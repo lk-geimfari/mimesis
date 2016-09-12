@@ -182,6 +182,10 @@ class Personal():
     def __init__(self, lang='en_us'):
         self.lang = lang.lower()
 
+    @staticmethod
+    def age(maximum=66):
+        return randint(16, int(maximum))
+
     def name(self, gender='f'):
         """
         Get a random name.
