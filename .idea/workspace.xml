@@ -1,51 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BookmarkManager">
+    <bookmark url="file://$PROJECT_DIR$/church/church.py" line="175" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="58825402-5af6-4b15-89db-d921f725b7a1" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dictionaries/geimfari.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/church/church.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/church/data/en_us/currency" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/church/data/en_us/day_abbr" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/church/data/en_us/days" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/church/data/en_us/email" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/church/data/en_us/favorite_movie" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/church/data/en_us/gender" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/church/data/en_us/month_abbr" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/church/data/en_us/months" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/church/data/en_us/nation" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/church/data/en_us/periodicity" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/church/data/en_us/postal_codes" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/church/data/en_us/pro_lang" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/church/data/ru_ru/cities" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/church/data/ru_ru/colors" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/church/data/ru_ru/countries" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/church/data/ru_ru/days" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/church/data/ru_ru/days_abbr" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/church/data/ru_ru/domains" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/church/data/ru_ru/f_names" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/church/data/ru_ru/f_surnames" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/church/data/ru_ru/favorite_movie" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/church/data/ru_ru/gender" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/church/data/ru_ru/languages" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/church/data/ru_ru/m_names" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/church/data/ru_ru/m_surnames" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/church/data/ru_ru/month_abbr" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/church/data/ru_ru/months" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/church/data/ru_ru/nation" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/church/data/ru_ru/periodicity" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/church/data/ru_ru/postal_codes" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/church/data/ru_ru/professions" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/church/data/ru_ru/qualifications" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/church/data/ru_ru/quote" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/church/data/ru_ru/street" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/church/data/ru_ru/street_suffix" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/church/data/ru_ru/subjects" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/church/data/ru_ru/text" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/church/data/ru_ru/university" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/church/data/ru_ru/words" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/church/utils.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tests/test_address.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/church/church.py" afterPath="$PROJECT_DIR$/church/church.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/church/data/en_us/pro_lang" afterPath="$PROJECT_DIR$/church/data/en_us/pro_lang" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/test_address.py" afterPath="$PROJECT_DIR$/tests/test_address.py" />
     </list>
     <ignored path="church.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -60,7 +22,7 @@
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/church$datetimes.coverage" NAME="datetimes Coverage Results" MODIFIED="1473687649925" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/church/church" />
-    <SUITE FILE_PATH="coverage/church$test_address.coverage" NAME="test_address Coverage Results" MODIFIED="1473716637965" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/church$test_address.coverage" NAME="test_address Coverage Results" MODIFIED="1473718808690" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/church$__init__.coverage" NAME="__init__ Coverage Results" MODIFIED="1473686959077" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/church" />
     <SUITE FILE_PATH="coverage/church$church.coverage" NAME="church Coverage Results" MODIFIED="1473687796474" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/church" />
   </component>
@@ -73,24 +35,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="test_address.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="test_address.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/tests/test_address.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="230">
-              <caret line="10" column="26" selection-start-line="10" selection-start-column="26" selection-end-line="10" selection-end-column="26" />
+            <state relative-caret-position="322">
+              <caret line="14" column="21" selection-start-line="14" selection-start-column="21" selection-end-line="14" selection-end-column="21" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="church.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/church/church.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="416">
-              <caret line="139" column="11" selection-start-line="139" selection-start-column="11" selection-end-line="139" selection-end-column="11" />
-              <folding>
-                <element signature="e#0#25#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -151,6 +101,7 @@
         <option value="$PROJECT_DIR$/church/data/ru_ru/usernames" />
         <option value="$PROJECT_DIR$/church/data/en_us/usernames.txt" />
         <option value="$PROJECT_DIR$/church/data/en_us/email_hosts" />
+        <option value="$PROJECT_DIR$/church/data/en_us/pro_lang" />
         <option value="$PROJECT_DIR$/tests/test_address.py" />
         <option value="$PROJECT_DIR$/church/church.py" />
       </list>
@@ -1015,14 +966,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/church/data/en_us/pro_lang">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/church/data/en_us/street">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1071,21 +1014,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test_address.py">
+    <entry file="file://$PROJECT_DIR$/church/data/en_us/pro_lang">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="10" column="26" selection-start-line="10" selection-start-column="26" selection-end-line="10" selection-end-column="26" />
+        <state relative-caret-position="416">
+          <caret line="79" column="8" selection-start-line="79" selection-start-column="8" selection-end-line="79" selection-end-column="8" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/church/church.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="416">
-          <caret line="139" column="11" selection-start-line="139" selection-start-column="11" selection-end-line="139" selection-end-column="11" />
+        <state relative-caret-position="186">
+          <caret line="410" column="17" selection-start-line="410" selection-start-column="17" selection-end-line="410" selection-end-column="17" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_address.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="322">
+          <caret line="14" column="21" selection-start-line="14" selection-start-column="21" selection-end-line="14" selection-end-column="21" />
+          <folding />
         </state>
       </provider>
     </entry>

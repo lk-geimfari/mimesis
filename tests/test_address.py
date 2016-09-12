@@ -14,5 +14,5 @@ person = Personal('ru_ru')
 # print(person.profession())
 print(person.email())
 
-net = Datetime()
-print(net.date( with_time=True))
+net = BasicData()
+print(net.words())
