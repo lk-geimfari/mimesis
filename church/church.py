@@ -208,10 +208,14 @@ class Personal():
         """
         if type(gender) is not str:
             raise TypeError('surname takes only string type')
-        if gender.lower() == 'f':
-            return choice(pull('f_surnames', self.lang)).strip()
-        elif gender.lower() == 'm':
-            return choice(pull('m_surnames', self.lang)).strip()
+        if self.lang == 'en_us':
+            return choice(pull('surnames', self.lang)).strip()
+
+        elif self.lang == 'ru_ru':
+            if gender.lower() == 'f':
+                return choice(pull('f_surnames', self.lang)).strip()
+            elif gender.lower() == 'm':
+                return choice(pull('m_surnames', self.lang)).strip()
 
     def full_name(self, gender='f'):
         """
