@@ -83,3 +83,4 @@ ENV/
 .ropeproject
 
 .idea/
+.idea/workspace.xml
