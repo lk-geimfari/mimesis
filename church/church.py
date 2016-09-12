@@ -14,15 +14,31 @@ class Address():
         self.lang = lang.lower()
 
     def street_number(self):
+        """
+        Generate a random street number.
+        :return: street number
+        """
         return ''.join(sample(digits, int(choice(digits[1:4]))))
 
     def street_name(self):
+        """
+        Get a random street name.
+        :return: street name
+        """
         return choice(pull('street', self.lang)).strip()
 
     def street_suffix(self):
+        """
+        Get a random street suffix.
+        :return: street suffix. For example: Street.
+        """
         return choice(pull('street_suffix', self.lang))
 
     def street_address(self):
+        """
+        Get a random address.
+        :return: full address.
+        """
         if self.lang == 'ru_ru':
             return '{} {} {}'.format(
                 self.street_suffix(),
@@ -37,15 +53,28 @@ class Address():
             )
 
     def state_or_subject(self):
+        """
+        Get a random states or subject of country. For 'ru_ru' always will
+        be getting subject of Russian Federation. For other localization will be getting state.
+        :return:
+        """
         if self.lang == 'ru_ru':
             return choice(pull('subjects', self.lang)).strip()
         elif self.lang == 'en_us':
             return choice(pull('state', self.lang)).strip()
 
     def postal_code(self):
+        """
+        Get a random postal code.
+        :return: postal code. For example: 389213
+        """
         return choice(pull('postal_codes', self.lang)).strip()
 
     def telephone(self):
+        """
+        Generate a random phone number.
+        :return: phone number. For example: +7-(963)409-11-22
+        """
         phone_number = ''
         mask = '+7-($$$)$$$-$$-$$' if self.lang == 'ru_ru' \
             else '$-($$$)$$$-$$-$$'
@@ -57,9 +86,17 @@ class Address():
         return phone_number.strip()
 
     def country(self):
+        """
+        Get a random country.
+        :return: country. For example: Russia
+        """
         return choice(pull('countries', self.lang)).strip()
 
     def city(self):
+        """
+        Get a random name of city.
+        :return: city name. For example: Saint Petersburg
+        """
         return choice(pull('cities', self.lang)).strip()
 
 
@@ -68,6 +105,11 @@ class BasicData():
         self.lang = lang.lower()
 
     def lorem_ipsum(self, quantity=5):
+        """
+        Get random strings.
+        :param quantity: quantity of strings.
+        :return:
+        """
         if type(quantity) is not int:
             raise TypeError('lorem_ipsum takes only integer type')
         else:
@@ -77,9 +119,19 @@ class BasicData():
             return text
 
     def title(self):
+        """
+        Get random title.
+        :return: title. For example: Erlang - is a general-purpose,
+        concurrent, functional programming language.
+        """
         return self.lorem_ipsum(quantity=1)
 
     def words(self, quantity=5):
+        """
+        Get the random words.
+        :param quantity: quantity of words. Default is 5.
+        :return: words. For example: science, network, god, octopus, love
+        """
         if type(quantity) is not int:
             raise TypeError('words takes only integer type')
         else:
@@ -89,18 +141,40 @@ class BasicData():
             return words_list
 
     def word(self):
+        """
+        Get a random word.
+        :return: single word. For example: science
+        """
         return self.words(quantity=1)[0]
 
     def quote_from_movie(self):
+        """
+        Get a random quote from movie.
+        :return: quote. For example: Bond... James Bond.
+        """
         return choice(pull('quote', self.lang)).strip()
 
-    def currency_iso(self):
+    @staticmethod
+    def currency_iso():
+        """
+        Get currency code. ISO 4217
+        :return: currency code. For example: RUR
+        """
         return choice(pull('currency', 'en_us')).strip()
 
     def color(self):
+        """
+        Get random name of color.
+        :return: color name. For example: Red
+        """
         return choice(pull('colors', self.lang)).strip()
 
-    def programming_language(self):
+    @staticmethod
+    def programming_language():
+        """
+        Get a random programming language from list with 82 values.
+        :return: programming language. For example: Erlang
+        """
         return choice(pull('pro_lang', 'en_us')).strip()
 
 
@@ -109,6 +183,11 @@ class Personal():
         self.lang = lang.lower()
 
     def name(self, gender='f'):
+        """
+        Get a random name.
+        :param gender: if 'm' then will getting male name else female name
+        :return:
+        """
         if type(gender) is not str:
             raise TypeError('name takes only string type')
         if gender.lower() == 'f':
@@ -117,6 +196,12 @@ class Personal():
             return choice(pull('m_names', self.lang)).strip()
 
     def surname(self, gender='f'):
+        """
+        Get random surname.
+        :param gender: if 'm' then will getting male surname else
+        female surname.
+        :return: surname. For example: Wolf
+        """
         if type(gender) is not str:
             raise TypeError('surname takes only string type')
         if gender.lower() == 'f':
@@ -125,6 +210,12 @@ class Personal():
             return choice(pull('m_surnames', self.lang)).strip()
 
     def full_name(self, gender='f'):
+        """
+        Get random full name
+        :param gender: if gender='m' then will be returned male name else
+        female name.
+        :return: full name. For example: Johann Wolfgang
+        """
         if self.lang == 'ru_ru':
             if gender.lower() == 'f':
                 return '{0} {1}'.format(self.surname(), self.name())
@@ -138,7 +229,7 @@ class Personal():
 
     def username(self):
         """
-        Generate random username with digits.
+        Get random username with digits.
         :return: username. For example: foretime10
         """
         user_name = choice(pull('usernames', 'en_us')) \
@@ -181,8 +272,8 @@ class Personal():
 
     def gender(self, abbreviated=False):
         """
-        Generate random gender.
-        :param abbreviated: if True then will returned abbreviated gender title.
+        Get random gender.
+        :param abbreviated: if True then will getting abbreviated gender title.
         For example: M or F
         :return: title of gender. For example: Male
         """
@@ -192,14 +283,14 @@ class Personal():
 
     def profession(self):
         """
-        Generate random profession.
+        Get a random profession.
         :return: the name of profession. For example: Programmer
         """
         return choice(pull('professions', self.lang)).strip()
 
     def nationality(self, gender='f'):
         """
-        Generate random nationality.
+        Get a random nationality.
         :param gender: female or male
         :return: nationality
         """
@@ -217,28 +308,28 @@ class Personal():
 
     def university(self):
         """
-        Generate random university.
+        Get a random university.
         :return: university name. For example: MIT
         """
         return choice(pull('university', self.lang)).strip()
 
     def qualification(self):
         """
-        Generate random qualification.
+        Get a random qualification.
         :return: degree. For example: Bachelor of Science
         """
         return choice(pull('qualifications', self.lang)).strip()
 
     def language(self):
         """
-        Generate random language.
+        Get a random language.
         :return: random language. For example: Irish
         """
         return choice(pull('languages', self.lang)).strip()
 
     def favorite_movie(self):
         """
-        Generate random movie.
+        Get a random movie.
         :return: name of the movie
         """
         return choice(pull('favorite_movie', self.lang)).strip()
@@ -254,7 +345,7 @@ class Datetime():
 
     def day_of_week(self, abbreviated=False):
         """
-        Generate random day of week.
+        Get a random day of week.
         :param abbreviated: if True then will be returned abbreviated name of day of the week.
         :return: name of day of the week
         """
@@ -264,7 +355,7 @@ class Datetime():
 
     def month(self, abbreviated=False):
         """
-        Generate random month.
+        Get a random month.
         :param abbreviated: if True then will be returned abbreviated month name.
         :return: month name. For example: November
         """
@@ -274,7 +365,7 @@ class Datetime():
 
     def periodicity(self):
         """
-        Method for generate periodicity string.
+        Get a random periodicity string.
         :return: periodicity: For example: Never
         """
         return choice(pull('periodicity', self.lang)).strip()
