@@ -1,0 +1,332 @@
+from datetime import date
+from random import choice, sample, randint
+from string import digits
+
+from .utils import pull
+
+
+class ASCIISymbols():
+    pass
+
+
+class Address():
+    def __init__(self, lang='en_us'):
+        self.lang = lang.lower()
+
+    def street_number(self):
+        return ''.join(sample(digits, int(choice(digits[1:4]))))
+
+    def street_name(self):
+        return choice(pull('street', self.lang)).strip()
+
+    def street_suffix(self):
+        return choice(pull('street_suffix', self.lang))
+
+    def street_address(self):
+        if self.lang == 'ru_ru':
+            return '{} {} {}'.format(
+                self.street_suffix(),
+                self.street_name(),
+                self.street_number()
+            )
+        else:
+            return '{} {} {}'.format(
+                self.street_number(),
+                self.street_name(),
+                self.street_suffix()
+            )
+
+    def state_or_subject(self):
+        if self.lang == 'ru_ru':
+            return choice(pull('subjects', self.lang)).strip()
+        elif self.lang == 'en_us':
+            return choice(pull('state', self.lang)).strip()
+
+    def postal_code(self):
+        return choice(pull('postal_codes', self.lang)).strip()
+
+    def telephone(self):
+        phone_number = ''
+        mask = '+7-($$$)$$$-$$-$$' if self.lang == 'ru_ru' \
+            else '$-($$$)$$$-$$-$$'
+        for i in mask:
+            if i == '$':
+                phone_number += str(randint(1, 9))
+            else:
+                phone_number += i
+        return phone_number.strip()
+
+    def country(self):
+        return choice(pull('countries', self.lang)).strip()
+
+    def city(self):
+        return choice(pull('cities', self.lang)).strip()
+
+
+class BasicData():
+    def __init__(self, lang='en_us'):
+        self.lang = lang.lower()
+
+    def lorem_ipsum(self, quantity=5):
+        if type(quantity) is not int:
+            raise TypeError('lorem_ipsum takes only integer type')
+        else:
+            text = ''
+            for i in range(quantity):
+                text += choice(pull('text', self.lang)).replace('\n', ' ')
+            return text
+
+    def title(self):
+        return self.lorem_ipsum(quantity=1)
+
+    def words(self, quantity=5):
+        if type(quantity) is not int:
+            raise TypeError('words takes only integer type')
+        else:
+            words_list = []
+            for _ in range(quantity):
+                words_list.append(choice(pull('words', self.lang)).strip())
+            return words_list
+
+    def word(self):
+        return self.words(quantity=1)[0]
+
+    def quote_from_movie(self):
+        return choice(pull('quote', self.lang)).strip()
+
+    def currency_iso(self):
+        return choice(pull('currency', 'en_us')).strip()
+
+    def color(self):
+        return choice(pull('colors', self.lang)).strip()
+
+    def programming_language(self):
+        return choice(pull('pro_lang', 'en_us')).strip()
+
+
+class Personal():
+    def __init__(self, lang='en_us'):
+        self.lang = lang.lower()
+
+    def name(self, gender='f'):
+        if type(gender) is not str:
+            raise TypeError('name takes only string type')
+        if gender.lower() == 'f':
+            return choice(pull('f_names', self.lang)).strip()
+        elif gender.lower() == 'm':
+            return choice(pull('m_names', self.lang)).strip()
+
+    def surname(self, gender='f'):
+        if type(gender) is not str:
+            raise TypeError('surname takes only string type')
+        if gender.lower() == 'f':
+            return choice(pull('f_surnames', self.lang)).strip()
+        elif gender.lower() == 'm':
+            return choice(pull('m_surnames', self.lang)).strip()
+
+    def full_name(self, gender='f'):
+        if self.lang == 'ru_ru':
+            if gender.lower() == 'f':
+                return '{0} {1}'.format(self.surname(), self.name())
+            elif gender.lower() == 'm':
+                return '{0} {1}'.format(self.surname('m'), self.name('m'))
+        else:
+            if gender.lower() == 'f':
+                return '{0} {1}'.format(self.name(), self.surname())
+            elif gender.lower() == 'm':
+                return '{0} {1}'.format(self.name('m'), self.surname('m'))
+
+    def username(self):
+        """
+        Generate random username with digits.
+        :return: username. For example: foretime10
+        """
+        user_name = choice(pull('usernames', 'en_us')) \
+            .replace(' ', '_').strip()
+        user_name += str(randint(3, 94))
+        return user_name.lower()
+
+    def email(self):
+        """
+        Generate random email using usernames.
+        :return: email address. For example: foretime10@live.com
+        """
+        name = self.username()
+        email_adders = name + choice(pull('email', 'en_us'))
+        return email_adders.strip()
+
+    def home_page(self):
+        """
+        Generate random home page using usernames.
+        :return: random home page. For example: http://www.fontanez6.info
+        """
+        domain_name = 'http://www.' + self.username().replace(' ', '-')
+        return domain_name + choice(pull('domains', 'en_us')).strip()
+
+    @staticmethod
+    def cvv():
+        """
+        Generate random card verification value (CVV)
+        :return: CVV code
+        """
+        return randint(100, 999)
+
+    @staticmethod
+    def cid():
+        """
+        Generate random CID code.
+        :return: CID code
+        """
+        return randint(1000, 9999)
+
+    def gender(self, abbreviated=False):
+        """
+        Generate random gender.
+        :param abbreviated: if True then will returned abbreviated gender title.
+        For example: M or F
+        :return: title of gender. For example: Male
+        """
+        if abbreviated:
+            return choice(pull('gender', self.lang))[0:1]
+        return choice(pull('gender', self.lang)).strip()
+
+    def profession(self):
+        """
+        Generate random profession.
+        :return: the name of profession. For example: Programmer
+        """
+        return choice(pull('professions', self.lang)).strip()
+
+    def nationality(self, gender='f'):
+        """
+        Generate random nationality.
+        :param gender: female or male
+        :return: nationality
+        """
+        try:
+            # If you know Russian, then you will understand everything at once.
+            if self.lang == 'ru_ru':
+                if gender.lower() == 'm':
+                    return choice(pull('nation', self.lang)).split('|')[0].strip()
+                else:
+                    return choice(pull('nation', self.lang)).split('|')[1].strip()
+            else:
+                return choice(pull('nation', self.lang)).strip()
+        except Exception:
+            raise TypeError('name takes only string type')
+
+    def university(self):
+        """
+        Generate random university.
+        :return: university name. For example: MIT
+        """
+        return choice(pull('university', self.lang)).strip()
+
+    def qualification(self):
+        """
+        Generate random qualification.
+        :return: degree. For example: Bachelor of Science
+        """
+        return choice(pull('qualifications', self.lang)).strip()
+
+    def language(self):
+        """
+        Generate random language.
+        :return: random language. For example: Irish
+        """
+        return choice(pull('languages', self.lang)).strip()
+
+    def favorite_movie(self):
+        """
+        Generate random movie.
+        :return: name of the movie
+        """
+        return choice(pull('favorite_movie', self.lang)).strip()
+
+
+class Datetime():
+    """
+    Class for generate the fake data that you can use for working with date and time.
+    """
+
+    def __init__(self, lang='en_us'):
+        self.lang = lang.lower()
+
+    def day_of_week(self, abbreviated=False):
+        """
+        Generate random day of week.
+        :param abbreviated: if True then will be returned abbreviated name of day of the week.
+        :return: name of day of the week
+        """
+        if abbreviated:
+            return choice(pull('days_abbr', self.lang)).strip()
+        return choice(pull('days', self.lang)).strip()
+
+    def month(self, abbreviated=False):
+        """
+        Generate random month.
+        :param abbreviated: if True then will be returned abbreviated month name.
+        :return: month name. For example: November
+        """
+        if abbreviated:
+            return choice(pull('month_abbr', self.lang)).strip()
+        return choice(pull('months', self.lang)).strip()
+
+    def periodicity(self):
+        """
+        Method for generate periodicity string.
+        :return: periodicity: For example: Never
+        """
+        return choice(pull('periodicity', self.lang)).strip()
+
+    def date(self, sep='-', with_time=False):
+        """
+
+        :param sep: a separator for date. Default is '-': 11-05-2016
+        :param with_time: if it's True then will be added random time.
+        :return: formatted date and time: 20-03-2016 03:20
+        """
+        _d = date(randint(2000, 2035), randint(1, 12), randint(1, 28))
+        pattern = '%d{0}%m{0}%Y %m:%d' if with_time else '%d{0}%m{0}%Y'
+        return _d.strftime(pattern.format(sep))
+
+    @staticmethod
+    def day_of_month():
+        """
+        Static method for generate random days of month.
+        :return: random value from 1 to 31
+        """
+        return randint(1, 31)
+
+
+class Network():
+    @staticmethod
+    def ip_v4():
+        """
+        Static method for generate a random IPv4 address
+        :return: random IPv4 address
+        """
+        ip = '.'.join([str(randint(0, 255)) for i in range(0, 4)])
+        return ip.strip()
+
+    @staticmethod
+    def ip_v6():
+        """
+        Static method for generate a random IPv6 address
+        :return: random IPv6 address
+        """
+        return "2001:" + ":".join("%x" % randint(0, 16 ** 4) for _ in range(7))
+
+    @staticmethod
+    def mac_address():
+        """
+        Static method for generate a random MAC address.
+        :return: random mac address
+        """
+        mac = [0x00, 0x16, 0x3e,
+               randint(0x00, 0x7f),
+               randint(0x00, 0xff),
+               randint(0x00, 0xff)
+               ]
+        _mac = map(lambda x: "%02x" % x, mac)
+        return ':'.join(_mac)
