@@ -4,6 +4,12 @@ from string import digits
 
 from .utils import pull
 
+__author__ = {
+    'name': 'Isaak Uchakaev',
+    'nickname': 'Likid Geimfari',
+    'email': 'likid.geimfari@gmail.com',
+}
+
 
 class ASCIISymbols():
     pass
