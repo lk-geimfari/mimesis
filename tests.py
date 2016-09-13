@@ -22,7 +22,7 @@ class AddressTestCase(TestCase):
         assert result in pull('street', self.address.lang)
 
     def test_street_suffix(self):
-        result = self.address.street_suffix()
+        result = self.address.street_suffix() + '\n'
         assert result in pull('street_suffix', self.address.lang)
 
     def test_state_or_subject(self):
