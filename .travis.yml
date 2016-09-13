@@ -5,3 +5,5 @@ python:
   - "3.3"
   - "3.4"
   - "3.5"
+
+script: python tests.py
