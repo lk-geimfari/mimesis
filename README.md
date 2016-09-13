@@ -17,7 +17,7 @@ Church - is a library to generate fake data.
 
 ## Usage
 ```python
-# you can use church in your models for generate data for testing
+#  It's very useful if you need bootstrap your database.
 # ...
 # ... 
 
