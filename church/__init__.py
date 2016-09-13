@@ -3,7 +3,7 @@ from .church import (
     Network, Datetime, ASCIISymbols
 )
 
-__version__ = '0.1.4'
+__version__ = '0.1.5'
 
 __all__ = [
     'Address',
