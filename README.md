@@ -9,13 +9,13 @@
 
 Church - is a library to generate fake data.
 
-# Installation
+## Installation
 ```zsh
 ➜  ~  pip install church
 
 ```
 
-# Usage
+## Usage
 ```python
 # you can use church in your models for generate data for testing
 # ...
@@ -48,9 +48,9 @@ def _church(c=100):
 
 ```
 
-# Licence 
+## Licence 
 [![MIT Licence](https://badges.frapsoft.com/os/mit/mit.svg?v=103)](https://opensource.org/licenses/mit-license.php)   
 
 
-#Why church?
+## Why church?
 «Such teachings come through hypocritical liars, whose consciences have been seared as with a hot iron.»
