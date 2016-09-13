@@ -2,7 +2,7 @@ import re
 from unittest import TestCase
 
 from church.church import (
-    Address, BasicData, Personal, Datetime, Network
+    Address, BasicData, Personal, Datetime, Network, ASCIISymbols
 )
 from church.utils import pull
 
@@ -41,7 +41,8 @@ class AddressTestCase(TestCase):
 
     def test_telephone(self):
         result = self.address.telephone()
-        assert re.match(r'^((8|\+[1-9])[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$', result)
+        assert re.match(
+            r'^((8|\+[1-9])[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$', result)
 
     def test_country(self):
         result = self.address.country() + '\n'
@@ -95,7 +96,7 @@ class PersonalTestCase(TestCase):
     person = Personal(LANG)
 
     def test_age(self):
-        result = self.person.age(55)
+        result = self.person.age(maximum=55)
         assert result < 55
 
     def test_name(self):
@@ -143,7 +144,8 @@ class PersonalTestCase(TestCase):
 
     def test_email(self):
         result = self.person.email()
-        assert re.match(r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)", result)
+        assert re.match(
+            r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)", result)
 
     def test_home_page(self):
         result = self.person.home_page()
@@ -226,21 +228,22 @@ class NetworkTestCase(TestCase):
 
     def test_ip_v6(self):
         result = self.net.ip_v6()
-        ip_v6_pattern = r'(([0-9a-fA-F]{1,4}:)' \
-                        '{7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:)' \
-                        '{1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]' \
-                        '{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4})' \
-                        '{1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}' \
-                        '|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|' \
-                        '([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|' \
-                        '[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|' \
-                        ':((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]' \
-                        '{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:)' \
-                        '{0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.)' \
-                        '{3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|' \
-                        '([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|' \
-                        '1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|' \
-                        '(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))'
+        ip_v6_pattern = \
+            r'(([0-9a-fA-F]{1,4}:)' \
+            '{7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:)' \
+            '{1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]' \
+            '{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4})' \
+            '{1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}' \
+            '|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|' \
+            '([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|' \
+            '[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|' \
+            ':((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]' \
+            '{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:)' \
+            '{0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.)' \
+            '{3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|' \
+            '([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|' \
+            '1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|' \
+            '(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))'
 
         assert re.match(ip_v6_pattern, result)
 
@@ -248,3 +251,17 @@ class NetworkTestCase(TestCase):
         result = self.net.mac_address()
         mac_pattern = r'^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$'
         assert re.match(mac_pattern, result)
+
+
+class ASCIISymbolsTestCase(TestCase):
+    a = ASCIISymbols()
+
+    def test_gender_symbol(self):
+        male = self.a.gender_symbol('m')
+        assert male == '♂'
+
+        female = self.a.gender_symbol('f')
+        assert female == '♀'
+
+        transexual = self.a.gender_symbol('ts')
+        assert transexual == '⚦'
