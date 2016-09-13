@@ -61,7 +61,7 @@ class Address():
         if self.lang == 'ru_ru':
             return choice(pull('subjects', self.lang)).strip()
         elif self.lang == 'en_us':
-            return choice(pull('state', self.lang)).strip()
+            return choice(pull('states', self.lang)).strip()
 
     def postal_code(self):
         """
@@ -116,7 +116,14 @@ class BasicData():
             text = ''
             for i in range(quantity):
                 text += choice(pull('text', self.lang)).replace('\n', ' ')
-            return text
+            return text.strip()
+
+    def sentence(self):
+        """
+        Get a random sentence from text.
+        :return: sentence.
+        """
+        return self.lorem_ipsum(quantity=1)
 
     def title(self):
         """
@@ -149,10 +156,10 @@ class BasicData():
 
     def quote_from_movie(self):
         """
-        Get a random quote from movie.
-        :return: quote. For example: Bond... James Bond.
+        Get a random quotes from movie.
+        :return: quotes. For example: Bond... James Bond.
         """
-        return choice(pull('quote', self.lang)).strip()
+        return choice(pull('quotes', self.lang)).strip()
 
     @staticmethod
     def currency_iso():
@@ -269,6 +276,15 @@ class Personal():
         :return: CVV code
         """
         return randint(100, 999)
+
+    @staticmethod
+    def credit_card_number():
+        """
+        Generate a random credit card number for Visa or MasterCard
+        :return: credit card. For example: 3519 2073 7960 3241
+        """
+        card = ' '.join([str(randint(1000, 9999)) for i in range(0, 4)])
+        return card.strip()
 
     @staticmethod
     def cid():
