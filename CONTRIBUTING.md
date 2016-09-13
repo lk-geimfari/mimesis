@@ -16,6 +16,7 @@ Your contributions are always welcome!
 
 - Make sure the tests are passing.
 
+- If you add any function, then you should add tests for it.
 
 ----------
 As says Obi-Wan Kenobi: ` May the Force be with you. `
