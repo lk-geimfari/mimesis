@@ -1,5 +1,4 @@
 import re
-import sys
 from unittest import TestCase
 
 from church.church import (
@@ -192,6 +191,18 @@ class PersonalTestCase(TestCase):
     def test_favorite_movie(self):
         result = self.person.favorite_movie() + '\n'
         assert result in pull('favorite_movie', self.person.lang)
+
+    def test_worldview(self):
+        result = self.person.worldview() + '\n'
+        assert result in pull('worldview', self.person.lang)
+
+    def test_views_on(self):
+        result = self.person.views_on() + '\n'
+        assert result in pull('views_on', self.person.lang)
+
+    def test_political_views(self):
+        result = self.person.political_views() + '\n'
+        assert result in pull('political_views', self.person.lang)
 
 
 class DatetimeTestCase(TestCase):

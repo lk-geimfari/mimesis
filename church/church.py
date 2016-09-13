@@ -113,7 +113,7 @@ class BasicData(object):
         """
         Get random strings.
         :param quantity: quantity of strings.
-        :return:
+        :return: random text
         """
         if type(quantity) is not int:
             raise TypeError('lorem_ipsum takes only integer type')
@@ -336,6 +336,27 @@ class Personal(object):
         :return: the name of profession. For example: Programmer
         """
         return choice(pull('professions', self.lang)).strip()
+
+    def political_views(self):
+        """
+        Get a random political views.
+        :return: political views. For example: Liberal
+        """
+        return choice(pull('political_views', self.lang)).strip()
+
+    def worldview(self):
+        """
+        Get a random worldview.
+        :return: worldview. For example: Pantheism
+        """
+        return choice(pull('worldview', self.lang)).strip()
+
+    def views_on(self):
+        """
+        Get a random views on.
+        :return: views on string. For example: Negative
+        """
+        return choice(pull('views_on', self.lang)).strip()
 
     def nationality(self, gender='f'):
         """
