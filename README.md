@@ -5,7 +5,7 @@
 [![PyPI](https://img.shields.io/pypi/pyversions/caravel.svg?maxAge=2592000)](https://pypi.python.org/pypi/church/)
 
 
-![alt text](http://graphiccave.com/wp-content/uploads/2015/04/TwoTowers-Catholic-Church.png)
+![alt text](https://raw.githubusercontent.com/lk-geimfari/church/master/examples/church.png)
 
 Church - is a library to generate fake data.
 
