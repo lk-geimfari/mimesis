@@ -1,8 +1,7 @@
-from pprint import pprint
-
-from church import Address, Personal, Network
+from church import Personal
 
 p = Personal('en_us')
 
-n = Network
+print(p.worldview())
 
+print(p.political_views())

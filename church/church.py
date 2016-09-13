@@ -115,11 +115,11 @@ class BasicData(object):
         :param quantity: quantity of strings.
         :return: random text
         """
-        if type(quantity) is not int:
+        if not isinstance(quantity, int):
             raise TypeError('lorem_ipsum takes only integer type')
         else:
             text = ''
-            for i in range(quantity):
+            for _ in range(quantity):
                 text += choice(pull('text', self.lang)).replace('\n', ' ')
             return text.strip()
 
@@ -144,7 +144,7 @@ class BasicData(object):
         :param quantity: quantity of words. Default is 5.
         :return: words. For example: science, network, god, octopus, love
         """
-        if type(quantity) is not int:
+        if not isinstance(quantity, int):
             raise TypeError('words takes only integer type')
         else:
             words_list = []
@@ -214,7 +214,7 @@ class Personal(object):
         :param gender: if 'm' then will getting male name else female name.
         :return: name
         """
-        if type(gender) is not str:
+        if not isinstance(gender, str):
             raise TypeError('name takes only string type')
         if gender.lower() == 'f':
             return choice(pull('f_names', self.lang)).strip()
@@ -228,7 +228,7 @@ class Personal(object):
         female surname.
         :return: surname. For example: Wolf
         """
-        if type(gender) is not str:
+        if not isinstance(gender, str):
             raise TypeError('surname takes only string type')
         if self.lang == 'en_us':
             return choice(pull('surnames', self.lang)).strip()
