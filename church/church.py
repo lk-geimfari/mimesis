@@ -4,9 +4,54 @@ from string import digits, ascii_letters
 
 from .utils import pull
 
+__all__ = ['Address', 'Personal',
+           'BasicData', 'Network',
+           'Datetime', 'ASCIISymbols'
+           ]
+
 
 class ASCIISymbols():
-    pass
+    """
+    Class for generate ASCII symbols.
+    """
+
+    @staticmethod
+    def gender_symbol(sex='f'):
+        """
+        Get ascii symbol of gender.
+        :param sex: if sex='m' then will be returned ascii symbol for male.
+        Default value of sex if 'f' i.e female.
+        :return: the corresponding ascii symbol
+        """
+        if sex.lower() == 'm':
+            return '♂'
+        if sex.lower() == 'ts':
+            return '⚦'
+        else:
+            return '♀'
+
+    @staticmethod
+    def emoji():
+        """
+        Get a random ascii symbol of emoji.
+        :return: ascii symbol of emoji
+        """
+        emoji_list = ['😃', '😅', '😆', '😎', '😈',
+                      '😀', '😍', '😗', '😴', '😕',
+                      '😑', '😏', '😮', '😯', '😡',
+                      ]
+        return choice(emoji_list)
+
+    @staticmethod
+    def food_symbol():
+        """
+        Get a random ascii symbol of food.
+        :return: food ascii symbol
+        """
+        food_list = ['🍔', '🍕', '🍝', '🍜' '🍇', '🍈',
+                     '🍉', '🍍', '🍄', '🍆', '🍪'
+                     ]
+        return choice(food_list)
 
 
 class Address():
@@ -101,6 +146,10 @@ class Address():
 
 
 class BasicData():
+    """
+    Class for generate text data, i.e text, lorem ipsum and another.
+    """
+
     def __init__(self, lang='en_us'):
         self.lang = lang.lower()
 
@@ -186,18 +235,28 @@ class BasicData():
 
 
 class Personal():
+    """
+    Class for generate personal data, i.e names, surnames, age and another.
+    """
+
     def __init__(self, lang='en_us'):
         self.lang = lang.lower()
 
     @staticmethod
-    def age(maximum=66):
-        return randint(16, int(maximum))
+    def age(minimum=16, maximum=66):
+        """
+        Get a random integer value.
+        :param maximum: max age
+        :param minimum: min age
+        :return: random integer from minimum=16 to maximum=66
+        """
+        return randint(int(minimum), int(maximum))
 
     def name(self, gender='f'):
         """
         Get a random name.
-        :param gender: if 'm' then will getting male name else female name
-        :return:
+        :param gender: if 'm' then will getting male name else female name.
+        :return: name
         """
         if type(gender) is not str:
             raise TypeError('name takes only string type')
@@ -208,7 +267,7 @@ class Personal():
 
     def surname(self, gender='f'):
         """
-        Get random surname.
+        Get a random surname.
         :param gender: if 'm' then will getting male surname else
         female surname.
         :return: surname. For example: Wolf
@@ -226,7 +285,7 @@ class Personal():
 
     def full_name(self, gender='f'):
         """
-        Get random full name
+        Get a random full name
         :param gender: if gender='m' then will be returned male name else
         female name.
         :return: full name. For example: Johann Wolfgang
@@ -244,7 +303,7 @@ class Personal():
 
     def username(self):
         """
-        Get random username with digits.
+        Get a random username with digits.
         :return: username. For example: foretime10
         """
         user_name = choice(pull('usernames', 'en_us')) \
@@ -255,7 +314,7 @@ class Personal():
     @staticmethod
     def password(length=8):
         """
-        Generate a rondom password.
+        Generate a random password.
         :param length: length of password
         :return: random password
         """
@@ -264,7 +323,7 @@ class Personal():
 
     def email(self):
         """
-        Generate random email using usernames.
+        Generate a random email using usernames.
         :return: email address. For example: foretime10@live.com
         """
         name = self.username()
@@ -273,8 +332,8 @@ class Personal():
 
     def home_page(self):
         """
-        Generate random home page using usernames.
-        :return: random home page. For example: http://www.fontanez6.info
+        Generate a random home page using usernames.
+        :return: random home page. For example: http://www.font6.info
         """
         domain_name = 'http://www.' + self.username().replace(' ', '-')
         return domain_name + choice(pull('domains', 'en_us')).strip()
@@ -282,7 +341,7 @@ class Personal():
     @staticmethod
     def cvv():
         """
-        Generate random card verification value (CVV)
+        Generate a random card verification value (CVV)
         :return: CVV code
         """
         return randint(100, 999)
@@ -299,14 +358,14 @@ class Personal():
     @staticmethod
     def cid():
         """
-        Generate random CID code.
+        Generate a random CID code.
         :return: CID code
         """
         return randint(1000, 9999)
 
     def gender(self, abbreviated=False):
         """
-        Get random gender.
+        Get a random gender.
         :param abbreviated: if True then will getting abbreviated gender title.
         For example: M or F
         :return: title of gender. For example: Male
@@ -326,7 +385,7 @@ class Personal():
         """
         Get a random nationality.
         :param gender: female or male
-        :return: nationality
+        :return: nationality. For example: Russian
         """
         try:
             # If you know Russian, then you will understand everything at once.
@@ -350,7 +409,7 @@ class Personal():
     def qualification(self):
         """
         Get a random qualification.
-        :return: degree. For example: Bachelor of Science
+        :return: degree. For example: Bachelor
         """
         return choice(pull('qualifications', self.lang)).strip()
 
@@ -369,7 +428,7 @@ class Personal():
         return choice(pull('favorite_movie', self.lang)).strip()
 
 
-class Datetime():
+class Datetime(object):
     """
     Class for generate the fake data that you can use for working with date and time.
     """
@@ -400,14 +459,15 @@ class Datetime():
     def periodicity(self):
         """
         Get a random periodicity string.
-        :return: periodicity: For example: Never
+        :return: periodicity. For example: Never
         """
         return choice(pull('periodicity', self.lang)).strip()
 
-    def date(self, sep='-', with_time=False):
+    @staticmethod
+    def date(sep='-', with_time=False):
         """
-
-        :param sep: a separator for date. Default is '-': 11-05-2016
+        Generate a random date formatted as a 11-05-2016
+        :param sep: a separator for date. Default is '-'.
         :param with_time: if it's True then will be added random time.
         :return: formatted date and time: 20-03-2016 03:20
         """
@@ -418,17 +478,22 @@ class Datetime():
     @staticmethod
     def day_of_month():
         """
-        Static method for generate random days of month.
+        Static method for generate a random days of month, from 1 to 31.
         :return: random value from 1 to 31
         """
         return randint(1, 31)
 
 
 class Network():
+    """
+    Class for generate data for working with network,
+    i.e IPv4, IPv6 and another
+    """
+
     @staticmethod
     def ip_v4():
         """
-        Static method for generate a random IPv4 address
+        Static method for generate a random IPv4 address.
         :return: random IPv4 address
         """
         ip = '.'.join([str(randint(0, 255)) for i in range(0, 4)])
@@ -437,7 +502,7 @@ class Network():
     @staticmethod
     def ip_v6():
         """
-        Static method for generate a random IPv6 address
+        Static method for generate a random IPv6 address.
         :return: random IPv6 address
         """
         return "2001:" + ":".join("%x" % randint(0, 16 ** 4) for _ in range(7))
