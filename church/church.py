@@ -77,7 +77,7 @@ class Address():
         """
         phone_number = ''
         mask = '+7-($$$)$$$-$$-$$' if self.lang == 'ru_ru' \
-            else '$-($$$)$$$-$$-$$'
+            else '+$-($$$)$$$-$$-$$'
         for i in mask:
             if i == '$':
                 phone_number += str(randint(1, 9))

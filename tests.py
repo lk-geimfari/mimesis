@@ -6,9 +6,12 @@ from church.church import (
 )
 from church.utils import pull
 
+# LANG = 'ru_ru'
+LANG = 'en_us'
+
 
 class AddressTestCase(TestCase):
-    address = Address('ru_ru')
+    address = Address(LANG)
 
     def test_street_number(self):
         result = self.address.street_number()
@@ -38,7 +41,7 @@ class AddressTestCase(TestCase):
 
     def test_telephone(self):
         result = self.address.telephone()
-        assert re.match(r'^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$', result)
+        assert re.match(r'^((8|\+[1-9])[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$', result)
 
     def test_country(self):
         result = self.address.country() + '\n'
@@ -50,7 +53,7 @@ class AddressTestCase(TestCase):
 
 
 class BasicDataTestCase(TestCase):
-    data = BasicData('ru_ru')
+    data = BasicData(LANG)
 
     def test_sentence(self):
         result = self.data.sentence() + '\n'
@@ -89,7 +92,7 @@ class BasicDataTestCase(TestCase):
 
 
 class PersonalTestCase(TestCase):
-    person = Personal('ru_ru')
+    person = Personal(LANG)
 
     def test_age(self):
         result = self.person.age(55)
@@ -104,12 +107,11 @@ class PersonalTestCase(TestCase):
 
     def test_surname(self):
         if self.person.lang == 'ru_ru':
-
             result = self.person.surname('f') + '\n'
-            assert result in pull('f_names', self.person.lang)
+            assert result in pull('f_surnames', self.person.lang)
 
             result = self.person.surname('m') + '\n'
-            assert result in pull('m_names', self.person.lang)
+            assert result in pull('m_surnames', self.person.lang)
 
         elif self.person.lang == 'en_us':
             result = self.person.surname() + '\n'
@@ -151,7 +153,6 @@ class PersonalTestCase(TestCase):
 
     def test_credit_card_number(self):
         result = self.person.credit_card_number()
-        print(result)
         assert re.match(r'[\d]+((-|\s)?[\d]+)+', result)
 
     def test_cid(self):
@@ -159,7 +160,7 @@ class PersonalTestCase(TestCase):
         assert (1000 <= result) and (result <= 9999)
 
     def test_gender(self):
-        result = self.person.gender()
+        result = self.person.gender() + '\n'
         assert result in pull('gender', self.person.lang)
 
         result_abbr = self.person.gender(abbreviated=True) + '\n'
@@ -187,7 +188,7 @@ class PersonalTestCase(TestCase):
 
 
 class DatetimeTestCase(TestCase):
-    datetime = Datetime('en_us')
+    datetime = Datetime(LANG)
 
     def test_day_of_week(self):
         result = self.datetime.day_of_week() + '\n'
@@ -209,7 +210,6 @@ class DatetimeTestCase(TestCase):
 
     def test_day_of_month(self):
         result = self.datetime.day_of_month()
-        print(result)
         assert result >= 1 or result <= 31
 
 
