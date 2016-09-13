@@ -3,7 +3,7 @@ import sys
 from unittest import TestCase
 
 from church.church import (
-    Address, BasicData, Personal, Datetime, Network, ASCIISymbols
+    Address, BasicData, Personal, Datetime, Network
 )
 from church.utils import pull
 

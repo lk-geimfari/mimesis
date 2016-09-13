@@ -6,29 +6,8 @@ from .utils import pull
 
 __all__ = ['Address', 'Personal',
            'BasicData', 'Network',
-           'Datetime', 'ASCIISymbols'
+           'Datetime'
            ]
-
-
-class ASCIISymbols(object):
-    """
-    Class for generate ASCII symbols.
-    """
-
-    @staticmethod
-    def gender_symbol(sex='f'):
-        """
-        Get ascii symbol of gender.
-        :param sex: if sex='m' then will be returned ascii symbol for male.
-        Default value of sex if 'f' i.e female.
-        :return: the corresponding ascii symbol
-        """
-        if sex.lower() == 'm':
-            return '♂'
-        if sex.lower() == 'ts':
-            return '⚦'
-        else:
-            return '♀'
 
 
 class Address(object):
