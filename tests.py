@@ -97,7 +97,7 @@ class PersonalTestCase(TestCase):
 
     def test_age(self):
         result = self.person.age(maximum=55)
-        assert result < 55
+        assert result <= 55
 
     def test_name(self):
         result = self.person.name() + '\n'

@@ -21,6 +21,7 @@ church/data/en_us/month_abbr
 church/data/en_us/months
 church/data/en_us/nation
 church/data/en_us/periodicity
+church/data/en_us/political_views
 church/data/en_us/postal_codes
 church/data/en_us/pro_lang
 church/data/en_us/professions
@@ -32,8 +33,11 @@ church/data/en_us/street_suffix
 church/data/en_us/surnames
 church/data/en_us/text
 church/data/en_us/university
+church/data/en_us/useragents
 church/data/en_us/usernames
+church/data/en_us/views_on
 church/data/en_us/words
+church/data/en_us/worldview
 church/data/ru_ru/cities
 church/data/ru_ru/colors
 church/data/ru_ru/countries
@@ -51,6 +55,7 @@ church/data/ru_ru/month_abbr
 church/data/ru_ru/months
 church/data/ru_ru/nation
 church/data/ru_ru/periodicity
+church/data/ru_ru/political_views
 church/data/ru_ru/postal_codes
 church/data/ru_ru/professions
 church/data/ru_ru/qualifications
@@ -60,4 +65,6 @@ church/data/ru_ru/street_suffix
 church/data/ru_ru/subjects
 church/data/ru_ru/text
 church/data/ru_ru/university
+church/data/ru_ru/views_on
 church/data/ru_ru/words
+church/data/ru_ru/worldview
