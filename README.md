@@ -2,7 +2,6 @@
 [![Build Status](https://travis-ci.org/lk-geimfari/church.svg?branch=master)](https://travis-ci.org/lk-geimfari/church)
 [![PyPI version](https://badge.fury.io/py/church%2F.svg)](https://badge.fury.io/py/church%2F)
 [![HitCount](https://hitt.herokuapp.com/lk-geimfar/church.svg)](https://github.com/lk-geimfari/church)
-[![PyPI](https://img.shields.io/pypi/pyversions/caravel.svg?maxAge=2592000)](https://pypi.python.org/pypi/church/)
 
 
 ![alt text](https://raw.githubusercontent.com/lk-geimfari/church/master/examples/church.png)
@@ -51,6 +50,9 @@ def _church(c=100):
 ## Contributing
 Your contributions are always welcome! Please take a look at the [contribution](https://github.com/lk-geimfari/church/blob/master/CONTRIBUTING.md) guidelines first.
 
+## Runtime
+[![PyPI](https://img.shields.io/pypi/pyversions/caravel.svg?maxAge=2592000)](https://pypi.python.org/pypi/church/)
+[![PyPI](https://img.shields.io/pypi/implementation/Django.svg?maxAge=2592000)]()
 
 ## Licence 
 [![MIT Licence](https://badges.frapsoft.com/os/mit/mit.svg?v=103)](https://opensource.org/licenses/mit-license.php)   
