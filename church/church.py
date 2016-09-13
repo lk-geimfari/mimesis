@@ -476,3 +476,12 @@ class Network(object):
                ]
         _mac = map(lambda x: "%02x" % x, mac)
         return ':'.join(_mac)
+
+    @staticmethod
+    def user_agent():
+        """
+        Get a random user agent.
+        :return: user agent string
+        """
+        u_agent = choice(pull('useragents', 'en_us'))
+        return u_agent.strip()

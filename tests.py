@@ -252,3 +252,7 @@ class NetworkTestCase(TestCase):
         result = self.net.mac_address()
         mac_pattern = r'^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$'
         assert re.match(mac_pattern, result)
+
+    def test_user_agent(self):
+        result = self.net.user_agent() + '\n'
+        assert result in pull('useragents', LANG)
