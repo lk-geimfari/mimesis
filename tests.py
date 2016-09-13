@@ -252,18 +252,3 @@ class NetworkTestCase(TestCase):
         result = self.net.mac_address()
         mac_pattern = r'^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$'
         assert re.match(mac_pattern, result)
-
-
-class ASCIISymbolsTestCase(TestCase):
-    a = ASCIISymbols()
-
-    def test_gender_symbol(self):
-        if sys.version_info[0] == 3:
-            male = self.a.gender_symbol('m')
-            assert male == '♂'
-
-            female = self.a.gender_symbol('f')
-            assert female == '♀'
-
-            transsexual = self.a.gender_symbol('ts')
-            assert transsexual == '⚦'
