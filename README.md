@@ -8,7 +8,7 @@
 
 ![alt text](https://raw.githubusercontent.com/lk-geimfari/church/master/examples/church.png)
 
-Church - is a library to generate fake data.
+Church - is a library to generate fake data. It's very useful if you need to bootstrap your database.
 
 ## Installation
 ```zsh
