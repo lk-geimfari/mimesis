@@ -14,7 +14,8 @@ class Address(object):
     def __init__(self, lang='en_us'):
         self.lang = lang.lower()
 
-    def street_number(self):
+    @staticmethod
+    def street_number():
         """
         Generate a random street number.
         :return: street number
@@ -33,7 +34,7 @@ class Address(object):
         Get a random street suffix.
         :return: street suffix. For example: Street.
         """
-        return choice(pull('street_suffix', self.lang))
+        return choice(pull('street_suffix', self.lang)).strip()
 
     def street_address(self):
         """
@@ -44,11 +45,11 @@ class Address(object):
             return '{} {} {}'.format(
                 self.street_suffix(),
                 self.street_name(),
-                self.street_number()
+                Address.street_number()
             )
         else:
             return '{} {} {}'.format(
-                self.street_number(),
+                Address.street_number(),
                 self.street_name(),
                 self.street_suffix()
             )
