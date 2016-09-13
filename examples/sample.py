@@ -1,7 +1,6 @@
-from church import Personal
+from church import Address
 
-p = Personal('en_us')
+p = Address('ru_ru')
 
-print(p.worldview())
-
-print(p.political_views())
+print(p.street_address())
+print(p.street_number())
