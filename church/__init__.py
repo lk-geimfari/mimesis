@@ -1,6 +1,6 @@
 from .church import (
     Address, Personal, BasicData,
-    Network, Datetime, ASCIISymbols
+    Network, Datetime
 )
 
 __version__ = '0.1.5'
@@ -11,7 +11,6 @@ __all__ = [
     'BasicData',
     'Network',
     'Datetime',
-    'ASCIISymbols'
 ]
 
 __author__ = {
