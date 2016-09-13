@@ -1,6 +1,6 @@
 from datetime import date
 from random import choice, sample, randint
-from string import digits
+from string import digits, ascii_letters
 
 from .utils import pull
 
@@ -251,6 +251,16 @@ class Personal():
             .replace(' ', '_').strip()
         user_name += str(randint(3, 94))
         return user_name.lower()
+
+    @staticmethod
+    def password(length=8):
+        """
+        Generate a rondom password.
+        :param length: length of password
+        :return: random password
+        """
+        _punc = '!"#$%+:<?@^_'
+        return "".join([choice(ascii_letters + digits + _punc) for _ in range(length)])
 
     def email(self):
         """
