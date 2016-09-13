@@ -2,12 +2,13 @@
 [![Build Status](https://travis-ci.org/lk-geimfari/church.svg?branch=master)](https://travis-ci.org/lk-geimfari/church)
 [![PyPI version](https://badge.fury.io/py/church%2F.svg)](https://badge.fury.io/py/church%2F)
 [![HitCount](https://hitt.herokuapp.com/lk-geimfar/church.svg)](https://github.com/lk-geimfari/church)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/d773f20efa67430683bb24fff5af9db8)](https://www.codacy.com/app/likid-geimfari/church?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=lk-geimfari/church&amp;utm_campaign=Badge_Grade)
 [![Issues](https://img.shields.io/github/issues/lk-geimfari/church.svg)](https://github.com/lk-geimfari/church/issues)
 
 
 ![alt text](https://raw.githubusercontent.com/lk-geimfari/church/master/examples/church.png)
 
-Church - is a library to generate fake data.
+Church - is a library to generate fake data. It's very useful if you need to bootstrap your database.
 
 ## Installation
 ```zsh
