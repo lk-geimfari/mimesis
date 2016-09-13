@@ -1,5 +1,5 @@
 # Church
-
+[![Build Status](https://travis-ci.org/lk-geimfari/church.svg?branch=master)](https://travis-ci.org/lk-geimfari/church)
 
 ![alt text](http://graphiccave.com/wp-content/uploads/2015/04/TwoTowers-Catholic-Church.png)
 
