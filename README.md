@@ -1,8 +1,7 @@
 # Church
 [![Build Status](https://travis-ci.org/lk-geimfari/church.svg?branch=master)](https://travis-ci.org/lk-geimfari/church)
 [![PyPI version](https://badge.fury.io/py/church.svg)](https://badge.fury.io/py/church)
-[![Requirements Status](https://requires.io/github/lk-geimfari/church/requirements.svg?branch=master)](https://requires.io/github/lk-geimfari/church/requirements/?branch=master)
-[![HitCount](https://hitt.herokuapp.com/lk-geimfar/church.svg)](https://github.com/lk-geimfari}/church)
+[![HitCount](https://hitt.herokuapp.com/lk-geimfar/church.svg)](https://github.com/lk-geimfari/church)
 [![PyPI](https://img.shields.io/pypi/pyversions/caravel.svg?maxAge=2592000)](https://pypi.python.org/pypi/church/)
 
 
