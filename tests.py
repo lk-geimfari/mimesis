@@ -1,4 +1,5 @@
 import re
+import sys
 from unittest import TestCase
 
 from church.church import (
@@ -257,11 +258,12 @@ class ASCIISymbolsTestCase(TestCase):
     a = ASCIISymbols()
 
     def test_gender_symbol(self):
-        male = self.a.gender_symbol('m')
-        assert male == '♂'
+        if sys.version_info[0] == 3:
+            male = self.a.gender_symbol('m')
+            assert male == '♂'
 
-        female = self.a.gender_symbol('f')
-        assert female == '♀'
+            female = self.a.gender_symbol('f')
+            assert female == '♀'
 
-        transexual = self.a.gender_symbol('ts')
-        assert transexual == '⚦'
+            transsexual = self.a.gender_symbol('ts')
+            assert transsexual == '⚦'
