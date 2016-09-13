@@ -5,17 +5,17 @@
 [![PyPI](https://img.shields.io/pypi/pyversions/caravel.svg?maxAge=2592000)](https://pypi.python.org/pypi/church/)
 
 
-![alt text](http://graphiccave.com/wp-content/uploads/2015/04/TwoTowers-Catholic-Church.png)
+![alt text](https://raw.githubusercontent.com/lk-geimfari/church/master/examples/church.png)
 
 Church - is a library to generate fake data.
 
-# Installation
+## Installation
 ```zsh
 ➜  ~  pip install church
 
 ```
 
-# Usage
+## Usage
 ```python
 # you can use church in your models for generate data for testing
 # ...
@@ -48,9 +48,13 @@ def _church(c=100):
 
 ```
 
-# Licence 
+## Contributing
+Your contributions are always welcome! Please take a look at the [contribution](https://github.com/lk-geimfari/church/blob/master/CONTRIBUTING.md) guidelines first.
+
+
+## Licence 
 [![MIT Licence](https://badges.frapsoft.com/os/mit/mit.svg?v=103)](https://opensource.org/licenses/mit-license.php)   
 
 
-#Why church?
+## Why church?
 «Such teachings come through hypocritical liars, whose consciences have been seared as with a hot iron.»
