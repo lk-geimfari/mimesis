@@ -10,7 +10,7 @@ __all__ = ['Address', 'Personal',
            ]
 
 
-class ASCIISymbols():
+class ASCIISymbols(object):
     """
     Class for generate ASCII symbols.
     """
@@ -30,31 +30,8 @@ class ASCIISymbols():
         else:
             return '♀'
 
-    @staticmethod
-    def emoji():
-        """
-        Get a random ascii symbol of emoji.
-        :return: ascii symbol of emoji
-        """
-        emoji_list = ['😃', '😅', '😆', '😎', '😈',
-                      '😀', '😍', '😗', '😴', '😕',
-                      '😑', '😏', '😮', '😯', '😡',
-                      ]
-        return choice(emoji_list)
 
-    @staticmethod
-    def food_symbol():
-        """
-        Get a random ascii symbol of food.
-        :return: food ascii symbol
-        """
-        food_list = ['🍔', '🍕', '🍝', '🍜' '🍇', '🍈',
-                     '🍉', '🍍', '🍄', '🍆', '🍪'
-                     ]
-        return choice(food_list)
-
-
-class Address():
+class Address(object):
     def __init__(self, lang='en_us'):
         self.lang = lang.lower()
 
@@ -145,7 +122,7 @@ class Address():
         return choice(pull('cities', self.lang)).strip()
 
 
-class BasicData():
+class BasicData(object):
     """
     Class for generate text data, i.e text, lorem ipsum and another.
     """
@@ -234,7 +211,7 @@ class BasicData():
         return choice(pull('pro_lang', 'en_us')).strip()
 
 
-class Personal():
+class Personal(object):
     """
     Class for generate personal data, i.e names, surnames, age and another.
     """
@@ -484,7 +461,7 @@ class Datetime(object):
         return randint(1, 31)
 
 
-class Network():
+class Network(object):
     """
     Class for generate data for working with network,
     i.e IPv4, IPv6 and another
