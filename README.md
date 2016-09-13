@@ -1,8 +1,8 @@
 # Church
 [![Build Status](https://travis-ci.org/lk-geimfari/church.svg?branch=master)](https://travis-ci.org/lk-geimfari/church)
-[![PyPI version](https://badge.fury.io/py/church.svg)](https://badge.fury.io/py/church)
+[![PyPI version](https://badge.fury.io/py/church%2F.svg)](https://badge.fury.io/py/church%2F)
 [![HitCount](https://hitt.herokuapp.com/lk-geimfar/church.svg)](https://github.com/lk-geimfari/church)
-[![PyPI](https://img.shields.io/pypi/pyversions/caravel.svg?maxAge=2592000)](https://pypi.python.org/pypi/church/)
+[![Issues](https://img.shields.io/github/issues/lk-geimfari/church.svg)](https://github.com/lk-geimfari/church/issues)
 
 
 ![alt text](https://raw.githubusercontent.com/lk-geimfari/church/master/examples/church.png)
@@ -17,7 +17,7 @@ Church - is a library to generate fake data.
 
 ## Usage
 ```python
-# you can use church in your models for generate data for testing
+#  It's very useful if you need bootstrap your database.
 # ...
 # ... 
 
@@ -50,6 +50,9 @@ def _church(c=100):
 
 ## Contributing
 Your contributions are always welcome! Please take a look at the [contribution](https://github.com/lk-geimfari/church/blob/master/CONTRIBUTING.md) guidelines first.
+
+## Runtime
+[![PyPI](https://img.shields.io/pypi/pyversions/caravel.svg?maxAge=2592000)](https://pypi.python.org/pypi/church/)
 
 
 ## Licence 
