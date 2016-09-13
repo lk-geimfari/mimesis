@@ -137,6 +137,10 @@ class PersonalTestCase(TestCase):
         result = self.person.username()
         assert re.match(r'^[a-zA-Z0-9_.-]+$', result)
 
+    def test_password(self):
+        result = self.person.password(length=10)
+        assert len(result) == 10
+
     def test_email(self):
         result = self.person.email()
         assert re.match(r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)", result)
