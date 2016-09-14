@@ -57,7 +57,7 @@ Your contributions are always welcome! Please take a look at the [contribution](
 
 
 ## Licence 
-[![MIT Licence](https://badges.frapsoft.com/os/mit/mit.svg?v=103)](https://opensource.org/licenses/mit-license.php)   
+[![MIT Licence](https://badges.frapsoft.com/os/mit/mit.svg?v=103)](https://github.com/lk-geimfari/church/blob/master/LICENSE)   
 
 
 ## Why church?
