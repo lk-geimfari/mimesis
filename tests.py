@@ -39,11 +39,6 @@ class AddressTestCase(TestCase):
         elif self.address.lang == 'ru_ru':
             assert re.match(r'[0-9]{6}$', result)
 
-    def test_telephone(self):
-        result = self.address.telephone()
-        assert re.match(
-            r'^((8|\+[1-9])[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$', result)
-
     def test_country(self):
         result = self.address.country() + '\n'
         assert result in pull('countries', self.address.lang)
@@ -91,6 +86,14 @@ class BasicDataTestCase(TestCase):
         result = self.data.programming_language() + '\n'
         assert result in pull('pro_lang', 'en_us')
 
+    def test_company_type(self):
+        result = self.data.company_type(abbreviated=True)
+        assert len(result) < 7
+
+    def test_company(self):
+        result = self.data.company() + '\n'
+        assert result in pull('company', self.data.lang)
+
 
 class PersonalTestCase(TestCase):
     person = Personal(LANG)
@@ -105,6 +108,11 @@ class PersonalTestCase(TestCase):
 
         result = self.person.name('m') + '\n'
         assert result in pull('m_names', self.person.lang)
+
+    def test_telephone(self):
+        result = self.person.telephone()
+        assert re.match(
+            r'^((8|\+[1-9])[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$', result)
 
     def test_surname(self):
         if self.person.lang == 'ru_ru':

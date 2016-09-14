@@ -72,21 +72,6 @@ class Address(object):
         """
         return choice(pull('postal_codes', self.lang)).strip()
 
-    def telephone(self):
-        """
-        Generate a random phone number.
-        :return: phone number. For example: +7-(963)409-11-22
-        """
-        phone_number = ''
-        mask = '+7-($$$)$$$-$$-$$' if self.lang == 'ru_ru' \
-            else '+$-($$$)$$$-$$-$$'
-        for i in mask:
-            if i == '$':
-                phone_number += str(randint(1, 9))
-            else:
-                phone_number += i
-        return phone_number.strip()
-
     def country(self):
         """
         Get a random country.
@@ -181,6 +166,25 @@ class BasicData(object):
         :return: color name. For example: Red
         """
         return choice(pull('colors', self.lang)).strip()
+
+    def company_type(self, abbreviated=False):
+        """
+        Get a random company type.
+        :param abbreviated: if True then abbreviated company type.
+        :return: company type. For example: Inc.
+        """
+        _type = choice(pull('company_type', self.lang)).split('|')
+        if abbreviated:
+            return _type[1].strip()
+        return _type[0].strip()
+
+    def company(self):
+        """
+        Get a random company name.
+        :return: company name. For example: Intel
+        """
+        company = choice(pull('company', self.lang))
+        return company.strip()
 
     @staticmethod
     def programming_language():
@@ -404,6 +408,21 @@ class Personal(object):
         :return: name of the movie
         """
         return choice(pull('favorite_movie', self.lang)).strip()
+
+    def telephone(self):
+        """
+        Generate a random phone number.
+        :return: phone number. For example: +7-(963)409-11-22
+        """
+        phone_number = ''
+        mask = '+7-($$$)$$$-$$-$$' if self.lang == 'ru_ru' \
+            else '+$-($$$)$$$-$$-$$'
+        for i in mask:
+            if i == '$':
+                phone_number += str(randint(1, 9))
+            else:
+                phone_number += i
+        return phone_number.strip()
 
 
 class Datetime(object):
