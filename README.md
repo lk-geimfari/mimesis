@@ -61,4 +61,4 @@ Your contributions are always welcome! Please take a look at the [contribution](
 
 
 ## Why church?
-«Such teachings come through hypocritical liars, whose consciences have been seared as with a hot iron.»
+«Such teachings come through hypocritical liars, whose consciences have been seared as with a hot iron.» Bible, Timothy 1:4
