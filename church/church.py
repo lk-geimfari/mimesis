@@ -597,7 +597,7 @@ class File(object):
 
 class Science(object):
     """
-    Get a random facts.
+    Class for getting facts science.
     """
 
     def __init__(self, lang='en_us'):
