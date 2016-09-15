@@ -6,7 +6,7 @@ from .utils import pull
 
 __all__ = ['Address', 'Personal',
            'BasicData', 'Network',
-           'Datetime'
+           'Datetime', 'File'
            ]
 
 
@@ -534,3 +534,58 @@ class Network(object):
         """
         u_agent = choice(pull('useragents', 'en_us'))
         return u_agent.strip()
+
+
+class File(object):
+    """
+    Class for generate fake data for file.
+     """
+
+    @staticmethod
+    def extension(file_type='text'):
+        """
+        Get a random extension from list.
+        :param type: The type of extension. Default is text.
+        All supported types:
+            1. source - '.py', '.rb', '.cpp' and other.
+            2. text = '.doc', '.log', '.rtf' and other.
+            3. data_file = '.csv', '.dat', '.pps' and other.
+        :return:
+        """
+        _type = file_type.lower()
+
+        source = [
+            '.a', '.asm', '.asp', '.awk', '.c', '.class',
+            '.cpp', '.pl', '.js', '.java', '.clj', '.py',
+            '.rb', '.hs', '.erl', '.rs', '.swift', '.html',
+            '.json', '.xml', '.css', '.php', '.jl', '.r',
+            '.cs', 'd', '.lisp', '.cl', '.go', '.h', '.scala',
+            '.sc', '.ts', '.sql'
+        ]
+        text = ['.doc', '.docx', '.log', '.rtf', '.md',
+                '.pdf', '.odt', '.txt'
+                ]
+
+        data = ['.csv', '.dat', '.ged', '.pps', '.ppt', '.pptx']
+        audio = ['.flac', '.mp3', '.m3u', '.m4a', '.wav', '.wma']
+        video = ['.3gp', '.mp4', '.abi', '.m4v', '.mov', '.mpg', '.wmv']
+        image = ['.bmp', '.jpg', '.jpeg', '.png', '.svg']
+        executable = ['.apk', '.app', '.bat', '.jar', '.com', '.exe']
+        compressed = ['.7z', '.war', '.zip', '.tar.gz', '.tar.xz', '.rar']
+
+        if _type == 'source':
+            return choice(source)
+        elif _type == 'data':
+            return choice(data)
+        elif _type == 'audio':
+            return choice(audio)
+        elif _type == 'video':
+            return choice(video)
+        elif _type == 'image':
+            return choice(image)
+        elif _type == 'executable':
+            return choice(executable)
+        elif _type == 'compressed':
+            return choice(compressed)
+        else:
+            return choice(text)
