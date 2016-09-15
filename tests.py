@@ -8,6 +8,7 @@ from church.utils import pull
 
 # LANG = 'ru_ru'
 LANG = 'en_us'
+# LANG = 'de_de'
 
 
 class AddressTestCase(TestCase):
@@ -302,7 +303,7 @@ class FileTestCase(TestCase):
 
 
 class ScienceTestCase(TestCase):
-    science = Science('en_us')
+    science = Science(LANG)
 
     def test_math_formula(self):
         result = self.science.math_formula() + '\n'

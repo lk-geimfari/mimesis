@@ -62,7 +62,7 @@ class Address(object):
         """
         if self.lang == 'ru_ru':
             return choice(pull('subjects', self.lang)).strip()
-        elif self.lang == 'en_us':
+        else:
             return choice(pull('states', self.lang)).strip()
 
     def postal_code(self):
