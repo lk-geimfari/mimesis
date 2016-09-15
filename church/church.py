@@ -299,6 +299,13 @@ class Personal(object):
         domain_name = 'http://www.' + self.username().replace(' ', '-')
         return domain_name + choice(pull('domains', 'en_us')).strip()
 
+    def bitcoin(self):
+        """
+        Generate a random bitcoin address.
+        :return: random bitcoin address
+        """
+        return '1'+ "".join([choice(ascii_letters + digits) for _ in range(33)])
+
     @staticmethod
     def cvv():
         """
