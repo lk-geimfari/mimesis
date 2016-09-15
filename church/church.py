@@ -300,12 +300,16 @@ class Personal(object):
         return domain_name + choice(pull('domains', 'en_us')).strip()
 
     @staticmethod
-    def bitcoin():
+    def bitcoin(address_format='p2pkh'):
         """
-        Generate a random bitcoin address.
-        :return: random bitcoin address
+        Get a random bitcoin address.
+        Currently supported only two address formats that are most popular.
+        It's 'P2PKH' and 'P2SH'
+        :param address_format: bitcoin address format. Default is 'P2PKH'
+        :return: address_format. For example: 3EktnHQD7RiAE6uzMj2ZifT9YgRrkSgzQX
         """
-        return '1' + "".join([choice(ascii_letters + digits) for _ in range(33)])
+        _fmt = '1' if address_format.lower() == 'p2pkh' else '3'
+        return _fmt + "".join([choice(ascii_letters + digits) for _ in range(33)])
 
     @staticmethod
     def cvv():
@@ -538,7 +542,7 @@ class Network(object):
 
 class File(object):
     """
-    Class for generate fake data for file.
+    Class for generate fake data for files.
      """
 
     @staticmethod
