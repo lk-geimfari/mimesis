@@ -165,6 +165,11 @@ class PersonalTestCase(TestCase):
         result = self.person.bitcoin()
         assert len(result) == 34
 
+        p2pkh = self.person.bitcoin(address_format='p2pkh')
+        assert p2pkh[0] == '1'
+        p2sh = self.person.bitcoin(address_format='p2sh')
+        assert p2sh[0] == '3'
+
     def test_cvv(self):
         result = self.person.cvv()
         assert (100 <= result) and (result <= 999)
