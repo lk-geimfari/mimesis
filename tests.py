@@ -161,6 +161,10 @@ class PersonalTestCase(TestCase):
                         r'[$-_@.&+]|[!*\(\),]|'
                         r'(?:%[0-9a-fA-F][0-9a-fA-F]))+', result)
 
+    def test_bitcoin(self):
+        result = self.person.bitcoin()
+        assert len(result) == 34
+
     def test_cvv(self):
         result = self.person.cvv()
         assert (100 <= result) and (result <= 999)
