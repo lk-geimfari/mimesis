@@ -451,9 +451,10 @@ class Datetime(object):
         :param abbreviated: if True then will be returned abbreviated name of day of the week.
         :return: name of day of the week
         """
+        _day = choice(pull('days', self.lang)).split('|')
         if abbreviated:
-            return choice(pull('days_abbr', self.lang)).strip()
-        return choice(pull('days', self.lang)).strip()
+            return _day[1].strip()
+        return _day[0].strip()
 
     def month(self, abbreviated=False):
         """
@@ -461,9 +462,10 @@ class Datetime(object):
         :param abbreviated: if True then will be returned abbreviated month name.
         :return: month name. For example: November
         """
+        _month = choice(pull('months', self.lang)).split('|')
         if abbreviated:
-            return choice(pull('month_abbr', self.lang)).strip()
-        return choice(pull('months', self.lang)).strip()
+            return _month[1].strip()
+        return _month[0].strip()
 
     def periodicity(self):
         """
