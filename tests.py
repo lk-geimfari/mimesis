@@ -2,7 +2,7 @@ import re
 from unittest import TestCase
 
 from church.church import (
-    Address, BasicData, Personal, Datetime, Network
+    Address, BasicData, Personal, Datetime, Network, File
 )
 from church.utils import pull
 
@@ -279,3 +279,18 @@ class NetworkTestCase(TestCase):
     def test_user_agent(self):
         result = self.net.user_agent() + '\n'
         assert result in pull('useragents', LANG)
+
+
+class FileTestCase(TestCase):
+    file = File()
+
+    def test_extension(self):
+        source = self.file.extension('source')
+        assert len(source) < 8
+
+        other = self.file.extension()
+        text = ['.doc', '.docx', '.log',
+                '.rtf', '.md', '.pdf',
+                '.odt', '.txt'
+                ]
+        assert other in text
