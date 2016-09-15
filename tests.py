@@ -2,7 +2,7 @@ import re
 from unittest import TestCase
 
 from church.church import (
-    Address, BasicData, Personal, Datetime, Network, File
+    Address, BasicData, Personal, Datetime, Network, File, Science
 )
 from church.utils import pull
 
@@ -299,3 +299,19 @@ class FileTestCase(TestCase):
                 '.odt', '.txt'
                 ]
         assert other in text
+
+
+class ScienceTestCase(TestCase):
+    science = Science('ru_ru')
+
+    def test_math_formula(self):
+        result = self.science.math_formula() + '\n'
+        assert result in pull('math_formula', 'en_us')
+
+    def test_physical_law(self):
+        result = self.science.physical_law() + '\n'
+        assert result in pull('physical_law', self.science.lang)
+
+    def test_article_on_wiki(self):
+        result = self.science.article_on_wiki() + '\n'
+        assert result in pull('science_wiki')
