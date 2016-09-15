@@ -302,7 +302,7 @@ class FileTestCase(TestCase):
 
 
 class ScienceTestCase(TestCase):
-    science = Science('ru_ru')
+    science = Science('en_us')
 
     def test_math_formula(self):
         result = self.science.math_formula() + '\n'
@@ -315,3 +315,7 @@ class ScienceTestCase(TestCase):
     def test_article_on_wiki(self):
         result = self.science.article_on_wiki() + '\n'
         assert result in pull('science_wiki')
+
+    def test_scientist(self):
+        result = self.science.scientist() + '\n'
+        assert result in pull('scientist')

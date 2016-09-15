@@ -627,3 +627,11 @@ class Science(object):
         """
         article = choice(pull('science_wiki', self.lang))
         return article.strip()
+
+    def scientist(self):
+        """
+        Get a random name of scientist.
+        :return: name of scientist. For example: Konstantin Tsiolkovsky
+        """
+        scientist_name = choice(pull('scientist', self.lang))
+        return scientist_name.strip()
