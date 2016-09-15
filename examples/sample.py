@@ -1,6 +1,8 @@
-from church import Address
+from church import Address, Datetime, Science
 
-p = Address('ru_ru')
+p = Datetime('en_us')
+sci = Science('en_us')
 
-print(p.street_address())
-print(p.state_or_subject())
+print(p.month(), p.month(abbreviated=True))
+print(sci.article_on_wiki())
+print(sci.scientist())
