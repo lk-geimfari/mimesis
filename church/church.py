@@ -6,7 +6,7 @@ from .utils import pull
 
 __all__ = ['Address', 'Personal',
            'BasicData', 'Network',
-           'Datetime', 'File'
+           'Datetime', 'File', 'Science'
            ]
 
 
@@ -593,3 +593,37 @@ class File(object):
             return choice(compressed)
         else:
             return choice(text)
+
+
+class Science(object):
+    """
+    Get a random facts.
+    """
+
+    def __init__(self, lang='en_us'):
+        self.lang = lang.lower()
+
+    @staticmethod
+    def math_formula():
+        """
+        Get a random mathematical formula.
+        :return: formula. For example: A = (ab)/2
+        """
+        formula = choice(pull('math_formula', 'en_us'))
+        return formula.strip()
+
+    def physical_law(self):
+        """
+        Get the wording of the law of physics.
+        :return: law of physics
+        """
+        law = choice(pull('physical_law', self.lang))
+        return law.strip()
+
+    def article_on_wiki(self):
+        """
+        Get a random link to article in Wikipedia.
+        :return: link. For example: https://en.wikipedia.org/wiki/Black_hole
+        """
+        article = choice(pull('science_wiki', self.lang))
+        return article.strip()
