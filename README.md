@@ -63,4 +63,4 @@ Your contributions are always welcome! Please take a look at the [contribution](
 ## Why church?
 «Such teachings come through hypocritical liars, whose consciences have been seared as with a hot iron.» Timothy 1:4
 
-`If you offende by name of this library just do not use it.` [`Do Not Use!`](https://github.com/lk-geimfari/church/issues/6)
+`If you offended by name of this library then you may don't use it.` [`Do Not Use!`](https://github.com/lk-geimfari/church/issues/6)
