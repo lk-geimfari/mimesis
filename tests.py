@@ -42,7 +42,10 @@ class AddressTestCase(TestCase):
 
     def test_country(self):
         result = self.address.country() + '\n'
-        assert result in pull('countries', self.address.lang)
+        assert len(result) > 3
+
+        result2 = self.address.country(only_iso_code=True) + '\n'
+        assert len(result2) < 4
 
     def test_city(self):
         result = self.address.city() + '\n'

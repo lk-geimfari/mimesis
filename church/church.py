@@ -72,12 +72,16 @@ class Address(object):
         """
         return choice(pull('postal_codes', self.lang)).strip()
 
-    def country(self):
+    def country(self, only_iso_code=False):
         """
         Get a random country.
+        :param only_iso_code: Return only ISO code of country.
         :return: country. For example: Russia
         """
-        return choice(pull('countries', self.lang)).strip()
+        country_name = choice(pull('countries', self.lang)).split('|')
+        if only_iso_code:
+            return country_name[0].strip()
+        return country_name[1].strip()
 
     def city(self):
         """
