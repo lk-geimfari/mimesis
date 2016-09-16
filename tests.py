@@ -126,9 +126,8 @@ class PersonalTestCase(TestCase):
             result = self.person.surname('m') + '\n'
             assert result in pull('m_surnames', self.person.lang)
 
-        elif self.person.lang == 'en_us':
-            result = self.person.surname() + '\n'
-            assert result in pull('surnames', self.person.lang)
+        result = self.person.surname() + '\n'
+        assert result in pull('surnames', self.person.lang)
 
     def test_full_name(self):
         if self.person.lang == 'ru_ru':
