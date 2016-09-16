@@ -239,14 +239,15 @@ class Personal(object):
         """
         if not isinstance(gender, str):
             raise TypeError('surname takes only string type')
-        if self.lang == 'en_us':
-            return choice(pull('surnames', self.lang)).strip()
 
+        # In Russia, different surnames for men and women.
         elif self.lang == 'ru_ru':
-            if gender.lower() == 'f':
-                return choice(pull('f_surnames', self.lang)).strip()
-            elif gender.lower() == 'm':
+            if gender.lower() == 'm':
                 return choice(pull('m_surnames', self.lang)).strip()
+            else:
+                return choice(pull('f_surnames', self.lang)).strip()
+
+        return choice(pull('surnames', self.lang)).strip()
 
     def full_name(self, gender='f'):
         """
