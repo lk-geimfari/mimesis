@@ -263,7 +263,8 @@ class Personal(object):
             elif gender.lower() == 'm':
                 return '{0} {1}'.format(self.name('m'), self.surname('m'))
 
-    def username(self):
+    @staticmethod
+    def username():
         """
         Get a random username with digits.
         :return: username. For example: foretime10
@@ -288,7 +289,7 @@ class Personal(object):
         Generate a random email using usernames.
         :return: email address. For example: foretime10@live.com
         """
-        name = self.username()
+        name = Personal.username()
         email_adders = name + choice(pull('email', 'en_us'))
         return email_adders.strip()
 
@@ -297,7 +298,7 @@ class Personal(object):
         Generate a random home page using usernames.
         :return: random home page. For example: http://www.font6.info
         """
-        domain_name = 'http://www.' + self.username().replace(' ', '-')
+        domain_name = 'http://www.' + Personal.username().replace(' ', '-')
         return domain_name + choice(pull('domains', 'en_us')).strip()
 
     @staticmethod
@@ -720,7 +721,8 @@ class Development(object):
         """
         return choice(pull('pro_lang', 'en_us')).strip()
 
-    def framework(self, _type='back'):
+    @staticmethod
+    def framework(_type='back'):
         """
         Get a random framework from file.
         :param _type: If _type='front' then will be returned front-end framework,
@@ -744,8 +746,8 @@ class Development(object):
                       'Front-end': 'Webpack',
                       'Other': 'Martini'}
         """
-        front = '{0}'.format(self.framework('front'))
-        back = '{}'.format(self.framework())
+        front = '{}'.format(Development.framework('front'))
+        back = '{}'.format(Development.framework())
         db = '{}'.format(Development.database(nosql))
         other = '{}'.format(Development.other())
         _stack = {
