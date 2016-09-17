@@ -738,7 +738,8 @@ class Development(object):
             back_f = choice(pull('back_frmwk'))
             return back_f.strip()
 
-    def stack_of_tech(self, nosql=False):
+    @staticmethod
+    def stack_of_tech(nosql=False):
         """
         Get a random stack.
         :param nosql: if True the only NoSQL skills.
