@@ -376,7 +376,6 @@ class DevelopmentTestCase(TestCase):
                  'Mercurial', 'Jira',
                  'REST', 'Apache Hadoop',
                  'Scrum', 'Redmine',
-                 'Docker/Docker Compose'
                  ]
         result = self.dev.other()
         assert result in _list
