@@ -284,7 +284,8 @@ class Personal(object):
         _punc = '!"#$%+:<?@^_'
         return "".join([choice(ascii_letters + digits + _punc) for _ in range(length)])
 
-    def email(self):
+    @staticmethod
+    def email():
         """
         Generate a random email using usernames.
         :return: email address. For example: foretime10@live.com
@@ -293,7 +294,8 @@ class Personal(object):
         email_adders = name + choice(pull('email', 'en_us'))
         return email_adders.strip()
 
-    def home_page(self):
+    @staticmethod
+    def home_page():
         """
         Generate a random home page using usernames.
         :return: random home page. For example: http://www.font6.info
