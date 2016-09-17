@@ -1,15 +1,6 @@
-ABC
-ActionScript
-Ada
-Algol
-Alice
-Apex
-APL
-Arduino
 ASP
 Assembly
 AutoIt
-AutoLISP
 Awk
 Bash
 C
@@ -17,12 +8,10 @@ C Shell
 C#
 C++
 C++/CLI
-C-Omega
 Caml
 Ceylon
 Clojure
 CoffeeScript
-ColdFusion
 Common Lisp
 D
 Dart
@@ -40,13 +29,10 @@ Go
 Groovy
 Haskell
 haXe
-IDL
 Io
 J#
 Java
 JavaScript
-JScript
-JScript.NET
 Julia
 Kotlin
 Lisp
@@ -75,8 +61,5 @@ Smalltalk
 Tcl
 Tex
 Transact-SQL
-Turing
 TypeScript
-VBScript
-Visual Basic .NET
 Z shell

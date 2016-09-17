@@ -2,12 +2,14 @@ import re
 from unittest import TestCase
 
 from church.church import (
-    Address, BasicData, Personal, Datetime, Network, File, Science
+    Address, BasicData, Personal, Datetime, Network, File, Science, Development
 )
 from church.utils import pull
 
 # LANG = 'ru_ru'
 LANG = 'en_us'
+
+
 # LANG = 'de_de'
 
 
@@ -85,10 +87,6 @@ class BasicDataTestCase(TestCase):
     def test_color(self):
         result = self.data.color() + '\n'
         assert result in pull('colors', self.data.lang)
-
-    def test_programming_language(self):
-        result = self.data.programming_language() + '\n'
-        assert result in pull('pro_lang', 'en_us')
 
     def test_company_type(self):
         result = self.data.company_type(abbreviated=True)
@@ -322,3 +320,78 @@ class ScienceTestCase(TestCase):
     def test_scientist(self):
         result = self.science.scientist() + '\n'
         assert result in pull('scientist')
+
+    def test_chemical_element(self):
+        result = self.science.chemical_element(name_only=True)
+        assert len(result) > 2
+
+        not_reuslt = self.science.chemical_element(name_only=False)
+        assert isinstance(not_reuslt, dict)
+
+
+class DevelopmentTestCase(TestCase):
+    dev = Development()
+
+    def test_license(self):
+        _license = [
+            'Apache License, 2.0 (Apache-2.0)',
+            'The BSD 3-Clause License',
+            'The BSD 2-Clause License',
+            'GNU General Public License (GPL)',
+            'General Public License (LGPL),'
+            'MIT license (MIT)',
+            'Mozilla Public License 2.0 (MPL-2.0)',
+            'Common Development and Distribution License (CDDL-1.0)',
+            'Eclipse Public License (EPL-1.0)'
+        ]
+
+        result = self.dev.license()
+        assert result in _license
+
+    def test_programming_language(self):
+        result = self.dev.programming_language() + '\n'
+        assert result in pull('pro_lang', 'en_us')
+
+    def test_database(self):
+        _sql = ['MariaDB', 'MySQL', 'PostgreSQL', 'Oracle DB', 'SQLite']
+
+        result = self.dev.database()
+        assert result in _sql
+
+        _nosql = ['MongoDB', 'RethinkDB',
+                  'Couchbase', 'CouchDB',
+                  'Aerospike', 'MemcacheDB',
+                  'MUMPS,  Riak', 'Redis',
+                  'AllegroGraph', 'Neo4J',
+                  'InfiniteGraph'
+                  ]
+        _result = self.dev.database(nosql=True)
+        assert _result in _nosql
+
+    def test_other(self):
+        _list = ['Docker', 'Rkt',
+                 'LXC', 'Vagrant',
+                 'Elasticsearch',
+                 'Nginx', 'Git',
+                 'Mercurial', 'Jira',
+                 'REST', 'Apache Hadoop',
+                 'Scrum', 'Redmine',
+                 'Docker/Docker Compose'
+                 ]
+        result = self.dev.other()
+        assert result in _list
+
+    def test_framework(self):
+        result = self.dev.framework(_type='front') + '\n'
+        assert result in pull('front_frmwk')
+
+        _result = self.dev.framework(_type='back') + '\n'
+        assert _result in pull('back_frmwk')
+
+    def test_stack_of_tech(self):
+        result = self.dev.stack_of_tech(nosql=True)
+        assert isinstance(result, dict)
+
+    def test_github_repo(self):
+        url = self.dev.github_repo() + '\n'
+        assert url in pull('github_repos')
