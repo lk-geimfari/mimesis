@@ -1,8 +1,6 @@
-from church import Address, Datetime, Science
+from church import Development
 
-p = Datetime('en_us')
-sci = Science('en_us')
+p = Development()
 
-print(p.month(), p.month(abbreviated=True))
-print(sci.article_on_wiki())
-print(sci.scientist())
+o = Development()
+print(o.stack_of_tech())

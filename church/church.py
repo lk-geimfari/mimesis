@@ -4,9 +4,13 @@ from string import digits, ascii_letters
 
 from .utils import pull
 
+# pull - is internal function,
+# please do not use this function outside the module 'church'.
+
 __all__ = ['Address', 'Personal',
            'BasicData', 'Network',
-           'Datetime', 'File', 'Science'
+           'Datetime', 'File', 'Science',
+           'Development'
            ]
 
 
@@ -189,14 +193,6 @@ class BasicData(object):
         """
         company = choice(pull('company', self.lang))
         return company.strip()
-
-    @staticmethod
-    def programming_language():
-        """
-        Get a random programming language from list with 82 values.
-        :return: programming language. For example: Erlang
-        """
-        return choice(pull('pro_lang', 'en_us')).strip()
 
 
 class Personal(object):
@@ -619,6 +615,26 @@ class Science(object):
         formula = choice(pull('math_formula', 'en_us'))
         return formula.strip()
 
+    def chemical_element(self, name_only=True):
+        """
+        Get a random chemical element from file.
+        :param name_only: if False then will be returned dict.
+        :return: name of chemical element or dict.
+        For example: {'Symbol': 'S',
+                      'Name': 'Sulfur',
+                      'Atomic number': '16'
+                    }
+           or name of chemical element: 'Helium'
+        """
+        _e = choice(pull('chemical_elements', self.lang)).split('|')
+        if not name_only:
+            return {'name': _e[0].strip(),
+                    'symbol': _e[1].strip(),
+                    'atomic_number': _e[2].strip()
+                    }
+        else:
+            return _e[0]
+
     def physical_law(self):
         """
         Get the wording of the law of physics.
@@ -629,7 +645,7 @@ class Science(object):
 
     def article_on_wiki(self):
         """
-        Get a random link to article in Wikipedia.
+        Get a random link to scientific article on Wikipedia.
         :return: link. For example: https://en.wikipedia.org/wiki/Black_hole
         """
         article = choice(pull('science_wiki', self.lang))
@@ -642,3 +658,110 @@ class Science(object):
         """
         scientist_name = choice(pull('scientist', self.lang))
         return scientist_name.strip()
+
+
+class Development(object):
+    """
+    Class for getting fake data for Developers.
+    """
+
+    @staticmethod
+    def license():
+        """
+        Get a random license from list.
+        :return:
+        """
+        _license = [
+            'Apache License, 2.0 (Apache-2.0)',
+            'The BSD 3-Clause License',
+            'The BSD 2-Clause License',
+            'GNU General Public License (GPL)',
+            'General Public License (LGPL),'
+            'MIT license (MIT)',
+            'Mozilla Public License 2.0 (MPL-2.0)',
+            'Common Development and Distribution License (CDDL-1.0)',
+            'Eclipse Public License (EPL-1.0)'
+        ]
+        return choice(_license)
+
+    @staticmethod
+    def database(nosql=False):
+        """
+        Get a random database name.
+        :param nosql:
+        :return: return database name. For example: PostgreSQL
+        """
+        _nosql = ['MongoDB', 'RethinkDB', 'Couchbase', 'CouchDB',
+                  'Aerospike', 'MemcacheDB', 'MUMPS,  Riak', 'Redis',
+                  'AllegroGraph', 'Neo4J', 'InfiniteGraph']
+
+        _sql = ['MariaDB', 'MySQL', 'PostgreSQL', 'Oracle DB', 'SQLite']
+        if nosql:
+            return choice(_nosql)
+        return choice(_sql)
+
+    @staticmethod
+    def other():
+        """
+        Get a random value list.
+        :return: some technology. For example: Nginx
+        """
+        _list = ['Docker', 'Rkt', 'LXC', 'Vagrant',
+                 'Elasticsearch', 'Nginx', 'Git', 'Mercurial',
+                 'Jira', 'REST', 'Apache Hadoop', 'Scrum', 'Redmine',
+                 ]
+        return choice(_list)
+
+    @staticmethod
+    def programming_language():
+        """
+        Get a random programming language from list with 82 values.
+        :return: programming language. For example: Erlang
+        """
+        return choice(pull('pro_lang', 'en_us')).strip()
+
+    def framework(self, _type='back'):
+        """
+        Get a random framework from file.
+        :param _type: If _type='front' then will be returned front-end framework,
+        else will be returned back-end framework.
+        :return: framework or list of used stack: For example:  Python/Django
+        """
+        if _type == 'front':
+            front_f = choice(pull('front_frmwk'))
+            return front_f.strip()
+        else:
+            back_f = choice(pull('back_frmwk'))
+            return back_f.strip()
+
+    def stack_of_tech(self, nosql=False):
+        """
+        Get a random stack.
+        :param nosql: if True the only NoSQL skills.
+        :return: dict like in example.
+        For example: {'Back-end': 'Martini',
+                      'DB': 'SQLite',
+                      'Front-end': 'Webpack',
+                      'Other': 'Martini'}
+        """
+        front = '{0}'.format(self.framework('front'))
+        back = '{}'.format(self.framework())
+        db = '{}'.format(Development.database(nosql))
+        other = '{}'.format(Development.other())
+        _stack = {
+            'front-end': front,
+            'back-end': back,
+            'db': db,
+            'other': other
+        }
+
+        return _stack
+
+    @staticmethod
+    def github_repo():
+        """
+        Get a random link to github repository.
+        :return: link. For example: https://github.com/lk-geimfari/church
+        """
+        repository = choice(pull('github_repos'))
+        return repository.strip()
