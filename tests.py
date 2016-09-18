@@ -2,13 +2,15 @@ import re
 from unittest import TestCase
 
 from church.church import (
-    Address, BasicData, Personal, Datetime, Network, File, Science, Development
+    Address, BasicData, Personal,
+    Datetime, Network, File, Science,
+    Development,
 )
 from church.utils import pull
 
+# LANG = 'de_de'
 # LANG = 'ru_ru'
 LANG = 'en_us'
-# LANG = 'de_de'
 
 
 class AddressTestCase(TestCase):
@@ -159,6 +161,19 @@ class PersonalTestCase(TestCase):
         assert re.match(r'http[s]?://(?:[a-zA-Z]|[0-9]|'
                         r'[$-_@.&+]|[!*\(\),]|'
                         r'(?:%[0-9a-fA-F][0-9a-fA-F]))+', result)
+
+    def test_subreddit(self):
+        result = self.person.subreddit()
+        assert result in pull('subreddits')
+
+        full_result = self.person.subreddit(full_url=True)
+        assert len(full_result) > 20
+
+        result_nsfw = self.person.subreddit(nsfw=True)
+        assert result_nsfw in pull('nsfw_subreddits')
+
+        full_result = self.person.subreddit(nsfw=True, full_url=True)
+        assert len(full_result) > 20
 
     def test_bitcoin(self):
         result = self.person.bitcoin()
