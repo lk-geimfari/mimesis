@@ -48,6 +48,9 @@ def _church(c=100):
 # ...
 
 ```
+## Docs
+Church is pretty simple library. All that you need is small [guidebook.](https://github.com/lk-geimfari/church/blob/master/docs/README.md)
+
 
 ## Contributing
 Your contributions are always welcome! Please take a look at the [contribution](https://github.com/lk-geimfari/church/blob/master/CONTRIBUTING.md) guidelines first.
