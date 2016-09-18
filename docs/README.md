@@ -184,8 +184,9 @@ file = File()
 # 6. image = '.jpeg', '.jpg', '.png' and other.
 # 7. executable = '.exe', '.apk', '.bat' and other.
 # 8. compressed = '.zip', '.7z', '.tar.xz' and other.
+# For example: '.py'
 extension = file.extension(file_type='source')
-For example: '.py'
+
 ```
 
 ## Address
