@@ -19,3 +19,5 @@ other_skill = Development.other()
 
 #
 programming_language= Development
+
+print(dev.os())
