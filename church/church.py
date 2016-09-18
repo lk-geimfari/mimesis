@@ -106,7 +106,7 @@ class BasicData(object):
     def lorem_ipsum(self, quantity=5):
         """
         Get random strings.
-        :param quantity: quantity of strings.
+        :param quantity: quantity of sentence.
         :return: random text
         """
         if not isinstance(quantity, int):
@@ -559,7 +559,12 @@ class File(object):
         All supported types:
             1. source - '.py', '.rb', '.cpp' and other.
             2. text = '.doc', '.log', '.rtf' and other.
-            3. data_file = '.csv', '.dat', '.pps' and other.
+            3. data = '.csv', '.dat', '.pps' and other.
+            4. audio = '.mp3', '.flac', '.m4a' and other.
+            5. video = '.mp4', '.m4v', '.avi' and other.
+            6. image = '.jpeg', '.jpg', '.png' and other.
+            7. executable = '.exe', '.apk', '.bat' and other.
+            8. compressed = '.zip', '.7z', '.tar.xz' and other.
         :return:
         """
         _type = file_type.lower()
@@ -718,7 +723,7 @@ class Development(object):
     @staticmethod
     def programming_language():
         """
-        Get a random programming language from list with 82 values.
+        Get a random programming language from list.
         :return: programming language. For example: Erlang
         """
         return choice(pull('pro_lang', 'en_us')).strip()

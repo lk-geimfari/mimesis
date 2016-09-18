@@ -8,8 +8,6 @@ from church.utils import pull
 
 # LANG = 'ru_ru'
 LANG = 'en_us'
-
-
 # LANG = 'de_de'
 
 
