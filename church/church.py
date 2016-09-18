@@ -304,6 +304,25 @@ class Personal(object):
         return domain_name + choice(pull('domains', 'en_us')).strip()
 
     @staticmethod
+    def subreddit(nsfw=False, full_url=False):
+        """
+        Get a random subreddit from list.
+        :param nsfw: if True then will be returned NSFW subreddit.
+        :param full_url: If true http://www.reddit.com/r/subreddit
+        else /r/subreddit
+        :return: subreddit or subreddit url.
+        """
+        url = 'http://www.reddit.com'
+        if nsfw:
+            if full_url:
+                return url + choice(pull('nsfw_subreddits'))
+            else:
+                return choice(pull('nsfw_subreddits'))
+        _subreddit = choice(pull('subreddits'))
+        _result = url + _subreddit if full_url else _subreddit
+        return _result
+
+    @staticmethod
     def bitcoin(address_format='p2pkh'):
         """
         Get a random bitcoin address.
