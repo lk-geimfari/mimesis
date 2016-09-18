@@ -36,6 +36,11 @@ email = person.email()
 # For example: http://www.font6.info
 home_page = person.home_page()
 
+# Get a random subreddit thread from list. 
+# If nsfw=True then will be returned NSFW subreddit
+# For example: /r/games
+subreddit = p.subreddit(nsfw=False, full_url=False)
+
 # Bitcoin address. Support only 2 most common format: 'P2PKH' and 'P2SH'
 # For example:
 bitcoin = person.bitcoin(address_format='p2sh')
