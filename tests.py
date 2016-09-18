@@ -147,6 +147,9 @@ class PersonalTestCase(TestCase):
         result = self.person.username()
         assert re.match(r'^[a-zA-Z0-9_.-]+$', result)
 
+        result = self.person.username(gender='f')
+        assert re.match(r'^[a-zA-Z0-9_.-]+$', result)
+
     def test_password(self):
         result = self.person.password(length=10)
         assert len(result) == 10
@@ -407,3 +410,7 @@ class DevelopmentTestCase(TestCase):
     def test_github_repo(self):
         url = self.dev.github_repo() + '\n'
         assert url in pull('github_repos')
+
+    def test_os(self):
+        result = self.dev.os() + '\n'
+        assert result in pull('os')

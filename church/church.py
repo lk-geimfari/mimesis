@@ -252,27 +252,32 @@ class Personal(object):
         female name.
         :return: full name. For example: Johann Wolfgang
         """
+        gender += gender.lower()
+
         if self.lang == 'ru_ru':
-            if gender.lower() == 'f':
+            if gender == 'f':
                 return '{0} {1}'.format(self.surname(), self.name())
-            elif gender.lower() == 'm':
+            elif gender == 'm':
                 return '{0} {1}'.format(self.surname('m'), self.name('m'))
         else:
-            if gender.lower() == 'f':
+            if gender == 'f':
                 return '{0} {1}'.format(self.name(), self.surname())
-            elif gender.lower() == 'm':
+            elif gender == 'm':
                 return '{0} {1}'.format(self.name('m'), self.surname('m'))
 
     @staticmethod
-    def username():
+    def username(gender='m'):
         """
         Get a random username with digits.
-        :return: username. For example: foretime10
+        Username generated from en_us names for all locales.
+        :return: username. For example: abby101
         """
-        user_name = choice(pull('usernames', 'en_us')) \
-            .replace(' ', '_').strip()
-        user_name += str(randint(3, 94))
-        return user_name.lower()
+        if gender.lower() == 'f':
+            _fu = choice(pull('f_names', 'en_us')).replace(' ', '_')
+            return _fu.strip().lower() + str(randint(2, 5000))
+
+        _mu = choice(pull('m_names', 'en_us')).replace(' ', '_')
+        return _mu.strip().lower() + str(randint(2, 5000))
 
     @staticmethod
     def password(length=8):
@@ -794,3 +799,11 @@ class Development(object):
         """
         repository = choice(pull('github_repos'))
         return repository.strip()
+
+    @staticmethod
+    def os():
+        """
+        Get a random operating system or distributive name.
+        :return: os name. For example: Gentoo
+        """
+        return choice(pull('os')).strip()
