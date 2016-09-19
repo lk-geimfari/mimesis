@@ -1,3 +1,9 @@
+# -*- coding: utf-8 -*-
+"""
+:copyright: (c) 2016 by Lk Geimfari.
+:license: MIT, see LICENSE for more details.
+"""
+
 from datetime import date
 from random import choice, sample, randint
 from string import digits, ascii_letters
