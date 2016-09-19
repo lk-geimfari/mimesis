@@ -31,7 +31,7 @@ def _church(c=100):
         user = User(username=ch.username(),
                     email=ch.email(),
                     name=ch.name('m'),
-                    surname=ch.surname('m'),
+                    surname=ch.surname(),
                     credit_card=ch.credit_card_number(),
                     home_page=ch.home_page(),
                     password=ch.password(length=10),
