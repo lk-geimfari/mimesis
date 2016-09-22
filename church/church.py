@@ -1,3 +1,9 @@
+# -*- coding: utf-8 -*-
+"""
+:copyright: (c) 2016 by Lk Geimfari.
+:license: MIT, see LICENSE for more details.
+"""
+
 from datetime import date
 from random import choice, sample, randint
 from string import digits, ascii_letters
@@ -866,5 +872,9 @@ class Food(object):
         Get a random vegetable.
         :return: vegetable. Example: Tomato
         """
+<<<<<<< HEAD
         _vegetable = choice(pull('vegetables', self.lang))
         return _vegetable.strip()
+=======
+        return choice(pull('os')).strip()
+>>>>>>> 731b67fedc9134bd79d521d6df81c3a51ce7c75b
