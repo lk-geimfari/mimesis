@@ -823,7 +823,7 @@ class Development(object):
         """
         front = '{}'.format(Development.framework('front'))
         back = '{}'.format(Development.framework('back'))
-        db = '{}'.format(Development.database(nosql=True))
+        db = '{}'.format(Development.database(nosql))
         other = '{}'.format(Development.other())
         _stack = {
             'front-end': front,

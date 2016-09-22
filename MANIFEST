@@ -4,6 +4,7 @@ setup.py
 church/__init__.py
 church/church.py
 church/utils.py
+church/data/ch_path/data
 church/data/de_de/chemical_elements
 church/data/de_de/cities
 church/data/de_de/colors
@@ -19,7 +20,6 @@ church/data/de_de/m_names
 church/data/de_de/months
 church/data/de_de/nation
 church/data/de_de/periodicity
-church/data/de_de/physical_law
 church/data/de_de/political_views
 church/data/de_de/postal_codes
 church/data/de_de/professions
@@ -62,7 +62,6 @@ church/data/en_us/nation
 church/data/en_us/nsfw_subreddits
 church/data/en_us/os
 church/data/en_us/periodicity
-church/data/en_us/physical_law
 church/data/en_us/political_views
 church/data/en_us/postal_codes
 church/data/en_us/pro_lang
@@ -101,7 +100,6 @@ church/data/ru_ru/m_surnames
 church/data/ru_ru/months
 church/data/ru_ru/nation
 church/data/ru_ru/periodicity
-church/data/ru_ru/physical_law
 church/data/ru_ru/political_views
 church/data/ru_ru/postal_codes
 church/data/ru_ru/professions
