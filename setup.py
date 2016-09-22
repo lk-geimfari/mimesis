@@ -6,7 +6,7 @@ setup(
     name='church',
     version=__version__,
     packages=['church'],
-    keywords=['fake', 'data', 'testing', 'generate', 'random'],
+    keywords=['fake', 'data', 'testing', 'generate', 'faker'],
     package_data={
         'church': [
             'data/*/*',
@@ -16,7 +16,7 @@ setup(
     license='MIT',
     author='Likid Geimfari',
     author_email='likid.geimfari@gmail.com',
-    description='Library for fake data generation for testing.',
+    description='Church is a library that help you generate fake data.',
     classifiers=[
         "Development Status :: 3 - Alpha",
         'Programming Language :: Python :: 2.7',

@@ -1,276 +1,315 @@
+import random
 import re
-from unittest import TestCase
+import unittest
 
 from church.church import (
-    Address, BasicData, Personal,
+    Address, Text, Personal,
     Datetime, Network, File, Science,
-    Development,
+    Development, Food
 )
 from church.utils import pull
 
-# LANG = 'de_de'
-# LANG = 'ru_ru'
-LANG = 'en_us'
+# LANG = random.choice(['en_us', 'de_de', 'ru_ru'])
+LANG = 'ru_ru'
 
 
-class AddressTestCase(TestCase):
-    address = Address(LANG)
+class AddressTestCase(unittest.TestCase):
+    def setUp(self):
+        self.address = Address(LANG)
+
+    def tearDown(self):
+        del self.address
 
     def test_street_number(self):
         result = self.address.street_number()
-        assert re.match(r'[0-9]{1,5}$', result)
+        self.assertTrue(re.match(r'[0-9]{1,5}$', result))
 
     def test_street_name(self):
         result = self.address.street_name() + '\n'
-        assert result in pull('street', self.address.lang)
+        self.assertIn(result, pull('street', self.address.lang))
 
     def test_street_suffix(self):
         result = self.address.street_suffix() + '\n'
-        assert result in pull('street_suffix', self.address.lang)
+        self.assertIn(result, pull('street_suffix', self.address.lang))
 
     def test_state_or_subject(self):
-        result = self.address.state_or_subject() + '\n'
+        # TODO: Fix
+        result = self.address.state() + '\n'
         if self.address.lang == 'en_us':
-            assert result in pull('states', self.address.lang)
+            self.assertIn(result, pull('states', self.address.lang))
         elif self.address.lang == 'ru_ru':
-            assert result in pull('subjects', self.address.lang)
+            self.assertIn(result, pull('subjects', self.address.lang))
 
     def test_postal_code(self):
         result = self.address.postal_code()
-        if self.address.lang == 'en_us':
-            assert re.match(r'[0-9]{5}$', result) is not None
-        elif self.address.lang == 'ru_ru':
-            assert re.match(r'[0-9]{6}$', result)
+        if self.address.lang == 'ru_ru':
+            self.assertIsNotNone(re.match(r'[0-9]{6}$', result))
+        else:
+            self.assertTrue(re.match(r'[0-9]{5}$', result))
 
     def test_country(self):
         result = self.address.country() + '\n'
-        assert len(result) > 3
+        self.assertTrue(len(result) > 3)
 
         result2 = self.address.country(only_iso_code=True) + '\n'
-        assert len(result2) < 4
+        self.assertTrue(len(result2) < 4)
 
     def test_city(self):
         result = self.address.city() + '\n'
-        assert result in pull('cities', self.address.lang)
+        self.assertIn(result, pull('cities', self.address.lang))
 
 
-class BasicDataTestCase(TestCase):
-    data = BasicData(LANG)
+class BasicDataTestCase(unittest.TestCase):
+    def setUp(self):
+        self.data = Text(LANG)
+
+    def tearDown(self):
+        del self.data
 
     def test_sentence(self):
         result = self.data.sentence() + '\n'
-        assert result in pull('text', self.data.lang)
+        self.assertIn(result, pull('text', self.data.lang))
 
     def test_title(self):
         result = self.data.title() + '\n'
-        assert result in pull('text', self.data.lang)
+        self.assertIn(result, pull('text', self.data.lang))
 
     def test_words(self):
         result = self.data.words()
-        assert len(result) == 5
+        self.assertEqual(len(result), 5)
 
         result = self.data.words(quantity=1)
-        assert len(result) == 1
+        self.assertEqual(len(result), 1)
 
     def test_word(self):
         result = self.data.word() + '\n'
-        assert result in pull('words', self.data.lang)
+        self.assertIn(result, pull('words', self.data.lang))
 
     def test_quote_from_movie(self):
         result = self.data.quote_from_movie() + '\n'
-        assert result in pull('quotes', self.data.lang)
+        self.assertIn(result, pull('quotes', self.data.lang))
 
     def test_currency_sio(self):
         result = self.data.currency_iso() + '\n'
-        assert result in pull('currency', self.data.lang)
+        self.assertIn(result, pull('currency', 'en_us'))
 
     def test_color(self):
         result = self.data.color() + '\n'
-        assert result in pull('colors', self.data.lang)
+        self.assertIn(result, pull('colors', self.data.lang))
 
     def test_company_type(self):
         result = self.data.company_type(abbreviated=True)
-        assert len(result) < 7
+        self.assertTrue(len(result) < 7)
 
     def test_company(self):
         result = self.data.company() + '\n'
-        assert result in pull('company', self.data.lang)
+        self.assertIn(result, pull('company', self.data.lang))
 
 
-class PersonalTestCase(TestCase):
+class PersonalTestCase(unittest.TestCase):
     person = Personal(LANG)
 
     def test_age(self):
         result = self.person.age(maximum=55)
-        assert result <= 55
+        self.assertTrue(result <= 55)
 
     def test_name(self):
         result = self.person.name() + '\n'
-        assert result in pull('f_names', self.person.lang)
+        self.assertIn(result, pull('f_names', self.person.lang))
 
         result = self.person.name('m') + '\n'
-        assert result in pull('m_names', self.person.lang)
+        self.assertIn(result, pull('m_names', self.person.lang))
 
     def test_telephone(self):
         result = self.person.telephone()
-        assert re.match(
-            r'^((8|\+[1-9])[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$', result)
+        self.assertTrue(
+            re.match(r'^((8|\+[1-9])[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$', result))
 
     def test_surname(self):
         if self.person.lang == 'ru_ru':
             result = self.person.surname('f') + '\n'
-            assert result in pull('f_surnames', self.person.lang)
+            self.assertIn(result, pull('f_surnames', self.person.lang))
 
             result = self.person.surname('m') + '\n'
-            assert result in pull('m_surnames', self.person.lang)
-
-        result = self.person.surname() + '\n'
-        assert result in pull('surnames', self.person.lang)
+            self.assertIn(result, pull('m_surnames', self.person.lang))
+        else:
+            result = self.person.surname() + '\n'
+            self.assertIn(result, pull('surnames', self.person.lang))
 
     def test_full_name(self):
-        if self.person.lang == 'ru_ru':
-            result = self.person.full_name('f').split(' ')
-            f_surname = result[0] + '\n'
-            assert f_surname in pull('f_surnames', self.person.lang)
-
-            f_name = result[1] + '\n'
-            assert f_name in pull('f_names', self.person.lang)
-
-            result = self.person.full_name('m').split(' ')
-            m_surname = result[0] + '\n'
-            assert m_surname in pull('m_surnames', self.person.lang)
-
-            m_name = result[1] + '\n'
-            assert m_name in pull('m_names', self.person.lang)
+        result = self.person.full_name('f')
+        _result = result.split(' ')
+        self.assertEqual(len(_result), 2)
 
     def test_username(self):
         result = self.person.username()
-        assert re.match(r'^[a-zA-Z0-9_.-]+$', result)
+        self.assertTrue(re.match(r'^[a-zA-Z0-9_.-]+$', result))
 
-        result = self.person.username(gender='f')
-        assert re.match(r'^[a-zA-Z0-9_.-]+$', result)
+        result = self.person.username('f')
+        self.assertTrue(re.match(r'^[a-zA-Z0-9_.-]+$', result))
+
+    def test_twitter(self):
+        result = self.person.twitter('f')
+        self.assertIsNotNone(result)
+
+        _result = self.person.twitter('m')
+        self.assertIsNotNone(_result)
+
+    def test_facebook(self):
+        result = self.person.facebook('f')
+        self.assertIsNotNone(result)
+
+        _result = self.person.facebook('m')
+        self.assertIsNotNone(_result)
+
+    def test_wmid(self):
+        result = self.person.wmid()
+        self.assertEqual(len(result), 12)
+
+    def test_paypal(self):
+        result = self.person.paypal()
+        self.assertIsNotNone(result)
+
+    def test_yandex_money(self):
+        result = self.person.yandex_money()
+        self.assertEqual(len(result), 14)
 
     def test_password(self):
-        result = self.person.password(length=10)
-        assert len(result) == 10
+        _plain = self.person.password(length=15)
+        self.assertEqual(len(_plain), 15)
+
+        _md5 = self.person.password(algorithm='md5')
+        self.assertEqual(len(_md5), 32)
+
+        _sha1 = self.person.password(algorithm='sha1')
+        self.assertEqual(len(_sha1), 40)
+
+        _sha256 = self.person.password(algorithm='sha256')
+        self.assertEqual(len(_sha256), 64)
+
+        _sha512 = self.person.password(algorithm='sha512')
+        self.assertEqual(len(_sha512), 128)
 
     def test_email(self):
         result = self.person.email()
-        assert re.match(
-            r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)", result)
+        self.assertTrue(
+            re.match(r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)",
+                     result))
 
     def test_home_page(self):
         result = self.person.home_page()
-        assert re.match(r'http[s]?://(?:[a-zA-Z]|[0-9]|'
-                        r'[$-_@.&+]|[!*\(\),]|'
-                        r'(?:%[0-9a-fA-F][0-9a-fA-F]))+', result)
+        self.assertTrue(re.match(r'http[s]?://(?:[a-zA-Z]|[0-9]|'
+                                 r'[$-_@.&+]|[!*\(\),]|'
+                                 r'(?:%[0-9a-fA-F][0-9a-fA-F]))+', result))
 
     def test_subreddit(self):
         result = self.person.subreddit()
-        assert result in pull('subreddits')
+        self.assertIn(result, pull('subreddits'))
 
         full_result = self.person.subreddit(full_url=True)
-        assert len(full_result) > 20
+        self.assertTrue(len(full_result) > 20)
 
         result_nsfw = self.person.subreddit(nsfw=True)
-        assert result_nsfw in pull('nsfw_subreddits')
+        self.assertIn(result_nsfw, pull('nsfw_subreddits'))
 
         full_result = self.person.subreddit(nsfw=True, full_url=True)
-        assert len(full_result) > 20
+        self.assertTrue(len(full_result) > 20)
 
     def test_bitcoin(self):
         result = self.person.bitcoin()
-        assert len(result) == 34
+        self.assertEqual(len(result), 34)
 
         p2pkh = self.person.bitcoin(address_format='p2pkh')
-        assert p2pkh[0] == '1'
+        self.assertEqual(p2pkh[0], '1')
+
         p2sh = self.person.bitcoin(address_format='p2sh')
-        assert p2sh[0] == '3'
+        self.assertEqual(p2sh[0], '3')
 
     def test_cvv(self):
         result = self.person.cvv()
-        assert (100 <= result) and (result <= 999)
+        self.assertTrue((100 <= result) and (result <= 999))
 
     def test_credit_card_number(self):
         result = self.person.credit_card_number()
-        assert re.match(r'[\d]+((-|\s)?[\d]+)+', result)
+        self.assertTrue(re.match(r'[\d]+((-|\s)?[\d]+)+', result))
 
     def test_cid(self):
         result = self.person.cid()
-        assert (1000 <= result) and (result <= 9999)
+        self.assertTrue((1000 <= result) and (result <= 9999))
 
     def test_gender(self):
         result = self.person.gender() + '\n'
-        assert result in pull('gender', self.person.lang)
+        self.assertIn(result, pull('gender', self.person.lang))
 
         result_abbr = self.person.gender(abbreviated=True) + '\n'
-        assert len(result_abbr) == 2
+        self.assertEqual(len(result_abbr), 2)
 
     def test_profession(self):
         result = self.person.profession() + '\n'
-        assert result in pull('professions', self.person.lang)
+        self.assertIn(result, pull('professions', self.person.lang))
 
     def test_university(self):
         result = self.person.university() + '\n'
-        assert result in pull('university', self.person.lang)
+        self.assertIn(result, pull('university', self.person.lang))
 
     def test_qualification(self):
         result = self.person.qualification() + '\n'
-        assert result in pull('qualifications', self.person.lang)
+        self.assertIn(result, pull('qualifications', self.person.lang))
 
     def test_language(self):
         result = self.person.language() + '\n'
-        assert result in pull('languages', self.person.lang)
+        self.assertIn(result, pull('languages', self.person.lang))
 
     def test_favorite_movie(self):
         result = self.person.favorite_movie() + '\n'
-        assert result in pull('favorite_movie', self.person.lang)
+        self.assertIn(result, pull('favorite_movie', self.person.lang))
 
     def test_worldview(self):
         result = self.person.worldview() + '\n'
-        assert result in pull('worldview', self.person.lang)
+        self.assertIn(result, pull('worldview', self.person.lang))
 
     def test_views_on(self):
         result = self.person.views_on() + '\n'
-        assert result in pull('views_on', self.person.lang)
+        self.assertIn(result, pull('views_on', self.person.lang))
 
     def test_political_views(self):
         result = self.person.political_views() + '\n'
-        assert result in pull('political_views', self.person.lang)
+        self.assertIn(result, pull('political_views', self.person.lang))
 
 
-class DatetimeTestCase(TestCase):
+class DatetimeTestCase(unittest.TestCase):
     datetime = Datetime(LANG)
 
     def test_day_of_week(self):
         result = self.datetime.day_of_week() + '\n'
-        assert len(result) > 3
+        self.assertGreater(len(result), 4)
 
         result_abbr = self.datetime.day_of_week(abbreviated=True)
-        assert len(result_abbr) < 6 or '.' in result_abbr
+        self.assertTrue(len(result_abbr) < 6 or '.' in result_abbr)
 
     def test_month(self):
         result = self.datetime.month() + '\n'
-        assert len(result) > 3
+        self.assertGreater(len(result), 3)
 
         result_abbr = self.datetime.month(abbreviated=True)
-        assert len(result_abbr) < 6
+        self.assertLess(len(result_abbr), 6)
 
     def test_periodicity(self):
         result = self.datetime.periodicity() + '\n'
-        assert result in pull('periodicity', self.datetime.lang)
+        self.assertIn(result, pull('periodicity', self.datetime.lang))
 
     def test_day_of_month(self):
         result = self.datetime.day_of_month()
-        assert result >= 1 or result <= 31
+        self.assertTrue((result >= 1) or (result <= 31))
 
 
-class NetworkTestCase(TestCase):
+class NetworkTestCase(unittest.TestCase):
     net = Network()
 
     def test_ip_v4(self):
         result = self.net.ip_v4()
-        assert re.match(r"^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$", result)
+        ip_v4_pattern = r"^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$"
+        self.assertTrue(re.match(ip_v4_pattern, result))
 
     def test_ip_v6(self):
         result = self.net.ip_v6()
@@ -291,61 +330,57 @@ class NetworkTestCase(TestCase):
             '1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|' \
             '(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))'
 
-        assert re.match(ip_v6_pattern, result)
+        self.assertTrue(re.match(ip_v6_pattern, result))
 
     def test_mac_address(self):
         result = self.net.mac_address()
         mac_pattern = r'^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$'
-        assert re.match(mac_pattern, result)
+        self.assertTrue(re.match(mac_pattern, result))
 
     def test_user_agent(self):
         result = self.net.user_agent() + '\n'
-        assert result in pull('useragents', LANG)
+        self.assertIn(result, pull('useragents', 'en_us'))
 
 
-class FileTestCase(TestCase):
+class FileTestCase(unittest.TestCase):
     file = File()
 
     def test_extension(self):
         source = self.file.extension('source')
-        assert len(source) < 8
+        self.assertLess(len(source), 10)
 
-        other = self.file.extension()
+        _text = self.file.extension()
         text = ['.doc', '.docx', '.log',
                 '.rtf', '.md', '.pdf',
                 '.odt', '.txt'
                 ]
-        assert other in text
+        self.assertIn(_text, text)
 
 
-class ScienceTestCase(TestCase):
+class ScienceTestCase(unittest.TestCase):
     science = Science(LANG)
 
     def test_math_formula(self):
         result = self.science.math_formula() + '\n'
-        assert result in pull('math_formula', 'en_us')
-
-    def test_physical_law(self):
-        result = self.science.physical_law() + '\n'
-        assert result in pull('physical_law', self.science.lang)
+        self.assertIn(result, pull('math_formula', 'en_us'))
 
     def test_article_on_wiki(self):
         result = self.science.article_on_wiki() + '\n'
-        assert result in pull('science_wiki')
+        self.assertIn(result, pull('science_wiki', self.science.lang))
 
     def test_scientist(self):
         result = self.science.scientist() + '\n'
-        assert result in pull('scientist')
+        self.assertIn(result, pull('scientist', self.science.lang))
 
     def test_chemical_element(self):
         result = self.science.chemical_element(name_only=True)
-        assert len(result) > 2
+        self.assertGreater(len(result), 2)
 
-        not_reuslt = self.science.chemical_element(name_only=False)
-        assert isinstance(not_reuslt, dict)
+        _result = self.science.chemical_element(name_only=False)
+        self.assertIsInstance(_result, dict)
 
 
-class DevelopmentTestCase(TestCase):
+class DevelopmentTestCase(unittest.TestCase):
     dev = Development()
 
     def test_license(self):
@@ -362,17 +397,19 @@ class DevelopmentTestCase(TestCase):
         ]
 
         result = self.dev.license()
-        assert result in _license
+        self.assertIn(result, _license)
 
     def test_programming_language(self):
         result = self.dev.programming_language() + '\n'
-        assert result in pull('pro_lang', 'en_us')
+        self.assertIn(result, pull('pro_lang', 'en_us'))
 
     def test_database(self):
-        _sql = ['MariaDB', 'MySQL', 'PostgreSQL', 'Oracle DB', 'SQLite']
+        _sql = ['MariaDB', 'MySQL', 'PostgreSQL',
+                'Oracle DB', 'SQLite'
+                ]
 
         result = self.dev.database()
-        assert result in _sql
+        self.assertIn(result, _sql)
 
         _nosql = ['MongoDB', 'RethinkDB',
                   'Couchbase', 'CouchDB',
@@ -382,7 +419,7 @@ class DevelopmentTestCase(TestCase):
                   'InfiniteGraph'
                   ]
         _result = self.dev.database(nosql=True)
-        assert _result in _nosql
+        self.assertIn(_result, _nosql)
 
     def test_other(self):
         _list = ['Docker', 'Rkt',
@@ -394,23 +431,39 @@ class DevelopmentTestCase(TestCase):
                  'Scrum', 'Redmine',
                  ]
         result = self.dev.other()
-        assert result in _list
+        self.assertIn(result, _list)
 
     def test_framework(self):
         result = self.dev.framework(_type='front') + '\n'
-        assert result in pull('front_frmwk')
+        self.assertIn(result, pull('front_frmwk'))
 
         _result = self.dev.framework(_type='back') + '\n'
-        assert _result in pull('back_frmwk')
+        self.assertIn(_result, pull('back_frmwk'))
 
     def test_stack_of_tech(self):
         result = self.dev.stack_of_tech(nosql=True)
-        assert isinstance(result, dict)
+        self.assertIsInstance(result, dict)
 
     def test_github_repo(self):
         url = self.dev.github_repo() + '\n'
-        assert url in pull('github_repos')
+        self.assertIn(url, pull('github_repos'))
 
     def test_os(self):
         result = self.dev.os() + '\n'
-        assert result in pull('os')
+        self.assertIn(result, pull('os'))
+
+
+class FoodTestCase(unittest.TestCase):
+    def setUp(self):
+        self.food = Food(LANG)
+
+    def tearDown(self):
+        del self.food
+
+    def test_berry(self):
+        # TODO: Fix
+        pass
+
+    def test_vegetable(self):
+        # TODO: Fix
+        pass

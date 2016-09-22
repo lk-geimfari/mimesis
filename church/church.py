@@ -8,13 +8,17 @@ from .utils import pull
 # please do not use this function outside the module 'church'.
 
 __all__ = ['Address', 'Personal',
-           'BasicData', 'Network',
+           'Text', 'Network',
            'Datetime', 'File', 'Science',
-           'Development'
+           'Development', 'Food'
            ]
 
 
 class Address(object):
+    """
+    Class for generate fake address data.
+    """
+
     def __init__(self, lang='en_us'):
         self.lang = lang.lower()
 
@@ -36,13 +40,13 @@ class Address(object):
     def street_suffix(self):
         """
         Get a random street suffix.
-        :return: street suffix. For example: Street.
+        :return: street suffix. Example: Street.
         """
         return choice(pull('street_suffix', self.lang)).strip()
 
     def street_address(self):
         """
-        Get a random address.
+        Get a random full address.
         :return: full address.
         """
         if self.lang == 'ru_ru':
@@ -58,11 +62,11 @@ class Address(object):
                 self.street_suffix()
             )
 
-    def state_or_subject(self):
+    def state(self):
         """
-        Get a random states or subject of country. For 'ru_ru' always will
-        be getting subject of Russian Federation. For other localization will be getting state.
-        :return:
+        Get a random states or subject of country.
+        For locale 'ru_ru' always will be getting subject of RF.
+        :return: state. Example: Alabama
         """
         if self.lang == 'ru_ru':
             return choice(pull('subjects', self.lang)).strip()
@@ -71,8 +75,8 @@ class Address(object):
 
     def postal_code(self):
         """
-        Get a random postal code.
-        :return: postal code. For example: 389213
+        Get a random (real) postal code.
+        :return: postal code. Example: 389213
         """
         return choice(pull('postal_codes', self.lang)).strip()
 
@@ -80,7 +84,7 @@ class Address(object):
         """
         Get a random country.
         :param only_iso_code: Return only ISO code of country.
-        :return: country. For example: Russia
+        :return: country. Example: Russia
         """
         country_name = choice(pull('countries', self.lang)).split('|')
         if only_iso_code:
@@ -90,12 +94,12 @@ class Address(object):
     def city(self):
         """
         Get a random name of city.
-        :return: city name. For example: Saint Petersburg
+        :return: city name. Example: Saint Petersburg
         """
         return choice(pull('cities', self.lang)).strip()
 
 
-class BasicData(object):
+class Text(object):
     """
     Class for generate text data, i.e text, lorem ipsum and another.
     """
@@ -105,9 +109,9 @@ class BasicData(object):
 
     def lorem_ipsum(self, quantity=5):
         """
-        Get random strings.
-        :param quantity: quantity of sentence.
-        :return: random text
+        Get random strings. Not only lorem ipsum.
+        :param quantity: quantity of sentence
+        :return: text
         """
         if not isinstance(quantity, int):
             raise TypeError('lorem_ipsum takes only integer type')
@@ -126,8 +130,8 @@ class BasicData(object):
 
     def title(self):
         """
-        Get random title.
-        :return: title. For example: Erlang - is a general-purpose,
+        Get a random title.
+        :return: title Example: Erlang - is a general-purpose,
         concurrent, functional programming language.
         """
         return self.lorem_ipsum(quantity=1)
@@ -136,7 +140,7 @@ class BasicData(object):
         """
         Get the random words.
         :param quantity: quantity of words. Default is 5.
-        :return: words. For example: science, network, god, octopus, love
+        :return: words. Example: science, network, god, octopus, love
         """
         if not isinstance(quantity, int):
             raise TypeError('words takes only integer type')
@@ -149,29 +153,29 @@ class BasicData(object):
     def word(self):
         """
         Get a random word.
-        :return: single word. For example: science
+        :return: single word. Example: science
         """
         return self.words(quantity=1)[0]
 
     def quote_from_movie(self):
         """
         Get a random quotes from movie.
-        :return: quotes. For example: Bond... James Bond.
+        :return: quotes. Example: "Bond... James Bond."
         """
         return choice(pull('quotes', self.lang)).strip()
 
     @staticmethod
     def currency_iso():
         """
-        Get currency code. ISO 4217
-        :return: currency code. For example: RUR
+        Get a currency code. ISO 4217 format.
+        :return: currency code. Example: RUR
         """
         return choice(pull('currency', 'en_us')).strip()
 
     def color(self):
         """
-        Get random name of color.
-        :return: color name. For example: Red
+        Get a random name of color.
+        :return: color name. Example: Red
         """
         return choice(pull('colors', self.lang)).strip()
 
@@ -179,7 +183,7 @@ class BasicData(object):
         """
         Get a random company type.
         :param abbreviated: if True then abbreviated company type.
-        :return: company type. For example: Inc.
+        :return: company type. Example: Inc.
         """
         _type = choice(pull('company_type', self.lang)).split('|')
         if abbreviated:
@@ -189,7 +193,7 @@ class BasicData(object):
     def company(self):
         """
         Get a random company name.
-        :return: company name. For example: Intel
+        :return: company name. Example: Intel
         """
         company = choice(pull('company', self.lang))
         return company.strip()
@@ -217,53 +221,41 @@ class Personal(object):
         """
         Get a random name.
         :param gender: if 'm' then will getting male name else female name.
-        :return: name
+        :return: name. Example (gender='m'): John Abbey
         """
         if not isinstance(gender, str):
             raise TypeError('name takes only string type')
-        if gender.lower() == 'f':
-            return choice(pull('f_names', self.lang)).strip()
-        elif gender.lower() == 'm':
-            return choice(pull('m_names', self.lang)).strip()
+
+        _filename = 'f_names' if gender.lower() == 'f' else 'm_names'
+        return choice(pull(_filename, self.lang)).strip()
 
     def surname(self, gender='f'):
         """
         Get a random surname.
         :param gender: if 'm' then will getting male surname else
         female surname.
-        :return: surname. For example: Wolf
+        :return: surname. Example: Wolf
         """
         if not isinstance(gender, str):
             raise TypeError('surname takes only string type')
 
-        # In Russia, different surnames for men and women.
-        elif self.lang == 'ru_ru':
-            if gender.lower() == 'm':
-                return choice(pull('m_surnames', self.lang)).strip()
-            else:
-                return choice(pull('f_surnames', self.lang)).strip()
+        if self.lang == 'ru_ru':
+            _file = 'm_surnames' if gender == 'm' else 'f_surnames'
+            return choice(pull(_file, self.lang)).strip()
 
         return choice(pull('surnames', self.lang)).strip()
 
     def full_name(self, gender='f'):
+
         """
-        Get a random full name
+        Get a random full name.
         :param gender: if gender='m' then will be returned male name else
         female name.
-        :return: full name. For example: Johann Wolfgang
+        :return: full name. Example: Johann Wolfgang
         """
-        gender += gender.lower()
+        _sex = gender.lower()
 
-        if self.lang == 'ru_ru':
-            if gender == 'f':
-                return '{0} {1}'.format(self.surname(), self.name())
-            elif gender == 'm':
-                return '{0} {1}'.format(self.surname('m'), self.name('m'))
-        else:
-            if gender == 'f':
-                return '{0} {1}'.format(self.name(), self.surname())
-            elif gender == 'm':
-                return '{0} {1}'.format(self.name('m'), self.surname('m'))
+        return '{0} {1}'.format(self.name(_sex), self.surname(_sex))
 
     @staticmethod
     def username(gender='m'):
@@ -272,28 +264,62 @@ class Personal(object):
         Username generated from en_us names for all locales.
         :return: username. For example: abby101
         """
-        if gender.lower() == 'f':
-            _fu = choice(pull('f_names', 'en_us')).replace(' ', '_')
-            return _fu.strip().lower() + str(randint(2, 5000))
 
-        _mu = choice(pull('m_names', 'en_us')).replace(' ', '_')
-        return _mu.strip().lower() + str(randint(2, 5000))
+        _file_name = 'f_names' \
+            if gender.lower() == 'f' else 'm_names'
+
+        _u = choice(pull(_file_name)).replace(' ', '_')
+        return _u.strip().lower() + str(randint(2, 5000))
 
     @staticmethod
-    def password(length=8):
+    def twitter(gender='m'):
         """
-        Generate a random password.
+        Get a random twitter user.
+        :param gender:
+        :return: URL to user. Example: http://twitter.com/someuser12
+        """
+        url = "http://twitter.com/{0}"
+        _t = Personal.username(gender.lower())
+        return url.format(_t)
+
+    @staticmethod
+    def facebook(gender='m'):
+        """
+        Generate a random facebook user.
+        :param gender:
+        :return: URL to user. Example: https://facebook.com/some.user
+        """
+        url = 'https://facebook.com/{0}'
+        _f = Personal.username(gender.lower())
+        return url.format(_f)
+
+    @staticmethod
+    def password(length=8, algorithm=''):
+        """
+        Generate a password or hash password.
         :param length: length of password
-        :return: random password
+        :param algorithm: hashing algorithm
+        :return: password or password hash
         """
+        import hashlib
         _punc = '!"#$%+:<?@^_'
-        return "".join([choice(ascii_letters + digits + _punc) for _ in range(length)])
+        _pass = "".join([choice(ascii_letters + digits + _punc) for _ in range(length)])
+        if algorithm.lower() == 'sha1':
+            return hashlib.sha1(_pass.encode()).hexdigest()
+        elif algorithm.lower() == 'sha256':
+            return hashlib.sha256(_pass.encode()).hexdigest()
+        elif algorithm.lower() == 'sha512':
+            return hashlib.sha512(_pass.encode()).hexdigest()
+        elif algorithm.lower() == 'md5':
+            return hashlib.md5(_pass.encode()).hexdigest()
+        else:
+            return _pass
 
     @staticmethod
     def email():
         """
         Generate a random email using usernames.
-        :return: email address. For example: foretime10@live.com
+        :return: email address. Example: foretime10@live.com
         """
         name = Personal.username()
         email_adders = name + choice(pull('email', 'en_us'))
@@ -303,10 +329,10 @@ class Personal(object):
     def home_page():
         """
         Generate a random home page using usernames.
-        :return: random home page. For example: http://www.font6.info
+        :return: random home page. Example: http://www.font6.info
         """
-        domain_name = 'http://www.' + Personal.username().replace(' ', '-')
-        return domain_name + choice(pull('domains', 'en_us')).strip()
+        url = 'http://www.' + Personal.username().replace(' ', '-')
+        return url + choice(pull('domains', 'en_us')).strip()
 
     @staticmethod
     def subreddit(nsfw=False, full_url=False):
@@ -334,7 +360,7 @@ class Personal(object):
         Currently supported only two address formats that are most popular.
         It's 'P2PKH' and 'P2SH'
         :param address_format: bitcoin address format. Default is 'P2PKH'
-        :return: address_format. For example: 3EktnHQD7RiAE6uzMj2ZifT9YgRrkSgzQX
+        :return: address_format. Example: 3EktnHQD7RiAE6uzMj2ZifT9YgRrkSgzQX
         """
         _fmt = '1' if address_format.lower() == 'p2pkh' else '3'
         return _fmt + "".join([choice(ascii_letters + digits) for _ in range(33)])
@@ -351,7 +377,7 @@ class Personal(object):
     def credit_card_number():
         """
         Generate a random credit card number for Visa or MasterCard
-        :return: credit card. For example: 3519 2073 7960 3241
+        :return: credit card. Example: 3519 2073 7960 3241
         """
         card = ' '.join([str(randint(1000, 9999)) for i in range(0, 4)])
         return card.strip()
@@ -364,12 +390,36 @@ class Personal(object):
         """
         return randint(1000, 9999)
 
+    @staticmethod
+    def wmid():
+        """
+        Generate a identifier of user WMID for WebMoney
+        :return: Example: 834296404761
+        """
+        return "".join([choice(digits) for _ in range(12)])
+
+    @staticmethod
+    def paypal():
+        """
+        Generate a random PayPal account.
+        :return: email. Example: wolf235@gmail.com
+        """
+        return Personal.email()
+
+    @staticmethod
+    def yandex_money():
+        """
+        Generate a random Yandex.Money account.
+        :return: Y.Money account.
+        """
+        return "".join([choice(digits) for _ in range(14)])
+
     def gender(self, abbreviated=False):
         """
         Get a random gender.
         :param abbreviated: if True then will getting abbreviated gender title.
         For example: M or F
-        :return: title of gender. For example: Male
+        :return: title of gender. Example: Male
         """
         if abbreviated:
             return choice(pull('gender', self.lang))[0:1]
@@ -378,28 +428,28 @@ class Personal(object):
     def profession(self):
         """
         Get a random profession.
-        :return: the name of profession. For example: Programmer
+        :return: the name of profession. Example: Programmer
         """
         return choice(pull('professions', self.lang)).strip()
 
     def political_views(self):
         """
         Get a random political views.
-        :return: political views. For example: Liberal
+        :return: political views. Example: Liberal
         """
         return choice(pull('political_views', self.lang)).strip()
 
     def worldview(self):
         """
         Get a random worldview.
-        :return: worldview. For example: Pantheism
+        :return: worldview. Example: Pantheism
         """
         return choice(pull('worldview', self.lang)).strip()
 
     def views_on(self):
         """
         Get a random views on.
-        :return: views on string. For example: Negative
+        :return: views on string. Example: Negative
         """
         return choice(pull('views_on', self.lang)).strip()
 
@@ -407,15 +457,13 @@ class Personal(object):
         """
         Get a random nationality.
         :param gender: female or male
-        :return: nationality. For example: Russian
+        :return: nationality. Example: Russian
         """
         try:
             # If you know Russian, then you will understand everything at once.
             if self.lang == 'ru_ru':
-                if gender.lower() == 'm':
-                    return choice(pull('nation', self.lang)).split('|')[0].strip()
-                else:
-                    return choice(pull('nation', self.lang)).split('|')[1].strip()
+                index = 0 if gender.lower() == 'm' else 1
+                return choice(pull('nation', self.lang)).split('|')[index].strip()
             else:
                 return choice(pull('nation', self.lang)).strip()
         except Exception:
@@ -424,21 +472,21 @@ class Personal(object):
     def university(self):
         """
         Get a random university.
-        :return: university name. For example: MIT
+        :return: university name. Example: MIT
         """
         return choice(pull('university', self.lang)).strip()
 
     def qualification(self):
         """
         Get a random qualification.
-        :return: degree. For example: Bachelor
+        :return: degree. Example: Bachelor
         """
         return choice(pull('qualifications', self.lang)).strip()
 
     def language(self):
         """
         Get a random language.
-        :return: random language. For example: Irish
+        :return: random language. Example: Irish
         """
         return choice(pull('languages', self.lang)).strip()
 
@@ -452,7 +500,7 @@ class Personal(object):
     def telephone(self):
         """
         Generate a random phone number.
-        :return: phone number. For example: +7-(963)409-11-22
+        :return: phone number. Example: +7-(963)409-11-22
         """
         phone_number = ''
         mask = '+7-($$$)$$$-$$-$$' if self.lang == 'ru_ru' \
@@ -488,7 +536,7 @@ class Datetime(object):
         """
         Get a random month.
         :param abbreviated: if True then will be returned abbreviated month name.
-        :return: month name. For example: November
+        :return: month name. Example: November
         """
         _month = choice(pull('months', self.lang)).split('|')
         if abbreviated:
@@ -498,7 +546,7 @@ class Datetime(object):
     def periodicity(self):
         """
         Get a random periodicity string.
-        :return: periodicity. For example: Never
+        :return: periodicity. Example: Never
         """
         return choice(pull('periodicity', self.lang)).strip()
 
@@ -579,7 +627,7 @@ class File(object):
     def extension(file_type='text'):
         """
         Get a random extension from list.
-        :param type: The type of extension. Default is text.
+        :param file_type: The type of extension. Default is text.
         All supported types:
             1. source - '.py', '.rb', '.cpp' and other.
             2. text = '.doc', '.log', '.rtf' and other.
@@ -652,10 +700,10 @@ class Science(object):
         Get a random chemical element from file.
         :param name_only: if False then will be returned dict.
         :return: name of chemical element or dict.
-        For example: {'Symbol': 'S',
-                      'Name': 'Sulfur',
-                      'Atomic number': '16'
-                    }
+        Example: {'Symbol': 'S',
+                  'Name': 'Sulfur',
+                  'Atomic number': '16'
+                }
            or name of chemical element: 'Helium'
         """
         _e = choice(pull('chemical_elements', self.lang)).split('|')
@@ -667,18 +715,10 @@ class Science(object):
         else:
             return _e[0]
 
-    def physical_law(self):
-        """
-        Get the wording of the law of physics.
-        :return: law of physics
-        """
-        law = choice(pull('physical_law', self.lang))
-        return law.strip()
-
     def article_on_wiki(self):
         """
         Get a random link to scientific article on Wikipedia.
-        :return: link. For example: https://en.wikipedia.org/wiki/Black_hole
+        :return: link. Example: https://en.wikipedia.org/wiki/Black_hole
         """
         article = choice(pull('science_wiki', self.lang))
         return article.strip()
@@ -686,7 +726,7 @@ class Science(object):
     def scientist(self):
         """
         Get a random name of scientist.
-        :return: name of scientist. For example: Konstantin Tsiolkovsky
+        :return: name of scientist. Example: Konstantin Tsiolkovsky
         """
         scientist_name = choice(pull('scientist', self.lang))
         return scientist_name.strip()
@@ -720,8 +760,8 @@ class Development(object):
     def database(nosql=False):
         """
         Get a random database name.
-        :param nosql:
-        :return: return database name. For example: PostgreSQL
+        :param nosql: only NoSQL databases
+        :return: database name. Example: PostgreSQL
         """
         _nosql = ['MongoDB', 'RethinkDB', 'Couchbase', 'CouchDB',
                   'Aerospike', 'MemcacheDB', 'MUMPS,  Riak', 'Redis',
@@ -736,7 +776,7 @@ class Development(object):
     def other():
         """
         Get a random value list.
-        :return: some technology. For example: Nginx
+        :return: some technology. Example: Nginx
         """
         _list = ['Docker', 'Rkt', 'LXC', 'Vagrant',
                  'Elasticsearch', 'Nginx', 'Git', 'Mercurial',
@@ -748,7 +788,7 @@ class Development(object):
     def programming_language():
         """
         Get a random programming language from list.
-        :return: programming language. For example: Erlang
+        :return: programming language. Example: Erlang
         """
         return choice(pull('pro_lang', 'en_us')).strip()
 
@@ -758,14 +798,11 @@ class Development(object):
         Get a random framework from file.
         :param _type: If _type='front' then will be returned front-end framework,
         else will be returned back-end framework.
-        :return: framework or list of used stack: For example:  Python/Django
+        :return: framework or list of used stack: Example:  Python/Django
         """
-        if _type == 'front':
-            front_f = choice(pull('front_frmwk'))
-            return front_f.strip()
-        else:
-            back_f = choice(pull('back_frmwk'))
-            return back_f.strip()
+        _file = 'front_frmwk' if _type.lower() == 'front' else 'back_frmwk'
+        _framework = choice(pull(_file))
+        return _framework.strip()
 
     @staticmethod
     def stack_of_tech(nosql=False):
@@ -773,14 +810,14 @@ class Development(object):
         Get a random stack.
         :param nosql: if True the only NoSQL skills.
         :return: dict like in example.
-        For example: {'Back-end': 'Martini',
+        Example:      {'Back-end': 'Martini',
                       'DB': 'SQLite',
                       'Front-end': 'Webpack',
                       'Other': 'Martini'}
         """
         front = '{}'.format(Development.framework('front'))
-        back = '{}'.format(Development.framework())
-        db = '{}'.format(Development.database(nosql))
+        back = '{}'.format(Development.framework('back'))
+        db = '{}'.format(Development.database(nosql=True))
         other = '{}'.format(Development.other())
         _stack = {
             'front-end': front,
@@ -795,15 +832,39 @@ class Development(object):
     def github_repo():
         """
         Get a random link to github repository.
-        :return: link. For example: https://github.com/lk-geimfari/church
+        :return: link. Example: https://github.com/lk-geimfari/church
         """
-        repository = choice(pull('github_repos'))
-        return repository.strip()
+        return choice(pull('github_repos')).strip()
 
     @staticmethod
     def os():
         """
         Get a random operating system or distributive name.
-        :return: os name. For example: Gentoo
+        :return: os name. Example: Gentoo
         """
         return choice(pull('os')).strip()
+
+
+class Food(object):
+    """
+    Class for Food, i.e fruits, vegetables, berries and other.
+    """
+
+    def __init__(self, lang):
+        self.lang = lang
+
+    def berry(self):
+        """
+        Get random berry.
+        :return: berry. Example: Blackberry
+        """
+        _berry = choice(pull('berries', self.lang))
+        return _berry.strip()
+
+    def vegetable(self):
+        """
+        Get a random vegetable.
+        :return: vegetable. Example: Tomato
+        """
+        _vegetable = choice(pull('vegetables', self.lang))
+        return _vegetable.strip()
