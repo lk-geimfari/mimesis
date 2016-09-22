@@ -1,23 +1,22 @@
 from .church import (
-    Address, Personal, BasicData,
-    Network, Datetime, File, Science, Development
+    Address, Personal, Text,
+    Network, Datetime, File, Science,
+    Development, Food
 )
 
-__version__ = '0.1.7'
+__version__ = '0.1.8'
 
 __all__ = [
     'Address',
     'Personal',
-    'BasicData',
+    'Text',
     'Network',
     'Datetime',
     'File',
     'Science',
-    'Development'
+    'Development',
+    'Food'
 ]
 
-__author__ = {
-    'name': 'Isaak Uchakaev',
-    'nickname': 'Likid Geimfari',
-    'email': 'likid.geimfari@gmail.com',
-}
+__author__ = 'Lk Geimfari'
+__email__ = 'likid.geimfari@gmail.com'
