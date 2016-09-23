@@ -19,7 +19,7 @@ Church - is a library to generate fake data. It's very useful if you need to boo
 
 ## Usage
 ```python
-#  It's very useful if you need bootstrap your database.
+#  It's very useful if you need to bootstrap your database.
 # ...
 # ... 
 
