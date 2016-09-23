@@ -20,25 +20,26 @@ Church - is a library to generate fake data. It's very useful if you need to boo
 ## Usage
 ```python
 #  It's very useful if you need to bootstrap your database.
+# Just create static method that will generate fake data.
 # ...
-# ... 
 
 @staticmethod
-def _church(c=100):
+def _bootstrap(count=2000):
     from church import Personal
 
-    ch = Personal('en_us')
-    for i in range(c):
-        user = User(username=ch.username(),
-                    email=ch.email(),
-                    name=ch.name('m'),
-                    surname=ch.surname(),
-                    credit_card=ch.credit_card_number(),
-                    home_page=ch.home_page(),
-                    password=ch.password(length=10),
-                    gender=ch.gender(abbreviated=True),
-                    profession=ch.profession(),
-                    nationality=ch.nationality()
+    person = Personal('en_us')
+    for _ in range(count):
+        user = User(username=person.username(),
+                    email=person.email(),
+                    user_twitter=person.twitter()
+                    name=person.name('m'),
+                    surname=person.surname(),
+                    credit_card=person.credit_card_number(),
+                    home_page=person.home_page(),
+                    password=person.password(algorithm='sha1'),
+                    gender=person.gender(abbreviated=True),
+                    profession=person.profession(),
+                    nationality=person.nationality()
                     )
         try:
             db.session.add(user)
@@ -46,8 +47,6 @@ def _church(c=100):
             db.session.commit()
 
 # ...
-# ...
-
 ```
 ## Docs
 Church is pretty simple library. All that you need is small [guidebook.](https://github.com/lk-geimfari/church/blob/master/docs/README.md)
