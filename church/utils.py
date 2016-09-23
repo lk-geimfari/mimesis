@@ -7,7 +7,6 @@ from os.path import (
 
 PATH = abspath(join(dirname(__file__), 'data'))
 
-__all__ = ['priest']
 
 
 @lru_cache(maxsize=None)
