@@ -22,13 +22,3 @@ def pull(filename, lang='en_us'):
         _result = f.readlines()
 
     return _result
-
-
-def priest():
-    """
-    Get a random quote from Bible.
-    :return: quote.
-    """
-    from random import choice
-    _quo = choice(pull('data', 'ch_path')).strip()
-    return "My child, " + _quo
