@@ -1,4 +1,3 @@
-import random
 import re
 import unittest
 
@@ -10,7 +9,7 @@ from church.church import (
 from church.utils import pull
 
 # LANG = random.choice(['en_us', 'de_de', 'ru_ru'])
-LANG = 'ru_ru'
+LANG = 'en_us'
 
 
 class AddressTestCase(unittest.TestCase):
@@ -105,9 +104,14 @@ class BasicDataTestCase(unittest.TestCase):
         result = self.data.company() + '\n'
         self.assertIn(result, pull('company', self.data.lang))
 
+    def test_emoji(self):
+        result = self.data.emoji() + '\n'
+        self.assertIn(result, pull('emoji'))
+
 
 class PersonalTestCase(unittest.TestCase):
-    person = Personal(LANG)
+    def setUp(self):
+        self.person = Personal(LANG)
 
     def test_age(self):
         result = self.person.age(maximum=55)
@@ -278,7 +282,8 @@ class PersonalTestCase(unittest.TestCase):
 
 
 class DatetimeTestCase(unittest.TestCase):
-    datetime = Datetime(LANG)
+    def setUp(self):
+        self.datetime = Datetime(LANG)
 
     def test_day_of_week(self):
         result = self.datetime.day_of_week() + '\n'
@@ -304,7 +309,8 @@ class DatetimeTestCase(unittest.TestCase):
 
 
 class NetworkTestCase(unittest.TestCase):
-    net = Network()
+    def setUp(self):
+        self.net = Network()
 
     def test_ip_v4(self):
         result = self.net.ip_v4()
@@ -343,7 +349,8 @@ class NetworkTestCase(unittest.TestCase):
 
 
 class FileTestCase(unittest.TestCase):
-    file = File()
+    def setUp(self):
+        self.file = File()
 
     def test_extension(self):
         source = self.file.extension('source')
@@ -358,7 +365,8 @@ class FileTestCase(unittest.TestCase):
 
 
 class ScienceTestCase(unittest.TestCase):
-    science = Science(LANG)
+    def setUp(self):
+        self.science = Science(LANG)
 
     def test_math_formula(self):
         result = self.science.math_formula() + '\n'
@@ -381,7 +389,8 @@ class ScienceTestCase(unittest.TestCase):
 
 
 class DevelopmentTestCase(unittest.TestCase):
-    dev = Development()
+    def setUp(self):
+        self.dev = Development()
 
     def test_license(self):
         _license = [
@@ -461,9 +470,13 @@ class FoodTestCase(unittest.TestCase):
         del self.food
 
     def test_berry(self):
-        # TODO: Fix
-        pass
+        result = self.food.berry() + '\n'
+        self.assertIn(result, pull('berries', self.food.lang))
 
     def test_vegetable(self):
-        # TODO: Fix
-        pass
+        result = self.food.vegetable() + '\n'
+        self.assertIn(result, pull('vegetables', self.food.lang))
+
+    def test_fruit(self):
+        result = self.food.fruit() + '\n'
+        self.assertIn(result, pull('fruits', self.food.lang))
