@@ -204,6 +204,24 @@ class Text(object):
         company = choice(pull('company', self.lang))
         return company.strip()
 
+    @staticmethod
+    def emoji():
+        """
+        Get a random emoji shortcut code.
+        :return: emoji. Example: :kissing:
+        """
+        _shortcut = choice(pull('emoji', 'en_us'))
+        return _shortcut.strip()
+
+    @staticmethod
+    def hardware():
+        """
+        Generate random information about hardware. [Dev]
+        :return:
+        """
+        _hardware_info = choice(pull('hardware', 'en_us'))
+        return _hardware_info.strip()
+
 
 class Personal(object):
     """
@@ -874,3 +892,11 @@ class Food(object):
         """
         _vegetable = choice(pull('vegetables', self.lang))
         return _vegetable.strip()
+
+    def fruit(self):
+        """
+        Get a random fruit name.
+        :return: fruit. Example: Banana
+        """
+        _fruit = choice(pull('fruits', self.lang))
+        return _fruit.strip()
