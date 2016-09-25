@@ -19,7 +19,6 @@ setup(
     description='Church is a library that help you generate fake data.',
     classifiers=[
         "Development Status :: 3 - Alpha",
-        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',

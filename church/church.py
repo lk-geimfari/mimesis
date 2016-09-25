@@ -163,6 +163,14 @@ class Text(object):
         """
         return self.words(quantity=1)[0]
 
+    def swear_word(self):
+        """
+        Get a random swear word.
+        :return: swear word
+        """
+        _word = choice(pull('swear_words', self.lang))
+        return _word.strip()
+
     def quote_from_movie(self):
         """
         Get a random quotes from movie.
@@ -212,15 +220,6 @@ class Text(object):
         """
         _shortcut = choice(pull('emoji', 'en_us'))
         return _shortcut.strip()
-
-    @staticmethod
-    def hardware():
-        """
-        Generate random information about hardware. [Dev]
-        :return:
-        """
-        _hardware_info = choice(pull('hardware', 'en_us'))
-        return _hardware_info.strip()
 
 
 class Personal(object):
@@ -900,3 +899,49 @@ class Food(object):
         """
         _fruit = choice(pull('fruits', self.lang))
         return _fruit.strip()
+
+
+class Hardware(object):
+    """
+    Class for generate data about hardware.
+    All available methods:
+      1. resolution - resolution of screen
+      2. screen_size - screen size in inch.
+      3. cpu_clock - cpu frequency.
+      4. generation - generation of something.
+      5. cpu_codename - codename of CPU.
+      6. ram_type - type of RAM.
+      7. ram size - size of RAM in GB.
+      8. hdd_or_ssd - get HDD or SSD.
+      9. graphic - get a manufacturer of graphics.
+    """
+
+    def resolution(self):
+        pass
+
+    def screen_size(self):
+        pass
+
+    def cpu_clock(self):
+        pass
+
+    def generation(self):
+        pass
+
+    def cpu_codename(self):
+        pass
+
+    def ram_type(self):
+        pass
+
+    def ram_size(self):
+        pass
+
+    def hdd_or_ssd(self):
+        pass
+
+    def graphic(self):
+        pass
+
+    def manufacturer(self):
+        pass
