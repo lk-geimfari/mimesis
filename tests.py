@@ -58,7 +58,7 @@ class AddressTestCase(unittest.TestCase):
         self.assertIn(result, pull('cities', self.address.lang))
 
 
-class BasicDataTestCase(unittest.TestCase):
+class TextTestCase(unittest.TestCase):
     def setUp(self):
         self.data = Text(LANG)
 
@@ -83,6 +83,10 @@ class BasicDataTestCase(unittest.TestCase):
     def test_word(self):
         result = self.data.word() + '\n'
         self.assertIn(result, pull('words', self.data.lang))
+
+    def test_swear_word(self):
+        result = self.data.swear_word() + '\n'
+        self.assertIn(result, pull('swear_words', self.data.lang))
 
     def test_quote_from_movie(self):
         result = self.data.quote_from_movie() + '\n'
@@ -112,6 +116,9 @@ class BasicDataTestCase(unittest.TestCase):
 class PersonalTestCase(unittest.TestCase):
     def setUp(self):
         self.person = Personal(LANG)
+
+    def tearDown(self):
+        del self.person
 
     def test_age(self):
         result = self.person.age(maximum=55)
@@ -285,6 +292,9 @@ class DatetimeTestCase(unittest.TestCase):
     def setUp(self):
         self.datetime = Datetime(LANG)
 
+    def tearDown(self):
+        del self.datetime
+
     def test_day_of_week(self):
         result = self.datetime.day_of_week() + '\n'
         self.assertGreater(len(result), 4)
@@ -352,6 +362,9 @@ class FileTestCase(unittest.TestCase):
     def setUp(self):
         self.file = File()
 
+    def tearDown(self):
+        del self.file
+
     def test_extension(self):
         source = self.file.extension('source')
         self.assertLess(len(source), 10)
@@ -367,6 +380,9 @@ class FileTestCase(unittest.TestCase):
 class ScienceTestCase(unittest.TestCase):
     def setUp(self):
         self.science = Science(LANG)
+
+    def tearDown(self):
+        del self.science
 
     def test_math_formula(self):
         result = self.science.math_formula() + '\n'
@@ -391,6 +407,9 @@ class ScienceTestCase(unittest.TestCase):
 class DevelopmentTestCase(unittest.TestCase):
     def setUp(self):
         self.dev = Development()
+
+    def tearDown(self):
+        del self.dev
 
     def test_license(self):
         _license = [
