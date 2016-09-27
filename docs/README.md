@@ -310,3 +310,100 @@ stack = Development.stack_of_tech(nosql=True)
 repo = Development.github_repo()
 ```
 
+## Food
+
+```python
+food = Food('en_us')
+
+# Get a random alcoholic drink.
+# Example: Vodka
+food.alcoholic_drink()
+
+# Get a random berry.
+# Example: Blackberry
+food.berry()
+
+# Get a random cocktail.
+# Example: Amber Moon
+food.cocktail()
+
+# Get a random dish for current locale
+# Example ('ru_ru'): Борщ 
+food.dish()
+
+# Get a random fruit.
+# Example: Apple
+food.fruit()
+
+# Get a random mushroom
+# Example: Laetiporus sulphureus
+food.mushroom()
+
+# Get a random herbs or spices.
+# Example: Artemisia
+food.spices()
+
+# Get a random vegetable.
+# Example: Belgian Endive
+food.vegetable()
+```
+
+## Hardware
+
+```python
+hardware = Hardware()
+
+# Get a random CPU name.
+# Example: Intel® Core i3
+hardware.cpu()
+
+# Get a random CPU codename.
+# Example: Bear Ridge
+hardware.cpu_codename()
+
+# Get a random frequency of CPU.
+# Example: 2.3 GHz
+hardware.cpu_frequency()
+
+# Get a random generation.
+# Example: 2nd Generation
+hardware.generation()
+
+# Get a random graphics.
+# Example: Intel® HD Graphics 620
+hardware.graphics()
+
+# Get a random manufacturer
+# Example: HP
+hardware.manufacturer()
+
+# Get a random size of RAM.
+# Example: 32GB
+hardware.ram_size()
+
+# Get a random type of RAM
+# Example: DDR3
+hardware.ram_type()
+
+# Get a random resolution of screen.
+# Example: 1440x900
+hardware.resolution()
+
+# Get a random size of screen (in inch).
+# Example: 15.4″
+hardware.screen_size()
+
+# Get a random information about drive
+# Example: 1TB HDD(7200 RPM) + 32GB SSD
+hardware.ssd_or_hdd()
+
+# Generate a random information about hardware.
+# Example:  Acer Intel® Core i7 2nd Generation 3.50 GHz/1920x1200/12″/
+# 1TB HDD + 64GB SSD/DDR3-32GB/Intel® HD Graphics 5300  
+hardware.hardware_full()
+
+# Get a random model of phone.
+# Example: Nokia Lumia 610
+hardware.phone_model()
+
+```

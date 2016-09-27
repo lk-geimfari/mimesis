@@ -1,15 +1,15 @@
+import random
 import re
 import unittest
 
 from church.church import (
     Address, Text, Personal,
     Datetime, Network, File, Science,
-    Development, Food
+    Development, Food, Hardware
 )
 from church.utils import pull
 
-# LANG = random.choice(['en_us', 'de_de', 'ru_ru'])
-LANG = 'en_us'
+LANG = random.choice(['en_us', 'de_de', 'ru_ru'])
 
 
 class AddressTestCase(unittest.TestCase):
@@ -31,7 +31,7 @@ class AddressTestCase(unittest.TestCase):
         result = self.address.street_suffix() + '\n'
         self.assertIn(result, pull('street_suffix', self.address.lang))
 
-    def test_state_or_subject(self):
+    def test_state(self):
         # TODO: Fix
         result = self.address.state() + '\n'
         if self.address.lang == 'en_us':
@@ -457,6 +457,7 @@ class DevelopmentTestCase(unittest.TestCase):
                  'Mercurial', 'Jira',
                  'REST', 'Apache Hadoop',
                  'Scrum', 'Redmine',
+                 'Apache Spark', 'Apache Kafka'
                  ]
         result = self.dev.other()
         self.assertIn(result, _list)
@@ -499,3 +500,155 @@ class FoodTestCase(unittest.TestCase):
     def test_fruit(self):
         result = self.food.fruit() + '\n'
         self.assertIn(result, pull('fruits', self.food.lang))
+
+    def test_dish(self):
+        result = self.food.dish() + '\n'
+        self.assertIn(result, pull('dishes', self.food.lang))
+
+    def test_alcoholic_drink(self):
+        result = self.food.alcoholic_drink() + '\n'
+        self.assertIn(result, pull('alcoholic_drinks', self.food.lang))
+
+    def test_spices(self):
+        result = self.food.spices() + '\n'
+        self.assertIn(result, pull('spices', self.food.lang))
+
+    def test_mushroom(self):
+        result = self.food.mushroom() + '\n'
+        self.assertIn(result, pull('mushrooms', self.food.lang))
+
+
+class HardwareTestCase(unittest.TestCase):
+    def setUp(self):
+        self.hard = Hardware()
+
+    def tearDown(self):
+        del self.hard
+
+    def test_resolution(self):
+        resolution = ['1152x768', '1280x854', '1440x960',
+                      '2880x1920', '1024x768', '1152x864',
+                      '1280x960', '1400x1050', '1600x1200',
+                      '2048x1536', '3200x2400', '1280x768',
+                      '1280x1024', '2560x2048', '1280x720',
+                      '1365x768', '1600x900', '1920x1080',
+                      '1280x800', '1440x900', '1680x1050',
+                      '1920x1200', '2560x1600'
+                      ]
+        _result = self.hard.resolution()
+        self.assertIn(_result, resolution)
+
+    def test_screen_size(self):
+        sizes = ['14″', '12.1″', '12″', '14.4″',
+                 '15″', ' 15.7″', '13.3″', '13″',
+                 '17″', '15.4″', ' 14.1″']
+        result = self.hard.screen_size()
+        self.assertIn(result, sizes)
+
+    def test_generation(self):
+        gn = ['2nd Generation',
+              '3rd Generation',
+              '4th Generation',
+              '5th Generation',
+              '6th Generation',
+              '7th Generation',
+              ]
+        result = self.hard.generation()
+        self.assertIn(result, gn)
+
+    def test_cpu_frequency(self):
+        f = ['3.50', '3.67', '2.2', '1.6',
+             '2.7', '2.8', '3.2', '3.0',
+             '2.5', '2.9', '2.4', '4.0',
+             '3.8', '3.7', '3.9', '4.2',
+             '2.3', '2.9', '3.3', '3.1']
+        result = self.hard.cpu_frequency().split(' ')[0]
+        self.assertIn(result, f)
+
+    def test_cpu(self):
+        cpu = ['Intel® Core i3',
+               'Intel® Core i5',
+               'Intel® Core i7']
+        result = self.hard.cpu()
+        self.assertIn(result, cpu)
+
+    def test_cpu_codename(self):
+        code_name = ['Ivytown', 'Haswell', 'Fortville',
+                     'Devil\'s Canyon', 'Valley Island',
+                     'Broadwell', 'Bay Trail', 'Skylake',
+                     'Orchid Island', 'Bear Ridge',
+                     'Cannonlake'
+                     ]
+        result = self.hard.cpu_codename()
+        self.assertIn(result, code_name)
+
+    def test_ram_type(self):
+        result = self.hard.ram_type()
+        self.assertIn(result, ['DDR2', 'DDR3', 'DDR4'])
+
+    def test_ram_size(self):
+        result = self.hard.ram_size().split(' ')
+        self.assertGreater(len(result), 0)
+
+    def test_ssd_or_hdd(self):
+        _hard = [
+            '64GB SSD', '128GB SSD',
+            '256GB SDD', '512GB SSD', '1024GB SSD',
+            '256GB HDD', '256GB HDD(7200 RPM)',
+            '256GB HDD(5400 RPM)', '512GB HDD',
+            '512GB HDD(7200 RPM)', '1TB HDD',
+            '1TB HDD(7200 RPM)', '1TB HDD + 64GB SSD',
+            '2TB HDD(7200 RPM)', '512 GB HDD + 32GB SSD',
+            '1TB HDD(7200 RPM) + 32GB SSD']
+        result = self.hard.ssd_or_hdd()
+        self.assertIn(result, _hard)
+
+    def test_graphics(self):
+        _g = ['Intel® HD Graphics 620',
+              'Intel® HD Graphics 615',
+              'Intel® Iris™ Pro Graphics 580',
+              'Intel® Iris™ Graphics 550'
+              'Intel® HD Graphics 520',
+              'Intel® Iris™ Pro Graphics 6200',
+              'Intel® Iris™ Graphics 6100',
+              'Intel® HD Graphics 6000',
+              'Intel® HD Graphics 5300 ',
+              'Intel® Iris™ Pro Graphics 5200',
+              'Intel® Iris™ Graphics 5100',
+              'Intel® HD Graphics 5500',
+              'Intel® HD Graphics 5000',
+              'Intel® HD Graphics 4600',
+              'Intel® HD Graphics 4400',
+              'Intel® HD Graphics 4000',
+              'Intel® HD Graphics 3000',
+              'NVIDIA GeForce GTX 1080',
+              'NVIDIA GeForce GTX 1070',
+              'NVIDIA GeForce GTX 1080',
+              'NVIDIA GeForce GTX 980',
+              'NVIDIA GeForce GTX 1070',
+              'NVIDIA GeForce GTX 980M',
+              'NVIDIA GeForce GTX 980',
+              'NVIDIA GeForce GTX 970M',
+              'NVIDIA GeForce GTX 880M',
+              'AMD Radeon R9 M395X',
+              'AMD Radeon R9 M485X',
+              'AMD Radeon R9 M395'
+              ]
+        result = self.hard.graphics()
+        self.assertIn(result, _g)
+
+    def test_manufacturer(self):
+        _m = ['Acer', 'Dell', 'ASUS',
+              'VAIO', 'Lenovo', 'HP',
+              'Toshiba', 'Sony', 'Samsung',
+              'Fujitsu', 'Apple']
+        result = self.hard.manufacturer()
+        self.assertIn(result, _m)
+
+    def test_hardware_full(self):
+        result = self.hard.hardware_full()
+        self.assertGreater(len(result), 15)
+
+    def test_phone_model(self):
+        result = self.hard.phone_model() + '\n'
+        self.assertIn(result, pull('phone_models', 'en_us'))

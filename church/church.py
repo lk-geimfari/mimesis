@@ -16,7 +16,7 @@ from .utils import pull
 __all__ = ['Address', 'Personal',
            'Text', 'Network',
            'Datetime', 'File', 'Science',
-           'Development', 'Food'
+           'Development', 'Food', 'Hardware'
            ]
 
 
@@ -804,7 +804,7 @@ class Development(object):
         _list = ['Docker', 'Rkt', 'LXC', 'Vagrant',
                  'Elasticsearch', 'Nginx', 'Git', 'Mercurial',
                  'Jira', 'REST', 'Apache Hadoop', 'Scrum', 'Redmine',
-                 ]
+                 'Apache Kafka', 'Apache Spark']
         return choice(_list)
 
     @staticmethod
@@ -900,6 +900,46 @@ class Food(object):
         _fruit = choice(pull('fruits', self.lang))
         return _fruit.strip()
 
+    def dish(self):
+        """
+        Get a random dish for current locale.
+        :return: dish name. Example (ru_ru): Борщ
+        """
+        _dishes = choice(pull('dishes', self.lang))
+        return _dishes.strip()
+
+    def spices(self):
+        """
+        Get a random spices or herbs.
+        :return: spices or herbs.
+        """
+        result = choice(pull('spices', self.lang))
+        return result.strip()
+
+    def mushroom(self):
+        """
+        Get a random mushroom's name
+        :return: mushroom's name. Example: Marasmius oreades
+        """
+        result = choice(pull('mushrooms', self.lang))
+        return result.strip()
+
+    def alcoholic_drink(self):
+        """
+        Get a random alcoholic drink.
+        :return: alcoholic_drink. Example: Vodka
+        """
+        _ad = choice(pull('alcoholic_drinks', self.lang))
+        return _ad.strip()
+
+    def cocktail(self):
+        """
+        Get a random cocktail.
+        :return: cocktail name.
+        """
+        _list = choice(pull('cocktails', self.lang))
+        return _list.strip()
+
 
 class Hardware(object):
     """
@@ -907,41 +947,205 @@ class Hardware(object):
     All available methods:
       1. resolution - resolution of screen
       2. screen_size - screen size in inch.
-      3. cpu_clock - cpu frequency.
+      3. cpu_frequency - cpu frequency.
       4. generation - generation of something.
       5. cpu_codename - codename of CPU.
       6. ram_type - type of RAM.
-      7. ram size - size of RAM in GB.
-      8. hdd_or_ssd - get HDD or SSD.
-      9. graphic - get a manufacturer of graphics.
+      7. ram_size - size of RAM in GB.
+      8. ssd_or_hdd - get HDD or SSD.
+      9. graphics - graphics.
+      10. cpu - cpu name.
     """
 
-    def resolution(self):
-        pass
+    @staticmethod
+    def resolution():
+        """
+        Get a random screen resolution.
+        :return: resolution. Example: 1280x720
+        """
+        _res = ['1152x768', '1280x854', '1440x960',
+                '2880x1920', '1024x768', '1152x864',
+                '1280x960', '1400x1050', '1600x1200',
+                '2048x1536', '3200x2400', '1280x768',
+                '1280x1024', '2560x2048', '1280x720',
+                '1365x768', '1600x900', '1920x1080',
+                '1280x800', '1440x900', '1680x1050',
+                '1920x1200', '2560x1600'
+                ]
 
-    def screen_size(self):
-        pass
+        return choice(_res)
 
-    def cpu_clock(self):
-        pass
+    @staticmethod
+    def screen_size():
+        """
+        Get a random size of screen in inch
+        :return: screen size. Example: 13″
+        """
+        _size = ['14″', '12.1″', '12″', '14.4″',
+                 '15″', ' 15.7″', '13.3″', '13″',
+                 '17″', '15.4″', ' 14.1″']
+        return choice(_size)
 
-    def generation(self):
-        pass
+    @staticmethod
+    def cpu():
+        """
+        Get a random CPU name.
+        :return: CPU name. Example: Intel® Core i7
+        """
+        _cpu = ['Intel® Core i3',
+                'Intel® Core i5',
+                'Intel® Core i7']
+        return choice(_cpu)
 
-    def cpu_codename(self):
-        pass
+    @staticmethod
+    def cpu_frequency():
+        """
+        Get a random frequency of CPU.
+        :return: frequency. Example: 4.0 GHz
+        """
+        _c = ['3.50', '3.67', '2.2', '1.6',
+              '2.7', '2.8', '3.2', '3.0',
+              '2.5', '2.9', '2.4', '4.0',
+              '3.8', '3.7', '3.9', '4.2',
+              '2.3', '2.9', '3.3', '3.1']
+        return choice(_c) + ' GHz'
 
-    def ram_type(self):
-        pass
+    @staticmethod
+    def generation():
+        """
+        Get a random generation.
+        :return: generation.
+        """
+        _gn = ['2nd Generation',
+               '3rd Generation',
+               '4th Generation',
+               '5th Generation',
+               '6th Generation',
+               '7th Generation',
+               ]
+        return choice(_gn)
 
-    def ram_size(self):
-        pass
+    @staticmethod
+    def cpu_codename():
+        """
+        Get a random CPU code name.
+        :return: cpu code name. Example: Haswell
+        """
+        _cn = ['Ivytown', 'Haswell', 'Fortville',
+               'Devil\'s Canyon', 'Valley Island',
+               'Broadwell', 'Bay Trail', 'Skylake',
+               'Orchid Island', 'Bear Ridge',
+               'Cannonlake'
+               ]
+        return choice(_cn)
 
-    def hdd_or_ssd(self):
-        pass
+    @staticmethod
+    def ram_type():
+        """
+        Get a random RAM type.
+        :return: type of ram. Example: DDR3
+        """
+        return choice(['DDR2', 'DDR3', 'DDR4'])
 
-    def graphic(self):
-        pass
+    @staticmethod
+    def ram_size():
+        """
+        Get a random size of RAM.
+        :return: RAM size. Example: 16GB
+        """
+        return choice(['4', '6', '8', '16', '32']) + 'GB'
 
-    def manufacturer(self):
-        pass
+    @staticmethod
+    def ssd_or_hdd():
+        """
+        Get a random value from list.
+        :return: HDD or SSD. Example: 512GB HDD
+        """
+        _hard = [
+            '64GB SSD', '128GB SSD',
+            '256GB SDD', '512GB SSD', '1024GB SSD',
+            '256GB HDD', '256GB HDD(7200 RPM)',
+            '256GB HDD(5400 RPM)', '512GB HDD',
+            '512GB HDD(7200 RPM)', '1TB HDD',
+            '1TB HDD(7200 RPM)', '1TB HDD + 64GB SSD',
+            '2TB HDD(7200 RPM)', '512 GB HDD + 32GB SSD',
+            '1TB HDD(7200 RPM) + 32GB SSD'
+        ]
+        return choice(_hard)
+
+    @staticmethod
+    def graphics():
+        """
+        Get a random graphics.
+        :return: graphics. Example: Intel® Iris™ Pro Graphics 6200
+        """
+        _g = ['Intel® HD Graphics 620',
+              'Intel® HD Graphics 615',
+              'Intel® Iris™ Pro Graphics 580',
+              'Intel® Iris™ Graphics 550'
+              'Intel® HD Graphics 520',
+              'Intel® Iris™ Pro Graphics 6200',
+              'Intel® Iris™ Graphics 6100',
+              'Intel® HD Graphics 6000',
+              'Intel® HD Graphics 5300 ',
+              'Intel® Iris™ Pro Graphics 5200',
+              'Intel® Iris™ Graphics 5100',
+              'Intel® HD Graphics 5500',
+              'Intel® HD Graphics 5000',
+              'Intel® HD Graphics 4600',
+              'Intel® HD Graphics 4400',
+              'Intel® HD Graphics 4000',
+              'Intel® HD Graphics 3000',
+              'NVIDIA GeForce GTX 1080',
+              'NVIDIA GeForce GTX 1070',
+              'NVIDIA GeForce GTX 1080',
+              'NVIDIA GeForce GTX 980',
+              'NVIDIA GeForce GTX 1070',
+              'NVIDIA GeForce GTX 980M',
+              'NVIDIA GeForce GTX 980',
+              'NVIDIA GeForce GTX 970M',
+              'NVIDIA GeForce GTX 880M',
+              'AMD Radeon R9 M395X',
+              'AMD Radeon R9 M485X',
+              'AMD Radeon R9 M395'
+              ]
+        return choice(_g)
+
+    @staticmethod
+    def manufacturer():
+        """
+        Get a random manufacturer.
+        :return: manufacturer. Example: Dell
+        """
+        _m = ['Acer', 'Dell', 'ASUS',
+              'VAIO', 'Lenovo', 'HP',
+              'Toshiba', 'Sony', 'Samsung',
+              'Fujitsu', 'Apple']
+        return choice(_m)
+
+    @staticmethod
+    def hardware_full():
+        """
+        Get a random full information about device (laptop).
+        :return: full information. Example:
+        ASUS Intel® Core i3 3rd Generation 3.50 GHz/1920x1200/12″/
+        512GB HDD(7200 RPM)/DDR2-4GB/Intel® Iris™ Pro Graphics 6200
+        """
+        _c = '{}'.format(Hardware.cpu())
+        _r = '{}'.format(Hardware.resolution())
+        _ss = '{}'.format(Hardware.screen_size())
+        _cl = '{}'.format(Hardware.cpu_frequency())
+        _gn = '{}'.format(Hardware.generation())
+        _rt = '{}'.format(Hardware.ram_type())
+        _rs = '{}'.format(Hardware.ram_size())
+        _mem = '{}'.format(Hardware.ssd_or_hdd())
+        _gr = '{}'.format(Hardware.graphics())
+        _mnf = '{}'.format(Hardware.manufacturer())
+        _full = '{0} {1} {2} {3}/{4}/{5}/{6}/{7}-{8}/{9}'.format(
+            _mnf, _c, _gn, _cl, _r, _ss, _mem, _rt, _rs, _gr)
+        return _full
+
+    @staticmethod
+    def phone_model():
+        _model = choice(pull('phone_models', 'en_us'))
+        return _model.strip()
