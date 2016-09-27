@@ -292,7 +292,7 @@ class Personal(object):
             if gender.lower() == 'f' else 'm_names'
 
         _u = choice(pull(_file_name)).replace(' ', '_')
-        return _u.strip().lower() + str(randint(2, 5000))
+        return _u.strip().lower() + str(randint(2, 9999))
 
     @staticmethod
     def twitter(gender='m'):
