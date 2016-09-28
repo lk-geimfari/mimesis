@@ -266,16 +266,16 @@ class Personal(object):
 
         return choice(pull('surnames', self.lang)).strip()
 
-    def full_name(self, gender='f', reversed=False):
+    def full_name(self, gender='f', reverse=False):
         """
         Get a random full name.
-        :param reversed: if true: surname/name else name/surname
+        :param reverse: if true: surname/name else name/surname
         :param gender: if gender='m' then will be returned male name else
         female name.
         :return: full name. Example: Johann Wolfgang
         """
         _sex = gender.lower()
-        if reversed:
+        if reverse:
             return '{0} {1}'.format(self.surname(_sex), self.name(_sex))
         return '{0} {1}'.format(self.name(_sex), self.surname(_sex))
 
