@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 :copyright: (c) 2016 by Lk Geimfari.
-:license: MIT, see LICENSE for more details.
+:software_license: MIT, see LICENSE for more details.
 """
 
 from datetime import date
@@ -15,8 +15,9 @@ from .utils import pull
 
 __all__ = ['Address', 'Personal',
            'Text', 'Network',
-           'Datetime', 'File', 'Science',
-           'Development', 'Food', 'Hardware'
+           'Datetime', 'File',
+           'Science', 'Development',
+           'Food', 'Hardware'
            ]
 
 
@@ -74,10 +75,7 @@ class Address(object):
         For locale 'ru_ru' always will be getting subject of RF.
         :return: state. Example: Alabama
         """
-        if self.lang == 'ru_ru':
-            return choice(pull('subjects', self.lang)).strip()
-        else:
-            return choice(pull('states', self.lang)).strip()
+        return choice(pull('states', self.lang)).strip()
 
     def postal_code(self):
         """
@@ -268,16 +266,17 @@ class Personal(object):
 
         return choice(pull('surnames', self.lang)).strip()
 
-    def full_name(self, gender='f'):
-
+    def full_name(self, gender='f', reversed=False):
         """
         Get a random full name.
+        :param reversed: if true: surname/name else name/surname
         :param gender: if gender='m' then will be returned male name else
         female name.
         :return: full name. Example: Johann Wolfgang
         """
         _sex = gender.lower()
-
+        if reversed:
+            return '{0} {1}'.format(self.surname(_sex), self.name(_sex))
         return '{0} {1}'.format(self.name(_sex), self.surname(_sex))
 
     @staticmethod
@@ -761,9 +760,9 @@ class Development(object):
     """
 
     @staticmethod
-    def license():
+    def software_license():
         """
-        Get a random license from list.
+        Get a random software license from list.
         :return:
         """
         _license = [
@@ -772,7 +771,7 @@ class Development(object):
             'The BSD 2-Clause License',
             'GNU General Public License (GPL)',
             'General Public License (LGPL),'
-            'MIT license (MIT)',
+            'MIT software_license (MIT)',
             'Mozilla Public License 2.0 (MPL-2.0)',
             'Common Development and Distribution License (CDDL-1.0)',
             'Eclipse Public License (EPL-1.0)'
@@ -1124,7 +1123,7 @@ class Hardware(object):
         return choice(_m)
 
     @staticmethod
-    def hardware_full():
+    def hardware_full_info():
         """
         Get a random full information about device (laptop).
         :return: full information. Example:
@@ -1147,5 +1146,9 @@ class Hardware(object):
 
     @staticmethod
     def phone_model():
+        """
+        Get a random phone model.
+        :return: phone model. Example: Nokia Lumia 920
+        """
         _model = choice(pull('phone_models', 'en_us'))
         return _model.strip()

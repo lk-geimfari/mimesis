@@ -317,35 +317,35 @@ food = Food('en_us')
 
 # Get a random alcoholic drink.
 # Example: Vodka
-food.alcoholic_drink()
+alco_drink = food.alcoholic_drink()
 
 # Get a random berry.
 # Example: Blackberry
-food.berry()
+berry = food.berry()
 
 # Get a random cocktail.
 # Example: Amber Moon
-food.cocktail()
+cocktail = food.cocktail()
 
 # Get a random dish for current locale
 # Example ('ru_ru'): Борщ 
-food.dish()
+dish = food.dish()
 
 # Get a random fruit.
 # Example: Apple
-food.fruit()
+fruit = food.fruit()
 
 # Get a random mushroom
 # Example: Laetiporus sulphureus
-food.mushroom()
+mushroom = food.mushroom()
 
 # Get a random herbs or spices.
 # Example: Artemisia
-food.spices()
+spices_or_herbs = food.spices()
 
 # Get a random vegetable.
 # Example: Belgian Endive
-food.vegetable()
+vegetable = food.vegetable()
 ```
 
 ## Hardware
@@ -355,55 +355,54 @@ hardware = Hardware()
 
 # Get a random CPU name.
 # Example: Intel® Core i3
-hardware.cpu()
+cpu_name = hardware.cpu()
 
 # Get a random CPU codename.
 # Example: Bear Ridge
-hardware.cpu_codename()
+cpu_codename = hardware.cpu_codename()
 
 # Get a random frequency of CPU.
 # Example: 2.3 GHz
-hardware.cpu_frequency()
+cpu_frequency = hardware.cpu_frequency()
 
 # Get a random generation.
 # Example: 2nd Generation
-hardware.generation()
+generation = hardware.generation()
 
 # Get a random graphics.
 # Example: Intel® HD Graphics 620
-hardware.graphics()
+graphics = hardware.graphics()
 
 # Get a random manufacturer
 # Example: HP
-hardware.manufacturer()
+manufacturer = hardware.manufacturer()
 
 # Get a random size of RAM.
 # Example: 32GB
-hardware.ram_size()
+ram_size = hardware.ram_size()
 
 # Get a random type of RAM
 # Example: DDR3
-hardware.ram_type()
+ram_type = hardware.ram_type()
 
 # Get a random resolution of screen.
 # Example: 1440x900
-hardware.resolution()
+resolution_of_screen = hardware.resolution()
 
 # Get a random size of screen (in inch).
 # Example: 15.4″
-hardware.screen_size()
+screen_size = hardware.screen_size()
 
 # Get a random information about drive
 # Example: 1TB HDD(7200 RPM) + 32GB SSD
-hardware.ssd_or_hdd()
+ssd_or_hdd = hardware.ssd_or_hdd()
 
 # Generate a random information about hardware.
 # Example:  Acer Intel® Core i7 2nd Generation 3.50 GHz/1920x1200/12″/
 # 1TB HDD + 64GB SSD/DDR3-32GB/Intel® HD Graphics 5300  
-hardware.hardware_full()
+hardware_full_info = hardware.hardware_full_info()
 
 # Get a random model of phone.
 # Example: Nokia Lumia 610
-hardware.phone_model()
-
+phone_model = hardware.phone_model()
 ```

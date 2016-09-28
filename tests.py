@@ -32,12 +32,8 @@ class AddressTestCase(unittest.TestCase):
         self.assertIn(result, pull('street_suffix', self.address.lang))
 
     def test_state(self):
-        # TODO: Fix
         result = self.address.state() + '\n'
-        if self.address.lang == 'en_us':
-            self.assertIn(result, pull('states', self.address.lang))
-        elif self.address.lang == 'ru_ru':
-            self.assertIn(result, pull('subjects', self.address.lang))
+        self.assertIn(result, pull('states', self.address.lang))
 
     def test_postal_code(self):
         result = self.address.postal_code()
@@ -418,13 +414,13 @@ class DevelopmentTestCase(unittest.TestCase):
             'The BSD 2-Clause License',
             'GNU General Public License (GPL)',
             'General Public License (LGPL),'
-            'MIT license (MIT)',
+            'MIT software_license (MIT)',
             'Mozilla Public License 2.0 (MPL-2.0)',
             'Common Development and Distribution License (CDDL-1.0)',
             'Eclipse Public License (EPL-1.0)'
         ]
 
-        result = self.dev.license()
+        result = self.dev.software_license()
         self.assertIn(result, _license)
 
     def test_programming_language(self):
@@ -646,7 +642,7 @@ class HardwareTestCase(unittest.TestCase):
         self.assertIn(result, _m)
 
     def test_hardware_full(self):
-        result = self.hard.hardware_full()
+        result = self.hard.hardware_full_info()
         self.assertGreater(len(result), 15)
 
     def test_phone_model(self):
