@@ -88,6 +88,10 @@ class TextTestCase(unittest.TestCase):
         result = self.data.swear_word() + '\n'
         self.assertIn(result, pull('swear_words', self.data.lang))
 
+    def test_naughty_strings(self):
+        result = self.data.naughty_strings()
+        self.assertTrue(len(result) > 10)
+
     def test_quote_from_movie(self):
         result = self.data.quote_from_movie() + '\n'
         self.assertIn(result, pull('quotes', self.data.lang))
@@ -310,8 +314,8 @@ class DatetimeTestCase(unittest.TestCase):
         self.assertLess(len(result_abbr), 6)
 
     def test_year(self):
-        result = self.datetime.year(from_=2000, to_=2016)
-        self.assertTrue((result > 2000) and (result < 2016))
+        result = self.datetime.year(from_=2000)
+        self.assertTrue(result > 2000)
 
     def test_periodicity(self):
         result = self.datetime.periodicity() + '\n'

@@ -169,6 +169,25 @@ class Text(object):
         _word = choice(pull('swear_words', self.lang))
         return _word.strip()
 
+    @staticmethod
+    def naughty_strings():
+        """
+        Get a random naughty string form file.
+        Authors of big-list-of-naughty-strings is Max Woolf and contributors.
+        Thank you to all who have contributed in big-list-of-naughty-strings.
+        Repository: https://github.com/minimaxir/big-list-of-naughty-strings
+        :return: The list of naughty strings
+        """
+        import os.path as op
+        PATH = op.abspath(op.join(op.dirname(__file__), 'data'))
+
+        with open(op.join(PATH + '/other', 'bad_input'), 'r') as f:
+            result = f.readlines()
+            strings = [x.strip(u'\n') for x in result]
+            naughty_list = strings
+
+        return naughty_list
+
     def quote_from_movie(self):
         """
         Get a random quotes from movie.
@@ -218,6 +237,11 @@ class Text(object):
         """
         _shortcut = choice(pull('emoji', 'en_us'))
         return _shortcut.strip()
+
+    @staticmethod
+    def image_placeholder(width='400', height='300'):
+        url = 'http://placehold.it/{0}x{1}'.format(width, height)
+        return url
 
 
 class Personal(object):
