@@ -342,14 +342,15 @@ class Personal(object):
     @staticmethod
     def password(length=8, algorithm=''):
         """
-        Generate a password or hash password.
+        Generate a password or hash of password.
         :param length: length of password
         :param algorithm: hashing algorithm
-        :return: password or password hash
+        :return: password or hash of password
         """
         import hashlib
         _punc = '!"#$%+:<?@^_'
-        _pass = "".join([choice(ascii_letters + digits + _punc) for _ in range(length)])
+        _str = [choice(ascii_letters + digits + _punc) for _ in range(length)]
+        _pass = "".join(_str)
         if algorithm.lower() == 'sha1':
             return hashlib.sha1(_pass.encode()).hexdigest()
         elif algorithm.lower() == 'sha256':
@@ -409,7 +410,8 @@ class Personal(object):
         :return: address_format. Example: 3EktnHQD7RiAE6uzMj2ZifT9YgRrkSgzQX
         """
         _fmt = '1' if address_format.lower() == 'p2pkh' else '3'
-        return _fmt + "".join([choice(ascii_letters + digits) for _ in range(33)])
+        _fmt += "".join([choice(ascii_letters + digits) for _ in range(33)])
+        return _fmt
 
     @staticmethod
     def cvv():
@@ -508,8 +510,8 @@ class Personal(object):
         try:
             # If you know Russian, then you will understand everything at once.
             if self.lang == 'ru_ru':
-                index = 0 if gender.lower() == 'm' else 1
-                return choice(pull('nation', self.lang)).split('|')[index].strip()
+                i = 0 if gender.lower() == 'm' else 1
+                return choice(pull('nation', self.lang)).split('|')[i].strip()
             else:
                 return choice(pull('nation', self.lang)).strip()
         except Exception:
@@ -567,7 +569,8 @@ class Personal(object):
 
 class Datetime(object):
     """
-    Class for generate the fake data that you can use for working with date and time.
+    Class for generate the fake data that you can use for
+    working with date and time.
     """
 
     def __init__(self, lang='en_us'):
@@ -576,7 +579,8 @@ class Datetime(object):
     def day_of_week(self, abbreviated=False):
         """
         Get a random day of week.
-        :param abbreviated: if True then will be returned abbreviated name of day of the week.
+        :param abbreviated: if True then will be returned abbreviated name
+        of day of the week.
         :return: name of day of the week
         """
         _day = choice(pull('days', self.lang)).split('|')
@@ -587,7 +591,8 @@ class Datetime(object):
     def month(self, abbreviated=False):
         """
         Get a random month.
-        :param abbreviated: if True then will be returned abbreviated month name.
+        :param abbreviated: if True then will be returned
+        abbreviated month name.
         :return: month name. Example: November
         """
         _month = choice(pull('months', self.lang)).split('|')
@@ -858,9 +863,9 @@ class Development(object):
     def framework(_type='back'):
         """
         Get a random framework from file.
-        :param _type: If _type='front' then will be returned front-end framework,
-        else will be returned back-end framework.
-        :return: framework or list of used stack: Example:  Python/Django
+        :param _type: If _type='front' then will be returned
+        front-end framework, else will be returned back-end framework.
+        :return: framework or dict of used stack: Example:  Python/Django
         """
         _file = 'front_frmwk' if _type.lower() == 'front' else 'back_frmwk'
         _framework = choice(pull(_file))

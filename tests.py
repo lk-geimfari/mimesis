@@ -138,7 +138,9 @@ class PersonalTestCase(unittest.TestCase):
     def test_telephone(self):
         result = self.person.telephone()
         self.assertTrue(
-            re.match(r'^((8|\+[1-9])[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$', result))
+            re.match(r'^((8|\+[1-9])[\- ]?)?'
+                     r'(\(?\d{3}\)?[\- ]?)?'
+                     r'[\d\- ]{7,10}$', result))
 
     def test_surname(self):
         if self.person.lang == 'ru_ru':
