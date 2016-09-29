@@ -1,4 +1,3 @@
-import random
 import re
 import unittest
 
@@ -9,7 +8,12 @@ from church.church import (
 )
 from church.utils import pull
 
-LANG = random.choice(['en_us', 'de_de', 'ru_ru'])
+LANG = 'en_us'
+
+
+# LANG = 'ru_ru'
+# LANG = 'de_de'
+# LANG = 'fr_fr'
 
 
 class AddressTestCase(unittest.TestCase):
@@ -304,6 +308,10 @@ class DatetimeTestCase(unittest.TestCase):
 
         result_abbr = self.datetime.month(abbreviated=True)
         self.assertLess(len(result_abbr), 6)
+
+    def test_year(self):
+        result = self.datetime.year(from_=2000, to_=2016)
+        self.assertTrue((result > 2000) and (result < 2016))
 
     def test_periodicity(self):
         result = self.datetime.periodicity() + '\n'
