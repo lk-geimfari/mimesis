@@ -108,6 +108,10 @@ class TextTestCase(unittest.TestCase):
         result = self.data.color() + '\n'
         self.assertIn(result, pull('colors', self.data.lang))
 
+    def test_hex_color(self):
+        result = self.data.hex_color()
+        self.assertIn('#', result)
+
     def test_company_type(self):
         result = self.data.company_type(abbreviated=True)
         self.assertTrue(len(result) < 7)
