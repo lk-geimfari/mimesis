@@ -565,6 +565,16 @@ class Datetime(object):
             return _month[1].strip()
         return _month[0].strip()
 
+    @staticmethod
+    def year(from_=1990, to_=2050):
+        """
+        Generate a random year.
+        :param from_:
+        :param to_:
+        :return: year. Example 2023
+        """
+        return randint(int(from_), int(to_))
+
     def periodicity(self):
         """
         Get a random periodicity string.
