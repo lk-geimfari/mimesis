@@ -230,9 +230,9 @@ country = address.country()
 city = address.city()
 ```
 
-## Datetime
+## Text
 ```python
-data = BasicData('en_us')
+data = Text('en_us')
 
 # Get random text.
 # quantity=5 is a quantity of sentence
@@ -251,6 +251,14 @@ words = data.words(quantity=7)
 # Get a random word.
 # For example: peach
 word = data.word()
+
+# Get a random swear word.
+# For example: shit
+bad = data.swear_word()
+
+# Get a list of naughty strings (bad input)
+# For example: $ENV{'HOME'}
+naughty = data.naughty_strings()
 
 # Get a random quotes from movie.
 # For example: 'Bond...James Bond.'
