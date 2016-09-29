@@ -210,6 +210,16 @@ class Text(object):
         """
         return choice(pull('colors', self.lang)).strip()
 
+    @staticmethod
+    def hex_color():
+        """
+        Generate a hex color.
+        :return: hex color code. Example: #D8346B
+        """
+        letters = '0123456789ABCDEF'
+        result = '#' + ''.join(sample(letters, 6))
+        return result
+
     def company_type(self, abbreviated=False):
         """
         Get a random company type.

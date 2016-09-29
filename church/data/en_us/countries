@@ -14,7 +14,7 @@ AW|Aruba
 AU|Australia
 AT|Austria
 AZ|Azerbaijan
-BS|Bahamas (the)
+BS|Bahamas
 BH|Bahrain
 BD|Bangladesh
 BB|Barbados
@@ -39,29 +39,29 @@ CV|Cabo Verde
 KH|Cambodia
 CM|Cameroon
 CA|Canada
-KY|Cayman Islands (the)
-CF|Central African Republic (the)
+KY|Cayman Islands
+CF|Central African Republic
 TD|Chad
 CL|Chile
 CN|China
 CX|Christmas Island
-CC|Cocos (Keeling) Islands (the)
+CC|Cocos
 CO|Colombia
-KM|Comoros (the)
-CD|Congo (the Democratic Republic of the)
-CG|Congo (the)
-CK|Cook Islands (the)
+KM|Comoros
+CD|Congo
+CG|Congo
+CK|Cook Islands
 CR|Costa Rica
 CI|Côte d'Ivoire
 HR|Croatia
 CU|Cuba
 CW|Curaçao
 CY|Cyprus
-CZ|Czech Republic (the)
+CZ|Czech Republic
 DK|Denmark
 DJ|Djibouti
 DM|Dominica
-DO|Dominican Republic (the)
+DO|Dominican Republic
 EC|Ecuador
 EG|Egypt
 SV|El Salvador
@@ -69,16 +69,16 @@ GQ|Equatorial Guinea
 ER|Eritrea
 EE|Estonia
 ET|Ethiopia
-FK|Falkland Islands (the) [Malvinas]
-FO|Faroe Islands (the)
+FK|Falkland Islands
+FO|Faroe Islands
 FJ|Fiji
 FI|Finland
 FR|France
 GF|French Guiana
 PF|French Polynesia
-TF|French Southern Territories (the)
+TF|French Southern Territories
 GA|Gabon
-GM|Gambia (the)
+GM|Gambia
 GE|Georgia
 DE|Germany
 GH|Ghana
@@ -95,14 +95,14 @@ GW|Guinea-Bissau
 GY|Guyana
 HT|Haiti
 HM|Heard Island and McDonald Islands
-VA|Holy See (the)
+VA|Holy See
 HN|Honduras
 HK|Hong Kong
 HU|Hungary
 IS|Iceland
 IN|India
 ID|Indonesia
-IR|Iran (Islamic Republic of)
+IR|Iran
 IQ|Iraq
 IE|Ireland
 IM|Isle of Man
@@ -115,11 +115,11 @@ JO|Jordan
 KZ|Kazakhstan
 KE|Kenya
 KI|Kiribati
-KP|Korea (the Democratic People's Republic of)
-KR|Korea (the Republic of)
+KP|Korea
+KR|Korea
 KW|Kuwait
 KG|Kyrgyzstan
-LA|Lao People's Democratic Republic (the)
+LA|Lao People's Democratic Republic
 LV|Latvia
 LB|Lebanon
 LS|Lesotho
@@ -129,21 +129,21 @@ LI|Liechtenstein
 LT|Lithuania
 LU|Luxembourg
 MO|Macao
-MK|Macedonia (the former Yugoslav Republic of)
+MK|Macedonia
 MG|Madagascar
 MW|Malawi
 MY|Malaysia
 MV|Maldives
 ML|Mali
 MT|Malta
-MH|Marshall Islands (the)
+MH|Marshall Islands
 MQ|Martinique
 MR|Mauritania
 MU|Mauritius
 YT|Mayotte
 MX|Mexico
-FM|Micronesia (Federated States of)
-MD|Moldova (the Republic of)
+FM|Micronesia
+MD|Moldova
 MC|Monaco
 MN|Mongolia
 ME|Montenegro
@@ -154,25 +154,25 @@ MM|Myanmar
 NA|Namibia
 NR|Nauru
 NP|Nepal
-NL|Netherlands (the)
+NL|Netherlands
 NC|New Caledonia
 NZ|New Zealand
 NI|Nicaragua
-NE|Niger (the)
+NE|Niger
 NG|Nigeria
 NU|Niue
 NF|Norfolk Island
-MP|Northern Mariana Islands (the)
+MP|Northern Mariana Islands
 NO|Norway
 OM|Oman
 PK|Pakistan
 PW|Palau
-PS|Palestine, State of
+PS|Palestine
 PA|Panama
 PG|Papua New Guinea
 PY|Paraguay
 PE|Peru
-PH|Philippines (the)
+PH|Philippines
 PN|Pitcairn
 PL|Poland
 PT|Portugal
@@ -180,13 +180,13 @@ PR|Puerto Rico
 QA|Qatar
 RE|Réunion
 RO|Romania
-RU|Russian Federation (the)
+RU|Russian Federation
 RW|Rwanda
 BL|Saint Barthélemy
-SH|Saint Helena, Ascension and Tristan da Cunha
+SH|Saint Helena
 KN|Saint Kitts and Nevis
 LC|Saint Lucia
-MF|Saint Martin (French part)
+MF|Saint Martin
 PM|Saint Pierre and Miquelon
 VC|Saint Vincent and the Grenadines
 WS|Samoa
@@ -198,7 +198,7 @@ RS|Serbia
 SC|Seychelles
 SL|Sierra Leone
 SG|Singapore
-SX|Sint Maarten (Dutch part)
+SX|Sint Maarten
 SK|Slovakia
 SI|Slovenia
 SB|Solomon Islands
@@ -208,16 +208,16 @@ GS|South Georgia and the South Sandwich Islands
 SS|South Sudan
 ES|Spain
 LK|Sri Lanka
-SD|Sudan (the)
+SD|Sudan
 SR|Suriname
 SJ|Svalbard and Jan Mayen
 SZ|Swaziland
 SE|Sweden
 CH|Switzerland
 SY|Syrian Arab Republic
-TW|Taiwan (Province of China)
+TW|Taiwan
 TJ|Tajikistan
-TZ|Tanzania, United Republic of
+TZ|Tanzania
 TH|Thailand
 TL|Timor-Leste
 TG|Togo
@@ -227,18 +227,18 @@ TT|Trinidad and Tobago
 TN|Tunisia
 TR|Turkey
 TM|Turkmenistan
-TC|Turks and Caicos Islands (the)
+TC|Turks and Caicos Islands
 TV|Tuvalu
 UG|Uganda
 UA|Ukraine
-AE|United Arab Emirates (the)
-GB|United Kingdom of Great Britain and Northern Ireland (the)
-UM|United States Minor Outlying Islands (the)
-US|United States of America (the)
+AE|United Arab Emirates
+GB|United Kingdom of Great Britain and Northern Ireland
+UM|United States Minor Outlying Islands
+US|United States of America
 UY|Uruguay
 UZ|Uzbekistan
 VU|Vanuatu
-VE|Venezuela (Bolivarian Republic of)
+VE|Venezuela
 VN|Viet Nam
 VG|Virgin Islands (British)
 VI|Virgin Islands (U.S.)
