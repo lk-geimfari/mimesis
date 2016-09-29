@@ -8,7 +8,7 @@ from datetime import date
 from random import choice, sample, randint, uniform
 from string import digits, ascii_letters
 
-from .utils import pull
+from .utils import pull, this
 
 # pull - is internal function,
 # please do not use this function outside the module 'church'.
@@ -941,6 +941,16 @@ class Development(object):
         :return: os name. Example: Gentoo
         """
         return choice(pull('os')).strip()
+
+    @staticmethod
+    def this():
+        """
+        All pythonistas know what is it.
+        :return: string from philosophy of Python
+        (Actually it's work for all languages).
+        Example: Beautiful is better than ugly.
+        """
+        return choice(this)
 
 
 class Food(object):
