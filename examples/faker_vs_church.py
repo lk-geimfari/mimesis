@@ -47,7 +47,7 @@ def test_church_address():
     """
     li = []
     for _ in range(5000):
-        li.append(a.street_address())
+        li.append(a.address())
 
 
 def test_faker_emails():

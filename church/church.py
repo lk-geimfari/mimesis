@@ -35,7 +35,8 @@ class Address(object):
         Generate a random street number.
         :return: street number
         """
-        return ''.join(sample(digits, int(choice(digits[1:4]))))
+        number = sample(digits, int(choice(digits[1:4])))
+        return ''.join(number)
 
     def street_name(self):
         """
@@ -51,7 +52,7 @@ class Address(object):
         """
         return choice(pull('street_suffix', self.lang)).strip()
 
-    def street_address(self):
+    def address(self):
         """
         Get a random full address.
         :return: full address.
@@ -60,11 +61,11 @@ class Address(object):
             return '{} {} {}'.format(
                 self.street_suffix(),
                 self.street_name(),
-                Address.street_number()
+                self.street_number()
             )
         else:
             return '{} {} {}'.format(
-                Address.street_number(),
+                self.street_number(),
                 self.street_name(),
                 self.street_suffix()
             )
@@ -179,12 +180,11 @@ class Text(object):
         :return: The list of naughty strings
         """
         import os.path as op
-        PATH = op.abspath(op.join(op.dirname(__file__), 'data'))
+        path = op.abspath(op.join(op.dirname(__file__), 'data'))
 
-        with open(op.join(PATH + '/other', 'bad_input'), 'r') as f:
+        with open(op.join(path + '/other', 'bad_input'), 'r') as f:
             result = f.readlines()
-            strings = [x.strip(u'\n') for x in result]
-            naughty_list = strings
+            naughty_list = [x.strip(u'\n') for x in result]
 
         return naughty_list
 
@@ -363,22 +363,23 @@ class Personal(object):
             return _pass
 
     @staticmethod
-    def email():
+    def email(gender='f'):
         """
         Generate a random email using usernames.
         :return: email address. Example: foretime10@live.com
         """
-        name = Personal.username()
+        gender = 'm' if gender.lower() == 'm' else 'f'
+        name = Personal.username(gender=gender)
         email_adders = name + choice(pull('email', 'en_us'))
         return email_adders.strip()
 
-    @staticmethod
-    def home_page():
+    def home_page(self):
         """
         Generate a random home page using usernames.
         :return: random home page. Example: http://www.font6.info
         """
-        url = 'http://www.' + Personal.username().replace(' ', '-')
+        username = self.username().replace(' ', '-')
+        url = 'http://www.' + username
         return url + choice(pull('domains', 'en_us')).strip()
 
     @staticmethod
@@ -562,9 +563,9 @@ class Personal(object):
 
     @staticmethod
     def avatar():
-        ava_path = 'https://raw.githubusercontent.com/lk-geimfari/' \
-            'church/master/examples/avatars/{0}.png'.format(randint(1, 7))
-        return ava_path
+        url = 'https://raw.githubusercontent.com/lk-geimfari/' \
+              'church/master/examples/avatars/{0}.png'.format(randint(1, 7))
+        return url
 
 
 class Datetime(object):
@@ -830,9 +831,11 @@ class Development(object):
         :param nosql: only NoSQL databases
         :return: database name. Example: PostgreSQL
         """
-        _nosql = ['MongoDB', 'RethinkDB', 'Couchbase', 'CouchDB',
-                  'Aerospike', 'MemcacheDB', 'MUMPS,  Riak', 'Redis',
-                  'AllegroGraph', 'Neo4J', 'InfiniteGraph']
+        _nosql = [
+            'MongoDB', 'RethinkDB', 'Couchbase', 'CouchDB',
+            'Aerospike', 'MemcacheDB', 'MUMPS,  Riak', 'Redis',
+            'AllegroGraph', 'Neo4J', 'InfiniteGraph'
+        ]
 
         _sql = ['MariaDB', 'MySQL', 'PostgreSQL', 'Oracle DB', 'SQLite']
         if nosql:
@@ -845,11 +848,14 @@ class Development(object):
         Get a random value list.
         :return: some technology. Example: Nginx
         """
-        _list = ['Docker', 'Rkt', 'LXC', 'Vagrant',
-                 'Elasticsearch', 'Nginx', 'Git', 'Mercurial',
-                 'Jira', 'REST', 'Apache Hadoop', 'Scrum', 'Redmine',
-                 'Apache Kafka', 'Apache Spark']
-        return choice(_list)
+        other_tech = [
+            'Docker', 'Rkt', 'LXC', 'Vagrant',
+            'Elasticsearch', 'Nginx', 'Git',
+            'Jira', 'REST', 'Apache Hadoop',
+            'Scrum', 'Redmine', 'Mercurial',
+            'Apache Kafka', 'Apache Spark'
+        ]
+        return choice(other_tech)
 
     @staticmethod
     def programming_language():
@@ -871,8 +877,7 @@ class Development(object):
         _framework = choice(pull(_file))
         return _framework.strip()
 
-    @staticmethod
-    def stack_of_tech(nosql=False):
+    def stack_of_tech(self, nosql=False):
         """
         Get a random stack.
         :param nosql: if True the only NoSQL skills.
@@ -882,15 +887,11 @@ class Development(object):
                       'Front-end': 'Webpack',
                       'Other': 'Martini'}
         """
-        front = '{}'.format(Development.framework('front'))
-        back = '{}'.format(Development.framework('back'))
-        db = '{}'.format(Development.database(nosql))
-        other = '{}'.format(Development.other())
         _stack = {
-            'front-end': front,
-            'back-end': back,
-            'db': db,
-            'other': other
+            'front-end': self.framework('front'),
+            'back-end': self.framework('back'),
+            'db': self.database(nosql),
+            'other': self.other()
         }
 
         return _stack
@@ -918,7 +919,7 @@ class Food(object):
     """
 
     def __init__(self, lang):
-        self.lang = lang
+        self.lang = lang.lower()
 
     def berry(self):
         """
@@ -1167,26 +1168,20 @@ class Hardware(object):
               'Fujitsu', 'Apple']
         return choice(_m)
 
-    @staticmethod
-    def hardware_full_info():
+    def hardware_full_info(self):
         """
         Get a random full information about device (laptop).
         :return: full information. Example:
         ASUS Intel® Core i3 3rd Generation 3.50 GHz/1920x1200/12″/
         512GB HDD(7200 RPM)/DDR2-4GB/Intel® Iris™ Pro Graphics 6200
         """
-        _c = '{}'.format(Hardware.cpu())
-        _r = '{}'.format(Hardware.resolution())
-        _ss = '{}'.format(Hardware.screen_size())
-        _cl = '{}'.format(Hardware.cpu_frequency())
-        _gn = '{}'.format(Hardware.generation())
-        _rt = '{}'.format(Hardware.ram_type())
-        _rs = '{}'.format(Hardware.ram_size())
-        _mem = '{}'.format(Hardware.ssd_or_hdd())
-        _gr = '{}'.format(Hardware.graphics())
-        _mnf = '{}'.format(Hardware.manufacturer())
         _full = '{0} {1} {2} {3}/{4}/{5}/{6}/{7}-{8}/{9}'.format(
-            _mnf, _c, _gn, _cl, _r, _ss, _mem, _rt, _rs, _gr)
+            self.manufacturer(), self.cpu(),
+            self.generation(), self.cpu_frequency(),
+            self.resolution(), self.screen_size(),
+            self.ssd_or_hdd(), self.ram_type(),
+            self.ram_size(), self.graphics()
+        )
         return _full
 
     @staticmethod
