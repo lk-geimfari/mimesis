@@ -558,6 +558,11 @@ class Personal(object):
                 phone_number += i
         return phone_number.strip()
 
+    def avatar(self):
+        l = 'https://raw.githubusercontent.com/lk-geimfari/' \
+            'church/master/examples/avatars/{0}.png'.format(randint(1, 7))
+        return l
+
 
 class Datetime(object):
     """
