@@ -8,15 +8,15 @@ Your contributions are always welcome!
 
 - Add one commit per one Pull Request.
 
-- Always comment your code (only in Eglish!).
+- Always comment your code (only in English!).
 
 - Check your spelling and grammar.
 
-- Check code with pycodestyle or with another similar tool.
+- Check code with pycodestyle or with any other similar tool.
 
-- Make sure the tests are passing.
+- Make sure the tests pass.
 
-- If you add any function, then you should add tests for it.
+- If you add any functionality, then you should add tests for it.
 
 ----------
-As says Obi-Wan Kenobi: ` May the Force be with you. `
+As Obi-Wan Kenobi says: ` May the Force be with you. `
