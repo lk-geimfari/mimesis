@@ -5,10 +5,10 @@
 """
 
 from datetime import date
-from random import choice, sample, randint
+from random import choice, sample, randint, uniform
 from string import digits, ascii_letters
 
-from .utils import pull
+from .utils import pull, this
 
 # pull - is internal function,
 # please do not use this function outside the module 'church'.
@@ -35,7 +35,8 @@ class Address(object):
         Generate a random street number.
         :return: street number
         """
-        return ''.join(sample(digits, int(choice(digits[1:4]))))
+        number = sample(digits, int(choice(digits[1:4])))
+        return ''.join(number)
 
     def street_name(self):
         """
@@ -51,7 +52,7 @@ class Address(object):
         """
         return choice(pull('street_suffix', self.lang)).strip()
 
-    def street_address(self):
+    def address(self):
         """
         Get a random full address.
         :return: full address.
@@ -60,11 +61,11 @@ class Address(object):
             return '{} {} {}'.format(
                 self.street_suffix(),
                 self.street_name(),
-                Address.street_number()
+                self.street_number()
             )
         else:
             return '{} {} {}'.format(
-                Address.street_number(),
+                self.street_number(),
                 self.street_name(),
                 self.street_suffix()
             )
@@ -169,6 +170,24 @@ class Text(object):
         _word = choice(pull('swear_words', self.lang))
         return _word.strip()
 
+    @staticmethod
+    def naughty_strings():
+        """
+        Get a random naughty string form file.
+        Authors of big-list-of-naughty-strings is Max Woolf and contributors.
+        Thank you to all who have contributed in big-list-of-naughty-strings.
+        Repository: https://github.com/minimaxir/big-list-of-naughty-strings
+        :return: The list of naughty strings
+        """
+        import os.path as op
+        path = op.abspath(op.join(op.dirname(__file__), 'data'))
+
+        with open(op.join(path + '/other', 'bad_input'), 'r') as f:
+            result = f.readlines()
+            naughty_list = [x.strip(u'\n') for x in result]
+
+        return naughty_list
+
     def quote_from_movie(self):
         """
         Get a random quotes from movie.
@@ -218,6 +237,11 @@ class Text(object):
         """
         _shortcut = choice(pull('emoji', 'en_us'))
         return _shortcut.strip()
+
+    @staticmethod
+    def image_placeholder(width='400', height='300'):
+        url = 'http://placehold.it/{0}x{1}'.format(width, height)
+        return url
 
 
 class Personal(object):
@@ -318,14 +342,15 @@ class Personal(object):
     @staticmethod
     def password(length=8, algorithm=''):
         """
-        Generate a password or hash password.
+        Generate a password or hash of password.
         :param length: length of password
         :param algorithm: hashing algorithm
-        :return: password or password hash
+        :return: password or hash of password
         """
         import hashlib
         _punc = '!"#$%+:<?@^_'
-        _pass = "".join([choice(ascii_letters + digits + _punc) for _ in range(length)])
+        _str = [choice(ascii_letters + digits + _punc) for _ in range(length)]
+        _pass = "".join(_str)
         if algorithm.lower() == 'sha1':
             return hashlib.sha1(_pass.encode()).hexdigest()
         elif algorithm.lower() == 'sha256':
@@ -338,22 +363,23 @@ class Personal(object):
             return _pass
 
     @staticmethod
-    def email():
+    def email(gender='f'):
         """
         Generate a random email using usernames.
         :return: email address. Example: foretime10@live.com
         """
-        name = Personal.username()
+        gender = 'm' if gender.lower() == 'm' else 'f'
+        name = Personal.username(gender=gender)
         email_adders = name + choice(pull('email', 'en_us'))
         return email_adders.strip()
 
-    @staticmethod
-    def home_page():
+    def home_page(self):
         """
         Generate a random home page using usernames.
         :return: random home page. Example: http://www.font6.info
         """
-        url = 'http://www.' + Personal.username().replace(' ', '-')
+        username = self.username().replace(' ', '-')
+        url = 'http://www.' + username
         return url + choice(pull('domains', 'en_us')).strip()
 
     @staticmethod
@@ -385,7 +411,8 @@ class Personal(object):
         :return: address_format. Example: 3EktnHQD7RiAE6uzMj2ZifT9YgRrkSgzQX
         """
         _fmt = '1' if address_format.lower() == 'p2pkh' else '3'
-        return _fmt + "".join([choice(ascii_letters + digits) for _ in range(33)])
+        _fmt += "".join([choice(ascii_letters + digits) for _ in range(33)])
+        return _fmt
 
     @staticmethod
     def cvv():
@@ -447,6 +474,36 @@ class Personal(object):
             return choice(pull('gender', self.lang))[0:1]
         return choice(pull('gender', self.lang)).strip()
 
+    @staticmethod
+    def height(from_=1.5, to_=2.0):
+        """
+        Generate a random height in M.
+        :param from_: min value
+        :param to_: max value
+        :return: height. Example: 1.85
+        """
+        h = uniform(float(from_), float(to_))
+        return '{:0.2f}'.format(h)
+
+    @staticmethod
+    def weight(from_=38, to_=90):
+        """
+        Generate a random weight in KG.
+        :param from_: min value
+        :param to_: max value
+        :return: weight. Example: 74
+        """
+        w = randint(int(from_), int(to_))
+        return w
+
+    def sexual_orientation(self):
+        """
+        Get a random (LOL) sexual orientation.
+        :return: sexual orientation. Example: Heterosexuality
+        """
+        so = choice(pull('sexual_orientation', self.lang))
+        return so.strip()
+
     def profession(self):
         """
         Get a random profession.
@@ -484,8 +541,8 @@ class Personal(object):
         try:
             # If you know Russian, then you will understand everything at once.
             if self.lang == 'ru_ru':
-                index = 0 if gender.lower() == 'm' else 1
-                return choice(pull('nation', self.lang)).split('|')[index].strip()
+                i = 0 if gender.lower() == 'm' else 1
+                return choice(pull('nation', self.lang)).split('|')[i].strip()
             else:
                 return choice(pull('nation', self.lang)).strip()
         except Exception:
@@ -534,10 +591,17 @@ class Personal(object):
                 phone_number += i
         return phone_number.strip()
 
+    @staticmethod
+    def avatar():
+        url = 'https://raw.githubusercontent.com/lk-geimfari/' \
+              'church/master/examples/avatars/{0}.png'.format(randint(1, 7))
+        return url
+
 
 class Datetime(object):
     """
-    Class for generate the fake data that you can use for working with date and time.
+    Class for generate the fake data that you can use for
+    working with date and time.
     """
 
     def __init__(self, lang='en_us'):
@@ -546,7 +610,8 @@ class Datetime(object):
     def day_of_week(self, abbreviated=False):
         """
         Get a random day of week.
-        :param abbreviated: if True then will be returned abbreviated name of day of the week.
+        :param abbreviated: if True then will be returned abbreviated name
+        of day of the week.
         :return: name of day of the week
         """
         _day = choice(pull('days', self.lang)).split('|')
@@ -557,7 +622,8 @@ class Datetime(object):
     def month(self, abbreviated=False):
         """
         Get a random month.
-        :param abbreviated: if True then will be returned abbreviated month name.
+        :param abbreviated: if True then will be returned
+        abbreviated month name.
         :return: month name. Example: November
         """
         _month = choice(pull('months', self.lang)).split('|')
@@ -795,9 +861,11 @@ class Development(object):
         :param nosql: only NoSQL databases
         :return: database name. Example: PostgreSQL
         """
-        _nosql = ['MongoDB', 'RethinkDB', 'Couchbase', 'CouchDB',
-                  'Aerospike', 'MemcacheDB', 'MUMPS,  Riak', 'Redis',
-                  'AllegroGraph', 'Neo4J', 'InfiniteGraph']
+        _nosql = [
+            'MongoDB', 'RethinkDB', 'Couchbase', 'CouchDB',
+            'Aerospike', 'MemcacheDB', 'MUMPS,  Riak', 'Redis',
+            'AllegroGraph', 'Neo4J', 'InfiniteGraph'
+        ]
 
         _sql = ['MariaDB', 'MySQL', 'PostgreSQL', 'Oracle DB', 'SQLite']
         if nosql:
@@ -810,11 +878,14 @@ class Development(object):
         Get a random value list.
         :return: some technology. Example: Nginx
         """
-        _list = ['Docker', 'Rkt', 'LXC', 'Vagrant',
-                 'Elasticsearch', 'Nginx', 'Git', 'Mercurial',
-                 'Jira', 'REST', 'Apache Hadoop', 'Scrum', 'Redmine',
-                 'Apache Kafka', 'Apache Spark']
-        return choice(_list)
+        other_tech = [
+            'Docker', 'Rkt', 'LXC', 'Vagrant',
+            'Elasticsearch', 'Nginx', 'Git',
+            'Jira', 'REST', 'Apache Hadoop',
+            'Scrum', 'Redmine', 'Mercurial',
+            'Apache Kafka', 'Apache Spark'
+        ]
+        return choice(other_tech)
 
     @staticmethod
     def programming_language():
@@ -828,16 +899,15 @@ class Development(object):
     def framework(_type='back'):
         """
         Get a random framework from file.
-        :param _type: If _type='front' then will be returned front-end framework,
-        else will be returned back-end framework.
-        :return: framework or list of used stack: Example:  Python/Django
+        :param _type: If _type='front' then will be returned
+        front-end framework, else will be returned back-end framework.
+        :return: framework or dict of used stack: Example:  Python/Django
         """
         _file = 'front_frmwk' if _type.lower() == 'front' else 'back_frmwk'
         _framework = choice(pull(_file))
         return _framework.strip()
 
-    @staticmethod
-    def stack_of_tech(nosql=False):
+    def stack_of_tech(self, nosql=False):
         """
         Get a random stack.
         :param nosql: if True the only NoSQL skills.
@@ -847,15 +917,11 @@ class Development(object):
                       'Front-end': 'Webpack',
                       'Other': 'Martini'}
         """
-        front = '{}'.format(Development.framework('front'))
-        back = '{}'.format(Development.framework('back'))
-        db = '{}'.format(Development.database(nosql))
-        other = '{}'.format(Development.other())
         _stack = {
-            'front-end': front,
-            'back-end': back,
-            'db': db,
-            'other': other
+            'front-end': self.framework('front'),
+            'back-end': self.framework('back'),
+            'db': self.database(nosql),
+            'other': self.other()
         }
 
         return _stack
@@ -876,6 +942,16 @@ class Development(object):
         """
         return choice(pull('os')).strip()
 
+    @staticmethod
+    def this():
+        """
+        All pythonistas know what is it.
+        :return: string from philosophy of Python
+        (Actually it's work for all languages).
+        Example: Beautiful is better than ugly.
+        """
+        return choice(this)
+
 
 class Food(object):
     """
@@ -883,7 +959,7 @@ class Food(object):
     """
 
     def __init__(self, lang):
-        self.lang = lang
+        self.lang = lang.lower()
 
     def berry(self):
         """
@@ -1132,26 +1208,20 @@ class Hardware(object):
               'Fujitsu', 'Apple']
         return choice(_m)
 
-    @staticmethod
-    def hardware_full_info():
+    def hardware_full_info(self):
         """
         Get a random full information about device (laptop).
         :return: full information. Example:
         ASUS Intel® Core i3 3rd Generation 3.50 GHz/1920x1200/12″/
         512GB HDD(7200 RPM)/DDR2-4GB/Intel® Iris™ Pro Graphics 6200
         """
-        _c = '{}'.format(Hardware.cpu())
-        _r = '{}'.format(Hardware.resolution())
-        _ss = '{}'.format(Hardware.screen_size())
-        _cl = '{}'.format(Hardware.cpu_frequency())
-        _gn = '{}'.format(Hardware.generation())
-        _rt = '{}'.format(Hardware.ram_type())
-        _rs = '{}'.format(Hardware.ram_size())
-        _mem = '{}'.format(Hardware.ssd_or_hdd())
-        _gr = '{}'.format(Hardware.graphics())
-        _mnf = '{}'.format(Hardware.manufacturer())
         _full = '{0} {1} {2} {3}/{4}/{5}/{6}/{7}-{8}/{9}'.format(
-            _mnf, _c, _gn, _cl, _r, _ss, _mem, _rt, _rs, _gr)
+            self.manufacturer(), self.cpu(),
+            self.generation(), self.cpu_frequency(),
+            self.resolution(), self.screen_size(),
+            self.ssd_or_hdd(), self.ram_type(),
+            self.ram_size(), self.graphics()
+        )
         return _full
 
     @staticmethod

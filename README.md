@@ -19,6 +19,8 @@ Church - is a library to generate fake data. It's very useful if you need to boo
 
 ## Usage
 ```python
+# At this moment a library supported 4 locales: en_us, de_de, fr_fr, ru_ru
+#
 # It's very useful if you need to bootstrap your database.
 # Just create static method that will generate fake data.
 # ...
