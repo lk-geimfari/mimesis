@@ -35,6 +35,10 @@ class AddressTestCase(unittest.TestCase):
         result = self.address.street_suffix() + '\n'
         self.assertIn(result, pull('street_suffix', self.address.lang))
 
+    def test_address(self):
+        result = self.address.address()
+        self.assertTrue(len(result) > 6)
+
     def test_state(self):
         result = self.address.state() + '\n'
         self.assertIn(result, pull('states', self.address.lang))
@@ -88,6 +92,10 @@ class TextTestCase(unittest.TestCase):
         result = self.data.swear_word() + '\n'
         self.assertIn(result, pull('swear_words', self.data.lang))
 
+    def test_naughty_strings(self):
+        result = self.data.naughty_strings()
+        self.assertTrue(len(result) > 10)
+
     def test_quote_from_movie(self):
         result = self.data.quote_from_movie() + '\n'
         self.assertIn(result, pull('quotes', self.data.lang))
@@ -134,7 +142,9 @@ class PersonalTestCase(unittest.TestCase):
     def test_telephone(self):
         result = self.person.telephone()
         self.assertTrue(
-            re.match(r'^((8|\+[1-9])[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$', result))
+            re.match(r'^((8|\+[1-9])[\- ]?)?'
+                     r'(\(?\d{3}\)?[\- ]?)?'
+                     r'[\d\- ]{7,10}$', result))
 
     def test_surname(self):
         if self.person.lang == 'ru_ru':
@@ -255,6 +265,20 @@ class PersonalTestCase(unittest.TestCase):
         result_abbr = self.person.gender(abbreviated=True) + '\n'
         self.assertEqual(len(result_abbr), 2)
 
+    def test_height(self):
+        result = self.person.height(from_=1.60, to_=1.90)
+        self.assertTrue(result.startswith('1'))
+        self.assertIsInstance(result, str)
+
+    def test_weight(self):
+        result = self.person.weight(from_=40, to_=60)
+        self.assertTrue((result >= 40) and (result <= 60))
+
+    def test_sexual_orientation(self):
+        result = self.person.sexual_orientation()
+        self.assertIn(
+            result + '\n', pull('sexual_orientation', self.person.lang))
+
     def test_profession(self):
         result = self.person.profession() + '\n'
         self.assertIn(result, pull('professions', self.person.lang))
@@ -287,6 +311,10 @@ class PersonalTestCase(unittest.TestCase):
         result = self.person.political_views() + '\n'
         self.assertIn(result, pull('political_views', self.person.lang))
 
+    def test_avatar(self):
+        result = self.person.avatar()
+        self.assertTrue(len(result) > 20)
+
 
 class DatetimeTestCase(unittest.TestCase):
     def setUp(self):
@@ -311,7 +339,7 @@ class DatetimeTestCase(unittest.TestCase):
 
     def test_year(self):
         result = self.datetime.year(from_=2000, to_=2016)
-        self.assertTrue((result > 2000) and (result < 2016))
+        self.assertTrue((result >= 2000) and (result <= 2016))
 
     def test_periodicity(self):
         result = self.datetime.periodicity() + '\n'
@@ -484,6 +512,11 @@ class DevelopmentTestCase(unittest.TestCase):
     def test_os(self):
         result = self.dev.os() + '\n'
         self.assertIn(result, pull('os'))
+
+    def test_this(self):
+        result = self.dev.this()
+        self.assertIsInstance(result, str)
+        self.assertTrue(len(result) > 10)
 
 
 class FoodTestCase(unittest.TestCase):
