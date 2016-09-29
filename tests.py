@@ -25,6 +25,7 @@ class AddressTestCase(unittest.TestCase):
 
     def test_street_number(self):
         result = self.address.street_number()
+        print(result)
         self.assertTrue(re.match(r'[0-9]{1,5}$', result))
 
     def test_street_name(self):
@@ -34,6 +35,10 @@ class AddressTestCase(unittest.TestCase):
     def test_street_suffix(self):
         result = self.address.street_suffix() + '\n'
         self.assertIn(result, pull('street_suffix', self.address.lang))
+
+    def test_address(self):
+        result = self.address.address()
+        self.assertTrue(len(result) > 6)
 
     def test_state(self):
         result = self.address.state() + '\n'
@@ -320,7 +325,7 @@ class DatetimeTestCase(unittest.TestCase):
         self.assertLess(len(result_abbr), 6)
 
     def test_year(self):
-        result = self.datetime.year(from_=2000)
+        result = self.datetime.year(from_=2000, to_=2016)
         self.assertTrue(result > 2000)
 
     def test_periodicity(self):
