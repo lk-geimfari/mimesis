@@ -5,7 +5,7 @@
 """
 
 from datetime import date
-from random import choice, sample, randint
+from random import choice, sample, randint, uniform
 from string import digits, ascii_letters
 
 from .utils import pull
@@ -473,6 +473,36 @@ class Personal(object):
         if abbreviated:
             return choice(pull('gender', self.lang))[0:1]
         return choice(pull('gender', self.lang)).strip()
+
+    @staticmethod
+    def height(from_=1.5, to_=2.0):
+        """
+        Generate a random height in M.
+        :param from_: min value
+        :param to_: max value
+        :return: height. Example: 1.85
+        """
+        h = uniform(float(from_), float(to_))
+        return '{:0.2f}'.format(h)
+
+    @staticmethod
+    def weight(from_=38, to_=90):
+        """
+        Generate a random weight in KG.
+        :param from_: min value
+        :param to_: max value
+        :return: weight. Example: 74
+        """
+        w = randint(int(from_), int(to_))
+        return w
+
+    def sexual_orientation(self):
+        """
+        Get a random (LOL) sexual orientation.
+        :return: sexual orientation. Example: Heterosexuality
+        """
+        so = choice(pull('sexual_orientation', self.lang))
+        return so.strip()
 
     def profession(self):
         """
