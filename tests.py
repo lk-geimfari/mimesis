@@ -266,6 +266,20 @@ class PersonalTestCase(unittest.TestCase):
         result_abbr = self.person.gender(abbreviated=True) + '\n'
         self.assertEqual(len(result_abbr), 2)
 
+    def test_height(self):
+        result = self.person.height(from_=1.60, to_=1.90)
+        self.assertTrue(result.startswith('1'))
+        self.assertIsInstance(result, str)
+
+    def test_weight(self):
+        result = self.person.weight(from_=40, to_=60)
+        self.assertTrue((result >= 40) and (result <= 60))
+
+    def test_sexual_orientation(self):
+        result = self.person.sexual_orientation()
+        self.assertIn(
+            result + '\n', pull('sexual_orientation', self.person.lang))
+
     def test_profession(self):
         result = self.person.profession() + '\n'
         self.assertIn(result, pull('professions', self.person.lang))
