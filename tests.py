@@ -291,6 +291,10 @@ class PersonalTestCase(unittest.TestCase):
         result = self.person.political_views() + '\n'
         self.assertIn(result, pull('political_views', self.person.lang))
 
+    def test_avatar(self):
+        result = self.person.avatar()
+        self.assertTrue(len(result) > 20)
+
 
 class DatetimeTestCase(unittest.TestCase):
     def setUp(self):
