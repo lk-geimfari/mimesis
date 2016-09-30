@@ -182,7 +182,7 @@ class Text(object):
         import os.path as op
         path = op.abspath(op.join(op.dirname(__file__), 'data'))
 
-        with open(op.join(path + '/other', 'bad_input'), 'r') as f:
+        with open(op.join(path + '/other', 'naughty_strings'), 'r') as f:
             result = f.readlines()
             naughty_list = [x.strip(u'\n') for x in result]
 
@@ -913,7 +913,7 @@ class Development(object):
         front-end framework, else will be returned back-end framework.
         :return: framework or dict of used stack: Example:  Python/Django
         """
-        _file = 'front_frmwk' if _type.lower() == 'front' else 'back_frmwk'
+        _file = 'frontend' if _type.lower() == 'front' else 'backend'
         _framework = choice(pull(_file))
         return _framework.strip()
 
@@ -1078,7 +1078,8 @@ class Hardware(object):
         """
         _size = ['14″', '12.1″', '12″', '14.4″',
                  '15″', ' 15.7″', '13.3″', '13″',
-                 '17″', '15.4″', ' 14.1″']
+                 '17″', '15.4″', ' 14.1″'
+                 ]
         return choice(_size)
 
     @staticmethod

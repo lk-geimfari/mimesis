@@ -500,10 +500,10 @@ class DevelopmentTestCase(unittest.TestCase):
 
     def test_framework(self):
         result = self.dev.framework(_type='front') + '\n'
-        self.assertIn(result, pull('front_frmwk'))
+        self.assertIn(result, pull('frontend'))
 
         _result = self.dev.framework(_type='back') + '\n'
-        self.assertIn(_result, pull('back_frmwk'))
+        self.assertIn(_result, pull('backend'))
 
     def test_stack_of_tech(self):
         result = self.dev.stack_of_tech(nosql=True)
