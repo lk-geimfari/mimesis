@@ -183,8 +183,7 @@ class Text(object):
         path = op.abspath(op.join(op.dirname(__file__), 'data'))
 
         with open(op.join(path + '/other', 'naughty_strings'), 'r') as f:
-            result = f.readlines()
-            naughty_list = [x.strip(u'\n') for x in result]
+            naughty_list = [x.strip(u'\n') for x in f.readlines()]
 
         return naughty_list
 
@@ -217,8 +216,8 @@ class Text(object):
         :return: hex color code. Example: #D8346B
         """
         letters = '0123456789ABCDEF'
-        result = '#' + ''.join(sample(letters, 6))
-        return result
+        color_code = '#' + ''.join(sample(letters, 6))
+        return color_code
 
     def company_type(self, abbreviated=False):
         """
@@ -408,8 +407,8 @@ class Personal(object):
             else:
                 return choice(pull('nsfw_subreddits'))
         _subreddit = choice(pull('subreddits'))
-        _result = url + _subreddit if full_url else _subreddit
-        return _result
+        _r = url + _subreddit if full_url else _subreddit
+        return _r
 
     @staticmethod
     def bitcoin(address_format='p2pkh'):
@@ -440,6 +439,19 @@ class Personal(object):
         """
         card = ' '.join([str(randint(1000, 9999)) for i in range(0, 4)])
         return card.strip()
+
+    @staticmethod
+    def credit_card_expiration_date(from_=16, to_=25):
+        """
+        Generate a random expiration date for credit card.
+        :param from_:
+        :param to_: maximum of expiration_date
+        :return: expiration date. Example: 03/19
+        """
+        month = randint(1, 12)
+        year = randint(int(from_), int(to_))
+        month = '0' + str(month) if month < 10 else month
+        return '{0}/{1}'.format(month, year)
 
     @staticmethod
     def cid():
