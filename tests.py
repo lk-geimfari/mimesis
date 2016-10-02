@@ -120,6 +120,14 @@ class TextTestCase(unittest.TestCase):
         result = self.data.company() + '\n'
         self.assertIn(result, pull('company', self.data.lang))
 
+    def test_copyright(self):
+        result = self.data.copyright()
+        copyright_symbol = '©'
+        self.assertIn(copyright_symbol, result)
+
+        result = self.data.copyright(without_date=True)
+        self.assertFalse(any(char.isdigit() for char in result))
+
     def test_emoji(self):
         result = self.data.emoji() + '\n'
         self.assertIn(result, pull('emoji'))
