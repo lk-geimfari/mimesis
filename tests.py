@@ -258,6 +258,11 @@ class PersonalTestCase(unittest.TestCase):
         result = self.person.credit_card_number()
         self.assertTrue(re.match(r'[\d]+((-|\s)?[\d]+)+', result))
 
+    def test_expiration_date(self):
+        result = self.person.credit_card_expiration_date(from_=16, to_=25)
+        year = result.split('/')[1]
+        self.assertTrue((int(year) >= 16) and (int(year) <= 25))
+
     def test_cid(self):
         result = self.person.cid()
         self.assertTrue((1000 <= result) and (result <= 9999))
