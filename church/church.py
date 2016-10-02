@@ -238,6 +238,22 @@ class Text(object):
         company = choice(pull('company', self.lang))
         return company.strip()
 
+    def copyright(self, from_=1990, to_=2016, without_date=False):
+        """
+        Generate a random copyright.
+        :param from_: foundation date
+        :param to_: current date
+        :param without_date: if True then will be returned
+        copyright without date.
+        :return: copyright. Example: © 1990-2016 Komercia, Inc.
+        """
+        founded = randint(int(from_), int(to_))
+        company = self.company()
+        company_type = self.company_type(abbreviated=True)
+        if without_date:
+            return '© {}, {}'.format(company, company_type)
+        return '© {0}-{1} {2}, {3}'.format(founded, to_, company, company_type)
+
     @staticmethod
     def emoji():
         """
@@ -432,13 +448,21 @@ class Personal(object):
         return randint(100, 999)
 
     @staticmethod
-    def credit_card_number():
+    def credit_card_number(card_type='visa'):
         """
-        Generate a random credit card number for Visa or MasterCard
-        :return: credit card. Example: 3519 2073 7960 3241
+        Generate a random credit card number.
+        :param card_type: Issuing Network. Default is Visa
+        :return: credit card number. Example: 4455 5299 1152 2450
         """
-        card = ' '.join([str(randint(1000, 9999)) for i in range(0, 4)])
-        return card.strip()
+        visa = randint(4000, 4999)
+        mc = choice([randint(2221, 2720), randint(5100, 5500)])
+
+        # Issuer identification number.
+        # Read more: http://bit.ly/2dBhNcX
+        iin = mc if card_type.lower() == 'mastercard' or 'mc' else visa
+
+        tail = ''.join([str(randint(0000, 9999)) for _ in range(0, 3)])
+        return '{0} {1}'.format(str(iin), tail)
 
     @staticmethod
     def credit_card_expiration_date(from_=16, to_=25):
