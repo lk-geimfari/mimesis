@@ -530,11 +530,6 @@ class DevelopmentTestCase(unittest.TestCase):
         result = self.dev.os() + '\n'
         self.assertIn(result, pull('os'))
 
-    def test_this(self):
-        result = self.dev.this()
-        self.assertIsInstance(result, str)
-        self.assertTrue(len(result) > 10)
-
 
 class FoodTestCase(unittest.TestCase):
     def setUp(self):
