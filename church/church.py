@@ -769,13 +769,13 @@ class Network(object):
         :return: Random MAC address.
         Example: 00:16:3e:25:e7:b1
         """
-        mac = [0x00, 0x16, 0x3e,
-               randint(0x00, 0x7f),
-               randint(0x00, 0xff),
-               randint(0x00, 0xff)
-               ]
-        _mac = map(lambda x: "{:02x}".format(x), mac)
-        return ':'.join(_mac)
+        mac_hex = [0x00, 0x16, 0x3e,
+                   randint(0x00, 0x7f),
+                   randint(0x00, 0xff),
+                   randint(0x00, 0xff)
+                   ]
+        mac = map(lambda x: "%02x" % x, mac_hex)
+        return ':'.join(mac)
 
     @staticmethod
     def user_agent():
