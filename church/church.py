@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
 """
 :copyright: (c) 2016 by Lk Geimfari.
-:software_license: MIT, see LICENSE for more details.
+:software_license: MIT, see LICENSES for more details.
 """
 
 from datetime import date
 from random import choice, sample, randint, uniform
 from string import digits, ascii_letters
 
+import church._common as common
 from .utils import pull
 
 # pull - is internal function,
@@ -202,7 +203,7 @@ class Text(object):
         Get a currency code. ISO 4217 format.
         :return: Currency code. Example: RUR
         """
-        return choice(pull('currency', 'en_us')).strip()
+        return choice(common.CURRENCY)
 
     def color(self):
         """
@@ -259,11 +260,10 @@ class Text(object):
     @staticmethod
     def emoji():
         """
-        Get a random emoji shortcut code.
+        Get a random EMOJI shortcut code.
         :return: Emoji code. Example: :kissing:
         """
-        _shortcut = choice(pull('emoji', 'en_us'))
-        return _shortcut.strip()
+        return choice(common.EMOJI)
 
     @staticmethod
     def image_placeholder(width='400', height='300'):
@@ -399,7 +399,7 @@ class Personal(object):
         """
         gender = 'm' if gender.lower() == 'm' else 'f'
         name = Personal.username(gender=gender)
-        email_adders = name + choice(pull('email', 'en_us'))
+        email_adders = name + choice(common.EMAIL_DOMAINS)
         return email_adders.strip()
 
     def home_page(self):
@@ -423,23 +423,22 @@ class Personal(object):
         url = 'http://www.reddit.com'
         if nsfw:
             if full_url:
-                return url + choice(pull('nsfw_subreddits'))
+                return url + choice(common.SUBREDDITS_NSFW)
             else:
-                return choice(pull('nsfw_subreddits'))
-        _subreddit = choice(pull('subreddits'))
+                return choice(common.SUBREDDITS_NSFW)
+        _subreddit = choice(common.SUBREDDITS)
         _r = url + _subreddit if full_url else _subreddit
         return _r
 
     @staticmethod
-    def bitcoin(address_format='p2pkh'):
+    def bitcoin():
         """
         Get a random bitcoin address.
         Currently supported only two address formats that are most popular.
         It's 'P2PKH' and 'P2SH'
-        :param address_format: bitcoin address format. Default is 'P2PKH'
         :return: Bitcoin address. Example: 3EktnHQD7RiAE6uzMj2ZifT9YgRrkSgzQX
         """
-        _fmt = '1' if address_format.lower() == 'p2pkh' else '3'
+        _fmt = choice(['1', '3'])
         _fmt += "".join([choice(ascii_letters + digits) for _ in range(33)])
         return _fmt
 
@@ -646,7 +645,7 @@ class Personal(object):
         """
         Generate a random phone number.
         :param mask: Mask for formatting number.
-        :param placeholder: A placeholder for mask.
+        :param placeholder: A Placeholder for a mask.
         :return: Phone number. Example: +7-(963)-409-11-22.
         """
         if not mask:
@@ -749,7 +748,7 @@ class Network(object):
         Static method for generate a random IPv4 address.
         :return: Random IPv4 address.
         """
-        ip = '.'.join([str(randint(0, 255)) for i in range(0, 4)])
+        ip = '.'.join([str(randint(0, 255)) for _ in range(0, 4)])
         return ip.strip()
 
     @staticmethod
@@ -757,21 +756,25 @@ class Network(object):
         """
         Static method for generate a random IPv6 address.
         :return: Random IPv6 address.
+        Example: 2001:c244:cf9d:1fb1:c56d:f52c:8a04:94f3
         """
-        return "2001:" + ":".join("%x" % randint(0, 16 ** 4) for _ in range(7))
+        n = 16 ** 4
+        ip = "2001:" + ":".join("%x" % randint(0, n) for _ in range(7))
+        return ip
 
     @staticmethod
     def mac_address():
         """
         Static method for generate a random MAC address.
-        :return: Random MAC address
+        :return: Random MAC address.
+        Example: 00:16:3e:25:e7:b1
         """
         mac = [0x00, 0x16, 0x3e,
                randint(0x00, 0x7f),
                randint(0x00, 0xff),
                randint(0x00, 0xff)
                ]
-        _mac = map(lambda x: "%02x" % x, mac)
+        _mac = map(lambda x: "{:02x}".format(x), mac)
         return ':'.join(_mac)
 
     @staticmethod
@@ -805,43 +808,9 @@ class File(object):
             8. compressed = '.zip', '.7z', '.tar.xz' and other.
         :return: Extension of a file. Example (file_type='source'): .py
         """
-        _type = file_type.lower()
+        _type = file_type.upper()
 
-        source = [
-            '.a', '.asm', '.asp', '.awk', '.c', '.class',
-            '.cpp', '.pl', '.js', '.java', '.clj', '.py',
-            '.rb', '.hs', '.erl', '.rs', '.swift', '.html',
-            '.json', '.xml', '.css', '.php', '.jl', '.r',
-            '.cs', 'd', '.lisp', '.cl', '.go', '.h', '.scala',
-            '.sc', '.ts', '.sql'
-        ]
-        text = ['.doc', '.docx', '.log', '.rtf', '.md',
-                '.pdf', '.odt', '.txt'
-                ]
-
-        data = ['.csv', '.dat', '.ged', '.pps', '.ppt', '.pptx']
-        audio = ['.flac', '.mp3', '.m3u', '.m4a', '.wav', '.wma']
-        video = ['.3gp', '.mp4', '.abi', '.m4v', '.mov', '.mpg', '.wmv']
-        image = ['.bmp', '.jpg', '.jpeg', '.png', '.svg']
-        executable = ['.apk', '.app', '.bat', '.jar', '.com', '.exe']
-        compressed = ['.7z', '.war', '.zip', '.tar.gz', '.tar.xz', '.rar']
-
-        if _type == 'source':
-            return choice(source)
-        elif _type == 'data':
-            return choice(data)
-        elif _type == 'audio':
-            return choice(audio)
-        elif _type == 'video':
-            return choice(video)
-        elif _type == 'image':
-            return choice(image)
-        elif _type == 'executable':
-            return choice(executable)
-        elif _type == 'compressed':
-            return choice(compressed)
-        else:
-            return choice(text)
+        return choice(common.EXTENSIONS[_type])
 
 
 class Science(object):
@@ -858,7 +827,7 @@ class Science(object):
         Get a random mathematical formula.
         :return: Math formula. For example: A = (ab)/2
         """
-        formula = choice(pull('math_formula', 'en_us'))
+        formula = choice(common.MATH_FORMULAS)
         return formula.strip()
 
     def chemical_element(self, name_only=True):
@@ -910,18 +879,7 @@ class Development(object):
         Get a random software license from list.
         :return:
         """
-        _license = [
-            'Apache License, 2.0 (Apache-2.0)',
-            'The BSD 3-Clause License',
-            'The BSD 2-Clause License',
-            'GNU General Public License (GPL)',
-            'General Public License (LGPL),'
-            'MIT software_license (MIT)',
-            'Mozilla Public License 2.0 (MPL-2.0)',
-            'Common Development and Distribution License (CDDL-1.0)',
-            'Eclipse Public License (EPL-1.0)'
-        ]
-        return choice(_license)
+        return choice(common.LICENSES)
 
     @staticmethod
     def database(nosql=False):
@@ -930,16 +888,9 @@ class Development(object):
         :param nosql: only NoSQL databases.
         :return: Database name. Example: PostgreSQL.
         """
-        _nosql = [
-            'MongoDB', 'RethinkDB', 'Couchbase', 'CouchDB',
-            'Aerospike', 'MemcacheDB', 'MUMPS,  Riak', 'Redis',
-            'AllegroGraph', 'Neo4J', 'InfiniteGraph'
-        ]
-
-        _sql = ['MariaDB', 'MySQL', 'PostgreSQL', 'Oracle DB', 'SQLite']
         if nosql:
-            return choice(_nosql)
-        return choice(_sql)
+            return choice(common.NOSQL)
+        return choice(common.SQL)
 
     @staticmethod
     def other():
@@ -947,14 +898,7 @@ class Development(object):
         Get a random value list.
         :return: Some other technology. Example: Nginx
         """
-        other_tech = [
-            'Docker', 'Rkt', 'LXC', 'Vagrant',
-            'Elasticsearch', 'Nginx', 'Git',
-            'Jira', 'REST', 'Apache Hadoop',
-            'Scrum', 'Redmine', 'Mercurial',
-            'Apache Kafka', 'Apache Spark'
-        ]
-        return choice(other_tech)
+        return choice(common.OTHER_TECH)
 
     @staticmethod
     def programming_language():
@@ -962,7 +906,7 @@ class Development(object):
         Get a random programming language from list.
         :return: Programming language. Example: Erlang
         """
-        return choice(pull('pro_lang', 'en_us')).strip()
+        return choice(common.PROGRAMMING_LANGS)
 
     @staticmethod
     def framework(_type='back'):
@@ -972,9 +916,10 @@ class Development(object):
         front-end framework, else will be returned back-end framework.
         :return: Framework or dict of used stack: Example:  Python/Django.
         """
-        _file = 'frontend' if _type.lower() == 'front' else 'backend'
-        _framework = choice(pull(_file))
-        return _framework.strip()
+        if _type == 'front':
+            return choice(common.FRONTEND)
+        else:
+            return choice(common.BACKEND)
 
     def stack_of_tech(self, nosql=False):
         """
@@ -996,21 +941,12 @@ class Development(object):
         return _stack
 
     @staticmethod
-    def github_repo():
-        """
-        Get a random link to github repository.
-        :return: Link to repository.
-        Example: https://github.com/lk-geimfari/church
-        """
-        return choice(pull('github_repos')).strip()
-
-    @staticmethod
     def os():
         """
         Get a random operating system or distributive name.
-        :return: os name. Example: Gentoo
+        :return: The name of OS. Example: Gentoo
         """
-        return choice(pull('os')).strip()
+        return choice(common.OS)
 
 
 class Food(object):
@@ -1108,17 +1044,7 @@ class Hardware(object):
         Get a random screen resolution.
         :return: Resolution of screen. Example: 1280x720.
         """
-        _res = ['1152x768', '1280x854', '1440x960',
-                '2880x1920', '1024x768', '1152x864',
-                '1280x960', '1400x1050', '1600x1200',
-                '2048x1536', '3200x2400', '1280x768',
-                '1280x1024', '2560x2048', '1280x720',
-                '1365x768', '1600x900', '1920x1080',
-                '1280x800', '1440x900', '1680x1050',
-                '1920x1200', '2560x1600'
-                ]
-
-        return choice(_res)
+        return choice(common.RESOLUTIONS)
 
     @staticmethod
     def screen_size():
@@ -1126,11 +1052,7 @@ class Hardware(object):
         Get a random size of screen in inch.
         :return: Screen size. Example: 13″.
         """
-        _size = ['14″', '12.1″', '12″', '14.4″',
-                 '15″', ' 15.7″', '13.3″', '13″',
-                 '17″', '15.4″', ' 14.1″'
-                 ]
-        return choice(_size)
+        return choice(common.SCREEN_SIZES)
 
     @staticmethod
     def cpu():
@@ -1138,10 +1060,7 @@ class Hardware(object):
         Get a random CPU name.
         :return: CPU name. Example: Intel® Core i7
         """
-        _cpu = ['Intel® Core i3',
-                'Intel® Core i5',
-                'Intel® Core i7']
-        return choice(_cpu)
+        return choice(common.CPU)
 
     @staticmethod
     def cpu_frequency():
@@ -1149,11 +1068,7 @@ class Hardware(object):
         Get a random frequency of CPU.
         :return: frequency. Example: 4.0 GHz
         """
-        _c = ['3.50', '3.67', '2.2', '1.6',
-              '2.7', '2.8', '3.2', '3.0',
-              '2.5', '2.9', '2.4', '4.0',
-              '3.8', '3.7', '3.9', '4.2',
-              '2.3', '2.9', '3.3', '3.1']
+        _c = common.CPU_FREQUENCY
         return choice(_c) + ' GHz'
 
     @staticmethod
@@ -1162,13 +1077,7 @@ class Hardware(object):
         Get a random generation.
         :return: Generation of something.
         """
-        _gn = ['2nd Generation',
-               '3rd Generation',
-               '4th Generation',
-               '5th Generation',
-               '6th Generation',
-               '7th Generation',
-               ]
+        _gn = common.GENERATION
         return choice(_gn)
 
     @staticmethod
@@ -1177,12 +1086,7 @@ class Hardware(object):
         Get a random CPU code name.
         :return: CPU code name. Example: .
         """
-        _cn = ['Ivytown', 'Haswell', 'Fortville',
-               'Devil\'s Canyon', 'Valley Island',
-               'Broadwell', 'Bay Trail', 'Skylake',
-               'Orchid Island', 'Bear Ridge',
-               'Cannonlake'
-               ]
+        _cn = common.CPU_CODENAMES
         return choice(_cn)
 
     @staticmethod
@@ -1207,17 +1111,7 @@ class Hardware(object):
         Get a random value from list.
         :return: HDD or SSD. Example: 512GB HDD.
         """
-        _hard = [
-            '64GB SSD', '128GB SSD',
-            '256GB SDD', '512GB SSD', '1024GB SSD',
-            '256GB HDD', '256GB HDD(7200 RPM)',
-            '256GB HDD(5400 RPM)', '512GB HDD',
-            '512GB HDD(7200 RPM)', '1TB HDD',
-            '1TB HDD(7200 RPM)', '1TB HDD + 64GB SSD',
-            '2TB HDD(7200 RPM)', '512 GB HDD + 32GB SSD',
-            '1TB HDD(7200 RPM) + 32GB SSD'
-        ]
-        return choice(_hard)
+        return choice(common.MEMORY)
 
     @staticmethod
     def graphics():
@@ -1225,37 +1119,7 @@ class Hardware(object):
         Get a random graphics.
         :return: Graphics. Example: Intel® Iris™ Pro Graphics 6200
         """
-        _g = ['Intel® HD Graphics 620',
-              'Intel® HD Graphics 615',
-              'Intel® Iris™ Pro Graphics 580',
-              'Intel® Iris™ Graphics 550'
-              'Intel® HD Graphics 520',
-              'Intel® Iris™ Pro Graphics 6200',
-              'Intel® Iris™ Graphics 6100',
-              'Intel® HD Graphics 6000',
-              'Intel® HD Graphics 5300 ',
-              'Intel® Iris™ Pro Graphics 5200',
-              'Intel® Iris™ Graphics 5100',
-              'Intel® HD Graphics 5500',
-              'Intel® HD Graphics 5000',
-              'Intel® HD Graphics 4600',
-              'Intel® HD Graphics 4400',
-              'Intel® HD Graphics 4000',
-              'Intel® HD Graphics 3000',
-              'NVIDIA GeForce GTX 1080',
-              'NVIDIA GeForce GTX 1070',
-              'NVIDIA GeForce GTX 1080',
-              'NVIDIA GeForce GTX 980',
-              'NVIDIA GeForce GTX 1070',
-              'NVIDIA GeForce GTX 980M',
-              'NVIDIA GeForce GTX 980',
-              'NVIDIA GeForce GTX 970M',
-              'NVIDIA GeForce GTX 880M',
-              'AMD Radeon R9 M395X',
-              'AMD Radeon R9 M485X',
-              'AMD Radeon R9 M395'
-              ]
-        return choice(_g)
+        return choice(common.GRAPHICS)
 
     @staticmethod
     def manufacturer():
@@ -1263,11 +1127,7 @@ class Hardware(object):
         Get a random manufacturer.
         :return: Manufacturer. Example: Dell
         """
-        _m = ['Acer', 'Dell', 'ASUS',
-              'VAIO', 'Lenovo', 'HP',
-              'Toshiba', 'Sony', 'Samsung',
-              'Fujitsu', 'Apple']
-        return choice(_m)
+        return choice(common.MANUFACTURERS)
 
     def hardware_full_info(self):
         """
@@ -1291,5 +1151,4 @@ class Hardware(object):
         Get a random phone model.
         :return: Phone model. Example: Nokia Lumia 920
         """
-        _model = choice(pull('phone_models', 'en_us'))
-        return _model.strip()
+        return choice(common.PHONE_MODELS)

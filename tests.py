@@ -7,6 +7,7 @@ from church.church import (
     Development, Food, Hardware
 )
 from church.utils import pull
+import church._common as common
 
 LANG = 'en_us'
 
@@ -101,8 +102,8 @@ class TextTestCase(unittest.TestCase):
         self.assertIn(result, pull('quotes', self.data.lang))
 
     def test_currency_sio(self):
-        result = self.data.currency_iso() + '\n'
-        self.assertIn(result, pull('currency', 'en_us'))
+        result = self.data.currency_iso()
+        self.assertIn(result, common.CURRENCY)
 
     def test_color(self):
         result = self.data.color() + '\n'
@@ -113,8 +114,8 @@ class TextTestCase(unittest.TestCase):
         self.assertIn('#', result)
 
     def test_company_type(self):
-        result = self.data.company_type(abbreviated=True)
-        self.assertTrue(len(result) < 7)
+        result = self.data.company_type()
+        self.assertTrue(len(result) > 8)
 
     def test_company(self):
         result = self.data.company() + '\n'
@@ -129,8 +130,8 @@ class TextTestCase(unittest.TestCase):
         self.assertFalse(any(char.isdigit() for char in result))
 
     def test_emoji(self):
-        result = self.data.emoji() + '\n'
-        self.assertIn(result, pull('emoji'))
+        result = self.data.emoji()
+        self.assertIn(result, common.EMOJI)
 
 
 class PersonalTestCase(unittest.TestCase):
@@ -153,7 +154,7 @@ class PersonalTestCase(unittest.TestCase):
 
     def test_telephone(self):
         result = self.person.telephone()
-        self.assertTrue(len(result) >= 11 )
+        self.assertTrue(len(result) >= 11)
 
     def test_surname(self):
         if self.person.lang == 'ru_ru':
@@ -234,13 +235,13 @@ class PersonalTestCase(unittest.TestCase):
 
     def test_subreddit(self):
         result = self.person.subreddit()
-        self.assertIn(result, pull('subreddits'))
+        self.assertIn(result, common.SUBREDDITS)
 
         full_result = self.person.subreddit(full_url=True)
         self.assertTrue(len(full_result) > 20)
 
         result_nsfw = self.person.subreddit(nsfw=True)
-        self.assertIn(result_nsfw, pull('nsfw_subreddits'))
+        self.assertIn(result_nsfw, common.SUBREDDITS_NSFW)
 
         full_result = self.person.subreddit(nsfw=True, full_url=True)
         self.assertTrue(len(full_result) > 20)
@@ -248,12 +249,6 @@ class PersonalTestCase(unittest.TestCase):
     def test_bitcoin(self):
         result = self.person.bitcoin()
         self.assertEqual(len(result), 34)
-
-        p2pkh = self.person.bitcoin(address_format='p2pkh')
-        self.assertEqual(p2pkh[0], '1')
-
-        p2sh = self.person.bitcoin(address_format='p2sh')
-        self.assertEqual(p2sh[0], '3')
 
     def test_cvv(self):
         result = self.person.cvv()
@@ -412,15 +407,8 @@ class FileTestCase(unittest.TestCase):
         del self.file
 
     def test_extension(self):
-        source = self.file.extension('source')
-        self.assertLess(len(source), 10)
-
-        _text = self.file.extension()
-        text = ['.doc', '.docx', '.log',
-                '.rtf', '.md', '.pdf',
-                '.odt', '.txt'
-                ]
-        self.assertIn(_text, text)
+        text = self.file.extension()
+        self.assertIn(text, common.EXTENSIONS['TEXT'])
 
 
 class ScienceTestCase(unittest.TestCase):
@@ -431,8 +419,8 @@ class ScienceTestCase(unittest.TestCase):
         del self.science
 
     def test_math_formula(self):
-        result = self.science.math_formula() + '\n'
-        self.assertIn(result, pull('math_formula', 'en_us'))
+        result = self.science.math_formula()
+        self.assertIn(result, common.MATH_FORMULAS)
 
     def test_article_on_wiki(self):
         result = self.science.article_on_wiki() + '\n'
@@ -458,74 +446,38 @@ class DevelopmentTestCase(unittest.TestCase):
         del self.dev
 
     def test_license(self):
-        _license = [
-            'Apache License, 2.0 (Apache-2.0)',
-            'The BSD 3-Clause License',
-            'The BSD 2-Clause License',
-            'GNU General Public License (GPL)',
-            'General Public License (LGPL),'
-            'MIT software_license (MIT)',
-            'Mozilla Public License 2.0 (MPL-2.0)',
-            'Common Development and Distribution License (CDDL-1.0)',
-            'Eclipse Public License (EPL-1.0)'
-        ]
-
         result = self.dev.software_license()
-        self.assertIn(result, _license)
+        self.assertIn(result, common.LICENSES)
 
     def test_programming_language(self):
-        result = self.dev.programming_language() + '\n'
-        self.assertIn(result, pull('pro_lang', 'en_us'))
+        result = self.dev.programming_language()
+        self.assertIn(result, common.PROGRAMMING_LANGS)
 
     def test_database(self):
-        _sql = ['MariaDB', 'MySQL', 'PostgreSQL',
-                'Oracle DB', 'SQLite'
-                ]
-
         result = self.dev.database()
-        self.assertIn(result, _sql)
+        self.assertIn(result, common.SQL)
 
-        _nosql = ['MongoDB', 'RethinkDB',
-                  'Couchbase', 'CouchDB',
-                  'Aerospike', 'MemcacheDB',
-                  'MUMPS,  Riak', 'Redis',
-                  'AllegroGraph', 'Neo4J',
-                  'InfiniteGraph'
-                  ]
         _result = self.dev.database(nosql=True)
-        self.assertIn(_result, _nosql)
+        self.assertIn(_result, common.NOSQL)
 
     def test_other(self):
-        _list = ['Docker', 'Rkt',
-                 'LXC', 'Vagrant',
-                 'Elasticsearch',
-                 'Nginx', 'Git',
-                 'Mercurial', 'Jira',
-                 'REST', 'Apache Hadoop',
-                 'Scrum', 'Redmine',
-                 'Apache Spark', 'Apache Kafka'
-                 ]
         result = self.dev.other()
-        self.assertIn(result, _list)
+        self.assertIn(result, common.OTHER_TECH)
 
     def test_framework(self):
-        result = self.dev.framework(_type='front') + '\n'
-        self.assertIn(result, pull('frontend'))
+        result = self.dev.framework(_type='front')
+        self.assertIn(result, common.FRONTEND)
 
-        _result = self.dev.framework(_type='back') + '\n'
-        self.assertIn(_result, pull('backend'))
+        _result = self.dev.framework(_type='back')
+        self.assertIn(_result, common.BACKEND)
 
     def test_stack_of_tech(self):
         result = self.dev.stack_of_tech(nosql=True)
         self.assertIsInstance(result, dict)
 
-    def test_github_repo(self):
-        url = self.dev.github_repo() + '\n'
-        self.assertIn(url, pull('github_repos'))
-
     def test_os(self):
-        result = self.dev.os() + '\n'
-        self.assertIn(result, pull('os'))
+        result = self.dev.os()
+        self.assertIn(result, common.OS)
 
 
 class FoodTestCase(unittest.TestCase):
@@ -572,61 +524,28 @@ class HardwareTestCase(unittest.TestCase):
         del self.hard
 
     def test_resolution(self):
-        resolution = ['1152x768', '1280x854', '1440x960',
-                      '2880x1920', '1024x768', '1152x864',
-                      '1280x960', '1400x1050', '1600x1200',
-                      '2048x1536', '3200x2400', '1280x768',
-                      '1280x1024', '2560x2048', '1280x720',
-                      '1365x768', '1600x900', '1920x1080',
-                      '1280x800', '1440x900', '1680x1050',
-                      '1920x1200', '2560x1600'
-                      ]
-        _result = self.hard.resolution()
-        self.assertIn(_result, resolution)
+        result = self.hard.resolution()
+        self.assertIn(result, common.RESOLUTIONS)
 
     def test_screen_size(self):
-        sizes = ['14″', '12.1″', '12″', '14.4″',
-                 '15″', ' 15.7″', '13.3″', '13″',
-                 '17″', '15.4″', ' 14.1″']
         result = self.hard.screen_size()
-        self.assertIn(result, sizes)
+        self.assertIn(result, common.SCREEN_SIZES)
 
     def test_generation(self):
-        gn = ['2nd Generation',
-              '3rd Generation',
-              '4th Generation',
-              '5th Generation',
-              '6th Generation',
-              '7th Generation',
-              ]
         result = self.hard.generation()
-        self.assertIn(result, gn)
+        self.assertIn(result, common.GENERATION)
 
     def test_cpu_frequency(self):
-        f = ['3.50', '3.67', '2.2', '1.6',
-             '2.7', '2.8', '3.2', '3.0',
-             '2.5', '2.9', '2.4', '4.0',
-             '3.8', '3.7', '3.9', '4.2',
-             '2.3', '2.9', '3.3', '3.1']
         result = self.hard.cpu_frequency().split(' ')[0]
-        self.assertIn(result, f)
+        self.assertIn(result, common.CPU_FREQUENCY)
 
     def test_cpu(self):
-        cpu = ['Intel® Core i3',
-               'Intel® Core i5',
-               'Intel® Core i7']
         result = self.hard.cpu()
-        self.assertIn(result, cpu)
+        self.assertIn(result, common.CPU)
 
     def test_cpu_codename(self):
-        code_name = ['Ivytown', 'Haswell', 'Fortville',
-                     'Devil\'s Canyon', 'Valley Island',
-                     'Broadwell', 'Bay Trail', 'Skylake',
-                     'Orchid Island', 'Bear Ridge',
-                     'Cannonlake'
-                     ]
         result = self.hard.cpu_codename()
-        self.assertIn(result, code_name)
+        self.assertIn(result, common.CPU_CODENAMES)
 
     def test_ram_type(self):
         result = self.hard.ram_type()
@@ -637,64 +556,21 @@ class HardwareTestCase(unittest.TestCase):
         self.assertGreater(len(result), 0)
 
     def test_ssd_or_hdd(self):
-        _hard = [
-            '64GB SSD', '128GB SSD',
-            '256GB SDD', '512GB SSD', '1024GB SSD',
-            '256GB HDD', '256GB HDD(7200 RPM)',
-            '256GB HDD(5400 RPM)', '512GB HDD',
-            '512GB HDD(7200 RPM)', '1TB HDD',
-            '1TB HDD(7200 RPM)', '1TB HDD + 64GB SSD',
-            '2TB HDD(7200 RPM)', '512 GB HDD + 32GB SSD',
-            '1TB HDD(7200 RPM) + 32GB SSD']
         result = self.hard.ssd_or_hdd()
-        self.assertIn(result, _hard)
+        self.assertIn(result, common.MEMORY)
 
     def test_graphics(self):
-        _g = ['Intel® HD Graphics 620',
-              'Intel® HD Graphics 615',
-              'Intel® Iris™ Pro Graphics 580',
-              'Intel® Iris™ Graphics 550'
-              'Intel® HD Graphics 520',
-              'Intel® Iris™ Pro Graphics 6200',
-              'Intel® Iris™ Graphics 6100',
-              'Intel® HD Graphics 6000',
-              'Intel® HD Graphics 5300 ',
-              'Intel® Iris™ Pro Graphics 5200',
-              'Intel® Iris™ Graphics 5100',
-              'Intel® HD Graphics 5500',
-              'Intel® HD Graphics 5000',
-              'Intel® HD Graphics 4600',
-              'Intel® HD Graphics 4400',
-              'Intel® HD Graphics 4000',
-              'Intel® HD Graphics 3000',
-              'NVIDIA GeForce GTX 1080',
-              'NVIDIA GeForce GTX 1070',
-              'NVIDIA GeForce GTX 1080',
-              'NVIDIA GeForce GTX 980',
-              'NVIDIA GeForce GTX 1070',
-              'NVIDIA GeForce GTX 980M',
-              'NVIDIA GeForce GTX 980',
-              'NVIDIA GeForce GTX 970M',
-              'NVIDIA GeForce GTX 880M',
-              'AMD Radeon R9 M395X',
-              'AMD Radeon R9 M485X',
-              'AMD Radeon R9 M395'
-              ]
         result = self.hard.graphics()
-        self.assertIn(result, _g)
+        self.assertIn(result, common.GRAPHICS)
 
     def test_manufacturer(self):
-        _m = ['Acer', 'Dell', 'ASUS',
-              'VAIO', 'Lenovo', 'HP',
-              'Toshiba', 'Sony', 'Samsung',
-              'Fujitsu', 'Apple']
         result = self.hard.manufacturer()
-        self.assertIn(result, _m)
+        self.assertIn(result, common.MANUFACTURERS)
 
     def test_hardware_full(self):
         result = self.hard.hardware_full_info()
         self.assertGreater(len(result), 15)
 
     def test_phone_model(self):
-        result = self.hard.phone_model() + '\n'
-        self.assertIn(result, pull('phone_models', 'en_us'))
+        result = self.hard.phone_model()
+        self.assertIn(result, common.PHONE_MODELS)
