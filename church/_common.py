@@ -955,13 +955,13 @@ EMOJI = [
     ":shipit:"
 ]
 
-EMAIL_DOMAINS = [
+EMAIL_DOMAINS = (
     "@gmail.com",
     "@yandex.com",
     "@yahoo.com",
     "@live.com",
     "@outlook.com"
-]
+)
 
 OS = [
     "Arch",
@@ -1503,7 +1503,7 @@ PROGRAMMING_LANGS = [
     "Z shell"
 ]
 
-NOSQL = [
+NOSQL = (
     "MongoDB",
     "RethinkDB",
     "Couchbase",
@@ -1515,15 +1515,15 @@ NOSQL = [
     "AllegroGraph",
     "Neo4J",
     "InfiniteGraph"
-]
+)
 
-SQL = [
+SQL = (
     "MariaDB",
     "MySQL",
     "PostgreSQL",
     "Oracle DB",
     "SQLite"
-]
+)
 
 OTHER_TECH = [
     "Docker",
@@ -1678,7 +1678,7 @@ RESOLUTIONS = [
     "2560x1600"
 ]
 
-SCREEN_SIZES = [
+SCREEN_SIZES = (
     "14″",
     "12.1″",
     "12″",
@@ -1690,13 +1690,13 @@ SCREEN_SIZES = [
     "17″",
     "15.4″",
     "14.1″"
-]
+)
 
-CPU = [
+CPU = (
     "Intel® Core i3",
     "Intel® Core i5",
     "Intel® Core i7"
-]
+)
 
 CPU_FREQUENCY = [
     "3.50",
@@ -1721,22 +1721,22 @@ CPU_FREQUENCY = [
     "3.1"
 ]
 
-GENERATION = [
+GENERATION = (
     '2nd Generation',
     '3rd Generation',
     '4th Generation',
     '5th Generation',
     '6th Generation',
     '7th Generation',
-]
+)
 
-CPU_CODENAMES = [
+CPU_CODENAMES = (
     'Ivytown', 'Haswell', 'Fortville',
     'Devil\'s Canyon', 'Valley Island',
     'Broadwell', 'Bay Trail', 'Skylake',
     'Orchid Island', 'Bear Ridge',
     'Cannonlake'
-]
+)
 
 MEMORY = [
     "64GB SSD",
@@ -1789,7 +1789,7 @@ GRAPHICS = [
     "AMD Radeon R9 M395"
 ]
 
-MANUFACTURERS = [
+MANUFACTURERS = (
     "Acer",
     "Dell",
     "ASUS",
@@ -1801,7 +1801,7 @@ MANUFACTURERS = [
     "Samsung",
     "Fujitsu",
     "Apple"
-]
+)
 
 CURRENCY = [
     "AED",
@@ -1929,4 +1929,148 @@ CURRENCY = [
     "ZAR",
     "ZAR",
     "ZMK"
+]
+
+BLOOD_GROUPS = (
+    'O+', 'A+', 'B+', 'AB+',
+    'O−', 'A−', 'B−', 'AB−'
+)
+
+THE_VEHICLES = [
+    "Ford Model T",
+    "Volkswagen Beetle",
+    "Toyota Corolla",
+    "Ford Falcon",
+    "Volkswagen Gol",
+    "Volkswagen Santana",
+    "Škoda Octavia",
+    "Renault Clio",
+    "Volkswagen Golf",
+    "Hindustan Ambassador",
+    "Fiat Uno",
+    "Toyota Corolla",
+    "Perodua Myvi",
+    "SEAT Ibiza",
+    "Volvo 200 Series",
+    "Renault Symbol",
+    "ZAZ Zaporozhets",
+    "Morris Mini",
+    "Ford F-Series",
+    "Alfa Romeo Alfasud",
+    "Alpine A310",
+    "AMC Hornet",
+    "Aston Martin DB7",
+    "Autobianchi A112",
+    "BMW 3 Series",
+    "Buick LeSabre",
+    "Bugatti Type 40",
+    "Cadillac De Ville",
+    "Checker Marathon",
+    "Chevrolet Impala",
+    "Chrysler Newport",
+    "Citroën 2CV",
+    "Continental Mark II",
+    "Crosley",
+    "DeSoto Custom",
+    "De Tomaso Pantera",
+    "Dodge Coronet",
+    "Eagle Talon",
+    "Edsel Ranger",
+    "Excalibur Series II",
+    "Facellia",
+    "Ferrari 360",
+    "Fiat Uno",
+    "Ford F-Series",
+    "Frazer Standard",
+    "Henry J Deluxe",
+    "Hindustan Ambassador",
+    "Holden Commodore",
+    "Honda Civic",
+    "Hudson Super",
+    "Imperial Crown",
+    "Jaguar XJ",
+    "Jeep Cherokee (XJ)",
+    "Kaiser Deluxe",
+    "Koenigsegg CCX",
+    "Lada Riva",
+    "Series/Defender",
+    "Lamborghini Gallardo",
+    "Lancia Ypsilon",
+    "Lincoln Town Car",
+    "Lotus Elise",
+    "McLaren 12C",
+    "Maserati Biturbo",
+    "Mazda Familia",
+    "Mercedes-Benz C-Class",
+    "Mercury Grand Marquis",
+    "Messerschmitt KR200",
+    "Metropolitan",
+    "Mitsubishi Lancer",
+    "Nash Statesman",
+    "Oldsmobile Cutlass",
+    "Opel Corsa",
+    "Packard Eight",
+    "Peel Trident",
+    "Perodua Myvi",
+    "Peugeot 206",
+    "Plymouth Fury",
+    "Pontiac Grand Am",
+    "Porsche 911",
+    "Rambler Classic",
+    "Renault Clio",
+    "Rolls-Royce Silver Shadow",
+    "Saab 900",
+    "Saturn S-Series",
+    "SEAT Ibiza",
+    "Simca 1100",
+    "Smart Fortwo",
+    "Studebaker Champion",
+    "Subaru Legacy",
+    "Škoda Octavia",
+    "Toyota Corolla",
+    "Tesla Model S",
+    "Trabant",
+    "Volkswagen Golf",
+    "Volvo 200 Series",
+    "Willys 77",
+    "Zaporozhets",
+    "Nissan Leaf",
+    "Chevrolet Impala",
+    "Toyota Prius",
+    "Ford F-Series",
+    "Chevrolet Volt",
+    "Cadillac De Ville",
+    "Porsche 911 GT3 Cup",
+    "Mazda RX-7",
+    "Nissan Z-cars",
+    "Mazda MX-5",
+    "Volkswagen Type 2",
+    'Skateboard'
+]
+
+FAVORITE_MUSIC_GENRE = [
+    "Pop",
+    "Rock",
+    "Hard Rock",
+    "Rhythm & Blues (R&B)",
+    "Country",
+    "Rock & Roll",
+    "Soul",
+    "Country Pop",
+    "Pop Rock",
+    "Heavy Metal",
+    "Progressive Rock",
+    "Alternative Rock",
+    "Jazz",
+    "New Wave",
+    "Synthpop",
+    "Hip Hop",
+    "Folk",
+    "New Age",
+    "Blues Rock",
+    "Ambient",
+    "Ambient house",
+    "Classic",
+    "Neoclassic",
+    "Drum and bass"
 ]
