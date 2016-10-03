@@ -642,15 +642,18 @@ class Personal(object):
             mask = '+1-(###)-###-####'
         return mask
 
-    def telephone(self):
+    def telephone(self, mask=None, placeholder='#'):
         """
         Generate a random phone number.
+        :param mask: Mask for formatting number.
+        :param placeholder: A placeholder for mask.
         :return: Phone number. Example: +7-(963)-409-11-22.
         """
-        mask = self.__telephone_mask()
+        if not mask:
+            mask = self.__telephone_mask()
         phone_number = ''
         for i in mask:
-            if i == '#':
+            if i == placeholder:
                 phone_number += str(randint(1, 9))
             else:
                 phone_number += i

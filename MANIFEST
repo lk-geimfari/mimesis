@@ -26,7 +26,6 @@ church/data/de_de/mushrooms
 church/data/de_de/nation
 church/data/de_de/periodicity
 church/data/de_de/political_views
-church/data/de_de/postal_codes
 church/data/de_de/professions
 church/data/de_de/qualifications
 church/data/de_de/quotes
@@ -78,7 +77,6 @@ church/data/en_us/os
 church/data/en_us/periodicity
 church/data/en_us/phone_models
 church/data/en_us/political_views
-church/data/en_us/postal_codes
 church/data/en_us/pro_lang
 church/data/en_us/professions
 church/data/en_us/qualifications
@@ -122,7 +120,6 @@ church/data/fr_fr/mushrooms
 church/data/fr_fr/nation
 church/data/fr_fr/periodicity
 church/data/fr_fr/political_views
-church/data/fr_fr/postal_codes
 church/data/fr_fr/professions
 church/data/fr_fr/qualifications
 church/data/fr_fr/quotes
@@ -166,7 +163,6 @@ church/data/ru_ru/mushrooms
 church/data/ru_ru/nation
 church/data/ru_ru/periodicity
 church/data/ru_ru/political_views
-church/data/ru_ru/postal_codes
 church/data/ru_ru/professions
 church/data/ru_ru/qualifications
 church/data/ru_ru/quotes
