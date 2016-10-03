@@ -283,6 +283,10 @@ class PersonalTestCase(unittest.TestCase):
         result = self.person.weight(from_=40, to_=60)
         self.assertTrue((result >= 40) and (result <= 60))
 
+    def test_blood_type(self):
+        result = self.person.blood_type()
+        self.assertIn(result, common.BLOOD_GROUPS)
+
     def test_sexual_orientation(self):
         result = self.person.sexual_orientation()
         self.assertIn(
@@ -308,6 +312,10 @@ class PersonalTestCase(unittest.TestCase):
         result = self.person.favorite_movie() + '\n'
         self.assertIn(result, pull('favorite_movie', self.person.lang))
 
+    def test_favorite_music_genre(self):
+        result = self.person.favorite_music_genre()
+        self.assertIn(result, common.FAVORITE_MUSIC_GENRE)
+
     def test_worldview(self):
         result = self.person.worldview() + '\n'
         self.assertIn(result, pull('worldview', self.person.lang))
@@ -323,6 +331,10 @@ class PersonalTestCase(unittest.TestCase):
     def test_avatar(self):
         result = self.person.avatar()
         self.assertTrue(len(result) > 20)
+
+    def test_vehicle(self):
+        result = self.person.vehicle()
+        self.assertIn(result, common.THE_VEHICLES)
 
 
 class DatetimeTestCase(unittest.TestCase):
@@ -357,6 +369,10 @@ class DatetimeTestCase(unittest.TestCase):
     def test_day_of_month(self):
         result = self.datetime.day_of_month()
         self.assertTrue((result >= 1) or (result <= 31))
+
+    def test_birthday(self):
+        result =  self.datetime.birthday()
+        self.assertIsInstance(result, str)
 
 
 class NetworkTestCase(unittest.TestCase):

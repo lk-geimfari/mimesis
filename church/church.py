@@ -544,6 +544,15 @@ class Personal(object):
         w = randint(int(from_), int(to_))
         return w
 
+    @staticmethod
+    def blood_type():
+        """
+        Get a random blood type.
+        :return: Blood type (blood group).
+        Example: A+
+        """
+        return choice(common.BLOOD_GROUPS)
+
     def sexual_orientation(self):
         """
         Get a random (LOL) sexual orientation.
@@ -619,10 +628,19 @@ class Personal(object):
 
     def favorite_movie(self):
         """
-        Get a random movie.
-        :return: Name of the movie.
+        Get a random movie for current locale.
+        :return: The name of the movie.
+        Example (en_us): Interstellar
         """
         return choice(pull('favorite_movie', self.lang)).strip()
+
+    @staticmethod
+    def favorite_music_genre():
+        """
+        Get a random music genre.
+        :return: A music genre. Example: Ambient
+        """
+        return choice(common.FAVORITE_MUSIC_GENRE)
 
     def __telephone_mask(self):
         """
@@ -663,6 +681,14 @@ class Personal(object):
         url = 'https://raw.githubusercontent.com/lk-geimfari/' \
               'church/master/examples/avatars/{0}.png'.format(randint(1, 7))
         return url
+
+    @staticmethod
+    def vehicle():
+        """
+        Get a random vehicle.
+        :return: A vehicle. Example: Tesla Model S
+        """
+        return choice(common.THE_VEHICLES)
 
 
 class Datetime(object):
@@ -734,6 +760,19 @@ class Datetime(object):
         :return: Random value from 1 to 31.
         """
         return randint(1, 31)
+
+    def birthday(self, from_=1980, to_=2000):
+        """
+        Generate a random day of birth.
+        :param from_: min of range
+        :param to_: max of range
+        :return: A birthday. Example: June 20, 1987
+        """
+        return '{} {}, {}'.format(
+            self.month(),
+            self.day_of_month(),
+            self.year(from_, to_)
+        )
 
 
 class Network(object):
