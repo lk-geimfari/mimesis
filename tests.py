@@ -465,6 +465,15 @@ class DevelopmentTestCase(unittest.TestCase):
         result = self.dev.software_license()
         self.assertIn(result, common.LICENSES)
 
+    def test_version(self):
+        result = self.dev.version().split('.')
+        major = int(result[0])
+        self.assertTrue((major >= 0) and (major <= 11))
+        minor = int(result[1])
+        self.assertTrue((minor >= 0) and (minor <= 11))
+        micro = int(result[2])
+        self.assertTrue((micro >= 0) and (micro <= 11))
+
     def test_programming_language(self):
         result = self.dev.programming_language()
         self.assertIn(result, common.PROGRAMMING_LANGS)

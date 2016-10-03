@@ -921,6 +921,17 @@ class Development(object):
         return choice(common.LICENSES)
 
     @staticmethod
+    def version():
+        """
+        Generate a random version information.
+        :return: The version. Example: 0.11.3
+        """
+        major = randint(0, 11)
+        minor = randint(0, 11)
+        micro = randint(0, 11)
+        return '{0}.{1}.{2}'.format(major, minor, micro)
+
+    @staticmethod
     def database(nosql=False):
         """
         Get a random database name.
