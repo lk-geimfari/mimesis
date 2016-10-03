@@ -51,6 +51,9 @@ def _bootstrap(count=2000):
 # ...
 ```
 
+## Example
+[presturinn](https://github.com/lk-geimfari/presturinn) - This is a fake API based on `Falcon` and `Church`.
+
 ## Docs
 Church is a pretty simple library. All you need to start is a small [guidebook.](https://github.com/lk-geimfari/church/blob/master/docs/README.md)
 
