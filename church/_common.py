@@ -1930,4 +1930,3 @@ CURRENCY = [
     "ZAR",
     "ZMK"
 ]
-
