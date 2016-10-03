@@ -80,10 +80,12 @@ class Address(object):
 
     def postal_code(self):
         """
-        Get a random (real) postal code.
+        Get a random postal code.
         :return: postal code. Example: 389213
         """
-        return choice(pull('postal_codes', self.lang)).strip()
+        if self.lang == 'ru_ru':
+            return randint(100000, 999999)
+        return randint(10000, 99999)
 
     def country(self, only_iso_code=False):
         """
@@ -623,16 +625,32 @@ class Personal(object):
         """
         return choice(pull('favorite_movie', self.lang)).strip()
 
+    def __telephone_mask(self):
+        """
+        It's internal method.
+        Return a mask of telephone for current locale.
+        :return: mask. Example (ru_ru): '+7-(###)-###-##-##'
+        """
+        mask = ''
+        if self.lang == 'ru_ru':
+            mask = '+7-(###)-###-##-##'
+        elif self.lang == 'fr_fr':
+            mask = '+33-#########'
+        elif self.lang == 'de_de':
+            mask = '+49-#########'
+        elif self.lang == 'en_us':
+            mask = '+1-(###)-###-####'
+        return mask
+
     def telephone(self):
         """
         Generate a random phone number.
-        :return: Phone number. Example: +7-(963)409-11-22.
+        :return: Phone number. Example: +7-(963)-409-11-22.
         """
+        mask = self.__telephone_mask()
         phone_number = ''
-        mask = '+7-($$$)$$$-$$-$$' if self.lang == 'ru_ru' \
-            else '+$-($$$)$$$-$$-$$'
         for i in mask:
-            if i == '$':
+            if i == '#':
                 phone_number += str(randint(1, 9))
             else:
                 phone_number += i
