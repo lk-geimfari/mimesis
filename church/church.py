@@ -270,6 +270,35 @@ class Text(object):
         url = 'http://placehold.it/{0}x{1}'.format(width, height)
         return url
 
+    @staticmethod
+    def hashtags(quantity=4, category=None):
+        """
+        Create a list of hashtags (for Instagram, Twitter etc.)
+        :param quantity: The quantity of hashtags.
+        :param category: The category of hashtag.
+        Available categories:
+          1. general - #nice, #day, #tree etc.
+          2. girls - #lady, #beautiful, #girlsday etc.
+          3. boys - #men, #guys, #dude etc.
+          4. love - #love, #romantic, #relationship etc.
+          5. friends - #crazy, #party etc.
+          6. family - #fam, #sister, #brother etc.
+          7. nature - #nature, #tree, #blue, #sky etc.
+          8. travel - #natureaddict, #sunset etc.
+          9. cars - #car, #ride, #drive etc.
+          10. sport - #soccer, #game etc.
+          11 tumblr - #perfect, #tumblr etc.
+        :return: The list of hashtags. Example: ['#love', '#sky', '#nice']
+        """
+        tags = []
+
+        if not category:
+            category = choice(['general', 'love', 'nature', 'travel'])
+
+        for _ in range(int(quantity)):
+            tags.append(choice(common.HASHTAGS[category]))
+        return tags
+
 
 class Personal(object):
     """
@@ -847,7 +876,7 @@ class File(object):
             8. compressed = '.zip', '.7z', '.tar.xz' and other.
         :return: Extension of a file. Example (file_type='source'): .py
         """
-        _type = file_type.upper()
+        _type = file_type.lower()
 
         return choice(common.EXTENSIONS[_type])
 

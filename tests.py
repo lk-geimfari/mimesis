@@ -1,13 +1,13 @@
 import re
 import unittest
 
+import church._common as common
 from church.church import (
     Address, Text, Personal,
     Datetime, Network, File, Science,
     Development, Food, Hardware
 )
 from church.utils import pull
-import church._common as common
 
 LANG = 'en_us'
 
@@ -132,6 +132,13 @@ class TextTestCase(unittest.TestCase):
     def test_emoji(self):
         result = self.data.emoji()
         self.assertIn(result, common.EMOJI)
+
+    def test_hashtags(self):
+        result = self.data.hashtags(quantity=5)
+        self.assertEqual(len(result), 5)
+
+        result = self.data.hashtags(quantity=1, category='general')
+        self.assertIn(result[0], common.HASHTAGS['general'])
 
 
 class PersonalTestCase(unittest.TestCase):
@@ -371,7 +378,7 @@ class DatetimeTestCase(unittest.TestCase):
         self.assertTrue((result >= 1) or (result <= 31))
 
     def test_birthday(self):
-        result =  self.datetime.birthday()
+        result = self.datetime.birthday()
         self.assertIsInstance(result, str)
 
 
@@ -424,7 +431,7 @@ class FileTestCase(unittest.TestCase):
 
     def test_extension(self):
         text = self.file.extension()
-        self.assertIn(text, common.EXTENSIONS['TEXT'])
+        self.assertIn(text, common.EXTENSIONS['text'])
 
 
 class ScienceTestCase(unittest.TestCase):
