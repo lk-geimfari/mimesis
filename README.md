@@ -1,5 +1,6 @@
 # Church
 [![Build Status](https://travis-ci.org/lk-geimfari/church.svg?branch=master)](https://travis-ci.org/lk-geimfari/church)
+[![PyPI](https://img.shields.io/badge/python-3.4%2C%203.5-blue.svg?maxAge=2592000)](https://pypi.python.org/pypi/church/)
 [![PyPI version](https://badge.fury.io/py/church.svg)](https://badge.fury.io/py/church)
 [![HitCount](https://hitt.herokuapp.com/lk-geimfar/church.svg)](https://github.com/lk-geimfari/church)
 [![Code Health](https://landscape.io/github/lk-geimfari/church/master/landscape.svg?style=flat)](https://landscape.io/github/lk-geimfari/church/master)
@@ -20,35 +21,52 @@ Church is a library to generate fake data. It's very useful when you need to boo
 ## Usage
 
 ```python
-# At this moment a library has 4 supported locales: en_us, de_de, fr_fr, ru_ru
+# At this moment a library has 5 supported locales: 
+# en_us, de_de, fr_fr, ru_ru and es_es
 #
 # It's very useful when you need to bootstrap your database.
 # Just create a static method that will generate fake data:
 
-@staticmethod
-def _bootstrap(count=2000):
-    from church import Personal
 
-    person = Personal('en_us')
-    for _ in range(count):
-        user = User(username=person.username(),
-                    email=person.email(),
-                    user_twitter=person.twitter()
-                    name=person.name('m'),
-                    surname=person.surname(),
-                    credit_card=person.credit_card_number(),
-                    home_page=person.home_page(),
-                    password=person.password(algorithm='sha1'),
-                    gender=person.gender(abbreviated=True),
-                    profession=person.profession(),
-                    nationality=person.nationality()
-               )
+class Patient(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(120), unique=True)
+    phone_number = db.Column(db.String(25))
+    full_name = db.Column(db.String(100))
+    gender = db.Column(db.String(64))
+    nationality = db.Column(db.String(64))
+    weight = db.Column(db.String(64))
+    height = db.Column(db.String(64))
+    blood_type = db.Column(db.String(64))
+
+    def __init__(self, **kwargs):
+        super(Patient, self).__init__(**kwargs)
+
+    def __str__(self):
+        return self.full_name
+
+    def __repr__(self):
+        return '<Patient: {0}>'.format(self.full_name)
+
+    @staticmethod
+    def _churhify(count=2000):
+        from church import Personal
+
+        person = Personal('en_us')
+        for _ in range(count):
+            patient = Patient(email=person.email(),
+                              phone_number=person.telephone(),
+                              full_name=person.full_name('f'),
+                              gender=person.gender(),
+                              nationality=person.nationality(),
+                              weight=person.weight(),
+                              height=person.height(),
+                              blood_type=person.blood_type()
+                              )
         try:
-            db.session.add(user)
+            db.session.add(patient)
         except Exception:
             db.session.commit()
-
-# ...
 ```
 
 ## Example
@@ -62,9 +80,6 @@ Your contributions are always welcome! Please take a look at the [contribution](
 
 ## Requirements
 No requirements, no dependencies
-
-## Runtime
-[![PyPI](https://img.shields.io/badge/python-3.4%2C%203.5-blue.svg?maxAge=2592000)](https://pypi.python.org/pypi/church/)
 
 ## Licence 
 [![MIT Licence](https://badges.frapsoft.com/os/mit/mit.svg?v=103)](https://github.com/lk-geimfari/church/blob/master/LICENSE)   

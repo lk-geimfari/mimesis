@@ -271,7 +271,7 @@ class Text(object):
         return url
 
     @staticmethod
-    def hashtags(quantity=4, category=None):
+    def hashtags(quantity=4, category='general'):
         """
         Create a list of hashtags (for Instagram, Twitter etc.)
         :param quantity: The quantity of hashtags.
@@ -290,13 +290,8 @@ class Text(object):
           11 tumblr - #perfect, #tumblr etc.
         :return: The list of hashtags. Example: ['#love', '#sky', '#nice']
         """
-        tags = []
-
-        if not category:
-            category = choice(['general', 'love', 'nature', 'travel'])
-
-        for _ in range(int(quantity)):
-            tags.append(choice(common.HASHTAGS[category]))
+        k = category.lower()
+        tags = [choice(common.HASHTAGS[k]) for _ in range(int(quantity))]
         return tags
 
 
