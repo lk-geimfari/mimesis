@@ -3,9 +3,12 @@
 :copyright: (c) 2016 by Lk Geimfari.
 :software_license: MIT, see LICENSES for more details.
 """
-
+import array
 from datetime import date
-from random import choice, sample, randint, uniform
+from random import (
+    choice, sample,
+    randint, uniform, random
+)
 from string import digits, ascii_letters
 
 import church._common as common
@@ -25,6 +28,8 @@ __all__ = ['Address', 'Personal',
 class Address(object):
     """
     Class for generate fake address data.
+        Args:
+            lang (str): current language.
     """
 
     def __init__(self, lang='en_us'):
@@ -107,9 +112,53 @@ class Address(object):
         return choice(pull('cities', self.lang)).strip()
 
 
+class Numbers(object):
+    """
+    Class for generating numbers.
+    """
+
+    @staticmethod
+    def floats(n=2, type_code='f', to_list=False):
+        """
+        Generate an array of random float number of 10**n
+
+        Type Code    C Type             Storage size   Value range
+        'f'          floating point     4 byte         1.2E-38 to 3.4E+38
+        -------------------------------------------------------------------
+        'd'          floating point     8 byte         2.3E-308 to 1.7E+308
+        -------------------------------------------------------------------
+        :param n: Raise 10 to the 'n' power.
+        :param type_code: A code of type.
+        :param to_list: Convert array to list.
+        Note: When you work with large numbers, it is better not to use
+        this option, because type 'array' much faster than 'list'.
+        :return: An array of floating-point numbers.
+        """
+        nums = array.array(type_code, (random() for _ in range(10 ** int(n))))
+        nums = nums.tolist() if to_list else nums
+        return nums
+
+    @staticmethod
+    def primes(n=2, to_list=False):
+        """
+        Generate an array of prime numbers of 10 ** n
+
+        Type Code    C Type             Storage size   Value range
+        -------------------------------------------------------------------
+        'L'          unsigned integer    4 byte        0 to 4,294,967,295
+        -------------------------------------------------------------------
+        :return: An array of floating-point numbers.
+        """
+        nums = array.array('L', (i for i in range(10 ** n) if i % 2))
+        nums = nums.tolist() if to_list else nums
+        return nums
+
+
 class Text(object):
     """
     Class for generate text data, i.e text, lorem ipsum and another.
+        Args:
+            lang (str): current language.
     """
 
     def __init__(self, lang='en_us'):
@@ -298,6 +347,8 @@ class Text(object):
 class Personal(object):
     """
     Class for generate personal data, i.e names, surnames, age and another.
+        Args:
+            lang (str): current language.
     """
 
     def __init__(self, lang='en_us'):
@@ -719,6 +770,8 @@ class Datetime(object):
     """
     Class for generate the fake data that you can use for
     working with date and time.
+        Args:
+            lang (str): current language.
     """
 
     def __init__(self, lang='en_us'):
@@ -879,6 +932,8 @@ class File(object):
 class Science(object):
     """
     Class for getting facts science.
+        Args:
+            lang (str): current language.
     """
 
     def __init__(self, lang='en_us'):
@@ -1026,6 +1081,8 @@ class Development(object):
 class Food(object):
     """
     Class for Food, i.e fruits, vegetables, berries and other.
+        Args:
+            lang (str): current language.
     """
 
     def __init__(self, lang):

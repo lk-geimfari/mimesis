@@ -1,7 +1,7 @@
 from .church import (
     Address, Personal, Text,
     Network, Datetime, File, Science,
-    Development, Food, Hardware
+    Development, Food, Hardware, Numbers
 )
 
 __version__ = '0.2.2'
@@ -16,7 +16,8 @@ __all__ = [
     'Science',
     'Development',
     'Food',
-    'Hardware'
+    'Hardware',
+    'Numbers'
 ]
 
 __author__ = 'Lk Geimfari'

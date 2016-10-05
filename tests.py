@@ -1,3 +1,4 @@
+import array
 import re
 import unittest
 
@@ -5,7 +6,8 @@ import church._common as common
 from church.church import (
     Address, Text, Personal,
     Datetime, Network, File, Science,
-    Development, Food, Hardware
+    Development, Food, Hardware,
+    Numbers
 )
 from church.utils import pull
 
@@ -61,6 +63,32 @@ class AddressTestCase(unittest.TestCase):
     def test_city(self):
         result = self.address.city() + '\n'
         self.assertIn(result, pull('cities', self.address.lang))
+
+
+class NumbersTestCase(unittest.TestCase):
+    def setUp(self):
+        self.numbers = Numbers()
+
+    def tearDown(self):
+        del self.numbers
+
+    def test_floats(self):
+        result = self.numbers.floats()
+        self.assertEqual(len(result), 100)
+        self.assertIsInstance(result, array.array)
+
+        result = self.numbers.floats(n=3, to_list=True)
+        self.assertEqual(len(result), 1000)
+        self.assertIsInstance(result, list)
+
+    def test_primes(self):
+        result = self.numbers.primes()
+        self.assertEqual(len(result), 50)
+        self.assertIsInstance(result, array.array)
+
+        result = self.numbers.primes(n=3, to_list=True)
+        self.assertEqual(len(result), 500)
+        self.assertIsInstance(result, list)
 
 
 class TextTestCase(unittest.TestCase):
