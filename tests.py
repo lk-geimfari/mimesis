@@ -168,6 +168,17 @@ class TextTestCase(unittest.TestCase):
         result = self.data.hashtags(quantity=1, category='general')
         self.assertIn(result[0], common.HASHTAGS['general'])
 
+    def test_weather(self):
+        result = self.data.weather(scale='c').split(' ')
+        temp, scale = float(result[0]), result[1]
+        self.assertEqual(scale, '°C')
+        self.assertTrue((temp >= -30) and (temp <= 40))
+
+        result = self.data.weather(scale='f', a=0, b=10).split(' ')
+        temp, scale = float(result[0]), result[1]
+        self.assertEqual(scale, '°F')
+        self.assertTrue((temp >= 0) and (temp <= (10 * 1.8) + 32))
+
 
 class PersonalTestCase(unittest.TestCase):
     def setUp(self):
