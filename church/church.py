@@ -1101,7 +1101,7 @@ class Food(object):
             lang (str): current language.
     """
 
-    def __init__(self, lang):
+    def __init__(self, lang='en_us'):
         self.lang = lang.lower()
 
     def berry(self):

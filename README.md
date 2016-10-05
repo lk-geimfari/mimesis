@@ -13,7 +13,13 @@
 Church is a library to generate fake data. It's very useful when you need to bootstrap your database.
 
 ## Installation
+```zsh
+➜  ~ git clone https://github.com/lk-geimfari/church.git
+➜  ~ cd church/
+➜  ~ python3 setup.py install
 
+```
+or
 ```zsh
 ➜  ~  pip install church
 ```
@@ -69,7 +75,9 @@ class Patient(db.Model):
             db.session.commit()
 ```
 
-## Example
+## Examples
+[flask_church](https://github.com/lk-geimfari/flask_church) - An extension for `Flask` based on `Church`.
+
 [presturinn](https://github.com/lk-geimfari/presturinn) - This is a fake API based on `Falcon` and `Church`.
 
 ## Docs
@@ -83,6 +91,8 @@ No requirements, no dependencies
 
 ## Licence 
 [![MIT Licence](https://badges.frapsoft.com/os/mit/mit.svg?v=103)](https://github.com/lk-geimfari/church/blob/master/LICENSE)   
+## Disclaimer
+The author does not assume any responsibility for how you will use this library and how you will use data generated with this library. This library is designed only for developers and only with good intentions. Do not use the data generated with `church` for illegal purposes.
 
 ## Why church?
 «Such teachings come through hypocritical liars, whose consciences have been seared as with a hot iron.» Timothy 1:4
