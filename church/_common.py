@@ -2050,7 +2050,7 @@ THE_VEHICLES = [
     'Skateboard'
 ]
 
-FAVORITE_MUSIC_GENRE = [
+FAVORITE_MUSIC_GENRE = (
     "Pop",
     "Rock",
     "Hard Rock",
@@ -2075,7 +2075,7 @@ FAVORITE_MUSIC_GENRE = [
     "Classic",
     "Neoclassic",
     "Drum and bass"
-]
+)
 
 HASHTAGS = {
     "general": [
