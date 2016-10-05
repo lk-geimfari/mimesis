@@ -343,6 +343,22 @@ class Text(object):
         tags = [choice(common.HASHTAGS[k]) for _ in range(int(quantity))]
         return tags
 
+    @staticmethod
+    def weather(scale='c', a=-30, b=40):
+        """
+        Generate a random temperature value.
+        :param scale: Scale of temperature.
+        :param a: Minimum value of temperature.
+        :param b: Maximum value of temperature.
+        :return: Temperature in Celsius or Fahrenheit.
+        """
+        n = randint(a, b)
+        # Convert to Fahrenheit
+        n = (n * 1.8) + 32 if scale.lower() == 'f' else n
+        scale = '°C' if scale.lower() == 'c' else '°F'
+
+        return '{0:0.1f} {1}'.format(n, scale)
+
 
 class Personal(object):
     """
