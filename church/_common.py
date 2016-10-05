@@ -78,7 +78,7 @@ FRONTEND = [
     'Webpack/Grunt/PostCSS'
 ]
 
-EMOJI = [
+EMOJI = (
     ":bowtie:",
     ":smile:",
     ":laughing:",
@@ -955,7 +955,7 @@ EMOJI = [
     ":small_red_triangle:",
     ":small_red_triangle_down:",
     ":shipit:"
-]
+)
 
 EMAIL_DOMAINS = (
     "@gmail.com",
