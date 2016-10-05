@@ -49,7 +49,7 @@ class Patient(db.Model):
         return '<Patient: {0}>'.format(self.full_name)
 
     @staticmethod
-    def _churhify(count=2000):
+    def _churchify(count=2000):
         from church import Personal
 
         person = Personal('en_us')
