@@ -18,7 +18,6 @@ LANG = 'en_us'
 # LANG = 'de_de'
 # LANG = 'fr_fr'
 
-
 class AddressTestCase(unittest.TestCase):
     def setUp(self):
         self.address = Address(LANG)
@@ -105,6 +104,11 @@ class TextTestCase(unittest.TestCase):
     def test_title(self):
         result = self.data.title() + '\n'
         self.assertIn(result, pull('text', self.data.lang))
+
+    def test_lorem_ipsum(self):
+        result = self.data.lorem_ipsum(quantity=2)
+        self.assertIsNot(result, None)
+        self.assertIsInstance(result, str)
 
     def test_words(self):
         result = self.data.words()

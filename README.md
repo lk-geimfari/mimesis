@@ -7,10 +7,10 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/d773f20efa67430683bb24fff5af9db8)](https://www.codacy.com/app/likid-geimfari/church)
 [![Issues](https://img.shields.io/github/issues/lk-geimfari/church.svg)](https://github.com/lk-geimfari/church/issues)
 
-
 ![alt text](https://raw.githubusercontent.com/lk-geimfari/church/master/examples/church.png)
 
-Church is a library to generate fake data. It's very useful when you need to bootstrap your database.
+Church is a library to generate fake data. It's very useful when you need to bootstrap your database. Church have not any requirements.
+
 
 ## Installation
 ```zsh
@@ -48,14 +48,8 @@ class Patient(db.Model):
     def __init__(self, **kwargs):
         super(Patient, self).__init__(**kwargs)
 
-    def __str__(self):
-        return self.full_name
-
-    def __repr__(self):
-        return '<Patient: {0}>'.format(self.full_name)
-
     @staticmethod
-    def _churchify(count=2000):
+    def churchify(count=2000):
         from church import Personal
 
         person = Personal('en_us')
@@ -76,9 +70,9 @@ class Patient(db.Model):
 ```
 
 ## Examples
-[flask_church](https://github.com/lk-geimfari/flask_church) - An extension for `Flask` based on `Church`.
+- [flask_church](https://github.com/lk-geimfari/flask_church) - An extension for `Flask` based on `Church`.
+- [presturinn](https://github.com/lk-geimfari/presturinn) - This is a fake API based on `Falcon` and `Church v0.2.0` .
 
-[presturinn](https://github.com/lk-geimfari/presturinn) - This is a fake API based on `Falcon` and `Church`.
 
 ## Docs
 Church is a pretty simple library. All you need to start is a small [guidebook.](https://github.com/lk-geimfari/church/blob/master/docs/README.md)
@@ -86,13 +80,14 @@ Church is a pretty simple library. All you need to start is a small [guidebook.]
 ## Contributing
 Your contributions are always welcome! Please take a look at the [contribution](https://github.com/lk-geimfari/church/blob/master/CONTRIBUTING.md) guidelines first.
 
-## Requirements
-No requirements, no dependencies
 
-## Licence 
-[![MIT Licence](https://badges.frapsoft.com/os/mit/mit.svg?v=103)](https://github.com/lk-geimfari/church/blob/master/LICENSE)   
 ## Disclaimer
 The author does not assume any responsibility for how you will use this library and how you will use data generated with this library. This library is designed only for developers and only with good intentions. Do not use the data generated with `church` for illegal purposes.
+
+
+## Licence 
+[MIT License](https://github.com/lk-geimfari/church/blob/master/LICENSE)
+
 
 ## Why church?
 «Such teachings come through hypocritical liars, whose consciences have been seared as with a hot iron.» Timothy 1:4
