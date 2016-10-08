@@ -1,5 +1,6 @@
 # Test
 import cProfile
+import time
 
 from faker import Faker
 
@@ -8,6 +9,19 @@ from church import Personal, Address
 p = Personal('en_us')
 a = Address('en_us')
 f = Faker()
+
+
+def clock(func):
+    def clocked(*args):
+        t0 = time.time()
+        result = func(*args)
+        elapsed = time.time() - t0
+        name = func.__name__
+        arg_str = ', '.join(repr(arg) for arg in args)
+        print('[%0.8fs] %s(%s) -> %r' % (elapsed, name, arg_str, result))
+        return result
+
+    return clocked
 
 
 def test_faker_full_name():
