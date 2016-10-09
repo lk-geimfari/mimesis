@@ -87,6 +87,11 @@ church/data/en_us/vegetables
 church/data/en_us/views_on
 church/data/en_us/words
 church/data/en_us/worldview
+church/data/es_es/cities
+church/data/es_es/f_names
+church/data/es_es/m_names
+church/data/es_es/states
+church/data/es_es/surnames
 church/data/fr_fr/alcoholic_drinks
 church/data/fr_fr/berries
 church/data/fr_fr/chemical_elements
