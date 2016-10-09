@@ -7,16 +7,16 @@ from church.church import (
     Address, Text, Personal,
     Datetime, Network, File, Science,
     Development, Food, Hardware,
-    Numbers
+    Numbers, Church
+)
+from church.exceptions import (
+    LocaleDoesNotSupport
 )
 from church.utils import pull
 
-LANG = 'en_us'
+# en, es, de, fr, ru
+LANG = 'en'
 
-
-# LANG = 'ru_ru'
-# LANG = 'de_de'
-# LANG = 'fr_fr'
 
 class AddressTestCase(unittest.TestCase):
     def setUp(self):
@@ -47,7 +47,7 @@ class AddressTestCase(unittest.TestCase):
 
     def test_postal_code(self):
         result = self.address.postal_code()
-        if self.address.lang == 'ru_ru':
+        if self.address.lang == 'ru':
             self.assertTrue(re.match(r'[0-9]{6}$', str(result)))
         else:
             self.assertTrue(re.match(r'[0-9]{5}$', str(result)))
@@ -128,6 +128,7 @@ class TextTestCase(unittest.TestCase):
     def test_naughty_strings(self):
         result = self.data.naughty_strings()
         self.assertTrue(len(result) > 10)
+        self.assertIsInstance(result, list)
 
     def test_quote_from_movie(self):
         result = self.data.quote_from_movie() + '\n'
@@ -207,7 +208,7 @@ class PersonalTestCase(unittest.TestCase):
         self.assertTrue(len(result) >= 11)
 
     def test_surname(self):
-        if self.person.lang == 'ru_ru':
+        if self.person.lang == 'ru':
             result = self.person.surname('f') + '\n'
             self.assertIn(result, pull('f_surnames', self.person.lang))
 
@@ -462,7 +463,7 @@ class NetworkTestCase(unittest.TestCase):
 
     def test_user_agent(self):
         result = self.net.user_agent() + '\n'
-        self.assertIn(result, pull('useragents', 'en_us'))
+        self.assertIn(result, pull('useragents', 'en'))
 
 
 class FileTestCase(unittest.TestCase):
@@ -649,3 +650,38 @@ class HardwareTestCase(unittest.TestCase):
     def test_phone_model(self):
         result = self.hard.phone_model()
         self.assertIn(result, common.PHONE_MODELS)
+
+
+class PullTestCase(unittest.TestCase):
+    def test_pull(self):
+        result = pull('views_on', 'en')
+        self.assertIsNotNone(result)
+        self.assertIsInstance(result, list)
+        self.assertRaises(LocaleDoesNotSupport, lambda: pull('views_on', 'spoke'))
+        self.assertRaises(FileNotFoundError, lambda: pull('something', 'en'))
+
+
+class ChurchTestCase(unittest.TestCase):
+
+    def setUp(self):
+        self.church = Church('en')
+
+    def test_personal(self):
+        result = self.church.personal.username()
+        self.assertIsNotNone(result)
+
+    def test_text(self):
+        result = self.church.text.words()
+        self.assertIsNotNone(result)
+
+    def test_address(self):
+        result = self.church.address.address()
+        self.assertIsNotNone(result)
+
+    def test_food(self):
+        result = self.church.food.fruit()
+        self.assertIsNotNone(result)
+
+    def test_sciense(self):
+        result = self.church.science.scientist()
+        self.assertIsNotNone(result)

@@ -1,23 +1,37 @@
 from functools import lru_cache
-from os.path import (
-    join,
-    dirname,
-    abspath
-)
+from os.path import abspath, join, dirname
+
+from .exceptions import LocaleDoesNotSupport
 
 PATH = abspath(join(dirname(__file__), 'data'))
 
+SUPPORTED_LOCALES = {
+    "en": "English",
+    "es": "Spanish",
+    "de": "German",
+    "fr": "French",
+    "ru": "Russian"
+}
+
 
 @lru_cache(maxsize=None)
-def pull(filename, lang='en_us'):
+def pull(filename, locale='en'):
     """
-    Function for getting data from text files in data/
-    1. de_de - Folder for Germany.
-    2. en_us - Folder for United States
-    3. ru_ru - Folder for Russian Federation.
-    4. fr_fr - Folder for France.
+    Open file and get content from file. Memorize result using lru_cache.
+    Args:
+        filename: The name of file.
+        locale:
+           de - German  (data/de)
+           en - English (data/en)
+           ru - Russian (data/ru)
+           fr - French  (data/fr)
+           es - Spanish (data/es)
+    Returns: The content of the file.
     """
-    with open(join(PATH + '/' + lang, filename), 'r') as f:
-        _result = f.readlines()
+    if locale not in SUPPORTED_LOCALES:
+        raise LocaleDoesNotSupport("Locale %s does not exist" % locale)
 
-    return _result
+    with open(join(PATH + '/' + locale, filename), 'r') as f:
+        data = f.readlines()
+
+    return data

@@ -1,6 +1,6 @@
 # Church
 [![Build Status](https://travis-ci.org/lk-geimfari/church.svg?branch=master)](https://travis-ci.org/lk-geimfari/church)
-[![PyPI](https://img.shields.io/badge/python-3.4%2C%203.5-blue.svg?maxAge=2592000)](https://pypi.python.org/pypi/church/)
+[![PyPI](https://img.shields.io/badge/python-3.3%2C%203.4%2C%203.5%2C%203.6--dev-blue.svg)](https://pypi.python.org/pypi/church/)
 [![PyPI version](https://badge.fury.io/py/church.svg)](https://badge.fury.io/py/church)
 [![HitCount](https://hitt.herokuapp.com/lk-geimfar/church.svg)](https://github.com/lk-geimfari/church)
 [![Code Health](https://landscape.io/github/lk-geimfari/church/master/landscape.svg?style=flat)](https://landscape.io/github/lk-geimfari/church/master)
@@ -23,6 +23,13 @@ or
 ```zsh
 ➜  ~  pip install church
 ```
+
+## Testing
+```zsh
+➜  ~ cd church/
+➜  python3 -m unittest
+```
+
 
 ## Usage
 
@@ -52,7 +59,7 @@ class Patient(db.Model):
     def churchify(count=2000):
         from church import Personal
 
-        person = Personal('en_us')
+        person = Personal('en')
         for _ in range(count):
             patient = Patient(email=person.email(),
                               phone_number=person.telephone(),
