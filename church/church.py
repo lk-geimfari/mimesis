@@ -5,14 +5,19 @@
 """
 import array
 from datetime import date
+from hashlib import (
+    sha1, sha256,
+    sha512, md5
+)
 from random import (
     choice, sample,
-    randint, uniform, random
+    randint, uniform,
+    random
 )
 from string import digits, ascii_letters
 
 import church._common as common
-from .utils import pull
+from .utils import pull, PATH
 
 # pull - is internal function,
 # please do not use this function outside the module 'church'.
@@ -21,8 +26,56 @@ __all__ = ['Address', 'Personal',
            'Text', 'Network',
            'Datetime', 'File',
            'Science', 'Development',
-           'Food', 'Hardware'
+           'Food', 'Hardware',
+           'Numbers', 'Church'
            ]
+
+
+class Church(object):
+    """
+    A lazy initialization of locale for all classes that have locales.
+    Useful if you use only one locale for all data (Persona, Address etc.).
+        Args:
+            locale - Locale.
+    """
+
+    def __init__(self, locale):
+        self.locale = locale
+        self._personal = Personal
+        self._address = Address
+        self._text = Text
+        self._food = Food
+        self._science = Science
+
+    @property
+    def personal(self):
+        if callable(self._personal):
+            self._personal = self._personal(self.locale)
+        return self._personal
+
+    @property
+    def address(self):
+        if callable(self._address):
+            self._address = self._address(self.locale)
+        return self._address
+
+    @property
+    def text(self):
+        if callable(self._text):
+            self._text = self._text(self.locale)
+        return self._text
+
+    @property
+    def food(self):
+        if callable(self._food):
+            self._food = self._food(self.locale)
+        return self._food
+
+    @property
+    def science(self):
+        if callable(self._science):
+            self._science = self._science(self.locale)
+        return self._science
 
 
 class Address(object):
@@ -65,7 +118,7 @@ class Address(object):
         Get a random full address.
         :return: Full address (include Street number, suffix and name).
         """
-        if self.lang == 'ru_ru':
+        if self.lang == 'ru':
             return '{} {} {}'.format(
                 self.street_suffix(),
                 self.street_name(),
@@ -81,8 +134,8 @@ class Address(object):
     def state(self):
         """
         Get a random states or subject of country.
-        For locale 'ru_ru' always will be getting subject of Russia.
-        :return: State of current country. Example (en_us): Alabama
+        For locale 'ru' always will be getting subject of Russia.
+        :return: State of current country. Example (en): Alabama
         """
         state_name = choice(pull('states', self.lang))
         return state_name.strip()
@@ -92,7 +145,7 @@ class Address(object):
         Get a random postal code.
         :return: postal code. Example: 389213
         """
-        if self.lang == 'ru_ru':
+        if self.lang == 'ru':
             return randint(100000, 999999)
         return randint(10000, 99999)
 
@@ -110,7 +163,7 @@ class Address(object):
     def city(self):
         """
         Get a random name of city.
-        :return: City name. Example (for ru_ru): Saint Petersburg
+        :return: City name. Example (for ru): Saint Petersburg
         """
         city_name = choice(pull('cities', self.lang))
         return city_name.strip()
@@ -165,7 +218,7 @@ class Text(object):
             lang (str): current language.
     """
 
-    def __init__(self, lang='en_us'):
+    def __init__(self, lang='en'):
         self.lang = lang.lower()
 
     def lorem_ipsum(self, quantity=5):
@@ -230,9 +283,8 @@ class Text(object):
         :return: The list of naughty strings.
         """
         import os.path as op
-        path = op.abspath(op.join(op.dirname(__file__), 'data'))
 
-        with open(op.join(path + '/other', 'naughty_strings'), 'r') as f:
+        with open(op.join(PATH + '/etc', 'naughty_strings'), 'r') as f:
             naughty_list = [x.strip(u'\n') for x in f.readlines()]
 
         return naughty_list
@@ -258,8 +310,8 @@ class Text(object):
         Get a random name of color.
         :return: Color name. Example: Red
         """
-        _color = choice(pull('colors', self.lang))
-        return _color.strip()
+        color = choice(pull('colors', self.lang))
+        return color.strip()
 
     @staticmethod
     def hex_color():
@@ -367,7 +419,7 @@ class Personal(object):
             lang (str): current language.
     """
 
-    def __init__(self, lang='en_us'):
+    def __init__(self, lang='en'):
         self.lang = lang.lower()
 
     @staticmethod
@@ -404,7 +456,7 @@ class Personal(object):
         if not isinstance(gender, str):
             raise TypeError('surname takes only string type')
 
-        if self.lang == 'ru_ru':
+        if self.lang == 'ru':
             _file = 'm_surnames' if gender == 'm' else 'f_surnames'
             return choice(pull(_file, self.lang)).strip()
 
@@ -435,12 +487,11 @@ class Personal(object):
     def username(gender='m'):
         """
         Get a random username with digits.
-        Username generated from en_us names for all locales.
+        Username generated from en names for all locales.
         :return: Username. For example: abby101
         """
         gender = gender.lower()
-        file_name = 'f_names' \
-            if gender == 'f' else 'm_names'
+        file_name = 'f_names' if gender == 'f' else 'm_names'
 
         u = choice(pull(file_name)).lower().replace(' ', '_')
         return u.strip() + str(randint(2, 9999))
@@ -476,20 +527,20 @@ class Personal(object):
         :param algorithm: hashing algorithm.
         :return: Password or hash of password.
         """
-        import hashlib
-        _punc = '!"#$%+:<?@^_'
-        _str = [choice(ascii_letters + digits + _punc) for _ in range(length)]
-        _pass = "".join(_str)
-        if algorithm.lower() == 'sha1':
-            return hashlib.sha1(_pass.encode()).hexdigest()
-        elif algorithm.lower() == 'sha256':
-            return hashlib.sha256(_pass.encode()).hexdigest()
-        elif algorithm.lower() == 'sha512':
-            return hashlib.sha512(_pass.encode()).hexdigest()
-        elif algorithm.lower() == 'md5':
-            return hashlib.md5(_pass.encode()).hexdigest()
+        algorithm = algorithm.lower()
+        punc = '!"#$%+:<?@^_'
+        s = [choice(ascii_letters + digits + punc) for _ in range(length)]
+        password = "".join(s)
+        if algorithm == 'sha1':
+            return sha1(password.encode()).hexdigest()
+        elif algorithm == 'sha256':
+            return sha256(password.encode()).hexdigest()
+        elif algorithm == 'sha512':
+            return sha512(password.encode()).hexdigest()
+        elif algorithm == 'md5':
+            return md5(password.encode()).hexdigest()
         else:
-            return _pass
+            return password
 
     @staticmethod
     def email(gender='f'):
@@ -509,7 +560,7 @@ class Personal(object):
         :return: Random home page. Example: http://www.font6.info
         """
         url = 'http://www.' + self.username()
-        domain = choice(pull('domains', 'en_us')).strip()
+        domain = choice(pull('domains', 'en')).strip()
         return '{0}{1}'.format(url, domain)
 
     @staticmethod
@@ -702,7 +753,7 @@ class Personal(object):
         :return: Nationality. Example: Russian.
         """
         # Subtleties of the Russian orthography.
-        if self.lang == 'ru_ru':
+        if self.lang == 'ru':
             i = 0 if gender.lower() == 'm' else 1
             nation = choice(pull('nation', self.lang)).split('|')[i]
             return nation.strip()
@@ -737,7 +788,7 @@ class Personal(object):
         """
         Get a random movie for current locale.
         :return: The name of the movie.
-        Example (en_us): Interstellar
+        Example (en): Interstellar
         """
         movie = choice(pull('favorite_movie', self.lang))
         return movie.strip()
@@ -754,16 +805,16 @@ class Personal(object):
         """
         It's internal method.
         Return a mask of telephone for current locale.
-        :return: mask. Example (ru_ru): '+7-(###)-###-##-##'
+        :return: mask. Example (ru): '+7-(###)-###-##-##'
         """
         mask = ''
-        if self.lang == 'ru_ru':
+        if self.lang == 'ru':
             mask = '+7-(###)-###-##-##'
-        elif self.lang == 'fr_fr':
+        elif self.lang == 'fr':
             mask = '+33-#########'
-        elif self.lang == 'de_de':
+        elif self.lang == 'de':
             mask = '+49-#########'
-        elif self.lang == 'en_us':
+        elif self.lang == 'en':
             mask = '+1-(###)-###-####'
         return mask
 
@@ -807,7 +858,7 @@ class Datetime(object):
             lang (str): current language.
     """
 
-    def __init__(self, lang='en_us'):
+    def __init__(self, lang='en'):
         self.lang = lang.lower()
 
     def day_of_week(self, abbreviated=False):
@@ -933,7 +984,7 @@ class Network(object):
         Get a random user agent.
         :return: User agent.
         """
-        u_agent = choice(pull('useragents', 'en_us'))
+        u_agent = choice(pull('useragents', 'en'))
         return u_agent.strip()
 
 
@@ -969,7 +1020,7 @@ class Science(object):
             lang (str): current language.
     """
 
-    def __init__(self, lang='en_us'):
+    def __init__(self, lang='en'):
         self.lang = lang.lower()
 
     @staticmethod
@@ -1118,7 +1169,7 @@ class Food(object):
             lang (str): current language.
     """
 
-    def __init__(self, lang='en_us'):
+    def __init__(self, lang='en'):
         self.lang = lang.lower()
 
     def berry(self):
@@ -1148,7 +1199,7 @@ class Food(object):
     def dish(self):
         """
         Get a random dish for current locale.
-        :return: Dish name. Example (ru_ru): Борщ
+        :return: Dish name. Example (ru): Борщ
         """
         dishes = choice(pull('dishes', self.lang))
         return dishes.strip()
