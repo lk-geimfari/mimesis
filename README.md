@@ -9,7 +9,14 @@
 
 ![alt text](https://raw.githubusercontent.com/lk-geimfari/church/master/examples/church.png)
 
-Church is a library to generate fake data. It's very useful when you need to bootstrap your database. Church have not any requirements.
+Church is a library to generate fake data. It's very useful when you need to bootstrap your database. Church have not any requirements. Church is a pretty simple library. All you need to start is a small [guidebook.](https://github.com/lk-geimfari/church/blob/master/docs/README.md)
+
+At this moment a library has 5 supported locales: 
+- :us: - English (en)
+- :es: - Spanish (es)
+- :de: - German  (de)
+- :fr: - French  (fr)
+- :ru: - Russian (ru)
 
 
 ## Installation
@@ -34,9 +41,6 @@ or
 ## Usage
 
 ```python
-# At this moment a library has 5 supported locales: 
-# en_us, de_de, fr_fr, ru_ru and es_es
-#
 # It's very useful when you need to bootstrap your database.
 # Just create a static method that will generate fake data:
 
@@ -75,14 +79,28 @@ class Patient(db.Model):
         except Exception:
             db.session.commit()
 ```
+When you use only one locale, use following format:
+```python
+from church import Church
+
+ch = Church('en')
+
+
+def patient(sex='f'):
+    user = {
+        'full_name': ch.personal.full_name(sex),
+        'gender': ch.personal.gender(sex),
+        'blood_type': ch.person.blood_type(),
+        'birthday': ch.datetime.birthday()
+    }
+    return user
+```
+
 
 ## Examples
 - [flask_church](https://github.com/lk-geimfari/flask_church) - An extension for `Flask` based on `Church`.
 - [presturinn](https://github.com/lk-geimfari/presturinn) - This is a fake API based on `Falcon` and `Church v0.2.0` .
 
-
-## Docs
-Church is a pretty simple library. All you need to start is a small [guidebook.](https://github.com/lk-geimfari/church/blob/master/docs/README.md)
 
 ## Contributing
 Your contributions are always welcome! Please take a look at the [contribution](https://github.com/lk-geimfari/church/blob/master/CONTRIBUTING.md) guidelines first.

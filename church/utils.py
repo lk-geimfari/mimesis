@@ -1,7 +1,7 @@
 from functools import lru_cache
 from os.path import abspath, join, dirname
 
-from .exceptions import LocaleDoesNotSupport
+from .exceptions import UnsupportedLocale
 
 PATH = abspath(join(dirname(__file__), 'data'))
 
@@ -18,6 +18,8 @@ SUPPORTED_LOCALES = {
 def pull(filename, locale='en'):
     """
     Open file and get content from file. Memorize result using lru_cache.
+    pull - is internal function, please do not use this function outside
+    the module'church'.
     Args:
         filename: The name of file.
         locale:
@@ -29,7 +31,7 @@ def pull(filename, locale='en'):
     Returns: The content of the file.
     """
     if locale not in SUPPORTED_LOCALES:
-        raise LocaleDoesNotSupport("Locale %s does not exist" % locale)
+        raise UnsupportedLocale("Locale %s does not supported" % locale)
 
     with open(join(PATH + '/' + locale, filename), 'r') as f:
         data = f.readlines()

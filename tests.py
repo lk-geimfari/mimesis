@@ -5,12 +5,12 @@ import unittest
 import church._common as common
 from church.church import (
     Address, Text, Personal,
-    Datetime, Network, File, Science,
+    Datetime, Network, File,
     Development, Food, Hardware,
-    Numbers, Church
+    Science, Numbers, Church
 )
 from church.exceptions import (
-    LocaleDoesNotSupport
+    UnsupportedLocale
 )
 from church.utils import pull
 
@@ -35,7 +35,7 @@ class AddressTestCase(unittest.TestCase):
 
     def test_street_suffix(self):
         result = self.address.street_suffix() + '\n'
-        self.assertIn(result, pull('street_suffix', self.address.lang))
+        self.assertIn(result, pull('st_suffix', self.address.lang))
 
     def test_address(self):
         result = self.address.address()
@@ -341,7 +341,7 @@ class PersonalTestCase(unittest.TestCase):
     def test_sexual_orientation(self):
         result = self.person.sexual_orientation()
         self.assertIn(
-            result + '\n', pull('sexual_orientation', self.person.lang))
+            result + '\n', pull('sexuality', self.person.lang))
 
     def test_profession(self):
         result = self.person.profession() + '\n'
@@ -361,7 +361,7 @@ class PersonalTestCase(unittest.TestCase):
 
     def test_favorite_movie(self):
         result = self.person.favorite_movie() + '\n'
-        self.assertIn(result, pull('favorite_movie', self.person.lang))
+        self.assertIn(result, pull('movies', self.person.lang))
 
     def test_favorite_music_genre(self):
         result = self.person.favorite_music_genre()
@@ -581,7 +581,7 @@ class FoodTestCase(unittest.TestCase):
 
     def test_alcoholic_drink(self):
         result = self.food.alcoholic_drink() + '\n'
-        self.assertIn(result, pull('alcoholic_drinks', self.food.lang))
+        self.assertIn(result, pull('drinks', self.food.lang))
 
     def test_spices(self):
         result = self.food.spices() + '\n'
@@ -657,7 +657,7 @@ class PullTestCase(unittest.TestCase):
         result = pull('views_on', 'en')
         self.assertIsNotNone(result)
         self.assertIsInstance(result, list)
-        self.assertRaises(LocaleDoesNotSupport, lambda: pull('views_on', 'spoke'))
+        self.assertRaises(UnsupportedLocale, lambda: pull('views_on', 'spoke'))
         self.assertRaises(FileNotFoundError, lambda: pull('something', 'en'))
 
 
