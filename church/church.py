@@ -672,7 +672,7 @@ class Personal(object):
             http://www.font6.info
         """
         url = 'http://www.' + self.username()
-        domain = choice(pull('domains', 'en')).strip()
+        domain = choice(common.DOMAINS)
         return '{0}{1}'.format(url, domain)
 
     @staticmethod

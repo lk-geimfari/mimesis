@@ -11,11 +11,12 @@
 
 Church is a library to generate fake data. It's very useful when you need to bootstrap your database. Church have not any requirements. Church is a pretty simple library. All you need to start is a small [guidebook.](https://github.com/lk-geimfari/church/blob/master/docs/README.md)
 
-At this moment a library has 5 supported locales: 
+At this moment a library has 6 supported locales: 
 - :us: - English (en)
 - :es: - Spanish (es)
 - :de: - German  (de)
 - :fr: - French  (fr)
+- :it: - Italian (it)
 - :ru: - Russian (ru)
 
 

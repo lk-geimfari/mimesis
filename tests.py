@@ -14,7 +14,7 @@ from church.exceptions import (
 )
 from church.utils import pull
 
-# en, es, de, fr, ru
+# en, es, de, fr, it, ru
 LANG = 'en'
 
 

@@ -10,6 +10,7 @@ SUPPORTED_LOCALES = {
     "es": "Spanish",
     "de": "German",
     "fr": "French",
+    "it": 'Italian',
     "ru": "Russian"
 }
 
@@ -28,6 +29,7 @@ def pull(filename, locale='en'):
            ru - Russian (data/ru)
            fr - French  (data/fr)
            es - Spanish (data/es)
+           it - Italian (data/it)
     Returns: The content of the file.
     """
     if locale not in SUPPORTED_LOCALES:

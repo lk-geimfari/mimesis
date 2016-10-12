@@ -957,6 +957,32 @@ EMOJI = (
     ":shipit:"
 )
 
+DOMAINS = [
+    ".ac",
+    ".ad",
+    ".biz",
+    ".by",
+    ".com",
+    ".edu",
+    ".gov",
+    ".in",
+    ".info",
+    ".int",
+    ".io",
+    ".is",
+    ".mil",
+    ".name",
+    ".net",
+    ".org",
+    ".place",
+    ".pw",
+    ".ru",
+    ".ua",
+    ".uk",
+    ".us",
+    ".uk"
+]
+
 EMAIL_DOMAINS = (
     "@gmail.com",
     "@yandex.com",
@@ -1204,6 +1230,7 @@ SUBREDDITS_NSFW = [
     "/r/rule34",
     "/r/hentai",
     "/r/rule34_comics",
+    "/r/AsianHotties",
     "/r/AsianHotties",
     "/r/AsiansGoneWild",
     "/r/realasians",
