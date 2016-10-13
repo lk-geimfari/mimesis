@@ -613,7 +613,7 @@ class HardwareTestCase(unittest.TestCase):
 
     def test_cpu_frequency(self):
         result = self.hard.cpu_frequency().split(' ')[0]
-        self.assertIn(result, common.CPU_FREQUENCY)
+        self.assertLess(float(result), 4.4)
 
     def test_cpu(self):
         result = self.hard.cpu()

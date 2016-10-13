@@ -1533,17 +1533,22 @@ PROGRAMMING_LANGS = [
 ]
 
 NOSQL = (
-    "MongoDB",
-    "RethinkDB",
-    "Couchbase",
-    "CouchDB",
     "Aerospike",
-    "MemcacheDB",
-    "MUMPS,  Riak",
-    "Redis",
+    "Aerospike",
     "AllegroGraph",
+    "Apache Cassandra",
+    "CouchDB",
+    "Couchbase",
+    "Hyperdex",
+    "InfiniteGraph",
+    "MUMPS",
+    "MemcacheDB",
+    "Memcached",
+    "MongoDB",
     "Neo4J",
-    "InfiniteGraph"
+    "Redis",
+    "RethinkDB",
+    "Riak"
 )
 
 SQL = (
@@ -1552,6 +1557,7 @@ SQL = (
     "PostgreSQL",
     "Oracle DB",
     "SQLite"
+    "DB2"
 )
 
 OTHER_TECH = [
@@ -1726,29 +1732,6 @@ CPU = (
     "Intel® Core i5",
     "Intel® Core i7"
 )
-
-CPU_FREQUENCY = [
-    "3.50",
-    "3.67",
-    "2.2",
-    "1.6",
-    "2.7",
-    "2.8",
-    "3.2",
-    "3.0",
-    "2.5",
-    "2.9",
-    "2.4",
-    "4.0",
-    "3.8",
-    "3.7",
-    "3.9",
-    "4.2",
-    "2.3",
-    "2.9",
-    "3.3",
-    "3.1"
-]
 
 GENERATION = (
     '2nd Generation',

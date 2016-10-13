@@ -986,7 +986,7 @@ class Personal(object):
         """
         It's internal method.
         Return a mask of telephone for current locale.
-        :return: mask.
+        :return: A mask of telephone.
 
         :Example:
             +7-(###)-###-##-## (for locale ru).
@@ -1588,8 +1588,8 @@ class Hardware(object):
         :Example:
             4.0 GHz.
         """
-        cf = common.CPU_FREQUENCY
-        return choice(cf) + ' GHz'
+        cf = uniform(1.5, 4.3)
+        return "{0:.1f} GHz".format(cf)
 
     @staticmethod
     def generation():
