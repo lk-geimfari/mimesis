@@ -4,7 +4,7 @@ from .church import (
     Food, Hardware, Text, Church
 )
 
-__version__ = '0.2.3'
+__version__ = '0.2.4'
 
 __all__ = [
     'Address', 'Personal',
