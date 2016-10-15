@@ -413,11 +413,11 @@ class Text(object):
         company_name = choice(pull('company', self.lang))
         return company_name.strip()
 
-    def copyright(self, from_=1990, to_=2016, without_date=False):
+    def copyright(self, mi=1990, mx=2016, without_date=False):
         """
         Generate a random copyright.
-        :param from_: Foundation date
-        :param to_: Current date
+        :param mi: Foundation date
+        :param mx: Current date
         :param without_date: if True then will be returned
         copyright without date.
         :return: Copyright of company.
@@ -425,12 +425,12 @@ class Text(object):
         :Example:
             © 1990-2016 Komercia, Inc.
         """
-        founded = randint(int(from_), int(to_))
+        founded = randint(int(mi), int(mx))
         company = self.company()
-        company_type = self.company_type(abbreviated=True)
+        ct = self.company_type(abbreviated=True)
         if without_date:
-            return '© {}, {}'.format(company, company_type)
-        return '© {0}-{1} {2}, {3}'.format(founded, to_, company, company_type)
+            return '© {}, {}'.format(company, ct)
+        return '© {}-{} {}, {}'.format(founded, mx, company, ct)
 
     @staticmethod
     def emoji():
@@ -673,7 +673,7 @@ class Personal(object):
         """
         url = 'http://www.' + self.username()
         domain = choice(common.DOMAINS)
-        return '{0}{1}'.format(url, domain)
+        return '{}{}'.format(url, domain)
 
     @staticmethod
     def subreddit(nsfw=False, full_url=False):
@@ -738,11 +738,10 @@ class Personal(object):
         mc = choice([randint(2221, 2720), randint(5100, 5500)])
 
         # Issuer identification number.
-        # Read more: http://bit.ly/2dBhNcX
         iin = mc if card_type.lower() == 'mastercard' or 'mc' else visa
 
         tail = ''.join([str(randint(0000, 9999)) for _ in range(0, 3)])
-        return '{0} {1}'.format(str(iin), tail)
+        return '{} {}'.format(str(iin), tail)
 
     @staticmethod
     def credit_card_expiration_date(from_=16, to_=25):
@@ -1002,6 +1001,9 @@ class Personal(object):
             mask = '+1-(###)-###-####'
         elif self.lang == 'es':
             mask = '+34 91# ## ## ##'
+        elif self.lang == 'it':
+            # TODO: _
+            mask = ''
         return mask
 
     def telephone(self, mask=None, placeholder='#'):
@@ -1023,7 +1025,7 @@ class Personal(object):
                 phone_number += str(randint(1, 9))
             else:
                 phone_number += i
-        return phone_number.strip()
+        return phone_number
 
     @staticmethod
     def avatar():
@@ -1035,7 +1037,7 @@ class Personal(object):
 
         """
         url = 'https://raw.githubusercontent.com/lk-geimfari/' \
-              'church/master/examples/avatars/{0}.png'.format(randint(1, 7))
+              'church/master/examples/avatars/{}.png'.format(randint(1, 7))
         return url
 
     @staticmethod
@@ -1174,7 +1176,7 @@ class Network(object):
             19.121.223.58
         """
         ip = '.'.join([str(randint(0, 255)) for _ in range(0, 4)])
-        return ip.strip()
+        return ip
 
     @staticmethod
     def ip_v6():
@@ -1216,7 +1218,7 @@ class Network(object):
             Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:15.0)
             Gecko/20100101 Firefox/15.0.1
         """
-        u_agent = choice(pull('useragents', 'en'))
+        u_agent = choice(pull('useragents'))
         return u_agent.strip()
 
 
@@ -1242,7 +1244,7 @@ class File(object):
         :return: Extension of a file.
 
         :Example:
-            .py (when file_type='source')
+            .py (When file_type='source')
         """
         k = file_type.lower()
         return choice(common.EXTENSIONS[k])
@@ -1268,7 +1270,7 @@ class Science(object):
             A = (ab)/2.
         """
         formula = choice(common.MATH_FORMULAS)
-        return formula.strip()
+        return formula
 
     def chemical_element(self, name_only=True):
         """
@@ -1340,10 +1342,8 @@ class Development(object):
         :Example:
             0.11.3.
         """
-        major = randint(0, 11)
-        minor = randint(0, 11)
-        micro = randint(0, 11)
-        return '{0}.{1}.{2}'.format(major, minor, micro)
+        n = (randint(0, 11) for _ in range(3))
+        return '{}.{}.{}'.format(*n)
 
     @staticmethod
     def database(nosql=False):
@@ -1400,7 +1400,7 @@ class Development(object):
     def stack_of_tech(self, nosql=False):
         """
         Get a random stack.
-        :param nosql: if True the only NoSQL skills.
+        :param nosql: When nosql=True the only NoSQL skills.
         :return: Dict of technologies.
 
         :Example:
@@ -1534,16 +1534,16 @@ class Hardware(object):
     """
     Class for generate data about hardware.
     All available methods:
-      1. resolution - resolution of screen
-      2. screen_size - screen size in inch.
-      3. cpu_frequency - cpu frequency.
-      4. generation - generation of something.
-      5. cpu_codename - codename of CPU.
-      6. ram_type - type of RAM.
-      7. ram_size - size of RAM in GB.
-      8. ssd_or_hdd - get HDD or SSD.
-      9. graphics - graphics.
-      10. cpu - cpu name.
+      1. resolution - Resolution of screen.
+      2. screen_size - Screen size in inch.
+      3. cpu_frequency - Frequency of CPU.
+      4. generation - Generation of something.
+      5. cpu_codename - Codename of CPU.
+      6. ram_type - Type of RAM.
+      7. ram_size - Size of RAM in GB.
+      8. ssd_or_hdd - Get HDD or SSD.
+      9. graphics - Graphics.
+      10. cpu - The name of CPU.
     """
 
     @staticmethod
@@ -1624,7 +1624,8 @@ class Hardware(object):
         :Example:
             DDR3.
         """
-        return choice(['DDR2', 'DDR3', 'DDR4'])
+        tp = ('DDR2', 'DDR3', 'DDR4')
+        return choice(tp)
 
     @staticmethod
     def ram_size():
@@ -1635,7 +1636,8 @@ class Hardware(object):
         :Example:
             16GB.
         """
-        return choice(['4', '6', '8', '16', '32']) + 'GB'
+        sizes = ('4', '6', '8', '16', '32', '64')
+        return choice(sizes) + 'GB'
 
     @staticmethod
     def ssd_or_hdd():

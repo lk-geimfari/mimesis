@@ -662,7 +662,6 @@ class PullTestCase(unittest.TestCase):
 
 
 class ChurchTestCase(unittest.TestCase):
-
     def setUp(self):
         self.church = Church('en')
 
