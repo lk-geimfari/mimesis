@@ -1,4 +1,4 @@
-## Small guidebook
+## Small guidebook [v0.1.9]
 
 ## Personal
 ```python

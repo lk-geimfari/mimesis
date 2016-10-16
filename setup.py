@@ -1,12 +1,15 @@
 from distutils.core import setup
 
-from church import __version__
+import church
 
 setup(
     name='church',
-    version=__version__,
+    version=church.__version__,
     packages=['church'],
-    keywords=['fake', 'data', 'testing', 'generate', 'faker', 'church'],
+    keywords=['fake', 'data', 'testing',
+              'generate', 'faker', 'church',
+              'bootstrap', 'database'
+              ],
     package_data={
         'church': [
             'data/*/*',
@@ -18,7 +21,8 @@ setup(
     author_email='likid.geimfari@gmail.com',
     description='Church is a library that help you generate fake data.',
     long_description="Church is a library to generate fake data."
-                     "It's very useful when you need to bootstrap your database.",
+                     "It's very useful when you need to bootstrap "
+                     "your database.",
     classifiers=[
         "Development Status :: 4 - Beta",
         'Intended Audience :: Developers',
