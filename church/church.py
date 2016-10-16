@@ -388,17 +388,17 @@ class Text(object):
         color_code = '#' + ''.join(sample(letters, 6))
         return color_code
 
-    def company_type(self, abbreviated=False):
+    def company_type(self, abbr=False):
         """
         Get a random company type.
-        :param abbreviated: if True then abbreviated company type.
+        :param abbr: if True then abbreviated company type.
         :return: Company type.
 
         :Example:
-            Incorporated (Inc. when abbreviated=True).
+            Incorporated (Inc. when abbr=True).
         """
         _type = choice(pull('company_type', self.lang)).split('|')
-        if abbreviated:
+        if abbr:
             return _type[1].strip()
         return _type[0].strip()
 
@@ -427,10 +427,10 @@ class Text(object):
         """
         founded = randint(int(mi), int(mx))
         company = self.company()
-        ct = self.company_type(abbreviated=True)
-        if without_date:
-            return '© {}, {}'.format(company, ct)
-        return '© {}-{} {}, {}'.format(founded, mx, company, ct)
+        ct = self.company_type(abbr=True)
+        if not without_date:
+            return '© {}-{} {}, {}'.format(founded, mx, company, ct)
+        return '© {}, {}'.format(company, ct)
 
     @staticmethod
     def emoji():
@@ -802,16 +802,16 @@ class Personal(object):
         """
         return "".join([choice(digits) for _ in range(14)])
 
-    def gender(self, abbreviated=False):
+    def gender(self, abbr=False):
         """
         Get a random gender.
-        :param abbreviated: if True then will getting abbreviated gender title.
+        :param abbr: if True then will getting abbreviated gender title.
         :return: Title of gender.
 
         :Example:
-            Male (M when abbreviated=True).
+            Male (M when abbr=True).
         """
-        if not abbreviated:
+        if not abbr:
             return choice(pull('gender', self.lang)).strip()
         return choice(pull('gender', self.lang))[0:1]
 
@@ -1002,8 +1002,7 @@ class Personal(object):
         elif self.lang == 'es':
             mask = '+34 91# ## ## ##'
         elif self.lang == 'it':
-            # TODO: _
-            mask = ''
+            mask = '+39 6 ########'
         return mask
 
     def telephone(self, mask=None, placeholder='#'):
@@ -1063,33 +1062,33 @@ class Datetime(object):
     def __init__(self, lang='en'):
         self.lang = lang.lower()
 
-    def day_of_week(self, abbreviated=False):
+    def day_of_week(self, abbr=False):
         """
         Get a random day of week.
-        :param abbreviated: if True then will be returned abbreviated name
+        :param abbr: if True then will be returned abbreviated name
         of day of the week.
         :return: Name of day of the week.
 
         :Example:
-            Wednesday (Wed. when abbreviated=True).
+            Wednesday (Wed. when abbr=True).
         """
         day = choice(pull('days', self.lang)).split('|')
-        if abbreviated:
+        if abbr:
             return day[1].strip()
         return day[0].strip()
 
-    def month(self, abbreviated=False):
+    def month(self, abbr=False):
         """
         Get a random month.
-        :param abbreviated: if True then will be returned
+        :param abbr: if True then will be returned
         abbreviated month name.
         :return: Month name.
 
         :Example:
-            January (Jan. when abbreviated=True).
+            January (Jan. when abbr=True).
         """
         month = choice(pull('months', self.lang)).split('|')
-        if abbreviated:
+        if abbr:
             return month[1].strip()
         return month[0].strip()
 
@@ -1430,6 +1429,21 @@ class Development(object):
         """
         return choice(common.OS)
 
+    @staticmethod
+    def stackoverflow_question():
+        """
+        Generate a random question id for StackOverFlow
+        and return url to a question.
+        :return: URL to a question.
+
+        :Example:
+            http://stackoverflow.com/questions/1726403
+
+        """
+        post_id = randint(1000000, 9999999)
+        url = 'http://stackoverflow.com/questions/{0}'
+        return url.format(post_id)
+
 
 class Food(object):
     """
@@ -1507,9 +1521,9 @@ class Food(object):
         mushroom = choice(pull('mushrooms', self.lang))
         return mushroom.strip()
 
-    def alcoholic_drink(self):
+    def drink(self):
         """
-        Get a random alcoholic drink.
+        Get a random drink.
         :return: Alcoholic drink.
 
         :Example:
@@ -1517,17 +1531,6 @@ class Food(object):
         """
         ad = choice(pull('drinks', self.lang))
         return ad.strip()
-
-    def cocktail(self):
-        """
-        Get a random cocktail.
-        :return: Cocktail name.
-
-        :Example:
-            Bacardi.
-        """
-        cocktail = choice(pull('cocktails', self.lang))
-        return cocktail.strip()
 
 
 class Hardware(object):
@@ -1589,10 +1592,10 @@ class Hardware(object):
             4.0 GHz.
         """
         cf = uniform(1.5, 4.3)
-        return "{0:.1f} GHz".format(cf)
+        return "{0:.1f}GHz".format(cf)
 
     @staticmethod
-    def generation():
+    def generation(abbr=False):
         """
         Get a random generation.
         :return: Generation of something.
@@ -1600,8 +1603,10 @@ class Hardware(object):
         :Example:
              6th Generation.
         """
-        gn = common.GENERATION
-        return choice(gn)
+        if not abbr:
+            return choice(common.GENERATION)
+
+        return choice(common.GENERATION_ABBR)
 
     @staticmethod
     def cpu_codename():
@@ -1681,9 +1686,9 @@ class Hardware(object):
             ASUS Intel® Core i3 3rd Generation 3.50 GHz/1920x1200/12″/
             512GB HDD(7200 RPM)/DDR2-4GB/Intel® Iris™ Pro Graphics 6200.
         """
-        full = '{0} {1} {2} {3}/{4}/{5}/{6}/{7}-{8}/{9}'.format(
+        full = '{0} {1}-{2} CPU @ {3}/{4}/{5}/{6}/{7}-{8}/{9}.'.format(
             self.manufacturer(), self.cpu(),
-            self.generation(), self.cpu_frequency(),
+            self.generation(abbr=True), self.cpu_frequency(),
             self.resolution(), self.screen_size(),
             self.ssd_or_hdd(), self.ram_type(),
             self.ram_size(), self.graphics()

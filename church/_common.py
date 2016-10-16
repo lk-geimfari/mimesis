@@ -1742,6 +1742,37 @@ GENERATION = (
     '7th Generation',
 )
 
+GENERATION_ABBR = (
+    '7500U',
+    '7Y75',
+    '7Y30',
+    '7200U',
+    '7500U',
+    '6600K',
+    '6700T',
+    '6700K',
+    '6600T',
+    '6300T',
+    '6100H',
+    '6820HK',
+    '6920HQ',
+    '6700HQ',
+    '6600U',
+    '6300U',
+    '6100U',
+    '5775C',
+    '5675C',
+    '5775R',
+    '5675R',
+    '5575R',
+    '5350H',
+    '5950HQ',
+    '5850HQ',
+    '5750HQ',
+    '5700HQ',
+    '5650U'
+)
+
 CPU_CODENAMES = (
     'Ivytown', 'Haswell', 'Fortville',
     'Devil\'s Canyon', 'Valley Island',

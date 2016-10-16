@@ -322,7 +322,7 @@ class PersonalTestCase(unittest.TestCase):
         result = self.person.gender() + '\n'
         self.assertIn(result, pull('gender', self.person.lang))
 
-        result_abbr = self.person.gender(abbreviated=True) + '\n'
+        result_abbr = self.person.gender(abbr=True) + '\n'
         self.assertEqual(len(result_abbr), 2)
 
     def test_height(self):
@@ -399,15 +399,15 @@ class DatetimeTestCase(unittest.TestCase):
         result = self.datetime.day_of_week() + '\n'
         self.assertGreater(len(result), 4)
 
-        result_abbr = self.datetime.day_of_week(abbreviated=True)
+        result_abbr = self.datetime.day_of_week(abbr=True)
         self.assertTrue(len(result_abbr) < 6 or '.' in result_abbr)
 
     def test_month(self):
         result = self.datetime.month() + '\n'
         self.assertGreater(len(result), 3)
 
-        result_abbr = self.datetime.month(abbreviated=True)
-        self.assertLess(len(result_abbr), 6)
+        result_abbr = self.datetime.month(abbr=True)
+        self.assertIsInstance(result_abbr, str)
 
     def test_year(self):
         result = self.datetime.year(from_=2000, to_=2016)
@@ -555,6 +555,12 @@ class DevelopmentTestCase(unittest.TestCase):
         result = self.dev.os()
         self.assertIn(result, common.OS)
 
+    def test_stackoverflow_question(self):
+        url = self.dev.stackoverflow_question()
+        post_id = int(url.split('/')[-1])
+        self.assertTrue((post_id >= 1000000) and
+                        (post_id <= 9999999))
+
 
 class FoodTestCase(unittest.TestCase):
     def setUp(self):
@@ -579,8 +585,8 @@ class FoodTestCase(unittest.TestCase):
         result = self.food.dish() + '\n'
         self.assertIn(result, pull('dishes', self.food.lang))
 
-    def test_alcoholic_drink(self):
-        result = self.food.alcoholic_drink() + '\n'
+    def test_drink(self):
+        result = self.food.drink() + '\n'
         self.assertIn(result, pull('drinks', self.food.lang))
 
     def test_spices(self):
@@ -612,7 +618,7 @@ class HardwareTestCase(unittest.TestCase):
         self.assertIn(result, common.GENERATION)
 
     def test_cpu_frequency(self):
-        result = self.hard.cpu_frequency().split(' ')[0]
+        result = self.hard.cpu_frequency().split('G')[0]
         self.assertLess(float(result), 4.4)
 
     def test_cpu(self):

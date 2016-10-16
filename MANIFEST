@@ -9,7 +9,6 @@ church/utils.py
 church/data/de/berries
 church/data/de/ch_el
 church/data/de/cities
-church/data/de/cocktails
 church/data/de/colors
 church/data/de/company
 church/data/de/company_type
@@ -49,7 +48,6 @@ church/data/de/worldview
 church/data/en/berries
 church/data/en/ch_el
 church/data/en/cities
-church/data/en/cocktails
 church/data/en/colors
 church/data/en/company
 church/data/en/company_type
@@ -93,7 +91,6 @@ church/data/es/ch_el
 church/data/es/ch_el~
 church/data/es/cities
 church/data/es/cities~
-church/data/es/cocktails
 church/data/es/colors
 church/data/es/company
 church/data/es/company_type
@@ -134,7 +131,6 @@ church/data/etc/naughty_strings
 church/data/fr/berries
 church/data/fr/ch_el
 church/data/fr/cities
-church/data/fr/cocktails
 church/data/fr/colors
 church/data/fr/company
 church/data/fr/company_type
@@ -174,7 +170,6 @@ church/data/fr/worldview
 church/data/it/berries
 church/data/it/ch_el
 church/data/it/cities
-church/data/it/cocktails
 church/data/it/colors
 church/data/it/company
 church/data/it/company_type
@@ -214,7 +209,6 @@ church/data/it/worldview
 church/data/ru/berries
 church/data/ru/ch_el
 church/data/ru/cities
-church/data/ru/cocktails
 church/data/ru/colors
 church/data/ru/company
 church/data/ru/company_type
