@@ -25,7 +25,8 @@ __all__ = ['Address', 'Personal',
            'Datetime', 'File',
            'Science', 'Development',
            'Food', 'Hardware',
-           'Numbers', 'Church'
+           'Numbers', 'Business',
+           'Church'
            ]
 
 
@@ -42,6 +43,7 @@ class Church(object):
         self._personal = Personal
         self._address = Address
         self._datetime = Datetime
+        self._business = Business
         self._text = Text
         self._food = Food
         self._science = Science
@@ -51,6 +53,7 @@ class Church(object):
         self.hardware = Hardware()
         self.network = Network()
 
+    # TODO: Rewrite all @property as a dynamic.
     @property
     def personal(self):
         if callable(self._personal):
@@ -68,6 +71,12 @@ class Church(object):
         if callable(self._datetime):
             self._datetime = self._datetime(self.locale)
         return self._datetime
+
+    @property
+    def business(self):
+        if callable(self._business):
+            self._business = self._business(self.locale)
+        return self._business
 
     @property
     def text(self):
@@ -95,7 +104,7 @@ class Address(object):
             lang (str): current language.
     """
 
-    def __init__(self, lang='en_us'):
+    def __init__(self, lang='en'):
         self.lang = lang.lower()
 
     @staticmethod
@@ -353,17 +362,6 @@ class Text(object):
         quote = choice(pull('quotes', self.lang))
         return quote.strip()
 
-    @staticmethod
-    def currency_iso():
-        """
-        Get a currency code. ISO 4217 format.
-        :return: Currency code.
-
-        :Example:
-            RUR.
-        """
-        return choice(common.CURRENCY)
-
     def color(self):
         """
         Get a random name of color.
@@ -387,50 +385,6 @@ class Text(object):
         letters = '0123456789ABCDEF'
         color_code = '#' + ''.join(sample(letters, 6))
         return color_code
-
-    def company_type(self, abbr=False):
-        """
-        Get a random company type.
-        :param abbr: if True then abbreviated company type.
-        :return: Company type.
-
-        :Example:
-            Incorporated (Inc. when abbr=True).
-        """
-        _type = choice(pull('company_type', self.lang)).split('|')
-        if abbr:
-            return _type[1].strip()
-        return _type[0].strip()
-
-    def company(self):
-        """
-        Get a random company name.
-        :return: Company name.
-
-        :Example:
-            Gamma Systems
-        """
-        company_name = choice(pull('company', self.lang))
-        return company_name.strip()
-
-    def copyright(self, mi=1990, mx=2016, without_date=False):
-        """
-        Generate a random copyright.
-        :param mi: Foundation date
-        :param mx: Current date
-        :param without_date: if True then will be returned
-        copyright without date.
-        :return: Copyright of company.
-
-        :Example:
-            © 1990-2016 Komercia, Inc.
-        """
-        founded = randint(int(mi), int(mx))
-        company = self.company()
-        ct = self.company_type(abbr=True)
-        if not without_date:
-            return '© {}-{} {}, {}'.format(founded, mx, company, ct)
-        return '© {}, {}'.format(company, ct)
 
     @staticmethod
     def emoji():
@@ -493,6 +447,70 @@ class Text(object):
         scale = '°C' if scale.lower() == 'c' else '°F'
 
         return '{0:0.1f} {1}'.format(n, scale)
+
+
+class Business(object):
+    """
+    Class for generating data for business.
+    """
+
+    def __init__(self, lang):
+        self.lang = lang.lower()
+
+    def company_type(self, abbr=False):
+        """
+        Get a random company type.
+        :param abbr: if True then abbreviated company type.
+        :return: Company type.
+
+        :Example:
+            Incorporated (Inc. when abbr=True).
+        """
+        _type = choice(pull('company_type', self.lang)).split('|')
+        if abbr:
+            return _type[1].strip()
+        return _type[0].strip()
+
+    def company(self):
+        """
+        Get a random company name.
+        :return: Company name.
+
+        :Example:
+            Gamma Systems
+        """
+        company_name = choice(pull('company', self.lang))
+        return company_name.strip()
+
+    def copyright(self, mi=1990, mx=2016, without_date=False):
+        """
+        Generate a random copyright.
+        :param mi: Foundation date
+        :param mx: Current date
+        :param without_date: if True then will be returned
+        copyright without date.
+        :return: Copyright of company.
+
+        :Example:
+            © 1990-2016 Komercia, Inc.
+        """
+        founded = randint(int(mi), int(mx))
+        company = self.company()
+        ct = self.company_type(abbr=True)
+        if not without_date:
+            return '© {}-{} {}, {}'.format(founded, mx, company, ct)
+        return '© {}, {}'.format(company, ct)
+
+    @staticmethod
+    def currency_iso():
+        """
+        Get a currency code. ISO 4217 format.
+        :return: Currency code.
+
+        :Example:
+            RUR.
+        """
+        return choice(common.CURRENCY)
 
 
 class Personal(object):
@@ -635,16 +653,18 @@ class Personal(object):
         """
         algorithm = algorithm.lower()
         punc = '!"#$%+:<?@^_'
+
         s = [choice(ascii_letters + digits + punc) for _ in range(length)]
-        password = "".join(s)
+        password = "".join(s).encode()
+
         if algorithm == 'sha1':
-            return sha1(password.encode()).hexdigest()
+            return sha1(password).hexdigest()
         elif algorithm == 'sha256':
-            return sha256(password.encode()).hexdigest()
+            return sha256(password).hexdigest()
         elif algorithm == 'sha512':
-            return sha512(password.encode()).hexdigest()
+            return sha512(password).hexdigest()
         elif algorithm == 'md5':
-            return md5(password.encode()).hexdigest()
+            return md5(password).hexdigest()
         else:
             return password
 
@@ -744,18 +764,18 @@ class Personal(object):
         return '{} {}'.format(str(iin), tail)
 
     @staticmethod
-    def credit_card_expiration_date(from_=16, to_=25):
+    def credit_card_expiration_date(mi=16, mx=25):
         """
         Generate a random expiration date for credit card.
-        :param from_: Date of issue.
-        :param to_: Maximum of expiration_date.
+        :param mi: Date of issue.
+        :param mx: Maximum of expiration_date.
         :return: Expiration date of credit card.
 
         :Example:
             03/19.
         """
         month = randint(1, 12)
-        year = randint(int(from_), int(to_))
+        year = randint(int(mi), int(mx))
         month = '0' + str(month) if month < 10 else month
         return '{0}/{1}'.format(month, year)
 
@@ -1030,13 +1050,16 @@ class Personal(object):
     def avatar():
         """
         Get a random link to avatar.
-        Returns:
-            Link to avatar that hosted on github in
-            repository of church.
+        :return: Link to avatar that hosted on github in
+        repository of church.
 
+        :Example:
+            https://raw.githubusercontent.com/lk-geimfari/
+            church/master/examples/avatars/4.png
         """
+        img_id = randint(1, 7)
         url = 'https://raw.githubusercontent.com/lk-geimfari/' \
-              'church/master/examples/avatars/{}.png'.format(randint(1, 7))
+              'church/master/examples/avatars/%s.png' % img_id
         return url
 
     @staticmethod

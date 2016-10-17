@@ -1,13 +1,14 @@
 import array
 import re
-import unittest
+from unittest import TestCase
 
 import church._common as common
 from church.church import (
     Address, Text, Personal,
     Datetime, Network, File,
     Development, Food, Hardware,
-    Science, Numbers, Church
+    Science, Numbers, Business,
+    Church
 )
 from church.exceptions import (
     UnsupportedLocale
@@ -18,7 +19,7 @@ from church.utils import pull
 LANG = 'en'
 
 
-class AddressTestCase(unittest.TestCase):
+class AddressTestCase(TestCase):
     def setUp(self):
         self.address = Address(LANG)
 
@@ -30,20 +31,23 @@ class AddressTestCase(unittest.TestCase):
         self.assertTrue(re.match(r'[0-9]{1,5}$', result))
 
     def test_street_name(self):
-        result = self.address.street_name() + '\n'
-        self.assertIn(result, pull('street', self.address.lang))
+        result = self.address.street_name()
+        parent_file = pull('street', self.address.lang)
+        self.assertIn(result + '\n', parent_file)
 
     def test_street_suffix(self):
-        result = self.address.street_suffix() + '\n'
-        self.assertIn(result, pull('st_suffix', self.address.lang))
+        result = self.address.street_suffix()
+        parent_file = pull('st_suffix', self.address.lang)
+        self.assertIn(result + '\n', parent_file)
 
     def test_address(self):
         result = self.address.address()
         self.assertTrue(len(result) > 6)
 
     def test_state(self):
-        result = self.address.state() + '\n'
-        self.assertIn(result, pull('states', self.address.lang))
+        result = self.address.state()
+        parent_file = pull('states', self.address.lang)
+        self.assertIn(result + '\n', parent_file)
 
     def test_postal_code(self):
         result = self.address.postal_code()
@@ -60,11 +64,12 @@ class AddressTestCase(unittest.TestCase):
         self.assertTrue(len(result2) < 4)
 
     def test_city(self):
-        result = self.address.city() + '\n'
-        self.assertIn(result, pull('cities', self.address.lang))
+        result = self.address.city()
+        parent_file = pull('cities', self.address.lang)
+        self.assertIn(result + '\n', parent_file)
 
 
-class NumbersTestCase(unittest.TestCase):
+class NumbersTestCase(TestCase):
     def setUp(self):
         self.numbers = Numbers()
 
@@ -90,7 +95,7 @@ class NumbersTestCase(unittest.TestCase):
         self.assertIsInstance(result, list)
 
 
-class TextTestCase(unittest.TestCase):
+class TextTestCase(TestCase):
     def setUp(self):
         self.data = Text(LANG)
 
@@ -99,11 +104,13 @@ class TextTestCase(unittest.TestCase):
 
     def test_sentence(self):
         result = self.data.sentence() + '\n'
-        self.assertIn(result, pull('text', self.data.lang))
+        parent_file = pull('text', self.data.lang)
+        self.assertIn(result, parent_file)
 
     def test_title(self):
         result = self.data.title() + '\n'
-        self.assertIn(result, pull('text', self.data.lang))
+        parent_file = pull('text', self.data.lang)
+        self.assertIn(result, parent_file)
 
     def test_lorem_ipsum(self):
         result = self.data.lorem_ipsum(quantity=2)
@@ -118,12 +125,14 @@ class TextTestCase(unittest.TestCase):
         self.assertEqual(len(result), 1)
 
     def test_word(self):
-        result = self.data.word() + '\n'
-        self.assertIn(result, pull('words', self.data.lang))
+        result = self.data.word()
+        parent_file = pull('words', self.data.lang)
+        self.assertIn(result + '\n', parent_file)
 
     def test_swear_word(self):
-        result = self.data.swear_word() + '\n'
-        self.assertIn(result, pull('swear_words', self.data.lang))
+        result = self.data.swear_word()
+        parent_file = pull('swear_words', self.data.lang)
+        self.assertIn(result + '\n', parent_file)
 
     def test_naughty_strings(self):
         result = self.data.naughty_strings()
@@ -131,36 +140,18 @@ class TextTestCase(unittest.TestCase):
         self.assertIsInstance(result, list)
 
     def test_quote_from_movie(self):
-        result = self.data.quote_from_movie() + '\n'
-        self.assertIn(result, pull('quotes', self.data.lang))
-
-    def test_currency_sio(self):
-        result = self.data.currency_iso()
-        self.assertIn(result, common.CURRENCY)
+        result = self.data.quote_from_movie()
+        parent_file = pull('quotes', self.data.lang)
+        self.assertIn(result + '\n', parent_file)
 
     def test_color(self):
-        result = self.data.color() + '\n'
-        self.assertIn(result, pull('colors', self.data.lang))
+        result = self.data.color()
+        parent_file = pull('colors', self.data.lang)
+        self.assertIn(result + '\n', parent_file)
 
     def test_hex_color(self):
         result = self.data.hex_color()
         self.assertIn('#', result)
-
-    def test_company_type(self):
-        result = self.data.company_type()
-        self.assertTrue(len(result) > 8)
-
-    def test_company(self):
-        result = self.data.company() + '\n'
-        self.assertIn(result, pull('company', self.data.lang))
-
-    def test_copyright(self):
-        result = self.data.copyright()
-        copyright_symbol = '©'
-        self.assertIn(copyright_symbol, result)
-
-        result = self.data.copyright(without_date=True)
-        self.assertFalse(any(char.isdigit() for char in result))
 
     def test_emoji(self):
         result = self.data.emoji()
@@ -185,7 +176,33 @@ class TextTestCase(unittest.TestCase):
         self.assertTrue((temp >= 0) and (temp <= (10 * 1.8) + 32))
 
 
-class PersonalTestCase(unittest.TestCase):
+class BusinessTestCase(TestCase):
+    def setUp(self):
+        self.business = Business(LANG)
+
+    def test_company_type(self):
+        result = self.business.company_type()
+        self.assertTrue(len(result) > 8)
+
+    def test_company(self):
+        result = self.business.company()
+        parent_file = pull('company', self.business.lang)
+        self.assertIn(result + '\n', parent_file)
+
+    def test_copyright(self):
+        result = self.business.copyright()
+        copyright_symbol = '©'
+        self.assertIn(copyright_symbol, result)
+
+        result = self.business.copyright(without_date=True)
+        self.assertFalse(any(char.isdigit() for char in result))
+
+    def test_currency_sio(self):
+        result = self.business.currency_iso()
+        self.assertIn(result, common.CURRENCY)
+
+
+class PersonalTestCase(TestCase):
     def setUp(self):
         self.person = Personal(LANG)
 
@@ -197,26 +214,36 @@ class PersonalTestCase(unittest.TestCase):
         self.assertTrue(result <= 55)
 
     def test_name(self):
-        result = self.person.name() + '\n'
-        self.assertIn(result, pull('f_names', self.person.lang))
+        result = self.person.name()
+        parent_file = pull('f_names', self.person.lang)
+        self.assertIn(result + '\n', parent_file)
 
-        result = self.person.name('m') + '\n'
-        self.assertIn(result, pull('m_names', self.person.lang))
+        result = self.person.name('m')
+        parent_file = pull('m_names', self.person.lang)
+        self.assertIn(result + '\n', parent_file)
 
     def test_telephone(self):
         result = self.person.telephone()
         self.assertTrue(len(result) >= 11)
 
+        mask = '+5 (###)-###-##-##'
+        result2 = self.person.telephone(mask=mask)
+        head = result2.split(' ')[0]
+        self.assertEqual(head, '+5')
+
     def test_surname(self):
         if self.person.lang == 'ru':
-            result = self.person.surname('f') + '\n'
-            self.assertIn(result, pull('f_surnames', self.person.lang))
+            result = self.person.surname('f')
+            parent_file = pull('f_surnames', self.person.lang)
+            self.assertIn(result + '\n', parent_file)
 
-            result = self.person.surname('m') + '\n'
-            self.assertIn(result, pull('m_surnames', self.person.lang))
+            result = self.person.surname('m')
+            parent_file = pull('m_surnames', self.person.lang)
+            self.assertIn(result + '\n', parent_file)
         else:
-            result = self.person.surname() + '\n'
-            self.assertIn(result, pull('surnames', self.person.lang))
+            result = self.person.surname()
+            parent_file = pull('surnames', self.person.lang)
+            self.assertIn(result + '\n', parent_file)
 
     def test_full_name(self):
         result = self.person.full_name('f')
@@ -257,20 +284,20 @@ class PersonalTestCase(unittest.TestCase):
         self.assertEqual(len(result), 14)
 
     def test_password(self):
-        _plain = self.person.password(length=15)
-        self.assertEqual(len(_plain), 15)
+        plain = self.person.password(length=15)
+        self.assertEqual(len(plain), 15)
 
-        _md5 = self.person.password(algorithm='md5')
-        self.assertEqual(len(_md5), 32)
+        md5 = self.person.password(algorithm='md5')
+        self.assertEqual(len(md5), 32)
 
-        _sha1 = self.person.password(algorithm='sha1')
-        self.assertEqual(len(_sha1), 40)
+        sha1 = self.person.password(algorithm='sha1')
+        self.assertEqual(len(sha1), 40)
 
-        _sha256 = self.person.password(algorithm='sha256')
-        self.assertEqual(len(_sha256), 64)
+        sha256 = self.person.password(algorithm='sha256')
+        self.assertEqual(len(sha256), 64)
 
-        _sha512 = self.person.password(algorithm='sha512')
-        self.assertEqual(len(_sha512), 128)
+        sha512 = self.person.password(algorithm='sha512')
+        self.assertEqual(len(sha512), 128)
 
     def test_email(self):
         result = self.person.email()
@@ -310,7 +337,7 @@ class PersonalTestCase(unittest.TestCase):
         self.assertTrue(re.match(r'[\d]+((-|\s)?[\d]+)+', result))
 
     def test_expiration_date(self):
-        result = self.person.credit_card_expiration_date(from_=16, to_=25)
+        result = self.person.credit_card_expiration_date(mi=16, mx=25)
         year = result.split('/')[1]
         self.assertTrue((int(year) >= 16) and (int(year) <= 25))
 
@@ -340,44 +367,52 @@ class PersonalTestCase(unittest.TestCase):
 
     def test_sexual_orientation(self):
         result = self.person.sexual_orientation()
-        self.assertIn(
-            result + '\n', pull('sexuality', self.person.lang))
+        parent_file = pull('sexuality', self.person.lang)
+        self.assertIn(result + '\n', parent_file)
 
     def test_profession(self):
-        result = self.person.profession() + '\n'
-        self.assertIn(result, pull('professions', self.person.lang))
+        result = self.person.profession()
+        parent_file = pull('professions', self.person.lang)
+        self.assertIn(result + '\n', parent_file)
 
     def test_university(self):
-        result = self.person.university() + '\n'
-        self.assertIn(result, pull('university', self.person.lang))
+        result = self.person.university()
+        parent_file = pull('university', self.person.lang)
+        self.assertIn(result + '\n', parent_file)
 
     def test_qualification(self):
-        result = self.person.qualification() + '\n'
-        self.assertIn(result, pull('qualifications', self.person.lang))
+        result = self.person.qualification()
+        parent_file = pull('qualifications', self.person.lang)
+        self.assertIn(result + '\n', parent_file)
 
     def test_language(self):
-        result = self.person.language() + '\n'
-        self.assertIn(result, pull('languages', self.person.lang))
+        result = self.person.language()
+        parent_file = pull('languages', self.person.lang)
+        self.assertIn(result + '\n', parent_file)
 
     def test_favorite_movie(self):
-        result = self.person.favorite_movie() + '\n'
-        self.assertIn(result, pull('movies', self.person.lang))
+        result = self.person.favorite_movie()
+        parent_file = pull('movies', self.person.lang)
+        self.assertIn(result + '\n', parent_file)
 
     def test_favorite_music_genre(self):
         result = self.person.favorite_music_genre()
         self.assertIn(result, common.FAVORITE_MUSIC_GENRE)
 
     def test_worldview(self):
-        result = self.person.worldview() + '\n'
-        self.assertIn(result, pull('worldview', self.person.lang))
+        result = self.person.worldview()
+        parent_file = pull('worldview', self.person.lang)
+        self.assertIn(result + '\n', parent_file)
 
     def test_views_on(self):
-        result = self.person.views_on() + '\n'
-        self.assertIn(result, pull('views_on', self.person.lang))
+        result = self.person.views_on()
+        parent_file = pull('views_on', self.person.lang)
+        self.assertIn(result + '\n', parent_file)
 
     def test_political_views(self):
-        result = self.person.political_views() + '\n'
-        self.assertIn(result, pull('political_views', self.person.lang))
+        result = self.person.political_views()
+        parent_file = pull('political_views', self.person.lang)
+        self.assertIn(result + '\n', parent_file)
 
     def test_avatar(self):
         result = self.person.avatar()
@@ -388,7 +423,7 @@ class PersonalTestCase(unittest.TestCase):
         self.assertIn(result, common.THE_VEHICLES)
 
 
-class DatetimeTestCase(unittest.TestCase):
+class DatetimeTestCase(TestCase):
     def setUp(self):
         self.datetime = Datetime(LANG)
 
@@ -414,8 +449,9 @@ class DatetimeTestCase(unittest.TestCase):
         self.assertTrue((result >= 2000) and (result <= 2016))
 
     def test_periodicity(self):
-        result = self.datetime.periodicity() + '\n'
-        self.assertIn(result, pull('periodicity', self.datetime.lang))
+        result = self.datetime.periodicity()
+        parent_file = pull('periodicity', self.datetime.lang)
+        self.assertIn(result + '\n', parent_file)
 
     def test_day_of_month(self):
         result = self.datetime.day_of_month()
@@ -426,7 +462,7 @@ class DatetimeTestCase(unittest.TestCase):
         self.assertIsInstance(result, str)
 
 
-class NetworkTestCase(unittest.TestCase):
+class NetworkTestCase(TestCase):
     def setUp(self):
         self.net = Network()
 
@@ -462,11 +498,12 @@ class NetworkTestCase(unittest.TestCase):
         self.assertTrue(re.match(mac_pattern, result))
 
     def test_user_agent(self):
-        result = self.net.user_agent() + '\n'
-        self.assertIn(result, pull('useragents', 'en'))
+        result = self.net.user_agent()
+        parent_file = pull('useragents', 'en')
+        self.assertIn(result + '\n', parent_file)
 
 
-class FileTestCase(unittest.TestCase):
+class FileTestCase(TestCase):
     def setUp(self):
         self.file = File()
 
@@ -478,7 +515,7 @@ class FileTestCase(unittest.TestCase):
         self.assertIn(text, common.EXTENSIONS['text'])
 
 
-class ScienceTestCase(unittest.TestCase):
+class ScienceTestCase(TestCase):
     def setUp(self):
         self.science = Science(LANG)
 
@@ -490,12 +527,14 @@ class ScienceTestCase(unittest.TestCase):
         self.assertIn(result, common.MATH_FORMULAS)
 
     def test_article_on_wiki(self):
-        result = self.science.article_on_wiki() + '\n'
-        self.assertIn(result, pull('science_wiki', self.science.lang))
+        result = self.science.article_on_wiki()
+        parent_file = pull('science_wiki', self.science.lang)
+        self.assertIn(result + '\n', parent_file)
 
     def test_scientist(self):
-        result = self.science.scientist() + '\n'
-        self.assertIn(result, pull('scientist', self.science.lang))
+        result = self.science.scientist()
+        parent_file = pull('scientist', self.science.lang)
+        self.assertIn(result + '\n', parent_file)
 
     def test_chemical_element(self):
         result = self.science.chemical_element(name_only=True)
@@ -505,7 +544,7 @@ class ScienceTestCase(unittest.TestCase):
         self.assertIsInstance(_result, dict)
 
 
-class DevelopmentTestCase(unittest.TestCase):
+class DevelopmentTestCase(TestCase):
     def setUp(self):
         self.dev = Development()
 
@@ -562,7 +601,7 @@ class DevelopmentTestCase(unittest.TestCase):
                         (post_id <= 9999999))
 
 
-class FoodTestCase(unittest.TestCase):
+class FoodTestCase(TestCase):
     def setUp(self):
         self.food = Food(LANG)
 
@@ -570,35 +609,42 @@ class FoodTestCase(unittest.TestCase):
         del self.food
 
     def test_berry(self):
-        result = self.food.berry() + '\n'
-        self.assertIn(result, pull('berries', self.food.lang))
+        result = self.food.berry()
+        parent_file = pull('berries', self.food.lang)
+        self.assertIn(result + '\n', parent_file)
 
     def test_vegetable(self):
-        result = self.food.vegetable() + '\n'
-        self.assertIn(result, pull('vegetables', self.food.lang))
+        result = self.food.vegetable()
+        parent_file = pull('vegetables', self.food.lang)
+        self.assertIn(result + '\n', parent_file)
 
     def test_fruit(self):
-        result = self.food.fruit() + '\n'
-        self.assertIn(result, pull('fruits', self.food.lang))
+        result = self.food.fruit()
+        parent_file = pull('fruits', self.food.lang)
+        self.assertIn(result + '\n', parent_file)
 
     def test_dish(self):
-        result = self.food.dish() + '\n'
-        self.assertIn(result, pull('dishes', self.food.lang))
+        result = self.food.dish()
+        parent_file = pull('dishes', self.food.lang)
+        self.assertIn(result + '\n', parent_file)
 
     def test_drink(self):
-        result = self.food.drink() + '\n'
-        self.assertIn(result, pull('drinks', self.food.lang))
+        result = self.food.drink()
+        parent_file = pull('drinks', self.food.lang)
+        self.assertIn(result + '\n', parent_file)
 
     def test_spices(self):
-        result = self.food.spices() + '\n'
-        self.assertIn(result, pull('spices', self.food.lang))
+        result = self.food.spices()
+        parent_file = pull('spices', self.food.lang)
+        self.assertIn(result + '\n', parent_file)
 
     def test_mushroom(self):
-        result = self.food.mushroom() + '\n'
-        self.assertIn(result, pull('mushrooms', self.food.lang))
+        result = self.food.mushroom()
+        parent_file = pull('mushrooms', self.food.lang)
+        self.assertIn(result + '\n', parent_file)
 
 
-class HardwareTestCase(unittest.TestCase):
+class HardwareTestCase(TestCase):
     def setUp(self):
         self.hard = Hardware()
 
@@ -658,16 +704,18 @@ class HardwareTestCase(unittest.TestCase):
         self.assertIn(result, common.PHONE_MODELS)
 
 
-class PullTestCase(unittest.TestCase):
+class PullTestCase(TestCase):
     def test_pull(self):
         result = pull('views_on', 'en')
         self.assertIsNotNone(result)
         self.assertIsInstance(result, list)
-        self.assertRaises(UnsupportedLocale, lambda: pull('views_on', 'spoke'))
-        self.assertRaises(FileNotFoundError, lambda: pull('something', 'en'))
+        self.assertRaises(
+            UnsupportedLocale, lambda: pull('views_on', 'spoke'))
+        self.assertRaises(
+            FileNotFoundError, lambda: pull('something', 'en'))
 
 
-class ChurchTestCase(unittest.TestCase):
+class ChurchTestCase(TestCase):
     def setUp(self):
         self.church = Church('en')
 
@@ -687,6 +735,10 @@ class ChurchTestCase(unittest.TestCase):
         result = self.church.food.fruit()
         self.assertIsNotNone(result)
 
-    def test_sciense(self):
+    def test_science(self):
         result = self.church.science.scientist()
+        self.assertIsNotNone(result)
+
+    def test_business(self):
+        result = self.church.business.copyright()
         self.assertIsNotNone(result)
