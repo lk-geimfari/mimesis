@@ -1,0 +1,44 @@
+Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.
+Haskell features a type system with type inference and lazy evaluation.
+Type classes first appeared in the Haskell programming language.
+Its main implementation is the Glasgow Haskell Compiler.
+Erlang is a general-purpose, concurrent, functional programming language.
+It is also a garbage-collected runtime system.
+The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.
+Erlang is known for its designs that are well suited for systems.
+Atoms are used within a program to denote distinguished values.
+They are written as strings of consecutive alphanumeric characters, the first character being lowercase.
+Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.
+Tuples are containers for a fixed number of Erlang data types.
+The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.
+The arguments can be primitive data types or compound data types.
+Any element of a tuple can be accessed in constant time.
+Ports are used to communicate with the external world.
+Ports are created with the built-in function open_port.
+Messages can be sent to and received from ports, but these messages must obey the so-called "port protocol."
+Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+Cras ornare mauris dolor, in dignissim mauris semper sit amet.
+Vivamus luctus luctus nisi, in rutrum lectus posuere faucibus.
+Curabitur nec arcu sit amet nisl vulputate lacinia eu vel elit.
+Aliquam eu erat semper, interdum libero sed, tempus felis.
+Cras nisi turpis, lobortis ut euismod ac, gravida vitae elit.
+Quisque volutpat metus lectus, vestibulum rhoncus velit mattis ut.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+Donec at dolor libero. Vestibulum eu tempus nisl.
+Suspendisse potenti.
+Nullam fermentum est enim, quis consequat augue elementum a.
+Nulla mattis nisi ultrices arcu ultricies, ut facilisis nibh fringilla.
+Donec nec nisl dignissim, suscipit elit ut, molestie erat.
+Sed et lectus quam. Integer at imperdiet ante, in faucibus nunc.
+Praesent a ante sodales, commodo augue a, maximus diam.
+Fusce in ipsum mi.
+Integer at consequat neque.
+Donec a venenatis dui.
+Aenean ligula lectus, tristique in tristique a, lacinia sit amet nunc.
+Cras fringilla arcu id nunc tincidunt mattis.
+Nunc eleifend semper sagittis. Etiam lorem lorem, imperdiet vel feugiat quis, ullamcorper id erat.
+Praesent semper lorem at quam porttitor sollicitudin.
+Nullam eget ex sapien.
+Fusce eget urna nec neque rutrum dapibus.
+Morbi sapien odio, venenatis vitae tristique non, condimentum et nibh.
+Ut lectus nulla, semper sed malesuada id, finibus ac nibh.
