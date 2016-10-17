@@ -13,7 +13,8 @@ SUPPORTED_LOCALES = {
     "de": "German",
     "fr": "French",
     "it": 'Italian',
-    "ru": "Russian"
+    "ru": "Russian",
+    "pt-br": 'Brazilian Portuguese'
 }
 
 
