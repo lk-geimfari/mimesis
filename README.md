@@ -17,6 +17,7 @@ At this moment a library has 6 supported locales:
 - :de: - Deutsch  (de)
 - :fr: - Français (fr)
 - :it: - Italiano (it)
+- 🇧🇷 - Português (pt-br)
 - :ru: - Русский  (ru)
 
 
