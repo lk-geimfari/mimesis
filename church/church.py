@@ -1533,17 +1533,6 @@ class Food(object):
         spices = choice(pull('spices', self.lang))
         return spices.strip()
 
-    def mushroom(self):
-        """
-        Get a random mushroom's name
-        :return: Mushroom's name.
-
-        :Example:
-            Marasmius oreades.
-        """
-        mushroom = choice(pull('mushrooms', self.lang))
-        return mushroom.strip()
-
     def drink(self):
         """
         Get a random drink.

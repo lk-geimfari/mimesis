@@ -639,11 +639,6 @@ class FoodTestCase(TestCase):
         parent_file = pull('spices', self.food.lang)
         self.assertIn(result + '\n', parent_file)
 
-    def test_mushroom(self):
-        result = self.food.mushroom()
-        parent_file = pull('mushrooms', self.food.lang)
-        self.assertIn(result + '\n', parent_file)
-
 
 class HardwareTestCase(TestCase):
     def setUp(self):
