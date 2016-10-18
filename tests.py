@@ -609,10 +609,6 @@ class FoodTestCase(TestCase):
     def tearDown(self):
         del self.food
 
-    def test_berry(self):
-        result = self.food.berry()
-        parent_file = pull('berries', self.food.lang)
-        self.assertIn(result + '\n', parent_file)
 
     def test_vegetable(self):
         result = self.food.vegetable()
@@ -620,8 +616,8 @@ class FoodTestCase(TestCase):
         self.assertIn(result + '\n', parent_file)
 
     def test_fruit(self):
-        result = self.food.fruit()
-        parent_file = pull('fruits', self.food.lang)
+        result = self.food.fruit_or_berry()
+        parent_file = pull('fruits_berries', self.food.lang)
         self.assertIn(result + '\n', parent_file)
 
     def test_dish(self):
@@ -728,7 +724,7 @@ class ChurchTestCase(TestCase):
         self.assertIsNotNone(result)
 
     def test_food(self):
-        result = self.church.food.fruit()
+        result = self.church.food.fruit_or_berry()
         self.assertIsNotNone(result)
 
     def test_science(self):

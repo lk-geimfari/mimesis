@@ -1478,17 +1478,6 @@ class Food(object):
     def __init__(self, lang='en'):
         self.lang = lang.lower()
 
-    def berry(self):
-        """
-        Get random berry.
-        :return: Berry.
-
-        :Example:
-            Blackberry.
-        """
-        berry = choice(pull('berries', self.lang))
-        return berry.strip()
-
     def vegetable(self):
         """
         Get a random vegetable.
@@ -1500,15 +1489,15 @@ class Food(object):
         vegetable = choice(pull('vegetables', self.lang))
         return vegetable.strip()
 
-    def fruit(self):
+    def fruit_or_berry(self):
         """
-        Get a random fruit name.
+        Get a random fruit_or_berry name.
         :return: Fruit.
 
         :Example:
             Banana.
         """
-        fruit = choice(pull('fruits', self.lang))
+        fruit = choice(pull('fruits_berries', self.lang))
         return fruit.strip()
 
     def dish(self):
