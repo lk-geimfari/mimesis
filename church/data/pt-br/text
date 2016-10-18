@@ -1,21 +1,21 @@
-Haskell is a standardized, general-purpose purely functional programming language, with non-strict semantics and strong static typing.
-Haskell features a type system with type inference and lazy evaluation.
-Type classes first appeared in the Haskell programming language.
-Its main implementation is the Glasgow Haskell Compiler.
-Erlang is a general-purpose, concurrent, functional programming language.
-It is also a garbage-collected runtime system.
-The sequential subset of Erlang supports eager evaluation, single assignment, and dynamic typing.
-Erlang is known for its designs that are well suited for systems.
-Atoms are used within a program to denote distinguished values.
-They are written as strings of consecutive alphanumeric characters, the first character being lowercase.
-Atoms can contain any character if they are enclosed within single quotes and an escape convention exists which allows any character to be used within an atom.
-Tuples are containers for a fixed number of Erlang data types.
-The syntax {D1,D2,...,Dn} denotes a tuple whose arguments are D1, D2, ... Dn.
-The arguments can be primitive data types or compound data types.
-Any element of a tuple can be accessed in constant time.
-Ports are used to communicate with the external world.
-Ports are created with the built-in function open_port.
-Messages can be sent to and received from ports, but these messages must obey the so-called "port protocol."
+Haskell é uma linguagem de propósito geral puramente funcional, linguagem de programação padronizada, com a semântica não-rígida e forte tipagem estática.
+Haskell possui um sistema de tipo com inferência e avaliação preguiçosa.
+Tipos de classes apareceram primeiro na linguagem de Programação Haskell.
+Sua implementação principal é o compilador Glasgow Haskell.
+Erlang é uma linguagem de uso geral, concorrente e linguagem de programação funcional.
+Seu sistema também possui uma rotina de garbage-collector.
+O subconjunto sequencial da Erlang suporta avaliação, atribuição única e tipagem dinâmica.
+A linguagem Erlang é conhecida por seu design bem apropriado para sistemas.
+Atomos são usados em um programa pra denotar valores distintos.
+Eles são escritos como strings de caracteres alfanuméricos consecultivos, com o primeiro caractere sendo minúculo.
+Átomos podem conter qualuqer caractere se ele for colocado dentro de aspas simples e se uma convenção de escape que permita qualquer caractére a ser usado em um átomo exista.
+Tuplas são conteiners para um número fixo de tipos de dados da linguagem de programação (Erlang).
+A syntaxe {D1,D2,...,Dn} denota a tupla onde os argumentos são D1, D2, ... Dn.
+Os argumentos podem ser tipos de dados primitivos ou compostos.
+Qualquer elemento de uma tupla pode ser acessado a qualque tempo.
+Portas são usadas para comunicar com o mundo externo.
+Portas são criadas com uma função padrão open_port
+Mensagens podem ser mandadas e recebidas por portas, mas elas devem obedecer o "protocolo da porta".
 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 Cras ornare mauris dolor, in dignissim mauris semper sit amet.
 Vivamus luctus luctus nisi, in rutrum lectus posuere faucibus.
