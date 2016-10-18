@@ -17,6 +17,7 @@ SUPPORTED_LOCALES = {
     "ru": "Russian",
     "no": "Norwegian",
     "pt": "Portuguese",
+    "sv": "Swedish",
     "pt-br": 'Brazilian Portuguese'
 }
 
@@ -42,6 +43,7 @@ def pull(filename, locale='en'):
            it - Italian                  (data/it)
            pt - Portuguese               (data/pt)
            no - Norwegian                (data/no)
+           sv - Swedish                  (data/sv)
            pt-br - Brazilian Portuguese  (data/pt-br)
 
     :return: The content of the file.
