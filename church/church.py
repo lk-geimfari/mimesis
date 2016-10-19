@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-:copyright: (c) 2016 by Lk Geimfari <likid.geimfari@gmail.com>.
+:copyright: (c) 2016 by Likid Geimfari <likid.geimfari@gmail.com>.
 :software_license: MIT, see LICENSES for more details.
 :repository: https://github.com/lk-geimfari/church
 """
@@ -33,7 +33,7 @@ __all__ = ['Address', 'Personal',
 class Church(object):
     """
     A lazy initialization of locale for all classes that have locales.
-    Useful if you use only one locale for all data (Persona, Address etc.).
+    Useful when you use only one locale for all data (Persona, Address etc.).
         Args:
             locale - Locale.
     """
@@ -116,8 +116,9 @@ class Address(object):
         :Example:
             134.
         """
-        number = sample(digits, int(choice(digits[1:4])))
-        return ''.join(number)
+
+        number = randint(1, 1400)
+        return ''.join(str(number))
 
     def street_name(self):
         """
@@ -149,18 +150,24 @@ class Address(object):
         :Example:
             5 Central Sideline.
         """
-        if self.lang == 'ru':
-            return '{} {} {}'.format(
-                self.street_suffix(),
-                self.street_name(),
-                self.street_number()
-            )
-        else:
-            return '{} {} {}'.format(
-                self.street_number(),
-                self.street_name(),
-                self.street_suffix()
-            )
+
+        def _format():
+            if self.lang == 'sv':
+                return '{} {}'.format(
+                    self.street_name(),
+                    self.street_number()
+                )
+            else:
+                fmt = '{2} {1} {0}' if self.lang == 'ru' \
+                    else '{} {} {}'
+                return fmt.format(
+                    self.street_number(),
+                    self.street_name(),
+                    self.street_suffix()
+                )
+
+        address = _format()
+        return address
 
     def state(self):
         """
@@ -351,10 +358,10 @@ class Text(object):
 
         return naughty_list
 
-    def quote_from_movie(self):
+    def quote(self):
         """
-        Get a random quotes from movie.
-        :return: Quote from movie.
+        Get a random quotes.
+        :return: Quote.
 
         :Example:
             "Bond... James Bond."
@@ -1001,7 +1008,8 @@ class Personal(object):
         """
         return choice(common.FAVORITE_MUSIC_GENRE)
 
-    def __telephone_mask(self):
+    @property
+    def _telephone_mask(self):
         """
         It's internal method.
         Return a mask of telephone for current locale.
@@ -1010,20 +1018,26 @@ class Personal(object):
         :Example:
             +7-(###)-###-##-## (for locale ru).
         """
-        mask = ''
-        if self.lang == 'ru':
-            mask = '+7-(###)-###-##-##'
-        elif self.lang == 'fr':
-            mask = '+33-#########'
-        elif self.lang == 'de':
-            mask = '+49-#########'
-        elif self.lang == 'en':
-            mask = '+1-(###)-###-####'
-        elif self.lang == 'es':
-            mask = '+34 91# ## ## ##'
-        elif self.lang == 'it':
-            mask = '+39 6 ########'
-        return mask
+        masks = {
+            'da': '+45 ### ### ###',
+            'de': '+49-##-###-#####',
+            'en': '+1-(###)-###-####',
+            'es': '+34 91# ## ## ##',
+            'fr': '+33-#########',
+            'it': '+39 6 ########',
+            'nl': '+31 ## ### ####',
+            'no': '+47 #### ####',
+            'pt': '+351 # #### ####',
+            'pt-br': '+55 (##) ####-####',
+            'ru': '+7-(###)-###-##-##',
+            'sv': '+46 ### ### ###',
+            'default': '+#-(###)-###-####'
+        }
+
+        if self.lang in masks:
+            return masks[self.lang]
+        else:
+            return masks['default']
 
     def telephone(self, mask=None, placeholder='#'):
         """
@@ -1037,11 +1051,11 @@ class Personal(object):
             +7-(963)-409-11-22.
         """
         if not mask:
-            mask = self.__telephone_mask()
+            mask = self._telephone_mask
         phone_number = ''
         for i in mask:
             if i == placeholder:
-                phone_number += str(randint(1, 9))
+                phone_number += str(randint(0, 9))
             else:
                 phone_number += i
         return phone_number

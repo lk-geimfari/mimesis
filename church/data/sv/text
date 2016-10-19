@@ -1,1 +1,57 @@
-Test
+Android, det dominerande operativsystemet för mobiltelefoner, är ett exempel på ett sådant annorlunda GNU/Linux-baserat operativsystem.
+Datatypen boolean, sant eller falskt, kan testas på flera olika sätt och används framförallt i iterativa loopar.
+Datorers grundspråk kallas maskinkod och består av ettor och nollor, som datorns centralprocessor (eller motsvarande enhet i kringutrustning) direkt kan tolka.
+De byggdes sedan på med arv under mitten och slutet av 1980-talet.
+De större distributionerna är avsedda att kunna användas i de flesta sammanhang, och programvara som inte ingår i en viss distribution går ändå att installera där med måttligt besvär.
+De ursprungliga idéerna i metoden (objekt, inkapsling) uppstod i slutet av 1960-talet i programmeringsspråk för simulering.
+Den kod man skriver i hårdvarunära språk som assembler eller i högnivåspråk översätts sedan till maskinkod som sparas i en exekverbar binärfil, via assemblering respektive kompilering (i vissa fall både och).
+Denna metod att programmera anses av förespråkarna vara effektiv och kraftfull, speciellt vid konstruktion av större program, eftersom oönskad påverkan mellan programmets olika delar minimeras.
+Det består i allmänhet av central programvara från GNU-projektet, kärnan Linux samt annan programvara från tusentals andra projekt.
+Det blir lättare att bevisa att ett program är korrekt, det vill säga gör vad det är avsett att göra.
+Det finns ett flertal funktionella programspråk.
+Det finns ett stort antal distributioner skapade av företag, privatpersoner och öppna projekt.
+Det finns även språk som kan kompileras allteftersom programmet körs, med hjälp av en JIT-kompilator.
+Det lämpar sig väl för avancerade programmeringstekniker som funktioner av högre ordning och polymorfism.
+Det är ett av de mer framstående exemplen på vad utveckling med fri programvara och öppen källkod har åstadkommit.
+Det är också oftare lättare att återanvända programdelar från ett program i ett annat, eftersom begreppen, objektklasserna, ofta blir generella och användbara i olika sammanhang.
+Detta kan kontrasteras med procedurell och imperativ programmering, där datorn instrueras att utföra instruktioner sekventiellt.
+Därför har man tagit fram olika sorters programspråk som kan översätta läsbar kod bestående av siffror och tecken till maskinkod.
+Därför är det av yttersta vikt att använda sig av tekniken "svansrekursion" (eng: tail recursion), och alltså inte utföra något alls efter att man kallat på sig själv.
+En GNU/linuxdistribution är en samling programvara som förutom Linuxkärnan och GNU-systemet innehåller det som behövs för att få ett komplett, fungerande datorsystem.
+En del distributioner är främst tänkta att användas på persondatorer, andra är avsedda för servrar.
+En fakultet är en organisatorisk enhet vid en högskola eller ett universitet.
+Erlang anstränger sig för att, när den kan, frigöra minnet associerat med en funktion.
+Erlang är ett generellt programspråk som från början (år 1987) utvecklades på forskningsavdelningen hos telebolaget Ericsson vid utvärderingen av olika programspråk för implementation av styrsystemen i telefonväxlar.
+Erlangs namn är avsiktligt fyndigt taget både efter (den i telefonsystem förekommande) enheten Erlang och som sammansättningen av Ericsson Language.
+Ett interpreterat språk, å andra sidan, tolkas (interpreteras) under själva exekveringen (när man "kör" programmet).
+Fakultet är ett typiskt problem som man löser rekursivt.
+Fakulteten har vanligen det högsta ansvaret för forskning och utbildning inom en ämnesgrupp.
+Femton år senare, år 2003, publicerade de sedan en stabil definition av språket.
+Frånvaron av sidoeffekter minskar risken för buggar och gör program mer modulära.
+Funktionell programmering är en form av programmering inom vilken program konstrueras genom komposition av matematiska funktioner, och exekvering innebär att funktionerna utvärderas.
+Funktionella program använder tekniker som många programmerare finner svåra att förstå och tillämpa, som rekursion, funktioner av högre ordning och polymorfism.
+Funktionella program lämpar sig väl för automatiserad analys.
+Funktionella språk kan vara ineffektiva jämfört med imperativa språk, framför allt vid användning av komplicerade datastrukturer.
+Följande kodexempel kan vid första glimt se ut att följa just denna princip, men det är först när fac returnerar multiplikationen sker.
+GNU/Linux är idag det klart dominerande operativsystemet bland superdatorer.
+GNU/Linux, liksom alla UNIX-lika miljöer har dessutom en stark tradition av att använda skriptspråk för att göra arbetet och livet lättare.
+Haskell bygger till stor del, som många andra funktionella programspråk, på lambdauttryck och rekursion, men har också ett starkt typsystem och flera andra relativt ovanliga egenskaper som exempelvis lat evaluering.
+Haskell är ett rent funktionellt programspråk.
+In- och utmatning (till exempel text, grafik och styrning av hårdvara) kan bli problematiskt i funktionella språk.
+Linux eller GNU/Linux är ett Unix-liknande operativsystem som till största delen, och i några varianter helt, består av fri programvara.
+Linux-kärnan används ofta också i inbyggda system, men resten av operativsystemet kan skilja sig väsentligt från GNU/Linux.
+Men rekursion är traditionellt sett — speciellt i språk som C — minneskrävande, då man behöver allokera minne för varje gång man kallar på en funktion.
+None, noll ( 0 ), en tom lista [] eller en tom tuple () representeras som falska. Numeriska värden som inte är noll ( 0 ), listor med innehåll och ordböcker med innehåll är sanna.
+Objektorienterad programmering (Object Oriented Programming, OOP) är en programmeringsmetod i vilken ett program kan innehålla en varierande uppsättning objekt som interagerar med varandra.
+Optimeringstekniker som till exempel memoisation och lat evaluering kan tillämpas.
+Programspråk, eller programmeringsspråk, är ett språk som en människa använder för att skapa datorprogram.
+Python har utvecklats till ett kraftfullt och samtidigt smidigt språk med stöd för flera olika programmeringsparadigmer, bland annat objektorienterad och funktionell programmering.
+Python är ett programspråk som utformades i slutet av 1980-talet av Guido van Rossum.
+Skript är program skrivna i språk som tolkas under körningen vilket ger långsammare program men mycket flexiblare och effektivare utveckling.
+Språket är ett funktionellt programspråk, utan typdeklarationer och med dynamisk typning. Eftersom språket är designat för parallell bearbetning på flera sammankopplade system är det också synnerligen väl lämpat för användning på moderna multicore-maskiner.
+Språket är också konstruerat för att vara så kompakt och så likt matematik som möjligt, och lånar därför symboler ur både logiken och matematiken.
+Så är det även i Erlang och liknande språk; men med ett undantag!
+Till språket hör ett rikt standardbibliotek.
+Utvecklingen av språket, som fick sitt namn efter den amerikanska logikern Haskell Curry, startades 1987 av en internationell kommitté.
+Vanliga exempel som ofta finns inkluderade, förutom de olika kommandotolkarnas inbyggda språk, är Perl, PHP, Python, Tcl och Ruby.
+Året 1998 släpptes språket fritt som öppen källkod och används nu av flera internationella företag.

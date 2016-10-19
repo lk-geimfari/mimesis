@@ -16,7 +16,7 @@ from church.exceptions import (
 from church.utils import pull
 
 # en, es, de, fr, it, ru, pt,
-# pt-br, da, no
+# pt-br, da, no, sv
 LANG = 'en'
 
 
@@ -141,7 +141,7 @@ class TextTestCase(TestCase):
         self.assertIsInstance(result, list)
 
     def test_quote_from_movie(self):
-        result = self.data.quote_from_movie()
+        result = self.data.quote()
         parent_file = pull('quotes', self.data.lang)
         self.assertIn(result + '\n', parent_file)
 
