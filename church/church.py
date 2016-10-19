@@ -33,6 +33,7 @@ __all__ = ['Address', 'Personal',
 class Church(object):
     """
     A lazy initialization of locale for all classes that have locales.
+    Useful if you use only one locale for all data (Persona, Address etc.).
     """
 
     def __init__(self, locale):
@@ -184,7 +185,7 @@ class Address(object):
     def postal_code(self):
         """
         Get a random postal code.
-
+        
         :returns: postal code.
         :Example:
             389213
@@ -582,17 +583,18 @@ class Personal(object):
         self.lang = lang.lower()
 
     @staticmethod
-    def age(mi=16, mx=66):
+    def age(minimum=16, maximum=66):
         """
         Get a random integer value.
 
-        :param mx: max age
-        :param mi: min age
+        :param maximum: max age
+        :param minimum: min age
         :returns: Random integer (from minimum=16 to maximum=66)
         :Example:
             23.
         """
-        return randint(mi, mx)
+        diapason = randint(int(minimum), int(maximum))
+        return diapason
 
     def name(self, gender='f'):
         """
@@ -1531,6 +1533,10 @@ class Food(object):
     """
 
     def __init__(self, lang='en'):
+<<<<<<< 65259d9faa2686b72f098bbd04db8534c9921d90
+        """
+        :param lang: Current language.
+=======
         """
         :param lang: Current language.
         """

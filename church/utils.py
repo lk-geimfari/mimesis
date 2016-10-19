@@ -65,7 +65,6 @@ def pull(filename, locale='en'):
     Open file and get content from file. Memorize result using lru_cache.
     pull - is internal function, please do not use this function outside
     the module 'church'.
-<<<<<<< HEAD
 
     +------------------------------+--------------+
     | Locale Code                  | Folder       |
@@ -94,27 +93,6 @@ def pull(filename, locale='en'):
     :param filename: The name of file.
     :param locale: Locale.
     :returns: The content of the file.
-=======
-    Args:
-        filename: The name of file.
-        locale: Locale
-
-           locale code                   folder
-           _________________________________________
-           da - Danish                   (data/da)
-           de - German                   (data/de)
-           en - English                  (data/en)
-           ru - Russian                  (data/ru)
-           fr - French                   (data/fr)
-           es - Spanish                  (data/es)
-           it - Italian                  (data/it)
-           pt - Portuguese               (data/pt)
-           no - Norwegian                (data/no)
-           sv - Swedish                  (data/sv)
-           pt-br - Brazilian Portuguese  (data/pt-br)
-
-    :return: The content of the file.
->>>>>>> upstream/master
     """
     if locale not in SUPPORTED_LOCALES:
         raise UnsupportedLocale("Locale %s does not supported" % locale)
