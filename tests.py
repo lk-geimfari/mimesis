@@ -69,6 +69,24 @@ class AddressTestCase(TestCase):
         parent_file = pull('cities', self.address.lang)
         self.assertIn(result + '\n', parent_file)
 
+    def test_latitude(self):
+        result = self.address.latitude()
+        self.assertLessEqual(result, 90)
+
+    def test_longitude(self):
+        result = self.address.longitude()
+        self.assertLessEqual(result, 180)
+
+    def test_coordinates(self):
+        result = self.address.coordinates()
+        self.assertIsInstance(result, dict)
+
+        latitude = result['latitude']
+        self.assertTrue(latitude <= 90)
+
+        longitude = result['longitude']
+        self.assertTrue(longitude <= 180)
+
 
 class NumbersTestCase(TestCase):
     def setUp(self):

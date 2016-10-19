@@ -108,17 +108,18 @@ class Address(object):
         self.lang = lang.lower()
 
     @staticmethod
-    def street_number():
+    def street_number(mx=1400):
         """
         Generate a random street number.
+        :param mx: Maximum value of street number.
         :return: Street number.
 
         :Example:
             134.
         """
 
-        number = randint(1, 1400)
-        return ''.join(str(number))
+        number = randint(1, int(mx))
+        return '{}'.format(number)
 
     def street_name(self):
         """
@@ -216,6 +217,33 @@ class Address(object):
         """
         city_name = choice(pull('cities', self.lang))
         return city_name.strip()
+
+    @staticmethod
+    def latitude():
+        """
+        Generate a random value of latitude (+90 to -90)
+        Returns: Value of longitude.
+        """
+        return uniform(-90, 90)
+
+    @staticmethod
+    def longitude():
+        """
+        Generate a random value of longitude (-180 to +180).
+        Returns: Value of longitude.
+        """
+        return uniform(-180, 180)
+
+    def coordinates(self):
+        """
+        Generate random geo coordinates.
+        Returns: Dict of coordinates.
+
+        """
+        c = {'longitude': self.longitude(),
+             'latitude': self.latitude()
+             }
+        return c
 
 
 class Numbers(object):
