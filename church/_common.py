@@ -2505,3 +2505,19 @@ HASHTAGS = {
         "#tumblrgram"
     ]
 }
+
+GENDER_SYMBOLS = (
+    '♂',
+    '♀',
+    '⚲',
+)
+
+SEXUALITY_SYMBOLS = (
+    '⚤',
+    '⚢',
+    '⚣',
+    '⚥',
+    '⚧',
+    '⚪'
+)
+

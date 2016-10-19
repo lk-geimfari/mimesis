@@ -108,17 +108,18 @@ class Address(object):
         self.lang = lang.lower()
 
     @staticmethod
-    def street_number():
+    def street_number(mx=1400):
         """
         Generate a random street number.
+        :param mx: Maximum value of street number.
         :return: Street number.
 
         :Example:
             134.
         """
 
-        number = randint(1, 1400)
-        return ''.join(str(number))
+        number = randint(1, int(mx))
+        return '{}'.format(number)
 
     def street_name(self):
         """
@@ -216,6 +217,33 @@ class Address(object):
         """
         city_name = choice(pull('cities', self.lang))
         return city_name.strip()
+
+    @staticmethod
+    def latitude():
+        """
+        Generate a random value of latitude (+90 to -90)
+        Returns: Value of longitude.
+        """
+        return uniform(-90, 90)
+
+    @staticmethod
+    def longitude():
+        """
+        Generate a random value of longitude (-180 to +180).
+        Returns: Value of longitude.
+        """
+        return uniform(-180, 180)
+
+    def coordinates(self):
+        """
+        Generate random geo coordinates.
+        Returns: Dict of coordinates.
+
+        """
+        c = {'longitude': self.longitude(),
+             'latitude': self.latitude()
+             }
+        return c
 
 
 class Numbers(object):
@@ -531,18 +559,17 @@ class Personal(object):
         self.lang = lang.lower()
 
     @staticmethod
-    def age(minimum=16, maximum=66):
+    def age(mi=16, mx=66):
         """
         Get a random integer value.
-        :param maximum: max age
-        :param minimum: min age
+        :param mx: max age
+        :param mi: min age
         :return: Random integer (from minimum=16 to maximum=66)
 
         :Example:
             23.
         """
-        diapason = randint(int(minimum), int(maximum))
-        return diapason
+        return randint(mi, mx)
 
     def name(self, gender='f'):
         """
@@ -556,9 +583,9 @@ class Personal(object):
         if not isinstance(gender, str):
             raise TypeError('name takes only string type')
 
-        _filename = 'f_names' if gender.lower() == 'f' else 'm_names'
-        name = choice(pull(_filename, self.lang)).strip()
-        return name
+        file = 'f_names' if gender.lower() == 'f' else 'm_names'
+        name = choice(pull(file, self.lang))
+        return name.strip()
 
     def surname(self, gender='f'):
         """
@@ -574,8 +601,8 @@ class Personal(object):
             raise TypeError('surname takes only string type')
 
         if self.lang == 'ru':
-            _file = 'm_surnames' if gender == 'm' else 'f_surnames'
-            return choice(pull(_file, self.lang)).strip()
+            file = 'm_surnames' if gender == 'm' else 'f_surnames'
+            return choice(pull(file, self.lang)).strip()
 
         return choice(pull('surnames', self.lang)).strip()
 
@@ -591,17 +618,9 @@ class Personal(object):
             Johann Wolfgang.
         """
         sex = gender.lower()
-        if reverse:
-            full_name = '{0} {1}'.format(
-                self.surname(sex),
-                self.name(sex)
-            )
-            return full_name
-        full_name = '{0} {1}'.format(
-            self.name(sex),
-            self.surname(sex)
-        )
-        return full_name
+        fmt = '{1} {0}' if reverse else '{0} {1}'
+        fn = fmt.format(self.name(sex), self.surname(sex))
+        return fn
 
     @staticmethod
     def username(gender='m'):
@@ -614,10 +633,10 @@ class Personal(object):
             abby1189.
         """
         gender = gender.lower()
-        file_name = 'f_names' if gender == 'f' else 'm_names'
+        file = 'f_names' if gender == 'f' else 'm_names'
 
-        u = choice(pull(file_name)).lower().replace(' ', '_')
-        return u.strip() + str(randint(2, 9999))
+        u = choice(pull(file)).strip()
+        return '{}{}'.format(u.lower(), randint(2, 9999))
 
     @staticmethod
     def twitter(gender='m'):
@@ -685,10 +704,9 @@ class Personal(object):
         :Example:
             foretime10@live.com
         """
-        gender = 'm' if gender.lower() == 'm' else 'f'
-        name = Personal.username(gender)
-        email_adders = name + choice(common.EMAIL_DOMAINS)
-        return email_adders.strip()
+        name = Personal.username(gender.lower())
+        email = name + choice(common.EMAIL_DOMAINS)
+        return email.strip()
 
     def home_page(self):
         """
@@ -781,8 +799,7 @@ class Personal(object):
         :Example:
             03/19.
         """
-        month = randint(1, 12)
-        year = randint(int(mi), int(mx))
+        month, year = randint(1, 12), randint(mi, mx)
         month = '0' + str(month) if month < 10 else month
         return '{0}/{1}'.format(month, year)
 
@@ -829,18 +846,20 @@ class Personal(object):
         """
         return "".join([choice(digits) for _ in range(14)])
 
-    def gender(self, abbr=False):
+    def gender(self, symbol=False):
         """
         Get a random gender.
-        :param abbr: if True then will getting abbreviated gender title.
+        :param symbol: Unicode symbol.
         :return: Title of gender.
 
         :Example:
             Male (M when abbr=True).
         """
-        if not abbr:
-            return choice(pull('gender', self.lang)).strip()
-        return choice(pull('gender', self.lang))[0:1]
+        if symbol:
+            return choice(common.GENDER_SYMBOLS)
+
+        gender = choice(pull('gender', self.lang))
+        return gender.strip()
 
     @staticmethod
     def height(from_=1.5, to_=2.0):
@@ -881,14 +900,18 @@ class Personal(object):
         """
         return choice(common.BLOOD_GROUPS)
 
-    def sexual_orientation(self):
+    def sexual_orientation(self, symbol=False):
         """
         Get a random (LOL) sexual orientation.
+        :param symbol: Unicode symbol.
         :return: Sexual orientation.
 
         :Example:
             Heterosexuality.
         """
+        if symbol:
+            return choice(common.SEXUALITY_SYMBOLS)
+
         so = choice(pull('sexuality', self.lang))
         return so.strip()
 
