@@ -12,9 +12,9 @@ Welcome to Church's documentation!
     :target: https://travis-ci.org/lk-geimfari/church
     :alt: Build status of the master branch
 
-.. |pypi| image:: https://img.shields.io/badge/python-3.3%2C%203.4%2C%203.5%2C%203.6--dev-blue.svg
-    :target: https://pypi.python.org/pypi/church/
-    :alt: PyPI Package
+.. |docs-version| image:: https://readthedocs.org/projects/church/badge/?version=latest
+    :target: http://church.readthedocs.io/en/latest/?badge=latest
+    :alt: Documentation Status
 
 .. |pypi-version| image:: https://badge.fury.io/py/church.svg
     :target: https://badge.fury.io/py/church
@@ -32,7 +32,7 @@ Welcome to Church's documentation!
     :target: https://github.com/lk-geimfari/church/issues
     :alt: Current bug reports and issues
 
-|build| |pypi| |pypi-version| |code-health| |codacy-badge| |issues|
+|build| |docs-version| |pypi-version| |code-health| |codacy-badge| |issues|
 
 Church is a library to generate fake data. It's very useful when you need to bootstrap your database. Church doesn't have any dependencies.
 

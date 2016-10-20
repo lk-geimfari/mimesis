@@ -1,15 +1,16 @@
 # Church
 [![Build Status](https://travis-ci.org/lk-geimfari/church.svg?branch=master)](https://travis-ci.org/lk-geimfari/church)
-[![PyPI](https://img.shields.io/badge/python-3.3%2C%203.4%2C%203.5%2C%203.6--dev-blue.svg)](https://pypi.python.org/pypi/church/)
+[![Documentation Status](https://readthedocs.org/projects/church/badge/?version=latest)](http://church.readthedocs.io/en/latest/?badge=latest)
 [![PyPI version](https://badge.fury.io/py/church.svg)](https://badge.fury.io/py/church)
 [![HitCount](https://hitt.herokuapp.com/lk-geimfar/church.svg)](https://github.com/lk-geimfari/church)
 [![Code Health](https://landscape.io/github/lk-geimfari/church/master/landscape.svg?style=flat)](https://landscape.io/github/lk-geimfari/church/master)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/d773f20efa67430683bb24fff5af9db8)](https://www.codacy.com/app/likid-geimfari/church)
 [![Issues](https://img.shields.io/github/issues/lk-geimfari/church.svg)](https://github.com/lk-geimfari/church/issues)
 
+
 ![alt text](https://raw.githubusercontent.com/lk-geimfari/church/master/examples/church.png)
 
-Church is a library to generate fake data. It's very useful when you need to bootstrap your database. Church doesn't have any dependencies. Church is a pretty simple library and all you need to start is a small [guidebook.](https://github.com/lk-geimfari/church/blob/master/docs/README.md)
+Church is a library to generate fake data. It's very useful when you need to bootstrap your database. Church doesn't have any dependencies.
 
 At this moment a library has 9 supported locales: 
 - 🇺🇸 - English  (en)
@@ -21,6 +22,10 @@ At this moment a library has 9 supported locales:
 - 🇷🇺 - Русский  (ru)
 - 🇳🇴 - Norsk (no)
 - 🇸🇪 - Svenska (sv)
+
+## Documentation
+Church is a pretty simple library and all you need to start is the small documentation. See church's Sphinx-generated documentation here: [http://church.readthedocs.io](http://church.readthedocs.io)
+
 
 
 ## Installation
