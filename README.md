@@ -107,7 +107,7 @@ def patient(sex='f'):
 
 
 ## Contributing
-Your contributions are always welcome! Please take a look at the [contribution](https://github.com/lk-geimfari/church/blob/master/CONTRIBUTING.md) guidelines first.
+Your contributions are always welcome! Please take a look at the [contribution](https://github.com/lk-geimfari/church/blob/master/CONTRIBUTING.md) guidelines first. [Here](https://github.com/lk-geimfari/church/blob/master/CONTRIBUTORS.md) you can look a list of contributors
 
 
 ## Disclaimer
