@@ -48,10 +48,16 @@ Programspråk, eller programmeringsspråk, är ett språk som en människa anvä
 Python har utvecklats till ett kraftfullt och samtidigt smidigt språk med stöd för flera olika programmeringsparadigmer, bland annat objektorienterad och funktionell programmering.
 Python är ett programspråk som utformades i slutet av 1980-talet av Guido van Rossum.
 Skript är program skrivna i språk som tolkas under körningen vilket ger långsammare program men mycket flexiblare och effektivare utveckling.
-Språket är ett funktionellt programspråk, utan typdeklarationer och med dynamisk typning. Eftersom språket är designat för parallell bearbetning på flera sammankopplade system är det också synnerligen väl lämpat för användning på moderna multicore-maskiner.
+Språket är ett funktionellt programspråk, utan typdeklarationer och med dynamisk typning.
+Eftersom språket är designat för parallell bearbetning på flera sammankopplade system är det också synnerligen väl lämpat för användning på moderna multicore-maskiner.
 Språket är också konstruerat för att vara så kompakt och så likt matematik som möjligt, och lånar därför symboler ur både logiken och matematiken.
 Så är det även i Erlang och liknande språk; men med ett undantag!
 Till språket hör ett rikt standardbibliotek.
 Utvecklingen av språket, som fick sitt namn efter den amerikanska logikern Haskell Curry, startades 1987 av en internationell kommitté.
 Vanliga exempel som ofta finns inkluderade, förutom de olika kommandotolkarnas inbyggda språk, är Perl, PHP, Python, Tcl och Ruby.
 Året 1998 släpptes språket fritt som öppen källkod och används nu av flera internationella företag.
+Lorem ipsum används ofta som exempeltext inom trycksaksframställning och grafisk design för att visa hur till exempel ett dokument kommer att se ut när väl den riktiga texten är på plats.
+Lorem ipsum visar hur layout, teckensnitt och typografi samspelar, utan att texten, undermedvetet genom ordens betydelse, ska påverka betraktaren.
+Träutensilierna i ett tryckeri äro ingalunda en faktor där trevnadens ordningens och ekonomiens upprätthållande, och dock är det icke sällan som sorgliga erfarenheter göras ordningens och ekon och miens därmed upprätthållande.
+Träutensilierna i ett tryckeri äro ingalunda en oviktig faktor, för trevnadens ordningens och och dock är det icke sällan.
+Träutensilierna i ett tryckeri äro ingalunda en oviktig faktor, för trevnadens, ordningens och ekonomiens upprätthållande, och dock är det icke sällan som sorgliga erfarenheter göras på grund af det oförstånd med hvilket kaster, formbräden och regaler tillverkas och försäljas Kaster som äro dåligt hopkomna och af otillräckligt.
