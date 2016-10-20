@@ -16,7 +16,7 @@ from church.exceptions import (
 from church.utils import pull
 
 # en, es, de, fr, it, ru, pt,
-# pt-br, da, no, sv
+# pt-br, da, no, sv, hu
 LANG = 'en'
 
 
@@ -33,7 +33,7 @@ class AddressTestCase(TestCase):
 
     def test_street_name(self):
         result = self.address.street_name()
-        parent_file = pull('street', self.address.lang)
+        parent_file = pull('streets', self.address.lang)
         self.assertIn(result + '\n', parent_file)
 
     def test_street_suffix(self):

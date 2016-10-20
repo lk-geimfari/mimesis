@@ -129,7 +129,7 @@ class Address(object):
         :Example:
            Candlewood.
         """
-        street_name = choice(pull('street', self.lang))
+        street_name = choice(pull('streets', self.lang))
         return street_name.strip()
 
     def street_suffix(self):
