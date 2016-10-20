@@ -6,7 +6,7 @@ Personal
 
 .. code:: python
 
-	person = Personal('en')
+	person = Personal('en_us')
 
 	# Get a random integer value.
 	# For example: 21
@@ -109,7 +109,7 @@ Datetime
 
 .. code:: python
 
-	datetime = Datetime('en')
+	datetime = Datetime('en_us')
 
 	# Get a random day of week.
 	# For example: Sun.
@@ -156,7 +156,7 @@ Science
 
 .. code:: python
 
-	science = Science('en')
+	science = Science('en_us')
 
 	# Get a random mathematical formula.
 	# For example: A = (ab)/2
@@ -207,7 +207,7 @@ Address
 
 .. code:: python
 
-	address = Address('en')
+	address = Address('en_us')
 
 	# Generate a random street number.
 	street_number = address.street_number()
@@ -245,7 +245,7 @@ Text
 
 .. code:: python
 
-	data = Text('en')
+	data = Text('en_us')
 
 	# Get random text.
 	# quantity=5 is a quantity of sentence
@@ -337,7 +337,7 @@ Food
 
 .. code:: python
 
-	food = Food('en')
+	food = Food('en_us')
 
 	# Get a random alcoholic drink.
 	# Example: Vodka
