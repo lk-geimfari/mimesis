@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-:copyright: (c) 2016 by Lk Geimfari <likid.geimfari@gmail.com>.
+:copyright: (c) 2016 by Likid Geimfari <likid.geimfari@gmail.com>.
 :software_license: MIT, see LICENSES for more details.
 :repository: https://github.com/lk-geimfari/church
 """
@@ -33,7 +33,6 @@ __all__ = ['Address', 'Personal',
 class Church(object):
     """
     A lazy initialization of locale for all classes that have locales.
-    Useful if you use only one locale for all data (Persona, Address etc.).
     """
 
     def __init__(self, locale):
@@ -110,7 +109,7 @@ class Address(object):
         self.lang = lang.lower()
 
     @staticmethod
-    def street_number():
+    def street_number(mx=1400):
         """
         Generate a random street number.
 
@@ -118,8 +117,9 @@ class Address(object):
         :Example:
             134.
         """
-        number = sample(digits, int(choice(digits[1:4])))
-        return ''.join(number)
+
+        number = randint(1, int(mx))
+        return '{}'.format(number)
 
     def street_name(self):
         """
@@ -151,18 +151,24 @@ class Address(object):
         :Example:
             5 Central Sideline.
         """
-        if self.lang == 'ru':
-            return '{} {} {}'.format(
-                self.street_suffix(),
-                self.street_name(),
-                self.street_number()
-            )
-        else:
-            return '{} {} {}'.format(
-                self.street_number(),
-                self.street_name(),
-                self.street_suffix()
-            )
+
+        def _format():
+            if self.lang == 'sv':
+                return '{} {}'.format(
+                    self.street_name(),
+                    self.street_number()
+                )
+            else:
+                fmt = '{2} {1} {0}' if self.lang == 'ru' \
+                    else '{} {} {}'
+                return fmt.format(
+                    self.street_number(),
+                    self.street_name(),
+                    self.street_suffix()
+                )
+
+        address = _format()
+        return address
 
     def state(self):
         """
@@ -178,7 +184,7 @@ class Address(object):
     def postal_code(self):
         """
         Get a random postal code.
-        
+
         :returns: postal code.
         :Example:
             389213
@@ -211,6 +217,33 @@ class Address(object):
         """
         city_name = choice(pull('cities', self.lang))
         return city_name.strip()
+
+    @staticmethod
+    def latitude():
+        """
+        Generate a random value of latitude (+90 to -90)
+        Returns: Value of longitude.
+        """
+        return uniform(-90, 90)
+
+    @staticmethod
+    def longitude():
+        """
+        Generate a random value of longitude (-180 to +180).
+        Returns: Value of longitude.
+        """
+        return uniform(-180, 180)
+
+    def coordinates(self):
+        """
+        Generate random geo coordinates.
+        Returns: Dict of coordinates.
+
+        """
+        c = {'longitude': self.longitude(),
+             'latitude': self.latitude()
+             }
+        return c
 
 
 class Numbers(object):
@@ -363,7 +396,7 @@ class Text(object):
 
         return naughty_list
 
-    def quote_from_movie(self):
+    def quote(self):
         """
         Get a random quotes from movie.
 
@@ -539,18 +572,17 @@ class Personal(object):
         self.lang = lang.lower()
 
     @staticmethod
-    def age(minimum=16, maximum=66):
+    def age(mi=16, mx=66):
         """
         Get a random integer value.
 
-        :param maximum: max age
-        :param minimum: min age
+        :param mx: max age
+        :param mi: min age
         :returns: Random integer (from minimum=16 to maximum=66)
         :Example:
             23.
         """
-        diapason = randint(int(minimum), int(maximum))
-        return diapason
+        return randint(mi, mx)
 
     def name(self, gender='f'):
         """
@@ -564,9 +596,9 @@ class Personal(object):
         if not isinstance(gender, str):
             raise TypeError('name takes only string type')
 
-        _filename = 'f_names' if gender.lower() == 'f' else 'm_names'
-        name = choice(pull(_filename, self.lang)).strip()
-        return name
+        file = 'f_names' if gender.lower() == 'f' else 'm_names'
+        name = choice(pull(file, self.lang))
+        return name.strip()
 
     def surname(self, gender='f'):
         """
@@ -582,8 +614,8 @@ class Personal(object):
             raise TypeError('surname takes only string type')
 
         if self.lang == 'ru':
-            _file = 'm_surnames' if gender == 'm' else 'f_surnames'
-            return choice(pull(_file, self.lang)).strip()
+            file = 'm_surnames' if gender == 'm' else 'f_surnames'
+            return choice(pull(file, self.lang)).strip()
 
         return choice(pull('surnames', self.lang)).strip()
 
@@ -599,17 +631,9 @@ class Personal(object):
             Johann Wolfgang.
         """
         sex = gender.lower()
-        if reverse:
-            full_name = '{0} {1}'.format(
-                self.surname(sex),
-                self.name(sex)
-            )
-            return full_name
-        full_name = '{0} {1}'.format(
-            self.name(sex),
-            self.surname(sex)
-        )
-        return full_name
+        fmt = '{1} {0}' if reverse else '{0} {1}'
+        fn = fmt.format(self.name(sex), self.surname(sex))
+        return fn
 
     @staticmethod
     def username(gender='m'):
@@ -622,10 +646,10 @@ class Personal(object):
             abby1189.
         """
         gender = gender.lower()
-        file_name = 'f_names' if gender == 'f' else 'm_names'
+        file = 'f_names' if gender == 'f' else 'm_names'
 
-        u = choice(pull(file_name)).lower().replace(' ', '_')
-        return u.strip() + str(randint(2, 9999))
+        u = choice(pull(file)).strip()
+        return '{}{}'.format(u.lower(), randint(2, 9999))
 
     @staticmethod
     def twitter(gender='m'):
@@ -693,10 +717,9 @@ class Personal(object):
         :Example:
             foretime10@live.com
         """
-        gender = 'm' if gender.lower() == 'm' else 'f'
-        name = Personal.username(gender)
-        email_adders = name + choice(common.EMAIL_DOMAINS)
-        return email_adders.strip()
+        name = Personal.username(gender.lower())
+        email = name + choice(common.EMAIL_DOMAINS)
+        return email.strip()
 
     def home_page(self):
         """
@@ -789,8 +812,7 @@ class Personal(object):
         :Example:
             03/19.
         """
-        month = randint(1, 12)
-        year = randint(int(mi), int(mx))
+        month, year = randint(1, 12), randint(mi, mx)
         month = '0' + str(month) if month < 10 else month
         return '{0}/{1}'.format(month, year)
 
@@ -837,18 +859,20 @@ class Personal(object):
         """
         return "".join([choice(digits) for _ in range(14)])
 
-    def gender(self, abbr=False):
+    def gender(self, symbol=False):
         """
         Get a random gender.
 
-        :param abbr: if True then will getting abbreviated gender title.
+        :param symbol: Unicode symbol.
         :returns: Title of gender.
         :Example:
-            Male (M when abbr=True).
+            Male (♂ when symbol=True).
         """
-        if not abbr:
-            return choice(pull('gender', self.lang)).strip()
-        return choice(pull('gender', self.lang))[0:1]
+        if symbol:
+            return choice(common.GENDER_SYMBOLS)
+
+        gender = choice(pull('gender', self.lang))
+        return gender.strip()
 
     @staticmethod
     def height(from_=1.5, to_=2.0):
@@ -889,14 +913,18 @@ class Personal(object):
         """
         return choice(common.BLOOD_GROUPS)
 
-    def sexual_orientation(self):
+    def sexual_orientation(self, symbol=False):
         """
         Get a random (LOL) sexual orientation.
 
+        :param symbol: Unicode symbol.
         :returns: Sexual orientation.
         :Example:
             Heterosexuality.
         """
+        if symbol:
+            return choice(common.SEXUALITY_SYMBOLS)
+
         so = choice(pull('sexuality', self.lang))
         return so.strip()
 
@@ -1016,7 +1044,8 @@ class Personal(object):
         """
         return choice(common.FAVORITE_MUSIC_GENRE)
 
-    def __telephone_mask(self):
+    @property
+    def _telephone_mask(self):
         """
         It's internal method.
         Return a mask of telephone for current locale.
@@ -1025,20 +1054,26 @@ class Personal(object):
         :Example:
             +7-(###)-###-##-## (for locale ru).
         """
-        mask = ''
-        if self.lang == 'ru':
-            mask = '+7-(###)-###-##-##'
-        elif self.lang == 'fr':
-            mask = '+33-#########'
-        elif self.lang == 'de':
-            mask = '+49-#########'
-        elif self.lang == 'en':
-            mask = '+1-(###)-###-####'
-        elif self.lang == 'es':
-            mask = '+34 91# ## ## ##'
-        elif self.lang == 'it':
-            mask = '+39 6 ########'
-        return mask
+        masks = {
+            'da': '+45 ### ### ###',
+            'de': '+49-##-###-#####',
+            'en': '+1-(###)-###-####',
+            'es': '+34 91# ## ## ##',
+            'fr': '+33-#########',
+            'it': '+39 6 ########',
+            'nl': '+31 ## ### ####',
+            'no': '+47 #### ####',
+            'pt': '+351 # #### ####',
+            'pt-br': '+55 (##) ####-####',
+            'ru': '+7-(###)-###-##-##',
+            'sv': '+46 ### ### ###',
+            'default': '+#-(###)-###-####'
+        }
+
+        if self.lang in masks:
+            return masks[self.lang]
+        else:
+            return masks['default']
 
     def telephone(self, mask=None, placeholder='#'):
         """
@@ -1052,11 +1087,11 @@ class Personal(object):
             +7-(963)-409-11-22.
         """
         if not mask:
-            mask = self.__telephone_mask()
+            mask = self._telephone_mask
         phone_number = ''
         for i in mask:
             if i == placeholder:
-                phone_number += str(randint(1, 9))
+                phone_number += str(randint(0, 9))
             else:
                 phone_number += i
         return phone_number
@@ -1491,17 +1526,6 @@ class Food(object):
         """
         self.lang = lang.lower()
 
-    def berry(self):
-        """
-        Get random berry.
-
-        :returns: Berry.
-        :Example:
-            Blackberry.
-        """
-        berry = choice(pull('berries', self.lang))
-        return berry.strip()
-
     def vegetable(self):
         """
         Get a random vegetable.
@@ -1513,15 +1537,15 @@ class Food(object):
         vegetable = choice(pull('vegetables', self.lang))
         return vegetable.strip()
 
-    def fruit(self):
+    def fruit_or_berry(self):
         """
-        Get a random fruit name.
+        Get a random fruit_or_berry name.
 
         :returns: Fruit.
         :Example:
             Banana.
         """
-        fruit = choice(pull('fruits', self.lang))
+        fruit = choice(pull('fruits_berries', self.lang))
         return fruit.strip()
 
     def dish(self):
@@ -1545,17 +1569,6 @@ class Food(object):
         """
         spices = choice(pull('spices', self.lang))
         return spices.strip()
-
-    def mushroom(self):
-        """
-        Get a random mushroom's name
-
-        :returns: Mushroom's name.
-        :Example:
-            Marasmius oreades.
-        """
-        mushroom = choice(pull('mushrooms', self.lang))
-        return mushroom.strip()
 
     def drink(self):
         """

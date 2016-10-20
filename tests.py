@@ -16,7 +16,7 @@ from church.exceptions import (
 from church.utils import pull
 
 # en, es, de, fr, it, ru, pt,
-# pt-br, da, no
+# pt-br, da, no, sv
 LANG = 'en'
 
 
@@ -68,6 +68,24 @@ class AddressTestCase(TestCase):
         result = self.address.city()
         parent_file = pull('cities', self.address.lang)
         self.assertIn(result + '\n', parent_file)
+
+    def test_latitude(self):
+        result = self.address.latitude()
+        self.assertLessEqual(result, 90)
+
+    def test_longitude(self):
+        result = self.address.longitude()
+        self.assertLessEqual(result, 180)
+
+    def test_coordinates(self):
+        result = self.address.coordinates()
+        self.assertIsInstance(result, dict)
+
+        latitude = result['latitude']
+        self.assertTrue(latitude <= 90)
+
+        longitude = result['longitude']
+        self.assertTrue(longitude <= 180)
 
 
 class NumbersTestCase(TestCase):
@@ -141,7 +159,7 @@ class TextTestCase(TestCase):
         self.assertIsInstance(result, list)
 
     def test_quote_from_movie(self):
-        result = self.data.quote_from_movie()
+        result = self.data.quote()
         parent_file = pull('quotes', self.data.lang)
         self.assertIn(result + '\n', parent_file)
 
@@ -194,9 +212,7 @@ class BusinessTestCase(TestCase):
         result = self.business.copyright()
         copyright_symbol = '©'
         self.assertIn(copyright_symbol, result)
-
-        result = self.business.copyright(without_date=True)
-        self.assertFalse(any(char.isdigit() for char in result))
+        self.assertTrue(len(result) > 4)
 
     def test_currency_sio(self):
         result = self.business.currency_iso()
@@ -211,7 +227,7 @@ class PersonalTestCase(TestCase):
         del self.person
 
     def test_age(self):
-        result = self.person.age(maximum=55)
+        result = self.person.age(mx=55)
         self.assertTrue(result <= 55)
 
     def test_name(self):
@@ -350,8 +366,8 @@ class PersonalTestCase(TestCase):
         result = self.person.gender() + '\n'
         self.assertIn(result, pull('gender', self.person.lang))
 
-        result_abbr = self.person.gender(abbr=True) + '\n'
-        self.assertEqual(len(result_abbr), 2)
+        symbol = self.person.gender(symbol=True)
+        self.assertIn(symbol, common.GENDER_SYMBOLS)
 
     def test_height(self):
         result = self.person.height(from_=1.60, to_=1.90)
@@ -370,6 +386,9 @@ class PersonalTestCase(TestCase):
         result = self.person.sexual_orientation()
         parent_file = pull('sexuality', self.person.lang)
         self.assertIn(result + '\n', parent_file)
+
+        symbol = self.person.sexual_orientation(symbol=True)
+        self.assertIn(symbol, common.SEXUALITY_SYMBOLS)
 
     def test_profession(self):
         result = self.person.profession()
@@ -609,19 +628,14 @@ class FoodTestCase(TestCase):
     def tearDown(self):
         del self.food
 
-    def test_berry(self):
-        result = self.food.berry()
-        parent_file = pull('berries', self.food.lang)
-        self.assertIn(result + '\n', parent_file)
-
     def test_vegetable(self):
         result = self.food.vegetable()
         parent_file = pull('vegetables', self.food.lang)
         self.assertIn(result + '\n', parent_file)
 
     def test_fruit(self):
-        result = self.food.fruit()
-        parent_file = pull('fruits', self.food.lang)
+        result = self.food.fruit_or_berry()
+        parent_file = pull('fruits_berries', self.food.lang)
         self.assertIn(result + '\n', parent_file)
 
     def test_dish(self):
@@ -637,11 +651,6 @@ class FoodTestCase(TestCase):
     def test_spices(self):
         result = self.food.spices()
         parent_file = pull('spices', self.food.lang)
-        self.assertIn(result + '\n', parent_file)
-
-    def test_mushroom(self):
-        result = self.food.mushroom()
-        parent_file = pull('mushrooms', self.food.lang)
         self.assertIn(result + '\n', parent_file)
 
 
@@ -733,7 +742,7 @@ class ChurchTestCase(TestCase):
         self.assertIsNotNone(result)
 
     def test_food(self):
-        result = self.church.food.fruit()
+        result = self.church.food.fruit_or_berry()
         self.assertIsNotNone(result)
 
     def test_science(self):

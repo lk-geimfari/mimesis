@@ -8,16 +8,54 @@ PATH = abspath(join(dirname(__file__), 'data'))
 __all__ = ['pull']
 
 SUPPORTED_LOCALES = {
-    "da": "Danish",
-    "en": "English",
-    "es": "Spanish",
-    "de": "German",
-    "fr": "French",
-    "it": 'Italian',
-    "ru": "Russian",
-    "no": "Norwegian",
-    "pt": "Portuguese",
-    "pt-br": 'Brazilian Portuguese'
+    'da': {
+        'name': 'Danish',
+        'name_local': 'Dansk',
+    },
+    'de': {
+        'name': 'German',
+        'name_local': 'Deutsch',
+    },
+    'en': {
+        'name': 'English',
+        'name_local': 'English',
+    },
+    'es': {
+        'name': 'Spanish',
+        'name_local': 'Español',
+    },
+    'fr': {
+        'name': 'French',
+        'name_local': 'Français',
+    },
+    'it': {
+        'name': 'Italian',
+        'name_local': 'Italiano',
+    },
+    'nl': {
+        'name': 'Dutch',
+        'name_local': 'Nederlands',
+    },
+    'no': {
+        'name': 'Norwegian',
+        'name_local': 'Norsk',
+    },
+    'pt': {
+        'name': 'Portuguese',
+        'name_local': 'Português',
+    },
+    'pt-br': {
+        'name': 'Brazilian Portuguese',
+        'name_local': 'Português Brasileiro',
+    },
+    'ru': {
+        'name': 'Russian',
+        'name_local': 'Русский',
+    },
+    'sv': {
+        'name': 'Swedish',
+        'name_local': 'Svenska',
+    }
 }
 
 
@@ -27,6 +65,7 @@ def pull(filename, locale='en'):
     Open file and get content from file. Memorize result using lru_cache.
     pull - is internal function, please do not use this function outside
     the module 'church'.
+<<<<<<< HEAD
 
     +------------------------------+--------------+
     | Locale Code                  | Folder       |
@@ -55,6 +94,27 @@ def pull(filename, locale='en'):
     :param filename: The name of file.
     :param locale: Locale.
     :returns: The content of the file.
+=======
+    Args:
+        filename: The name of file.
+        locale: Locale
+
+           locale code                   folder
+           _________________________________________
+           da - Danish                   (data/da)
+           de - German                   (data/de)
+           en - English                  (data/en)
+           ru - Russian                  (data/ru)
+           fr - French                   (data/fr)
+           es - Spanish                  (data/es)
+           it - Italian                  (data/it)
+           pt - Portuguese               (data/pt)
+           no - Norwegian                (data/no)
+           sv - Swedish                  (data/sv)
+           pt-br - Brazilian Portuguese  (data/pt-br)
+
+    :return: The content of the file.
+>>>>>>> upstream/master
     """
     if locale not in SUPPORTED_LOCALES:
         raise UnsupportedLocale("Locale %s does not supported" % locale)

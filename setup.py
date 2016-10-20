@@ -17,7 +17,7 @@ setup(
     },
     url='https://github.com/lk-geimfari/church',
     license='MIT',
-    author='Likid Geimfari',
+    author=church.__author__,
     author_email='likid.geimfari@gmail.com',
     description='Church is a library that help you generate fake data.',
     long_description="Church is a library to generate fake data."
