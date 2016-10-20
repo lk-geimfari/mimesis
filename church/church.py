@@ -222,7 +222,10 @@ class Address(object):
     def latitude():
         """
         Generate a random value of latitude (+90 to -90)
-        Returns: Value of longitude.
+
+        :returns: Value of longitude.
+        :Example:
+            -66.4214188124611
         """
         return uniform(-90, 90)
 
@@ -230,15 +233,22 @@ class Address(object):
     def longitude():
         """
         Generate a random value of longitude (-180 to +180).
-        Returns: Value of longitude.
+
+        :returns: Value of longitude.
+        :Example:
+            112.18440260511943
         """
         return uniform(-180, 180)
 
     def coordinates(self):
         """
         Generate random geo coordinates.
-        Returns: Dict of coordinates.
 
+        :returns: Dict with coordinates.
+        :Example:
+            {'latitude': 8.003968712834975,
+            'longitude': 36.02811153405548
+            }
         """
         c = {'longitude': self.longitude(),
              'latitude': self.latitude()
