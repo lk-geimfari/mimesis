@@ -33,12 +33,12 @@ __all__ = ['Address', 'Personal',
 class Church(object):
     """
     A lazy initialization of locale for all classes that have locales.
-    Useful when you use only one locale for all data (Persona, Address etc.).
-        Args:
-            locale - Locale.
     """
 
     def __init__(self, locale):
+        """
+        :param locale: Locale
+        """
         self.locale = locale
         self._personal = Personal
         self._address = Address
@@ -100,20 +100,20 @@ class Church(object):
 class Address(object):
     """
     Class for generate fake address data.
-        Args:
-            lang (str): current language.
     """
 
     def __init__(self, lang='en'):
+        """
+        :param lang: Current language.
+        """
         self.lang = lang.lower()
 
     @staticmethod
     def street_number(mx=1400):
         """
         Generate a random street number.
-        :param mx: Maximum value of street number.
-        :return: Street number.
 
+        :returns: Street number.
         :Example:
             134.
         """
@@ -124,8 +124,8 @@ class Address(object):
     def street_name(self):
         """
         Get a random street name.
-        :return: Street name.
 
+        :returns: Street name.
         :Example:
            Candlewood.
         """
@@ -135,8 +135,8 @@ class Address(object):
     def street_suffix(self):
         """
         Get a random street suffix.
-        :return: Street suffix.
 
+        :returns: Street suffix.
         :Example:
             Street.
         """
@@ -146,8 +146,8 @@ class Address(object):
     def address(self):
         """
         Get a random full address.
-        :return: Full address (include Street number, suffix and name).
 
+        :returns: Full address (include Street number, suffix and name).
         :Example:
             5 Central Sideline.
         """
@@ -173,8 +173,8 @@ class Address(object):
     def state(self):
         """
         Get a random states or subject of country.
-        :return: State of current country.
 
+        :returns: State of current country.
         :Example:
             Alabama (for locale `en`).
         """
@@ -184,8 +184,8 @@ class Address(object):
     def postal_code(self):
         """
         Get a random postal code.
-        :return: postal code.
 
+        :returns: postal code.
         :Example:
             389213
         """
@@ -196,9 +196,9 @@ class Address(object):
     def country(self, only_iso_code=False):
         """
         Get a random country.
-        :param only_iso_code: Return only ISO code of country.
-        :return: The Country
 
+        :param only_iso_code: Return only ISO code of country.
+        :returns: The Country
         :Example:
             Russia.
         """
@@ -210,8 +210,8 @@ class Address(object):
     def city(self):
         """
         Get a random name of city.
-        :return: City name.
 
+        :returns: City name.
         :Example:
             Saint Petersburg.
         """
@@ -256,17 +256,22 @@ class Numbers(object):
         """
         Generate an array of random float number of 10**n
 
-        Type Code    C Type             Storage size   Value range
-        'f'          floating point     4 byte         1.2E-38 to 3.4E+38
-        -------------------------------------------------------------------
-        'd'          floating point     8 byte         2.3E-308 to 1.7E+308
-        -------------------------------------------------------------------
+        +-----------+----------------+--------------+----------------------+
+        | Type Code | C Type         | Storage size | Value range          |
+        +===========+================+==============+======================+
+        | 'f'       | floating point | 4 byte       | 1.2E-38 to 3.4E+38   |
+        +-----------+----------------+--------------+----------------------+
+        | 'd'       | floating point | 8 byte       | 2.3E-308 to 1.7E+308 |
+        +-----------+----------------+--------------+----------------------+
+
         :param n: Raise 10 to the 'n' power.
         :param type_code: A code of type.
         :param to_list: Convert array to list.
-        Note: When you work with large numbers, it is better not to use
-        this option, because type 'array' much faster than 'list'.
-        :return: An array of floating-point numbers.
+
+        .. note:: When you work with large numbers, it is better not to use
+            this option, because type 'array' much faster than 'list'.
+
+        :returns: An array of floating-point numbers.
         """
         nums = array.array(type_code, (random() for _ in range(10 ** int(n))))
         nums = nums.tolist() if to_list else nums
@@ -277,11 +282,13 @@ class Numbers(object):
         """
         Generate an array of prime numbers of 10 ** n
 
-        Type Code    C Type             Storage size   Value range
-        -------------------------------------------------------------------
-        'L'          unsigned integer    4 byte        0 to 4,294,967,295
-        -------------------------------------------------------------------
-        :return: An array of floating-point numbers.
+        +------------+-----------------+--------------+--------------------+
+        | Type Code | C Type           | Storage size | Value range        |
+        +===========+==================+==============+====================+
+        | 'L'       | unsigned integer | 4 byte       | 0 to 4,294,967,295 |
+        +-----------+------------------+--------------+--------------------+
+
+        :returns: An array of floating-point numbers.
         """
         nums = array.array('L', (i for i in range(10 ** n) if i % 2))
         nums = nums.tolist() if to_list else nums
@@ -291,19 +298,20 @@ class Numbers(object):
 class Text(object):
     """
     Class for generate text data, i.e text, lorem ipsum and another.
-        Args:
-            lang (str): current language.
     """
 
     def __init__(self, lang='en'):
+        """
+        :param lang: Current language.
+        """
         self.lang = lang.lower()
 
     def lorem_ipsum(self, quantity=5):
         """
         Get random strings. Not only lorem ipsum.
-        :param quantity: Quantity of sentence.
-        :return: Text.
 
+        :param quantity: Quantity of sentence.
+        :returns: Text.
         :Example:
             Haskell is a standardized, general-purpose purely
             functional programming language, with non-strict semantics
@@ -317,8 +325,8 @@ class Text(object):
     def sentence(self):
         """
         Get a random sentence from text.
-        :return: Sentence.
 
+        :returns: Sentence.
         :Example:
             Any element of a tuple can be accessed in constant time.
         """
@@ -327,8 +335,8 @@ class Text(object):
     def title(self):
         """
         Get a random title.
-        :return: The title.
-
+        
+        :returns: The title.
         :Example:
             Erlang - is a general-purpose, concurrent,
             functional programming language.
@@ -338,9 +346,9 @@ class Text(object):
     def words(self, quantity=5):
         """
         Get the random words.
-        :param quantity: Quantity of words. Default is 5.
-        :return: Word list.
 
+        :param quantity: Quantity of words. Default is 5.
+        :returns: Word list.
         :Example:
             science, network, god, octopus, love.
         """
@@ -352,8 +360,8 @@ class Text(object):
     def word(self):
         """
         Get a random word.
-        :return: Single word.
 
+        :returns: Single word.
         :Example:
             Science.
         """
@@ -362,8 +370,8 @@ class Text(object):
     def swear_word(self):
         """
         Get a random swear word.
-        :return: Swear word.
 
+        :returns: Swear word.
         :Example:
             Damn.
         """
@@ -374,10 +382,12 @@ class Text(object):
     def naughty_strings():
         """
         Get a random naughty string form file.
+
         Authors of big-list-of-naughty-strings is Max Woolf and contributors.
         Thank you to all who have contributed in big-list-of-naughty-strings.
         Repository: https://github.com/minimaxir/big-list-of-naughty-strings
-        :return: The list of naughty strings.
+
+        :returns: The list of naughty strings.
         """
         import os.path as op
 
@@ -388,9 +398,9 @@ class Text(object):
 
     def quote(self):
         """
-        Get a random quotes.
-        :return: Quote.
+        Get a random quotes from movie.
 
+        :returns: Quote from movie.
         :Example:
             "Bond... James Bond."
         """
@@ -400,8 +410,8 @@ class Text(object):
     def color(self):
         """
         Get a random name of color.
-        :return: Color name.
 
+        :returns: Color name.
         :Example:
             Red.
         """
@@ -412,8 +422,8 @@ class Text(object):
     def hex_color():
         """
         Generate a hex color.
-        :return: Hex color code.
 
+        :returns: Hex color code.
         :Example:
             #D8346B
         """
@@ -425,8 +435,8 @@ class Text(object):
     def emoji():
         """
         Get a random EMOJI shortcut code.
-        :return: Emoji code.
 
+        :returns: Emoji code.
         :Example:
             :kissing:
         """
@@ -441,8 +451,10 @@ class Text(object):
     def hashtags(quantity=4, category='general'):
         """
         Create a list of hashtags (for Instagram, Twitter etc.)
+
         :param quantity: The quantity of hashtags.
         :param category: The category of hashtag.
+
         Available categories:
           1. general - #nice, #day, #tree etc.
           2. girls - #lady, #beautiful, #girlsday etc.
@@ -454,9 +466,9 @@ class Text(object):
           8. travel - #natureaddict, #sunset etc.
           9. cars - #car, #ride, #drive etc.
           10. sport - #soccer, #game etc.
-          11 tumblr - #perfect, #tumblr etc.
-        :return: The list of hashtags.
+          11. tumblr - #perfect, #tumblr etc.
 
+        :returns: The list of hashtags.
         :Example:
             ['#love', '#sky', '#nice']
         """
@@ -468,11 +480,11 @@ class Text(object):
     def weather(scale='c', a=-30, b=40):
         """
         Generate a random temperature value.
+
         :param scale: Scale of temperature.
         :param a: Minimum value of temperature.
         :param b: Maximum value of temperature.
-        :return: Temperature in Celsius or Fahrenheit.
-
+        :returns: Temperature in Celsius or Fahrenheit.
         :Example:
             33.4 °C.
         """
@@ -495,9 +507,9 @@ class Business(object):
     def company_type(self, abbr=False):
         """
         Get a random company type.
-        :param abbr: if True then abbreviated company type.
-        :return: Company type.
 
+        :param abbr: if True then abbreviated company type.
+        :returns: Company type.
         :Example:
             Incorporated (Inc. when abbr=True).
         """
@@ -509,8 +521,8 @@ class Business(object):
     def company(self):
         """
         Get a random company name.
-        :return: Company name.
 
+        :returns: Company name.
         :Example:
             Gamma Systems
         """
@@ -520,12 +532,12 @@ class Business(object):
     def copyright(self, mi=1990, mx=2016, without_date=False):
         """
         Generate a random copyright.
+
         :param mi: Foundation date
         :param mx: Current date
         :param without_date: if True then will be returned
-        copyright without date.
-        :return: Copyright of company.
-
+            copyright without date.
+        :returns: Copyright of company.
         :Example:
             © 1990-2016 Komercia, Inc.
         """
@@ -540,8 +552,8 @@ class Business(object):
     def currency_iso():
         """
         Get a currency code. ISO 4217 format.
-        :return: Currency code.
 
+        :returns: Currency code.
         :Example:
             RUR.
         """
@@ -551,21 +563,22 @@ class Business(object):
 class Personal(object):
     """
     Class for generate personal data, i.e names, surnames, age and another.
-        Args:
-            lang (str): Current language.
     """
 
     def __init__(self, lang='en'):
+        """
+        :param lang: Current language.
+        """
         self.lang = lang.lower()
 
     @staticmethod
     def age(mi=16, mx=66):
         """
         Get a random integer value.
+
         :param mx: max age
         :param mi: min age
-        :return: Random integer (from minimum=16 to maximum=66)
-
+        :returns: Random integer (from minimum=16 to maximum=66)
         :Example:
             23.
         """
@@ -574,9 +587,9 @@ class Personal(object):
     def name(self, gender='f'):
         """
         Get a random name.
-        :param gender: if 'm' then will getting male name else female name.
-        :return: Name.
 
+        :param gender: if 'm' then will getting male name else female name.
+        :returns: Name.
         :Example:
             John Abbey (gender='m').
         """
@@ -590,10 +603,10 @@ class Personal(object):
     def surname(self, gender='f'):
         """
         Get a random surname.
-        :param gender: if 'm' then will getting male surname else
-        female surname.
-        :return: Surname.
 
+        :param gender: if 'm' then will getting male surname else
+            female surname.
+        :returns: Surname.
         :Example:
             Smith.
         """
@@ -609,11 +622,11 @@ class Personal(object):
     def full_name(self, gender='f', reverse=False):
         """
         Get a random full name.
+
         :param reverse: if true: surname/name else name/surname
         :param gender: if gender='m' then will be returned male name else
-        female name.
-        :return: Full name.
-
+            female name.
+        :returns: Full name.
         :Example:
             Johann Wolfgang.
         """
@@ -627,8 +640,8 @@ class Personal(object):
         """
         Get a random username with digits.
         Username generated from names (en) for all locales.
-        :return: Username.
 
+        :returns: Username.
         :Example:
             abby1189.
         """
@@ -642,9 +655,9 @@ class Personal(object):
     def twitter(gender='m'):
         """
         Get a random twitter user.
-        :param gender: Gender of user.
-        :return: URL to user.
 
+        :param gender: Gender of user.
+        :returns: URL to user.
         :Example:
             http://twitter.com/some_user
         """
@@ -656,9 +669,9 @@ class Personal(object):
     def facebook(gender='m'):
         """
         Generate a random facebook user.
-        :param gender: Gender of user.
-        :return: URL to user.
 
+        :param gender: Gender of user.
+        :returns: URL to user.
         :Example:
             https://facebook.com/some_user
         """
@@ -670,10 +683,10 @@ class Personal(object):
     def password(length=8, algorithm=''):
         """
         Generate a password or hash of password.
+
         :param length: length of password.
         :param algorithm: hashing algorithm.
-        :return: Password or hash of password.
-
+        :returns: Password or hash of password.
         :Example:
             k6dv2odff9#4h (without hashing).
         """
@@ -698,9 +711,9 @@ class Personal(object):
     def email(gender='f'):
         """
         Generate a random email using usernames.
-        :param gender: Gender of user.
-        :return: Email address.
 
+        :param gender: Gender of user.
+        :returns: Email address.
         :Example:
             foretime10@live.com
         """
@@ -711,8 +724,8 @@ class Personal(object):
     def home_page(self):
         """
         Generate a random home page using usernames.
-        :return: Random home page.
 
+        :returns: Random home page.
         :Example:
             http://www.font6.info
         """
@@ -724,11 +737,11 @@ class Personal(object):
     def subreddit(nsfw=False, full_url=False):
         """
         Get a random subreddit from list.
+
         :param nsfw: if True then will be returned NSFW subreddit.
         :param full_url: If true http://www.reddit.com/r/subreddit
-        else /r/subreddit
-        :return: Subreddit or URL to subreddit.
-
+            else /r/subreddit
+        :returns: Subreddit or URL to subreddit.
         :Example:
             https://www.reddit.com/r/flask/
         """
@@ -749,8 +762,8 @@ class Personal(object):
         Get a random bitcoin address.
         Currently supported only two address formats that are most popular.
         It's 'P2PKH' and 'P2SH'
-        :return: Bitcoin address.
 
+        :returns: Bitcoin address.
         :Example:
             3EktnHQD7RiAE6uzMj2ZifT9YgRrkSgzQX
         """
@@ -762,8 +775,8 @@ class Personal(object):
     def cvv():
         """
         Generate a random card verification value (CVV)
-        :return: CVV code
 
+        :returns: CVV code
         :Example:
             324
         """
@@ -773,9 +786,9 @@ class Personal(object):
     def credit_card_number(card_type='visa'):
         """
         Generate a random credit card number.
-        :param card_type: Issuing Network. Default is Visa
-        :return: Credit card number.
 
+        :param card_type: Issuing Network. Default is Visa
+        :returns: Credit card number.
         :Example:
             4455 5299 1152 2450
         """
@@ -792,10 +805,10 @@ class Personal(object):
     def credit_card_expiration_date(mi=16, mx=25):
         """
         Generate a random expiration date for credit card.
+
         :param mi: Date of issue.
         :param mx: Maximum of expiration_date.
-        :return: Expiration date of credit card.
-
+        :returns: Expiration date of credit card.
         :Example:
             03/19.
         """
@@ -807,8 +820,8 @@ class Personal(object):
     def cid():
         """
         Generate a random CID code.
-        :return: CID code.
 
+        :returns: CID code.
         :Example:
             7452
         """
@@ -818,8 +831,8 @@ class Personal(object):
     def wmid():
         """
         Generate a identifier of user WMID for WebMoney
-        :return: WMID (WebMoney ID).
 
+        :returns: WMID (WebMoney ID).
         :Example:
             834296404761
         """
@@ -828,8 +841,8 @@ class Personal(object):
     def paypal(self):
         """
         Generate a random PayPal account.
-        :return: Email of PapPal user.
 
+        :returns: Email of PapPal user.
         :Example:
             wolf235@gmail.com
         """
@@ -839,8 +852,8 @@ class Personal(object):
     def yandex_money():
         """
         Generate a random Yandex.Money account.
-        :return: Yandex.Money account.
 
+        :returns: Yandex.Money account.
         :Example:
             97508675463414
         """
@@ -849,11 +862,11 @@ class Personal(object):
     def gender(self, symbol=False):
         """
         Get a random gender.
-        :param symbol: Unicode symbol.
-        :return: Title of gender.
 
+        :param symbol: Unicode symbol.
+        :returns: Title of gender.
         :Example:
-            Male (M when abbr=True).
+            Male (♂ when symbol=True).
         """
         if symbol:
             return choice(common.GENDER_SYMBOLS)
@@ -865,10 +878,10 @@ class Personal(object):
     def height(from_=1.5, to_=2.0):
         """
         Generate a random height in M.
+
         :param from_: Min value.
         :param to_: Max value.
-        :return: Height.
-
+        :returns: Height.
         :Example:
             1.85.
         """
@@ -879,10 +892,10 @@ class Personal(object):
     def weight(from_=38, to_=90):
         """
         Generate a random weight in KG.
+
         :param from_: min value
         :param to_: max value
-        :return: Weight.
-
+        :returns: Weight.
         :Example:
             48.
         """
@@ -893,8 +906,8 @@ class Personal(object):
     def blood_type():
         """
         Get a random blood type.
-        :return: Blood type (blood group).
 
+        :returns: Blood type (blood group).
         :Example:
             A+
         """
@@ -903,9 +916,9 @@ class Personal(object):
     def sexual_orientation(self, symbol=False):
         """
         Get a random (LOL) sexual orientation.
-        :param symbol: Unicode symbol.
-        :return: Sexual orientation.
 
+        :param symbol: Unicode symbol.
+        :returns: Sexual orientation.
         :Example:
             Heterosexuality.
         """
@@ -918,8 +931,8 @@ class Personal(object):
     def profession(self):
         """
         Get a random profession.
-        :return: The name of profession.
 
+        :returns: The name of profession.
         :Example:
             Programmer.
         """
@@ -929,8 +942,8 @@ class Personal(object):
     def political_views(self):
         """
         Get a random political views.
-        :return: Political views.
 
+        :returns: Political views.
         :Example:
             Liberal.
         """
@@ -940,8 +953,8 @@ class Personal(object):
     def worldview(self):
         """
         Get a random worldview.
-        :return: Worldview.
 
+        :returns: Worldview.
         :Example:
             Pantheism.
         """
@@ -951,8 +964,8 @@ class Personal(object):
     def views_on(self):
         """
         Get a random views on.
-        :return: Views on.
 
+        :returns: Views on.
         :Example:
             Negative.
         """
@@ -962,9 +975,9 @@ class Personal(object):
     def nationality(self, gender='f'):
         """
         Get a random nationality.
-        :param gender: female or male
-        :return: Nationality.
 
+        :param gender: female or male
+        :returns: Nationality.
         :Example:
             Russian.
         """
@@ -979,8 +992,8 @@ class Personal(object):
     def university(self):
         """
         Get a random university.
-        :return: University name.
 
+        :returns: University name.
         :Example:
             MIT.
         """
@@ -990,8 +1003,8 @@ class Personal(object):
     def qualification(self):
         """
         Get a random qualification.
-        :return: Degree.
 
+        :returns: Degree.
         :Example:
             Bachelor.
         """
@@ -1001,8 +1014,8 @@ class Personal(object):
     def language(self):
         """
         Get a random language.
-        :return: Random language.
 
+        :returns: Random language.
         :Example:
             Irish.
         """
@@ -1012,8 +1025,8 @@ class Personal(object):
     def favorite_movie(self):
         """
         Get a random movie for current locale.
-        :return: The name of the movie.
 
+        :returns: The name of the movie.
         :Example:
             Interstellar.
         """
@@ -1024,8 +1037,8 @@ class Personal(object):
     def favorite_music_genre():
         """
         Get a random music genre.
-        :return: A music genre.
 
+        :returns: A music genre.
         :Example:
             Ambient.
         """
@@ -1036,8 +1049,8 @@ class Personal(object):
         """
         It's internal method.
         Return a mask of telephone for current locale.
-        :return: A mask of telephone.
 
+        :returns: A mask of telephone.
         :Example:
             +7-(###)-###-##-## (for locale ru).
         """
@@ -1065,11 +1078,11 @@ class Personal(object):
     def telephone(self, mask=None, placeholder='#'):
         """
         Generate a random phone number.
+
         :param mask: Mask for formatting number.
         :param placeholder: A Placeholder for a mask.
-        Default placeholder is sharp (#).
-        :return: Phone number.
-
+            Default placeholder is sharp (#).
+        :returns: Phone number.
         :Example:
             +7-(963)-409-11-22.
         """
@@ -1087,9 +1100,9 @@ class Personal(object):
     def avatar():
         """
         Get a random link to avatar.
-        :return: Link to avatar that hosted on github in
-        repository of church.
 
+        :returns: Link to avatar that hosted on github in
+            repository of church.
         :Example:
             https://raw.githubusercontent.com/lk-geimfari/
             church/master/examples/avatars/4.png
@@ -1103,8 +1116,8 @@ class Personal(object):
     def vehicle():
         """
         Get a random vehicle.
-        :return: A vehicle.
 
+        :returns: A vehicle.
         :Example:
             Tesla Model S.
         """
@@ -1115,20 +1128,21 @@ class Datetime(object):
     """
     Class for generate the fake data that you can use for
     working with date and time.
-        Args:
-            lang (str): current language.
     """
 
     def __init__(self, lang='en'):
+        """
+        :param lang: Current language.
+        """
         self.lang = lang.lower()
 
     def day_of_week(self, abbr=False):
         """
         Get a random day of week.
-        :param abbr: if True then will be returned abbreviated name
-        of day of the week.
-        :return: Name of day of the week.
 
+        :param abbr: if True then will be returned abbreviated name
+            of day of the week.
+        :returns: Name of day of the week.
         :Example:
             Wednesday (Wed. when abbr=True).
         """
@@ -1140,10 +1154,10 @@ class Datetime(object):
     def month(self, abbr=False):
         """
         Get a random month.
-        :param abbr: if True then will be returned
-        abbreviated month name.
-        :return: Month name.
 
+        :param abbr: if True then will be returned
+            abbreviated month name.
+        :returns: Month name.
         :Example:
             January (Jan. when abbr=True).
         """
@@ -1156,10 +1170,10 @@ class Datetime(object):
     def year(from_=1990, to_=2050):
         """
         Generate a random year.
+
         :param from_:
         :param to_:
-        :return: Year.
-
+        :returns: Year.
         :Example:
             2023.
         """
@@ -1168,8 +1182,8 @@ class Datetime(object):
     def periodicity(self):
         """
         Get a random periodicity string.
-        :return: Periodicity.
 
+        :returns: Periodicity.
         :Example:
             Never.
         """
@@ -1180,10 +1194,10 @@ class Datetime(object):
     def date(sep='-', with_time=False):
         """
         Generate a random date formatted as a 11-05-2016
+
         :param sep: A separator for date. Default is '-'.
         :param with_time: if it's True then will be added random time.
-        :return: Formatted date and time.
-
+        :returns: Formatted date and time.
         :Example:
             20-03-2016 03:20.
         """
@@ -1195,8 +1209,8 @@ class Datetime(object):
     def day_of_month():
         """
         Static method for generate a random days of month, from 1 to 31.
-        :return: Random value from 1 to 31.
 
+        :returns: Random value from 1 to 31.
         :Example:
             23
         """
@@ -1205,10 +1219,10 @@ class Datetime(object):
     def birthday(self, from_=1980, to_=2000):
         """
         Generate a random day of birth.
+
         :param from_: min of range
         :param to_: max of range
-        :return: A birthday.
-
+        :returns: A birthday.
         :Example:
             June 20, 1987
         """
@@ -1229,8 +1243,8 @@ class Network(object):
     def ip_v4():
         """
         Static method for generate a random IPv4 address.
-        :return: Random IPv4 address.
 
+        :returns: Random IPv4 address.
         :Example:
             19.121.223.58
         """
@@ -1241,8 +1255,8 @@ class Network(object):
     def ip_v6():
         """
         Static method for generate a random IPv6 address.
-        :return: Random IPv6 address.
 
+        :returns: Random IPv6 address.
         :Example:
             2001:c244:cf9d:1fb1:c56d:f52c:8a04:94f3
         """
@@ -1254,8 +1268,8 @@ class Network(object):
     def mac_address():
         """
         Static method for generate a random MAC address.
-        :return: Random MAC address.
 
+        :returns: Random MAC address.
         :Example:
             00:16:3e:25:e7:b1
         """
@@ -1271,8 +1285,8 @@ class Network(object):
     def user_agent():
         """
         Get a random user agent.
-        :return: User agent.
 
+        :returns: User agent.
         :Example:
             Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:15.0)
             Gecko/20100101 Firefox/15.0.1
@@ -1290,7 +1304,9 @@ class File(object):
     def extension(file_type='text'):
         """
         Get a random extension from list.
+
         :param file_type: The type of extension. Default is text.
+
         All supported types:
             1. source - '.py', '.rb', '.cpp' and other.
             2. text = '.doc', '.log', '.rtf' and other.
@@ -1300,8 +1316,8 @@ class File(object):
             6. image = '.jpeg', '.jpg', '.png' and other.
             7. executable = '.exe', '.apk', '.bat' and other.
             8. compressed = '.zip', '.7z', '.tar.xz' and other.
-        :return: Extension of a file.
 
+        :returns: Extension of a file.
         :Example:
             .py (When file_type='source')
         """
@@ -1312,19 +1328,20 @@ class File(object):
 class Science(object):
     """
     Class for getting facts science.
-        Args:
-            lang (str): current language.
     """
 
     def __init__(self, lang='en'):
+        """
+        :param lang: Current language.
+        """
         self.lang = lang.lower()
 
     @staticmethod
     def math_formula():
         """
         Get a random mathematical formula.
-        :return: Math formula.
 
+        :returns: Math formula.
         :Example:
             A = (ab)/2.
         """
@@ -1334,14 +1351,11 @@ class Science(object):
     def chemical_element(self, name_only=True):
         """
         Get a random chemical element from file.
-        :param name_only: if False then will be returned dict.
-        :return: Name of chemical element or dict.
 
+        :param name_only: if False then will be returned dict.
+        :returns: Name of chemical element or dict.
         :Example:
-            {'Symbol': 'S',
-             'Name': 'Sulfur',
-             'Atomic number': '16'
-            }
+            {'Symbol': 'S', 'Name': 'Sulfur', 'Atomic number': '16'}
         """
         e = choice(pull('ch_el', self.lang)).split('|')
         if not name_only:
@@ -1356,8 +1370,8 @@ class Science(object):
     def article_on_wiki(self):
         """
         Get a random link to scientific article on Wikipedia.
-        :return: Link to article on Wikipedia.
 
+        :returns: Link to article on Wikipedia.
         :Example:
             https://en.wikipedia.org/wiki/Black_hole
         """
@@ -1367,8 +1381,8 @@ class Science(object):
     def scientist(self):
         """
         Get a random name of scientist.
-        :return: Name of scientist.
 
+        :returns: Name of scientist.
         :Example:
             Konstantin Tsiolkovsky.
         """
@@ -1385,8 +1399,8 @@ class Development(object):
     def software_license():
         """
         Get a random software license from list.
-        :return: License name.
 
+        :returns: License name.
         :Example:
             The BSD 3-Clause License.
         """
@@ -1396,8 +1410,8 @@ class Development(object):
     def version():
         """
         Generate a random version information.
-        :return: The version.
 
+        :returns: The version.
         :Example:
             0.11.3.
         """
@@ -1408,9 +1422,9 @@ class Development(object):
     def database(nosql=False):
         """
         Get a random database name.
-        :param nosql: only NoSQL databases.
-        :return: Database name.
 
+        :param nosql: only NoSQL databases.
+        :returns: Database name.
         :Example:
             PostgreSQL.
         """
@@ -1422,8 +1436,8 @@ class Development(object):
     def other():
         """
         Get a random value list.
-        :return: Some other technology.
 
+        :returns: Some other technology.
         :Example:
             Nginx.
         """
@@ -1433,8 +1447,8 @@ class Development(object):
     def programming_language():
         """
         Get a random programming language from list.
-        :return: Programming language.
 
+        :returns: Programming language.
         :Example:
             Erlang.
         """
@@ -1444,10 +1458,10 @@ class Development(object):
     def framework(_type='back'):
         """
         Get a random framework from file.
-        :param _type: If _type='front' then will be returned
-        front-end framework, else will be returned back-end framework.
-        :return: Framework or dict of used stack
 
+        :param _type: If _type='front' then will be returned
+            front-end framework, else will be returned back-end framework.
+        :returns: Framework or dict of used stack
         :Example:
             Python/Django.
         """
@@ -1459,15 +1473,11 @@ class Development(object):
     def stack_of_tech(self, nosql=False):
         """
         Get a random stack.
-        :param nosql: When nosql=True the only NoSQL skills.
-        :return: Dict of technologies.
 
-        :Example:
-            {'Back-end': 'Martini',
-             'DB': 'SQLite',
-             'Front-end': 'Webpack',
-             'Other': 'Nginx'
-            }
+        :param nosql: When nosql=True the only NoSQL skills.
+        :returns: Dict of technologies.
+        :Example: {'Back-end': 'Martini', 'DB': 'SQLite',
+            'Front-end': 'Webpack', 'Other': 'Nginx'}
         """
         stack = {
             'front-end': self.framework('front'),
@@ -1482,8 +1492,8 @@ class Development(object):
     def os():
         """
         Get a random operating system or distributive name.
-        :return: The name of OS.
 
+        :returns: The name of OS.
         :Example:
             Gentoo (Yes, i know that is not OS).
         """
@@ -1494,8 +1504,8 @@ class Development(object):
         """
         Generate a random question id for StackOverFlow
         and return url to a question.
-        :return: URL to a question.
 
+        :returns: URL to a question.
         :Example:
             http://stackoverflow.com/questions/1726403
 
@@ -1508,18 +1518,19 @@ class Development(object):
 class Food(object):
     """
     Class for Food, i.e fruits, vegetables, berries and other.
-        Args:
-            lang (str): current language.
     """
 
     def __init__(self, lang='en'):
+        """
+        :param lang: Current language.
+        """
         self.lang = lang.lower()
 
     def vegetable(self):
         """
         Get a random vegetable.
-        :return: Vegetable.
 
+        :returns: Vegetable.
         :Example:
             Tomato.
         """
@@ -1529,8 +1540,8 @@ class Food(object):
     def fruit_or_berry(self):
         """
         Get a random fruit_or_berry name.
-        :return: Fruit.
 
+        :returns: Fruit.
         :Example:
             Banana.
         """
@@ -1540,8 +1551,8 @@ class Food(object):
     def dish(self):
         """
         Get a random dish for current locale.
-        :return: Dish name.
 
+        :returns: Dish name.
         :Example:
             Ratatouille.
         """
@@ -1551,8 +1562,8 @@ class Food(object):
     def spices(self):
         """
         Get a random spices or herbs.
-        :return: Spices or herbs.
 
+        :returns: Spices or herbs.
         :Example:
             Anise.
         """
@@ -1562,8 +1573,8 @@ class Food(object):
     def drink(self):
         """
         Get a random drink.
-        :return: Alcoholic drink.
 
+        :returns: Alcoholic drink.
         :Example:
             Vodka.
         """
@@ -1574,6 +1585,7 @@ class Food(object):
 class Hardware(object):
     """
     Class for generate data about hardware.
+
     All available methods:
       1. resolution - Resolution of screen.
       2. screen_size - Screen size in inch.
@@ -1591,8 +1603,8 @@ class Hardware(object):
     def resolution():
         """
         Get a random screen resolution.
-        :return: Resolution of screen.
 
+        :returns: Resolution of screen.
         :Example:
             1280x720.
         """
@@ -1602,8 +1614,8 @@ class Hardware(object):
     def screen_size():
         """
         Get a random size of screen in inch.
-        :return: Screen size.
 
+        :returns: Screen size.
         :Example:
             13″.
         """
@@ -1613,8 +1625,8 @@ class Hardware(object):
     def cpu():
         """
         Get a random CPU name.
-        :return: CPU name.
 
+        :returns: CPU name.
         :Example:
             Intel® Core i7.
         """
@@ -1624,8 +1636,8 @@ class Hardware(object):
     def cpu_frequency():
         """
         Get a random frequency of CPU.
-        :return: Frequency of CPU.
 
+        :returns: Frequency of CPU.
         :Example:
             4.0 GHz.
         """
@@ -1636,8 +1648,8 @@ class Hardware(object):
     def generation(abbr=False):
         """
         Get a random generation.
-        :return: Generation of something.
 
+        :returns: Generation of something.
         :Example:
              6th Generation.
         """
@@ -1650,8 +1662,8 @@ class Hardware(object):
     def cpu_codename():
         """
         Get a random CPU code name.
-        :return: CPU code name.
 
+        :returns: CPU code name.
         :Example:
             Cannonlake.
         """
@@ -1662,8 +1674,8 @@ class Hardware(object):
     def ram_type():
         """
         Get a random RAM type.
-        :return: Type of RAM.
 
+        :returns: Type of RAM.
         :Example:
             DDR3.
         """
@@ -1674,8 +1686,8 @@ class Hardware(object):
     def ram_size():
         """
         Get a random size of RAM.
-        :return: RAM size.
 
+        :returns: RAM size.
         :Example:
             16GB.
         """
@@ -1686,8 +1698,8 @@ class Hardware(object):
     def ssd_or_hdd():
         """
         Get a random value from list.
-        :return: HDD or SSD.
 
+        :returns: HDD or SSD.
         :Example:
             512GB SSD.
         """
@@ -1697,8 +1709,8 @@ class Hardware(object):
     def graphics():
         """
         Get a random graphics.
-        :return: Graphics.
 
+        :returns: Graphics.
         :Example:
             Intel® Iris™ Pro Graphics 6200.
         """
@@ -1708,8 +1720,8 @@ class Hardware(object):
     def manufacturer():
         """
         Get a random manufacturer.
-        :return: Manufacturer.
 
+        :returns: Manufacturer.
         :Example:
             Dell.
         """
@@ -1718,8 +1730,8 @@ class Hardware(object):
     def hardware_full_info(self):
         """
         Get a random full information about device (laptop).
-        :return: Full information.
 
+        :returns: Full information.
         :Example:
             ASUS Intel® Core i3 3rd Generation 3.50 GHz/1920x1200/12″/
             512GB HDD(7200 RPM)/DDR2-4GB/Intel® Iris™ Pro Graphics 6200.
@@ -1737,8 +1749,8 @@ class Hardware(object):
     def phone_model():
         """
         Get a random phone model.
-        :return: Phone model.
 
+        :returns: Phone model.
         :Example:
             Nokia Lumia 920.
         """
