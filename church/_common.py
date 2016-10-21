@@ -2520,4 +2520,3 @@ SEXUALITY_SYMBOLS = (
     '⚧',
     '⚪'
 )
-

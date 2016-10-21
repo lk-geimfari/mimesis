@@ -345,7 +345,7 @@ class Text(object):
     def title(self):
         """
         Get a random title.
-        
+
         :returns: The title.
         :Example:
             Erlang - is a general-purpose, concurrent,
