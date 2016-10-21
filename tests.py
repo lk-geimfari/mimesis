@@ -15,8 +15,13 @@ from church.exceptions import (
 )
 from church.utils import pull
 
-# en, es, de, fr, it, ru, pt,
-# pt-br, da, no, sv, hu
+# Partially supported.
+# z = ['da', 'de', 'en', 'es', 'fr', 'hu',
+#      'it', 'no', 'pt', 'pt-br', 'ru', 'sv']
+
+# Fully supported:
+# ['de','en','es','fr', 'it','no', 'pt-br','ru','sv']
+
 LANG = 'en'
 
 
@@ -265,7 +270,7 @@ class PersonalTestCase(TestCase):
     def test_full_name(self):
         result = self.person.full_name('f')
         _result = result.split(' ')
-        self.assertEqual(len(_result), 2)
+        self.assertIsInstance(_result, list)
 
     def test_username(self):
         result = self.person.username()
