@@ -8,101 +8,109 @@ Personal
 
 	person = Personal('en')
 
-	# Get a random integer value.
-	# For example: 21
-	age = person.age(minimum=17, maximum=35)
+	# Get a random integer value from range.
+	# Output: 21
+	age = person.age(mi=17, mx=35)
+	
 
 	# Get a random name.
-	# For example: Christina
-	name = person.name()
+	# Output: Christina
+	name = person.name(gender='f')
 
 	# Get a random surname.
-	# For example: Wolf
+	# Output: Wolf
 	surname = person.surname()
 
 	# Get a random full name.
-	# For example: Leo Johnson.
+	# Output: Leo Johnson.
 	full_name = person.full_name(gender='m')
 
 	# Get a random username.
-	# For example: foretime10
+	# Output: john1032
 	username = person.username()
 
 	# Generate a random password.
 	password = person.password(length=15)
 
 	# Generate a random email using usernames.
-	# For example: foretime10@live.com
+	# Output: foretime10@live.com
 	email = person.email()
 
 	# Generate a random home page using usernames.
-	# For example: http://www.font6.info
+	# Output: http://www.font6.info
 	home_page = person.home_page()
 
 	# Get a random subreddit thread from list. 
 	# If nsfw=True then will be returned NSFW subreddit
-	# For example: /r/games
+	# Output: /r/games
 	subreddit = p.subreddit(nsfw=False, full_url=False)
 
-	# Bitcoin address. Support only 2 most common format: 'P2PKH' and 'P2SH'
-	# For example:
-	bitcoin = person.bitcoin(address_format='p2sh')
+	# Get a bitcoin address.
+	# Output:
+	bitcoin = person.bitcoin()
 
 	# Generate a random card verification value (CVV)
-	# For example: 731
+	# Output: 731
 	cvv = person.cvv()
 
 	# Generate a random CID code.
-	# For example: 7834
+	# Output: 7834
 	cid = person.cid()
 
 	# Generate a random credit card number (Visa or MasterCard)
-	# For example: 3519 2073 7960 3241
-	credit_card = person.credit_card_number()
+	# Output: 4001 2073 7960 3241
+	credit_card = person.credit_card_number(card_type='visa')
 
 	# Get a random gender.
-	# For example: Male or M if abbreviated=True
-	gender = person.gender(abbreviated=True)
+	# Output: Male
+	gender = person.gender()
+	# Output:  ♂
+	gender_symbol = person.gender(symbol=True)
 
 	# Get a random profession.
-	# For example: Programmer
+	# Output: Programmer
 	profession = person.profession()
 
 	# Get a random political views.
-	# For example: Liberal
+	# Output: Liberal
 	political_views = person.political_views()
 
 	# Get a random worldview
-	# For example: Naturalistic Pantheism
+	# Output: Naturalistic Pantheism
 	worldview = person.worldview()
 
 	# Get a random views on.
-	# For example: Negative
+	# Output: Negative
 	views_on = person.views_on()
 
 	# Get a random nationality.
-	# For example: Russian
+	# Output: Russian
 	nationality = person.nationality()
 
 	# Get a random university.
-	# For example: MIT
+	# Output: MIT
 	university = person.university()
 
 	# Get a random qualification.
-	# For example: Master
+	# Output: Master
 	qualification = person.qualification()
 
 	# Get a random language.
-	# For example: Russian
+	# Output: Russian
 	language = person.language()
 
 	# Get a random movie.
-	# For example: Pulp Fiction
+	# Output: Pulp Fiction
 	favorite_movie = person.favorite_movie()
 
 	# Generate a random phone number.
-	# For example: +7-(963)409-11-22
+	# Output: +7-(963)409-11-22
 	telephone = person.telephone()
+	# You're also can use mask
+	mask = +1-### ### ## ##
+	# Output: +1-763 001 13 22
+	telephone = person.telephone(mask)
+
 
 Datetime
 --------
@@ -112,23 +120,23 @@ Datetime
 	datetime = Datetime('en')
 
 	# Get a random day of week.
-	# For example: Sun.
-	day_of_week = datetime.day_of_week(abbreviated=True)
+	# Output: Sun.
+	day_of_week = datetime.day_of_week(abbr=True)
 
 	# Get a random month.
-	# For example:  Dec.
-	month = datetime.month(abbreviated=True)
+	# Output:  Dec.
+	month = datetime.month(abbr=True)
 
 	# Get a random periodicity string.
-	# For example: Never
+	# Output: Never
 	periodicity = datetime.periodicity()
 
 	# Generate a random date formatted as a d/m/Y
-	# For example: 11/05/2016
+	# Output: 11/05/2016
 	date = datetime.date(sep='/', with_time=True)
 
 	# Generate a random days of month, from 1 to 31.
-	# For example: 21
+	# Output: 21
 	day_of_month = datetime.day_of_month()
 
 Network
@@ -159,12 +167,12 @@ Science
 	science = Science('en')
 
 	# Get a random mathematical formula.
-	# For example: A = (ab)/2
+	# Output: A = (ab)/2
 	math_formula = science.math_formula()
 
 	# Get a random chemical element. If argument name_only=True
 	# then will be returned only Name, else dict with more information
-	# For example: {'Symbol': 'S',
+	# Output: {'Symbol': 'S',
 	#               'Name': 'Sulfur',
 	#               'Atomic number': '16'
 	#             }
@@ -175,11 +183,11 @@ Science
 	physical_law = science.physical_law()
 
 	# Get a random link to scientific article on Wikipedia.
-	# For example: https://en.wikipedia.org/wiki/Black_hole
+	# Output: https://en.wikipedia.org/wiki/Black_hole
 	article = science.article_on_wiki()
 
 	# Get a random name of scientist.
-	# For example: Konstantin Tsiolkovsky
+	# Output: Konstantin Tsiolkovsky
 	scientist = science.scientist()
 
 File
@@ -199,7 +207,7 @@ File
 	# 6. image = '.jpeg', '.jpg', '.png' and other.
 	# 7. executable = '.exe', '.apk', '.bat' and other.
 	# 8. compressed = '.zip', '.7z', '.tar.xz' and other.
-	# For example: '.py'
+	# Output: '.py'
 	extension = file.extension(file_type='source')
 
 Address
@@ -216,7 +224,7 @@ Address
 	street_name = address.street_name()
 
 	# Get a random street suffix.
-	# For example: Street.
+	# Output: Street.
 	street_suffix = address.street_suffix()
 
 	# Get a random address.
@@ -229,15 +237,15 @@ Address
 	state = address.state_or_subject()
 
 	# Get real postal code.
-	# For example: 389213
+	# Output: 389213
 	postal_code = address.postal_code()
 
 	# Get a random country.
-	# For example: Russia or Ru if only_iso_code=True:
+	# Output: Russia or Ru if only_iso_code=True:
 	country = address.country()
 
 	# Get a random name of city
-	# For example: Saint Petersburg
+	# Output: Saint Petersburg
 	city = address.city()
 
 Text
@@ -258,39 +266,39 @@ Text
 	title = data.title()
 
 	# Get the random words.
-	# For example: human, rabbit, love, hope, tiger, cat, dog
+	# Output: human, rabbit, love, hope, tiger, cat, dog
 	words = data.words(quantity=7)
 
 	# Get a random word.
-	# For example: peach
+	# Output: peach
 	word = data.word()
 
 	# Get a random swear word.
-	# For example: shit
+	# Output: shit
 	bad = data.swear_word()
 
 	# Get a list of naughty strings (bad input)
-	# For example: $ENV{'HOME'}
+	# Output: $ENV{'HOME'}
 	naughty = data.naughty_strings()
 
 	# Get a random quotes from movie.
-	# For example: 'Bond...James Bond.'
+	# Output: 'Bond...James Bond.'
 	quote = data.quote_from_movie()
 
 	# Get currency code. ISO 4217
-	# For example: USD
+	# Output: USD
 	currency = data.currency_iso()
 
 	# Get random name of color.
-	# For example: White
+	# Output: White
 	color = data.company()
 
 	# Get a random company name.
-	# For example: AI Research Group.
+	# Output: AI Research Group.
 	company = data.company()
 
 	# Get a random company type.
-	# For example: Inc.
+	# Output: Inc.
 	company_type = data.company_type()
 
 Development
@@ -304,18 +312,18 @@ Development
 	software_license = Development.license()
 
 	# Get a random database name.
-	# For example: Riak or if nosql=False PostgreSQL
+	# Output: Riak or if nosql=False PostgreSQL
 	db = Development.database(nosql=True)
 
 	# Get a random value list.
-	# For example: Docker
+	# Output: Docker
 	other_skill = Development.other()
 
 	# Get a random programming language from list.
 	programming_language = Development.programming_language()
 
 	# Get a random framework from file.
-	# For example:  Python/Django
+	# Output:  Python/Django
 	# or
 	# React/Redux if _type='front'
 	framework = Development.framework(_type='back')
@@ -329,7 +337,7 @@ Development
 	stack = Development.stack_of_tech(nosql=True)
 
 	# Get a random link to github repository.
-	# For example: https://github.com/lk-geimfari/church
+	# Output: https://github.com/lk-geimfari/church
 	repo = Development.github_repo()
 
 Food
