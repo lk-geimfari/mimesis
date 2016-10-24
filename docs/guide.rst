@@ -11,7 +11,7 @@ Personal
 	# Get a random integer value from range.
 	# Output: 21
 	age = person.age(mi=17, mx=35)
-	
+
 
 	# Get a random name.
 	# Output: Christina
@@ -40,7 +40,7 @@ Personal
 	# Output: http://www.font6.info
 	home_page = person.home_page()
 
-	# Get a random subreddit thread from list. 
+	# Get a random subreddit thread from list.
 	# If nsfw=True then will be returned NSFW subreddit
 	# Output: /r/games
 	subreddit = p.subreddit(nsfw=False, full_url=False)
@@ -91,9 +91,9 @@ Personal
 	# Output: MIT
 	university = person.university()
 
-	# Get a random qualification.
+	# Get a random academic degree.
 	# Output: Master
-	qualification = person.qualification()
+	ad = person.academic_degree()
 
 	# Get a random language.
 	# Output: Russian
@@ -138,6 +138,33 @@ Datetime
 	# Generate a random days of month, from 1 to 31.
 	# Output: 21
 	day_of_month = datetime.day_of_month()
+
+Business
+--------
+
+.. code:: python
+
+	business = Business('en')
+
+	# Get a random company type
+	# abbr=True is abbreviated company type
+	# Output: Incorporated (Inc. when abbr=True)
+	company_type = business.company_type(abrr=False)
+
+	# Get a random company name
+	# Output: Gamma Systems
+	company = business.company()
+
+	# Generate a random copyright
+	# mi=1990 is foundation date
+	# mx=2016 is current date
+	# without_date=True returns copyright without date
+	# Output: © 1990-2016 Komercia, Inc
+	copyright = business.copyright(mi=1990, mx=2016, without_date=False)
+
+	# Get a currency code. ISO 4217 format
+	#  Output: RUR
+	currency = business.currency()
 
 Network
 -------
@@ -229,12 +256,11 @@ Address
 
 	# Get a random address.
 	# 786 Clinton Lane
-	street_address = address.street_address()
+	street_address = address.address()
 
-	# Get a random states or subject of country. For 'ru_ru' always will
-	# be getting subject of Russian Federation.
-	# For other localization will be getting state.
-	state = address.state_or_subject()
+	# Get a random name of state
+	# Output: Alabama (for locale 'en')
+	state = address.state()
 
 	# Get real postal code.
 	# Output: 389213
@@ -247,6 +273,36 @@ Address
 	# Get a random name of city
 	# Output: Saint Petersburg
 	city = address.city()
+
+	# Get a random value of latitude (+90 to -90)
+	# Output: -66.4214188124611
+	latitude = address.latitude()
+
+	# Get a random value of longitude (-180 to +180)
+	# Output: 112.18440260511943
+	longitude = address.longitude()
+
+	# Get random geo coordinates
+	# Output: {'latitude': 8.003968712834975, 'longitude': 36.02811153405548}
+	coordinates = address.coordinates()
+
+Numbers
+-------
+
+.. code:: python
+
+	number = Numbers()
+
+	# Get an array of random float number of 10**n
+	# n=2 is raise 10 to the 'n' power
+	# type_code='f' is a code of type('f'/'d')
+	# to_list=True is to convert array to list
+	floats = number.floats(n=2, type_code='f', to_list=True)
+
+	# Get an array of prime numbers of 10**n
+	# n=2 is raise 10 to the 'n' power
+	# to_list=True is to convert array to list
+	primes = number.primes(n=2, to_list=True)
 
 Text
 ----
@@ -281,25 +337,13 @@ Text
 	# Output: $ENV{'HOME'}
 	naughty = data.naughty_strings()
 
-	# Get a random quotes from movie.
+	# Get a random quote.
 	# Output: 'Bond...James Bond.'
-	quote = data.quote_from_movie()
-
-	# Get currency code. ISO 4217
-	# Output: USD
-	currency = data.currency_iso()
+	quote = data.quote()
 
 	# Get random name of color.
 	# Output: White
-	color = data.company()
-
-	# Get a random company name.
-	# Output: AI Research Group.
-	company = data.company()
-
-	# Get a random company type.
-	# Output: Inc.
-	company_type = data.company_type()
+	color = data.color()
 
 Development
 -----------
@@ -331,8 +375,8 @@ Development
 	# Get a random stack.
 	# {'front-end': 'Twitter Bootstrap',
 	# 'back-end': 'Python/Flask'
-	# 'other': 'Docker', 
-	# 'db': 'Couchbase', 
+	# 'other': 'Docker',
+	# 'db': 'Couchbase',
 	# }
 	stack = Development.stack_of_tech(nosql=True)
 
@@ -360,7 +404,7 @@ Food
 	cocktail = food.cocktail()
 
 	# Get a random dish for current locale
-	# Example ('ru_ru'): Борщ 
+	# Example ('ru_ru'): Борщ
 	dish = food.dish()
 
 	# Get a random fruit.
@@ -432,7 +476,7 @@ Hardware
 
 	# Generate a random information about hardware.
 	# Example:  Acer Intel® Core i7 2nd Generation 3.50 GHz/1920x1200/12″/
-	# 1TB HDD + 64GB SSD/DDR3-32GB/Intel® HD Graphics 5300  
+	# 1TB HDD + 64GB SSD/DDR3-32GB/Intel® HD Graphics 5300
 	hardware_full_info = hardware.hardware_full_info()
 
 	# Get a random model of phone.

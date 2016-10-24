@@ -4,14 +4,13 @@ import re
 from unittest import TestCase
 
 from church.church import Address
-from church.utils import pull
-
 from tests import LANG
 
 
 class AddressTestCase(TestCase):
     def setUp(self):
         self.address = Address(LANG)
+        self.db = self.address.data
 
     def tearDown(self):
         del self.address
@@ -22,13 +21,11 @@ class AddressTestCase(TestCase):
 
     def test_street_name(self):
         result = self.address.street_name()
-        parent_file = pull('streets', self.address.lang)
-        self.assertIn(result + '\n', parent_file)
+        self.assertIn(result, self.db['street']['name'])
 
     def test_street_suffix(self):
         result = self.address.street_suffix()
-        parent_file = pull('st_suffix', self.address.lang)
-        self.assertIn(result + '\n', parent_file)
+        self.assertIn(result, self.db['street']['suffix'])
 
     def test_address(self):
         result = self.address.address()
@@ -36,8 +33,7 @@ class AddressTestCase(TestCase):
 
     def test_state(self):
         result = self.address.state()
-        parent_file = pull('states', self.address.lang)
-        self.assertIn(result + '\n', parent_file)
+        self.assertIn(result, self.db['state']['name'])
 
     def test_postal_code(self):
         result = self.address.postal_code()
@@ -47,16 +43,15 @@ class AddressTestCase(TestCase):
             self.assertTrue(re.match(r'[0-9]{5}$', str(result)))
 
     def test_country(self):
-        result = self.address.country() + '\n'
-        self.assertTrue(len(result) > 3)
+        result = self.address.country()
+        self.assertTrue(self.db['country']['name'], result)
 
-        result2 = self.address.country(only_iso_code=True) + '\n'
-        self.assertTrue(len(result2) < 4)
+        result2 = self.address.country(iso_code=True)
+        self.assertTrue(self.db['country']['iso_code'], result2)
 
     def test_city(self):
         result = self.address.city()
-        parent_file = pull('cities', self.address.lang)
-        self.assertIn(result + '\n', parent_file)
+        self.assertIn(result, self.db['city'])
 
     def test_latitude(self):
         result = self.address.latitude()

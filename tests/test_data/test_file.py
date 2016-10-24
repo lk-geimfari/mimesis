@@ -14,5 +14,8 @@ class FileTestCase(TestCase):
         del self.file
 
     def test_extension(self):
-        text = self.file.extension()
+        text = self.file.extension(file_type='text')
         self.assertIn(text, common.EXTENSIONS['text'])
+
+        source = self.file.extension(file_type='source')
+        self.assertIn(source, common.EXTENSIONS['source'])

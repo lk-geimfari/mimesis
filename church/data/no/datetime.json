@@ -1,0 +1,62 @@
+{
+  "periodicity": [
+    "En gang",
+    "Aldri",
+    "Sjeldent",
+    "Ofte",
+    "Daglig",
+    "Ukentlig",
+    "Månedlig",
+    "Årlig"
+  ],
+  "day": {
+    "abbr": [
+      "Ma.",
+      "Ti.",
+      "On.",
+      "To.",
+      "Fr.",
+      "Lø.",
+      "Sø."
+    ],
+    "name": [
+      "Mandag",
+      "Tirsdag",
+      "Onsdag",
+      "Torsdag",
+      "Fredag",
+      "Lørdag",
+      "Søndag"
+    ]
+  },
+  "month": {
+    "abbr": [
+      "Jan.",
+      "Febr.",
+      "Mars",
+      "April",
+      "Mai",
+      "Juni",
+      "Juli",
+      "Aug.",
+      "Sept.",
+      "Okt.",
+      "Nov.",
+      "Des."
+    ],
+    "name": [
+      "Januar",
+      "Februar",
+      "Mars",
+      "April",
+      "Mai",
+      "Juni",
+      "Juli",
+      "August",
+      "September",
+      "Oktober",
+      "November",
+      "Desember"
+    ]
+  }
+}

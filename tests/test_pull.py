@@ -10,11 +10,11 @@ from church.utils import pull
 
 class PullTestCase(TestCase):
     def test_pull(self):
-        result = pull('views_on', 'en')
-        self.assertIsNotNone(result)
-        self.assertIsInstance(result, list)
+        data = pull('personal.json', 'en')
+        self.assertIsNotNone(data['views_on'])
+        self.assertIsInstance(data['views_on'], list)
         self.assertRaises(
-            UnsupportedLocale, lambda: pull('views_on', 'spoke'))
+            UnsupportedLocale, lambda: pull('personal.json', 'spoke'))
         self.assertRaises(
-            FileNotFoundError, lambda: pull('something', 'en'))
+            FileNotFoundError, lambda: pull('something.json', 'en'))
 

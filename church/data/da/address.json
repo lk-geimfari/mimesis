@@ -1,0 +1,29 @@
+{
+  "state": {
+    "abbr": [
+      "Test"
+    ],
+    "name": [
+      "Test"
+    ]
+  },
+  "street": {
+    "suffix": [
+      "Test"
+    ],
+    "name": [
+      "Test"
+    ]
+  },
+  "country": {
+    "iso_code": [
+      "Test"
+    ],
+    "name": [
+      "Test"
+    ]
+  },
+  "city": [
+    "Test"
+  ]
+}

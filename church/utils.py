@@ -1,3 +1,4 @@
+import json
 from functools import lru_cache
 from os.path import abspath, join, dirname
 
@@ -8,54 +9,18 @@ PATH = abspath(join(dirname(__file__), 'data'))
 __all__ = ['pull']
 
 SUPPORTED_LOCALES = {
-    'da': {
-        'name': 'Danish',
-        'name_local': 'Dansk',
-    },
-    'de': {
-        'name': 'German',
-        'name_local': 'Deutsch',
-    },
-    'en': {
-        'name': 'English',
-        'name_local': 'English',
-    },
-    'es': {
-        'name': 'Spanish',
-        'name_local': 'Español',
-    },
-    'fr': {
-        'name': 'French',
-        'name_local': 'Français',
-    },
-    'it': {
-        'name': 'Italian',
-        'name_local': 'Italiano',
-    },
-    'nl': {
-        'name': 'Dutch',
-        'name_local': 'Nederlands',
-    },
-    'no': {
-        'name': 'Norwegian',
-        'name_local': 'Norsk',
-    },
-    'pt': {
-        'name': 'Portuguese',
-        'name_local': 'Português',
-    },
-    'pt-br': {
-        'name': 'Brazilian Portuguese',
-        'name_local': 'Português Brasileiro',
-    },
-    'ru': {
-        'name': 'Russian',
-        'name_local': 'Русский',
-    },
-    'sv': {
-        'name': 'Swedish',
-        'name_local': 'Svenska',
-    }
+    'da': dict(name='Danish', name_local='Dansk'),
+    'de': dict(name='German', name_local='Deutsch'),
+    'en': dict(name='English', name_local='English'),
+    'es': dict(name='Spanish', name_local='Español'),
+    'fr': dict(name='French', name_local='Français'),
+    'it': dict(name='Italian', name_local='Italiano'),
+    'no': dict(name='Norwegian', name_local='Norsk'),
+    'pt': dict(name='Portuguese', name_local='Português'),
+    'pt-br': dict(name='Brazilian Portuguese', name_local='Português Brasileiro'),
+    'ru': dict(name='Russian', name_local='Русский'),
+    'sv': dict(name='Swedish', name_local='Svenska'),
+    'etc': "Int."
 }
 
 
@@ -98,6 +63,6 @@ def pull(filename, locale='en'):
         raise UnsupportedLocale("Locale %s does not supported" % locale)
 
     with open(join(PATH + '/' + locale, filename), 'r') as f:
-        data = f.readlines()
+        data = json.load(f)
 
     return data
