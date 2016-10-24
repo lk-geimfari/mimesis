@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import re
 from unittest import TestCase
 
 from church.church import Text
