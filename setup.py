@@ -23,6 +23,7 @@ setup(
     long_description="Church is a library to generate fake data."
                      "It's very useful when you need to bootstrap "
                      "your database.",
+    zip_safe=False,
     classifiers=[
         "Development Status :: 4 - Beta",
         'Intended Audience :: Developers',
@@ -30,6 +31,10 @@ setup(
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
         'License :: OSI Approved :: MIT License',
-        "Topic :: Software Development :: Testing",
+        'Intended Audience :: Developers',
+        'Operating System :: OS Independent',
+        'Topic :: Software Development :: Libraries :: Python Modules',
+        'Topic :: Software Development',
+        'Topic :: Software Development :: Testing',
     ],
 )

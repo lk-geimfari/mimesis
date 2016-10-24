@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 BACKEND = [
     "C#",
     "C#/ASP.NET",
