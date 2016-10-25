@@ -35,9 +35,11 @@ class AddressTestCase(TestCase):
         self.assertTrue(len(result) > 6)
 
     def test_state(self):
-        result = self.address.state()
-        parent_file = pull('states', self.address.lang)
-        self.assertIn(result + '\n', parent_file)
+        result = self.address.state() + '\n'
+        self.assertTrue(len(result) > 3)
+
+        result2 = self.address.state(abbrev=True) + '\n'
+        self.assertTrue(len(result2) == 3)
 
     def test_postal_code(self):
         result = self.address.postal_code()
