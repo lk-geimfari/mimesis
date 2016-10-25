@@ -3,8 +3,8 @@
 import re
 from unittest import TestCase
 
+from church._common import USER_AGENTS
 from church.church import Network
-from church.utils import pull
 
 
 class NetworkTestCase(TestCase):
@@ -44,5 +44,4 @@ class NetworkTestCase(TestCase):
 
     def test_user_agent(self):
         result = self.net.user_agent()
-        parent_file = pull('useragents', 'en')
-        self.assertIn(result + '\n', parent_file)
+        self.assertIn(result, USER_AGENTS)

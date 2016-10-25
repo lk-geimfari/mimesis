@@ -12,6 +12,7 @@ from tests import LANG
 class ScienceTestCase(TestCase):
     def setUp(self):
         self.science = Science(LANG)
+        self.db = self.science._data
 
     def tearDown(self):
         del self.science
@@ -20,15 +21,13 @@ class ScienceTestCase(TestCase):
         result = self.science.math_formula()
         self.assertIn(result, common.MATH_FORMULAS)
 
-    def test_article_on_wiki(self):
-        result = self.science.article_on_wiki()
-        parent_file = pull('science_wiki', self.science.lang)
-        self.assertIn(result + '\n', parent_file)
+    def test_scientific_article(self):
+        result = self.science.scientific_article()
+        self.assertIn(result, self.db['article'])
 
     def test_scientist(self):
         result = self.science.scientist()
-        parent_file = pull('scientist', self.science.lang)
-        self.assertIn(result + '\n', parent_file)
+        self.assertIn(result, self.db['scientist'])
 
     def test_chemical_element(self):
         result = self.science.chemical_element(name_only=True)

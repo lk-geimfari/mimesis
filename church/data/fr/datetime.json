@@ -1,0 +1,62 @@
+{
+  "month": {
+    "abbr": [
+      "Janv.",
+      "Févr.",
+      "mars",
+      "avril",
+      "mai",
+      "juin",
+      "juil.",
+      "août",
+      "sept.",
+      "Oct.",
+      "nov.",
+      "déc."
+    ],
+    "name": [
+      "Janvier",
+      "Février",
+      "Mars",
+      "Avril",
+      "Mai",
+      "Juin",
+      "Juillet",
+      "Août",
+      "Septembre",
+      "Octobre",
+      "Novembre",
+      "Décembre"
+    ]
+  },
+  "periodicity": [
+    "Annuel",
+    "Hebdomadaire",
+    "Jamais",
+    "Mensuel",
+    "Rarement",
+    "Souvent",
+    "Tous les jours",
+    "Une fois"
+  ],
+  "day": {
+    "abbr": [
+      "Lun.",
+      "Mar.",
+      "Mer.",
+      "Jeu.",
+      "Ven.",
+      "Sam.",
+      "Dim."
+    ],
+    "name": [
+      "Lundi",
+      "Mardi",
+      "Mercredi",
+      "Jeudi",
+      "Vendredi",
+      "Samedi",
+      "Dimanche"
+    ]
+  }
+}

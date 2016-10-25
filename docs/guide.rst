@@ -11,7 +11,7 @@ Personal
 	# Get a random integer value from range.
 	# Output: 21
 	age = person.age(mi=17, mx=35)
-	
+
 
 	# Get a random name.
 	# Output: Christina
@@ -40,7 +40,7 @@ Personal
 	# Output: http://www.font6.info
 	home_page = person.home_page()
 
-	# Get a random subreddit thread from list. 
+	# Get a random subreddit thread from list.
 	# If nsfw=True then will be returned NSFW subreddit
 	# Output: /r/games
 	subreddit = p.subreddit(nsfw=False, full_url=False)
@@ -91,9 +91,9 @@ Personal
 	# Output: MIT
 	university = person.university()
 
-	# Get a random qualification.
+	# Get a random academic degree.
 	# Output: Master
-	qualification = person.qualification()
+	ad = person.academic_degree()
 
 	# Get a random language.
 	# Output: Russian
@@ -337,7 +337,7 @@ Text
 	# Output: $ENV{'HOME'}
 	naughty = data.naughty_strings()
 
-	# Get a random quotes from movie.
+	# Get a random quote.
 	# Output: 'Bond...James Bond.'
 	quote = data.quote()
 
@@ -375,8 +375,8 @@ Development
 	# Get a random stack.
 	# {'front-end': 'Twitter Bootstrap',
 	# 'back-end': 'Python/Flask'
-	# 'other': 'Docker', 
-	# 'db': 'Couchbase', 
+	# 'other': 'Docker',
+	# 'db': 'Couchbase',
 	# }
 	stack = Development.stack_of_tech(nosql=True)
 
@@ -404,7 +404,7 @@ Food
 	cocktail = food.cocktail()
 
 	# Get a random dish for current locale
-	# Example ('ru_ru'): Борщ 
+	# Example ('ru_ru'): Борщ
 	dish = food.dish()
 
 	# Get a random fruit.
@@ -476,7 +476,7 @@ Hardware
 
 	# Generate a random information about hardware.
 	# Example:  Acer Intel® Core i7 2nd Generation 3.50 GHz/1920x1200/12″/
-	# 1TB HDD + 64GB SSD/DDR3-32GB/Intel® HD Graphics 5300  
+	# 1TB HDD + 64GB SSD/DDR3-32GB/Intel® HD Graphics 5300
 	hardware_full_info = hardware.hardware_full_info()
 
 	# Get a random model of phone.

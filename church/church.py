@@ -107,6 +107,7 @@ class Address(object):
         :param lang: Current language.
         """
         self.lang = lang.lower()
+        self.data = pull('address.json', self.lang)
 
     @staticmethod
     def street_number(mx=1400):
@@ -129,8 +130,8 @@ class Address(object):
         :Example:
            Candlewood.
         """
-        street_name = choice(pull('streets', self.lang))
-        return street_name.strip()
+        names = self.data['street']['name']
+        return choice(names)
 
     def street_suffix(self):
         """
@@ -140,8 +141,8 @@ class Address(object):
         :Example:
             Street.
         """
-        suffix = choice(pull('st_suffix', self.lang))
-        return suffix.strip()
+        suffix = self.data['street']['suffix']
+        return choice(suffix)
 
     def address(self):
         """
@@ -170,7 +171,7 @@ class Address(object):
         address = _format()
         return address
 
-    def state(self):
+    def state(self, abbr=False):
         """
         Get a random states or subject of country.
 
@@ -178,8 +179,9 @@ class Address(object):
         :Example:
             Alabama (for locale `en`).
         """
-        state_name = choice(pull('states', self.lang))
-        return state_name.strip()
+        key = 'abbr' if abbr else 'name'
+        states = self.data['state'][key]
+        return choice(states)
 
     def postal_code(self):
         """
@@ -193,19 +195,18 @@ class Address(object):
             return randint(100000, 999999)
         return randint(10000, 99999)
 
-    def country(self, only_iso_code=False):
+    def country(self, iso_code=False):
         """
         Get a random country.
 
-        :param only_iso_code: Return only ISO code of country.
+        :param iso_code: Return only ISO code of country.
         :returns: The Country
         :Example:
             Russia.
         """
-        country_name = choice(pull('countries', self.lang)).split('|')
-        if not only_iso_code:
-            return country_name[1].strip()
-        return country_name[0].strip()
+        key = 'iso_code' if iso_code else 'name'
+        countries = self.data['country'][key]
+        return choice(countries)
 
     def city(self):
         """
@@ -215,8 +216,8 @@ class Address(object):
         :Example:
             Saint Petersburg.
         """
-        city_name = choice(pull('cities', self.lang))
-        return city_name.strip()
+        cities = self.data['city']
+        return choice(cities)
 
     @staticmethod
     def latitude():
@@ -315,6 +316,7 @@ class Text(object):
         :param lang: Current language.
         """
         self.lang = lang.lower()
+        self.data = pull('text.json', self.lang)
 
     def lorem_ipsum(self, quantity=5):
         """
@@ -328,8 +330,8 @@ class Text(object):
             and strong static typing.
         """
         text = ''
-        for _ in range(int(quantity)):
-            text += choice(pull('text', self.lang)).replace('\n', ' ')
+        for _ in range(quantity):
+            text += '' + choice(self.data['text'])
         return text.strip()
 
     def sentence(self):
@@ -363,8 +365,9 @@ class Text(object):
             science, network, god, octopus, love.
         """
         words_list = []
+        words = self.data['words']['normal']
         for _ in range(int(quantity)):
-            words_list.append(choice(pull('words', self.lang)).strip())
+            words_list.append(choice(words))
         return words_list
 
     def word(self):
@@ -385,8 +388,8 @@ class Text(object):
         :Example:
             Damn.
         """
-        word = choice(pull('swear_words', self.lang))
-        return word.strip()
+        bad_words = self.data['words']['bad']
+        return choice(bad_words)
 
     @staticmethod
     def naughty_strings():
@@ -414,8 +417,8 @@ class Text(object):
         :Example:
             "Bond... James Bond."
         """
-        quote = choice(pull('quotes', self.lang))
-        return quote.strip()
+        quotes = self.data['quotes']
+        return choice(quotes)
 
     def color(self):
         """
@@ -425,8 +428,8 @@ class Text(object):
         :Example:
             Red.
         """
-        color = choice(pull('colors', self.lang))
-        return color.strip()
+        colors = self.data['color']
+        return choice(colors)
 
     @staticmethod
     def hex_color():
@@ -513,6 +516,7 @@ class Business(object):
 
     def __init__(self, lang):
         self.lang = lang.lower()
+        self.data = pull('business.json', self.lang)
 
     def company_type(self, abbr=False):
         """
@@ -523,10 +527,9 @@ class Business(object):
         :Example:
             Incorporated (Inc. when abbr=True).
         """
-        _type = choice(pull('company_type', self.lang)).split('|')
-        if abbr:
-            return _type[1].strip()
-        return _type[0].strip()
+        key = 'abbr' if abbr else 'title'
+        company_type = self.data['company']['type'][key]
+        return choice(company_type)
 
     def company(self):
         """
@@ -536,8 +539,8 @@ class Business(object):
         :Example:
             Gamma Systems
         """
-        company_name = choice(pull('company', self.lang))
-        return company_name.strip()
+        companies = self.data['company']['name']
+        return choice(companies)
 
     def copyright(self, mi=1990, mx=2016, without_date=False):
         """
@@ -580,6 +583,7 @@ class Personal(object):
         :param lang: Current language.
         """
         self.lang = lang.lower()
+        self.data = pull('personal.json', self.lang)
 
     @staticmethod
     def age(mi=16, mx=66):
@@ -594,23 +598,22 @@ class Personal(object):
         """
         return randint(mi, mx)
 
-    def name(self, gender='f'):
+    def name(self, gender='female'):
         """
         Get a random name.
 
-        :param gender: if 'm' then will getting male name else female name.
+        :param gender: if 'male' then will getting male name else female name.
         :returns: Name.
         :Example:
-            John Abbey (gender='m').
+            John Abbey (gender='male').
         """
         if not isinstance(gender, str):
             raise TypeError('name takes only string type')
 
-        file = 'f_names' if gender.lower() == 'f' else 'm_names'
-        name = choice(pull(file, self.lang))
-        return name.strip()
+        names = self.data['names'][gender]
+        return choice(names)
 
-    def surname(self, gender='f'):
+    def surname(self, gender='female'):
         """
         Get a random surname.
 
@@ -624,17 +627,17 @@ class Personal(object):
             raise TypeError('surname takes only string type')
 
         if self.lang == 'ru':
-            file = 'm_surnames' if gender == 'm' else 'f_surnames'
-            return choice(pull(file, self.lang)).strip()
+            gender = 'female' if gender == 'female' else 'male'
+            return choice(self.data['surnames'][gender])
 
-        return choice(pull('surnames', self.lang)).strip()
+        return choice(self.data['surnames'])
 
-    def full_name(self, gender='f', reverse=False):
+    def full_name(self, gender='female', reverse=False):
         """
         Get a random full name.
 
         :param reverse: if true: surname/name else name/surname
-        :param gender: if gender='m' then will be returned male name else
+        :param gender: if gender='male' then will be returned male name else
             female name.
         :returns: Full name.
         :Example:
@@ -646,7 +649,7 @@ class Personal(object):
         return fn
 
     @staticmethod
-    def username(gender='m'):
+    def username(gender='female'):
         """
         Get a random username with digits.
         Username generated from names (en) for all locales.
@@ -655,14 +658,12 @@ class Personal(object):
         :Example:
             abby1189.
         """
-        gender = gender.lower()
-        file = 'f_names' if gender == 'f' else 'm_names'
-
-        u = choice(pull(file)).strip()
-        return '{}{}'.format(u.lower(), randint(2, 9999))
+        data = pull('personal.json', 'en')
+        username = choice(data['names'][gender])
+        return '{}{}'.format(username.lower(), randint(2, 9999))
 
     @staticmethod
-    def twitter(gender='m'):
+    def twitter(gender='female'):
         """
         Get a random twitter user.
 
@@ -676,7 +677,7 @@ class Personal(object):
         return url.format(username)
 
     @staticmethod
-    def facebook(gender='m'):
+    def facebook(gender='female'):
         """
         Generate a random facebook user.
 
@@ -718,7 +719,7 @@ class Personal(object):
             return password
 
     @staticmethod
-    def email(gender='f'):
+    def email(gender='female'):
         """
         Generate a random email using usernames.
 
@@ -727,19 +728,20 @@ class Personal(object):
         :Example:
             foretime10@live.com
         """
-        name = Personal.username(gender.lower())
+        name = Personal.username(gender)
         email = name + choice(common.EMAIL_DOMAINS)
         return email.strip()
 
-    def home_page(self):
+    def home_page(self, gender='female'):
         """
         Generate a random home page using usernames.
 
+        :param gender: Gender of author of site.
         :returns: Random home page.
         :Example:
             http://www.font6.info
         """
-        url = 'http://www.' + self.username()
+        url = 'http://www.' + self.username(gender)
         domain = choice(common.DOMAINS)
         return '{}{}'.format(url, domain)
 
@@ -881,35 +883,35 @@ class Personal(object):
         if symbol:
             return choice(common.GENDER_SYMBOLS)
 
-        gender = choice(pull('gender', self.lang))
-        return gender.strip()
+        gender = choice(self.data['gender'])
+        return gender
 
     @staticmethod
-    def height(from_=1.5, to_=2.0):
+    def height(from_=1.5, to=2.0):
         """
         Generate a random height in M.
 
-        :param from_: Min value.
-        :param to_: Max value.
+        :param from_: Minimum value.
+        :param to: Maximum value.
         :returns: Height.
         :Example:
             1.85.
         """
-        h = uniform(float(from_), float(to_))
+        h = uniform(float(from_), float(to))
         return '{:0.2f}'.format(h)
 
     @staticmethod
-    def weight(from_=38, to_=90):
+    def weight(from_=38, to=90):
         """
         Generate a random weight in KG.
 
         :param from_: min value
-        :param to_: max value
+        :param to: max value
         :returns: Weight.
         :Example:
             48.
         """
-        w = randint(int(from_), int(to_))
+        w = randint(int(from_), int(to))
         return w
 
     @staticmethod
@@ -935,19 +937,19 @@ class Personal(object):
         if symbol:
             return choice(common.SEXUALITY_SYMBOLS)
 
-        so = choice(pull('sexuality', self.lang))
-        return so.strip()
+        sexuality = self.data['sexuality']
+        return choice(sexuality)
 
-    def profession(self):
+    def occupation(self):
         """
-        Get a random profession.
+        Get a random job.
 
-        :returns: The name of profession.
+        :returns: The name of job.
         :Example:
             Programmer.
         """
-        job = choice(pull('professions', self.lang))
-        return job.strip()
+        jobs = self.data['occupation']
+        return choice(jobs)
 
     def political_views(self):
         """
@@ -957,8 +959,8 @@ class Personal(object):
         :Example:
             Liberal.
         """
-        pv = choice(pull('political_views', self.lang))
-        return pv.strip()
+        views = self.data['political_views']
+        return choice(views)
 
     def worldview(self):
         """
@@ -968,8 +970,8 @@ class Personal(object):
         :Example:
             Pantheism.
         """
-        worldview = choice(pull('worldview', self.lang))
-        return worldview.strip()
+        worldview = self.data['worldview']
+        return choice(worldview)
 
     def views_on(self):
         """
@@ -979,10 +981,10 @@ class Personal(object):
         :Example:
             Negative.
         """
-        views_on = choice(pull('views_on', self.lang))
-        return views_on.strip()
+        views = self.data['views_on']
+        return choice(views)
 
-    def nationality(self, gender='f'):
+    def nationality(self, gender='female'):
         """
         Get a random nationality.
 
@@ -993,11 +995,10 @@ class Personal(object):
         """
         # Subtleties of the Russian orthography.
         if self.lang == 'ru':
-            i = 0 if gender.lower() == 'm' else 1
-            nation = choice(pull('nation', self.lang)).split('|')[i]
-            return nation.strip()
+            nations = self.data['nationality'][gender]
+            return choice(nations)
         else:
-            return choice(pull('nation', self.lang)).strip()
+            return choice(self.data['nationality'])
 
     def university(self):
         """
@@ -1007,19 +1008,19 @@ class Personal(object):
         :Example:
             MIT.
         """
-        university = choice(pull('university', self.lang))
-        return university.strip()
+        universities = self.data['university']
+        return choice(universities)
 
-    def qualification(self):
+    def academic_degree(self):
         """
-        Get a random qualification.
+        Get a random academic degree.
 
         :returns: Degree.
         :Example:
             Bachelor.
         """
-        degree = choice(pull('qualifications', self.lang))
-        return degree.strip()
+        degrees = self.data['academic_degree']
+        return choice(degrees)
 
     def language(self):
         """
@@ -1029,8 +1030,8 @@ class Personal(object):
         :Example:
             Irish.
         """
-        language = choice(pull('languages', self.lang))
-        return language.strip()
+        languages = self.data['language']
+        return choice(languages)
 
     def favorite_movie(self):
         """
@@ -1040,8 +1041,8 @@ class Personal(object):
         :Example:
             Interstellar.
         """
-        movie = choice(pull('movies', self.lang))
-        return movie.strip()
+        movies = self.data['favorite_movie']
+        return choice(movies)
 
     @staticmethod
     def favorite_music_genre():
@@ -1145,6 +1146,7 @@ class Datetime(object):
         :param lang: Current language.
         """
         self.lang = lang.lower()
+        self.data = pull('datetime.json', self.lang)
 
     def day_of_week(self, abbr=False):
         """
@@ -1156,10 +1158,9 @@ class Datetime(object):
         :Example:
             Wednesday (Wed. when abbr=True).
         """
-        day = choice(pull('days', self.lang)).split('|')
-        if abbr:
-            return day[1].strip()
-        return day[0].strip()
+        key = 'abbr' if abbr else 'name'
+        days = self.data['day'][key]
+        return choice(days)
 
     def month(self, abbr=False):
         """
@@ -1171,23 +1172,22 @@ class Datetime(object):
         :Example:
             January (Jan. when abbr=True).
         """
-        month = choice(pull('months', self.lang)).split('|')
-        if abbr:
-            return month[1].strip()
-        return month[0].strip()
+        key = 'abbr' if abbr else 'name'
+        months = self.data['month'][key]
+        return choice(months)
 
     @staticmethod
-    def year(from_=1990, to_=2050):
+    def year(from_=1990, to=2050):
         """
         Generate a random year.
 
-        :param from_:
-        :param to_:
+        :param from_: Minimum value.
+        :param to: Maximum value
         :returns: Year.
         :Example:
             2023.
         """
-        return randint(int(from_), int(to_))
+        return randint(int(from_), int(to))
 
     def periodicity(self):
         """
@@ -1197,8 +1197,7 @@ class Datetime(object):
         :Example:
             Never.
         """
-        periodicity = choice(pull('periodicity', self.lang))
-        return periodicity.strip()
+        return choice(self.data['periodicity'])
 
     @staticmethod
     def date(sep='-', with_time=False):
@@ -1226,12 +1225,12 @@ class Datetime(object):
         """
         return randint(1, 31)
 
-    def birthday(self, from_=1980, to_=2000):
+    def birthday(self, from_=1980, to=2000):
         """
         Generate a random day of birth.
 
-        :param from_: min of range
-        :param to_: max of range
+        :param from_: Minimum of range
+        :param to: Maximum of range
         :returns: A birthday.
         :Example:
             June 20, 1987
@@ -1239,7 +1238,7 @@ class Datetime(object):
         return '{} {}, {}'.format(
             self.month(),
             self.day_of_month(),
-            self.year(from_, to_)
+            self.year(from_, to)
         )
 
 
@@ -1301,8 +1300,8 @@ class Network(object):
             Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:15.0)
             Gecko/20100101 Firefox/15.0.1
         """
-        u_agent = choice(pull('useragents'))
-        return u_agent.strip()
+        agent = choice(common.USER_AGENTS)
+        return agent
 
 
 class File(object):
@@ -1345,6 +1344,8 @@ class Science(object):
         :param lang: Current language.
         """
         self.lang = lang.lower()
+        self._data = pull('science.json', self.lang)
+
 
     @staticmethod
     def math_formula():
@@ -1367,7 +1368,7 @@ class Science(object):
         :Example:
             {'Symbol': 'S', 'Name': 'Sulfur', 'Atomic number': '16'}
         """
-        e = choice(pull('ch_el', self.lang)).split('|')
+        e = choice(self._data['chemical_element']).split('|')
         if not name_only:
             return {
                 'name': e[0].strip(),
@@ -1377,7 +1378,7 @@ class Science(object):
         else:
             return e[0]
 
-    def article_on_wiki(self):
+    def scientific_article(self):
         """
         Get a random link to scientific article on Wikipedia.
 
@@ -1385,8 +1386,8 @@ class Science(object):
         :Example:
             https://en.wikipedia.org/wiki/Black_hole
         """
-        article = choice(pull('science_wiki', self.lang))
-        return article.strip()
+        articles = self._data['article']
+        return choice(articles)
 
     def scientist(self):
         """
@@ -1396,8 +1397,8 @@ class Science(object):
         :Example:
             Konstantin Tsiolkovsky.
         """
-        scientist = choice(pull('scientist', self.lang))
-        return scientist.strip()
+        scientists = self._data['scientist']
+        return choice(scientists)
 
 
 class Development(object):
@@ -1535,6 +1536,7 @@ class Food(object):
         :param lang: Current language.
         """
         self.lang = lang.lower()
+        self._data = pull('food.json', self.lang)
 
     def vegetable(self):
         """
@@ -1544,8 +1546,8 @@ class Food(object):
         :Example:
             Tomato.
         """
-        vegetable = choice(pull('vegetables', self.lang))
-        return vegetable.strip()
+        vegetables = self._data['vegetables']
+        return choice(vegetables)
 
     def fruit_or_berry(self):
         """
@@ -1555,8 +1557,8 @@ class Food(object):
         :Example:
             Banana.
         """
-        fruit = choice(pull('fruits_berries', self.lang))
-        return fruit.strip()
+        fruits = self._data['fruits']
+        return choice(fruits)
 
     def dish(self):
         """
@@ -1566,8 +1568,8 @@ class Food(object):
         :Example:
             Ratatouille.
         """
-        dishes = choice(pull('dishes', self.lang))
-        return dishes.strip()
+        dishes = self._data['dishes']
+        return choice(dishes)
 
     def spices(self):
         """
@@ -1577,8 +1579,8 @@ class Food(object):
         :Example:
             Anise.
         """
-        spices = choice(pull('spices', self.lang))
-        return spices.strip()
+        spices = self._data['spices']
+        return choice(spices)
 
     def drink(self):
         """
@@ -1588,8 +1590,8 @@ class Food(object):
         :Example:
             Vodka.
         """
-        ad = choice(pull('drinks', self.lang))
-        return ad.strip()
+        drinks = self._data['drinks']
+        return choice(drinks)
 
 
 class Hardware(object):
