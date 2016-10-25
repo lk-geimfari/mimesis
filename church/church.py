@@ -31,6 +31,7 @@ __all__ = ['Address', 'Personal',
 
 
 class Church(object):
+
     """
     A lazy initialization of locale for all classes that have locales.
     """
@@ -98,6 +99,7 @@ class Church(object):
 
 
 class Address(object):
+
     """
     Class for generate fake address data.
     """
@@ -170,7 +172,7 @@ class Address(object):
         address = _format()
         return address
 
-    def state(self):
+    def state(self, abbrev=False):
         """
         Get a random states or subject of country.
 
@@ -178,8 +180,8 @@ class Address(object):
         :Example:
             Alabama (for locale `en`).
         """
-        state_name = choice(pull('states', self.lang))
-        return state_name.strip()
+        state_name, abbreviation = choice(pull('states', self.lang)).split(' | ')
+        return abbreviation.strip() if abbrev is True else state_name.strip()
 
     def postal_code(self):
         """
@@ -257,6 +259,7 @@ class Address(object):
 
 
 class Numbers(object):
+
     """
     Class for generating numbers.
     """
@@ -306,6 +309,7 @@ class Numbers(object):
 
 
 class Text(object):
+
     """
     Class for generate text data, i.e text, lorem ipsum and another.
     """
@@ -507,6 +511,7 @@ class Text(object):
 
 
 class Business(object):
+
     """
     Class for generating data for business.
     """
@@ -571,6 +576,7 @@ class Business(object):
 
 
 class Personal(object):
+
     """
     Class for generate personal data, i.e names, surnames, age and another.
     """
@@ -1135,6 +1141,7 @@ class Personal(object):
 
 
 class Datetime(object):
+
     """
     Class for generate the fake data that you can use for
     working with date and time.
@@ -1244,6 +1251,7 @@ class Datetime(object):
 
 
 class Network(object):
+
     """
     Class for generate data for working with network,
     i.e IPv4, IPv6 and another
@@ -1306,6 +1314,7 @@ class Network(object):
 
 
 class File(object):
+
     """
     Class for generate fake data for files.
      """
@@ -1336,6 +1345,7 @@ class File(object):
 
 
 class Science(object):
+
     """
     Class for getting facts science.
     """
@@ -1401,6 +1411,7 @@ class Science(object):
 
 
 class Development(object):
+
     """
     Class for getting fake data for Developers.
     """
@@ -1526,6 +1537,7 @@ class Development(object):
 
 
 class Food(object):
+
     """
     Class for Food, i.e fruits, vegetables, berries and other.
     """
@@ -1593,6 +1605,7 @@ class Food(object):
 
 
 class Hardware(object):
+
     """
     Class for generate data about hardware.
 
