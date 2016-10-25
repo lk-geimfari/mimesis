@@ -4,31 +4,89 @@ from unittest import TestCase
 
 from church import Church
 
+from test_data import DummyCase
 
-class ChurchTestCase(TestCase):
+# all locale dependent cases
+from test_data.test_address import AddressTestCase
+from test_data.test_business import BusinessTestCase
+from test_data.test_datetime import DatetimeTestCase
+from test_data.test_food import FoodTestCase
+from test_data.test_personal import PersonalTestCase
+from test_data.test_sciense import ScienceTestCase
+from test_data.test_text import TextTestCase
+
+
+class ChurchBase(DummyCase):
+
     def setUp(self):
-        self.church = Church('en')
+        self.church = Church(self.LANG)
 
-    def test_personal(self):
+    def test_base_personal(self):
         result = self.church.personal.username()
         self.assertIsNotNone(result)
 
-    def test_text(self):
+    def test_base_text(self):
         result = self.church.text.words()
         self.assertIsNotNone(result)
 
-    def test_address(self):
+    def test_base_address(self):
         result = self.church.address.address()
         self.assertIsNotNone(result)
 
-    def test_food(self):
+    def test_base_food(self):
         result = self.church.food.fruit_or_berry()
         self.assertIsNotNone(result)
 
-    def test_science(self):
+    def test_base_science(self):
         result = self.church.science.scientist()
         self.assertIsNotNone(result)
 
-    def test_business(self):
+    def test_base_business(self):
         result = self.church.business.copyright()
         self.assertIsNotNone(result)
+
+
+class ChurchLocaleBase(ChurchBase, AddressTestCase, BusinessTestCase,
+                       DatetimeTestCase, FoodTestCase, PersonalTestCase,
+                       ScienceTestCase, TextTestCase):
+    pass
+
+
+class ChurchEnglishTestCase(ChurchLocaleBase, TestCase):
+    LANG = 'en'
+
+
+class ChurchGermanTestCase(ChurchLocaleBase, TestCase):
+    LANG = 'de'
+
+
+class ChurchRussianTestCase(ChurchLocaleBase, TestCase):
+    LANG = 'ru'
+
+
+class ChurchDanishTestCase(ChurchLocaleBase, TestCase):
+    LANG = 'da'
+
+
+class ChurchFrenchTestCase(ChurchLocaleBase, TestCase):
+    LANG = 'fr'
+
+
+class ChurchSpanishTestCase(ChurchLocaleBase, TestCase):
+    LANG = 'es'
+
+
+class ChurchItalianTestCase(ChurchLocaleBase, TestCase):
+    LANG = 'it'
+
+
+class ChurchPortugueseTestCase(ChurchLocaleBase, TestCase):
+    LANG = 'pt-br'
+
+
+class ChurchNorwegianTestCase(ChurchLocaleBase, TestCase):
+    LANG = 'no'
+
+
+class ChurchSwedishTestCase(ChurchLocaleBase, TestCase):
+    LANG = 'sv'

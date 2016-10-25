@@ -1,37 +1,25 @@
 # -*- coding: utf-8 -*-
 
-from unittest import TestCase
-
-from church.church import Food
-from church.utils import pull
-
-from tests import LANG
+from . import DummyCase
 
 
-class FoodTestCase(TestCase):
-    def setUp(self):
-        self.food = Food(LANG)
-        self.db = self.food._data
-
-    def tearDown(self):
-        del self.food
-
+class FoodTestCase(DummyCase):
     def test_vegetable(self):
-        result = self.food.vegetable()
-        self.assertIn(result, self.db['vegetables'])
+        result = self.church.food.vegetable()
+        self.assertIn(result, self.church.food._data['vegetables'])
 
     def test_fruit(self):
-        result = self.food.fruit_or_berry()
-        self.assertIn(result, self.db['fruits'])
+        result = self.church.food.fruit_or_berry()
+        self.assertIn(result, self.church.food._data['fruits'])
 
     def test_dish(self):
-        result = self.food.dish()
-        self.assertIn(result, self.db['dishes'])
+        result = self.church.food.dish()
+        self.assertIn(result, self.church.food._data['dishes'])
 
     def test_drink(self):
-        result = self.food.drink()
-        self.assertIn(result, self.db['drinks'])
+        result = self.church.food.drink()
+        self.assertIn(result, self.church.food._data['drinks'])
 
     def test_spices(self):
-        result = self.food.spices()
-        self.assertIn(result, self.db['spices'])
+        result = self.church.food.spices()
+        self.assertIn(result, self.church.food._data['spices'])
