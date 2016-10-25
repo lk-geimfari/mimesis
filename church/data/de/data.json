@@ -534,7 +534,7 @@
     ]
   },
   "science": {
-    "chemical_elements": [
+    "chemical_element": [
       "Actinium|Ac|89",
       "Aluminium|Al|13",
       "Americium|Am|95",
