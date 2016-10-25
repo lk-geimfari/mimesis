@@ -78,7 +78,7 @@ class Patient(db.Model):
         for _ in range(count):
             patient = Patient(email=person.email(),
                               phone_number=person.telephone(),
-                              full_name=person.full_name('f'),
+                              full_name=person.full_name(gender='female'),
                               gender=person.gender(),
                               nationality=person.nationality(),
                               weight=person.weight(),
@@ -97,7 +97,7 @@ from church import Church
 ch = Church('en')
 
 
-def patient(sex='f'):
+def patient(sex='female'):
     user = {
         'full_name': ch.personal.full_name(sex),
         'gender': ch.personal.gender(sex),
