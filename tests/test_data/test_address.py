@@ -35,6 +35,9 @@ class AddressTestCase(TestCase):
         result = self.address.state()
         self.assertIn(result, self.db['state']['name'])
 
+        result_abbr = self.address.state(abbr=True)
+        self.assertIn(result_abbr, self.db['state']['abbr'])
+
     def test_postal_code(self):
         result = self.address.postal_code()
         if self.address.lang == 'ru':

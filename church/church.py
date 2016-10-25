@@ -1368,7 +1368,7 @@ class Science(object):
         :Example:
             {'Symbol': 'S', 'Name': 'Sulfur', 'Atomic number': '16'}
         """
-        e = choice(self._data['chemical_element']).split('|')
+        e = choice(self._data['chemical_elements']).split('|')
         if not name_only:
             return {
                 'name': e[0].strip(),
