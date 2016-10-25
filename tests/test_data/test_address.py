@@ -2,7 +2,7 @@
 
 import re
 
-from . import DummyCase
+from tests.test_data import DummyCase
 
 
 class AddressTestCase(DummyCase):

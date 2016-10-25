@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from . import DummyCase
+from tests.test_data import DummyCase
 
 
 class FoodTestCase(DummyCase):

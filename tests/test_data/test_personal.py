@@ -4,7 +4,7 @@ import re
 
 import church._common as common
 
-from . import DummyCase
+from tests.test_data import DummyCase
 
 
 class PersonalTestCase(DummyCase):

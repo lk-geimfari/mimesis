@@ -2,7 +2,7 @@
 
 from church import _common as common
 
-from . import DummyCase
+from tests.test_data import DummyCase
 
 
 class TextTestCase(DummyCase):

@@ -4,16 +4,16 @@ from unittest import TestCase
 
 from church import Church
 
-from test_data import DummyCase
+from tests.test_data import DummyCase
 
 # all locale dependent cases
-from test_data.test_address import AddressTestCase
-from test_data.test_business import BusinessTestCase
-from test_data.test_datetime import DatetimeTestCase
-from test_data.test_food import FoodTestCase
-from test_data.test_personal import PersonalTestCase
-from test_data.test_sciense import ScienceTestCase
-from test_data.test_text import TextTestCase
+from tests.test_data.test_address import AddressTestCase
+from tests.test_data.test_business import BusinessTestCase
+from tests.test_data.test_datetime import DatetimeTestCase
+from tests.test_data.test_food import FoodTestCase
+from tests.test_data.test_personal import PersonalTestCase
+from tests.test_data.test_sciense import ScienceTestCase
+from tests.test_data.test_text import TextTestCase
 
 
 class ChurchBase(DummyCase):
