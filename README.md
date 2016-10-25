@@ -12,16 +12,18 @@
 
 Church is a library to generate fake data. It's very useful when you need to bootstrap your database. Church doesn't have any dependencies.
 
-At this moment a library has 9 supported locales: 
+At this moment a library has 9 supported locales:
+- 🇩🇰 - Dansk    (da)
 - 🇺🇸 - English  (en)
 - 🇪🇸 - Español  (es)
 - 🇩🇪 - Deutsch  (de)
 - 🇫🇷 - Français (fr)
 - 🇮🇹 - Italiano (it)
-- 🇧🇷 - Português (pt-br)
 - 🇷🇺 - Русский  (ru)
 - 🇳🇴 - Norsk (no)
 - 🇸🇪 - Svenska (sv)
+- 🇵🇹 - Português (pt)
+- 🇧🇷 - Português Brasileiro
 
 ## Documentation
 Church is a pretty simple library and all you need to start is the small documentation. See church's Sphinx-generated documentation here: [http://church.readthedocs.io](http://church.readthedocs.io)
@@ -119,7 +121,7 @@ Your contributions are always welcome! Please take a look at the [contribution](
 The author does not assume any responsibility for how you will use this library and how you will use data generated with this library. This library is designed only for developers and only with good intentions. Do not use the data generated with `church` for illegal purposes.
 
 
-## Licence 
+## Licence
 [MIT License](https://github.com/lk-geimfari/church/blob/master/LICENSE)
 
 
