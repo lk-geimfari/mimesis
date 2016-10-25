@@ -23,7 +23,7 @@ At this moment a library has 9 supported locales:
 - 🇳🇴 - Norsk (no)
 - 🇸🇪 - Svenska (sv)
 - 🇵🇹 - Português (pt)
-- 🇧🇷 - Português Brasileiro
+- 🇧🇷 - Português Brasileiro (pt-br)
 
 ## Documentation
 Church is a pretty simple library and all you need to start is the small documentation. See church's Sphinx-generated documentation here: [http://church.readthedocs.io](http://church.readthedocs.io)
