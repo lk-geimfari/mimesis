@@ -175,12 +175,13 @@ class Address(object):
     def state(self, abbrev=False):
         """
         Get a random states or subject of country.
-
+        
+        :param abbrev: Return only the abbreviation of a state.
         :returns: State of current country.
         :Example:
             Alabama (for locale `en`).
         """
-        state_name, abbreviation = choice(pull('states', self.lang)).split(' | ')
+        state_name, abbreviation = choice(pull('states', self.lang)).split('|')
         return abbreviation.strip() if abbrev is True else state_name.strip()
 
     def postal_code(self):
