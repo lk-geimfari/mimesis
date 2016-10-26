@@ -1,0 +1,15 @@
+{
+  "city": [],
+  "country": {
+    "iso_code": [],
+    "name": []
+  },
+  "street": {
+    "name": [],
+    "suffix": []
+  },
+  "state": {
+    "name": [],
+    "abbr": []
+  }
+}
