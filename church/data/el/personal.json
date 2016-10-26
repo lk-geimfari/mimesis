@@ -1,13 +1,7 @@
 {
   "names": {
 	"male": [],
-	"female": [],
-	"title": [
-	  {
-		"male": [],
-		"female": []
-	  }
-	]
+	"female": []
   },
   "surnames": [],
   "gender": [],
@@ -20,5 +14,13 @@
   "academic_degree": [],
   "sexuality": [],
   "favorite_movie": [],
-  "university": []
+  "university": [],
+  "title": {
+	"female": [
+	  "Test"
+	],
+	"male": [
+	  "Test"
+	]
+  }
 }
