@@ -86,7 +86,3 @@ text = {
         "bad": []
     }
 }
-
-from church.church import Personal
-
-add = Personal('en')

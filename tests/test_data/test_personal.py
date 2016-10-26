@@ -208,3 +208,8 @@ class PersonalTestCase(DummyCase):
     def test_vehicle(self):
         result = self.church.personal.vehicle()
         self.assertIn(result, common.THE_VEHICLES)
+
+    def test_identifier(self):
+        result = self.church.personal.identifier()
+        mask = '##-##/##'
+        self.assertEqual(len(mask), len(result))

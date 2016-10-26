@@ -1142,6 +1142,25 @@ class Personal(object):
         """
         return choice(common.THE_VEHICLES)
 
+    @staticmethod
+    def identifier(mask='##-##/##', placeholder='#'):
+        """
+        Generate a random identifier by mask.
+
+        :param mask: The mask.
+        :param placeholder: Placeholder.
+        :return: Identifier
+        :Example:
+            07-97/04
+        """
+        _id = ''
+        for symbol in mask:
+            if symbol == placeholder:
+                _id += str(randint(0, 9))
+            else:
+                _id += symbol
+        return _id
+
 
 class Datetime(object):
     """
