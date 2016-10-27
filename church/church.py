@@ -152,32 +152,28 @@ class Address(object):
         :Example:
             5 Central Sideline.
         """
-        ru = '{2} {1} {0}'  # Russian address format
-        fr = '{0} {2} {1}'  # French address format
-        intl = '{} {} {}'  # international format
 
-        def _f():
-            # TODO: Rewrite as extensible
+        def _format():
             if self.lang == 'sv':
                 return '{} {}'.format(
                     self.street_name(),
-                    self.street_number())
-            if self.lang == 'de':
-                return '{} {}'.format(
+                    self.street_number()
+                )
+            else:
+                if self.lang == 'ru':
+                    fmt = '{2} {1} {0}'
+                elif self.lang == 'fr':
+                    fmt = '{0} {2} {1}'
+                else: 
+                    '{} {} {}'
+                return fmt.format(
+                    self.street_number(),
                     self.street_name(),
-                    self.street_number())
-
-            # specific format for some locales
-            fmt = ru if self.lang == 'ru' else \
-                fr if self.lang == 'fr' else intl
-
-            return fmt.format(
-                self.street_number(),
-                self.street_name(),
-                self.street_suffix()
-            )
-
-        return _f()
+                    self.street_suffix()
+                )
+        
+        address = _format()
+        return address
 
     def state(self, abbr=False):
         """
@@ -1142,25 +1138,6 @@ class Personal(object):
         """
         return choice(common.THE_VEHICLES)
 
-    @staticmethod
-    def identifier(mask='##-##/##', placeholder='#'):
-        """
-        Generate a random identifier by mask.
-
-        :param mask: The mask.
-        :param placeholder: Placeholder.
-        :return: Identifier
-        :Example:
-            07-97/04
-        """
-        _id = ''
-        for symbol in mask:
-            if symbol == placeholder:
-                _id += str(randint(0, 9))
-            else:
-                _id += symbol
-        return _id
-
 
 class Datetime(object):
     """
@@ -1372,6 +1349,7 @@ class Science(object):
         """
         self.lang = lang.lower()
         self._data = pull('science.json', self.lang)
+
 
     @staticmethod
     def math_formula():
