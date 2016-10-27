@@ -1107,12 +1107,11 @@ class Personal(object):
         """
         if not mask:
             mask = self._telephone_mask
+
         phone_number = ''
         for i in mask:
-            if i == placeholder:
-                phone_number += str(randint(0, 9))
-            else:
-                phone_number += i
+            phone_number += str(randint(0, 9)) \
+                if i == placeholder else i
         return phone_number
 
     @staticmethod
@@ -1145,7 +1144,9 @@ class Personal(object):
     @staticmethod
     def identifier(mask='##-##/##', placeholder='#'):
         """
-        Generate a random identifier by mask.
+        Generate a random identifier by mask. With this method you can
+        generate any identifiers that you need. Simply select the mask
+        that you need.
 
         :param mask: The mask.
         :param placeholder: Placeholder.
@@ -1153,13 +1154,12 @@ class Personal(object):
         :Example:
             07-97/04
         """
-        _id = ''
-        for symbol in mask:
-            if symbol == placeholder:
-                _id += str(randint(0, 9))
-            else:
-                _id += symbol
-        return _id
+        identifier = ''
+        for s in mask:
+            identifier += str(randint(0, 9)) \
+                if s == placeholder else s
+
+        return identifier
 
 
 class Datetime(object):

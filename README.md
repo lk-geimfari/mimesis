@@ -14,14 +14,14 @@ Church is a library to generate fake data. It's very useful when you need to boo
 
 At this moment a library has 9 supported locales:
 - 🇩🇰 - Dansk    (da)
+- 🇩🇪 - Deutsch  (de)
 - 🇺🇸 - English  (en)
 - 🇪🇸 - Español  (es)
-- 🇩🇪 - Deutsch  (de)
 - 🇫🇷 - Français (fr)
 - 🇮🇹 - Italiano (it)
-- 🇷🇺 - Русский  (ru)
 - 🇳🇴 - Norsk (no)
 - 🇸🇪 - Svenska (sv)
+- 🇷🇺 - Русский  (ru)
 - 🇵🇹 - Português (pt)
 - 🇧🇷 - Português Brasileiro (pt-br)
 
