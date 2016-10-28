@@ -25,6 +25,11 @@ SUPPORTED_LOCALES = {
         "name": "Spanish",
         "name_local": "Español"
     },
+    "fi": {
+        "code": "fi",
+        "name": "Finnish",
+        "name_local": "Suomi"
+    },
     "fr": {
         "name": "French",
         "name_local": "Français"
@@ -74,6 +79,8 @@ def pull(filename, locale='en'):
     | en - English                 | (data/en)    |
     +------------------------------+--------------+
     | ru - Russian                 | (data/ru)    |
+    +------------------------------+--------------+
+    | fi - Finnish                 | (data/fi)    |
     +------------------------------+--------------+
     | fr - French                  | (data/fr)    |
     +------------------------------+--------------+

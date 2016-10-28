@@ -3,7 +3,6 @@
 from unittest import TestCase
 
 from church import Church
-
 from tests.test_data import DummyCase
 
 # all locale dependent cases
@@ -17,7 +16,6 @@ from tests.test_data.test_text import TextTestCase
 
 
 class ChurchBase(DummyCase):
-
     def setUp(self):
         self.church = Church(self.LANG)
 
@@ -90,3 +88,7 @@ class ChurchNorwegianTestCase(ChurchLocaleBase, TestCase):
 
 class ChurchSwedishTestCase(ChurchLocaleBase, TestCase):
     LANG = 'sv'
+
+
+class ChurchFinnishTestCase(ChurchLocaleBase, TestCase):
+    LANG = 'fi'
