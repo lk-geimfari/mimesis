@@ -5,7 +5,10 @@
 :repository: https://github.com/lk-geimfari/church
 """
 import array
-from datetime import date
+from datetime import (
+    date, timedelta,
+    datetime
+)
 from hashlib import (
     sha1, sha256,
     sha512, md5
@@ -1252,16 +1255,28 @@ class Datetime(object):
         """
         return randint(1, 31)
 
-    def birthday(self, from_=1980, to=2000):
+    def birthday(self, from_=1980, to=2000, readable=True, fmt=None):
         """
         Generate a random day of birth.
 
         :param from_: Minimum of range
         :param to: Maximum of range
+        :param readable: Return a user-friendly
+        readable format.
+        :param fmt: The format.
         :returns: A birthday.
         :Example:
             June 20, 1987
         """
+        if not fmt:
+            fmt = '%d-%m-%Y'
+
+        if not readable:
+            f = datetime.strptime(str(from_), "%Y")
+            t = datetime.strptime(str(to), "%Y")
+            bd = [f + timedelta(days=x) for x in range(0, (t - f).days)]
+            return choice(bd).strftime(fmt)
+
         return '{} {}, {}'.format(
             self.month(),
             self.day_of_month(),

@@ -33,3 +33,12 @@ class DatetimeTestCase(DummyCase):
     def test_birthday(self):
         result = self.church.datetime.birthday()
         self.assertIsInstance(result, str)
+
+        not_readable = self.church.datetime.birthday(readable=False)
+        day, month, year = not_readable.split('-')
+        self.assertTrue(int(day) <= 31)
+        self.assertTrue(int(month) <= 12)
+        self.assertTrue((int(year) >= 1980) and (int(year) <= 2000))
+
+        fmt = self.church.datetime.birthday(from_=2015, to=2025, readable=False, fmt='%Y')
+        self.assertTrue((int(year) >= 1980) and (int(year) <= 2000))
