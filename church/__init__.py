@@ -14,7 +14,7 @@ from .church import (
 )
 
 # Data for setup.py
-__version__ = '0.2.6'
+__version__ = '0.2.7'
 __author__ = 'Likid Geimfari'
 
 __all__ = ['Address', 'Personal',
