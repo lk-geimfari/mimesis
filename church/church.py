@@ -160,15 +160,11 @@ class Address(object):
         intl = '{} {} {}'  # international format
 
         def _f():
-            # TODO: Rewrite as extensible
-            if self.lang == 'sv':
+            if self.lang in ['sv', 'de', 'fi']:
                 return '{} {}'.format(
                     self.street_name(),
-                    self.street_number())
-            if self.lang == 'de':
-                return '{} {}'.format(
-                    self.street_name(),
-                    self.street_number())
+                    self.street_number()
+                )
 
             # specific format for some locales
             fmt = ru if self.lang == 'ru' else \
@@ -1082,6 +1078,7 @@ class Personal(object):
             'en': '+1-(###)-###-####',
             'es': '+34 91# ## ## ##',
             'fr': '+33-#########',
+            'fi': '+358 ## ### ####',
             'it': '+39 6 ########',
             'nl': '+31 ## ### ####',
             'no': '+47 #### ####',
