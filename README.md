@@ -46,7 +46,7 @@ or
 ## Testing
 ```zsh
 ➜  ~ cd church/
-➜  ~ python3 -m unittest
+➜  ~ python3 -m unittest discover tests
 ```
 
 
