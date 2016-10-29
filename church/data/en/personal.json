@@ -5191,11 +5191,88 @@
 	"Secular humanism"
   ],
   "title": {
-	"female": [
-	  "Test"
-	],
-	"male": [
-	  "Test"
-	]
+	"female": {
+	  "typical": [
+		"Mrs.",
+		"Ms.",
+		"Miss",
+		"Madam"
+	  ],
+	  "aristocratic": [
+		"Princess",
+		"Empress",
+		"Queen",
+		"Tsarina",
+		"Duchess"
+	  ],
+	  "religious": [
+		"Abbess",
+		"Sister",
+		"Mother"
+	  ],
+	  "academic": [
+		"Dr.",
+		"Prof.",
+		"DPhil",
+		"PhD",
+		"M.D.",
+		"EdD",
+		"D.Ed.",
+		"B.A.",
+		"B.E.",
+		"B.Sc",
+		"LL.D",
+		"M.A.",
+		"M.Des",
+		"M.Eng.",
+		"MMath",
+		"MSc",
+		"M.Sc.Tech."
+	  ]
+	},
+	"male": {
+	  "typical": [
+		"Mr.",
+		"Sir",
+		"Master"
+	  ],
+	  "aristocratic": [
+		"Prince",
+		"Lord",
+		"Emperor",
+		"King",
+		"Tsar",
+		"Duke",
+		"Honorable"
+	  ],
+	  "religious": [
+		"Abbot",
+		"Brother",
+		"Pastor",
+		"Father",
+		"Fr.",
+		"Pastor",
+		"Cardinal"
+	  ],
+	  "academic": [
+		"Dr.",
+		"Prof.",
+		"DPhil",
+		"PhD",
+		"M.D.",
+		"EdD",
+		"D.Ed.",
+		"B.A.",
+		"B.E.",
+		"B.Sc",
+		"LL.D",
+		"M.A.",
+		"M.Des",
+		"M.Eng.",
+		"MMath",
+		"MSc",
+		"M.Sc.Tech."
+	  ]
+	}
   }
 }

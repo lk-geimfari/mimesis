@@ -213,3 +213,16 @@ class PersonalTestCase(DummyCase):
         result = self.church.personal.identifier()
         mask = '##-##/##'
         self.assertEqual(len(mask), len(result))
+
+    def test_title(self):
+        result = self.church.personal.title(type_='typical')
+        self.assertIsNotNone(result)
+
+        result2 = self.church.personal.title(type_='aristocratic')
+        self.assertIsNotNone(result2)
+
+        result3 = self.church.personal.title(type_='religious')
+        self.assertIsNotNone(result3)
+
+        result4 = self.church.personal.title(type_='academic')
+        self.assertIsNotNone(result4)

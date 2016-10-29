@@ -2257,12 +2257,33 @@
 	"Åbo Akademi"
   ],
   "title": {
-	"female": [
-	  "Rouva",
-	  "Neiti"
-	],
-	"male": [
-	  "Herra"
-	]
+	"female": {
+	  "typical": [
+		"Test"
+	  ],
+	  "aristocratic": [
+		"Test"
+	  ],
+	  "religious": [
+		"Test"
+	  ],
+	  "academic": [
+		"Test"
+	  ]
+	},
+	"male": {
+	  "typical": [
+		"Test"
+	  ],
+	  "aristocratic": [
+		"Test"
+	  ],
+	  "religious": [
+		"Test"
+	  ],
+	  "academic": [
+		"Test"
+	  ]
+	}
   }
 }

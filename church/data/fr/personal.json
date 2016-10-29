@@ -3832,11 +3832,33 @@
 	"Zhuang"
   ],
   "title": {
-	"female": [
-	  "Test"
-	],
-	"male": [
-	  "Test"
-	]
+	"female": {
+	  "typical": [
+		"Test"
+	  ],
+	  "aristocratic": [
+		"Test"
+	  ],
+	  "religious": [
+		"Test"
+	  ],
+	  "academic": [
+		"Test"
+	  ]
+	},
+	"male": {
+	  "typical": [
+		"Test"
+	  ],
+	  "aristocratic": [
+		"Test"
+	  ],
+	  "religious": [
+		"Test"
+	  ],
+	  "academic": [
+		"Test"
+	  ]
+	}
   }
 }

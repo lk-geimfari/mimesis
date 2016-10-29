@@ -639,6 +639,31 @@ class Personal(object):
 
         return choice(self.data['surnames'])
 
+    def title(self, gender='female', type_=None):
+        """
+        Get a random title (prefix/suffix) for name.
+
+        :param gender: The gender.
+        :param type_:  The type of title. Available types:
+        +-------------------+-------------------------+
+        | Key of type       |      An example (M/F)   |
+        +===================+=========================+
+        | typical           |      Mr./Mrs.           |
+        +-------------------+-------------------------+
+        | aristocratic      |      Prince/Princess    |
+        +-------------------+-------------------------+
+        | religious         |      Brother/Sister     |
+        +-------------------+-------------------------+
+        | academic          |      PhD, Dr.           |
+        +-------------------+-------------------------+
+        :return: The title.
+        """
+        if not type_:
+            type_ = 'typical'
+
+        ttl = self.data['title'][gender][type_]
+        return ttl
+
     def full_name(self, gender='female', reverse=False):
         """
         Get a random full name.
