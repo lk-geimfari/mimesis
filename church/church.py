@@ -211,8 +211,10 @@ class Address(object):
         :Example:
             Russia.
         """
-        key = 'iso_code' if iso_code else 'name'
-        countries = self.data['country'][key]
+        if iso_code:
+            return choice(common.COUNTRY_ISO_CODE)
+
+        countries = self.data['country']['name']
         return choice(countries)
 
     def city(self):

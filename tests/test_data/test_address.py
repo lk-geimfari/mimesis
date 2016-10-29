@@ -3,7 +3,7 @@
 import re
 
 from tests.test_data import DummyCase
-
+import church._common as common
 
 class AddressTestCase(DummyCase):
     def test_street_number(self):
@@ -37,9 +37,8 @@ class AddressTestCase(DummyCase):
         result = self.church.address.country()
         self.assertTrue(self.church.address.data['country']['name'], result)
 
-        result2 = self.church.address.country(iso_code=True)
-        self.assertTrue(self.church.address.data['country']['iso_code'],
-                        result2)
+        result_iso = self.church.address.country(iso_code=True)
+        self.assertIn(result_iso, common.COUNTRY_ISO_CODE)
 
     def test_city(self):
         result = self.church.address.city()
