@@ -636,7 +636,6 @@ class Personal(object):
             raise TypeError('surname takes only string type')
 
         if self.lang == 'ru':
-            gender = 'female' if gender == 'female' else 'male'
             return choice(self.data['surnames'][gender])
 
         return choice(self.data['surnames'])
