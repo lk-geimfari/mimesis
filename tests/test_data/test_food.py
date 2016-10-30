@@ -23,3 +23,9 @@ class FoodTestCase(DummyCase):
     def test_spices(self):
         result = self.church.food.spices()
         self.assertIn(result, self.church.food._data['spices'])
+
+    def test_measurement(self):
+        result = self.church.food.measurement()
+        quantity, measure = result.split()
+        self.assertIsNotNone(quantity)
+        self.assertIn(measure, self.church.food._data['measurement'])

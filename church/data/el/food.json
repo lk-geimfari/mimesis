@@ -1,7 +1,20 @@
 {
-  "fruits": [],
-  "vegetables": [],
-  "dishes": [],
-  "spices": [],
-  "drinks": []
+  "fruits": [
+	"Test"
+  ],
+  "vegetables": [
+	"Test"
+  ],
+  "dishes": [
+	"Test"
+  ],
+  "spices": [
+	"Test"
+  ],
+  "drinks": [
+	"Test"
+  ],
+    "measurement":[
+	"Test"
+  ]
 }

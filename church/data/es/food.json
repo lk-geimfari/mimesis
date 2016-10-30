@@ -336,5 +336,8 @@
 	"Pera",
 	"Piña",
 	"Plátano"
+  ],
+  "measurement": [
+	"Test"
   ]
 }
