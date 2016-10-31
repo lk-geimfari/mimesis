@@ -87,6 +87,4 @@ ENV/
 
 #mac Os
 .DS_Store
-examples/app.py
 examples/sample.py
-TODO
