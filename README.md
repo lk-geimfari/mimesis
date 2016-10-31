@@ -124,7 +124,3 @@ The author does not assume any responsibility for how you will use this library 
 
 ## Licence
 [MIT License](https://github.com/lk-geimfari/church/blob/master/LICENSE)
-
-
-## Why church?
-«Such teachings come through hypocritical liars, whose consciences have been seared as with a hot iron.» Timothy 1:4
