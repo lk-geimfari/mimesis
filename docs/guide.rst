@@ -15,7 +15,7 @@ Personal
 
 	# Get a random name.
 	# Output: Christina
-	name = person.name(gender='f')
+	name = person.name(gender='female')
 
 	# Get a random surname.
 	# Output: Wolf
@@ -23,11 +23,16 @@ Personal
 
 	# Get a random full name.
 	# Output: Leo Johnson.
-	full_name = person.full_name(gender='m')
+	full_name = person.full_name(gender='male')
 
 	# Get a random username.
 	# Output: john1032
 	username = person.username()
+
+	# Get a random title (prefix/suffix) for name/surname.
+	# Available types: typical, aristocratic, religious, academic
+	# Output: PhD.
+	title = person.title(gender='female', type_='academic')
 
 	# Generate a random password.
 	password = person.password(length=15)

@@ -658,6 +658,8 @@ class Personal(object):
         | academic          |      PhD, Dr.           |
         +-------------------+-------------------------+
         :return: The title.
+        :Example:
+            PhD.
         """
         if not type_:
             type_ = 'typical'
