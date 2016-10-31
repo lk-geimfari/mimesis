@@ -160,7 +160,7 @@ class Address(object):
         intl = '{} {} {}'  # international format
 
         def _f():
-            if self.lang in ['sv', 'de', 'fi']:
+            if self.lang in ('sv', 'de', 'fi', 'nl'):
                 return '{} {}'.format(
                     self.street_name(),
                     self.street_number()

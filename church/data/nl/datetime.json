@@ -1,0 +1,61 @@
+{
+  "day": {
+	"name": [
+	  "Maandag",
+	  "Dinsdag",
+	  "Woensdag",
+	  "Donderdag",
+	  "Vrijdag",
+	  "Zaterdag",
+	  "Zondag"
+	],
+	"abbr": [
+	  "Ma.",
+	  "Di.",
+	  "Wo.",
+	  "Do.",
+	  "Vr.",
+	  "Za.",
+	  "Zo."
+	]
+  },
+  "month": {
+	"name": [
+	  "Januari",
+	  "Februari",
+	  "Maart",
+	  "April",
+	  "Mei",
+	  "Juni",
+	  "Juli",
+	  "Augustus",
+	  "September",
+	  "Oktober",
+	  "November",
+	  "December"
+	],
+	"abbr": [
+	  "Jan.",
+	  "Feb.",
+	  "Mrt.",
+	  "Apr.",
+	  "Mei.",
+	  "Jun.",
+	  "Jul.",
+	  "Aug.",
+	  "Sep.",
+	  "Okt.",
+	  "Nov.",
+	  "Dec."
+	]
+  },
+  "periodicity": [
+	"Eenmaal",
+	"Nooit",
+	"Zelden",
+	"Dagelijks",
+	"Wekelijks",
+	"Maandelijks",
+	"Jaarlijks"
+  ]
+}

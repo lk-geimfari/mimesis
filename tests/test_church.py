@@ -92,3 +92,7 @@ class ChurchSwedishTestCase(ChurchLocaleBase, TestCase):
 
 class ChurchFinnishTestCase(ChurchLocaleBase, TestCase):
     LANG = 'fi'
+
+
+class ChurchDutchTestCase(ChurchLocaleBase, TestCase):
+    LANG = 'nl'

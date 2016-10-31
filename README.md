@@ -12,7 +12,7 @@
 
 Church is a library to generate fake data. It's very useful when you need to bootstrap your database. Church doesn't have any dependencies.
 
-At this moment a library has 12 supported locales:
+At this moment a library has 13 supported locales:
 - 🇩🇰 - Dansk    (da)
 - 🇩🇪 - Deutsch  (de)
 - 🇺🇸 - English  (en)
@@ -20,6 +20,7 @@ At this moment a library has 12 supported locales:
 - 🇫🇮 - Suomi (fi)
 - 🇫🇷 - Français (fr)
 - 🇮🇹 - Italiano (it)
+- 🇳🇱 - Nederlands (nl)
 - 🇳🇴 - Norsk (no)
 - 🇸🇪 - Svenska (sv)
 - 🇷🇺 - Русский  (ru)
