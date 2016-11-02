@@ -160,7 +160,7 @@ class Address(object):
         intl = '{} {} {}'  # international format
 
         def _f():
-            if self.lang in ('sv', 'de', 'fi', 'nl'):
+            if self.lang in ('sv', 'de', 'fi', 'nl', 'is'):
                 return '{} {}'.format(
                     self.street_name(),
                     self.street_number()
@@ -198,8 +198,13 @@ class Address(object):
         :Example:
             389213
         """
-        if self.lang == 'ru':
-            return randint(100000, 999999)
+        diff_codes = {
+            'ru': randint(100000, 999999),
+            'is': randint(100, 902),
+        }
+        if self.lang in diff_codes:
+            return diff_codes[self.lang]
+
         return randint(10000, 99999)
 
     def country(self, iso_code=False):
