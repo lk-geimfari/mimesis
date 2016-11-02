@@ -29,7 +29,8 @@ class PersonalTestCase(DummyCase):
         self.assertEqual(head, '+5')
 
     def test_surname(self):
-        if self.church.personal.lang == 'ru':
+        diff_surnames = ('ru', 'is')
+        if self.church.personal.lang in diff_surnames:
             result = self.church.personal.surname(gender='female')
             self.assertIn(result,
                           self.church.personal.data['surnames']['female'])

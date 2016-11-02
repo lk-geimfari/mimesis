@@ -12,20 +12,27 @@
 
 Church is a library to generate fake data. It's very useful when you need to bootstrap your database. Church doesn't have any dependencies.
 
-At this moment a library has 13 supported locales:
-- 🇩🇰 - Dansk    (da)
-- 🇩🇪 - Deutsch  (de)
-- 🇺🇸 - English  (en)
-- 🇪🇸 - Español  (es)
-- 🇫🇮 - Suomi (fi)
-- 🇫🇷 - Français (fr)
-- 🇮🇹 - Italiano (it)
-- 🇳🇱 - Nederlands (nl)
-- 🇳🇴 - Norsk (no)
-- 🇸🇪 - Svenska (sv)
-- 🇷🇺 - Русский  (ru)
-- 🇵🇹 - Português (pt)
-- 🇧🇷 - Português Brasileiro (pt-br)
+At this moment a library has 14 supported locales:
+
+|   F   |  Code   |   Name              |
+|--:   |---     |    ---            |
+| 🇩🇰  | da      |  Danish              |
+| 🇩🇪  | de      |  Deutsch             |
+| 🇺🇸  | en      |  English             |
+| 🇪🇸  | es      |  Español             |
+| 🇫🇮  | fi      |  Suomi               |
+| 🇫🇷  | fr      |  Français            |
+| 🇮🇸  | is      |  Íslenska*           |
+| 🇮🇹  | it      |  Italiano            |
+| 🇳🇱  | nl      |  Nederlands*         |
+| 🇳🇴  | no      |  Norsk               |
+| 🇸🇪  | sv      |  Svenska             |
+| 🇷🇺  | ru      |  Русский             |
+| 🇵🇹  | pt      | Português            |
+| 🇧🇷  | pt-br   |  Português Brasileiro|
+
+`* - not completely`
+
 
 ## Documentation
 Church is a pretty simple library and all you need to start is the small documentation. See church's Sphinx-generated documentation here: [http://church.readthedocs.io](http://church.readthedocs.io)

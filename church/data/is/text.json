@@ -1,0 +1,19 @@
+{
+  "text": [
+	"Test"
+  ],
+  "quotes": [
+	"Test"
+  ],
+  "color": [
+	"Test"
+  ],
+  "words": {
+	"normal": [
+	  "Test"
+	],
+	"bad": [
+	  "Test"
+	]
+  }
+}

@@ -635,7 +635,11 @@ class Personal(object):
         if not isinstance(gender, str):
             raise TypeError('surname takes only string type')
 
-        if self.lang == 'ru':
+        # In Russian Federation and Iceland surnames
+        # separated by gender.
+        diff_surnames = ('ru', 'is')
+
+        if self.lang in diff_surnames:
             return choice(self.data['surnames'][gender])
 
         return choice(self.data['surnames'])
@@ -1107,6 +1111,7 @@ class Personal(object):
             'es': '+34 91# ## ## ##',
             'fr': '+33-#########',
             'fi': '+358 ## ### ####',
+            'is': '+354 ### ####',
             'it': '+39 6 ########',
             'nl': '+31 ## ### ####',
             'no': '+47 #### ####',

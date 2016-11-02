@@ -1,0 +1,26 @@
+{
+  "city": [
+    "Test"
+  ],
+  "country": {
+    "name": [
+      "Test"
+    ]
+  },
+  "street": {
+    "name": [
+      "Test"
+    ],
+    "suffix": [
+      "Test"
+    ]
+  },
+  "state": {
+    "name": [
+      "Test"
+    ],
+    "abbr": [
+      "Test"
+    ]
+  }
+}
