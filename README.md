@@ -15,8 +15,8 @@ Church is a library to generate fake data. It's very useful when you need to boo
 At this moment a library has 14 supported locales:
 
 |   F   |  Code   |   Name              |
-|--:   |---     |    ---            |
-| 🇩🇰  | da      |  Danish              |
+|--:    |---      |    ---              |
+| 🇩🇰  | da      |  Dansk               |
 | 🇩🇪  | de      |  Deutsch             |
 | 🇺🇸  | en      |  English             |
 | 🇪🇸  | es      |  Español             |
