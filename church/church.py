@@ -13,12 +13,16 @@ from hashlib import (
     sha1, sha256,
     sha512, md5
 )
+from itertools import product
 from random import (
     choice, sample,
     randint, uniform,
     random
 )
-from string import digits, ascii_letters
+from string import (
+    digits, ascii_letters,
+    ascii_uppercase
+)
 
 import church._common as common
 from .utils import pull, PATH
@@ -198,9 +202,19 @@ class Address(object):
         :Example:
             389213
         """
+        # In some countries postal codes has prefix.
+        prx = choice([a + b for a, b in product(
+            ascii_uppercase, repeat=2)])
+
+        prefix = ' %s' % prx
+
+        # TODO: Refactoring
         diff_codes = {
             'ru': randint(100000, 999999),
+            'nl': str(randint(1000, 9999)) + prefix,
             'is': randint(100, 902),
+            'pt': randint(1000, 9999),
+            'no': randint(1000, 9999)
         }
         if self.lang in diff_codes:
             return diff_codes[self.lang]

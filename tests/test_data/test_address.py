@@ -2,8 +2,9 @@
 
 import re
 
-from tests.test_data import DummyCase
 import church._common as common
+from tests.test_data import DummyCase
+
 
 class AddressTestCase(DummyCase):
     def test_street_number(self):
@@ -32,6 +33,11 @@ class AddressTestCase(DummyCase):
             self.assertTrue(re.match(r'[0-9]{6}$', result))
         elif self.church.address.lang == 'is':
             self.assertTrue(re.match(r'[0-9]{3}$', result))
+        elif self.church.address.lang == 'nl':
+            nl_pattern = r'^[1-9][0-9]{3}\s?[a-zA-Z]{2}$'
+            self.assertTrue(re.match(nl_pattern, result))
+        elif self.church.address.lang in ('pt', 'no'):
+            self.assertTrue(re.match(r'[0-9]{4}$', result))
         else:
             self.assertTrue(re.match(r'[0-9]{5}$', result))
 
