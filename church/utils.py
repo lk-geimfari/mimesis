@@ -1,5 +1,5 @@
+import functools
 import json
-from functools import lru_cache
 from os.path import abspath, join, dirname
 
 from .exceptions import UnsupportedLocale
@@ -70,8 +70,8 @@ SUPPORTED_LOCALES = {
 }
 
 
-@lru_cache(maxsize=None)
-def pull(filename, locale='en'):
+@functools.lru_cache(maxsize=None)
+def pull(file, locale='en'):
     """
     Open file and get content from file. Memorize result using lru_cache.
     pull - is internal function, please do not use this function outside
@@ -109,14 +109,38 @@ def pull(filename, locale='en'):
     | sv - Swedish                 | (data/sv)    |
     +------------------------------+--------------+
 
-    :param filename: The name of file.
+    :param file: The name of file.
     :param locale: Locale.
     :returns: The content of the file.
     """
     if locale not in SUPPORTED_LOCALES:
         raise UnsupportedLocale("Locale %s does not supported" % locale)
 
-    with open(join(PATH + '/' + locale, filename), 'r') as f:
+    with open(join(PATH + '/' + locale, file), 'r') as f:
         data = json.load(f)
 
     return data
+
+
+# TODO: Refactoring
+def push(**kwargs):
+    """
+    Dict to json file.
+    :param kwargs: Kwargs
+    :return: None
+    """
+    skeleton = {
+        'key': {
+            'key': 'value',
+        }
+    }
+
+    locale = kwargs.get('locale', 'en')
+    file = kwargs.get('file', 'test.json')
+    data = kwargs.get('data', skeleton)
+
+    if locale not in SUPPORTED_LOCALES:
+        raise UnsupportedLocale("Locale %s does not supported" % locale)
+
+    with open(join(PATH + '/' + locale, file), 'w') as f:
+        json.dump(data, f)
