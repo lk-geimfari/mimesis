@@ -8,7 +8,9 @@
 [![Issues](https://img.shields.io/github/issues/lk-geimfari/church.svg)](https://github.com/lk-geimfari/church/issues)
 
 
-![alt text](https://raw.githubusercontent.com/lk-geimfari/church/master/examples/logo_2.png)
+![alt text](https://raw.githubusercontent.com/lk-geimfari/church/master/examples/logo.png)
+
+
 
 Church is a library to generate fake data. It's very useful when you need to bootstrap your database. Church doesn't have any dependencies.
 
