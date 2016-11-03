@@ -88,3 +88,4 @@ ENV/
 #mac Os
 .DS_Store
 examples/sample.py
+examples/f.txt
