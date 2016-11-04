@@ -1,30 +1,4 @@
 {
-  "state": {
-    "abbr": [
-      "Test"
-    ],
-    "name": [
-      "Akershus",
-      "Aust-Agder",
-      "Buskerud",
-      "Finnmark",
-      "Hedmark",
-      "Hordaland",
-      "Møre og Romsdal",
-      "Nord-Trøndelag",
-      "Nordland",
-      "Oppland",
-      "Oslo",
-      "Rogaland",
-      "Sogn og Fjordane",
-      "Sør-Trøndelag",
-      "Telemark",
-      "Troms",
-      "Vest-Agder",
-      "Vestfold",
-      "Østfold"
-    ]
-  },
   "city": [
     "Alta",
     "Arendal",
@@ -387,6 +361,52 @@
       "Åland",
       "Øst-Timor",
       "Østerrike"
+    ]
+  },
+  "state": {
+    "abbr": [
+      "NO-01",
+      "NO-02",
+      "NO-03",
+      "NO-04",
+      "NO-05",
+      "NO-06",
+      "NO-07",
+      "NO-08",
+      "NO-09",
+      "NO-10",
+      "NO-11",
+      "NO-12",
+      "NO-14",
+      "NO-15",
+      "NO-16",
+      "NO-17",
+      "NO-18",
+      "NO-19",
+      "NO-20",
+      "NO-21",
+      "NO-22"
+    ],
+    "name": [
+      "Akershus",
+      "Aust-Agder",
+      "Buskerud",
+      "Finnmark",
+      "Hedmark",
+      "Hordaland",
+      "Møre og Romsdal",
+      "Nord-Trøndelag",
+      "Nordland",
+      "Oppland",
+      "Oslo",
+      "Rogaland",
+      "Sogn og Fjordane",
+      "Sør-Trøndelag",
+      "Telemark",
+      "Troms",
+      "Vest-Agder",
+      "Vestfold",
+      "Østfold"
     ]
   },
   "street": {

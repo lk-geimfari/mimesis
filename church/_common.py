@@ -2794,3 +2794,6 @@ COUNTRY_ISO_CODE = [
     "ZM",
     "ZW"
 ]
+
+AVATARS = 'https://raw.githubusercontent.com/lk-geimfari/' \
+          'church/master/examples/avatars/%s.png'

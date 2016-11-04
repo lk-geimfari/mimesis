@@ -28,7 +28,7 @@ class AddressTestCase(DummyCase):
         self.assertIn(result, self.church.address.data['state']['name'])
 
     def test_postal_code(self):
-        result = str(self.church.address.postal_code())
+        result = self.church.address.postal_code()
         if self.church.address.lang == 'ru':
             self.assertTrue(re.match(r'[0-9]{6}$', result))
         elif self.church.address.lang == 'is':
@@ -38,6 +38,9 @@ class AddressTestCase(DummyCase):
             self.assertTrue(re.match(nl_pattern, result))
         elif self.church.address.lang in ('pt', 'no'):
             self.assertTrue(re.match(r'[0-9]{4}$', result))
+        elif self.church.address.lang == 'da':
+            self.assertEqual(result.split('-')[0], 'DK')
+            self.assertTrue(re.match(r'[0-9]{4}$', result.split('-')[1]))
         else:
             self.assertTrue(re.match(r'[0-9]{5}$', result))
 

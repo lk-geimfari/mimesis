@@ -215,6 +215,13 @@ class PersonalTestCase(DummyCase):
         mask = '##-##/##'
         self.assertEqual(len(mask), len(result))
 
+        result = self.church.personal.identifier(mask='##', suffix=True)
+        lst = result.split()
+        _id, sfx = lst[0], lst[1]
+        self.assertEqual(len(_id), 2)
+        self.assertEqual(len(_id), 2)
+
+
     def test_title(self):
         result = self.church.personal.title(type_='typical')
         self.assertIsNotNone(result)

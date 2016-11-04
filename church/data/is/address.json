@@ -184,6 +184,28 @@
       "Þýskaland"
     ]
   },
+  "state": {
+    "name": [
+      "Austurland",
+      "Höfuðborgarsvæði",
+      "Norðurland eystra",
+      "Norðurland vestra",
+      "Suðurland",
+      "Suðurnes",
+      "Vestfirðir",
+      "Vesturland"
+    ],
+    "abbr": [
+      "IS-1",
+      "IS-2",
+      "IS-3",
+      "IS-4",
+      "IS-5",
+      "IS-6",
+      "IS-7",
+      "IS-8"
+    ]
+  },
   "street": {
     "name": [
       "Aflagrandi",
@@ -8327,21 +8349,6 @@
       "vogur",
       "vík",
       "vör"
-    ]
-  },
-  "state": {
-    "name": [
-      "Austurland",
-      "Höfuðborgarsvæði",
-      "Norðurland eystra",
-      "Norðurland vestra",
-      "Suðurland",
-      "Suðurnes",
-      "Vestfirðir",
-      "Vesturland"
-    ],
-    "abbr": [
-      "Test"
     ]
   }
 }

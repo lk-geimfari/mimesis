@@ -1,12 +1,4 @@
 {
-  "street": {
-    "suffix": [
-      "Test"
-    ],
-    "name": [
-      "Las Ventas"
-    ]
-  },
   "city": [
     "A Coruña",
     "Alcalá de Henares",
@@ -85,14 +77,6 @@
     "Vizcaya",
     "Zaragoza"
   ],
-  "state": {
-    "abbr": [
-      "Test"
-    ],
-    "name": [
-      "Test"
-    ]
-  },
   "country": {
     "name": [
       "Andorra",
@@ -345,6 +329,56 @@
       "Sudáfrica",
       "Zambia",
       "Zimbabwe"
+    ]
+  },
+  "state": {
+    "abbr": [
+      "AN",
+      "AR",
+      "AS",
+      "CB",
+      "CE",
+      "CL",
+      "CM",
+      "CN",
+      "CT",
+      "EX",
+      "GA",
+      "IB",
+      "MC",
+      "MD",
+      "ML",
+      "NC",
+      "PV",
+      "RI",
+      "VC"
+    ],
+    "name": [
+      "Andalucía",
+      "Aragón",
+      "Asturias",
+      "Canarias",
+      "Cantabria",
+      "Castilla y León",
+      "Castilla-La Mancha",
+      "Catalunya",
+      "Extremadura",
+      "Galicia",
+      "Illes Balears",
+      "La Rioja",
+      "Madrid",
+      "Murcia",
+      "Navarra",
+      "País Vasco",
+      "Valenciana"
+    ]
+  },
+  "street": {
+    "suffix": [
+      "Test"
+    ],
+    "name": [
+      "Las Ventas"
     ]
   }
 }

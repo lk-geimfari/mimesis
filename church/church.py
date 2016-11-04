@@ -182,15 +182,17 @@ class Address(object):
 
         return _f()
 
-    def state(self, abbr=False):
+    def state(self, iso_code=False):
         """
         Get a random states or subject of country.
 
+        :param iso_code: If True then return ISO (ISO 3166-2)
+        code of state/region/province/subject.
         :returns: State of current country.
         :Example:
             Alabama (for locale `en`).
         """
-        key = 'abbr' if abbr else 'name'
+        key = 'iso_code' if iso_code else 'name'
         states = self.data['state'][key]
         return choice(states)
 
@@ -202,24 +204,22 @@ class Address(object):
         :Example:
             389213
         """
-        # In some countries postal codes has prefix.
-        prx = choice([a + b for a, b in product(
-            ascii_uppercase, repeat=2)])
+        _ = Personal.identifier
 
-        prefix = ' %s' % prx
-
-        # TODO: Refactoring
-        diff_codes = {
-            'ru': randint(100000, 999999),
-            'nl': str(randint(1000, 9999)) + prefix,
-            'is': randint(100, 902),
-            'pt': randint(1000, 9999),
-            'no': randint(1000, 9999)
+        codes = {
+            'ru': _(mask='######'),
+            'nl': _(mask='####', suffix=True),
+            'is': _(mask='###'),
+            'pt': _(mask='####'),
+            'no': _(mask='####'),
+            'da': 'DK-' + _(mask='####'),
+            'br-pt': _(mask='#####-###'),
+            'default': _(mask='#####')
         }
-        if self.lang in diff_codes:
-            return diff_codes[self.lang]
+        if self.lang in codes:
+            return codes[self.lang]
 
-        return randint(10000, 99999)
+        return codes['default']
 
     def country(self, iso_code=False):
         """
@@ -1177,9 +1177,7 @@ class Personal(object):
             https://raw.githubusercontent.com/lk-geimfari/
             church/master/examples/avatars/4.png
         """
-        img_id = randint(1, 7)
-        url = 'https://raw.githubusercontent.com/lk-geimfari/' \
-              'church/master/examples/avatars/%s.png' % img_id
+        url = common.AVATARS % randint(1, 7)
         return url
 
     @staticmethod
@@ -1194,7 +1192,7 @@ class Personal(object):
         return choice(common.THE_VEHICLES)
 
     @staticmethod
-    def identifier(mask='##-##/##', placeholder='#'):
+    def identifier(mask='##-##/##', placeholder='#', suffix=False):
         """
         Generate a random identifier by mask. With this method you can
         generate any identifiers that you need. Simply select the mask
@@ -1202,14 +1200,20 @@ class Personal(object):
 
         :param mask: The mask.
         :param placeholder: Placeholder.
+        :param suffix: Add characters to id.
         :return: Identifier
         :Example:
             07-97/04
         """
+        suffixes = [a + b for a, b in product(ascii_uppercase, repeat=2)]
+        sfx = ' %s' % choice(suffixes)
+
         identifier = ''
         for s in mask:
-            identifier += str(randint(0, 9)) \
+            identifier += str(randint(1, 9)) \
                 if s == placeholder else s
+        if suffix:
+            return identifier + sfx
 
         return identifier
 
