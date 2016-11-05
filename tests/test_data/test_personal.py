@@ -219,7 +219,7 @@ class PersonalTestCase(DummyCase):
         lst = result.split()
         _id, sfx = lst[0], lst[1]
         self.assertEqual(len(_id), 2)
-        self.assertEqual(len(_id), 2)
+        self.assertEqual(len(sfx), 2)
 
 
     def test_title(self):

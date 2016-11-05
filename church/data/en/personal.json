@@ -1,4 +1,9 @@
 {
+  "academic_degree": [
+	"Bachelor",
+	"Master",
+	"PhD"
+  ],
   "favorite_movie": [
 	"The Shawshank Redemption (1994)",
 	"The Godfather (1972)",
@@ -2636,7 +2641,6 @@
 	],
 	"male": [
 	  "Aaron",
-	  "Abdul",
 	  "Abe",
 	  "Abel",
 	  "Abraham",
@@ -3478,9 +3482,6 @@
 	  "Mitchel",
 	  "Mitchell",
 	  "Modesto",
-	  "Mohamed",
-	  "Mohammad",
-	  "Mohammed",
 	  "Moises",
 	  "Monroe",
 	  "Monte",
@@ -4074,11 +4075,6 @@
 	"Socialist",
 	"Conservative",
 	"Libertarian"
-  ],
-  "academic_degree": [
-	"Bachelor",
-	"Master",
-	"PhD"
   ],
   "sexuality": [
 	"Asexual",
@@ -5088,6 +5084,91 @@
 	"Zamora",
 	"Zimmerman"
   ],
+  "title": {
+	"female": {
+	  "typical": [
+		"Mrs.",
+		"Ms.",
+		"Miss",
+		"Madam"
+	  ],
+	  "aristocratic": [
+		"Princess",
+		"Empress",
+		"Queen",
+		"Tsarina",
+		"Duchess"
+	  ],
+	  "religious": [
+		"Abbess",
+		"Sister",
+		"Mother"
+	  ],
+	  "academic": [
+		"Dr.",
+		"Prof.",
+		"DPhil",
+		"PhD",
+		"M.D.",
+		"EdD",
+		"D.Ed.",
+		"B.A.",
+		"B.E.",
+		"B.Sc",
+		"LL.D",
+		"M.A.",
+		"M.Des",
+		"M.Eng.",
+		"MMath",
+		"MSc",
+		"M.Sc.Tech."
+	  ]
+	},
+	"male": {
+	  "typical": [
+		"Mr.",
+		"Sir",
+		"Master"
+	  ],
+	  "aristocratic": [
+		"Prince",
+		"Lord",
+		"Emperor",
+		"King",
+		"Tsar",
+		"Duke",
+		"Honorable"
+	  ],
+	  "religious": [
+		"Abbot",
+		"Brother",
+		"Pastor",
+		"Father",
+		"Fr.",
+		"Pastor",
+		"Cardinal"
+	  ],
+	  "academic": [
+		"Dr.",
+		"Prof.",
+		"DPhil",
+		"PhD",
+		"M.D.",
+		"EdD",
+		"D.Ed.",
+		"B.A.",
+		"B.E.",
+		"B.Sc",
+		"LL.D",
+		"M.A.",
+		"M.Des",
+		"M.Eng.",
+		"MMath",
+		"MSc",
+		"M.Sc.Tech."
+	  ]
+	}
+  },
   "university": [
 	"Florida A&M University (Florida A&M)",
 	"Florida Atlantic University (FAU)",
@@ -5189,90 +5270,5 @@
 	"Pantheism",
 	"Confucianism",
 	"Secular humanism"
-  ],
-  "title": {
-	"female": {
-	  "typical": [
-		"Mrs.",
-		"Ms.",
-		"Miss",
-		"Madam"
-	  ],
-	  "aristocratic": [
-		"Princess",
-		"Empress",
-		"Queen",
-		"Tsarina",
-		"Duchess"
-	  ],
-	  "religious": [
-		"Abbess",
-		"Sister",
-		"Mother"
-	  ],
-	  "academic": [
-		"Dr.",
-		"Prof.",
-		"DPhil",
-		"PhD",
-		"M.D.",
-		"EdD",
-		"D.Ed.",
-		"B.A.",
-		"B.E.",
-		"B.Sc",
-		"LL.D",
-		"M.A.",
-		"M.Des",
-		"M.Eng.",
-		"MMath",
-		"MSc",
-		"M.Sc.Tech."
-	  ]
-	},
-	"male": {
-	  "typical": [
-		"Mr.",
-		"Sir",
-		"Master"
-	  ],
-	  "aristocratic": [
-		"Prince",
-		"Lord",
-		"Emperor",
-		"King",
-		"Tsar",
-		"Duke",
-		"Honorable"
-	  ],
-	  "religious": [
-		"Abbot",
-		"Brother",
-		"Pastor",
-		"Father",
-		"Fr.",
-		"Pastor",
-		"Cardinal"
-	  ],
-	  "academic": [
-		"Dr.",
-		"Prof.",
-		"DPhil",
-		"PhD",
-		"M.D.",
-		"EdD",
-		"D.Ed.",
-		"B.A.",
-		"B.E.",
-		"B.Sc",
-		"LL.D",
-		"M.A.",
-		"M.Des",
-		"M.Eng.",
-		"MMath",
-		"MSc",
-		"M.Sc.Tech."
-	  ]
-	}
-  }
+  ]
 }

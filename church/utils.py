@@ -26,7 +26,6 @@ SUPPORTED_LOCALES = {
         "name_local": "Español"
     },
     "fi": {
-        "code": "fi",
         "name": "Finnish",
         "name_local": "Suomi"
     },

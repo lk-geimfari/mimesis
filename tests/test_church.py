@@ -78,7 +78,7 @@ class ChurchItalianTestCase(ChurchLocaleBase, TestCase):
     LANG = 'it'
 
 
-class ChurchPortugueseTestCase(ChurchLocaleBase, TestCase):
+class ChurchBrazilianPortugueseTestCase(ChurchLocaleBase, TestCase):
     LANG = 'pt-br'
 
 
@@ -100,3 +100,7 @@ class ChurchDutchTestCase(ChurchLocaleBase, TestCase):
 
 class ChurchIcelandicTestCase(ChurchLocaleBase, TestCase):
     LANG = 'is'
+
+
+class ChurchPortugueseTestCase(ChurchLocaleBase, TestCase):
+    LANG = 'pt'
