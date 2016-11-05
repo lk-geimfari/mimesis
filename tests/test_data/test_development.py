@@ -59,5 +59,9 @@ class DevelopmentTestCase(TestCase):
     def test_stackoverflow_question(self):
         url = self.dev.stackoverflow_question()
         post_id = int(url.split('/')[-1])
-        self.assertTrue((post_id >= 1000000) and
-                        (post_id <= 9999999))
+        self.assertTrue(post_id >= 1000000)
+        self.assertTrue(post_id <= 9999999)
+
+    # TODO: Write it
+    def test_hardware_info(self):
+        pass

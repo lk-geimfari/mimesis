@@ -19,7 +19,7 @@ class DatetimeTestCase(DummyCase):
         self.assertIsInstance(result_abbr, str)
 
     def test_year(self):
-        result = self.church.datetime.year(from_=2000, to=2016)
+        result = self.church.datetime.year(minimum=2000, maximum=2016)
         self.assertTrue((result >= 2000) and (result <= 2016))
 
     def test_periodicity(self):
@@ -40,5 +40,5 @@ class DatetimeTestCase(DummyCase):
         self.assertTrue(int(month) <= 12)
         self.assertTrue((int(year) >= 1980) and (int(year) <= 2000))
 
-        fmt = self.church.datetime.birthday(from_=2015, to=2025, readable=False, fmt='%Y')
+        fmt = self.church.datetime.birthday(minimum=2015, maximum=2025, readable=False, fmt='%Y')
         self.assertTrue((int(year) >= 1980) and (int(year) <= 2000))

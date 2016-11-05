@@ -58,7 +58,7 @@ class HardwareTestCase(TestCase):
         self.assertIn(result, common.MANUFACTURERS)
 
     def test_hardware_full(self):
-        result = self.hard.hardware_full_info()
+        result = self.hard.hardware_info()
         self.assertGreater(len(result), 15)
 
     def test_phone_model(self):

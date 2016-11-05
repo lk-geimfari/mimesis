@@ -112,6 +112,9 @@ def pull(file, locale='en'):
     :param locale: Locale.
     :returns: The content of the file.
     """
+
+    locale = locale.lower()
+
     if locale not in SUPPORTED_LOCALES:
         raise UnsupportedLocale("Locale %s does not supported" % locale)
 
@@ -122,7 +125,7 @@ def pull(file, locale='en'):
 
 
 # TODO: Refactoring
-def push(**kwargs):
+def _push(**kwargs):
     """
     Dict to json file.
     :param kwargs: Kwargs

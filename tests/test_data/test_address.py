@@ -29,16 +29,16 @@ class AddressTestCase(DummyCase):
 
     def test_postal_code(self):
         result = self.church.address.postal_code()
-        if self.church.address.lang == 'ru':
+        if self.church.address.locale == 'ru':
             self.assertTrue(re.match(r'[0-9]{6}$', result))
-        elif self.church.address.lang == 'is':
+        elif self.church.address.locale == 'is':
             self.assertTrue(re.match(r'[0-9]{3}$', result))
-        elif self.church.address.lang == 'nl':
+        elif self.church.address.locale == 'nl':
             nl_pattern = r'^[1-9][0-9]{3}\s?[a-zA-Z]{2}$'
             self.assertTrue(re.match(nl_pattern, result))
-        elif self.church.address.lang in ('pt', 'no'):
+        elif self.church.address.locale in ('pt', 'no'):
             self.assertTrue(re.match(r'[0-9]{4}$', result))
-        elif self.church.address.lang == 'da':
+        elif self.church.address.locale == 'da':
             self.assertEqual(result.split('-')[0], 'DK')
             self.assertTrue(re.match(r'[0-9]{4}$', result.split('-')[1]))
         else:

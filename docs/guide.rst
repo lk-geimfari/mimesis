@@ -318,7 +318,7 @@ Text
 
 	# Get random text.
 	# quantity=5 is a quantity of sentence
-	text = data.lorem_ipsum(quantity=5)
+	text = data.text(quantity=5)
 
 	# Get a random sentence.
 	sentence = data.sentence()

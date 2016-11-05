@@ -9,7 +9,7 @@ from tests.test_data import DummyCase
 
 class PersonalTestCase(DummyCase):
     def test_age(self):
-        result = self.church.personal.age(mx=55)
+        result = self.church.personal.age(maximum=55)
         self.assertTrue(result <= 55)
 
     def test_name(self):
@@ -30,14 +30,13 @@ class PersonalTestCase(DummyCase):
 
     def test_surname(self):
         diff_surnames = ('ru', 'is')
-        if self.church.personal.lang in diff_surnames:
+        if self.church.personal.locale in diff_surnames:
+
             result = self.church.personal.surname(gender='female')
-            self.assertIn(result,
-                          self.church.personal.data['surnames']['female'])
+            self.assertIn(result, self.church.personal.data['surnames']['female'])
 
             result = self.church.personal.surname(gender='male')
-            self.assertIn(result,
-                          self.church.personal.data['surnames']['male'])
+            self.assertIn(result, self.church.personal.data['surnames']['male'])
         else:
             result = self.church.personal.surname()
             self.assertIn(result, self.church.personal.data['surnames'])
@@ -131,7 +130,7 @@ class PersonalTestCase(DummyCase):
         self.assertTrue(re.match(r'[\d]+((-|\s)?[\d]+)+', result))
 
     def test_expiration_date(self):
-        result = self.church.personal.credit_card_expiration_date(mi=16, mx=25)
+        result = self.church.personal.credit_card_expiration_date(minimum=16, maximum=25)
         year = result.split('/')[1]
         self.assertTrue((int(year) >= 16) and (int(year) <= 25))
 
@@ -147,12 +146,12 @@ class PersonalTestCase(DummyCase):
         self.assertIn(symbol, common.GENDER_SYMBOLS)
 
     def test_height(self):
-        result = self.church.personal.height(from_=1.60, to=1.90)
+        result = self.church.personal.height(minimum=1.60, maximum=1.90)
         self.assertTrue(result.startswith('1'))
         self.assertIsInstance(result, str)
 
     def test_weight(self):
-        result = self.church.personal.weight(from_=40, to=60)
+        result = self.church.personal.weight(minimum=40, maximum=60)
         self.assertTrue((result >= 40) and (result <= 60))
 
     def test_blood_type(self):
@@ -221,7 +220,6 @@ class PersonalTestCase(DummyCase):
         self.assertEqual(len(_id), 2)
         self.assertEqual(len(sfx), 2)
 
-
     def test_title(self):
         result = self.church.personal.title(type_='typical')
         self.assertIsNotNone(result)
@@ -234,3 +232,4 @@ class PersonalTestCase(DummyCase):
 
         result4 = self.church.personal.title(type_='academic')
         self.assertIsNotNone(result4)
+

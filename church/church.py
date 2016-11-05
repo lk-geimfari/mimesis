@@ -44,7 +44,7 @@ class Church(object):
 
     def __init__(self, locale):
         """
-        :param locale: Locale
+        :param locale: Locale code.
         """
         self.locale = locale
         self._personal = Personal
@@ -109,15 +109,15 @@ class Address(object):
     Class for generate fake address data.
     """
 
-    def __init__(self, lang='en'):
+    def __init__(self, locale='en'):
         """
-        :param lang: Current language.
+        :param locale: Current language.
         """
-        self.lang = lang.lower()
-        self.data = pull('address.json', self.lang)
+        self.locale = locale
+        self.data = pull('address.json', self.locale)
 
     @staticmethod
-    def street_number(mx=1400):
+    def street_number(maximum=1400):
         """
         Generate a random street number.
 
@@ -126,7 +126,7 @@ class Address(object):
             134.
         """
 
-        number = randint(1, int(mx))
+        number = randint(1, int(maximum))
         return '{}'.format(number)
 
     def street_name(self):
@@ -148,8 +148,8 @@ class Address(object):
         :Example:
             Street.
         """
-        suffix = self.data['street']['suffix']
-        return choice(suffix)
+        suffixes = self.data['street']['suffix']
+        return choice(suffixes)
 
     def address(self):
         """
@@ -164,15 +164,15 @@ class Address(object):
         intl = '{} {} {}'  # international format
 
         def _f():
-            if self.lang in ('sv', 'de', 'fi', 'nl', 'is'):
+            if self.locale in ('sv', 'de', 'fi', 'nl', 'is'):
                 return '{} {}'.format(
                     self.street_name(),
                     self.street_number()
                 )
 
             # specific format for some locales
-            fmt = ru if self.lang == 'ru' else \
-                fr if self.lang == 'fr' else intl
+            fmt = ru if self.locale == 'ru' else \
+                fr if self.locale == 'fr' else intl
 
             return fmt.format(
                 self.street_number(),
@@ -216,8 +216,8 @@ class Address(object):
             'br-pt': _(mask='#####-###'),
             'default': _(mask='#####')
         }
-        if self.lang in codes:
-            return codes[self.lang]
+        if self.locale in codes:
+            return codes[self.locale]
 
         return codes['default']
 
@@ -250,7 +250,7 @@ class Address(object):
     @staticmethod
     def latitude():
         """
-        Generate a random value of latitude (+90 to -90)
+        Generate a random value of latitude (-90 to +90)
 
         :returns: Value of longitude.
         :Example:
@@ -279,10 +279,11 @@ class Address(object):
             'longitude': 36.02811153405548
             }
         """
-        c = {'longitude': self.longitude(),
-             'latitude': self.latitude()
-             }
-        return c
+        coord = {
+            'longitude': self.longitude(),
+            'latitude': self.latitude()
+        }
+        return coord
 
 
 class Numbers(object):
@@ -327,6 +328,7 @@ class Numbers(object):
         | 'L'       | unsigned integer | 4 byte       | 0 to 4,294,967,295 |
         +-----------+------------------+--------------+--------------------+
 
+        :param to_list: Convert array to list.
         :returns: An array of floating-point numbers.
         """
         nums = array.array('L', (i for i in range(10 ** n) if i % 2))
@@ -339,18 +341,18 @@ class Text(object):
     Class for generate text data, i.e text, lorem ipsum and another.
     """
 
-    def __init__(self, lang='en'):
+    def __init__(self, locale='en'):
         """
-        :param lang: Current language.
+        :param locale: Current language.
         """
-        self.lang = lang.lower()
-        self.data = pull('text.json', self.lang)
+        self.locale = locale
+        self.data = pull('text.json', self.locale)
 
-    def lorem_ipsum(self, quantity=5):
+    def text(self, quantity=5):
         """
         Get random strings. Not only lorem ipsum.
 
-        :param quantity: Quantity of sentence.
+        :param quantity: Quantity of sentences.
         :returns: Text.
         :Example:
             Haskell is a standardized, general-purpose purely
@@ -359,7 +361,7 @@ class Text(object):
         """
         text = ''
         for _ in range(quantity):
-            text += '' + choice(self.data['text'])
+            text += ' ' + choice(self.data['text'])
         return text.strip()
 
     def sentence(self):
@@ -370,7 +372,7 @@ class Text(object):
         :Example:
             Any element of a tuple can be accessed in constant time.
         """
-        return self.lorem_ipsum(quantity=1)
+        return self.text(quantity=1)
 
     def title(self):
         """
@@ -381,7 +383,7 @@ class Text(object):
             Erlang - is a general-purpose, concurrent,
             functional programming language.
         """
-        return self.lorem_ipsum(quantity=1)
+        return self.text(quantity=1)
 
     def words(self, quantity=5):
         """
@@ -518,18 +520,18 @@ class Text(object):
         return tags
 
     @staticmethod
-    def weather(scale='c', a=-30, b=40):
+    def weather(scale='c', minimum=-30, maximum=40):
         """
         Generate a random temperature value.
 
         :param scale: Scale of temperature.
-        :param a: Minimum value of temperature.
-        :param b: Maximum value of temperature.
+        :param minimum: Minimum value of temperature.
+        :param maximum: Maximum value of temperature.
         :returns: Temperature in Celsius or Fahrenheit.
         :Example:
             33.4 °C.
         """
-        n = randint(a, b)
+        n = randint(minimum, maximum)
         # Convert to Fahrenheit
         n = (n * 1.8) + 32 if scale.lower() == 'f' else n
         scale = '°C' if scale.lower() == 'c' else '°F'
@@ -542,9 +544,9 @@ class Business(object):
     Class for generating data for business.
     """
 
-    def __init__(self, lang):
-        self.lang = lang.lower()
-        self.data = pull('business.json', self.lang)
+    def __init__(self, locale='en'):
+        self.locale = locale
+        self.data = pull('business.json', self.locale)
 
     def company_type(self, abbr=False):
         """
@@ -570,23 +572,23 @@ class Business(object):
         companies = self.data['company']['name']
         return choice(companies)
 
-    def copyright(self, mi=1990, mx=2016, without_date=False):
+    def copyright(self, minimum=1990, maximum=2016, without_date=False):
         """
         Generate a random copyright.
 
-        :param mi: Foundation date
-        :param mx: Current date
-        :param without_date: if True then will be returned
+        :param minimum: Foundation date
+        :param maximum: Current date
+        :param without_date: When True will be returned
             copyright without date.
         :returns: Copyright of company.
         :Example:
             © 1990-2016 Komercia, Inc.
         """
-        founded = randint(int(mi), int(mx))
+        founded = randint(int(minimum), int(maximum))
         company = self.company()
         ct = self.company_type(abbr=True)
         if not without_date:
-            return '© {}-{} {}, {}'.format(founded, mx, company, ct)
+            return '© {}-{} {}, {}'.format(founded, maximum, company, ct)
         return '© {}, {}'.format(company, ct)
 
     @staticmethod
@@ -606,25 +608,25 @@ class Personal(object):
     Class for generate personal data, i.e names, surnames, age and another.
     """
 
-    def __init__(self, lang='en'):
+    def __init__(self, locale='en'):
         """
-        :param lang: Current language.
+        :param locale: Current language.
         """
-        self.lang = lang.lower()
-        self.data = pull('personal.json', self.lang)
+        self.locale = locale
+        self.data = pull('personal.json', self.locale)
 
     @staticmethod
-    def age(mi=16, mx=66):
+    def age(minimum=16, maximum=66):
         """
         Get a random integer value.
 
-        :param mx: max age
-        :param mi: min age
+        :param maximum: max age
+        :param minimum: min age
         :returns: Random integer (from minimum=16 to maximum=66)
         :Example:
             23.
         """
-        return randint(mi, mx)
+        return randint(minimum, maximum)
 
     def name(self, gender='female'):
         """
@@ -645,8 +647,7 @@ class Personal(object):
         """
         Get a random surname.
 
-        :param gender: if 'm' then will getting male surname else
-            female surname.
+        :param gender: The gender of person.
         :returns: Surname.
         :Example:
             Smith.
@@ -658,7 +659,7 @@ class Personal(object):
         # separated by gender.
         diff_surnames = ('ru', 'is')
 
-        if self.lang in diff_surnames:
+        if self.locale in diff_surnames:
             return choice(self.data['surnames'][gender])
 
         return choice(self.data['surnames'])
@@ -687,8 +688,8 @@ class Personal(object):
         if not type_:
             type_ = 'typical'
 
-        ttl = self.data['title'][gender][type_]
-        return ttl
+        titulus = self.data['title'][gender][type_]
+        return titulus
 
     def full_name(self, gender='female', reverse=False):
         """
@@ -753,8 +754,8 @@ class Personal(object):
         """
         Generate a password or hash of password.
 
-        :param length: length of password.
-        :param algorithm: hashing algorithm.
+        :param length: Length of password.
+        :param algorithm: Hashing algorithm.
         :returns: Password or hash of password.
         :Example:
             k6dv2odff9#4h (without hashing).
@@ -779,9 +780,9 @@ class Personal(object):
     @staticmethod
     def email(gender='female'):
         """
-        Generate a random email using usernames.
+        Generate a random email.
 
-        :param gender: Gender of user.
+        :param gender: Gender of the user.
         :returns: Email address.
         :Example:
             foretime10@live.com
@@ -792,7 +793,7 @@ class Personal(object):
 
     def home_page(self, gender='female'):
         """
-        Generate a random home page using usernames.
+        Generate a random home page.
 
         :param gender: Gender of author of site.
         :returns: Random home page.
@@ -808,9 +809,8 @@ class Personal(object):
         """
         Get a random subreddit from list.
 
-        :param nsfw: if True then will be returned NSFW subreddit.
-        :param full_url: If true http://www.reddit.com/r/subreddit
-            else /r/subreddit
+        :param nsfw: NSFW subreddit.
+        :param full_url: Full URL address.
         :returns: Subreddit or URL to subreddit.
         :Example:
             https://www.reddit.com/r/flask/
@@ -872,17 +872,17 @@ class Personal(object):
         return '{} {}'.format(str(iin), tail)
 
     @staticmethod
-    def credit_card_expiration_date(mi=16, mx=25):
+    def credit_card_expiration_date(minimum=16, maximum=25):
         """
         Generate a random expiration date for credit card.
 
-        :param mi: Date of issue.
-        :param mx: Maximum of expiration_date.
+        :param minimum: Date of issue.
+        :param maximum: Maximum of expiration_date.
         :returns: Expiration date of credit card.
         :Example:
             03/19.
         """
-        month, year = randint(1, 12), randint(mi, mx)
+        month, year = randint(1, 12), randint(minimum, maximum)
         month = '0' + str(month) if month < 10 else month
         return '{0}/{1}'.format(month, year)
 
@@ -945,31 +945,31 @@ class Personal(object):
         return gender
 
     @staticmethod
-    def height(from_=1.5, to=2.0):
+    def height(minimum=1.5, maximum=2.0):
         """
         Generate a random height in M.
 
-        :param from_: Minimum value.
-        :param to: Maximum value.
+        :param minimum: Minimum value.
+        :param maximum: Maximum value.
         :returns: Height.
         :Example:
             1.85.
         """
-        h = uniform(float(from_), float(to))
+        h = uniform(float(minimum), float(maximum))
         return '{:0.2f}'.format(h)
 
     @staticmethod
-    def weight(from_=38, to=90):
+    def weight(minimum=38, maximum=90):
         """
         Generate a random weight in KG.
 
-        :param from_: min value
-        :param to: max value
+        :param minimum: min value
+        :param maximum: max value
         :returns: Weight.
         :Example:
             48.
         """
-        w = randint(int(from_), int(to))
+        w = randint(int(minimum), int(maximum))
         return w
 
     @staticmethod
@@ -1028,8 +1028,8 @@ class Personal(object):
         :Example:
             Pantheism.
         """
-        worldview = self.data['worldview']
-        return choice(worldview)
+        views = self.data['worldview']
+        return choice(views)
 
     def views_on(self):
         """
@@ -1052,7 +1052,7 @@ class Personal(object):
             Russian.
         """
         # Subtleties of the Russian orthography.
-        if self.lang == 'ru':
+        if self.locale == 'ru':
             nations = self.data['nationality'][gender]
             return choice(nations)
         else:
@@ -1141,8 +1141,8 @@ class Personal(object):
             'default': '+#-(###)-###-####'
         }
 
-        if self.lang in masks:
-            return masks[self.lang]
+        if self.locale in masks:
+            return masks[self.locale]
         else:
             return masks['default']
 
@@ -1224,12 +1224,12 @@ class Datetime(object):
     working with date and time.
     """
 
-    def __init__(self, lang='en'):
+    def __init__(self, locale='en'):
         """
-        :param lang: Current language.
+        :param locale: Current language.
         """
-        self.lang = lang.lower()
-        self.data = pull('datetime.json', self.lang)
+        self.locale = locale
+        self.data = pull('datetime.json', self.locale)
 
     def day_of_week(self, abbr=False):
         """
@@ -1260,17 +1260,17 @@ class Datetime(object):
         return choice(months)
 
     @staticmethod
-    def year(from_=1990, to=2050):
+    def year(minimum=1990, maximum=2050):
         """
         Generate a random year.
 
-        :param from_: Minimum value.
-        :param to: Maximum value
+        :param minimum: Minimum value.
+        :param maximum: Maximum value
         :returns: Year.
         :Example:
             2023.
         """
-        return randint(int(from_), int(to))
+        return randint(int(minimum), int(maximum))
 
     def periodicity(self):
         """
@@ -1283,17 +1283,19 @@ class Datetime(object):
         return choice(self.data['periodicity'])
 
     @staticmethod
-    def date(sep='-', with_time=False):
+    def date(sep='-',minimum=2000, maximum=2035, with_time=False):
         """
         Generate a random date formatted as a 11-05-2016
 
         :param sep: A separator for date. Default is '-'.
+        :param minimum: Minimum value of year.
+        :param maximum: Maximum value of year.
         :param with_time: if it's True then will be added random time.
         :returns: Formatted date and time.
         :Example:
             20-03-2016 03:20.
         """
-        d = date(randint(2000, 2035), randint(1, 12), randint(1, 28))
+        d = date(randint(minimum, maximum), randint(1, 12), randint(1, 28))
         pattern = '%d{0}%m{0}%Y %m:%d' if with_time else '%d{0}%m{0}%Y'
         return d.strftime(pattern.format(sep))
 
@@ -1308,12 +1310,12 @@ class Datetime(object):
         """
         return randint(1, 31)
 
-    def birthday(self, from_=1980, to=2000, readable=True, fmt=None):
+    def birthday(self, minimum=1980, maximum=2000, readable=True, fmt=None):
         """
         Generate a random day of birth.
 
-        :param from_: Minimum of range
-        :param to: Maximum of range
+        :param minimum: Minimum of range
+        :param maximum: Maximum of range
         :param readable: Return a user-friendly
         readable format.
         :param fmt: The format.
@@ -1325,15 +1327,15 @@ class Datetime(object):
             fmt = '%d-%m-%Y'
 
         if not readable:
-            f = datetime.strptime(str(from_), "%Y")
-            t = datetime.strptime(str(to), "%Y")
+            f = datetime.strptime(str(minimum), "%Y")
+            t = datetime.strptime(str(maximum), "%Y")
             bd = [f + timedelta(days=x) for x in range(0, (t - f).days)]
             return choice(bd).strftime(fmt)
 
         return '{} {}, {}'.format(
             self.month(),
             self.day_of_month(),
-            self.year(from_, to)
+            self.year(minimum, maximum)
         )
 
 
@@ -1434,12 +1436,12 @@ class Science(object):
     Class for getting facts science.
     """
 
-    def __init__(self, lang='en'):
+    def __init__(self, locale='en'):
         """
         :param lang: Current language.
         """
-        self.lang = lang.lower()
-        self._data = pull('science.json', self.lang)
+        self.locale = locale
+        self._data = pull('science.json', self.locale)
 
     @staticmethod
     def math_formula():
@@ -1629,7 +1631,7 @@ class Food(object):
         """
         :param lang: Current language.
         """
-        self.lang = lang.lower()
+        self.lang = lang
         self._data = pull('food.json', self.lang)
 
     def vegetable(self):
@@ -1703,18 +1705,6 @@ class Food(object):
 class Hardware(object):
     """
     Class for generate data about hardware.
-
-    All available methods:
-      1. resolution - Resolution of screen.
-      2. screen_size - Screen size in inch.
-      3. cpu_frequency - Frequency of CPU.
-      4. generation - Generation of something.
-      5. cpu_codename - Codename of CPU.
-      6. ram_type - Type of RAM.
-      7. ram_size - Size of RAM in GB.
-      8. ssd_or_hdd - Get HDD or SSD.
-      9. graphics - Graphics.
-      10. cpu - The name of CPU.
     """
 
     @staticmethod
@@ -1845,7 +1835,7 @@ class Hardware(object):
         """
         return choice(common.MANUFACTURERS)
 
-    def hardware_full_info(self):
+    def hardware_info(self):
         """
         Get a random full information about device (laptop).
 

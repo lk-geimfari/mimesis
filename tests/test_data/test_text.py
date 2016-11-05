@@ -14,8 +14,8 @@ class TextTestCase(DummyCase):
         result = self.church.text.title()
         self.assertIn(result.strip(), self.church.text.data['text'])
 
-    def test_lorem_ipsum(self):
-        result = self.church.text.lorem_ipsum(quantity=4)
+    def test_text(self):
+        result = self.church.text.text(quantity=4)
         self.assertTrue(len(result) >= 4)
         self.assertIsInstance(result, str)
 
@@ -68,7 +68,7 @@ class TextTestCase(DummyCase):
         self.assertEqual(scale, '°C')
         self.assertTrue((temp >= -30) and (temp <= 40))
 
-        result = self.church.text.weather(scale='f', a=0, b=10).split(' ')
+        result = self.church.text.weather(scale='f', minimum=0, maximum=10).split(' ')
         temp, scale = float(result[0]), result[1]
         self.assertEqual(scale, '°F')
         self.assertTrue((temp >= 0) and (temp <= (10 * 1.8) + 32))
