@@ -1,4 +1,4 @@
-# Church
+# Elizabeth
 [![Build Status](https://travis-ci.org/lk-geimfari/church.svg?branch=master)](https://travis-ci.org/lk-geimfari/church)
 [![Documentation Status](https://readthedocs.org/projects/church/badge/?version=latest)](http://church.readthedocs.io/en/latest/?badge=latest)
 [![PyPI version](https://badge.fury.io/py/elizabeth.svg)](https://badge.fury.io/py/elizabeth)
