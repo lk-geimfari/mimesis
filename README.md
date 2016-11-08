@@ -8,8 +8,10 @@
 [![Issues](https://img.shields.io/github/issues/lk-geimfari/church.svg)](https://github.com/lk-geimfari/elizabeth/issues)
 
 
-![alt text](https://raw.githubusercontent.com/lk-geimfari/church/master/examples/elizabeth.png)
-
+<p align="center">
+  <img src="https://raw.githubusercontent.com/lk-geimfari/church/master/examples/elizabeth.png">
+  <br>
+</p>
 
 
 Elizabeth is a library to generate fake data. It's very useful when you need to bootstrap your database. Elizabeth doesn't have any dependencies.
