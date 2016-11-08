@@ -1,11 +1,11 @@
 # Elizabeth
-[![Build Status](https://travis-ci.org/lk-geimfari/church.svg?branch=master)](https://travis-ci.org/lk-geimfari/church)
-[![Documentation Status](https://readthedocs.org/projects/church/badge/?version=latest)](http://church.readthedocs.io/en/latest/?badge=latest)
+[![Build Status](https://travis-ci.org/lk-geimfari/elizabeth.svg?branch=master)](https://travis-ci.org/lk-geimfari/elizabeth)
+[![Documentation Status](https://readthedocs.org/projects/elizabeth/badge/?version=latest)](http://elizabeth.readthedocs.io/en/latest/?badge=latest)
 [![PyPI version](https://badge.fury.io/py/elizabeth.svg)](https://badge.fury.io/py/elizabeth)
-[![HitCount](https://hitt.herokuapp.com/lk-geimfar/church.svg)](https://github.com/lk-geimfari/church)
+[![HitCount](https://hitt.herokuapp.com/lk-geimfar/church.svg)](https://github.com/lk-geimfari/elizabeth)
 [![Code Health](https://landscape.io/github/lk-geimfari/church/master/landscape.svg?style=flat)](https://landscape.io/github/lk-geimfari/church/master)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/d773f20efa67430683bb24fff5af9db8)](https://www.codacy.com/app/likid-geimfari/church)
-[![Issues](https://img.shields.io/github/issues/lk-geimfari/church.svg)](https://github.com/lk-geimfari/church/issues)
+[![Issues](https://img.shields.io/github/issues/lk-geimfari/church.svg)](https://github.com/lk-geimfari/elizabeth/issues)
 
 
 ![alt text](https://raw.githubusercontent.com/lk-geimfari/church/master/examples/elizabeth.png)
@@ -37,7 +37,7 @@ At this moment a library has 14 supported locales:
 
 
 ## Documentation
-Elizabeth is a pretty simple library and all you need to start is the small documentation. See church's Sphinx-generated documentation here: [http://church.readthedocs.io](http://church.readthedocs.io)
+Elizabeth is a pretty simple library and all you need to start is the small documentation. See church's Sphinx-generated documentation here: [http://elizabeth.readthedocs.io/en/latest/](http://elizabeth.readthedocs.io/en/latest/)
 
 
 
@@ -63,9 +63,6 @@ or
 ## Usage
 
 ```python
-# It's very useful when you need to bootstrap your database.
-# Just create a static method that will generate fake data:
-
 
 class Patient(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -103,9 +100,9 @@ class Patient(db.Model):
 ```
 When you use only one locale, use following format:
 ```python
-from church import Church
+from elizabeth import Generic
 
-ch = Church('en')
+ch = Generic('en')
 
 
 def patient(gender='female'):
@@ -120,12 +117,12 @@ return patient_card
 
 
 ## Examples
-- [flask_church](https://github.com/lk-geimfari/flask_church) - An extension for `Flask` based on `Church`.
-- [presturinn](https://github.com/lk-geimfari/presturinn) - This is a fake API based on `Falcon` and `Church v0.2.0` .
+- [flask_church](https://github.com/lk-geimfari/flask_church) - An extension for `Flask` based on `Elizabeth`.
+- [presturinn](https://github.com/lk-geimfari/presturinn) - This is a fake API based on `Falcon` and `Elizabeth v0.2.0` .
 
 
 ## Contributing
-Your contributions are always welcome! Please take a look at the [contribution](https://github.com/lk-geimfari/church/blob/master/CONTRIBUTING.md) guidelines first. [Here](https://github.com/lk-geimfari/church/blob/master/CONTRIBUTORS.md) you can look a list of contributors
+Your contributions are always welcome! Please take a look at the [contribution](https://github.com/lk-geimfari/elizabeth/blob/master/CONTRIBUTING.md) guidelines first. [Here](https://github.com/lk-geimfari/elizabeth/blob/master/CONTRIBUTORS.md) you can look a list of contributors
 
 
 ## Disclaimer
@@ -133,4 +130,4 @@ The author does not assume any responsibility for how you will use this library 
 
 
 ## Licence
-[MIT License](https://github.com/lk-geimfari/church/blob/master/LICENSE)
+[MIT License](https://github.com/lk-geimfari/elizabeth/blob/master/LICENSE)
