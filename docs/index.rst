@@ -1,9 +1,9 @@
-.. Church documentation master file, created by
+.. Generic documentation master file, created by
    sphinx-quickstart on Tue Oct 18 14:11:49 2016.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Church's documentation!
+Welcome to Generic's documentation!
 ==================================
 
 .. image:: https://raw.githubusercontent.com/lk-geimfari/church/master/examples/church.png
@@ -34,9 +34,9 @@ Welcome to Church's documentation!
 
 |build| |docs-version| |pypi-version| |code-health| |codacy-badge| |issues|
 
-Church is a library to generate fake data. It's very useful when you need to bootstrap your database. Church doesn't have any dependencies.
+Generic is a library to generate fake data. It's very useful when you need to bootstrap your database. Generic doesn't have any dependencies.
 
-At this moment a library has 9 supported locales: 
+At this moment a library has 9 supported locales:
 
     - English (en)
     - Español (es)
@@ -117,9 +117,9 @@ When you use only one locale, use following format:
 
 .. code:: python
 
-    from church import Church
+    from church import Generic
 
-    ch = Church('en')
+    ch = Generic('en')
 
 
     def patient(sex='f'):
@@ -135,8 +135,8 @@ When you use only one locale, use following format:
 Examples
 --------
 
-- `Flask-church`_ - an extension for Flask based on Church.
-- `Presturinn`_ - This is a fake API based on Falcon and Church v0.2.0.
+- `Flask-church`_ - an extension for Flask based on Generic.
+- `Presturinn`_ - This is a fake API based on Falcon and Generic v0.2.0.
 
 .. _Flask-church: https://github.com/lk-geimfari/flask_church)
 .. _Presturinn: https://github.com/lk-geimfari/presturinn
@@ -152,12 +152,12 @@ Your contributions are always welcome! Please take a look at the `contribution`_
 Disclaimer
 ----------
 
-The author does not assume any responsibility for how you will use this library and how you will use data generated with this library. This library is designed only for developers and only with good intentions. Do not use the data generated with Church for illegal purposes.
+The author does not assume any responsibility for how you will use this library and how you will use data generated with this library. This library is designed only for developers and only with good intentions. Do not use the data generated with Generic for illegal purposes.
 
-Licence 
+Licence
 --------
 
-Church uses the `MIT License <https://github.com/lk-geimfari/church/blob/master/LICENSE>`_.
+Generic uses the `MIT License <https://github.com/lk-geimfari/church/blob/master/LICENSE>`_.
 
 Why church?
 -----------

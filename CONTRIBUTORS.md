@@ -1,6 +1,6 @@
-Below is a list of people who help us do a `church` better:
+Below is a list of people who help us do a `generic` better:
 
-- [lk-geimfari](https://github.com/lk-geimfari) - Inventor of `church`.
+- [lk-geimfari](https://github.com/lk-geimfari) - Inventor of `generic`.
 - [auyer](https://github.com/auyer) - Contributor (`pr-br`).
 - [jackmcmorrow](https://github.com/jackmcmorrow) - Contributor (`pr-br`).
 - [Costava](https://github.com/Costava) - Contributor (`es`).

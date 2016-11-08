@@ -660,7 +660,7 @@ EMOJI = (
     ":love_hotel:",
     ":hotel:",
     ":wedding:",
-    ":church:",
+    ":elizabeth:",
     ":department_store:",
     ":european_post_office:",
     ":city_sunrise:",
@@ -2796,4 +2796,4 @@ COUNTRY_ISO_CODE = [
 ]
 
 AVATARS = 'https://raw.githubusercontent.com/lk-geimfari/' \
-          'church/master/examples/avatars/%s.png'
+          'elizabeth/master/examples/avatars/%s.png'

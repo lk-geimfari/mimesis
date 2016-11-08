@@ -3,8 +3,8 @@
 import re
 from unittest import TestCase
 
-from church._common import USER_AGENTS
-from church.church import Network
+from elizabeth._common import USER_AGENTS
+from elizabeth.elizabeth import Network
 
 
 class NetworkTestCase(TestCase):

@@ -2,10 +2,10 @@
 
 from unittest import TestCase
 
-from church.exceptions import (
+from elizabeth.exceptions import (
     UnsupportedLocale
 )
-from church.utils import pull
+from elizabeth.utils import pull
 
 
 class PullTestCase(TestCase):

@@ -51,7 +51,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = 'Church'
+project = 'Generic'
 copyright = '2016, Likid Geimfari'
 author = 'Likid Geimfari'
 
@@ -262,7 +262,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'Church.tex', 'Church Documentation',
+    (master_doc, 'Generic.tex', 'Generic Documentation',
      'Likid Geimfari', 'manual'),
 ]
 
@@ -304,7 +304,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'church', 'Church Documentation',
+    (master_doc, 'elizabeth', 'Generic Documentation',
      [author], 1)
 ]
 
@@ -319,8 +319,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'Church', 'Church Documentation',
-     author, 'Church', 'Church is a library to generate fake data.',
+    (master_doc, 'Generic', 'Generic Documentation',
+     author, 'Generic', 'Generic is a library to generate fake data.',
      'Miscellaneous'),
 ]
 

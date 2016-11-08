@@ -1,26 +1,26 @@
 from distutils.core import setup
 
-import church
+import elizabeth
 
 setup(
-    name='church',
-    version=church.__version__,
-    packages=['church'],
+    name='elizabeth',
+    version=elizabeth.__version__,
+    packages=['elizabeth'],
     keywords=['fake', 'data', 'testing',
-              'generate', 'faker', 'church',
-              'bootstrap', 'database'
+              'generate', 'faker', 'elizabeth',
+              'bootstrap', 'database', 'generic'
               ],
     package_data={
-        'church': [
+        'elizabeth': [
             'data/*/*',
         ]
     },
-    url='https://github.com/lk-geimfari/church',
+    url='https://github.com/lk-geimfari/elizabeth',
     license='MIT',
-    author=church.__author__,
+    author=elizabeth.__author__,
     author_email='likid.geimfari@gmail.com',
-    description='Church is a library that help you generate fake data.',
-    long_description="Church is a library to generate fake data."
+    description='Elizabeth is a library that help you generate fake data.',
+    long_description="Generic is a library to generate fake data."
                      "It's very useful when you need to bootstrap "
                      "your database.",
     zip_safe=False,

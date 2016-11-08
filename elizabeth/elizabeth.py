@@ -2,7 +2,7 @@
 """
 :copyright: (c) 2016 by Likid Geimfari <likid.geimfari@gmail.com>.
 :software_license: MIT, see LICENSES for more details.
-:repository: https://github.com/lk-geimfari/church
+:repository: https://github.com/lk-geimfari/elizabeth
 """
 import array
 from datetime import (
@@ -24,7 +24,7 @@ from string import (
     ascii_uppercase
 )
 
-import church._common as common
+import elizabeth._common as common
 from .utils import pull, PATH
 
 __all__ = ['Address', 'Personal',
@@ -33,11 +33,11 @@ __all__ = ['Address', 'Personal',
            'Science', 'Development',
            'Food', 'Hardware',
            'Numbers', 'Business',
-           'Church'
+           'Generic'
            ]
 
 
-class Church(object):
+class Generic(object):
     """
     A lazy initialization of locale for all classes that have locales.
     """
@@ -1172,10 +1172,10 @@ class Personal(object):
         Get a random link to avatar.
 
         :returns: Link to avatar that hosted on github in
-            repository of church.
+            repository of elizabeth.
         :Example:
             https://raw.githubusercontent.com/lk-geimfari/
-            church/master/examples/avatars/4.png
+            elizabeth/master/examples/avatars/4.png
         """
         url = common.AVATARS % randint(1, 7)
         return url

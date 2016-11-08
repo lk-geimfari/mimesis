@@ -2,8 +2,8 @@
 
 from unittest import TestCase
 
-import church._common as common
-from church.church import File
+import elizabeth._common as common
+from elizabeth.elizabeth import File
 
 
 class FileTestCase(TestCase):

@@ -3,7 +3,7 @@
 import array
 from unittest import TestCase
 
-from church.church import Numbers
+from elizabeth.elizabeth import Numbers
 
 
 class NumbersTestCase(TestCase):

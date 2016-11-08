@@ -74,7 +74,7 @@ def pull(file, locale='en'):
     """
     Open file and get content from file. Memorize result using lru_cache.
     pull - is internal function, please do not use this function outside
-    the module 'church'.
+    the module 'elizabeth'.
 
     +------------------------------+--------------+
     | Locale Code                  | Folder       |

@@ -3,18 +3,18 @@
 """
 :copyright: (c) 2016 by Likid Geimfari <likid.geimfari@gmail.com>.
 :software_license: MIT, see LICENSES for more details.
-:repository: https://github.com/lk-geimfari/church
-:contributors: https://github.com/lk-geimfari/church/blob/master/CONTRIBUTORS.md
+:repository: https://github.com/lk-geimfari/elizabeth
+:contributors: https://github.com/lk-geimfari/elizabeth/blob/master/CONTRIBUTORS.md
 """
 
-from .church import (
+from .elizabeth import (
     Address, Personal, Network, Datetime,
     Development, File, Science, Numbers,
-    Food, Hardware, Text, Business, Church
+    Food, Hardware, Text, Business, Generic
 )
 
 # Data for setup.py
-__version__ = '0.2.7'
+__version__ = '0.2.8'
 __author__ = 'Likid Geimfari'
 
 __all__ = ['Address', 'Personal',
@@ -23,5 +23,5 @@ __all__ = ['Address', 'Personal',
            'Science', 'Development',
            'Food', 'Hardware',
            'Numbers', 'Business',
-           'Church',
+           'Generic',
            ]

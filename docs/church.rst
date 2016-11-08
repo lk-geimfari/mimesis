@@ -1,10 +1,10 @@
-Church Module
+Generic Module
 =============
 
-Church
+Generic
 ------
 
-.. autoclass:: church.Church
+.. autoclass:: church.Generic
    :members:
    :special-members: __init__
 

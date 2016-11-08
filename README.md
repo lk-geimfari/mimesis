@@ -1,18 +1,18 @@
 # Church
 [![Build Status](https://travis-ci.org/lk-geimfari/church.svg?branch=master)](https://travis-ci.org/lk-geimfari/church)
 [![Documentation Status](https://readthedocs.org/projects/church/badge/?version=latest)](http://church.readthedocs.io/en/latest/?badge=latest)
-[![PyPI version](https://badge.fury.io/py/church.svg)](https://badge.fury.io/py/church)
+[![PyPI version](https://badge.fury.io/py/elizabeth.svg)](https://badge.fury.io/py/elizabeth)
 [![HitCount](https://hitt.herokuapp.com/lk-geimfar/church.svg)](https://github.com/lk-geimfari/church)
 [![Code Health](https://landscape.io/github/lk-geimfari/church/master/landscape.svg?style=flat)](https://landscape.io/github/lk-geimfari/church/master)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/d773f20efa67430683bb24fff5af9db8)](https://www.codacy.com/app/likid-geimfari/church)
 [![Issues](https://img.shields.io/github/issues/lk-geimfari/church.svg)](https://github.com/lk-geimfari/church/issues)
 
 
-![alt text](https://raw.githubusercontent.com/lk-geimfari/church/master/examples/church.png)
+![alt text](https://raw.githubusercontent.com/lk-geimfari/church/master/examples/elizabeth.png)
 
 
 
-Church is a library to generate fake data. It's very useful when you need to bootstrap your database. Church doesn't have any dependencies.
+Elizabeth is a library to generate fake data. It's very useful when you need to bootstrap your database. Elizabeth doesn't have any dependencies.
 
 At this moment a library has 14 supported locales:
 
@@ -37,7 +37,7 @@ At this moment a library has 14 supported locales:
 
 
 ## Documentation
-Church is a pretty simple library and all you need to start is the small documentation. See church's Sphinx-generated documentation here: [http://church.readthedocs.io](http://church.readthedocs.io)
+Elizabeth is a pretty simple library and all you need to start is the small documentation. See church's Sphinx-generated documentation here: [http://church.readthedocs.io](http://church.readthedocs.io)
 
 
 
@@ -129,7 +129,7 @@ Your contributions are always welcome! Please take a look at the [contribution](
 
 
 ## Disclaimer
-The author does not assume any responsibility for how you will use this library and how you will use data generated with this library. This library is designed only for developers and only with good intentions. Do not use the data generated with `church` for illegal purposes.
+The author does not assume any responsibility for how you will use this library and how you will use data generated with this library. This library is designed only for developers and only with good intentions. Do not use the data generated with `generic` for illegal purposes.
 
 
 ## Licence

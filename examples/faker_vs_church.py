@@ -1,10 +1,10 @@
 import time
 
 import faker
-import church
+import elizabeth
 
-personal = church.Personal('en')
-address = church.Address('en')
+personal = elizabeth.Personal('en')
+address = elizabeth.Address('en')
 f = faker.Faker()
 
 
