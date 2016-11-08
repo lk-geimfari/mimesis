@@ -115,7 +115,7 @@ Your contributions are always welcome! Please take a look at the [contribution](
 
 
 ## Disclaimer
-The author does not assume any responsibility for how you will use this library and how you will use data generated with this library. This library is designed only for developers and only with good intentions. Do not use the data generated with `generic` for illegal purposes.
+The author does not assume any responsibility for how you will use this library and how you will use data generated with this library. This library is designed only for developers and only with good intentions. Do not use the data generated with `elizabeth` for illegal purposes.
 
 
 ## Licence
