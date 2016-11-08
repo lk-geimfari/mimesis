@@ -4,96 +4,96 @@ Generic Module
 Generic
 ------
 
-.. autoclass:: church.Generic
+.. autoclass:: elizabeth.Generic
    :members:
    :special-members: __init__
 
 Address
 -------
 
-.. autoclass:: church.Address
+.. autoclass:: elizabeth.Address
    :members:
    :special-members: __init__
 
 Numbers
 -------
 
-.. autoclass:: church.Numbers
+.. autoclass:: elizabeth.Numbers
    :members:
    :special-members: __init__
 
 Text
 ----
 
-.. autoclass:: church.Text
+.. autoclass:: elizabeth.Text
    :members:
    :special-members: __init__
 
 Business
 --------
 
-.. autoclass:: church.Business
+.. autoclass:: elizabeth.Business
    :members:
    :special-members: __init__
 
 Personal
 --------
 
-.. autoclass:: church.Personal
+.. autoclass:: elizabeth.Personal
    :members:
    :special-members: __init__
 
 Datetime
 --------
 
-.. autoclass:: church.Datetime
+.. autoclass:: elizabeth.Datetime
    :members:
    :special-members: __init__
 
 Network
 -------
 
-.. autoclass:: church.Network
+.. autoclass:: elizabeth.Network
    :members:
    :special-members: __init__
 
 File
 ----
 
-.. autoclass:: church.File
+.. autoclass:: elizabeth.File
    :members:
    :special-members: __init__
 
 Science
 -------
 
-.. autoclass:: church.Science
+.. autoclass:: elizabeth.Science
    :members:
    :special-members: __init__
 
 Development
 -----------
 
-.. autoclass:: church.Development
+.. autoclass:: elizabeth.Development
    :members:
    :special-members: __init__
 
 Food
 ----
 
-.. autoclass:: church.Food
+.. autoclass:: elizabeth.Food
    :members:
    :special-members: __init__
 
 Hardware
 --------
 
-.. autoclass:: church.Hardware
+.. autoclass:: elizabeth.Hardware
    :members:
    :special-members: __init__
 
 Exceptions
 ----------
 
-.. automodule:: church.exceptions
+.. automodule:: elizabeth.exceptions
    :members:

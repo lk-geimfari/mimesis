@@ -9,55 +9,42 @@
 
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/lk-geimfari/church/master/examples/elizabeth.png">
+  <img src="https://raw.githubusercontent.com/lk-geimfari/elizabeth/master/other/elizabeth.png">
   <br>
 </p>
 
 
-Elizabeth is a library to generate fake data. It's very useful when you need to bootstrap your database. Elizabeth doesn't have any dependencies.
+Elizabeth is a library to generate dummy data. It's very useful when you need to bootstrap your database. Elizabeth doesn't have any dependencies.
 
 At this moment a library has 14 supported locales:
 
-|   F   |  Code   |   Name              |
-|--:    |---      |    ---              |
-| 🇩🇰  | da      |  Dansk               |
-| 🇩🇪  | de      |  Deutsch             |
-| 🇺🇸  | en      |  English             |
-| 🇪🇸  | es      |  Español             |
-| 🇫🇮  | fi      |  Suomi               |
-| 🇫🇷  | fr      |  Français            |
-| 🇮🇸  | is      |  Íslenska*           |
-| 🇮🇹  | it      |  Italiano            |
-| 🇳🇱  | nl      |  Nederlands*         |
-| 🇳🇴  | no      |  Norsk               |
-| 🇸🇪  | sv      |  Svenska             |
-| 🇷🇺  | ru      |  Русский             |
-| 🇵🇹  | pt      | Português            |
-| 🇧🇷  | pt-br   |  Português Brasileiro|
+| F     |🇩🇰 |🇩🇪|🇺🇸|🇪🇸 |🇫🇮|🇫🇷|🇮🇸|🇮🇹|🇳🇱|🇳🇴|🇸🇪|🇷🇺|🇵🇹|🇧🇷 |
+|---    |--- |--- |---|--- |--- |--- |---|---|--- |---|--- |---|---|---  |
+| Code  |da  | de |en |es* |fi  | fr |is* |it |nl*  |no |sv  |ru |pt |pt-br|
 
 `* - not completely`
 
 
 ## Documentation
-Elizabeth is a pretty simple library and all you need to start is the small documentation. See church's Sphinx-generated documentation here: [http://elizabeth.readthedocs.io/en/latest/](http://elizabeth.readthedocs.io/en/latest/)
+Elizabeth is a pretty simple library and all you need to start is the small documentation. See Elizabeth's Sphinx-generated documentation here: [http://elizabeth.readthedocs.io/en/latest/](http://elizabeth.readthedocs.io/en/latest/)
 
 
 
 ## Installation
 ```zsh
-➜  ~ git clone https://github.com/lk-geimfari/church.git
-➜  ~ cd church/
+➜  ~ git clone https://github.com/lk-geimfari/elizabeth.git
+➜  ~ cd elizabeth/
 ➜  ~ python3 setup.py install
 
 ```
 or
 ```zsh
-➜  ~  pip install church
+➜  ~  pip install elizabeth
 ```
 
 ## Testing
 ```zsh
-➜  ~ cd church/
+➜  ~ cd elizabeth/
 ➜  ~ python3 -m unittest discover tests
 ```
 
@@ -81,7 +68,7 @@ class Patient(db.Model):
         super(Patient, self).__init__(**kwargs)
 
     @staticmethod
-    def churchify(count=2000):
+    def _generate(count=2000):
         from elizabeth import Personal
 
         person = Personal('en')

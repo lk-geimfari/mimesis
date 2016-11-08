@@ -3,38 +3,19 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Generic's documentation!
+Welcome to Elizabeth's documentation!
 ==================================
 
-.. image:: https://raw.githubusercontent.com/lk-geimfari/church/master/examples/church.png
+.. image:: https://raw.githubusercontent.com/lk-geimfari/elizabeth/master/other/elizabeth.png
 
-.. |build| image:: https://travis-ci.org/lk-geimfari/church.svg?branch=master
-    :target: https://travis-ci.org/lk-geimfari/church
+.. |build| image:: https://travis-ci.org/lk-geimfari/elizabeth.svg?branch=master
+    :target: https://travis-ci.org/lk-geimfari/elizabeth
     :alt: Build status of the master branch
 
-.. |docs-version| image:: https://readthedocs.org/projects/church/badge/?version=latest
-    :target: http://church.readthedocs.io/en/latest/?badge=latest
-    :alt: Documentation Status
 
-.. |pypi-version| image:: https://badge.fury.io/py/church.svg
-    :target: https://badge.fury.io/py/church
-    :alt: Current PyPI version
+|build|
 
-.. |code-health| image:: https://landscape.io/github/lk-geimfari/church/master/landscape.svg?style=flat
-    :target: https://landscape.io/github/lk-geimfari/church/master
-    :alt: Code health status
-
-.. |codacy-badge| image:: https://api.codacy.com/project/badge/Grade/d773f20efa67430683bb24fff5af9db8
-    :target: https://www.codacy.com/app/likid-geimfari/church
-    :alt: Codacy Badge
-
-.. |issues| image:: https://img.shields.io/github/issues/lk-geimfari/church.svg
-    :target: https://github.com/lk-geimfari/church/issues
-    :alt: Current bug reports and issues
-
-|build| |docs-version| |pypi-version| |code-health| |codacy-badge| |issues|
-
-Generic is a library to generate fake data. It's very useful when you need to bootstrap your database. Generic doesn't have any dependencies.
+Elizabeth is a library to generate fake data. It's very useful when you need to bootstrap your database. Elizabeth doesn't have any dependencies.
 
 At this moment a library has 9 supported locales:
 
@@ -53,7 +34,7 @@ Installation
 
 .. code:: bash
 
-	➜  ~ git clone https://github.com/lk-geimfari/church.git
+	➜  ~ git clone https://github.com/lk-geimfari/elizabeth.git
 	➜  ~ cd church/
 	➜  ~ python3 setup.py install
 
@@ -61,14 +42,14 @@ or
 
 .. code:: bash
 
-	➜  ~  pip install church
+	➜  ~  pip install elizabeth
 
 Testing
 -------
 
 .. code:: bash
 
-	➜  ~ cd church/
+	➜  ~ cd elizabeth/
 	➜  ~ python3 -m unittest
 
 Usage
@@ -94,8 +75,8 @@ Usage
             super(Patient, self).__init__(**kwargs)
 
         @staticmethod
-        def churchify(count=2000):
-            from church import Personal
+        def _generate(count=2000):
+            from elizabeth import Personal
 
             person = Personal('en')
             for _ in range(count):
@@ -119,15 +100,15 @@ When you use only one locale, use following format:
 
     from church import Generic
 
-    ch = Generic('en')
+    el = Generic('en')
 
 
     def patient(sex='f'):
         user = {
-                'full_name': ch.personal.full_name(sex),
-                'gender': ch.personal.gender(sex),
-                'blood_type': ch.person.blood_type(),
-                'birthday': ch.datetime.birthday()
+                'full_name': el.personal.full_name(sex),
+                'gender': el.personal.gender(sex),
+                'blood_type': el.person.blood_type(),
+                'birthday': el.datetime.birthday()
                 }
         return user
 
@@ -135,8 +116,8 @@ When you use only one locale, use following format:
 Examples
 --------
 
-- `Flask-church`_ - an extension for Flask based on Generic.
-- `Presturinn`_ - This is a fake API based on Falcon and Generic v0.2.0.
+- `Flask-church`_ - an extension for Flask based on Elizabeth.
+- `Presturinn`_ - This is a fake API based on Falcon and Elizabeth v0.2.0.
 
 .. _Flask-church: https://github.com/lk-geimfari/flask_church)
 .. _Presturinn: https://github.com/lk-geimfari/presturinn
@@ -146,8 +127,8 @@ Contributing
 
 Your contributions are always welcome! Please take a look at the `contribution`_ guidelines first. `Here`_ you can look a list of contributors.
 
-.. _contribution: https://github.com/lk-geimfari/church/blob/master/CONTRIBUTING.md
-.. _Here: https://github.com/lk-geimfari/church/blob/master/CONTRIBUTORS.md
+.. _contribution: https://github.com/lk-geimfari/elizabeth/blob/master/CONTRIBUTING.md
+.. _Here: https://github.com/lk-geimfari/elizabeth/blob/master/CONTRIBUTORS.md
 
 Disclaimer
 ----------
@@ -158,12 +139,6 @@ Licence
 --------
 
 Generic uses the `MIT License <https://github.com/lk-geimfari/church/blob/master/LICENSE>`_.
-
-Why church?
------------
-
-| Such teachings come through hypocritical liars, whose consciences have been seared as with a hot iron.
-| -- Timothy 1:4
 
 Contents
 --------
