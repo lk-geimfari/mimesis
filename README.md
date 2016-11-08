@@ -18,9 +18,9 @@ Elizabeth is a library to generate dummy data. It's very useful when you need to
 
 At this moment a library has 14 supported locales:
 
-| F     |🇩🇰 |🇩🇪|🇺🇸|🇪🇸 |🇫🇮|🇫🇷|🇮🇸|🇮🇹|🇳🇱|🇳🇴|🇸🇪|🇷🇺|🇵🇹|🇧🇷 |
+| F     |🇩🇰 |🇩🇪|🇺🇸|🇪🇸 |🇫🇮|🇫🇷|🇮🇸|🇮🇹|🇳🇱|🇳🇴|🇸🇪|🇷🇺|🇵🇹 |🇧🇷 |
 |---    |--- |--- |---|--- |--- |--- |---|---|--- |---|--- |---|---|---  |
-| Code  |da  | de |en |es* |fi  | fr |is* |it |nl*  |no |sv  |ru |pt |pt-br|
+| Code  |da  | de |en |es* |fi* | fr |is* |it |nl*  |no |sv  |ru |pt |pt-br|
 
 `* - not completely`
 
