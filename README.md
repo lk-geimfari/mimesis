@@ -108,14 +108,14 @@ from church import Church
 ch = Church('en')
 
 
-def patient(sex='female'):
-    user = {
+def patient(gender='female'):
+    patient_card = {
         'full_name': ch.personal.full_name(sex),
-        'gender': ch.personal.gender(sex),
+        'gender': ch.personal.gender(gender=gender),
         'blood_type': ch.person.blood_type(),
         'birthday': ch.datetime.birthday()
     }
-    return user
+return patient_card
 ```
 
 
