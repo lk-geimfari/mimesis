@@ -1171,11 +1171,11 @@ class Personal(object):
         """
         Get a random link to avatar.
 
-        :returns: Link to avatar that hosted on github in
+        :returns: Link to avatar that hosted on GitHub in
             repository of elizabeth.
         :Example:
             https://raw.githubusercontent.com/lk-geimfari/
-            elizabeth/master/examples/avatars/4.png
+            elizabeth/master/other/avatars/4.png
         """
         url = common.AVATARS % randint(1, 7)
         return url

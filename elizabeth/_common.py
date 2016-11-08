@@ -2796,4 +2796,4 @@ COUNTRY_ISO_CODE = [
 ]
 
 AVATARS = 'https://raw.githubusercontent.com/lk-geimfari/' \
-          'elizabeth/master/examples/avatars/%s.png'
+          'elizabeth/master/other/avatars/%s.png'

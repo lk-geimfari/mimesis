@@ -15,7 +15,7 @@ from tests.test_data.test_sciense import ScienceTestCase
 from tests.test_data.test_text import TextTestCase
 
 
-class ChurchBase(DummyCase):
+class ElizabethBase(DummyCase):
     def setUp(self):
         self.generic = Generic(self.LANG)
 
@@ -44,63 +44,63 @@ class ChurchBase(DummyCase):
         self.assertIsNotNone(result)
 
 
-class ChurchLocaleBase(ChurchBase, AddressTestCase, BusinessTestCase,
-                       DatetimeTestCase, FoodTestCase, PersonalTestCase,
-                       ScienceTestCase, TextTestCase):
+class ElizabethLocaleBase(ElizabethBase, AddressTestCase, BusinessTestCase,
+                          DatetimeTestCase, FoodTestCase, PersonalTestCase,
+                          ScienceTestCase, TextTestCase):
     pass
 
 
-class ChurchEnglishTestCase(ChurchLocaleBase, TestCase):
+class EnglishTestCase(ElizabethLocaleBase, TestCase):
     LANG = 'en'
 
 
-class ChurchGermanTestCase(ChurchLocaleBase, TestCase):
+class GermanTestCase(ElizabethLocaleBase, TestCase):
     LANG = 'de'
 
 
-class ChurchRussianTestCase(ChurchLocaleBase, TestCase):
+class RussianTestCase(ElizabethLocaleBase, TestCase):
     LANG = 'ru'
 
 
-class ChurchDanishTestCase(ChurchLocaleBase, TestCase):
+class DanishTestCase(ElizabethLocaleBase, TestCase):
     LANG = 'da'
 
 
-class ChurchFrenchTestCase(ChurchLocaleBase, TestCase):
+class FrenchTestCase(ElizabethLocaleBase, TestCase):
     LANG = 'fr'
 
 
-class ChurchSpanishTestCase(ChurchLocaleBase, TestCase):
+class SpanishTestCase(ElizabethLocaleBase, TestCase):
     LANG = 'es'
 
 
-class ChurchItalianTestCase(ChurchLocaleBase, TestCase):
+class ItalianTestCase(ElizabethLocaleBase, TestCase):
     LANG = 'it'
 
 
-class ChurchBrazilianPortugueseTestCase(ChurchLocaleBase, TestCase):
+class BrazilianPortugueseTestCase(ElizabethLocaleBase, TestCase):
     LANG = 'pt-br'
 
 
-class ChurchNorwegianTestCase(ChurchLocaleBase, TestCase):
+class NorwegianTestCase(ElizabethLocaleBase, TestCase):
     LANG = 'no'
 
 
-class ChurchSwedishTestCase(ChurchLocaleBase, TestCase):
+class SwedishTestCase(ElizabethLocaleBase, TestCase):
     LANG = 'sv'
 
 
-class ChurchFinnishTestCase(ChurchLocaleBase, TestCase):
+class FinnishTestCase(ElizabethLocaleBase, TestCase):
     LANG = 'fi'
 
 
-class ChurchDutchTestCase(ChurchLocaleBase, TestCase):
+class DutchTestCase(ElizabethLocaleBase, TestCase):
     LANG = 'nl'
 
 
-class ChurchIcelandicTestCase(ChurchLocaleBase, TestCase):
+class IcelandicTestCase(ElizabethLocaleBase, TestCase):
     LANG = 'is'
 
 
-class ChurchPortugueseTestCase(ChurchLocaleBase, TestCase):
+class PortugueseTestCase(ElizabethLocaleBase, TestCase):
     LANG = 'pt'

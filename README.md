@@ -82,7 +82,7 @@ class Patient(db.Model):
 
     @staticmethod
     def churchify(count=2000):
-        from church import Personal
+        from elizabeth import Personal
 
         person = Personal('en')
         for _ in range(count):
@@ -104,15 +104,15 @@ When you use only one locale, use following format:
 ```python
 from elizabeth import Generic
 
-ch = Generic('en')
+el = Generic('en')
 
 
 def patient(gender='female'):
     patient_card = {
-        'full_name': ch.personal.full_name(sex),
-        'gender': ch.personal.gender(gender=gender),
-        'blood_type': ch.person.blood_type(),
-        'birthday': ch.datetime.birthday()
+        'full_name': el.personal.full_name(sex),
+        'gender': el.personal.gender(gender=gender),
+        'blood_type': el.person.blood_type(),
+        'birthday': el.datetime.birthday()
     }
 return patient_card
 ```
