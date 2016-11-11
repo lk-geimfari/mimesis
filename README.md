@@ -20,7 +20,7 @@ At this moment a library has 14 supported locales:
 
 | F     |🇩🇰 |🇩🇪|🇺🇸|🇪🇸 |🇫🇮|🇫🇷|🇮🇸|🇮🇹|🇳🇱|🇳🇴|🇸🇪|🇷🇺|🇵🇹 |🇧🇷 |
 |---    |--- |--- |---|--- |--- |--- |---|---|--- |---|--- |---|---|---  |
-| Code  |da  | de |en |es* |fi* | fr |is* |it |nl*  |no |sv  |ru |pt |pt-br|
+| Code  |da  | de |en |es* |fi* |fr  |is*|it |nl* |no |sv  |ru |pt* |pt-br|
 
 `* - not completely`
 
