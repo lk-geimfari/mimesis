@@ -35,7 +35,7 @@ Installation
 .. code:: bash
 
 	➜  ~ git clone https://github.com/lk-geimfari/elizabeth.git
-	➜  ~ cd church/
+	➜  ~ cd elizabeth/
 	➜  ~ python3 setup.py install
 
 or
@@ -98,7 +98,7 @@ When you use only one locale, use following format:
 
 .. code:: python
 
-    from church import Generic
+    from elizabeth import Generic
 
     el = Generic('en')
 
@@ -147,7 +147,7 @@ Contents
    :maxdepth: 2
 
    guide
-   church
+   elizabeth
 
 Indices and tables
 ==================
