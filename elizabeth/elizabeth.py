@@ -324,7 +324,7 @@ class Numbers(object):
         return nums
 
     @staticmethod
-    def primes(n=2, to_list=False):
+    def primes(start=1, end=999, to_list=False):
         """
         Generate an array of prime numbers of 10 ** n
 
@@ -334,11 +334,12 @@ class Numbers(object):
         | 'L'       | unsigned integer | 4 byte       | 0 to 4,294,967,295 |
         +-----------+------------------+--------------+--------------------+
 
-        :param n:
+        :param start: First value of range.
+        :param end: Last value of range.
         :param to_list: Convert array to list.
         :returns: An array of floating-point numbers.
         """
-        nums = array.array('L', (i for i in range(10 ** n) if i % 2))
+        nums = array.array('L', (i for i in range(start, end) if i % 2))
         nums = nums.tolist() if to_list else nums
         return nums
 
@@ -350,7 +351,7 @@ class Text(object):
 
     def __init__(self, locale='en'):
         """
-        :param locale: Current language.
+        :param locale: Current locale.
         """
         self.locale = locale
         self.data = pull('text.json', self.locale)
