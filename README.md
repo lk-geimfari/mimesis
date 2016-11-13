@@ -36,22 +36,70 @@ Elizabeth is a pretty simple library and all you need to start is the small docu
 ➜  ~ cd elizabeth/
 ➜  ~ python3 setup.py install
 
-```
-or
-```zsh
-➜  ~  pip install elizabeth
+# or
+
+➜  ~ pip install elizabeth
 ```
 
 ## Testing
 ```zsh
 ➜  ~ cd elizabeth/
 ➜  ~ python3 -m unittest discover tests
+
+# or
+➜  ~ ./run_tests.sh
 ```
 
 
 ## Usage
-
 ```python
+from elizabeth import Personal
+
+p = Personal('de')
+
+
+def generate_user(count=10, gender='female'):
+    for _ in range(count):
+        db = {
+            'name': p.name(gender=gender),
+            'surname': p.surname(gender=gender),
+            'age': p.age(minimum=18),
+            'degree': p.academic_degree(),
+            'email': p.email(),
+            'occupation': p.occupation(),
+            'views': {
+                'political': p.political_views(),
+                'worldview': p.worldview()
+            },
+            'id': p.identifier(mask='####-##/##', suffix=True)
+        }
+        yield db
+
+
+if __name__ == '__main__':
+    for i in generate_user(count=1):
+        print(i)
+
+    # {
+    #    "age": 34,
+    #    "name": "Winola",
+    #    "surname": "Gerig",
+    #    "degree": "Junggeselle",
+    #    "email": "roni4809@gmail.com",
+    #    "identifier": "3163-55/88 VX",
+    #    "occupation": "Programmiererin",
+    #    "views": {
+    #        "political": "Linksliberal",
+    #        "worldview": "Katholizismus"
+    #     }
+    # }
+
+```
+
+Moreover you can use `elizabeth` for bootstrapping the database like in example below.
+```python
+# ...
+# Model for some Flask project.
 
 class Patient(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -68,7 +116,7 @@ class Patient(db.Model):
         super(Patient, self).__init__(**kwargs)
 
     @staticmethod
-    def _generate(count=2000):
+    def _bootstrap(count=2000):
         from elizabeth import Personal
 
         person = Personal('en')
@@ -87,7 +135,7 @@ class Patient(db.Model):
         except Exception:
             db.session.commit()
 ```
-When you use only one locale, use following format:
+When you use only one locale, then you can use the `Generic` class.
 ```python
 from elizabeth import Generic
 
