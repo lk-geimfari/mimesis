@@ -27,14 +27,15 @@ from string import (
 import elizabeth._common as common
 from .utils import pull, PATH
 
-__all__ = ['Address', 'Personal',
-           'Text', 'Network',
-           'Datetime', 'File',
-           'Science', 'Development',
-           'Food', 'Hardware',
-           'Numbers', 'Business',
-           'Generic'
-           ]
+__all__ = [
+    'Address', 'Personal',
+    'Text', 'Network',
+    'Datetime', 'File',
+    'Science', 'Development',
+    'Food', 'Hardware',
+    'Numbers', 'Business',
+    'Generic'
+]
 
 
 class Generic(object):
@@ -127,7 +128,7 @@ class Address(object):
         """
 
         number = randint(1, int(maximum))
-        return '{}'.format(number)
+        return '%s' % number
 
     def street_name(self):
         """
@@ -159,22 +160,27 @@ class Address(object):
         :Example:
             5 Central Sideline.
         """
-        ru = '{2} {1} {0}'  # Russian address format
-        fr = '{0} {2} {1}'  # French address format
-        intl = '{} {} {}'  # international format
+        fmt_of_country = {
+            'ru': '{2} {1} {0}',
+            'fr': '{0} {2} {1}',
+            'sv': '{} {}',
+            'de': '{} {}',
+            'fi': '{} {}',
+            'nl': '{} {}',
+            'is': '{} {}',
+            'int': '{} {} {}'
+        }
 
         def _f():
             if self.locale in ('sv', 'de', 'fi', 'nl', 'is'):
-                return '{} {}'.format(
+                return fmt_of_country[self.locale].format(
                     self.street_name(),
                     self.street_number()
                 )
 
             # specific format for some locales
-            fmt = ru if self.locale == 'ru' else \
-                fr if self.locale == 'fr' else intl
 
-            return fmt.format(
+            return fmt_of_country['int'].format(
                 self.street_number(),
                 self.street_name(),
                 self.street_suffix()
@@ -328,6 +334,7 @@ class Numbers(object):
         | 'L'       | unsigned integer | 4 byte       | 0 to 4,294,967,295 |
         +-----------+------------------+--------------+--------------------+
 
+        :param n:
         :param to_list: Convert array to list.
         :returns: An array of floating-point numbers.
         """
@@ -394,10 +401,9 @@ class Text(object):
         :Example:
             science, network, god, octopus, love.
         """
-        words_list = []
+
         words = self.data['words']['normal']
-        for _ in range(int(quantity)):
-            words_list.append(choice(words))
+        words_list = [choice(words) for _ in range(int(quantity))]
         return words_list
 
     def word(self):
@@ -1283,7 +1289,7 @@ class Datetime(object):
         return choice(self.data['periodicity'])
 
     @staticmethod
-    def date(sep='-',minimum=2000, maximum=2035, with_time=False):
+    def date(sep='-', minimum=2000, maximum=2035, with_time=False):
         """
         Generate a random date formatted as a 11-05-2016
 
