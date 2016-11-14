@@ -45,7 +45,7 @@ class Generic(object):
 
     def __init__(self, locale):
         """
-        :param locale: Locale code.
+        :param locale: Current locale.
         """
         self.locale = locale
         self._personal = Personal
@@ -119,7 +119,7 @@ class Address(object):
 
     def __init__(self, locale='en'):
         """
-        :param locale: Current language.
+        :param locale: Current locale.
         """
         self.locale = locale
         self.data = pull('address.json', self.locale)
@@ -349,6 +349,26 @@ class Numbers(object):
         nums = array.array('L', (i for i in range(start, end) if i % 2))
         nums = nums.tolist() if to_list else nums
         return nums
+
+    @staticmethod
+    def digit(to_bin=False):
+        """
+        Get a random digit.
+        :return: Digit.
+        """
+        if to_bin:
+            return bin(randint(0, 9))
+        return randint(0, 9)
+
+    @staticmethod
+    def between(minimum=1, maximum=1000):
+        """
+        Generate a random number between minimum and maximum.
+        :param minimum: Minimum of range.
+        :param maximum: Maximum of range
+        :return: Number
+        """
+        return randint(minimum, maximum)
 
 
 class Text(object):

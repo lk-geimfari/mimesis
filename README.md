@@ -99,7 +99,7 @@ if __name__ == '__main__':
 Moreover you can use `elizabeth` for bootstrapping the database like in example below.
 ```python
 # ...
-# Model for some Flask project.
+# Model from some Flask project.
 
 class Patient(db.Model):
     id = db.Column(db.Integer, primary_key=True)
