@@ -22,5 +22,5 @@ class ScienceTestCase(DummyCase):
         result = self.generic.science.chemical_element(name_only=True)
         self.assertGreater(len(result), 2)
 
-        _result = self.generic.science.chemical_element(name_only=False)
-        self.assertIsInstance(_result, dict)
+        result = self.generic.science.chemical_element(name_only=False)
+        self.assertIsInstance(result, dict)
