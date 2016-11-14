@@ -13,7 +13,7 @@ from tests.test_data.test_food import FoodTestCase
 from tests.test_data.test_personal import PersonalTestCase
 from tests.test_data.test_sciense import ScienceTestCase
 from tests.test_data.test_text import TextTestCase
-
+from tests.test_data.test_code import CodeTestCase
 
 class ElizabethBase(DummyCase):
     def setUp(self):
@@ -43,10 +43,14 @@ class ElizabethBase(DummyCase):
         result = self.generic.business.copyright()
         self.assertIsNotNone(result)
 
+    def test_base_code(self):
+        result = self.generic.code.isbn()
+        self.assertIsNotNone(result)
+
 
 class ElizabethLocaleBase(ElizabethBase, AddressTestCase, BusinessTestCase,
                           DatetimeTestCase, FoodTestCase, PersonalTestCase,
-                          ScienceTestCase, TextTestCase):
+                          ScienceTestCase, TextTestCase, CodeTestCase):
     pass
 
 

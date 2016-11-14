@@ -10,7 +10,8 @@
 from .elizabeth import (
     Address, Personal, Network, Datetime,
     Development, File, Science, Numbers,
-    Food, Hardware, Text, Business, Generic
+    Food, Hardware, Text, Business, Code,
+    Generic
 )
 
 # Data for setup.py
@@ -23,5 +24,5 @@ __all__ = ['Address', 'Personal',
            'Science', 'Development',
            'Food', 'Hardware',
            'Numbers', 'Business',
-           'Generic',
+           'Code', 'Generic',
            ]

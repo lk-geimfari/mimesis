@@ -34,7 +34,7 @@ __all__ = [
     'Science', 'Development',
     'Food', 'Hardware',
     'Numbers', 'Business',
-    'Generic'
+    'Code', 'Generic'
 ]
 
 
@@ -55,6 +55,7 @@ class Generic(object):
         self._text = Text
         self._food = Food
         self._science = Science
+        self._code = Code
         self.file = File()
         self.numbers = Numbers()
         self.development = Development()
@@ -103,6 +104,12 @@ class Generic(object):
         if callable(self._science):
             self._science = self._science(self.locale)
         return self._science
+
+    @property
+    def code(self):
+        if callable(self._code):
+            self._code = self._code(self.locale)
+        return self._code
 
 
 class Address(object):
@@ -544,6 +551,74 @@ class Text(object):
         scale = '°C' if scale.lower() == 'c' else '°F'
 
         return '{0:0.1f} {1}'.format(n, scale)
+
+
+class Code(object):
+    """Class that provides methods for generating codes (isbn, asin & etc.)"""
+
+    def __init__(self, locale):
+        self._generator = Personal.identifier
+        self.locale = locale
+
+    def isbn(self, fmt='isbn-10'):
+        """
+        Generate ISBN for current locale.
+        :param fmt: ISBN format. Default is ISBN 10,
+        but you als can use ISBN-13
+        :return: ISBN.
+        """
+        groups = {
+            "da": "87",
+            "de": "3",
+            "en": "1",
+            "es": "84",
+            "fi": "951",
+            "fr": "2",
+            "is": "9935",
+            "it": "88",
+            "nl": "90",
+            "no": "82",
+            "pt": "972",
+            "pt-br": "85",
+            "ru": "5",
+            "sv": "91"
+        }
+        mask = '###-{}-#####-###-#' if \
+            fmt == 'isbn-13' else '{0}-#####-###-#'
+
+        if self.locale in groups:
+            mask = mask.format(groups[self.locale])
+        else:
+            mask = mask.format('#')
+
+        return self._generator(mask)
+
+    def ean(self, fmt='ean-13'):
+        """
+        Generate EAN (European Article Number) code.
+        :param fmt: Format of EAN. Default is EAN-13,
+        but yuo also can use EAN-8
+        :return: EAN.
+        """
+        mask = '########' if fmt == 'ean-8' \
+            else '#############'
+        return self._generator(mask)
+
+    def imei(self):
+        """
+        Generate a random IMEI (International Mobile Station
+        Equipment Identity).
+        :return: IMEI.
+        """
+        mask = '###############'
+        return self._generator(mask)
+
+    def pin(self):
+        """
+        Generate a random PIN code.
+        :return:
+        """
+        return self._generator(mask='####')
 
 
 class Business(object):
