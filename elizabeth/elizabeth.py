@@ -974,14 +974,17 @@ class Personal(object):
         :Example:
             4455 5299 1152 2450
         """
-        visa = randint(4000, 4999)
-        mc = choice([randint(2221, 2720), randint(5100, 5500)])
+        _ = Personal.identifier
 
-        # Issuer identification number.
-        iin = mc if card_type.lower() == 'mastercard' or 'mc' else visa
+        mask = "{0} #### #### ####"
 
-        tail = ''.join([str(randint(0000, 9999)) for _ in range(0, 3)])
-        return '{} {}'.format(str(iin), tail)
+        if card_type in ('visa', 'vi', 'v'):
+            mask = mask.format(randint(4000, 4999))
+        elif card_type in ('master_card', 'mc', 'master', 'm'):
+            iin = choice([randint(2221, 2720), randint(5100, 5500)])
+            mask = mask.format(iin)
+
+        return _(mask=mask)
 
     @staticmethod
     def credit_card_expiration_date(minimum=16, maximum=25):
