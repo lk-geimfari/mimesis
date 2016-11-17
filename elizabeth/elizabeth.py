@@ -62,6 +62,7 @@ class Generic(object):
         self.development = Development()
         self.hardware = Hardware()
         self.network = Network()
+        self.clothing_sizes = ClothingSizes()
 
     # TODO: Rewrite all @property as a dynamic.
     @property
