@@ -11,7 +11,7 @@ from .elizabeth import (
     Address, Personal, Network, Datetime,
     Development, File, Science, Numbers,
     Food, Hardware, Text, Business, Code,
-    Generic
+    ClothingSizes, Generic
 )
 
 # Data for setup.py
@@ -24,5 +24,6 @@ __all__ = ['Address', 'Personal',
            'Science', 'Development',
            'Food', 'Hardware',
            'Numbers', 'Business',
-           'Code', 'Generic',
+           'Code', 'ClothingSizes',
+           'Generic',
            ]

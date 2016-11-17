@@ -34,7 +34,8 @@ __all__ = [
     'Science', 'Development',
     'Food', 'Hardware',
     'Numbers', 'Business',
-    'Code', 'Generic'
+    'Code', 'ClothingSizes',
+    'Generic'
 ]
 
 
@@ -586,6 +587,8 @@ class Code(object):
         :param fmt: ISBN format. Default is ISBN 10,
         but you als can use ISBN-13
         :return: ISBN.
+        :Example:
+            132-1-15411-375-8.
         """
         groups = {
             "da": "87",
@@ -619,6 +622,8 @@ class Code(object):
         :param fmt: Format of EAN. Default is EAN-13,
         but yuo also can use EAN-8
         :return: EAN.
+        :Example:
+            3953753179567.
         """
         mask = '########' if fmt == 'ean-8' \
             else '#############'
@@ -629,6 +634,8 @@ class Code(object):
         Generate a random IMEI (International Mobile Station
         Equipment Identity).
         :return: IMEI.
+        :Example:
+            897181639771492.
         """
         mask = '###############'
         return self._generator(mask)
@@ -636,7 +643,9 @@ class Code(object):
     def pin(self):
         """
         Generate a random PIN code.
-        :return:
+        :return: PIN code.
+        :Example:
+            5241.
         """
         return self._generator(mask='####')
 
@@ -1965,3 +1974,57 @@ class Hardware(object):
             Nokia Lumia 920.
         """
         return choice(common.PHONE_MODELS)
+
+
+class ClothingSizes(object):
+    """
+    Clothing sizes.
+    """
+
+    @staticmethod
+    def international():
+        """
+        Get a random size in international format.
+        :return: Clothing size.
+        :Example:
+            XXL.
+        """
+        sizes = (
+            "L", "M", "S",
+            "XL", "XS", "XXL",
+            "XXS", "XXXL"
+        )
+
+        return choice(sizes)
+
+    @staticmethod
+    def european():
+        """
+        Generate a random clothing size in European format.
+        :return: Clothing size.
+        :Example:
+            42
+        """
+        size = choice([i for i in range(40, 62) if i % 2 == 0])
+        return size
+
+    @staticmethod
+    def custom(minimum=40, maximum=62, even=False):
+        """
+        Generate clothing size using custom format.
+        :param minimum: Min value.
+        :param maximum: Max value
+        :param even: Only even numbers.
+        :param odd: Only odd numbers.
+        :return: Clothing size.
+        :Example:
+            44
+        """
+        mi, ma = minimum, maximum
+
+        if even:
+            sizes = [i for i in range(mi, ma) if i % 2 == 0]
+        else:
+            sizes = [_ for _ in range(mi, ma)]
+
+        return choice(sizes)
