@@ -170,32 +170,37 @@ class Address(object):
             5 Central Sideline.
         """
         fmt_of_country = {
-            'ru': '{2} {1} {0}',
-            'fr': '{0} {2} {1}',
-            'sv': '{} {}',
-            'de': '{} {}',
-            'fi': '{} {}',
-            'nl': '{} {}',
-            'is': '{} {}',
-            'int': '{} {} {}'
+            "da": "{0} {1}",
+            "de": "{0} {1}",
+            "en": "{0} {1} {2}",
+            "es": "{0}, {1}",
+            "fi": "{0} {1}",
+            "fr": "{0} {2} {1}",
+            "is": "{0} {1}",
+            "it": "{0} {1} {2}",
+            "nl": "{0} {1}",
+            "no": "{0} {1}",
+            "pt": "{0} {1}",
+            "pt-br": "{0} {1}",
+            "ru": "{2} {1} {0}",
+            "sv": "{0} {1}"
         }
 
-        def _f():
-            if self.locale in ('sv', 'de', 'fi', 'nl', 'is'):
-                return fmt_of_country[self.locale].format(
-                    self.street_name(),
-                    self.street_number()
-                )
-
-            # specific format for some locales
-
-            return fmt_of_country['int'].format(
-                self.street_number(),
+        short_fmt = (
+            'da', 'de', 'es', 'fi', 'is',
+            'nl', 'no', 'sv', 'pt', 'pt-br'
+        )
+        if self.locale in short_fmt:
+            return fmt_of_country[self.locale].format(
                 self.street_name(),
-                self.street_suffix()
+                self.street_number()
             )
 
-        return _f()
+        return fmt_of_country[self.locale].format(
+            self.street_number(),
+            self.street_name(),
+            self.street_suffix()
+        )
 
     def state(self, iso_code=False):
         """
@@ -387,7 +392,7 @@ class Text(object):
 
     def text(self, quantity=5):
         """
-        Get random strings. Not only lorem ipsum.
+        Generate text.
 
         :param quantity: Quantity of sentences.
         :returns: Text.
@@ -463,9 +468,6 @@ class Text(object):
         Get a random naughty string form file.
 
         Authors of big-list-of-naughty-strings is Max Woolf and contributors.
-        Thank you to all who have contributed in big-list-of-naughty-strings.
-        Repository: https://github.com/minimaxir/big-list-of-naughty-strings
-
         :returns: The list of naughty strings.
         """
         import os.path as op
@@ -2019,7 +2021,6 @@ class ClothingSizes(object):
         :param minimum: Min value.
         :param maximum: Max value
         :param even: Only even numbers.
-        :param odd: Only odd numbers.
         :return: Clothing size.
         :Example:
             44
