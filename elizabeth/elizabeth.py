@@ -472,10 +472,10 @@ class Text(object):
         """
         import os.path as op
 
-        with open(op.join(PATH + '/etc', 'naughty_strings'), 'r') as f:
-            naughty_list = [x.strip(u'\n') for x in f.readlines()]
+        with open(op.join(PATH + '/etc', 'naughty'), 'r') as f:
+            ns = [x.strip(u'\n') for x in f.readlines()]
 
-        return naughty_list
+        return ns
 
     def quote(self):
         """

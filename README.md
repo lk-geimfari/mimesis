@@ -9,12 +9,12 @@
 
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/lk-geimfari/elizabeth/master/other/elizabeth.png">
+  <img src="https://raw.githubusercontent.com/lk-geimfari/elizabeth/master/other/elizabeth_1.png">
   <br>
 </p>
 
 
-Elizabeth is a library to generate dummy data. It's very useful when you need to bootstrap your database. Elizabeth doesn't have any dependencies.
+**Elizabeth** is a library to generate dummy data. It's very useful when you need to bootstrap your database. Elizabeth doesn't have any dependencies.
 
 At this moment a library has 14 supported locales:
 
@@ -109,21 +109,23 @@ return patient_card
 
 ## Available data providers
 
-- [Address](https://github.com/lk-geimfari/elizabeth/blob/master/elizabeth/elizabeth.py#L117) - Address data (street name, street suffix etc.).
-- [Personal](https://github.com/lk-geimfari/elizabeth/blob/master/elizabeth/elizabeth.py#L718) - Personal data (name, surname, age, email etc.).
-- [Text](https://github.com/lk-geimfari/elizabeth/blob/master/elizabeth/elizabeth.py#L376) - Text data (sentence, title etc.).
-- [Network](https://github.com/lk-geimfari/elizabeth/blob/master/elizabeth/elizabeth.py#L1454) - Network data (IPv4, IPv6, MAC address) etc.
-- [Datetime](https://github.com/lk-geimfari/elizabeth/blob/master/elizabeth/elizabeth.py#L1333) - Datetime (day_of_week, month, year etc.).
-- [File](https://github.com/lk-geimfari/elizabeth/blob/master/elizabeth/elizabeth.py#L1516) - File data (extension etc.)
-- [Science](https://github.com/lk-geimfari/elizabeth/blob/master/elizabeth/elizabeth.py#L1546) - Scientific data (scientist, math_formula etc.).
-- [Development](https://github.com/lk-geimfari/elizabeth/blob/master/elizabeth/elizabeth.py#L1612) - Data for developers (version, programming language etc.).
-- [Food](https://github.com/lk-geimfari/elizabeth/blob/master/elizabeth/elizabeth.py#L1737) - Information on food (vegetables, fruits, drinks, measurements etc.).
-- [Hardware](https://github.com/lk-geimfari/elizabeth/blob/master/elizabeth/elizabeth.py#L1817) - The data about the hardware (resolution, cpu, graphics etc.).
-- [Numbers](https://github.com/lk-geimfari/elizabeth/blob/master/elizabeth/elizabeth.py#L304) - Numerical data (floats, primes, digit etc.).
-- [Business](https://github.com/lk-geimfari/elizabeth/blob/master/elizabeth/elizabeth.py#L654) - Business data (company, company_type, copyright etc.).
-- [Code](https://github.com/lk-geimfari/elizabeth/blob/master/elizabeth/elizabeth.py#L578) - Codes (ISBN, EAN, IMEI etc.).
-- [ClothingSizes](https://github.com/lk-geimfari/elizabeth/blob/master/elizabeth/elizabeth.py#L1980) - Clothing sizes (international sizes, european etc.).
-- [Generic](https://github.com/lk-geimfari/elizabeth/blob/master/elizabeth/elizabeth.py#L42) - All at one.
+| Provider          | Description                                                  |
+| -------------     |:-------------                                                |
+| `Address`         | *Address data (street name, street suffix etc.)*             |
+| `Business`        | *Business data (company, company_type, copyright etc.)*      |
+| `Code`            | *Codes (ISBN, EAN, IMEI etc.).*                              |
+| `ClothingSizes`   | *Clothing sizes (international sizes, european etc.)*        |
+| `Datetime`        | *Datetime (day_of_week, month, year etc.)*                   |
+| `Development`     | *Data for developers (version, programming language etc.)*   |
+| `File`            | *File data (extension etc.)*                                 |
+| `Food`            | *Information on food (vegetables, fruits, measurements etc.)*|
+| `Personal`        | *Personal data (name, surname, age, email etc.)*             |
+| `Text`            | *Text data (sentence, title etc.)*                           |
+| `Network`         | *Network data (IPv4, IPv6, MAC address) etc*                 |
+| `Science`         | *Scientific data (scientist, math_formula etc.)*             |
+| `Hardware`        | *The data about the hardware (resolution, cpu, graphics etc.)*|
+| `Numbers`         | *Numerical data (floats, primes, digit etc.)*                 |
+| `Generic`         | *All at one*                                                  |
 
 
 ## Examples
