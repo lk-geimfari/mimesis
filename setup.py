@@ -6,10 +6,12 @@ setup(
     name='elizabeth',
     version=elizabeth.__version__,
     packages=['elizabeth'],
-    keywords=['fake', 'data', 'testing',
-              'generate', 'faker', 'elizabeth',
-              'bootstrap', 'database', 'generic'
-              ],
+    keywords=[
+        'fake', 'data', 'testing',
+        'generate', 'faker', 'elizabeth',
+        'bootstrap', 'database', 'generic',
+        'church', 'dummy'
+    ],
     package_data={
         'elizabeth': [
             'data/*/*',
@@ -19,8 +21,8 @@ setup(
     license='MIT',
     author=elizabeth.__author__,
     author_email='likid.geimfari@gmail.com',
-    description='Elizabeth is a library that help you generate fake data.',
-    long_description="Generic is a library to generate fake data."
+    description='Elizabeth (ex Church) is a library that help you generate fake data.',
+    long_description="Elizabeth (ex Church) is a library to generate fake data."
                      "It's very useful when you need to bootstrap "
                      "your database.",
     zip_safe=False,

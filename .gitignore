@@ -85,7 +85,5 @@ ENV/
 .idea/
 .idea/workspace.xml
 
-#mac Os
+# macOS
 .DS_Store
-examples/sample.py
-examples/f.txt
