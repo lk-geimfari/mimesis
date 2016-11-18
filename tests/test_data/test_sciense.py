@@ -20,7 +20,7 @@ class ScienceTestCase(DummyCase):
 
     def test_chemical_element(self):
         result = self.generic.science.chemical_element(name_only=True)
-        self.assertGreater(len(result), 2)
+        self.assertTrue(len(result) >= 2)
 
         result = self.generic.science.chemical_element(name_only=False)
         self.assertIsInstance(result, dict)
