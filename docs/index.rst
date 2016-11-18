@@ -6,7 +6,7 @@
 Welcome to Elizabeth's documentation!
 ==================================
 
-.. image:: https://raw.githubusercontent.com/lk-geimfari/elizabeth/master/other/elizabeth.png
+.. image:: https://raw.githubusercontent.com/lk-geimfari/elizabeth/master/other/elizabeth_1.png
 
 .. |build| image:: https://travis-ci.org/lk-geimfari/elizabeth.svg?branch=master
     :target: https://travis-ci.org/lk-geimfari/elizabeth
@@ -15,18 +15,23 @@ Welcome to Elizabeth's documentation!
 
 |build|
 
-Elizabeth is a library to generate fake data. It's very useful when you need to bootstrap your database. Elizabeth doesn't have any dependencies.
+Elizabeth is a library to generate dummy data. It's very useful when you need to bootstrap your database. Elizabeth doesn't have any dependencies.
 
-At this moment a library has 9 supported locales:
+At this moment a library has 14 supported locales:
 
+    - Dansk (da)
+    - Deutsch (de)
     - English (en)
     - Español (es)
-    - Deutsch (de)
+    - Suomi (fi)
     - Français (fr)
+    - Íslenska (is)
     - Italiano (it)
+    - Nederlands (nl)
+    - Norsk (no)
+    - Português (pt)
     - Português (pt-br)
     - Русский  (ru)
-    - Norsk (no)
     - Svenska (sv)
 
 Installation
@@ -34,31 +39,34 @@ Installation
 
 .. code:: bash
 
-	➜  ~ git clone https://github.com/lk-geimfari/elizabeth.git
-	➜  ~ cd elizabeth/
-	➜  ~ python3 setup.py install
+    ➜  ~ git clone https://github.com/lk-geimfari/elizabeth.git
+    ➜  ~ cd elizabeth/
+    ➜  ~ python3 setup.py install
 
 or
 
 .. code:: bash
 
-	➜  ~  pip install elizabeth
+    ➜  ~  pip install elizabeth
 
 Testing
 -------
 
 .. code:: bash
 
-	➜  ~ cd elizabeth/
-	➜  ~ python3 -m unittest
+    ➜  ~ cd elizabeth/
+    ➜  ~ python3 -m unittest
+or
+
+.. code:: bash
+    ➜  ~ ./run_tests.sh
 
 Usage
 -----
 
 .. code:: python
-
-    # It's very useful when you need to bootstrap your database.
-    # Just create a static method that will generate fake data:
+    # ...
+    # Model from some Flask project.
 
     class Patient(db.Model):
         id = db.Column(db.Integer, primary_key=True)

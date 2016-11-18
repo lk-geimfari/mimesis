@@ -6,6 +6,8 @@ Personal
 
 .. code:: python
 
+	from elizabeth import Personal
+
 	person = Personal('en')
 
 	# Get a random integer value from range.
@@ -115,6 +117,10 @@ Personal
 	mask = +1-### ### ## ##
 	# Output: +1-763 001 13 22
 	telephone = person.telephone(mask)
+
+	# Generate identifier by mask
+	# Output: 8492-436-03/11
+	id = person.identifier(mask="####-###-##/##")
 
 
 Datetime
