@@ -24,7 +24,7 @@ from string import (
     ascii_uppercase
 )
 
-import elizabeth._common as common
+from elizabeth.data import common
 from .utils import pull, PATH
 
 __all__ = [
@@ -35,7 +35,8 @@ __all__ = [
     'Food', 'Hardware',
     'Numbers', 'Business',
     'Code', 'ClothingSizes',
-    'Generic'
+    'Internet', 'Transport'
+                'Generic'
 ]
 
 
@@ -63,6 +64,8 @@ class Generic(object):
         self.hardware = Hardware()
         self.network = Network()
         self.clothing_sizes = ClothingSizes()
+        self.internet = Internet()
+        self.transport = Transport()
 
     # TODO: Rewrite all @property as a dynamic.
     @property
@@ -224,11 +227,11 @@ class Address(object):
         :Example:
             389213
         """
-        _ = Personal.identifier
+        _ = Code.custom_code
 
         codes = {
             'ru': _(mask='######'),
-            'nl': _(mask='####', suffix=True),
+            'nl': _(mask='#### @@'),
             'is': _(mask='###'),
             'pt': _(mask='####'),
             'no': _(mask='####'),
@@ -513,51 +516,6 @@ class Text(object):
         return color_code
 
     @staticmethod
-    def emoji():
-        """
-        Get a random EMOJI shortcut code.
-
-        :returns: Emoji code.
-        :Example:
-            :kissing:
-        """
-        return choice(common.EMOJI)
-
-    @staticmethod
-    def image_placeholder(width='400', height='300'):
-        url = 'http://placehold.it/{0}x{1}'.format(width, height)
-        return url
-
-    @staticmethod
-    def hashtags(quantity=4, category='general'):
-        """
-        Create a list of hashtags (for Instagram, Twitter etc.)
-
-        :param quantity: The quantity of hashtags.
-        :param category: The category of hashtag.
-
-        Available categories:
-          1. general - #nice, #day, #tree etc.
-          2. girls - #lady, #beautiful, #girlsday etc.
-          3. boys - #men, #guys, #dude etc.
-          4. love - #love, #romantic, #relationship etc.
-          5. friends - #crazy, #party etc.
-          6. family - #fam, #sister, #brother etc.
-          7. nature - #nature, #tree, #blue, #sky etc.
-          8. travel - #natureaddict, #sunset etc.
-          9. cars - #car, #ride, #drive etc.
-          10. sport - #soccer, #game etc.
-          11. tumblr - #perfect, #tumblr etc.
-
-        :returns: The list of hashtags.
-        :Example:
-            ['#love', '#sky', '#nice']
-        """
-        k = category.lower()
-        tags = [choice(common.HASHTAGS[k]) for _ in range(int(quantity))]
-        return tags
-
-    @staticmethod
     def weather(scale='c', minimum=-30, maximum=40):
         """
         Generate a random temperature value.
@@ -581,8 +539,30 @@ class Code(object):
     """Class that provides methods for generating codes (isbn, asin & etc.)"""
 
     def __init__(self, locale):
-        self._generator = Personal.identifier
         self.locale = locale
+
+    @staticmethod
+    def custom_code(mask="@###", char='@', digit='#'):
+        """
+        Generate custom code using ascii uppercase and random integers.
+
+        :param mask: Mask of code.
+        :param char: Placeholder for characters.
+        :param digit: Placeholder for digits.
+        :return: Custom code.
+        :Example::
+            5673-AGFR-SFSFF-1423-4/AD.
+        """
+        code = ''
+        for p in mask:
+            if p == char:
+                code += choice(ascii_uppercase)
+            elif p == digit:
+                code += str(randint(0, 9))
+            else:
+                code += p
+
+        return code
 
     def isbn(self, fmt='isbn-10'):
         """
@@ -617,7 +597,7 @@ class Code(object):
         else:
             mask = mask.format('#')
 
-        return self._generator(mask)
+        return self.custom_code(mask=mask)
 
     def ean(self, fmt='ean-13'):
         """
@@ -630,7 +610,7 @@ class Code(object):
         """
         mask = '########' if fmt == 'ean-8' \
             else '#############'
-        return self._generator(mask)
+        return self.custom_code(mask=mask)
 
     def imei(self):
         """
@@ -641,7 +621,7 @@ class Code(object):
             897181639771492.
         """
         mask = '###############'
-        return self._generator(mask)
+        return self.custom_code(mask=mask)
 
     def pin(self):
         """
@@ -650,7 +630,7 @@ class Code(object):
         :Example:
             5241.
         """
-        return self._generator(mask='####')
+        return self.custom_code(mask='####')
 
 
 class Business(object):
@@ -836,34 +816,6 @@ class Personal(object):
         return '{}{}'.format(username.lower(), randint(2, 9999))
 
     @staticmethod
-    def twitter(gender='female'):
-        """
-        Get a random twitter user.
-
-        :param gender: Gender of user.
-        :returns: URL to user.
-        :Example:
-            http://twitter.com/some_user
-        """
-        url = "http://twitter.com/{0}"
-        username = Personal.username(gender)
-        return url.format(username)
-
-    @staticmethod
-    def facebook(gender='female'):
-        """
-        Generate a random facebook user.
-
-        :param gender: Gender of user.
-        :returns: URL to user.
-        :Example:
-            https://facebook.com/some_user
-        """
-        url = 'https://facebook.com/{0}'
-        username = Personal.username(gender)
-        return url.format(username)
-
-    @staticmethod
     def password(length=8, algorithm=''):
         """
         Generate a password or hash of password.
@@ -905,41 +857,6 @@ class Personal(object):
         email = name + choice(common.EMAIL_DOMAINS)
         return email.strip()
 
-    def home_page(self, gender='female'):
-        """
-        Generate a random home page.
-
-        :param gender: Gender of author of site.
-        :returns: Random home page.
-        :Example:
-            http://www.font6.info
-        """
-        url = 'http://www.' + self.username(gender)
-        domain = choice(common.DOMAINS)
-        return '{}{}'.format(url, domain)
-
-    @staticmethod
-    def subreddit(nsfw=False, full_url=False):
-        """
-        Get a random subreddit from list.
-
-        :param nsfw: NSFW subreddit.
-        :param full_url: Full URL address.
-        :returns: Subreddit or URL to subreddit.
-        :Example:
-            https://www.reddit.com/r/flask/
-        """
-        url = 'http://www.reddit.com'
-        if not nsfw:
-            if not full_url:
-                return choice(common.SUBREDDITS)
-            else:
-                return url + choice(common.SUBREDDITS)
-
-        nsfw = choice(common.SUBREDDITS_NSFW)
-        result = url + nsfw if full_url else nsfw
-        return result
-
     @staticmethod
     def bitcoin():
         """
@@ -976,7 +893,7 @@ class Personal(object):
         :Example:
             4455 5299 1152 2450
         """
-        _ = Personal.identifier
+        _ = Code.custom_code
 
         mask = "{0} #### #### ####"
 
@@ -1298,41 +1215,28 @@ class Personal(object):
         return url
 
     @staticmethod
-    def vehicle():
-        """
-        Get a random vehicle.
-
-        :returns: A vehicle.
-        :Example:
-            Tesla Model S.
-        """
-        return choice(common.THE_VEHICLES)
-
-    @staticmethod
-    def identifier(mask='##-##/##', placeholder='#', suffix=False):
+    def identifier(mask='##-##/##', suffix=False):
         """
         Generate a random identifier by mask. With this method you can
         generate any identifiers that you need. Simply select the mask
-        that you need.
+        that you need. Here '@' is a placeholder of characters and '#'
+        is placeholder of digits.
 
         :param mask: The mask.
-        :param placeholder: Placeholder.
-        :param suffix: Add characters to id.
-        :return: Identifier
+        :param suffix: Add characters to ID.
+        :return: An identifier.
         :Example:
             07-97/04
         """
         suffixes = [a + b for a, b in product(ascii_uppercase, repeat=2)]
         sfx = ' %s' % choice(suffixes)
 
-        identifier = ''
-        for s in mask:
-            identifier += str(randint(1, 9)) \
-                if s == placeholder else s
-        if suffix:
-            return identifier + sfx
+        _ = Code.custom_code
 
-        return identifier
+        if suffix:
+            return _(mask=mask) + sfx
+
+        return _(mask=mask)
 
 
 class Datetime(object):
@@ -1503,19 +1407,6 @@ class Network(object):
                    ]
         mac = map(lambda x: "%02x" % x, mac_hex)
         return ':'.join(mac)
-
-    @staticmethod
-    def user_agent():
-        """
-        Get a random user agent.
-
-        :returns: User agent.
-        :Example:
-            Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:15.0)
-            Gecko/20100101 Firefox/15.0.1
-        """
-        agent = choice(common.USER_AGENTS)
-        return agent
 
 
 class File(object):
@@ -2033,3 +1924,177 @@ class ClothingSizes(object):
             sizes = [_ for _ in range(mi, ma)]
 
         return choice(sizes)
+
+
+class Internet(object):
+    """Class for generate the internet data.
+    """
+
+    @staticmethod
+    def emoji():
+        """
+        Get a random EMOJI shortcut code.
+
+        :returns: Emoji code.
+        :Example:
+            :kissing:
+        """
+        return choice(common.EMOJI)
+
+    @staticmethod
+    def image_placeholder(width='400', height='300'):
+        url = 'http://placehold.it/{0}x{1}'.format(width, height)
+        return url
+
+    @staticmethod
+    def hashtags(quantity=4, category='general'):
+        """
+        Create a list of hashtags (for Instagram, Twitter etc.)
+
+        :param quantity: The quantity of hashtags.
+        :param category: The category of hashtag.
+
+        Available categories:
+          1. general - #nice, #day, #tree etc.
+          2. girls - #lady, #beautiful, #girlsday etc.
+          3. boys - #men, #guys, #dude etc.
+          4. love - #love, #romantic, #relationship etc.
+          5. friends - #crazy, #party etc.
+          6. family - #fam, #sister, #brother etc.
+          7. nature - #nature, #tree, #blue, #sky etc.
+          8. travel - #natureaddict, #sunset etc.
+          9. cars - #car, #ride, #drive etc.
+          10. sport - #soccer, #game etc.
+          11. tumblr - #perfect, #tumblr etc.
+
+        :returns: The list of hashtags.
+        :Example:
+            ['#love', '#sky', '#nice']
+        """
+        k = category.lower()
+        tags = [choice(common.HASHTAGS[k]) for _ in range(int(quantity))]
+        return tags
+
+    @staticmethod
+    def twitter(gender='female'):
+        """
+        Get a random twitter user.
+
+        :param gender: Gender of user.
+        :returns: URL to user.
+        :Example:
+            http://twitter.com/some_user
+        """
+        url = "http://twitter.com/{0}"
+        username = Personal.username(gender)
+        return url.format(username)
+
+    @staticmethod
+    def facebook(gender='female'):
+        """
+        Generate a random facebook user.
+
+        :param gender: Gender of user.
+        :returns: URL to user.
+        :Example:
+            https://facebook.com/some_user
+        """
+        url = 'https://facebook.com/{0}'
+        username = Personal.username(gender)
+        return url.format(username)
+
+    @staticmethod
+    def home_page(gender='female'):
+        """
+        Generate a random home page.
+
+        :param gender: Gender of author of site.
+        :returns: Random home page.
+        :Example:
+            http://www.font6.info
+        """
+        url = 'http://www.' + Personal.username(gender)
+        domain = choice(common.DOMAINS)
+        return '{}{}'.format(url, domain)
+
+    @staticmethod
+    def subreddit(nsfw=False, full_url=False):
+        """
+        Get a random subreddit from list.
+
+        :param nsfw: NSFW subreddit.
+        :param full_url: Full URL address.
+        :returns: Subreddit or URL to subreddit.
+        :Example:
+            https://www.reddit.com/r/flask/
+        """
+        url = 'http://www.reddit.com'
+        if not nsfw:
+            if not full_url:
+                return choice(common.SUBREDDITS)
+            else:
+                return url + choice(common.SUBREDDITS)
+
+        nsfw = choice(common.SUBREDDITS_NSFW)
+        result = url + nsfw if full_url else nsfw
+        return result
+
+    @staticmethod
+    def user_agent():
+        """
+        Get a random user agent.
+
+        :returns: User agent.
+        :Example:
+            Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:15.0)
+            Gecko/20100101 Firefox/15.0.1
+        """
+        agent = choice(common.USER_AGENTS)
+        return agent
+
+
+class Transport(object):
+    """Class that provides dummy data about transport.
+    """
+
+    def __init__(self):
+        self._model = Code.custom_code
+
+    def truck(self, model_mask='#### @@'):
+        """
+        Generate a truck model.
+
+        :param model_mask: Mask of truck model. Here '@' is a
+        placeholder of characters and '#' is a placeholder of digits.
+        :return: Dummy truck model.
+        :Example:
+            Caledon-966O.
+        """
+        model = self._model(mask=model_mask, )
+        truck = choice(common.TRUCKS)
+        return '%s-%s' % (truck, model)
+
+    @staticmethod
+    def car():
+        """
+        Get a random vehicle.
+
+        :returns: A vehicle.
+        :Example:
+            Tesla Model S.
+        """
+        return choice(common.CAR)
+
+    def airplane(self, model_mask='###'):
+        """
+        Generate a dummy airplane model.
+        :param model_mask: Mask of truck model. Here '@' is a
+        placeholder of characters and '#' is a placeholder of digits.
+        :return:
+        :Example:
+            Boeing 727.
+        """
+        model = self._model(mask=model_mask)
+        plane = choice(common.AIRPLANES)
+
+        return '%s %s' % (plane, model)

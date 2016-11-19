@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from elizabeth import _common as common
-
 from tests.test_data import DummyCase
 
 
@@ -50,17 +48,6 @@ class TextTestCase(DummyCase):
     def test_hex_color(self):
         result = self.generic.text.hex_color()
         self.assertIn('#', result)
-
-    def test_emoji(self):
-        result = self.generic.text.emoji()
-        self.assertIn(result, common.EMOJI)
-
-    def test_hashtags(self):
-        result = self.generic.text.hashtags(quantity=5)
-        self.assertEqual(len(result), 5)
-
-        result = self.generic.text.hashtags(quantity=1, category='general')
-        self.assertIn(result[0], common.HASHTAGS['general'])
 
     def test_weather(self):
         result = self.generic.text.weather(scale='c').split(' ')

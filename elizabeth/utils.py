@@ -2,7 +2,7 @@ import functools
 import json
 from os.path import abspath, join, dirname
 
-from .exceptions import UnsupportedLocale
+from elizabeth.exceptions import UnsupportedLocale
 
 PATH = abspath(join(dirname(__file__), 'data'))
 

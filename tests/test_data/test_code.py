@@ -25,3 +25,12 @@ class CodeTestCase(DummyCase):
     def test_pin(self):
         result = self.generic.code.pin()
         self.assertTrue(len(result) == 4)
+
+    def test_custom_code(self):
+        result = self.generic.code.custom_code(mask="@###", char='@', digit='#')
+        self.assertTrue(len(result) == 4)
+
+    def test_custom_code_args(self):
+        result = self.generic.code.custom_code(mask="@@@-###-@@@").split('-')
+        a, b, c = result
+        self.assertTrue(a.isalpha() and c.isalpha() and b.isdigit())

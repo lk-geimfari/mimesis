@@ -2,7 +2,7 @@
 
 from unittest import TestCase
 
-import elizabeth._common as common
+import elizabeth.data.common as common
 from elizabeth.elizabeth import File
 
 

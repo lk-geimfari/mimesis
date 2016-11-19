@@ -3,7 +3,6 @@
 import re
 from unittest import TestCase
 
-from elizabeth._common import USER_AGENTS
 from elizabeth.elizabeth import Network
 
 
@@ -41,7 +40,3 @@ class NetworkTestCase(TestCase):
         result = self.net.mac_address()
         mac_pattern = r'^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$'
         self.assertTrue(re.match(mac_pattern, result))
-
-    def test_user_agent(self):
-        result = self.net.user_agent()
-        self.assertIn(result, USER_AGENTS)

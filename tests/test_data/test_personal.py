@@ -2,8 +2,7 @@
 
 import re
 
-import elizabeth._common as common
-
+import elizabeth.data.common as common
 from tests.test_data import DummyCase
 
 
@@ -50,20 +49,6 @@ class PersonalTestCase(DummyCase):
         result = self.generic.personal.username()
         self.assertTrue(re.match(r'^[a-zA-Z0-9_.-]+$', result))
 
-    def test_twitter(self):
-        result = self.generic.personal.twitter(gender='female')
-        self.assertIsNotNone(result)
-
-        _result = self.generic.personal.twitter(gender='male')
-        self.assertIsNotNone(_result)
-
-    def test_facebook(self):
-        result = self.generic.personal.facebook(gender='female')
-        self.assertIsNotNone(result)
-
-        _result = self.generic.personal.facebook(gender='female')
-        self.assertIsNotNone(_result)
-
     def test_wmid(self):
         result = self.generic.personal.wmid()
         self.assertEqual(len(result), 12)
@@ -97,25 +82,6 @@ class PersonalTestCase(DummyCase):
         self.assertTrue(
             re.match(r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)",
                      result))
-
-    def test_home_page(self):
-        result = self.generic.personal.home_page()
-        self.assertTrue(re.match(r'http[s]?://(?:[a-zA-Z]|[0-9]|'
-                                 r'[$-_@.&+]|[!*\(\),]|'
-                                 r'(?:%[0-9a-fA-F][0-9a-fA-F]))+', result))
-
-    def test_subreddit(self):
-        result = self.generic.personal.subreddit()
-        self.assertIn(result, common.SUBREDDITS)
-
-        full_result = self.generic.personal.subreddit(full_url=True)
-        self.assertTrue(len(full_result) > 20)
-
-        result_nsfw = self.generic.personal.subreddit(nsfw=True)
-        self.assertIn(result_nsfw, common.SUBREDDITS_NSFW)
-
-        full_result = self.generic.personal.subreddit(nsfw=True, full_url=True)
-        self.assertTrue(len(full_result) > 20)
 
     def test_bitcoin(self):
         result = self.generic.personal.bitcoin()
@@ -205,10 +171,6 @@ class PersonalTestCase(DummyCase):
         result = self.generic.personal.avatar()
         self.assertTrue(len(result) > 20)
 
-    def test_vehicle(self):
-        result = self.generic.personal.vehicle()
-        self.assertIn(result, common.THE_VEHICLES)
-
     def test_identifier(self):
         result = self.generic.personal.identifier()
         mask = '##-##/##'
@@ -232,4 +194,3 @@ class PersonalTestCase(DummyCase):
 
         result4 = self.generic.personal.title(type_='academic')
         self.assertIsNotNone(result4)
-

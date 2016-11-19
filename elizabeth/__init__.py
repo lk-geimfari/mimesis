@@ -11,11 +11,12 @@ from .elizabeth import (
     Address, Personal, Network, Datetime,
     Development, File, Science, Numbers,
     Food, Hardware, Text, Business, Code,
-    ClothingSizes, Generic
+    ClothingSizes, Internet, Transport,
+    Generic
 )
 
 # Data for setup.py
-__version__ = '0.2.8'
+__version__ = '0.2.9'
 __author__ = 'Likid Geimfari'
 
 __all__ = ['Address', 'Personal',
@@ -25,5 +26,6 @@ __all__ = ['Address', 'Personal',
            'Food', 'Hardware',
            'Numbers', 'Business',
            'Code', 'ClothingSizes',
+           'Internet', 'Transport'
            'Generic',
            ]
