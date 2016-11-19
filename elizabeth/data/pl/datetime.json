@@ -1,0 +1,21 @@
+{
+  "day": {
+	"name": [
+	  "Test"
+	],
+	"abbr": [
+	  "Test"
+	]
+  },
+  "month": {
+	"name": [
+	  "Test"
+	],
+	"abbr": [
+	  "Test"
+	]
+  },
+  "periodicity": [
+	"Test"
+  ]
+}

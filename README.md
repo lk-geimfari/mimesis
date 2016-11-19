@@ -18,9 +18,9 @@
 
 At this moment a library has 14 supported locales:
 
-| F     |🇩🇰 |🇩🇪|🇺🇸|🇪🇸 |🇫🇮|🇫🇷|🇮🇸|🇮🇹|🇳🇱|🇳🇴|🇸🇪|🇷🇺|🇵🇹 |🇧🇷 |
-|---    |--- |--- |---|--- |--- |--- |---|---|--- |---|--- |---|---|---  |
-| Code  |[da](http://bit.ly/2g50Hpf)|[de](http://bit.ly/2fDVsPl)|[en](http://bit.ly/2g3wYfe)|[es](http://bit.ly/2grHSRg)*|[fi](http://bit.ly/2g3tzxe)*|[fr](http://bit.ly/2fpp7cc)|[is](http://bit.ly/2f8Lem2)*|[it](http://bit.ly/2g4DAOl)|[nl](http://bit.ly/2fNqFNF)*|[no](http://bit.ly/2eOUErG)|[sv](http://bit.ly/2eOZV2D)|[ru](http://bit.ly/2fNsUk5)|[pt](http://bit.ly/2fNpopS)* |[pt-br](http://bit.ly/2grKChn)|
+| F     |🇩🇰 |🇩🇪|🇺🇸|🇪🇸 |🇫🇮|🇫🇷|🇮🇸|🇮🇹|🇳🇱|🇳🇴|🇸🇪|🇷🇺|🇵🇹 |🇧🇷 |🇵🇱|
+|---    |--- |--- |---|--- |--- |--- |---|---|--- |---|--- |---|---|---  |---  |
+| Code  |[da](http://bit.ly/2g50Hpf)|[de](http://bit.ly/2fDVsPl)|[en](http://bit.ly/2g3wYfe)|[es](http://bit.ly/2grHSRg)*|[fi](http://bit.ly/2g3tzxe)*|[fr](http://bit.ly/2fpp7cc)|[is](http://bit.ly/2f8Lem2)*|[it](http://bit.ly/2g4DAOl)|[nl](http://bit.ly/2fNqFNF)*|[no](http://bit.ly/2eOUErG)|[sv](http://bit.ly/2eOZV2D)|[ru](http://bit.ly/2fNsUk5)|[pt](http://bit.ly/2fNpopS)* |[pt-br](http://bit.ly/2grKChn)|pl*|
 
 `* - not completely`
 
