@@ -1,4 +1,4 @@
-Below is a list of people who help us do a `Elizabeth` better:
+Below is a list of people who help us do `Elizabeth` better:
 
 - [lk-geimfari](https://github.com/lk-geimfari) - Inventor of `elizabeth` (ex Church).
 - [auyer](https://github.com/auyer) - Contributor (`pr-br`).
