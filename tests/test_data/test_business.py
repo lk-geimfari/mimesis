@@ -28,3 +28,14 @@ class BusinessTestCase(DummyCase):
     def test_currency_sio(self):
         result = self.generic.business.currency_iso()
         self.assertIn(result, common.CURRENCY)
+
+    def test_price(self):
+        currencies = ('kr', '€', 'R$', '₽', '$')
+        result = self.generic.business.price(minimum=100.00, maximum=1999.99)
+        price, symbol = result.split(' ')
+        self.assertTrue((float(price) >= 100.00) and (float(price) <= 2000))
+        self.assertIn(symbol, currencies)
+
+    def test_discount(self):
+        result = self.generic.business.discount(5, 25)
+        self.assertIsNotNone(result)
