@@ -19,13 +19,22 @@ from .elizabeth import (
 __version__ = '0.2.9'
 __author__ = 'Likid Geimfari'
 
-__all__ = ['Address', 'Personal',
-           'Text', 'Network',
-           'Datetime', 'File',
-           'Science', 'Development',
-           'Food', 'Hardware',
-           'Numbers', 'Business',
-           'Code', 'ClothingSizes',
-           'Internet', 'Transport'
-           'Generic',
-           ]
+__all__ = [
+    'Address',
+    'Personal',
+    'Text',
+    'Network',
+    'Datetime',
+    'File',
+    'Science',
+    'Development',
+    'Food',
+    'Hardware',
+    'Numbers',
+    'Business',
+    'Code',
+    'ClothingSizes',
+    'Internet',
+    'Transport',
+    'Generic',
+]

@@ -28,15 +28,23 @@ from elizabeth.data import common
 from .utils import pull, PATH
 
 __all__ = [
-    'Address', 'Personal',
-    'Text', 'Network',
-    'Datetime', 'File',
-    'Science', 'Development',
-    'Food', 'Hardware',
-    'Numbers', 'Business',
-    'Code', 'ClothingSizes',
-    'Internet', 'Transport'
-                'Generic'
+    'Address',
+    'Personal',
+    'Text',
+    'Network',
+    'Datetime',
+    'File',
+    'Science',
+    'Development',
+    'Food',
+    'Hardware',
+    'Numbers',
+    'Business',
+    'Code',
+    'ClothingSizes',
+    'Internet',
+    'Transport',
+    'Generic'
 ]
 
 
@@ -401,7 +409,7 @@ class Text(object):
         :param letter_case: Letter case.
         :return: Alphabet (type list).
         """
-        letter_case = 'uppercase' if\
+        letter_case = 'uppercase' if \
             not letter_case else letter_case
 
         alpha = self.data['alphabet'][letter_case]
