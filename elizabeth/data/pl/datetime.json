@@ -1,21 +1,61 @@
 {
   "day": {
 	"name": [
-	  "Test"
+	  "Czwartek",
+	  "Niedziela",
+	  "Piątek",
+	  "Poniedziałek",
+	  "Sobota",
+	  "Wtorek",
+	  "Środa"
 	],
 	"abbr": [
-	  "Test"
+	  "Czw.",
+	  "Niedz.",
+	  "Pn.",
+	  "Pt.",
+	  "Sob.",
+	  "Wt.",
+	  "Śr."
 	]
   },
   "month": {
 	"name": [
-	  "Test"
+	  "Czerwiec",
+	  "Grudzień",
+	  "Kwiecień",
+	  "Lipiec",
+	  "Listopad",
+	  "Luty",
+	  "Maj",
+	  "Marzec",
+	  "Październik",
+	  "Sierpień",
+	  "Styczeń",
+	  "Wrzesień"
 	],
 	"abbr": [
-	  "Test"
+	  "Czerw.",
+	  "Grudz.",
+	  "Kwiec.",
+	  "Lip.",
+	  "Listop.",
+	  "Luty",
+	  "Maj",
+	  "Mar.",
+	  "Pazdz.",
+	  "Sierp.",
+	  "Stycz.",
+	  "Wrzes."
 	]
   },
   "periodicity": [
-	"Test"
+	"Codziennie",
+	"Często",
+	"Miesięczny",
+	"Nigdy",
+	"Pewnego razu",
+	"Rocznie",
+	"Rzadko"
   ]
 }

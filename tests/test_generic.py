@@ -15,6 +15,7 @@ from tests.test_data.test_sciense import ScienceTestCase
 from tests.test_data.test_text import TextTestCase
 from tests.test_data.test_code import CodeTestCase
 
+
 class ElizabethBase(DummyCase):
     def setUp(self):
         self.generic = Generic(self.LANG)
@@ -108,3 +109,7 @@ class IcelandicTestCase(ElizabethLocaleBase, TestCase):
 
 class PortugueseTestCase(ElizabethLocaleBase, TestCase):
     LANG = 'pt'
+
+
+class PolishTestCase(ElizabethLocaleBase, TestCase):
+    LANG = 'pl'

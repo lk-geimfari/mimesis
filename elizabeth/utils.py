@@ -49,6 +49,10 @@ SUPPORTED_LOCALES = {
         "name": "Norwegian",
         "name_local": "Norsk"
     },
+    "pl": {
+        'name': "Polish",
+        'name_local': "Polski",
+    },
     "pt": {
         "name": "Portuguese",
         "name_local": "Português"
@@ -96,6 +100,8 @@ def pull(file, locale='en'):
     | it - Italian                 | (data/it)    |
     +------------------------------+--------------+
     | is - Icelandic               | (data/is)    |
+    +------------------------------+--------------+
+    | pl - Polish                  | (data/pl)    |
     +------------------------------+--------------+
     | pt - Portuguese              | (data/pt)    |
     +------------------------------+--------------+

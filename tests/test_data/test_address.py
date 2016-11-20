@@ -36,6 +36,9 @@ class AddressTestCase(DummyCase):
         elif self.generic.address.locale == 'nl':
             nl_pattern = r'^[1-9][0-9]{3}\s?[a-zA-Z]{2}$'
             self.assertTrue(re.match(nl_pattern, result))
+        elif self.generic.address.locale == 'pl':
+            pl_pattern = r'\d{2}-\d{3}'
+            self.assertTrue(re.match(pl_pattern, result))
         elif self.generic.address.locale in ('pt', 'no'):
             self.assertTrue(re.match(r'[0-9]{4}$', result))
         elif self.generic.address.locale == 'da':
