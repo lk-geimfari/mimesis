@@ -13,7 +13,6 @@ from hashlib import (
     sha1, sha256,
     sha512, md5
 )
-from itertools import product
 from random import (
     choice, sample,
     randint, uniform,
@@ -1331,6 +1330,11 @@ class Datetime(object):
         d = date(randint(minimum, maximum), randint(1, 12), randint(1, 28))
         pattern = '%d{0}%m{0}%Y %m:%d' if with_time else '%d{0}%m{0}%Y'
         return d.strftime(pattern.format(sep))
+
+    @staticmethod
+    def time():
+        # TODO: Write it.
+        return '{h}:{m}'
 
     @staticmethod
     def day_of_month():
