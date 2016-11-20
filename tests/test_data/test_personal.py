@@ -186,11 +186,5 @@ class PersonalTestCase(DummyCase):
         result = self.generic.personal.title(type_='typical')
         self.assertIsNotNone(result)
 
-        result2 = self.generic.personal.title(type_='aristocratic')
-        self.assertIsNotNone(result2)
-
-        result3 = self.generic.personal.title(type_='religious')
-        self.assertIsNotNone(result3)
-
         result4 = self.generic.personal.title(type_='academic')
         self.assertIsNotNone(result4)

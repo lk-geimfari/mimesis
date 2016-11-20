@@ -5092,18 +5092,6 @@
 		"Miss",
 		"Madam"
 	  ],
-	  "aristocratic": [
-		"Princess",
-		"Empress",
-		"Queen",
-		"Tsarina",
-		"Duchess"
-	  ],
-	  "religious": [
-		"Abbess",
-		"Sister",
-		"Mother"
-	  ],
 	  "academic": [
 		"Dr.",
 		"Prof.",
@@ -5129,24 +5117,6 @@
 		"Mr.",
 		"Sir",
 		"Master"
-	  ],
-	  "aristocratic": [
-		"Prince",
-		"Lord",
-		"Emperor",
-		"King",
-		"Tsar",
-		"Duke",
-		"Honorable"
-	  ],
-	  "religious": [
-		"Abbot",
-		"Brother",
-		"Pastor",
-		"Father",
-		"Fr.",
-		"Pastor",
-		"Cardinal"
 	  ],
 	  "academic": [
 		"Dr.",

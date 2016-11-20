@@ -5468,18 +5468,18 @@
 	"Test"
   ],
   "university": [
-	"Test"
+	"Háskóli Íslands",
+	"Háskólinn á Akureyri",
+	"Háskólinn á Bifröst",
+	"Háskólinn í Reykjavík",
+	"Hólaskóli",
+	"Landbúnaðarháskóli Íslands"
   ],
   "title": {
 	"female": {
 	  "typical": [
-		"Test"
-	  ],
-	  "aristocratic": [
-		"Test"
-	  ],
-	  "religious": [
-		"Test"
+		"Frú",
+		"Ungfrú"
 	  ],
 	  "academic": [
 		"Test"
@@ -5487,13 +5487,7 @@
 	},
 	"male": {
 	  "typical": [
-		"Test"
-	  ],
-	  "aristocratic": [
-		"Test"
-	  ],
-	  "religious": [
-		"Test"
+		"Herra"
 	  ],
 	  "academic": [
 		"Test"

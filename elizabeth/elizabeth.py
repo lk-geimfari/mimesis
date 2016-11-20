@@ -821,11 +821,7 @@ class Personal(object):
         :Example:
             Smith.
         """
-        if not isinstance(gender, str):
-            raise TypeError('surname takes only string type')
-
-        # In Russian Federation and Iceland surnames
-        # separated by gender.
+        # In Russia and Iceland surnames separated by gender.
         diff_surnames = ('ru', 'is')
 
         if self.locale in diff_surnames:
@@ -844,10 +840,6 @@ class Personal(object):
         +===================+=========================+
         | typical           |      Mr./Mrs.           |
         +-------------------+-------------------------+
-        | aristocratic      |      Prince/Princess    |
-        +-------------------+-------------------------+
-        | religious         |      Brother/Sister     |
-        +-------------------+-------------------------+
         | academic          |      PhD, Dr.           |
         +-------------------+-------------------------+
         :return: The title.
@@ -857,8 +849,8 @@ class Personal(object):
         if not type_:
             type_ = 'typical'
 
-        titulus = self.data['title'][gender][type_]
-        return titulus
+        t = self.data['title'][gender][type_]
+        return t
 
     def full_name(self, gender='female', reverse=False):
         """
