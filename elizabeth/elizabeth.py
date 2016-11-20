@@ -47,83 +47,6 @@ __all__ = [
 ]
 
 
-class Generic(object):
-    """
-    A lazy initialization of locale for all classes that have locales.
-    """
-
-    def __init__(self, locale):
-        """
-        :param locale: Current locale.
-        """
-        self.locale = locale
-        self._personal = Personal
-        self._address = Address
-        self._datetime = Datetime
-        self._business = Business
-        self._text = Text
-        self._food = Food
-        self._science = Science
-        self._code = Code
-        self.file = File()
-        self.numbers = Numbers()
-        self.development = Development()
-        self.hardware = Hardware()
-        self.network = Network()
-        self.clothing_sizes = ClothingSizes()
-        self.internet = Internet()
-        self.transport = Transport()
-
-    # TODO: Rewrite all @property as a dynamic.
-    @property
-    def personal(self):
-        if callable(self._personal):
-            self._personal = self._personal(self.locale)
-        return self._personal
-
-    @property
-    def address(self):
-        if callable(self._address):
-            self._address = self._address(self.locale)
-        return self._address
-
-    @property
-    def datetime(self):
-        if callable(self._datetime):
-            self._datetime = self._datetime(self.locale)
-        return self._datetime
-
-    @property
-    def business(self):
-        if callable(self._business):
-            self._business = self._business(self.locale)
-        return self._business
-
-    @property
-    def text(self):
-        if callable(self._text):
-            self._text = self._text(self.locale)
-        return self._text
-
-    @property
-    def food(self):
-        if callable(self._food):
-            self._food = self._food(self.locale)
-        return self._food
-
-    @property
-    def science(self):
-        if callable(self._science):
-            self._science = self._science(self.locale)
-        return self._science
-
-    @property
-    def code(self):
-        if callable(self._code):
-            self._code = self._code(self.locale)
-        return self._code
-
-
 class Address(object):
     """
     Class for generate fake address data.
@@ -2139,3 +2062,80 @@ class Transport(object):
         plane = choice(common.AIRPLANES)
 
         return '%s %s' % (plane, model)
+
+
+class Generic(object):
+    """
+    A lazy initialization of locale for all classes that have locales.
+    """
+
+    def __init__(self, locale):
+        """
+        :param locale: Current locale.
+        """
+        self.locale = locale
+        self._personal = Personal
+        self._address = Address
+        self._datetime = Datetime
+        self._business = Business
+        self._text = Text
+        self._food = Food
+        self._science = Science
+        self._code = Code
+        self.file = File()
+        self.numbers = Numbers()
+        self.development = Development()
+        self.hardware = Hardware()
+        self.network = Network()
+        self.clothing_sizes = ClothingSizes()
+        self.internet = Internet()
+        self.transport = Transport()
+
+    # TODO: Rewrite all @property as dynamics.
+    @property
+    def personal(self):
+        if callable(self._personal):
+            self._personal = self._personal(self.locale)
+        return self._personal
+
+    @property
+    def address(self):
+        if callable(self._address):
+            self._address = self._address(self.locale)
+        return self._address
+
+    @property
+    def datetime(self):
+        if callable(self._datetime):
+            self._datetime = self._datetime(self.locale)
+        return self._datetime
+
+    @property
+    def business(self):
+        if callable(self._business):
+            self._business = self._business(self.locale)
+        return self._business
+
+    @property
+    def text(self):
+        if callable(self._text):
+            self._text = self._text(self.locale)
+        return self._text
+
+    @property
+    def food(self):
+        if callable(self._food):
+            self._food = self._food(self.locale)
+        return self._food
+
+    @property
+    def science(self):
+        if callable(self._science):
+            self._science = self._science(self.locale)
+        return self._science
+
+    @property
+    def code(self):
+        if callable(self._code):
+            self._code = self._code(self.locale)
+        return self._code
