@@ -21,8 +21,7 @@ class BusinessTestCase(DummyCase):
 
     def test_copyright(self):
         result = self.generic.business.copyright()
-        copyright_symbol = '©'
-        self.assertIn(copyright_symbol, result)
+        self.assertIn('©', result)
         self.assertTrue(len(result) > 4)
 
     def test_currency_sio(self):

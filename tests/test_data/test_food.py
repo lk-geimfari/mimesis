@@ -9,7 +9,7 @@ class FoodTestCase(DummyCase):
         self.assertIn(result, self.generic.food._data['vegetables'])
 
     def test_fruit(self):
-        result = self.generic.food.fruit_or_berry()
+        result = self.generic.food.fruit()
         self.assertIn(result, self.generic.food._data['fruits'])
 
     def test_dish(self):

@@ -27,6 +27,10 @@ class AddressTestCase(DummyCase):
         result = self.generic.address.state()
         self.assertIn(result, self.generic.address.data['state']['name'])
 
+    def test_state_args(self):
+        result = self.generic.address.state(abbr=True)
+        self.assertIn(result, self.generic.address.data['state']['abbr'])
+
     def test_postal_code(self):
         result = self.generic.address.postal_code()
         if self.generic.address.locale == 'ru':
@@ -52,7 +56,7 @@ class AddressTestCase(DummyCase):
         self.assertTrue(self.generic.address.data['country']['name'], result)
 
         result_iso = self.generic.address.country(iso_code=True)
-        self.assertIn(result_iso, common.COUNTRY_ISO_CODE)
+        self.assertIn(result_iso, common.COUNTRIES_ISO)
 
     def test_city(self):
         result = self.generic.address.city()

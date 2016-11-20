@@ -33,7 +33,7 @@ class ElizabethBase(DummyCase):
         self.assertIsNotNone(result)
 
     def test_base_food(self):
-        result = self.generic.food.fruit_or_berry()
+        result = self.generic.food.fruit()
         self.assertIsNotNone(result)
 
     def test_base_science(self):

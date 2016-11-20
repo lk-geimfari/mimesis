@@ -182,6 +182,11 @@ class PersonalTestCase(DummyCase):
         self.assertEqual(len(_id), 2)
         self.assertEqual(len(sfx), 2)
 
+    def test_identifier_args(self):
+        result = self.generic.personal.identifier(suffix=True)
+        suffix = result.split(' ')[1]
+        self.assertTrue(suffix.isalpha())
+
     def test_title(self):
         result = self.generic.personal.title(type_='typical')
         self.assertIsNotNone(result)

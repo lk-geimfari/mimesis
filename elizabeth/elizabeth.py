@@ -167,7 +167,7 @@ class Address(object):
 
         :returns: Street suffix.
         :Example:
-            Street.
+            Alley.
         """
         suffixes = self.data['street']['suffix']
         return choice(suffixes)
@@ -180,51 +180,31 @@ class Address(object):
         :Example:
             5 Central Sideline.
         """
-        fmt_of_country = {
-            "da": "{0} {1}",
-            "de": "{0} {1}",
-            "en": "{0} {1} {2}",
-            "es": "{0}, {1}",
-            "fi": "{0} {1}",
-            "fr": "{0} {2} {1}",
-            "is": "{0} {1}",
-            "it": "{0} {1} {2}",
-            "nl": "{0} {1}",
-            "no": "{0} {1}",
-            "pl": "{2} {1} {0}",
-            "pt": "{0} {1}",
-            "pt-br": "{0} {1}",
-            "ru": "{2} {1} {0}",
-            "sv": "{0} {1}"
-        }
+        fmt = common.ADDRESS_FMT
 
-        short_fmt = (
-            'da', 'de', 'es', 'fi', 'is',
-            'nl', 'no', 'sv', 'pt', 'pt-br'
-        )
-        if self.locale in short_fmt:
-            return fmt_of_country[self.locale].format(
+        if self.locale in fmt['shorted']:
+            return fmt[self.locale].format(
                 self.street_name(),
                 self.street_number()
             )
 
-        return fmt_of_country[self.locale].format(
+        return fmt[self.locale].format(
             self.street_number(),
             self.street_name(),
             self.street_suffix()
         )
 
-    def state(self, iso_code=False):
+    def state(self, abbr=False):
         """
         Get a random states or subject of country.
 
-        :param iso_code: If True then return ISO (ISO 3166-2)
+        :param abbr: If True then return ISO (ISO 3166-2)
         code of state/region/province/subject.
         :returns: State of current country.
         :Example:
             Alabama (for locale `en`).
         """
-        key = 'iso_code' if iso_code else 'name'
+        key = 'abbr' if abbr else 'name'
         states = self.data['state'][key]
         return choice(states)
 
@@ -264,7 +244,7 @@ class Address(object):
             Russia.
         """
         if iso_code:
-            return choice(common.COUNTRY_ISO_CODE)
+            return choice(common.COUNTRIES_ISO)
 
         countries = self.data['country']['name']
         return choice(countries)
@@ -635,7 +615,7 @@ class Code(object):
             else '#############'
         return self.custom_code(mask=mask)
 
-    def imei(self):
+    def imei(self, mask='###############'):
         """
         Generate a random IMEI (International Mobile Station
         Equipment Identity).
@@ -643,17 +623,16 @@ class Code(object):
         :Example:
             897181639771492.
         """
-        mask = '###############'
         return self.custom_code(mask=mask)
 
-    def pin(self):
+    def pin(self, mask='####'):
         """
         Generate a random PIN code.
         :return: PIN code.
         :Example:
             5241.
         """
-        return self.custom_code(mask='####')
+        return self.custom_code(mask=mask)
 
 
 class Business(object):
@@ -662,15 +641,18 @@ class Business(object):
     """
 
     def __init__(self, locale='en'):
+        """
+        :param locale: Current locale.
+        """
         self.locale = locale
         self.data = pull('business.json', self.locale)
 
     def company_type(self, abbr=False):
         """
-        Get a random company type.
+        Get a random type of business entity.
 
-        :param abbr: if True then abbreviated company type.
-        :returns: Company type.
+        :param abbr: If True then return abbreviated company type.
+        :returns: Types of business entity.
         :Example:
             Incorporated (Inc. when abbr=True).
         """
@@ -684,29 +666,31 @@ class Business(object):
 
         :returns: Company name.
         :Example:
-            Gamma Systems
+            Gamma Systems.
         """
         companies = self.data['company']['name']
         return choice(companies)
 
-    def copyright(self, minimum=1990, maximum=2016, without_date=False):
+    def copyright(self, date=True, **kwargs):
         """
         Generate a random copyright.
 
-        :param minimum: Foundation date
-        :param maximum: Current date
-        :param without_date: When True will be returned
-            copyright without date.
-        :returns: Copyright of company.
+        :param date: When True will be returned copyright with date.
+        :param kwargs: Keyword arguments. Minimum and Maximum of date range.
+        :returns: Dummy copyright of company.
         :Example:
             © 1990-2016 Komercia, Inc.
         """
-        founded = randint(int(minimum), int(maximum))
-        company = self.company()
+        mi = int(kwargs.get('minimum', 1990))
+        ma = int(kwargs.get('maximum', 2016))
+
+        founded = randint(mi, ma - 1)
         ct = self.company_type(abbr=True)
-        if not without_date:
-            return '© {}-{} {}, {}'.format(founded, maximum, company, ct)
-        return '© {}, {}'.format(company, ct)
+
+        if date:
+            return '© %s-%s %s, %s' % (founded, ma, self.company(), ct)
+
+        return '© %s, %s' % (self.company(), ct)
 
     @staticmethod
     def currency_iso():
@@ -806,9 +790,6 @@ class Personal(object):
         :Example:
             John Abbey (gender='male').
         """
-        if not isinstance(gender, str):
-            raise TypeError('name takes only string type')
-
         names = self.data['names'][gender]
         return choice(names)
 
@@ -822,14 +803,14 @@ class Personal(object):
             Smith.
         """
         # In Russia and Iceland surnames separated by gender.
-        diff_surnames = ('ru', 'is')
+        sep_surnames = ('ru', 'is')
 
-        if self.locale in diff_surnames:
+        if self.locale in sep_surnames:
             return choice(self.data['surnames'][gender])
 
         return choice(self.data['surnames'])
 
-    def title(self, gender='female', type_=None):
+    def title(self, gender='female', type_='typical'):
         """
         Get a random title (prefix/suffix) for name.
 
@@ -846,9 +827,6 @@ class Personal(object):
         :Example:
             PhD.
         """
-        if not type_:
-            type_ = 'typical'
-
         t = self.data['title'][gender][type_]
         return t
 
@@ -1214,67 +1192,33 @@ class Personal(object):
         """
         return choice(common.FAVORITE_MUSIC_GENRE)
 
-    @property
-    def _telephone_mask(self):
-        """
-        It's internal method.
-        Return a mask of telephone for current locale.
-
-        :returns: A mask of telephone.
-        :Example:
-            +7-(###)-###-##-## (for locale ru).
-        """
-        masks = {
-            'da': '+45 ### ### ###',
-            'de': '+49-##-###-#####',
-            'en': '+1-(###)-###-####',
-            'es': '+34 91# ## ## ##',
-            'fr': '+33-#########',
-            'fi': '+358 ## ### ####',
-            'is': '+354 ### ####',
-            'it': '+39 6 ########',
-            'nl': '+31 ## ### ####',
-            'no': '+47 #### ####',
-            'pl': '+48 ## ### ####',
-            'pt': '+351 # #### ####',
-            'pt-br': '+55 (##) ####-####',
-            'ru': '+7-(###)-###-##-##',
-            'sv': '+46 ### ### ###',
-            'default': '+#-(###)-###-####'
-        }
-
-        if self.locale in masks:
-            return masks[self.locale]
-        else:
-            return masks['default']
-
     def telephone(self, mask=None, placeholder='#'):
         """
         Generate a random phone number.
 
         :param mask: Mask for formatting number.
-        :param placeholder: A Placeholder for a mask.
-            Default placeholder is sharp (#).
+        :param placeholder: A placeholder for a mask (default is #).
         :returns: Phone number.
         :Example:
             +7-(963)-409-11-22.
         """
         if not mask:
-            mask = self._telephone_mask
+            masks = common.TELEPHONE_MASKS
+            if self.locale in masks:
+                mask = masks[self.locale]
+            else:
+                mask = masks['default']
 
-        phone_number = ''
-        for i in mask:
-            phone_number += str(randint(0, 9)) \
-                if i == placeholder else i
-        return phone_number
+        _ = Code.custom_code
+
+        return _(mask=mask, digit=placeholder)
 
     @staticmethod
     def avatar():
         """
         Get a random link to avatar.
 
-        :returns: Link to avatar that hosted on GitHub in
-            repository of elizabeth.
+        :returns: Link to avatar that hosted in repository of elizabeth.
         :Example:
             https://raw.githubusercontent.com/lk-geimfari/
             elizabeth/master/other/avatars/4.png
@@ -1296,13 +1240,13 @@ class Personal(object):
         :Example:
             07-97/04
         """
-        suffixes = [a + b for a, b in product(ascii_uppercase, repeat=2)]
-        sfx = ' %s' % choice(suffixes)
-
         _ = Code.custom_code
 
         if suffix:
-            return _(mask=mask) + sfx
+            # Because in custom_code placeholder
+            #  for characters is '@'.
+            mask += ' @@'
+            return _(mask=mask)
 
         return _(mask=mask)
 
@@ -1379,10 +1323,10 @@ class Datetime(object):
         :param sep: A separator for date. Default is '-'.
         :param minimum: Minimum value of year.
         :param maximum: Maximum value of year.
-        :param with_time: if it's True then will be added random time.
+        :param with_time: Add random time if True.
         :returns: Formatted date and time.
         :Example:
-            20-03-2016 03:20.
+            20-03-2016 03:20 (with_time=True).
         """
         d = date(randint(minimum, maximum), randint(1, 12), randint(1, 28))
         pattern = '%d{0}%m{0}%Y %m:%d' if with_time else '%d{0}%m{0}%Y'
@@ -1485,26 +1429,45 @@ class File(object):
     @staticmethod
     def extension(file_type='text'):
         """
-        Get a random extension from list.
+        Get a random file extension from list.
 
-        :param file_type: The type of extension. Default is text.
+        :param file_type: The type of extension.
 
-        All supported types:
-            1. source - '.py', '.rb', '.cpp' and other.
-            2. text = '.doc', '.log', '.rtf' and other.
-            3. data = '.csv', '.dat', '.pps' and other.
-            4. audio = '.mp3', '.flac', '.m4a' and other.
-            5. video = '.mp4', '.m4v', '.avi' and other.
-            6. image = '.jpeg', '.jpg', '.png' and other.
-            7. executable = '.exe', '.apk', '.bat' and other.
-            8. compressed = '.zip', '.7z', '.tar.xz' and other.
+        All supported file types:
+        +------------------------------+---------------+
+        | File type                    | Examples      |
+        +==============================+===============+
+        | Source file                  | .py, .erl, go |
+        +------------------------------+---------------+
+        | Text file                    | .doc, .txt    |
+        +------------------------------+---------------+
+        | Data file                    | .csv, .dat    |
+        +------------------------------+---------------+
+        | Audio file                   | .mp3, .flac   |
+        +------------------------------+---------------+
+        | Video file                   | .avi, .mp4    |
+        +------------------------------+---------------+
+        | Image file                   | .jpg, .png    |
+        +------------------------------+---------------+
+        | Executable file              | .exe, .apk    |
+        +------------------------------+---------------+
+        | Compressed file              | .zip, .war    |
+        +------------------------------+---------------+
 
         :returns: Extension of a file.
         :Example:
-            .py (When file_type='source')
+            .py (file_type='source').
         """
         k = file_type.lower()
         return choice(common.EXTENSIONS[k])
+
+    @staticmethod
+    def mime_type():
+        """
+        Get a random mime type from list.
+        :return: Mime type.
+        """
+        return choice(common.MIME_TYPES)
 
 
 class Science(object):
@@ -1678,7 +1641,7 @@ class Development(object):
 
         :returns: The name of OS.
         :Example:
-            Gentoo (Yes, i know that is not OS).
+            Gentoo (Yes, I know that is not OS).
         """
         return choice(common.OS)
 
@@ -1721,9 +1684,9 @@ class Food(object):
         vegetables = self._data['vegetables']
         return choice(vegetables)
 
-    def fruit_or_berry(self):
+    def fruit(self):
         """
-        Get a random fruit_or_berry name.
+        Get a random name of fruit or berry .
 
         :returns: Fruit.
         :Example:
@@ -1920,12 +1883,18 @@ class Hardware(object):
             ASUS Intel® Core i3 3rd Generation 3.50 GHz/1920x1200/12″/
             512GB HDD(7200 RPM)/DDR2-4GB/Intel® Iris™ Pro Graphics 6200.
         """
-        full = '{0} {1}-{2} CPU @ {3}/{4}/{5}/{6}/{7}-{8}/{9}.'.format(
-            self.manufacturer(), self.cpu(),
-            self.generation(abbr=True), self.cpu_frequency(),
-            self.resolution(), self.screen_size(),
-            self.ssd_or_hdd(), self.ram_type(),
-            self.ram_size(), self.graphics()
+        pattern = '{0} {1}-{2} CPU @ {3}/{4}/{5}/{6}/{7}-{8}/{9}.'
+        full = pattern.format(
+            self.manufacturer(),
+            self.cpu(),
+            self.generation(abbr=True),
+            self.cpu_frequency(),
+            self.resolution(),
+            self.screen_size(),
+            self.ssd_or_hdd(),
+            self.ram_type(),
+            self.ram_size(),
+            self.graphics()
         )
         return full
 
