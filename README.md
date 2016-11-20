@@ -5,7 +5,6 @@
 [![HitCount](https://hitt.herokuapp.com/lk-geimfar/church.svg)](https://github.com/lk-geimfari/elizabeth)
 [![Code Health](https://landscape.io/github/lk-geimfari/elizabeth/master/landscape.svg?style=flat)](https://landscape.io/github/lk-geimfari/elizabeth/master)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/d773f20efa67430683bb24fff5af9db8)](https://www.codacy.com/app/likid-geimfari/church)
-[![Issues](https://img.shields.io/github/issues/lk-geimfari/church.svg)](https://github.com/lk-geimfari/elizabeth/issues)
 
 
 <p align="center">
