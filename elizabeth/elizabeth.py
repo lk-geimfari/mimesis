@@ -232,7 +232,7 @@ class Address(object):
 
         codes = {
             'ru': _(mask='######'),
-            'nl': _(mask='#### @@'),
+            'nl': _(mask='1### @@'),
             'is': _(mask='###'),
             'pl': _(mask='##-###'),
             'pt': _(mask='####'),
