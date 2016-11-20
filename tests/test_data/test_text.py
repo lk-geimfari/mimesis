@@ -4,6 +4,11 @@ from tests.test_data import DummyCase
 
 
 class TextTestCase(DummyCase):
+    def test_alphabet(self):
+        result = self.generic.text.alphabet()
+        self.assertIsInstance(result, list)
+        self.assertIsNotNone(result)
+
     def test_sentence(self):
         result = self.generic.text.sentence()
         self.assertIn(result.strip(), self.generic.text.data['text'])

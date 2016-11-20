@@ -5081,5 +5081,13 @@
   ],
   "quotes": [
 	"Test"
-  ]
+  ],
+  "alphabet": {
+	"uppercase": [
+	  "Test"
+	],
+	"lowercase": [
+	  "Test"
+	]
+  }
 }

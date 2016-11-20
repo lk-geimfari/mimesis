@@ -4208,5 +4208,9 @@
 	  "Äpärä",
 	  "Äpärälapsi"
 	]
+  },
+  "alphabet": {
+	"uppercase": ["Test"],
+	"lowercase": ["Test"]
   }
 }

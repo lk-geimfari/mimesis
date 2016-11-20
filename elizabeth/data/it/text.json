@@ -3150,5 +3150,13 @@
 	"È tempo per lei di andare a casa",
 	"È un uomo che farà ciò che vuole",
 	"È un uomo che si è fatto da solo"
-  ]
+  ],
+  "alphabet": {
+	"uppercase": [
+	  "Test"
+	],
+	"lowercase": [
+	  "Test"
+	]
+  }
 }

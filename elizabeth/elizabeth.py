@@ -395,6 +395,18 @@ class Text(object):
         self.locale = locale
         self.data = pull('text.json', self.locale)
 
+    def alphabet(self, letter_case=None):
+        """
+        Get an alphabet for current locale.
+        :param letter_case: Letter case.
+        :return: Alphabet (type list).
+        """
+        letter_case = 'uppercase' if\
+            not letter_case else letter_case
+
+        alpha = self.data['alphabet'][letter_case]
+        return alpha
+
     def text(self, quantity=5):
         """
         Generate text.

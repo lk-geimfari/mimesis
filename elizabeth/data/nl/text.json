@@ -9639,5 +9639,13 @@
 	  "Vuile teringslijer",
 	  "Zuig mijn ballen"
 	]
+  },
+  "alphabet": {
+	"uppercase": [
+	  "Test"
+	],
+	"lowercase": [
+	  "Test"
+	]
   }
 }
