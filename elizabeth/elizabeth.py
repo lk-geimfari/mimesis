@@ -1846,6 +1846,7 @@ class ClothingSizes(object):
     def international():
         """
         Get a random size in international format.
+        
         :return: Clothing size.
         :Example:
             XXL.
@@ -1862,6 +1863,7 @@ class ClothingSizes(object):
     def european():
         """
         Generate a random clothing size in European format.
+        
         :return: Clothing size.
         :Example:
             42
@@ -1873,6 +1875,7 @@ class ClothingSizes(object):
     def custom(minimum=40, maximum=62, even=False):
         """
         Generate clothing size using custom format.
+        
         :param minimum: Min value.
         :param maximum: Max value
         :param even: Only even numbers.
@@ -2052,6 +2055,7 @@ class Transport(object):
     def airplane(self, model_mask='###'):
         """
         Generate a dummy airplane model.
+        
         :param model_mask: Mask of truck model. Here '@' is a
         placeholder of characters and '#' is a placeholder of digits.
         :return:
