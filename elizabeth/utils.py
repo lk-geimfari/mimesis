@@ -124,7 +124,8 @@ def pull(file, locale='en'):
     if locale not in SUPPORTED_LOCALES:
         raise UnsupportedLocale("Locale %s does not supported" % locale)
 
-    with open(join(PATH + '/' + locale, file), 'r') as f:
+    #Needs explicit encoding for Windows
+    with open(join(PATH + '/' + locale, file), 'r', encoding='utf8') as f:
         data = json.load(f)
 
     return data
