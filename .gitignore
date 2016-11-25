@@ -89,3 +89,7 @@ elizabeth/data/__pychache__
 
 # macOS
 .DS_Store
+
+# Development files.
+file.txt
+utility.py

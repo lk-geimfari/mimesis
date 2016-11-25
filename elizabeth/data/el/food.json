@@ -1,0 +1,21 @@
+{
+  "dishes": [
+    "Test"
+  ],
+  "spices": [
+    "Test",
+    "Test"
+  ],
+  "drinks": [
+    "Test"
+  ],
+  "fruits": [
+    "Test"
+  ],
+  "vegetables": [
+    "Test"
+  ],
+  "measurement": [
+	"Test"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "quotes": [
+	"Test"
+  ],
+  "color": [
+	"Test"
+  ],
+  "words": {
+	"bad": [
+	  "Test"
+	],
+	"normal": []
+  },
+  "text": [
+	"Test"
+  ],
+  "alphabet": {
+	"uppercase": [],
+	"lowercase": []
+  }
+}
