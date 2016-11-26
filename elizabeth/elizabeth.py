@@ -6,20 +6,26 @@
 """
 import array
 from datetime import (
-    date, timedelta,
+    date,
+    timedelta,
     datetime
 )
 from hashlib import (
-    sha1, sha256,
-    sha512, md5
+    sha1,
+    sha256,
+    sha512,
+    md5
 )
 from random import (
-    choice, sample,
-    randint, uniform,
+    choice,
+    sample,
+    randint,
+    uniform,
     random
 )
 from string import (
-    digits, ascii_letters,
+    digits,
+    ascii_letters,
     ascii_uppercase
 )
 
@@ -1897,7 +1903,7 @@ class Internet(object):
     @staticmethod
     def emoji():
         """
-        Get a random EMOJI shortcut code.
+        Get a random emoji shortcut code.
 
         :returns: Emoji code.
         :Example:
@@ -1916,24 +1922,38 @@ class Internet(object):
         Create a list of hashtags (for Instagram, Twitter etc.)
 
         :param quantity: The quantity of hashtags.
-        :param category: The category of hashtag.
+        :param category: The category of hashtags.
 
         Available categories:
-          1. general - #nice, #day, #tree etc.
-          2. girls - #lady, #beautiful, #girlsday etc.
-          3. boys - #men, #guys, #dude etc.
-          4. love - #love, #romantic, #relationship etc.
-          5. friends - #crazy, #party etc.
-          6. family - #fam, #sister, #brother etc.
-          7. nature - #nature, #tree, #blue, #sky etc.
-          8. travel - #natureaddict, #sunset etc.
-          9. cars - #car, #ride, #drive etc.
-          10. sport - #soccer, #game etc.
-          11. tumblr - #perfect, #tumblr etc.
+        +----------------------+-----------------------+
+        | Category             | Examples              |
+        +==============================+===============+
+        | general              | #nice, #day, #tree    |
+        +------------------------------+---------------+
+        | girls                | #beautiful, #beauty   |
+        +------------------------------+---------------+
+        | love                 | #love, #romantic      |
+        +------------------------------+---------------+
+        | boys                 | #guys, #dude          |
+        +------------------------------+---------------+
+        | friends              |  #crazy, #party       |
+        +------------------------------+---------------+
+        | family               |  #fam, #sister        |
+        +------------------------------+---------------+
+        | nature               | #nature, #tree        |
+        +------------------------------+---------------+
+        | travel               | #nature, #sunset      |
+        +------------------------------+---------------+
+        | cars                 | #car, #ride, #drive   |
+        +------------------------------+---------------+
+        | sport                | #soccer, #game        |
+        +------------------------------+---------------+
+        | tumblr               | #perfect, #tumblr     |
+        +----------------------+-----------------------+
 
         :returns: The list of hashtags.
         :Example:
-            ['#love', '#sky', '#nice']
+            ['#love', '#sky', '#nice'].
         """
         k = category.lower()
         tags = [choice(common.HASHTAGS[k]) for _ in range(int(quantity))]
@@ -2139,3 +2159,5 @@ class Generic(object):
         if callable(self._code):
             self._code = self._code(self.locale)
         return self._code
+
+

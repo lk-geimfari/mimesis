@@ -49,9 +49,10 @@ class ElizabethBase(DummyCase):
         self.assertIsNotNone(result)
 
 
-class ElizabethLocaleBase(ElizabethBase, AddressTestCase, BusinessTestCase,
-                          DatetimeTestCase, FoodTestCase, PersonalTestCase,
-                          ScienceTestCase, TextTestCase, CodeTestCase):
+class ElizabethLocaleBase(
+    ElizabethBase, AddressTestCase, BusinessTestCase,
+    DatetimeTestCase, FoodTestCase, PersonalTestCase,
+    ScienceTestCase, TextTestCase, CodeTestCase):
     pass
 
 

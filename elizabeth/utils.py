@@ -131,7 +131,7 @@ def pull(file, locale='en'):
 
 
 # TODO: Refactoring
-def _push(**kwargs):
+def __push(**kwargs):
     """
     Dict to json file.
     :param kwargs: Kwargs
