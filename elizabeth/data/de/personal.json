@@ -1997,18 +1997,23 @@
   "title": {
 	"female": {
 	  "typical": [
-		"Test"
+		"Fräulein",
+		"Frau",
+		"Dr."
 	  ],
 	  "academic": [
-		"Test"
+		"Dr.",
+		"Dr. rer. nat."
 	  ]
 	},
 	"male": {
 	  "typical": [
-		"Test"
+		"Herr",
+		"Junker"
 	  ],
 	  "academic": [
-		"Test"
+		"Dr.",
+		"Dr. rer. nat."
 	  ]
 	}
   }
