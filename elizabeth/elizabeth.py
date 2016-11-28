@@ -1671,18 +1671,6 @@ class Food(object):
         drinks = self._data['drinks']
         return choice(drinks)
 
-    def measurement(self):
-        """
-        Generate measure.
-        :return: Measure.
-        :Example:
-            1/16 teaspoon.
-        """
-        a, b = randint(1, 3), randint(2, 16)
-
-        measure = choice(self._data['measurement'])
-        return '%s/%s %s' % (a, b, measure)
-
 
 class Hardware(object):
     """

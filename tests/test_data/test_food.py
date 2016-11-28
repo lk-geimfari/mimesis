@@ -23,7 +23,3 @@ class FoodTestCase(DummyCase):
     def test_spices(self):
         result = self.generic.food.spices()
         self.assertIn(result, self.generic.food._data['spices'])
-
-    def test_measurement(self):
-        result = self.generic.food.measurement()
-        self.assertIsNotNone(result)
