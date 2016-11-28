@@ -4,8 +4,8 @@
 :software_license: MIT, see LICENSES for more details.
 :repository: https://github.com/lk-geimfari/elizabeth
 """
-import sys
 import os
+import sys
 import array
 from datetime import (
     date,
@@ -36,22 +36,22 @@ from .utils import pull, PATH
 
 __all__ = [
     'Address',
-    'Personal',
-    'Text',
-    'Network',
+    'Business',
+    'ClothingSizes',
+    'Code',
     'Datetime',
-    'File',
-    'Science',
     'Development',
+    'File',
     'Food',
     'Hardware',
-    'Numbers',
-    'Business',
-    'Code',
-    'ClothingSizes',
     'Internet',
-    'Transport',
+    'Network',
+    'Numbers',
     'Path',
+    'Personal',
+    'Science',
+    'Text',
+    'Transport',
     'Generic'
 ]
 
@@ -2100,6 +2100,8 @@ class Path(object):
     And More: https://en.wikipedia.org/wiki/Home_directory
     """
 
+    # TODO: Add support for MS Windows.
+
     def __init__(self):
         self.__p = Personal('en')
 
@@ -2217,6 +2219,7 @@ class Generic(object):
         self.clothing_sizes = ClothingSizes()
         self.internet = Internet()
         self.transport = Transport()
+        self.path = Path()
 
     # TODO: Rewrite all @property as dynamics.
     @property
