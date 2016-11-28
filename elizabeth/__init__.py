@@ -36,5 +36,6 @@ __all__ = [
     'ClothingSizes',
     'Internet',
     'Transport',
+    'Path',
     'Generic',
 ]

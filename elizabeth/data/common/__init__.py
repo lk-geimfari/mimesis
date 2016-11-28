@@ -8,3 +8,4 @@ from ._personal import *
 from ._text import *
 from ._transport import *
 from ._science import *
+from ._path import *

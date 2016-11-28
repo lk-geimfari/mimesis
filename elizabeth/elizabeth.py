@@ -4,6 +4,8 @@
 :software_license: MIT, see LICENSES for more details.
 :repository: https://github.com/lk-geimfari/elizabeth
 """
+import sys
+import os
 import array
 from datetime import (
     date,
@@ -49,6 +51,7 @@ __all__ = [
     'ClothingSizes',
     'Internet',
     'Transport',
+    'Path'
     'Generic'
 ]
 
@@ -2090,6 +2093,104 @@ class Transport(object):
         return '%s %s' % (plane, model)
 
 
+class Path(object):
+    """Class that provides methods and property for generate paths.
+
+    More: https://en.wikipedia.org/wiki/Path_(computing)
+    And More: https://en.wikipedia.org/wiki/Home_directory
+    """
+
+    def __init__(self):
+        self.__p = Personal('en')
+
+    @property
+    def root(self):
+        """
+        Generate a root dir path.
+
+        :return: Root dir.
+        :Example:
+            /
+        """
+        if sys.platform == 'win32':
+            return 'С:\\'
+        else:
+            return '/'
+
+    @property
+    def home(self):
+        """
+        Generate a home path.
+
+        :return: Home path.
+        :Example:
+            /home/
+        """
+        if sys.platform == 'win32':
+            return self.root + 'Users\\'
+        else:
+            return self.root + 'home/'
+
+    def user(self, gender='female'):
+        """
+        Generate a random user.
+
+        :param gender: Gender of user.
+        :return: Path to user.
+        :Example:
+            /home/oretha
+        """
+        user = self.__p.name(gender)
+        user = user.capitalize() if \
+            sys.platform == 'win32' else user.lower()
+        return self.home + user
+
+    def users_folder(self, user_gender='female'):
+        """
+        Generate a random path to user's folders.
+
+        :return: Path.
+        :Example:
+            /home/taneka/Pictures
+        """
+        folder = choice(common.FOLDERS)
+        user = self.user(user_gender)
+        return os.path.join(user, folder)
+
+    def dev_dir(self, user_gender='female'):
+        """
+        Generate a random path to development directory.
+
+        :param user_gender: Path to dev directory.
+        :return: Path.
+        :Example:
+            /home/sherrell/Development/Python/mercenary
+        """
+        dev_folder = 'Development'
+        stack = choice(common.PROGRAMMING_LANGS)
+
+        return os.path.join(
+            self.user(user_gender),
+            dev_folder,
+            stack
+        )
+
+    def project_dir(self, user_gender='female'):
+        """
+        Generate a random path to project directory.
+
+        :param user_gender: Gender of user.
+        :return: Path to project.
+        :Example:
+            /home/sherika/Development/Falcon/mercenary
+        """
+        project = choice(common.PROJECT_NAMES)
+        return os.path.join(
+            self.dev_dir(user_gender),
+            project
+        )
+
+
 class Generic(object):
     """
     A lazy initialization of locale for all classes that have locales.
@@ -2165,5 +2266,3 @@ class Generic(object):
         if callable(self._code):
             self._code = self._code(self.locale)
         return self._code
-
-

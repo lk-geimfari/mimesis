@@ -125,6 +125,7 @@ return patient_card
 | `Internet`        | *Dummy internet data (facebook, twitter etc.)*                |
 | `Hardware`        | *The data about the hardware (resolution, cpu, graphics etc.)*|
 | `Numbers`         | *Numerical data (floats, primes, digit etc.)*                 |
+| `Path`            | *Provides methods and property for generate paths.*           |
 | `Generic`         | *All at one*                                                  |
 
 
