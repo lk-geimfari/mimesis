@@ -1247,26 +1247,33 @@ class Datetime(object):
         return choice(self.data['periodicity'])
 
     @staticmethod
-    def date(sep='-', minimum=2000, maximum=2035, with_time=False):
+    def date(sep='-', start=2000, end=2035, with_time=False):
         """
         Generate a random date formatted as a 11-05-2016
 
         :param sep: A separator for date. Default is '-'.
-        :param minimum: Minimum value of year.
-        :param maximum: Maximum value of year.
+        :param start: Minimum value of year.
+        :param end: Maximum value of year.
         :param with_time: Add random time if True.
         :returns: Formatted date and time.
         :Example:
             20-03-2016 03:20 (with_time=True).
         """
-        d = date(randint(minimum, maximum), randint(1, 12), randint(1, 28))
+        d = date(randint(start, end), randint(1, 12), randint(1, 28))
         pattern = '%d{0}%m{0}%Y %m:%d' if with_time else '%d{0}%m{0}%Y'
         return d.strftime(pattern.format(sep))
 
-    @staticmethod
-    def time():
-        # TODO: Write it.
-        return '{h}:{m}'
+    def time(self):
+        """
+        Generate a random time in 24-hour format.
+
+        :return: Time.
+        :Example:
+            13:45
+        """
+        t = self.date(with_time=True)
+        _time = t.split(' ')[1]
+        return _time
 
     @staticmethod
     def day_of_month():
@@ -1671,8 +1678,6 @@ class Food(object):
         :Example:
             1/16 teaspoon.
         """
-        # TODO: Add support of German format.
-        # Example: 100 g white flour
         a, b = randint(1, 3), randint(2, 16)
 
         measure = choice(self._data['measurement'])
@@ -2221,7 +2226,7 @@ class Generic(object):
         self.transport = Transport()
         self.path = Path()
 
-    # TODO: Rewrite all @property as dynamics.
+    # Rewrite all @properties as dynamics.
     @property
     def personal(self):
         if callable(self._personal):
