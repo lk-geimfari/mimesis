@@ -13,6 +13,7 @@ elizabeth/data/common/_dev.py
 elizabeth/data/common/_file.py
 elizabeth/data/common/_hardware.py
 elizabeth/data/common/_internet.py
+elizabeth/data/common/_path.py
 elizabeth/data/common/_personal.py
 elizabeth/data/common/_science.py
 elizabeth/data/common/_text.py
@@ -31,6 +32,13 @@ elizabeth/data/de/food.json
 elizabeth/data/de/personal.json
 elizabeth/data/de/science.json
 elizabeth/data/de/text.json
+elizabeth/data/el/address.json
+elizabeth/data/el/business.json
+elizabeth/data/el/datetime.json
+elizabeth/data/el/food.json
+elizabeth/data/el/personal.json
+elizabeth/data/el/science.json
+elizabeth/data/el/text.json
 elizabeth/data/en/address.json
 elizabeth/data/en/business.json
 elizabeth/data/en/datetime.json
@@ -88,6 +96,13 @@ elizabeth/data/no/food.json
 elizabeth/data/no/personal.json
 elizabeth/data/no/science.json
 elizabeth/data/no/text.json
+elizabeth/data/pl/address.json
+elizabeth/data/pl/business.json
+elizabeth/data/pl/datetime.json
+elizabeth/data/pl/food.json
+elizabeth/data/pl/personal.json
+elizabeth/data/pl/science.json
+elizabeth/data/pl/text.json
 elizabeth/data/pt/address.json
 elizabeth/data/pt/business.json
 elizabeth/data/pt/datetime.json
