@@ -20,7 +20,7 @@ At this moment a library has 15 supported locales:
 |---    |--- |--- |---|--- |--- |--- |---|---|--- |---|--- |---|---|---  |---  |
 | Code  |[da](http://bit.ly/2g50Hpf)|[de](http://bit.ly/2fDVsPl)|[en](http://bit.ly/2g3wYfe)|[es](http://bit.ly/2grHSRg)*|[fi](http://bit.ly/2g3tzxe)*|[fr](http://bit.ly/2fpp7cc)|[is](http://bit.ly/2f8Lem2)*|[it](http://bit.ly/2g4DAOl)|[nl](http://bit.ly/2fNqFNF)*|[no](http://bit.ly/2eOUErG)|[sv](http://bit.ly/2eOZV2D)|[ru](http://bit.ly/2fNsUk5)|[pt](http://bit.ly/2fNpopS)* |[pt-br](http://bit.ly/2grKChn)|[pl](http://bit.ly/2ffwDbO)|
 
-`* - not completely`
+`*` - not completely
 
 
 ## Documentation
@@ -47,6 +47,31 @@ Elizabeth is a pretty simple library and all you need to start is the small docu
 # or
 ➜  ~ ./run_tests.sh
 ```
+
+## Data providers
+
+| Provider          | Description                                                  |
+| -------------     |:-------------                                                |
+| `Address`         | *Address data (street name, street suffix etc.)*             |
+| `Business`        | *Business data (company, company_type, copyright etc.)*      |
+| `Code`            | *Codes (ISBN, EAN, IMEI etc.).*                              |
+| `ClothingSizes`   | *Clothing sizes (international sizes, european etc.)*        |
+| `Datetime`        | *Datetime (day_of_week, month, year etc.)*                   |
+| `Development`     | *Data for developers (version, programming language etc.)*   |
+| `File`            | *File data (extension etc.)*                                 |
+| `Food`            | *Information on food (vegetables, fruits, measurements etc.)*|
+| `Personal`        | *Personal data (name, surname, age, email etc.)*             |
+| `Text`            | *Text data (sentence, title etc.)*                           |
+| `Transport`       | *Dummy data about transport (truck model, car etc.)*         |
+| `Network`         | *Network data (IPv4, IPv6, MAC address) etc*                 |
+| `Science`         | *Scientific data (scientist, math_formula etc.)*             |
+| `Internet`        | *Dummy internet data (facebook, twitter etc.)*                |
+| `Hardware`        | *The data about the hardware (resolution, cpu, graphics etc.)*|
+| `Numbers`         | *Numerical data (floats, primes, digit etc.)*                 |
+| `Path`            | *Provides methods and property for generate paths.*           |
+| `Generic`         | *All at one*                                                  |
+
+
 
 ## Usage
 
@@ -105,36 +130,10 @@ def patient(gender='female'):
 return patient_card
 ```
 
-## Available data providers
-
-| Provider          | Description                                                  |
-| -------------     |:-------------                                                |
-| `Address`         | *Address data (street name, street suffix etc.)*             |
-| `Business`        | *Business data (company, company_type, copyright etc.)*      |
-| `Code`            | *Codes (ISBN, EAN, IMEI etc.).*                              |
-| `ClothingSizes`   | *Clothing sizes (international sizes, european etc.)*        |
-| `Datetime`        | *Datetime (day_of_week, month, year etc.)*                   |
-| `Development`     | *Data for developers (version, programming language etc.)*   |
-| `File`            | *File data (extension etc.)*                                 |
-| `Food`            | *Information on food (vegetables, fruits, measurements etc.)*|
-| `Personal`        | *Personal data (name, surname, age, email etc.)*             |
-| `Text`            | *Text data (sentence, title etc.)*                           |
-| `Transport`       | *Dummy data about transport (truck model, car etc.)*         |
-| `Network`         | *Network data (IPv4, IPv6, MAC address) etc*                 |
-| `Science`         | *Scientific data (scientist, math_formula etc.)*             |
-| `Internet`        | *Dummy internet data (facebook, twitter etc.)*                |
-| `Hardware`        | *The data about the hardware (resolution, cpu, graphics etc.)*|
-| `Numbers`         | *Numerical data (floats, primes, digit etc.)*                 |
-| `Path`            | *Provides methods and property for generate paths.*           |
-| `Generic`         | *All at one*                                                  |
-
-
-## Examples
-- [flask_church](https://github.com/lk-geimfari/flask_church) - An extension for `Flask` based on `Elizabeth`.
-- [presturinn](https://github.com/lk-geimfari/presturinn) - This is a fake API based on `Falcon` and `Elizabeth v0.2.0` .
+## Example
 
 Below you can see, how to generate fake paths using `Elizabeth`:
-```
+```python
 >>> from elizabeth import Path
 >>> path = Path()
 
@@ -155,9 +154,7 @@ Below you can see, how to generate fake paths using `Elizabeth`:
 
 >>> path.project_dir(user_gender='female')
 '/home/katharina/Development/C Shell/litany'
-
 ```
-
 
 ## Contributing
 Your contributions are always welcome! Please take a look at the [contribution](https://github.com/lk-geimfari/elizabeth/blob/master/CONTRIBUTING.md) guidelines first. [Here](https://github.com/lk-geimfari/elizabeth/blob/master/CONTRIBUTORS.md) you can look a list of contributors
