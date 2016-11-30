@@ -16,7 +16,7 @@ from .elizabeth import (
 )
 
 # Data for setup.py
-__version__ = '0.3.0'
+__version__ = '0.3.1'
 __author__ = 'Likid Geimfari'
 
 __all__ = [
