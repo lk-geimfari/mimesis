@@ -137,11 +137,11 @@ Below you can see, how to generate fake paths using `Elizabeth`:
 >>> from elizabeth import Path
 >>> path = Path()
 
->>> path.home
-'/home/'
-
 >>> path.root
 '/'
+
+>>> path.home
+'/home/'
 
 >>> path.user(gender='female')
 '/home/chieko'
