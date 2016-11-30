@@ -17,7 +17,7 @@ Welcome to Elizabeth's documentation!
 
 Elizabeth is a library to generate dummy data. It's very useful when you need to bootstrap your database. Elizabeth doesn't have any dependencies.
 
-At this moment a library has 14 supported locales:
+At this moment a library has 15 supported locales:
 
     - Dansk (da)
     - Deutsch (de)
@@ -33,6 +33,7 @@ At this moment a library has 14 supported locales:
     - Português (pt-br)
     - Русский  (ru)
     - Svenska (sv)
+    - Polski (pl)
 
 Installation
 ------------
@@ -56,39 +57,38 @@ Testing
 
     ➜  ~ cd elizabeth/
     ➜  ~ python3 -m unittest
-or
+	➜  ~ # or
+	➜  ~ ./run_tests.sh
 
-.. code:: bash
-    ➜  ~ ./run_tests.sh
 
 Usage
 -----
 
 .. code:: python
-    # ...
+	# ...
     # Model from some Flask project.
 
     class Patient(db.Model):
-        id = db.Column(db.Integer, primary_key=True)
-        email = db.Column(db.String(120), unique=True)
-        phone_number = db.Column(db.String(25))
-        full_name = db.Column(db.String(100))
-        gender = db.Column(db.String(64))
-        nationality = db.Column(db.String(64))
-        weight = db.Column(db.String(64))
-        height = db.Column(db.String(64))
-        blood_type = db.Column(db.String(64))
+		id = db.Column(db.Integer, primary_key=True)
+		email = db.Column(db.String(120), unique=True)
+		phone_number = db.Column(db.String(25))
+		full_name = db.Column(db.String(100))
+		gender = db.Column(db.String(64))
+		nationality = db.Column(db.String(64))
+		weight = db.Column(db.String(64))
+		height = db.Column(db.String(64))
+		blood_type = db.Column(db.String(64))
 
-        def __init__(self, **kwargs):
-            super(Patient, self).__init__(**kwargs)
+		def __init__(self, **kwargs):
+			super(Patient, self).__init__(**kwargs)
 
-        @staticmethod
-        def _generate(count=2000):
-            from elizabeth import Personal
+		@staticmethod
+		def _generate(count=2000):
+			from elizabeth import Personal
 
-            person = Personal('en')
-            for _ in range(count):
-                patient = Patient(email=person.email(),
+			person = Personal('en')
+			for _ in range(count):
+				patient = Patient(email=person.email(),
                                   phone_number=person.telephone(),
                                   full_name=person.full_name('f'),
                                   gender=person.gender(),
@@ -97,28 +97,29 @@ Usage
                                   height=person.height(),
                                   blood_type=person.blood_type()
                                   )
-            try:
-                db.session.add(patient)
-            except Exception:
-                db.session.commit()
+			try:
+				db.session.add(patient)
+				db.session.commit()
+			except Exception:
+				pass
 
 When you use only one locale, use following format:
 
 .. code:: python
 
-    from elizabeth import Generic
+	from elizabeth import Generic
 
-    el = Generic('en')
+	el = Generic('en')
 
 
-    def patient(sex='f'):
-        user = {
+	def patient(sex='f'):
+		user = {
                 'full_name': el.personal.full_name(sex),
                 'gender': el.personal.gender(sex),
                 'blood_type': el.person.blood_type(),
                 'birthday': el.datetime.birthday()
                 }
-        return user
+		return user
 
 
 Examples

@@ -493,3 +493,30 @@ Hardware
 	# Get a random model of phone.
 	# Example: Nokia Lumia 610
 	phone_model = hardware.phone_model()
+
+
+Path
+--------
+
+.. code:: python
+	from elizabeth import Path
+
+	path = Path()
+
+	root = path.root
+	# Output: /
+
+    home = path.home
+	# Output: /home/
+
+    user = path.user(gender='female')
+	# Output: /home/mariko
+
+    user_folder = path.users_folder(user_gender='male')
+	# Output: /home/john/Documents
+
+    dev = path.dev_dir()
+	# Output: /home/fidelia/Development/Erlang
+
+	project_dir = path.project_dir(user_gender='female')
+	# Output:  /home/sherika/Development/Elixir/mercenary
