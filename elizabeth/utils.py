@@ -32,7 +32,11 @@ SUPPORTED_LOCALES = {
     },
     "fa": {
         "name": "Farsi",
+<<<<<<< HEAD
         "name_local": "فارسی"
+=======
+        "name_local": "Farsi"
+>>>>>>> add Farsi language address
     },
     "fi": {
         "name": "Finnish",
