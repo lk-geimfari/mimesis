@@ -8,14 +8,14 @@
 """
 
 from .elizabeth import (
-    Address, Personal, Network, Datetime,
-    Development, File, Science, Numbers,
-    Food, Hardware, Text, Business, Code,
-    ClothingSizes, Internet, Transport,
-    Path, Generic
+    Address, Business, ClothingSizes,
+    Code, Datetime, Development, File,
+    Food, Hardware, Internet, Network,
+    Numbers, Path, Personal, Science,
+    Text, Transport, Generic
 )
 
-# Data for setup.py
+
 __version__ = '0.3.1'
 __author__ = 'Likid Geimfari'
 
