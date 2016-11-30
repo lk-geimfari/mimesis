@@ -12,7 +12,7 @@ from .elizabeth import (
     Development, File, Science, Numbers,
     Food, Hardware, Text, Business, Code,
     ClothingSizes, Internet, Transport,
-    Generic
+    Path, Generic
 )
 
 # Data for setup.py
