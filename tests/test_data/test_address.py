@@ -21,7 +21,7 @@ class AddressTestCase(DummyCase):
 
     def test_address(self):
         result = self.generic.address.address()
-        self.assertTrue(len(result) > 6)
+        self.assertIsNotNone(result)
 
     def test_state(self):
         result = self.generic.address.state()
