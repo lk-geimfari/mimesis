@@ -1,0 +1,858 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.12: http://docutils.sourceforge.net/" />
+<title>Quick Start</title>
+<style type="text/css">
+
+/*
+:Author: David Goodger (goodger@python.org)
+:Id: $Id: html4css1.css 7614 2013-02-21 15:55:51Z milde $
+:Copyright: This stylesheet has been placed in the public domain.
+
+Default cascading style sheet for the HTML output of Docutils.
+
+See http://docutils.sf.net/docs/howto/html-stylesheets.html for how to
+customize this style sheet.
+*/
+
+/* used to remove borders from tables and images */
+.borderless, table.borderless td, table.borderless th {
+  border: 0 }
+
+table.borderless td, table.borderless th {
+  /* Override padding for "table.docutils td" with "! important".
+     The right padding separates the table cells. */
+  padding: 0 0.5em 0 0 ! important }
+
+.first {
+  /* Override more specific margin styles with "! important". */
+  margin-top: 0 ! important }
+
+.last, .with-subtitle {
+  margin-bottom: 0 ! important }
+
+.hidden {
+  display: none }
+
+a.toc-backref {
+  text-decoration: none ;
+  color: black }
+
+blockquote.epigraph {
+  margin: 2em 5em ; }
+
+dl.docutils dd {
+  margin-bottom: 0.5em }
+
+object[type="image/svg+xml"], object[type="application/x-shockwave-flash"] {
+  overflow: hidden;
+}
+
+/* Uncomment (and remove this text!) to get bold-faced definition list terms
+dl.docutils dt {
+  font-weight: bold }
+*/
+
+div.abstract {
+  margin: 2em 5em }
+
+div.abstract p.topic-title {
+  font-weight: bold ;
+  text-align: center }
+
+div.admonition, div.attention, div.caution, div.danger, div.error,
+div.hint, div.important, div.note, div.tip, div.warning {
+  margin: 2em ;
+  border: medium outset ;
+  padding: 1em }
+
+div.admonition p.admonition-title, div.hint p.admonition-title,
+div.important p.admonition-title, div.note p.admonition-title,
+div.tip p.admonition-title {
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title, .code .error {
+  color: red ;
+  font-weight: bold ;
+  font-family: sans-serif }
+
+/* Uncomment (and remove this text!) to get reduced vertical space in
+   compound paragraphs.
+div.compound .compound-first, div.compound .compound-middle {
+  margin-bottom: 0.5em }
+
+div.compound .compound-last, div.compound .compound-middle {
+  margin-top: 0.5em }
+*/
+
+div.dedication {
+  margin: 2em 5em ;
+  text-align: center ;
+  font-style: italic }
+
+div.dedication p.topic-title {
+  font-weight: bold ;
+  font-style: normal }
+
+div.figure {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+div.footer, div.header {
+  clear: both;
+  font-size: smaller }
+
+div.line-block {
+  display: block ;
+  margin-top: 1em ;
+  margin-bottom: 1em }
+
+div.line-block div.line-block {
+  margin-top: 0 ;
+  margin-bottom: 0 ;
+  margin-left: 1.5em }
+
+div.sidebar {
+  margin: 0 0 0.5em 1em ;
+  border: medium outset ;
+  padding: 1em ;
+  background-color: #ffffee ;
+  width: 40% ;
+  float: right ;
+  clear: right }
+
+div.sidebar p.rubric {
+  font-family: sans-serif ;
+  font-size: medium }
+
+div.system-messages {
+  margin: 5em }
+
+div.system-messages h1 {
+  color: red }
+
+div.system-message {
+  border: medium outset ;
+  padding: 1em }
+
+div.system-message p.system-message-title {
+  color: red ;
+  font-weight: bold }
+
+div.topic {
+  margin: 2em }
+
+h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
+h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
+  margin-top: 0.4em }
+
+h1.title {
+  text-align: center }
+
+h2.subtitle {
+  text-align: center }
+
+hr.docutils {
+  width: 75% }
+
+img.align-left, .figure.align-left, object.align-left {
+  clear: left ;
+  float: left ;
+  margin-right: 1em }
+
+img.align-right, .figure.align-right, object.align-right {
+  clear: right ;
+  float: right ;
+  margin-left: 1em }
+
+img.align-center, .figure.align-center, object.align-center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.align-left {
+  text-align: left }
+
+.align-center {
+  clear: both ;
+  text-align: center }
+
+.align-right {
+  text-align: right }
+
+/* reset inner alignment in figures */
+div.align-right {
+  text-align: inherit }
+
+/* div.align-center * { */
+/*   text-align: left } */
+
+ol.simple, ul.simple {
+  margin-bottom: 1em }
+
+ol.arabic {
+  list-style: decimal }
+
+ol.loweralpha {
+  list-style: lower-alpha }
+
+ol.upperalpha {
+  list-style: upper-alpha }
+
+ol.lowerroman {
+  list-style: lower-roman }
+
+ol.upperroman {
+  list-style: upper-roman }
+
+p.attribution {
+  text-align: right ;
+  margin-left: 50% }
+
+p.caption {
+  font-style: italic }
+
+p.credits {
+  font-style: italic ;
+  font-size: smaller }
+
+p.label {
+  white-space: nowrap }
+
+p.rubric {
+  font-weight: bold ;
+  font-size: larger ;
+  color: maroon ;
+  text-align: center }
+
+p.sidebar-title {
+  font-family: sans-serif ;
+  font-weight: bold ;
+  font-size: larger }
+
+p.sidebar-subtitle {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+p.topic-title {
+  font-weight: bold }
+
+pre.address {
+  margin-bottom: 0 ;
+  margin-top: 0 ;
+  font: inherit }
+
+pre.literal-block, pre.doctest-block, pre.math, pre.code {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+pre.code .ln { color: grey; } /* line numbers */
+pre.code, code { background-color: #eeeeee }
+pre.code .comment, code .comment { color: #5C6576 }
+pre.code .keyword, code .keyword { color: #3B0D06; font-weight: bold }
+pre.code .literal.string, code .literal.string { color: #0C5404 }
+pre.code .name.builtin, code .name.builtin { color: #352B84 }
+pre.code .deleted, code .deleted { background-color: #DEB0A1}
+pre.code .inserted, code .inserted { background-color: #A3D289}
+
+span.classifier {
+  font-family: sans-serif ;
+  font-style: oblique }
+
+span.classifier-delimiter {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+span.interpreted {
+  font-family: sans-serif }
+
+span.option {
+  white-space: nowrap }
+
+span.pre {
+  white-space: pre }
+
+span.problematic {
+  color: red }
+
+span.section-subtitle {
+  /* font-size relative to parent (h1..h6 element) */
+  font-size: 80% }
+
+table.citation {
+  border-left: solid 1px gray;
+  margin-left: 1px }
+
+table.docinfo {
+  margin: 2em 4em }
+
+table.docutils {
+  margin-top: 0.5em ;
+  margin-bottom: 0.5em }
+
+table.footnote {
+  border-left: solid 1px black;
+  margin-left: 1px }
+
+table.docutils td, table.docutils th,
+table.docinfo td, table.docinfo th {
+  padding-left: 0.5em ;
+  padding-right: 0.5em ;
+  vertical-align: top }
+
+table.docutils th.field-name, table.docinfo th.docinfo-name {
+  font-weight: bold ;
+  text-align: left ;
+  white-space: nowrap ;
+  padding-left: 0 }
+
+/* "booktabs" style (no vertical lines) */
+table.docutils.booktabs {
+  border: 0px;
+  border-top: 2px solid;
+  border-bottom: 2px solid;
+  border-collapse: collapse;
+}
+table.docutils.booktabs * {
+  border: 0px;
+}
+table.docutils.booktabs th {
+  border-bottom: thin solid;
+  text-align: left;
+}
+
+h1 tt.docutils, h2 tt.docutils, h3 tt.docutils,
+h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
+  font-size: 100% }
+
+ul.auto-toc {
+  list-style-type: none }
+
+</style>
+</head>
+<body>
+<div class="document" id="quick-start">
+<h1 class="title">Quick Start</h1>
+
+<div class="section" id="personal">
+<h1>Personal</h1>
+<pre class="code python literal-block">
+<span class="keyword namespace">from</span> <span class="name namespace">elizabeth</span> <span class="keyword namespace">import</span> <span class="name">Personal</span>
+
+<span class="name">person</span> <span class="operator">=</span> <span class="name">Personal</span><span class="punctuation">(</span><span class="literal string single">'en'</span><span class="punctuation">)</span>
+
+<span class="comment single"># Get a random integer value from range.</span>
+<span class="comment single"># Output: 21</span>
+<span class="name">age</span> <span class="operator">=</span> <span class="name">person</span><span class="operator">.</span><span class="name">age</span><span class="punctuation">(</span><span class="name">mi</span><span class="operator">=</span><span class="literal number integer">17</span><span class="punctuation">,</span> <span class="name">mx</span><span class="operator">=</span><span class="literal number integer">35</span><span class="punctuation">)</span>
+
+
+<span class="comment single"># Get a random name.</span>
+<span class="comment single"># Output: Christina</span>
+<span class="name">name</span> <span class="operator">=</span> <span class="name">person</span><span class="operator">.</span><span class="name">name</span><span class="punctuation">(</span><span class="name">gender</span><span class="operator">=</span><span class="literal string single">'female'</span><span class="punctuation">)</span>
+
+<span class="comment single"># Get a random surname.</span>
+<span class="comment single"># Output: Wolf</span>
+<span class="name">surname</span> <span class="operator">=</span> <span class="name">person</span><span class="operator">.</span><span class="name">surname</span><span class="punctuation">()</span>
+
+<span class="comment single"># Get a random full name.</span>
+<span class="comment single"># Output: Leo Johnson.</span>
+<span class="name">full_name</span> <span class="operator">=</span> <span class="name">person</span><span class="operator">.</span><span class="name">full_name</span><span class="punctuation">(</span><span class="name">gender</span><span class="operator">=</span><span class="literal string single">'male'</span><span class="punctuation">)</span>
+
+<span class="comment single"># Get a random username.</span>
+<span class="comment single"># Output: john1032</span>
+<span class="name">username</span> <span class="operator">=</span> <span class="name">person</span><span class="operator">.</span><span class="name">username</span><span class="punctuation">()</span>
+
+<span class="comment single"># Get a random title (prefix/suffix) for name/surname.</span>
+<span class="comment single"># Available types: typical, aristocratic, religious, academic</span>
+<span class="comment single"># Output: PhD.</span>
+<span class="name">title</span> <span class="operator">=</span> <span class="name">person</span><span class="operator">.</span><span class="name">title</span><span class="punctuation">(</span><span class="name">gender</span><span class="operator">=</span><span class="literal string single">'female'</span><span class="punctuation">,</span> <span class="name">type_</span><span class="operator">=</span><span class="literal string single">'academic'</span><span class="punctuation">)</span>
+
+<span class="comment single"># Generate a random password.</span>
+<span class="name">password</span> <span class="operator">=</span> <span class="name">person</span><span class="operator">.</span><span class="name">password</span><span class="punctuation">(</span><span class="name">length</span><span class="operator">=</span><span class="literal number integer">15</span><span class="punctuation">)</span>
+
+<span class="comment single"># Generate a random email using usernames.</span>
+<span class="comment single"># Output: foretime10&#64;live.com</span>
+<span class="name">email</span> <span class="operator">=</span> <span class="name">person</span><span class="operator">.</span><span class="name">email</span><span class="punctuation">()</span>
+
+<span class="comment single"># Generate a random home page using usernames.</span>
+<span class="comment single"># Output: http://www.font6.info</span>
+<span class="name">home_page</span> <span class="operator">=</span> <span class="name">person</span><span class="operator">.</span><span class="name">home_page</span><span class="punctuation">()</span>
+
+<span class="comment single"># Get a random subreddit thread from list.</span>
+<span class="comment single"># If nsfw=True then will be returned NSFW subreddit</span>
+<span class="comment single"># Output: /r/games</span>
+<span class="name">subreddit</span> <span class="operator">=</span> <span class="name">p</span><span class="operator">.</span><span class="name">subreddit</span><span class="punctuation">(</span><span class="name">nsfw</span><span class="operator">=</span><span class="name builtin pseudo">False</span><span class="punctuation">,</span> <span class="name">full_url</span><span class="operator">=</span><span class="name builtin pseudo">False</span><span class="punctuation">)</span>
+
+<span class="comment single"># Get a bitcoin address.</span>
+<span class="comment single"># Output:</span>
+<span class="name">bitcoin</span> <span class="operator">=</span> <span class="name">person</span><span class="operator">.</span><span class="name">bitcoin</span><span class="punctuation">()</span>
+
+<span class="comment single"># Generate a random card verification value (CVV)</span>
+<span class="comment single"># Output: 731</span>
+<span class="name">cvv</span> <span class="operator">=</span> <span class="name">person</span><span class="operator">.</span><span class="name">cvv</span><span class="punctuation">()</span>
+
+<span class="comment single"># Generate a random CID code.</span>
+<span class="comment single"># Output: 7834</span>
+<span class="name">cid</span> <span class="operator">=</span> <span class="name">person</span><span class="operator">.</span><span class="name">cid</span><span class="punctuation">()</span>
+
+<span class="comment single"># Generate a random credit card number (Visa or MasterCard)</span>
+<span class="comment single"># Output: 4001 2073 7960 3241</span>
+<span class="name">credit_card</span> <span class="operator">=</span> <span class="name">person</span><span class="operator">.</span><span class="name">credit_card_number</span><span class="punctuation">(</span><span class="name">card_type</span><span class="operator">=</span><span class="literal string single">'visa'</span><span class="punctuation">)</span>
+
+<span class="comment single"># Get a random gender.</span>
+<span class="comment single"># Output: Male</span>
+<span class="name">gender</span> <span class="operator">=</span> <span class="name">person</span><span class="operator">.</span><span class="name">gender</span><span class="punctuation">()</span>
+<span class="comment single"># Output:  ♂</span>
+<span class="name">gender_symbol</span> <span class="operator">=</span> <span class="name">person</span><span class="operator">.</span><span class="name">gender</span><span class="punctuation">(</span><span class="name">symbol</span><span class="operator">=</span><span class="name builtin pseudo">True</span><span class="punctuation">)</span>
+
+<span class="comment single"># Get a random profession.</span>
+<span class="comment single"># Output: Programmer</span>
+<span class="name">profession</span> <span class="operator">=</span> <span class="name">person</span><span class="operator">.</span><span class="name">profession</span><span class="punctuation">()</span>
+
+<span class="comment single"># Get a random political views.</span>
+<span class="comment single"># Output: Liberal</span>
+<span class="name">political_views</span> <span class="operator">=</span> <span class="name">person</span><span class="operator">.</span><span class="name">political_views</span><span class="punctuation">()</span>
+
+<span class="comment single"># Get a random worldview</span>
+<span class="comment single"># Output: Naturalistic Pantheism</span>
+<span class="name">worldview</span> <span class="operator">=</span> <span class="name">person</span><span class="operator">.</span><span class="name">worldview</span><span class="punctuation">()</span>
+
+<span class="comment single"># Get a random views on.</span>
+<span class="comment single"># Output: Negative</span>
+<span class="name">views_on</span> <span class="operator">=</span> <span class="name">person</span><span class="operator">.</span><span class="name">views_on</span><span class="punctuation">()</span>
+
+<span class="comment single"># Get a random nationality.</span>
+<span class="comment single"># Output: Russian</span>
+<span class="name">nationality</span> <span class="operator">=</span> <span class="name">person</span><span class="operator">.</span><span class="name">nationality</span><span class="punctuation">()</span>
+
+<span class="comment single"># Get a random university.</span>
+<span class="comment single"># Output: MIT</span>
+<span class="name">university</span> <span class="operator">=</span> <span class="name">person</span><span class="operator">.</span><span class="name">university</span><span class="punctuation">()</span>
+
+<span class="comment single"># Get a random academic degree.</span>
+<span class="comment single"># Output: Master</span>
+<span class="name">ad</span> <span class="operator">=</span> <span class="name">person</span><span class="operator">.</span><span class="name">academic_degree</span><span class="punctuation">()</span>
+
+<span class="comment single"># Get a random language.</span>
+<span class="comment single"># Output: Russian</span>
+<span class="name">language</span> <span class="operator">=</span> <span class="name">person</span><span class="operator">.</span><span class="name">language</span><span class="punctuation">()</span>
+
+<span class="comment single"># Get a random movie.</span>
+<span class="comment single"># Output: Pulp Fiction</span>
+<span class="name">favorite_movie</span> <span class="operator">=</span> <span class="name">person</span><span class="operator">.</span><span class="name">favorite_movie</span><span class="punctuation">()</span>
+
+<span class="comment single"># Generate a random phone number.</span>
+<span class="comment single"># Output: +7-(963)409-11-22</span>
+<span class="name">telephone</span> <span class="operator">=</span> <span class="name">person</span><span class="operator">.</span><span class="name">telephone</span><span class="punctuation">()</span>
+<span class="comment single"># You're also can use mask</span>
+<span class="name">mask</span> <span class="operator">=</span> <span class="operator">+</span><span class="literal number integer">1</span><span class="operator">-</span><span class="comment single">### ### ## ##</span>
+<span class="comment single"># Output: +1-763 001 13 22</span>
+<span class="name">telephone</span> <span class="operator">=</span> <span class="name">person</span><span class="operator">.</span><span class="name">telephone</span><span class="punctuation">(</span><span class="name">mask</span><span class="punctuation">)</span>
+
+<span class="comment single"># Generate identifier by mask</span>
+<span class="comment single"># Output: 8492-436-03/11</span>
+<span class="name builtin">id</span> <span class="operator">=</span> <span class="name">person</span><span class="operator">.</span><span class="name">identifier</span><span class="punctuation">(</span><span class="name">mask</span><span class="operator">=</span><span class="literal string double">&quot;####-###-##/##&quot;</span><span class="punctuation">)</span>
+</pre>
+</div>
+<div class="section" id="datetime">
+<h1>Datetime</h1>
+<pre class="code python literal-block">
+<span class="name">datetime</span> <span class="operator">=</span> <span class="name">Datetime</span><span class="punctuation">(</span><span class="literal string single">'en'</span><span class="punctuation">)</span>
+
+<span class="comment single"># Get a random day of week.</span>
+<span class="comment single"># Output: Sun.</span>
+<span class="name">day_of_week</span> <span class="operator">=</span> <span class="name">datetime</span><span class="operator">.</span><span class="name">day_of_week</span><span class="punctuation">(</span><span class="name">abbr</span><span class="operator">=</span><span class="name builtin pseudo">True</span><span class="punctuation">)</span>
+
+<span class="comment single"># Get a random month.</span>
+<span class="comment single"># Output:  Dec.</span>
+<span class="name">month</span> <span class="operator">=</span> <span class="name">datetime</span><span class="operator">.</span><span class="name">month</span><span class="punctuation">(</span><span class="name">abbr</span><span class="operator">=</span><span class="name builtin pseudo">True</span><span class="punctuation">)</span>
+
+<span class="comment single"># Get a random periodicity string.</span>
+<span class="comment single"># Output: Never</span>
+<span class="name">periodicity</span> <span class="operator">=</span> <span class="name">datetime</span><span class="operator">.</span><span class="name">periodicity</span><span class="punctuation">()</span>
+
+<span class="comment single"># Generate a random date formatted as a d/m/Y</span>
+<span class="comment single"># Output: 11/05/2016</span>
+<span class="name">date</span> <span class="operator">=</span> <span class="name">datetime</span><span class="operator">.</span><span class="name">date</span><span class="punctuation">(</span><span class="name">sep</span><span class="operator">=</span><span class="literal string single">'/'</span><span class="punctuation">,</span> <span class="name">with_time</span><span class="operator">=</span><span class="name builtin pseudo">True</span><span class="punctuation">)</span>
+
+<span class="comment single"># Generate a random days of month, from 1 to 31.</span>
+<span class="comment single"># Output: 21</span>
+<span class="name">day_of_month</span> <span class="operator">=</span> <span class="name">datetime</span><span class="operator">.</span><span class="name">day_of_month</span><span class="punctuation">()</span>
+</pre>
+</div>
+<div class="section" id="business">
+<h1>Business</h1>
+<pre class="code python literal-block">
+<span class="name">business</span> <span class="operator">=</span> <span class="name">Business</span><span class="punctuation">(</span><span class="literal string single">'en'</span><span class="punctuation">)</span>
+
+<span class="comment single"># Get a random company type</span>
+<span class="comment single"># abbr=True is abbreviated company type</span>
+<span class="comment single"># Output: Incorporated (Inc. when abbr=True)</span>
+<span class="name">company_type</span> <span class="operator">=</span> <span class="name">business</span><span class="operator">.</span><span class="name">company_type</span><span class="punctuation">(</span><span class="name">abrr</span><span class="operator">=</span><span class="name builtin pseudo">False</span><span class="punctuation">)</span>
+
+<span class="comment single"># Get a random company name</span>
+<span class="comment single"># Output: Gamma Systems</span>
+<span class="name">company</span> <span class="operator">=</span> <span class="name">business</span><span class="operator">.</span><span class="name">company</span><span class="punctuation">()</span>
+
+<span class="comment single"># Generate a random copyright</span>
+<span class="comment single"># mi=1990 is foundation date</span>
+<span class="comment single"># mx=2016 is current date</span>
+<span class="comment single"># without_date=True returns copyright without date</span>
+<span class="comment single"># Output: © 1990-2016 Komercia, Inc</span>
+<span class="name">copyright</span> <span class="operator">=</span> <span class="name">business</span><span class="operator">.</span><span class="name">copyright</span><span class="punctuation">(</span><span class="name">mi</span><span class="operator">=</span><span class="literal number integer">1990</span><span class="punctuation">,</span> <span class="name">mx</span><span class="operator">=</span><span class="literal number integer">2016</span><span class="punctuation">,</span> <span class="name">without_date</span><span class="operator">=</span><span class="name builtin pseudo">False</span><span class="punctuation">)</span>
+
+<span class="comment single"># Get a currency code. ISO 4217 format</span>
+<span class="comment single">#  Output: RUR</span>
+<span class="name">currency</span> <span class="operator">=</span> <span class="name">business</span><span class="operator">.</span><span class="name">currency</span><span class="punctuation">()</span>
+</pre>
+</div>
+<div class="section" id="network">
+<h1>Network</h1>
+<pre class="code python literal-block">
+<span class="comment single"># Class for generate data for working with network,</span>
+<span class="name">network</span> <span class="operator">=</span> <span class="name">Network</span><span class="punctuation">()</span>
+
+<span class="comment single"># Generate IPv4 address</span>
+<span class="name">ip_v4</span> <span class="operator">=</span> <span class="name">network</span><span class="operator">.</span><span class="name">ip_v4</span><span class="punctuation">()</span>
+
+<span class="comment single"># Generate IPv6 address.</span>
+<span class="name">ip_v6</span> <span class="operator">=</span> <span class="name">network</span><span class="operator">.</span><span class="name">ip_v6</span><span class="punctuation">()</span>
+
+<span class="comment single"># Generate mac address.</span>
+<span class="name">mac</span> <span class="operator">=</span> <span class="name">network</span><span class="operator">.</span><span class="name">mac_address</span><span class="punctuation">()</span>
+
+<span class="comment single"># Get a random user agent.</span>
+<span class="name">user_agent</span> <span class="operator">=</span> <span class="name">network</span><span class="operator">.</span><span class="name">user_agent</span><span class="punctuation">()</span>
+</pre>
+</div>
+<div class="section" id="science">
+<h1>Science</h1>
+<pre class="code python literal-block">
+<span class="name">science</span> <span class="operator">=</span> <span class="name">Science</span><span class="punctuation">(</span><span class="literal string single">'en'</span><span class="punctuation">)</span>
+
+<span class="comment single"># Get a random mathematical formula.</span>
+<span class="comment single"># Output: A = (ab)/2</span>
+<span class="name">math_formula</span> <span class="operator">=</span> <span class="name">science</span><span class="operator">.</span><span class="name">math_formula</span><span class="punctuation">()</span>
+
+<span class="comment single"># Get a random chemical element. If argument name_only=True</span>
+<span class="comment single"># then will be returned only Name, else dict with more information</span>
+<span class="comment single"># Output: {'Symbol': 'S',</span>
+<span class="comment single">#               'Name': 'Sulfur',</span>
+<span class="comment single">#               'Atomic number': '16'</span>
+<span class="comment single">#             }</span>
+<span class="comment single"># or name of chemical element: 'Helium'</span>
+<span class="name">chemical_e</span>  <span class="operator">=</span> <span class="name">science</span><span class="operator">.</span><span class="name">chemical_element</span><span class="punctuation">()</span>
+
+<span class="comment single"># Get the wording of the law of physics.</span>
+<span class="name">physical_law</span> <span class="operator">=</span> <span class="name">science</span><span class="operator">.</span><span class="name">physical_law</span><span class="punctuation">()</span>
+
+<span class="comment single"># Get a random link to scientific article on Wikipedia.</span>
+<span class="comment single"># Output: https://en.wikipedia.org/wiki/Black_hole</span>
+<span class="name">article</span> <span class="operator">=</span> <span class="name">science</span><span class="operator">.</span><span class="name">article_on_wiki</span><span class="punctuation">()</span>
+
+<span class="comment single"># Get a random name of scientist.</span>
+<span class="comment single"># Output: Konstantin Tsiolkovsky</span>
+<span class="name">scientist</span> <span class="operator">=</span> <span class="name">science</span><span class="operator">.</span><span class="name">scientist</span><span class="punctuation">()</span>
+</pre>
+</div>
+<div class="section" id="file">
+<h1>File</h1>
+<pre class="code python literal-block">
+<span class="name builtin">file</span> <span class="operator">=</span> <span class="name">File</span><span class="punctuation">()</span>
+
+<span class="comment single"># Get a random file extension.</span>
+<span class="comment single"># All available file types:</span>
+<span class="comment single"># 1. source - '.py', '.rb', '.cpp' and other.</span>
+<span class="comment single"># 2. text = '.doc', '.log', '.rtf' and other.</span>
+<span class="comment single"># 3. data = '.csv', '.dat', '.pps' and other.</span>
+<span class="comment single"># 4. audio = '.mp3', '.flac', '.m4a' and other.</span>
+<span class="comment single"># 5. video = '.mp4', '.m4v', '.avi' and other.</span>
+<span class="comment single"># 6. image = '.jpeg', '.jpg', '.png' and other.</span>
+<span class="comment single"># 7. executable = '.exe', '.apk', '.bat' and other.</span>
+<span class="comment single"># 8. compressed = '.zip', '.7z', '.tar.xz' and other.</span>
+<span class="comment single"># Output: '.py'</span>
+<span class="name">extension</span> <span class="operator">=</span> <span class="name builtin">file</span><span class="operator">.</span><span class="name">extension</span><span class="punctuation">(</span><span class="name">file_type</span><span class="operator">=</span><span class="literal string single">'source'</span><span class="punctuation">)</span>
+</pre>
+</div>
+<div class="section" id="address">
+<h1>Address</h1>
+<pre class="code python literal-block">
+<span class="name">address</span> <span class="operator">=</span> <span class="name">Address</span><span class="punctuation">(</span><span class="literal string single">'en'</span><span class="punctuation">)</span>
+
+<span class="comment single"># Generate a random street number.</span>
+<span class="name">street_number</span> <span class="operator">=</span> <span class="name">address</span><span class="operator">.</span><span class="name">street_number</span><span class="punctuation">()</span>
+
+<span class="comment single"># Get a random street name.</span>
+<span class="name">street_name</span> <span class="operator">=</span> <span class="name">address</span><span class="operator">.</span><span class="name">street_name</span><span class="punctuation">()</span>
+
+<span class="comment single"># Get a random street suffix.</span>
+<span class="comment single"># Output: Street.</span>
+<span class="name">street_suffix</span> <span class="operator">=</span> <span class="name">address</span><span class="operator">.</span><span class="name">street_suffix</span><span class="punctuation">()</span>
+
+<span class="comment single"># Get a random address.</span>
+<span class="comment single"># 786 Clinton Lane</span>
+<span class="name">street_address</span> <span class="operator">=</span> <span class="name">address</span><span class="operator">.</span><span class="name">address</span><span class="punctuation">()</span>
+
+<span class="comment single"># Get a random name of state</span>
+<span class="comment single"># Output: Alabama (for locale 'en')</span>
+<span class="name">state</span> <span class="operator">=</span> <span class="name">address</span><span class="operator">.</span><span class="name">state</span><span class="punctuation">()</span>
+
+<span class="comment single"># Get real postal code.</span>
+<span class="comment single"># Output: 389213</span>
+<span class="name">postal_code</span> <span class="operator">=</span> <span class="name">address</span><span class="operator">.</span><span class="name">postal_code</span><span class="punctuation">()</span>
+
+<span class="comment single"># Get a random country.</span>
+<span class="comment single"># Output: Russia or Ru if only_iso_code=True:</span>
+<span class="name">country</span> <span class="operator">=</span> <span class="name">address</span><span class="operator">.</span><span class="name">country</span><span class="punctuation">()</span>
+
+<span class="comment single"># Get a random name of city</span>
+<span class="comment single"># Output: Saint Petersburg</span>
+<span class="name">city</span> <span class="operator">=</span> <span class="name">address</span><span class="operator">.</span><span class="name">city</span><span class="punctuation">()</span>
+
+<span class="comment single"># Get a random value of latitude (+90 to -90)</span>
+<span class="comment single"># Output: -66.4214188124611</span>
+<span class="name">latitude</span> <span class="operator">=</span> <span class="name">address</span><span class="operator">.</span><span class="name">latitude</span><span class="punctuation">()</span>
+
+<span class="comment single"># Get a random value of longitude (-180 to +180)</span>
+<span class="comment single"># Output: 112.18440260511943</span>
+<span class="name">longitude</span> <span class="operator">=</span> <span class="name">address</span><span class="operator">.</span><span class="name">longitude</span><span class="punctuation">()</span>
+
+<span class="comment single"># Get random geo coordinates</span>
+<span class="comment single"># Output: {'latitude': 8.003968712834975, 'longitude': 36.02811153405548}</span>
+<span class="name">coordinates</span> <span class="operator">=</span> <span class="name">address</span><span class="operator">.</span><span class="name">coordinates</span><span class="punctuation">()</span>
+</pre>
+</div>
+<div class="section" id="numbers">
+<h1>Numbers</h1>
+<pre class="code python literal-block">
+<span class="name">number</span> <span class="operator">=</span> <span class="name">Numbers</span><span class="punctuation">()</span>
+
+<span class="comment single"># Get an array of random float number of 10**n</span>
+<span class="comment single"># n=2 is raise 10 to the 'n' power</span>
+<span class="comment single"># type_code='f' is a code of type('f'/'d')</span>
+<span class="comment single"># to_list=True is to convert array to list</span>
+<span class="name">floats</span> <span class="operator">=</span> <span class="name">number</span><span class="operator">.</span><span class="name">floats</span><span class="punctuation">(</span><span class="name">n</span><span class="operator">=</span><span class="literal number integer">2</span><span class="punctuation">,</span> <span class="name">type_code</span><span class="operator">=</span><span class="literal string single">'f'</span><span class="punctuation">,</span> <span class="name">to_list</span><span class="operator">=</span><span class="name builtin pseudo">True</span><span class="punctuation">)</span>
+
+<span class="comment single"># Get an array of prime numbers of 10**n</span>
+<span class="comment single"># n=2 is raise 10 to the 'n' power</span>
+<span class="comment single"># to_list=True is to convert array to list</span>
+<span class="name">primes</span> <span class="operator">=</span> <span class="name">number</span><span class="operator">.</span><span class="name">primes</span><span class="punctuation">(</span><span class="name">n</span><span class="operator">=</span><span class="literal number integer">2</span><span class="punctuation">,</span> <span class="name">to_list</span><span class="operator">=</span><span class="name builtin pseudo">True</span><span class="punctuation">)</span>
+</pre>
+</div>
+<div class="section" id="text">
+<h1>Text</h1>
+<pre class="code python literal-block">
+<span class="name">data</span> <span class="operator">=</span> <span class="name">Text</span><span class="punctuation">(</span><span class="literal string single">'en'</span><span class="punctuation">)</span>
+
+<span class="comment single"># Get random text.</span>
+<span class="comment single"># quantity=5 is a quantity of sentence</span>
+<span class="name">text</span> <span class="operator">=</span> <span class="name">data</span><span class="operator">.</span><span class="name">text</span><span class="punctuation">(</span><span class="name">quantity</span><span class="operator">=</span><span class="literal number integer">5</span><span class="punctuation">)</span>
+
+<span class="comment single"># Get a random sentence.</span>
+<span class="name">sentence</span> <span class="operator">=</span> <span class="name">data</span><span class="operator">.</span><span class="name">sentence</span><span class="punctuation">()</span>
+
+<span class="comment single"># Get a random title. Equal to sentence().</span>
+<span class="name">title</span> <span class="operator">=</span> <span class="name">data</span><span class="operator">.</span><span class="name">title</span><span class="punctuation">()</span>
+
+<span class="comment single"># Get the random words.</span>
+<span class="comment single"># Output: human, rabbit, love, hope, tiger, cat, dog</span>
+<span class="name">words</span> <span class="operator">=</span> <span class="name">data</span><span class="operator">.</span><span class="name">words</span><span class="punctuation">(</span><span class="name">quantity</span><span class="operator">=</span><span class="literal number integer">7</span><span class="punctuation">)</span>
+
+<span class="comment single"># Get a random word.</span>
+<span class="comment single"># Output: peach</span>
+<span class="name">word</span> <span class="operator">=</span> <span class="name">data</span><span class="operator">.</span><span class="name">word</span><span class="punctuation">()</span>
+
+<span class="comment single"># Get a random swear word.</span>
+<span class="comment single"># Output: shit</span>
+<span class="name">bad</span> <span class="operator">=</span> <span class="name">data</span><span class="operator">.</span><span class="name">swear_word</span><span class="punctuation">()</span>
+
+<span class="comment single"># Get a list of naughty strings (bad input)</span>
+<span class="comment single"># Output: $ENV{'HOME'}</span>
+<span class="name">naughty</span> <span class="operator">=</span> <span class="name">data</span><span class="operator">.</span><span class="name">naughty_strings</span><span class="punctuation">()</span>
+
+<span class="comment single"># Get a random quote.</span>
+<span class="comment single"># Output: 'Bond...James Bond.'</span>
+<span class="name">quote</span> <span class="operator">=</span> <span class="name">data</span><span class="operator">.</span><span class="name">quote</span><span class="punctuation">()</span>
+
+<span class="comment single"># Get random name of color.</span>
+<span class="comment single"># Output: White</span>
+<span class="name">color</span> <span class="operator">=</span> <span class="name">data</span><span class="operator">.</span><span class="name">color</span><span class="punctuation">()</span>
+</pre>
+</div>
+<div class="section" id="development">
+<h1>Development</h1>
+<pre class="code python literal-block">
+<span class="name">dev</span> <span class="operator">=</span> <span class="name">Development</span><span class="punctuation">()</span>
+
+<span class="comment single"># Get a random license from list.</span>
+<span class="name">software_license</span> <span class="operator">=</span> <span class="name">Development</span><span class="operator">.</span><span class="name">license</span><span class="punctuation">()</span>
+
+<span class="comment single"># Get a random database name.</span>
+<span class="comment single"># Output: Riak or if nosql=False PostgreSQL</span>
+<span class="name">db</span> <span class="operator">=</span> <span class="name">Development</span><span class="operator">.</span><span class="name">database</span><span class="punctuation">(</span><span class="name">nosql</span><span class="operator">=</span><span class="name builtin pseudo">True</span><span class="punctuation">)</span>
+
+<span class="comment single"># Get a random value list.</span>
+<span class="comment single"># Output: Docker</span>
+<span class="name">other_skill</span> <span class="operator">=</span> <span class="name">Development</span><span class="operator">.</span><span class="name">other</span><span class="punctuation">()</span>
+
+<span class="comment single"># Get a random programming language from list.</span>
+<span class="name">programming_language</span> <span class="operator">=</span> <span class="name">Development</span><span class="operator">.</span><span class="name">programming_language</span><span class="punctuation">()</span>
+
+<span class="comment single"># Get a random framework from file.</span>
+<span class="comment single"># Output:  Python/Django</span>
+<span class="comment single"># or</span>
+<span class="comment single"># React/Redux if _type='front'</span>
+<span class="name">framework</span> <span class="operator">=</span> <span class="name">Development</span><span class="operator">.</span><span class="name">framework</span><span class="punctuation">(</span><span class="name">_type</span><span class="operator">=</span><span class="literal string single">'back'</span><span class="punctuation">)</span>
+
+<span class="comment single"># Get a random stack.</span>
+<span class="comment single"># {'front-end': 'Twitter Bootstrap',</span>
+<span class="comment single"># 'back-end': 'Python/Flask'</span>
+<span class="comment single"># 'other': 'Docker',</span>
+<span class="comment single"># 'db': 'Couchbase',</span>
+<span class="comment single"># }</span>
+<span class="name">stack</span> <span class="operator">=</span> <span class="name">Development</span><span class="operator">.</span><span class="name">stack_of_tech</span><span class="punctuation">(</span><span class="name">nosql</span><span class="operator">=</span><span class="name builtin pseudo">True</span><span class="punctuation">)</span>
+
+<span class="comment single"># Get a random link to github repository.</span>
+<span class="comment single"># Output: https://github.com/lk-geimfari/church</span>
+<span class="name">repo</span> <span class="operator">=</span> <span class="name">Development</span><span class="operator">.</span><span class="name">github_repo</span><span class="punctuation">()</span>
+</pre>
+</div>
+<div class="section" id="food">
+<h1>Food</h1>
+<pre class="code python literal-block">
+<span class="name">food</span> <span class="operator">=</span> <span class="name">Food</span><span class="punctuation">(</span><span class="literal string single">'en'</span><span class="punctuation">)</span>
+
+<span class="comment single"># Get a random alcoholic drink.</span>
+<span class="comment single"># Example: Vodka</span>
+<span class="name">alco_drink</span> <span class="operator">=</span> <span class="name">food</span><span class="operator">.</span><span class="name">alcoholic_drink</span><span class="punctuation">()</span>
+
+<span class="comment single"># Get a random berry.</span>
+<span class="comment single"># Example: Blackberry</span>
+<span class="name">berry</span> <span class="operator">=</span> <span class="name">food</span><span class="operator">.</span><span class="name">berry</span><span class="punctuation">()</span>
+
+<span class="comment single"># Get a random cocktail.</span>
+<span class="comment single"># Example: Amber Moon</span>
+<span class="name">cocktail</span> <span class="operator">=</span> <span class="name">food</span><span class="operator">.</span><span class="name">cocktail</span><span class="punctuation">()</span>
+
+<span class="comment single"># Get a random dish for current locale</span>
+<span class="comment single"># Example ('ru_ru'): Борщ</span>
+<span class="name">dish</span> <span class="operator">=</span> <span class="name">food</span><span class="operator">.</span><span class="name">dish</span><span class="punctuation">()</span>
+
+<span class="comment single"># Get a random fruit.</span>
+<span class="comment single"># Example: Apple</span>
+<span class="name">fruit</span> <span class="operator">=</span> <span class="name">food</span><span class="operator">.</span><span class="name">fruit</span><span class="punctuation">()</span>
+
+<span class="comment single"># Get a random mushroom</span>
+<span class="comment single"># Example: Laetiporus sulphureus</span>
+<span class="name">mushroom</span> <span class="operator">=</span> <span class="name">food</span><span class="operator">.</span><span class="name">mushroom</span><span class="punctuation">()</span>
+
+<span class="comment single"># Get a random herbs or spices.</span>
+<span class="comment single"># Example: Artemisia</span>
+<span class="name">spices_or_herbs</span> <span class="operator">=</span> <span class="name">food</span><span class="operator">.</span><span class="name">spices</span><span class="punctuation">()</span>
+
+<span class="comment single"># Get a random vegetable.</span>
+<span class="comment single"># Example: Belgian Endive</span>
+<span class="name">vegetable</span> <span class="operator">=</span> <span class="name">food</span><span class="operator">.</span><span class="name">vegetable</span><span class="punctuation">()</span>
+</pre>
+</div>
+<div class="section" id="hardware">
+<h1>Hardware</h1>
+<pre class="code python literal-block">
+<span class="name">hardware</span> <span class="operator">=</span> <span class="name">Hardware</span><span class="punctuation">()</span>
+
+<span class="comment single"># Get a random CPU name.</span>
+<span class="comment single"># Example: Intel® Core i3</span>
+<span class="name">cpu_name</span> <span class="operator">=</span> <span class="name">hardware</span><span class="operator">.</span><span class="name">cpu</span><span class="punctuation">()</span>
+
+<span class="comment single"># Get a random CPU codename.</span>
+<span class="comment single"># Example: Bear Ridge</span>
+<span class="name">cpu_codename</span> <span class="operator">=</span> <span class="name">hardware</span><span class="operator">.</span><span class="name">cpu_codename</span><span class="punctuation">()</span>
+
+<span class="comment single"># Get a random frequency of CPU.</span>
+<span class="comment single"># Example: 2.3 GHz</span>
+<span class="name">cpu_frequency</span> <span class="operator">=</span> <span class="name">hardware</span><span class="operator">.</span><span class="name">cpu_frequency</span><span class="punctuation">()</span>
+
+<span class="comment single"># Get a random generation.</span>
+<span class="comment single"># Example: 2nd Generation</span>
+<span class="name">generation</span> <span class="operator">=</span> <span class="name">hardware</span><span class="operator">.</span><span class="name">generation</span><span class="punctuation">()</span>
+
+<span class="comment single"># Get a random graphics.</span>
+<span class="comment single"># Example: Intel® HD Graphics 620</span>
+<span class="name">graphics</span> <span class="operator">=</span> <span class="name">hardware</span><span class="operator">.</span><span class="name">graphics</span><span class="punctuation">()</span>
+
+<span class="comment single"># Get a random manufacturer</span>
+<span class="comment single"># Example: HP</span>
+<span class="name">manufacturer</span> <span class="operator">=</span> <span class="name">hardware</span><span class="operator">.</span><span class="name">manufacturer</span><span class="punctuation">()</span>
+
+<span class="comment single"># Get a random size of RAM.</span>
+<span class="comment single"># Example: 32GB</span>
+<span class="name">ram_size</span> <span class="operator">=</span> <span class="name">hardware</span><span class="operator">.</span><span class="name">ram_size</span><span class="punctuation">()</span>
+
+<span class="comment single"># Get a random type of RAM</span>
+<span class="comment single"># Example: DDR3</span>
+<span class="name">ram_type</span> <span class="operator">=</span> <span class="name">hardware</span><span class="operator">.</span><span class="name">ram_type</span><span class="punctuation">()</span>
+
+<span class="comment single"># Get a random resolution of screen.</span>
+<span class="comment single"># Example: 1440x900</span>
+<span class="name">resolution_of_screen</span> <span class="operator">=</span> <span class="name">hardware</span><span class="operator">.</span><span class="name">resolution</span><span class="punctuation">()</span>
+
+<span class="comment single"># Get a random size of screen (in inch).</span>
+<span class="comment single"># Example: 15.4″</span>
+<span class="name">screen_size</span> <span class="operator">=</span> <span class="name">hardware</span><span class="operator">.</span><span class="name">screen_size</span><span class="punctuation">()</span>
+
+<span class="comment single"># Get a random information about drive</span>
+<span class="comment single"># Example: 1TB HDD(7200 RPM) + 32GB SSD</span>
+<span class="name">ssd_or_hdd</span> <span class="operator">=</span> <span class="name">hardware</span><span class="operator">.</span><span class="name">ssd_or_hdd</span><span class="punctuation">()</span>
+
+<span class="comment single"># Generate a random information about hardware.</span>
+<span class="comment single"># Example:  Acer Intel® Core i7 2nd Generation 3.50 GHz/1920x1200/12″/</span>
+<span class="comment single"># 1TB HDD + 64GB SSD/DDR3-32GB/Intel® HD Graphics 5300</span>
+<span class="name">hardware_full_info</span> <span class="operator">=</span> <span class="name">hardware</span><span class="operator">.</span><span class="name">hardware_full_info</span><span class="punctuation">()</span>
+
+<span class="comment single"># Get a random model of phone.</span>
+<span class="comment single"># Example: Nokia Lumia 610</span>
+<span class="name">phone_model</span> <span class="operator">=</span> <span class="name">hardware</span><span class="operator">.</span><span class="name">phone_model</span><span class="punctuation">()</span>
+</pre>
+</div>
+<div class="section" id="path">
+<h1>Path</h1>
+<div class="system-message">
+<p class="system-message-title">System Message: ERROR/3 (<tt class="docutils">/home/lk/Development/open_source/elizabeth/docs/guide.rst</tt>, line 501)</p>
+<p>Error in &quot;code&quot; directive:
+maximum 1 argument(s) allowed, 5 supplied.</p>
+<pre class="literal-block">
+.. code:: python
+        from elizabeth import Path
+
+        path = Path()
+
+        root = path.root
+        # Output: /
+
+    home = path.home
+        # Output: /home/
+
+    user = path.user(gender='female')
+        # Output: /home/mariko
+
+    user_folder = path.users_folder(user_gender='male')
+        # Output: /home/john/Documents
+
+    dev = path.dev_dir()
+        # Output: /home/fidelia/Development/Erlang
+
+        project_dir = path.project_dir(user_gender='female')
+        # Output:  /home/sherika/Development/Elixir/mercenary
+</pre>
+</div>
+</div>
+</div>
+</body>
+</html>

@@ -133,6 +133,31 @@ return patient_card
 - [flask_church](https://github.com/lk-geimfari/flask_church) - An extension for `Flask` based on `Elizabeth`.
 - [presturinn](https://github.com/lk-geimfari/presturinn) - This is a fake API based on `Falcon` and `Elizabeth v0.2.0` .
 
+Below you can see, how to generate fake paths using `Elizabeth`:
+```
+>>> from elizabeth import Path
+>>> path = Path()
+
+>>> path.home
+'/home/'
+
+>>> path.root
+'/'
+
+>>> path.user(gender='female')
+'/home/chieko'
+
+>>> path.users_folder(user_gender='male')
+'/home/lyndon/Documents'
+
+>>> path.dev_dir(user_gender='female')
+'/home/edra/Development/Ruby'
+
+>>> path.project_dir(user_gender='female')
+'/home/katharina/Development/C Shell/litany'
+
+```
+
 
 ## Contributing
 Your contributions are always welcome! Please take a look at the [contribution](https://github.com/lk-geimfari/elizabeth/blob/master/CONTRIBUTING.md) guidelines first. [Here](https://github.com/lk-geimfari/elizabeth/blob/master/CONTRIBUTORS.md) you can look a list of contributors
