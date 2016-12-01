@@ -27,7 +27,7 @@ SUPPORTED_LOCALES = {
     },
     "fa": {
         "name": "Farsi",
-        "name_local": "Farsi"
+        "name_local": "فارسی"
     },
     "fi": {
         "name": "Finnish",
