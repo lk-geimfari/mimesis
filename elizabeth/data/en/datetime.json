@@ -1,48 +1,62 @@
 {
   "day": {
     "abbr": [
-      "ش",
-      "ی",
-      "د",
-      "س",
-      "چ",
-      "پ",
-      "ج"
+      "Mon.",
+      "Tue.",
+      "Wed.",
+      "Thu.",
+      "Fri.",
+      "Sat",
+      "Sun."
     ],
     "name": [
-      "شنبه",
-      "یکشنبه",
-      "دوشنبه",
-      "سه‌شنبه",
-      "چهارشنبه",
-      "پنجشنبه",
-      "جمعه"
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday"
     ]
   },
   "month": {
+    "abbr": [
+      "Jan.",
+      "Feb.",
+      "Mar.",
+      "Apr.",
+      "May.",
+      "Jun.",
+      "Jul.",
+      "Aug.",
+      "Sept.",
+      "Oct.",
+      "Nov.",
+      "Dec."
+    ],
     "name": [
-      "فروردین",
-      "اردیبهشت",
-      "خرداد",
-      "تیر",
-      "مرداد",
-      "شهریور",
-      "مهر",
-      "آبان",
-      "آذر",
-      "دی",
-      "بهمن",
-      "اسفند"
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
     ]
   },
   "periodicity": [
-    "یک بار",
-    "هرگز",
-    "ندرتا",
-    "غالبا",
-    "روزانه",
-    "هفتگی",
-    "ماهیانه",
-    "سالیانه"
+    "Once",
+    "Never",
+    "Seldom",
+    "Often",
+    "Daily",
+    "Weekly",
+    "Monthly",
+    "Yearly"
   ]
 }
