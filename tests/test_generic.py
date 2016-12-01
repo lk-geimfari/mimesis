@@ -114,3 +114,7 @@ class PortugueseTestCase(ElizabethLocaleBase, TestCase):
 
 class PolishTestCase(ElizabethLocaleBase, TestCase):
     LANG = 'pl'
+
+
+class FarsiTestCase(ElizabethLocaleBase, TestCase):
+    LANG = 'fa'
