@@ -1,6 +1,11 @@
 import functools
 import json
-from os.path import abspath, join, dirname
+
+from os.path import (
+    abspath,
+    dirname,
+    join
+)
 
 from elizabeth.exceptions import UnsupportedLocale
 
@@ -24,6 +29,10 @@ SUPPORTED_LOCALES = {
     "es": {
         "name": "Spanish",
         "name_local": "Español"
+    },
+    "fa": {
+        "name": "Farsi",
+        "name_local": "فارسی"
     },
     "fi": {
         "name": "Finnish",
@@ -68,8 +77,7 @@ SUPPORTED_LOCALES = {
     "sv": {
         "name": "Swedish",
         "name_local": "Svenska"
-    },
-    "etc": "Int."
+    }
 }
 
 
@@ -90,6 +98,8 @@ def pull(file, locale='en'):
     | en - English                 | (data/en)    |
     +------------------------------+--------------+
     | ru - Russian                 | (data/ru)    |
+    +------------------------------+--------------+
+    | fa - Farsi                   | (data/fa)    |
     +------------------------------+--------------+
     | fi - Finnish                 | (data/fi)    |
     +------------------------------+--------------+
@@ -124,32 +134,8 @@ def pull(file, locale='en'):
     if locale not in SUPPORTED_LOCALES:
         raise UnsupportedLocale("Locale %s does not supported" % locale)
 
-    #Needs explicit encoding for Windows
+    # Needs explicit encoding for Windows
     with open(join(PATH + '/' + locale, file), 'r', encoding='utf8') as f:
         data = json.load(f)
 
     return data
-
-
-# TODO: Refactoring
-def __push(**kwargs):
-    """
-    Dict to json file.
-    :param kwargs: Kwargs
-    :return: None
-    """
-    skeleton = {
-        'key': {
-            'key': 'value',
-        }
-    }
-
-    locale = kwargs.get('locale', 'en')
-    file = kwargs.get('file', 'test.json')
-    data = kwargs.get('data', skeleton)
-
-    if locale not in SUPPORTED_LOCALES:
-        raise UnsupportedLocale("Locale %s does not supported" % locale)
-
-    with open(join(PATH + '/' + locale, file), 'w') as f:
-        json.dump(data, f)

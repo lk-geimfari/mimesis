@@ -398,21 +398,6 @@ class Text(object):
         bad_words = self.data['words']['bad']
         return choice(bad_words)
 
-    @staticmethod
-    def naughty_strings():
-        """
-        Get a random naughty string form file.
-
-        Authors of big-list-of-naughty-strings is Max Woolf and contributors.
-        :returns: The list of naughty strings.
-        """
-        import os.path as op
-
-        with open(op.join(PATH + '/etc', 'naughty'), 'r') as f:
-            ns = [x.strip(u'\n') for x in f.readlines()]
-
-        return ns
-
     def quote(self):
         """
         Get a random quotes from movie.

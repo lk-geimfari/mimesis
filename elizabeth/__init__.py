@@ -7,15 +7,9 @@
 :contributors: https://github.com/lk-geimfari/elizabeth/blob/master/CONTRIBUTORS.md
 """
 
-from .core.elizabeth import (
-    Address, Business, ClothingSizes,
-    Code, Datetime, Development, File,
-    Food, Hardware, Internet, Network,
-    Numbers, Path, Personal, Science,
-    Text, Transport, Generic
-)
+from elizabeth.core import *
 
-__version__ = '0.3.1'
+__version__ = '0.3.2'
 __author__ = 'Likid Geimfari'
 
 __all__ = [

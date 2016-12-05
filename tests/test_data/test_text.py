@@ -37,11 +37,6 @@ class TextTestCase(DummyCase):
         result = self.generic.text.swear_word()
         self.assertIn(result, self.generic.text.data['words']['bad'])
 
-    def test_naughty_strings(self):
-        result = self.generic.text.naughty_strings()
-        self.assertTrue(len(result) > 10)
-        self.assertIsInstance(result, list)
-
     def test_quote(self):
         result = self.generic.text.quote()
         self.assertIn(result, self.generic.text.data['quotes'])
