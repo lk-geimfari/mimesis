@@ -2,8 +2,8 @@
 
 from unittest import TestCase
 
-import elizabeth.data.common as common
-from elizabeth.elizabeth import Development
+import elizabeth.core.interdata as common
+from elizabeth.core.elizabeth import Development
 
 
 class DevelopmentTestCase(TestCase):

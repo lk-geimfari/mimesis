@@ -3,7 +3,7 @@
 import re
 from unittest import TestCase
 
-from elizabeth.elizabeth import Network
+from elizabeth.core.elizabeth import Network
 
 
 class NetworkTestCase(TestCase):

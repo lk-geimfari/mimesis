@@ -2,7 +2,7 @@
 
 from unittest import TestCase
 
-from elizabeth.elizabeth import ClothingSizes
+from elizabeth.core.elizabeth import ClothingSizes
 
 
 class ClothingSizesTestCase(TestCase):

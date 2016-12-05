@@ -31,8 +31,8 @@ from string import (
     ascii_uppercase
 )
 
-from elizabeth.data import common
-from .utils import pull, PATH
+from . import interdata as common
+from elizabeth.utils import pull, PATH
 
 __all__ = [
     'Address',
