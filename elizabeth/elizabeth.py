@@ -2056,7 +2056,7 @@ class Transport(object):
         :Example:
             Caledon-966O.
         """
-        model = self._model(mask=model_mask, )
+        model = self._model(mask=model_mask)
         truck = choice(common.TRUCKS)
         return '%s-%s' % (truck, model)
 
