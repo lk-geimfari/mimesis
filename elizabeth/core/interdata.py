@@ -1,4 +1,5 @@
 # Here you can see data that used in all locales.
+# interdata is abbreviation of "International Data".
 
 # ------------
 # ADDRESS
