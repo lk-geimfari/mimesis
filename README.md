@@ -155,6 +155,28 @@ Below you can see, how to generate fake paths using `Elizabeth`:
 >>> path.project_dir(user_gender='female')
 '/home/katharina/Development/C Shell/litany'
 ```
+or how to generate fake model of transport:
+```python
+>>> from elizabeth import Transport
+>>> transport = Transport()
+
+>>> transport.truck()
+'Union-0632 FX'
+
+>>> transport.truck(model_mask="##/@")
+'Jiaotong-78/P'
+
+>>> transport.car()
+'Pontiac Grand Am'
+
+>>> transport.airplane()
+'Boeing 575'
+
+>>> transport.airplane(model_mask="7##")
+'Airbus 778'
+>>> 
+
+```
 
 ## Contributing
 Your contributions are always welcome! Please take a look at the [contribution](https://github.com/lk-geimfari/elizabeth/blob/master/CONTRIBUTING.md) guidelines first. [Here](https://github.com/lk-geimfari/elizabeth/blob/master/CONTRIBUTORS.md) you can look a list of contributors
