@@ -5,7 +5,7 @@ import elizabeth
 setup(
     name='elizabeth',
     version=elizabeth.__version__,
-    packages=['elizabeth'],
+    packages=['elizabeth', 'elizabeth.core'],
     keywords=['fake', 'data', 'testing',
               'generate', 'faker', 'elizabeth',
               'bootstrap', 'db', 'generic',
@@ -21,7 +21,7 @@ setup(
     author=elizabeth.__author__,
     author_email='likid.geimfari@gmail.com',
     description='Elizabeth is a library that help you generate fake data.',
-    long_description="Elizabeth (ex Church) is a library to generate fake data."
+    long_description="Elizabeth is a library to generate fake data."
                      "It's very useful when you need to bootstrap "
                      "your database.",
     classifiers=[

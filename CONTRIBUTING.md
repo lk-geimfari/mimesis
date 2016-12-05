@@ -18,5 +18,17 @@ Your contributions are always welcome!
 
 - If you add any functionality, then you should add tests for it.
 
-----------
-As Obi-Wan Kenobi says: ` May the Force be with you. `
+----------------------------------------------------
+
+# Contributors
+
+- [lk-geimfari](https://github.com/lk-geimfari) - Inventor of `elizabeth`.
+- [auyer](https://github.com/auyer) - Contributor (`pt-br`).
+- [jackmcmorrow](https://github.com/jackmcmorrow) - Contributor (`pt-br`).
+- [Costava](https://github.com/Costava) - Contributor.
+- [ranwise](https://github.com/ranwise) - Contributor.
+- [sobolev](https://github.com/sobolevn) - Contributor. Inspirer.
+- [mrcrilly](https://github.com/mrcrilly) - Contributor.
+- [FliegendeWurst](https://github.com/FliegendeWurst) - Contributor.
+- [bderusha](https://github.com/bderusha) - Contributor.
+- [Battleroid](https://github.com/Battleroid) - Contributor.

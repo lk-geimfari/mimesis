@@ -1,9 +1,9 @@
 # Here you can see data that used in all locales.
 # interdata is abbreviation of "International Data".
 
-# ------------
+# =============
 # ADDRESS
-# ------------
+# =============
 COUNTRIES_ISO = [
     "AF",
     "AX",
@@ -286,9 +286,9 @@ ADDRESS_FMT = {
     ]
 }
 
-# ------------
+# =============
 # DEVELOPMENT
-# ------------
+# =============
 OTHER_TECH = [
     "Docker",
     "Rkt",
@@ -516,9 +516,9 @@ OS = [
     "openSUSE"
 ]
 
-# ------------
+# =============
 # FILE
-# ------------
+# =============
 EXTENSIONS = {
     "source": [
         ".a",
@@ -686,9 +686,9 @@ MIME_TYPES = [
     "video/x-flv"
 ]
 
-# ------------
+# =============
 # HARDWARE
-# ------------
+# =============
 RESOLUTIONS = [
     "1152x768",
     "1280x854",
@@ -981,9 +981,9 @@ PHONE_MODELS = [
     "Sony Xperia Z5 Premium"
 ]
 
-# ------------
+# =============
 # INTERNET
-# ------------
+# =============
 SUBREDDITS = [
     "/r/AskReddit",
     "/r/IAmA",
@@ -2605,9 +2605,9 @@ HASHTAGS = {
     ]
 }
 
-# ------------
+# =============
 # PATH
-# ------------
+# =============
 FOLDERS = (
     'Development',
     'Downloads',
@@ -2688,9 +2688,9 @@ PROJECT_NAMES = [
     "zealous"
 ]
 
-# ------------
+# =============
 # PERSONAL
-# ------------
+# =============
 BLOOD_GROUPS = (
     'O+', 'A+', 'B+', 'AB+',
     'O−', 'A−', 'B−', 'AB−'
@@ -2759,9 +2759,9 @@ TELEPHONE_MASKS = {
     'default': '+#-(###)-###-####'
 }
 
-# ------------
+# =============
 # SCIENCE
-# ------------
+# =============
 MATH_FORMULAS = [
     "A = (ab)/2",
     "A = a2",
@@ -2781,9 +2781,9 @@ MATH_FORMULAS = [
     "V - E + F = 2"
 ]
 
-# ------------
+# =============
 # TEXT
-# ------------
+# =============
 CURRENCY = [
     "AED",
     "AFN",
@@ -2912,9 +2912,9 @@ CURRENCY = [
     "ZMK"
 ]
 
-# ------------
+# =============
 # TRANSPORT
-# ------------
+# =============
 TRUCKS = [
     "ACMAT",
     "AEC",
