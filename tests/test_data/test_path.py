@@ -2,8 +2,8 @@
 import sys
 from unittest import TestCase
 
-from elizabeth.data import common
-from elizabeth.elizabeth import Path
+from elizabeth.core.elizabeth import Path
+import elizabeth.core.interdata as common
 
 
 class PathCase(TestCase):

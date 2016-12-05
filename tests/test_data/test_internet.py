@@ -3,8 +3,8 @@
 import re
 from unittest import TestCase
 
-import elizabeth.data.common as common
-from elizabeth.elizabeth import Internet
+import elizabeth.core.interdata as common
+from elizabeth.core.elizabeth import Internet
 
 
 class InternetSizesTestCase(TestCase):

@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import elizabeth.data.common as common
-
+import elizabeth.core.interdata as common
 from tests.test_data import DummyCase
 
 

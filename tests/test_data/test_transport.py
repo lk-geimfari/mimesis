@@ -2,11 +2,11 @@
 
 from unittest import TestCase
 
-from elizabeth.data import common
-from elizabeth.elizabeth import Transport
+from elizabeth.core.elizabeth import Transport
+import elizabeth.core.interdata as common
 
 
-class TransportestCase(TestCase):
+class TransportTestCase(TestCase):
     def setUp(self):
         self.transport = Transport()
 
@@ -38,4 +38,3 @@ class TransportestCase(TestCase):
         manufacturer, model = result[0], result[1]
         self.assertIn(manufacturer, common.AIRPLANES)
         self.assertTrue(len(model) == len(mask))
-
