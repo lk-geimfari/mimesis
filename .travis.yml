@@ -8,11 +8,4 @@ python:
   - "3.5"
   - "3.6-dev"
 
-
-before_install:
-    - pip install coveralls
-
 script: python -m unittest discover tests
-
-after_success:
-    - coveralls
