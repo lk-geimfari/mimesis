@@ -106,12 +106,11 @@ return patient_card
 ```
 
 ## Data providers
-Elizabeth support more than 18 data providers, such as Personal, Datetime, Internet and another.
-[Here](https://github.com/lk-geimfari/elizabeth/blob/master/PROVIDERS.md) you can find full list of providers.
+Elizabeth support more than [18](https://github.com/lk-geimfari/elizabeth/blob/master/PROVIDERS.md) data providers, such as Personal, Datetime, Internet and [another](https://github.com/lk-geimfari/elizabeth/blob/master/PROVIDERS.md).
 
 
 ## Contributing
-Your contributions are always welcome! Please take a look at the [contribution](https://github.com/lk-geimfari/elizabeth/blob/master/CONTRIBUTING.md) guidelines first. [Here](https://github.com/lk-geimfari/elizabeth/blob/master/CONTRIBUTING.md) you can look a list of contributors
+Your contributions are always welcome! Please take a look at the [contribution](https://github.com/lk-geimfari/elizabeth/blob/master/CONTRIBUTING.md) guidelines first. [Here](https://github.com/lk-geimfari/elizabeth/blob/master/CONTRIBUTING.md#contributors) you can look a list of contributors
 
 
 ## Disclaimer
