@@ -8,4 +8,10 @@ python:
   - "3.5"
   - "3.6-dev"
 
-script: python -m unittest discover tests
+install:
+  - pip install codecov
+
+script: coverage run -m unittest discover tests
+  
+after_success:
+  codecov
