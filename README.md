@@ -6,12 +6,12 @@
 [![Python Version](https://img.shields.io/badge/python-v3.3%2C%20v3.4%2C%20v3.5%2C%20v3.6-brightgreen.svg)](https://github.com/lk-geimfari/elizabeth/)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/d773f20efa67430683bb24fff5af9db8)](https://www.codacy.com/app/likid-geimfari/church)
 
-*Elizabeth* is a fast and easier to use Python library for generate dummy data. These data are very useful when you need to bootstrap the database in the testing phase of your software. A great example of how you can use the library - is a web applications on Flask or Django which need a data, such as users (email, username, name, surname etc.), posts (tags, text, title, publishing date and etc.) and etc. The library use the JSON files as a datastore and doesn't have any dependencies.
-
 <p align="center">
   <img src="https://raw.githubusercontent.com/lk-geimfari/elizabeth/master/other/elizabeth_1.png">
   <br>
 </p>
+
+**Elizabeth** is a fast and easier to use Python library for generate dummy data. These data are very useful when you need to bootstrap the database in the testing phase of your software. A great example of how you can use the library - is a web applications on Flask or Django which need a data, such as users (email, username, name, surname etc.), posts (tags, text, title, publishing date and etc.) and etc. The library use the JSON files as a datastore and doesn't have any dependencies.
 
 
 ## Documentation
