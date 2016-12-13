@@ -11,7 +11,7 @@
   <br>
 </p>
 
-**Elizabeth** is a fast and easier to use Python library for generate dummy data. These data are very useful when you need to bootstrap the database in the testing phase of your software. A great example of how you can use the library - is a web applications on Flask or Django which need a data, such as users (email, username, name, surname etc.), posts (tags, text, title, publishing date and etc.) and etc. The library use the JSON files as a datastore and doesn't have any dependencies.
+**Elizabeth** is a fast and easier to use Python library for generate dummy data. These data are very useful when you need to bootstrap the database in the testing phase of your software. A great example of how you can use the library is a web applications on Flask or Django which need a data, such as users (email, username, name, surname etc.), posts (tags, text, title, publishing date and etc.) asf. The library use the JSON files as a datastore and doesn't have any dependencies.
 
 
 ## Documentation
