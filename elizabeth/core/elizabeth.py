@@ -634,6 +634,7 @@ class Business(object):
             "de": "€",
             "en": "$",
             "es": "€",
+            "fa": "﷼",
             "fi": "€",
             "fr": "€",
             "is": "kr",

@@ -24,6 +24,7 @@ Your contributions are always welcome!
 
 - [lk-geimfari](https://github.com/lk-geimfari) - Inventor of `elizabeth`.
 - [auyer](https://github.com/auyer) - Contributor (`pt-br`).
+- [aminalaee](https://github.com/aminalaee) - Contributor (`fa`).
 - [jackmcmorrow](https://github.com/jackmcmorrow) - Contributor (`pt-br`).
 - [Costava](https://github.com/Costava) - Contributor.
 - [ranwise](https://github.com/ranwise) - Contributor.
@@ -32,3 +33,4 @@ Your contributions are always welcome!
 - [FliegendeWurst](https://github.com/FliegendeWurst) - Contributor.
 - [bderusha](https://github.com/bderusha) - Contributor.
 - [Battleroid](https://github.com/Battleroid) - Contributor.
+
