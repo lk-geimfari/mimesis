@@ -19,11 +19,27 @@ Elizabeth is a pretty simple library and all you need to start is the small docu
 
 ## Locales
 
-At this moment a library has 15 supported locales:
+At this moment a library has 16 supported locales:
 
-| Flag  |🇩🇰 |🇩🇪|🇺🇸|🇪🇸 |🇫🇮|🇫🇷|🇮🇸|🇮🇹|🇳🇱|🇳🇴 |🇸🇪|🇷🇺|🇵🇹|🇧🇷 |🇵🇱|🇮🇷|
-|---    |--- |--- |---|--- |--- |--- |---|---|--- |---|--- |---|---|---  |---|---|
-| Code  |da  |de  |en |es  |fi  |fr  |is |it |nl  |no |sv  |ru |pt |pt-br|pl|fa|
+| №  | Flag  | Code       | Name                 | Native name |
+|--- |---    |---         |---                   |---          |
+| 1  | 🇩🇰   |  `da`      | Danish               | Dansk       |
+| 2  | 🇩🇪   |  `de`      | German               | Deutsch     |
+| 3  | 🇺🇸   |  `en`      | English              | English     |
+| 4  | 🇪🇸   |  `es`      | Spanish              | Español     |
+| 5  | 🇮🇷   |  `fa`      | Farsi                | فارسی       |
+| 6  | 🇫🇮   |  `fi`      | Finnish              | Suomi       |
+| 7  | 🇫🇷   |  `fr`      | French               | Français    |
+| 8  | 🇮🇸   |  `is`      | Icelandic            | Íslenska    |
+| 9  | 🇮🇹   |  `it`      | Italian              | Italiano    |
+| 10 | 🇳🇱   |  `nl`      | Dutch                | Nederlands  |
+| 11 | 🇳🇴   |  `no`      | Norwegian            | Norsk       |
+| 12 | 🇸🇪   |  `sv`      | Swedish              | Svenska     |
+| 13 | 🇷🇺   |  `ru`      | Russian              | Русский     |
+| 14 | 🇵🇹   |  `pt`      | Portuguese           | Português   |
+| 15 | 🇧🇷   |  `pt-br`   | Brazilian Portuguese | Português Brasileiro |
+| 16 | 🇵🇱   |  `pl`      | Polish               | Polski      |
+
 
 
 ## Installation
