@@ -32,7 +32,7 @@ from string import (
 )
 
 from . import interdata as common
-from elizabeth.utils import pull, PATH
+from elizabeth.utils import pull
 
 __all__ = [
     'Address',
