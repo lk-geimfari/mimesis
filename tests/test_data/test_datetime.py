@@ -12,8 +12,8 @@ class DatetimeTestCase(DummyCase):
         self.assertIn(result_abbr, self.generic.datetime.data['day']['abbr'])
 
     def test_month(self):
-        result = self.generic.datetime.month() + '\n'
-        self.assertGreater(len(result), 3)
+        result = self.generic.datetime.month()
+        self.assertIsNotNone(result)
 
         result_abbr = self.generic.datetime.month(abbr=True)
         self.assertIsInstance(result_abbr, str)
