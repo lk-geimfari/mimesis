@@ -28,7 +28,7 @@ Your contributions are always welcome!
 - [jackmcmorrow](https://github.com/jackmcmorrow) - Contributor (`pt-br`).
 - [Costava](https://github.com/Costava) - Contributor.
 - [ranwise](https://github.com/ranwise) - Contributor.
-- [sobolev](https://github.com/sobolevn) - Contributor. Inspirer.
+- [sobolevn](https://github.com/sobolevn) - Contributor. Inspirer.
 - [mrcrilly](https://github.com/mrcrilly) - Contributor.
 - [FliegendeWurst](https://github.com/FliegendeWurst) - Contributor.
 - [bderusha](https://github.com/bderusha) - Contributor.
