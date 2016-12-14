@@ -100,6 +100,44 @@ or how to generate dummy model of transport:
 'Airbus 778'
 ```
 
+or how to generate some dummy code:
+```python
+
+>>> from elizabeth import Code
+>>> code = Code('en')
+
+>>> code.custom_code()
+'Q643'
+
+>>> code.custom_code(mask="##@@#@@-@@@#/##-##-@@@@")
+'41FS3AI-ACV0/52-32-FPVQ'
+
+>>> code.custom_code(mask="?!!!!!", char="?", digit="!")
+'L12017'
+
+>>> code.issn()
+'5039-2343'
+
+>>> code.isbn()
+'1-97490-675-9'
+
+>>> code.isbn(fmt='isbn-13')
+'802-1-09978-470-4'
+
+>>> code.ean()
+'0580057151628'
+
+>>> code.ean(fmt='ean-8')
+'23518689'
+
+>>> code.imei()
+'981644226691583'
+
+>>> code.imei(mask="#34##########227")
+'9342683485818227'
+```
+
+
 When you use only one locale you can use the `Generic` , that provides all providers at one class.
 
 This is a contrived example, but it illustrates how this works.
