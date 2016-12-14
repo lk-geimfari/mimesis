@@ -760,7 +760,7 @@ class Personal(object):
             PhD.
         """
         t = self.data['title'][gender][type_]
-        return t
+        return choice(t)
 
     def full_name(self, gender='female', reverse=False):
         """

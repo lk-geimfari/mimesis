@@ -189,7 +189,7 @@ class PersonalTestCase(DummyCase):
 
     def test_title(self):
         result = self.generic.personal.title(type_='typical')
-        self.assertIsNotNone(result)
+        self.assertIsInstance(result, str)
 
-        result4 = self.generic.personal.title(type_='academic')
-        self.assertIsNotNone(result4)
+        result2 = self.generic.personal.title(type_='academic')
+        self.assertIsInstance(result2, str)
