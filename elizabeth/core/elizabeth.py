@@ -3,6 +3,7 @@
 :copyright: (c) 2016 by Likid Geimfari <likid.geimfari@gmail.com>.
 :software_license: MIT, see LICENSES for more details.
 :repository: https://github.com/lk-geimfari/elizabeth
+:contributors: http://bit.ly/2hlzxgE
 """
 import os
 import sys
@@ -317,6 +318,7 @@ class Text(object):
     def alphabet(self, letter_case=None):
         """
         Get an alphabet for current locale.
+
         :param letter_case: Letter case.
         :return: Alphabet (type list).
         """
@@ -328,7 +330,7 @@ class Text(object):
 
     def text(self, quantity=5):
         """
-        Generate text.
+        Generate the text.
 
         :param quantity: Quantity of sentences.
         :returns: Text.
@@ -438,7 +440,7 @@ class Text(object):
         """
         Generate a random temperature value.
 
-        :param scale: Scale of temperature.
+        :param scale: Scale of temperature ('f' for Fahrenheit and 'c' for Celsius).
         :param minimum: Minimum value of temperature.
         :param maximum: Maximum value of temperature.
         :returns: Temperature in Celsius or Fahrenheit.
@@ -496,6 +498,7 @@ class Code(object):
             "de": "3",
             "en": "1",
             "es": "84",
+            "fa": "600",
             "fi": "951",
             "fr": "2",
             "is": "9935",
@@ -2078,8 +2081,6 @@ class Path(object):
     More: https://en.wikipedia.org/wiki/Path_(computing)
     And More: https://en.wikipedia.org/wiki/Home_directory
     """
-
-    # TODO: Add support for MS Windows.
 
     def __init__(self):
         self.__p = Personal('en')

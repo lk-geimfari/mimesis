@@ -9,9 +9,9 @@ from os.path import (
 
 from elizabeth.exceptions import UnsupportedLocale
 
-PATH = abspath(join(dirname(__file__), 'data'))
-
 __all__ = ['pull']
+
+PATH = abspath(join(dirname(__file__), 'data'))
 
 SUPPORTED_LOCALES = {
     "da": {
@@ -85,6 +85,7 @@ SUPPORTED_LOCALES = {
 def pull(file, locale='en'):
     """
     Open file and get content from file. Memorize result using lru_cache.
+
     pull - is internal function, please do not use this function outside
     the module 'elizabeth'.
 
