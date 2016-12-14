@@ -5,18 +5,19 @@ from unittest import TestCase
 from elizabeth import Generic
 from tests.test_data import DummyCase
 
-# all locale dependent cases
-from tests.test_data.test_address import AddressTestCase
-from tests.test_data.test_business import BusinessTestCase
-from tests.test_data.test_datetime import DatetimeTestCase
-from tests.test_data.test_food import FoodTestCase
-from tests.test_data.test_personal import PersonalTestCase
-from tests.test_data.test_sciense import ScienceTestCase
-from tests.test_data.test_text import TextTestCase
-from tests.test_data.test_code import CodeTestCase
+# A ll locale dependent cases
+
+from .test_data.test_address import AddressTestCase
+from .test_data.test_business import BusinessTestCase
+from .test_data.test_datetime import DatetimeTestCase
+from .test_data.test_food import FoodTestCase
+from .test_data.test_personal import PersonalTestCase
+from .test_data.test_sciense import ScienceTestCase
+from .test_data.test_text import TextTestCase
+from .test_data.test_code import CodeTestCase
 
 
-class ElizabethBase(DummyCase):
+class GenericTestCase(DummyCase):
     def setUp(self):
         self.generic = Generic(self.LANG)
 
@@ -49,72 +50,72 @@ class ElizabethBase(DummyCase):
         self.assertIsNotNone(result)
 
 
-class ElizabethLocaleBase(
-    ElizabethBase, AddressTestCase, BusinessTestCase,
+class LocaleBase(
+    GenericTestCase, AddressTestCase, BusinessTestCase,
     DatetimeTestCase, FoodTestCase, PersonalTestCase,
     ScienceTestCase, TextTestCase, CodeTestCase):
     pass
 
 
-class EnglishTestCase(ElizabethLocaleBase, TestCase):
+class EnglishTestCase(LocaleBase, TestCase):
     LANG = 'en'
 
 
-class GermanTestCase(ElizabethLocaleBase, TestCase):
+class GermanTestCase(LocaleBase, TestCase):
     LANG = 'de'
 
 
-class RussianTestCase(ElizabethLocaleBase, TestCase):
+class RussianTestCase(LocaleBase, TestCase):
     LANG = 'ru'
 
 
-class DanishTestCase(ElizabethLocaleBase, TestCase):
+class DanishTestCase(LocaleBase, TestCase):
     LANG = 'da'
 
 
-class FrenchTestCase(ElizabethLocaleBase, TestCase):
+class FrenchTestCase(LocaleBase, TestCase):
     LANG = 'fr'
 
 
-class SpanishTestCase(ElizabethLocaleBase, TestCase):
+class SpanishTestCase(LocaleBase, TestCase):
     LANG = 'es'
 
 
-class ItalianTestCase(ElizabethLocaleBase, TestCase):
+class ItalianTestCase(LocaleBase, TestCase):
     LANG = 'it'
 
 
-class BrazilianPortugueseTestCase(ElizabethLocaleBase, TestCase):
+class BrazilianPortugueseTestCase(LocaleBase, TestCase):
     LANG = 'pt-br'
 
 
-class NorwegianTestCase(ElizabethLocaleBase, TestCase):
+class NorwegianTestCase(LocaleBase, TestCase):
     LANG = 'no'
 
 
-class SwedishTestCase(ElizabethLocaleBase, TestCase):
+class SwedishTestCase(LocaleBase, TestCase):
     LANG = 'sv'
 
 
-class FinnishTestCase(ElizabethLocaleBase, TestCase):
+class FinnishTestCase(LocaleBase, TestCase):
     LANG = 'fi'
 
 
-class DutchTestCase(ElizabethLocaleBase, TestCase):
+class DutchTestCase(LocaleBase, TestCase):
     LANG = 'nl'
 
 
-class IcelandicTestCase(ElizabethLocaleBase, TestCase):
+class IcelandicTestCase(LocaleBase, TestCase):
     LANG = 'is'
 
 
-class PortugueseTestCase(ElizabethLocaleBase, TestCase):
+class PortugueseTestCase(LocaleBase, TestCase):
     LANG = 'pt'
 
 
-class PolishTestCase(ElizabethLocaleBase, TestCase):
+class PolishTestCase(LocaleBase, TestCase):
     LANG = 'pl'
 
 
-class FarsiTestCase(ElizabethLocaleBase, TestCase):
+class FarsiTestCase(LocaleBase, TestCase):
     LANG = 'fa'

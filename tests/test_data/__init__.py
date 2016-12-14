@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
 
-
-class DummyCase:
+class DummyCase(object):
     LANG = None
