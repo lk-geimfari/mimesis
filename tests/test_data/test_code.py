@@ -4,6 +4,11 @@ from tests.test_data import DummyCase
 
 
 class CodeTestCase(DummyCase):
+
+    def test_issn(self):
+        result = self.generic.code.issn()
+        self.assertEqual(len(result), 9)
+
     def test_isbn(self):
         result = self.generic.code.isbn(fmt='isbn-10')
         self.assertTrue(len(result) >= 10)

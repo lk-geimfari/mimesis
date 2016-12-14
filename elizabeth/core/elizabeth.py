@@ -484,6 +484,18 @@ class Code(object):
 
         return code
 
+    def issn(self, mask=None):
+        """
+        Generate a random International Standard
+        Serial Number (ISSN).
+
+        :param mask: Mask ISSN.
+        :return: ISSN.
+        """
+        if not mask:
+            mask = "####-####"
+        return self.custom_code(mask=mask)
+
     def isbn(self, fmt='isbn-10'):
         """
         Generate ISBN for current locale.
