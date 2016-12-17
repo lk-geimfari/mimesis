@@ -56,106 +56,108 @@ At this moment a library has 16 supported locales:
 
 ## Examples
 
-Below you can see, how to generate fake paths using `Elizabeth`:
+How to generate user data:
+
 ```python
->>> from elizabeth import Path
->>> path = Path()
+from elizabeth import Personal
 
->>> path.root
-'/'
+personal = Personal('en')
 
->>> path.home
-'/home/'
-
->>> path.user(gender='female')
-'/home/chieko'
-
->>> path.users_folder(user_gender='male')
-'/home/lyndon/Documents'
-
->>> path.dev_dir(user_gender='female')
-'/home/edra/Development/Ruby'
-
->>> path.project_dir(user_gender='female')
-'/home/katharina/Development/C Shell/litany'
-```
-or how to generate dummy model of transport:
-```python
->>> from elizabeth import Transport
->>> transport = Transport()
-
->>> transport.truck()
-'Union-0632 FX'
-
->>> transport.truck(model_mask="##/@")
-'Jiaotong-78/P'
-
->>> transport.car()
-'Pontiac Grand Am'
-
->>> transport.airplane()
-'Boeing 575'
-
->>> transport.airplane(model_mask="7##")
-'Airbus 778'
+for _ in range(0, 15):
+    print(personal.full_name(gender='female'))
 ```
 
-or how to generate some dummy code:
-```python
-
->>> from elizabeth import Code
->>> code = Code('en')
-
->>> code.custom_code()
-'Q643'
-
->>> code.custom_code(mask="##@@#@@-@@@#/##-##-@@@@")
-'41FS3AI-ACV0/52-32-FPVQ'
-
->>> code.custom_code(mask="?!!!!!", char="?", digit="!")
-'L12017'
-
->>> code.issn()
-'5039-2343'
-
->>> code.isbn()
-'1-97490-675-9'
-
->>> code.isbn(fmt='isbn-13')
-'802-1-09978-470-4'
-
->>> code.ean()
-'0580057151628'
-
->>> code.ean(fmt='ean-8')
-'23518689'
-
->>> code.imei()
-'981644226691583'
-
->>> code.imei(mask="#34##########227")
-'9342683485818227'
+Output:
+```
+Sixta Cantu
+Antonetta Garrison
+Caroll Mcgee
+Helaine Mendoza
+Taneka Dickerson
+Jackelyn Stafford
+Tashia Olsen
+Reiko Lynn
+Roberto Baxter
+Rachal Hartman
+Susann Hogan
+Natashia Klein
+Delora Conrad
+Britteny Valdez
+Sunni Strickland
 ```
 
+For other locales, exactly the same way (Icelandic) :
+
+```python
+personal = Personal('is')
+
+for _ in range(0, 15):
+    print(personal.full_name(gender='male'))
+```
+
+Output:
+```
+Karl Brynjúlfsson
+Þórgrímur Garibaldason
+Rögnvald Eiðsson
+Zóphanías Bergfinnsson
+Vésteinn Ríkharðsson
+Friðleifur Granason
+Fjarki Arngarðsson
+Hafsteinn Þrymsson
+Hallvarður Valgarðsson
+Baltasar Hlégestsson
+Sívar Kakalason
+Sigurjón Tómasson
+Grímnir Unason
+Gýmir Þórðsson
+```
+
+How to work tith datetime:
+
+```python
+from elizabeth import Datetime
+
+dt = Datetime('no') # Norwegian
+
+for _ in range(0, 10):
+    print(dt.birthday())
+```
+
+Output:
+```
+Mai 17, 1982
+August 13, 1984
+September 6, 1999
+Februar 8, 1998
+April 8, 1985
+August 5, 1990
+Mai 23, 1997
+April 25, 1987
+November 5, 1980
+Mars 27, 1990
+```
 
 When you use only one locale you can use the `Generic` , that provides all providers at one class.
-
-This is a contrived example, but it illustrates how this works.
 
 ```python
 from elizabeth import Generic
 
-el = Generic('en')
+g = Generic('ru')
 
+for _ in range(0, 5):
+    name = g.personal.full_name()
+    birthday = g.datetime.birthday(readable=True)
+    print(name, '-', birthday)
 
-def patient(gender='female'):
-    patient_card = {
-        'full_name': el.personal.full_name(gender=gender),
-        'gender': el.personal.gender(gender=gender),
-        'blood_type': el.person.blood_type(),
-        'birthday': el.datetime.birthday()
-    }
-return patient_card
+```
+Output:
+```
+Гера Исакова - Май 31, 1981
+Лидия Воронцова - Апрель 11, 1990
+Пелагея Исаева - Август 7, 1983
+Евфросинья Ермакова - Март 12, 1992
+Веселина Зыкова - Октябрь 18, 1996
 ```
 
 ## Data providers
