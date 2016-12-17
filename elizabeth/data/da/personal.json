@@ -5,17 +5,30 @@
 	"Neutral"
   ],
   "worldview": [
-	"Test"
+	"Agnosticism",
+	"Ateisme",
+	"Buddhisme",
+	"Deisme",
+	"Katolicisme",
+	"Kungfutses lærersætninger",
+	"Ortodoks",
+	"Panteisme",
+	"Protestantisme",
+	"Sekulær Humanisme"
   ],
   "favorite_movie": [
 	"Test"
   ],
   "occupation": [
-	"Test",
 	"Test"
   ],
   "academic_degree": [
-	"Test"
+	"Cand.med.",
+	"Cand.oecon.",
+	"Cand.polit.",
+	"Cand.scient.",
+	"Cand.scient.pol.",
+	"Civiløkonom"
   ],
   "surnames": [
 	"Aaen",
@@ -1941,16 +1954,52 @@
 	"Test"
   ],
   "university": [
-	"Test"
+	"Center for Elektronnanoskopi",
+	"DTU Fødevareinstituttet",
+	"DTU Veterinærinstituttet",
+	"Danmarks Tekniske Informationscenter",
+	"IT-Universitetet i København",
+	"Institut for Akvatiske Ressourcer",
+	"Institut for Byggeri og Anlæg",
+	"Institut for Elektroteknologi",
+	"Institut for Fotonik",
+	"Institut for Fysik",
+	"Institut for Kemi",
+	"Institut for Kemiteknik",
+	"Institut for Matematik og Computer Science",
+	"Institut for Mekanisk Teknologi",
+	"Institut for Mikro- og Nanoteknologi",
+	"Institut for Rumforskning og -teknologi",
+	"Institut for Systembiologi",
+	"Institut for Systemer",
+	"Institut for Transport",
+	"Institut for Vand og Miljø",
+	"Københavns Erhvervsakademi",
+	"Metropolitan University College",
+	"Nationallaboratoriet for bæredygtig energi",
+	"University College Capital",
+	"University College Lillebælt",
+	"University College Sjælland",
+	"University College Syd",
+	"University College of Northern Danmark",
+	"VIA University College",
+	"Vestjylland University College"
   ],
   "political_views": [
-	"Test"
+	"Apartisk",
+	"Centrist",
+	"Frihedsforkæmper",
+	"Kommunist",
+	"Konservativ"
   ],
   "views_on": [
-	"Test"
+	"Positiv",
+	"Neutral",
+	"Negativ",
+	"Meget negativ",
+	"Kompromissøgende"
   ],
   "language": [
-	"Test",
 	"Test"
   ],
   "sexuality": [
@@ -1958,12 +2007,20 @@
   ],
   "title": {
 	"female": {
-	  "typical": ["Test"],
-	  "academic": ["Test"]
+	  "typical": [
+		"Test"
+	  ],
+	  "academic": [
+		"Test"
+	  ]
 	},
 	"male": {
-	  "typical": ["Test"],
-	  "academic": ["Test"]
+	  "typical": [
+		"Test"
+	  ],
+	  "academic": [
+		"Test"
+	  ]
 	}
   }
 }
