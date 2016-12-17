@@ -908,17 +908,6 @@ class Personal(object):
         """
         return randint(1000, 9999)
 
-    @staticmethod
-    def wmid():
-        """
-        Generate a identifier of user WMID for WebMoney
-
-        :returns: WMID (WebMoney ID).
-        :Example:
-            834296404761
-        """
-        return "".join([choice(digits) for _ in range(12)])
-
     def paypal(self):
         """
         Generate a random PayPal account.
@@ -928,17 +917,6 @@ class Personal(object):
             wolf235@gmail.com
         """
         return self.email()
-
-    @staticmethod
-    def yandex_money():
-        """
-        Generate a random Yandex.Money account.
-
-        :returns: Yandex.Money account.
-        :Example:
-            97508675463414
-        """
-        return "".join([choice(digits) for _ in range(14)])
 
     def gender(self, symbol=False):
         """

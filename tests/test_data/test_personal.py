@@ -49,17 +49,9 @@ class PersonalTestCase(DummyCase):
         result = self.generic.personal.username()
         self.assertTrue(re.match(r'^[a-zA-Z0-9_.-]+$', result))
 
-    def test_wmid(self):
-        result = self.generic.personal.wmid()
-        self.assertEqual(len(result), 12)
-
     def test_paypal(self):
         result = self.generic.personal.paypal()
         self.assertIsNotNone(result)
-
-    def test_yandex_money(self):
-        result = self.generic.personal.yandex_money()
-        self.assertEqual(len(result), 14)
 
     def test_password(self):
         plain = self.generic.personal.password(length=15)
