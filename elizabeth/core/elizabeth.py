@@ -818,7 +818,7 @@ class Personal(object):
         elif algorithm == 'md5':
             return md5(password).hexdigest()
         else:
-            return password
+            return password.decode('utf-8')
 
     @staticmethod
     def email(gender='female'):
