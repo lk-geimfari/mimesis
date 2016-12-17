@@ -113,7 +113,7 @@ Grímnir Unason
 Gýmir Þórðsson
 ```
 
-How to work tith datetime:
+How to work with datetime:
 
 ```python
 from elizabeth import Datetime
