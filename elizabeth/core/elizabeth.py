@@ -619,45 +619,26 @@ class Business(object):
         """
         return choice(common.CURRENCY)
 
-    def price(self, **kwargs):
+    def price(self, minimum=10.00, maximum=1000.00):
         """
         Generate a random price.
 
-        :param kwargs: Keyword arguments of minimum
-        and maximum values of price.
+        :param minimum:
+        :param maximum:
         :return: Price.
         :Example:
             599.99 $.
         """
-        currencies = {
-            "da": "kr",
-            "de": "€",
-            "en": "$",
-            "es": "€",
-            "fa": "﷼",
-            "fi": "€",
-            "fr": "€",
-            "is": "kr",
-            "it": "€",
-            "nl": "€",
-            "no": "kr",
-            "pl": "zł",
-            "pt": "€",
-            "pt-br": "R$",
-            "ru": "₽",
-            "sv": "kr",
-            "default": "$"
-        }
+        currencies = common.CURRENCY_SYMBOLS
 
-        mi = kwargs.get('minimum', 10.00)
-        ma = kwargs.get('maximum', 1000.00)
+        price = uniform(minimum, maximum)
 
-        price = uniform(float(mi), float(ma))
+        fmt = '{0:.2f} {1}'
 
         if self.locale in currencies:
-            return '{0:.2f} {1}'.format(price, currencies[self.locale])
-
-        return '{0:.2f}'.format(price)
+            return fmt.format(price, currencies[self.locale])
+        else:
+            return fmt.format(price, currencies['default'])
 
     @staticmethod
     def discount(minimum=5, maximum=20):

@@ -3496,3 +3496,23 @@ ISBN_GROUPS = {
     "ru": "5",
     "sv": "91"
 }
+
+CURRENCY_SYMBOLS = {
+    "da": "kr",
+    "de": "€",
+    "en": "$",
+    "es": "€",
+    "fa": "﷼",
+    "fi": "€",
+    "fr": "€",
+    "is": "kr",
+    "it": "€",
+    "nl": "€",
+    "no": "kr",
+    "pl": "zł",
+    "pt": "€",
+    "pt-br": "R$",
+    "ru": "₽",
+    "sv": "kr",
+    "default": "$"
+}
