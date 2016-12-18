@@ -4,7 +4,7 @@
 :copyright: (c) 2016 by Likid Geimfari <likid.geimfari@gmail.com>.
 :software_license: MIT, see LICENSES for more details.
 :repository: https://github.com/lk-geimfari/elizabeth
-:contributors: https://github.com/lk-geimfari/elizabeth/blob/master/CONTRIBUTORS.md
+:contributors: see CONTRIBUTING.md for more details.
 """
 
 from elizabeth.core import *
