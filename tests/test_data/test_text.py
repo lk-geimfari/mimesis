@@ -55,7 +55,8 @@ class TextTestCase(DummyCase):
         self.assertEqual(scale, '°C')
         self.assertTrue((temp >= -30) and (temp <= 40))
 
-        result = self.generic.text.weather(scale='f', minimum=0, maximum=10).split(' ')
+        result = self.generic.text.weather(
+            scale='f', minimum=0, maximum=10).split(' ')
         temp, scale = float(result[0]), result[1]
         self.assertEqual(scale, '°F')
         self.assertTrue((temp >= 0) and (temp <= (10 * 1.8) + 32))

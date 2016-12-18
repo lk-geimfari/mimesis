@@ -32,10 +32,12 @@ class PersonalTestCase(DummyCase):
         if self.generic.personal.locale in diff_surnames:
 
             result = self.generic.personal.surname(gender='female')
-            self.assertIn(result, self.generic.personal.data['surnames']['female'])
+            self.assertIn(
+                result, self.generic.personal.data['surnames']['female'])
 
             result = self.generic.personal.surname(gender='male')
-            self.assertIn(result, self.generic.personal.data['surnames']['male'])
+            self.assertIn(
+                result, self.generic.personal.data['surnames']['male'])
         else:
             result = self.generic.personal.surname()
             self.assertIn(result, self.generic.personal.data['surnames'])
@@ -88,7 +90,9 @@ class PersonalTestCase(DummyCase):
         self.assertTrue(re.match(r'[\d]+((-|\s)?[\d]+)+', result))
 
     def test_expiration_date(self):
-        result = self.generic.personal.credit_card_expiration_date(minimum=16, maximum=25)
+        result = self.generic.personal.credit_card_expiration_date(
+            minimum=16, maximum=25)
+
         year = result.split('/')[1]
         self.assertTrue((int(year) >= 16) and (int(year) <= 25))
 

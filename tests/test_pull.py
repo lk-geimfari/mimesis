@@ -13,10 +13,7 @@ class PullTestCase(TestCase):
         data = pull('personal.json', 'en')
         self.assertIsNotNone(data['views_on'])
         self.assertIsInstance(data['views_on'], list)
-
-        ulocale = lambda: pull('personal.json', 'spoke')
-        self.assertRaises(UnsupportedLocale, ulocale)
-
-        # Fake file
-        ffile = lambda: pull('something.json', 'en')
-        self.assertRaises(FileNotFoundError, ffile)
+        self.assertRaises(UnsupportedLocale,
+                          lambda: pull('personal.json', 'spoke'))
+        self.assertRaises(FileNotFoundError,
+                          lambda: pull('something.json', 'en'))
