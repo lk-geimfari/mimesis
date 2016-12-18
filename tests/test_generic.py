@@ -1,11 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from unittest import TestCase
-
 from elizabeth import Generic
 from tests.test_data import DummyCase
-
-# A ll locale dependent cases
 
 from tests.test_data.test_address import AddressTestCase
 from tests.test_data.test_business import BusinessTestCase
@@ -55,67 +51,3 @@ class LocaleBase(
     DatetimeTestCase, FoodTestCase, PersonalTestCase,
     ScienceTestCase, TextTestCase, CodeTestCase):
     pass
-
-
-class EnglishTestCase(LocaleBase, TestCase):
-    LANG = 'en'
-
-
-class GermanTestCase(LocaleBase, TestCase):
-    LANG = 'de'
-
-
-class RussianTestCase(LocaleBase, TestCase):
-    LANG = 'ru'
-
-
-class DanishTestCase(LocaleBase, TestCase):
-    LANG = 'da'
-
-
-class FrenchTestCase(LocaleBase, TestCase):
-    LANG = 'fr'
-
-
-class SpanishTestCase(LocaleBase, TestCase):
-    LANG = 'es'
-
-
-class ItalianTestCase(LocaleBase, TestCase):
-    LANG = 'it'
-
-
-class BrazilianPortugueseTestCase(LocaleBase, TestCase):
-    LANG = 'pt-br'
-
-
-class NorwegianTestCase(LocaleBase, TestCase):
-    LANG = 'no'
-
-
-class SwedishTestCase(LocaleBase, TestCase):
-    LANG = 'sv'
-
-
-class FinnishTestCase(LocaleBase, TestCase):
-    LANG = 'fi'
-
-
-class DutchTestCase(LocaleBase, TestCase):
-    LANG = 'nl'
-
-
-class IcelandicTestCase(LocaleBase, TestCase):
-    LANG = 'is'
-
-
-class PortugueseTestCase(LocaleBase, TestCase):
-    LANG = 'pt'
-
-
-class PolishTestCase(LocaleBase, TestCase):
-    LANG = 'pl'
-
-
-class FarsiTestCase(LocaleBase, TestCase):
-    LANG = 'fa'

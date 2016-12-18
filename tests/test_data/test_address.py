@@ -48,6 +48,9 @@ class AddressTestCase(DummyCase):
         elif self.generic.address.locale == 'da':
             self.assertEqual(result.split('-')[0], 'DK')
             self.assertTrue(re.match(r'[0-9]{4}$', result.split('-')[1]))
+        elif self.generic.address.locale == 'fa':
+            fa_pattern = r'\d{5}-\d{5}'
+            self.assertTrue(re.match(fa_pattern, result))
         else:
             self.assertTrue(re.match(r'[0-9]{5}$', result))
 

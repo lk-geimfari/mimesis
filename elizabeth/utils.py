@@ -44,7 +44,7 @@ SUPPORTED_LOCALES = {
     },
     'is': {
         'name': 'Icelandic',
-        'name_local': 'Íslenska',
+        'name_local': 'Íslenska'
     },
     "it": {
         "name": "Italian",
@@ -60,7 +60,7 @@ SUPPORTED_LOCALES = {
     },
     "pl": {
         'name': "Polish",
-        'name_local': "Polski",
+        'name_local': "Polski"
     },
     "pt": {
         "name": "Portuguese",

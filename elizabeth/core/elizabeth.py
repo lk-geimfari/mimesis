@@ -151,14 +151,15 @@ class Address(object):
         _ = Code.custom_code
 
         codes = {
-            'ru': _(mask='######'),
-            'nl': _(mask='1### @@'),
+            'da': 'DK-' + _(mask='####'),
+            'fa': _(mask='#####-#####'),
             'is': _(mask='###'),
+            'nl': _(mask='1### @@'),
+            'no': _(mask='####'),
             'pl': _(mask='##-###'),
             'pt': _(mask='####'),
-            'no': _(mask='####'),
-            'da': 'DK-' + _(mask='####'),
             'br-pt': _(mask='#####-###'),
+            'ru': _(mask='######'),
             'default': _(mask='#####')
         }
         if self.locale in codes:
