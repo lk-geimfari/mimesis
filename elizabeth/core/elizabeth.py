@@ -557,6 +557,8 @@ class Code(object):
         Get a random CPF (brazilian social security code)
         :param with_mask: use CPF mask (###.###.###-##) in the return
         :returns: Random CPF
+        :Example:
+            001.137.297-40
         """
         def get_verifying_digit_cpf(cpf, peso):
             """
@@ -589,6 +591,8 @@ class Code(object):
         Get a random cnpj (brazilian social security code)
         :param with_mask: use cnpj mask (###.###.###-##) in the return
         :returns: Random cnpj
+        :Example:
+            77.732.230/0001-70
         """
         def get_verifying_digit_cnpj(cnpj, peso):
             """
