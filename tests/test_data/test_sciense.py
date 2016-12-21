@@ -1,14 +1,25 @@
 # -*- coding: utf-8 -*-
 
+from unittest import TestCase
+
+from elizabeth import Science
 import elizabeth.core.interdata as common
 from tests.test_data import DummyCase
 
 
-class ScienceTestCase(DummyCase):
+class ScienceBaseTestCase(TestCase):
+    def setUp(self):
+        self.science = Science()
+
+    def tearDown(self):
+        del self.science
+
     def test_math_formula(self):
-        result = self.generic.science.math_formula()
+        result = self.science.math_formula()
         self.assertIn(result, common.MATH_FORMULAS)
 
+
+class ScienceTestCase(DummyCase):
     def test_scientific_article(self):
         result = self.generic.science.scientific_article()
         self.assertIn(result, self.generic.science._data['article'])

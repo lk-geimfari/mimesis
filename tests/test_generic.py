@@ -10,7 +10,7 @@ from tests.test_data.test_food import FoodTestCase
 from tests.test_data.test_personal import PersonalTestCase
 from tests.test_data.test_sciense import ScienceTestCase
 from tests.test_data.test_text import TextTestCase
-from tests.test_data.test_code import CodeTestCase
+from tests.test_data.test_code import CodeIntTestCase
 
 
 class GenericTestCase(DummyCase):
@@ -49,5 +49,5 @@ class GenericTestCase(DummyCase):
 class LocaleBase(
     GenericTestCase, AddressTestCase, BusinessTestCase,
     DatetimeTestCase, FoodTestCase, PersonalTestCase,
-    ScienceTestCase, TextTestCase, CodeTestCase):
+    ScienceTestCase, TextTestCase, CodeIntTestCase):
     pass

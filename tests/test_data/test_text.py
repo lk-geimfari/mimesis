@@ -1,6 +1,34 @@
 # -*- coding: utf-8 -*-
 
+from unittest import TestCase
+
+from elizabeth import Text
 from tests.test_data import DummyCase
+
+
+class TextBaseTestCase(TestCase):
+    def setUp(self):
+        self.text = Text()
+
+    def tearDown(self):
+        del self.text
+
+    def test_hex_color(self):
+        result = self.text.hex_color()
+        self.assertIn('#', result)
+
+    def test_weather(self):
+        result = self.text.weather(scale='c').split(' ')
+        temp, scale = float(result[0]), result[1]
+        self.assertEqual(scale, '°C')
+        self.assertTrue((temp >= -30) and (temp <= 40))
+
+        result = self.text.weather(
+            scale='f', minimum=0, maximum=10).split(' ')
+
+        temp, scale = float(result[0]), result[1]
+        self.assertEqual(scale, '°F')
+        self.assertTrue((temp >= 0) and (temp <= (10 * 1.8) + 32))
 
 
 class TextTestCase(DummyCase):
@@ -44,19 +72,3 @@ class TextTestCase(DummyCase):
     def test_color(self):
         result = self.generic.text.color()
         self.assertIn(result, self.generic.text.data['color'])
-
-    def test_hex_color(self):
-        result = self.generic.text.hex_color()
-        self.assertIn('#', result)
-
-    def test_weather(self):
-        result = self.generic.text.weather(scale='c').split(' ')
-        temp, scale = float(result[0]), result[1]
-        self.assertEqual(scale, '°C')
-        self.assertTrue((temp >= -30) and (temp <= 40))
-
-        result = self.generic.text.weather(
-            scale='f', minimum=0, maximum=10).split(' ')
-        temp, scale = float(result[0]), result[1]
-        self.assertEqual(scale, '°F')
-        self.assertTrue((temp >= 0) and (temp <= (10 * 1.8) + 32))

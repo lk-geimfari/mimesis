@@ -1,16 +1,44 @@
 # -*- coding: utf-8 -*-
 
 import re
+from unittest import TestCase
 
+from elizabeth import Address
 import elizabeth.core.interdata as common
 from tests.test_data import DummyCase
 
 
-class AddressTestCase(DummyCase):
+class AddressBaseTestCase(TestCase):
+    def setUp(self):
+        self.address = Address()
+
+    def tearDown(self):
+        del self.address
+
     def test_street_number(self):
-        result = self.generic.address.street_number()
+        result = self.address.street_number()
         self.assertTrue(re.match(r'[0-9]{1,5}$', result))
 
+    def test_latitude(self):
+        result = self.address.latitude()
+        self.assertLessEqual(result, 90)
+
+    def test_longitude(self):
+        result = self.address.longitude()
+        self.assertLessEqual(result, 180)
+
+    def test_coordinates(self):
+        result = self.address.coordinates()
+        self.assertIsInstance(result, dict)
+
+        latitude = result['latitude']
+        self.assertTrue(latitude <= 90)
+
+        longitude = result['longitude']
+        self.assertTrue(longitude <= 180)
+
+
+class AddressTestCase(DummyCase):
     def test_street_name(self):
         result = self.generic.address.street_name()
         self.assertIn(result, self.generic.address.data['street']['name'])
@@ -27,9 +55,8 @@ class AddressTestCase(DummyCase):
         result = self.generic.address.state()
         self.assertIn(result, self.generic.address.data['state']['name'])
 
-    def test_state_args(self):
-        result = self.generic.address.state(abbr=True)
-        self.assertIn(result, self.generic.address.data['state']['abbr'])
+        result_ = self.generic.address.state(abbr=True)
+        self.assertIn(result_, self.generic.address.data['state']['abbr'])
 
     def test_postal_code(self):
         result = self.generic.address.postal_code()
@@ -64,21 +91,3 @@ class AddressTestCase(DummyCase):
     def test_city(self):
         result = self.generic.address.city()
         self.assertIn(result, self.generic.address.data['city'])
-
-    def test_latitude(self):
-        result = self.generic.address.latitude()
-        self.assertLessEqual(result, 90)
-
-    def test_longitude(self):
-        result = self.generic.address.longitude()
-        self.assertLessEqual(result, 180)
-
-    def test_coordinates(self):
-        result = self.generic.address.coordinates()
-        self.assertIsInstance(result, dict)
-
-        latitude = result['latitude']
-        self.assertTrue(latitude <= 90)
-
-        longitude = result['longitude']
-        self.assertTrue(longitude <= 180)

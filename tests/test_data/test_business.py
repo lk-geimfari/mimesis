@@ -1,7 +1,31 @@
 # -*- coding: utf-8 -*-
 
+from unittest import TestCase
+
+from elizabeth import Business
 import elizabeth.core.interdata as common
 from tests.test_data import DummyCase
+
+
+class BusinessBaseTestCase(TestCase):
+    def setUp(self):
+        self.business = Business()
+
+    def tearDown(self):
+        del self.business
+
+    def test_copyright(self):
+        result = self.business.copyright()
+        self.assertIn('©', result)
+        self.assertTrue(len(result) > 4)
+
+    def test_currency_sio(self):
+        result = self.business.currency_iso()
+        self.assertIn(result, common.CURRENCY)
+
+    def test_discount(self):
+        result = self.business.discount(5, 25)
+        self.assertIsNotNone(result)
 
 
 class BusinessTestCase(DummyCase):
@@ -18,22 +42,9 @@ class BusinessTestCase(DummyCase):
         result = self.generic.business.company()
         self.assertIn(result, self.generic.business.data['company']['name'])
 
-    def test_copyright(self):
-        result = self.generic.business.copyright()
-        self.assertIn('©', result)
-        self.assertTrue(len(result) > 4)
-
-    def test_currency_sio(self):
-        result = self.generic.business.currency_iso()
-        self.assertIn(result, common.CURRENCY)
-
     def test_price(self):
         currencies = ('kr', '€', 'R$', '₽', '$', 'zł', '﷼')
         result = self.generic.business.price(minimum=100.00, maximum=1999.99)
         price, symbol = result.split(' ')
         self.assertTrue((float(price) >= 100.00) and (float(price) <= 2000))
         self.assertIn(symbol, currencies)
-
-    def test_discount(self):
-        result = self.generic.business.discount(5, 25)
-        self.assertIsNotNone(result)
