@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import re
+
 from tests.test_data import DummyCase
 
 
@@ -43,3 +45,18 @@ class CodeTestCase(DummyCase):
 
         a, b, c = result
         self.assertTrue(a.isalpha() and c.isalpha() and b.isdigit())
+
+    def test_cpf(self):
+        # test if the cpf has 14 digits with the mask
+        cpf_with_mask = self.generic.code.cpf()
+        self.assertEqual(len(cpf_with_mask), 14, cpf_with_mask)
+        # test the mask
+        non_numeric_digits = re.sub('\d', '', cpf_with_mask)
+        self.assertEqual('..-', non_numeric_digits, non_numeric_digits)
+        self.assertEqual(len(re.sub('\D', '', cpf_with_mask)),
+                         11, cpf_with_mask)
+        # test for the cpf without mask
+        cpf_without_mask = self.generic.code.cpf(False)
+        self.assertEqual(len(cpf_without_mask), 11, cpf_without_mask)
+        non_numeric_digits = re.sub('\d', '', cpf_without_mask)
+        self.assertEqual('', non_numeric_digits, non_numeric_digits)
