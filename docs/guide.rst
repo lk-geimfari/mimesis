@@ -392,7 +392,7 @@ Development
 	stack = Development.stack_of_tech(nosql=True)
 
 	# Get a random link to github repository.
-	# Output: https://github.com/lk-geimfari/church
+	# Output: https://github.com/lk-geimfari/elizabeth
 	repo = Development.github_repo()
 
 Food
