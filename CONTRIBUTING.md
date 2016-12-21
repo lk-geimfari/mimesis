@@ -33,4 +33,5 @@ Your contributions are always welcome!
 - [FliegendeWurst](https://github.com/FliegendeWurst) - Contributor.
 - [bderusha](https://github.com/bderusha) - Contributor.
 - [Battleroid](https://github.com/Battleroid) - Contributor.
-
+- [martini97](https://github.com/martini97) - Contributor.
+- [yn-coder](https://github.com/yn-coder) - Contributor.
