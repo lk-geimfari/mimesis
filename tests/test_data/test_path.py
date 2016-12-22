@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-import sys, os
+import os
+import sys
 from unittest import TestCase
 
 from elizabeth.core.elizabeth import Path
