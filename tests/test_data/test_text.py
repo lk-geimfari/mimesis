@@ -6,7 +6,7 @@ from elizabeth import Text
 from tests.test_data import DummyCase
 
 
-class TextBaseTestCase(TestCase):
+class TextBaseTest(TestCase):
     def setUp(self):
         self.text = Text()
 

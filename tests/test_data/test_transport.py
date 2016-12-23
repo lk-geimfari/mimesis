@@ -6,15 +6,12 @@ from elizabeth.core.elizabeth import Transport
 import elizabeth.core.interdata as common
 
 
-class TransportTestCase(TestCase):
+class TransportTest(TestCase):
     def setUp(self):
         self.transport = Transport()
 
     def tearDown(self):
         del self.transport
-
-    def test(self):
-        pass
 
     def test_truck(self):
         result = self.transport.truck().split('-')
@@ -22,7 +19,6 @@ class TransportTestCase(TestCase):
         self.assertIn(manufacturer, common.TRUCKS)
         self.assertTrue(len(model) == 7)
 
-    def test_truck_args(self):
         result = self.transport.truck(model_mask='###').split('-')
         manufacturer, model = result[0], result[1]
         self.assertIn(manufacturer, common.TRUCKS)

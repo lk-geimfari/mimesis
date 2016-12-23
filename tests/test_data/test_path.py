@@ -7,7 +7,7 @@ from elizabeth.core.elizabeth import Path
 import elizabeth.core.interdata as common
 
 
-class PathCase(TestCase):
+class PathTest(TestCase):
     def setUp(self):
         self.path = Path()
 

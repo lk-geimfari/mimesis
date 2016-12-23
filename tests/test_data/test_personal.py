@@ -5,10 +5,12 @@ from unittest import TestCase
 
 from elizabeth import Personal
 import elizabeth.core.interdata as common
+
 from tests.test_data import DummyCase
+from ._patterns import *
 
 
-class PersonalBaseTestCase(TestCase):
+class PersonalBaseTest(TestCase):
     def setUp(self):
         self.personal = Personal()
 
@@ -41,13 +43,11 @@ class PersonalBaseTestCase(TestCase):
 
     def test_username(self):
         result = self.personal.username()
-        self.assertTrue(re.match(r'^[a-zA-Z0-9_.-]+$', result))
+        self.assertTrue(re.match(USERNAME_REGEX, result))
 
     def test_email(self):
         result = self.personal.email()
-        self.assertTrue(
-            re.match(r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)",
-                     result))
+        self.assertTrue(re.match(EMAIL_REGEX, result))
 
     def test_bitcoin(self):
         result = self.personal.bitcoin()
@@ -59,7 +59,7 @@ class PersonalBaseTestCase(TestCase):
 
     def test_credit_card_number(self):
         result = self.personal.credit_card_number()
-        self.assertTrue(re.match(r'[\d]+((-|\s)?[\d]+)+', result))
+        self.assertTrue(re.match(CREDIT_CARD_REGEX, result))
 
     def test_expiration_date(self):
         result = self.personal.credit_card_expiration_date(
