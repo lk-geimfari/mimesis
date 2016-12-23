@@ -6,7 +6,7 @@ from elizabeth import Code
 from tests.test_data import DummyCase
 
 
-class CodeBaseTestCase(TestCase):
+class CodeBaseTest(TestCase):
     def setUp(self):
         self.code = Code('en')
 

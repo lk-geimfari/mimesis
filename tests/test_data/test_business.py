@@ -7,7 +7,7 @@ import elizabeth.core.interdata as common
 from tests.test_data import DummyCase
 
 
-class BusinessBaseTestCase(TestCase):
+class BusinessBaseTest(TestCase):
     def setUp(self):
         self.business = Business()
 

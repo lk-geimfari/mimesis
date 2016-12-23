@@ -6,7 +6,7 @@ import elizabeth.core.interdata as common
 from elizabeth.core.elizabeth import Development
 
 
-class DevelopmentTestCase(TestCase):
+class DevelopmentTest(TestCase):
     def setUp(self):
         self.dev = Development()
 

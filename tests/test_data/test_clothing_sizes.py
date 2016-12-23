@@ -5,7 +5,7 @@ from unittest import TestCase
 from elizabeth.core.elizabeth import ClothingSizes
 
 
-class ClothingSizesTestCase(TestCase):
+class ClothingSizesTest(TestCase):
     def setUp(self):
         self.sizes = ClothingSizes()
 

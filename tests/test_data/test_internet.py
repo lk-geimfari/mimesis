@@ -7,7 +7,7 @@ import elizabeth.core.interdata as common
 from elizabeth.core.elizabeth import Internet
 
 
-class InternetSizesTestCase(TestCase):
+class InternetTest(TestCase):
     def setUp(self):
         self.net = Internet()
 

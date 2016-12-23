@@ -6,7 +6,7 @@ from elizabeth import Datetime
 from tests.test_data import DummyCase
 
 
-class DatetimeBaseTestCase(TestCase):
+class DatetimeBaseTest(TestCase):
     def setUp(self):
         self.datetime = Datetime()
 

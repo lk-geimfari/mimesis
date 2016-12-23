@@ -6,7 +6,7 @@ import elizabeth.core.interdata as common
 from elizabeth.core.elizabeth import File
 
 
-class FileTestCase(TestCase):
+class FileTest(TestCase):
     def setUp(self):
         self.file = File()
 

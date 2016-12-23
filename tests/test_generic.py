@@ -13,7 +13,7 @@ from tests.test_data.test_text import TextTestCase
 from tests.test_data.test_code import CodeIntTestCase
 
 
-class GenericTestCase(DummyCase):
+class GenericTest(DummyCase):
     def setUp(self):
         self.generic = Generic(self.LANG)
 
@@ -47,7 +47,7 @@ class GenericTestCase(DummyCase):
 
 
 class LocaleBase(
-    GenericTestCase, AddressTestCase, BusinessTestCase,
+    GenericTest, AddressTestCase, BusinessTestCase,
     DatetimeTestCase, FoodTestCase, PersonalTestCase,
     ScienceTestCase, TextTestCase, CodeIntTestCase):
     pass

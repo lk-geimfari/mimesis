@@ -6,7 +6,7 @@ import elizabeth.core.interdata as common
 from elizabeth.core.elizabeth import Hardware
 
 
-class HardwareTestCase(TestCase):
+class HardwareTest(TestCase):
     def setUp(self):
         self.hard = Hardware()
 
