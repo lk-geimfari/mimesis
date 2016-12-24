@@ -57,10 +57,11 @@ At this moment a library has 16 supported locales:
 
 ## Using with Flask
 
-
-You can use `Elizabeth` with your Flask-application.
+You can use `Elizabeth` with your Flask-application (or with any another Web-framwrork that suppor ORM).
 
 ```python
+# Some logic
+# ...
 class Patient(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True)
@@ -75,20 +76,21 @@ class Patient(db.Model):
         super(Patient, self).__init__(**kwargs)
 
     @staticmethod
-    def _bootstrap(count=2000, locale='en', gender='female'):
+    def _bootstrap(count=2000, locale='en'):
         from elizabeth import Personal
 
         person = Personal(locale)
 
         for _ in range(count):
-            patient = Patient(email=person.email(),
-                              phone_number=person.telephone(),
-                              full_name=person.full_name(gender=gender),
-                              age=person.age(minimum=18, maximum=45),
-                              weight=person.weight(),
-                              height=person.height(),
-                              blood_type=person.blood_type()
-                              )
+            patient = Patient(
+                email=person.email(),
+                phone_number=person.telephone(),
+                full_name=person.full_name(gender='female'),
+                age=person.age(minimum=18, maximum=45),
+                weight=person.weight(),
+                height=person.height(),
+                blood_type=person.blood_type()
+            )
 
             db.session.add(patient)
             try:
@@ -96,6 +98,13 @@ class Patient(db.Model):
             except IntegrityError:
                 db.session.rollback()
 ```
+
+Just run shell mode
+```
+(venv) ➜ python3 manage.py shell
+```
+
+and do following:
 
 ```python
 >>> db
@@ -114,99 +123,63 @@ Result:
 
 ## A common use
 
-How to generate user data:
+Import a provider that you need
 
 ```python
-from elizabeth import Personal
+>>>> from elizabeth import Personal
+```
+and create instance of provider that was be imported:
 
-personal = Personal('en')
+```python
+>>> personal = Personal('en')
+```
+and call the one from methods:
 
-for _ in range(0, 15):
-    print(personal.full_name(gender='female'))
+```python
+>>> for _ in range(0, 5):
+       personal.full_name(gender='female')
 ```
 
 Output:
 ```
-Sixta Cantu
 Antonetta Garrison
-Caroll Mcgee
-Helaine Mendoza
 Taneka Dickerson
 Jackelyn Stafford
 Tashia Olsen
-Reiko Lynn
-Roberto Baxter
 Rachal Hartman
-Susann Hogan
-Natashia Klein
-Delora Conrad
-Britteny Valdez
-Sunni Strickland
 ```
 
 For other locales, exactly the same way (Icelandic) :
 
 ```python
-personal = Personal('is')
-
-for _ in range(0, 15):
-    print(personal.full_name(gender='male'))
+>>> personal = Personal('is')
 ```
-
-Output:
-```
-Karl Brynjúlfsson
-Þórgrímur Garibaldason
-Rögnvald Eiðsson
-Zóphanías Bergfinnsson
-Vésteinn Ríkharðsson
-Friðleifur Granason
-Fjarki Arngarðsson
-Hafsteinn Þrymsson
-Hallvarður Valgarðsson
-Baltasar Hlégestsson
-Sívar Kakalason
-Sigurjón Tómasson
-Grímnir Unason
-Gýmir Þórðsson
-```
-
-How to work with datetime:
 
 ```python
-from elizabeth import Datetime
-
-dt = Datetime('no') # Norwegian
-
-for _ in range(0, 10):
-    print(dt.birthday())
+>>> for _ in range(0, 5):
+        personal.full_name(gender='male')
 ```
 
 Output:
 ```
-Mai 17, 1982
-August 13, 1984
-September 6, 1999
-Februar 8, 1998
-April 8, 1985
-August 5, 1990
-Mai 23, 1997
-April 25, 1987
-November 5, 1980
-Mars 27, 1990
+Þórgrímur Garibaldason
+Zóphanías Bergfinnsson
+Vésteinn Ríkharðsson
+Hallvarður Valgarðsson
+Baltasar Hlégestsson
 ```
 
 When you use only one locale you can use the `Generic` , that provides all providers at one class.
 
 ```python
-from elizabeth import Generic
+>>> from elizabeth import Generic
 
-g = Generic('ru')
+>>> g = Generic('ru')
 
-for _ in range(0, 5):
-    name = g.personal.full_name()
-    birthday = g.datetime.birthday(readable=True)
-    print(name, '-', birthday)
+>>> for _ in range(0, 5):
+        name = g.personal.full_name()
+        birthday = g.datetime.birthday(readable=True)
+        print(name, '-', birthday)
 
 ```
 Output:
