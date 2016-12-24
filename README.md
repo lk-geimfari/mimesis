@@ -55,7 +55,64 @@ At this moment a library has 16 supported locales:
 ➜  ~ python3 -m unittest discover tests
 ```
 
-## Examples
+## Using with Flask
+
+
+You can use `Elizabeth` with your Flask-application.
+
+```python
+class Patient(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(120), unique=True)
+    phone_number = db.Column(db.String(25))
+    full_name = db.Column(db.String(100))
+    weight = db.Column(db.String(64))
+    height = db.Column(db.String(64))
+    blood_type = db.Column(db.String(64))
+    age = db.Column(db.Integer)
+
+    def __init__(self, **kwargs):
+        super(Patient, self).__init__(**kwargs)
+
+    @staticmethod
+    def _bootstrap(count=2000, locale='en', gender='female'):
+        from elizabeth import Personal
+
+        person = Personal(locale)
+
+        for _ in range(count):
+            patient = Patient(email=person.email(),
+                              phone_number=person.telephone(),
+                              full_name=person.full_name(gender=gender),
+                              age=person.age(minimum=18, maximum=45),
+                              weight=person.weight(),
+                              height=person.height(),
+                              blood_type=person.blood_type()
+                              )
+
+            db.session.add(patient)
+            try:
+                db.session.commit()
+            except IntegrityError:
+                db.session.rollback()
+```
+
+```python
+>>> db
+<SQLAlchemy engine='sqlite:///db_dev.sqlite'>
+
+>>> Patient
+<class 'app.models.Patient'>
+
+>>> Patient()._bootstrap(count=1000, locale='en', gender='female')
+```
+
+Result:
+
+![en](https://raw.githubusercontent.com/lk-geimfari/elizabeth/master/other/screenshots/en_bootstrap.png)
+
+
+## A common use
 
 How to generate user data:
 
