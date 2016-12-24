@@ -128,7 +128,7 @@ Examples
 - `Flask-church`_ - an extension for Flask based on Elizabeth.
 - `Presturinn`_ - This is a fake API based on Falcon and Elizabeth v0.2.0.
 
-.. _Flask-church: https://github.com/lk-geimfari/flask_church)
+.. _Flask-church: https://github.com/lk-geimfari/flask_church
 .. _Presturinn: https://github.com/lk-geimfari/presturinn
 
 Contributing
