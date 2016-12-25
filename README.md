@@ -57,7 +57,7 @@ At this moment a library has 16 supported locales:
 
 ## Using with Flask
 
-You can use `Elizabeth` with your Flask-application (or with any another Web-framwrork that suppor ORM).
+You can use `Elizabeth` with your Flask-application (with any other frameworks in a similar manner).
 
 ```python
 # Some logic
@@ -179,7 +179,7 @@ When you use only one locale you can use the `Generic` , that provides all provi
 >>> for _ in range(0, 5):
         name = g.personal.full_name()
         birthday = g.datetime.birthday(readable=True)
-        print(name, '-', birthday)
+        name + ' - ' + birthday
 
 ```
 Output:
