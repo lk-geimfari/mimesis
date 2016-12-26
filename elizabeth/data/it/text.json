@@ -3208,5 +3208,13 @@
 	  "y",
 	  "z"
 	]
-  }
+  },
+  "level": [
+	"basso",
+	"moderato",
+	"alto",
+	"molto alto",
+	"estremo",
+	"critico"
+  ]
 }

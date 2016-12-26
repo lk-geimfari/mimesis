@@ -2225,5 +2225,13 @@
 	  "æ",
 	  "ø"
 	]
-  }
+  },
+  "level": [
+	"lav",
+	"moderat",
+	"høy",
+	"meget høy",
+	"ekstrem",
+	"kritisk"
+  ]
 }

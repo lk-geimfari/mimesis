@@ -1671,5 +1671,13 @@
 	  "ö",
 	  "ü"
 	]
-  }
+  },
+  "level": [
+	"niedrig",
+	"mäßig",
+	"hoch",
+	"sehr hoch",
+	"extrem",
+	"kritisch"
+  ]
 }

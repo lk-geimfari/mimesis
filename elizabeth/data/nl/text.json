@@ -9698,5 +9698,13 @@
 	  "y",
 	  "z"
 	]
-  }
+  },
+  "level": [
+	"low",
+	"matig",
+	"hoog",
+	"zeer hoog",
+	"extreme",
+	"kritische"
+  ]
 }

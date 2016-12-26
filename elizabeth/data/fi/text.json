@@ -4276,5 +4276,13 @@
 	  "š",
 	  "ž"
 	]
-  }
+  },
+  "level": [
+	"matala",
+	"kohtalainen",
+	"korkea",
+	"erittäin korkea",
+	"äärimmäinen",
+	"kriittinen"
+  ]
 }

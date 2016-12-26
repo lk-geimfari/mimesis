@@ -5170,5 +5170,13 @@
 	  "ý",
 	  "þ"
 	]
-  }
+  },
+  "level": [
+	"lágt",
+	"miðlungs",
+	"hár",
+	"mjög hár",
+	"öfgafullt",
+	"mikilvægt"
+  ]
 }

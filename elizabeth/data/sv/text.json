@@ -3210,5 +3210,13 @@
 	  "ä",
 	  "ö"
 	]
-  }
+  },
+  "level": [
+	"låg",
+	"måttlig",
+	"hög",
+	"mycket hög",
+	"extrem",
+	"kritisk"
+  ]
 }

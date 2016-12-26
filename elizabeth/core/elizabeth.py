@@ -329,6 +329,17 @@ class Text(object):
         alpha = self.data['alphabet'][letter_case]
         return alpha
 
+    def level(self):
+        """
+        Generate a random level of danger or something else.
+
+        :return: Level.
+        :Example:
+            critical.
+        """
+        lvl = choice(self.data['level'])
+        return lvl
+
     def text(self, quantity=5):
         """
         Generate the text.
@@ -2160,7 +2171,7 @@ class Generic(object):
         self.transport = Transport()
         self.path = Path()
 
-    # Rewrite all @properties as dynamics.
+    # TODO: Refactor all.
     @property
     def personal(self):
         if callable(self._personal):

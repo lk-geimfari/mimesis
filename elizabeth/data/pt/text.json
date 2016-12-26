@@ -2452,5 +2452,13 @@
 	  "y",
 	  "z"
 	]
-  }
+  },
+  "level": [
+	"baixo",
+	"moderado",
+	"alto",
+	"muito alto",
+	"extremo",
+	"crítico"
+  ]
 }

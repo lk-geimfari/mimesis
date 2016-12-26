@@ -5151,5 +5151,13 @@
 	  "ź",
 	  "ż"
 	]
-  }
+  },
+  "level": [
+	"niski",
+	"średni",
+	"wysoki",
+	"bardzo wysokie",
+	"ekstremalne",
+	"krytyczny"
+  ]
 }

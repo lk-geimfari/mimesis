@@ -126,5 +126,13 @@
 	  "y",
 	  "z"
 	]
-  }
+  },
+  "level": [
+	"low",
+	"moderate",
+	"high",
+	"very high",
+	"extreme",
+	"critical"
+  ]
 }

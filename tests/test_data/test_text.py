@@ -72,3 +72,8 @@ class TextTestCase(DummyCase):
     def test_color(self):
         result = self.generic.text.color()
         self.assertIn(result, self.generic.text.data['color'])
+
+    def test_level(self):
+        result = self.generic.text.level()
+        self.assertIsNotNone(result)
+        self.assertIsInstance(result, str)

@@ -2078,5 +2078,13 @@
 	  "æ",
 	  "ø"
 	]
-  }
+  },
+  "level": [
+	"lav",
+	"moderat",
+	"høj",
+	"meget høj",
+	"ekstrem",
+	"kritisk"
+  ]
 }
