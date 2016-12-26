@@ -149,6 +149,11 @@ class PersonalTestCase(DummyCase):
         result = self.generic.personal.full_name(gender='female')
         _result = result.split(' ')
         self.assertIsInstance(_result, list)
+        self.assertIsNotNone(_result)
+
+        result = self.generic.personal.full_name(reverse=True)
+        self.assertIsNotNone(result)
+
 
     def test_gender(self):
         result = self.generic.personal.gender()

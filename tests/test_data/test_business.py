@@ -23,10 +23,6 @@ class BusinessBaseTest(TestCase):
         result = self.business.currency_iso()
         self.assertIn(result, common.CURRENCY)
 
-    def test_discount(self):
-        result = self.business.discount(5, 25)
-        self.assertIsNotNone(result)
-
 
 class BusinessTestCase(DummyCase):
     def test_company_type(self):

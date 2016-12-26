@@ -654,19 +654,6 @@ class Business(object):
         else:
             return fmt.format(price, currencies['default'])
 
-    @staticmethod
-    def discount(minimum=5, maximum=20):
-        """
-        Generate a random discount.
-
-        :param minimum: Minimum value of discount
-        :param maximum: Maximum valie of discount.
-        :return: Discount.
-        :Example:
-            -13 %.
-        """
-        return '-{0}%'.format(randint(minimum, maximum))
-
 
 class Personal(object):
     """
