@@ -201,6 +201,8 @@ You can say [thanks](https://saythanks.io/to/lk-geimfari)!
 ## Contributing
 Your contributions are always welcome! Please take a look at the [contribution](https://github.com/lk-geimfari/elizabeth/blob/master/CONTRIBUTING.md) guidelines first. [Here](https://github.com/lk-geimfari/elizabeth/blob/master/CONTRIBUTING.md#contributors) you can look a list of contributors
 
+## Changelog
+See [CHANGELOG.md](https://github.com/lk-geimfari/elizabeth/blob/master/CHANGELOG.md).
 
 ## Disclaimer
 The author does not assume any responsibility for how you will use this library and how you will use data generated with this library. This library is designed only for developers and only with good intentions. Do not use the data generated with `Elizabeth` for illegal purposes.
