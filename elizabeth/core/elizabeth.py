@@ -8,6 +8,7 @@
 import os
 import sys
 import array
+import inspect
 from datetime import (
     date,
     timedelta,
@@ -2157,6 +2158,12 @@ class Generic(object):
         self.internet = Internet()
         self.transport = Transport()
         self.path = Path()
+
+    def add_provider(self, cls):
+        if inspect.isclass(cls):
+            setattr(self, cls.__name__, cls())
+        else:
+            raise TypeError("Provider must be a class")
 
     # TODO: Refactor all.
     @property
