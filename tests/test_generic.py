@@ -47,6 +47,9 @@ class GenericTest(DummyCase):
 
     def test_add_provider(self):
         class CustomProvider:
+            class Meta:
+                name = 'custom_provider'
+
             def say(self):
                 return 'Custom'
 
@@ -55,8 +58,8 @@ class GenericTest(DummyCase):
                 return 1
 
         self.generic.add_provider(CustomProvider)
-        self.assertIsNotNone(self.generic.customprovider.say())
-        self.assertEqual(self.generic.customprovider.number(), 1)
+        self.assertIsNotNone(self.generic.custom_provider.say())
+        self.assertEqual(self.generic.custom_provider.number(), 1)
         with self.assertRaises(TypeError):
             self.generic.add_provider(True)
 

@@ -2161,7 +2161,10 @@ class Generic(object):
 
     def add_provider(self, cls):
         if inspect.isclass(cls):
-            setattr(self, cls.__name__.lower(), cls())
+            if hasattr(cls, 'Meta'):
+                setattr(self, cls.Meta.name, cls())
+            else:
+                setattr(self, cls.__name__, cls())
         else:
             raise TypeError("Provider must be a class")
 
