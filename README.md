@@ -198,6 +198,9 @@ You also can add custom provider to `Generic`.
 >>> generic = Generic('en')
 
 >>> class SomeProvider():
+        class Meta:
+            name = 'some_provider'
+
         def ints(self):
             return [i for i in range(0, 5)]
 
@@ -208,7 +211,7 @@ You also can add custom provider to `Generic`.
 >>> generic.add_provider(SomeProvider)
 >>> generic.add_provider(Another)
 
->>> generic.someprovider.ints()
+>>> generic.some_provider.ints()
 [0, 1, 2, 3, 4]
 
 >>> generic.another.bye()

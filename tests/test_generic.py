@@ -47,6 +47,9 @@ class GenericTest(DummyCase):
 
     def test_add_provider(self):
         class CustomProvider:
+            class Meta:
+                name = 'custom_provider'
+
             def say(self):
                 return 'Custom'
 
