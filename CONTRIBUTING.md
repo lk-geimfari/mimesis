@@ -1,4 +1,21 @@
-# Contributing
+# Contributors
+
+- [lk-geimfari](https://github.com/lk-geimfari) - Inventor of `elizabeth`.
+- [Battleroid](https://github.com/Battleroid) - Contributor.
+- [sobolevn](https://github.com/sobolevn) - Contributor. Inspirer.
+- [auyer](https://github.com/auyer) - Contributor (`pt-br`).
+- [aminalaee](https://github.com/aminalaee) - Contributor (`fa`).
+- [jackmcmorrow](https://github.com/jackmcmorrow) - Contributor (`pt-br`).
+- [Costava](https://github.com/Costava) - Contributor.
+- [ranwise](https://github.com/ranwise) - Contributor.
+- [mrcrilly](https://github.com/mrcrilly) - Contributor.
+- [FliegendeWurst](https://github.com/FliegendeWurst) - Contributor.
+- [bderusha](https://github.com/bderusha) - Contributor.
+- [martini97](https://github.com/martini97) - Contributor.
+- [yn-coder](https://github.com/yn-coder) - Contributor.
+
+
+---
 
 Your contributions are always welcome!
 
@@ -18,20 +35,3 @@ Your contributions are always welcome!
 
 - If you add any functionality, then you should add tests for it.
 
-----------------------------------------------------
-
-# Contributors
-
-- [lk-geimfari](https://github.com/lk-geimfari) - Inventor of `elizabeth`.
-- [auyer](https://github.com/auyer) - Contributor (`pt-br`).
-- [aminalaee](https://github.com/aminalaee) - Contributor (`fa`).
-- [jackmcmorrow](https://github.com/jackmcmorrow) - Contributor (`pt-br`).
-- [Costava](https://github.com/Costava) - Contributor.
-- [ranwise](https://github.com/ranwise) - Contributor.
-- [sobolevn](https://github.com/sobolevn) - Contributor. Inspirer.
-- [mrcrilly](https://github.com/mrcrilly) - Contributor.
-- [FliegendeWurst](https://github.com/FliegendeWurst) - Contributor.
-- [bderusha](https://github.com/bderusha) - Contributor.
-- [Battleroid](https://github.com/Battleroid) - Contributor.
-- [martini97](https://github.com/martini97) - Contributor.
-- [yn-coder](https://github.com/yn-coder) - Contributor.
