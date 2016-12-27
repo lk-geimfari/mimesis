@@ -141,32 +141,30 @@ and call the one from methods:
 ```
 
 Output:
-```
-Antonetta Garrison
-Taneka Dickerson
-Jackelyn Stafford
-Tashia Olsen
-Rachal Hartman
+```python
+'Antonetta Garrison'
+'Taneka Dickerson'
+'Jackelyn Stafford'
+'Tashia Olsen'
+'Rachal Hartman'
 ```
 
 For other locales, exactly the same way (Icelandic) :
 
 ```python
 >>> personal = Personal('is')
-```
 
-```python
 >>> for _ in range(0, 5):
         personal.full_name(gender='male')
 ```
 
 Output:
-```
-Þórgrímur Garibaldason
-Zóphanías Bergfinnsson
-Vésteinn Ríkharðsson
-Hallvarður Valgarðsson
-Baltasar Hlégestsson
+```python
+'Þórgrímur Garibaldason'
+'Zóphanías Bergfinnsson'
+'Vésteinn Ríkharðsson'
+'Hallvarður Valgarðsson'
+'Baltasar Hlégestsson'
 ```
 
 When you use only one locale you can use the `Generic` , that provides all providers at one class.
@@ -174,21 +172,47 @@ When you use only one locale you can use the `Generic` , that provides all provi
 ```python
 >>> from elizabeth import Generic
 
->>> g = Generic('ru')
+>>> g = Generic('en')
 
 >>> for _ in range(0, 5):
-        name = g.personal.full_name()
-        birthday = g.datetime.birthday(readable=True)
-        name + ' - ' + birthday
+        name = g.personal.name()
+        b_day = g.datetime.birthday()
+        "%s - %s" % (name, b_day)
+```
 
-```
 Output:
+```pyhton
+'Sharda - November 4, 2000'
+'Nevada - January 16, 1980'
+'Dreama - August 10, 1987'
+'Jani - July 30, 1989'
+'Chin - September 24, 1994'
 ```
-Гера Исакова - Май 31, 1981
-Лидия Воронцова - Апрель 11, 1990
-Пелагея Исаева - Август 7, 1983
-Евфросинья Ермакова - Март 12, 1992
-Веселина Зыкова - Октябрь 18, 1996
+
+## Custom provider
+You also can add custom provider to `Generic`.
+
+```python
+>>> from elizabeth import Generic
+
+>>> generic = Generic('en')
+
+>>> class SomeProvider():
+        def ints(self):
+            return [i for i in range(0, 5)]
+
+>>> class Another():
+        def bye(self):
+            return "Bye!"
+
+>>> generic.add_provider(SomeProvider)
+>>> generic.add_provider(Another)
+
+>>> generic.someprovider.ints()
+[0, 1, 2, 3, 4]
+
+>>> generic.another.bye()
+'Bye!'
 ```
 
 ## Data providers
