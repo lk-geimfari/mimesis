@@ -1,7 +1,6 @@
-## 0.3.6 (2016-12-27)
+## Changelog
 
-Features and
-  - minor updates
+### Version 0.3.6
 
-Bugfixes:
-  - fixed issue with `interdata`
+- Minor updates
+- Fixed issue with `interdata`.
