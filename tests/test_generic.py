@@ -46,16 +46,17 @@ class GenericTest(DummyCase):
         self.assertIsNotNone(result)
 
     def test_add_provider(self):
-        class MyCustomProvider:
+        class CustomProvider:
             def say(self):
                 return 'Custom'
 
-            def number(self):
+            @staticmethod
+            def number():
                 return 1
 
-        self.generic.add_provider(MyCustomProvider)
-        self.assertIsNotNone(self.generic.MyCustomProvider.say())
-        self.assertEqual(self.generic.MyCustomProvider.number(), 1)
+        self.generic.add_provider(CustomProvider)
+        self.assertIsNotNone(self.generic.customprovider.say())
+        self.assertEqual(self.generic.customprovider.number(), 1)
         with self.assertRaises(TypeError):
             self.generic.add_provider(True)
 
