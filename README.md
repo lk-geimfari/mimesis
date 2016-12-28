@@ -181,7 +181,7 @@ When you use only one locale you can use the `Generic` , that provides all provi
 ```
 
 Output:
-```pyhton
+```python
 'Sharda - November 4, 2000'
 'Nevada - January 16, 1980'
 'Dreama - August 10, 1987'
