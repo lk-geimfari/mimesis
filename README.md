@@ -202,7 +202,7 @@ You also can add custom provider to `Generic`.
             name = 'some_provider'
 
         def ints(self):
-            return [i for i in range(0, 5)]
+            return [i for i in range(1, 5)]
 
 >>> class Another():
         def bye(self):
@@ -212,7 +212,7 @@ You also can add custom provider to `Generic`.
 >>> generic.add_provider(Another)
 
 >>> generic.some_provider.ints()
-[0, 1, 2, 3, 4]
+[1, 2, 3, 4]
 
 >>> generic.another.bye()
 'Bye!'
