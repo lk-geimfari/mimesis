@@ -1385,7 +1385,8 @@
       "West Yorkshire",
       "Wiltshire",
       "Worcestershire"
-    ]
+    ],
+	"abbr": ["Test"]
   },
   "street": {
     "name": [

@@ -150,7 +150,7 @@ class Address(object):
             389213
         """
         _ = Code.custom_code
-
+        # here @ represents a letter and  # a digit.
         codes = {
             'da': 'DK-' + _(mask='####'),
             'fa': _(mask='#####-#####'),
@@ -161,7 +161,8 @@ class Address(object):
             'pt': _(mask='####'),
             'br-pt': _(mask='#####-###'),
             'ru': _(mask='######'),
-            'default': _(mask='#####')
+            'default': _(mask='#####'),
+            'en-gb': _(mask="@@#@ #@@")
         }
         if self.locale in codes:
             return codes[self.locale]

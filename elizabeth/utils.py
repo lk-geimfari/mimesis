@@ -26,6 +26,10 @@ SUPPORTED_LOCALES = {
         "name": "English",
         "name_local": "English"
     },
+    "en-gb": {
+        "name": "British English",
+        "name_local": "British English"
+    },
     "es": {
         "name": "Spanish",
         "name_local": "Español"
@@ -97,6 +101,8 @@ def pull(file, locale='en'):
     | de - German                  | (data/de)    |
     +------------------------------+--------------+
     | en - English                 | (data/en)    |
+    +------------------------------+--------------+
+    | en-gb - British English      | (data/en-gb) |
     +------------------------------+--------------+
     | ru - Russian                 | (data/ru)    |
     +------------------------------+--------------+

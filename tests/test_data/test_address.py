@@ -7,6 +7,9 @@ from elizabeth import Address
 import elizabeth.core.interdata as common
 from tests.test_data import DummyCase
 
+from ._patterns import EN_GB_POST_CODE, NL_POST_CODE, \
+    PL_POST_CODE, FA_POST_CODE
+
 
 class AddressBaseTest(TestCase):
     def setUp(self):
@@ -65,19 +68,18 @@ class AddressTestCase(DummyCase):
         elif self.generic.address.locale == 'is':
             self.assertTrue(re.match(r'[0-9]{3}$', result))
         elif self.generic.address.locale == 'nl':
-            nl_pattern = r'^[1-9][0-9]{3}\s?[a-zA-Z]{2}$'
-            self.assertTrue(re.match(nl_pattern, result))
+            self.assertTrue(re.match(NL_POST_CODE, result))
         elif self.generic.address.locale == 'pl':
-            pl_pattern = r'\d{2}-\d{3}'
-            self.assertTrue(re.match(pl_pattern, result))
+            self.assertTrue(re.match(PL_POST_CODE, result))
         elif self.generic.address.locale in ('pt', 'no'):
             self.assertTrue(re.match(r'[0-9]{4}$', result))
         elif self.generic.address.locale == 'da':
             self.assertEqual(result.split('-')[0], 'DK')
             self.assertTrue(re.match(r'[0-9]{4}$', result.split('-')[1]))
+        elif self.generic.address.locale == 'en-gb':
+            self.assertTrue(re.match(EN_GB_POST_CODE, result))
         elif self.generic.address.locale == 'fa':
-            fa_pattern = r'\d{5}-\d{5}'
-            self.assertTrue(re.match(fa_pattern, result))
+            self.assertTrue(re.match(FA_POST_CODE, result))
         else:
             self.assertTrue(re.match(r'[0-9]{5}$', result))
 

@@ -23,3 +23,19 @@ EMAIL_REGEX = r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)"
 USERNAME_REGEX = r'^[a-zA-Z0-9_.-]+$'
 
 CREDIT_CARD_REGEX = r'[\d]+((-|\s)?[\d]+)+'
+
+EN_GB_POST_CODE = r'((([A-PR-UWYZ][0-9])|([A-PR-UWYZ][0-9][0-9])|' \
+                  '([A-PR-UWYZ][A-HK-Y][0-9])|([A-PR-UWYZ][A-HK-Y][0-9][0-9])|' \
+                  '([A-PR-UWYZ][0-9][A-HJKSTUW])|([A-PR-UWYZ][A-HK-Y][0-9][ABEHMNPRVWXY]))) ' \
+                  '|| ((GIR)[ ]?(0AA))|(([A-PR-UWYZ][0-9])[ ]?([0-9][ABD-HJLNPQ-UW-Z]{0,2}))' \
+                  '|(([A-PR-UWYZ][0-9][0-9])[ ]?([0-9][ABD-HJLNPQ-UW-Z]{0,2}))|(([A-PR-UWYZ]' \
+                  '[A-HK-Y0-9][0-9])[ ]?([0-9][ABD-HJLNPQ-UW-Z]{0,2}))|(([A-PR-UWYZ][A-HK-Y0-9]' \
+                  '[0-9][0-9])[ ]?([0-9][ABD-HJLNPQ-UW-Z]{0,2}))|(([A-PR-UWYZ][0-9][A-HJKS-UW0-9])' \
+                  '[ ]?([0-9][ABD-HJLNPQ-UW-Z]{0,2}))|(([A-PR-UWYZ][A-HK-Y0-9][0-9][ABEHMNPRVWXY0-9])' \
+                  '[ ]?([0-9][ABD-HJLNPQ-UW-Z]{0,2}))'
+
+NL_POST_CODE = r'^[1-9][0-9]{3}\s?[a-zA-Z]{2}$'
+
+PL_POST_CODE = r'\d{2}-\d{3}'
+
+FA_POST_CODE = r'\d{5}-\d{5}'

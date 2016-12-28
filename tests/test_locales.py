@@ -15,6 +15,10 @@ class EnglishTest(LocaleBase, TestCase):
     LANG = 'en'
 
 
+class EnglishGreatBritainTest(LocaleBase, TestCase):
+    LANG = 'en-gb'
+
+
 class SpanishTest(LocaleBase, TestCase):
     LANG = 'es'
 
