@@ -37,6 +37,13 @@ elizabeth/data/en/food.json
 elizabeth/data/en/personal.json
 elizabeth/data/en/science.json
 elizabeth/data/en/text.json
+elizabeth/data/en-gb/address.json
+elizabeth/data/en-gb/business.json
+elizabeth/data/en-gb/datetime.json
+elizabeth/data/en-gb/food.json
+elizabeth/data/en-gb/personal.json
+elizabeth/data/en-gb/science.json
+elizabeth/data/en-gb/text.json
 elizabeth/data/es/address.json
 elizabeth/data/es/business.json
 elizabeth/data/es/datetime.json

@@ -5,7 +5,7 @@ import elizabeth
 setup(
     name='elizabeth',
     version=elizabeth.__version__,
-    packages=['elizabeth', 'elizabeth.core', 'elizabeth.core.interdata'],
+    packages=['elizabeth', 'elizabeth.core', 'elizabeth.core.interdata', 'elizabeth.builtins'],
     keywords=['fake', 'data', 'testing',
               'generate', 'faker', 'elizabeth',
               'bootstrap', 'db', 'generic',
