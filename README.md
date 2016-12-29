@@ -223,7 +223,7 @@ You also can add custom provider to `Generic`.
 Elizabeth support more than [18](https://github.com/lk-geimfari/elizabeth/blob/master/PROVIDERS.md) data providers, such as Personal, Datetime, Internet and [another](https://github.com/lk-geimfari/elizabeth/blob/master/PROVIDERS.md).
 
 ## Comparison
-[Here](https://gist.github.com/lk-geimfari/461ce92fd32379d7b73c9e12164a9154) you can find very small comparison with Faker. Screenshot [here](blob:http://imgur.com/553c2935-100b-4739-88c6-0b7bd681968a)
+[Here](https://gist.github.com/lk-geimfari/461ce92fd32379d7b73c9e12164a9154) you can find very small comparison with Faker. Screenshot [here](http://i.imgur.com/ZqkE1k2.png)
 
 ## Like it?
 You can say [thanks](https://saythanks.io/to/lk-geimfari)!
