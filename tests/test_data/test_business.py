@@ -17,7 +17,15 @@ class BusinessBaseTest(TestCase):
     def test_copyright(self):
         result = self.business.copyright()
         self.assertIn('©', result)
-        self.assertTrue(len(result) > 4)
+        self.assertIsNotNone(result)
+
+        result_1 = self.business.copyright(date=False)
+        self.assertIn('©', result)
+        self.assertIsNotNone(result_1)
+
+        result_args = self.business.copyright(minimum=1999, maximum=2010)
+        date = result_args.split()[1].split('-')
+        self.assertTrue(int(date[0]) >= 1999 and int(date[1]) <= 2010)
 
     def test_currency_sio(self):
         result = self.business.currency_iso()

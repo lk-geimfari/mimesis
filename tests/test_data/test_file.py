@@ -20,6 +20,6 @@ class FileTest(TestCase):
         source = self.file.extension(file_type='source')
         self.assertIn(source, common.EXTENSIONS['source'])
 
-    def tets_mime_type(self):
+    def test_mime_type(self):
         result = self.file.mime_type()
         self.assertIn(result, common.MIME_TYPES)

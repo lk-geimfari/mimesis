@@ -61,6 +61,9 @@ class PersonalBaseTest(TestCase):
         result = self.personal.credit_card_number()
         self.assertTrue(re.match(CREDIT_CARD_REGEX, result))
 
+        result_mc = self.personal.credit_card_number(card_type='master_card')
+        self.assertTrue(re.match(CREDIT_CARD_REGEX, result_mc))
+
     def test_expiration_date(self):
         result = self.personal.credit_card_expiration_date(
             minimum=16, maximum=25)
@@ -154,7 +157,6 @@ class PersonalTestCase(DummyCase):
         result = self.generic.personal.full_name(reverse=True)
         self.assertIsNotNone(result)
 
-
     def test_gender(self):
         result = self.generic.personal.gender()
         self.assertIn(result, self.generic.personal.data['gender'])
@@ -203,3 +205,7 @@ class PersonalTestCase(DummyCase):
 
         result2 = self.generic.personal.title(type_='academic')
         self.assertIsInstance(result2, str)
+
+    def test_nationality(self):
+        result = self.generic.personal.nationality()
+        self.assertIsNotNone(result)

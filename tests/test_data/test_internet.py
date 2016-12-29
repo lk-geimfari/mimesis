@@ -61,3 +61,7 @@ class InternetTest(TestCase):
     def test_user_agent(self):
         result = self.net.user_agent()
         self.assertIn(result, common.USER_AGENTS)
+
+    def test_image_placeholder(self):
+        result = self.net.image_placeholder(width=400, height=300)
+        self.assertIsNotNone(result)
