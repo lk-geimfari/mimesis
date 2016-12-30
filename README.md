@@ -219,6 +219,27 @@ You also can add custom provider to `Generic`.
 'Bye!'
 ```
 
+## Builtins specific data provider
+
+Every language has specific data that suit only for ones. For example `SSN` for `en` (USA) or `CPF` for `pt-br` (Brazil). `CPF` can be useful only for brazilians.
+
+If user want to use this providers then he must be imported explicitly.
+
+```python
+>>> from elizabeth import Generic
+>>> from elizabeth.builtins import Brazil
+
+>>> generic = Generic('pt-br')
+
+>>> class BrazilProvider(Brazil):
+        class Meta:
+            name = "brazil_provider"
+
+>>> generic.add_provider(BrazilProvider)
+>>> generic.brazil_provider.cpf()
+'001.137.297-40'
+```
+
 ## Data providers
 Elizabeth support more than [18](https://github.com/lk-geimfari/elizabeth/blob/master/PROVIDERS.md) data providers, such as Personal, Datetime, Internet and [another](https://github.com/lk-geimfari/elizabeth/blob/master/PROVIDERS.md).
 
