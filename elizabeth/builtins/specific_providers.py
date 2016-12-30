@@ -1,7 +1,7 @@
 from string import ascii_uppercase
 from random import randint, choice
 
-__all__ = ['USA', 'Brazil']
+__all__ = ['USA', 'Brazil', 'Russia']
 
 
 def _custom_code(mask="@###", char='@', digit='#'):
@@ -36,6 +36,7 @@ class Brazil(object):
     def cpf(with_mask=True):
         """
         Get a random CPF (brazilian social security code)
+
         :param with_mask: use CPF mask (###.###.###-##) in the return
         :returns: Random CPF
         :Example:
@@ -75,6 +76,7 @@ class Brazil(object):
     def cnpj(with_mask=True):
         """
         Get a random cnpj (brazilian social security code)
+
         :param with_mask: use cnpj mask (###.###.###-##) in the return
         :returns: Random cnpj
         :Example:
@@ -147,6 +149,10 @@ class USA(object):
         return _custom_code(mask=mask)
 
     def ssn(self):
+        """
+        Generate a random, but valid Social Security Number.
+        :return:
+        """
         ranges = {
             'NY': (100, 134),
             'NJ': (135, 138),
@@ -165,13 +171,13 @@ class USA(object):
             'WI': (387, 399),
             'KY': (400, 407),
             'TN': (408, 415),
-            'AL': (416, 424 ),
+            'AL': (416, 424),
             'MS': (425, 428),
             'AR': (429, 432),
             'LA': (433, 439),
             'OK': (440, 448),
             'TX': (449, 467),
-            'MN': (468, 477 ),
+            'MN': (468, 477),
             'IA': (478, 485),
             'MO': (486, 500),
             'ND': (501, 502),
@@ -180,18 +186,62 @@ class USA(object):
             'KS': (509, 515),
             'MT': (516, 517),
             'ID': (518, 519),
-            'WY': (520, ),
+            'WY': (520,),
             'CO': (521, 524),
-            'NM': (525, ),
+            'NM': (525,),
             'AZ': (526, 527),
             'UT': (528, 529),
-            'NV': (530, ),
+            'NV': (530,),
             'WA': (531, 539),
             'OR': (540, 544),
             'CA': (545, 573),
-            'AK': (574, ),
+            'AK': (574,),
             'HI': (575, 576),
             'DC': (577, 579),
-            'VI': (580, )
+            'VI': (580,)
         }
         # TODO: Write it
+
+
+class Russia(object):
+    """
+    Specific data for russian language (ru)
+    """
+
+    class Meta:
+        name = 'russia_provider'
+
+    @staticmethod
+    def passport_series(year=None):
+        """
+        Generate random series of passport.
+
+        :param year: Year of manufacture.
+        :return: Series.
+        """
+        year = randint(10, 16) if not \
+            year else year
+
+        region = randint(1, 99)
+        return '{region} {year}'.format(
+            region=region, year=year)
+
+    @staticmethod
+    def passport_number():
+        """
+        Generate random passport number.
+
+        :return: Number.
+        """
+        return _custom_code(mask='######')
+
+    def series_and_number(self):
+        """
+        Generate a random passport number and series.
+
+        :return: Series and number.
+        """
+        snn = '{} {}'.format(
+            self.passport_series(),
+            self.passport_number())
+        return snn

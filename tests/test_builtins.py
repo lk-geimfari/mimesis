@@ -1,7 +1,7 @@
 import re
 from unittest import TestCase
 
-from elizabeth.builtins import Brazil, USA
+from elizabeth.builtins import Brazil, USA, Russia
 
 
 class BrazilTest(TestCase):
@@ -61,3 +61,29 @@ class USATest(TestCase):
         result_2 = self.usa.tracking_number(service='ups')
         self.assertIsNotNone(result_2)
         self.assertTrue(len(result_2) == 18)
+
+
+class RussiaTest(TestCase):
+    def setUp(self):
+        self.russia = Russia()
+
+    def tearDown(self):
+        del self.russia
+
+    def test_passport_series(self):
+        result = self.russia.passport_series()
+        self.assertIsNotNone(result)
+        result = result.split(' ')
+        self.assertIsInstance(result, list)
+
+        result = self.russia.passport_series(year=10)
+        region, year = result.split(' ')
+        self.assertTrue(int(year) == 10)
+
+    def test_passport_number(self):
+        result = self.russia.passport_number()
+        self.assertTrue(len(result) == 6)
+
+    def test_series_and_number(self):
+        result = self.russia.series_and_number()
+        self.assertIsNotNone(result)
