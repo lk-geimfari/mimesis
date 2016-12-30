@@ -1,7 +1,7 @@
 import re
 from unittest import TestCase
 
-from elizabeth.builtins import Brazil
+from elizabeth.builtins import Brazil, USA
 
 
 class BrazilTest(TestCase):
@@ -40,3 +40,26 @@ class BrazilTest(TestCase):
         self.assertEqual(len(cnpj_without_mask), 14, cnpj_without_mask)
         non_numeric_digits = re.sub('\d', '', cnpj_without_mask)
         self.assertEqual('', non_numeric_digits, non_numeric_digits)
+
+
+class USATest(TestCase):
+    def setUp(self):
+        self.en = USA()
+
+    def tearDown(self):
+        del self.en
+
+    def test_usps_tracking_number(self):
+        result = self.en.usps_tracking_number()
+        self.assertIsNotNone(result)
+        self.assertTrue(len(result) == 24 or len(result) == 17)
+
+    def test_fedex_tracking_number(self):
+        result = self.en.fedex_tracking_number()
+        self.assertIsNotNone(result)
+        self.assertTrue(len(result) == 14 or len(result) == 18)
+
+    def test_ups_tracking_number(self):
+        result = self.en.ups_tracking_number()
+        self.assertIsNotNone(result)
+        self.assertTrue(len(result) == 18)
