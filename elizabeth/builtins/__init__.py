@@ -1,9 +1,11 @@
 from random import randint
 
+__all__ = ['Brazil']
+
 
 class Brazil(object):
     """Class that provides special data"""
-    
+
     class Meta:
         name = 'brazil_provider'
 

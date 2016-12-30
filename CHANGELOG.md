@@ -1,5 +1,13 @@
 ## Changelog
 
+
+### Version 0.3.8
+
+- Update data in `data/`
+- Added builtins specific providers.
+- Other minor improvements
+
+
 ### Version 0.3.7
 
 - Added `en-gb`.

@@ -9,7 +9,7 @@
 
 from elizabeth.core import *
 
-__version__ = '0.3.7'
+__version__ = '0.3.8'
 __author__ = 'Likid Geimfari'
 
 __all__ = [
