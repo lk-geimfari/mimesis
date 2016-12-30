@@ -44,22 +44,20 @@ class BrazilTest(TestCase):
 
 class USATest(TestCase):
     def setUp(self):
-        self.en = USA()
+        self.usa = USA()
 
     def tearDown(self):
-        del self.en
+        del self.usa
 
     def test_usps_tracking_number(self):
-        result = self.en.usps_tracking_number()
+        result = self.usa.tracking_number(service='usps')
         self.assertIsNotNone(result)
         self.assertTrue(len(result) == 24 or len(result) == 17)
 
-    def test_fedex_tracking_number(self):
-        result = self.en.fedex_tracking_number()
-        self.assertIsNotNone(result)
-        self.assertTrue(len(result) == 14 or len(result) == 18)
+        result_1 = self.usa.tracking_number(service='fedex')
+        self.assertIsNotNone(result_1)
+        self.assertTrue(len(result_1) == 14 or len(result_1) == 18)
 
-    def test_ups_tracking_number(self):
-        result = self.en.ups_tracking_number()
-        self.assertIsNotNone(result)
-        self.assertTrue(len(result) == 18)
+        result_2 = self.usa.tracking_number(service='ups')
+        self.assertIsNotNone(result_2)
+        self.assertTrue(len(result_2) == 18)

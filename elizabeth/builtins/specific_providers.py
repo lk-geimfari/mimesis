@@ -1,6 +1,8 @@
 from string import ascii_uppercase
 from random import randint, choice
 
+__all__ = ['USA', 'Brazil']
+
 
 def _custom_code(mask="@###", char='@', digit='#'):
     """
@@ -25,12 +27,11 @@ def _custom_code(mask="@###", char='@', digit='#'):
 
 
 class Brazil(object):
-    """Class that provides special data"""
+    """Class that provides special data for pt-br"""
 
     class Meta:
         name = 'brazil_provider'
 
-    # TODO: Refactor
     @staticmethod
     def cpf(with_mask=True):
         """
@@ -43,10 +44,11 @@ class Brazil(object):
 
         def get_verifying_digit_cpf(cpf, peso):
             """
-            Calculates the verifying digit for the cpf
-            :param cpf: list of integers with the cpf
-            :param peso: integer with the weight for the modulo 11 calcule
-            :returns: the verifying digit for the cpf
+            Calculates the verifying digit for the CPF
+
+            :param cpf: ist of integers with the CPF
+            :param peso: Integer with the weight for the modulo 11 calculate
+            :returns: the verifying digit for the CPF
             """
             soma = 0
             for index, digit in enumerate(cpf):
@@ -58,10 +60,13 @@ class Brazil(object):
 
         cpf_without_dv = [randint(0, 9) for _ in range(9)]
         first_dv = get_verifying_digit_cpf(cpf_without_dv, 10)
+
         cpf_without_dv.append(first_dv)
         second_dv = get_verifying_digit_cpf(cpf_without_dv, 11)
         cpf_without_dv.append(second_dv)
+
         cpf = ''.join([str(i) for i in cpf_without_dv])
+
         if with_mask:
             return cpf[:3] + '.' + cpf[3:6] + '.' + cpf[6:9] + '-' + cpf[9:]
         return cpf
@@ -99,9 +104,12 @@ class Brazil(object):
 
         first_dv = get_verifying_digit_cnpj(cnpj_without_dv, 5)
         cnpj_without_dv.append(first_dv)
+
         second_dv = get_verifying_digit_cnpj(cnpj_without_dv, 6)
         cnpj_without_dv.append(second_dv)
+
         cnpj = ''.join([str(i) for i in cnpj_without_dv])
+
         if with_mask:
             return cnpj[:2] + '.' + cnpj[2:5] + '.' + cnpj[5:8] + '/' + \
                    cnpj[8:12] + '-' + cnpj[12:]
@@ -113,24 +121,77 @@ class USA(object):
         name = 'usa_provider'
 
     @staticmethod
-    def usps_tracking_number():
-        masks = [
-            '#### #### #### #### ####',
-            '@@ ### ### ### US'
-        ]
-        mask = choice(masks)
+    def tracking_number(service='usps'):
+        """
+        Generate random tracking number for USPS, FedEx and UPS.
+        :param service:
+        :return:
+        """
+        service = service.lower()
+
+        if service not in ('usps', 'fedex', 'ups'):
+            raise ValueError('Unsupported post service')
+
+        services = {
+            'usps': (
+                '#### #### #### #### ####',
+                '@@ ### ### ### US'
+            ),
+            'fedex': (
+                "#### #### ####",
+                "#### #### #### ###"
+            ),
+            'ups': ("1Z@####@##########",)
+        }
+        mask = choice(services[service])
         return _custom_code(mask=mask)
 
-    @staticmethod
-    def fedex_tracking_number():
-        masks = [
-            "#### #### ####",
-            "#### #### #### ###"
-        ]
-        mask = choice(masks)
-        return _custom_code(mask=mask)
-
-    @staticmethod
-    def ups_tracking_number():
-        mask = "1Z@####@##########"
-        return _custom_code(mask=mask)
+    def ssn(self):
+        ranges = {
+            'NY': (100, 134),
+            'NJ': (135, 138),
+            'PA': (159, 211),
+            'MD': (212, 220),
+            'VA': (223, 231),
+            'WV': (232, 236),
+            'NC': (237, 246),
+            'SC': (247, 251),
+            'GA': (252, 260),
+            'FL': (261, 267),
+            'OH': (268, 302),
+            'IN': (303, 317),
+            'IL': (318, 361),
+            'MI': (362, 386),
+            'WI': (387, 399),
+            'KY': (400, 407),
+            'TN': (408, 415),
+            'AL': (416, 424 ),
+            'MS': (425, 428),
+            'AR': (429, 432),
+            'LA': (433, 439),
+            'OK': (440, 448),
+            'TX': (449, 467),
+            'MN': (468, 477 ),
+            'IA': (478, 485),
+            'MO': (486, 500),
+            'ND': (501, 502),
+            'SD': (503, 504),
+            'NE': (505, 508),
+            'KS': (509, 515),
+            'MT': (516, 517),
+            'ID': (518, 519),
+            'WY': (520, ),
+            'CO': (521, 524),
+            'NM': (525, ),
+            'AZ': (526, 527),
+            'UT': (528, 529),
+            'NV': (530, ),
+            'WA': (531, 539),
+            'OR': (540, 544),
+            'CA': (545, 573),
+            'AK': (574, ),
+            'HI': (575, 576),
+            'DC': (577, 579),
+            'VI': (580, )
+        }
+        # TODO: Write it
