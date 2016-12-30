@@ -4,6 +4,7 @@ setup.py
 elizabeth/__init__.py
 elizabeth/exceptions.py
 elizabeth/utils.py
+elizabeth/builtins/__init__.py
 elizabeth/core/__init__.py
 elizabeth/core/elizabeth.py
 elizabeth/core/interdata/__init__.py
