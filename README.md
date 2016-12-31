@@ -219,7 +219,7 @@ You also can add custom provider to `Generic`.
 'Bye!'
 ```
 
-## Builtins specific data provider
+## Builtins specific data providers
 
 Every language has specific data that suit only for ones. For example `SSN` for `en` (USA) or `CPF` for `pt-br` (Brazil). `CPF` can be useful only for brazilians.
 
@@ -244,14 +244,14 @@ If user want to use this providers then he must be imported explicitly.
 Elizabeth support more than [18](https://github.com/lk-geimfari/elizabeth/blob/master/PROVIDERS.md) data providers, such as Personal, Datetime, Internet and [another](https://github.com/lk-geimfari/elizabeth/blob/master/PROVIDERS.md).
 
 ## Comparison
-[Here](https://gist.github.com/lk-geimfari/461ce92fd32379d7b73c9e12164a9154) you can find very small comparison with Faker. Screenshot [here](http://i.imgur.com/ZqkE1k2.png)
+[Here](https://gist.github.com/lk-geimfari/461ce92fd32379d7b73c9e12164a9154) you can find very small comparison with Faker. Screenshot [here](http://i.imgur.com/ZqkE1k2.png).
 
 ## Like it?
 You can say [thanks](https://saythanks.io/to/lk-geimfari)!
 
 
 ## Contributing
-Your contributions are always welcome! Please take a look at the [contribution](https://github.com/lk-geimfari/elizabeth/blob/master/CONTRIBUTING.md) guidelines first. [Here](https://github.com/lk-geimfari/elizabeth/blob/master/CONTRIBUTING.md#contributors) you can look a list of contributors
+Your contributions are always welcome! Please take a look at the [contribution](https://github.com/lk-geimfari/elizabeth/blob/master/CONTRIBUTING.md) guidelines first. [Here](https://github.com/lk-geimfari/elizabeth/blob/master/CONTRIBUTING.md#contributors) you can look a list of our contributors.
 
 ## Changelog
 See [CHANGELOG.md](https://github.com/lk-geimfari/elizabeth/blob/master/CHANGELOG.md).
@@ -261,4 +261,4 @@ The author does not assume any responsibility for how you will use this library 
 
 
 ## Licence
-Elizabeth is licensed under the MIT License. See [LICENSE](https://github.com/lk-geimfari/elizabeth/blob/master/LICENSE)  for the full license text.
+Elizabeth is licensed under the [MIT License](https://github.com/lk-geimfari/elizabeth/blob/master/LICENSE). See [LICENSE](https://github.com/lk-geimfari/elizabeth/blob/master/LICENSE)  for the full license text.
