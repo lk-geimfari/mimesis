@@ -7,6 +7,7 @@
 - Added builtins specific providers.
 - Other minor improvements
 
+----
 
 ### Version 0.3.7
 
