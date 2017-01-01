@@ -26,7 +26,7 @@
 
 from elizabeth.core import *
 
-__version__ = '0.3.8'
+__version__ = '0.3.9'
 __author__ = 'Likid Geimfari'
 
 __all__ = [
