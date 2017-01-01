@@ -2,6 +2,12 @@
 
 
 ### Version 0.3.8
+ - Minor updates
+ - Bug fix
+
+---
+
+### Version 0.3.8
 
 - Update data in `data/`
 - Added builtins specific providers.
