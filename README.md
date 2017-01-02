@@ -41,7 +41,14 @@ At this moment a library has 17 supported locales:
 | 16 | 🇷🇺   |  `ru`      | Russian              | Русский     |
 | 17 | 🇸🇪   |  `sv`      | Swedish              | Svenska     |
 
+## Comparison
 
+Compared with `Faker`, `Elizabeth` offers:
+
+* an increase in speed
+* more detailed providers. Where `Faker` tries to cover the most common needs, `Elizabeth` strives for more completeness.
+
+[Here](https://gist.github.com/lk-geimfari/461ce92fd32379d7b73c9e12164a9154) you can find a speed comparison with Faker. Screenshot [here](http://i.imgur.com/ZqkE1k2.png).
 
 
 ## Installation
@@ -242,9 +249,6 @@ If user want to use this providers then he must be imported explicitly.
 
 ## Data providers
 Elizabeth support more than [18](https://github.com/lk-geimfari/elizabeth/blob/master/PROVIDERS.md) data providers, such as Personal, Datetime, Internet and [another](https://github.com/lk-geimfari/elizabeth/blob/master/PROVIDERS.md).
-
-## Comparison
-[Here](https://gist.github.com/lk-geimfari/461ce92fd32379d7b73c9e12164a9154) you can find very small comparison with Faker. Screenshot [here](http://i.imgur.com/ZqkE1k2.png).
 
 ## Like it?
 You can say [thanks](https://saythanks.io/to/lk-geimfari)!
