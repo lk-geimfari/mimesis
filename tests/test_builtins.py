@@ -62,6 +62,9 @@ class USATest(TestCase):
         self.assertIsNotNone(result_2)
         self.assertTrue(len(result_2) == 18)
 
+        self.assertRaises(ValueError,
+                          lambda: self.usa.tracking_number(service='x'))
+
 
 class RussiaTest(TestCase):
     def setUp(self):

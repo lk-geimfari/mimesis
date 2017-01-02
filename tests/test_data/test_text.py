@@ -43,6 +43,7 @@ class TextTestCase(DummyCase):
 
     def test_title(self):
         result = self.generic.text.title()
+        self.assertIsNotNone(result)
         self.assertIn(result.strip(), self.generic.text.data['text'])
 
     def test_text(self):

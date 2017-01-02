@@ -57,14 +57,21 @@ class GenericTest(DummyCase):
             def number():
                 return 1
 
-            class Meta:
-                name = 'custom_provider'
-
         self.generic.add_provider(CustomProvider)
         self.assertIsNotNone(self.generic.custom_provider.say())
         self.assertEqual(self.generic.custom_provider.number(), 1)
         with self.assertRaises(TypeError):
             self.generic.add_provider(True)
+
+        class UnnamedProvider():
+            @staticmethod
+            def nothing():
+                return None
+
+        self.generic.add_provider(UnnamedProvider)
+        self.assertIs(self.generic.unnamedprovider.nothing(), None)
+
+        self.assertTrue('unnamedprovider', UnnamedProvider.__name__.lower())
 
 
 class LocaleBase(
