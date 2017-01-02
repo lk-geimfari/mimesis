@@ -1,7 +1,7 @@
 ## Changelog
 
 
-### Version 0.3.8
+### Version 0.3.9
  - Minor updates
  - Bug fix
 
