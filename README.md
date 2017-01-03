@@ -47,6 +47,7 @@ Compared with `Faker`, `Elizabeth` offers:
 
 * an increase in speed
 * more detailed providers. Where `Faker` tries to cover the most common needs, `Elizabeth` strives for more completeness.
+* no dependencies.
 
 [Here](https://gist.github.com/lk-geimfari/461ce92fd32379d7b73c9e12164a9154) you can find a speed comparison with Faker. Screenshot [here](http://i.imgur.com/ZqkE1k2.png).
 
@@ -139,40 +140,21 @@ Import a provider that you need
 and create instance of provider that was be imported:
 
 ```python
+>>> # for other locales, exactly the same way
 >>> personal = Personal('en')
 ```
 and call the one from methods:
 
 ```python
->>> for _ in range(0, 5):
-       personal.full_name(gender='female')
-```
-
-Output:
-```python
+>>> for _ in range(1, 5):
+...     personal.full_name(gender='female')
+... 
 'Antonetta Garrison'
 'Taneka Dickerson'
 'Jackelyn Stafford'
 'Tashia Olsen'
 'Rachal Hartman'
-```
-
-For other locales, exactly the same way (Icelandic) :
-
-```python
->>> personal = Personal('is')
-
->>> for _ in range(0, 5):
-        personal.full_name(gender='male')
-```
-
-Output:
-```python
-'Þórgrímur Garibaldason'
-'Zóphanías Bergfinnsson'
-'Vésteinn Ríkharðsson'
-'Hallvarður Valgarðsson'
-'Baltasar Hlégestsson'
+>>> 
 ```
 
 When you use only one locale you can use the `Generic` , that provides all providers at one class.
@@ -183,19 +165,18 @@ When you use only one locale you can use the `Generic` , that provides all provi
 >>> g = Generic('en')
 
 >>> for _ in range(0, 5):
-        name = g.personal.name()
-        b_day = g.datetime.birthday()
-        "%s - %s" % (name, b_day)
+...         name = g.personal.name()
+...         bday = g.datetime.birthday()
+...         "%s - %s" % (name, bday)
+... 
+'Genna - April 28, 1985'
+'Tandy - July 6, 1983'
+'Livia - September 7, 1988'
+'Nery - February 16, 1996'
+'Basilia - September 9, 1984'
+
 ```
 
-Output:
-```python
-'Sharda - November 4, 2000'
-'Nevada - January 16, 1980'
-'Dreama - August 10, 1987'
-'Jani - July 30, 1989'
-'Chin - September 24, 1994'
-```
 
 ## Custom provider
 You also can add custom provider to `Generic`.
