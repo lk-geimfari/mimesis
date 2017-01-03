@@ -41,6 +41,11 @@ class DatetimeBaseTest(TestCase):
         self.assertTrue(int(hour) <= 24)
         self.assertTrue(int(minutes) <= 60)
 
+    def test_century(self):
+        result = self.datetime.century()
+        self.assertIsNotNone(result)
+        self.assertIsInstance(result, str)
+
 
 class DatetimeTestCase(DummyCase):
     def test_day_of_week(self):

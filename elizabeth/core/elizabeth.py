@@ -1184,6 +1184,17 @@ class Datetime(object):
         """
         return randint(int(minimum), int(maximum))
 
+    @staticmethod
+    def century():
+        """
+        Get a random value from list of centuries (roman format).
+
+        :return: Century.
+        :Example:
+            XXI
+        """
+        return choice(common.ROMAN_NUMS)
+
     def periodicity(self):
         """
         Get a random periodicity string.
