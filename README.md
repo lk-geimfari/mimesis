@@ -45,11 +45,11 @@ At this moment a library has 17 supported locales:
 
 Compared with `Faker`, `Elizabeth` offers:
 
-* an increase in speed
+* an increase in [speed](http://i.imgur.com/ZqkE1k2.png)
 * more detailed providers. Where `Faker` tries to cover the most common needs, `Elizabeth` strives for more completeness.
 * no dependencies.
 
-[Here](https://gist.github.com/lk-geimfari/461ce92fd32379d7b73c9e12164a9154) you can find a speed comparison with Faker. Screenshot [here](http://i.imgur.com/ZqkE1k2.png).
+[Here](https://gist.github.com/lk-geimfari/461ce92fd32379d7b73c9e12164a9154) you can find a speed comparison with Faker.
 
 
 ## Installation
