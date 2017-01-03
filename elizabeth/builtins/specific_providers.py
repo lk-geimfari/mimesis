@@ -148,78 +148,70 @@ class USA(object):
         mask = choice(services[service])
         return _custom_code(mask=mask)
 
-    def ssn(self):
+    @staticmethod
+    def ssn(state='NY'):
         """
         Generate a random, but valid Social Security Number.
+
         :return:
         """
-        # ranges = {
-        #     'NY': (100, 134),
-        #     'NJ': (135, 138),
-        #     'PA': (159, 211),
-        #     'MD': (212, 220),
-        #     'VA': (223, 231),
-        #     'WV': (232, 236),
-        #     'NC': (237, 246),
-        #     'SC': (247, 251),
-        #     'GA': (252, 260),
-        #     'FL': (261, 267),
-        #     'OH': (268, 302),
-        #     'IN': (303, 317),
-        #     'IL': (318, 361),
-        #     'MI': (362, 386),
-        #     'WI': (387, 399),
-        #     'KY': (400, 407),
-        #     'TN': (408, 415),
-        #     'AL': (416, 424),
-        #     'MS': (425, 428),
-        #     'AR': (429, 432),
-        #     'LA': (433, 439),
-        #     'OK': (440, 448),
-        #     'TX': (449, 467),
-        #     'MN': (468, 477),
-        #     'IA': (478, 485),
-        #     'MO': (486, 500),
-        #     'ND': (501, 502),
-        #     'SD': (503, 504),
-        #     'NE': (505, 508),
-        #     'KS': (509, 515),
-        #     'MT': (516, 517),
-        #     'ID': (518, 519),
-        #     'WY': (520,),
-        #     'CO': (521, 524),
-        #     'NM': (525,),
-        #     'AZ': (526, 527),
-        #     'UT': (528, 529),
-        #     'NV': (530,),
-        #     'WA': (531, 539),
-        #     'OR': (540, 544),
-        #     'CA': (545, 573),
-        #     'AK': (574,),
-        #     'HI': (575, 576),
-        #     'DC': (577, 579),
-        #     'VI': (580,)
-        # }
-        pass
+        areas = {
+            'NY': (100, 134),
+            'NJ': (135, 138),
+            'PA': (159, 211),
+            'MD': (212, 220),
+            'VA': (223, 231),
+            'WV': (232, 236),
+            'NC': (237, 246),
+            'SC': (247, 251),
+            'GA': (252, 260),
+            'FL': (261, 267),
+            'OH': (268, 302),
+            'IN': (303, 317),
+            'IL': (318, 361),
+            'MI': (362, 386),
+            'WI': (387, 399),
+            'KY': (400, 407),
+            'TN': (408, 415),
+            'AL': (416, 424),
+            'MS': (425, 428),
+            'AR': (429, 432),
+            'LA': (433, 439),
+            'OK': (440, 448),
+            'TX': (449, 467),
+            'MN': (468, 477),
+            'IA': (478, 485),
+            'MO': (486, 500),
+            'ND': (501, 502),
+            'SD': (503, 504),
+            'NE': (505, 508),
+            'KS': (509, 515),
+            'MT': (516, 517),
+            'ID': (518, 519),
+            'CO': (521, 524),
+            'AZ': (526, 527),
+            'UT': (528, 529),
+            'WA': (531, 539),
+            'OR': (540, 544),
+            'CA': (545, 573),
+            'HI': (575, 576),
+            'DC': (577, 579),
+        }
+
+        if state in areas:
+            pass
 
     @staticmethod
     def personality(category='mbti'):
-        mbtis = ("ISFJ",
-                 "ISTJ",
-                 "INFJ",
-                 "INTJ",
-                 "ISTP",
-                 "ISFP",
-                 "INFP",
-                 "INTP",
-                 "ESTP",
-                 "ESFP",
-                 "ENFP",
-                 "ENTP",
-                 "ESTJ",
-                 "ESFJ",
-                 "ENFJ",
-                 "ENTJ")
+        mbtis = ("ISFJ", "ISTJ",
+                 "INFJ", "INTJ",
+                 "ISTP", "ISFP",
+                 "INFP", "INTP",
+                 "ESTP", "ESFP",
+                 "ENFP", "ENTP",
+                 "ESTJ", "ESFJ",
+                 "ENFJ", "ENTJ"
+                 )
 
         if category.lower() == 'rheti':
             return randint(1, 10)
@@ -265,7 +257,7 @@ class Russia(object):
 
         :return: Series and number.
         """
-        snn = '{} {}'.format(
+        return '%s %s' % (
             self.passport_series(),
-            self.passport_number())
-        return snn
+            self.passport_number()
+        )
