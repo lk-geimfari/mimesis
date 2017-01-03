@@ -202,6 +202,30 @@ class USA(object):
         # }
         pass
 
+    @staticmethod
+    def personality(category='mbti'):
+        mbtis = ("ISFJ",
+                 "ISTJ",
+                 "INFJ",
+                 "INTJ",
+                 "ISTP",
+                 "ISFP",
+                 "INFP",
+                 "INTP",
+                 "ESTP",
+                 "ESFP",
+                 "ENFP",
+                 "ENTP",
+                 "ESTJ",
+                 "ESFJ",
+                 "ENFJ",
+                 "ENTJ")
+
+        if category.lower() == 'rheti':
+            return randint(1, 10)
+
+        return choice(mbtis)
+
 
 class Russia(object):
     """

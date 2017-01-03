@@ -65,6 +65,15 @@ class USATest(TestCase):
         self.assertRaises(ValueError,
                           lambda: self.usa.tracking_number(service='x'))
 
+    def test_personality(self):
+        result = self.usa.personality(category='rheti')
+        self.assertTrue((int(result)) <= 9 and (int(result) >= 1))
+
+        result_1 = self.usa.personality(category='mbti')
+        self.assertIsInstance(result_1, str)
+        self.assertTrue(len(result_1) == 4)
+        self.assertTrue(result_1.isupper())
+
 
 class RussiaTest(TestCase):
     def setUp(self):
