@@ -2273,5 +2273,36 @@
 		"Test"
 	  ]
 	}
+  },
+  "personality": {
+	  "mbti": [
+		  "ISFJ",
+		  "ISTJ",
+		  "INFJ",
+		  "INTJ",
+		  "ISTP",
+		  "ISFP",
+		  "INFP",
+		  "INTP",
+		  "ESTP",
+		  "ESFP",
+		  "ENFP",
+		  "ENTP",
+		  "ESTJ",
+		  "ESFJ",
+		  "ENFJ",
+		  "ENTJ"
+	  ],
+	  "rheti": [
+		 "1",
+		 "2",
+		 "3",
+		 "4",
+		 "5",
+		 "6",
+		 "7",
+		 "8",
+		 "9" 
+	  ]
   }
 }

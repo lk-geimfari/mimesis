@@ -124,6 +124,13 @@ class PersonalTestCase(DummyCase):
         result = self.generic.personal.name(gender='male')
         self.assertIn(result, self.generic.personal.data['names']['male'])
 
+    def test_personality(self):
+        result = self.generic.personal.personality(category='mbti')
+        self.assertIn(result, self.generic.personal.data['personality']['mbti'])
+
+        result = self.generic.personal.personality(category='rheti')
+        self.assertIn(result, self.generic.personal.data['personality']['rheti'])
+
     def test_telephone(self):
         result = self.generic.personal.telephone()
         self.assertTrue(len(result) >= 11)

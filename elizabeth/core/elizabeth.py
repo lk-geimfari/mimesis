@@ -956,6 +956,18 @@ class Personal(object):
         sexuality = self.data['sexuality']
         return choice(sexuality)
 
+    def personality(self, category='mbti'):
+        """
+        Get a random personality type
+
+        :param category: MBTI or RHETI
+        :returns: Personality type
+        :Example:
+            INFJ
+        """
+        personality = choice(self.data['personality'][category])
+        return personality
+
     def occupation(self):
         """
         Get a random job.
