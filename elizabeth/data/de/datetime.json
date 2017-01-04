@@ -1,4 +1,24 @@
 {
+  "day": {
+    "name": [
+      "Montag",
+      "Dienstag",
+      "Mittwoch",
+      "Donnerstag",
+      "Freitag",
+      "Samstag",
+      "Sonntag"
+    ],
+    "abbr": [
+      "Mo.",
+      "Di.",
+      "Mi.",
+      "Do.",
+      "Fr.",
+      "Sa.",
+      "So."
+    ]
+  },
   "month": {
     "name": [
       "Januar",
@@ -27,26 +47,6 @@
       "Okt.",
       "Nov.",
       "Dez."
-    ]
-  },
-  "day": {
-    "name": [
-      "Montag",
-      "Dienstag",
-      "Mittwoch",
-      "Donnerstag",
-      "Freitag",
-      "Samstag",
-      "Sonntag"
-    ],
-    "abbr": [
-      "Mo.",
-      "Di.",
-      "Mi.",
-      "Do.",
-      "Fr.",
-      "Sa.",
-      "So."
     ]
   },
   "periodicity": [

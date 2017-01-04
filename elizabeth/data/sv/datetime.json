@@ -1,4 +1,24 @@
 {
+  "day": {
+    "abbr": [
+      "Ma.",
+      "Ti.",
+      "On.",
+      "To.",
+      "Fr.",
+      "Lö.",
+      "Sö."
+    ],
+    "name": [
+      "Måndag",
+      "Tisdag",
+      "Onsdag",
+      "Torsdag",
+      "Fredag",
+      "Lördag",
+      "Söndag"
+    ]
+  },
   "month": {
     "abbr": [
       "Jan.",
@@ -38,25 +58,5 @@
     "Veckovis",
     "Månatlig",
     "Årlig"
-  ],
-  "day": {
-    "abbr": [
-      "Ma.",
-      "Ti.",
-      "On.",
-      "To.",
-      "Fr.",
-      "Lö.",
-      "Sö."
-    ],
-    "name": [
-      "Måndag",
-      "Tisdag",
-      "Onsdag",
-      "Torsdag",
-      "Fredag",
-      "Lördag",
-      "Söndag"
-    ]
-  }
+  ]
 }

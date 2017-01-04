@@ -1,29 +1,5 @@
 {
   "company": {
-    "type": {
-      "title": [
-        "Aktiebolag",
-        "Publikt aktiebolag",
-        "Ekonomisk förening",
-        "Handelsbolag",
-        "Kommanditbolag",
-        "Enskild firma",
-        "Enkelt bolag",
-        "Ideell förening",
-        "Stiftelse"
-      ],
-      "abbr": [
-        "AB",
-        "AB",
-        "Ek. för.",
-        "HB",
-        "KB",
-        "Enskild firma",
-        "Enkelt bolag",
-        "Ideell förening",
-        "Stiftelse"
-      ]
-    },
     "name": [
       "3H Biomedical",
       "AB Svensk Filmindustri",
@@ -319,6 +295,30 @@
       "ÅF",
       "Åhléns",
       "Öhlins"
-    ]
+    ],
+    "type": {
+      "abbr": [
+        "AB",
+        "AB",
+        "Ek. för.",
+        "HB",
+        "KB",
+        "Enskild firma",
+        "Enkelt bolag",
+        "Ideell förening",
+        "Stiftelse"
+      ],
+      "title": [
+        "Aktiebolag",
+        "Publikt aktiebolag",
+        "Ekonomisk förening",
+        "Handelsbolag",
+        "Kommanditbolag",
+        "Enskild firma",
+        "Enkelt bolag",
+        "Ideell förening",
+        "Stiftelse"
+      ]
+    }
   }
 }

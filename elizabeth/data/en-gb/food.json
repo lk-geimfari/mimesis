@@ -1,5 +1,7 @@
 {
-  "dishes": ["Test"],
+  "dishes": [
+    "Test"
+  ],
   "drinks": [
     "20th Century",
     "A Black Jack",

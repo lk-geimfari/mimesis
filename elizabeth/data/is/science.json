@@ -1,11 +1,11 @@
 {
-  "scientist": [
-	"Test"
-  ],
   "article": [
-	"Test"
+    "Test"
   ],
   "chemical_element": [
-	"Test|Test|Test"
+    "Test|Test|Test"
+  ],
+  "scientist": [
+    "Test"
   ]
 }

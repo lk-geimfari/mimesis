@@ -1,4 +1,8 @@
 {
+  "article": [
+    "https://pt.wikipedia.org/wiki/Buraco_negro",
+    "https://pt.wikipedia.org/wiki/Buraco_negro"
+  ],
   "chemical_element": [
     "Actínio|Ac|89",
     "Alumínio|Al|13",
@@ -119,10 +123,6 @@
     "Xenônio|Xe|54",
     "Zinco|Zn|30",
     "Zircônio|Zr|40"
-  ],
-  "article": [
-    "https://pt.wikipedia.org/wiki/Buraco_negro",
-    "https://pt.wikipedia.org/wiki/Buraco_negro"
   ],
   "scientist": [
     "Luís Amaral",

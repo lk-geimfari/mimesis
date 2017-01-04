@@ -1,4 +1,8 @@
 {
+  "article": [
+    "Test",
+    "Test"
+  ],
   "chemical_element": [
     "Hidrógeno|H|1",
     "Helio|He|2",
@@ -120,10 +124,6 @@
     "Ununoctio|Uuo|118"
   ],
   "scientist": [
-    "Test"
-  ],
-  "article": [
-    "Test",
     "Test"
   ]
 }

@@ -1,4 +1,8 @@
 {
+  "article": [
+    "https://no.wikipedia.org/wiki/Sort_hull",
+    "https://no.wikipedia.org/wiki/Sort_hull"
+  ],
   "chemical_element": [
     "Hydrogen|H|1",
     "Helium|He|2",
@@ -118,10 +122,6 @@
     "Livermorium|Lv|116",
     "Ununseptium|Uus|117",
     "Ununoctium|Uuo|118"
-  ],
-  "article": [
-    "https://no.wikipedia.org/wiki/Sort_hull",
-    "https://no.wikipedia.org/wiki/Sort_hull"
   ],
   "scientist": [
     "Adam Arndtsen",

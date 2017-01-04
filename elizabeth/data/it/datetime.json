@@ -1,4 +1,24 @@
 {
+  "day": {
+    "abbr": [
+      "Do.",
+      "lun.",
+      "Mar.",
+      "Mer.",
+      "Gio.",
+      "Ven.",
+      "Sab."
+    ],
+    "name": [
+      "Domenica",
+      "Lunedì",
+      "Martedì",
+      "Mercoledì",
+      "Giovedì",
+      "Venerdì",
+      "Sabato"
+    ]
+  },
   "month": {
     "abbr": [
       "Genn.",
@@ -27,26 +47,6 @@
       "Ottobre",
       "Novembre",
       "Dicembre"
-    ]
-  },
-  "day": {
-    "abbr": [
-      "Do.",
-      "lun.",
-      "Mar.",
-      "Mer.",
-      "Gio.",
-      "Ven.",
-      "Sab."
-    ],
-    "name": [
-      "Domenica",
-      "Lunedì",
-      "Martedì",
-      "Mercoledì",
-      "Giovedì",
-      "Venerdì",
-      "Sabato"
     ]
   },
   "periodicity": [

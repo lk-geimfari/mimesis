@@ -1,6 +1,8 @@
 {
   "company": {
-    "name": ["Test"],
+    "name": [
+      "Test"
+    ],
     "type": {
       "title": [
         "Corporation",
@@ -19,7 +21,7 @@
         "IPS",
         "LLP",
         "LP",
-		"PLC"
+        "PLC"
       ]
     }
   }

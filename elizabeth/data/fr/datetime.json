@@ -1,4 +1,24 @@
 {
+  "day": {
+    "abbr": [
+      "Lun.",
+      "Mar.",
+      "Mer.",
+      "Jeu.",
+      "Ven.",
+      "Sam.",
+      "Dim."
+    ],
+    "name": [
+      "Lundi",
+      "Mardi",
+      "Mercredi",
+      "Jeudi",
+      "Vendredi",
+      "Samedi",
+      "Dimanche"
+    ]
+  },
   "month": {
     "abbr": [
       "Janv.",
@@ -38,25 +58,5 @@
     "Souvent",
     "Tous les jours",
     "Une fois"
-  ],
-  "day": {
-    "abbr": [
-      "Lun.",
-      "Mar.",
-      "Mer.",
-      "Jeu.",
-      "Ven.",
-      "Sam.",
-      "Dim."
-    ],
-    "name": [
-      "Lundi",
-      "Mardi",
-      "Mercredi",
-      "Jeudi",
-      "Vendredi",
-      "Samedi",
-      "Dimanche"
-    ]
-  }
+  ]
 }

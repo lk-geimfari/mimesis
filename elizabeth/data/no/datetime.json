@@ -1,14 +1,4 @@
 {
-  "periodicity": [
-    "En gang",
-    "Aldri",
-    "Sjeldent",
-    "Ofte",
-    "Daglig",
-    "Ukentlig",
-    "Månedlig",
-    "Årlig"
-  ],
   "day": {
     "abbr": [
       "Ma.",
@@ -58,5 +48,15 @@
       "November",
       "Desember"
     ]
-  }
+  },
+  "periodicity": [
+    "En gang",
+    "Aldri",
+    "Sjeldent",
+    "Ofte",
+    "Daglig",
+    "Ukentlig",
+    "Månedlig",
+    "Årlig"
+  ]
 }

@@ -1,14 +1,24 @@
 {
-  "periodicity": [
-    "Uma Vez",
-    "Nunca",
-    "Raramente",
-    "Frequentemente",
-    "Diariamente",
-    "Semanalmente",
-    "Mensalmente",
-    "Anualmente"
-  ],
+  "day": {
+    "name": [
+      "Segunda Feira",
+      "Terça Feira",
+      "Quarta Feira",
+      "Quinta Feira",
+      "Sexta Feira",
+      "Sábado",
+      "Domingo"
+    ],
+    "abbr": [
+      "Seg.",
+      "Ter.",
+      "Qar.",
+      "Qui.",
+      "Sex.",
+      "Sab",
+      "Dom."
+    ]
+  },
   "month": {
     "name": [
       "Janeiro",
@@ -39,24 +49,14 @@
       "Dez."
     ]
   },
-  "day": {
-    "name": [
-      "Segunda Feira",
-      "Terça Feira",
-      "Quarta Feira",
-      "Quinta Feira",
-      "Sexta Feira",
-      "Sábado",
-      "Domingo"
-    ],
-    "abbr": [
-      "Seg.",
-      "Ter.",
-      "Qar.",
-      "Qui.",
-      "Sex.",
-      "Sab",
-      "Dom."
-    ]
-  }
+  "periodicity": [
+    "Uma Vez",
+    "Nunca",
+    "Raramente",
+    "Frequentemente",
+    "Diariamente",
+    "Semanalmente",
+    "Mensalmente",
+    "Anualmente"
+  ]
 }

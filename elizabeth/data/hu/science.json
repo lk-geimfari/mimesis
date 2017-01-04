@@ -1,5 +1,11 @@
 {
-  "scientist": ["Test"],
-  "chemical_element": ["Test|Test|Test"],
-  "article": ["Test"]
+  "article": [
+    "Test"
+  ],
+  "chemical_element": [
+    "Test|Test|Test"
+  ],
+  "scientist": [
+    "Test"
+  ]
 }
