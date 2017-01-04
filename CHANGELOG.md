@@ -1,5 +1,9 @@
 ## Changelog
 
+### Version 0.3.10
+ - Now support `hu` locale
+
+---
 
 ### Version 0.3.9
  - Minor updates
