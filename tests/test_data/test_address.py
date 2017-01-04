@@ -63,6 +63,7 @@ class AddressTestCase(DummyCase):
 
     def test_postal_code(self):
         result = self.generic.address.postal_code()
+        # TODO: Rewrite
         if self.generic.address.locale == 'ru':
             self.assertTrue(re.match(r'[0-9]{6}$', result))
         elif self.generic.address.locale == 'is':
@@ -80,6 +81,8 @@ class AddressTestCase(DummyCase):
             self.assertTrue(re.match(EN_GB_POST_CODE, result))
         elif self.generic.address.locale == 'fa':
             self.assertTrue(re.match(FA_POST_CODE, result))
+        elif self.generic.address.locale == 'hu':
+            self.assertTrue(re.match(r'[0-9]{4}$', result))
         else:
             self.assertTrue(re.match(r'[0-9]{5}$', result))
 

@@ -151,23 +151,25 @@ class Address(object):
         """
         _ = Code.custom_code
         # here @ represents a letter and  # a digit.
-        codes = {
-            'da': 'DK-' + _(mask='####'),
-            'fa': _(mask='#####-#####'),
-            'is': _(mask='###'),
-            'nl': _(mask='1### @@'),
-            'no': _(mask='####'),
-            'pl': _(mask='##-###'),
-            'pt': _(mask='####'),
-            'br-pt': _(mask='#####-###'),
-            'ru': _(mask='######'),
-            'default': _(mask='#####'),
-            'en-gb': _(mask="@@#@ #@@")
+        masks = {
+            'da': 'DK-####',
+            'fa': '#####-#####',
+            'hu': '####',
+            'is': '###',
+            'nl': '1### @@',
+            'no': '####',
+            'pl': '##-###',
+            'pt': '####',
+            'br-pt': '#####-###',
+            'ru': '######',
+            'default': '#####',
+            'en-gb': '@@#@ #@@'
         }
-        if self.locale in codes:
-            return codes[self.locale]
 
-        return codes['default']
+        if self.locale in masks:
+            return _(mask=masks[self.locale])
+
+        return _(mask=masks['default'])
 
     def country(self, iso_code=False):
         """
@@ -1122,8 +1124,8 @@ class Personal(object):
         _ = Code.custom_code
 
         if suffix:
-            # Because in custom_code placeholder
-            #  for characters is '@'.
+            # Because in custom_code() placeholder
+            # for characters is '@'.
             mask += ' @@'
             return _(mask=mask)
 

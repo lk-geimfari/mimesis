@@ -19,7 +19,7 @@ Elizabeth is a pretty simple library and all you need to start is the small docu
 
 ## Locales
 
-At this moment a library has 17 supported locales:
+At this moment a library has 18 supported locales:
 
 | №  | Flag  | Code       | Name                 | Native name |
 |--- |---   |---        |---                |---         |
@@ -31,15 +31,16 @@ At this moment a library has 17 supported locales:
 | 6  | 🇮🇷   |  `fa`      | Farsi                |      فارسی  |
 | 7  | 🇫🇮   |  `fi`      | Finnish              | Suomi       |
 | 8  | 🇫🇷   |  `fr`      | French               | Français    |
-| 9  | 🇮🇸   |  `is`      | Icelandic            | Íslenska    |
-| 10 | 🇮🇹   |  `it`      | Italian              | Italiano    |
-| 11 | 🇳🇱   |  `nl`      | Dutch                | Nederlands  |
-| 12 | 🇳🇴   |  `no`      | Norwegian            | Norsk       |
-| 13 | 🇵🇱   |  `pl`      | Polish               | Polski      |
-| 14 | 🇵🇹   |  `pt`      | Portuguese           | Português   |
-| 15 | 🇧🇷   |  `pt-br`   | Brazilian Portuguese | Português Brasileiro |
-| 16 | 🇷🇺   |  `ru`      | Russian              | Русский     |
-| 17 | 🇸🇪   |  `sv`      | Swedish              | Svenska     |
+| 9  | 🇭🇺   |  `hu`      | Hungarian            | Magyar      |
+| 10 | 🇮🇸   |  `is`      | Icelandic            | Íslenska    |
+| 11 | 🇮🇹   |  `it`      | Italian              | Italiano    |
+| 12 | 🇳🇱   |  `nl`      | Dutch                | Nederlands  |
+| 13 | 🇳🇴   |  `no`      | Norwegian            | Norsk       |
+| 14 | 🇵🇱   |  `pl`      | Polish               | Polski      |
+| 15 | 🇵🇹   |  `pt`      | Portuguese           | Português   |
+| 16 | 🇧🇷   |  `pt-br`   | Brazilian Portuguese | Português Brasileiro |
+| 17 | 🇷🇺   |  `ru`      | Russian              | Русский     |
+| 18 | 🇸🇪   |  `sv`      | Swedish              | Svenska     |
 
 ## Comparison
 
@@ -148,13 +149,13 @@ and call the one from methods:
 ```python
 >>> for _ in range(1, 5):
 ...     personal.full_name(gender='female')
-... 
+...
 'Antonetta Garrison'
 'Taneka Dickerson'
 'Jackelyn Stafford'
 'Tashia Olsen'
 'Rachal Hartman'
->>> 
+>>>
 ```
 
 When you use only one locale you can use the `Generic` , that provides all providers at one class.
@@ -168,7 +169,7 @@ When you use only one locale you can use the `Generic` , that provides all provi
 ...         name = g.personal.name()
 ...         bday = g.datetime.birthday()
 ...         "%s - %s" % (name, bday)
-... 
+...
 'Genna - April 28, 1985'
 'Tandy - July 6, 1983'
 'Livia - September 7, 1988'

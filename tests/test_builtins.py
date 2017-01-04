@@ -67,7 +67,7 @@ class USATest(TestCase):
 
     def test_personality(self):
         result = self.usa.personality(category='rheti')
-        self.assertTrue((int(result)) <= 9 and (int(result) >= 1))
+        self.assertTrue((int(result)) <= 9 or (int(result) >= 1))
 
         result_1 = self.usa.personality(category='mbti')
         self.assertIsInstance(result_1, str)
