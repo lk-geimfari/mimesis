@@ -166,9 +166,9 @@ When you use only one locale you can use the `Generic` , that provides all provi
 >>> g = Generic('en')
 
 >>> for _ in range(0, 5):
-...         name = g.personal.name()
-...         bday = g.datetime.birthday()
-...         "%s - %s" % (name, bday)
+...     name = g.personal.name()
+...     bday = g.datetime.birthday()
+...     '%s - %s' % (name, bday)
 ...
 'Genna - April 28, 1985'
 'Tandy - July 6, 1983'
