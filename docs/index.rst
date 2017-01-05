@@ -117,7 +117,7 @@ When you use only one locale, use following format:
                 'full_name': el.personal.full_name(sex),
                 'gender': el.personal.gender(sex),
                 'blood_type': el.person.blood_type(),
-                'birthday': el.datetime.birthday()
+                'birthday': el.datetime.date()
                 }
 		return user
 

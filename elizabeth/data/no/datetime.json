@@ -19,6 +19,10 @@
       "Søndag"
     ]
   },
+  "formats": {
+	"date": "%d.%m.%Y",
+	"time": "%H:%M:%S"
+  },
   "month": {
     "abbr": [
       "Jan.",

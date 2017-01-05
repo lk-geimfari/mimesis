@@ -9,10 +9,10 @@ import os
 import sys
 import array
 import inspect
+from calendar import monthrange
 from datetime import (
     date,
-    timedelta,
-    datetime
+    time,
 )
 from hashlib import (
     sha1,
@@ -1207,34 +1207,32 @@ class Datetime(object):
         """
         return choice(self.data['periodicity'])
 
-    @staticmethod
-    def date(sep='-', start=2000, end=2035, with_time=False):
+    def date(self, start=2000, end=2035, fmt=None):
         """
-        Generate a random date formatted as a 11-05-2016
+        Returns a string representing a random date formatted for the locale or as specified.
 
-        :param sep: A separator for date. Default is '-'.
         :param start: Minimum value of year.
         :param end: Maximum value of year.
-        :param with_time: Add random time if True.
-        :returns: Formatted date and time.
+        :param fmt: Format string for date.
+        :returns: Formatted date.
         :Example:
-            20-03-2016 03:20 (with_time=True).
+            08/16/88 (en)
         """
-        d = date(randint(start, end), randint(1, 12), randint(1, 28))
-        pattern = '%d{0}%m{0}%Y %m:%d' if with_time else '%d{0}%m{0}%Y'
-        return d.strftime(pattern.format(sep))
+        year = randint(start, end)
+        month = randint(1, 12)
+        d = date(year, month, randint(1, monthrange(year, month)[1]))
+        return d.strftime(fmt or self.data['formats']['date'])
 
-    def time(self):
+    def time(self, fmt=None):
         """
-        Generate a random time in 24-hour format.
+        Generate a random time formatted for the locale or as specified.
 
         :return: Time.
         :Example:
-            13:45
+            21:30:00 (en)
         """
-        t = self.date(with_time=True)
-        _time = t.split(' ')[1]
-        return _time
+        t = time(randint(0, 23), randint(0, 59), randint(0, 59), randint(0, 999999))
+        return t.strftime(fmt or self.data['formats']['time'])
 
     @staticmethod
     def day_of_month():
@@ -1246,34 +1244,6 @@ class Datetime(object):
             23
         """
         return randint(1, 31)
-
-    def birthday(self, minimum=1980, maximum=2000, readable=True, fmt=None):
-        """
-        Generate a random day of birth.
-
-        :param minimum: Minimum of range
-        :param maximum: Maximum of range
-        :param readable: Return a user-friendly
-        readable format.
-        :param fmt: The format.
-        :returns: A birthday.
-        :Example:
-            June 20, 1987
-        """
-        if not fmt:
-            fmt = '%d-%m-%Y'
-
-        if not readable:
-            f = datetime.strptime(str(minimum), "%Y")
-            t = datetime.strptime(str(maximum), "%Y")
-            bd = [f + timedelta(days=x) for x in range(0, (t - f).days)]
-            return choice(bd).strftime(fmt)
-
-        return '{} {}, {}'.format(
-            self.month(),
-            self.day_of_month(),
-            self.year(minimum, maximum)
-        )
 
 
 class Network(object):
