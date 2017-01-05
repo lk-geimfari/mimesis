@@ -155,7 +155,6 @@ and call the one from methods:
 'Jackelyn Stafford'
 'Tashia Olsen'
 'Rachal Hartman'
->>>
 ```
 
 When you use only one locale you can use the `Generic` , that provides all providers at one class.
