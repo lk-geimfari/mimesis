@@ -41,6 +41,9 @@ class PersonalBaseTest(TestCase):
         sha512 = self.personal.password(algorithm='sha512')
         self.assertEqual(len(sha512), 128)
 
+        with self.assertRaises(NotImplementedError):
+            self.personal.password(algorithm='sha42')
+
     def test_username(self):
         result = self.personal.username()
         self.assertTrue(re.match(USERNAME_REGEX, result))
