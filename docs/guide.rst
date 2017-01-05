@@ -74,9 +74,9 @@ Personal
 	# Output:  ♂
 	gender_symbol = person.gender(symbol=True)
 
-	# Get a random profession.
+	# Get a random occupation.
 	# Output: Programmer
-	profession = person.profession()
+	occupation = person.occupation()
 
 	# Get a random political views.
 	# Output: Liberal
