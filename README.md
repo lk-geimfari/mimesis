@@ -50,6 +50,8 @@ Compared with `Faker`, `Elizabeth` offers:
 * more detailed providers. Where `Faker` tries to cover the most common needs, `Elizabeth` strives for more completeness.
 * no dependencies.
 
+Furthermore, `Elizabeth` is Python 3 only, while `Faker` supports both Python 2 and Python 3.
+
 [Here](https://gist.github.com/lk-geimfari/461ce92fd32379d7b73c9e12164a9154) you can find a speed comparison with Faker.
 
 
