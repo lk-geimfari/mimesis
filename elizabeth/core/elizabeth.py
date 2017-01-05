@@ -30,7 +30,8 @@ from random import (
 from string import (
     digits,
     ascii_letters,
-    ascii_uppercase
+    ascii_uppercase,
+    punctuation
 )
 
 from . import interdata as common
@@ -764,7 +765,7 @@ class Personal(object):
         return '{}{}'.format(username.lower(), randint(2, 9999))
 
     @staticmethod
-    def password(length=8, algorithm=''):
+    def password(length=8, algorithm=None):
         """
         Generate a password or hash of password.
 
@@ -774,22 +775,21 @@ class Personal(object):
         :Example:
             k6dv2odff9#4h (without hashing).
         """
-        algorithm = algorithm.lower()
-        punc = '!"#$%+:<?@^_'
+        password = "".join([choice(ascii_letters + digits + punctuation) for _ in range(length)])
 
-        s = [choice(ascii_letters + digits + punc) for _ in range(length)]
-        password = "".join(s).encode()
+        if algorithm is not None:
+            algorithm = algorithm.lower()
+            if algorithm == 'sha1':
+                return sha1(password.encode()).hexdigest()
+            elif algorithm == 'sha256':
+                return sha256(password.encode()).hexdigest()
+            elif algorithm == 'sha512':
+                return sha512(password.encode()).hexdigest()
+            elif algorithm == 'md5':
+                return md5(password.encode()).hexdigest()
+            raise NotImplementedError("The specified hashing algorithm is not available.")
 
-        if algorithm == 'sha1':
-            return sha1(password).hexdigest()
-        elif algorithm == 'sha256':
-            return sha256(password).hexdigest()
-        elif algorithm == 'sha512':
-            return sha512(password).hexdigest()
-        elif algorithm == 'md5':
-            return md5(password).hexdigest()
-        else:
-            return password.decode('utf-8')
+        return password
 
     @staticmethod
     def email(gender='female'):
