@@ -67,6 +67,12 @@ class PersonalBaseTest(TestCase):
         result_mc = self.personal.credit_card_number(card_type='master_card')
         self.assertTrue(re.match(CREDIT_CARD_REGEX, result_mc))
 
+        result_ax = self.personal.credit_card_number(card_type='amex')
+        self.assertTrue(re.match(CREDIT_CARD_REGEX, result_ax))
+
+        with self.assertRaises(NotImplementedError):
+            self.personal.credit_card_number(card_type="discover")
+
     def test_expiration_date(self):
         result = self.personal.credit_card_expiration_date(
             minimum=16, maximum=25)
