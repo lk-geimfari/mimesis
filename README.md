@@ -28,6 +28,7 @@ To install `Elizabeth`, simply:
 ```python
 >>> from elizabeth import Personal
 >>> p = Personal('en')
+>>>
 >>> p.full_name(gender='female')
 'Antonetta Garrison'
 >>> p.blood_type()
@@ -67,10 +68,12 @@ Using locales:
 >>> from elizabeth import Text
 >>> en = Text()  # English is Elizabeth's default locale
 >>> de = Text('de')
+
 >>> en.sentence()
 'Ports are used to communicate with the external world.'
 >>> de.sentence()
 'Wir müssen nicht vergessen Zickler.'
+>>>
 >>> en.color()
 'Blue'
 >>> de.color()
@@ -83,6 +86,7 @@ providers from one object.
 ```python
 >>> from elizabeth import Generic
 >>> g = Generic('es')
+>>>
 >>> g.datetime.month()
 'Agosto'
 >>> g.code.imei()
@@ -155,8 +159,10 @@ and do following:
 ```python
 >>> db
 <SQLAlchemy engine='sqlite:///db_dev.sqlite'>
+
 >>> Patient
 <class 'app.models.Patient'>
+
 >>> Patient()._bootstrap(count=1000, locale='en', gender='female')
 ```
 
@@ -169,20 +175,22 @@ You also can add custom provider to `Generic`.
 
 ```python
 >>> from elizabeth import Generic
->>>
 >>> generic = Generic('en')
+>>>
 >>> class SomeProvider():
 >>>     class Meta:
 >>>         name = 'some_provider'
 >>>
 >>>     def ints(self):
 >>>         return [i for i in range(1, 5)]
+>>>
 >>> class Another():
 >>>     def bye(self):
 >>>         return "Bye!"
 >>>
 >>> generic.add_provider(SomeProvider)
 >>> generic.add_provider(Another)
+>>>
 >>> generic.some_provider.ints()
 [1, 2, 3, 4]
 >>> generic.another.bye()
@@ -201,11 +209,13 @@ If you would like to use these country-specific providers, then you must import 
 >>> from elizabeth.builtins import Brazil
 >>>
 >>> generic = Generic('pt-br')
+>>>
 >>> class BrazilProvider(Brazil):
 >>>     class Meta:
 >>>         name = "brazil_provider"
 >>>
 >>> generic.add_provider(BrazilProvider)
+>>>
 >>> generic.brazil_provider.cpf()
 '001.137.297-40'
 ```
