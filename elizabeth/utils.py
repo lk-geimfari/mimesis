@@ -89,6 +89,29 @@ SUPPORTED_LOCALES = {
 }
 
 
+def luhn_checksum(num):
+    """
+    Calculate a checksum for num using the Luhn algorithm.
+    See: https://en.wikipedia.org/wiki/Luhn_algorithm
+    :param num: The number to calculate a checksum for as a string
+    :type num: str
+    :returns: checksum for number
+    :rtype: str
+    :Example:
+
+    >>> from elizabeth.utils import luhn_checksum
+    >>> luhn_checksum("7992739871")
+    3
+    """
+    check = 0
+    for i, s in enumerate(reversed([x for x in num])):
+        sx = int(s)
+        sx = sx * 2 if i % 2 == 0 else sx
+        sx = sx - 9 if sx > 9 else sx
+        check += sx
+    return str(check * 9 % 10)
+
+
 @functools.lru_cache(maxsize=None)
 def pull(file, locale='en'):
     """

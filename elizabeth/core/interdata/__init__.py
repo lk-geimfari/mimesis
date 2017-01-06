@@ -2,6 +2,7 @@
 # interdata is abbreviation of "International Data".
 
 from .address import *
+from .code import *
 from .datetime import *
 from .development import *
 from .hardware import *
