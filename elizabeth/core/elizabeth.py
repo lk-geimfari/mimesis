@@ -9,6 +9,7 @@ import os
 import sys
 import array
 import inspect
+import re
 from datetime import (
     date,
     timedelta,
