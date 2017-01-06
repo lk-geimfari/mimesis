@@ -6,6 +6,7 @@
 :contributors: http://bit.ly/2hlzxgE
 """
 import os
+import re
 import sys
 import array
 import inspect
@@ -606,24 +607,22 @@ class Business(object):
         companies = self.data['company']['name']
         return choice(companies)
 
-    def copyright(self, date=True, **kwargs):
+    def copyright(self, date=True, minimum=1990, maximum=2016):
         """
         Generate a random copyright.
 
         :param date: When True will be returned copyright with date.
-        :param kwargs: Keyword arguments. Minimum and Maximum of date range.
+        :param minimum: Minimum of date range.
+        :param maximum: Maximum of date range.
         :returns: Dummy copyright of company.
         :Example:
             © 1990-2016 Komercia, Inc.
         """
-        mi = int(kwargs.get('minimum', 1990))
-        ma = int(kwargs.get('maximum', 2016))
-
-        founded = randint(mi, ma - 1)
         ct = self.company_type(abbr=True)
 
         if date:
-            return '© %s-%s %s, %s' % (founded, ma, self.company(), ct)
+            founded = randint(minimum, maximum - 1)
+            return '© %s-%s %s, %s' % (founded, maximum, self.company(), ct)
 
         return '© %s, %s' % (self.company(), ct)
 
@@ -841,17 +840,33 @@ class Personal(object):
         :Example:
             4455 5299 1152 2450
         """
-        _ = Code.custom_code
-
-        mask = "{0} #### #### ####"
+        length = 16
+        regex = re.compile("(\d{4})(\d{4})(\d{4})(\d{4})")
 
         if card_type in ('visa', 'vi', 'v'):
-            mask = mask.format(randint(4000, 4999))
+            number = randint(4000, 4999)
         elif card_type in ('master_card', 'mc', 'master', 'm'):
-            iin = choice([randint(2221, 2720), randint(5100, 5500)])
-            mask = mask.format(iin)
+            number = choice([randint(2221, 2720), randint(5100, 5500)])
+        elif card_type in ('american_express', 'amex', 'ax', 'a'):
+            number = choice([34, 37])
+            length = 15
+            regex = re.compile("(\d{4})(\d{6})(\d{5})")
+        else:
+            raise NotImplementedError("Card type {} is not supported.".format(card_type))
 
-        return _(mask=mask)
+        number = str(number)
+        while len(number) < length - 1:
+            number += choice(digits)
+
+        check = 0  # calculate checksum; see https://en.wikipedia.org/wiki/Luhn_algorithm
+        for i, s in enumerate(reversed([x for x in number])):
+            sx = int(s)
+            sx = sx * 2 if i % 2 == 0 else sx
+            sx = sx - 9 if sx > 9 else sx
+            check += sx
+        check = check * 9 % 10
+
+        return " ".join(regex.search(number + str(check)).groups())
 
     @staticmethod
     def credit_card_expiration_date(minimum=16, maximum=25):
