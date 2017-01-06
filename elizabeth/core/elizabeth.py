@@ -557,7 +557,10 @@ class Code(object):
         Equipment Identity).
         :return: IMEI.
         :Example:
-            897181639771492.
+
+        >>> from elizabeth import Code
+        >>> Code().imei()
+        353918052107063
         """
         num = choice(common.IMEI_TACS) + self.custom_code(mask='######')
         return num + luhn_checksum(num)
