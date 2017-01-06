@@ -11,15 +11,34 @@
   <br>
 </p>
 
-**Elizabeth** is a fast and easier to use Python library for generating dummy data. These data are very useful when you need to bootstrap the database in the testing phase of your software. A great example of how you can use the library are web applications on Flask or Django which need a data, such as users (email, username, name, surname etc.), posts (tags, text, title, publishing date and etc.) and so forth. The library uses the JSON files as a datastore and doesn’t have any dependencies. The library offers more than 18 different data providers (from personal ones to transport and more).
-
+**Elizabeth** is a fast and easy to use Python library for generating dummy data for a variety of purposes.  This data can be particularly useful during software development and testing.  For example, it could be used to populate a testing database for a web application with user information such as email addresses, usernames, first names, last names, etc.  Elizabeth uses a JSON-based datastore and does not require any modules that are not in the Python standard library.   There are over eighteen different [data providers](https://github.com/lk-geimfari/elizabeth/blob/master/PROVIDERS.md) available, which can produce data related to food, people, computer hardware, transportation, addresses, and more.
 
 ## Documentation
-Elizabeth is a pretty simple library and all you need to start is the small documentation. See Elizabeth's Sphinx-generated documentation here: [http://elizabeth.readthedocs.io/en/latest/](http://elizabeth.readthedocs.io/)
+Elizabeth is simple to use, and the below examples should help you get started.  Complete documentation for `Elizabeth` is available here: [http://elizabeth.readthedocs.io/en/latest/](http://elizabeth.readthedocs.io/)
+
+## Installation
+To install `Elizabeth`, simply:
+
+```zsh
+➜  ~ pip install elizabeth
+```
+
+## Basic Usage
+
+```python
+>>> from elizabeth import Personal
+>>> p = Personal('en')
+>>> p.full_name(gender='female')
+'Antonetta Garrison'
+>>> p.blood_type()
+'O-'
+>>> p.occupation()
+'Programmer'
+```
 
 ## Locales
 
-At this moment a library has 18 supported locales:
+You can specify a locale when creating providers and they will return data that is appropriate for the language or country associated with that locale.  `Elizabeth` currently includes support for 18 different locales:
 
 | №  | Flag  | Code       | Name                 | Native name |
 |--- |---   |---        |---                |---         |
@@ -42,36 +61,53 @@ At this moment a library has 18 supported locales:
 | 17 | 🇷🇺   |  `ru`      | Russian              | Русский     |
 | 18 | 🇸🇪   |  `sv`      | Swedish              | Svenska     |
 
-## Comparison
-
-Compared with `Faker`, `Elizabeth` offers:
-
-* an increase in [speed](http://i.imgur.com/ZqkE1k2.png)
-* more detailed providers. Where `Faker` tries to cover the most common needs, `Elizabeth` strives for more completeness.
-* no dependencies.
-
-[Here](https://gist.github.com/lk-geimfari/461ce92fd32379d7b73c9e12164a9154) you can find a speed comparison with Faker.
-
-
-## Installation
-```zsh
-➜  ~ pip install elizabeth
-```
-
-## Testing
-```zsh
-➜  ~ git clone https://github.com/lk-geimfari/elizabeth.git
-➜  ~ cd elizabeth/
-➜  ~ python3 -m unittest discover tests
-```
-
-## Using with Flask
-
-You can use `Elizabeth` with your Flask-application (with any other frameworks in a similar manner).
+Using locales:
 
 ```python
-# Some logic
-# ...
+>>> from elizabeth import Text
+>>> en = Text()  # English is Elizabeth's default locale
+>>> de = Text('de')
+>>> en.sentence()
+'Ports are used to communicate with the external world.'
+>>> de.sentence()
+'Wir müssen nicht vergessen Zickler.'
+>>> en.color()
+'Blue'
+>>> de.color()
+'Türkis'
+```
+
+When you only need to generate data for a single locale, use the `Generic` provider, and you can access all `Elizabeth`
+providers from one object.
+
+```python
+>>> from elizabeth import Generic
+>>> g = Generic('es')
+>>> g.datetime.month()
+'Agosto'
+>>> g.code.imei()
+'353918052107063'
+>>> g.food.fruit()
+'Limón'
+```
+
+## Advantages
+
+`Elizabeth` offers a number of advantages over other similar libraries, such as `Faker`:
+
+* Performance. `Elizabeth` is significantly [faster](http://i.imgur.com/ZqkE1k2.png) than other similar libraries.
+* Completeness. `Elizabeth` strives to provide many detailed providers that offer a variety of data generators.
+* Simplicity. `Elizabeth` does not require any modules other than the Python standard library.
+
+See [here](https://gist.github.com/lk-geimfari/461ce92fd32379d7b73c9e12164a9154) for an example of how we compare
+performance with other libraries.
+
+## Integration with Web Application Frameworks
+
+You can use `Elizabeth` during development and testing of applications built on a variety of frameworks. Here is an
+example of integration with a `Flask` application:
+
+```python
 class Patient(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True)
@@ -119,10 +155,8 @@ and do following:
 ```python
 >>> db
 <SQLAlchemy engine='sqlite:///db_dev.sqlite'>
-
 >>> Patient
 <class 'app.models.Patient'>
-
 >>> Patient()._bootstrap(count=1000, locale='en', gender='female')
 ```
 
@@ -130,120 +164,70 @@ Result:
 
 ![en](https://raw.githubusercontent.com/lk-geimfari/elizabeth/master/other/screenshots/en_bootstrap.png)
 
-
-## A common use
-
-Import a provider that you need
-
-```python
->>>> from elizabeth import Personal
-```
-and create instance of provider that was be imported:
-
-```python
->>> # for other locales, exactly the same way
->>> personal = Personal('en')
-```
-and call the one from methods:
-
-```python
->>> for _ in range(1, 5):
-...     personal.full_name(gender='female')
-...
-'Antonetta Garrison'
-'Taneka Dickerson'
-'Jackelyn Stafford'
-'Tashia Olsen'
-'Rachal Hartman'
-```
-
-When you use only one locale you can use the `Generic` , that provides all providers at one class.
-
-```python
->>> from elizabeth import Generic
-
->>> g = Generic('en')
-
->>> for _ in range(0, 5):
-...     name = g.personal.name()
-...     bday = g.datetime.birthday()
-...     '%s - %s' % (name, bday)
-...
-'Genna - April 28, 1985'
-'Tandy - July 6, 1983'
-'Livia - September 7, 1988'
-'Nery - February 16, 1996'
-'Basilia - September 9, 1984'
-
-```
-
-
-## Custom provider
+## Custom Providers
 You also can add custom provider to `Generic`.
 
 ```python
 >>> from elizabeth import Generic
-
+>>>
 >>> generic = Generic('en')
-
 >>> class SomeProvider():
-        class Meta:
-            name = 'some_provider'
-
-        def ints(self):
-            return [i for i in range(1, 5)]
-
+>>>     class Meta:
+>>>         name = 'some_provider'
+>>>
+>>>     def ints(self):
+>>>         return [i for i in range(1, 5)]
 >>> class Another():
-        def bye(self):
-            return "Bye!"
-
+>>>     def bye(self):
+>>>         return "Bye!"
+>>>
 >>> generic.add_provider(SomeProvider)
 >>> generic.add_provider(Another)
-
 >>> generic.some_provider.ints()
 [1, 2, 3, 4]
-
 >>> generic.another.bye()
 'Bye!'
 ```
 
 ## Builtins specific data providers
 
-Every language has specific data that suit only for ones. For example `SSN` for `en` (USA) or `CPF` for `pt-br` (Brazil). `CPF` can be useful only for brazilians.
+Some countries have data types specific to that country. For example social security numbers in the United States (`en` locale),
+and cadastro de pessoas físicas (CPF) in Brazil (`pt-br` locale).
 
-If user want to use this providers then he must be imported explicitly.
+If you would like to use these country-specific providers, then you must import them explicitly:
 
 ```python
 >>> from elizabeth import Generic
 >>> from elizabeth.builtins import Brazil
-
+>>>
 >>> generic = Generic('pt-br')
-
 >>> class BrazilProvider(Brazil):
-        class Meta:
-            name = "brazil_provider"
-
+>>>     class Meta:
+>>>         name = "brazil_provider"
+>>>
 >>> generic.add_provider(BrazilProvider)
 >>> generic.brazil_provider.cpf()
 '001.137.297-40'
 ```
 
-## Data providers
-Elizabeth support more than [18](https://github.com/lk-geimfari/elizabeth/blob/master/PROVIDERS.md) data providers, such as Personal, Datetime, Internet and [another](https://github.com/lk-geimfari/elizabeth/blob/master/PROVIDERS.md).
-
-## Like it?
+## Like It?
 You can say [thanks](https://saythanks.io/to/lk-geimfari)!
-
 
 ## Contributing
 Your contributions are always welcome! Please take a look at the [contribution](https://github.com/lk-geimfari/elizabeth/blob/master/CONTRIBUTING.md) guidelines first. [Here](https://github.com/lk-geimfari/elizabeth/blob/master/CONTRIBUTING.md#contributors) you can look a list of our contributors.
 
-## Changelog
+## Testing
+```zsh
+➜  ~ git clone https://github.com/lk-geimfari/elizabeth.git
+➜  ~ cd elizabeth/
+➜  ~ python3 -m unittest discover tests
+```
+
+## Change Log
 See [CHANGELOG.md](https://github.com/lk-geimfari/elizabeth/blob/master/CHANGELOG.md).
 
+## License
+Elizabeth is licensed under the MIT License. See [LICENSE](https://github.com/lk-geimfari/elizabeth/blob/master/LICENSE) for more information.
+
 ## Disclaimer
-The author does not assume any responsibility for how you will use this library and how you will use data generated with this library. This library is designed only for developers and only with good intentions. Do not use the data generated with `Elizabeth` for illegal purposes.
-
-
-## Licence
-Elizabeth is licensed under the [MIT License](https://github.com/lk-geimfari/elizabeth/blob/master/LICENSE). See [LICENSE](https://github.com/lk-geimfari/elizabeth/blob/master/LICENSE)  for the full license text.
+The authors assume no responsibility for how you use this library data generated by it.  This library is designed only for developers with good intentions. Do not use the data generated with `Elizabeth` for illegal purposes.
