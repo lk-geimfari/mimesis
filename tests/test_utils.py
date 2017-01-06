@@ -5,10 +5,14 @@ import unittest
 from elizabeth.exceptions import (
     UnsupportedLocale
 )
-from elizabeth.utils import pull
+from elizabeth.utils import pull, luhn_checksum
 
 
-class PullTest(unittest.TestCase):
+class UtilsTest(unittest.TestCase):
+
+    def test_luhn_checksum(self):
+        self.assertEqual(luhn_checksum("7992739871"), "3")
+
     def test_pull(self):
         f = ('personal.json', 'something.json')
 

@@ -36,7 +36,7 @@ from string import (
 )
 
 from . import interdata as common
-from elizabeth.utils import pull
+from elizabeth.utils import luhn_checksum, pull
 
 __all__ = [
     'Address',
@@ -551,7 +551,7 @@ class Code(object):
             else '#############'
         return self.custom_code(mask=mask)
 
-    def imei(self, mask='###############'):
+    def imei(self):
         """
         Generate a random IMEI (International Mobile Station
         Equipment Identity).
@@ -559,7 +559,8 @@ class Code(object):
         :Example:
             897181639771492.
         """
-        return self.custom_code(mask=mask)
+        num = choice(common.IMEI_TACS) + self.custom_code(mask='######')
+        return num + luhn_checksum(num)
 
     def pin(self, mask='####'):
         """
@@ -858,15 +859,7 @@ class Personal(object):
         while len(number) < length - 1:
             number += choice(digits)
 
-        check = 0  # calculate checksum; see https://en.wikipedia.org/wiki/Luhn_algorithm
-        for i, s in enumerate(reversed([x for x in number])):
-            sx = int(s)
-            sx = sx * 2 if i % 2 == 0 else sx
-            sx = sx - 9 if sx > 9 else sx
-            check += sx
-        check = check * 9 % 10
-
-        return " ".join(regex.search(number + str(check)).groups())
+        return " ".join(regex.search(number + luhn_checksum(number)).groups())
 
     @staticmethod
     def credit_card_expiration_date(minimum=16, maximum=25):
