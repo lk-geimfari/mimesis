@@ -92,6 +92,7 @@ SUPPORTED_LOCALES = {
 def luhn_checksum(num):
     """
     Calculate a checksum for num using the Luhn algorithm.
+
     See: https://en.wikipedia.org/wiki/Luhn_algorithm
     :param num: The number to calculate a checksum for as a string
     :type num: str
