@@ -19,6 +19,10 @@
       "So."
     ]
   },
+  "formats": {
+	"date": "%d.%m.%Y",
+	"time": "%H:%M:%S"
+  },
   "month": {
     "name": [
       "Januar",

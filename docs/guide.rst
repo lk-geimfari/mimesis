@@ -142,13 +142,25 @@ Datetime
 	# Output: Never
 	periodicity = datetime.periodicity()
 
-	# Generate a random date formatted as a d/m/Y
+	# Generate a random date formatted for the locale
 	# Output: 11/05/2016
-	date = datetime.date(sep='/', with_time=True)
+	date = datetime.date()
+
+	# Specify a custom date format and a range in years
+	# Output: 2008-08-21
+	date = datetime.date(start=2000, end=2010, fmt="%y-%m-%d")
 
 	# Generate a random days of month, from 1 to 31.
 	# Output: 21
 	day_of_month = datetime.day_of_month()
+
+	# Generate a random time formatted for the locale
+	# Output: 22:00:50
+	time = datetime.time()
+
+	# Specify a custom time format
+	# Output: 22:00
+	date = datetime.time(fmt="%H:%M")
 
 Business
 --------

@@ -19,6 +19,10 @@
       "Domingo"
     ]
   },
+  "formats": {
+	"date": "%d/%m/%Y",
+	"time": "%H:%M:%S"
+  },
   "month": {
     "abbr": [
       "Enero",

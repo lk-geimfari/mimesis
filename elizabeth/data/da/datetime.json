@@ -19,6 +19,10 @@
       "Torsdag"
     ]
   },
+  "formats": {
+	"date": "%d-%m-%Y",
+	"time": "%H:%M:%S"
+  },
   "month": {
     "abbr": [
       "Ja.",

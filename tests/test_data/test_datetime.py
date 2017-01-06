@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import datetime
 
 from unittest import TestCase
 
@@ -22,24 +23,22 @@ class DatetimeBaseTest(TestCase):
         self.assertTrue((result >= 1) or (result <= 31))
 
     def test_date(self):
-        # Default: date(sep='-', start=2000, end=2035, with_time=False)
-        result = self.datetime.date()
-        d, m, y = result.split('-')
-        self.assertTrue(int(d) <= 31)
-        self.assertTrue(int(m) <= 12)
-        self.assertTrue(int(y) >= 2000)
-        self.assertTrue(int(y) <= 2035)
+        result = self.datetime.date(start=1999, end=1999, fmt="%m/%d/%Y")
 
-        result = self.datetime.date(with_time=True)
-        hour, minutes = result.split(' ')[1].split(':')
-        self.assertTrue(int(hour) <= 24)
-        self.assertTrue(int(minutes) <= 60)
+        try:  # check if is valid date in correct format
+            result = datetime.datetime.strptime(result, "%m/%d/%Y")
+        except ValueError:
+            self.fail("date() returned value in incorrect format or invalid date")
+        else:
+            self.assertTrue(result.year == 1999)  # check range was applied correctly
 
     def test_time(self):
-        result = self.datetime.time()
-        hour, minutes = result.split(':')
-        self.assertTrue(int(hour) <= 24)
-        self.assertTrue(int(minutes) <= 60)
+        result = self.datetime.time(fmt="%H:%M")
+
+        try:  # check if is valid time in correct format
+            datetime.datetime.strptime(result, "%H:%M")
+        except ValueError:
+            self.fail("time() returned value in incorrect format or invalid date")
 
     def test_century(self):
         result = self.datetime.century()
@@ -67,19 +66,3 @@ class DatetimeTestCase(DummyCase):
     def test_periodicity(self):
         result = self.generic.datetime.periodicity()
         self.assertIn(result, self.generic.datetime.data['periodicity'])
-
-    def test_birthday(self):
-        result = self.generic.datetime.birthday()
-        self.assertIsInstance(result, str)
-
-        not_readable = self.generic.datetime.birthday(readable=False)
-        day, month, year = not_readable.split('-')
-        self.assertTrue(int(day) <= 31)
-        self.assertTrue(int(month) <= 12)
-        self.assertTrue((int(year) >= 1980) and (int(year) <= 2000))
-
-        fmt_year = self.generic.datetime.birthday(
-            minimum=2015, maximum=2025, readable=False, fmt='%Y')
-
-        self.assertGreaterEqual(int(fmt_year), 2015)
-        self.assertLessEqual(int(fmt_year), 2025)
