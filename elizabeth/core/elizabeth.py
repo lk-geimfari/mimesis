@@ -607,24 +607,22 @@ class Business(object):
         companies = self.data['company']['name']
         return choice(companies)
 
-    def copyright(self, date=True, **kwargs):
+    def copyright(self, date=True, minimum=1990, maximum=2016):
         """
         Generate a random copyright.
 
         :param date: When True will be returned copyright with date.
-        :param kwargs: Keyword arguments. Minimum and Maximum of date range.
+        :param minimum: Minimum of date range.
+        :param maximum: Maximum of date range.
         :returns: Dummy copyright of company.
         :Example:
             © 1990-2016 Komercia, Inc.
         """
-        mi = int(kwargs.get('minimum', 1990))
-        ma = int(kwargs.get('maximum', 2016))
-
-        founded = randint(mi, ma - 1)
         ct = self.company_type(abbr=True)
 
         if date:
-            return '© %s-%s %s, %s' % (founded, ma, self.company(), ct)
+            founded = randint(minimum, maximum - 1)
+            return '© %s-%s %s, %s' % (founded, maximum, self.company(), ct)
 
         return '© %s, %s' % (self.company(), ct)
 
