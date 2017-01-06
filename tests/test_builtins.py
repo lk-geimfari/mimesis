@@ -74,6 +74,14 @@ class USATest(TestCase):
         self.assertTrue(len(result_1) == 4)
         self.assertTrue(result_1.isupper())
 
+    def test_ssn(self):
+        result = self.usa.ssn()
+        self.assertIsNotNone(result)
+        self.assertNotEqual('666', result[:3])
+        self.assertRegex(result, '^\d{3}-\d{2}-\d{4}$')
+        self.assertTrue(result.replace('-', '').isdigit())
+        self.assertTrue(len(result.replace('-', '')) == 9)
+
 
 class RussiaTest(TestCase):
     def setUp(self):

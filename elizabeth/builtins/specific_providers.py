@@ -149,57 +149,21 @@ class USA(object):
         return _custom_code(mask=mask)
 
     @staticmethod
-    def ssn(state='NY'):
+    def ssn():
         """
         Generate a random, but valid Social Security Number.
 
-        :return:
+        :returns: Random SSN
+        :Example:
+            569-66-5801
         """
-        areas = {
-            'NY': (100, 134),
-            'NJ': (135, 138),
-            'PA': (159, 211),
-            'MD': (212, 220),
-            'VA': (223, 231),
-            'WV': (232, 236),
-            'NC': (237, 246),
-            'SC': (247, 251),
-            'GA': (252, 260),
-            'FL': (261, 267),
-            'OH': (268, 302),
-            'IN': (303, 317),
-            'IL': (318, 361),
-            'MI': (362, 386),
-            'WI': (387, 399),
-            'KY': (400, 407),
-            'TN': (408, 415),
-            'AL': (416, 424),
-            'MS': (425, 428),
-            'AR': (429, 432),
-            'LA': (433, 439),
-            'OK': (440, 448),
-            'TX': (449, 467),
-            'MN': (468, 477),
-            'IA': (478, 485),
-            'MO': (486, 500),
-            'ND': (501, 502),
-            'SD': (503, 504),
-            'NE': (505, 508),
-            'KS': (509, 515),
-            'MT': (516, 517),
-            'ID': (518, 519),
-            'CO': (521, 524),
-            'AZ': (526, 527),
-            'UT': (528, 529),
-            'WA': (531, 539),
-            'OR': (540, 544),
-            'CA': (545, 573),
-            'HI': (575, 576),
-            'DC': (577, 579),
-        }
+        # Valid SSNs exclude 000, 666, and 900-999 in the area group
+        area = randint(1, 899)
+        if area == 666:
+            area = 665
 
-        if state in areas:
-            pass
+        return '{:03}-{:02}-{:04}'.format(
+            area, randint(1, 99), randint(1, 9999))
 
     @staticmethod
     def personality(category='mbti'):
