@@ -474,10 +474,10 @@ class Text(object):
 
 
 class Code(object):
-    """Class that provides methods for generating codes (isbn, asin & etc.)"""
+    """
+    Class that provides methods for generating codes (isbn, asin & etc.)
+    """
 
-    # TO DO: Write some mechanism that help realize special
-    # providers for selected locale.
     def __init__(self, locale):
         self.locale = locale
 
