@@ -22,6 +22,9 @@
 		"Zapsaný spolek"
 	  ]
 	},
-	"name": ["Test"]
+	"name": [
+	  "DATASCAN",
+	  "Building Audit"
+	]
   }
 }

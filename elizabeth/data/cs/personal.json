@@ -6,7 +6,9 @@
 	"Test"
   ],
   "gender": [
-	"Test"
+	"Masculine",
+	"Feminine",
+	"Neuter"
   ],
   "language": [
 	"Test"
@@ -2290,7 +2292,9 @@
 	"České vysoké učení technické v Praze"
   ],
   "views_on": [
-	"Test"
+	"Pozitivní",
+	"Negativy",
+	"Neutrální"
   ],
   "worldview": [
 	"Test"
