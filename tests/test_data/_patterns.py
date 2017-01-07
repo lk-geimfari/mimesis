@@ -40,6 +40,4 @@ PL_POST_CODE = r'\d{2}-\d{3}'
 
 FA_POST_CODE = r'\d{5}-\d{5}'
 
-KO_POST_CODE = r'\d{3}-\d{3}'
-
 CS_POST_CODE = r'\d{3}[ ]?\d{2}'
