@@ -10,6 +10,7 @@ elizabeth/core/__init__.py
 elizabeth/core/elizabeth.py
 elizabeth/core/interdata/__init__.py
 elizabeth/core/interdata/address.py
+elizabeth/core/interdata/code.py
 elizabeth/core/interdata/datetime.py
 elizabeth/core/interdata/development.py
 elizabeth/core/interdata/hardware.py
@@ -19,6 +20,13 @@ elizabeth/core/interdata/personal.py
 elizabeth/core/interdata/science.py
 elizabeth/core/interdata/text.py
 elizabeth/core/interdata/transport.py
+elizabeth/data/cs/address.json
+elizabeth/data/cs/business.json
+elizabeth/data/cs/datetime.json
+elizabeth/data/cs/food.json
+elizabeth/data/cs/personal.json
+elizabeth/data/cs/science.json
+elizabeth/data/cs/text.json
 elizabeth/data/da/address.json
 elizabeth/data/da/business.json
 elizabeth/data/da/datetime.json
@@ -96,6 +104,13 @@ elizabeth/data/it/food.json
 elizabeth/data/it/personal.json
 elizabeth/data/it/science.json
 elizabeth/data/it/text.json
+elizabeth/data/ko/address.json
+elizabeth/data/ko/business.json
+elizabeth/data/ko/datetime.json
+elizabeth/data/ko/food.json
+elizabeth/data/ko/personal.json
+elizabeth/data/ko/science.json
+elizabeth/data/ko/text.json
 elizabeth/data/nl/address.json
 elizabeth/data/nl/business.json
 elizabeth/data/nl/datetime.json
