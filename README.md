@@ -39,7 +39,7 @@ To install `Elizabeth`, simply:
 
 ## Locales
 
-You can specify a locale when creating providers and they will return data that is appropriate for the language or country associated with that locale.  `Elizabeth` currently includes support for 18 different locales:
+You can specify a locale when creating providers and they will return data that is appropriate for the language or country associated with that locale.  `Elizabeth` currently includes support for 19 different locales:
 
 | №  | Flag  | Code       | Name                 | Native name |
 |--- |---   |---        |---                |---         |
@@ -54,13 +54,14 @@ You can specify a locale when creating providers and they will return data that 
 | 9  | 🇭🇺   |  `hu`      | Hungarian            | Magyar      |
 | 10 | 🇮🇸   |  `is`      | Icelandic            | Íslenska    |
 | 11 | 🇮🇹   |  `it`      | Italian              | Italiano    |
-| 12 | 🇳🇱   |  `nl`      | Dutch                | Nederlands  |
-| 13 | 🇳🇴   |  `no`      | Norwegian            | Norsk       |
-| 14 | 🇵🇱   |  `pl`      | Polish               | Polski      |
-| 15 | 🇵🇹   |  `pt`      | Portuguese           | Português   |
-| 16 | 🇧🇷   |  `pt-br`   | Brazilian Portuguese | Português Brasileiro |
-| 17 | 🇷🇺   |  `ru`      | Russian              | Русский     |
-| 18 | 🇸🇪   |  `sv`      | Swedish              | Svenska     |
+| 12 | 🇰🇷   |  `ko`      | Korean               | 한국어       |
+| 13 | 🇳🇱   |  `nl`      | Dutch                | Nederlands  |
+| 14 | 🇳🇴   |  `no`      | Norwegian            | Norsk       |
+| 15 | 🇵🇱   |  `pl`      | Polish               | Polski      |
+| 16 | 🇵🇹   |  `pt`      | Portuguese           | Português   |
+| 17 | 🇧🇷   |  `pt-br`   | Brazilian Portuguese | Português Brasileiro |
+| 18 | 🇷🇺   |  `ru`      | Russian              | Русский     |
+| 19 | 🇸🇪   |  `sv`      | Swedish              | Svenska     |
 
 Using locales:
 

@@ -8,7 +8,7 @@ import elizabeth.core.interdata as common
 from tests.test_data import DummyCase
 
 from ._patterns import EN_GB_POST_CODE, NL_POST_CODE, \
-    PL_POST_CODE, FA_POST_CODE
+    PL_POST_CODE, FA_POST_CODE, KO_POST_CODE
 
 
 class AddressBaseTest(TestCase):
@@ -83,6 +83,9 @@ class AddressTestCase(DummyCase):
             self.assertTrue(re.match(FA_POST_CODE, result))
         elif self.generic.address.locale == 'hu':
             self.assertTrue(re.match(r'[0-9]{4}$', result))
+        elif self.generic.address.locale == 'ko':
+            print(result)
+            self.assertTrue(re.match(KO_POST_CODE, result))
         else:
             self.assertTrue(re.match(r'[0-9]{5}$', result))
 

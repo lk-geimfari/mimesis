@@ -343,6 +343,7 @@ CURRENCY_SYMBOLS = {
     "hu": "Ft",
     "is": "kr",
     "it": "€",
+    "ko": "₩",
     "nl": "€",
     "no": "kr",
     "pl": "zł",

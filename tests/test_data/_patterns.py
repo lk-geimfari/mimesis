@@ -39,3 +39,5 @@ NL_POST_CODE = r'^[1-9][0-9]{3}\s?[a-zA-Z]{2}$'
 PL_POST_CODE = r'\d{2}-\d{3}'
 
 FA_POST_CODE = r'\d{5}-\d{5}'
+
+KO_POST_CODE = r'\d{3}-\d{3}'

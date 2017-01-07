@@ -6,6 +6,7 @@
 - [auyer](https://github.com/auyer) - Contributor (`pt-br`).
 - [aminalaee](https://github.com/aminalaee) - Contributor (`fa`).
 - [jackmcmorrow](https://github.com/jackmcmorrow) - Contributor (`pt-br`).
+- [redus](https://github.com/redus) - Contributor (`ko`).
 - [Costava](https://github.com/Costava) - Contributor.
 - [ranwise](https://github.com/ranwise) - Contributor.
 - [mrcrilly](https://github.com/mrcrilly) - Contributor.

@@ -46,11 +46,11 @@ SUPPORTED_LOCALES = {
         "name": "French",
         "name_local": "Français"
     },
-    'hu': {
+    "hu": {
         'name': 'Hungarian',
         'name_local': 'Magyar'
     },
-    'is': {
+    "is": {
         'name': 'Icelandic',
         'name_local': 'Íslenska'
     },
@@ -58,7 +58,11 @@ SUPPORTED_LOCALES = {
         "name": "Italian",
         "name_local": "Italiano"
     },
-    'nl': {
+    "ko": {
+        'name': 'Korean',
+        'name_local': '한국어'
+    },
+    "nl": {
         'name': 'Dutch',
         'name_local': 'Nederlands'
     },
