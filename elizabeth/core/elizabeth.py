@@ -445,7 +445,8 @@ class Text(object):
         """
         Generate a random temperature value.
 
-        :param scale: Scale of temperature ('f' for Fahrenheit and 'c' for Celsius).
+        :param scale: Scale of temperature('f' for Fahrenheit and
+        'c' for Celsius).
         :param minimum: Minimum value of temperature.
         :param maximum: Maximum value of temperature.
         :returns: Temperature in Celsius or Fahrenheit.
@@ -765,19 +766,22 @@ class Personal(object):
         :Example:
             k6dv2odff9#4h (without hashing).
         """
-        password = "".join([choice(ascii_letters + digits + punctuation) for _ in range(length)])
+        password = "".join([choice(
+            ascii_letters + digits + punctuation) for _ in range(length)])
 
         if algorithm is not None:
             algorithm = algorithm.lower()
+            password = password.encode()
             if algorithm == 'sha1':
-                return sha1(password.encode()).hexdigest()
+                return sha1(password).hexdigest()
             elif algorithm == 'sha256':
-                return sha256(password.encode()).hexdigest()
+                return sha256(password).hexdigest()
             elif algorithm == 'sha512':
-                return sha512(password.encode()).hexdigest()
+                return sha512(password).hexdigest()
             elif algorithm == 'md5':
-                return md5(password.encode()).hexdigest()
-            raise NotImplementedError("The specified hashing algorithm is not available.")
+                return md5(password).hexdigest()
+            raise NotImplementedError("The specified hashing algorithm "
+                                      "is not available.")
 
         return password
 
@@ -843,7 +847,8 @@ class Personal(object):
             length = 15
             regex = re.compile("(\d{4})(\d{6})(\d{5})")
         else:
-            raise NotImplementedError("Card type {} is not supported.".format(card_type))
+            raise NotImplementedError(
+                "Card type {} is not supported.".format(card_type))
 
         number = str(number)
         while len(number) < length - 1:
@@ -1207,7 +1212,8 @@ class Datetime(object):
 
     def date(self, start=2000, end=2035, fmt=None):
         """
-        Returns a string representing a random date formatted for the locale or as specified.
+        Returns a string representing a random date formatted for
+        the locale or as specified.
 
         :param start: Minimum value of year.
         :param end: Maximum value of year.
@@ -1229,7 +1235,9 @@ class Datetime(object):
         :Example:
             21:30:00 (en)
         """
-        t = time(randint(0, 23), randint(0, 59), randint(0, 59), randint(0, 999999))
+        # TODO: Not cool. Refactor it.
+        t = time(randint(0, 23), randint(0, 59),
+                 randint(0, 59), randint(0, 999999))
         return t.strftime(fmt or self.data['formats']['time'])
 
     @staticmethod
@@ -2152,7 +2160,7 @@ class Generic(object):
         else:
             raise TypeError("Provider must be a class")
 
-    # TODO: Refactor all.
+    # TODO: Not cool. Refactor it.
     @property
     def personal(self):
         if callable(self._personal):
