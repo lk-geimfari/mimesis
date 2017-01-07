@@ -1,10 +1,11 @@
+===========
 Quick Start
 ===========
 
 Personal
 --------
 
-.. code:: python
+.. code-block:: python
 
 	from elizabeth import Personal
 
@@ -126,7 +127,7 @@ Personal
 Datetime
 --------
 
-.. code:: python
+.. code-block:: python
 
 	datetime = Datetime('en')
 
@@ -165,7 +166,7 @@ Datetime
 Business
 --------
 
-.. code:: python
+.. code-block:: python
 
 	business = Business('en')
 
@@ -192,7 +193,7 @@ Business
 Network
 -------
 
-.. code:: python
+.. code-block:: python
 
 	# Class for generate data for working with network,
 	network = Network()
@@ -212,7 +213,7 @@ Network
 Science
 -------
 
-.. code:: python
+.. code-block:: python
 
 	science = Science('en')
 
@@ -243,7 +244,7 @@ Science
 File
 ----
 
-.. code:: python
+.. code-block:: python
 
 	file = File()
 
@@ -263,7 +264,7 @@ File
 Address
 -------
 
-.. code:: python
+.. code-block:: python
 
 	address = Address('en')
 
@@ -312,7 +313,7 @@ Address
 Numbers
 -------
 
-.. code:: python
+.. code-block:: python
 
 	number = Numbers()
 
@@ -330,7 +331,7 @@ Numbers
 Text
 ----
 
-.. code:: python
+.. code-block:: python
 
 	data = Text('en')
 
@@ -371,7 +372,7 @@ Text
 Development
 -----------
 
-.. code:: python
+.. code-block:: python
 
 	dev = Development()
 
@@ -410,7 +411,7 @@ Development
 Food
 ----
 
-.. code:: python
+.. code-block:: python
 
 	food = Food('en')
 
@@ -449,7 +450,7 @@ Food
 Hardware
 --------
 
-.. code:: python
+.. code-block:: python
 
 	hardware = Hardware()
 
@@ -508,9 +509,10 @@ Hardware
 
 
 Path
---------
+----
 
-.. code:: python
+.. code-block:: python
+
 	from elizabeth import Path
 
 	path = Path()

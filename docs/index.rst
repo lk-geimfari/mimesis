@@ -1,132 +1,106 @@
-.. Generic documentation master file, created by
-   sphinx-quickstart on Tue Oct 18 14:11:49 2016.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+=========
+Elizabeth
+=========
 
-Welcome to Elizabeth's documentation!
-==================================
+**Elizabeth** is a fast and easy to use Python library for generating dummy data for a variety of purposes.  This data can be particularly useful during software development and testing.  For example, it could be used to populate a testing database for a web application with user information such as email addresses, usernames, first names, last names, etc.
 
-.. image:: https://raw.githubusercontent.com/lk-geimfari/elizabeth/master/other/elizabeth_1.png
-
-.. |build| image:: https://travis-ci.org/lk-geimfari/elizabeth.svg?branch=master
-    :target: https://travis-ci.org/lk-geimfari/elizabeth
-    :alt: Build status of the master branch
-
-
-|build|
-
-Elizabeth is a library to generate dummy data. It's very useful when you need to bootstrap your database. Elizabeth doesn't have any dependencies.
-
-At this moment a library has 15 supported locales:
-
-    - Dansk (da)
-    - Deutsch (de)
-    - English (en)
-    - Español (es)
-    - Suomi (fi)
-    - Français (fr)
-    - Íslenska (is)
-    - Italiano (it)
-    - Nederlands (nl)
-    - Norsk (no)
-    - Português (pt)
-    - Português (pt-br)
-    - Русский  (ru)
-    - Svenska (sv)
-    - Polski (pl)
+There are over eighteen different `data providers <https://github.com/lk-geimfari/elizabeth/blob/master/PROVIDERS.md>`_ available, which can produce data related to food, people, computer hardware, transportation, addresses, and more.  *Elizabeth* does not require any modules that are not in the Python standard library.
 
 Installation
 ------------
 
-.. code:: bash
+.. code-block:: bash
 
-    ➜  ~ git clone https://github.com/lk-geimfari/elizabeth.git
-    ➜  ~ cd elizabeth/
-    ➜  ~ python3 setup.py install
+    git clone https://github.com/lk-geimfari/elizabeth.git
+    cd elizabeth/
+    python3 setup.py install
 
-or
+or simply:
 
-.. code:: bash
+.. code-block:: bash
 
-    ➜  ~  pip install elizabeth
+    pip install elizabeth
 
-Testing
+Basic Usage
+-----------
+
+.. code-block:: python
+
+    >>> from elizabeth import Personal
+    >>> p = Personal()
+    >>>
+    >>> p.full_name(gender='female')
+    'Antonetta Garrison'
+    >>> p.blood_type()
+    'O-'
+    >>> p.occupation()
+    'Programmer'
+
+Locales
 -------
 
-.. code:: bash
+You can specify a locale when creating providers and they will return data that is appropriate for the language or country associated with that locale.  `Elizabeth` currently includes support for 18 different locales:
 
-    ➜  ~ cd elizabeth/
-    ➜  ~ python3 -m unittest
-	➜  ~ # or
-	➜  ~ ./run_tests.sh
-
+=======  ====================  ====================
+Code     Name                  Native Name
+=======  ====================  ====================
+`da`     Danish                Dansk
+`de`     German                Deutsch
+`en`     English               English
+`en-gb`  British English       English
+`es`     Spanish               Español
+`fa`     Farsi                 فارسی
+`fi`     Finnish               Suomi
+`fr`     French                Français
+`hu`     Hungarian             Magyar
+`is`     Icelandic             Íslenska
+`it`     Italian               Italiano
+`nl`     Dutch                 Nederlands
+`no`     Norwegian             Norsk
+`pl`     Polish                Polski
+`pt`     Portuguese            Português
+`pt-br`  Brazilian Portuguese  Português Brasileiro
+`ru`     Russian               Русский
+`sv`     Swedish               Svenska
+=======  ====================  ====================
 
 Usage
------
+~~~~~
 
-.. code:: python
-	# ...
-    # Model from some Flask project.
+.. code-block:: python
 
-    class Patient(db.Model):
-		id = db.Column(db.Integer, primary_key=True)
-		email = db.Column(db.String(120), unique=True)
-		phone_number = db.Column(db.String(25))
-		full_name = db.Column(db.String(100))
-		gender = db.Column(db.String(64))
-		nationality = db.Column(db.String(64))
-		weight = db.Column(db.String(64))
-		height = db.Column(db.String(64))
-		blood_type = db.Column(db.String(64))
+    >>> from elizabeth import Text
+    >>> en = Text()  # English is Elizabeth's default locale
+    >>> de = Text('de')
+    >>> en.sentence()
+    'Ports are used to communicate with the external world.'
+    >>> de.sentence()
+    'Wir müssen nicht vergessen Zickler.'
+    >>>
+    >>> en.color()
+    'Blue'
+    >>> de.color()
+    'Türkis'
 
-		def __init__(self, **kwargs):
-			super(Patient, self).__init__(**kwargs)
+When you only need to generate data for a single locale, use the `Generic` provider, and you can access all `Elizabeth`
+providers from one object.
 
-		@staticmethod
-		def _generate(count=2000):
-			from elizabeth import Personal
+.. code-block:: python
 
-			person = Personal('en')
-			for _ in range(count):
-				patient = Patient(email=person.email(),
-                                  phone_number=person.telephone(),
-                                  full_name=person.full_name('f'),
-                                  gender=person.gender(),
-                                  nationality=person.nationality(),
-                                  weight=person.weight(),
-                                  height=person.height(),
-                                  blood_type=person.blood_type()
-                                  )
-			try:
-				db.session.add(patient)
-				db.session.commit()
-			except Exception:
-				pass
+    >>> from elizabeth import Generic
+    >>> g = Generic('es')
+    >>> g.datetime.month()
+    'Agosto'
+    >>> g.code.imei()
+    '353918052107063'
+    >>> g.food.fruit()
+    'Limón'
 
-When you use only one locale, use following format:
-
-.. code:: python
-
-	from elizabeth import Generic
-
-	el = Generic('en')
-
-
-	def patient(sex='f'):
-		user = {
-                'full_name': el.personal.full_name(sex),
-                'gender': el.personal.gender(sex),
-                'blood_type': el.person.blood_type(),
-                'birthday': el.datetime.date()
-                }
-		return user
-
-
-Examples
---------
+Related Libraries
+-----------------
 
 - `Flask-church`_ - an extension for Flask based on Elizabeth.
-- `Presturinn`_ - This is a fake API based on Falcon and Elizabeth v0.2.0.
+- `Presturinn`_ - a fake API based on Falcon and Elizabeth v0.2.0.
 
 .. _Flask-church: https://github.com/lk-geimfari/flask_church
 .. _Presturinn: https://github.com/lk-geimfari/presturinn
@@ -134,33 +108,53 @@ Examples
 Contributing
 ------------
 
-Your contributions are always welcome! Please take a look at the `contribution`_ guidelines first. `Here`_ you can look a list of contributors.
+The `source code <https://github.com/lk-geimfari/elizabeth>`_ and `issue tracker <https://github.com/lk-geimfari/elizabeth/issues>`_ are hosted on GitHub.  *Elizabeth* is tested against Python 3.2 through 3.6 on `Travis-CI <https://travis-ci.org/lk-geimfari/elizabeth>`_.  Test coverage is monitored with `Codecov <https://codecov.io/gh/lk-geimfari/elizabeth>`_, and code quality checks are automated with `Codacy <https://www.codacy.com/app/wikkiewikkie/elizabeth/dashboard>`_.
 
-.. _contribution: https://github.com/lk-geimfari/elizabeth/blob/master/CONTRIBUTING.md
-.. _Here: https://github.com/lk-geimfari/elizabeth/blob/master/CONTRIBUTORS.md
+Guidelines
+~~~~~~~~~~
+Your contributions are always welcome! Please adhere to the contribution guidelines:
 
-Disclaimer
-----------
+- Make one change per one commit.
+- Include only commit in each pull request.
+- Document your code with comments in English.
+- Check your spelling and grammar.
+- Check code style with `pycodestyle <https://pycodestyle.readthedocs.io/en/latest/>`_, `pylint <https://www.pylint.org/>`_, or another similar tool.
+- `Run the test suite <#running-tests>`_ and ensure all tests pass.
+- Write additional tests to cover new functionality.
 
-The author does not assume any responsibility for how you will use this library and how you will use data generated with this library. This library is designed only for developers and only with good intentions. Do not use the data generated with Generic for illegal purposes.
 
-Licence
---------
+Running Tests
+~~~~~~~~~~~~~
 
-Generic uses the `MIT License <https://github.com/lk-geimfari/church/blob/master/LICENSE>`_.
+.. code-block:: bash
+
+    cd elizabeth/
+    python3 -m unittest discover tests
+
+or
+
+.. code-block:: bash
+
+    run_tests.sh
+
+License and Disclaimer
+----------------------
+
+`Elizabeth` is distributed under the `MIT License <https://github.com/lk-geimfari/church/blob/master/LICENSE>`_.
+
+The authors do not assume any responsibility for how you use this library or how you use data generated with it.  This library is designed only for developers and only with good intentions.  Do not use the data generated with `Elizabeth` for illegal purposes.
 
 Contents
 --------
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
 
    guide
-   elizabeth
+   api
 
-Indices and tables
-==================
+Indices
+-------
 
 * :ref:`genindex`
 * :ref:`modindex`
-* :ref:`search`
