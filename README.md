@@ -39,28 +39,30 @@ To install `Elizabeth`, simply:
 
 ## Locales
 
-You can specify a locale when creating providers and they will return data that is appropriate for the language or country associated with that locale.  `Elizabeth` currently includes support for 18 different locales:
+You can specify a locale when creating providers and they will return data that is appropriate for the language or country associated with that locale.  `Elizabeth` currently includes support for 20 different locales:
 
 | №  | Flag  | Code       | Name                 | Native name |
 |--- |---   |---        |---                |---         |
-| 1  | 🇩🇰   |  `da`      | Danish               | Dansk       |
-| 2  | 🇩🇪   |  `de`      | German               | Deutsch     |
-| 3  | 🇺🇸   |  `en`      | English              | English     |
-| 4  | 🇬🇧   |  `en-gb`   | British English      | English     |
-| 5  | 🇪🇸   |  `es`      | Spanish              | Español     |
-| 6  | 🇮🇷   |  `fa`      | Farsi                |      فارسی  |
-| 7  | 🇫🇮   |  `fi`      | Finnish              | Suomi       |
-| 8  | 🇫🇷   |  `fr`      | French               | Français    |
-| 9  | 🇭🇺   |  `hu`      | Hungarian            | Magyar      |
-| 10 | 🇮🇸   |  `is`      | Icelandic            | Íslenska    |
-| 11 | 🇮🇹   |  `it`      | Italian              | Italiano    |
-| 12 | 🇳🇱   |  `nl`      | Dutch                | Nederlands  |
-| 13 | 🇳🇴   |  `no`      | Norwegian            | Norsk       |
-| 14 | 🇵🇱   |  `pl`      | Polish               | Polski      |
-| 15 | 🇵🇹   |  `pt`      | Portuguese           | Português   |
-| 16 | 🇧🇷   |  `pt-br`   | Brazilian Portuguese | Português Brasileiro |
-| 17 | 🇷🇺   |  `ru`      | Russian              | Русский     |
-| 18 | 🇸🇪   |  `sv`      | Swedish              | Svenska     |
+| 1  | 🇨🇿   |  `cs`      | Czech                | Česky       |
+| 2  | 🇩🇰   |  `da`      | Danish               | Dansk       |
+| 3  | 🇩🇪   |  `de`      | German               | Deutsch     |
+| 4  | 🇺🇸   |  `en`      | English              | English     |
+| 5  | 🇬🇧   |  `en-gb`   | British English      | English     |
+| 6  | 🇪🇸   |  `es`      | Spanish              | Español     |
+| 7  | 🇮🇷   |  `fa`      | Farsi                |      فارسی  |
+| 8  | 🇫🇮   |  `fi`      | Finnish              | Suomi       |
+| 9  | 🇫🇷   |  `fr`      | French               | Français    |
+| 10  | 🇭🇺   |  `hu`      | Hungarian            | Magyar      |
+| 11 | 🇮🇸   |  `is`      | Icelandic            | Íslenska    |
+| 12 | 🇮🇹   |  `it`      | Italian              | Italiano    |
+| 13 | 🇰🇷   |  `ko`      | Korean               | 한국어       |
+| 14 | 🇳🇱   |  `nl`      | Dutch                | Nederlands  |
+| 15 | 🇳🇴   |  `no`      | Norwegian            | Norsk       |
+| 16 | 🇵🇱   |  `pl`      | Polish               | Polski      |
+| 17 | 🇵🇹   |  `pt`      | Portuguese           | Português   |
+| 18 | 🇧🇷   |  `pt-br`   | Brazilian Portuguese | Português Brasileiro |
+| 19 | 🇷🇺   |  `ru`      | Russian              | Русский     |
+| 20 | 🇸🇪   |  `sv`      | Swedish              | Svenska     |
 
 Using locales:
 

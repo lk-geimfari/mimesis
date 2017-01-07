@@ -1,5 +1,13 @@
 ## Changelog
 
+
+### Version 0.3.11
+ - Added `ko` locale
+ - Added `cs` locale
+ - Fix bugs
+
+---
+
 ### Version 0.3.10
  - Now support `hu` locale
 

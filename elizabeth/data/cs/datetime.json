@@ -1,0 +1,65 @@
+{
+  "day": {
+	"abbr": [
+	  "Ne.",
+	  "Po.",
+	  "Pá.",
+	  "So.",
+	  "St.",
+	  "Út.",
+	  "Čt."
+	],
+	"name": [
+	  "Neděle",
+	  "Pondělí",
+	  "Pátek",
+	  "Sobota",
+	  "Středa",
+	  "Úterý",
+	  "Čtvrtek"
+	]
+  },
+  "formats": {
+	"date": "%d-%m-%Y",
+	"time": "%H:%M:%S"
+  },
+  "month": {
+	"abbr": [
+	  "Brez.",
+	  "Cerv.",
+	  "Cerven.",
+	  "Dub.",
+	  "Kvet.",
+	  "Led.",
+	  "List.",
+	  "Pros.",
+	  "Ríj.",
+	  "Srp.",
+	  "Zár.",
+	  "Ún."
+	],
+	"name": [
+	  "Březen",
+	  "Duben",
+	  "Květen",
+	  "Leden",
+	  "Listopad",
+	  "Prosinec",
+	  "Srpen",
+	  "Září",
+	  "Únor",
+	  "Červen",
+	  "Červenec",
+	  "Říjen"
+	]
+  },
+  "periodicity": [
+	"Denní",
+	"Týdně",
+	"Měsíční",
+	"Roční",
+	"Zřídka",
+	"Jednou",
+	"Nikdy"
+  ]
+}

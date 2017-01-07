@@ -1,9 +1,5 @@
 # -*- coding: utf-8 -*-
 
-# :copyright: (c) 2016 by Likid Geimfari <likid.geimfari@gmail.com>.
-# :repository: https://github.com/lk-geimfari/elizabeth
-# :software_license: MIT License
-#
 # Copyright (c) 2016 Likid Geimfari (Isaak Uchakaev)  <likid.geimfari@gmail.com>
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -18,15 +14,17 @@
 #
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 # IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# FITNESS FOR A PARTICULAR PURPOSE AND NON INFRINGEMENT. IN NO EVENT SHALL THE
 # AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+# :repository: https://github.com/lk-geimfari/elizabeth
+
 from elizabeth.core import *
 
-__version__ = '0.3.10'
+__version__ = '0.3.11'
 __author__ = 'Likid Geimfari'
 
 __all__ = [

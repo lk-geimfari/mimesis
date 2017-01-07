@@ -73,3 +73,11 @@ class SwedishTest(LocaleBase, TestCase):
 
 class HungarianTest(LocaleBase, TestCase):
     LANG = 'hu'
+
+
+class KoreanTest(LocaleBase, TestCase):
+    LANG = 'ko'
+
+
+class CzechTest(LocaleBase, TestCase):
+    LANG = 'cs'
