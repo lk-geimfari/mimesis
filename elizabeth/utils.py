@@ -14,6 +14,10 @@ __all__ = ['pull']
 PATH = abspath(join(dirname(__file__), 'data'))
 
 SUPPORTED_LOCALES = {
+    "cs": {
+        'name': 'Czech',
+        'name_local': 'česky',
+    },
     "da": {
         "name": "Danish",
         "name_local": "Dansk"

@@ -152,22 +152,8 @@ class Address(object):
             389213
         """
         _ = Code.custom_code
-        # here @ represents a letter and  # a digit.
-        masks = {
-            'da': 'DK-####',
-            'fa': '#####-#####',
-            'hu': '####',
-            'is': '###',
-            'ko': '###-###',
-            'nl': '1### @@',
-            'no': '####',
-            'pl': '##-###',
-            'pt': '####',
-            'br-pt': '#####-###',
-            'ru': '######',
-            'default': '#####',
-            'en-gb': '@@#@ #@@'
-        }
+
+        masks = common.POSTAL_CODE_FMT
 
         if self.locale in masks:
             return _(mask=masks[self.locale])

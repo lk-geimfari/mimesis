@@ -27,5 +27,51 @@ IMEI_TACS = [
     "35744105",  # Samsung Galaxy S4
     "32930400",  # Samsung Galaxy S7
     "35171005",  # Sony Ericsson Xperia S
-    "35511405"   # Sony Ericsson Xperia U
+    "35511405"  # Sony Ericsson Xperia U
 ]
+
+ISBN_GROUPS = {
+    "cs": "80",
+    "da": "87",
+    "de": "3",
+    "en": "1",
+    "es": "84",
+    "fa": "600",
+    "fi": "951",
+    "fr": "2",
+    "hu": "615",
+    "is": "9935",
+    "it": "88",
+    "ko": "89",
+    "nl": "90",
+    "no": "82",
+    "pl": "83",
+    "pt": "972",
+    "pt-br": "85",
+    "ru": "5",
+    "sv": "91"
+}
+
+CURRENCY_SYMBOLS = {
+    "cs": "Kč",
+    "da": "kr",
+    "de": "€",
+    "en": "$",
+    "en-gb": "£",
+    "es": "€",
+    "fa": "﷼",
+    "fi": "€",
+    "fr": "€",
+    "hu": "Ft",
+    "is": "kr",
+    "it": "€",
+    "ko": "₩",
+    "nl": "€",
+    "no": "kr",
+    "pl": "zł",
+    "pt": "€",
+    "pt-br": "R$",
+    "ru": "₽",
+    "sv": "kr",
+    "default": "$"
+}
