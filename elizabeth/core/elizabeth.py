@@ -133,9 +133,11 @@ class Address(object):
         """
         Get a random states or subject of country.
 
-        :param abbr: If True then return ISO (ISO 3166-2)
+        :param abbr: If True then return ISO (ISO 3166-2) \
         code of state/region/province/subject.
+
         :returns: State of current country.
+
         :Example:
             Alabama (for locale `en`).
         """
@@ -478,7 +480,7 @@ class Code(object):
         :param char: Placeholder for characters.
         :param digit: Placeholder for digits.
         :return: Custom code.
-        :Example::
+        :Example:
             5673-AGFR-SFSFF-1423-4/AD.
         """
         code = ''
@@ -494,8 +496,7 @@ class Code(object):
 
     def issn(self, mask=None):
         """
-        Generate a random International Standard
-        Serial Number (ISSN).
+        Generate a random International Standard Serial Number (ISSN).
 
         :param mask: Mask ISSN.
         :return: ISSN.
@@ -507,8 +508,8 @@ class Code(object):
     def isbn(self, fmt='isbn-10'):
         """
         Generate ISBN for current locale.
-        :param fmt: ISBN format. Default is ISBN 10,
-        but you als can use ISBN-13
+
+        :param fmt: ISBN format. Default is ISBN 10, but you als can use ISBN-13
         :return: ISBN.
         :Example:
             132-1-15411-375-8.
@@ -529,8 +530,8 @@ class Code(object):
     def ean(self, fmt='ean-13'):
         """
         Generate EAN (European Article Number) code.
-        :param fmt: Format of EAN. Default is EAN-13,
-        but yuo also can use EAN-8
+
+        :param fmt: Format of EAN. Default is EAN-13, but you also can use EAN-8
         :return: EAN.
         :Example:
             3953753179567.
@@ -541,8 +542,8 @@ class Code(object):
 
     def imei(self):
         """
-        Generate a random IMEI (International Mobile Station
-        Equipment Identity).
+        Generate a random IMEI (International Mobile Station Equipment Identity).
+
         :return: IMEI.
         :Example:
 
@@ -556,6 +557,7 @@ class Code(object):
     def pin(self, mask='####'):
         """
         Generate a random PIN code.
+
         :return: PIN code.
         :Example:
             5241.
@@ -710,14 +712,15 @@ class Personal(object):
         Get a random title (prefix/suffix) for name.
 
         :param gender: The gender.
-        :param type_:  The type of title. Available types:
+        :param type_:  The type of title. Available types: \
+        +-------------------+-------------------------+ \
+        | Key of type       |      An example (M/F)   | \
+        +===================+=========================+ \
+        | typical           |      Mr./Mrs.           | \
+        +-------------------+-------------------------+ \
+        | academic          |      PhD, Dr.           | \
         +-------------------+-------------------------+
-        | Key of type       |      An example (M/F)   |
-        +===================+=========================+
-        | typical           |      Mr./Mrs.           |
-        +-------------------+-------------------------+
-        | academic          |      PhD, Dr.           |
-        +-------------------+-------------------------+
+
         :return: The title.
         :Example:
             PhD.
@@ -1357,7 +1360,7 @@ class Science(object):
 
     def __init__(self, locale='en'):
         """
-        :param lang: Current language.
+        :param locale: Current language.
         """
         self.locale = locale
         self._data = pull('science.json', self.locale)
@@ -1986,7 +1989,7 @@ class Transport(object):
         """
         Generate a truck model.
 
-        :param model_mask: Mask of truck model. Here '@' is a
+        :param model_mask: Mask of truck model. Here '@' is a \
         placeholder of characters and '#' is a placeholder of digits.
         :return: Dummy truck model.
         :Example:
@@ -2011,7 +2014,7 @@ class Transport(object):
         """
         Generate a dummy airplane model.
 
-        :param model_mask: Mask of truck model. Here '@' is a
+        :param model_mask: Mask of truck model. Here '@' is a \
         placeholder of characters and '#' is a placeholder of digits.
         :return:
         :Example:
