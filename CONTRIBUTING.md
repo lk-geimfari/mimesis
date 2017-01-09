@@ -5,6 +5,8 @@
 - [sobolevn](https://github.com/sobolevn) - Contributor. Inspirer.
 - [auyer](https://github.com/auyer) - Contributor (`pt-br`).
 - [aminalaee](https://github.com/aminalaee) - Contributor (`fa`).
+- [Uncleleech](https://github.com/Uncleleech)  - Contributor.
+- [wikkiewikkie](https://github.com/wikkiewikkie) - Contributor.
 - [jackmcmorrow](https://github.com/jackmcmorrow) - Contributor (`pt-br`).
 - [redus](https://github.com/redus) - Contributor (`ko`).
 - [Costava](https://github.com/Costava) - Contributor.
@@ -14,9 +16,11 @@
 - [bderusha](https://github.com/bderusha) - Contributor.
 - [martini97](https://github.com/martini97) - Contributor.
 - [yn-coder](https://github.com/yn-coder) - Contributor.
-- [Uncleleech](https://github.com/Uncleleech)  - Contributor.
-- [wikkiewikkie](https://github.com/wikkiewikkie) - Contributor.
-
+- [sammyshj](https://github.com/sammyshj) - Contributor.
+- [jeromechrist](https://github.com/jeromechrist) - Contributor.
+- [drpoggi](https://github.com/drpoggi) - Contributor.
+- [fcurella](https://github.com/fcurella) - Contributor.
+- [mipaaa](https://github.com/mipaaa) - Contributor.
 
 ---
 
