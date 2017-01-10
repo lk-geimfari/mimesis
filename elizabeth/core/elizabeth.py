@@ -355,6 +355,7 @@ class Structured(object):
         """
         prop = choice(list(common.CSS_PROPERTIES.keys()))
         val = common.CSS_PROPERTIES[prop]
+
         if isinstance(val, list):
             val = choice(val)
         elif val == "color":
@@ -379,18 +380,23 @@ class Structured(object):
         :return: a random snippet of delimited data
         :rtype: str
         """
-        column_providers = [self.datetime.date,
-                            self.datetime.time,
-                            self.personal.email,
-                            self.personal.name,
-                            self.personal.password,
-                            self.personal.telephone,
-                            self.text.sentence,
-                            self.text.word,
-                            self.internet.home_page]
+        column_providers = [
+            self.datetime.date,
+            self.datetime.time,
+            self.personal.email,
+            self.personal.name,
+            self.personal.password,
+            self.personal.telephone,
+            self.text.sentence,
+            self.text.word,
+            self.internet.home_page
+        ]
+
         columns = sample(column_providers, cols)
         output = io.StringIO()
-        writer = csv.writer(output, delimiter=delimiter, quotechar=quotechar, quoting=csv.QUOTE_ALL)
+        writer = csv.writer(output, delimiter=delimiter,
+                            quotechar=quotechar, quoting=csv.QUOTE_ALL)
+
         writer.writerow([self.text.word() for _ in range(0, cols)])
         for _ in range(0, lines):
             writer.writerow([p() for p in columns])
@@ -408,7 +414,9 @@ class Structured(object):
 
             >>> s = Structured()
             >>> s.html()
-            '<span class="select" id="careers">Ports are created with the built-in function open_port.</span>'
+            '<span class="select" id="careers">
+                Ports are created with the built-in function open_port.
+            </span>'
 
         """
         # TODO: Refactor. Readability counts.
@@ -447,7 +455,9 @@ class Structured(object):
         try:
             value = common.HTML_CONTAINER_TAGS[tag][attribute]
         except KeyError:
-            raise NotImplementedError("Tag {} or attribute {} is not supported".format(tag, attribute))
+            raise NotImplementedError(
+                "Tag {} or attribute {} is not supported".format(tag, attribute))
+
         if isinstance(value, list):
             value = choice(value)
         elif value == "css":
@@ -457,7 +467,8 @@ class Structured(object):
         elif value == "url":
             value = self.internet.home_page()
         else:
-            raise NotImplementedError("Attribute type {} is not implemented".format(value))
+            raise NotImplementedError(
+                "Attribute type {} is not implemented".format(value))
         return value
 
 
