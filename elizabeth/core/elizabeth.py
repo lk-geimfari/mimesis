@@ -392,6 +392,8 @@ class Structured(object):
             self.internet.home_page
         ]
 
+        # TODO: Remove sentence, word and homepage.
+        # This isn't useful in current context.
         columns = sample(column_providers, cols)
         output = io.StringIO()
         writer = csv.writer(output, delimiter=delimiter,
@@ -401,6 +403,7 @@ class Structured(object):
         for _ in range(0, lines):
             writer.writerow([p() for p in columns])
         output.seek(0)
+
         return output.read()
 
     def html(self):
