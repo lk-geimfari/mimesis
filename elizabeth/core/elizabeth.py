@@ -9,7 +9,9 @@ import os
 import re
 import sys
 import array
+import csv
 import inspect
+import io
 from calendar import monthrange
 from datetime import (
     date,
@@ -297,6 +299,159 @@ class Numbers(object):
         :return: Number
         """
         return randint(minimum, maximum)
+
+
+class Structured(object):
+    """
+    Provider for structured text data such as CSS, Delimited, HTML, etc.
+    """
+
+    def __init__(self, locale='en'):
+        self.locale = locale
+        self.datetime = Datetime(self.locale)
+        self.internet = Internet()
+        self.personal = Personal(self.locale)
+        self.text = Text(self.locale)
+
+    def css(self):
+        """
+        Generates a random snippet of CSS
+
+        :return: CSS
+        :rtype: str
+
+        :Example:
+
+            >>> s = Structured()
+            >>> s.css()
+            'strong {pointer: crosshair; padding-right: 46pt; margin-left: 38em; padding-right: 65em}'
+
+        """
+        base = "{}".format(choice([choice(list(common.HTML_CONTAINER_TAGS.keys())),
+                                   choice(common.HTML_MARKUP_TAGS),
+                                   "{}{}".format(choice(common.CSS_SELECTORS),
+                                                 self.text.word())]))
+        props = "; ".join([self.css_property() for _ in range(randint(1, 6))])
+        return "{} {{{}}}".format(base, props)
+
+    def css_property(self):
+        """
+        Generates a random snippet of CSS that assigns value to a property
+
+        :return: CSS property
+        :rtype: str
+
+        :Examples:
+
+            >>> s = Structured()
+            >>> s.css_property()
+            'background-color: #f4d3a1'
+        """
+        prop = choice(list(common.CSS_PROPERTIES.keys()))
+        val = common.CSS_PROPERTIES[prop]
+        if isinstance(val, list):
+            val = choice(val)
+        elif val == "color":
+            val = self.text.hex_color()
+        elif val == "size":
+            val = "{}{}".format(randint(1, 99), choice(common.CSS_SIZE_UNITS))
+
+        return "{}: {}".format(prop, val)
+
+    def delimited(self, lines=20, cols=5, delimiter=",", quotechar="\""):
+        """
+        Generate random delimited data.
+
+        :param lines: number of lines to output
+        :type lines: int
+        :param cols: number of rows to output
+        :type cols: int
+        :param delimiter: string used to separate fields
+        :type delimiter: str
+        :param quotechar: string used to enclose fields
+        :type quotechar: str
+        :return: a random snippet of delimited data
+        :rtype: str
+        """
+        column_providers = [self.datetime.date,
+                            self.datetime.time,
+                            self.personal.email,
+                            self.personal.name,
+                            self.personal.password,
+                            self.personal.telephone,
+                            self.text.sentence,
+                            self.text.word,
+                            self.internet.home_page]
+        columns = sample(column_providers, cols)
+        output = io.StringIO()
+        writer = csv.writer(output, delimiter=delimiter, quotechar=quotechar, quoting=csv.QUOTE_ALL)
+        writer.writerow([self.text.word() for _ in range(0, cols)])
+        for _ in range(0, lines):
+            writer.writerow([p() for p in columns])
+        output.seek(0)
+        return output.read()
+
+    def html(self):
+        """
+        Generate a random HTML tag with text inside and some attributes set.
+
+        :return: HTML
+        :rtype: str
+
+        :Examples:
+
+            >>> s = Structured()
+            >>> s.html()
+            '<span class="select" id="careers">Ports are created with the built-in function open_port.</span>'
+
+        """
+        tag_name = choice(list(common.HTML_CONTAINER_TAGS))
+        tag_attributes = common.HTML_CONTAINER_TAGS[tag_name]
+        selected_attributes = sample(list(tag_attributes), k=randint(1, len(tag_attributes)))
+
+        attributes = []
+        for attribute in selected_attributes:
+            attributes.append("{}=\"{}\"".format(attribute, self.html_attribute_value(tag_name, attribute)))
+
+        return "<{tag} {attributes}>{content}</{tag}>".format(tag=tag_name,
+                                                              attributes=" ".join(attributes),
+                                                              content=self.text.sentence())
+
+    def html_attribute_value(self, tag, attribute):
+        """
+        Random value for specified HTML tag attribute.
+
+        :param tag: An HTML tag
+        :param attribute: An attribute of the specified tag
+        :type tag: str
+        :type attribute: str
+        :return: attribute
+        :rtype: str
+
+        :Examples:
+
+            >>> s = Structured()
+            >>> s.html_attribute_value('a', 'href')
+            'http://www.cnn.com'
+            >>> s.html_attribute_value('div', 'class')
+            'divider'
+
+        """
+        try:
+            value = common.HTML_CONTAINER_TAGS[tag][attribute]
+        except KeyError:
+            raise NotImplementedError("Tag {} or attribute {} is not supported".format(tag, attribute))
+        if isinstance(value, list):
+            value = choice(value)
+        elif value == "css":
+            value = self.css_property()
+        elif value == "word":
+            value = self.text.word()
+        elif value == "url":
+            value = self.internet.home_page()
+        else:
+            raise NotImplementedError("Attribute type {} is not implemented".format(value))
+        return value
 
 
 class Text(object):

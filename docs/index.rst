@@ -1,4 +1,3 @@
-=========
 Elizabeth
 =========
 
@@ -39,11 +38,12 @@ Basic Usage
 Locales
 -------
 
-You can specify a locale when creating providers and they will return data that is appropriate for the language or country associated with that locale.  `Elizabeth` currently includes support for 18 different locales:
+You can specify a locale when creating providers and they will return data that is appropriate for the language or country associated with that locale.  `Elizabeth` currently includes support for 20 different locales:
 
 =======  ====================  ====================
 Code     Name                  Native Name
 =======  ====================  ====================
+`cs`     Czech				   Česky
 `da`     Danish                Dansk
 `de`     German                Deutsch
 `en`     English               English
@@ -55,6 +55,7 @@ Code     Name                  Native Name
 `hu`     Hungarian             Magyar
 `is`     Icelandic             Íslenska
 `it`     Italian               Italiano
+`ko`	 Korean                한국어
 `nl`     Dutch                 Nederlands
 `no`     Norwegian             Norsk
 `pl`     Polish                Polski
@@ -158,3 +159,4 @@ Indices
 
 * :ref:`genindex`
 * :ref:`modindex`
+* :ref:`search`

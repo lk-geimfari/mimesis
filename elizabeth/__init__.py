@@ -43,6 +43,7 @@ __all__ = [
     'Path',
     'Personal',
     'Science',
+    'Structured',
     'Text',
     'Transport',
     'Generic'

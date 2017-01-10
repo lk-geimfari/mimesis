@@ -3,5 +3,5 @@ from .elizabeth import (
     Code, Datetime, Development, File,
     Food, Hardware, Internet, Network,
     Numbers, Path, Personal, Science,
-    Text, Transport, Generic
+    Structured, Text, Transport, Generic
 )
