@@ -10,5 +10,6 @@ from .internet import *
 from .network import *
 from .personal import *
 from .science import *
+from .structured import *
 from .text import *
 from .transport import *
