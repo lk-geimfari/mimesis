@@ -4,6 +4,7 @@ import csv
 from elizabeth.core.elizabeth import Structured
 from unittest import TestCase
 
+from elizabeth.core import interdata as common
 
 class StructuredBaseTest(TestCase):
     def setUp(self):
@@ -40,6 +41,10 @@ class StructuredBaseTest(TestCase):
         self.assertEqual(result[0:4], "http")
         with self.assertRaises(NotImplementedError):
             self.structured.html_attribute_value("a", "bogus")
+        with self.assertRaises(NotImplementedError):
+            common.HTML_CONTAINER_TAGS['div']['class'] = "bogus"
+            from elizabeth.core.elizabeth import Structured
+            Structured().html_attribute_value("div", "class")
 
     def test_html(self):
         result = self.structured.html()
