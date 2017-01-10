@@ -324,9 +324,15 @@ class Structured(object):
 
             >>> s = Structured()
             >>> s.css()
-            'strong {pointer: crosshair; padding-right: 46pt; margin-left: 38em; padding-right: 65em}'
+            'strong {
+                pointer: crosshair;
+                padding-right: 46pt;
+                margin-left: 38em;
+                padding-right: 65em
+            }'
 
         """
+        # TODO: Refactor. Simple is better than complex.
         base = "{}".format(choice([choice(list(common.HTML_CONTAINER_TAGS.keys())),
                                    choice(common.HTML_MARKUP_TAGS),
                                    "{}{}".format(choice(common.CSS_SELECTORS),
@@ -405,6 +411,7 @@ class Structured(object):
             '<span class="select" id="careers">Ports are created with the built-in function open_port.</span>'
 
         """
+        # TODO: Refactor. Readability counts.
         tag_name = choice(list(common.HTML_CONTAINER_TAGS))
         tag_attributes = common.HTML_CONTAINER_TAGS[tag_name]
         selected_attributes = sample(list(tag_attributes), k=randint(1, len(tag_attributes)))
