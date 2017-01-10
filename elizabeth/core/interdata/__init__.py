@@ -7,8 +7,9 @@ from .datetime import *
 from .development import *
 from .hardware import *
 from .internet import *
-from .network import *
+from .file import *
 from .personal import *
+from .path import *
 from .science import *
 from .text import *
 from .transport import *
