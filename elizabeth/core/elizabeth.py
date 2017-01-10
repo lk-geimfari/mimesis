@@ -9,8 +9,9 @@ import os
 import re
 import sys
 import array
+import csv
 import inspect
-import copy
+import io
 from calendar import monthrange
 from datetime import (
     date,
@@ -302,12 +303,14 @@ class Numbers(object):
 
 class Structured(object):
     """
-    Provider for structured text data such as CSS, Delimited, HTML, XML, etc.
+    Provider for structured text data such as CSS, Delimited, HTML, etc.
     """
 
     def __init__(self, locale='en'):
         self.locale = locale
+        self.datetime = Datetime(self.locale)
         self.internet = Internet()
+        self.personal = Personal(self.locale)
         self.text = Text(self.locale)
 
     def css(self):
@@ -355,8 +358,38 @@ class Structured(object):
 
         return "{}: {}".format(prop, val)
 
-    def delimited(self):
-        pass
+    def delimited(self, lines=20, cols=5, delimiter=",", quotechar="\""):
+        """
+        Generate random delimited data.
+
+        :param lines: number of lines to output
+        :type lines: int
+        :param cols: number of rows to output
+        :type cols: int
+        :param delimiter: string used to separate fields
+        :type delimiter: str
+        :param quotechar: string used to enclose fields
+        :type quotechar: str
+        :return: a random snippet of delimited data
+        :rtype: str
+        """
+        column_providers = [self.datetime.date,
+                            self.datetime.time,
+                            self.personal.email,
+                            self.personal.name,
+                            self.personal.password,
+                            self.personal.telephone,
+                            self.text.sentence,
+                            self.text.word,
+                            self.internet.home_page]
+        columns = sample(column_providers, cols)
+        output = io.StringIO()
+        writer = csv.writer(output, delimiter=delimiter, quotechar=quotechar, quoting=csv.QUOTE_ALL)
+        writer.writerow([self.text.word() for _ in range(0, cols)])
+        for _ in range(0, lines):
+            writer.writerow([p() for p in columns])
+        output.seek(0)
+        return output.read()
 
     def html(self):
         """
@@ -404,7 +437,10 @@ class Structured(object):
             'divider'
 
         """
-        value = common.HTML_CONTAINER_TAGS[tag][attribute]
+        try:
+            value = common.HTML_CONTAINER_TAGS[tag][attribute]
+        except KeyError:
+            raise NotImplementedError("Tag {} or attribute {} is not supported".format(tag, attribute))
         if isinstance(value, list):
             value = choice(value)
         elif value == "css":
@@ -417,8 +453,6 @@ class Structured(object):
             raise NotImplementedError("Attribute type {} is not implemented".format(value))
         return value
 
-    def xml(self):
-        pass
 
 class Text(object):
     """
