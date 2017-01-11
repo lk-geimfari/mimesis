@@ -332,11 +332,13 @@ class Structured(object):
             }'
 
         """
-        # TODO: Refactor. Simple is better than complex.
-        base = "{}".format(choice([choice(list(common.HTML_CONTAINER_TAGS.keys())),
-                                   choice(common.HTML_MARKUP_TAGS),
-                                   "{}{}".format(choice(common.CSS_SELECTORS),
-                                                 self.text.word())]))
+        selector = choice(common.CSS_SELECTORS)
+        css_selector = "%s%s" % (selector, self.text.word())
+
+        html_cont_keys = choice(list(common.HTML_CONTAINER_TAGS.keys()))
+        html_mrk_tag = choice(common.HTML_MARKUP_TAGS)
+
+        base = "{}".format(choice([html_cont_keys, html_mrk_tag, css_selector]))
         props = "; ".join([self.css_property() for _ in range(randint(1, 6))])
         return "{} {{{}}}".format(base, props)
 
@@ -425,14 +427,15 @@ class Structured(object):
         # TODO: Refactor. Readability counts.
         tag_name = choice(list(common.HTML_CONTAINER_TAGS))
         tag_attributes = common.HTML_CONTAINER_TAGS[tag_name]
-        selected_attributes = sample(list(tag_attributes), k=randint(1, len(tag_attributes)))
+        selected_attrs = sample(list(tag_attributes), k=randint(1, len(tag_attributes)))
 
-        attributes = []
-        for attribute in selected_attributes:
-            attributes.append("{}=\"{}\"".format(attribute, self.html_attribute_value(tag_name, attribute)))
+        attrs = []
+        for attr in selected_attrs:
+            attrs.append("{}=\"{}\"".format(
+                attr, self.html_attribute_value(tag_name, attr)))
 
         return "<{tag} {attributes}>{content}</{tag}>".format(tag=tag_name,
-                                                              attributes=" ".join(attributes),
+                                                              attributes=" ".join(attrs),
                                                               content=self.text.sentence())
 
     def html_attribute_value(self, tag, attribute):
