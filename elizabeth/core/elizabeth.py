@@ -12,6 +12,7 @@ import array
 import csv
 import inspect
 import io
+import json
 from calendar import monthrange
 from datetime import (
     date,
@@ -473,6 +474,36 @@ class Structured(object):
             raise NotImplementedError(
                 "Attribute type {} is not implemented".format(value))
         return value
+
+    def json(self, items=5, max_depth=3, _recursive=False):
+        """
+        Generate a random snippet of JSON
+
+        :param items: number of top-level items to produce
+        :type items: int
+        :param max_depth: maximum depth of each top-level item
+        :type max_depth: int
+        :param _recursive: When used recursively, will return a \
+        python object instead of JSON string.
+        :type _recursive: bool
+        :return: JSON
+        :rtype: str
+        """
+        root = choice([list, dict])()  # choose root element type
+        for _ in range(items):
+            if max_depth > 0:
+                data = choice([self.text.sentence(),
+                               randint(1, 10000),
+                               random(),
+                               self.json(max_depth=max_depth-1, _recursive=True)])  # choose interior element type
+                if isinstance(root, list):
+                    root.append(data)
+                elif isinstance(root, dict):
+                    root[self.text.word()] = data
+
+        if _recursive:
+            return root
+        return json.dumps(root, indent=4)
 
 
 class Text(object):
