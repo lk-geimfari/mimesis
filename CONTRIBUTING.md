@@ -42,3 +42,6 @@ Your contributions are always welcome!
 
 - If you add any functionality, then you should add tests for it.
 
+- Do not write shitty code.
+
+
