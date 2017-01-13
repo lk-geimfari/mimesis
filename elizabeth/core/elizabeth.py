@@ -410,7 +410,7 @@ class Structured(object):
 
     def html(self):
         """
-        Generate a random HTML tag with text inside and some attributes set.
+        Generate a random HTML tag with text inside and some attrs set.
 
         :return: HTML
         :rtype: str
@@ -424,19 +424,20 @@ class Structured(object):
             </span>'
 
         """
-        # TODO: Refactor. Readability counts.
         tag_name = choice(list(common.HTML_CONTAINER_TAGS))
-        tag_attributes = common.HTML_CONTAINER_TAGS[tag_name]
-        selected_attrs = sample(list(tag_attributes), k=randint(1, len(tag_attributes)))
+        tag_attributes = list(common.HTML_CONTAINER_TAGS[tag_name])
+        k = randint(1, len(tag_attributes))
+
+        selected_attrs = sample(tag_attributes, k=k)
 
         attrs = []
         for attr in selected_attrs:
             attrs.append("{}=\"{}\"".format(
                 attr, self.html_attribute_value(tag_name, attr)))
 
-        return "<{tag} {attributes}>{content}</{tag}>".format(tag=tag_name,
-                                                              attributes=" ".join(attrs),
-                                                              content=self.text.sentence())
+        return "<{tag} {attrs}>{content}</{tag}>".format(tag=tag_name,
+                                                         attrs=" ".join(attrs),
+                                                         content=self.text.sentence())
 
     def html_attribute_value(self, tag, attribute):
         """
