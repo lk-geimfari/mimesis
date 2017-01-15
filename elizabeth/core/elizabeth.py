@@ -3,7 +3,6 @@
 :copyright: (c) 2016 by Likid Geimfari <likid.geimfari@gmail.com>.
 :software_license: MIT, see LICENSES for more details.
 :repository: https://github.com/lk-geimfari/elizabeth
-:contributors: http://bit.ly/2hlzxgE
 """
 import os
 import re
@@ -367,47 +366,6 @@ class Structured(object):
 
         return "{}: {}".format(prop, val)
 
-    def delimited(self, lines=20, cols=5, delimiter=",", quotechar="\""):
-        """
-        Generate random delimited data.
-
-        :param lines: number of lines to output
-        :type lines: int
-        :param cols: number of rows to output
-        :type cols: int
-        :param delimiter: string used to separate fields
-        :type delimiter: str
-        :param quotechar: string used to enclose fields
-        :type quotechar: str
-        :return: a random snippet of delimited data
-        :rtype: str
-        """
-        column_providers = [
-            self.datetime.date,
-            self.datetime.time,
-            self.personal.email,
-            self.personal.name,
-            self.personal.password,
-            self.personal.telephone,
-            self.text.sentence,
-            self.text.word,
-            self.internet.home_page
-        ]
-
-        # TODO: Remove sentence, word and homepage.
-        # This isn't useful in current context.
-        columns = sample(column_providers, cols)
-        output = io.StringIO()
-        writer = csv.writer(output, delimiter=delimiter,
-                            quotechar=quotechar, quoting=csv.QUOTE_ALL)
-
-        writer.writerow([self.text.word() for _ in range(0, cols)])
-        for _ in range(0, lines):
-            writer.writerow([p() for p in columns])
-        output.seek(0)
-
-        return output.read()
-
     def html(self):
         """
         Generate a random HTML tag with text inside and some attrs set.
@@ -435,9 +393,10 @@ class Structured(object):
             attrs.append("{}=\"{}\"".format(
                 attr, self.html_attribute_value(tag_name, attr)))
 
-        return "<{tag} {attrs}>{content}</{tag}>".format(tag=tag_name,
-                                                         attrs=" ".join(attrs),
-                                                         content=self.text.sentence())
+        return "<{tag} {attrs}>{content}</{tag}>".format(
+            tag=tag_name,
+            attrs=" ".join(attrs),
+            content=self.text.sentence())
 
     def html_attribute_value(self, tag, attribute):
         """

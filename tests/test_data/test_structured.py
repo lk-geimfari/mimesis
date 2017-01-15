@@ -6,6 +6,7 @@ from unittest import TestCase
 
 from elizabeth.core import interdata as common
 
+
 class StructuredBaseTest(TestCase):
     def setUp(self):
         self.structured = Structured()
@@ -25,17 +26,6 @@ class StructuredBaseTest(TestCase):
         self.assertEqual(len(result.split(" ")), 2)  # contains one property assignment
         self.assertIn(":", result)  # contains any property assignments
 
-    def test_delimited(self):
-        result = self.structured.delimited(lines=5, cols=3, delimiter="\x14", quotechar="\xfe")[:-1]
-        self.assertIn("\x14", result)  # contains delimiter
-        self.assertIn("\xfe", result)  # contains quotechar
-        rows = 0
-        reader = csv.reader(result.split("\n"), delimiter="\x14", quotechar="\xfe")
-        for row in reader:
-            rows += 1
-            self.assertEqual(len(row), 3)  # row contains three columns
-        self.assertEqual(rows, 6)  # 5 lines plus header
-
     def test_html_attribute_value(self):
         result = self.structured.html_attribute_value("a", "href")
         self.assertEqual(result[0:4], "http")
@@ -49,4 +39,4 @@ class StructuredBaseTest(TestCase):
     def test_html(self):
         result = self.structured.html()
         self.assertEqual(result[0], "<")  # tag is enclosed
-        self.assertEqual(result[-1], ">") # tag is enclosed
+        self.assertEqual(result[-1], ">")  # tag is enclosed
