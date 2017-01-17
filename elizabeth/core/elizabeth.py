@@ -1276,6 +1276,25 @@ class Personal(object):
 
         return _(mask=mask)
 
+    @staticmethod
+    def level_of_english():
+        """
+        Get a random level of English.
+
+        :return: Level of english.
+        :Example:
+            Intermediate.
+        """
+        lvl_s = ('Beginner',
+                 'Elementary',
+                 'Pre - Intermediate',
+                 'Intermediate',
+                 'Upper Intermediate',
+                 'Advanced',
+                 'Proficiency'
+                 )
+        return choice(lvl_s)
+
 
 class Datetime(object):
     """

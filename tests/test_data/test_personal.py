@@ -124,6 +124,18 @@ class PersonalBaseTest(TestCase):
         suffix = result.split(' ')[1]
         self.assertTrue(suffix.isalpha())
 
+    def test_level_of_english(self):
+        result = self.personal.level_of_english()
+        lvl_s = ['Beginner',
+                 'Elementary',
+                 'Pre - Intermediate',
+                 'Intermediate',
+                 'Upper Intermediate',
+                 'Advanced',
+                 'Proficiency'
+                 ]
+        self.assertIn(result, lvl_s)
+
 
 class PersonalTestCase(DummyCase):
     def test_name(self):
