@@ -820,13 +820,38 @@ class Personal(object):
         self._store['age'] = a
         return a
 
-    def child_count( self ):
-        if self._store['age'] < 18:
+    def child_count( self, max_childs = 5 ):
+        """
+        Get a count of child's
+        
+        :param max_childs: maximum count of child's
+        
+        Returns int. Depend on previous generated age
+        """
+        a = self._store['age']
+        if a == 0:
+            a = self.age()
+        
+        if a < 18:
             cc = 0 # underage
         else:
-            cc = randint(0, 5 )
+            cc = randint( 0, max_childs )
         return cc
     
+    def work_experience( self, working_start_age = 22 ):
+        """
+        Get a work experience 
+        
+        :param working_start_age: age then person start to work
+        
+        Returns int. Depend on previous generated age
+        """        
+        a = self._store['age']
+        if a == 0:
+            a = self.age()
+        
+        return max( (a - working_start_age ), 0 )
+        
     def name(self, gender='female'):
         """
         Get a random name.

@@ -20,7 +20,35 @@ class PersonalBaseTest(TestCase):
     def test_age(self):
         result = self.personal.age(maximum=55)
         self.assertTrue(result <= 55)
-
+    
+    def test_age(self):
+        result = self.personal.age(maximum=55)
+        self.assertTrue(result <= 55)
+    
+    def test_age_store(self):
+        result = self.personal._store['age']
+        self.assertEqual( result, 0 )
+        
+    def test_age_update(self):
+        result = self.personal.age() - self.personal._store['age'] # calling age() should go first
+        self.assertEqual( result, 0 )
+        
+    def test_child_count(self):
+        result = self.personal.child_count(max_childs=10)
+        self.assertTrue(result <= 10)
+        
+    def test_work_experience(self):
+        result = self.personal.work_experience(working_start_age = 0) - self.personal._store['age']
+        self.assertEqual(result, 0 )
+        
+    def test_work_experience_store(self):
+        result = self.personal.work_experience( ) - self.personal.work_experience( )
+        self.assertEqual(result, 0 )
+        
+    def test_work_experience_extreme(self):
+        result = self.personal.work_experience(working_start_age = 100000 )
+        self.assertEqual(result, 0 )
+        
     def test_paypal(self):
         result = self.personal.paypal()
         self.assertIsNotNone(result)
