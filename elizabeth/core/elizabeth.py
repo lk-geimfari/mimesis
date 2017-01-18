@@ -803,10 +803,14 @@ class Personal(object):
         """
         self.locale = locale
         self.data = pull('personal.json', self.locale)
-        self._store = {'age': 0} # storage for repeated usage of some generated data
+        # storage for repeated usage of some generated data
+        self._store = {
 
-    #@staticmethod
-    def age(self, minimum=16, maximum=66 ):
+            'age': 0
+        }
+
+    # @staticmethod
+    def age(self, minimum=16, maximum=66):
         """
         Get a random integer value.
 
@@ -820,38 +824,33 @@ class Personal(object):
         self._store['age'] = a
         return a
 
-    def child_count( self, max_childs = 5 ):
+    def child_count(self, max_childs=5):
         """
         Get a count of child's
-        
+
         :param max_childs: maximum count of child's
-        
-        Returns int. Depend on previous generated age
+        :returns: Ints. Depend on previous generated age
         """
         a = self._store['age']
         if a == 0:
             a = self.age()
-        
-        if a < 18:
-            cc = 0 # underage
-        else:
-            cc = randint( 0, max_childs )
+
+        cc = 0 if a < 18 else randint(0, max_childs)
         return cc
-    
-    def work_experience( self, working_start_age = 22 ):
+
+    def work_experience(self, working_start_age=22):
         """
-        Get a work experience 
-        
+        Get a work experience.
+
         :param working_start_age: age then person start to work
-        
-        Returns int. Depend on previous generated age
-        """        
+        :return: Int. Depend on previous generated age
+        """
         a = self._store['age']
         if a == 0:
             a = self.age()
-        
-        return max( (a - working_start_age ), 0 )
-        
+
+        return max(a - working_start_age, 0)
+
     def name(self, gender='female'):
         """
         Get a random name.
