@@ -803,9 +803,10 @@ class Personal(object):
         """
         self.locale = locale
         self.data = pull('personal.json', self.locale)
+        self.stored_age = 0
 
-    @staticmethod
-    def age(minimum=16, maximum=66):
+    #@staticmethod
+    def age(self, minimum=16, maximum=66, use_stored = False ):
         """
         Get a random integer value.
 
@@ -815,8 +816,16 @@ class Personal(object):
         :Example:
             23.
         """
-        return randint(minimum, maximum)
+        self.stored_age = randint(minimum, maximum)         
+        return self.stored_age
 
+    def child_count( self ):
+        if self.stored_age < 18:
+            cc = 0 # underage
+        else:
+            cc = randint(0, 5 )
+        return cc
+    
     def name(self, gender='female'):
         """
         Get a random name.
