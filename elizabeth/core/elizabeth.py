@@ -803,10 +803,10 @@ class Personal(object):
         """
         self.locale = locale
         self.data = pull('personal.json', self.locale)
-        self.stored_age = 0
+        self._store = {'age': 0} # storage for repeated usage of some generated data
 
     #@staticmethod
-    def age(self, minimum=16, maximum=66, use_stored = False ):
+    def age(self, minimum=16, maximum=66 ):
         """
         Get a random integer value.
 
@@ -816,11 +816,12 @@ class Personal(object):
         :Example:
             23.
         """
-        self.stored_age = randint(minimum, maximum)         
-        return self.stored_age
+        a = randint(minimum, maximum)
+        self._store['age'] = a
+        return a
 
     def child_count( self ):
-        if self.stored_age < 18:
+        if self._store['age'] < 18:
             cc = 0 # underage
         else:
             cc = randint(0, 5 )
