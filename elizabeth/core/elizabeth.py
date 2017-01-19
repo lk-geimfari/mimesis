@@ -8,9 +8,7 @@ import os
 import re
 import sys
 import array
-import csv
 import inspect
-import io
 from calendar import monthrange
 from datetime import (
     date,
@@ -37,7 +35,8 @@ from string import (
 )
 
 from . import interdata as common
-from elizabeth.utils import luhn_checksum, pull
+from elizabeth.utils import luhn_checksum, \
+    pull, SUPPORTED_LOCALES
 
 __all__ = [
     'Address',
@@ -802,14 +801,17 @@ class Personal(object):
         :param locale: Current language.
         """
         self.locale = locale
+        # TODO: This should be self._data.
         self.data = pull('personal.json', self.locale)
-        # storage for repeated usage of some generated data
         self._store = {
-
             'age': 0
         }
 
-    # @staticmethod
+    def __str__(self):
+        sl = SUPPORTED_LOCALES[self.locale]
+        return '{}:{}:{}'.format(
+            self.__class__.__name__, self.locale, sl['name'])
+
     def age(self, minimum=16, maximum=66):
         """
         Get a random integer value.
