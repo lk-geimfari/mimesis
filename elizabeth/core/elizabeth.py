@@ -36,7 +36,7 @@ from string import (
 
 from . import interdata as common
 from elizabeth.utils import luhn_checksum, \
-    pull, SUPPORTED_LOCALES
+    pull
 
 __all__ = [
     'Address',
@@ -808,9 +808,8 @@ class Personal(object):
         }
 
     def __str__(self):
-        sl = SUPPORTED_LOCALES[self.locale]
-        return '{}:{}:{}'.format(
-            self.__class__.__name__, self.locale, sl['name'])
+        return '{}:{}'.format(
+            self.__class__.__name__, self.locale)
 
     def age(self, minimum=16, maximum=66):
         """
@@ -874,7 +873,7 @@ class Personal(object):
         :Example:
             Smith.
         """
-        # In Russia and Iceland surnames separated by gender.
+        # Separated by gender.
         sep_surnames = ('ru', 'is')
 
         if self.locale in sep_surnames:
@@ -958,8 +957,8 @@ class Personal(object):
                 return sha512(password).hexdigest()
             elif algorithm == 'md5':
                 return md5(password).hexdigest()
-            raise NotImplementedError("The specified hashing algorithm "
-                                      "is not available.")
+            raise NotImplementedError(
+                "The specified hashing algorithm is not available.")
 
         return password
 
