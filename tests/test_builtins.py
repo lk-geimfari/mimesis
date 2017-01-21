@@ -2,6 +2,7 @@ import re
 from unittest import TestCase
 
 from elizabeth.builtins import Brazil, USA, Russia
+from elizabeth.exceptions import JSONKeyError
 
 
 class BrazilTest(TestCase):
@@ -107,3 +108,14 @@ class RussiaTest(TestCase):
     def test_series_and_number(self):
         result = self.russia.series_and_number()
         self.assertIsNotNone(result)
+
+    def test_patronymic(self):
+        patronymic = self.russia.patronymic
+
+        self.assertIsInstance(patronymic(gender='female'), str)
+        self.assertTrue(len(patronymic(gender='female')) >= 4)
+
+        self.assertIsInstance(patronymic(gender='male'), str)
+        self.assertTrue(len(patronymic(gender='male')) >= 4)
+
+        self.assertRaises(JSONKeyError, lambda: patronymic(gender='nil'))

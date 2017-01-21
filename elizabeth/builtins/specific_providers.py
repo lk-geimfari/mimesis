@@ -1,6 +1,8 @@
 from random import randint, choice
 
 from elizabeth.core import Code
+from elizabeth.exceptions import JSONKeyError
+from elizabeth.utils import pull
 
 __all__ = [
     'USA',
@@ -156,9 +158,12 @@ class USA(object):
     @staticmethod
     def personality(category='mbti'):
         """
-        Generate personality.
+        Generate a type of personality.
+
         :param category: Category.
-        :return:
+        :return: Personality type.
+        :Example:
+            ISFJ.
         """
         mbtis = ("ISFJ", "ISTJ", "INFJ", "INTJ", "ISTP",
                  "ISFP", "INFP", "INTP", "ESTP", "ESFP",
@@ -178,18 +183,39 @@ class Russia(object):
         name = 'russia_provider'
 
     @staticmethod
+    def patronymic(gender='female'):
+        """
+        Generate random patronymic name.
+
+        :param gender: Gender of person.
+        :return: Patronymic name.
+        :Example:
+            Алексеева.
+        """
+        gender = gender.lower()
+
+        try:
+            d = pull('personal.json', 'ru')['patronymic'][gender]
+            return choice(d)
+        except:
+            raise JSONKeyError(
+                'Not exist key. Please use one of ["female", "male"]')
+
+    @staticmethod
     def passport_series(year=None):
         """
         Generate random series of passport.
 
         :param year: Year of manufacture.
         :return: Series.
+        :Example:
+            02 15.
         """
         year = randint(10, 16) if not \
             year else year
 
         region = randint(1, 99)
-        return '{} {}'.format(region, year)
+        return '{:02d} {}'.format(region, year)
 
     @staticmethod
     def passport_number():
@@ -197,6 +223,8 @@ class Russia(object):
         Generate random passport number.
 
         :return: Number.
+        :Example:
+            560430
         """
         return _custom_code(mask='######')
 
@@ -205,6 +233,8 @@ class Russia(object):
         Generate a random passport number and series.
 
         :return: Series and number.
+        :Example:
+            57 16 805199.
         """
         return '%s %s' % (
             self.passport_series(),
