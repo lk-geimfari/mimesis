@@ -11,7 +11,7 @@
   <br>
 </p>
 
-**Elizabeth** is a fast and easy to use Python library for generating dummy data for a variety of purposes.  This data can be particularly useful during software development and testing.  For example, it could be used to populate a testing database for a web application with user information such as email addresses, usernames, first names, last names, etc.  Elizabeth uses a JSON-based datastore and does not require any modules that are not in the Python standard library.   There are over eighteen different [data providers](https://github.com/lk-geimfari/elizabeth/blob/master/PROVIDERS.md) available, which can produce data related to food, people, computer hardware, transportation, addresses, and more.
+**Elizabeth** is a fast and easy to use Python library for generating dummy data for a variety of purposes.  This data can be particularly useful during software development and testing.  For example, it could be used to populate a testing database for a web application with user information such as email addresses, usernames, first names, last names, etc.  Elizabeth uses a JSON-based datastore and does not require any modules that are not in the Python standard library. There are over nineteen different [data providers](https://github.com/lk-geimfari/elizabeth/blob/master/PROVIDERS.md) available, which can produce data related to food, people, computer hardware, transportation, addresses, and more.
 
 ## Documentation
 Elizabeth is simple to use, and the below examples should help you get started.  Complete documentation for `Elizabeth` is available here: [http://elizabeth.readthedocs.io/en/latest/](http://elizabeth.readthedocs.io/)
@@ -42,7 +42,7 @@ To install `Elizabeth`, simply:
 You can specify a locale when creating providers and they will return data that is appropriate for the language or country associated with that locale.  `Elizabeth` currently includes support for 20 different locales:
 
 | №  | Flag  | Code       | Name                 | Native name |
-|--- |---   |---        |---                |---         |
+|--- |---    |---         |---                   |---          |
 | 1  | 🇨🇿   |  `cs`      | Czech                | Česky       |
 | 2  | 🇩🇰   |  `da`      | Danish               | Dansk       |
 | 3  | 🇩🇪   |  `de`      | German               | Deutsch     |
@@ -52,7 +52,7 @@ You can specify a locale when creating providers and they will return data that 
 | 7  | 🇮🇷   |  `fa`      | Farsi                |      فارسی  |
 | 8  | 🇫🇮   |  `fi`      | Finnish              | Suomi       |
 | 9  | 🇫🇷   |  `fr`      | French               | Français    |
-| 10  | 🇭🇺   |  `hu`      | Hungarian            | Magyar      |
+| 10 | 🇭🇺   |  `hu`      | Hungarian            | Magyar      |
 | 11 | 🇮🇸   |  `is`      | Icelandic            | Íslenska    |
 | 12 | 🇮🇹   |  `it`      | Italian              | Italiano    |
 | 13 | 🇰🇷   |  `ko`      | Korean               | 한국어       |
@@ -230,9 +230,9 @@ Your contributions are always welcome! Please take a look at the [contribution](
 
 ## Testing
 ```zsh
-➜  ~ git clone https://github.com/lk-geimfari/elizabeth.git
-➜  ~ cd elizabeth/
-➜  ~ python3 -m unittest discover tests # or ./run_tests.sh
+➜ ~ git clone https://github.com/lk-geimfari/elizabeth.git
+➜ cd elizabeth/
+➜ python3 -m unittest discover tests
 ```
 
 ## Change Log
