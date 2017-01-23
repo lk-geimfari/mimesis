@@ -39,7 +39,7 @@ To install `Elizabeth`, simply:
 
 ## Locales
 
-You can specify a locale when creating providers and they will return data that is appropriate for the language or country associated with that locale.  `Elizabeth` currently includes support for 20 different locales:
+You can specify a locale when creating providers and they will return data that is appropriate for the language or country associated with that locale.  `Elizabeth` currently includes support for 21 different locales:
 
 | №  | Flag  | Code       | Name                 | Native name |
 |--- |---    |---         |---                   |---          |
@@ -55,14 +55,15 @@ You can specify a locale when creating providers and they will return data that 
 | 10 | 🇭🇺   |  `hu`      | Hungarian            | Magyar      |
 | 11 | 🇮🇸   |  `is`      | Icelandic            | Íslenska    |
 | 12 | 🇮🇹   |  `it`      | Italian              | Italiano    |
-| 13 | 🇰🇷   |  `ko`      | Korean               | 한국어       |
-| 14 | 🇳🇱   |  `nl`      | Dutch                | Nederlands  |
-| 15 | 🇳🇴   |  `no`      | Norwegian            | Norsk       |
-| 16 | 🇵🇱   |  `pl`      | Polish               | Polski      |
-| 17 | 🇵🇹   |  `pt`      | Portuguese           | Português   |
-| 18 | 🇧🇷   |  `pt-br`   | Brazilian Portuguese | Português Brasileiro |
-| 19 | 🇷🇺   |  `ru`      | Russian              | Русский     |
-| 20 | 🇸🇪   |  `sv`      | Swedish              | Svenska     |
+| 13 | 🇯🇵   |  `jp`      | Japanese             | 日本語       |
+| 14 | 🇰🇷   |  `ko`      | Korean               | 한국어       |
+| 15 | 🇳🇱   |  `nl`      | Dutch                | Nederlands  |
+| 16 | 🇳🇴   |  `no`      | Norwegian            | Norsk       |
+| 17 | 🇵🇱   |  `pl`      | Polish               | Polski      |
+| 18 | 🇵🇹   |  `pt`      | Portuguese           | Português   |
+| 19 | 🇧🇷   |  `pt-br`   | Brazilian Portuguese | Português Brasileiro |
+| 20 | 🇷🇺   |  `ru`      | Russian              | Русский     |
+| 21 | 🇸🇪   |  `sv`      | Swedish              | Svenska     |
 
 Using locales:
 
