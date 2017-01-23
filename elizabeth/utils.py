@@ -62,6 +62,10 @@ SUPPORTED_LOCALES = {
         "name": "Italian",
         "name_local": "Italiano"
     },
+    "jp": {
+        "name": "Japanese",
+        "name_local": "日本語"
+    },
     "ko": {
         'name': 'Korean',
         'name_local': '한국어'
