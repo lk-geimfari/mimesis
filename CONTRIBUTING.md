@@ -33,6 +33,7 @@
 - [drpoggi](https://github.com/drpoggi) - Contributor.
 - [fcurella](https://github.com/fcurella) - Contributor.
 - [jackmcmorrow](https://github.com/jackmcmorrow) - Contributor (`pt-br`).
+- [jasonwaiting-dev](https://github.com/jasonwaiting-dev) - Contributor (`jp`).
 - [jeromechrist](https://github.com/jeromechrist) - Contributor.
 - [lk-geimfari](https://github.com/lk-geimfari) - Inventor of `Elizabeth`.
 - [martini97](https://github.com/martini97) - Contributor.
