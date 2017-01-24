@@ -1,65 +1,62 @@
 {
   "day": {
     "name": [
-      "Maandag",
       "Dinsdag",
-      "Woensdag",
       "Donderdag",
-      "Vrijdag",
       "Zaterdag",
+      "Vrijdag",
+      "Woensdag",
+      "Maandag",
       "Zondag"
     ],
     "abbr": [
+      "Vr.",
+      "Zo.",
       "Ma.",
+      "Do.",
       "Di.",
       "Wo.",
-      "Do.",
-      "Vr.",
-      "Za.",
-      "Zo."
+      "Za."
     ]
   },
-  "formats": {
-	"date": "%d-%m-%Y",
-	"time": "%H:%M:%S"
-  },
+  "formats": {},
   "month": {
     "name": [
-      "Januari",
-      "Februari",
-      "Maart",
-      "April",
       "Mei",
       "Juni",
-      "Juli",
-      "Augustus",
-      "September",
-      "Oktober",
       "November",
-      "December"
+      "Maart",
+      "Januari",
+      "Augustus",
+      "Februari",
+      "September",
+      "December",
+      "Oktober",
+      "April",
+      "Juli"
     ],
     "abbr": [
-      "Jan.",
+      "Dec.",
       "Feb.",
-      "Mrt.",
-      "Apr.",
-      "Mei.",
-      "Jun.",
+      "Jan.",
       "Jul.",
       "Aug.",
-      "Sep.",
-      "Okt.",
+      "Mei.",
+      "Jun.",
       "Nov.",
-      "Dec."
+      "Sep.",
+      "Mrt.",
+      "Apr.",
+      "Okt."
     ]
   },
   "periodicity": [
+    "Jaarlijks",
     "Eenmaal",
-    "Nooit",
-    "Zelden",
+    "Maandelijks",
     "Dagelijks",
     "Wekelijks",
-    "Maandelijks",
-    "Jaarlijks"
+    "Zelden",
+    "Nooit"
   ]
 }

@@ -2,64 +2,61 @@
   "day": {
     "abbr": [
       "Csüt.",
+      "Szo.",
+      "Vas",
+      "P.",
       "H.",
       "K.",
-      "P.",
-      "Sze.",
-      "Szo.",
-      "Vas"
+      "Sze."
     ],
     "name": [
       "Hétfő",
-      "Kedd",
-      "Szerda",
       "Csütörtök",
       "Péntek",
+      "Szerda",
       "Szombaton",
-      "Vasárnap"
+      "Vasárnap",
+      "Kedd"
     ]
   },
-  "formats": {
-	"date": "%y. %m. %d",
-	"time": "%H:%M:%S"
-  },
+  "formats": {},
   "month": {
     "abbr": [
-      "Jan.",
+      "Dec.",
       "Feb.",
-      "Márc.",
-      "Ápr.",
-      "Máj.",
-      "Jun.",
+      "Szept.",
+      "Jan.",
       "Jul.",
       "Aug.",
-      "Szept.",
-      "Okt.",
+      "Jun.",
+      "Márc.",
       "Nov.",
-      "Dec."
+      "Máj.",
+      "Ápr.",
+      "Okt."
     ],
     "name": [
-      "Augusztus",
-      "December",
-      "Február",
-      "Január",
       "Július",
-      "Június",
+      "Április",
       "Május",
-      "Március",
       "November",
-      "Október",
+      "December",
+      "Január",
+      "Február",
+      "Március",
       "Szeptember",
-      "Április"
+      "Október",
+      "Június",
+      "Augusztus"
     ]
   },
   "periodicity": [
-    "Egyszer",
-    "Havi",
-    "Heti",
-    "Napi",
     "Ritkán",
+    "Havi",
     "Soha",
-    "Évi"
+    "Heti",
+    "Évi",
+    "Egyszer",
+    "Napi"
   ]
 }
