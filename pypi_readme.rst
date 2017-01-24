@@ -6,9 +6,8 @@ Version| |Codacy Badge|
 
 
 .. figure::  https://raw.githubusercontent.com/lk-geimfari/elizabeth/master/other/elizabeth_1.png
-    :width: 200px
     :align: center
-    
+
 
 **Elizabeth** is a fast and easy to use Python library for generating
 dummy data for a variety of purposes. This data can be particularly
