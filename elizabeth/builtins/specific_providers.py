@@ -165,10 +165,10 @@ class USA(object):
         :Example:
             ISFJ.
         """
-        mbtis = ("ISFJ", "ISTJ", "INFJ", "INTJ", "ISTP",
-                 "ISFP", "INFP", "INTP", "ESTP", "ESFP",
-                 "ENFP", "ENTP", "ESTJ", "ESFJ", "ENFJ",
-                 "ENTJ")
+        mbtis = ("ISFJ", "ISTJ", "INFJ", "INTJ",
+                 "ISTP", "ISFP", "INFP", "INTP",
+                 "ESTP", "ESFP", "ENFP", "ENTP",
+                 "ESTJ", "ESFJ", "ENFJ", "ENTJ")
 
         if category.lower() == 'rheti':
             return randint(1, 10)

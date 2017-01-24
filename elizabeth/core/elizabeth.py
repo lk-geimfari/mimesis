@@ -1752,11 +1752,11 @@ class Food(object):
     Class for Food, i.e fruits, vegetables, berries and other.
     """
 
-    def __init__(self, lang='en'):
+    def __init__(self, locale='en'):
         """
-        :param lang: Current language.
+        :param locale: Current language.
         """
-        self.lang = lang
+        self.lang = locale
         self._data = pull('food.json', self.lang)
 
     def vegetable(self):
