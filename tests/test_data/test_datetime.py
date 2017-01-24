@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
+
+import re
 import datetime
 
 from unittest import TestCase
 
 from elizabeth import Datetime
 from tests.test_data import DummyCase
+from ._patterns import STR_REGEX
 
 
 class DatetimeBaseTest(TestCase):
@@ -13,6 +16,9 @@ class DatetimeBaseTest(TestCase):
 
     def tearDown(self):
         del self.datetime
+
+    def test_str(self):
+        self.assertTrue(re.match(STR_REGEX, self.datetime.__str__()))
 
     def test_year(self):
         result = self.datetime.year(minimum=2000, maximum=2016)

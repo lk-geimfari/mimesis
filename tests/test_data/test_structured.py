@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
+import re
 import csv
 
 from elizabeth.core.elizabeth import Structured
 from unittest import TestCase
 
 from elizabeth.core import interdata as common
+from ._patterns import STR_REGEX
 
 
 class StructuredBaseTest(TestCase):
@@ -13,6 +15,9 @@ class StructuredBaseTest(TestCase):
 
     def tearDown(self):
         del self.structured
+
+    def test_str(self):
+        self.assertTrue(re.match(STR_REGEX, self.structured.__str__()))
 
     def test_css(self):
         result = self.structured.css()

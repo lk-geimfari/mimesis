@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
-
+import re
 from unittest import TestCase
 
 from elizabeth import Business
 import elizabeth.core.interdata as common
 from tests.test_data import DummyCase
+
+from ._patterns import STR_REGEX
 
 
 class BusinessBaseTest(TestCase):
@@ -13,6 +15,9 @@ class BusinessBaseTest(TestCase):
 
     def tearDown(self):
         del self.business
+
+    def test_str(self):
+        self.assertTrue(re.match(STR_REGEX, self.business.__str__()))
 
     def test_copyright(self):
         result = self.business.copyright()

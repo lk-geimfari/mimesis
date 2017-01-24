@@ -8,7 +8,7 @@ import elizabeth.core.interdata as common
 from tests.test_data import DummyCase
 
 from ._patterns import EN_GB_POST_CODE, NL_POST_CODE, \
-    PL_POST_CODE, FA_POST_CODE, CS_POST_CODE
+    PL_POST_CODE, FA_POST_CODE, CS_POST_CODE, STR_REGEX
 
 
 class AddressBaseTest(TestCase):
@@ -17,6 +17,9 @@ class AddressBaseTest(TestCase):
 
     def tearDown(self):
         del self.address
+
+    def test_str(self):
+        self.assertTrue(re.match(STR_REGEX, self.address.__str__()))
 
     def test_street_number(self):
         result = self.address.street_number()

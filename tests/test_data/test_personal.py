@@ -17,6 +17,9 @@ class PersonalBaseTest(TestCase):
     def tearDown(self):
         del self.personal
 
+    def test_str(self):
+        self.assertTrue(re.match(STR_REGEX, self.personal.__str__()))
+
     def test_age(self):
         result = self.personal.age(maximum=55)
         self.assertTrue(result <= 55)

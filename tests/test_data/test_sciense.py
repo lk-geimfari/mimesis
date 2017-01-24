@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 
+import re
 from unittest import TestCase
 
 from elizabeth import Science
 import elizabeth.core.interdata as common
 from tests.test_data import DummyCase
+from ._patterns import STR_REGEX
 
 
 class ScienceBaseTest(TestCase):
@@ -13,6 +15,9 @@ class ScienceBaseTest(TestCase):
 
     def tearDown(self):
         del self.science
+
+    def test_str(self):
+        self.assertTrue(re.match(STR_REGEX, self.science.__str__()))
 
     def test_math_formula(self):
         result = self.science.math_formula()
