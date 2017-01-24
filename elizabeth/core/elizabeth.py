@@ -123,6 +123,16 @@ class Address(object):
                 self.street_number()
             )
 
+        if self.locale == 'jp':
+            towns = self.data['town']
+            maximum = 100
+            return fmt[self.locale].format(
+                choice(towns),
+                '%s' % randint(1, int(maximum)),
+                '%s' % randint(1, int(maximum)),
+                '%s' % randint(1, int(maximum))
+            )
+
         return fmt[self.locale].format(
             self.street_number(),
             self.street_name(),
