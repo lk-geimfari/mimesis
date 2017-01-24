@@ -1,5 +1,10 @@
 ## Changelog
 
+### Version 0.3.11
+ - Added jp
+ - Added `Structured()`
+ - Updated test
+ - Minor improvements and bug fix.
 
 ### Version 0.3.11
  - Added `ko` locale
