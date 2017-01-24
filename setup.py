@@ -1,16 +1,19 @@
+import os
 from distutils.core import setup
 
-import elizabeth
+from elizabeth import __version__, \
+    __author__
+
+here = os.path.abspath(os.path.dirname(__file__))
+
+with open(os.path.join(here, 'README.md'), encoding='utf-8') as f:
+    long_description = '\n' + f.read()
 
 setup(
     name='elizabeth',
-    version=elizabeth.__version__,
+    version=__version__,
     packages=['elizabeth', 'elizabeth.core', 'elizabeth.core.interdata', 'elizabeth.builtins'],
-    keywords=['fake', 'data', 'testing',
-              'generate', 'faker', 'elizabeth',
-              'bootstrap', 'db', 'generic',
-              'church', 'dummy'
-              ],
+    keywords=['fake', 'data', 'testing', 'generate', 'elizabeth', 'db', 'church', 'dummy'],
     package_data={
         'elizabeth': [
             'data/*/*',
@@ -18,12 +21,11 @@ setup(
     },
     url='https://github.com/lk-geimfari/elizabeth',
     license='MIT',
-    author=elizabeth.__author__,
+    author=__author__,
     author_email='likid.geimfari@gmail.com',
-    description='Elizabeth is a library that help you generate fake data.',
-    long_description="Elizabeth is a library to generate fake data."
-                     "It's very useful when you need to bootstrap "
-                     "your database.",
+    description='Elizabeth is a fast and easy to use Python library '
+                'for generating dummy data for a variety of purposes.',
+    long_description=long_description,
     classifiers=[
         "Development Status :: 4 - Beta",
         'Intended Audience :: Developers',
