@@ -1284,17 +1284,17 @@ class Personal(object):
 
         return _(mask=mask, digit=placeholder)
 
-    @staticmethod
-    def avatar():
+    def avatar(self, size=256):
         """
         Get a random link to avatar.
 
         :returns: Link to avatar that hosted in repository of elizabeth.
         :Example:
-            https://raw.githubusercontent.com/lk-geimfari/
-            elizabeth/master/other/avatars/4.png
+            https://api.adorable.io/avatars/64/875ed3de1604812b3c2b592c05863f47.png
         """
-        url = common.AVATARS % randint(1, 7)
+        # {0} is size of avatar, {1} is hash of avatar.
+        url = 'https://api.adorable.io/avatars/%s/%s.png'% (
+            size, self.password(algorithm='md5'))
         return url
 
     @staticmethod

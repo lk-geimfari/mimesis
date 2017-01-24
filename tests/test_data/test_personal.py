@@ -134,8 +134,10 @@ class PersonalBaseTest(TestCase):
         self.assertIn(result, common.FAVORITE_MUSIC_GENRE)
 
     def test_avatar(self):
-        result = self.personal.avatar()
-        self.assertTrue(len(result) > 20)
+        result = self.personal.avatar(size=512)
+        img, size, _, _, _, _ = result.split('/')[::-1]
+        self.assertEquals(int(size), 512)
+        self.assertEquals(32, len(img.split('.')[0]))
 
     def test_identifier(self):
         result = self.personal.identifier()
