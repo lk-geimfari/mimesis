@@ -226,7 +226,6 @@ Result:
 .. figure:: https://raw.githubusercontent.com/lk-geimfari/elizabeth/master/other/screenshots/en_bootstrap.png
    :alt: en
 
-   en
 
 Custom Providers
 ================
