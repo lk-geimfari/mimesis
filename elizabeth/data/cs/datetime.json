@@ -1,65 +1,62 @@
 {
   "day": {
-	"abbr": [
-	  "Ne.",
-	  "Po.",
-	  "Pá.",
-	  "So.",
-	  "St.",
-	  "Út.",
-	  "Čt."
-	],
-	"name": [
-	  "Neděle",
-	  "Pondělí",
-	  "Pátek",
-	  "Sobota",
-	  "Středa",
-	  "Úterý",
-	  "Čtvrtek"
-	]
+    "abbr": [
+      "Čt.",
+      "Ne.",
+      "Pá.",
+      "So.",
+      "Út.",
+      "St.",
+      "Po."
+    ],
+    "name": [
+      "Pátek",
+      "Úterý",
+      "Sobota",
+      "Čtvrtek",
+      "Neděle",
+      "Pondělí",
+      "Středa"
+    ]
   },
-  "formats": {
-	"date": "%d-%m-%Y",
-	"time": "%H:%M:%S"
-  },
+  "formats": {},
   "month": {
-	"abbr": [
-	  "Brez.",
-	  "Cerv.",
-	  "Cerven.",
-	  "Dub.",
-	  "Kvet.",
-	  "Led.",
-	  "List.",
-	  "Pros.",
-	  "Ríj.",
-	  "Srp.",
-	  "Zár.",
-	  "Ún."
-	],
-	"name": [
-	  "Březen",
-	  "Duben",
-	  "Květen",
-	  "Leden",
-	  "Listopad",
-	  "Prosinec",
-	  "Srpen",
-	  "Září",
-	  "Únor",
-	  "Červen",
-	  "Červenec",
-	  "Říjen"
-	]
+    "abbr": [
+      "List.",
+      "Ún.",
+      "Dub.",
+      "Pros.",
+      "Brez.",
+      "Led.",
+      "Ríj.",
+      "Zár.",
+      "Cerven.",
+      "Srp.",
+      "Cerv.",
+      "Kvet."
+    ],
+    "name": [
+      "Březen",
+      "Prosinec",
+      "Listopad",
+      "Duben",
+      "Únor",
+      "Září",
+      "Květen",
+      "Leden",
+      "Červen",
+      "Srpen",
+      "Červenec",
+      "Říjen"
+    ]
   },
   "periodicity": [
-	"Denní",
-	"Týdně",
-	"Měsíční",
-	"Roční",
-	"Zřídka",
-	"Jednou",
-	"Nikdy"
+    "Měsíční",
+    "Zřídka",
+    "Nikdy",
+    "Roční",
+    "Denní",
+    "Jednou",
+    "Týdně"
   ]
 }

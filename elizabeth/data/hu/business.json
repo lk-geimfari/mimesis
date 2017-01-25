@@ -2,40 +2,40 @@
   "company": {
     "type": {
       "abbr": [
-        "e.v.",
-        "e.c.",
-        "bt.",
-        "kkt.",
         "kft.",
-        "kht.",
         "kv.",
-        "rt.",
         "Nyrt.",
-        "Zrt."
+        "bt.",
+        "e.c.",
+        "e.v.",
+        "Zrt.",
+        "kkt.",
+        "kht.",
+        "rt."
       ],
       "title": [
-        "Egyéni vállalkozó",
-        "Egyéni cég",
         "Betéti társaság",
-        "Közkereseti társaság",
         "Korlátolt felelősségű társaság",
-        "Közhasznú társaság",
-        "Közös vállalat",
-        "Részvénytársaság",
+        "Zártközűen működő részvénytársaság",
         "Nyilvánosan működő részvénytársaság",
-        "Zártközűen működő részvénytársaság"
+        "Közös vállalat",
+        "Egyéni vállalkozó",
+        "Közkereseti társaság",
+        "Részvénytársaság",
+        "Egyéni cég",
+        "Közhasznú társaság"
       ]
     },
     "name": [
-      "Borsod Brewery",
-      "Dreher Brewery",
-      "Győri Keksz",
       "Hell Energy",
-      "Pick Szeged",
-      "Pécs Brewery",
       "Traubi",
+      "Zwack",
+      "Pécs Brewery",
       "Törley",
-      "Zwack"
+      "Borsod Brewery",
+      "Pick Szeged",
+      "Győri Keksz",
+      "Dreher Brewery"
     ]
   }
 }

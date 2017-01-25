@@ -1,66 +1,63 @@
 {
   "day": {
     "abbr": [
-      "Ma.",
-      "Ti.",
-      "On.",
       "To.",
       "Fr.",
-      "Lø.",
-      "Sø."
+      "Ma.",
+      "Sø.",
+      "Ti.",
+      "On.",
+      "Lø."
     ],
     "name": [
       "Mandag",
-      "Tirsdag",
       "Onsdag",
-      "Torsdag",
       "Fredag",
-      "Lørdag",
-      "Søndag"
+      "Søndag",
+      "Tirsdag",
+      "Torsdag",
+      "Lørdag"
     ]
   },
-  "formats": {
-	"date": "%d.%m.%Y",
-	"time": "%H:%M:%S"
-  },
+  "formats": {},
   "month": {
     "abbr": [
+      "Sept.",
+      "Okt.",
+      "Des.",
+      "Juni",
+      "Mai",
       "Jan.",
+      "Aug.",
+      "Nov.",
       "Febr.",
       "Mars",
       "April",
-      "Mai",
-      "Juni",
-      "Juli",
-      "Aug.",
-      "Sept.",
-      "Okt.",
-      "Nov.",
-      "Des."
+      "Juli"
     ],
     "name": [
-      "Januar",
-      "Februar",
-      "Mars",
-      "April",
-      "Mai",
       "Juni",
-      "Juli",
-      "August",
-      "September",
-      "Oktober",
       "November",
-      "Desember"
+      "Mai",
+      "Februar",
+      "September",
+      "Desember",
+      "Oktober",
+      "Mars",
+      "Januar",
+      "August",
+      "April",
+      "Juli"
     ]
   },
   "periodicity": [
-    "En gang",
+    "Årlig",
+    "Månedlig",
     "Aldri",
-    "Sjeldent",
     "Ofte",
     "Daglig",
+    "En gang",
     "Ukentlig",
-    "Månedlig",
-    "Årlig"
+    "Sjeldent"
   ]
 }

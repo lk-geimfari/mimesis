@@ -5,23 +5,23 @@
     ],
     "type": {
       "title": [
-        "Corporation",
-        "Incorporated",
         "Limited Liability Company",
-        "Limited Liability Partnership",
         "Limited Partnership",
+        "Incorporated",
+        "Corporation",
+        "Limited Liability Partnership",
         "Private company limited by guarantee"
       ],
       "abbr": [
-        "Corp.",
-        "Inc.",
         "Ltd.",
+        "LP",
         "CIC",
         "CIO",
-        "IPS",
         "LLP",
-        "LP",
-        "PLC"
+        "PLC",
+        "Corp.",
+        "IPS",
+        "Inc."
       ]
     }
   }

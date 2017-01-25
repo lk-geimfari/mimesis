@@ -3,63 +3,60 @@
     "name": [
       "Mánudagur",
       "Þriðjudagur",
-      "Miðvikudagur",
       "Fimmtudagur",
-      "Föstudagur",
       "Laugardagur",
-      "Sunnudagur"
+      "Sunnudagur",
+      "Miðvikudagur",
+      "Föstudagur"
     ],
     "abbr": [
+      "Mi.",
+      "Fö.",
+      "Fi.",
       "Má.",
       "Þr.",
-      "Mi.",
-      "Fi.",
-      "Fö.",
-      "Lau.",
-      "Su."
+      "Su.",
+      "Lau."
     ]
   },
-  "formats": {
-	"date": "%d.%m.%Y",
-	"time": "%H:%M:%S"
-  },
+  "formats": {},
   "month": {
     "name": [
-      "Janúar",
-      "Febrúar",
-      "Mars",
       "Apríl",
+      "Janúar",
       "Maí",
-      "Júní",
-      "Júlí",
-      "Ágúst",
       "September",
-      "Október",
+      "Ágúst",
+      "Desember",
+      "Mars",
+      "Júní",
+      "Febrúar",
+      "Júlí",
       "Nóvember",
-      "Desember"
+      "Október"
     ],
     "abbr": [
-      "Jan.",
+      "Okt.",
+      "Des.",
       "Feb.",
       "Mar.",
-      "Apr.",
-      "Maí.",
-      "Jún.",
       "Júl.",
-      "Ágú.",
-      "Sep.",
-      "Okt.",
+      "Jan.",
       "Nóv.",
-      "Des."
+      "Sep.",
+      "Jún.",
+      "Maí.",
+      "Apr.",
+      "Ágú."
     ]
   },
   "periodicity": [
-    "Einu sinni",
+    "Mánaðarleg",
     "Aldrei",
     "Sjaldan",
     "Oft",
     "Vikuleg",
-    "Mánaðarleg",
-    "Árlega"
+    "Árlega",
+    "Einu sinni"
   ]
 }

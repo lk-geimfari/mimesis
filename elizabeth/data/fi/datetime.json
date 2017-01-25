@@ -1,66 +1,61 @@
 {
   "day": {
     "name": [
-      "Keskiviikko",
-      "Lauantai",
-      "Maanantai",
       "Perjantai",
+      "Maanantai",
+      "Keskiviikko",
       "Sunnuntai",
       "Tiistai",
-      "Torstai"
+      "Torstai",
+      "Lauantai"
     ],
     "abbr": [
-      "Ke.",
-      "La.",
-      "Ma.",
+      "To.",
       "Pe.",
+      "Ma.",
       "Su.",
       "Ti.",
-      "To."
+      "Ke.",
+      "La."
     ]
   },
-  "formats": {
-	"date": "%d.%m.%Y",
-	"time": "%H:%M:%S"
-  },
+  "formats": {},
   "month": {
     "name": [
+      "Joulukuu",
       "Elokuu",
       "Heinäkuu",
-      "Helmikuu",
-      "Huhtikuu",
-      "Joulukuu",
-      "Kesäkuu",
       "Lokakuu",
+      "Kesäkuu",
       "Maaliskuu",
       "Marraskuu",
-      "Syyskuu",
+      "Huhtikuu",
       "Tammikuu",
+      "Syyskuu",
+      "Helmikuu",
       "Toukokuu"
     ],
     "abbr": [
+      "To.",
+      "Hu.",
+      "Ta.",
+      "Ma.",
+      "Jo.",
       "El.",
       "He.",
-      "He.",
-      "Hu.",
-      "Jo.",
-      "Ke.",
-      "Lo.",
-      "Ma.",
-      "Ma.",
       "Sy.",
-      "Ta.",
-      "To."
+      "Lo.",
+      "Ke."
     ]
   },
   "periodicity": [
-    "Ei ikinä",
-    "Harvoin",
     "Kerran",
-    "Kuukausittain",
-    "Päivittäin",
     "Usein",
+    "Päivittäin",
+    "Ei ikinä",
+    "Kuukausittain",
     "Viikoittain",
+    "Harvoin",
     "Vuosittain"
   ]
 }
