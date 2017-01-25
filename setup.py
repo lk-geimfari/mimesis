@@ -1,13 +1,7 @@
-import os
 from distutils.core import setup
 
 from elizabeth import __version__, \
     __author__
-
-here = os.path.abspath(os.path.dirname(__file__))
-
-with open(os.path.join(here, 'pypi_readme.rst'), encoding='utf-8') as f:
-    long_description = '\n' + f.read()
 
 setup(
     name='elizabeth',
@@ -25,7 +19,6 @@ setup(
     author_email='likid.geimfari@gmail.com',
     description='Elizabeth is a fast and easy to use Python library '
                 'for generating dummy data for a variety of purposes.',
-    long_description=long_description,
     classifiers=[
         "Development Status :: 4 - Beta",
         'Intended Audience :: Developers',
