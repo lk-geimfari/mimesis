@@ -6,7 +6,8 @@ Version| |Codacy Badge|
 
 
 .. figure::  https://raw.githubusercontent.com/lk-geimfari/elizabeth/master/other/elizabeth_1.png
-    :align: center
+   :target: https://github.com/lk-geimfari/elizabeth
+   :align: center
 
 
 **Elizabeth** is a fast and easy to use Python library for generating
@@ -226,7 +227,6 @@ Result:
 .. figure:: https://raw.githubusercontent.com/lk-geimfari/elizabeth/master/other/screenshots/en_bootstrap.png
    :alt: en
 
-   en
 
 Custom Providers
 ================
