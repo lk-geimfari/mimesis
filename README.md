@@ -23,6 +23,14 @@ To install `Elizabeth`, simply:
 ➜  ~ pip install elizabeth
 ```
 
+Also you can install it manually:
+```zsh
+➜  ~ git clone https://github.com/lk-geimfari/elizabeth.git
+➜  ~ cd elizabeth
+➜  python3 setup.py install
+```
+
+
 ## Basic Usage
 
 ```python
