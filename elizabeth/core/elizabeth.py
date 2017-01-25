@@ -35,8 +35,11 @@ from string import (
 )
 
 from . import interdata as common
-from elizabeth.utils import luhn_checksum, \
-    pull
+from elizabeth.utils import (
+    luhn_checksum,
+    pull,
+    locale_information
+)
 
 __all__ = [
     'Address',
@@ -71,6 +74,10 @@ class Address(object):
         """
         self.locale = locale
         self.data = pull('address.json', self.locale)
+
+    def __str__(self):
+        return '{}:{}:{}'.format(
+            self.__class__.__name__, self.locale, locale_information(self.locale)['name'])
 
     @staticmethod
     def street_number(maximum=1400):
@@ -321,6 +328,10 @@ class Structured(object):
         self.personal = Personal(self.locale)
         self.text = Text(self.locale)
 
+    def __str__(self):
+        return '{}:{}:{}'.format(
+            self.__class__.__name__, self.locale, locale_information(self.locale)['name'])
+
     def css(self):
         """
         Generates a random snippet of CSS
@@ -458,6 +469,10 @@ class Text(object):
         """
         self.locale = locale
         self.data = pull('text.json', self.locale)
+
+    def __str__(self):
+        return '{}:{}:{}'.format(
+            self.__class__.__name__, self.locale, locale_information(self.locale)['name'])
 
     def alphabet(self, letter_case=None):
         """
@@ -619,6 +634,10 @@ class Code(object):
     def __init__(self, locale):
         self.locale = locale
 
+    def __str__(self):
+        return '{}:{}:{}'.format(
+            self.__class__.__name__, self.locale, locale_information(self.locale)['name'])
+
     @staticmethod
     def custom_code(mask="@###", char='@', digit='#'):
         """
@@ -725,6 +744,10 @@ class Business(object):
         self.locale = locale
         self.data = pull('business.json', self.locale)
 
+    def __str__(self):
+        return '{}:{}:{}'.format(
+            self.__class__.__name__, self.locale, locale_information(self.locale)['name'])
+
     def company_type(self, abbr=False):
         """
         Get a random type of business entity.
@@ -818,8 +841,8 @@ class Personal(object):
         }
 
     def __str__(self):
-        return '{}:{}'.format(
-            self.__class__.__name__, self.locale)
+        return '{}:{}:{}'.format(
+            self.__class__.__name__, self.locale, locale_information(self.locale)['name'])
 
     def age(self, minimum=16, maximum=66):
         """
@@ -1354,6 +1377,10 @@ class Datetime(object):
         self.locale = locale
         self.data = pull('datetime.json', self.locale)
 
+    def __str__(self):
+        return '{}:{}:{}'.format(
+            self.__class__.__name__, self.locale, locale_information(self.locale)['name'])
+
     def day_of_week(self, abbr=False):
         """
         Get a random day of week.
@@ -1568,6 +1595,10 @@ class Science(object):
         self.locale = locale
         self._data = pull('science.json', self.locale)
 
+    def __str__(self):
+        return '{}:{}:{}'.format(
+            self.__class__.__name__, self.locale, locale_information(self.locale)['name'])
+
     @staticmethod
     def math_formula():
         """
@@ -1758,6 +1789,10 @@ class Food(object):
         """
         self.lang = locale
         self._data = pull('food.json', self.lang)
+
+    def __str__(self):
+        return '{}:{}:{}'.format(
+            self.__class__.__name__, self.lang, locale_information(self.lang)['name'])
 
     def vegetable(self):
         """
@@ -2354,6 +2389,10 @@ class Generic(object):
         self.internet = Internet()
         self.transport = Transport()
         self.path = Path()
+
+    def __str__(self):
+        return '{}:{}:{}'.format(
+            self.__class__.__name__, self.locale, locale_information(self.locale)['name'])
 
     def add_provider(self, cls):
         if inspect.isclass(cls):

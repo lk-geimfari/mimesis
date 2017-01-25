@@ -100,6 +100,28 @@ SUPPORTED_LOCALES = {
     }
 }
 
+def locale_information(locale, local=False):
+    """
+    Return name (in english) or local name of the locale
+    :param locale: locale abbreviation
+    :param local: if True then return local name of the locale
+    :type locale: str
+    :returns: locale name
+    :rtype: str
+    :Example:
+
+    >>> from elizabeth.utils import locale_information
+    >>> locale_information('sv')
+    Swedish
+    >>> locale_information('sv', local=True)
+    Svenska
+    """
+    locale = locale.lower()
+
+    if locale not in SUPPORTED_LOCALES:
+        raise UnsupportedLocale("Locale %s does not supported" % locale)
+
+    return SUPPORTED_LOCALES[locale]
 
 def luhn_checksum(num):
     """
@@ -161,6 +183,8 @@ def pull(file, locale='en'):
     | it - Italian                 | (data/it)    |
     +------------------------------+--------------+
     | is - Icelandic               | (data/is)    |
+    +------------------------------+--------------+
+    | jp - Japanese                | (data/jp)    |
     +------------------------------+--------------+
     | ko - Korean                  | (data/ko)    |
     +------------------------------+--------------+
