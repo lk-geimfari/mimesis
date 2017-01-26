@@ -100,30 +100,29 @@ SUPPORTED_LOCALES = {
     }
 }
 
-def locale_information(locale, local=False):
+
+def locale_information(locale: str) -> str:
     """
     Return name (in english) or local name of the locale
-    :param locale: locale abbreviation
-    :param local: if True then return local name of the locale
+    :param locale: Locale abbreviation.
     :type locale: str
-    :returns: locale name
+    :returns: Locale name.
     :rtype: str
     :Example:
 
     >>> from elizabeth.utils import locale_information
     >>> locale_information('sv')
-    Swedish
-    >>> locale_information('sv', local=True)
-    Svenska
+    'Swedish'
     """
     locale = locale.lower()
 
     if locale not in SUPPORTED_LOCALES:
         raise UnsupportedLocale("Locale %s does not supported" % locale)
 
-    return SUPPORTED_LOCALES[locale]
+    return SUPPORTED_LOCALES[locale]['name']
 
-def luhn_checksum(num):
+
+def luhn_checksum(num) -> str:
     """
     Calculate a checksum for num using the Luhn algorithm.
 
@@ -136,7 +135,7 @@ def luhn_checksum(num):
 
     >>> from elizabeth.utils import luhn_checksum
     >>> luhn_checksum("7992739871")
-    3
+    '3'
     """
     check = 0
     for i, s in enumerate(reversed([x for x in num])):
@@ -204,6 +203,15 @@ def pull(file, locale='en'):
     :param file: The name of file.
     :param locale: Locale.
     :returns: The content of the file.
+
+    :Example:
+
+        >>> from elizabeth.utils import pull
+        >>> en = pull(file='datetime.json', locale='en')
+        >>> isinstance(en, dict)
+        True
+        >>> en['day']['abbr'][0]
+        'Mon.'
     """
 
     locale = locale.lower()
