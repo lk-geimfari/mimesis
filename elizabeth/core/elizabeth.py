@@ -77,7 +77,7 @@ class Address(object):
 
     def __str__(self):
         return '{}:{}:{}'.format(
-            self.__class__.__name__, self.locale, locale_information(self.locale)['name'])
+            self.__class__.__name__, self.locale, locale_information(self.locale))
 
     @staticmethod
     def street_number(maximum=1400):
@@ -330,7 +330,7 @@ class Structured(object):
 
     def __str__(self):
         return '{}:{}:{}'.format(
-            self.__class__.__name__, self.locale, locale_information(self.locale)['name'])
+            self.__class__.__name__, self.locale, locale_information(self.locale))
 
     def css(self):
         """
@@ -340,16 +340,12 @@ class Structured(object):
         :rtype: str
 
         :Example:
-
-            >>> s = Structured()
-            >>> s.css()
             'strong {
                 pointer: crosshair;
                 padding-right: 46pt;
                 margin-left: 38em;
                 padding-right: 65em
             }'
-
         """
         selector = choice(common.CSS_SELECTORS)
         css_selector = "%s%s" % (selector, self.text.word())
@@ -369,9 +365,6 @@ class Structured(object):
         :rtype: str
 
         :Examples:
-
-            >>> s = Structured()
-            >>> s.css_property()
             'background-color: #f4d3a1'
         """
         prop = choice(list(common.CSS_PROPERTIES.keys()))
@@ -394,13 +387,9 @@ class Structured(object):
         :rtype: str
 
         :Examples:
-
-            >>> s = Structured()
-            >>> s.html()
             '<span class="select" id="careers">
                 Ports are created with the built-in function open_port.
             </span>'
-
         """
         tag_name = choice(list(common.HTML_CONTAINER_TAGS))
         tag_attributes = list(common.HTML_CONTAINER_TAGS[tag_name])
@@ -428,15 +417,6 @@ class Structured(object):
         :type attribute: str
         :return: attribute
         :rtype: str
-
-        :Examples:
-
-            >>> s = Structured()
-            >>> s.html_attribute_value('a', 'href')
-            'http://www.cnn.com'
-            >>> s.html_attribute_value('div', 'class')
-            'divider'
-
         """
         try:
             value = common.HTML_CONTAINER_TAGS[tag][attribute]
@@ -472,7 +452,7 @@ class Text(object):
 
     def __str__(self):
         return '{}:{}:{}'.format(
-            self.__class__.__name__, self.locale, locale_information(self.locale)['name'])
+            self.__class__.__name__, self.locale, locale_information(self.locale))
 
     def alphabet(self, letter_case=None):
         """
@@ -636,7 +616,7 @@ class Code(object):
 
     def __str__(self):
         return '{}:{}:{}'.format(
-            self.__class__.__name__, self.locale, locale_information(self.locale)['name'])
+            self.__class__.__name__, self.locale, locale_information(self.locale))
 
     @staticmethod
     def custom_code(mask="@###", char='@', digit='#'):
@@ -712,10 +692,8 @@ class Code(object):
         Generate a random IMEI (International Mobile Station Equipment Identity).
 
         :return: IMEI.
-        :Example:
 
-        >>> from elizabeth import Code
-        >>> Code().imei()
+        :Example:
         353918052107063
         """
         num = choice(common.IMEI_TACS) + self.custom_code(mask='######')
@@ -746,7 +724,7 @@ class Business(object):
 
     def __str__(self):
         return '{}:{}:{}'.format(
-            self.__class__.__name__, self.locale, locale_information(self.locale)['name'])
+            self.__class__.__name__, self.locale, locale_information(self.locale))
 
     def company_type(self, abbr=False):
         """
@@ -820,8 +798,8 @@ class Business(object):
 
         if self.locale in currencies:
             return fmt.format(price, currencies[self.locale])
-        else:
-            return fmt.format(price, currencies['default'])
+
+        return fmt.format(price, currencies['default'])
 
 
 class Personal(object):
@@ -842,7 +820,7 @@ class Personal(object):
 
     def __str__(self):
         return '{}:{}:{}'.format(
-            self.__class__.__name__, self.locale, locale_information(self.locale)['name'])
+            self.__class__.__name__, self.locale, locale_information(self.locale))
 
     def age(self, minimum=16, maximum=66):
         """
@@ -1316,7 +1294,7 @@ class Personal(object):
             https://api.adorable.io/avatars/64/875ed3de1604812b3c2b592c05863f47.png
         """
         # {0} is size of avatar, {1} is hash of avatar.
-        url = 'https://api.adorable.io/avatars/%s/%s.png'% (
+        url = 'https://api.adorable.io/avatars/%s/%s.png' % (
             size, self.password(algorithm='md5'))
         return url
 
@@ -1379,7 +1357,7 @@ class Datetime(object):
 
     def __str__(self):
         return '{}:{}:{}'.format(
-            self.__class__.__name__, self.locale, locale_information(self.locale)['name'])
+            self.__class__.__name__, self.locale, locale_information(self.locale))
 
     def day_of_week(self, abbr=False):
         """
@@ -1597,7 +1575,7 @@ class Science(object):
 
     def __str__(self):
         return '{}:{}:{}'.format(
-            self.__class__.__name__, self.locale, locale_information(self.locale)['name'])
+            self.__class__.__name__, self.locale, locale_information(self.locale))
 
     @staticmethod
     def math_formula():
@@ -1792,7 +1770,7 @@ class Food(object):
 
     def __str__(self):
         return '{}:{}:{}'.format(
-            self.__class__.__name__, self.lang, locale_information(self.lang)['name'])
+            self.__class__.__name__, self.lang, locale_information(self.lang))
 
     def vegetable(self):
         """
@@ -2392,7 +2370,7 @@ class Generic(object):
 
     def __str__(self):
         return '{}:{}:{}'.format(
-            self.__class__.__name__, self.locale, locale_information(self.locale)['name'])
+            self.__class__.__name__, self.locale, locale_information(self.locale))
 
     def add_provider(self, cls):
         if inspect.isclass(cls):
