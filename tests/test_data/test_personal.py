@@ -17,9 +17,40 @@ class PersonalBaseTest(TestCase):
     def tearDown(self):
         del self.personal
 
+    def test_str(self):
+        self.assertTrue(re.match(STR_REGEX, self.personal.__str__()))
+
     def test_age(self):
         result = self.personal.age(maximum=55)
         self.assertTrue(result <= 55)
+
+    def test_age(self):
+        result = self.personal.age(maximum=55)
+        self.assertTrue(result <= 55)
+
+    def test_age_store(self):
+        result = self.personal._store['age']
+        self.assertEqual(result, 0)
+
+    def test_age_update(self):
+        result = self.personal.age() - self.personal._store['age']  # calling age() should go first
+        self.assertEqual(result, 0)
+
+    def test_child_count(self):
+        result = self.personal.child_count(max_childs=10)
+        self.assertTrue(result <= 10)
+
+    def test_work_experience(self):
+        result = self.personal.work_experience(working_start_age=0) - self.personal._store['age']
+        self.assertEqual(result, 0)
+
+    def test_work_experience_store(self):
+        result = self.personal.work_experience() - self.personal.work_experience()
+        self.assertEqual(result, 0)
+
+    def test_work_experience_extreme(self):
+        result = self.personal.work_experience(working_start_age=100000)
+        self.assertEqual(result, 0)
 
     def test_paypal(self):
         result = self.personal.paypal()
@@ -106,8 +137,10 @@ class PersonalBaseTest(TestCase):
         self.assertIn(result, common.FAVORITE_MUSIC_GENRE)
 
     def test_avatar(self):
-        result = self.personal.avatar()
-        self.assertTrue(len(result) > 20)
+        result = self.personal.avatar(size=512)
+        img, size, _, _, _, _ = result.split('/')[::-1]
+        self.assertEqual(int(size), 512)
+        self.assertEqual(32, len(img.split('.')[0]))
 
     def test_identifier(self):
         result = self.personal.identifier()
@@ -123,6 +156,18 @@ class PersonalBaseTest(TestCase):
         result = self.personal.identifier(suffix=True)
         suffix = result.split(' ')[1]
         self.assertTrue(suffix.isalpha())
+
+    def test_level_of_english(self):
+        result = self.personal.level_of_english()
+        lvl_s = ['Beginner',
+                 'Elementary',
+                 'Pre - Intermediate',
+                 'Intermediate',
+                 'Upper Intermediate',
+                 'Advanced',
+                 'Proficiency'
+                 ]
+        self.assertIn(result, lvl_s)
 
 
 class PersonalTestCase(DummyCase):

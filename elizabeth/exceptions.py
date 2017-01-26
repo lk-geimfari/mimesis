@@ -11,3 +11,10 @@ class JSONKeyError(KeyError):
     An exception that raised when JSON key doesn't exist
     """
     pass
+
+
+class NotImplementedYet(NotImplementedError):
+    """
+    An exception that raised when NotImplementedError
+    """
+    pass

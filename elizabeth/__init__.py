@@ -24,7 +24,7 @@
 
 from elizabeth.core import *
 
-__version__ = '0.3.11'
+__version__ = '0.3.13'
 __author__ = 'Likid Geimfari'
 
 __all__ = [
@@ -43,6 +43,7 @@ __all__ = [
     'Path',
     'Personal',
     'Science',
+    'Structured',
     'Text',
     'Transport',
     'Generic'

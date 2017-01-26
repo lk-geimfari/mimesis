@@ -41,3 +41,5 @@ PL_POST_CODE = r'\d{2}-\d{3}'
 FA_POST_CODE = r'\d{5}-\d{5}'
 
 CS_POST_CODE = r'\d{3}[ ]?\d{2}'
+
+STR_REGEX = r'^(Address|Business|Code|Datetime|Food|Generic|Personal|Science|Structured|Text):[a-z-]+:(.*)$'

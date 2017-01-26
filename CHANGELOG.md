@@ -1,5 +1,18 @@
 ## Changelog
 
+### Version 0.3.13
+ - Fixed issue with setup.py
+	- Minor updates
+	
+---
+
+### Version 0.3.12
+ - Added jp
+ - Added `Structured()`
+ - Updated test
+ - Minor improvements and bug fix.
+
+---
 
 ### Version 0.3.11
  - Added `ko` locale

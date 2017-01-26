@@ -1,29 +1,17 @@
-from string import ascii_uppercase
 from random import randint, choice
 
-__all__ = ['USA', 'Brazil', 'Russia']
+from elizabeth.core import Code
+from elizabeth.exceptions import JSONKeyError
+from elizabeth.utils import pull
 
+__all__ = [
+    'USA',
+    'Brazil',
+    'Russia'
+]
 
-def _custom_code(mask="@###", char='@', digit='#'):
-    """
-    Generate custom code using ascii uppercase and random integers.
-
-    :param mask: Mask of code.
-    :param char: Placeholder for characters.
-    :param digit: Placeholder for digits.
-    :return: Custom code.
-    :Example::
-        5673-AGFR-SFSFF-1423-4/AD.
-    """
-    code = ''
-    for p in mask:
-        if p == char:
-            code += choice(ascii_uppercase)
-        elif p == digit:
-            code += str(randint(0, 9))
-        else:
-            code += p
-    return code
+# Internal
+_custom_code = Code.custom_code
 
 
 class Brazil(object):
@@ -119,6 +107,8 @@ class Brazil(object):
 
 
 class USA(object):
+    """Class that provides special data for en"""
+
     class Meta:
         name = 'usa_provider'
 
@@ -167,15 +157,18 @@ class USA(object):
 
     @staticmethod
     def personality(category='mbti'):
-        mbtis = ("ISFJ", "ISTJ",
-                 "INFJ", "INTJ",
-                 "ISTP", "ISFP",
-                 "INFP", "INTP",
-                 "ESTP", "ESFP",
-                 "ENFP", "ENTP",
-                 "ESTJ", "ESFJ",
-                 "ENFJ", "ENTJ"
-                 )
+        """
+        Generate a type of personality.
+
+        :param category: Category.
+        :return: Personality type.
+        :Example:
+            ISFJ.
+        """
+        mbtis = ("ISFJ", "ISTJ", "INFJ", "INTJ",
+                 "ISTP", "ISFP", "INFP", "INTP",
+                 "ESTP", "ESFP", "ENFP", "ENTP",
+                 "ESTJ", "ESFJ", "ENFJ", "ENTJ")
 
         if category.lower() == 'rheti':
             return randint(1, 10)
@@ -184,12 +177,29 @@ class USA(object):
 
 
 class Russia(object):
-    """
-    Specific data for russian language (ru)
-    """
+    """Specific data for russian language (ru)"""
 
     class Meta:
         name = 'russia_provider'
+
+    @staticmethod
+    def patronymic(gender='female'):
+        """
+        Generate random patronymic name.
+
+        :param gender: Gender of person.
+        :return: Patronymic name.
+        :Example:
+            Алексеева.
+        """
+        gender = gender.lower()
+
+        try:
+            d = pull('personal.json', 'ru')['patronymic'][gender]
+            return choice(d)
+        except:
+            raise JSONKeyError(
+                'Not exist key. Please use one of ["female", "male"]')
 
     @staticmethod
     def passport_series(year=None):
@@ -198,13 +208,14 @@ class Russia(object):
 
         :param year: Year of manufacture.
         :return: Series.
+        :Example:
+            02 15.
         """
         year = randint(10, 16) if not \
             year else year
 
         region = randint(1, 99)
-        return '{region} {year}'.format(
-            region=region, year=year)
+        return '{:02d} {}'.format(region, year)
 
     @staticmethod
     def passport_number():
@@ -212,6 +223,8 @@ class Russia(object):
         Generate random passport number.
 
         :return: Number.
+        :Example:
+            560430
         """
         return _custom_code(mask='######')
 
@@ -220,6 +233,8 @@ class Russia(object):
         Generate a random passport number and series.
 
         :return: Series and number.
+        :Example:
+            57 16 805199.
         """
         return '%s %s' % (
             self.passport_series(),

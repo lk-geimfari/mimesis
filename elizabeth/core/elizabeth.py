@@ -3,7 +3,6 @@
 :copyright: (c) 2016 by Likid Geimfari <likid.geimfari@gmail.com>.
 :software_license: MIT, see LICENSES for more details.
 :repository: https://github.com/lk-geimfari/elizabeth
-:contributors: http://bit.ly/2hlzxgE
 """
 import os
 import re
@@ -36,7 +35,11 @@ from string import (
 )
 
 from . import interdata as common
-from elizabeth.utils import luhn_checksum, pull
+from elizabeth.utils import (
+    luhn_checksum,
+    pull,
+    locale_information
+)
 
 __all__ = [
     'Address',
@@ -71,6 +74,10 @@ class Address(object):
         """
         self.locale = locale
         self.data = pull('address.json', self.locale)
+
+    def __str__(self):
+        return '{}:{}:{}'.format(
+            self.__class__.__name__, self.locale, locale_information(self.locale)['name'])
 
     @staticmethod
     def street_number(maximum=1400):
@@ -121,6 +128,16 @@ class Address(object):
             return fmt[self.locale].format(
                 self.street_name(),
                 self.street_number()
+            )
+
+        if self.locale == 'jp':
+            towns = self.data['town']
+            maximum = 100
+            return fmt[self.locale].format(
+                choice(towns),
+                '%s' % randint(1, int(maximum)),
+                '%s' % randint(1, int(maximum)),
+                '%s' % randint(1, int(maximum))
             )
 
         return fmt[self.locale].format(
@@ -299,6 +316,148 @@ class Numbers(object):
         return randint(minimum, maximum)
 
 
+class Structured(object):
+    """
+    Provider for structured text data such as CSS, Delimited, HTML, etc.
+    """
+
+    def __init__(self, locale='en'):
+        self.locale = locale
+        self.datetime = Datetime(self.locale)
+        self.internet = Internet()
+        self.personal = Personal(self.locale)
+        self.text = Text(self.locale)
+
+    def __str__(self):
+        return '{}:{}:{}'.format(
+            self.__class__.__name__, self.locale, locale_information(self.locale)['name'])
+
+    def css(self):
+        """
+        Generates a random snippet of CSS
+
+        :return: CSS
+        :rtype: str
+
+        :Example:
+
+            >>> s = Structured()
+            >>> s.css()
+            'strong {
+                pointer: crosshair;
+                padding-right: 46pt;
+                margin-left: 38em;
+                padding-right: 65em
+            }'
+
+        """
+        selector = choice(common.CSS_SELECTORS)
+        css_selector = "%s%s" % (selector, self.text.word())
+
+        html_cont_keys = choice(list(common.HTML_CONTAINER_TAGS.keys()))
+        html_mrk_tag = choice(common.HTML_MARKUP_TAGS)
+
+        base = "{}".format(choice([html_cont_keys, html_mrk_tag, css_selector]))
+        props = "; ".join([self.css_property() for _ in range(randint(1, 6))])
+        return "{} {{{}}}".format(base, props)
+
+    def css_property(self):
+        """
+        Generates a random snippet of CSS that assigns value to a property
+
+        :return: CSS property
+        :rtype: str
+
+        :Examples:
+
+            >>> s = Structured()
+            >>> s.css_property()
+            'background-color: #f4d3a1'
+        """
+        prop = choice(list(common.CSS_PROPERTIES.keys()))
+        val = common.CSS_PROPERTIES[prop]
+
+        if isinstance(val, list):
+            val = choice(val)
+        elif val == "color":
+            val = self.text.hex_color()
+        elif val == "size":
+            val = "{}{}".format(randint(1, 99), choice(common.CSS_SIZE_UNITS))
+
+        return "{}: {}".format(prop, val)
+
+    def html(self):
+        """
+        Generate a random HTML tag with text inside and some attrs set.
+
+        :return: HTML
+        :rtype: str
+
+        :Examples:
+
+            >>> s = Structured()
+            >>> s.html()
+            '<span class="select" id="careers">
+                Ports are created with the built-in function open_port.
+            </span>'
+
+        """
+        tag_name = choice(list(common.HTML_CONTAINER_TAGS))
+        tag_attributes = list(common.HTML_CONTAINER_TAGS[tag_name])
+        k = randint(1, len(tag_attributes))
+
+        selected_attrs = sample(tag_attributes, k=k)
+
+        attrs = []
+        for attr in selected_attrs:
+            attrs.append("{}=\"{}\"".format(
+                attr, self.html_attribute_value(tag_name, attr)))
+
+        return "<{tag} {attrs}>{content}</{tag}>".format(
+            tag=tag_name,
+            attrs=" ".join(attrs),
+            content=self.text.sentence())
+
+    def html_attribute_value(self, tag, attribute):
+        """
+        Random value for specified HTML tag attribute.
+
+        :param tag: An HTML tag
+        :param attribute: An attribute of the specified tag
+        :type tag: str
+        :type attribute: str
+        :return: attribute
+        :rtype: str
+
+        :Examples:
+
+            >>> s = Structured()
+            >>> s.html_attribute_value('a', 'href')
+            'http://www.cnn.com'
+            >>> s.html_attribute_value('div', 'class')
+            'divider'
+
+        """
+        try:
+            value = common.HTML_CONTAINER_TAGS[tag][attribute]
+        except KeyError:
+            raise NotImplementedError(
+                "Tag {} or attribute {} is not supported".format(tag, attribute))
+
+        if isinstance(value, list):
+            value = choice(value)
+        elif value == "css":
+            value = self.css_property()
+        elif value == "word":
+            value = self.text.word()
+        elif value == "url":
+            value = self.internet.home_page()
+        else:
+            raise NotImplementedError(
+                "Attribute type {} is not implemented".format(value))
+        return value
+
+
 class Text(object):
     """
     Class for generate text data, i.e text, lorem ipsum and another.
@@ -310,6 +469,10 @@ class Text(object):
         """
         self.locale = locale
         self.data = pull('text.json', self.locale)
+
+    def __str__(self):
+        return '{}:{}:{}'.format(
+            self.__class__.__name__, self.locale, locale_information(self.locale)['name'])
 
     def alphabet(self, letter_case=None):
         """
@@ -471,6 +634,10 @@ class Code(object):
     def __init__(self, locale):
         self.locale = locale
 
+    def __str__(self):
+        return '{}:{}:{}'.format(
+            self.__class__.__name__, self.locale, locale_information(self.locale)['name'])
+
     @staticmethod
     def custom_code(mask="@###", char='@', digit='#'):
         """
@@ -577,6 +744,10 @@ class Business(object):
         self.locale = locale
         self.data = pull('business.json', self.locale)
 
+    def __str__(self):
+        return '{}:{}:{}'.format(
+            self.__class__.__name__, self.locale, locale_information(self.locale)['name'])
+
     def company_type(self, abbr=False):
         """
         Get a random type of business entity.
@@ -663,10 +834,17 @@ class Personal(object):
         :param locale: Current language.
         """
         self.locale = locale
+        # TODO: This should be self._data.
         self.data = pull('personal.json', self.locale)
+        self._store = {
+            'age': 0
+        }
 
-    @staticmethod
-    def age(minimum=16, maximum=66):
+    def __str__(self):
+        return '{}:{}:{}'.format(
+            self.__class__.__name__, self.locale, locale_information(self.locale)['name'])
+
+    def age(self, minimum=16, maximum=66):
         """
         Get a random integer value.
 
@@ -676,7 +854,36 @@ class Personal(object):
         :Example:
             23.
         """
-        return randint(minimum, maximum)
+        a = randint(minimum, maximum)
+        self._store['age'] = a
+        return a
+
+    def child_count(self, max_childs=5):
+        """
+        Get a count of child's
+
+        :param max_childs: maximum count of child's
+        :returns: Ints. Depend on previous generated age
+        """
+        a = self._store['age']
+        if a == 0:
+            a = self.age()
+
+        cc = 0 if a < 18 else randint(0, max_childs)
+        return cc
+
+    def work_experience(self, working_start_age=22):
+        """
+        Get a work experience.
+
+        :param working_start_age: age then person start to work
+        :return: Int. Depend on previous generated age
+        """
+        a = self._store['age']
+        if a == 0:
+            a = self.age()
+
+        return max(a - working_start_age, 0)
 
     def name(self, gender='female'):
         """
@@ -699,7 +906,7 @@ class Personal(object):
         :Example:
             Smith.
         """
-        # In Russia and Iceland surnames separated by gender.
+        # Separated by gender.
         sep_surnames = ('ru', 'is')
 
         if self.locale in sep_surnames:
@@ -783,8 +990,8 @@ class Personal(object):
                 return sha512(password).hexdigest()
             elif algorithm == 'md5':
                 return md5(password).hexdigest()
-            raise NotImplementedError("The specified hashing algorithm "
-                                      "is not available.")
+            raise NotImplementedError(
+                "The specified hashing algorithm is not available.")
 
         return password
 
@@ -1100,17 +1307,17 @@ class Personal(object):
 
         return _(mask=mask, digit=placeholder)
 
-    @staticmethod
-    def avatar():
+    def avatar(self, size=256):
         """
         Get a random link to avatar.
 
         :returns: Link to avatar that hosted in repository of elizabeth.
         :Example:
-            https://raw.githubusercontent.com/lk-geimfari/
-            elizabeth/master/other/avatars/4.png
+            https://api.adorable.io/avatars/64/875ed3de1604812b3c2b592c05863f47.png
         """
-        url = common.AVATARS % randint(1, 7)
+        # {0} is size of avatar, {1} is hash of avatar.
+        url = 'https://api.adorable.io/avatars/%s/%s.png'% (
+            size, self.password(algorithm='md5'))
         return url
 
     @staticmethod
@@ -1137,6 +1344,25 @@ class Personal(object):
 
         return _(mask=mask)
 
+    @staticmethod
+    def level_of_english():
+        """
+        Get a random level of English.
+
+        :return: Level of english.
+        :Example:
+            Intermediate.
+        """
+        lvl_s = ('Beginner',
+                 'Elementary',
+                 'Pre - Intermediate',
+                 'Intermediate',
+                 'Upper Intermediate',
+                 'Advanced',
+                 'Proficiency'
+                 )
+        return choice(lvl_s)
+
 
 class Datetime(object):
     """
@@ -1150,6 +1376,10 @@ class Datetime(object):
         """
         self.locale = locale
         self.data = pull('datetime.json', self.locale)
+
+    def __str__(self):
+        return '{}:{}:{}'.format(
+            self.__class__.__name__, self.locale, locale_information(self.locale)['name'])
 
     def day_of_week(self, abbr=False):
         """
@@ -1365,6 +1595,10 @@ class Science(object):
         self.locale = locale
         self._data = pull('science.json', self.locale)
 
+    def __str__(self):
+        return '{}:{}:{}'.format(
+            self.__class__.__name__, self.locale, locale_information(self.locale)['name'])
+
     @staticmethod
     def math_formula():
         """
@@ -1549,12 +1783,16 @@ class Food(object):
     Class for Food, i.e fruits, vegetables, berries and other.
     """
 
-    def __init__(self, lang='en'):
+    def __init__(self, locale='en'):
         """
-        :param lang: Current language.
+        :param locale: Current language.
         """
-        self.lang = lang
+        self.lang = locale
         self._data = pull('food.json', self.lang)
+
+    def __str__(self):
+        return '{}:{}:{}'.format(
+            self.__class__.__name__, self.lang, locale_information(self.lang)['name'])
 
     def vegetable(self):
         """
@@ -2151,6 +2389,10 @@ class Generic(object):
         self.internet = Internet()
         self.transport = Transport()
         self.path = Path()
+
+    def __str__(self):
+        return '{}:{}:{}'.format(
+            self.__class__.__name__, self.locale, locale_information(self.locale)['name'])
 
     def add_provider(self, cls):
         if inspect.isclass(cls):
