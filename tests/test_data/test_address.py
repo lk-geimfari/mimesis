@@ -92,6 +92,8 @@ class AddressTestCase(DummyCase):
             self.assertTrue(re.match(CS_POST_CODE, result))
         elif self.generic.address.locale == 'jp':
             self.assertTrue(re.match(r'[0-9]{3}-[0-9]{4}$', result))
+        elif self.generic.address.locale == 'pt-br':
+            self.assertTrue(re.match(r'[0-9]{5}-[0-9]{3}$', result))
         else:
             self.assertTrue(re.match(r'[0-9]{5}$', result))
 
