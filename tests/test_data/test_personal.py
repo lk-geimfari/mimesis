@@ -138,7 +138,7 @@ class PersonalBaseTest(TestCase):
 
     def test_avatar(self):
         result = self.personal.avatar(size=512)
-        img, size, _, _, _, _ = result.split('/')[::-1]
+        img, size, *__ = result.split('/')[::-1]
         self.assertEqual(int(size), 512)
         self.assertEqual(32, len(img.split('.')[0]))
 
