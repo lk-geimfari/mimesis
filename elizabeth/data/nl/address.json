@@ -1,4 +1,5 @@
 {
+  "address_fmt": "{st_num} {st_name}",
   "city": [
     "Aagtdorp",
     "Aalsmeer",
@@ -2794,5 +2795,6 @@
       "straat",
       "steeg"
     ]
-  }
+  },
+  "postal_code_fmt":"#### @@"
 }

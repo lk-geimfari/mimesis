@@ -1,4 +1,5 @@
 {
+  "address_fmt": "{st_num} {st_name} {st_sfx}",
   "city": [
     "Aberaeron",
     "Aberdare",
@@ -7683,5 +7684,6 @@
       "Walk",
       "Wynd"
     ]
-  }
+  },
+  "postal_code_fmt": "@@#@ #@@"
 }

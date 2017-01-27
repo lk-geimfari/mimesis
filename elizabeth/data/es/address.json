@@ -1,4 +1,5 @@
 {
+  "address_fmt": "{st_name}, {st_num}",
   "city": [
     "A Coruña",
     "Alcalá de Henares",
@@ -383,5 +384,7 @@
     "name": [
       "Las Ventas"
     ]
-  }
+  },
+  "postal_code_fmt": "#####"
+
 }

@@ -1,4 +1,5 @@
 {
+  "address_fmt": "{st_sfx} {st_name} {st_num}",
   "city": [
     "Aleksandrów Kujawski",
     "Aleksandrów Łódzki",
@@ -3617,5 +3618,6 @@
       "axis.",
       "park"
     ]
-  }
+  },
+  "postal_code_fmt": "##-###"
 }
