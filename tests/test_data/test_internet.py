@@ -4,7 +4,7 @@ import re
 from unittest import TestCase
 
 import elizabeth.core.interdata as common
-from elizabeth.core.elizabeth import Internet
+from elizabeth.core.providers import Internet
 
 
 class InternetTest(TestCase):

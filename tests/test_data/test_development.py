@@ -3,7 +3,7 @@
 from unittest import TestCase
 
 import elizabeth.core.interdata as common
-from elizabeth.core.elizabeth import Development
+from elizabeth.core.providers import Development
 
 
 class DevelopmentTest(TestCase):

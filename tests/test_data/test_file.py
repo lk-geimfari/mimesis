@@ -3,7 +3,7 @@
 from unittest import TestCase
 
 import elizabeth.core.interdata as common
-from elizabeth.core.elizabeth import File
+from elizabeth.core.providers import File
 
 
 class FileTest(TestCase):

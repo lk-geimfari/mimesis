@@ -2,7 +2,7 @@
 import re
 import csv
 
-from elizabeth.core.elizabeth import Structured
+from elizabeth.core.providers import Structured
 from unittest import TestCase
 
 from elizabeth.core import interdata as common
@@ -38,7 +38,7 @@ class StructuredBaseTest(TestCase):
             self.structured.html_attribute_value("a", "bogus")
         with self.assertRaises(NotImplementedError):
             common.HTML_CONTAINER_TAGS['div']['class'] = "bogus"
-            from elizabeth.core.elizabeth import Structured
+            from elizabeth.core.providers import Structured
             Structured().html_attribute_value("div", "class")
 
     def test_html(self):
