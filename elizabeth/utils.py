@@ -1,17 +1,14 @@
 import functools
 import json
 
-from os.path import (
-    abspath,
-    dirname,
-    join
-)
+import os.path as path
 
 from elizabeth.exceptions import UnsupportedLocale
 
-__all__ = ['pull']
+__all__ = ['pull', 'locale_information']
 
-PATH = abspath(join(dirname(__file__), 'data'))
+PATH = path.abspath(
+    path.join(path.dirname(__file__), 'data'))
 
 SUPPORTED_LOCALES = {
     "cs": {
@@ -219,8 +216,10 @@ def pull(file, locale='en') -> dict:
     if locale not in SUPPORTED_LOCALES:
         raise UnsupportedLocale("Locale %s does not supported" % locale)
 
+    file_path = path.join(PATH + '/' + locale, file)
+
     # Needs explicit encoding for Windows
-    with open(join(PATH + '/' + locale, file), 'r', encoding='utf8') as f:
+    with open(file_path, 'r', encoding='utf8') as f:
         data = json.load(f)
 
     return data
