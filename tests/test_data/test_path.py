@@ -3,7 +3,7 @@ import os
 import sys
 from unittest import TestCase
 
-from elizabeth.core.elizabeth import Path
+from elizabeth.core.providers import Path
 import elizabeth.core.interdata as common
 
 

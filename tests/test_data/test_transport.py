@@ -2,7 +2,7 @@
 
 from unittest import TestCase
 
-from elizabeth.core.elizabeth import Transport
+from elizabeth.core.providers import Transport
 import elizabeth.core.interdata as common
 
 

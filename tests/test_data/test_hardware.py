@@ -3,7 +3,7 @@
 from unittest import TestCase
 
 import elizabeth.core.interdata as common
-from elizabeth.core.elizabeth import Hardware
+from elizabeth.core.providers import Hardware
 
 
 class HardwareTest(TestCase):

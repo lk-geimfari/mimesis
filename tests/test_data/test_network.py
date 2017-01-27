@@ -3,7 +3,7 @@
 import re
 from unittest import TestCase
 
-from elizabeth.core.elizabeth import Network
+from elizabeth.core.providers import Network
 
 from ._patterns import *
 

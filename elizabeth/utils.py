@@ -147,7 +147,7 @@ def luhn_checksum(num) -> str:
 
 
 @functools.lru_cache(maxsize=None)
-def pull(file, locale='en'):
+def pull(file, locale='en') -> dict:
     """
     Open file and get content from file. Memorize result using lru_cache.
 
