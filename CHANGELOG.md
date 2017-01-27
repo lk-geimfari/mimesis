@@ -1,9 +1,17 @@
 ## Changelog
 
+### Version 0.3.14
+ - Moved address_fmt to json file
+ - Moved postal_code_fmt to json file
+ - Refactored
+ - Other minor improvements
+
+---
+
 ### Version 0.3.13
  - Fixed issue with setup.py
-	- Minor updates
-	
+ - Minor updates
+
 ---
 
 ### Version 0.3.12

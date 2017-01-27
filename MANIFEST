@@ -7,9 +7,10 @@ elizabeth/utils.py
 elizabeth/builtins/__init__.py
 elizabeth/builtins/specific_providers.py
 elizabeth/core/__init__.py
-elizabeth/core/elizabeth.py
+elizabeth/core/providers.py
 elizabeth/core/interdata/__init__.py
 elizabeth/core/interdata/address.py
+elizabeth/core/interdata/business.py
 elizabeth/core/interdata/code.py
 elizabeth/core/interdata/datetime.py
 elizabeth/core/interdata/development.py
@@ -20,7 +21,6 @@ elizabeth/core/interdata/path.py
 elizabeth/core/interdata/personal.py
 elizabeth/core/interdata/science.py
 elizabeth/core/interdata/structured.py
-elizabeth/core/interdata/text.py
 elizabeth/core/interdata/transport.py
 elizabeth/data/cs/address.json
 elizabeth/data/cs/business.json
