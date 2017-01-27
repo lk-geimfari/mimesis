@@ -77,7 +77,10 @@ class Address(object):
 
     def __str__(self):
         return '{}:{}:{}'.format(
-            self.__class__.__name__, self.locale, locale_information(self.locale))
+            self.__class__.__name__,
+            self.locale,
+            locale_information(self.locale)
+        )
 
     @staticmethod
     def street_number(maximum=1400):
@@ -330,7 +333,10 @@ class Structured(object):
 
     def __str__(self):
         return '{}:{}:{}'.format(
-            self.__class__.__name__, self.locale, locale_information(self.locale))
+            self.__class__.__name__,
+            self.locale,
+            locale_information(self.locale)
+        )
 
     def css(self):
         """
@@ -452,7 +458,10 @@ class Text(object):
 
     def __str__(self):
         return '{}:{}:{}'.format(
-            self.__class__.__name__, self.locale, locale_information(self.locale))
+            self.__class__.__name__,
+            self.locale,
+            locale_information(self.locale)
+        )
 
     def alphabet(self, letter_case=None):
         """
@@ -616,7 +625,10 @@ class Code(object):
 
     def __str__(self):
         return '{}:{}:{}'.format(
-            self.__class__.__name__, self.locale, locale_information(self.locale))
+            self.__class__.__name__,
+            self.locale,
+            locale_information(self.locale)
+        )
 
     @staticmethod
     def custom_code(mask="@###", char='@', digit='#'):
@@ -724,7 +736,10 @@ class Business(object):
 
     def __str__(self):
         return '{}:{}:{}'.format(
-            self.__class__.__name__, self.locale, locale_information(self.locale))
+            self.__class__.__name__,
+            self.locale,
+            locale_information(self.locale)
+        )
 
     def company_type(self, abbr=False):
         """
@@ -820,7 +835,10 @@ class Personal(object):
 
     def __str__(self):
         return '{}:{}:{}'.format(
-            self.__class__.__name__, self.locale, locale_information(self.locale))
+            self.__class__.__name__,
+            self.locale,
+            locale_information(self.locale)
+        )
 
     def age(self, minimum=16, maximum=66):
         """
@@ -1357,7 +1375,10 @@ class Datetime(object):
 
     def __str__(self):
         return '{}:{}:{}'.format(
-            self.__class__.__name__, self.locale, locale_information(self.locale))
+            self.__class__.__name__,
+            self.locale,
+            locale_information(self.locale)
+        )
 
     def day_of_week(self, abbr=False):
         """
@@ -1575,7 +1596,10 @@ class Science(object):
 
     def __str__(self):
         return '{}:{}:{}'.format(
-            self.__class__.__name__, self.locale, locale_information(self.locale))
+            self.__class__.__name__,
+            self.locale,
+            locale_information(self.locale)
+        )
 
     @staticmethod
     def math_formula():
@@ -1770,7 +1794,10 @@ class Food(object):
 
     def __str__(self):
         return '{}:{}:{}'.format(
-            self.__class__.__name__, self.lang, locale_information(self.lang))
+            self.__class__.__name__,
+            self.lang,
+            locale_information(self.lang)
+        )
 
     def vegetable(self):
         """
@@ -2370,7 +2397,10 @@ class Generic(object):
 
     def __str__(self):
         return '{}:{}:{}'.format(
-            self.__class__.__name__, self.locale, locale_information(self.locale))
+            self.__class__.__name__,
+            self.locale,
+            locale_information(self.locale)
+        )
 
     def add_provider(self, cls):
         if inspect.isclass(cls):
