@@ -36,6 +36,7 @@ from string import (
 
 # from . import interdata as common
 from elizabeth.core import interdata as common
+
 from elizabeth.utils import (
     luhn_checksum,
     pull,
@@ -151,6 +152,7 @@ class Address(object):
             st_num=self.street_number(),
             st_name=self.street_name(),
             st_sfx=self.street_suffix()
+
         )
 
     def state(self, abbr=False):
@@ -180,6 +182,7 @@ class Address(object):
         mask = self.data['postal_code_fmt']
 
         return Code.custom_code(mask)
+
 
     def country(self, iso_code=False):
         """
