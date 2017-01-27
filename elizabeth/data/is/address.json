@@ -1,4 +1,5 @@
 {
+  "address_fmt": "{st_num} {st_name}",
   "city": [
     "Akranes",
     "Akureyri",
@@ -8531,5 +8532,6 @@
       "vík",
       "vör"
     ]
-  }
+  },
+  "postal_code_fmt": "###"
 }

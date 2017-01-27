@@ -1,4 +1,5 @@
 {
+  "address_fmt": "{st_num} {st_name}",
   "city": [
     "Aabenraa",
     "Aabybro",
@@ -1002,5 +1003,6 @@
       "Øster Voldgade",
       "Østerbrogade"
     ]
-  }
+  },
+  "postal_code_fmt": "DK-####"
 }

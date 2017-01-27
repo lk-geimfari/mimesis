@@ -34,7 +34,9 @@ from string import (
     punctuation
 )
 
-from . import interdata as common
+# from . import interdata as common
+from elizabeth.core import interdata as common
+
 from elizabeth.utils import (
     luhn_checksum,
     pull,
@@ -57,6 +59,7 @@ __all__ = [
     'Path',
     'Personal',
     'Science',
+    'Structured',
     'Text',
     'Transport',
     'Generic'
@@ -125,28 +128,31 @@ class Address(object):
         :Example:
             5 Central Sideline.
         """
-        fmt = common.ADDRESS_FMT
+        fmt = self.data['address_fmt']
 
-        if self.locale in fmt['shorted']:
-            return fmt[self.locale].format(
-                self.street_name(),
-                self.street_number()
-            )
+        if self.locale in common.SHORTENED_ADDRESS_FMT:
+            # Because fmt for ko is {st_name}{st_sfx} {st_num},
+            # i.e not shortened address format
+            if self.locale != 'ko':
+                return fmt.format(
+                    st_num=self.street_number(),
+                    st_name=self.street_name(),
+                )
 
         if self.locale == 'jp':
             towns = self.data['town']
-            maximum = 100
-            return fmt[self.locale].format(
-                choice(towns),
-                '%s' % randint(1, int(maximum)),
-                '%s' % randint(1, int(maximum)),
-                '%s' % randint(1, int(maximum))
+            return fmt.format(
+                town=choice(towns),
+                n=randint(1, 100),
+                nn=randint(1, 100),
+                nnn=randint(1, 100)
             )
 
-        return fmt[self.locale].format(
-            self.street_number(),
-            self.street_name(),
-            self.street_suffix()
+        return fmt.format(
+            st_num=self.street_number(),
+            st_name=self.street_name(),
+            st_sfx=self.street_suffix()
+
         )
 
     def state(self, abbr=False):
@@ -167,20 +173,16 @@ class Address(object):
 
     def postal_code(self):
         """
-        Get a random postal code.
+        Generate a postal code for current locale.
 
         :returns: postal code.
         :Example:
             389213
         """
-        _ = Code.custom_code
+        mask = self.data['postal_code_fmt']
 
-        masks = common.POSTAL_CODE_FMT
+        return Code.custom_code(mask)
 
-        if self.locale in masks:
-            return _(mask=masks[self.locale])
-
-        return _(mask=masks['default'])
 
     def country(self, iso_code=False):
         """

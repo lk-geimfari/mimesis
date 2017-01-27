@@ -25,7 +25,7 @@ LICENSES = [
     "The BSD 2-Clause License",
     "GNU General Public License (GPL)",
     "General Public License (LGPL)",
-    "MIT software_license (MIT)",
+    "MIT License (MIT)",
     "Mozilla Public License 2.0 (MPL-2.0)",
     "Common Development and Distribution License (CDDL-1.0)",
     "Eclipse Public License (EPL-1.0)"

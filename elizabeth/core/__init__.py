@@ -1,4 +1,4 @@
-from .providers import (
+from elizabeth.core.providers import (
     Address, Business, ClothingSizes,
     Code, Datetime, Development, File,
     Food, Hardware, Internet, Network,
