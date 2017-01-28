@@ -4,6 +4,7 @@ from elizabeth.core import Code
 from elizabeth.exceptions import JSONKeyError
 from elizabeth.utils import pull
 
+# TODO: Rename provider to *SpecificProvider, where * is locale code.
 __all__ = [
     'USA',
     'Brazil',
@@ -190,13 +191,13 @@ class Russia(object):
         :param gender: Gender of person.
         :return: Patronymic name.
         :Example:
-            Алексеева.
+            Алексеевна.
         """
         gender = gender.lower()
 
         try:
-            d = pull('personal.json', 'ru')['patronymic'][gender]
-            return choice(d)
+            patronymic = pull('personal.json', 'ru')['patronymic']
+            return choice(patronymic[gender])
         except:
             raise JSONKeyError(
                 'Not exist key. Please use one of ["female", "male"]')
