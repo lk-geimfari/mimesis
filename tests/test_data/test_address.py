@@ -5,10 +5,9 @@ from unittest import TestCase
 
 from elizabeth import Address
 import elizabeth.core.interdata as common
-from tests.test_data import DummyCase
 
-from ._patterns import EN_GB_POST_CODE, NL_POST_CODE, \
-    PL_POST_CODE, FA_POST_CODE, CS_POST_CODE, STR_REGEX
+from tests.test_data import DummyCase
+from ._patterns import POSTAL_CODE_REGEX, STR_REGEX
 
 
 class AddressBaseTest(TestCase):
@@ -66,36 +65,16 @@ class AddressTestCase(DummyCase):
 
     def test_postal_code(self):
         result = self.generic.address.postal_code()
-        # TODO: Rewrite
-        if self.generic.address.locale == 'ru':
-            self.assertTrue(re.match(r'[0-9]{6}$', result))
-        elif self.generic.address.locale == 'is':
-            self.assertTrue(re.match(r'[0-9]{3}$', result))
-        elif self.generic.address.locale == 'nl':
-            self.assertTrue(re.match(NL_POST_CODE, result))
-        elif self.generic.address.locale == 'pl':
-            self.assertTrue(re.match(PL_POST_CODE, result))
-        elif self.generic.address.locale in ('pt', 'no'):
-            self.assertTrue(re.match(r'[0-9]{4}$', result))
-        elif self.generic.address.locale == 'da':
-            self.assertEqual(result.split('-')[0], 'DK')
-            self.assertTrue(re.match(r'[0-9]{4}$', result.split('-')[1]))
-        elif self.generic.address.locale == 'en-gb':
-            self.assertTrue(re.match(EN_GB_POST_CODE, result))
-        elif self.generic.address.locale == 'fa':
-            self.assertTrue(re.match(FA_POST_CODE, result))
-        elif self.generic.address.locale == 'hu':
-            self.assertTrue(re.match(r'[0-9]{4}$', result))
-        elif self.generic.address.locale == 'ko':
-            self.assertTrue(re.match(r'[0-9]{5}$', result))
-        elif self.generic.address.locale == 'cs':
-            self.assertTrue(re.match(CS_POST_CODE, result))
-        elif self.generic.address.locale == 'jp':
-            self.assertTrue(re.match(r'[0-9]{3}-[0-9]{4}$', result))
-        elif self.generic.address.locale == 'pt-br':
-            self.assertTrue(re.match(r'[0-9]{5}-[0-9]{3}$', result))
+        current_locale = self.generic.address.locale
+
+        if current_locale in POSTAL_CODE_REGEX:
+            self.assertTrue(re.match(
+                POSTAL_CODE_REGEX[current_locale], result)
+            )
         else:
-            self.assertTrue(re.match(r'[0-9]{5}$', result))
+            self.assertTrue(re.match(
+                POSTAL_CODE_REGEX['default'], result)
+            )
 
     def test_country(self):
         result = self.generic.address.country()
