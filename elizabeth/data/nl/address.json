@@ -2796,5 +2796,5 @@
       "steeg"
     ]
   },
-  "postal_code_fmt":"#### @@"
+  "postal_code_fmt":"1### @@"
 }
