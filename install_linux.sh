@@ -1,9 +1,7 @@
 #!/usr/bin/env bash
 
-SUPPORTED_PYTHON=python3
-
 function install {
-  virtualenv -p $SUPPORTED_PYTHON venv
+  virtualenv -p python3 venv
   source venv/bin/activate
 
   # Install stable release.
