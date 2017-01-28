@@ -339,12 +339,14 @@ class Japan(object):
 
         def hf_parse(char, result):
             """
-            Generate random series of passport.
+            parse the char from half-width to full-width, append to result,
+            and return result
 
-            :param year: Year of manufacture.
-            :return: Series.
+            :param char: character to be parsed from half-width to full-width
+            :param result: previous result string
+            :return: result appended with parsed char
             :Example:
-                02 15.
+                ラーメン
             """
             if char in hf_kana_special:
                 result += hf_kana_special[char]
