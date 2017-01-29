@@ -256,9 +256,9 @@ class Japan(object):
         Convert all full width katakana, alphanumeric and few special
         characters like （, ）, ・ to equivalent half width character.
 
-        :param text: the text to be converted.
-        :param alnum: convert alphanumeric, default True.
-        :return: text with full width characters converted to half width.
+        :param text: The text to be converted.
+        :param alnum: Convert alphanumeric, default True.
+        :return: Text with full width characters converted to half width.
 
         :Example:
             QVCｼﾞｬﾊﾟﾝ(0123)
@@ -291,7 +291,7 @@ class Japan(object):
         for char in text:
             if char in fh_kana_special:
                 result += fh_kana_special[char]
-            elif alnum and ord(char) >= ord("０") and ord(char) <= ord("ｚ"):
+            elif alnum and ord("０") <= ord(char) <= ord("ｚ"):
                 result += chr(ord(char) - _fh_alnum_offset)
             else:
                 result += char
@@ -303,9 +303,9 @@ class Japan(object):
         Convert all half width katakana, alphanumeric, and special characters
         ((, ), ) to equivalent full width character.
 
-        :param text: the text to be converted.
-        :param alnum: convert alphanumeric, default True.
-        :return: text with half width characters converted to full width.
+        :param text: The text to be converted.
+        :param alnum: Convert alphanumeric, default True.
+        :return: Text with half width characters converted to full width.
 
         :Example:
             ＱＶＣジャパン（０１２３）
@@ -322,7 +322,7 @@ class Japan(object):
         }
         hf_kana_special = {
             "ｱ": "ア", "ｲ": "イ", "ｳ": "ウ", "ｴ": "エ", "ｵ": "オ", "ｶ": "カ",
-            "ｷ": "キ", "ｸ": "ク", "ｹ": "ケ", "ｺ": "コ", "ｻ": "サ", "ｼ": "シ", 
+            "ｷ": "キ", "ｸ": "ク", "ｹ": "ケ", "ｺ": "コ", "ｻ": "サ", "ｼ": "シ",
             "ｽ": "ス", "ｾ": "セ", "ｿ": "ソ", "ﾀ": "タ", "ﾁ": "チ", "ﾂ": "ツ",
             "ﾃ": "テ", "ﾄ": "ト", "ﾅ": "ナ", "ﾆ": "ニ", "ﾇ": "ヌ", "ﾈ": "ネ",
             "ﾉ": "ノ", "ﾊ": "ハ", "ﾋ": "ヒ", "ﾌ": "フ", "ﾍ": "ヘ", "ﾎ": "ホ",
@@ -340,18 +340,18 @@ class Japan(object):
 
         def hf_parse(char, result):
             """
-            parse the char from half-width to full-width, append to result,
-            and return result
+            Parse the char from half-width to full-width, append to result,
+            and return result.
 
-            :param char: character to be parsed from half-width to full-width
-            :param result: previous result string
-            :return: result appended with parsed char
+            :param char: Character to be parsed from half-width to full-width.
+            :param result: Previous result string.
+            :return: Result appended with parsed char.
             :Example:
                 ラーメン
             """
             if char in hf_kana_special:
                 result += hf_kana_special[char]
-            elif alnum and ord(char) >= ord("0") and ord(char) <= ord("z"):
+            elif alnum and ord("0") <= ord(char) <= ord("z"):
                 result += chr(ord(char) + _hf_alnum_offset)
             else:
                 result += char
