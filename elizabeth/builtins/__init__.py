@@ -1,8 +1,8 @@
-from .specific_providers import Brazil, USA, Russia, Japan
+from .specific_providers import BrazilSpecProvider, USASpecProvider, RussiaSpecProvider, JapanSpecProvider
 
 __all__ = [
-    'Brazil',
-    'USA',
-    'Russia',
-    'Japan'
+    'BrazilSpecProvider',
+    'USASpecProvider',
+    'RussiaSpecProvider',
+    'JapanSpecProvider'
 ]

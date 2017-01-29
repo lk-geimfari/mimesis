@@ -291,7 +291,7 @@ Address
 	postal_code = address.postal_code()
 
 	# Get a random country.
-	# Output: Russia or Ru if only_iso_code=True:
+	# Output: RussiaSpecProvider or Ru if only_iso_code=True:
 	country = address.country()
 
 	# Get a random name of city

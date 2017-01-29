@@ -190,7 +190,7 @@ class Address(object):
         :param iso_code: Return only ISO code of country.
         :returns: The Country
         :Example:
-            Russia.
+            RussiaSpecProvider.
         """
         if iso_code:
             return choice(common.COUNTRIES_ISO)

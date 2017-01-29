@@ -217,11 +217,11 @@ If you would like to use these country-specific providers, then you must import 
 
 ```python
 >>> from elizabeth import Generic
->>> from elizabeth.builtins import Brazil
+>>> from elizabeth.builtins import BrazilSpecProvider
 >>>
 >>> generic = Generic('pt-br')
 >>>
->>> class BrazilProvider(Brazil):
+>>> class BrazilProvider(BrazilSpecProvider):
 >>>     class Meta:
 >>>         name = "brazil_provider"
 >>>

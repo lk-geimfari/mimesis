@@ -6,17 +6,17 @@ from elizabeth.utils import pull
 
 # TODO: Rename provider to *SpecificProvider, where * is locale code.
 __all__ = [
-    'USA',
-    'Brazil',
-    'Russia',
-    'Japan'
+    'USASpecProvider',
+    'BrazilSpecProvider',
+    'RussiaSpecProvider',
+    'JapanSpecProvider'
 ]
 
 # Internal
 _custom_code = Code.custom_code
 
 
-class Brazil(object):
+class BrazilSpecProvider(object):
     """Class that provides special data for pt-br"""
 
     class Meta:
@@ -108,7 +108,7 @@ class Brazil(object):
         return cnpj
 
 
-class USA(object):
+class USASpecProvider(object):
     """Class that provides special data for en"""
 
     class Meta:
@@ -178,7 +178,7 @@ class USA(object):
         return choice(mbtis)
 
 
-class Russia(object):
+class RussiaSpecProvider(object):
     """Specific data for russian language (ru)"""
 
     class Meta:
@@ -244,7 +244,7 @@ class Russia(object):
         )
 
 
-class Japan(object):
+class JapanSpecProvider(object):
     """Class that provides special data for jp"""
 
     class Meta:
