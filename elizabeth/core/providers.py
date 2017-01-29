@@ -183,7 +183,6 @@ class Address(object):
 
         return Code.custom_code(mask)
 
-
     def country(self, iso_code=False):
         """
         Get a random country.
