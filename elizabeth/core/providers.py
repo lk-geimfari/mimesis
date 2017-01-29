@@ -10,10 +10,7 @@ import sys
 import array
 import inspect
 from calendar import monthrange
-from datetime import (
-    date,
-    time,
-)
+import datetime
 from hashlib import (
     sha1,
     sha256,
@@ -1441,11 +1438,11 @@ class Datetime(object):
         :Example:
             Never.
         """
-        return choice(self.data['periodicity'])
+        periodicity = self.data['periodicity']
+        return choice(periodicity)
 
     def date(self, start=2000, end=2035, fmt=None):
-        """
-        Returns a string representing a random date formatted for
+        """Generate a string representing of random date formatted for
         the locale or as specified.
 
         :param start: Minimum value of year.
@@ -1455,28 +1452,33 @@ class Datetime(object):
         :Example:
             08/16/88 (en)
         """
+
+        fmt = fmt or self.data['formats']['date']
+
         year = randint(start, end)
         month = randint(1, 12)
-        d = date(year, month, randint(1, monthrange(year, month)[1]))
-        return d.strftime(fmt or self.data['formats']['date'])
+        d = datetime.date(
+            year, month, randint(1, monthrange(year, month)[1]))
+        return d.strftime(fmt)
 
     def time(self, fmt=None):
-        """
-        Generate a random time formatted for the locale or as specified.
+        """Generate a random time formatted for the locale or as specified.
 
         :return: Time.
         :Example:
             21:30:00 (en)
         """
-        # TODO: Not cool. Refactor it.
-        t = time(randint(0, 23), randint(0, 59),
-                 randint(0, 59), randint(0, 999999))
-        return t.strftime(fmt or self.data['formats']['time'])
+        fmt = fmt or self.data['formats']['time']
+        t = datetime.time(randint(0, 23),
+                          randint(0, 59),
+                          randint(0, 59),
+                          randint(0, 999999)
+                          )
+        return t.strftime(fmt)
 
     @staticmethod
     def day_of_month():
-        """
-        Static method for generate a random days of month, from 1 to 31.
+        """Generate a random day of month, from 1 to 31.
 
         :returns: Random value from 1 to 31.
         :Example:
@@ -1493,8 +1495,7 @@ class Network(object):
 
     @staticmethod
     def ip_v4():
-        """
-        Static method for generate a random IPv4 address.
+        """Generate a random IPv4 address.
 
         :returns: Random IPv4 address.
         :Example:
@@ -1505,15 +1506,14 @@ class Network(object):
 
     @staticmethod
     def ip_v6():
-        """
-        Static method for generate a random IPv6 address.
+        """Generate a random IPv6 address.
 
         :returns: Random IPv6 address.
         :Example:
             2001:c244:cf9d:1fb1:c56d:f52c:8a04:94f3
         """
-        n = 16 ** 4
-        ip = "2001:" + ":".join("%x" % randint(0, n) for _ in range(7))
+        ip = "2001:" + ":".join(
+            "%x" % randint(0, 16 ** 4) for _ in range(7))
         return ip
 
     @staticmethod
@@ -1541,8 +1541,7 @@ class File(object):
 
     @staticmethod
     def extension(file_type='text'):
-        """
-        Get a random file extension from list.
+        """Get a random file extension from list.
 
         :param file_type: The type of extension.
 
@@ -1604,8 +1603,7 @@ class Science(object):
 
     @staticmethod
     def math_formula():
-        """
-        Get a random mathematical formula.
+        """Get a random mathematical formula.
 
         :returns: Math formula.
         :Example:
@@ -1615,27 +1613,27 @@ class Science(object):
         return formula
 
     def chemical_element(self, name_only=True):
-        """
-        Get a random chemical element from file.
+        """Generate a random chemical element.
 
         :param name_only: if False then will be returned dict.
         :returns: Name of chemical element or dict.
         :Example:
             {'Symbol': 'S', 'Name': 'Sulfur', 'Atomic number': '16'}
         """
-        e = choice(self._data['chemical_element']).split('|')
+        elements = self._data['chemical_element']
+        nm, sm, an = choice(elements).split('|')
+
         if not name_only:
             return {
-                'name': e[0].strip(),
-                'symbol': e[1].strip(),
-                'atomic_number': e[2].strip()
+                'name': nm.strip(),
+                'symbol': sm.strip(),
+                'atomic_number': an.strip()
             }
-        else:
-            return e[0]
+
+        return nm.strip()
 
     def scientific_article(self):
-        """
-        Get a random link to scientific article on Wikipedia.
+        """Generate a random link to scientific article on Wikipedia.
 
         :returns: Link to article on Wikipedia.
         :Example:
@@ -1737,8 +1735,7 @@ class Development(object):
             return choice(common.BACKEND)
 
     def stack_of_tech(self, nosql=False):
-        """
-        Get a random stack.
+        """Generate a random stack.
 
         :param nosql: When nosql=True the only NoSQL skills.
         :returns: Dict of technologies.
@@ -1929,8 +1926,8 @@ class Hardware(object):
         :Example:
             Cannonlake.
         """
-        cn = common.CPU_CODENAMES
-        return choice(cn)
+        code_names = common.CPU_CODENAMES
+        return choice(code_names)
 
     @staticmethod
     def ram_type():
@@ -1941,8 +1938,8 @@ class Hardware(object):
         :Example:
             DDR3.
         """
-        tp = ('DDR2', 'DDR3', 'DDR4')
-        return choice(tp)
+        ram_types = ('DDR2', 'DDR3', 'DDR4')
+        return choice(ram_types)
 
     @staticmethod
     def ram_size():
@@ -1990,16 +1987,15 @@ class Hardware(object):
         return choice(common.MANUFACTURERS)
 
     def hardware_info(self):
-        """
-        Get a random full information about device (laptop).
+        """Generate a random full information about device (laptop).
 
-        :returns: Full information.
+        :return: Full information.
         :Example:
             ASUS Intel® Core i3 3rd Generation 3.50 GHz/1920x1200/12″/
             512GB HDD(7200 RPM)/DDR2-4GB/Intel® Iris™ Pro Graphics 6200.
         """
-        pattern = '{0} {1}-{2} CPU @ {3}/{4}/{5}/{6}/{7}-{8}/{9}.'
-        full = pattern.format(
+        fmt = '%s %s-%s CPU @ %s/%s/%s/%s/%s-%s/%s.'
+        fmt = fmt % (
             self.manufacturer(),
             self.cpu(),
             self.generation(abbr=True),
@@ -2009,9 +2005,8 @@ class Hardware(object):
             self.ssd_or_hdd(),
             self.ram_type(),
             self.ram_size(),
-            self.graphics()
-        )
-        return full
+            self.graphics())
+        return fmt
 
     @staticmethod
     def phone_model():
@@ -2060,25 +2055,16 @@ class ClothingSizes(object):
         return size
 
     @staticmethod
-    def custom(minimum=40, maximum=62, even=False):
-        """
-        Generate clothing size using custom format.
+    def custom(minimum=40, maximum=62):
+        """Generate clothing size using custom format.
 
         :param minimum: Min value.
         :param maximum: Max value
-        :param even: Only even numbers.
         :return: Clothing size.
         :Example:
             44
         """
-        mi, ma = minimum, maximum
-
-        if even:
-            sizes = [i for i in range(mi, ma) if i % 2 == 0]
-        else:
-            sizes = [_ for _ in range(mi, ma)]
-
-        return choice(sizes)
+        return randint(int(minimum), int(maximum))
 
 
 class Internet(object):
@@ -2098,8 +2084,14 @@ class Internet(object):
 
     @staticmethod
     def image_placeholder(width='400', height='300'):
-        url = 'http://placehold.it/{0}x{1}'.format(width, height)
-        return url
+        """Generate a link to the image placeholder.
+
+        :param width: Width of image.
+        :param height: Height of image.
+        :return: URL to image placeholder.
+        """
+        url = 'http://placehold.it/%sx%s'
+        return url % (width, height)
 
     @staticmethod
     def hashtags(quantity=4, category='general'):
@@ -2140,8 +2132,8 @@ class Internet(object):
         :Example:
             ['#love', '#sky', '#nice'].
         """
-        k = category.lower()
-        tags = [choice(common.HASHTAGS[k]) for _ in range(int(quantity))]
+        hashtags = common.HASHTAGS[category.lower()]
+        tags = [choice(hashtags) for _ in range(int(quantity))]
         return tags
 
     @staticmethod
@@ -2184,16 +2176,15 @@ class Internet(object):
         """
         url = 'http://www.' + Personal.username(gender)
         domain = choice(common.DOMAINS)
-        return '{}{}'.format(url, domain)
+        return '%s%s' % (url, domain)
 
     @staticmethod
     def subreddit(nsfw=False, full_url=False):
-        """
-        Get a random subreddit from list.
+        """Get a random subreddit from the list.
 
         :param nsfw: NSFW subreddit.
         :param full_url: Full URL address.
-        :returns: Subreddit or URL to subreddit.
+        :return: Subreddit or URL to subreddit.
         :Example:
             https://www.reddit.com/r/flask/
         """
@@ -2210,16 +2201,14 @@ class Internet(object):
 
     @staticmethod
     def user_agent():
-        """
-        Get a random user agent.
+        """Get a random user agent.
 
-        :returns: User agent.
+        :return: User agent.
         :Example:
             Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:15.0)
             Gecko/20100101 Firefox/15.0.1
         """
-        agent = choice(common.USER_AGENTS)
-        return agent
+        return choice(common.USER_AGENTS)
 
 
 class Transport(object):
@@ -2266,7 +2255,6 @@ class Transport(object):
         """
         model = self._model(mask=model_mask)
         plane = choice(common.AIRPLANES)
-
         return '%s %s' % (plane, model)
 
 
@@ -2343,18 +2331,14 @@ class Path(object):
         :Example:
             /home/sherrell/Development/Python/mercenary
         """
-        dev_folder = 'Development'
+        dev_folder = choice(('Development', 'Dev'))
         stack = choice(common.PROGRAMMING_LANGS)
+        user = self.user(user_gender)
 
-        return os.path.join(
-            self.user(user_gender),
-            dev_folder,
-            stack
-        )
+        return os.path.join(user, dev_folder, stack)
 
     def project_dir(self, user_gender='female'):
-        """
-        Generate a random path to project directory.
+        """Generate a random path to project directory.
 
         :param user_gender: Gender of user.
         :return: Path to project.
@@ -2363,14 +2347,11 @@ class Path(object):
         """
         project = choice(common.PROJECT_NAMES)
         return os.path.join(
-            self.dev_dir(user_gender),
-            project
-        )
+            self.dev_dir(user_gender), project)
 
 
 class Generic(object):
-    """
-    A lazy initialization of locale for all classes that have locales.
+    """A lazy initialization of locale for all classes that have locales.
     """
 
     def __init__(self, locale):
@@ -2405,6 +2386,7 @@ class Generic(object):
 
     def add_provider(self, cls):
         if inspect.isclass(cls):
+            name = ''
             if hasattr(cls, 'Meta'):
                 if inspect.isclass(cls.Meta) and hasattr(cls.Meta, 'name'):
                     name = cls.Meta.name
