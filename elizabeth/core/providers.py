@@ -304,6 +304,9 @@ class Structured(object):
     """Provider for structured text data such as CSS, Delimited, HTML, etc."""
 
     def __init__(self, locale='en'):
+        """
+        :param locale: Current locale.
+        """
         self.locale = locale
         self.datetime = Datetime(self.locale)
         self.internet = Internet()
@@ -420,6 +423,9 @@ class Text(object):
     """Class for generate text data, i.e text, lorem ipsum and another."""
 
     def __init__(self, locale='en'):
+        """
+        :param locale: Current locale.
+        """
         self.locale = locale
         self.data = pull('text.json', self.locale)
 
@@ -575,6 +581,9 @@ class Code(object):
     """Class that provides methods for generating codes (isbn, asin & etc.)"""
 
     def __init__(self, locale):
+        """
+        :param locale: Current locale.
+        """
         self.locale = locale
 
     def __str__(self):
@@ -674,6 +683,9 @@ class Business(object):
     """Class for generating data for business."""
 
     def __init__(self, locale='en'):
+        """
+        :param locale: Current locale.
+        """
         self.locale = locale
         self.data = pull('business.json', self.locale)
 
@@ -759,6 +771,9 @@ class Personal(object):
     """Class for generate personal data, i.e names, surnames, age and another."""
 
     def __init__(self, locale='en'):
+        """
+        :param locale: Current locale.
+        """
         self.locale = locale
         # TODO: This should be self._data.
         self.data = pull('personal.json', self.locale)
@@ -1265,6 +1280,9 @@ class Datetime(object):
     working with date and time."""
 
     def __init__(self, locale='en'):
+        """
+        :param locale: Current locale.
+        """
         self.locale = locale
         self.data = pull('datetime.json', self.locale)
 
@@ -1644,6 +1662,9 @@ class Food(object):
     """Class for Food, i.e fruits, vegetables, berries and other."""
 
     def __init__(self, locale='en'):
+        """
+        :param locale: Current locale.
+        """
         self.lang = locale
         self._data = pull('food.json', self.lang)
 
