@@ -1,6 +1,3 @@
-# =============
-# HARDWARE
-# =============
 RESOLUTIONS = [
     "1152x768",
     "1280x854",
@@ -292,4 +289,3 @@ PHONE_MODELS = [
     "Sony Xperia XZ",
     "Sony Xperia Z5 Premium"
 ]
-
