@@ -1,14 +1,13 @@
 import functools
 import json
-
 import os.path as path
+import urllib.request as request
 
 from elizabeth.exceptions import UnsupportedLocale
 
-__all__ = ['pull', 'locale_information']
+__all__ = ['pull']
 
-PATH = path.abspath(
-    path.join(path.dirname(__file__), 'data'))
+PATH = path.abspath(path.join(path.dirname(__file__), 'data'))
 
 SUPPORTED_LOCALES = {
     "cs": {
@@ -99,8 +98,8 @@ SUPPORTED_LOCALES = {
 
 
 def locale_information(locale: str) -> str:
-    """
-    Return name (in english) or local name of the locale
+    """Return name (in english) or local name of the locale
+
     :param locale: Locale abbreviation.
     :type locale: str
     :returns: Locale name.
@@ -120,8 +119,7 @@ def locale_information(locale: str) -> str:
 
 
 def luhn_checksum(num) -> str:
-    """
-    Calculate a checksum for num using the Luhn algorithm.
+    """Calculate a checksum for num using the Luhn algorithm.
 
     See: https://en.wikipedia.org/wiki/Luhn_algorithm
     :param num: The number to calculate a checksum for as a string
@@ -145,8 +143,7 @@ def luhn_checksum(num) -> str:
 
 @functools.lru_cache(maxsize=None)
 def pull(file, locale='en') -> dict:
-    """
-    Open file and get content from file. Memorize result using lru_cache.
+    """Open file and get content from file. Memorize result using lru_cache.
 
     pull - is internal function, please do not use this function outside
     the module 'elizabeth'.
@@ -223,3 +220,25 @@ def pull(file, locale='en') -> dict:
         data = json.load(f)
 
     return data
+
+
+def download_image(url, save_path='', unverified_ctx=False):
+    """Download image and save in current directory on local machine.
+
+    :param url: URL to image.
+    :param save_path: Saving path.
+    :param unverified_ctx: Create unverified context. Use if you get CERTIFICATE_VERIFY_FAILED.
+    :return: Image name.
+    :rtype: str
+    :Example:
+        f88684c22086d4bb3983159fb1e95c22.png
+    """
+    if unverified_ctx:
+        import ssl
+        ssl._create_default_https_context = ssl._create_unverified_context
+
+    if url is not None:
+        image_name = url.rsplit('/')[-1]
+        request.urlretrieve(url, save_path + image_name)
+        return image_name
+    return None
