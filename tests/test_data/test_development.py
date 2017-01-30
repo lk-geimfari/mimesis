@@ -41,16 +41,13 @@ class DevelopmentTest(TestCase):
         result = self.dev.other()
         self.assertIn(result, common.OTHER_TECH)
 
-    def test_framework(self):
-        result = self.dev.framework(_type='front')
+    def test_frontend(self):
+        result = self.dev.frontend()
         self.assertIn(result, common.FRONTEND)
 
-        _result = self.dev.framework(_type='back')
+    def test_backend(self):
+        _result = self.dev.backend()
         self.assertIn(_result, common.BACKEND)
-
-    def test_stack_of_tech(self):
-        result = self.dev.stack_of_tech(nosql=True)
-        self.assertIsInstance(result, dict)
 
     def test_os(self):
         result = self.dev.os()

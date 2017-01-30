@@ -123,7 +123,6 @@ SQL = (
 )
 
 BACKEND = [
-    "C#",
     "C#/ASP.NET",
     "Java",
     "Java/Tapestry",
