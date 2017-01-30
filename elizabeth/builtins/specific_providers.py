@@ -4,7 +4,6 @@ from elizabeth.core import Code
 from elizabeth.exceptions import JSONKeyError
 from elizabeth.utils import pull
 
-# TODO: Rename provider to *SpecificProvider, where * is locale code.
 __all__ = [
     'USASpecProvider',
     'BrazilSpecProvider',
@@ -24,8 +23,7 @@ class BrazilSpecProvider(object):
 
     @staticmethod
     def cpf(with_mask=True):
-        """
-        Get a random CPF (brazilian social security code)
+        """Get a random CPF (brazilian social security code)
 
         :param with_mask: use CPF mask (###.###.###-##) in the return
         :returns: Random CPF
@@ -34,8 +32,7 @@ class BrazilSpecProvider(object):
         """
 
         def get_verifying_digit_cpf(cpf, peso):
-            """
-            Calculates the verifying digit for the CPF
+            """Calculates the verifying digit for the CPF
 
             :param cpf: ist of integers with the CPF
             :param peso: Integer with the weight for the modulo 11 calculate
@@ -64,8 +61,7 @@ class BrazilSpecProvider(object):
 
     @staticmethod
     def cnpj(with_mask=True):
-        """
-        Get a random cnpj (brazilian social security code)
+        """Get a random cnpj (brazilian social security code)
 
         :param with_mask: use cnpj mask (###.###.###-##) in the return
         :returns: Random cnpj
@@ -74,8 +70,7 @@ class BrazilSpecProvider(object):
         """
 
         def get_verifying_digit_cnpj(cnpj, peso):
-            """
-            Calculates the verifying digit for the cnpj
+            """Calculates the verifying digit for the cnpj
             :param cnpj: list of integers with the cnpj
             :param peso: integer with the weigth for the modulo 11 calcule
             :returns: the verifying digit for the cnpj
@@ -116,8 +111,7 @@ class USASpecProvider(object):
 
     @staticmethod
     def tracking_number(service='usps'):
-        """
-        Generate random tracking number for USPS, FedEx and UPS.
+        """Generate random tracking number for USPS, FedEx and UPS.
         :param service:
         :return:
         """
@@ -142,8 +136,7 @@ class USASpecProvider(object):
 
     @staticmethod
     def ssn():
-        """
-        Generate a random, but valid Social Security Number.
+        """Generate a random, but valid Social Security Number.
 
         :returns: Random SSN
         :Example:
@@ -159,8 +152,7 @@ class USASpecProvider(object):
 
     @staticmethod
     def personality(category='mbti'):
-        """
-        Generate a type of personality.
+        """Generate a type of personality.
 
         :param category: Category.
         :return: Personality type.
@@ -185,9 +177,19 @@ class RussiaSpecProvider(object):
         name = 'russia_provider'
 
     @staticmethod
-    def patronymic(gender='female'):
+    def generate_sentence():
+        """Generate sentence from the parts.
+
+        :return: Sentence.
+        :rtype: str
         """
-        Generate random patronymic name.
+        data = pull('text.json', 'ru')['sentence']
+        sentence = [choice(data[k]) for k in ('head', 'p1', 'p2', 'tail')]
+        return '{0} {1} {2} {3}'.format(*sentence)
+
+    @staticmethod
+    def patronymic(gender='female'):
+        """Generate random patronymic name.
 
         :param gender: Gender of person.
         :return: Patronymic name.
@@ -205,8 +207,7 @@ class RussiaSpecProvider(object):
 
     @staticmethod
     def passport_series(year=None):
-        """
-        Generate random series of passport.
+        """Generate random series of passport.
 
         :param year: Year of manufacture.
         :return: Series.
@@ -221,8 +222,7 @@ class RussiaSpecProvider(object):
 
     @staticmethod
     def passport_number():
-        """
-        Generate random passport number.
+        """Generate random passport number.
 
         :return: Number.
         :Example:
@@ -231,8 +231,7 @@ class RussiaSpecProvider(object):
         return _custom_code(mask='######')
 
     def series_and_number(self):
-        """
-        Generate a random passport number and series.
+        """Generate a random passport number and series.
 
         :return: Series and number.
         :Example:
@@ -252,8 +251,7 @@ class JapanSpecProvider(object):
 
     @staticmethod
     def full_to_half(text, alnum=True):
-        """
-        Convert all full width katakana, alphanumeric and few special
+        """Convert all full width katakana, alphanumeric and few special
         characters like （, ）, ・ to equivalent half width character.
 
         :param text: The text to be converted.
@@ -279,14 +277,14 @@ class JapanSpecProvider(object):
             "ィ": "ｨ", "ゥ": "ｩ", "ェ": "ｪ", "ォ": "ｫ", "ッ": "ｯ", "ャ": "ｬ",
             "ュ": "ｭ", "ョ": "ｮ", "！": "!", "＂": "\"", "＃": "#", "＄": "$",
             "％": "%", "＆": "&", "＇": "'", "（": "(", "）": ")", "＊": "*",
-            "＋": "+", "ー": "ｰ", "／": "/",  "：": ":", "；": ";",
+            "＋": "+", "ー": "ｰ", "／": "/", "：": ":", "；": ";",
             "＜": "<", "＝": "=", "＞": ">", "？": "?", "＠": "@", "［": "[",
             "＼": "\\", "］": "]", "＾": "^", "＿": "_", "｀": "`", "｛": "{",
-            "｜": "|", "｝": "}", "～": "~", "・": "･",  "「": "｢", "」": "｣"
+            "｜": "|", "｝": "}", "～": "~", "・": "･", "「": "｢", "」": "｣"
         }
         # leaving "。": "｡", "、": "," out for now
 
-        _fh_alnum_offset = 65248 # 0xFEE0
+        _fh_alnum_offset = 65248  # 0xFEE0
         result = ""
         for char in text:
             if char in fh_kana_special:
@@ -299,8 +297,7 @@ class JapanSpecProvider(object):
 
     @staticmethod
     def half_to_full(text, alnum=True):
-        """
-        Convert all half width katakana, alphanumeric, and special characters
+        """Convert all half width katakana, alphanumeric, and special characters
         ((, ), ) to equivalent full width character.
 
         :param text: The text to be converted.
@@ -330,17 +327,16 @@ class JapanSpecProvider(object):
             "ﾕ": "ユ", "ﾖ": "ヨ", "ﾗ": "ラ", "ﾘ": "リ", "ﾙ": "ル", "ﾚ": "レ",
             "ﾛ": "ロ", "ﾜ": "ワ", "ｦ": "ヲ", "ﾝ": "ン", "ｧ": "ァ", "ｨ": "ィ",
             "ｩ": "ゥ", "ｪ": "ェ", "ｫ": "ォ", "ｯ": "ッ", "ｬ": "ャ", "ｭ": "ュ",
-            "ｮ": "ョ", "!": "！", "\"":"＂", "#": "＃", "$":"＄", "%": "％",
+            "ｮ": "ョ", "!": "！", "\"": "＂", "#": "＃", "$": "＄", "%": "％",
             "&": "＆", "'": "＇", "(": "（", ")": "）", "*": "＊", "+": "＋",
-            "ｰ": "ー", "/": "／",  ":": "：", ";": "；", "<": "＜", "=": "＝",
+            "ｰ": "ー", "/": "／", ":": "：", ";": "；", "<": "＜", "=": "＝",
             ">": "＞", "?": "？", "@": "＠", "[": "［", "\\": "＼", "]": "］",
             "^": "＾", "_": "＿", "`": "｀", "{": "｛", "|": "｜", "}": "｝",
             "~": "～", "･": "・", "｢": "「", "｣": "」"
         }
 
         def hf_parse(char, result):
-            """
-            Parse the char from half-width to full-width, append to result,
+            """Parse the char from half-width to full-width, append to result,
             and return result.
 
             :param char: Character to be parsed from half-width to full-width.
@@ -363,7 +359,7 @@ class JapanSpecProvider(object):
             # need to lookahead for separate voice mark
             pair = text[i] + text[i + 1]
             if (text[i + 1] == "ﾞ" or text[i + 1] == "ﾟ") and \
-                pair in hf_voiced_kana:
+                    pair in hf_voiced_kana:
                 result += hf_voiced_kana[pair]
                 i += 2
                 continue
@@ -375,4 +371,3 @@ class JapanSpecProvider(object):
             result = hf_parse(text[i], result)
 
         return result
-
