@@ -11,7 +11,7 @@ from ._patterns import STR_REGEX
 
 class StructuredBaseTest(TestCase):
     def setUp(self):
-        self.structured = Structured()
+        self.structured = Structured('en')
 
     def tearDown(self):
         del self.structured
@@ -39,7 +39,7 @@ class StructuredBaseTest(TestCase):
         with self.assertRaises(NotImplementedError):
             common.HTML_CONTAINER_TAGS['div']['class'] = "bogus"
             from elizabeth.core.providers import Structured
-            Structured().html_attribute_value("div", "class")
+            Structured('en').html_attribute_value("div", "class")
 
     def test_html(self):
         result = self.structured.html()

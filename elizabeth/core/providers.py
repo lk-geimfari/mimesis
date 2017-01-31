@@ -308,9 +308,7 @@ class Structured(object):
         :param locale: Current locale.
         """
         self.locale = locale
-        self.datetime = Datetime(self.locale)
         self.internet = Internet()
-        self.personal = Personal(self.locale)
         self.text = Text(self.locale)
 
     def __str__(self):

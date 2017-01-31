@@ -10,7 +10,7 @@ from ._patterns import STR_REGEX
 
 class TextBaseTest(TestCase):
     def setUp(self):
-        self.text = Text()
+        self.text = Text('en')
 
     def tearDown(self):
         del self.text
