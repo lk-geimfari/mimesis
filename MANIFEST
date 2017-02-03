@@ -2,7 +2,9 @@
 setup.cfg
 setup.py
 elizabeth/__init__.py
+elizabeth/decorators.py
 elizabeth/exceptions.py
+elizabeth/settings.py
 elizabeth/utils.py
 elizabeth/builtins/__init__.py
 elizabeth/builtins/specific_providers.py
@@ -10,16 +12,11 @@ elizabeth/core/__init__.py
 elizabeth/core/providers.py
 elizabeth/core/interdata/__init__.py
 elizabeth/core/interdata/address.py
-elizabeth/core/interdata/business.py
 elizabeth/core/interdata/code.py
-elizabeth/core/interdata/datetime.py
 elizabeth/core/interdata/development.py
-elizabeth/core/interdata/file.py
 elizabeth/core/interdata/hardware.py
 elizabeth/core/interdata/internet.py
 elizabeth/core/interdata/path.py
-elizabeth/core/interdata/personal.py
-elizabeth/core/interdata/science.py
 elizabeth/core/interdata/structured.py
 elizabeth/core/interdata/transport.py
 elizabeth/data/cs/address.json
@@ -176,3 +173,10 @@ elizabeth/data/sv/food.json
 elizabeth/data/sv/personal.json
 elizabeth/data/sv/science.json
 elizabeth/data/sv/text.json
+elizabeth/data/tr/address.json
+elizabeth/data/tr/business.json
+elizabeth/data/tr/datetime.json
+elizabeth/data/tr/food.json
+elizabeth/data/tr/personal.json
+elizabeth/data/tr/science.json
+elizabeth/data/tr/text.json
