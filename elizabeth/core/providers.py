@@ -169,7 +169,21 @@ class Address(object):
 
         return Code.custom_code(mask)
 
-    def country(self, iso_code=False):
+    @staticmethod
+    def country_iso(fmt=None):
+        """Get a random ISO code of country.
+
+        :param fmt: Format of code (iso2, iso3, numeric).
+        :return: ISO Code.
+        :Example:
+            DE
+        """
+        if not fmt:
+            fmt = 'iso2'
+        countries = common.COUNTRIES_ISO[fmt]
+        return choice(countries)
+
+    def country(self):
         """Get a random country.
 
         :param iso_code: Return only ISO code of country.
@@ -177,9 +191,6 @@ class Address(object):
         :Example:
             Russia.
         """
-        if iso_code:
-            return choice(common.COUNTRIES_ISO)
-
         countries = self.data['country']['name']
         return choice(countries)
 

@@ -80,8 +80,19 @@ class AddressTestCase(DummyCase):
         result = self.generic.address.country()
         self.assertTrue(self.generic.address.data['country']['name'], result)
 
-        result_iso = self.generic.address.country(iso_code=True)
-        self.assertIn(result_iso, common.COUNTRIES_ISO)
+    def test_country_iso(self):
+        iso2 = self.generic.address.country_iso(fmt='iso2')
+        self.assertIn(iso2, common.COUNTRIES_ISO['iso2'])
+        self.assertTrue(len(iso2) == 2)
+
+        iso3 = self.generic.address.country_iso(fmt='iso3')
+        self.assertIn(iso3, common.COUNTRIES_ISO['iso3'])
+        self.assertTrue(len(iso3) == 3)
+
+        numeric = self.generic.address.country_iso(fmt='numeric')
+        self.assertIn(numeric, common.COUNTRIES_ISO['numeric'])
+        self.assertTrue(len(numeric) == 3)
+        self.assertTrue(numeric.isdigit())
 
     def test_city(self):
         result = self.generic.address.city()
