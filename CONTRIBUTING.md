@@ -22,6 +22,7 @@
 
 - [Battleroid](https://github.com/Battleroid) - Contributor.
 - [Costava](https://github.com/Costava) - Contributor.
+- [Eliz](https://github.com/el) - Contributor (`tr`).
 - [FliegendeWurst](https://github.com/FliegendeWurst) - Contributor.
 - [Uncleleech](https://github.com/Uncleleech)  - Contributor.
 - [aminalaee](https://github.com/aminalaee) - Contributor (`fa`).
