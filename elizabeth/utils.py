@@ -107,6 +107,8 @@ def pull(file, locale='en') -> dict:
     +------------------------------+--------------+
     | sv - Swedish                 | (data/sv)    |
     +------------------------------+--------------+
+    | tr - Turkish                 | (data/tr)    |
+    +------------------------------+--------------+
 
     :param file: The name of file.
     :param locale: Locale.
