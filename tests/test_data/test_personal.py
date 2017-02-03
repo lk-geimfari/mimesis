@@ -180,7 +180,7 @@ class PersonalTestCase(DummyCase):
 
     def test_telephone(self):
         result = self.generic.personal.telephone()
-        self.assertTrue(len(result) >= 11)
+        self.assertIsNotNone(result)
 
         mask = '+5 (###)-###-##-##'
         result2 = self.generic.personal.telephone(mask=mask)

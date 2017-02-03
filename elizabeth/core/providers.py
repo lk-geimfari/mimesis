@@ -1211,15 +1211,14 @@ class Personal(object):
         :Example:
             +7-(963)-409-11-22.
         """
+        # Default
+        df = '+#-(###)-###-####'
+
         if not mask:
-            masks = common.TELEPHONE_MASKS
-            if self.locale in masks:
-                mask = masks[self.locale]
-            else:
-                mask = masks['default']
+            masks = self.data.get('telephone_fmt', df)
+            mask = choice(masks)
 
         _ = Code.custom_code
-
         return _(mask=mask, digit=placeholder)
 
     def avatar(self, size=256):

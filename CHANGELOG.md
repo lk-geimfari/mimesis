@@ -1,5 +1,14 @@
 ## Changelog
 
+
+### Version 0.3.15
+ - Added `tr` locale
+ - Moved `SUPPORTED_LOCALES` to `setting.py`
+ - Moved telephone_fmt to json files
+ - Other minor improvements
+
+---
+
 ### Version 0.3.14
  - Moved address_fmt to json file
  - Moved postal_code_fmt to json file
