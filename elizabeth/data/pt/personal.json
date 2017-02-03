@@ -3901,5 +3901,9 @@
     "Ubandista",
     "Xinoísta",
     "Outro"
+  ],
+  "telephone_fmt": [
+	"+351 # #### ####",
+	"+351 ## #### ####"
   ]
 }
