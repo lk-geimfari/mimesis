@@ -86,5 +86,6 @@ class CzechTest(LocaleBase, TestCase):
 class JapaneseTest(LocaleBase, TestCase):
     LANG = 'jp'
 
+
 class TurkishTest(LocaleBase, TestCase):
     LANG = 'tr'

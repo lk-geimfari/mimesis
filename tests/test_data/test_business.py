@@ -52,7 +52,7 @@ class BusinessTestCase(DummyCase):
         self.assertIn(result, self.generic.business.data['company']['name'])
 
     def test_price(self):
-        currencies = ('kr', '€', 'R$', '₽', '$', 'zł', '﷼', "£", 'Ft', '₩', 'Kč', '¥')
+        currencies  = common.CURRENCY_SYMBOLS[self.generic.business.locale]
         result = self.generic.business.price(minimum=100.00, maximum=1999.99)
         price, symbol = result.split(' ')
         self.assertTrue((float(price) >= 100.00) and (float(price) <= 2000))
