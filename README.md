@@ -72,6 +72,7 @@ You can specify a locale when creating providers and they will return data that 
 | 19 | 🇧🇷   |  `pt-br`   | Brazilian Portuguese | Português Brasileiro |
 | 20 | 🇷🇺   |  `ru`      | Russian              | Русский     |
 | 21 | 🇸🇪   |  `sv`      | Swedish              | Svenska     |
+| 21 | 🇹🇷   |  `tr`      | Turkish              | Türkçe      |
 
 Using locales:
 
