@@ -84,6 +84,10 @@ SUPPORTED_LOCALES = {
     "sv": {
         "name": "Swedish",
         "name_local": "Svenska"
+    },
+    "tr": {
+        "name": "Turkish",
+        "name_local": "Türkçe"
     }
 }
 
