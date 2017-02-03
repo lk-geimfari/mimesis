@@ -51,7 +51,7 @@ ISBN_GROUPS = {
     "pt-br": "85",
     "ru": "5",
     "sv": "91",
-    "tr": "90"
+    "tr": "605"
 }
 
 CURRENCY_SYMBOLS = {
