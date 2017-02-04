@@ -47,7 +47,7 @@ Also you can install it manually:
 
 ## Locales
 
-You can specify a locale when creating providers and they will return data that is appropriate for the language or country associated with that locale.  `Elizabeth` currently includes support for 21 different locales:
+You can specify a locale when creating providers and they will return data that is appropriate for the language or country associated with that locale.  `Elizabeth` currently includes support for 22 different locales:
 
 | №  | Flag  | Code       | Name                 | Native name |
 |--- |---    |---         |---                   |---          |
