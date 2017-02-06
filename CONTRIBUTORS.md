@@ -1,3 +1,7 @@
+## Creator & Maintainer
+
+ - [lk-geimfari](https://github.com/lk-geimfari)
+
 
 ## Contributors
 
@@ -18,7 +22,6 @@
 - [jasonwaiting-dev](https://github.com/jasonwaiting-dev) - Contributor (`jp`).
 - [jeromechrist](https://github.com/jeromechrist) - Contributor.
 - [jlwt90](https://github.com/jlwt90) - Contributor.
-- [lk-geimfari](https://github.com/lk-geimfari) - Inventor of `Elizabeth`.
 - [martini97](https://github.com/martini97) - Contributor.
 - [mipaaa](https://github.com/mipaaa) - Contributor.
 - [mrcrilly](https://github.com/mrcrilly) - Contributor.
