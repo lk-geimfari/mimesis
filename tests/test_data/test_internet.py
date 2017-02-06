@@ -65,3 +65,22 @@ class InternetTest(TestCase):
     def test_image_placeholder(self):
         result = self.net.image_placeholder(width=400, height=300)
         self.assertIsNotNone(result)
+
+    def test_stock_image(self):
+        result = self.net.stock_image()
+        self.assertIsNotNone(result)
+
+        result_2 = self.net.stock_image(category='nature')
+        result_2 = result_2.split('/')[-2]
+        self.assertEqual(result_2, 'nature')
+
+        result_3 = self.net.stock_image(width=1900, height=1080)
+        result_3 = result_3.split('/')[-1]
+        self.assertEqual(result_3, '1900x1080')
+
+
+    def test_image_by_keyword(self):
+        result = self.net.image_by_keyword(keyword='word')
+        result = result.split('/')[-1]
+        result = result.split('?')[1]
+        self.assertEqual('word', result)

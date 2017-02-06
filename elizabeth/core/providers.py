@@ -1955,6 +1955,47 @@ class Internet(object):
         return url % (width, height)
 
     @staticmethod
+    def stock_image(category=None, width=1900, height=1080):
+        """Get a random beautiful stock image that hosted on Unsplash.com
+
+        :param category: Category of image. Available categories: 'buildings', 'food', 'nature',
+        'people', 'technology', 'objects'
+        :param width: Width of image.
+        :param height: Height of image.
+        :return: An image (Link to image).
+        """
+        url = 'https://source.unsplash.com/category/{category}/{width}x{height}'
+
+        categories = (
+            'buildings', 'food', 'nature',
+            'people', 'technology', 'objects'
+        )
+
+        if not category or category not in categories:
+            category = choice(categories)
+
+        return url.format(category=category, width=width, height=height)
+
+    @staticmethod
+    def image_by_keyword(keyword=None):
+        """Get a random image by the keyword.
+
+        :param keyword: Keyword.
+        :return: An image.
+        """
+        url = 'https://source.unsplash.com/weekly?{keyword}'
+
+        keywords = ('cat', 'girl', 'boy',
+                    'beauty', 'nature', 'woman',
+                    'man', 'tech', 'space',
+                    )
+
+        if not keyword:
+            keyword = choice(keywords)
+
+        return url.format(keyword=keyword)
+
+    @staticmethod
     def hashtags(quantity=4, category='general'):
         """Create a list of hashtags (for Instagram, Twitter etc.)
 
