@@ -254,10 +254,10 @@ class PersonalTestCase(DummyCase):
         self.assertIn(result, self.generic.personal.data['political_views'])
 
     def test_title(self):
-        result = self.generic.personal.title(type_='typical')
+        result = self.generic.personal.title(title_type='typical')
         self.assertIsInstance(result, str)
 
-        result2 = self.generic.personal.title(type_='academic')
+        result2 = self.generic.personal.title(title_type='academic')
         self.assertIsInstance(result2, str)
 
     def test_nationality(self):

@@ -862,24 +862,16 @@ class Personal(object):
 
         return choice(self.data['surnames'])
 
-    def title(self, gender='female', type_='typical'):
+    def title(self, gender='female', title_type='typical'):
         """Get a random title (prefix/suffix) for name.
 
         :param gender: The gender.
-        :param type_:  The type of title. Available types: \
-        +-------------------+-------------------------+ \
-        | Key of type       |      An example (M/F)   | \
-        +===================+=========================+ \
-        | typical           |      Mr./Mrs.           | \
-        +-------------------+-------------------------+ \
-        | academic          |      PhD, Dr.           | \
-        +-------------------+-------------------------+
-
+        :param title_type:  The type of title. Available types: 'typical' and 'academic'.
         :return: The title.
         :Example:
             PhD.
         """
-        t = self.data['title'][gender][type_]
+        t = self.data['title'][gender][title_type]
         return choice(t)
 
     def full_name(self, gender='female', reverse=False):
@@ -1454,29 +1446,8 @@ class File(object):
     def extension(file_type='text'):
         """Get a random file extension from list.
 
-        :param file_type: The type of extension.
-
-        All supported file types:
-        +------------------------------+---------------+
-        | File type                    | Examples      |
-        +==============================+===============+
-        | Source file                  | .py, .erl, go |
-        +------------------------------+---------------+
-        | Text file                    | .doc, .txt    |
-        +------------------------------+---------------+
-        | Data file                    | .csv, .dat    |
-        +------------------------------+---------------+
-        | Audio file                   | .mp3, .flac   |
-        +------------------------------+---------------+
-        | Video file                   | .avi, .mp4    |
-        +------------------------------+---------------+
-        | Image file                   | .jpg, .png    |
-        +------------------------------+---------------+
-        | Executable file              | .exe, .apk    |
-        +------------------------------+---------------+
-        | Compressed file              | .zip, .war    |
-        +------------------------------+---------------+
-
+        :param file_type: File type (source, text, data, audio, video, image,
+        executable, compressed).
         :return: Extension of a file.
         :Example:
             .py (file_type='source').
@@ -1978,17 +1949,12 @@ class Internet(object):
 
     @staticmethod
     def image_by_keyword(keyword=None):
-        """Get a random image by the keyword.
-
-        :param keyword: Keyword.
-        :return: An image.
-        """
         url = 'https://source.unsplash.com/weekly?{keyword}'
 
-        keywords = ('cat', 'girl', 'boy',
+        keywords = ['cat', 'girl', 'boy',
                     'beauty', 'nature', 'woman',
-                    'man', 'tech', 'space',
-                    )
+                    'man', 'tech', 'space', 'science'
+                    ]
 
         if not keyword:
             keyword = choice(keywords)
@@ -2000,35 +1966,8 @@ class Internet(object):
         """Create a list of hashtags (for Instagram, Twitter etc.)
 
         :param quantity: The quantity of hashtags.
-        :param category: The category of hashtags.
-
-        Available categories:
-        +----------------------+-----------------------+
-        | Category             | Examples              |
-        +==============================+===============+
-        | general              | #nice, #day, #tree    |
-        +------------------------------+---------------+
-        | girls                | #beautiful, #beauty   |
-        +------------------------------+---------------+
-        | love                 | #love, #romantic      |
-        +------------------------------+---------------+
-        | boys                 | #guys, #dude          |
-        +------------------------------+---------------+
-        | friends              |  #crazy, #party       |
-        +------------------------------+---------------+
-        | family               |  #fam, #sister        |
-        +------------------------------+---------------+
-        | nature               | #nature, #tree        |
-        +------------------------------+---------------+
-        | travel               | #nature, #sunset      |
-        +------------------------------+---------------+
-        | cars                 | #car, #ride, #drive   |
-        +------------------------------+---------------+
-        | sport                | #soccer, #game        |
-        +------------------------------+---------------+
-        | tumblr               | #perfect, #tumblr     |
-        +----------------------+-----------------------+
-
+        :param category: The category of hashtags. Available categories: general, girls, love, boys,
+        friends, family, nature, travel, cars, sport, tumblr
         :return: The list of hashtags.
         :Example:
             ['#love', '#sky', '#nice'].
