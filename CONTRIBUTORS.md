@@ -1,34 +1,33 @@
-## Creator & Maintainer
+### Creator & Maintainer
+ - Likid Geimfari [(lk-geimfari)](https://github.com/lk-geimfari)
 
- - [lk-geimfari](https://github.com/lk-geimfari)
+###  Inspirer
+ - Sobolev Nikita [(sobolevn)](https://github.com/sobolevn)
 
 
-## Contributors
-
-- [Battleroid](https://github.com/Battleroid) - Contributor.
-- [Costava](https://github.com/Costava) - Contributor.
-- [Eliz](https://github.com/el) - Contributor (`tr`).
-- [FliegendeWurst](https://github.com/FliegendeWurst) - Contributor.
-- [Uncleleech](https://github.com/Uncleleech)  - Contributor.
-- [aminalaee](https://github.com/aminalaee) - Contributor (`fa`).
-- [auyer](https://github.com/auyer) - Contributor (`pt-br`).
-- [bderusha](https://github.com/bderusha) - Contributor.
-- [bderusha](https://github.com/bderusha) - Contributor.
-- [cl0ne](https://github.com/cl0ne) - Contributor.
-- [crayxt](https://github.com/crayxt) - Contributor.
-- [drpoggi](https://github.com/drpoggi) - Contributor.
-- [fcurella](https://github.com/fcurella) - Contributor.
-- [jackmcmorrow](https://github.com/jackmcmorrow) - Contributor (`pt-br`).
-- [jasonwaiting-dev](https://github.com/jasonwaiting-dev) - Contributor (`jp`).
-- [jeromechrist](https://github.com/jeromechrist) - Contributor.
-- [jlwt90](https://github.com/jlwt90) - Contributor.
-- [martini97](https://github.com/martini97) - Contributor.
-- [mipaaa](https://github.com/mipaaa) - Contributor.
-- [mrcrilly](https://github.com/mrcrilly) - Contributor.
-- [offermann](https://github.com/offermann) - Contributor.
-- [ranwise](https://github.com/ranwise) - Contributor.
-- [redus](https://github.com/redus) - Contributor (`ko`).
-- [sammyshj](https://github.com/sammyshj) - Contributor.
-- [sobolevn](https://github.com/sobolevn) - Contributor. Inspirer.
-- [wikkiewikkie](https://github.com/wikkiewikkie) - Contributor.
-- [yn-coder](https://github.com/yn-coder) - Contributor.
+### Contributors
+- [Battleroid](https://github.com/Battleroid)
+- [Costava](https://github.com/Costava)
+- [Eliz](https://github.com/el) (`tr`).
+- [FliegendeWurst](https://github.com/FliegendeWurst)
+- [Uncleleech](https://github.com/Uncleleech)
+- [aminalaee](https://github.com/aminalaee) (`fa`).
+- [auyer](https://github.com/auyer) (`pt-br`).
+- [bderusha](https://github.com/bderusha)
+- [cl0ne](https://github.com/cl0ne)
+- [crayxt](https://github.com/crayxt)
+- [drpoggi](https://github.com/drpoggi)
+- [fcurella](https://github.com/fcurella)
+- [jackmcmorrow](https://github.com/jackmcmorrow) (`pt-br`).
+- [jasonwaiting-dev](https://github.com/jasonwaiting-dev) (`jp`).
+- [jeromechrist](https://github.com/jeromechrist)
+- [jlwt90](https://github.com/jlwt90)
+- [martini97](https://github.com/martini97)
+- [mipaaa](https://github.com/mipaaa)
+- [mrcrilly](https://github.com/mrcrilly)
+- [offermann](https://github.com/offermann)
+- [ranwise](https://github.com/ranwise)
+- [redus](https://github.com/redus) (`ko`).
+- [sammyshj](https://github.com/sammyshj)
+- [wikkiewikkie](https://github.com/wikkiewikkie)
+- [yn-coder](https://github.com/yn-coder)
