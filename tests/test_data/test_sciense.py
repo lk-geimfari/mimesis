@@ -4,7 +4,8 @@ import re
 from unittest import TestCase
 
 from elizabeth import Science
-import elizabeth.core.interdata as common
+from elizabeth.core.interdata import MATH_FORMULAS
+
 from tests.test_data import DummyCase
 from ._patterns import STR_REGEX
 
@@ -21,7 +22,7 @@ class ScienceBaseTest(TestCase):
 
     def test_math_formula(self):
         result = self.science.math_formula()
-        self.assertIn(result, common.MATH_FORMULAS)
+        self.assertIn(result, MATH_FORMULAS)
 
 
 class ScienceTestCase(DummyCase):

@@ -4,7 +4,7 @@ import re
 from unittest import TestCase
 
 from elizabeth import Address
-import elizabeth.core.interdata as common
+from elizabeth.core.interdata import COUNTRIES_ISO
 
 from tests.test_data import DummyCase
 from ._patterns import POSTAL_CODE_REGEX, STR_REGEX
@@ -82,15 +82,15 @@ class AddressTestCase(DummyCase):
 
     def test_country_iso(self):
         iso2 = self.generic.address.country_iso(fmt='iso2')
-        self.assertIn(iso2, common.COUNTRIES_ISO['iso2'])
+        self.assertIn(iso2, COUNTRIES_ISO['iso2'])
         self.assertTrue(len(iso2) == 2)
 
         iso3 = self.generic.address.country_iso(fmt='iso3')
-        self.assertIn(iso3, common.COUNTRIES_ISO['iso3'])
+        self.assertIn(iso3, COUNTRIES_ISO['iso3'])
         self.assertTrue(len(iso3) == 3)
 
         numeric = self.generic.address.country_iso(fmt='numeric')
-        self.assertIn(numeric, common.COUNTRIES_ISO['numeric'])
+        self.assertIn(numeric, COUNTRIES_ISO['numeric'])
         self.assertTrue(len(numeric) == 3)
         self.assertTrue(numeric.isdigit())
 

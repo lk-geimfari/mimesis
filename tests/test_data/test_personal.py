@@ -4,7 +4,10 @@ import re
 from unittest import TestCase
 
 from elizabeth import Personal
-import elizabeth.core.interdata as common
+from elizabeth.core.interdata import (
+    FAVORITE_MUSIC_GENRE, SEXUALITY_SYMBOLS,
+    BLOOD_GROUPS, GENDER_SYMBOLS
+)
 
 from tests.test_data import DummyCase
 from ._patterns import *
@@ -126,7 +129,7 @@ class PersonalBaseTest(TestCase):
 
     def test_blood_type(self):
         result = self.personal.blood_type()
-        self.assertIn(result, common.BLOOD_GROUPS)
+        self.assertIn(result, BLOOD_GROUPS)
 
     def test_favorite_movie(self):
         result = self.personal.favorite_movie()
@@ -134,7 +137,7 @@ class PersonalBaseTest(TestCase):
 
     def test_favorite_music_genre(self):
         result = self.personal.favorite_music_genre()
-        self.assertIn(result, common.FAVORITE_MUSIC_GENRE)
+        self.assertIn(result, FAVORITE_MUSIC_GENRE)
 
     def test_avatar(self):
         result = self.personal.avatar(size=512)
@@ -147,13 +150,7 @@ class PersonalBaseTest(TestCase):
         mask = '##-##/##'
         self.assertEqual(len(mask), len(result))
 
-        result = self.personal.identifier(mask='##', suffix=True)
-        lst = result.split()
-        _id, sfx = lst[0], lst[1]
-        self.assertEqual(len(_id), 2)
-        self.assertEqual(len(sfx), 2)
-
-        result = self.personal.identifier(suffix=True)
+        result = self.personal.identifier(mask='##-##/## @@')
         suffix = result.split(' ')[1]
         self.assertTrue(suffix.isalpha())
 
@@ -216,14 +213,14 @@ class PersonalTestCase(DummyCase):
         self.assertIn(result, self.generic.personal.data['gender'])
 
         symbol = self.generic.personal.gender(symbol=True)
-        self.assertIn(symbol, common.GENDER_SYMBOLS)
+        self.assertIn(symbol, GENDER_SYMBOLS)
 
     def test_sexual_orientation(self):
         result = self.generic.personal.sexual_orientation()
         self.assertIn(result, self.generic.personal.data['sexuality'])
 
         symbol = self.generic.personal.sexual_orientation(symbol=True)
-        self.assertIn(symbol, common.SEXUALITY_SYMBOLS)
+        self.assertIn(symbol, SEXUALITY_SYMBOLS)
 
     def test_profession(self):
         result = self.generic.personal.occupation()

@@ -3,7 +3,7 @@
 from unittest import TestCase
 
 from elizabeth.core.providers import Transport
-import elizabeth.core.interdata as common
+from elizabeth.core.interdata import CAR, TRUCKS, AIRPLANES
 
 
 class TransportTest(TestCase):
@@ -16,21 +16,21 @@ class TransportTest(TestCase):
     def test_truck(self):
         result = self.transport.truck().split('-')
         manufacturer, model = result[0], result[1]
-        self.assertIn(manufacturer, common.TRUCKS)
+        self.assertIn(manufacturer, TRUCKS)
         self.assertTrue(len(model) == 7)
 
         result = self.transport.truck(model_mask='###').split('-')
         manufacturer, model = result[0], result[1]
-        self.assertIn(manufacturer, common.TRUCKS)
+        self.assertIn(manufacturer, TRUCKS)
         self.assertTrue(len(model) == 3)
 
     def test_car(self):
         result = self.transport.car()
-        self.assertIn(result, common.CAR)
+        self.assertIn(result, CAR)
 
     def test_airplane(self):
         mask = '@###'
         result = self.transport.airplane(model_mask=mask).split()
         manufacturer, model = result[0], result[1]
-        self.assertIn(manufacturer, common.AIRPLANES)
+        self.assertIn(manufacturer, AIRPLANES)
         self.assertTrue(len(model) == len(mask))

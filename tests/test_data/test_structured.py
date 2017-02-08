@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
 import re
-import csv
 
 from elizabeth.core.providers import Structured
 from unittest import TestCase
 
-from elizabeth.core import interdata as common
+from elizabeth.core.interdata import HTML_CONTAINER_TAGS
 from ._patterns import STR_REGEX
 
 
@@ -37,7 +36,7 @@ class StructuredBaseTest(TestCase):
         with self.assertRaises(NotImplementedError):
             self.structured.html_attribute_value("a", "bogus")
         with self.assertRaises(NotImplementedError):
-            common.HTML_CONTAINER_TAGS['div']['class'] = "bogus"
+            HTML_CONTAINER_TAGS['div']['class'] = "bogus"
             from elizabeth.core.providers import Structured
             Structured('en').html_attribute_value("div", "class")
 

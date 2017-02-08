@@ -53,7 +53,6 @@ ROMANIZATION_ALPHABETS = {
     }
 }
 
-# Business
 CURRENCY = [
     "AED",
     "AFN",
@@ -182,7 +181,6 @@ CURRENCY = [
     "ZMK"
 ]
 
-# Datetime
 ROMAN_NUMS = [
     'I',
     'II',
@@ -207,7 +205,6 @@ ROMAN_NUMS = [
     'XXI'
 ]
 
-# File
 EXTENSIONS = {
     "source": [
         ".a",
@@ -375,7 +372,6 @@ MIME_TYPES = [
     "video/x-flv"
 ]
 
-# Science
 MATH_FORMULAS = [
     "A = (ab)/2",
     "A = a2",
@@ -395,7 +391,6 @@ MATH_FORMULAS = [
     "V - E + F = 2"
 ]
 
-# Personal
 BLOOD_GROUPS = (
     'O+', 'A+', 'B+', 'AB+',
     'O−', 'A−', 'B−', 'AB−'

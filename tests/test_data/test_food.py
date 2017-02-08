@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import re
+
 from tests.test_data import DummyCase
 from ._patterns import STR_REGEX
 

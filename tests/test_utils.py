@@ -2,9 +2,7 @@
 
 import unittest
 
-from elizabeth.exceptions import (
-    UnsupportedLocale
-)
+from elizabeth.exceptions import UnsupportedLocale
 from elizabeth.utils import (
     pull, luhn_checksum,
     locale_information, download_image
@@ -20,11 +18,10 @@ class UtilsTest(unittest.TestCase):
 
         self.assertIsNotNone(data['views_on'])
         self.assertIsInstance(data['views_on'], list)
-        self.assertRaises(
-            UnsupportedLocale, lambda: pull('personal.json', 'w'))
-
-        self.assertRaises(
-            FileNotFoundError, lambda: pull('something.json', 'en'))
+        self.assertRaises(UnsupportedLocale,
+                          lambda: pull('personal.json', 'w'))
+        self.assertRaises(FileNotFoundError,
+                          lambda: pull('something.json', 'en'))
 
     def test_download_image(self):
         result = download_image(url=None)
@@ -36,6 +33,5 @@ class UtilsTest(unittest.TestCase):
 
         result_1 = locale_information(locale='is')
         self.assertEqual(result_1, 'Icelandic')
-
-        self.assertRaises(
-            UnsupportedLocale, lambda: locale_information(locale='w'))
+        self.assertRaises(UnsupportedLocale,
+                          lambda: locale_information(locale='w'))

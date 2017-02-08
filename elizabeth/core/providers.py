@@ -31,7 +31,7 @@ from string import (
     punctuation
 )
 
-from elizabeth.core import interdata as common
+from elizabeth.core import interdata as intd
 
 from elizabeth.utils import (
     pull,
@@ -87,7 +87,6 @@ class Address(object):
         :Example:
             134.
         """
-
         number = randint(1, int(maximum))
         return '%s' % number
 
@@ -120,7 +119,7 @@ class Address(object):
         """
         fmt = self.data['address_fmt']
 
-        if self.locale in common.SHORTENED_ADDRESS_FMT:
+        if self.locale in intd.SHORTENED_ADDRESS_FMT:
             # Because fmt for ko is {st_name}{st_sfx} {st_num},
             # i.e not shortened address format
             if self.locale != 'ko':
@@ -148,7 +147,7 @@ class Address(object):
     def state(self, abbr=False):
         """Get a random states or subject of country.
 
-        :param abbr: If True then return ISO (ISO 3166-2) \
+        :param abbr: If True then return ISO (ISO 3166-2)
         code of state/region/province/subject.
         :return: State of current country.
         :Example:
@@ -166,7 +165,6 @@ class Address(object):
             389213
         """
         mask = self.data['postal_code_fmt']
-
         return Code.custom_code(mask)
 
     @staticmethod
@@ -180,7 +178,8 @@ class Address(object):
         """
         if not fmt:
             fmt = 'iso2'
-        countries = common.COUNTRIES_ISO[fmt]
+
+        countries = intd.COUNTRIES_ISO[fmt]
         return choice(countries)
 
     def country(self):
@@ -265,8 +264,7 @@ class Numbers(object):
         :return: An array of floating-point numbers.
         """
         nums = array.array(type_code, (random() for _ in range(10 ** int(n))))
-        nums = nums.tolist() if to_list else nums
-        return nums
+        return nums.tolist() if to_list else nums
 
     @staticmethod
     def primes(start=1, end=999, to_list=False):
@@ -284,8 +282,7 @@ class Numbers(object):
         :return: An array of floating-point numbers.
         """
         nums = array.array('L', (i for i in range(start, end) if i % 2))
-        nums = nums.tolist() if to_list else nums
-        return nums
+        return nums.tolist() if to_list else nums
 
     @staticmethod
     def digit(to_bin=False):
@@ -296,9 +293,12 @@ class Numbers(object):
         :Example:
             4.
         """
+        digit = randint(0, 9)
+
         if to_bin:
-            return bin(randint(0, 9))
-        return randint(0, 9)
+            return bin(digit)
+
+        return digit
 
     @staticmethod
     def between(minimum=1, maximum=1000):
@@ -342,11 +342,11 @@ class Structured(object):
                 padding-right: 65em
             }'
         """
-        selector = choice(common.CSS_SELECTORS)
+        selector = choice(intd.CSS_SELECTORS)
         css_selector = "%s%s" % (selector, self.text.word())
 
-        html_cont_keys = choice(list(common.HTML_CONTAINER_TAGS.keys()))
-        html_mrk_tag = choice(common.HTML_MARKUP_TAGS)
+        html_cont_keys = choice(list(intd.HTML_CONTAINER_TAGS.keys()))
+        html_mrk_tag = choice(intd.HTML_MARKUP_TAGS)
 
         base = "{}".format(choice([html_cont_keys, html_mrk_tag, css_selector]))
         props = "; ".join([self.css_property() for _ in range(randint(1, 6))])
@@ -360,15 +360,15 @@ class Structured(object):
         :Examples:
             'background-color: #f4d3a1'
         """
-        prop = choice(list(common.CSS_PROPERTIES.keys()))
-        val = common.CSS_PROPERTIES[prop]
+        prop = choice(list(intd.CSS_PROPERTIES.keys()))
+        val = intd.CSS_PROPERTIES[prop]
 
         if isinstance(val, list):
             val = choice(val)
         elif val == "color":
             val = self.text.hex_color()
         elif val == "size":
-            val = "{}{}".format(randint(1, 99), choice(common.CSS_SIZE_UNITS))
+            val = "{}{}".format(randint(1, 99), choice(intd.CSS_SIZE_UNITS))
 
         return "{}: {}".format(prop, val)
 
@@ -382,8 +382,8 @@ class Structured(object):
                 Ports are created with the built-in function open_port.
             </span>'
         """
-        tag_name = choice(list(common.HTML_CONTAINER_TAGS))
-        tag_attributes = list(common.HTML_CONTAINER_TAGS[tag_name])
+        tag_name = choice(list(intd.HTML_CONTAINER_TAGS))
+        tag_attributes = list(intd.HTML_CONTAINER_TAGS[tag_name])
         k = randint(1, len(tag_attributes))
 
         selected_attrs = sample(tag_attributes, k=k)
@@ -393,10 +393,12 @@ class Structured(object):
             attrs.append("{}=\"{}\"".format(
                 attr, self.html_attribute_value(tag_name, attr)))
 
-        return "<{tag} {attrs}>{content}</{tag}>".format(
+        html_result = "<{tag} {attrs}>{content}</{tag}>"
+        return html_result.format(
             tag=tag_name,
             attrs=" ".join(attrs),
-            content=self.text.sentence())
+            content=self.text.sentence()
+        )
 
     def html_attribute_value(self, tag, attribute):
         """Random value for specified HTML tag attribute.
@@ -409,7 +411,7 @@ class Structured(object):
         :rtype: str
         """
         try:
-            value = common.HTML_CONTAINER_TAGS[tag][attribute]
+            value = intd.HTML_CONTAINER_TAGS[tag][attribute]
         except KeyError:
             raise NotImplementedError(
                 "Tag {} or attribute {} is not supported".format(tag, attribute))
@@ -510,7 +512,6 @@ class Text(object):
         :Example:
             science, network, god, octopus, love.
         """
-
         words = self.data['words']['normal']
         words_list = [choice(words) for _ in range(int(quantity))]
         return words_list
@@ -578,6 +579,7 @@ class Text(object):
         :Example:
             33.4 °C.
         """
+        # TODO: Rewrite it
         n = randint(minimum, maximum)
         # Convert to Fahrenheit
         n = (n * 1.8) + 32 if scale.lower() == 'f' else n
@@ -642,10 +644,9 @@ class Code(object):
         :Example:
             132-1-15411-375-8.
         """
+        groups = intd.ISBN_GROUPS
 
-        groups = common.ISBN_GROUPS
-
-        mask = '###-{}-#####-###-#' if \
+        mask = '###-{0}-#####-###-#' if \
             fmt == 'isbn-13' else '{0}-#####-###-#'
 
         if self.locale in groups:
@@ -675,7 +676,7 @@ class Code(object):
         :Example:
         353918052107063
         """
-        num = choice(common.IMEI_TACS) + self.custom_code(mask='######')
+        num = choice(intd.IMEI_TACS) + self.custom_code(mask='######')
         return num + luhn_checksum(num)
 
     def pin(self, mask='####'):
@@ -753,7 +754,7 @@ class Business(object):
         :Example:
             RUR.
         """
-        return choice(common.CURRENCY)
+        return choice(intd.CURRENCY)
 
     def price(self, minimum=10.00, maximum=1000.00):
         """Generate a random price.
@@ -764,7 +765,7 @@ class Business(object):
         :Example:
             599.99 $.
         """
-        currencies = common.CURRENCY_SYMBOLS
+        currencies = intd.CURRENCY_SYMBOLS
 
         price = uniform(minimum, maximum)
 
@@ -884,10 +885,13 @@ class Personal(object):
         :Example:
             Johann Wolfgang.
         """
-        sex = gender.lower()
+        gender = gender.lower()
+
         fmt = '{1} {0}' if reverse else '{0} {1}'
-        fn = fmt.format(self.name(sex), self.surname(sex))
-        return fn
+        return fmt.format(
+            self.name(gender),
+            self.surname(gender)
+        )
 
     @staticmethod
     def username(gender='female'):
@@ -942,7 +946,7 @@ class Personal(object):
             foretime10@live.com
         """
         name = Personal.username(gender)
-        email = name + choice(common.EMAIL_DOMAINS)
+        email = name + choice(intd.EMAIL_DOMAINS)
         return email.strip()
 
     @staticmethod
@@ -1043,7 +1047,7 @@ class Personal(object):
             Male (♂ when symbol=True).
         """
         if symbol:
-            return choice(common.GENDER_SYMBOLS)
+            return choice(intd.GENDER_SYMBOLS)
 
         gender = choice(self.data['gender'])
         return gender
@@ -1071,8 +1075,8 @@ class Personal(object):
         :Example:
             48.
         """
-        w = randint(int(minimum), int(maximum))
-        return w
+        weight = randint(int(minimum), int(maximum))
+        return weight
 
     @staticmethod
     def blood_type():
@@ -1082,7 +1086,7 @@ class Personal(object):
         :Example:
             A+
         """
-        return choice(common.BLOOD_GROUPS)
+        return choice(intd.BLOOD_GROUPS)
 
     def sexual_orientation(self, symbol=False):
         """Get a random (LOL) sexual orientation.
@@ -1093,7 +1097,7 @@ class Personal(object):
             Heterosexuality.
         """
         if symbol:
-            return choice(common.SEXUALITY_SYMBOLS)
+            return choice(intd.SEXUALITY_SYMBOLS)
 
         sexuality = self.data['sexuality']
         return choice(sexuality)
@@ -1151,8 +1155,8 @@ class Personal(object):
         if self.locale == 'ru':
             nations = self.data['nationality'][gender]
             return choice(nations)
-        else:
-            return choice(self.data['nationality'])
+
+        return choice(self.data['nationality'])
 
     def university(self):
         """
@@ -1203,7 +1207,7 @@ class Personal(object):
         :Example:
             Ambient.
         """
-        return choice(common.FAVORITE_MUSIC_GENRE)
+        return choice(intd.FAVORITE_MUSIC_GENRE)
 
     def telephone(self, mask=None, placeholder='#'):
         """Generate a random phone number.
@@ -1215,10 +1219,10 @@ class Personal(object):
             +7-(963)-409-11-22.
         """
         # Default
-        df = '+#-(###)-###-####'
+        default = '+#-(###)-###-####'
 
         if not mask:
-            masks = self.data.get('telephone_fmt', df)
+            masks = self.data.get('telephone_fmt', default)
             mask = choice(masks)
 
         _ = Code.custom_code
@@ -1231,29 +1235,21 @@ class Personal(object):
         :Example:
             https://api.adorable.io/avatars/64/875ed3de1604812b3c2b592c05863f47.png
         """
-        # {0} is size of avatar, {1} is hash of avatar.
-        url = 'https://api.adorable.io/avatars/%s/%s.png' % (
-            size, self.password(algorithm='md5'))
-        return url
+        url = 'https://api.adorable.io/avatars/{0}/{1}.png'
+        return url.format(size, self.password(algorithm='md5'))
 
     @staticmethod
-    def identifier(mask='##-##/##', suffix=False):
+    def identifier(mask='##-##/##'):
         """Generate a random identifier by mask. With this method you can generate
         any identifiers that you need. Simply select the mask that you need.
         Here '@' is a placeholder for characters and '#' is placeholder for digits.
 
         :param mask: The mask.
-        :param suffix: Add characters to ID.
         :return: An identifier.
         :Example:
             07-97/04
         """
         _ = Code.custom_code
-
-        if suffix:
-            mask += ' @@'
-            return _(mask=mask)
-
         return _(mask=mask)
 
     @staticmethod
@@ -1337,7 +1333,7 @@ class Datetime(object):
         :Example:
             XXI
         """
-        return choice(common.ROMAN_NUMS)
+        return choice(intd.ROMAN_NUMS)
 
     def periodicity(self):
         """Get a random periodicity string.
@@ -1376,7 +1372,9 @@ class Datetime(object):
         :Example:
             21:30:00 (en)
         """
-        fmt = fmt or self.data['formats']['time']
+        if not fmt:
+            fmt = self.data['formats']['time']
+
         t = datetime.time(randint(0, 23),
                           randint(0, 59),
                           randint(0, 59),
@@ -1407,7 +1405,7 @@ class Network(object):
         :Example:
             19.121.223.58
         """
-        ip = '.'.join([str(randint(0, 255)) for _ in range(0, 4)])
+        ip = '.'.join([str(randint(0, 255)) for _ in range(4)])
         return ip
 
     @staticmethod
@@ -1418,8 +1416,7 @@ class Network(object):
         :Example:
             2001:c244:cf9d:1fb1:c56d:f52c:8a04:94f3
         """
-        ip = "2001:" + ":".join(
-            "%x" % randint(0, 16 ** 4) for _ in range(7))
+        ip = "2001:" + ":".join("%x" % randint(0, 16 ** 4) for _ in range(7))
         return ip
 
     @staticmethod
@@ -1453,7 +1450,7 @@ class File(object):
             .py (file_type='source').
         """
         k = file_type.lower()
-        return choice(common.EXTENSIONS[k])
+        return choice(intd.EXTENSIONS[k])
 
     @staticmethod
     def mime_type():
@@ -1462,7 +1459,7 @@ class File(object):
         :return: Mime type.
         :rtype: str
         """
-        return choice(common.MIME_TYPES)
+        return choice(intd.MIME_TYPES)
 
 
 class Science(object):
@@ -1490,7 +1487,7 @@ class Science(object):
         :Example:
             A = (ab)/2.
         """
-        formula = choice(common.MATH_FORMULAS)
+        formula = choice(intd.MATH_FORMULAS)
         return formula
 
     def chemical_element(self, name_only=True):
@@ -1546,7 +1543,7 @@ class Development(object):
         :Example:
             The BSD 3-Clause License.
         """
-        return choice(common.LICENSES)
+        return choice(intd.LICENSES)
 
     @staticmethod
     def version():
@@ -1569,8 +1566,8 @@ class Development(object):
             PostgreSQL.
         """
         if nosql:
-            return choice(common.NOSQL)
-        return choice(common.SQL)
+            return choice(intd.NOSQL)
+        return choice(intd.SQL)
 
     @staticmethod
     def other():
@@ -1580,7 +1577,7 @@ class Development(object):
         :Example:
             Nginx.
         """
-        return choice(common.OTHER_TECH)
+        return choice(intd.OTHER_TECH)
 
     @staticmethod
     def programming_language():
@@ -1590,7 +1587,7 @@ class Development(object):
         :Example:
             Erlang.
         """
-        return choice(common.PROGRAMMING_LANGS)
+        return choice(intd.PROGRAMMING_LANGS)
 
     @staticmethod
     def backend():
@@ -1600,7 +1597,7 @@ class Development(object):
         :Example:
             Elixir/Phoenix
         """
-        return choice(common.BACKEND)
+        return choice(intd.BACKEND)
 
     @staticmethod
     def frontend():
@@ -1610,7 +1607,7 @@ class Development(object):
         :Example:
             JS/React.
         """
-        return choice(common.FRONTEND)
+        return choice(intd.FRONTEND)
 
     @staticmethod
     def os():
@@ -1620,7 +1617,7 @@ class Development(object):
         :Example:
             Gentoo
         """
-        return choice(common.OS)
+        return choice(intd.OS)
 
     @staticmethod
     def stackoverflow_question():
@@ -1716,7 +1713,7 @@ class Hardware(object):
         :Example:
             1280x720.
         """
-        return choice(common.RESOLUTIONS)
+        return choice(intd.RESOLUTIONS)
 
     @staticmethod
     def screen_size():
@@ -1726,7 +1723,7 @@ class Hardware(object):
         :Example:
             13″.
         """
-        return choice(common.SCREEN_SIZES)
+        return choice(intd.SCREEN_SIZES)
 
     @staticmethod
     def cpu():
@@ -1736,7 +1733,7 @@ class Hardware(object):
         :Example:
             Intel® Core i7.
         """
-        return choice(common.CPU)
+        return choice(intd.CPU)
 
     @staticmethod
     def cpu_frequency():
@@ -1758,9 +1755,9 @@ class Hardware(object):
              6th Generation.
         """
         if not abbr:
-            return choice(common.GENERATION)
+            return choice(intd.GENERATION)
 
-        return choice(common.GENERATION_ABBR)
+        return choice(intd.GENERATION_ABBR)
 
     @staticmethod
     def cpu_codename():
@@ -1770,7 +1767,7 @@ class Hardware(object):
         :Example:
             Cannonlake.
         """
-        code_names = common.CPU_CODENAMES
+        code_names = intd.CPU_CODENAMES
         return choice(code_names)
 
     @staticmethod
@@ -1803,7 +1800,7 @@ class Hardware(object):
         :Example:
             512GB SSD.
         """
-        return choice(common.MEMORY)
+        return choice(intd.MEMORY)
 
     @staticmethod
     def graphics():
@@ -1813,7 +1810,7 @@ class Hardware(object):
         :Example:
             Intel® Iris™ Pro Graphics 6200.
         """
-        return choice(common.GRAPHICS)
+        return choice(intd.GRAPHICS)
 
     @staticmethod
     def manufacturer():
@@ -1823,7 +1820,7 @@ class Hardware(object):
         :Example:
             Dell.
         """
-        return choice(common.MANUFACTURERS)
+        return choice(intd.MANUFACTURERS)
 
     def hardware_info(self):
         """Generate a random full information about device (laptop).
@@ -1855,7 +1852,7 @@ class Hardware(object):
         :Example:
             Nokia Lumia 920.
         """
-        return choice(common.PHONE_MODELS)
+        return choice(intd.PHONE_MODELS)
 
 
 class ClothingSizes(object):
@@ -1912,7 +1909,7 @@ class Internet(object):
         :Example:
             :kissing:
         """
-        return choice(common.EMOJI)
+        return choice(intd.EMOJI)
 
     @staticmethod
     def image_placeholder(width='400', height='300'):
@@ -1972,7 +1969,7 @@ class Internet(object):
         :Example:
             ['#love', '#sky', '#nice'].
         """
-        hashtags = common.HASHTAGS[category.lower()]
+        hashtags = intd.HASHTAGS[category.lower()]
         tags = [choice(hashtags) for _ in range(int(quantity))]
         return tags
 
@@ -2012,7 +2009,7 @@ class Internet(object):
             http://www.font6.info
         """
         url = 'http://www.' + Personal.username(gender)
-        domain = choice(common.DOMAINS)
+        domain = choice(intd.DOMAINS)
         return '%s%s' % (url, domain)
 
     @staticmethod
@@ -2028,11 +2025,11 @@ class Internet(object):
         url = 'http://www.reddit.com'
         if not nsfw:
             if not full_url:
-                return choice(common.SUBREDDITS)
+                return choice(intd.SUBREDDITS)
             else:
-                return url + choice(common.SUBREDDITS)
+                return url + choice(intd.SUBREDDITS)
 
-        nsfw = choice(common.SUBREDDITS_NSFW)
+        nsfw = choice(intd.SUBREDDITS_NSFW)
         result = url + nsfw if full_url else nsfw
         return result
 
@@ -2045,7 +2042,7 @@ class Internet(object):
             Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:15.0)
             Gecko/20100101 Firefox/15.0.1
         """
-        return choice(common.USER_AGENTS)
+        return choice(intd.USER_AGENTS)
 
 
 class Transport(object):
@@ -2064,7 +2061,7 @@ class Transport(object):
             Caledon-966O.
         """
         model = self._model(mask=model_mask)
-        truck = choice(common.TRUCKS)
+        truck = choice(intd.TRUCKS)
         return '%s-%s' % (truck, model)
 
     @staticmethod
@@ -2075,7 +2072,7 @@ class Transport(object):
         :Example:
             Tesla Model S.
         """
-        return choice(common.CAR)
+        return choice(intd.CAR)
 
     def airplane(self, model_mask='###'):
         """Generate a dummy airplane model.
@@ -2087,7 +2084,7 @@ class Transport(object):
             Boeing 727.
         """
         model = self._model(mask=model_mask)
-        plane = choice(common.AIRPLANES)
+        plane = choice(intd.AIRPLANES)
         return '%s %s' % (plane, model)
 
 
@@ -2143,7 +2140,7 @@ class Path(object):
         :Example:
             /home/taneka/Pictures
         """
-        folder = choice(common.FOLDERS)
+        folder = choice(intd.FOLDERS)
         user = self.user(user_gender)
         return os.path.join(user, folder)
 
@@ -2156,7 +2153,7 @@ class Path(object):
             /home/sherrell/Development/Python/mercenary
         """
         dev_folder = choice(('Development', 'Dev'))
-        stack = choice(common.PROGRAMMING_LANGS)
+        stack = choice(intd.PROGRAMMING_LANGS)
         user = self.user(user_gender)
 
         return os.path.join(user, dev_folder, stack)
@@ -2169,7 +2166,7 @@ class Path(object):
         :Example:
             /home/sherika/Development/Falcon/mercenary
         """
-        project = choice(common.PROJECT_NAMES)
+        project = choice(intd.PROJECT_NAMES)
         return os.path.join(
             self.dev_dir(user_gender), project)
 

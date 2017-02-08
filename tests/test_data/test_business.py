@@ -3,7 +3,7 @@ import re
 from unittest import TestCase
 
 from elizabeth import Business
-import elizabeth.core.interdata as common
+from elizabeth.core.interdata import CURRENCY, CURRENCY_SYMBOLS
 from tests.test_data import DummyCase
 
 from ._patterns import STR_REGEX
@@ -34,7 +34,7 @@ class BusinessBaseTest(TestCase):
 
     def test_currency_sio(self):
         result = self.business.currency_iso()
-        self.assertIn(result, common.CURRENCY)
+        self.assertIn(result, CURRENCY)
 
 
 class BusinessTestCase(DummyCase):
@@ -52,7 +52,7 @@ class BusinessTestCase(DummyCase):
         self.assertIn(result, self.generic.business.data['company']['name'])
 
     def test_price(self):
-        currencies  = common.CURRENCY_SYMBOLS[self.generic.business.locale]
+        currencies  = CURRENCY_SYMBOLS[self.generic.business.locale]
         result = self.generic.business.price(minimum=100.00, maximum=1999.99)
         price, symbol = result.split(' ')
         self.assertTrue((float(price) >= 100.00) and (float(price) <= 2000))

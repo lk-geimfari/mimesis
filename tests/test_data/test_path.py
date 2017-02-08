@@ -4,7 +4,11 @@ import sys
 from unittest import TestCase
 
 from elizabeth.core.providers import Path
-import elizabeth.core.interdata as common
+from elizabeth.core.interdata import (
+    PROGRAMMING_LANGS,
+    FOLDERS,
+    PROJECT_NAMES
+)
 
 
 class PathTest(TestCase):
@@ -37,18 +41,18 @@ class PathTest(TestCase):
         folder = self.path.users_folder(user_gender='female')
         folder = folder.split(os.sep)
         self.assertTrue(len(folder) == 4)
-        self.assertIn(folder[3], common.FOLDERS)
+        self.assertIn(folder[3], FOLDERS)
 
     def test_dev_dir(self):
         dev_dir = self.path.dev_dir(user_gender='female')
         # /home/yajaira/Development/Lua
         dev_dir = dev_dir.split(os.sep)
         self.assertTrue(len(dev_dir) == 5)
-        self.assertIn(dev_dir[4], common.PROGRAMMING_LANGS)
+        self.assertIn(dev_dir[4], PROGRAMMING_LANGS)
 
     def test_project_dir(self):
         project_path = self.path.project_dir(user_gender='female')
         project_path = project_path.split(os.sep)
         self.assertTrue(len(project_path) == 6)
         # /home/sherika/Development/Falcon/mercenary
-        self.assertIn(project_path[5], common.PROJECT_NAMES)
+        self.assertIn(project_path[5], PROJECT_NAMES)
