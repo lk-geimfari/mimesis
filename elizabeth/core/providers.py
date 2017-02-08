@@ -31,6 +31,7 @@ from string import (
     punctuation
 )
 
+# intd (acronym International Data)
 from elizabeth.core import interdata as intd
 
 from elizabeth.utils import (
