@@ -1,3 +1,5 @@
+## Supported locales
+
 | №  | Flag  | Code       | Name                 | Native name |
 |--- |---    |---         |---                   |---          |
 | 1  | 🇨🇿   |  `cs`      | Czech                | Česky       |
