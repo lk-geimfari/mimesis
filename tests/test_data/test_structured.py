@@ -16,14 +16,6 @@ class StructuredBaseTest(TestCase):
     def tearDown(self):
         del self.structured
 
-    def depth(self, x):
-        """Calculates depth of object."""
-        if isinstance(x, dict) and x:
-            return 1 + max(self.depth(x[a]) for a in x)
-        if isinstance(x, list) and x:
-            return 1 + max(self.depth(a) for a in x)
-        return 0
-
     def test_str(self):
         self.assertTrue(re.match(STR_REGEX, self.structured.__str__()))
 
@@ -64,3 +56,5 @@ class StructuredBaseTest(TestCase):
         self.assertIsInstance(data, (dict, list))  # root element is container
         _, root = data.popitem()
         self.assertEqual(len(root), 3)  # root container has three items
+
+        self.structured.json('hardware', items=1)
