@@ -52,14 +52,15 @@ class StructuredBaseTest(TestCase):
     def test_html(self):
         result = self.structured.html()
         self.assertEqual(result[0], "<")  # tag is enclosed
-        self.assertEqual(result[-1], ">") # tag is enclosed
+        self.assertEqual(result[-1], ">")  # tag is enclosed
 
     def test_json(self):
-        result = self.structured.json(items=3, max_depth=4)
+        with self.assertRaises(NotImplementedError):
+            self.structured.json('food')
+
+        result = self.structured.json('personal', items=3)
         self.assertIsInstance(result, str)  # returns str
         data = json.loads(result)  # is valid JSON
         self.assertIsInstance(data, (dict, list))  # root element is container
-        self.assertEqual(len(data), 3)  # root container has three items
-        r = self.structured.json(items=3, max_depth=4, _recursive=True)
-        self.assertIsInstance(r, (dict, list))  # recursive returns python object, not JSON
-        self.assertLessEqual(self.depth(r), 4)  # maximum depth of three elements
+        _, root = data.popitem()
+        self.assertEqual(len(root), 3)  # root container has three items

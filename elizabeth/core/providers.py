@@ -429,35 +429,51 @@ class Structured(object):
                 "Attribute type {} is not implemented".format(value))
         return value
 
-    def json(self, items=5, max_depth=3, _recursive=False):
+    def json(self, provider_name, items=5):
         """
         Generate a random snippet of JSON
 
-        :param items: number of top-level items to produce
+        :param provider_name: name of provider to generate JSON data for.
+        :type provider_name: str
+        :param items: number of top-level items to include
         :type items: int
-        :param max_depth: maximum depth of each top-level item
-        :type max_depth: int
-        :param _recursive: When used recursively, will return a \
-        python object instead of JSON string.
-        :type _recursive: bool
         :return: JSON
         :rtype: str
         """
-        root = choice([list, dict])()  # choose root element type
-        for _ in range(items):
-            if max_depth > 0:
-                data = choice([self.text.sentence(),
-                               randint(1, 10000),
-                               random(),
-                               self.json(max_depth=max_depth-1, _recursive=True)])  # choose interior element type
-                if isinstance(root, list):
-                    root.append(data)
-                elif isinstance(root, dict):
-                    root[self.text.word()] = data
+        providers = {
+            'hardware': {
+                'provider': Hardware,
+                'root_element': 'computers',
+            },
+            'personal': {
+                'provider': Personal,
+                'root_element': 'users'
+            }
+        }
 
-        if _recursive:
-            return root
-        return json.dumps(root, indent=4)
+        try:
+            provider_data = providers[provider_name.lower()]
+        except KeyError:
+            raise NotImplementedError("Provider {} is not supported".format(provider_name))
+
+        try:
+            provider = provider_data['provider'](self.locale)
+        except TypeError:  # handle providers that do not accept locale
+            provider = provider_data['provider']()
+
+        root_element = provider_data['root_element']
+
+        data = {root_element: []}
+
+        for _ in range(items):
+            element = dict()
+            for attribute_name in dir(provider):
+                attribute = getattr(provider, attribute_name)
+                if attribute_name[:1] != "_" and callable(attribute):
+                    element[attribute_name] = attribute()
+            data[root_element].append(element)
+
+        return json.dumps(data, indent=4)
 
 
 class Text(object):
