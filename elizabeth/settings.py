@@ -1,3 +1,4 @@
+# settings.py
 # Global settings of Elizabeth library.
 
 SUPPORTED_LOCALES = {

@@ -1,9 +1,6 @@
+# providers.py
 # -*- coding: utf-8 -*-
-"""
-:copyright: (c) 2016 by Likid Geimfari <likid.geimfari@gmail.com>.
-:software_license: MIT, see LICENSES for more details.
-:repository: https://github.com/lk-geimfari/elizabeth
-"""
+
 import os
 import re
 import sys
