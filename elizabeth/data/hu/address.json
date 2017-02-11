@@ -1,4 +1,5 @@
 {
+  "address_fmt": "{st_name} {st_sfx} {st_num}",
   "city": [
 	"Aba",
 	"Abaújszántó",
@@ -1112,5 +1113,6 @@
 	  "Újvilág",
 	  "Ősz"
 	]
-  }
+  },
+  "postal_code_fmt": "####"
 }

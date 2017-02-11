@@ -1,4 +1,5 @@
 {
+  "address_fmt": "{st_num} {st_name} {st_sfx}",
   "city": [
     "Acerra",
     "Acireale",
@@ -678,5 +679,7 @@
       "della Spiga",
       "della Vigna Nuova"
     ]
-  }
+  },
+  "postal_code_fmt": "#####"
+
 }

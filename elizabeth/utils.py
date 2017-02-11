@@ -1,105 +1,41 @@
+# utils.py
+
 import functools
 import json
-
-from os.path import (
-    abspath,
-    dirname,
-    join
-)
+import os.path as path
+import urllib.request as request
 
 from elizabeth.exceptions import UnsupportedLocale
+from elizabeth.settings import SUPPORTED_LOCALES
 
 __all__ = ['pull']
 
-PATH = abspath(join(dirname(__file__), 'data'))
-
-SUPPORTED_LOCALES = {
-    "cs": {
-        'name': 'Czech',
-        'name_local': 'česky',
-    },
-    "da": {
-        "name": "Danish",
-        "name_local": "Dansk"
-    },
-    "de": {
-        "name": "German",
-        "name_local": "Deutsch"
-    },
-    "en": {
-        "name": "English",
-        "name_local": "English"
-    },
-    "en-gb": {
-        "name": "British English",
-        "name_local": "British English"
-    },
-    "es": {
-        "name": "Spanish",
-        "name_local": "Español"
-    },
-    "fa": {
-        "name": "Farsi",
-        "name_local": "فارسی"
-    },
-    "fi": {
-        "name": "Finnish",
-        "name_local": "Suomi"
-    },
-    "fr": {
-        "name": "French",
-        "name_local": "Français"
-    },
-    "hu": {
-        'name': 'Hungarian',
-        'name_local': 'Magyar'
-    },
-    "is": {
-        'name': 'Icelandic',
-        'name_local': 'Íslenska'
-    },
-    "it": {
-        "name": "Italian",
-        "name_local": "Italiano"
-    },
-    "ko": {
-        'name': 'Korean',
-        'name_local': '한국어'
-    },
-    "nl": {
-        'name': 'Dutch',
-        'name_local': 'Nederlands'
-    },
-    "no": {
-        "name": "Norwegian",
-        "name_local": "Norsk"
-    },
-    "pl": {
-        'name': "Polish",
-        'name_local': "Polski"
-    },
-    "pt": {
-        "name": "Portuguese",
-        "name_local": "Português"
-    },
-    "pt-br": {
-        "name": "Brazilian Portuguese",
-        "name_local": "Português Brasileiro"
-    },
-    "ru": {
-        "name": "Russian",
-        "name_local": "Русский"
-    },
-    "sv": {
-        "name": "Swedish",
-        "name_local": "Svenska"
-    }
-}
+PATH = path.abspath(path.join(path.dirname(__file__), 'data'))
 
 
-def luhn_checksum(num):
+def locale_information(locale: str) -> str:
+    """Return name (in english) or local name of the locale
+
+    :param locale: Locale abbreviation.
+    :type locale: str
+    :returns: Locale name.
+    :rtype: str
+    :Example:
+
+    >>> from elizabeth.utils import locale_information
+    >>> locale_information('sv')
+    'Swedish'
     """
-    Calculate a checksum for num using the Luhn algorithm.
+    locale = locale.lower()
+
+    if locale not in SUPPORTED_LOCALES:
+        raise UnsupportedLocale("Locale %s does not supported" % locale)
+
+    return SUPPORTED_LOCALES[locale]['name']
+
+
+def luhn_checksum(num) -> str:
+    """Calculate a checksum for num using the Luhn algorithm.
 
     See: https://en.wikipedia.org/wiki/Luhn_algorithm
     :param num: The number to calculate a checksum for as a string
@@ -110,7 +46,7 @@ def luhn_checksum(num):
 
     >>> from elizabeth.utils import luhn_checksum
     >>> luhn_checksum("7992739871")
-    3
+    '3'
     """
     check = 0
     for i, s in enumerate(reversed([x for x in num])):
@@ -122,9 +58,8 @@ def luhn_checksum(num):
 
 
 @functools.lru_cache(maxsize=None)
-def pull(file, locale='en'):
-    """
-    Open file and get content from file. Memorize result using lru_cache.
+def pull(file, locale='en') -> dict:
+    """Open file and get content from file. Memorize result using lru_cache.
 
     pull - is internal function, please do not use this function outside
     the module 'elizabeth'.
@@ -139,6 +74,8 @@ def pull(file, locale='en'):
     | de - German                  | (data/de)    |
     +------------------------------+--------------+
     | en - English                 | (data/en)    |
+    +------------------------------+--------------+
+    | en-au - Australian English   | (data/en-au) |
     +------------------------------+--------------+
     | en-gb - British English      | (data/en-gb) |
     +------------------------------+--------------+
@@ -158,6 +95,8 @@ def pull(file, locale='en'):
     +------------------------------+--------------+
     | is - Icelandic               | (data/is)    |
     +------------------------------+--------------+
+    | jp - Japanese                | (data/jp)    |
+    +------------------------------+--------------+
     | ko - Korean                  | (data/ko)    |
     +------------------------------+--------------+
     | pl - Polish                  | (data/pl)    |
@@ -172,10 +111,21 @@ def pull(file, locale='en'):
     +------------------------------+--------------+
     | sv - Swedish                 | (data/sv)    |
     +------------------------------+--------------+
+    | tr - Turkish                 | (data/tr)    |
+    +------------------------------+--------------+
 
     :param file: The name of file.
     :param locale: Locale.
     :returns: The content of the file.
+
+    :Example:
+
+        >>> from elizabeth.utils import pull
+        >>> en = pull(file='datetime.json', locale='en')
+        >>> isinstance(en, dict)
+        True
+        >>> en['day']['abbr'][0]
+        'Mon.'
     """
 
     locale = locale.lower()
@@ -183,8 +133,32 @@ def pull(file, locale='en'):
     if locale not in SUPPORTED_LOCALES:
         raise UnsupportedLocale("Locale %s does not supported" % locale)
 
+    file_path = path.join(PATH + '/' + locale, file)
+
     # Needs explicit encoding for Windows
-    with open(join(PATH + '/' + locale, file), 'r', encoding='utf8') as f:
+    with open(file_path, 'r', encoding='utf8') as f:
         data = json.load(f)
 
     return data
+
+
+def download_image(url, save_path='', unverified_ctx=False):
+    """Download image and save in current directory on local machine.
+
+    :param url: URL to image.
+    :param save_path: Saving path.
+    :param unverified_ctx: Create unverified context. Use if you get CERTIFICATE_VERIFY_FAILED.
+    :return: Image name.
+    :rtype: str
+    :Example:
+        f88684c22086d4bb3983159fb1e95c22.png
+    """
+    if unverified_ctx:
+        import ssl
+        ssl._create_default_https_context = ssl._create_unverified_context
+
+    if url is not None:
+        image_name = url.rsplit('/')[-1]
+        request.urlretrieve(url, save_path + image_name)
+        return image_name
+    return None

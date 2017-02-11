@@ -1,4 +1,5 @@
 {
+  "address_fmt": "{st_num} {st_name}",
   "city": [
     "Aach",
     "Aachen",
@@ -2346,5 +2347,7 @@
       "Straße",
       "Allee"
     ]
-  }
+  },
+  "postal_code_fmt": "#####"
+
 }

@@ -1,30 +1,21 @@
 # -*- coding: utf-8 -*-
+"""Elizabeth is a fast and easy to use Python library for generating dummy data for a variety of purposes.
 
-# Copyright (c) 2016 Likid Geimfari (Isaak Uchakaev)  <likid.geimfari@gmail.com>
-#
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-#
-# The above copyright notice and this permission notice shall be included in all
-# copies or substantial portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NON INFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
+This data can be particularly useful during software development and testing.
+For example, it could be used to populate a testing database for a web application with
+user information such as email addresses, usernames, first names, last names, etc.
+Elizabeth uses a JSON-based datastore and does not require any modules that are not in the Python
+standard library. There are over nineteen different data providers available,
+which can produce data related to food, people, computer hardware, transportation, addresses, and more.
 
-# :repository: https://github.com/lk-geimfari/elizabeth
+Copyright (c) 2016 Likid Geimfari (Isaak Uchakaev)  <likid.geimfari@gmail.com>
+Repository: https://github.com/lk-geimfari/elizabeth
+"""
+
 
 from elizabeth.core import *
 
-__version__ = '0.3.11'
+__version__ = '0.3.15'
 __author__ = 'Likid Geimfari'
 
 __all__ = [

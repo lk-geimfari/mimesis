@@ -4,7 +4,10 @@ import re
 from unittest import TestCase
 
 from elizabeth import Personal
-import elizabeth.core.interdata as common
+from elizabeth.core.intd import (
+    FAVORITE_MUSIC_GENRE, SEXUALITY_SYMBOLS,
+    BLOOD_GROUPS, GENDER_SYMBOLS
+)
 
 from tests.test_data import DummyCase
 from ._patterns import *
@@ -17,9 +20,40 @@ class PersonalBaseTest(TestCase):
     def tearDown(self):
         del self.personal
 
+    def test_str(self):
+        self.assertTrue(re.match(STR_REGEX, self.personal.__str__()))
+
     def test_age(self):
         result = self.personal.age(maximum=55)
         self.assertTrue(result <= 55)
+
+    def test_age(self):
+        result = self.personal.age(maximum=55)
+        self.assertTrue(result <= 55)
+
+    def test_age_store(self):
+        result = self.personal._store['age']
+        self.assertEqual(result, 0)
+
+    def test_age_update(self):
+        result = self.personal.age() - self.personal._store['age']  # calling age() should go first
+        self.assertEqual(result, 0)
+
+    def test_child_count(self):
+        result = self.personal.child_count(max_childs=10)
+        self.assertTrue(result <= 10)
+
+    def test_work_experience(self):
+        result = self.personal.work_experience(working_start_age=0) - self.personal._store['age']
+        self.assertEqual(result, 0)
+
+    def test_work_experience_store(self):
+        result = self.personal.work_experience() - self.personal.work_experience()
+        self.assertEqual(result, 0)
+
+    def test_work_experience_extreme(self):
+        result = self.personal.work_experience(working_start_age=100000)
+        self.assertEqual(result, 0)
 
     def test_paypal(self):
         result = self.personal.paypal()
@@ -95,7 +129,7 @@ class PersonalBaseTest(TestCase):
 
     def test_blood_type(self):
         result = self.personal.blood_type()
-        self.assertIn(result, common.BLOOD_GROUPS)
+        self.assertIn(result, BLOOD_GROUPS)
 
     def test_favorite_movie(self):
         result = self.personal.favorite_movie()
@@ -103,26 +137,34 @@ class PersonalBaseTest(TestCase):
 
     def test_favorite_music_genre(self):
         result = self.personal.favorite_music_genre()
-        self.assertIn(result, common.FAVORITE_MUSIC_GENRE)
+        self.assertIn(result, FAVORITE_MUSIC_GENRE)
 
     def test_avatar(self):
-        result = self.personal.avatar()
-        self.assertTrue(len(result) > 20)
+        result = self.personal.avatar(size=512)
+        img, size, *__ = result.split('/')[::-1]
+        self.assertEqual(int(size), 512)
+        self.assertEqual(32, len(img.split('.')[0]))
 
     def test_identifier(self):
         result = self.personal.identifier()
         mask = '##-##/##'
         self.assertEqual(len(mask), len(result))
 
-        result = self.personal.identifier(mask='##', suffix=True)
-        lst = result.split()
-        _id, sfx = lst[0], lst[1]
-        self.assertEqual(len(_id), 2)
-        self.assertEqual(len(sfx), 2)
-
-        result = self.personal.identifier(suffix=True)
+        result = self.personal.identifier(mask='##-##/## @@')
         suffix = result.split(' ')[1]
         self.assertTrue(suffix.isalpha())
+
+    def test_level_of_english(self):
+        result = self.personal.level_of_english()
+        lvl_s = ['Beginner',
+                 'Elementary',
+                 'Pre - Intermediate',
+                 'Intermediate',
+                 'Upper Intermediate',
+                 'Advanced',
+                 'Proficiency'
+                 ]
+        self.assertIn(result, lvl_s)
 
 
 class PersonalTestCase(DummyCase):
@@ -135,7 +177,7 @@ class PersonalTestCase(DummyCase):
 
     def test_telephone(self):
         result = self.generic.personal.telephone()
-        self.assertTrue(len(result) >= 11)
+        self.assertIsNotNone(result)
 
         mask = '+5 (###)-###-##-##'
         result2 = self.generic.personal.telephone(mask=mask)
@@ -171,14 +213,14 @@ class PersonalTestCase(DummyCase):
         self.assertIn(result, self.generic.personal.data['gender'])
 
         symbol = self.generic.personal.gender(symbol=True)
-        self.assertIn(symbol, common.GENDER_SYMBOLS)
+        self.assertIn(symbol, GENDER_SYMBOLS)
 
     def test_sexual_orientation(self):
         result = self.generic.personal.sexual_orientation()
         self.assertIn(result, self.generic.personal.data['sexuality'])
 
         symbol = self.generic.personal.sexual_orientation(symbol=True)
-        self.assertIn(symbol, common.SEXUALITY_SYMBOLS)
+        self.assertIn(symbol, SEXUALITY_SYMBOLS)
 
     def test_profession(self):
         result = self.generic.personal.occupation()
@@ -209,10 +251,10 @@ class PersonalTestCase(DummyCase):
         self.assertIn(result, self.generic.personal.data['political_views'])
 
     def test_title(self):
-        result = self.generic.personal.title(type_='typical')
+        result = self.generic.personal.title(title_type='typical')
         self.assertIsInstance(result, str)
 
-        result2 = self.generic.personal.title(type_='academic')
+        result2 = self.generic.personal.title(title_type='academic')
         self.assertIsInstance(result2, str)
 
     def test_nationality(self):

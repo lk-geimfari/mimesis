@@ -1,0 +1,65 @@
+{
+  "day": {
+	"abbr": [
+	  "Pzt.",
+	  "Sal.",
+	  "Çrş.",
+	  "Prş.",
+	  "Cum.",
+	  "Cts.",
+	  "Paz."
+	],
+	"name": [
+	  "Pazartesi",
+	  "Salı",
+	  "Çarşamba",
+	  "Perşembe",
+	  "Cuma",
+	  "Cumartesi",
+	  "Pazar"
+	]
+  },
+  "formats": {
+	"date": "%d/%m/%Y",
+	"time": "%H:%M:%S"
+  },
+  "month": {
+	"abbr": [
+	  "Ock.",
+	  "Şbt.",
+	  "Mar.",
+	  "Nsn.",
+	  "May.",
+	  "Haz.",
+	  "Tem.",
+	  "Ağs.",
+	  "Eyl.",
+	  "Ekm.",
+	  "Kas.",
+	  "Arl."
+	],
+	"name": [
+	  "Ocak",
+	  "Şubat",
+	  "Mart",
+	  "Nisan",
+	  "Mayıs",
+	  "Haziran",
+	  "Temmuz",
+	  "Ağustos",
+	  "Eylül",
+	  "Ekim",
+	  "Kasım",
+	  "Aralık"
+	]
+  },
+  "periodicity": [
+	"Bir kere",
+	"Hiç",
+	"Sıklıkla",
+	"Günlük",
+	"Haftalık",
+	"Aylık",
+	"Yıllık"
+  ]
+}

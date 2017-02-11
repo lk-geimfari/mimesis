@@ -11,7 +11,7 @@
   <br>
 </p>
 
-**Elizabeth** is a fast and easy to use Python library for generating dummy data for a variety of purposes.  This data can be particularly useful during software development and testing.  For example, it could be used to populate a testing database for a web application with user information such as email addresses, usernames, first names, last names, etc.  Elizabeth uses a JSON-based datastore and does not require any modules that are not in the Python standard library.   There are over eighteen different [data providers](https://github.com/lk-geimfari/elizabeth/blob/master/PROVIDERS.md) available, which can produce data related to food, people, computer hardware, transportation, addresses, and more.
+**Elizabeth** is a fast and easy to use Python library for generating dummy data for a variety of purposes.  This data can be particularly useful during software development and testing.  For example, it could be used to populate a testing database for a web application with user information such as email addresses, usernames, first names, last names, etc.  Elizabeth uses a JSON-based datastore and does not require any modules that are not in the Python standard library. There are over nineteen different [data providers](https://github.com/lk-geimfari/elizabeth/blob/master/PROVIDERS.md) available, which can produce data related to food, people, computer hardware, transportation, addresses, and more.
 
 ## Documentation
 Elizabeth is simple to use, and the below examples should help you get started.  Complete documentation for `Elizabeth` is available here: [http://elizabeth.readthedocs.io/en/latest/](http://elizabeth.readthedocs.io/)
@@ -22,6 +22,14 @@ To install `Elizabeth`, simply:
 ```zsh
 ➜  ~ pip install elizabeth
 ```
+
+Also you can install it manually:
+```zsh
+➜  ~ git clone https://github.com/lk-geimfari/elizabeth.git
+➜  ~ cd elizabeth
+➜  python3 setup.py install
+```
+
 
 ## Basic Usage
 
@@ -39,30 +47,7 @@ To install `Elizabeth`, simply:
 
 ## Locales
 
-You can specify a locale when creating providers and they will return data that is appropriate for the language or country associated with that locale.  `Elizabeth` currently includes support for 20 different locales:
-
-| №  | Flag  | Code       | Name                 | Native name |
-|--- |---   |---        |---                |---         |
-| 1  | 🇨🇿   |  `cs`      | Czech                | Česky       |
-| 2  | 🇩🇰   |  `da`      | Danish               | Dansk       |
-| 3  | 🇩🇪   |  `de`      | German               | Deutsch     |
-| 4  | 🇺🇸   |  `en`      | English              | English     |
-| 5  | 🇬🇧   |  `en-gb`   | British English      | English     |
-| 6  | 🇪🇸   |  `es`      | Spanish              | Español     |
-| 7  | 🇮🇷   |  `fa`      | Farsi                |      فارسی  |
-| 8  | 🇫🇮   |  `fi`      | Finnish              | Suomi       |
-| 9  | 🇫🇷   |  `fr`      | French               | Français    |
-| 10  | 🇭🇺   |  `hu`      | Hungarian            | Magyar      |
-| 11 | 🇮🇸   |  `is`      | Icelandic            | Íslenska    |
-| 12 | 🇮🇹   |  `it`      | Italian              | Italiano    |
-| 13 | 🇰🇷   |  `ko`      | Korean               | 한국어       |
-| 14 | 🇳🇱   |  `nl`      | Dutch                | Nederlands  |
-| 15 | 🇳🇴   |  `no`      | Norwegian            | Norsk       |
-| 16 | 🇵🇱   |  `pl`      | Polish               | Polski      |
-| 17 | 🇵🇹   |  `pt`      | Portuguese           | Português   |
-| 18 | 🇧🇷   |  `pt-br`   | Brazilian Portuguese | Português Brasileiro |
-| 19 | 🇷🇺   |  `ru`      | Russian              | Русский     |
-| 20 | 🇸🇪   |  `sv`      | Swedish              | Svenska     |
+You can specify a locale when creating providers and they will return data that is appropriate for the language or country associated with that locale.  `Elizabeth` currently includes support for 22 different [locales](https://github.com/lk-geimfari/elizabeth/blob/master/LOCALES.md).
 
 Using locales:
 
@@ -168,9 +153,7 @@ and do following:
 >>> Patient()._bootstrap(count=1000, locale='en', gender='female')
 ```
 
-Result:
-
-![en](https://raw.githubusercontent.com/lk-geimfari/elizabeth/master/other/screenshots/en_bootstrap.png)
+Result: [screenshot](https://raw.githubusercontent.com/lk-geimfari/elizabeth/master/other/screenshots/en_bootstrap.png)
 
 ## Custom Providers
 You also can add custom provider to `Generic`.
@@ -201,18 +184,17 @@ You also can add custom provider to `Generic`.
 
 ## Builtins specific data providers
 
-Some countries have data types specific to that country. For example social security numbers in the United States (`en` locale),
-and cadastro de pessoas físicas (CPF) in Brazil (`pt-br` locale).
+Some countries have data types specific to that country. For example social security numbers in the United States (`en` locale), and cadastro de pessoas físicas (CPF) in Brazil (`pt-br` locale).
 
 If you would like to use these country-specific providers, then you must import them explicitly:
 
 ```python
 >>> from elizabeth import Generic
->>> from elizabeth.builtins import Brazil
+>>> from elizabeth.builtins import BrazilSpecProvider
 >>>
 >>> generic = Generic('pt-br')
 >>>
->>> class BrazilProvider(Brazil):
+>>> class BrazilProvider(BrazilSpecProvider):
 >>>     class Meta:
 >>>         name = "brazil_provider"
 >>>
@@ -222,24 +204,21 @@ If you would like to use these country-specific providers, then you must import 
 '001.137.297-40'
 ```
 
-## Like It?
-You can say [thanks](https://saythanks.io/to/lk-geimfari)!
-
 ## Contributing
-Your contributions are always welcome! Please take a look at the [contribution](https://github.com/lk-geimfari/elizabeth/blob/master/CONTRIBUTING.md) guidelines first. [Here](https://github.com/lk-geimfari/elizabeth/blob/master/CONTRIBUTING.md#contributors) you can look a list of our contributors.
+Your contributions are always welcome! Please take a look at the [contribution](https://github.com/lk-geimfari/elizabeth/blob/master/CONTRIBUTING.md) guidelines first. [Here](https://github.com/lk-geimfari/elizabeth/blob/master/CONTRIBUTORS.md) you can look a list of our contributors.
 
 ## Testing
 ```zsh
-➜  ~ git clone https://github.com/lk-geimfari/elizabeth.git
-➜  ~ cd elizabeth/
-➜  ~ python3 -m unittest discover tests
+➜ ~ git clone https://github.com/lk-geimfari/elizabeth.git
+➜ cd elizabeth/
+➜ python3 -m unittest discover tests
 ```
-
-## Change Log
-See [CHANGELOG.md](https://github.com/lk-geimfari/elizabeth/blob/master/CHANGELOG.md).
 
 ## License
 Elizabeth is licensed under the MIT License. See [LICENSE](https://github.com/lk-geimfari/elizabeth/blob/master/LICENSE) for more information.
+
+## Like It?
+You can say [thanks](https://saythanks.io/to/lk-geimfari)!
 
 ## Disclaimer
 The authors assume no responsibility for how you use this library data generated by it.  This library is designed only for developers with good intentions. Do not use the data generated with `Elizabeth` for illegal purposes.

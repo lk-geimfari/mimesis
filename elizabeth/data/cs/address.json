@@ -1,4 +1,5 @@
 {
+  "address_fmt": "{st_name} {st_num}",
   "city": [
 	"Abertamy",
 	"Adamov",
@@ -5471,5 +5472,6 @@
 	  "Žďárská",
 	  "Žďárského"
 	]
-  }
+  },
+  "postal_code_fmt": "### ##"
 }

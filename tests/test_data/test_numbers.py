@@ -3,7 +3,7 @@
 import array
 from unittest import TestCase
 
-from elizabeth.core.elizabeth import Numbers
+from elizabeth.core.providers import Numbers
 
 
 class NumbersTest(TestCase):

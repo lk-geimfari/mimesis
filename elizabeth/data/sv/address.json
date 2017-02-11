@@ -1,4 +1,5 @@
 {
+  "address_fmt": "{st_num} {st_name}",
   "city": [
     "Abbekås",
     "Abborrberget",
@@ -2775,5 +2776,7 @@
       "Östgötagatan",
       "Överskärargränd"
     ]
-  }
+  },
+  "postal_code_fmt": "#####"
+
 }

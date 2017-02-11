@@ -1,17 +1,22 @@
 # -*- coding: utf-8 -*-
-
+import re
 from unittest import TestCase
 
 from elizabeth import Text
 from tests.test_data import DummyCase
 
+from ._patterns import STR_REGEX
+
 
 class TextBaseTest(TestCase):
     def setUp(self):
-        self.text = Text()
+        self.text = Text('en')
 
     def tearDown(self):
         del self.text
+
+    def test_str(self):
+        self.assertTrue(re.match(STR_REGEX, self.text.__str__()))
 
     def test_hex_color(self):
         result = self.text.hex_color()

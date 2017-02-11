@@ -2,7 +2,7 @@
 
 from unittest import TestCase
 
-from elizabeth.core.elizabeth import ClothingSizes
+from elizabeth.core.providers import ClothingSizes
 
 
 class ClothingSizesTest(TestCase):
@@ -27,6 +27,3 @@ class ClothingSizesTest(TestCase):
     def test_custom(self):
         result = self.sizes.custom(minimum=40, maximum=62)
         self.assertTrue((result >= 40) and (result <= 62))
-
-        result_even = self.sizes.custom(even=True)
-        self.assertTrue(result_even % 2 == 0)

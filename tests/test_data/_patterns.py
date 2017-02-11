@@ -24,20 +24,31 @@ USERNAME_REGEX = r'^[a-zA-Z0-9_.-]+$'
 
 CREDIT_CARD_REGEX = r'[\d]+((-|\s)?[\d]+)+'
 
-EN_GB_POST_CODE = r'((([A-PR-UWYZ][0-9])|([A-PR-UWYZ][0-9][0-9])|' \
-                  '([A-PR-UWYZ][A-HK-Y][0-9])|([A-PR-UWYZ][A-HK-Y][0-9][0-9])|' \
-                  '([A-PR-UWYZ][0-9][A-HJKSTUW])|([A-PR-UWYZ][A-HK-Y][0-9][ABEHMNPRVWXY]))) ' \
-                  '|| ((GIR)[ ]?(0AA))|(([A-PR-UWYZ][0-9])[ ]?([0-9][ABD-HJLNPQ-UW-Z]{0,2}))' \
-                  '|(([A-PR-UWYZ][0-9][0-9])[ ]?([0-9][ABD-HJLNPQ-UW-Z]{0,2}))|(([A-PR-UWYZ]' \
-                  '[A-HK-Y0-9][0-9])[ ]?([0-9][ABD-HJLNPQ-UW-Z]{0,2}))|(([A-PR-UWYZ][A-HK-Y0-9]' \
-                  '[0-9][0-9])[ ]?([0-9][ABD-HJLNPQ-UW-Z]{0,2}))|(([A-PR-UWYZ][0-9][A-HJKS-UW0-9])' \
-                  '[ ]?([0-9][ABD-HJLNPQ-UW-Z]{0,2}))|(([A-PR-UWYZ][A-HK-Y0-9][0-9][ABEHMNPRVWXY0-9])' \
-                  '[ ]?([0-9][ABD-HJLNPQ-UW-Z]{0,2}))'
+STR_REGEX = r'^(Address|Business|Code|Datetime|Food|Generic|Personal|Science|Structured|Text):[a-z-]+:(.*)$'
 
-NL_POST_CODE = r'^[1-9][0-9]{3}\s?[a-zA-Z]{2}$'
+_EN_GB_POST_CODE = r'((([A-PR-UWYZ][0-9])|([A-PR-UWYZ][0-9][0-9])|' \
+                   '([A-PR-UWYZ][A-HK-Y][0-9])|([A-PR-UWYZ][A-HK-Y][0-9][0-9])|' \
+                   '([A-PR-UWYZ][0-9][A-HJKSTUW])|([A-PR-UWYZ][A-HK-Y][0-9][ABEHMNPRVWXY]))) ' \
+                   '|| ((GIR)[ ]?(0AA))|(([A-PR-UWYZ][0-9])[ ]?([0-9][ABD-HJLNPQ-UW-Z]{0,2}))' \
+                   '|(([A-PR-UWYZ][0-9][0-9])[ ]?([0-9][ABD-HJLNPQ-UW-Z]{0,2}))|(([A-PR-UWYZ]' \
+                   '[A-HK-Y0-9][0-9])[ ]?([0-9][ABD-HJLNPQ-UW-Z]{0,2}))|(([A-PR-UWYZ][A-HK-Y0-9]' \
+                   '[0-9][0-9])[ ]?([0-9][ABD-HJLNPQ-UW-Z]{0,2}))|(([A-PR-UWYZ][0-9][A-HJKS-UW0-9])' \
+                   '[ ]?([0-9][ABD-HJLNPQ-UW-Z]{0,2}))|(([A-PR-UWYZ][A-HK-Y0-9][0-9][ABEHMNPRVWXY0-9])' \
+                   '[ ]?([0-9][ABD-HJLNPQ-UW-Z]{0,2}))'
 
-PL_POST_CODE = r'\d{2}-\d{3}'
-
-FA_POST_CODE = r'\d{5}-\d{5}'
-
-CS_POST_CODE = r'\d{3}[ ]?\d{2}'
+POSTAL_CODE_REGEX = {
+    'ru': r'[0-9]{6}$',
+    'is': r'[0-9]{3}$',
+    'nl': r'^[1-9][0-9]{3}\s?[a-zA-Z]{2}$',
+    'pl': r'\d{2}-\d{3}',
+    'pt': r'[0-9]{4}$',
+    'no': r'[0-9]{4}$',
+    'da': r'DK-[0-9]{4}$',
+    'en-gb': _EN_GB_POST_CODE,
+    'fa': r'\d{5}-\d{5}',
+    'hu': r'[0-9]{4}$',
+    'cs': r'\d{3}[ ]?\d{2}',
+    'jp': r'[0-9]{3}-[0-9]{4}$',
+    'pt-br': r'[0-9]{5}-[0-9]{3}$',
+    'default': r'[0-9]{5}$'
+}

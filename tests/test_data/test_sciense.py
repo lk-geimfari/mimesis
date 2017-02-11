@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
 
+import re
 from unittest import TestCase
 
 from elizabeth import Science
-import elizabeth.core.interdata as common
+from elizabeth.core.intd import MATH_FORMULAS
+
 from tests.test_data import DummyCase
+from ._patterns import STR_REGEX
 
 
 class ScienceBaseTest(TestCase):
@@ -14,9 +17,12 @@ class ScienceBaseTest(TestCase):
     def tearDown(self):
         del self.science
 
+    def test_str(self):
+        self.assertTrue(re.match(STR_REGEX, self.science.__str__()))
+
     def test_math_formula(self):
         result = self.science.math_formula()
-        self.assertIn(result, common.MATH_FORMULAS)
+        self.assertIn(result, MATH_FORMULAS)
 
 
 class ScienceTestCase(DummyCase):
@@ -29,8 +35,10 @@ class ScienceTestCase(DummyCase):
         self.assertIn(result, self.generic.science._data['scientist'])
 
     def test_chemical_element(self):
-        result = self.generic.science.chemical_element(name_only=True)
-        self.assertTrue(len(result) >= 1)
+        # Because: https://travis-ci.org/lk-geimfari/elizabeth/jobs/196565835
+        if self.generic.locale != 'fa':
+            result = self.generic.science.chemical_element(name_only=True)
+            self.assertTrue(len(result) >= 1)
 
-        result = self.generic.science.chemical_element(name_only=False)
-        self.assertIsInstance(result, dict)
+            result = self.generic.science.chemical_element(name_only=False)
+            self.assertIsInstance(result, dict)

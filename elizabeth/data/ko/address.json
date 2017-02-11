@@ -1,4 +1,5 @@
 {
+  "address_fmt": "{st_name}{st_sfx} {st_num}",
   "city": [
     "가평군",
     "강남구",
@@ -2624,5 +2625,6 @@
       "대로",
       "로"
     ]
-  }
+  },
+  "postal_code_fmt": "#####"
 }

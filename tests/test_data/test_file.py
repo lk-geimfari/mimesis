@@ -2,8 +2,8 @@
 
 from unittest import TestCase
 
-import elizabeth.core.interdata as common
-from elizabeth.core.elizabeth import File
+from elizabeth.core.intd import EXTENSIONS, MIME_TYPES
+from elizabeth.core.providers import File
 
 
 class FileTest(TestCase):
@@ -15,11 +15,11 @@ class FileTest(TestCase):
 
     def test_extension(self):
         text = self.file.extension(file_type='text')
-        self.assertIn(text, common.EXTENSIONS['text'])
+        self.assertIn(text, EXTENSIONS['text'])
 
         source = self.file.extension(file_type='source')
-        self.assertIn(source, common.EXTENSIONS['source'])
+        self.assertIn(source, EXTENSIONS['source'])
 
     def test_mime_type(self):
         result = self.file.mime_type()
-        self.assertIn(result, common.MIME_TYPES)
+        self.assertIn(result, MIME_TYPES)

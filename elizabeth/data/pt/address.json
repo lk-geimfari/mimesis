@@ -1,4 +1,5 @@
 {
+  "address_fmt": "{st_num} {st_name}",
   "city": [
     "Abrantes",
     "Agualva-Cacém",
@@ -594,5 +595,6 @@
       "Rotatória",
       "Rua"
     ]
-  }
+  },
+  "postal_code_fmt": "####"
 }

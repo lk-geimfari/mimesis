@@ -1,12 +1,21 @@
 # -*- coding: utf-8 -*-
 
-from unittest import TestCase
+import unittest
 
-import elizabeth.core.interdata as common
-from elizabeth.core.elizabeth import Development
+from elizabeth.core.providers import Development
+from elizabeth.core.intd import (
+    FRONTEND,
+    PROGRAMMING_LANGS,
+    OS,
+    OTHER_TECH,
+    LICENSES,
+    NOSQL,
+    BACKEND,
+    SQL
+)
 
 
-class DevelopmentTest(TestCase):
+class DevelopmentTest(unittest.TestCase):
     def setUp(self):
         self.dev = Development()
 
@@ -15,7 +24,7 @@ class DevelopmentTest(TestCase):
 
     def test_license(self):
         result = self.dev.software_license()
-        self.assertIn(result, common.LICENSES)
+        self.assertIn(result, LICENSES)
 
     def test_version(self):
         result = self.dev.version().split('.')
@@ -28,33 +37,30 @@ class DevelopmentTest(TestCase):
 
     def test_programming_language(self):
         result = self.dev.programming_language()
-        self.assertIn(result, common.PROGRAMMING_LANGS)
+        self.assertIn(result, PROGRAMMING_LANGS)
 
     def test_database(self):
         result = self.dev.database()
-        self.assertIn(result, common.SQL)
+        self.assertIn(result, SQL)
 
         _result = self.dev.database(nosql=True)
-        self.assertIn(_result, common.NOSQL)
+        self.assertIn(_result, NOSQL)
 
     def test_other(self):
         result = self.dev.other()
-        self.assertIn(result, common.OTHER_TECH)
+        self.assertIn(result, OTHER_TECH)
 
-    def test_framework(self):
-        result = self.dev.framework(_type='front')
-        self.assertIn(result, common.FRONTEND)
+    def test_frontend(self):
+        result = self.dev.frontend()
+        self.assertIn(result, FRONTEND)
 
-        _result = self.dev.framework(_type='back')
-        self.assertIn(_result, common.BACKEND)
-
-    def test_stack_of_tech(self):
-        result = self.dev.stack_of_tech(nosql=True)
-        self.assertIsInstance(result, dict)
+    def test_backend(self):
+        _result = self.dev.backend()
+        self.assertIn(_result, BACKEND)
 
     def test_os(self):
         result = self.dev.os()
-        self.assertIn(result, common.OS)
+        self.assertIn(result, OS)
 
     def test_stackoverflow_question(self):
         url = self.dev.stackoverflow_question()

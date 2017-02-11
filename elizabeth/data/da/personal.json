@@ -2206,5 +2206,11 @@
 	"Panteisme",
 	"Protestantisme",
 	"Sekulær Humanisme"
+  ],
+  "telephone_fmt": [
+	"+45 ### ### ###",
+	"## ## ## ##",
+	"#### ####",
+	"## ### ###"
   ]
 }

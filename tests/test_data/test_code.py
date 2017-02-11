@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
-
+import re
 from unittest import TestCase
 
 from elizabeth import Code
 from tests.test_data import DummyCase
+
+from ._patterns import STR_REGEX
 
 
 class CodeBaseTest(TestCase):
@@ -12,6 +14,9 @@ class CodeBaseTest(TestCase):
 
     def tearDown(self):
         del self.code
+
+    def test_str(self):
+        self.assertTrue(re.match(STR_REGEX, self.code.__str__()))
 
     def test_custom_code(self):
         result = self.code.custom_code(
