@@ -29,7 +29,8 @@ from string import (
 )
 
 # intd (acronym International Data)
-from elizabeth.core import interdata as intd
+import elizabeth.core.intd
+from elizabeth.core import intd
 
 from elizabeth.utils import (
     pull,
@@ -117,7 +118,7 @@ class Address(object):
         """
         fmt = self.data['address_fmt']
 
-        if self.locale in intd.SHORTENED_ADDRESS_FMT:
+        if self.locale in elizabeth.core.intd.SHORTENED_ADDRESS_FMT:
             # Because fmt for ko is {st_name}{st_sfx} {st_num},
             # i.e not shortened address format
             if self.locale != 'ko':
@@ -177,7 +178,7 @@ class Address(object):
         if not fmt:
             fmt = 'iso2'
 
-        countries = intd.COUNTRIES_ISO[fmt]
+        countries = elizabeth.core.intd.COUNTRIES_ISO[fmt]
         return choice(countries)
 
     def country(self):
@@ -642,7 +643,7 @@ class Code(object):
         :Example:
             132-1-15411-375-8.
         """
-        groups = intd.ISBN_GROUPS
+        groups = elizabeth.core.intd.ISBN_GROUPS
 
         mask = '###-{0}-#####-###-#' if \
             fmt == 'isbn-13' else '{0}-#####-###-#'
@@ -674,7 +675,7 @@ class Code(object):
         :Example:
         353918052107063
         """
-        num = choice(intd.IMEI_TACS) + self.custom_code(mask='######')
+        num = choice(elizabeth.core.intd.IMEI_TACS) + self.custom_code(mask='######')
         return num + luhn_checksum(num)
 
     def pin(self, mask='####'):
@@ -763,7 +764,7 @@ class Business(object):
         :Example:
             599.99 $.
         """
-        currencies = intd.CURRENCY_SYMBOLS
+        currencies = elizabeth.core.intd.CURRENCY_SYMBOLS
 
         price = uniform(minimum, maximum)
 
@@ -1541,7 +1542,7 @@ class Development(object):
         :Example:
             The BSD 3-Clause License.
         """
-        return choice(intd.LICENSES)
+        return choice(elizabeth.core.intd.LICENSES)
 
     @staticmethod
     def version():
@@ -1564,8 +1565,8 @@ class Development(object):
             PostgreSQL.
         """
         if nosql:
-            return choice(intd.NOSQL)
-        return choice(intd.SQL)
+            return choice(elizabeth.core.intd.NOSQL)
+        return choice(elizabeth.core.intd.SQL)
 
     @staticmethod
     def other():
@@ -1575,7 +1576,7 @@ class Development(object):
         :Example:
             Nginx.
         """
-        return choice(intd.OTHER_TECH)
+        return choice(elizabeth.core.intd.OTHER_TECH)
 
     @staticmethod
     def programming_language():
@@ -1585,7 +1586,7 @@ class Development(object):
         :Example:
             Erlang.
         """
-        return choice(intd.PROGRAMMING_LANGS)
+        return choice(elizabeth.core.intd.PROGRAMMING_LANGS)
 
     @staticmethod
     def backend():
@@ -1595,7 +1596,7 @@ class Development(object):
         :Example:
             Elixir/Phoenix
         """
-        return choice(intd.BACKEND)
+        return choice(elizabeth.core.intd.BACKEND)
 
     @staticmethod
     def frontend():
@@ -1605,7 +1606,7 @@ class Development(object):
         :Example:
             JS/React.
         """
-        return choice(intd.FRONTEND)
+        return choice(elizabeth.core.intd.FRONTEND)
 
     @staticmethod
     def os():
@@ -1615,7 +1616,7 @@ class Development(object):
         :Example:
             Gentoo
         """
-        return choice(intd.OS)
+        return choice(elizabeth.core.intd.OS)
 
     @staticmethod
     def stackoverflow_question():
@@ -2151,7 +2152,7 @@ class Path(object):
             /home/sherrell/Development/Python/mercenary
         """
         dev_folder = choice(('Development', 'Dev'))
-        stack = choice(intd.PROGRAMMING_LANGS)
+        stack = choice(elizabeth.core.intd.PROGRAMMING_LANGS)
         user = self.user(user_gender)
 
         return os.path.join(user, dev_folder, stack)

@@ -75,6 +75,8 @@ def pull(file, locale='en') -> dict:
     +------------------------------+--------------+
     | en - English                 | (data/en)    |
     +------------------------------+--------------+
+    | en-au - Australian English   | (data/en-au) |
+    +------------------------------+--------------+
     | en-gb - British English      | (data/en-gb) |
     +------------------------------+--------------+
     | ru - Russian                 | (data/ru)    |

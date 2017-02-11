@@ -3,7 +3,7 @@
 from unittest import TestCase
 
 from elizabeth.core.providers import Transport
-from elizabeth.core.interdata import CAR, TRUCKS, AIRPLANES
+from elizabeth.core.intd import CAR, TRUCKS, AIRPLANES
 
 
 class TransportTest(TestCase):

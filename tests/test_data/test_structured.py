@@ -4,7 +4,7 @@ import re
 from elizabeth.core.providers import Structured
 from unittest import TestCase
 
-from elizabeth.core.interdata import HTML_CONTAINER_TAGS
+from elizabeth.core.intd import HTML_CONTAINER_TAGS
 from ._patterns import STR_REGEX
 
 

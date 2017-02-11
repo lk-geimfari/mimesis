@@ -2,7 +2,7 @@
 
 from unittest import TestCase
 
-from elizabeth.core.interdata import (
+from elizabeth.core.intd import (
     CPU_CODENAMES, PHONE_MODELS, MEMORY,
     RESOLUTIONS, MANUFACTURERS, CPU,
     GENERATION, SCREEN_SIZES, GRAPHICS

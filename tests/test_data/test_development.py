@@ -3,7 +3,7 @@
 import unittest
 
 from elizabeth.core.providers import Development
-from elizabeth.core.interdata import (
+from elizabeth.core.intd import (
     FRONTEND,
     PROGRAMMING_LANGS,
     OS,

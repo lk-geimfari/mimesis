@@ -4,7 +4,7 @@ import re
 from unittest import TestCase
 
 from elizabeth import Science
-from elizabeth.core.interdata import MATH_FORMULAS
+from elizabeth.core.intd import MATH_FORMULAS
 
 from tests.test_data import DummyCase
 from ._patterns import STR_REGEX

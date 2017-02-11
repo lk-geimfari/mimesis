@@ -4,7 +4,7 @@ import re
 from unittest import TestCase
 
 from elizabeth.core.providers import Internet
-from elizabeth.core.interdata import (
+from elizabeth.core.intd import (
     SUBREDDITS, EMOJI, USER_AGENTS,
     SUBREDDITS_NSFW, HASHTAGS
 )

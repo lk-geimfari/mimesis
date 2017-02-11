@@ -4,7 +4,7 @@ import re
 from unittest import TestCase
 
 from elizabeth import Address
-from elizabeth.core.interdata import COUNTRIES_ISO
+from elizabeth.core.intd import COUNTRIES_ISO
 
 from tests.test_data import DummyCase
 from ._patterns import POSTAL_CODE_REGEX, STR_REGEX

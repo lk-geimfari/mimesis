@@ -2,7 +2,7 @@
 
 from unittest import TestCase
 
-from elizabeth.core.interdata import EXTENSIONS, MIME_TYPES
+from elizabeth.core.intd import EXTENSIONS, MIME_TYPES
 from elizabeth.core.providers import File
 
 

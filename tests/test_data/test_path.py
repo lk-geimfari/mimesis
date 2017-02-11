@@ -4,7 +4,7 @@ import sys
 from unittest import TestCase
 
 from elizabeth.core.providers import Path
-from elizabeth.core.interdata import (
+from elizabeth.core.intd import (
     PROGRAMMING_LANGS,
     FOLDERS,
     PROJECT_NAMES

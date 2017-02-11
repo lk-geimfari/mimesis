@@ -1,7 +1,7 @@
-from elizabeth.core.interdata import ROMANIZATION_ALPHABETS
+from elizabeth.core.intd import ROMANIZATION_ALPHABETS
 
 
-def romanize(func):
+def romanized_russian(func):
     """Cyrillic letter to latin converter. Romanization of the Russian alphabet
     is the process of transliterating the Russian language from the Cyrillic script
     into the Latin alphabet.

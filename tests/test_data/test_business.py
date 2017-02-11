@@ -3,7 +3,7 @@ import re
 from unittest import TestCase
 
 from elizabeth import Business
-from elizabeth.core.interdata import CURRENCY, CURRENCY_SYMBOLS
+from elizabeth.core.intd import CURRENCY, CURRENCY_SYMBOLS
 from tests.test_data import DummyCase
 
 from ._patterns import STR_REGEX

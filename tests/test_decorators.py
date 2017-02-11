@@ -1,10 +1,10 @@
 import unittest
-from elizabeth.decorators import romanize
+from elizabeth.decorators import romanized_russian
 
 
 class Decorators(unittest.TestCase):
 
-    @romanize
+    @romanized_russian
     def russian_user(self):
         return 'Ликид Геимфари'
 

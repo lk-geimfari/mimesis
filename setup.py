@@ -6,7 +6,7 @@ from elizabeth import __version__, \
 setup(
     name='elizabeth',
     version=__version__,
-    packages=['elizabeth', 'elizabeth.core', 'elizabeth.core.interdata', 'elizabeth.builtins'],
+    packages=['elizabeth', 'elizabeth.core', 'elizabeth.core.intd', 'elizabeth.builtins'],
     keywords=['fake', 'data', 'testing', 'generate', 'elizabeth', 'db', 'church', 'dummy'],
     package_data={
         'elizabeth': [

@@ -4,7 +4,7 @@ import re
 from unittest import TestCase
 
 from elizabeth import Personal
-from elizabeth.core.interdata import (
+from elizabeth.core.intd import (
     FAVORITE_MUSIC_GENRE, SEXUALITY_SYMBOLS,
     BLOOD_GROUPS, GENDER_SYMBOLS
 )
