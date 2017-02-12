@@ -173,7 +173,7 @@ Business
 	# Get a random company type
 	# abbr=True is abbreviated company type
 	# Output: Incorporated (Inc. when abbr=True)
-	company_type = business.company_type(abrr=False)
+	company_type = business.company_type(abbr=False)
 
 	# Get a random company name
 	# Output: Gamma Systems
