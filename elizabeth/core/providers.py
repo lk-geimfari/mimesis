@@ -1868,28 +1868,6 @@ class Hardware(object):
         """
         return choice(intd.MANUFACTURERS)
 
-    def hardware_info(self):
-        """Generate a random full information about device (laptop).
-
-        :return: Full information.
-        :Example:
-            ASUS Intel® Core i3 3rd Generation 3.50 GHz/1920x1200/12″/
-            512GB HDD(7200 RPM)/DDR2-4GB/Intel® Iris™ Pro Graphics 6200.
-        """
-        fmt = '%s %s-%s CPU @ %s/%s/%s/%s/%s-%s/%s.'
-        fmt = fmt % (
-            self.manufacturer(),
-            self.cpu(),
-            self.generation(abbr=True),
-            self.cpu_frequency(),
-            self.resolution(),
-            self.screen_size(),
-            self.ssd_or_hdd(),
-            self.ram_type(),
-            self.ram_size(),
-            self.graphics())
-        return fmt
-
     @staticmethod
     def phone_model():
         """Get a random phone model.
