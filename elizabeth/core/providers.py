@@ -6,6 +6,7 @@ import re
 import sys
 import array
 import inspect
+import json
 from calendar import monthrange
 import datetime
 from hashlib import (
@@ -427,6 +428,52 @@ class Structured(object):
             raise NotImplementedError(
                 "Attribute type {} is not implemented".format(value))
         return value
+
+    def json(self, provider_name, items=5):
+        """
+        Generate a random snippet of JSON
+
+        :param provider_name: name of provider to generate JSON data for.
+        :type provider_name: str
+        :param items: number of top-level items to include
+        :type items: int
+        :return: JSON
+        :rtype: str
+        """
+        providers = {
+            'hardware': {
+                'provider': Hardware,
+                'root_element': 'computers',
+            },
+            'personal': {
+                'provider': Personal,
+                'root_element': 'users'
+            }
+        }
+
+        try:
+            provider_data = providers[provider_name.lower()]
+        except KeyError:
+            raise NotImplementedError("Provider {} is not supported".format(provider_name))
+
+        try:
+            provider = provider_data['provider'](self.locale)
+        except TypeError:  # handle providers that do not accept locale
+            provider = provider_data['provider']()
+
+        root_element = provider_data['root_element']
+
+        data = {root_element: []}
+
+        for _ in range(items):
+            element = dict()
+            for attribute_name in dir(provider):
+                attribute = getattr(provider, attribute_name)
+                if attribute_name[:1] != "_" and callable(attribute):
+                    element[attribute_name] = attribute()
+            data[root_element].append(element)
+
+        return json.dumps(data, indent=4)
 
 
 class Text(object):

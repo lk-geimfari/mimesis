@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import json
 import re
 
 from elizabeth.core.providers import Structured
@@ -44,3 +45,16 @@ class StructuredBaseTest(TestCase):
         result = self.structured.html()
         self.assertEqual(result[0], "<")  # tag is enclosed
         self.assertEqual(result[-1], ">")  # tag is enclosed
+
+    def test_json(self):
+        with self.assertRaises(NotImplementedError):
+            self.structured.json('food')
+
+        result = self.structured.json('personal', items=3)
+        self.assertIsInstance(result, str)  # returns str
+        data = json.loads(result)  # is valid JSON
+        self.assertIsInstance(data, (dict, list))  # root element is container
+        _, root = data.popitem()
+        self.assertEqual(len(root), 3)  # root container has three items
+
+        self.structured.json('hardware', items=1)
