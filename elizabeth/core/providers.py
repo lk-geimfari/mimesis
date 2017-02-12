@@ -430,14 +430,13 @@ class Structured(object):
         return value
 
     def json(self, provider_name, items=5):
-        """
-        Generate a random snippet of JSON
+        """Generate a random snippet of JSON
 
-        :param provider_name: name of provider to generate JSON data for.
+        :param provider_name: Name of provider to generate JSON data for.
         :type provider_name: str
-        :param items: number of top-level items to include
+        :param items: Number of top-level items to include.
         :type items: int
-        :return: JSON
+        :return: JSON.
         :rtype: str
         """
         providers = {
@@ -454,7 +453,9 @@ class Structured(object):
         try:
             provider_data = providers[provider_name.lower()]
         except KeyError:
-            raise NotImplementedError("Provider {} is not supported".format(provider_name))
+            raise NotImplementedError(
+                "Provider {} is not supported".format(provider_name)
+            )
 
         try:
             provider = provider_data['provider'](self.locale)
