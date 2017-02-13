@@ -211,7 +211,7 @@ Your contributions are always welcome! Please take a look at the [contribution](
 ```zsh
 ➜ ~ git clone https://github.com/lk-geimfari/elizabeth.git
 ➜ cd elizabeth/
-➜ python3 -m unittest discover tests
+➜ py.test --cov=elizabeth/ --cov-report=term-missing
 ```
 
 ## License
