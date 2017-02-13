@@ -22,6 +22,10 @@ SUPPORTED_LOCALES = {
         "name": "British English",
         "name_local": "British English"
     },
+    "en-au": {
+        "name": "Australian English",
+        "name_local": "Australian English"
+    },
     "es": {
         "name": "Spanish",
         "name_local": "Español"
