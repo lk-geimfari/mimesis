@@ -22,6 +22,7 @@
 - [jasonwaiting-dev](https://github.com/jasonwaiting-dev) (`jp`).
 - [jeromechrist](https://github.com/jeromechrist)
 - [jlwt90](https://github.com/jlwt90)
+- [jwilk](https://github.com/jwilk)
 - [martini97](https://github.com/martini97)
 - [mipaaa](https://github.com/mipaaa)
 - [mrcrilly](https://github.com/mrcrilly)
