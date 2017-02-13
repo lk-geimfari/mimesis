@@ -38,7 +38,7 @@ class InternetTest(TestCase):
     def test_home_page(self):
         result = self.net.home_page()
         self.assertTrue(re.match(r'http[s]?://(?:[a-zA-Z]|[0-9]|'
-                                 r'[$-_@.&+]|[!*\(\),]|'
+                                 r'[$_@.&+-]|[!*\(\),]|'
                                  r'(?:%[0-9a-fA-F][0-9a-fA-F]))+', result))
 
     def test_subreddit(self):
