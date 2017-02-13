@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import pytest
 import re
 
 from elizabeth.core.intd import MATH_FORMULAS

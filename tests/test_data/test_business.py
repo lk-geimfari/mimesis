@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import re
-import pytest
 
 from elizabeth.core.intd import CURRENCY, CURRENCY_SYMBOLS
 from tests.test_data import business, generic

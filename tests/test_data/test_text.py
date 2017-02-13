@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import pytest
 import re
 
 from tests.test_data import generic, text

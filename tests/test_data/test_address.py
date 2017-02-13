@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import re
-import pytest
 
 from elizabeth.core.intd import COUNTRIES_ISO
 

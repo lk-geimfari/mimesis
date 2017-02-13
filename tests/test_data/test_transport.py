@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import pytest
-
 from elizabeth.core.intd import CAR, TRUCKS, AIRPLANES
 from tests.test_data import transport
 

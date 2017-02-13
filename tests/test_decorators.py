@@ -1,4 +1,3 @@
-import pytest
 from elizabeth.decorators import romanized_russian
 
 

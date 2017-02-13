@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import datetime
-import pytest
 import re
 
 from tests.test_data import dt, generic
