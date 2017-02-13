@@ -26,6 +26,7 @@
 - [mipaaa](https://github.com/mipaaa)
 - [mrcrilly](https://github.com/mrcrilly)
 - [offermann](https://github.com/offermann)
+- [PaulWaltersDev](https://github.com/PaulWaltersDev)
 - [ranwise](https://github.com/ranwise)
 - [redus](https://github.com/redus) (`ko`).
 - [sammyshj](https://github.com/sammyshj)
