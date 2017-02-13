@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 import re
 
-from tests.test_data import generic, text
-
 from ._patterns import STR_REGEX
 
 

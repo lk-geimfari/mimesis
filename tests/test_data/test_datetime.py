@@ -2,7 +2,6 @@
 import datetime
 import re
 
-from tests.test_data import dt, generic
 from ._patterns import STR_REGEX
 
 

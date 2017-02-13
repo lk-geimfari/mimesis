@@ -3,7 +3,6 @@ import json
 import pytest
 import re
 
-from tests.test_data import structured
 from ._patterns import STR_REGEX
 
 

@@ -2,8 +2,6 @@
 
 import pytest
 
-from tests.test_data import generic
-
 
 def test_base_personal(generic):
     result = generic.personal.username()

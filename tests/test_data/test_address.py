@@ -4,7 +4,6 @@ import re
 
 from elizabeth.core.intd import COUNTRIES_ISO
 
-from tests.test_data import address, generic
 from ._patterns import POSTAL_CODE_REGEX, STR_REGEX
 
 

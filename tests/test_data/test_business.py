@@ -2,7 +2,6 @@
 import re
 
 from elizabeth.core.intd import CURRENCY, CURRENCY_SYMBOLS
-from tests.test_data import business, generic
 
 from ._patterns import STR_REGEX
 

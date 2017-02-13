@@ -4,7 +4,6 @@ import re
 
 from elizabeth.core.intd import MATH_FORMULAS
 
-from tests.test_data import generic, science
 from ._patterns import STR_REGEX
 
 

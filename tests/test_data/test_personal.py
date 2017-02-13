@@ -9,7 +9,6 @@ from elizabeth.core.intd import (
     BLOOD_GROUPS, GENDER_SYMBOLS
 )
 
-from tests.test_data import generic, personal
 from ._patterns import *
 
 
