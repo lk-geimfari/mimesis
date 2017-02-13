@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import pytest
 import re
-from unittest import TestCase
 
 from elizabeth.core.providers import Internet
 from elizabeth.core.intd import (
@@ -10,75 +10,82 @@ from elizabeth.core.intd import (
 )
 
 
-class InternetTest(TestCase):
-    def setUp(self):
-        self.net = Internet()
+@pytest.fixture
+def net():
+    return Internet()
 
-    def tearDown(self):
-        del self.net
 
-    def test_emoji(self):
-        result = self.net.emoji()
-        self.assertIn(result, EMOJI)
+def test_emoji(net):
+    result = net.emoji()
+    assert result in EMOJI
 
-    def test_facebook(self):
-        result = self.net.facebook(gender='female')
-        self.assertIsNotNone(result)
 
-        _result = self.net.facebook(gender='female')
-        self.assertIsNotNone(_result)
+def test_facebook(net):
+    result = net.facebook(gender='female')
+    assert result is not None
 
-    def test_hashtags(self):
-        result = self.net.hashtags(quantity=5)
-        self.assertEqual(len(result), 5)
+    _result = net.facebook(gender='female')
+    assert _result is not None
 
-        result = self.net.hashtags(quantity=1, category='general')
-        self.assertIn(result[0], HASHTAGS['general'])
 
-    def test_home_page(self):
-        result = self.net.home_page()
-        self.assertTrue(re.match(r'http[s]?://(?:[a-zA-Z]|[0-9]|'
-                                 r'[$_@.&+-]|[!*\(\),]|'
-                                 r'(?:%[0-9a-fA-F][0-9a-fA-F]))+', result))
+def test_hashtags(net):
+    result = net.hashtags(quantity=5)
+    assert len(result) == 5
 
-    def test_subreddit(self):
-        result = self.net.subreddit()
-        self.assertIn(result, SUBREDDITS)
+    result = net.hashtags(quantity=1, category='general')
+    assert result[0] in HASHTAGS['general']
 
-        full_result = self.net.subreddit(full_url=True)
-        self.assertTrue(len(full_result) > 20)
 
-        result_nsfw = self.net.subreddit(nsfw=True)
-        self.assertIn(result_nsfw, SUBREDDITS_NSFW)
+def test_home_page(net):
+    result = net.home_page()
+    assert re.match(r'http[s]?://(?:[a-zA-Z]|[0-9]|'
+                    r'[$_@.&+-]|[!*\(\),]|'
+                    r'(?:%[0-9a-fA-F][0-9a-fA-F]))+', result)
 
-        full_result = self.net.subreddit(nsfw=True, full_url=True)
-        self.assertTrue(len(full_result) > 20)
 
-    def test_twitter(self):
-        result = self.net.twitter(gender='female')
-        self.assertIsNotNone(result)
+def test_subreddit(net):
+    result = net.subreddit()
+    assert result in SUBREDDITS
 
-        _result = self.net.twitter(gender='male')
-        self.assertIsNotNone(_result)
+    full_result = net.subreddit(full_url=True)
+    assert len(full_result) > 20
 
-    def test_user_agent(self):
-        result = self.net.user_agent()
-        self.assertIn(result, USER_AGENTS)
+    result_nsfw = net.subreddit(nsfw=True)
+    assert result_nsfw in SUBREDDITS_NSFW
 
-    def test_image_placeholder(self):
-        result = self.net.image_placeholder(width=400, height=300)
-        self.assertIsNotNone(result)
+    full_result = net.subreddit(nsfw=True, full_url=True)
+    assert len(full_result) > 20
 
-    def test_stock_image(self):
-        result = self.net.stock_image()
-        self.assertIsNotNone(result)
 
-        result_2 = self.net.stock_image(category='nature').split('/')[-2]
-        self.assertEqual(result_2, 'nature')
+def test_twitter(net):
+    result = net.twitter(gender='female')
+    assert result is not None
 
-        result_3 = self.net.stock_image(width=1900, height=1080).split('/')[-1]
-        self.assertEqual(result_3, '1900x1080')
+    _result = net.twitter(gender='male')
+    assert _result is not None
 
-    def test_image_by_keyword(self):
-        result = self.net.image_by_keyword(keyword='word').split('/')[-1]
-        self.assertEqual('word', result.split('?')[1])
+
+def test_user_agent(net):
+    result = net.user_agent()
+    assert result in USER_AGENTS
+
+
+def test_image_placeholder(net):
+    result = net.image_placeholder(width=400, height=300)
+    assert result is not None
+
+
+def test_stock_image(net):
+    result = net.stock_image()
+    assert result is not None
+
+    result_2 = net.stock_image(category='nature').split('/')[-2]
+    assert result_2 == 'nature'
+
+    result_3 = net.stock_image(width=1900, height=1080).split('/')[-1]
+    assert result_3 == '1900x1080'
+
+
+def test_image_by_keyword(net):
+    result = net.image_by_keyword(keyword='word').split('/')[-1]
+    assert 'word' == result.split('?')[1]

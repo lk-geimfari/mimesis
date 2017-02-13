@@ -1,46 +1,49 @@
-from unittest import TestCase
+import pytest
 
 from elizabeth.builtins import RussiaSpecProvider
 from elizabeth.exceptions import JSONKeyError
 
 
-class RussiaTest(TestCase):
-    def setUp(self):
-        self.russia = RussiaSpecProvider()
+@pytest.fixture
+def russia():
+    return RussiaSpecProvider()
 
-    def tearDown(self):
-        del self.russia
 
-    def test_passport_series(self):
-        result = self.russia.passport_series()
-        self.assertIsNotNone(result)
-        result = result.split(' ')
-        self.assertIsInstance(result, list)
+def test_passport_series(russia):
+    result = russia.passport_series()
+    assert result is not None
+    result = result.split(' ')
+    assert isinstance(result, list)
 
-        result = self.russia.passport_series(year=10)
-        region, year = result.split(' ')
-        self.assertTrue(int(year) == 10)
+    result = russia.passport_series(year=10)
+    region, year = result.split(' ')
+    assert int(year) == 10
 
-    def test_passport_number(self):
-        result = self.russia.passport_number()
-        self.assertTrue(len(result) == 6)
 
-    def test_series_and_number(self):
-        result = self.russia.series_and_number()
-        self.assertIsNotNone(result)
+def test_passport_number(russia):
+    result = russia.passport_number()
+    assert len(result) == 6
 
-    def test_patronymic(self):
-        patronymic = self.russia.patronymic
 
-        self.assertIsInstance(patronymic(gender='female'), str)
-        self.assertTrue(len(patronymic(gender='female')) >= 4)
+def test_series_and_number(russia):
+    result = russia.series_and_number()
+    assert result is not None
 
-        self.assertIsInstance(patronymic(gender='male'), str)
-        self.assertTrue(len(patronymic(gender='male')) >= 4)
 
-        self.assertRaises(JSONKeyError, lambda: patronymic(gender='nil'))
+def test_patronymic(russia):
+    patronymic = russia.patronymic
 
-    def test_generate_sentence(self):
-        result = self.russia.generate_sentence()
-        self.assertTrue(len(result) >= 20)
-        self.assertIsInstance(result, str)
+    assert isinstance(patronymic(gender='female'), str)
+    assert len(patronymic(gender='female')) >= 4
+
+    assert isinstance(patronymic(gender='male'), str)
+    assert len(patronymic(gender='male')) >= 4
+
+    with pytest.raises(JSONKeyError):
+        patronymic(gender='nil')
+
+
+def test_generate_sentence(russia):
+    result = russia.generate_sentence()
+    assert len(result) >= 20
+    assert isinstance(result, str)

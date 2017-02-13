@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from unittest import TestCase
+import pytest
 
 from elizabeth.core.intd import (
     CPU_CODENAMES, PHONE_MODELS, MEMORY,
@@ -10,57 +10,65 @@ from elizabeth.core.intd import (
 from elizabeth.core.providers import Hardware
 
 
-class HardwareTest(TestCase):
-    def setUp(self):
-        self.hard = Hardware()
+@pytest.fixture
+def hard():
+    return Hardware()
 
-    def tearDown(self):
-        del self.hard
 
-    def test_resolution(self):
-        result = self.hard.resolution()
-        self.assertIn(result, RESOLUTIONS)
+def test_resolution(hard):
+    result = hard.resolution()
+    assert result in RESOLUTIONS
 
-    def test_screen_size(self):
-        result = self.hard.screen_size()
-        self.assertIn(result, SCREEN_SIZES)
 
-    def test_generation(self):
-        result = self.hard.generation()
-        self.assertIn(result, GENERATION)
+def test_screen_size(hard):
+    result = hard.screen_size()
+    assert result in SCREEN_SIZES
 
-    def test_cpu_frequency(self):
-        result = self.hard.cpu_frequency().split('G')[0]
-        self.assertLess(float(result), 4.4)
 
-    def test_cpu(self):
-        result = self.hard.cpu()
-        self.assertIn(result, CPU)
+def test_generation(hard):
+    result = hard.generation()
+    assert result in GENERATION
 
-    def test_cpu_codename(self):
-        result = self.hard.cpu_codename()
-        self.assertIn(result, CPU_CODENAMES)
 
-    def test_ram_type(self):
-        result = self.hard.ram_type()
-        self.assertIn(result, ['DDR2', 'DDR3', 'DDR4'])
+def test_cpu_frequency(hard):
+    result = hard.cpu_frequency().split('G')[0]
+    assert float(result) < 4.4
 
-    def test_ram_size(self):
-        result = self.hard.ram_size().split(' ')
-        self.assertGreater(len(result), 0)
 
-    def test_ssd_or_hdd(self):
-        result = self.hard.ssd_or_hdd()
-        self.assertIn(result, MEMORY)
+def test_cpu(hard):
+    result = hard.cpu()
+    assert result in CPU
 
-    def test_graphics(self):
-        result = self.hard.graphics()
-        self.assertIn(result, GRAPHICS)
 
-    def test_manufacturer(self):
-        result = self.hard.manufacturer()
-        self.assertIn(result, MANUFACTURERS)
+def test_cpu_codename(hard):
+    result = hard.cpu_codename()
+    assert result in CPU_CODENAMES
 
-    def test_phone_model(self):
-        result = self.hard.phone_model()
-        self.assertIn(result, PHONE_MODELS)
+def test_ram_type(hard):
+    result = hard.ram_type()
+    assert result in ['DDR2', 'DDR3', 'DDR4']
+
+
+def test_ram_size(hard):
+    result = hard.ram_size().split(' ')
+    assert len(result) > 0
+
+
+def test_ssd_or_hdd(hard):
+    result = hard.ssd_or_hdd()
+    assert result in MEMORY
+
+
+def test_graphics(hard):
+    result = hard.graphics()
+    assert result in GRAPHICS
+
+
+def test_manufacturer(hard):
+    result = hard.manufacturer()
+    assert result in MANUFACTURERS
+
+
+def test_phone_model(hard):
+    result = hard.phone_model()
+    assert result in PHONE_MODELS

@@ -1,25 +1,24 @@
 # -*- coding: utf-8 -*-
 
-from unittest import TestCase
+import pytest
 
 from elizabeth.core.intd import EXTENSIONS, MIME_TYPES
 from elizabeth.core.providers import File
 
 
-class FileTest(TestCase):
-    def setUp(self):
-        self.file = File()
+@pytest.fixture
+def file():
+    return File()
 
-    def tearDown(self):
-        del self.file
 
-    def test_extension(self):
-        text = self.file.extension(file_type='text')
-        self.assertIn(text, EXTENSIONS['text'])
+def test_extension(file):
+    text = file.extension(file_type='text')
+    assert text in EXTENSIONS['text']
 
-        source = self.file.extension(file_type='source')
-        self.assertIn(source, EXTENSIONS['source'])
+    source = file.extension(file_type='source')
+    assert source in EXTENSIONS['source']
 
-    def test_mime_type(self):
-        result = self.file.mime_type()
-        self.assertIn(result, MIME_TYPES)
+
+def test_mime_type(file):
+    result = file.mime_type()
+    assert result in MIME_TYPES

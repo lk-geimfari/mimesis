@@ -1,85 +1,89 @@
 # -*- coding: utf-8 -*-
+import pytest
 import re
-from unittest import TestCase
 
-from elizabeth import Text
-from tests.test_data import DummyCase
+from tests.test_data import generic, text
 
 from ._patterns import STR_REGEX
 
 
-class TextBaseTest(TestCase):
-    def setUp(self):
-        self.text = Text('en')
-
-    def tearDown(self):
-        del self.text
-
-    def test_str(self):
-        self.assertTrue(re.match(STR_REGEX, self.text.__str__()))
-
-    def test_hex_color(self):
-        result = self.text.hex_color()
-        self.assertIn('#', result)
-
-    def test_weather(self):
-        result = self.text.weather(scale='c').split(' ')
-        temp, scale = float(result[0]), result[1]
-        self.assertEqual(scale, '°C')
-        self.assertTrue((temp >= -30) and (temp <= 40))
-
-        result = self.text.weather(
-            scale='f', minimum=0, maximum=10).split(' ')
-
-        temp, scale = float(result[0]), result[1]
-        self.assertEqual(scale, '°F')
-        self.assertTrue((temp >= 0) and (temp <= (10 * 1.8) + 32))
+def test_str(text):
+    assert re.match(STR_REGEX, str(text))
 
 
-class TextTestCase(DummyCase):
-    def test_alphabet(self):
-        result = self.generic.text.alphabet()
-        self.assertIsInstance(result, list)
-        self.assertIsNotNone(result)
+def test_hex_color(text):
+    result = text.hex_color()
+    assert '#' in result
 
-    def test_sentence(self):
-        result = self.generic.text.sentence()
-        self.assertIn(result.strip(), self.generic.text.data['text'])
 
-    def test_title(self):
-        result = self.generic.text.title()
-        self.assertIsNotNone(result)
-        self.assertIn(result.strip(), self.generic.text.data['text'])
+def test_weather(text):
+    result = text.weather(scale='c').split(' ')
+    temp, scale = float(result[0]), result[1]
+    assert scale == '°C'
+    assert temp >= -30
+    assert temp <= 40
 
-    def test_text(self):
-        result = self.generic.text.text(quantity=4)
-        self.assertTrue(len(result) >= 4)
-        self.assertIsInstance(result, str)
+    result = text.weather(
+        scale='f', minimum=0, maximum=10).split(' ')
 
-    def test_words(self):
-        result = self.generic.text.words(quantity=5)
-        self.assertEqual(len(result), 5)
+    temp, scale = float(result[0]), result[1]
+    assert scale == '°F'
+    assert temp >= 0
+    assert temp <= ((10 * 1.8) + 32)
 
-        result = self.generic.text.words(quantity=1)
-        self.assertEqual(len(result), 1)
 
-    def test_word(self):
-        result = self.generic.text.word()
-        self.assertIn(result, self.generic.text.data['words']['normal'])
+def test_alphabet(generic):
+    result = generic.text.alphabet()
+    assert isinstance(result, list)
+    assert result is not None
 
-    def test_swear_word(self):
-        result = self.generic.text.swear_word()
-        self.assertIn(result, self.generic.text.data['words']['bad'])
 
-    def test_quote(self):
-        result = self.generic.text.quote()
-        self.assertIn(result, self.generic.text.data['quotes'])
+def test_sentence(generic):
+    result = generic.text.sentence()
+    assert result.strip() in generic.text.data['text']
 
-    def test_color(self):
-        result = self.generic.text.color()
-        self.assertIn(result, self.generic.text.data['color'])
 
-    def test_level(self):
-        result = self.generic.text.level()
-        self.assertIsNotNone(result)
-        self.assertIsInstance(result, str)
+def test_title(generic):
+    result = generic.text.title()
+    assert result is not None
+    assert result.strip() in generic.text.data['text']
+
+
+def test_text(generic):
+    result = generic.text.text(quantity=4)
+    assert len(result) >= 4
+    assert isinstance(result, str)
+
+
+def test_words(generic):
+    result = generic.text.words(quantity=5)
+    assert len(result) == 5
+
+    result = generic.text.words(quantity=1)
+    assert len(result) == 1
+
+
+def test_word(generic):
+    result = generic.text.word()
+    assert result in generic.text.data['words']['normal']
+
+
+def test_swear_word(generic):
+    result = generic.text.swear_word()
+    assert result in generic.text.data['words']['bad']
+
+
+def test_quote(generic):
+    result = generic.text.quote()
+    assert result in generic.text.data['quotes']
+
+
+def test_color(generic):
+    result = generic.text.color()
+    assert result in generic.text.data['color']
+
+
+def test_level(generic):
+    result = generic.text.level()
+    assert result is not None
+    assert isinstance(result, str)

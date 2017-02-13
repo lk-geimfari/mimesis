@@ -1,36 +1,31 @@
 # -*- coding: utf-8 -*-
 
-from unittest import TestCase
+import pytest
 
-from elizabeth.core.providers import Transport
 from elizabeth.core.intd import CAR, TRUCKS, AIRPLANES
+from tests.test_data import transport
 
 
-class TransportTest(TestCase):
-    def setUp(self):
-        self.transport = Transport()
+def test_truck(transport):
+    result = transport.truck().split('-')
+    manufacturer, model = result[0], result[1]
+    assert manufacturer in TRUCKS
+    assert len(model) == 7
 
-    def tearDown(self):
-        del self.transport
+    result = transport.truck(model_mask='###').split('-')
+    manufacturer, model = result[0], result[1]
+    assert manufacturer in TRUCKS
+    assert len(model) == 3
 
-    def test_truck(self):
-        result = self.transport.truck().split('-')
-        manufacturer, model = result[0], result[1]
-        self.assertIn(manufacturer, TRUCKS)
-        self.assertTrue(len(model) == 7)
 
-        result = self.transport.truck(model_mask='###').split('-')
-        manufacturer, model = result[0], result[1]
-        self.assertIn(manufacturer, TRUCKS)
-        self.assertTrue(len(model) == 3)
+def test_car(transport):
+    result = transport.car()
+    assert result in CAR
 
-    def test_car(self):
-        result = self.transport.car()
-        self.assertIn(result, CAR)
 
-    def test_airplane(self):
-        mask = '@###'
-        result = self.transport.airplane(model_mask=mask).split()
-        manufacturer, model = result[0], result[1]
-        self.assertIn(manufacturer, AIRPLANES)
-        self.assertTrue(len(model) == len(mask))
+def test_airplane(transport):
+    mask = '@###'
+    result = transport.airplane(model_mask=mask).split()
+    manufacturer, model = result[0], result[1]
+    assert manufacturer in AIRPLANES
+    assert len(model) == len(mask)
