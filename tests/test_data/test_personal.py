@@ -21,11 +21,6 @@ def test_age(personal):
     assert result <= 55
 
 
-def test_age(personal):
-    result = personal.age(maximum=55)
-    assert result <= 55
-
-
 def test_age_store(personal):
     result = personal._store['age']
     assert result == 0
