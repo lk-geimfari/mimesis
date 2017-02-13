@@ -1255,6 +1255,7 @@ CURRENCY_SYMBOLS = {
     "de": "€",
     "en": "$",
     "en-gb": "£",
+    "en-au": "$",
     "es": "€",
     "fa": "﷼",
     "fi": "€",

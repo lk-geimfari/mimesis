@@ -44,6 +44,7 @@ POSTAL_CODE_REGEX = {
     'pt': r'[0-9]{4}$',
     'no': r'[0-9]{4}$',
     'da': r'DK-[0-9]{4}$',
+    'en-au': r'[0-9]{4}$',
     'en-gb': _EN_GB_POST_CODE,
     'fa': r'\d{5}-\d{5}',
     'hu': r'[0-9]{4}$',

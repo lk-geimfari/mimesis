@@ -2,6 +2,8 @@ from unittest import TestCase
 
 from tests.test_generic import LocaleBase
 
+class AustraliaTest(LocaleBase, TestCase):
+    LANG = 'en-au'
 
 class DanishTest(LocaleBase, TestCase):
     LANG = 'da'
