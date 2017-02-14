@@ -3,7 +3,6 @@
 import pytest
 import re
 
-
 from elizabeth.core.intd import (
     FAVORITE_MUSIC_GENRE, SEXUALITY_SYMBOLS,
     BLOOD_GROUPS, GENDER_SYMBOLS
@@ -265,6 +264,7 @@ def test_worldview(generic):
     result = generic.personal.worldview()
     assert result in generic.personal.data['worldview']
 
+
 def test_views_on(generic):
     result = generic.personal.views_on()
     assert result in generic.personal.data['views_on']
@@ -273,6 +273,7 @@ def test_views_on(generic):
 def test_political_views(generic):
     result = generic.personal.political_views()
     assert result in generic.personal.data['political_views']
+
 
 def test_title(generic):
     result = generic.personal.title(title_type='typical')

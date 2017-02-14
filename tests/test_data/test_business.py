@@ -44,7 +44,7 @@ def test_company(generic):
 
 
 def test_price(generic):
-    currencies  = CURRENCY_SYMBOLS[generic.business.locale]
+    currencies = CURRENCY_SYMBOLS[generic.business.locale]
     result = generic.business.price(minimum=100.00, maximum=1999.99)
     price, symbol = result.split(' ')
     assert float(price) >= 100.00

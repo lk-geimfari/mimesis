@@ -57,7 +57,7 @@ def test_state(generic):
     assert result in generic.address.data['state']['name']
 
     result_ = generic.address.state(abbr=True)
-    assert result_ in  generic.address.data['state']['abbr']
+    assert result_ in generic.address.data['state']['abbr']
 
 
 def test_postal_code(generic):

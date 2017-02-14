@@ -79,8 +79,3 @@ def test_stackoverflow_question(dev):
     post_id = int(url.split('/')[-1])
     assert post_id >= 1000000
     assert post_id <= 9999999
-
-
-# TODO: Write it
-def test_hardware_info(dev):
-    pass

@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 import json
-import pytest
 import re
+
+import pytest
 
 from ._patterns import STR_REGEX
 

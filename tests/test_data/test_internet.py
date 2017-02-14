@@ -9,6 +9,8 @@ from elizabeth.core.intd import (
     SUBREDDITS_NSFW, HASHTAGS
 )
 
+from ._patterns import HOME_PAGE
+
 
 @pytest.fixture
 def net():
@@ -38,9 +40,7 @@ def test_hashtags(net):
 
 def test_home_page(net):
     result = net.home_page()
-    assert re.match(r'http[s]?://(?:[a-zA-Z]|[0-9]|'
-                    r'[$_@.&+-]|[!*\(\),]|'
-                    r'(?:%[0-9a-fA-F][0-9a-fA-F]))+', result)
+    assert re.match(HOME_PAGE, result)
 
 
 def test_subreddit(net):

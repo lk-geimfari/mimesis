@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-
 import array
+
 import pytest
 
 from elizabeth.core.providers import Numbers

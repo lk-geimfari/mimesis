@@ -2,7 +2,10 @@
 
 import pytest
 
-from elizabeth.core.intd import EXTENSIONS, MIME_TYPES
+from elizabeth.core.intd import (
+    EXTENSIONS,
+    MIME_TYPES
+)
 from elizabeth.core.providers import File
 
 

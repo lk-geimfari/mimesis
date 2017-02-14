@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 import os
-import pytest
 import sys
 
+import pytest
 
 from elizabeth.core.providers import Path
 from elizabeth.core.intd import (
@@ -52,6 +52,7 @@ def test_dev_dir(path):
     dev_dir = dev_dir.split(os.sep)
     assert len(dev_dir) == 5
     assert dev_dir[4] in PROGRAMMING_LANGS
+
 
 def test_project_dir(path):
     project_path = path.project_dir(user_gender='female')

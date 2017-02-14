@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
-import pytest
 import re
+
+import pytest
 
 from elizabeth.core.providers import Network
 

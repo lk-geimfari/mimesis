@@ -44,6 +44,7 @@ def test_cpu_codename(hard):
     result = hard.cpu_codename()
     assert result in CPU_CODENAMES
 
+
 def test_ram_type(hard):
     result = hard.ram_type()
     assert result in ['DDR2', 'DDR3', 'DDR4']
