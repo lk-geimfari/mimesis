@@ -206,5 +206,6 @@ CURRENCY_SYMBOLS = {
     "sv": "kr",
     "tr": "₺",
     "ua": '₴',
+    "zh": "¥",
     "default": "$"
 }
