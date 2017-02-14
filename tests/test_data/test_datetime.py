@@ -1,74 +1,61 @@
 # -*- coding: utf-8 -*-
-
-import re
 import datetime
+import re
 
-from unittest import TestCase
-
-from elizabeth import Datetime
-from tests.test_data import DummyCase
 from ._patterns import STR_REGEX
 
 
-class DatetimeBaseTest(TestCase):
-    def setUp(self):
-        self.datetime = Datetime()
-
-    def tearDown(self):
-        del self.datetime
-
-    def test_str(self):
-        self.assertTrue(re.match(STR_REGEX, self.datetime.__str__()))
-
-    def test_year(self):
-        result = self.datetime.year(minimum=2000, maximum=2016)
-        self.assertTrue((result >= 2000) and (result <= 2016))
-
-    def test_day_of_month(self):
-        result = self.datetime.day_of_month()
-        self.assertTrue((result >= 1) or (result <= 31))
-
-    def test_date(self):
-        result = self.datetime.date(start=1999, end=1999, fmt="%m/%d/%Y")
-
-        try:  # check if is valid date in correct format
-            result = datetime.datetime.strptime(result, "%m/%d/%Y")
-        except ValueError:
-            self.fail("date() returned value in incorrect format or invalid date")
-        else:
-            self.assertTrue(result.year == 1999)  # check range was applied correctly
-
-    def test_time(self):
-        result = self.datetime.time(fmt="%H:%M")
-
-        try:  # check if is valid time in correct format
-            datetime.datetime.strptime(result, "%H:%M")
-        except ValueError:
-            self.fail("time() returned value in incorrect format or invalid date")
-
-    def test_century(self):
-        result = self.datetime.century()
-        self.assertIsNotNone(result)
-        self.assertIsInstance(result, str)
+def test_str(dt):
+    assert re.match(STR_REGEX, str(dt))
 
 
-class DatetimeTestCase(DummyCase):
-    def test_day_of_week(self):
-        result = self.generic.datetime.day_of_week()
-        self.assertIn(result,
-                      self.generic.datetime.data['day']['name'])
+def test_year(dt):
+    result = dt.year(minimum=2000, maximum=2016)
+    assert result >= 2000
+    assert result <= 2016
 
-        result_abbr = self.generic.datetime.day_of_week(abbr=True)
-        self.assertIn(result_abbr,
-                      self.generic.datetime.data['day']['abbr'])
 
-    def test_month(self):
-        result = self.generic.datetime.month()
-        self.assertIsNotNone(result)
+def test_day_of_month(dt):
+    result = dt.day_of_month()
+    assert ((result >= 1) or (result <= 31))
 
-        result_abbr = self.generic.datetime.month(abbr=True)
-        self.assertIsInstance(result_abbr, str)
 
-    def test_periodicity(self):
-        result = self.generic.datetime.periodicity()
-        self.assertIn(result, self.generic.datetime.data['periodicity'])
+def test_date(dt):
+    result = dt.date(start=1999, end=1999, fmt="%m/%d/%Y")
+
+    result = datetime.datetime.strptime(result, "%m/%d/%Y")
+    assert result.year == 1999  # check range was applied correctly
+
+
+def test_time(dt):
+    result = dt.time(fmt="%H:%M")
+
+    result = datetime.datetime.strptime(result, "%H:%M")
+    assert isinstance(result, datetime.datetime)
+
+
+def test_century(dt):
+    result = dt.century()
+    assert result is not None
+    assert isinstance(result, str)
+
+
+def test_day_of_week(generic):
+    result = generic.datetime.day_of_week()
+    assert result in generic.datetime.data['day']['name']
+
+    result_abbr = generic.datetime.day_of_week(abbr=True)
+    assert result_abbr in generic.datetime.data['day']['abbr']
+
+
+def test_month(generic):
+    result = generic.datetime.month()
+    assert result is not None
+
+    result_abbr = generic.datetime.month(abbr=True)
+    assert isinstance(result_abbr, str)
+
+
+def test_periodicity(generic):
+    result = generic.datetime.periodicity()
+    assert result in generic.datetime.data['periodicity']

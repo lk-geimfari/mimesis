@@ -130,7 +130,7 @@ Running Tests
 .. code-block:: bash
 
     cd elizabeth/
-    python3 -m unittest discover tests
+    py.test --cov=elizabeth/ --cov-report=term-missing
 
 or
 

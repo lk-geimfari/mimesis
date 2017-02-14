@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-python3 -m unittest discover tests
+py.test --cov=elizabeth/ --cov-report=term-missing

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import unittest
+import pytest
 
 from elizabeth.exceptions import UnsupportedLocale
 from elizabeth.utils import (
@@ -9,29 +9,31 @@ from elizabeth.utils import (
 )
 
 
-class UtilsTest(unittest.TestCase):
-    def test_luhn_checksum(self):
-        self.assertEqual(luhn_checksum("7992739871"), "3")
+def test_luhn_checksum():
+    assert luhn_checksum("7992739871") == "3"
 
-    def test_pull(self):
-        data = pull('personal.json', 'en')
 
-        self.assertIsNotNone(data['views_on'])
-        self.assertIsInstance(data['views_on'], list)
-        self.assertRaises(UnsupportedLocale,
-                          lambda: pull('personal.json', 'w'))
-        self.assertRaises(FileNotFoundError,
-                          lambda: pull('something.json', 'en'))
+def test_pull():
+    data = pull('personal.json', 'en')
 
-    def test_download_image(self):
-        result = download_image(url=None)
-        self.assertIsNone(result)
+    assert data['views_on'] is not None
+    assert isinstance(data['views_on'], list)
+    with pytest.raises(UnsupportedLocale):
+        pull('personal.json', 'w')
+    with pytest.raises(FileNotFoundError):
+        pull('something.json', 'en')
 
-    def test_locale_information(self):
-        result = locale_information(locale='ru')
-        self.assertEqual(result, 'Russian')
 
-        result_1 = locale_information(locale='is')
-        self.assertEqual(result_1, 'Icelandic')
-        self.assertRaises(UnsupportedLocale,
-                          lambda: locale_information(locale='w'))
+def test_download_image():
+    result = download_image(url=None)
+    assert result is None
+
+
+def test_locale_information():
+    result = locale_information(locale='ru')
+    assert result == 'Russian'
+
+    result_1 = locale_information(locale='is')
+    assert result_1 == 'Icelandic'
+    with pytest.raises(UnsupportedLocale):
+        locale_information(locale='w')
