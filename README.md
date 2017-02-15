@@ -27,7 +27,7 @@ Also you can install it manually:
 ```zsh
 ➜  ~ git clone https://github.com/lk-geimfari/elizabeth.git
 ➜  ~ cd elizabeth
-➜  python3 setup.py install
+➜  make install
 ```
 
 
@@ -47,7 +47,7 @@ Also you can install it manually:
 
 ## Locales
 
-You can specify a locale when creating providers and they will return data that is appropriate for the language or country associated with that locale.  `Elizabeth` currently includes support for 22 different [locales](https://github.com/lk-geimfari/elizabeth/blob/master/LOCALES.md).
+You can specify a locale when creating providers and they will return data that is appropriate for the language or country associated with that locale.  `Elizabeth` currently includes support for 23 different [locales](https://github.com/lk-geimfari/elizabeth/blob/master/LOCALES.md).
 
 Using locales:
 
@@ -211,7 +211,7 @@ Your contributions are always welcome! Please take a look at the [contribution](
 ```zsh
 ➜ ~ git clone https://github.com/lk-geimfari/elizabeth.git
 ➜ cd elizabeth/
-➜ py.test --cov=elizabeth/ --cov-report=term-missing
+➜ make test
 ```
 
 ## License

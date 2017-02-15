@@ -12,7 +12,7 @@ Installation
 
     git clone https://github.com/lk-geimfari/elizabeth.git
     cd elizabeth/
-    python3 setup.py install
+    make install
 
 or simply:
 
@@ -38,7 +38,7 @@ Basic Usage
 Locales
 -------
 
-You can specify a locale when creating providers and they will return data that is appropriate for the language or country associated with that locale.  `Elizabeth` currently includes support for 20 different locales:
+You can specify a locale when creating providers and they will return data that is appropriate for the language or country associated with that locale.  `Elizabeth` currently includes support for 23 different locales:
 
 =======  ====================  ====================
 Code     Name                  Native Name
@@ -47,6 +47,7 @@ Code     Name                  Native Name
 `da`     Danish                Dansk
 `de`     German                Deutsch
 `en`     English               English
+`en-au`  Australian English    English
 `en-gb`  British English       English
 `es`     Spanish               Español
 `fa`     Farsi                 فارسی
@@ -55,6 +56,7 @@ Code     Name                  Native Name
 `hu`     Hungarian             Magyar
 `is`     Icelandic             Íslenska
 `it`     Italian               Italiano
+`jp`     Japanese              日本語
 `ko`	 Korean                한국어
 `nl`     Dutch                 Nederlands
 `no`     Norwegian             Norsk
@@ -63,6 +65,7 @@ Code     Name                  Native Name
 `pt-br`  Brazilian Portuguese  Português Brasileiro
 `ru`     Russian               Русский
 `sv`     Swedish               Svenska
+`tr`     Turkish               Türkçe
 =======  ====================  ====================
 
 Usage
@@ -136,7 +139,7 @@ or
 
 .. code-block:: bash
 
-    run_tests.sh
+    make test
 
 License and Disclaimer
 ----------------------

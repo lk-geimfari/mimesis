@@ -19,6 +19,10 @@
       "日曜日"
     ]
   },
+    "formats": {
+    "date": "%Y/%m/%d",
+    "time": "%H:%M:%S"
+  },
   "month": {
     "abbr": [
       "1月",
