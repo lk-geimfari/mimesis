@@ -20,7 +20,7 @@
     ]
   },
   "formats": {
-    "date": "%Y.%m.%d",
+    "date": "%Y/%m/%d",
     "time": "%H:%M:%S"
   },
   "month": {
