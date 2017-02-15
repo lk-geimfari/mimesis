@@ -18,12 +18,16 @@ def test_street_number(address):
 
 def test_latitude(address):
     result = address.latitude()
+    assert isinstance(result, float)
     assert result <= 90
+    assert result >= -90
 
 
 def test_longitude(address):
     result = address.longitude()
+    assert isinstance(result, float)
     assert result <= 180
+    assert result >= -180
 
 
 def test_coordinates(address):
@@ -31,24 +35,31 @@ def test_coordinates(address):
     assert isinstance(result, dict)
 
     latitude = result['latitude']
+    assert isinstance(latitude, float)
     assert latitude <= 90
+    assert latitude >= -90
 
     longitude = result['longitude']
+    assert isinstance(latitude, float)
     assert longitude <= 180
+    assert longitude >= -180
 
 
 def test_street_name(generic):
     result = generic.address.street_name()
+    assert isinstance(result, str)
     assert result in generic.address.data['street']['name']
 
 
 def test_street_suffix(generic):
     result = generic.address.street_suffix()
+    assert isinstance(result, str)
     assert result in generic.address.data['street']['suffix']
 
 
 def test_address(generic):
     result = generic.address.address()
+    assert isinstance(result, str)
     assert result is not None
 
 
@@ -76,6 +87,10 @@ def test_country(generic):
 
 
 def test_country_iso(generic):
+    default = generic.address.country_iso()
+    assert isinstance(default, str)
+    assert default in COUNTRIES_ISO['iso2']
+
     iso2 = generic.address.country_iso(fmt='iso2')
     assert iso2 in COUNTRIES_ISO['iso2']
     assert len(iso2) == 2

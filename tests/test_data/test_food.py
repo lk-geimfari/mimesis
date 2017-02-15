@@ -5,7 +5,7 @@ from ._patterns import STR_REGEX
 
 
 def test_str(generic):
-    assert re.match(STR_REGEX, str(generic))
+    assert re.match(STR_REGEX, str(generic.food))
 
 
 def test_vegetable(generic):

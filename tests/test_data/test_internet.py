@@ -89,3 +89,6 @@ def test_stock_image(net):
 def test_image_by_keyword(net):
     result = net.image_by_keyword(keyword='word').split('/')[-1]
     assert 'word' == result.split('?')[1]
+
+    default = net.image_by_keyword()
+    assert isinstance(default, str)

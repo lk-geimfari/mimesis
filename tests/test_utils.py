@@ -28,6 +28,11 @@ def test_download_image():
     result = download_image(url=None)
     assert result is None
 
+    verified = download_image(
+        url="https://github.com/lk-geimfari/elizabeth/raw/master/other/elizabeth_1.png",
+    )
+    assert verified == "elizabeth_1.png"
+
 
 def test_locale_information():
     result = locale_information(locale='ru')

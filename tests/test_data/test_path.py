@@ -10,6 +10,7 @@ from elizabeth.core.intd import (
     FOLDERS,
     PROJECT_NAMES
 )
+from unittest.mock import patch
 
 
 @pytest.fixture
@@ -18,19 +19,27 @@ def path():
 
 
 def test_root(path):
-    root = path.root
+    platform_patcher = patch('sys.platform', 'win32')
+    platform_patcher.start()
+    assert 'С:\\' == path.root
+    platform_patcher.stop()
 
-    if sys.platform == 'win32':
-        assert 'С:\\' == root
-    else:
-        assert '/' == root
+    platform_patcher = patch('sys.platform', 'linux2')
+    platform_patcher.start()
+    assert '/' == path.root
+    platform_patcher.stop()
 
 
 def test_home(path):
-    if sys.platform == 'win32':
-        assert 'С:\\Users\\' == path.home
-    else:
-        assert '/home/' == path.home
+    platform_patcher = patch('sys.platform', 'win32')
+    platform_patcher.start()
+    assert 'С:\\Users\\' == path.home
+    platform_patcher.stop()
+
+    platform_patcher = patch('sys.platform', 'linux2')
+    platform_patcher.start()
+    assert '/home/' == path.home
+    platform_patcher.stop()
 
 
 def test_user(path):
