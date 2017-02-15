@@ -1,29 +1,32 @@
 # -*- coding: utf-8 -*-
 
-from unittest import TestCase
+import pytest
 
 from elizabeth.core.providers import ClothingSizes
 
 
-class ClothingSizesTest(TestCase):
-    def setUp(self):
-        self.sizes = ClothingSizes()
+@pytest.fixture
+def sizes():
+    return ClothingSizes()
 
-    def tearDown(self):
-        del self.sizes
 
-    def test_international(self):
-        sizes = ("L", "M", "S",
-                 "XL", "XS", "XXL",
-                 "XXS", "XXXL"
-                 )
-        result = self.sizes.international()
-        self.assertIn(result, sizes)
+def test_international(sizes):
+    size_names = (
+        "L", "M", "S",
+        "XL", "XS", "XXL",
+        "XXS", "XXXL"
+    )
+    result = sizes.international()
+    assert result in size_names
 
-    def test_eur(self):
-        result = self.sizes.european()
-        self.assertTrue((result >= 40) and (result <= 62))
 
-    def test_custom(self):
-        result = self.sizes.custom(minimum=40, maximum=62)
-        self.assertTrue((result >= 40) and (result <= 62))
+def test_eur(sizes):
+    result = sizes.european()
+    assert result >= 40
+    assert result <= 62
+
+
+def test_custom(sizes):
+    result = sizes.custom(minimum=40, maximum=62)
+    assert result >= 40
+    assert result <= 62

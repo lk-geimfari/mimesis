@@ -10,8 +10,9 @@ python:
 
 install:
   - pip install codecov
+  - pip install pytest-cov
 
-script: coverage run -m unittest discover tests
-  
+script: py.test --cov=elizabeth/
+
 after_success:
   codecov

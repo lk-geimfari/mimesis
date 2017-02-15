@@ -1,41 +1,43 @@
+import pytest
 import re
-import unittest
+
 from elizabeth.builtins import BrazilSpecProvider
 
 
-class BrazilTest(unittest.TestCase):
-    def setUp(self):
-        self.pt_br = BrazilSpecProvider()
+@pytest.fixture
+def pt_br():
+    return BrazilSpecProvider()
 
-    def tearDown(self):
-        del self.pt_br
 
-    def test_cpf(self):
-        # test if the cpf has 14 digits with the mask
-        cpf_with_mask = self.pt_br.cpf()
-        self.assertEqual(len(cpf_with_mask), 14, cpf_with_mask)
-        # test the mask
-        non_numeric_digits = re.sub('\d', '', cpf_with_mask)
-        self.assertEqual('..-', non_numeric_digits, non_numeric_digits)
-        self.assertEqual(len(re.sub('\D', '', cpf_with_mask)),
-                         11, cpf_with_mask)
-        # test for the cpf without mask
-        cpf_without_mask = self.pt_br.cpf(False)
-        self.assertEqual(len(cpf_without_mask), 11, cpf_without_mask)
-        non_numeric_digits = re.sub('\d', '', cpf_without_mask)
-        self.assertEqual('', non_numeric_digits, non_numeric_digits)
+def test_cpf(pt_br):
+    # test if the cpf has 14 digits with the mask
+    cpf_with_mask = pt_br.cpf()
+    assert len(cpf_with_mask) == 14
 
-    def test_cnpj(self):
-        # test if the cnpj has 14 digits with the mask
-        cnpj_with_mask = self.pt_br.cnpj()
-        self.assertEqual(len(cnpj_with_mask), 18, cnpj_with_mask)
-        # test the mask
-        non_numeric_digits = re.sub('\d', '', cnpj_with_mask)
-        self.assertEqual('../-', non_numeric_digits, non_numeric_digits)
-        self.assertEqual(len(re.sub('\D', '', cnpj_with_mask)),
-                         14, cnpj_with_mask)
-        # test for the cnpj without mask
-        cnpj_without_mask = self.pt_br.cnpj(False)
-        self.assertEqual(len(cnpj_without_mask), 14, cnpj_without_mask)
-        non_numeric_digits = re.sub('\d', '', cnpj_without_mask)
-        self.assertEqual('', non_numeric_digits, non_numeric_digits)
+    # test the mask
+    non_numeric_digits = re.sub('\d', '', cpf_with_mask)
+    assert '..-' == non_numeric_digits == non_numeric_digits
+    assert len(re.sub('\D', '', cpf_with_mask)) == 11
+
+    # test for the cpf without mask
+    cpf_without_mask = pt_br.cpf(False)
+    assert len(cpf_without_mask) == 11
+    non_numeric_digits = re.sub('\d', '', cpf_without_mask)
+    assert '' == non_numeric_digits
+
+
+def test_cnpj(pt_br):
+    # test if the cnpj has 18 digits with the mask
+    cnpj_with_mask = pt_br.cnpj()
+    assert len(cnpj_with_mask) == 18
+
+    # test the mask
+    non_numeric_digits = re.sub('\d', '', cnpj_with_mask)
+    assert '../-' == non_numeric_digits == non_numeric_digits
+    assert len(re.sub('\D', '', cnpj_with_mask)) == 14
+
+    # test for the cnpj without mask
+    cnpj_without_mask = pt_br.cnpj(False)
+    assert len(cnpj_without_mask) == 14
+    non_numeric_digits = re.sub('\d', '', cnpj_without_mask)
+    assert '' == non_numeric_digits

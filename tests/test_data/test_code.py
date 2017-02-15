@@ -1,61 +1,56 @@
 # -*- coding: utf-8 -*-
 import re
-from unittest import TestCase
-
-from elizabeth import Code
-from tests.test_data import DummyCase
 
 from ._patterns import STR_REGEX
 
 
-class CodeBaseTest(TestCase):
-    def setUp(self):
-        self.code = Code('en')
-
-    def tearDown(self):
-        del self.code
-
-    def test_str(self):
-        self.assertTrue(re.match(STR_REGEX, self.code.__str__()))
-
-    def test_custom_code(self):
-        result = self.code.custom_code(
-            mask="@###", char='@', digit='#')
-
-        self.assertTrue(len(result) == 4)
-
-    def test_custom_code_args(self):
-        result = self.code.custom_code(
-            mask="@@@-###-@@@").split('-')
-
-        a, b, c = result
-        self.assertTrue(
-            a.isalpha() and c.isalpha() and b.isdigit())
-
-    def test_ean(self):
-        result = self.code.ean(fmt='ean-8')
-        self.assertTrue(len(result) == 8)
-
-        result = self.code.ean(fmt='ean-13')
-        self.assertTrue(len(result) == 13)
-
-    def test_imei(self):
-        result = self.code.imei()
-        self.assertTrue(len(result) <= 15)
-
-    def test_pin(self):
-        result = self.code.pin()
-        self.assertTrue(len(result) == 4)
-
-    def test_issn(self):
-        result = self.code.issn()
-        self.assertEqual(len(result), 9)
+def test_str(code):
+    assert re.match(STR_REGEX, str(code))
 
 
-class CodeIntTestCase(DummyCase):
-    def test_isbn(self):
-        result = self.generic.code.isbn(fmt='isbn-10')
-        self.assertTrue(len(result) >= 10)
+def test_custom_code(code):
+    result = code.custom_code(
+        mask="@###", char='@', digit='#')
 
-        result = self.generic.code.isbn(fmt='isbn-13')
-        self.assertTrue(len(result) >= 13)
+    assert len(result) == 4
+
+
+def test_custom_code_args(code):
+    result = code.custom_code(
+        mask="@@@-###-@@@").split('-')
+
+    a, b, c = result
+    assert a.isalpha()
+    assert b.isdigit()
+    assert c.isalpha()
+
+
+def test_ean(code):
+    result = code.ean(fmt='ean-8')
+    assert len(result) == 8
+
+    result = code.ean(fmt='ean-13')
+    assert len(result) == 13
+
+
+def test_imei(code):
+    result = code.imei()
+    assert len(result) <= 15
+
+
+def test_pin(code):
+    result = code.pin()
+    assert len(result) == 4
+
+
+def test_issn(code):
+    result = code.issn()
+    assert len(result) == 9
+
+
+def test_isbn(generic):
+    result = generic.code.isbn(fmt='isbn-10')
+    assert len(result) >= 10
+
+    result = generic.code.isbn(fmt='isbn-13')
+    assert len(result) >= 13

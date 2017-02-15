@@ -19,6 +19,10 @@
       "일요일"
     ]
   },
+  "formats": {
+    "date": "%Y.%m.%d",
+    "time": "%H:%M:%S"
+  },
   "month": {
     "abbr": [
       "1월",

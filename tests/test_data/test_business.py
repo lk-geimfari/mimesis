@@ -1,59 +1,57 @@
 # -*- coding: utf-8 -*-
 import re
-from unittest import TestCase
 
-from elizabeth import Business
 from elizabeth.core.intd import CURRENCY, CURRENCY_SYMBOLS
-from tests.test_data import DummyCase
 
 from ._patterns import STR_REGEX
 
 
-class BusinessBaseTest(TestCase):
-    def setUp(self):
-        self.business = Business()
-
-    def tearDown(self):
-        del self.business
-
-    def test_str(self):
-        self.assertTrue(re.match(STR_REGEX, self.business.__str__()))
-
-    def test_copyright(self):
-        result = self.business.copyright()
-        self.assertIn('©', result)
-        self.assertIsNotNone(result)
-
-        result_1 = self.business.copyright(date=False)
-        self.assertIn('©', result)
-        self.assertIsNotNone(result_1)
-
-        result_args = self.business.copyright(minimum=1999, maximum=2010)
-        date = result_args.split()[1].split('-')
-        self.assertTrue(int(date[0]) >= 1999 and int(date[1]) <= 2010)
-
-    def test_currency_sio(self):
-        result = self.business.currency_iso()
-        self.assertIn(result, CURRENCY)
+def test_str(business):
+    assert re.match(STR_REGEX, str(business))
 
 
-class BusinessTestCase(DummyCase):
-    def test_company_type(self):
-        result = self.generic.business.company_type()
-        self.assertIn(result,
-                      self.generic.business.data['company']['type']['title'])
+def test_copyright(business):
+    result = business.copyright()
+    assert '©' in result
+    assert result is not None
 
-        result_2 = self.generic.business.company_type(abbr=True)
-        self.assertIn(result_2,
-                      self.generic.business.data['company']['type']['abbr'])
+    result_1 = business.copyright(date=False)
+    assert '©' in result
+    assert result_1 is not None
 
-    def test_company(self):
-        result = self.generic.business.company()
-        self.assertIn(result, self.generic.business.data['company']['name'])
+    result_args = business.copyright(minimum=1999, maximum=2010)
+    date = result_args.split()[1].split('-')
+    assert int(date[0]) >= 1999
+    assert int(date[1]) <= 2010
 
-    def test_price(self):
-        currencies  = CURRENCY_SYMBOLS[self.generic.business.locale]
-        result = self.generic.business.price(minimum=100.00, maximum=1999.99)
-        price, symbol = result.split(' ')
-        self.assertTrue((float(price) >= 100.00) and (float(price) <= 2000))
-        self.assertIn(symbol, currencies)
+
+def test_currency_sio(business):
+    result = business.currency_iso()
+    assert result in CURRENCY
+
+
+def test_company_type(generic):
+    result = generic.business.company_type()
+    assert result in generic.business.data['company']['type']['title']
+
+    result_2 = generic.business.company_type(abbr=True)
+    assert result_2 in generic.business.data['company']['type']['abbr']
+
+
+def test_company(generic):
+    result = generic.business.company()
+    assert result in generic.business.data['company']['name']
+
+
+def test_price(generic):
+    currencies = CURRENCY_SYMBOLS[generic.business.locale]
+    result = generic.business.price(minimum=100.00, maximum=1999.99)
+    price, symbol = result.split(' ')
+    assert isinstance(price, str)
+    assert float(price) >= 100.00
+    assert float(price) <= 1999.99
+    assert symbol in currencies
+
+    # invalid locale should use default
+    generic.business.locale = "xx"
+    assert CURRENCY_SYMBOLS['default'] in generic.business.price()

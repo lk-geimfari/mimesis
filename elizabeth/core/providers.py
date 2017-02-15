@@ -430,14 +430,13 @@ class Structured(object):
         return value
 
     def json(self, provider_name, items=5):
-        """
-        Generate a random snippet of JSON
+        """Generate a random snippet of JSON
 
-        :param provider_name: name of provider to generate JSON data for.
+        :param provider_name: Name of provider to generate JSON data for.
         :type provider_name: str
-        :param items: number of top-level items to include
+        :param items: Number of top-level items to include.
         :type items: int
-        :return: JSON
+        :return: JSON.
         :rtype: str
         """
         providers = {
@@ -454,7 +453,9 @@ class Structured(object):
         try:
             provider_data = providers[provider_name.lower()]
         except KeyError:
-            raise NotImplementedError("Provider {} is not supported".format(provider_name))
+            raise NotImplementedError(
+                "Provider {} is not supported".format(provider_name)
+            )
 
         try:
             provider = provider_data['provider'](self.locale)
@@ -1867,28 +1868,6 @@ class Hardware(object):
             Dell.
         """
         return choice(intd.MANUFACTURERS)
-
-    def hardware_info(self):
-        """Generate a random full information about device (laptop).
-
-        :return: Full information.
-        :Example:
-            ASUS Intel® Core i3 3rd Generation 3.50 GHz/1920x1200/12″/
-            512GB HDD(7200 RPM)/DDR2-4GB/Intel® Iris™ Pro Graphics 6200.
-        """
-        fmt = '%s %s-%s CPU @ %s/%s/%s/%s/%s-%s/%s.'
-        fmt = fmt % (
-            self.manufacturer(),
-            self.cpu(),
-            self.generation(abbr=True),
-            self.cpu_frequency(),
-            self.resolution(),
-            self.screen_size(),
-            self.ssd_or_hdd(),
-            self.ram_type(),
-            self.ram_size(),
-            self.graphics())
-        return fmt
 
     @staticmethod
     def phone_model():

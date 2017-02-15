@@ -92,6 +92,7 @@ elizabeth/data/__pychache__
 
 # Development files.
 file.txt
+file.json
 utility.py
 TODO
 .gitignore
