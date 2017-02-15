@@ -28,8 +28,11 @@ def test_date(dt):
 
 
 def test_time(dt):
-    result = dt.time(fmt="%H:%M")
+    default = dt.time()
+    default = datetime.datetime.strptime(default, dt.data['formats']['time'])
+    assert isinstance(default, datetime.datetime)
 
+    result = dt.time(fmt="%H:%M")
     result = datetime.datetime.strptime(result, "%H:%M")
     assert isinstance(result, datetime.datetime)
 
