@@ -1,6 +1,13 @@
 # -*- coding: utf-8 -*-
 
 import pytest
+import re
+
+from .test_data._patterns import STR_REGEX
+
+
+def test_str(generic):
+    assert re.match(STR_REGEX, str(generic))
 
 
 def test_base_personal(generic):

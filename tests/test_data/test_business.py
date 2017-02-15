@@ -47,6 +47,11 @@ def test_price(generic):
     currencies = CURRENCY_SYMBOLS[generic.business.locale]
     result = generic.business.price(minimum=100.00, maximum=1999.99)
     price, symbol = result.split(' ')
+    assert isinstance(price, str)
     assert float(price) >= 100.00
-    assert float(price) <= 2000
+    assert float(price) <= 1999.99
     assert symbol in currencies
+
+    # invalid locale should use default
+    generic.business.locale = "xx"
+    assert CURRENCY_SYMBOLS['default'] in generic.business.price()

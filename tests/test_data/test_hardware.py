@@ -5,7 +5,8 @@ import pytest
 from elizabeth.core.intd import (
     CPU_CODENAMES, PHONE_MODELS, MEMORY,
     RESOLUTIONS, MANUFACTURERS, CPU,
-    GENERATION, SCREEN_SIZES, GRAPHICS
+    GENERATION, SCREEN_SIZES, GRAPHICS,
+    GENERATION_ABBR
 )
 from elizabeth.core.providers import Hardware
 
@@ -28,6 +29,11 @@ def test_screen_size(hard):
 def test_generation(hard):
     result = hard.generation()
     assert result in GENERATION
+    assert isinstance(result, str)
+
+    abbr = hard.generation(abbr=True)
+    assert abbr in GENERATION_ABBR
+    assert isinstance(abbr, str)
 
 
 def test_cpu_frequency(hard):
