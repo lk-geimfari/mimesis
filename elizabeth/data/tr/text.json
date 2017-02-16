@@ -133,7 +133,9 @@
 	"Bu vatan, çocuklarımız ve torunlarımız için cennet yapılmaya layıktır."
   ],
   "words": {
-	"bad": ["Test"],
+	"bad": [
+	  "Test"
+	],
 	"normal": [
 	  "bir",
 	  "bu",
