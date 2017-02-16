@@ -1,9 +1,7 @@
-
 ## Data providers
 
-
 | №   | Provider        | Description                                                    |
-|---  | -------------   |:-------------                                                  |
+|---  | ------------- |:-------------                                           |
 | 1   | Address         | *Address data (street name, street suffix etc.)*               |
 | 2   | Business        | *Business data (company, company_type, copyright etc.)*        |
 | 3   | Code            | *Codes (ISBN, EAN, IMEI etc.).*                                |

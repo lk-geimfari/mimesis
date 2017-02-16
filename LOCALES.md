@@ -25,3 +25,6 @@
 | 21 | 🇷🇺   |  `ru`      | Russian              | Русский     |
 | 22 | 🇸🇪   |  `sv`      | Swedish              | Svenska     |
 | 23 | 🇹🇷   |  `tr`      | Turkish              | Türkçe      |
+
+---
+Help us make this project better. Check the locales and send us `PR` with your changes.
