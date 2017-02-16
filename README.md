@@ -113,7 +113,7 @@ class Patient(db.Model):
         super(Patient, self).__init__(**kwargs)
 
     @staticmethod
-    def _bootstrap(count=2000, locale='en'):
+    def _bootstrap(count=500, locale='en', gender):
         from elizabeth import Personal
 
         person = Personal(locale)
@@ -122,7 +122,7 @@ class Patient(db.Model):
             patient = Patient(
                 email=person.email(),
                 phone_number=person.telephone(),
-                full_name=person.full_name(gender='female'),
+                full_name=person.full_name(gender=gender),
                 age=person.age(minimum=18, maximum=45),
                 weight=person.weight(),
                 height=person.height(),
