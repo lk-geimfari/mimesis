@@ -155,7 +155,10 @@ def download_image(url, save_path='', unverified_ctx=False):
     """
     if unverified_ctx:
         import ssl
-        ssl._create_default_https_context = ssl._create_unverified_context
+        try:
+            ssl._create_default_https_context = ssl._create_stdlib_context
+        except AttributeError:
+            raise NotImplementedError("unverified_ctx is only supported in Python 3.4+")
 
     if url is not None:
         image_name = url.rsplit('/')[-1]
