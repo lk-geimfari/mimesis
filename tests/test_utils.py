@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import os
 import pytest
 
 from elizabeth.exceptions import UnsupportedLocale
@@ -32,6 +33,7 @@ def test_download_image():
         url="https://github.com/lk-geimfari/elizabeth/raw/master/other/elizabeth_1.png",
     )
     assert verified == "elizabeth_1.png"
+    os.remove(verified)
 
 
 def test_locale_information():
