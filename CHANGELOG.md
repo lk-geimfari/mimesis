@@ -1,5 +1,11 @@
 ## Changelog
 
+
+### Version 0.3.17
+ - Fixed incorrect imports
+
+---
+
 ### Version 0.3.16
  - Updated data for some locales
  - New tests uing pytest (100% coverage)
