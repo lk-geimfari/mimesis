@@ -17,6 +17,7 @@ help:
 	@echo "\033[93m::::::::::::::::::::::::::::::::::::::::::::::::::::::::\033[0m"
 	@echo "\033[92mclean-pyc    - remove Python file artifacts\033[0m"
 	@echo "\033[92mclean-build  - remove build artifacts\033[0m"
+	@echo "\033[92mclean        - remove build and Python file artifacts\033[0m"
 	@echo "\033[92mtest         - run tests quickly with the default Python\033[0m"
 	@echo "\033[92mtest-travis  - run tests for Travis CI\033[0m"
 	@echo "\033[92mtest-files   - internal files for development\033[0m"
@@ -35,6 +36,8 @@ clean-build:
 	rm --force --recursive build/
 	rm --force --recursive dist/
 	rm --force --recursive .cache/
+
+clean: clean-pyc clean-build
 
 test:
 	py.test --cov=elizabeth/ --cov-report=term-missing  --verbose --color=yes $(ROOT)
