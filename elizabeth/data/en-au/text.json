@@ -57,6 +57,11 @@
 	  "z"
 	]
   },
+  "answers": [
+	"Yes",
+	"No",
+	"Maybe"
+  ],
   "color": [
 	"White",
 	"Black",

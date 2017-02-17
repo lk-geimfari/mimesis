@@ -63,6 +63,11 @@
 	  "z"
 	]
   },
+  "answers": [
+	"Evet",
+	"Hayır",
+	"Olabilir"
+  ],
   "color": [
 	"Bej",
 	"Siyah",
