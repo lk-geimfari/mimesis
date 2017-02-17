@@ -1,5 +1,12 @@
 ## Changelog
 
+### Version 0.3.16
+ - Updated data for some locales
+ - New tests uing pytest (100% coverage)
+ - Added answer() to Text()
+ - Other minor improvements
+
+---
 
 ### Version 0.3.15
  - Added `tr` locale
