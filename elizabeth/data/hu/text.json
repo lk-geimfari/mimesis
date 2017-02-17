@@ -94,15 +94,28 @@
     ]
   },
   "color": [
-    "Test"
+    "Barna",
+    "Bordó",
+    "Citromsárga",
+    "Fehér",
+    "Fekete",
+    "Lila",
+    "Narancssárga",
+    "Piros",
+    "Rózsaszín",
+    "Sötétkék",
+    "Sötétzöld",
+    "Szürke",
+    "Világoskék",
+    "Világoszöld"
   ],
   "level": [
     "Alacsony",
-    "Kritikai",
+    "Kritikus",
     "Magas",
     "Mérsékelt",
     "Nagyon magas",
-    "Szélső"
+    "Szélsőséges"
   ],
   "quotes": [
     "Test"
