@@ -92,3 +92,9 @@ def test_image_by_keyword(net):
 
     default = net.image_by_keyword()
     assert isinstance(default, str)
+
+
+def test_protocol(net):
+    result = net.protocol()
+    assert result is not None
+    assert result in ['http', 'https']

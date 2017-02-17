@@ -2080,6 +2080,16 @@ class Internet(object):
         """
         return choice(intd.USER_AGENTS)
 
+    @staticmethod
+    def protocol():
+        """Get a random protocol.
+
+        :return: Protocol.
+        :Example:
+            https
+        """
+        return choice(['http', 'https'])
+
 
 class Transport(object):
     """Class that provides dummy data about transport."""
