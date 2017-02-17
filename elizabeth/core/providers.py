@@ -29,7 +29,7 @@ from string import (
     punctuation
 )
 
-# intd (acronym International Data)
+# intd (International Data)
 from elizabeth.core import intd
 
 from elizabeth.utils import (
@@ -2197,7 +2197,7 @@ class Path(object):
         :Example:
             /home/sherrell/Development/Python/mercenary
         """
-        dev_folder = choice( ['Development', 'Dev', 'dev',])
+        dev_folder = choice(['Development', 'Dev'])
         stack = choice(intd.PROGRAMMING_LANGS)
         user = self.user(user_gender)
 
@@ -2261,7 +2261,6 @@ class Generic(object):
         else:
             raise TypeError("Provider must be a class")
 
-    # TODO: Not cool. Refactor it.
     @property
     def personal(self):
         if callable(self._personal):
