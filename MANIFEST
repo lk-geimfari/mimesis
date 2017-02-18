@@ -10,15 +10,7 @@ elizabeth/builtins/__init__.py
 elizabeth/builtins/specific_providers.py
 elizabeth/core/__init__.py
 elizabeth/core/providers.py
-elizabeth/core/interdata/__init__.py
-elizabeth/core/interdata/address.py
-elizabeth/core/interdata/code.py
-elizabeth/core/interdata/development.py
-elizabeth/core/interdata/hardware.py
-elizabeth/core/interdata/internet.py
-elizabeth/core/interdata/path.py
-elizabeth/core/interdata/structured.py
-elizabeth/core/interdata/transport.py
+elizabeth/core/intd/__init__.py
 elizabeth/data/cs/address.json
 elizabeth/data/cs/business.json
 elizabeth/data/cs/datetime.json

@@ -1424,8 +1424,7 @@
 	]
   },
   "nationality": [
-	"Test",
-	""
+	"Test"
   ],
   "occupation": [
 	"Acheteur d’espaces publicitaires",
@@ -3675,18 +3674,24 @@
   "title": {
 	"female": {
 	  "typical": [
-		"Test"
+		"Mme.",
+		"Madame"
 	  ],
 	  "academic": [
-		"Test"
+		"PhD",
+		"Dr.",
+		"Prof."
 	  ]
 	},
 	"male": {
 	  "typical": [
-		"Test"
+		"M.",
+		"Mr."
 	  ],
 	  "academic": [
-		"Test"
+		"PhD",
+		"Dr.",
+		"Prof."
 	  ]
 	}
   },

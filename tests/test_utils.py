@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
+import os
 import pytest
+import sys
 
 from elizabeth.exceptions import UnsupportedLocale
 from elizabeth.utils import (
@@ -32,6 +34,14 @@ def test_download_image():
         url="https://github.com/lk-geimfari/elizabeth/raw/master/other/elizabeth_1.png",
     )
     assert verified == "elizabeth_1.png"
+    os.remove(verified)
+
+    if sys.version_info.minor <= 3:
+        with pytest.raises(NotImplementedError):
+            download_image(url=None, unverified_ctx=True)
+    else:
+        unverified = download_image(url=None, unverified_ctx=True)
+        assert unverified is None
 
 
 def test_locale_information():

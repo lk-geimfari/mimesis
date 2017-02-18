@@ -634,6 +634,17 @@ class Text(object):
 
         return '{0:0.1f} {1}'.format(n, scale)
 
+    def answer(self):
+        """Get a random answer in current language.
+
+        :return: An answer.
+        :rtype: str
+        :Example:
+            No
+        """
+        answers = self.data['answers']
+        return choice(answers)
+
 
 class Code(object):
     """Class that provides methods for generating codes (isbn, asin & etc.)"""

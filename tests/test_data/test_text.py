@@ -84,3 +84,9 @@ def test_level(generic):
     result = generic.text.level()
     assert result is not None
     assert isinstance(result, str)
+
+
+def test_answer(generic):
+    result = generic.text.answer()
+    assert result is not None
+    assert isinstance(result, str)

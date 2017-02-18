@@ -1,7 +1,8 @@
 {
   "academic_degree": [
 	"Sapolo",
-	"Dottorato"
+	"Dottorato",
+	"Dottorato di ricerca"
   ],
   "favorite_movie": [
 	"2 giorni a Parigi",
@@ -7101,18 +7102,33 @@
   "title": {
 	"female": {
 	  "typical": [
-		"Test"
+		"Signorina",
+		"La signorina",
+		"La signora",
+		"Signora"
 	  ],
 	  "academic": [
-		"Test"
+		"Dott.",
+		"Avv.",
+		"Ing.",
+		"PhD",
+		"Dr.",
+		"Dott. Ric"
 	  ]
 	},
 	"male": {
 	  "typical": [
-		"Test"
+		"Signore",
+		"Sig.",
+		"Mister"
 	  ],
 	  "academic": [
-		"Test"
+		"Dott.",
+		"Avv.",
+		"Ing.",
+		"PhD",
+		"Dr.",
+		"Dott. Ric"
 	  ]
 	}
   },
