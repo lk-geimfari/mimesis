@@ -57,7 +57,9 @@
     "Volt egyszer egy Vadnyugat"
   ],
   "gender": [
-    "Test"
+    "Férfi",
+    "Nő",
+    "Egyéb"
   ],
   "language": [
     "Afrikaans",
