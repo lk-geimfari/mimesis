@@ -2463,23 +2463,85 @@
   "title": {
     "female": {
       "typical": [
-        "Test"
+        "Mrs.",
+		"Ms.",
+		"Miss"
       ],
       "academic": [
-        "Test"
+        "Adjunktus",
+        "Dékán",
+        "Dr.",
+        "Egyetemi docens",
+        "Egyetemi tanár",
+        "Főiskolai docens",
+        "Főiskolai tanár",
+        "PhD.",
+        "Professzor",
+        "Rektor",
+        "Rektorhelyettes",
+        "Tanársegéd",
+        "Tanszékvezető"
       ]
     },
     "male": {
       "typical": [
-        "Test"
+        "Mr.",
+		"Sir"
       ],
       "academic": [
-        "Test"
+        "Adjunktus",
+        "Dékán",
+        "Dr.",
+        "Egyetemi docens",
+        "Egyetemi tanár",
+        "Főiskolai docens",
+        "Főiskolai tanár",
+        "PhD.",
+        "Professzor",
+        "Rektor",
+        "Rektorhelyettes",
+        "Tanársegéd",
+        "Tanszékvezető"
       ]
     }
   },
   "university": [
-    "Test"
+    "Állatorvostudományi Egyetem",
+    "Andrássy Gyula Budapesti Német Nyelvű Egyetem",
+    "Budapesti Corvinus Egyetem",
+    "Budapesti Gazdasági Egyetem",
+    "Budapesti Metropolitan Egyetem",
+    "Budapesti Műszaki és Gazdaságtudományi Egyetem",
+    "Debreceni Egyetem",
+    "Debreceni Református Hittudományi Egyetem",
+    "Dunaújvárosi Egyetem",
+    "Eötvös Loránd Tudományegyetem",
+    "Eszterházy Károly Egyetem",
+    "Evangélikus Hittudományi Egyetem",
+    "Kaposvári Egyetem",
+    "Károli Gáspár Református Egyetem",
+    "Közép-európai Egyetem",
+    "Liszt Ferenc Zeneművészeti Egyetem",
+    "Magyar Képzőművészeti Egyetem",
+    "Magyar Táncművészeti Egyetem",
+    "McDaniel College Budapest",
+    "Moholy-Nagy Művészeti Egyetem",
+    "Miskolci Egyetem",
+    "Nemzeti Közszolgálati Egyetem",
+    "Nyíregyházi Egyetem",
+    "Nyugat-magyarországi Egyetem",
+    "Óbudai Egyetem",
+    "Országos Rabbiképző – Zsidó Egyetem",
+    "Pallasz Athéné Egyetem",
+    "Pannon Egyetem",
+    "Pázmány Péter Katolikus Egyetem",
+    "Pécsi Tudományegyetem",
+    "Semmelweis Egyetem",
+    "Szent István Egyetem",
+    "Széchenyi István Egyetem",
+    "Színház- és Filmművészeti Egyetem",
+    "Szegedi Tudományegyetem",
+    "Zsigmond Király Egyetem"
   ],
   "views_on": [
     "Test"
