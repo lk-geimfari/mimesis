@@ -309,6 +309,19 @@ class Numbers(object):
         """
         return randint(minimum, maximum)
 
+    @staticmethod
+    def rating(maximum=5.0):
+        """Generate random rating for something.
+
+        :param maximum: Minimum value (default is 5.0).
+        :return: Rating.
+        :rtype: float
+        :Example:
+            4.7
+        """
+        res = '{0:0.1f}'.format(uniform(0, maximum))
+        return float(res)
+
 
 class Structured(object):
     """Provider for structured text data such as CSS, Delimited, HTML, etc."""
