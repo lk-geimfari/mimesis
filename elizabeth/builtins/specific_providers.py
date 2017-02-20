@@ -228,7 +228,7 @@ class RussiaSpecProvider(object):
         :Example:
             560430
         """
-        return _custom_code(mask='######')
+        return randint(100000, 999999)
 
     def series_and_number(self):
         """Generate a random passport number and series.

@@ -49,3 +49,9 @@ def test_between(numbers):
     result = numbers.between(90, 100)
     assert result >= 90
     assert result <= 100
+
+
+def test_rating(numbers):
+    result = numbers.rating(maximum=5.0)
+    assert isinstance(result, float)
+    assert (result >= 0) and (result <= 5.0)

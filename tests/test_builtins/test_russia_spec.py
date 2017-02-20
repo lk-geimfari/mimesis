@@ -22,7 +22,9 @@ def test_passport_series(russia):
 
 def test_passport_number(russia):
     result = russia.passport_number()
-    assert len(result) == 6
+    assert isinstance(result, int)
+    assert (result <= 999999) and (
+        result >= 100000)
 
 
 def test_series_and_number(russia):
