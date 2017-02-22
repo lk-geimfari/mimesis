@@ -5,6 +5,7 @@ locales = [
     'en-au',
     'da',
     'de',
+    'de-at',
     'en',
     'en-gb',
     'es',

@@ -119,6 +119,13 @@ Science
    :members:
    :special-members: __init__
 
+Structured
+-------
+
+.. autoclass:: elizabeth.Structured
+   :members:
+   :special-members: __init__
+
 Text
 ----
 
