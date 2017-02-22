@@ -47,7 +47,7 @@ Also you can install it manually:
 
 ## Locales
 
-You can specify a locale when creating providers and they will return data that is appropriate for the language or country associated with that locale.  `Elizabeth` currently includes support for 23 different [locales](https://github.com/lk-geimfari/elizabeth/blob/master/LOCALES.md).
+You can specify a locale when creating providers and they will return data that is appropriate for the language or country associated with that locale.  `Elizabeth` currently includes support for 24 different [locales](https://github.com/lk-geimfari/elizabeth/blob/master/LOCALES.md).
 
 Using locales:
 
