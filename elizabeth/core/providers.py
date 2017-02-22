@@ -1590,16 +1590,6 @@ class Science(object):
         articles = self._data['article']
         return choice(articles)
 
-    def scientist(self):
-        """Get a random name of scientist.
-
-        :return: Name of scientist.
-        :Example:
-            Konstantin Tsiolkovsky.
-        """
-        scientists = self._data['scientist']
-        return choice(scientists)
-
 
 class Development(object):
     """Class for getting fake data for Developers."""

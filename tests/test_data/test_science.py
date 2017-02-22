@@ -21,11 +21,6 @@ def test_scientific_article(generic):
     assert result in generic.science._data['article']
 
 
-def test_scientist(generic):
-    result = generic.science.scientist()
-    assert result in generic.science._data['scientist']
-
-
 def test_chemical_element(generic):
     # Because: https://travis-ci.org/lk-geimfari/elizabeth/jobs/196565835
     if generic.locale != 'fa':
