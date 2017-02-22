@@ -14,6 +14,10 @@ SUPPORTED_LOCALES = {
         "name": "German",
         "name_local": "Deutsch"
     },
+    "de-at": {
+        "name": "German",
+        "name_local": "Deutsch"
+    },
     "en": {
         "name": "English",
         "name_local": "English"

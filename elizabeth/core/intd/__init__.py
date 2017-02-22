@@ -1253,6 +1253,7 @@ CURRENCY_SYMBOLS = {
     "cs": "Kč",
     "da": "kr",
     "de": "€",
+    "de-at": "€",
     "en": "$",
     "en-gb": "£",
     "en-au": "$",
