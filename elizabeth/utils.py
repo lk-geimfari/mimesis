@@ -73,6 +73,8 @@ def pull(file, locale='en') -> dict:
     +------------------------------+--------------+
     | de - German                  | (data/de)    |
     +------------------------------+--------------+
+    | de-at - Austrian german      | (data/de-at) |
+    +------------------------------+--------------+
     | en - English                 | (data/en)    |
     +------------------------------+--------------+
     | en-au - Australian English   | (data/en-au) |
