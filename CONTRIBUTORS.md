@@ -8,6 +8,7 @@
 - Alessandro Martini [(martini97)](https://github.com/martini97)
 - Amin Alaee [(aminalaee)](https://github.com/aminalaee)
 - Baurzhan Muftakhidinov [(crayxt)](https://github.com/crayxt)
+- Benjamin Schwarze [(benjixx)](https://github.com/benjixx)
 - Bill DeRusha [(bderusha)](https://github.com/bderusha)
 - Casey Weed [(Battleroid)](https://github.com/Battleroid)
 - David Poggi [(drpoggi)](https://github.com/drpoggi)

@@ -67,7 +67,7 @@
   "answers": [
 	"Ja",
 	"Nein",
-	"Könnte sein"
+	"Vielleicht"
   ],
   "color": [
 	"Rot",
@@ -77,7 +77,7 @@
 	"Blau",
 	"Violett",
 	"Rosa",
-	"Dunkel-blau",
+	"Dunkelblau",
 	"Braun",
 	"Beige",
 	"Weiß",
@@ -1682,7 +1682,7 @@
 	  "Scheisskerl",
 	  "Drecksau",
 	  "Dorftrottel",
-	  "Dumme ziege"
+	  "Dumme Ziege"
 	]
   }
 }

@@ -2208,22 +2208,22 @@
   },
   "state": {
     "name": [
-      "North Rhine-Westphalia",
-      "Bavaria",
       "Baden-Württemberg",
-      "Hesse",
-      "Lower Saxony",
-      "Rhineland-Palatinate",
+      "Bayern",
       "Berlin",
-      "Saxony",
-      "Hamburg",
-      "Schleswig-Holstein",
       "Brandenburg",
-      "Thuringia",
-      "Saxony-Anhalt",
+      "Bremen",
+      "Hamburg",
+      "Hessen",
       "Mecklenburg-Vorpommern",
+      "Niedersachsen",
+      "Nordrhein-Westfalen",
+      "Rheinland-Pfalz",
       "Saarland",
-      "Bremen"
+      "Sachsen",
+      "Sachsen-Anhalt",
+      "Schleswig-Holstein",
+      "Thüringen"
     ],
     "abbr": [
       "DE-BB",
