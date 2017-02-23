@@ -3,13 +3,13 @@
 	"name": [
 	  "Degussa",
 	  "Delton",
-	  "Deutsche Bahn,",
+	  "Deutsche Bahn",
 	  "Deutsche Börse",
 	  "Deutsche Postd",
 	  "DHL",
-	  "Deutsche Teleko",
-	  "J-Mobile",
-	  "T-Systemsi",
+	  "Deutsche Telekom",
+	  "T-Mobile",
+	  "T-Systems",
 	  "Deutsche Vermögensberatung",
 	  "Deutz",
 	  "Dieffenbacher",
@@ -97,7 +97,8 @@
 		"Kommanditgesellschaft auf Aktien",
 		"Unternehmergesellschaft",
 		"Europäische Gesellschaft",
-		"Gesellschaft mit beschränkter Haftung & Compagnie Kommanditgesellschaft"
+		"Gesellschaft mit beschränkter Haftung & Compagnie Kommanditgesellschaft",
+		"Gesellschaft bürgerlichen Rechts"
 	  ],
 	  "abbr": [
 		"AG",
@@ -105,7 +106,8 @@
 		"KGaA",
 		"UG",
 		"SE",
-		"GmbH & Co KG"
+		"GmbH & Co. KG",
+		"GbR"
 	  ]
 	}
   }
