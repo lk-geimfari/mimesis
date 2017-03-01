@@ -7,7 +7,7 @@ setup(
     name='elizabeth',
     version=__version__,
     packages=['elizabeth', 'elizabeth.core', 'elizabeth.core.intd', 'elizabeth.builtins'],
-    keywords=['fake', 'data', 'testing', 'generate', 'elizabeth', 'db', 'church', 'dummy'],
+    keywords=['fake', 'data', 'testing', 'generate', 'elizabeth', 'db', 'dummy'],
     package_data={
         'elizabeth': [
             'data/*/*',
