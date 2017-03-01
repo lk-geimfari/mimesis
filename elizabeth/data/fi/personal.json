@@ -2226,18 +2226,21 @@
   "title": {
 	"female": {
 	  "typical": [
-		"Test"
+		"Rouva",
+		"Neiti"
 	  ],
 	  "academic": [
-		"Test"
+		"LkT",
+		"Lic.Sc."
 	  ]
 	},
 	"male": {
 	  "typical": [
-		"Test"
+		"Herra"
 	  ],
 	  "academic": [
-		"Test"
+		"LkT",
+		"Lic.Sc."
 	  ]
 	}
   },
