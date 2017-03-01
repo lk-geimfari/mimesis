@@ -4,7 +4,64 @@
 	"Doktorgrad"
   ],
   "favorite_movie": [
-	"Test"
+	"2012",
+	"Alice i Eventyrland",
+	"Avatar",
+	"Da Vinci-koden",
+	"De utrolige",
+	"Den sjette sansen",
+	"Den tapte verden",
+	"E.T.",
+	"Filmnavn",
+	"Forrest Gump",
+	"Hancock",
+	"Harry Potter og Føniksordenen",
+	"Harry Potter og Halvblodsprinsen",
+	"Harry Potter og de vises stein",
+	"Harry Potter og dødstalismanene – del 1",
+	"Harry Potter og dødstalismanene – del 2",
+	"Harry Potter og fangen fra Azkaban",
+	"Harry Potter og ildbegeret",
+	"Harry Potter og mysteriekammeret",
+	"Independence Day",
+	"Indiana Jones og krystallhodeskallens rike",
+	"Istid 2",
+	"Istid 3: Dinosaurene kommer",
+	"Jurassic Park",
+	"Kung Fu Panda",
+	"Legenden om Narnia – Løven, heksa og klesskapet",
+	"Løvenes konge",
+	"Løvenes konge",
+	"Madagaskar 2",
+	"Mamma Mia!",
+	"Oppdrag Nemo",
+	"Pirates of the Caribbean: At World's End",
+	"Pirates of the Caribbean: Dead Man's Chest",
+	"Pirates of the Caribbean: On Stranger Tides",
+	"Pirates of the Caribbean: The Curse of the Black Pearl",
+	"Ringenes herre: Atter en konge",
+	"Ringenes herre: Ringens brorskap",
+	"Ringenes herre: To tårn",
+	"Rottatouille",
+	"Se Opp",
+	"Shrek 2",
+	"Shrek den tredje",
+	"Spider-Man",
+	"Spider-Man 2",
+	"Spider-Man 3",
+	"Star Wars Episode I: Den skjulte trussel",
+	"Star Wars Episode II: Klonene angriper",
+	"Star Wars Episode III: Sithene tar hevn",
+	"Star Wars Episode IV: Et nytt håp",
+	"The Dark Knight",
+	"The Matrix Reloaded",
+	"The Passion of the Christ",
+	"The Twilight Saga: New Moon",
+	"Titanic",
+	"Toy Story 3",
+	"Transformers",
+	"Transformers: Dark of the Moon",
+	"Transformers: De beseirede slår tilbake"
   ],
   "gender": [
 	"Kvinne",
@@ -4436,18 +4493,21 @@
   "title": {
 	"female": {
 	  "typical": [
-		"Test"
+		"Fru."
 	  ],
 	  "academic": [
-		"Test"
+		"Prof.",
+		"Dr."
 	  ]
 	},
 	"male": {
 	  "typical": [
-		"Test"
+		"MR.",
+		"Herr"
 	  ],
 	  "academic": [
-		"Test"
+		"Prof.",
+		"Dr."
 	  ]
 	}
   },
