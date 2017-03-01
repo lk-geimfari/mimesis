@@ -50,7 +50,8 @@ def test_add_provider(generic):
         class Meta:
             name = 'custom_provider'
 
-        def say(self):
+        @staticmethod
+        def say():
             return 'Custom'
 
         @staticmethod
