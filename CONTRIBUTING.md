@@ -2,13 +2,13 @@
 
 - Add one change per one commit.
 
-- Add one commit per one Pull Request.
-
 - Always comment your code (only in English!).
 
 - Check your spelling and grammar.
 
 - Check code with [pycodestyle](https://github.com/PyCQA/pycodestyle) or with any other similar tool.
+
+- Run the tests after each commit.
 
 - Make sure the tests pass.
 
