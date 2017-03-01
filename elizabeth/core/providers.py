@@ -1965,9 +1965,9 @@ class Internet(object):
         """Get a random beautiful stock image that hosted on Unsplash.com
 
         :param category: Category of image. Available categories: 'buildings', 'food', 'nature',
-        'people', 'technology', 'objects'
-        :param width: Width of image.
-        :param height: Height of image.
+        'people', 'technology', 'objects'.
+        :param width: Width of the image.
+        :param height: Height of the image.
         :return: An image (Link to image).
         """
         url = 'https://source.unsplash.com/category/{category}/{width}x{height}'
@@ -2001,9 +2001,10 @@ class Internet(object):
         """Create a list of hashtags (for Instagram, Twitter etc.)
 
         :param quantity: The quantity of hashtags.
-        :param category: The category of hashtags. Available categories: general, girls, love, boys,
-        friends, family, nature, travel, cars, sport, tumblr
+        :param category: Available categories: general, girls, love, boys, friends,
+        family, nature, travel, cars, sport, tumblr.
         :return: The list of hashtags.
+
         :Example:
             ['#love', '#sky', '#nice'].
         """

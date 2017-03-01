@@ -46,6 +46,7 @@ Code     Name                  Native Name
 `cs`     Czech				   Česky
 `da`     Danish                Dansk
 `de`     German                Deutsch
+`de-at`  Austrian german       Deutsch
 `en`     English               English
 `en-au`  Australian English    English
 `en-gb`  British English       English
@@ -103,11 +104,11 @@ providers from one object.
 Related Libraries
 -----------------
 
-- `Flask-church`_ - an extension for Flask based on Elizabeth.
 - `Presturinn`_ - a fake API based on Falcon and Elizabeth v0.2.0.
+- `pytest-elizabeth`_ - is a pytest plugin that provides pytest fixtures for Elizabeth providers.
 
-.. _Flask-church: https://github.com/lk-geimfari/flask_church
 .. _Presturinn: https://github.com/lk-geimfari/presturinn
+.. _pytest-elizabeth: https://github.com/lk-geimfari/pytest-elizabeth
 
 Contributing
 ------------
