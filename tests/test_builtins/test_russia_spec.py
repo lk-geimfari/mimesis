@@ -18,6 +18,7 @@ def test_passport_series(russia):
     result = russia.passport_series(year=10)
     region, year = result.split(' ')
     assert int(year) == 10
+    assert region is not None
 
 
 def test_passport_number(russia):
