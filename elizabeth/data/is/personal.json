@@ -1,15 +1,47 @@
 {
   "academic_degree": [
-	"Test"
+	"BA"
   ],
   "favorite_movie": [
 	"Test"
   ],
   "gender": [
-	"Test"
+	"Kvenkyns",
+	"Karlkyn",
+	"Annað"
   ],
   "language": [
-	"Test"
+	"Arabíska",
+	"Bengalska",
+	"Búrmíska",
+	"Enska",
+	"Franska",
+	"Gujarati",
+	"Hindí",
+	"Japanska",
+	"Javíska",
+	"Kanaríska",
+	"Kínverska",
+	"Kóreska",
+	"Malæjalam",
+	"Maratí",
+	"Oríja",
+	"Persneska",
+	"Portúgalska",
+	"Pólska",
+	"Púndjabí",
+	"Rússneska",
+	"Spænska",
+	"Tamílska",
+	"Taílenska",
+	"Telúgú",
+	"Tyrkneska",
+	"Víetnamska",
+	"Íslenska",
+	"Ítalska",
+	"Úkraínska",
+	"Úrdú",
+	"Þýska"
   ],
   "names": {
 	"male": [
@@ -3993,13 +4025,21 @@
 	"Test"
   ],
   "occupation": [
-	"Test"
+	"Forritari",
+	"Hönnuður",
+	"Arkitekt"
   ],
   "political_views": [
-	"Test"
+	"Áhugalausir",
+	"Kommúnista",
+	"Miðlungs",
+	"Liberal",
+	"Frjálshyggjufélagið"
   ],
   "sexuality": [
-	"Test"
+	"Gagnkynhneigð",
+	"Samkynhneigð",
+	"Tvíkynhneigð"
   ],
   "surnames": {
 	"male": [
@@ -5468,7 +5508,8 @@
 		"Ungfrú"
 	  ],
 	  "academic": [
-		"Test"
+		"Dr.",
+		"Prófessor"
 	  ]
 	},
 	"male": {
@@ -5476,7 +5517,8 @@
 		"Herra"
 	  ],
 	  "academic": [
-		"Test"
+		"Dr.",
+		"Prófessor"
 	  ]
 	}
   },
@@ -5489,10 +5531,18 @@
 	"Landbúnaðarháskóli Íslands"
   ],
   "views_on": [
-	"Test"
+	"Neikvæð",
+	"Very neikvæð",
+	"Jákvæð",
+	"Hlutlaus"
   ],
   "worldview": [
-	"Test"
+	"Trúleysi",
+	"Algyðistrú",
+	"Guðleysi",
+	"Kristni",
+	"Gyðingdómur",
+	"Frumgyðistrú"
   ],
   "telephone_fmt": [
 	"+354 ### ####",

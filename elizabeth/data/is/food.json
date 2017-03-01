@@ -1,12 +1,35 @@
 {
   "dishes": [
-    "Test"
+    "Hákarl",
+	"Súrir hrútspungar",
+	"Harðfiskur",
+	"Svið",
+	"Slátur",
+	"Hangikjöt",
+	"Laufabrauð",
+	"Saltfiskur",
+	"Kæfa",
+	"Gellur",
+	"Hvalspik",
+	"Kútmagar",
+	"Fiskibollur",
+	"Lundi",
+	"Kjötsúpa",
+	"Fiskisúpa",
+	"Skyr"
   ],
   "drinks": [
-    "Test"
+	"Brennivín",
+	"Vodka",
+	"Bjór",
+	"Vín",
+	"Cognac"
   ],
   "fruits": [
-    "Test"
+    "Banani",
+	"Pera",
+	"Appelsínugulur",
+	"Pineapple"
   ],
   "spices": [
     "Test"
