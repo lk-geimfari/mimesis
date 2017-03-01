@@ -25,7 +25,8 @@ To install `Elizabeth`, simply:
 
 Also you can install it manually (pre-activated virtualenv):
 ```zsh
-(venv) ➜  ~ git clone https://github.com/lk-geimfari/elizabeth.git && cd elizabeth
+(venv) ➜  ~ git clone https://github.com/lk-geimfari/elizabeth.git
+(venv) ➜  ~ cd elizabeth
 (venv) ➜  make test
 (venv) ➜  make install
 ```
@@ -205,7 +206,7 @@ If you would like to use these country-specific providers, then you must import 
 ```
 
 ## Contributing
-Your contributions are always welcome! Please take a look at the [contribution](https://github.com/lk-geimfari/elizabeth/blob/master/CONTRIBUTING.md) guidelines first. [Here](https://github.com/lk-geimfari/elizabeth/blob/master/CONTRIBUTORS.md) you can look a list of our contributors.
+Your contributions are always welcome! Please take a look at the [contribution](https://github.com/lk-geimfari/elizabeth/blob/master/CONTRIBUTING.md) guidelines first it is very important. [Here](https://github.com/lk-geimfari/elizabeth/blob/master/CONTRIBUTORS.md) you can look a list of our contributors.
 
 ## License
 Elizabeth is licensed under the MIT License. See [LICENSE](https://github.com/lk-geimfari/elizabeth/blob/master/LICENSE) for more information.
