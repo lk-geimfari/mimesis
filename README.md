@@ -14,7 +14,7 @@
 **Elizabeth** is a fast and easy to use Python library for generating dummy data for a variety of purposes.  This data can be particularly useful during software development and testing.  For example, it could be used to populate a testing database for a web application with user information such as email addresses, usernames, first names, last names, etc.  Elizabeth uses a JSON-based datastore and does not require any modules that are not in the Python standard library. There are over nineteen different [data providers](https://github.com/lk-geimfari/elizabeth/blob/master/PROVIDERS.md) available, which can produce data related to food, people, computer hardware, transportation, addresses, and more.
 
 ## Documentation
-Elizabeth is simple to use, and the below examples should help you get started.  Complete documentation for `Elizabeth` is available here: [http://elizabeth.readthedocs.io/en/latest/](http://elizabeth.readthedocs.io/)
+Elizabeth is simple to use, and the below examples should help you get started.  Complete documentation for `Elizabeth` is available here: [http://elizabeth.readthedocs.io/](http://elizabeth.readthedocs.io/)
 
 ## Installation
 To install `Elizabeth`, simply:
@@ -23,11 +23,11 @@ To install `Elizabeth`, simply:
 ➜  ~ pip install elizabeth
 ```
 
-Also you can install it manually:
+Also you can install it manually (pre-activated virtualenv):
 ```zsh
-➜  ~ git clone https://github.com/lk-geimfari/elizabeth.git
-➜  ~ cd elizabeth
-➜  make install
+(venv) ➜  ~ git clone https://github.com/lk-geimfari/elizabeth.git && cd elizabeth
+(venv) ➜  make test
+(venv) ➜  make install
 ```
 
 
@@ -206,13 +206,6 @@ If you would like to use these country-specific providers, then you must import 
 
 ## Contributing
 Your contributions are always welcome! Please take a look at the [contribution](https://github.com/lk-geimfari/elizabeth/blob/master/CONTRIBUTING.md) guidelines first. [Here](https://github.com/lk-geimfari/elizabeth/blob/master/CONTRIBUTORS.md) you can look a list of our contributors.
-
-## Testing
-```zsh
-➜ ~ git clone https://github.com/lk-geimfari/elizabeth.git
-➜ cd elizabeth/
-➜ make test
-```
 
 ## License
 Elizabeth is licensed under the MIT License. See [LICENSE](https://github.com/lk-geimfari/elizabeth/blob/master/LICENSE) for more information.
