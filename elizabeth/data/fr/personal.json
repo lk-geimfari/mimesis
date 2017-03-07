@@ -1424,7 +1424,15 @@
 	]
   },
   "nationality": [
-	"Test"
+	"Anglais",
+	"Américaine",
+	"Français",
+	"Russe",
+	"Polonais",
+	"Chinois",
+	"Japonais",
+	"Brésilien",
+	"Ukrainien"
   ],
   "occupation": [
 	"Acheteur d’espaces publicitaires",
