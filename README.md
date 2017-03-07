@@ -1,4 +1,4 @@
-<a href="https://github.com/lk-geimfari/elizabeth/">
+<a href="https://github.com/lk-geimfari/elizabeth#documentation">
     <p align="center">
       <img src="https://raw.githubusercontent.com/lk-geimfari/elizabeth/master/other/logo.png" alt="Elizabeth">
     </p>
