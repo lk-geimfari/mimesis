@@ -1,8 +1,12 @@
 ### Creator & Maintainer
  - Likid Geimfari [(lk-geimfari)](https://github.com/lk-geimfari)
 
-###  Inspirer
+### Inspirer
  - Sobolev Nikita [(sobolevn)](https://github.com/sobolevn)
+
+### Design
+ - Illustration by [CarlaNatalie](http://carlanatalie.deviantart.com/)
+ - Logo by Izmael ([caspian-seagull](https://github.com/caspian-seagull))
 
 ### Contributors
 - Alessandro Martini [(martini97)](https://github.com/martini97)
@@ -27,6 +31,7 @@
 - Michael Hand [(mipaaa)](https://github.com/mipaaa)
 - Paul Walters [(PaulWaltersDev)](https://github.com/PaulWaltersDev)
 - Philipp Offermann [(offermann)](https://github.com/offermann)
+- Sobolev Nikita [(sobolevn)](https://github.com/sobolevn)
 - Rafael Passos [(auyer)](https://github.com/auyer)
 - Ranwise [(ranwise)](https://github.com/ranwise)
 - Sambuddha Basu [(sammyshj)](https://github.com/sammyshj)
