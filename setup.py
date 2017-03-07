@@ -3,8 +3,12 @@ from distutils.core import setup
 from elizabeth import __version__, \
     __author__
 
-with open('_readme_pypi.rst', 'r', encoding='utf-8') as f:
-    readme = f.read()
+
+try:
+    with open('_readme_pypi.rst', 'r', encoding='utf-8') as f:
+        readme = f.read()
+except FileNotFoundError:
+    readme = ''
 
 setup(
     name='elizabeth',
@@ -16,6 +20,7 @@ setup(
             'data/*/*',
         ]
     },
+    data_files=[("", ["LICENSE"])],
     url='https://github.com/lk-geimfari/elizabeth',
     license='MIT',
     author=__author__,
