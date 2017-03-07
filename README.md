@@ -28,10 +28,9 @@ To install `Elizabeth`, simply:
 
 Also you can install it manually (pre-activated virtualenv):
 ```zsh
-(venv) ➜  ~ git clone https://github.com/lk-geimfari/elizabeth.git
-(venv) ➜  ~ cd elizabeth
-(venv) ➜  make test
-(venv) ➜  make install
+(env) ➜  cd elizabeth/
+(env) ➜  make test
+(env) ➜  make install
 ```
 
 
@@ -39,13 +38,15 @@ Also you can install it manually (pre-activated virtualenv):
 
 ```python
 >>> from elizabeth import Personal
->>> p = Personal('en')
->>>
->>> p.full_name(gender='female')
+>>> pr = Personal('en')
+
+>>> pr.full_name(gender='female')
 'Antonetta Garrison'
->>> p.blood_type()
-'O-'
->>> p.occupation()
+
+>>> pr.email(gender='male)
+'oren5936@live.com'
+
+>>> pr.occupation()
 'Programmer'
 ```
 
@@ -92,19 +93,21 @@ Help us make this project better. Check the locales and send us `PR` with your c
 Using locales:
 
 ```python
->>> from elizabeth import Text
->>> en = Text()  # English is Elizabeth's default locale
->>> de = Text('de')
+>>> from elizabeth import Personal
 
->>> en.sentence()
-'Ports are used to communicate with the external world.'
->>> de.sentence()
-'Wir müssen nicht vergessen Zickler.'
->>>
->>> en.color()
-'Blue'
->>> de.color()
-'Türkis'
+>>> en = Personal('en')
+>>> de = Personal('de')
+>>> ic = Personal('is')
+
+>>> en.full_name()
+'Carolin Brady'
+
+>>> de.full_name()
+'Sabrina Gutermuth'
+
+>>> ic.full_name()
+'Rósa Þórlindsdóttir'
+
 ```
 
 When you only need to generate data for a single locale, use the `Generic` provider, and you can access all `Elizabeth`
@@ -113,11 +116,13 @@ providers from one object.
 ```python
 >>> from elizabeth import Generic
 >>> g = Generic('es')
->>>
+
 >>> g.datetime.month()
 'Agosto'
+
 >>> g.code.imei()
 '353918052107063'
+
 >>> g.food.fruit()
 'Limón'
 ```
@@ -178,7 +183,7 @@ class Patient(db.Model):
 
 Just run shell mode
 ```
-(venv) ➜ python3 manage.py shell
+(env) ➜ python3 manage.py shell
 ```
 
 and do following:
@@ -199,25 +204,27 @@ Result: [screenshot](https://raw.githubusercontent.com/lk-geimfari/elizabeth/mas
 You also can add custom provider to `Generic`.
 
 ```python
->>> from elizabeth import Generic
->>> generic = Generic('en')
->>>
 >>> class SomeProvider():
->>>     class Meta:
->>>         name = 'some_provider'
->>>
->>>     def ints(self):
->>>         return [i for i in range(1, 5)]
->>>
+...
+...     class Meta:
+...         name = "some_provider"
+...
+...     @staticmethod
+...     def one():
+...         return 1
+
 >>> class Another():
->>>     def bye(self):
->>>         return "Bye!"
->>>
+...
+...     @staticmethod
+...     def bye():
+...         return "Bye!"
+
 >>> generic.add_provider(SomeProvider)
 >>> generic.add_provider(Another)
->>>
->>> generic.some_provider.ints()
-[1, 2, 3, 4]
+
+>>> generic.some_provider.one()
+1
+
 >>> generic.another.bye()
 'Bye!'
 ```
@@ -231,18 +238,44 @@ If you would like to use these country-specific providers, then you must import 
 ```python
 >>> from elizabeth import Generic
 >>> from elizabeth.builtins import BrazilSpecProvider
->>>
+
 >>> generic = Generic('pt-br')
->>>
+
 >>> class BrazilProvider(BrazilSpecProvider):
->>>     class Meta:
->>>         name = "brazil_provider"
->>>
+...
+...     class Meta:
+...         name = "brazil_provider"
+...
+
 >>> generic.add_provider(BrazilProvider)
->>>
 >>> generic.brazil_provider.cpf()
-'001.137.297-40'
+'696.441.186-00'
 ```
+
+If your locale is cyrillic, but you need latinized locale-specific data, then you can use special decorator.
+At this moment it's work only for Russian:
+```python
+>>> from elizabeth import Personal
+>>> from elizabeth.decorators import romanized_russian
+
+>>> pr = Personal('ru')
+
+>>> @romanized_russian
+... def get_name_ro():
+...     return pr.full_name()
+...
+
+>>> def get_name_ru():
+...     return pr.full_name()
+...
+
+>>> get_name_ru()
+'Вида Панова'
+
+>>> get_name_ro()
+'Veronika Denisova'
+```
+
 
 ## Contributing
 Your contributions are always welcome! Please take a look at the [contribution](https://github.com/lk-geimfari/elizabeth/blob/master/CONTRIBUTING.md) guidelines first it is very important. [Here](https://github.com/lk-geimfari/elizabeth/blob/master/CONTRIBUTORS.md) you can look a list of our contributors.
