@@ -3,7 +3,7 @@ from distutils.core import setup
 from elizabeth import __version__, \
     __author__
 
-with open('readme_pypi.rst', 'r', encoding='utf-8') as f:
+with open('_readme_pypi.rst', 'r', encoding='utf-8') as f:
     readme = f.read()
 
 setup(
