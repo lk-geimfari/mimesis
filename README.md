@@ -1,6 +1,6 @@
 <p align="center">
 	<a href="https://github.com/lk-geimfari/elizabeth/">
-  <img src="https://raw.githubusercontent.com/lk-geimfari/elizabeth/master/other/logo.png">
+        <img src="https://raw.githubusercontent.com/lk-geimfari/elizabeth/master/other/logo.png">
 	</a>
   <br>
 </p>
