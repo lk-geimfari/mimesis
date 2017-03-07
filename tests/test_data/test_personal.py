@@ -84,6 +84,11 @@ def test_email(personal):
     result = personal.email()
     assert re.match(EMAIL_REGEX, result)
 
+    domains = ["@example.com"]
+    result = personal.email(domains=domains)
+    assert re.match(EMAIL_REGEX, result)
+    assert result.split('@')[1] == 'example.com'
+
 
 def test_bitcoin(personal):
     result = personal.bitcoin()

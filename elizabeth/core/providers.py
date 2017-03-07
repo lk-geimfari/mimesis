@@ -1006,18 +1006,22 @@ class Personal(object):
 
         return password
 
-    @staticmethod
-    def email(gender='female'):
+    def email(self, gender='female', domains=None):
         """Generate a random email.
 
         :param gender: Gender of the user.
+        :type gender: str
+        :param domains: Custom domain for email.
+        :type domains: list, tuple
         :return: Email address.
         :Example:
             foretime10@live.com
         """
-        name = Personal.username(gender)
-        email = name + choice(intd.EMAIL_DOMAINS)
-        return email.strip()
+        host = domains if domains \
+            else intd.EMAIL_DOMAINS
+
+        email = self.username(gender) + choice(host)
+        return email
 
     @staticmethod
     def bitcoin():
