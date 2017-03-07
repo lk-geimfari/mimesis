@@ -7,7 +7,7 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/8b2f43d89d774929bb0b7535812f5b08)](https://www.codacy.com/app/likid-geimfari/elizabeth?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=lk-geimfari/elizabeth&amp;utm_campaign=Badge_Grade)
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/lk-geimfari/elizabeth/master/other/elizabeth_1.png">
+  <img src="https://raw.githubusercontent.com/lk-geimfari/elizabeth/master/other/logo.png">
   <br>
 </p>
 
