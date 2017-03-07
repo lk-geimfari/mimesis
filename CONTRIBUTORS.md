@@ -6,7 +6,6 @@
 
 ### Design
  - Illustration by [CarlaNatalie](http://carlanatalie.deviantart.com/)
- - Logo by Izmael ([caspian-seagull](https://github.com/caspian-seagull))
 
 ### Contributors
 - Alessandro Martini [(martini97)](https://github.com/martini97)
