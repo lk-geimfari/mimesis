@@ -22,14 +22,6 @@ def test_emoji(net):
     assert result in EMOJI
 
 
-def test_facebook(net):
-    result = net.facebook(gender='female')
-    assert result is not None
-
-    _result = net.facebook(gender='female')
-    assert _result is not None
-
-
 def test_hashtags(net):
     result = net.hashtags(quantity=5)
     assert len(result) == 5
@@ -55,14 +47,6 @@ def test_subreddit(net):
 
     full_result = net.subreddit(nsfw=True, full_url=True)
     assert len(full_result) > 20
-
-
-def test_twitter(net):
-    result = net.twitter(gender='female')
-    assert result is not None
-
-    _result = net.twitter(gender='male')
-    assert _result is not None
 
 
 def test_user_agent(net):

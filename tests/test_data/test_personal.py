@@ -5,7 +5,7 @@ import re
 
 from elizabeth.core.intd import (
     FAVORITE_MUSIC_GENRE, SEXUALITY_SYMBOLS,
-    BLOOD_GROUPS, GENDER_SYMBOLS
+    BLOOD_GROUPS, GENDER_SYMBOLS, ENGLISH_LEVEL
 )
 
 from ._patterns import *
@@ -157,6 +157,14 @@ def test_favorite_music_genre(personal):
     assert result in FAVORITE_MUSIC_GENRE
 
 
+def test_social_media_profile(personal):
+    result = personal.social_media_profile(gender='female')
+    assert result is not None
+
+    _result = personal.social_media_profile(gender='male')
+    assert _result is not None
+
+
 def test_avatar(personal):
     result = personal.avatar(size=512)
     img, size, *__ = result.split('/')[::-1]
@@ -176,15 +184,7 @@ def test_identifier(personal):
 
 def test_level_of_english(personal):
     result = personal.level_of_english()
-    lvl_s = ['Beginner',
-             'Elementary',
-             'Pre - Intermediate',
-             'Intermediate',
-             'Upper Intermediate',
-             'Advanced',
-             'Proficiency'
-             ]
-    assert result in lvl_s
+    assert result in ENGLISH_LEVEL
 
 
 def test_name(generic):

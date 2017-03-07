@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from elizabeth.core.intd import CAR, TRUCKS, AIRPLANES
+from elizabeth.core.intd import CARS, TRUCKS, AIRPLANES
 
 
 def test_truck(transport):
@@ -17,7 +17,7 @@ def test_truck(transport):
 
 def test_car(transport):
     result = transport.car()
-    assert result in CAR
+    assert result in CARS
 
 
 def test_airplane(transport):

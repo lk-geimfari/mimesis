@@ -29,8 +29,23 @@ from string import (
     punctuation
 )
 
-# intd (International Data)
-from elizabeth.core import intd
+from elizabeth.core.intd import (
+    AIRPLANES, BACKEND, BLOOD_GROUPS, CARS,
+    COUNTRIES_ISO, CPU_CODENAMES, CSS_PROPERTIES,
+    CPU, CSS_SELECTORS, CSS_SIZE_UNITS, CURRENCY,
+    CURRENCY_SYMBOLS, DOMAINS, EMAIL_DOMAINS, EMOJI,
+    EXTENSIONS, FAVORITE_MUSIC_GENRE, FOLDERS, FRONTEND,
+    GENDER_SYMBOLS, GENERATION, GENERATION_ABBR, GRAPHICS,
+    HASHTAGS, HTML_CONTAINER_TAGS, HTML_MARKUP_TAGS,
+    IMEI_TACS, ISBN_GROUPS, LICENSES, MANUFACTURERS,
+    MATH_FORMULAS, MEMORY, MIME_TYPES, NOSQL, OS,
+    CONTAINER, PHONE_MODELS, PROGRAMMING_LANGS,
+    PROJECT_NAMES, RESOLUTIONS, ROMAN_NUMS,
+    SCREEN_SIZES, SEXUALITY_SYMBOLS,
+    SHORTENED_ADDRESS_FMT, SUBREDDITS,
+    SUBREDDITS_NSFW, TRUCKS, USER_AGENTS, SQL,
+    ENGLISH_LEVEL
+)
 
 from elizabeth.utils import (
     pull,
@@ -118,7 +133,7 @@ class Address(object):
         """
         fmt = self.data['address_fmt']
 
-        if self.locale in intd.SHORTENED_ADDRESS_FMT:
+        if self.locale in SHORTENED_ADDRESS_FMT:
             # Because fmt for ko is {st_name}{st_sfx} {st_num},
             # i.e not shortened address format
             if self.locale != 'ko':
@@ -178,7 +193,7 @@ class Address(object):
         if not fmt:
             fmt = 'iso2'
 
-        countries = intd.COUNTRIES_ISO[fmt]
+        countries = COUNTRIES_ISO[fmt]
         return choice(countries)
 
     def country(self):
@@ -354,11 +369,11 @@ class Structured(object):
                 padding-right: 65em
             }'
         """
-        selector = choice(intd.CSS_SELECTORS)
+        selector = choice(CSS_SELECTORS)
         css_selector = "%s%s" % (selector, self.text.word())
 
-        html_cont_keys = choice(list(intd.HTML_CONTAINER_TAGS.keys()))
-        html_mrk_tag = choice(intd.HTML_MARKUP_TAGS)
+        html_cont_keys = choice(list(HTML_CONTAINER_TAGS.keys()))
+        html_mrk_tag = choice(HTML_MARKUP_TAGS)
 
         base = "{}".format(choice([html_cont_keys, html_mrk_tag, css_selector]))
         props = "; ".join([self.css_property() for _ in range(randint(1, 6))])
@@ -372,15 +387,15 @@ class Structured(object):
         :Examples:
             'background-color: #f4d3a1'
         """
-        prop = choice(list(intd.CSS_PROPERTIES.keys()))
-        val = intd.CSS_PROPERTIES[prop]
+        prop = choice(list(CSS_PROPERTIES.keys()))
+        val = CSS_PROPERTIES[prop]
 
         if isinstance(val, list):
             val = choice(val)
         elif val == "color":
             val = self.text.hex_color()
         elif val == "size":
-            val = "{}{}".format(randint(1, 99), choice(intd.CSS_SIZE_UNITS))
+            val = "{}{}".format(randint(1, 99), choice(CSS_SIZE_UNITS))
 
         return "{}: {}".format(prop, val)
 
@@ -394,8 +409,8 @@ class Structured(object):
                 Ports are created with the built-in function open_port.
             </span>'
         """
-        tag_name = choice(list(intd.HTML_CONTAINER_TAGS))
-        tag_attributes = list(intd.HTML_CONTAINER_TAGS[tag_name])
+        tag_name = choice(list(HTML_CONTAINER_TAGS))
+        tag_attributes = list(HTML_CONTAINER_TAGS[tag_name])
         k = randint(1, len(tag_attributes))
 
         selected_attrs = sample(tag_attributes, k=k)
@@ -423,7 +438,7 @@ class Structured(object):
         :rtype: str
         """
         try:
-            value = intd.HTML_CONTAINER_TAGS[tag][attribute]
+            value = HTML_CONTAINER_TAGS[tag][attribute]
         except KeyError:
             raise NotImplementedError(
                 "Tag {} or attribute {} is not supported".format(tag, attribute))
@@ -714,7 +729,7 @@ class Code(object):
         :Example:
             132-1-15411-375-8.
         """
-        groups = intd.ISBN_GROUPS
+        groups = ISBN_GROUPS
 
         mask = '###-{0}-#####-###-#' if \
             fmt == 'isbn-13' else '{0}-#####-###-#'
@@ -746,7 +761,7 @@ class Code(object):
         :Example:
         353918052107063
         """
-        num = choice(intd.IMEI_TACS) + self.custom_code(mask='######')
+        num = choice(IMEI_TACS) + self.custom_code(mask='######')
         return num + luhn_checksum(num)
 
     def pin(self, mask='####'):
@@ -824,7 +839,7 @@ class Business(object):
         :Example:
             RUR.
         """
-        return choice(intd.CURRENCY)
+        return choice(CURRENCY)
 
     def price(self, minimum=10.00, maximum=1000.00):
         """Generate a random price.
@@ -835,7 +850,7 @@ class Business(object):
         :Example:
             599.99 $.
         """
-        currencies = intd.CURRENCY_SYMBOLS
+        currencies = CURRENCY_SYMBOLS
 
         price = uniform(minimum, maximum)
 
@@ -1018,7 +1033,7 @@ class Personal(object):
             foretime10@live.com
         """
         host = domains if domains \
-            else intd.EMAIL_DOMAINS
+            else EMAIL_DOMAINS
 
         email = self.username(gender) + choice(host)
         return email
@@ -1111,6 +1126,24 @@ class Personal(object):
         """
         return self.email()
 
+    def social_media_profile(self, gender='female'):
+        """Generate profile for random social network.
+
+        :param gender: Gender of user.
+        :return: Profile in some network.
+        :Example:
+            http://facebook.com/some_user
+        """
+        urls = [
+            "facebook.com/{}",
+            "twitter.com/{}",
+            "medium.com/@{}"
+        ]
+        url = 'http://' + choice(urls)
+        username = self.username(gender)
+
+        return url.format(username)
+
     def gender(self, symbol=False):
         """Get a random gender.
 
@@ -1121,7 +1154,7 @@ class Personal(object):
             Male (♂ when symbol=True).
         """
         if symbol:
-            return choice(intd.GENDER_SYMBOLS)
+            return choice(GENDER_SYMBOLS)
 
         gender = choice(self.data['gender'])
         return gender
@@ -1160,7 +1193,7 @@ class Personal(object):
         :Example:
             A+
         """
-        return choice(intd.BLOOD_GROUPS)
+        return choice(BLOOD_GROUPS)
 
     def sexual_orientation(self, symbol=False):
         """Get a random (LOL) sexual orientation.
@@ -1171,7 +1204,7 @@ class Personal(object):
             Heterosexuality.
         """
         if symbol:
-            return choice(intd.SEXUALITY_SYMBOLS)
+            return choice(SEXUALITY_SYMBOLS)
 
         sexuality = self.data['sexuality']
         return choice(sexuality)
@@ -1281,7 +1314,7 @@ class Personal(object):
         :Example:
             Ambient.
         """
-        return choice(intd.FAVORITE_MUSIC_GENRE)
+        return choice(FAVORITE_MUSIC_GENRE)
 
     def telephone(self, mask=None, placeholder='#'):
         """Generate a random phone number.
@@ -1334,15 +1367,7 @@ class Personal(object):
         :Example:
             Intermediate.
         """
-        lvl_s = ('Beginner',
-                 'Elementary',
-                 'Pre - Intermediate',
-                 'Intermediate',
-                 'Upper Intermediate',
-                 'Advanced',
-                 'Proficiency'
-                 )
-        return choice(lvl_s)
+        return choice(ENGLISH_LEVEL)
 
 
 class Datetime(object):
@@ -1407,7 +1432,7 @@ class Datetime(object):
         :Example:
             XXI
         """
-        return choice(intd.ROMAN_NUMS)
+        return choice(ROMAN_NUMS)
 
     def periodicity(self):
         """Get a random periodicity string.
@@ -1524,7 +1549,7 @@ class File(object):
             .py (file_type='source').
         """
         k = file_type.lower()
-        return choice(intd.EXTENSIONS[k])
+        return choice(EXTENSIONS[k])
 
     @staticmethod
     def mime_type():
@@ -1533,7 +1558,7 @@ class File(object):
         :return: Mime type.
         :rtype: str
         """
-        return choice(intd.MIME_TYPES)
+        return choice(MIME_TYPES)
 
 
 class Science(object):
@@ -1561,7 +1586,7 @@ class Science(object):
         :Example:
             A = (ab)/2.
         """
-        formula = choice(intd.MATH_FORMULAS)
+        formula = choice(MATH_FORMULAS)
         return formula
 
     def chemical_element(self, name_only=True):
@@ -1607,7 +1632,7 @@ class Development(object):
         :Example:
             The BSD 3-Clause License.
         """
-        return choice(intd.LICENSES)
+        return choice(LICENSES)
 
     @staticmethod
     def version():
@@ -1630,18 +1655,28 @@ class Development(object):
             PostgreSQL.
         """
         if nosql:
-            return choice(intd.NOSQL)
-        return choice(intd.SQL)
+            return choice(NOSQL)
+        return choice(SQL)
 
     @staticmethod
-    def other():
-        """Get a random value from the list.
+    def container():
+        """Get a random containerization system.
 
-        :return: Some other technology.
+        :return: Containerization system.
         :Example:
-            Nginx.
+            Docker.
         """
-        return choice(intd.OTHER_TECH)
+        return choice(CONTAINER)
+
+    @staticmethod
+    def version_control_system():
+        """Get a random version control system.
+
+        :return: Version control system
+        :Example:
+            Git
+        """
+        return choice(["Git", "Subversion"])
 
     @staticmethod
     def programming_language():
@@ -1651,7 +1686,7 @@ class Development(object):
         :Example:
             Erlang.
         """
-        return choice(intd.PROGRAMMING_LANGS)
+        return choice(PROGRAMMING_LANGS)
 
     @staticmethod
     def backend():
@@ -1661,7 +1696,7 @@ class Development(object):
         :Example:
             Elixir/Phoenix
         """
-        return choice(intd.BACKEND)
+        return choice(BACKEND)
 
     @staticmethod
     def frontend():
@@ -1671,7 +1706,7 @@ class Development(object):
         :Example:
             JS/React.
         """
-        return choice(intd.FRONTEND)
+        return choice(FRONTEND)
 
     @staticmethod
     def os():
@@ -1681,7 +1716,7 @@ class Development(object):
         :Example:
             Gentoo
         """
-        return choice(intd.OS)
+        return choice(OS)
 
     @staticmethod
     def stackoverflow_question():
@@ -1777,7 +1812,7 @@ class Hardware(object):
         :Example:
             1280x720.
         """
-        return choice(intd.RESOLUTIONS)
+        return choice(RESOLUTIONS)
 
     @staticmethod
     def screen_size():
@@ -1787,7 +1822,7 @@ class Hardware(object):
         :Example:
             13″.
         """
-        return choice(intd.SCREEN_SIZES)
+        return choice(SCREEN_SIZES)
 
     @staticmethod
     def cpu():
@@ -1797,7 +1832,7 @@ class Hardware(object):
         :Example:
             Intel® Core i7.
         """
-        return choice(intd.CPU)
+        return choice(CPU)
 
     @staticmethod
     def cpu_frequency():
@@ -1819,9 +1854,9 @@ class Hardware(object):
              6th Generation.
         """
         if not abbr:
-            return choice(intd.GENERATION)
+            return choice(GENERATION)
 
-        return choice(intd.GENERATION_ABBR)
+        return choice(GENERATION_ABBR)
 
     @staticmethod
     def cpu_codename():
@@ -1831,8 +1866,7 @@ class Hardware(object):
         :Example:
             Cannonlake.
         """
-        code_names = intd.CPU_CODENAMES
-        return choice(code_names)
+        return choice(CPU_CODENAMES)
 
     @staticmethod
     def ram_type():
@@ -1864,7 +1898,7 @@ class Hardware(object):
         :Example:
             512GB SSD.
         """
-        return choice(intd.MEMORY)
+        return choice(MEMORY)
 
     @staticmethod
     def graphics():
@@ -1874,7 +1908,7 @@ class Hardware(object):
         :Example:
             Intel® Iris™ Pro Graphics 6200.
         """
-        return choice(intd.GRAPHICS)
+        return choice(GRAPHICS)
 
     @staticmethod
     def manufacturer():
@@ -1884,7 +1918,7 @@ class Hardware(object):
         :Example:
             Dell.
         """
-        return choice(intd.MANUFACTURERS)
+        return choice(MANUFACTURERS)
 
     @staticmethod
     def phone_model():
@@ -1894,7 +1928,7 @@ class Hardware(object):
         :Example:
             Nokia Lumia 920.
         """
-        return choice(intd.PHONE_MODELS)
+        return choice(PHONE_MODELS)
 
 
 class ClothingSizes(object):
@@ -1951,7 +1985,7 @@ class Internet(object):
         :Example:
             :kissing:
         """
-        return choice(intd.EMOJI)
+        return choice(EMOJI)
 
     @staticmethod
     def image_placeholder(width='400', height='300'):
@@ -1990,10 +2024,11 @@ class Internet(object):
     def image_by_keyword(keyword=None):
         url = 'https://source.unsplash.com/weekly?{keyword}'
 
-        keywords = ['cat', 'girl', 'boy',
-                    'beauty', 'nature', 'woman',
-                    'man', 'tech', 'space', 'science'
-                    ]
+        keywords = [
+            'cat', 'girl', 'boy', 'beauty',
+            'nature', 'woman', 'man', 'tech',
+            'space'
+        ]
 
         if not keyword:
             keyword = choice(keywords)
@@ -2005,42 +2040,18 @@ class Internet(object):
         """Create a list of hashtags (for Instagram, Twitter etc.)
 
         :param quantity: The quantity of hashtags.
+        :type quantity: int
         :param category: Available categories: general, girls, love, boys, friends,
         family, nature, travel, cars, sport, tumblr.
         :return: The list of hashtags.
+        :rtype: list
 
         :Example:
             ['#love', '#sky', '#nice'].
         """
-        hashtags = intd.HASHTAGS[category.lower()]
+        hashtags = HASHTAGS[category.lower()]
         tags = [choice(hashtags) for _ in range(int(quantity))]
         return tags
-
-    @staticmethod
-    def twitter(gender='female'):
-        """Get a random twitter user.
-
-        :param gender: Gender of user.
-        :return: URL to user.
-        :Example:
-            http://twitter.com/some_user
-        """
-        url = "http://twitter.com/{0}"
-        username = Personal.username(gender)
-        return url.format(username)
-
-    @staticmethod
-    def facebook(gender='female'):
-        """Generate a random facebook user.
-
-        :param gender: Gender of user.
-        :return: URL to user.
-        :Example:
-            https://facebook.com/some_user
-        """
-        url = 'https://facebook.com/{0}'
-        username = Personal.username(gender)
-        return url.format(username)
 
     @staticmethod
     def home_page(gender='female'):
@@ -2052,7 +2063,7 @@ class Internet(object):
             http://www.font6.info
         """
         url = 'http://www.' + Personal.username(gender)
-        domain = choice(intd.DOMAINS)
+        domain = choice(DOMAINS)
         return '%s%s' % (url, domain)
 
     @staticmethod
@@ -2068,11 +2079,11 @@ class Internet(object):
         url = 'http://www.reddit.com'
         if not nsfw:
             if not full_url:
-                return choice(intd.SUBREDDITS)
+                return choice(SUBREDDITS)
             else:
-                return url + choice(intd.SUBREDDITS)
+                return url + choice(SUBREDDITS)
 
-        nsfw = choice(intd.SUBREDDITS_NSFW)
+        nsfw = choice(SUBREDDITS_NSFW)
         result = url + nsfw if full_url else nsfw
         return result
 
@@ -2085,7 +2096,7 @@ class Internet(object):
             Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:15.0)
             Gecko/20100101 Firefox/15.0.1
         """
-        return choice(intd.USER_AGENTS)
+        return choice(USER_AGENTS)
 
     @staticmethod
     def protocol():
@@ -2114,7 +2125,7 @@ class Transport(object):
             Caledon-966O.
         """
         model = self._model(mask=model_mask)
-        truck = choice(intd.TRUCKS)
+        truck = choice(TRUCKS)
         return '%s-%s' % (truck, model)
 
     @staticmethod
@@ -2125,7 +2136,7 @@ class Transport(object):
         :Example:
             Tesla Model S.
         """
-        return choice(intd.CAR)
+        return choice(CARS)
 
     def airplane(self, model_mask='###'):
         """Generate a dummy airplane model.
@@ -2137,7 +2148,7 @@ class Transport(object):
             Boeing 727.
         """
         model = self._model(mask=model_mask)
-        plane = choice(intd.AIRPLANES)
+        plane = choice(AIRPLANES)
         return '%s %s' % (plane, model)
 
 
@@ -2193,7 +2204,7 @@ class Path(object):
         :Example:
             /home/taneka/Pictures
         """
-        folder = choice(intd.FOLDERS)
+        folder = choice(FOLDERS)
         user = self.user(user_gender)
         return os.path.join(user, folder)
 
@@ -2206,7 +2217,7 @@ class Path(object):
             /home/sherrell/Development/Python/mercenary
         """
         dev_folder = choice(['Development', 'Dev'])
-        stack = choice(intd.PROGRAMMING_LANGS)
+        stack = choice(PROGRAMMING_LANGS)
         user = self.user(user_gender)
 
         return os.path.join(user, dev_folder, stack)
@@ -2219,7 +2230,7 @@ class Path(object):
         :Example:
             /home/sherika/Development/Falcon/mercenary
         """
-        project = choice(intd.PROJECT_NAMES)
+        project = choice(PROJECT_NAMES)
         return os.path.join(
             self.dev_dir(user_gender), project)
 

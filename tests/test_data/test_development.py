@@ -7,7 +7,7 @@ from elizabeth.core.intd import (
     FRONTEND,
     PROGRAMMING_LANGS,
     OS,
-    OTHER_TECH,
+    CONTAINER,
     LICENSES,
     NOSQL,
     BACKEND,
@@ -23,6 +23,11 @@ def dev():
 def test_license(dev):
     result = dev.software_license()
     assert result in LICENSES
+
+
+def test_version_control_system(dev):
+    vcs = ["Git", "Subversion"]
+    assert dev.version_control_system() in vcs
 
 
 def test_version(dev):
@@ -55,8 +60,8 @@ def test_database(dev):
 
 
 def test_other(dev):
-    result = dev.other()
-    assert result in OTHER_TECH
+    result = dev.container()
+    assert result in CONTAINER
 
 
 def test_frontend(dev):
