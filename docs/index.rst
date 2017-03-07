@@ -10,15 +10,15 @@ Installation
 
 .. code-block:: bash
 
-    git clone https://github.com/lk-geimfari/elizabeth.git
-    cd elizabeth/
-    make install
+    ➜ git clone https://github.com/lk-geimfari/elizabeth.git
+    ➜ cd elizabeth/
+    ➜ make install
 
 or simply:
 
 .. code-block:: bash
 
-    pip install elizabeth
+    ➜ pip install elizabeth
 
 Basic Usage
 -----------
