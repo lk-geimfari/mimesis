@@ -1,6 +1,20 @@
 ## Changelog
 
 
+### Version 0.3.19
+ - Updated README for PyPi
+ - Fixed bug
+
+---
+
+### Version 0.3.18
+ - Updated locales
+ - Removed unused functions
+ - Added new features
+ - Bug fix
+
+---
+
 ### Version 0.3.17
  - Fixed incorrect imports
 

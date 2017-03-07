@@ -3,6 +3,9 @@ from distutils.core import setup
 from elizabeth import __version__, \
     __author__
 
+with open('readme_pypi.rst', 'r', encoding='utf-8') as f:
+    readme = f.read()
+
 setup(
     name='elizabeth',
     version=__version__,
@@ -17,8 +20,8 @@ setup(
     license='MIT',
     author=__author__,
     author_email='likid.geimfari@gmail.com',
-    description='Elizabeth is a fast and easy to use Python library '
-                'for generating dummy data for a variety of purposes.',
+    description='Elizabeth: dummy data for you.',
+    long_description=readme,
     classifiers=[
         "Development Status :: 4 - Beta",
         'Intended Audience :: Developers',
