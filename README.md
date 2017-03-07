@@ -252,6 +252,8 @@ If you would like to use these country-specific providers, then you must import 
 '696.441.186-00'
 ```
 
+
+## Decorators
 If your locale is cyrillic, but you need latinized locale-specific data, then you can use special decorator.
 At this moment it's work only for Russian:
 ```python
