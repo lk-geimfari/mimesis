@@ -31,9 +31,9 @@ def test_download_image():
     assert result is None
 
     verified = download_image(
-        url="https://github.com/lk-geimfari/elizabeth/raw/master/other/elizabeth_1.png",
+        url="https://github.com/lk-geimfari/elizabeth/raw/master/other/elizabeth.png",
     )
-    assert verified == "elizabeth_1.png"
+    assert verified == "elizabeth.png"
     os.remove(verified)
 
     if sys.version_info.minor <= 3:
