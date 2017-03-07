@@ -301,6 +301,8 @@ purposes.
 .. _Here: https://github.com/lk-geimfari/elizabeth/blob/master/CONTRIBUTORS.md
 .. _LICENSE: https://github.com/lk-geimfari/elizabeth/blob/master/LICENSE
 
+
 Author and Maintainer
 ------------
-Likid Geimfari <likid.geimfari@gmail.com>
+
+`Likid Geimfari <https://github.com/lk-geimfari>`_ <likid.geimfari@gmail.com>
