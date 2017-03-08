@@ -64,7 +64,6 @@ __all__ = [
     'Food',
     'Hardware',
     'Internet',
-    'Network',
     'Numbers',
     'Path',
     'Personal',
@@ -1493,49 +1492,6 @@ class Datetime(object):
         return randint(1, 31)
 
 
-class Network(object):
-    """Class for generate data for working with network,
-    i.e IPv4, IPv6 and another"""
-
-    @staticmethod
-    def ip_v4():
-        """Generate a random IPv4 address.
-
-        :return: Random IPv4 address.
-        :Example:
-            19.121.223.58
-        """
-        ip = '.'.join([str(randint(0, 255)) for _ in range(4)])
-        return ip
-
-    @staticmethod
-    def ip_v6():
-        """Generate a random IPv6 address.
-
-        :return: Random IPv6 address.
-        :Example:
-            2001:c244:cf9d:1fb1:c56d:f52c:8a04:94f3
-        """
-        ip = "2001:" + ":".join("%x" % randint(0, 16 ** 4) for _ in range(7))
-        return ip
-
-    @staticmethod
-    def mac_address():
-        """Generate a random MAC address.
-
-        :return: Random MAC address.
-        :Example:
-            00:16:3e:25:e7:b1
-        """
-        mac_hex = [0x00, 0x16, 0x3e,
-                   randint(0x00, 0x7f),
-                   randint(0x00, 0xff),
-                   randint(0x00, 0xff)
-                   ]
-        mac = map(lambda x: "%02x" % x, mac_hex)
-        return ':'.join(mac)
-
-
 class File(object):
     """Class for generate fake data for files."""
 
@@ -1977,6 +1933,44 @@ class ClothingSizes(object):
 
 class Internet(object):
     """Class for generate the internet data."""
+
+    @staticmethod
+    def ip_v4():
+        """Generate a random IPv4 address.
+
+        :return: Random IPv4 address.
+        :Example:
+            19.121.223.58
+        """
+        ip = '.'.join([str(randint(0, 255)) for _ in range(4)])
+        return ip
+
+    @staticmethod
+    def ip_v6():
+        """Generate a random IPv6 address.
+
+        :return: Random IPv6 address.
+        :Example:
+            2001:c244:cf9d:1fb1:c56d:f52c:8a04:94f3
+        """
+        ip = "2001:" + ":".join("%x" % randint(0, 16 ** 4) for _ in range(7))
+        return ip
+
+    @staticmethod
+    def mac_address():
+        """Generate a random MAC address.
+
+        :return: Random MAC address.
+        :Example:
+            00:16:3e:25:e7:b1
+        """
+        mac_hex = [0x00, 0x16, 0x3e,
+                   randint(0x00, 0x7f),
+                   randint(0x00, 0xff),
+                   randint(0x00, 0xff)
+                   ]
+        mac = map(lambda x: "%02x" % x, mac_hex)
+        return ':'.join(mac)
 
     @staticmethod
     def emoji():
@@ -2557,7 +2551,6 @@ class Generic(object):
         self.numbers = Numbers()
         self.development = Development()
         self.hardware = Hardware()
-        self.network = Network()
         self.clothing_sizes = ClothingSizes()
         self.internet = Internet()
         self.transport = Transport()
