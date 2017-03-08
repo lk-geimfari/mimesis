@@ -1,16 +1,16 @@
 # -*- coding: utf-8 -*-
 
-import pytest
 import re
 
+import pytest
+
 from elizabeth.core.providers import Internet
-from elizabeth.core.intd import (
+from elizabeth.intd import (
     SUBREDDITS, EMOJI, USER_AGENTS,
     SUBREDDITS_NSFW, HASHTAGS,
     HTTP_METHODS, MIME_TYPES,
     HTTP_STATUS_CODES
 )
-
 from ._patterns import (
     HOME_PAGE,
     IP_V6_REGEX,

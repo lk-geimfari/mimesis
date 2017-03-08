@@ -4,11 +4,11 @@
 import os
 import re
 import sys
-import array
-import inspect
 import json
-from calendar import monthrange
+import array
 import datetime
+import inspect
+from calendar import monthrange
 from hashlib import (
     sha1,
     sha256,
@@ -29,66 +29,82 @@ from string import (
     punctuation
 )
 
-from elizabeth.core.intd import (
-    OS,
-    SQL,
-    CPU,
-    CARS,
-    NOSQL,
-    EMOJI,
-    TRUCKS,
-    FOLDERS,
-    HDD_SSD,
-    DOMAINS,
-    BACKEND,
-    CURRENCY,
-    GRAPHICS,
-    HASHTAGS,
-    FRONTEND,
-    LICENSES,
-    AIRPLANES,
-    IMEI_TACS,
-    CONTAINER,
-    GENERATION,
-    EXTENSIONS,
-    MIME_TYPES,
-    ROMAN_NUMS,
-    SUBREDDITS,
-    ISBN_GROUPS,
-    RESOLUTIONS,
-    USER_AGENTS,
-    SI_PREFIXES,
-    BLOOD_GROUPS,
-    PHONE_MODELS,
-    SCREEN_SIZES,
-    HTTP_METHODS,
-    COUNTRIES_ISO,
-    CPU_CODENAMES,
-    CSS_SELECTORS,
-    EMAIL_DOMAINS,
-    MANUFACTURERS,
-    MATH_FORMULAS,
-    PROJECT_NAMES,
-    ENGLISH_LEVEL,
-    CSS_PROPERTIES,
-    CSS_SIZE_UNITS,
-    GENDER_SYMBOLS,
-    GENERATION_ABBR,
-    SUBREDDITS_NSFW,
-    CURRENCY_SYMBOLS,
-    HTML_MARKUP_TAGS,
-    PROGRAMMING_LANGS,
-    HTTP_STATUS_CODES,
-    SEXUALITY_SYMBOLS,
-    HTML_CONTAINER_TAGS,
-    FAVORITE_MUSIC_GENRE,
-    SHORTENED_ADDRESS_FMT,
-)
-
 from elizabeth.utils import (
     pull,
     luhn_checksum,
     locale_information
+)
+
+# International data for Address() provider.
+from elizabeth.intd.addr import (
+    COUNTRIES_ISO,
+    SHORTENED_ADDRESS_FMT
+)
+
+# International data for Business() provider.
+from elizabeth.intd.bus import CURRENCIES, CURRENCY_SYMBOLS
+
+# International data for Code() provider.
+from elizabeth.intd.code import IMEI_TACS, ISBN_GROUPS
+
+# International data for Development() and Structured() providers.
+from elizabeth.intd.dev import (
+    # Development
+    SQL, NOSQL, CONTAINER, LICENSES, OS,
+    PROGRAMMING_LANGS, BACKEND, FRONTEND,
+    # Structured
+    CSS_PROPERTIES, CSS_SIZE_UNITS,
+    CSS_SELECTORS, HTML_CONTAINER_TAGS,
+    HTML_MARKUP_TAGS, FOLDERS, PROJECT_NAMES
+
+)
+
+# International data for Datetime() provider.
+from elizabeth.intd.dt import ROMAN_NUMS
+
+# International data for File() provider.
+from elizabeth.intd.file import EXTENSIONS, MIME_TYPES
+
+# International data for Hardware() provider.
+from elizabeth.intd.hw import (
+    RESOLUTIONS, SCREEN_SIZES, CPU_CODENAMES, CPU,
+    GENERATION_ABBR, GENERATION, GRAPHICS, HDD_SSD,
+    MANUFACTURERS, PHONE_MODELS
+)
+
+# International data for Internet() provider.
+from elizabeth.intd.net import (
+    EMOJI,
+    DOMAINS,
+    HASHTAGS,
+    SUBREDDITS,
+    USER_AGENTS,
+    HTTP_METHODS,
+    EMAIL_DOMAINS,
+    SUBREDDITS_NSFW,
+    HTTP_STATUS_CODES
+)
+
+# International data for Personal() provider.
+from elizabeth.intd.per import (
+    BLOOD_GROUPS,
+    ENGLISH_LEVEL,
+    GENDER_SYMBOLS,
+    SEXUALITY_SYMBOLS,
+    FAVORITE_MUSIC_GENRE
+)
+
+# International data for Science() and UnitSystem() providers.
+from elizabeth.intd.sci import (
+    SI_PREFIXES,
+    MATH_FORMULAS
+)
+
+# International data for Transport() provider.
+from elizabeth.intd.trans import (
+    CARS,
+    TRUCKS,
+    AIRPLANES
 )
 
 __all__ = [
@@ -877,7 +893,7 @@ class Business(object):
         :Example:
             RUR.
         """
-        return choice(CURRENCY)
+        return choice(CURRENCIES)
 
     def price(self, minimum=10.00, maximum=1000.00):
         """Generate a random price.

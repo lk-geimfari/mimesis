@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from elizabeth.core.intd import CARS, TRUCKS, AIRPLANES
+from elizabeth.intd import CARS, TRUCKS, AIRPLANES
 
 
 def test_truck(transport):

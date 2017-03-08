@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 import re
 
-from elizabeth.core.intd import CURRENCY, CURRENCY_SYMBOLS
-
+from elizabeth.intd import CURRENCIES, CURRENCY_SYMBOLS
 from ._patterns import STR_REGEX
 
 
@@ -27,7 +26,7 @@ def test_copyright(business):
 
 def test_currency_sio(business):
     result = business.currency_iso()
-    assert result in CURRENCY
+    assert result in CURRENCIES
 
 
 def test_company_type(generic):

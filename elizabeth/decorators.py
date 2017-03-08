@@ -1,4 +1,4 @@
-from elizabeth.core.intd import ROMANIZATION_ALPHABETS
+from elizabeth.intd.dec import ROMANIZATION_ALPHABETS
 
 
 def romanized_russian(func):

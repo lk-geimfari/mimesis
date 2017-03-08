@@ -2,11 +2,11 @@
 
 import pytest
 
-from elizabeth.core.intd import (
+from elizabeth.core.providers import File
+from elizabeth.intd import (
     EXTENSIONS,
     MIME_TYPES
 )
-from elizabeth.core.providers import File
 
 
 @pytest.fixture

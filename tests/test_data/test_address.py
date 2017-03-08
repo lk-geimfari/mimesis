@@ -2,8 +2,7 @@
 
 import re
 
-from elizabeth.core.intd import COUNTRIES_ISO
-
+from elizabeth.intd import COUNTRIES_ISO
 from ._patterns import POSTAL_CODE_REGEX, STR_REGEX
 
 

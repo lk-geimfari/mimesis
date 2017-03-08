@@ -3,7 +3,7 @@
 import pytest
 
 from elizabeth.core.providers import Development
-from elizabeth.core.intd import (
+from elizabeth.intd import (
     FRONTEND,
     PROGRAMMING_LANGS,
     OS,
