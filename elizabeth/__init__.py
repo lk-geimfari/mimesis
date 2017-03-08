@@ -30,7 +30,6 @@ __all__ = [
     'Food',
     'Hardware',
     'Internet',
-    'Network',
     'Numbers',
     'Path',
     'Personal',

@@ -30,21 +30,59 @@ from string import (
 )
 
 from elizabeth.core.intd import (
-    AIRPLANES, BACKEND, BLOOD_GROUPS, CARS,
-    COUNTRIES_ISO, CPU_CODENAMES, CSS_PROPERTIES,
-    CPU, CSS_SELECTORS, CSS_SIZE_UNITS, CURRENCY,
-    CURRENCY_SYMBOLS, DOMAINS, EMAIL_DOMAINS, EMOJI,
-    EXTENSIONS, FAVORITE_MUSIC_GENRE, FOLDERS, FRONTEND,
-    GENDER_SYMBOLS, GENERATION, GENERATION_ABBR, GRAPHICS,
-    HASHTAGS, HTML_CONTAINER_TAGS, HTML_MARKUP_TAGS,
-    IMEI_TACS, ISBN_GROUPS, LICENSES, MANUFACTURERS,
-    MATH_FORMULAS, MEMORY, MIME_TYPES, NOSQL, OS,
-    CONTAINER, PHONE_MODELS, PROGRAMMING_LANGS,
-    PROJECT_NAMES, RESOLUTIONS, ROMAN_NUMS,
-    SCREEN_SIZES, SEXUALITY_SYMBOLS,
-    SHORTENED_ADDRESS_FMT, SUBREDDITS,
-    SUBREDDITS_NSFW, TRUCKS, USER_AGENTS, SQL,
-    ENGLISH_LEVEL, SI_PREFIXES
+    OS,
+    SQL,
+    CPU,
+    CARS,
+    NOSQL,
+    EMOJI,
+    TRUCKS,
+    FOLDERS,
+    HDD_SSD,
+    DOMAINS,
+    BACKEND,
+    CURRENCY,
+    GRAPHICS,
+    HASHTAGS,
+    FRONTEND,
+    LICENSES,
+    AIRPLANES,
+    IMEI_TACS,
+    CONTAINER,
+    GENERATION,
+    EXTENSIONS,
+    MIME_TYPES,
+    ROMAN_NUMS,
+    SUBREDDITS,
+    ISBN_GROUPS,
+    RESOLUTIONS,
+    USER_AGENTS,
+    SI_PREFIXES,
+    BLOOD_GROUPS,
+    PHONE_MODELS,
+    SCREEN_SIZES,
+    HTTP_METHODS,
+    COUNTRIES_ISO,
+    CPU_CODENAMES,
+    CSS_SELECTORS,
+    EMAIL_DOMAINS,
+    MANUFACTURERS,
+    MATH_FORMULAS,
+    PROJECT_NAMES,
+    ENGLISH_LEVEL,
+    CSS_PROPERTIES,
+    CSS_SIZE_UNITS,
+    GENDER_SYMBOLS,
+    GENERATION_ABBR,
+    SUBREDDITS_NSFW,
+    CURRENCY_SYMBOLS,
+    HTML_MARKUP_TAGS,
+    PROGRAMMING_LANGS,
+    HTTP_STATUS_CODES,
+    SEXUALITY_SYMBOLS,
+    HTML_CONTAINER_TAGS,
+    FAVORITE_MUSIC_GENRE,
+    SHORTENED_ADDRESS_FMT,
 )
 
 from elizabeth.utils import (
@@ -1855,7 +1893,7 @@ class Hardware(object):
         :Example:
             512GB SSD.
         """
-        return choice(MEMORY)
+        return choice(HDD_SSD)
 
     @staticmethod
     def graphics():
@@ -1933,6 +1971,37 @@ class ClothingSizes(object):
 
 class Internet(object):
     """Class for generate the internet data."""
+
+    @staticmethod
+    def content_type():
+        """Get a random HTTP content type.
+
+        :return: Content type.
+        :Example:
+            Content-Type: application/json
+        """
+        c_type = 'Content-Type: {}'.format(File.mime_type())
+        return c_type
+
+    @staticmethod
+    def http_status_code():
+        """Get a random HTTP status.
+
+        :return: HTTP status.
+        :Example:
+            200 OK
+        """
+        return choice(HTTP_STATUS_CODES)
+
+    @staticmethod
+    def http_method():
+        """Get a random HTTP method.
+
+        :return: HTTP method.
+        :Example:
+            POST
+        """
+        return choice(HTTP_METHODS)
 
     @staticmethod
     def ip_v4():

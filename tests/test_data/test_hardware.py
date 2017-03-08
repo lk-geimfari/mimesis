@@ -3,7 +3,7 @@
 import pytest
 
 from elizabeth.core.intd import (
-    CPU_CODENAMES, PHONE_MODELS, MEMORY,
+    CPU_CODENAMES, PHONE_MODELS, HDD_SSD,
     RESOLUTIONS, MANUFACTURERS, CPU,
     GENERATION, SCREEN_SIZES, GRAPHICS,
     GENERATION_ABBR
@@ -63,7 +63,7 @@ def test_ram_size(hard):
 
 def test_ssd_or_hdd(hard):
     result = hard.ssd_or_hdd()
-    assert result in MEMORY
+    assert result in HDD_SSD
 
 
 def test_graphics(hard):

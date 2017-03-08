@@ -6,12 +6,17 @@ import re
 from elizabeth.core.providers import Internet
 from elizabeth.core.intd import (
     SUBREDDITS, EMOJI, USER_AGENTS,
-    SUBREDDITS_NSFW, HASHTAGS
+    SUBREDDITS_NSFW, HASHTAGS,
+    HTTP_METHODS, MIME_TYPES,
+    HTTP_STATUS_CODES
 )
 
-from ._patterns import HOME_PAGE
-
-from ._patterns import *
+from ._patterns import (
+    HOME_PAGE,
+    IP_V6_REGEX,
+    IP_V4_REGEX,
+    MAC_ADDRESS_REGEX
+)
 
 
 @pytest.fixture
@@ -99,3 +104,19 @@ def test_ip_v6(net):
 def test_mac_address(net):
     mac = net.mac_address()
     assert re.match(MAC_ADDRESS_REGEX, mac)
+
+
+def test_http_method(net):
+    result = net.http_method()
+    assert result in HTTP_METHODS
+
+
+def test_content_type(net):
+    result = net.content_type().split(':')
+    result = result[1].strip()
+    assert result in MIME_TYPES
+
+
+def test_http_status_code(net):
+    result = net.http_status_code()
+    assert result in HTTP_STATUS_CODES
