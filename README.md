@@ -130,19 +130,17 @@ providers from one object.
 'Limón'
 ```
 
-Elizabeth supports more than 19 data providers and its mean that you can generate data for everything:
-
+Keep in mind that the library supports more than nineteen data providers and it's means that you can create data for almost anything you want:
 ```python
->>> from random import randint
 >>> from elizabeth import UnitSystem
 
 >>> us = UnitSystem()
 
->>> '{} {}{}'.format(randint(0, 100), us.prefix(), us.magnetic_flux())
-'99 exaweber'
+>>> '23 %s%s' % (us.prefix(), us.magnetic_flux())
+'23 exaweber'
 
->>> '{} {}{}'.format(randint(0, 100), us.prefix(sign='negative'), us.radioactivity())
-'88 millibecquerel'
+>>> '678 %s%s' % (us.prefix(sign='negative'), us.radioactivity())
+'678 millibecquerel'
 ```
 
 ## Advantages
