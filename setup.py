@@ -1,32 +1,61 @@
+from os.path import (
+    abspath,
+    dirname,
+    join
+)
+
 from distutils.core import setup
 
-from elizabeth import __version__, \
-    __author__
+from elizabeth import (
+    __author__,
+    __version__
+)
+
+PATH = abspath(join(dirname(__file__), 'other'))
 
 
-try:
-    with open('_readme_pypi.rst', 'r', encoding='utf-8') as f:
-        readme = f.read()
-except FileNotFoundError:
-    readme = ''
+def readme():
+    descr = ''
+    try:
+        with open(PATH + '/pypir.rst', 'r', encoding='utf-8') as f:
+            descr = f.read()
+    except FileNotFoundError:
+        pass
+    return descr
+
 
 setup(
     name='elizabeth',
     version=__version__,
-    packages=['elizabeth', 'elizabeth.core', 'elizabeth.core.intd', 'elizabeth.builtins'],
-    keywords=['fake', 'data', 'testing', 'generate', 'elizabeth', 'db', 'dummy'],
+    packages=[
+        'elizabeth',
+        'elizabeth.core',
+        'elizabeth.core.intd',
+        'elizabeth.builtins'
+    ],
+    keywords=[
+        'db',
+        'fake',
+        'data',
+        'testing',
+        'generate',
+        'elizabeth',
+        'dummy'
+    ],
     package_data={
         'elizabeth': [
-            'data/*/*',
+            'data/*/*'
         ]
     },
-    data_files=[("", ["LICENSE"])],
+    data_files=[
+        ("", ["LICENSE"])
+    ],
     url='https://github.com/lk-geimfari/elizabeth',
-    license='MIT',
+    license='MIT License',
     author=__author__,
     author_email='likid.geimfari@gmail.com',
     description='Elizabeth: dummy data for you.',
-    long_description=readme,
+    long_description=readme(),
     classifiers=[
         "Development Status :: 4 - Beta",
         'Intended Audience :: Developers',
