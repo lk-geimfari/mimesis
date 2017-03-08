@@ -13,3 +13,9 @@ from .net import *
 from .per import *
 from .sci import *
 from .trans import *
+
+# BAD:
+# from elizabeth.intd import EMOJI
+
+# GOOD:
+# from elizabeth.intd.net import EMOJI
