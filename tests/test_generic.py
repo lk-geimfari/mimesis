@@ -40,6 +40,11 @@ def test_base_business(generic):
     assert result is not None
 
 
+def test_base_unit_system(generic):
+    result = generic.unit_system.mass()
+    assert result is not None
+
+
 def test_base_code(generic):
     result = generic.code.isbn()
     assert result is not None

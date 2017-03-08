@@ -44,6 +44,38 @@ ROMANIZATION_ALPHABETS = {
     }
 }
 
+# UNIT SYSTEM
+SI_PREFIXES = {
+    "negative": [
+        "deci",
+        "centi",
+        "milli",
+        "micro",
+        "nano",
+        "pico",
+        "femto",
+        "atto",
+        "zepto",
+        "yocto"
+    ],
+    "positive": [
+        "yotta",
+        "zetta",
+        "exa",
+        "peta",
+        "tera",
+        "giga",
+        "mega",
+        "kilo",
+        "hecto",
+        "deca"
+    ],
+    "_sym_": {
+        "negative": ['d', 'c', 'm', 'μ', 'n', 'p', 'f', 'a', 'z', 'y'],
+        "positive": ['Y', 'Z', 'E', 'P', 'T', 'G', 'M', 'k', 'h', 'da']
+    }
+}
+
 # BUSINESS
 CURRENCY = [
     "AED",

@@ -3,5 +3,6 @@ from elizabeth.core.providers import (
     Code, Datetime, Development, File,
     Food, Hardware, Internet, Network,
     Numbers, Path, Personal, Science,
-    Structured, Text, Transport, Generic
+    Structured, Text, Transport, UnitSystem,
+    Generic
 )

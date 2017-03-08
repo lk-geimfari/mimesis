@@ -38,5 +38,6 @@ __all__ = [
     'Structured',
     'Text',
     'Transport',
+    'UnitSystem',
     'Generic'
 ]
