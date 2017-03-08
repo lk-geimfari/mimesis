@@ -130,7 +130,8 @@ providers from one object.
 'Limón'
 ```
 
-You can create dummy data for everything:
+Elizabeth supports more than 19 data providers and its mean that you can generate data for everything:
+
 ```python
 >>> from random import randint
 >>> from elizabeth import UnitSystem
@@ -138,7 +139,7 @@ You can create dummy data for everything:
 >>> us = UnitSystem()
 
 >>> '{} {}{}'.format(randint(0, 100), us.prefix(), us.magnetic_flux())
-99 exaweber
+'99 exaweber'
 
 >>> '{} {}{}'.format(randint(0, 100), us.prefix(sign='negative'), us.radioactivity())
 '88 millibecquerel'
