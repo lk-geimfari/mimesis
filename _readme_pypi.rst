@@ -290,14 +290,6 @@ Russian:
     'Veronika Denisova'
 
 
-Contributing
-------------
-
-Your contributions are always welcome! Please take a look at the
-`contribution`_ guidelines first it is very important. `Here`_ you can
-look a list of our contributors.
-
-
 License
 ------------
 
@@ -314,11 +306,10 @@ intentions. Do not use the data generated with ``Elizabeth`` for illegal
 purposes.
 
 .. _contribution: https://github.com/lk-geimfari/elizabeth/blob/master/CONTRIBUTING.md
-.. _Here: https://github.com/lk-geimfari/elizabeth/blob/master/CONTRIBUTORS.md
 .. _LICENSE: https://github.com/lk-geimfari/elizabeth/blob/master/LICENSE
 
 
 Author and Maintainer
 ------------
 
-`Likid Geimfari <https://github.com/lk-geimfari>`_ <likid.geimfari@gmail.com>
+`Likid Geimfari <https://github.com/lk-geimfari>`_ (likid.geimfari@gmail.com)
