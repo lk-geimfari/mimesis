@@ -1,6 +1,7 @@
 ===========
-Quick Start
+Deprecated documentation
 ===========
+
 
 Personal
 --------
@@ -190,25 +191,6 @@ Business
 	#  Output: RUR
 	currency = business.currency()
 
-Network
--------
-
-.. code-block:: python
-
-	# Class for generate data for working with network,
-	network = Network()
-
-	# Generate IPv4 address
-	ip_v4 = network.ip_v4()
-
-	# Generate IPv6 address.
-	ip_v6 = network.ip_v6()
-
-	# Generate mac address.
-	mac = network.mac_address()
-
-	# Get a random user agent.
-	user_agent = network.user_agent()
 
 Science
 -------
