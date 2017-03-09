@@ -12,123 +12,198 @@ def us():
 
 
 def test_mass(us):
-    assert us.mass(symbol=False) == 'gram'
-    assert us.mass(symbol=True) == 'gr'
+    result = us.mass(symbol=False)
+    assert result == 'gram'
+
+    result_sym = us.mass(symbol=True)
+    assert result_sym == 'gr'
 
 
 def test_thermodynamic_temperature(us):
-    assert us.thermodynamic_temperature(symbol=False) == 'kelvin'
-    assert us.thermodynamic_temperature(symbol=True) == 'K'
+    result = us.thermodynamic_temperature(symbol=False)
+    assert result == 'kelvin'
+
+    result_sym = us.thermodynamic_temperature(symbol=True)
+    assert result_sym == 'K'
 
 
 def test_amount_of_substance(us):
-    assert us.amount_of_substance(symbol=False) == 'mole'
-    assert us.amount_of_substance(symbol=True) == 'mol'
+    result = us.amount_of_substance(symbol=False)
+    assert result == 'mole'
+
+    result_sym = us.amount_of_substance(symbol=True)
+    assert result_sym == 'mol'
 
 
 def test_angle(us):
-    assert us.angle(symbol=False) == 'radian'
-    assert us.angle(symbol=True) == 'r'
+    result = us.angle(symbol=False)
+    assert result == 'radian'
+
+    result_sym = us.angle(symbol=True)
+    assert result_sym == 'r'
 
 
 def test_solid_angle(us):
-    assert us.solid_angle(symbol=False) == 'steradian'
-    assert us.solid_angle(symbol=True) == '㏛'
+    result = us.solid_angle(symbol=False)
+    assert result == 'steradian'
+
+    result_sym = us.solid_angle(symbol=True)
+    assert result_sym == '㏛'
 
 
 def test_frequency(us):
-    assert us.frequency(symbol=False) == 'hertz'
-    assert us.frequency(symbol=True) == 'Hz'
+    result = us.frequency(symbol=False)
+    assert result == 'hertz'
+
+    result_sym = us.frequency(symbol=True)
+    assert result_sym == 'Hz'
 
 
 def test_pressure(us):
-    assert us.pressure(symbol=True) == 'P'
-    assert us.pressure(symbol=False) == 'pascal'
+    result = us.pressure(symbol=True)
+    assert result == 'P'
+
+    result_sym = us.pressure(symbol=False)
+    assert result_sym == 'pascal'
 
 
 def test_energy(us):
-    assert us.energy(symbol=True) == 'J'
-    assert us.energy(symbol=False) == 'joule'
+    result = us.energy(symbol=True)
+    assert result == 'J'
+
+    result_sym = us.energy(symbol=False)
+    assert result_sym == 'joule'
 
 
 def test_power(us):
-    assert us.power(symbol=True) == 'W'
-    assert us.power(symbol=False) == 'watt'
+    result_sym = us.power(symbol=True)
+    assert result_sym == 'W'
+
+    result = us.power(symbol=False)
+    assert result == 'watt'
 
 
 def test_flux(us):
-    assert us.flux(symbol=True) == 'W'
-    assert us.flux(symbol=False) == 'watt'
+    result_sym = us.flux(symbol=True)
+    assert result_sym == 'W'
+
+    result = us.flux(symbol=False)
+    assert result == 'watt'
 
 
 def test_electric_charge(us):
-    assert us.electric_charge(symbol=True) == 'C'
-    assert us.electric_charge(symbol=False) == 'coulomb'
+    result_sym = us.electric_charge(symbol=True)
+    assert result_sym == 'C'
+
+    result = us.electric_charge(symbol=False)
+    assert result == 'coulomb'
 
 
 def test_voltage(us):
-    assert us.voltage(symbol=True) == 'V'
-    assert us.voltage(symbol=False) == 'volt'
+    result_sym = us.voltage(symbol=True)
+    assert result_sym == 'V'
+
+    result = us.voltage(symbol=False)
+    assert result == 'volt'
 
 
 def test_electric_capacitance(us):
-    assert us.electric_capacitance(symbol=True) == 'F'
-    assert us.electric_capacitance(symbol=False) == 'farad'
+    result_sym = us.electric_capacitance(symbol=True)
+    assert result_sym == 'F'
+
+    result = us.electric_capacitance(symbol=False)
+    assert result == 'farad'
 
 
 def test_electric_resistance(us):
-    assert us.electric_resistance(symbol=True) == 'Ω'
-    assert us.electric_resistance(symbol=False) == 'ohm'
+    result_sym = us.electric_resistance(symbol=True)
+    assert result_sym == 'Ω'
+
+    result = us.electric_resistance(symbol=False)
+    assert result == 'ohm'
 
 
 def test_impedance(us):
-    assert us.impedance(symbol=True) == 'Ω'
-    assert us.impedance(symbol=False) == 'ohm'
+    result_sym = us.impedance(symbol=True)
+    assert result_sym == 'Ω'
+
+    result = us.impedance(symbol=False)
+    assert result == 'ohm'
 
 
 def test_reactance(us):
-    assert us.reactance(symbol=True) == 'Ω'
-    assert us.reactance(symbol=False) == 'ohm'
+    result_sym = us.reactance(symbol=True)
+    assert result_sym == 'Ω'
+
+    result = us.reactance(symbol=False)
+    assert result == 'ohm'
 
 
 def test_electrical_conductance(us):
-    assert us.electrical_conductance(symbol=True) == 'S'
-    assert us.electrical_conductance(symbol=False) == 'siemens'
+    result_sym = us.electrical_conductance(symbol=True)
+    assert result_sym == 'S'
+
+    result = us.electrical_conductance(symbol=False)
+    assert result == 'siemens'
 
 
 def test_magnetic_flux(us):
-    assert us.magnetic_flux(symbol=True) == 'Wb'
-    assert us.magnetic_flux(symbol=False) == 'weber'
+    result_sym = us.magnetic_flux(symbol=True)
+    assert result_sym == 'Wb'
+
+    result = us.magnetic_flux(symbol=False)
+    assert result == 'weber'
 
 
 def test_magnetic_flux_density(us):
-    assert us.magnetic_flux_density(symbol=True) == 'T'
-    assert us.magnetic_flux_density(symbol=False) == 'tesla'
+    result_sym = us.magnetic_flux_density(symbol=True)
+    assert result_sym == 'T'
+
+    result = us.magnetic_flux_density(symbol=False)
+    assert result == 'tesla'
 
 
 def test_inductance(us):
-    assert us.inductance(symbol=True) == 'H'
-    assert us.inductance(symbol=False) == 'henry'
+    result_sym = us.inductance(symbol=True)
+    assert result_sym == 'H'
+
+    result = us.inductance(symbol=False)
+    assert result == 'henry'
 
 
 def test_temperature(us):
-    assert us.temperature(symbol=True) == '°C'
-    assert us.temperature(symbol=False) == 'Celsius'
+    result_sym = us.temperature(symbol=True)
+    assert result_sym == '°C'
+
+    result = us.temperature(symbol=False)
+    assert result == 'Celsius'
 
 
 def test_radioactivity(us):
-    assert us.radioactivity(symbol=True) == 'Bq'
-    assert us.radioactivity(symbol=False) == 'becquerel'
+    result_sym = us.radioactivity(symbol=True)
+    assert result_sym == 'Bq'
+
+    result = us.radioactivity(symbol=False)
+    assert result == 'becquerel'
 
 
 def test_prefix(us):
-    assert us.prefix(sign='positive', symbol=False) in SI_PREFIXES['positive']
-    assert us.prefix(sign='negative', symbol=False) in SI_PREFIXES['negative']
+    result_po = us.prefix(sign='positive', symbol=False)
+    assert result_po in SI_PREFIXES['positive']
 
-    assert us.prefix(sign='positive', symbol=True) in SI_PREFIXES['_sym_']['positive']
-    assert us.prefix(sign='negative', symbol=True) in SI_PREFIXES['_sym_']['negative']
+    result_ne = us.prefix(sign='negative', symbol=False)
+    assert result_ne in SI_PREFIXES['negative']
+
+    result_ne_sym = us.prefix(sign='negative', symbol=True)
+    assert result_ne_sym in SI_PREFIXES['_sym_']['negative']
+
+    result_po_sym = us.prefix(sign='positive', symbol=True)
+    assert result_po_sym in SI_PREFIXES['_sym_']['positive']
 
 
 def test_information(us):
-    assert us.information(symbol=True) == 'b'
-    assert us.information(symbol=False) == 'byte'
+    result_sym = us.information(symbol=True)
+    assert result_sym == 'b'
+
+    result = us.information(symbol=False)
+    assert result == 'byte'
