@@ -762,3 +762,5 @@ SHORTENED_ADDRESS_FMT = [
     'pt',
     'pt-br'
 ]
+
+CONTINENT_CODES = ['AF', 'NA', 'OC', 'AN', 'AS', 'EU', 'SA']

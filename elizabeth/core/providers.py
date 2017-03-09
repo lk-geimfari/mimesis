@@ -38,6 +38,7 @@ from elizabeth.utils import (
 # International data for Address() provider.
 from elizabeth.intd.addr import (
     COUNTRIES_ISO,
+    CONTINENT_CODES,
     SHORTENED_ADDRESS_FMT
 )
 
@@ -305,6 +306,16 @@ class Address(object):
             'latitude': self.latitude()
         }
         return coord
+
+    @staticmethod
+    def continent_code():
+        """Get a random continent code.
+
+        :return: Code of continent.
+        :Example:
+            EU
+        """
+        return choice(CONTINENT_CODES)
 
 
 class Numbers(object):

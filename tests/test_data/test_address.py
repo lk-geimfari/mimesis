@@ -2,12 +2,17 @@
 
 import re
 
-from elizabeth.intd import COUNTRIES_ISO
+from elizabeth.intd import COUNTRIES_ISO, CONTINENT_CODES
 from ._patterns import POSTAL_CODE_REGEX, STR_REGEX
 
 
 def test_str(address):
     assert re.match(STR_REGEX, str(address))
+
+
+def test_continent_code(address):
+    result = address.continent_code()
+    assert result in CONTINENT_CODES
 
 
 def test_street_number(address):
