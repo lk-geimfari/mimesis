@@ -112,9 +112,32 @@ def test_http_method(net):
 
 
 def test_content_type(net):
-    result = net.content_type().split(':')
-    result = result[1].strip()
-    assert result in MIME_TYPES
+    application = net.content_type(mime_type='application')
+    application = application.split(':')[1].strip()
+    assert application in MIME_TYPES['application']
+
+    audio = net.content_type(mime_type='audio')
+    audio = audio.split(':')[1].strip()
+    assert audio in MIME_TYPES['audio']
+
+    image = net.content_type(mime_type='image')
+    image = image.split(':')[1].strip()
+    assert image in MIME_TYPES['image']
+
+    message = net.content_type(mime_type='message')
+    message = message.split(':')[1].strip()
+    assert message in MIME_TYPES['message']
+
+    text = net.content_type(mime_type='text')
+    text = text.split(':')[1].strip()
+    assert text in MIME_TYPES['text']
+
+    video = net.content_type(mime_type='video')
+    video = video.split(':')[1].strip()
+    assert video in MIME_TYPES['video']
+
+    with pytest.raises(ValueError):
+        net.content_type(mime_type='blablabla')
 
 
 def test_http_status_code(net):

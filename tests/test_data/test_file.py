@@ -23,5 +23,23 @@ def test_extension(file):
 
 
 def test_mime_type(file):
-    result = file.mime_type()
-    assert result in MIME_TYPES
+    application = file.mime_type(type_t='application')
+    assert application in MIME_TYPES['application']
+
+    audio = file.mime_type(type_t='audio')
+    assert audio in MIME_TYPES['audio']
+
+    image = file.mime_type(type_t='image')
+    assert image in MIME_TYPES['image']
+
+    message = file.mime_type(type_t='message')
+    assert message in MIME_TYPES['message']
+
+    text = file.mime_type(type_t='text')
+    assert text in MIME_TYPES['text']
+
+    video = file.mime_type(type_t='video')
+    assert video in MIME_TYPES['video']
+
+    with pytest.raises(ValueError):
+        file.mime_type(type_t='blablabla')

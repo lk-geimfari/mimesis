@@ -1563,13 +1563,19 @@ class File(object):
         return choice(EXTENSIONS[k])
 
     @staticmethod
-    def mime_type():
+    def mime_type(type_t='application'):
         """Get a random mime type from list.
 
         :return: Mime type.
+        :param type_t: Type of media: application, image, video, audio, text, message
         :rtype: str
         """
-        return choice(MIME_TYPES)
+        supported = ''.join(MIME_TYPES.keys())
+
+        if type_t not in list(MIME_TYPES.keys()):
+            raise ValueError('Unsupported mime type! Use: {}'.format(supported))
+
+        return choice(MIME_TYPES[type_t])
 
 
 class Science(object):
@@ -1989,15 +1995,15 @@ class Internet(object):
     """Class for generate the internet data."""
 
     @staticmethod
-    def content_type():
+    def content_type(mime_type='application'):
         """Get a random HTTP content type.
 
         :return: Content type.
         :Example:
             Content-Type: application/json
         """
-        c_type = 'Content-Type: {}'.format(File.mime_type())
-        return c_type
+        fmt = File.mime_type(type_t=mime_type)
+        return 'Content-Type: {}'.format(fmt)
 
     @staticmethod
     def http_status_code():
