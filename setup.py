@@ -1,3 +1,5 @@
+import codecs
+
 from os.path import (
     abspath,
     dirname,
@@ -13,15 +15,7 @@ from elizabeth import (
 
 PATH = abspath(join(dirname(__file__), 'other'))
 
-
-def readme():
-    descr = ''
-    try:
-        with open(PATH + '/pypir.rst', 'r', encoding='utf-8') as f:
-            descr = f.read()
-    except FileNotFoundError:
-        pass
-    return descr
+readme = codecs.open(PATH + '/pypir.rst', encoding='utf-8').read() 
 
 
 setup(
@@ -55,7 +49,7 @@ setup(
     author=__author__,
     author_email='likid.geimfari@gmail.com',
     description='Elizabeth: dummy data for you.',
-    long_description=readme(),
+    long_description=readme,
     classifiers=[
         "Development Status :: 4 - Beta",
         'Intended Audience :: Developers',
