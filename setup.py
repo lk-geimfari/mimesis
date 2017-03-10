@@ -30,7 +30,7 @@ setup(
     packages=[
         'elizabeth',
         'elizabeth.core',
-        'elizabeth.core.intd',
+        'elizabeth.intd',
         'elizabeth.builtins'
     ],
     keywords=[
