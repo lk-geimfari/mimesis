@@ -1,6 +1,14 @@
 ## Changelog
 
 
+### Version 0.3.20
+ - Updated README for PyPi
+ - Added more data
+ - Updated data
+ - Fixed bug
+
+---
+
 ### Version 0.3.19
  - Updated README for PyPi
  - Fixed bug

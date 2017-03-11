@@ -11,7 +11,6 @@ elizabeth/builtins/__init__.py
 elizabeth/builtins/specific_providers.py
 elizabeth/core/__init__.py
 elizabeth/core/providers.py
-elizabeth/core/intd/__init__.py
 elizabeth/data/cs/address.json
 elizabeth/data/cs/business.json
 elizabeth/data/cs/datetime.json
@@ -180,3 +179,16 @@ elizabeth/data/tr/food.json
 elizabeth/data/tr/personal.json
 elizabeth/data/tr/science.json
 elizabeth/data/tr/text.json
+elizabeth/intd/__init__.py
+elizabeth/intd/addr.py
+elizabeth/intd/bus.py
+elizabeth/intd/code.py
+elizabeth/intd/dec.py
+elizabeth/intd/dev.py
+elizabeth/intd/dt.py
+elizabeth/intd/file.py
+elizabeth/intd/hw.py
+elizabeth/intd/net.py
+elizabeth/intd/per.py
+elizabeth/intd/sci.py
+elizabeth/intd/trans.py
