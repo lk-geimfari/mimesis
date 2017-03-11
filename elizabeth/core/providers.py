@@ -1209,15 +1209,28 @@ class Personal(object):
 
         return url.format(username)
 
-    def gender(self, symbol=False):
-        """Get a random gender.
+    def gender(self, iso5218=False, symbol=False):
+        """Get a random title of gender, code for the representation of human sexes is an international
+        standard that defines a representation of human sexes through a language-neutral single-digit code
+        or symbol of gender.
 
-        :param symbol: Unicode symbol.
+        :param iso5218: Codes for the representation of human sexes is an international standard.
+        :param symbol: Symbol of gender.
         :return: Title of gender.
         :rtype: str
         :Example:
-            Male (♂ when symbol=True).
+            Male.
         """
+        # The four codes specified in ISO/IEC 5218 are:
+        #     0 = not known,
+        #     1 = male,
+        #     2 = female,
+        #     9 = not applicable.
+        codes = [0, 1, 2, 9]
+
+        if iso5218:
+            return choice(codes)
+
         if symbol:
             return choice(GENDER_SYMBOLS)
 

@@ -236,6 +236,13 @@ def test_gender(generic):
     symbol = generic.personal.gender(symbol=True)
     assert symbol in GENDER_SYMBOLS
 
+    # The four codes specified in ISO/IEC 5218 are:
+    # 0 = not known, 1 = male, 2 = female, 9 = not applicable.
+    codes = [0, 1, 2, 9]
+    iso5218 = generic.personal.gender(iso5218=True)
+    assert iso5218 in codes
+
+
 
 def test_sexual_orientation(generic):
     result = generic.personal.sexual_orientation()
