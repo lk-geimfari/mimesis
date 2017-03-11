@@ -9182,7 +9182,12 @@
 		"Tęsknić"
 	  ],
 	  "academic": [
-		"Test"
+		"Dr.",
+		"Inż.",
+		"Mgr.",
+		"Mgr. inż.",
+		"Dr hab.",
+		"Prof."
 	  ]
 	},
 	"male": {
@@ -9190,7 +9195,12 @@
 		"Pan"
 	  ],
 	  "academic": [
-		"Test"
+		"Dr.",
+		"Inż.",
+		"Mgr.",
+		"Mgr. inż.",
+		"Dr hab.",
+		"Prof."
 	  ]
 	}
   },
