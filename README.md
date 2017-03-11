@@ -12,7 +12,6 @@
 [![PyPI version](https://badge.fury.io/py/elizabeth.svg)](https://badge.fury.io/py/elizabeth)
 [![Python Version](https://img.shields.io/badge/python-v3.3%2C%20v3.4%2C%20v3.5%2C%20v3.6-brightgreen.svg)](https://github.com/lk-geimfari/elizabeth/)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/8b2f43d89d774929bb0b7535812f5b08)](https://www.codacy.com/app/likid-geimfari/elizabeth?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=lk-geimfari/elizabeth&amp;utm_campaign=Badge_Grade)
-[![Code Triagers Badge](https://www.codetriage.com/lk-geimfari/elizabeth/badges/users.svg)](https://www.codetriage.com/lk-geimfari/elizabeth)
 
 ## Description
 
