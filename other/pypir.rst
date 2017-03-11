@@ -282,6 +282,37 @@ Russian:
 
     >>> get_name_ro()
     'Veronika Denisova'
+	
+
+
+Decorators
+----------
+
+If your locale is cyrillic, but you need latinized locale-specific data,
+then you can use special decorator. At this moment it’s work only for
+Russian:
+
+.. code:: python
+
+    >>> from elizabeth import Personal
+    >>> from elizabeth.decorators import romanized_russian
+
+    >>> pr = Personal('ru')
+
+    >>> @romanized_russian
+    ... def get_name_ro():
+    ...     return pr.full_name()
+    ...
+
+    >>> def get_name_ru():
+    ...     return pr.full_name()
+    ...
+
+    >>> get_name_ru()
+    'Вида Панова'
+
+    >>> get_name_ro()
+    'Veronika Denisova'
 
 
 License
