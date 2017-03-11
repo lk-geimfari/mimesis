@@ -1,10 +1,11 @@
 {
   "academic_degree": [
-	"Cand.med.",
 	"Cand.oecon.",
 	"Cand.polit.",
+	"Cand.psychol.",
 	"Cand.scient.",
 	"Cand.scient.pol.",
+	"Cand.med.",
 	"Civiløkonom"
   ],
   "favorite_movie": [
@@ -1112,10 +1113,90 @@
 	]
   },
   "nationality": [
-	"Test"
+	"Amerikansk",
+	"Arabisk",
+	"Bosnisk",
+	"Dansk",
+	"Engelsk",
+	"Finsk",
+	"Finsk",
+	"Fransk",
+	"Færøsk",
+	"Hindi",
+	"Islandsk",
+	"Japansk",
+	"Kinesisk",
+	"Norsk",
+	"Persisk",
+	"Polsk",
+	"Russisk",
+	"Serbisk",
+	"Spansk",
+	"Svensk",
+	"Thai",
+	"Tyrkisk",
+	"Tysk",
+	"Ungarsk",
+	"Urdu"
   ],
   "occupation": [
-	"Test"
+	"Adm. direktør",
+	"Advokat",
+	"Advokatfuldmægtig",
+	"Aut. el installatør",
+	"Avisbud",
+	"Bankassistent",
+	"Butiksslagter",
+	"Bybuschauffør",
+	"Børnepædagog",
+	"Chef projektleder",
+	"Cykelbud",
+	"Dommer",
+	"Dyrlæge",
+	"Ejendomsmægler",
+	"Elektriker",
+	"Flymekaniker",
+	"Forretningsudvikler",
+	"Fotomodel",
+	"Frisørarbejde",
+	"Fysioterapeut",
+	"Gadefejning og beslægtet arbejde",
+	"Handelsskolelærer privat",
+	"Informationsarbejde på kundekontaktcentre",
+	"Journalistisk arbejde",
+	"Journalistisk kommunikationsmedarbejder",
+	"Kasseassistentarbejde og beslægtet kundebetjening",
+	"Kriminalassisent",
+	"Kurator",
+	"Kurer",
+	"Kørerlærer",
+	"Ledelse af reklame og pr",
+	"Maskiningeniør",
+	"Matematiker",
+	"Medhjælp i butik mv.",
+	"Mekanikerarbejde, person- og varevogne",
+	"Murer",
+	"Postomdeler",
+	"Pr/reklame",
+	"Programmering inden for softwareudvikling",
+	"Psykologarbejde",
+	"Reklamedesigner",
+	"Rengøring af kontorer og beboelsesområder",
+	"Rutebilchauffør",
+	"Salgsarbejde i kundekontaktcentre",
+	"Shippingassistent",
+	"Skolelærer på grundskoleniveau",
+	"Skuespiller",
+	"Smed",
+	"Statistiker",
+	"Tandlæge",
+	"Telefonsælger",
+	"Togfører",
+	"Tømrer",
+	"Valuar",
+	"Vvs montør",
+	"Webudvikler",
+	"Økonom"
   ],
   "political_views": [
 	"Apartisk",
@@ -2144,18 +2225,31 @@
   "title": {
 	"female": {
 	  "typical": [
-		"Test"
+		"Fru.",
+		"Frk."
 	  ],
 	  "academic": [
-		"Test"
+		"Cand.oecon.",
+		"Cand.polit.",
+		"Cand.psychol.",
+		"Cand.scient.",
+		"Cand.scient.pol.",
+		"Cand.med.",
+		"Civiløkonom"
 	  ]
 	},
 	"male": {
 	  "typical": [
-		"Test"
+		"Hr."
 	  ],
 	  "academic": [
-		"Test"
+		"Cand.oecon.",
+		"Cand.polit.",
+		"Cand.psychol.",
+		"Cand.scient.",
+		"Cand.scient.pol.",
+		"Cand.med.",
+		"Civiløkonom"
 	  ]
 	}
   },
