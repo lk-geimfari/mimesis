@@ -27,12 +27,6 @@
 .. image:: https://img.shields.io/github/forks/lk-geimfari/elizabeth.svg
     :target: https://github.com/lk-geimfari/elizabeth/network
 
-.. image:: https://img.shields.io/github/issues/lk-geimfari/elizabeth.svg
-    :target: https://github.com/lk-geimfari/elizabeth/issues
-
-.. image:: https://img.shields.io/badge/license-MIT-blue.svg
-    :target: https://raw.githubusercontent.com/lk-geimfari/elizabeth/master/LICENSE
-
 
 `Elizabeth <https://github.com/lk-geimfari/elizabeth>`_ is a fast and easy to use Python library for generating dummy data for a variety of purposes. This data can be particularly useful during software development and testing. For example, it could be used to populate a testing database for a web application with user information such as email addresses, usernames, first names, last names, etc.
 
