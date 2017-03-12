@@ -16,6 +16,7 @@
 
 - Do not write bad code.
 
+----
 
 When you add new locale make sure, that you added data for your locale to:
 - [Conftest](https://github.com/lk-geimfari/elizabeth/blob/master/tests/conftest.py#L4)
