@@ -2139,7 +2139,17 @@ class Internet(object):
         :Example:
             ['#love', '#sky', '#nice'].
         """
-        hashtags = HASHTAGS[category.lower()]
+        category = category.lower()
+        supported = ''.join(list(HASHTAGS.keys()))
+
+        try:
+            hashtags = HASHTAGS[category]
+        except KeyError:
+            raise KeyError('Unsupported category. Use: {}'.format(supported))
+
+        if int(quantity) == 1:
+            return choice(hashtags)
+
         tags = [choice(hashtags) for _ in range(int(quantity))]
         return tags
 
