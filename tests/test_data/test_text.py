@@ -13,22 +13,6 @@ def test_hex_color(text):
     assert '#' in result
 
 
-def test_weather(text):
-    result = text.weather(scale='c').split(' ')
-    temp, scale = float(result[0]), result[1]
-    assert scale == '°C'
-    assert temp >= -30
-    assert temp <= 40
-
-    result = text.weather(
-        scale='f', minimum=0, maximum=10).split(' ')
-
-    temp, scale = float(result[0]), result[1]
-    assert scale == '°F'
-    assert temp >= 0
-    assert temp <= ((10 * 1.8) + 32)
-
-
 def test_alphabet(generic):
     result = generic.text.alphabet()
     assert isinstance(result, list)

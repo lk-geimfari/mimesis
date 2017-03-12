@@ -706,26 +706,6 @@ class Text(object):
         color_code = '#' + ''.join(sample(letters, 6))
         return color_code
 
-    @staticmethod
-    def weather(scale='c', minimum=-30, maximum=40):
-        """Generate a random temperature value.
-
-        :param scale: Scale of temperature('f' for Fahrenheit and
-        'c' for Celsius).
-        :param minimum: Minimum value of temperature.
-        :param maximum: Maximum value of temperature.
-        :return: Temperature in Celsius or Fahrenheit.
-        :Example:
-            33.4 °C.
-        """
-        # TODO: Rewrite it
-        n = randint(minimum, maximum)
-        # Convert to Fahrenheit
-        n = (n * 1.8) + 32 if scale.lower() == 'f' else n
-        scale = '°C' if scale.lower() == 'c' else '°F'
-
-        return '{0:0.1f} {1}'.format(n, scale)
-
     def answer(self):
         """Get a random answer in current language.
 
