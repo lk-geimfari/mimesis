@@ -266,11 +266,11 @@ Russian:
 .. code:: python
 
     >>> from elizabeth import Personal
-    >>> from elizabeth.decorators import romanized_russian
+    >>> from elizabeth.decorators import romanized
 
     >>> pr = Personal('ru')
 
-    >>> @romanized_russian
+    >>> @romanized('ru')
     ... def get_name_ro():
     ...     return pr.full_name()
     ...

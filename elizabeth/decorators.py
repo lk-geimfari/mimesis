@@ -1,21 +1,32 @@
+from functools import wraps
+
+from elizabeth.exceptions import UnsupportedLocale
 from elizabeth.intd.dec import ROMANIZATION_ALPHABETS
 
 
-def romanized_russian(func):
-    """Cyrillic letter to latin converter. Romanization of the Russian alphabet
-    is the process of transliterating the Russian language from the Cyrillic script
-    into the Latin alphabet.
+def romanized(locale):
+    def romanized_deco(func):
+        """Cyrillic letter to latin converter. Romanization of the Cyrillic alphabet
+        is the process of transliterating the Cyrillic language from the Cyrillic script
+        into the Latin alphabet.
 
-    .. note:: At this moment it's work only for Russian (http://bit.ly/2kjTEO4),
-    but in future we can add support for all slavic languages or for all Cyrillic languages.
+        .. note:: At this moment it's work only for Russian and Ukrainian,
+        but in future we can add support for all slavic languages or for all Cyrillic languages.
 
-    :param func: Function.
-    :return: Latinized text.
-    """
-    alphabet = ROMANIZATION_ALPHABETS['ru']
+        :param func: Function.
+        :return: Latinized text.
+        """
 
-    def romanized(*args, **kwargs):
-        result = func(*args, **kwargs)
-        return ''.join([alphabet[i] for i in result if i in alphabet])
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            try:
+                alphabet = ROMANIZATION_ALPHABETS[locale]
+            except KeyError:
+                raise UnsupportedLocale('Locale {0} is not supported yet.'.format(locale))
+            result = func(*args, **kwargs)
+            txt = ''.join([alphabet[i] for i in result if i in alphabet])
+            return txt
 
-    return romanized
+        return wrapper
+
+    return romanized_deco

@@ -271,14 +271,14 @@ If you would like to use these country-specific providers, then you must import 
 
 ## Decorators
 If your locale is cyrillic, but you need latinized locale-specific data, then you can use special decorator.
-At this moment it's works only for Russian:
+At this moment it's works only for Russian and Ukrainian:
 ```python
 >>> from elizabeth import Personal
->>> from elizabeth.decorators import romanized_russian
+>>> from elizabeth.decorators import romanized
 
 >>> pr = Personal('ru')
 
->>> @romanized_russian
+>>> @romanized('ru')
 ... def get_name_ro():
 ...     return pr.full_name()
 ...
