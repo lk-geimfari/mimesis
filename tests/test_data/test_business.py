@@ -12,16 +12,6 @@ def test_str(business):
 def test_copyright(business):
     result = business.copyright()
     assert '©' in result
-    assert result is not None
-
-    result_1 = business.copyright(date=False)
-    assert '©' in result
-    assert result_1 is not None
-
-    result_args = business.copyright(minimum=1999, maximum=2010)
-    date = result_args.split()[1].split('-')
-    assert int(date[0]) >= 1999
-    assert int(date[1]) <= 2010
 
 
 def test_currency_sio(business):

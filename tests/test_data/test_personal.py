@@ -4,10 +4,12 @@ import re
 
 import pytest
 
+from elizabeth.exceptions import WrongArgument
 from elizabeth.intd import (
     FAVORITE_MUSIC_GENRE, SEXUALITY_SYMBOLS,
     BLOOD_GROUPS, GENDER_SYMBOLS, ENGLISH_LEVEL
 )
+
 from ._patterns import *
 
 
@@ -194,6 +196,9 @@ def test_name(generic):
     result = generic.personal.name(gender='male')
     assert result in generic.personal.data['names']['male']
 
+    with pytest.raises(WrongArgument):
+        generic.personal.name(gender='other')
+
 
 def test_telephone(generic):
     result = generic.personal.telephone()
@@ -214,6 +219,9 @@ def test_surname(generic):
 
         result = generic.personal.surname(gender='male')
         assert result in generic.personal.data['surnames']['male']
+
+        with pytest.raises(WrongArgument):
+            generic.personal.surname(gender='other')
     else:
         result = generic.personal.surname()
         assert result in generic.personal.data['surnames']
@@ -241,7 +249,6 @@ def test_gender(generic):
     codes = [0, 1, 2, 9]
     iso5218 = generic.personal.gender(iso5218=True)
     assert iso5218 in codes
-
 
 
 def test_sexual_orientation(generic):
@@ -293,6 +300,15 @@ def test_title(generic):
 
     result2 = generic.personal.title(title_type='academic')
     assert isinstance(result2, str)
+
+    result_fem = generic.personal.title(gender='female')
+    assert result_fem is not None
+
+    result_fem = generic.personal.title(gender='male')
+    assert result_fem is not None
+
+    with pytest.raises(WrongArgument):
+        generic.personal.title(gender='other', title_type='religious')
 
 
 def test_nationality(generic):

@@ -15,7 +15,7 @@ from elizabeth import (
 
 PATH = abspath(join(dirname(__file__), 'other'))
 
-readme = codecs.open(PATH + '/pypir.rst', encoding='utf-8').read() 
+readme = codecs.open(PATH + '/pypir.rst', encoding='utf-8').read()
 
 
 setup(

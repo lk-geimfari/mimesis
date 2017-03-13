@@ -53,5 +53,5 @@ ISBN_GROUPS = {
     "sv": "91",
     "tr": "605",
     "ua": '966',
-    "default": '0'
+    "default": '#'
 }
