@@ -1,5 +1,3 @@
-from random import choice
-
 IMEI_TACS = [
     "01124500",  # Apple iPhone
     "01161200",  # Apple iPhone 3G
@@ -32,9 +30,6 @@ IMEI_TACS = [
     "35511405"  # Sony Ericsson Xperia U
 ]
 
-
-_ua_code = choice(['966', '617'])
-
 ISBN_GROUPS = {
     "cs": "80",
     "da": "87",
@@ -57,5 +52,6 @@ ISBN_GROUPS = {
     "ru": "5",
     "sv": "91",
     "tr": "605",
-    "ua": _ua_code
+    "ua": '966',
+    "default": '0'
 }
