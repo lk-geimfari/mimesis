@@ -97,6 +97,10 @@ SUPPORTED_LOCALES = {
     "tr": {
         "name": "Turkish",
         "name_local": "Türkçe"
+    },
+    "ua": {
+        "name": "Ukrainian",
+        "name_local": "Українська"
     }
 }
 
