@@ -8,3 +8,7 @@ class JSONKeyError(KeyError):
 
 class NotImplementedYet(NotImplementedError):
     """An exception that raised when NotImplementedError"""
+
+
+class WrongArgument(KeyError):
+    """An exception that raised when argument is wrong"""

@@ -13,10 +13,8 @@ from elizabeth import (
     __version__
 )
 
-PATH = abspath(join(dirname(__file__), 'other'))
-
-readme = codecs.open(PATH + '/pypir.rst', encoding='utf-8').read() 
-
+with open('other/pypir.rst', 'r', 'utf-8') as f:
+    readme = f.read()
 
 setup(
     name='elizabeth',

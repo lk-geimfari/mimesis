@@ -108,6 +108,8 @@ from elizabeth.intd.trans import (
     AIRPLANES
 )
 
+from elizabeth.exceptions import WrongArgument
+
 __all__ = [
     'Address',
     'Business',
@@ -176,8 +178,8 @@ class Address(object):
         :Example:
             Alley.
         """
-        suffixes = self.data['street']['suffix']
-        return choice(suffixes)
+        suffix = choice(self.data['street']['suffix'])
+        return suffix
 
     def address(self):
         """Get a random full address (include Street number, suffix and name).
@@ -237,7 +239,7 @@ class Address(object):
         return Code.custom_code(mask)
 
     @staticmethod
-    def country_iso(fmt=None):
+    def country_iso(fmt='iso2'):
         """Get a random ISO code of country.
 
         :param fmt: Format of code (iso2, iso3, numeric).
@@ -245,8 +247,10 @@ class Address(object):
         :Example:
             DE
         """
-        if not fmt:
-            fmt = 'iso2'
+        sup = ''.join(list(COUNTRIES_ISO.keys()))
+
+        if fmt not in COUNTRIES_ISO:
+            raise KeyError('Unsupported format. Use: {}'.format(sup))
 
         countries = COUNTRIES_ISO[fmt]
         return choice(countries)
@@ -254,7 +258,6 @@ class Address(object):
     def country(self):
         """Get a random country.
 
-        :param iso_code: Return only ISO code of country.
         :return: The Country.
         :Example:
             Russia.
@@ -387,7 +390,8 @@ class Numbers(object):
         :param maximum: Maximum of range
         :return: Number
         """
-        return randint(minimum, maximum)
+        num = randint(int(minimum), int(maximum))
+        return num
 
     @staticmethod
     def rating(maximum=5.0):
@@ -399,7 +403,7 @@ class Numbers(object):
         :Example:
             4.7
         """
-        res = '{0:0.1f}'.format(uniform(0, maximum))
+        res = '{0:0.1f}'.format(uniform(0, float(maximum)))
         return float(res)
 
 
@@ -620,7 +624,7 @@ class Text(object):
             and strong static typing.
         """
         text = ''
-        for _ in range(quantity):
+        for _ in range(int(quantity)):
             text += ' ' + choice(self.data['text'])
         return text.strip()
 
@@ -782,7 +786,7 @@ class Code(object):
         if self.locale in groups:
             mask = mask.format(groups[self.locale])
         else:
-            mask = mask.format('#')
+            mask = mask.format(groups['default'])
 
         return self.custom_code(mask=mask)
 
@@ -858,23 +862,15 @@ class Business(object):
         companies = self.data['company']['name']
         return choice(companies)
 
-    def copyright(self, date=True, minimum=1990, maximum=2016):
+    def copyright(self):
         """Generate a random copyright.
 
-        :param date: When True will be returned copyright with date.
-        :param minimum: Minimum of date range.
-        :param maximum: Maximum of date range.
         :return: Dummy copyright of company.
         :Example:
             © 1990-2016 Komercia, Inc.
         """
-        ct = self.company_type(abbr=True)
-
-        if date:
-            founded = randint(minimum, maximum - 1)
-            return '© %s-%s %s, %s' % (founded, maximum, self.company(), ct)
-
-        return '© %s, %s' % (self.company(), ct)
+        company_type = self.company_type(abbr=True)
+        return '© %s, %s' % (self.company(), company_type)
 
     @staticmethod
     def currency_iso():
@@ -897,7 +893,7 @@ class Business(object):
         """
         currencies = CURRENCY_SYMBOLS
 
-        price = uniform(minimum, maximum)
+        price = uniform(float(minimum), float(maximum))
 
         fmt = '{0:.2f} {1}'
 
@@ -915,7 +911,6 @@ class Personal(object):
         :param locale: Current locale.
         """
         self.locale = locale
-        # TODO: This should be self._data.
         self.data = pull('personal.json', self.locale)
         self._store = {
             'age': 0
@@ -937,7 +932,7 @@ class Personal(object):
         :Example:
             23.
         """
-        a = randint(minimum, maximum)
+        a = randint(int(minimum), int(maximum))
         self._store['age'] = a
         return a
 
@@ -974,7 +969,11 @@ class Personal(object):
         :Example:
             John.
         """
-        names = self.data['names'][gender]
+        try:
+            names = self.data['names'][gender]
+        except KeyError:
+            raise WrongArgument('gender must be "female" or "male"')
+
         return choice(names)
 
     def surname(self, gender='female'):
@@ -989,7 +988,10 @@ class Personal(object):
         sep_surnames = ('ru', 'is')
 
         if self.locale in sep_surnames:
-            return choice(self.data['surnames'][gender])
+            try:
+                return choice(self.data['surnames'][gender])
+            except KeyError:
+                raise WrongArgument('gender must be "female" or "male"')
 
         return choice(self.data['surnames'])
 
@@ -1002,8 +1004,12 @@ class Personal(object):
         :Example:
             PhD.
         """
-        t = self.data['title'][gender][title_type]
-        return choice(t)
+        try:
+            titles = self.data['title'][gender][title_type]
+        except KeyError:
+            raise WrongArgument('Wrong value of argument.')
+
+        return choice(titles)
 
     def full_name(self, gender='female', reverse=False):
         """Generate a random full name.
@@ -1034,8 +1040,13 @@ class Personal(object):
             abby1189.
         """
         data = pull('personal.json', 'en')
-        username = choice(data['names'][gender])
-        return '{}{}'.format(username.lower(), randint(2, 9999))
+        try:
+            username = choice(data['names'][gender])
+        except KeyError:
+            raise WrongArgument('gender must be "female" or "male"')
+
+        username = '%s%s' % (username, randint(2, 9999))
+        return username.lower()
 
     @staticmethod
     def password(length=8, algorithm=None):
@@ -1048,7 +1059,7 @@ class Personal(object):
             k6dv2odff9#4h (without hashing).
         """
         password = "".join([choice(
-            ascii_letters + digits + punctuation) for _ in range(length)])
+            ascii_letters + digits + punctuation) for _ in range(int(length))])
 
         if algorithm is not None:
             algorithm = algorithm.lower()
@@ -2139,7 +2150,17 @@ class Internet(object):
         :Example:
             ['#love', '#sky', '#nice'].
         """
-        hashtags = HASHTAGS[category.lower()]
+        category = category.lower()
+        supported = ''.join(list(HASHTAGS.keys()))
+
+        try:
+            hashtags = HASHTAGS[category]
+        except KeyError:
+            raise KeyError('Unsupported category. Use: {}'.format(supported))
+
+        if int(quantity) == 1:
+            return choice(hashtags)
+
         tags = [choice(hashtags) for _ in range(int(quantity))]
         return tags
 

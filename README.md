@@ -54,7 +54,7 @@ Also you can install it manually (pre-activated virtualenv):
 
 ## Locales
 
-You can specify a locale when creating providers and they will return data that is appropriate for the language or country associated with that locale.  `Elizabeth` currently includes support for 24 different locales. See details for more information.
+You can specify a locale when creating providers and they will return data that is appropriate for the language or country associated with that locale.  `Elizabeth` currently includes support for 25 different locales. See details for more information.
 
 <details>
 <!-- toc -->
@@ -84,6 +84,7 @@ You can specify a locale when creating providers and they will return data that 
 | 22 | 🇷🇺   |  `ru`      | Russian              | Русский     |
 | 23 | 🇸🇪   |  `sv`      | Swedish              | Svenska     |
 | 24 | 🇹🇷   |  `tr`      | Turkish              | Türkçe      |
+| 25 | 🇺🇦   | `ua`       | Ukrainian            | Український |
 
 ---
 Help us make this project better. Check the locales and send us `PR` with your changes.
@@ -270,14 +271,14 @@ If you would like to use these country-specific providers, then you must import 
 
 ## Decorators
 If your locale is cyrillic, but you need latinized locale-specific data, then you can use special decorator.
-At this moment it's work only for Russian:
+At this moment it's works only for Russian and Ukrainian:
 ```python
 >>> from elizabeth import Personal
->>> from elizabeth.decorators import romanized_russian
+>>> from elizabeth.decorators import romanized
 
 >>> pr = Personal('ru')
 
->>> @romanized_russian
+>>> @romanized('ru')
 ... def get_name_ro():
 ...     return pr.full_name()
 ...

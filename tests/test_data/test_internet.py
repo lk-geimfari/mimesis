@@ -34,7 +34,10 @@ def test_hashtags(net):
     assert len(result) == 5
 
     result = net.hashtags(quantity=1, category='general')
-    assert result[0] in HASHTAGS['general']
+    assert result in HASHTAGS['general']
+
+    with pytest.raises(KeyError):
+        net.hashtags(category='religious')
 
 
 def test_home_page(net):
