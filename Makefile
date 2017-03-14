@@ -1,6 +1,6 @@
 ROOT=./
 
-VERSION = 0.3.19
+VERSION = 0.3.22
 PROJECT_NAME = Elizabeth
 REPOSITORY_URL = https://github.com/lk-geimfari/elizabeth
 
@@ -57,3 +57,5 @@ release-test:
 install:
 	python3 setup.py install
 
+minify-json:
+	gulp json

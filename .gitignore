@@ -96,3 +96,8 @@ file.json
 utility.py
 TODO
 .gitignore
+
+# JSON Minifer
+gulpfile.js
+package.json
+node_modules/
