@@ -13,10 +13,8 @@ from elizabeth import (
     __version__
 )
 
-PATH = abspath(join(dirname(__file__), 'other'))
-
-readme = codecs.open(PATH + '/pypir.rst', encoding='utf-8').read()
-
+with open('PYPI_README.rst', 'r', encoding='utf-8') as f:
+    readme = f.read()
 
 setup(
     name='elizabeth',
@@ -42,7 +40,7 @@ setup(
         ]
     },
     data_files=[
-        ("", ["LICENSE"])
+        ("", ["LICENSE", 'PYPI_README.rst'])
     ],
     url='https://github.com/lk-geimfari/elizabeth',
     license='MIT License',
