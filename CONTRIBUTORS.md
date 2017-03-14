@@ -8,12 +8,13 @@
  - Illustration by [CarlaNatalie](http://carlanatalie.deviantart.com/)
 
 ### Contributors
+- Kevin Schellenberg [(wikkiewikkie)](https://github.com/wikkiewikkie)
+- Casey Weed [(Battleroid)](https://github.com/Battleroid)
 - Alessandro Martini [(martini97)](https://github.com/martini97)
 - Amin Alaee [(aminalaee)](https://github.com/aminalaee)
 - Baurzhan Muftakhidinov [(crayxt)](https://github.com/crayxt)
 - Benjamin Schwarze [(benjixx)](https://github.com/benjixx)
 - Bill DeRusha [(bderusha)](https://github.com/bderusha)
-- Casey Weed [(Battleroid)](https://github.com/Battleroid)
 - David Poggi [(drpoggi)](https://github.com/drpoggi)
 - Eliz Kiliç [(Eliz)](https://github.com/el)
 - Flavio Curella [(fcurella)](https://github.com/fcurella)
@@ -25,7 +26,6 @@
 - Jin Yang [(redus)](https://github.com/redus)
 - Json701 [(jasonwaiting-dev)](https://github.com/jasonwaiting-dev)
 - Jérôme Christ [(jeromechrist)](https://github.com/jeromechrist)
-- Kevin Schellenberg [(wikkiewikkie)](https://github.com/wikkiewikkie)
 - Michael Crilly [(mrcrilly)](https://github.com/mrcrilly)
 - Michael Hand [(mipaaa)](https://github.com/mipaaa)
 - Paul Walters [(PaulWaltersDev)](https://github.com/PaulWaltersDev)
