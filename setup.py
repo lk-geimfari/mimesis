@@ -1,11 +1,3 @@
-import codecs
-
-from os.path import (
-    abspath,
-    dirname,
-    join
-)
-
 from distutils.core import setup
 
 from elizabeth import (
@@ -13,11 +5,7 @@ from elizabeth import (
     __version__
 )
 
-<<<<<<< HEAD
 with open('PYPI_README.rst', 'r', encoding='utf-8') as f:
-=======
-with open('other/pypir.rst', 'r', 'utf-8') as f:
->>>>>>> 9f6b80a63064f3c95f8779e9f108b6feb514aa03
     readme = f.read()
 
 setup(
