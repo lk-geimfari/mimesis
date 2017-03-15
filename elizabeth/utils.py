@@ -133,13 +133,20 @@ def pull(file, locale='en') -> dict:
     locale = locale.lower()
 
     if locale not in SUPPORTED_LOCALES:
-        raise UnsupportedLocale("Locale %s does not supported" % locale)
+        raise UnsupportedLocale("Locale %s is not supported" % locale)
 
-    file_path = path.join(PATH + '/' + locale, file)
+    master_locale = locale.split("-")[0]
+    master_locale_path = path.join(PATH + '/' + master_locale, file)
 
     # Needs explicit encoding for Windows
-    with open(file_path, 'r', encoding='utf8') as f:
+    with open(master_locale_path, 'r', encoding='utf8') as f:
         data = json.load(f)
+
+    # Handle sub-locales
+    if "-" in locale:
+        sub_locale_path = path.join(PATH + '/' + locale, file)
+        with open(sub_locale_path, 'r', encoding='utf8') as f:
+            data.update(json.load(f))
 
     return data
 

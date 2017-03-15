@@ -25,6 +25,11 @@ def test_pull():
     with pytest.raises(FileNotFoundError):
         pull('something.json', 'en')
 
+    data = pull('address.json', 'en-gb')
+    assert "city" in data
+    assert "Aberystwyth" in data['city']
+    assert "Addison" not in data['city']
+
 
 def test_download_image():
     result = download_image(url=None)
