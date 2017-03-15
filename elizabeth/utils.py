@@ -59,62 +59,10 @@ def luhn_checksum(num) -> str:
 
 @functools.lru_cache(maxsize=None)
 def pull(file, locale='en') -> dict:
-    """Open file and get content from file. Memorize result using lru_cache.
+    """Open json file file and get content from file and memorize result using lru_cache.
 
-    pull - is internal function, please do not use this function outside
+    .. note:: pull - is internal function, please do not use this function outside
     the module 'elizabeth'.
-
-    +------------------------------+--------------+
-    | Locale Code                  | Folder       |
-    +==============================+==============+
-    | cs - Czech                   | (data/cs)    |
-    +------------------------------+--------------+
-    | da - Danish                  | (data/da)    |
-    +------------------------------+--------------+
-    | de - German                  | (data/de)    |
-    +------------------------------+--------------+
-    | de-at - Austrian german      | (data/de-at) |
-    +------------------------------+--------------+
-    | en - English                 | (data/en)    |
-    +------------------------------+--------------+
-    | en-au - Australian English   | (data/en-au) |
-    +------------------------------+--------------+
-    | en-gb - British English      | (data/en-gb) |
-    +------------------------------+--------------+
-    | ru - Russian                 | (data/ru)    |
-    +------------------------------+--------------+
-    | fa - Farsi                   | (data/fa)    |
-    +------------------------------+--------------+
-    | fi - Finnish                 | (data/fi)    |
-    +------------------------------+--------------+
-    | fr - French                  | (data/fr)    |
-    +------------------------------+--------------+
-    | es - Spanish                 | (data/es)    |
-    +------------------------------+--------------+
-    | hu - Hungarian               | (data/hu)    |
-    +------------------------------+--------------+
-    | it - Italian                 | (data/it)    |
-    +------------------------------+--------------+
-    | is - Icelandic               | (data/is)    |
-    +------------------------------+--------------+
-    | jp - Japanese                | (data/jp)    |
-    +------------------------------+--------------+
-    | ko - Korean                  | (data/ko)    |
-    +------------------------------+--------------+
-    | pl - Polish                  | (data/pl)    |
-    +------------------------------+--------------+
-    | pt - Portuguese              | (data/pt)    |
-    +------------------------------+--------------+
-    | nl - Dutch                   | (data/nl)    |
-    +------------------------------+--------------+
-    | no - Norwegian               | (data/no)    |
-    +------------------------------+--------------+
-    | pt-br - Brazilian Portuguese | (data/pt-br) |
-    +------------------------------+--------------+
-    | sv - Swedish                 | (data/sv)    |
-    +------------------------------+--------------+
-    | tr - Turkish                 | (data/tr)    |
-    +------------------------------+--------------+
 
     :param file: The name of file.
     :param locale: Locale.
