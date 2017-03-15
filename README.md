@@ -85,6 +85,7 @@ You can specify a locale when creating providers and they will return data that 
 | 23 | 🇸🇪   |  `sv`      | Swedish              | Svenska     |
 | 24 | 🇹🇷   |  `tr`      | Turkish              | Türkçe      |
 | 25 | 🇺🇦   | `ua`       | Ukrainian            | Український |
+| 26 | 🇨🇳   |  `zh`      | Chinese              | 汉语         |
 
 ---
 Help us make this project better. Check the locales and send us `PR` with your changes.

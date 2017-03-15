@@ -97,6 +97,10 @@ SUPPORTED_LOCALES = {
     "tr": {
         "name": "Turkish",
         "name_local": "Türkçe"
+    },
+    "zh": {
+        "name": "Chinese",
+        "name_local": "汉语"
     }
 }
 
