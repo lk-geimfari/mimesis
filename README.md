@@ -58,6 +58,7 @@ You can specify a locale when creating providers and they will return data that 
 
 <details>
 <!-- toc -->
+
 | №  | Flag  | Code       | Name                 | Native name |
 |--- |---    |---         |---                   |---          |
 | 1  | 🇨🇿   |  `cs`      | Czech                | Česky       |
@@ -87,11 +88,7 @@ You can specify a locale when creating providers and they will return data that 
 | 25 | 🇺🇦   | `ua`       | Ukrainian            | Український |
 | 26 | 🇨🇳   |  `zh`      | Chinese              | 汉语         |
 
----
-Help us make this project better. Check the locales and send us `PR` with your changes.
-
 <!-- tocstop -->
-
 </details>
 
 Using locales:
