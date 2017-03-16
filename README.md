@@ -75,7 +75,7 @@ You can specify a locale when creating providers and they will return data that 
 | 12 | 🇭🇺   |  `hu`      | Hungarian            | Magyar      |
 | 13 | 🇮🇸   |  `is`      | Icelandic            | Íslenska    |
 | 14 | 🇮🇹   |  `it`      | Italian              | Italiano    |
-| 15 | 🇯🇵   |  `jp`      | Japanese             | 日本語       |
+| 15 | 🇯🇵   |  `ja`      | Japanese             | 日本語       |
 | 16 | 🇰🇷   |  `ko`      | Korean               | 한국어       |
 | 17 | 🇳🇱   |  `nl`      | Dutch                | Nederlands  |
 | 18 | 🇳🇴   |  `no`      | Norwegian            | Norsk       |
