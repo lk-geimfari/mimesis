@@ -68,7 +68,7 @@ Basic Usage:
 Locales
 -------
 
-You can specify a locale when creating providers and they will return data that is appropriate for the language or country associated with that locale. `Elizabeth` currently includes support for `24 <https://github.com/lk-geimfari/elizabeth#locales>`_ different locales.
+You can specify a locale when creating providers and they will return data that is appropriate for the language or country associated with that locale. `Elizabeth` currently includes support for `27 <https://github.com/lk-geimfari/elizabeth#locales>`_ different locales.
 
 Using locales:
 
