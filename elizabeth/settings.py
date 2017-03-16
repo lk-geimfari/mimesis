@@ -58,7 +58,7 @@ SUPPORTED_LOCALES = {
         "name": "Italian",
         "name_local": "Italiano"
     },
-    "jp": {
+    "ja": {
         "name": "Japanese",
         "name_local": "日本語"
     },

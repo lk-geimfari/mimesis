@@ -195,7 +195,7 @@ CURRENCY_SYMBOLS = {
     "hu": "Ft",
     "is": "kr",
     "it": "€",
-    "jp": "¥",
+    "ja": "¥",
     "ko": "₩",
     "nl": "€",
     "no": "kr",

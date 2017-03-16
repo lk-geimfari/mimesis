@@ -24,7 +24,7 @@ locales = [
     'hu',
     'ko',
     'cs',
-    'jp',
+    'ja',
     'tr',
     'zh'
 ]
