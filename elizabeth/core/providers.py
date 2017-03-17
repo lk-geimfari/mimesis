@@ -200,9 +200,9 @@ class Address(object):
                 )
 
         if self.locale == 'ja':
-            towns = self.data['town']
+            cities = self.data['city']
             return fmt.format(
-                town=choice(towns),
+                city=choice(cities),
                 n=randint(1, 100),
                 nn=randint(1, 100),
                 nnn=randint(1, 100)
