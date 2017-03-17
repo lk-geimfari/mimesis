@@ -1,5 +1,5 @@
 {
-  "address_fmt": "{st_num} {st_name} {st_sfx}",
+  "address_fmt": "{st_num} {st_sfx} {st_name}",
   "city": [
 	"Acerra",
 	"Acireale",
@@ -633,7 +633,6 @@
   "street": {
 	"suffix": [
 	  "Via",
-	  "Corso",
 	  "Viale",
 	  "Via degli"
 	],
