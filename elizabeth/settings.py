@@ -15,7 +15,11 @@ SUPPORTED_LOCALES = {
         "name_local": "Deutsch"
     },
     "de-at": {
-        "name": "German",
+        "name": "Austrian German",
+        "name_local": "Deutsch"
+    },
+    "de-ch": {
+        "name": "Swiss German",
         "name_local": "Deutsch"
     },
     "en": {

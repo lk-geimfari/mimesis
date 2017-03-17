@@ -753,6 +753,7 @@ SHORTENED_ADDRESS_FMT = [
     'da',
     'de',
     'de-at',
+    'de-ch',
     'es',
     'fi',
     'is',
