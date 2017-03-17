@@ -30,7 +30,7 @@ def locale_information(locale: str) -> str:
     locale = locale.lower()
 
     if locale not in SUPPORTED_LOCALES:
-        raise UnsupportedLocale("Locale %s does not supported" % locale)
+        raise UnsupportedLocale("Locale %s is not supported" % locale)
 
     return SUPPORTED_LOCALES[locale]['name']
 
