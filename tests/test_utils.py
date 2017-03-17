@@ -70,7 +70,7 @@ def test_update_dict():
 
     result = update_dict(first, second)
 
-    assert "cats" in result['animals']z
+    assert "cats" in result['animals']
     assert "dogs" in result['animals']
 
     third = {"animals": {"dogs": ["golden retriever"]}}
