@@ -21,6 +21,8 @@ def test_alphabet(generic):
 
 def test_sentence(generic):
     result = generic.text.sentence()
+    if generic.locale == 'zh':
+        assert result in generic.text.data['text']
     assert result.strip() in generic.text.data['text']
 
 
