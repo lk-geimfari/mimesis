@@ -1,5 +1,6 @@
 # utils.py
 
+import collections
 import functools
 import json
 import os.path as path
@@ -77,17 +78,28 @@ def pull(file, locale='en') -> dict:
         >>> en['day']['abbr'][0]
         'Mon.'
     """
+    def get_data(locale_name):
+        """
+        Pull JSON data from file.
+        :param locale_name: Name of locale to pull.
+        :return: Dict of data from file
+        """
+        file_path = path.join(PATH + '/' + locale_name, file)
+        # Needs explicit encoding for Windows
+        with open(file_path, 'r', encoding='utf8') as f:
+            return json.load(f)
 
     locale = locale.lower()
 
     if locale not in SUPPORTED_LOCALES:
-        raise UnsupportedLocale("Locale %s does not supported" % locale)
+        raise UnsupportedLocale("Locale %s is not supported" % locale)
 
-    file_path = path.join(PATH + '/' + locale, file)
+    master_locale = locale.split("-")[0]
+    data = get_data(master_locale)
 
-    # Needs explicit encoding for Windows
-    with open(file_path, 'r', encoding='utf8') as f:
-        data = json.load(f)
+    # Handle sub-locales
+    if "-" in locale:
+        data = update_dict(data, get_data(locale))
 
     return data
 
@@ -115,3 +127,21 @@ def download_image(url, save_path='', unverified_ctx=False):
         request.urlretrieve(url, save_path + image_name)
         return image_name
     return None
+
+
+def update_dict(initial, other):
+    """
+    Recursively update a dictionary.
+
+    :param initial: Dict to update.
+    :param other: Dict to update from
+    :return: Updated dict
+    :rtype: dict
+    """
+    for key, value in other.items():
+        if isinstance(value, collections.Mapping):
+            r = update_dict(initial.get(key, {}), value)
+            initial[key] = r
+        else:
+            initial[key] = other[key]
+    return initial

@@ -7,7 +7,8 @@ import sys
 from elizabeth.exceptions import UnsupportedLocale
 from elizabeth.utils import (
     pull, luhn_checksum,
-    locale_information, download_image
+    locale_information, download_image,
+    update_dict
 )
 
 
@@ -24,6 +25,15 @@ def test_pull():
         pull('personal.json', 'w')
     with pytest.raises(FileNotFoundError):
         pull('something.json', 'en')
+
+    data = pull('address.json', 'en-gb')
+    assert "city" in data
+    assert "Aberystwyth" in data['city']
+    assert "Addison" not in data['city']
+
+    data = pull('address.json', 'en-au')
+    assert "city" in data
+    assert "Melbourne" in data['city']
 
 
 def test_download_image():
@@ -52,3 +62,18 @@ def test_locale_information():
     assert result_1 == 'Icelandic'
     with pytest.raises(UnsupportedLocale):
         locale_information(locale='w')
+
+
+def test_update_dict():
+    first = {"animals": {"dogs": ['spaniel']}}
+    second = {"animals": {"cats": ['maine coon']}}
+
+    result = update_dict(first, second)
+
+    assert "cats" in result['animals']
+    assert "dogs" in result['animals']
+
+    third = {"animals": {"dogs": ["golden retriever"]}}
+
+    result = update_dict(first, third)
+    assert "spaniel" not in result['animals']['dogs']
