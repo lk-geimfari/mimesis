@@ -6066,6 +6066,22 @@
 	  "Túnel Sá Freire Alvim",
 	  "Túnel Velho",
 	  "Via Sérgio Braga"
+	],
+	"suffix": [
+	  "Alley",
+	  "Pedágio",
+	  "Plantação",
+	  "Portão",
+	  "Praça",
+	  "Private",
+	  "Promenade",
+	  "Quadra",
+	  "Quadrado",
+	  "Ribanceira",
+	  "Rodovia",
+	  "Rota",
+	  "Rotatória",
+	  "Rua"
 	]
   },
   "postal_code_fmt": "#####-###"
