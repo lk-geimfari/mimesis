@@ -86,7 +86,7 @@ You can specify a locale when creating providers and they will return data that 
 | 23 | 🇷🇺   |  `ru`      | Russian              | Русский     |
 | 24 | 🇸🇪   |  `sv`      | Swedish              | Svenska     |
 | 25 | 🇹🇷   |  `tr`      | Turkish              | Türkçe      |
-| 26 | 🇺🇦   |  `ua`      | Ukrainian            | Український |
+| 26 | 🇺🇦   |  `uk`      | Ukrainian            | Український |
 | 27 | 🇨🇳   |  `zh`      | Chinese              | 汉语         |
 
 <!-- tocstop -->
