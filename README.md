@@ -68,26 +68,27 @@ You can specify a locale when creating providers and they will return data that 
 | 5  | 🇨🇭   |  `de-ch`   | Swiss German         | Deutsch     |
 | 6  | 🇺🇸   |  `en`      | English              | English     |
 | 7  | 🇦🇺   |  `en-au`   | Australian English   | English     |
-| 8  | 🇬🇧   |  `en-gb`   | British English      | English     |
-| 9  | 🇪🇸   |  `es`      | Spanish              | Español     |
-| 10 | 🇮🇷   |  `fa`      | Farsi                |      فارسی  |
-| 11 | 🇫🇮   |  `fi`      | Finnish              | Suomi       |
-| 12 | 🇫🇷   |  `fr`      | French               | Français    |
-| 13 | 🇭🇺   |  `hu`      | Hungarian            | Magyar      |
-| 14 | 🇮🇸   |  `is`      | Icelandic            | Íslenska    |
-| 15 | 🇮🇹   |  `it`      | Italian              | Italiano    |
-| 16 | 🇯🇵   |  `ja`      | Japanese             | 日本語       |
-| 17 | 🇰🇷   |  `ko`      | Korean               | 한국어       |
-| 18 | 🇳🇱   |  `nl`      | Dutch                | Nederlands  |
-| 19 | 🇳🇴   |  `no`      | Norwegian            | Norsk       |
-| 20 | 🇵🇱   |  `pl`      | Polish               | Polski      |
-| 21 | 🇵🇹   |  `pt`      | Portuguese           | Português   |
-| 22 | 🇧🇷   |  `pt-br`   | Brazilian Portuguese | Português Brasileiro |
-| 23 | 🇷🇺   |  `ru`      | Russian              | Русский     |
-| 24 | 🇸🇪   |  `sv`      | Swedish              | Svenska     |
-| 25 | 🇹🇷   |  `tr`      | Turkish              | Türkçe      |
-| 26 | 🇺🇦   |  `uk`      | Ukrainian            | Український |
-| 27 | 🇨🇳   |  `zh`      | Chinese              | 汉语         |
+| 8  | 🇨🇦   |  `en-ca`   | Canadian English     | English     |
+| 9  | 🇬🇧   |  `en-gb`   | British English      | English     |
+| 10 | 🇪🇸   |  `es`      | Spanish              | Español     |
+| 11 | 🇮🇷   |  `fa`      | Farsi                |      فارسی  |
+| 12 | 🇫🇮   |  `fi`      | Finnish              | Suomi       |
+| 13 | 🇫🇷   |  `fr`      | French               | Français    |
+| 14 | 🇭🇺   |  `hu`      | Hungarian            | Magyar      |
+| 15 | 🇮🇸   |  `is`      | Icelandic            | Íslenska    |
+| 16 | 🇮🇹   |  `it`      | Italian              | Italiano    |
+| 17 | 🇯🇵   |  `ja`      | Japanese             | 日本語       |
+| 18 | 🇰🇷   |  `ko`      | Korean               | 한국어       |
+| 19 | 🇳🇱   |  `nl`      | Dutch                | Nederlands  |
+| 20 | 🇳🇴   |  `no`      | Norwegian            | Norsk       |
+| 21 | 🇵🇱   |  `pl`      | Polish               | Polski      |
+| 22 | 🇵🇹   |  `pt`      | Portuguese           | Português   |
+| 23 | 🇧🇷   |  `pt-br`   | Brazilian Portuguese | Português Brasileiro |
+| 24 | 🇷🇺   |  `ru`      | Russian              | Русский     |
+| 25 | 🇸🇪   |  `sv`      | Swedish              | Svenska     |
+| 26 | 🇹🇷   |  `tr`      | Turkish              | Türkçe      |
+| 27 | 🇺🇦   |  `uk`      | Ukrainian            | Український |
+| 28 | 🇨🇳   |  `zh`      | Chinese              | 汉语         |
 
 <!-- tocstop -->
 </details>

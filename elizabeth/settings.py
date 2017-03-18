@@ -28,11 +28,15 @@ SUPPORTED_LOCALES = {
     },
     "en-gb": {
         "name": "British English",
-        "name_local": "British English"
+        "name_local": "English"
     },
     "en-au": {
         "name": "Australian English",
-        "name_local": "Australian English"
+        "name_local": "English"
+    },
+    "en-ca": {
+        "name": "Canadian English",
+        "name_local": "English"
     },
     "es": {
         "name": "Spanish",

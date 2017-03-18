@@ -2,12 +2,13 @@ import elizabeth
 import pytest
 
 locales = [
-    'en-au',
     'da',
     'de',
     'de-at',
     'de-ch',
     'en',
+    'en-au',
+    'en-ca',
     'en-gb',
     'es',
     'fa',

@@ -1,0 +1,6 @@
+{
+  "formats": {
+	"date": "%d/%m/%Y",
+	"time": "%H:%M:%S"
+  }
+}
