@@ -1,6 +1,25 @@
 ## Changelog
 
 
+### Version 0.3.23
+ - Added support of sub-locales
+ - Updated data
+ - Added zh, en-ca, de-ch etc.
+
+---
+
+### Version 0.3.22
+ - Updated data
+ - Fixed bug
+
+---
+
+### Version 0.3.21
+ - Updated data
+ - Fixed bug
+
+---
+
 ### Version 0.3.20
  - Updated README for PyPi
  - Added more data

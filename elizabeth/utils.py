@@ -9,7 +9,7 @@ import urllib.request as request
 from elizabeth.exceptions import UnsupportedLocale
 from elizabeth.settings import SUPPORTED_LOCALES
 
-__all__ = ['pull']
+__all__ = ['pull', 'download_image' 'locale_information']
 
 PATH = path.abspath(path.join(path.dirname(__file__), 'data'))
 
@@ -78,6 +78,7 @@ def pull(file, locale='en') -> dict:
         >>> en['day']['abbr'][0]
         'Mon.'
     """
+
     def get_data(locale_name):
         """
         Pull JSON data from file.
