@@ -5,8 +5,9 @@ import functools
 import json
 import os.path as path
 import urllib.request as request
+from random import choice
 
-from elizabeth.exceptions import UnsupportedLocale
+from elizabeth.exceptions import UnsupportedLocale, WrongArgument
 from elizabeth.settings import SUPPORTED_LOCALES
 
 __all__ = ['pull', 'download_image' 'locale_information']
@@ -146,3 +147,21 @@ def update_dict(initial, other):
         else:
             initial[key] = other[key]
     return initial
+
+def check_gender(gender):
+    """
+    Check a given gender if it's valid
+    
+    Valid genders are 'male', 'female' and None. If None is given, a gender
+    is randomly choosen.
+
+    :param gender: str or None
+    :return: One of 'male' or 'female'
+    :rtype: str
+    """
+    if gender is None:
+        return choice(['male', 'female'])
+    gender = gender.lower()
+    if gender not in ['male', 'female', None]:
+        raise WrongArgument('gender must be "female", "male" or None but was "%s"' % str(gender))
+    return gender

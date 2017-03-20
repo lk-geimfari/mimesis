@@ -32,7 +32,8 @@ from string import (
 from elizabeth.utils import (
     pull,
     luhn_checksum,
-    locale_information
+    locale_information,
+    check_gender
 )
 
 # International data for Address() provider.
@@ -969,11 +970,7 @@ class Personal(object):
         :Example:
             John.
         """
-        try:
-            names = self.data['names'][gender]
-        except KeyError:
-            raise WrongArgument('gender must be "female" or "male"')
-
+        names = self.data['names'][check_gender(gender)]
         return choice(names)
 
     def surname(self, gender='female'):
@@ -988,10 +985,7 @@ class Personal(object):
         sep_surnames = ('ru', 'is', 'uk')
 
         if self.locale in sep_surnames:
-            try:
-                return choice(self.data['surnames'][gender])
-            except KeyError:
-                raise WrongArgument('gender must be "female" or "male"')
+            return choice(self.data['surnames'][check_gender(gender)])
 
         return choice(self.data['surnames'])
 
@@ -1005,7 +999,7 @@ class Personal(object):
             PhD.
         """
         try:
-            titles = self.data['title'][gender][title_type]
+            titles = self.data['title'][check_gender(gender)][title_type]
         except KeyError:
             raise WrongArgument('Wrong value of argument.')
 
@@ -1021,7 +1015,7 @@ class Personal(object):
         :Example:
             Johann Wolfgang.
         """
-        gender = gender.lower()
+        gender = check_gender(gender)
 
         fmt = '{1} {0}' if reverse else '{0} {1}'
         return fmt.format(
@@ -1040,10 +1034,7 @@ class Personal(object):
             abby1189.
         """
         data = pull('personal.json', 'en')
-        try:
-            username = choice(data['names'][gender])
-        except KeyError:
-            raise WrongArgument('gender must be "female" or "male"')
+        username = choice(data['names'][check_gender(gender)])
 
         username = '%s%s' % (username, randint(2, 9999))
         return username.lower()
@@ -1091,7 +1082,7 @@ class Personal(object):
         host = domains if domains \
             else EMAIL_DOMAINS
 
-        email = self.username(gender) + choice(host)
+        email = self.username(check_gender(gender)) + choice(host)
         return email
 
     @staticmethod
@@ -1196,7 +1187,7 @@ class Personal(object):
             "medium.com/@{}"
         ]
         url = 'http://' + choice(urls)
-        username = self.username(gender)
+        username = self.username(check_gender(gender))
 
         return url.format(username)
 
@@ -1331,7 +1322,7 @@ class Personal(object):
         separated_locales = ['ru', 'uk']
 
         if self.locale in separated_locales:
-            nations = self.data['nationality'][gender]
+            nations = self.data['nationality'][check_gender(gender)]
             return choice(nations)
 
         return choice(self.data['nationality'])
