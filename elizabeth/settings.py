@@ -106,7 +106,7 @@ SUPPORTED_LOCALES = {
         "name": "Turkish",
         "name_local": "Türkçe"
     },
-    "ua": {
+    "uk": {
         "name": "Ukrainian",
         "name_local": "Українська"
     },

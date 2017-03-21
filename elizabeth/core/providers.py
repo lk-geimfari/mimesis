@@ -985,7 +985,7 @@ class Personal(object):
             Smith.
         """
         # Separated by gender.
-        sep_surnames = ('ru', 'is')
+        sep_surnames = ('ru', 'is', 'uk')
 
         if self.locale in sep_surnames:
             try:
@@ -1327,8 +1327,10 @@ class Personal(object):
         :Example:
             Russian.
         """
-        # Subtleties of the Russian orthography.
-        if self.locale == 'ru':
+        # Subtleties of the Russian and Ukrainian orthography.
+        separated_locales = ['ru', 'uk']
+
+        if self.locale in separated_locales:
             nations = self.data['nationality'][gender]
             return choice(nations)
 

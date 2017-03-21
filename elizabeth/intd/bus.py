@@ -207,7 +207,7 @@ CURRENCY_SYMBOLS = {
     "ru": "₽",
     "sv": "kr",
     "tr": "₺",
-    "ua": '₴',
+    "uk": '₴',
     "zh": "¥",
     "default": "$"
 }
