@@ -106,6 +106,10 @@ SUPPORTED_LOCALES = {
         "name": "Turkish",
         "name_local": "Türkçe"
     },
+    "ua": {
+        "name": "Ukrainian",
+        "name_local": "Українська"
+    },
     "zh": {
         "name": "Chinese",
         "name_local": "汉语"
