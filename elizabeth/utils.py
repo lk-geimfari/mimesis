@@ -151,7 +151,7 @@ def update_dict(initial, other):
 def check_gender(gender):
     """
     Check a given gender if it's valid
-    
+
     Valid genders are 'male', 'female' and None. If None is given, a gender
     is randomly choosen.
 

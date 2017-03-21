@@ -91,5 +91,3 @@ def test_check_gender():
     assert set(cntr) == set(['male', 'female'])
     assert abs(cntr['male'] - cntr['female']) < 100, \
         'check_gender returned unequal distributed data'
-
-    
