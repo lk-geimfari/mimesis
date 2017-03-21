@@ -15,7 +15,11 @@ SUPPORTED_LOCALES = {
         "name_local": "Deutsch"
     },
     "de-at": {
-        "name": "German",
+        "name": "Austrian German",
+        "name_local": "Deutsch"
+    },
+    "de-ch": {
+        "name": "Swiss German",
         "name_local": "Deutsch"
     },
     "en": {
@@ -24,11 +28,15 @@ SUPPORTED_LOCALES = {
     },
     "en-gb": {
         "name": "British English",
-        "name_local": "British English"
+        "name_local": "English"
     },
     "en-au": {
         "name": "Australian English",
-        "name_local": "Australian English"
+        "name_local": "English"
+    },
+    "en-ca": {
+        "name": "Canadian English",
+        "name_local": "English"
     },
     "es": {
         "name": "Spanish",
@@ -58,7 +66,7 @@ SUPPORTED_LOCALES = {
         "name": "Italian",
         "name_local": "Italiano"
     },
-    "jp": {
+    "ja": {
         "name": "Japanese",
         "name_local": "日本語"
     },
@@ -101,6 +109,10 @@ SUPPORTED_LOCALES = {
     "ua": {
         "name": "Ukrainian",
         "name_local": "Українська"
+    },
+    "zh": {
+        "name": "Chinese",
+        "name_local": "汉语"
     }
 }
 

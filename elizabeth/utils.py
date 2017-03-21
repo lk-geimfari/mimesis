@@ -1,5 +1,6 @@
 # utils.py
 
+import collections
 import functools
 import json
 import os.path as path
@@ -8,7 +9,7 @@ import urllib.request as request
 from elizabeth.exceptions import UnsupportedLocale
 from elizabeth.settings import SUPPORTED_LOCALES
 
-__all__ = ['pull']
+__all__ = ['pull', 'download_image' 'locale_information']
 
 PATH = path.abspath(path.join(path.dirname(__file__), 'data'))
 
@@ -29,7 +30,7 @@ def locale_information(locale: str) -> str:
     locale = locale.lower()
 
     if locale not in SUPPORTED_LOCALES:
-        raise UnsupportedLocale("Locale %s does not supported" % locale)
+        raise UnsupportedLocale("Locale %s is not supported" % locale)
 
     return SUPPORTED_LOCALES[locale]['name']
 
@@ -59,62 +60,10 @@ def luhn_checksum(num) -> str:
 
 @functools.lru_cache(maxsize=None)
 def pull(file, locale='en') -> dict:
-    """Open file and get content from file. Memorize result using lru_cache.
+    """Open json file file and get content from file and memorize result using lru_cache.
 
-    pull - is internal function, please do not use this function outside
+    .. note:: pull - is internal function, please do not use this function outside
     the module 'elizabeth'.
-
-    +------------------------------+--------------+
-    | Locale Code                  | Folder       |
-    +==============================+==============+
-    | cs - Czech                   | (data/cs)    |
-    +------------------------------+--------------+
-    | da - Danish                  | (data/da)    |
-    +------------------------------+--------------+
-    | de - German                  | (data/de)    |
-    +------------------------------+--------------+
-    | de-at - Austrian german      | (data/de-at) |
-    +------------------------------+--------------+
-    | en - English                 | (data/en)    |
-    +------------------------------+--------------+
-    | en-au - Australian English   | (data/en-au) |
-    +------------------------------+--------------+
-    | en-gb - British English      | (data/en-gb) |
-    +------------------------------+--------------+
-    | ru - Russian                 | (data/ru)    |
-    +------------------------------+--------------+
-    | fa - Farsi                   | (data/fa)    |
-    +------------------------------+--------------+
-    | fi - Finnish                 | (data/fi)    |
-    +------------------------------+--------------+
-    | fr - French                  | (data/fr)    |
-    +------------------------------+--------------+
-    | es - Spanish                 | (data/es)    |
-    +------------------------------+--------------+
-    | hu - Hungarian               | (data/hu)    |
-    +------------------------------+--------------+
-    | it - Italian                 | (data/it)    |
-    +------------------------------+--------------+
-    | is - Icelandic               | (data/is)    |
-    +------------------------------+--------------+
-    | jp - Japanese                | (data/jp)    |
-    +------------------------------+--------------+
-    | ko - Korean                  | (data/ko)    |
-    +------------------------------+--------------+
-    | pl - Polish                  | (data/pl)    |
-    +------------------------------+--------------+
-    | pt - Portuguese              | (data/pt)    |
-    +------------------------------+--------------+
-    | nl - Dutch                   | (data/nl)    |
-    +------------------------------+--------------+
-    | no - Norwegian               | (data/no)    |
-    +------------------------------+--------------+
-    | pt-br - Brazilian Portuguese | (data/pt-br) |
-    +------------------------------+--------------+
-    | sv - Swedish                 | (data/sv)    |
-    +------------------------------+--------------+
-    | tr - Turkish                 | (data/tr)    |
-    +------------------------------+--------------+
 
     :param file: The name of file.
     :param locale: Locale.
@@ -130,16 +79,28 @@ def pull(file, locale='en') -> dict:
         'Mon.'
     """
 
+    def get_data(locale_name):
+        """
+        Pull JSON data from file.
+        :param locale_name: Name of locale to pull.
+        :return: Dict of data from file
+        """
+        file_path = path.join(PATH + '/' + locale_name, file)
+        # Needs explicit encoding for Windows
+        with open(file_path, 'r', encoding='utf8') as f:
+            return json.load(f)
+
     locale = locale.lower()
 
     if locale not in SUPPORTED_LOCALES:
-        raise UnsupportedLocale("Locale %s does not supported" % locale)
+        raise UnsupportedLocale("Locale %s is not supported" % locale)
 
-    file_path = path.join(PATH + '/' + locale, file)
+    master_locale = locale.split("-")[0]
+    data = get_data(master_locale)
 
-    # Needs explicit encoding for Windows
-    with open(file_path, 'r', encoding='utf8') as f:
-        data = json.load(f)
+    # Handle sub-locales
+    if "-" in locale:
+        data = update_dict(data, get_data(locale))
 
     return data
 
@@ -167,3 +128,21 @@ def download_image(url, save_path='', unverified_ctx=False):
         request.urlretrieve(url, save_path + image_name)
         return image_name
     return None
+
+
+def update_dict(initial, other):
+    """
+    Recursively update a dictionary.
+
+    :param initial: Dict to update.
+    :param other: Dict to update from
+    :return: Updated dict
+    :rtype: dict
+    """
+    for key, value in other.items():
+        if isinstance(value, collections.Mapping):
+            r = update_dict(initial.get(key, {}), value)
+            initial[key] = r
+        else:
+            initial[key] = other[key]
+    return initial

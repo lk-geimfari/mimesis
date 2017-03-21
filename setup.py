@@ -1,11 +1,3 @@
-import codecs
-
-from os.path import (
-    abspath,
-    dirname,
-    join
-)
-
 from distutils.core import setup
 
 from elizabeth import (
@@ -13,7 +5,7 @@ from elizabeth import (
     __version__
 )
 
-with open('other/pypir.rst', 'r', 'utf-8') as f:
+with open('PYPI_README.rst', 'r', encoding='utf-8') as f:
     readme = f.read()
 
 setup(
@@ -40,7 +32,7 @@ setup(
         ]
     },
     data_files=[
-        ("", ["LICENSE"])
+        ("", ["LICENSE", 'PYPI_README.rst'])
     ],
     url='https://github.com/lk-geimfari/elizabeth',
     license='MIT License',

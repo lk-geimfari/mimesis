@@ -185,7 +185,9 @@ CURRENCY_SYMBOLS = {
     "da": "kr",
     "de": "€",
     "de-at": "€",
+    "de-ch": "Fr.",
     "en": "$",
+    "en-ca": "$",
     "en-gb": "£",
     "en-au": "$",
     "es": "€",
@@ -195,7 +197,7 @@ CURRENCY_SYMBOLS = {
     "hu": "Ft",
     "is": "kr",
     "it": "€",
-    "jp": "¥",
+    "ja": "¥",
     "ko": "₩",
     "nl": "€",
     "no": "kr",
@@ -206,5 +208,6 @@ CURRENCY_SYMBOLS = {
     "sv": "kr",
     "tr": "₺",
     "ua": '₴',
+    "zh": "¥",
     "default": "$"
 }

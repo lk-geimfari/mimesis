@@ -6,6 +6,9 @@
 
 ### Design
  - Illustration by [CarlaNatalie](http://carlanatalie.deviantart.com/)
+	
+### Special thanks
+- Kevin Schellenberg [(wikkiewikkie)](https://github.com/wikkiewikkie)
 
 ### Contributors
 - Kevin Schellenberg [(wikkiewikkie)](https://github.com/wikkiewikkie)

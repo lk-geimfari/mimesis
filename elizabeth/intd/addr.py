@@ -753,14 +753,13 @@ SHORTENED_ADDRESS_FMT = [
     'da',
     'de',
     'de-at',
+    'de-ch',
     'es',
     'fi',
     'is',
     'nl',
     'no',
-    'sv',
-    'pt',
-    'pt-br'
+    'sv'
 ]
 
 CONTINENT_CODES = ['AF', 'NA', 'OC', 'AN', 'AS', 'EU', 'SA']

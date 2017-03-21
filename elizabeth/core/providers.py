@@ -199,10 +199,10 @@ class Address(object):
                     st_name=self.street_name(),
                 )
 
-        if self.locale == 'jp':
-            towns = self.data['town']
+        if self.locale == 'ja':
+            cities = self.data['city']
             return fmt.format(
-                town=choice(towns),
+                city=choice(cities),
                 n=randint(1, 100),
                 nn=randint(1, 100),
                 nnn=randint(1, 100)
@@ -1585,7 +1585,7 @@ class File(object):
         :param type_t: Type of media: application, image, video, audio, text, message
         :rtype: str
         """
-        supported = ''.join(MIME_TYPES.keys())
+        supported = ' '.join(MIME_TYPES.keys())
 
         if type_t not in list(MIME_TYPES.keys()):
             raise ValueError('Unsupported mime type! Use: {}'.format(supported))

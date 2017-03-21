@@ -1,6 +1,6 @@
 ROOT=./
 
-VERSION = 0.3.19
+VERSION = 0.3.22
 PROJECT_NAME = Elizabeth
 REPOSITORY_URL = https://github.com/lk-geimfari/elizabeth
 
@@ -19,7 +19,6 @@ help:
 	@echo "\033[92mclean-build  - remove build artifacts\033[0m"
 	@echo "\033[92mclean        - remove build and Python file artifacts\033[0m"i
 	@echo "\033[92mtest         - run tests quickly with the default Python\033[0m"
-	@echo "\033[92mtest-travis  - run tests for Travis CI\033[0m"
 	@echo "\033[92mtest-files   - internal files for development\033[0m"
 	@echo "\033[92mrelease      - package and upload a release to PyPI\033[0m"
 	@echo "\033[92mrelease-test - upload package to PyPI Test\033[0m"
@@ -42,9 +41,6 @@ clean: clean-pyc clean-build
 test:
 	py.test --cov=elizabeth/ --cov-report=term-missing  --verbose --color=yes $(ROOT)
 
-test-travis:
-	py.test --cov=elizabeth/
-
 test-files:
 	touch file.txt file.json
 
@@ -56,4 +52,3 @@ release-test:
 
 install:
 	python3 setup.py install
-
