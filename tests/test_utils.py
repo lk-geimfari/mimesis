@@ -4,7 +4,7 @@ import os
 import pytest
 import sys
 
-from elizabeth.exceptions import UnsupportedLocale
+from elizabeth.exceptions import UnsupportedLocale, WrongArgument
 from elizabeth.utils import (
     pull, luhn_checksum,
     locale_information, download_image,
@@ -81,13 +81,13 @@ def test_update_dict():
 
 
 def test_check_gender():
-    from collections import Counter
     for gender in ['male', 'female', 'Male', 'Female']:
         assert check_gender(gender) == gender.lower()
 
-    cntr = Counter()
+    seen_values = set()
     for _ in range(1000):
-        cntr[check_gender(None)] += 1
-    assert set(cntr) == set(['male', 'female'])
-    assert abs(cntr['male'] - cntr['female']) < 100, \
-        'check_gender returned unequal distributed data'
+        seen_values.add(check_gender(None))
+    assert seen_values == set(['male', 'female'])
+
+    with pytest.raises(WrongArgument):
+        check_gender('some other arg')

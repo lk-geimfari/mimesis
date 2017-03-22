@@ -162,6 +162,6 @@ def check_gender(gender):
     if gender is None:
         return choice(['male', 'female'])
     gender = gender.lower()
-    if gender not in ['male', 'female', None]:
-        raise WrongArgument('gender must be "female", "male" or None but was "%s"' % str(gender))
+    if gender not in ['male', 'female']:
+        raise WrongArgument('gender must be "female", "male" or None but was "%s"' % gender)
     return gender
