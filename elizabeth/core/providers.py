@@ -9,12 +9,8 @@ import array
 import datetime
 import inspect
 from calendar import monthrange
-from hashlib import (
-    sha1,
-    sha256,
-    sha512,
-    md5
-)
+from hashlib import sha1, sha256, sha512, md5
+
 from random import (
     choice,
     sample,
@@ -35,78 +31,38 @@ from elizabeth.utils import (
     locale_information
 )
 
-# International data for Address() provider.
-from elizabeth.intd.addr import (
-    COUNTRIES_ISO,
-    CONTINENT_CODES,
-    SHORTENED_ADDRESS_FMT
-)
+# International data for Address().
+from elizabeth.intd.addr import *
 
-# International data for Business() provider.
-from elizabeth.intd.bus import CURRENCIES, CURRENCY_SYMBOLS
+# International data for Business().
+from elizabeth.intd.bus import *
 
-# International data for Code() provider.
-from elizabeth.intd.code import IMEI_TACS, ISBN_GROUPS
+# International data for Code().
+from elizabeth.intd.code import *
 
-# International data for Development() and Structured() providers.
-from elizabeth.intd.dev import (
-    # Development
-    SQL, NOSQL, CONTAINER, LICENSES, OS,
-    PROGRAMMING_LANGS, BACKEND, FRONTEND,
-    # Structured
-    CSS_PROPERTIES, CSS_SIZE_UNITS,
-    CSS_SELECTORS, HTML_CONTAINER_TAGS,
-    HTML_MARKUP_TAGS, FOLDERS, PROJECT_NAMES
+# International data for Datetime().
+from elizabeth.intd.dt import *
 
-)
+# International data for File().
+from elizabeth.intd.file import *
 
-# International data for Datetime() provider.
-from elizabeth.intd.dt import ROMAN_NUMS
+# International data for Hardware().
+from elizabeth.intd.hw import *
 
-# International data for File() provider.
-from elizabeth.intd.file import EXTENSIONS, MIME_TYPES
+# International data for Transport().
+from elizabeth.intd.trans import *
 
-# International data for Hardware() provider.
-from elizabeth.intd.hw import (
-    RESOLUTIONS, SCREEN_SIZES, CPU_CODENAMES, CPU,
-    GENERATION_ABBR, GENERATION, GRAPHICS, HDD_SSD,
-    MANUFACTURERS, PHONE_MODELS
-)
+# International data for Internet().
+from elizabeth.intd.net import *
 
-# International data for Internet() provider.
-from elizabeth.intd.net import (
-    EMOJI,
-    DOMAINS,
-    HASHTAGS,
-    SUBREDDITS,
-    USER_AGENTS,
-    HTTP_METHODS,
-    EMAIL_DOMAINS,
-    SUBREDDITS_NSFW,
-    HTTP_STATUS_CODES
-)
+# International data for Personal().
+from elizabeth.intd.per import *
 
-# International data for Personal() provider.
-from elizabeth.intd.per import (
-    BLOOD_GROUPS,
-    ENGLISH_LEVEL,
-    GENDER_SYMBOLS,
-    SEXUALITY_SYMBOLS,
-    FAVORITE_MUSIC_GENRE
-)
+# International data for Science() and UnitSystem().
+from elizabeth.intd.sci import *
 
-# International data for Science() and UnitSystem() providers.
-from elizabeth.intd.sci import (
-    SI_PREFIXES,
-    MATH_FORMULAS
-)
-
-# International data for Transport() provider.
-from elizabeth.intd.trans import (
-    CARS,
-    TRUCKS,
-    AIRPLANES
-)
+# International data for Development() and Structured().
+from elizabeth.intd.dev import *
 
 from elizabeth.exceptions import WrongArgument
 
@@ -610,8 +566,8 @@ class Text(object):
         :Example:
             critical.
         """
-        lvl = choice(self.data['level'])
-        return lvl
+        levels = self.data['level']
+        return choice(levels)
 
     def text(self, quantity=5):
         """Generate the text.

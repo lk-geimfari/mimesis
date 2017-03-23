@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import re
+import pytest
 
 from elizabeth.intd import COUNTRIES_ISO, CONTINENT_CODES
 from ._patterns import POSTAL_CODE_REGEX, STR_REGEX
@@ -107,6 +108,9 @@ def test_country_iso(generic):
     assert numeric in COUNTRIES_ISO['numeric']
     assert len(numeric) == 3
     assert numeric.isdigit()
+
+    with pytest.raises(KeyError):
+        generic.address.country_iso(fmt='none')
 
 
 def test_city(generic):

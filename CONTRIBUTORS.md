@@ -6,7 +6,7 @@
 
 ### Design
  - Illustration by [CarlaNatalie](http://carlanatalie.deviantart.com/)
-	
+
 ### Special thanks
 - Kevin Schellenberg [(wikkiewikkie)](https://github.com/wikkiewikkie)
 
@@ -19,7 +19,7 @@
 - Benjamin Schwarze [(benjixx)](https://github.com/benjixx)
 - Bill DeRusha [(bderusha)](https://github.com/bderusha)
 - David Poggi [(drpoggi)](https://github.com/drpoggi)
-- Eliz Kiliç [(Eliz)](https://github.com/el)
+- Eliz Kiliç [(el)](https://github.com/el)
 - Flavio Curella [(fcurella)](https://github.com/fcurella)
 - FliegendeWurst [(FliegendeWurst)](https://github.com/FliegendeWurst)
 - JLWT90 [(jlwt90)](https://github.com/jlwt90)
