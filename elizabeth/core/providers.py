@@ -1471,7 +1471,7 @@ class Datetime(object):
         periodicity = self.data['periodicity']
         return choice(periodicity)
 
-    def date(self, start=2000, end=2035, fmt=None):
+    def date(self, start=2000, end=2035, fmt=None, obj=False):
         """Generate a string representing of random date formatted for
         the locale or as specified.
 
@@ -1489,6 +1489,8 @@ class Datetime(object):
         month = randint(1, 12)
         d = datetime.date(
             year, month, randint(1, monthrange(year, month)[1]))
+        if obj:
+            return d
         return d.strftime(fmt)
 
     def time(self, fmt=None):
