@@ -3,6 +3,7 @@
 import os
 import pytest
 import sys
+import socket
 
 from elizabeth.exceptions import UnsupportedLocale
 from elizabeth.utils import (
@@ -11,7 +12,15 @@ from elizabeth.utils import (
     update_dict
 )
 
-from . import is_connected
+
+def is_connected():
+    try:
+        host = socket.gethostbyname('https://github.com/')
+        socket.create_connection((host, 80), 2)
+        return True
+    except:
+        pass
+    return False
 
 
 def test_luhn_checksum():
@@ -68,15 +77,33 @@ def test_locale_information():
 
 
 def test_update_dict():
-    first = {"animals": {"dogs": ['spaniel']}}
-    second = {"animals": {"cats": ['maine coon']}}
+    first = {
+        "animals": {
+            "dogs": [
+                'spaniel'
+            ]
+        }
+    }
+    second = {
+        "animals": {
+            "cats": [
+                'maine coon'
+            ]
+        }
+    }
 
     result = update_dict(first, second)
 
     assert "cats" in result['animals']
     assert "dogs" in result['animals']
 
-    third = {"animals": {"dogs": ["golden retriever"]}}
+    third = {
+        "animals": {
+            "dogs": [
+                "golden retriever"
+            ]
+        }
+    }
 
     result = update_dict(first, third)
     assert "spaniel" not in result['animals']['dogs']
