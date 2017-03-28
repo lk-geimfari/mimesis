@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import re
 
+from elizabeth.intd import LOCALE_CODES
 from ._patterns import STR_REGEX
 
 
@@ -46,6 +47,11 @@ def test_pin(code):
 def test_issn(code):
     result = code.issn()
     assert len(result) == 9
+
+
+def test_locale_code(code):
+    result = code.locale_code()
+    assert result in LOCALE_CODES
 
 
 def test_isbn(generic):

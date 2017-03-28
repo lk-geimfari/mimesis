@@ -11,6 +11,8 @@ from elizabeth.utils import (
     update_dict
 )
 
+from . import is_connected
+
 
 def test_luhn_checksum():
     assert luhn_checksum("7992739871") == "3"
@@ -40,18 +42,19 @@ def test_download_image():
     result = download_image(url=None)
     assert result is None
 
-    verified = download_image(
-        url="https://github.com/lk-geimfari/elizabeth/raw/master/other/elizabeth.png",
-    )
-    assert verified == "elizabeth.png"
-    os.remove(verified)
+    url = "https://github.com/lk-geimfari/elizabeth/raw/master/other/elizabeth.png"
 
-    if sys.version_info.minor <= 3:
-        with pytest.raises(NotImplementedError):
-            download_image(url=None, unverified_ctx=True)
-    else:
-        unverified = download_image(url=None, unverified_ctx=True)
-        assert unverified is None
+    if is_connected():
+        verified = download_image(url=url)
+        assert verified == "elizabeth.png"
+        os.remove(verified)
+
+        if sys.version_info.minor <= 3:
+            with pytest.raises(NotImplementedError):
+                download_image(url=None, unverified_ctx=True)
+        else:
+            unverified = download_image(url=None, unverified_ctx=True)
+            assert unverified is None
 
 
 def test_locale_information():
