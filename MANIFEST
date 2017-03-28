@@ -194,6 +194,13 @@ elizabeth/data/tr/food.json
 elizabeth/data/tr/personal.json
 elizabeth/data/tr/science.json
 elizabeth/data/tr/text.json
+elizabeth/data/uk/address.json
+elizabeth/data/uk/business.json
+elizabeth/data/uk/datetime.json
+elizabeth/data/uk/food.json
+elizabeth/data/uk/personal.json
+elizabeth/data/uk/science.json
+elizabeth/data/uk/text.json
 elizabeth/data/zh/address.json
 elizabeth/data/zh/business.json
 elizabeth/data/zh/datetime.json

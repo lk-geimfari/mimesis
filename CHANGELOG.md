@@ -1,5 +1,11 @@
 ## Changelog
 
+### Version 0.3.24
+ - Minor improvements
+ - Updated data
+ - Fixed bugs
+
+---
 
 ### Version 0.3.23
  - Added support of sub-locales
