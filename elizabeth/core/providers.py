@@ -266,15 +266,20 @@ class Address(object):
         }
         return coord
 
-    @staticmethod
-    def continent_code():
-        """Get a random continent code.
+    def continent(self, code=False):
+        """Get a random continent name or continent
+        code (code in international format)
 
-        :return: Code of continent.
+        :return: Continent name.
         :Example:
-            EU
+            Africa (en)
         """
-        return choice(CONTINENT_CODES)
+        if code:
+            codes = CONTINENT_CODES
+            return choice(codes)
+
+        continent = choice(self.data['continent'])
+        return continent
 
 
 class Numbers(object):

@@ -11,11 +11,6 @@ def test_str(address):
     assert re.match(STR_REGEX, str(address))
 
 
-def test_continent_code(address):
-    result = address.continent_code()
-    assert result in CONTINENT_CODES
-
-
 def test_street_number(address):
     result = address.street_number()
     assert re.match(r'[0-9]{1,5}$', result)
@@ -116,3 +111,11 @@ def test_country_iso(generic):
 def test_city(generic):
     result = generic.address.city()
     assert result in generic.address.data['city']
+
+
+def test_continent(generic):
+    result = generic.address.continent()
+    assert result in generic.address.data['continent']
+
+    result = generic.address.continent(code=True)
+    assert result in CONTINENT_CODES
