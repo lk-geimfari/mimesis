@@ -52,17 +52,39 @@ Basic Usage:
 
 .. code-block:: python
 
-    >>> from elizabeth import Personal
-    >>> pr = Personal('en')
+    >>> from elizabeth import Personal, Address
+    >>> person = Personal('en')
+    >>> address = Address('en')
 
-    >>> pr.full_name(gender='female')
+    >>> person.full_name(gender='female')
     'Antonetta Garrison'
 
-    >>> pr.email(gender='male)
+    >>> person.email(gender='male)
     'oren5936@live.com'
 
-    >>> pr.occupation()
+    >>> person.occupation()
     'Programmer'
+    
+    >>> address.address()
+    '713 Rock Stravenue'
+	
+    >>> address.city()
+    'Dumont'
+	
+    >>> address.country()
+    'Switzerland'
+	
+    >>> address.country_iso(fmt='iso2')
+    'WF'
+	
+    >>> address.country_iso(fmt='iso3')
+    'BFA'
+	
+    >>> address.country_iso(fmt='numeric')
+    '744'
+	
+    >>> address.continent()
+    'South America'
 
 
 Locales
