@@ -716,6 +716,19 @@ class Code(object):
 
         return code
 
+    @staticmethod
+    def locale_code():
+        """Get a random locale code (MS-LCID).
+        See Windows Language Code Identifier Reference for more information.
+
+        :return: Locale code.
+        :rtype: str
+        :Example:
+            de-ch
+        """
+        locale = choice(LOCALE_CODES)
+        return locale
+
     def issn(self, mask=None):
         """Generate a random International Standard Serial Number (ISSN).
 
@@ -2592,7 +2605,6 @@ class UnitSystem(object):
         :Example:
             mega
         """
-
         if symbol:
             prefixes = SI_PREFIXES['_sym_']
         else:
