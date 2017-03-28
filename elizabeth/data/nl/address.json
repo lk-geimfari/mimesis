@@ -869,6 +869,15 @@
 	  "Åland"
 	]
   },
+  "continent": [
+	"Afrika",
+	"Antarctica",
+	"Australië",
+	"Azië",
+	"Europa",
+	"Noord-Amerika",
+	"Zuid-Amerika"
+  ],
   "state": {
 	"name": [
 	  "Groningen",

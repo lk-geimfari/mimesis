@@ -693,6 +693,15 @@
 	  "Îles Åland"
 	]
   },
+  "continent": [
+	"Afrique",
+	"Amérique du Nord",
+	"Amérique du Sud",
+	"Antarctique",
+	"Asie",
+	"Europe",
+	"Océanie"
+  ],
   "state": {
 	"abbr": [
 	  "FR-A",

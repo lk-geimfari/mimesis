@@ -335,6 +335,14 @@
 	  "islas Canarias"
 	]
   },
+  "continent": [
+	"América",
+	"Antártida",
+	"Asia",
+	"Europa",
+	"Oceanía",
+	"África"
+  ],
   "state": {
 	"abbr": [
 	  "AN",

@@ -404,6 +404,14 @@
 	  "Zimbabwe"
 	]
   },
+  "continent": [
+	"Africa",
+	"Antartide",
+	"Eurasia",
+	"Nordamerica",
+	"Oceania",
+	"Sudamerica"
+  ],
   "state": {
 	"abbr": [
 	  "AG",

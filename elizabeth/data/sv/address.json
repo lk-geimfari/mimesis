@@ -2189,6 +2189,14 @@
 	  "Östtimor"
 	]
   },
+  "continent": [
+	"Afrika",
+	"Antarktis",
+	"Australien",
+	"Eurasien",
+	"Nordamerika",
+	"Sydamerika"
+  ],
   "state": {
 	"abbr": [
 	  "SV-AH",

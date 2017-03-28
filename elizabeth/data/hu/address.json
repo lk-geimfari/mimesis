@@ -605,6 +605,15 @@
 	  "Üzbegisztán"
 	]
   },
+  "continent": [
+	"Afrika",
+	"Antarktisz",
+	"Ausztrália",
+	"Dél-Amerika",
+	"Európa",
+	"Ázsia",
+	"Észak-Amerika"
+  ],
   "state": {
 	"abbr": [
 	  "HU-BA",

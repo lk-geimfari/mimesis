@@ -827,6 +827,15 @@
 	  "Østrig"
 	]
   },
+  "continent": [
+	"Afrika",
+	"Antarktis",
+	"Asien",
+	"Europa",
+	"Nordamerika",
+	"Oceanien",
+	"Sydamerika"
+  ],
   "state": {
 	"abbr": [
 	  "DK.HS",

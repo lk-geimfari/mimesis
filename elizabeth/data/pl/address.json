@@ -1174,6 +1174,14 @@
 	  "Łotwa"
 	]
   },
+  "continent": [
+	"Afrykę",
+	"Amerykę Południową",
+	"Amerykę Północną",
+	"Antarktydę",
+	"Australię",
+	"Eurazję"
+  ],
   "state": {
 	"name": [
 	  "Dolnośląskie",

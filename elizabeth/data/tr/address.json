@@ -267,6 +267,15 @@
 	  "Kuzey İrlanda"
 	]
   },
+  "continent": [
+	"Afrika",
+	"Antarktika",
+	"Asya",
+	"Avrupa",
+	"Avustralya",
+	"Güney Amerika",
+	"Kuzey Amerika"
+  ],
   "street": {
 	"name": [
 	  "Aba",

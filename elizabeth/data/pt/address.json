@@ -460,6 +460,14 @@
 	  "Índia"
 	]
   },
+  "continent": [
+	"América",
+	"Antártida",
+	"Europa",
+	"Oceania",
+	"África",
+	"Ásia"
+  ],
   "state": {
 	"name": [
 	  "Aveiro",

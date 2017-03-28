@@ -452,6 +452,15 @@
 	  "Švýcarsko"
 	]
   },
+  "continent": [
+	"Afrika",
+	"Amerika",
+	"Antarktida",
+	"Asie",
+	"Austrálie",
+	"Evropa",
+	"Oceánie"
+  ],
   "state": {
 	"abbr": [
 	  "CZ-JC",
