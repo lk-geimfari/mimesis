@@ -40,15 +40,15 @@ Also you can install it manually (pre-activated virtualenv):
 
 ```python
 >>> from elizabeth import Personal
->>> pr = Personal('en')
+>>> person = Personal('en')
 
->>> pr.full_name(gender='female')
+>>> person.full_name(gender='female')
 'Antonetta Garrison'
 
->>> pr.email(gender='male)
+>>> person.email(gender='male)
 'oren5936@live.com'
 
->>> pr.occupation()
+>>> person.occupation()
 'Programmer'
 ```
 
@@ -273,25 +273,23 @@ If you would like to use these country-specific providers, then you must import 
 If your locale is cyrillic, but you need latinized locale-specific data, then you can use special decorator.
 At this moment it's works only for Russian and Ukrainian:
 ```python
->>> from elizabeth import Personal
 >>> from elizabeth.decorators import romanized
 
->>> pr = Personal('ru')
-
 >>> @romanized('ru')
-... def get_name_ro():
-...     return pr.full_name()
+... def name_ru():
+...     return 'Вероника Денисова'
 ...
 
->>> def get_name_ru():
-...     return pr.full_name()
+>>> @romanized('uk')
+>>> def name_uk():
+...     return 'Емілія Акуленко'
 ...
 
->>> get_name_ru()
-'Вида Панова'
-
->>> get_name_ro()
+>>> name_ru()
 'Veronika Denisova'
+
+>>> name_uk()
+'Emlja Akulenko'
 ```
 
 

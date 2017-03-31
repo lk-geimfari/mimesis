@@ -11,7 +11,7 @@ def russian_mixed_text():
     return 'Что-то там_4352-!@#$%^&*()_+?"<>"'
 
 
-@romanized('ua')
+@romanized('uk')
 def ukrainian_text():
     return 'Українська мова!'
 

@@ -164,7 +164,7 @@ ROMANIZATION_ALPHABETS = {
         'y': 'y',
         'z': 'z'
     },
-    'ua': {
+    'uk': {
         "А": "A",
         "а": "a",
         "Б": "B",
