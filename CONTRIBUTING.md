@@ -18,7 +18,7 @@
 
 ----
 
-When you add new locale make sure, that you added data for your locale to:
+When you add new locale make sure, that you added following data:
 - [Conftest](https://github.com/lk-geimfari/elizabeth/blob/master/tests/conftest.py#L4)
 - [SUPPORTED_LOCALES](https://github.com/lk-geimfari/elizabeth/blob/master/elizabeth/settings.py#L4)
 - [CURRENCY_SYMBOLS](https://github.com/lk-geimfari/elizabeth/blob/master/elizabeth/intd/bus.py#L183)
