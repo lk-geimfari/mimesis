@@ -1,6 +1,11 @@
 ## Changelog
 
 ### Version 0.3.25
+ - Update readme for PyPi
+
+---
+
+### Version 0.3.25
  - Updated data
  - Update readme for PyPi
  - Minor improvements
