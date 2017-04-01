@@ -1,13 +1,5 @@
-.. raw:: html
-
-    <a href="https://github.com/lk-geimfari/elizabeth">
-      <p align="center">
-         <img src="https://raw.githubusercontent.com/lk-geimfari/elizabeth/master/other/logo.png">
-      </p>
-    </a>
-
-----------
-
+.. image:: https://raw.githubusercontent.com/lk-geimfari/elizabeth/master/other/logo.png
+    :target: https://github.com/lk-geimfari/elizabeth
 
 .. image:: https://travis-ci.org/lk-geimfari/elizabeth.svg?branch=master
     :target: https://travis-ci.org/lk-geimfari/elizabeth
