@@ -38,7 +38,7 @@ setup(
     license='MIT License',
     author=__author__,
     author_email='likid.geimfari@gmail.com',
-    description='Elizabeth: dummy data for you.',
+    description='Elizabeth: dummy data generator.',
     long_description=readme,
     classifiers=[
         "Development Status :: 4 - Beta",
