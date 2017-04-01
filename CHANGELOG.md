@@ -1,6 +1,12 @@
 ## Changelog
 
-### Version 0.3.25
+
+### Version 0.3.27
+ - It's stupid, but i update readme again
+
+---
+
+### Version 0.3.26
  - Update readme for PyPi
 
 ---
