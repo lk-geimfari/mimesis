@@ -289,7 +289,7 @@ At this moment it's works only for Russian and Ukrainian:
 'Veronika Denisova'
 
 >>> name_uk()
-'Emlja Akulenko'
+'Emіlіja Akulenko'
 ```
 
 
