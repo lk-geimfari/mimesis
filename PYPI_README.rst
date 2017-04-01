@@ -1,9 +1,12 @@
-.. image:: https://raw.githubusercontent.com/lk-geimfari/elizabeth/master/other/logo.png
-    :target: http://docs.python-requests.org/
+.. raw:: html
 
+    <a href="https://github.com/lk-geimfari/elizabeth">
+      <p align="center">
+         <img src="https://raw.githubusercontent.com/lk-geimfari/elizabeth/master/other/logo.png">
+      </p>
+    </a>
 
-
-=========================
+----------
 
 
 .. image:: https://travis-ci.org/lk-geimfari/elizabeth.svg?branch=master
