@@ -1,6 +1,8 @@
 .. image:: https://raw.githubusercontent.com/lk-geimfari/elizabeth/master/other/logo.png
     :target: https://github.com/lk-geimfari/elizabeth
 
+=========================
+
 .. image:: https://travis-ci.org/lk-geimfari/elizabeth.svg?branch=master
     :target: https://travis-ci.org/lk-geimfari/elizabeth
 
@@ -12,15 +14,6 @@
 
 .. image:: https://img.shields.io/badge/python-v3.3%2C%20v3.4%2C%20v3.5%2C%20v3.6-brightgreen.svg
     :target: https://github.com/lk-geimfari/elizabeth/
-
-.. image:: https://api.codacy.com/project/badge/Grade/8b2f43d89d774929bb0b7535812f5b08
-    :target: https://www.codacy.com/app/likid-geimfari/elizabeth?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=lk-geimfari/elizabeth&amp;utm_campaign=Badge_Grade
-
-.. image:: https://img.shields.io/github/stars/lk-geimfari/elizabeth.svg
-    :target: https://github.com/lk-geimfari/elizabeth/stargazers
-
-.. image:: https://img.shields.io/github/forks/lk-geimfari/elizabeth.svg
-    :target: https://github.com/lk-geimfari/elizabeth/network
 
 
 `Elizabeth <https://github.com/lk-geimfari/elizabeth>`_ is a fast and easy to use Python library for generating dummy data for a variety of purposes. This data can be particularly useful during software development and testing. For example, it could be used to populate a testing database for a web application with user information such as email addresses, usernames, first names, last names, etc.
