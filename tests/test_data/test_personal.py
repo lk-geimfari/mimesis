@@ -196,6 +196,10 @@ def test_name(generic):
     result = generic.personal.name(gender='male')
     assert result in generic.personal.data['names']['male']
 
+    result = generic.personal.name(gender=None)
+    data = generic.personal.data['names']
+    assert result in data['male'] or result in data['female']
+
     with pytest.raises(WrongArgument):
         generic.personal.name(gender='other')
 

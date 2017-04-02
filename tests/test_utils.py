@@ -5,11 +5,12 @@ import pytest
 import sys
 import socket
 
-from elizabeth.exceptions import UnsupportedLocale
+from elizabeth.exceptions import UnsupportedLocale, WrongArgument
 from elizabeth.utils import (
     pull, luhn_checksum,
     locale_information, download_image,
-    update_dict
+    update_dict,
+    check_gender
 )
 
 
@@ -107,3 +108,16 @@ def test_update_dict():
 
     result = update_dict(first, third)
     assert "spaniel" not in result['animals']['dogs']
+
+
+def test_check_gender():
+    for gender in ['male', 'female', 'Male', 'Female']:
+        assert check_gender(gender) == gender.lower()
+
+    seen_values = set()
+    for _ in range(1000):
+        seen_values.add(check_gender(None))
+    assert seen_values == set(['male', 'female'])
+
+    with pytest.raises(WrongArgument):
+        check_gender('some other arg')
