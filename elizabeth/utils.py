@@ -9,7 +9,7 @@ import urllib.request as request
 from elizabeth.exceptions import UnsupportedLocale
 from elizabeth.settings import SUPPORTED_LOCALES
 
-__all__ = ['pull', 'download_image' 'locale_information']
+__all__ = ['pull', 'download_image', 'locale_information']
 
 PATH = path.abspath(path.join(path.dirname(__file__), 'data'))
 

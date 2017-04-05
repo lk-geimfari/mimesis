@@ -3,7 +3,7 @@
 import pytest
 
 from elizabeth.core.providers import File
-from elizabeth.intd import (
+from elizabeth.data.int import (
     EXTENSIONS,
     MIME_TYPES
 )

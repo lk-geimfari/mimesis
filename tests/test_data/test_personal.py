@@ -4,12 +4,11 @@ import re
 
 import pytest
 
-from elizabeth.exceptions import WrongArgument
-from elizabeth.intd import (
+from elizabeth.data.int import (
     FAVORITE_MUSIC_GENRE, SEXUALITY_SYMBOLS,
     BLOOD_GROUPS, GENDER_SYMBOLS, ENGLISH_LEVEL
 )
-
+from elizabeth.exceptions import WrongArgument
 from ._patterns import *
 
 

@@ -3,7 +3,7 @@
 import pytest
 
 from elizabeth.core.providers import UnitSystem
-from elizabeth.intd import SI_PREFIXES
+from elizabeth.data.int import SI_PREFIXES
 
 
 @pytest.fixture

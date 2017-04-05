@@ -1,7 +1,7 @@
 from functools import wraps
 
+from elizabeth.data.int.decorator import *
 from elizabeth.exceptions import UnsupportedLocale
-from elizabeth.intd.dec import ROMANIZATION_ALPHABETS
 
 
 def romanized(locale):
