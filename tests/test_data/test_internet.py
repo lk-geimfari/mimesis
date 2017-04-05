@@ -5,7 +5,7 @@ import re
 import pytest
 
 from elizabeth.core.providers import Internet
-from elizabeth.intd import (
+from elizabeth.data.int import (
     SUBREDDITS, EMOJI, USER_AGENTS,
     SUBREDDITS_NSFW, HASHTAGS,
     HTTP_METHODS, MIME_TYPES,

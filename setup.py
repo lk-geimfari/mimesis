@@ -14,7 +14,6 @@ setup(
     packages=[
         'elizabeth',
         'elizabeth.core',
-        'elizabeth.intd',
         'elizabeth.builtins'
     ],
     keywords=[
@@ -32,13 +31,16 @@ setup(
         ]
     },
     data_files=[
-        ("", ["LICENSE", 'PYPI_README.rst'])
+        ("", ["LICENSE",
+              'PYPI_README.rst'
+              ]
+         )
     ],
     url='https://github.com/lk-geimfari/elizabeth',
     license='MIT License',
     author=__author__,
     author_email='likid.geimfari@gmail.com',
-    description='Elizabeth: dummy data for you.',
+    description='Elizabeth: dummy data for developers.',
     long_description=readme,
     classifiers=[
         "Development Status :: 4 - Beta",

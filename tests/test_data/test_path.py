@@ -5,7 +5,7 @@ from unittest.mock import patch
 import pytest
 
 from elizabeth.core.providers import Path
-from elizabeth.intd import (
+from elizabeth.data.int import (
     PROGRAMMING_LANGS,
     FOLDERS,
     PROJECT_NAMES

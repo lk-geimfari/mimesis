@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 
 import re
+
 import pytest
 
-from elizabeth.intd import COUNTRIES_ISO, CONTINENT_CODES
+from elizabeth.data.int import COUNTRIES_ISO, CONTINENT_CODES
 from ._patterns import POSTAL_CODE_REGEX, STR_REGEX
 
 

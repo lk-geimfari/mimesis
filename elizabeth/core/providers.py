@@ -1,16 +1,15 @@
 # providers.py
 # -*- coding: utf-8 -*-
 
-import os
-import re
-import sys
-import json
 import array
 import datetime
 import inspect
+import json
+import os
+import re
+import sys
 from calendar import monthrange
 from hashlib import sha1, sha256, sha512, md5
-
 from random import (
     choice,
     sample,
@@ -20,51 +19,27 @@ from random import (
 )
 from string import (
     digits,
+    punctuation,
     ascii_letters,
-    ascii_uppercase,
-    punctuation
+    ascii_uppercase
 )
-
-from elizabeth.utils import (
-    pull,
-    luhn_checksum,
-    locale_information
-)
-
-# International data for Address().
-from elizabeth.intd.addr import *
-
-# International data for Business().
-from elizabeth.intd.bus import *
-
-# International data for Code().
-from elizabeth.intd.code import *
-
-# International data for Datetime().
-from elizabeth.intd.dt import *
-
-# International data for File().
-from elizabeth.intd.file import *
-
-# International data for Hardware().
-from elizabeth.intd.hw import *
-
-# International data for Transport().
-from elizabeth.intd.trans import *
-
-# International data for Internet().
-from elizabeth.intd.net import *
-
-# International data for Personal().
-from elizabeth.intd.per import *
-
-# International data for Science() and UnitSystem().
-from elizabeth.intd.sci import *
-
-# International data for Development() and Structured().
-from elizabeth.intd.dev import *
+# The data which common for all locales.
+from elizabeth.data.int.address import *
+from elizabeth.data.int.business import *
+from elizabeth.data.int.code import *
+from elizabeth.data.int.development import *
+from elizabeth.data.int.file import *
+from elizabeth.data.int.hardware import *
+from elizabeth.data.int.network import *
+from elizabeth.data.int.personal import *
+from elizabeth.data.int.scientific import *
+from elizabeth.data.int.transport import *
+from elizabeth.data.int.datetime import *
 
 from elizabeth.exceptions import WrongArgument
+
+from elizabeth.utils import pull, luhn_checksum, \
+    locale_information
 
 __all__ = [
     'Address',

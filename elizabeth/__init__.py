@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 """Elizabeth is a fast and easy to use Python library for generating dummy data
 for a variety of purposes.
 
@@ -12,7 +13,6 @@ which can produce data related to food, people, computer hardware, transportatio
 Copyright (c) 2016 Likid Geimfari (Isaak Uchakaev)  <likid.geimfari@gmail.com>
 Repository: https://github.com/lk-geimfari/elizabeth
 """
-
 
 from elizabeth.core import *
 

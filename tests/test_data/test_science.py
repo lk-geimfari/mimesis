@@ -2,7 +2,7 @@
 
 import re
 
-from elizabeth.intd import MATH_FORMULAS
+from elizabeth.data.int import MATH_FORMULAS
 from ._patterns import STR_REGEX
 
 
