@@ -9,12 +9,12 @@ import urllib.request as request
 from elizabeth.exceptions import UnsupportedLocale
 from elizabeth.settings import SUPPORTED_LOCALES
 
-__all__ = ['pull', 'download_image', 'locale_information']
+__all__ = ['pull', 'download_image', 'locale_info']
 
 PATH = path.abspath(path.join(path.dirname(__file__), 'data'))
 
 
-def locale_information(locale: str) -> str:
+def locale_info(locale: str) -> str:
     """Return name (in english) or local name of the locale
 
     :param locale: Locale abbreviation.
@@ -23,8 +23,8 @@ def locale_information(locale: str) -> str:
     :rtype: str
     :Example:
 
-    >>> from elizabeth.utils import locale_information
-    >>> locale_information('sv')
+    >>> from elizabeth.utils import locale_info
+    >>> locale_info('sv')
     'Swedish'
     """
     locale = locale.lower()
@@ -131,12 +131,11 @@ def download_image(url, save_path='', unverified_ctx=False):
 
 
 def update_dict(initial, other):
-    """
-    Recursively update a dictionary.
+    """Recursively update a dictionary.
 
     :param initial: Dict to update.
-    :param other: Dict to update from
-    :return: Updated dict
+    :param other: Dict to update from.
+    :return: Updated dict.
     :rtype: dict
     """
     for key, value in other.items():

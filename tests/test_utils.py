@@ -8,7 +8,7 @@ import socket
 from elizabeth.exceptions import UnsupportedLocale
 from elizabeth.utils import (
     pull, luhn_checksum,
-    locale_information, download_image,
+    locale_info, download_image,
     update_dict
 )
 
@@ -67,13 +67,13 @@ def test_download_image():
 
 
 def test_locale_information():
-    result = locale_information(locale='ru')
+    result = locale_info(locale='ru')
     assert result == 'Russian'
 
-    result_1 = locale_information(locale='is')
+    result_1 = locale_info(locale='is')
     assert result_1 == 'Icelandic'
     with pytest.raises(UnsupportedLocale):
-        locale_information(locale='w')
+        locale_info(locale='w')
 
 
 def test_update_dict():

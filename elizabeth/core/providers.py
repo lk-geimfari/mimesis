@@ -39,7 +39,7 @@ from elizabeth.data.int.datetime import *
 from elizabeth.exceptions import WrongArgument
 
 from elizabeth.utils import pull, luhn_checksum, \
-    locale_information
+    locale_info
 
 __all__ = [
     'Address',
@@ -78,7 +78,7 @@ class Address(object):
         return '{}:{}:{}'.format(
             self.__class__.__name__,
             self.locale,
-            locale_information(self.locale)
+            locale_info(self.locale)
         )
 
     @staticmethod
@@ -358,7 +358,7 @@ class Structured(object):
         return '{}:{}:{}'.format(
             self.__class__.__name__,
             self.locale,
-            locale_information(self.locale)
+            locale_info(self.locale)
         )
 
     def css(self):
@@ -523,7 +523,7 @@ class Text(object):
         return '{}:{}:{}'.format(
             self.__class__.__name__,
             self.locale,
-            locale_information(self.locale)
+            locale_info(self.locale)
         )
 
     def alphabet(self, letter_case=None):
@@ -671,7 +671,7 @@ class Code(object):
         return '{}:{}:{}'.format(
             self.__class__.__name__,
             self.locale,
-            locale_information(self.locale)
+            locale_info(self.locale)
         )
 
     @staticmethod
@@ -786,7 +786,7 @@ class Business(object):
         return '{}:{}:{}'.format(
             self.__class__.__name__,
             self.locale,
-            locale_information(self.locale)
+            locale_info(self.locale)
         )
 
     def company_type(self, abbr=False):
@@ -869,7 +869,7 @@ class Personal(object):
         return '{}:{}:{}'.format(
             self.__class__.__name__,
             self.locale,
-            locale_information(self.locale)
+            locale_info(self.locale)
         )
 
     def age(self, minimum=16, maximum=66):
@@ -918,6 +918,7 @@ class Personal(object):
         :Example:
             John.
         """
+        # TODO: Add function for checking gender.
         try:
             names = self.data['names'][gender]
         except KeyError:
@@ -934,15 +935,14 @@ class Personal(object):
             Smith.
         """
         # Separated by gender.
-        sep_surnames = ('ru', 'is', 'uk')
-
-        if self.locale in sep_surnames:
+        if self.locale in ('ru', 'is', 'uk'):
             try:
                 return choice(self.data['surnames'][gender])
             except KeyError:
                 raise WrongArgument('gender must be "female" or "male"')
 
-        return choice(self.data['surnames'])
+        surname = choice(self.data['surnames'])
+        return surname
 
     def title(self, gender='female', title_type='typical'):
         """Get a random title (prefix/suffix) for name.
@@ -958,7 +958,8 @@ class Personal(object):
         except KeyError:
             raise WrongArgument('Wrong value of argument.')
 
-        return choice(titles)
+        title = choice(titles)
+        return title
 
     def full_name(self, gender='female', reverse=False):
         """Generate a random full name.
@@ -988,13 +989,15 @@ class Personal(object):
         :Example:
             abby1189.
         """
-        data = pull('personal.json', 'en')
         try:
-            username = choice(data['names'][gender])
+            names = pull('personal.json', 'en')['names'][gender]
+            name = choice(names)
         except KeyError:
             raise WrongArgument('gender must be "female" or "male"')
 
-        username = '%s%s' % (username, randint(2, 9999))
+        fmt = ['%s_%s', '%s%s', '%s-%s']
+
+        username = choice(fmt) % (name, randint(2, 9999))
         return username.lower()
 
     @staticmethod
@@ -1095,7 +1098,8 @@ class Personal(object):
         while len(number) < length - 1:
             number += choice(digits)
 
-        return " ".join(regex.search(number + luhn_checksum(number)).groups())
+        card = " ".join(regex.search(number + luhn_checksum(number)).groups())
+        return card
 
     @staticmethod
     def credit_card_expiration_date(minimum=16, maximum=25):
@@ -1159,7 +1163,7 @@ class Personal(object):
         :return: Title of gender.
         :rtype: str
         :Example:
-            Male.
+            Male
         """
         # The four codes specified in ISO/IEC 5218 are:
         #     0 = not known,
@@ -1405,7 +1409,7 @@ class Datetime(object):
         return '{}:{}:{}'.format(
             self.__class__.__name__,
             self.locale,
-            locale_information(self.locale)
+            locale_info(self.locale)
         )
 
     def day_of_week(self, abbr=False):
@@ -1475,8 +1479,8 @@ class Datetime(object):
         :Example:
             08/16/88 (en)
         """
-
-        fmt = fmt or self.data['formats']['date']
+        if not fmt:
+            fmt = self.data['formats']['date']
 
         year = randint(start, end)
         month = randint(1, 12)
@@ -1494,11 +1498,12 @@ class Datetime(object):
         if not fmt:
             fmt = self.data['formats']['time']
 
-        t = datetime.time(randint(0, 23),
-                          randint(0, 59),
-                          randint(0, 59),
-                          randint(0, 999999)
-                          )
+        t = datetime.time(
+            randint(0, 23),
+            randint(0, 59),
+            randint(0, 59),
+            randint(0, 999999)
+        )
         return t.strftime(fmt)
 
     @staticmethod
@@ -1541,7 +1546,8 @@ class File(object):
         if type_t not in list(MIME_TYPES.keys()):
             raise ValueError('Unsupported mime type! Use: {}'.format(supported))
 
-        return choice(MIME_TYPES[type_t])
+        mime_type = choice(MIME_TYPES[type_t])
+        return mime_type
 
 
 class Science(object):
@@ -1558,7 +1564,7 @@ class Science(object):
         return '{}:{}:{}'.format(
             self.__class__.__name__,
             self.locale,
-            locale_information(self.locale)
+            locale_info(self.locale)
         )
 
     @staticmethod
@@ -1730,7 +1736,7 @@ class Food(object):
         return '{}:{}:{}'.format(
             self.__class__.__name__,
             self.lang,
-            locale_information(self.lang)
+            locale_info(self.lang)
         )
 
     def vegetable(self):
@@ -2626,7 +2632,7 @@ class Generic(object):
         return '{}:{}:{}'.format(
             self.__class__.__name__,
             self.locale,
-            locale_information(self.locale)
+            locale_info(self.locale)
         )
 
     def add_provider(self, cls):
