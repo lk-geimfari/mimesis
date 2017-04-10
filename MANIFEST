@@ -9,7 +9,6 @@ elizabeth/exceptions.py
 elizabeth/settings.py
 elizabeth/utils.py
 elizabeth/builtins/__init__.py
-elizabeth/builtins/specific_providers.py
 elizabeth/core/__init__.py
 elizabeth/core/providers.py
 elizabeth/data/__pycache__/__init__.cpython-35.pyc

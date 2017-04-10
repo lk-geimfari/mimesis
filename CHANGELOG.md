@@ -1,6 +1,14 @@
 ## Changelog
 
 
+### Version 0.3.28
+ - Changed structure of `builtins`
+ - Updated data
+ - Refactoring in provider.py
+ - Fixed bugs and other minor improvements
+
+---
+
 ### Version 0.3.27
  - It's stupid, but i update readme again
 
