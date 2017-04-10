@@ -1,7 +1,7 @@
 import pytest
 import re
 
-from elizabeth.builtins import USASpecProvider
+from elizabeth.builtins.en import USASpecProvider
 
 
 @pytest.fixture

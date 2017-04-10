@@ -251,7 +251,7 @@ import them explicitly:
 .. code:: python
 
     >>> from elizabeth import Generic
-    >>> from elizabeth.builtins import BrazilSpecProvider
+    >>> from elizabeth.builtins.pt_br import BrazilSpecProvider
 
     >>> generic = Generic('pt-br')
 

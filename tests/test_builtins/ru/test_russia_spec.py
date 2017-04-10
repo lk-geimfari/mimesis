@@ -1,6 +1,6 @@
 import pytest
 
-from elizabeth.builtins import RussiaSpecProvider
+from elizabeth.builtins.ru import RussiaSpecProvider
 from elizabeth.exceptions import JSONKeyError
 
 
@@ -50,3 +50,9 @@ def test_generate_sentence(russia):
     result = russia.generate_sentence()
     assert len(result) >= 20
     assert isinstance(result, str)
+
+
+def test_snils(russia):
+    result = russia.snils()
+    number = result.replace('-', '')
+    assert len(number) == 11
