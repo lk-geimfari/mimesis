@@ -78,6 +78,10 @@ SUPPORTED_LOCALES = {
         'name': 'Dutch',
         'name_local': 'Nederlands'
     },
+    "nl-be": {
+        'name': "Belgium Dutch",
+        "name_local": "Nederlands"
+    },
     "no": {
         "name": "Norwegian",
         "name_local": "Norsk"

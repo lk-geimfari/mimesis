@@ -200,6 +200,7 @@ CURRENCY_SYMBOLS = {
     "ja": "¥",
     "ko": "₩",
     "nl": "€",
+    "nl-be": "€",
     "no": "kr",
     "pl": "zł",
     "pt": "€",

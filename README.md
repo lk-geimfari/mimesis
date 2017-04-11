@@ -80,15 +80,16 @@ You can specify a locale when creating providers and they will return data that 
 | 17 | 🇯🇵   |  `ja`      | Japanese             | 日本語       |
 | 18 | 🇰🇷   |  `ko`      | Korean               | 한국어       |
 | 19 | 🇳🇱   |  `nl`      | Dutch                | Nederlands  |
-| 20 | 🇳🇴   |  `no`      | Norwegian            | Norsk       |
-| 21 | 🇵🇱   |  `pl`      | Polish               | Polski      |
-| 22 | 🇵🇹   |  `pt`      | Portuguese           | Português   |
-| 23 | 🇧🇷   |  `pt-br`   | Brazilian Portuguese | Português Brasileiro |
-| 24 | 🇷🇺   |  `ru`      | Russian              | Русский     |
-| 25 | 🇸🇪   |  `sv`      | Swedish              | Svenska     |
-| 26 | 🇹🇷   |  `tr`      | Turkish              | Türkçe      |
-| 27 | 🇺🇦   |  `uk`      | Ukrainian            | Український |
-| 28 | 🇨🇳   |  `zh`      | Chinese              | 汉语         |
+| 20 | 🇧🇪   |  `nl-be`   | Belgium Dutch        | Nederlands  |
+| 21 | 🇳🇴   |  `no`      | Norwegian            | Norsk       |
+| 22 | 🇵🇱   |  `pl`      | Polish               | Polski      |
+| 23 | 🇵🇹   |  `pt`      | Portuguese           | Português   |
+| 24 | 🇧🇷   |  `pt-br`   | Brazilian Portuguese | Português Brasileiro |
+| 25 | 🇷🇺   |  `ru`      | Russian              | Русский     |
+| 26 | 🇸🇪   |  `sv`      | Swedish              | Svenska     |
+| 27 | 🇹🇷   |  `tr`      | Turkish              | Türkçe      |
+| 28 | 🇺🇦   |  `uk`      | Ukrainian            | Український |
+| 29 | 🇨🇳   |  `zh`      | Chinese              | 汉语         |
 
 <!-- tocstop -->
 </details>
