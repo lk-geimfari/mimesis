@@ -191,6 +191,7 @@ CURRENCY_SYMBOLS = {
     "en-gb": "£",
     "en-au": "$",
     "es": "€",
+    "es-mx": "$",
     "fa": "﷼",
     "fi": "€",
     "fr": "€",

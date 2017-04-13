@@ -54,7 +54,7 @@ Also you can install it manually (pre-activated virtualenv):
 
 ## Locales
 
-You can specify a locale when creating providers and they will return data that is appropriate for the language or country associated with that locale.  `Elizabeth` currently includes support for 28 different locales. See details for more information.
+You can specify a locale when creating providers and they will return data that is appropriate for the language or country associated with that locale.  `Elizabeth` currently includes support for 30 different locales. See details for more information.
 
 <details>
 <!-- toc -->
@@ -71,25 +71,26 @@ You can specify a locale when creating providers and they will return data that 
 | 8  | 🇨🇦   |  `en-ca`   | Canadian English     | English     |
 | 9  | 🇬🇧   |  `en-gb`   | British English      | English     |
 | 10 | 🇪🇸   |  `es`      | Spanish              | Español     |
-| 11 | 🇮🇷   |  `fa`      | Farsi                |      فارسی  |
-| 12 | 🇫🇮   |  `fi`      | Finnish              | Suomi       |
-| 13 | 🇫🇷   |  `fr`      | French               | Français    |
-| 14 | 🇭🇺   |  `hu`      | Hungarian            | Magyar      |
-| 15 | 🇮🇸   |  `is`      | Icelandic            | Íslenska    |
-| 16 | 🇮🇹   |  `it`      | Italian              | Italiano    |
-| 17 | 🇯🇵   |  `ja`      | Japanese             | 日本語       |
-| 18 | 🇰🇷   |  `ko`      | Korean               | 한국어       |
-| 19 | 🇳🇱   |  `nl`      | Dutch                | Nederlands  |
-| 20 | 🇧🇪   |  `nl-be`   | Belgium Dutch        | Nederlands  |
-| 21 | 🇳🇴   |  `no`      | Norwegian            | Norsk       |
-| 22 | 🇵🇱   |  `pl`      | Polish               | Polski      |
-| 23 | 🇵🇹   |  `pt`      | Portuguese           | Português   |
-| 24 | 🇧🇷   |  `pt-br`   | Brazilian Portuguese | Português Brasileiro |
-| 25 | 🇷🇺   |  `ru`      | Russian              | Русский     |
-| 26 | 🇸🇪   |  `sv`      | Swedish              | Svenska     |
-| 27 | 🇹🇷   |  `tr`      | Turkish              | Türkçe      |
-| 28 | 🇺🇦   |  `uk`      | Ukrainian            | Український |
-| 29 | 🇨🇳   |  `zh`      | Chinese              | 汉语         |
+| 11 | 🇲🇽   |  `es-mx`   | Mexican Spanish      | Español     |
+| 12 | 🇮🇷   |  `fa`      | Farsi                |      فارسی  |
+| 13 | 🇫🇮   |  `fi`      | Finnish              | Suomi       |
+| 14 | 🇫🇷   |  `fr`      | French               | Français    |
+| 15 | 🇭🇺   |  `hu`      | Hungarian            | Magyar      |
+| 16 | 🇮🇸   |  `is`      | Icelandic            | Íslenska    |
+| 17 | 🇮🇹   |  `it`      | Italian              | Italiano    |
+| 18 | 🇯🇵   |  `ja`      | Japanese             | 日本語       |
+| 19 | 🇰🇷   |  `ko`      | Korean               | 한국어       |
+| 20 | 🇳🇱   |  `nl`      | Dutch                | Nederlands  |
+| 21 | 🇧🇪   |  `nl-be`   | Belgium Dutch        | Nederlands  |
+| 22 | 🇳🇴   |  `no`      | Norwegian            | Norsk       |
+| 23 | 🇵🇱   |  `pl`      | Polish               | Polski      |
+| 24 | 🇵🇹   |  `pt`      | Portuguese           | Português   |
+| 25 | 🇧🇷   |  `pt-br`   | Brazilian Portuguese | Português Brasileiro |
+| 26 | 🇷🇺   |  `ru`      | Russian              | Русский     |
+| 27 | 🇸🇪   |  `sv`      | Swedish              | Svenska     |
+| 28 | 🇹🇷   |  `tr`      | Turkish              | Türkçe      |
+| 29 | 🇺🇦   |  `uk`      | Ukrainian            | Український |
+| 30 | 🇨🇳   |  `zh`      | Chinese              | 汉语         |
 
 <!-- tocstop -->
 </details>

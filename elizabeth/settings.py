@@ -42,6 +42,10 @@ SUPPORTED_LOCALES = {
         "name": "Spanish",
         "name_local": "Español"
     },
+    "es-mx": {
+        "name": "Mexican Spanish",
+        "name_local": "Español"
+    },
     "fa": {
         "name": "Farsi",
         "name_local": "فارسی"

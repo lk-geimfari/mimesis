@@ -12,6 +12,7 @@ locales = [
     "en-ca",
     "en-gb",
     "es",
+    "es-mx",
     "fa",
     "fi",
     "fr",
