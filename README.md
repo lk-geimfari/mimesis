@@ -54,11 +54,7 @@ Also you can install it manually (pre-activated virtualenv):
 
 ## Locales
 
-<<<<<<< HEAD
 You can specify a locale when creating providers and they will return data that is appropriate for the language or country associated with that locale.  `Elizabeth` currently includes support for 30 different locales. See details for more information.
-=======
-You can specify a locale when creating providers and they will return data that is appropriate for the language or country associated with that locale.  `Elizabeth` currently includes support for 29 different locales. See details for more information.
->>>>>>> 07483a69589e9d0b4a096457e3f3b06ad9e00c59
 
 <details>
 <!-- toc -->
