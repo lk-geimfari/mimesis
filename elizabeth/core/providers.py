@@ -2132,7 +2132,7 @@ class Internet(object):
         """
         url = 'http://www.' + Personal.username(gender)
         domain = choice(DOMAINS)
-        return '%s%s' % (url, domain)
+        return '{}{}'.format(url, domain)
 
     @staticmethod
     def subreddit(nsfw=False, full_url=False):
@@ -2151,8 +2151,8 @@ class Internet(object):
             else:
                 return url + choice(SUBREDDITS)
 
-        nsfw = choice(SUBREDDITS_NSFW)
-        result = url + nsfw if full_url else nsfw
+        nsfw_sr = choice(SUBREDDITS_NSFW)
+        result = url + nsfw_sr if full_url else nsfw_sr
         return result
 
     @staticmethod
@@ -2599,11 +2599,15 @@ class UnitSystem(object):
         if sign in list(prefixes.keys()):
             return choice(prefixes[sign])
 
-        return choice(prefixes['positive'])
+        prefix = choice(prefixes['positive'])
+        return prefix
 
 
 class Generic(object):
     """A lazy initialization of locale for all classes that have locales."""
+
+    # (Priority: high)
+    # TODO: Update this class using __getattr__ or add the other more acceptable mechanism.
 
     def __init__(self, locale):
         """
