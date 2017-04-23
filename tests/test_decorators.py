@@ -26,6 +26,3 @@ def test_russian_mixed_text():
 
 def test_ukrainian():
     assert 'Ukrayins’ka mova!' == ukrainian_text()
-
-
-print(russian_mixed_text())
