@@ -15,7 +15,7 @@
 | 11  | Transport       | *Dummy data about transport (truck model, car etc.)*           |
 | 12  | Science         | *Scientific data (scientist, math_formula etc.)*               |
 | 13  | Structured      | *Structured data (html, css etc.)*                             |
-| 14  | Internet        | *Dummy internet data (facebook, twitter etc.)*                 |
+| 14  | Internet        | *Internet data (facebook, twitter etc.)*                       |
 | 15  | Hardware        | *The data about the hardware (resolution, cpu, graphics etc.)* |
 | 16  | Numbers         | *Numerical data (floats, primes, digit etc.)*                  |
 | 17  | Path            | *Provides methods and property for generate paths.*            |
