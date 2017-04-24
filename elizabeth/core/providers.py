@@ -375,13 +375,14 @@ class Structured(object):
             }'
         """
         selector = choice(CSS_SELECTORS)
-        css_selector = "%s%s" % (selector, self.text.word())
+        css_sel = '{}{}'.format(selector, self.text.word())
 
-        html_cont_keys = choice(list(HTML_CONTAINER_TAGS.keys()))
-        html_mrk_tag = choice(HTML_MARKUP_TAGS)
+        cont_tag = choice(list(HTML_CONTAINER_TAGS.keys()))
+        mrk_tag = choice(HTML_MARKUP_TAGS)
 
-        base = "{}".format(choice([html_cont_keys, html_mrk_tag, css_selector]))
-        props = "; ".join([self.css_property() for _ in range(randint(1, 6))])
+        base = "{}".format(choice([cont_tag, mrk_tag, css_sel]))
+        props = "; ".join(
+            [self.css_property() for _ in range(randint(1, 6))])
         return "{} {{{}}}".format(base, props)
 
     def css_property(self):
@@ -446,7 +447,8 @@ class Structured(object):
             value = HTML_CONTAINER_TAGS[tag][attribute]
         except KeyError:
             raise NotImplementedError(
-                "Tag {} or attribute {} is not supported".format(tag, attribute))
+                "Tag {} or attribute {} is not supported".format(
+                    tag, attribute))
 
         if isinstance(value, list):
             value = choice(value)
@@ -720,9 +722,10 @@ class Code(object):
         return self.custom_code(mask=mask)
 
     def isbn(self, fmt='isbn-10'):
-        """Generate ISBN for current locale.
+        """Generate ISBN for current locale. Default is ISBN 10,
+        but you also can use ISBN-13.
 
-        :param fmt: ISBN format. Default is ISBN 10, but you also can use ISBN-13.
+        :param fmt: ISBN format.
         :return: ISBN.
         :Example:
             132-1-15411-375-8.
@@ -740,9 +743,10 @@ class Code(object):
         return self.custom_code(mask=mask)
 
     def ean(self, fmt='ean-13'):
-        """Generate EAN (European Article Number) code.
+        """Generate EAN (European Article Number) code. Default is
+        EAN-13, but you also can use EAN-8.
 
-        :param fmt: Format of EAN. Default is EAN-13, but you also can use EAN-8
+        :param fmt: Format of EAN.
         :return: EAN.
         :Example:
             3953753179567.
@@ -853,7 +857,8 @@ class Business(object):
 
 
 class Personal(object):
-    """Class for generate personal data, i.e names, surnames, age and another."""
+    """Class for generate personal data, i.e names, surnames,
+    age and another."""
 
     def __init__(self, locale='en'):
         """
@@ -948,7 +953,7 @@ class Personal(object):
         """Get a random title (prefix/suffix) for name.
 
         :param gender: The gender.
-        :param title_type:  The type of title. Available types: 'typical' and 'academic'.
+        :param title_type:  The type of title ('typical' and 'academic').
         :return: The title.
         :Example:
             PhD.
@@ -1154,11 +1159,13 @@ class Personal(object):
         return url.format(username)
 
     def gender(self, iso5218=False, symbol=False):
-        """Get a random title of gender, code for the representation of human sexes is an international
-        standard that defines a representation of human sexes through a language-neutral single-digit code
-        or symbol of gender.
+        """Get a random title of gender, code for the representation
+        of human sexes is an international standard that defines a
+        representation of human sexes through a language-neutral single-digit
+        code or symbol of gender.
 
-        :param iso5218: Codes for the representation of human sexes is an international standard.
+        :param iso5218: Codes for the representation of human sexes
+        is an international standard.
         :param symbol: Symbol of gender.
         :return: Title of gender.
         :rtype: str
@@ -1373,9 +1380,9 @@ class Personal(object):
     def identifier(mask='##-##/##'):
         """Generate a random identifier by mask. With this method you can generate
         any identifiers that you need. Simply select the mask that you need.
-        Here '@' is a placeholder for characters and '#' is placeholder for digits.
 
-        :param mask: The mask.
+        :param mask: The mask. Here '@' is a placeholder for characters
+        and '#' is placeholder for digits.
         :return: An identifier.
         :Example:
             07-97/04
@@ -1415,7 +1422,7 @@ class Datetime(object):
     def day_of_week(self, abbr=False):
         """Get a random day of week.
 
-        :param abbr: if True then will be returned abbreviated name of day of the week.
+        :param abbr: Abbreviated name of the day.
         :return: Name of day of the week.
         :Example:
             Wednesday (Wed. when abbr=True).
@@ -1538,13 +1545,15 @@ class File(object):
         """Get a random mime type from list.
 
         :return: Mime type.
-        :param type_t: Type of media: application, image, video, audio, text, message
+        :param type_t: Type of media: (application,
+        image, video, audio, text, message).
         :rtype: str
         """
         supported = ' '.join(MIME_TYPES.keys())
 
         if type_t not in list(MIME_TYPES.keys()):
-            raise ValueError('Unsupported mime type! Use: {}'.format(supported))
+            raise ValueError(
+                'Unsupported mime type! Use: {}'.format(supported))
 
         mime_type = choice(MIME_TYPES[type_t])
         return mime_type
@@ -2060,13 +2069,14 @@ class Internet(object):
     def stock_image(category=None, width=1900, height=1080):
         """Get a random beautiful stock image that hosted on Unsplash.com
 
-        :param category: Category of image. Available categories: 'buildings', 'food', 'nature',
-        'people', 'technology', 'objects'.
+        :param category: Category of image. Available: 'buildings', 'food',
+        'nature', 'people', 'technology', 'objects'.
         :param width: Width of the image.
         :param height: Height of the image.
         :return: An image (Link to image).
         """
-        url = 'https://source.unsplash.com/category/{category}/{width}x{height}'
+        url = 'https://source.unsplash.com/category/' \
+              '{category}/{width}x{height}'
 
         categories = (
             'buildings', 'food', 'nature',
@@ -2099,8 +2109,8 @@ class Internet(object):
 
         :param quantity: The quantity of hashtags.
         :type quantity: int
-        :param category: Available categories: general, girls, love, boys, friends,
-        family, nature, travel, cars, sport, tumblr.
+        :param category: Available categories: general, girls, love,
+        boys, friends, family, nature, travel, cars, sport, tumblr.
         :return: The list of hashtags.
         :rtype: list
 
@@ -2607,7 +2617,8 @@ class Generic(object):
     """A lazy initialization of locale for all classes that have locales."""
 
     # (Priority: high)
-    # TODO: Update this class using __getattr__ or add the other more acceptable mechanism.
+    # TODO: Update this class using __getattr__ or add the other
+    # more acceptable mechanism.
 
     def __init__(self, locale):
         """
