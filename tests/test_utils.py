@@ -51,7 +51,8 @@ def test_download_image():
     result = download_image(url=None)
     assert result is None
 
-    url = "https://github.com/lk-geimfari/elizabeth/raw/master/other/elizabeth.png"
+    url = "https://github.com/lk-geimfari/elizabeth/" \
+          "raw/master/other/elizabeth.png"
 
     if is_connected():
         verified = download_image(url=url)

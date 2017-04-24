@@ -24,17 +24,25 @@ USERNAME_REGEX = r'^[a-zA-Z0-9_.-]+$'
 
 CREDIT_CARD_REGEX = r'[\d]+((-|\s)?[\d]+)+'
 
-STR_REGEX = r'^(Address|Business|Code|Datetime|Food|Generic|Personal|Science|Structured|Text):[a-z-]+:(.*)$'
+STR_REGEX = r'^(Address|Business|Code|Datetime|Food|Generic|' \
+            r'Personal|Science|Structured|Text):[a-z-]+:(.*)$'
 
-_EN_GB_POST_CODE = r'((([A-PR-UWYZ][0-9])|([A-PR-UWYZ][0-9][0-9])|' \
-                   '([A-PR-UWYZ][A-HK-Y][0-9])|([A-PR-UWYZ][A-HK-Y][0-9][0-9])|' \
-                   '([A-PR-UWYZ][0-9][A-HJKSTUW])|([A-PR-UWYZ][A-HK-Y][0-9][ABEHMNPRVWXY]))) ' \
-                   '|| ((GIR)[ ]?(0AA))|(([A-PR-UWYZ][0-9])[ ]?([0-9][ABD-HJLNPQ-UW-Z]{0,2}))' \
-                   '|(([A-PR-UWYZ][0-9][0-9])[ ]?([0-9][ABD-HJLNPQ-UW-Z]{0,2}))|(([A-PR-UWYZ]' \
-                   '[A-HK-Y0-9][0-9])[ ]?([0-9][ABD-HJLNPQ-UW-Z]{0,2}))|(([A-PR-UWYZ][A-HK-Y0-9]' \
-                   '[0-9][0-9])[ ]?([0-9][ABD-HJLNPQ-UW-Z]{0,2}))|(([A-PR-UWYZ][0-9][A-HJKS-UW0-9])' \
-                   '[ ]?([0-9][ABD-HJLNPQ-UW-Z]{0,2}))|(([A-PR-UWYZ][A-HK-Y0-9][0-9][ABEHMNPRVWXY0-9])' \
-                   '[ ]?([0-9][ABD-HJLNPQ-UW-Z]{0,2}))'
+_EN_GB_POST_CODE = \
+    r'((([A-PR-UWYZ][0-9])|([A-PR-UWYZ][0-9][0-9])' \
+    r'|([A-PR-UWYZ][A-HK-Y][0-9])|([A-PR-UWYZ][A-HK-Y][0-9][0-9])|' \
+    r'([A-PR-UWYZ][0-9][A-HJKSTUW])|([A-PR-UWYZ][A-HK-Y][0-9]' \
+    r'[ABEHMNPRVWXY]))) ' \
+    r'|| ((GIR)[ ]?(0AA))|(([A-PR-UWYZ][0-9])[ ]?([0-9]' \
+    r'[ABD-HJLNPQ-UW-Z]{0,2}))' \
+    r'|(([A-PR-UWYZ][0-9][0-9])[ ]?([0-9][ABD-HJLNPQ-UW-Z]{0,2}))' \
+    r'|(([A-PR-UWYZ]' \
+    r'[A-HK-Y0-9][0-9])[ ]?([0-9][ABD-HJLNPQ-UW-Z]{0,2}))' \
+    r'|(([A-PR-UWYZ][A-HK-Y0-9]' \
+    r'[0-9][0-9])[ ]?([0-9][ABD-HJLNPQ-UW-Z]{0,2}))' \
+    r'|(([A-PR-UWYZ][0-9][A-HJKS-UW0-9])' \
+    r'[ ]?([0-9][ABD-HJLNPQ-UW-Z]{0,2}))' \
+    r'|(([A-PR-UWYZ][A-HK-Y0-9][0-9][ABEHMNPRVWXY0-9])' \
+    r'[ ]?([0-9][ABD-HJLNPQ-UW-Z]{0,2}))'
 
 POSTAL_CODE_REGEX = {
     'ru': r'[0-9]{6}$',
@@ -61,4 +69,5 @@ POSTAL_CODE_REGEX = {
     'default': r'[0-9]{5}$'
 }
 
-HOME_PAGE = r'http[s]?://(?:[a-zA-Z]|[0-9]|[$_@.&+-]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+'
+HOME_PAGE = r'http[s]?://(?:[a-zA-Z]|[0-9]|[$_@.&+-]' \
+            r'|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+'

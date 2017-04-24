@@ -27,7 +27,7 @@ def test_age_store(personal):
 
 
 def test_age_update(personal):
-    result = personal.age() - personal._store['age']  # calling age() should go first
+    result = personal.age() - personal._store['age']
     assert result == 0
 
 
@@ -37,7 +37,8 @@ def test_child_count(personal):
 
 
 def test_work_experience(personal):
-    result = personal.work_experience(working_start_age=0) - personal._store['age']
+    result = personal.work_experience(
+        working_start_age=0) - personal._store['age']
     assert result == 0
 
 
