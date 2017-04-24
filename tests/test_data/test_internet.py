@@ -12,7 +12,7 @@ from elizabeth.data.int import (
     HTTP_STATUS_CODES,
     NETWORK_PROTOCOLS
 )
-from ._patterns import (
+from tests.test_data._patterns import (
     HOME_PAGE,
     IP_V6_REGEX,
     IP_V4_REGEX,
@@ -34,8 +34,11 @@ def test_hashtags(net):
     result = net.hashtags(quantity=5)
     assert len(result) == 5
 
-    result = net.hashtags(quantity=1, category='general')
-    assert result in HASHTAGS['general']
+    tags = list(HASHTAGS.keys())
+
+    for category in tags:
+        result = net.hashtags(quantity=1, category=category)
+        assert result in HASHTAGS[category]
 
     with pytest.raises(KeyError):
         net.hashtags(category='religious')
@@ -91,26 +94,12 @@ def test_image_by_keyword(net):
 
 def test_network_protocol(net):
     # Default layer 'is application'
-    result = net.network_protocol()
-    assert result in NETWORK_PROTOCOLS['application']
 
-    result_1 = net.network_protocol(layer='data_link')
-    assert result_1 in NETWORK_PROTOCOLS['data_link']
+    layers = list(NETWORK_PROTOCOLS.keys())
 
-    result_2 = net.network_protocol(layer='network')
-    assert result_2 in NETWORK_PROTOCOLS['network']
-
-    result_3 = net.network_protocol(layer='physical')
-    assert result_3 in NETWORK_PROTOCOLS['physical']
-
-    result_4 = net.network_protocol(layer='presentation')
-    assert result_4 in NETWORK_PROTOCOLS['presentation']
-
-    result_4 = net.network_protocol(layer='session')
-    assert result_4 in NETWORK_PROTOCOLS['session']
-
-    result_4 = net.network_protocol(layer='transport')
-    assert result_4 in NETWORK_PROTOCOLS['transport']
+    for layer in layers:
+        result = net.network_protocol(layer=layer)
+        assert result in NETWORK_PROTOCOLS[layer]
 
 
 def test_ip_v4(net):
@@ -134,29 +123,12 @@ def test_http_method(net):
 
 
 def test_content_type(net):
-    application = net.content_type(mime_type='application')
-    application = application.split(':')[1].strip()
-    assert application in MIME_TYPES['application']
+    types = list(MIME_TYPES.keys())
 
-    audio = net.content_type(mime_type='audio')
-    audio = audio.split(':')[1].strip()
-    assert audio in MIME_TYPES['audio']
-
-    image = net.content_type(mime_type='image')
-    image = image.split(':')[1].strip()
-    assert image in MIME_TYPES['image']
-
-    message = net.content_type(mime_type='message')
-    message = message.split(':')[1].strip()
-    assert message in MIME_TYPES['message']
-
-    text = net.content_type(mime_type='text')
-    text = text.split(':')[1].strip()
-    assert text in MIME_TYPES['text']
-
-    video = net.content_type(mime_type='video')
-    video = video.split(':')[1].strip()
-    assert video in MIME_TYPES['video']
+    for typ in types:
+        ct = net.content_type(mime_type=typ)
+        ct = ct.split(':')[1].strip()
+        assert ct in MIME_TYPES[typ]
 
     with pytest.raises(ValueError):
         net.content_type(mime_type='blablabla')
