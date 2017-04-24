@@ -130,6 +130,12 @@ providers from one object.
 
 >>> g.food.fruit()
 'Limón'
+
+>>> g.internet.network_protocol(layer='application')
+'AMQP'
+
+>>> g.science.math_formula()
+'(a/b)/(c/d) = (a/b) * (d/c)'
 ```
 
 Keep in mind that the library supports more than nineteen data providers and it's means that you can create data for almost anything you want:

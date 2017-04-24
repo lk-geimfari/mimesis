@@ -9,7 +9,8 @@ from elizabeth.data.int import (
     SUBREDDITS, EMOJI, USER_AGENTS,
     SUBREDDITS_NSFW, HASHTAGS,
     HTTP_METHODS, MIME_TYPES,
-    HTTP_STATUS_CODES
+    HTTP_STATUS_CODES,
+    NETWORK_PROTOCOLS
 )
 from ._patterns import (
     HOME_PAGE,
@@ -88,10 +89,28 @@ def test_image_by_keyword(net):
     assert isinstance(default, str)
 
 
-def test_protocol(net):
-    result = net.protocol()
-    assert result is not None
-    assert result in ['http', 'https']
+def test_network_protocol(net):
+    # Default layer 'is application'
+    result = net.network_protocol()
+    assert result in NETWORK_PROTOCOLS['application']
+
+    result_1 = net.network_protocol(layer='data_link')
+    assert result_1 in NETWORK_PROTOCOLS['data_link']
+
+    result_2 = net.network_protocol(layer='network')
+    assert result_2 in NETWORK_PROTOCOLS['network']
+
+    result_3 = net.network_protocol(layer='physical')
+    assert result_3 in NETWORK_PROTOCOLS['physical']
+
+    result_4 = net.network_protocol(layer='presentation')
+    assert result_4 in NETWORK_PROTOCOLS['presentation']
+
+    result_4 = net.network_protocol(layer='session')
+    assert result_4 in NETWORK_PROTOCOLS['session']
+
+    result_4 = net.network_protocol(layer='transport')
+    assert result_4 in NETWORK_PROTOCOLS['transport']
 
 
 def test_ip_v4(net):
@@ -144,5 +163,8 @@ def test_content_type(net):
 
 
 def test_http_status_code(net):
-    result = net.http_status_code()
+    result = net.http_status_code(code_only=False)
     assert result in HTTP_STATUS_CODES
+
+    result = net.http_status_code()
+    assert (int(result) >= 100) and (int(result) <= 511)

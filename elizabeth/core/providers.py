@@ -1987,14 +1987,19 @@ class Internet(object):
         return 'Content-Type: {}'.format(fmt)
 
     @staticmethod
-    def http_status_code():
+    def http_status_code(code_only=True):
         """Get a random HTTP status.
 
+        :param code_only: Return only http status code.
         :return: HTTP status.
         :Example:
             200 OK
         """
-        return choice(HTTP_STATUS_CODES)
+        status = choice(HTTP_STATUS_CODES)
+
+        if code_only:
+            return status.split()[0]
+        return status
 
     @staticmethod
     def http_method():
@@ -2177,14 +2182,23 @@ class Internet(object):
         return choice(USER_AGENTS)
 
     @staticmethod
-    def protocol():
-        """Get a random protocol.
-
-        :return: Protocol.
+    def network_protocol(layer='application'):
+        """Get a random network protocol form OSI model.
+        
+        :param layer: Layer of protocol: application, data_link,
+        network, physical, presentation, session and transport.
+        :return: Protocol name.
         :Example:
-            https
+            AMQP
         """
-        return choice(['http', 'https'])
+        # TODO: Refactoring.
+        layer = layer.lower()
+        try:
+            protocol = choice(NETWORK_PROTOCOLS[layer])
+            return protocol
+        except KeyError:
+            raise WrongArgument(
+                'Unsupported layer, use: {}'.format(list(NETWORK_PROTOCOLS.keys())))
 
 
 class Transport(object):
