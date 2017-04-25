@@ -5,7 +5,7 @@
  - Sobolev Nikita [(sobolevn)](https://github.com/sobolevn)
 
 ### Design
- - Illustration by [CarlaNatalie](http://carlanatalie.deviantart.com/)
+ - Illustration by ([CarlaNatalie](http://carlanatalie.deviantart.com/))
 
 ### Special thanks
 - Kevin Schellenberg [(wikkiewikkie)](https://github.com/wikkiewikkie)
