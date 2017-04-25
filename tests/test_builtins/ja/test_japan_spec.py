@@ -1,6 +1,6 @@
 import pytest
 
-from elizabeth.builtins.ja import JapanSpecProvider
+from elizabeth.builtins import JapanSpecProvider
 
 
 @pytest.fixture

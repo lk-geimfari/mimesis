@@ -1,6 +1,6 @@
 import pytest
 
-from elizabeth.builtins.ru import RussiaSpecProvider
+from elizabeth.builtins import RussiaSpecProvider
 from elizabeth.exceptions import JSONKeyError
 
 

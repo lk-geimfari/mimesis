@@ -1,7 +1,7 @@
 import pytest
 import re
 
-from elizabeth.builtins.pt_br import BrazilSpecProvider
+from elizabeth.builtins import BrazilSpecProvider
 
 
 @pytest.fixture

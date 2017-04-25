@@ -1,5 +1,11 @@
 ## Changelog
 
+### Version 0.3.29
+ - Fixed import error for builtin data providers
+ - Updated data
+ - Fixed bugs and other minor improvements
+
+---
 
 ### Version 0.3.28
  - Changed structure of `builtins`

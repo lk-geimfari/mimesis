@@ -16,7 +16,7 @@ Repository: https://github.com/lk-geimfari/elizabeth
 
 from elizabeth.core import *
 
-__version__ = '0.3.28'
+__version__ = '0.3.29'
 __author__ = 'Likid Geimfari'
 
 __all__ = [
