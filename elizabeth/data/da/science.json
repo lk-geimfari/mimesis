@@ -1,6 +1,12 @@
 {
   "article": [
-    "Test"
+    "https://da.wikipedia.org/wiki/Sort_hul",
+	"https://da.wikipedia.org/wiki/Gravitation",
+	"https://da.wikipedia.org/wiki/Elektromagnetisk_stråling",
+	"https://da.wikipedia.org/wiki/Elektromagnetiske_spektrum",
+	"https://da.wikipedia.org/wiki/Hawkingstråling",
+	"https://da.wikipedia.org/wiki/Antistof_(fysik)",
+	"https://da.wikipedia.org/wiki/Kvantemekanisk_tunnelering"
   ],
   "chemical_element": [
     "Hydrogen|H|1",
