@@ -2615,16 +2615,18 @@ class UnitSystem(object):
         :Example:
             mega
         """
+        sign = sign.lower()
+
         if symbol:
             prefixes = SI_PREFIXES['_sym_']
         else:
             prefixes = SI_PREFIXES
 
-        if sign in list(prefixes.keys()):
+        try:
             return choice(prefixes[sign])
-
-        prefix = choice(prefixes['positive'])
-        return prefix
+        except KeyError:
+            raise WrongArgument(
+                "Unsupported sign. Use: 'positive' or 'negative'")
 
 
 class Generic(object):

@@ -4,6 +4,7 @@ import pytest
 
 from elizabeth.core.providers import UnitSystem
 from elizabeth.data.int import SI_PREFIXES
+from elizabeth.exceptions import WrongArgument
 
 
 @pytest.fixture
@@ -188,17 +189,20 @@ def test_radioactivity(us):
 
 
 def test_prefix(us):
-    result_po = us.prefix(sign='positive', symbol=False)
-    assert result_po in SI_PREFIXES['positive']
+    signs = list(SI_PREFIXES.keys())
+    sym_signs = list(SI_PREFIXES['_sym_'])
 
-    result_ne = us.prefix(sign='negative', symbol=False)
-    assert result_ne in SI_PREFIXES['negative']
+    for sign in signs:
+        if not sign.startswith('_'):
+            res = us.prefix(sign=sign, symbol=False)
+            assert res in SI_PREFIXES[sign]
 
-    result_ne_sym = us.prefix(sign='negative', symbol=True)
-    assert result_ne_sym in SI_PREFIXES['_sym_']['negative']
+    for sign in sym_signs:
+        res = us.prefix(sign=sign, symbol=True)
+        assert res in SI_PREFIXES['_sym_'][sign]
 
-    result_po_sym = us.prefix(sign='positive', symbol=True)
-    assert result_po_sym in SI_PREFIXES['_sym_']['positive']
+    with pytest.raises(WrongArgument):
+        us.prefix(sign='nil')
 
 
 def test_information(us):
@@ -207,3 +211,11 @@ def test_information(us):
 
     result = us.information(symbol=False)
     assert result == 'byte'
+
+
+def test_force(us):
+    result_sym = us.force(symbol=True)
+    assert result_sym == 'N'
+
+    result = us.force(symbol=False)
+    assert result == 'newton'

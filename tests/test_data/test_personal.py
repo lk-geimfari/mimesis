@@ -81,6 +81,9 @@ def test_username(personal):
     result = personal.username()
     assert re.match(USERNAME_REGEX, result)
 
+    with pytest.raises(WrongArgument):
+        personal.username(gender='nil')
+
 
 def test_email(personal):
     result = personal.email()

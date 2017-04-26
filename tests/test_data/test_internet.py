@@ -12,6 +12,7 @@ from elizabeth.data.int import (
     HTTP_STATUS_CODES,
     NETWORK_PROTOCOLS
 )
+from elizabeth.exceptions import WrongArgument
 from tests.test_data._patterns import (
     HOME_PAGE,
     IP_V6_REGEX,
@@ -100,6 +101,9 @@ def test_network_protocol(net):
     for layer in layers:
         result = net.network_protocol(layer=layer)
         assert result in NETWORK_PROTOCOLS[layer]
+
+    with pytest.raises(WrongArgument):
+        net.network_protocol(layer="super")
 
 
 def test_ip_v4(net):

@@ -1,3 +1,4 @@
+import pytest
 from elizabeth.decorators import romanized
 
 
@@ -26,3 +27,13 @@ def test_russian_mixed_text():
 
 def test_ukrainian():
     assert 'Ukrayins’ka mova!' == ukrainian_text()
+
+
+def test_not_implemented_error():
+
+    @romanized('nil')
+    def user():
+        return 'Elizabeth'
+
+    with pytest.raises(KeyError):
+        user()

@@ -15,31 +15,17 @@ def file():
 
 
 def test_extension(file):
-    text = file.extension(file_type='text')
-    assert text in EXTENSIONS['text']
+    file_types = list(EXTENSIONS.keys())
 
-    source = file.extension(file_type='source')
-    assert source in EXTENSIONS['source']
+    for typ in file_types:
+        assert file.extension(file_type=typ) in EXTENSIONS[typ]
 
 
 def test_mime_type(file):
-    application = file.mime_type(type_t='application')
-    assert application in MIME_TYPES['application']
+    mime_types = list(MIME_TYPES.keys())
 
-    audio = file.mime_type(type_t='audio')
-    assert audio in MIME_TYPES['audio']
-
-    image = file.mime_type(type_t='image')
-    assert image in MIME_TYPES['image']
-
-    message = file.mime_type(type_t='message')
-    assert message in MIME_TYPES['message']
-
-    text = file.mime_type(type_t='text')
-    assert text in MIME_TYPES['text']
-
-    video = file.mime_type(type_t='video')
-    assert video in MIME_TYPES['video']
+    for mime in mime_types:
+        assert file.mime_type(type_t=mime) in MIME_TYPES[mime]
 
     with pytest.raises(ValueError):
-        file.mime_type(type_t='blablabla')
+        file.mime_type(type_t='nil')

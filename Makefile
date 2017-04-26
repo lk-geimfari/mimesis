@@ -1,6 +1,6 @@
 ROOT=./
 
-VERSION = 0.3.22
+VERSION = 0.3.30
 PROJECT_NAME = Elizabeth
 REPOSITORY_URL = https://github.com/lk-geimfari/elizabeth
 
