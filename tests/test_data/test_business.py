@@ -42,5 +42,6 @@ def test_price(generic):
     assert symbol in currencies
 
     # invalid locale should use default
-    generic.business.locale = "xx"
-    assert CURRENCY_SYMBOLS['default'] in generic.business.price()
+    business = generic.business
+    business.locale = "xx"
+    assert CURRENCY_SYMBOLS['default'] in business.price()
