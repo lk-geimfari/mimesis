@@ -14,12 +14,10 @@
 
 ## Description
 
-**Elizabeth** is a fast and easy to use Python library for generating dummy data for a variety of purposes.  This data can be particularly useful during software development and testing.  For example, it could be used to populate a testing database for a web application with user information such as email addresses, usernames, first names, last names, etc.
-
-Elizabeth uses a JSON-based datastore and does not require any modules that are not in the Python standard library. There are over nineteen different [data providers](https://github.com/lk-geimfari/elizabeth/blob/master/PROVIDERS.md) available, which can produce data related to food, people, computer hardware, transportation, addresses, and more.
+**Elizabeth** is a fast and easy to use Python library, which helps generate mock datadata for a variety of purposes.  This data can be particularly useful during software development and testing.  For example, it could be used to populate a testing database for a web application with user information such as email addresses, usernames, first names, last names, etc. The library was written with the use of tools from the standard Python library, and therefore, it doesn’t have any side dependencies. Currently the library supports [30](https://github.com/lk-geimfari/elizabeth#locales) languages and [19](https://github.com/lk-geimfari/elizabeth/blob/master/PROVIDERS.md) class providers, supplying various data.
 
 ## Documentation
-Elizabeth is simple to use, and the below examples should help you get started.  Complete documentation for Elizabeth is available here: [http://elizabeth.readthedocs.io/](http://elizabeth.readthedocs.io/)
+Elizabeth is simple to use, and the below examples should help you get started. Complete documentation for Elizabeth is available [here](http://elizabeth.readthedocs.io/). You can read more about this library in English [here](https://medium.com/wemake-services/generating-mock-data-using-elizabeth-part-i-ca5a55b8027c) and in Russian [here](https://habrahabr.ru/post/318120/) and [here](https://habrahabr.ru/post/319880/).
 
 ## Installation
 To install `Elizabeth`, simply:
@@ -31,10 +29,8 @@ To install `Elizabeth`, simply:
 Also you can install it manually (pre-activated virtualenv):
 ```zsh
 (env) ➜  cd elizabeth/
-(env) ➜  make test
 (env) ➜  make install
 ```
-
 
 ## Basic Usage
 
@@ -54,7 +50,7 @@ Also you can install it manually (pre-activated virtualenv):
 
 ## Locales
 
-You can specify a locale when creating providers and they will return data that is appropriate for the language or country associated with that locale.  `Elizabeth` currently includes support for 30 different locales. See details for more information.
+You can specify a locale when creating providers and they will return data that is appropriate for the language or country associated with that locale. `Elizabeth` currently includes support for 30 different locales. See details for more information.
 
 <details>
 <!-- toc -->
@@ -133,9 +129,6 @@ providers from one object.
 
 >>> g.internet.network_protocol(layer='application')
 'AMQP'
-
->>> g.science.math_formula()
-'(a/b)/(c/d) = (a/b) * (d/c)'
 ```
 
 Keep in mind that the library supports more than nineteen data providers and it's means that you can create data for almost anything you want:
