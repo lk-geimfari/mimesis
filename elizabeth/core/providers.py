@@ -2656,8 +2656,11 @@ class Generic(object):
         self.path = Path()
 
     def __getattr__(self, attrname):
-        """Get _attribute witout underscore"""
-
+        """Get _attribute without underscore
+        
+        :param attrname: Attribute name.
+        :return: An attribute.
+        """
         attribute = object.__getattribute__(self, '_' + attrname)
         if attribute and callable(attribute):
             attribute = attribute(self.locale)
