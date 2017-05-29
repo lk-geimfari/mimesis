@@ -38,7 +38,7 @@ Basic Usage
 Locales
 -------
 
-You can specify a locale when creating providers and they will return data that is appropriate for the language or country associated with that locale.  `Elizabeth` currently includes support for 23 different locales:
+You can specify a locale when creating providers and they will return data that is appropriate for the language or country associated with that locale.  `Elizabeth` currently includes support for 30 different locales:
 
 =======  ====================  ====================
 Code     Name                  Native Name
@@ -47,10 +47,13 @@ Code     Name                  Native Name
 `da`     Danish                Dansk
 `de`     German                Deutsch
 `de-at`  Austrian german       Deutsch
+`de-ch`  Swiss german          Deutsch
 `en`     English               English
 `en-au`  Australian English    English
+`en-ca`  Canadian English      English
 `en-gb`  British English       English
 `es`     Spanish               Español
+`es`     Mexican Spanish       Español
 `fa`     Farsi                 فارسی
 `fi`     Finnish               Suomi
 `fr`     French                Français
@@ -60,6 +63,7 @@ Code     Name                  Native Name
 `jp`     Japanese              日本語
 `ko`	 Korean                한국어
 `nl`     Dutch                 Nederlands
+`nl-be`  Belgium Dutch         Nederlands
 `no`     Norwegian             Norsk
 `pl`     Polish                Polski
 `pt`     Portuguese            Português
@@ -67,6 +71,8 @@ Code     Name                  Native Name
 `ru`     Russian               Русский
 `sv`     Swedish               Svenska
 `tr`     Turkish               Türkçe
+`uk`     Ukrainian             Український
+`zh`     Chinese               汉语
 =======  ====================  ====================
 
 Usage
@@ -81,7 +87,6 @@ Usage
     'Ports are used to communicate with the external world.'
     >>> de.sentence()
     'Wir müssen nicht vergessen Zickler.'
-    >>>
     >>> en.color()
     'Blue'
     >>> de.color()
