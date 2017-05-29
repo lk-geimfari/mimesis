@@ -2184,7 +2184,7 @@ class Internet(object):
     @staticmethod
     def network_protocol(layer='application'):
         """Get a random network protocol form OSI model.
-        
+
         :param layer: Layer of protocol: application, data_link,
         network, physical, presentation, session and transport.
         :return: Protocol name.
@@ -2632,10 +2632,6 @@ class UnitSystem(object):
 class Generic(object):
     """A lazy initialization of locale for all classes that have locales."""
 
-    # (Priority: high)
-    # TODO: Update this class using __getattr__ or add the other
-    # more acceptable mechanism.
-
     def __init__(self, locale):
         """
         :param locale: Current locale.
@@ -2659,6 +2655,14 @@ class Generic(object):
         self.transport = Transport()
         self.path = Path()
 
+    def __getattr__(self, attrname):
+        """Get _attribute witout underscore"""
+
+        attribute = object.__getattribute__(self, '_' + attrname)
+        if attribute and callable(attribute):
+            attribute = attribute(self.locale)
+            return attribute
+
     def __str__(self):
         return '{}:{}:{}'.format(
             self.__class__.__name__,
@@ -2677,51 +2681,3 @@ class Generic(object):
             setattr(self, name, cls())
         else:
             raise TypeError("Provider must be a class")
-
-    @property
-    def personal(self):
-        if callable(self._personal):
-            self._personal = self._personal(self.locale)
-        return self._personal
-
-    @property
-    def address(self):
-        if callable(self._address):
-            self._address = self._address(self.locale)
-        return self._address
-
-    @property
-    def datetime(self):
-        if callable(self._datetime):
-            self._datetime = self._datetime(self.locale)
-        return self._datetime
-
-    @property
-    def business(self):
-        if callable(self._business):
-            self._business = self._business(self.locale)
-        return self._business
-
-    @property
-    def text(self):
-        if callable(self._text):
-            self._text = self._text(self.locale)
-        return self._text
-
-    @property
-    def food(self):
-        if callable(self._food):
-            self._food = self._food(self.locale)
-        return self._food
-
-    @property
-    def science(self):
-        if callable(self._science):
-            self._science = self._science(self.locale)
-        return self._science
-
-    @property
-    def code(self):
-        if callable(self._code):
-            self._code = self._code(self.locale)
-        return self._code

@@ -50,6 +50,11 @@ def test_base_code(generic):
     assert result is not None
 
 
+def test_bad_argument(generic):
+    with pytest.raises(AttributeError):
+        result = generic.bad_argument
+
+
 def test_add_provider(generic):
     class CustomProvider:
         class Meta:

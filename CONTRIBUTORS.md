@@ -41,3 +41,4 @@
 - Vladislav Glinsky [(cl0ne)](https://github.com/cl0ne)
 - Yn-Coder [(yn-coder)](https://github.com/yn-coder)
 - Dmytro Zelinskyi [(zelds)](https://github.com/zelds)
+- axcel [(axce1)](https://github.com/axce1)
