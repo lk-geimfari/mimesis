@@ -111,7 +111,7 @@ Using locales:
 
 ```
 
-When you only need to generate data for a single locale, use the `Generic` provider, and you can access all `Elizabeth`
+When you only need to generate data for a single locale, use the `Generic()` provider, and you can access all `Elizabeth`
 providers from one object.
 
 ```python
@@ -218,7 +218,7 @@ and do following:
 Result: [screenshot](https://raw.githubusercontent.com/lk-geimfari/elizabeth/master/other/screenshots/en_bootstrap.png)
 
 ## Custom Providers
-You also can add custom provider to `Generic`.
+You also can add custom provider to `Generic()`, using `add_provider()`:
 
 ```python
 >>> class SomeProvider():
@@ -246,7 +246,8 @@ You also can add custom provider to `Generic`.
 'Bye!'
 ```
 
-Also you can add multiple custom providers using method `add_providers()`:
+or multiple custom providers using method `add_providers()`:
+
 ```python
 >>> generic.add_providers(SomeProvider, Another)
 ```
