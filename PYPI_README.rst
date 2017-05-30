@@ -260,7 +260,6 @@ import them explicitly:
     ...     class Meta:
     ...         name = "brazil_provider"
     ...
-
     >>> generic.add_provider(BrazilProvider)
     >>> generic.brazil_provider.cpf()
     '696.441.186-00'
