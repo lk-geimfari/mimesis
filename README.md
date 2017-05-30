@@ -246,6 +246,11 @@ You also can add custom provider to `Generic`.
 'Bye!'
 ```
 
+Also you can add multiple custom providers using method `add_providers()`:
+```python
+>>> generic.add_providers(SomeProvider, Another)
+```
+
 ## Builtins specific data providers
 
 Some countries have data types specific to that country. For example social security numbers in the United States (`en` locale), and cadastro de pessoas físicas (CPF) in Brazil (`pt-br` locale).

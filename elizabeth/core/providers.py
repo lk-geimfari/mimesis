@@ -2657,7 +2657,7 @@ class Generic(object):
 
     def __getattr__(self, attrname):
         """Get _attribute without underscore
-        
+
         :param attrname: Attribute name.
         :return: An attribute.
         """
@@ -2674,6 +2674,11 @@ class Generic(object):
         )
 
     def add_provider(self, cls):
+        """Add a custom provider to Generic() object.
+
+        :param cls: Custom provider.
+        :return: None
+        """
         if inspect.isclass(cls):
             name = ''
             if hasattr(cls, 'Meta'):
@@ -2684,3 +2689,12 @@ class Generic(object):
             setattr(self, name, cls())
         else:
             raise TypeError("Provider must be a class")
+
+    def add_providers(self, *providers):
+        """Add a lot of custom providers to Generic() object.
+
+        :param providers: Custom providers.
+        :return: None
+        """
+        for provider in providers:
+            self.add_provider(provider)

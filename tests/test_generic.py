@@ -83,3 +83,29 @@ def test_add_provider(generic):
     assert generic.unnamedprovider.nothing() is None
 
     assert 'unnamedprovider' == UnnamedProvider.__name__.lower()
+
+
+def test_add_providers(generic):
+
+    class Provider1(object):
+        @staticmethod
+        def one():
+            return 1
+
+    class Provider2(object):
+        @staticmethod
+        def two():
+            return 2
+
+    class Provider3(object):
+        @staticmethod
+        def three():
+            return 3
+
+    generic.add_providers(Provider1, Provider2, Provider3)
+    assert generic.provider1.one() == 1
+    assert generic.provider2.two() == 2
+    assert generic.provider3.three() == 3
+
+    with pytest.raises(TypeError):
+        generic.add_providers(True)
