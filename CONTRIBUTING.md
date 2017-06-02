@@ -14,7 +14,7 @@
 
 - If you add any functionality, then you should add tests for it.
 
-- Do not write bad code.
+- Do not write bad code!
 
 ----
 
