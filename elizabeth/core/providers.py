@@ -64,7 +64,24 @@ __all__ = [
 ]
 
 
-class Address(object):
+class BaseProvider(object):
+    """This is a base class for all providers."""
+
+    locale = None
+
+    def __str__(self):
+        """
+        Nice and pretty representation of a class.
+        """
+        return '{}:{}:{}'.format(
+            self.__class__.__name__,
+            self.locale,
+            locale_info(self.locale)
+        )
+
+
+
+class Address(BaseProvider):
     """Class for generate fake address data."""
 
     def __init__(self, locale='en'):
@@ -73,13 +90,6 @@ class Address(object):
         """
         self.locale = locale
         self.data = pull('address.json', self.locale)
-
-    def __str__(self):
-        return '{}:{}:{}'.format(
-            self.__class__.__name__,
-            self.locale,
-            locale_info(self.locale)
-        )
 
     @staticmethod
     def street_number(maximum=1400):
@@ -257,7 +267,7 @@ class Address(object):
         return continent
 
 
-class Numbers(object):
+class Numbers(BaseProvider):
     """Class for generating numbers"""
 
     @staticmethod
@@ -343,7 +353,7 @@ class Numbers(object):
         return float(res)
 
 
-class Structured(object):
+class Structured(BaseProvider):
     """Provider for structured text data such as CSS, Delimited, HTML, etc."""
 
     def __init__(self, locale='en'):
@@ -353,13 +363,6 @@ class Structured(object):
         self.locale = locale
         self.internet = Internet()
         self.text = Text(self.locale)
-
-    def __str__(self):
-        return '{}:{}:{}'.format(
-            self.__class__.__name__,
-            self.locale,
-            locale_info(self.locale)
-        )
 
     def css(self):
         """Generates a random snippet of CSS.
@@ -511,7 +514,7 @@ class Structured(object):
         return json.dumps(data, indent=4)
 
 
-class Text(object):
+class Text(BaseProvider):
     """Class for generate text data, i.e text, lorem ipsum and another."""
 
     def __init__(self, locale='en'):
@@ -520,13 +523,6 @@ class Text(object):
         """
         self.locale = locale
         self.data = pull('text.json', self.locale)
-
-    def __str__(self):
-        return '{}:{}:{}'.format(
-            self.__class__.__name__,
-            self.locale,
-            locale_info(self.locale)
-        )
 
     def alphabet(self, letter_case=None):
         """Get an alphabet for current locale.
@@ -660,7 +656,7 @@ class Text(object):
         return choice(answers)
 
 
-class Code(object):
+class Code(BaseProvider):
     """Class that provides methods for generating codes (isbn, asin & etc.)"""
 
     def __init__(self, locale):
@@ -668,13 +664,6 @@ class Code(object):
         :param locale: Current locale.
         """
         self.locale = locale
-
-    def __str__(self):
-        return '{}:{}:{}'.format(
-            self.__class__.__name__,
-            self.locale,
-            locale_info(self.locale)
-        )
 
     @staticmethod
     def custom_code(mask="@###", char='@', digit='#'):
@@ -776,7 +765,7 @@ class Code(object):
         return self.custom_code(mask=mask)
 
 
-class Business(object):
+class Business(BaseProvider):
     """Class for generating data for business."""
 
     def __init__(self, locale='en'):
@@ -785,13 +774,6 @@ class Business(object):
         """
         self.locale = locale
         self.data = pull('business.json', self.locale)
-
-    def __str__(self):
-        return '{}:{}:{}'.format(
-            self.__class__.__name__,
-            self.locale,
-            locale_info(self.locale)
-        )
 
     def company_type(self, abbr=False):
         """Get a random type of business entity.
@@ -856,7 +838,7 @@ class Business(object):
         return fmt.format(price, currencies['default'])
 
 
-class Personal(object):
+class Personal(BaseProvider):
     """Class for generate personal data, i.e names, surnames,
     age and another."""
 
@@ -869,13 +851,6 @@ class Personal(object):
         self._store = {
             'age': 0
         }
-
-    def __str__(self):
-        return '{}:{}:{}'.format(
-            self.__class__.__name__,
-            self.locale,
-            locale_info(self.locale)
-        )
 
     def age(self, minimum=16, maximum=66):
         """Get a random integer value.
@@ -1401,7 +1376,7 @@ class Personal(object):
         return choice(ENGLISH_LEVEL)
 
 
-class Datetime(object):
+class Datetime(BaseProvider):
     """Class for generate the fake data that you can use for
     working with date and time."""
 
@@ -1411,13 +1386,6 @@ class Datetime(object):
         """
         self.locale = locale
         self.data = pull('datetime.json', self.locale)
-
-    def __str__(self):
-        return '{}:{}:{}'.format(
-            self.__class__.__name__,
-            self.locale,
-            locale_info(self.locale)
-        )
 
     def day_of_week(self, abbr=False):
         """Get a random day of week.
@@ -1524,7 +1492,7 @@ class Datetime(object):
         return randint(1, 31)
 
 
-class File(object):
+class File(BaseProvider):
     """Class for generate fake data for files."""
 
     @staticmethod
@@ -1559,7 +1527,7 @@ class File(object):
         return mime_type
 
 
-class Science(object):
+class Science(BaseProvider):
     """Class for getting scientific data"""
 
     def __init__(self, locale='en'):
@@ -1568,13 +1536,6 @@ class Science(object):
         """
         self.locale = locale
         self._data = pull('science.json', self.locale)
-
-    def __str__(self):
-        return '{}:{}:{}'.format(
-            self.__class__.__name__,
-            self.locale,
-            locale_info(self.locale)
-        )
 
     @staticmethod
     def math_formula():
@@ -1618,7 +1579,7 @@ class Science(object):
         return choice(articles)
 
 
-class Development(object):
+class Development(BaseProvider):
     """Class for getting fake data for Developers."""
 
     @staticmethod
@@ -1731,22 +1692,15 @@ class Development(object):
         return url.format(post_id)
 
 
-class Food(object):
+class Food(BaseProvider):
     """Class for Food, i.e fruits, vegetables, berries and other."""
 
     def __init__(self, locale='en'):
         """
         :param locale: Current locale.
         """
-        self.lang = locale
-        self._data = pull('food.json', self.lang)
-
-    def __str__(self):
-        return '{}:{}:{}'.format(
-            self.__class__.__name__,
-            self.lang,
-            locale_info(self.lang)
-        )
+        self.locale = locale
+        self._data = pull('food.json', self.locale)
 
     def vegetable(self):
         """Get a random vegetable.
@@ -1799,7 +1753,7 @@ class Food(object):
         return choice(drinks)
 
 
-class Hardware(object):
+class Hardware(BaseProvider):
     """Class for generate data about hardware."""
 
     @staticmethod
@@ -1929,7 +1883,7 @@ class Hardware(object):
         return choice(PHONE_MODELS)
 
 
-class ClothingSizes(object):
+class ClothingSizes(BaseProvider):
     """Class for generate clothing sizes data"""
 
     @staticmethod
@@ -1972,7 +1926,7 @@ class ClothingSizes(object):
         return randint(int(minimum), int(maximum))
 
 
-class Internet(object):
+class Internet(BaseProvider):
     """Class for generate the internet data."""
 
     @staticmethod
@@ -2201,7 +2155,7 @@ class Internet(object):
                 'Unsupported layer, use: {}'.format(list(NETWORK_PROTOCOLS.keys())))
 
 
-class Transport(object):
+class Transport(BaseProvider):
     """Class that provides dummy data about transport."""
 
     def __init__(self):
@@ -2327,7 +2281,7 @@ class Path(object):
             self.dev_dir(user_gender), project)
 
 
-class UnitSystem(object):
+class UnitSystem(BaseProvider):
     """Class for generating name of unit.
     """
 
@@ -2629,7 +2583,7 @@ class UnitSystem(object):
                 "Unsupported sign. Use: 'positive' or 'negative'")
 
 
-class Generic(object):
+class Generic(BaseProvider):
     """A lazy initialization of locale for all classes that have locales."""
 
     def __init__(self, locale):
@@ -2665,13 +2619,6 @@ class Generic(object):
         if attribute and callable(attribute):
             attribute = attribute(self.locale)
             return attribute
-
-    def __str__(self):
-        return '{}:{}:{}'.format(
-            self.__class__.__name__,
-            self.locale,
-            locale_info(self.locale)
-        )
 
     def add_provider(self, cls):
         """Add a custom provider to Generic() object.
