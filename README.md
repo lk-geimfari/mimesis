@@ -17,7 +17,7 @@
 **Elizabeth** is a fast and easy to use Python library, which helps generate mock datadata for a variety of purposes.  This data can be particularly useful during software development and testing.  For example, it could be used to populate a testing database for a web application with user information such as email addresses, usernames, first names, last names, etc. The library was written with the use of tools from the standard Python library, and therefore, it doesn’t have any side dependencies. Currently the library supports [30](https://github.com/lk-geimfari/elizabeth#locales) languages and [19](https://github.com/lk-geimfari/elizabeth/blob/master/PROVIDERS.md) class providers, supplying various data.
 
 ## Documentation
-Elizabeth is simple to use, and the below examples should help you get started. Complete documentation for Elizabeth is available [here](http://elizabeth.readthedocs.io/). You can read more about this library in English [here](https://medium.com/wemake-services/generating-mock-data-using-elizabeth-part-i-ca5a55b8027c) and in Russian [here](https://habrahabr.ru/post/318120/) and [here](https://habrahabr.ru/post/319880/).
+Elizabeth is simple to use, and the below examples should help you get started. Complete documentation for Elizabeth is available [here](http://elizabeth.readthedocs.io/). You can read more about this library in English here: [part 1](https://medium.com/wemake-services/generating-mock-data-using-elizabeth-part-i-ca5a55b8027c) and [part 2](https://medium.com/wemake-services/generating-mock-data-with-elizabeth-part-ii-bb16a3f3106f).
 
 ## Installation
 To install `Elizabeth`, simply:
