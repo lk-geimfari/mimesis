@@ -47,7 +47,7 @@ Basic Usage:
     >>> person.full_name(gender='female')
     'Antonetta Garrison'
 
-    >>> person.email(gender='male)
+    >>> person.email(gender='male')
     'oren5936@live.com'
 
     >>> person.occupation()
