@@ -39,13 +39,13 @@ Basic Usage
     >>> from elizabeth import Personal
     >>> p = Personal()
     
-	>>> p.full_name(gender='female')
+    >>> p.full_name(gender='female')
     'Antonetta Garrison'
     
-	>>> p.blood_type()
+    >>> p.blood_type()
     'O-'
     
-	>>> p.occupation()
+    >>> p.occupation()
     'Programmer'
 
 Locales
