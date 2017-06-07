@@ -5,6 +5,17 @@ Elizabeth
 
 There are over eighteen different `data providers <https://github.com/lk-geimfari/elizabeth/blob/master/PROVIDERS.md>`_ available, which can produce data related to food, people, computer hardware, transportation, addresses, and more.  *Elizabeth* does not require any modules that are not in the Python standard library.
 
+Best Practice
+------------
+We strongly recommend to read articles which published in our blog_ on Medium. There we are speak about best practices and a number of most useful features of the library.
+
+Generating mock data using Elizabeth: First_ and Second_ part.
+
+.. _First: https://medium.com/wemake-services/generating-mock-data-using-elizabeth-part-i-ca5a55b8027c
+.. _Second: https://medium.com/wemake-services/generating-mock-data-with-elizabeth-part-ii-bb16a3f3106f
+.. _blog: https://medium.com/wemake-services
+
+
 Installation
 ------------
 
