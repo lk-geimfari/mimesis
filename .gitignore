@@ -158,3 +158,6 @@ ENV/
 
 #### python ####
 .cache
+
+#### IDE ####
+.idea
