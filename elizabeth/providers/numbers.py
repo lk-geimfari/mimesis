@@ -1,6 +1,6 @@
 import array
 
-from elizabeth.core.providers.base import BaseProvider
+from elizabeth.providers.base import BaseProvider
 
 
 class Numbers(BaseProvider):

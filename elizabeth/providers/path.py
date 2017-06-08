@@ -1,12 +1,12 @@
 import os
 import sys
 
-from elizabeth.core.providers import BaseProvider, Personal
 from elizabeth.data.int.development import (
     PROGRAMMING_LANGS,
     PROJECT_NAMES,
     FOLDERS,
 )
+from elizabeth.providers import BaseProvider, Personal
 
 
 class Path(BaseProvider):

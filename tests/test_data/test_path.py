@@ -4,12 +4,12 @@ from unittest.mock import patch
 
 import pytest
 
-from elizabeth.core.providers import Path
 from elizabeth.data.int import (
     PROGRAMMING_LANGS,
     FOLDERS,
     PROJECT_NAMES
 )
+from elizabeth.providers import Path
 
 
 @pytest.fixture

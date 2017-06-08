@@ -2,7 +2,6 @@
 
 import pytest
 
-from elizabeth.core.providers import Development
 from elizabeth.data.int import (
     FRONTEND,
     PROGRAMMING_LANGS,
@@ -13,6 +12,7 @@ from elizabeth.data.int import (
     BACKEND,
     SQL
 )
+from elizabeth.providers import Development
 
 
 @pytest.fixture

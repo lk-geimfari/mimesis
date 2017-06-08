@@ -1,8 +1,8 @@
 from string import ascii_uppercase
 
 from elizabeth.data.int.code import LOCALE_CODES, ISBN_GROUPS, IMEI_TACS
+from elizabeth.providers.base import BaseProvider
 from elizabeth.utils import luhn_checksum
-from elizabeth.core.providers.base import BaseProvider
 
 
 class Code(BaseProvider):

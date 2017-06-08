@@ -1,19 +1,18 @@
 import json
 
-from elizabeth.core.providers import (
-    BaseProvider,
-    Text,
-    Internet,
-    Personal,
-    Hardware,
-)
-
 from elizabeth.data.int.development import (
     CSS_SELECTORS,
     CSS_PROPERTIES,
     CSS_SIZE_UNITS,
     HTML_MARKUP_TAGS,
     HTML_CONTAINER_TAGS,
+)
+from elizabeth.providers import (
+    BaseProvider,
+    Text,
+    Internet,
+    Personal,
+    Hardware,
 )
 
 

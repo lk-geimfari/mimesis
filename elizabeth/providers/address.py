@@ -1,12 +1,11 @@
-from elizabeth.core.providers import BaseProvider
-
 from elizabeth.data.int.address import (
     CONTINENT_CODES,
     COUNTRIES_ISO,
     SHORTENED_ADDRESS_FMT,
 )
+from elizabeth.providers import BaseProvider
+from elizabeth.providers import Code
 from elizabeth.utils import pull
-from elizabeth.core.providers import Code
 
 
 class Address(BaseProvider):

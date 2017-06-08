@@ -2,9 +2,9 @@
 
 import pytest
 
-from elizabeth.core.providers import UnitSystem
 from elizabeth.data.int import SI_PREFIXES
 from elizabeth.exceptions import WrongArgument
+from elizabeth.providers import UnitSystem
 
 
 @pytest.fixture

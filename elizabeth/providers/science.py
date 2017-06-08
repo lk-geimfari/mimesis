@@ -1,7 +1,6 @@
-from elizabeth.core.providers import BaseProvider
-
-from elizabeth.utils import pull
 from elizabeth.data.int.scientific import MATH_FORMULAS
+from elizabeth.providers import BaseProvider
+from elizabeth.utils import pull
 
 
 class Science(BaseProvider):

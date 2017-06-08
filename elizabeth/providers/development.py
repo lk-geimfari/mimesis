@@ -1,4 +1,3 @@
-from elizabeth.core.providers import BaseProvider
 from elizabeth.data.int.development import (
     LICENSES,
     SQL,
@@ -9,6 +8,7 @@ from elizabeth.data.int.development import (
     FRONTEND,
     OS,
 )
+from elizabeth.providers import BaseProvider
 
 
 class Development(BaseProvider):

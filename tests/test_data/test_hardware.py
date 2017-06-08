@@ -2,13 +2,13 @@
 
 import pytest
 
-from elizabeth.core.providers import Hardware
 from elizabeth.data.int import (
     CPU_CODENAMES, PHONE_MODELS, HDD_SSD,
     RESOLUTIONS, MANUFACTURERS, CPU,
     GENERATION, SCREEN_SIZES, GRAPHICS,
     GENERATION_ABBR
 )
+from elizabeth.providers import Hardware
 
 
 @pytest.fixture

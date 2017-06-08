@@ -1,6 +1,6 @@
 import inspect
 
-from elizabeth.core.providers import (
+from elizabeth.providers import (
     BaseProvider,
     Personal,
     Address,
