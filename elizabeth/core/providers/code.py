@@ -95,9 +95,8 @@ class Code(BaseProvider):
         """Generate a random IMEI (International Mobile Station Equipment Identity).
 
         :return: IMEI.
-
         :Example:
-        353918052107063
+            353918052107063
         """
         num = self.random.choice(IMEI_TACS) + self.custom_code(mask='######')
         return num + luhn_checksum(num)

@@ -21,6 +21,7 @@ from elizabeth.core.providers import (
     Path,
 )
 
+
 class Generic(BaseProvider):
     """A lazy initialization of locale for all classes that have locales."""
 
