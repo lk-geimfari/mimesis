@@ -2,7 +2,7 @@
 
 import pytest
 
-from elizabeth.providers import ClothingSizes
+from elizabeth.providers.clothing import ClothingSizes
 
 
 @pytest.fixture

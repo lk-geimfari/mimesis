@@ -1,6 +1,5 @@
-from elizabeth.providers import BaseProvider
-
 from elizabeth.utils import pull
+from .base import BaseProvider
 
 
 class Food(BaseProvider):

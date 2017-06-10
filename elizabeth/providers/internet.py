@@ -1,4 +1,3 @@
-from elizabeth.core.providers import BaseProvider, File, Personal
 from elizabeth.data.int.network import (
     HTTP_METHODS,
     HTTP_STATUS_CODES,
@@ -11,6 +10,10 @@ from elizabeth.data.int.network import (
     NETWORK_PROTOCOLS,
 )
 from elizabeth.exceptions import WrongArgument
+
+from .base import BaseProvider
+from .file import File
+from .personal import Personal
 
 
 class Internet(BaseProvider):
@@ -79,9 +82,9 @@ class Internet(BaseProvider):
         """
         mac_hex = [
             0x00, 0x16, 0x3e,
-           self.random.randint(0x00, 0x7f),
-           self.random.randint(0x00, 0xff),
-           self.random.randint(0x00, 0xff)
+            self.random.randint(0x00, 0x7f),
+            self.random.randint(0x00, 0xff),
+            self.random.randint(0x00, 0xff)
         ]
         mac = map(lambda x: "%02x" % x, mac_hex)
         return ':'.join(mac)

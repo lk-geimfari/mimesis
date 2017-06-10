@@ -1,5 +1,5 @@
 from elizabeth.data.int.file import EXTENSIONS, MIME_TYPES
-from elizabeth.providers import BaseProvider
+from .base import BaseProvider
 
 
 class File(BaseProvider):

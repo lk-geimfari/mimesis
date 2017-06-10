@@ -1,6 +1,6 @@
 from random import choice, randint
 
-from elizabeth.core import Code
+from elizabeth.providers.code import Code
 
 # Internal
 _custom_code = Code.custom_code

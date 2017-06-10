@@ -8,7 +8,7 @@ from elizabeth.data.int import (
     GENERATION, SCREEN_SIZES, GRAPHICS,
     GENERATION_ABBR
 )
-from elizabeth.providers import Hardware
+from elizabeth.providers.hardware import Hardware
 
 
 @pytest.fixture

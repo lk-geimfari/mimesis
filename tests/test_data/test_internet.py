@@ -12,7 +12,7 @@ from elizabeth.data.int import (
     NETWORK_PROTOCOLS
 )
 from elizabeth.exceptions import WrongArgument
-from elizabeth.providers import Internet
+from elizabeth.providers.internet import Internet
 from tests.test_data._patterns import (
     HOME_PAGE,
     IP_V6_REGEX,

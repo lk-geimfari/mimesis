@@ -4,7 +4,7 @@ import pytest
 
 from elizabeth.data.int import SI_PREFIXES
 from elizabeth.exceptions import WrongArgument
-from elizabeth.providers import UnitSystem
+from elizabeth.providers.units import UnitSystem
 
 
 @pytest.fixture

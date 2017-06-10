@@ -7,13 +7,11 @@ from elizabeth.data.int.development import (
     HTML_MARKUP_TAGS,
     HTML_CONTAINER_TAGS,
 )
-from elizabeth.providers import (
-    BaseProvider,
-    Text,
-    Internet,
-    Personal,
-    Hardware,
-)
+from .base import BaseProvider
+from .text import Text
+from .internet import Internet
+from .personal import Personal
+from .hardware import Hardware
 
 
 class Structured(BaseProvider):

@@ -12,7 +12,7 @@ from elizabeth.data.int import (
     BACKEND,
     SQL
 )
-from elizabeth.providers import Development
+from elizabeth.providers.development import Development
 
 
 @pytest.fixture

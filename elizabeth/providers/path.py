@@ -6,7 +6,8 @@ from elizabeth.data.int.development import (
     PROJECT_NAMES,
     FOLDERS,
 )
-from elizabeth.providers import BaseProvider, Personal
+from .base import BaseProvider
+from .personal import Personal
 
 
 class Path(BaseProvider):

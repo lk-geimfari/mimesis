@@ -9,7 +9,7 @@ from elizabeth.data.int import (
     FOLDERS,
     PROJECT_NAMES
 )
-from elizabeth.providers import Path
+from elizabeth.providers.path import Path
 
 
 @pytest.fixture

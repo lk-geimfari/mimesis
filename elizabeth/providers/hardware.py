@@ -10,7 +10,7 @@ from elizabeth.data.int.hardware import (
     PHONE_MODELS,
     CPU_CODENAMES,
 )
-from elizabeth.providers import BaseProvider
+from .base import BaseProvider
 
 
 class Hardware(BaseProvider):

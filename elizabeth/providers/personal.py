@@ -15,8 +15,10 @@ from elizabeth.data.int.personal import (
     SEXUALITY_SYMBOLS,
 )
 from elizabeth.exceptions import WrongArgument
-from elizabeth.providers import BaseProvider, Code
 from elizabeth.utils import pull, luhn_checksum
+
+from .base import BaseProvider
+from .code import Code
 
 
 class Personal(BaseProvider):

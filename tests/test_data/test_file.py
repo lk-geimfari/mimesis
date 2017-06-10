@@ -6,7 +6,7 @@ from elizabeth.data.int import (
     EXTENSIONS,
     MIME_TYPES
 )
-from elizabeth.providers import File
+from elizabeth.providers.file import File
 
 
 @pytest.fixture

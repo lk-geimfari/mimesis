@@ -1,6 +1,7 @@
 from elizabeth.data.int.transport import TRUCKS, CARS, AIRPLANES
 
-from elizabeth.providers import BaseProvider, Code
+from .base import BaseProvider
+from .code import Code
 
 
 class Transport(BaseProvider):

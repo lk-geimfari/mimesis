@@ -1,8 +1,8 @@
 import datetime
 
 from elizabeth.data.int.datetime import ROMAN_NUMS
-from elizabeth.providers import BaseProvider
 from elizabeth.utils import pull
+from .base import BaseProvider
 
 
 class Datetime(BaseProvider):

@@ -3,8 +3,8 @@ from elizabeth.data.int.address import (
     COUNTRIES_ISO,
     SHORTENED_ADDRESS_FMT,
 )
-from elizabeth.providers import BaseProvider
-from elizabeth.providers import Code
+from .base import BaseProvider
+from .code import Code
 from elizabeth.utils import pull
 
 

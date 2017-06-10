@@ -1,6 +1,7 @@
 from elizabeth.data.int.scientific import SI_PREFIXES
 from elizabeth.exceptions import WrongArgument
-from elizabeth.providers import BaseProvider
+
+from .base import BaseProvider
 
 
 class UnitSystem(BaseProvider):

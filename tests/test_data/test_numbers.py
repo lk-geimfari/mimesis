@@ -3,7 +3,7 @@ import array
 
 import pytest
 
-from elizabeth.providers import Numbers
+from elizabeth.providers.numbers import Numbers
 
 
 @pytest.fixture

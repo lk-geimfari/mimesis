@@ -8,7 +8,7 @@ from elizabeth.data.int.development import (
     FRONTEND,
     OS,
 )
-from elizabeth.providers import BaseProvider
+from .base import BaseProvider
 
 
 class Development(BaseProvider):

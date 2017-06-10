@@ -1,6 +1,6 @@
 from elizabeth.data.int.business import CURRENCIES, CURRENCY_SYMBOLS
-from elizabeth.providers import BaseProvider
 from elizabeth.utils import pull
+from .base import BaseProvider
 
 
 class Business(BaseProvider):

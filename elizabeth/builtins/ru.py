@@ -2,7 +2,7 @@ from random import choice, randint
 
 from elizabeth.exceptions import JSONKeyError
 from elizabeth.utils import pull
-from elizabeth.core import Code
+from elizabeth.providers.code import Code
 
 
 # Internal
