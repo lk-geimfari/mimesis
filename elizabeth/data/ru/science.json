@@ -181,5 +181,11 @@
     "Цирконий|Zr|40",
     "Эйнштейний|Es|99",
     "Эрбий|Er|68"
+  ],
+  "currency": [
+	"Test"
+  ],
+  "prescription_drug": [
+	"Test"
   ]
 }

@@ -20,6 +20,16 @@ def test_scientific_article(generic):
     assert result in generic.science._data['article']
 
 
+def test_currency(generic):
+    result = generic.science.currency()
+    assert result in generic.science._data['currency']
+
+
+def test_prescription_drug(generic):
+    result = generic.science.prescription_drug()
+    assert result in generic.science._data['prescription_drug']
+
+
 def test_chemical_element(generic):
     # Because: https://travis-ci.org/lk-geimfari/elizabeth/jobs/196565835
     if generic.locale != 'fa':

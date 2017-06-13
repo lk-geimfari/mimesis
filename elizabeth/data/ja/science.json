@@ -180,5 +180,11 @@
     "リバモリウム|Lv|116",
     "ウンウンセプチウム|Uus|117",
     "ウンウンオクチウム|Uuo|118"
+  ],
+  "currency": [
+	"Test"
+  ],
+  "prescription_drug": [
+	"Test"
   ]
 }

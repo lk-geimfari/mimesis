@@ -141,5 +141,11 @@
     "헬륨|He|2",
     "홀뮴|Ho|67",
     "황|S|16"
+  ],
+  "currency": [
+	"Test"
+  ],
+  "prescription_drug": [
+	"Test"
   ]
 }
