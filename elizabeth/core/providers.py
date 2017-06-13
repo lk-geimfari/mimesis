@@ -1577,6 +1577,26 @@ class Science(BaseProvider):
         """
         articles = self._data['article']
         return choice(articles)
+    
+    def currency(self):
+        """Generate a random currency abbreviation.
+
+        :return: Currency abbreviation.
+        :Example:
+            AUD
+        """
+        currencies = self._data['currency']
+        return choice(currencies)
+    
+    def prescription_drug(self):
+        """Generate a random prescription drug name.
+
+        :return: Name of a prescription drug.
+        :Example:
+            Pramipexole
+        """
+        drugs = self._data['prescription_drug']
+        return choice(drugs)
 
     def currency(self):
         """Generate a random currency abbreviation.
