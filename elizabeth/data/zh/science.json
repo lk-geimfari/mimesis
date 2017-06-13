@@ -143,11 +143,5 @@
 	"氩|Ar|18",
 	"钾|K|19",
 	"钙|Ca|20"
-  ],
-  "currency": [
-	"Test"
-  ],
-  "prescription_drug": [
-	"Test"
   ]
 }

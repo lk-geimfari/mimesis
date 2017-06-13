@@ -66,6 +66,11 @@ def food(request):
 
 
 @pytest.fixture(params=locales)
+def medicine(request):
+    return elizabeth.Medicine(request.param)
+
+
+@pytest.fixture(params=locales)
 def personal(request):
     return elizabeth.Personal(request.param)
 

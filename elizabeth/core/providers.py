@@ -52,6 +52,7 @@ __all__ = [
     'Food',
     'Hardware',
     'Internet',
+    'Medicine',
     'Numbers',
     'Path',
     'Personal',
@@ -1578,15 +1579,16 @@ class Science(BaseProvider):
         articles = self._data['article']
         return choice(articles)
 
-    def currency(self):
-        """Generate a random currency abbreviation.
 
-        :return: Currency abbreviation.
-        :Example:
-            AUD
+class Medicine(BaseProvider):
+    """Class for getting fake data for Medicine."""
+
+    def __init__(self, locale='en'):
         """
-        currencies = self._data['currency']
-        return choice(currencies)
+        :param locale: Current language.
+        """
+        self.locale = locale
+        self._data = pull('medicine.json', self.locale)
 
     def prescription_drug(self):
         """Generate a random prescription drug name.
@@ -2618,6 +2620,7 @@ class Generic(BaseProvider):
         self._text = Text
         self._food = Food
         self._science = Science
+        self._medicine = Medicine
         self._code = Code
         self.unit_system = UnitSystem()
         self.file = File()
