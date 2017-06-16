@@ -78,6 +78,10 @@ SUPPORTED_LOCALES = {
         'name': 'Korean',
         'name_local': '한국어'
     },
+    "kz": {
+        "name": "Kazakh",
+        "name_local": "Қазақша"
+    },
     "nl": {
         'name': 'Dutch',
         'name_local': 'Nederlands'
