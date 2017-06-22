@@ -52,7 +52,7 @@ def test_base_code(generic):
 
 def test_bad_argument(generic):
     with pytest.raises(AttributeError):
-        result = generic.bad_argument
+        __ = generic.bad_argument
 
 
 def test_add_provider(generic):

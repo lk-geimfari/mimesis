@@ -78,7 +78,7 @@ class RussiaSpecProvider(object):
         """
         return '%s %s' % (
             self.passport_series(),
-            self.passport_number()
+            self.passport_number(),
         )
 
     @staticmethod

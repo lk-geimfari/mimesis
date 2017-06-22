@@ -11,7 +11,7 @@ from elizabeth.data.int import (
     LICENSES,
     NOSQL,
     BACKEND,
-    SQL
+    SQL,
 )
 
 
@@ -26,7 +26,7 @@ def test_license(dev):
 
 
 def test_version_control_system(dev):
-    vcs = ["Git", "Subversion"]
+    vcs = ['Git', 'Subversion']
     assert dev.version_control_system() in vcs
 
 

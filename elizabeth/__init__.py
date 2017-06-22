@@ -4,11 +4,12 @@
 for a variety of purposes.
 
 This data can be particularly useful during software development and testing.
-For example, it could be used to populate a testing database for a web application with
-user information such as email addresses, usernames, first names, last names, etc.
-Elizabeth uses a JSON-based datastore and does not require any modules that are not in the Python
-standard library. There are over nineteen different data providers available,
-which can produce data related to food, people, computer hardware, transportation, addresses, and more.
+For example, it could be used to populate a testing database for a web
+application with user information such as email addresses, usernames, first
+names, last names, etc. Elizabeth uses a JSON-based datastore and does not
+require any modules that are not in the Python standard library. There are over
+nineteen different data providers available, which can produce data related to
+food, people, computer hardware, transportation, addresses, and more.
 
 Copyright (c) 2016 Likid Geimfari (Isaak Uchakaev)  <likid.geimfari@gmail.com>
 Repository: https://github.com/lk-geimfari/elizabeth
@@ -38,5 +39,5 @@ __all__ = [
     'Text',
     'Transport',
     'UnitSystem',
-    'Generic'
+    'Generic',
 ]

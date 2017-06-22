@@ -5,7 +5,7 @@ import pytest
 from elizabeth.core.providers import File
 from elizabeth.data.int import (
     EXTENSIONS,
-    MIME_TYPES
+    MIME_TYPES,
 )
 
 

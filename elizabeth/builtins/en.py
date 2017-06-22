@@ -26,13 +26,15 @@ class USASpecProvider(object):
         services = {
             'usps': (
                 '#### #### #### #### ####',
-                '@@ ### ### ### US'
+                '@@ ### ### ### US',
             ),
             'fedex': (
-                "#### #### ####",
-                "#### #### #### ###"
+                '#### #### ####',
+                '#### #### #### ###',
             ),
-            'ups': ("1Z@####@##########",)
+            'ups': (
+                '1Z@####@##########',
+            ),
         }
         mask = choice(services[service])
         return _custom_code(mask=mask)
@@ -62,10 +64,10 @@ class USASpecProvider(object):
         :Example:
             ISFJ.
         """
-        mbtis = ("ISFJ", "ISTJ", "INFJ", "INTJ",
-                 "ISTP", "ISFP", "INFP", "INTP",
-                 "ESTP", "ESFP", "ENFP", "ENTP",
-                 "ESTJ", "ESFJ", "ENFJ", "ENTJ")
+        mbtis = ('ISFJ', 'ISTJ', 'INFJ', 'INTJ',
+                 'ISTP', 'ISFP', 'INFP', 'INTP',
+                 'ESTP', 'ESFP', 'ENFP', 'ENTP',
+                 'ESTJ', 'ESFJ', 'ENFJ', 'ENTJ')
 
         if category.lower() == 'rheti':
             return randint(1, 10)
