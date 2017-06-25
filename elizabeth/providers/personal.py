@@ -1,4 +1,5 @@
 import re
+import random
 from hashlib import sha1, sha256, sha512, md5
 from string import (
     digits,
@@ -44,7 +45,7 @@ class Personal(BaseProvider):
         :Example:
             23.
         """
-        a = self.random.randint(int(minimum), int(maximum))
+        a = random.randint(int(minimum), int(maximum))
         self._store['age'] = a
         return a
 
@@ -58,7 +59,7 @@ class Personal(BaseProvider):
         if a == 0:
             a = self.age()
 
-        cc = 0 if a < 18 else self.random.randint(0, max_childs)
+        cc = 0 if a < 18 else random.randint(0, max_childs)
         return cc
 
     def work_experience(self, working_start_age=22):
@@ -87,7 +88,7 @@ class Personal(BaseProvider):
         except KeyError:
             raise WrongArgument('gender must be "female" or "male"')
 
-        return self.random.choice(names)
+        return random.choice(names)
 
     def surname(self, gender='female'):
         """Get a random surname.
@@ -100,11 +101,11 @@ class Personal(BaseProvider):
         # Separated by gender.
         if self.locale in ('ru', 'is', 'uk'):
             try:
-                return self.random.choice(self.data['surnames'][gender])
+                return random.choice(self.data['surnames'][gender])
             except KeyError:
                 raise WrongArgument('gender must be "female" or "male"')
 
-        surname = self.random.choice(self.data['surnames'])
+        surname = random.choice(self.data['surnames'])
         return surname
 
     def title(self, gender='female', title_type='typical'):
@@ -121,7 +122,7 @@ class Personal(BaseProvider):
         except KeyError:
             raise WrongArgument('Wrong value of argument.')
 
-        title = self.random.choice(titles)
+        title = random.choice(titles)
         return title
 
     def full_name(self, gender='female', reverse=False):
@@ -153,13 +154,13 @@ class Personal(BaseProvider):
         """
         try:
             names = pull('personal.json', 'en')['names'][gender]
-            name = self.random.choice(names)
+            name = random.choice(names)
         except KeyError:
             raise WrongArgument('gender must be "female" or "male"')
 
         fmt = ['%s_%s', '%s%s', '%s-%s']
 
-        username = self.random.choice(fmt) % (name, self.random.randint(2, 9999))
+        username = random.choice(fmt) % (name, random.randint(2, 9999))
         return username.lower()
 
     def password(self, length=8, algorithm=None):
@@ -171,7 +172,7 @@ class Personal(BaseProvider):
         :Example:
             k6dv2odff9#4h (without hashing).
         """
-        password = "".join([self.random.choice(
+        password = "".join([random.choice(
             ascii_letters + digits + punctuation) for _ in range(int(length))])
 
         if algorithm is not None:
@@ -203,7 +204,7 @@ class Personal(BaseProvider):
         """
         host = domains if domains else EMAIL_DOMAINS
 
-        email = self.username(gender) + self.random.choice(host)
+        email = self.username(gender) + random.choice(host)
         return email
 
     def bitcoin(self):
@@ -214,8 +215,8 @@ class Personal(BaseProvider):
         :Example:
             3EktnHQD7RiAE6uzMj2ZifT9YgRrkSgzQX
         """
-        fmt = self.random.choice(['1', '3'])
-        fmt += "".join([self.random.choice(ascii_letters + digits) for _ in range(33)])
+        fmt = random.choice(['1', '3'])
+        fmt += "".join([random.choice(ascii_letters + digits) for _ in range(33)])
         return fmt
 
     def cvv(self):
@@ -226,7 +227,7 @@ class Personal(BaseProvider):
         :Example:
             324
         """
-        return self.random.randint(100, 999)
+        return random.randint(100, 999)
 
     def credit_card_number(self, card_type='visa'):
         """Generate a random credit card number.
@@ -240,11 +241,11 @@ class Personal(BaseProvider):
         regex = re.compile("(\d{4})(\d{4})(\d{4})(\d{4})")
 
         if card_type in ('visa', 'vi', 'v'):
-            number = self.random.randint(4000, 4999)
+            number = random.randint(4000, 4999)
         elif card_type in ('master_card', 'mc', 'master', 'm'):
-            number = self.random.choice([self.random.randint(2221, 2720), self.random.randint(5100, 5500)])
+            number = random.choice([random.randint(2221, 2720), random.randint(5100, 5500)])
         elif card_type in ('american_express', 'amex', 'ax', 'a'):
-            number = self.random.choice([34, 37])
+            number = random.choice([34, 37])
             length = 15
             regex = re.compile("(\d{4})(\d{6})(\d{5})")
         else:
@@ -253,7 +254,7 @@ class Personal(BaseProvider):
 
         number = str(number)
         while len(number) < length - 1:
-            number += self.random.choice(digits)
+            number += random.choice(digits)
 
         card = " ".join(regex.search(number + luhn_checksum(number)).groups())
         return card
@@ -268,7 +269,7 @@ class Personal(BaseProvider):
         :Example:
             03/19.
         """
-        month, year = self.random.randint(1, 12), self.random.randint(minimum, maximum)
+        month, year = random.randint(1, 12), random.randint(minimum, maximum)
         month = '0' + str(month) if month < 10 else month
         return '{0}/{1}'.format(month, year)
 
@@ -279,7 +280,7 @@ class Personal(BaseProvider):
         :Example:
             7452
         """
-        return self.random.randint(1000, 9999)
+        return random.randint(1000, 9999)
 
     def paypal(self):
         """Generate a random PayPal account.
@@ -303,7 +304,7 @@ class Personal(BaseProvider):
             "twitter.com/{}",
             "medium.com/@{}"
         ]
-        url = 'http://' + self.random.choice(urls)
+        url = 'http://' + random.choice(urls)
         username = self.username(gender)
 
         return url.format(username)
@@ -330,12 +331,12 @@ class Personal(BaseProvider):
         codes = [0, 1, 2, 9]
 
         if iso5218:
-            return self.random.choice(codes)
+            return random.choice(codes)
 
         if symbol:
-            return self.random.choice(GENDER_SYMBOLS)
+            return random.choice(GENDER_SYMBOLS)
 
-        gender = self.random.choice(self.data['gender'])
+        gender = random.choice(self.data['gender'])
         return gender
 
     def height(self, minimum=1.5, maximum=2.0):
@@ -347,7 +348,7 @@ class Personal(BaseProvider):
         :Example:
             1.85.
         """
-        h = self.random.uniform(float(minimum), float(maximum))
+        h = random.uniform(float(minimum), float(maximum))
         return '{:0.2f}'.format(h)
 
     def weight(self, minimum=38, maximum=90):
@@ -359,7 +360,7 @@ class Personal(BaseProvider):
         :Example:
             48.
         """
-        weight = self.random.randint(int(minimum), int(maximum))
+        weight = random.randint(int(minimum), int(maximum))
         return weight
 
     def blood_type(self):
@@ -369,7 +370,7 @@ class Personal(BaseProvider):
         :Example:
             A+
         """
-        return self.random.choice(BLOOD_GROUPS)
+        return random.choice(BLOOD_GROUPS)
 
     def sexual_orientation(self, symbol=False):
         """Get a random (LOL) sexual orientation.
@@ -380,10 +381,10 @@ class Personal(BaseProvider):
             Heterosexuality.
         """
         if symbol:
-            return self.random.choice(SEXUALITY_SYMBOLS)
+            return random.choice(SEXUALITY_SYMBOLS)
 
         sexuality = self.data['sexuality']
-        return self.random.choice(sexuality)
+        return random.choice(sexuality)
 
     def occupation(self):
         """Get a random job.
@@ -393,7 +394,7 @@ class Personal(BaseProvider):
             Programmer.
         """
         jobs = self.data['occupation']
-        return self.random.choice(jobs)
+        return random.choice(jobs)
 
     def political_views(self):
         """Get a random political views.
@@ -403,7 +404,7 @@ class Personal(BaseProvider):
             Liberal.
         """
         views = self.data['political_views']
-        return self.random.choice(views)
+        return random.choice(views)
 
     def worldview(self):
         """Get a random worldview.
@@ -413,7 +414,7 @@ class Personal(BaseProvider):
             Pantheism.
         """
         views = self.data['worldview']
-        return self.random.choice(views)
+        return random.choice(views)
 
     def views_on(self):
         """
@@ -424,7 +425,7 @@ class Personal(BaseProvider):
             Negative.
         """
         views = self.data['views_on']
-        return self.random.choice(views)
+        return random.choice(views)
 
     def nationality(self, gender='female'):
         """Get a random nationality.
@@ -439,9 +440,9 @@ class Personal(BaseProvider):
 
         if self.locale in separated_locales:
             nations = self.data['nationality'][gender]
-            return self.random.choice(nations)
+            return random.choice(nations)
 
-        return self.random.choice(self.data['nationality'])
+        return random.choice(self.data['nationality'])
 
     def university(self):
         """
@@ -452,7 +453,7 @@ class Personal(BaseProvider):
             MIT.
         """
         universities = self.data['university']
-        return self.random.choice(universities)
+        return random.choice(universities)
 
     def academic_degree(self):
         """Get a random academic degree.
@@ -462,7 +463,7 @@ class Personal(BaseProvider):
             Bachelor.
         """
         degrees = self.data['academic_degree']
-        return self.random.choice(degrees)
+        return random.choice(degrees)
 
     def language(self):
         """Get a random language.
@@ -472,7 +473,7 @@ class Personal(BaseProvider):
             Irish.
         """
         languages = self.data['language']
-        return self.random.choice(languages)
+        return random.choice(languages)
 
     def favorite_movie(self):
         """Get a random movie for current locale.
@@ -482,7 +483,7 @@ class Personal(BaseProvider):
             Interstellar.
         """
         movies = self.data['favorite_movie']
-        return self.random.choice(movies)
+        return random.choice(movies)
 
     def favorite_music_genre(self):
         """Get a random music genre.
@@ -491,7 +492,7 @@ class Personal(BaseProvider):
         :Example:
             Ambient.
         """
-        return self.random.choice(FAVORITE_MUSIC_GENRE)
+        return random.choice(FAVORITE_MUSIC_GENRE)
 
     def telephone(self, mask=None, placeholder='#'):
         """Generate a random phone number.
@@ -507,7 +508,7 @@ class Personal(BaseProvider):
 
         if not mask:
             masks = self.data.get('telephone_fmt', default)
-            mask = self.random.choice(masks)
+            mask = random.choice(masks)
 
         return Code(self.locale).custom_code(mask=mask, digit=placeholder)
 
@@ -540,4 +541,4 @@ class Personal(BaseProvider):
         :Example:
             Intermediate.
         """
-        return self.random.choice(ENGLISH_LEVEL)
+        return random.choice(ENGLISH_LEVEL)

@@ -27,7 +27,7 @@ class Internet(BaseProvider):
         :Example:
             Content-Type: application/json
         """
-        fmt = File.mime_type(type_t=mime_type)
+        fmt = File().mime_type(type_t=mime_type)
         return 'Content-Type: {}'.format(fmt)
 
     def http_status_code(self, code_only=True):
