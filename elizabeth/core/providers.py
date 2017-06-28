@@ -15,13 +15,13 @@ from random import (
     sample,
     randint,
     uniform,
-    random
+    random,
 )
 from string import (
     digits,
     punctuation,
     ascii_letters,
-    ascii_uppercase
+    ascii_uppercase,
 )
 # The data which common for all locales.
 from elizabeth.data.int.address import *
@@ -60,7 +60,7 @@ __all__ = [
     'Text',
     'Transport',
     'UnitSystem',
-    'Generic'
+    'Generic',
 ]
 
 
@@ -76,9 +76,8 @@ class BaseProvider(object):
         return '{}:{}:{}'.format(
             self.__class__.__name__,
             self.locale,
-            locale_info(self.locale)
+            locale_info(self.locale),
         )
-
 
 
 class Address(BaseProvider):
@@ -146,13 +145,13 @@ class Address(BaseProvider):
                 city=choice(cities),
                 n=randint(1, 100),
                 nn=randint(1, 100),
-                nnn=randint(1, 100)
+                nnn=randint(1, 100),
             )
 
         return fmt.format(
             st_num=self.street_number(),
             st_name=self.street_name(),
-            st_sfx=self.street_suffix()
+            st_sfx=self.street_suffix(),
 
         )
 
@@ -247,7 +246,7 @@ class Address(BaseProvider):
         """
         coord = {
             'longitude': self.longitude(),
-            'latitude': self.latitude()
+            'latitude': self.latitude(),
         }
         return coord
 
@@ -383,10 +382,10 @@ class Structured(BaseProvider):
         cont_tag = choice(list(HTML_CONTAINER_TAGS.keys()))
         mrk_tag = choice(HTML_MARKUP_TAGS)
 
-        base = "{}".format(choice([cont_tag, mrk_tag, css_sel]))
-        props = "; ".join(
+        base = '{}'.format(choice([cont_tag, mrk_tag, css_sel, ]))
+        props = '; '.join(
             [self.css_property() for _ in range(randint(1, 6))])
-        return "{} {{{}}}".format(base, props)
+        return '{} {{{}}}'.format(base, props)
 
     def css_property(self):
         """Generates a random snippet of CSS that assigns value to a property.
@@ -401,12 +400,12 @@ class Structured(BaseProvider):
 
         if isinstance(val, list):
             val = choice(val)
-        elif val == "color":
+        elif val == 'color':
             val = self.text.hex_color()
-        elif val == "size":
-            val = "{}{}".format(randint(1, 99), choice(CSS_SIZE_UNITS))
+        elif val == 'size':
+            val = '{}{}'.format(randint(1, 99), choice(CSS_SIZE_UNITS))
 
-        return "{}: {}".format(prop, val)
+        return '{}: {}'.format(prop, val)
 
     def html(self):
         """Generate a random HTML tag with text inside and some attrs set.
@@ -426,14 +425,14 @@ class Structured(BaseProvider):
 
         attrs = []
         for attr in selected_attrs:
-            attrs.append("{}=\"{}\"".format(
+            attrs.append('{}=\"{}\"'.format(
                 attr, self.html_attribute_value(tag_name, attr)))
 
-        html_result = "<{tag} {attrs}>{content}</{tag}>"
+        html_result = '<{tag} {attrs}>{content}</{tag}>'
         return html_result.format(
             tag=tag_name,
-            attrs=" ".join(attrs),
-            content=self.text.sentence()
+            attrs=' '.join(attrs),
+            content=self.text.sentence(),
         )
 
     def html_attribute_value(self, tag, attribute):
@@ -450,20 +449,20 @@ class Structured(BaseProvider):
             value = HTML_CONTAINER_TAGS[tag][attribute]
         except KeyError:
             raise NotImplementedError(
-                "Tag {} or attribute {} is not supported".format(
+                'Tag {} or attribute {} is not supported'.format(
                     tag, attribute))
 
         if isinstance(value, list):
             value = choice(value)
-        elif value == "css":
+        elif value == 'css':
             value = self.css_property()
-        elif value == "word":
+        elif value == 'word':
             value = self.text.word()
-        elif value == "url":
+        elif value == 'url':
             value = self.internet.home_page()
         else:
             raise NotImplementedError(
-                "Attribute type {} is not implemented".format(value))
+                'Attribute type {} is not implemented'.format(value))
         return value
 
     def json(self, provider_name, items=5):
@@ -483,15 +482,15 @@ class Structured(BaseProvider):
             },
             'personal': {
                 'provider': Personal,
-                'root_element': 'users'
-            }
+                'root_element': 'users',
+            },
         }
 
         try:
             provider_data = providers[provider_name.lower()]
         except KeyError:
             raise NotImplementedError(
-                "Provider {} is not supported".format(provider_name)
+                'Provider {} is not supported'.format(provider_name),
             )
 
         try:
@@ -507,7 +506,7 @@ class Structured(BaseProvider):
             element = dict()
             for attribute_name in dir(provider):
                 attribute = getattr(provider, attribute_name)
-                if attribute_name[:1] != "_" and callable(attribute):
+                if attribute_name[:1] != '_' and callable(attribute):
                     element[attribute_name] = attribute()
             data[root_element].append(element)
 
@@ -666,7 +665,7 @@ class Code(BaseProvider):
         self.locale = locale
 
     @staticmethod
-    def custom_code(mask="@###", char='@', digit='#'):
+    def custom_code(mask='@###', char='@', digit='#'):
         """Generate custom code using ascii uppercase and random integers.
 
         :param mask: Mask of code.
@@ -707,7 +706,7 @@ class Code(BaseProvider):
         :return: ISSN.
         """
         if not mask:
-            mask = "####-####"
+            mask = '####-####'
         return self.custom_code(mask=mask)
 
     def isbn(self, fmt='isbn-10'):
@@ -849,7 +848,7 @@ class Personal(BaseProvider):
         self.locale = locale
         self.data = pull('personal.json', self.locale)
         self._store = {
-            'age': 0
+            'age': 0,
         }
 
     def age(self, minimum=16, maximum=66):
@@ -956,7 +955,7 @@ class Personal(BaseProvider):
         fmt = '{1} {0}' if reverse else '{0} {1}'
         return fmt.format(
             self.name(gender),
-            self.surname(gender)
+            self.surname(gender),
         )
 
     @staticmethod
@@ -990,7 +989,7 @@ class Personal(BaseProvider):
         :Example:
             k6dv2odff9#4h (without hashing).
         """
-        password = "".join([choice(
+        password = ''.join([choice(
             ascii_letters + digits + punctuation) for _ in range(int(length))])
 
         if algorithm is not None:
@@ -1005,7 +1004,7 @@ class Personal(BaseProvider):
             elif algorithm == 'md5':
                 return md5(password).hexdigest()
             raise NotImplementedError(
-                "The specified hashing algorithm is not available.")
+                'The specified hashing algorithm is not available.')
 
         return password
 
@@ -1036,7 +1035,7 @@ class Personal(BaseProvider):
             3EktnHQD7RiAE6uzMj2ZifT9YgRrkSgzQX
         """
         fmt = choice(['1', '3'])
-        fmt += "".join([choice(ascii_letters + digits) for _ in range(33)])
+        fmt += ''.join([choice(ascii_letters + digits) for _ in range(33)])
         return fmt
 
     @staticmethod
@@ -1060,7 +1059,7 @@ class Personal(BaseProvider):
             4455 5299 1152 2450
         """
         length = 16
-        regex = re.compile("(\d{4})(\d{4})(\d{4})(\d{4})")
+        regex = re.compile('(\d{4})(\d{4})(\d{4})(\d{4})')
 
         if card_type in ('visa', 'vi', 'v'):
             number = randint(4000, 4999)
@@ -1069,16 +1068,16 @@ class Personal(BaseProvider):
         elif card_type in ('american_express', 'amex', 'ax', 'a'):
             number = choice([34, 37])
             length = 15
-            regex = re.compile("(\d{4})(\d{6})(\d{5})")
+            regex = re.compile('(\d{4})(\d{6})(\d{5})')
         else:
             raise NotImplementedError(
-                "Card type {} is not supported.".format(card_type))
+                'Card type {} is not supported.'.format(card_type))
 
         number = str(number)
         while len(number) < length - 1:
             number += choice(digits)
 
-        card = " ".join(regex.search(number + luhn_checksum(number)).groups())
+        card = ' '.join(regex.search(number + luhn_checksum(number)).groups())
         return card
 
     @staticmethod
@@ -1124,9 +1123,9 @@ class Personal(BaseProvider):
             http://facebook.com/some_user
         """
         urls = [
-            "facebook.com/{}",
-            "twitter.com/{}",
-            "medium.com/@{}"
+            'facebook.com/{}',
+            'twitter.com/{}',
+            'medium.com/@{}',
         ]
         url = 'http://' + choice(urls)
         username = self.username(gender)
@@ -1477,7 +1476,7 @@ class Datetime(BaseProvider):
             randint(0, 23),
             randint(0, 59),
             randint(0, 59),
-            randint(0, 999999)
+            randint(0, 999999),
         )
         return t.strftime(fmt)
 
@@ -1563,7 +1562,7 @@ class Science(BaseProvider):
             return {
                 'name': nm.strip(),
                 'symbol': sm.strip(),
-                'atomic_number': an.strip()
+                'atomic_number': an.strip(),
             }
 
         return nm.strip()
@@ -1635,7 +1634,7 @@ class Development(BaseProvider):
         :Example:
             Git
         """
-        return choice(["Git", "Subversion"])
+        return choice(['Git', 'Subversion'])
 
     @staticmethod
     def programming_language():
@@ -1795,7 +1794,7 @@ class Hardware(BaseProvider):
             4.0 GHz.
         """
         cf = uniform(1.5, 4.3)
-        return "{0:.1f}GHz".format(cf)
+        return '{0:.1f}GHz'.format(cf)
 
     @staticmethod
     def generation(abbr=False):
@@ -1895,9 +1894,9 @@ class ClothingSizes(BaseProvider):
             XXL.
         """
         sizes = (
-            "L", "M", "S",
-            "XL", "XS", "XXL",
-            "XXS", "XXXL"
+            'L', 'M', 'S',
+            'XL', 'XS', 'XXL',
+            'XXS', 'XXXL',
         )
 
         return choice(sizes)
@@ -1984,7 +1983,7 @@ class Internet(BaseProvider):
         :Example:
             2001:c244:cf9d:1fb1:c56d:f52c:8a04:94f3
         """
-        ip = "2001:" + ":".join("%x" % randint(0, 16 ** 4) for _ in range(7))
+        ip = '2001:' + ':'.join('%x' % randint(0, 16 ** 4) for _ in range(7))
         return ip
 
     @staticmethod
@@ -1998,9 +1997,9 @@ class Internet(BaseProvider):
         mac_hex = [0x00, 0x16, 0x3e,
                    randint(0x00, 0x7f),
                    randint(0x00, 0xff),
-                   randint(0x00, 0xff)
+                   randint(0x00, 0xff),
                    ]
-        mac = map(lambda x: "%02x" % x, mac_hex)
+        mac = map(lambda x: '%02x' % x, mac_hex)
         return ':'.join(mac)
 
     @staticmethod
@@ -2039,7 +2038,7 @@ class Internet(BaseProvider):
 
         categories = (
             'buildings', 'food', 'nature',
-            'people', 'technology', 'objects'
+            'people', 'technology', 'objects',
         )
 
         if not category or category not in categories:
@@ -2054,7 +2053,7 @@ class Internet(BaseProvider):
         keywords = [
             'cat', 'girl', 'boy', 'beauty',
             'nature', 'woman', 'man', 'tech',
-            'space'
+            'space',
         ]
 
         if not keyword:
@@ -2152,7 +2151,10 @@ class Internet(BaseProvider):
             return protocol
         except KeyError:
             raise WrongArgument(
-                'Unsupported layer, use: {}'.format(list(NETWORK_PROTOCOLS.keys())))
+                'Unsupported layer, use: {}'.format(
+                    list(NETWORK_PROTOCOLS.keys()),
+                ),
+            )
 
 
 class Transport(BaseProvider):
@@ -2635,7 +2637,7 @@ class Generic(BaseProvider):
                 name = cls.__name__.lower()
             setattr(self, name, cls())
         else:
-            raise TypeError("Provider must be a class")
+            raise TypeError('Provider must be a class')
 
     def add_providers(self, *providers):
         """Add a lot of custom providers to Generic() object.

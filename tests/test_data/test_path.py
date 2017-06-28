@@ -8,7 +8,7 @@ from elizabeth.core.providers import Path
 from elizabeth.data.int import (
     PROGRAMMING_LANGS,
     FOLDERS,
-    PROJECT_NAMES
+    PROJECT_NAMES,
 )
 
 

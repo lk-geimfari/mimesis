@@ -16,9 +16,9 @@ IP_V6_REGEX = r'(([0-9a-fA-F]{1,4}:)' \
 
 MAC_ADDRESS_REGEX = r'^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$'
 
-IP_V4_REGEX = r"^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$"
+IP_V4_REGEX = r'^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$'
 
-EMAIL_REGEX = r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)"
+EMAIL_REGEX = r'(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)'
 
 USERNAME_REGEX = r'^[a-zA-Z0-9_.-]+$'
 
@@ -66,7 +66,7 @@ POSTAL_CODE_REGEX = {
     'pt-br': r'[0-9]{5}-[0-9]{3}$',
     'zh': r'[0-9]{6}$',
     'uk': r'[0-9]{6}$',
-    'default': r'[0-9]{5}$'
+    'default': r'[0-9]{5}$',
 }
 
 HOME_PAGE = r'http[s]?://(?:[a-zA-Z]|[0-9]|[$_@.&+-]' \

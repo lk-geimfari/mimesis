@@ -6,7 +6,7 @@ import pytest
 
 from elizabeth.data.int import (
     FAVORITE_MUSIC_GENRE, SEXUALITY_SYMBOLS,
-    BLOOD_GROUPS, GENDER_SYMBOLS, ENGLISH_LEVEL
+    BLOOD_GROUPS, GENDER_SYMBOLS, ENGLISH_LEVEL,
 )
 from elizabeth.exceptions import WrongArgument
 from ._patterns import *
@@ -89,7 +89,7 @@ def test_email(personal):
     result = personal.email()
     assert re.match(EMAIL_REGEX, result)
 
-    domains = ["@example.com"]
+    domains = ['@example.com']
     result = personal.email(domains=domains)
     assert re.match(EMAIL_REGEX, result)
     assert result.split('@')[1] == 'example.com'
@@ -117,7 +117,7 @@ def test_credit_card_number(personal):
     assert re.match(CREDIT_CARD_REGEX, result_ax)
 
     with pytest.raises(NotImplementedError):
-        personal.credit_card_number(card_type="discover")
+        personal.credit_card_number(card_type='discover')
 
 
 def test_expiration_date(personal):
