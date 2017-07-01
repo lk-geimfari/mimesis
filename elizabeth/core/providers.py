@@ -9,7 +9,8 @@ import os
 import re
 import sys
 from calendar import monthrange
-from hashlib import sha1, sha256, sha512, md5
+from binascii import hexlify
+from hashlib import sha1, sha256, sha512, md5, pbkdf2_hmac
 from random import (
     choice,
     sample,
@@ -1003,6 +1004,9 @@ class Personal(BaseProvider):
                 return sha512(password).hexdigest()
             elif algorithm == 'md5':
                 return md5(password).hexdigest()
+            elif algorithm == 'pbkdf2':
+                return hexlify(pbkdf2_hmac('sha256', password,
+                                           os.urandom(16), 10000)).decode()
             raise NotImplementedError(
                 'The specified hashing algorithm is not available.')
 
