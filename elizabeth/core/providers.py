@@ -993,7 +993,7 @@ class Personal(BaseProvider):
         password = ''.join([choice(
             ascii_letters + digits + punctuation) for _ in range(int(length))])
 
-        if algorithm is not None:
+        if algorithm:
             algorithm = algorithm.lower()
             password = password.encode()
             if algorithm == 'sha1':
