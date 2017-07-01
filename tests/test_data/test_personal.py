@@ -73,6 +73,9 @@ def test_password(personal):
     sha512 = personal.password(algorithm='sha512')
     assert len(sha512) == 128
 
+    pbkdf2 = personal.password(algorithm='pbkdf2')
+    assert len(pbkdf2) == 64
+
     with pytest.raises(NotImplementedError):
         personal.password(algorithm='sha42')
 
