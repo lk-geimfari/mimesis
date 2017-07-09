@@ -36,12 +36,13 @@ Also you can install it manually (pre-activated virtualenv):
 
 ```python
 >>> from elizabeth import Personal
->>> person = Personal('en')
+>>> from elizabeth import constants as c
+>>> person = Personal(locale=c.EN)
 
->>> person.full_name(gender='female')
+>>> person.full_name(gender=c.FEMALE)
 'Antonetta Garrison'
 
->>> person.email(gender='male)
+>>> person.email(gender=c.MALE)
 'oren5936@live.com'
 
 >>> person.occupation()

@@ -4,7 +4,7 @@ EXTENSIONS = {
         ".asm",
         ".asp",
         ".awk",
-        ".c",
+        ".constants",
         ".class",
         ".cpp",
         ".pl",

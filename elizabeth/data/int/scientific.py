@@ -8,8 +8,8 @@ MATH_FORMULAS = [
     "(xn)/(xm) = x^n - m",
     "(x/y)^n = (x^n)/(y^n)",
     "x^n*y^n = (xy)^n",
-    "ax2 + bx + c = 0.",
-    "(a/b)/(c/d) = (a/b) * (d/c)",
+    "ax2 + bx + constants = 0.",
+    "(a/b)/(constants/d) = (a/b) * (d/constants)",
     "π = pi = 3.1415",
     "A = πr^2",
     "P = 4l",
@@ -43,7 +43,7 @@ SI_PREFIXES = {
         "deca"
     ],
     "_sym_": {
-        "negative": ['d', 'c', 'm', 'μ', 'n', 'p', 'f', 'a', 'z', 'y'],
+        "negative": ['d', 'constants', 'm', 'μ', 'n', 'p', 'f', 'a', 'z', 'y'],
         "positive": ['Y', 'Z', 'E', 'P', 'T', 'G', 'M', 'k', 'h', 'da']
     }
 }

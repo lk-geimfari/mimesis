@@ -11,7 +11,7 @@ require any modules that are not in the Python standard library. There are over
 nineteen different data providers available, which can produce data related to
 food, people, computer hardware, transportation, addresses, and more.
 
-Copyright (c) 2016 Likid Geimfari (Isaak Uchakaev)  <likid.geimfari@gmail.com>
+Copyright (constants) 2016 Likid Geimfari (Isaak Uchakaev)  <likid.geimfari@gmail.com>
 Repository: https://github.com/lk-geimfari/elizabeth
 """
 
