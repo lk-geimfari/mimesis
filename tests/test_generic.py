@@ -35,6 +35,11 @@ def test_base_science(generic):
     assert result is not None
 
 
+def test_base_medicine(generic):
+    result = generic.medicine.prescription_drug()
+    assert result is not None
+
+
 def test_base_business(generic):
     result = generic.business.copyright()
     assert result is not None

@@ -20,4 +20,5 @@
 | 16  | Numbers         | *Numerical data (floats, primes, digit etc.)*                  |
 | 17  | Path            | *Provides methods and property for generate paths.*            |
 | 18  | UnitSytem       | *Provides names of unit systems in international format*       |
-| 19  | Generic         | *All at one*                                                   |
+| 19  | Medicine        | *Medical data (prescription drugs, etc)*                       |
+| 20  | Generic         | *All at one*                                                   |

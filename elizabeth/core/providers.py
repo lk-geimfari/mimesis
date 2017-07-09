@@ -52,6 +52,7 @@ __all__ = [
     'Food',
     'Hardware',
     'Internet',
+    'Medicine',
     'Numbers',
     'Path',
     'Personal',
@@ -1578,6 +1579,27 @@ class Science(BaseProvider):
         return choice(articles)
 
 
+class Medicine(BaseProvider):
+    """Class for getting fake data for Medicine."""
+
+    def __init__(self, locale='en'):
+        """
+        :param locale: Current language.
+        """
+        self.locale = locale
+        self._data = pull('medicine.json', self.locale)
+
+    def prescription_drug(self):
+        """Generate a random prescription drug name.
+
+        :return: Name of a prescription drug.
+        :Example:
+            Pramipexole
+        """
+        drugs = self._data['prescription_drug']
+        return choice(drugs)
+
+
 class Development(BaseProvider):
     """Class for getting fake data for Developers."""
 
@@ -2600,6 +2622,7 @@ class Generic(BaseProvider):
         self._text = Text
         self._food = Food
         self._science = Science
+        self._medicine = Medicine
         self._code = Code
         self.unit_system = UnitSystem()
         self.file = File()
