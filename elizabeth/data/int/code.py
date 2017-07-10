@@ -147,6 +147,7 @@ LOCALE_CODES = [
     "ji",
     "ko",
     "ko",
+    "kz",
     "lt",
     "lv",
     "mk",

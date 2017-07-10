@@ -21,6 +21,7 @@ locales = [
     "it",
     "ja",
     "ko",
+    "kz",
     "nl",
     "nl-be",
     "no",
