@@ -38,15 +38,20 @@ def test_html(structured):
     assert result[-1] == '>'  # tag is enclosed
 
 
-def test_json(structured):
-    with pytest.raises(NotImplementedError):
-        structured.json('food')
+def depth(x):
+    """Calculates depth of object."""
+    if isinstance(x, dict) and x:
+        return 1 + max(depth(x[a]) for a in x)
+    if isinstance(x, list) and x:
+        return 1 + max(depth(a) for a in x)
+    return 0
 
-    result = structured.json('personal', items=3)
+
+def test_json(structured):
+    result = structured.json(items=3, max_depth=4)
     assert isinstance(result, str)  # returns str
     data = json.loads(result)  # is valid JSON
     assert isinstance(data, (dict, list))  # root element is container
-    _, root = data.popitem()
-    assert len(root) == 3  # root container has three items
-
-    structured.json('hardware', items=1)
+    assert len(data) == 3  # root container has three items
+    r = structured.json(items=3, max_depth=4, _recursive=True)
+    assert depth(r) <= 4  # maximum depth of three elements
