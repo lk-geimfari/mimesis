@@ -6,7 +6,7 @@ from elizabeth.providers.code import Code
 
 
 # Internal
-_custom_code = Code.custom_code
+_custom_code = Code().custom_code
 
 
 class RussiaSpecProvider(object):

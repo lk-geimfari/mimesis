@@ -27,7 +27,7 @@ class Internet(BaseProvider):
         :Example:
             Content-Type: application/json
         """
-        fmt = File.mime_type(type_t=mime_type)
+        fmt = File().mime_type(type_t=mime_type)
         return 'Content-Type: {}'.format(fmt)
 
     def http_status_code(self, code_only=True):
@@ -180,7 +180,7 @@ class Internet(BaseProvider):
         :Example:
             http://www.font6.info
         """
-        url = 'http://www.' + Personal.username(gender)
+        url = 'http://www.' + Personal().username(gender)
         domain = self.random.choice(DOMAINS)
         return '{}{}'.format(url, domain)
 
