@@ -42,3 +42,4 @@
 - Yn-Coder [(yn-coder)](https://github.com/yn-coder)
 - Dmytro Zelinskyi [(zelds)](https://github.com/zelds)
 - axcel [(axce1)](https://github.com/axce1)
+- Ruslan Valerievich [(Valerievich)](https://github.com/Valerievich)

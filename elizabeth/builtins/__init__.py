@@ -7,5 +7,5 @@ __all__ = [
     'USASpecProvider',
     'JapanSpecProvider',
     'RussiaSpecProvider',
-    'BrazilSpecProvider'
+    'BrazilSpecProvider',
 ]

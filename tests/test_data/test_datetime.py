@@ -21,9 +21,9 @@ def test_day_of_month(dt):
 
 
 def test_date(dt):
-    result = dt.date(start=1999, end=1999, fmt="%m/%d/%Y")
+    result = dt.date(start=1999, end=1999, fmt='%m/%d/%Y')
 
-    result = datetime.datetime.strptime(result, "%m/%d/%Y")
+    result = datetime.datetime.strptime(result, '%m/%d/%Y')
     assert result.year == 1999  # check range was applied correctly
 
 
@@ -32,8 +32,8 @@ def test_time(dt):
     default = datetime.datetime.strptime(default, dt.data['formats']['time'])
     assert isinstance(default, datetime.datetime)
 
-    result = dt.time(fmt="%H:%M")
-    result = datetime.datetime.strptime(result, "%H:%M")
+    result = dt.time(fmt='%H:%M')
+    result = datetime.datetime.strptime(result, '%H:%M')
     assert isinstance(result, datetime.datetime)
 
 
