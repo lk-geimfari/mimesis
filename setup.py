@@ -1,9 +1,6 @@
 from distutils.core import setup
 
-from elizabeth import (
-    __author__,
-    __version__,
-)
+from elizabeth import __author__, __version__
 
 with open('PYPI_README.rst', 'r', encoding='utf-8') as f:
     readme = f.read()
@@ -13,7 +10,8 @@ setup(
     version=__version__,
     packages=[
         'elizabeth',
-        'elizabeth.core',
+        'elizabeth.constants'
+        'elizabeth.providers',
         'elizabeth.builtins',
     ],
     keywords=[

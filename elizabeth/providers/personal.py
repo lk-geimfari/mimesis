@@ -1,22 +1,13 @@
 import re
-from hashlib import sha1, sha256, sha512, md5
-from string import (
-    digits,
-    punctuation,
-    ascii_letters,
-)
+from hashlib import md5, sha1, sha256, sha512
+from string import ascii_letters, digits, punctuation
 
-from elizabeth.data import (
-    BLOOD_GROUPS,
-    EMAIL_DOMAINS,
-    GENDER_SYMBOLS,
-    ENGLISH_LEVEL,
-    FAVORITE_MUSIC_GENRE,
-    SEXUALITY_SYMBOLS,
-)
+from elizabeth.data import (BLOOD_GROUPS, EMAIL_DOMAINS, ENGLISH_LEVEL,
+                            FAVORITE_MUSIC_GENRE, GENDER_SYMBOLS,
+                            SEXUALITY_SYMBOLS)
 from elizabeth.exceptions import WrongArgument
-from elizabeth.utils import pull, luhn_checksum
 from elizabeth.providers import BaseProvider, Code
+from elizabeth.utils import luhn_checksum, pull
 
 __all__ = ['Personal']
 
@@ -32,7 +23,7 @@ class Personal(BaseProvider):
         super().__init__(*args, **kwargs)
         self.data = pull('personal.json', self.locale)
         self._store = {
-            'age': 0
+            'age': 0,
         }
 
     def age(self, minimum=16, maximum=66):
@@ -138,7 +129,7 @@ class Personal(BaseProvider):
         fmt = '{1} {0}' if reverse else '{0} {1}'
         return fmt.format(
             self.name(gender),
-            self.surname(gender)
+            self.surname(gender),
         )
 
     def username(self, gender='female'):
@@ -158,7 +149,8 @@ class Personal(BaseProvider):
 
         fmt = ['%s_%s', '%s%s', '%s-%s']
 
-        username = self.random.choice(fmt) % (name, self.random.randint(2, 9999))
+        username = self.random.choice(fmt) % (name,
+                                              self.random.randint(2, 9999))
         return username.lower()
 
     def password(self, length=8, algorithm=None):
@@ -170,7 +162,7 @@ class Personal(BaseProvider):
         :Example:
             k6dv2odff9#4h (without hashing).
         """
-        password = "".join([self.random.choice(
+        password = ''.join([self.random.choice(
             ascii_letters + digits + punctuation) for _ in range(int(length))])
 
         if algorithm is not None:
@@ -185,7 +177,7 @@ class Personal(BaseProvider):
             elif algorithm == 'md5':
                 return md5(password).hexdigest()
             raise NotImplementedError(
-                "The specified hashing algorithm is not available.")
+                'The specified hashing algorithm is not available.')
 
         return password
 
@@ -214,7 +206,8 @@ class Personal(BaseProvider):
             3EktnHQD7RiAE6uzMj2ZifT9YgRrkSgzQX
         """
         fmt = self.random.choice(['1', '3'])
-        fmt += "".join([self.random.choice(ascii_letters + digits) for _ in range(33)])
+        fmt += ''.join([self.random.choice(ascii_letters + digits)
+                        for _ in range(33)])
         return fmt
 
     def cvv(self):
@@ -236,25 +229,26 @@ class Personal(BaseProvider):
             4455 5299 1152 2450
         """
         length = 16
-        regex = re.compile("(\d{4})(\d{4})(\d{4})(\d{4})")
+        regex = re.compile('(\d{4})(\d{4})(\d{4})(\d{4})')
 
         if card_type in ('visa', 'vi', 'v'):
             number = self.random.randint(4000, 4999)
         elif card_type in ('master_card', 'mc', 'master', 'm'):
-            number = self.random.choice([self.random.randint(2221, 2720), self.random.randint(5100, 5500)])
+            number = self.random.choice([self.random.randint(2221, 2720),
+                                         self.random.randint(5100, 5500)])
         elif card_type in ('american_express', 'amex', 'ax', 'a'):
             number = self.random.choice([34, 37])
             length = 15
-            regex = re.compile("(\d{4})(\d{6})(\d{5})")
+            regex = re.compile('(\d{4})(\d{6})(\d{5})')
         else:
             raise NotImplementedError(
-                "Card type {} is not supported.".format(card_type))
+                'Card type {} is not supported.'.format(card_type))
 
         number = str(number)
         while len(number) < length - 1:
             number += self.random.choice(digits)
 
-        card = " ".join(regex.search(number + luhn_checksum(number)).groups())
+        card = ' '.join(regex.search(number + luhn_checksum(number)).groups())
         return card
 
     def credit_card_expiration_date(self, minimum=16, maximum=25):
@@ -267,7 +261,8 @@ class Personal(BaseProvider):
         :Example:
             03/19.
         """
-        month, year = self.random.randint(1, 12), self.random.randint(minimum, maximum)
+        month, year = [self.random.randint(1, 12),
+                       self.random.randint(minimum, maximum)]
         month = '0' + str(month) if month < 10 else month
         return '{0}/{1}'.format(month, year)
 
@@ -298,9 +293,9 @@ class Personal(BaseProvider):
             http://facebook.com/some_user
         """
         urls = [
-            "facebook.com/{}",
-            "twitter.com/{}",
-            "medium.com/@{}"
+            'facebook.com/{}',
+            'twitter.com/{}',
+            'medium.com/@{}',
         ]
         url = 'http://' + self.random.choice(urls)
         username = self.username(gender)

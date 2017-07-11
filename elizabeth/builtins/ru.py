@@ -1,9 +1,8 @@
 from random import choice, randint
 
 from elizabeth.exceptions import JSONKeyError
-from elizabeth.utils import pull
 from elizabeth.providers.code import Code
-
+from elizabeth.utils import pull
 
 # Internal
 _custom_code = Code().custom_code

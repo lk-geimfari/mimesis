@@ -1,15 +1,6 @@
-from elizabeth.data import (
-    RESOLUTIONS,
-    MANUFACTURERS,
-    SCREEN_SIZES,
-    HDD_SSD,
-    GRAPHICS,
-    CPU,
-    GENERATION,
-    GENERATION_ABBR,
-    PHONE_MODELS,
-    CPU_CODENAMES,
-)
+from elizabeth.data import (CPU, CPU_CODENAMES, GENERATION, GENERATION_ABBR,
+                            GRAPHICS, HDD_SSD, MANUFACTURERS, PHONE_MODELS,
+                            RESOLUTIONS, SCREEN_SIZES)
 from elizabeth.providers import BaseProvider
 
 
@@ -51,7 +42,7 @@ class Hardware(BaseProvider):
             4.0 GHz.
         """
         cf = self.random.uniform(1.5, 4.3)
-        return "{0:.1f}GHz".format(cf)
+        return '{0:.1f}GHz'.format(cf)
 
     def generation(self, abbr=False):
         """Get a random generation.

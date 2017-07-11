@@ -1,6 +1,6 @@
 from functools import wraps
 
-from elizabeth.data.int.decorator import *
+from elizabeth.data import ROMANIZATION_ALPHABETS
 from elizabeth.exceptions import UnsupportedLocale
 
 

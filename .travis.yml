@@ -12,6 +12,11 @@ python:
 install:
   - pip install codecov
   - pip install pytest-cov
+  - pip install flake8-builtins
+  - pip install flake8-commas
+  - pip install flake8-quotes
+  - pip install pytest-flake8
+  - pip install pytest-isort
 
 script: py.test --cov=elizabeth/
 

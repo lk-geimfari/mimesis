@@ -1,16 +1,14 @@
 # -*- coding: utf-8 -*-
 
 import os
-import pytest
-import sys
 import socket
+import sys
+
+import pytest
 
 from elizabeth.exceptions import UnsupportedLocale
-from elizabeth.utils import (
-    pull, luhn_checksum,
-    locale_info, download_image,
-    update_dict,
-)
+from elizabeth.utils import (download_image, locale_info, luhn_checksum, pull,
+                             update_dict)
 
 
 def is_connected():

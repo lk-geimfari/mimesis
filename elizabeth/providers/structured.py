@@ -1,17 +1,9 @@
 import json
 
-from elizabeth.data import (
-    CSS_SELECTORS,
-    CSS_PROPERTIES,
-    CSS_SIZE_UNITS,
-    HTML_MARKUP_TAGS,
-    HTML_CONTAINER_TAGS,
-)
-from .base import BaseProvider
-from .text import Text
-from .internet import Internet
-from .personal import Personal
-from .hardware import Hardware
+from elizabeth.data import (CSS_PROPERTIES, CSS_SELECTORS, CSS_SIZE_UNITS,
+                            HTML_CONTAINER_TAGS, HTML_MARKUP_TAGS)
+from elizabeth.providers import BaseProvider, Hardware, Internet, Personal
+from elizabeth.providers.text import Text
 
 
 class Structured(BaseProvider):
@@ -44,10 +36,10 @@ class Structured(BaseProvider):
         cont_tag = self.random.choice(list(HTML_CONTAINER_TAGS.keys()))
         mrk_tag = self.random.choice(HTML_MARKUP_TAGS)
 
-        base = "{}".format(self.random.choice([cont_tag, mrk_tag, css_sel]))
-        props = "; ".join(
+        base = '{}'.format(self.random.choice([cont_tag, mrk_tag, css_sel]))
+        props = '; '.join(
             [self.css_property() for _ in range(self.random.randint(1, 6))])
-        return "{} {{{}}}".format(base, props)
+        return '{} {{{}}}'.format(base, props)
 
     def css_property(self):
         """Generates a random snippet of CSS that assigns value to a property.
@@ -62,12 +54,13 @@ class Structured(BaseProvider):
 
         if isinstance(val, list):
             val = self.random.choice(val)
-        elif val == "color":
+        elif val == 'color':
             val = self.text.hex_color()
-        elif val == "size":
-            val = "{}{}".format(self.random.randint(1, 99), self.random.choice(CSS_SIZE_UNITS))
+        elif val == 'size':
+            val = '{}{}'.format(self.random.randint(1, 99),
+                                self.random.choice(CSS_SIZE_UNITS))
 
-        return "{}: {}".format(prop, val)
+        return '{}: {}'.format(prop, val)
 
     def html(self):
         """Generate a random HTML tag with text inside and some attrs set.
@@ -87,14 +80,14 @@ class Structured(BaseProvider):
 
         attrs = []
         for attr in selected_attrs:
-            attrs.append("{}=\"{}\"".format(
+            attrs.append('{}="{}"'.format(
                 attr, self.html_attribute_value(tag_name, attr)))
 
-        html_result = "<{tag} {attrs}>{content}</{tag}>"
+        html_result = '<{tag} {attrs}>{content}</{tag}>'
         return html_result.format(
             tag=tag_name,
-            attrs=" ".join(attrs),
-            content=self.text.sentence()
+            attrs=' '.join(attrs),
+            content=self.text.sentence(),
         )
 
     def html_attribute_value(self, tag, attribute):
@@ -111,20 +104,20 @@ class Structured(BaseProvider):
             value = HTML_CONTAINER_TAGS[tag][attribute]
         except KeyError:
             raise NotImplementedError(
-                "Tag {} or attribute {} is not supported".format(
+                'Tag {} or attribute {} is not supported'.format(
                     tag, attribute))
 
         if isinstance(value, list):
             value = self.random.choice(value)
-        elif value == "css":
+        elif value == 'css':
             value = self.css_property()
-        elif value == "word":
+        elif value == 'word':
             value = self.text.word()
-        elif value == "url":
+        elif value == 'url':
             value = self.internet.home_page()
         else:
             raise NotImplementedError(
-                "Attribute type {} is not implemented".format(value))
+                'Attribute type {} is not implemented'.format(value))
         return value
 
     def json(self, provider_name, items=5):
@@ -144,16 +137,15 @@ class Structured(BaseProvider):
             },
             'personal': {
                 'provider': Personal,
-                'root_element': 'users'
-            }
+                'root_element': 'users',
+            },
         }
 
         try:
             provider_data = providers[provider_name.lower()]
         except KeyError:
             raise NotImplementedError(
-                "Provider {} is not supported".format(provider_name)
-            )
+                'Provider {} is not supported'.format(provider_name))
 
         try:
             provider = provider_data['provider'](self.locale)
@@ -168,7 +160,7 @@ class Structured(BaseProvider):
             element = dict()
             for attribute_name in dir(provider):
                 attribute = getattr(provider, attribute_name)
-                if attribute_name[:1] != "_" and callable(attribute):
+                if attribute_name[:1] != '_' and callable(attribute):
                     element[attribute_name] = attribute()
             data[root_element].append(element)
 

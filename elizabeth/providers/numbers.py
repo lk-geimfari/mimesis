@@ -26,7 +26,8 @@ class Numbers(BaseProvider):
 
         :return: An array of floating-point numbers.
         """
-        nums = array.array(type_code, (self.random.random() for _ in range(10 ** int(n))))
+        nums = array.array(type_code, (self.random.random()
+                                       for _ in range(10 ** int(n))))
         return nums.tolist() if to_list else nums
 
     @staticmethod

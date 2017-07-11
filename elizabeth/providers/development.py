@@ -1,13 +1,5 @@
-from elizabeth.data import (
-    LICENSES,
-    SQL,
-    NOSQL,
-    CONTAINER,
-    PROGRAMMING_LANGS,
-    BACKEND,
-    FRONTEND,
-    OS,
-)
+from elizabeth.data import (BACKEND, CONTAINER, FRONTEND, LICENSES, NOSQL, OS,
+                            PROGRAMMING_LANGS, SQL)
 from elizabeth.providers import BaseProvider
 
 
@@ -62,7 +54,7 @@ class Development(BaseProvider):
         :Example:
             Git
         """
-        return self.random.choice(["Git", "Subversion"])
+        return self.random.choice(['Git', 'Subversion'])
 
     def programming_language(self):
         """Get a random programming language from the list.

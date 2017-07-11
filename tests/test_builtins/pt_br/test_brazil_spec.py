@@ -1,5 +1,6 @@
-import pytest
 import re
+
+import pytest
 
 from elizabeth.builtins import BrazilSpecProvider
 

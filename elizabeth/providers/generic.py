@@ -1,28 +1,20 @@
 import inspect
 
-from elizabeth.providers import (
-    Address,
-    BaseProvider,
-    Business,
-    ClothingSizes,
-    Code,
-    Datetime,
-    Development,
-    File,
-    Food,
-)
+from elizabeth.providers import (Address, BaseProvider, Business,
+                                 ClothingSizes, Code, Datetime, Development,
+                                 File, Food)
 
 # TODO: Resolve importing errors and use importing format as above.
-from .personal import Personal
+from .games import Games
 from .hardware import Hardware
 from .internet import Internet
 from .numbers import Numbers
 from .path import Path
+from .personal import Personal
 from .science import Science
 from .text import Text
 from .transport import Transport
 from .units import UnitSystem
-from .games import Games
 
 
 class Generic(BaseProvider):
@@ -77,7 +69,7 @@ class Generic(BaseProvider):
                 name = cls.__name__.lower()
             setattr(self, name, cls())
         else:
-            raise TypeError("Provider must be a class")
+            raise TypeError('Provider must be a class')
 
     def add_providers(self, *providers):
         """Add a lot of custom providers to Generic() object.

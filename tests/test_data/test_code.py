@@ -2,11 +2,12 @@
 import re
 
 from elizabeth.data import LOCALE_CODES
-from ._patterns import STR_REGEX
+
+from . import _patterns as p
 
 
 def test_str(code):
-    assert re.match(STR_REGEX, str(code))
+    assert re.match(p.STR_REGEX, str(code))
 
 
 def test_custom_code(code):

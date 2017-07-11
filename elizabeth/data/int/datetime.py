@@ -19,5 +19,5 @@ ROMAN_NUMS = [
     'XVIII',
     'XIX',
     'XX',
-    'XXI'
+    'XXI',
 ]

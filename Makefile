@@ -1,6 +1,6 @@
 ROOT=./
 
-VERSION = 0.3.30
+VERSION = 0.4.0
 PROJECT_NAME = Elizabeth
 REPOSITORY_URL = https://github.com/lk-geimfari/elizabeth
 
@@ -17,8 +17,9 @@ help:
 	@echo "\033[93m::::::::::::::::::::::::::::::::::::::::::::::::::::::::\033[0m"
 	@echo "\033[92mclean-pyc    - remove Python file artifacts\033[0m"
 	@echo "\033[92mclean-build  - remove build artifacts\033[0m"
-	@echo "\033[92mclean        - remove build and Python file artifacts\033[0m"i
+	@echo "\033[92mclean        - remove build and Python file artifacts\033[0m"
 	@echo "\033[92mtest         - run tests quickly with the default Python\033[0m"
+	@echo "\033[92mflake        - run py.test with flake8\033[0m"
 	@echo "\033[92mtest-files   - internal files for development\033[0m"
 	@echo "\033[92mrelease      - package and upload a release to PyPI\033[0m"
 	@echo "\033[92mrelease-test - upload package to PyPI Test\033[0m"
@@ -43,6 +44,9 @@ test:
 
 test-files:
 	touch file.txt file.json
+
+flake:
+	py.test --flake8
 
 release:
 	python3 setup.py register sdist upload -r pypi

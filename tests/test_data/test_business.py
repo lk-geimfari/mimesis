@@ -2,11 +2,12 @@
 import re
 
 from elizabeth.data import CURRENCIES, CURRENCY_SYMBOLS
-from ._patterns import STR_REGEX
+
+from . import _patterns as p
 
 
 def test_str(business):
-    assert re.match(STR_REGEX, str(business))
+    assert re.match(p.STR_REGEX, str(business))
 
 
 def test_copyright(business):

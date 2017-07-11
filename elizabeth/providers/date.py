@@ -2,8 +2,8 @@ import datetime
 from calendar import monthrange
 
 from elizabeth.data import ROMAN_NUMS
-from elizabeth.utils import pull
 from elizabeth.providers import BaseProvider
+from elizabeth.utils import pull
 
 
 class Datetime(BaseProvider):
@@ -105,7 +105,7 @@ class Datetime(BaseProvider):
             self.random.randint(0, 23),
             self.random.randint(0, 59),
             self.random.randint(0, 59),
-            self.random.randint(0, 999999)
+            self.random.randint(0, 999999),
         )
         return t.strftime(fmt)
 

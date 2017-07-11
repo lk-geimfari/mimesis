@@ -1,8 +1,8 @@
 from string import ascii_uppercase
 
-from elizabeth.data import LOCALE_CODES, ISBN_GROUPS, IMEI_TACS
-from elizabeth.utils import luhn_checksum
+from elizabeth.data import IMEI_TACS, ISBN_GROUPS, LOCALE_CODES
 from elizabeth.providers import BaseProvider
+from elizabeth.utils import luhn_checksum
 
 
 class Code(BaseProvider):
@@ -14,7 +14,7 @@ class Code(BaseProvider):
         """
         super().__init__(*args, **kwargs)
 
-    def custom_code(self, mask="@###", char='@', digit='#'):
+    def custom_code(self, mask='@###', char='@', digit='#'):
         """Generate custom code using ascii uppercase and random integers.
 
         :param mask: Mask of code.
@@ -54,7 +54,7 @@ class Code(BaseProvider):
         :return: ISSN.
         """
         if not mask:
-            mask = "####-####"
+            mask = '####-####'
         return self.custom_code(mask=mask)
 
     def isbn(self, fmt='isbn-10'):

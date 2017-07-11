@@ -246,7 +246,7 @@ COUNTRIES_ISO = {
         "MYT",
         "ZAF",
         "ZMB",
-        "ZWE"
+        "ZWE",
     ],
     "iso2": [
         "AD",
@@ -495,7 +495,7 @@ COUNTRIES_ISO = {
         "YT",
         "ZA",
         "ZM",
-        "ZW"
+        "ZW",
     ],
     "numeric": [
         "020",
@@ -744,8 +744,8 @@ COUNTRIES_ISO = {
         "175",
         "710",
         "894",
-        "716"
-    ]
+        "716",
+    ],
 }
 
 SHORTENED_ADDRESS_FMT = [
@@ -760,7 +760,7 @@ SHORTENED_ADDRESS_FMT = [
     'nl',
     'nl-be',
     'no',
-    'sv'
+    'sv',
 ]
 
 CONTINENT_CODES = ['AF', 'NA', 'OC', 'AN', 'AS', 'EU', 'SA']

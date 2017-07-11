@@ -1,9 +1,5 @@
-from elizabeth.data import (
-    CONTINENT_CODES,
-    COUNTRIES_ISO,
-    SHORTENED_ADDRESS_FMT,
-)
-
+from elizabeth.data import (CONTINENT_CODES, COUNTRIES_ISO,
+                            SHORTENED_ADDRESS_FMT)
 from elizabeth.providers import BaseProvider
 from elizabeth.utils import pull
 
@@ -72,13 +68,13 @@ class Address(BaseProvider):
                 city=self.random.choice(cities),
                 n=self.random.randint(1, 100),
                 nn=self.random.randint(1, 100),
-                nnn=self.random.randint(1, 100)
+                nnn=self.random.randint(1, 100),
             )
 
         return fmt.format(
             st_num=self.street_number(),
             st_name=self.street_name(),
-            st_sfx=self.street_suffix()
+            st_sfx=self.street_suffix(),
 
         )
 
@@ -172,7 +168,7 @@ class Address(BaseProvider):
         """
         coord = {
             'longitude': self.longitude(),
-            'latitude': self.latitude()
+            'latitude': self.latitude(),
         }
         return coord
 

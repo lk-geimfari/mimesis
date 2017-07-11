@@ -26,5 +26,5 @@ class BaseProvider(object):
         return '{}:{}:{}'.format(
             self.__class__.__name__,
             self.locale,
-            locale_info(self.locale)
+            locale_info(self.locale),
         )

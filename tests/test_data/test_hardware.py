@@ -1,11 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from elizabeth.data import (
-    CPU_CODENAMES, PHONE_MODELS, HDD_SSD,
-    RESOLUTIONS, MANUFACTURERS, CPU,
-    GENERATION, SCREEN_SIZES, GRAPHICS,
-    GENERATION_ABBR,
-)
+from elizabeth.data import (CPU, CPU_CODENAMES, GENERATION, GENERATION_ABBR,
+                            GRAPHICS, HDD_SSD, MANUFACTURERS, PHONE_MODELS,
+                            RESOLUTIONS, SCREEN_SIZES)
 
 
 def test_resolution(hard):

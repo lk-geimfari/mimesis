@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from elizabeth.data import CARS, TRUCKS, AIRPLANES
+from elizabeth.data import AIRPLANES, CARS, TRUCKS
 
 
 def test_truck(transport):

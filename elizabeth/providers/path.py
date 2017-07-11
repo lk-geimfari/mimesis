@@ -1,13 +1,9 @@
 import os
 import sys
 
-from elizabeth.data import (
-    PROGRAMMING_LANGS,
-    PROJECT_NAMES,
-    FOLDERS,
-)
-from .base import BaseProvider
-from .personal import Personal
+from elizabeth.data import FOLDERS, PROGRAMMING_LANGS, PROJECT_NAMES
+from elizabeth.providers import BaseProvider
+from elizabeth.providers.personal import Personal
 
 
 class Path(BaseProvider):

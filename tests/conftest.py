@@ -1,7 +1,7 @@
+import pytest
+
 import elizabeth
 from elizabeth.settings import SUPPORTED_LOCALES
-
-import pytest
 
 locales = list(SUPPORTED_LOCALES.keys())
 
@@ -99,3 +99,8 @@ def dev():
 @pytest.fixture
 def sizes():
     return elizabeth.ClothingSizes()
+
+
+@pytest.fixture
+def net():
+    return elizabeth.Internet()

@@ -1,18 +1,9 @@
-from elizabeth.data import (
-    HTTP_METHODS,
-    HTTP_STATUS_CODES,
-    EMOJI,
-    SUBREDDITS,
-    SUBREDDITS_NSFW,
-    USER_AGENTS,
-    HASHTAGS,
-    DOMAINS,
-    NETWORK_PROTOCOLS,
-)
+from elizabeth.data import (DOMAINS, EMOJI, HASHTAGS, HTTP_METHODS,
+                            HTTP_STATUS_CODES, NETWORK_PROTOCOLS, SUBREDDITS,
+                            SUBREDDITS_NSFW, USER_AGENTS)
 from elizabeth.exceptions import WrongArgument
-
 from elizabeth.providers import BaseProvider, File
-from .personal import Personal
+from elizabeth.providers.personal import Personal
 
 
 class Internet(BaseProvider):
@@ -69,7 +60,8 @@ class Internet(BaseProvider):
         :Example:
             2001:c244:cf9d:1fb1:c56d:f52c:8a04:94f3
         """
-        ip = "2001:" + ":".join("%x" % self.random.randint(0, 16 ** 4) for _ in range(7))
+        ip = '2001:' + ':'.join(
+            '%x' % self.random.randint(0, 16 ** 4) for _ in range(7))
         return ip
 
     def mac_address(self):
@@ -83,9 +75,9 @@ class Internet(BaseProvider):
             0x00, 0x16, 0x3e,
             self.random.randint(0x00, 0x7f),
             self.random.randint(0x00, 0xff),
-            self.random.randint(0x00, 0xff)
+            self.random.randint(0x00, 0xff),
         ]
-        mac = map(lambda x: "%02x" % x, mac_hex)
+        mac = map(lambda x: '%02x' % x, mac_hex)
         return ':'.join(mac)
 
     def emoji(self):
@@ -122,7 +114,7 @@ class Internet(BaseProvider):
 
         categories = (
             'buildings', 'food', 'nature',
-            'people', 'technology', 'objects'
+            'people', 'technology', 'objects',
         )
 
         if not category or category not in categories:
@@ -136,7 +128,7 @@ class Internet(BaseProvider):
         keywords = [
             'cat', 'girl', 'boy', 'beauty',
             'nature', 'woman', 'man', 'tech',
-            'space'
+            'space',
         ]
 
         if not keyword:
@@ -228,5 +220,5 @@ class Internet(BaseProvider):
             protocol = self.random.choice(NETWORK_PROTOCOLS[layer])
             return protocol
         except KeyError:
-            raise WrongArgument(
-                'Unsupported layer, use: {}'.format(list(NETWORK_PROTOCOLS.keys())))
+            protocols = list(NETWORK_PROTOCOLS.keys())
+            raise WrongArgument('Unsupported layer, use: {}'.format(protocols))

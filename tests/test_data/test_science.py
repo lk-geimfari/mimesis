@@ -3,6 +3,7 @@
 import re
 
 from elizabeth.data import MATH_FORMULAS
+
 from ._patterns import STR_REGEX
 
 

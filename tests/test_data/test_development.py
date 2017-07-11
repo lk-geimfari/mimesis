@@ -1,15 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from elizabeth.data import (
-    FRONTEND,
-    PROGRAMMING_LANGS,
-    OS,
-    CONTAINER,
-    LICENSES,
-    NOSQL,
-    BACKEND,
-    SQL,
-)
+from elizabeth.data import (BACKEND, CONTAINER, FRONTEND, LICENSES, NOSQL, OS,
+                            PROGRAMMING_LANGS, SQL)
 
 
 def test_license(dev):

@@ -1,9 +1,4 @@
-from elizabeth.data import (
-    GAMES,
-    GAMING_PLATFORMS,
-    GENRES,
-    SCORE_PHRASES,
-)
+from elizabeth.data import GAMES, GAMING_PLATFORMS, GENRES, SCORE_PHRASES
 
 
 def test_gaming_platform(games):

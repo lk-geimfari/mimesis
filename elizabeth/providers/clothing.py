@@ -12,9 +12,14 @@ class ClothingSizes(BaseProvider):
             XXL.
         """
         sizes = (
-            "L", "M", "S",
-            "XL", "XS", "XXL",
-            "XXS", "XXXL"
+            'L',
+            'M',
+            'S',
+            'XL',
+            'XS',
+            'XXL',
+            'XXS',
+            'XXXL',
         )
 
         return self.random.choice(sizes)

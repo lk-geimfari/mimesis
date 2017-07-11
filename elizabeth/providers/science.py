@@ -39,7 +39,7 @@ class Science(BaseProvider):
             return {
                 'name': nm.strip(),
                 'symbol': sm.strip(),
-                'atomic_number': an.strip()
+                'atomic_number': an.strip(),
             }
 
         return nm.strip()

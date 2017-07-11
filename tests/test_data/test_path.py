@@ -2,11 +2,7 @@
 import os
 from unittest.mock import patch
 
-from elizabeth.data import (
-    PROGRAMMING_LANGS,
-    FOLDERS,
-    PROJECT_NAMES,
-)
+from elizabeth.data import FOLDERS, PROGRAMMING_LANGS, PROJECT_NAMES
 
 
 def test_root(path):

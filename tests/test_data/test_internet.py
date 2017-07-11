@@ -4,27 +4,12 @@ import re
 
 import pytest
 
-from elizabeth.data import (
-    SUBREDDITS, EMOJI, USER_AGENTS,
-    SUBREDDITS_NSFW, HASHTAGS,
-    HTTP_METHODS, MIME_TYPES,
-    HTTP_STATUS_CODES,
-    NETWORK_PROTOCOLS,
-)
+from elizabeth.data import (EMOJI, HASHTAGS, HTTP_METHODS, HTTP_STATUS_CODES,
+                            MIME_TYPES, NETWORK_PROTOCOLS, SUBREDDITS,
+                            SUBREDDITS_NSFW, USER_AGENTS)
 from elizabeth.exceptions import WrongArgument
-from elizabeth import Internet
 
-from ._patterns import (
-    HOME_PAGE,
-    IP_V6_REGEX,
-    IP_V4_REGEX,
-    MAC_ADDRESS_REGEX,
-)
-
-
-@pytest.fixture
-def net():
-    return Internet()
+from . import _patterns as p
 
 
 def test_emoji(net):
@@ -48,7 +33,7 @@ def test_hashtags(net):
 
 def test_home_page(net):
     result = net.home_page()
-    assert re.match(HOME_PAGE, result)
+    assert re.match(p.HOME_PAGE, result)
 
 
 def test_subreddit(net):
@@ -109,17 +94,17 @@ def test_network_protocol(net):
 
 def test_ip_v4(net):
     ip = net.ip_v4()
-    assert re.match(IP_V4_REGEX, ip)
+    assert re.match(p.IP_V4_REGEX, ip)
 
 
 def test_ip_v6(net):
     ip = net.ip_v6()
-    assert re.match(IP_V6_REGEX, ip)
+    assert re.match(p.IP_V6_REGEX, ip)
 
 
 def test_mac_address(net):
     mac = net.mac_address()
-    assert re.match(MAC_ADDRESS_REGEX, mac)
+    assert re.match(p.MAC_ADDRESS_REGEX, mac)
 
 
 def test_http_method(net):
