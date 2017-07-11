@@ -1175,12 +1175,12 @@
 	]
   },
   "continent": [
-	"Afrykę",
-	"Amerykę Południową",
-	"Amerykę Północną",
-	"Antarktydę",
-	"Australię",
-	"Eurazję"
+	"Afryka",
+	"Ameryka Południowa",
+	"Ameryka Północna",
+	"Antarktyda",
+	"Australia",
+	"Eurazja"
   ],
   "state": {
 	"name": [
@@ -5529,7 +5529,6 @@
 	"suffix": [
 	  "ul.",
 	  "plac",
-	  "axis.",
 	  "park"
 	]
   },

@@ -9,7 +9,7 @@ from elizabeth.data.int import (
     SUBREDDITS_NSFW, HASHTAGS,
     HTTP_METHODS, MIME_TYPES,
     HTTP_STATUS_CODES,
-    NETWORK_PROTOCOLS
+    NETWORK_PROTOCOLS,
 )
 from elizabeth.exceptions import WrongArgument
 from elizabeth.providers.internet import Internet
@@ -17,7 +17,7 @@ from tests.test_data._patterns import (
     HOME_PAGE,
     IP_V6_REGEX,
     IP_V4_REGEX,
-    MAC_ADDRESS_REGEX
+    MAC_ADDRESS_REGEX,
 )
 
 
@@ -103,7 +103,7 @@ def test_network_protocol(net):
         assert result in NETWORK_PROTOCOLS[layer]
 
     with pytest.raises(WrongArgument):
-        net.network_protocol(layer="super")
+        net.network_protocol(layer='super')
 
 
 def test_ip_v4(net):

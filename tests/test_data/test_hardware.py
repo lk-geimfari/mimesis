@@ -6,7 +6,7 @@ from elizabeth.data.int import (
     CPU_CODENAMES, PHONE_MODELS, HDD_SSD,
     RESOLUTIONS, MANUFACTURERS, CPU,
     GENERATION, SCREEN_SIZES, GRAPHICS,
-    GENERATION_ABBR
+    GENERATION_ABBR,
 )
 from elizabeth.providers.hardware import Hardware
 

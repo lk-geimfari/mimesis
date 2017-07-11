@@ -5,6 +5,17 @@ Elizabeth
 
 There are over eighteen different `data providers <https://github.com/lk-geimfari/elizabeth/blob/master/PROVIDERS.md>`_ available, which can produce data related to food, people, computer hardware, transportation, addresses, and more.  *Elizabeth* does not require any modules that are not in the Python standard library.
 
+Best Practice
+------------
+We strongly recommend to read articles which published in our blog_ on Medium. There we are speak about best practices and a number of most useful features of the library.
+
+Generating mock data using Elizabeth: First_ and Second_ part.
+
+.. _First: https://medium.com/wemake-services/generating-mock-data-using-elizabeth-part-i-ca5a55b8027c
+.. _Second: https://medium.com/wemake-services/generating-mock-data-with-elizabeth-part-ii-bb16a3f3106f
+.. _blog: https://medium.com/wemake-services
+
+
 Installation
 ------------
 
@@ -27,11 +38,13 @@ Basic Usage
 
     >>> from elizabeth import Personal
     >>> p = Personal()
-    >>>
+    
     >>> p.full_name(gender='female')
     'Antonetta Garrison'
+    
     >>> p.blood_type()
     'O-'
+    
     >>> p.occupation()
     'Programmer'
 
@@ -81,14 +94,18 @@ Usage
 .. code-block:: python
 
     >>> from elizabeth import Text
-    >>> en = Text()  # English is Elizabeth's default locale
+    >>> en = Text('en')
     >>> de = Text('de')
+	
     >>> en.sentence()
     'Ports are used to communicate with the external world.'
+	
     >>> de.sentence()
     'Wir müssen nicht vergessen Zickler.'
+	
     >>> en.color()
     'Blue'
+	
     >>> de.color()
     'Türkis'
 
@@ -99,20 +116,23 @@ providers from one object.
 
     >>> from elizabeth import Generic
     >>> g = Generic('es')
+	
     >>> g.datetime.month()
     'Agosto'
+	
     >>> g.code.imei()
     '353918052107063'
+	
     >>> g.food.fruit()
     'Limón'
 
 Related Libraries
 -----------------
 
-- `Presturinn`_ - a fake API based on Falcon and Elizabeth v0.2.0.
+- `elizabeth-cloud`_ - web version of Elizabeth using GraphQL and Sanic.
 - `pytest-elizabeth`_ - is a pytest plugin that provides pytest fixtures for Elizabeth providers.
 
-.. _Presturinn: https://github.com/lk-geimfari/presturinn
+.. _elizabeth-cloud: https://github.com/wemake-services/elizabeth-cloud
 .. _pytest-elizabeth: https://github.com/lk-geimfari/pytest-elizabeth
 
 Contributing
@@ -124,13 +144,14 @@ Guidelines
 ~~~~~~~~~~
 Your contributions are always welcome! Please adhere to the contribution guidelines:
 
-- Make one change per one commit.
+- Add one change per one commit.
 - Include only commit in each pull request.
 - Document your code with comments in English.
 - Check your spelling and grammar.
 - Check code style with `pycodestyle <https://pycodestyle.readthedocs.io/en/latest/>`_, `pylint <https://www.pylint.org/>`_, or another similar tool.
 - `Run the test suite <#running-tests>`_ and ensure all tests pass.
 - Write additional tests to cover new functionality.
+- Do not write bad code!
 
 
 Running Tests
@@ -152,7 +173,7 @@ License and Disclaimer
 
 `Elizabeth` is distributed under the `MIT License <https://github.com/lk-geimfari/church/blob/master/LICENSE>`_.
 
-The authors do not assume any responsibility for how you use this library or how you use data generated with it.  This library is designed only for developers and only with good intentions.  Do not use the data generated with `Elizabeth` for illegal purposes.
+The authors do not assume any responsibility for how you use this library or how you use data generated with it.  This library is designed only for developers and only with good intentions. Do not use the data generated with `Elizabeth` for illegal purposes.
 
 Contents
 --------

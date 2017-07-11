@@ -30,7 +30,7 @@ def locale_info(locale: str) -> str:
     locale = locale.lower()
 
     if locale not in SUPPORTED_LOCALES:
-        raise UnsupportedLocale("Locale %s is not supported" % locale)
+        raise UnsupportedLocale('Locale %s is not supported' % locale)
 
     return SUPPORTED_LOCALES[locale]['name']
 
@@ -60,10 +60,11 @@ def luhn_checksum(num) -> str:
 
 @functools.lru_cache(maxsize=None)
 def pull(file, locale='en') -> dict:
-    """Open json file file and get content from file and memorize result using lru_cache.
+    """Open json file file and get content from file and memorize result using
+     lru_cache.
 
-    .. note:: pull - is internal function, please do not use this function outside
-    the module 'elizabeth'.
+    .. note:: pull - is internal function, please do not use this function
+    outside the module 'elizabeth'.
 
     :param file: The name of file.
     :param locale: Locale.
@@ -93,13 +94,13 @@ def pull(file, locale='en') -> dict:
     locale = locale.lower()
 
     if locale not in SUPPORTED_LOCALES:
-        raise UnsupportedLocale("Locale %s is not supported" % locale)
+        raise UnsupportedLocale('Locale %s is not supported' % locale)
 
-    master_locale = locale.split("-")[0]
+    master_locale = locale.split('-')[0]
     data = get_data(master_locale)
 
     # Handle sub-locales
-    if "-" in locale:
+    if '-' in locale:
         data = update_dict(data, get_data(locale))
 
     return data
@@ -110,7 +111,8 @@ def download_image(url, save_path='', unverified_ctx=False):
 
     :param url: URL to image.
     :param save_path: Saving path.
-    :param unverified_ctx: Create unverified context. Use if you get CERTIFICATE_VERIFY_FAILED.
+    :param unverified_ctx: Create unverified context. Use if you get
+    CERTIFICATE_VERIFY_FAILED.
     :return: Image name.
     :rtype: str
     :Example:
@@ -121,7 +123,9 @@ def download_image(url, save_path='', unverified_ctx=False):
         try:
             ssl._create_default_https_context = ssl._create_stdlib_context
         except AttributeError:
-            raise NotImplementedError("unverified_ctx is only supported in Python 3.4+")
+            raise NotImplementedError(
+                'unverified_ctx is only supported in Python 3.4+',
+            )
 
     if url is not None:
         image_name = url.rsplit('/')[-1]

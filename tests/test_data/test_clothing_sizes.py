@@ -12,9 +12,9 @@ def sizes():
 
 def test_international(sizes):
     size_names = (
-        "L", "M", "S",
-        "XL", "XS", "XXL",
-        "XXS", "XXXL"
+        'L', 'M', 'S',
+        'XL', 'XS', 'XXL',
+        'XXS', 'XXXL',
     )
     result = sizes.international()
     assert result in size_names

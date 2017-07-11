@@ -2,7 +2,7 @@ from distutils.core import setup
 
 from elizabeth import (
     __author__,
-    __version__
+    __version__,
 )
 
 with open('PYPI_README.rst', 'r', encoding='utf-8') as f:
@@ -14,7 +14,7 @@ setup(
     packages=[
         'elizabeth',
         'elizabeth.core',
-        'elizabeth.builtins'
+        'elizabeth.builtins',
     ],
     keywords=[
         'db',
@@ -23,18 +23,18 @@ setup(
         'testing',
         'generate',
         'elizabeth',
-        'dummy'
+        'dummy',
     ],
     package_data={
         'elizabeth': [
-            'data/*/*'
-        ]
+            'data/*/*',
+        ],
     },
     data_files=[
-        ("", ["LICENSE",
-              'PYPI_README.rst'
-              ]
-         )
+        ('', ['LICENSE',
+              'PYPI_README.rst',
+              ],
+         ),
     ],
     url='https://github.com/lk-geimfari/elizabeth',
     license='MIT License',
@@ -43,7 +43,7 @@ setup(
     description='Elizabeth: dummy data for developers.',
     long_description=readme,
     classifiers=[
-        "Development Status :: 4 - Beta",
+        'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
         'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',

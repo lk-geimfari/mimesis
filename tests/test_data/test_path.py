@@ -7,7 +7,7 @@ import pytest
 from elizabeth.data.int import (
     PROGRAMMING_LANGS,
     FOLDERS,
-    PROJECT_NAMES
+    PROJECT_NAMES,
 )
 from elizabeth.providers.path import Path
 

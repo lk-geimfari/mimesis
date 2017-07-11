@@ -1,38 +1,9 @@
 import elizabeth
+from elizabeth.settings import SUPPORTED_LOCALES
+
 import pytest
 
-locales = [
-    "cs",
-    "da",
-    "de",
-    "de-at",
-    "de-ch",
-    "en",
-    "en-au",
-    "en-ca",
-    "en-gb",
-    "es",
-    "es-mx",
-    "fa",
-    "fi",
-    "fr",
-    "hu",
-    "is",
-    "it",
-    "ja",
-    "ko",
-    "nl",
-    "nl-be",
-    "no",
-    "pl",
-    "pt",
-    "pt-br",
-    "ru",
-    "sv",
-    "tr",
-    "uk",
-    "zh"
-]
+locales = list(SUPPORTED_LOCALES.keys())
 
 
 @pytest.fixture(params=locales)

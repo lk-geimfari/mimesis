@@ -36,7 +36,7 @@ def test_digit(numbers):
         0, 1, 2,
         3, 4, 5,
         6, 7, 8,
-        9
+        9,
     )
     result = numbers.digit()
     assert result in digits
