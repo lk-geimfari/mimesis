@@ -2,16 +2,10 @@
 
 import pytest
 
-from elizabeth.data.int import (
+from elizabeth.data import (
     EXTENSIONS,
     MIME_TYPES,
 )
-from elizabeth.providers.file import File
-
-
-@pytest.fixture
-def file():
-    return File()
 
 
 def test_extension(file):

@@ -1,4 +1,4 @@
-from elizabeth.data.int.network import (
+from elizabeth.data import (
     HTTP_METHODS,
     HTTP_STATUS_CODES,
     EMOJI,
@@ -11,8 +11,7 @@ from elizabeth.data.int.network import (
 )
 from elizabeth.exceptions import WrongArgument
 
-from .base import BaseProvider
-from .file import File
+from elizabeth.providers import BaseProvider, File
 from .personal import Personal
 
 

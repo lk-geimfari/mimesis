@@ -1,6 +1,12 @@
 BLOOD_GROUPS = (
-    'O+', 'A+', 'B+', 'AB+',
-    'O−', 'A−', 'B−', 'AB−'
+    'O+',
+    'A+',
+    'B+',
+    'AB+',
+    'O−',
+    'A−',
+    'B−',
+    'AB−',
 )
 
 FAVORITE_MUSIC_GENRE = (
@@ -27,7 +33,7 @@ FAVORITE_MUSIC_GENRE = (
     "Ambient house",
     "Classic",
     "Neoclassic",
-    "Drum and bass"
+    "Drum and bass",
 )
 
 GENDER_SYMBOLS = (
@@ -42,7 +48,7 @@ SEXUALITY_SYMBOLS = (
     '⚣',
     '⚥',
     '⚧',
-    '⚪'
+    '⚪',
 )
 
 ENGLISH_LEVEL = [
@@ -52,5 +58,5 @@ ENGLISH_LEVEL = [
     'Intermediate',
     'Upper Intermediate',
     'Advanced',
-    'Proficiency'
+    'Proficiency',
 ]

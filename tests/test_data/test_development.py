@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import pytest
-
-from elizabeth.data.int import (
+from elizabeth.data import (
     FRONTEND,
     PROGRAMMING_LANGS,
     OS,
@@ -12,12 +10,6 @@ from elizabeth.data.int import (
     BACKEND,
     SQL,
 )
-from elizabeth.providers.development import Development
-
-
-@pytest.fixture
-def dev():
-    return Development()
 
 
 def test_license(dev):

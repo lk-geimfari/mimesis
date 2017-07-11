@@ -1,4 +1,4 @@
-from elizabeth.data.int.scientific import MATH_FORMULAS
+from elizabeth.data import MATH_FORMULAS
 from elizabeth.utils import pull
 
 from .base import BaseProvider

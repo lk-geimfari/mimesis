@@ -2,14 +2,8 @@
 
 import pytest
 
-from elizabeth.data.int import SI_PREFIXES
+from elizabeth.data import SI_PREFIXES
 from elizabeth.exceptions import WrongArgument
-from elizabeth.providers.units import UnitSystem
-
-
-@pytest.fixture
-def us():
-    return UnitSystem()
 
 
 def test_mass(us):

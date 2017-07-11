@@ -1,6 +1,6 @@
 import json
 
-from elizabeth.data.int.development import (
+from elizabeth.data import (
     CSS_SELECTORS,
     CSS_PROPERTIES,
     CSS_SIZE_UNITS,

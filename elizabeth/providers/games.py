@@ -1,6 +1,11 @@
 from elizabeth.providers import BaseProvider
 
-from elizabeth.data.int.games import *
+from elizabeth.data import (
+    GAMES,
+    GAMING_PLATFORMS,
+    GENRES,
+    SCORE_PHRASES,
+)
 
 __all__ = ['Games']
 

@@ -1,4 +1,4 @@
-from .base import BaseProvider
+from elizabeth.providers import BaseProvider
 
 
 class ClothingSizes(BaseProvider):

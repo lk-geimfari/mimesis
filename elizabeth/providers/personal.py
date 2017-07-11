@@ -6,9 +6,9 @@ from string import (
     ascii_letters,
 )
 
-from elizabeth.data.int.network import EMAIL_DOMAINS
-from elizabeth.data.int.personal import (
+from elizabeth.data import (
     BLOOD_GROUPS,
+    EMAIL_DOMAINS,
     GENDER_SYMBOLS,
     ENGLISH_LEVEL,
     FAVORITE_MUSIC_GENRE,
@@ -16,9 +16,9 @@ from elizabeth.data.int.personal import (
 )
 from elizabeth.exceptions import WrongArgument
 from elizabeth.utils import pull, luhn_checksum
+from elizabeth.providers import BaseProvider, Code
 
-from .base import BaseProvider
-from .code import Code
+__all__ = ['Personal']
 
 
 class Personal(BaseProvider):

@@ -1,4 +1,4 @@
-from elizabeth.data.int.transport import TRUCKS, CARS, AIRPLANES
+from elizabeth.data import TRUCKS, CARS, AIRPLANES
 
 from .base import BaseProvider
 from .code import Code

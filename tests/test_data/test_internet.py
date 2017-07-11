@@ -4,7 +4,7 @@ import re
 
 import pytest
 
-from elizabeth.data.int import (
+from elizabeth.data import (
     SUBREDDITS, EMOJI, USER_AGENTS,
     SUBREDDITS_NSFW, HASHTAGS,
     HTTP_METHODS, MIME_TYPES,
@@ -12,8 +12,9 @@ from elizabeth.data.int import (
     NETWORK_PROTOCOLS,
 )
 from elizabeth.exceptions import WrongArgument
-from elizabeth.providers.internet import Internet
-from tests.test_data._patterns import (
+from elizabeth import Internet
+
+from ._patterns import (
     HOME_PAGE,
     IP_V6_REGEX,
     IP_V4_REGEX,

@@ -1,23 +1,28 @@
 import inspect
 
-from .base import BaseProvider
-from .address import Address
-from .business import Business
-from .clothing import ClothingSizes
-from .code import Code
-from .date import Datetime
-from .development import Development
-from .file import File
-from .food import Food
+from elizabeth.providers import (
+    Address,
+    BaseProvider,
+    Business,
+    ClothingSizes,
+    Code,
+    Datetime,
+    Development,
+    File,
+    Food,
+)
+
+# TODO: Resolve importing errors and use importing format as above.
+from .personal import Personal
 from .hardware import Hardware
 from .internet import Internet
 from .numbers import Numbers
 from .path import Path
-from .personal import Personal
 from .science import Science
 from .text import Text
 from .transport import Transport
 from .units import UnitSystem
+from .games import Games
 
 
 class Generic(BaseProvider):
@@ -45,6 +50,7 @@ class Generic(BaseProvider):
         self.internet = Internet()
         self.transport = Transport()
         self.path = Path()
+        self.games = Games()
 
     def __getattr__(self, attrname):
         """Get _attribute without underscore

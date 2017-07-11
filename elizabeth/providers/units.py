@@ -1,4 +1,4 @@
-from elizabeth.data.int.scientific import SI_PREFIXES
+from elizabeth.data import SI_PREFIXES
 from elizabeth.exceptions import WrongArgument
 
 from .base import BaseProvider

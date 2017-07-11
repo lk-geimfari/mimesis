@@ -1,14 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import pytest
-
-from elizabeth.providers.clothing import ClothingSizes
-
-
-@pytest.fixture
-def sizes():
-    return ClothingSizes()
-
 
 def test_international(sizes):
     size_names = (

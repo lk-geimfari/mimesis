@@ -56,11 +56,46 @@ def text(request):
     return elizabeth.Text()
 
 
+@pytest.fixture
+def path():
+    return elizabeth.Path()
+
+
 @pytest.fixture()
 def transport():
     return elizabeth.Transport()
 
 
 @pytest.fixture
+def us():
+    return elizabeth.UnitSystem()
+
+
+@pytest.fixture
 def games():
     return elizabeth.Games()
+
+
+@pytest.fixture
+def numbers():
+    return elizabeth.Numbers()
+
+
+@pytest.fixture
+def hard():
+    return elizabeth.Hardware()
+
+
+@pytest.fixture
+def file():
+    return elizabeth.File()
+
+
+@pytest.fixture
+def dev():
+    return elizabeth.Development()
+
+
+@pytest.fixture
+def sizes():
+    return elizabeth.ClothingSizes()

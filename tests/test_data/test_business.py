@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import re
 
-from elizabeth.data.int import CURRENCIES, CURRENCY_SYMBOLS
+from elizabeth.data import CURRENCIES, CURRENCY_SYMBOLS
 from ._patterns import STR_REGEX
 
 

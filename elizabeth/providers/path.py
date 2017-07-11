@@ -1,7 +1,7 @@
 import os
 import sys
 
-from elizabeth.data.int.development import (
+from elizabeth.data import (
     PROGRAMMING_LANGS,
     PROJECT_NAMES,
     FOLDERS,

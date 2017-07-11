@@ -4,7 +4,7 @@ import re
 
 import pytest
 
-from elizabeth.data.int import COUNTRIES_ISO, CONTINENT_CODES
+from elizabeth.data import COUNTRIES_ISO, CONTINENT_CODES
 from ._patterns import POSTAL_CODE_REGEX, STR_REGEX
 
 

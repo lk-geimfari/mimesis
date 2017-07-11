@@ -2,19 +2,11 @@
 import os
 from unittest.mock import patch
 
-import pytest
-
-from elizabeth.data.int import (
+from elizabeth.data import (
     PROGRAMMING_LANGS,
     FOLDERS,
     PROJECT_NAMES,
 )
-from elizabeth.providers.path import Path
-
-
-@pytest.fixture
-def path():
-    return Path()
 
 
 def test_root(path):

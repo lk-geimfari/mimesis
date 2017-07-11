@@ -4,7 +4,7 @@ import re
 
 import pytest
 
-from elizabeth.data.int import (
+from elizabeth.data import (
     FAVORITE_MUSIC_GENRE, SEXUALITY_SYMBOLS,
     BLOOD_GROUPS, GENDER_SYMBOLS, ENGLISH_LEVEL,
 )

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import re
 
-from elizabeth.data.int import LOCALE_CODES
+from elizabeth.data import LOCALE_CODES
 from ._patterns import STR_REGEX
 
 

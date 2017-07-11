@@ -1,10 +1,10 @@
-from elizabeth.data.int.address import (
+from elizabeth.data import (
     CONTINENT_CODES,
     COUNTRIES_ISO,
     SHORTENED_ADDRESS_FMT,
 )
-from .base import BaseProvider
-from .code import Code
+
+from elizabeth.providers import BaseProvider
 from elizabeth.utils import pull
 
 
@@ -102,6 +102,8 @@ class Address(BaseProvider):
         :Example:
             389213
         """
+        from elizabeth.providers import Code
+
         mask = self.data['postal_code_fmt']
         return Code(self.locale).custom_code(mask)
 

@@ -1,4 +1,4 @@
-from elizabeth.data.int.development import (
+from elizabeth.data import (
     LICENSES,
     SQL,
     NOSQL,
@@ -8,7 +8,7 @@ from elizabeth.data.int.development import (
     FRONTEND,
     OS,
 )
-from .base import BaseProvider
+from elizabeth.providers import BaseProvider
 
 
 class Development(BaseProvider):
