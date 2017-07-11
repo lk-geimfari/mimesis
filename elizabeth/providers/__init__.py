@@ -18,6 +18,7 @@ from elizabeth.providers.structured import Structured
 from elizabeth.providers.text import Text
 from elizabeth.providers.transport import Transport
 from elizabeth.providers.units import UnitSystem
+from elizabeth.providers.games import Games
 
 __all__ = [
     # The main class:
@@ -32,6 +33,7 @@ __all__ = [
     'Development',
     'File',
     'Food',
+    'Games',
     'Hardware',
     'Internet',
     'Numbers',

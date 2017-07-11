@@ -13,3 +13,4 @@ from .network import *
 from .personal import *
 from .scientific import *
 from .transport import *
+from .games import *

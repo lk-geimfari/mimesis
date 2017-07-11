@@ -88,3 +88,8 @@ def text(request):
 @pytest.fixture()
 def transport():
     return elizabeth.Transport()
+
+
+@pytest.fixture
+def games():
+    return elizabeth.Games()
