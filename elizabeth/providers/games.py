@@ -18,7 +18,7 @@ class Games(BaseProvider):
     def score(self, minimum=1, maximum=10):
         return self.random.randint(minimum * 10, maximum * 10) / 10
 
-    def pegi_rating(self, pt=True):
+    def pegi_rating(self, pt=False):
         """Get a random PEGI rating.
 
         :param pt: PEGI rating for Portugal.
