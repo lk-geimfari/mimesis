@@ -82,7 +82,7 @@ def structured(request):
 
 @pytest.fixture(params=locales)
 def text(request):
-    return elizabeth.Text(request.param)
+    return elizabeth.Text()
 
 
 @pytest.fixture()

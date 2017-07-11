@@ -1,4 +1,5 @@
 import datetime
+from calendar import monthrange
 
 from elizabeth.data.int.datetime import ROMAN_NUMS
 from elizabeth.utils import pull
@@ -87,7 +88,7 @@ class Datetime(BaseProvider):
         year = self.random.randint(start, end)
         month = self.random.randint(1, 12)
         d = datetime.date(
-            year, month, self.random.randint(1, self.random.monthrange(year, month)[1]))
+            year, month, self.random.randint(1, monthrange(year, month)[1]))
         return d.strftime(fmt)
 
     def time(self, fmt=None):

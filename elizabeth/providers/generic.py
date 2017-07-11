@@ -54,8 +54,7 @@ class Generic(BaseProvider):
         """
         attribute = object.__getattribute__(self, '_' + attrname)
         if attribute and callable(attribute):
-            attribute = attribute(self.locale)
-            return attribute
+            return attribute()
 
     def add_provider(self, cls):
         """Add a custom provider to Generic() object.

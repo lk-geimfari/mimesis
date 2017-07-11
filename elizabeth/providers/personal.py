@@ -86,7 +86,6 @@ class Personal(BaseProvider):
             names = self.data['names'][gender]
         except KeyError:
             raise WrongArgument('gender must be "female" or "male"')
-
         return self.random.choice(names)
 
     def surname(self, gender='female'):

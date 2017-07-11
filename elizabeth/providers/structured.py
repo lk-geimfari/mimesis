@@ -23,7 +23,7 @@ class Structured(BaseProvider):
         """
         super().__init__(*args, **kwargs)
         self.internet = Internet()
-        self.text = Text(self.locale)
+        self.text = Text()
 
     def css(self):
         """Generates a random snippet of CSS.
