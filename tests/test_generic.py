@@ -53,7 +53,7 @@ def test_base_code(generic):
 
 def test_bad_argument(generic):
     with pytest.raises(AttributeError):
-        _ = generic.bad_argument
+        _ = generic.bad_argument  # noqa
 
 
 def test_add_provider(generic):
@@ -75,7 +75,7 @@ def test_add_provider(generic):
     with pytest.raises(TypeError):
         generic.add_provider(True)
 
-    class UnnamedProvider():
+    class UnnamedProvider(object):
         @staticmethod
         def nothing():
             return None

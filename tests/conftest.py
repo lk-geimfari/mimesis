@@ -53,6 +53,8 @@ def structured(request):
 
 @pytest.fixture(params=locales)
 def text(request):
+    # TODO: At this moment this fixture check only english version of provider.
+    # Fix it!
     return mimesis.Text()
 
 

@@ -1,19 +1,19 @@
 import pytest
 
-from mimesis.decorators import romanized
+import mimesis.decorators
 
 
-@romanized('ru')
+@mimesis.decorators.romanized('ru')
 def russian_user():
     return 'Ликид Геимфари'
 
 
-@romanized('ru')
+@mimesis.decorators.romanized('ru')
 def russian_mixed_text():
     return 'Что-то там_4352-!@#$%^&*()_+?"<>"'
 
 
-@romanized('uk')
+@mimesis.decorators.romanized('uk')
 def ukrainian_text():
     return 'Українська мова!'
 
@@ -32,9 +32,9 @@ def test_ukrainian():
 
 def test_not_implemented_error():
 
-    @romanized('nil')
+    @mimesis.decorators.romanized('nil')
     def user():
-        return 'Elizabeth'
+        return 'Mimesis'
 
     with pytest.raises(KeyError):
         user()

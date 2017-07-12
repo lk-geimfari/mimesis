@@ -10,14 +10,15 @@
 | 6   | Development     | *Data for developers (version, programming language etc.)*     |
 | 7   | File            | *File data (extension etc.)*                                   |
 | 8   | Food            | *Information on food (vegetables, fruits, measurements etc.)*  |
-| 9   | Personal        | *Personal data (name, surname, age, email etc.)*               |
-| 10  | Text            | *Text data (sentence, title etc.)*                             |
-| 11  | Transport       | *Dummy data about transport (truck model, car etc.)*           |
-| 12  | Science         | *Scientific data (scientist, math_formula etc.)*               |
-| 13  | Structured      | *Structured data (html, css etc.)*                             |
-| 14  | Internet        | *Internet data (facebook, twitter etc.)*                       |
-| 15  | Hardware        | *The data about the hardware (resolution, cpu, graphics etc.)* |
-| 16  | Numbers         | *Numerical data (floats, primes, digit etc.)*                  |
-| 17  | Path            | *Provides methods and property for generate paths.*            |
-| 18  | UnitSytem       | *Provides names of unit systems in international format*       |
-| 19  | Generic         | *All at one*                                                   |
+| 9   | Games           | *Games data (game, score, pegi_rating etc.)*  |
+| 10   | Personal        | *Personal data (name, surname, age, email etc.)*               |
+| 11  | Text            | *Text data (sentence, title etc.)*                             |
+| 12  | Transport       | *Dummy data about transport (truck model, car etc.)*           |
+| 13  | Science         | *Scientific data (scientist, math_formula etc.)*               |
+| 14  | Structured      | *Structured data (html, css etc.)*                             |
+| 15  | Internet        | *Internet data (facebook, twitter etc.)*                       |
+| 16  | Hardware        | *The data about the hardware (resolution, cpu, graphics etc.)* |
+| 17  | Numbers         | *Numerical data (floats, primes, digit etc.)*                  |
+| 18  | Path            | *Provides methods and property for generate paths.*            |
+| 19  | UnitSytem       | *Provides names of unit systems in international format*       |
+| 20  | Generic         | *All at one*                                                   |

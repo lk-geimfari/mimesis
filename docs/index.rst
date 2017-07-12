@@ -1,9 +1,9 @@
-Elizabeth
+Mimesis
 =========
 
 **Mimesis** is a fast and easy to use Python library for generating dummy data for a variety of purposes.  This data can be particularly useful during software development and testing.  For example, it could be used to populate a testing database for a web application with user information such as email addresses, usernames, first names, last names, etc.
 
-There are over eighteen different `data providers <https://github.com/lk-geimfari/mimesis/blob/master/PROVIDERS.md>`_ available, which can produce data related to food, people, computer hardware, transportation, addresses, and more.  *Elizabeth* does not require any modules that are not in the Python standard library.
+There are over eighteen different `data providers <https://github.com/lk-geimfari/mimesis/blob/master/PROVIDERS.md>`_ available, which can produce data related to food, people, computer hardware, transportation, addresses, and more.  *Mimesis* does not require any modules that are not in the Python standard library.
 
 Best Practice
 ------------
@@ -51,7 +51,7 @@ Basic Usage
 Locales
 -------
 
-You can specify a locale when creating providers and they will return data that is appropriate for the language or country associated with that locale.  `Elizabeth` currently includes support for 30 different locales:
+You can specify a locale when creating providers and they will return data that is appropriate for the language or country associated with that locale.  `Mimesis` currently includes support for 30 different locales:
 
 =======  ====================  ====================
 Code     Name                  Native Name
@@ -73,7 +73,7 @@ Code     Name                  Native Name
 `hu`     Hungarian             Magyar
 `is`     Icelandic             Íslenska
 `it`     Italian               Italiano
-`jp`     Japanese              日本語
+`ja`     Japanese              日本語
 `ko`	 Korean                한국어
 `nl`     Dutch                 Nederlands
 `nl-be`  Belgium Dutch         Nederlands
@@ -109,7 +109,7 @@ Usage
     >>> de.color()
     'Türkis'
 
-When you only need to generate data for a single locale, use the `Generic` provider, and you can access all `Elizabeth`
+When you only need to generate data for a single locale, use the `Generic` provider, and you can access all Mimesis
 providers from one object.
 
 .. code-block:: python
@@ -129,8 +129,8 @@ providers from one object.
 Related Libraries
 -----------------
 
-- `elizabeth-cloud`_ - web version of Elizabeth using GraphQL and Sanic.
-- `pytest-elizabeth`_ - is a pytest plugin that provides pytest fixtures for Elizabeth providers.
+- `elizabeth-cloud`_ - web version of Mimesis using GraphQL and Sanic.
+- `pytest-elizabeth`_ - is a pytest plugin that provides pytest fixtures for Mimesis providers.
 
 .. _elizabeth-cloud: https://github.com/wemake-services/elizabeth-cloud
 .. _pytest-elizabeth: https://github.com/lk-geimfari/pytest-elizabeth
@@ -138,7 +138,7 @@ Related Libraries
 Contributing
 ------------
 
-The `source code <https://github.com/lk-geimfari/mimesis>`_ and `issue tracker <https://github.com/lk-geimfari/mimesis/issues>`_ are hosted on GitHub.  *Elizabeth* is tested against Python 3.2 through 3.6 on `Travis-CI <https://travis-ci.org/lk-geimfari/mimesis>`_.  Test coverage is monitored with `Codecov <https://codecov.io/gh/lk-geimfari/mimesis>`_.
+The `source code <https://github.com/lk-geimfari/mimesis>`_ and `issue tracker <https://github.com/lk-geimfari/mimesis/issues>`_ are hosted on GitHub.  *Mimesis* is tested against Python 3.2 through 3.6 on `Travis-CI <https://travis-ci.org/lk-geimfari/mimesis>`_.  Test coverage is monitored with `Codecov <https://codecov.io/gh/lk-geimfari/mimesis>`_.
 
 Guidelines
 ~~~~~~~~~~
@@ -173,7 +173,7 @@ License and Disclaimer
 
 `Mimesis` is distributed under the `MIT License <https://github.com/lk-geimfari/church/blob/master/LICENSE>`_.
 
-The authors do not assume any responsibility for how you use this library or how you use data generated with it.  This library is designed only for developers and only with good intentions. Do not use the data generated with `Elizabeth` for illegal purposes.
+The authors do not assume any responsibility for how you use this library or how you use data generated with it.  This library is designed only for developers and only with good intentions. Do not use the data generated with Mimesis for illegal purposes.
 
 Contents
 --------

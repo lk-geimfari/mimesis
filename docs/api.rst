@@ -2,7 +2,7 @@
 API Reference
 =============
 
-This part of the documentation covers all the interfaces of *Elizabeth*.
+This part of the documentation covers all the interfaces of *Mimesis*.
 
 Generic
 =======

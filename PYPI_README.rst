@@ -1,4 +1,4 @@
-.. image:: https://raw.githubusercontent.com/lk-geimfari/elizabeth/master/other/logo.png
+.. image:: https://raw.githubusercontent.com/lk-geimfari/mimesis/master/media/logo.png
     :target: https://github.com/lk-geimfari/elizabeth
 
 =========================
@@ -34,13 +34,13 @@ To install Elizabeth, simply:
 
 .. code-block:: bash
 
-    ➜  ~ pip install elizabeth
+    ➜  ~ pip install mimesis
 
 Basic Usage:
 
 .. code-block:: python
 
-    >>> from elizabeth import Personal, Address
+    >>> from mimesis import Personal, Address
     >>> person = Personal('en')
     >>> address = Address('en')
 
@@ -78,13 +78,13 @@ Basic Usage:
 Locales
 -------
 
-You can specify a locale when creating providers and they will return data that is appropriate for the language or country associated with that locale. Elizabeth currently includes support for `27 <https://github.com/lk-geimfari/elizabeth#locales>`_ different locales.
+You can specify a locale when creating providers and they will return data that is appropriate for the language or country associated with that locale. Elizabeth currently includes support for `32 <https://github.com/lk-geimfari/mimesis#locales>`_ different locales.
 
 Using locales:
 
 .. code-block:: python
 
-    >>> from elizabeth import Personal
+    >>> from mimesis import Personal
 
     >>> en = Personal('en')
     >>> de = Personal('de')
@@ -135,7 +135,7 @@ providers from one object.
 
 
 
-    >>> from elizabeth import Generic
+    >>> from mimesis import Generic
     >>> g = Generic('es')
 
     >>> g.datetime.month()
@@ -151,14 +151,14 @@ providers from one object.
 Advantages
 ----------
 
-``Elizabeth`` offers a number of advantages over other similar
-libraries, such as ``Faker``:
+Mimesis offers a number of advantages over other similar
+libraries, such as Faker:
 
--  Performance. ``Elizabeth`` is significantly `faster`_ than other
+-  Performance. Mimesis is significantly `faster`_ than other
    similar libraries.
--  Completeness. ``Elizabeth`` strives to provide many detailed
+-  Completeness. Mimesis strives to provide many detailed
    providers that offer a variety of data generators.
--  Simplicity. ``Elizabeth`` does not require any modules other than the
+-  Simplicity. Mimesis does not require any modules other than the
    Python standard library.
 
 See `here`_ for an example of how we compare performance with other
@@ -171,16 +171,14 @@ libraries.
 Integration with Web Application Frameworks
 -------------------------------------------
 
-You can use ``Elizabeth`` during development and testing of applications
+You can use Mimesis during development and testing of applications
 built on a variety of frameworks. Here is an example of integration with
-a ``Flask`` application:
+a Flask application:
 
 .. code:: python
 
     class Patient(db.Model):
         id = db.Column(db.Integer, primary_key=True)
-        email = db.Column(db.String(120), unique=True)
-        phone_number = db.Column(db.String(25))
         full_name = db.Column(db.String(100))
         weight = db.Column(db.String(64))
         height = db.Column(db.String(64))
@@ -192,19 +190,17 @@ a ``Flask`` application:
 
         @staticmethod
         def _bootstrap(count=500, locale='en', gender):
-            from elizabeth import Personal
+            from mimesis import Personal
 
             person = Personal(locale)
 
             for _ in range(count):
                 patient = Patient(
-                    email=person.email(),
-                    phone_number=person.telephone(),
                     full_name=person.full_name(gender=gender),
                     age=person.age(minimum=18, maximum=45),
                     weight=person.weight(),
                     height=person.height(),
-                    blood_type=person.blood_type()
+                    blood_type=person.blood_type(),
                 )
 
                 db.session.add(patient)
@@ -230,10 +226,6 @@ and do following:
     <class 'app.models.Patient'>
 
     >>> Patient()._bootstrap(count=1000, locale='en', gender='female')
-
-Result: `screenshot`_
-
-.. _screenshot: https://raw.githubusercontent.com/lk-geimfari/elizabeth/master/other/screenshots/en_bootstrap.png
 
 
 Custom Providers
@@ -280,24 +272,7 @@ import them explicitly:
 
 .. code:: python
 
-    >>> from elizabeth import Generic
-    >>> from mimesis.builtins.pt_br import BrazilSpecProvider
-
-    >>> generic = Generic('pt-br')
-
-    >>> class BrazilProvider(BrazilSpecProvider):
-    ...
-    ...     class Meta:
-    ...         name = "brazil_provider"
-    ...
-    >>> generic.add_provider(BrazilProvider)
-    >>> generic.brazil_provider.cpf()
-    '696.441.186-00'
-
-
-
-
-    >>> from elizabeth import Generic
+    >>> from mimesis import Generic
     >>> from mimesis.builtins.pt_br import BrazilSpecProvider
 
     >>> generic = Generic('pt-br')
@@ -315,7 +290,7 @@ import them explicitly:
 
 
     >>> from mimesis import Generic
-    >>> from elizabeth.builtins.pt_br import BrazilSpecProvider
+    >>> from mimesis.builtins.pt_br import BrazilSpecProvider
 
     >>> generic = Generic('pt-br')
 
@@ -332,7 +307,7 @@ import them explicitly:
 
 
     >>> from mimesis import Generic
-    >>> from elizabeth.builtins.pt_br import BrazilSpecProvider
+    >>> from mimesis.builtins.pt_br import BrazilSpecProvider
 
     >>> generic = Generic('pt-br')
 
@@ -348,8 +323,25 @@ import them explicitly:
 
 
 
-    >>> from elizabeth import Generic
-    >>> from elizabeth.builtins.pt_br import BrazilSpecProvider
+    >>> from mimesis import Generic
+    >>> from mimesis.builtins.pt_br import BrazilSpecProvider
+
+    >>> generic = Generic('pt-br')
+
+    >>> class BrazilProvider(BrazilSpecProvider):
+    ...
+    ...     class Meta:
+    ...         name = "brazil_provider"
+    ...
+    >>> generic.add_provider(BrazilProvider)
+    >>> generic.brazil_provider.cpf()
+    '696.441.186-00'
+
+
+
+
+    >>> from mimesis import Generic
+    >>> from mimesis.builtins.pt_br import BrazilSpecProvider
 
     >>> generic = Generic('pt-br')
 
@@ -372,30 +364,7 @@ Russian:
 
 .. code:: python
 
-    >>> from elizabeth import Personal
-    >>> from mimesis.decorators import romanized
-
-    >>> pr = Personal('ru')
-
-    >>> @romanized('ru')
-    ... def get_name_ro():
-    ...     return pr.full_name()
-    ...
-
-    >>> def get_name_ru():
-    ...     return pr.full_name()
-    ...
-
-    >>> get_name_ru()
-    'Вида Панова'
-
-    >>> get_name_ro()
-    'Veronika Denisova'
-
-
-
-
-    >>> from elizabeth import Personal
+    >>> from mimesis import Personal
     >>> from mimesis.decorators import romanized
 
     >>> pr = Personal('ru')
@@ -419,7 +388,7 @@ Russian:
 
 
     >>> from mimesis import Personal
-    >>> from elizabeth.decorators import romanized
+    >>> from mimesis.decorators import romanized
 
     >>> pr = Personal('ru')
 
@@ -442,7 +411,7 @@ Russian:
 
 
     >>> from mimesis import Personal
-    >>> from elizabeth.decorators import romanized
+    >>> from mimesis.decorators import romanized
 
     >>> pr = Personal('ru')
 
@@ -464,8 +433,31 @@ Russian:
 
 
 
-    >>> from elizabeth import Personal
-    >>> from elizabeth.decorators import romanized
+    >>> from mimesis import Personal
+    >>> from mimesis.decorators import romanized
+
+    >>> pr = Personal('ru')
+
+    >>> @romanized('ru')
+    ... def get_name_ro():
+    ...     return pr.full_name()
+    ...
+
+    >>> def get_name_ru():
+    ...     return pr.full_name()
+    ...
+
+    >>> get_name_ru()
+    'Вида Панова'
+
+    >>> get_name_ro()
+    'Veronika Denisova'
+
+
+
+
+    >>> from mimesis import Personal
+    >>> from mimesis.decorators import romanized
 
     >>> pr = Personal('ru')
 
@@ -490,11 +482,11 @@ Disclaimer
 
 The authors assume no responsibility for how you use this library data
 generated by it. This library is designed only for developers with good
-intentions. Do not use the data generated with ``Elizabeth`` for illegal
+intentions. Do not use the data generated with ``Mimesis`` for illegal
 purposes.
 
-.. _contribution: https://github.com/lk-geimfari/elizabeth/blob/master/CONTRIBUTING.md
-.. _LICENSE: https://github.com/lk-geimfari/elizabeth/blob/master/LICENSE
+.. _contribution: https://github.com/lk-geimfari/mimesis/blob/master/CONTRIBUTING.md
+.. _LICENSE: https://github.com/lk-geimfari/mimesis/blob/master/LICENSE
 
 
 Author
