@@ -1,6 +1,6 @@
 <a href="https://github.com/lk-geimfari/mimesis/">
     <p align="center">
-      <img src="https://raw.githubusercontent.com/lk-geimfari/mimesis/master/media/logo.png">
+      <img src="https://raw.githubusercontent.com/lk-geimfari/elizabeth/feature-new-strucutre/media/logo.png">
     </p>
 </a>
 
