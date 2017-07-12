@@ -1,6 +1,6 @@
 import pytest
 
-from elizabeth.builtins import JapanSpecProvider
+from mimesis.builtins import JapanSpecProvider
 
 
 @pytest.fixture

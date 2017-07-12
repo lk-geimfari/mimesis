@@ -7,7 +7,7 @@ This part of the documentation covers all the interfaces of *Elizabeth*.
 Generic
 =======
 
-.. autoclass:: elizabeth.Generic
+.. autoclass:: mimesis.Generic
    :members:
    :special-members: __init__
 
@@ -17,131 +17,131 @@ Providers
 Address
 -------
 
-.. autoclass:: elizabeth.Address
+.. autoclass:: mimesis.Address
    :members:
    :special-members: __init__
 
 Business
 --------
 
-.. autoclass:: elizabeth.Business
+.. autoclass:: mimesis.Business
    :members:
    :special-members: __init__
 
 ClothingSizes
 -------------
 
-.. autoclass:: elizabeth.ClothingSizes
+.. autoclass:: mimesis.ClothingSizes
    :members:
    :special-members: __init__
 
 Code
 ----
 
-.. autoclass:: elizabeth.Code
+.. autoclass:: mimesis.Code
    :members:
    :special-members: __init__
 
 Datetime
 --------
 
-.. autoclass:: elizabeth.Datetime
+.. autoclass:: mimesis.Datetime
    :members:
    :special-members: __init__
 
 Development
 -----------
 
-.. autoclass:: elizabeth.Development
+.. autoclass:: mimesis.Development
    :members:
    :special-members: __init__
 
 File
 ----
 
-.. autoclass:: elizabeth.File
+.. autoclass:: mimesis.File
    :members:
    :special-members: __init__
 
 Food
 ----
 
-.. autoclass:: elizabeth.Food
+.. autoclass:: mimesis.Food
    :members:
    :special-members: __init__
 
 Hardware
 --------
 
-.. autoclass:: elizabeth.core.Hardware
+.. autoclass:: mimesis.core.Hardware
    :members:
    :special-members: __init__
 
 Internet
 --------
 
-.. autoclass:: elizabeth.core.Internet
+.. autoclass:: mimesis.core.Internet
    :members:
    :special-members: __init__
 
 Network
 -------
 
-.. autoclass:: elizabeth.Network
+.. autoclass:: mimesis.Network
    :members:
    :special-members: __init__
 
 Numbers
 -------
 
-.. autoclass:: elizabeth.Numbers
+.. autoclass:: mimesis.Numbers
    :members:
    :special-members: __init__
 
 Path
 --------
 
-.. autoclass:: elizabeth.Path
+.. autoclass:: mimesis.Path
    :members:
    :special-members: __init__
 
 Personal
 --------
 
-.. autoclass:: elizabeth.Personal
+.. autoclass:: mimesis.Personal
    :members:
    :special-members: __init__
 
 Science
 -------
 
-.. autoclass:: elizabeth.Science
+.. autoclass:: mimesis.Science
    :members:
    :special-members: __init__
 
 Structured
 -------
 
-.. autoclass:: elizabeth.Structured
+.. autoclass:: mimesis.Structured
    :members:
    :special-members: __init__
 
 Text
 ----
 
-.. autoclass:: elizabeth.Text
+.. autoclass:: mimesis.Text
    :members:
    :special-members: __init__
 
 Transport
 ---------
 
-.. autoclass:: elizabeth.Transport
+.. autoclass:: mimesis.Transport
    :members:
    :special-members: __init__
 
 Exceptions
 ==========
 
-.. automodule:: elizabeth.exceptions
+.. automodule:: mimesis.exceptions
    :members:

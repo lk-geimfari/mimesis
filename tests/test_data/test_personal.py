@@ -4,9 +4,9 @@ import re
 
 import pytest
 
-from elizabeth.data import (BLOOD_GROUPS, ENGLISH_LEVEL, FAVORITE_MUSIC_GENRE,
-                            GENDER_SYMBOLS, SEXUALITY_SYMBOLS)
-from elizabeth.exceptions import WrongArgument
+from mimesis.data import (BLOOD_GROUPS, ENGLISH_LEVEL, FAVORITE_MUSIC_GENRE,
+                          GENDER_SYMBOLS, SEXUALITY_SYMBOLS)
+from mimesis.exceptions import WrongArgument
 
 from . import _patterns as p
 

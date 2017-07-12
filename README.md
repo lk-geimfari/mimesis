@@ -1,6 +1,6 @@
-<a href="https://github.com/lk-geimfari/elizabeth/">
+<a href="https://github.com/lk-geimfari/mimesis/">
     <p align="center">
-      <img src="https://raw.githubusercontent.com/lk-geimfari/elizabeth/master/other/logo.png" alt="Elizabeth">
+      <img src="https://raw.githubusercontent.com/lk-geimfari/mimesis/master/media/logo.png">
     </p>
 </a>
 
@@ -14,29 +14,29 @@
 
 ## Description
 
-**Elizabeth** is a fast and easy to use Python library, which helps generate mock datadata for a variety of purposes.  This data can be particularly useful during software development and testing.  For example, it could be used to populate a testing database for a web application with user information such as email addresses, usernames, first names, last names, etc. The library was written with the use of tools from the standard Python library, and therefore, it doesn’t have any side dependencies. Currently the library supports [30](https://github.com/lk-geimfari/elizabeth#locales) languages and [19](https://github.com/lk-geimfari/elizabeth/blob/master/PROVIDERS.md) class providers, supplying various data.
+**Mimesis** is a fast and easy to use Python library, which helps generate mock datadata for a variety of purposes.  This data can be particularly useful during software development and testing.  For example, it could be used to populate a testing database for a web application with user information such as email addresses, usernames, first names, last names, etc. The library was written with the use of tools from the standard Python library, and therefore, it doesn’t have any side dependencies. Currently the library supports [30](https://github.com/lk-geimfari/mimesis#locales) languages and [19](https://github.com/lk-geimfari/mimesis/blob/master/PROVIDERS.md) class providers, supplying various data.
 
 ## Documentation
-Elizabeth is simple to use, and the below examples should help you get started. Complete documentation for Elizabeth is available [here](http://elizabeth.readthedocs.io/). You can read more about this library in English here: [part 1](https://medium.com/wemake-services/generating-mock-data-using-elizabeth-part-i-ca5a55b8027c) and [part 2](https://medium.com/wemake-services/generating-mock-data-with-elizabeth-part-ii-bb16a3f3106f).
+Mimesis is simple to use, and the below examples should help you get started. Complete documentation for Elizabeth is available [here](http://elizabeth.readthedocs.io/). You can read more about this library in English here: [part 1](https://medium.com/wemake-services/generating-mock-data-using-elizabeth-part-i-ca5a55b8027c) and [part 2](https://medium.com/wemake-services/generating-mock-data-with-elizabeth-part-ii-bb16a3f3106f).
 
 ## Installation
-To install `Elizabeth`, simply:
+To install `Mimesis`, simply:
 
 ```zsh
-➜  ~ pip install elizabeth
+➜  ~ pip install mimesis
 ```
 
 Also you can install it manually (pre-activated virtualenv):
 ```zsh
-(env) ➜  cd elizabeth/
+(env) ➜  cd mimesis/
 (env) ➜  make install
 ```
 
 ## Basic Usage
 
 ```python
->>> from elizabeth import Personal
->>> from elizabeth import constants as c
+>>> from mimesis import Personal
+>>> from mimesis import constants as c
 >>> person = Personal(locale=c.EN)
 
 >>> person.full_name(gender=c.FEMALE)
@@ -95,7 +95,7 @@ You can specify a locale when creating providers and they will return data that 
 Using locales:
 
 ```python
->>> from elizabeth import Personal
+>>> from mimesis import Personal
 
 >>> en = Personal('en')
 >>> de = Personal('de')
@@ -116,7 +116,7 @@ When you only need to generate data for a single locale, use the `Generic()` pro
 providers from one object.
 
 ```python
->>> from elizabeth import Generic
+>>> from mimesis import Generic
 >>> g = Generic('es')
 
 >>> g.datetime.month()
@@ -134,7 +134,7 @@ providers from one object.
 
 Keep in mind that the library supports more than nineteen data providers and it's means that you can create data for almost anything you want:
 ```python
->>> from elizabeth import UnitSystem
+>>> from mimesis import UnitSystem
 
 >>> us = UnitSystem()
 
@@ -177,7 +177,7 @@ class Patient(db.Model):
 
     @staticmethod
     def _bootstrap(count=500, locale='en', gender):
-        from elizabeth import Personal
+        from mimesis import Personal
 
         person = Personal(locale)
 
@@ -216,7 +216,7 @@ and do following:
 >>> Patient()._bootstrap(count=1000, locale='en', gender='female')
 ```
 
-Result: [screenshot](https://raw.githubusercontent.com/lk-geimfari/elizabeth/master/other/screenshots/en_bootstrap.png)
+Result: [screenshot](https://raw.githubusercontent.com/lk-geimfari/mimesis/master/media/screenshots/en_bootstrap.png)
 
 ## Custom Providers
 You also can add custom provider to `Generic()`, using `add_provider()`:
@@ -260,8 +260,8 @@ Some countries have data types specific to that country. For example social secu
 If you would like to use these country-specific providers, then you must import them explicitly:
 
 ```python
->>> from elizabeth import Generic
->>> from elizabeth.builtins import BrazilSpecProvider
+>>> from mimesis import Generic
+>>> from mimesis.builtins import BrazilSpecProvider
 
 >>> generic = Generic('pt-br')
 
@@ -281,7 +281,7 @@ If you would like to use these country-specific providers, then you must import 
 If your locale is cyrillic, but you need latinized locale-specific data, then you can use special decorator.
 At this moment it's works only for Russian and Ukrainian:
 ```python
->>> from elizabeth.decorators import romanized
+>>> from mimesis.decorators import romanized
 
 >>> @romanized('ru')
 ... def name_ru():
@@ -302,10 +302,10 @@ At this moment it's works only for Russian and Ukrainian:
 
 
 ## Contributing
-Your contributions are always welcome! Please take a look at the [contribution](https://github.com/lk-geimfari/elizabeth/blob/master/CONTRIBUTING.md) guidelines first it is very important. [Here](https://github.com/lk-geimfari/elizabeth/blob/master/CONTRIBUTORS.md) you can look a list of our contributors.
+Your contributions are always welcome! Please take a look at the [contribution](https://github.com/lk-geimfari/mimesis/blob/master/CONTRIBUTING.md) guidelines first it is very important. [Here](https://github.com/lk-geimfari/mimesis/blob/master/CONTRIBUTORS.md) you can look a list of our contributors.
 
 ## License
-Elizabeth is licensed under the MIT License. See [LICENSE](https://github.com/lk-geimfari/elizabeth/blob/master/LICENSE) for more information.
+Elizabeth is licensed under the MIT License. See [LICENSE](https://github.com/lk-geimfari/mimesis/blob/master/LICENSE) for more information.
 
 ## Disclaimer
 The authors assume no responsibility for how you use this library data generated by it.  This library is designed only for developers with good intentions. Do not use the data generated with Elizabeth for illegal purposes.

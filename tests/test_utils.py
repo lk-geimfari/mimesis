@@ -6,9 +6,9 @@ import sys
 
 import pytest
 
-from elizabeth.exceptions import UnsupportedLocale
-from elizabeth.utils import (download_image, locale_info, luhn_checksum, pull,
-                             update_dict)
+from mimesis.exceptions import UnsupportedLocale
+from mimesis.utils import (download_image, locale_info, luhn_checksum, pull,
+                           update_dict)
 
 
 def is_connected():
@@ -49,12 +49,12 @@ def test_download_image():
     result = download_image(url=None)
     assert result is None
 
-    url = 'https://github.com/lk-geimfari/elizabeth/' \
-          'raw/master/other/elizabeth.png'
+    url = 'https://github.com/lk-geimfari/mimesis/' \
+          'raw/master/media/mimesis.png'
 
     if is_connected():
         verified = download_image(url=url)
-        assert verified == 'elizabeth.png'
+        assert verified == 'mimesis.png'
         os.remove(verified)
 
         if sys.version_info.minor <= 3:

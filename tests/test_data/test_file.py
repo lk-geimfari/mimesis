@@ -2,7 +2,7 @@
 
 import pytest
 
-from elizabeth.data import EXTENSIONS, MIME_TYPES
+from mimesis.data import EXTENSIONS, MIME_TYPES
 
 
 def test_extension(file):

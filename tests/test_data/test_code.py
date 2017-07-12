@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import re
 
-from elizabeth.data import LOCALE_CODES
+from mimesis.data import LOCALE_CODES
 
 from . import _patterns as p
 

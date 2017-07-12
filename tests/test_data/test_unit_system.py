@@ -2,8 +2,8 @@
 
 import pytest
 
-from elizabeth.data import SI_PREFIXES
-from elizabeth.exceptions import WrongArgument
+from mimesis.data import SI_PREFIXES
+from mimesis.exceptions import WrongArgument
 
 
 def test_mass(us):

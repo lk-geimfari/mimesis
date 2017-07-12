@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import re
 
-from elizabeth.data import CURRENCIES, CURRENCY_SYMBOLS
+from mimesis.data import CURRENCIES, CURRENCY_SYMBOLS
 
 from . import _patterns as p
 

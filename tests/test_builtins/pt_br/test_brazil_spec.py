@@ -2,7 +2,7 @@ import re
 
 import pytest
 
-from elizabeth.builtins import BrazilSpecProvider
+from mimesis.builtins import BrazilSpecProvider
 
 
 @pytest.fixture

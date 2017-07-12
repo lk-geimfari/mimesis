@@ -8,7 +8,7 @@ Personal
 
 .. code-block:: python
 
-	from elizabeth import Personal
+	from mimesis import Personal
 
 	person = Personal('en')
 
@@ -387,7 +387,7 @@ Development
 	stack = Development.stack_of_tech(nosql=True)
 
 	# Get a random link to github repository.
-	# Output: https://github.com/lk-geimfari/elizabeth
+	# Output: https://github.com/lk-geimfari/mimesis
 	repo = Development.github_repo()
 
 Food
@@ -495,7 +495,7 @@ Path
 
 .. code-block:: python
 
-	from elizabeth import Path
+	from mimesis import Path
 
 	path = Path()
 

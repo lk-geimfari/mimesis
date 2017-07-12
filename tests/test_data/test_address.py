@@ -4,7 +4,7 @@ import re
 
 import pytest
 
-from elizabeth.data import CONTINENT_CODES, COUNTRIES_ISO
+from mimesis.data import CONTINENT_CODES, COUNTRIES_ISO
 
 from . import _patterns as p
 

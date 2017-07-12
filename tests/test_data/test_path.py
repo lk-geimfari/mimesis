@@ -2,7 +2,7 @@
 import os
 from unittest.mock import patch
 
-from elizabeth.data import FOLDERS, PROGRAMMING_LANGS, PROJECT_NAMES
+from mimesis.data import FOLDERS, PROGRAMMING_LANGS, PROJECT_NAMES
 
 
 def test_root(path):

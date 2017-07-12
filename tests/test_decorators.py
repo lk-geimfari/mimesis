@@ -1,6 +1,6 @@
 import pytest
 
-from elizabeth.decorators import romanized
+from mimesis.decorators import romanized
 
 
 @romanized('ru')

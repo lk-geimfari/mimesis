@@ -4,10 +4,10 @@ import re
 
 import pytest
 
-from elizabeth.data import (EMOJI, HASHTAGS, HTTP_METHODS, HTTP_STATUS_CODES,
-                            MIME_TYPES, NETWORK_PROTOCOLS, SUBREDDITS,
-                            SUBREDDITS_NSFW, USER_AGENTS)
-from elizabeth.exceptions import WrongArgument
+from mimesis.data import (EMOJI, HASHTAGS, HTTP_METHODS, HTTP_STATUS_CODES,
+                          MIME_TYPES, NETWORK_PROTOCOLS, SUBREDDITS,
+                          SUBREDDITS_NSFW, USER_AGENTS)
+from mimesis.exceptions import WrongArgument
 
 from . import _patterns as p
 

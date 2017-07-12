@@ -105,6 +105,36 @@ providers from one object.
 
 .. code:: python
 
+    >>> from mimesis import Generic
+    >>> g = Generic('es')
+
+    >>> g.datetime.month()
+    'Agosto'
+
+    >>> g.code.imei()
+    '353918052107063'
+
+    >>> g.food.fruit()
+    'Limón'
+
+
+
+
+    >>> from mimesis import Generic
+    >>> g = Generic('es')
+
+    >>> g.datetime.month()
+    'Agosto'
+
+    >>> g.code.imei()
+    '353918052107063'
+
+    >>> g.food.fruit()
+    'Limón'
+
+
+
+
     >>> from elizabeth import Generic
     >>> g = Generic('es')
 
@@ -251,6 +281,74 @@ import them explicitly:
 .. code:: python
 
     >>> from elizabeth import Generic
+    >>> from mimesis.builtins.pt_br import BrazilSpecProvider
+
+    >>> generic = Generic('pt-br')
+
+    >>> class BrazilProvider(BrazilSpecProvider):
+    ...
+    ...     class Meta:
+    ...         name = "brazil_provider"
+    ...
+    >>> generic.add_provider(BrazilProvider)
+    >>> generic.brazil_provider.cpf()
+    '696.441.186-00'
+
+
+
+
+    >>> from elizabeth import Generic
+    >>> from mimesis.builtins.pt_br import BrazilSpecProvider
+
+    >>> generic = Generic('pt-br')
+
+    >>> class BrazilProvider(BrazilSpecProvider):
+    ...
+    ...     class Meta:
+    ...         name = "brazil_provider"
+    ...
+    >>> generic.add_provider(BrazilProvider)
+    >>> generic.brazil_provider.cpf()
+    '696.441.186-00'
+
+
+
+
+    >>> from mimesis import Generic
+    >>> from elizabeth.builtins.pt_br import BrazilSpecProvider
+
+    >>> generic = Generic('pt-br')
+
+    >>> class BrazilProvider(BrazilSpecProvider):
+    ...
+    ...     class Meta:
+    ...         name = "brazil_provider"
+    ...
+    >>> generic.add_provider(BrazilProvider)
+    >>> generic.brazil_provider.cpf()
+    '696.441.186-00'
+
+
+
+
+    >>> from mimesis import Generic
+    >>> from elizabeth.builtins.pt_br import BrazilSpecProvider
+
+    >>> generic = Generic('pt-br')
+
+    >>> class BrazilProvider(BrazilSpecProvider):
+    ...
+    ...     class Meta:
+    ...         name = "brazil_provider"
+    ...
+    >>> generic.add_provider(BrazilProvider)
+    >>> generic.brazil_provider.cpf()
+    '696.441.186-00'
+
+
+
+
+    >>> from elizabeth import Generic
     >>> from elizabeth.builtins.pt_br import BrazilSpecProvider
 
     >>> generic = Generic('pt-br')
@@ -273,6 +371,98 @@ then you can use special decorator. At this moment it’s work only for
 Russian:
 
 .. code:: python
+
+    >>> from elizabeth import Personal
+    >>> from mimesis.decorators import romanized
+
+    >>> pr = Personal('ru')
+
+    >>> @romanized('ru')
+    ... def get_name_ro():
+    ...     return pr.full_name()
+    ...
+
+    >>> def get_name_ru():
+    ...     return pr.full_name()
+    ...
+
+    >>> get_name_ru()
+    'Вида Панова'
+
+    >>> get_name_ro()
+    'Veronika Denisova'
+
+
+
+
+    >>> from elizabeth import Personal
+    >>> from mimesis.decorators import romanized
+
+    >>> pr = Personal('ru')
+
+    >>> @romanized('ru')
+    ... def get_name_ro():
+    ...     return pr.full_name()
+    ...
+
+    >>> def get_name_ru():
+    ...     return pr.full_name()
+    ...
+
+    >>> get_name_ru()
+    'Вида Панова'
+
+    >>> get_name_ro()
+    'Veronika Denisova'
+
+
+
+
+    >>> from mimesis import Personal
+    >>> from elizabeth.decorators import romanized
+
+    >>> pr = Personal('ru')
+
+    >>> @romanized('ru')
+    ... def get_name_ro():
+    ...     return pr.full_name()
+    ...
+
+    >>> def get_name_ru():
+    ...     return pr.full_name()
+    ...
+
+    >>> get_name_ru()
+    'Вида Панова'
+
+    >>> get_name_ro()
+    'Veronika Denisova'
+
+
+
+
+    >>> from mimesis import Personal
+    >>> from elizabeth.decorators import romanized
+
+    >>> pr = Personal('ru')
+
+    >>> @romanized('ru')
+    ... def get_name_ro():
+    ...     return pr.full_name()
+    ...
+
+    >>> def get_name_ru():
+    ...     return pr.full_name()
+    ...
+
+    >>> get_name_ru()
+    'Вида Панова'
+
+    >>> get_name_ro()
+    'Veronika Denisova'
+
+
+
 
     >>> from elizabeth import Personal
     >>> from elizabeth.decorators import romanized
