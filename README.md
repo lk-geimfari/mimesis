@@ -107,7 +107,6 @@ Using locales:
 
 >>> ic.full_name()
 'Rósa Þórlindsdóttir'
-
 ```
 
 When you only need to generate data for a single locale, use the `Generic()` provider, and you can access all providers of Mimesis from one object.
@@ -124,9 +123,6 @@ When you only need to generate data for a single locale, use the `Generic()` pro
 
 >>> g.food.fruit()
 'Limón'
-
->>> g.internet.network_protocol(layer='application')
-'AMQP'
 ```
 
 Keep in mind that the library supports more than twenty data providers and it's means that you can generate data for almost anything you want (really):
