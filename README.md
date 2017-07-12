@@ -34,13 +34,12 @@ Also you can install it manually:
 
 ```python
 >>> from mimesis import Personal
->>> from mimesis import constants as c
->>> person = Personal(locale=c.EN)
+>>> person = Personal(locale='en')
 
->>> person.full_name(gender=c.FEMALE)
+>>> person.full_name(gender='female')
 'Antonetta Garrison'
 
->>> person.email(gender=c.MALE)
+>>> person.email(gender='male')
 'john7893@live.com'
 
 >>> person.occupation()
@@ -161,7 +160,6 @@ class Patient(db.Model):
     weight = db.Column(db.String(64))
     height = db.Column(db.String(64))
     blood_type = db.Column(db.String(64))
-    age = db.Column(db.Integer)
 
     def __init__(self, **kwargs):
         super(Patient, self).__init__(**kwargs)
@@ -175,10 +173,9 @@ class Patient(db.Model):
         for _ in range(count):
             patient = Patient(
                 full_name=person.full_name(gender=gender),
-                age=person.age(minimum=18, maximum=45),
                 weight=person.weight(),
                 height=person.height(),
-                blood_type=person.blood_type()
+                blood_type=person.blood_type(),
             )
 
             db.session.add(patient)
@@ -252,10 +249,8 @@ If you would like to use these country-specific providers, then you must import 
 >>> generic = Generic('pt-br')
 
 >>> class BrazilProvider(BrazilSpecProvider):
-...
 ...     class Meta:
 ...         name = "brazil_provider"
-...
 
 >>> generic.add_provider(BrazilProvider)
 >>> generic.brazil_provider.cpf()
@@ -267,14 +262,13 @@ If you would like to use these country-specific providers, then you must import 
 If your locale belongs to the family of Cyrillic languages, but you need latinized locale-specific data, then you can use special decorator which help you romanize your data.
 At this moment it's works only for Russian and Ukrainian:
 ```python
->>> from mimesis.decorators import romanized
+>>> from mimesis import decorators
 
->>> @romanized('ru')
-... def name_ru():
+>>> decorators.romanized('ru')
+... def russian_name():
 ...     return 'Вероника Денисова'
-...
 
->>> name_ru()
+>>> russian_name()
 'Veronika Denisova'
 ```
 
