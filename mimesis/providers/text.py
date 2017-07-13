@@ -5,11 +5,11 @@ from mimesis.utils import pull
 class Text(BaseProvider):
     """Class for generate text data, i.e text, lorem ipsum and another."""
 
-    def __init__(self, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         :param locale: Current locale.
         """
-        super().__init__(**kwargs)
+        super().__init__(*args, **kwargs)
         self.data = pull('text.json', self.locale)
 
     def alphabet(self, letter_case=None):
