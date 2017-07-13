@@ -7,6 +7,7 @@
 ### Special thanks
 - Sobolev Nikita [(sobolevn)](https://github.com/sobolevn)
 - Kevin Schellenberg [(wikkiewikkie)](https://github.com/wikkiewikkie)
+- Ryan Varley [(ryanvarley)](https://github.com/ryanvarley) 
 
 ### Contributors
 - Kevin Schellenberg [(wikkiewikkie)](https://github.com/wikkiewikkie)
