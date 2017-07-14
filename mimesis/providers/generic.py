@@ -2,18 +2,16 @@ import inspect
 
 from mimesis.providers import (Address, BaseProvider, Business, ClothingSizes,
                                Code, Datetime, Development, File, Food)
-
-# TODO: Resolve importing errors and use importing format as above.
-from .games import Games
-from .hardware import Hardware
-from .internet import Internet
-from .numbers import Numbers
-from .path import Path
-from .personal import Personal
-from .science import Science
-from .text import Text
-from .transport import Transport
-from .units import UnitSystem
+from mimesis.providers.games import Games
+from mimesis.providers.hardware import Hardware
+from mimesis.providers.internet import Internet
+from mimesis.providers.numbers import Numbers
+from mimesis.providers.path import Path
+from mimesis.providers.personal import Personal
+from mimesis.providers.science import Science
+from mimesis.providers.text import Text
+from mimesis.providers.transport import Transport
+from mimesis.providers.units import UnitSystem
 
 
 class Generic(BaseProvider):
