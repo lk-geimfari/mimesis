@@ -5,7 +5,6 @@ import pytest
 
 locales = list(SUPPORTED_LOCALES.keys())
 
-
 @pytest.fixture(params=locales)
 def generic(request):
     return elizabeth.Generic(request.param)
