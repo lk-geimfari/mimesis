@@ -141,5 +141,5 @@ if __name__ == '__main__':
     answer = answer.lower().strip()
 
     if answer in ('y', 'yes'):
-        minimizer = JsonMinimizer(output)
+        minimizer = JsonMinimizer(output_dir=output)
         minimizer.start()
