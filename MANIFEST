@@ -16,6 +16,7 @@ mimesis/constants/__init__.py
 mimesis/constants/gender.py
 mimesis/constants/locales.py
 mimesis/data/__init__.py
+mimesis/data/__pycache__/__init__.cpython-35.pyc
 mimesis/data/cs/address.json
 mimesis/data/cs/business.json
 mimesis/data/cs/datetime.json
