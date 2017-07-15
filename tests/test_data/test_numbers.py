@@ -1,15 +1,6 @@
 # -*- coding: utf-8 -*-
 import array
 
-import pytest
-
-from elizabeth.core.providers import Numbers
-
-
-@pytest.fixture
-def numbers():
-    return Numbers()
-
 
 def test_floats(numbers):
     result = numbers.floats()

@@ -1,7 +1,7 @@
 import pytest
 
-from elizabeth.builtins import RussiaSpecProvider
-from elizabeth.exceptions import JSONKeyError
+from mimesis.builtins import RussiaSpecProvider
+from mimesis.exceptions import JSONKeyError
 
 
 @pytest.fixture

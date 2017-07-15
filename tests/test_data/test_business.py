@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 import re
 
-from elizabeth.data.int import CURRENCIES, CURRENCY_SYMBOLS
-from ._patterns import STR_REGEX
+from mimesis.data import CURRENCIES, CURRENCY_SYMBOLS
+
+from . import _patterns as p
 
 
 def test_str(business):
-    assert re.match(STR_REGEX, str(business))
+    assert re.match(p.STR_REGEX, str(business))
 
 
 def test_copyright(business):

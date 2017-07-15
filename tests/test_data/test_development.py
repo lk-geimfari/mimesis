@@ -1,23 +1,7 @@
 # -*- coding: utf-8 -*-
 
-import pytest
-
-from elizabeth.core.providers import Development
-from elizabeth.data.int import (
-    FRONTEND,
-    PROGRAMMING_LANGS,
-    OS,
-    CONTAINER,
-    LICENSES,
-    NOSQL,
-    BACKEND,
-    SQL,
-)
-
-
-@pytest.fixture
-def dev():
-    return Development()
+from mimesis.data import (BACKEND, CONTAINER, FRONTEND, LICENSES, NOSQL, OS,
+                          PROGRAMMING_LANGS, SQL)
 
 
 def test_license(dev):

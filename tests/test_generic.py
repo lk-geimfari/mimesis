@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
 
-import pytest
 import re
 
-from .test_data._patterns import STR_REGEX
+import pytest
+
+from .test_data import _patterns as p
 
 
 def test_str(generic):
-    assert re.match(STR_REGEX, str(generic))
+    assert re.match(p.STR_REGEX, str(generic))
 
 
 def test_base_personal(generic):
@@ -52,7 +53,7 @@ def test_base_code(generic):
 
 def test_bad_argument(generic):
     with pytest.raises(AttributeError):
-        __ = generic.bad_argument
+        _ = generic.bad_argument  # noqa
 
 
 def test_add_provider(generic):
@@ -74,7 +75,7 @@ def test_add_provider(generic):
     with pytest.raises(TypeError):
         generic.add_provider(True)
 
-    class UnnamedProvider():
+    class UnnamedProvider(object):
         @staticmethod
         def nothing():
             return None
@@ -86,7 +87,6 @@ def test_add_provider(generic):
 
 
 def test_add_providers(generic):
-
     class Provider1(object):
         @staticmethod
         def one():

@@ -2,7 +2,8 @@
 
 import re
 
-from elizabeth.data.int import MATH_FORMULAS
+from mimesis.data import MATH_FORMULAS
+
 from ._patterns import STR_REGEX
 
 

@@ -4,12 +4,13 @@ import re
 
 import pytest
 
-from elizabeth.data.int import COUNTRIES_ISO, CONTINENT_CODES
-from ._patterns import POSTAL_CODE_REGEX, STR_REGEX
+from mimesis.data import CONTINENT_CODES, COUNTRIES_ISO
+
+from . import _patterns as p
 
 
 def test_str(address):
-    assert re.match(STR_REGEX, str(address))
+    assert re.match(p.STR_REGEX, str(address))
 
 
 def test_street_number(address):
@@ -76,10 +77,10 @@ def test_postal_code(generic):
     result = generic.address.postal_code()
     current_locale = generic.address.locale
 
-    if current_locale in POSTAL_CODE_REGEX:
-        assert re.match(POSTAL_CODE_REGEX[current_locale], result)
+    if current_locale in p.POSTAL_CODE_REGEX:
+        assert re.match(p.POSTAL_CODE_REGEX[current_locale], result)
     else:
-        assert re.match(POSTAL_CODE_REGEX['default'], result)
+        assert re.match(p.POSTAL_CODE_REGEX['default'], result)
 
 
 def test_country(generic):

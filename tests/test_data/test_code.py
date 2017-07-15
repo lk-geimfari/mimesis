@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 import re
 
-from elizabeth.data.int import LOCALE_CODES
-from ._patterns import STR_REGEX
+from mimesis.data import LOCALE_CODES
+
+from . import _patterns as p
 
 
 def test_str(code):
-    assert re.match(STR_REGEX, str(code))
+    assert re.match(p.STR_REGEX, str(code))
 
 
 def test_custom_code(code):

@@ -4,16 +4,15 @@ import re
 
 import pytest
 
-from elizabeth.data.int import (
-    FAVORITE_MUSIC_GENRE, SEXUALITY_SYMBOLS,
-    BLOOD_GROUPS, GENDER_SYMBOLS, ENGLISH_LEVEL,
-)
-from elizabeth.exceptions import WrongArgument
-from ._patterns import *
+from mimesis.data import (BLOOD_GROUPS, ENGLISH_LEVEL, FAVORITE_MUSIC_GENRE,
+                          GENDER_SYMBOLS, SEXUALITY_SYMBOLS)
+from mimesis.exceptions import WrongArgument
+
+from . import _patterns as p
 
 
 def test_str(personal):
-    assert re.match(STR_REGEX, str(personal))
+    assert re.match(p.STR_REGEX, str(personal))
 
 
 def test_age(personal):
@@ -79,7 +78,7 @@ def test_password(personal):
 
 def test_username(personal):
     result = personal.username()
-    assert re.match(USERNAME_REGEX, result)
+    assert re.match(p.USERNAME_REGEX, result)
 
     with pytest.raises(WrongArgument):
         personal.username(gender='nil')
@@ -87,11 +86,11 @@ def test_username(personal):
 
 def test_email(personal):
     result = personal.email()
-    assert re.match(EMAIL_REGEX, result)
+    assert re.match(p.EMAIL_REGEX, result)
 
     domains = ['@example.com']
     result = personal.email(domains=domains)
-    assert re.match(EMAIL_REGEX, result)
+    assert re.match(p.EMAIL_REGEX, result)
     assert result.split('@')[1] == 'example.com'
 
 
@@ -108,13 +107,13 @@ def test_cvv(personal):
 
 def test_credit_card_number(personal):
     result = personal.credit_card_number()
-    assert re.match(CREDIT_CARD_REGEX, result)
+    assert re.match(p.CREDIT_CARD_REGEX, result)
 
     result_mc = personal.credit_card_number(card_type='master_card')
-    assert re.match(CREDIT_CARD_REGEX, result_mc)
+    assert re.match(p.CREDIT_CARD_REGEX, result_mc)
 
     result_ax = personal.credit_card_number(card_type='amex')
-    assert re.match(CREDIT_CARD_REGEX, result_ax)
+    assert re.match(p.CREDIT_CARD_REGEX, result_ax)
 
     with pytest.raises(NotImplementedError):
         personal.credit_card_number(card_type='discover')

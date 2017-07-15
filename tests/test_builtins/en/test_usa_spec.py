@@ -1,7 +1,8 @@
-import pytest
 import re
 
-from elizabeth.builtins import USASpecProvider
+import pytest
+
+from mimesis.builtins import USASpecProvider
 
 
 @pytest.fixture

@@ -1,32 +1,34 @@
 from distutils.core import setup
 
-from elizabeth import (
-    __author__,
-    __version__,
-)
+from mimesis import __author__, __version__
 
 with open('PYPI_README.rst', 'r', encoding='utf-8') as f:
     readme = f.read()
 
 setup(
-    name='elizabeth',
+    name='mimesis',
     version=__version__,
     packages=[
-        'elizabeth',
-        'elizabeth.core',
-        'elizabeth.builtins',
+        'mimesis',
+        'mimesis.data',
+        'mimesis.data.int',
+        'mimesis.builtins',
+        'mimesis.constants',
+        'mimesis.providers',
     ],
     keywords=[
-        'db',
         'fake',
+        'mock',
         'data',
+        'populate',
+        'database',
         'testing',
         'generate',
-        'elizabeth',
+        'mimesis',
         'dummy',
     ],
     package_data={
-        'elizabeth': [
+        'mimesis': [
             'data/*/*',
         ],
     },
@@ -36,11 +38,11 @@ setup(
               ],
          ),
     ],
-    url='https://github.com/lk-geimfari/elizabeth',
+    url='https://github.com/lk-geimfari/mimesis',
     license='MIT License',
     author=__author__,
     author_email='likid.geimfari@gmail.com',
-    description='Elizabeth: dummy data for developers.',
+    description='Mimesis: dummy data for developers.',
     long_description=readme,
     classifiers=[
         'Development Status :: 4 - Beta',

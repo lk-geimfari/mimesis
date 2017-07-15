@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from elizabeth.data.int import CARS, TRUCKS, AIRPLANES
+from mimesis.data import AIRPLANES, CARS, TRUCKS
 
 
 def test_truck(transport):

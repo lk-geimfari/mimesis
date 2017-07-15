@@ -4,11 +4,10 @@
 ### Inspirer
  - Sobolev Nikita [(sobolevn)](https://github.com/sobolevn)
 
-### Design
- - Illustration by ([CarlaNatalie](http://carlanatalie.deviantart.com/))
-
 ### Special thanks
+- Sobolev Nikita [(sobolevn)](https://github.com/sobolevn)
 - Kevin Schellenberg [(wikkiewikkie)](https://github.com/wikkiewikkie)
+- Ryan Varley [(ryanvarley)](https://github.com/ryanvarley) 
 
 ### Contributors
 - Kevin Schellenberg [(wikkiewikkie)](https://github.com/wikkiewikkie)
@@ -43,3 +42,6 @@
 - Dmytro Zelinskyi [(zelds)](https://github.com/zelds)
 - axcel [(axce1)](https://github.com/axce1)
 - Ruslan Valerievich [(Valerievich)](https://github.com/Valerievich)
+
+### Design
+ - The illustration is taken from internet. If you know the creator of this octopus, then let us know.

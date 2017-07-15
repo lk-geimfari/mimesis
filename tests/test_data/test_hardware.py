@@ -1,19 +1,8 @@
 # -*- coding: utf-8 -*-
 
-import pytest
-
-from elizabeth.core.providers import Hardware
-from elizabeth.data.int import (
-    CPU_CODENAMES, PHONE_MODELS, HDD_SSD,
-    RESOLUTIONS, MANUFACTURERS, CPU,
-    GENERATION, SCREEN_SIZES, GRAPHICS,
-    GENERATION_ABBR,
-)
-
-
-@pytest.fixture
-def hard():
-    return Hardware()
+from mimesis.data import (CPU, CPU_CODENAMES, GENERATION, GENERATION_ABBR,
+                          GRAPHICS, HDD_SSD, MANUFACTURERS, PHONE_MODELS,
+                          RESOLUTIONS, SCREEN_SIZES)
 
 
 def test_resolution(hard):
