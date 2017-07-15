@@ -1,6 +1,6 @@
 ## Changelog
 
-### Version 0.0.1
- - Change here
- - Other change here
- - And here too
+### Version 0.0.2
+ - Renamed library
+ - Added provider for `Games()`
+ - Minor improvements
