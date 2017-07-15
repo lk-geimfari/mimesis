@@ -14,7 +14,7 @@
 **Mimesis** is a fast and easy to use library for Python, which helps generate mock data for a variety of purposes. This data can be particularly useful during software development and testing. For example, it could be used to populate a testing database for a web application (Django, Flask, etc.) with user information such as email addresses, usernames, first names, last names, etc. The library was written with the use of tools from the standard Python library, and therefore, it does not have any side dependencies. Currently the library supports 30 languages and 20 class providers, supplying various data.
 
 ## Documentation
-Mimesis is very simple to use, and the below examples should help you get started. Complete documentation for Mimesis is available [here](http://elizabeth.readthedocs.io/).
+Mimesis is very simple to use, and the below examples should help you get started. Complete documentation for Mimesis is available [here](http://mimesis.readthedocs.io/).
 
 ## Installation
 To install Mimesis, simply:
