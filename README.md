@@ -1,6 +1,6 @@
 <a href="https://github.com/lk-geimfari/mimesis/">
     <p align="center">
-      <img src="https://raw.githubusercontent.com/lk-geimfari/elizabeth/feature-new-strucutre/media/logo.png">
+      <img src="https://raw.githubusercontent.com/lk-geimfari/mimesis/master/media/logo.png">
     </p>
 </a>
 
@@ -8,8 +8,7 @@
 
 [![Build Status](https://travis-ci.org/lk-geimfari/mimesis.svg?branch=master)](https://travis-ci.org/lk-geimfari/mimesis)
 [![codecov](https://codecov.io/gh/lk-geimfari/mimesis/branch/master/graph/badge.svg)](https://codecov.io/gh/lk-geimfari/mimesis)
-[![PyPI version](https://badge.fury.io/py/elizabeth.svg)](https://badge.fury.io/py/elizabeth)
-
+[![PyPI version](https://badge.fury.io/py/mimesis.svg)](https://badge.fury.io/py/mimesis)
 
 **Mimesis** is a fast and easy to use library for Python, which helps generate mock data for a variety of purposes. This data can be particularly useful during software development and testing. For example, it could be used to populate a testing database for a web application (Django, Flask, etc.) with user information such as email addresses, usernames, first names, last names, etc. The library was written with the use of tools from the standard Python library, and therefore, it does not have any side dependencies. Currently the library supports 30 languages and 20 class providers, supplying various data.
 
