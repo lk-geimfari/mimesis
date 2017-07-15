@@ -42,8 +42,9 @@ class JsonMinimizer(object):
                     tmp = re.sub('[ \t\n\r]+', '', tmp)
                 new_str.append(tmp)
             elif not strip_space:
-                # Replace comments with white space so that the JSON parser reports
-                # the correct column numbers on parsing errors.
+                # Replace comments with white space so that the JSON
+                # parser reports the correct column numbers on
+                # parsing errors.
                 new_str.append(' ' * (match.start() - index))
 
             index = match.end()
