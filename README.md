@@ -197,6 +197,9 @@ and do following:
 You also can add custom provider to `Generic()`, using `add_provider()` method:
 
 ```python
+>>> from mimesis import Generic
+>>> generic = Generic('en')
+
 >>> class SomeProvider():
 ...
 ...     class Meta:
