@@ -22,3 +22,4 @@
 | 18  | Path            | *Provides methods and property for generate paths.*            |
 | 19  | UnitSytem       | *Provides names of unit systems in international format*       |
 | 20  | Generic         | *All at one*                                                   |
+| 21  | Cryptographic            | *Cryptographic data*      |

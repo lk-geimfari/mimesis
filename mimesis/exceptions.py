@@ -12,3 +12,7 @@ class NotImplementedYet(NotImplementedError):
 
 class WrongArgument(KeyError):
     """An exception that raised when argument is wrong"""
+
+
+class UnsupportedAlgorithm(AttributeError):
+    """An exception that raised when user want to use unsupported algorithm"""

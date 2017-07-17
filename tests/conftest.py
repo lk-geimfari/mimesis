@@ -104,3 +104,8 @@ def sizes():
 @pytest.fixture
 def net():
     return mimesis.Internet()
+
+
+@pytest.fixture
+def crypto():
+    return mimesis.Cryptographic()
