@@ -114,7 +114,7 @@ When you only need to generate data for a single locale, use the `Generic()` pro
 >>> g.datetime.month()
 'Agosto'
 
->>> g.cryptographic.token()
+>>> g.cryptographic.token(entropy=16)
 '44922f433a1f8611843520ac919928b9'
 
 >>> g.food.fruit()
