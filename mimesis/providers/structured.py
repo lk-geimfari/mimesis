@@ -2,12 +2,12 @@ import json
 
 from mimesis.data import (CSS_PROPERTIES, CSS_SELECTORS, CSS_SIZE_UNITS,
                           HTML_CONTAINER_TAGS, HTML_MARKUP_TAGS)
-from mimesis.providers import BaseProvider, Hardware, Internet, Personal
+from mimesis.providers import BaseProvider, Internet
 from mimesis.providers.text import Text
 
 
 class Structured(BaseProvider):
-    """Provider for structured text data such as CSS, Delimited, HTML, etc."""
+    """Provider for structured text data such as CSS, HTML, JSON etc."""
 
     def __init__(self, *args, **kwargs):
         """
@@ -22,13 +22,6 @@ class Structured(BaseProvider):
 
         :return: CSS.
         :rtype: str
-        :Example:
-            'strong {
-                pointer: crosshair;
-                padding-right: 46pt;
-                margin-left: 38em;
-                padding-right: 65em
-            }'
         """
         selector = self.random.choice(CSS_SELECTORS)
         css_sel = '{}{}'.format(selector, self.text.word())
@@ -120,48 +113,37 @@ class Structured(BaseProvider):
                 'Attribute type {} is not implemented'.format(value))
         return value
 
-    def json(self, provider_name, items=5):
-        """Generate a random snippet of JSON
+    def json(self, items=5, max_depth=3, recursive=False):
+        """Generate a random snippet of JSON.
 
-        :param provider_name: Name of provider to generate JSON data for.
-        :type provider_name: str
-        :param items: Number of top-level items to include.
-        :type items: int
-        :return: JSON.
-        :rtype: str
+        :param items: Number of top-level items to produce.
+        :param max_depth: Maximum depth of each top-level item.
+        :param recursive: When used recursively, will return a Python object
+        instead of JSON string.
+        :return: JSON
         """
-        providers = {
-            'hardware': {
-                'provider': Hardware,
-                'root_element': 'computers',
-            },
-            'personal': {
-                'provider': Personal,
-                'root_element': 'users',
-            },
-        }
 
-        try:
-            provider_data = providers[provider_name.lower()]
-        except KeyError:
-            raise NotImplementedError(
-                'Provider {} is not supported'.format(provider_name))
-
-        try:
-            provider = provider_data['provider'](self.locale)
-        except TypeError:  # handle providers that do not accept locale
-            provider = provider_data['provider']()
-
-        root_element = provider_data['root_element']
-
-        data = {root_element: []}
+        # choose root element type
+        root = self.random.choice([list, dict])()
 
         for _ in range(items):
-            element = dict()
-            for attribute_name in dir(provider):
-                attribute = getattr(provider, attribute_name)
-                if attribute_name[:1] != '_' and callable(attribute):
-                    element[attribute_name] = attribute()
-            data[root_element].append(element)
 
-        return json.dumps(data, indent=4)
+            key = self.text.word()
+
+            if max_depth > 0:
+                value = self.random.choice([
+                    self.text.sentence(),
+                    self.random.randint(1, 10000),
+                    self.random.random(),
+                    self.json(max_depth=max_depth - 1,
+                              recursive=True),
+                ])
+                if isinstance(root, list):
+                    root.append(value)
+                elif isinstance(root, dict):
+                    root[key] = value
+
+        if recursive:
+            return root
+
+        return json.dumps(root, indent=4)

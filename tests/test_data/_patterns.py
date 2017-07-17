@@ -25,7 +25,8 @@ USERNAME_REGEX = r'^[a-zA-Z0-9_.-]+$'
 CREDIT_CARD_REGEX = r'[\d]+((-|\s)?[\d]+)+'
 
 STR_REGEX = r'^(Address|Business|Code|Datetime|Food|Generic|' \
-            r'Personal|Science|Structured|Text):[a-z-]+:(.*)$'
+            r'Personal|Science|Structured|Text|Games|Transport|' \
+            r'UnitSystem|Path):[a-z-]+:(.*)$'
 
 _EN_GB_POST_CODE = \
     r'((([A-PR-UWYZ][0-9])|([A-PR-UWYZ][0-9][0-9])' \
