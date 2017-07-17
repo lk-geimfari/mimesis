@@ -11,6 +11,15 @@ def test_str(structured):
     assert re.match(STR_REGEX, str(structured))
 
 
+def depth(x):
+    """Calculates depth of object."""
+    if isinstance(x, dict) and x:
+        return 1 + max(depth(x[a]) for a in x)
+    if isinstance(x, list) and x:
+        return 1 + max(depth(a) for a in x)
+    return 0
+
+
 def test_css(structured):
     result = structured.css()
     assert isinstance(result, str)  # returns string
@@ -39,14 +48,16 @@ def test_html(structured):
 
 
 def test_json(structured):
-    with pytest.raises(NotImplementedError):
-        structured.json('food')
+    result = structured.json(items=3, max_depth=4)
+    assert isinstance(result, str)
 
-    result = structured.json('personal', items=3)
-    assert isinstance(result, str)  # returns str
-    data = json.loads(result)  # is valid JSON
-    assert isinstance(data, (dict, list))  # root element is container
-    _, root = data.popitem()
-    assert len(root) == 3  # root container has three items
+    # Is valid json and root element is container with three items
+    data = json.loads(result)
+    assert isinstance(data, (dict, list))
+    assert len(data) == 3
 
-    structured.json('hardware', items=1)
+    # Recursive returns python object, not JSON and
+    # maximum depth of three elements
+    r = structured.json(items=3, max_depth=4, recursive=True)
+    assert isinstance(r, (dict, list))
+    assert depth(r) <= 4
