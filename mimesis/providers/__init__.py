@@ -19,6 +19,7 @@ from .text import Text
 from .transport import Transport
 from .units import UnitSystem
 from .games import Games
+from .cryptographic import Cryptographic
 
 __all__ = [
     # The main class:
@@ -44,6 +45,7 @@ __all__ = [
     'Text',
     'Transport',
     'UnitSystem',
+    'Cryptographic',
 
     # Has all:
     'Generic',

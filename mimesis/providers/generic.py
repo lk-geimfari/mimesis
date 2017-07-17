@@ -14,6 +14,7 @@ from .science import Science
 from .text import Text
 from .transport import Transport
 from .units import UnitSystem
+from .cryptographic import Cryptographic
 
 
 class Generic(BaseProvider):
@@ -42,6 +43,7 @@ class Generic(BaseProvider):
         self.transport = Transport()
         self.path = Path()
         self.games = Games()
+        self.cryptographic = Cryptographic()
 
     def __getattr__(self, attrname):
         """Get _attribute without underscore
