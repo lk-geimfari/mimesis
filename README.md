@@ -123,15 +123,12 @@ When you only need to generate data for a single locale, use the `Generic()` pro
 
 Keep in mind that the library supports more than twenty data providers and it's means that you can generate data for almost anything you want (really):
 ```python
->>> from mimesis import UnitSystem
+>>> import mimesis
+>>> us = mimesis.UnitSystem()
 
->>> us = UnitSystem()
-
->>> '23 %s%s' % (us.prefix(), us.magnetic_flux())
-'23 exaweber'
-
->>> '678 %s%s' % (us.prefix(sign='negative'), us.radioactivity())
-'678 millibecquerel'
+>>> '678 {prefix}{unit}'.format(prefix=us.prefix(sign='negative'),
+                            unit=us.radioactivity())
+>>> '678 millibecquerel'
 ```
 
 ## Advantages
