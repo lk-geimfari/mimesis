@@ -1,5 +1,5 @@
 # settings.py
-# Global settings of Elizabeth library.
+# Global settings of Mimesis library.
 
 SUPPORTED_LOCALES = {
     'cs': {
