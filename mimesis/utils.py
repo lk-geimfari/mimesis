@@ -64,7 +64,7 @@ def pull(file, locale='en') -> dict:
      lru_cache.
 
     .. note:: pull - is internal function, please do not use this function
-    outside the module 'elizabeth'.
+    outside the module 'mimesis'.
 
     :param file: The name of file.
     :param locale: Locale.
