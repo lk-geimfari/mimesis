@@ -6,7 +6,7 @@ import pytest
 
 from mimesis.data import (BLOOD_GROUPS, ENGLISH_LEVEL, FAVORITE_MUSIC_GENRE,
                           GENDER_SYMBOLS, SEXUALITY_SYMBOLS)
-from mimesis.exceptions import WrongArgument
+from mimesis.exceptions import UnsupportedAlgorithm, WrongArgument
 
 from . import _patterns as p
 
@@ -72,7 +72,7 @@ def test_password(personal):
     sha512 = personal.password(algorithm='sha512')
     assert len(sha512) == 128
 
-    with pytest.raises(NotImplementedError):
+    with pytest.raises(UnsupportedAlgorithm):
         personal.password(algorithm='sha42')
 
 

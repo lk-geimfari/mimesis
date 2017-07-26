@@ -1,5 +1,4 @@
 import re
-from hashlib import md5, sha1, sha256, sha512
 from string import ascii_letters, digits, punctuation
 
 from mimesis.data import (BLOOD_GROUPS, EMAIL_DOMAINS, ENGLISH_LEVEL,
@@ -7,6 +6,7 @@ from mimesis.data import (BLOOD_GROUPS, EMAIL_DOMAINS, ENGLISH_LEVEL,
                           SEXUALITY_SYMBOLS)
 from mimesis.exceptions import WrongArgument
 from mimesis.providers import BaseProvider, Code
+from mimesis.providers.cryptographic import Cryptographic
 from mimesis.utils import luhn_checksum, pull
 
 __all__ = ['Personal']
@@ -166,18 +166,7 @@ class Personal(BaseProvider):
             ascii_letters + digits + punctuation) for _ in range(int(length))])
 
         if algorithm is not None:
-            algorithm = algorithm.lower()
-            password = password.encode()
-            if algorithm == 'sha1':
-                return sha1(password).hexdigest()
-            elif algorithm == 'sha256':
-                return sha256(password).hexdigest()
-            elif algorithm == 'sha512':
-                return sha512(password).hexdigest()
-            elif algorithm == 'md5':
-                return md5(password).hexdigest()
-            raise NotImplementedError(
-                'The specified hashing algorithm is not available.')
+            return Cryptographic().hash(algorithm=algorithm)
 
         return password
 
