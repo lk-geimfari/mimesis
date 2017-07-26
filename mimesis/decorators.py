@@ -33,3 +33,21 @@ def romanized(locale):
         return wrapper
 
     return romanized_deco
+
+
+def type_to(new_type):
+    """Convert result of function to different type
+
+    :param new_type: New type.
+    :return: Converted to new_type result.
+    """
+    def inner(func):
+
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            result = func(*args, **kwargs)
+            return new_type(result)
+
+        return wrapper
+
+    return inner

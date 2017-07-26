@@ -31,10 +31,22 @@ def test_ukrainian():
 
 
 def test_not_implemented_error():
-
     @mimesis.decorators.romanized('nil')
     def user():
         return 'Mimesis'
 
     with pytest.raises(KeyError):
         user()
+
+
+def test_type_to():
+    @mimesis.decorators.type_to(tuple)
+    def fixture_list():
+        return ['this', 'is', 'a', 'list']
+
+    @mimesis.decorators.type_to(list)
+    def fixture_tuple():
+        return ['this', 'is', 'a', 'list']
+
+    assert isinstance(fixture_list(), tuple)
+    assert isinstance(fixture_tuple(), list)
