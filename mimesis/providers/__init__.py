@@ -7,7 +7,6 @@ from .date import Datetime
 from .development import Development
 from .file import File
 from .food import Food
-from .generic import Generic
 from .hardware import Hardware
 from .internet import Internet
 from .numbers import Numbers
@@ -20,6 +19,7 @@ from .transport import Transport
 from .units import UnitSystem
 from .games import Games
 from .cryptographic import Cryptographic
+from .generic import Generic
 
 __all__ = [
     # The main class:

@@ -128,7 +128,7 @@ Keep in mind that the library supports more than twenty data providers and it's 
 
 >>> '678 {prefix}{unit}'.format(prefix=us.prefix(sign='negative'),
                             unit=us.radioactivity())
->>> '678 millibecquerel'
+'678 millibecquerel'
 ```
 
 ## Advantages
