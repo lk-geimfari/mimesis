@@ -1,4 +1,3 @@
-import os
 import sys
 
 from mimesis.data import FOLDERS, PROGRAMMING_LANGS, PROJECT_NAMES
@@ -9,10 +8,11 @@ from mimesis.providers.personal import Personal
 class Path(BaseProvider):
     """Class that provides methods and property for generate paths."""
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, platform=sys.platform, *args, **kwargs):
         # TODO: platform should be a parameter
         super().__init__(*args, **kwargs)
         self.__p = Personal('en')
+        self.platform = platform
 
     @property
     def root(self):
@@ -22,8 +22,8 @@ class Path(BaseProvider):
         :Example:
             /
         """
-        if sys.platform == 'win32':
-            return 'С:\\'
+        if self.platform == 'win32':
+            return 'C:\\'
         else:
             return '/'
 
@@ -35,7 +35,7 @@ class Path(BaseProvider):
         :Example:
             /home/
         """
-        if sys.platform == 'win32':
+        if self.platform == 'win32':
             return self.root + 'Users\\'
         else:
             return self.root + 'home/'
@@ -50,7 +50,7 @@ class Path(BaseProvider):
         """
         user = self.__p.name(gender)
         user = user.capitalize() if \
-            sys.platform == 'win32' else user.lower()
+            self.platform == 'win32' else user.lower()
         return self.home + user
 
     def users_folder(self, user_gender='female'):
@@ -62,7 +62,8 @@ class Path(BaseProvider):
         """
         folder = self.random.choice(FOLDERS)
         user = self.user(user_gender)
-        return os.path.join(user, folder)
+        path = '\\' if self.platform == 'win32' else '/'
+        return (user + '{}' + folder).format(path)
 
     def dev_dir(self, user_gender='female'):
         """Generate a random path to development directory.
@@ -75,8 +76,8 @@ class Path(BaseProvider):
         dev_folder = self.random.choice(['Development', 'Dev'])
         stack = self.random.choice(PROGRAMMING_LANGS)
         user = self.user(user_gender)
-
-        return os.path.join(user, dev_folder, stack)
+        path = '\\' if self.platform == 'win32' else '/'
+        return (user + '{}' + dev_folder + '{}' + stack).format(path, path)
 
     def project_dir(self, user_gender='female'):
         """Generate a random path to project directory.
@@ -87,5 +88,5 @@ class Path(BaseProvider):
             /home/sherika/Development/Falcon/mercenary
         """
         project = self.random.choice(PROJECT_NAMES)
-        return os.path.join(
-            self.dev_dir(user_gender), project)
+        path = '\\' if self.platform == 'win32' else '/'
+        return (self.dev_dir(user_gender) + '{}' + project).format(path)
