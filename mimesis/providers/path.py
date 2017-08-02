@@ -9,7 +9,6 @@ class Path(BaseProvider):
     """Class that provides methods and property for generate paths."""
 
     def __init__(self, platform=sys.platform, *args, **kwargs):
-        # TODO: platform should be a parameter
         super().__init__(*args, **kwargs)
         self.__p = Personal('en')
         self.platform = platform
