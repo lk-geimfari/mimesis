@@ -26,7 +26,7 @@ deploy:
   provider: pypi
   user: lk-geimfari
   password:
-  	secure: $SECURE_PASS
+    secure: $SECURE_PASS
   on:
     branch: master
     tags: true
