@@ -21,3 +21,16 @@ script: py.test --cov=mimesis/
 
 after_success:
   codecov
+
+deploy:
+  provider: pypi
+  user: $USER
+  password: $PYPI_PASSWORD
+  on:
+    branch: master
+    tags: true
+
+notifications:
+  email:
+    on_success: never
+    on_failure: change
