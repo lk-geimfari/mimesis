@@ -30,8 +30,8 @@ Also you can install it manually:
 ## Basic Usage
 
 ```python
->>> from mimesis import Personal
->>> person = Personal(locale='en')
+>>> import mimesis
+>>> person = mimesis.Personal(locale='en')
 
 >>> person.full_name(gender='female')
 'Antonetta Garrison'
@@ -89,14 +89,10 @@ You can specify a locale when creating providers and they will return data that 
 Using locales:
 
 ```python
->>> import mimesis
+>>> from mimesis import Personal
 
->>> en = mimesis.Personal('en')
->>> de = mimesis.Personal('de')
->>> ic = mimesis.Personal('is')
-
->>> en.full_name()
-'Carolin Brady'
+>>> de = Personal('de')
+>>> ic = Personal('is')
 
 >>> de.full_name()
 'Sabrina Gutermuth'
@@ -108,8 +104,8 @@ Using locales:
 When you only need to generate data for a single locale, use the `Generic()` provider, and you can access all providers of Mimesis from one object.
 
 ```python
->>> from mimesis import Generic
->>> g = Generic('es')
+>>> import mimesis
+>>> g = mimesis.Generic('es')
 
 >>> g.datetime.month()
 'Agosto'
@@ -119,16 +115,6 @@ When you only need to generate data for a single locale, use the `Generic()` pro
 
 >>> g.food.fruit()
 'Limón'
-```
-
-Keep in mind that the library supports more than twenty data providers and it's means that you can generate data for almost anything you want (really):
-```python
->>> import mimesis
->>> us = mimesis.UnitSystem()
-
->>> '678 {prefix}{unit}'.format(prefix=us.prefix(sign='negative'),
-                            unit=us.radioactivity())
-'678 millibecquerel'
 ```
 
 ## Advantages
@@ -159,14 +145,14 @@ class Patient(db.Model):
         super(Patient, self).__init__(**kwargs)
 
     @staticmethod
-    def bootstrap(count=500, locale='en', gender=None):
+    def bootstrap(count=500, locale='en'):
         from mimesis import Personal
 
         person = Personal(locale)
 
         for _ in range(count):
             patient = Patient(
-                full_name=person.full_name(gender=gender),
+                full_name=person.full_name('female'),
                 weight=person.weight(),
                 height=person.height(),
                 blood_type=person.blood_type(),
@@ -187,7 +173,7 @@ Just run shell mode
 and do following:
 
 ```python
->>> Patient().bootstrap(count=1000, locale='en', gender='female')
+>>> Patient().bootstrap(count=1000, locale='en')
 ```
 
 ## Generate data by schema
@@ -195,20 +181,21 @@ Mimesis support generating data by schema:
 
 ```python
 >>> from mimesis.schema import Schema
+>>> schema = Schema('en')
 
->>> apps_schema = {
+>>> schema.load(schema={
 ...     "id": "cryptographic.uuid",
 ...     "name": "text.word",
-...     'version': 'development.version',
+...     "version": "development.version",
 ...     "owner": {
 ...         "email": "personal.email",
-...         "username": "personal.username",
-...         "token": "cryptographic.token"
+...         "token": "cryptographic.token",
+...         "creator": "personal.full_name"
 ...     }
-... }
+... }).create(iterations=2)
 
->>> schema = Schema('en')
->>> schema.create(schema=apps_schema, iterations=2)
+>>> # or you can load data from json file:
+>>> schema.load(path='schema.json').create(iterations=2)
 ```
 
 Result:
@@ -216,24 +203,24 @@ Result:
 ```json
 [
   {
-    "id": "8a2e1ed8-7500-743b-dedd-3f20fb725d2e",
+    "id": "790cce21-5f75-2652-2ee2-f9d90a26c43d",
+    "name": "container",
     "owner": {
-      "username": "charmain_9925",
-      "email": "armandina4946@gmail.com",
-      "token": "b776d3448b4600f0a22f0d363f4b53152070a4de4ed2f691d1ac4bb26554a83a"
+      "email": "anjelica8481@outlook.com",
+      "token": "0bf924125640c46aad2a860f40ec4b7f33a516c497957abd70375c548ed56978",
+      "creator": "Ileen Ellis"
     },
-    "name": "rex",
-    "version": "2.3.7"
+    "version": "4.11.6"
   },
   {
-    "id": "419cf38a-4d5e-46cc-db2c-15f7d1827218",
+    "id": "c9df4564-b763-eff8-2a54-d71b8e11d63b",
+    "name": "bible",
     "owner": {
-      "username": "lashaunda-8002",
-      "email": "marth-639@outlook.com",
-      "token": "0231526d6c1bb0592212a999121404e3049c8c771ec340c849630ca313176d15"
+      "email": "genesis_2659@yahoo.com",
+      "token": "d65e9e36ceea68024c6a70b6af8e7597a5442fd63603464aedbb800f5a89f4f5",
+      "creator": "Rozella Johnson"
     },
-    "name": "robot",
-    "version": "1.4.3"
+    "version": "10.2.0"
   }
 ]
 ```
@@ -242,29 +229,25 @@ Result:
 You also can add custom provider to `Generic()`, using `add_provider()` method:
 
 ```python
->>> from mimesis import Generic
->>> generic = Generic('en')
+>>> import mimesis
+>>> generic = mimesis.Generic('en')
 
->>> class SomeProvider():
-...
+>>> class SomeProvider(object):
 ...     class Meta:
 ...         name = "some_provider"
 ...
-...     @staticmethod
-...     def one():
-...         return 1
+...     def hi(self):
+...         return "Hi!"
 
->>> class Another():
-...
-...     @staticmethod
-...     def bye():
+>>> class Another(object):
+...     def bye(self):
 ...         return "Bye!"
 
 >>> generic.add_provider(SomeProvider)
 >>> generic.add_provider(Another)
 
->>> generic.some_provider.one()
-1
+>>> generic.some_provider.hi()
+'Hi!'
 
 >>> generic.another.bye()
 'Bye!'
@@ -286,12 +269,8 @@ If you would like to use these country-specific providers, then you must import 
 >>> from mimesis.builtins import BrazilSpecProvider
 
 >>> generic = Generic('pt-br')
-
->>> class BrazilProvider(BrazilSpecProvider):
-...     class Meta:
-...         name = "brazil_provider"
-
->>> generic.add_provider(BrazilProvider)
+>>> # BrazilSpecProvider.Meta.name = name of provider
+>>> generic.add_provider(BrazilSpecProvider)
 >>> generic.brazil_provider.cpf()
 '696.441.186-00'
 ```
