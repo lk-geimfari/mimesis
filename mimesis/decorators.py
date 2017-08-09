@@ -35,18 +35,24 @@ def romanized(locale):
     return romanized_deco
 
 
-def type_to(new_type):
+def type_to(new_type, check_len):
     """Convert result of function to different type
 
     :param new_type: New type.
-    :return: Converted to new_type result.
+    :param check_len: Check lenght of object.
+    :return: Converted to new_type object.
     """
-    def inner(func):
 
+    def inner(func):
         @wraps(func)
         def wrapper(*args, **kwargs):
             result = func(*args, **kwargs)
-            return new_type(result)
+            result = new_type(result)
+
+            if check_len and len(result) == 1:
+                return result[0]
+
+            return result
 
         return wrapper
 

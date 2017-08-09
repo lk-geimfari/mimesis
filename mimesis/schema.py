@@ -1,28 +1,46 @@
+import json
+
 from mimesis.decorators import type_to
 from mimesis.providers import Generic
 
 
-# TODO: 1. Saving json in the file (fluent interface)
-# TODO: 2. Add tests
-
 class Schema(object):
     def __init__(self, locale=None):
-        self.generic = Generic(locale=locale)
+        self.schema = {}
+        if locale is None:
+            self.locale = 'en'
+        else:
+            self.locale = locale
+
+        self.generic = Generic(self.locale)
 
     def __generate(self, schema):
         data = dict()
-        for key, val in schema.items():
-            if isinstance(val, dict):
-                data[key] = self.__generate(val)
-            elif isinstance(val, list):
-                data[key] = [self.__generate(i) for i in val]
+        for k, v in schema.items():
+            if isinstance(v, dict):
+                data[k] = self.__generate(v)
+            elif isinstance(v, list):
+                data[k] = [self.__generate(i) for i in v]
             else:
-                provider, method = val.split('.')
-                data[key] = getattr(
+                provider, method = v.split('.')
+                data[k] = getattr(
                     getattr(self.generic, provider), method)()
         return data
 
-    @type_to(list)
-    def create(self, schema, iterations=1):
-        return map(lambda _: self.__generate(schema),
-                   range(iterations))
+    def load(self, path=None, schema=None):
+
+        if schema:
+            self.schema = schema
+        if path:
+            try:
+                with open(path, 'r') as f:
+                    self.schema = json.load(f)
+            except ValueError:
+                raise ValueError('Invalid json file!')
+        return self
+
+    @type_to(list, check_len=True)
+    def create(self, iterations=1):
+        if self.schema:
+            return map(lambda _: self.__generate(self.schema),
+                       range(iterations))
