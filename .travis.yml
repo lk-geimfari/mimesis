@@ -25,9 +25,7 @@ after_success:
 deploy:
   provider: pypi
   user: lk-geimfari
-  password:
-    secure: $SECURE_PASS
+  password: $SECURE_PASS
   on:
     branch: master
     tags: true
-    python: 3.5
