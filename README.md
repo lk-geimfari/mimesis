@@ -223,7 +223,7 @@ Result:
       "token": "b776d3448b4600f0a22f0d363f4b53152070a4de4ed2f691d1ac4bb26554a83a"
     },
     "name": "rex",
-	"version": "2.3.7"
+    "version": "2.3.7"
   },
   {
     "id": "419cf38a-4d5e-46cc-db2c-15f7d1827218",
@@ -233,7 +233,7 @@ Result:
       "token": "0231526d6c1bb0592212a999121404e3049c8c771ec340c849630ca313176d15"
     },
     "name": "robot",
-	"version": "1.4.3"
+    "version": "1.4.3"
   }
 ]
 ```
