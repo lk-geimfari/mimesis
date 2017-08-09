@@ -4,6 +4,7 @@ import mimesis
 from mimesis.settings import SUPPORTED_LOCALES
 
 locales = list(SUPPORTED_LOCALES.keys())
+platform = ['win32', 'linux2']
 
 
 @pytest.fixture(params=locales)
@@ -56,9 +57,9 @@ def text(request):
     return mimesis.Text(request.param)
 
 
-@pytest.fixture
-def path():
-    return mimesis.Path()
+@pytest.fixture(params=platform)
+def path(request):
+    return mimesis.Path(request.param)
 
 
 @pytest.fixture()
