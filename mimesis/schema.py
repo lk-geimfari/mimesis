@@ -1,6 +1,7 @@
 import json
 
 from mimesis.decorators import type_to
+from mimesis.exceptions import UndefinedSchema
 from mimesis.providers import Generic
 
 
@@ -33,8 +34,12 @@ class Schema(object):
             self.schema = schema
         if path:
             try:
-                with open(path, 'r') as f:
-                    self.schema = json.load(f)
+                try:
+                    with open(path, 'r') as f:
+                        self.schema = json.load(f)
+                except FileNotFoundError:
+                    raise FileNotFoundError(
+                        'File {path} is not found'.format(path=path))
             except ValueError:
                 raise ValueError('Invalid json file!')
         return self
@@ -44,3 +49,6 @@ class Schema(object):
         if self.schema:
             return map(lambda _: self.__generate(self.schema),
                        range(iterations))
+        else:
+            raise UndefinedSchema(
+                'The schema is empty or do not loaded.')

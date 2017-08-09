@@ -16,3 +16,7 @@ class WrongArgument(KeyError):
 
 class UnsupportedAlgorithm(AttributeError):
     """An exception that raised when user want to use unsupported algorithm"""
+
+
+class UndefinedSchema(ValueError):
+    """An exception that raised when schema if empty"""
