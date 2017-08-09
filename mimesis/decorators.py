@@ -35,7 +35,7 @@ def romanized(locale):
     return romanized_deco
 
 
-def type_to(new_type, check_len):
+def type_to(new_type, check_len=False):
     """Convert result of function to different type
 
     :param new_type: New type.

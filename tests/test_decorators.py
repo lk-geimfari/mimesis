@@ -50,3 +50,11 @@ def test_type_to():
 
     assert isinstance(fixture_list(), tuple)
     assert isinstance(fixture_tuple(), list)
+
+    @mimesis.decorators.type_to(list, check_len=True)
+    def fixture_list_check_let():
+        return ['one element']
+
+    # When we use check_len=True and length of returned object == 1,
+    # decorator just returns first element.
+    assert isinstance(fixture_list_check_let(), str)
