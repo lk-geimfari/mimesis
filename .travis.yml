@@ -21,3 +21,13 @@ script: py.test --cov=mimesis/
 
 after_success:
   codecov
+
+deploy:
+  provider: pypi
+  user: lk-geimfari
+  password:
+  	secure: $SECURE_PASS
+  on:
+    branch: master
+    tags: true
+    python: 3.5
