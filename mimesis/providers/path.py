@@ -18,7 +18,6 @@ class Path(BaseProvider):
         self.__p = Personal('en')
         self.platform = platform
 
-    @property
     def root(self):
         """Generate a root dir path.
 
@@ -31,7 +30,6 @@ class Path(BaseProvider):
                 root = PLATFORMS[platform]['root']
                 return root
 
-    @property
     def home(self):
         """Generate a home path.
 
@@ -55,7 +53,7 @@ class Path(BaseProvider):
         user = self.__p.name(gender)
         user = user.capitalize() if \
             self.platform == 'win32' else user.lower()
-        return self.home + user
+        return self.home() + user
 
     def users_folder(self, user_gender='female'):
         """Generate a random path to user's folders.
