@@ -29,7 +29,8 @@ class Minimizer(object):
         """
         with open(file_path, 'r') as f:
             json_text = json.loads(f.read())
-            minimized = json.dumps(json_text, separators=(',', ':'))
+            minimized = json.dumps(json_text, separators=(',', ':'),
+                                   sort_keys=True, indent=0)
 
         if len(file_path) > 0:
             output_path = abspath(file_path)
