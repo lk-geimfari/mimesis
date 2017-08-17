@@ -1,11 +1,10 @@
 ROOT=./
-VERSION = 0.0.1
 
 help:
 	@echo "Project and maintainer:"
 	@echo "\033[93m::::::::::::::::::::::::::::::::::::::::::::::::::::::::\033[0m"
 	@echo "\033[92mAuthor:     Likid Geimfari <likid.geimfari@gmail.com>\033[0m"
-	@echo "\033[92mPackage:    Mimesis $(VERSION)\\033[0m"
+	@echo "\033[92mPackage:    Mimesis\\033[0m"
 	@echo "\033[92mRepository: https://github.com/lk-geimfari/mimesis\033[0m"
 	@echo "\033[92mLicense:    MIT License\033[0m"
 	@echo "\033[93m::::::::::::::::::::::::::::::::::::::::::::::::::::::::\033[0m"
