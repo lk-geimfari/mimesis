@@ -8,7 +8,7 @@ Repository: https://github.com/lk-geimfari/mimesis
 
 from mimesis.providers import *
 
-__version__ = '0.0.4'
+__version__ = '0.0.5'
 __author__ = 'Likid Geimfari'
 
 __all__ = [
