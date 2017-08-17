@@ -23,8 +23,7 @@ after_success:
   codecov
 
 before_deploy:
-  script:
-    - python deploy/json_minimizer.py
+  - python deploy/json_minimizer.py
 
 deploy:
   provider: pypi
