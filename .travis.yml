@@ -22,8 +22,8 @@ script: py.test --cov=mimesis/
 after_success:
   codecov
 
-before_deploy:
-  - python deploy/json_minimizer.py
+#before_deploy:
+#  - python deploy/json_minimizer.py
 
 deploy:
   provider: pypi
