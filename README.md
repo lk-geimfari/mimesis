@@ -10,7 +10,8 @@
 [![codecov](https://codecov.io/gh/lk-geimfari/mimesis/branch/master/graph/badge.svg)](https://codecov.io/gh/lk-geimfari/mimesis)
 [![PyPI version](https://badge.fury.io/py/mimesis.svg)](https://badge.fury.io/py/mimesis)
 
-**Mimesis** is a fast and easy to use library for Python, which helps generate mock data for a variety of purposes. This data can be particularly useful during software development and testing. For example, it could be used to populate a testing database for a web application (Django, Flask, etc.) with user information such as email addresses, usernames, first names, last names, etc. The library was written with the use of tools from the standard Python library, and therefore, it does not have any side dependencies. Currently the library supports 30 languages and 21 class providers, supplying various data.
+**Mimesis** is a fast and easy to use library for Python, which helps generate mock data for a variety of purposes in a variety of languages (see "[Locales](https://github.com/lk-geimfari/mimesis/blob/master/README.md#locales)"). This data can be particularly useful during software development and testing. The library was written with the use of tools from the standard Python library, and therefore, it does not have any side dependencies.
+
 
 ## Documentation
 Mimesis is very simple to use, and the below examples should help you get started. Complete documentation for Mimesis is available [here](http://mimesis.readthedocs.io/).
@@ -29,6 +30,8 @@ Also you can install it manually:
 
 ## Basic Usage
 
+As we said above, this library is really easy to use:
+
 ```python
 >>> import mimesis
 >>> person = mimesis.Personal(locale='en')
@@ -36,16 +39,28 @@ Also you can install it manually:
 >>> person.full_name(gender='female')
 'Antonetta Garrison'
 
->>> person.email(gender='male')
-'john7893@live.com'
-
 >>> person.occupation()
 'Backend Developer'
 ```
 
 ## Locales
 
-You can specify a locale when creating providers and they will return data that is appropriate for the language or country associated with that locale. Mimesis currently includes support for 30 different locales. See details for more information.
+You can specify a locale when creating providers and they will return data that is appropriate for the language or country associated with that locale:
+
+```python
+>>> from mimesis import Personal
+
+>>> de = Personal('de')
+>>> ic = Personal('is')
+
+>>> de.full_name()
+'Sabrina Gutermuth'
+
+>>> ic.full_name()
+'Rósa Þórlindsdóttir'
+```
+
+Mimesis currently includes support for 30 different locales. See details for more information.
 
 <details>
 <!-- toc -->
@@ -86,21 +101,6 @@ You can specify a locale when creating providers and they will return data that 
 <!-- tocstop -->
 </details>
 
-Using locales:
-
-```python
->>> from mimesis import Personal
-
->>> de = Personal('de')
->>> ic = Personal('is')
-
->>> de.full_name()
-'Sabrina Gutermuth'
-
->>> ic.full_name()
-'Rósa Þórlindsdóttir'
-```
-
 When you only need to generate data for a single locale, use the `Generic()` provider, and you can access all providers of Mimesis from one object.
 
 ```python
@@ -109,9 +109,6 @@ When you only need to generate data for a single locale, use the `Generic()` pro
 
 >>> g.datetime.month()
 'Agosto'
-
->>> g.cryptographic.token(entropy=16)
-'44922f433a1f8611843520ac919928b9'
 
 >>> g.food.fruit()
 'Limón'
@@ -130,50 +127,13 @@ performance with other libraries.
 
 ## Integration with Web Application Frameworks
 
-You can use Mimesis during development and testing of applications built on a variety of frameworks. Here is an
-example of integration with a Flask application:
+You can use Mimesis during development and testing of applications built on a variety of frameworks. [Here](https://gist.github.com/lk-geimfari/ff1ed5de8a76a1ac09b29e8dff3784a3) is an
+example of integration with a Flask application.
+
+Just run shell mode and do following:
 
 ```python
-class Patient(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    full_name = db.Column(db.String(100))
-    weight = db.Column(db.String(64))
-    height = db.Column(db.String(64))
-    blood_type = db.Column(db.String(64))
-
-    def __init__(self, **kwargs):
-        super(Patient, self).__init__(**kwargs)
-
-    @staticmethod
-    def bootstrap(count=500, locale='en'):
-        from mimesis import Personal
-
-        person = Personal(locale)
-
-        for _ in range(count):
-            patient = Patient(
-                full_name=person.full_name('female'),
-                weight=person.weight(),
-                height=person.height(),
-                blood_type=person.blood_type(),
-            )
-
-            db.session.add(patient)
-            try:
-                db.session.commit()
-            except IntegrityError:
-                db.session.rollback()
-```
-
-Just run shell mode
-```
-(env) ➜ python3 manage.py shell
-```
-
-and do following:
-
-```python
->>> Patient().bootstrap(count=1000, locale='en')
+>>> Patient().populate(count=1000, locale='en')
 ```
 
 ## Generate data by schema
@@ -200,7 +160,7 @@ Mimesis support generating data by schema:
 
 Result:
 
-```json
+```
 [
   {
     "id": "790cce21-5f75-2652-2ee2-f9d90a26c43d",
@@ -212,16 +172,7 @@ Result:
     },
     "version": "4.11.6"
   },
-  {
-    "id": "c9df4564-b763-eff8-2a54-d71b8e11d63b",
-    "name": "bible",
-    "owner": {
-      "email": "genesis_2659@yahoo.com",
-      "token": "d65e9e36ceea68024c6a70b6af8e7597a5442fd63603464aedbb800f5a89f4f5",
-      "creator": "Rozella Johnson"
-    },
-    "version": "10.2.0"
-  }
+  ...
 ]
 ```
 
@@ -236,8 +187,8 @@ You also can add custom provider to `Generic()`, using `add_provider()` method:
 ...     class Meta:
 ...         name = "some_provider"
 ...
-...     def hi(self):
-...         return "Hi!"
+...     def hello(self):
+...         return "Hello!"
 
 >>> class Another(object):
 ...     def bye(self):
@@ -247,7 +198,7 @@ You also can add custom provider to `Generic()`, using `add_provider()` method:
 >>> generic.add_provider(Another)
 
 >>> generic.some_provider.hi()
-'Hi!'
+'Hello!'
 
 >>> generic.another.bye()
 'Bye!'
@@ -269,7 +220,6 @@ If you would like to use these country-specific providers, then you must import 
 >>> from mimesis.builtins import BrazilSpecProvider
 
 >>> generic = Generic('pt-br')
->>> # BrazilSpecProvider.Meta.name = name of provider
 >>> generic.add_provider(BrazilSpecProvider)
 >>> generic.brazil_provider.cpf()
 '696.441.186-00'
@@ -280,9 +230,9 @@ If you would like to use these country-specific providers, then you must import 
 If your locale belongs to the family of Cyrillic languages, but you need latinized locale-specific data, then you can use special decorator which help you romanize your data.
 At this moment it's works only for Russian and Ukrainian:
 ```python
->>> import mimesis.decorators
+>>> from mimesis.decorators import romanized
 
->>> @mimesis.decorators.romanized('ru')
+>>> @romanized('ru')
 ... def russian_name():
 ...     return 'Вероника Денисова'
 
