@@ -127,8 +127,36 @@ performance with other libraries.
 
 ## Integration with Web Application Frameworks
 
-You can use Mimesis during development and testing of applications built on a variety of frameworks. [Here](https://gist.github.com/lk-geimfari/ff1ed5de8a76a1ac09b29e8dff3784a3) is an
-example of integration with a Flask application.
+You can use Mimesis during development and testing of applications built on a variety of frameworks. Here is an
+example of integration with a Flask application:
+
+```python
+class Patient(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    full_name = db.Column(db.String(100))
+    blood_type = db.Column(db.String(64))
+
+    def __init__(self, **kwargs):
+        super(Patient, self).__init__(**kwargs)
+
+    @staticmethod
+    def populate(count=500, locale=None):
+        import mimesis
+
+        person =  mimesis.Personal(locale=locale)
+
+        for _ in range(count):
+            patient = Patient(
+                full_name=person.full_name('female'),
+                blood_type=person.blood_type(),
+            )
+
+            db.session.add(patient)
+            try:
+                db.session.commit()
+            except IntegrityError:
+                db.session.rollback()
+```
 
 Just run shell mode and do following:
 
