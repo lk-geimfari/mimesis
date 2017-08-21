@@ -42,8 +42,12 @@ class Business(BaseProvider):
         :Example:
             © 1990-2016 Komercia, Inc.
         """
-        company_type = self.company_type(abbr=True)
-        return '© %s, %s' % (self.company(), company_type)
+        return '© {company}, {company_type}'.format(
+            company=self.company(),
+            company_type=self.company_type(
+                abbr=True,
+            ),
+        )
 
     def currency_iso(self):
         """Get a currency code. ISO 4217 format.
@@ -57,15 +61,18 @@ class Business(BaseProvider):
     def price(self, minimum=10.00, maximum=1000.00):
         """Generate a random price.
 
-        :param minimum:
-        :param maximum:
+        :param minimum: Max value of price.
+        :param maximum: Min value of price.
         :return: Price.
         :Example:
             599.99 $.
         """
         currencies = CURRENCY_SYMBOLS
 
-        price = self.random.uniform(float(minimum), float(maximum))
+        price = self.random.uniform(
+            float(minimum),
+            float(maximum),
+        )
 
         fmt = '{0:.2f} {1}'
 
