@@ -7,7 +7,7 @@ There are over eighteen different `data providers <https://github.com/lk-geimfar
 
 Best Practice
 ------------
-We strongly recommend to read articles which published in our blog_ on Medium. There we are speak about best practices and a number of most useful features of the library.
+We strongly recommend to read articles which published in blog_ of our friends on Medium. There we are speak about best practices and a number of most useful features of the library.
 
 Generating mock data using Mimesis: First_ and Second_ part.
 
