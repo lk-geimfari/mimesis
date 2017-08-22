@@ -2,6 +2,8 @@
 import datetime
 import re
 
+from mimesis.data import TIMEZONES
+
 from ._patterns import STR_REGEX
 
 
@@ -62,3 +64,11 @@ def test_month(generic):
 def test_periodicity(generic):
     result = generic.datetime.periodicity()
     assert result in generic.datetime.data['periodicity']
+
+
+def test_timezone(generic):
+    result = generic.datetime.timezone()
+
+    assert result is not None
+    assert isinstance(result, str)
+    assert result in TIMEZONES
