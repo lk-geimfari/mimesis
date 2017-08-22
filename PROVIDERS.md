@@ -21,5 +21,5 @@
 | 17  | Numbers         | *Numerical data (floats, primes, digit etc.)*                  |
 | 18  | Path            | *Provides methods and property for generate paths.*            |
 | 19  | UnitSytem       | *Provides names of unit systems in international format*       |
-| 20  | Generic         | *All at one*                                                   |
+| 20  | Generic         | *All at once*                                                   |
 | 21  | Cryptographic            | *Cryptographic data*      |
