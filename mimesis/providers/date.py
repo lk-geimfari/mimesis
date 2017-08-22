@@ -2,6 +2,7 @@ import datetime
 from calendar import monthrange
 
 from mimesis.data import ROMAN_NUMS
+from mimesis.data import TIMEZONES
 from mimesis.providers import BaseProvider
 from mimesis.utils import pull
 
@@ -117,3 +118,12 @@ class Datetime(BaseProvider):
             23
         """
         return self.random.randint(1, 31)
+
+    def timezone(self):
+        """Get a random timezone
+
+        :return: Timezone.
+        :Example:
+            Europe/Paris
+        """
+        return self.random.choice(TIMEZONES)
