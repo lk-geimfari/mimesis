@@ -1,8 +1,7 @@
 import datetime
 from calendar import monthrange
 
-from mimesis.data import ROMAN_NUMS
-from mimesis.data import TIMEZONES
+from mimesis.data import GMT_OFFSETS, ROMAN_NUMS, TIMEZONES
 from mimesis.providers import BaseProvider
 from mimesis.utils import pull
 
@@ -127,3 +126,12 @@ class Datetime(BaseProvider):
             Europe/Paris
         """
         return self.random.choice(TIMEZONES)
+
+    def gmt_offset(self):
+        """Get a random GMT offset value.
+
+        :return: GMT Offset.
+        :Example:
+            'UTC +03:00'
+        """
+        return self.random.choice(GMT_OFFSETS)

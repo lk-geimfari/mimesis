@@ -2,7 +2,7 @@
 import datetime
 import re
 
-from mimesis.data import TIMEZONES
+from mimesis.data import GMT_OFFSETS, TIMEZONES
 
 from ._patterns import STR_REGEX
 
@@ -15,6 +15,11 @@ def test_year(dt):
     result = dt.year(minimum=2000, maximum=2016)
     assert result >= 2000
     assert result <= 2016
+
+
+def test_gmt_offset(dt):
+    result = dt.gmt_offset()
+    assert result in GMT_OFFSETS
 
 
 def test_day_of_month(dt):
