@@ -10,7 +10,7 @@
 [![codecov](https://codecov.io/gh/lk-geimfari/mimesis/branch/master/graph/badge.svg)](https://codecov.io/gh/lk-geimfari/mimesis)
 [![PyPI version](https://badge.fury.io/py/mimesis.svg)](https://badge.fury.io/py/mimesis)
 
-**Mimesis** is a fast and easy to use library for Python, which helps generate mock data for a variety of purposes in a variety of languages (see "[Locales](https://github.com/lk-geimfari/mimesis#locales)"). This data can be particularly useful during software development and testing. The library was written with the use of tools from the standard Python library, and therefore, it does not have any side dependencies.
+**Mimesis** is a fast and easy to use library for Python 3, which helps generate mock data for a variety of purposes in a variety of languages (see "[Locales](https://github.com/lk-geimfari/mimesis#locales)"). This data can be particularly useful during software development and testing. The library was written with the use of tools from the standard Python library, and therefore, it does not have any side dependencies.
 
 
 ## Documentation
