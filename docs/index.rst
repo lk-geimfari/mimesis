@@ -16,6 +16,7 @@ Generating mock data using Mimesis: First_ and Second_ part.
 .. _blog: https://medium.com/wemake-services
 
 
+
 Installation
 ------------
 
@@ -30,6 +31,12 @@ or simply:
 .. code-block:: bash
 
     ➜ pip install mimesis
+
+
+Please note
+------------
+The library only runs on Python 3.3+. Developers don’t have any plans of adding Python 2.7 support.
+
 
 Basic Usage
 -----------
@@ -130,10 +137,10 @@ Related Libraries
 -----------------
 
 - `elizabeth-cloud`_ - web version of Mimesis using GraphQL and Sanic.
-- `pytest-elizabeth`_ - is a pytest plugin that provides pytest fixtures for Mimesis providers.
+- `pytest-mimesis`_ - is a pytest plugin that provides pytest fixtures for Mimesis providers.
 
 .. _elizabeth-cloud: https://github.com/wemake-services/elizabeth-cloud
-.. _pytest-elizabeth: https://github.com/lk-geimfari/pytest-elizabeth
+.. _pytest-mimesis: https://github.com/lk-geimfari/pytest-mimesis
 
 Contributing
 ------------
@@ -159,14 +166,14 @@ Running Tests
 
 .. code-block:: bash
 
-    cd mimesis/
-    py.test --cov=mimesis/ --cov-report=term-missing
+    ➜  ~ cd mimesis/
+    ➜  py.test
 
 or
 
 .. code-block:: bash
 
-    make test
+    ➜ make test
 
 License and Disclaimer
 ----------------------
@@ -183,6 +190,7 @@ Contents
 
    guide
    api
+
 
 Indices
 -------

@@ -73,14 +73,14 @@ Food
 Hardware
 --------
 
-.. autoclass:: mimesis.core.Hardware
+.. autoclass:: mimesis.Hardware
    :members:
    :special-members: __init__
 
 Internet
 --------
 
-.. autoclass:: mimesis.core.Internet
+.. autoclass:: mimesis.Internet
    :members:
    :special-members: __init__
 
