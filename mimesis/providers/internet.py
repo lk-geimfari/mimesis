@@ -214,7 +214,6 @@ class Internet(BaseProvider):
         :Example:
             AMQP
         """
-        # TODO: Refactoring.
         layer = layer.lower()
         try:
             protocol = self.random.choice(NETWORK_PROTOCOLS[layer])
