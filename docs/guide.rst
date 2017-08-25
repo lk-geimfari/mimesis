@@ -502,16 +502,16 @@ Path
 	root = path.root
 	# Output: /
 
-    home = path.home
+	home = path.home
 	# Output: /home/
 
-    user = path.user(gender='female')
+	user = path.user(gender='female')
 	# Output: /home/mariko
 
-    user_folder = path.users_folder(user_gender='male')
+	user_folder = path.users_folder(user_gender='male')
 	# Output: /home/john/Documents
 
-    dev = path.dev_dir()
+	dev = path.dev_dir()
 	# Output: /home/fidelia/Development/Erlang
 
 	project_dir = path.project_dir(user_gender='female')
