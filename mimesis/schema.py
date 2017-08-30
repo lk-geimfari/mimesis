@@ -6,6 +6,9 @@ from mimesis.providers import Generic
 
 
 class Schema(object):
+    """Class which helps generate data by schema using any
+    providers which supported by mimesis.
+    """
     def __init__(self, locale=None):
         self.schema = {}
         if locale is None:
@@ -29,6 +32,11 @@ class Schema(object):
         return data
 
     def load(self, path=None, schema=None):
+        """Load schema from python dict or from json file.
+
+        :param path: Path to file.
+        :param schema: Dictionary (schema).
+        """
 
         if schema:
             self.schema = schema
@@ -46,6 +54,11 @@ class Schema(object):
 
     @type_to(list, check_len=True)
     def create(self, iterations=1):
+        """Fill schema using data generators of mimesis.
+
+        :param iterations: Count of iterations.
+        :return: Filled schema.
+        """
         if self.schema:
             return map(lambda _: self.__generate(self.schema),
                        range(iterations))

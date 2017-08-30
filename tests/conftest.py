@@ -1,6 +1,7 @@
 import pytest
 
 import mimesis
+from mimesis.schema import Schema
 from mimesis.settings import SUPPORTED_LOCALES
 
 locales = list(SUPPORTED_LOCALES.keys())
@@ -110,3 +111,8 @@ def net():
 @pytest.fixture
 def crypto():
     return mimesis.Cryptographic()
+
+
+@pytest.fixture
+def schema():
+    return Schema()
