@@ -58,6 +58,25 @@ def luhn_checksum(num) -> str:
     return str(check * 9 % 10)
 
 
+def update_dict(initial, other):
+    """Recursively update a dictionary.
+
+    .. note:: update_dict - is internal function of `mimesis`.
+
+    :param initial: Dict to update.
+    :param other: Dict to update from.
+    :return: Updated dict.
+    :rtype: dict
+    """
+    for key, value in other.items():
+        if isinstance(value, collections.Mapping):
+            r = update_dict(initial.get(key, {}), value)
+            initial[key] = r
+        else:
+            initial[key] = other[key]
+    return initial
+
+
 @functools.lru_cache(maxsize=None)
 def pull(file, locale='en') -> dict:
     """Open json file file and get content from file and memorize result using
@@ -132,20 +151,3 @@ def download_image(url, save_path='', unverified_ctx=False):
         request.urlretrieve(url, save_path + image_name)
         return image_name
     return None
-
-
-def update_dict(initial, other):
-    """Recursively update a dictionary.
-
-    :param initial: Dict to update.
-    :param other: Dict to update from.
-    :return: Updated dict.
-    :rtype: dict
-    """
-    for key, value in other.items():
-        if isinstance(value, collections.Mapping):
-            r = update_dict(initial.get(key, {}), value)
-            initial[key] = r
-        else:
-            initial[key] = other[key]
-    return initial
