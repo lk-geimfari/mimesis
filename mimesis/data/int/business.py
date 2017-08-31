@@ -192,6 +192,7 @@ CURRENCY_SYMBOLS = {
     'en-au': '$',
     'es': '€',
     'es-mx': '$',
+    'et': '€',
     'fa': '﷼',
     'fi': '€',
     'fr': '€',

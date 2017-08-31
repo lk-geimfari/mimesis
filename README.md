@@ -79,25 +79,26 @@ Mimesis currently includes support for 30 different locales. See details for mor
 | 9  | 🇬🇧   |  `en-gb`   | British English      | English     |
 | 10 | 🇪🇸   |  `es`      | Spanish              | Español     |
 | 11 | 🇲🇽   |  `es-mx`   | Mexican Spanish      | Español     |
-| 12 | 🇮🇷   |  `fa`      | Farsi                |      فارسی  |
-| 13 | 🇫🇮   |  `fi`      | Finnish              | Suomi       |
-| 14 | 🇫🇷   |  `fr`      | French               | Français    |
-| 15 | 🇭🇺   |  `hu`      | Hungarian            | Magyar      |
-| 16 | 🇮🇸   |  `is`      | Icelandic            | Íslenska    |
-| 17 | 🇮🇹   |  `it`      | Italian              | Italiano    |
-| 18 | 🇯🇵   |  `ja`      | Japanese             | 日本語       |
-| 19 | 🇰🇷   |  `ko`      | Korean               | 한국어       |
-| 20 | 🇳🇱   |  `nl`      | Dutch                | Nederlands  |
-| 21 | 🇧🇪   |  `nl-be`   | Belgium Dutch        | Nederlands  |
-| 22 | 🇳🇴   |  `no`      | Norwegian            | Norsk       |
-| 23 | 🇵🇱   |  `pl`      | Polish               | Polski      |
-| 24 | 🇵🇹   |  `pt`      | Portuguese           | Português   |
-| 25 | 🇧🇷   |  `pt-br`   | Brazilian Portuguese | Português Brasileiro |
-| 26 | 🇷🇺   |  `ru`      | Russian              | Русский     |
-| 27 | 🇸🇪   |  `sv`      | Swedish              | Svenska     |
-| 28 | 🇹🇷   |  `tr`      | Turkish              | Türkçe      |
-| 29 | 🇺🇦   |  `uk`      | Ukrainian            | Український |
-| 30 | 🇨🇳   |  `zh`      | Chinese              | 汉语         |
+| 12 | 🇲🇽   |  `et`      | Estonian             | Eesti       |
+| 13 | 🇮🇷   |  `fa`      | Farsi                | فارسی       |
+| 14 | 🇫🇮   |  `fi`      | Finnish              | Suomi       |
+| 15 | 🇫🇷   |  `fr`      | French               | Français    |
+| 16 | 🇭🇺   |  `hu`      | Hungarian            | Magyar      |
+| 17 | 🇮🇸   |  `is`      | Icelandic            | Íslenska    |
+| 18 | 🇮🇹   |  `it`      | Italian              | Italiano    |
+| 19 | 🇯🇵   |  `ja`      | Japanese             | 日本語       |
+| 20 | 🇰🇷   |  `ko`      | Korean               | 한국어        |
+| 21 | 🇳🇱   |  `nl`      | Dutch                | Nederlands  |
+| 22 | 🇧🇪   |  `nl-be`   | Belgium Dutch        | Nederlands  |
+| 23 | 🇳🇴   |  `no`      | Norwegian            | Norsk       |
+| 24 | 🇵🇱   |  `pl`      | Polish               | Polski      |
+| 25 | 🇵🇹   |  `pt`      | Portuguese           | Português   |
+| 26 | 🇧🇷   |  `pt-br`   | Brazilian Portuguese | Português Brasileiro |
+| 27 | 🇷🇺   |  `ru`      | Russian              | Русский     |
+| 28 | 🇸🇪   |  `sv`      | Swedish              | Svenska     |
+| 29 | 🇹🇷   |  `tr`      | Turkish              | Türkçe      |
+| 30 | 🇺🇦   |  `uk`      | Ukrainian            | Український |
+| 31 | 🇨🇳   |  `zh`      | Chinese              | 汉语         |
 
 <!-- tocstop -->
 </details>
