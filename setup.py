@@ -1,13 +1,27 @@
+import os
+
 from distutils.core import setup
 
-from mimesis import __author__, __version__
+here = os.path.abspath(os.path.dirname(__file__))
 
+# Long description.
 with open('PYPI_README.rst', 'r', encoding='utf-8') as f:
     readme = f.read()
 
+about = {}
+# Get meta-data from __version__.py
+with open(os.path.join(here, 'mimesis', '__version__.py')) as f:
+    exec(f.read(), about)
+
 setup(
-    name='mimesis',
-    version=__version__,
+    name=about['__title__'],
+    version=about['__version__'],
+    description=about['__description__'],
+    long_description=readme,
+    author=about['__author__'],
+    author_email=about['__author_email__'],
+    url=about['__url__'],
+    license=about['__license__'],
     packages=[
         'mimesis',
         'mimesis.data',
@@ -38,23 +52,15 @@ setup(
               ],
          ),
     ],
-    url='https://github.com/lk-geimfari/mimesis',
-    license='MIT License',
-    author=__author__,
-    author_email='likid.geimfari@gmail.com',
-    description='Mimesis: dummy data for developers.',
-    long_description=readme,
     classifiers=[
-        'Development Status :: 4 - Beta',
+        'License :: OSI Approved :: MIT License',
         'Intended Audience :: Developers',
         'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
-        'License :: OSI Approved :: MIT License',
-        'Intended Audience :: Developers',
+        'Programming Language :: Python :: Implementation :: CPython',
         'Operating System :: OS Independent',
-        'Topic :: Software Development :: Libraries :: Python Modules',
         'Topic :: Software Development',
         'Topic :: Software Development :: Testing',
     ],

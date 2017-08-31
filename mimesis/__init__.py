@@ -8,9 +8,6 @@ Repository: https://github.com/lk-geimfari/mimesis
 
 from mimesis.providers import *
 
-__version__ = '0.0.5'
-__author__ = 'Likid Geimfari'
-
 __all__ = [
     'Address',
     'Business',

@@ -41,6 +41,8 @@ flake:
 
 release:
 	python3 setup.py register sdist upload -r pypi
+	python3 sdist bdist_wheel --universal
+	twine upload dist/*
 
 install:
 	python3 setup.py install
