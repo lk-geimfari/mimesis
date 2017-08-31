@@ -1,0 +1,66 @@
+{
+  "day": {
+    "abbr": [
+	  "E",
+	  "T",
+	  "K",
+	  "N",
+	  "R",
+	  "L",
+	  "P"
+    ],
+    "name": [
+	  "Esmaspäev",
+	  "Teisipäev",
+	  "Kolmapäev",
+	  "Neljapäev",
+	  "Reede",
+	  "Laupäev",
+	  "Pühapäev"
+    ]
+  },
+  "formats": {
+	"date": "%d/%m/%Y",
+	"time": "%H:%M:%S"
+  },
+  "month": {
+    "abbr": [
+	  "Jaan",
+	  "Veebr",
+	  "Märts",
+	  "Apr",
+	  "Mai",
+	  "Juuni",
+	  "Juuli",
+	  "Aug",
+	  "Sept",
+	  "Okt",
+	  "Nov",
+	  "Dets"
+    ],
+    "name": [
+	  "Jaanuar",
+	  "Veebruar",
+	  "Märts",
+	  "Aprill",
+	  "Mai",
+	  "Juuni",
+	  "Juuli",
+	  "August",
+	  "September",
+	  "Oktoober",
+	  "November",
+	  "Detsember"
+    ]
+  },
+  "periodicity": [
+    "Ühel päeval",
+    "Mitte kunagi",
+    "Harva",
+    "Väga sageli",
+    "Igapäevaselt",
+    "Nädalas",
+    "Kuus",
+    "Kord aastas"
+  ]
+}
