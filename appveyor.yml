@@ -8,9 +8,9 @@ environment:
     - PYTHON: "C:\\Python36-x64"
 
 install:
-  - "%PYTHON%\\python.exe -m pip install pytest"
+  - "%PYTHON%\\python.exe -m pip install pytest flake8-builtins flake8-commas flake8-quotes pytest-flake8"
 
 build: off
 
 test_script:
-  - "%PYTHON%\\python.exe setup.py test"
+  - "%PYTHON%\\python.exe setup.py test -a"
