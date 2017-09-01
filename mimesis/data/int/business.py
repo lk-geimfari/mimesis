@@ -196,6 +196,7 @@ CURRENCY_SYMBOLS = {
     'fa': '﷼',
     'fi': '€',
     'fr': '€',
+    'gr': '€',
     'hu': 'Ft',
     'is': 'kr',
     'it': '€',
