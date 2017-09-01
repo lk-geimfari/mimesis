@@ -62,6 +62,10 @@ SUPPORTED_LOCALES = {
         'name': 'French',
         'name_local': 'Français',
     },
+    'gr': {
+        'name': 'Greek',
+        'name_local': 'Ελληνικά',
+    },
     'hu': {
         'name': 'Hungarian',
         'name_local': 'Magyar',
