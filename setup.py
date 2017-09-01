@@ -1,6 +1,8 @@
 import os
+import sys
 
 from distutils.core import setup
+from setuptools.command.test import test as TestCommand
 
 here = os.path.abspath(os.path.dirname(__file__))
 
@@ -12,6 +14,27 @@ about = {}
 # Get meta-data from __version__.py
 with open(os.path.join(here, 'mimesis', '__version__.py')) as f:
     exec(f.read(), about)
+
+
+class PyTest(TestCommand):
+    """Custom command for running test using setup.py test"""
+
+    user_options = [('pytest-args=', 'a', 'Arguments to pass to py.test')]
+
+    def initialize_options(self):
+        TestCommand.initialize_options(self)
+        self.pytest_args = []
+
+    def finalize_options(self):
+        TestCommand.finalize_options(self)
+        self.test_args = []
+        self.test_suite = True
+
+    def run_tests(self):
+        import pytest
+        errno = pytest.main(self.pytest_args)
+        sys.exit(errno)
+
 
 setup(
     name=about['__title__'],
@@ -64,4 +87,6 @@ setup(
         'Topic :: Software Development',
         'Topic :: Software Development :: Testing',
     ],
+    tests_require=['pytest'],
+    cmdclass={'test': PyTest},
 )
