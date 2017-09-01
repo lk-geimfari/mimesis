@@ -87,6 +87,12 @@ setup(
         'Topic :: Software Development',
         'Topic :: Software Development :: Testing',
     ],
-    tests_require=['pytest'],
+    tests_require=[
+        'pytest',
+        'flake8-builtins',
+        'flake8-commas',
+        'flake8-quotes',
+        'pytest-flake8',
+    ],
     cmdclass={'test': PyTest},
 )
