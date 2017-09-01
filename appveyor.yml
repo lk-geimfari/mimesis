@@ -13,4 +13,4 @@ install:
 build: off
 
 test_script:
-  - "build.cmd %PYTHON%\\python.exe setup.py test"
+  - "%PYTHON%\\python.exe setup.py test"
