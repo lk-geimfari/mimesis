@@ -88,7 +88,7 @@ Mimesis currently includes support for 31 different locales. See details for mor
 | 9  | 🇬🇧   |  `en-gb`   | British English      | English     |
 | 10 | 🇪🇸   |  `es`      | Spanish              | Español     |
 | 11 | 🇲🇽   |  `es-mx`   | Mexican Spanish      | Español     |
-| 12 | 🇲🇽   |  `et`      | Estonian             | Eesti       |
+| 12 | 🇪🇪   |  `et`      | Estonian             | Eesti       |
 | 13 | 🇮🇷   |  `fa`      | Farsi                | فارسی       |
 | 14 | 🇫🇮   |  `fi`      | Finnish              | Suomi       |
 | 15 | 🇫🇷   |  `fr`      | French               | Français    |
