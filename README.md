@@ -12,6 +12,17 @@
 [![PyPI version](https://badge.fury.io/py/mimesis.svg)](https://badge.fury.io/py/mimesis)
 [![Python](https://img.shields.io/badge/python-3.3%5E-brightgreen.svg)](https://badge.fury.io/py/mimesis)
 
+## Advantages
+
+Mimesis offers a number of advantages over other similar libraries, such as Faker:
+
+* Performance. Mimesis is significantly [faster](http://i.imgur.com/pCo6yPA.png) than other similar libraries.
+* Completeness. Mimesis strives to provide many detailed providers that offer a variety of data generators.
+* Simplicity. Mimesis does not require any modules other than the Python standard library.
+
+See [here](https://gist.github.com/lk-geimfari/461ce92fd32379d7b73c9e12164a9154) for an example of how we compare
+performance with other libraries.
+
 ## Documentation
 Mimesis is very simple to use, and the below examples should help you get started. Complete documentation for Mimesis is available [here](http://mimesis.readthedocs.io/).
 
@@ -26,17 +37,6 @@ Also you can install it manually:
 ```zsh
 (env) ➜  python3 setup.py install
 ```
-
-## Advantages
-
-Mimesis offers a number of advantages over other similar libraries, such as Faker:
-
-* Performance. Mimesis is significantly [faster](http://i.imgur.com/pCo6yPA.png) than other similar libraries.
-* Completeness. Mimesis strives to provide many detailed providers that offer a variety of data generators.
-* Simplicity. Mimesis does not require any modules other than the Python standard library.
-
-See [here](https://gist.github.com/lk-geimfari/461ce92fd32379d7b73c9e12164a9154) for an example of how we compare
-performance with other libraries.
 
 ## Basic Usage
 
