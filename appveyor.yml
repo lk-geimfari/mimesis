@@ -1,0 +1,23 @@
+environment:
+  matrix:
+
+    - PYTHON: "C:\\Python33"
+    - PYTHON: "C:\\Python33-x64"
+
+    - PYTHON: "C:\\Python34"
+    - PYTHON: "C:\\Python34-x64"
+
+    - PYTHON: "C:\\Python35"
+    - PYTHON: "C:\\Python35-x64"
+
+    - PYTHON: "C:\\Python36"
+    - PYTHON: "C:\\Python36-x64"
+
+install:
+  - "%PYTHON%\\python.exe -m pip install pytest pytest-flake8"
+  - "%PYTHON%\\python.exe -m pip install flake8-builtins flake8-commas flake8-quotes"
+
+build: off
+
+test_script:
+  - "%PYTHON%\\python.exe setup.py test"
