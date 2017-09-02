@@ -181,7 +181,7 @@ You also can add custom provider to `Generic()`, using `add_provider()` method:
 >>> generic.add_provider(SomeProvider)
 >>> generic.add_provider(Another)
 
->>> generic.some_provider.hi()
+>>> generic.some_provider.hello()
 'Hello!'
 
 >>> generic.another.bye()
