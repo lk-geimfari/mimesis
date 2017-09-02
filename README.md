@@ -101,6 +101,8 @@ Mimesis currently includes support for 30 different locales. See details for mor
 <!-- tocstop -->
 </details>
 
+<br>
+
 When you only need to generate data for a single locale, use the `Generic()` provider, and you can access all providers of Mimesis from one object.
 
 ```python
