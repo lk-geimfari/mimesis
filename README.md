@@ -12,6 +12,17 @@
 [![PyPI version](https://badge.fury.io/py/mimesis.svg)](https://badge.fury.io/py/mimesis)
 [![Python](https://img.shields.io/badge/python-3.3%5E-brightgreen.svg)](https://badge.fury.io/py/mimesis)
 
+## Advantages
+
+Mimesis offers a number of advantages over other similar libraries, such as Faker:
+
+* Performance. Mimesis is significantly [faster](http://i.imgur.com/pCo6yPA.png) than other similar libraries.
+* Completeness. Mimesis strives to provide many detailed providers that offer a variety of data generators.
+* Simplicity. Mimesis does not require any modules other than the Python standard library.
+
+See [here](https://gist.github.com/lk-geimfari/461ce92fd32379d7b73c9e12164a9154) for an example of how we compare
+performance with other libraries.
+
 ## Documentation
 Mimesis is very simple to use, and the below examples should help you get started. Complete documentation for Mimesis is available [here](http://mimesis.readthedocs.io/).
 
@@ -59,7 +70,7 @@ You can specify a locale when creating providers and they will return data that 
 'Rósa Þórlindsdóttir'
 ```
 
-Mimesis currently includes support for 30 different locales. See details for more information.
+Mimesis currently includes support for 31 different locales. See details for more information.
 
 <details>
 <!-- toc -->
@@ -77,7 +88,7 @@ Mimesis currently includes support for 30 different locales. See details for mor
 | 9  | 🇬🇧   |  `en-gb`   | British English      | English     |
 | 10 | 🇪🇸   |  `es`      | Spanish              | Español     |
 | 11 | 🇲🇽   |  `es-mx`   | Mexican Spanish      | Español     |
-| 12 | 🇲🇽   |  `et`      | Estonian             | Eesti       |
+| 12 | 🇪🇪   |  `et`      | Estonian             | Eesti       |
 | 13 | 🇮🇷   |  `fa`      | Farsi                | فارسی       |
 | 14 | 🇫🇮   |  `fi`      | Finnish              | Suomi       |
 | 15 | 🇫🇷   |  `fr`      | French               | Français    |
@@ -101,6 +112,8 @@ Mimesis currently includes support for 30 different locales. See details for mor
 <!-- tocstop -->
 </details>
 
+<br>
+
 When you only need to generate data for a single locale, use the `Generic()` provider, and you can access all providers of Mimesis from one object.
 
 ```python
@@ -115,7 +128,7 @@ When you only need to generate data for a single locale, use the `Generic()` pro
 ```
 
 ## Data providers
-Mimesis support  over twenty different data providers available, which can produce data related to food, people, computer hardware, transportation, addresses, and more. See details for more information.
+Mimesis support over twenty different data providers available, which can produce data related to food, people, computer hardware, transportation, addresses, and more. See details for more information.
 
 <details>
 <!-- toc -->
@@ -131,7 +144,7 @@ Mimesis support  over twenty different data providers available, which can produ
 | 7   | File            | *File data (extension etc.)*                                   |
 | 8   | Food            | *Information on food (vegetables, fruits, measurements etc.)*  |
 | 9   | Games           | *Games data (game, score, pegi_rating etc.)*                   |
-| 10   | Personal       | *Personal data (name, surname, age, email etc.)*               |
+| 10  | Personal        | *Personal data (name, surname, age, email etc.)*               |
 | 11  | Text            | *Text data (sentence, title etc.)*                             |
 | 12  | Transport       | *Dummy data about transport (truck model, car etc.)*           |
 | 13  | Science         | *Scientific data (scientist, math_formula etc.)*               |
@@ -147,17 +160,54 @@ Mimesis support  over twenty different data providers available, which can produ
 <!-- tocstop -->
 </details>
 
+## Custom Providers
+You also can add custom provider to `Generic()`, using `add_provider()` method:
 
-## Advantages
+```python
+>>> import mimesis
+>>> generic = mimesis.Generic('en')
 
-Mimesis offers a number of advantages over other similar libraries, such as Faker:
+>>> class SomeProvider(object):
+...     class Meta:
+...         name = "some_provider"
+...
+...     def hello(self):
+...         return "Hello!"
 
-* Performance. Mimesis is significantly [faster](http://i.imgur.com/pCo6yPA.png) than other similar libraries.
-* Completeness. Mimesis strives to provide many detailed providers that offer a variety of data generators.
-* Simplicity. Mimesis does not require any modules other than the Python standard library.
+>>> class Another(object):
+...     def bye(self):
+...         return "Bye!"
 
-See [here](https://gist.github.com/lk-geimfari/461ce92fd32379d7b73c9e12164a9154) for an example of how we compare
-performance with other libraries.
+>>> generic.add_provider(SomeProvider)
+>>> generic.add_provider(Another)
+
+>>> generic.some_provider.hello()
+'Hello!'
+
+>>> generic.another.bye()
+'Bye!'
+```
+
+or multiple custom providers using method `add_providers()`:
+
+```python
+>>> generic.add_providers(SomeProvider, Another)
+```
+
+## Builtins specific data providers
+
+Some countries have data types specific to that country. For example social security numbers (SSN) in the United States of America (`en`), and cadastro de pessoas físicas (CPF) in Brazil (`pt-br`).
+If you would like to use these country-specific providers, then you must import them explicitly:
+
+```python
+>>> from mimesis import Generic
+>>> from mimesis.builtins import BrazilSpecProvider
+
+>>> generic = Generic('pt-br')
+>>> generic.add_provider(BrazilSpecProvider)
+>>> generic.brazil_provider.cpf()
+'696.441.186-00'
+```
 
 ## Integration with Web Application Frameworks
 
@@ -236,55 +286,6 @@ Result:
   },
   ...
 ]
-```
-
-## Custom Providers
-You also can add custom provider to `Generic()`, using `add_provider()` method:
-
-```python
->>> import mimesis
->>> generic = mimesis.Generic('en')
-
->>> class SomeProvider(object):
-...     class Meta:
-...         name = "some_provider"
-...
-...     def hello(self):
-...         return "Hello!"
-
->>> class Another(object):
-...     def bye(self):
-...         return "Bye!"
-
->>> generic.add_provider(SomeProvider)
->>> generic.add_provider(Another)
-
->>> generic.some_provider.hi()
-'Hello!'
-
->>> generic.another.bye()
-'Bye!'
-```
-
-or multiple custom providers using method `add_providers()`:
-
-```python
->>> generic.add_providers(SomeProvider, Another)
-```
-
-## Builtins specific data providers
-
-Some countries have data types specific to that country. For example social security numbers (SSN) in the United States of America (`en`), and cadastro de pessoas físicas (CPF) in Brazil (`pt-br`).
-If you would like to use these country-specific providers, then you must import them explicitly:
-
-```python
->>> from mimesis import Generic
->>> from mimesis.builtins import BrazilSpecProvider
-
->>> generic = Generic('pt-br')
->>> generic.add_provider(BrazilSpecProvider)
->>> generic.brazil_provider.cpf()
-'696.441.186-00'
 ```
 
 
