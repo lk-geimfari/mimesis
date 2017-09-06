@@ -194,6 +194,9 @@ or multiple custom providers using method `add_providers()`:
 >>> generic.add_providers(SomeProvider, Another)
 ```
 
+Too lazy to search for data? No problem, we found them for you and collected them here: [mimesis-extra-data](https://github.com/mimesis-lab/mimesis-extra-data).
+
+
 ## Builtins specific data providers
 
 Some countries have data types specific to that country. For example social security numbers (SSN) in the United States of America (`en`), and cadastro de pessoas físicas (CPF) in Brazil (`pt-br`).
