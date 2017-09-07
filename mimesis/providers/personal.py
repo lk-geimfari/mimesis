@@ -297,8 +297,9 @@ class Personal(BaseProvider):
         representation of human sexes through a language-neutral single-digit
         code or symbol of gender.
 
-        :param iso5218: Codes for the representation of human sexes
-        is an international standard.
+        :param iso5218:
+            Codes for the representation of human sexes is an international
+            standard.
         :param symbol: Symbol of gender.
         :return: Title of gender.
         :rtype: str
@@ -508,8 +509,9 @@ class Personal(BaseProvider):
         """Generate a random identifier by mask. With this method you can generate
         any identifiers that you need. Simply select the mask that you need.
 
-        :param mask: The mask. Here '@' is a placeholder for characters
-        and '#' is placeholder for digits.
+        :param mask:
+            The mask. Here '@' is a placeholder for characters and '#' is
+            placeholder for digits.
         :return: An identifier.
         :Example:
             07-97/04

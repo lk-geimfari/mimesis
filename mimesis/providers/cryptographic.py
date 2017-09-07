@@ -21,8 +21,9 @@ class Cryptographic(BaseProvider):
     def hash(self, algorithm='sha1'):
         """Generate random hash.
 
-        :param algorithm: Hashing algorithm ('md5', 'sha1', 'sha224', 'sha256',
-        'sha384', 'sha512').
+        :param algorithm:
+            Hashing algorithm ('md5', 'sha1', 'sha224', 'sha256',
+            'sha384', 'sha512').
         :return: Hash.
         """
         algorithm = algorithm.lower().strip()

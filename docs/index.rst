@@ -1,12 +1,12 @@
 Mimesis
-=========
+=======
 
 **Mimesis** is a fast and easy to use Python library for generating dummy data for a variety of purposes.  This data can be particularly useful during software development and testing.  For example, it could be used to populate a testing database for a web application with user information such as email addresses, usernames, first names, last names, etc.
 
 There are over eighteen different `data providers <https://github.com/lk-geimfari/mimesis/blob/master/PROVIDERS.md>`_ available, which can produce data related to food, people, computer hardware, transportation, addresses, and more.  *Mimesis* does not require any modules that are not in the Python standard library.
 
 Best Practice
-------------
+-------------
 We strongly recommend to read articles which published in blog_ of our friends on Medium. There we are speak about best practices and a number of most useful features of the library.
 
 Generating mock data using Mimesis: First_ and Second_ part.
@@ -34,7 +34,7 @@ or simply:
 
 
 Please note
-------------
+-----------
 The library only runs on Python 3.3+. Developers don’t have any plans of adding Python 2.7 support.
 
 
@@ -74,6 +74,7 @@ Code     Name                  Native Name
 `en-gb`  British English       English
 `es`     Spanish               Español
 `es`     Mexican Spanish       Español
+`et`     Estonian              Eesti
 `fa`     Farsi                 فارسی
 `fi`     Finnish               Suomi
 `fr`     French                Français

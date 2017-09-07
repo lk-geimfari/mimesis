@@ -80,8 +80,9 @@ class Address(BaseProvider):
     def state(self, abbr=False):
         """Get a random states or subject of country.
 
-        :param abbr: If True then return ISO (ISO 3166-2)
-        code of state/region/province/subject.
+        :param abbr:
+            If True then return ISO (ISO 3166-2)
+            code of state/region/province/subject.
         :return: State of current country.
         :Example:
             Alabama (for locale `en`).

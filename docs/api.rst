@@ -42,6 +42,14 @@ Code
    :members:
    :special-members: __init__
 
+Cryptographic
+-------------
+
+.. autoclass:: mimesis.Cryptographic
+   :members:
+   :special-members: __init__
+
+
 Datetime
 --------
 
@@ -65,8 +73,14 @@ File
 
 Food
 ----
-
 .. autoclass:: mimesis.Food
+   :members:
+   :special-members: __init__
+
+Games
+-----
+
+.. autoclass:: mimesis.Games
    :members:
    :special-members: __init__
 
@@ -84,13 +98,6 @@ Internet
    :members:
    :special-members: __init__
 
-Network
--------
-
-.. autoclass:: mimesis.Network
-   :members:
-   :special-members: __init__
-
 Numbers
 -------
 
@@ -99,7 +106,7 @@ Numbers
    :special-members: __init__
 
 Path
---------
+----
 
 .. autoclass:: mimesis.Path
    :members:
@@ -120,7 +127,7 @@ Science
    :special-members: __init__
 
 Structured
--------
+----------
 
 .. autoclass:: mimesis.Structured
    :members:
@@ -140,8 +147,9 @@ Transport
    :members:
    :special-members: __init__
 
-Exceptions
-==========
+UnitSystem
+----------
 
-.. automodule:: mimesis.exceptions
+.. autoclass:: mimesis.UnitSystem
    :members:
+   :special-members: __init__
