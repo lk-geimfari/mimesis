@@ -62,7 +62,7 @@ class Structured(BaseProvider):
         :rtype: str
         :Examples:
             '<span class="select" id="careers">
-                Ports are created with the built-in function open_port.
+            Ports are created with the built-in function open_port.
             </span>'
         """
         tag_name = self.random.choice(list(HTML_CONTAINER_TAGS))
@@ -118,8 +118,9 @@ class Structured(BaseProvider):
 
         :param items: Number of top-level items to produce.
         :param max_depth: Maximum depth of each top-level item.
-        :param recursive: When used recursively, will return a Python object
-        instead of JSON string.
+        :param recursive:
+            When used recursively, will return a Python object instead of JSON
+            string.
         :return: JSON
         """
 

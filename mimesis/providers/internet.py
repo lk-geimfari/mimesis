@@ -103,8 +103,9 @@ class Internet(BaseProvider):
     def stock_image(self, category=None, width=1900, height=1080):
         """Get a random beautiful stock image that hosted on Unsplash.com
 
-        :param category: Category of image. Available: 'buildings', 'food',
-        'nature', 'people', 'technology', 'objects'.
+        :param category:
+            Category of image. Available: 'buildings', 'food', 'nature',
+            'people', 'technology', 'objects'.
         :param width: Width of the image.
         :param height: Height of the image.
         :return: An image (Link to image).
@@ -141,8 +142,9 @@ class Internet(BaseProvider):
 
         :param quantity: The quantity of hashtags.
         :type quantity: int
-        :param category: Available categories: general, girls, love,
-        boys, friends, family, nature, travel, cars, sport, tumblr.
+        :param category:
+            Available categories: general, girls, love, boys, friends, family,
+            nature, travel, cars, sport, tumblr.
         :return: The list of hashtags.
         :rtype: list
 
@@ -208,8 +210,9 @@ class Internet(BaseProvider):
     def network_protocol(self, layer='application'):
         """Get a random network protocol form OSI model.
 
-        :param layer: Layer of protocol: application, data_link,
-        network, physical, presentation, session and transport.
+        :param layer:
+            Layer of protocol: application, data_link, network, physical,
+            presentation, session and transport.
         :return: Protocol name.
         :Example:
             AMQP
