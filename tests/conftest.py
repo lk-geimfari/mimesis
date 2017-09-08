@@ -2,9 +2,9 @@ import pytest
 
 import mimesis
 from mimesis.schema import Schema
-from mimesis.settings import SUPPORTED_LOCALES
+from mimesis.settings import LIST_OF_LOCALES
 
-locales = list(SUPPORTED_LOCALES.keys())
+locales = LIST_OF_LOCALES
 platform = ['win32', 'linux2']
 
 

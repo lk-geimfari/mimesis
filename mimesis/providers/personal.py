@@ -88,7 +88,7 @@ class Personal(BaseProvider):
             Smith.
         """
         # Separated by gender.
-        if self.locale in ('ru', 'is', 'uk'):
+        if self.locale in ('ru', 'is', 'uk', 'kk'):
             try:
                 return self.random.choice(self.data['surnames'][gender])
             except KeyError:
@@ -418,8 +418,8 @@ class Personal(BaseProvider):
         :Example:
             Russian.
         """
-        # Subtleties of the Russian and Ukrainian orthography.
-        separated_locales = ['ru', 'uk']
+        # Subtleties of the orthography.
+        separated_locales = ['ru', 'uk', 'kk']
 
         if self.locale in separated_locales:
             nations = self.data['nationality'][gender]

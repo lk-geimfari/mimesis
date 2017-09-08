@@ -213,7 +213,7 @@ def test_telephone(generic):
 
 
 def test_surname(generic):
-    diff_surnames = ('ru', 'is', 'uk')
+    diff_surnames = ('ru', 'is', 'uk', 'kk')
     if generic.personal.locale in diff_surnames:
 
         result = generic.personal.surname(gender='female')
@@ -314,7 +314,7 @@ def test_title(generic):
 
 
 def test_nationality(generic):
-    if generic.personal.locale in ['ru', 'uk']:
+    if generic.personal.locale in ['ru', 'uk', 'kk']:
         result = generic.personal.nationality(gender='female')
         assert result in generic.personal.data['nationality']['female']
 

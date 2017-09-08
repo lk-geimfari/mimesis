@@ -78,6 +78,10 @@ SUPPORTED_LOCALES = {
         'name': 'Japanese',
         'name_local': '日本語',
     },
+    'kk': {
+        'name': 'Kazakh',
+        'name_local': 'Қазақша',
+    },
     'ko': {
         'name': 'Korean',
         'name_local': '한국어',
@@ -127,5 +131,7 @@ SUPPORTED_LOCALES = {
         'name_local': '汉语',
     },
 }
+
+LIST_OF_LOCALES = list(SUPPORTED_LOCALES.keys())
 
 DEFAULT_LOCALE = 'en'
