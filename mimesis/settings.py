@@ -38,6 +38,10 @@ SUPPORTED_LOCALES = {
         'name': 'Canadian English',
         'name_local': 'English',
     },
+    'el': {
+        'name': 'Greek',
+        'name_local': 'Ελληνικά',
+    },
     'es': {
         'name': 'Spanish',
         'name_local': 'Español',
@@ -61,10 +65,6 @@ SUPPORTED_LOCALES = {
     'fr': {
         'name': 'French',
         'name_local': 'Français',
-    },
-    'gr': {
-        'name': 'Greek',
-        'name_local': 'Ελληνικά',
     },
     'hu': {
         'name': 'Hungarian',
