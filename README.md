@@ -70,7 +70,7 @@ You can specify a locale when creating providers and they will return data that 
 'Rósa Þórlindsdóttir'
 ```
 
-Mimesis currently includes support for 31 different locales. See details for more information.
+Mimesis currently includes support for 32 different locales. See details for more information.
 
 <details>
 <!-- toc -->
@@ -96,18 +96,19 @@ Mimesis currently includes support for 31 different locales. See details for mor
 | 17 | 🇮🇸   |  `is`      | Icelandic            | Íslenska    |
 | 18 | 🇮🇹   |  `it`      | Italian              | Italiano    |
 | 19 | 🇯🇵   |  `ja`      | Japanese             | 日本語       |
-| 20 | 🇰🇷   |  `ko`      | Korean               | 한국어        |
-| 21 | 🇳🇱   |  `nl`      | Dutch                | Nederlands  |
-| 22 | 🇧🇪   |  `nl-be`   | Belgium Dutch        | Nederlands  |
-| 23 | 🇳🇴   |  `no`      | Norwegian            | Norsk       |
-| 24 | 🇵🇱   |  `pl`      | Polish               | Polski      |
-| 25 | 🇵🇹   |  `pt`      | Portuguese           | Português   |
-| 26 | 🇧🇷   |  `pt-br`   | Brazilian Portuguese | Português Brasileiro |
-| 27 | 🇷🇺   |  `ru`      | Russian              | Русский     |
-| 28 | 🇸🇪   |  `sv`      | Swedish              | Svenska     |
-| 29 | 🇹🇷   |  `tr`      | Turkish              | Türkçe      |
-| 30 | 🇺🇦   |  `uk`      | Ukrainian            | Український |
-| 31 | 🇨🇳   |  `zh`      | Chinese              | 汉语         |
+| 20 | 🇰🇿   |  `kk`      | Kazakh               | Қазақша     |
+| 22 | 🇰🇷   |  `ko`      | Korean               | 한국어       |
+| 22 | 🇳🇱   |  `nl`      | Dutch                | Nederlands  |
+| 23 | 🇧🇪   |  `nl-be`   | Belgium Dutch        | Nederlands  |
+| 24 | 🇳🇴   |  `no`      | Norwegian            | Norsk       |
+| 25 | 🇵🇱   |  `pl`      | Polish               | Polski      |
+| 26 | 🇵🇹   |  `pt`      | Portuguese           | Português   |
+| 27 | 🇧🇷   |  `pt-br`   | Brazilian Portuguese | Português Brasileiro |
+| 28 | 🇷🇺   |  `ru`      | Russian              | Русский     |
+| 29 | 🇸🇪   |  `sv`      | Swedish              | Svenska     |
+| 30 | 🇹🇷   |  `tr`      | Turkish              | Türkçe      |
+| 31 | 🇺🇦   |  `uk`      | Ukrainian            | Український |
+| 32 | 🇨🇳   |  `zh`      | Chinese              | 汉语         |
 
 <!-- tocstop -->
 </details>

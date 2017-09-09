@@ -10,9 +10,9 @@ class Path(BaseProvider):
     """Class that provides methods and property for generate paths."""
     def __init__(self, platform=sys.platform, *args, **kwargs):
         """
-        :param platform: Required platform type ('linux2', 'darwin', 'win32',
-        'win64').
-        Supported platforms: mimesis/constant/platforms.py
+        :param platform:
+            Required platform type ('linux2', 'darwin', 'win32', 'win64').
+            Supported platforms: mimesis/constant/platforms.py
         """
         super().__init__(*args, **kwargs)
         self.__p = Personal('en')
