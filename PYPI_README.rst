@@ -2,77 +2,99 @@
     :target: https://github.com/lk-geimfari/mimesis
 
 
-**Mimesis** is a fast and easy to use library for Python, which helps
-generate mock data for a variety of purposes (see "Data providers")
-in a variety of languages (see "Locales"). This data can be particularly useful during software development and testing.
-The library was written with the use of tools from the standard Python library, and therefore, it does not have any side dependencies.
+=========================
 
-|Build Status| |Build status on Windows| |codecov| |PyPI version|
-|Python|
 
-Advantages
-----------
+.. image:: https://travis-ci.org/lk-geimfari/mimesis.svg?branch=master
+    :target: https://travis-ci.org/lk-geimfari/mimesis
 
-Mimesis offers a number of advantages over other similar libraries, such
-as Faker:
+.. image:: https://readthedocs.org/projects/mimesis/badge/?version=latest
+	:target: http://mimesis.readthedocs.io/en/latest/?badge=latest
+	:alt: Documentation Status
 
--  Performance. Mimesis is significantly
-   `faster <http://i.imgur.com/pCo6yPA.png>`__ than other similar
-   libraries.
--  Completeness. Mimesis strives to provide many detailed providers that
-   offer a variety of data generators.
--  Simplicity. Mimesis does not require any modules other than the
-   Python standard library.
+.. image:: https://badge.fury.io/py/mimesis.svg
+    :target: https://badge.fury.io/py/mimesis
 
-See
-`here <https://gist.github.com/lk-geimfari/461ce92fd32379d7b73c9e12164a9154>`__
-for an example of how we compare performance with other libraries.
+.. image:: https://img.shields.io/badge/python-v3.3%2C%20v3.4%2C%20v3.5%2C%20v3.6-brightgreen.svg
+    :target: https://github.com/lk-geimfari/mimesis/
+
+
+`Mimesis <https://github.com/lk-geimfari/mimesis>`_ is a fast and easy to use Python library for generating dummy data for a variety of purposes. This data can be particularly useful during software development and testing. For example, it could be used to populate a testing database for a web application with user information such as email addresses, usernames, first names, last names, etc.
+
+Mimesis uses a JSON-based datastore and does not require any modules that are not in the Python standard library. There are over nineteen different data providers available, which can produce data related to food, people, computer hardware, transportation, addresses, and more.
+
 
 Documentation
 -------------
 
-Mimesis is very simple to use, and the below examples should help you
-get started. Complete documentation for Mimesis is available
-`here <http://mimesis.readthedocs.io/>`__.
+Complete documentation for Mimesis is available here: http://mimesis.readthedocs.io/
+
 
 Installation
 ------------
 
-To install mimesis, simply:
+To install Mimesis, simply:
 
-.. code:: zsh
+.. code-block:: bash
 
     ➜  ~ pip install mimesis
 
-Basic Usage
------------
+Basic Usage:
 
-As we said above, this library is really easy to use:
+.. code-block:: python
 
-.. code:: python
-
-    >>> import mimesis
-    >>> person = mimesis.Personal(locale='en')
+    >>> from mimesis import Personal, Address
+    >>> person = Personal('en')
+    >>> address = Address('en')
 
     >>> person.full_name(gender='female')
     'Antonetta Garrison'
 
+    >>> person.email(gender='male')
+    'oren5936@live.com'
+
     >>> person.occupation()
-    'Backend Developer'
+    'Programmer'
+
+    >>> address.address()
+    '713 Rock Stravenue'
+
+    >>> address.city()
+    'Dumont'
+
+    >>> address.country()
+    'Switzerland'
+
+    >>> address.country_iso(fmt='iso2')
+    'WF'
+
+    >>> address.country_iso(fmt='iso3')
+    'BFA'
+
+    >>> address.country_iso(fmt='numeric')
+    '744'
+
+    >>> address.continent()
+    'South America'
+
 
 Locales
 -------
 
-You can specify a locale when creating providers and they will return
-data that is appropriate for the language or country associated with
-that locale:
+You can specify a locale when creating providers and they will return data that is appropriate for the language or country associated with that locale. Mimesis currently includes support for `32 <https://github.com/lk-geimfari/mimesis#locales>`_ different locales.
 
-.. code:: python
+Using locales:
+
+.. code-block:: python
 
     >>> from mimesis import Personal
 
+    >>> en = Personal('en')
     >>> de = Personal('de')
     >>> ic = Personal('is')
+
+    >>> en.full_name()
+    'Carolin Brady'
 
     >>> de.full_name()
     'Sabrina Gutermuth'
@@ -80,271 +102,144 @@ that locale:
     >>> ic.full_name()
     'Rósa Þórlindsdóttir'
 
-Mimesis currently includes support for 31 different locales. See `here`_.
 
-.. _here: https://github.com/lk-geimfari/mimesis#locales
-
-When you only need to generate data for a single locale, use the
-``Generic()`` provider, and you can access all providers of Mimesis from
-one object.
+When you only need to generate data for a single locale, use the `Generic` provider, and you can access all `Mimesis`
+providers from one object.
 
 .. code:: python
 
-    >>> import mimesis
-    >>> g = mimesis.Generic('es')
+    >>> from mimesis import Generic
+    >>> g = Generic('es')
 
     >>> g.datetime.month()
     'Agosto'
 
+    >>> g.code.imei()
+    '353918052107063'
+
     >>> g.food.fruit()
     'Limón'
 
-Data providers
---------------
 
-Mimesis support over twenty different data providers available, which
-can produce data related to food, people, computer hardware,
-transportation, addresses, and more. See details for more information.
+Advantages
+----------
 
-+------+-----------------+------------------------------------------------------------------+
-| №    | Provider        | Description                                                      |
-+======+=================+==================================================================+
-| 1    | Address         | *Address data (street name, street suffix etc.)*                 |
-+------+-----------------+------------------------------------------------------------------+
-| 2    | Business        | *Business data (company, company\_type, copyright etc.)*         |
-+------+-----------------+------------------------------------------------------------------+
-| 3    | Code            | *Codes (ISBN, EAN, IMEI etc.).*                                  |
-+------+-----------------+------------------------------------------------------------------+
-| 4    | ClothingSizes   | *Clothing sizes (international sizes, european etc.)*            |
-+------+-----------------+------------------------------------------------------------------+
-| 5    | Datetime        | *Datetime (day\_of\_week, month, year etc.)*                     |
-+------+-----------------+------------------------------------------------------------------+
-| 6    | Development     | *Data for developers (version, programming language etc.)*       |
-+------+-----------------+------------------------------------------------------------------+
-| 7    | File            | *File data (extension etc.)*                                     |
-+------+-----------------+------------------------------------------------------------------+
-| 8    | Food            | *Information on food (vegetables, fruits, measurements etc.)*    |
-+------+-----------------+------------------------------------------------------------------+
-| 9    | Games           | *Games data (game, score, pegi\_rating etc.)*                    |
-+------+-----------------+------------------------------------------------------------------+
-| 10   | Personal        | *Personal data (name, surname, age, email etc.)*                 |
-+------+-----------------+------------------------------------------------------------------+
-| 11   | Text            | *Text data (sentence, title etc.)*                               |
-+------+-----------------+------------------------------------------------------------------+
-| 12   | Transport       | *Dummy data about transport (truck model, car etc.)*             |
-+------+-----------------+------------------------------------------------------------------+
-| 13   | Science         | *Scientific data (scientist, math\_formula etc.)*                |
-+------+-----------------+------------------------------------------------------------------+
-| 14   | Structured      | *Structured data (html, css etc.)*                               |
-+------+-----------------+------------------------------------------------------------------+
-| 15   | Internet        | *Internet data (facebook, twitter etc.)*                         |
-+------+-----------------+------------------------------------------------------------------+
-| 16   | Hardware        | *The data about the hardware (resolution, cpu, graphics etc.)*   |
-+------+-----------------+------------------------------------------------------------------+
-| 17   | Numbers         | *Numerical data (floats, primes, digit etc.)*                    |
-+------+-----------------+------------------------------------------------------------------+
-| 18   | Path            | *Provides methods and property for generate paths.*              |
-+------+-----------------+------------------------------------------------------------------+
-| 19   | UnitSytem       | *Provides names of unit systems in international format*         |
-+------+-----------------+------------------------------------------------------------------+
-| 20   | Generic         | *All at once*                                                    |
-+------+-----------------+------------------------------------------------------------------+
-| 21   | Cryptographic   | *Cryptographic data*                                             |
-+------+-----------------+------------------------------------------------------------------+
+Mimesis offers a number of advantages over other similar
+libraries, such as Faker:
+
+-  Performance. Mimesis is significantly `faster`_ than other
+   similar libraries.
+-  Completeness. Mimesis strives to provide many detailed
+   providers that offer a variety of data generators.
+-  Simplicity. Mimesis does not require any modules other than the
+   Python standard library.
+
+See `here`_ for an example of how we compare performance with other
+libraries.
+
+.. _faster: http://i.imgur.com/ZqkE1k2.png
+.. _here: https://gist.github.com/lk-geimfari/461ce92fd32379d7b73c9e12164a9154
 
 
 Custom Providers
 ----------------
 
-You also can add custom provider to ``Generic()``, using
-``add_provider()`` method:
+You also can add custom provider to ``Generic``.
 
 .. code:: python
 
-    >>> import mimesis
-    >>> generic = mimesis.Generic('en')
-
-    >>> class SomeProvider(object):
+    >>> class SomeProvider():
+    ...
     ...     class Meta:
     ...         name = "some_provider"
     ...
-    ...     def hello(self):
-    ...         return "Hello!"
+    ...     @staticmethod
+    ...     def one():
+    ...         return 1
 
-    >>> class Another(object):
-    ...     def bye(self):
+    >>> class Another():
+    ...
+    ...     @staticmethod
+    ...     def bye():
     ...         return "Bye!"
 
     >>> generic.add_provider(SomeProvider)
     >>> generic.add_provider(Another)
 
-    >>> generic.some_provider.hi()
-    'Hello!'
+    >>> generic.some_provider.one()
+    1
 
     >>> generic.another.bye()
     'Bye!'
 
-or multiple custom providers using method ``add_providers()``:
-
-.. code:: python
-
-    >>> generic.add_providers(SomeProvider, Another)
 
 Builtins specific data providers
 --------------------------------
 
 Some countries have data types specific to that country. For example
-social security numbers (SSN) in the United States of America (``en``),
-and cadastro de pessoas físicas (CPF) in Brazil (``pt-br``). If you
-would like to use these country-specific providers, then you must import
-them explicitly:
+social security numbers in the United States (``en`` locale), and
+cadastro de pessoas físicas (CPF) in Brazil (``pt-br`` locale).
+
+If you would like to use these country-specific providers, then you must
+import them explicitly:
 
 .. code:: python
 
     >>> from mimesis import Generic
-    >>> from mimesis.builtins import BrazilSpecProvider
+    >>> from mimesis.builtins.pt_br import BrazilSpecProvider
 
     >>> generic = Generic('pt-br')
-    >>> generic.add_provider(BrazilSpecProvider)
+
+    >>> class BrazilProvider(BrazilSpecProvider):
+    ...
+    ...     class Meta:
+    ...         name = "brazil_provider"
+    ...
+    >>> generic.add_provider(BrazilProvider)
     >>> generic.brazil_provider.cpf()
     '696.441.186-00'
 
-Integration with Web Application Frameworks
--------------------------------------------
-
-You can use Mimesis during development and testing of applications built
-on a variety of frameworks. Here is an example of integration with a
-Flask application:
-
-.. code:: python
-
-    class Patient(db.Model):
-        id = db.Column(db.Integer, primary_key=True)
-        full_name = db.Column(db.String(100))
-        blood_type = db.Column(db.String(64))
-
-        def __init__(self, **kwargs):
-            super(Patient, self).__init__(**kwargs)
-
-        @staticmethod
-        def populate(count=500, locale=None):
-            import mimesis
-
-            person =  mimesis.Personal(locale=locale)
-
-            for _ in range(count):
-                patient = Patient(
-                    full_name=person.full_name('female'),
-                    blood_type=person.blood_type(),
-                )
-
-                db.session.add(patient)
-                try:
-                    db.session.commit()
-                except IntegrityError:
-                    db.session.rollback()
-
-Just run shell mode and do following:
-
-.. code:: python
-
-    >>> Patient().populate(count=1000, locale='en')
-
-Generate data by schema
------------------------
-
-Mimesis support generating data by schema:
-
-.. code:: python
-
-    >>> from mimesis.schema import Schema
-    >>> schema = Schema('en')
-
-    >>> schema.load(schema={
-    ...     "id": "cryptographic.uuid",
-    ...     "name": "text.word",
-    ...     "version": "development.version",
-    ...     "owner": {
-    ...         "email": "personal.email",
-    ...         "token": "cryptographic.token",
-    ...         "creator": "personal.full_name"
-    ...     }
-    ... }).create(iterations=2)
-
-    >>> # or you can load data from json file:
-    >>> schema.load(path='schema.json').create(iterations=2)
-
-Result:
-
-::
-
-    [
-      {
-        "id": "790cce21-5f75-2652-2ee2-f9d90a26c43d",
-        "name": "container",
-        "owner": {
-          "email": "anjelica8481@outlook.com",
-          "token": "0bf924125640c46aad2a860f40ec4b7f33a516c497957abd70375c548ed56978",
-          "creator": "Ileen Ellis"
-        },
-        "version": "4.11.6"
-      },
-      ...
-    ]
 
 Decorators
 ----------
 
-If your locale belongs to the family of Cyrillic languages, but you need
-latinized locale-specific data, then you can use special decorator which
-help you romanize your data. At this moment it's works only for Russian
-and Ukrainian:
+If your locale is cyrillic, but you need latinized locale-specific data,
+then you can use special decorator. At this moment it’s work only for
+Russian:
 
 .. code:: python
 
+    >>> from mimesis import Personal
     >>> from mimesis.decorators import romanized
 
-    >>> @romanized('ru')
-    ... def russian_name():
-    ...     return 'Вероника Денисова'
+    >>> pr = Personal('ru')
 
-    >>> russian_name()
+    >>> @romanized('ru')
+    ... def get_name_ro():
+    ...     return pr.full_name()
+    ...
+
+    >>> def get_name_ru():
+    ...     return pr.full_name()
+    ...
+
+    >>> get_name_ru()
+    'Вида Панова'
+
+    >>> get_name_ro()
     'Veronika Denisova'
+
 
 Disclaimer
 ----------
 
 The authors assume no responsibility for how you use this library data
 generated by it. This library is designed only for developers with good
-intentions. Do not use the data generated with Mimesis for illegal
+intentions. Do not use the data generated with ``Mimesis`` for illegal
 purposes.
 
-Contributing
-------------
-
-Your contributions are always welcome! Please take a look at the
-`contribution <https://github.com/lk-geimfari/mimesis/blob/master/CONTRIBUTING.md>`__
-guidelines first.
-`Here <https://github.com/lk-geimfari/mimesis/blob/master/CONTRIBUTORS.md>`__
-you can look at list of our contributors.
-
-License
--------
-
-Mimesis is licensed under the MIT License. See
-`LICENSE <https://github.com/lk-geimfari/mimesis/blob/master/LICENSE>`__
-for more information.
-
-.. |Build Status| image:: https://travis-ci.org/lk-geimfari/mimesis.svg?branch=master
-   :target: https://travis-ci.org/lk-geimfari/mimesis
-.. |Build status on Windows| image:: https://ci.appveyor.com/api/projects/status/chj8huslvn6vde18?svg=true
-   :target: https://ci.appveyor.com/project/lk-geimfari/mimesis
-.. |codecov| image:: https://codecov.io/gh/lk-geimfari/mimesis/branch/master/graph/badge.svg
-   :target: https://codecov.io/gh/lk-geimfari/mimesis
-.. |PyPI version| image:: https://badge.fury.io/py/mimesis.svg
-   :target: https://badge.fury.io/py/mimesis
-.. |Python| image:: https://img.shields.io/badge/python-3.3%5E-brightgreen.svg
-   :target: https://badge.fury.io/py/mimesis
+.. _contribution: https://github.com/lk-geimfari/mimesis/blob/master/CONTRIBUTING.md
+.. _LICENSE: https://github.com/lk-geimfari/mimesis/blob/master/LICENSE
 
 
 Author
