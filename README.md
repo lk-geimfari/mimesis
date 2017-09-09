@@ -83,32 +83,34 @@ Mimesis currently includes support for 32 different locales. See details for mor
 | 4  | 🇦🇹   |  `de-at`   | Austrian German      | Deutsch     |
 | 5  | 🇨🇭   |  `de-ch`   | Swiss German         | Deutsch     |
 | 6  | 🇺🇸   |  `en`      | English              | English     |
-| 7  | 🇦🇺   |  `en-au`   | Australian English   | English     |
-| 8  | 🇨🇦   |  `en-ca`   | Canadian English     | English     |
-| 9  | 🇬🇧   |  `en-gb`   | British English      | English     |
-| 10 | 🇪🇸   |  `es`      | Spanish              | Español     |
-| 11 | 🇲🇽   |  `es-mx`   | Mexican Spanish      | Español     |
-| 12 | 🇪🇪   |  `et`      | Estonian             | Eesti       |
-| 13 | 🇮🇷   |  `fa`      | Farsi                | فارسی       |
-| 14 | 🇫🇮   |  `fi`      | Finnish              | Suomi       |
-| 15 | 🇫🇷   |  `fr`      | French               | Français    |
-| 16 | 🇭🇺   |  `hu`      | Hungarian            | Magyar      |
-| 17 | 🇮🇸   |  `is`      | Icelandic            | Íslenska    |
-| 18 | 🇮🇹   |  `it`      | Italian              | Italiano    |
-| 19 | 🇯🇵   |  `ja`      | Japanese             | 日本語       |
-| 20 | 🇰🇿   |  `kk`      | Kazakh               | Қазақша     |
+| 6  | 🇬🇷   |  `el`      | Greek                | Ελληνικά    |
+| 7  | 🇺🇸   |  `en`      | English              | English     |
+| 8  | 🇦🇺   |  `en-au`   | Australian English   | English     |
+| 9  | 🇨🇦   |  `en-ca`   | Canadian English     | English     |
+| 10 | 🇬🇧   |  `en-gb`   | British English      | English     |
+| 11 | 🇪🇸   |  `es`      | Spanish              | Español     |
+| 12 | 🇲🇽   |  `es-mx`   | Mexican Spanish      | Español     |
+| 13 | 🇪🇪   |  `et`      | Estonian             | Eesti       |
+| 14 | 🇮🇷   |  `fa`      | Farsi                | فارسی       |
+| 15 | 🇫🇮   |  `fi`      | Finnish              | Suomi       |
+| 16 | 🇫🇷   |  `fr`      | French               | Français    |
+| 17 | 🇭🇺   |  `hu`      | Hungarian            | Magyar      |
+| 18 | 🇮🇸   |  `is`      | Icelandic            | Íslenska    |
+| 19 | 🇮🇹   |  `it`      | Italian              | Italiano    |
+| 20 | 🇯🇵   |  `ja`      | Japanese             | 日本語       |
+| 21 | 🇰🇿   |  `kk`      | Kazakh               | Қазақша     |
 | 22 | 🇰🇷   |  `ko`      | Korean               | 한국어       |
-| 22 | 🇳🇱   |  `nl`      | Dutch                | Nederlands  |
-| 23 | 🇧🇪   |  `nl-be`   | Belgium Dutch        | Nederlands  |
-| 24 | 🇳🇴   |  `no`      | Norwegian            | Norsk       |
-| 25 | 🇵🇱   |  `pl`      | Polish               | Polski      |
-| 26 | 🇵🇹   |  `pt`      | Portuguese           | Português   |
-| 27 | 🇧🇷   |  `pt-br`   | Brazilian Portuguese | Português Brasileiro |
-| 28 | 🇷🇺   |  `ru`      | Russian              | Русский     |
-| 29 | 🇸🇪   |  `sv`      | Swedish              | Svenska     |
-| 30 | 🇹🇷   |  `tr`      | Turkish              | Türkçe      |
-| 31 | 🇺🇦   |  `uk`      | Ukrainian            | Український |
-| 32 | 🇨🇳   |  `zh`      | Chinese              | 汉语         |
+| 23 | 🇳🇱   |  `nl`      | Dutch                | Nederlands  |
+| 24 | 🇧🇪   |  `nl-be`   | Belgium Dutch        | Nederlands  |
+| 25 | 🇳🇴   |  `no`      | Norwegian            | Norsk       |
+| 26 | 🇵🇱   |  `pl`      | Polish               | Polski      |
+| 27 | 🇵🇹   |  `pt`      | Portuguese           | Português   |
+| 28 | 🇧🇷   |  `pt-br`   | Brazilian Portuguese | Português Brasileiro |
+| 29 | 🇷🇺   |  `ru`      | Russian              | Русский     |
+| 30 | 🇸🇪   |  `sv`      | Swedish              | Svenska     |
+| 31 | 🇹🇷   |  `tr`      | Turkish              | Türkçe      |
+| 32 | 🇺🇦   |  `uk`      | Ukrainian            | Український |
+| 33 | 🇨🇳   |  `zh`      | Chinese              | 汉语         |
 
 <!-- tocstop -->
 </details>
