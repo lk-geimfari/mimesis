@@ -1,6 +1,7 @@
 # settings.py
 # Global settings of Mimesis library.
 
+# Dictionary of supported locales with names.
 SUPPORTED_LOCALES = {
     'cs': {
         'name': 'Czech',
@@ -136,6 +137,12 @@ SUPPORTED_LOCALES = {
     },
 }
 
+# List of all supported locales.
 LIST_OF_LOCALES = list(SUPPORTED_LOCALES.keys())
 
+# Default locale.
 DEFAULT_LOCALE = 'en'
+
+# If in your locale surnames separated by gender,
+# then add locale to this tuple.
+SURNAMES_SEPARATED_BY_GENDER = ('el', 'ru', 'is', 'uk', 'kk')

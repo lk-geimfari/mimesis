@@ -165,15 +165,14 @@ class Internet(BaseProvider):
         tags = [self.random.choice(hashtags) for _ in range(int(quantity))]
         return tags
 
-    def home_page(self, gender='female'):
+    def home_page(self):
         """Generate a random home page.
 
-        :param gender: Gender of author of site.
         :return: Random home page.
         :Example:
             http://www.font6.info
         """
-        url = 'http://www.' + Personal().username(gender)
+        url = 'http://www.' + Personal().username()
         domain = self.random.choice(DOMAINS)
         return '{}{}'.format(url, domain)
 

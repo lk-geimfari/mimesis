@@ -3,10 +3,11 @@ from string import ascii_letters, digits, punctuation
 
 from mimesis.data import (BLOOD_GROUPS, EMAIL_DOMAINS, ENGLISH_LEVEL,
                           FAVORITE_MUSIC_GENRE, GENDER_SYMBOLS,
-                          SEXUALITY_SYMBOLS)
+                          SEXUALITY_SYMBOLS, USERNAMES)
 from mimesis.exceptions import WrongArgument
 from mimesis.providers import BaseProvider, Code
 from mimesis.providers.cryptographic import Cryptographic
+from mimesis.settings import SURNAMES_SEPARATED_BY_GENDER
 from mimesis.utils import luhn_checksum, pull
 
 __all__ = ['Personal']
@@ -88,7 +89,7 @@ class Personal(BaseProvider):
             Smith.
         """
         # Separated by gender.
-        if self.locale in ('ru', 'is', 'uk', 'kk'):
+        if self.locale in SURNAMES_SEPARATED_BY_GENDER:
             try:
                 return self.random.choice(self.data['surnames'][gender])
             except KeyError:
@@ -132,26 +133,82 @@ class Personal(BaseProvider):
             self.surname(gender),
         )
 
-    def username(self, gender='female'):
-        """Get a random username with digits. Username generated
-        from names (en) for all locales.
+    def username(self, template=None):
+        """Generate username by template.
 
+        :param template: Template ('U_d', 'U.d', 'U-d', 'ld', 'l-d', 'Ud',
+        'l.d', 'l_d', 'default')
         :return: Username.
-        :rtype: str
         :Example:
-            abby1189.
+            Celloid1873
         """
-        try:
-            names = pull('personal.json', 'en')['names'][gender]
-            name = self.random.choice(names)
-        except KeyError:
-            raise WrongArgument('gender must be "female" or "male"')
+        name = self.random.choice(USERNAMES)
+        date = str(self.random.randint(1800, 2070))
 
-        fmt = ['%s_%s', '%s%s', '%s-%s']
+        templates = {
+            # UppercaseDate
+            'Ud': '{U}{d}'.format(
+                U=name.capitalize(),
+                d=date,
+            ),
+            # Uppercase.Date
+            'U.d': '{U}.{d}'.format(
+                U=name.capitalize(),
+                d=date,
+            ),
+            # lowercaseDate
+            'ld': '{l}{d}'.format(
+                l=name,
+                d=date,
+            ),
+            # Uppercase-date
+            'U-d': '{U}-{d}'.format(
+                U=name.title(),
+                d=date,
+            ),
+            # Uppercase_date
+            'U_d': '{U}_{d}'.format(
+                U=name.title(),
+                d=date,
+            ),
+            # lowercase-date
+            'l-d': '{l}-{d}'.format(
+                l=name,
+                d=date,
+            ),
+            # lowercase_date
+            'l_d': '{l}_{d}'.format(
+                l=name,
+                d=date,
+            ),
+            # lowercase.date
+            'l.d': '{l}.{d}'.format(
+                l=name,
+                d=date,
+            ),
+            # Default is ld
+            'default': '{l}{d}'.format(
+                l=name,
+                d=date,
+            ),
+        }
 
-        username = self.random.choice(fmt) % (name,
-                                              self.random.randint(2, 9999))
-        return username.lower()
+        supported = list(templates.keys())
+
+        if template is not None:
+            try:
+                return templates[template]
+            except KeyError:
+                raise WrongArgument(
+                    'Unsupported template {unsupported}.'
+                    'Use one of: {supported}'.format(
+                        unsupported=template,
+                        supported=', '.join(supported),
+                    ),
+                )
+
+        templ = self.random.choice(supported)
+        return templates[templ]
 
     def password(self, length=8, algorithm=None):
         """Generate a password or hash of password.
@@ -170,11 +227,9 @@ class Personal(BaseProvider):
 
         return password
 
-    def email(self, gender='female', domains=None):
+    def email(self, domains=None):
         """Generate a random email.
 
-        :param gender: Gender of the user.
-        :type gender: str
         :param domains: Custom domain for email.
         :type domains: list, tuple
         :return: Email address.
@@ -183,7 +238,7 @@ class Personal(BaseProvider):
         """
         host = domains if domains else EMAIL_DOMAINS
 
-        email = self.username(gender) + self.random.choice(host)
+        email = self.username(template='ld') + self.random.choice(host)
         return email
 
     def bitcoin(self):
@@ -273,7 +328,7 @@ class Personal(BaseProvider):
         """
         return self.email()
 
-    def social_media_profile(self, gender='female'):
+    def social_media_profile(self):
         """Generate profile for random social network.
 
         :param gender: Gender of user.
@@ -287,7 +342,7 @@ class Personal(BaseProvider):
             'medium.com/@{}',
         ]
         url = 'http://' + self.random.choice(urls)
-        username = self.username(gender)
+        username = self.username()
 
         return url.format(username)
 

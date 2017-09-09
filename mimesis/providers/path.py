@@ -1,13 +1,13 @@
 import sys
 
-from mimesis.data import FOLDERS, PROGRAMMING_LANGS, PROJECT_NAMES
+from mimesis.data import FOLDERS, PROGRAMMING_LANGS, PROJECT_NAMES, USERNAMES
 from mimesis.providers import BaseProvider
-from mimesis.providers.personal import Personal
 from mimesis.constants.platforms import PLATFORMS
 
 
 class Path(BaseProvider):
     """Class that provides methods and property for generate paths."""
+
     def __init__(self, platform=sys.platform, *args, **kwargs):
         """
         :param platform:
@@ -15,7 +15,6 @@ class Path(BaseProvider):
             Supported platforms: mimesis/constant/platforms.py
         """
         super().__init__(*args, **kwargs)
-        self.__p = Personal('en')
         self.platform = platform
 
     def root(self):
@@ -45,17 +44,16 @@ class Path(BaseProvider):
     def user(self, gender='female'):
         """Generate a random user.
 
-        :param gender: Gender of user.
         :return: Path to user.
         :Example:
             /home/oretha
         """
-        user = self.__p.name(gender)
+        user = self.random.choice(USERNAMES)
         user = user.capitalize() if \
             self.platform == 'win32' else user.lower()
         return self.home() + user
 
-    def users_folder(self, user_gender='female'):
+    def users_folder(self):
         """Generate a random path to user's folders.
 
         :return: Path.
@@ -63,24 +61,23 @@ class Path(BaseProvider):
             /home/taneka/Pictures
         """
         folder = self.random.choice(FOLDERS)
-        user = self.user(user_gender)
+        user = self.user()
         for platform in PLATFORMS:
             if self.platform == PLATFORMS[platform]['name']:
                 path_separator = PLATFORMS[platform]['path_separator']
                 users_folder = (user + '{}' + folder).format(path_separator)
                 return users_folder
 
-    def dev_dir(self, user_gender='female'):
+    def dev_dir(self):
         """Generate a random path to development directory.
 
-        :param user_gender: Path to dev directory.
         :return: Path.
         :Example:
             /home/sherrell/Development/Python/mercenary
         """
         dev_folder = self.random.choice(['Development', 'Dev'])
         stack = self.random.choice(PROGRAMMING_LANGS)
-        user = self.user(user_gender)
+        user = self.user()
         for platform in PLATFORMS:
             if self.platform == PLATFORMS[platform]['name']:
                 path_separator = PLATFORMS[platform]['path_separator']
@@ -89,10 +86,9 @@ class Path(BaseProvider):
                 ).format(path_separator, path_separator)
                 return dev_dir
 
-    def project_dir(self, user_gender='female'):
+    def project_dir(self):
         """Generate a random path to project directory.
 
-        :param user_gender: Gender of user.
         :return: Path to project.
         :Example:
             /home/sherika/Development/Falcon/mercenary
@@ -102,6 +98,6 @@ class Path(BaseProvider):
             if self.platform == PLATFORMS[platform]['name']:
                 path_separator = PLATFORMS[platform]['path_separator']
                 project_dir = (
-                    self.dev_dir(user_gender) + '{}' + project
+                    self.dev_dir() + '{}' + project
                 ).format(path_separator)
                 return project_dir
