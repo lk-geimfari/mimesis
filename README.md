@@ -91,7 +91,6 @@ Mimesis currently includes support for 33 different locales. See details for mor
 | 3  | 🇩🇪   |  `de`      | German               | Deutsch     |
 | 4  | 🇦🇹   |  `de-at`   | Austrian German      | Deutsch     |
 | 5  | 🇨🇭   |  `de-ch`   | Swiss German         | Deutsch     |
-| 6  | 🇺🇸   |  `en`      | English              | English     |
 | 6  | 🇬🇷   |  `el`      | Greek                | Ελληνικά    |
 | 7  | 🇺🇸   |  `en`      | English              | English     |
 | 8  | 🇦🇺   |  `en-au`   | Australian English   | English     |
