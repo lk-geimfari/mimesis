@@ -70,7 +70,7 @@ You can specify a locale when creating providers and they will return data that 
 'Rósa Þórlindsdóttir'
 ```
 
-Mimesis currently includes support for 32 different locales. See details for more information.
+Mimesis currently includes support for 33 different locales. See details for more information.
 
 <details>
 <!-- toc -->
