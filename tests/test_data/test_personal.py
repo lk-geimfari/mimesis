@@ -4,15 +4,16 @@ import re
 
 import pytest
 
+from mimesis import settings
 from mimesis.data import (BLOOD_GROUPS, ENGLISH_LEVEL, FAVORITE_MUSIC_GENRE,
                           GENDER_SYMBOLS, SEXUALITY_SYMBOLS)
 from mimesis.exceptions import UnsupportedAlgorithm, WrongArgument
 
-from . import _patterns as p
+from ._patterns import USERNAME_REGEX, STR_REGEX, CREDIT_CARD_REGEX, EMAIL_REGEX
 
 
 def test_str(personal):
-    assert re.match(p.STR_REGEX, str(personal))
+    assert re.match(STR_REGEX, str(personal))
 
 
 def test_age(personal):
@@ -56,41 +57,51 @@ def test_paypal(personal):
     assert result is not None
 
 
-def test_password(personal):
-    plain = personal.password(length=15)
-    assert len(plain) == 15
+@pytest.mark.parametrize(
+    'algorithm, length', [
+        ('md5', 32),
+        ('sha1', 40),
+        ('sha256', 64),
+        ('sha512', 128),
+    ],
+)
+def test_password(personal, algorithm, length):
+    plain_password = personal.password(length=15)
+    assert len(plain_password) == 15
 
-    md5 = personal.password(algorithm='md5')
-    assert len(md5) == 32
-
-    sha1 = personal.password(algorithm='sha1')
-    assert len(sha1) == 40
-
-    sha256 = personal.password(algorithm='sha256')
-    assert len(sha256) == 64
-
-    sha512 = personal.password(algorithm='sha512')
-    assert len(sha512) == 128
+    encrypted_password = personal.password(algorithm=algorithm)
+    assert len(encrypted_password) == length
 
     with pytest.raises(UnsupportedAlgorithm):
         personal.password(algorithm='sha42')
 
 
-def test_username(personal):
-    result = personal.username()
-    assert re.match(p.USERNAME_REGEX, result)
+@pytest.mark.parametrize(
+    'template', [
+        'U-d', 'U.d',
+        'U_d', 'Ud',
+        'l-d', 'l.d',
+        'l_d', 'ld',
+
+        # Default is ld
+        'default',
+    ],
+)
+def test_username(personal, template):
+    username = personal.username(template=template)
+    assert re.match(USERNAME_REGEX, username)
 
     with pytest.raises(WrongArgument):
-        personal.username(gender='nil')
+        personal.username(template=':D')
 
 
 def test_email(personal):
     result = personal.email()
-    assert re.match(p.EMAIL_REGEX, result)
+    assert re.match(EMAIL_REGEX, result)
 
     domains = ['@example.com']
     result = personal.email(domains=domains)
-    assert re.match(p.EMAIL_REGEX, result)
+    assert re.match(EMAIL_REGEX, result)
     assert result.split('@')[1] == 'example.com'
 
 
@@ -105,15 +116,21 @@ def test_cvv(personal):
     assert result <= 999
 
 
-def test_credit_card_number(personal):
-    result = personal.credit_card_number()
-    assert re.match(p.CREDIT_CARD_REGEX, result)
+@pytest.mark.parametrize(
+    'card_type', [
+        # Visa
+        'visa', 'vi', 'v',
 
-    result_mc = personal.credit_card_number(card_type='master_card')
-    assert re.match(p.CREDIT_CARD_REGEX, result_mc)
+        # MasterCard
+        'master_card', 'master', 'mc', 'm',
 
-    result_ax = personal.credit_card_number(card_type='amex')
-    assert re.match(p.CREDIT_CARD_REGEX, result_ax)
+        # American Express
+        'american_express', 'amex', 'ax', 'a',
+    ],
+)
+def test_credit_card_number(personal, card_type):
+    result = personal.credit_card_number(card_type=card_type)
+    assert re.match(CREDIT_CARD_REGEX, result)
 
     with pytest.raises(NotImplementedError):
         personal.credit_card_number(card_type='discover')
@@ -162,10 +179,10 @@ def test_favorite_music_genre(personal):
 
 
 def test_social_media_profile(personal):
-    result = personal.social_media_profile(gender='female')
+    result = personal.social_media_profile()
     assert result is not None
 
-    _result = personal.social_media_profile(gender='male')
+    _result = personal.social_media_profile()
     assert _result is not None
 
 
@@ -191,12 +208,15 @@ def test_level_of_english(personal):
     assert result in ENGLISH_LEVEL
 
 
-def test_name(generic):
-    result = generic.personal.name(gender='female')
-    assert result in generic.personal.data['names']['female']
-
-    result = generic.personal.name(gender='male')
-    assert result in generic.personal.data['names']['male']
+@pytest.mark.parametrize(
+    'gender', [
+        'female',
+        'male',
+    ],
+)
+def test_name(generic, gender):
+    result = generic.personal.name(gender=gender)
+    assert result in generic.personal.data['names'][gender]
 
     with pytest.raises(WrongArgument):
         generic.personal.name(gender='other')
@@ -212,15 +232,17 @@ def test_telephone(generic):
     assert head == '+5'
 
 
-def test_surname(generic):
-    diff_surnames = ('ru', 'is', 'uk', 'kk')
-    if generic.personal.locale in diff_surnames:
+@pytest.mark.parametrize(
+    'gender', [
+        'female',
+        'male',
+    ],
+)
+def test_surname(generic, gender):
+    if generic.personal.locale in settings.SURNAMES_SEPARATED_BY_GENDER:
 
-        result = generic.personal.surname(gender='female')
-        assert result in generic.personal.data['surnames']['female']
-
-        result = generic.personal.surname(gender='male')
-        assert result in generic.personal.data['surnames']['male']
+        result = generic.personal.surname(gender=gender)
+        assert result in generic.personal.data['surnames'][gender]
 
         with pytest.raises(WrongArgument):
             generic.personal.surname(gender='other')
@@ -229,11 +251,18 @@ def test_surname(generic):
         assert result in generic.personal.data['surnames']
 
 
-def test_full_name(generic):
-    result = generic.personal.full_name(gender='female')
-    _result = result.split(' ')
-    assert isinstance(_result, list)
-    assert _result is not None
+@pytest.mark.parametrize(
+    'gender', [
+        'female',
+        'male',
+    ],
+)
+def test_full_name(generic, gender):
+    result = generic.personal.full_name(gender=gender)
+
+    result = result.split(' ')
+    assert result[0] is not None
+    assert result[1] is not None
 
     result = generic.personal.full_name(reverse=True)
     assert result is not None
@@ -296,30 +325,40 @@ def test_political_views(generic):
     assert result in generic.personal.data['political_views']
 
 
-def test_title(generic):
-    result = generic.personal.title(title_type='typical')
+@pytest.mark.parametrize(
+    'gender', [
+        'female',
+        'male',
+    ],
+)
+@pytest.mark.parametrize(
+    'title_type', [
+        'academic',
+        'typical',
+    ],
+)
+def test_title(generic, gender, title_type):
+    result = generic.personal.title(title_type=title_type)
+    assert result is not None
     assert isinstance(result, str)
 
-    result2 = generic.personal.title(title_type='academic')
-    assert isinstance(result2, str)
-
-    result_fem = generic.personal.title(gender='female')
-    assert result_fem is not None
-
-    result_fem = generic.personal.title(gender='male')
-    assert result_fem is not None
+    result_by_gender = generic.personal.title(gender=gender)
+    assert result_by_gender is not None
 
     with pytest.raises(WrongArgument):
         generic.personal.title(gender='other', title_type='religious')
 
 
-def test_nationality(generic):
+@pytest.mark.parametrize(
+    'gender', [
+        'female',
+        'male',
+    ],
+)
+def test_nationality(generic, gender):
     if generic.personal.locale in ['ru', 'uk', 'kk']:
-        result = generic.personal.nationality(gender='female')
-        assert result in generic.personal.data['nationality']['female']
-
-        result = generic.personal.nationality(gender='male')
-        assert result in generic.personal.data['nationality']['male']
+        result = generic.personal.nationality(gender=gender)
+        assert result in generic.personal.data['nationality'][gender]
 
     result = generic.personal.nationality()
     assert result is not None

@@ -88,23 +88,17 @@ def test_country(generic):
     assert result in generic.address.data['country']['name']
 
 
-def test_country_iso(generic):
-    default = generic.address.country_iso()
-    assert isinstance(default, str)
-    assert default in COUNTRIES_ISO['iso2']
-
-    iso2 = generic.address.country_iso(fmt='iso2')
-    assert iso2 in COUNTRIES_ISO['iso2']
-    assert len(iso2) == 2
-
-    iso3 = generic.address.country_iso(fmt='iso3')
-    assert iso3 in COUNTRIES_ISO['iso3']
-    assert len(iso3) == 3
-
-    numeric = generic.address.country_iso(fmt='numeric')
-    assert numeric in COUNTRIES_ISO['numeric']
-    assert len(numeric) == 3
-    assert numeric.isdigit()
+@pytest.mark.parametrize(
+    'fmt, length', [
+        ('iso2', 2),
+        ('iso3', 3),
+        ('numeric', 3),
+    ],
+)
+def test_country_iso(generic, fmt, length):
+    iso = generic.address.country_iso(fmt=fmt)
+    assert iso in COUNTRIES_ISO[fmt]
+    assert len(iso) == length
 
     with pytest.raises(KeyError):
         generic.address.country_iso(fmt='none')

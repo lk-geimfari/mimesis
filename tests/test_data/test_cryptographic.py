@@ -11,13 +11,18 @@ def test_uuid(crypto):
     assert re.match(UUID_REGEX, crypto.uuid())
 
 
-def test_hash(crypto):
-    assert len(crypto.hash(algorithm='md5')) == 32
-    assert len(crypto.hash(algorithm='sha1')) == 40
-    assert len(crypto.hash(algorithm='sha224')) == 56
-    assert len(crypto.hash(algorithm='sha256')) == 64
-    assert len(crypto.hash(algorithm='sha384')) == 96
-    assert len(crypto.hash(algorithm='sha512')) == 128
+@pytest.mark.parametrize(
+    'algorithm, length', [
+        ('md5', 32),
+        ('sha1', 40),
+        ('sha224', 56),
+        ('sha256', 64),
+        ('sha384', 96),
+        ('sha512', 128),
+    ],
+)
+def test_hash(crypto, algorithm, length):
+    assert len(crypto.hash(algorithm=algorithm)) == length
 
     with pytest.raises(UnsupportedAlgorithm):
         crypto.hash(algorithm='mimesis')
