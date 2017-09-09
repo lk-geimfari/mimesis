@@ -186,6 +186,7 @@ CURRENCY_SYMBOLS = {
     'de': '€',
     'de-at': '€',
     'de-ch': 'Fr.',
+    'el': '€',
     'en': '$',
     'en-ca': '$',
     'en-gb': '£',

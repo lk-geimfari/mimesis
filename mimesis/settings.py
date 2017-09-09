@@ -22,6 +22,10 @@ SUPPORTED_LOCALES = {
         'name': 'Swiss German',
         'name_local': 'Deutsch',
     },
+    'el': {
+        'name': 'Greek',
+        'name_local': 'Ελληνικά',
+    },
     'en': {
         'name': 'English',
         'name_local': 'English',
