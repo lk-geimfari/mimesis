@@ -1,5 +1,4 @@
-from random import Random
-
+from mimesis.helpers import Random
 from mimesis.utils import locale_info
 from mimesis.settings import DEFAULT_LOCALE
 
@@ -25,9 +24,6 @@ class BaseProvider(object):
             self.random.seed(self.seed)
 
     def __str__(self):
-        """
-        Nice and pretty representation of a class.
-        """
         return '{}:{}:{}'.format(
             self.__class__.__name__,
             self.locale,

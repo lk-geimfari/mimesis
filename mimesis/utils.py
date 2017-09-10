@@ -20,12 +20,6 @@ def locale_info(locale: str) -> str:
     :param locale: Locale abbreviation.
     :type locale: str
     :returns: Locale name.
-    :rtype: str
-    :Example:
-
-    >>> from mimesis.utils import locale_info
-    >>> locale_info('sv')
-    'Swedish'
     """
     locale = locale.lower()
 

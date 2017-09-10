@@ -40,8 +40,8 @@ class Address(BaseProvider):
         :Example:
             Alley.
         """
-        suffix = self.random.choice(self.data['street']['suffix'])
-        return suffix
+        suffixes = self.data['street']['suffix']
+        return self.random.choice(suffixes)
 
     def address(self):
         """Get a random full address (include Street number, suffix and name).
@@ -52,27 +52,25 @@ class Address(BaseProvider):
         """
         fmt = self.data['address_fmt']
 
+        st_num = self.street_number()
+        st_name = self.street_name()
+
         if self.locale in SHORTENED_ADDRESS_FMT:
-            # Because fmt for ko is {st_name}{st_sfx} {st_num},
-            # i.e not shortened address format
-            if self.locale != 'ko':
-                return fmt.format(
-                    st_num=self.street_number(),
-                    st_name=self.street_name(),
-                )
+            return fmt.format(
+                st_num=st_num,
+                st_name=st_name,
+            )
 
         if self.locale == 'ja':
             cities = self.data['city']
-            return fmt.format(
-                city=self.random.choice(cities),
-                n=self.random.randint(1, 100),
-                nn=self.random.randint(1, 100),
-                nnn=self.random.randint(1, 100),
-            )
+            city = self.random.choice(cities)
+
+            n, nn, nnn = self.random.randints(3, 1, 100)
+            return fmt.format(city=city, n=n, nn=nn, nnn=nnn)
 
         return fmt.format(
-            st_num=self.street_number(),
-            st_name=self.street_name(),
+            st_num=st_num,
+            st_name=st_name,
             st_sfx=self.street_suffix(),
 
         )
@@ -149,8 +147,7 @@ class Address(BaseProvider):
         return self.random.uniform(-90, 90)
 
     def longitude(self):
-        """
-        Generate a random value of longitude (-180 to +180).
+        """Generate a random value of longitude (-180 to +180).
 
         :return: Value of longitude.
         :Example:
@@ -174,7 +171,7 @@ class Address(BaseProvider):
 
     def continent(self, code=False):
         """Get a random continent name or continent
-        code (code in international format)
+        code (code in international format).
 
         :return: Continent name.
         :Example:
@@ -184,5 +181,5 @@ class Address(BaseProvider):
             codes = CONTINENT_CODES
             return self.random.choice(codes)
 
-        continent = self.random.choice(self.data['continent'])
-        return continent
+        continents = self.data['continent']
+        return self.random.choice(continents)
