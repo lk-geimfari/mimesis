@@ -38,6 +38,7 @@
 - Ranwise [(ranwise)](https://github.com/ranwise)
 - Sambuddha Basu [(sammyshj)](https://github.com/sammyshj)
 - Thomas Carroll [(Uncleleech)](https://github.com/Uncleleech)
+- Tsimpitas Dimitris [(TsimpDim)](https://github.com/TsimpDim)
 - Vladislav Glinsky [(cl0ne)](https://github.com/cl0ne)
 - Yn-Coder [(yn-coder)](https://github.com/yn-coder)
 - Dmytro Zelinskyi [(zelds)](https://github.com/zelds)
