@@ -17,15 +17,27 @@ def test_emoji(net):
     assert result in EMOJI
 
 
-def test_hashtags(net):
+@pytest.mark.parametrize(
+    'category', [
+        'boys',
+        'cars',
+        'family',
+        'friends',
+        'general',
+        'girls',
+        'love',
+        'nature',
+        'sport',
+        'travel',
+        'tumblr',
+    ],
+)
+def test_hashtags(net, category):
     result = net.hashtags(quantity=5)
     assert len(result) == 5
 
-    tags = list(HASHTAGS.keys())
-
-    for category in tags:
-        result = net.hashtags(quantity=1, category=category)
-        assert result in HASHTAGS[category]
+    result = net.hashtags(quantity=1, category=category)
+    assert result in HASHTAGS[category]
 
     with pytest.raises(KeyError):
         net.hashtags(category='religious')
@@ -79,15 +91,23 @@ def test_image_by_keyword(net):
     assert isinstance(default, str)
 
 
-def test_network_protocol(net):
-    # Default layer 'is application'
+@pytest.mark.parametrize(
+    'layer', [
+        'application',
+        'data_link',
+        'network',
+        'physical',
+        'presentation',
+        'session',
+        'transport',
+    ],
+)
+def test_network_protocol(net, layer):
+    result = net.network_protocol(layer=layer)
+    assert result in NETWORK_PROTOCOLS[layer]
 
-    layers = list(NETWORK_PROTOCOLS.keys())
 
-    for layer in layers:
-        result = net.network_protocol(layer=layer)
-        assert result in NETWORK_PROTOCOLS[layer]
-
+def test_network_protocol_wrong(net):
     with pytest.raises(WrongArgument):
         net.network_protocol(layer='super')
 
@@ -112,14 +132,23 @@ def test_http_method(net):
     assert result in HTTP_METHODS
 
 
-def test_content_type(net):
-    types = list(MIME_TYPES.keys())
+@pytest.mark.parametrize(
+    'mime_type', [
+        'application',
+        'audio',
+        'image',
+        'message',
+        'text',
+        'video',
+    ],
+)
+def test_content_type(net, mime_type):
+    ct = net.content_type(mime_type=mime_type)
+    ct = ct.split(':')[1].strip()
+    assert ct in MIME_TYPES[mime_type]
 
-    for typ in types:
-        ct = net.content_type(mime_type=typ)
-        ct = ct.split(':')[1].strip()
-        assert ct in MIME_TYPES[typ]
 
+def test_content_type_wrong_arg(net):
     with pytest.raises(ValueError):
         net.content_type(mime_type='blablabla')
 

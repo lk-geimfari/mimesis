@@ -24,11 +24,6 @@ def business(request):
 
 
 @pytest.fixture(params=locales)
-def code(request):
-    return mimesis.Code(request.param)
-
-
-@pytest.fixture(params=locales)
 def dt(request):
     return mimesis.Datetime(request.param)
 
@@ -48,9 +43,9 @@ def science(request):
     return mimesis.Science(request.param)
 
 
-@pytest.fixture(params=locales)
-def structured(request):
-    return mimesis.Structured(request.param)
+@pytest.fixture
+def structured():
+    return mimesis.Structured()
 
 
 @pytest.fixture(params=locales)
@@ -63,7 +58,7 @@ def path(request):
     return mimesis.Path(request.param)
 
 
-@pytest.fixture()
+@pytest.fixture
 def transport():
     return mimesis.Transport()
 
@@ -116,3 +111,8 @@ def crypto():
 @pytest.fixture
 def schema():
     return Schema()
+
+
+@pytest.fixture()
+def code():
+    return mimesis.Code()

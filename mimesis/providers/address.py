@@ -1,4 +1,5 @@
-from mimesis.data import CONTINENT_CODES, COUNTRIES_ISO, SHORTENED_ADDRESS_FMT
+from mimesis.data import CALLING_CODES, CONTINENT_CODES, \
+    COUNTRIES_ISO, SHORTENED_ADDRESS_FMT
 from mimesis.providers import BaseProvider
 from mimesis.utils import pull
 
@@ -183,3 +184,12 @@ class Address(BaseProvider):
 
         continents = self.data['continent']
         return self.random.choice(continents)
+
+    def calling_code(self):
+        """Get a random calling code of random country.
+
+        :return: Calling code.
+        :Example:
+            +7
+        """
+        return self.random.choice(CALLING_CODES)

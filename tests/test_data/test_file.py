@@ -5,18 +5,36 @@ import pytest
 from mimesis.data import EXTENSIONS, MIME_TYPES
 
 
-def test_extension(file):
-    file_types = list(EXTENSIONS.keys())
+@pytest.mark.parametrize(
+    'extension', [
+        'audio',
+        'compressed',
+        'data',
+        'executable',
+        'image',
+        'source',
+        'text',
+        'video',
+    ],
+)
+def test_extension(file, extension):
+    ext = file.extension(file_type=extension)
 
-    for typ in file_types:
-        assert file.extension(file_type=typ) in EXTENSIONS[typ]
+    assert ext in EXTENSIONS[extension]
 
 
-def test_mime_type(file):
-    mime_types = list(MIME_TYPES.keys())
-
-    for mime in mime_types:
-        assert file.mime_type(type_t=mime) in MIME_TYPES[mime]
+@pytest.mark.parametrize(
+    'mime_type', [
+        'application',
+        'audio',
+        'image',
+        'message',
+        'text',
+        'video',
+    ],
+)
+def test_mime_type(file, mime_type):
+    assert file.mime_type(type_t=mime_type) in MIME_TYPES[mime_type]
 
     with pytest.raises(ValueError):
         file.mime_type(type_t='nil')

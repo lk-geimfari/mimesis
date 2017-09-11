@@ -1,76 +1,85 @@
 # -*- coding: utf-8 -*-
 import re
 
+import pytest
+
+import mimesis
+
 from ._patterns import STR_REGEX
+
+
+@pytest.fixture
+def _text():
+    return mimesis.Text()
 
 
 def test_str(text):
     assert re.match(STR_REGEX, str(text))
 
 
-def test_hex_color(text):
-    result = text.hex_color()
+def test_hex_color(_text):
+    result = _text.hex_color()
     assert '#' in result
 
 
-def test_alphabet(generic):
-    result = generic.text.alphabet()
+def test_alphabet(text):
+    result = text.alphabet()
     assert isinstance(result, list)
     assert result is not None
 
 
-def test_sentence(generic):
-    result = generic.text.sentence().strip()
-    assert result in generic.text.data['text']
+def test_sentence(text):
+    result = text.sentence().strip()
+    assert result in text.data['text']
 
 
-def test_title(generic):
-    result = generic.text.title()
+def test_title(text):
+    result = text.title()
     assert result is not None
-    assert result.strip() in generic.text.data['text']
+    assert result.strip() in text.data['text']
 
 
-def test_text(generic):
-    result = generic.text.text(quantity=4)
+def test_text(text):
+    result = text.text(quantity=4)
     assert len(result) >= 4
     assert isinstance(result, str)
 
 
-def test_words(generic):
-    result = generic.text.words(quantity=5)
+def test_words(text):
+    result = text.words(quantity=5)
     assert len(result) == 5
 
-    result = generic.text.words(quantity=1)
+    result = text.words(quantity=1)
     assert len(result) == 1
 
 
-def test_word(generic):
-    result = generic.text.word()
-    assert result in generic.text.data['words']['normal']
+def test_word(text):
+    result = text.word()
+    assert result in text.data['words']['normal']
 
 
-def test_swear_word(generic):
-    result = generic.text.swear_word()
-    assert result in generic.text.data['words']['bad']
+def test_swear_word(text):
+    result = text.swear_word()
+    assert result in text.data['words']['bad']
 
 
-def test_quote(generic):
-    result = generic.text.quote()
-    assert result in generic.text.data['quotes']
+def test_quote(text):
+    result = text.quote()
+    assert result in text.data['quotes']
 
 
-def test_color(generic):
-    result = generic.text.color()
-    assert result in generic.text.data['color']
+def test_color(text):
+    result = text.color()
+    assert result in text.data['color']
 
 
-def test_level(generic):
-    result = generic.text.level()
+def test_level(text):
+    result = text.level()
     assert result is not None
     assert isinstance(result, str)
 
 
-def test_answer(generic):
-    result = generic.text.answer()
+def test_answer(text):
+    result = text.answer()
     assert result is not None
     assert isinstance(result, str)

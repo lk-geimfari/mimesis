@@ -15,7 +15,6 @@ def test_str(code):
 def test_custom_code(code):
     result = code.custom_code(
         mask='@###', char='@', digit='#')
-
     assert len(result) == 4
 
 
@@ -66,7 +65,7 @@ def test_locale_code(code):
         ('isbn-13', 13),
     ],
 )
-def test_isbn(generic, fmt, length):
-    result = generic.code.isbn(fmt=fmt)
+def test_isbn(code, fmt, length):
+    result = code.isbn(fmt=fmt)
     assert result is not None
     assert len(result) >= length
