@@ -15,8 +15,9 @@ class USASpecProvider(object):
     @staticmethod
     def tracking_number(service='usps'):
         """Generate random tracking number for USPS, FedEx and UPS.
-        :param service:
-        :return:
+
+        :param service: Post service.
+        :return: Tracking number.
         """
         service = service.lower()
 

@@ -33,14 +33,17 @@ def test_series_and_number(russia):
     assert result is not None
 
 
-def test_patronymic(russia):
+@pytest.mark.parametrize(
+    'gender', [
+        'female',
+        'male',
+    ],
+)
+def test_patronymic(russia, gender):
     patronymic = russia.patronymic
 
-    assert isinstance(patronymic(gender='female'), str)
-    assert len(patronymic(gender='female')) >= 4
-
-    assert isinstance(patronymic(gender='male'), str)
-    assert len(patronymic(gender='male')) >= 4
+    assert patronymic(gender=gender) is not None
+    assert len(patronymic(gender=gender)) >= 4
 
     with pytest.raises(JSONKeyError):
         patronymic(gender='nil')

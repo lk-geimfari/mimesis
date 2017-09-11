@@ -10,18 +10,17 @@ def usa():
     return USASpecProvider()
 
 
-def test_usps_tracking_number(usa):
-    result = usa.tracking_number(service='usps')
+@pytest.mark.parametrize(
+    'service, length', [
+        ('usps', 24),
+        ('fedex', 18),
+        ('ups', 18),
+    ],
+)
+def test_usps_tracking_number(usa, service, length):
+    result = usa.tracking_number(service=service)
     assert result is not None
-    assert len(result) == 24 or len(result) == 17
-
-    result_1 = usa.tracking_number(service='fedex')
-    assert result_1 is not None
-    assert len(result_1) == 14 or len(result_1) == 18
-
-    result_2 = usa.tracking_number(service='ups')
-    assert result_2 is not None
-    assert len(result_2) == 18
+    assert len(result) <= length
 
     with pytest.raises(ValueError):
         usa.tracking_number(service='x')
