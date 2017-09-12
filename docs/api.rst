@@ -163,28 +163,24 @@ UnsupportedLocale
 
 .. autoclass:: mimesis.exceptions.UnsupportedLocale
    :members:
-   :special-members:
 
 JSONKeyError
 ------------
 
 .. autoclass:: mimesis.exceptions.JSONKeyError
    :members:
-   :special-members:
 
 WrongArgument
 -------------
 
 .. autoclass:: mimesis.exceptions.WrongArgument
    :members:
-   :special-members:
 
 UnsupportedAlgorithm
 --------------------
 
 .. autoclass:: mimesis.exceptions.UnsupportedAlgorithm
    :members:
-   :special-members:
 
 
 UndefinedSchema
@@ -192,4 +188,3 @@ UndefinedSchema
 
 .. autoclass:: mimesis.exceptions.UndefinedSchema
    :members:
-   :special-members:
