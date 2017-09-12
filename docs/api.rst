@@ -153,3 +153,43 @@ UnitSystem
 .. autoclass:: mimesis.UnitSystem
    :members:
    :special-members: __init__
+
+
+Exceptions
+==========
+
+UnsupportedLocale
+-----------------
+
+.. autoclass:: mimesis.exceptions.UnsupportedLocale
+   :members:
+   :special-members:
+
+JSONKeyError
+------------
+
+.. autoclass:: mimesis.exceptions.JSONKeyError
+   :members:
+   :special-members:
+
+WrongArgument
+-------------
+
+.. autoclass:: mimesis.exceptions.WrongArgument
+   :members:
+   :special-members:
+
+UnsupportedAlgorithm
+--------------------
+
+.. autoclass:: mimesis.exceptions.UnsupportedAlgorithm
+   :members:
+   :special-members:
+
+
+UndefinedSchema
+---------------
+
+.. autoclass:: mimesis.exceptions.UndefinedSchema
+   :members:
+   :special-members:
