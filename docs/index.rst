@@ -189,7 +189,6 @@ Contents
 .. toctree::
    :maxdepth: 3
 
-   guide
    api
 
 
