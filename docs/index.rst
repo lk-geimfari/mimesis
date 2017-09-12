@@ -143,8 +143,8 @@ Data Providers
 List of supported data providers available `here <http://mimesis.readthedocs.io/en/latest/providers.html>`_
 
 
-Builtins Specific Data Providers
---------------------------------
+Builtins Data Providers
+-----------------------
 
 Some countries have data types specific to that country. For example
 social security numbers (SSN) in the United States of America (``en``),
@@ -167,7 +167,7 @@ Custom Providers
 ----------------
 
 You also can add custom provider to ``Generic()``, using
-``add_provider()`` method:
+``.add_provider()`` method:
 
 .. code:: python
 
