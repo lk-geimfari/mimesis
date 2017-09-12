@@ -1,8 +1,6 @@
 Mimesis
 =======
 
-**Mimesis** is a fast and easy to use Python library for generating dummy data for a variety of purposes.  This data can be particularly useful during software development and testing.  For example, it could be used to populate a testing database for a web application with user information such as email addresses, usernames, first names, last names, etc. There are over eighteen different `data providers <https://github.com/lk-geimfari/mimesis/blob/master/PROVIDERS.md>`_ available, which can produce data related to food, people, computer hardware, transportation, addresses, and more.  *Mimesis* does not require any modules that are not in the Python standard library.
-
 |Build Status| |Build status on Windows| |codecov| |PyPI version|
 |Python|
 
@@ -17,6 +15,7 @@ Mimesis
 .. |Python| image:: https://img.shields.io/badge/python-3.3%5E-brightgreen.svg
    :target: https://badge.fury.io/py/mimesis
 
+**Mimesis** is a fast and easy to use Python library for generating dummy data for a variety of purposes.  This data can be particularly useful during software development and testing.  For example, it could be used to populate a testing database for a web application with user information such as email addresses, usernames, first names, last names, etc. There are over eighteen different `data providers <https://github.com/lk-geimfari/mimesis/blob/master/PROVIDERS.md>`_ available, which can produce data related to food, people, computer hardware, transportation, addresses, and more. Mimesis does not require any modules that are not in the Python standard library.
 
 Advantages
 -------------
@@ -31,12 +30,10 @@ as Faker:
 -  Simplicity. Mimesis does not require any modules other than the
    Python standard library.
 
-See `here`_ for an example of how we compare performance with other
+See `here <https://gist.github.com/lk-geimfari/461ce92fd32379d7b73c9e12164a9154>`_ for an example of how we compare performance with other
 libraries.
 
 .. _faster: http://i.imgur.com/pCo6yPA.png
-.. _here: https://gist.github.com/lk-geimfari/461ce92fd32379d7b73c9e12164a9154
-
 
 
 Best Practice
@@ -97,45 +94,10 @@ As we said above, this library is really easy to use:
 Locales
 -------
 
-You can specify a locale when creating providers and they will return data that is appropriate for the language or country associated with that locale.  `Mimesis` currently includes support for 33 different locales:
+You can specify a locale when creating providers and they will return data that is appropriate for
+the language or country associated with that locale. `Mimesis` currently includes support
+for `33 <http://mimesis.readthedocs.io/en/latest/locales.html>`_ different locales:
 
-=======  ====================  ====================
-Code     Name                  Native Name
-=======  ====================  ====================
-`cs`     Czech                 Česky
-`da`     Danish                Dansk
-`de`     German                Deutsch
-`de-at`  Austrian german       Deutsch
-`de-ch`  Swiss german          Deutsch
-`el`	 Greek                 Ελληνικά
-`en`     English               English
-`en-au`  Australian English    English
-`en-ca`  Canadian English      English
-`en-gb`  British English       English
-`es`     Spanish               Español
-`es-mx`  Mexican Spanish       Español
-`et`     Estonian              Eesti
-`fa`     Farsi                 فارسی
-`fi`     Finnish               Suomi
-`fr`     French                Français
-`hu`     Hungarian             Magyar
-`is`     Icelandic             Íslenska
-`it`     Italian               Italiano
-`ja`     Japanese              日本語
-`kk`     Kazakh                Қазақша
-`ko`	 Korean                한국어
-`nl`     Dutch                 Nederlands
-`nl-be`  Belgium Dutch         Nederlands
-`no`     Norwegian             Norsk
-`pl`     Polish                Polski
-`pt`     Portuguese            Português
-`pt-br`  Brazilian Portuguese  Português Brasileiro
-`ru`     Russian               Русский
-`sv`     Swedish               Svenska
-`tr`     Turkish               Türkçe
-`uk`     Ukrainian             Український
-`zh`     Chinese               汉语
-=======  ====================  ====================
 
 Usage
 ~~~~~
@@ -178,51 +140,7 @@ providers from one object.
 
 Data providers
 --------------
-+------+-----------------+------------------------------------------------------------------+
-| №    | Provider        | Description                                                      |
-+======+=================+==================================================================+
-| 1    | Address         | Address data (street name, street suffix etc.)                   |
-+------+-----------------+------------------------------------------------------------------+
-| 2    | Business        | Business data (company, company\_type, copyright etc.)           |
-+------+-----------------+------------------------------------------------------------------+
-| 3    | Code            | Codes (ISBN, EAN, IMEI etc.).                                    |
-+------+-----------------+------------------------------------------------------------------+
-| 4    | ClothingSizes   | Clothing sizes (international sizes, european etc.)              |
-+------+-----------------+------------------------------------------------------------------+
-| 5    | Datetime        | Datetime (day\_of\_week, month, year etc.)                       |
-+------+-----------------+------------------------------------------------------------------+
-| 6    | Development     | Data for developers (version, programming language etc.)         |
-+------+-----------------+------------------------------------------------------------------+
-| 7    | File            | File data (extension etc.)                                       |
-+------+-----------------+------------------------------------------------------------------+
-| 8    | Food            | Information on food (vegetables, fruits, measurements etc.)      |
-+------+-----------------+------------------------------------------------------------------+
-| 9    | Games           | Games data (game, score, pegi\_rating etc.)                      |
-+------+-----------------+------------------------------------------------------------------+
-| 10   | Personal        | Personal data (name, surname, age, email etc.)                   |
-+------+-----------------+------------------------------------------------------------------+
-| 11   | Text            | Text data (sentence, title etc.)                                 |
-+------+-----------------+------------------------------------------------------------------+
-| 12   | Transport       | Dummy data about transport (truck model, car etc.)               |
-+------+-----------------+------------------------------------------------------------------+
-| 13   | Science         | Scientific data (scientist, math\_formula etc.)                  |
-+------+-----------------+------------------------------------------------------------------+
-| 14   | Structured      | Structured data (html, css etc.)                                 |
-+------+-----------------+------------------------------------------------------------------+
-| 15   | Internet        | Internet data (facebook, twitter etc.)                           |
-+------+-----------------+------------------------------------------------------------------+
-| 16   | Hardware        | The data about the hardware (resolution, cpu, graphics etc.)     |
-+------+-----------------+------------------------------------------------------------------+
-| 17   | Numbers         | Numerical data (floats, primes, digit etc.)                      |
-+------+-----------------+------------------------------------------------------------------+
-| 18   | Path            | Provides methods and property for generate paths.                |
-+------+-----------------+------------------------------------------------------------------+
-| 19   | UnitSytem       | Provides names of unit systems in international format           |
-+------+-----------------+------------------------------------------------------------------+
-| 20   | Generic         | All at once                                                      |
-+------+-----------------+------------------------------------------------------------------+
-| 21   | Cryptographic   | Cryptographic data                                               |
-+------+-----------------+------------------------------------------------------------------+
+List of supported data providers available `here <http://mimesis.readthedocs.io/en/latest/providers.html>`_
 
 
 Related Libraries
