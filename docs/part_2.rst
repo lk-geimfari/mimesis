@@ -2,8 +2,8 @@
 Generating mock data using Mimesis: Part II
 ===========
 
-We have already published how to generate mock data with the help of
-a Python library  — `Mimesis <https://github.com/lk-geimfari/mimesis>`__.
+We have already `published <http://mimesis.readthedocs.io/en/latest/part_1.html>`_ how to generate mock
+data with the help of a Python library  — `Mimesis <https://github.com/lk-geimfari/mimesis>`__.
 The article you are reading now is the continuation of the previous one,
 therefore, we will not be going over the basics again. In case you missed
 out on the first article or you felt lazy at the time, you might want to
@@ -85,6 +85,17 @@ single object, rather than through multiple separate class providers.
 Using ``Generic()`` will allow you to get rid of several extra lines of
 code.
 
+Incorrect:
+
+.. code:: python
+
+    >>> from mimesis import Personal, Datetime, Text, Code
+
+    >>> personal = Personal('ru')
+    >>> datetime = Datetime('ru')
+    >>> text = Text('ru')
+    >>> code = Code('ru')
+
 Correct:
 
 .. code:: python
@@ -97,17 +108,6 @@ Correct:
 
     >>> generic.datetime.date()
     '14-05-2007'
-
-Incorrect:
-
-.. code:: python
-
-    >>> from mimesis import Personal, Datetime, Text, Code
-
-    >>> personal = Personal('ru')
-    >>> datetime = Datetime('ru')
-    >>> text = Text('ru')
-    >>> code = Code('ru')
 
 Still correct:
 
