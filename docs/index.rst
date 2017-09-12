@@ -163,7 +163,7 @@ them explicitly:
     '696.441.186-00'
 
 
-Custom Providers
+Custom Data Providers
 ----------------
 
 You also can add custom provider to ``Generic()``, using
