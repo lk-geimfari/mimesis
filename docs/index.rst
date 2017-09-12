@@ -41,13 +41,14 @@ libraries.
 
 Best Practice
 -------------
-We strongly recommend to read articles which published in blog_ of our friends on Medium. There we are speak about best practices and a number of most useful features of the library.
+We strongly recommend to read articles which published below. There we are speak about
+best practices and a number of most useful features of the library.
 
-Generating mock data using Mimesis: First_ and Second_ part.
+.. toctree::
+   :maxdepth: 3
 
-.. _First: https://medium.com/wemake-services/generating-mock-data-using-elizabeth-part-i-ca5a55b8027c
-.. _Second: https://medium.com/wemake-services/generating-mock-data-with-elizabeth-part-ii-bb16a3f3106f
-.. _blog: https://medium.com/wemake-services
+   part_1
+   part_2
 
 
 
@@ -91,7 +92,7 @@ As we said above, this library is really easy to use:
     'Abdel-1888'
     'constructor_1884'
     'chegre-2051'
-	
+
 
 Locales
 -------
@@ -173,8 +174,8 @@ providers from one object.
 
     >>> g.food.fruit()
     'Limón'
-	
-	
+
+
 Data providers
 --------------
 +------+-----------------+------------------------------------------------------------------+
