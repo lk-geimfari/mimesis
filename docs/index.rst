@@ -67,11 +67,6 @@ or simply:
     ➜ pip install mimesis
 
 
-Please note
------------
-The library only runs on Python 3.3+. Developers don’t have any plans of adding Python 2.7 support.
-
-
 Basic Usage
 -----------
 
@@ -80,7 +75,7 @@ As we said above, this library is really easy to use:
 .. code:: python
 
     >>> import mimesis
-    >>> person = mimesis.Personal(locale='en')
+    >>> person = mimesis.Personal('en')
 
     >>> person.full_name(gender='female')
     'Antonetta Garrison'
@@ -106,12 +101,12 @@ You can specify a locale when creating providers and they will return data that 
 =======  ====================  ====================
 Code     Name                  Native Name
 =======  ====================  ====================
-`cs`     Czech				   Česky
+`cs`     Czech                 Česky
 `da`     Danish                Dansk
 `de`     German                Deutsch
 `de-at`  Austrian german       Deutsch
 `de-ch`  Swiss german          Deutsch
-`el`	 Greek				   Ελληνικά
+`el`	 Greek                 Ελληνικά
 `en`     English               English
 `en-au`  Australian English    English
 `en-ca`  Canadian English      English
