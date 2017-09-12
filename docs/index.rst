@@ -96,7 +96,7 @@ Locales
 
 You can specify a locale when creating providers and they will return data that is appropriate for
 the language or country associated with that locale. `Mimesis` currently includes support
-for `33 <http://mimesis.readthedocs.io/en/latest/locales.html>`_ different locales:
+for `33 different locales <http://mimesis.readthedocs.io/en/latest/locales.html>`_.
 
 
 Usage
@@ -138,9 +138,87 @@ providers from one object.
     'Limón'
 
 
-Data providers
+Data Providers
 --------------
 List of supported data providers available `here <http://mimesis.readthedocs.io/en/latest/providers.html>`_
+
+
+Builtins Specific Data Providers
+--------------------------------
+
+Some countries have data types specific to that country. For example
+social security numbers (SSN) in the United States of America (``en``),
+and cadastro de pessoas físicas (CPF) in Brazil (``pt-br``). If you
+would like to use these country-specific providers, then you must import
+them explicitly:
+
+.. code:: python
+
+    >>> from mimesis import Generic
+    >>> from mimesis.builtins import BrazilSpecProvider
+
+    >>> generic = Generic('pt-br')
+    >>> generic.add_provider(BrazilSpecProvider)
+    >>> generic.brazil_provider.cpf()
+    '696.441.186-00'
+
+
+Custom Providers
+----------------
+
+You also can add custom provider to ``Generic()``, using
+``add_provider()`` method:
+
+.. code:: python
+
+    >>> import mimesis
+    >>> generic = mimesis.Generic('en')
+
+    >>> class SomeProvider(object):
+    ...     class Meta:
+    ...         name = "some_provider"
+    ...
+    ...     def hello(self):
+    ...         return "Hello!"
+
+    >>> class Another(object):
+    ...     def bye(self):
+    ...         return "Bye!"
+
+    >>> generic.add_provider(SomeProvider)
+    >>> generic.add_provider(Another)
+
+    >>> generic.some_provider.hello()
+    'Hello!'
+
+    >>> generic.another.bye()
+    'Bye!'
+
+or multiple custom providers using method ``add_providers()``:
+
+.. code:: python
+
+    >>> generic.add_providers(SomeProvider, Another)
+
+
+Decorators
+----------
+
+If your locale belongs to the family of Cyrillic languages, but you need
+latinized locale-specific data, then you can use special decorator which
+help you romanize your data. At this moment it’s works only for Russian
+and Ukrainian:
+
+.. code:: python
+
+    >>> from mimesis.decorators import romanized
+
+    >>> @romanized('ru')
+    ... def russian_name():
+    ...     return 'Вероника Денисова'
+
+    >>> russian_name()
+    'Veronika Denisova'
 
 
 Related Libraries
