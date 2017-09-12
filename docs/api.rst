@@ -14,6 +14,14 @@ Generic
 Providers
 =========
 
+BaseProvider
+------------
+
+.. autoclass:: mimesis.providers.BaseProvider
+   :members:
+   :special-members: __init__
+
+
 Address
 -------
 
@@ -187,4 +195,24 @@ UndefinedSchema
 ---------------
 
 .. autoclass:: mimesis.exceptions.UndefinedSchema
+   :members:
+
+
+Helpers
+=======
+
+Random
+------
+
+.. autoclass:: mimesis.helpers.Random
+   :members:
+
+
+Schema
+=======
+
+Schema
+------
+
+.. autoclass:: mimesis.schema.Schema
    :members:
