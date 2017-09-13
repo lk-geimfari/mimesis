@@ -11,8 +11,8 @@ class Random(random.Random):
         """Generate list of random integers.
 
         :param amount: Amount of elements.
-        :param a: minimum
-        :param b: maximum
+        :param a: Minimum value of range.
+        :param b: Maximum value of range.
         :return: List of random integers.
         """
 

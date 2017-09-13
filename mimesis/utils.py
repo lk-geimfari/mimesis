@@ -14,7 +14,7 @@ __all__ = ['pull', 'download_image', 'locale_info']
 PATH = path.abspath(path.join(path.dirname(__file__), 'data'))
 
 
-def locale_info(locale: str) -> str:
+def locale_info(locale):
     """Return name (in english) or local name of the locale
 
     :param locale: Locale abbreviation.
@@ -29,19 +29,11 @@ def locale_info(locale: str) -> str:
     return SUPPORTED_LOCALES[locale]['name']
 
 
-def luhn_checksum(num) -> str:
+def luhn_checksum(num):
     """Calculate a checksum for num using the Luhn algorithm.
 
-    See: https://en.wikipedia.org/wiki/Luhn_algorithm
-    :param num: The number to calculate a checksum for as a string
-    :type num: str
-    :returns: checksum for number
-    :rtype: str
-    :Example:
-
-    >>> from mimesis.utils import luhn_checksum
-    >>> luhn_checksum("7992739871")
-    '3'
+    :param num: The number to calculate a checksum for as a string.
+    :returns: Checksum for number.
     """
     check = 0
     for i, s in enumerate(reversed([x for x in num])):
@@ -60,7 +52,6 @@ def update_dict(initial, other):
     :param initial: Dict to update.
     :param other: Dict to update from.
     :return: Updated dict.
-    :rtype: dict
     """
     for key, value in other.items():
         if isinstance(value, collections.Mapping):
@@ -72,7 +63,7 @@ def update_dict(initial, other):
 
 
 @functools.lru_cache(maxsize=None)
-def pull(file, locale='en') -> dict:
+def pull(file, locale='en'):
     """Open json file file and get content from file and memorize result using
      lru_cache.
 
@@ -94,8 +85,8 @@ def pull(file, locale='en') -> dict:
     """
 
     def get_data(locale_name):
-        """
-        Pull JSON data from file.
+        """Pull JSON data from file.
+
         :param locale_name: Name of locale to pull.
         :return: Dict of data from file
         """
@@ -124,12 +115,8 @@ def download_image(url, save_path='', unverified_ctx=False):
 
     :param url: URL to image.
     :param save_path: Saving path.
-    :param unverified_ctx: Create unverified context. Use if you get
-    CERTIFICATE_VERIFY_FAILED.
+    :param unverified_ctx: Create unverified context.
     :return: Image name.
-    :rtype: str
-    :Example:
-        f88684c22086d4bb3983159fb1e95c22.png
     """
     if unverified_ctx:
         import ssl

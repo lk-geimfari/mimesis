@@ -1,10 +1,10 @@
 import pytest
 
 import mimesis
-from mimesis.schema import Schema
-from mimesis.settings import LIST_OF_LOCALES
 
-locales = LIST_OF_LOCALES
+from mimesis import settings
+
+locales = settings.LIST_OF_LOCALES
 platform = ['win32', 'linux2']
 
 
@@ -41,11 +41,6 @@ def personal(request):
 @pytest.fixture(params=locales)
 def science(request):
     return mimesis.Science(request.param)
-
-
-@pytest.fixture
-def structured():
-    return mimesis.Structured()
 
 
 @pytest.fixture(params=locales)
@@ -108,11 +103,11 @@ def crypto():
     return mimesis.Cryptographic()
 
 
-@pytest.fixture
-def schema():
-    return Schema()
-
-
 @pytest.fixture()
 def code():
     return mimesis.Code()
+
+
+@pytest.fixture
+def structured():
+    return mimesis.Structured()

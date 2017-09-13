@@ -1,5 +1,12 @@
 import pytest
 
+from mimesis.schema import Schema
+
+
+@pytest.fixture
+def schema():
+    return Schema()
+
 
 def test_valid_schema(schema):
     valid_schema = {
