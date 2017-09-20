@@ -4,7 +4,7 @@
     </p>
 </a>
 
-**Mimesis** is a fast and easy to use library for Python, which helps generate mock data for a variety of purposes (see "[Data providers](https://github.com/lk-geimfari/mimesis#data-providers)") in a variety of languages (see "[Locales](https://github.com/lk-geimfari/mimesis#locales)"). This data can be particularly useful during software development and testing. The library was written with the use of tools from the standard Python library, and therefore, it does not have any side dependencies.
+**Mimesis** is a fast and easy to use library for Python programming language, which helps generate mock (dummy) data for a variety of purposes (see "[Data providers](#data-providers)") in a variety of languages (see "[Locales](#locales)"). This data can be particularly useful during software development and testing. The library was written with the use of tools from the standard Python library, and therefore, it does not have any side dependencies.
 
 [![Build Status](https://travis-ci.org/lk-geimfari/mimesis.svg?branch=master)](https://travis-ci.org/lk-geimfari/mimesis)
 [![Build status on Windows](https://ci.appveyor.com/api/projects/status/chj8huslvn6vde18?svg=true)](https://ci.appveyor.com/project/lk-geimfari/mimesis)
@@ -24,7 +24,7 @@ See [here](https://gist.github.com/lk-geimfari/461ce92fd32379d7b73c9e12164a9154)
 performance with other libraries.
 
 ## Documentation
-Mimesis is very simple to use, and the below examples should help you get started. Complete documentation for Mimesis is available [here](http://mimesis.readthedocs.io/).
+Mimesis is very simple to use, and the below examples should help you get started. Complete documentation for Mimesis is available on [Read the Docs](http://mimesis.readthedocs.io/).
 
 ## Installation
 To install mimesis, simply:

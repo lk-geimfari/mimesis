@@ -36,19 +36,6 @@ libraries.
 .. _faster: http://i.imgur.com/pCo6yPA.png
 
 
-Best Practice
--------------
-We strongly recommend to read articles which published below. There we are speak about
-best practices and a number of most useful features of the library.
-
-.. toctree::
-   :maxdepth: 3
-
-   part_1
-   part_2
-
-
-
 Installation
 ------------
 
@@ -219,6 +206,18 @@ and Ukrainian:
 
     >>> russian_name()
     'Veronika Denisova'
+
+
+Best Practice
+-------------
+We strongly recommend to read articles which published below. There we are speak about
+best practices and a number of most useful features of the library.
+
+.. toctree::
+   :maxdepth: 3
+
+   part_1
+   part_2
 
 
 Related Libraries
