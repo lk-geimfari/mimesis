@@ -4,9 +4,7 @@ import re
 
 import pytest
 
-from mimesis.data import (EMOJI, HASHTAGS, HTTP_METHODS, HTTP_STATUS_CODES,
-                          MIME_TYPES, NETWORK_PROTOCOLS, SUBREDDITS,
-                          SUBREDDITS_NSFW, USER_AGENTS)
+from mimesis import data
 from mimesis.exceptions import WrongArgument
 
 from . import _patterns as p
@@ -14,7 +12,7 @@ from . import _patterns as p
 
 def test_emoji(net):
     result = net.emoji()
-    assert result in EMOJI
+    assert result in data.EMOJI
 
 
 @pytest.mark.parametrize(
@@ -37,7 +35,7 @@ def test_hashtags(net, category):
     assert len(result) == 5
 
     result = net.hashtags(quantity=1, category=category)
-    assert result in HASHTAGS[category]
+    assert result in data.HASHTAGS[category]
 
     with pytest.raises(KeyError):
         net.hashtags(category='religious')
@@ -50,13 +48,13 @@ def test_home_page(net):
 
 def test_subreddit(net):
     result = net.subreddit()
-    assert result in SUBREDDITS
+    assert result in data.SUBREDDITS
 
     full_result = net.subreddit(full_url=True)
     assert len(full_result) > 20
 
     result_nsfw = net.subreddit(nsfw=True)
-    assert result_nsfw in SUBREDDITS_NSFW
+    assert result_nsfw in data.SUBREDDITS_NSFW
 
     full_result = net.subreddit(nsfw=True, full_url=True)
     assert len(full_result) > 20
@@ -64,7 +62,7 @@ def test_subreddit(net):
 
 def test_user_agent(net):
     result = net.user_agent()
-    assert result in USER_AGENTS
+    assert result in data.USER_AGENTS
 
 
 def test_image_placeholder(net):
@@ -104,7 +102,7 @@ def test_image_by_keyword(net):
 )
 def test_network_protocol(net, layer):
     result = net.network_protocol(layer=layer)
-    assert result in NETWORK_PROTOCOLS[layer]
+    assert result in data.NETWORK_PROTOCOLS[layer]
 
 
 def test_network_protocol_wrong(net):
@@ -129,7 +127,7 @@ def test_mac_address(net):
 
 def test_http_method(net):
     result = net.http_method()
-    assert result in HTTP_METHODS
+    assert result in data.HTTP_METHODS
 
 
 @pytest.mark.parametrize(
@@ -145,7 +143,7 @@ def test_http_method(net):
 def test_content_type(net, mime_type):
     ct = net.content_type(mime_type=mime_type)
     ct = ct.split(':')[1].strip()
-    assert ct in MIME_TYPES[mime_type]
+    assert ct in data.MIME_TYPES[mime_type]
 
 
 def test_content_type_wrong_arg(net):
@@ -155,7 +153,31 @@ def test_content_type_wrong_arg(net):
 
 def test_http_status_code(net):
     result = net.http_status_code(code_only=False)
-    assert result in HTTP_STATUS_CODES
+    assert result in data.HTTP_STATUS_CODES
 
     result = net.http_status_code()
     assert (int(result) >= 100) and (int(result) <= 511)
+
+
+@pytest.mark.parametrize(
+    'domain_type', [
+        'ccTLD',  # Country code top-level domains.
+        'gTLD',  # Generic top-level domains.
+        'GeoTLD',  # Geographic top-level domains.
+        'uTLD',  # Unsponsored top-level domains.
+        'sTLD',  # Sponsored top-level domains.
+    ],
+)
+def test_top_level_domain(net, domain_type):
+    result = net.top_level_domain(
+        domain_type=domain_type,
+    )
+    domain_type = domain_type.lower()
+
+    assert result is not None
+    assert result in data.TLD[domain_type]
+
+
+def test_top_level_domain_unsupported(net):
+    with pytest.raises(KeyError):
+        net.top_level_domain(domain_type='nil')

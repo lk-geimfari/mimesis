@@ -342,7 +342,7 @@ class Personal(BaseProvider):
             'medium.com/@{}',
         ]
         url = 'http://' + self.random.choice(urls)
-        username = self.username()
+        username = self.username(template='U_d')
 
         return url.format(username)
 

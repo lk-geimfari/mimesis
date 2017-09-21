@@ -1,9 +1,8 @@
-from mimesis.data import (DOMAINS, EMOJI, HASHTAGS, HTTP_METHODS,
+from mimesis.data import (TLD, EMOJI, HASHTAGS, HTTP_METHODS,
                           HTTP_STATUS_CODES, NETWORK_PROTOCOLS, SUBREDDITS,
-                          SUBREDDITS_NSFW, USER_AGENTS)
+                          SUBREDDITS_NSFW, USERNAMES, USER_AGENTS)
 from mimesis.exceptions import WrongArgument
 from mimesis.providers import BaseProvider, File
-from mimesis.providers.personal import Personal
 
 
 class Internet(BaseProvider):
@@ -165,16 +164,47 @@ class Internet(BaseProvider):
         tags = [self.random.choice(hashtags) for _ in range(int(quantity))]
         return tags
 
-    def home_page(self):
+    def home_page(self, domain_type=None):
         """Generate a random home page.
 
+        :param: Domain type (en.wikipedia.org/wiki/Top-level_domain#Types).
         :return: Random home page.
         :Example:
-            http://www.font6.info
+            http://www.fontir.info
         """
-        url = 'http://www.' + Personal().username()
-        domain = self.random.choice(DOMAINS)
-        return '{}{}'.format(url, domain)
+        resource = self.random.choice(USERNAMES)
+        domain = self.top_level_domain(
+            domain_type=domain_type,
+        )
+
+        return 'http://www.{}{}'.format(
+            resource, domain)
+
+    def top_level_domain(self, domain_type=None):
+        """Return random top level domain.
+
+        :param domain_type: Type of domain.
+        Supported TLDs: ccTLD, gTLD, GeoTLD, uTLD, sTLD
+        :return: Top level domain.
+        """
+        # TODO: This is really ugly solution. Fix it.
+        supported = tuple(TLD.keys())
+
+        if domain_type is not None:
+            try:
+                domain_type = domain_type.lower()
+                return self.random.choice(TLD[domain_type])
+            except KeyError:
+                raise KeyError(
+                    'Unsupported type of domain. Please, use one of: {}'.format(
+                        ', '.join(supported),
+                    ),
+                )
+
+        domain_type = self.random.choice(supported)
+        domains = TLD[domain_type]
+
+        return self.random.choice(domains)
 
     def subreddit(self, nsfw=False, full_url=False):
         """Get a random subreddit from the list.

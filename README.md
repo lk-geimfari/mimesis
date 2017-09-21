@@ -136,6 +136,9 @@ When you only need to generate data for a single locale, use the `Generic()` pro
 
 >>> g.food.fruit()
 'Limón'
+
+>>> g.internet.top_level_domain('GeoTLD')
+'.moscow'
 ```
 
 ## Data providers
