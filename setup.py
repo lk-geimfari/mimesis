@@ -6,6 +6,14 @@ from setuptools.command.test import test as TestCommand
 
 here = os.path.abspath(os.path.dirname(__file__))
 
+tests_requirements = [
+    'pytest',
+    'flake8-builtins',
+    'flake8-commas',
+    'flake8-quotes',
+    'pytest-flake8',
+]
+
 # Long description.
 with open('PYPI_README.rst', 'r', encoding='utf-8') as f:
     readme = f.read()
@@ -87,12 +95,6 @@ setup(
         'Topic :: Software Development',
         'Topic :: Software Development :: Testing',
     ],
-    tests_require=[
-        'pytest',
-        'flake8-builtins',
-        'flake8-commas',
-        'flake8-quotes',
-        'pytest-flake8',
-    ],
+    tests_require=tests_requirements,
     cmdclass={'test': PyTest},
 )
