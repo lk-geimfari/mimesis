@@ -6,8 +6,6 @@ from distutils.core import setup
 from setuptools import Command
 from setuptools.command.test import test as TestCommand
 
-from mimesis import __version__ as v
-
 # Update __version__ automatically.
 TRAVIS_AUTO_VERSION = os.environ.get(
     'TRAVIS_AUTO_VERSION',
@@ -59,7 +57,7 @@ class Versioner(Command):
     user_options = []
 
     def initialize_options(self):
-        self.current = v.__version__
+        self.current = about['__version__']
         sys.stdout.write(
             'Previous version:\033[33m {}\033[0m.\n'.format(
                 self.current))
