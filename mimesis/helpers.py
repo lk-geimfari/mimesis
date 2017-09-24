@@ -1,3 +1,4 @@
+import os
 import random
 
 
@@ -21,3 +22,8 @@ class Random(random.Random):
 
         return [self.randint(a, b)
                 for _ in range(amount)]
+
+    @staticmethod
+    def urandom(*args, **kwargs):
+        """Return a bytes object containing random bytes."""
+        return os.urandom(*args, **kwargs)

@@ -1,7 +1,6 @@
 from binascii import hexlify
 import hashlib
 import uuid
-import os
 
 from mimesis.exceptions import UnsupportedAlgorithm
 from mimesis.providers import BaseProvider
@@ -51,7 +50,7 @@ class Cryptographic(BaseProvider):
         if entropy is None:
             entropy = 32
 
-        return os.urandom(entropy)
+        return self.random.urandom(entropy)
 
     def token(self, entropy=None):
         """Return a random text string, in hexadecimal.
@@ -59,4 +58,5 @@ class Cryptographic(BaseProvider):
         :param entropy: Number of bytes.
         :return: Token.
         """
-        return hexlify(self.bytes(entropy)).decode('ascii')
+        token = hexlify(self.bytes(entropy))
+        return token.decode('ascii')
