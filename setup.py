@@ -54,7 +54,7 @@ class PyTest(TestCommand):
 
 
 class Versioner(Command):
-    """Custom command for running test using setup.py test"""
+    """Custom command for versioning"""
 
     user_options = []
 
