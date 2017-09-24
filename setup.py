@@ -60,7 +60,9 @@ class Versioner(Command):
 
     def initialize_options(self):
         self.current = v.__version__
-        sys.stdout.write('Previous version:\033[33m {}\033[0m.\n'.format(self.current))
+        sys.stdout.write(
+            'Previous version:\033[33m {}\033[0m.\n'.format(
+                self.current))
 
     def finalize_options(self):
         pass
@@ -100,14 +102,16 @@ class Versioner(Command):
 
         with open('mimesis/__version__.py', 'r+') as f:
             version_str = '__version__ = \'{}\''.format(version)
-            regexp = r"__version__ = .*"
+            regexp = r'__version__ = .*'
 
             meta = re.sub(regexp, version_str, f.read())
             f.seek(0)
             f.write(meta)
             f.truncate()
 
-        sys.stdout.write('Updated! Current version is: \033[34m{}\033[0m.\n'.format(version))
+        sys.stdout.write(
+            'Updated! Current version is: \033[34m{}\033[0m.\n'.format(
+                version))
 
         sys.exit(0)
 
