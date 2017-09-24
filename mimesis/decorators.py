@@ -15,9 +15,7 @@ def romanized(locale):
          alphabet is the process of transliterating the Cyrillic language from
          the Cyrillic script into the Latin alphabet.
 
-        .. note:: At this moment it's work only for Russian, Ukrainian and Kazakh,
-        but in future we can add support for all slavic languages or for all
-        Cyrillic languages.
+        .. note:: At this moment it's work only for `ru`, `uk`, `kk`.
 
         :param func: Function.
         :return: Latinized text.

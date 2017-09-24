@@ -1,8 +1,17 @@
 import os
+import re
 import sys
 
 from distutils.core import setup
+from setuptools import Command
 from setuptools.command.test import test as TestCommand
+
+from mimesis import __version__ as v
+
+# Update __version__ automatically.
+TRAVIS_AUTO_VERSION = os.environ.get(
+    'TRAVIS_AUTO_VERSION',
+)
 
 here = os.path.abspath(os.path.dirname(__file__))
 
@@ -42,6 +51,79 @@ class PyTest(TestCommand):
         import pytest
         errno = pytest.main(self.pytest_args)
         sys.exit(errno)
+
+
+class Versioner(Command):
+    """Custom command for running test using setup.py test"""
+
+    user_options = []
+
+    def initialize_options(self):
+        self.current = v.__version__
+        sys.stdout.write('Previous version:\033[33m {}\033[0m.\n'.format(self.current))
+
+    def finalize_options(self):
+        pass
+
+    @staticmethod
+    def automatically(version):
+        """Automatically increment version string.
+
+        :param version: Current version.
+        :return: Next version.
+        """
+        major, minor, micro = [
+            int(i) for i in version.split('.')]
+
+        # TODO: Refactor
+
+        if 10 > micro:
+            micro += 1
+        elif 10 == micro:
+            micro = 0
+            minor += 1
+        elif 10 > minor:
+            minor += 1
+        elif 10 == minor:
+            micro, minor = 0, 0
+            major += 1
+        if 10 < minor:
+            minor, micro = 0, 0
+            major += 1
+
+        return '.'.join([str(i) for i
+                         in (major, minor, micro)])
+
+    def rewrite(self, version=None):
+        if not version:
+            version = self.current
+
+        with open('mimesis/__version__.py', 'r+') as f:
+            version_str = '__version__ = \'{}\''.format(version)
+            regexp = r"__version__ = .*"
+
+            meta = re.sub(regexp, version_str, f.read())
+            f.seek(0)
+            f.write(meta)
+            f.truncate()
+
+        sys.stdout.write('Updated! Current version is: \033[34m{}\033[0m.\n'.format(version))
+
+        sys.exit(0)
+
+    def run(self):
+        if TRAVIS_AUTO_VERSION:
+            version = self.automatically(self.current)
+            self.rewrite(version)
+        else:
+            response = input('Are you sure? (y/n): ')
+            if response.lower() == 'y':
+                new_version = input('New version: ')
+                if not new_version:
+                    new_version = self.automatically(self.current)
+                self.rewrite(new_version)
+            else:
+                sys.stdout.write('Bye!\n')
 
 
 setup(
@@ -96,5 +178,8 @@ setup(
         'Topic :: Software Development :: Testing',
     ],
     tests_require=tests_requirements,
-    cmdclass={'test': PyTest},
+    cmdclass={
+        'test': PyTest,
+        'versioner': Versioner,
+    },
 )
