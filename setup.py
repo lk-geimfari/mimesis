@@ -1,17 +1,20 @@
-import os
+from os import (
+    environ,
+    path,
+)
 import re
-import sys
+from sys import exit, stdout
 
 from distutils.core import setup
 from setuptools import Command
 from setuptools.command.test import test as TestCommand
 
 # Update __version__ automatically.
-TRAVIS_AUTO_VERSION = os.environ.get(
+TRAVIS_AUTO_VERSION = environ.get(
     'TRAVIS_AUTO_VERSION',
 )
 
-here = os.path.abspath(os.path.dirname(__file__))
+here = path.abspath(path.dirname(__file__))
 
 tests_requirements = [
     'pytest',
@@ -27,7 +30,7 @@ with open('PYPI_README.rst', 'r', encoding='utf-8') as f:
 
 about = {}
 # Get meta-data from __version__.py
-with open(os.path.join(here, 'mimesis', '__version__.py')) as f:
+with open(path.join(here, 'mimesis', '__version__.py')) as f:
     exec(f.read(), about)
 
 
@@ -48,7 +51,7 @@ class PyTest(TestCommand):
     def run_tests(self):
         import pytest
         errno = pytest.main(self.pytest_args)
-        sys.exit(errno)
+        exit(errno)
 
 
 class Versioner(Command):
@@ -58,7 +61,7 @@ class Versioner(Command):
 
     def initialize_options(self):
         self.current = about['__version__']
-        sys.stdout.write(
+        stdout.write(
             'Previous version:\033[33m {}\033[0m.\n'.format(
                 self.current))
 
@@ -73,7 +76,8 @@ class Versioner(Command):
         :return: Next version.
         """
         major, minor, micro = [
-            int(i) for i in version.split('.')]
+            int(i) for i in version.split('.')
+        ]
 
         # TODO: Refactor
 
@@ -98,7 +102,7 @@ class Versioner(Command):
         if not version:
             version = self.current
 
-        with open('mimesis/__version__.py', 'r+') as f:
+        with open(path.join(here, 'mimesis', '__version__.py'), 'r+') as f:
             version_str = '__version__ = \'{}\''.format(version)
             regexp = r'__version__ = .*'
 
@@ -107,16 +111,19 @@ class Versioner(Command):
             f.write(meta)
             f.truncate()
 
-        sys.stdout.write(
+        stdout.write(
             'Updated! Current version is: \033[34m{}\033[0m.\n'.format(
                 version))
 
-        sys.exit(0)
+        exit(0)
 
     def run(self):
         if TRAVIS_AUTO_VERSION:
-            version = self.automatically(self.current)
-            self.rewrite(version)
+            self.rewrite(
+                self.automatically(
+                    self.current,
+                ),
+            )
         else:
             response = input('Are you sure? (y/n): ')
             if response.lower() == 'y':
@@ -124,8 +131,6 @@ class Versioner(Command):
                 if not new_version:
                     new_version = self.automatically(self.current)
                 self.rewrite(new_version)
-            else:
-                sys.stdout.write('Bye!\n')
 
 
 setup(
