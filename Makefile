@@ -60,6 +60,11 @@ version:
 	python3 setup.py versioner
 
 
+.PHONY: minify
+minify:
+	python3 setup.py minify
+
+
 .PHONY: install
 install:
 	python3 setup.py install

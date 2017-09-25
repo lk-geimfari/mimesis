@@ -22,6 +22,9 @@ script: py.test --cov=mimesis/
 after_success:
   codecov
 
+before_deploy:
+  - python setup.py minify
+
 deploy:
   provider: pypi
   user: lk-geimfari
