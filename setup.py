@@ -9,16 +9,14 @@ from os.path import (
     getsize,
 )
 import json
-from os import path
 
 import re
-from sys import exit, stdout
 
 from distutils.core import setup
 from setuptools import Command
 from setuptools.command.test import test as TestCommand
 
-here = path.abspath(path.dirname(__file__))
+here = abspath(dirname(__file__))
 
 tests_requirements = [
     'pytest',
@@ -34,7 +32,7 @@ with open('PYPI_README.rst', 'r', encoding='utf-8') as f:
 
 about = {}
 # Get meta-data from __version__.py
-with open(path.join(here, 'mimesis', '__version__.py')) as f:
+with open(join(here, 'mimesis', '__version__.py')) as f:
     exec(f.read(), about)
 
 
@@ -158,9 +156,8 @@ class Versioner(Command):
 
     def initialize_options(self):
         self.current = about['__version__']
-        stdout.write(
-            'Previous version: \033[33m{}\033[0m.\n'.format(
-                self.current))
+        print('Previous version: '
+              '\033[33m{}\033[0m.\n'.format(self.current))
 
     def finalize_options(self):
         pass
@@ -175,8 +172,6 @@ class Versioner(Command):
         major, minor, micro = [
             int(i) for i in version.split('.')
         ]
-
-        # TODO: Refactor
 
         if 10 > micro:
             micro += 1
@@ -199,7 +194,7 @@ class Versioner(Command):
         if not version:
             version = self.current
 
-        with open(path.join(here, 'mimesis', '__version__.py'), 'r+') as f:
+        with open(join(here, 'mimesis', '__version__.py'), 'r+') as f:
             version_str = '__version__ = \'{}\''.format(version)
             regexp = r'__version__ = .*'
 
@@ -208,11 +203,10 @@ class Versioner(Command):
             f.write(meta)
             f.truncate()
 
-        stdout.write(
-            'Updated! Current version is: \033[34m{}\033[0m.\n'.format(
-                version))
+        print('Updated! Current version is: '
+              '\033[34m{}\033[0m.\n'.format(version))
 
-        exit(0)
+        exit()
 
     def run(self):
         response = input('Are you sure? (yes/no): ')
