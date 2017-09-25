@@ -22,12 +22,6 @@ script: py.test --cov=mimesis/
 after_success:
   codecov
 
-env:
-  - TRAVIS_AUTO_VERSION=true
-
-before_deploy:
-  - python setup.py versioner
-
 deploy:
   provider: pypi
   user: lk-geimfari

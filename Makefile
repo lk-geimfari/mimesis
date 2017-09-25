@@ -55,8 +55,8 @@ publish:
 	python3 setup.py sdist && twine upload dist/*
 
 
-.PHONY: versioner
-versioner:
+.PHONY: version
+version:
 	python3 setup.py versioner
 
 

@@ -1,18 +1,11 @@
-from os import (
-    environ,
-    path,
-)
+from os import path
+
 import re
 from sys import exit, stdout
 
 from distutils.core import setup
 from setuptools import Command
 from setuptools.command.test import test as TestCommand
-
-# Update __version__ automatically.
-TRAVIS_AUTO_VERSION = environ.get(
-    'TRAVIS_AUTO_VERSION',
-)
 
 here = path.abspath(path.dirname(__file__))
 
@@ -62,7 +55,7 @@ class Versioner(Command):
     def initialize_options(self):
         self.current = about['__version__']
         stdout.write(
-            'Previous version:\033[33m {}\033[0m.\n'.format(
+            'Previous version: \033[33m{}\033[0m.\n'.format(
                 self.current))
 
     def finalize_options(self):
@@ -118,19 +111,13 @@ class Versioner(Command):
         exit(0)
 
     def run(self):
-        if TRAVIS_AUTO_VERSION:
+        response = input('Are you sure? (yes/no): ')
+        if response.lower() in ('yes', 'y'):
             self.rewrite(
                 self.automatically(
                     self.current,
                 ),
             )
-        else:
-            response = input('Are you sure? (y/n): ')
-            if response.lower() == 'y':
-                new_version = input('New version: ')
-                if not new_version:
-                    new_version = self.automatically(self.current)
-                self.rewrite(new_version)
 
 
 setup(
