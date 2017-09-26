@@ -9,12 +9,16 @@ from os.path import (
     getsize,
 )
 import json
-
 import re
+from shutil import rmtree
+import sys
 
 from distutils.core import setup
 from setuptools import Command
 from setuptools.command.test import test as TestCommand
+
+VERSION_MINOR_MAX = 10
+VERSION_MICRO_MAX = 10
 
 here = abspath(dirname(__file__))
 
@@ -34,6 +38,34 @@ about = {}
 # Get meta-data from __version__.py
 with open(join(here, 'mimesis', '__version__.py')) as f:
     exec(f.read(), about)
+
+
+class BaseCommand(Command):
+    description = ''
+    user_options = []
+
+    def initialize_options(self):
+        pass
+
+    def finalize_options(self):
+        pass
+
+    def run(self):
+        pass
+
+
+class Upload(BaseCommand):
+    """Support setup.py upload."""
+
+    def run(self):
+        try:
+            rmtree(os.path.join(here, 'dist'))
+        except OSError:
+            pass
+
+        os.system('{0} setup.py sdist bdist_wheel --universal'.format(sys.executable))
+        os.system('twine upload dist/*')
+        sys.exit()
 
 
 class PyTest(TestCommand):
@@ -56,10 +88,9 @@ class PyTest(TestCommand):
         exit(errno)
 
 
-class Minimizer(Command):
+class Minimizer(BaseCommand):
     """Minify content of all json file for all locales.
     """
-    user_options = []
 
     def initialize_options(self):
         """Find all files of all locales.
@@ -81,9 +112,6 @@ class Minimizer(Command):
                             file,
                         )
                     )
-
-    def finalize_options(self):
-        pass
 
     @staticmethod
     def size_of(num):
@@ -141,26 +169,20 @@ class Minimizer(Command):
         before = self.size_of(self.before_total)
         saved = self.size_of(self.before_total - self.after_total)
 
-        print(
-            '\nTotal: '
-            '\033[92m{}\033[0m -> \033[92m{}\033[0m. '
-            'Compressed: \033[92m{}\033[0m\n'.format(
-                before, after, saved)
-        )
+        template = '\nTotal: ' \
+                   '\033[92m{}\033[0m -> \033[92m{}\033[0m. ' \
+                   'Compressed: \033[92m{}\033[0m\n'.format(before, after, saved)
+
+        print(template)
 
 
-class Versioner(Command):
+class Versioner(BaseCommand):
     """Custom command for versioning"""
-
-    user_options = []
 
     def initialize_options(self):
         self.current = about['__version__']
         print('Previous version: '
               '\033[33m{}\033[0m.\n'.format(self.current))
-
-    def finalize_options(self):
-        pass
 
     @staticmethod
     def automatically(version):
@@ -173,17 +195,17 @@ class Versioner(Command):
             int(i) for i in version.split('.')
         ]
 
-        if 10 > micro:
+        if VERSION_MICRO_MAX > micro:
             micro += 1
-        elif 10 == micro:
+        elif VERSION_MICRO_MAX == micro:
             micro = 0
             minor += 1
-        elif 10 > minor:
+        elif VERSION_MINOR_MAX > minor:
             minor += 1
-        elif 10 == minor:
+        elif VERSION_MINOR_MAX == minor:
             micro, minor = 0, 0
             major += 1
-        if 10 < minor:
+        if VERSION_MINOR_MAX < minor:
             minor, micro = 0, 0
             major += 1
 
@@ -274,5 +296,6 @@ setup(
         'test': PyTest,
         'versioner': Versioner,
         'minify': Minimizer,
+        'upload': Upload,
     },
 )
