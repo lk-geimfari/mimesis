@@ -6,12 +6,12 @@ class JSONKeyError(KeyError):
     """An exception that raised when JSON key doesn't exist"""
 
 
-class NotImplementedYet(NotImplementedError):
-    """An exception that raised when NotImplementedError"""
-
-
 class WrongArgument(KeyError):
     """An exception that raised when argument is wrong"""
+
+
+class UnexpectedGender(WrongArgument):
+    """An exceptions that raised when gender is wrong"""
 
 
 class UnsupportedAlgorithm(AttributeError):
