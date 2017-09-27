@@ -5,11 +5,12 @@ import functools
 import json
 import os.path as path
 import urllib.request as request
+from random import choice
 
-from mimesis.exceptions import UnsupportedLocale
+from mimesis.exceptions import UnexpectedGender, UnsupportedLocale
 from mimesis.settings import SUPPORTED_LOCALES
 
-__all__ = ['pull', 'download_image', 'locale_info']
+__all__ = ['pull', 'download_image', 'locale_info', 'check_gender']
 
 PATH = path.abspath(path.join(path.dirname(__file__), 'data'))
 
@@ -132,3 +133,33 @@ def download_image(url, save_path='', unverified_ctx=False):
         request.urlretrieve(url, save_path + image_name)
         return image_name
     return None
+
+
+def check_gender(gender=None):
+    """Checking of the correctness of gender.
+
+    :param gender: Gender.
+    :return: Gender.
+    """
+    f, m = ('female', 'male')
+    # When gender is None or 0, 9
+    o = choice([f, m])
+
+    options = {
+        '0': o, '9': o,
+        '1': m, '2': f,
+        'f': f, 'm': m,
+        f: f, m: m,
+    }
+
+    if gender is None:
+        return o
+
+    supported = sorted(options)
+    gender = str(gender).lower()
+
+    if gender not in supported:
+        raise UnexpectedGender(
+            'Gender must be {}.'.format(', '.join(supported)))
+
+    return options[gender]
