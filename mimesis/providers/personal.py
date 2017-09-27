@@ -8,7 +8,7 @@ from mimesis.exceptions import WrongArgument
 from mimesis.providers import BaseProvider, Code
 from mimesis.providers.cryptographic import Cryptographic
 from mimesis.settings import SURNAMES_SEPARATED_BY_GENDER
-from mimesis.utils import luhn_checksum, pull
+from mimesis.utils import check_gender, luhn_checksum, pull
 
 __all__ = ['Personal']
 
@@ -65,22 +65,20 @@ class Personal(BaseProvider):
 
         return max(a - working_start_age, 0)
 
-    def name(self, gender='female'):
+    def name(self, gender=None):
         """Get a random name.
 
-        :param gender: if 'male' then will getting male name else female name.
+        :param gender: if 'male' then will returned male name,
+        if 'female' then female name,  if None return random from ones.
         :return: Name.
         :Example:
             John.
         """
-        # TODO: Add function for checking gender.
-        try:
-            names = self.data['names'][gender]
-        except KeyError:
-            raise WrongArgument('gender must be "female" or "male"')
+        gender = check_gender(gender)
+        names = self.data['names'][gender]
         return self.random.choice(names)
 
-    def surname(self, gender='female'):
+    def surname(self, gender=None):
         """Get a random surname.
 
         :param gender: The gender of person.
@@ -88,17 +86,18 @@ class Personal(BaseProvider):
         :Example:
             Smith.
         """
+        surnames = self.data['surnames']
+
         # Separated by gender.
         if self.locale in SURNAMES_SEPARATED_BY_GENDER:
-            try:
-                return self.random.choice(self.data['surnames'][gender])
-            except KeyError:
-                raise WrongArgument('gender must be "female" or "male"')
+            gender = check_gender(gender)
+            return self.random.choice(
+                surnames[gender],
+            )
 
-        surname = self.random.choice(self.data['surnames'])
-        return surname
+        return self.random.choice(surnames)
 
-    def title(self, gender='female', title_type='typical'):
+    def title(self, gender=None, title_type='typical'):
         """Get a random title (prefix/suffix) for name.
 
         :param gender: The gender.
@@ -108,6 +107,7 @@ class Personal(BaseProvider):
             PhD.
         """
         try:
+            gender = check_gender(gender)
             titles = self.data['title'][gender][title_type]
         except KeyError:
             raise WrongArgument('Wrong value of argument.')
@@ -115,7 +115,7 @@ class Personal(BaseProvider):
         title = self.random.choice(titles)
         return title
 
-    def full_name(self, gender='female', reverse=False):
+    def full_name(self, gender=None, reverse=False):
         """Generate a random full name.
 
         :param reverse: if true: surname/name else name/surname
@@ -125,7 +125,7 @@ class Personal(BaseProvider):
         :Example:
             Johann Wolfgang.
         """
-        gender = gender.lower()
+        gender = check_gender(gender)
 
         fmt = '{1} {0}' if reverse else '{0} {1}'
         return fmt.format(
@@ -465,10 +465,10 @@ class Personal(BaseProvider):
         views = self.data['views_on']
         return self.random.choice(views)
 
-    def nationality(self, gender='female'):
+    def nationality(self, gender=None):
         """Get a random nationality.
 
-        :param gender: female or male
+        :param gender: Gender.
         :return: Nationality.
         :Example:
             Russian.
@@ -476,11 +476,14 @@ class Personal(BaseProvider):
         # Subtleties of the orthography.
         separated_locales = ['ru', 'uk', 'kk']
 
+        nationalities = self.data['nationality']
+
         if self.locale in separated_locales:
-            nations = self.data['nationality'][gender]
+            gender = check_gender(gender)
+            nations = nationalities[gender]
             return self.random.choice(nations)
 
-        return self.random.choice(self.data['nationality'])
+        return self.random.choice(nationalities)
 
     def university(self):
         """
