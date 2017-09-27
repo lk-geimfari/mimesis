@@ -10,11 +10,8 @@ from mimesis.providers import (Address, BaseProvider, Business, ClothingSizes,
 class Generic(BaseProvider):
     """A lazy initialization of locale for all classes that have locales."""
 
-    def __init__(self, locale):
-        """
-        :param locale: Current locale.
-        """
-        self.locale = locale
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self._personal = Personal
         self._address = Address
         self._datetime = Datetime
