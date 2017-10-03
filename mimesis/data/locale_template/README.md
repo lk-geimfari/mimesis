@@ -36,6 +36,8 @@ for your locale, but in no other way. You should not modify the provider object	
 
 Before Pull Request:
 
+- Rename folder `locale_template` to [your-locale-code](#you-can-grab-code-of-your-locale-from-the-table-below).
+- Add your locale to `SUPPORTED_LOCALES` in `mimesis/settings.py`.
 - Make sure that you have replaced all `["Tests""]` sections with data for your locale.
 - Make sure that you **removed** all `"__COMMENT_KEY__": "Description"` from json file. This data only for developers.
 - Format the content of json files alphabetically using [jsoneditoronline.org](http://jsoneditoronline.org)
@@ -44,11 +46,11 @@ Before Pull Request:
 - Make sure that you have added your locale code to `ISBN_GROUPS` in  `mimesis/data/int/code.py` 
 - Add yourself to list of contributors (`CONTRIBUTORS.md`).
 - Run tests and make sure that all (without exception) tests passed.
-- Rename folder `locale_template` to `your-locale-code`. 
 
 
 
-**You can grab code of your locale from the table below**:
+
+#### You can grab code of your locale from the table below:
 
 
 <table class="clsStd" summary="table">
