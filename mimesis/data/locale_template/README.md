@@ -44,6 +44,7 @@ Before Pull Request:
 - Make sure that you have added currency symbol for your locale to `CURRENCY_SYMBOLS` in `mimesis/data/int/business.py` 
 - Make sure that you have added your locale code to `ISBN_GROUPS` in  `mimesis/data/int/code.py` 
 - Run tests and make sure that all tests pass
+- Grab flag of your country from [this](https://emojipedia.org/flags/) page and add it to the table of locales in `README.md`.
 - Add yourself to (`CONTRIBUTORS.md`)
 
 
