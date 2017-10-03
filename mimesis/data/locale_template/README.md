@@ -7,7 +7,6 @@ files (`File name`) which include data related to some data providers (`Provider
 .----------------------------.
 | File name        Provider  |
 .----------------------------.
-
 ├── address.json   # Address()
 ├── business.json  # Business()
 ├── datetime.json  # Datetime()
