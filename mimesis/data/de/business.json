@@ -1,11 +1,15 @@
 {
   "company": {
 	"name": [
+	  "Agfa",
+	  "Allianz",
+	  "Axa",
+	  "Bayer",
 	  "Degussa",
 	  "Delton",
 	  "Deutsche Bahn",
 	  "Deutsche Börse",
-	  "Deutsche Postd",
+	  "Deutsche Post",
 	  "DHL",
 	  "Deutsche Telekom",
 	  "T-Mobile",
@@ -27,6 +31,7 @@
 	  "Fresenius",
 	  "Fresenius Medical Care",
 	  "Freudenberg Group",
+	  "Fleischmann",
 	  "Fuchs Petrolub",
 	  "Hama",
 	  "Hannover Re",
@@ -44,6 +49,7 @@
 	  "KSB",
 	  "KTB mechatronics",
 	  "KUKA",
+	  "Märklin",
 	  "Phoenix Contact",
 	  "PTV",
 	  "PUMA",
@@ -98,7 +104,9 @@
 		"Unternehmergesellschaft",
 		"Europäische Gesellschaft",
 		"Gesellschaft mit beschränkter Haftung & Compagnie Kommanditgesellschaft",
-		"Gesellschaft bürgerlichen Rechts"
+		"Gesellschaft bürgerlichen Rechts",
+		"Offene Handelsgesellschaft",
+		"Genossenschaft"
 	  ],
 	  "abbr": [
 		"AG",
@@ -107,7 +115,9 @@
 		"UG",
 		"SE",
 		"GmbH & Co. KG",
-		"GbR"
+		"GbR",
+		"OHG",
+		"GEN"
 	  ]
 	}
   }
