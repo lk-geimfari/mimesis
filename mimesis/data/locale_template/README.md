@@ -1,6 +1,6 @@
 ## How to add new locale
 
-This is template of structure of the locale. There are seven json 
+This is a template of the locale structure. There are seven json 
 files (`File name`) which include data related to some data providers (`Provider`):
 
 ```
@@ -16,12 +16,11 @@ files (`File name`) which include data related to some data providers (`Provider
 └── text.json      # Text()
 ```
 
-Almost all locales has similar structure, but the structure of the file may differ
-if we have supported builtins specific data providers for this locale. For example, locale `ru` has a different 
-structure of file `personal.json`, because in Russian we have patronymic which useful for this locale,
-but if we add patronymic to `Personal()` then what it will return for `en`? So, it's not our problem because similar 
-data always should be moved to builtins. It's mean that if someone want to use patronymic then he must 
-import builtin specific provider:
+Almost all locales have a similar structure, but the structure of the locale file may differ when there are any builtins specific data providers for this locale. 
+For example, locale `ru` has a different structure of `personal.json`, because in Russia there are mandatory patronymic names. 
+So, it is useful for this locale only (and a couple of other). 
+It means that if someone wants to use patronymic names then he must import builtin specific provider:
+
 
 ````python
 >>> from mimesis.builtins import RussiaSpecProvider
@@ -30,24 +29,22 @@ import builtin specific provider:
 'Васильевна'
 ````
 
-It's mean that you can add custom rows to json file if you planned to add specific data provider (`mimesis.builtins`) 
-for your locale, but in no other way. You should not modify the provider object	directly, if the data which you add is not common for all locales.
+Only if your locale uses any specific fields it could be added into json files otherwise, it is not permitted to modify the structure.
+You should not modify the provider object directly if the data which you add is not common for all locales.
 
 
 Before Pull Request:
 
-- Rename folder `locale_template` to [your-locale-code](#you-can-grab-code-of-your-locale-from-the-table-below).
-- Add your locale to `SUPPORTED_LOCALES` in `mimesis/settings.py`.
+- Rename folder `locale_template` to `your-locale-code`.
 - Make sure that you have replaced all `["Tests""]` sections with data for your locale.
-- Make sure that you **removed** all `"__COMMENT_KEY__": "Description"` from json file. This data only for developers.
+- Make sure that you have **removed** all `"__COMMENT_KEY__": "Description"` from json files. This data only for developers.
+- Add your locale to `SUPPORTED_LOCALES` in `mimesis/settings.py`.
 - Format the content of json files alphabetically using [jsoneditoronline.org](http://jsoneditoronline.org)
-- If in your locale you're use shortened address format, then add your locale code to `SHORTENED_ADDRESS_FMT` in `mimesis/data/int/address.py` .
+- If your locale uses shortened address format, then add your locale code to `SHORTENED_ADDRESS_FMT` in `mimesis/data/int/address.py` 
 - Make sure that you have added currency symbol for your locale to `CURRENCY_SYMBOLS` in `mimesis/data/int/business.py` 
 - Make sure that you have added your locale code to `ISBN_GROUPS` in  `mimesis/data/int/code.py` 
-- Add yourself to list of contributors (`CONTRIBUTORS.md`).
-- Run tests and make sure that all (without exception) tests passed.
-
-
+- Run tests and make sure that all tests pass
+- Add yourself to (`CONTRIBUTORS.md`)
 
 
 #### You can grab code of your locale from the table below:
