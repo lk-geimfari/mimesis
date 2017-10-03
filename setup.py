@@ -273,6 +273,12 @@ setup(
             'data/*/*',
         ],
     },
+    exclude_package_data={
+        'mimesis': [
+            # It's for development.
+            'data/locale_template/*'
+        ],
+    },
     data_files=[
         ('', ['LICENSE',
               'PYPI_README.rst',
