@@ -304,7 +304,22 @@ Result:
   ...
 ]
 ```
+## Constants
+Constants are included in Mimesis when passing in parameters to different methods. The constants included in Mimesis are gender, locales and platforms. Here are some examples of the constants:
+```python
+>>>import mimesis
+>>>person = mimesis.Personal('en')
+>>>person.full_name(gender='female')
+Izetta Steele
 
+>>>person = mimesis.Personal('ja')
+>>>person.full_name(gender='male')
+みつき 菊名
+
+>>>mimesis.Text('en).sentence()
+The Galactic Empire is nearing completion of the Death Star, a space station with the power to destroy entire planets.
+
+```
 
 ## Decorators
 If your locale belongs to the family of Cyrillic languages, but you need latinized locale-specific data, then you can use special decorator which help you romanize your data.
