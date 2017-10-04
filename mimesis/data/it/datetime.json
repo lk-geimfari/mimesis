@@ -2,7 +2,7 @@
   "day": {
     "abbr": [
       "Do.",
-      "lun.",
+      "Lun.",
       "Mar.",
       "Mer.",
       "Gio.",
@@ -25,14 +25,14 @@
   },
   "month": {
     "abbr": [
-      "Genn.",
-      "Febb.",
+      "Gen.",
+      "Feb.",
       "Mar.",
       "Apr.",
-      "Magg.",
-      "Giugno",
-      "Luglio",
-      "Ag.",
+      "Mag.",
+      "Giu.",
+      "Lug.",
+      "Ago.",
       "Sep.",
       "Ott.",
       "Nov.",
@@ -57,9 +57,9 @@
     "Una volta",
     "Mai",
     "Raramente",
-    "Di frequente",
+    "Spesso",
     "Quotidiano",
-    "settimanalmente",
+    "Settimanalmente",
     "Mensile",
     "Annuale"
   ]
