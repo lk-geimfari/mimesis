@@ -16,11 +16,5 @@
 
 - Do not write bad code!
 
-----
-
-When you add new locale make sure, that you:
-- Add your locale (ISO 639-1) to `SUPPORTED_LOCALES` in `mimesis/settings.py`.
-- Add symbol of currency of your locale to `CURRENCY_SYMBOLS` in `mimesis/data/int/business.py`.
-- Add number of ISBN group of your locale to `ISBN_GROUPS` in `mimesis/data/int/code.py`.
-- If it's sub locale (like `en-gb`) that you inherit data from base locale and do not duplicate data from base locale.
+- Use `data/locale_template` if you want to add new locale.
 
