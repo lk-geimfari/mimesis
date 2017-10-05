@@ -333,6 +333,8 @@ Result:
       ...
     ]
 
+.. note:: ``Schema()`` is an experimental feature. Be careful when using it.
+
 Which type of data do you usually need in your work? What is the library
 missing? We will be very happy to hear your suggestions and comments.
 

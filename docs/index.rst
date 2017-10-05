@@ -15,7 +15,7 @@ Mimesis
 .. |Python| image:: https://img.shields.io/badge/python-3.3%5E-brightgreen.svg
    :target: https://badge.fury.io/py/mimesis
 
-**Mimesis** is a fast and easy to use Python library for generating dummy data for a variety of purposes.  This data can be particularly useful during software development and testing.  For example, it could be used to populate a testing database for a web application with user information such as email addresses, usernames, first names, last names, etc. There are over eighteen different `data providers <https://github.com/lk-geimfari/mimesis/blob/master/PROVIDERS.md>`_ available, which can produce data related to food, people, computer hardware, transportation, addresses, and more. Mimesis does not require any modules that are not in the Python standard library.
+**Mimesis** is a fast and easy to use Python library for generating dummy data for a variety of purposes.  This data can be particularly useful during software development and testing.  For example, it could be used to populate a testing database for a web application with user information such as email addresses, usernames, first names, last names, etc. There are over eighteen different `data providers <http://mimesis.readthedocs.io/en/latest/providers.html>`_ available, which can produce data related to food, people, computer hardware, transportation, addresses, and more. Mimesis does not require any modules that are not in the Python standard library.
 
 Advantages
 -------------
@@ -23,11 +23,11 @@ Advantages
 Mimesis offers a number of advantages over other similar libraries, such
 as Faker:
 
--  Performance. Mimesis is significantly `faster`_ than other similar
+-  *Performance*. Mimesis is significantly `faster`_ than other similar
    libraries.
--  Completeness. Mimesis strives to provide many detailed providers that
+-  *Completeness*. Mimesis strives to provide many detailed providers that
    offer a variety of data generators.
--  Simplicity. Mimesis does not require any modules other than the
+-  *Simplicity*. Mimesis does not require any modules other than the
    Python standard library.
 
 See `here <https://gist.github.com/lk-geimfari/461ce92fd32379d7b73c9e12164a9154>`_ for an example of how we compare performance with other
@@ -107,7 +107,7 @@ Usage
     >>> de.color()
     'Türkis'
 
-When you only need to generate data for a single locale, use the `Generic` provider, and you can access all Mimesis
+When you only need to generate data for a single locale, use the ``Generic()`` provider, and you can access all Mimesis
 providers from one object.
 
 .. code-block:: python
@@ -154,7 +154,7 @@ Custom Data Providers
 ----------------
 
 You also can add custom provider to ``Generic()``, using
-``.add_provider()`` method:
+``add_provider()`` method:
 
 .. code:: python
 
@@ -193,14 +193,15 @@ Decorators
 
 If your locale belongs to the family of Cyrillic languages, but you need
 latinized locale-specific data, then you can use special decorator which
-help you romanize your data. At this moment it’s works only for Russian
-and Ukrainian:
+help you romanize your data. At this moment it’s works only for Russian (``ru``),
+Ukrainian (``uk``) and Kazakh (``kk``):
 
 .. code:: python
 
     >>> from mimesis.decorators import romanized
+	>>> import mimesis.constants as c
 
-    >>> @romanized('ru')
+    >>> @romanized(c.RU)
     ... def russian_name():
     ...     return 'Вероника Денисова'
 
