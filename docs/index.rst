@@ -23,11 +23,11 @@ Advantages
 Mimesis offers a number of advantages over other similar libraries, such
 as Faker:
 
--  *Performance*. Mimesis is significantly `faster`_ than other similar
+-  Performance. Mimesis is significantly `faster`_ than other similar
    libraries.
--  *Completeness*. Mimesis strives to provide many detailed providers that
+-  Completeness. Mimesis strives to provide many detailed providers that
    offer a variety of data generators.
--  *Simplicity*. Mimesis does not require any modules other than the
+-  Simplicity. Mimesis does not require any modules other than the
    Python standard library.
 
 See `here <https://gist.github.com/lk-geimfari/461ce92fd32379d7b73c9e12164a9154>`_ for an example of how we compare performance with other
@@ -186,6 +186,32 @@ or multiple custom providers using method ``add_providers()``:
 .. code:: python
 
     >>> generic.add_providers(SomeProvider, Another)
+
+
+Constants
+---------
+
+The constraints will be useful to you, because they allows you to avoid entering values,
+and this mean that they help to avoid typos.
+
+.. code:: python
+
+    >>> from mimesis import Personal
+    >>> import mimesis.constants as c
+
+    >>> pr = Personal(c.EN)
+    # typo in parameter gender, which should be has a value "female"
+    >>> female_names = [pr.full_name(gender='emale') for _ in range(5)]
+
+    # An exception will be raised:
+    # UnexpectedGender: 'Gender must be 0, 1, 2, 9, f, female, m, male.'
+
+    # The constants helps to avoid similar issues.
+    >>> female_names = [pr.full_name(c.FEMALE) for _ in range(5)]
+    ['Nobuko Campos', 'Casimira Ballard', 'Lena Brady', 'Victoria Carr', 'Luetta Beard']
+
+
+That's all that constants are for.
 
 
 Decorators
