@@ -2,20 +2,18 @@ import json
 
 from mimesis.decorators import type_to
 from mimesis.exceptions import UndefinedSchema
-from mimesis.providers import Generic
+from mimesis.providers import BaseProvider, Generic
 
 
-class Schema(object):
+class Schema(BaseProvider):
     """Class which helps generate data by schema using any
     providers which supported by mimesis.
     """
-    def __init__(self, locale=None):
-        self.schema = {}
-        if locale is None:
-            self.locale = 'en'
-        else:
-            self.locale = locale
 
+    schema = {}
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.generic = Generic(self.locale)
 
     def __generate(self, schema):
