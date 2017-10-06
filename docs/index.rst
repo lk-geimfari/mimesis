@@ -191,8 +191,7 @@ or multiple custom providers using method ``add_providers()``:
 Constants
 ---------
 
-The constraints will be useful to you, because they allows you to avoid entering values,
-and this mean that they help to avoid typos.
+The constraints will be useful to you, because they allows you to avoid entering parameters manually, and this mean that they help to avoid typos.
 
 .. code:: python
 
@@ -201,11 +200,9 @@ and this mean that they help to avoid typos.
 
     >>> p = Personal(c.EN)
     # Typo in parameter gender, which should be has a value "female"
-    >>> female_names = [p.full_name(gender='emale') for _ in range(3)]
-	 
+    >>> f_names = [p.full_name(gender='emale') for _ in range(3)] 
+    
     # An exception UnexpectedGender will be raised.
-    # ...
-    # ...
  
 
 The constants helps to avoid similar issues:
@@ -213,7 +210,7 @@ The constants helps to avoid similar issues:
 .. code:: python
 
     >>> # Use c.FEMALE instead string "female" 
-    >>> female_names = [p.full_name(c.FEMALE) for _ in range(3)]
+    >>> f_names = [p.full_name(c.FEMALE) for _ in range(3)]
     ['Nobuko Campos', 'Casimira Ballard', 'Lena Brady']
 
 
