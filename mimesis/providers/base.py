@@ -15,7 +15,7 @@ class BaseProvider(object):
         if not locale:
             self.locale = DEFAULT_LOCALE
         else:
-            self.locale = locale
+            self.locale = locale.lower()
 
         self.seed = seed
         self.random = Random()
