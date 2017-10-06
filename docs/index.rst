@@ -207,8 +207,8 @@ and this mean that they help to avoid typos.
     # UnexpectedGender: 'Gender must be 0, 1, 2, 9, f, female, m, male.'
 
     # The constants helps to avoid similar issues.
-    >>> female_names = [pr.full_name(c.FEMALE) for _ in range(5)]
-    ['Nobuko Campos', 'Casimira Ballard', 'Lena Brady', 'Victoria Carr', 'Luetta Beard']
+    >>> female_names = [pr.full_name(c.FEMALE) for _ in range(3)]
+    ['Nobuko Campos', 'Casimira Ballard', 'Lena Brady']
 
 
 That's all that constants are for.
@@ -225,7 +225,7 @@ Ukrainian (``uk``) and Kazakh (``kk``):
 .. code:: python
 
     >>> from mimesis.decorators import romanized
-	>>> import mimesis.constants as c
+    >>> import mimesis.constants as c
 
     >>> @romanized(c.RU)
     ... def russian_name():
