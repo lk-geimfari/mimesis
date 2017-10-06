@@ -1,0 +1,71 @@
+{
+  "academic_degree": [
+	"Test"
+  ],
+  "favorite_movie": [
+	"Test"
+  ],
+  "gender": [
+	"Test"
+  ],
+  "language": [
+	"Test"
+  ],
+  "names": {
+	"female": [
+	  "Test"
+	],
+	"male": [
+	  "Test"
+	]
+  },
+  "__COMMENT_NATIONALITY__": "Optional -> nationality: {female: [], male: []}",
+  "nationality": [
+	"Test"
+  ],
+  "occupation": [
+	"Test"
+  ],
+  "political_views": [
+	"Test"
+  ],
+  "sexuality": [
+	"Test"
+  ],
+  "__COMMENT_SURNAMES__": "Optional -> surnames: {female: [], male: []}",
+  "surnames": [
+	"Test"
+  ],
+  "title": {
+	"female": {
+	  "typical": [
+		"Test"
+	  ],
+	  "academic": [
+		"Test"
+	  ]
+	},
+	"male": {
+	  "typical": [
+		"Test"
+	  ],
+	  "academic": [
+		"Test"
+	  ]
+	}
+  },
+  "university": [
+	"Test"
+  ],
+  "views_on": [
+	"Test"
+  ],
+  "worldview": [
+	"Test"
+  ],
+  "telephone_fmt": [
+	"###-###-####",
+	"(###) ###-####",
+	"1-###-###-####"
+  ]
+}

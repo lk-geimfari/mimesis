@@ -15,7 +15,7 @@ Mimesis
 .. |Python| image:: https://img.shields.io/badge/python-3.3%5E-brightgreen.svg
    :target: https://badge.fury.io/py/mimesis
 
-**Mimesis** is a fast and easy to use Python library for generating dummy data for a variety of purposes.  This data can be particularly useful during software development and testing.  For example, it could be used to populate a testing database for a web application with user information such as email addresses, usernames, first names, last names, etc. There are over eighteen different `data providers <https://github.com/lk-geimfari/mimesis/blob/master/PROVIDERS.md>`_ available, which can produce data related to food, people, computer hardware, transportation, addresses, and more. Mimesis does not require any modules that are not in the Python standard library.
+**Mimesis** is a fast and easy to use Python library for generating dummy data for a variety of purposes.  This data can be particularly useful during software development and testing.  For example, it could be used to populate a testing database for a web application with user information such as email addresses, usernames, first names, last names, etc. There are over eighteen different `data providers <http://mimesis.readthedocs.io/en/latest/providers.html>`_ available, which can produce data related to food, people, computer hardware, transportation, addresses, and more. Mimesis does not require any modules that are not in the Python standard library.
 
 Advantages
 -------------
@@ -107,7 +107,7 @@ Usage
     >>> de.color()
     'Türkis'
 
-When you only need to generate data for a single locale, use the `Generic` provider, and you can access all Mimesis
+When you only need to generate data for a single locale, use the ``Generic()`` provider, and you can access all Mimesis
 providers from one object.
 
 .. code-block:: python
@@ -154,7 +154,7 @@ Custom Data Providers
 ----------------
 
 You also can add custom provider to ``Generic()``, using
-``.add_provider()`` method:
+``add_provider()`` method:
 
 .. code:: python
 
@@ -188,19 +188,49 @@ or multiple custom providers using method ``add_providers()``:
     >>> generic.add_providers(SomeProvider, Another)
 
 
+Constants
+---------
+
+The constraints will be useful to you, because they allows you to avoid entering parameters manually, and this mean that they help to avoid typos.
+
+.. code:: python
+
+    >>> from mimesis import Personal
+    >>> import mimesis.constants as c
+
+    >>> p = Personal(c.EN)
+    # Typo in parameter gender, which should be has a value "female"
+    >>> f_names = [p.full_name(gender='emale') for _ in range(3)] 
+    
+    # An exception UnexpectedGender will be raised.
+ 
+
+The constants helps to avoid similar issues:
+
+.. code:: python
+
+    >>> # Use c.FEMALE instead string "female" 
+    >>> f_names = [p.full_name(c.FEMALE) for _ in range(3)]
+    ['Nobuko Campos', 'Casimira Ballard', 'Lena Brady']
+
+
+That's all that constants are for.
+
+
 Decorators
 ----------
 
 If your locale belongs to the family of Cyrillic languages, but you need
 latinized locale-specific data, then you can use special decorator which
-help you romanize your data. At this moment it’s works only for Russian
-and Ukrainian:
+help you romanize your data. At this moment it’s works only for Russian (``ru``),
+Ukrainian (``uk``) and Kazakh (``kk``):
 
 .. code:: python
 
     >>> from mimesis.decorators import romanized
+    >>> import mimesis.constants as c
 
-    >>> @romanized('ru')
+    >>> @romanized(c.RU)
     ... def russian_name():
     ...     return 'Вероника Денисова'
 
