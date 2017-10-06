@@ -200,20 +200,22 @@ and this mean that they help to avoid typos.
     >>> import mimesis.constants as c
 
     >>> p = Personal(c.EN)
-    # typo in parameter gender, which should be has a value "female"
+    # Typo in parameter gender, which should be has a value "female"
     >>> female_names = [p.full_name(gender='emale') for _ in range(3)]
 	 
-	 # An exception UnexpectedGender will be raised.
-	 # ...
-	 # ...
+    # An exception UnexpectedGender will be raised.
+    # ...
+    # ...
  
 
-The constants helps to avoid similar issues.
+The constants helps to avoid similar issues:
 
 .. code:: python
-    >>> # We have use c.FEMALE instead string "female" 
+
+    >>> # Use c.FEMALE instead string "female" 
     >>> female_names = [p.full_name(c.FEMALE) for _ in range(3)]
     ['Nobuko Campos', 'Casimira Ballard', 'Lena Brady']
+
 
 That's all that constants are for.
 
