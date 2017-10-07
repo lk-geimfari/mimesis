@@ -4,12 +4,49 @@ API Reference
 
 This part of the documentation covers all the interfaces of *Mimesis*.
 
+
+Builtins
+========
+
+USASpecProvider
+---------------
+
+.. autoclass:: mimesis.builtins.USASpecProvider
+   :members:
+   :special-members: __init__
+
+
+JapanSpecProvider
+-----------------
+
+.. autoclass:: mimesis.builtins.JapanSpecProvider
+   :members:
+   :special-members: __init__
+
+
+BrazilSpecProvider
+------------------
+
+.. autoclass:: mimesis.builtins.BrazilSpecProvider
+   :members:
+   :special-members: __init__
+
+
+RussiaSpecProvider
+------------------
+
+.. autoclass:: mimesis.builtins.RussiaSpecProvider
+   :members:
+   :special-members: __init__
+
+
 Generic
 =======
 
 .. autoclass:: mimesis.Generic
    :members:
    :special-members: __init__
+
 
 Providers
 =========
