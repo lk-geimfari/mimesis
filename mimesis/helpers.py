@@ -6,7 +6,7 @@ class Random(random.Random):
     """Custom Random() class for the possibility of extending."""
 
     def __init__(self):
-        super().__init__(self)
+        pass
 
     def randints(self, amount=None, a=1, b=100):
         """Generate list of random integers.
