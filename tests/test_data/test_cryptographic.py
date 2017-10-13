@@ -37,3 +37,10 @@ def test_token(crypto):
     # Each byte converted to two hex digits.
     assert len(crypto.token(entropy=16)) == 32
     assert isinstance(crypto.token(), str)
+
+
+def test_salt(crypto):
+    result = crypto.salt()
+
+    assert result is not None
+    assert len(result) == 32
