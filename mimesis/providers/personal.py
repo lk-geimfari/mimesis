@@ -474,7 +474,7 @@ class Personal(BaseProvider):
             Russian.
         """
         # Subtleties of the orthography.
-        separated_locales = ['ru', 'uk', 'kk']
+        separated_locales = ['cs', 'ru', 'uk', 'kk']
 
         nationalities = self.data['nationality']
 
