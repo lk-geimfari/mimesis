@@ -1,7 +1,7 @@
 import pytest
 
 from mimesis.builtins import RussiaSpecProvider
-from mimesis.exceptions import JSONKeyError
+from mimesis.exceptions import UnexpectedGender
 
 
 @pytest.fixture
@@ -45,7 +45,7 @@ def test_patronymic(russia, gender):
     assert patronymic(gender=gender) is not None
     assert len(patronymic(gender=gender)) >= 4
 
-    with pytest.raises(JSONKeyError):
+    with pytest.raises(UnexpectedGender):
         patronymic(gender='nil')
 
 

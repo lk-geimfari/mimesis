@@ -28,5 +28,8 @@ __all__ = [
     'Text',
     'Transport',
     'UnitSystem',
+    'Cryptographic',
+
+    # Has all:
     'Generic',
 ]

@@ -1,32 +1,31 @@
-from functools import wraps
+import functools
 from string import (
     ascii_letters as letters,
     digits,
     punctuation,
 )
 
-from mimesis.data import COMMON_LETTERS, ROMANIZATION_DICT
+from mimesis import data
 from mimesis.exceptions import UnsupportedLocale
 
 
-def romanized(locale):
+def romanized(locale=None):
+    """Romanization of the Cyrillic alphabet (transliterating the Cyrillic language
+    from the Cyrillic script into the Latin alphabet).
+
+    .. note:: At this moment it's work only for `ru`, `uk`, `kk`.
+
+    :param locale: Function.
+    :return: Latinized text.
+    """
+
     def romanized_deco(func):
-        """Cyrillic letter to latin converter. Romanization of the Cyrillic
-         alphabet is the process of transliterating the Cyrillic language from
-         the Cyrillic script into the Latin alphabet.
-
-        .. note:: At this moment it's work only for `ru`, `uk`, `kk`.
-
-        :param func: Function.
-        :return: Latinized text.
-        """
-
-        @wraps(func)
+        @functools.wraps(func)
         def wrapper(*args, **kwargs):
             try:
-                alphabet = ROMANIZATION_DICT[locale]
+                alphabet = data.ROMANIZATION_DICT[locale]
                 # Add common cyrillic common letters
-                alphabet.update(COMMON_LETTERS)
+                alphabet.update(data.COMMON_LETTERS)
                 # String can contain ascii symbols, digits and
                 # punctuation symbols.
                 alphabet.update({s: s for s in
@@ -45,7 +44,8 @@ def romanized(locale):
 
 
 def type_to(new_type, check_len=False):
-    """Convert result of function to different type.
+    """Convert result of function to different type. This is
+    internal function.
 
     :param new_type: New type.
     :param check_len: Check length of object.
@@ -53,7 +53,7 @@ def type_to(new_type, check_len=False):
     """
 
     def inner(func):
-        @wraps(func)
+        @functools.wraps(func)
         def wrapper(*args, **kwargs):
             result = func(*args, **kwargs)
             result = new_type(result)

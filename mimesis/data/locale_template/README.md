@@ -8,6 +8,7 @@ files (`File name`) which include data related to some data providers (`Provider
 | File name        Provider  |
 .----------------------------.
 ├── address.json   # Address()
+├── builtin.json   # YourSpecProvider()
 ├── business.json  # Business()
 ├── datetime.json  # Datetime()
 ├── food.json      # Food()
@@ -21,7 +22,6 @@ For example, locale `ru` has a different structure of `personal.json`, because i
 So, it is useful for this locale only (and a couple of other). 
 It means that if someone wants to use patronymic names then he must import builtin specific provider:
 
-
 ````python
 >>> from mimesis.builtins import RussiaSpecProvider
 >>> ru = RussiaSpecProvider()
@@ -32,6 +32,7 @@ It means that if someone wants to use patronymic names then he must import built
 Only if your locale uses any specific fields it could be added into json files otherwise, it is not permitted to modify the structure.
 You should not modify the provider object directly if the data which you add is not common for all locales.
 
+If you want to create `YourCountrySpecProvider()`, then you should add all related data to the file `locale/builtin.json`.
 
 Before Pull Request:
 

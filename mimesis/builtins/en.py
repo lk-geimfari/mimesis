@@ -1,19 +1,13 @@
-from random import choice, randint
-
-from mimesis.providers.code import Code
-
-# Internal
-_custom_code = Code().custom_code
+from mimesis.builtins.base import BaseSpecProvider
 
 
-class USASpecProvider(object):
+class USASpecProvider(BaseSpecProvider):
     """Class that provides special data for en"""
 
     class Meta:
         name = 'usa_provider'
 
-    @staticmethod
-    def tracking_number(service='usps'):
+    def tracking_number(self, service='usps'):
         """Generate random tracking number for USPS, FedEx and UPS.
 
         :param service: Post service.
@@ -37,11 +31,10 @@ class USASpecProvider(object):
                 '1Z@####@##########',
             ),
         }
-        mask = choice(services[service])
-        return _custom_code(mask=mask)
+        mask = self.random.choice(services[service])
+        return self.code(mask=mask)
 
-    @staticmethod
-    def ssn():
+    def ssn(self):
         """Generate a random, but valid Social Security Number.
 
         :returns: Random SSN
@@ -49,15 +42,17 @@ class USASpecProvider(object):
             569-66-5801
         """
         # Valid SSNs exclude 000, 666, and 900-999 in the area group
-        area = randint(1, 899)
+        area = self.random.randint(1, 899)
         if area == 666:
             area = 665
 
         return '{:03}-{:02}-{:04}'.format(
-            area, randint(1, 99), randint(1, 9999))
+            area,
+            self.random.randint(1, 99),
+            self.random.randint(1, 9999),
+        )
 
-    @staticmethod
-    def personality(category='mbti'):
+    def personality(self, category='mbti'):
         """Generate a type of personality.
 
         :param category: Category.
@@ -71,6 +66,6 @@ class USASpecProvider(object):
                  'ESTJ', 'ESFJ', 'ENFJ', 'ENTJ')
 
         if category.lower() == 'rheti':
-            return randint(1, 10)
+            return self.random.randint(1, 10)
 
-        return choice(mbtis)
+        return self.random.choice(mbtis)
