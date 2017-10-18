@@ -328,5 +328,3 @@ Your contributions are always welcome! Please take a look at the [contribution](
 
 ## License
 Mimesis is licensed under the MIT License. See [LICENSE](https://github.com/lk-geimfari/mimesis/blob/master/LICENSE) for more information.
-
-<a target='_blank' rel='nofollow' href='https://app.codesponsor.io/link/GbNtgVQ2Ascbe9pLJsEr8cC5/lk-geimfari/mimesis'></a>
