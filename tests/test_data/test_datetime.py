@@ -41,10 +41,15 @@ def test_date(dt):
     result = datetime.datetime.strptime(result, '%m/%d/%Y')
     assert result.year == 1999  # check range was applied correctly
 
+    date = dt.date(start=2018, end=2018)
+    result_fmt = datetime.datetime.strptime(date, dt.data['formats']['date'])
+    assert result_fmt.year == 2018
+
 
 def test_time(dt):
     default = dt.time()
     default = datetime.datetime.strptime(default, dt.data['formats']['time'])
+
     assert isinstance(default, datetime.datetime)
 
     result = dt.time(fmt='%H:%M')
