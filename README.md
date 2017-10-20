@@ -35,7 +35,9 @@ To install mimesis, simply:
 
 Also you can install it manually:
 ```zsh
-(env) ➜  python3 setup.py install
+(env) ➜ python3 setup.py install
+# or
+(env) ➜ make install
 ```
 
 ## Basic Usage
