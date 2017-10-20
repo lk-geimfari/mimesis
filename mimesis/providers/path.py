@@ -41,7 +41,7 @@ class Path(BaseProvider):
                 home = PLATFORMS[platform]['home']
                 return home
 
-    def user(self, gender='female'):
+    def user(self):
         """Generate a random user.
 
         :return: Path to user.
