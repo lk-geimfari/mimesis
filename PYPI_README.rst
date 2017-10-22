@@ -15,7 +15,7 @@
 .. image:: https://badge.fury.io/py/mimesis.svg
     :target: https://badge.fury.io/py/mimesis
 
-.. image:: https://img.shields.io/badge/python-v3.3%2C%20v3.4%2C%20v3.5%2C%20v3.6-brightgreen.svg
+.. image:: https://img.shields.io/badge/python-3.5%2C%203.6%5E-brightgreen.svg
     :target: https://github.com/lk-geimfari/mimesis/
 
 

@@ -10,7 +10,7 @@
 [![Build status on Windows](https://ci.appveyor.com/api/projects/status/chj8huslvn6vde18?svg=true)](https://ci.appveyor.com/project/lk-geimfari/mimesis)
 [![codecov](https://codecov.io/gh/lk-geimfari/mimesis/branch/master/graph/badge.svg)](https://codecov.io/gh/lk-geimfari/mimesis)
 [![PyPI version](https://badge.fury.io/py/mimesis.svg)](https://badge.fury.io/py/mimesis)
-[![Python](https://img.shields.io/badge/python-3.3%5E-brightgreen.svg)](https://badge.fury.io/py/mimesis)
+[![Python](https://img.shields.io/badge/python-3.5%2C%203.6%5E-brightgreen.svg)](https://badge.fury.io/py/mimesis)
 
 ## Advantages
 
