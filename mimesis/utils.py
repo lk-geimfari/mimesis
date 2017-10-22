@@ -8,8 +8,12 @@ import urllib.request as request
 from typing import Union
 from random import choice
 
-from mimesis.exceptions import UnexpectedGender, UnsupportedLocale
-from mimesis.settings import SUPPORTED_LOCALES
+from mimesis.exceptions import (
+    UnexpectedGender,
+    UnsupportedLocale,
+)
+import mimesis.settings as settings
+from mimesis import type
 
 __all__ = ['pull', 'download_image', 'locale_info', 'check_gender']
 
@@ -24,11 +28,12 @@ def locale_info(locale: str) -> str:
     :returns: Locale name.
     """
     locale = locale.lower()
+    supported = settings.SUPPORTED_LOCALES
 
-    if locale not in SUPPORTED_LOCALES:
+    if locale not in supported:
         raise UnsupportedLocale('Locale %s is not supported' % locale)
 
-    return SUPPORTED_LOCALES[locale]['name']
+    return supported[locale]['name']
 
 
 def luhn_checksum(num: str) -> str:
@@ -46,7 +51,7 @@ def luhn_checksum(num: str) -> str:
     return str(check * 9 % 10)
 
 
-def update_dict(initial: dict, other: collections.Mapping) -> dict:
+def update_dict(initial: type.JSON, other: type.Mapping) -> type.JSON:
     """Recursively update a dictionary.
 
     .. note:: update_dict - is internal function of `mimesis`.
@@ -65,7 +70,7 @@ def update_dict(initial: dict, other: collections.Mapping) -> dict:
 
 
 @functools.lru_cache(maxsize=None)
-def pull(file: str, locale: str = 'en') -> Union[dict, list]:
+def pull(file: str, locale: str = 'en') -> type.JSON:
     """Open json file file and get content from file and memorize result using
      lru_cache.
 
@@ -86,7 +91,7 @@ def pull(file: str, locale: str = 'en') -> Union[dict, list]:
         'Mon.'
     """
 
-    def get_data(locale_name: str) -> Union[dict, list]:
+    def get_data(locale_name: str) -> type.JSON:
         """Pull JSON data from file.
 
         :param locale_name: Name of locale to pull.
@@ -99,7 +104,7 @@ def pull(file: str, locale: str = 'en') -> Union[dict, list]:
 
     locale = locale.lower()
 
-    if locale not in SUPPORTED_LOCALES:
+    if locale not in settings.SUPPORTED_LOCALES:
         raise UnsupportedLocale('Locale %s is not supported' % locale)
 
     master_locale = locale.split('-')[0]
@@ -137,7 +142,7 @@ def download_image(url: str, save_path: str = '',
     return None
 
 
-def check_gender(gender: Union[str, int] = None) -> str:
+def check_gender(gender: type.Gender = 0) -> str:
     """Checking of the correctness of gender.
 
     :param gender: Gender.
