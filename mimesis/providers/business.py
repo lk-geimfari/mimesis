@@ -13,7 +13,7 @@ class Business(BaseProvider):
         super().__init__(*args, **kwargs)
         self.data = pull('business.json', self.locale)
 
-    def company_type(self, abbr=False):
+    def company_type(self, abbr: bool=False) -> str:
         """Get a random type of business entity.
 
         :param abbr: If True then return abbreviated company type.
@@ -25,7 +25,7 @@ class Business(BaseProvider):
         company_type = self.data['company']['type'][key]
         return self.random.choice(company_type)
 
-    def company(self):
+    def company(self) -> str:
         """Get a random company name.
 
         :return: Company name.
@@ -35,7 +35,7 @@ class Business(BaseProvider):
         companies = self.data['company']['name']
         return self.random.choice(companies)
 
-    def copyright(self):
+    def copyright(self) -> str:
         """Generate a random copyright.
 
         :return: Dummy copyright of company.
@@ -49,7 +49,7 @@ class Business(BaseProvider):
             ),
         )
 
-    def currency_iso(self):
+    def currency_iso(self) -> str:
         """Get a currency code. ISO 4217 format.
 
         :return: Currency code.
@@ -58,7 +58,7 @@ class Business(BaseProvider):
         """
         return self.random.choice(CURRENCIES)
 
-    def price(self, minimum=10.00, maximum=1000.00):
+    def price(self, minimum: int=10.00, maximum: int=1000.00) -> str:
         """Generate a random price.
 
         :param minimum: Max value of price.

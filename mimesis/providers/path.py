@@ -8,7 +8,7 @@ from mimesis.constants.platforms import PLATFORMS
 class Path(BaseProvider):
     """Class that provides methods and property for generate paths."""
 
-    def __init__(self, platform=sys.platform, *args, **kwargs):
+    def __init__(self, platform: str=sys.platform, *args, **kwargs):
         """
         :param platform:
             Required platform type ('linux2', 'darwin', 'win32', 'win64').
@@ -17,7 +17,7 @@ class Path(BaseProvider):
         super().__init__(*args, **kwargs)
         self.platform = platform
 
-    def root(self):
+    def root(self) -> str:
         """Generate a root dir path.
 
         :return: Root dir.
@@ -29,7 +29,7 @@ class Path(BaseProvider):
                 root = PLATFORMS[platform]['root']
                 return root
 
-    def home(self):
+    def home(self) -> str:
         """Generate a home path.
 
         :return: Home path.
@@ -41,7 +41,7 @@ class Path(BaseProvider):
                 home = PLATFORMS[platform]['home']
                 return home
 
-    def user(self):
+    def user(self) -> str:
         """Generate a random user.
 
         :return: Path to user.
@@ -53,7 +53,7 @@ class Path(BaseProvider):
             self.platform == 'win32' else user.lower()
         return self.home() + user
 
-    def users_folder(self):
+    def users_folder(self) -> str:
         """Generate a random path to user's folders.
 
         :return: Path.
@@ -68,7 +68,7 @@ class Path(BaseProvider):
                 users_folder = (user + '{}' + folder).format(path_separator)
                 return users_folder
 
-    def dev_dir(self):
+    def dev_dir(self) -> str:
         """Generate a random path to development directory.
 
         :return: Path.
@@ -86,7 +86,7 @@ class Path(BaseProvider):
                 ).format(path_separator, path_separator)
                 return dev_dir
 
-    def project_dir(self):
+    def project_dir(self) -> str:
         """Generate a random path to project directory.
 
         :return: Path to project.
