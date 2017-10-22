@@ -254,11 +254,10 @@ class Personal(BaseProvider):
                         for _ in range(33)])
         return fmt
 
-    def cvv(self):
+    def cvv(self) -> int:
         """Generate a random card verification value (CVV).
 
         :return: CVV code.
-        :rtype: int
         :Example:
             324
         """
@@ -295,13 +294,12 @@ class Personal(BaseProvider):
         card = ' '.join(regex.search(number + luhn_checksum(number)).groups())
         return card
 
-    def credit_card_expiration_date(self, minimum=16, maximum=25):
+    def credit_card_expiration_date(self, minimum=16, maximum=25) -> str:
         """Generate a random expiration date for credit card.
 
         :param minimum: Date of issue.
         :param maximum: Maximum of expiration_date.
         :return: Expiration date of credit card.
-        :rtype: str
         :Example:
             03/19.
         """
@@ -346,7 +344,7 @@ class Personal(BaseProvider):
 
         return url.format(username)
 
-    def gender(self, iso5218=False, symbol=False):
+    def gender(self, iso5218=False, symbol=False) -> str:
         """Get a random title of gender, code for the representation
         of human sexes is an international standard that defines a
         representation of human sexes through a language-neutral single-digit
@@ -357,7 +355,6 @@ class Personal(BaseProvider):
             standard.
         :param symbol: Symbol of gender.
         :return: Title of gender.
-        :rtype: str
         :Example:
             Male
         """

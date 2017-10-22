@@ -73,12 +73,11 @@ class Numbers(BaseProvider):
         num = self.random.randint(int(minimum), int(maximum))
         return num
 
-    def rating(self, maximum=5.0):
+    def rating(self, maximum=5.0) -> float:
         """Generate random rating for something.
 
         :param maximum: Minimum value (default is 5.0).
         :return: Rating.
-        :rtype: float
         :Example:
             4.7
         """

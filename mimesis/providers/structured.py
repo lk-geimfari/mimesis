@@ -17,11 +17,10 @@ class Structured(BaseProvider):
         self.internet = Internet()
         self.text = Text()
 
-    def css(self):
+    def css(self) -> str:
         """Generates a random snippet of CSS.
 
         :return: CSS.
-        :rtype: str
         """
         selector = self.random.choice(CSS_SELECTORS)
         css_sel = '{}{}'.format(selector, self.text.word())
@@ -34,11 +33,10 @@ class Structured(BaseProvider):
             [self.css_property() for _ in range(self.random.randint(1, 6))])
         return '{} {{{}}}'.format(base, props)
 
-    def css_property(self):
+    def css_property(self) -> str:
         """Generates a random snippet of CSS that assigns value to a property.
 
         :return: CSS property.
-        :rtype: str
         :Examples:
             'background-color: #f4d3a1'
         """
@@ -55,11 +53,10 @@ class Structured(BaseProvider):
 
         return '{}: {}'.format(prop, val)
 
-    def html(self):
+    def html(self) -> str:
         """Generate a random HTML tag with text inside and some attrs set.
 
         :return: HTML.
-        :rtype: str
         :Examples:
             '<span class="select" id="careers">
             Ports are created with the built-in function open_port.
@@ -83,7 +80,7 @@ class Structured(BaseProvider):
             content=self.text.sentence(),
         )
 
-    def html_attribute_value(self, tag, attribute):
+    def html_attribute_value(self, tag, attribute) -> str:
         """Random value for specified HTML tag attribute.
 
         :param tag: An HTML tag.
@@ -91,7 +88,6 @@ class Structured(BaseProvider):
         :type tag: str
         :type attribute: str
         :return: An attribute.
-        :rtype: str
         """
         try:
             value = HTML_CONTAINER_TAGS[tag][attribute]

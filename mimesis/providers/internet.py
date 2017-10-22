@@ -136,7 +136,7 @@ class Internet(BaseProvider):
 
         return url.format(keyword=keyword)
 
-    def hashtags(self, quantity=4, category='general'):
+    def hashtags(self, quantity=4, category='general') -> list:
         """Create a list of hashtags (for Instagram, Twitter etc.)
 
         :param quantity: The quantity of hashtags.
@@ -145,7 +145,6 @@ class Internet(BaseProvider):
             Available categories: general, girls, love, boys, friends, family,
             nature, travel, cars, sport, tumblr.
         :return: The list of hashtags.
-        :rtype: list
 
         :Example:
             ['#love', '#sky', '#nice'].

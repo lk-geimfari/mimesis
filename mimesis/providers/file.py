@@ -18,13 +18,12 @@ class File(BaseProvider):
         k = file_type.lower()
         return self.random.choice(EXTENSIONS[k])
 
-    def mime_type(self, type_t='application'):
+    def mime_type(self, type_t='application') -> str:
         """Get a random mime type from list.
 
         :return: Mime type.
         :param type_t:
             Type of media: (application, image, video, audio, text, message).
-        :rtype: str
         """
         supported = ' '.join(MIME_TYPES.keys())
 

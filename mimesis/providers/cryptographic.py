@@ -62,10 +62,9 @@ class Cryptographic(BaseProvider):
         return token.decode('ascii')
 
     @staticmethod
-    def salt():
+    def salt() -> str:
         """Generate salt (not cryptographically safe) using uuid4().
 
         :return: Salt.
-        :rtype: str
         """
         return uuid.uuid4().hex

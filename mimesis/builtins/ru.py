@@ -12,11 +12,10 @@ class RussiaSpecProvider(BaseSpecProvider):
     class Meta:
         name = 'russia_provider'
 
-    def generate_sentence(self):
+    def generate_sentence(self) -> str:
         """Generate sentence from the parts.
 
         :return: Sentence.
-        :rtype: str
         """
         sentences = self._data['sentence']
         sentence = [

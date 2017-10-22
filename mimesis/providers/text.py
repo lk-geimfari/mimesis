@@ -12,12 +12,11 @@ class Text(BaseProvider):
         super().__init__(*args, **kwargs)
         self.data = pull('text.json', self.locale)
 
-    def alphabet(self, letter_case=None):
+    def alphabet(self, letter_case=None) -> list:
         """Get an alphabet for current locale.
 
         :param letter_case: Letter case.
         :return: Alphabet.
-        :rtype: list
         """
         letter_case = 'uppercase' if \
             not letter_case else letter_case
@@ -131,11 +130,10 @@ class Text(BaseProvider):
         color_code = '#' + ''.join(self.random.sample(letters, 6))
         return color_code
 
-    def answer(self):
+    def answer(self) -> str:
         """Get a random answer in current language.
 
         :return: An answer.
-        :rtype: str
         :Example:
             No
         """
