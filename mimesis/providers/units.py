@@ -281,13 +281,12 @@ class UnitSystem(BaseProvider):
             return 'becquerel'
         return 'Bq'
 
-    def prefix(self, sign='positive', symbol=False):
+    def prefix(self, sign='positive', symbol=False) -> str:
         """Get a random prefix for the International System of Units (SI)
 
         :param sign: Sing of number (positive, negative)
         :param symbol: Return symbol of prefix.
         :return: Prefix for SI.
-        :rtype: str
         :Example:
             mega
         """

@@ -6,11 +6,10 @@ from mimesis.providers import BaseProvider
 class Development(BaseProvider):
     """Class for getting fake data for Developers."""
 
-    def software_license(self):
+    def software_license(self) -> str:
         """Get a random software license from list.
 
         :return: License name.
-        :rtype: str
         :Example:
             The BSD 3-Clause License.
         """

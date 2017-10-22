@@ -35,12 +35,11 @@ class Code(BaseProvider):
 
         return code
 
-    def locale_code(self):
+    def locale_code(self) -> str:
         """Get a random locale code (MS-LCID).
         See Windows Language Code Identifier Reference for more information.
 
         :return: Locale code.
-        :rtype: str
         :Example:
             de-ch
         """

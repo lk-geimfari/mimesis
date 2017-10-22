@@ -156,11 +156,10 @@ class Address(BaseProvider):
         """
         return self.random.uniform(-180, 180)
 
-    def coordinates(self):
+    def coordinates(self) -> dict:
         """Generate random geo coordinates.
 
         :return: Dict with coordinates.
-        :rtype: dict
         :Example:
             {'latitude': 8.003968712834975, 'longitude': 36.02811153405548}
         """
