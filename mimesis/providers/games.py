@@ -5,7 +5,7 @@ __all__ = ['Games']
 
 
 class Games(BaseProvider):
-    def gaming_platform(self):
+    def gaming_platform(self) -> str:
         """Get random gaming platform.
 
         :return: Gaming platform
@@ -14,10 +14,10 @@ class Games(BaseProvider):
         """
         return self.random.choice(GAMING_PLATFORMS)
 
-    def score(self, minimum=1, maximum=10):
+    def score(self, minimum: int=1, maximum: int=10) -> int:
         return self.random.randint(minimum * 10, maximum * 10) / 10
 
-    def pegi_rating(self, pt=False):
+    def pegi_rating(self, pt: bool=False) -> str:
         """Get a random PEGI rating.
 
         :param pt: PEGI rating for Portugal.
@@ -37,7 +37,7 @@ class Games(BaseProvider):
         return '{0} {1}'.format('PEGI',
                                 self.random.choice(standard))
 
-    def genre(self):
+    def genre(self) -> str:
         """Get a random genre of game.
 
         :return: Genre.
@@ -46,7 +46,7 @@ class Games(BaseProvider):
         """
         return self.random.choice(GENRES)
 
-    def score_phrase(self):
+    def score_phrase(self) -> str:
         """Get a random score phrase.
 
         :return: Score phrase.
@@ -55,7 +55,7 @@ class Games(BaseProvider):
         """
         return self.random.choice(SCORE_PHRASES)
 
-    def game(self):
+    def game(self) -> str:
         """Get a random game from list of games.
 
         :return: Name of the game.

@@ -5,7 +5,7 @@ from mimesis.providers import BaseProvider
 class File(BaseProvider):
     """Class for generate fake data for files."""
 
-    def extension(self, file_type='text'):
+    def extension(self, file_type: str='text') -> str:
         """Get a random file extension from list.
 
         :param file_type:
@@ -18,7 +18,7 @@ class File(BaseProvider):
         k = file_type.lower()
         return self.random.choice(EXTENSIONS[k])
 
-    def mime_type(self, type_t='application') -> str:
+    def mime_type(self, type_t: str='application') -> str:
         """Get a random mime type from list.
 
         :return: Mime type.

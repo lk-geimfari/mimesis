@@ -80,7 +80,7 @@ class Structured(BaseProvider):
             content=self.text.sentence(),
         )
 
-    def html_attribute_value(self, tag, attribute) -> str:
+    def html_attribute_value(self, tag: str, attribute: str) -> str:
         """Random value for specified HTML tag attribute.
 
         :param tag: An HTML tag.
@@ -109,7 +109,7 @@ class Structured(BaseProvider):
                 'Attribute type {} is not implemented'.format(value))
         return value
 
-    def json(self, items=5, max_depth=3, recursive=False):
+    def json(self, items: int=5, max_depth: int=3, recursive: bool=False) -> str:
         """Generate a random snippet of JSON.
 
         :param items: Number of top-level items to produce.

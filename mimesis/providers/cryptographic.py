@@ -10,14 +10,14 @@ class Cryptographic(BaseProvider):
     """This class provides support cryptographic data.
     """
 
-    def uuid(self):
+    def uuid(self) -> str:
         """Generate random UUID.
 
         :return: UUID
         """
         return str(uuid.UUID(int=self.random.getrandbits(128)))
 
-    def hash(self, algorithm='sha1'):
+    def hash(self, algorithm: str='sha1') -> str:
         """Generate random hash.
 
         :param algorithm:
@@ -38,7 +38,7 @@ class Cryptographic(BaseProvider):
                     algorithm, ', '.join(hashlib.algorithms_guaranteed)),
             )
 
-    def bytes(self, entropy=None):
+    def bytes(self, entropy: int=None) -> bytes:
         """Get a random byte string containing *entropy* bytes.
 
         The string has *entropy* random bytes, each byte converted to two
@@ -52,7 +52,7 @@ class Cryptographic(BaseProvider):
 
         return self.random.urandom(entropy)
 
-    def token(self, entropy=None):
+    def token(self, entropy: int=None) -> str:
         """Return a random text string, in hexadecimal.
 
         :param entropy: Number of bytes.
