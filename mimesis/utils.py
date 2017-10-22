@@ -12,7 +12,7 @@ from mimesis.exceptions import (
     UnsupportedLocale,
 )
 import mimesis.settings as settings
-import mimesis.type as types
+import mimesis.typing as types
 
 __all__ = ['pull', 'download_image', 'locale_info', 'check_gender']
 
