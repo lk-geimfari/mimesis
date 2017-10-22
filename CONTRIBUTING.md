@@ -14,7 +14,8 @@
 
 - If you add any functionality, then you should add tests for it.
 
+- Annotate your code.
+
 - Do not write bad code!
 
 - Use `data/locale_template` if you want to add new locale.
-

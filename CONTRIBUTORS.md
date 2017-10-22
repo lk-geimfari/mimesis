@@ -1,8 +1,8 @@
 ### Creator & Maintainer
- - Likid Geimfari [(lk-geimfari)](https://github.com/lk-geimfari)
+- Likid Geimfari [(lk-geimfari)](https://github.com/lk-geimfari)
 
 ### Inspirer
- - Sobolev Nikita [(sobolevn)](https://github.com/sobolevn)
+- Sobolev Nikita [(sobolevn)](https://github.com/sobolevn)
 
 ### Special thanks
 - Sobolev Nikita [(sobolevn)](https://github.com/sobolevn)

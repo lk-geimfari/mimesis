@@ -1,7 +1,21 @@
-from typing import Dict, List, Union, Mapping, Any
+"""
+This module is included built in and custom types for type hinting.
+This is internal module and you shouldn't use it if you don't know
+why you should.
+"""
 
-__all__ = ['Any', 'Dict', 'List', 'Union',
-           'Mapping', 'Gender', 'JSON', 'Generic']
+from typing import Any, Dict, List, Union, Mapping
+
+__all__ = [
+    'Any',
+    'Dict',
+    'Gender',
+    'Generic',
+    'JSON',
+    'List',
+    'Mapping',
+    'Union',
+]
 
 Generic = Union[str, int, float, bool, None]
 
