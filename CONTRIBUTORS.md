@@ -44,6 +44,7 @@
 - Dmytro Zelinskyi [(zelds)](https://github.com/zelds)
 - axcel [(axce1)](https://github.com/axce1)
 - Ruslan Valerievich [(Valerievich)](https://github.com/Valerievich)
+- Simon [(DefaltSimon)](https://github.com/DefaltSimon)
 
 ### Design
  - The illustration is taken from internet. If you know the creator of this octopus, then let us know.
