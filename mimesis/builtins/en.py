@@ -7,7 +7,7 @@ class USASpecProvider(BaseSpecProvider):
     class Meta:
         name = 'usa_provider'
 
-    def tracking_number(self, service='usps'):
+    def tracking_number(self, service: str='usps') -> str:
         """Generate random tracking number for USPS, FedEx and UPS.
 
         :param service: Post service.
@@ -34,7 +34,7 @@ class USASpecProvider(BaseSpecProvider):
         mask = self.random.choice(services[service])
         return self.code(mask=mask)
 
-    def ssn(self):
+    def ssn(self) -> str:
         """Generate a random, but valid Social Security Number.
 
         :returns: Random SSN
@@ -52,7 +52,7 @@ class USASpecProvider(BaseSpecProvider):
             self.random.randint(1, 9999),
         )
 
-    def personality(self, category='mbti'):
+    def personality(self, category: str='mbti') -> str:
         """Generate a type of personality.
 
         :param category: Category.
