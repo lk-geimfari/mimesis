@@ -5,7 +5,6 @@ import functools
 import json
 import os.path as path
 import urllib.request as request
-from typing import Union
 from random import choice
 
 from mimesis.exceptions import (
@@ -13,7 +12,7 @@ from mimesis.exceptions import (
     UnsupportedLocale,
 )
 import mimesis.settings as settings
-from mimesis import type
+import mimesis.type as types
 
 __all__ = ['pull', 'download_image', 'locale_info', 'check_gender']
 
@@ -51,7 +50,7 @@ def luhn_checksum(num: str) -> str:
     return str(check * 9 % 10)
 
 
-def update_dict(initial: type.JSON, other: type.Mapping) -> type.JSON:
+def update_dict(initial: types.JSON, other: types.Mapping) -> types.JSON:
     """Recursively update a dictionary.
 
     .. note:: update_dict - is internal function of `mimesis`.
@@ -70,7 +69,7 @@ def update_dict(initial: type.JSON, other: type.Mapping) -> type.JSON:
 
 
 @functools.lru_cache(maxsize=None)
-def pull(file: str, locale: str = 'en') -> type.JSON:
+def pull(file: str, locale: str = 'en') -> types.JSON:
     """Open json file file and get content from file and memorize result using
      lru_cache.
 
@@ -91,7 +90,7 @@ def pull(file: str, locale: str = 'en') -> type.JSON:
         'Mon.'
     """
 
-    def get_data(locale_name: str) -> type.JSON:
+    def get_data(locale_name: str) -> types.JSON:
         """Pull JSON data from file.
 
         :param locale_name: Name of locale to pull.
@@ -118,7 +117,7 @@ def pull(file: str, locale: str = 'en') -> type.JSON:
 
 
 def download_image(url: str, save_path: str = '',
-                   unverified_ctx: bool = False) -> Union[None, str]:
+                   unverified_ctx: bool = False) -> types.Union[None, str]:
     """Download image and save in current directory on local machine.
 
     :param url: URL to image.
@@ -142,7 +141,7 @@ def download_image(url: str, save_path: str = '',
     return None
 
 
-def check_gender(gender: type.Gender = 0) -> str:
+def check_gender(gender: types.Gender = 0) -> str:
     """Checking of the correctness of gender.
 
     :param gender: Gender.
