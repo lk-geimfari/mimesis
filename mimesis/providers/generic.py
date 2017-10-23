@@ -60,7 +60,7 @@ class Generic(BaseProvider):
         else:
             raise TypeError('Provider must be a class')
 
-    def add_providers(self, *providers: Iterable) -> None:
+    def add_providers(self, *providers: Iterable[Callable]) -> None:
         """Add a lot of custom providers to Generic() object.
 
         :param providers: Custom providers.

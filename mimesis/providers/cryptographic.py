@@ -38,7 +38,7 @@ class Cryptographic(BaseProvider):
                     algorithm, ', '.join(hashlib.algorithms_guaranteed)),
             )
 
-    def bytes(self, entropy: int=None) -> bytes:
+    def bytes(self, entropy: int=32) -> bytes:
         """Get a random byte string containing *entropy* bytes.
 
         The string has *entropy* random bytes, each byte converted to two
@@ -52,7 +52,7 @@ class Cryptographic(BaseProvider):
 
         return self.random.urandom(entropy)
 
-    def token(self, entropy: int=None) -> str:
+    def token(self, entropy: int=32) -> str:
         """Return a random text string, in hexadecimal.
 
         :param entropy: Number of bytes.

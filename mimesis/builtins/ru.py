@@ -1,5 +1,6 @@
 from mimesis.builtins.base import BaseSpecProvider
 from mimesis.utils import pull, check_gender
+from mimesis.typing import Gender
 
 
 class RussiaSpecProvider(BaseSpecProvider):
@@ -24,7 +25,7 @@ class RussiaSpecProvider(BaseSpecProvider):
         ]
         return '{0} {1} {2} {3}'.format(*sentence)
 
-    def patronymic(self, gender: str=None) -> str:
+    def patronymic(self, gender: Gender=0) -> str:
         """Generate random patronymic name.
 
         :param gender: Gender of person.

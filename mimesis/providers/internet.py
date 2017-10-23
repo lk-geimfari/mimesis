@@ -3,6 +3,7 @@ from mimesis.data import (TLD, EMOJI, HASHTAGS, HTTP_METHODS,
                           SUBREDDITS_NSFW, USERNAMES, USER_AGENTS)
 from mimesis.exceptions import WrongArgument
 from mimesis.providers import BaseProvider, File
+from mimesis.typing import Size, Union
 
 
 class Internet(BaseProvider):
@@ -89,7 +90,7 @@ class Internet(BaseProvider):
         return self.random.choice(EMOJI)
 
     @staticmethod
-    def image_placeholder(width: str='400', height: str='300') -> str:
+    def image_placeholder(width: Size='400', height: Size='300') -> str:
         """Generate a link to the image placeholder.
 
         :param width: Width of image.
@@ -99,7 +100,7 @@ class Internet(BaseProvider):
         url = 'http://placehold.it/%sx%s'
         return url % (width, height)
 
-    def stock_image(self, category: str=None, width: int=1900, height: int=1080) -> str:
+    def stock_image(self, category: str=None, width: Size=1900, height: Size=1080) -> str:
         """Get a random beautiful stock image that hosted on Unsplash.com
 
         :param category:
@@ -136,7 +137,7 @@ class Internet(BaseProvider):
 
         return url.format(keyword=keyword)
 
-    def hashtags(self, quantity: int=4, category: str='general') -> list:
+    def hashtags(self, quantity: int=4, category: str='general') -> Union[str, list]:
         """Create a list of hashtags (for Instagram, Twitter etc.)
 
         :param quantity: The quantity of hashtags.

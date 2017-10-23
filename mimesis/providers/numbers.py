@@ -1,5 +1,5 @@
 import array
-from typing import Union
+from mimesis.typing import Union
 
 from .base import BaseProvider
 
@@ -7,7 +7,7 @@ from .base import BaseProvider
 class Numbers(BaseProvider):
     """Class for generating numbers"""
 
-    def floats(self, n: int=2, type_code: str='f', to_list: bool=False) -> list:
+    def floats(self, n: int=2, type_code: str='f', to_list: bool=False) -> Union[array.ArrayType, list]:
         """Generate an array of random float number of 10**n.
 
         +-----------+----------------+--------------+----------------------+
@@ -32,7 +32,7 @@ class Numbers(BaseProvider):
         return nums.tolist() if to_list else nums
 
     @staticmethod
-    def primes(start: int=1, end: int=999, to_list: bool=False) -> list:
+    def primes(start: int=1, end: int=999, to_list: bool=False) -> Union[array.ArrayType, list]:
         """Generate an array of prime numbers of 10 ** n.
 
         +------------+-----------------+--------------+--------------------+

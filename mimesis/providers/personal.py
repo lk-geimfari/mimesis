@@ -9,6 +9,7 @@ from mimesis.providers import BaseProvider, Code
 from mimesis.providers.cryptographic import Cryptographic
 from mimesis.settings import SURNAMES_SEPARATED_BY_GENDER
 from mimesis.utils import check_gender, luhn_checksum, pull
+from mimesis.typing import Gender
 
 __all__ = ['Personal']
 
@@ -65,7 +66,7 @@ class Personal(BaseProvider):
 
         return max(a - working_start_age, 0)
 
-    def name(self, gender: str=None) -> str:
+    def name(self, gender: Gender=0) -> str:
         """Get a random name.
 
         :param gender: if 'male' then will returned male name,
@@ -78,7 +79,7 @@ class Personal(BaseProvider):
         names = self.data['names'][gender]
         return self.random.choice(names)
 
-    def surname(self, gender=None) -> str:
+    def surname(self, gender: Gender=0) -> str:
         """Get a random surname.
 
         :param gender: The gender of person.
@@ -97,7 +98,7 @@ class Personal(BaseProvider):
 
         return self.random.choice(surnames)
 
-    def title(self, gender: str=None, title_type: str='typical') -> str:
+    def title(self, gender: Gender=0, title_type: str='typical') -> str:
         """Get a random title (prefix/suffix) for name.
 
         :param gender: The gender.
@@ -115,7 +116,7 @@ class Personal(BaseProvider):
         title = self.random.choice(titles)
         return title
 
-    def full_name(self, gender: str=None, reverse: bool=False) -> str:
+    def full_name(self, gender: Gender=0, reverse: bool=False) -> str:
         """Generate a random full name.
 
         :param reverse: if true: surname/name else name/surname
@@ -374,7 +375,7 @@ class Personal(BaseProvider):
         gender = self.random.choice(self.data['gender'])
         return gender
 
-    def height(self, minimum: int=1.5, maximum: int=2.0):
+    def height(self, minimum: float=1.5, maximum: float=2.0):
         """Generate a random height in M (Meter).
 
         :param minimum: Minimum value.
@@ -462,7 +463,7 @@ class Personal(BaseProvider):
         views = self.data['views_on']
         return self.random.choice(views)
 
-    def nationality(self, gender: str=None) -> str:
+    def nationality(self, gender: Gender=0) -> str:
         """Get a random nationality.
 
         :param gender: Gender.

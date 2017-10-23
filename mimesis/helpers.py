@@ -5,7 +5,7 @@ import random
 class Random(random.Random):
     """Custom Random() class for the possibility of extending."""
 
-    def randints(self, amount: int=None, a: int=1, b: int=100) -> list:
+    def randints(self, amount: int=3, a: int=1, b: int=100) -> list:
         """Generate list of random integers.
 
         :param amount: Amount of elements.
