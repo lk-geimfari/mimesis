@@ -14,11 +14,11 @@ def test_randints(random):
     # Length of default list is 3
     assert len(result) == 3
 
-    result_custom = random.randints(25, 1, 1)
+    result = random.randints(25, 1, 1)
 
-    assert len(result_custom) == 25
+    assert len(result) == 25
     # All elements in result_custom equals to 1.
-    assert result_custom[0] == 1 and result_custom[-1] == 1
+    assert result[0] == 1 and result[-1] == 1
 
 
 @pytest.mark.parametrize(

@@ -39,8 +39,8 @@ def test_database(dev):
     result = dev.database()
     assert result in SQL
 
-    _result = dev.database(nosql=True)
-    assert _result in NOSQL
+    result = dev.database(nosql=True)
+    assert result in NOSQL
 
 
 def test_other(dev):

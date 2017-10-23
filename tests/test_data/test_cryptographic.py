@@ -22,21 +22,25 @@ def test_uuid(crypto):
     ],
 )
 def test_hash(crypto, algorithm, length):
-    assert len(crypto.hash(algorithm=algorithm)) == length
+    result = crypto.hash(algorithm=algorithm)
+    assert len(result) == length
 
     with pytest.raises(UnsupportedAlgorithm):
         crypto.hash(algorithm='mimesis')
 
 
 def test_bytes(crypto):
-    assert crypto.bytes(entropy=64) is not None
-    assert isinstance(crypto.bytes(entropy=64), bytes)
+    result = crypto.bytes(entropy=64)
+    assert result is not None
+    assert isinstance(result, bytes)
 
 
 def test_token(crypto):
+    result = crypto.token(entropy=16)
+
     # Each byte converted to two hex digits.
-    assert len(crypto.token(entropy=16)) == 32
-    assert isinstance(crypto.token(), str)
+    assert len(result) == 32
+    assert isinstance(result, str)
 
 
 def test_salt(crypto):
