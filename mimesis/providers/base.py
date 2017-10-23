@@ -6,7 +6,7 @@ from mimesis.settings import DEFAULT_LOCALE
 class BaseProvider(object):
     """This is a base class for all providers."""
 
-    def __init__(self, locale=None, seed=None):
+    def __init__(self, locale: str=None, seed: int=None):
         """Base constructor for all providers.
 
         :param locale: Current locale. Default is 'en'.

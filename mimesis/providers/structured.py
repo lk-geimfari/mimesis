@@ -5,6 +5,8 @@ from mimesis.data import (CSS_PROPERTIES, CSS_SELECTORS, CSS_SIZE_UNITS,
 from mimesis.providers import BaseProvider, Internet
 from mimesis.providers.text import Text
 
+from mimesis.typing import JSON
+
 
 class Structured(BaseProvider):
     """Provider for structured text data such as CSS, HTML, JSON etc."""
@@ -17,11 +19,10 @@ class Structured(BaseProvider):
         self.internet = Internet()
         self.text = Text()
 
-    def css(self):
+    def css(self) -> str:
         """Generates a random snippet of CSS.
 
         :return: CSS.
-        :rtype: str
         """
         selector = self.random.choice(CSS_SELECTORS)
         css_sel = '{}{}'.format(selector, self.text.word())
@@ -34,11 +35,10 @@ class Structured(BaseProvider):
             [self.css_property() for _ in range(self.random.randint(1, 6))])
         return '{} {{{}}}'.format(base, props)
 
-    def css_property(self):
+    def css_property(self) -> str:
         """Generates a random snippet of CSS that assigns value to a property.
 
         :return: CSS property.
-        :rtype: str
         :Examples:
             'background-color: #f4d3a1'
         """
@@ -55,11 +55,10 @@ class Structured(BaseProvider):
 
         return '{}: {}'.format(prop, val)
 
-    def html(self):
+    def html(self) -> str:
         """Generate a random HTML tag with text inside and some attrs set.
 
         :return: HTML.
-        :rtype: str
         :Examples:
             '<span class="select" id="careers">
             Ports are created with the built-in function open_port.
@@ -83,7 +82,7 @@ class Structured(BaseProvider):
             content=self.text.sentence(),
         )
 
-    def html_attribute_value(self, tag, attribute):
+    def html_attribute_value(self, tag: str, attribute: str) -> str:
         """Random value for specified HTML tag attribute.
 
         :param tag: An HTML tag.
@@ -91,7 +90,6 @@ class Structured(BaseProvider):
         :type tag: str
         :type attribute: str
         :return: An attribute.
-        :rtype: str
         """
         try:
             value = HTML_CONTAINER_TAGS[tag][attribute]
@@ -113,7 +111,7 @@ class Structured(BaseProvider):
                 'Attribute type {} is not implemented'.format(value))
         return value
 
-    def json(self, items=5, max_depth=3, recursive=False):
+    def json(self, items: int=5, max_depth: int=3, recursive: bool=False) -> JSON:
         """Generate a random snippet of JSON.
 
         :param items: Number of top-level items to produce.

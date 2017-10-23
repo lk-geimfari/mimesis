@@ -7,15 +7,19 @@ import os.path as path
 import urllib.request as request
 from random import choice
 
-from mimesis.exceptions import UnexpectedGender, UnsupportedLocale
-from mimesis.settings import SUPPORTED_LOCALES
+from mimesis.exceptions import (
+    UnexpectedGender,
+    UnsupportedLocale,
+)
+import mimesis.settings as settings
+import mimesis.typing as types
 
 __all__ = ['pull', 'download_image', 'locale_info', 'check_gender']
 
 PATH = path.abspath(path.join(path.dirname(__file__), 'data'))
 
 
-def locale_info(locale):
+def locale_info(locale: str) -> str:
     """Return name (in english) or local name of the locale
 
     :param locale: Locale abbreviation.
@@ -23,14 +27,15 @@ def locale_info(locale):
     :returns: Locale name.
     """
     locale = locale.lower()
+    supported = settings.SUPPORTED_LOCALES
 
-    if locale not in SUPPORTED_LOCALES:
+    if locale not in supported:
         raise UnsupportedLocale('Locale %s is not supported' % locale)
 
-    return SUPPORTED_LOCALES[locale]['name']
+    return supported[locale]['name']
 
 
-def luhn_checksum(num):
+def luhn_checksum(num: str) -> str:
     """Calculate a checksum for num using the Luhn algorithm.
 
     :param num: The number to calculate a checksum for as a string.
@@ -45,7 +50,7 @@ def luhn_checksum(num):
     return str(check * 9 % 10)
 
 
-def update_dict(initial, other):
+def update_dict(initial: types.JSON, other: types.Mapping) -> types.JSON:
     """Recursively update a dictionary.
 
     .. note:: update_dict - is internal function of `mimesis`.
@@ -64,7 +69,7 @@ def update_dict(initial, other):
 
 
 @functools.lru_cache(maxsize=None)
-def pull(file, locale='en'):
+def pull(file: str, locale: str = 'en') -> types.JSON:
     """Open json file file and get content from file and memorize result using
      lru_cache.
 
@@ -85,7 +90,7 @@ def pull(file, locale='en'):
         'Mon.'
     """
 
-    def get_data(locale_name):
+    def get_data(locale_name: str) -> types.JSON:
         """Pull JSON data from file.
 
         :param locale_name: Name of locale to pull.
@@ -98,7 +103,7 @@ def pull(file, locale='en'):
 
     locale = locale.lower()
 
-    if locale not in SUPPORTED_LOCALES:
+    if locale not in settings.SUPPORTED_LOCALES:
         raise UnsupportedLocale('Locale %s is not supported' % locale)
 
     master_locale = locale.split('-')[0]
@@ -111,7 +116,8 @@ def pull(file, locale='en'):
     return data
 
 
-def download_image(url, save_path='', unverified_ctx=False):
+def download_image(url: str, save_path: str = '',
+                   unverified_ctx: bool = False) -> types.Union[None, str]:
     """Download image and save in current directory on local machine.
 
     :param url: URL to image.
@@ -135,7 +141,7 @@ def download_image(url, save_path='', unverified_ctx=False):
     return None
 
 
-def check_gender(gender=None):
+def check_gender(gender: types.Gender = 0) -> str:
     """Checking of the correctness of gender.
 
     :param gender: Gender.

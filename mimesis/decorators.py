@@ -4,12 +4,13 @@ from string import (
     digits,
     punctuation,
 )
+from typing import Callable, Type
 
 from mimesis import data
 from mimesis.exceptions import UnsupportedLocale
 
 
-def romanized(locale=None):
+def romanized(locale: str=None) -> Callable:
     """Romanization of the Cyrillic alphabet (transliterating the Cyrillic language
     from the Cyrillic script into the Latin alphabet).
 
@@ -43,7 +44,7 @@ def romanized(locale=None):
     return romanized_deco
 
 
-def type_to(new_type, check_len=False):
+def type_to(new_type: Type, check_len: bool=False):
     """Convert result of function to different type. This is
     internal function.
 
