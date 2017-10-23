@@ -28,3 +28,4 @@ JSON = Union[
 # Gender can be represented as integer (0, 1, 2, 9) like in ISO/IEC 5218
 # and as string: ('0', '1', '2', '9', 'female', 'male', 'f', 'm')
 Gender = Union[str, int]
+Size = Union[str, int]

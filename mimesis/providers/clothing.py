@@ -4,7 +4,7 @@ from mimesis.providers import BaseProvider
 class ClothingSizes(BaseProvider):
     """Class for generate clothing sizes data"""
 
-    def international(self):
+    def international(self) -> str:
         """Get a random size in international format.
 
         :return: Clothing size.
@@ -24,7 +24,7 @@ class ClothingSizes(BaseProvider):
 
         return self.random.choice(sizes)
 
-    def european(self):
+    def european(self) -> int:
         """Generate a random clothing size in European format.
 
         :return: Clothing size.
@@ -34,7 +34,7 @@ class ClothingSizes(BaseProvider):
         size = self.random.choice([i for i in range(40, 62) if i % 2 == 0])
         return size
 
-    def custom(self, minimum=40, maximum=62):
+    def custom(self, minimum: int=40, maximum: int=62) -> int:
         """Generate clothing size using custom format.
 
         :param minimum: Min value.

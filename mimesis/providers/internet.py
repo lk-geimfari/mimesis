@@ -3,13 +3,14 @@ from mimesis.data import (TLD, EMOJI, HASHTAGS, HTTP_METHODS,
                           SUBREDDITS_NSFW, USERNAMES, USER_AGENTS)
 from mimesis.exceptions import WrongArgument
 from mimesis.providers import BaseProvider, File
+from mimesis.typing import Size, Union
 
 
 class Internet(BaseProvider):
     """Class for generate the internet data."""
 
     @staticmethod
-    def content_type(mime_type='application'):
+    def content_type(mime_type: str='application') -> str:
         """Get a random HTTP content type.
 
         :return: Content type.
@@ -19,7 +20,7 @@ class Internet(BaseProvider):
         fmt = File().mime_type(type_t=mime_type)
         return 'Content-Type: {}'.format(fmt)
 
-    def http_status_code(self, code_only=True):
+    def http_status_code(self, code_only: bool=True) -> str:
         """Get a random HTTP status.
 
         :param code_only: Return only http status code.
@@ -33,7 +34,7 @@ class Internet(BaseProvider):
             return status.split()[0]
         return status
 
-    def http_method(self):
+    def http_method(self) -> str:
         """Get a random HTTP method.
 
         :return: HTTP method.
@@ -42,7 +43,7 @@ class Internet(BaseProvider):
         """
         return self.random.choice(HTTP_METHODS)
 
-    def ip_v4(self):
+    def ip_v4(self) -> str:
         """Generate a random IPv4 address.
 
         :return: Random IPv4 address.
@@ -52,7 +53,7 @@ class Internet(BaseProvider):
         ip = '.'.join([str(self.random.randint(0, 255)) for _ in range(4)])
         return ip
 
-    def ip_v6(self):
+    def ip_v6(self) -> str:
         """Generate a random IPv6 address.
 
         :return: Random IPv6 address.
@@ -63,7 +64,7 @@ class Internet(BaseProvider):
             '%x' % self.random.randint(0, 16 ** 4) for _ in range(7))
         return ip
 
-    def mac_address(self):
+    def mac_address(self) -> str:
         """Generate a random MAC address.
 
         :return: Random MAC address.
@@ -79,7 +80,7 @@ class Internet(BaseProvider):
         mac = map(lambda x: '%02x' % x, mac_hex)
         return ':'.join(mac)
 
-    def emoji(self):
+    def emoji(self) -> str:
         """Get a random emoji shortcut code.
 
         :return: Emoji code.
@@ -89,7 +90,7 @@ class Internet(BaseProvider):
         return self.random.choice(EMOJI)
 
     @staticmethod
-    def image_placeholder(width='400', height='300'):
+    def image_placeholder(width: Size='400', height: Size='300') -> str:
         """Generate a link to the image placeholder.
 
         :param width: Width of image.
@@ -99,7 +100,7 @@ class Internet(BaseProvider):
         url = 'http://placehold.it/%sx%s'
         return url % (width, height)
 
-    def stock_image(self, category=None, width=1900, height=1080):
+    def stock_image(self, category: str=None, width: Size=1900, height: Size=1080) -> str:
         """Get a random beautiful stock image that hosted on Unsplash.com
 
         :param category:
@@ -122,7 +123,7 @@ class Internet(BaseProvider):
 
         return url.format(category=category, width=width, height=height)
 
-    def image_by_keyword(self, keyword=None):
+    def image_by_keyword(self, keyword: str=None) -> str:
         url = 'https://source.unsplash.com/weekly?{keyword}'
 
         keywords = [
@@ -136,7 +137,7 @@ class Internet(BaseProvider):
 
         return url.format(keyword=keyword)
 
-    def hashtags(self, quantity=4, category='general'):
+    def hashtags(self, quantity: int=4, category: str='general') -> Union[str, list]:
         """Create a list of hashtags (for Instagram, Twitter etc.)
 
         :param quantity: The quantity of hashtags.
@@ -145,7 +146,6 @@ class Internet(BaseProvider):
             Available categories: general, girls, love, boys, friends, family,
             nature, travel, cars, sport, tumblr.
         :return: The list of hashtags.
-        :rtype: list
 
         :Example:
             ['#love', '#sky', '#nice'].
@@ -164,7 +164,7 @@ class Internet(BaseProvider):
         tags = [self.random.choice(hashtags) for _ in range(int(quantity))]
         return tags
 
-    def home_page(self, domain_type=None):
+    def home_page(self, domain_type: str=None) -> str:
         """Generate a random home page.
 
         :param: Domain type (en.wikipedia.org/wiki/Top-level_domain#Types).
@@ -180,7 +180,7 @@ class Internet(BaseProvider):
         return 'http://www.{}{}'.format(
             resource, domain)
 
-    def top_level_domain(self, domain_type=None):
+    def top_level_domain(self, domain_type: str=None) -> str:
         """Return random top level domain.
 
         :param domain_type: Type of domain.
@@ -206,7 +206,7 @@ class Internet(BaseProvider):
 
         return self.random.choice(domains)
 
-    def subreddit(self, nsfw=False, full_url=False):
+    def subreddit(self, nsfw: bool=False, full_url: bool=False) -> str:
         """Get a random subreddit from the list.
 
         :param nsfw: NSFW subreddit.
@@ -226,7 +226,7 @@ class Internet(BaseProvider):
         result = url + nsfw_sr if full_url else nsfw_sr
         return result
 
-    def user_agent(self):
+    def user_agent(self) -> str:
         """Get a random user agent.
 
         :return: User agent.
@@ -236,7 +236,7 @@ class Internet(BaseProvider):
         """
         return self.random.choice(USER_AGENTS)
 
-    def network_protocol(self, layer='application'):
+    def network_protocol(self, layer: str='application') -> str:
         """Get a random network protocol form OSI model.
 
         :param layer:

@@ -1,4 +1,5 @@
 import inspect
+from typing import Callable, Iterable
 
 from mimesis.providers import (Address, BaseProvider, Business, ClothingSizes,
                                Code, Datetime, Development, File, Food, Games,
@@ -42,7 +43,7 @@ class Generic(BaseProvider):
         if attribute and callable(attribute):
             return attribute(self.locale)
 
-    def add_provider(self, cls):
+    def add_provider(self, cls: Callable) -> None:
         """Add a custom provider to Generic() object.
 
         :param cls: Custom provider.
@@ -59,7 +60,7 @@ class Generic(BaseProvider):
         else:
             raise TypeError('Provider must be a class')
 
-    def add_providers(self, *providers):
+    def add_providers(self, *providers: Iterable[Callable]) -> None:
         """Add a lot of custom providers to Generic() object.
 
         :param providers: Custom providers.

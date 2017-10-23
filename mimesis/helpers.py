@@ -5,7 +5,7 @@ import random
 class Random(random.Random):
     """Custom Random() class for the possibility of extending."""
 
-    def randints(self, amount=None, a=1, b=100):
+    def randints(self, amount: int=3, a: int=1, b: int=100) -> list:
         """Generate list of random integers.
 
         :param amount: Amount of elements.
@@ -21,6 +21,6 @@ class Random(random.Random):
                 for _ in range(amount)]
 
     @staticmethod
-    def urandom(*args, **kwargs):
+    def urandom(*args, **kwargs) -> bytes:
         """Return a bytes object containing random bytes."""
         return os.urandom(*args, **kwargs)
