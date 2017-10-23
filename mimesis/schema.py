@@ -1,4 +1,5 @@
 import json
+from typing import Iterator
 
 from mimesis.decorators import type_to
 from mimesis.exceptions import UndefinedSchema
@@ -16,7 +17,7 @@ class Schema(BaseProvider):
         super().__init__(*args, **kwargs)
         self.generic = Generic(self.locale)
 
-    def __generate(self, schema):
+    def __generate(self, schema: dict) -> dict:
         data = dict()
         for k, v in schema.items():
             if isinstance(v, dict):
@@ -29,7 +30,7 @@ class Schema(BaseProvider):
                     getattr(self.generic, provider), method)()
         return data
 
-    def load(self, path=None, schema=None):
+    def load(self, path: str=None, schema: dict=None):
         """Load schema from python dict or from json file.
 
         :param path: Path to file.
@@ -51,7 +52,7 @@ class Schema(BaseProvider):
         return self
 
     @type_to(list, check_len=True)
-    def create(self, iterations=1):
+    def create(self, iterations: int=1) -> Iterator:
         """Fill schema using data generators of mimesis.
 
         :param iterations: Count of iterations.

@@ -12,7 +12,7 @@ class Food(BaseProvider):
         super().__init__(*args, **kwargs)
         self._data = pull('food.json', self.locale)
 
-    def vegetable(self):
+    def vegetable(self) -> str:
         """Get a random vegetable.
 
         :return: Vegetable.
@@ -22,7 +22,7 @@ class Food(BaseProvider):
         vegetables = self._data['vegetables']
         return self.random.choice(vegetables)
 
-    def fruit(self):
+    def fruit(self) -> str:
         """Get a random name of fruit or berry .
 
         :return: Fruit.
@@ -32,7 +32,7 @@ class Food(BaseProvider):
         fruits = self._data['fruits']
         return self.random.choice(fruits)
 
-    def dish(self):
+    def dish(self) -> str:
         """Get a random dish for current locale.
 
         :return: Dish name.
@@ -42,7 +42,7 @@ class Food(BaseProvider):
         dishes = self._data['dishes']
         return self.random.choice(dishes)
 
-    def spices(self):
+    def spices(self) -> str:
         """Get a random spices or herbs.
 
         :return: Spices or herbs.
@@ -52,7 +52,7 @@ class Food(BaseProvider):
         spices = self._data['spices']
         return self.random.choice(spices)
 
-    def drink(self):
+    def drink(self) -> str:
         """Get a random drink.
 
         :return: Alcoholic drink.

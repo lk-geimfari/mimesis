@@ -14,7 +14,7 @@ class Address(BaseProvider):
         super().__init__(*args, **kwargs)
         self.data = pull('address.json', self.locale)
 
-    def street_number(self, maximum=1400):
+    def street_number(self, maximum: int=1400) -> str:
         """Generate a random street number.
 
         :return: Street number.
@@ -24,7 +24,7 @@ class Address(BaseProvider):
         number = self.random.randint(1, int(maximum))
         return '%s' % number
 
-    def street_name(self):
+    def street_name(self) -> str:
         """Get a random street name.
 
         :return: Street name.
@@ -34,7 +34,7 @@ class Address(BaseProvider):
         names = self.data['street']['name']
         return self.random.choice(names)
 
-    def street_suffix(self):
+    def street_suffix(self) -> str:
         """Get a random street suffix.
 
         :return: Street suffix.
@@ -44,7 +44,7 @@ class Address(BaseProvider):
         suffixes = self.data['street']['suffix']
         return self.random.choice(suffixes)
 
-    def address(self):
+    def address(self) -> str:
         """Get a random full address (include Street number, suffix and name).
 
         :return: Full address.
@@ -76,7 +76,7 @@ class Address(BaseProvider):
 
         )
 
-    def state(self, abbr=False):
+    def state(self, abbr: bool=False) -> str:
         """Get a random states or subject of country.
 
         :param abbr:
@@ -90,7 +90,7 @@ class Address(BaseProvider):
         states = self.data['state'][key]
         return self.random.choice(states)
 
-    def postal_code(self):
+    def postal_code(self) -> int:
         """Generate a postal code for current locale.
 
         :return: Postal code.
@@ -102,7 +102,7 @@ class Address(BaseProvider):
         mask = self.data['postal_code_fmt']
         return Code(self.locale).custom_code(mask)
 
-    def country_iso(self, fmt='iso2'):
+    def country_iso(self, fmt: str='iso2') -> str:
         """Get a random ISO code of country.
 
         :param fmt: Format of code (iso2, iso3, numeric).
@@ -118,7 +118,7 @@ class Address(BaseProvider):
         countries = COUNTRIES_ISO[fmt]
         return self.random.choice(countries)
 
-    def country(self):
+    def country(self) -> str:
         """Get a random country.
 
         :return: The Country.
@@ -128,7 +128,7 @@ class Address(BaseProvider):
         countries = self.data['country']['name']
         return self.random.choice(countries)
 
-    def city(self):
+    def city(self) -> str:
         """Get a random city for current locale.
 
         :return: City name.
@@ -138,7 +138,7 @@ class Address(BaseProvider):
         cities = self.data['city']
         return self.random.choice(cities)
 
-    def latitude(self):
+    def latitude(self) -> float:
         """Generate a random value of latitude (-90 to +90).
 
         :return: Value of longitude.
@@ -147,7 +147,7 @@ class Address(BaseProvider):
         """
         return self.random.uniform(-90, 90)
 
-    def longitude(self):
+    def longitude(self) -> float:
         """Generate a random value of longitude (-180 to +180).
 
         :return: Value of longitude.
@@ -156,11 +156,10 @@ class Address(BaseProvider):
         """
         return self.random.uniform(-180, 180)
 
-    def coordinates(self):
+    def coordinates(self) -> dict:
         """Generate random geo coordinates.
 
         :return: Dict with coordinates.
-        :rtype: dict
         :Example:
             {'latitude': 8.003968712834975, 'longitude': 36.02811153405548}
         """
@@ -170,7 +169,7 @@ class Address(BaseProvider):
         }
         return coord
 
-    def continent(self, code=False):
+    def continent(self, code: bool=False) -> str:
         """Get a random continent name or continent
         code (code in international format).
 
@@ -185,7 +184,7 @@ class Address(BaseProvider):
         continents = self.data['continent']
         return self.random.choice(continents)
 
-    def calling_code(self):
+    def calling_code(self) -> str:
         """Get a random calling code of random country.
 
         :return: Calling code.
