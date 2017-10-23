@@ -116,7 +116,7 @@ def pull(file: str, locale: str = 'en') -> types.JSON:
     return data
 
 
-def download_image(url: str, save_path: str = '',
+def download_image(url: str = '', save_path: str = '',
                    unverified_ctx: bool = False) -> types.Union[None, str]:
     """Download image and save in current directory on local machine.
 
@@ -125,15 +125,9 @@ def download_image(url: str, save_path: str = '',
     :param unverified_ctx: Create unverified context.
     :return: Image name.
     """
-    # TODO: We don't support Python 3.4. Remove it!
     if unverified_ctx:
         import ssl
-        try:
-            ssl._create_default_https_context = ssl._create_stdlib_context
-        except AttributeError:
-            raise NotImplementedError(
-                'unverified_ctx is only supported in Python 3.4+',
-            )
+        ssl._create_default_https_context = ssl._create_stdlib_context
 
     if url is not None:
         image_name = url.rsplit('/')[-1]

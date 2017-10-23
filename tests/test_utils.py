@@ -2,7 +2,6 @@
 
 import os
 import socket
-import sys
 
 import pytest
 
@@ -45,24 +44,20 @@ def test_pull():
     assert 'Melbourne' in data['city']
 
 
-def test_download_image():
-    result = download_image(url=None)
-    assert result is None
-
+@pytest.mark.parametrize(
+    'ctx', [
+        False,
+        True,
+    ],
+)
+def test_download_image(ctx):
     url = 'https://github.com/lk-geimfari/mimesis/' \
           'raw/master/media/mimesis.png'
 
     if is_connected():
-        verified = download_image(url=url)
+        verified = download_image(url=url, unverified_ctx=ctx)
         assert verified == 'mimesis.png'
         os.remove(verified)
-
-        if sys.version_info.minor <= 3:
-            with pytest.raises(NotImplementedError):
-                download_image(url=None, unverified_ctx=True)
-        else:
-            unverified = download_image(url=None, unverified_ctx=True)
-            assert unverified is None
 
 
 def test_locale_information():
