@@ -14,7 +14,7 @@ environment:
     - PYTHON: "C:\\Python36-x64"
 
 install:
-  - "%PYTHON%\\python.exe -m pip install pytest pytest-flake8"
+  - "%PYTHON%\\python.exe -m pip install pytest pytest-flake8 pytest-mock"
   - "%PYTHON%\\python.exe -m pip install flake8-builtins flake8-commas flake8-quotes"
 
 build: off

@@ -39,9 +39,14 @@ def test_personality(usa):
 def test_ssn(usa):
     result = usa.ssn()
     assert result is not None
-    # todo fix so this actually checks that 666 prefix can never be returned
     assert '666' != result[:3]
     assert re.match('^\d{3}-\d{2}-\d{4}$', result)
 
     assert result.replace('-', '').isdigit()
     assert len(result.replace('-', '')) == 9
+
+
+def test_cpf_with_666_prefix(mocker, usa):
+    with mocker.patch.object(usa.random, 'randint', return_value=666):
+        result = usa.ssn()
+        assert '665' == result[:3]

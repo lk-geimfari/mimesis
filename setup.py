@@ -28,6 +28,7 @@ tests_requirements = [
     'flake8-commas',
     'flake8-quotes',
     'pytest-flake8',
+    'pytest-mock',
 ]
 
 # Long description.
