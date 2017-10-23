@@ -13,7 +13,7 @@ class Business(BaseProvider):
         super().__init__(*args, **kwargs)
         self.data = pull('business.json', self.locale)
 
-    def company_type(self, abbr: bool=False) -> str:
+    def company_type(self, abbr: bool = False) -> str:
         """Get a random type of business entity.
 
         :param abbr: If True then return abbreviated company type.
@@ -58,7 +58,7 @@ class Business(BaseProvider):
         """
         return self.random.choice(CURRENCIES)
 
-    def price(self, minimum: float=10.00, maximum: float=1000.00) -> str:
+    def price(self, minimum: float = 10.00, maximum: float = 1000.00) -> str:
         """Generate a random price.
 
         :param minimum: Max value of price.

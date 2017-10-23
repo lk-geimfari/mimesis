@@ -8,7 +8,7 @@ from mimesis.constants.platforms import PLATFORMS
 class Path(BaseProvider):
     """Class that provides methods and property for generate paths."""
 
-    def __init__(self, platform: str=sys.platform, *args, **kwargs):
+    def __init__(self, platform: str = sys.platform, *args, **kwargs):
         """
         :param platform:
             Required platform type ('linux2', 'darwin', 'win32', 'win64').

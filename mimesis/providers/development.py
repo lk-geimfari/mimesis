@@ -25,7 +25,7 @@ class Development(BaseProvider):
         n = (self.random.randint(0, 11) for _ in range(3))
         return '{}.{}.{}'.format(*n)
 
-    def database(self, nosql: bool=False) -> str:
+    def database(self, nosql: bool = False) -> str:
         """Get a random database name.
 
         :param nosql: only NoSQL databases.

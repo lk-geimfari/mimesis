@@ -10,7 +10,7 @@ class Transport(BaseProvider):
 
         self._model = Code().custom_code
 
-    def truck(self, model_mask: str='#### @@') -> str:
+    def truck(self, model_mask: str = '#### @@') -> str:
         """Generate a truck model.
 
         :param model_mask: Mask of truck model. Here '@' is a \
@@ -32,7 +32,7 @@ class Transport(BaseProvider):
         """
         return self.random.choice(CARS)
 
-    def airplane(self, model_mask: str='###') -> str:
+    def airplane(self, model_mask: str = '###') -> str:
         """Generate a dummy airplane model.
 
         :param model_mask: Mask of truck model. Here '@' is a \

@@ -10,7 +10,7 @@ from mimesis import data
 from mimesis.exceptions import UnsupportedLocale
 
 
-def romanized(locale: str=None) -> Callable:
+def romanized(locale: str = None) -> Callable:
     """Romanization of the Cyrillic alphabet (transliterating the Cyrillic language
     from the Cyrillic script into the Latin alphabet).
 
@@ -44,7 +44,7 @@ def romanized(locale: str=None) -> Callable:
     return romanized_deco
 
 
-def type_to(new_type: Type, check_len: bool=False):
+def type_to(new_type: Type, check_len: bool = False):
     """Convert result of function to different type. This is
     internal function.
 

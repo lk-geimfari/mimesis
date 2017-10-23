@@ -17,7 +17,7 @@ class Datetime(BaseProvider):
         super().__init__(*args, **kwargs)
         self.data = pull('datetime.json', self.locale)
 
-    def day_of_week(self, abbr: bool=False) -> str:
+    def day_of_week(self, abbr: bool = False) -> str:
         """Get a random day of week.
 
         :param abbr: Abbreviated name of the day.
@@ -29,7 +29,7 @@ class Datetime(BaseProvider):
         days = self.data['day'][key]
         return self.random.choice(days)
 
-    def month(self, abbr: str=False) -> str:
+    def month(self, abbr: str = False) -> str:
         """Get a random month.
 
         :param abbr: if True then will be returned abbreviated month name.
@@ -41,7 +41,7 @@ class Datetime(BaseProvider):
         months = self.data['month'][key]
         return self.random.choice(months)
 
-    def year(self, minimum: int=1990, maximum: int=2050) -> int:
+    def year(self, minimum: int = 1990, maximum: int = 2050) -> int:
         """Generate a random year.
 
         :param minimum: Minimum value.
@@ -71,7 +71,8 @@ class Datetime(BaseProvider):
         periodicity = self.data['periodicity']
         return self.random.choice(periodicity)
 
-    def date(self, start: int=2000, end: int=2035, fmt: str=None) -> str:
+    def date(self, start: int = 2000, end: int = 2035,
+             fmt: str = None) -> str:
         """Generate a string representing of random date formatted for
         the locale or as specified.
 
@@ -91,7 +92,7 @@ class Datetime(BaseProvider):
             year, month, self.random.randint(1, monthrange(year, month)[1]))
         return d.strftime(fmt)
 
-    def time(self, fmt: str=None) -> str:
+    def time(self, fmt: str = None) -> str:
         """Generate a random time formatted for the locale or as specified.
 
         :return: Time.

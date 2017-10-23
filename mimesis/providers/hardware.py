@@ -44,7 +44,7 @@ class Hardware(BaseProvider):
         cf = self.random.uniform(1.5, 4.3)
         return '{0:.1f}GHz'.format(cf)
 
-    def generation(self, abbr: bool=False) -> str:
+    def generation(self, abbr: bool = False) -> str:
         """Get a random generation.
 
         :return: Generation of something.

@@ -12,7 +12,7 @@ class Text(BaseProvider):
         super().__init__(*args, **kwargs)
         self.data = pull('text.json', self.locale)
 
-    def alphabet(self, letter_case: str=None) -> list:
+    def alphabet(self, letter_case: str = None) -> list:
         """Get an alphabet for current locale.
 
         :param letter_case: Letter case.
@@ -34,7 +34,7 @@ class Text(BaseProvider):
         levels = self.data['level']
         return self.random.choice(levels)
 
-    def text(self, quantity: int=5) -> str:
+    def text(self, quantity: int = 5) -> str:
         """Generate the text.
 
         :param quantity: Quantity of sentences.
@@ -68,7 +68,7 @@ class Text(BaseProvider):
         """
         return self.text(quantity=1)
 
-    def words(self, quantity: int=5) -> list:
+    def words(self, quantity: int = 5) -> list:
         """Get the random words.
 
         :param quantity: Quantity of words. Default is 5.

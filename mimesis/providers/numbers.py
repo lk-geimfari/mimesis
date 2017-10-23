@@ -1,5 +1,5 @@
 import array
-from mimesis.typing import Union
+import mimesis.typing as types
 
 from .base import BaseProvider
 
@@ -7,7 +7,8 @@ from .base import BaseProvider
 class Numbers(BaseProvider):
     """Class for generating numbers"""
 
-    def floats(self, n: int=2, type_code: str='f', to_list: bool=False) -> Union[array.ArrayType, list]:
+    def floats(self, n: int = 2, type_code: str = 'f',
+               to_list: bool = False) -> types.Array:
         """Generate an array of random float number of 10**n.
 
         +-----------+----------------+--------------+----------------------+
@@ -32,7 +33,8 @@ class Numbers(BaseProvider):
         return nums.tolist() if to_list else nums
 
     @staticmethod
-    def primes(start: int=1, end: int=999, to_list: bool=False) -> Union[array.ArrayType, list]:
+    def primes(start: int = 1, end: int = 999,
+               to_list: bool = False) -> types.Array:
         """Generate an array of prime numbers of 10 ** n.
 
         +------------+-----------------+--------------+--------------------+
@@ -49,7 +51,7 @@ class Numbers(BaseProvider):
         nums = array.array('L', (i for i in range(start, end) if i % 2))
         return nums.tolist() if to_list else nums
 
-    def digit(self, to_bin: bool=False) -> Union[str, int]:
+    def digit(self, to_bin: bool = False) -> types.Number:
         """Get a random digit.
 
         :param to_bin: If True then convert to binary.
@@ -64,7 +66,7 @@ class Numbers(BaseProvider):
 
         return digit
 
-    def between(self, minimum: int=1, maximum: int=1000) -> int:
+    def between(self, minimum: int = 1, maximum: int = 1000) -> int:
         """Generate a random number between minimum and maximum.
 
         :param minimum: Minimum of range.
@@ -74,7 +76,7 @@ class Numbers(BaseProvider):
         num = self.random.randint(int(minimum), int(maximum))
         return num
 
-    def rating(self, maximum: float=5.0) -> float:
+    def rating(self, maximum: float = 5.0) -> float:
         """Generate random rating for something.
 
         :param maximum: Minimum value (default is 5.0).

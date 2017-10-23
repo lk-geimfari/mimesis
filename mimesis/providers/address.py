@@ -14,7 +14,7 @@ class Address(BaseProvider):
         super().__init__(*args, **kwargs)
         self.data = pull('address.json', self.locale)
 
-    def street_number(self, maximum: int=1400) -> str:
+    def street_number(self, maximum: int = 1400) -> str:
         """Generate a random street number.
 
         :return: Street number.
@@ -76,7 +76,7 @@ class Address(BaseProvider):
 
         )
 
-    def state(self, abbr: bool=False) -> str:
+    def state(self, abbr: bool = False) -> str:
         """Get a random states or subject of country.
 
         :param abbr:
@@ -102,7 +102,7 @@ class Address(BaseProvider):
         mask = self.data['postal_code_fmt']
         return Code(self.locale).custom_code(mask)
 
-    def country_iso(self, fmt: str='iso2') -> str:
+    def country_iso(self, fmt: str = 'iso2') -> str:
         """Get a random ISO code of country.
 
         :param fmt: Format of code (iso2, iso3, numeric).
@@ -169,7 +169,7 @@ class Address(BaseProvider):
         }
         return coord
 
-    def continent(self, code: bool=False) -> str:
+    def continent(self, code: bool = False) -> str:
         """Get a random continent name or continent
         code (code in international format).
 

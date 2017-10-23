@@ -7,7 +7,7 @@ class USASpecProvider(BaseSpecProvider):
     class Meta:
         name = 'usa_provider'
 
-    def tracking_number(self, service: str='usps') -> str:
+    def tracking_number(self, service: str = 'usps') -> str:
         """Generate random tracking number for USPS, FedEx and UPS.
 
         :param service: Post service.
@@ -52,7 +52,7 @@ class USASpecProvider(BaseSpecProvider):
             self.random.randint(1, 9999),
         )
 
-    def personality(self, category: str='mbti') -> str:
+    def personality(self, category: str = 'mbti') -> str:
         """Generate a type of personality.
 
         :param category: Category.

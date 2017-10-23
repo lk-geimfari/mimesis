@@ -34,7 +34,7 @@ class ClothingSizes(BaseProvider):
         size = self.random.choice([i for i in range(40, 62) if i % 2 == 0])
         return size
 
-    def custom(self, minimum: int=40, maximum: int=62) -> int:
+    def custom(self, minimum: int = 40, maximum: int = 62) -> int:
         """Generate clothing size using custom format.
 
         :param minimum: Min value.

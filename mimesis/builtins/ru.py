@@ -25,7 +25,7 @@ class RussiaSpecProvider(BaseSpecProvider):
         ]
         return '{0} {1} {2} {3}'.format(*sentence)
 
-    def patronymic(self, gender: Gender=0) -> str:
+    def patronymic(self, gender: Gender = 0) -> str:
         """Generate random patronymic name.
 
         :param gender: Gender of person.
@@ -37,7 +37,7 @@ class RussiaSpecProvider(BaseSpecProvider):
         patronymics = self._data['patronymic'][gender]
         return self.random.choice(patronymics)
 
-    def passport_series(self, year: int=None):
+    def passport_series(self, year: int = None):
         """Generate random series of passport.
 
         :param year: Year of manufacture.

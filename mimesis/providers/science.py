@@ -25,7 +25,7 @@ class Science(BaseProvider):
         formula = self.random.choice(MATH_FORMULAS)
         return formula
 
-    def chemical_element(self, name_only: bool=True) -> Union[dict, str]:
+    def chemical_element(self, name_only: bool = True) -> Union[dict, str]:
         """Generate a random chemical element.
 
         :param name_only: If False then will be returned dict.

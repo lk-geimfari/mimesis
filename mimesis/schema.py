@@ -30,7 +30,7 @@ class Schema(BaseProvider):
                     getattr(self.generic, provider), method)()
         return data
 
-    def load(self, path: str=None, schema: dict=None):
+    def load(self, path: str = None, schema: dict = None):
         """Load schema from python dict or from json file.
 
         :param path: Path to file.
@@ -52,7 +52,7 @@ class Schema(BaseProvider):
         return self
 
     @type_to(list, check_len=True)
-    def create(self, iterations: int=1) -> Iterator:
+    def create(self, iterations: int = 1) -> Iterator:
         """Fill schema using data generators of mimesis.
 
         :param iterations: Count of iterations.

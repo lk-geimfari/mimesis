@@ -14,7 +14,8 @@ class Code(BaseProvider):
         """
         super().__init__(*args, **kwargs)
 
-    def custom_code(self, mask: str='@###', char: str='@', digit: str='#') -> str:
+    def custom_code(self, mask: str = '@###',
+                    char: str = '@', digit: str = '#') -> str:
         """Generate custom code using ascii uppercase and random integers.
 
         :param mask: Mask of code.
@@ -46,7 +47,7 @@ class Code(BaseProvider):
         locale = self.random.choice(LOCALE_CODES)
         return locale
 
-    def issn(self, mask: str=None) -> str:
+    def issn(self, mask: str = None) -> str:
         """Generate a random International Standard Serial Number (ISSN).
 
         :param mask: Mask ISSN.
@@ -56,7 +57,7 @@ class Code(BaseProvider):
             mask = '####-####'
         return self.custom_code(mask=mask)
 
-    def isbn(self, fmt: str='isbn-10') -> str:
+    def isbn(self, fmt: str = 'isbn-10') -> str:
         """Generate ISBN for current locale. Default is ISBN 10,
         but you also can use ISBN-13.
 
@@ -77,7 +78,7 @@ class Code(BaseProvider):
 
         return self.custom_code(mask=mask)
 
-    def ean(self, fmt: str='ean-13') -> str:
+    def ean(self, fmt: str = 'ean-13') -> str:
         """Generate EAN (European Article Number) code. Default is
         EAN-13, but you also can use EAN-8.
 
@@ -100,7 +101,7 @@ class Code(BaseProvider):
         num = self.random.choice(IMEI_TACS) + self.custom_code(mask='######')
         return num + luhn_checksum(num)
 
-    def pin(self, mask: str='####') -> str:
+    def pin(self, mask: str = '####') -> str:
         """Generate a random PIN code.
 
         :return: PIN code.

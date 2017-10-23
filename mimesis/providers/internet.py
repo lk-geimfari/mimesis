@@ -10,7 +10,7 @@ class Internet(BaseProvider):
     """Class for generate the internet data."""
 
     @staticmethod
-    def content_type(mime_type: str='application') -> str:
+    def content_type(mime_type: str = 'application') -> str:
         """Get a random HTTP content type.
 
         :return: Content type.
@@ -20,7 +20,7 @@ class Internet(BaseProvider):
         fmt = File().mime_type(type_t=mime_type)
         return 'Content-Type: {}'.format(fmt)
 
-    def http_status_code(self, code_only: bool=True) -> str:
+    def http_status_code(self, code_only: bool = True) -> str:
         """Get a random HTTP status.
 
         :param code_only: Return only http status code.
@@ -90,7 +90,7 @@ class Internet(BaseProvider):
         return self.random.choice(EMOJI)
 
     @staticmethod
-    def image_placeholder(width: Size='400', height: Size='300') -> str:
+    def image_placeholder(width: Size = '400', height: Size = '300') -> str:
         """Generate a link to the image placeholder.
 
         :param width: Width of image.
@@ -100,7 +100,8 @@ class Internet(BaseProvider):
         url = 'http://placehold.it/%sx%s'
         return url % (width, height)
 
-    def stock_image(self, category: str=None, width: Size=1900, height: Size=1080) -> str:
+    def stock_image(self, category: str = None,
+                    width: Size = 1900, height: Size = 1080) -> str:
         """Get a random beautiful stock image that hosted on Unsplash.com
 
         :param category:
@@ -123,7 +124,7 @@ class Internet(BaseProvider):
 
         return url.format(category=category, width=width, height=height)
 
-    def image_by_keyword(self, keyword: str=None) -> str:
+    def image_by_keyword(self, keyword: str = None) -> str:
         url = 'https://source.unsplash.com/weekly?{keyword}'
 
         keywords = [
@@ -137,7 +138,8 @@ class Internet(BaseProvider):
 
         return url.format(keyword=keyword)
 
-    def hashtags(self, quantity: int=4, category: str='general') -> Union[str, list]:
+    def hashtags(self, quantity: int = 4,
+                 category: str = 'general') -> Union[str, list]:
         """Create a list of hashtags (for Instagram, Twitter etc.)
 
         :param quantity: The quantity of hashtags.
@@ -164,7 +166,7 @@ class Internet(BaseProvider):
         tags = [self.random.choice(hashtags) for _ in range(int(quantity))]
         return tags
 
-    def home_page(self, domain_type: str=None) -> str:
+    def home_page(self, domain_type: str = None) -> str:
         """Generate a random home page.
 
         :param: Domain type (en.wikipedia.org/wiki/Top-level_domain#Types).
@@ -180,7 +182,7 @@ class Internet(BaseProvider):
         return 'http://www.{}{}'.format(
             resource, domain)
 
-    def top_level_domain(self, domain_type: str=None) -> str:
+    def top_level_domain(self, domain_type: str = None) -> str:
         """Return random top level domain.
 
         :param domain_type: Type of domain.
@@ -206,7 +208,7 @@ class Internet(BaseProvider):
 
         return self.random.choice(domains)
 
-    def subreddit(self, nsfw: bool=False, full_url: bool=False) -> str:
+    def subreddit(self, nsfw: bool = False, full_url: bool = False) -> str:
         """Get a random subreddit from the list.
 
         :param nsfw: NSFW subreddit.
@@ -236,7 +238,7 @@ class Internet(BaseProvider):
         """
         return self.random.choice(USER_AGENTS)
 
-    def network_protocol(self, layer: str='application') -> str:
+    def network_protocol(self, layer: str = 'application') -> str:
         """Get a random network protocol form OSI model.
 
         :param layer:

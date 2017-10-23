@@ -5,7 +5,7 @@ from mimesis.data import (CSS_PROPERTIES, CSS_SELECTORS, CSS_SIZE_UNITS,
 from mimesis.providers import BaseProvider, Internet
 from mimesis.providers.text import Text
 
-from mimesis.typing import JSON
+import mimesis.typing as types
 
 
 class Structured(BaseProvider):
@@ -111,7 +111,8 @@ class Structured(BaseProvider):
                 'Attribute type {} is not implemented'.format(value))
         return value
 
-    def json(self, items: int=5, max_depth: int=3, recursive: bool=False) -> JSON:
+    def json(self, items: int = 5,
+             max_depth: int = 3, recursive: bool = False) -> types.JSON:
         """Generate a random snippet of JSON.
 
         :param items: Number of top-level items to produce.
