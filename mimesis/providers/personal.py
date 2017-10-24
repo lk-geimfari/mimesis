@@ -157,8 +157,8 @@ class Personal(BaseProvider):
                 d=date,
             ),
             # lowercaseDate
-            'ld': '{l}{d}'.format(
-                l=name,
+            'ld': '{lower}{d}'.format(
+                lower=name,
                 d=date,
             ),
             # Uppercase-date
@@ -172,23 +172,23 @@ class Personal(BaseProvider):
                 d=date,
             ),
             # lowercase-date
-            'l-d': '{l}-{d}'.format(
-                l=name,
+            'l-d': '{lower}-{d}'.format(
+                lower=name,
                 d=date,
             ),
             # lowercase_date
-            'l_d': '{l}_{d}'.format(
-                l=name,
+            'l_d': '{lower}_{d}'.format(
+                lower=name,
                 d=date,
             ),
             # lowercase.date
-            'l.d': '{l}.{d}'.format(
-                l=name,
+            'l.d': '{lower}.{d}'.format(
+                lower=name,
                 d=date,
             ),
             # Default is ld
-            'default': '{l}{d}'.format(
-                l=name,
+            'default': '{lower}{d}'.format(
+                lower=name,
                 d=date,
             ),
         }
