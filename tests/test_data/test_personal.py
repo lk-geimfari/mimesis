@@ -87,11 +87,11 @@ def test_paypal(_personal):
     ],
 )
 def test_password(_personal, algorithm, length):
-    plain_password = _personal.password(length=15)
-    assert len(plain_password) == 15
+    result = _personal.password(length=15)
+    assert len(result) == 15
 
-    encrypted_password = _personal.password(algorithm=algorithm)
-    assert len(encrypted_password) == length
+    result = _personal.password(algorithm=algorithm)
+    assert len(result) == length
 
     with pytest.raises(UnsupportedAlgorithm):
         _personal.password(algorithm='sha42')
@@ -109,8 +109,8 @@ def test_password(_personal, algorithm, length):
     ],
 )
 def test_username(_personal, template):
-    username = _personal.username(template=template)
-    assert re.match(USERNAME_REGEX, username)
+    result = _personal.username(template=template)
+    assert re.match(USERNAME_REGEX, result)
 
     with pytest.raises(WrongArgument):
         _personal.username(template=':D')
@@ -252,8 +252,8 @@ def test_telephone(personal):
     assert result is not None
 
     mask = '+5 (###)-###-##-##'
-    result2 = personal.telephone(mask=mask)
-    head = result2.split(' ')[0]
+    result = personal.telephone(mask=mask)
+    head = result.split(' ')[0]
     assert head == '+5'
 
 
@@ -303,8 +303,8 @@ def test_gender(personal):
     result = personal.gender()
     assert result in personal.data['gender']
 
-    symbol = personal.gender(symbol=True)
-    assert symbol in GENDER_SYMBOLS
+    result = personal.gender(symbol=True)
+    assert result in GENDER_SYMBOLS
 
     # The four codes specified in ISO/IEC 5218 are:
     # 0 = not known, 1 = male, 2 = female, 9 = not applicable.
@@ -377,8 +377,8 @@ def test_title(personal, gender, title_type):
     assert result is not None
     assert isinstance(result, str)
 
-    result_by_gender = personal.title(gender=gender)
-    assert result_by_gender is not None
+    result = personal.title(gender=gender)
+    assert result is not None
 
     with pytest.raises(WrongArgument):
         personal.title(gender='other', title_type='religious')

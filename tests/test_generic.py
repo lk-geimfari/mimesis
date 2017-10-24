@@ -56,36 +56,6 @@ def test_bad_argument(generic):
         _ = generic.bad_argument  # noqa
 
 
-def test_add_provider(generic):
-    class CustomProvider:
-        class Meta:
-            name = 'custom_provider'
-
-        @staticmethod
-        def say():
-            return 'Custom'
-
-        @staticmethod
-        def number():
-            return 1
-
-    generic.add_provider(CustomProvider)
-    assert generic.custom_provider.say() is not None
-    assert generic.custom_provider.number() == 1
-    with pytest.raises(TypeError):
-        generic.add_provider(True)
-
-    class UnnamedProvider(object):
-        @staticmethod
-        def nothing():
-            return None
-
-    generic.add_provider(UnnamedProvider)
-    assert generic.unnamedprovider.nothing() is None
-
-    assert 'unnamedprovider' == UnnamedProvider.__name__.lower()
-
-
 def test_add_providers(generic):
     class Provider1(object):
         @staticmethod
@@ -93,6 +63,9 @@ def test_add_providers(generic):
             return 1
 
     class Provider2(object):
+        class Meta:
+            name = 'custom_provider'
+
         @staticmethod
         def two():
             return 2
@@ -104,8 +77,16 @@ def test_add_providers(generic):
 
     generic.add_providers(Provider1, Provider2, Provider3)
     assert generic.provider1.one() == 1
-    assert generic.provider2.two() == 2
+    assert generic.custom_provider.two() == 2
     assert generic.provider3.three() == 3
 
     with pytest.raises(TypeError):
         generic.add_providers(True)
+
+    class UnnamedProvider(object):
+        @staticmethod
+        def nothing():
+            return None
+
+    generic.add_provider(UnnamedProvider)
+    assert generic.unnamedprovider.nothing() is None

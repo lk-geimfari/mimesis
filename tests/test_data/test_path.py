@@ -4,11 +4,13 @@ from mimesis.data import FOLDERS, PROGRAMMING_LANGS, PROJECT_NAMES
 
 
 def test_root(path):
-    assert 'C:\\', '/' == path.root()
+    result = path.root()
+    assert 'C:\\', '/' == result
 
 
 def test_home(path):
-    assert 'С:\\Users\\', '/home/' == path.home()
+    result = path.home()
+    assert 'С:\\Users\\', '/home/' == result
 
 
 def test_user(path):

@@ -9,13 +9,7 @@ python:
   - "3.6"
   - "3.7-dev"
 
-install:
-  - pip install codecov
-  - pip install pytest-cov
-  - pip install flake8-builtins
-  - pip install flake8-commas
-  - pip install flake8-quotes
-  - pip install pytest-flake8
+install: pip install -r dev_requirements.txt
 
 script: py.test --cov=mimesis/
 

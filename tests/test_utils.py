@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import os
-import socket
 import sys
 
 import pytest
@@ -9,16 +8,6 @@ import pytest
 from mimesis.exceptions import UnsupportedLocale, UnexpectedGender
 from mimesis.utils import (check_gender, download_image, locale_info,
                            luhn_checksum, pull, update_dict)
-
-
-def is_connected():
-    try:
-        host = socket.gethostbyname('https://github.com/')
-        socket.create_connection((host, 80), 2)
-        return True
-    except:
-        pass
-    return False
 
 
 def test_luhn_checksum():
@@ -45,14 +34,20 @@ def test_pull():
     assert 'Melbourne' in data['city']
 
 
-def test_download_image():
+def test_download_image(mocker):
     result = download_image(url=None)
     assert result is None
 
     url = 'https://github.com/lk-geimfari/mimesis/' \
           'raw/master/media/mimesis.png'
 
-    if is_connected():
+    def create_image(*args, **kwargs):
+        image_name = 'mimesis.png'
+        with open(image_name, 'w') as f:
+            f.write('testing image')
+
+    with mocker.patch('mimesis.utils.request.urlretrieve',
+                      side_effect=create_image):
         verified = download_image(url=url)
         assert verified == 'mimesis.png'
         os.remove(verified)

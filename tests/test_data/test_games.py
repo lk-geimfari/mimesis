@@ -7,30 +7,31 @@ def test_gaming_platform(games):
 
 
 def test_score(games):
-    score = games.score(minimum=5.5, maximum=10)
-    assert isinstance(score, float)
-    assert (score >= 5.5) and (score <= 10)
+    result = games.score(minimum=5.5, maximum=10)
+    assert isinstance(result, float)
+    assert (result >= 5.5) and (result <= 10)
 
 
 def test_pegi_rating(games):
-    rating = games.pegi_rating().split(' ')[1]
+    result = games.pegi_rating().split(' ')[1]
     standard = [3, 7, 12, 16, 18]
 
-    assert int(rating) in standard
+    assert int(result) in standard
 
-    rating_pt = games.pegi_rating(pt=True).split(' ')[1]
-    assert int(rating_pt) <= 18
+    result = games.pegi_rating(pt=True).split(' ')[1]
+    assert int(result) <= 18
 
 
 def test_genre(games):
-    genre = games.genre()
-    assert genre in GENRES
+    result = games.genre()
+    assert result in GENRES
 
 
 def test_score_phrase(games):
-    phrase = games.score_phrase()
-    assert phrase in SCORE_PHRASES
+    result = games.score_phrase()
+    assert result in SCORE_PHRASES
 
 
 def test_game(games):
-    assert games.game() in GAMES
+    result = games.game()
+    assert result in GAMES
