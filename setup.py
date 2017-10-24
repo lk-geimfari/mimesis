@@ -22,7 +22,7 @@ VERSION_MICRO_MAX = 10
 
 here = abspath(dirname(__file__))
 
-with open('requirements.txt') as f:
+with open('dev_requirements.txt') as f:
     tests_requirements = f.read().splitlines()
 
 # Long description.

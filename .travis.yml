@@ -9,7 +9,7 @@ python:
   - "3.6"
   - "3.7-dev"
 
-install: pip install -r requirements.txt
+install: pip install -r dev_requirements.txt
 
 script: py.test --cov=mimesis/
 
