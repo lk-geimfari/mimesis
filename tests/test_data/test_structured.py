@@ -58,6 +58,6 @@ def test_json(structured):
 
     # Recursive returns python object, not JSON and
     # maximum depth of three elements
-    r = structured.json(items=3, max_depth=4, recursive=True)
-    assert isinstance(r, (dict, list))
-    assert depth(r) <= 4
+    result = structured.json(items=3, max_depth=4, recursive=True)
+    assert isinstance(result, (dict, list))
+    assert depth(result) <= 4

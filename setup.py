@@ -22,13 +22,8 @@ VERSION_MICRO_MAX = 10
 
 here = abspath(dirname(__file__))
 
-tests_requirements = [
-    'pytest',
-    'flake8-builtins',
-    'flake8-commas',
-    'flake8-quotes',
-    'pytest-flake8',
-]
+with open('dev_requirements.txt') as f:
+    tests_requirements = f.read().splitlines()
 
 # Long description.
 with open('PYPI_README.rst', 'r', encoding='utf-8') as f:

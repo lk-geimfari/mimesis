@@ -14,15 +14,10 @@ def test_str(code):
 
 def test_custom_code(code):
     result = code.custom_code(
-        mask='@###', char='@', digit='#')
-    assert len(result) == 4
+        mask='@@@-###-@@@', char='@', digit='#')
+    assert len(result) == 11
 
-
-def test_custom_code_args(code):
-    result = code.custom_code(
-        mask='@@@-###-@@@').split('-')
-
-    a, b, c = result
+    a, b, c = result.split('-')
     assert a.isalpha()
     assert b.isdigit()
     assert c.isalpha()
