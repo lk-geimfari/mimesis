@@ -2,7 +2,9 @@ from mimesis.data import (TLD, EMOJI, HASHTAGS, HTTP_METHODS,
                           HTTP_STATUS_CODES, NETWORK_PROTOCOLS, SUBREDDITS,
                           SUBREDDITS_NSFW, USERNAMES, USER_AGENTS)
 from mimesis.exceptions import WrongArgument
-from mimesis.providers import BaseProvider, File
+from mimesis.providers.base import BaseProvider
+from mimesis.providers.file import File
+
 from mimesis.typing import Size, Union
 
 
@@ -124,7 +126,7 @@ class Internet(BaseProvider):
 
         return url.format(category=category, width=width, height=height)
 
-    def image_by_keyword(self, keyword: str = None) -> str:
+    def image_by_keyword(self, keyword: str = '') -> str:
         url = 'https://source.unsplash.com/weekly?{keyword}'
 
         keywords = [
@@ -182,7 +184,7 @@ class Internet(BaseProvider):
         return 'http://www.{}{}'.format(
             resource, domain)
 
-    def top_level_domain(self, domain_type: str = None) -> str:
+    def top_level_domain(self, domain_type: str = '') -> str:
         """Return random top level domain.
 
         :param domain_type: Type of domain.

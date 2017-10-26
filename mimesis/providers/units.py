@@ -1,7 +1,7 @@
-from mimesis.data import SI_PREFIXES
+from mimesis.data import SI_PREFIXES, SI_PREFIXES_SYM
 from mimesis.exceptions import WrongArgument
 
-from .base import BaseProvider
+from mimesis.providers.base import BaseProvider
 
 
 class UnitSystem(BaseProvider):
@@ -281,7 +281,7 @@ class UnitSystem(BaseProvider):
             return 'becquerel'
         return 'Bq'
 
-    def prefix(self, sign='positive', symbol: bool = False) -> str:
+    def prefix(self, sign: str = 'positive', symbol: bool = False) -> str:
         """Get a random prefix for the International System of Units (SI)
 
         :param sign: Sing of number (positive, negative)
@@ -292,13 +292,12 @@ class UnitSystem(BaseProvider):
         """
         sign = sign.lower()
 
-        if symbol:
-            prefixes = SI_PREFIXES['_sym_']
-        else:
-            prefixes = SI_PREFIXES
+        prefixes = SI_PREFIXES_SYM if \
+            symbol else SI_PREFIXES
 
         try:
-            return self.random.choice(prefixes[sign])
+            prefixes = self.random.choice(prefixes[sign])
+            return prefixes  # type: ignore
         except KeyError:
             raise WrongArgument(
                 "Unsupported sign. Use: 'positive' or 'negative'")

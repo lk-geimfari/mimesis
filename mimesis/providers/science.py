@@ -2,7 +2,7 @@ from mimesis.data import MATH_FORMULAS
 from mimesis.utils import pull
 from typing import Union
 
-from .base import BaseProvider
+from mimesis.providers.base import BaseProvider
 
 
 class Science(BaseProvider):

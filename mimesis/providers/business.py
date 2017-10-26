@@ -1,5 +1,5 @@
 from mimesis.data import CURRENCIES, CURRENCY_SYMBOLS
-from mimesis.providers import BaseProvider
+from mimesis.providers.base import BaseProvider
 from mimesis.utils import pull
 
 
@@ -22,7 +22,8 @@ class Business(BaseProvider):
             Incorporated.
         """
         key = 'abbr' if abbr else 'title'
-        company_type = self.data['company']['type'][key]
+        company_type = self.data['company'].get(
+            'type').get(key)
         return self.random.choice(company_type)
 
     def company(self) -> str:
@@ -32,7 +33,7 @@ class Business(BaseProvider):
         :Example:
             Gamma Systems.
         """
-        companies = self.data['company']['name']
+        companies = self.data['company'].get('name')
         return self.random.choice(companies)
 
     def copyright(self) -> str:

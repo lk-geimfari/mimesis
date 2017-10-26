@@ -1,4 +1,4 @@
-from mimesis.providers import BaseProvider
+from mimesis.providers.base import BaseProvider
 from mimesis.utils import pull
 
 
@@ -21,7 +21,7 @@ class Text(BaseProvider):
         letter_case = 'uppercase' if \
             not letter_case else letter_case
 
-        alpha = self.data['alphabet'][letter_case]
+        alpha = self.data['alphabet'].get(letter_case)
         return alpha
 
     def level(self) -> str:
@@ -76,7 +76,7 @@ class Text(BaseProvider):
         :Example:
             science, network, god, octopus, love.
         """
-        words = self.data['words']['normal']
+        words = self.data['words'].get('normal')
         words_list = [self.random.choice(words) for _ in range(int(quantity))]
         return words_list
 
@@ -96,7 +96,7 @@ class Text(BaseProvider):
         :Example:
             Damn.
         """
-        bad_words = self.data['words']['bad']
+        bad_words = self.data['words'].get('bad')
         return self.random.choice(bad_words)
 
     def quote(self) -> str:

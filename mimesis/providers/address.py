@@ -1,6 +1,6 @@
 from mimesis.data import CALLING_CODES, CONTINENT_CODES, \
     COUNTRIES_ISO, SHORTENED_ADDRESS_FMT
-from mimesis.providers import BaseProvider
+from mimesis.providers.base import BaseProvider
 from mimesis.utils import pull
 
 
@@ -22,7 +22,7 @@ class Address(BaseProvider):
             134.
         """
         number = self.random.randint(1, int(maximum))
-        return '%s' % number
+        return '{}'.format(number)
 
     def street_name(self) -> str:
         """Get a random street name.
@@ -31,7 +31,7 @@ class Address(BaseProvider):
         :Example:
            Candlewood.
         """
-        names = self.data['street']['name']
+        names = self.data['street'].get('name')
         return self.random.choice(names)
 
     def street_suffix(self) -> str:
@@ -41,7 +41,7 @@ class Address(BaseProvider):
         :Example:
             Alley.
         """
-        suffixes = self.data['street']['suffix']
+        suffixes = self.data['street'].get('suffix')
         return self.random.choice(suffixes)
 
     def address(self) -> str:
@@ -87,19 +87,20 @@ class Address(BaseProvider):
             Alabama (for locale `en`).
         """
         key = 'abbr' if abbr else 'name'
-        states = self.data['state'][key]
+        states = self.data['state'].get(key)
         return self.random.choice(states)
 
-    def postal_code(self) -> int:
+    def postal_code(self) -> str:
         """Generate a postal code for current locale.
 
         :return: Postal code.
         :Example:
             389213
         """
-        from mimesis.providers import Code
+        from mimesis.providers.code import Code
 
         mask = self.data['postal_code_fmt']
+        # TODO: Move custom_code() to utils.
         return Code(self.locale).custom_code(mask)
 
     def country_iso(self, fmt: str = 'iso2') -> str:
@@ -125,7 +126,7 @@ class Address(BaseProvider):
         :Example:
             Russia.
         """
-        countries = self.data['country']['name']
+        countries = self.data['country'].get('name')
         return self.random.choice(countries)
 
     def city(self) -> str:

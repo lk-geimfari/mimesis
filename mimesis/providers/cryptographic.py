@@ -3,7 +3,8 @@ import hashlib
 import uuid
 
 from mimesis.exceptions import UnsupportedAlgorithm
-from mimesis.providers import BaseProvider
+from mimesis.providers.base import BaseProvider
+import mimesis.typing as types
 
 
 class Cryptographic(BaseProvider):
@@ -38,7 +39,7 @@ class Cryptographic(BaseProvider):
                     algorithm, ', '.join(hashlib.algorithms_guaranteed)),
             )
 
-    def bytes(self, entropy: int = 32) -> bytes:
+    def bytes(self, entropy: int = 32) -> types.Bytes:
         """Get a random byte string containing *entropy* bytes.
 
         The string has *entropy* random bytes, each byte converted to two
@@ -46,10 +47,8 @@ class Cryptographic(BaseProvider):
 
         :param entropy:
         :return: Bytes.
+        :rtype: bytes
         """
-        if entropy is None:
-            entropy = 32
-
         return self.random.urandom(entropy)
 
     def token(self, entropy: int = 32) -> str:

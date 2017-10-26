@@ -5,11 +5,12 @@ from mimesis.data import (BLOOD_GROUPS, EMAIL_DOMAINS, ENGLISH_LEVEL,
                           FAVORITE_MUSIC_GENRE, GENDER_SYMBOLS,
                           SEXUALITY_SYMBOLS, USERNAMES)
 from mimesis.exceptions import WrongArgument
-from mimesis.providers import BaseProvider, Code
+from mimesis.providers.base import BaseProvider
+from mimesis.providers.code import Code
 from mimesis.providers.cryptographic import Cryptographic
 from mimesis.settings import SURNAMES_SEPARATED_BY_GENDER
 from mimesis.utils import check_gender, luhn_checksum, pull
-from mimesis.typing import Gender
+from mimesis.typing import Gender, Union
 
 __all__ = ['Personal']
 
@@ -76,7 +77,7 @@ class Personal(BaseProvider):
             John.
         """
         gender = check_gender(gender)
-        names = self.data['names'][gender]
+        names = self.data['names'].get(gender)
         return self.random.choice(names)
 
     def surname(self, gender: Gender = 0) -> str:
@@ -93,7 +94,7 @@ class Personal(BaseProvider):
         if self.locale in SURNAMES_SEPARATED_BY_GENDER:
             gender = check_gender(gender)
             return self.random.choice(
-                surnames[gender],
+                surnames.get(gender),
             )
 
         return self.random.choice(surnames)
@@ -109,7 +110,8 @@ class Personal(BaseProvider):
         """
         try:
             gender = check_gender(gender)
-            titles = self.data['title'][gender][title_type]
+            titles = self.data['title'].get(
+                gender).get(title_type)
         except KeyError:
             raise WrongArgument('Wrong value of argument.')
 
@@ -134,7 +136,7 @@ class Personal(BaseProvider):
             self.surname(gender),
         )
 
-    def username(self, template: str = None) -> str:
+    def username(self, template: str = '') -> str:
         """Generate username by template.
 
         :param template: Template ('U_d', 'U.d', 'U-d', 'ld', 'l-d', 'Ud',
@@ -196,7 +198,7 @@ class Personal(BaseProvider):
 
         supported = list(templates.keys())
 
-        if template is not None:
+        if template:
             try:
                 return templates[template]
             except KeyError:
@@ -228,7 +230,7 @@ class Personal(BaseProvider):
 
         return password
 
-    def email(self, domains: str = None):
+    def email(self, domains: Union[tuple, list] = None) -> str:
         """Generate a random email.
 
         :param domains: Custom domain for email.
@@ -288,11 +290,12 @@ class Personal(BaseProvider):
             raise NotImplementedError(
                 'Card type {} is not supported.'.format(card_type))
 
-        number = str(number)
-        while len(number) < length - 1:
-            number += self.random.choice(digits)
+        str_num = str(number)
+        while len(str_num) < length - 1:
+            str_num += self.random.choice(digits)
 
-        card = ' '.join(regex.search(number + luhn_checksum(number)).groups())
+        groups = regex.search(str_num + luhn_checksum(str_num))
+        card = ' '.join(groups.groups())
         return card
 
     def credit_card_expiration_date(self, minimum: int = 16,
@@ -307,7 +310,7 @@ class Personal(BaseProvider):
         """
         month, year = [self.random.randint(1, 12),
                        self.random.randint(minimum, maximum)]
-        month = '0' + str(month) if month < 10 else month
+        month = 0 + month if month < 10 else month
         return '{0}/{1}'.format(month, year)
 
     def cid(self) -> int:
@@ -346,7 +349,8 @@ class Personal(BaseProvider):
 
         return url.format(username)
 
-    def gender(self, iso5218: bool = False, symbol: bool = False) -> str:
+    def gender(self, iso5218: bool = False,
+               symbol: bool = False) -> Union[str, int]:
         """Get a random title of gender, code for the representation
         of human sexes is an international standard that defines a
         representation of human sexes through a language-neutral single-digit
@@ -397,7 +401,7 @@ class Personal(BaseProvider):
         :Example:
             48.
         """
-        weight = self.random.randint(int(minimum), int(maximum))
+        weight = self.random.randint(minimum, maximum)
         return weight
 
     def blood_type(self) -> str:

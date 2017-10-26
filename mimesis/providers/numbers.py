@@ -1,7 +1,7 @@
 import array
 import mimesis.typing as types
 
-from .base import BaseProvider
+from mimesis.providers.base import BaseProvider
 
 
 class Numbers(BaseProvider):

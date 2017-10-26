@@ -2,7 +2,7 @@ import datetime
 from calendar import monthrange
 
 from mimesis.data import GMT_OFFSETS, ROMAN_NUMS, TIMEZONES
-from mimesis.providers import BaseProvider
+from mimesis.providers.base import BaseProvider
 from mimesis.utils import pull
 
 
@@ -26,10 +26,10 @@ class Datetime(BaseProvider):
             Wednesday (Wed. when abbr=True).
         """
         key = 'abbr' if abbr else 'name'
-        days = self.data['day'][key]
+        days = self.data['day'].get(key)
         return self.random.choice(days)
 
-    def month(self, abbr: str = False) -> str:
+    def month(self, abbr: bool = False) -> str:
         """Get a random month.
 
         :param abbr: if True then will be returned abbreviated month name.
@@ -38,7 +38,7 @@ class Datetime(BaseProvider):
             January (Jan. when abbr=True).
         """
         key = 'abbr' if abbr else 'name'
-        months = self.data['month'][key]
+        months = self.data['month'].get(key)
         return self.random.choice(months)
 
     def year(self, minimum: int = 1990, maximum: int = 2050) -> int:
@@ -50,7 +50,7 @@ class Datetime(BaseProvider):
         :Example:
             2023
         """
-        return self.random.randint(int(minimum), int(maximum))
+        return self.random.randint(minimum, maximum)
 
     def century(self) -> str:
         """Get a random value from list of centuries (roman format).
@@ -72,7 +72,7 @@ class Datetime(BaseProvider):
         return self.random.choice(periodicity)
 
     def date(self, start: int = 2000, end: int = 2035,
-             fmt: str = None) -> str:
+             fmt: str = '') -> str:
         """Generate a string representing of random date formatted for
         the locale or as specified.
 
@@ -84,7 +84,7 @@ class Datetime(BaseProvider):
             08/16/88 (en)
         """
         if not fmt:
-            fmt = self.data['formats']['date']
+            fmt = self.data['formats'].get('date')
 
         year = self.random.randint(start, end)
         month = self.random.randint(1, 12)
@@ -92,7 +92,7 @@ class Datetime(BaseProvider):
             year, month, self.random.randint(1, monthrange(year, month)[1]))
         return d.strftime(fmt)
 
-    def time(self, fmt: str = None) -> str:
+    def time(self, fmt: str = '') -> str:
         """Generate a random time formatted for the locale or as specified.
 
         :return: Time.
@@ -100,7 +100,7 @@ class Datetime(BaseProvider):
             21:30:00 (en)
         """
         if not fmt:
-            fmt = self.data['formats']['time']
+            fmt = self.data['formats'].get('time')
 
         t = datetime.time(
             self.random.randint(0, 23),
@@ -110,7 +110,7 @@ class Datetime(BaseProvider):
         )
         return t.strftime(fmt)
 
-    def day_of_month(self) -> str:
+    def day_of_month(self) -> int:
         """Generate a random day of month, from 1 to 31.
 
         :return: Random value from 1 to 31.

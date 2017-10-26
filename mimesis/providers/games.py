@@ -1,5 +1,5 @@
 from mimesis.data import GAMES, GAMING_PLATFORMS, GENRES, SCORE_PHRASES
-from mimesis.providers import BaseProvider
+from mimesis.providers.base import BaseProvider
 
 __all__ = ['Games']
 
@@ -14,7 +14,14 @@ class Games(BaseProvider):
         """
         return self.random.choice(GAMING_PLATFORMS)
 
-    def score(self, minimum: int = 1, maximum: int = 10) -> int:
+    def score(self, minimum: int = 1, maximum: int = 10) -> float:
+        """Score of game.
+
+        :param minimum: Maximum value.
+        :param maximum: Minimum value.
+        :return: Score.
+        :rtype: float
+        """
         return self.random.randint(minimum * 10, maximum * 10) / 10
 
     def pegi_rating(self, pt: bool = False) -> str:

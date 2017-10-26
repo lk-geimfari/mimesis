@@ -1,7 +1,7 @@
 from string import ascii_uppercase
 
 from mimesis.data import IMEI_TACS, ISBN_GROUPS, LOCALE_CODES
-from mimesis.providers import BaseProvider
+from mimesis.providers.base import BaseProvider
 from mimesis.utils import luhn_checksum
 
 
@@ -47,14 +47,12 @@ class Code(BaseProvider):
         locale = self.random.choice(LOCALE_CODES)
         return locale
 
-    def issn(self, mask: str = None) -> str:
+    def issn(self, mask: str = '####-####') -> str:
         """Generate a random International Standard Serial Number (ISSN).
 
         :param mask: Mask ISSN.
         :return: ISSN.
         """
-        if not mask:
-            mask = '####-####'
         return self.custom_code(mask=mask)
 
     def isbn(self, fmt: str = 'isbn-10') -> str:
@@ -91,7 +89,7 @@ class Code(BaseProvider):
             else '#############'
         return self.custom_code(mask=mask)
 
-    def imei(self) -> int:
+    def imei(self) -> str:
         """Generate a random IMEI (International Mobile Station Equipment Identity).
 
         :return: IMEI.

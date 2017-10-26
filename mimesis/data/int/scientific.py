@@ -42,8 +42,11 @@ SI_PREFIXES = {
         'hecto',
         'deca',
     ],
-    '_sym_': {
-        'negative': ['d', 'c', 'm', 'μ', 'n', 'p', 'f', 'a', 'z', 'y'],
-        'positive': ['Y', 'Z', 'E', 'P', 'T', 'G', 'M', 'k', 'h', 'da'],
-    },
+}
+
+SI_PREFIXES_SYM = {
+    'negative': ['d', 'c', 'm', 'μ', 'n',
+                 'p', 'f', 'a', 'z', 'y'],
+    'positive': ['Y', 'Z', 'E', 'P', 'T',
+                 'G', 'M', 'k', 'h', 'da'],
 }

@@ -1,6 +1,6 @@
 from mimesis.data import (BACKEND, CONTAINER, FRONTEND, LICENSES, NOSQL, OS,
                           PROGRAMMING_LANGS, SQL)
-from mimesis.providers import BaseProvider
+from mimesis.providers.base import BaseProvider
 
 
 class Development(BaseProvider):

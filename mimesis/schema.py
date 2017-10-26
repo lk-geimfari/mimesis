@@ -3,7 +3,10 @@ from typing import Iterator
 
 from mimesis.decorators import type_to
 from mimesis.exceptions import UndefinedSchema
-from mimesis.providers import BaseProvider, Generic
+from mimesis.providers.base import BaseProvider
+from mimesis.providers.generic import Generic
+
+import mimesis.typing as types
 
 
 class Schema(BaseProvider):
@@ -11,13 +14,13 @@ class Schema(BaseProvider):
     providers which supported by mimesis.
     """
 
-    schema = {}
+    schema = {}  # type: types.JSON
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
         self.generic = Generic(self.locale)
 
-    def __generate(self, schema: dict) -> dict:
+    def __generate(self, schema: types.JSON) -> types.JSON:
         data = dict()
         for k, v in schema.items():
             if isinstance(v, dict):
@@ -30,7 +33,7 @@ class Schema(BaseProvider):
                     getattr(self.generic, provider), method)()
         return data
 
-    def load(self, path: str = None, schema: dict = None):
+    def load(self, path: str = '', schema: types.JSON = None):
         """Load schema from python dict or from json file.
 
         :param path: Path to file.

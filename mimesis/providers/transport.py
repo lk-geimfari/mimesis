@@ -1,5 +1,6 @@
 from mimesis.data import AIRPLANES, CARS, TRUCKS
-from mimesis.providers import BaseProvider, Code
+from mimesis.providers.code import Code
+from mimesis.providers.base import BaseProvider
 
 
 class Transport(BaseProvider):

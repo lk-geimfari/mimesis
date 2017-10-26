@@ -6,6 +6,8 @@ import json
 import os.path as path
 import urllib.request as request
 from random import choice
+import ssl
+from ssl import _create_unverified_context as uctx
 
 from mimesis.exceptions import (
     UnexpectedGender,
@@ -126,8 +128,7 @@ def download_image(url: str = '', save_path: str = '',
     :return: Image name.
     """
     if unverified_ctx:
-        import ssl
-        ssl._create_default_https_context = ssl._create_stdlib_context
+        ssl._create_default_https_context = uctx
 
     if url is not None:
         image_name = url.rsplit('/')[-1]

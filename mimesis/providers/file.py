@@ -1,5 +1,5 @@
 from mimesis.data import EXTENSIONS, MIME_TYPES
-from mimesis.providers import BaseProvider
+from mimesis.providers.base import BaseProvider
 
 
 class File(BaseProvider):
@@ -15,8 +15,8 @@ class File(BaseProvider):
         :Example:
             .py (file_type='source').
         """
-        k = file_type.lower()
-        return self.random.choice(EXTENSIONS[k])
+        key = file_type.lower()
+        return self.random.choice(EXTENSIONS[key])
 
     def mime_type(self, type_t: str = 'application') -> str:
         """Get a random mime type from list.

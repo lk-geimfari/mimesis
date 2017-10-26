@@ -2,10 +2,9 @@ import json
 
 from mimesis.data import (CSS_PROPERTIES, CSS_SELECTORS, CSS_SIZE_UNITS,
                           HTML_CONTAINER_TAGS, HTML_MARKUP_TAGS)
-from mimesis.providers import BaseProvider, Internet
+from mimesis.providers.base import BaseProvider
+from mimesis.providers.internet import Internet
 from mimesis.providers.text import Text
-
-import mimesis.typing as types
 
 
 class Structured(BaseProvider):
@@ -57,8 +56,8 @@ class Structured(BaseProvider):
 
     def html(self) -> str:
         """Generate a random HTML tag with text inside and some attrs set.
-
         :return: HTML.
+        :rtype: str
         :Examples:
             '<span class="select" id="careers">
             Ports are created with the built-in function open_port.
@@ -112,7 +111,7 @@ class Structured(BaseProvider):
         return value
 
     def json(self, items: int = 5,
-             max_depth: int = 3, recursive: bool = False) -> types.JSON:
+             max_depth: int = 3, recursive: bool = False) -> str:
         """Generate a random snippet of JSON.
 
         :param items: Number of top-level items to produce.

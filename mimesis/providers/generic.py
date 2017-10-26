@@ -1,11 +1,27 @@
 import inspect
-from typing import Callable, Iterable
 
-from mimesis.providers import (Address, BaseProvider, Business, ClothingSizes,
-                               Code, Datetime, Development, File, Food, Games,
-                               Hardware, Internet, Numbers, Path, Personal,
-                               Science, Text, Transport, UnitSystem,
-                               Cryptographic)
+from mimesis.providers.address import Address
+from mimesis.providers.base import BaseProvider
+from mimesis.providers.business import Business
+from mimesis.providers.clothing import ClothingSizes
+from mimesis.providers.cryptographic import Cryptographic
+from mimesis.providers.code import Code
+from mimesis.providers.date import Datetime
+from mimesis.providers.development import Development
+from mimesis.providers.file import File
+from mimesis.providers.food import Food
+from mimesis.providers.games import Games
+from mimesis.providers.hardware import Hardware
+from mimesis.providers.internet import Internet
+from mimesis.providers.numbers import Numbers
+from mimesis.providers.path import Path
+from mimesis.providers.personal import Personal
+from mimesis.providers.science import Science
+from mimesis.providers.text import Text
+from mimesis.providers.transport import Transport
+from mimesis.providers.units import UnitSystem
+
+import mimesis.typing as types
 
 
 class Generic(BaseProvider):
@@ -43,7 +59,7 @@ class Generic(BaseProvider):
         if attribute and callable(attribute):
             return attribute(self.locale)
 
-    def add_provider(self, cls: Callable) -> None:
+    def add_provider(self, cls: types.Provider) -> None:
         """Add a custom provider to Generic() object.
 
         :param cls: Custom provider.
@@ -60,7 +76,7 @@ class Generic(BaseProvider):
         else:
             raise TypeError('Provider must be a class')
 
-    def add_providers(self, *providers: Iterable[Callable]) -> None:
+    def add_providers(self, *providers: types.Providers) -> None:
         """Add a lot of custom providers to Generic() object.
 
         :param providers: Custom providers.

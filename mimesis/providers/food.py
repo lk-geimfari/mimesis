@@ -1,4 +1,4 @@
-from mimesis.providers import BaseProvider
+from mimesis.providers.base import BaseProvider
 from mimesis.utils import pull
 
 

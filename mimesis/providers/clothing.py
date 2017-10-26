@@ -1,4 +1,4 @@
-from mimesis.providers import BaseProvider
+from mimesis.providers.base import BaseProvider
 
 
 class ClothingSizes(BaseProvider):
@@ -31,7 +31,8 @@ class ClothingSizes(BaseProvider):
         :Example:
             42
         """
-        size = self.random.choice([i for i in range(40, 62) if i % 2 == 0])
+        size = self.random.choice(
+            [i for i in range(40, 62) if i % 2 == 0])
         return size
 
     def custom(self, minimum: int = 40, maximum: int = 62) -> int:
@@ -43,4 +44,4 @@ class ClothingSizes(BaseProvider):
         :Example:
             44
         """
-        return self.random.randint(int(minimum), int(maximum))
+        return self.random.randint(minimum, maximum)
