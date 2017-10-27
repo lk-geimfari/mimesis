@@ -42,7 +42,7 @@ Also you can install it manually:
 
 ## Basic Usage
 
-As we said above, this library is really easy to use:
+As we said above, this library is really easy to use. A simple usage example is given below:
 
 ```python
 >>> import mimesis
