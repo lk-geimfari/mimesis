@@ -26,7 +26,8 @@ def locale_info(locale: str) -> str:
 
     :param locale: Locale abbreviation.
     :type locale: str
-    :returns: Locale name.
+    :return: Locale name.
+    :rtype: str
     """
     locale = locale.lower()
     supported = settings.SUPPORTED_LOCALES
@@ -41,7 +42,9 @@ def luhn_checksum(num: str) -> str:
     """Calculate a checksum for num using the Luhn algorithm.
 
     :param num: The number to calculate a checksum for as a string.
-    :returns: Checksum for number.
+    :return: Checksum for number.
+    :rtype: str
+
     """
     check = 0
     for i, s in enumerate(reversed([x for x in num])):
@@ -60,6 +63,7 @@ def update_dict(initial: types.JSON, other: types.Mapping) -> types.JSON:
     :param initial: Dict to update.
     :param other: Dict to update from.
     :return: Updated dict.
+    :rtype: types.JSON
     """
     for key, value in other.items():
         if isinstance(value, collections.Mapping):
@@ -80,7 +84,8 @@ def pull(file: str, locale: str = 'en') -> types.JSON:
 
     :param file: The name of file.
     :param locale: Locale.
-    :returns: The content of the file.
+    :return: The content of the file.
+    :rtype: types.JSON
 
     :Example:
 
@@ -126,6 +131,7 @@ def download_image(url: str = '', save_path: str = '',
     :param save_path: Saving path.
     :param unverified_ctx: Create unverified context.
     :return: Image name.
+    :rtype: types.Union[None, str]
     """
     if unverified_ctx:
         ssl._create_default_https_context = uctx
@@ -142,6 +148,7 @@ def check_gender(gender: types.Gender = 0) -> str:
 
     :param gender: Gender.
     :return: Gender.
+    :rtype: str
     """
     f, m = ('female', 'male')
     # When gender is None or 0, 9

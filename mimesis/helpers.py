@@ -12,6 +12,7 @@ class Random(random.Random):
         :param a: Minimum value of range.
         :param b: Maximum value of range.
         :return: List of random integers.
+        :rtype: list
         """
 
         if not amount:

@@ -18,6 +18,7 @@ def romanized(locale: str = '') -> types.Callable:
 
     :param locale: Function.
     :return: Latinized text.
+    :rtype: types.Callable
     """
 
     def romanized_deco(func):
@@ -52,6 +53,7 @@ def type_to(new_type: types.Callable,
     :param new_type: New type.
     :param check_len: Check length of object.
     :return: Converted to new_type object.
+    :rtype: types.Callable
     """
 
     def inner(func):

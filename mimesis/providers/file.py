@@ -12,6 +12,8 @@ class File(BaseProvider):
             File type (source, text, data, audio, video, image,
             executable, compressed).
         :return: Extension of a file.
+        :rtype: str
+
         :Example:
             .py (file_type='source').
         """
@@ -21,9 +23,10 @@ class File(BaseProvider):
     def mime_type(self, type_t: str = 'application') -> str:
         """Get a random mime type from list.
 
-        :return: Mime type.
         :param type_t:
             Type of media: (application, image, video, audio, text, message).
+        :return: Mime type.
+        :rtype: str
         """
         supported = ' '.join(MIME_TYPES.keys())
 

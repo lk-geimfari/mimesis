@@ -8,6 +8,8 @@ class ClothingSizes(BaseProvider):
         """Get a random size in international format.
 
         :return: Clothing size.
+        :rtype: str
+
         :Example:
             XXL.
         """
@@ -28,6 +30,8 @@ class ClothingSizes(BaseProvider):
         """Generate a random clothing size in European format.
 
         :return: Clothing size.
+        :rtype: int
+
         :Example:
             42
         """
@@ -41,6 +45,8 @@ class ClothingSizes(BaseProvider):
         :param minimum: Min value.
         :param maximum: Max value
         :return: Clothing size.
+        :rtype: int
+
         :Example:
             44
         """

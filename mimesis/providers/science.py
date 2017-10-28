@@ -19,6 +19,8 @@ class Science(BaseProvider):
         """Get a random mathematical formula.
 
         :return: Math formula.
+        :rtype: str
+
         :Example:
             A = (ab)/2.
         """
@@ -30,6 +32,8 @@ class Science(BaseProvider):
 
         :param name_only: If False then will be returned dict.
         :return: Name of chemical element or dict.
+        :rtype: Union[dict, str]
+
         :Example:
             {'Symbol': 'S', 'Name': 'Sulfur', 'Atomic number': '16'}
         """
@@ -49,6 +53,8 @@ class Science(BaseProvider):
         """Generate a random link to scientific article on Wikipedia.
 
         :return: Link to article on Wikipedia.
+        :rtype: str
+
         :Example:
             https://en.wikipedia.org/wiki/Black_hole
         """

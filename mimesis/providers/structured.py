@@ -22,6 +22,7 @@ class Structured(BaseProvider):
         """Generates a random snippet of CSS.
 
         :return: CSS.
+        :rtype: str
         """
         selector = self.random.choice(CSS_SELECTORS)
         css_sel = '{}{}'.format(selector, self.text.word())
@@ -89,6 +90,7 @@ class Structured(BaseProvider):
         :type tag: str
         :type attribute: str
         :return: An attribute.
+        :rtype: str
         """
         try:
             value = HTML_CONTAINER_TAGS[tag][attribute]  # type: ignore
@@ -120,6 +122,7 @@ class Structured(BaseProvider):
             When used recursively, will return a Python object instead of JSON
             string.
         :return: JSON
+        :rtype: str
         """
 
         # choose root element type

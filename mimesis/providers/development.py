@@ -10,6 +10,8 @@ class Development(BaseProvider):
         """Get a random software license from list.
 
         :return: License name.
+        :rtype: str
+
         :Example:
             The BSD 3-Clause License.
         """
@@ -19,6 +21,8 @@ class Development(BaseProvider):
         """Generate a random version information.
 
         :return: The version of software.
+        :rtype: str
+
         :Example:
             0.11.3.
         """
@@ -30,6 +34,8 @@ class Development(BaseProvider):
 
         :param nosql: only NoSQL databases.
         :return: Database name.
+        :rtype: str
+
         :Example:
             PostgreSQL.
         """
@@ -41,6 +47,8 @@ class Development(BaseProvider):
         """Get a random containerization system.
 
         :return: Containerization system.
+        :rtype: str
+
         :Example:
             Docker.
         """
@@ -50,6 +58,8 @@ class Development(BaseProvider):
         """Get a random version control system.
 
         :return: Version control system
+        :rtype: str
+
         :Example:
             Git
         """
@@ -59,6 +69,8 @@ class Development(BaseProvider):
         """Get a random programming language from the list.
 
         :return: Programming language.
+        :rtype: str
+
         :Example:
             Erlang.
         """
@@ -68,6 +80,8 @@ class Development(BaseProvider):
         """Get a random backend stack.
 
         :return: Stack.
+        :rtype: str
+
         :Example:
             Elixir/Phoenix
         """
@@ -77,6 +91,8 @@ class Development(BaseProvider):
         """Get a random front-end stack.
 
         :return: Stack.
+        :rtype: str
+
         :Example:
             JS/React.
         """
@@ -86,6 +102,8 @@ class Development(BaseProvider):
         """Get a random operating system or distributive name.
 
         :return: The name of OS.
+        :rtype: str
+
         :Example:
             Gentoo
         """
@@ -96,6 +114,8 @@ class Development(BaseProvider):
         and return url to a question.
 
         :return: URL to a question.
+        :rtype: str
+
         :Example:
             http://stackoverflow.com/questions/1726403
         """

@@ -79,6 +79,32 @@ def test_state(address):
     assert result_abbr in address.data['state']['abbr']
 
 
+# TODO: Refactoring
+
+def test_province(address):
+    result = address.state()
+    assert result in address.data['state']['name']
+
+    result_abbr = address.state(abbr=True)
+    assert result_abbr in address.data['state']['abbr']
+
+
+def region(address):
+    result = address.state()
+    assert result in address.data['state']['name']
+
+    result_abbr = address.state(abbr=True)
+    assert result_abbr in address.data['state']['abbr']
+
+
+def federal_subject(address):
+    result = address.state()
+    assert result in address.data['state']['name']
+
+    result_abbr = address.state(abbr=True)
+    assert result_abbr in address.data['state']['abbr']
+
+
 def test_postal_code(address):
     result = address.postal_code()
     current_locale = address.locale

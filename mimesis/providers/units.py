@@ -14,6 +14,7 @@ class UnitSystem(BaseProvider):
 
         :param symbol: Symbol of unit.
         :return: Mass unit name.
+        :rtype: str
         :Example:
             gr
         """
@@ -33,6 +34,8 @@ class UnitSystem(BaseProvider):
 
         :param symbol: Symbol of unit.
         :return: Thermodynamic temperature unit name
+        :rtype: str
+
         :Example:
             K
         """
@@ -46,6 +49,8 @@ class UnitSystem(BaseProvider):
 
         :param symbol: Symbol of unit.
         :return: Unit name of amount of substance.
+        :rtype: str
+
         :Example:
             mol
         """
@@ -59,6 +64,8 @@ class UnitSystem(BaseProvider):
 
         :param symbol: Symbol of unit.
         :return: Unit name of angle.
+        :rtype: str
+
         :Example:
             radian
         """
@@ -72,6 +79,8 @@ class UnitSystem(BaseProvider):
 
         :param symbol: Symbol of unit.
         :return: Unit name of solid angle
+        :rtype: str
+
         :Example:
             ㏛
         """
@@ -85,6 +94,8 @@ class UnitSystem(BaseProvider):
 
         :param symbol: Symbol of unit.
         :return: Unit name if frequency.
+        :rtype: str
+
         :Example:
             Hz
         """
@@ -98,6 +109,8 @@ class UnitSystem(BaseProvider):
 
         :param symbol:  Symbol of unit.
         :return:  Unit name of force.
+        :rtype: str
+
         :Example:
             N
         """
@@ -111,6 +124,8 @@ class UnitSystem(BaseProvider):
 
         :param symbol: Symbol of unit.
         :return: Unit name of pressure.
+        :rtype: str
+
         :Example:
             pascal
         """
@@ -124,6 +139,8 @@ class UnitSystem(BaseProvider):
 
         :param symbol: Symbol of unit.
         :return: Unit name of energy.
+        :rtype: str
+
         :Example:
             J
         """
@@ -137,6 +154,8 @@ class UnitSystem(BaseProvider):
 
         :param symbol: Symbol of unit.
         :return: Unit name of power.
+        :rtype: str
+
         :Example:
             watt
         """
@@ -153,6 +172,8 @@ class UnitSystem(BaseProvider):
 
         :param symbol: Symbol of unit.
         :return: Unit name of electric charge.
+        :rtype: str
+
         :Example:
             coulomb
         """
@@ -166,6 +187,8 @@ class UnitSystem(BaseProvider):
 
         :param symbol: Symbol of unit.
         :return: Unit name of voltage.
+        :rtype: str
+
         :Example:
             volt
         """
@@ -179,6 +202,8 @@ class UnitSystem(BaseProvider):
 
         :param symbol: Symbol of unit.
         :return: Unit name of electric capacitance.
+        :rtype: str
+
         :Example:
             F
         """
@@ -192,6 +217,8 @@ class UnitSystem(BaseProvider):
 
         :param symbol: Symbol of unit.
         :return: Name of electric resistance.
+        :rtype: str
+
         :Example:
             Ω
         """
@@ -211,6 +238,8 @@ class UnitSystem(BaseProvider):
 
         :param symbol: Symbol of unit.
         :return: Unit name of electrical conductance.
+        :rtype: str
+
         :Example:
             siemens
         """
@@ -224,6 +253,8 @@ class UnitSystem(BaseProvider):
 
         :param symbol: Symbol of unit.
         :return: Unit name of magnetic flux.
+        :rtype: str
+
         :Example:
             Wb
         """
@@ -237,6 +268,8 @@ class UnitSystem(BaseProvider):
 
         :param symbol: Symbol of unit.
         :return: Unit name of magnetic flux density.
+        :rtype: str
+
         :Example:
             tesla
         """
@@ -250,6 +283,8 @@ class UnitSystem(BaseProvider):
 
         :param symbol: Symbol of unit.
         :return: Unit name of inductance.
+        :rtype: str
+
         :Example:
             H
         """
@@ -263,6 +298,8 @@ class UnitSystem(BaseProvider):
 
         :param symbol:
         :return:
+        :rtype: str
+
         """
         if not symbol:
             return 'Celsius'
@@ -274,6 +311,8 @@ class UnitSystem(BaseProvider):
 
         :param symbol: Symbol of unit.
         :return: Unit name of radioactivity.
+        :rtype: str
+
         :Example:
             Bq
         """
@@ -287,6 +326,8 @@ class UnitSystem(BaseProvider):
         :param sign: Sing of number (positive, negative)
         :param symbol: Return symbol of prefix.
         :return: Prefix for SI.
+        :rtype: str
+
         :Example:
             mega
         """

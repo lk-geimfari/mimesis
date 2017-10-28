@@ -27,6 +27,7 @@ class Numbers(BaseProvider):
             this option, because type 'array' much faster than 'list'.
 
         :return: An array of floating-point numbers.
+        :rtype: types.Array
         """
         nums = array.array(type_code, (self.random.random()
                                        for _ in range(10 ** int(n))))
@@ -47,6 +48,7 @@ class Numbers(BaseProvider):
         :param end: Last value of range.
         :param to_list: Convert array to list.
         :return: An array of floating-point numbers.
+        :rtype: types.Array
         """
         nums = array.array('L', (i for i in range(start, end) if i % 2))
         return nums.tolist() if to_list else nums
@@ -56,6 +58,8 @@ class Numbers(BaseProvider):
 
         :param to_bin: If True then convert to binary.
         :return: Digit.
+        :rtype: types.Number
+
         :Example:
             4.
         """
@@ -72,6 +76,7 @@ class Numbers(BaseProvider):
         :param minimum: Minimum of range.
         :param maximum: Maximum of range
         :return: Number
+        :rtype: int
         """
         num = self.random.randint(int(minimum), int(maximum))
         return num
@@ -81,6 +86,8 @@ class Numbers(BaseProvider):
 
         :param maximum: Minimum value (default is 5.0).
         :return: Rating.
+        :rtype: float
+
         :Example:
             4.7
         """

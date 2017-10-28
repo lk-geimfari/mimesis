@@ -22,6 +22,8 @@ class Code(BaseProvider):
         :param char: Placeholder for characters.
         :param digit: Placeholder for digits.
         :return: Custom code.
+        :rtype: str
+
         :Example:
             5673-AGFR-SFSFF-1423-4/AD.
         """
@@ -41,6 +43,8 @@ class Code(BaseProvider):
         See Windows Language Code Identifier Reference for more information.
 
         :return: Locale code.
+        :rtype: str
+
         :Example:
             de-ch
         """
@@ -52,6 +56,7 @@ class Code(BaseProvider):
 
         :param mask: Mask ISSN.
         :return: ISSN.
+        :rtype: str
         """
         return self.custom_code(mask=mask)
 
@@ -61,6 +66,8 @@ class Code(BaseProvider):
 
         :param fmt: ISBN format.
         :return: ISBN.
+        :rtype: str
+
         :Example:
             132-1-15411-375-8.
         """
@@ -82,6 +89,8 @@ class Code(BaseProvider):
 
         :param fmt: Format of EAN.
         :return: EAN.
+        :rtype: str
+
         :Example:
             3953753179567.
         """
@@ -93,6 +102,8 @@ class Code(BaseProvider):
         """Generate a random IMEI (International Mobile Station Equipment Identity).
 
         :return: IMEI.
+        :rtype: str
+
         :Example:
             353918052107063
         """
@@ -103,6 +114,8 @@ class Code(BaseProvider):
         """Generate a random PIN code.
 
         :return: PIN code.
+        :rtype: str
+
         :Example:
             5241.
         """

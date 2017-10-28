@@ -16,6 +16,8 @@ class Internet(BaseProvider):
         """Get a random HTTP content type.
 
         :return: Content type.
+        :rtype: str
+
         :Example:
             Content-Type: application/json
         """
@@ -27,6 +29,8 @@ class Internet(BaseProvider):
 
         :param code_only: Return only http status code.
         :return: HTTP status.
+        :rtype: str
+
         :Example:
             200 OK
         """
@@ -40,6 +44,8 @@ class Internet(BaseProvider):
         """Get a random HTTP method.
 
         :return: HTTP method.
+        :rtype: str
+
         :Example:
             POST
         """
@@ -49,6 +55,8 @@ class Internet(BaseProvider):
         """Generate a random IPv4 address.
 
         :return: Random IPv4 address.
+        :rtype: str
+
         :Example:
             19.121.223.58
         """
@@ -59,6 +67,8 @@ class Internet(BaseProvider):
         """Generate a random IPv6 address.
 
         :return: Random IPv6 address.
+        :rtype: str
+
         :Example:
             2001:c244:cf9d:1fb1:c56d:f52c:8a04:94f3
         """
@@ -70,6 +80,8 @@ class Internet(BaseProvider):
         """Generate a random MAC address.
 
         :return: Random MAC address.
+        :rtype: str
+
         :Example:
             00:16:3e:25:e7:b1
         """
@@ -86,18 +98,22 @@ class Internet(BaseProvider):
         """Get a random emoji shortcut code.
 
         :return: Emoji code.
+        :rtype: str
+
         :Example:
             :kissing:
         """
         return self.random.choice(EMOJI)
 
     @staticmethod
-    def image_placeholder(width: Size = '400', height: Size = '300') -> str:
+    def image_placeholder(width: Size = '400',
+                          height: Size = '300') -> str:
         """Generate a link to the image placeholder.
 
         :param width: Width of image.
         :param height: Height of image.
         :return: URL to image placeholder.
+        :rtype: str
         """
         url = 'http://placehold.it/%sx%s'
         return url % (width, height)
@@ -112,6 +128,7 @@ class Internet(BaseProvider):
         :param width: Width of the image.
         :param height: Height of the image.
         :return: An image (Link to image).
+        :rtype: str
         """
         url = 'https://source.unsplash.com/category/' \
               '{category}/{width}x{height}'
@@ -150,6 +167,7 @@ class Internet(BaseProvider):
             Available categories: general, girls, love, boys, friends, family,
             nature, travel, cars, sport, tumblr.
         :return: The list of hashtags.
+        :rtype: Union[str, list]
 
         :Example:
             ['#love', '#sky', '#nice'].
@@ -173,6 +191,8 @@ class Internet(BaseProvider):
 
         :param: Domain type (en.wikipedia.org/wiki/Top-level_domain#Types).
         :return: Random home page.
+        :rtype: str
+
         :Example:
             http://www.fontir.info
         """
@@ -190,6 +210,7 @@ class Internet(BaseProvider):
         :param domain_type: Type of domain.
         Supported TLDs: ccTLD, gTLD, GeoTLD, uTLD, sTLD
         :return: Top level domain.
+        :rtype: str
         """
         # TODO: This is really ugly solution. Fix it.
         supported = tuple(TLD.keys())
@@ -210,12 +231,15 @@ class Internet(BaseProvider):
 
         return self.random.choice(domains)
 
-    def subreddit(self, nsfw: bool = False, full_url: bool = False) -> str:
+    def subreddit(self, nsfw: bool = False,
+                  full_url: bool = False) -> str:
         """Get a random subreddit from the list.
 
         :param nsfw: NSFW subreddit.
         :param full_url: Full URL address.
         :return: Subreddit or URL to subreddit.
+        :rtype: str
+
         :Example:
             https://www.reddit.com/r/flask/
         """
@@ -234,6 +258,8 @@ class Internet(BaseProvider):
         """Get a random user agent.
 
         :return: User agent.
+        :rtype: str
+
         :Example:
             Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:15.0)
             Gecko/20100101 Firefox/15.0.1
@@ -247,6 +273,8 @@ class Internet(BaseProvider):
             Layer of protocol: application, data_link, network, physical,
             presentation, session and transport.
         :return: Protocol name.
+        :rtype: str
+
         :Example:
             AMQP
         """

@@ -15,6 +15,7 @@ class GermanySpecProvider(BaseSpecProvider):
 
         :param plural: Return noun in plural.
         :return: Noun.
+        :rtype: str
         """
 
         key = 'plural' if \

@@ -22,8 +22,10 @@ class Datetime(BaseProvider):
 
         :param abbr: Abbreviated name of the day.
         :return: Name of day of the week.
+        :rtype: str
+
         :Example:
-            Wednesday (Wed. when abbr=True).
+            Wednesday
         """
         key = 'abbr' if abbr else 'name'
         days = self.data['day'].get(key)
@@ -34,8 +36,10 @@ class Datetime(BaseProvider):
 
         :param abbr: if True then will be returned abbreviated month name.
         :return: Month name.
+        :rtype: str
+
         :Example:
-            January (Jan. when abbr=True).
+            January
         """
         key = 'abbr' if abbr else 'name'
         months = self.data['month'].get(key)
@@ -47,6 +51,8 @@ class Datetime(BaseProvider):
         :param minimum: Minimum value.
         :param maximum: Maximum value
         :return: Year
+        :rtype: int
+
         :Example:
             2023
         """
@@ -56,6 +62,8 @@ class Datetime(BaseProvider):
         """Get a random value from list of centuries (roman format).
 
         :return: Century.
+        :rtype: str
+
         :Example:
             XXI
         """
@@ -65,6 +73,8 @@ class Datetime(BaseProvider):
         """Get a random periodicity string.
 
         :return: Periodicity.
+        :rtype: str
+
         :Example:
             Never.
         """
@@ -80,6 +90,8 @@ class Datetime(BaseProvider):
         :param end: Maximum value of year.
         :param fmt: Format string for date.
         :return: Formatted date.
+        :rtype: str
+
         :Example:
             08/16/88 (en)
         """
@@ -96,8 +108,10 @@ class Datetime(BaseProvider):
         """Generate a random time formatted for the locale or as specified.
 
         :return: Time.
+        :rtype: str
+
         :Example:
-            21:30:00 (en)
+            21:30:00
         """
         if not fmt:
             fmt = self.data['formats'].get('time')
@@ -114,6 +128,8 @@ class Datetime(BaseProvider):
         """Generate a random day of month, from 1 to 31.
 
         :return: Random value from 1 to 31.
+        :rtype: int
+
         :Example:
             23
         """
@@ -123,6 +139,8 @@ class Datetime(BaseProvider):
         """Get a random timezone
 
         :return: Timezone.
+        :rtype: str
+
         :Example:
             Europe/Paris
         """
@@ -132,6 +150,8 @@ class Datetime(BaseProvider):
         """Get a random GMT offset value.
 
         :return: GMT Offset.
+        :rtype: str
+
         :Example:
             'UTC +03:00'
         """

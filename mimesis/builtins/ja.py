@@ -12,6 +12,7 @@ class JapanSpecProvider(object):
         :param text: The text to be converted.
         :param alnum: Convert alphanumeric, default True.
         :return: Text with full width characters converted to half width.
+        :rtype: str
 
         :Example:
             QVCｼﾞｬﾊﾟﾝ(0123)
@@ -58,6 +59,7 @@ class JapanSpecProvider(object):
         :param text: The text to be converted.
         :param alnum: Convert alphanumeric, default True.
         :return: Text with half width characters converted to full width.
+        :type: str
 
         :Example:
             ＱＶＣジャパン（０１２３）

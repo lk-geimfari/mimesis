@@ -25,6 +25,7 @@ class Cryptographic(BaseProvider):
             Hashing algorithm ('md5', 'sha1', 'sha224', 'sha256',
             'sha384', 'sha512').
         :return: Hash.
+        :rtype: str
         """
         algorithm = algorithm.lower().strip()
 
@@ -56,6 +57,7 @@ class Cryptographic(BaseProvider):
 
         :param entropy: Number of bytes.
         :return: Token.
+        :rtype: str
         """
         token = hexlify(self.bytes(entropy))
         return token.decode('ascii')
@@ -65,5 +67,6 @@ class Cryptographic(BaseProvider):
         """Generate salt (not cryptographically safe) using uuid4().
 
         :return: Salt.
+        :rtype: str
         """
         return uuid.uuid4().hex

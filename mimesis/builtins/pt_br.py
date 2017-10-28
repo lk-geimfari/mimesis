@@ -13,6 +13,8 @@ class BrazilSpecProvider(object):
 
         :param with_mask: use CPF mask (###.###.###-##) in the return
         :returns: Random CPF
+        :rtype: str
+
         :Example:
             001.137.297-40
         """
@@ -50,7 +52,9 @@ class BrazilSpecProvider(object):
         """Get a random cnpj (brazilian social security code)
 
         :param with_mask: use cnpj mask (###.###.###-##) in the return
-        :returns: Random cnpj
+        :returns: Random cnpj.
+        :rtype: str
+
         :Example:
             77.732.230/0001-70
         """

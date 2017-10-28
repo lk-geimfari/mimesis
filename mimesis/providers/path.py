@@ -23,6 +23,8 @@ class Path(BaseProvider):
         """Generate a root dir path.
 
         :return: Root dir.
+        :rtype: types.Union[str, None]
+
         :Example:
             /
         """
@@ -35,6 +37,7 @@ class Path(BaseProvider):
         """Generate a home path.
 
         :return: Home path.
+        :rtype: types.Union[str, None]
         :Example:
             /home/
         """
@@ -47,6 +50,7 @@ class Path(BaseProvider):
         """Generate a random user.
 
         :return: Path to user.
+        :rtype: types.Union[str, None]
         :Example:
             /home/oretha
         """
@@ -59,6 +63,7 @@ class Path(BaseProvider):
         """Generate a random path to user's folders.
 
         :return: Path.
+        :rtype: types.Union[str, None]
         :Example:
             /home/taneka/Pictures
         """
@@ -74,6 +79,8 @@ class Path(BaseProvider):
         """Generate a random path to development directory.
 
         :return: Path.
+        :rtype: str
+
         :Example:
             /home/sherrell/Development/Python/mercenary
         """
@@ -92,6 +99,8 @@ class Path(BaseProvider):
         """Generate a random path to project directory.
 
         :return: Path to project.
+        :rtype: str
+
         :Example:
             /home/sherika/Development/Falcon/mercenary
         """

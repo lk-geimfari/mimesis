@@ -60,6 +60,7 @@ class Schema(BaseProvider):
 
         :param iterations: Count of iterations.
         :return: Filled schema.
+        :rtype: Iterator
         """
         if self.schema:
             return map(lambda _: self.__generate(self.schema),
