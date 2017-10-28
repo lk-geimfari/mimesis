@@ -1,9 +1,20 @@
+import re
+
 from mimesis.data import EXTENSIONS, MIME_TYPES
 from mimesis.providers.base import BaseProvider
+from mimesis.providers.text import Text
 
 
 class File(BaseProvider):
     """Class for generate fake data for files."""
+
+    def __init__(self):
+        super().__init__()
+        self.__text = Text('en')
+
+    def __sub(self, string):
+        replacer = self.random.choice(['_', '-'])
+        return re.sub("\s+", replacer, string.strip())
 
     def extension(self, file_type: str = 'text') -> str:
         """Get a random file extension from list.
@@ -36,3 +47,43 @@ class File(BaseProvider):
 
         mime_type = self.random.choice(MIME_TYPES[type_t])
         return mime_type
+
+    def size(self, minimum: int = 1, maximum: int = 100) -> str:
+        """Get size of file.
+
+        :param minimum: Maximum value.
+        :param maximum: Minimum value.
+        :return: Size of file.
+        :rtype: str
+
+        :Example:
+            56 kB
+        """
+        num = self.random.randint(minimum, maximum)
+        unit = self.random.choice(
+            ['kB', 'MB', 'GB', 'TB'])
+
+        return '{num} {unit}'.format(
+            num=num,
+            unit=unit,
+        )
+
+    def file_name(self, file_type: str = 'data') -> str:
+        """Get a random file name with some extension.
+
+        :param file_type:
+            File type (source, text, data, audio, video,
+            image, executable, compressed)
+        :return: File name.
+        :rtype: str
+
+        :Example:
+            legislative.txt
+        """
+        name = self.__text.word()
+        ext = self.extension(file_type)
+
+        return '{name}{ext}'.format(
+            name=self.__sub(name),
+            ext=ext,
+        )
