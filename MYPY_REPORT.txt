@@ -1,3 +1,0 @@
-mimesis/providers/units.py:299: error: Argument 1 to "choice" of "Random" has incompatible type "List[str]"; expected "Sequence[Dict[str, List[str]]]"
-mimesis/providers/generic.py:71: error: Item "function" of "Union[Callable[..., Any], Any]" has no attribute "Meta"
-mimesis/providers/generic.py:72: error: Item "function" of "Union[Callable[..., Any], Any]" has no attribute "Meta"

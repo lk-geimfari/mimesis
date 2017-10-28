@@ -296,7 +296,7 @@ class UnitSystem(BaseProvider):
             symbol else SI_PREFIXES
 
         try:
-            prefixes = self.random.choice(prefixes[sign])
+            prefixes = self.random.choice(prefixes[sign])  # type: ignore
             return prefixes  # type: ignore
         except KeyError:
             raise WrongArgument(

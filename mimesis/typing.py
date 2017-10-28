@@ -44,14 +44,5 @@ Array = Union[
     List[Union[int, float]],
 ]
 
-# Provider
-Provider = Union[
-    Callable,
-    Any,
-]
-
 # Bytes type
 Bytes = bytes
-
-# Provider
-Providers = Iterable[Provider]

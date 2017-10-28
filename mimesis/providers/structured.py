@@ -64,7 +64,7 @@ class Structured(BaseProvider):
             </span>'
         """
         tag_name = self.random.choice(list(HTML_CONTAINER_TAGS))
-        tag_attributes = list(HTML_CONTAINER_TAGS[tag_name])
+        tag_attributes = list(HTML_CONTAINER_TAGS[tag_name])  # type: ignore
         k = self.random.randint(1, len(tag_attributes))
 
         selected_attrs = self.random.sample(tag_attributes, k=k)
@@ -91,7 +91,7 @@ class Structured(BaseProvider):
         :return: An attribute.
         """
         try:
-            value = HTML_CONTAINER_TAGS[tag][attribute]
+            value = HTML_CONTAINER_TAGS[tag][attribute]  # type: ignore
         except KeyError:
             raise NotImplementedError(
                 'Tag {} or attribute {} is not supported'.format(

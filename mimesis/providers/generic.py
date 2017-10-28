@@ -59,7 +59,7 @@ class Generic(BaseProvider):
         if attribute and callable(attribute):
             return attribute(self.locale)
 
-    def add_provider(self, cls: types.Provider) -> None:
+    def add_provider(self, cls) -> None:
         """Add a custom provider to Generic() object.
 
         :param cls: Custom provider.
@@ -76,7 +76,7 @@ class Generic(BaseProvider):
         else:
             raise TypeError('Provider must be a class')
 
-    def add_providers(self, *providers: types.Providers) -> None:
+    def add_providers(self, *providers) -> None:
         """Add a lot of custom providers to Generic() object.
 
         :param providers: Custom providers.
