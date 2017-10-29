@@ -12,6 +12,7 @@ import json
 import re
 from shutil import rmtree
 import sys
+import codecs
 
 from distutils.core import setup
 from setuptools import Command
@@ -26,7 +27,7 @@ with open('dev_requirements.txt') as f:
     tests_requirements = f.read().splitlines()
 
 # Long description.
-with open('PYPI_README.rst', 'r', encoding='utf-8') as f:
+with codecs.open('PYPI_README.rst', 'r', encoding='utf-8') as f:
     readme = f.read()
 
 about = {}
