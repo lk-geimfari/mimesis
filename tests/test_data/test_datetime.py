@@ -90,3 +90,41 @@ def test_timezone(_datetime):
     assert result is not None
     assert isinstance(result, str)
     assert result in TIMEZONES
+
+
+@pytest.mark.parametrize(
+    'posix, _type', [
+        (False, str),
+        (True, int),
+    ],
+)
+def test_timestamp(_datetime, posix, _type):
+    result = _datetime.timestamp(posix)
+    assert result is not None
+    assert isinstance(result, _type)
+
+
+@pytest.mark.parametrize(
+    'start, end, humanized, _type', [
+        (2018, 2018, False, datetime.datetime),
+        (2018, 2018, True, str),
+    ],
+)
+def test_datetime(_datetime, start, end, humanized, _type):
+    dt = _datetime.datetime(start=start, end=end, humanized=humanized)
+
+    assert dt is not None
+    assert isinstance(dt, _type)
+
+    if _type is str:
+        year = int(dt.split(' ')[2])
+        assert year == 2018
+
+
+def test_week_date(_datetime):
+    result = _datetime.week_date(start=2017, end=2018)
+    result = result.replace('-', ' ').replace('W', '')
+    year, week = result.split(' ')
+
+    assert (int(year) >= 2017) and (int(year) <= 2018)
+    assert int(week) <= 52

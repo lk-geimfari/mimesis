@@ -1,9 +1,11 @@
-import datetime
+from datetime import date, datetime, time
+from calendar import timegm
 from calendar import monthrange
 
 from mimesis.data import GMT_OFFSETS, ROMAN_NUMS, TIMEZONES
 from mimesis.providers.base import BaseProvider
 from mimesis.utils import pull
+import mimesis.typing as types
 
 
 class Datetime(BaseProvider):
@@ -16,6 +18,24 @@ class Datetime(BaseProvider):
         """
         super().__init__(*args, **kwargs)
         self.data = pull('datetime.json', self.locale)
+
+    def week_date(self, start: int = 2017, end: int = 2018) -> str:
+        """Get week number with year.
+
+        :param start: From start.
+        :param end: To end.
+        :return: Week number.
+        :rtype: str
+
+        :Example:
+            2017-W32
+        """
+        year = self.year(minimum=start, maximum=end)
+        week = self.random.randint(1, 52)
+        return '{year}-W{week}'.format(
+            year=year,
+            week=week,
+        )
 
     def day_of_week(self, abbr: bool = False) -> str:
         """Get a random day of week.
@@ -100,7 +120,7 @@ class Datetime(BaseProvider):
 
         year = self.random.randint(start, end)
         month = self.random.randint(1, 12)
-        d = datetime.date(
+        d = date(
             year, month, self.random.randint(1, monthrange(year, month)[1]))
         return d.strftime(fmt)
 
@@ -116,7 +136,7 @@ class Datetime(BaseProvider):
         if not fmt:
             fmt = self.data['formats'].get('time')
 
-        t = datetime.time(
+        t = time(
             self.random.randint(0, 23),
             self.random.randint(0, 59),
             self.random.randint(0, 59),
@@ -156,3 +176,45 @@ class Datetime(BaseProvider):
             'UTC +03:00'
         """
         return self.random.choice(GMT_OFFSETS)
+
+    def datetime(self, humanized: bool = False, **kwargs) -> types.DateTime:
+        """Generate random datetime.
+
+        :param humanized: Readable representation.
+        :param kwargs: Keyword arguments (start, end).
+        :return: Datetime.
+        :rtype: types.DateTime
+
+        :Example:
+            March, 24 2002
+        """
+        fmt = '%Y-%m-%d %H:%M:%S'
+        dt_str = '{date} {time}'.format(
+            date=self.date(fmt='%Y-%m-%d', **kwargs),
+            time=self.time(),
+        )
+
+        dt = datetime.strptime(dt_str, fmt)
+
+        if humanized:
+            return dt.strftime('%B, %d %Y')
+
+        return dt
+
+    def timestamp(self, posix: bool = True, **kwargs) -> types.Union[str, int]:
+        """Generate random timestamp.
+
+        :param posix: POSIX time.
+        :param kwargs: Keyword arguments (start, end).
+        :return: Timestamp.
+        :rtype: types.Union[str, int]
+
+        :Example:
+            2035-01-02T06:19:19Z
+        """
+        stamp = self.datetime(**kwargs)
+
+        if posix:
+            return timegm(stamp.utctimetuple())
+
+        return stamp.strftime('%Y-%m-%dT%H:%M:%SZ')
