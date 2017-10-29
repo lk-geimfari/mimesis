@@ -12,9 +12,15 @@ class File(BaseProvider):
         super().__init__()
         self.__text = Text('en')
 
-    def __sub(self, string):
+    def __sub(self, string: str) -> str:
+        """Replace spaces in string.
+
+        :param string: String.
+        :return: String without spaces.
+        :rtype: str
+        """
         replacer = self.random.choice(['_', '-'])
-        return re.sub("\s+", replacer, string.strip())
+        return re.sub('\s+', replacer, string.strip())
 
     def extension(self, file_type: str = 'text') -> str:
         """Get a random file extension from list.
@@ -61,7 +67,7 @@ class File(BaseProvider):
         """
         num = self.random.randint(minimum, maximum)
         unit = self.random.choice(
-            ['kB', 'MB', 'GB', 'TB'])
+            ['bytes', 'kB', 'MB', 'GB', 'TB'])
 
         return '{num} {unit}'.format(
             num=num,

@@ -21,8 +21,6 @@ from mimesis.providers.text import Text
 from mimesis.providers.transport import Transport
 from mimesis.providers.units import UnitSystem
 
-import mimesis.typing as types
-
 
 class Generic(BaseProvider):
     """A lazy initialization of locale for all classes that have locales."""

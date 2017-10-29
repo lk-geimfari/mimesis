@@ -3,6 +3,7 @@ This module is included built in and custom types for type hinting.
 This is internal module and you shouldn't use it if you don't know
 why you should.
 """
+import datetime
 from typing import (Any, Callable, Dict, Iterable, List,
                     Union, Mapping, MutableSequence, Tuple)
 
@@ -46,3 +47,6 @@ Array = Union[
 
 # Bytes type
 Bytes = bytes
+
+# Datetime
+DateTime = Union[datetime.datetime, str]
