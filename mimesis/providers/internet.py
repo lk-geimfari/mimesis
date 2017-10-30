@@ -1,10 +1,12 @@
+from typing import Union
+
 from mimesis.data import (TLD, EMOJI, HASHTAGS, HTTP_METHODS,
                           HTTP_STATUS_CODES, NETWORK_PROTOCOLS, SUBREDDITS,
                           SUBREDDITS_NSFW, USERNAMES, USER_AGENTS)
 from mimesis.exceptions import WrongArgument
 from mimesis.providers.base import BaseProvider
 from mimesis.providers.file import File
-from mimesis.typing import Size, Union
+from mimesis.typing import Size
 
 
 class Internet(BaseProvider):

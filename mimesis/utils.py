@@ -3,18 +3,18 @@
 import collections
 import functools
 import json
-import os.path as path
-import urllib.request as request
-from random import choice
 import ssl
-from ssl import _create_unverified_context as uctx
+from os import path
+from random import choice
+from typing import Mapping, Union
+from urllib import request
 
 from mimesis.exceptions import (
     UnexpectedGender,
     UnsupportedLocale,
 )
-import mimesis.settings as settings
-import mimesis.typing as types
+from mimesis import settings
+from mimesis.typing import JSON, Gender
 
 __all__ = ['pull', 'download_image', 'locale_info', 'check_gender']
 
@@ -33,7 +33,8 @@ def locale_info(locale: str) -> str:
     supported = settings.SUPPORTED_LOCALES
 
     if locale not in supported:
-        raise UnsupportedLocale('Locale %s is not supported' % locale)
+        raise UnsupportedLocale(
+            'Locale {} is not supported'.format(locale))
 
     return supported[locale]['name']
 
@@ -55,7 +56,7 @@ def luhn_checksum(num: str) -> str:
     return str(check * 9 % 10)
 
 
-def update_dict(initial: types.JSON, other: types.Mapping) -> types.JSON:
+def update_dict(initial: JSON, other: Mapping) -> JSON:
     """Recursively update a dictionary.
 
     .. note:: update_dict - is internal function of `mimesis`.
@@ -63,7 +64,7 @@ def update_dict(initial: types.JSON, other: types.Mapping) -> types.JSON:
     :param initial: Dict to update.
     :param other: Dict to update from.
     :return: Updated dict.
-    :rtype: types.JSON
+    :rtype: JSON
     """
     for key, value in other.items():
         if isinstance(value, collections.Mapping):
@@ -75,7 +76,7 @@ def update_dict(initial: types.JSON, other: types.Mapping) -> types.JSON:
 
 
 @functools.lru_cache(maxsize=None)
-def pull(file: str, locale: str = 'en') -> types.JSON:
+def pull(file: str, locale: str = 'en') -> JSON:
     """Open json file file and get content from file and memorize result using
      lru_cache.
 
@@ -85,7 +86,7 @@ def pull(file: str, locale: str = 'en') -> types.JSON:
     :param file: The name of file.
     :param locale: Locale.
     :return: The content of the file.
-    :rtype: types.JSON
+    :rtype: JSON
 
     :Example:
 
@@ -97,7 +98,7 @@ def pull(file: str, locale: str = 'en') -> types.JSON:
         'Mon.'
     """
 
-    def get_data(locale_name: str) -> types.JSON:
+    def get_data(locale_name: str) -> JSON:
         """Pull JSON data from file.
 
         :param locale_name: Name of locale to pull.
@@ -124,17 +125,17 @@ def pull(file: str, locale: str = 'en') -> types.JSON:
 
 
 def download_image(url: str = '', save_path: str = '',
-                   unverified_ctx: bool = False) -> types.Union[None, str]:
+                   unverified_ctx: bool = False) -> Union[None, str]:
     """Download image and save in current directory on local machine.
 
     :param url: URL to image.
     :param save_path: Saving path.
     :param unverified_ctx: Create unverified context.
     :return: Image name.
-    :rtype: types.Union[None, str]
+    :rtype: Union[None, str]
     """
     if unverified_ctx:
-        ssl._create_default_https_context = uctx
+        ssl._create_default_https_context = ssl._create_unverified_context
 
     if url is not None:
         image_name = url.rsplit('/')[-1]
@@ -143,7 +144,7 @@ def download_image(url: str = '', save_path: str = '',
     return None
 
 
-def check_gender(gender: types.Gender = 0) -> str:
+def check_gender(gender: Gender = 0) -> str:
     """Checking of the correctness of gender.
 
     :param gender: Gender.

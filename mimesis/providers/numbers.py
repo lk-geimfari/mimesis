@@ -1,5 +1,5 @@
 import array
-import mimesis.typing as types
+from mimesis.typing import Array, Number
 
 from mimesis.providers.base import BaseProvider
 
@@ -8,7 +8,7 @@ class Numbers(BaseProvider):
     """Class for generating numbers"""
 
     def floats(self, n: int = 2, type_code: str = 'f',
-               to_list: bool = False) -> types.Array:
+               to_list: bool = False) -> Array:
         """Generate an array of random float number of 10**n.
 
         +-----------+----------------+--------------+----------------------+
@@ -35,7 +35,7 @@ class Numbers(BaseProvider):
 
     @staticmethod
     def primes(start: int = 1, end: int = 999,
-               to_list: bool = False) -> types.Array:
+               to_list: bool = False) -> Array:
         """Generate an array of prime numbers of 10 ** n.
 
         +------------+-----------------+--------------+--------------------+
@@ -53,7 +53,7 @@ class Numbers(BaseProvider):
         nums = array.array('L', (i for i in range(start, end) if i % 2))
         return nums.tolist() if to_list else nums
 
-    def digit(self, to_bin: bool = False) -> types.Number:
+    def digit(self, to_bin: bool = False) -> Number:
         """Get a random digit.
 
         :param to_bin: If True then convert to binary.

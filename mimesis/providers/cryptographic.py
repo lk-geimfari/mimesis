@@ -4,7 +4,7 @@ import uuid
 
 from mimesis.exceptions import UnsupportedAlgorithm
 from mimesis.providers.base import BaseProvider
-import mimesis.typing as types
+from mimesis.typing import Bytes
 
 
 class Cryptographic(BaseProvider):
@@ -40,7 +40,7 @@ class Cryptographic(BaseProvider):
                     algorithm, ', '.join(hashlib.algorithms_guaranteed)),
             )
 
-    def bytes(self, entropy: int = 32) -> types.Bytes:
+    def bytes(self, entropy: int = 32) -> Bytes:
         """Get a random byte string containing *entropy* bytes.
 
         The string has *entropy* random bytes, each byte converted to two

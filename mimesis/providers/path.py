@@ -1,10 +1,9 @@
 import sys
+from typing import Union
 
 from mimesis.constants.platforms import PLATFORMS
 from mimesis.data import FOLDERS, PROGRAMMING_LANGS, PROJECT_NAMES, USERNAMES
 from mimesis.providers.base import BaseProvider
-
-import mimesis.typing as types
 
 
 class Path(BaseProvider):
@@ -19,7 +18,7 @@ class Path(BaseProvider):
         super().__init__(*args, **kwargs)
         self.platform = platform
 
-    def root(self) -> types.Union[str, None]:
+    def root(self) -> Union[str, None]:
         """Generate a root dir path.
 
         :return: Root dir.
@@ -33,7 +32,7 @@ class Path(BaseProvider):
                 root = PLATFORMS[platform]['root']
                 return root
 
-    def home(self) -> types.Union[str, None]:
+    def home(self) -> Union[str, None]:
         """Generate a home path.
 
         :return: Home path.
@@ -46,7 +45,7 @@ class Path(BaseProvider):
                 home = PLATFORMS[platform]['home']
                 return home
 
-    def user(self) -> types.Union[str, None]:
+    def user(self) -> Union[str, None]:
         """Generate a random user.
 
         :return: Path to user.
@@ -59,7 +58,7 @@ class Path(BaseProvider):
             self.platform == 'win32' else user.lower()
         return self.home() + user
 
-    def users_folder(self) -> types.Union[str, None]:
+    def users_folder(self) -> Union[str, None]:
         """Generate a random path to user's folders.
 
         :return: Path.
@@ -75,7 +74,7 @@ class Path(BaseProvider):
                 users_folder = (user + '{}' + folder).format(path_separator)
                 return users_folder
 
-    def dev_dir(self) -> types.Union[str, None]:
+    def dev_dir(self) -> Union[str, None]:
         """Generate a random path to development directory.
 
         :return: Path.
@@ -95,7 +94,7 @@ class Path(BaseProvider):
                 ).format(path_separator, path_separator)
                 return dev_dir
 
-    def project_dir(self) -> types.Union[str, None]:
+    def project_dir(self) -> Union[str, None]:
         """Generate a random path to project directory.
 
         :return: Path to project.

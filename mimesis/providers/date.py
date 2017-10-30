@@ -5,7 +5,7 @@ from calendar import monthrange
 from mimesis.data import GMT_OFFSETS, ROMAN_NUMS, TIMEZONES
 from mimesis.providers.base import BaseProvider
 from mimesis.utils import pull
-import mimesis.typing as types
+from mimesis.typing import Timestamp, DateTime
 
 
 class Datetime(BaseProvider):
@@ -177,7 +177,7 @@ class Datetime(BaseProvider):
         """
         return self.random.choice(GMT_OFFSETS)
 
-    def datetime(self, humanized: bool = False, **kwargs) -> types.DateTime:
+    def datetime(self, humanized: bool = False, **kwargs) -> DateTime:
         """Generate random datetime.
 
         :param humanized: Readable representation.
@@ -201,7 +201,7 @@ class Datetime(BaseProvider):
 
         return dt
 
-    def timestamp(self, posix: bool = True, **kwargs) -> types.Timestamp:
+    def timestamp(self, posix: bool = True, **kwargs) -> Timestamp:
         """Generate random timestamp.
 
         :param posix: POSIX time.

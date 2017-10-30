@@ -1,5 +1,6 @@
 import re
 from string import ascii_letters, digits, punctuation
+from typing import Union
 
 from mimesis.data import (BLOOD_GROUPS, EMAIL_DOMAINS, ENGLISH_LEVEL,
                           FAVORITE_MUSIC_GENRE, GENDER_SYMBOLS,
@@ -10,7 +11,7 @@ from mimesis.providers.code import Code
 from mimesis.providers.cryptographic import Cryptographic
 from mimesis.settings import SURNAMES_SEPARATED_BY_GENDER
 from mimesis.utils import check_gender, luhn_checksum, pull
-from mimesis.typing import Gender, Union
+from mimesis.typing import Gender
 
 __all__ = ['Personal']
 

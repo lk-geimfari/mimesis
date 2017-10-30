@@ -4,23 +4,17 @@ This is internal module and you shouldn't use it if you don't know
 why you should.
 """
 import datetime
-from typing import (Any, Callable, Dict, Iterable, List,
-                    Union, Mapping, MutableSequence, Tuple)
+from typing import (Any, Dict, List,
+                    Union, MutableSequence)
 
 __all__ = [
-    'Any',
     'Array',
-    'Dict',
     'Gender',
     'JSON',
-    'List',
-    'Mapping',
     'Size',
-    'Union',
-    'Callable',
-    'Iterable',
-    'Tuple',
-    'MutableSequence',
+    'Bytes',
+    'DateTime',
+    'Timestamp',
 ]
 
 JSON = Union[
@@ -48,6 +42,6 @@ Array = Union[
 # Bytes type
 Bytes = bytes
 
-DateTime = Union[datetime.datetime, str]
+DateTime = Union[datetime.datetime, Any]
 
 Timestamp = _StrOrInt
