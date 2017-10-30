@@ -1,12 +1,8 @@
 import json
-from typing import Iterator
 
 from mimesis.decorators import type_to
 from mimesis.exceptions import UndefinedSchema
-from mimesis.providers.base import BaseProvider
-from mimesis.providers.generic import Generic
-
-import mimesis.typing as types
+from mimesis.providers import BaseProvider, Generic
 
 
 class Schema(BaseProvider):
@@ -14,13 +10,13 @@ class Schema(BaseProvider):
     providers which supported by mimesis.
     """
 
-    schema = {}  # type: types.JSON
+    schema = {}
 
-    def __init__(self, *args, **kwargs) -> None:
+    def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.generic = Generic(self.locale)
 
-    def __generate(self, schema: types.JSON) -> types.JSON:
+    def __generate(self, schema):
         data = dict()
         for k, v in schema.items():
             if isinstance(v, dict):
@@ -33,8 +29,8 @@ class Schema(BaseProvider):
                     getattr(self.generic, provider), method)()
         return data
 
-    def load(self, path: str = '', schema: types.JSON = None):
-        """Load schema from python dict or from json file.
+    def load(self, path=None, schema=None):
+        """Load schema from python dict or json file.
 
         :param path: Path to file.
         :param schema: Dictionary (schema).
@@ -44,27 +40,26 @@ class Schema(BaseProvider):
             self.schema = schema
         if path:
             try:
-                try:
-                    with open(path, 'r') as f:
-                        self.schema = json.load(f)
-                except FileNotFoundError:
-                    raise FileNotFoundError(
-                        'File {path} is not found'.format(path=path))
+                with open(path, 'r') as f:
+                    self.schema = json.load(f)
+            except FileNotFoundError:
+                # modify message
+                raise FileNotFoundError(
+                    'File {path} is not found'.format(path=path))
             except ValueError:
                 raise ValueError('Invalid json file!')
         return self
 
     @type_to(list, check_len=True)
-    def create(self, iterations: int = 1) -> Iterator:
+    def create(self, iterations=1):
         """Fill schema using data generators of mimesis.
 
         :param iterations: Count of iterations.
         :return: Filled schema.
-        :rtype: Iterator
         """
         if self.schema:
             return map(lambda _: self.__generate(self.schema),
                        range(iterations))
         else:
             raise UndefinedSchema(
-                'The schema is empty or do not loaded.')
+                'The schema is empty or not loaded.')
