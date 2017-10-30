@@ -1,5 +1,7 @@
-from mimesis.data import CALLING_CODES, CONTINENT_CODES, \
-    COUNTRIES_ISO, SHORTENED_ADDRESS_FMT
+from typing import Optional
+
+from mimesis.data import (CALLING_CODES, CONTINENT_CODES,
+    COUNTRIES_ISO, SHORTENED_ADDRESS_FMT)
 from mimesis.providers.base import BaseProvider
 from mimesis.utils import pull
 
@@ -7,14 +9,15 @@ from mimesis.utils import pull
 class Address(BaseProvider):
     """Class for generate fake address data."""
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, locale: Optional[str] =None,
+                 seed: Optional[int] =None) -> None:
         """
         :param locale: Current locale.
         """
-        super().__init__(*args, **kwargs)
+        super(Address, self).__init__(locale, seed)
         self.data = pull('address.json', self.locale)
 
-    def street_number(self, maximum: int = 1400) -> str:
+    def street_number(self, maximum: int =1400) -> str:
         """Generate a random street number.
 
         :return: Street number.
@@ -84,7 +87,7 @@ class Address(BaseProvider):
 
         )
 
-    def state(self, abbr: bool = False) -> str:
+    def state(self, abbr: bool =False) -> str:
         """Get a random administrative district of country.
 
         :param abbr: Return ISO 3166-2 code.
@@ -98,7 +101,7 @@ class Address(BaseProvider):
         states = self.data['state'].get(key)
         return self.random.choice(states)
 
-    def region(self, abbr: bool = False) -> str:
+    def region(self, abbr: bool =False) -> str:
         """Get a random region.
 
         :param abbr: Return ISO 3166-2 code.
@@ -107,7 +110,7 @@ class Address(BaseProvider):
         """
         return self.state(abbr)
 
-    def province(self, abbr: bool = False) -> str:
+    def province(self, abbr: bool =False) -> str:
         """Get a random province.
 
         :param abbr: Return ISO 3166-2 code.
@@ -116,7 +119,7 @@ class Address(BaseProvider):
         """
         return self.state(abbr)
 
-    def federal_subject(self, abbr: bool = False) -> str:
+    def federal_subject(self, abbr: bool =False) -> str:
         """Get a random region.
 
         :param abbr: Return ISO 3166-2 code.
@@ -140,7 +143,7 @@ class Address(BaseProvider):
         # TODO: Move custom_code() to utils.
         return Code(self.locale).custom_code(mask)
 
-    def country_iso(self, fmt: str = 'iso2') -> str:
+    def country_iso(self, fmt: str ='iso2') -> str:
         """Get a random ISO code of country.
 
         :param fmt: Format of code (iso2, iso3, numeric).
@@ -219,7 +222,7 @@ class Address(BaseProvider):
         }
         return coord
 
-    def continent(self, code: bool = False) -> str:
+    def continent(self, code: bool =False) -> str:
         """Get a random continent name or continent
         code (code in international format).
 

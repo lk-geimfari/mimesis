@@ -1,11 +1,11 @@
-class JapanSpecProvider(object):
+class JapanSpecProvider:
     """Class that provides special data for ja"""
 
     class Meta:
         name = 'japan_provider'
 
     @staticmethod
-    def full_to_half(text: str, alnum: bool = True) -> str:
+    def full_to_half(text: str, alnum: bool =True) -> str:
         """Convert all full width katakana, alphanumeric and few special
         characters like （, ）, ・ to equivalent half width character.
 
@@ -40,7 +40,7 @@ class JapanSpecProvider(object):
         }
         # leaving "。": "｡", "、": "," out for now
 
-        _fh_alnum_offset = 65248  # 0xFEE0
+        _fh_alnum_offset = 0xFEE0
         result = ''
         for char in text:
             if char in fh_kana_special:
@@ -52,7 +52,7 @@ class JapanSpecProvider(object):
         return result
 
     @staticmethod
-    def half_to_full(text: str, alnum: bool = True) -> str:
+    def half_to_full(text: str, alnum: bool =True) -> str:
         """Convert all half width katakana, alphanumeric, and special characters
         ((, ), ) to equivalent full width character.
 
@@ -64,7 +64,7 @@ class JapanSpecProvider(object):
         :Example:
             ＱＶＣジャパン（０１２３）
         """
-        _hf_alnum_offset = 65248
+        _hf_alnum_offset = 0xFEE0
         result = ''
 
         hf_voiced_kana = {
@@ -92,7 +92,7 @@ class JapanSpecProvider(object):
             '~': '～', '･': '・', '｢': '「', '｣': '」',
         }
 
-        def hf_parse(char, result):
+        def hf_parse(char: str, result: str) -> str:
             """Parse the char from half-width to full-width, append to result,
             and return result.
 

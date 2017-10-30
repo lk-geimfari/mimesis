@@ -33,7 +33,7 @@ class Schema(BaseProvider):
                     getattr(self.generic, provider), method)()
         return data
 
-    def load(self, path: str = '', schema: types.JSON = None):
+    def load(self, path: str = '', schema: types.JSON = None) -> 'Schema':
         """Load schema from python dict or from json file.
 
         :param path: Path to file.

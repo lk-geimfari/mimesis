@@ -1,27 +1,11 @@
 """
-This module is included built in and custom types for type hinting.
-This is internal module and you shouldn't use it if you don't know
-why you should.
-"""
-import datetime
-from typing import (Any, Callable, Dict, Iterable, List,
-                    Union, Mapping, MutableSequence, Tuple)
+Custom types and shortcuts for annotating Mimesis.
 
-__all__ = [
-    'Any',
-    'Array',
-    'Dict',
-    'Gender',
-    'JSON',
-    'List',
-    'Mapping',
-    'Size',
-    'Union',
-    'Callable',
-    'Iterable',
-    'Tuple',
-    'MutableSequence',
-]
+Otherwise, simply import the types you need at the top of each file.
+"""
+
+import datetime
+from typing import (Any, Dict, List, Union, MutableSequence)
 
 JSON = Union[
     Dict[str, Any],

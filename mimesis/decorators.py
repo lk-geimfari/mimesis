@@ -1,4 +1,6 @@
-import functools
+from typing import Any, Callable, TypeVar, Generator, Iterable, cast
+U = TypeVar('U', covariant=True)
+
 from string import (
     ascii_letters as letters,
     digits,
@@ -7,23 +9,24 @@ from string import (
 
 from mimesis import data
 from mimesis.exceptions import UnsupportedLocale
-import mimesis.typing as types
+
+import functools
 
 
-def romanized(locale: str = '') -> types.Callable:
+def romanized(locale: str ='') -> Callable:
     """Romanization of the Cyrillic alphabet (transliterating the Cyrillic language
     from the Cyrillic script into the Latin alphabet).
 
-    .. note:: At this moment it's work only for `ru`, `uk`, `kk`.
+    .. note:: At this moment it works only for `ru`, `uk`, `kk`.
 
     :param locale: Function.
     :return: Latinized text.
     :rtype: types.Callable
     """
 
-    def romanized_deco(func):
+    def romanized_deco(func: Callable[..., U]) -> U:
         @functools.wraps(func)
-        def wrapper(*args, **kwargs):
+        def wrapper(*args: Any, **kwargs: Any) -> Any:
             try:
                 alphabet = data.ROMANIZATION_DICT[locale]
                 # Add common cyrillic common letters
@@ -37,7 +40,7 @@ def romanized(locale: str = '') -> types.Callable:
                     'Locale {0} is not supported yet.'.format(locale),
                 )
             result = func(*args, **kwargs)
-            txt = ''.join([alphabet[i] for i in result if i in alphabet])
+            txt = ''.join(cast(Iterable, (alphabet[i] for i in result if i in alphabet)))
             return txt
 
         return wrapper
@@ -45,8 +48,8 @@ def romanized(locale: str = '') -> types.Callable:
     return romanized_deco
 
 
-def type_to(new_type: types.Callable,
-            check_len: bool = False) -> types.Callable:
+def type_to(new_type: Callable,
+            check_len: bool =False) -> Callable:
     """Convert result of function to different type. This is
     internal function.
 
@@ -56,9 +59,9 @@ def type_to(new_type: types.Callable,
     :rtype: types.Callable
     """
 
-    def inner(func):
+    def inner(func: Callable[..., U]) -> U:
         @functools.wraps(func)
-        def wrapper(*args, **kwargs):
+        def wrapper(*args: Any, **kwargs: Any) -> U:
             result = func(*args, **kwargs)
             result = new_type(result)
 
@@ -66,6 +69,6 @@ def type_to(new_type: types.Callable,
                 return result[0]
             return result
 
-        return wrapper
+        return cast(U, wrapper)
 
     return inner
