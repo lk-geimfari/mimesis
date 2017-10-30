@@ -29,6 +29,7 @@ class Personal(BaseProvider):
         self._store = {
             'age': 0,
         }
+        self.__custom_code = Code().custom_code
 
     def age(self, minimum: int = 16, maximum: int = 66) -> int:
         """Get a random integer value.
@@ -619,7 +620,7 @@ class Personal(BaseProvider):
             masks = self.data.get('telephone_fmt', default)
             mask = self.random.choice(masks)
 
-        return Code(self.locale).custom_code(mask=mask, digit=placeholder)
+        return self.__custom_code(mask=mask, digit=placeholder)
 
     def avatar(self, size: int = 256) -> str:
         """Generate a random avatar (link to avatar) using API of  Adorable.io.
@@ -643,7 +644,7 @@ class Personal(BaseProvider):
         :Example:
             07-97/04
         """
-        return Code(self.locale).custom_code(mask=mask)
+        return self.__custom_code(mask=mask)
 
     def level_of_english(self) -> str:
         """Get a random level of English.

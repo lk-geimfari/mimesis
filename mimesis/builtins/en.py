@@ -1,3 +1,5 @@
+from typing import Union
+
 from mimesis.builtins.base import BaseSpecProvider
 
 
@@ -32,7 +34,7 @@ class USASpecProvider(BaseSpecProvider):
                 '1Z@####@##########',
             ),
         }
-        mask = self.random.choice(services[service])
+        mask = self.random.choice(services[service])  # type: ignore
         return self.code(mask=mask)
 
     def ssn(self) -> str:
@@ -54,12 +56,13 @@ class USASpecProvider(BaseSpecProvider):
             self.random.randint(1, 9999),
         )
 
-    def personality(self, category: str = 'mbti') -> str:
+    def personality(self, category: str = 'mbti') -> Union[str, int]:
         """Generate a type of personality.
 
         :param category: Category.
+        :type category: str
         :return: Personality type.
-        :rtype: str
+        :rtype: Union[str, int]
         :Example:
             ISFJ.
         """

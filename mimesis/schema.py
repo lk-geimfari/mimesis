@@ -10,7 +10,7 @@ class Schema(BaseProvider):
     providers which supported by mimesis.
     """
 
-    schema = {}
+    schema = {}  # type: dict
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
