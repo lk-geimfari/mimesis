@@ -180,17 +180,18 @@ Mimesis support over twenty different data providers available, which can produc
 You also can add custom provider to `Generic()`, using `add_provider()` method:
 
 ```python
->>> import mimesis
->>> generic = mimesis.Generic('en')
+>>> from mimesis import Generic
+>>> from mimesis.providers import BaseProvider
+>>> generic = Generic('en')
 
->>> class SomeProvider(object):
+>>> class SomeProvider(BaseProvider):
 ...     class Meta:
 ...         name = "some_provider"
 ...
 ...     def hello(self):
 ...         return "Hello!"
 
->>> class Another(object):
+>>> class Another(BaseProvider):
 ...     def bye(self):
 ...         return "Bye!"
 
