@@ -28,18 +28,18 @@ JSON = Union[
     Any,
 ]
 
-StrOrInt = Union[str, int]
+_StrOrInt = Union[str, int]
 
 # Gender can be int and str.
-Gender = StrOrInt
+Gender = _StrOrInt
 
-Size = StrOrInt
+Size = _StrOrInt
 
-Number = StrOrInt
+Number = _StrOrInt
 
 # Array (instance of array.array)
 Array = Union[
-    # array.ArrayType can contain float and integer.
+    # can contain float and int.
     MutableSequence[float],
     MutableSequence[int],
     List[Union[int, float]],
@@ -48,5 +48,6 @@ Array = Union[
 # Bytes type
 Bytes = bytes
 
-# Datetime
 DateTime = Union[datetime.datetime, str]
+
+Timestamp = _StrOrInt

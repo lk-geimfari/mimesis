@@ -201,16 +201,16 @@ class Datetime(BaseProvider):
 
         return dt
 
-    def timestamp(self, posix: bool = True, **kwargs) -> types.Union[str, int]:
+    def timestamp(self, posix: bool = True, **kwargs) -> types.Timestamp:
         """Generate random timestamp.
 
         :param posix: POSIX time.
         :param kwargs: Keyword arguments (start, end).
         :return: Timestamp.
-        :rtype: types.Union[str, int]
+        :rtype: types.Timestamp
 
         :Example:
-            2035-01-02T06:19:19Z
+            2018-01-02T06:19:19Z
         """
         stamp = self.datetime(**kwargs)
 

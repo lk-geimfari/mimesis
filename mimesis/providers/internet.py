@@ -4,7 +4,6 @@ from mimesis.data import (TLD, EMOJI, HASHTAGS, HTTP_METHODS,
 from mimesis.exceptions import WrongArgument
 from mimesis.providers.base import BaseProvider
 from mimesis.providers.file import File
-
 from mimesis.typing import Size, Union
 
 
@@ -106,8 +105,8 @@ class Internet(BaseProvider):
         return self.random.choice(EMOJI)
 
     @staticmethod
-    def image_placeholder(width: Size = '400',
-                          height: Size = '300') -> str:
+    def image_placeholder(width: Size = 400,
+                          height: Size = 300) -> str:
         """Generate a link to the image placeholder.
 
         :param width: Width of image.
@@ -115,10 +114,10 @@ class Internet(BaseProvider):
         :return: URL to image placeholder.
         :rtype: str
         """
-        url = 'http://placehold.it/%sx%s'
-        return url % (width, height)
+        url = 'http://placehold.it/{width}x{height}'
+        return url.format(width=width, height=height)
 
-    def stock_image(self, category: str = None,
+    def stock_image(self, category: str = '',
                     width: Size = 1900, height: Size = 1080) -> str:
         """Get a random beautiful stock image that hosted on Unsplash.com
 
@@ -189,7 +188,7 @@ class Internet(BaseProvider):
     def home_page(self, domain_type: str = None) -> str:
         """Generate a random home page.
 
-        :param: Domain type (en.wikipedia.org/wiki/Top-level_domain#Types).
+        :param domain_type: TLD type.
         :return: Random home page.
         :rtype: str
 
