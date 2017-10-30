@@ -343,11 +343,11 @@ The authors assume no responsibility for how you use this library data generated
 Applications of Python
 
 1.GUI based desktop applications
-2.Image processing and graphic design applications
-3.Scientific and computational applications
-4.Games
-5.Web frameworks and web applications
-6.Enterprise and business applications
-7.Operating systems
-8.Language development
-9.Prototyping
+  Image processing and graphic design applications
+  Scientific and computational applications
+  Games
+2.Web frameworks and web applications
+3.Enterprise and business applications
+4.Operating systems
+5.Language development
+6.Prototyping
