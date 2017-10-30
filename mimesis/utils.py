@@ -37,7 +37,7 @@ def luhn_checksum(num):
     :returns: Checksum for number.
     """
     check = 0
-    for i, s in enumerate(reversed([x for x in num])):
+    for i, s in enumerate(reversed(num)):
         sx = int(s)
         sx = sx * 2 if i % 2 == 0 else sx
         sx = sx - 9 if sx > 9 else sx

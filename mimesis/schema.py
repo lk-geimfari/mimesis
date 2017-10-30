@@ -30,7 +30,7 @@ class Schema(BaseProvider):
         return data
 
     def load(self, path=None, schema=None):
-        """Load schema from python dict or from json file.
+        """Load schema from python dict or json file.
 
         :param path: Path to file.
         :param schema: Dictionary (schema).
@@ -40,12 +40,12 @@ class Schema(BaseProvider):
             self.schema = schema
         if path:
             try:
-                try:
-                    with open(path, 'r') as f:
-                        self.schema = json.load(f)
-                except FileNotFoundError:
-                    raise FileNotFoundError(
-                        'File {path} is not found'.format(path=path))
+                with open(path, 'r') as f:
+                    self.schema = json.load(f)
+            except FileNotFoundError:
+                # modify message
+                raise FileNotFoundError(
+                    'File {path} is not found'.format(path=path))
             except ValueError:
                 raise ValueError('Invalid json file!')
         return self
@@ -62,4 +62,4 @@ class Schema(BaseProvider):
                        range(iterations))
         else:
             raise UndefinedSchema(
-                'The schema is empty or do not loaded.')
+                'The schema is empty or not loaded.')
