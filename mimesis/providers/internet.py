@@ -184,7 +184,7 @@ class Internet(BaseProvider):
         """Return random top level domain.
 
         :param domain_type: Type of domain.
-        Supported TLDs: ccTLD, gTLD, GeoTLD, uTLD, sTLD
+          Supported TLDs: ccTLD, gTLD, GeoTLD, uTLD, sTLD
         :return: Top level domain.
         """
         # TODO: This is really ugly solution. Fix it.
