@@ -1,6 +1,6 @@
-===========
+==========================================
 Generating mock data using Mimesis: Part I
-===========
+==========================================
 
 The ability to generate mock but valid data comes in handy in app
 development, where you need to work with databases. Filling in the
@@ -20,7 +20,7 @@ dependencies. Currently the library supports over 33 languages and over 23 class
 providers, supplying various data.
 
 Generating data
---------
+---------------
 
 Initially, we planned on showing data generation using the example of a
 small web-application Flask, but we decided against it because not
@@ -90,7 +90,7 @@ and the model in question are available.
     >>> Patient()._bootstrap(count=40000, locale='en')
 
 Introduction
---------
+------------
 
 It is worth noting that we will be showing the basic capabilities of the
 library and we will be using a few most common class providers, since

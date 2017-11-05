@@ -1,6 +1,6 @@
-===========
+===========================================
 Generating mock data using Mimesis: Part II
-===========
+===========================================
 
 We have already `published <http://mimesis.readthedocs.io/en/latest/part_1.html>`_ how to generate mock
 data with the help of a Python library  — `Mimesis <https://github.com/lk-geimfari/mimesis>`__.

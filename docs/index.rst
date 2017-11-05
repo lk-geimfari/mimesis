@@ -18,7 +18,7 @@ Mimesis
 **Mimesis** is a fast and easy to use Python library for generating dummy data for a variety of purposes.  This data can be particularly useful during software development and testing.  For example, it could be used to populate a testing database for a web application with user information such as email addresses, usernames, first names, last names, etc. There are over eighteen different `data providers <http://mimesis.readthedocs.io/en/latest/providers.html>`_ available, which can produce data related to food, people, computer hardware, transportation, addresses, and more. Mimesis does not require any modules that are not in the Python standard library.
 
 Advantages
--------------
+----------
 
 Mimesis offers a number of advantages over other similar libraries, such
 as Faker:
@@ -151,7 +151,7 @@ them explicitly:
 
 
 Custom Data Providers
-----------------
+---------------------
 
 You also can add custom provider to ``Generic()``, using
 ``add_provider()`` method:

@@ -77,7 +77,7 @@ class Personal(BaseProvider):
         """Get a random name.
 
         :param gender: if 'male' then will returned male name,
-        if 'female' then female name,  if None return random from ones.
+            if 'female' then female name,  if None return random from ones.
         :return: Name.
         :rtype: str
 
@@ -155,7 +155,7 @@ class Personal(BaseProvider):
         """Generate username by template.
 
         :param template: Template ('U_d', 'U.d', 'U-d', 'ld', 'l-d', 'Ud',
-        'l.d', 'l_d', 'default')
+            'l.d', 'l_d', 'default')
         :return: Username.
         :rtype: str
 
