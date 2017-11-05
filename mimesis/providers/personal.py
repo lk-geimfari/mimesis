@@ -1,6 +1,6 @@
 import re
 from string import ascii_letters, digits, punctuation
-from typing import Union, Optional
+from typing import Union
 
 from mimesis.data import (BLOOD_GROUPS, EMAIL_DOMAINS, ENGLISH_LEVEL,
                           FAVORITE_MUSIC_GENRE, GENDER_SYMBOLS,

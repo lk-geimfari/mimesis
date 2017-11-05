@@ -2,8 +2,9 @@
 
 """Mimesis is a Python library, which helps generate mock data.
 
-Copyright (c) 2016 - 2018 Likid Geimfari (Isaak Uchakaev) <likid.geimfari@gmail.com>
+Copyright (c) 2016 - 2018 Likid Geimfari (Isaak Uchakaev)
 Repository: https://github.com/lk-geimfari/mimesis
+Email: <likid.geimfari@gmail.com>
 """
 
 from mimesis.providers import *
