@@ -1,8 +1,8 @@
 """
-This module is included built in and custom types for type hinting.
-This is internal module and you shouldn't use it if you don't know
-why you should.
+Custom types and shortcuts for annotating Mimesis.
+Otherwise, simply import the types you need at the top of each file.
 """
+
 import datetime
 from typing import (Any, Dict, List,
                     Union, MutableSequence)

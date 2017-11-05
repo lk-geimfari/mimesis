@@ -173,3 +173,15 @@ def check_gender(gender: Gender = 0) -> str:
             'Gender must be {}.'.format(', '.join(supported)))
 
     return options[gender]
+
+
+def setup_locale(locale: str = '') -> str:
+    """Setup locale to BaseProvider.
+
+    :param locale: Locale
+    :return: Locale in lowercase.
+    """
+    if not locale:
+        return settings.DEFAULT_LOCALE
+
+    return locale.lower()

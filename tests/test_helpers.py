@@ -20,6 +20,9 @@ def test_randints(random):
     # All elements in result_custom equals to 1.
     assert result[0] == 1 and result[-1] == 1
 
+    with pytest.raises(ValueError):
+        random.randints(amount=0)
+
 
 @pytest.mark.parametrize(
     'n', (8, 16, 32, 64),

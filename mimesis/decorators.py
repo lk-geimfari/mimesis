@@ -14,7 +14,7 @@ def romanized(locale: str = '') -> Callable:
     """Romanization of the Cyrillic alphabet (transliterating the Cyrillic language
     from the Cyrillic script into the Latin alphabet).
 
-    .. note:: At this moment it's work only for `ru`, `uk`, `kk`.
+    .. note:: At this moment it works only for `ru`, `uk`, `kk`.
 
     :param locale: Function.
     :return: Latinized text.

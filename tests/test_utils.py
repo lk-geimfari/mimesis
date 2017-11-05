@@ -7,7 +7,7 @@ import pytest
 
 from mimesis.exceptions import UnsupportedLocale, UnexpectedGender
 from mimesis.utils import (check_gender, download_image, locale_info,
-                           luhn_checksum, pull, update_dict)
+                           luhn_checksum, pull, update_dict, setup_locale)
 
 
 def is_connected():
@@ -124,3 +124,15 @@ def test_check_gender(abbr, gender):
 def test_check_gender_invalid_gender():
     with pytest.raises(UnexpectedGender):
         check_gender(gender='other')
+
+
+@pytest.mark.parametrize(
+    'inp, out', [
+        ('EN', 'en'),
+        ('DE', 'de'),
+        ('RU', 'ru'),
+    ],
+)
+def test_setup_locale(inp, out):
+    result = setup_locale(inp)
+    assert result == out
