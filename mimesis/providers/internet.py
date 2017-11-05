@@ -1,4 +1,4 @@
-from typing import Union
+from typing import Union, Optional
 
 from mimesis.data import (TLD, EMOJI, HASHTAGS, HTTP_METHODS,
                           HTTP_STATUS_CODES, NETWORK_PROTOCOLS, SUBREDDITS,
@@ -187,7 +187,7 @@ class Internet(BaseProvider):
         tags = [self.random.choice(hashtags) for _ in range(int(quantity))]
         return tags
 
-    def home_page(self, domain_type: str = None) -> str:
+    def home_page(self, domain_type: Optional[str] = None) -> str:
         """Generate a random home page.
 
         :param domain_type: TLD type.
@@ -205,7 +205,7 @@ class Internet(BaseProvider):
         return 'http://www.{}{}'.format(
             resource, domain)
 
-    def top_level_domain(self, domain_type: str = '') -> str:
+    def top_level_domain(self, domain_type: Optional[str] = None) -> str:
         """Return random top level domain.
 
         :param domain_type: Type of domain.

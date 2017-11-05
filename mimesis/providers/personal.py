@@ -1,6 +1,6 @@
 import re
 from string import ascii_letters, digits, punctuation
-from typing import Union
+from typing import Union, Optional
 
 from mimesis.data import (BLOOD_GROUPS, EMAIL_DOMAINS, ENGLISH_LEVEL,
                           FAVORITE_MUSIC_GENRE, GENDER_SYMBOLS,
@@ -602,7 +602,7 @@ class Personal(BaseProvider):
         """
         return self.random.choice(FAVORITE_MUSIC_GENRE)
 
-    def telephone(self, mask: str = None, placeholder: str = '#') -> str:
+    def telephone(self, mask: str = '', placeholder: str = '#') -> str:
         """Generate a random phone number.
 
         :param mask: Mask for formatting number.

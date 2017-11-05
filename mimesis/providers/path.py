@@ -56,13 +56,16 @@ class Path(BaseProvider):
         user = self.random.choice(USERNAMES)
         user = user.capitalize() if \
             self.platform == 'win32' else user.lower()
-        return self.home() + user
+        return '{home}{user}'.format(
+            home=self.home(),
+            user=user,
+        )
 
     def users_folder(self) -> Union[str, None]:
         """Generate a random path to user's folders.
 
         :return: Path.
-        :rtype: types.Union[str, None]
+        :rtype: Union[str, None]
         :Example:
             /home/taneka/Pictures
         """
@@ -70,44 +73,51 @@ class Path(BaseProvider):
         user = self.user()
         for platform in PLATFORMS:
             if self.platform == PLATFORMS[platform]['name']:
-                path_separator = PLATFORMS[platform]['path_separator']
-                users_folder = (user + '{}' + folder).format(path_separator)
-                return users_folder
+                sep = PLATFORMS[platform]['path_separator']
+                return '{user}{sep}{folder}'.format(
+                    user=user,
+                    sep=sep,
+                    folder=folder,
+                )
 
     def dev_dir(self) -> Union[str, None]:
         """Generate a random path to development directory.
 
         :return: Path.
-        :rtype: str
+        :rtype: Union[str, None]
 
         :Example:
             /home/sherrell/Development/Python/mercenary
         """
-        dev_folder = self.random.choice(['Development', 'Dev'])
+        folder = self.random.choice(['Development', 'Dev'])
         stack = self.random.choice(PROGRAMMING_LANGS)
-        user = self.user()
         for platform in PLATFORMS:
             if self.platform == PLATFORMS[platform]['name']:
-                path_separator = PLATFORMS[platform]['path_separator']
-                dev_dir = (
-                    user + '{}' + dev_folder + '{}' + stack
-                ).format(path_separator, path_separator)
-                return dev_dir
+                sep = PLATFORMS[platform]['path_separator']
+                return '{user}{sep}{folder}{sep}{stack}'.format(
+                    user=self.user(),
+                    sep=sep,
+                    folder=folder,
+                    stack=stack,
+                )
 
     def project_dir(self) -> Union[str, None]:
         """Generate a random path to project directory.
 
         :return: Path to project.
-        :rtype: str
+        :rtype: Union[str, None]
 
         :Example:
             /home/sherika/Development/Falcon/mercenary
         """
         project = self.random.choice(PROJECT_NAMES)
+        dev_dir = self.dev_dir()
         for platform in PLATFORMS:
             if self.platform == PLATFORMS[platform]['name']:
-                path_separator = PLATFORMS[platform]['path_separator']
-                project_dir = (
-                    self.dev_dir() + '{}' + project
-                ).format(path_separator)
-                return project_dir
+                sep = PLATFORMS[platform]['path_separator']
+
+                return '{dev_dir}{sep}{project}'.format(
+                    dev_dir=dev_dir,
+                    sep=sep,
+                    project=project,
+                )

@@ -19,7 +19,7 @@ class Schema(BaseProvider):
         super().__init__(*args, **kwargs)
         self.generic = Generic(self.locale)
 
-    def __generate(self, schema: Optional[JSON] = None) -> dict:
+    def __generate(self, schema: JSON = dict) -> JSON:
         data = dict()
         for k, v in schema.items():
             if isinstance(v, dict):
