@@ -18,9 +18,9 @@ class Code(BaseProvider):
                     char: str = '@', digit: str = '#') -> str:
         """Generate custom code using ascii uppercase and random integers.
 
-        :param mask: Mask of code.
-        :param char: Placeholder for characters.
-        :param digit: Placeholder for digits.
+        :param str mask: Mask of code.
+        :param str char: Placeholder for characters.
+        :param str digit: Placeholder for digits.
         :return: Custom code.
         :rtype: str
 
@@ -54,7 +54,7 @@ class Code(BaseProvider):
     def issn(self, mask: str = '####-####') -> str:
         """Generate a random International Standard Serial Number (ISSN).
 
-        :param mask: Mask ISSN.
+        :param str mask: Mask of ISSN.
         :return: ISSN.
         :rtype: str
         """
@@ -64,7 +64,7 @@ class Code(BaseProvider):
         """Generate ISBN for current locale. Default is ISBN 10,
         but you also can use ISBN-13.
 
-        :param fmt: ISBN format.
+        :param str fmt: ISBN format.
         :return: ISBN.
         :rtype: str
 
@@ -87,7 +87,7 @@ class Code(BaseProvider):
         """Generate EAN (European Article Number) code. Default is
         EAN-13, but you also can use EAN-8.
 
-        :param fmt: Format of EAN.
+        :param str fmt: Format of EAN.
         :return: EAN.
         :rtype: str
 
@@ -113,6 +113,7 @@ class Code(BaseProvider):
     def pin(self, mask: str = '####') -> str:
         """Generate a random PIN code.
 
+        :param str mask: Mask of pin code.
         :return: PIN code.
         :rtype: str
 

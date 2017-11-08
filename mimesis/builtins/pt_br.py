@@ -11,8 +11,8 @@ class BrazilSpecProvider(object):
     def cpf(with_mask: bool = True) -> str:
         """Get a random CPF (brazilian social security code)
 
-        :param with_mask: use CPF mask (###.###.###-##) in the return
-        :returns: Random CPF
+        :param bool with_mask: Use CPF mask (###.###.###-##).
+        :returns: Random CPF.
         :rtype: str
 
         :Example:
@@ -51,7 +51,7 @@ class BrazilSpecProvider(object):
     def cnpj(with_mask: bool = True) -> str:
         """Get a random cnpj (brazilian social security code)
 
-        :param with_mask: use cnpj mask (###.###.###-##) in the return
+        :param bool with_mask: use cnpj mask (###.###.###-##)
         :returns: Random cnpj.
         :rtype: str
 

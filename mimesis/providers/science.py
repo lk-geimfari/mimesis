@@ -30,9 +30,9 @@ class Science(BaseProvider):
     def chemical_element(self, name_only: bool = True) -> Union[dict, str]:
         """Generate a random chemical element.
 
-        :param name_only: If False then will be returned dict.
+        :param bool name_only: If False then will be returned dict.
         :return: Name of chemical element or dict.
-        :rtype: Union[dict, str]
+        :rtype: dict or str
 
         :Example:
             {'Symbol': 'S', 'Name': 'Sulfur', 'Atomic number': '16'}

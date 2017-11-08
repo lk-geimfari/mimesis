@@ -13,7 +13,7 @@ class GermanySpecProvider(BaseSpecProvider):
     def noun(self, plural: bool = False) -> str:
         """Return a random noun in German.
 
-        :param plural: Return noun in plural.
+        :param bool plural: Return noun in plural.
         :return: Noun.
         :rtype: str
         """

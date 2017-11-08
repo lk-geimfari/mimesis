@@ -62,6 +62,7 @@ class Generic(BaseProvider):
 
         :param cls: Custom provider.
         :return: None
+        :raises TypeError: if cls is not class.
         """
         if inspect.isclass(cls):
             name = ''

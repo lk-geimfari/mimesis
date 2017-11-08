@@ -22,7 +22,7 @@ class Personal(BaseProvider):
 
     def __init__(self, *args, **kwargs):
         """
-        :param locale: Current locale.
+        :param str locale: Current locale.
         """
         super().__init__(*args, **kwargs)
         self.data = pull('personal.json', self.locale)
@@ -34,9 +34,9 @@ class Personal(BaseProvider):
     def age(self, minimum: int = 16, maximum: int = 66) -> int:
         """Get a random integer value.
 
-        :param maximum: max age
-        :param minimum: min age
-        :return: Random integer (from minimum=16 to maximum=66)
+        :param int maximum: Maximum value of age.
+        :param int minimum: Minimum value of age.
+        :return: Random integer.
         :rtype: int
 
         :Example:
@@ -49,7 +49,7 @@ class Personal(BaseProvider):
     def child_count(self, max_childs: int = 5) -> int:
         """Get a count of child's.
 
-        :param max_childs: Maximum count of child's.
+        :param int max_childs: Maximum count of child's.
         :return: Ints. Depend on previous generated age.
         :rtype: int
         """
@@ -63,7 +63,7 @@ class Personal(BaseProvider):
     def work_experience(self, working_start_age: int = 22) -> int:
         """Get a work experience.
 
-        :param working_start_age: Age then person start to work.
+        :param int working_start_age: Age then person start to work.
         :return: Int. Depend on previous generated age.
         :rtype: int
         """
@@ -78,6 +78,7 @@ class Personal(BaseProvider):
 
         :param gender: if 'male' then will returned male name,
             if 'female' then female name,  if None return random from ones.
+        :type gender: int or str
         :return: Name.
         :rtype: str
 
@@ -92,6 +93,7 @@ class Personal(BaseProvider):
         """Get a random surname.
 
         :param gender: The gender of person.
+        :type gender: int of str
         :return: Surname.
         :rtype: str
 
@@ -114,9 +116,11 @@ class Personal(BaseProvider):
         """Get a random title (prefix/suffix) for name.
 
         :param gender: The gender.
-        :param title_type:  The type of title ('typical' and 'academic').
+        :type gender: int or str
+        :param str title_type:  The type of title ('typical' and 'academic').
         :return: The title.
         :rtype: str
+        :raises WrongArgument: if gender in incorrect format.
 
         :Example:
             PhD.
@@ -134,9 +138,9 @@ class Personal(BaseProvider):
     def full_name(self, gender: Gender = 0, reverse: bool = False) -> str:
         """Generate a random full name.
 
-        :param reverse: if true: surname/name else name/surname
-        :param gender: if gender='male' then will be returned male name else
-            female name.
+        :param bool reverse: Return reversed full name.
+        :param gender: Gender.
+        :type gender: int or str
         :return: Full name.
         :rtype: str
 
@@ -154,10 +158,11 @@ class Personal(BaseProvider):
     def username(self, template: str = '') -> str:
         """Generate username by template.
 
-        :param template: Template ('U_d', 'U.d', 'U-d', 'ld', 'l-d', 'Ud',
+        :param str template: Template ('U_d', 'U.d', 'U-d', 'ld', 'l-d', 'Ud',
             'l.d', 'l_d', 'default')
         :return: Username.
         :rtype: str
+        :raises WrongArgument: if template is not supported.
 
         :Example:
             Celloid1873
@@ -233,8 +238,8 @@ class Personal(BaseProvider):
     def password(self, length: int = 8, algorithm: str = None) -> str:
         """Generate a password or hash of password.
 
-        :param length: Length of password.
-        :param algorithm: Hashing algorithm.
+        :param int length: Length of password.
+        :param str algorithm: Hashing algorithm.
         :return: Password or hash of password.
         :rtype: str
 
@@ -253,7 +258,7 @@ class Personal(BaseProvider):
         """Generate a random email.
 
         :param domains: Custom domain for email.
-        :type domains: list, tuple
+        :type domains: list or tuple
         :return: Email address.
         :rtype: str
 
@@ -294,9 +299,10 @@ class Personal(BaseProvider):
     def credit_card_number(self, card_type: str = 'visa') -> str:
         """Generate a random credit card number.
 
-        :param card_type: Issuing Network. Default is Visa.
+        :param str card_type: Issuing Network. Default is Visa.
         :return: Credit card number.
         :rtype: str
+        :raises NotImplementedError: if cart_type is not supported.
 
         :Example:
             4455 5299 1152 2450
@@ -329,8 +335,8 @@ class Personal(BaseProvider):
                                     maximum: int = 25) -> str:
         """Generate a random expiration date for credit card.
 
-        :param minimum: Date of issue.
-        :param maximum: Maximum of expiration_date.
+        :param int minimum: Date of issue.
+        :param int maximum: Maximum of expiration_date.
         :return: Expiration date of credit card.
         :rtype: str
 
@@ -367,7 +373,6 @@ class Personal(BaseProvider):
     def social_media_profile(self) -> str:
         """Generate profile for random social network.
 
-        :param gender: Gender of user.
         :return: Profile in some network.
         :rtype: str
 
@@ -391,12 +396,12 @@ class Personal(BaseProvider):
         representation of human sexes through a language-neutral single-digit
         code or symbol of gender.
 
-        :param iso5218:
+        :param bool iso5218:
             Codes for the representation of human sexes is an international
             standard.
-        :param symbol: Symbol of gender.
+        :param bool symbol: Symbol of gender.
         :return: Title of gender.
-        :rtype: Union[str, int]
+        :rtype: str or int
 
         :Example:
             Male
@@ -420,8 +425,8 @@ class Personal(BaseProvider):
     def height(self, minimum: float = 1.5, maximum: float = 2.0) -> str:
         """Generate a random height in M (Meter).
 
-        :param minimum: Minimum value.
-        :param maximum: Maximum value.
+        :param float minimum: Minimum value.
+        :param float maximum: Maximum value.
         :return: Height.
         :rtype: str
 
@@ -434,8 +439,8 @@ class Personal(BaseProvider):
     def weight(self, minimum: int = 38, maximum: int = 90) -> int:
         """Generate a random weight in Kg.
 
-        :param minimum: min value
-        :param maximum: max value
+        :param int minimum: min value
+        :param int maximum: max value
         :return: Weight.
         :rtype: int
 
@@ -459,7 +464,7 @@ class Personal(BaseProvider):
     def sexual_orientation(self, symbol: bool = False) -> str:
         """Get a random (LOL) sexual orientation.
 
-        :param symbol: Unicode symbol.
+        :param bool symbol: Unicode symbol.
         :return: Sexual orientation.
         :rtype: str
 
@@ -525,6 +530,7 @@ class Personal(BaseProvider):
         """Get a random nationality.
 
         :param gender: Gender.
+        :type gender: str or int
         :return: Nationality.
         :rtype: str
 
@@ -605,8 +611,8 @@ class Personal(BaseProvider):
     def telephone(self, mask: str = '', placeholder: str = '#') -> str:
         """Generate a random phone number.
 
-        :param mask: Mask for formatting number.
-        :param placeholder: A placeholder for a mask (default is #).
+        :param str mask: Mask for formatting number.
+        :param str placeholder: A placeholder for a mask (default is #).
         :return: Phone number.
         :rtype: str
 
@@ -625,6 +631,7 @@ class Personal(BaseProvider):
     def avatar(self, size: int = 256) -> str:
         """Generate a random avatar (link to avatar) using API of  Adorable.io.
 
+        :param int size: Size of avatar.
         :return: Link to avatar.
         :rtype: str
         """
@@ -635,7 +642,7 @@ class Personal(BaseProvider):
         """Generate a random identifier by mask. With this method you can generate
         any identifiers that you need. Simply select the mask that you need.
 
-        :param mask:
+        :param str mask:
             The mask. Here '@' is a placeholder for characters and '#' is
             placeholder for digits.
         :return: An identifier.

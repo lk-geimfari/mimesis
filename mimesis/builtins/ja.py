@@ -9,8 +9,8 @@ class JapanSpecProvider(object):
         """Convert all full width katakana, alphanumeric and few special
         characters like （, ）, ・ to equivalent half width character.
 
-        :param text: The text to be converted.
-        :param alnum: Convert alphanumeric, default True.
+        :param str text: The text to be converted.
+        :param bool alnum: Convert alphanumeric, default True.
         :return: Text with full width characters converted to half width.
         :rtype: str
 
@@ -56,8 +56,8 @@ class JapanSpecProvider(object):
         """Convert all half width katakana, alphanumeric, and special characters
         ((, ), ) to equivalent full width character.
 
-        :param text: The text to be converted.
-        :param alnum: Convert alphanumeric, default True.
+        :param str text: The text to be converted.
+        :param bool alnum: Convert alphanumeric, default True.
         :return: Text with half width characters converted to full width.
         :type: str
 

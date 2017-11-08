@@ -12,7 +12,7 @@ class USASpecProvider(BaseSpecProvider):
     def tracking_number(self, service: str = 'usps') -> str:
         """Generate random tracking number for USPS, FedEx and UPS.
 
-        :param service: Post service.
+        :param str service: Post service.
         :return: Tracking number.
         :rtype: str
         """
@@ -42,6 +42,7 @@ class USASpecProvider(BaseSpecProvider):
 
         :returns: Random SSN
         :rtype: str
+
         :Example:
             569-66-5801
         """
@@ -59,10 +60,10 @@ class USASpecProvider(BaseSpecProvider):
     def personality(self, category: str = 'mbti') -> Union[str, int]:
         """Generate a type of personality.
 
-        :param category: Category.
-        :type category: str
+        :param str category: Category.
         :return: Personality type.
-        :rtype: Union[str, int]
+        :rtype: str or int
+
         :Example:
             ISFJ.
         """

@@ -14,7 +14,7 @@ class Datetime(BaseProvider):
 
     def __init__(self, *args, **kwargs):
         """
-        :param locale: Current locale.
+        :param str locale: Current locale.
         """
         super().__init__(*args, **kwargs)
         self.data = pull('datetime.json', self.locale)
@@ -22,8 +22,8 @@ class Datetime(BaseProvider):
     def week_date(self, start: int = 2017, end: int = 2018) -> str:
         """Get week number with year.
 
-        :param start: From start.
-        :param end: To end.
+        :param int start: From start.
+        :param int end: To end.
         :return: Week number.
         :rtype: str
 
@@ -40,7 +40,7 @@ class Datetime(BaseProvider):
     def day_of_week(self, abbr: bool = False) -> str:
         """Get a random day of week.
 
-        :param abbr: Abbreviated name of the day.
+        :param bool abbr: Abbreviated name of the day.
         :return: Name of day of the week.
         :rtype: str
 
@@ -54,7 +54,7 @@ class Datetime(BaseProvider):
     def month(self, abbr: bool = False) -> str:
         """Get a random month.
 
-        :param abbr: if True then will be returned abbreviated month name.
+        :param bool abbr: Return abbreviated month name.
         :return: Month name.
         :rtype: str
 
@@ -68,9 +68,9 @@ class Datetime(BaseProvider):
     def year(self, minimum: int = 1990, maximum: int = 2050) -> int:
         """Generate a random year.
 
-        :param minimum: Minimum value.
-        :param maximum: Maximum value
-        :return: Year
+        :param int minimum: Minimum value.
+        :param int maximum: Maximum value.
+        :return: Year.
         :rtype: int
 
         :Example:
@@ -106,9 +106,9 @@ class Datetime(BaseProvider):
         """Generate a string representing of random date formatted for
         the locale or as specified.
 
-        :param start: Minimum value of year.
-        :param end: Maximum value of year.
-        :param fmt: Format string for date.
+        :param int start: Minimum value of year.
+        :param int end: Maximum value of year.
+        :param str fmt: Format string for date.
         :return: Formatted date.
         :rtype: str
 
@@ -127,6 +127,7 @@ class Datetime(BaseProvider):
     def time(self, fmt: str = '') -> str:
         """Generate a random time formatted for the locale or as specified.
 
+        :param str fmt: Format of time.
         :return: Time.
         :rtype: str
 
@@ -180,10 +181,10 @@ class Datetime(BaseProvider):
     def datetime(self, humanized: bool = False, **kwargs) -> DateTime:
         """Generate random datetime.
 
-        :param humanized: Readable representation.
+        :param bool humanized: Readable representation.
         :param kwargs: Keyword arguments (start, end).
         :return: Datetime.
-        :rtype: types.DateTime
+        :rtype: DateTime
 
         :Example:
             March, 24 2002
@@ -204,10 +205,10 @@ class Datetime(BaseProvider):
     def timestamp(self, posix: bool = True, **kwargs) -> Timestamp:
         """Generate random timestamp.
 
-        :param posix: POSIX time.
+        :param bool posix: POSIX time.
         :param kwargs: Keyword arguments (start, end).
         :return: Timestamp.
-        :rtype: types.Timestamp
+        :rtype: Timestamp
 
         :Example:
             2018-01-02T06:19:19Z

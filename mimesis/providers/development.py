@@ -32,7 +32,7 @@ class Development(BaseProvider):
     def database(self, nosql: bool = False) -> str:
         """Get a random database name.
 
-        :param nosql: only NoSQL databases.
+        :param bool nosql: only NoSQL databases.
         :return: Database name.
         :rtype: str
 

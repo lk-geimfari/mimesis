@@ -24,8 +24,7 @@ PATH = path.abspath(path.join(path.dirname(__file__), 'data'))
 def locale_info(locale: str) -> str:
     """Return name (in english) or local name of the locale
 
-    :param locale: Locale abbreviation.
-    :type locale: str
+    :param str locale: Locale abbreviation.
     :return: Locale name.
     :rtype: str
     """
@@ -42,7 +41,7 @@ def locale_info(locale: str) -> str:
 def luhn_checksum(num: str) -> str:
     """Calculate a checksum for num using the Luhn algorithm.
 
-    :param num: The number to calculate a checksum for as a string.
+    :param str num: The number to calculate a checksum for as a string.
     :return: Checksum for number.
     :rtype: str
 
@@ -59,10 +58,10 @@ def luhn_checksum(num: str) -> str:
 def update_dict(initial: JSON, other: Mapping) -> JSON:
     """Recursively update a dictionary.
 
-    .. note:: update_dict - is internal function of `mimesis`.
-
     :param initial: Dict to update.
+    :type initial: dict or list
     :param other: Dict to update from.
+    :type other: Mapping
     :return: Updated dict.
     :rtype: JSON
     """
@@ -80,13 +79,11 @@ def pull(file: str, locale: str = 'en') -> JSON:
     """Open json file file and get content from file and memorize result using
      lru_cache.
 
-    .. note:: pull - is internal function, please do not use this function
-    outside the module 'mimesis'.
-
-    :param file: The name of file.
-    :param locale: Locale.
+    :param str file: The name of file.
+    :param str locale: Locale.
     :return: The content of the file.
     :rtype: JSON
+    :raises UnsupportedLocale: if locale is not supported.
 
     :Example:
 
@@ -128,11 +125,11 @@ def download_image(url: str = '', save_path: str = '',
                    unverified_ctx: bool = False) -> Union[None, str]:
     """Download image and save in current directory on local machine.
 
-    :param url: URL to image.
-    :param save_path: Saving path.
-    :param unverified_ctx: Create unverified context.
+    :param str url: URL to image.
+    :param str save_path: Saving path.
+    :param bool unverified_ctx: Create unverified context.
     :return: Image name.
-    :rtype: Union[None, str]
+    :rtype: str or None
     """
     if unverified_ctx:
         ssl._create_default_https_context = ssl._create_unverified_context
@@ -148,6 +145,7 @@ def check_gender(gender: Gender = 0) -> str:
     """Checking of the correctness of gender.
 
     :param gender: Gender.
+    :type gender: int or str
     :return: Gender.
     :rtype: str
     """
@@ -178,8 +176,9 @@ def check_gender(gender: Gender = 0) -> str:
 def setup_locale(locale: str = '') -> str:
     """Setup locale to BaseProvider.
 
-    :param locale: Locale
+    :param str locale: Locale
     :return: Locale in lowercase.
+    :rtype: str
     """
     if not locale:
         return settings.DEFAULT_LOCALE

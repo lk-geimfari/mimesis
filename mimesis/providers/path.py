@@ -11,7 +11,7 @@ class Path(BaseProvider):
 
     def __init__(self, platform: str = sys.platform, *args, **kwargs) -> None:
         """
-        :param platform:
+        :param str platform:
             Required platform type ('linux2', 'darwin', 'win32', 'win64').
             Supported platforms: mimesis/constant/platforms.py
         """
@@ -22,7 +22,7 @@ class Path(BaseProvider):
         """Generate a root dir path.
 
         :return: Root dir.
-        :rtype: types.Union[str, None]
+        :rtype: Union[str, None]
 
         :Example:
             /
@@ -36,7 +36,8 @@ class Path(BaseProvider):
         """Generate a home path.
 
         :return: Home path.
-        :rtype: types.Union[str, None]
+        :rtype: Union[str, None]
+
         :Example:
             /home/
         """
@@ -66,6 +67,7 @@ class Path(BaseProvider):
 
         :return: Path.
         :rtype: Union[str, None]
+
         :Example:
             /home/taneka/Pictures
         """

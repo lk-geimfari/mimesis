@@ -162,13 +162,13 @@ class Internet(BaseProvider):
                  category: str = 'general') -> Union[str, list]:
         """Create a list of hashtags (for Instagram, Twitter etc.)
 
-        :param quantity: The quantity of hashtags.
-        :type quantity: int
-        :param category:
+        :param int quantity: The quantity of hashtags.
+        :param str category:
             Available categories: general, girls, love, boys, friends, family,
             nature, travel, cars, sport, tumblr.
         :return: The list of hashtags.
-        :rtype: Union[str, list]
+        :rtype: str or list
+        :raises KeyError: if category is not supported.
 
         :Example:
             ['#love', '#sky', '#nice'].
@@ -208,10 +208,11 @@ class Internet(BaseProvider):
     def top_level_domain(self, domain_type: Optional[str] = None) -> str:
         """Return random top level domain.
 
-        :param domain_type: Type of domain.
-          Supported TLDs: ccTLD, gTLD, GeoTLD, uTLD, sTLD
+        :param str domain_type: Type of domain (ccTLD, gTLD,
+            GeoTLD, uTLD, sTLD).
         :return: Top level domain.
         :rtype: str
+        :raises KeyError: if domain_type is not supported.
         """
         # TODO: This is really ugly solution. Fix it.
         supported = tuple(TLD.keys())
@@ -236,8 +237,8 @@ class Internet(BaseProvider):
                   full_url: bool = False) -> str:
         """Get a random subreddit from the list.
 
-        :param nsfw: NSFW subreddit.
-        :param full_url: Full URL address.
+        :param bool nsfw: NSFW subreddit.
+        :param bool full_url: Full URL address.
         :return: Subreddit or URL to subreddit.
         :rtype: str
 
@@ -270,11 +271,12 @@ class Internet(BaseProvider):
     def network_protocol(self, layer: str = 'application') -> str:
         """Get a random network protocol form OSI model.
 
-        :param layer:
+        :param str layer:
             Layer of protocol: application, data_link, network, physical,
             presentation, session and transport.
         :return: Protocol name.
         :rtype: str
+        :raises WrongArgument: if layer is not supported.
 
         :Example:
             AMQP

@@ -17,6 +17,7 @@ class Address(BaseProvider):
     def street_number(self, maximum: int = 1400) -> str:
         """Generate a random street number.
 
+        :param int maximum: Maximum value.
         :return: Street number.
         :rtype: str
 
@@ -87,7 +88,7 @@ class Address(BaseProvider):
     def state(self, abbr: bool = False) -> str:
         """Get a random administrative district of country.
 
-        :param abbr: Return ISO 3166-2 code.
+        :param bool abbr: Return ISO 3166-2 code.
         :return: Administrative district.
         :rtype: str
 
@@ -101,7 +102,7 @@ class Address(BaseProvider):
     def region(self, abbr: bool = False) -> str:
         """Get a random region.
 
-        :param abbr: Return ISO 3166-2 code.
+        :param bool abbr: Return ISO 3166-2 code.
         :return: State.
         :rtype: str
         """
@@ -110,7 +111,7 @@ class Address(BaseProvider):
     def province(self, abbr: bool = False) -> str:
         """Get a random province.
 
-        :param abbr: Return ISO 3166-2 code.
+        :param bool abbr: Return ISO 3166-2 code.
         :return: Province.
         :rtype: str
         """
@@ -119,7 +120,7 @@ class Address(BaseProvider):
     def federal_subject(self, abbr: bool = False) -> str:
         """Get a random region.
 
-        :param abbr: Return ISO 3166-2 code.
+        :param bool abbr: Return ISO 3166-2 code.
         :return: Federal subject.
         :rtype: str
         """
@@ -143,9 +144,10 @@ class Address(BaseProvider):
     def country_iso(self, fmt: str = 'iso2') -> str:
         """Get a random ISO code of country.
 
-        :param fmt: Format of code (iso2, iso3, numeric).
+        :param str fmt: Format of code (iso2, iso3, numeric).
         :return: ISO Code.
         :rtype: str
+        :raises KeyError: if fmt is not supported.
 
         :Example:
             DE
@@ -223,6 +225,7 @@ class Address(BaseProvider):
         """Get a random continent name or continent
         code (code in international format).
 
+        :param bool code: Return code of continent.
         :return: Continent name.
         :rtype: str
 

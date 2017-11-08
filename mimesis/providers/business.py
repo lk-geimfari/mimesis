@@ -8,7 +8,7 @@ class Business(BaseProvider):
 
     def __init__(self, *args, **kwargs):
         """
-        :param locale: Current locale.
+        :param str locale: Current locale.
         """
         super().__init__(*args, **kwargs)
         self.data = pull('business.json', self.locale)
@@ -16,7 +16,7 @@ class Business(BaseProvider):
     def company_type(self, abbr: bool = False) -> str:
         """Get a random type of business entity.
 
-        :param abbr: If True then return abbreviated company type.
+        :param bool abbr: If True then return abbreviated company type.
         :return: Types of business entity.
         :rtype: str
 
@@ -70,8 +70,8 @@ class Business(BaseProvider):
     def price(self, minimum: float = 10.00, maximum: float = 1000.00) -> str:
         """Generate a random price.
 
-        :param minimum: Max value of price.
-        :param maximum: Min value of price.
+        :param float minimum: Max value of price.
+        :param float maximum: Min value of price.
         :return: Price.
         :rtype: str
 

@@ -16,7 +16,7 @@ def romanized(locale: str = '') -> Callable:
 
     .. note:: At this moment it works only for `ru`, `uk`, `kk`.
 
-    :param locale: Function.
+    :param str locale: Function.
     :return: Latinized text.
     :rtype: types.Callable
     """
@@ -51,7 +51,7 @@ def type_to(new_type: Callable,
     internal function.
 
     :param new_type: New type.
-    :param check_len: Check length of object.
+    :param bool check_len: Check length of object.
     :return: Converted to new_type object.
     :rtype: types.Callable
     """

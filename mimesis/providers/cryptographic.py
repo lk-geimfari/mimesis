@@ -21,11 +21,12 @@ class Cryptographic(BaseProvider):
     def hash(self, algorithm: str = 'sha1') -> str:
         """Generate random hash.
 
-        :param algorithm:
+        :param str algorithm:
             Hashing algorithm ('md5', 'sha1', 'sha224', 'sha256',
             'sha384', 'sha512').
         :return: Hash.
         :rtype: str
+        :raises UnsupportedAlgorithm: if algorithm is not supported.
         """
         algorithm = algorithm.lower().strip()
 
@@ -46,7 +47,7 @@ class Cryptographic(BaseProvider):
         The string has *entropy* random bytes, each byte converted to two
         hex digits.
 
-        :param entropy:
+        :param int entropy: Number of bytes.
         :return: Bytes.
         :rtype: bytes
         """
@@ -55,7 +56,7 @@ class Cryptographic(BaseProvider):
     def token(self, entropy: int = 32) -> str:
         """Return a random text string, in hexadecimal.
 
-        :param entropy: Number of bytes.
+        :param int entropy: Number of bytes.
         :return: Token.
         :rtype: str
         """

@@ -8,13 +8,12 @@ class Transport(BaseProvider):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-
         self._model = Code().custom_code
 
     def truck(self, model_mask: str = '#### @@') -> str:
         """Generate a truck model.
 
-        :param model_mask: Mask of truck model. Here '@' is a \
+        :param str model_mask: Mask of truck model. Here '@' is a \
         placeholder of characters and '#' is a placeholder of digits.
         :return: Dummy truck model.
         :rtype: str
@@ -40,7 +39,7 @@ class Transport(BaseProvider):
     def airplane(self, model_mask: str = '###') -> str:
         """Generate a dummy airplane model.
 
-        :param model_mask: Mask of truck model. Here '@' is a \
+        :param str model_mask: Mask of truck model. Here '@' is a \
         placeholder of characters and '#' is a placeholder of digits.
         :return: Airplane model.
         :rtype: str

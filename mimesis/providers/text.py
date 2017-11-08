@@ -7,22 +7,22 @@ class Text(BaseProvider):
 
     def __init__(self, *args, **kwargs):
         """
-        :param locale: Current locale.
+        :param str locale: Current locale.
         """
         super().__init__(*args, **kwargs)
         self.data = pull('text.json', self.locale)
 
-    def alphabet(self, letter_case: str = None) -> list:
+    def alphabet(self, lower_case: bool = False) -> list:
         """Get an alphabet for current locale.
 
-        :param letter_case: Letter case.
+        :param str lower_case: Return alphabet in lower case.
         :return: Alphabet.
         :rtype: list
         """
-        letter_case = 'uppercase' if \
-            not letter_case else letter_case
+        case = 'uppercase' if \
+            not lower_case else 'lowercase'
 
-        alpha = self.data['alphabet'].get(letter_case)
+        alpha = self.data['alphabet'].get(case)
         return alpha
 
     def level(self) -> str:
@@ -40,7 +40,7 @@ class Text(BaseProvider):
     def text(self, quantity: int = 5) -> str:
         """Generate the text.
 
-        :param quantity: Quantity of sentences.
+        :param int quantity: Quantity of sentences.
         :return: Text.
         :rtype: str
 
@@ -80,7 +80,7 @@ class Text(BaseProvider):
     def words(self, quantity: int = 5) -> list:
         """Get the random words.
 
-        :param quantity: Quantity of words. Default is 5.
+        :param int quantity: Quantity of words. Default is 5.
         :return: Word list.
         :rtype: list
         :Example:

@@ -12,10 +12,10 @@ class File(BaseProvider):
         super().__init__()
         self.__text = Text('en')
 
-    def __sub(self, string: str) -> str:
+    def __sub(self, string: str = '') -> str:
         """Replace spaces in string.
 
-        :param string: String.
+        :param str string: String.
         :return: String without spaces.
         :rtype: str
         """
@@ -25,7 +25,7 @@ class File(BaseProvider):
     def extension(self, file_type: str = 'text') -> str:
         """Get a random file extension from list.
 
-        :param file_type:
+        :param str file_type:
             File type (source, text, data, audio, video, image,
             executable, compressed).
         :return: Extension of a file.
@@ -40,10 +40,11 @@ class File(BaseProvider):
     def mime_type(self, type_t: str = 'application') -> str:
         """Get a random mime type from list.
 
-        :param type_t:
+        :param str type_t:
             Type of media: (application, image, video, audio, text, message).
         :return: Mime type.
         :rtype: str
+        :raises ValueError: if type_t is not supported.
         """
         supported = ' '.join(MIME_TYPES.keys())
 
@@ -57,8 +58,8 @@ class File(BaseProvider):
     def size(self, minimum: int = 1, maximum: int = 100) -> str:
         """Get size of file.
 
-        :param minimum: Maximum value.
-        :param maximum: Minimum value.
+        :param int minimum: Maximum value.
+        :param int maximum: Minimum value.
         :return: Size of file.
         :rtype: str
 
@@ -77,7 +78,7 @@ class File(BaseProvider):
     def file_name(self, file_type: str = 'data') -> str:
         """Get a random file name with some extension.
 
-        :param file_type:
+        :param str file_type:
             File type (source, text, data, audio, video,
             image, executable, compressed)
         :return: File name.

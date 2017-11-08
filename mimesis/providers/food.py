@@ -7,7 +7,7 @@ class Food(BaseProvider):
 
     def __init__(self, *args, **kwargs):
         """
-        :param locale: Current locale.
+        :param str locale: Current locale.
         """
         super().__init__(*args, **kwargs)
         self._data = pull('food.json', self.locale)

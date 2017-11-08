@@ -85,12 +85,11 @@ class Structured(BaseProvider):
     def html_attribute_value(self, tag: str, attribute: str) -> str:
         """Random value for specified HTML tag attribute.
 
-        :param tag: An HTML tag.
-        :param attribute: An attribute of the specified tag.
-        :type tag: str
-        :type attribute: str
+        :param str tag: An HTML tag.
+        :param str attribute: An attribute of the specified tag.
         :return: An attribute.
         :rtype: str
+        :raises NotImplementedError: if tag is unsupported.
         """
         try:
             value = HTML_CONTAINER_TAGS[tag][attribute]  # type: ignore
@@ -116,9 +115,9 @@ class Structured(BaseProvider):
              max_depth: int = 3, recursive: bool = False) -> str:
         """Generate a random snippet of JSON.
 
-        :param items: Number of top-level items to produce.
-        :param max_depth: Maximum depth of each top-level item.
-        :param recursive:
+        :param int items: Number of top-level items to produce.
+        :param int max_depth: Maximum depth of each top-level item.
+        :param bool recursive:
             When used recursively, will return a Python object instead of JSON
             string.
         :return: JSON

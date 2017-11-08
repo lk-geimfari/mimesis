@@ -12,7 +12,7 @@ class UnitSystem(BaseProvider):
     def mass(symbol: bool = False) -> str:
         """Get a mass unit name.
 
-        :param symbol: Symbol of unit.
+        :param bool symbol: Symbol of unit.
         :return: Mass unit name.
         :rtype: str
         :Example:
@@ -32,7 +32,7 @@ class UnitSystem(BaseProvider):
     def thermodynamic_temperature(symbol: bool = False) -> str:
         """Get the thermodynamic temperature unit name.
 
-        :param symbol: Symbol of unit.
+        :param bool symbol: Symbol of unit.
         :return: Thermodynamic temperature unit name
         :rtype: str
 
@@ -47,7 +47,7 @@ class UnitSystem(BaseProvider):
     def amount_of_substance(symbol: bool = False) -> str:
         """Get unit name of amount of substance.
 
-        :param symbol: Symbol of unit.
+        :param bool symbol: Symbol of unit.
         :return: Unit name of amount of substance.
         :rtype: str
 
@@ -62,7 +62,7 @@ class UnitSystem(BaseProvider):
     def angle(symbol: bool = False) -> str:
         """Get unit name of angle.
 
-        :param symbol: Symbol of unit.
+        :param bool symbol: Symbol of unit.
         :return: Unit name of angle.
         :rtype: str
 
@@ -77,7 +77,7 @@ class UnitSystem(BaseProvider):
     def solid_angle(symbol: bool = False) -> str:
         """Get unit name if solid angle
 
-        :param symbol: Symbol of unit.
+        :param bool symbol: Symbol of unit.
         :return: Unit name of solid angle
         :rtype: str
 
@@ -92,7 +92,7 @@ class UnitSystem(BaseProvider):
     def frequency(symbol: bool = False) -> str:
         """Get unit name of frequency.
 
-        :param symbol: Symbol of unit.
+        :param bool symbol: Symbol of unit.
         :return: Unit name if frequency.
         :rtype: str
 
@@ -107,7 +107,7 @@ class UnitSystem(BaseProvider):
     def force(symbol: bool = False) -> str:
         """Get unit name of fore.
 
-        :param symbol:  Symbol of unit.
+        :param bool symbol:  Symbol of unit.
         :return:  Unit name of force.
         :rtype: str
 
@@ -122,7 +122,7 @@ class UnitSystem(BaseProvider):
     def pressure(symbol: bool = False) -> str:
         """Get unit name of pressure.
 
-        :param symbol: Symbol of unit.
+        :param bool symbol: Symbol of unit.
         :return: Unit name of pressure.
         :rtype: str
 
@@ -137,7 +137,7 @@ class UnitSystem(BaseProvider):
     def energy(symbol: bool = False) -> str:
         """Get unit name of energy.
 
-        :param symbol: Symbol of unit.
+        :param bool symbol: Symbol of unit.
         :return: Unit name of energy.
         :rtype: str
 
@@ -152,7 +152,7 @@ class UnitSystem(BaseProvider):
     def power(symbol: bool = False) -> str:
         """Get unit name of power.
 
-        :param symbol: Symbol of unit.
+        :param bool symbol: Symbol of unit.
         :return: Unit name of power.
         :rtype: str
 
@@ -170,7 +170,7 @@ class UnitSystem(BaseProvider):
     def electric_charge(symbol: bool = False) -> str:
         """Get unit name of electric charge.
 
-        :param symbol: Symbol of unit.
+        :param bool symbol: Symbol of unit.
         :return: Unit name of electric charge.
         :rtype: str
 
@@ -185,7 +185,7 @@ class UnitSystem(BaseProvider):
     def voltage(symbol: bool = False) -> str:
         """Get unit name of voltage.
 
-        :param symbol: Symbol of unit.
+        :param bool symbol: Symbol of unit.
         :return: Unit name of voltage.
         :rtype: str
 
@@ -200,7 +200,7 @@ class UnitSystem(BaseProvider):
     def electric_capacitance(symbol: bool = False) -> str:
         """Get unit name of electric capacitance.
 
-        :param symbol: Symbol of unit.
+        :param bool symbol: Symbol of unit.
         :return: Unit name of electric capacitance.
         :rtype: str
 
@@ -215,7 +215,7 @@ class UnitSystem(BaseProvider):
     def electric_resistance(symbol: bool = False) -> str:
         """Get name of electric resistance.
 
-        :param symbol: Symbol of unit.
+        :param bool symbol: Symbol of unit.
         :return: Name of electric resistance.
         :rtype: str
 
@@ -236,7 +236,7 @@ class UnitSystem(BaseProvider):
     def electrical_conductance(symbol: bool = False) -> str:
         """Get unit name of electrical conductance.
 
-        :param symbol: Symbol of unit.
+        :param bool symbol: Symbol of unit.
         :return: Unit name of electrical conductance.
         :rtype: str
 
@@ -251,7 +251,7 @@ class UnitSystem(BaseProvider):
     def magnetic_flux(symbol: bool = False) -> str:
         """Get unit name of magnetic flux.
 
-        :param symbol: Symbol of unit.
+        :param bool symbol: Symbol of unit.
         :return: Unit name of magnetic flux.
         :rtype: str
 
@@ -266,7 +266,7 @@ class UnitSystem(BaseProvider):
     def magnetic_flux_density(symbol: bool = False) -> str:
         """Get unit name of magnetic flux density.
 
-        :param symbol: Symbol of unit.
+        :param bool symbol: Symbol of unit.
         :return: Unit name of magnetic flux density.
         :rtype: str
 
@@ -281,7 +281,7 @@ class UnitSystem(BaseProvider):
     def inductance(symbol: bool = False) -> str:
         """Get unit name of inductance.
 
-        :param symbol: Symbol of unit.
+        :param bool symbol: Symbol of unit.
         :return: Unit name of inductance.
         :rtype: str
 
@@ -296,7 +296,7 @@ class UnitSystem(BaseProvider):
     def temperature(symbol: bool = False) -> str:
         """Get unit name of temperature.
 
-        :param symbol:
+        :param bool symbol:
         :return:
         :rtype: str
 
@@ -309,7 +309,7 @@ class UnitSystem(BaseProvider):
     def radioactivity(symbol: bool = False) -> str:
         """Get unit name of radioactivity.
 
-        :param symbol: Symbol of unit.
+        :param bool symbol: Symbol of unit.
         :return: Unit name of radioactivity.
         :rtype: str
 
@@ -324,9 +324,10 @@ class UnitSystem(BaseProvider):
         """Get a random prefix for the International System of Units (SI)
 
         :param sign: Sing of number (positive, negative)
-        :param symbol: Return symbol of prefix.
+        :param bool symbol: Return symbol of prefix.
         :return: Prefix for SI.
         :rtype: str
+        :raises WrongArgument: if sign is not supported.
 
         :Example:
             mega

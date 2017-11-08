@@ -58,7 +58,7 @@ class Schema(BaseProvider):
     def create(self, iterations: int = 1) -> Iterator[dict]:
         """Fill schema using data generators of mimesis.
 
-        :param iterations: Count of iterations.
+        :param int iterations: Count of iterations.
         :return: Filled schema.
         """
 

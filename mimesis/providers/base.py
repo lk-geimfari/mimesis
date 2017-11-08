@@ -11,8 +11,8 @@ class BaseProvider(object):
                  seed: Optional[int] = None) -> None:
         """Base constructor for all providers.
 
-        :param locale: Current locale. Default is 'en'.
-        :param seed: Seed to all the random functions. Default is 'None'.
+        :param str locale: Current locale. Default is 'en'.
+        :param int seed: Seed to all the random functions. Default is 'None'.
         """
         self.seed = seed
         self.random = Random()

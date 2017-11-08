@@ -19,15 +19,15 @@ class Numbers(BaseProvider):
         | 'd'       | floating point | 8 byte       | 2.3E-308 to 1.7E+308 |
         +-----------+----------------+--------------+----------------------+
 
-        :param n: Raise 10 to the 'n' power.
-        :param type_code: A code of type.
-        :param to_list: Convert array to list.
+        :param int n: Raise 10 to the 'n' power.
+        :param str type_code: A code of type.
+        :param bool to_list: Convert array to list.
 
         .. note:: When you work with large numbers, it is better not to use
             this option, because type 'array' much faster than 'list'.
 
         :return: An array of floating-point numbers.
-        :rtype: types.Array
+        :rtype: Array
         """
         nums = array.array(type_code, (self.random.random()
                                        for _ in range(10 ** int(n))))
@@ -44,11 +44,11 @@ class Numbers(BaseProvider):
         | 'L'       | unsigned integer | 4 byte       | 0 to 4,294,967,295 |
         +-----------+------------------+--------------+--------------------+
 
-        :param start: First value of range.
-        :param end: Last value of range.
-        :param to_list: Convert array to list.
+        :param int start: First value of range.
+        :param int end: Last value of range.
+        :param bool to_list: Convert array to list.
         :return: An array of floating-point numbers.
-        :rtype: types.Array
+        :rtype: Array
         """
         nums = array.array('L', (i for i in range(start, end) if i % 2))
         return nums.tolist() if to_list else nums
@@ -56,7 +56,7 @@ class Numbers(BaseProvider):
     def digit(self, to_bin: bool = False) -> Number:
         """Get a random digit.
 
-        :param to_bin: If True then convert to binary.
+        :param bool to_bin: If True then convert to binary.
         :return: Digit.
         :rtype: types.Number
 
@@ -73,9 +73,9 @@ class Numbers(BaseProvider):
     def between(self, minimum: int = 1, maximum: int = 1000) -> int:
         """Generate a random number between minimum and maximum.
 
-        :param minimum: Minimum of range.
-        :param maximum: Maximum of range
-        :return: Number
+        :param int minimum: Minimum of range.
+        :param int maximum: Maximum of range.
+        :return: Number.
         :rtype: int
         """
         num = self.random.randint(int(minimum), int(maximum))
@@ -84,7 +84,7 @@ class Numbers(BaseProvider):
     def rating(self, maximum: float = 5.0) -> float:
         """Generate random rating for something.
 
-        :param maximum: Minimum value (default is 5.0).
+        :param float maximum: Minimum value (default is 5.0).
         :return: Rating.
         :rtype: float
 

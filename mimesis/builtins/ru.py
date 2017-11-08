@@ -30,6 +30,7 @@ class RussiaSpecProvider(BaseSpecProvider):
         """Generate random patronymic name.
 
         :param gender: Gender of person.
+        :type gender: str or int
         :return: Patronymic name.
         :rtype: str
 
@@ -44,13 +45,14 @@ class RussiaSpecProvider(BaseSpecProvider):
         """Generate random series of passport.
 
         :param year: Year of manufacture.
+        :type year: int or None
         :return: Series.
         :rtype: str
 
         :Example:
             02 15.
         """
-        year = self.random.randint(10, 16) if not \
+        year = self.random.randint(10, 18) if not \
             year else year
 
         region = self.random.randint(1, 99)
