@@ -7,7 +7,7 @@
 [![Python](https://img.shields.io/badge/python-3.5%2C%203.6-brightgreen.svg)](https://badge.fury.io/py/mimesis)
 
 
-[![](https://i.imgur.com/IbrDVyE.png)](https://github.com/lk-geimfari/mimesis)
+[![](/media/large-logo.png)](https://github.com/lk-geimfari/mimesis)
 
 **Mimesis** is a fast and easy to use library for Python programming language, which helps generate mock (dummy) data for a variety of purposes (see "[Data providers](#data-providers)") in a variety of languages (see "[Locales](#locales)"). This data can be particularly useful during software development and testing. For example, it could be used to populate a testing database for a web application with user information such as email addresses, usernames, first names, last names, etc. 
 
