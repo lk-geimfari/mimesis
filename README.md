@@ -69,13 +69,17 @@ You can specify a locale when creating providers and they will return data that 
 >>> from mimesis import Personal
 
 >>> de = Personal('de')
->>> ic = Personal('is')
+>>> fr = Personal('fr')
+>>> pl = Personal('pl')
 
 >>> de.full_name()
 'Sabrina Gutermuth'
 
->>> ic.full_name()
-'Rósa Þórlindsdóttir'
+>>> fr.full_name()
+'César Bélair
+
+>>> pl.full_name()
+'Światosław Tomankiewicz'
 ```
 
 Mimesis currently includes support for 33 different locales. See details for more information.
