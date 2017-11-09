@@ -1,6 +1,5 @@
 from random import Random
 
-from mimesis.providers import Code
 from mimesis.utils import custom_code
 
 

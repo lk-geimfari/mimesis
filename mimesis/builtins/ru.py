@@ -96,5 +96,4 @@ class RussiaSpecProvider(BaseSpecProvider):
             451-952-540-41.
         """
         mask = '###-###-###-##'
-        snils = self.code(mask=mask)
-        return snils
+        return self.code(mask=mask)
