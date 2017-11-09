@@ -1,11 +1,12 @@
 # utils.py
+from string import ascii_uppercase
 
 import collections
 import functools
 import json
 import ssl
 from os import path
-from random import choice
+from random import choice, randint
 from typing import Mapping, Union
 from urllib import request
 
@@ -184,3 +185,28 @@ def setup_locale(locale: str = '') -> str:
         return settings.DEFAULT_LOCALE
 
     return locale.lower()
+
+
+def custom_code(mask: str = '@###',
+                char: str = '@', digit: str = '#') -> str:
+    """Generate custom code using ascii uppercase and random integers.
+
+    :param str mask: Mask of code.
+    :param str char: Placeholder for characters.
+    :param str digit: Placeholder for digits.
+    :return: Custom code.
+    :rtype: str
+
+    :Example:
+        5673-AGFR-SFSFF-1423-4/AD.
+    """
+    code = ''
+    for p in mask:
+        if p == char:
+            code += choice(ascii_uppercase)
+        elif p == digit:
+            code += str(randint(0, 9))
+        else:
+            code += p
+
+    return code

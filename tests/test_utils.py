@@ -6,8 +6,16 @@ import socket
 import pytest
 
 from mimesis.exceptions import UnsupportedLocale, UnexpectedGender
-from mimesis.utils import (check_gender, download_image, locale_info,
-                           luhn_checksum, pull, update_dict, setup_locale)
+from mimesis.utils import (
+    check_gender,
+    custom_code,
+    download_image,
+    locale_info,
+    luhn_checksum,
+    pull,
+    update_dict,
+    setup_locale,
+)
 
 
 def is_connected():
@@ -136,3 +144,13 @@ def test_check_gender_invalid_gender():
 def test_setup_locale(inp, out):
     result = setup_locale(inp)
     assert result == out
+
+
+def test_custom_code():
+    result = custom_code(mask='@@@-###-@@@', char='@', digit='#')
+    assert len(result) == 11
+
+    a, b, c = result.split('-')
+    assert a.isalpha()
+    assert b.isdigit()
+    assert c.isalpha()

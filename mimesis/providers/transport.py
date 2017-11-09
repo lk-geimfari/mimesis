@@ -1,6 +1,6 @@
 from mimesis.data import AIRPLANES, CARS, TRUCKS
-from mimesis.providers.code import Code
 from mimesis.providers.base import BaseProvider
+from mimesis.utils import custom_code
 
 
 class Transport(BaseProvider):
@@ -8,7 +8,6 @@ class Transport(BaseProvider):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self._model = Code().custom_code
 
     def truck(self, model_mask: str = '#### @@') -> str:
         """Generate a truck model.
@@ -21,7 +20,7 @@ class Transport(BaseProvider):
         :Example:
             Caledon-966O.
         """
-        model = self._model(mask=model_mask)
+        model = custom_code(mask=model_mask)
         truck = self.random.choice(TRUCKS)
         return '%s-%s' % (truck, model)
 
@@ -47,6 +46,6 @@ class Transport(BaseProvider):
         :Example:
             Boeing 727.
         """
-        model = self._model(mask=model_mask)
+        model = custom_code(mask=model_mask)
         plane = self.random.choice(AIRPLANES)
         return '%s %s' % (plane, model)

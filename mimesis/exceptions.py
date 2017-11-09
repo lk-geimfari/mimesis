@@ -10,7 +10,7 @@ class WrongArgument(KeyError):
     """ Raised when argument is wrong. """
 
 
-class UnexpectedGender(WrongArgument):
+class UnexpectedGender(KeyError):
     """ Raised when gender is wrong. """
 
 

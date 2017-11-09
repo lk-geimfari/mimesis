@@ -1,8 +1,6 @@
-from string import ascii_uppercase
-
 from mimesis.data import IMEI_TACS, ISBN_GROUPS, LOCALE_CODES
 from mimesis.providers.base import BaseProvider
-from mimesis.utils import luhn_checksum
+from mimesis.utils import luhn_checksum, custom_code
 
 
 class Code(BaseProvider):
@@ -13,30 +11,6 @@ class Code(BaseProvider):
         :param locale: Current locale.
         """
         super().__init__(*args, **kwargs)
-
-    def custom_code(self, mask: str = '@###',
-                    char: str = '@', digit: str = '#') -> str:
-        """Generate custom code using ascii uppercase and random integers.
-
-        :param str mask: Mask of code.
-        :param str char: Placeholder for characters.
-        :param str digit: Placeholder for digits.
-        :return: Custom code.
-        :rtype: str
-
-        :Example:
-            5673-AGFR-SFSFF-1423-4/AD.
-        """
-        code = ''
-        for p in mask:
-            if p == char:
-                code += self.random.choice(ascii_uppercase)
-            elif p == digit:
-                code += str(self.random.randint(0, 9))
-            else:
-                code += p
-
-        return code
 
     def locale_code(self) -> str:
         """Get a random locale code (MS-LCID).
@@ -58,7 +32,7 @@ class Code(BaseProvider):
         :return: ISSN.
         :rtype: str
         """
-        return self.custom_code(mask=mask)
+        return custom_code(mask=mask)
 
     def isbn(self, fmt: str = 'isbn-10') -> str:
         """Generate ISBN for current locale. Default is ISBN 10,
@@ -81,7 +55,7 @@ class Code(BaseProvider):
         else:
             mask = mask.format(groups['default'])
 
-        return self.custom_code(mask=mask)
+        return custom_code(mask=mask)
 
     def ean(self, fmt: str = 'ean-13') -> str:
         """Generate EAN (European Article Number) code. Default is
@@ -96,7 +70,7 @@ class Code(BaseProvider):
         """
         mask = '########' if fmt == 'ean-8' \
             else '#############'
-        return self.custom_code(mask=mask)
+        return custom_code(mask=mask)
 
     def imei(self) -> str:
         """Generate a random IMEI (International Mobile Station Equipment Identity).
@@ -107,7 +81,7 @@ class Code(BaseProvider):
         :Example:
             353918052107063
         """
-        num = self.random.choice(IMEI_TACS) + self.custom_code(mask='######')
+        num = self.random.choice(IMEI_TACS) + custom_code(mask='######')
         return num + luhn_checksum(num)
 
     def pin(self, mask: str = '####') -> str:
@@ -120,4 +94,4 @@ class Code(BaseProvider):
         :Example:
             5241.
         """
-        return self.custom_code(mask=mask)
+        return custom_code(mask=mask)

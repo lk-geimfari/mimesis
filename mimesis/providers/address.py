@@ -1,7 +1,7 @@
 from mimesis.data import CALLING_CODES, CONTINENT_CODES, \
     COUNTRIES_ISO, SHORTENED_ADDRESS_FMT
 from mimesis.providers.base import BaseProvider
-from mimesis.utils import pull
+from mimesis.utils import pull, custom_code
 
 
 class Address(BaseProvider):
@@ -138,8 +138,7 @@ class Address(BaseProvider):
         from mimesis.providers.code import Code
 
         mask = self.data['postal_code_fmt']
-        # TODO: Move custom_code() to utils.
-        return Code(self.locale).custom_code(mask)
+        return custom_code(mask=mask)
 
     def country_iso(self, fmt: str = 'iso2') -> str:
         """Get a random ISO code of country.

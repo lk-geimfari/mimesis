@@ -7,10 +7,9 @@ from mimesis.data import (BLOOD_GROUPS, EMAIL_DOMAINS, ENGLISH_LEVEL,
                           SEXUALITY_SYMBOLS, USERNAMES)
 from mimesis.exceptions import WrongArgument
 from mimesis.providers.base import BaseProvider
-from mimesis.providers.code import Code
 from mimesis.providers.cryptographic import Cryptographic
 from mimesis.settings import SURNAMES_SEPARATED_BY_GENDER
-from mimesis.utils import check_gender, luhn_checksum, pull
+from mimesis.utils import check_gender, luhn_checksum, pull, custom_code
 from mimesis.typing import Gender
 
 __all__ = ['Personal']
@@ -29,7 +28,6 @@ class Personal(BaseProvider):
         self._store = {
             'age': 0,
         }
-        self.__custom_code = Code().custom_code
 
     def age(self, minimum: int = 16, maximum: int = 66) -> int:
         """Get a random integer value.
@@ -626,7 +624,7 @@ class Personal(BaseProvider):
             masks = self.data.get('telephone_fmt', default)
             mask = self.random.choice(masks)
 
-        return self.__custom_code(mask=mask, digit=placeholder)
+        return custom_code(mask=mask, digit=placeholder)
 
     def avatar(self, size: int = 256) -> str:
         """Generate a random avatar (link to avatar) using API of  Adorable.io.
@@ -651,7 +649,7 @@ class Personal(BaseProvider):
         :Example:
             07-97/04
         """
-        return self.__custom_code(mask=mask)
+        return custom_code(mask=mask)
 
     def level_of_english(self) -> str:
         """Get a random level of English.
