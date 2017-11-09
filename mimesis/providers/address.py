@@ -135,7 +135,6 @@ class Address(BaseProvider):
         :Example:
             389213
         """
-        from mimesis.providers.code import Code
 
         mask = self.data['postal_code_fmt']
         return custom_code(mask=mask)
