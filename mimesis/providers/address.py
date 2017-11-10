@@ -9,7 +9,7 @@ class Address(BaseProvider):
 
     def __init__(self, *args, **kwargs):
         """
-        :param locale: Current locale.
+        :param str locale: Current locale.
         """
         super().__init__(*args, **kwargs)
         self.data = pull('address.json', self.locale)
@@ -19,7 +19,6 @@ class Address(BaseProvider):
 
         :param int maximum: Maximum value.
         :return: Street number.
-        :rtype: str
 
         :Example:
             134.
@@ -31,7 +30,6 @@ class Address(BaseProvider):
         """Get a random street name.
 
         :return: Street name.
-        :rtype: str
 
         :Example:
            Candlewood.
@@ -43,7 +41,6 @@ class Address(BaseProvider):
         """Get a random street suffix.
 
         :return: Street suffix.
-        :rtype: str
 
         :Example:
             Alley.
@@ -55,7 +52,6 @@ class Address(BaseProvider):
         """Get a random full address (include Street number, suffix and name).
 
         :return: Full address.
-        :rtype: str
 
         :Example:
             5 Central Sideline.
@@ -90,7 +86,6 @@ class Address(BaseProvider):
 
         :param bool abbr: Return ISO 3166-2 code.
         :return: Administrative district.
-        :rtype: str
 
         :Example:
             Alabama (for locale `en`).
@@ -104,7 +99,6 @@ class Address(BaseProvider):
 
         :param bool abbr: Return ISO 3166-2 code.
         :return: State.
-        :rtype: str
         """
         return self.state(abbr)
 
@@ -113,7 +107,6 @@ class Address(BaseProvider):
 
         :param bool abbr: Return ISO 3166-2 code.
         :return: Province.
-        :rtype: str
         """
         return self.state(abbr)
 
@@ -122,7 +115,6 @@ class Address(BaseProvider):
 
         :param bool abbr: Return ISO 3166-2 code.
         :return: Federal subject.
-        :rtype: str
         """
         return self.state(abbr)
 
@@ -130,7 +122,6 @@ class Address(BaseProvider):
         """Generate a postal code for current locale.
 
         :return: Postal code.
-        :type: str
 
         :Example:
             389213
@@ -144,7 +135,6 @@ class Address(BaseProvider):
 
         :param str fmt: Format of code (iso2, iso3, numeric).
         :return: ISO Code.
-        :rtype: str
         :raises KeyError: if fmt is not supported.
 
         :Example:
@@ -162,7 +152,6 @@ class Address(BaseProvider):
         """Get a random country.
 
         :return: The Country.
-        :rtype: str
 
         :Example:
             Russia.
@@ -174,7 +163,6 @@ class Address(BaseProvider):
         """Get a random city for current locale.
 
         :return: City name.
-        :rtype: str
 
         :Example:
             Saint Petersburg.
@@ -186,7 +174,6 @@ class Address(BaseProvider):
         """Generate a random value of latitude (-90 to +90).
 
         :return: Value of longitude.
-        :rtype: float
 
         :Example:
             -66.4214188124611
@@ -197,7 +184,6 @@ class Address(BaseProvider):
         """Generate a random value of longitude (-180 to +180).
 
         :return: Value of longitude.
-        :rtype: float
 
         :Example:
             112.18440260511943
@@ -208,7 +194,6 @@ class Address(BaseProvider):
         """Generate random geo coordinates.
 
         :return: Dict with coordinates.
-        :rtype: dict
 
         :Example:
             {'latitude': 8.003968712834975, 'longitude': 36.02811153405548}
@@ -225,7 +210,6 @@ class Address(BaseProvider):
 
         :param bool code: Return code of continent.
         :return: Continent name.
-        :rtype: str
 
         :Example:
             Africa (en)
@@ -241,7 +225,6 @@ class Address(BaseProvider):
         """Get a random calling code of random country.
 
         :return: Calling code.
-        :rtype: str
 
         :Example:
             +7
