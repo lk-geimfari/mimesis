@@ -60,6 +60,7 @@ class Schema(BaseProvider):
 
         :param int iterations: Count of iterations.
         :return: Filled schema.
+        :raises UndefinedSchema: if self.schema is empty dict.
         """
 
         if self.schema:
