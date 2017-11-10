@@ -15,8 +15,7 @@ class Food(BaseProvider):
     def vegetable(self) -> str:
         """Get a random vegetable.
 
-        :return: Vegetable.
-        :rtype: str
+        :return: Vegetable name.
 
         :Example:
             Tomato.
@@ -27,8 +26,7 @@ class Food(BaseProvider):
     def fruit(self) -> str:
         """Get a random name of fruit or berry .
 
-        :return: Fruit.
-        :rtype: str
+        :return: Fruit name.
 
         :Example:
             Banana.
@@ -40,7 +38,6 @@ class Food(BaseProvider):
         """Get a random dish for current locale.
 
         :return: Dish name.
-        :rtype: str
 
         :Example:
             Ratatouille.
@@ -52,7 +49,6 @@ class Food(BaseProvider):
         """Get a random spices or herbs.
 
         :return: Spices or herbs.
-        :rtype: str
 
         :Example:
             Anise.
@@ -64,7 +60,6 @@ class Food(BaseProvider):
         """Get a random drink.
 
         :return: Alcoholic drink.
-        :rtype: str
 
         :Example:
             Vodka.

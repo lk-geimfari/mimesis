@@ -35,7 +35,6 @@ class Personal(BaseProvider):
         :param int maximum: Maximum value of age.
         :param int minimum: Minimum value of age.
         :return: Random integer.
-        :rtype: int
 
         :Example:
             23.
@@ -49,7 +48,6 @@ class Personal(BaseProvider):
 
         :param int max_childs: Maximum count of child's.
         :return: Ints. Depend on previous generated age.
-        :rtype: int
         """
         a = self._store['age']
         if a == 0:
@@ -63,7 +61,6 @@ class Personal(BaseProvider):
 
         :param int working_start_age: Age then person start to work.
         :return: Int. Depend on previous generated age.
-        :rtype: int
         """
         a = self._store['age']
         if a == 0:
@@ -78,7 +75,6 @@ class Personal(BaseProvider):
             if 'female' then female name,  if None return random from ones.
         :type gender: int or str
         :return: Name.
-        :rtype: str
 
         :Example:
             John.
@@ -93,7 +89,6 @@ class Personal(BaseProvider):
         :param gender: The gender of person.
         :type gender: int of str
         :return: Surname.
-        :rtype: str
 
         :Example:
             Smith.
@@ -117,7 +112,6 @@ class Personal(BaseProvider):
         :type gender: int or str
         :param str title_type:  The type of title ('typical' and 'academic').
         :return: The title.
-        :rtype: str
         :raises WrongArgument: if gender in incorrect format.
 
         :Example:
@@ -140,7 +134,6 @@ class Personal(BaseProvider):
         :param gender: Gender.
         :type gender: int or str
         :return: Full name.
-        :rtype: str
 
         :Example:
             Johann Wolfgang.
@@ -159,7 +152,6 @@ class Personal(BaseProvider):
         :param str template: Template ('U_d', 'U.d', 'U-d', 'ld', 'l-d', 'Ud',
             'l.d', 'l_d', 'default')
         :return: Username.
-        :rtype: str
         :raises WrongArgument: if template is not supported.
 
         :Example:
@@ -239,7 +231,6 @@ class Personal(BaseProvider):
         :param int length: Length of password.
         :param str algorithm: Hashing algorithm.
         :return: Password or hash of password.
-        :rtype: str
 
         :Example:
             k6dv2odff9#4h (without hashing).
@@ -255,10 +246,9 @@ class Personal(BaseProvider):
     def email(self, domains: Union[tuple, list] = None) -> str:
         """Generate a random email.
 
-        :param domains: Custom domain for email.
+        :param domains: List of custom domains for emails.
         :type domains: list or tuple
         :return: Email address.
-        :rtype: str
 
         :Example:
             foretime10@live.com
@@ -273,7 +263,6 @@ class Personal(BaseProvider):
         address formats that are most popular: 'P2PKH' and 'P2SH'
 
         :return: Bitcoin address.
-        :rtype: str
 
         :Example:
             3EktnHQD7RiAE6uzMj2ZifT9YgRrkSgzQX
@@ -287,7 +276,6 @@ class Personal(BaseProvider):
         """Generate a random card verification value (CVV).
 
         :return: CVV code.
-        :rtype: str
 
         :Example:
             324
@@ -299,7 +287,6 @@ class Personal(BaseProvider):
 
         :param str card_type: Issuing Network. Default is Visa.
         :return: Credit card number.
-        :rtype: str
         :raises NotImplementedError: if cart_type is not supported.
 
         :Example:
@@ -336,7 +323,6 @@ class Personal(BaseProvider):
         :param int minimum: Date of issue.
         :param int maximum: Maximum of expiration_date.
         :return: Expiration date of credit card.
-        :rtype: str
 
         :Example:
             03/19.
@@ -350,7 +336,6 @@ class Personal(BaseProvider):
         """Generate a random CID code.
 
         :return: CID code.
-        :rtype: int
 
         :Example:
             7452
@@ -361,7 +346,6 @@ class Personal(BaseProvider):
         """Generate a random PayPal account.
 
         :return: Email of PapPal user.
-        :rtype: str
 
         :Example:
             wolf235@gmail.com
@@ -372,7 +356,6 @@ class Personal(BaseProvider):
         """Generate profile for random social network.
 
         :return: Profile in some network.
-        :rtype: str
 
         :Example:
             http://facebook.com/some_user
@@ -426,7 +409,6 @@ class Personal(BaseProvider):
         :param float minimum: Minimum value.
         :param float maximum: Maximum value.
         :return: Height.
-        :rtype: str
 
         :Example:
             1.85.
@@ -440,7 +422,6 @@ class Personal(BaseProvider):
         :param int minimum: min value
         :param int maximum: max value
         :return: Weight.
-        :rtype: int
 
         :Example:
             48.
@@ -452,7 +433,6 @@ class Personal(BaseProvider):
         """Get a random blood type.
 
         :return: Blood type (blood group).
-        :rtype: str
 
         :Example:
             A+
@@ -464,7 +444,6 @@ class Personal(BaseProvider):
 
         :param bool symbol: Unicode symbol.
         :return: Sexual orientation.
-        :rtype: str
 
         :Example:
             Heterosexuality.
@@ -479,7 +458,6 @@ class Personal(BaseProvider):
         """Get a random job.
 
         :return: The name of job.
-        :rtype: str
 
         :Example:
             Programmer.
@@ -491,7 +469,6 @@ class Personal(BaseProvider):
         """Get a random political views.
 
         :return: Political views.
-        :rtype: str
 
         :Example:
             Liberal.
@@ -503,7 +480,6 @@ class Personal(BaseProvider):
         """Get a random worldview.
 
         :return: Worldview.
-        :rtype: str
 
         :Example:
             Pantheism.
@@ -516,7 +492,6 @@ class Personal(BaseProvider):
         Get a random views on.
 
         :return: Views on.
-        :rtype: str
 
         :Example:
             Negative.
@@ -530,7 +505,6 @@ class Personal(BaseProvider):
         :param gender: Gender.
         :type gender: str or int
         :return: Nationality.
-        :rtype: str
 
         :Example:
             Russian.
@@ -551,7 +525,6 @@ class Personal(BaseProvider):
         """Get a random university.
 
         :return: University name.
-        :rtype: str
 
         :Example:
             MIT.
@@ -563,7 +536,6 @@ class Personal(BaseProvider):
         """Get a random academic degree.
 
         :return: Degree.
-        :rtype: str
 
         :Example:
             Bachelor.
@@ -575,7 +547,6 @@ class Personal(BaseProvider):
         """Get a random language.
 
         :return: Random language.
-        :rtype: str
 
         :Example:
             Irish.
@@ -587,7 +558,6 @@ class Personal(BaseProvider):
         """Get a random movie for current locale.
 
         :return: The name of the movie.
-        :rtype: str
 
         :Example:
             Interstellar.
@@ -599,7 +569,6 @@ class Personal(BaseProvider):
         """Get a random music genre.
 
         :return: A music genre.
-        :rtype: str
 
         :Example:
             Ambient.
@@ -612,7 +581,6 @@ class Personal(BaseProvider):
         :param str mask: Mask for formatting number.
         :param str placeholder: A placeholder for a mask (default is #).
         :return: Phone number.
-        :rtype: str
 
         :Example:
             +7-(963)-409-11-22.
@@ -631,7 +599,6 @@ class Personal(BaseProvider):
 
         :param int size: Size of avatar.
         :return: Link to avatar.
-        :rtype: str
         """
         url = 'https://api.adorable.io/avatars/{0}/{1}.png'
         return url.format(size, self.password(algorithm='md5'))
@@ -644,7 +611,6 @@ class Personal(BaseProvider):
             The mask. Here '@' is a placeholder for characters and '#' is
             placeholder for digits.
         :return: An identifier.
-        :rtype: str
 
         :Example:
             07-97/04
@@ -655,7 +621,6 @@ class Personal(BaseProvider):
         """Get a random level of English.
 
         :return: Level of english.
-        :rtype: str
 
         :Example:
             Intermediate.

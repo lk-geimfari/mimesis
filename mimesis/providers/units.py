@@ -14,7 +14,7 @@ class UnitSystem(BaseProvider):
 
         :param bool symbol: Symbol of unit.
         :return: Mass unit name.
-        :rtype: str
+
         :Example:
             gr
         """
@@ -34,7 +34,6 @@ class UnitSystem(BaseProvider):
 
         :param bool symbol: Symbol of unit.
         :return: Thermodynamic temperature unit name
-        :rtype: str
 
         :Example:
             K
@@ -49,7 +48,6 @@ class UnitSystem(BaseProvider):
 
         :param bool symbol: Symbol of unit.
         :return: Unit name of amount of substance.
-        :rtype: str
 
         :Example:
             mol
@@ -64,7 +62,6 @@ class UnitSystem(BaseProvider):
 
         :param bool symbol: Symbol of unit.
         :return: Unit name of angle.
-        :rtype: str
 
         :Example:
             radian
@@ -79,7 +76,6 @@ class UnitSystem(BaseProvider):
 
         :param bool symbol: Symbol of unit.
         :return: Unit name of solid angle
-        :rtype: str
 
         :Example:
             ㏛
@@ -94,7 +90,6 @@ class UnitSystem(BaseProvider):
 
         :param bool symbol: Symbol of unit.
         :return: Unit name if frequency.
-        :rtype: str
 
         :Example:
             Hz
@@ -109,7 +104,6 @@ class UnitSystem(BaseProvider):
 
         :param bool symbol:  Symbol of unit.
         :return:  Unit name of force.
-        :rtype: str
 
         :Example:
             N
@@ -124,7 +118,6 @@ class UnitSystem(BaseProvider):
 
         :param bool symbol: Symbol of unit.
         :return: Unit name of pressure.
-        :rtype: str
 
         :Example:
             pascal
@@ -139,7 +132,6 @@ class UnitSystem(BaseProvider):
 
         :param bool symbol: Symbol of unit.
         :return: Unit name of energy.
-        :rtype: str
 
         :Example:
             J
@@ -154,7 +146,6 @@ class UnitSystem(BaseProvider):
 
         :param bool symbol: Symbol of unit.
         :return: Unit name of power.
-        :rtype: str
 
         :Example:
             watt
@@ -172,7 +163,6 @@ class UnitSystem(BaseProvider):
 
         :param bool symbol: Symbol of unit.
         :return: Unit name of electric charge.
-        :rtype: str
 
         :Example:
             coulomb
@@ -187,7 +177,6 @@ class UnitSystem(BaseProvider):
 
         :param bool symbol: Symbol of unit.
         :return: Unit name of voltage.
-        :rtype: str
 
         :Example:
             volt
@@ -202,7 +191,6 @@ class UnitSystem(BaseProvider):
 
         :param bool symbol: Symbol of unit.
         :return: Unit name of electric capacitance.
-        :rtype: str
 
         :Example:
             F
@@ -217,7 +205,6 @@ class UnitSystem(BaseProvider):
 
         :param bool symbol: Symbol of unit.
         :return: Name of electric resistance.
-        :rtype: str
 
         :Example:
             Ω
@@ -238,7 +225,6 @@ class UnitSystem(BaseProvider):
 
         :param bool symbol: Symbol of unit.
         :return: Unit name of electrical conductance.
-        :rtype: str
 
         :Example:
             siemens
@@ -253,7 +239,6 @@ class UnitSystem(BaseProvider):
 
         :param bool symbol: Symbol of unit.
         :return: Unit name of magnetic flux.
-        :rtype: str
 
         :Example:
             Wb
@@ -268,7 +253,6 @@ class UnitSystem(BaseProvider):
 
         :param bool symbol: Symbol of unit.
         :return: Unit name of magnetic flux density.
-        :rtype: str
 
         :Example:
             tesla
@@ -283,7 +267,6 @@ class UnitSystem(BaseProvider):
 
         :param bool symbol: Symbol of unit.
         :return: Unit name of inductance.
-        :rtype: str
 
         :Example:
             H
@@ -296,9 +279,8 @@ class UnitSystem(BaseProvider):
     def temperature(symbol: bool = False) -> str:
         """Get unit name of temperature.
 
-        :param bool symbol:
-        :return:
-        :rtype: str
+        :param bool symbol: Symbol of unit.
+        :return: Unit of temperature.
 
         """
         if not symbol:
@@ -311,7 +293,6 @@ class UnitSystem(BaseProvider):
 
         :param bool symbol: Symbol of unit.
         :return: Unit name of radioactivity.
-        :rtype: str
 
         :Example:
             Bq
@@ -326,7 +307,6 @@ class UnitSystem(BaseProvider):
         :param sign: Sing of number (positive, negative)
         :param bool symbol: Return symbol of prefix.
         :return: Prefix for SI.
-        :rtype: str
         :raises WrongArgument: if sign is not supported.
 
         :Example:

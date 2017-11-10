@@ -11,7 +11,6 @@ class Hardware(BaseProvider):
         """Get a random screen resolution.
 
         :return: Resolution of screen.
-        :rtype: str
 
         :Example:
             1280x720.
@@ -22,7 +21,6 @@ class Hardware(BaseProvider):
         """Get a random size of screen in inch.
 
         :return: Screen size.
-        :rtype: str
 
         :Example:
             13″.
@@ -33,7 +31,6 @@ class Hardware(BaseProvider):
         """Get a random CPU name.
 
         :return: CPU name.
-        :rtype: str
 
         :Example:
             Intel® Core i7.
@@ -44,7 +41,6 @@ class Hardware(BaseProvider):
         """Get a random frequency of CPU.
 
         :return: Frequency of CPU.
-        :rtype: str
 
         :Example:
             4.0 GHz.
@@ -56,7 +52,6 @@ class Hardware(BaseProvider):
         """Get a random generation.
 
         :return: Generation of something.
-        :rtype: str
 
         :Example:
              6th Generation.
@@ -70,7 +65,6 @@ class Hardware(BaseProvider):
         """Get a random CPU code name.
 
         :return: CPU code name.
-        :rtype: str
 
         :Example:
             Cannonlake.
@@ -81,7 +75,6 @@ class Hardware(BaseProvider):
         """Get a random RAM type.
 
         :return: Type of RAM.
-        :rtype: str
 
         :Example:
             DDR3.
@@ -93,7 +86,6 @@ class Hardware(BaseProvider):
         """Get a random size of RAM.
 
         :return: RAM size.
-        :rtype: str
 
         :Example:
             16GB.
@@ -105,7 +97,6 @@ class Hardware(BaseProvider):
         """Get a random value from list.
 
         :return: HDD or SSD.
-        :rtype: str
 
         :Example:
             512GB SSD.
@@ -116,7 +107,6 @@ class Hardware(BaseProvider):
         """Get a random graphics.
 
         :return: Graphics.
-        :rtype: str
 
         :Example:
             Intel® Iris™ Pro Graphics 6200.
@@ -127,7 +117,6 @@ class Hardware(BaseProvider):
         """Get a random manufacturer.
 
         :return: Manufacturer.
-        :rtype: str
 
         :Example:
             Dell.
@@ -138,7 +127,6 @@ class Hardware(BaseProvider):
         """Get a random phone model.
 
         :return: Phone model.
-        :rtype: str
 
         :Example:
             Nokia Lumia 920.

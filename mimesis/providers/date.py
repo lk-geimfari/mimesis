@@ -25,7 +25,6 @@ class Datetime(BaseProvider):
         :param int start: From start.
         :param int end: To end.
         :return: Week number.
-        :rtype: str
 
         :Example:
             2017-W32
@@ -42,7 +41,6 @@ class Datetime(BaseProvider):
 
         :param bool abbr: Abbreviated name of the day.
         :return: Name of day of the week.
-        :rtype: str
 
         :Example:
             Wednesday
@@ -56,7 +54,6 @@ class Datetime(BaseProvider):
 
         :param bool abbr: Return abbreviated month name.
         :return: Month name.
-        :rtype: str
 
         :Example:
             January
@@ -71,7 +68,6 @@ class Datetime(BaseProvider):
         :param int minimum: Minimum value.
         :param int maximum: Maximum value.
         :return: Year.
-        :rtype: int
 
         :Example:
             2023
@@ -82,7 +78,6 @@ class Datetime(BaseProvider):
         """Get a random value from list of centuries (roman format).
 
         :return: Century.
-        :rtype: str
 
         :Example:
             XXI
@@ -93,7 +88,6 @@ class Datetime(BaseProvider):
         """Get a random periodicity string.
 
         :return: Periodicity.
-        :rtype: str
 
         :Example:
             Never.
@@ -110,7 +104,6 @@ class Datetime(BaseProvider):
         :param int end: Maximum value of year.
         :param str fmt: Format string for date.
         :return: Formatted date.
-        :rtype: str
 
         :Example:
             08/16/88 (en)
@@ -129,7 +122,6 @@ class Datetime(BaseProvider):
 
         :param str fmt: Format of time.
         :return: Time.
-        :rtype: str
 
         :Example:
             21:30:00
@@ -149,7 +141,6 @@ class Datetime(BaseProvider):
         """Generate a random day of month, from 1 to 31.
 
         :return: Random value from 1 to 31.
-        :rtype: int
 
         :Example:
             23
@@ -160,7 +151,6 @@ class Datetime(BaseProvider):
         """Get a random timezone
 
         :return: Timezone.
-        :rtype: str
 
         :Example:
             Europe/Paris
@@ -171,7 +161,6 @@ class Datetime(BaseProvider):
         """Get a random GMT offset value.
 
         :return: GMT Offset.
-        :rtype: str
 
         :Example:
             'UTC +03:00'
@@ -184,7 +173,7 @@ class Datetime(BaseProvider):
         :param bool humanized: Readable representation.
         :param kwargs: Keyword arguments (start, end).
         :return: Datetime.
-        :rtype: DateTime
+        :rtype: datetime.datetime
 
         :Example:
             March, 24 2002
@@ -208,7 +197,7 @@ class Datetime(BaseProvider):
         :param bool posix: POSIX time.
         :param kwargs: Keyword arguments (start, end).
         :return: Timestamp.
-        :rtype: Timestamp
+        :rtype: str or int
 
         :Example:
             2018-01-02T06:19:19Z

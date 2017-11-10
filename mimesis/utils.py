@@ -26,7 +26,6 @@ def locale_info(locale: str) -> str:
 
     :param str locale: Locale abbreviation.
     :return: Locale name.
-    :rtype: str
     :raises UnsupportedLocale: if locale is not supported.
     """
     locale = locale.lower()
@@ -44,8 +43,6 @@ def luhn_checksum(num: str) -> str:
 
     :param str num: The number to calculate a checksum for as a string.
     :return: Checksum for number.
-    :rtype: str
-
     """
     check = 0
     for i, s in enumerate(reversed(num)):
@@ -64,7 +61,7 @@ def update_dict(initial: JSON, other: Mapping) -> JSON:
     :param other: Dict to update from.
     :type other: Mapping
     :return: Updated dict.
-    :rtype: JSON
+    :rtype: dict
     """
     for key, value in other.items():
         if isinstance(value, collections.Mapping):
@@ -83,7 +80,7 @@ def pull(file: str, locale: str = 'en') -> JSON:
     :param str file: The name of file.
     :param str locale: Locale.
     :return: The content of the file.
-    :rtype: JSON
+    :rtype: dict
     :raises UnsupportedLocale: if locale is not supported.
 
     :Example:
@@ -148,7 +145,6 @@ def check_gender(gender: Gender = 0) -> str:
     :param gender: Gender.
     :type gender: int or str
     :return: Gender.
-    :rtype: str
     :raises UnexpectedGender: if gender has not correct value.
     """
     f, m = ('female', 'male')
@@ -180,7 +176,6 @@ def setup_locale(locale: str = '') -> str:
 
     :param str locale: Locale
     :return: Locale in lowercase.
-    :rtype: str
     """
     if not locale:
         return settings.DEFAULT_LOCALE
@@ -196,7 +191,6 @@ def custom_code(mask: str = '@###',
     :param str char: Placeholder for characters.
     :param str digit: Placeholder for digits.
     :return: Custom code.
-    :rtype: str
 
     :Example:
         5673-AGFR-SFSFF-1423-4/AD.

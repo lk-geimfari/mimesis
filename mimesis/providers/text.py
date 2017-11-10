@@ -17,7 +17,6 @@ class Text(BaseProvider):
 
         :param str lower_case: Return alphabet in lower case.
         :return: Alphabet.
-        :rtype: list
         """
         case = 'uppercase' if \
             not lower_case else 'lowercase'
@@ -29,7 +28,6 @@ class Text(BaseProvider):
         """Generate a random level of danger or something else.
 
         :return: Level.
-        :rtype: str
 
         :Example:
             critical.
@@ -42,7 +40,6 @@ class Text(BaseProvider):
 
         :param int quantity: Quantity of sentences.
         :return: Text.
-        :rtype: str
 
         :Example:
             Haskell is a standardized, general-purpose purely
@@ -58,7 +55,6 @@ class Text(BaseProvider):
         """Get a random sentence from text.
 
         :return: Sentence.
-        :rtype: str
 
         :Example:
             Any element of a tuple can be accessed in constant time.
@@ -69,7 +65,6 @@ class Text(BaseProvider):
         """Get a random title.
 
         :return: The title.
-        :rtype: str
 
         :Example:
             Erlang - is a general-purpose, concurrent,
@@ -82,7 +77,7 @@ class Text(BaseProvider):
 
         :param int quantity: Quantity of words. Default is 5.
         :return: Word list.
-        :rtype: list
+
         :Example:
             science, network, god, octopus, love.
         """
@@ -94,7 +89,6 @@ class Text(BaseProvider):
         """Get a random word.
 
         :return: Single word.
-        :rtype: str
 
         :Example:
             Science.
@@ -105,7 +99,6 @@ class Text(BaseProvider):
         """Get a random swear word.
 
         :return: Swear word.
-        :rtype: str
 
         :Example:
             Damn.
@@ -117,7 +110,6 @@ class Text(BaseProvider):
         """Get a random quote.
 
         :return: Quote from movie.
-        :rtype: str
 
         :Example:
             "Bond... James Bond."
@@ -129,7 +121,6 @@ class Text(BaseProvider):
         """Get a random name of color.
 
         :return: Color name.
-        :rtype: str
 
         :Example:
             Red.
@@ -141,7 +132,6 @@ class Text(BaseProvider):
         """Generate a hex color.
 
         :return: Hex color code.
-        :rtype: str
 
         :Example:
             #D8346B
@@ -154,7 +144,6 @@ class Text(BaseProvider):
         """Get a random answer in current language.
 
         :return: An answer.
-        :rtype: str
 
         :Example:
             No

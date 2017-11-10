@@ -17,7 +17,6 @@ class File(BaseProvider):
 
         :param str string: String.
         :return: String without spaces.
-        :rtype: str
         """
         replacer = self.random.choice(['_', '-'])
         return re.sub('\s+', replacer, string.strip())
@@ -29,7 +28,6 @@ class File(BaseProvider):
             File type (source, text, data, audio, video, image,
             executable, compressed).
         :return: Extension of a file.
-        :rtype: str
 
         :Example:
             .py (file_type='source').
@@ -43,7 +41,6 @@ class File(BaseProvider):
         :param str type_t:
             Type of media: (application, image, video, audio, text, message).
         :return: Mime type.
-        :rtype: str
         :raises ValueError: if type_t is not supported.
         """
         supported = ' '.join(MIME_TYPES.keys())
@@ -61,7 +58,6 @@ class File(BaseProvider):
         :param int minimum: Maximum value.
         :param int maximum: Minimum value.
         :return: Size of file.
-        :rtype: str
 
         :Example:
             56 kB
@@ -82,7 +78,6 @@ class File(BaseProvider):
             File type (source, text, data, audio, video,
             image, executable, compressed)
         :return: File name.
-        :rtype: str
 
         :Example:
             legislative.txt

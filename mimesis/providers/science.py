@@ -10,7 +10,7 @@ class Science(BaseProvider):
 
     def __init__(self, *args, **kwargs):
         """
-        :param locale: Current language.
+        :param str locale: Current language.
         """
         super().__init__(*args, **kwargs)
         self._data = pull('science.json', self.locale)
@@ -19,7 +19,6 @@ class Science(BaseProvider):
         """Get a random mathematical formula.
 
         :return: Math formula.
-        :rtype: str
 
         :Example:
             A = (ab)/2.
@@ -53,7 +52,6 @@ class Science(BaseProvider):
         """Generate a random link to scientific article on Wikipedia.
 
         :return: Link to article on Wikipedia.
-        :rtype: str
 
         :Example:
             https://en.wikipedia.org/wiki/Black_hole

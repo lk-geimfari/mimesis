@@ -14,7 +14,6 @@ class USASpecProvider(BaseSpecProvider):
 
         :param str service: Post service.
         :return: Tracking number.
-        :rtype: str
         """
         service = service.lower()
 
@@ -41,7 +40,6 @@ class USASpecProvider(BaseSpecProvider):
         """Generate a random, but valid Social Security Number.
 
         :returns: Random SSN
-        :rtype: str
 
         :Example:
             569-66-5801

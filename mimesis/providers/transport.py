@@ -15,7 +15,6 @@ class Transport(BaseProvider):
         :param str model_mask: Mask of truck model. Here '@' is a \
         placeholder of characters and '#' is a placeholder of digits.
         :return: Dummy truck model.
-        :rtype: str
 
         :Example:
             Caledon-966O.
@@ -28,7 +27,6 @@ class Transport(BaseProvider):
         """Get a random vehicle.
 
         :return: A vehicle.
-        :rtype: str
 
         :Example:
             Tesla Model S.
@@ -41,7 +39,6 @@ class Transport(BaseProvider):
         :param str model_mask: Mask of truck model. Here '@' is a \
         placeholder of characters and '#' is a placeholder of digits.
         :return: Airplane model.
-        :rtype: str
 
         :Example:
             Boeing 727.

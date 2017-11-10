@@ -58,7 +58,7 @@ class Numbers(BaseProvider):
 
         :param bool to_bin: If True then convert to binary.
         :return: Digit.
-        :rtype: types.Number
+        :rtype: str or int
 
         :Example:
             4.
@@ -76,7 +76,6 @@ class Numbers(BaseProvider):
         :param int minimum: Minimum of range.
         :param int maximum: Maximum of range.
         :return: Number.
-        :rtype: int
         """
         num = self.random.randint(int(minimum), int(maximum))
         return num
@@ -86,7 +85,6 @@ class Numbers(BaseProvider):
 
         :param float maximum: Minimum value (default is 5.0).
         :return: Rating.
-        :rtype: float
 
         :Example:
             4.7

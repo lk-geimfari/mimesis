@@ -12,7 +12,7 @@ class Structured(BaseProvider):
 
     def __init__(self, *args, **kwargs):
         """
-        :param locale: Current locale.
+        :param str locale: Current locale.
         """
         super().__init__(*args, **kwargs)
         self.internet = Internet()
@@ -22,7 +22,6 @@ class Structured(BaseProvider):
         """Generates a random snippet of CSS.
 
         :return: CSS.
-        :rtype: str
         """
         selector = self.random.choice(CSS_SELECTORS)
         css_sel = '{}{}'.format(selector, self.text.word())
@@ -39,6 +38,7 @@ class Structured(BaseProvider):
         """Generates a random snippet of CSS that assigns value to a property.
 
         :return: CSS property.
+
         :Examples:
             'background-color: #f4d3a1'
         """
@@ -58,7 +58,7 @@ class Structured(BaseProvider):
     def html(self) -> str:
         """Generate a random HTML tag with text inside and some attrs set.
         :return: HTML.
-        :rtype: str
+
         :Examples:
             '<span class="select" id="careers">
             Ports are created with the built-in function open_port.
@@ -88,7 +88,6 @@ class Structured(BaseProvider):
         :param str tag: An HTML tag.
         :param str attribute: An attribute of the specified tag.
         :return: An attribute.
-        :rtype: str
         :raises NotImplementedError: if tag is unsupported.
         """
         try:
@@ -121,7 +120,6 @@ class Structured(BaseProvider):
             When used recursively, will return a Python object instead of JSON
             string.
         :return: JSON
-        :rtype: str
         """
 
         # choose root element type

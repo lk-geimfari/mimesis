@@ -18,7 +18,6 @@ class Business(BaseProvider):
 
         :param bool abbr: If True then return abbreviated company type.
         :return: Types of business entity.
-        :rtype: str
 
         :Example:
             Incorporated.
@@ -32,7 +31,6 @@ class Business(BaseProvider):
         """Get a random company name.
 
         :return: Company name.
-        :rtype: str
 
         :Example:
             Gamma Systems.
@@ -44,7 +42,6 @@ class Business(BaseProvider):
         """Generate a random copyright.
 
         :return: Dummy copyright of company.
-        :rtype: str
 
         :Example:
             © 1990-2016 Komercia, Inc.
@@ -60,7 +57,6 @@ class Business(BaseProvider):
         """Get a currency code. ISO 4217 format.
 
         :return: Currency code.
-        :rtype: str
 
         :Example:
             RUR.
@@ -73,7 +69,6 @@ class Business(BaseProvider):
         :param float minimum: Max value of price.
         :param float maximum: Min value of price.
         :return: Price.
-        :rtype: str
 
         :Example:
             599.99 $.

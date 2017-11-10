@@ -17,7 +17,6 @@ class Internet(BaseProvider):
         """Get a random HTTP content type.
 
         :return: Content type.
-        :rtype: str
 
         :Example:
             Content-Type: application/json
@@ -30,7 +29,6 @@ class Internet(BaseProvider):
 
         :param code_only: Return only http status code.
         :return: HTTP status.
-        :rtype: str
 
         :Example:
             200 OK
@@ -45,7 +43,6 @@ class Internet(BaseProvider):
         """Get a random HTTP method.
 
         :return: HTTP method.
-        :rtype: str
 
         :Example:
             POST
@@ -56,7 +53,6 @@ class Internet(BaseProvider):
         """Generate a random IPv4 address.
 
         :return: Random IPv4 address.
-        :rtype: str
 
         :Example:
             19.121.223.58
@@ -68,7 +64,6 @@ class Internet(BaseProvider):
         """Generate a random IPv6 address.
 
         :return: Random IPv6 address.
-        :rtype: str
 
         :Example:
             2001:c244:cf9d:1fb1:c56d:f52c:8a04:94f3
@@ -81,7 +76,6 @@ class Internet(BaseProvider):
         """Generate a random MAC address.
 
         :return: Random MAC address.
-        :rtype: str
 
         :Example:
             00:16:3e:25:e7:b1
@@ -99,7 +93,6 @@ class Internet(BaseProvider):
         """Get a random emoji shortcut code.
 
         :return: Emoji code.
-        :rtype: str
 
         :Example:
             :kissing:
@@ -112,9 +105,10 @@ class Internet(BaseProvider):
         """Generate a link to the image placeholder.
 
         :param width: Width of image.
+        :type width: str or int
         :param height: Height of image.
+        :type height: str or int
         :return: URL to image placeholder.
-        :rtype: str
         """
         url = 'http://placehold.it/{width}x{height}'
         return url.format(width=width, height=height)
@@ -127,9 +121,10 @@ class Internet(BaseProvider):
             Category of image. Available: 'buildings', 'food', 'nature',
             'people', 'technology', 'objects'.
         :param width: Width of the image.
+        :type width: str or int
         :param height: Height of the image.
+        :type height: str or int
         :return: An image (Link to image).
-        :rtype: str
         """
         url = 'https://source.unsplash.com/category/' \
               '{category}/{width}x{height}'
@@ -145,6 +140,11 @@ class Internet(BaseProvider):
         return url.format(category=category, width=width, height=height)
 
     def image_by_keyword(self, keyword: str = '') -> str:
+        """Image by keyword.
+
+        :param keyword: Keyword.
+        :return: Link to image.
+        """
         url = 'https://source.unsplash.com/weekly?{keyword}'
 
         keywords = [
@@ -190,9 +190,8 @@ class Internet(BaseProvider):
     def home_page(self, domain_type: Optional[str] = None) -> str:
         """Generate a random home page.
 
-        :param domain_type: TLD type.
+        :param str domain_type: TLD type.
         :return: Random home page.
-        :rtype: str
 
         :Example:
             http://www.fontir.info
@@ -211,7 +210,6 @@ class Internet(BaseProvider):
         :param str domain_type: Type of domain (ccTLD, gTLD,
             GeoTLD, uTLD, sTLD).
         :return: Top level domain.
-        :rtype: str
         :raises KeyError: if domain_type is not supported.
         """
         # TODO: This is really ugly solution. Fix it.
@@ -240,7 +238,6 @@ class Internet(BaseProvider):
         :param bool nsfw: NSFW subreddit.
         :param bool full_url: Full URL address.
         :return: Subreddit or URL to subreddit.
-        :rtype: str
 
         :Example:
             https://www.reddit.com/r/flask/
@@ -260,7 +257,6 @@ class Internet(BaseProvider):
         """Get a random user agent.
 
         :return: User agent.
-        :rtype: str
 
         :Example:
             Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:15.0)
@@ -275,7 +271,6 @@ class Internet(BaseProvider):
             Layer of protocol: application, data_link, network, physical,
             presentation, session and transport.
         :return: Protocol name.
-        :rtype: str
         :raises WrongArgument: if layer is not supported.
 
         :Example:

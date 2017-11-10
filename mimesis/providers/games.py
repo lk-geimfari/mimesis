@@ -9,7 +9,6 @@ class Games(BaseProvider):
         """Get random gaming platform.
 
         :return: Gaming platform
-        :rtype: str
 
         :Example:
             PlayStation 4 Pro
@@ -22,7 +21,6 @@ class Games(BaseProvider):
         :param int minimum: Maximum value.
         :param int maximum: Minimum value.
         :return: Score.
-        :rtype: float
         """
         return self.random.randint(minimum * 10, maximum * 10) / 10
 
@@ -31,7 +29,6 @@ class Games(BaseProvider):
 
         :param bool pt: PEGI rating for Portugal.
         :return: PEGI rating.
-        :rtype: str
 
         :Example:
             PEGI 18
@@ -52,7 +49,6 @@ class Games(BaseProvider):
         """Get a random genre of game.
 
         :return: Genre.
-        :rtype: str
 
         :Example:
             Shooter
@@ -63,7 +59,6 @@ class Games(BaseProvider):
         """Get a random score phrase.
 
         :return: Score phrase.
-        :rtype: str
 
         :Example:
             Great
@@ -74,7 +69,6 @@ class Games(BaseProvider):
         """Get a random game from list of games.
 
         :return: Name of the game.
-        :rtype: str
 
         :Example:
             Battlefield 1
