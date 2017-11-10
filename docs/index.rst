@@ -12,7 +12,7 @@ Mimesis
    :target: https://codecov.io/gh/lk-geimfari/mimesis
 .. |PyPI version| image:: https://badge.fury.io/py/mimesis.svg
    :target: https://badge.fury.io/py/mimesis
-.. |Python| image:: https://img.shields.io/badge/python-3.3%5E-brightgreen.svg
+.. |Python| image:: https://img.shields.io/badge/python-3.5%2C%203.6-brightgreen.svg
    :target: https://badge.fury.io/py/mimesis
 
 **Mimesis** is a fast and easy to use Python library for generating dummy data for a variety of purposes.  This data can be particularly useful during software development and testing.  For example, it could be used to populate a testing database for a web application with user information such as email addresses, usernames, first names, last names, etc. There are over eighteen different `data providers <http://mimesis.readthedocs.io/en/latest/providers.html>`_ available, which can produce data related to food, people, computer hardware, transportation, addresses, and more. Mimesis does not require any modules that are not in the Python standard library.
