@@ -258,13 +258,3 @@ Schema
 
 .. autoclass:: mimesis.schema.Schema
    :members:
-
-
-Utilities
-=========
-
-utils.py
---------
-
-.. automodule:: mimesis.utils
-   :members:
