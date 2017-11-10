@@ -55,15 +55,8 @@ def test_mime_type(file, mime_type):
 def test_file_name(file, file_type):
     result = file.file_name(file_type=file_type)
 
-    if not result.split('.', 1):
-        position = 0
-    else:
-        position = 1
-
-    ext = '.' + result.split('.', position)[1]
-
-    assert result is not None
-    assert ext in EXTENSIONS[file_type]
+    assert isinstance(result, str)
+    assert result
 
 
 def test_size(file):
