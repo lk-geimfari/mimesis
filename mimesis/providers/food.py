@@ -1,4 +1,4 @@
-from mimesis.providers import BaseProvider
+from mimesis.providers.base import BaseProvider
 from mimesis.utils import pull
 
 
@@ -7,55 +7,65 @@ class Food(BaseProvider):
 
     def __init__(self, *args, **kwargs):
         """
-        :param locale: Current locale.
+        :param str locale: Current locale.
         """
         super().__init__(*args, **kwargs)
         self._data = pull('food.json', self.locale)
 
-    def vegetable(self):
+    def vegetable(self) -> str:
         """Get a random vegetable.
 
         :return: Vegetable.
+        :rtype: str
+
         :Example:
             Tomato.
         """
         vegetables = self._data['vegetables']
         return self.random.choice(vegetables)
 
-    def fruit(self):
+    def fruit(self) -> str:
         """Get a random name of fruit or berry .
 
         :return: Fruit.
+        :rtype: str
+
         :Example:
             Banana.
         """
         fruits = self._data['fruits']
         return self.random.choice(fruits)
 
-    def dish(self):
+    def dish(self) -> str:
         """Get a random dish for current locale.
 
         :return: Dish name.
+        :rtype: str
+
         :Example:
             Ratatouille.
         """
         dishes = self._data['dishes']
         return self.random.choice(dishes)
 
-    def spices(self):
+    def spices(self) -> str:
         """Get a random spices or herbs.
 
         :return: Spices or herbs.
+        :rtype: str
+
         :Example:
             Anise.
         """
         spices = self._data['spices']
         return self.random.choice(spices)
 
-    def drink(self):
+    def drink(self) -> str:
         """Get a random drink.
 
         :return: Alcoholic drink.
+        :rtype: str
+
         :Example:
             Vodka.
         """

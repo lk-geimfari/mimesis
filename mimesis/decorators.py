@@ -4,19 +4,21 @@ from string import (
     digits,
     punctuation,
 )
+from typing import Callable
 
 from mimesis import data
 from mimesis.exceptions import UnsupportedLocale
 
 
-def romanized(locale=None):
+def romanized(locale: str = '') -> Callable:
     """Romanization of the Cyrillic alphabet (transliterating the Cyrillic language
     from the Cyrillic script into the Latin alphabet).
 
-    .. note:: At this moment it's work only for `ru`, `uk`, `kk`.
+    .. note:: At this moment it works only for `ru`, `uk`, `kk`.
 
-    :param locale: Function.
+    :param str locale: Locale code.
     :return: Latinized text.
+    :rtype: types.Callable
     """
 
     def romanized_deco(func):
@@ -43,13 +45,15 @@ def romanized(locale=None):
     return romanized_deco
 
 
-def type_to(new_type, check_len=False):
+def type_to(new_type: Callable,
+            check_len: bool = False) -> Callable:
     """Convert result of function to different type. This is
     internal function.
 
     :param new_type: New type.
-    :param check_len: Check length of object.
+    :param bool check_len: Check length of object.
     :return: Converted to new_type object.
+    :rtype: types.Callable
     """
 
     def inner(func):

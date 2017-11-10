@@ -2,7 +2,7 @@
 
 import pytest
 
-from mimesis.data import SI_PREFIXES
+from mimesis.data import SI_PREFIXES, SI_PREFIXES_SYM
 from mimesis.exceptions import WrongArgument
 
 
@@ -182,18 +182,17 @@ def test_radioactivity(us):
     assert result == 'becquerel'
 
 
-def test_prefix(us):
-    signs = list(SI_PREFIXES.keys())
-    sym_signs = list(SI_PREFIXES['_sym_'])
-
-    for sign in signs:
-        if not sign.startswith('_'):
-            res = us.prefix(sign=sign, symbol=False)
-            assert res in SI_PREFIXES[sign]
-
-    for sign in sym_signs:
-        res = us.prefix(sign=sign, symbol=True)
-        assert res in SI_PREFIXES['_sym_'][sign]
+@pytest.mark.parametrize(
+    'sign, symbol', [
+        ('positive', True),
+        ('positive', False),
+        ('negative', True),
+        ('negative', False),
+    ],
+)
+def test_prefix(us, sign, symbol):
+    prefix = us.prefix(sign=sign, symbol=symbol)
+    assert prefix in SI_PREFIXES[sign] or prefix in SI_PREFIXES_SYM[sign]
 
     with pytest.raises(WrongArgument):
         us.prefix(sign='nil')

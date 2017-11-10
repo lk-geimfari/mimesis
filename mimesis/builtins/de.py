@@ -10,11 +10,12 @@ class GermanySpecProvider(BaseSpecProvider):
     class Meta:
         name = 'germany_provider'
 
-    def noun(self, plural=False):
+    def noun(self, plural: bool = False) -> str:
         """Return a random noun in German.
 
-        :param plural: Return noun in plural.
+        :param bool plural: Return noun in plural.
         :return: Noun.
+        :rtype: str
         """
 
         key = 'plural' if \

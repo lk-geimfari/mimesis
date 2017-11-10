@@ -65,6 +65,11 @@ minify:
 	python3 setup.py minify
 
 
+.PHONY: type-hints
+type-hints:
+	mypy mimesis/
+
+
 .PHONY: install
 install:
 	python3 setup.py install

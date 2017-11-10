@@ -1,3 +1,5 @@
+from typing import Union
+
 from mimesis.builtins.base import BaseSpecProvider
 
 
@@ -7,11 +9,12 @@ class USASpecProvider(BaseSpecProvider):
     class Meta:
         name = 'usa_provider'
 
-    def tracking_number(self, service='usps'):
+    def tracking_number(self, service: str = 'usps') -> str:
         """Generate random tracking number for USPS, FedEx and UPS.
 
-        :param service: Post service.
+        :param str service: Post service.
         :return: Tracking number.
+        :rtype: str
         """
         service = service.lower()
 
@@ -31,13 +34,15 @@ class USASpecProvider(BaseSpecProvider):
                 '1Z@####@##########',
             ),
         }
-        mask = self.random.choice(services[service])
+        mask = self.random.choice(services[service])  # type: ignore
         return self.code(mask=mask)
 
-    def ssn(self):
+    def ssn(self) -> str:
         """Generate a random, but valid Social Security Number.
 
         :returns: Random SSN
+        :rtype: str
+
         :Example:
             569-66-5801
         """
@@ -52,11 +57,13 @@ class USASpecProvider(BaseSpecProvider):
             self.random.randint(1, 9999),
         )
 
-    def personality(self, category='mbti'):
+    def personality(self, category: str = 'mbti') -> Union[str, int]:
         """Generate a type of personality.
 
-        :param category: Category.
+        :param str category: Category.
         :return: Personality type.
+        :rtype: str or int
+
         :Example:
             ISFJ.
         """

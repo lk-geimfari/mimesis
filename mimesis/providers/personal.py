@@ -1,14 +1,16 @@
 import re
 from string import ascii_letters, digits, punctuation
+from typing import Union
 
 from mimesis.data import (BLOOD_GROUPS, EMAIL_DOMAINS, ENGLISH_LEVEL,
                           FAVORITE_MUSIC_GENRE, GENDER_SYMBOLS,
                           SEXUALITY_SYMBOLS, USERNAMES)
 from mimesis.exceptions import WrongArgument
-from mimesis.providers import BaseProvider, Code
+from mimesis.providers.base import BaseProvider
 from mimesis.providers.cryptographic import Cryptographic
 from mimesis.settings import SURNAMES_SEPARATED_BY_GENDER
-from mimesis.utils import check_gender, luhn_checksum, pull
+from mimesis.utils import check_gender, luhn_checksum, pull, custom_code
+from mimesis.typing import Gender
 
 __all__ = ['Personal']
 
@@ -19,7 +21,7 @@ class Personal(BaseProvider):
 
     def __init__(self, *args, **kwargs):
         """
-        :param locale: Current locale.
+        :param str locale: Current locale.
         """
         super().__init__(*args, **kwargs)
         self.data = pull('personal.json', self.locale)
@@ -27,12 +29,14 @@ class Personal(BaseProvider):
             'age': 0,
         }
 
-    def age(self, minimum=16, maximum=66):
+    def age(self, minimum: int = 16, maximum: int = 66) -> int:
         """Get a random integer value.
 
-        :param maximum: max age
-        :param minimum: min age
-        :return: Random integer (from minimum=16 to maximum=66)
+        :param int maximum: Maximum value of age.
+        :param int minimum: Minimum value of age.
+        :return: Random integer.
+        :rtype: int
+
         :Example:
             23.
         """
@@ -40,11 +44,12 @@ class Personal(BaseProvider):
         self._store['age'] = a
         return a
 
-    def child_count(self, max_childs=5):
+    def child_count(self, max_childs: int = 5) -> int:
         """Get a count of child's.
 
-        :param max_childs: Maximum count of child's.
+        :param int max_childs: Maximum count of child's.
         :return: Ints. Depend on previous generated age.
+        :rtype: int
         """
         a = self._store['age']
         if a == 0:
@@ -53,11 +58,12 @@ class Personal(BaseProvider):
         cc = 0 if a < 18 else self.random.randint(0, max_childs)
         return cc
 
-    def work_experience(self, working_start_age=22):
+    def work_experience(self, working_start_age: int = 22) -> int:
         """Get a work experience.
 
-        :param working_start_age: Age then person start to work.
+        :param int working_start_age: Age then person start to work.
         :return: Int. Depend on previous generated age.
+        :rtype: int
         """
         a = self._store['age']
         if a == 0:
@@ -65,24 +71,30 @@ class Personal(BaseProvider):
 
         return max(a - working_start_age, 0)
 
-    def name(self, gender=None):
+    def name(self, gender: Gender = 0) -> str:
         """Get a random name.
 
         :param gender: if 'male' then will returned male name,
             if 'female' then female name,  if None return random from ones.
+        :type gender: int or str
         :return: Name.
+        :rtype: str
+
         :Example:
             John.
         """
         gender = check_gender(gender)
-        names = self.data['names'][gender]
+        names = self.data['names'].get(gender)
         return self.random.choice(names)
 
-    def surname(self, gender=None):
+    def surname(self, gender: Gender = 0) -> str:
         """Get a random surname.
 
         :param gender: The gender of person.
+        :type gender: int of str
         :return: Surname.
+        :rtype: str
+
         :Example:
             Smith.
         """
@@ -92,36 +104,44 @@ class Personal(BaseProvider):
         if self.locale in SURNAMES_SEPARATED_BY_GENDER:
             gender = check_gender(gender)
             return self.random.choice(
-                surnames[gender],
+                surnames.get(gender),
             )
 
         return self.random.choice(surnames)
 
-    def title(self, gender=None, title_type='typical'):
+    def title(self, gender: Gender = 0,
+              title_type: str = 'typical') -> str:
         """Get a random title (prefix/suffix) for name.
 
         :param gender: The gender.
-        :param title_type:  The type of title ('typical' and 'academic').
+        :type gender: int or str
+        :param str title_type:  The type of title ('typical' and 'academic').
         :return: The title.
+        :rtype: str
+        :raises WrongArgument: if gender in incorrect format.
+
         :Example:
             PhD.
         """
         try:
             gender = check_gender(gender)
-            titles = self.data['title'][gender][title_type]
+            titles = self.data['title'].get(
+                gender).get(title_type)
         except KeyError:
             raise WrongArgument('Wrong value of argument.')
 
         title = self.random.choice(titles)
         return title
 
-    def full_name(self, gender=None, reverse=False):
+    def full_name(self, gender: Gender = 0, reverse: bool = False) -> str:
         """Generate a random full name.
 
-        :param reverse: if true: surname/name else name/surname
-        :param gender: if gender='male' then will be returned male name else
-            female name.
+        :param bool reverse: Return reversed full name.
+        :param gender: Gender.
+        :type gender: int or str
         :return: Full name.
+        :rtype: str
+
         :Example:
             Johann Wolfgang.
         """
@@ -133,12 +153,15 @@ class Personal(BaseProvider):
             self.surname(gender),
         )
 
-    def username(self, template=None):
+    def username(self, template: str = '') -> str:
         """Generate username by template.
 
-        :param template: Template ('U_d', 'U.d', 'U-d', 'ld', 'l-d', 'Ud',
+        :param str template: Template ('U_d', 'U.d', 'U-d', 'ld', 'l-d', 'Ud',
             'l.d', 'l_d', 'default')
         :return: Username.
+        :rtype: str
+        :raises WrongArgument: if template is not supported.
+
         :Example:
             Celloid1873
         """
@@ -195,7 +218,7 @@ class Personal(BaseProvider):
 
         supported = list(templates.keys())
 
-        if template is not None:
+        if template:
             try:
                 return templates[template]
             except KeyError:
@@ -210,12 +233,14 @@ class Personal(BaseProvider):
         templ = self.random.choice(supported)
         return templates[templ]
 
-    def password(self, length=8, algorithm=None):
+    def password(self, length: int = 8, algorithm: str = None) -> str:
         """Generate a password or hash of password.
 
-        :param length: Length of password.
-        :param algorithm: Hashing algorithm.
+        :param int length: Length of password.
+        :param str algorithm: Hashing algorithm.
         :return: Password or hash of password.
+        :rtype: str
+
         :Example:
             k6dv2odff9#4h (without hashing).
         """
@@ -227,12 +252,14 @@ class Personal(BaseProvider):
 
         return password
 
-    def email(self, domains=None):
+    def email(self, domains: Union[tuple, list] = None) -> str:
         """Generate a random email.
 
         :param domains: Custom domain for email.
-        :type domains: list, tuple
+        :type domains: list or tuple
         :return: Email address.
+        :rtype: str
+
         :Example:
             foretime10@live.com
         """
@@ -241,11 +268,13 @@ class Personal(BaseProvider):
         email = self.username(template='ld') + self.random.choice(host)
         return email
 
-    def bitcoin(self):
+    def bitcoin(self) -> str:
         """Generate a random bitcoin address. Currently supported only two
         address formats that are most popular: 'P2PKH' and 'P2SH'
 
         :return: Bitcoin address.
+        :rtype: str
+
         :Example:
             3EktnHQD7RiAE6uzMj2ZifT9YgRrkSgzQX
         """
@@ -254,21 +283,25 @@ class Personal(BaseProvider):
                         for _ in range(33)])
         return fmt
 
-    def cvv(self):
+    def cvv(self) -> int:
         """Generate a random card verification value (CVV).
 
         :return: CVV code.
-        :rtype: int
+        :rtype: str
+
         :Example:
             324
         """
         return self.random.randint(100, 999)
 
-    def credit_card_number(self, card_type='visa'):
+    def credit_card_number(self, card_type: str = 'visa') -> str:
         """Generate a random credit card number.
 
-        :param card_type: Issuing Network. Default is Visa.
+        :param str card_type: Issuing Network. Default is Visa.
         :return: Credit card number.
+        :rtype: str
+        :raises NotImplementedError: if cart_type is not supported.
+
         :Example:
             4455 5299 1152 2450
         """
@@ -288,51 +321,59 @@ class Personal(BaseProvider):
             raise NotImplementedError(
                 'Card type {} is not supported.'.format(card_type))
 
-        number = str(number)
-        while len(number) < length - 1:
-            number += self.random.choice(digits)
+        str_num = str(number)
+        while len(str_num) < length - 1:
+            str_num += self.random.choice(digits)
 
-        card = ' '.join(regex.search(number + luhn_checksum(number)).groups())
+        groups = regex.search(str_num + luhn_checksum(str_num))
+        card = ' '.join(groups.groups())
         return card
 
-    def credit_card_expiration_date(self, minimum=16, maximum=25):
+    def credit_card_expiration_date(self, minimum: int = 16,
+                                    maximum: int = 25) -> str:
         """Generate a random expiration date for credit card.
 
-        :param minimum: Date of issue.
-        :param maximum: Maximum of expiration_date.
+        :param int minimum: Date of issue.
+        :param int maximum: Maximum of expiration_date.
         :return: Expiration date of credit card.
         :rtype: str
+
         :Example:
             03/19.
         """
         month, year = [self.random.randint(1, 12),
                        self.random.randint(minimum, maximum)]
-        month = '0' + str(month) if month < 10 else month
+        month = 0 + month if month < 10 else month
         return '{0}/{1}'.format(month, year)
 
-    def cid(self):
+    def cid(self) -> int:
         """Generate a random CID code.
 
         :return: CID code.
+        :rtype: int
+
         :Example:
             7452
         """
         return self.random.randint(1000, 9999)
 
-    def paypal(self):
+    def paypal(self) -> str:
         """Generate a random PayPal account.
 
         :return: Email of PapPal user.
+        :rtype: str
+
         :Example:
             wolf235@gmail.com
         """
         return self.email()
 
-    def social_media_profile(self):
+    def social_media_profile(self) -> str:
         """Generate profile for random social network.
 
-        :param gender: Gender of user.
         :return: Profile in some network.
+        :rtype: str
+
         :Example:
             http://facebook.com/some_user
         """
@@ -346,18 +387,20 @@ class Personal(BaseProvider):
 
         return url.format(username)
 
-    def gender(self, iso5218=False, symbol=False):
+    def gender(self, iso5218: bool = False,
+               symbol: bool = False) -> Union[str, int]:
         """Get a random title of gender, code for the representation
         of human sexes is an international standard that defines a
         representation of human sexes through a language-neutral single-digit
         code or symbol of gender.
 
-        :param iso5218:
+        :param bool iso5218:
             Codes for the representation of human sexes is an international
             standard.
-        :param symbol: Symbol of gender.
+        :param bool symbol: Symbol of gender.
         :return: Title of gender.
-        :rtype: str
+        :rtype: str or int
+
         :Example:
             Male
         """
@@ -377,44 +420,52 @@ class Personal(BaseProvider):
         gender = self.random.choice(self.data['gender'])
         return gender
 
-    def height(self, minimum=1.5, maximum=2.0):
+    def height(self, minimum: float = 1.5, maximum: float = 2.0) -> str:
         """Generate a random height in M (Meter).
 
-        :param minimum: Minimum value.
-        :param maximum: Maximum value.
+        :param float minimum: Minimum value.
+        :param float maximum: Maximum value.
         :return: Height.
+        :rtype: str
+
         :Example:
             1.85.
         """
         h = self.random.uniform(float(minimum), float(maximum))
         return '{:0.2f}'.format(h)
 
-    def weight(self, minimum=38, maximum=90):
+    def weight(self, minimum: int = 38, maximum: int = 90) -> int:
         """Generate a random weight in Kg.
 
-        :param minimum: min value
-        :param maximum: max value
+        :param int minimum: min value
+        :param int maximum: max value
         :return: Weight.
+        :rtype: int
+
         :Example:
             48.
         """
-        weight = self.random.randint(int(minimum), int(maximum))
+        weight = self.random.randint(minimum, maximum)
         return weight
 
-    def blood_type(self):
+    def blood_type(self) -> str:
         """Get a random blood type.
 
         :return: Blood type (blood group).
+        :rtype: str
+
         :Example:
             A+
         """
         return self.random.choice(BLOOD_GROUPS)
 
-    def sexual_orientation(self, symbol=False):
+    def sexual_orientation(self, symbol: bool = False) -> str:
         """Get a random (LOL) sexual orientation.
 
-        :param symbol: Unicode symbol.
+        :param bool symbol: Unicode symbol.
         :return: Sexual orientation.
+        :rtype: str
+
         :Example:
             Heterosexuality.
         """
@@ -424,52 +475,63 @@ class Personal(BaseProvider):
         sexuality = self.data['sexuality']
         return self.random.choice(sexuality)
 
-    def occupation(self):
+    def occupation(self) -> str:
         """Get a random job.
 
         :return: The name of job.
+        :rtype: str
+
         :Example:
             Programmer.
         """
         jobs = self.data['occupation']
         return self.random.choice(jobs)
 
-    def political_views(self):
+    def political_views(self) -> str:
         """Get a random political views.
 
         :return: Political views.
+        :rtype: str
+
         :Example:
             Liberal.
         """
         views = self.data['political_views']
         return self.random.choice(views)
 
-    def worldview(self):
+    def worldview(self) -> str:
         """Get a random worldview.
 
         :return: Worldview.
+        :rtype: str
+
         :Example:
             Pantheism.
         """
         views = self.data['worldview']
         return self.random.choice(views)
 
-    def views_on(self):
+    def views_on(self) -> str:
         """
         Get a random views on.
 
         :return: Views on.
+        :rtype: str
+
         :Example:
             Negative.
         """
         views = self.data['views_on']
         return self.random.choice(views)
 
-    def nationality(self, gender=None):
+    def nationality(self, gender: Gender = 0) -> str:
         """Get a random nationality.
 
         :param gender: Gender.
+        :type gender: str or int
         :return: Nationality.
+        :rtype: str
+
         :Example:
             Russian.
         """
@@ -485,62 +547,73 @@ class Personal(BaseProvider):
 
         return self.random.choice(nationalities)
 
-    def university(self):
-        """
-        Get a random university.
+    def university(self) -> str:
+        """Get a random university.
 
         :return: University name.
+        :rtype: str
+
         :Example:
             MIT.
         """
         universities = self.data['university']
         return self.random.choice(universities)
 
-    def academic_degree(self):
+    def academic_degree(self) -> str:
         """Get a random academic degree.
 
         :return: Degree.
+        :rtype: str
+
         :Example:
             Bachelor.
         """
         degrees = self.data['academic_degree']
         return self.random.choice(degrees)
 
-    def language(self):
+    def language(self) -> str:
         """Get a random language.
 
         :return: Random language.
+        :rtype: str
+
         :Example:
             Irish.
         """
         languages = self.data['language']
         return self.random.choice(languages)
 
-    def favorite_movie(self):
+    def favorite_movie(self) -> str:
         """Get a random movie for current locale.
 
         :return: The name of the movie.
+        :rtype: str
+
         :Example:
             Interstellar.
         """
         movies = self.data['favorite_movie']
         return self.random.choice(movies)
 
-    def favorite_music_genre(self):
+    def favorite_music_genre(self) -> str:
         """Get a random music genre.
 
         :return: A music genre.
+        :rtype: str
+
         :Example:
             Ambient.
         """
         return self.random.choice(FAVORITE_MUSIC_GENRE)
 
-    def telephone(self, mask=None, placeholder='#'):
+    def telephone(self, mask: str = '', placeholder: str = '#') -> str:
         """Generate a random phone number.
 
-        :param mask: Mask for formatting number.
-        :param placeholder: A placeholder for a mask (default is #).
+        :param str mask: Mask for formatting number.
+        :param str placeholder: A placeholder for a mask (default is #).
         :return: Phone number.
+        :rtype: str
+
         :Example:
             +7-(963)-409-11-22.
         """
@@ -551,35 +624,39 @@ class Personal(BaseProvider):
             masks = self.data.get('telephone_fmt', default)
             mask = self.random.choice(masks)
 
-        return Code(self.locale).custom_code(mask=mask, digit=placeholder)
+        return custom_code(mask=mask, digit=placeholder)
 
-    def avatar(self, size=256):
+    def avatar(self, size: int = 256) -> str:
         """Generate a random avatar (link to avatar) using API of  Adorable.io.
 
+        :param int size: Size of avatar.
         :return: Link to avatar.
-        :Example:
-            https://api.adorable.io/avatars/64/875ed3de1604812b3c2b592c05863f47.png
+        :rtype: str
         """
         url = 'https://api.adorable.io/avatars/{0}/{1}.png'
         return url.format(size, self.password(algorithm='md5'))
 
-    def identifier(self, mask='##-##/##'):
+    def identifier(self, mask: str = '##-##/##') -> str:
         """Generate a random identifier by mask. With this method you can generate
         any identifiers that you need. Simply select the mask that you need.
 
-        :param mask:
+        :param str mask:
             The mask. Here '@' is a placeholder for characters and '#' is
             placeholder for digits.
         :return: An identifier.
+        :rtype: str
+
         :Example:
             07-97/04
         """
-        return Code(self.locale).custom_code(mask=mask)
+        return custom_code(mask=mask)
 
-    def level_of_english(self):
+    def level_of_english(self) -> str:
         """Get a random level of English.
 
         :return: Level of english.
+        :rtype: str
+
         :Example:
             Intermediate.
         """

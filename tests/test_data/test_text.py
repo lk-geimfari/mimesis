@@ -22,10 +22,16 @@ def test_hex_color(_text):
     assert '#' in result
 
 
-def test_alphabet(text):
-    result = text.alphabet()
-    assert isinstance(result, list)
+@pytest.mark.parametrize(
+    'case', [
+        True,
+        False,
+    ],
+)
+def test_alphabet(text, case):
+    result = text.alphabet(lower_case=case)
     assert result is not None
+    assert isinstance(result, list)
 
 
 def test_sentence(text):

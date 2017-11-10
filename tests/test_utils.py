@@ -1,13 +1,31 @@
 # -*- coding: utf-8 -*-
 
 import os
-import sys
+import socket
 
 import pytest
 
 from mimesis.exceptions import UnsupportedLocale, UnexpectedGender
-from mimesis.utils import (check_gender, download_image, locale_info,
-                           luhn_checksum, pull, update_dict)
+from mimesis.utils import (
+    check_gender,
+    custom_code,
+    download_image,
+    locale_info,
+    luhn_checksum,
+    pull,
+    update_dict,
+    setup_locale,
+)
+
+
+def is_connected():
+    try:
+        host = socket.gethostbyname('https://github.com/')
+        socket.create_connection((host, 80), 2)
+        return True
+    except:
+        pass
+    return False
 
 
 def test_luhn_checksum():
@@ -34,30 +52,20 @@ def test_pull():
     assert 'Melbourne' in data['city']
 
 
-def test_download_image(mocker):
-    result = download_image(url=None)
-    assert result is None
-
+@pytest.mark.parametrize(
+    'ctx', [
+        False,
+        True,
+    ],
+)
+def test_download_image(ctx):
     url = 'https://github.com/lk-geimfari/mimesis/' \
           'raw/master/media/mimesis.png'
 
-    def create_image(*args, **kwargs):
-        image_name = 'mimesis.png'
-        with open(image_name, 'w') as f:
-            f.write('testing image')
-
-    with mocker.patch('mimesis.utils.request.urlretrieve',
-                      side_effect=create_image):
-        verified = download_image(url=url)
+    if is_connected():
+        verified = download_image(url=url, unverified_ctx=ctx)
         assert verified == 'mimesis.png'
         os.remove(verified)
-
-        if sys.version_info.minor <= 3:
-            with pytest.raises(NotImplementedError):
-                download_image(url=None, unverified_ctx=True)
-        else:
-            unverified = download_image(url=None, unverified_ctx=True)
-            assert unverified is None
 
 
 def test_locale_information():
@@ -124,3 +132,25 @@ def test_check_gender(abbr, gender):
 def test_check_gender_invalid_gender():
     with pytest.raises(UnexpectedGender):
         check_gender(gender='other')
+
+
+@pytest.mark.parametrize(
+    'inp, out', [
+        ('EN', 'en'),
+        ('DE', 'de'),
+        ('RU', 'ru'),
+    ],
+)
+def test_setup_locale(inp, out):
+    result = setup_locale(inp)
+    assert result == out
+
+
+def test_custom_code():
+    result = custom_code(mask='@@@-###-@@@', char='@', digit='#')
+    assert len(result) == 11
+
+    a, b, c = result.split('-')
+    assert a.isalpha()
+    assert b.isdigit()
+    assert c.isalpha()

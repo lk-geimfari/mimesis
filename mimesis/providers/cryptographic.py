@@ -3,27 +3,30 @@ import hashlib
 import uuid
 
 from mimesis.exceptions import UnsupportedAlgorithm
-from mimesis.providers import BaseProvider
+from mimesis.providers.base import BaseProvider
+from mimesis.typing import Bytes
 
 
 class Cryptographic(BaseProvider):
     """This class provides support cryptographic data.
     """
 
-    def uuid(self):
+    def uuid(self) -> str:
         """Generate random UUID.
 
         :return: UUID
         """
         return str(uuid.UUID(int=self.random.getrandbits(128)))
 
-    def hash(self, algorithm='sha1'):
+    def hash(self, algorithm: str = 'sha1') -> str:
         """Generate random hash.
 
-        :param algorithm:
+        :param str algorithm:
             Hashing algorithm ('md5', 'sha1', 'sha224', 'sha256',
             'sha384', 'sha512').
         :return: Hash.
+        :rtype: str
+        :raises UnsupportedAlgorithm: if algorithm is not supported.
         """
         algorithm = algorithm.lower().strip()
 
@@ -38,31 +41,30 @@ class Cryptographic(BaseProvider):
                     algorithm, ', '.join(hashlib.algorithms_guaranteed)),
             )
 
-    def bytes(self, entropy=None):
+    def bytes(self, entropy: int = 32) -> Bytes:
         """Get a random byte string containing *entropy* bytes.
 
         The string has *entropy* random bytes, each byte converted to two
         hex digits.
 
-        :param entropy:
+        :param int entropy: Number of bytes.
         :return: Bytes.
+        :rtype: bytes
         """
-        if entropy is None:
-            entropy = 32
-
         return self.random.urandom(entropy)
 
-    def token(self, entropy=None):
+    def token(self, entropy: int = 32) -> str:
         """Return a random text string, in hexadecimal.
 
-        :param entropy: Number of bytes.
+        :param int entropy: Number of bytes.
         :return: Token.
+        :rtype: str
         """
         token = hexlify(self.bytes(entropy))
         return token.decode('ascii')
 
     @staticmethod
-    def salt():
+    def salt() -> str:
         """Generate salt (not cryptographically safe) using uuid4().
 
         :return: Salt.

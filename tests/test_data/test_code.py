@@ -12,17 +12,6 @@ def test_str(code):
     assert re.match(p.STR_REGEX, str(code))
 
 
-def test_custom_code(code):
-    result = code.custom_code(
-        mask='@@@-###-@@@', char='@', digit='#')
-    assert len(result) == 11
-
-    a, b, c = result.split('-')
-    assert a.isalpha()
-    assert b.isdigit()
-    assert c.isalpha()
-
-
 @pytest.mark.parametrize(
     'fmt, length', [
         ('ean-8', 8),

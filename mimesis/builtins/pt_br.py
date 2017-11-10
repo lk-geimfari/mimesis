@@ -8,11 +8,13 @@ class BrazilSpecProvider(object):
         name = 'brazil_provider'
 
     @staticmethod
-    def cpf(with_mask=True):
+    def cpf(with_mask: bool = True) -> str:
         """Get a random CPF (brazilian social security code)
 
-        :param with_mask: use CPF mask (###.###.###-##) in the return
-        :returns: Random CPF
+        :param bool with_mask: Use CPF mask (###.###.###-##).
+        :returns: Random CPF.
+        :rtype: str
+
         :Example:
             001.137.297-40
         """
@@ -46,11 +48,13 @@ class BrazilSpecProvider(object):
         return cpf
 
     @staticmethod
-    def cnpj(with_mask=True):
+    def cnpj(with_mask: bool = True) -> str:
         """Get a random cnpj (brazilian social security code)
 
-        :param with_mask: use cnpj mask (###.###.###-##) in the return
-        :returns: Random cnpj
+        :param bool with_mask: use cnpj mask (###.###.###-##)
+        :returns: Random cnpj.
+        :rtype: str
+
         :Example:
             77.732.230/0001-70
         """

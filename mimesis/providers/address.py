@@ -1,7 +1,7 @@
 from mimesis.data import CALLING_CODES, CONTINENT_CODES, \
     COUNTRIES_ISO, SHORTENED_ADDRESS_FMT
-from mimesis.providers import BaseProvider
-from mimesis.utils import pull
+from mimesis.providers.base import BaseProvider
+from mimesis.utils import pull, custom_code
 
 
 class Address(BaseProvider):
@@ -14,40 +14,49 @@ class Address(BaseProvider):
         super().__init__(*args, **kwargs)
         self.data = pull('address.json', self.locale)
 
-    def street_number(self, maximum=1400):
+    def street_number(self, maximum: int = 1400) -> str:
         """Generate a random street number.
 
+        :param int maximum: Maximum value.
         :return: Street number.
+        :rtype: str
+
         :Example:
             134.
         """
         number = self.random.randint(1, int(maximum))
-        return '%s' % number
+        return '{}'.format(number)
 
-    def street_name(self):
+    def street_name(self) -> str:
         """Get a random street name.
 
         :return: Street name.
+        :rtype: str
+
         :Example:
            Candlewood.
         """
-        names = self.data['street']['name']
+        names = self.data['street'].get('name')
         return self.random.choice(names)
 
-    def street_suffix(self):
+    def street_suffix(self) -> str:
         """Get a random street suffix.
 
         :return: Street suffix.
+        :rtype: str
+
         :Example:
             Alley.
         """
-        suffixes = self.data['street']['suffix']
+        suffixes = self.data['street'].get('suffix')
         return self.random.choice(suffixes)
 
-    def address(self):
+    def address(self) -> str:
         """Get a random full address (include Street number, suffix and name).
 
         :return: Full address.
+        :rtype: str
+
         :Example:
             5 Central Sideline.
         """
@@ -76,37 +85,68 @@ class Address(BaseProvider):
 
         )
 
-    def state(self, abbr=False):
-        """Get a random states or subject of country.
+    def state(self, abbr: bool = False) -> str:
+        """Get a random administrative district of country.
 
-        :param abbr:
-            If True then return ISO (ISO 3166-2)
-            code of state/region/province/subject.
-        :return: State of current country.
+        :param bool abbr: Return ISO 3166-2 code.
+        :return: Administrative district.
+        :rtype: str
+
         :Example:
             Alabama (for locale `en`).
         """
         key = 'abbr' if abbr else 'name'
-        states = self.data['state'][key]
+        states = self.data['state'].get(key)
         return self.random.choice(states)
 
-    def postal_code(self):
+    def region(self, abbr: bool = False) -> str:
+        """Get a random region.
+
+        :param bool abbr: Return ISO 3166-2 code.
+        :return: State.
+        :rtype: str
+        """
+        return self.state(abbr)
+
+    def province(self, abbr: bool = False) -> str:
+        """Get a random province.
+
+        :param bool abbr: Return ISO 3166-2 code.
+        :return: Province.
+        :rtype: str
+        """
+        return self.state(abbr)
+
+    def federal_subject(self, abbr: bool = False) -> str:
+        """Get a random region.
+
+        :param bool abbr: Return ISO 3166-2 code.
+        :return: Federal subject.
+        :rtype: str
+        """
+        return self.state(abbr)
+
+    def postal_code(self) -> str:
         """Generate a postal code for current locale.
 
         :return: Postal code.
+        :type: str
+
         :Example:
             389213
         """
-        from mimesis.providers import Code
 
         mask = self.data['postal_code_fmt']
-        return Code(self.locale).custom_code(mask)
+        return custom_code(mask=mask)
 
-    def country_iso(self, fmt='iso2'):
+    def country_iso(self, fmt: str = 'iso2') -> str:
         """Get a random ISO code of country.
 
-        :param fmt: Format of code (iso2, iso3, numeric).
+        :param str fmt: Format of code (iso2, iso3, numeric).
         :return: ISO Code.
+        :rtype: str
+        :raises KeyError: if fmt is not supported.
+
         :Example:
             DE
         """
@@ -118,49 +158,58 @@ class Address(BaseProvider):
         countries = COUNTRIES_ISO[fmt]
         return self.random.choice(countries)
 
-    def country(self):
+    def country(self) -> str:
         """Get a random country.
 
         :return: The Country.
+        :rtype: str
+
         :Example:
             Russia.
         """
-        countries = self.data['country']['name']
+        countries = self.data['country'].get('name')
         return self.random.choice(countries)
 
-    def city(self):
+    def city(self) -> str:
         """Get a random city for current locale.
 
         :return: City name.
+        :rtype: str
+
         :Example:
             Saint Petersburg.
         """
         cities = self.data['city']
         return self.random.choice(cities)
 
-    def latitude(self):
+    def latitude(self) -> float:
         """Generate a random value of latitude (-90 to +90).
 
         :return: Value of longitude.
+        :rtype: float
+
         :Example:
             -66.4214188124611
         """
         return self.random.uniform(-90, 90)
 
-    def longitude(self):
+    def longitude(self) -> float:
         """Generate a random value of longitude (-180 to +180).
 
         :return: Value of longitude.
+        :rtype: float
+
         :Example:
             112.18440260511943
         """
         return self.random.uniform(-180, 180)
 
-    def coordinates(self):
+    def coordinates(self) -> dict:
         """Generate random geo coordinates.
 
         :return: Dict with coordinates.
         :rtype: dict
+
         :Example:
             {'latitude': 8.003968712834975, 'longitude': 36.02811153405548}
         """
@@ -170,11 +219,14 @@ class Address(BaseProvider):
         }
         return coord
 
-    def continent(self, code=False):
+    def continent(self, code: bool = False) -> str:
         """Get a random continent name or continent
         code (code in international format).
 
+        :param bool code: Return code of continent.
         :return: Continent name.
+        :rtype: str
+
         :Example:
             Africa (en)
         """
@@ -185,10 +237,12 @@ class Address(BaseProvider):
         continents = self.data['continent']
         return self.random.choice(continents)
 
-    def calling_code(self):
+    def calling_code(self) -> str:
         """Get a random calling code of random country.
 
         :return: Calling code.
+        :rtype: str
+
         :Example:
             +7
         """
