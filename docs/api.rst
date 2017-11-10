@@ -40,12 +40,56 @@ RussiaSpecProvider
    :special-members: __init__
 
 
-Generic
+Decorators
+==========
+
+.. automodule:: mimesis.decorators
+   :members:
+
+
+Exceptions
+==========
+
+UnsupportedLocale
+-----------------
+
+.. autoclass:: mimesis.exceptions.UnsupportedLocale
+   :members:
+
+JSONKeyError
+------------
+
+.. autoclass:: mimesis.exceptions.JSONKeyError
+   :members:
+
+WrongArgument
+-------------
+
+.. autoclass:: mimesis.exceptions.WrongArgument
+   :members:
+
+UnsupportedAlgorithm
+--------------------
+
+.. autoclass:: mimesis.exceptions.UnsupportedAlgorithm
+   :members:
+
+
+UndefinedSchema
+---------------
+
+.. autoclass:: mimesis.exceptions.UndefinedSchema
+   :members:
+
+
+Helpers
 =======
 
-.. autoclass:: mimesis.Generic
+Random
+------
+
+.. autoclass:: mimesis.helpers.Random
    :members:
-   :special-members: __init__
 
 
 Providers
@@ -58,6 +102,12 @@ BaseProvider
    :members:
    :special-members: __init__
 
+Generic
+-------
+
+.. autoclass:: mimesis.Generic
+   :members:
+   :special-members: __init__
 
 Address
 -------
@@ -200,51 +250,6 @@ UnitSystem
    :special-members: __init__
 
 
-Exceptions
-==========
-
-UnsupportedLocale
------------------
-
-.. autoclass:: mimesis.exceptions.UnsupportedLocale
-   :members:
-
-JSONKeyError
-------------
-
-.. autoclass:: mimesis.exceptions.JSONKeyError
-   :members:
-
-WrongArgument
--------------
-
-.. autoclass:: mimesis.exceptions.WrongArgument
-   :members:
-
-UnsupportedAlgorithm
---------------------
-
-.. autoclass:: mimesis.exceptions.UnsupportedAlgorithm
-   :members:
-
-
-UndefinedSchema
----------------
-
-.. autoclass:: mimesis.exceptions.UndefinedSchema
-   :members:
-
-
-Helpers
-=======
-
-Random
-------
-
-.. autoclass:: mimesis.helpers.Random
-   :members:
-
-
 Schema
 =======
 
@@ -252,4 +257,14 @@ Schema
 ------
 
 .. autoclass:: mimesis.schema.Schema
+   :members:
+
+
+Utilities
+=========
+
+utils.py
+--------
+
+.. automodule:: mimesis.utils
    :members:
