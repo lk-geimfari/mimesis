@@ -16,7 +16,7 @@ def romanized(locale: str = '') -> Callable:
 
     .. note:: At this moment it works only for `ru`, `uk`, `kk`.
 
-    :param str locale: Function.
+    :param str locale: Locale code.
     :return: Latinized text.
     :rtype: types.Callable
     """

@@ -1,12 +1,11 @@
 # utils.py
-from string import ascii_uppercase
-
+import string
 import collections
 import functools
 import json
 import ssl
 from os import path
-from random import choice, randint
+from random import randint, choice
 from typing import Mapping, Union
 from urllib import request
 
@@ -28,6 +27,7 @@ def locale_info(locale: str) -> str:
     :param str locale: Locale abbreviation.
     :return: Locale name.
     :rtype: str
+    :raises UnsupportedLocale: if locale is not supported.
     """
     locale = locale.lower()
     supported = settings.SUPPORTED_LOCALES
@@ -149,6 +149,7 @@ def check_gender(gender: Gender = 0) -> str:
     :type gender: int or str
     :return: Gender.
     :rtype: str
+    :raises UnexpectedGender: if gender has not correct value.
     """
     f, m = ('female', 'male')
     # When gender is None or 0, 9
@@ -203,7 +204,7 @@ def custom_code(mask: str = '@###',
     code = ''
     for p in mask:
         if p == char:
-            code += choice(ascii_uppercase)
+            code += choice(string.ascii_uppercase)
         elif p == digit:
             code += str(randint(0, 9))
         else:

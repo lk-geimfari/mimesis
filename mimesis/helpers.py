@@ -7,7 +7,8 @@ from typing import List, Any
 class Random(random.Random):
     """Custom Random() class for the possibility of extending."""
 
-    def randints(self, amount: int = 3, a: int = 1, b: int = 100) -> List[int]:
+    def randints(self, amount: int = 3,
+                 a: int = 1, b: int = 100) -> List[int]:
         """Generate list of random integers.
 
         :param int amount: Amount of elements.
@@ -15,6 +16,7 @@ class Random(random.Random):
         :param int b: Maximum value of range.
         :return: List of random integers.
         :rtype: list
+        :raises ValueError: if amount less or equal to zero.
         """
 
         if amount <= 0:
