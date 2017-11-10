@@ -8,13 +8,12 @@ This part of the documentation covers all the interfaces of *Mimesis*.
 Builtins
 ========
 
-USASpecProvider
----------------
+BrazilSpecProvider
+------------------
 
-.. autoclass:: mimesis.builtins.USASpecProvider
+.. autoclass:: mimesis.builtins.BrazilSpecProvider
    :members:
    :special-members: __init__
-
 
 JapanSpecProvider
 -----------------
@@ -23,19 +22,17 @@ JapanSpecProvider
    :members:
    :special-members: __init__
 
-
-BrazilSpecProvider
-------------------
-
-.. autoclass:: mimesis.builtins.BrazilSpecProvider
-   :members:
-   :special-members: __init__
-
-
 RussiaSpecProvider
 ------------------
 
 .. autoclass:: mimesis.builtins.RussiaSpecProvider
+   :members:
+   :special-members: __init__
+
+USASpecProvider
+---------------
+
+.. autoclass:: mimesis.builtins.USASpecProvider
    :members:
    :special-members: __init__
 
@@ -50,22 +47,10 @@ Decorators
 Exceptions
 ==========
 
-UnsupportedLocale
------------------
-
-.. autoclass:: mimesis.exceptions.UnsupportedLocale
-   :members:
-
 JSONKeyError
 ------------
 
 .. autoclass:: mimesis.exceptions.JSONKeyError
-   :members:
-
-WrongArgument
--------------
-
-.. autoclass:: mimesis.exceptions.WrongArgument
    :members:
 
 UnsupportedAlgorithm
@@ -74,6 +59,11 @@ UnsupportedAlgorithm
 .. autoclass:: mimesis.exceptions.UnsupportedAlgorithm
    :members:
 
+UnsupportedLocale
+-----------------
+
+.. autoclass:: mimesis.exceptions.UnsupportedLocale
+   :members:
 
 UndefinedSchema
 ---------------
@@ -81,38 +71,27 @@ UndefinedSchema
 .. autoclass:: mimesis.exceptions.UndefinedSchema
    :members:
 
+WrongArgument
+-------------
 
-Helpers
-=======
-
-Random
-------
-
-.. autoclass:: mimesis.helpers.Random
+.. autoclass:: mimesis.exceptions.WrongArgument
    :members:
 
 
 Providers
 =========
 
-BaseProvider
-------------
-
-.. autoclass:: mimesis.providers.BaseProvider
-   :members:
-   :special-members: __init__
-
-Generic
--------
-
-.. autoclass:: mimesis.Generic
-   :members:
-   :special-members: __init__
-
 Address
 -------
 
 .. autoclass:: mimesis.Address
+   :members:
+   :special-members: __init__
+
+BaseProvider
+------------
+
+.. autoclass:: mimesis.providers.BaseProvider
    :members:
    :special-members: __init__
 
@@ -176,6 +155,13 @@ Games
 -----
 
 .. autoclass:: mimesis.Games
+   :members:
+   :special-members: __init__
+
+Generic
+-------
+
+.. autoclass:: mimesis.Generic
    :members:
    :special-members: __init__
 
