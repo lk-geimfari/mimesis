@@ -1,8 +1,8 @@
 ### Creator & Maintainer
- - Likid Geimfari [(lk-geimfari)](https://github.com/lk-geimfari)
+- Likid Geimfari [(lk-geimfari)](https://github.com/lk-geimfari)
 
 ### Inspirer
- - Sobolev Nikita [(sobolevn)](https://github.com/sobolevn)
+- Sobolev Nikita [(sobolevn)](https://github.com/sobolevn)
 
 ### Special thanks
 - Sobolev Nikita [(sobolevn)](https://github.com/sobolevn)
@@ -38,11 +38,13 @@
 - Ranwise [(ranwise)](https://github.com/ranwise)
 - Sambuddha Basu [(sammyshj)](https://github.com/sammyshj)
 - Thomas Carroll [(Uncleleech)](https://github.com/Uncleleech)
+- Tsimpitas Dimitris [(TsimpDim)](https://github.com/TsimpDim)
 - Vladislav Glinsky [(cl0ne)](https://github.com/cl0ne)
 - Yn-Coder [(yn-coder)](https://github.com/yn-coder)
 - Dmytro Zelinskyi [(zelds)](https://github.com/zelds)
 - axcel [(axce1)](https://github.com/axce1)
 - Ruslan Valerievich [(Valerievich)](https://github.com/Valerievich)
+- Simon [(DefaltSimon)](https://github.com/DefaltSimon)
 
 ### Design
  - The illustration is taken from internet. If you know the creator of this octopus, then let us know.

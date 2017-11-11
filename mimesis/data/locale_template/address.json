@@ -1,0 +1,31 @@
+{
+  "address_fmt": "{st_num} {st_name} {st_sfx}",
+  "city": [
+	"Test"
+  ],
+  "country": {
+	"name": [
+	  "Test"
+	]
+  },
+  "continent": [
+	"Test"
+  ],
+  "state": {
+	"name": [
+	  "Test"
+	],
+	"abbr": [
+	  "Test"
+	]
+  },
+  "street": {
+	"name": [
+	  "Test"
+	],
+	"suffix": [
+	  "Test"
+	]
+  },
+  "postal_code_fmt": "#####"
+}

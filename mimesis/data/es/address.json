@@ -345,30 +345,28 @@
   ],
   "state": {
 	"abbr": [
-	  "AN",
-	  "AR",
-	  "AS",
-	  "CB",
-	  "CE",
-	  "CL",
-	  "CM",
-	  "CN",
-	  "CT",
-	  "EX",
-	  "GA",
-	  "IB",
-	  "MC",
-	  "MD",
-	  "ML",
-	  "NC",
-	  "PV",
-	  "RI",
-	  "VC"
+	  "ES-AN",
+	  "ES-AR",
+	  "ES-AS",
+	  "ES-CN",
+	  "ES-CB",
+	  "ES-CL",
+	  "ES-CM",
+	  "ES-CT",
+	  "ES-EX",
+	  "ES-GA",
+	  "ES-IB",
+	  "ES-RI",
+	  "ES-MD",
+	  "ES-MC",
+	  "ES-NC",
+	  "ES-PV",
+	  "ES-VC"
 	],
 	"name": [
 	  "Andalucía",
 	  "Aragón",
-	  "Asturias",
+	  "Principiado de Asturias",
 	  "Canarias",
 	  "Cantabria",
 	  "Castilla y León",
@@ -376,18 +374,18 @@
 	  "Catalunya",
 	  "Extremadura",
 	  "Galicia",
-	  "Illes Balears",
+	  "Islas Baleares",
 	  "La Rioja",
-	  "Madrid",
-	  "Murcia",
-	  "Navarra",
+	  "Comunidad de Madrid",
+	  "Region de Murcia",
+	  "Comunidad Foral de Navarra",
 	  "País Vasco",
-	  "Valenciana"
+	  "Comunidad Valenciana"
 	]
   },
   "street": {
 	"suffix": [
-	  "Rua",
+	  "Calle",
 	  "Avenida"
 	],
 	"name": [

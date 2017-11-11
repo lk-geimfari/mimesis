@@ -2,7 +2,8 @@ import json
 
 from mimesis.data import (CSS_PROPERTIES, CSS_SELECTORS, CSS_SIZE_UNITS,
                           HTML_CONTAINER_TAGS, HTML_MARKUP_TAGS)
-from mimesis.providers import BaseProvider, Internet
+from mimesis.providers.base import BaseProvider
+from mimesis.providers.internet import Internet
 from mimesis.providers.text import Text
 
 
@@ -11,17 +12,16 @@ class Structured(BaseProvider):
 
     def __init__(self, *args, **kwargs):
         """
-        :param locale: Current locale.
+        :param str locale: Current locale.
         """
         super().__init__(*args, **kwargs)
         self.internet = Internet()
         self.text = Text()
 
-    def css(self):
+    def css(self) -> str:
         """Generates a random snippet of CSS.
 
         :return: CSS.
-        :rtype: str
         """
         selector = self.random.choice(CSS_SELECTORS)
         css_sel = '{}{}'.format(selector, self.text.word())
@@ -34,11 +34,11 @@ class Structured(BaseProvider):
             [self.css_property() for _ in range(self.random.randint(1, 6))])
         return '{} {{{}}}'.format(base, props)
 
-    def css_property(self):
+    def css_property(self) -> str:
         """Generates a random snippet of CSS that assigns value to a property.
 
         :return: CSS property.
-        :rtype: str
+
         :Examples:
             'background-color: #f4d3a1'
         """
@@ -55,18 +55,17 @@ class Structured(BaseProvider):
 
         return '{}: {}'.format(prop, val)
 
-    def html(self):
+    def html(self) -> str:
         """Generate a random HTML tag with text inside and some attrs set.
-
         :return: HTML.
-        :rtype: str
+
         :Examples:
             '<span class="select" id="careers">
-                Ports are created with the built-in function open_port.
+            Ports are created with the built-in function open_port.
             </span>'
         """
         tag_name = self.random.choice(list(HTML_CONTAINER_TAGS))
-        tag_attributes = list(HTML_CONTAINER_TAGS[tag_name])
+        tag_attributes = list(HTML_CONTAINER_TAGS[tag_name])  # type: ignore
         k = self.random.randint(1, len(tag_attributes))
 
         selected_attrs = self.random.sample(tag_attributes, k=k)
@@ -83,18 +82,16 @@ class Structured(BaseProvider):
             content=self.text.sentence(),
         )
 
-    def html_attribute_value(self, tag, attribute):
+    def html_attribute_value(self, tag: str, attribute: str) -> str:
         """Random value for specified HTML tag attribute.
 
-        :param tag: An HTML tag.
-        :param attribute: An attribute of the specified tag.
-        :type tag: str
-        :type attribute: str
+        :param str tag: An HTML tag.
+        :param str attribute: An attribute of the specified tag.
         :return: An attribute.
-        :rtype: str
+        :raises NotImplementedError: if tag is unsupported.
         """
         try:
-            value = HTML_CONTAINER_TAGS[tag][attribute]
+            value = HTML_CONTAINER_TAGS[tag][attribute]  # type: ignore
         except KeyError:
             raise NotImplementedError(
                 'Tag {} or attribute {} is not supported'.format(
@@ -113,13 +110,15 @@ class Structured(BaseProvider):
                 'Attribute type {} is not implemented'.format(value))
         return value
 
-    def json(self, items=5, max_depth=3, recursive=False):
+    def json(self, items: int = 5,
+             max_depth: int = 3, recursive: bool = False) -> str:
         """Generate a random snippet of JSON.
 
-        :param items: Number of top-level items to produce.
-        :param max_depth: Maximum depth of each top-level item.
-        :param recursive: When used recursively, will return a Python object
-        instead of JSON string.
+        :param int items: Number of top-level items to produce.
+        :param int max_depth: Maximum depth of each top-level item.
+        :param bool recursive:
+            When used recursively, will return a Python object instead of JSON
+            string.
         :return: JSON
         """
 

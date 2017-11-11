@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 import re
 
+import pytest
+
 from mimesis.data import LOCALE_CODES
 
 from . import _patterns as p
@@ -10,29 +12,15 @@ def test_str(code):
     assert re.match(p.STR_REGEX, str(code))
 
 
-def test_custom_code(code):
-    result = code.custom_code(
-        mask='@###', char='@', digit='#')
-
-    assert len(result) == 4
-
-
-def test_custom_code_args(code):
-    result = code.custom_code(
-        mask='@@@-###-@@@').split('-')
-
-    a, b, c = result
-    assert a.isalpha()
-    assert b.isdigit()
-    assert c.isalpha()
-
-
-def test_ean(code):
-    result = code.ean(fmt='ean-8')
-    assert len(result) == 8
-
-    result = code.ean(fmt='ean-13')
-    assert len(result) == 13
+@pytest.mark.parametrize(
+    'fmt, length', [
+        ('ean-8', 8),
+        ('ean-13', 13),
+    ],
+)
+def test_ean(code, fmt, length):
+    result = code.ean(fmt=fmt)
+    assert len(result) == length
 
 
 def test_imei(code):
@@ -55,9 +43,13 @@ def test_locale_code(code):
     assert result in LOCALE_CODES
 
 
-def test_isbn(generic):
-    result = generic.code.isbn(fmt='isbn-10')
-    assert len(result) >= 10
-
-    result = generic.code.isbn(fmt='isbn-13')
-    assert len(result) >= 13
+@pytest.mark.parametrize(
+    'fmt, length', [
+        ('isbn-10', 10),
+        ('isbn-13', 13),
+    ],
+)
+def test_isbn(code, fmt, length):
+    result = code.isbn(fmt=fmt)
+    assert result is not None
+    assert len(result) >= length

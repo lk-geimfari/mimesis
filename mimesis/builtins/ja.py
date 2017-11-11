@@ -5,13 +5,14 @@ class JapanSpecProvider(object):
         name = 'japan_provider'
 
     @staticmethod
-    def full_to_half(text, alnum=True):
+    def full_to_half(text: str, alnum: bool = True) -> str:
         """Convert all full width katakana, alphanumeric and few special
         characters like （, ）, ・ to equivalent half width character.
 
-        :param text: The text to be converted.
-        :param alnum: Convert alphanumeric, default True.
+        :param str text: The text to be converted.
+        :param bool alnum: Convert alphanumeric, default True.
         :return: Text with full width characters converted to half width.
+        :rtype: str
 
         :Example:
             QVCｼﾞｬﾊﾟﾝ(0123)
@@ -51,13 +52,14 @@ class JapanSpecProvider(object):
         return result
 
     @staticmethod
-    def half_to_full(text, alnum=True):
+    def half_to_full(text: str, alnum: bool = True) -> str:
         """Convert all half width katakana, alphanumeric, and special characters
         ((, ), ) to equivalent full width character.
 
-        :param text: The text to be converted.
-        :param alnum: Convert alphanumeric, default True.
+        :param str text: The text to be converted.
+        :param bool alnum: Convert alphanumeric, default True.
         :return: Text with half width characters converted to full width.
+        :type: str
 
         :Example:
             ＱＶＣジャパン（０１２３）

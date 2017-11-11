@@ -16,6 +16,7 @@ help:
 	@echo "test         - run tests quickly with the default Python"
 	@echo "flake        - run py.test with flake8"
 	@echo "publish      - create dist and upload package to PyPI"
+	@echo "versioner    - update __version__ file"
 	@echo "install      - install the package to the active Python's site-packages"
 	@echo "........................................................"
 
@@ -52,6 +53,21 @@ test:
 .PHONY: publish
 publish:
 	python3 setup.py sdist && twine upload dist/*
+
+
+.PHONY: version
+version:
+	python3 setup.py versioner
+
+
+.PHONY: minify
+minify:
+	python3 setup.py minify
+
+
+.PHONY: type-hints
+type-hints:
+	mypy mimesis/
 
 
 .PHONY: install

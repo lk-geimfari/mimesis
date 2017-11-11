@@ -11,24 +11,40 @@ def test_uuid(crypto):
     assert re.match(UUID_REGEX, crypto.uuid())
 
 
-def test_hash(crypto):
-    assert len(crypto.hash(algorithm='md5')) == 32
-    assert len(crypto.hash(algorithm='sha1')) == 40
-    assert len(crypto.hash(algorithm='sha224')) == 56
-    assert len(crypto.hash(algorithm='sha256')) == 64
-    assert len(crypto.hash(algorithm='sha384')) == 96
-    assert len(crypto.hash(algorithm='sha512')) == 128
+@pytest.mark.parametrize(
+    'algorithm, length', [
+        ('md5', 32),
+        ('sha1', 40),
+        ('sha224', 56),
+        ('sha256', 64),
+        ('sha384', 96),
+        ('sha512', 128),
+    ],
+)
+def test_hash(crypto, algorithm, length):
+    result = crypto.hash(algorithm=algorithm)
+    assert len(result) == length
 
     with pytest.raises(UnsupportedAlgorithm):
         crypto.hash(algorithm='mimesis')
 
 
 def test_bytes(crypto):
-    assert crypto.bytes(entropy=64) is not None
-    assert isinstance(crypto.bytes(entropy=64), bytes)
+    result = crypto.bytes(entropy=64)
+    assert result is not None
+    assert isinstance(result, bytes)
 
 
 def test_token(crypto):
+    result = crypto.token(entropy=16)
+
     # Each byte converted to two hex digits.
-    assert len(crypto.token(entropy=16)) == 32
-    assert isinstance(crypto.token(), str)
+    assert len(result) == 32
+    assert isinstance(result, str)
+
+
+def test_salt(crypto):
+    result = crypto.salt()
+
+    assert result is not None
+    assert len(result) == 32

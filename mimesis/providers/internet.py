@@ -1,30 +1,35 @@
-from mimesis.data import (DOMAINS, EMOJI, HASHTAGS, HTTP_METHODS,
+from typing import Union, Optional
+
+from mimesis.data import (TLD, EMOJI, HASHTAGS, HTTP_METHODS,
                           HTTP_STATUS_CODES, NETWORK_PROTOCOLS, SUBREDDITS,
-                          SUBREDDITS_NSFW, USER_AGENTS)
+                          SUBREDDITS_NSFW, USERNAMES, USER_AGENTS)
 from mimesis.exceptions import WrongArgument
-from mimesis.providers import BaseProvider, File
-from mimesis.providers.personal import Personal
+from mimesis.providers.base import BaseProvider
+from mimesis.providers.file import File
+from mimesis.typing import Size
 
 
 class Internet(BaseProvider):
     """Class for generate the internet data."""
 
     @staticmethod
-    def content_type(mime_type='application'):
+    def content_type(mime_type: str = 'application') -> str:
         """Get a random HTTP content type.
 
         :return: Content type.
+
         :Example:
             Content-Type: application/json
         """
         fmt = File().mime_type(type_t=mime_type)
         return 'Content-Type: {}'.format(fmt)
 
-    def http_status_code(self, code_only=True):
+    def http_status_code(self, code_only: bool = True) -> str:
         """Get a random HTTP status.
 
         :param code_only: Return only http status code.
         :return: HTTP status.
+
         :Example:
             200 OK
         """
@@ -34,29 +39,32 @@ class Internet(BaseProvider):
             return status.split()[0]
         return status
 
-    def http_method(self):
+    def http_method(self) -> str:
         """Get a random HTTP method.
 
         :return: HTTP method.
+
         :Example:
             POST
         """
         return self.random.choice(HTTP_METHODS)
 
-    def ip_v4(self):
+    def ip_v4(self) -> str:
         """Generate a random IPv4 address.
 
         :return: Random IPv4 address.
+
         :Example:
             19.121.223.58
         """
         ip = '.'.join([str(self.random.randint(0, 255)) for _ in range(4)])
         return ip
 
-    def ip_v6(self):
+    def ip_v6(self) -> str:
         """Generate a random IPv6 address.
 
         :return: Random IPv6 address.
+
         :Example:
             2001:c244:cf9d:1fb1:c56d:f52c:8a04:94f3
         """
@@ -64,10 +72,11 @@ class Internet(BaseProvider):
             '%x' % self.random.randint(0, 16 ** 4) for _ in range(7))
         return ip
 
-    def mac_address(self):
+    def mac_address(self) -> str:
         """Generate a random MAC address.
 
         :return: Random MAC address.
+
         :Example:
             00:16:3e:25:e7:b1
         """
@@ -80,33 +89,41 @@ class Internet(BaseProvider):
         mac = map(lambda x: '%02x' % x, mac_hex)
         return ':'.join(mac)
 
-    def emoji(self):
+    def emoji(self) -> str:
         """Get a random emoji shortcut code.
 
         :return: Emoji code.
+
         :Example:
             :kissing:
         """
         return self.random.choice(EMOJI)
 
     @staticmethod
-    def image_placeholder(width='400', height='300'):
+    def image_placeholder(width: Size = 400,
+                          height: Size = 300) -> str:
         """Generate a link to the image placeholder.
 
         :param width: Width of image.
+        :type width: str or int
         :param height: Height of image.
+        :type height: str or int
         :return: URL to image placeholder.
         """
-        url = 'http://placehold.it/%sx%s'
-        return url % (width, height)
+        url = 'http://placehold.it/{width}x{height}'
+        return url.format(width=width, height=height)
 
-    def stock_image(self, category=None, width=1900, height=1080):
+    def stock_image(self, category: str = '',
+                    width: Size = 1900, height: Size = 1080) -> str:
         """Get a random beautiful stock image that hosted on Unsplash.com
 
-        :param category: Category of image. Available: 'buildings', 'food',
-        'nature', 'people', 'technology', 'objects'.
+        :param category:
+            Category of image. Available: 'buildings', 'food', 'nature',
+            'people', 'technology', 'objects'.
         :param width: Width of the image.
+        :type width: str or int
         :param height: Height of the image.
+        :type height: str or int
         :return: An image (Link to image).
         """
         url = 'https://source.unsplash.com/category/' \
@@ -122,7 +139,12 @@ class Internet(BaseProvider):
 
         return url.format(category=category, width=width, height=height)
 
-    def image_by_keyword(self, keyword=None):
+    def image_by_keyword(self, keyword: str = '') -> str:
+        """Image by keyword.
+
+        :param keyword: Keyword.
+        :return: Link to image.
+        """
         url = 'https://source.unsplash.com/weekly?{keyword}'
 
         keywords = [
@@ -136,15 +158,17 @@ class Internet(BaseProvider):
 
         return url.format(keyword=keyword)
 
-    def hashtags(self, quantity=4, category='general'):
+    def hashtags(self, quantity: int = 4,
+                 category: str = 'general') -> Union[str, list]:
         """Create a list of hashtags (for Instagram, Twitter etc.)
 
-        :param quantity: The quantity of hashtags.
-        :type quantity: int
-        :param category: Available categories: general, girls, love,
-        boys, friends, family, nature, travel, cars, sport, tumblr.
+        :param int quantity: The quantity of hashtags.
+        :param str category:
+            Available categories: general, girls, love, boys, friends, family,
+            nature, travel, cars, sport, tumblr.
         :return: The list of hashtags.
-        :rtype: list
+        :rtype: str or list
+        :raises KeyError: if category is not supported.
 
         :Example:
             ['#love', '#sky', '#nice'].
@@ -163,24 +187,58 @@ class Internet(BaseProvider):
         tags = [self.random.choice(hashtags) for _ in range(int(quantity))]
         return tags
 
-    def home_page(self, gender='female'):
+    def home_page(self, domain_type: Optional[str] = None) -> str:
         """Generate a random home page.
 
-        :param gender: Gender of author of site.
+        :param str domain_type: TLD type.
         :return: Random home page.
-        :Example:
-            http://www.font6.info
-        """
-        url = 'http://www.' + Personal().username(gender)
-        domain = self.random.choice(DOMAINS)
-        return '{}{}'.format(url, domain)
 
-    def subreddit(self, nsfw=False, full_url=False):
+        :Example:
+            http://www.fontir.info
+        """
+        resource = self.random.choice(USERNAMES)
+        domain = self.top_level_domain(
+            domain_type=domain_type,
+        )
+
+        return 'http://www.{}{}'.format(
+            resource, domain)
+
+    def top_level_domain(self, domain_type: Optional[str] = None) -> str:
+        """Return random top level domain.
+
+        :param str domain_type: Type of domain (ccTLD, gTLD,
+            GeoTLD, uTLD, sTLD).
+        :return: Top level domain.
+        :raises KeyError: if domain_type is not supported.
+        """
+        # TODO: This is really ugly solution. Fix it.
+        supported = tuple(TLD.keys())
+
+        if domain_type is not None:
+            try:
+                domain_type = domain_type.lower()
+                return self.random.choice(TLD[domain_type])
+            except KeyError:
+                raise KeyError(
+                    'Unsupported type of domain. Please, use one of: {}'.format(
+                        ', '.join(supported),
+                    ),
+                )
+
+        domain_type = self.random.choice(supported)
+        domains = TLD[domain_type]
+
+        return self.random.choice(domains)
+
+    def subreddit(self, nsfw: bool = False,
+                  full_url: bool = False) -> str:
         """Get a random subreddit from the list.
 
-        :param nsfw: NSFW subreddit.
-        :param full_url: Full URL address.
+        :param bool nsfw: NSFW subreddit.
+        :param bool full_url: Full URL address.
         :return: Subreddit or URL to subreddit.
+
         :Example:
             https://www.reddit.com/r/flask/
         """
@@ -195,22 +253,26 @@ class Internet(BaseProvider):
         result = url + nsfw_sr if full_url else nsfw_sr
         return result
 
-    def user_agent(self):
+    def user_agent(self) -> str:
         """Get a random user agent.
 
         :return: User agent.
+
         :Example:
             Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:15.0)
             Gecko/20100101 Firefox/15.0.1
         """
         return self.random.choice(USER_AGENTS)
 
-    def network_protocol(self, layer='application'):
+    def network_protocol(self, layer: str = 'application') -> str:
         """Get a random network protocol form OSI model.
 
-        :param layer: Layer of protocol: application, data_link,
-        network, physical, presentation, session and transport.
+        :param str layer:
+            Layer of protocol: application, data_link, network, physical,
+            presentation, session and transport.
         :return: Protocol name.
+        :raises WrongArgument: if layer is not supported.
+
         :Example:
             AMQP
         """

@@ -1,0 +1,11 @@
+{
+  "id": "cryptographic.uuid",
+  "name": "text.word",
+  "owner": {
+	"email": "personal.email",
+	"token": "cryptographic.token",
+	"creator": "personal.full_name"
+  },
+  "site": ,
+  "version": "development.version"
+}

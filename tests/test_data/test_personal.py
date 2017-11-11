@@ -4,123 +4,161 @@ import re
 
 import pytest
 
-from mimesis.data import (BLOOD_GROUPS, ENGLISH_LEVEL, FAVORITE_MUSIC_GENRE,
-                          GENDER_SYMBOLS, SEXUALITY_SYMBOLS)
-from mimesis.exceptions import UnsupportedAlgorithm, WrongArgument
+import mimesis
+from mimesis import settings
+from mimesis.data import (
+    BLOOD_GROUPS,
+    ENGLISH_LEVEL,
+    FAVORITE_MUSIC_GENRE,
+    GENDER_SYMBOLS,
+    SEXUALITY_SYMBOLS,
+)
+from mimesis.exceptions import (
+    UnexpectedGender,
+    UnsupportedAlgorithm,
+    WrongArgument,
+)
+from mimesis.utils import check_gender
 
-from . import _patterns as p
+from ._patterns import (
+    USERNAME_REGEX,
+    STR_REGEX,
+    CREDIT_CARD_REGEX,
+    EMAIL_REGEX,
+)
+
+
+@pytest.fixture
+def _personal():
+    return mimesis.Personal()
 
 
 def test_str(personal):
-    assert re.match(p.STR_REGEX, str(personal))
+    assert re.match(STR_REGEX, str(personal))
 
 
-def test_age(personal):
-    result = personal.age(maximum=55)
+def test_age(_personal):
+    result = _personal.age(maximum=55)
     assert result <= 55
 
 
-def test_age_store(personal):
-    result = personal._store['age']
+def test_age_store(_personal):
+    result = _personal._store['age']
     assert result == 0
 
 
-def test_age_update(personal):
-    result = personal.age() - personal._store['age']
+def test_age_update(_personal):
+    result = _personal.age() - _personal._store['age']
     assert result == 0
 
 
-def test_child_count(personal):
-    result = personal.child_count(max_childs=10)
+def test_child_count(_personal):
+    result = _personal.child_count(max_childs=10)
     assert result <= 10
 
 
-def test_work_experience(personal):
-    result = personal.work_experience(
-        working_start_age=0) - personal._store['age']
+def test_work_experience(_personal):
+    result = _personal.work_experience(
+        working_start_age=0) - _personal._store['age']
     assert result == 0
 
 
-def test_work_experience_store(personal):
-    result = personal.work_experience() - personal.work_experience()
+def test_work_experience_store(_personal):
+    result = _personal.work_experience() - _personal.work_experience()
     assert result == 0
 
 
-def test_work_experience_extreme(personal):
-    result = personal.work_experience(working_start_age=100000)
+def test_work_experience_extreme(_personal):
+    result = _personal.work_experience(working_start_age=100000)
     assert result == 0
 
 
-def test_paypal(personal):
-    result = personal.paypal()
+def test_paypal(_personal):
+    result = _personal.paypal()
     assert result is not None
 
 
-def test_password(personal):
-    plain = personal.password(length=15)
-    assert len(plain) == 15
+@pytest.mark.parametrize(
+    'algorithm, length', [
+        ('md5', 32),
+        ('sha1', 40),
+        ('sha256', 64),
+        ('sha512', 128),
+    ],
+)
+def test_password(_personal, algorithm, length):
+    result = _personal.password(length=15)
+    assert len(result) == 15
 
-    md5 = personal.password(algorithm='md5')
-    assert len(md5) == 32
-
-    sha1 = personal.password(algorithm='sha1')
-    assert len(sha1) == 40
-
-    sha256 = personal.password(algorithm='sha256')
-    assert len(sha256) == 64
-
-    sha512 = personal.password(algorithm='sha512')
-    assert len(sha512) == 128
+    result = _personal.password(algorithm=algorithm)
+    assert len(result) == length
 
     with pytest.raises(UnsupportedAlgorithm):
-        personal.password(algorithm='sha42')
+        _personal.password(algorithm='sha42')
 
 
-def test_username(personal):
-    result = personal.username()
-    assert re.match(p.USERNAME_REGEX, result)
+@pytest.mark.parametrize(
+    'template', [
+        'U-d', 'U.d',
+        'U_d', 'Ud',
+        'l-d', 'l.d',
+        'l_d', 'ld',
+
+        # Default is ld
+        'default',
+    ],
+)
+def test_username(_personal, template):
+    result = _personal.username(template=template)
+    assert re.match(USERNAME_REGEX, result)
 
     with pytest.raises(WrongArgument):
-        personal.username(gender='nil')
+        _personal.username(template=':D')
 
 
-def test_email(personal):
-    result = personal.email()
-    assert re.match(p.EMAIL_REGEX, result)
+def test_email(_personal):
+    result = _personal.email()
+    assert re.match(EMAIL_REGEX, result)
 
     domains = ['@example.com']
-    result = personal.email(domains=domains)
-    assert re.match(p.EMAIL_REGEX, result)
+    result = _personal.email(domains=domains)
+    assert re.match(EMAIL_REGEX, result)
     assert result.split('@')[1] == 'example.com'
 
 
-def test_bitcoin(personal):
-    result = personal.bitcoin()
+def test_bitcoin(_personal):
+    result = _personal.bitcoin()
     assert len(result) == 34
 
 
-def test_cvv(personal):
-    result = personal.cvv()
+def test_cvv(_personal):
+    result = _personal.cvv()
     assert 100 <= result
     assert result <= 999
 
 
-def test_credit_card_number(personal):
-    result = personal.credit_card_number()
-    assert re.match(p.CREDIT_CARD_REGEX, result)
+@pytest.mark.parametrize(
+    'card_type', [
+        # Visa
+        'visa', 'vi', 'v',
 
-    result_mc = personal.credit_card_number(card_type='master_card')
-    assert re.match(p.CREDIT_CARD_REGEX, result_mc)
+        # MasterCard
+        'master_card', 'master', 'mc', 'm',
 
-    result_ax = personal.credit_card_number(card_type='amex')
-    assert re.match(p.CREDIT_CARD_REGEX, result_ax)
+        # American Express
+        'american_express', 'amex', 'ax', 'a',
+    ],
+)
+def test_credit_card_number(_personal, card_type):
+    result = _personal.credit_card_number(card_type=card_type)
+    assert re.match(CREDIT_CARD_REGEX, result)
 
     with pytest.raises(NotImplementedError):
-        personal.credit_card_number(card_type='discover')
+        _personal.credit_card_number(card_type='discover')
 
 
-def test_expiration_date(personal):
-    result = personal.credit_card_expiration_date(
+def test_expiration_date(_personal):
+    result = _personal.credit_card_expiration_date(
         minimum=16, maximum=25)
 
     year = result.split('/')[1]
@@ -128,26 +166,26 @@ def test_expiration_date(personal):
     assert int(year) <= 25
 
 
-def test_cid(personal):
-    result = personal.cid()
+def test_cid(_personal):
+    result = _personal.cid()
     assert 1000 <= result
     assert result <= 9999
 
 
-def test_height(personal):
-    result = personal.height(minimum=1.60, maximum=1.90)
+def test_height(_personal):
+    result = _personal.height(minimum=1.60, maximum=1.90)
     assert result.startswith('1')
     assert isinstance(result, str)
 
 
-def test_weight(personal):
-    result = personal.weight(minimum=40, maximum=60)
+def test_weight(_personal):
+    result = _personal.weight(minimum=40, maximum=60)
     assert result >= 40
     assert result <= 60
 
 
-def test_blood_type(personal):
-    result = personal.blood_type()
+def test_blood_type(_personal):
+    result = _personal.blood_type()
     assert result in BLOOD_GROUPS
 
 
@@ -156,170 +194,211 @@ def test_favorite_movie(personal):
     assert result in personal.data['favorite_movie']
 
 
-def test_favorite_music_genre(personal):
-    result = personal.favorite_music_genre()
+def test_favorite_music_genre(_personal):
+    result = _personal.favorite_music_genre()
     assert result in FAVORITE_MUSIC_GENRE
 
 
-def test_social_media_profile(personal):
-    result = personal.social_media_profile(gender='female')
+def test_social_media_profile(_personal):
+    result = _personal.social_media_profile()
     assert result is not None
 
-    _result = personal.social_media_profile(gender='male')
-    assert _result is not None
 
-
-def test_avatar(personal):
-    result = personal.avatar(size=512)
+def test_avatar(_personal):
+    result = _personal.avatar(size=512)
     img, size, *__ = result.split('/')[::-1]
     assert int(size) == 512
     assert 32 == len(img.split('.')[0])
 
 
-def test_identifier(personal):
-    result = personal.identifier()
+def test_identifier(_personal):
+    result = _personal.identifier()
     mask = '##-##/##'
     assert len(mask) == len(result)
 
-    result = personal.identifier(mask='##-##/## @@')
+    result = _personal.identifier(mask='##-##/## @@')
     suffix = result.split(' ')[1]
     assert suffix.isalpha()
 
 
-def test_level_of_english(personal):
-    result = personal.level_of_english()
+def test_level_of_english(_personal):
+    result = _personal.level_of_english()
     assert result in ENGLISH_LEVEL
 
 
-def test_name(generic):
-    result = generic.personal.name(gender='female')
-    assert result in generic.personal.data['names']['female']
+@pytest.mark.parametrize(
+    'gender', [
+        '1',
+        '2',
+        'm',
+        'f',
+        'male',
+        'female',
+    ],
+)
+def test_name(personal, gender):
+    result = personal.name(gender=gender)
+    checked_gender = check_gender(gender)
+    assert result in personal.data['names'][checked_gender]
 
-    result = generic.personal.name(gender='male')
-    assert result in generic.personal.data['names']['male']
 
-    with pytest.raises(WrongArgument):
-        generic.personal.name(gender='other')
+def test_name_unexpected_gender(personal):
+    with pytest.raises(UnexpectedGender):
+        personal.name(gender='other')
 
 
-def test_telephone(generic):
-    result = generic.personal.telephone()
+def test_telephone(personal):
+    result = personal.telephone()
     assert result is not None
 
     mask = '+5 (###)-###-##-##'
-    result2 = generic.personal.telephone(mask=mask)
-    head = result2.split(' ')[0]
+    result = personal.telephone(mask=mask)
+    head = result.split(' ')[0]
     assert head == '+5'
 
 
-def test_surname(generic):
-    diff_surnames = ('ru', 'is', 'uk')
-    if generic.personal.locale in diff_surnames:
+@pytest.mark.parametrize(
+    'gender', [
+        '1',
+        '2',
+        'm',
+        'f',
+        'male',
+        'female',
+    ],
+)
+def test_surname(personal, gender):
+    if personal.locale in settings.SURNAMES_SEPARATED_BY_GENDER:
 
-        result = generic.personal.surname(gender='female')
-        assert result in generic.personal.data['surnames']['female']
-
-        result = generic.personal.surname(gender='male')
-        assert result in generic.personal.data['surnames']['male']
-
-        with pytest.raises(WrongArgument):
-            generic.personal.surname(gender='other')
+        result = personal.surname(gender=gender)
+        checked_gender = check_gender(gender)
+        assert result in personal.data['surnames'][checked_gender]
     else:
-        result = generic.personal.surname()
-        assert result in generic.personal.data['surnames']
+        result = personal.surname()
+        assert result in personal.data['surnames']
 
 
-def test_full_name(generic):
-    result = generic.personal.full_name(gender='female')
-    _result = result.split(' ')
-    assert isinstance(_result, list)
-    assert _result is not None
+@pytest.mark.parametrize(
+    'gender', [
+        '1',
+        '2',
+        'm',
+        'f',
+        'male',
+        'female',
+    ],
+)
+def test_full_name(personal, gender):
+    result = personal.full_name(gender=gender)
 
-    result = generic.personal.full_name(reverse=True)
+    result = result.split(' ')
+    assert result[0] is not None
+    assert result[1] is not None
+
+    result = personal.full_name(reverse=True)
     assert result is not None
 
 
-def test_gender(generic):
-    result = generic.personal.gender()
-    assert result in generic.personal.data['gender']
+def test_gender(personal):
+    result = personal.gender()
+    assert result in personal.data['gender']
 
-    symbol = generic.personal.gender(symbol=True)
-    assert symbol in GENDER_SYMBOLS
+    result = personal.gender(symbol=True)
+    assert result in GENDER_SYMBOLS
 
     # The four codes specified in ISO/IEC 5218 are:
     # 0 = not known, 1 = male, 2 = female, 9 = not applicable.
     codes = [0, 1, 2, 9]
-    iso5218 = generic.personal.gender(iso5218=True)
+    iso5218 = personal.gender(iso5218=True)
     assert iso5218 in codes
 
 
-def test_sexual_orientation(generic):
-    result = generic.personal.sexual_orientation()
-    assert result in generic.personal.data['sexuality']
+def test_sexual_orientation(personal):
+    result = personal.sexual_orientation()
+    assert result in personal.data['sexuality']
 
-    symbol = generic.personal.sexual_orientation(symbol=True)
+    symbol = personal.sexual_orientation(symbol=True)
     assert symbol in SEXUALITY_SYMBOLS
 
 
-def test_profession(generic):
-    result = generic.personal.occupation()
-    assert result in generic.personal.data['occupation']
+def test_profession(personal):
+    result = personal.occupation()
+    assert result in personal.data['occupation']
 
 
-def test_university(generic):
-    result = generic.personal.university()
-    assert result in generic.personal.data['university']
+def test_university(personal):
+    result = personal.university()
+    assert result in personal.data['university']
 
 
-def test_academic_degree(generic):
-    result = generic.personal.academic_degree()
-    assert result in generic.personal.data['academic_degree']
+def test_academic_degree(personal):
+    result = personal.academic_degree()
+    assert result in personal.data['academic_degree']
 
 
-def test_language(generic):
-    result = generic.personal.language()
-    assert result in generic.personal.data['language']
+def test_language(personal):
+    result = personal.language()
+    assert result in personal.data['language']
 
 
-def test_worldview(generic):
-    result = generic.personal.worldview()
-    assert result in generic.personal.data['worldview']
+def test_worldview(personal):
+    result = personal.worldview()
+    assert result in personal.data['worldview']
 
 
-def test_views_on(generic):
-    result = generic.personal.views_on()
-    assert result in generic.personal.data['views_on']
+def test_views_on(personal):
+    result = personal.views_on()
+    assert result in personal.data['views_on']
 
 
-def test_political_views(generic):
-    result = generic.personal.political_views()
-    assert result in generic.personal.data['political_views']
+def test_political_views(personal):
+    result = personal.political_views()
+    assert result in personal.data['political_views']
 
 
-def test_title(generic):
-    result = generic.personal.title(title_type='typical')
+@pytest.mark.parametrize(
+    'gender', [
+        '1',
+        '2',
+        'm',
+        'f',
+        'male',
+        'female',
+    ],
+)
+@pytest.mark.parametrize(
+    'title_type', [
+        'academic',
+        'typical',
+    ],
+)
+def test_title(personal, gender, title_type):
+    result = personal.title(title_type=title_type)
+    assert result is not None
     assert isinstance(result, str)
 
-    result2 = generic.personal.title(title_type='academic')
-    assert isinstance(result2, str)
-
-    result_fem = generic.personal.title(gender='female')
-    assert result_fem is not None
-
-    result_fem = generic.personal.title(gender='male')
-    assert result_fem is not None
+    result = personal.title(gender=gender)
+    assert result is not None
 
     with pytest.raises(WrongArgument):
-        generic.personal.title(gender='other', title_type='religious')
+        personal.title(gender='other', title_type='religious')
 
 
-def test_nationality(generic):
-    if generic.personal.locale in ['ru', 'uk']:
-        result = generic.personal.nationality(gender='female')
-        assert result in generic.personal.data['nationality']['female']
+@pytest.mark.parametrize(
+    'gender', [
+        '1',
+        '2',
+        'm',
+        'f',
+        'male',
+        'female',
+    ],
+)
+def test_nationality(personal, gender):
+    if personal.locale in ['ru', 'uk', 'kk']:
+        result = personal.nationality(gender=gender)
+        checked_gender = check_gender(gender)
+        assert result in personal.data['nationality'][checked_gender]
 
-        result = generic.personal.nationality(gender='male')
-        assert result in generic.personal.data['nationality']['male']
-
-    result = generic.personal.nationality()
+    result = personal.nationality()
     assert result is not None

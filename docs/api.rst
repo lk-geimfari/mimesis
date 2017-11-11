@@ -4,12 +4,79 @@ API Reference
 
 This part of the documentation covers all the interfaces of *Mimesis*.
 
-Generic
-=======
 
-.. autoclass:: mimesis.Generic
+Builtins
+========
+
+BrazilSpecProvider
+------------------
+
+.. autoclass:: mimesis.builtins.BrazilSpecProvider
    :members:
    :special-members: __init__
+
+JapanSpecProvider
+-----------------
+
+.. autoclass:: mimesis.builtins.JapanSpecProvider
+   :members:
+   :special-members: __init__
+
+RussiaSpecProvider
+------------------
+
+.. autoclass:: mimesis.builtins.RussiaSpecProvider
+   :members:
+   :special-members: __init__
+
+USASpecProvider
+---------------
+
+.. autoclass:: mimesis.builtins.USASpecProvider
+   :members:
+   :special-members: __init__
+
+
+Decorators
+==========
+
+.. automodule:: mimesis.decorators
+   :members:
+
+
+Exceptions
+==========
+
+JSONKeyError
+------------
+
+.. autoclass:: mimesis.exceptions.JSONKeyError
+   :members:
+
+UnsupportedAlgorithm
+--------------------
+
+.. autoclass:: mimesis.exceptions.UnsupportedAlgorithm
+   :members:
+
+UnsupportedLocale
+-----------------
+
+.. autoclass:: mimesis.exceptions.UnsupportedLocale
+   :members:
+
+UndefinedSchema
+---------------
+
+.. autoclass:: mimesis.exceptions.UndefinedSchema
+   :members:
+
+WrongArgument
+-------------
+
+.. autoclass:: mimesis.exceptions.WrongArgument
+   :members:
+
 
 Providers
 =========
@@ -18,6 +85,13 @@ Address
 -------
 
 .. autoclass:: mimesis.Address
+   :members:
+   :special-members: __init__
+
+BaseProvider
+------------
+
+.. autoclass:: mimesis.providers.BaseProvider
    :members:
    :special-members: __init__
 
@@ -42,6 +116,14 @@ Code
    :members:
    :special-members: __init__
 
+Cryptographic
+-------------
+
+.. autoclass:: mimesis.Cryptographic
+   :members:
+   :special-members: __init__
+
+
 Datetime
 --------
 
@@ -65,8 +147,21 @@ File
 
 Food
 ----
-
 .. autoclass:: mimesis.Food
+   :members:
+   :special-members: __init__
+
+Games
+-----
+
+.. autoclass:: mimesis.Games
+   :members:
+   :special-members: __init__
+
+Generic
+-------
+
+.. autoclass:: mimesis.Generic
    :members:
    :special-members: __init__
 
@@ -84,13 +179,6 @@ Internet
    :members:
    :special-members: __init__
 
-Network
--------
-
-.. autoclass:: mimesis.Network
-   :members:
-   :special-members: __init__
-
 Numbers
 -------
 
@@ -99,7 +187,7 @@ Numbers
    :special-members: __init__
 
 Path
---------
+----
 
 .. autoclass:: mimesis.Path
    :members:
@@ -120,7 +208,7 @@ Science
    :special-members: __init__
 
 Structured
--------
+----------
 
 .. autoclass:: mimesis.Structured
    :members:
@@ -140,8 +228,19 @@ Transport
    :members:
    :special-members: __init__
 
-Exceptions
-==========
+UnitSystem
+----------
 
-.. automodule:: mimesis.exceptions
+.. autoclass:: mimesis.UnitSystem
+   :members:
+   :special-members: __init__
+
+
+Schema
+=======
+
+Schema
+------
+
+.. autoclass:: mimesis.schema.Schema
    :members:

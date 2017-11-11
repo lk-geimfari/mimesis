@@ -1,6 +1,6 @@
-===========
+==========================================
 Generating mock data using Mimesis: Part I
-===========
+==========================================
 
 The ability to generate mock but valid data comes in handy in app
 development, where you need to work with databases. Filling in the
@@ -15,12 +15,12 @@ general.
 
 **Mimesis** is a Python library, which helps generate mock data
 for various purposes. The library was written with the use of tools from
-the standard Python library, and therefore, it doesn’t have any side
-dependencies. Currently the library supports 32 languages and 19 class
+the standard Python library, and therefore, it does not have any side
+dependencies. Currently the library supports over 33 languages and over 23 class
 providers, supplying various data.
 
 Generating data
---------
+---------------
 
 Initially, we planned on showing data generation using the example of a
 small web-application Flask, but we decided against it because not
@@ -84,13 +84,13 @@ and the model in question are available.
     <SQLAlchemy engine='sqlite:///db.sqlite'>
 
     >>> Patient
-
     <class 'app.models.Patient'>
 
-    >>> Patient()._bootstrap(count=40000, locale='en') # generate 40к entries in English.
+    >>> # Generate 40к entries in English.
+    >>> Patient()._bootstrap(count=40000, locale='en')
 
 Introduction
---------
+------------
 
 It is worth noting that we will be showing the basic capabilities of the
 library and we will be using a few most common class providers, since
@@ -100,7 +100,7 @@ listed in the end of the article and find out more. The library is
 pretty simple. All you need to do to start working with the data is to
 create a class provider. The most common type of data in apps are
 personal users’ data, such as name, last name, credit card info, etc.
-There is a special class provider for this type of data — Personal(),
+There is a special class provider for this type of data — ``Personal()``,
 which takes the code from the language standard in the form of a line as
 shown below:
 
@@ -117,7 +117,7 @@ shown below:
 
 Almost every web-application requires e-mail for registration.
 Naturally, the library supports the ability to generate e-mails with the
-help of email() method Personal() class, as below:
+help of ``email()`` method ``Personal()`` class, as below:
 
 .. code:: python
 
@@ -129,7 +129,7 @@ help of email() method Personal() class, as below:
 
 There is a little problem with the method above, which may cause the
 code to be slightly “dirty” in case the app uses more than one type of
-class providers. In such situation you should use object Generic(),
+class providers. In such situation you should use object ``Generic()``,
 which grants access to all providers from one single object:
 
 .. code:: python
@@ -170,18 +170,19 @@ holders:
     {'exp_date': '11/19', 'owner': 'Melany Martinez', 'card_number': '4980 9423 5464 1201'}
     {'exp_date': '01/19', 'owner': 'Cleora Mcfarland', 'card_number': '4085 8037 5801 9703'}
 
-As mentioned above, the library supports more than 19 class providers
+As mentioned above, the library supports over 22 class providers
 with data for all possible situations (if not, your PR with corrections
 of such an awful injustice are more than welcome). For example, if you
 are working on an app dedicated to transportation and logistics and you
 need to generate transportation models, you can easily do this by using
-Transport() class provider, which contains data related to
+``Transport()`` class provider, which contains data related to
 transportation:
 
 .. code:: python
 
     >>> from mimesis import Transport
     >>> trans = Transport()
+
     >>> for _ in range(0, 5):
     ...     trans.truck()
     ...
@@ -208,14 +209,15 @@ Or you could indicate the transport mask model:
 Quite often when testing web-applications (blog would be an excellent
 example) you need to generate text data (text, sentences, tags, etc.).
 Manually inputting the text is long and boring, and Mimesis allows you
-to avoid this thanks to a class provider Text():
+to avoid this thanks to a class provider ``Text()``:
 
 .. code:: python
 
     >>> from mimesis import Text
     >>> text = Text('en')
-    >>> text.text(quantity=3)
-    'Language includes means for creating light parallel processes  and their interactions via exchanging asynchronous messages according to the actors’ model. Python supports several programming paradigms, including structural, object-oriented, functional, imperative and aspect-oriented. For instance, some functions that use comparison of examples to choose one calculating option or extracting data points looks similar to an equation.'
+
+    >>> text.text(quantity=1)
+    'Python is a programming language that lets you work quickly and integrate systems more effectively'
 
 You can get a list of random words:
 
@@ -231,6 +233,7 @@ Generate a street name:
 
     >>> from mimesis import Address
     >>> address = Address('en')
+
     >>> address.address()
     '77 Shephard Trace'
 
@@ -248,16 +251,20 @@ moment only Russian and Ukrainian are supported):
 .. code:: python
 
     >>> from mimesis.decorators import romanized
+
     >>> @romanized('ru')
     ... def name_ru():
     ...     return 'Вероника Денисова'
     ...
+
     >>> @romanized('uk')
     >>> def name_uk():
     ...     return 'Емілія Акуленко'
     ...
+
     >>> name_ru()
     'Veronika Denisova'
+
     >>> name_uk()
     'Emіlіja Akulenko'
 

@@ -1,7 +1,7 @@
-from mimesis.data import SI_PREFIXES
+from mimesis.data import SI_PREFIXES, SI_PREFIXES_SYM
 from mimesis.exceptions import WrongArgument
 
-from .base import BaseProvider
+from mimesis.providers.base import BaseProvider
 
 
 class UnitSystem(BaseProvider):
@@ -9,11 +9,12 @@ class UnitSystem(BaseProvider):
     """
 
     @staticmethod
-    def mass(symbol=False):
+    def mass(symbol: bool = False) -> str:
         """Get a mass unit name.
 
-        :param symbol: Symbol of unit.
+        :param bool symbol: Symbol of unit.
         :return: Mass unit name.
+
         :Example:
             gr
         """
@@ -22,17 +23,18 @@ class UnitSystem(BaseProvider):
         return 'gr'
 
     @staticmethod
-    def information(symbol=False):
+    def information(symbol: bool = False) -> str:
         if not symbol:
             return 'byte'
         return 'b'
 
     @staticmethod
-    def thermodynamic_temperature(symbol=False):
+    def thermodynamic_temperature(symbol: bool = False) -> str:
         """Get the thermodynamic temperature unit name.
 
-        :param symbol: Symbol of unit.
+        :param bool symbol: Symbol of unit.
         :return: Thermodynamic temperature unit name
+
         :Example:
             K
         """
@@ -41,11 +43,12 @@ class UnitSystem(BaseProvider):
         return 'K'
 
     @staticmethod
-    def amount_of_substance(symbol=False):
+    def amount_of_substance(symbol: bool = False) -> str:
         """Get unit name of amount of substance.
 
-        :param symbol: Symbol of unit.
+        :param bool symbol: Symbol of unit.
         :return: Unit name of amount of substance.
+
         :Example:
             mol
         """
@@ -54,11 +57,12 @@ class UnitSystem(BaseProvider):
         return 'mol'
 
     @staticmethod
-    def angle(symbol=False):
+    def angle(symbol: bool = False) -> str:
         """Get unit name of angle.
 
-        :param symbol: Symbol of unit.
+        :param bool symbol: Symbol of unit.
         :return: Unit name of angle.
+
         :Example:
             radian
         """
@@ -67,11 +71,12 @@ class UnitSystem(BaseProvider):
         return 'r'
 
     @staticmethod
-    def solid_angle(symbol=False):
+    def solid_angle(symbol: bool = False) -> str:
         """Get unit name if solid angle
 
-        :param symbol: Symbol of unit.
+        :param bool symbol: Symbol of unit.
         :return: Unit name of solid angle
+
         :Example:
             ㏛
         """
@@ -80,11 +85,12 @@ class UnitSystem(BaseProvider):
         return '㏛'
 
     @staticmethod
-    def frequency(symbol=False):
+    def frequency(symbol: bool = False) -> str:
         """Get unit name of frequency.
 
-        :param symbol: Symbol of unit.
+        :param bool symbol: Symbol of unit.
         :return: Unit name if frequency.
+
         :Example:
             Hz
         """
@@ -93,11 +99,12 @@ class UnitSystem(BaseProvider):
         return 'Hz'
 
     @staticmethod
-    def force(symbol=False):
+    def force(symbol: bool = False) -> str:
         """Get unit name of fore.
 
-        :param symbol:  Symbol of unit.
+        :param bool symbol:  Symbol of unit.
         :return:  Unit name of force.
+
         :Example:
             N
         """
@@ -106,11 +113,12 @@ class UnitSystem(BaseProvider):
         return 'N'
 
     @staticmethod
-    def pressure(symbol=False):
+    def pressure(symbol: bool = False) -> str:
         """Get unit name of pressure.
 
-        :param symbol: Symbol of unit.
+        :param bool symbol: Symbol of unit.
         :return: Unit name of pressure.
+
         :Example:
             pascal
         """
@@ -119,11 +127,12 @@ class UnitSystem(BaseProvider):
         return 'P'
 
     @staticmethod
-    def energy(symbol=False):
+    def energy(symbol: bool = False) -> str:
         """Get unit name of energy.
 
-        :param symbol: Symbol of unit.
+        :param bool symbol: Symbol of unit.
         :return: Unit name of energy.
+
         :Example:
             J
         """
@@ -132,11 +141,12 @@ class UnitSystem(BaseProvider):
         return 'J'
 
     @staticmethod
-    def power(symbol=False):
+    def power(symbol: bool = False) -> str:
         """Get unit name of power.
 
-        :param symbol: Symbol of unit.
+        :param bool symbol: Symbol of unit.
         :return: Unit name of power.
+
         :Example:
             watt
         """
@@ -144,15 +154,16 @@ class UnitSystem(BaseProvider):
             return 'watt'
         return 'W'
 
-    def flux(self, symbol=True):
+    def flux(self, symbol: bool = True) -> str:
         return self.power(symbol)
 
     @staticmethod
-    def electric_charge(symbol=False):
+    def electric_charge(symbol: bool = False) -> str:
         """Get unit name of electric charge.
 
-        :param symbol: Symbol of unit.
+        :param bool symbol: Symbol of unit.
         :return: Unit name of electric charge.
+
         :Example:
             coulomb
         """
@@ -161,11 +172,12 @@ class UnitSystem(BaseProvider):
         return 'C'
 
     @staticmethod
-    def voltage(symbol=False):
+    def voltage(symbol: bool = False) -> str:
         """Get unit name of voltage.
 
-        :param symbol: Symbol of unit.
+        :param bool symbol: Symbol of unit.
         :return: Unit name of voltage.
+
         :Example:
             volt
         """
@@ -174,11 +186,12 @@ class UnitSystem(BaseProvider):
         return 'V'
 
     @staticmethod
-    def electric_capacitance(symbol=False):
+    def electric_capacitance(symbol: bool = False) -> str:
         """Get unit name of electric capacitance.
 
-        :param symbol: Symbol of unit.
+        :param bool symbol: Symbol of unit.
         :return: Unit name of electric capacitance.
+
         :Example:
             F
         """
@@ -187,11 +200,12 @@ class UnitSystem(BaseProvider):
         return 'F'
 
     @staticmethod
-    def electric_resistance(symbol=False):
+    def electric_resistance(symbol: bool = False) -> str:
         """Get name of electric resistance.
 
-        :param symbol: Symbol of unit.
+        :param bool symbol: Symbol of unit.
         :return: Name of electric resistance.
+
         :Example:
             Ω
         """
@@ -199,18 +213,19 @@ class UnitSystem(BaseProvider):
             return 'ohm'
         return 'Ω'
 
-    def impedance(self, symbol=False):
+    def impedance(self, symbol: bool = False) -> str:
         return self.electric_resistance(symbol)
 
-    def reactance(self, symbol=False):
+    def reactance(self, symbol: bool = False) -> str:
         return self.electric_resistance(symbol)
 
     @staticmethod
-    def electrical_conductance(symbol=False):
+    def electrical_conductance(symbol: bool = False) -> str:
         """Get unit name of electrical conductance.
 
-        :param symbol: Symbol of unit.
+        :param bool symbol: Symbol of unit.
         :return: Unit name of electrical conductance.
+
         :Example:
             siemens
         """
@@ -219,11 +234,12 @@ class UnitSystem(BaseProvider):
         return 'S'
 
     @staticmethod
-    def magnetic_flux(symbol=False):
+    def magnetic_flux(symbol: bool = False) -> str:
         """Get unit name of magnetic flux.
 
-        :param symbol: Symbol of unit.
+        :param bool symbol: Symbol of unit.
         :return: Unit name of magnetic flux.
+
         :Example:
             Wb
         """
@@ -232,11 +248,12 @@ class UnitSystem(BaseProvider):
         return 'Wb'
 
     @staticmethod
-    def magnetic_flux_density(symbol=False):
+    def magnetic_flux_density(symbol: bool = False) -> str:
         """Get unit name of magnetic flux density.
 
-        :param symbol: Symbol of unit.
+        :param bool symbol: Symbol of unit.
         :return: Unit name of magnetic flux density.
+
         :Example:
             tesla
         """
@@ -245,11 +262,12 @@ class UnitSystem(BaseProvider):
         return 'T'
 
     @staticmethod
-    def inductance(symbol=False):
+    def inductance(symbol: bool = False) -> str:
         """Get unit name of inductance.
 
-        :param symbol: Symbol of unit.
+        :param bool symbol: Symbol of unit.
         :return: Unit name of inductance.
+
         :Example:
             H
         """
@@ -258,22 +276,24 @@ class UnitSystem(BaseProvider):
         return 'H'
 
     @staticmethod
-    def temperature(symbol=False):
+    def temperature(symbol: bool = False) -> str:
         """Get unit name of temperature.
 
-        :param symbol:
-        :return:
+        :param bool symbol: Symbol of unit.
+        :return: Unit of temperature.
+
         """
         if not symbol:
             return 'Celsius'
         return '°C'
 
     @staticmethod
-    def radioactivity(symbol=False):
+    def radioactivity(symbol: bool = False) -> str:
         """Get unit name of radioactivity.
 
-        :param symbol: Symbol of unit.
+        :param bool symbol: Symbol of unit.
         :return: Unit name of radioactivity.
+
         :Example:
             Bq
         """
@@ -281,25 +301,25 @@ class UnitSystem(BaseProvider):
             return 'becquerel'
         return 'Bq'
 
-    def prefix(self, sign='positive', symbol=False):
+    def prefix(self, sign: str = 'positive', symbol: bool = False) -> str:
         """Get a random prefix for the International System of Units (SI)
 
         :param sign: Sing of number (positive, negative)
-        :param symbol: Return symbol of prefix.
+        :param bool symbol: Return symbol of prefix.
         :return: Prefix for SI.
-        :rtype: str
+        :raises WrongArgument: if sign is not supported.
+
         :Example:
             mega
         """
         sign = sign.lower()
 
-        if symbol:
-            prefixes = SI_PREFIXES['_sym_']
-        else:
-            prefixes = SI_PREFIXES
+        prefixes = SI_PREFIXES_SYM if \
+            symbol else SI_PREFIXES
 
         try:
-            return self.random.choice(prefixes[sign])
+            prefixes = self.random.choice(prefixes[sign])  # type: ignore
+            return prefixes  # type: ignore
         except KeyError:
             raise WrongArgument(
                 "Unsupported sign. Use: 'positive' or 'negative'")
