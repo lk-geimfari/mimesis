@@ -271,6 +271,14 @@ Just run shell mode and do following:
 >>> Patient().populate(count=1000, locale='en')
 ```
 
+
+## Integration with `py.test` and `factory_boy`
+We have created libraries which can help you easily use Mimesis with `factory_boy` and `py.test`.
+
+- [mimesis-factory](https://github.com/mimesis-lab/mimesis-factory) - Integration with factory_boy.
+- [pytest-mimesis](https://github.com/mimesis-lab/pytest-mimesis) -  Integration with the `py.test`.
+
+
 ## Generate data by schema
 Mimesis support generating data by schema:
 
