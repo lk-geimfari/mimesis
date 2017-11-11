@@ -335,9 +335,5 @@ Result:
 
 .. note:: ``Schema()`` is an experimental feature. Be careful when using it.
 
-Which type of data do you usually need in your work? What is the library
-missing? We will be very happy to hear your suggestions and comments.
-
-
 .. |Mimesis| image:: https://user-images.githubusercontent.com/15812620/29830988-701236f8-8cec-11e7-9b81-1f0082972069.png
    :target: https://github.com/lk-geimfari/mimesis
