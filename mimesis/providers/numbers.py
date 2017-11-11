@@ -4,6 +4,9 @@ from mimesis.providers.base import BaseProvider
 from mimesis.typing import Array, Number
 
 
+initial_primes = [2]
+
+
 class Numbers(BaseProvider):
     """Class for generating numbers"""
 
@@ -34,24 +37,40 @@ class Numbers(BaseProvider):
         return nums.tolist() if to_list else nums
 
     @staticmethod
-    def primes(start: int = 1, end: int = 999,
-               to_list: bool = False) -> Array:
-        """Generate an array of prime numbers of 10 ** n.
-
-        +------------+-----------------+--------------+--------------------+
-        | Type Code | C Type           | Storage size | Value range        |
-        +===========+==================+==============+====================+
-        | 'L'       | unsigned integer | 4 byte       | 0 to 4,294,967,295 |
-        +-----------+------------------+--------------+--------------------+
+    def primes(start: int = 1, end: int = 999) -> list:
+        """Generate a list of prime numbers from start to end.
 
         :param int start: First value of range.
         :param int end: Last value of range.
-        :param bool to_list: Convert array to list.
-        :return: An array of floating-point numbers.
-        :rtype: Array
+
+        :return: A list of prime numbers from start to end.
+        :rtype: list
         """
-        nums = array.array('L', (i for i in range(start, end) if i % 2))
-        return nums.tolist() if to_list else nums
+        global initial_primes
+
+        # if request is inside initial_primes return a subset of it.
+        if (end <= initial_primes[-1]):
+            return [p for p in initial_primes if start <= p <= end]
+
+        # remove case when start == 1
+        if (start < 2):
+            start = 2
+
+        # create a sieve and remove all non-primes from it
+        sieve = [True] * (end - start)
+        for p in Numbers.primes(1, int(end**0.5) + 1):
+            s = max(p**2, start + (p - start % p) % p)
+            for i in range(s - start, end - start, p):
+                sieve[i] = False
+
+        # create a list of primes from the sieve
+        primes_list = [i + start for i, x in enumerate(sieve) if x]
+
+        # update the list of initial primes when bigger one is available
+        if (start <= 2 and primes_list > initial_primes):
+            initial_primes = primes_list
+
+        return [p for p in primes_list if start <= p <= end]
 
     def digit(self, to_bin: bool = False) -> Number:
         """Get a random digit.
