@@ -14,11 +14,11 @@ def test_floats(numbers):
 
 def test_primes(numbers):
     result = numbers.primes()
-    assert len(result) == 499
-    assert isinstance(result, array.array)
+    assert len(result) == 168
+    assert isinstance(result, list)
 
-    result = numbers.primes(to_list=True)
-    assert len(result) == 499
+    result = numbers.primes(500, 500000)
+    assert len(result) == 41443
     assert isinstance(result, list)
 
 

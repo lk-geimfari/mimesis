@@ -34,24 +34,35 @@ class Numbers(BaseProvider):
         return nums.tolist() if to_list else nums
 
     @staticmethod
-    def primes(start: int = 1, end: int = 999,
-               to_list: bool = False) -> Array:
-        """Generate an array of prime numbers of 10 ** n.
-
-        +------------+-----------------+--------------+--------------------+
-        | Type Code | C Type           | Storage size | Value range        |
-        +===========+==================+==============+====================+
-        | 'L'       | unsigned integer | 4 byte       | 0 to 4,294,967,295 |
-        +-----------+------------------+--------------+--------------------+
+    def primes(start: int = 1, end: int = 999) -> list:
+        """Generate a list of prime numbers from start to end.
 
         :param int start: First value of range.
         :param int end: Last value of range.
-        :param bool to_list: Convert array to list.
-        :return: An array of floating-point numbers.
-        :rtype: Array
+
+        :return: A list of prime numbers from start to end.
+        :rtype: list
         """
-        nums = array.array('L', (i for i in range(start, end) if i % 2))
-        return nums.tolist() if to_list else nums
+        sieve_size = (end // 2 - 1) if end % 2 == 0 else (end // 2)
+        sieve = [True] * sieve_size
+
+        primes = []     # list of primes
+        # add 2 to the list if it's in the given range
+        if end >= 2:
+            primes.append(2)
+        for i in range(sieve_size):
+            if sieve[i]:
+                value_at_i = i * 2 + 3
+                primes.append(value_at_i)
+                for j in range(i, sieve_size, value_at_i):
+                    sieve[j] = False
+
+        chop_index = 0
+        for i in range(len(primes)):
+            if primes[i] >= start:
+                chop_index = i
+                break
+        return primes[chop_index:]
 
     def digit(self, to_bin: bool = False) -> Number:
         """Get a random digit.
