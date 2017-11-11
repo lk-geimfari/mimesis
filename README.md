@@ -272,7 +272,7 @@ Just run shell mode and do following:
 ```
 
 
-## Integration with `py.test` and `factory_boy`
+## Integration with py.test and factory_boy
 We have created libraries which can help you easily use Mimesis with `factory_boy` and `py.test`.
 
 - [mimesis-factory](https://github.com/mimesis-lab/mimesis-factory) - Integration with factory_boy.
