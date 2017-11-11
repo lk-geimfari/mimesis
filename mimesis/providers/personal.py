@@ -104,6 +104,9 @@ class Personal(BaseProvider):
 
         return self.random.choice(surnames)
 
+    def last_name(self, gender: Gender = 0) -> str:
+        return self.surname(gender)
+
     def title(self, gender: Gender = 0,
               title_type: str = 'typical') -> str:
         """Get a random title (prefix/suffix) for name.
