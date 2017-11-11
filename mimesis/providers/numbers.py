@@ -4,9 +4,6 @@ from mimesis.providers.base import BaseProvider
 from mimesis.typing import Array, Number
 
 
-initial_primes = [2]
-
-
 class Numbers(BaseProvider):
     """Class for generating numbers"""
 
@@ -46,31 +43,26 @@ class Numbers(BaseProvider):
         :return: A list of prime numbers from start to end.
         :rtype: list
         """
-        global initial_primes
+        sieve_size = (end // 2 - 1) if end % 2 == 0 else (end // 2)
+        sieve = [True] * sieve_size
 
-        # if request is inside initial_primes return a subset of it.
-        if (end <= initial_primes[-1]):
-            return [p for p in initial_primes if start <= p <= end]
+        primes = []     # list of primes
+        # add 2 to the list if it's in the given range
+        if end >= 2:
+            primes.append(2)
+        for i in range(sieve_size):
+            if sieve[i]:
+                value_at_i = i * 2 + 3
+                primes.append(value_at_i)
+                for j in range(i, sieve_size, value_at_i):
+                    sieve[j] = False
 
-        # remove case when start == 1
-        if (start < 2):
-            start = 2
-
-        # create a sieve and remove all non-primes from it
-        sieve = [True] * (end - start)
-        for p in Numbers.primes(1, int(end**0.5) + 1):
-            s = max(p**2, start + (p - start % p) % p)
-            for i in range(s - start, end - start, p):
-                sieve[i] = False
-
-        # create a list of primes from the sieve
-        primes_list = [i + start for i, x in enumerate(sieve) if x]
-
-        # update the list of initial primes when bigger one is available
-        if (start <= 2 and primes_list > initial_primes):
-            initial_primes = primes_list
-
-        return [p for p in primes_list if start <= p <= end]
+        chop_index = 0
+        for i in range(len(primes)):
+            if primes[i] >= start:
+                chop_index = i
+                break
+        return primes[chop_index:]
 
     def digit(self, to_bin: bool = False) -> Number:
         """Get a random digit.
