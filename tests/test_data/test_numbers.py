@@ -21,6 +21,9 @@ def test_primes(numbers):
     assert len(result) == 41443
     assert isinstance(result, list)
 
+    result = numbers.primes(start=10, end=200)[1]
+    assert result == 13
+
 
 def test_digit(numbers):
     digits = (
