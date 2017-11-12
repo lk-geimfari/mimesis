@@ -37,3 +37,21 @@ def test_chemical_element(science):
 
         result = science.chemical_element(name_only=False)
         assert isinstance(result, dict)
+
+
+def test_atomic_number(default_science):
+    result = default_science.atomic_number()
+    assert isinstance(result, int)
+    assert result <= 119
+
+
+def test_rna(default_science):
+    result = default_science.rna(length=10)
+    assert isinstance(result, str)
+    assert len(result) == 10
+
+
+def test_dna(default_science):
+    result = default_science.dna(length=10)
+    assert isinstance(result, str)
+    assert len(result) == 10

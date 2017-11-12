@@ -48,6 +48,16 @@ class Science(BaseProvider):
 
         return nm.strip()
 
+    def atomic_number(self) -> int:
+        """Generate random atomic number
+
+        :return: Atomic number
+
+        :Example:
+            92
+        """
+        return self.random.randint(1, 119)
+
     def scientific_article(self) -> str:
         """Generate a random link to scientific article on Wikipedia.
 
@@ -58,3 +68,27 @@ class Science(BaseProvider):
         """
         articles = self._data['article']
         return self.random.choice(articles)
+
+    def rna(self, length: int = 10) -> str:
+        """Generate random RNA sequence.
+
+        :param int length: Length of block
+        :return: RNA sequence.
+
+        :Example:
+            AGUGACACAA
+        """
+        letters = ['U', 'C', 'G', 'A']
+        return self.random.schoice(letters, length)
+
+    def dna(self, length: int = 10) -> str:
+        """Generate random DNA sequence.
+
+        :param int length: Length of block
+        :return: DNA sequence.
+
+        :Example:
+            GCTTTAGACC
+        """
+        letters = ['T', 'C', 'G', 'A']
+        return self.random.schoice(letters, length)
