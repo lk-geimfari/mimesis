@@ -1,4 +1,6 @@
-# utils.py
+"""This module is provide internal util functions for mimesis
+"""
+
 import string
 import collections
 import functools
@@ -13,7 +15,7 @@ from mimesis.exceptions import (
     UnexpectedGender,
     UnsupportedLocale,
 )
-from mimesis import settings
+from mimesis import config
 from mimesis.typing import JSON, Gender
 
 __all__ = ['pull', 'download_image', 'locale_info', 'check_gender']
@@ -29,7 +31,7 @@ def locale_info(locale: str) -> str:
     :raises UnsupportedLocale: if locale is not supported.
     """
     locale = locale.lower()
-    supported = settings.SUPPORTED_LOCALES
+    supported = config.SUPPORTED_LOCALES
 
     if locale not in supported:
         raise UnsupportedLocale(
@@ -106,7 +108,7 @@ def pull(file: str, locale: str = 'en') -> JSON:
 
     locale = locale.lower()
 
-    if locale not in settings.SUPPORTED_LOCALES:
+    if locale not in config.SUPPORTED_LOCALES:
         raise UnsupportedLocale('Locale %s is not supported' % locale)
 
     master_locale = locale.split('-')[0]
@@ -178,7 +180,7 @@ def setup_locale(locale: str = '') -> str:
     :return: Locale in lowercase.
     """
     if not locale:
-        return settings.DEFAULT_LOCALE
+        return config.DEFAULT_LOCALE
 
     return locale.lower()
 

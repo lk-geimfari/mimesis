@@ -5,7 +5,7 @@ import re
 import pytest
 
 import mimesis
-from mimesis import settings
+from mimesis import config
 from mimesis.data import (
     BLOOD_GROUPS,
     ENGLISH_LEVEL,
@@ -268,7 +268,7 @@ def test_telephone(personal):
     ],
 )
 def test_surname(personal, gender):
-    if personal.locale in settings.SURNAMES_SEPARATED_BY_GENDER:
+    if personal.locale in config.SURNAMES_SEPARATED_BY_GENDER:
 
         result = personal.surname(gender=gender)
         checked_gender = check_gender(gender)

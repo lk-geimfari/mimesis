@@ -2,9 +2,9 @@ import pytest
 
 import mimesis
 
-from mimesis import settings
+from mimesis import config
 
-locales = settings.LIST_OF_LOCALES
+locales = config.LIST_OF_LOCALES
 platform = ['win32', 'linux2']
 
 

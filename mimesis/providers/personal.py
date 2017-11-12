@@ -8,7 +8,7 @@ from mimesis.data import (BLOOD_GROUPS, EMAIL_DOMAINS, ENGLISH_LEVEL,
 from mimesis.exceptions import WrongArgument
 from mimesis.providers.base import BaseProvider
 from mimesis.providers.cryptographic import Cryptographic
-from mimesis.settings import SURNAMES_SEPARATED_BY_GENDER
+from mimesis.config import SURNAMES_SEPARATED_BY_GENDER
 from mimesis.utils import check_gender, luhn_checksum, pull, custom_code
 from mimesis.typing import Gender
 
@@ -161,7 +161,7 @@ class Personal(BaseProvider):
             Celloid1873
         """
         name = self.random.choice(USERNAMES)
-        date = str(self.random.randint(1800, 2070))
+        date = self.random.randint(1800, 2070)
 
         templates = {
             # UppercaseDate
@@ -238,11 +238,12 @@ class Personal(BaseProvider):
         :Example:
             k6dv2odff9#4h (without hashing).
         """
-        password = ''.join([self.random.choice(
-            ascii_letters + digits + punctuation) for _ in range(int(length))])
+        text = ascii_letters + digits + punctuation
+        password = ''.join([self.random.choice(text) for _ in range(length)])
 
         if algorithm is not None:
-            return Cryptographic().hash(algorithm=algorithm)
+            crypto = Cryptographic()
+            return crypto.hash(algorithm)
 
         return password
 
@@ -256,24 +257,27 @@ class Personal(BaseProvider):
         :Example:
             foretime10@live.com
         """
-        host = domains if domains else EMAIL_DOMAINS
+        if not domains:
+            domains = EMAIL_DOMAINS
 
-        email = self.username(template='ld') + self.random.choice(host)
-        return email
+        domain = self.random.choice(domains)
+        name = self.username(template='ld')
+        return '{name}{domain}'.format(
+            name=name,
+            domain=domain,
+        )
 
     def bitcoin(self) -> str:
-        """Generate a random bitcoin address. Currently supported only two
-        address formats that are most popular: 'P2PKH' and 'P2SH'
+        """Generate a random bitcoin address.
 
         :return: Bitcoin address.
 
         :Example:
             3EktnHQD7RiAE6uzMj2ZifT9YgRrkSgzQX
         """
-        fmt = self.random.choice(['1', '3'])
-        fmt += ''.join([self.random.choice(ascii_letters + digits)
-                        for _ in range(33)])
-        return fmt
+        letters = ascii_letters + digits
+        address = [self.random.choice(letters) for _ in range(33)]
+        return '3' + ''.join(address)
 
     def cvv(self) -> int:
         """Generate a random card verification value (CVV).
@@ -330,10 +334,9 @@ class Personal(BaseProvider):
         :Example:
             03/19.
         """
-        month, year = [self.random.randint(1, 12),
-                       self.random.randint(minimum, maximum)]
-        month = 0 + month if month < 10 else month
-        return '{0}/{1}'.format(month, year)
+        month = self.random.randint(1, 12)
+        year = self.random.randint(minimum, maximum)
+        return '{0:02d}/{1}'.format(month, year)
 
     def cid(self) -> int:
         """Generate a random CID code.
@@ -416,7 +419,7 @@ class Personal(BaseProvider):
         :Example:
             1.85.
         """
-        h = self.random.uniform(float(minimum), float(maximum))
+        h = self.random.uniform(minimum, maximum)
         return '{:0.2f}'.format(h)
 
     def weight(self, minimum: int = 38, maximum: int = 90) -> int:
@@ -606,7 +609,8 @@ class Personal(BaseProvider):
         url = 'https://api.adorable.io/avatars/{0}/{1}.png'
         return url.format(size, self.password(algorithm='md5'))
 
-    def identifier(self, mask: str = '##-##/##') -> str:
+    @staticmethod
+    def identifier(mask: str = '##-##/##') -> str:
         """Generate a random identifier by mask. With this method you can generate
         any identifiers that you need. Simply select the mask that you need.
 

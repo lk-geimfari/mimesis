@@ -16,7 +16,8 @@ class Cryptographic(BaseProvider):
 
         :return: UUID
         """
-        return str(uuid.UUID(int=self.random.getrandbits(128)))
+        bits = self.random.getrandbits(128)
+        return str(uuid.UUID(int=bits))
 
     def hash(self, algorithm: str = 'sha1') -> str:
         """Generate random hash.

@@ -24,7 +24,8 @@ class Code(BaseProvider):
         locale = self.random.choice(LOCALE_CODES)
         return locale
 
-    def issn(self, mask: str = '####-####') -> str:
+    @staticmethod
+    def issn(mask: str = '####-####') -> str:
         """Generate a random International Standard Serial Number (ISSN).
 
         :param str mask: Mask of ISSN.
@@ -54,7 +55,8 @@ class Code(BaseProvider):
 
         return custom_code(mask=mask)
 
-    def ean(self, fmt: str = 'ean-13') -> str:
+    @staticmethod
+    def ean(fmt: str = 'ean-13') -> str:
         """Generate EAN (European Article Number) code. Default is
         EAN-13, but you also can use EAN-8.
 

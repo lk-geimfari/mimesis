@@ -49,8 +49,8 @@ class RussiaSpecProvider(BaseSpecProvider):
         :Example:
             02 15.
         """
-        year = self.random.randint(10, 18) if not \
-            year else year
+        if not year:
+            year = self.random.randint(10, 18)
 
         region = self.random.randint(1, 99)
         return '{:02d} {}'.format(region, year)
@@ -74,7 +74,8 @@ class RussiaSpecProvider(BaseSpecProvider):
         :Example:
             57 16 805199.
         """
-        return '%s %s' % (
+
+        return '{}{}'.format(
             self.passport_series(),
             self.passport_number(),
         )

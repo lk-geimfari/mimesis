@@ -29,7 +29,7 @@ class Datetime(BaseProvider):
         :Example:
             2017-W32
         """
-        year = self.year(minimum=start, maximum=end)
+        year = self.year(start, end)
         week = self.random.randint(1, 52)
         return '{year}-W{week}'.format(
             year=year,
@@ -62,7 +62,8 @@ class Datetime(BaseProvider):
         months = self.data['month'].get(key)
         return self.random.choice(months)
 
-    def year(self, minimum: int = 1990, maximum: int = 2050) -> int:
+    def year(self, minimum: int = 1990,
+             maximum: int = 2050) -> int:
         """Generate a random year.
 
         :param int minimum: Minimum value.
@@ -113,8 +114,8 @@ class Datetime(BaseProvider):
 
         year = self.random.randint(start, end)
         month = self.random.randint(1, 12)
-        d = date(
-            year, month, self.random.randint(1, monthrange(year, month)[1]))
+        d = date(year, month, self.random.randint(
+            1, monthrange(year, month)[1]))
         return d.strftime(fmt)
 
     def time(self, fmt: str = '') -> str:

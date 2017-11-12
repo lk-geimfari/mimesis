@@ -6,14 +6,14 @@ from os.path import (
 
 import pytest
 
-from mimesis import settings
+from mimesis import config
 from mimesis.exceptions import UndefinedSchema
 from mimesis.schema import Schema
 
 PATH = abspath(join(dirname(__file__), 'data_fixtures'))
 
 
-@pytest.fixture(params=settings.LIST_OF_LOCALES)
+@pytest.fixture(params=config.LIST_OF_LOCALES)
 def schema(request):
     return Schema(request.param)
 

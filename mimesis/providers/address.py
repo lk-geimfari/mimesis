@@ -140,7 +140,7 @@ class Address(BaseProvider):
         :Example:
             DE
         """
-        sup = ''.join(list(COUNTRIES_ISO.keys()))
+        sup = ', '.join(COUNTRIES_ISO.keys())
 
         if fmt not in COUNTRIES_ISO:
             raise KeyError('Unsupported format. Use: {}'.format(sup))
@@ -196,7 +196,8 @@ class Address(BaseProvider):
         :return: Dict with coordinates.
 
         :Example:
-            {'latitude': 8.003968712834975, 'longitude': 36.02811153405548}
+            {'latitude': 8.003968712834975,
+            'longitude': 36.02811153405548}
         """
         coord = {
             'longitude': self.longitude(),
@@ -215,8 +216,8 @@ class Address(BaseProvider):
             Africa (en)
         """
         if code:
-            codes = CONTINENT_CODES
-            return self.random.choice(codes)
+            return self.random.choice(
+                CONTINENT_CODES)
 
         continents = self.data['continent']
         return self.random.choice(continents)

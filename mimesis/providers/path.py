@@ -31,6 +31,7 @@ class Path(BaseProvider):
             if self.platform == PLATFORMS[platform]['name']:
                 root = PLATFORMS[platform]['root']
                 return root
+        return None
 
     def home(self) -> Union[str, None]:
         """Generate a home path.
@@ -45,6 +46,7 @@ class Path(BaseProvider):
             if self.platform == PLATFORMS[platform]['name']:
                 home = PLATFORMS[platform]['home']
                 return home
+        return None
 
     def user(self) -> Union[str, None]:
         """Generate a random user.
@@ -81,6 +83,7 @@ class Path(BaseProvider):
                     sep=sep,
                     folder=folder,
                 )
+        return None
 
     def dev_dir(self) -> Union[str, None]:
         """Generate a random path to development directory.
@@ -102,6 +105,7 @@ class Path(BaseProvider):
                     folder=folder,
                     stack=stack,
                 )
+        return None
 
     def project_dir(self) -> Union[str, None]:
         """Generate a random path to project directory.
@@ -123,3 +127,4 @@ class Path(BaseProvider):
                     sep=sep,
                     project=project,
                 )
+        return None

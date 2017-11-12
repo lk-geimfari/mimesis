@@ -5,6 +5,9 @@ __all__ = ['Games']
 
 
 class Games(BaseProvider):
+    """Data related to Gaming and Games.
+    """
+
     def gaming_platform(self) -> str:
         """Get random gaming platform.
 
@@ -42,8 +45,8 @@ class Games(BaseProvider):
             standard[0] = 4
             standard[1] = 6
 
-        return '{0} {1}'.format('PEGI',
-                                self.random.choice(standard))
+        digit = self.random.choice(standard)
+        return '{0} {1}'.format('PEGI', digit)
 
     def genre(self) -> str:
         """Get a random genre of game.

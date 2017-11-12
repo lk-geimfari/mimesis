@@ -61,10 +61,3 @@ def test_backend(dev):
 def test_os(dev):
     result = dev.os()
     assert result in OS
-
-
-def test_stackoverflow_question(dev):
-    url = dev.stackoverflow_question()
-    post_id = int(url.split('/')[-1])
-    assert post_id >= 1000000
-    assert post_id <= 9999999

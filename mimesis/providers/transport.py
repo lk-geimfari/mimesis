@@ -21,7 +21,7 @@ class Transport(BaseProvider):
         """
         model = custom_code(mask=model_mask)
         truck = self.random.choice(TRUCKS)
-        return '%s-%s' % (truck, model)
+        return '{}-{}'.format(truck, model)
 
     def car(self) -> str:
         """Get a random vehicle.
@@ -45,4 +45,4 @@ class Transport(BaseProvider):
         """
         model = custom_code(mask=model_mask)
         plane = self.random.choice(AIRPLANES)
-        return '%s %s' % (plane, model)
+        return '{} {}'.format(plane, model)

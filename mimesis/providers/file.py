@@ -32,6 +32,7 @@ class File(BaseProvider):
         :Example:
             .py (file_type='source').
         """
+        # TODO: Catch exception KeyError
         key = file_type.lower()
         return self.random.choice(EXTENSIONS[key])
 

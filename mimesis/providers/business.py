@@ -16,7 +16,7 @@ class Business(BaseProvider):
     def company_type(self, abbr: bool = False) -> str:
         """Get a random type of business entity.
 
-        :param bool abbr: If True then return abbreviated company type.
+        :param bool abbr: Abbreviated company type.
         :return: Types of business entity.
 
         :Example:
@@ -63,7 +63,8 @@ class Business(BaseProvider):
         """
         return self.random.choice(CURRENCIES)
 
-    def price(self, minimum: float = 10.00, maximum: float = 1000.00) -> str:
+    def price(self, minimum: float = 10.00,
+              maximum: float = 1000.00) -> str:
         """Generate a random price.
 
         :param float minimum: Max value of price.

@@ -33,9 +33,8 @@ class ClothingSizes(BaseProvider):
         :Example:
             42
         """
-        size = self.random.choice(
-            [i for i in range(40, 62) if i % 2 == 0])
-        return size
+        sizes = [i for i in range(40, 62) if i % 2 == 0]
+        return self.random.choice(sizes)
 
     def custom(self, minimum: int = 40, maximum: int = 62) -> int:
         """Generate clothing size using custom format.

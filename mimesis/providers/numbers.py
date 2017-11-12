@@ -39,7 +39,6 @@ class Numbers(BaseProvider):
 
         :param int start: First value of range.
         :param int end: Last value of range.
-
         :return: A list of prime numbers from start to end.
         :rtype: list
         """
@@ -100,5 +99,5 @@ class Numbers(BaseProvider):
         :Example:
             4.7
         """
-        res = '{0:0.1f}'.format(self.random.uniform(0, float(maximum)))
+        res = '{0:0.1f}'.format(self.random.uniform(0, maximum))
         return float(res)

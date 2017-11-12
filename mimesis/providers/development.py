@@ -99,16 +99,3 @@ class Development(BaseProvider):
             Gentoo
         """
         return self.random.choice(OS)
-
-    def stackoverflow_question(self) -> str:
-        """Generate a random question id for StackOverFlow
-        and return url to a question.
-
-        :return: URL to a question.
-
-        :Example:
-            http://stackoverflow.com/questions/1726403
-        """
-        post_id = self.random.randint(1000000, 9999999)
-        url = 'http://stackoverflow.com/questions/{0}'
-        return url.format(post_id)
