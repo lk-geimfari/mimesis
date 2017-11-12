@@ -143,6 +143,31 @@ Very bad:
 
     >>> Patient()._bootstrap(count=600000, locale='de')
 
+
+Constants
+---------
+
+The constraints will be useful to you, because they allows you to avoid entering parameters manually, and this mean that they help to avoid typos.
+
+.. code:: python
+
+    >>> from mimesis import Personal
+    >>> import mimesis.constants as c
+
+    >>> person = Personal(c.EN)
+    >>> female_name = person.full_name(gender='emale')
+
+    # An exception UnexpectedGender will be raised.
+
+
+The constants helps to avoid similar issues:
+
+.. code:: python
+
+    >>> female_name = person.full_name(c.FEMALE)
+    'Lena Brady'
+
+
 Importing images
 ----------------
 

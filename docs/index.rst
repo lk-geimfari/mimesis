@@ -5,30 +5,25 @@ Mimesis
 |Python|
 
 .. |Build Status| image:: https://travis-ci.org/lk-geimfari/mimesis.svg?branch=master
-   :target: https://travis-ci.org/lk-geimfari/mimesis
+	:target: https://travis-ci.org/lk-geimfari/mimesis
 .. |Build status on Windows| image:: https://ci.appveyor.com/api/projects/status/chj8huslvn6vde18?svg=true
-   :target: https://ci.appveyor.com/project/lk-geimfari/mimesis
+	:target: https://ci.appveyor.com/project/lk-geimfari/mimesis
 .. |codecov| image:: https://codecov.io/gh/lk-geimfari/mimesis/branch/master/graph/badge.svg
-   :target: https://codecov.io/gh/lk-geimfari/mimesis
+	:target: https://codecov.io/gh/lk-geimfari/mimesis
 .. |PyPI version| image:: https://badge.fury.io/py/mimesis.svg
-   :target: https://badge.fury.io/py/mimesis
+	:target: https://badge.fury.io/py/mimesis
 .. |Python| image:: https://img.shields.io/badge/python-3.5%2C%203.6-brightgreen.svg
-   :target: https://badge.fury.io/py/mimesis
+	:target: https://badge.fury.io/py/mimesis
 
-**Mimesis** is a fast and easy to use Python library for generating dummy data for a variety of purposes.  This data can be particularly useful during software development and testing.  For example, it could be used to populate a testing database for a web application with user information such as email addresses, usernames, first names, last names, etc. There are over eighteen different `data providers <http://mimesis.readthedocs.io/en/latest/providers.html>`_ available, which can produce data related to food, people, computer hardware, transportation, addresses, and more. Mimesis does not require any modules that are not in the Python standard library.
 
-Advantages
-----------
+**Mimesis** is a fast and easy to use library for Python programming language, which helps generate mock data for a variety of purposes (see "Data providers") in a variety of languages (see "Locales"). This data can be particularly useful during software development and testing. For example, it could be used to populate a testing database for a web application with user information such as email addresses, usernames, first names, last names, etc.
 
 Mimesis offers a number of advantages over other similar libraries, such
 as Faker:
 
--  Performance. Mimesis is significantly `faster`_ than other similar
-   libraries.
--  Completeness. Mimesis strives to provide many detailed providers that
-   offer a variety of data generators.
--  Simplicity. Mimesis does not require any modules other than the
-   Python standard library.
+-  Performance. Mimesis is significantly `faster`_ than other similar libraries.
+-  Completeness. Mimesis strives to provide many detailed providers that offer a variety of data generators.
+-  Simplicity. Mimesis does not require any modules other than the Python standard library.
 
 See `here <https://gist.github.com/lk-geimfari/461ce92fd32379d7b73c9e12164a9154>`_ for an example of how we compare performance with other
 libraries.
@@ -59,8 +54,8 @@ As we said above, this library is really easy to use:
 
 .. code:: python
 
-    >>> import mimesis
-    >>> person = mimesis.Personal('en')
+    >>> from mimesis import Personal
+    >>> person = Personal('en')
 
     >>> person.full_name(gender='female')
     'Antonetta Garrison'
@@ -95,12 +90,6 @@ Usage
     >>> en = Text('en')
     >>> de = Text('de')
 
-    >>> en.sentence()
-    'Ports are used to communicate with the external world.'
-
-    >>> de.sentence()
-    'Wir müssen nicht vergessen Zickler.'
-
     >>> en.color()
     'Blue'
 
@@ -124,31 +113,13 @@ providers from one object.
     >>> g.food.fruit()
     'Limón'
 
+    >>> g.science.rna()
+    'GCTTTAGACC'
+
 
 Data Providers
 --------------
 List of supported data providers available `here <http://mimesis.readthedocs.io/en/latest/providers.html>`_
-
-
-Builtins Data Providers
------------------------
-
-Some countries have data types specific to that country. For example
-social security numbers (SSN) in the United States of America (``en``),
-and cadastro de pessoas físicas (CPF) in Brazil (``pt-br``). If you
-would like to use these country-specific providers, then you must import
-them explicitly:
-
-.. code:: python
-
-    >>> from mimesis import Generic
-    >>> from mimesis.builtins import BrazilSpecProvider
-
-    >>> generic = Generic('pt-br')
-    >>> generic.add_provider(BrazilSpecProvider)
-    >>> generic.brazil_provider.cpf()
-    '696.441.186-00'
-
 
 Custom Data Providers
 ---------------------
@@ -188,33 +159,24 @@ or multiple custom providers using method ``add_providers()``:
     >>> generic.add_providers(SomeProvider, Another)
 
 
-Constants
----------
+Builtins Data Providers
+-----------------------
 
-The constraints will be useful to you, because they allows you to avoid entering parameters manually, and this mean that they help to avoid typos.
-
-.. code:: python
-
-    >>> from mimesis import Personal
-    >>> import mimesis.constants as c
-
-    >>> p = Personal(c.EN)
-    # Typo in parameter gender, which should be has a value "female"
-    >>> f_names = [p.full_name(gender='emale') for _ in range(3)] 
-    
-    # An exception UnexpectedGender will be raised.
- 
-
-The constants helps to avoid similar issues:
+Some countries have data types specific to that country. For example
+«Social Security Number» (SSN) in the United States of America (``en``),
+and «Cadastro de Pessoas Físicas» (CPF) in Brazil (``pt-br``). If you
+would like to use these country-specific providers, then you must import
+them explicitly:
 
 .. code:: python
 
-    >>> # Use c.FEMALE instead string "female" 
-    >>> f_names = [p.full_name(c.FEMALE) for _ in range(3)]
-    ['Nobuko Campos', 'Casimira Ballard', 'Lena Brady']
+    >>> from mimesis import Generic
+    >>> from mimesis.builtins import BrazilSpecProvider
 
-
-That's all that constants are for.
+    >>> generic = Generic('pt-br')
+    >>> generic.add_provider(BrazilSpecProvider)
+    >>> generic.brazil_provider.cpf()
+    '696.441.186-00'
 
 
 Decorators
@@ -244,20 +206,62 @@ We strongly recommend to read articles which published below. There we are speak
 best practices and a number of most useful features of the library.
 
 .. toctree::
-   :maxdepth: 3
+:maxdepth: 3
 
    part_1
    part_2
 
 
-Related Libraries
------------------
-- `mimesis-lab`_ - An extra open-source solutions using Mimesis library.
-- `elizabeth-cloud`_ - web version of Mimesis using GraphQL and Sanic.
+Integration with Web Application Frameworks
+-------------------------------------------
+
+You can use Mimesis during development and testing of applications built
+on a variety of frameworks. Here is an example of integration with a
+Flask application:
+
+.. code:: python
+
+    class Patient(db.Model):
+        id = db.Column(db.Integer, primary_key=True)
+        full_name = db.Column(db.String(100))
+        blood_type = db.Column(db.String(64))
+
+        def __init__(self, **kwargs):
+            super(Patient, self).__init__(**kwargs)
+
+        @staticmethod
+        def populate(count=500, locale=None):
+            import mimesis
+
+            person =  mimesis.Personal(locale=locale)
+
+            for _ in range(count):
+                patient = Patient(
+                    full_name=person.full_name('female'),
+                    blood_type=person.blood_type(),
+                )
+
+                db.session.add(patient)
+                try:
+                    db.session.commit()
+                except IntegrityError:
+                    db.session.rollback()
+
+Just run shell mode and do following:
+
+.. code:: python
+
+    >>> Patient().populate(count=1000, locale='en')
+
+
+
+Integration with third-party libraries
+--------------------------------------
+
+- `mimesis-factory`_ - Integration with ``factory_boy``.
 - `pytest-mimesis`_ - is a pytest plugin that provides pytest fixtures for Mimesis providers.
 
-.. _mimesis-lab: https://github.com/mimesis-lab
-.. _elizabeth-cloud: https://github.com/wemake-services/elizabeth-cloud
+.. _mimesis-factory: https://github.com/mimesis-lab/mimesis-factory
 .. _pytest-mimesis: https://github.com/lk-geimfari/pytest-mimesis
 
 Contributing
@@ -284,6 +288,7 @@ Running Tests
 
 .. code-block:: bash
 
+    ➜  ~ pip install -r dev_requirements.txt
     ➜  ~ cd mimesis/
     ➜  py.test
 
@@ -304,7 +309,7 @@ Contents
 --------
 
 .. toctree::
-   :maxdepth: 3
+:maxdepth: 3
 
    api
 
