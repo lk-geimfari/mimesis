@@ -32,3 +32,14 @@ def test_urandom(random, n):
 
     assert len(result) == n
     assert isinstance(result, bytes)
+
+
+@pytest.mark.parametrize(
+    'seq, length', [
+        (['U'], 10),
+        (['A'], 20),
+    ],
+)
+def test_schoice(random, seq, length):
+    result = random.schoice(seq, length)
+    assert len(result) == length

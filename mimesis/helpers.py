@@ -1,7 +1,7 @@
 import os
 import random
 
-from typing import List, Any
+from typing import List, Any, Union
 
 
 class Random(random.Random):
@@ -33,3 +33,14 @@ class Random(random.Random):
         :rtype: bytes
         """
         return os.urandom(*args, **kwargs)
+
+    def schoice(self, seq: Union[tuple, list], end: int = 10) -> str:
+        """Choice function which returns string created from sequence.
+
+        :param seq: Sequence of letters or digits.
+        :type seq: tuple or list
+        :param int end: Max value.
+        :return: Single string.
+        """
+        seq = [self.choice(seq) for _ in range(end)]
+        return ''.join(seq)
