@@ -212,7 +212,7 @@ Too lazy to search for data? No problem, we found them for you and collected the
 
 ## Builtins specific data providers
 
-Some countries have data types specific to that country. For example social security numbers (SSN) in the United States of America (`en`), and cadastro de pessoas físicas (CPF) in Brazil (`pt-br`).
+Some countries have data types specific to that country. For example «Social Security Number» (SSN) in the United States of America (`en`), and «Cadastro de Pessoas Físicas» (CPF) in Brazil (`pt-br`).
 If you would like to use these country-specific providers, then you must import them explicitly:
 
 ```python
@@ -232,106 +232,12 @@ You can use specific-provider without adding it to `Generic()`:
 '712.455.163-37'
 ```
 
-## Integration with Web Application Frameworks
-
-You can use Mimesis during development and testing of applications built on a variety of frameworks. Here is an
-example of integration with a Flask application:
-
-```python
-class Patient(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    full_name = db.Column(db.String(100))
-    blood_type = db.Column(db.String(64))
-
-    def __init__(self, **kwargs):
-        super(Patient, self).__init__(**kwargs)
-
-    @staticmethod
-    def populate(count=500, locale=None):
-        import mimesis
-
-        person =  mimesis.Personal(locale=locale)
-
-        for _ in range(count):
-            patient = Patient(
-                full_name=person.full_name('female'),
-                blood_type=person.blood_type(),
-            )
-
-            db.session.add(patient)
-            try:
-                db.session.commit()
-            except IntegrityError:
-                db.session.rollback()
-```
-
-Just run shell mode and do following:
-
-```python
->>> Patient().populate(count=1000, locale='en')
-```
-
-
 ## Integration with py.test and factory_boy
 We have created libraries which can help you easily use Mimesis with `factory_boy` and `py.test`.
 
-- [mimesis-factory](https://github.com/mimesis-lab/mimesis-factory) - Integration with factory_boy.
+- [mimesis-factory](https://github.com/mimesis-lab/mimesis-factory) - Integration with the `factory_boy`.
 - [pytest-mimesis](https://github.com/mimesis-lab/pytest-mimesis) -  Integration with the `py.test`.
 
-
-## Generate data by schema
-Mimesis support generating data by schema:
-
-```python
->>> from mimesis.schema import Schema
->>> schema = Schema('en')
-
->>> schema.load(schema={
-...     "id": "cryptographic.uuid",
-...     "name": "text.word",
-...     "version": "development.version",
-...     "owner": {
-...         "email": "personal.email",
-...         "token": "cryptographic.token",
-...         "creator": "personal.full_name"
-...     }
-... }).create(iterations=2)
-
->>> # or you can load data from json file:
->>> schema.load(path='schema.json').create(iterations=2)
-```
-
-Result:
-
-```
-[
-  {
-    "id": "790cce21-5f75-2652-2ee2-f9d90a26c43d",
-    "name": "container",
-    "owner": {
-      "email": "anjelica8481@outlook.com",
-      "token": "0bf924125640c46aad2a860f40ec4b7f33a516c497957abd70375c548ed56978",
-      "creator": "Ileen Ellis"
-    },
-    "version": "4.11.6"
-  },
-  ...
-]
-```
-
-## Decorators
-If your locale belongs to the family of Cyrillic languages, but you need latinized locale-specific data, then you can use special decorator which help you romanize your data.
-At this moment it's works only for Russian and Ukrainian:
-```python
->>> from mimesis.decorators import romanized
-
->>> @romanized('ru')
-... def russian_name():
-...     return 'Вероника Денисова'
-
->>> russian_name()
-'Veronika Denisova'
-```
 
 ## How to Contribute
 
