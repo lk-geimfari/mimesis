@@ -206,10 +206,11 @@ We strongly recommend to read articles which published below. There we are speak
 best practices and a number of most useful features of the library.
 
 .. toctree::
-:maxdepth: 3
+   :maxdepth: 3
 
    part_1
    part_2
+
 
 
 Integration with Web Application Frameworks
@@ -309,7 +310,7 @@ Contents
 --------
 
 .. toctree::
-:maxdepth: 3
+   :maxdepth: 3
 
    api
 
