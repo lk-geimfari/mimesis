@@ -21,6 +21,28 @@ from mimesis.providers.text import Text
 from mimesis.providers.transport import Transport
 from mimesis.providers.units import UnitSystem
 
+GENERIC_ATTRS = [
+    'address',
+    'business',
+    'clothing_sizes',
+    'code',
+    'cryptographic',
+    'datetime',
+    'development',
+    'file',
+    'food',
+    'games',
+    'hardware',
+    'internet',
+    'numbers',
+    'path',
+    'personal',
+    'science',
+    'text',
+    'transport',
+    'unit_system',
+]
+
 
 class Generic(BaseProvider):
     """A lazy initialization of locale for all classes that have locales."""

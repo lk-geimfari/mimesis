@@ -1,29 +1,9 @@
 from typing import Any, Iterator
 from types import LambdaType
 
-from mimesis import Generic
-
-DATA_PROVIDERS = [
-    'address',
-    'business',
-    'clothing_sizes',
-    'code',
-    'cryptographic',
-    'datetime',
-    'development',
-    'file',
-    'food',
-    'games',
-    'hardware',
-    'internet',
-    'numbers',
-    'path',
-    'personal',
-    'science',
-    'text',
-    'transport',
-    'unit_system',
-]
+from mimesis.exceptions import UndefinedSchema
+from mimesis.providers import Generic
+from mimesis.providers.generic import GENERIC_ATTRS
 
 
 class Field(object):
@@ -36,15 +16,26 @@ class Field(object):
     def __init__(self, locale: str = 'en') -> None:
         self.locale = locale
         self.gen = Generic(self.locale)
-        self.SUPPORTED = DATA_PROVIDERS
 
-    def __call__(self, name, **kwargs) -> Any:
-        for provider in self.SUPPORTED:
-            if hasattr(self.gen, provider):
-                provider = getattr(self.gen, provider)
+    def __call__(self, name: str, **kwargs) -> Any:
+        """Override standard calling.
 
-                if name and hasattr(provider, name):
-                    return getattr(provider, name)(**kwargs)
+        :param str name: Name of method.
+        :param kwargs: Kwargs of method.
+        :return: Value which represented by method.
+        :rtype: Any
+        :raises ValueError: if providers is not supported.
+        :raises ValueError: if field is not defined.
+        """
+        if name is not None:
+            for provider in GENERIC_ATTRS:
+                if hasattr(self.gen, provider):
+
+                    provider = getattr(self.gen, provider)
+                    if hasattr(provider, name):
+                        return getattr(provider, name)(**kwargs)
+            else:
+                raise ValueError('Unsupported field')
         else:
             raise ValueError('Undefined field')
 
@@ -57,17 +48,16 @@ class Field(object):
 
     @staticmethod
     def fill(schema: LambdaType, iterations: int = 1) -> Iterator[dict]:
-        """Fill schema using data generators of mimesis.
+        """Fill schema with data.
 
         :param lambda schema: Lambda function with schema.
         :param int iterations: Count of iterations.
         :return: Filled schema.
-        :raises TypeError: if self.schema is empty dict.
+        :raises UndefinedSchema: if schema is empty dict.
         """
-
-        try:
-            if schema and isinstance(schema, LambdaType):
-                result = map(lambda _: schema(), range(iterations))
-                return list(result)
-        except TypeError:
-            raise TypeError('Schema should be lambda.')
+        if schema() and isinstance(schema, LambdaType):
+            result = map(lambda _: schema(), range(iterations))
+            return list(result)
+        else:
+            raise UndefinedSchema(
+                'Schema should be defined in lambda.')
