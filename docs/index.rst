@@ -78,7 +78,7 @@ Locales
 
 You can specify a locale when creating providers and they will return data that is appropriate for
 the language or country associated with that locale. `Mimesis` currently includes support
-for `33 different locales <http://mimesis.readthedocs.io/en/latest/locales.html>`_.
+for `33 different locales <http://mimesis.readthedocs.io/locales.html>`_.
 
 
 Usage
@@ -119,7 +119,7 @@ providers from one object.
 
 Data Providers
 --------------
-List of supported data providers available `here <http://mimesis.readthedocs.io/en/latest/providers.html>`_
+List of supported data providers available `here <http://mimesis.readthedocs.io/providers.html>`_
 
 Custom Data Providers
 ---------------------
