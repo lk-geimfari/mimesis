@@ -317,28 +317,29 @@ the object ``Generic()``. You can use it directly, as shown below:
 Generate data by schema
 -----------------------
 
-Mimesis support generating data by schema from version ``0.0.5``. This
-feature is still at an early stage of development. Actually is very easy
-feature, here how it works:
+Mimesis support generating data by schema starting from version
+``1.0.0``. For generating data by schema, just import ``Field()``
+object, describe structure of your schema (dict) in using fields in
+``lambda`` function and run filling the schema using method ``.fill()``:
 
 .. code:: python
 
-    >>> from mimesis.schema import Schema
-    >>> schema = Schema('en')
-
-    >>> schema.load(schema={
-    ...     "id": "cryptographic.uuid",
-    ...     "name": "text.word",
-    ...     "version": "development.version",
-    ...     "owner": {
-    ...         "email": "personal.email",
-    ...         "token": "cryptographic.token",
-    ...         "creator": "personal.full_name"
+    >>> from mimesis.schema import Field
+    >>> _ = Field('en')
+    >>> app_schema = (
+    ...     lambda: {
+    ...         "id": _('uuid'),
+    ...         "name": _('word'),
+    ...         "version": _('version'),
+    ...         "owner": {
+    ...             "email": _('email'),
+    ...             "token": _('token'),
+    ...             "creator": _('full_name', gender='female')
+    ...         }
     ...     }
-    ... }).create(iterations=2)
-
-    >>> # or you can load data from json file:
-    >>> schema.load(path='schema.json').create(iterations=2)
+    ... )
+    >>>
+    >>> _.fill(schema=app_schema, iterations=10)
 
 Result:
 
@@ -358,7 +359,6 @@ Result:
       ...
     ]
 
-.. note:: ``Schema()`` is an experimental feature. Be careful when using it.
 
 .. |Mimesis| image:: https://user-images.githubusercontent.com/15812620/29830988-701236f8-8cec-11e7-9b81-1f0082972069.png
    :target: https://github.com/lk-geimfari/mimesis

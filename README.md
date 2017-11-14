@@ -232,6 +232,29 @@ You can use specific-provider without adding it to `Generic()`:
 '712.455.163-37'
 ```
 
+## Generate data by schema
+Mimesis support generating data by schema starting from version `1.0.0`. For generating data by schema, just import `Field()` object, describe structure of your schema (dict) in using fields in `lambda`  and run filling the schema using method `.fill()`:
+
+```python
+>>> from mimesis.schema import Field
+>>> _ = Field('en')
+>>> app_schema = (
+...     lambda: {
+...         "id": _('uuid'),
+...         "name": _('word'),
+...         "version": _('version'),
+...         "owner": {
+...             "email": _('email'),
+...             "token": _('token'),
+...             "creator": _('full_name', gender='female')
+...         }
+...     }
+... )
+>>> _.fill(schema=app_schema, iterations=10)
+```
+
+Output example available [here](https://gist.github.com/lk-geimfari/a839842ca5acc391fb32553beae353b0).
+
 ## Integration with py.test and factory_boy
 We have created libraries which can help you easily use Mimesis with `factory_boy` and `py.test`.
 
