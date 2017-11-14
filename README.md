@@ -7,7 +7,11 @@
 [![Python](https://img.shields.io/badge/python-3.5%2C%203.6-brightgreen.svg)](https://badge.fury.io/py/mimesis)
 
 
-[![](/media/large-logo.png)](https://github.com/lk-geimfari/mimesis)
+<p align="center">
+    <a href="https://github.com/lk-geimfari/mimesis">
+        <img src="/media/logo-large-nodescr.png">
+    </a>
+</p>
 
 **Mimesis** is a fast and easy to use library for Python programming language, which helps generate mock (dummy) data for a variety of purposes (see "[Data providers](#data-providers)") in a variety of languages (see "[Locales](#locales)"). This data can be particularly useful during software development and testing. For example, it could be used to populate a testing database for a web application with user information such as email addresses, usernames, first names, last names, etc. 
 
@@ -233,7 +237,7 @@ You can use specific-provider without adding it to `Generic()`:
 ```
 
 ## Generate data by schema
-Mimesis support generating data by schema starting from version `1.0.0`. For generating data by schema, just import `Field()` object, describe structure of your schema (dict) in using fields in `lambda`  and run filling the schema using method `.fill()`:
+For generating data by schema, just import `Field()` object, describe structure of your schema in using fields in lambda function and run filling the schema using method `fill()`:
 
 ```python
 >>> from mimesis.schema import Field
@@ -253,7 +257,8 @@ Mimesis support generating data by schema starting from version `1.0.0`. For gen
 >>> _.fill(schema=app_schema, iterations=10)
 ```
 
-Output example available [here](https://gist.github.com/lk-geimfari/a839842ca5acc391fb32553beae353b0).
+Mimesis support generating data by schema only starting from version `1.0.0`. 
+
 
 ## Integration with py.test and factory_boy
 We have created libraries which can help you easily use Mimesis with `factory_boy` and `py.test`.
