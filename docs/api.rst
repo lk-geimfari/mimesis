@@ -242,5 +242,5 @@ Schema
 Schema
 ------
 
-.. autoclass:: mimesis.schema.Schema
+.. autoclass:: mimesis.schema.Field
    :members:

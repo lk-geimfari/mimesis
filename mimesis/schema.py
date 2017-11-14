@@ -1,71 +1,64 @@
-import json
-from typing import Optional, Iterator
+from typing import Any, List
+from types import LambdaType
 
-from mimesis.decorators import type_to
 from mimesis.exceptions import UndefinedSchema
-from mimesis.providers.base import BaseProvider
-from mimesis.providers.generic import Generic
-from mimesis.typing import JSON
+from mimesis.providers import Generic
+from mimesis.providers.generic import GENERIC_ATTRS
 
 
-class Schema(BaseProvider):
-    """Class which helps generate data by schema using any
-    providers which supported by mimesis.
+class Field(object):
+    """Field for generating data using Schema().
+
+    >>> field = Field('en')
+    >>> field('name', gender='female')
     """
 
-    schema = {}  # type: dict
+    def __init__(self, locale: str = 'en') -> None:
+        self.locale = locale
+        self.gen = Generic(self.locale)
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.generic = Generic(self.locale)
+    def __call__(self, name: str, **kwargs) -> Any:
+        """Override standard calling.
 
-    def __generate(self, schema: JSON = dict) -> JSON:
-        data = dict()
-        for k, v in schema.items():
-            if isinstance(v, dict):
-                data[k] = self.__generate(v)
-            elif isinstance(v, list):
-                data[k] = [self.__generate(i) for i in v]
-            else:
-                provider, method = v.split('.')
-                data[k] = getattr(
-                    getattr(self.generic, provider), method)()
-        return data
-
-    def load(self, path: Optional[str] = None,
-             schema: Optional[JSON] = None) -> 'Schema':
-        """Load schema from python dict or json file.
-
-        :param path: Path to file.
-        :param schema: Dictionary (schema).
+        :param str name: Name of method.
+        :param kwargs: Kwargs of method.
+        :return: Value which represented by method.
+        :rtype: Any
+        :raises ValueError: if providers is not supported.
+        :raises ValueError: if field is not defined.
         """
+        if name is not None:
+            for provider in GENERIC_ATTRS:
+                if hasattr(self.gen, provider):
 
-        if schema:
-            self.schema = schema
-        if path:
-            try:
-                with open(path, 'r') as f:
-                    self.schema = json.load(f)
-            except FileNotFoundError:
-                # modify message
-                raise FileNotFoundError(
-                    'File {path} is not found'.format(path=path))
-            except ValueError:
-                raise ValueError('Invalid json file!')
-        return self
+                    provider = getattr(self.gen, provider)
+                    if hasattr(provider, name):
+                        return getattr(provider, name)(**kwargs)
+            else:
+                raise ValueError('Unsupported field')
+        else:
+            raise ValueError('Undefined field')
 
-    @type_to(list, check_len=True)
-    def create(self, iterations: int = 1) -> Iterator[dict]:
-        """Fill schema using data generators of mimesis.
+    def __str__(self):
+        return '{}:{}'.format(
+            self.locale,
+            self.__class__.__name__,
 
+        )
+
+    @staticmethod
+    def fill(schema: LambdaType, iterations: int = 1) -> List[Any]:
+        """Fill schema with data.
+
+        :param lambda schema: Lambda function with schema.
         :param int iterations: Count of iterations.
         :return: Filled schema.
-        :raises UndefinedSchema: if self.schema is empty dict.
+        :rtype: list
+        :raises UndefinedSchema: if schema is empty dict.
         """
-
-        if self.schema:
-            return map(lambda _: self.__generate(self.schema),
-                       range(iterations))
+        if schema() and isinstance(schema, LambdaType):
+            result = map(lambda _: schema(), range(iterations))
+            return list(result)
         else:
             raise UndefinedSchema(
-                'The schema is empty or not loaded.')
+                'Schema should be defined in lambda.')
