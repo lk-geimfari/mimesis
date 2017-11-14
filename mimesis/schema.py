@@ -1,4 +1,4 @@
-from typing import Any, Iterator
+from typing import Any, List
 from types import LambdaType
 
 from mimesis.exceptions import UndefinedSchema
@@ -47,12 +47,13 @@ class Field(object):
         )
 
     @staticmethod
-    def fill(schema: LambdaType, iterations: int = 1) -> Iterator[dict]:
+    def fill(schema: LambdaType, iterations: int = 1) -> List[Any]:
         """Fill schema with data.
 
         :param lambda schema: Lambda function with schema.
         :param int iterations: Count of iterations.
         :return: Filled schema.
+        :rtype: list
         :raises UndefinedSchema: if schema is empty dict.
         """
         if schema() and isinstance(schema, LambdaType):
