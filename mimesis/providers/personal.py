@@ -2,8 +2,8 @@ import re
 from string import ascii_letters, digits, punctuation
 from typing import Union
 
-from mimesis.data import (BLOOD_GROUPS, EMAIL_DOMAINS, ENGLISH_LEVEL,
-                          FAVORITE_MUSIC_GENRE, GENDER_SYMBOLS,
+from mimesis.data import (CALLING_CODES, BLOOD_GROUPS, EMAIL_DOMAINS,
+                          ENGLISH_LEVEL, FAVORITE_MUSIC_GENRE, GENDER_SYMBOLS,
                           SEXUALITY_SYMBOLS, USERNAMES)
 from mimesis.exceptions import WrongArgument
 from mimesis.providers.base import BaseProvider
@@ -591,10 +591,12 @@ class Personal(BaseProvider):
         :Example:
             +7-(963)-409-11-22.
         """
-        # Default
-        default = '+#-(###)-###-####'
-
         if not mask:
+            code = self.random.choice(CALLING_CODES)
+            default = [
+                '{}-(###)-###-####'.format(code),
+            ]
+
             masks = self.data.get('telephone_fmt', default)
             mask = self.random.choice(masks)
 
