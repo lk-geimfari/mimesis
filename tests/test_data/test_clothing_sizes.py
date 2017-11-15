@@ -1,4 +1,12 @@
 # -*- coding: utf-8 -*-
+import pytest
+
+from mimesis import ClothingSizes
+
+
+@pytest.fixture
+def sizes():
+    return ClothingSizes()
 
 
 def test_international(sizes):

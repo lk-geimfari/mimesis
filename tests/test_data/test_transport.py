@@ -1,6 +1,13 @@
 # -*- coding: utf-8 -*-
+import pytest
 
+from mimesis import Transport
 from mimesis.data import AIRPLANES, CARS, TRUCKS
+
+
+@pytest.fixture
+def transport():
+    return Transport()
 
 
 def test_truck(transport):

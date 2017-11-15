@@ -2,9 +2,15 @@ import re
 
 import pytest
 
+from mimesis import Cryptographic
 from mimesis.exceptions import UnsupportedAlgorithm
 
 from ._patterns import UUID_REGEX
+
+
+@pytest.fixture
+def crypto():
+    return Cryptographic()
 
 
 def test_uuid(crypto):

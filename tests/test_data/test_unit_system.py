@@ -2,8 +2,14 @@
 
 import pytest
 
+from mimesis import UnitSystem
 from mimesis.data import SI_PREFIXES, SI_PREFIXES_SYM
 from mimesis.exceptions import WrongArgument
+
+
+@pytest.fixture
+def us():
+    return UnitSystem()
 
 
 def test_mass(us):

@@ -2,7 +2,13 @@
 
 import pytest
 
+from mimesis import File
 from mimesis.data import EXTENSIONS, MIME_TYPES
+
+
+@pytest.fixture
+def file():
+    return File()
 
 
 @pytest.mark.parametrize(

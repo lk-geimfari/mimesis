@@ -4,7 +4,14 @@ import re
 
 import pytest
 
+from mimesis import Structured
+
 from ._patterns import STR_REGEX
+
+
+@pytest.fixture
+def structured():
+    return Structured()
 
 
 def test_str(structured):

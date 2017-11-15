@@ -1,8 +1,15 @@
 # -*- coding: utf-8 -*-
+import pytest
 
+from mimesis import Hardware
 from mimesis.data import (CPU, CPU_CODENAMES, GENERATION, GENERATION_ABBR,
                           GRAPHICS, HDD_SSD, MANUFACTURERS, PHONE_MODELS,
                           RESOLUTIONS, SCREEN_SIZES)
+
+
+@pytest.fixture
+def hard():
+    return Hardware()
 
 
 def test_resolution(hard):

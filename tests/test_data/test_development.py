@@ -1,12 +1,19 @@
 # -*- coding: utf-8 -*-
 
-from mimesis.data import (BACKEND, CONTAINER, FRONTEND, LICENSES, NOSQL, OS,
-                          PROGRAMMING_LANGS, SQL)
+import pytest
+
+from mimesis import Development
+import mimesis.data as data
+
+
+@pytest.fixture
+def dev():
+    return Development()
 
 
 def test_license(dev):
     result = dev.software_license()
-    assert result in LICENSES
+    assert result in data.LICENSES
 
 
 def test_version_control_system(dev):
@@ -32,32 +39,32 @@ def test_version(dev):
 
 def test_programming_language(dev):
     result = dev.programming_language()
-    assert result in PROGRAMMING_LANGS
+    assert result in data.PROGRAMMING_LANGS
 
 
 def test_database(dev):
     result = dev.database()
-    assert result in SQL
+    assert result in data.SQL
 
     result = dev.database(nosql=True)
-    assert result in NOSQL
+    assert result in data.NOSQL
 
 
 def test_other(dev):
     result = dev.container()
-    assert result in CONTAINER
+    assert result in data.CONTAINER
 
 
 def test_frontend(dev):
     result = dev.frontend()
-    assert result in FRONTEND
+    assert result in data.FRONTEND
 
 
 def test_backend(dev):
     _result = dev.backend()
-    assert _result in BACKEND
+    assert _result in data.BACKEND
 
 
 def test_os(dev):
     result = dev.os()
-    assert result in OS
+    assert result in data.OS

@@ -1,4 +1,12 @@
+import pytest
+
+from mimesis import Games
 from mimesis.data import GAMES, GAMING_PLATFORMS, GENRES, SCORE_PHRASES
+
+
+@pytest.fixture
+def games():
+    return Games()
 
 
 def test_gaming_platform(games):

@@ -1,6 +1,15 @@
 # -*- coding: utf-8 -*-
 import array
 
+import pytest
+
+from mimesis import Numbers
+
+
+@pytest.fixture
+def numbers():
+    return Numbers()
+
 
 def test_floats(numbers):
     result = numbers.floats()

@@ -3,9 +3,15 @@ import re
 
 import pytest
 
+from mimesis import Code
 from mimesis.data import LOCALE_CODES
 
 from . import _patterns as p
+
+
+@pytest.fixture
+def code():
+    return Code()
 
 
 def test_str(code):

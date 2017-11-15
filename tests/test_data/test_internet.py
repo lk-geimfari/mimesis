@@ -4,10 +4,16 @@ import re
 
 import pytest
 
+from mimesis import Internet
 from mimesis import data
 from mimesis.exceptions import WrongArgument
 
 from . import _patterns as p
+
+
+@pytest.fixture
+def net():
+    return Internet()
 
 
 def test_emoji(net):
@@ -114,6 +120,11 @@ def test_ip_v4(net):
     ip = net.ip_v4()
     assert re.match(p.IP_V4_REGEX, ip)
 
+    ip_with_port = net.ip_v4(with_port=True)
+    port = int(ip_with_port.split(':')[1])
+
+    assert (port >= 1) and (port <= 65535)
+
 
 def test_ip_v6(net):
     ip = net.ip_v6()
@@ -181,3 +192,20 @@ def test_top_level_domain(net, domain_type):
 def test_top_level_domain_unsupported(net):
     with pytest.raises(KeyError):
         net.top_level_domain(domain_type='nil')
+
+
+def test_port(net):
+    result = net.port()
+    assert (result >= 1) and (result <= 65535)
+
+    result = net.port('well-known')
+    assert (result >= 1) and (result <= 1023)
+
+    result = net.port('ephemeral')
+    assert (result >= 49152) and (result <= 65535)
+
+    result = net.port('registered')
+    assert (result >= 1024) and (result <= 49151)
+
+    with pytest.raises(KeyError):
+        net.port('lol')
