@@ -49,15 +49,20 @@ class Internet(BaseProvider):
         """
         return self.random.choice(HTTP_METHODS)
 
-    def ip_v4(self) -> str:
+    def ip_v4(self, with_port: bool = False) -> str:
         """Generate a random IPv4 address.
 
+        :param bool with_port: Add port to IP.
         :return: Random IPv4 address.
 
         :Example:
             19.121.223.58
         """
         ip = '.'.join([str(self.random.randint(0, 255)) for _ in range(4)])
+
+        if with_port:
+            ip += ':{}'.format(self.port())
+
         return ip
 
     def ip_v6(self) -> str:
@@ -283,3 +288,29 @@ class Internet(BaseProvider):
         except KeyError:
             protocols = list(NETWORK_PROTOCOLS.keys())
             raise WrongArgument('Unsupported layer, use: {}'.format(protocols))
+
+    def port(self, diapason: str = '') -> int:
+        """Generate random port. Default range is well-known.
+
+        :param str diapason: Diapason name (well-known,
+            well-known, registered)
+        :return: Port number.
+        :rtype: int
+
+        :Example:
+            8080
+        """
+        diapasons = {
+            'default': (1, 65535),
+            'well-known': (1, 1023),
+            'ephemeral': (49152, 65535),
+            'registered': (1024, 49151),
+        }
+        diapason = 'default' if not diapason else diapason
+
+        try:
+            ranges = diapasons[diapason]
+        except KeyError:
+            raise KeyError('Unsupported diapason name')
+
+        return self.random.randint(*ranges)
