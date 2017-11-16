@@ -197,7 +197,7 @@ def test_top_level_domain_unsupported(net):
 
 @pytest.mark.parametrize(
     'range_, excepted', [
-        (PortRange.DEFAULT, (1, 65535)),
+        (PortRange.ALL, (1, 65535)),
         (PortRange.EPHEMERAL, (49152, 65535)),
         (PortRange.REGISTERED, (1024, 49151)),
     ],
