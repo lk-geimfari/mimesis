@@ -189,6 +189,5 @@ def check_gender(gender: Gender = Gender.RANDOM) -> Gender:
         return gender
     else:
         raise UnexpectedGender(
-            'You should use enum object "Gender" '
-            'from the module mimesis.enums'
+            'You should use "Gender" from the module mimesis.enums',
         )
