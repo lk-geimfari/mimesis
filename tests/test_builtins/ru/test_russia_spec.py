@@ -1,6 +1,7 @@
 import pytest
 
 from mimesis.builtins import RussiaSpecProvider
+from mimesis.enums import Gender
 from mimesis.exceptions import UnexpectedGender
 
 
@@ -35,8 +36,8 @@ def test_series_and_number(russia):
 
 @pytest.mark.parametrize(
     'gender', [
-        'female',
-        'male',
+        Gender.FEMALE,
+        Gender.MALE,
     ],
 )
 def test_patronymic(russia, gender):

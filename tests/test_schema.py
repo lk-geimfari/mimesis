@@ -2,6 +2,7 @@ import pytest
 
 from mimesis import config
 from mimesis.schema import Field
+from mimesis.enums import Gender
 from mimesis.exceptions import UndefinedSchema
 
 
@@ -28,7 +29,7 @@ def valid():
         'owner': {
             'email': _('email'),
             'token': _('token'),
-            'creator': _('full_name', gender='female'),
+            'creator': _('full_name', gender=Gender.FEMALE),
         },
     }
 
