@@ -136,8 +136,6 @@ def test_custom_code():
 
 @pytest.mark.parametrize(
     'gender, excepted', [
-        (Gender.F, 'female'),
-        (Gender.M, 'male'),
         (Gender.MALE, 'male'),
         (Gender.FEMALE, 'female'),
         (Gender.RANDOM, ['female', 'male']),

@@ -229,8 +229,6 @@ def test_level_of_english(_personal):
 
 @pytest.mark.parametrize(
     'gender', [
-        Gender.F,
-        Gender.M,
         Gender.FEMALE,
         Gender.MALE,
         Gender.RANDOM,
@@ -259,8 +257,6 @@ def test_telephone(personal):
 
 @pytest.mark.parametrize(
     'gender', [
-        Gender.F,
-        Gender.M,
         Gender.FEMALE,
         Gender.MALE,
         Gender.RANDOM,
@@ -279,8 +275,6 @@ def test_surname(personal, gender):
 
 @pytest.mark.parametrize(
     'gender', [
-        Gender.F,
-        Gender.M,
         Gender.FEMALE,
         Gender.MALE,
         Gender.RANDOM,
@@ -363,8 +357,6 @@ def test_political_views(personal):
 )
 @pytest.mark.parametrize(
     'gender', [
-        Gender.F,
-        Gender.M,
         Gender.FEMALE,
         Gender.MALE,
         Gender.RANDOM,
@@ -381,8 +373,6 @@ def test_title(personal, gender, title_type):
 
 @pytest.mark.parametrize(
     'gender', [
-        Gender.F,
-        Gender.M,
         Gender.FEMALE,
         Gender.MALE,
         Gender.RANDOM,

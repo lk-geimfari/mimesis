@@ -12,8 +12,6 @@ class PortRange(Enum):
 class Gender(Enum):
     FEMALE = 'female'
     MALE = 'male'
-    F = FEMALE
-    M = MALE
     RANDOM = choice([FEMALE, MALE])
 
 
