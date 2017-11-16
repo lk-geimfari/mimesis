@@ -5,6 +5,7 @@ import socket
 
 import pytest
 
+from mimesis.enums import Gender
 from mimesis.exceptions import UnsupportedLocale, UnexpectedGender
 from mimesis.utils import (
     check_gender,
@@ -112,29 +113,6 @@ def test_update_dict():
 
 
 @pytest.mark.parametrize(
-    'abbr, gender',
-    [
-        ('0', ('male', 'female')),
-        ('9', ('male', 'female')),
-        ('1', 'male'),
-        ('2', 'female'),
-        ('f', 'female'),
-        ('female', 'female'),
-        ('m', 'male'),
-        ('male', 'male'),
-    ],
-)
-def test_check_gender(abbr, gender):
-    result = check_gender(abbr)
-    assert result == gender or result in gender
-
-
-def test_check_gender_invalid_gender():
-    with pytest.raises(UnexpectedGender):
-        check_gender(gender='other')
-
-
-@pytest.mark.parametrize(
     'inp, out', [
         ('EN', 'en'),
         ('DE', 'de'),
@@ -154,3 +132,21 @@ def test_custom_code():
     assert a.isalpha()
     assert b.isdigit()
     assert c.isalpha()
+
+
+@pytest.mark.parametrize(
+    'gender, excepted', [
+        (Gender.F, 'female'),
+        (Gender.M, 'male'),
+        (Gender.MALE, 'male'),
+        (Gender.FEMALE, 'female'),
+        (Gender.RANDOM, ['female', 'male']),
+    ],
+)
+def test_check_gender(gender, excepted):
+    result = check_gender(gender).value
+    assert (result == excepted) or (result in excepted)
+    assert gender in Gender
+
+    with pytest.raises(UnexpectedGender):
+        check_gender(gender=None)

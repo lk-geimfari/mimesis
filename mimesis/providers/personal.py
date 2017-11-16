@@ -5,12 +5,12 @@ from typing import Union
 from mimesis.data import (CALLING_CODES, BLOOD_GROUPS, EMAIL_DOMAINS,
                           ENGLISH_LEVEL, FAVORITE_MUSIC_GENRE, GENDER_SYMBOLS,
                           SEXUALITY_SYMBOLS, USERNAMES)
+from mimesis.enums import Gender, TitleType
 from mimesis.exceptions import WrongArgument
 from mimesis.providers.base import BaseProvider
 from mimesis.providers.cryptographic import Cryptographic
 from mimesis.config import SURNAMES_SEPARATED_BY_GENDER
 from mimesis.utils import check_gender, luhn_checksum, pull, custom_code
-from mimesis.typing import Gender
 
 __all__ = ['Personal']
 
@@ -68,26 +68,23 @@ class Personal(BaseProvider):
 
         return max(a - working_start_age, 0)
 
-    def name(self, gender: Gender = 0) -> str:
+    def name(self, gender: Gender = Gender.RANDOM) -> str:
         """Get a random name.
 
-        :param gender: if 'male' then will returned male name,
-            if 'female' then female name,  if None return random from ones.
-        :type gender: int or str
+        :param gender: Gender's enum object.
         :return: Name.
 
         :Example:
             John.
         """
         gender = check_gender(gender)
-        names = self.data['names'].get(gender)
+        names = self.data['names'].get(gender.value)
         return self.random.choice(names)
 
-    def surname(self, gender: Gender = 0) -> str:
+    def surname(self, gender: Gender = Gender.RANDOM) -> str:
         """Get a random surname.
 
-        :param gender: The gender of person.
-        :type gender: int of str
+        :param gender: Gender's enum object.
         :return: Surname.
 
         :Example:
@@ -99,49 +96,52 @@ class Personal(BaseProvider):
         if self.locale in SURNAMES_SEPARATED_BY_GENDER:
             gender = check_gender(gender)
             return self.random.choice(
-                surnames.get(gender),
+                surnames.get(gender.value),
             )
 
         return self.random.choice(surnames)
 
-    def last_name(self, gender: Gender = 0) -> str:
+    def last_name(self, gender: Gender = Gender.RANDOM) -> str:
+        """An alias of self.surname.
+
+        :param gender: Gender's enum object.
+        :return: Last name.
+        """
         return self.surname(gender)
 
-    def title(self, gender: Gender = 0,
-              title_type: str = 'typical') -> str:
+    def title(self, gender: Gender = Gender.RANDOM,
+              title_type: TitleType = TitleType.RANDOM) -> str:
         """Get a random title (prefix/suffix) for name.
 
         :param gender: The gender.
-        :type gender: int or str
-        :param str title_type:  The type of title ('typical' and 'academic').
+        :param title_type: TitleType enum object.
         :return: The title.
-        :raises WrongArgument: if gender in incorrect format.
+        :raises ValueError: if gender or title_type in incorrect format.
 
         :Example:
             PhD.
         """
-        try:
-            gender = check_gender(gender)
-            titles = self.data['title'].get(
-                gender).get(title_type)
-        except KeyError:
-            raise WrongArgument('Wrong value of argument.')
+        gender = check_gender(gender).value
 
-        title = self.random.choice(titles)
-        return title
+        if title_type and title_type in TitleType:
+            titles = self.data['title'][gender]
+            titles = titles[title_type.value]
+            return self.random.choice(titles)
+        else:
+            raise ValueError(
+                'Title type should be enum object "TitleType"')
 
-    def full_name(self, gender: Gender = 0, reverse: bool = False) -> str:
+    def full_name(self, gender: Gender = Gender.RANDOM,
+                  reverse: bool = False) -> str:
         """Generate a random full name.
 
-        :param bool reverse: Return reversed full name.
-        :param gender: Gender.
-        :type gender: int or str
+        :param reverse: Return reversed full name.
+        :param gender: Gender's enum object.
         :return: Full name.
 
         :Example:
             Johann Wolfgang.
         """
-        gender = check_gender(gender)
 
         fmt = '{1} {0}' if reverse else '{0} {1}'
         return fmt.format(
@@ -505,7 +505,7 @@ class Personal(BaseProvider):
         views = self.data['views_on']
         return self.random.choice(views)
 
-    def nationality(self, gender: Gender = 0) -> str:
+    def nationality(self, gender: Gender = Gender.RANDOM) -> str:
         """Get a random nationality.
 
         :param gender: Gender.
@@ -522,7 +522,7 @@ class Personal(BaseProvider):
 
         if self.locale in separated_locales:
             gender = check_gender(gender)
-            nations = nationalities[gender]
+            nations = nationalities[gender.value]
             return self.random.choice(nations)
 
         return self.random.choice(nationalities)
