@@ -144,28 +144,9 @@ Very bad:
     >>> Patient()._bootstrap(count=600000, locale='de')
 
 
-Constants
+Enums
 ---------
-
-The constraints will be useful to you, because they allows you to avoid entering parameters manually, and this mean that they help to avoid typos.
-
-.. code:: python
-
-    >>> from mimesis import Personal
-    >>> import mimesis.constants as c
-
-    >>> person = Personal(c.EN)
-    >>> female_name = person.full_name(gender='emale')
-
-    # An exception UnexpectedGender will be raised.
-
-
-The constants helps to avoid similar issues:
-
-.. code:: python
-
-    >>> female_name = person.full_name(c.FEMALE)
-    'Lena Brady'
+TODO
 
 
 Importing images
@@ -325,6 +306,7 @@ object, describe structure of your schema (dict) in using fields in
 .. code:: python
 
     >>> from mimesis.schema import Field
+    >>> from mimesis.enums import Gender
     >>> _ = Field('en')
     >>> app_schema = (
     ...     lambda: {
@@ -334,7 +316,7 @@ object, describe structure of your schema (dict) in using fields in
     ...         "owner": {
     ...             "email": _('email'),
     ...             "token": _('token'),
-    ...             "creator": _('full_name', gender='female')
+    ...             "creator": _('full_name', gender=Gender.FEMALE)
     ...         }
     ...     }
     ... )

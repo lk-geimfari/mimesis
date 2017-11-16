@@ -55,9 +55,10 @@ As we said above, this library is really easy to use:
 .. code:: python
 
     >>> from mimesis import Personal
+    >>> from mimesis.enums import Gender
     >>> person = Personal('en')
 
-    >>> person.full_name(gender='female')
+    >>> person.full_name(gender=Gender.FEMALE)
     'Antonetta Garrison'
 
     >>> person.occupation()

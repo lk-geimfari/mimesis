@@ -107,9 +107,10 @@ shown below:
 .. code:: python
 
     >>> from mimesis import Personal
+    >>> from mimesis.enums import Gender
     >>> person = Personal('is')
     >>> for _ in range(0, 3):
-    ...     person.full_name(gender='male')
+    ...     person.full_name(gender=Gender.MALE)
     ...
     'Karl Brynjúlfsson'
     'Rögnvald Eiðsson'
@@ -121,11 +122,8 @@ help of ``email()`` method ``Personal()`` class, as below:
 
 .. code:: python
 
-    >>> person.email(gender='female')
+    >>> person.email()
     'lvana6108@gmail.com'
-
-    >>> person.email(gender='male')
-    'john2454@yandex.com'
 
 There is a little problem with the method above, which may cause the
 code to be slightly “dirty” in case the app uses more than one type of
@@ -154,9 +152,10 @@ you can create mock (female) Visa (Maestro, MasterCard) credit card
 holders:
 
 .. code:: python
-
+    >>> from mimesis import Personal
+    >>> from mimesis.enums import Gender
     >>> user = Personal('en')
-    >>> def get_card(sex='female'):
+    >>> def get_card(sex=Gender.RANDOM):
     ...     owner = {
     ...       'owner': user.full_name(sex),
     ...       'exp_date': user.credit_card_expiration_date(maximum=21),

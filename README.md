@@ -47,9 +47,10 @@ As we said above, this library is really easy to use. A simple usage example is 
 
 ```python
 >>> from mimesis import Personal
+>>> from mimesis.enums import Gender
 >>> person = Personal('en')
 
->>> person.full_name(gender='female')
+>>> person.full_name(gender=Gender.FEMALE)
 'Antonetta Garrison'
 
 >>> person.occupation()
@@ -241,6 +242,7 @@ For generating data by schema, just import `Field()` object, describe structure 
 
 ```python
 >>> from mimesis.schema import Field
+>>> from mimesis.enums import Gender
 >>> _ = Field('en')
 >>> app_schema = (
 ...     lambda: {
@@ -250,7 +252,7 @@ For generating data by schema, just import `Field()` object, describe structure 
 ...         "owner": {
 ...             "email": _('email'),
 ...             "token": _('token'),
-...             "creator": _('full_name', gender='female')
+...             "creator": _('full_name', gender=Gender.FEMALE)
 ...         }
 ...     }
 ... )
