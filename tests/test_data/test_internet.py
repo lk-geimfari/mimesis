@@ -208,3 +208,8 @@ def test_port(net, range_, excepted):
 
     with pytest.raises(KeyError):
         net.port('lol')
+
+
+def test_torrent_portal_category(net):
+    result = net.category_of_website()
+    assert result in data.TORRENT_CATEGORIES

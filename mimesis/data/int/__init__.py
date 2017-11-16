@@ -9,7 +9,7 @@ from .development import *
 from .datetime import *
 from .file import *
 from .hardware import *
-from .network import *
+from .internet import *
 from .personal import *
 from .scientific import *
 from .transport import *

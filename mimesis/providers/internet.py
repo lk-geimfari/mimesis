@@ -1,8 +1,9 @@
 from typing import Union, Optional
 
 from mimesis.data import (TLD, EMOJI, HASHTAGS, HTTP_METHODS,
-                          HTTP_STATUS_CODES, NETWORK_PROTOCOLS, SUBREDDITS,
-                          SUBREDDITS_NSFW, USERNAMES, USER_AGENTS)
+                          TORRENT_CATEGORIES, HTTP_STATUS_CODES,
+                          NETWORK_PROTOCOLS, SUBREDDITS, SUBREDDITS_NSFW,
+                          USERNAMES, USER_AGENTS)
 from mimesis.enums import PortRange
 from mimesis.exceptions import WrongArgument
 from mimesis.providers.base import BaseProvider
@@ -303,3 +304,13 @@ class Internet(BaseProvider):
             return self.random.randint(*range_.value)
         else:
             raise KeyError('You should use enum object "PortRange"')
+
+    def category_of_website(self):
+        """Get random category of torrent portal.
+
+        :return: Category name.
+
+        :Example:
+            Video/TV shows
+        """
+        return self.random.choice(TORRENT_CATEGORIES)
