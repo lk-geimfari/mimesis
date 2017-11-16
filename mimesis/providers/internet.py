@@ -290,7 +290,7 @@ class Internet(BaseProvider):
             protocols = list(NETWORK_PROTOCOLS.keys())
             raise WrongArgument('Unsupported layer, use: {}'.format(protocols))
 
-    def port(self, range_: PortRange = PortRange.DEFAULT) -> int:
+    def port(self, range_: PortRange = PortRange.ALL) -> int:
         """Generate random port.
 
         :param range_: Range enum object.
