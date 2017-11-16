@@ -6,6 +6,7 @@ import pytest
 
 from mimesis import Internet
 from mimesis import data
+from mimesis.enums import PortRange
 from mimesis.exceptions import WrongArgument
 
 from . import _patterns as p
@@ -194,18 +195,16 @@ def test_top_level_domain_unsupported(net):
         net.top_level_domain(domain_type='nil')
 
 
-def test_port(net):
-    result = net.port()
-    assert (result >= 1) and (result <= 65535)
-
-    result = net.port('well-known')
-    assert (result >= 1) and (result <= 1023)
-
-    result = net.port('ephemeral')
-    assert (result >= 49152) and (result <= 65535)
-
-    result = net.port('registered')
-    assert (result >= 1024) and (result <= 49151)
+@pytest.mark.parametrize(
+    'range_, excepted', [
+        (PortRange.DEFAULT, (1, 65535)),
+        (PortRange.EPHEMERAL, (49152, 65535)),
+        (PortRange.REGISTERED, (1024, 49151)),
+    ],
+)
+def test_port(net, range_, excepted):
+    result = net.port(range_=range_)
+    assert (result >= excepted[0]) and (result <= excepted[1])
 
     with pytest.raises(KeyError):
         net.port('lol')

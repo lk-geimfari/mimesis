@@ -3,6 +3,7 @@ from typing import Union, Optional
 from mimesis.data import (TLD, EMOJI, HASHTAGS, HTTP_METHODS,
                           HTTP_STATUS_CODES, NETWORK_PROTOCOLS, SUBREDDITS,
                           SUBREDDITS_NSFW, USERNAMES, USER_AGENTS)
+from mimesis.enums import PortRange
 from mimesis.exceptions import WrongArgument
 from mimesis.providers.base import BaseProvider
 from mimesis.providers.file import File
@@ -289,28 +290,16 @@ class Internet(BaseProvider):
             protocols = list(NETWORK_PROTOCOLS.keys())
             raise WrongArgument('Unsupported layer, use: {}'.format(protocols))
 
-    def port(self, diapason: str = '') -> int:
-        """Generate random port. Default range is well-known.
+    def port(self, range_: PortRange = PortRange.DEFAULT) -> int:
+        """Generate random port.
 
-        :param str diapason: Diapason name (well-known,
-            well-known, registered)
+        :param range_: Range enum object.
         :return: Port number.
-        :rtype: int
 
         :Example:
             8080
         """
-        diapasons = {
-            'default': (1, 65535),
-            'well-known': (1, 1023),
-            'ephemeral': (49152, 65535),
-            'registered': (1024, 49151),
-        }
-        diapason = 'default' if not diapason else diapason
-
-        try:
-            ranges = diapasons[diapason]
-        except KeyError:
-            raise KeyError('Unsupported diapason name')
-
-        return self.random.randint(*ranges)
+        if range_ and range_ in PortRange:
+            return self.random.randint(*range_.value)
+        else:
+            raise KeyError('You should use enum object "PortRange"')

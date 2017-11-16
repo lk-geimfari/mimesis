@@ -16,7 +16,8 @@ from mimesis.exceptions import (
     UnsupportedLocale,
 )
 from mimesis import config
-from mimesis.typing import JSON, Gender
+from mimesis.typing import JSON
+from mimesis.enums import Gender
 
 __all__ = ['pull', 'download_image', 'locale_info', 'check_gender']
 
@@ -141,38 +142,6 @@ def download_image(url: str = '', save_path: str = '',
     return None
 
 
-def check_gender(gender: Gender = 0) -> str:
-    """Checking of the correctness of gender.
-
-    :param gender: Gender.
-    :type gender: int or str
-    :return: Gender.
-    :raises UnexpectedGender: if gender has not correct value.
-    """
-    f, m = ('female', 'male')
-    # When gender is None or 0, 9
-    o = choice([f, m])
-
-    options = {
-        '0': o, '9': o,
-        '1': m, '2': f,
-        'f': f, 'm': m,
-        f: f, m: m,
-    }
-
-    if gender is None:
-        return o
-
-    supported = sorted(options)
-    gender = str(gender).lower()
-
-    if gender not in supported:
-        raise UnexpectedGender(
-            'Gender must be {}.'.format(', '.join(supported)))
-
-    return options[gender]
-
-
 def setup_locale(locale: str = '') -> str:
     """Setup locale to BaseProvider.
 
@@ -207,3 +176,19 @@ def custom_code(mask: str = '@###',
             code += p
 
     return code
+
+
+def check_gender(gender: Gender = Gender.RANDOM) -> Gender:
+    """Check correctness of the gender.
+
+    :param gender: Gender's enum object.
+    :return: Gender.
+    :raises UnexpectedGender: if gender has incorrect value.
+    """
+    if gender and gender in Gender:
+        return gender
+    else:
+        raise UnexpectedGender(
+            'You should use enum object "Gender" '
+            'from the module mimesis.enums'
+        )
