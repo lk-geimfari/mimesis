@@ -8,6 +8,7 @@ from .int.file import *
 from .int.hardware import *
 from .int.internet import *
 from .int.personal import *
+from .int.payment import *
 from .int.scientific import *
 from .int.transport import *
 from .int.games import *

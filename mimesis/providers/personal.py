@@ -1,6 +1,6 @@
 import re
 from string import ascii_letters, digits, punctuation
-from typing import Union
+from typing import Union, Optional
 
 from mimesis.data import (CALLING_CODES, BLOOD_GROUPS, EMAIL_DOMAINS,
                           ENGLISH_LEVEL, FAVORITE_MUSIC_GENRE, GENDER_SYMBOLS,
@@ -121,10 +121,10 @@ class Personal(BaseProvider):
         :Example:
             PhD.
         """
-        gender = check_gender(gender).value
+        gender = check_gender(gender)
 
         if title_type and title_type in TitleType:
-            titles = self.data['title'][gender]
+            titles = self.data['title'][gender.value]
             titles = titles[title_type.value]
             return self.random.choice(titles)
         else:
@@ -322,41 +322,6 @@ class Personal(BaseProvider):
         groups = regex.search(str_num + luhn_checksum(str_num))
         card = ' '.join(groups.groups())
         return card
-
-    def credit_card_expiration_date(self, minimum: int = 16,
-                                    maximum: int = 25) -> str:
-        """Generate a random expiration date for credit card.
-
-        :param int minimum: Date of issue.
-        :param int maximum: Maximum of expiration_date.
-        :return: Expiration date of credit card.
-
-        :Example:
-            03/19.
-        """
-        month = self.random.randint(1, 12)
-        year = self.random.randint(minimum, maximum)
-        return '{0:02d}/{1}'.format(month, year)
-
-    def cid(self) -> int:
-        """Generate a random CID code.
-
-        :return: CID code.
-
-        :Example:
-            7452
-        """
-        return self.random.randint(1000, 9999)
-
-    def paypal(self) -> str:
-        """Generate a random PayPal account.
-
-        :return: Email of PapPal user.
-
-        :Example:
-            wolf235@gmail.com
-        """
-        return self.email()
 
     def social_media_profile(self) -> str:
         """Generate profile for random social network.

@@ -24,7 +24,6 @@ from mimesis.utils import check_gender
 from ._patterns import (
     USERNAME_REGEX,
     STR_REGEX,
-    CREDIT_CARD_REGEX,
     EMAIL_REGEX,
 )
 
@@ -74,11 +73,6 @@ def test_work_experience_extreme(_personal):
     assert result == 0
 
 
-def test_paypal(_personal):
-    result = _personal.paypal()
-    assert result is not None
-
-
 @pytest.mark.parametrize(
     'algorithm, length', [
         ('md5', 32),
@@ -125,52 +119,6 @@ def test_email(_personal):
     result = _personal.email(domains=domains)
     assert re.match(EMAIL_REGEX, result)
     assert result.split('@')[1] == 'example.com'
-
-
-def test_bitcoin(_personal):
-    result = _personal.bitcoin()
-    assert len(result) == 34
-
-
-def test_cvv(_personal):
-    result = _personal.cvv()
-    assert 100 <= result
-    assert result <= 999
-
-
-@pytest.mark.parametrize(
-    'card_type', [
-        # Visa
-        'visa', 'vi', 'v',
-
-        # MasterCard
-        'master_card', 'master', 'mc', 'm',
-
-        # American Express
-        'american_express', 'amex', 'ax', 'a',
-    ],
-)
-def test_credit_card_number(_personal, card_type):
-    result = _personal.credit_card_number(card_type=card_type)
-    assert re.match(CREDIT_CARD_REGEX, result)
-
-    with pytest.raises(NotImplementedError):
-        _personal.credit_card_number(card_type='discover')
-
-
-def test_expiration_date(_personal):
-    result = _personal.credit_card_expiration_date(
-        minimum=16, maximum=25)
-
-    year = result.split('/')[1]
-    assert int(year) >= 16
-    assert int(year) <= 25
-
-
-def test_cid(_personal):
-    result = _personal.cid()
-    assert 1000 <= result
-    assert result <= 9999
 
 
 def test_height(_personal):

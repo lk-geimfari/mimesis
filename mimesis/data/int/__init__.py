@@ -11,6 +11,7 @@ from .file import *
 from .hardware import *
 from .internet import *
 from .personal import *
+from .payment import *
 from .scientific import *
 from .transport import *
 from .games import *
