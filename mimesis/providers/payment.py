@@ -4,7 +4,8 @@ import string
 from mimesis.enums import CardType
 from mimesis.data import CREDIT_CARD_NETWORKS
 from mimesis.utils import luhn_checksum
-from mimesis.providers import BaseProvider, Personal
+from mimesis.providers.base import BaseProvider
+from mimesis.providers.personal import Personal
 
 
 class Payment(BaseProvider):
