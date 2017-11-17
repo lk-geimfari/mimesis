@@ -24,9 +24,6 @@ JSON = Union[
 
 _StrOrInt = Union[str, int]
 
-# Gender can be int and str.
-Gender = _StrOrInt
-
 Size = _StrOrInt
 
 Number = _StrOrInt
