@@ -21,6 +21,11 @@ def test_base_text(generic):
     assert result is not None
 
 
+def test_base_payment(generic):
+    result = generic.payment.bitcoin_address()
+    assert result is not None
+
+
 def test_base_address(generic):
     result = generic.address.address()
     assert result is not None
