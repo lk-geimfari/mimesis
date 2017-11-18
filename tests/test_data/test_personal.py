@@ -17,7 +17,6 @@ from mimesis.enums import Gender, TitleType
 from mimesis.exceptions import (
     NonEnumerableError,
     UnsupportedAlgorithm,
-    WrongArgument,
 )
 from mimesis.utils import check_gender
 
@@ -107,7 +106,7 @@ def test_username(_personal, template):
     result = _personal.username(template=template)
     assert re.match(USERNAME_REGEX, result)
 
-    with pytest.raises(WrongArgument):
+    with pytest.raises(KeyError):
         _personal.username(template=':D')
 
 

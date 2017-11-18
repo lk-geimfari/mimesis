@@ -1,6 +1,4 @@
 from mimesis.data import SI_PREFIXES, SI_PREFIXES_SYM
-from mimesis.exceptions import WrongArgument
-
 from mimesis.providers.base import BaseProvider
 
 
@@ -307,7 +305,7 @@ class UnitSystem(BaseProvider):
         :param sign: Sing of number (positive, negative)
         :param bool symbol: Return symbol of prefix.
         :return: Prefix for SI.
-        :raises WrongArgument: if sign is not supported.
+        :raises KeyError: if sign is not supported.
 
         :Example:
             mega
@@ -321,5 +319,5 @@ class UnitSystem(BaseProvider):
             prefixes = self.random.choice(prefixes[sign])  # type: ignore
             return prefixes  # type: ignore
         except KeyError:
-            raise WrongArgument(
-                "Unsupported sign. Use: 'positive' or 'negative'")
+            raise KeyError(
+                'Unsupported sign. Use: \'positive\' or \'negative\'')

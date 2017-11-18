@@ -4,7 +4,6 @@ import pytest
 
 from mimesis import UnitSystem
 from mimesis.data import SI_PREFIXES, SI_PREFIXES_SYM
-from mimesis.exceptions import WrongArgument
 
 
 @pytest.fixture
@@ -200,7 +199,7 @@ def test_prefix(us, sign, symbol):
     prefix = us.prefix(sign=sign, symbol=symbol)
     assert prefix in SI_PREFIXES[sign] or prefix in SI_PREFIXES_SYM[sign]
 
-    with pytest.raises(WrongArgument):
+    with pytest.raises(KeyError):
         us.prefix(sign='nil')
 
 

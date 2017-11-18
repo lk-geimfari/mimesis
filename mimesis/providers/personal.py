@@ -8,7 +8,6 @@ from mimesis.data import (
     SEXUALITY_SYMBOLS, USERNAMES,
 )
 from mimesis.enums import Gender, TitleType
-from mimesis.exceptions import WrongArgument
 from mimesis.providers.base import BaseProvider
 from mimesis.providers.cryptographic import Cryptographic
 from mimesis.config import SURNAMES_SEPARATED_BY_GENDER
@@ -160,7 +159,7 @@ class Personal(BaseProvider):
         :param str template: Template ('U_d', 'U.d', 'U-d', 'ld', 'l-d', 'Ud',
             'l.d', 'l_d', 'default')
         :return: Username.
-        :raises WrongArgument: if template is not supported.
+        :raises KeyError: if template is not supported.
 
         :Example:
             Celloid1873
@@ -222,7 +221,7 @@ class Personal(BaseProvider):
             try:
                 return templates[template]
             except KeyError:
-                raise WrongArgument(
+                raise KeyError(
                     'Unsupported template {unsupported}.'
                     'Use one of: {supported}'.format(
                         unsupported=template,

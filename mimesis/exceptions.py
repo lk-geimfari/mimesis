@@ -6,10 +6,6 @@ class JSONKeyError(KeyError):
     """ Raised when a JSON key doesn't exist. """
 
 
-class WrongArgument(KeyError):
-    """ Raised when argument is wrong. """
-
-
 class UnexpectedGender(KeyError):
     """ Raised when gender is wrong. """
 
@@ -23,6 +19,8 @@ class UndefinedSchema(ValueError):
 
 
 class NonEnumerableError(TypeError):
+    """ Raised when object is not instance of Enum """
+
     def __init__(self, enum_name):
         self.enum_name = enum_name
 
