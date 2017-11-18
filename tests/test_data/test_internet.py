@@ -6,8 +6,7 @@ import pytest
 
 from mimesis import Internet
 from mimesis import data
-from mimesis.enums import PortRange
-from mimesis.exceptions import WrongArgument
+from mimesis.enums import PortRange, TLDType, Layer
 
 from . import _patterns as p
 
@@ -98,22 +97,23 @@ def test_image_by_keyword(net):
 
 @pytest.mark.parametrize(
     'layer', [
-        'application',
-        'data_link',
-        'network',
-        'physical',
-        'presentation',
-        'session',
-        'transport',
+        Layer.APPLICATION,
+        Layer.DATA_LINK,
+        Layer.NETWORK,
+        Layer.PHYSICAL,
+        Layer.PRESENTATION,
+        Layer.SESSION,
+        Layer.TRANSPORT,
+        Layer.RANDOM,
     ],
 )
 def test_network_protocol(net, layer):
     result = net.network_protocol(layer=layer)
-    assert result in data.NETWORK_PROTOCOLS[layer]
+    assert result in data.NETWORK_PROTOCOLS[layer.value]
 
 
 def test_network_protocol_wrong(net):
-    with pytest.raises(WrongArgument):
+    with pytest.raises(ValueError):
         net.network_protocol(layer='super')
 
 
@@ -173,26 +173,23 @@ def test_http_status_code(net):
 
 @pytest.mark.parametrize(
     'domain_type', [
-        'ccTLD',  # Country code top-level domains.
-        'gTLD',  # Generic top-level domains.
-        'GeoTLD',  # Geographic top-level domains.
-        'uTLD',  # Unsponsored top-level domains.
-        'sTLD',  # Sponsored top-level domains.
+        TLDType.CCTLD,
+        TLDType.GTLD,
+        TLDType.GEOTLD,
+        TLDType.UTLD,
+        TLDType.STLD,
+        TLDType.RANDOM,
     ],
 )
 def test_top_level_domain(net, domain_type):
-    result = net.top_level_domain(
-        domain_type=domain_type,
-    )
-    domain_type = domain_type.lower()
-
+    result = net.top_level_domain(tld_type=domain_type)
     assert result is not None
-    assert result in data.TLD[domain_type]
+    assert result in data.TLD[domain_type.value]
 
 
 def test_top_level_domain_unsupported(net):
-    with pytest.raises(KeyError):
-        net.top_level_domain(domain_type='nil')
+    with pytest.raises(ValueError):
+        net.top_level_domain(tld_type='nil')
 
 
 @pytest.mark.parametrize(

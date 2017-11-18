@@ -4,7 +4,7 @@ from mimesis.data import (TLD, EMOJI, HASHTAGS, HTTP_METHODS,
                           TORRENT_CATEGORIES, HTTP_STATUS_CODES,
                           NETWORK_PROTOCOLS, SUBREDDITS, SUBREDDITS_NSFW,
                           USERNAMES, USER_AGENTS)
-from mimesis.enums import PortRange
+from mimesis.enums import PortRange, TLDType, Layer
 from mimesis.exceptions import WrongArgument
 from mimesis.providers.base import BaseProvider
 from mimesis.providers.file import File
@@ -194,10 +194,10 @@ class Internet(BaseProvider):
         tags = [self.random.choice(hashtags) for _ in range(int(quantity))]
         return tags
 
-    def home_page(self, domain_type: Optional[str] = None) -> str:
+    def home_page(self, tld_type: TLDType = TLDType.GTLD) -> str:
         """Generate a random home page.
 
-        :param str domain_type: TLD type.
+        :param str tld_type: TLD type.
         :return: Random home page.
 
         :Example:
@@ -205,38 +205,23 @@ class Internet(BaseProvider):
         """
         resource = self.random.choice(USERNAMES)
         domain = self.top_level_domain(
-            domain_type=domain_type,
+            tld_type=tld_type,
         )
 
         return 'http://www.{}{}'.format(
             resource, domain)
 
-    def top_level_domain(self, domain_type: Optional[str] = None) -> str:
+    def top_level_domain(self, tld_type: TLDType = TLDType.RANDOM) -> str:
         """Return random top level domain.
 
-        :param str domain_type: Type of domain (ccTLD, gTLD,
-            GeoTLD, uTLD, sTLD).
+        :param tld_type: Enum object DomainType
         :return: Top level domain.
-        :raises KeyError: if domain_type is not supported.
+        :raises ValueError: if tld_type not in DomainType.
         """
-        # TODO: This is really ugly solution. Fix it.
-        supported = tuple(TLD.keys())
-
-        if domain_type is not None:
-            try:
-                domain_type = domain_type.lower()
-                return self.random.choice(TLD[domain_type])
-            except KeyError:
-                raise KeyError(
-                    'Unsupported type of domain. Please, use one of: {}'.format(
-                        ', '.join(supported),
-                    ),
-                )
-
-        domain_type = self.random.choice(supported)
-        domains = TLD[domain_type]
-
-        return self.random.choice(domains)
+        if tld_type and tld_type in TLDType:
+            return self.random.choice(TLD[tld_type.value])
+        else:
+            raise ValueError('tld_type should be enum object DomainType')
 
     def subreddit(self, nsfw: bool = False,
                   full_url: bool = False) -> str:
@@ -271,25 +256,19 @@ class Internet(BaseProvider):
         """
         return self.random.choice(USER_AGENTS)
 
-    def network_protocol(self, layer: str = 'application') -> str:
+    def network_protocol(self, layer: Layer = Layer.RANDOM) -> str:
         """Get a random network protocol form OSI model.
 
-        :param str layer:
-            Layer of protocol: application, data_link, network, physical,
-            presentation, session and transport.
+        :param layer: Enum object Layer.
         :return: Protocol name.
-        :raises WrongArgument: if layer is not supported.
 
         :Example:
             AMQP
         """
-        layer = layer.lower()
-        try:
-            protocol = self.random.choice(NETWORK_PROTOCOLS[layer])
-            return protocol
-        except KeyError:
-            protocols = list(NETWORK_PROTOCOLS.keys())
-            raise WrongArgument('Unsupported layer, use: {}'.format(protocols))
+        if layer and layer in Layer:
+            return self.random.choice(NETWORK_PROTOCOLS[layer.value])
+        else:
+            raise ValueError('You should use enum object Layer')
 
     def port(self, range_: PortRange = PortRange.ALL) -> int:
         """Generate random port.
