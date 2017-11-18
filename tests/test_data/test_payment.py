@@ -3,7 +3,9 @@ import re
 import pytest
 
 from mimesis import Payment
-from mimesis.enums import CardType
+from mimesis.data import CREDIT_CARD_NETWORKS
+from mimesis.enums import CardType, Gender
+from mimesis.exceptions import NonEnumerableError
 from ._patterns import CREDIT_CARD_REGEX
 
 
@@ -26,7 +28,6 @@ def test_cvv(payment):
 
 @pytest.mark.parametrize(
     'card_type', [
-        CardType.RANDOM,
         CardType.VISA,
         CardType.MASTER_CARD,
         CardType.AMERICAN_EXPRESS,
@@ -36,8 +37,8 @@ def test_credit_card_number(payment, card_type):
     result = payment.credit_card_number(card_type=card_type)
     assert re.match(CREDIT_CARD_REGEX, result)
 
-    with pytest.raises(ValueError):
-        payment.credit_card_number(card_type=None)
+    with pytest.raises(NonEnumerableError):
+        payment.credit_card_number(card_type='nil')
 
 
 def test_expiration_date(payment):
@@ -58,3 +59,22 @@ def test_cid(payment):
 def test_paypal(payment):
     result = payment.paypal()
     assert result is not None
+
+
+@pytest.mark.parametrize(
+    'gender', [
+        Gender.MALE,
+        Gender.FEMALE,
+    ],
+)
+def test_credit_card_owner(payment, gender):
+    result = payment.credit_card_owner(gender=gender)
+    assert isinstance(result, dict)
+    assert 'owner' in result
+    assert 'credit_card' in result
+    assert 'expiration_date' in result
+
+
+def credit_card_network(payment):
+    result = payment.credit_card_network()
+    assert result in CREDIT_CARD_NETWORKS

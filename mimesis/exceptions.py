@@ -20,3 +20,12 @@ class UnsupportedAlgorithm(AttributeError):
 
 class UndefinedSchema(ValueError):
     """ Raised when schema is empty. """
+
+
+class NonEnumerableError(TypeError):
+    def __init__(self, enum_name):
+        self.enum_name = enum_name
+
+    def __str__(self):
+        return 'You should use enum object «{}» ' \
+               'from module mimesis.enums'.format(self.enum_name)

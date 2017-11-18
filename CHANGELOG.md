@@ -5,7 +5,7 @@
 
 - Added `Field` for generating data by schema
 - Added `category_of_website` and `port` to `Internet` data provider
-- Added support of enums in arguments of method
+- Added new module `enums.py` and support of enums in arguments of methods
 - Added `dna`, `rna` and `atomic_number` to `Science` data provider
 - Added `schoice` method for `Random`
 - Added alias `last_name` for `surname` in `Personal` data provider
@@ -13,12 +13,11 @@
 - Added annotations for all methods and functions for supporting type hints
 - Added module `typing.py` for custom types
 - Added new data provider `Payment`
-- Added new methods to `Payment`: `credit_card_network`, `ethereum_addres`, `litecoin_addres`, 
-`bitcoin_addres`, `credit_card_owner`
+- Added new methods to `Payment`: `credit_card_network`, `bitcoin_addres`, `credit_card_owner`
 
 **Fixed**:
 - Fixed issue with `primes` in `Nimbers` data provider
-- Fixed issue with repeated output when using `Code().custom code`
+- Fixed issue with repeated output on using `Code().custom code`
 - Other minor fix and improvements
 
 

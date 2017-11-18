@@ -1,6 +1,9 @@
 import re
+from typing import Optional
 
 from mimesis.data import EXTENSIONS, MIME_TYPES
+from mimesis.enums import FileType, MimeType
+from mimesis.exceptions import NonEnumerableError
 from mimesis.providers.base import BaseProvider
 from mimesis.providers.text import Text
 
@@ -21,37 +24,37 @@ class File(BaseProvider):
         replacer = self.random.choice(['_', '-'])
         return re.sub('\s+', replacer, string.strip())
 
-    def extension(self, file_type: str = 'text') -> str:
+    def extension(self, file_type: Optional[FileType] = None) -> str:
         """Get a random file extension from list.
 
-        :param str file_type:
-            File type (source, text, data, audio, video, image,
-            executable, compressed).
-        :return: Extension of a file.
+        :param file_type: Enum object FileType.
+        :return: Extension of the file.
 
         :Example:
-            .py (file_type='source').
+            .py
         """
-        # TODO: Catch exception KeyError
-        key = file_type.lower()
-        return self.random.choice(EXTENSIONS[key])
+        if file_type is None:
+            file_type = FileType.get_random_item()
 
-    def mime_type(self, type_t: str = 'application') -> str:
+        if file_type and file_type in FileType:
+            return self.random.choice(EXTENSIONS[file_type.value])
+        else:
+            raise NonEnumerableError("FileType")
+
+    def mime_type(self, type_: Optional[MimeType] = None) -> str:
         """Get a random mime type from list.
 
-        :param str type_t:
-            Type of media: (application, image, video, audio, text, message).
+        :param type_: Enum object MimeType.
         :return: Mime type.
         :raises ValueError: if type_t is not supported.
         """
-        supported = ' '.join(MIME_TYPES.keys())
+        if type_ is None:
+            type_ = MimeType.get_random_item()
 
-        if type_t not in list(MIME_TYPES.keys()):
-            raise ValueError(
-                'Unsupported mime type! Use: {}'.format(supported))
-
-        mime_type = self.random.choice(MIME_TYPES[type_t])
-        return mime_type
+        if type_ and type_ in MimeType:
+            return self.random.choice(MIME_TYPES[type_.value])
+        else:
+            raise NonEnumerableError("MimeType")
 
     def size(self, minimum: int = 1, maximum: int = 100) -> str:
         """Get size of file.
@@ -72,12 +75,10 @@ class File(BaseProvider):
             unit=unit,
         )
 
-    def file_name(self, file_type: str = 'data') -> str:
+    def file_name(self, file_type: Optional[FileType] = None) -> str:
         """Get a random file name with some extension.
 
-        :param str file_type:
-            File type (source, text, data, audio, video,
-            image, executable, compressed)
+        :param str file_type: Enum object FileType
         :return: File name.
 
         :Example:

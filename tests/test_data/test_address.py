@@ -79,29 +79,27 @@ def test_state(address):
     assert result_abbr in address.data['state']['abbr']
 
 
-# TODO: Refactoring
-
 def test_province(address):
-    result = address.state()
+    result = address.province()
     assert result in address.data['state']['name']
 
-    result_abbr = address.state(abbr=True)
+    result_abbr = address.province(abbr=True)
     assert result_abbr in address.data['state']['abbr']
 
 
 def region(address):
-    result = address.state()
+    result = address.region()
     assert result in address.data['state']['name']
 
-    result_abbr = address.state(abbr=True)
+    result_abbr = address.region(abbr=True)
     assert result_abbr in address.data['state']['abbr']
 
 
 def federal_subject(address):
-    result = address.state()
+    result = address.federal_subject()
     assert result in address.data['state']['name']
 
-    result_abbr = address.state(abbr=True)
+    result_abbr = address.federal_subject(abbr=True)
     assert result_abbr in address.data['state']['abbr']
 
 

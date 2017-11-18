@@ -37,6 +37,7 @@ GENERIC_ATTRS = [
     'internet',
     'numbers',
     'path',
+    'payment',
     'personal',
     'science',
     'text',

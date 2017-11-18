@@ -8,12 +8,13 @@ import json
 import ssl
 from os import path
 from random import randint, choice
-from typing import Mapping, Union
+from typing import Mapping, Union, Optional
 from urllib import request
 
 from mimesis.exceptions import (
     UnexpectedGender,
     UnsupportedLocale,
+    NonEnumerableError,
 )
 from mimesis import config
 from mimesis.typing import JSON
@@ -178,16 +179,16 @@ def custom_code(mask: str = '@###',
     return code
 
 
-def check_gender(gender: Gender = Gender.RANDOM) -> Gender:
+def check_gender(gender: Optional[Gender] = None) -> Gender:
     """Check correctness of the gender.
 
     :param gender: Gender's enum object.
     :return: Gender.
-    :raises UnexpectedGender: if gender has incorrect value.
+    :raises NonEnumerableError: if gender has incorrect value.
     """
-    if gender and gender in Gender:
+    if gender is None:
+        return Gender.get_random_item()
+    elif gender and gender in Gender:
         return gender
     else:
-        raise UnexpectedGender(
-            'You should use "Gender" from the module mimesis.enums',
-        )
+        raise NonEnumerableError("Gender")

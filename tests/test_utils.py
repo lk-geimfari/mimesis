@@ -6,7 +6,7 @@ import socket
 import pytest
 
 from mimesis.enums import Gender
-from mimesis.exceptions import UnsupportedLocale, UnexpectedGender
+from mimesis.exceptions import UnsupportedLocale, NonEnumerableError
 from mimesis.utils import (
     check_gender,
     custom_code,
@@ -138,13 +138,13 @@ def test_custom_code():
     'gender, excepted', [
         (Gender.MALE, 'male'),
         (Gender.FEMALE, 'female'),
-        (Gender.RANDOM, ['female', 'male']),
+        (None, ['female', 'male']),
     ],
 )
 def test_check_gender(gender, excepted):
-    result = check_gender(gender).value
-    assert (result == excepted) or (result in excepted)
-    assert gender in Gender
+    result = check_gender(gender)
+    assert (result.value == excepted) or (result.value in excepted)
+    assert result in Gender
 
-    with pytest.raises(UnexpectedGender):
-        check_gender(gender=None)
+    with pytest.raises(NonEnumerableError):
+        check_gender(gender='nil')

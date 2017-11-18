@@ -4,8 +4,8 @@ from mimesis.data import (TLD, EMOJI, HASHTAGS, HTTP_METHODS,
                           TORRENT_CATEGORIES, HTTP_STATUS_CODES,
                           NETWORK_PROTOCOLS, SUBREDDITS, SUBREDDITS_NSFW,
                           USERNAMES, USER_AGENTS)
-from mimesis.enums import PortRange, TLDType, Layer
-from mimesis.exceptions import WrongArgument
+from mimesis.enums import PortRange, TLDType, Layer, MimeType
+from mimesis.exceptions import NonEnumerableError
 from mimesis.providers.base import BaseProvider
 from mimesis.providers.file import File
 from mimesis.typing import Size
@@ -15,7 +15,7 @@ class Internet(BaseProvider):
     """Class for generate the internet data."""
 
     @staticmethod
-    def content_type(mime_type: str = 'application') -> str:
+    def content_type(mime_type: Optional[MimeType] = None) -> str:
         """Get a random HTTP content type.
 
         :return: Content type.
@@ -23,7 +23,7 @@ class Internet(BaseProvider):
         :Example:
             Content-Type: application/json
         """
-        fmt = File().mime_type(type_t=mime_type)
+        fmt = File().mime_type(type_=mime_type)
         return 'Content-Type: {}'.format(fmt)
 
     def http_status_code(self, code_only: bool = True) -> str:
@@ -180,6 +180,7 @@ class Internet(BaseProvider):
         :Example:
             ['#love', '#sky', '#nice'].
         """
+        # TODO: Update it using enums
         category = category.lower()
         supported = ''.join(list(HASHTAGS.keys()))
 
@@ -194,7 +195,7 @@ class Internet(BaseProvider):
         tags = [self.random.choice(hashtags) for _ in range(int(quantity))]
         return tags
 
-    def home_page(self, tld_type: TLDType = TLDType.GTLD) -> str:
+    def home_page(self, tld_type: Optional[TLDType] = None) -> str:
         """Generate a random home page.
 
         :param str tld_type: TLD type.
@@ -211,17 +212,20 @@ class Internet(BaseProvider):
         return 'http://www.{}{}'.format(
             resource, domain)
 
-    def top_level_domain(self, tld_type: TLDType = TLDType.RANDOM) -> str:
+    def top_level_domain(self, tld_type: Optional[TLDType] = None) -> str:
         """Return random top level domain.
 
         :param tld_type: Enum object DomainType
         :return: Top level domain.
         :raises ValueError: if tld_type not in DomainType.
         """
+        if tld_type is None:
+            tld_type = TLDType.get_random_item()
+
         if tld_type and tld_type in TLDType:
             return self.random.choice(TLD[tld_type.value])
         else:
-            raise ValueError('tld_type should be enum object DomainType')
+            raise NonEnumerableError('DomainType')
 
     def subreddit(self, nsfw: bool = False,
                   full_url: bool = False) -> str:
@@ -256,7 +260,7 @@ class Internet(BaseProvider):
         """
         return self.random.choice(USER_AGENTS)
 
-    def network_protocol(self, layer: Layer = Layer.RANDOM) -> str:
+    def network_protocol(self, layer: Optional[Layer] = None) -> str:
         """Get a random network protocol form OSI model.
 
         :param layer: Enum object Layer.
@@ -265,24 +269,27 @@ class Internet(BaseProvider):
         :Example:
             AMQP
         """
+        if layer is None:
+            layer = Layer.get_random_item()
+
         if layer and layer in Layer:
             return self.random.choice(NETWORK_PROTOCOLS[layer.value])
         else:
-            raise ValueError('You should use enum object Layer')
+            raise NonEnumerableError('Layer')
 
-    def port(self, range_: PortRange = PortRange.ALL) -> int:
+    def port(self, port_range: PortRange = PortRange.ALL) -> int:
         """Generate random port.
 
-        :param range_: Range enum object.
+        :param port_range: Range enum object.
         :return: Port number.
 
         :Example:
             8080
         """
-        if range_ and range_ in PortRange:
-            return self.random.randint(*range_.value)
+        if port_range and port_range in PortRange:
+            return self.random.randint(*port_range.value)
         else:
-            raise KeyError('You should use enum object "PortRange"')
+            raise NonEnumerableError('PortRange')
 
     def category_of_website(self):
         """Get random category of torrent portal.

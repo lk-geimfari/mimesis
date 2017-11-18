@@ -6,7 +6,8 @@ import pytest
 
 from mimesis import Internet
 from mimesis import data
-from mimesis.enums import PortRange, TLDType, Layer
+from mimesis.enums import PortRange, TLDType, Layer, MimeType
+from mimesis.exceptions import NonEnumerableError
 
 from . import _patterns as p
 
@@ -104,7 +105,6 @@ def test_image_by_keyword(net):
         Layer.PRESENTATION,
         Layer.SESSION,
         Layer.TRANSPORT,
-        Layer.RANDOM,
     ],
 )
 def test_network_protocol(net, layer):
@@ -112,9 +112,9 @@ def test_network_protocol(net, layer):
     assert result in data.NETWORK_PROTOCOLS[layer.value]
 
 
-def test_network_protocol_wrong(net):
-    with pytest.raises(ValueError):
-        net.network_protocol(layer='super')
+def test_network_protocol_exception(net):
+    with pytest.raises(NonEnumerableError):
+        net.network_protocol(layer='nil')
 
 
 def test_ip_v4(net):
@@ -144,23 +144,23 @@ def test_http_method(net):
 
 @pytest.mark.parametrize(
     'mime_type', [
-        'application',
-        'audio',
-        'image',
-        'message',
-        'text',
-        'video',
+        MimeType.APPLICATION,
+        MimeType.AUDIO,
+        MimeType.IMAGE,
+        MimeType.MESSAGE,
+        MimeType.TEXT,
+        MimeType.VIDEO,
     ],
 )
 def test_content_type(net, mime_type):
     ct = net.content_type(mime_type=mime_type)
     ct = ct.split(':')[1].strip()
-    assert ct in data.MIME_TYPES[mime_type]
+    assert ct in data.MIME_TYPES[mime_type.value]
 
 
 def test_content_type_wrong_arg(net):
-    with pytest.raises(ValueError):
-        net.content_type(mime_type='blablabla')
+    with pytest.raises(NonEnumerableError):
+        net.content_type(mime_type='nil')
 
 
 def test_http_status_code(net):
@@ -178,7 +178,6 @@ def test_http_status_code(net):
         TLDType.GEOTLD,
         TLDType.UTLD,
         TLDType.STLD,
-        TLDType.RANDOM,
     ],
 )
 def test_top_level_domain(net, domain_type):
@@ -188,7 +187,7 @@ def test_top_level_domain(net, domain_type):
 
 
 def test_top_level_domain_unsupported(net):
-    with pytest.raises(ValueError):
+    with pytest.raises(NonEnumerableError):
         net.top_level_domain(tld_type='nil')
 
 
@@ -200,11 +199,11 @@ def test_top_level_domain_unsupported(net):
     ],
 )
 def test_port(net, range_, excepted):
-    result = net.port(range_=range_)
+    result = net.port(port_range=range_)
     assert (result >= excepted[0]) and (result <= excepted[1])
 
-    with pytest.raises(KeyError):
-        net.port('lol')
+    with pytest.raises(NonEnumerableError):
+        net.port('nill')
 
 
 def test_torrent_portal_category(net):

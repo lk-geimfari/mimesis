@@ -3,6 +3,8 @@
 import pytest
 
 from mimesis import File
+from mimesis.enums import FileType, MimeType
+from mimesis.exceptions import NonEnumerableError
 from mimesis.data import EXTENSIONS, MIME_TYPES
 
 
@@ -13,49 +15,49 @@ def file():
 
 @pytest.mark.parametrize(
     'extension', [
-        'audio',
-        'compressed',
-        'data',
-        'executable',
-        'image',
-        'source',
-        'text',
-        'video',
+        FileType.AUDIO,
+        FileType.COMPRESSED,
+        FileType.DATA,
+        FileType.EXECUTABLE,
+        FileType.IMAGE,
+        FileType.SOURCE,
+        FileType.TEXT,
+        FileType.VIDEO,
     ],
 )
 def test_extension(file, extension):
     ext = file.extension(file_type=extension)
-
-    assert ext in EXTENSIONS[extension]
+    assert ext in EXTENSIONS[extension.value]
 
 
 @pytest.mark.parametrize(
-    'mime_type', [
-        'application',
-        'audio',
-        'image',
-        'message',
-        'text',
-        'video',
+    'type_', [
+        MimeType.APPLICATION,
+        MimeType.AUDIO,
+        MimeType.IMAGE,
+        MimeType.MESSAGE,
+        MimeType.TEXT,
+        MimeType.VIDEO,
     ],
 )
-def test_mime_type(file, mime_type):
-    assert file.mime_type(type_t=mime_type) in MIME_TYPES[mime_type]
+def test_mime_type(file, type_):
+    result = file.mime_type(type_=type_)
+    assert result in MIME_TYPES[type_.value]
 
-    with pytest.raises(ValueError):
-        file.mime_type(type_t='nil')
+    with pytest.raises(NonEnumerableError):
+        file.mime_type(type_='nil')
 
 
 @pytest.mark.parametrize(
     'file_type', [
-        'audio',
-        'compressed',
-        'data',
-        'executable',
-        'image',
-        'source',
-        'text',
-        'video',
+        FileType.AUDIO,
+        FileType.COMPRESSED,
+        FileType.DATA,
+        FileType.EXECUTABLE,
+        FileType.IMAGE,
+        FileType.SOURCE,
+        FileType.TEXT,
+        FileType.VIDEO,
     ],
 )
 def test_file_name(file, file_type):

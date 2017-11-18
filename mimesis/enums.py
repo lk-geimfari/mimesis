@@ -1,18 +1,16 @@
 from enum import Enum, EnumMeta
-from random import choice
+import random
 
 from mimesis.data import GENDER_SYMBOLS
-from mimesis.helpers import clsproperty
 
 
 class AllowRandom(EnumMeta):
-    """This metaclass allows an attribute `RANDOM` which
+    """This metaclass allow method get_random_item() which
     equal to random field of enum for his subclasses.
     """
 
-    @clsproperty
-    def RANDOM(self) -> Enum:
-        return choice(list(self))
+    def get_random_item(self):
+        return random.choice(list(self))
 
 
 class PortRange(Enum):
@@ -47,11 +45,6 @@ class Algorithm(Enum, metaclass=AllowRandom):
     SHA512 = 'sha512'
 
 
-class GenderFmt(Enum, metaclass=AllowRandom):
-    ISO5218 = [0, 1, 2, 9]
-    SYMBOL = GENDER_SYMBOLS
-
-
 class TLDType(Enum, metaclass=AllowRandom):
     CCTLD = 'cctld'
     GTLD = 'gtld'
@@ -68,3 +61,23 @@ class Layer(Enum, metaclass=AllowRandom):
     PRESENTATION = 'presentation'
     SESSION = 'session'
     TRANSPORT = 'transport'
+
+
+class FileType(Enum, metaclass=AllowRandom):
+    SOURCE = 'source'
+    TEXT = 'text'
+    DATA = 'data'
+    AUDIO = 'audio'
+    VIDEO = 'video'
+    IMAGE = 'image'
+    EXECUTABLE = 'executable'
+    COMPRESSED = 'compressed'
+
+
+class MimeType(Enum, metaclass=AllowRandom):
+    APPLICATION = 'application'
+    AUDIO = 'audio'
+    IMAGE = 'image'
+    MESSAGE = 'message'
+    TEXT = 'text'
+    VIDEO = 'video'

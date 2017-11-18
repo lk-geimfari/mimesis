@@ -1,7 +1,9 @@
 import re
 import string
+from typing import Optional
 
-from mimesis.enums import CardType
+from mimesis.enums import CardType, Gender
+from mimesis.exceptions import NonEnumerableError
 from mimesis.data import CREDIT_CARD_NETWORKS
 from mimesis.utils import luhn_checksum
 from mimesis.providers.base import BaseProvider
@@ -58,7 +60,7 @@ class Payment(BaseProvider):
         """
         return self.random.choice(CREDIT_CARD_NETWORKS)
 
-    def credit_card_number(self, card_type: CardType = CardType.RANDOM) -> str:
+    def credit_card_number(self, card_type: Optional[CardType] = None) -> str:
         """Generate a random credit card number.
 
         :param str card_type: Issuing Network. Default is Visa.
@@ -70,6 +72,9 @@ class Payment(BaseProvider):
         """
         length = 16
         regex = re.compile('(\d{4})(\d{4})(\d{4})(\d{4})')
+
+        if card_type is None:
+            card_type = CardType.get_random_item()
 
         if card_type == CardType.VISA:
             number = self.random.randint(4000, 4999)
@@ -83,8 +88,7 @@ class Payment(BaseProvider):
             length = 15
             regex = re.compile('(\d{4})(\d{6})(\d{5})')
         else:
-            raise ValueError(
-                'Card type should be enum object "CardType"'.format(card_type))
+            raise NonEnumerableError('CardType')
 
         str_num = str(number)
         while len(str_num) < length - 1:
@@ -119,14 +123,10 @@ class Payment(BaseProvider):
         """
         return self.random.randint(100, 999)
 
-    def credit_card_owner(self, gender):
-        # TODO: implement it
-        pass
-
-    def ethereum_address(self):
-        # TODO: implement it
-        pass
-
-    def litecoin_address(self):
-        # TODO: implement it
-        pass
+    def credit_card_owner(self, gender: Optional[Gender] = None) -> dict:
+        owner = {
+            'credit_card': self.credit_card_number(),
+            'expiration_date': self.credit_card_expiration_date(),
+            'owner': self.__personal.full_name(gender=gender).upper()
+        }
+        return owner

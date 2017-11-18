@@ -15,7 +15,7 @@ from mimesis.data import (
 )
 from mimesis.enums import Gender, TitleType
 from mimesis.exceptions import (
-    UnexpectedGender,
+    NonEnumerableError,
     UnsupportedAlgorithm,
     WrongArgument,
 )
@@ -179,18 +179,25 @@ def test_level_of_english(_personal):
     'gender', [
         Gender.FEMALE,
         Gender.MALE,
-        Gender.RANDOM,
     ],
 )
 def test_name(personal, gender):
     result = personal.name(gender=gender)
-    checked = check_gender(gender)
-    assert result in personal.data['names'][checked.value]
+    assert result in personal.data['names'][gender.value]
+
+
+@pytest.mark.parametrize(
+    'gender', [None],
+)
+def test_name_with_none(_personal, gender):
+    gender = check_gender(gender)
+    result = _personal.name(gender=gender)
+    assert result in _personal.data['names'][gender.value]
 
 
 def test_name_unexpected_gender(personal):
-    with pytest.raises(UnexpectedGender):
-        personal.name(gender=None)
+    with pytest.raises(NonEnumerableError):
+        personal.name(gender='nil')
 
 
 def test_telephone(personal):
@@ -207,15 +214,13 @@ def test_telephone(personal):
     'gender', [
         Gender.FEMALE,
         Gender.MALE,
-        Gender.RANDOM,
     ],
 )
 def test_surname(personal, gender):
     if personal.locale in config.SURNAMES_SEPARATED_BY_GENDER:
 
         result = personal.surname(gender=gender)
-        checked = check_gender(gender)
-        assert result in personal.data['surnames'][checked.value]
+        assert result in personal.data['surnames'][gender.value]
     else:
         result = personal.surname()
         assert result in personal.data['surnames']
@@ -225,7 +230,6 @@ def test_surname(personal, gender):
     'gender', [
         Gender.FEMALE,
         Gender.MALE,
-        Gender.RANDOM,
     ],
 )
 def test_full_name(personal, gender):
@@ -300,14 +304,14 @@ def test_political_views(personal):
     'title_type', [
         TitleType.ACADEMIC,
         TitleType.TYPICAL,
-        TitleType.RANDOM,
+        None,
     ],
 )
 @pytest.mark.parametrize(
     'gender', [
         Gender.FEMALE,
         Gender.MALE,
-        Gender.RANDOM,
+        None,
     ],
 )
 def test_title(personal, gender, title_type):
@@ -315,22 +319,20 @@ def test_title(personal, gender, title_type):
     assert result is not None
 
     with pytest.raises(ValueError):
-        personal.title(title_type=None)
-        personal.title(gender=None)
+        personal.title(title_type='nil')
+        personal.title(gender='nil')
 
 
 @pytest.mark.parametrize(
     'gender', [
         Gender.FEMALE,
         Gender.MALE,
-        Gender.RANDOM,
     ],
 )
 def test_nationality(personal, gender):
     if personal.locale in ['ru', 'uk', 'kk']:
         result = personal.nationality(gender=gender)
-        checked = check_gender(gender)
-        assert result in personal.data['nationality'][checked.value]
+        assert result in personal.data['nationality'][gender.value]
 
     result = personal.nationality()
     assert result is not None

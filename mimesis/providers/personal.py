@@ -1,5 +1,5 @@
 from string import ascii_letters, digits, punctuation
-from typing import Union
+from typing import Union, Optional
 
 from mimesis.data import (
     CALLING_CODES, BLOOD_GROUPS,
@@ -70,7 +70,7 @@ class Personal(BaseProvider):
 
         return max(a - working_start_age, 0)
 
-    def name(self, gender: Gender = Gender.RANDOM) -> str:
+    def name(self, gender: Optional[Gender] = None) -> str:
         """Get a random name.
 
         :param gender: Gender's enum object.
@@ -83,7 +83,7 @@ class Personal(BaseProvider):
         names = self.data['names'].get(gender.value)
         return self.random.choice(names)
 
-    def surname(self, gender: Gender = Gender.RANDOM) -> str:
+    def surname(self, gender: Optional[Gender] = None) -> str:
         """Get a random surname.
 
         :param gender: Gender's enum object.
@@ -103,7 +103,7 @@ class Personal(BaseProvider):
 
         return self.random.choice(surnames)
 
-    def last_name(self, gender: Gender = Gender.RANDOM) -> str:
+    def last_name(self, gender: Optional[Gender] = None) -> str:
         """An alias of self.surname.
 
         :param gender: Gender's enum object.
@@ -111,8 +111,8 @@ class Personal(BaseProvider):
         """
         return self.surname(gender)
 
-    def title(self, gender: Gender = Gender.RANDOM,
-              title_type: TitleType = TitleType.RANDOM) -> str:
+    def title(self, gender: Optional[Gender] = None,
+              title_type: Optional[TitleType] = None) -> str:
         """Get a random title (prefix/suffix) for name.
 
         :param gender: The gender.
@@ -125,6 +125,9 @@ class Personal(BaseProvider):
         """
         gender = check_gender(gender)
 
+        if title_type is None:
+            title_type = TitleType.get_random_item()
+
         if title_type and title_type in TitleType:
             titles = self.data['title'][gender.value]
             titles = titles[title_type.value]
@@ -133,7 +136,7 @@ class Personal(BaseProvider):
             raise ValueError(
                 'Title type should be enum object "TitleType"')
 
-    def full_name(self, gender: Gender = Gender.RANDOM,
+    def full_name(self, gender: Optional[Gender] = None,
                   reverse: bool = False) -> str:
         """Generate a random full name.
 
@@ -416,7 +419,7 @@ class Personal(BaseProvider):
         views = self.data['views_on']
         return self.random.choice(views)
 
-    def nationality(self, gender: Gender = Gender.RANDOM) -> str:
+    def nationality(self, gender: Optional[Gender] = None) -> str:
         """Get a random nationality.
 
         :param gender: Gender.
