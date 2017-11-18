@@ -9,7 +9,7 @@ BLOOD_GROUPS = (
     'AB−',
 )
 
-FAVORITE_MUSIC_GENRE = (
+MUSIC_GENRE = (
     'Pop',
     'Rock',
     'Hard Rock',

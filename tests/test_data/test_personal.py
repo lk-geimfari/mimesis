@@ -9,7 +9,7 @@ from mimesis import config
 from mimesis.data import (
     BLOOD_GROUPS,
     ENGLISH_LEVEL,
-    FAVORITE_MUSIC_GENRE,
+    MUSIC_GENRE,
     GENDER_SYMBOLS,
     SEXUALITY_SYMBOLS,
 )
@@ -145,7 +145,7 @@ def test_favorite_movie(personal):
 
 def test_favorite_music_genre(_personal):
     result = _personal.favorite_music_genre()
-    assert result in FAVORITE_MUSIC_GENRE
+    assert result in MUSIC_GENRE
 
 
 def test_social_media_profile(_personal):

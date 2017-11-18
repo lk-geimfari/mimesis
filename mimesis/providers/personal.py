@@ -1,16 +1,18 @@
-import re
 from string import ascii_letters, digits, punctuation
-from typing import Union, Optional
+from typing import Union
 
-from mimesis.data import (CALLING_CODES, BLOOD_GROUPS, EMAIL_DOMAINS,
-                          ENGLISH_LEVEL, FAVORITE_MUSIC_GENRE, GENDER_SYMBOLS,
-                          SEXUALITY_SYMBOLS, USERNAMES)
+from mimesis.data import (
+    CALLING_CODES, BLOOD_GROUPS,
+    EMAIL_DOMAINS, ENGLISH_LEVEL,
+    MUSIC_GENRE, GENDER_SYMBOLS,
+    SEXUALITY_SYMBOLS, USERNAMES,
+)
 from mimesis.enums import Gender, TitleType
 from mimesis.exceptions import WrongArgument
 from mimesis.providers.base import BaseProvider
 from mimesis.providers.cryptographic import Cryptographic
 from mimesis.config import SURNAMES_SEPARATED_BY_GENDER
-from mimesis.utils import check_gender, luhn_checksum, pull, custom_code
+from mimesis.utils import check_gender, pull, custom_code
 
 __all__ = ['Personal']
 
@@ -267,62 +269,6 @@ class Personal(BaseProvider):
             domain=domain,
         )
 
-    def bitcoin(self) -> str:
-        """Generate a random bitcoin address.
-
-        :return: Bitcoin address.
-
-        :Example:
-            3EktnHQD7RiAE6uzMj2ZifT9YgRrkSgzQX
-        """
-        letters = ascii_letters + digits
-        address = [self.random.choice(letters) for _ in range(33)]
-        return '3' + ''.join(address)
-
-    def cvv(self) -> int:
-        """Generate a random card verification value (CVV).
-
-        :return: CVV code.
-
-        :Example:
-            324
-        """
-        return self.random.randint(100, 999)
-
-    def credit_card_number(self, card_type: str = 'visa') -> str:
-        """Generate a random credit card number.
-
-        :param str card_type: Issuing Network. Default is Visa.
-        :return: Credit card number.
-        :raises NotImplementedError: if cart_type is not supported.
-
-        :Example:
-            4455 5299 1152 2450
-        """
-        length = 16
-        regex = re.compile('(\d{4})(\d{4})(\d{4})(\d{4})')
-
-        if card_type in ('visa', 'vi', 'v'):
-            number = self.random.randint(4000, 4999)
-        elif card_type in ('master_card', 'mc', 'master', 'm'):
-            number = self.random.choice([self.random.randint(2221, 2720),
-                                         self.random.randint(5100, 5500)])
-        elif card_type in ('american_express', 'amex', 'ax', 'a'):
-            number = self.random.choice([34, 37])
-            length = 15
-            regex = re.compile('(\d{4})(\d{6})(\d{5})')
-        else:
-            raise NotImplementedError(
-                'Card type {} is not supported.'.format(card_type))
-
-        str_num = str(number)
-        while len(str_num) < length - 1:
-            str_num += self.random.choice(digits)
-
-        groups = regex.search(str_num + luhn_checksum(str_num))
-        card = ' '.join(groups.groups())
-        return card
-
     def social_media_profile(self) -> str:
         """Generate profile for random social network.
 
@@ -544,7 +490,7 @@ class Personal(BaseProvider):
         :Example:
             Ambient.
         """
-        return self.random.choice(FAVORITE_MUSIC_GENRE)
+        return self.random.choice(MUSIC_GENRE)
 
     def telephone(self, mask: str = '', placeholder: str = '#') -> str:
         """Generate a random phone number.
