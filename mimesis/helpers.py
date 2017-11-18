@@ -44,3 +44,16 @@ class Random(random.Random):
         """
         seq = [self.choice(seq) for _ in range(end)]
         return ''.join(seq)
+
+
+class clsproperty(object):
+    def __init__(self, mget):
+        self.mget = mget
+
+    def __get__(self, obj, klass=None):
+        if klass is None:
+            klass = type(obj)
+        return self.mget.__get__(obj, klass)()
+
+    def __set__(self, obj, value):
+        raise AttributeError("Can't set attribute")
