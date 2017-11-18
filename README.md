@@ -149,17 +149,18 @@ Mimesis support over twenty different data providers available, which can produc
 | 8   | File            | File data (extension etc.)                                   |
 | 9   | Food            | Information on food (vegetables, fruits, measurements etc.)  |
 | 10  | Games           | Games data (game, score, pegi_rating etc.)                   |
-| 11  | Personal        | Personal data (name, surname, age, email etc.)               |
-| 12  | Text            | Text data (sentence, title etc.)                             |
-| 13  | Transport       | Dummy data about transport (truck model, car etc.)           |
-| 14  | Science         | Scientific data (scientist, math_formula etc.)               |
-| 15  | Structured      | Structured data (html, css etc.)                             |
-| 16  | Internet        | Internet data (facebook, twitter etc.)                       |
-| 17  | Hardware        | The data about the hardware (resolution, cpu, graphics etc.) |
-| 18  | Numbers         | Numerical data (floats, primes, digit etc.)                  |
-| 19  | Path            | Provides methods and property for generate paths             |
-| 20  | UnitSytem       | Provides names of unit systems in international format       |
-| 21  | Generic         | All at once                                                  |
+| 11  | Payment         | Payment data (credit_card, credit_card_network etc.)         |
+| 12  | Personal        | Personal data (name, surname, age, email etc.)               |
+| 13  | Text            | Text data (sentence, title etc.)                             |
+| 14  | Transport       | Dummy data about transport (truck model, car etc.)           |
+| 15  | Science         | Scientific data (scientist, math_formula etc.)               |
+| 16  | Structured      | Structured data (html, css etc.)                             |
+| 17  | Internet        | Internet data (facebook, twitter etc.)                       |
+| 18  | Hardware        | The data about the hardware (resolution, cpu, graphics etc.) |
+| 19  | Numbers         | Numerical data (floats, primes, digit etc.)                  |
+| 20  | Path            | Provides methods and property for generate paths             |
+| 21  | UnitSytem       | Provides names of unit systems in international format       |
+| 22  | Generic         | All at once                                                  |
 
 When you only need to generate data for a single locale, use the `Generic()` provider, and you can access all providers of Mimesis from one object.
 

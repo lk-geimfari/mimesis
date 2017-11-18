@@ -24,7 +24,9 @@
 **Mover/Removed**:
 - Moved `credit_card`, `credot_card_expiration_date`, `cid`, `cvv`, `paypal` and `bitcoin` to `Payment` from `Personal`
 - Moved `custom_code` to `utils.py` from `providers.code.Code`
-- Removed useless methods
+- Removed some useless methods
+- Removed module `constants`, in view of adding more convenient and useful module `enums`
+- Removed non informative custom exception `WrongArgument` and replaced one with `KeyError` and `NonEnumerableError`
 
 **Updated/Renamed**:
 - Updated data for `de-at`, `en`, `fr`, `pl`, `pt-br`, `pt`, `ru`, `uk`
