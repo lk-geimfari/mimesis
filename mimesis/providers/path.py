@@ -1,7 +1,7 @@
 import sys
 from typing import Union
 
-from mimesis.constants.platforms import PLATFORMS
+from mimesis.data import PLATFORMS
 from mimesis.data import FOLDERS, PROGRAMMING_LANGS, PROJECT_NAMES, USERNAMES
 from mimesis.providers.base import BaseProvider
 
