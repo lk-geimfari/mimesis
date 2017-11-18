@@ -79,28 +79,25 @@ def test_state(address):
     assert result_abbr in address.data['state']['abbr']
 
 
-def test_province(address):
-    result = address.province()
-    assert result in address.data['state']['name']
+def test_state_aliases(address):
+    province = address.province()
+    region = address.region()
+    federal_subject = address.federal_subject()
 
-    result_abbr = address.province(abbr=True)
-    assert result_abbr in address.data['state']['abbr']
+    states = address.data['state']['name']
 
+    assert province in states
+    assert region in states
+    assert federal_subject in states
 
-def region(address):
-    result = address.region()
-    assert result in address.data['state']['name']
+    province = address.province(abbr=True)
+    region = address.region(abbr=True)
+    federal_subject = address.federal_subject(abbr=True)
 
-    result_abbr = address.region(abbr=True)
-    assert result_abbr in address.data['state']['abbr']
-
-
-def federal_subject(address):
-    result = address.federal_subject()
-    assert result in address.data['state']['name']
-
-    result_abbr = address.federal_subject(abbr=True)
-    assert result_abbr in address.data['state']['abbr']
+    abbreviations = address.data['state']['abbr']
+    assert province in abbreviations
+    assert region in abbreviations
+    assert federal_subject in abbreviations
 
 
 def test_postal_code(address):
