@@ -9,7 +9,6 @@ from typing import (Any, Dict, List,
 
 __all__ = [
     'Array',
-    'Gender',
     'JSON',
     'Size',
     'Bytes',
