@@ -2515,28 +2515,6 @@ HASHTAGS = {
         '#win',
         '#winning',
     ],
-    'tumblr': [
-        '#tumblr',
-        '#tumblrlife',
-        '#tumblrphoto',
-        '#TagsForLikes',
-        '#tumblrphotos',
-        '#tumblrlove',
-        '#tumblrpic',
-        '#tumblrpics',
-        '#tumblrposts',
-        '#tumblrpost',
-        '#perfect',
-        '#tumblrpicture',
-        '#tumblrpictures',
-        '#tumblrthings',
-        '#tumblrstuff',
-        '#instatumblr',
-        '#beautiful',
-        '#love',
-        '#TagsForLikes',
-        '#tumblrgram',
-    ],
 }
 
 NETWORK_PROTOCOLS = {
