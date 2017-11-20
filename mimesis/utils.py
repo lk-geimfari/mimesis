@@ -12,7 +12,6 @@ from typing import Mapping, Union, Optional
 from urllib import request
 
 from mimesis.exceptions import (
-    UnexpectedGender,
     UnsupportedLocale,
     NonEnumerableError,
 )
@@ -191,4 +190,4 @@ def check_gender(gender: Optional[Gender] = None) -> Gender:
     elif gender and gender in Gender:
         return gender
     else:
-        raise NonEnumerableError("Gender")
+        raise NonEnumerableError('Gender')
