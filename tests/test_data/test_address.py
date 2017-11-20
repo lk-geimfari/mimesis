@@ -5,6 +5,8 @@ import re
 import pytest
 
 import mimesis
+from mimesis.enums import CountryCode
+from mimesis.exceptions import NonEnumerableError
 from mimesis.data import CALLING_CODES, CONTINENT_CODES, COUNTRIES_ISO
 
 from . import _patterns as p
@@ -117,19 +119,19 @@ def test_country(address):
 
 @pytest.mark.parametrize(
     'fmt, length', [
-        ('iso2', 2),
-        ('iso3', 3),
-        ('numeric', 3),
+        (CountryCode.ISO2, 2),
+        (CountryCode.ISO3, 3),
+        (CountryCode.NUMERIC, 3),
     ],
 )
 def test_country_iso(_address, fmt, length):
-    iso = _address.country_iso(fmt=fmt)
+    iso = _address.country_iso_code(fmt=fmt)
 
-    assert iso in COUNTRIES_ISO[fmt]
+    assert iso in COUNTRIES_ISO[fmt.value]
     assert len(iso) == length
 
-    with pytest.raises(KeyError):
-        _address.country_iso(fmt='none')
+    with pytest.raises(NonEnumerableError):
+        _address.country_iso_code(fmt='nil')
 
 
 def test_city(address):
