@@ -1,7 +1,5 @@
 from enum import Enum, EnumMeta
-import random
-
-from mimesis.data import GENDER_SYMBOLS
+from random import choice
 
 
 class AllowRandom(EnumMeta):
@@ -10,7 +8,7 @@ class AllowRandom(EnumMeta):
     """
 
     def get_random_item(self):
-        return random.choice(list(self))
+        return choice(list(self))
 
 
 class PortRange(Enum):
@@ -81,3 +79,27 @@ class MimeType(Enum, metaclass=AllowRandom):
     MESSAGE = 'message'
     TEXT = 'text'
     VIDEO = 'video'
+
+
+class Hashtag(Enum, metaclass=AllowRandom):
+    LOVE = 'love'
+    FRIENDS = 'friends'
+    CARS = 'cars'
+    GIRLS = 'girls'
+    SPORT = 'sport'
+    FAMILY = 'family'
+    GENERAL = 'general'
+    TRAVEL = 'travel'
+    NATURE = 'nature'
+    BOYS = 'boys'
+
+
+class PrefixSign(Enum, metaclass=AllowRandom):
+    POSITIVE = 'positive'
+    NEGATIVE = 'negative'
+
+
+class CountryCode(Enum, metaclass=AllowRandom):
+    ISO2 = 'iso2'
+    ISO3 = 'iso3'
+    NUMERIC = 'numeric'
