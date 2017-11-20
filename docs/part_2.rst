@@ -298,10 +298,11 @@ the object ``Generic()``. You can use it directly, as shown below:
 Generate data by schema
 -----------------------
 
-Mimesis support generating data by schema starting from version
-``1.0.0``. For generating data by schema, just import ``Field()``
-object, describe structure of your schema (dict) in using fields in
-``lambda`` function and run filling the schema using method ``.fill()``:
+For generating data by schema, just create instance of ``Field`` object,
+which take any string which represents name of the any method of any
+supported data provider and the ``**kwargs`` of the method, after that
+you should describe the schema in ``lambda`` function and run filling the
+schema using method ``fill()``:
 
 .. code:: python
 

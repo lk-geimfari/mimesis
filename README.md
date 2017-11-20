@@ -41,6 +41,8 @@ Also you can install it manually:
 (env) ➜ make install
 ```
 
+**Note**: Version `1.0.0` has suffered significant [changes](/CHANGELOG.md#1.0.0), so there is no backwards compatibility with earlier versions of this library.
+
 ## Getting started
 
 As we said above, this library is really easy to use. A simple usage example is given below:
@@ -239,7 +241,7 @@ You can use specific-provider without adding it to `Generic()`:
 ```
 
 ## Generate data by schema
-For generating data by schema, just import `Field()` object, describe structure of your schema in using fields in lambda function and run filling the schema using method `fill()`:
+For generating data by schema, just create instance of  `Field` object, which take any string which represents name of the any method of any supported data provider and the `**kwargs` of the method, after that you should describe the schema in lambda function and run filling the schema using method `fill()`:
 
 ```python
 >>> from mimesis.schema import Field
@@ -253,14 +255,14 @@ For generating data by schema, just import `Field()` object, describe structure 
 ...         "owner": {
 ...             "email": _('email'),
 ...             "token": _('token'),
-...             "creator": _('full_name', gender=Gender.FEMALE)
-...         }
+...             "creator": _('full_name', gender=Gender.FEMALE),
+...         },
 ...     }
 ... )
 >>> _.fill(schema=app_schema, iterations=10)
 ```
 
-Mimesis support generating data by schema only starting from version `1.0.0`. 
+Mimesis support generating data by schema only starting from version `1.0.0`.
 
 
 ## Integration with py.test and factory_boy
