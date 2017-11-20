@@ -8,6 +8,7 @@ from mimesis.data import (
     SEXUALITY_SYMBOLS, USERNAMES,
 )
 from mimesis.enums import Gender, TitleType
+from mimesis.exceptions import NonEnumerableError
 from mimesis.providers.base import BaseProvider
 from mimesis.providers.cryptographic import Cryptographic
 from mimesis.config import SURNAMES_SEPARATED_BY_GENDER
@@ -132,8 +133,7 @@ class Personal(BaseProvider):
             titles = titles[title_type.value]
             return self.random.choice(titles)
         else:
-            raise ValueError(
-                'Title type should be enum object "TitleType"')
+            raise NonEnumerableError('TitleType')
 
     def full_name(self, gender: Optional[Gender] = None,
                   reverse: bool = False) -> str:
@@ -242,6 +242,8 @@ class Personal(BaseProvider):
         :Example:
             k6dv2odff9#4h (without hashing).
         """
+
+        # TODO: we should use enums here
         text = ascii_letters + digits + punctuation
         password = ''.join([self.random.choice(text) for _ in range(length)])
 
@@ -279,6 +281,8 @@ class Personal(BaseProvider):
         :Example:
             http://facebook.com/some_user
         """
+
+        # TODO: enum here
         urls = [
             'facebook.com/{}',
             'twitter.com/{}',

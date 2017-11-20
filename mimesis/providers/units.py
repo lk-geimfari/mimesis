@@ -1,3 +1,7 @@
+from typing import Optional
+
+from mimesis.enums import PrefixSign
+from mimesis.exceptions import NonEnumerableError
 from mimesis.data import SI_PREFIXES, SI_PREFIXES_SYM
 from mimesis.providers.base import BaseProvider
 
@@ -299,25 +303,25 @@ class UnitSystem(BaseProvider):
             return 'becquerel'
         return 'Bq'
 
-    def prefix(self, sign: str = 'positive', symbol: bool = False) -> str:
+    def prefix(self, sign: Optional[PrefixSign] = None,
+               symbol: bool = False) -> str:
         """Get a random prefix for the International System of Units (SI)
 
         :param sign: Sing of number (positive, negative)
-        :param bool symbol: Return symbol of prefix.
+        :param symbol: Return symbol of prefix.
         :return: Prefix for SI.
         :raises KeyError: if sign is not supported.
 
         :Example:
             mega
         """
-        sign = sign.lower()
-
         prefixes = SI_PREFIXES_SYM if \
             symbol else SI_PREFIXES
 
-        try:
-            prefixes = self.random.choice(prefixes[sign])  # type: ignore
-            return prefixes  # type: ignore
-        except KeyError:
-            raise KeyError(
-                'Unsupported sign. Use: \'positive\' or \'negative\'')
+        if sign is None:
+            sign = PrefixSign.get_random_item()
+
+        if sign and sign in PrefixSign:
+            return self.random.choice(prefixes[sign.value])
+        else:
+            raise NonEnumerableError('PrefixSign')

@@ -127,6 +127,6 @@ class Payment(BaseProvider):
         owner = {
             'credit_card': self.credit_card_number(),
             'expiration_date': self.credit_card_expiration_date(),
-            'owner': self.__personal.full_name(gender=gender).upper()
+            'owner': self.__personal.full_name(gender=gender).upper(),
         }
         return owner

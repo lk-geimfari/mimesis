@@ -39,7 +39,7 @@ class File(BaseProvider):
         if file_type and file_type in FileType:
             return self.random.choice(EXTENSIONS[file_type.value])
         else:
-            raise NonEnumerableError("FileType")
+            raise NonEnumerableError('FileType')
 
     def mime_type(self, type_: Optional[MimeType] = None) -> str:
         """Get a random mime type from list.
@@ -54,7 +54,7 @@ class File(BaseProvider):
         if type_ and type_ in MimeType:
             return self.random.choice(MIME_TYPES[type_.value])
         else:
-            raise NonEnumerableError("MimeType")
+            raise NonEnumerableError('MimeType')
 
     def size(self, minimum: int = 1, maximum: int = 100) -> str:
         """Get size of file.

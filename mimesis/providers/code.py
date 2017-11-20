@@ -45,6 +45,8 @@ class Code(BaseProvider):
         """
         groups = ISBN_GROUPS
 
+        # TODO: Enums here
+
         mask = '###-{0}-#####-###-#' if \
             fmt == 'isbn-13' else '{0}-#####-###-#'
 
@@ -66,6 +68,8 @@ class Code(BaseProvider):
         :Example:
             3953753179567.
         """
+
+        # TODO: here too
         mask = '########' if fmt == 'ean-8' \
             else '#############'
         return custom_code(mask=mask)

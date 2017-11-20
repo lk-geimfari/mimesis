@@ -28,6 +28,7 @@ class Cryptographic(BaseProvider):
         :return: Hash.
         :raises UnsupportedAlgorithm: if algorithm is not supported.
         """
+        # TODO: Enums here
         algorithm = algorithm.lower().strip()
 
         if algorithm in hashlib.algorithms_guaranteed:

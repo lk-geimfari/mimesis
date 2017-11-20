@@ -317,7 +317,7 @@ def test_title(personal, gender, title_type):
     result = personal.title(gender=gender, title_type=title_type)
     assert result is not None
 
-    with pytest.raises(ValueError):
+    with pytest.raises(NonEnumerableError):
         personal.title(title_type='nil')
         personal.title(gender='nil')
 

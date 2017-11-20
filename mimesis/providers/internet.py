@@ -4,7 +4,7 @@ from mimesis.data import (TLD, EMOJI, HASHTAGS, HTTP_METHODS,
                           TORRENT_CATEGORIES, HTTP_STATUS_CODES,
                           NETWORK_PROTOCOLS, SUBREDDITS, SUBREDDITS_NSFW,
                           USERNAMES, USER_AGENTS)
-from mimesis.enums import PortRange, TLDType, Layer, MimeType
+from mimesis.enums import PortRange, TLDType, Layer, MimeType, Hashtag
 from mimesis.exceptions import NonEnumerableError
 from mimesis.providers.base import BaseProvider
 from mimesis.providers.file import File
@@ -166,28 +166,26 @@ class Internet(BaseProvider):
         return url.format(keyword=keyword)
 
     def hashtags(self, quantity: int = 4,
-                 category: str = 'general') -> Union[str, list]:
+                 category: Hashtag = None) -> Union[str, list]:
         """Create a list of hashtags (for Instagram, Twitter etc.)
 
-        :param int quantity: The quantity of hashtags.
-        :param str category:
-            Available categories: general, girls, love, boys, friends, family,
-            nature, travel, cars, sport, tumblr.
+        :param quantity: The quantity of hashtags.
+        :param category: Enum object Hashtag.
         :return: The list of hashtags.
         :rtype: str or list
-        :raises KeyError: if category is not supported.
+        :raises NonEnumerableError: if category is not in Hashtag
 
         :Example:
-            ['#love', '#sky', '#nice'].
+            ['#love', '#sky', '#nice']
         """
-        # TODO: Update it using enums
-        category = category.lower()
-        supported = ''.join(list(HASHTAGS.keys()))
 
-        try:
-            hashtags = HASHTAGS[category]
-        except KeyError:
-            raise KeyError('Unsupported category. Use: {}'.format(supported))
+        if category is None:
+            category = Hashtag.get_random_item()
+
+        if category and category in Hashtag:
+            hashtags = HASHTAGS[category.value]
+        else:
+            raise NonEnumerableError('Hashtag')
 
         if int(quantity) == 1:
             return self.random.choice(hashtags)

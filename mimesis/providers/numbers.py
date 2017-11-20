@@ -29,6 +29,8 @@ class Numbers(BaseProvider):
         :return: An array of floating-point numbers.
         :rtype: Array
         """
+
+        # TODO: compare array and list
         nums = array.array(type_code, (self.random.random()
                                        for _ in range(10 ** int(n))))
         return nums.tolist() if to_list else nums

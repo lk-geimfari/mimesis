@@ -3,6 +3,8 @@
 import pytest
 
 from mimesis import UnitSystem
+from mimesis.enums import PrefixSign
+from mimesis.exceptions import NonEnumerableError
 from mimesis.data import SI_PREFIXES, SI_PREFIXES_SYM
 
 
@@ -189,17 +191,19 @@ def test_radioactivity(us):
 
 @pytest.mark.parametrize(
     'sign, symbol', [
-        ('positive', True),
-        ('positive', False),
-        ('negative', True),
-        ('negative', False),
+        (PrefixSign.POSITIVE, True),
+        (PrefixSign.POSITIVE, False),
+        (PrefixSign.NEGATIVE, True),
+        (PrefixSign.NEGATIVE, False),
     ],
 )
 def test_prefix(us, sign, symbol):
     prefix = us.prefix(sign=sign, symbol=symbol)
-    assert prefix in SI_PREFIXES[sign] or prefix in SI_PREFIXES_SYM[sign]
+    prefixes = SI_PREFIXES_SYM if symbol else SI_PREFIXES
 
-    with pytest.raises(KeyError):
+    assert prefix in prefixes[sign.value]
+
+    with pytest.raises(NonEnumerableError):
         us.prefix(sign='nil')
 
 
