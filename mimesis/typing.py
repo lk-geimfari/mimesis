@@ -4,8 +4,7 @@ Otherwise, simply import the types you need at the top of each file.
 """
 
 import datetime
-from typing import (Any, Dict, List,
-                    Union, MutableSequence)
+from typing import Any, Dict, Union
 
 __all__ = [
     'Array',
@@ -27,15 +26,6 @@ Size = _StrOrInt
 
 Number = _StrOrInt
 
-# Array (instance of array.array)
-Array = Union[
-    # can contain float and int.
-    MutableSequence[float],
-    MutableSequence[int],
-    List[Union[int, float]],
-]
-
-# Bytes type
 Bytes = bytes
 
 DateTime = Union[datetime.datetime, Any]

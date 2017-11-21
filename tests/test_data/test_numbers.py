@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-import array
-
 import pytest
 
 from mimesis import Numbers
@@ -14,9 +12,9 @@ def numbers():
 def test_floats(numbers):
     result = numbers.floats()
     assert len(result) == 100
-    assert isinstance(result, array.array)
+    assert isinstance(result, list)
 
-    result = numbers.floats(n=3, to_list=True)
+    result = numbers.floats(n=3)
     assert len(result) == 1000
     assert isinstance(result, list)
 

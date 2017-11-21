@@ -1,53 +1,36 @@
-import array
+from typing import List
 
 from mimesis.providers.base import BaseProvider
-from mimesis.typing import Array, Number
+from mimesis.typing import Number
 
 
 class Numbers(BaseProvider):
     """Class for generating numbers"""
 
-    def floats(self, n: int = 2, type_code: str = 'f',
-               to_list: bool = False) -> Array:
-        """Generate an array of random float number of 10**n.
+    def floats(self, n: int = 2) -> List[float]:
+        """Generate an array of random float number of 10 ** n.
 
-        +-----------+----------------+--------------+----------------------+
-        | Type Code | C Type         | Storage size | Value range          |
-        +===========+================+==============+======================+
-        | 'f'       | floating point | 4 byte       | 1.2E-38 to 3.4E+38   |
-        +-----------+----------------+--------------+----------------------+
-        | 'd'       | floating point | 8 byte       | 2.3E-308 to 1.7E+308 |
-        +-----------+----------------+--------------+----------------------+
-
-        :param int n: Raise 10 to the 'n' power.
-        :param str type_code: A code of type.
-        :param bool to_list: Convert array to list.
-
-        .. note:: When you work with large numbers, it is better not to use
-            this option, because type 'array' much faster than 'list'.
-
-        :return: An array of floating-point numbers.
-        :rtype: Array
+        :param n: Raise 10 to the 'n' power.
+        :return: The list of floating-point numbers.
+        :rtype: List of floats
         """
-
-        # TODO: compare array and list
-        nums = array.array(type_code, (self.random.random()
-                                       for _ in range(10 ** int(n))))
-        return nums.tolist() if to_list else nums
+        nums = [self.random.random()
+                for _ in range(10 ** int(n))]
+        return nums
 
     @staticmethod
-    def primes(start: int = 1, end: int = 999) -> list:
+    def primes(start: int = 1, end: int = 999) -> List[int]:
         """Generate a list of prime numbers from start to end.
 
-        :param int start: First value of range.
-        :param int end: Last value of range.
+        :param start: First value of range.
+        :param end: Last value of range.
         :return: A list of prime numbers from start to end.
         :rtype: list
         """
         sieve_size = (end // 2 - 1) if end % 2 == 0 else (end // 2)
         sieve = [True] * sieve_size
 
-        primes = []     # list of primes
+        primes = []  # list of primes
         # add 2 to the list if it's in the given range
         if end >= 2:
             primes.append(2)
@@ -68,7 +51,7 @@ class Numbers(BaseProvider):
     def digit(self, to_bin: bool = False) -> Number:
         """Get a random digit.
 
-        :param bool to_bin: If True then convert to binary.
+        :param to_bin: If True then convert to binary.
         :return: Digit.
         :rtype: str or int
 
@@ -85,8 +68,8 @@ class Numbers(BaseProvider):
     def between(self, minimum: int = 1, maximum: int = 1000) -> int:
         """Generate a random number between minimum and maximum.
 
-        :param int minimum: Minimum of range.
-        :param int maximum: Maximum of range.
+        :param minimum: Minimum of range.
+        :param maximum: Maximum of range.
         :return: Number.
         """
         num = self.random.randint(int(minimum), int(maximum))
@@ -95,7 +78,7 @@ class Numbers(BaseProvider):
     def rating(self, maximum: float = 5.0) -> float:
         """Generate random rating for something.
 
-        :param float maximum: Minimum value (default is 5.0).
+        :param maximum: Minimum value (default is 5.0).
         :return: Rating.
 
         :Example:
