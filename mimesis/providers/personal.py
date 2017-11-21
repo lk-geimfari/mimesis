@@ -128,7 +128,7 @@ class Personal(BaseProvider):
         if title_type is None:
             title_type = TitleType.get_random_item()
 
-        if title_type and title_type in TitleType:
+        if title_type in TitleType:
             titles = self.data['title'][gender.value]
             titles = titles[title_type.value]
             return self.random.choice(titles)

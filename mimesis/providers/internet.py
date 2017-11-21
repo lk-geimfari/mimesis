@@ -182,7 +182,7 @@ class Internet(BaseProvider):
         if category is None:
             category = Hashtag.get_random_item()
 
-        if category and category in Hashtag:
+        if category in Hashtag:
             hashtags = HASHTAGS[category.value]
         else:
             raise NonEnumerableError('Hashtag')
@@ -220,7 +220,7 @@ class Internet(BaseProvider):
         if tld_type is None:
             tld_type = TLDType.get_random_item()
 
-        if tld_type and tld_type in TLDType:
+        if tld_type in TLDType:
             return self.random.choice(TLD[tld_type.value])
         else:
             raise NonEnumerableError('DomainType')
@@ -272,7 +272,7 @@ class Internet(BaseProvider):
         if layer is None:
             layer = Layer.get_random_item()
 
-        if layer and layer in Layer:
+        if layer in Layer:
             return self.random.choice(protocols[layer.value])
         else:
             raise NonEnumerableError('Layer')

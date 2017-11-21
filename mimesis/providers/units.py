@@ -321,7 +321,7 @@ class UnitSystem(BaseProvider):
         if sign is None:
             sign = PrefixSign.get_random_item()
 
-        if sign and sign in PrefixSign:
+        if sign in PrefixSign:
             return self.random.choice(prefixes[sign.value])
         else:
             raise NonEnumerableError('PrefixSign')

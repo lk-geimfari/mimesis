@@ -36,7 +36,7 @@ class File(BaseProvider):
         if file_type is None:
             file_type = FileType.get_random_item()
 
-        if file_type and file_type in FileType:
+        if file_type in FileType:
             return self.random.choice(EXTENSIONS[file_type.value])
         else:
             raise NonEnumerableError('FileType')
@@ -51,7 +51,7 @@ class File(BaseProvider):
         if type_ is None:
             type_ = MimeType.get_random_item()
 
-        if type_ and type_ in MimeType:
+        if type_ in MimeType:
             return self.random.choice(MIME_TYPES[type_.value])
         else:
             raise NonEnumerableError('MimeType')
