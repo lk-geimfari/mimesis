@@ -267,11 +267,13 @@ class Internet(BaseProvider):
         :Example:
             AMQP
         """
+        protocols = NETWORK_PROTOCOLS
+
         if layer is None:
             layer = Layer.get_random_item()
 
         if layer and layer in Layer:
-            return self.random.choice(NETWORK_PROTOCOLS[layer.value])
+            return self.random.choice(protocols[layer.value])
         else:
             raise NonEnumerableError('Layer')
 

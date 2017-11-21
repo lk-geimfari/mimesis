@@ -1,4 +1,14 @@
-from mimesis.data import IMEI_TACS, ISBN_GROUPS, LOCALE_CODES
+from typing import Optional
+
+from mimesis.enums import ISBNFormat, EANFormat
+from mimesis.exceptions import NonEnumerableError
+from mimesis.data import (
+    EAN_MASKS,
+    IMEI_TACS,
+    ISBN_GROUPS,
+    ISBN_MASKS,
+    LOCALE_CODES,
+)
 from mimesis.providers.base import BaseProvider
 from mimesis.utils import luhn_checksum, custom_code
 
@@ -33,46 +43,55 @@ class Code(BaseProvider):
         """
         return custom_code(mask=mask)
 
-    def isbn(self, fmt: str = 'isbn-10') -> str:
+    def isbn(self, fmt: Optional[ISBNFormat] = None) -> str:
         """Generate ISBN for current locale. Default is ISBN 10,
         but you also can use ISBN-13.
 
         :param str fmt: ISBN format.
         :return: ISBN.
+        :raises NonEnumerableError: if fmt is not enum ISBNFormat.
 
         :Example:
             132-1-15411-375-8.
         """
-        groups = ISBN_GROUPS
+        if fmt is None:
+            fmt = ISBNFormat.get_random_item()
 
-        # TODO: Enums here
+        if fmt in ISBNFormat:
+            fmt = ISBN_MASKS[fmt.value]
 
-        mask = '###-{0}-#####-###-#' if \
-            fmt == 'isbn-13' else '{0}-#####-###-#'
+            if self.locale in ISBN_GROUPS:
+                mask = fmt.format(
+                    ISBN_GROUPS[self.locale])
+            else:
+                mask = fmt.format(
+                    ISBN_GROUPS['default'])
 
-        if self.locale in groups:
-            mask = mask.format(groups[self.locale])
+            return custom_code(mask=mask)
         else:
-            mask = mask.format(groups['default'])
-
-        return custom_code(mask=mask)
+            raise NonEnumerableError('ISBNFormat')
 
     @staticmethod
-    def ean(fmt: str = 'ean-13') -> str:
+    def ean(fmt: Optional[EANFormat] = None) -> str:
         """Generate EAN (European Article Number) code. Default is
         EAN-13, but you also can use EAN-8.
 
         :param str fmt: Format of EAN.
         :return: EAN.
+        :raises NonEnumerableError: if fmt is not enum EANFormat
 
         :Example:
             3953753179567.
         """
 
-        # TODO: here too
-        mask = '########' if fmt == 'ean-8' \
-            else '#############'
-        return custom_code(mask=mask)
+        if fmt is None:
+            fmt = EANFormat.get_random_item()
+
+        if fmt in EANFormat:
+            mask = EAN_MASKS[fmt.value]
+            return custom_code(mask=mask)
+        else:
+            raise NonEnumerableError('EANFormat')
 
     def imei(self) -> str:
         """Generate a random IMEI (International Mobile Station Equipment Identity).

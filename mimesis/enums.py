@@ -103,3 +103,13 @@ class CountryCode(Enum, metaclass=AllowRandom):
     ISO2 = 'iso2'
     ISO3 = 'iso3'
     NUMERIC = 'numeric'
+
+
+class ISBNFormat(Enum, metaclass=AllowRandom):
+    ISBN13 = 'isbn-13'
+    ISBN10 = 'isbn-10'
+
+
+class EANFormat(Enum, metaclass=AllowRandom):
+    EAN8 = 'ean-8'
+    EAN13 = 'ean-13'

@@ -4,6 +4,8 @@ import re
 import pytest
 
 from mimesis import Code
+from mimesis.enums import ISBNFormat, EANFormat
+from mimesis.exceptions import NonEnumerableError
 from mimesis.data import LOCALE_CODES
 
 from . import _patterns as p
@@ -20,13 +22,18 @@ def test_str(code):
 
 @pytest.mark.parametrize(
     'fmt, length', [
-        ('ean-8', 8),
-        ('ean-13', 13),
+        (EANFormat.EAN8, 8),
+        (EANFormat.EAN13, 13),
     ],
 )
 def test_ean(code, fmt, length):
     result = code.ean(fmt=fmt)
     assert len(result) == length
+
+
+def test_ean_non_enum(code):
+    with pytest.raises(NonEnumerableError):
+        code.ean(fmt='nil')
 
 
 def test_imei(code):
@@ -51,11 +58,16 @@ def test_locale_code(code):
 
 @pytest.mark.parametrize(
     'fmt, length', [
-        ('isbn-10', 10),
-        ('isbn-13', 13),
+        (ISBNFormat.ISBN10, 10),
+        (ISBNFormat.ISBN13, 13),
     ],
 )
 def test_isbn(code, fmt, length):
     result = code.isbn(fmt=fmt)
     assert result is not None
     assert len(result) >= length
+
+
+def test_isbn_non_enum(code):
+    with pytest.raises(NonEnumerableError):
+        code.isbn(fmt='nil')

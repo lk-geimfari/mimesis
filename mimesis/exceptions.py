@@ -25,5 +25,5 @@ class NonEnumerableError(TypeError):
         self.enum_name = enum_name
 
     def __str__(self):
-        return 'You should use enum object «{}» ' \
+        return 'You should use item of enum object «{}» ' \
                'from module mimesis.enums'.format(self.enum_name)
