@@ -2,7 +2,7 @@
 Generating mock data using Mimesis: Part II
 ===========================================
 
-We have already `published <http://mimesis.readthedocs.io/en/latest/part_1.html>`_ how to generate mock
+We have already `published <http://mimesis.readthedocs.io/part_1.html>`_ how to generate mock
 data with the help of a Python library  — `Mimesis <https://github.com/lk-geimfari/mimesis>`__.
 The article you are reading now is the continuation of the previous one,
 therefore, we will not be going over the basics again. In case you missed
@@ -51,7 +51,7 @@ illustrates the idea:
             super(Patient, self).__init__(**kwargs)
 
         @staticmethod
-        def _bootstrap(count=500, locale='en', gender):
+        def _bootstrap(count=500, locale='en'):
             from mimesis import Personal
             person = Personal(locale)
 
@@ -59,7 +59,7 @@ illustrates the idea:
                 patient = Patient(
                     email=person.email(),
                     phone_number=person.telephone(),
-                    full_name=person.full_name(gender=gender),
+                    full_name=person.full_name(gender),
                     age=person.age(minimum=18, maximum=45),
                     weight=person.weight(),
                     height=person.height(),
@@ -142,11 +142,6 @@ Very bad:
 .. code:: python
 
     >>> Patient()._bootstrap(count=600000, locale='de')
-
-
-Enums
----------
-TODO
 
 
 Importing images
@@ -287,12 +282,13 @@ the object ``Generic()``. You can use it directly, as shown below:
 .. code:: python
 
     >>> from mimesis.builtins import RussiaSpecProvider
+    >>> from mimesis.enums import Gender
     >>> ru = RussiaSpecProvider()
 
-    >>> ru.patronymic(gender='female')
+    >>> ru.patronymic(gender=Gender.FEMALE)
     'Петровна'
 
-    >>> ru.patronymic(gender='male')
+    >>> ru.patronymic(gender=Gender.MALE)
     'Бенедиктович'
 
 Generate data by schema
