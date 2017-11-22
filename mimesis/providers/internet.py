@@ -215,7 +215,7 @@ class Internet(BaseProvider):
 
         :param tld_type: Enum object DomainType
         :return: Top level domain.
-        :raises ValueError: if tld_type not in DomainType.
+        :raises NonEnumerableError: if tld_type not in DomainType.
         """
         if tld_type is None:
             tld_type = TLDType.get_random_item()
