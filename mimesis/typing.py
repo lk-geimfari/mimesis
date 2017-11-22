@@ -7,7 +7,6 @@ import datetime
 from typing import Any, Dict, Union
 
 __all__ = [
-    'Array',
     'JSON',
     'Size',
     'Bytes',

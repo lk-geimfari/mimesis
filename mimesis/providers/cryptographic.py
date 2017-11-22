@@ -1,8 +1,10 @@
 from binascii import hexlify
 import hashlib
 import uuid
+from typing import Optional
 
-from mimesis.exceptions import UnsupportedAlgorithm
+from mimesis.enums import Algorithm
+from mimesis.exceptions import NonEnumerableError
 from mimesis.providers.base import BaseProvider
 from mimesis.typing import Bytes
 
@@ -19,28 +21,24 @@ class Cryptographic(BaseProvider):
         bits = self.random.getrandbits(128)
         return str(uuid.UUID(int=bits))
 
-    def hash(self, algorithm: str = 'sha1') -> str:
+    def hash(self, algorithm: Optional[Algorithm] = None) -> str:
         """Generate random hash.
 
-        :param str algorithm:
-            Hashing algorithm ('md5', 'sha1', 'sha224', 'sha256',
-            'sha384', 'sha512').
+        :param algorithm: Enum object Algorithm.
         :return: Hash.
-        :raises UnsupportedAlgorithm: if algorithm is not supported.
+        :raises NonEnumerableError: if algorithm is not supported.
         """
-        # TODO: Enums here
-        algorithm = algorithm.lower().strip()
 
-        if algorithm in hashlib.algorithms_guaranteed:
-            if hasattr(hashlib, algorithm):
-                fn = getattr(hashlib, algorithm)
+        if algorithm is None:
+            algorithm = Algorithm.get_random_item()
+
+        if algorithm in Algorithm:
+            if hasattr(hashlib, algorithm.value):
+                fn = getattr(hashlib, algorithm.value)
                 _hash = fn(self.uuid().encode())
                 return _hash.hexdigest()
         else:
-            raise UnsupportedAlgorithm(
-                'Algorithm {0} is does not support. Use: {1}'.format(
-                    algorithm, ', '.join(hashlib.algorithms_guaranteed)),
-            )
+            raise NonEnumerableError('Algorithm')
 
     def bytes(self, entropy: int = 32) -> Bytes:
         """Get a random byte string containing *entropy* bytes.

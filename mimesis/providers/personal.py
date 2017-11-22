@@ -7,7 +7,7 @@ from mimesis.data import (
     MUSIC_GENRE, GENDER_SYMBOLS,
     SEXUALITY_SYMBOLS, USERNAMES,
 )
-from mimesis.enums import Gender, TitleType
+from mimesis.enums import Gender, TitleType, Algorithm
 from mimesis.exceptions import NonEnumerableError
 from mimesis.providers.base import BaseProvider
 from mimesis.providers.cryptographic import Cryptographic
@@ -232,26 +232,25 @@ class Personal(BaseProvider):
         templ = self.random.choice(supported)
         return templates[templ]
 
-    def password(self, length: int = 8, algorithm: str = None) -> str:
+    def password(self, length: int = 8, hashed: bool = False) -> str:
         """Generate a password or hash of password.
 
-        :param int length: Length of password.
-        :param str algorithm: Hashing algorithm.
+        :param length: Length of password.
+        :param hashed: MD5 hash.
         :return: Password or hash of password.
 
         :Example:
-            k6dv2odff9#4h (without hashing).
+            k6dv2odff9#4h
         """
 
-        # TODO: we should use enums here
         text = ascii_letters + digits + punctuation
         password = ''.join([self.random.choice(text) for _ in range(length)])
 
-        if algorithm is not None:
+        if hashed:
             crypto = Cryptographic()
-            return crypto.hash(algorithm)
-
-        return password
+            return crypto.hash(algorithm=Algorithm.MD5)
+        else:
+            return password
 
     def email(self, domains: Union[tuple, list] = None) -> str:
         """Generate a random email.
@@ -526,7 +525,7 @@ class Personal(BaseProvider):
         :return: Link to avatar.
         """
         url = 'https://api.adorable.io/avatars/{0}/{1}.png'
-        return url.format(size, self.password(algorithm='md5'))
+        return url.format(size, self.password(hashed=True))
 
     @staticmethod
     def identifier(mask: str = '##-##/##') -> str:

@@ -14,10 +14,7 @@ from mimesis.data import (
     SEXUALITY_SYMBOLS,
 )
 from mimesis.enums import Gender, TitleType
-from mimesis.exceptions import (
-    NonEnumerableError,
-    UnsupportedAlgorithm,
-)
+from mimesis.exceptions import NonEnumerableError
 from mimesis.utils import check_gender
 
 from ._patterns import (
@@ -72,23 +69,12 @@ def test_work_experience_extreme(_personal):
     assert result == 0
 
 
-@pytest.mark.parametrize(
-    'algorithm, length', [
-        ('md5', 32),
-        ('sha1', 40),
-        ('sha256', 64),
-        ('sha512', 128),
-    ],
-)
-def test_password(_personal, algorithm, length):
+def test_password(_personal):
     result = _personal.password(length=15)
     assert len(result) == 15
 
-    result = _personal.password(algorithm=algorithm)
-    assert len(result) == length
-
-    with pytest.raises(UnsupportedAlgorithm):
-        _personal.password(algorithm='sha42')
+    result = _personal.password(hashed=True)
+    assert len(result) == 32
 
 
 @pytest.mark.parametrize(
