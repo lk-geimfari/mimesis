@@ -38,7 +38,7 @@ class Cryptographic(BaseProvider):
                 _hash = fn(self.uuid().encode())
                 return _hash.hexdigest()
         else:
-            raise NonEnumerableError('Algorithm')
+            raise NonEnumerableError(Algorithm)
 
     def bytes(self, entropy: int = 32) -> Bytes:
         """Get a random byte string containing *entropy* bytes.
@@ -46,7 +46,7 @@ class Cryptographic(BaseProvider):
         The string has *entropy* random bytes, each byte converted to two
         hex digits.
 
-        :param int entropy: Number of bytes.
+        :param entropy: Number of bytes.
         :return: Bytes.
         :rtype: bytes
         """
@@ -55,7 +55,7 @@ class Cryptographic(BaseProvider):
     def token(self, entropy: int = 32) -> str:
         """Return a random text string, in hexadecimal.
 
-        :param int entropy: Number of bytes.
+        :param entropy: Number of bytes.
         :return: Token.
         """
         token = hexlify(self.bytes(entropy))

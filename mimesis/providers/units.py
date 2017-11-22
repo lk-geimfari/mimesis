@@ -310,7 +310,7 @@ class UnitSystem(BaseProvider):
         :param sign: Sing of number (positive, negative)
         :param symbol: Return symbol of prefix.
         :return: Prefix for SI.
-        :raises KeyError: if sign is not supported.
+        :raises NonEnumerableError: if sign is not supported.
 
         :Example:
             mega
@@ -324,4 +324,4 @@ class UnitSystem(BaseProvider):
         if sign in PrefixSign:
             return self.random.choice(prefixes[sign.value])
         else:
-            raise NonEnumerableError('PrefixSign')
+            raise NonEnumerableError(PrefixSign)

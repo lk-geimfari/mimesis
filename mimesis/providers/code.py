@@ -69,7 +69,7 @@ class Code(BaseProvider):
 
             return custom_code(mask=mask)
         else:
-            raise NonEnumerableError('ISBNFormat')
+            raise NonEnumerableError(ISBNFormat)
 
     @staticmethod
     def ean(fmt: Optional[EANFormat] = None) -> str:
@@ -78,7 +78,7 @@ class Code(BaseProvider):
 
         :param str fmt: Format of EAN.
         :return: EAN.
-        :raises NonEnumerableError: if fmt is not enum EANFormat
+        :raises NonEnumerableError: if fmt is not enum EANFormat.
 
         :Example:
             3953753179567.
@@ -91,7 +91,7 @@ class Code(BaseProvider):
             mask = EAN_MASKS[fmt.value]
             return custom_code(mask=mask)
         else:
-            raise NonEnumerableError('EANFormat')
+            raise NonEnumerableError(EANFormat)
 
     def imei(self) -> str:
         """Generate a random IMEI (International Mobile Station Equipment Identity).

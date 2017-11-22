@@ -88,7 +88,7 @@ class Payment(BaseProvider):
             length = 15
             regex = re.compile('(\d{4})(\d{6})(\d{5})')
         else:
-            raise NonEnumerableError('CardType')
+            raise NonEnumerableError(CardType)
 
         str_num = str(number)
         while len(str_num) < length - 1:

@@ -2,8 +2,12 @@ from typing import Optional
 
 from mimesis.enums import CountryCode
 from mimesis.exceptions import NonEnumerableError
-from mimesis.data import CALLING_CODES, CONTINENT_CODES, \
-    COUNTRIES_ISO, SHORTENED_ADDRESS_FMT
+from mimesis.data import (
+    CALLING_CODES,
+    CONTINENT_CODES,
+    COUNTRIES_ISO,
+    SHORTENED_ADDRESS_FMT,
+)
 from mimesis.providers.base import BaseProvider
 from mimesis.utils import pull, custom_code
 
@@ -151,7 +155,7 @@ class Address(BaseProvider):
             codes = COUNTRIES_ISO[fmt.value]
             return self.random.choice(codes)
         else:
-            raise NonEnumerableError('CountryCode')
+            raise NonEnumerableError(CountryCode)
 
     def country(self) -> str:
         """Get a random country.

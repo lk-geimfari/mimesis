@@ -158,9 +158,9 @@ def custom_code(mask: str = '@###',
                 char: str = '@', digit: str = '#') -> str:
     """Generate custom code using ascii uppercase and random integers.
 
-    :param str mask: Mask of code.
-    :param str char: Placeholder for characters.
-    :param str digit: Placeholder for digits.
+    :param mask: Mask of code.
+    :param char: Placeholder for characters.
+    :param digit: Placeholder for digits.
     :return: Custom code.
 
     :Example:
@@ -190,4 +190,4 @@ def check_gender(gender: Optional[Gender] = None) -> Gender:
     elif gender and gender in Gender:
         return gender
     else:
-        raise NonEnumerableError('Gender')
+        raise NonEnumerableError(Gender)

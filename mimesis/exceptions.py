@@ -21,9 +21,13 @@ class UndefinedSchema(ValueError):
 class NonEnumerableError(TypeError):
     """ Raised when object is not instance of Enum """
 
-    def __init__(self, enum_name):
-        self.enum_name = enum_name
+    def __init__(self, enum_obj):
+        if enum_obj:
+            self.enum_name = str(enum_obj)
+            self.items = ', '.join([str(i) for i in enum_obj])
+        else:
+            self.items = ''
 
     def __str__(self):
-        return 'You should use item of enum object «{}» ' \
-               'from module mimesis.enums'.format(self.enum_name)
+        return 'You should use one item of: «{}» of the object {} ' \
+               'from module mimesis.enums'.format(self.items, self.enum_name)

@@ -173,7 +173,7 @@ class Internet(BaseProvider):
         :param category: Enum object Hashtag.
         :return: The list of hashtags.
         :rtype: str or list
-        :raises NonEnumerableError: if category is not in Hashtag
+        :raises NonEnumerableError: if category is not in Hashtag.
 
         :Example:
             ['#love', '#sky', '#nice']
@@ -185,7 +185,7 @@ class Internet(BaseProvider):
         if category in Hashtag:
             hashtags = HASHTAGS[category.value]
         else:
-            raise NonEnumerableError('Hashtag')
+            raise NonEnumerableError(Hashtag)
 
         if int(quantity) == 1:
             return self.random.choice(hashtags)
@@ -223,7 +223,7 @@ class Internet(BaseProvider):
         if tld_type in TLDType:
             return self.random.choice(TLD[tld_type.value])
         else:
-            raise NonEnumerableError('DomainType')
+            raise NonEnumerableError(TLDType)
 
     def subreddit(self, nsfw: bool = False,
                   full_url: bool = False) -> str:
@@ -275,7 +275,7 @@ class Internet(BaseProvider):
         if layer in Layer:
             return self.random.choice(protocols[layer.value])
         else:
-            raise NonEnumerableError('Layer')
+            raise NonEnumerableError(Layer)
 
     def port(self, port_range: PortRange = PortRange.ALL) -> int:
         """Generate random port.
@@ -289,7 +289,7 @@ class Internet(BaseProvider):
         if port_range and port_range in PortRange:
             return self.random.randint(*port_range.value)
         else:
-            raise NonEnumerableError('PortRange')
+            raise NonEnumerableError(PortRange)
 
     def category_of_website(self):
         """Get random category of torrent portal.

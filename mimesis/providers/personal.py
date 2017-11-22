@@ -118,7 +118,7 @@ class Personal(BaseProvider):
         :param gender: The gender.
         :param title_type: TitleType enum object.
         :return: The title.
-        :raises ValueError: if gender or title_type in incorrect format.
+        :raises NonEnumerableError: if gender or title_type in incorrect format.
 
         :Example:
             PhD.
@@ -133,7 +133,7 @@ class Personal(BaseProvider):
             titles = titles[title_type.value]
             return self.random.choice(titles)
         else:
-            raise NonEnumerableError('TitleType')
+            raise NonEnumerableError(TitleType)
 
     def full_name(self, gender: Optional[Gender] = None,
                   reverse: bool = False) -> str:
