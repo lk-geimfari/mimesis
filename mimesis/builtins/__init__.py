@@ -10,4 +10,5 @@ __all__ = [
     'RussiaSpecProvider',
     'BrazilSpecProvider',
     'GermanySpecProvider',
+    'NLSpecProvider',
 ]
