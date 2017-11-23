@@ -3,6 +3,7 @@ from .ja import JapanSpecProvider
 from .ru import RussiaSpecProvider
 from .pt_br import BrazilSpecProvider
 from .de import GermanySpecProvider
+from .nl import NLSpecProvider
 
 __all__ = [
     'USASpecProvider',
