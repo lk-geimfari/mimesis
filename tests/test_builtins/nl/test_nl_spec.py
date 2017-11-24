@@ -1,11 +1,11 @@
 import pytest
 
-from mimesis.builtins import NLSpecProvider
+from mimesis.builtins import NetherlandsSpecProvider
 
 
 @pytest.fixture
 def nl():
-    return NLSpecProvider()
+    return NetherlandsSpecProvider()
 
 
 def test_ssn(nl):

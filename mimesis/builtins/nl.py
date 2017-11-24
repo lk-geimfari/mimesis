@@ -1,7 +1,7 @@
 from mimesis.builtins.base import BaseSpecProvider
 
 
-class NLSpecProvider(BaseSpecProvider):
+class NetherlandsSpecProvider(BaseSpecProvider):
     """Provides data specific to nl locale"""
 
     class Meta:
@@ -17,7 +17,7 @@ class NLSpecProvider(BaseSpecProvider):
         """
 
         # a bsn is valid when its 9 digits pass the '11 test'
-        def is_valid_bsn(number):
+        def _is_valid_bsn(number):
             total = 0
             multiplier = 9
 
@@ -29,7 +29,7 @@ class NLSpecProvider(BaseSpecProvider):
             return total % 11 == 0
 
         sample = str(self.random.randint(100000000, 999999999))
-        while not is_valid_bsn(sample):
+        while not _is_valid_bsn(sample):
             sample = str(self.random.randint(100000000, 999999999))
 
         return sample
