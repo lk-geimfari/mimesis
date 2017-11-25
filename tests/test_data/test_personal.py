@@ -139,6 +139,7 @@ def test_favorite_music_genre(_personal):
         SocialNetwork.FACEBOOK,
         SocialNetwork.TWITTER,
         SocialNetwork.VK,
+        None,
     ],
 )
 def test_social_media_profile(_personal, site):
