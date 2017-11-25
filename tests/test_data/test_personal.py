@@ -13,7 +13,7 @@ from mimesis.data import (
     GENDER_SYMBOLS,
     SEXUALITY_SYMBOLS,
 )
-from mimesis.enums import Gender, TitleType
+from mimesis.enums import Gender, TitleType, SocialNetwork
 from mimesis.exceptions import NonEnumerableError
 from mimesis.utils import check_gender
 
@@ -133,8 +133,16 @@ def test_favorite_music_genre(_personal):
     assert result in MUSIC_GENRE
 
 
-def test_social_media_profile(_personal):
-    result = _personal.social_media_profile()
+@pytest.mark.parametrize(
+    'site', [
+        SocialNetwork.INSTAGRAM,
+        SocialNetwork.FACEBOOK,
+        SocialNetwork.TWITTER,
+        SocialNetwork.VK,
+    ],
+)
+def test_social_media_profile(_personal, site):
+    result = _personal.social_media_profile(site=site)
     assert result is not None
 
 

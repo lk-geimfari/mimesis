@@ -113,3 +113,10 @@ class ISBNFormat(Enum, metaclass=AllowRandom):
 class EANFormat(Enum, metaclass=AllowRandom):
     EAN8 = 'ean-8'
     EAN13 = 'ean-13'
+
+
+class SocialNetwork(Enum, metaclass=AllowRandom):
+    FACEBOOK = 'facebook'
+    TWITTER = 'twitter'
+    INSTAGRAM = 'instagram'
+    VK = 'vk'

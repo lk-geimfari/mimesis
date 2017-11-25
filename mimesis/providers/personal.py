@@ -6,8 +6,9 @@ from mimesis.data import (
     EMAIL_DOMAINS, ENGLISH_LEVEL,
     MUSIC_GENRE, GENDER_SYMBOLS,
     SEXUALITY_SYMBOLS, USERNAMES,
+    SOCIAL_NETWORKS,
 )
-from mimesis.enums import Gender, TitleType, Algorithm
+from mimesis.enums import Gender, TitleType, Algorithm, SocialNetwork
 from mimesis.exceptions import NonEnumerableError
 from mimesis.providers.base import BaseProvider
 from mimesis.providers.cryptographic import Cryptographic
@@ -272,7 +273,7 @@ class Personal(BaseProvider):
             domain=domain,
         )
 
-    def social_media_profile(self) -> str:
+    def social_media_profile(self, site: Optional[SocialNetwork] = None) -> str:
         """Generate profile for random social network.
 
         :return: Profile in some network.
@@ -280,15 +281,17 @@ class Personal(BaseProvider):
         :Example:
             http://facebook.com/some_user
         """
+        if site is None:
+            site = SocialNetwork.get_random_item()
 
-        # TODO: enum here
-        urls = [
-            'facebook.com/{}',
-            'twitter.com/{}',
-            'medium.com/@{}',
-        ]
-        url = 'http://' + self.random.choice(urls)
-        username = self.username(template='U_d')
+        if site in SocialNetwork:
+            site = SOCIAL_NETWORKS[site.value]
+        else:
+            raise NonEnumerableError(SocialNetwork)
+
+        url = 'https://www.' + site
+        template = self.random.choice(['l-d', 'l_d', 'Ud', 'ld'])
+        username = self.username(template)
 
         return url.format(username)
 

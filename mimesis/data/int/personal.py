@@ -3460,3 +3460,10 @@ USERNAMES = [
     "zillionaire",
     "zooks",
 ]
+
+SOCIAL_NETWORKS = {
+    'facebook': 'facebook.com/{}',
+    'twitter': 'twitter.com/{}',
+    'instagram': 'instagram.com/{}',
+    'vk': 'vk.com/{}',
+}
