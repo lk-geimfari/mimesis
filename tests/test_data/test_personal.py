@@ -86,12 +86,15 @@ def test_password(_personal):
 
         # Default is ld
         'default',
+        None,
     ],
 )
 def test_username(_personal, template):
     result = _personal.username(template=template)
     assert re.match(USERNAME_REGEX, result)
 
+
+def test_username_unsupported_template(_personal):
     with pytest.raises(KeyError):
         _personal.username(template=':D')
 

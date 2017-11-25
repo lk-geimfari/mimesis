@@ -154,7 +154,7 @@ class Personal(BaseProvider):
             self.surname(gender),
         )
 
-    def username(self, template: str = '') -> str:
+    def username(self, template: Optional[str] = None) -> str:
         """Generate username by template.
 
         :param str template: Template ('U_d', 'U.d', 'U-d', 'ld', 'l-d', 'Ud',
