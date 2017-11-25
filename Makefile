@@ -34,6 +34,7 @@ clean-build:
 	rm --force --recursive build/
 	rm --force --recursive dist/
 	rm --force --recursive .cache/
+	rm --force --recursive .mypy_cache/
 
 
 .PHONY: clean
