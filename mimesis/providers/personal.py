@@ -290,9 +290,7 @@ class Personal(BaseProvider):
             raise NonEnumerableError(SocialNetwork)
 
         url = 'https://www.' + site
-        template = self.random.choice(['l-d', 'l_d', 'Ud', 'ld'])
-        username = self.username(template)
-
+        username = self.username()
         return url.format(username)
 
     def gender(self, iso5218: bool = False,
