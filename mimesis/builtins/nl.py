@@ -5,7 +5,7 @@ class NetherlandsSpecProvider(BaseSpecProvider):
     """Provides data specific to nl locale"""
 
     class Meta:
-        name = 'nl_provider'
+        name = 'netherlands_provider'
 
     def bsn(self) -> str:
         """Generate a random, but valid burgerservicenummer (BSN).
@@ -17,7 +17,7 @@ class NetherlandsSpecProvider(BaseSpecProvider):
         """
 
         # a bsn is valid when its 9 digits pass the '11 test'
-        def _is_valid_bsn(number):
+        def _is_valid_bsn(number: str) -> str:
             total = 0
             multiplier = 9
 

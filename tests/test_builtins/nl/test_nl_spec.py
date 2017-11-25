@@ -1,5 +1,6 @@
 import pytest
 
+from mimesis import Generic
 from mimesis.builtins import NetherlandsSpecProvider
 
 
@@ -25,3 +26,11 @@ def test_ssn(nl):
         int(result[7:8]) * 2 + \
         int(result[8:9]) * -1
     assert test11 % 11 == 0
+
+
+def test_nl_meta():
+    generic = Generic('nl')
+    generic.add_provider(NetherlandsSpecProvider)
+    result = generic.netherlands_provider.bsn()
+    assert result is not None
+    assert len(result) == 9
