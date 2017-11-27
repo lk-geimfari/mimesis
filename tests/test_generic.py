@@ -47,7 +47,7 @@ def test_base_business(generic):
 
 
 def test_base_unit_system(generic):
-    result = generic.unit_system.mass()
+    result = generic.unit_system.unit()
     assert result is not None
 
 
