@@ -244,3 +244,10 @@ Schema
 
 .. autoclass:: mimesis.schema.Field
    :members:
+
+
+Enums
+=====
+
+.. automodule:: mimesis.enums
+   :members:
