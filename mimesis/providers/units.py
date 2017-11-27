@@ -10,6 +10,12 @@ class UnitSystem(BaseProvider):
     """
 
     def unit(self, name: Optional[UnitName] = None, symbol=False):
+        """Get unit name.
+
+        :param name: Enum object UnitName.
+        :param symbol: Return only symbol
+        :return: Unit.
+        """
         result = self._validate_enum(item=name, enum=UnitName)
 
         if symbol:
