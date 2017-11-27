@@ -8,7 +8,7 @@ class NetherlandsSpecProvider(BaseSpecProvider):
         name = 'netherlands_provider'
 
     def bsn(self) -> str:
-        """Generate a random, but valid burgerservicenummer (BSN).
+        """Generate a random, but valid ``burgerservicenummer`` (BSN).
 
         :returns: random BSN
 

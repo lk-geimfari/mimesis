@@ -3,12 +3,16 @@ from mimesis.builtins.base import BaseSpecProvider
 
 
 class GermanySpecProvider(BaseSpecProvider):
+    """
+    Specific-provider of misc data for Deutschland.
+    """
+
     def __init__(self):
         super().__init__()
         self._data = pull('builtin.json', 'de')
 
     class Meta:
-        name = 'germany_provider'
+        name = 'Deutschland'
 
     def noun(self, plural: bool = False) -> str:
         """Return a random noun in German.
