@@ -9,7 +9,6 @@ from mimesis.data import (
     SOCIAL_NETWORKS,
 )
 from mimesis.enums import Gender, TitleType, Algorithm, SocialNetwork
-from mimesis.exceptions import NonEnumerableError
 from mimesis.providers.base import BaseProvider
 from mimesis.providers.cryptographic import Cryptographic
 from mimesis.config import SURNAMES_SEPARATED_BY_GENDER
@@ -125,16 +124,12 @@ class Personal(BaseProvider):
             PhD.
         """
         gender = check_gender(gender)
-
-        if title_type is None:
-            title_type = TitleType.get_random_item()
-
-        if title_type and title_type in TitleType:
-            titles = self.data['title'][gender.value]
-            titles = titles[title_type.value]
-            return self.random.choice(titles)
-        else:
-            raise NonEnumerableError(TitleType)
+        key = self._validate_enum(
+            item=title_type,
+            enum=TitleType,
+        )
+        titles = self.data['title'][gender.value][key]
+        return self.random.choice(titles)
 
     def full_name(self, gender: Optional[Gender] = None,
                   reverse: bool = False) -> str:
@@ -281,17 +276,14 @@ class Personal(BaseProvider):
         :Example:
             http://facebook.com/some_user
         """
-        if site is None:
-            site = SocialNetwork.get_random_item()
 
-        if site and site in SocialNetwork:
-            website = SOCIAL_NETWORKS[site.value]
-        else:
-            raise NonEnumerableError(SocialNetwork)
-
+        key = self._validate_enum(
+            item=site,
+            enum=SocialNetwork,
+        )
+        website = SOCIAL_NETWORKS[key]
         url = 'https://www.' + website
-        username = self.username()
-        return url.format(username)
+        return url.format(self.username())
 
     def gender(self, iso5218: bool = False,
                symbol: bool = False) -> Union[str, int]:
@@ -302,7 +294,7 @@ class Personal(BaseProvider):
 
         :param bool iso5218:
             Codes for the representation of human sexes is an international
-            standard.
+            standard (0 - not known, 1 - male, 2 - female, 9 - not applicable).
         :param bool symbol: Symbol of gender.
         :return: Title of gender.
         :rtype: str or int
@@ -310,11 +302,6 @@ class Personal(BaseProvider):
         :Example:
             Male
         """
-        # The four codes specified in ISO/IEC 5218 are:
-        #     0 = not known,
-        #     1 = male,
-        #     2 = female,
-        #     9 = not applicable.
         codes = [0, 1, 2, 9]
 
         if iso5218:
@@ -411,8 +398,7 @@ class Personal(BaseProvider):
         return self.random.choice(views)
 
     def views_on(self) -> str:
-        """
-        Get a random views on.
+        """Get a random views on.
 
         :return: Views on.
 
@@ -510,11 +496,8 @@ class Personal(BaseProvider):
         """
         if not mask:
             code = self.random.choice(CALLING_CODES)
-            default = [
-                '{}-(###)-###-####'.format(code),
-            ]
-
-            masks = self.data.get('telephone_fmt', default)
+            default = '{}-(###)-###-####'.format(code)
+            masks = self.data.get('telephone_fmt', [default])
             mask = self.random.choice(masks)
 
         return custom_code(mask=mask, digit=placeholder)

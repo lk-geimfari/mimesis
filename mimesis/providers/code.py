@@ -1,7 +1,6 @@
 from typing import Optional
 
 from mimesis.enums import ISBNFormat, EANFormat
-from mimesis.exceptions import NonEnumerableError
 from mimesis.data import (
     EAN_MASKS,
     IMEI_TACS,
@@ -54,7 +53,7 @@ class Code(BaseProvider):
         :Example:
             132-1-15411-375-8.
         """
-        fmt = self.validate_enum(item=fmt, enum=ISBNFormat)
+        fmt = self._validate_enum(item=fmt, enum=ISBNFormat)
         result = ISBN_MASKS[fmt]
 
         if self.locale in ISBN_GROUPS:
@@ -77,7 +76,7 @@ class Code(BaseProvider):
         :Example:
             3953753179567.
         """
-        key = self.validate_enum(
+        key = self._validate_enum(
             item=fmt,
             enum=EANFormat,
         )

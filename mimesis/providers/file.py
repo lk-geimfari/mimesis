@@ -3,7 +3,6 @@ from typing import Optional
 
 from mimesis.data import EXTENSIONS, MIME_TYPES
 from mimesis.enums import FileType, MimeType
-from mimesis.exceptions import NonEnumerableError
 from mimesis.providers.base import BaseProvider
 from mimesis.providers.text import Text
 
@@ -33,28 +32,19 @@ class File(BaseProvider):
         :Example:
             .py
         """
-        if file_type is None:
-            file_type = FileType.get_random_item()
-
-        if file_type and file_type in FileType:
-            return self.random.choice(EXTENSIONS[file_type.value])
-        else:
-            raise NonEnumerableError(FileType)
+        key = self._validate_enum(item=file_type, enum=FileType)
+        extensions = EXTENSIONS[key]
+        return self.random.choice(extensions)
 
     def mime_type(self, type_: Optional[MimeType] = None) -> str:
         """Get a random mime type from list.
 
         :param type_: Enum object MimeType.
         :return: Mime type.
-        :raises ValueError: if type_t is not supported.
         """
-        if type_ is None:
-            type_ = MimeType.get_random_item()
-
-        if type_ and type_ in MimeType:
-            return self.random.choice(MIME_TYPES[type_.value])
-        else:
-            raise NonEnumerableError(MimeType)
+        key = self._validate_enum(item=type_, enum=MimeType)
+        types = MIME_TYPES[key]
+        return self.random.choice(types)
 
     def size(self, minimum: int = 1, maximum: int = 100) -> str:
         """Get size of file.

@@ -23,7 +23,7 @@ class BaseProvider(object):
             self.random.seed(self.seed)
 
     @staticmethod
-    def validate_enum(item: Any, enum: Any) -> Any:
+    def _validate_enum(item: Any, enum: Any) -> Any:
         """Validate enum parameter of method in subclasses of BaseProvider.
 
         :param item: Item of enum object.

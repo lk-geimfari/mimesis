@@ -4,7 +4,6 @@ import uuid
 from typing import Optional
 
 from mimesis.enums import Algorithm
-from mimesis.exceptions import NonEnumerableError
 from mimesis.providers.base import BaseProvider
 from mimesis.typing import Bytes
 
@@ -28,7 +27,7 @@ class Cryptographic(BaseProvider):
         :return: Hash.
         :raises NonEnumerableError: if algorithm is not supported.
         """
-        key = self.validate_enum(
+        key = self._validate_enum(
             item=algorithm,
             enum=Algorithm,
         )

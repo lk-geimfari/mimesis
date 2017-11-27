@@ -47,7 +47,7 @@ class Text(BaseProvider):
             and strong static typing.
         """
         text = ''
-        for _ in range(int(quantity)):
+        for _ in range(quantity):
             text += ' ' + self.random.choice(self.data['text'])
         return text.strip()
 
@@ -82,7 +82,7 @@ class Text(BaseProvider):
             science, network, god, octopus, love.
         """
         words = self.data['words'].get('normal')
-        words_list = [self.random.choice(words) for _ in range(int(quantity))]
+        words_list = [self.random.choice(words) for _ in range(quantity)]
         return words_list
 
     def word(self) -> str:

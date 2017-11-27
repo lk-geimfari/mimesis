@@ -212,7 +212,7 @@ class Internet(BaseProvider):
         :return: Top level domain.
         :raises NonEnumerableError: if tld_type not in DomainType.
         """
-        key = self.validate_enum(item=tld_type, enum=TLDType)
+        key = self._validate_enum(item=tld_type, enum=TLDType)
         return self.random.choice(TLD[key])
 
     def subreddit(self, nsfw: bool = False,
@@ -257,7 +257,7 @@ class Internet(BaseProvider):
         :Example:
             AMQP
         """
-        key = self.validate_enum(item=layer, enum=Layer)
+        key = self._validate_enum(item=layer, enum=Layer)
         protocols = NETWORK_PROTOCOLS[key]
         return self.random.choice(protocols)
 
