@@ -4,7 +4,7 @@ from mimesis.data import (TLD, EMOJI, HASHTAGS, HTTP_METHODS,
                           TORRENT_CATEGORIES, HTTP_STATUS_CODES,
                           NETWORK_PROTOCOLS, SUBREDDITS, SUBREDDITS_NSFW,
                           USERNAMES, USER_AGENTS)
-from mimesis.enums import PortRange, TLDType, Layer, MimeType, Hashtag
+from mimesis.enums import PortRange, TLDType, Layer, MimeType
 from mimesis.exceptions import NonEnumerableError
 from mimesis.providers.base import BaseProvider
 from mimesis.providers.file import File
@@ -165,8 +165,7 @@ class Internet(BaseProvider):
 
         return url.format(keyword=keyword)
 
-    def hashtags(self, quantity: int = 4,
-                 category: Hashtag = None) -> Union[str, list]:
+    def hashtags(self, quantity: int = 4) -> Union[str, list]:
         """Create a list of hashtags (for Instagram, Twitter etc.)
 
         :param quantity: The quantity of hashtags.
@@ -178,19 +177,12 @@ class Internet(BaseProvider):
         :Example:
             ['#love', '#sky', '#nice']
         """
-
-        if category is None:
-            category = Hashtag.get_random_item()
-
-        if category and category in Hashtag:
-            hashtags = HASHTAGS[category.value]
-        else:
-            raise NonEnumerableError(Hashtag)
+        tags = ['#' + self.random.choice(HASHTAGS)
+                for _ in range(quantity)]
 
         if int(quantity) == 1:
-            return self.random.choice(hashtags)
+            return tags[0]
 
-        tags = [self.random.choice(hashtags) for _ in range(int(quantity))]
         return tags
 
     def home_page(self, tld_type: Optional[TLDType] = None) -> str:

@@ -6,7 +6,7 @@ import pytest
 
 from mimesis import Internet
 from mimesis import data
-from mimesis.enums import PortRange, TLDType, Layer, MimeType, Hashtag
+from mimesis.enums import PortRange, TLDType, Layer, MimeType
 from mimesis.exceptions import NonEnumerableError
 
 from . import _patterns as p
@@ -22,28 +22,12 @@ def test_emoji(net):
     assert result in data.EMOJI
 
 
-@pytest.mark.parametrize(
-    'category', [
-        Hashtag.BOYS,
-        Hashtag.CARS,
-        Hashtag.FAMILY,
-        Hashtag.GENERAL,
-        Hashtag.GIRLS,
-        Hashtag.LOVE,
-        Hashtag.NATURE,
-        Hashtag.SPORT,
-        Hashtag.TRAVEL,
-    ],
-)
-def test_hashtags(net, category):
+def test_hashtags(net):
     result = net.hashtags(quantity=5)
     assert len(result) == 5
 
-    result = net.hashtags(quantity=1, category=category)
-    assert result in data.HASHTAGS[category.value]
-
-    with pytest.raises(NonEnumerableError):
-        net.hashtags(category='nil')
+    result = net.hashtags(quantity=1)
+    assert result.replace('#', '') in data.HASHTAGS
 
 
 def test_home_page(net):
