@@ -1,5 +1,5 @@
 {
-  "address_fmt": "{st_num} {st_name}",
+  "address_fmt": "{st_name} {st_num}",
   "city": [
 	"Aagtdorp",
 	"Aalsmeer",
