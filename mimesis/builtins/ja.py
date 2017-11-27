@@ -1,4 +1,7 @@
-class JapanSpecProvider(object):
+from mimesis.builtins.base import BaseSpecProvider
+
+
+class JapanSpecProvider(BaseSpecProvider):
     """Class that provides special data for ja"""
 
     class Meta:

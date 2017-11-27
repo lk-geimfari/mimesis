@@ -5,10 +5,8 @@ import socket
 
 import pytest
 
-from mimesis.enums import Gender
-from mimesis.exceptions import UnsupportedLocale, NonEnumerableError
+from mimesis.exceptions import UnsupportedLocale
 from mimesis.utils import (
-    check_gender,
     custom_code,
     download_image,
     locale_info,
@@ -132,19 +130,3 @@ def test_custom_code():
     assert a.isalpha()
     assert b.isdigit()
     assert c.isalpha()
-
-
-@pytest.mark.parametrize(
-    'gender, excepted', [
-        (Gender.MALE, 'male'),
-        (Gender.FEMALE, 'female'),
-        (None, ['female', 'male']),
-    ],
-)
-def test_check_gender(gender, excepted):
-    result = check_gender(gender)
-    assert (result.value == excepted) or (result.value in excepted)
-    assert result in Gender
-
-    with pytest.raises(NonEnumerableError):
-        check_gender(gender='nil')

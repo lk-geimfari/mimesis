@@ -12,7 +12,7 @@ class GermanySpecProvider(BaseSpecProvider):
         self._data = pull('builtin.json', 'de')
 
     class Meta:
-        name = 'Deutschland'
+        name = 'germany_provider'
 
     def noun(self, plural: bool = False) -> str:
         """Return a random noun in German.

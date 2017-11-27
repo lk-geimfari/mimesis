@@ -8,16 +8,15 @@ class NetherlandsSpecProvider(BaseSpecProvider):
         name = 'netherlands_provider'
 
     def bsn(self) -> str:
-        """Generate a random, but valid ``burgerservicenummer`` (BSN).
+        """Generate a random, but valid ``Burgerservicenummer`` (BSN).
 
-        :returns: random BSN
+        :returns: Random BSN.
 
         :Example:
             255159705
         """
 
-        # a bsn is valid when its 9 digits pass the '11 test'
-        def _is_valid_bsn(number: str) -> str:
+        def _is_valid_bsn(number: str) -> bool:
             total = 0
             multiplier = 9
 
@@ -26,10 +25,13 @@ class NetherlandsSpecProvider(BaseSpecProvider):
                 total += int(char) * multiplier
                 multiplier -= 1
 
-            return total % 11 == 0
+            result = total % 11 == 0
+            return result
 
-        sample = str(self.random.randint(100000000, 999999999))
+        a, b = (100000000, 999999999)
+        sample = str(self.random.randint(a, b))
+
         while not _is_valid_bsn(sample):
-            sample = str(self.random.randint(100000000, 999999999))
+            sample = str(self.random.randint(a, b))
 
         return sample

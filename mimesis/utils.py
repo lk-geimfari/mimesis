@@ -8,18 +8,14 @@ import json
 import ssl
 from os import path
 from random import randint, choice
-from typing import Mapping, Union, Optional
+from typing import Mapping, Union
 from urllib import request
 
-from mimesis.exceptions import (
-    UnsupportedLocale,
-    NonEnumerableError,
-)
+from mimesis.exceptions import UnsupportedLocale
 from mimesis import config
 from mimesis.typing import JSON
-from mimesis.enums import Gender
 
-__all__ = ['pull', 'download_image', 'locale_info', 'check_gender']
+__all__ = ['custom_code', 'download_image']
 
 PATH = path.abspath(path.join(path.dirname(__file__), 'data'))
 
@@ -176,18 +172,3 @@ def custom_code(mask: str = '@###',
             code += p
 
     return code
-
-
-def check_gender(gender: Optional[Gender] = None) -> Gender:
-    """Check correctness of the gender.
-
-    :param gender: Gender's enum object.
-    :return: Gender.
-    :raises NonEnumerableError: if gender has incorrect value.
-    """
-    if gender is None:
-        return Gender.get_random_item()
-    elif gender and gender in Gender:
-        return gender
-    else:
-        raise NonEnumerableError(Gender)

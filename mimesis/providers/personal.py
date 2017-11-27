@@ -12,7 +12,7 @@ from mimesis.enums import Gender, TitleType, Algorithm, SocialNetwork
 from mimesis.providers.base import BaseProvider
 from mimesis.providers.cryptographic import Cryptographic
 from mimesis.config import SURNAMES_SEPARATED_BY_GENDER
-from mimesis.utils import check_gender, pull, custom_code
+from mimesis.utils import pull, custom_code
 
 __all__ = ['Personal']
 
@@ -79,8 +79,8 @@ class Personal(BaseProvider):
         :Example:
             John.
         """
-        gender = check_gender(gender)
-        names = self.data['names'].get(gender.value)
+        key = self._validate_enum(gender, Gender)
+        names = self.data['names'].get(key)
         return self.random.choice(names)
 
     def surname(self, gender: Optional[Gender] = None) -> str:
@@ -96,10 +96,8 @@ class Personal(BaseProvider):
 
         # Separated by gender.
         if self.locale in SURNAMES_SEPARATED_BY_GENDER:
-            gender = check_gender(gender)
-            return self.random.choice(
-                surnames.get(gender.value),
-            )
+            key = self._validate_enum(gender, Gender)
+            return self.random.choice(surnames.get(key))
 
         return self.random.choice(surnames)
 
@@ -123,12 +121,11 @@ class Personal(BaseProvider):
         :Example:
             PhD.
         """
-        gender = check_gender(gender)
-        key = self._validate_enum(
-            item=title_type,
-            enum=TitleType,
-        )
-        titles = self.data['title'][gender.value][key]
+        gender_key = self._validate_enum(gender, Gender)
+        title_key = self._validate_enum(
+            item=title_type, enum=TitleType)
+
+        titles = self.data['title'][gender_key][title_key]
         return self.random.choice(titles)
 
     def full_name(self, gender: Optional[Gender] = None,
@@ -421,14 +418,13 @@ class Personal(BaseProvider):
         # Subtleties of the orthography.
         separated_locales = ['cs', 'ru', 'uk', 'kk']
 
-        nationalities = self.data['nationality']
+        nations = self.data['nationality']
 
         if self.locale in separated_locales:
-            gender = check_gender(gender)
-            nations = nationalities[gender.value]
-            return self.random.choice(nations)
+            key = self._validate_enum(gender, Gender)
+            return self.random.choice(nations[key])
 
-        return self.random.choice(nationalities)
+        return self.random.choice(nations)
 
     def university(self) -> str:
         """Get a random university.

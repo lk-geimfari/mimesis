@@ -53,8 +53,8 @@ class Code(BaseProvider):
         :Example:
             132-1-15411-375-8.
         """
-        fmt = self._validate_enum(item=fmt, enum=ISBNFormat)
-        result = ISBN_MASKS[fmt]
+        fmt_value = self._validate_enum(item=fmt, enum=ISBNFormat)
+        result = ISBN_MASKS[fmt_value]
 
         if self.locale in ISBN_GROUPS:
             mask = result.format(

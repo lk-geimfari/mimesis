@@ -15,7 +15,6 @@ from mimesis.data import (
 )
 from mimesis.enums import Gender, TitleType, SocialNetwork
 from mimesis.exceptions import NonEnumerableError
-from mimesis.utils import check_gender
 
 from ._patterns import (
     USERNAME_REGEX,
@@ -183,13 +182,14 @@ def test_name(personal, gender):
     assert result in personal.data['names'][gender.value]
 
 
-@pytest.mark.parametrize(
-    'gender', [None],
-)
-def test_name_with_none(_personal, gender):
-    gender = check_gender(gender)
-    result = _personal.name(gender=gender)
-    assert result in _personal.data['names'][gender.value]
+def test_name_with_none(_personal):
+    result = _personal.name(gender=None)
+    names = _personal.data['names']
+
+    females = names['female']
+    males = names['male']
+    assert result is not None
+    assert (result in females) or (result in males)
 
 
 def test_name_unexpected_gender(personal):

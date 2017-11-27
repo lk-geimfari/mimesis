@@ -1,7 +1,7 @@
 from typing import Optional
 
 from mimesis.builtins.base import BaseSpecProvider
-from mimesis.utils import pull, check_gender
+from mimesis.utils import pull
 from mimesis.enums import Gender
 
 
@@ -37,8 +37,8 @@ class RussiaSpecProvider(BaseSpecProvider):
         :Example:
             Алексеевна.
         """
-        gender = check_gender(gender)
-        patronymics = self._data['patronymic'][gender.value]
+        gender = self._validate_enum(gender, Gender)
+        patronymics = self._data['patronymic'][gender]
         return self.random.choice(patronymics)
 
     def passport_series(self, year: int = None) -> str:
