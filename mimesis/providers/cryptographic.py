@@ -28,17 +28,15 @@ class Cryptographic(BaseProvider):
         :return: Hash.
         :raises NonEnumerableError: if algorithm is not supported.
         """
+        key = self.validate_enum(
+            item=algorithm,
+            enum=Algorithm,
+        )
 
-        if algorithm is None:
-            algorithm = Algorithm.get_random_item()
-
-        if algorithm and algorithm in Algorithm:
-            if hasattr(hashlib, algorithm.value):
-                fn = getattr(hashlib, algorithm.value)
-                _hash = fn(self.uuid().encode())
-                return _hash.hexdigest()
-        else:
-            raise NonEnumerableError(Algorithm)
+        if hasattr(hashlib, key):
+            fn = getattr(hashlib, key)
+            _hash = fn(self.uuid().encode())
+            return _hash.hexdigest()
 
     def bytes(self, entropy: int = 32) -> Bytes:
         """Get a random byte string containing *entropy* bytes.
