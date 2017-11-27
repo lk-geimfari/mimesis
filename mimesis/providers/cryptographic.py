@@ -32,7 +32,7 @@ class Cryptographic(BaseProvider):
         if algorithm is None:
             algorithm = Algorithm.get_random_item()
 
-        if algorithm in Algorithm:
+        if algorithm and algorithm in Algorithm:
             if hasattr(hashlib, algorithm.value):
                 fn = getattr(hashlib, algorithm.value)
                 _hash = fn(self.uuid().encode())

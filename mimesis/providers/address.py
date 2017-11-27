@@ -151,7 +151,7 @@ class Address(BaseProvider):
         if fmt is None:
             fmt = CountryCode.get_random_item()
 
-        if fmt in CountryCode:
+        if fmt and fmt in CountryCode:
             codes = COUNTRIES_ISO[fmt.value]
             return self.random.choice(codes)
         else:

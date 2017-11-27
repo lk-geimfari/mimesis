@@ -57,14 +57,13 @@ class Code(BaseProvider):
         if fmt is None:
             fmt = ISBNFormat.get_random_item()
 
-        if fmt in ISBNFormat:
-            fmt = ISBN_MASKS[fmt.value]
-
+        if fmt and fmt in ISBNFormat:
+            result_fmt = ISBN_MASKS[fmt.value]
             if self.locale in ISBN_GROUPS:
-                mask = fmt.format(
+                mask = result_fmt.format(
                     ISBN_GROUPS[self.locale])
             else:
-                mask = fmt.format(
+                mask = result_fmt.format(
                     ISBN_GROUPS['default'])
 
             return custom_code(mask=mask)
@@ -87,7 +86,7 @@ class Code(BaseProvider):
         if fmt is None:
             fmt = EANFormat.get_random_item()
 
-        if fmt in EANFormat:
+        if fmt and fmt in EANFormat:
             mask = EAN_MASKS[fmt.value]
             return custom_code(mask=mask)
         else:

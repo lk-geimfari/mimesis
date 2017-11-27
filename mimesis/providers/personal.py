@@ -129,7 +129,7 @@ class Personal(BaseProvider):
         if title_type is None:
             title_type = TitleType.get_random_item()
 
-        if title_type in TitleType:
+        if title_type and title_type in TitleType:
             titles = self.data['title'][gender.value]
             titles = titles[title_type.value]
             return self.random.choice(titles)
@@ -284,12 +284,12 @@ class Personal(BaseProvider):
         if site is None:
             site = SocialNetwork.get_random_item()
 
-        if site in SocialNetwork:
-            site = SOCIAL_NETWORKS[site.value]
+        if site and site in SocialNetwork:
+            website = SOCIAL_NETWORKS[site.value]
         else:
             raise NonEnumerableError(SocialNetwork)
 
-        url = 'https://www.' + site
+        url = 'https://www.' + website
         username = self.username()
         return url.format(username)
 
