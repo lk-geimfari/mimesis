@@ -26,6 +26,7 @@
 - Removed some useless methods
 - Removed module `constants`, in view of adding more convenient and useful module `enums`
 - Removed non informative custom exception `WrongArgument` and replaced one with `KeyError` and `NonEnumerableError`
+- Parameter `category` of method `hashtags` is deprecated and was removed
 
 **Updated/Renamed**:
 - Updated data for `de-at`, `en`, `fr`, `pl`, `pt-br`, `pt`, `ru`, `uk`
