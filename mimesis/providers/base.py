@@ -29,6 +29,7 @@ class BaseProvider(object):
         :param item: Item of enum object.
         :param enum: Enum object.
         :return: Value of item.
+        :raises NonEnumerableError: if ``item`` not in ``enum``.
         """
 
         if item is None:
