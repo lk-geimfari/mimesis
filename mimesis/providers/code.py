@@ -54,24 +54,19 @@ class Code(BaseProvider):
         :Example:
             132-1-15411-375-8.
         """
-        if fmt is None:
-            fmt = ISBNFormat.get_random_item()
+        fmt = self.validate_enum(item=fmt, enum=ISBNFormat)
+        result = ISBN_MASKS[fmt]
 
-        if fmt and fmt in ISBNFormat:
-            result_fmt = ISBN_MASKS[fmt.value]
-            if self.locale in ISBN_GROUPS:
-                mask = result_fmt.format(
-                    ISBN_GROUPS[self.locale])
-            else:
-                mask = result_fmt.format(
-                    ISBN_GROUPS['default'])
-
-            return custom_code(mask=mask)
+        if self.locale in ISBN_GROUPS:
+            mask = result.format(
+                ISBN_GROUPS[self.locale])
         else:
-            raise NonEnumerableError(ISBNFormat)
+            mask = result.format(
+                ISBN_GROUPS['default'])
 
-    @staticmethod
-    def ean(fmt: Optional[EANFormat] = None) -> str:
+        return custom_code(mask=mask)
+
+    def ean(self, fmt: Optional[EANFormat] = None) -> str:
         """Generate EAN (European Article Number) code. Default is
         EAN-13, but you also can use EAN-8.
 
@@ -82,15 +77,12 @@ class Code(BaseProvider):
         :Example:
             3953753179567.
         """
-
-        if fmt is None:
-            fmt = EANFormat.get_random_item()
-
-        if fmt and fmt in EANFormat:
-            mask = EAN_MASKS[fmt.value]
-            return custom_code(mask=mask)
-        else:
-            raise NonEnumerableError(EANFormat)
+        key = self.validate_enum(
+            item=fmt,
+            enum=EANFormat,
+        )
+        mask = EAN_MASKS[key]
+        return custom_code(mask=mask)
 
     def imei(self) -> str:
         """Generate a random IMEI (International Mobile Station Equipment Identity).

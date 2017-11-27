@@ -133,6 +133,7 @@ class Internet(BaseProvider):
         :type height: str or int
         :return: An image (Link to image).
         """
+        # TODO: Refactoring
         url = 'https://source.unsplash.com/category/' \
               '{category}/{width}x{height}'
 
@@ -152,6 +153,8 @@ class Internet(BaseProvider):
         :param keyword: Keyword.
         :return: Link to image.
         """
+
+        # TODO: Refactoring
         url = 'https://source.unsplash.com/weekly?{keyword}'
 
         keywords = [
@@ -209,13 +212,8 @@ class Internet(BaseProvider):
         :return: Top level domain.
         :raises NonEnumerableError: if tld_type not in DomainType.
         """
-        if tld_type is None:
-            tld_type = TLDType.get_random_item()
-
-        if tld_type and tld_type in TLDType:
-            return self.random.choice(TLD[tld_type.value])
-        else:
-            raise NonEnumerableError(TLDType)
+        key = self.validate_enum(item=tld_type, enum=TLDType)
+        return self.random.choice(TLD[key])
 
     def subreddit(self, nsfw: bool = False,
                   full_url: bool = False) -> str:
@@ -259,21 +257,16 @@ class Internet(BaseProvider):
         :Example:
             AMQP
         """
-        protocols = NETWORK_PROTOCOLS
-
-        if layer is None:
-            layer = Layer.get_random_item()
-
-        if layer and layer in Layer:
-            return self.random.choice(protocols[layer.value])
-        else:
-            raise NonEnumerableError(Layer)
+        key = self.validate_enum(item=layer, enum=Layer)
+        protocols = NETWORK_PROTOCOLS[key]
+        return self.random.choice(protocols)
 
     def port(self, port_range: PortRange = PortRange.ALL) -> int:
         """Generate random port.
 
         :param port_range: Range enum object.
         :return: Port number.
+        :raises NonEnumerableError: if port_range is not in PortRange.
 
         :Example:
             8080
@@ -291,4 +284,5 @@ class Internet(BaseProvider):
         :Example:
             Video/TV shows
         """
-        return self.random.choice(TORRENT_CATEGORIES)
+        categories = TORRENT_CATEGORIES
+        return self.random.choice(categories)
