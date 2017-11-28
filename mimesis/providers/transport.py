@@ -62,6 +62,6 @@ class Transport(BaseProvider):
         """
 
         if not allow_random:
-            return VRC_BY_LOCALES.get(self.locale)
+            return VRC_BY_LOCALES[self.locale]
 
         return self.random.choice(VR_CODES)
