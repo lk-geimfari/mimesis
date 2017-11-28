@@ -8,7 +8,7 @@ import json
 import ssl
 from os import path
 from random import randint, choice
-from typing import Mapping, Union
+from typing import Mapping, Union, Optional
 from urllib import request
 
 from mimesis.exceptions import UnsupportedLocale
@@ -106,7 +106,7 @@ def pull(file: str, locale: str = 'en') -> JSON:
     locale = locale.lower()
 
     if locale not in config.SUPPORTED_LOCALES:
-        raise UnsupportedLocale('Locale %s is not supported' % locale)
+        raise UnsupportedLocale(locale)
 
     master_locale = locale.split('-')[0]
     data = get_data(master_locale)
@@ -138,16 +138,21 @@ def download_image(url: str = '', save_path: str = '',
     return None
 
 
-def setup_locale(locale: str = '') -> str:
+def setup_locale(locale: Optional[str] = None) -> str:
     """Setup locale to BaseProvider.
 
     :param str locale: Locale
     :return: Locale in lowercase.
+    :raises UnsupportedLocale: if locales is not supported.
     """
     if not locale:
         return config.DEFAULT_LOCALE
 
-    return locale.lower()
+    locale = locale.lower()
+    if locale not in config.SUPPORTED_LOCALES:
+        raise UnsupportedLocale(locale)
+
+    return locale
 
 
 def custom_code(mask: str = '@###',

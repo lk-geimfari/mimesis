@@ -8,6 +8,7 @@
 - Added `category_of_website` and `port` to `Internet` data provider
 - Added `price_in_btc` and `currency_symbol` to `Business` data provider
 - Added `dna`, `rna` and `atomic_number` to `Science` data provider
+- Added `vehicle_registration_code` to `Transport` data provider
 - Added `schoice` method for `Random`
 - Added alias `last_name` for `surname` in `Personal` data provider
 - Added alias `province`, `region`, `federal_subject` for `state` in `Address` data provider

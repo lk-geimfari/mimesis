@@ -59,6 +59,7 @@ class Generic(BaseProvider):
         self._food = Food
         self._science = Science
         self._code = Code
+        self._transport = Transport
         self.unit_system = UnitSystem()
         self.file = File()
         self.numbers = Numbers()
@@ -66,7 +67,6 @@ class Generic(BaseProvider):
         self.hardware = Hardware()
         self.clothing_sizes = ClothingSizes()
         self.internet = Internet()
-        self.transport = Transport()
         self.path = Path()
         self.payment = Payment()
         self.games = Games()
