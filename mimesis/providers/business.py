@@ -1,4 +1,9 @@
-from mimesis.data import CURRENCIES, CURRENCY_SYMBOLS
+from mimesis.data import (
+    CURRENCY_ISO_CODES,
+    CURRENCY_SYMBOLS,
+    CRYPTOCURRENCY_SYMBOLS,
+    CRYPTOCURRENCY_ISO_CODES,
+)
 from mimesis.providers.base import BaseProvider
 from mimesis.utils import pull
 
@@ -53,15 +58,35 @@ class Business(BaseProvider):
             ),
         )
 
-    def currency_iso(self) -> str:
+    def currency_iso_code(self, crypto: bool = False) -> str:
         """Get a currency code. ISO 4217 format.
 
+        :param crypto: Return ISO code of cryptocurrency.
         :return: Currency code.
 
         :Example:
             RUR.
         """
-        return self.random.choice(CURRENCIES)
+        if crypto:
+            codes = CRYPTOCURRENCY_ISO_CODES
+        else:
+            codes = CURRENCY_ISO_CODES
+
+        return self.random.choice(codes)
+
+    def currency_symbol(self, crypto: bool = False):
+        """Get a currency symbol for current locale.
+
+        :param crypto: Return symbol of cryptocurrency.
+        :return: Currency symbol.
+
+        :Example:
+            Ƀ
+        """
+        if crypto:
+            return self.random.choice(CRYPTOCURRENCY_SYMBOLS)
+        else:
+            return CURRENCY_SYMBOLS[self.locale]
 
     def price(self, minimum: float = 10.00,
               maximum: float = 1000.00) -> str:

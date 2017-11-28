@@ -6,7 +6,7 @@
 - Added new module `typing.py` for custom types
 - Added new module `enums.py` and support of enums in arguments of methods
 - Added `category_of_website` and `port` to `Internet` data provider
-- Added `price_in_btc` to `Business` data provider
+- Added `price_in_btc` and `currency_symbol` to `Business` data provider
 - Added `dna`, `rna` and `atomic_number` to `Science` data provider
 - Added `schoice` method for `Random`
 - Added alias `last_name` for `surname` in `Personal` data provider
@@ -34,3 +34,4 @@
 - Updated data for `de-at`, `en`, `fr`, `pl`, `pt-br`, `pt`, `ru`, `uk`
 - Other minor updates in other languages
 - Renamed `country_iso` to `country_iso_code` in `Address` data provider
+- Renamed `currency_iso` to `currency_iso_code` `in Business` data provider

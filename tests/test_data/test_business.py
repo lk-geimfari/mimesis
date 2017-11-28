@@ -4,7 +4,12 @@ import re
 import pytest
 
 import mimesis
-from mimesis.data import CURRENCIES, CURRENCY_SYMBOLS
+from mimesis.data import (
+    CURRENCY_ISO_CODES,
+    CURRENCY_SYMBOLS,
+    CRYPTOCURRENCY_SYMBOLS,
+    CRYPTOCURRENCY_ISO_CODES,
+)
 
 from . import _patterns as p
 
@@ -23,9 +28,18 @@ def test_copyright(business):
     assert '©' in result
 
 
-def test_currency_iso(_business):
-    result = _business.currency_iso()
-    assert result in CURRENCIES
+def test_currency_iso_code(_business):
+    result = _business.currency_iso_code()
+    assert result in CURRENCY_ISO_CODES
+    result = _business.currency_iso_code(crypto=True)
+    assert result in CRYPTOCURRENCY_ISO_CODES
+
+
+def test_currency_symbol(business):
+    result = business.currency_symbol()
+    assert result in CURRENCY_SYMBOLS.values()
+    result = business.currency_symbol(crypto=True)
+    assert result in CRYPTOCURRENCY_SYMBOLS
 
 
 def test_company_type(business):
