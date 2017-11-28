@@ -9,10 +9,6 @@ class UnsupportedLocale(KeyError):
         return self.message.format(self.locale)
 
 
-class UnexpectedGender(KeyError):
-    """ Raised when gender is wrong. """
-
-
 class UnsupportedAlgorithm(AttributeError):
     """ Raised when the user wants to use an unsupported algorithm. """
 
