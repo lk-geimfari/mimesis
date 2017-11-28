@@ -249,7 +249,6 @@ setup(
         'mimesis.data',
         'mimesis.data.int',
         'mimesis.builtins',
-        'mimesis.constants',
         'mimesis.providers',
     ],
     keywords=[
