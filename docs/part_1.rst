@@ -48,7 +48,7 @@ for Flask (Flask-SQLAlchemy) would look like this:
             super(Patient, self).__init__(**kwargs)
 
         @staticmethod
-        def _bootstrap(count=500, locale='en', gender):
+        def _bootstrap(count=500, locale='en'):
             from mimesis import Personal
             person = Personal(locale)
 
@@ -56,7 +56,7 @@ for Flask (Flask-SQLAlchemy) would look like this:
                 patient = Patient(
                     email=person.email(),
                     phone_number=person.telephone(),
-                    full_name=person.full_name(gender=gender),
+                    full_name=person.full_name(),
                     age=person.age(minimum=18, maximum=45),
                     weight=person.weight(),
                     height=person.height(),
@@ -107,9 +107,12 @@ shown below:
 .. code:: python
 
     >>> from mimesis import Personal
+    >>> from mimesis.enums import Gender
     >>> person = Personal('is')
     >>> for _ in range(0, 3):
-    ...     person.full_name(gender='male')
+    ...     # Default gender value is None and this
+    ...     # mean that this value is random.
+    ...     person.full_name(gender=Gender.MALE)
     ...
     'Karl Brynjúlfsson'
     'Rögnvald Eiðsson'
@@ -121,11 +124,8 @@ help of ``email()`` method ``Personal()`` class, as below:
 
 .. code:: python
 
-    >>> person.email(gender='female')
+    >>> person.email()
     'lvana6108@gmail.com'
-
-    >>> person.email(gender='male')
-    'john2454@yandex.com'
 
 There is a little problem with the method above, which may cause the
 code to be slightly “dirty” in case the app uses more than one type of
@@ -135,7 +135,7 @@ which grants access to all providers from one single object:
 .. code:: python
 
     >>> from mimesis import Generic
-    >>> g = Generic('pl') # pl – code of Poland (ISO 639-1).
+    >>> g = Generic('pl') # pl – code of Poland.
     >>> g.personal.full_name()
     'Lonisława Podsiadło'
     >>> g.datetime.birthday(readable=True)
@@ -154,13 +154,14 @@ you can create mock (female) Visa (Maestro, MasterCard) credit card
 holders:
 
 .. code:: python
-
+    >>> from mimesis import Personal
+    >>> from mimesis.enums import Gender, CardType
     >>> user = Personal('en')
-    >>> def get_card(sex='female'):
+    >>> def get_card():
     ...     owner = {
-    ...       'owner': user.full_name(sex),
+    ...       'owner': user.full_name(),
     ...       'exp_date': user.credit_card_expiration_date(maximum=21),
-    ...       'number': user.credit_card_number(card_type='visa')
+    ...       'number': user.credit_card_number(card_type=CardType.VISA)
     ...       }
     ...     return owner
     >>> for _ in range(0, 3):
@@ -170,7 +171,7 @@ holders:
     {'exp_date': '11/19', 'owner': 'Melany Martinez', 'card_number': '4980 9423 5464 1201'}
     {'exp_date': '01/19', 'owner': 'Cleora Mcfarland', 'card_number': '4085 8037 5801 9703'}
 
-As mentioned above, the library supports over 22 class providers
+As mentioned above, the library supports over 23 class providers
 with data for all possible situations (if not, your PR with corrections
 of such an awful injustice are more than welcome). For example, if you
 are working on an app dedicated to transportation and logistics and you
@@ -197,7 +198,7 @@ Or you could indicate the transport mask model:
 .. code:: python
 
     >>> for _ in range(0, 5):
-    ...     # Here # (sharp) - placeholder for numbers, @ - for letters
+    ...     # sharp - placeholder for numbers, @ - for letters
     ...     trans.truck(model_mask="##@")
     ...
     'Henschel-16G'

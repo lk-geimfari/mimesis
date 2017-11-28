@@ -1,8 +1,9 @@
 from binascii import hexlify
 import hashlib
 import uuid
+from typing import Optional
 
-from mimesis.exceptions import UnsupportedAlgorithm
+from mimesis.enums import Algorithm
 from mimesis.providers.base import BaseProvider
 from mimesis.typing import Bytes
 
@@ -19,27 +20,22 @@ class Cryptographic(BaseProvider):
         bits = self.random.getrandbits(128)
         return str(uuid.UUID(int=bits))
 
-    def hash(self, algorithm: str = 'sha1') -> str:
+    def hash(self, algorithm: Optional[Algorithm] = None) -> str:
         """Generate random hash.
 
-        :param str algorithm:
-            Hashing algorithm ('md5', 'sha1', 'sha224', 'sha256',
-            'sha384', 'sha512').
+        :param algorithm: Enum object Algorithm.
         :return: Hash.
-        :raises UnsupportedAlgorithm: if algorithm is not supported.
+        :raises NonEnumerableError: if algorithm is not supported.
         """
-        algorithm = algorithm.lower().strip()
+        key = self._validate_enum(
+            item=algorithm,
+            enum=Algorithm,
+        )
 
-        if algorithm in hashlib.algorithms_guaranteed:
-            if hasattr(hashlib, algorithm):
-                fn = getattr(hashlib, algorithm)
-                _hash = fn(self.uuid().encode())
-                return _hash.hexdigest()
-        else:
-            raise UnsupportedAlgorithm(
-                'Algorithm {0} is does not support. Use: {1}'.format(
-                    algorithm, ', '.join(hashlib.algorithms_guaranteed)),
-            )
+        if hasattr(hashlib, key):
+            fn = getattr(hashlib, key)
+            _hash = fn(self.uuid().encode())
+            return _hash.hexdigest()
 
     def bytes(self, entropy: int = 32) -> Bytes:
         """Get a random byte string containing *entropy* bytes.
@@ -47,7 +43,7 @@ class Cryptographic(BaseProvider):
         The string has *entropy* random bytes, each byte converted to two
         hex digits.
 
-        :param int entropy: Number of bytes.
+        :param entropy: Number of bytes.
         :return: Bytes.
         :rtype: bytes
         """
@@ -56,7 +52,7 @@ class Cryptographic(BaseProvider):
     def token(self, entropy: int = 32) -> str:
         """Return a random text string, in hexadecimal.
 
-        :param int entropy: Number of bytes.
+        :param entropy: Number of bytes.
         :return: Token.
         """
         token = hexlify(self.bytes(entropy))

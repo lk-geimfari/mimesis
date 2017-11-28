@@ -215,4 +215,7 @@ CURRENCY_SYMBOLS = {
     'uk': '₴',
     'zh': '¥',
     'default': '$',
+    'bitcoin': 'Ƀ',
+    'litecoin': 'Ł',
+    'ether': 'Ξ',
 }

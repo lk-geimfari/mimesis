@@ -9,11 +9,11 @@
 
 <p align="center">
     <a href="https://github.com/lk-geimfari/mimesis">
-        <img src="/media/logo-large-nodescr.png">
+        <img src="/media/logo-nodescr.png">
     </a>
 </p>
 
-**Mimesis** is a fast and easy to use library for Python programming language, which helps generate mock (dummy) data for a variety of purposes (see "[Data providers](#data-providers)") in a variety of languages (see "[Locales](#locales)"). This data can be particularly useful during software development and testing. For example, it could be used to populate a testing database for a web application with user information such as email addresses, usernames, first names, last names, etc. 
+**Mimesis** is a fast and easy to use library for Python programming language, which helps generate mock data for a variety of purposes (see "[Data providers](#data-providers)") in a variety of languages (see "[Locales](#locales)"). This data can be particularly useful during software development and testing. For example, it could be used to populate a testing database for a web application with user information such as email addresses, usernames, first names, last names, etc. 
 
 Mimesis offers a number of advantages over other similar libraries, such as Faker:
 
@@ -41,15 +41,18 @@ Also you can install it manually:
 (env) ➜ make install
 ```
 
+**Note**: Version `1.0.0` has suffered significant [changes](/CHANGELOG.md#version-100), so there is no backwards compatibility with earlier versions of this library.
+
 ## Getting started
 
 As we said above, this library is really easy to use. A simple usage example is given below:
 
 ```python
 >>> from mimesis import Personal
+>>> from mimesis.enums import Gender
 >>> person = Personal('en')
 
->>> person.full_name(gender='female')
+>>> person.full_name(gender=Gender.FEMALE)
 'Antonetta Garrison'
 
 >>> person.occupation()
@@ -136,34 +139,36 @@ Mimesis currently includes support for 33 different locales. See details for mor
 
 Mimesis support over twenty different data providers available, which can produce data related to food, people, computer hardware, transportation, addresses, and more. See details for more information.
 
-| №   | Provider        | Description                                                  |
+| №   | Provider       | Description                                                  |
 |---  | ------------- |:-------------                                                  |
-| 1   | Address         | Address data (street name, street suffix etc.)               |
-| 2   | Business        | Business data (company, company_type, copyright etc.)        |
-| 3   | Code            | Codes (ISBN, EAN, IMEI etc.)                                 |
-| 4   | ClothingSizes   | Clothing sizes (international sizes, european etc.)          |
-| 5   | Cryptographic   | Cryptographic data                                           |
-| 6   | Datetime        | Datetime (day_of_week, month, year etc.)                     |
-| 7   | Development     | Data for developers (version, programming language etc.)     |
-| 8   | File            | File data (extension etc.)                                   |
-| 9   | Food            | Information on food (vegetables, fruits, measurements etc.)  |
-| 10  | Games           | Games data (game, score, pegi_rating etc.)                   |
-| 11  | Personal        | Personal data (name, surname, age, email etc.)               |
-| 12  | Text            | Text data (sentence, title etc.)                             |
-| 13  | Transport       | Dummy data about transport (truck model, car etc.)           |
-| 14  | Science         | Scientific data (scientist, math_formula etc.)               |
-| 15  | Structured      | Structured data (html, css etc.)                             |
-| 16  | Internet        | Internet data (facebook, twitter etc.)                       |
-| 17  | Hardware        | The data about the hardware (resolution, cpu, graphics etc.) |
-| 18  | Numbers         | Numerical data (floats, primes, digit etc.)                  |
-| 19  | Path            | Provides methods and property for generate paths             |
-| 20  | UnitSytem       | Provides names of unit systems in international format       |
-| 21  | Generic         | All at once                                                  |
+| 1   | `Address(*args, **kwargs)`         | Address data (street name, street suffix etc.)               |
+| 2   | `Business(*args, **kwargs)`        | Business data (company, company_type, copyright etc.)        |
+| 3   | `Code(*args, **kwargs)`            | Codes (ISBN, EAN, IMEI etc.)                                 |
+| 4   | `ClothingSizes(*args, **kwargs)`   | Clothing sizes (international sizes, european etc.)          |
+| 5   | `Cryptographic(*args, **kwargs)`   | Cryptographic data                                           |
+| 6   | `Datetime(*args, **kwargs)`        | Datetime (day_of_week, month, year etc.)                     |
+| 7   | `Development(*args, **kwargs)`     | Data for developers (version, programming language etc.)     |
+| 8   | `File(*args, **kwargs)`            | File data (extension etc.)                                   |
+| 9   | `Food(*args, **kwargs)`            | Information on food (vegetables, fruits, measurements etc.)  |
+| 10  | `Games(*args, **kwargs)`           | Games data (game, score, pegi_rating etc.)                   |
+| 11  | `Payment(*args, **kwargs)`         | Payment data (credit_card, credit_card_network etc.)         |
+| 12  | `Personal(*args, **kwargs)`        | Personal data (name, surname, age, email etc.)               |
+| 13  | `Text(*args, **kwargs)`            | Text data (sentence, title etc.)                             |
+| 14  | `Transport(*args, **kwargs)`       | Dummy data about transport (truck model, car etc.)           |
+| 15  | `Science(*args, **kwargs)`         | Scientific data (math_formula, rna, dna etc.)                |
+| 16  | `Structured(*args, **kwargs)`      | Structured data (html, css etc.)                             |
+| 17  | `Internet(*args, **kwargs)`        | Internet data (facebook, twitter etc.)                       |
+| 18  | `Hardware(*args, **kwargs)`        | The data about the hardware (resolution, cpu, graphics etc.) |
+| 19  | `Numbers(*args, **kwargs)`         | Numerical data (floats, primes, digit etc.)                  |
+| 20  | `Path(*args, **kwargs)`            | Provides methods and property for generate paths             |
+| 21  | `UnitSytem(*args, **kwargs)`       | Provides names of unit systems in international format       |
+| 22  | `Generic(*args, **kwargs)`         | All at once                                                  |
 
 When you only need to generate data for a single locale, use the `Generic()` provider, and you can access all providers of Mimesis from one object.
 
 ```python
 >>> from mimesis import Generic
+>>> from mimesis.enums import TLDType
 >>> g = Generic('es')
 
 >>> g.datetime.month()
@@ -172,7 +177,7 @@ When you only need to generate data for a single locale, use the `Generic()` pro
 >>> g.food.fruit()
 'Limón'
 
->>> g.internet.top_level_domain('GeoTLD')
+>>> g.internet.top_level_domain(TLDType.GEOTLD)
 '.moscow'
 ```
 
@@ -211,7 +216,7 @@ or multiple custom providers using method `add_providers()`:
 >>> generic.add_providers(SomeProvider, Another)
 ```
 
-Too lazy to search for data? No problem, we found them for you and collected them here: [mimesis-extra-data](https://github.com/mimesis-lab/mimesis-extra-data).
+Too lazy to search for data? No problem, we found them for you and collected them [here](https://github.com/mimesis-lab/mimesis-extra-data).
 
 
 ## Builtins specific data providers
@@ -237,10 +242,11 @@ You can use specific-provider without adding it to `Generic()`:
 ```
 
 ## Generate data by schema
-For generating data by schema, just import `Field()` object, describe structure of your schema in using fields in lambda function and run filling the schema using method `fill()`:
+For generating data by schema, just create instance of  `Field` object, which take any string which represents name of the any method of any supported data provider and the `**kwargs` of the method, after that you should describe the schema in lambda function and run filling the schema using method `fill()`:
 
 ```python
 >>> from mimesis.schema import Field
+>>> from mimesis.enums import Gender
 >>> _ = Field('en')
 >>> app_schema = (
 ...     lambda: {
@@ -250,14 +256,14 @@ For generating data by schema, just import `Field()` object, describe structure 
 ...         "owner": {
 ...             "email": _('email'),
 ...             "token": _('token'),
-...             "creator": _('full_name', gender='female')
-...         }
+...             "creator": _('full_name', gender=Gender.FEMALE),
+...         },
 ...     }
 ... )
 >>> _.fill(schema=app_schema, iterations=10)
 ```
 
-Mimesis support generating data by schema only starting from version `1.0.0`. 
+Mimesis support generating data by schema only starting from version `1.0.0`.
 
 
 ## Integration with py.test and factory_boy

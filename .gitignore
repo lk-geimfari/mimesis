@@ -188,3 +188,4 @@ fabric.properties
 
 # mypy
 .mypy_cache/
+.test.py

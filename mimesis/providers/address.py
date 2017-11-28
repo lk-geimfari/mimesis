@@ -1,5 +1,13 @@
-from mimesis.data import CALLING_CODES, CONTINENT_CODES, \
-    COUNTRIES_ISO, SHORTENED_ADDRESS_FMT
+from typing import Optional
+
+from mimesis.enums import CountryCode
+from mimesis.exceptions import NonEnumerableError
+from mimesis.data import (
+    CALLING_CODES,
+    CONTINENT_CODES,
+    COUNTRIES_ISO,
+    SHORTENED_ADDRESS_FMT,
+)
 from mimesis.providers.base import BaseProvider
 from mimesis.utils import pull, custom_code
 
@@ -130,23 +138,24 @@ class Address(BaseProvider):
         mask = self.data['postal_code_fmt']
         return custom_code(mask=mask)
 
-    def country_iso(self, fmt: str = 'iso2') -> str:
+    def country_iso_code(self, fmt: Optional[CountryCode] = None) -> str:
         """Get a random ISO code of country.
 
-        :param str fmt: Format of code (iso2, iso3, numeric).
+        :param fmt: Enum object CountryCode.
         :return: ISO Code.
         :raises KeyError: if fmt is not supported.
 
         :Example:
             DE
         """
-        sup = ', '.join(COUNTRIES_ISO.keys())
+        if fmt is None:
+            fmt = CountryCode.get_random_item()
 
-        if fmt not in COUNTRIES_ISO:
-            raise KeyError('Unsupported format. Use: {}'.format(sup))
-
-        countries = COUNTRIES_ISO[fmt]
-        return self.random.choice(countries)
+        if fmt and fmt in CountryCode:
+            codes = COUNTRIES_ISO[fmt.value]
+            return self.random.choice(codes)
+        else:
+            raise NonEnumerableError(CountryCode)
 
     def country(self) -> str:
         """Get a random country.

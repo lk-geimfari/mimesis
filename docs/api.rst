@@ -71,10 +71,10 @@ UndefinedSchema
 .. autoclass:: mimesis.exceptions.UndefinedSchema
    :members:
 
-WrongArgument
--------------
+NonEnumerableError
+------------------
 
-.. autoclass:: mimesis.exceptions.WrongArgument
+.. autoclass:: mimesis.exceptions.NonEnumerableError
    :members:
 
 
@@ -243,4 +243,11 @@ Schema
 ------
 
 .. autoclass:: mimesis.schema.Field
+   :members:
+
+
+Enums
+=====
+
+.. automodule:: mimesis.enums
    :members:

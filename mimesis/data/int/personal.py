@@ -9,7 +9,7 @@ BLOOD_GROUPS = (
     'AB−',
 )
 
-FAVORITE_MUSIC_GENRE = (
+MUSIC_GENRE = (
     'Pop',
     'Rock',
     'Hard Rock',
@@ -3460,3 +3460,10 @@ USERNAMES = [
     "zillionaire",
     "zooks",
 ]
+
+SOCIAL_NETWORKS = {
+    'facebook': 'facebook.com/{}',
+    'twitter': 'twitter.com/{}',
+    'instagram': 'instagram.com/{}',
+    'vk': 'vk.com/{}',
+}

@@ -11,14 +11,11 @@ from random import randint, choice
 from typing import Mapping, Union
 from urllib import request
 
-from mimesis.exceptions import (
-    UnexpectedGender,
-    UnsupportedLocale,
-)
+from mimesis.exceptions import UnsupportedLocale
 from mimesis import config
-from mimesis.typing import JSON, Gender
+from mimesis.typing import JSON
 
-__all__ = ['pull', 'download_image', 'locale_info', 'check_gender']
+__all__ = ['custom_code', 'download_image']
 
 PATH = path.abspath(path.join(path.dirname(__file__), 'data'))
 
@@ -141,38 +138,6 @@ def download_image(url: str = '', save_path: str = '',
     return None
 
 
-def check_gender(gender: Gender = 0) -> str:
-    """Checking of the correctness of gender.
-
-    :param gender: Gender.
-    :type gender: int or str
-    :return: Gender.
-    :raises UnexpectedGender: if gender has not correct value.
-    """
-    f, m = ('female', 'male')
-    # When gender is None or 0, 9
-    o = choice([f, m])
-
-    options = {
-        '0': o, '9': o,
-        '1': m, '2': f,
-        'f': f, 'm': m,
-        f: f, m: m,
-    }
-
-    if gender is None:
-        return o
-
-    supported = sorted(options)
-    gender = str(gender).lower()
-
-    if gender not in supported:
-        raise UnexpectedGender(
-            'Gender must be {}.'.format(', '.join(supported)))
-
-    return options[gender]
-
-
 def setup_locale(locale: str = '') -> str:
     """Setup locale to BaseProvider.
 
@@ -189,9 +154,9 @@ def custom_code(mask: str = '@###',
                 char: str = '@', digit: str = '#') -> str:
     """Generate custom code using ascii uppercase and random integers.
 
-    :param str mask: Mask of code.
-    :param str char: Placeholder for characters.
-    :param str digit: Placeholder for digits.
+    :param mask: Mask of code.
+    :param char: Placeholder for characters.
+    :param digit: Placeholder for digits.
     :return: Custom code.
 
     :Example:

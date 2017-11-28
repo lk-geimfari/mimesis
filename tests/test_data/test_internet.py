@@ -6,7 +6,8 @@ import pytest
 
 from mimesis import Internet
 from mimesis import data
-from mimesis.exceptions import WrongArgument
+from mimesis.enums import PortRange, TLDType, Layer, MimeType
+from mimesis.exceptions import NonEnumerableError
 
 from . import _patterns as p
 
@@ -21,30 +22,12 @@ def test_emoji(net):
     assert result in data.EMOJI
 
 
-@pytest.mark.parametrize(
-    'category', [
-        'boys',
-        'cars',
-        'family',
-        'friends',
-        'general',
-        'girls',
-        'love',
-        'nature',
-        'sport',
-        'travel',
-        'tumblr',
-    ],
-)
-def test_hashtags(net, category):
+def test_hashtags(net):
     result = net.hashtags(quantity=5)
     assert len(result) == 5
 
-    result = net.hashtags(quantity=1, category=category)
-    assert result in data.HASHTAGS[category]
-
-    with pytest.raises(KeyError):
-        net.hashtags(category='religious')
+    result = net.hashtags(quantity=1)
+    assert result.replace('#', '') in data.HASHTAGS
 
 
 def test_home_page(net):
@@ -97,23 +80,23 @@ def test_image_by_keyword(net):
 
 @pytest.mark.parametrize(
     'layer', [
-        'application',
-        'data_link',
-        'network',
-        'physical',
-        'presentation',
-        'session',
-        'transport',
+        Layer.APPLICATION,
+        Layer.DATA_LINK,
+        Layer.NETWORK,
+        Layer.PHYSICAL,
+        Layer.PRESENTATION,
+        Layer.SESSION,
+        Layer.TRANSPORT,
     ],
 )
 def test_network_protocol(net, layer):
     result = net.network_protocol(layer=layer)
-    assert result in data.NETWORK_PROTOCOLS[layer]
+    assert result in data.NETWORK_PROTOCOLS[layer.value]
 
 
-def test_network_protocol_wrong(net):
-    with pytest.raises(WrongArgument):
-        net.network_protocol(layer='super')
+def test_network_protocol_exception(net):
+    with pytest.raises(NonEnumerableError):
+        net.network_protocol(layer='nil')
 
 
 def test_ip_v4(net):
@@ -143,23 +126,23 @@ def test_http_method(net):
 
 @pytest.mark.parametrize(
     'mime_type', [
-        'application',
-        'audio',
-        'image',
-        'message',
-        'text',
-        'video',
+        MimeType.APPLICATION,
+        MimeType.AUDIO,
+        MimeType.IMAGE,
+        MimeType.MESSAGE,
+        MimeType.TEXT,
+        MimeType.VIDEO,
     ],
 )
 def test_content_type(net, mime_type):
     ct = net.content_type(mime_type=mime_type)
     ct = ct.split(':')[1].strip()
-    assert ct in data.MIME_TYPES[mime_type]
+    assert ct in data.MIME_TYPES[mime_type.value]
 
 
 def test_content_type_wrong_arg(net):
-    with pytest.raises(ValueError):
-        net.content_type(mime_type='blablabla')
+    with pytest.raises(NonEnumerableError):
+        net.content_type(mime_type='nil')
 
 
 def test_http_status_code(net):
@@ -172,40 +155,39 @@ def test_http_status_code(net):
 
 @pytest.mark.parametrize(
     'domain_type', [
-        'ccTLD',  # Country code top-level domains.
-        'gTLD',  # Generic top-level domains.
-        'GeoTLD',  # Geographic top-level domains.
-        'uTLD',  # Unsponsored top-level domains.
-        'sTLD',  # Sponsored top-level domains.
+        TLDType.CCTLD,
+        TLDType.GTLD,
+        TLDType.GEOTLD,
+        TLDType.UTLD,
+        TLDType.STLD,
     ],
 )
 def test_top_level_domain(net, domain_type):
-    result = net.top_level_domain(
-        domain_type=domain_type,
-    )
-    domain_type = domain_type.lower()
-
+    result = net.top_level_domain(tld_type=domain_type)
     assert result is not None
-    assert result in data.TLD[domain_type]
+    assert result in data.TLD[domain_type.value]
 
 
 def test_top_level_domain_unsupported(net):
-    with pytest.raises(KeyError):
-        net.top_level_domain(domain_type='nil')
+    with pytest.raises(NonEnumerableError):
+        net.top_level_domain(tld_type='nil')
 
 
-def test_port(net):
-    result = net.port()
-    assert (result >= 1) and (result <= 65535)
+@pytest.mark.parametrize(
+    'range_, excepted', [
+        (PortRange.ALL, (1, 65535)),
+        (PortRange.EPHEMERAL, (49152, 65535)),
+        (PortRange.REGISTERED, (1024, 49151)),
+    ],
+)
+def test_port(net, range_, excepted):
+    result = net.port(port_range=range_)
+    assert (result >= excepted[0]) and (result <= excepted[1])
 
-    result = net.port('well-known')
-    assert (result >= 1) and (result <= 1023)
+    with pytest.raises(NonEnumerableError):
+        net.port('nill')
 
-    result = net.port('ephemeral')
-    assert (result >= 49152) and (result <= 65535)
 
-    result = net.port('registered')
-    assert (result >= 1024) and (result <= 49151)
-
-    with pytest.raises(KeyError):
-        net.port('lol')
+def test_torrent_portal_category(net):
+    result = net.category_of_website()
+    assert result in data.TORRENT_CATEGORIES

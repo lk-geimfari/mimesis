@@ -5,9 +5,8 @@ import socket
 
 import pytest
 
-from mimesis.exceptions import UnsupportedLocale, UnexpectedGender
+from mimesis.exceptions import UnsupportedLocale
 from mimesis.utils import (
-    check_gender,
     custom_code,
     download_image,
     locale_info,
@@ -109,29 +108,6 @@ def test_update_dict():
 
     result = update_dict(first, third)
     assert 'spaniel' not in result['animals']['dogs']
-
-
-@pytest.mark.parametrize(
-    'abbr, gender',
-    [
-        ('0', ('male', 'female')),
-        ('9', ('male', 'female')),
-        ('1', 'male'),
-        ('2', 'female'),
-        ('f', 'female'),
-        ('female', 'female'),
-        ('m', 'male'),
-        ('male', 'male'),
-    ],
-)
-def test_check_gender(abbr, gender):
-    result = check_gender(abbr)
-    assert result == gender or result in gender
-
-
-def test_check_gender_invalid_gender():
-    with pytest.raises(UnexpectedGender):
-        check_gender(gender='other')
 
 
 @pytest.mark.parametrize(

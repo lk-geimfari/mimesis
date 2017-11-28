@@ -1,7 +1,8 @@
 from random import randint
+from mimesis.builtins.base import BaseSpecProvider
 
 
-class BrazilSpecProvider(object):
+class BrazilSpecProvider(BaseSpecProvider):
     """Class that provides special data for pt-br"""
 
     class Meta:

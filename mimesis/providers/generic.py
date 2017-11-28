@@ -16,6 +16,7 @@ from mimesis.providers.internet import Internet
 from mimesis.providers.numbers import Numbers
 from mimesis.providers.path import Path
 from mimesis.providers.personal import Personal
+from mimesis.providers.payment import Payment
 from mimesis.providers.science import Science
 from mimesis.providers.text import Text
 from mimesis.providers.transport import Transport
@@ -36,6 +37,7 @@ GENERIC_ATTRS = [
     'internet',
     'numbers',
     'path',
+    'payment',
     'personal',
     'science',
     'text',
@@ -66,6 +68,7 @@ class Generic(BaseProvider):
         self.internet = Internet()
         self.transport = Transport()
         self.path = Path()
+        self.payment = Payment()
         self.games = Games()
         self.cryptographic = Cryptographic()
 

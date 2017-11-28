@@ -21,6 +21,11 @@ def test_base_text(generic):
     assert result is not None
 
 
+def test_base_payment(generic):
+    result = generic.payment.bitcoin_address()
+    assert result is not None
+
+
 def test_base_address(generic):
     result = generic.address.address()
     assert result is not None
@@ -42,7 +47,7 @@ def test_base_business(generic):
 
 
 def test_base_unit_system(generic):
-    result = generic.unit_system.mass()
+    result = generic.unit_system.unit()
     assert result is not None
 
 

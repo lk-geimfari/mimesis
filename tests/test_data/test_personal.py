@@ -9,21 +9,16 @@ from mimesis import config
 from mimesis.data import (
     BLOOD_GROUPS,
     ENGLISH_LEVEL,
-    FAVORITE_MUSIC_GENRE,
+    MUSIC_GENRE,
     GENDER_SYMBOLS,
     SEXUALITY_SYMBOLS,
 )
-from mimesis.exceptions import (
-    UnexpectedGender,
-    UnsupportedAlgorithm,
-    WrongArgument,
-)
-from mimesis.utils import check_gender
+from mimesis.enums import Gender, TitleType, SocialNetwork
+from mimesis.exceptions import NonEnumerableError
 
 from ._patterns import (
     USERNAME_REGEX,
     STR_REGEX,
-    CREDIT_CARD_REGEX,
     EMAIL_REGEX,
 )
 
@@ -73,28 +68,12 @@ def test_work_experience_extreme(_personal):
     assert result == 0
 
 
-def test_paypal(_personal):
-    result = _personal.paypal()
-    assert result is not None
-
-
-@pytest.mark.parametrize(
-    'algorithm, length', [
-        ('md5', 32),
-        ('sha1', 40),
-        ('sha256', 64),
-        ('sha512', 128),
-    ],
-)
-def test_password(_personal, algorithm, length):
+def test_password(_personal):
     result = _personal.password(length=15)
     assert len(result) == 15
 
-    result = _personal.password(algorithm=algorithm)
-    assert len(result) == length
-
-    with pytest.raises(UnsupportedAlgorithm):
-        _personal.password(algorithm='sha42')
+    result = _personal.password(hashed=True)
+    assert len(result) == 32
 
 
 @pytest.mark.parametrize(
@@ -106,13 +85,16 @@ def test_password(_personal, algorithm, length):
 
         # Default is ld
         'default',
+        None,
     ],
 )
 def test_username(_personal, template):
     result = _personal.username(template=template)
     assert re.match(USERNAME_REGEX, result)
 
-    with pytest.raises(WrongArgument):
+
+def test_username_unsupported_template(_personal):
+    with pytest.raises(KeyError):
         _personal.username(template=':D')
 
 
@@ -124,52 +106,6 @@ def test_email(_personal):
     result = _personal.email(domains=domains)
     assert re.match(EMAIL_REGEX, result)
     assert result.split('@')[1] == 'example.com'
-
-
-def test_bitcoin(_personal):
-    result = _personal.bitcoin()
-    assert len(result) == 34
-
-
-def test_cvv(_personal):
-    result = _personal.cvv()
-    assert 100 <= result
-    assert result <= 999
-
-
-@pytest.mark.parametrize(
-    'card_type', [
-        # Visa
-        'visa', 'vi', 'v',
-
-        # MasterCard
-        'master_card', 'master', 'mc', 'm',
-
-        # American Express
-        'american_express', 'amex', 'ax', 'a',
-    ],
-)
-def test_credit_card_number(_personal, card_type):
-    result = _personal.credit_card_number(card_type=card_type)
-    assert re.match(CREDIT_CARD_REGEX, result)
-
-    with pytest.raises(NotImplementedError):
-        _personal.credit_card_number(card_type='discover')
-
-
-def test_expiration_date(_personal):
-    result = _personal.credit_card_expiration_date(
-        minimum=16, maximum=25)
-
-    year = result.split('/')[1]
-    assert int(year) >= 16
-    assert int(year) <= 25
-
-
-def test_cid(_personal):
-    result = _personal.cid()
-    assert 1000 <= result
-    assert result <= 9999
 
 
 def test_height(_personal):
@@ -196,11 +132,20 @@ def test_favorite_movie(personal):
 
 def test_favorite_music_genre(_personal):
     result = _personal.favorite_music_genre()
-    assert result in FAVORITE_MUSIC_GENRE
+    assert result in MUSIC_GENRE
 
 
-def test_social_media_profile(_personal):
-    result = _personal.social_media_profile()
+@pytest.mark.parametrize(
+    'site', [
+        SocialNetwork.INSTAGRAM,
+        SocialNetwork.FACEBOOK,
+        SocialNetwork.TWITTER,
+        SocialNetwork.VK,
+        None,
+    ],
+)
+def test_social_media_profile(_personal, site):
+    result = _personal.social_media_profile(site=site)
     assert result is not None
 
 
@@ -228,23 +173,28 @@ def test_level_of_english(_personal):
 
 @pytest.mark.parametrize(
     'gender', [
-        '1',
-        '2',
-        'm',
-        'f',
-        'male',
-        'female',
+        Gender.FEMALE,
+        Gender.MALE,
     ],
 )
 def test_name(personal, gender):
     result = personal.name(gender=gender)
-    checked_gender = check_gender(gender)
-    assert result in personal.data['names'][checked_gender]
+    assert result in personal.data['names'][gender.value]
+
+
+def test_name_with_none(_personal):
+    result = _personal.name(gender=None)
+    names = _personal.data['names']
+
+    females = names['female']
+    males = names['male']
+    assert result is not None
+    assert (result in females) or (result in males)
 
 
 def test_name_unexpected_gender(personal):
-    with pytest.raises(UnexpectedGender):
-        personal.name(gender='other')
+    with pytest.raises(NonEnumerableError):
+        personal.name(gender='nil')
 
 
 def test_telephone(personal):
@@ -259,20 +209,15 @@ def test_telephone(personal):
 
 @pytest.mark.parametrize(
     'gender', [
-        '1',
-        '2',
-        'm',
-        'f',
-        'male',
-        'female',
+        Gender.FEMALE,
+        Gender.MALE,
     ],
 )
 def test_surname(personal, gender):
     if personal.locale in config.SURNAMES_SEPARATED_BY_GENDER:
 
         result = personal.surname(gender=gender)
-        checked_gender = check_gender(gender)
-        assert result in personal.data['surnames'][checked_gender]
+        assert result in personal.data['surnames'][gender.value]
     else:
         result = personal.surname()
         assert result in personal.data['surnames']
@@ -280,12 +225,8 @@ def test_surname(personal, gender):
 
 @pytest.mark.parametrize(
     'gender', [
-        '1',
-        '2',
-        'm',
-        'f',
-        'male',
-        'female',
+        Gender.FEMALE,
+        Gender.MALE,
     ],
 )
 def test_full_name(personal, gender):
@@ -357,48 +298,38 @@ def test_political_views(personal):
 
 
 @pytest.mark.parametrize(
-    'gender', [
-        '1',
-        '2',
-        'm',
-        'f',
-        'male',
-        'female',
+    'title_type', [
+        TitleType.ACADEMIC,
+        TitleType.TYPICAL,
+        None,
     ],
 )
 @pytest.mark.parametrize(
-    'title_type', [
-        'academic',
-        'typical',
+    'gender', [
+        Gender.FEMALE,
+        Gender.MALE,
+        None,
     ],
 )
 def test_title(personal, gender, title_type):
-    result = personal.title(title_type=title_type)
-    assert result is not None
-    assert isinstance(result, str)
-
-    result = personal.title(gender=gender)
+    result = personal.title(gender=gender, title_type=title_type)
     assert result is not None
 
-    with pytest.raises(WrongArgument):
-        personal.title(gender='other', title_type='religious')
+    with pytest.raises(NonEnumerableError):
+        personal.title(title_type='nil')
+        personal.title(gender='nil')
 
 
 @pytest.mark.parametrize(
     'gender', [
-        '1',
-        '2',
-        'm',
-        'f',
-        'male',
-        'female',
+        Gender.FEMALE,
+        Gender.MALE,
     ],
 )
 def test_nationality(personal, gender):
     if personal.locale in ['ru', 'uk', 'kk']:
         result = personal.nationality(gender=gender)
-        checked_gender = check_gender(gender)
-        assert result in personal.data['nationality'][checked_gender]
+        assert result in personal.data['nationality'][gender.value]
 
     result = personal.nationality()
     assert result is not None

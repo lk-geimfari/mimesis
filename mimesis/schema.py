@@ -10,7 +10,7 @@ class Field(object):
     """Field for generating data using Schema().
 
     >>> field = Field('en')
-    >>> field('name', gender='female')
+    >>> field('full_name')
     """
 
     def __init__(self, locale: str = 'en') -> None:

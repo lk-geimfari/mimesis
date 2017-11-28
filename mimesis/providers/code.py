@@ -1,4 +1,13 @@
-from mimesis.data import IMEI_TACS, ISBN_GROUPS, LOCALE_CODES
+from typing import Optional
+
+from mimesis.enums import ISBNFormat, EANFormat
+from mimesis.data import (
+    EAN_MASKS,
+    IMEI_TACS,
+    ISBN_GROUPS,
+    ISBN_MASKS,
+    LOCALE_CODES,
+)
 from mimesis.providers.base import BaseProvider
 from mimesis.utils import luhn_checksum, custom_code
 
@@ -33,41 +42,45 @@ class Code(BaseProvider):
         """
         return custom_code(mask=mask)
 
-    def isbn(self, fmt: str = 'isbn-10') -> str:
+    def isbn(self, fmt: Optional[ISBNFormat] = None) -> str:
         """Generate ISBN for current locale. Default is ISBN 10,
         but you also can use ISBN-13.
 
         :param str fmt: ISBN format.
         :return: ISBN.
+        :raises NonEnumerableError: if fmt is not enum ISBNFormat.
 
         :Example:
             132-1-15411-375-8.
         """
-        groups = ISBN_GROUPS
+        fmt_value = self._validate_enum(item=fmt, enum=ISBNFormat)
+        result = ISBN_MASKS[fmt_value]
 
-        mask = '###-{0}-#####-###-#' if \
-            fmt == 'isbn-13' else '{0}-#####-###-#'
-
-        if self.locale in groups:
-            mask = mask.format(groups[self.locale])
+        if self.locale in ISBN_GROUPS:
+            mask = result.format(
+                ISBN_GROUPS[self.locale])
         else:
-            mask = mask.format(groups['default'])
+            mask = result.format(
+                ISBN_GROUPS['default'])
 
         return custom_code(mask=mask)
 
-    @staticmethod
-    def ean(fmt: str = 'ean-13') -> str:
+    def ean(self, fmt: Optional[EANFormat] = None) -> str:
         """Generate EAN (European Article Number) code. Default is
         EAN-13, but you also can use EAN-8.
 
         :param str fmt: Format of EAN.
         :return: EAN.
+        :raises NonEnumerableError: if fmt is not enum EANFormat.
 
         :Example:
             3953753179567.
         """
-        mask = '########' if fmt == 'ean-8' \
-            else '#############'
+        key = self._validate_enum(
+            item=fmt,
+            enum=EANFormat,
+        )
+        mask = EAN_MASKS[key]
         return custom_code(mask=mask)
 
     def imei(self) -> str:

@@ -1,16 +1,18 @@
-import re
 from string import ascii_letters, digits, punctuation
-from typing import Union
+from typing import Union, Optional
 
-from mimesis.data import (CALLING_CODES, BLOOD_GROUPS, EMAIL_DOMAINS,
-                          ENGLISH_LEVEL, FAVORITE_MUSIC_GENRE, GENDER_SYMBOLS,
-                          SEXUALITY_SYMBOLS, USERNAMES)
-from mimesis.exceptions import WrongArgument
+from mimesis.data import (
+    CALLING_CODES, BLOOD_GROUPS,
+    EMAIL_DOMAINS, ENGLISH_LEVEL,
+    MUSIC_GENRE, GENDER_SYMBOLS,
+    SEXUALITY_SYMBOLS, USERNAMES,
+    SOCIAL_NETWORKS,
+)
+from mimesis.enums import Gender, TitleType, Algorithm, SocialNetwork
 from mimesis.providers.base import BaseProvider
 from mimesis.providers.cryptographic import Cryptographic
 from mimesis.config import SURNAMES_SEPARATED_BY_GENDER
-from mimesis.utils import check_gender, luhn_checksum, pull, custom_code
-from mimesis.typing import Gender
+from mimesis.utils import pull, custom_code
 
 __all__ = ['Personal']
 
@@ -68,26 +70,23 @@ class Personal(BaseProvider):
 
         return max(a - working_start_age, 0)
 
-    def name(self, gender: Gender = 0) -> str:
+    def name(self, gender: Optional[Gender] = None) -> str:
         """Get a random name.
 
-        :param gender: if 'male' then will returned male name,
-            if 'female' then female name,  if None return random from ones.
-        :type gender: int or str
+        :param gender: Gender's enum object.
         :return: Name.
 
         :Example:
             John.
         """
-        gender = check_gender(gender)
-        names = self.data['names'].get(gender)
+        key = self._validate_enum(gender, Gender)
+        names = self.data['names'].get(key)
         return self.random.choice(names)
 
-    def surname(self, gender: Gender = 0) -> str:
+    def surname(self, gender: Optional[Gender] = None) -> str:
         """Get a random surname.
 
-        :param gender: The gender of person.
-        :type gender: int of str
+        :param gender: Gender's enum object.
         :return: Surname.
 
         :Example:
@@ -97,51 +96,49 @@ class Personal(BaseProvider):
 
         # Separated by gender.
         if self.locale in SURNAMES_SEPARATED_BY_GENDER:
-            gender = check_gender(gender)
-            return self.random.choice(
-                surnames.get(gender),
-            )
+            key = self._validate_enum(gender, Gender)
+            return self.random.choice(surnames.get(key))
 
         return self.random.choice(surnames)
 
-    def last_name(self, gender: Gender = 0) -> str:
+    def last_name(self, gender: Optional[Gender] = None) -> str:
+        """An alias of self.surname.
+
+        :param gender: Gender's enum object.
+        :return: Last name.
+        """
         return self.surname(gender)
 
-    def title(self, gender: Gender = 0,
-              title_type: str = 'typical') -> str:
+    def title(self, gender: Optional[Gender] = None,
+              title_type: Optional[TitleType] = None) -> str:
         """Get a random title (prefix/suffix) for name.
 
         :param gender: The gender.
-        :type gender: int or str
-        :param str title_type:  The type of title ('typical' and 'academic').
+        :param title_type: TitleType enum object.
         :return: The title.
-        :raises WrongArgument: if gender in incorrect format.
+        :raises NonEnumerableError: if gender or title_type in incorrect format.
 
         :Example:
             PhD.
         """
-        try:
-            gender = check_gender(gender)
-            titles = self.data['title'].get(
-                gender).get(title_type)
-        except KeyError:
-            raise WrongArgument('Wrong value of argument.')
+        gender_key = self._validate_enum(gender, Gender)
+        title_key = self._validate_enum(
+            item=title_type, enum=TitleType)
 
-        title = self.random.choice(titles)
-        return title
+        titles = self.data['title'][gender_key][title_key]
+        return self.random.choice(titles)
 
-    def full_name(self, gender: Gender = 0, reverse: bool = False) -> str:
+    def full_name(self, gender: Optional[Gender] = None,
+                  reverse: bool = False) -> str:
         """Generate a random full name.
 
-        :param bool reverse: Return reversed full name.
-        :param gender: Gender.
-        :type gender: int or str
+        :param reverse: Return reversed full name.
+        :param gender: Gender's enum object.
         :return: Full name.
 
         :Example:
             Johann Wolfgang.
         """
-        gender = check_gender(gender)
 
         fmt = '{1} {0}' if reverse else '{0} {1}'
         return fmt.format(
@@ -149,13 +146,13 @@ class Personal(BaseProvider):
             self.surname(gender),
         )
 
-    def username(self, template: str = '') -> str:
+    def username(self, template: Optional[str] = None) -> str:
         """Generate username by template.
 
         :param str template: Template ('U_d', 'U.d', 'U-d', 'ld', 'l-d', 'Ud',
             'l.d', 'l_d', 'default')
         :return: Username.
-        :raises WrongArgument: if template is not supported.
+        :raises KeyError: if template is not supported.
 
         :Example:
             Celloid1873
@@ -217,7 +214,7 @@ class Personal(BaseProvider):
             try:
                 return templates[template]
             except KeyError:
-                raise WrongArgument(
+                raise KeyError(
                     'Unsupported template {unsupported}.'
                     'Use one of: {supported}'.format(
                         unsupported=template,
@@ -228,24 +225,25 @@ class Personal(BaseProvider):
         templ = self.random.choice(supported)
         return templates[templ]
 
-    def password(self, length: int = 8, algorithm: str = None) -> str:
+    def password(self, length: int = 8, hashed: bool = False) -> str:
         """Generate a password or hash of password.
 
-        :param int length: Length of password.
-        :param str algorithm: Hashing algorithm.
+        :param length: Length of password.
+        :param hashed: MD5 hash.
         :return: Password or hash of password.
 
         :Example:
-            k6dv2odff9#4h (without hashing).
+            k6dv2odff9#4h
         """
+
         text = ascii_letters + digits + punctuation
         password = ''.join([self.random.choice(text) for _ in range(length)])
 
-        if algorithm is not None:
+        if hashed:
             crypto = Cryptographic()
-            return crypto.hash(algorithm)
-
-        return password
+            return crypto.hash(algorithm=Algorithm.MD5)
+        else:
+            return password
 
     def email(self, domains: Union[tuple, list] = None) -> str:
         """Generate a random email.
@@ -267,98 +265,7 @@ class Personal(BaseProvider):
             domain=domain,
         )
 
-    def bitcoin(self) -> str:
-        """Generate a random bitcoin address.
-
-        :return: Bitcoin address.
-
-        :Example:
-            3EktnHQD7RiAE6uzMj2ZifT9YgRrkSgzQX
-        """
-        letters = ascii_letters + digits
-        address = [self.random.choice(letters) for _ in range(33)]
-        return '3' + ''.join(address)
-
-    def cvv(self) -> int:
-        """Generate a random card verification value (CVV).
-
-        :return: CVV code.
-
-        :Example:
-            324
-        """
-        return self.random.randint(100, 999)
-
-    def credit_card_number(self, card_type: str = 'visa') -> str:
-        """Generate a random credit card number.
-
-        :param str card_type: Issuing Network. Default is Visa.
-        :return: Credit card number.
-        :raises NotImplementedError: if cart_type is not supported.
-
-        :Example:
-            4455 5299 1152 2450
-        """
-        length = 16
-        regex = re.compile('(\d{4})(\d{4})(\d{4})(\d{4})')
-
-        if card_type in ('visa', 'vi', 'v'):
-            number = self.random.randint(4000, 4999)
-        elif card_type in ('master_card', 'mc', 'master', 'm'):
-            number = self.random.choice([self.random.randint(2221, 2720),
-                                         self.random.randint(5100, 5500)])
-        elif card_type in ('american_express', 'amex', 'ax', 'a'):
-            number = self.random.choice([34, 37])
-            length = 15
-            regex = re.compile('(\d{4})(\d{6})(\d{5})')
-        else:
-            raise NotImplementedError(
-                'Card type {} is not supported.'.format(card_type))
-
-        str_num = str(number)
-        while len(str_num) < length - 1:
-            str_num += self.random.choice(digits)
-
-        groups = regex.search(str_num + luhn_checksum(str_num))
-        card = ' '.join(groups.groups())
-        return card
-
-    def credit_card_expiration_date(self, minimum: int = 16,
-                                    maximum: int = 25) -> str:
-        """Generate a random expiration date for credit card.
-
-        :param int minimum: Date of issue.
-        :param int maximum: Maximum of expiration_date.
-        :return: Expiration date of credit card.
-
-        :Example:
-            03/19.
-        """
-        month = self.random.randint(1, 12)
-        year = self.random.randint(minimum, maximum)
-        return '{0:02d}/{1}'.format(month, year)
-
-    def cid(self) -> int:
-        """Generate a random CID code.
-
-        :return: CID code.
-
-        :Example:
-            7452
-        """
-        return self.random.randint(1000, 9999)
-
-    def paypal(self) -> str:
-        """Generate a random PayPal account.
-
-        :return: Email of PapPal user.
-
-        :Example:
-            wolf235@gmail.com
-        """
-        return self.email()
-
-    def social_media_profile(self) -> str:
+    def social_media_profile(self, site: Optional[SocialNetwork] = None) -> str:
         """Generate profile for random social network.
 
         :return: Profile in some network.
@@ -366,15 +273,14 @@ class Personal(BaseProvider):
         :Example:
             http://facebook.com/some_user
         """
-        urls = [
-            'facebook.com/{}',
-            'twitter.com/{}',
-            'medium.com/@{}',
-        ]
-        url = 'http://' + self.random.choice(urls)
-        username = self.username(template='U_d')
 
-        return url.format(username)
+        key = self._validate_enum(
+            item=site,
+            enum=SocialNetwork,
+        )
+        website = SOCIAL_NETWORKS[key]
+        url = 'https://www.' + website
+        return url.format(self.username())
 
     def gender(self, iso5218: bool = False,
                symbol: bool = False) -> Union[str, int]:
@@ -385,7 +291,7 @@ class Personal(BaseProvider):
 
         :param bool iso5218:
             Codes for the representation of human sexes is an international
-            standard.
+            standard (0 - not known, 1 - male, 2 - female, 9 - not applicable).
         :param bool symbol: Symbol of gender.
         :return: Title of gender.
         :rtype: str or int
@@ -393,11 +299,6 @@ class Personal(BaseProvider):
         :Example:
             Male
         """
-        # The four codes specified in ISO/IEC 5218 are:
-        #     0 = not known,
-        #     1 = male,
-        #     2 = female,
-        #     9 = not applicable.
         codes = [0, 1, 2, 9]
 
         if iso5218:
@@ -494,8 +395,7 @@ class Personal(BaseProvider):
         return self.random.choice(views)
 
     def views_on(self) -> str:
-        """
-        Get a random views on.
+        """Get a random views on.
 
         :return: Views on.
 
@@ -505,7 +405,7 @@ class Personal(BaseProvider):
         views = self.data['views_on']
         return self.random.choice(views)
 
-    def nationality(self, gender: Gender = 0) -> str:
+    def nationality(self, gender: Optional[Gender] = None) -> str:
         """Get a random nationality.
 
         :param gender: Gender.
@@ -518,14 +418,13 @@ class Personal(BaseProvider):
         # Subtleties of the orthography.
         separated_locales = ['cs', 'ru', 'uk', 'kk']
 
-        nationalities = self.data['nationality']
+        nations = self.data['nationality']
 
         if self.locale in separated_locales:
-            gender = check_gender(gender)
-            nations = nationalities[gender]
-            return self.random.choice(nations)
+            key = self._validate_enum(gender, Gender)
+            return self.random.choice(nations[key])
 
-        return self.random.choice(nationalities)
+        return self.random.choice(nations)
 
     def university(self) -> str:
         """Get a random university.
@@ -579,7 +478,7 @@ class Personal(BaseProvider):
         :Example:
             Ambient.
         """
-        return self.random.choice(FAVORITE_MUSIC_GENRE)
+        return self.random.choice(MUSIC_GENRE)
 
     def telephone(self, mask: str = '', placeholder: str = '#') -> str:
         """Generate a random phone number.
@@ -593,11 +492,8 @@ class Personal(BaseProvider):
         """
         if not mask:
             code = self.random.choice(CALLING_CODES)
-            default = [
-                '{}-(###)-###-####'.format(code),
-            ]
-
-            masks = self.data.get('telephone_fmt', default)
+            default = '{}-(###)-###-####'.format(code)
+            masks = self.data.get('telephone_fmt', [default])
             mask = self.random.choice(masks)
 
         return custom_code(mask=mask, digit=placeholder)
@@ -609,7 +505,7 @@ class Personal(BaseProvider):
         :return: Link to avatar.
         """
         url = 'https://api.adorable.io/avatars/{0}/{1}.png'
-        return url.format(size, self.password(algorithm='md5'))
+        return url.format(size, self.password(hashed=True))
 
     @staticmethod
     def identifier(mask: str = '##-##/##') -> str:

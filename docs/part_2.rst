@@ -2,7 +2,7 @@
 Generating mock data using Mimesis: Part II
 ===========================================
 
-We have already `published <http://mimesis.readthedocs.io/en/latest/part_1.html>`_ how to generate mock
+We have already `published <http://mimesis.readthedocs.io/part_1.html>`_ how to generate mock
 data with the help of a Python library  — `Mimesis <https://github.com/lk-geimfari/mimesis>`__.
 The article you are reading now is the continuation of the previous one,
 therefore, we will not be going over the basics again. In case you missed
@@ -51,7 +51,7 @@ illustrates the idea:
             super(Patient, self).__init__(**kwargs)
 
         @staticmethod
-        def _bootstrap(count=500, locale='en', gender):
+        def _bootstrap(count=500, locale='en'):
             from mimesis import Personal
             person = Personal(locale)
 
@@ -59,7 +59,7 @@ illustrates the idea:
                 patient = Patient(
                     email=person.email(),
                     phone_number=person.telephone(),
-                    full_name=person.full_name(gender=gender),
+                    full_name=person.full_name(gender),
                     age=person.age(minimum=18, maximum=45),
                     weight=person.weight(),
                     height=person.height(),
@@ -142,30 +142,6 @@ Very bad:
 .. code:: python
 
     >>> Patient()._bootstrap(count=600000, locale='de')
-
-
-Constants
----------
-
-The constraints will be useful to you, because they allows you to avoid entering parameters manually, and this mean that they help to avoid typos.
-
-.. code:: python
-
-    >>> from mimesis import Personal
-    >>> import mimesis.constants as c
-
-    >>> person = Personal(c.EN)
-    >>> female_name = person.full_name(gender='emale')
-
-    # An exception UnexpectedGender will be raised.
-
-
-The constants helps to avoid similar issues:
-
-.. code:: python
-
-    >>> female_name = person.full_name(c.FEMALE)
-    'Lena Brady'
 
 
 Importing images
@@ -306,25 +282,28 @@ the object ``Generic()``. You can use it directly, as shown below:
 .. code:: python
 
     >>> from mimesis.builtins import RussiaSpecProvider
+    >>> from mimesis.enums import Gender
     >>> ru = RussiaSpecProvider()
 
-    >>> ru.patronymic(gender='female')
+    >>> ru.patronymic(gender=Gender.FEMALE)
     'Петровна'
 
-    >>> ru.patronymic(gender='male')
+    >>> ru.patronymic(gender=Gender.MALE)
     'Бенедиктович'
 
 Generate data by schema
 -----------------------
 
-Mimesis support generating data by schema starting from version
-``1.0.0``. For generating data by schema, just import ``Field()``
-object, describe structure of your schema (dict) in using fields in
-``lambda`` function and run filling the schema using method ``.fill()``:
+For generating data by schema, just create instance of ``Field`` object,
+which take any string which represents name of the any method of any
+supported data provider and the ``**kwargs`` of the method, after that
+you should describe the schema in ``lambda`` function and run filling the
+schema using method ``fill()``:
 
 .. code:: python
 
     >>> from mimesis.schema import Field
+    >>> from mimesis.enums import Gender
     >>> _ = Field('en')
     >>> app_schema = (
     ...     lambda: {
@@ -334,7 +313,7 @@ object, describe structure of your schema (dict) in using fields in
     ...         "owner": {
     ...             "email": _('email'),
     ...             "token": _('token'),
-    ...             "creator": _('full_name', gender='female')
+    ...             "creator": _('full_name', gender=Gender.FEMALE)
     ...         }
     ...     }
     ... )

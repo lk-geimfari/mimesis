@@ -3,7 +3,8 @@ import re
 import pytest
 
 from mimesis import Cryptographic
-from mimesis.exceptions import UnsupportedAlgorithm
+from mimesis.enums import Algorithm
+from mimesis.exceptions import NonEnumerableError
 
 from ._patterns import UUID_REGEX
 
@@ -19,20 +20,22 @@ def test_uuid(crypto):
 
 @pytest.mark.parametrize(
     'algorithm, length', [
-        ('md5', 32),
-        ('sha1', 40),
-        ('sha224', 56),
-        ('sha256', 64),
-        ('sha384', 96),
-        ('sha512', 128),
+        (Algorithm.MD5, 32),
+        (Algorithm.SHA1, 40),
+        (Algorithm.SHA224, 56),
+        (Algorithm.SHA256, 64),
+        (Algorithm.SHA384, 96),
+        (Algorithm.SHA512, 128),
     ],
 )
 def test_hash(crypto, algorithm, length):
     result = crypto.hash(algorithm=algorithm)
     assert len(result) == length
 
-    with pytest.raises(UnsupportedAlgorithm):
-        crypto.hash(algorithm='mimesis')
+
+def test_hash_non_enum(crypto):
+    with pytest.raises(NonEnumerableError):
+        crypto.hash(algorithm='nil')
 
 
 def test_bytes(crypto):

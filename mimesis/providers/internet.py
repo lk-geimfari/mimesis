@@ -1,9 +1,11 @@
 from typing import Union, Optional
 
 from mimesis.data import (TLD, EMOJI, HASHTAGS, HTTP_METHODS,
-                          HTTP_STATUS_CODES, NETWORK_PROTOCOLS, SUBREDDITS,
-                          SUBREDDITS_NSFW, USERNAMES, USER_AGENTS)
-from mimesis.exceptions import WrongArgument
+                          TORRENT_CATEGORIES, HTTP_STATUS_CODES,
+                          NETWORK_PROTOCOLS, SUBREDDITS, SUBREDDITS_NSFW,
+                          USERNAMES, USER_AGENTS)
+from mimesis.enums import PortRange, TLDType, Layer, MimeType
+from mimesis.exceptions import NonEnumerableError
 from mimesis.providers.base import BaseProvider
 from mimesis.providers.file import File
 from mimesis.typing import Size
@@ -13,7 +15,7 @@ class Internet(BaseProvider):
     """Class for generate the internet data."""
 
     @staticmethod
-    def content_type(mime_type: str = 'application') -> str:
+    def content_type(mime_type: Optional[MimeType] = None) -> str:
         """Get a random HTTP content type.
 
         :return: Content type.
@@ -21,7 +23,7 @@ class Internet(BaseProvider):
         :Example:
             Content-Type: application/json
         """
-        fmt = File().mime_type(type_t=mime_type)
+        fmt = File().mime_type(type_=mime_type)
         return 'Content-Type: {}'.format(fmt)
 
     def http_status_code(self, code_only: bool = True) -> str:
@@ -131,6 +133,7 @@ class Internet(BaseProvider):
         :type height: str or int
         :return: An image (Link to image).
         """
+        # TODO: Refactoring
         url = 'https://source.unsplash.com/category/' \
               '{category}/{width}x{height}'
 
@@ -150,6 +153,8 @@ class Internet(BaseProvider):
         :param keyword: Keyword.
         :return: Link to image.
         """
+
+        # TODO: Refactoring
         url = 'https://source.unsplash.com/weekly?{keyword}'
 
         keywords = [
@@ -163,39 +168,30 @@ class Internet(BaseProvider):
 
         return url.format(keyword=keyword)
 
-    def hashtags(self, quantity: int = 4,
-                 category: str = 'general') -> Union[str, list]:
+    def hashtags(self, quantity: int = 4) -> Union[str, list]:
         """Create a list of hashtags (for Instagram, Twitter etc.)
 
-        :param int quantity: The quantity of hashtags.
-        :param str category:
-            Available categories: general, girls, love, boys, friends, family,
-            nature, travel, cars, sport, tumblr.
+        :param quantity: The quantity of hashtags.
+        :param category: Enum object Hashtag.
         :return: The list of hashtags.
         :rtype: str or list
-        :raises KeyError: if category is not supported.
+        :raises NonEnumerableError: if category is not in Hashtag.
 
         :Example:
-            ['#love', '#sky', '#nice'].
+            ['#love', '#sky', '#nice']
         """
-        category = category.lower()
-        supported = ''.join(list(HASHTAGS.keys()))
-
-        try:
-            hashtags = HASHTAGS[category]
-        except KeyError:
-            raise KeyError('Unsupported category. Use: {}'.format(supported))
+        tags = ['#' + self.random.choice(HASHTAGS)
+                for _ in range(quantity)]
 
         if int(quantity) == 1:
-            return self.random.choice(hashtags)
+            return tags[0]
 
-        tags = [self.random.choice(hashtags) for _ in range(int(quantity))]
         return tags
 
-    def home_page(self, domain_type: Optional[str] = None) -> str:
+    def home_page(self, tld_type: Optional[TLDType] = None) -> str:
         """Generate a random home page.
 
-        :param str domain_type: TLD type.
+        :param str tld_type: TLD type.
         :return: Random home page.
 
         :Example:
@@ -203,38 +199,21 @@ class Internet(BaseProvider):
         """
         resource = self.random.choice(USERNAMES)
         domain = self.top_level_domain(
-            domain_type=domain_type,
+            tld_type=tld_type,
         )
 
         return 'http://www.{}{}'.format(
             resource, domain)
 
-    def top_level_domain(self, domain_type: Optional[str] = None) -> str:
+    def top_level_domain(self, tld_type: Optional[TLDType] = None) -> str:
         """Return random top level domain.
 
-        :param str domain_type: Type of domain (ccTLD, gTLD,
-            GeoTLD, uTLD, sTLD).
+        :param tld_type: Enum object DomainType
         :return: Top level domain.
-        :raises KeyError: if domain_type is not supported.
+        :raises NonEnumerableError: if tld_type not in DomainType.
         """
-        # TODO: This is really ugly solution. Fix it.
-        supported = tuple(TLD.keys())
-
-        if domain_type is not None:
-            try:
-                domain_type = domain_type.lower()
-                return self.random.choice(TLD[domain_type])
-            except KeyError:
-                raise KeyError(
-                    'Unsupported type of domain. Please, use one of: {}'.format(
-                        ', '.join(supported),
-                    ),
-                )
-
-        domain_type = self.random.choice(supported)
-        domains = TLD[domain_type]
-
-        return self.random.choice(domains)
+        key = self._validate_enum(item=tld_type, enum=TLDType)
+        return self.random.choice(TLD[key])
 
     def subreddit(self, nsfw: bool = False,
                   full_url: bool = False) -> str:
@@ -269,48 +248,41 @@ class Internet(BaseProvider):
         """
         return self.random.choice(USER_AGENTS)
 
-    def network_protocol(self, layer: str = 'application') -> str:
+    def network_protocol(self, layer: Optional[Layer] = None) -> str:
         """Get a random network protocol form OSI model.
 
-        :param str layer:
-            Layer of protocol: application, data_link, network, physical,
-            presentation, session and transport.
+        :param layer: Enum object Layer.
         :return: Protocol name.
-        :raises WrongArgument: if layer is not supported.
 
         :Example:
             AMQP
         """
-        layer = layer.lower()
-        try:
-            protocol = self.random.choice(NETWORK_PROTOCOLS[layer])
-            return protocol
-        except KeyError:
-            protocols = list(NETWORK_PROTOCOLS.keys())
-            raise WrongArgument('Unsupported layer, use: {}'.format(protocols))
+        key = self._validate_enum(item=layer, enum=Layer)
+        protocols = NETWORK_PROTOCOLS[key]
+        return self.random.choice(protocols)
 
-    def port(self, diapason: str = '') -> int:
-        """Generate random port. Default range is well-known.
+    def port(self, port_range: PortRange = PortRange.ALL) -> int:
+        """Generate random port.
 
-        :param str diapason: Diapason name (well-known,
-            well-known, registered)
+        :param port_range: Range enum object.
         :return: Port number.
-        :rtype: int
+        :raises NonEnumerableError: if port_range is not in PortRange.
 
         :Example:
             8080
         """
-        diapasons = {
-            'default': (1, 65535),
-            'well-known': (1, 1023),
-            'ephemeral': (49152, 65535),
-            'registered': (1024, 49151),
-        }
-        diapason = 'default' if not diapason else diapason
+        if port_range and port_range in PortRange:
+            return self.random.randint(*port_range.value)
+        else:
+            raise NonEnumerableError(PortRange)
 
-        try:
-            ranges = diapasons[diapason]
-        except KeyError:
-            raise KeyError('Unsupported diapason name')
+    def category_of_website(self):
+        """Get random category of torrent portal.
 
-        return self.random.randint(*ranges)
+        :return: Category name.
+
+        :Example:
+            Video/TV shows
+        """
+        categories = TORRENT_CATEGORIES
+        return self.random.choice(categories)

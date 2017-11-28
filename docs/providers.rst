@@ -43,9 +43,11 @@ There are list of data providers:
 +------+-----------------+------------------------------------------------------------------+
 | 18   | Path            | Provides methods and property for generate paths.                |
 +------+-----------------+------------------------------------------------------------------+
-| 19   | UnitSytem       | Provides names of unit systems in international format           |
+| 19   | Payment         | Payment data (credit_card, credit_card_network, etc.)            |
 +------+-----------------+------------------------------------------------------------------+
-| 20   | Generic         | All at once                                                      |
+| 20   | UnitSytem       | Provides names of unit systems in international format           |
 +------+-----------------+------------------------------------------------------------------+
-| 21   | Cryptographic   | Cryptographic data                                               |
+| 21   | Generic         | All at once                                                      |
++------+-----------------+------------------------------------------------------------------+
+| 22   | Cryptographic   | Cryptographic data                                               |
 +------+-----------------+------------------------------------------------------------------+

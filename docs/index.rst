@@ -55,9 +55,10 @@ As we said above, this library is really easy to use:
 .. code:: python
 
     >>> from mimesis import Personal
+    >>> from mimesis.enums import Gender
     >>> person = Personal('en')
 
-    >>> person.full_name(gender='female')
+    >>> person.full_name(gender=Gender.FEMALE)
     'Antonetta Garrison'
 
     >>> person.occupation()
@@ -190,9 +191,8 @@ Ukrainian (``uk``) and Kazakh (``kk``):
 .. code:: python
 
     >>> from mimesis.decorators import romanized
-    >>> import mimesis.constants as c
 
-    >>> @romanized(c.RU)
+    >>> @romanized('ru')
     ... def russian_name():
     ...     return 'Вероника Денисова'
 
@@ -238,7 +238,7 @@ Flask application:
 
             for _ in range(count):
                 patient = Patient(
-                    full_name=person.full_name('female'),
+                    full_name=person.full_name(),
                     blood_type=person.blood_type(),
                 )
 
