@@ -15,8 +15,8 @@ def test_field(locale):
     assert result.split('.')[1].isdigit()
 
     with pytest.raises(ValueError):
+        filed()  # default is None
         filed('unsupported_field')
-        filed('')
 
 
 @pytest.fixture
@@ -37,6 +37,11 @@ def valid():
 @pytest.fixture
 def _():
     return Field('en')
+
+
+def test_str(_):
+    name = str(_).split(':')[0]
+    assert name == _.__class__.__name__
 
 
 def test_fill(_, valid):

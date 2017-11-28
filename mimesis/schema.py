@@ -1,4 +1,4 @@
-from typing import Any, List
+from typing import Any, List, Optional
 from types import LambdaType
 
 from mimesis.exceptions import UndefinedSchema
@@ -22,33 +22,33 @@ class Field(object):
         self.locale = locale
         self.gen = Generic(self.locale)
 
-    def __call__(self, name: str, **kwargs) -> Any:
-        """Override standard calling.
+    def __call__(self, name: Optional[str] = None, **kwargs) -> Any:
+        """This magic override standard call so it's take any string which
+        represents name of the any method of any supported data provider
+        and the ``**kwargs`` of this method.
 
-        :param str name: Name of method.
+        :param name: Name of method.
         :param kwargs: Kwargs of method.
         :return: Value which represented by method.
-        :rtype: Any
-        :raises ValueError: if providers is not supported.
-        :raises ValueError: if field is not defined.
+        :raises ValueError: if provider is not
+            supported or if field is not defined.
         """
         if name is not None:
             for provider in GENERIC_ATTRS:
                 if hasattr(self.gen, provider):
-
                     provider = getattr(self.gen, provider)
                     if hasattr(provider, name):
-                        return getattr(provider, name)(**kwargs)
+                        method = getattr(provider, name)
+                        return method(**kwargs)
             else:
-                raise ValueError('Unsupported field')
+                raise ValueError('Field «{}» is not supported'.format(name))
         else:
             raise ValueError('Undefined field')
 
-    def __str__(self):
+    def __str__(self) -> str:
         return '{}:{}'.format(
-            self.locale,
             self.__class__.__name__,
-
+            self.locale,
         )
 
     @staticmethod

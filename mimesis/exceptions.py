@@ -1,7 +1,7 @@
 class UnsupportedLocale(KeyError):
     """ Raised when a locale isn't supported. """
 
-    def __init__(self, locale: str):
+    def __init__(self, locale: str) -> None:
         self.locale = locale
         self.message = 'Locale «{}» is not supported'
 
@@ -26,7 +26,7 @@ class NonEnumerableError(TypeError):
 
     message = 'You should use one item of: «{}» of the object mimesis.enums.{}'
 
-    def __init__(self, enum_obj):
+    def __init__(self, enum_obj) -> None:
         if enum_obj:
             self.name = enum_obj
             self.items = ', '.join([str(i) for i in enum_obj])
