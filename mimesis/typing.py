@@ -15,7 +15,7 @@ __all__ = [
 ]
 
 JSON = Union[
-    Dict[str, Any],
+    Dict[Any, Any],
     Any,
 ]
 

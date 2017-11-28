@@ -4,6 +4,7 @@ from types import LambdaType
 from mimesis.exceptions import UndefinedSchema
 from mimesis.providers import Generic
 from mimesis.providers.generic import GENERIC_ATTRS
+from mimesis.typing import JSON
 
 
 class Field(object):
@@ -52,7 +53,7 @@ class Field(object):
         )
 
     @staticmethod
-    def fill(schema: LambdaType, iterations: int = 1) -> List[Any]:
+    def fill(schema: LambdaType, iterations: int = 1) -> List[JSON]:
         """Fill schema with data.
 
         :param lambda schema: Lambda function with schema.
