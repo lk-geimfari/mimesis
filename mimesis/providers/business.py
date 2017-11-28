@@ -75,11 +75,7 @@ class Business(BaseProvider):
             599.99 $.
         """
         currencies = CURRENCY_SYMBOLS
-
-        price = self.random.uniform(
-            float(minimum),
-            float(maximum),
-        )
+        price = self.random.uniform(minimum, maximum)
 
         fmt = '{0:.2f} {1}'
 
@@ -87,3 +83,13 @@ class Business(BaseProvider):
             return fmt.format(price, currencies[self.locale])
 
         return fmt.format(price, currencies['default'])
+
+    def price_in_btc(self, minimum: float = 0, maximum: float = 2):
+        """Generate random price in BTC.
+
+        :param minimum: Minimum value of price
+        :param maximum: Maximum value of price.
+        :return: Price in BTC.
+        """
+        price = self.random.uniform(minimum, maximum)
+        return '{:.7f} BTC'.format(price)

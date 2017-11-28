@@ -52,3 +52,11 @@ def test_price(business):
 
     business.locale = 'xx'
     assert CURRENCY_SYMBOLS['default'] in business.price()
+
+
+def test_price_in_btc(_business):
+    result = _business.price_in_btc(minimum=0, maximum=2)
+    price, symbol = result.split(' ')
+    assert float(price) >= 0
+    assert float(price) <= 2
+    assert symbol == 'BTC'
