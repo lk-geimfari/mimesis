@@ -7,10 +7,15 @@ from mimesis.providers.generic import GENERIC_ATTRS
 
 
 class Field(object):
-    """Field for generating data using Schema().
+    """Field for generating data by schema.
 
-    >>> field = Field('en')
-    >>> field('full_name')
+    Instance of this object takes any string which represents name
+    of the any method of any supported data provider and the ``**kwargs``
+    of the method:
+
+    >>> _ = Field('en')
+    >>> _('full_name')
+    'Benedict Larson'
     """
 
     def __init__(self, locale: str = 'en') -> None:
@@ -53,7 +58,6 @@ class Field(object):
         :param lambda schema: Lambda function with schema.
         :param int iterations: Count of iterations.
         :return: Filled schema.
-        :rtype: list
         :raises UndefinedSchema: if schema is empty dict.
         """
         if schema() and isinstance(schema, LambdaType):
