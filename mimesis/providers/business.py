@@ -84,12 +84,15 @@ class Business(BaseProvider):
 
         return fmt.format(price, currencies['default'])
 
-    def price_in_btc(self, minimum: float = 0, maximum: float = 2):
+    def price_in_btc(self, minimum: float = 0, maximum: float = 2) -> str:
         """Generate random price in BTC.
 
         :param minimum: Minimum value of price
         :param maximum: Maximum value of price.
         :return: Price in BTC.
+
+        :Example:
+            0.5885238 BTC
         """
         price = self.random.uniform(minimum, maximum)
         return '{:.7f} BTC'.format(price)
