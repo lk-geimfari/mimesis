@@ -18,3 +18,4 @@ pytest-flake8==0.8.1
 pytest-mock==1.6.3
 requests==2.18.4
 urllib3==1.22
+mypy==0.5.0

@@ -8,7 +8,9 @@ python:
 
 install: pip install -r dev_requirements.txt
 
-script: py.test --cov=mimesis/
+script:
+  - py.test --cov=mimesis/
+  - mypy mimesis/
 
 after_success:
   codecov
