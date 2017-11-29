@@ -199,7 +199,7 @@ You can use specific-provider without adding it to ``Generic()``:
 Generate data by schema
 -----------------------
 
-For generating data by schema, just create instance of ``Field`` object,
+For generating data by schema, just create an instance of ``Field`` object,
 which take any string which represents name of the any method of any
 supported data provider and the ``**kwargs`` of the method, after that
 you should describe the schema in lambda function and run filling the
