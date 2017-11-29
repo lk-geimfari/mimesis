@@ -1,15 +1,10 @@
 from typing import Optional
 
-from mimesis.enums import ISBNFormat, EANFormat
-from mimesis.data import (
-    EAN_MASKS,
-    IMEI_TACS,
-    ISBN_GROUPS,
-    ISBN_MASKS,
-    LOCALE_CODES,
-)
+from mimesis.data import (EAN_MASKS, IMEI_TACS, ISBN_GROUPS, ISBN_MASKS,
+                          LOCALE_CODES)
+from mimesis.enums import EANFormat, ISBNFormat
 from mimesis.providers.base import BaseProvider
-from mimesis.utils import luhn_checksum, custom_code
+from mimesis.utils import custom_code, luhn_checksum
 
 
 class Code(BaseProvider):

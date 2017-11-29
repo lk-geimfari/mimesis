@@ -2,8 +2,7 @@
 
 import pytest
 
-from mimesis import Development
-import mimesis.data as data
+from mimesis import Development, data
 
 
 @pytest.fixture

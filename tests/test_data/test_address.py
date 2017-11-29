@@ -4,17 +4,17 @@ import re
 
 import pytest
 
-import mimesis
+from mimesis import Address
+from mimesis.data import CALLING_CODES, CONTINENT_CODES, COUNTRIES_ISO
 from mimesis.enums import CountryCode
 from mimesis.exceptions import NonEnumerableError
-from mimesis.data import CALLING_CODES, CONTINENT_CODES, COUNTRIES_ISO
 
 from . import _patterns as p
 
 
 @pytest.fixture
 def _address():
-    return mimesis.Address()
+    return Address()
 
 
 def test_str(address):

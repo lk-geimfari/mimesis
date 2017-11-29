@@ -3,9 +3,9 @@
 import pytest
 
 from mimesis import UnitSystem
+from mimesis.data import SI_PREFIXES, SI_PREFIXES_SYM
 from mimesis.enums import PrefixSign, UnitName
 from mimesis.exceptions import NonEnumerableError
-from mimesis.data import SI_PREFIXES, SI_PREFIXES_SYM
 
 
 @pytest.fixture

@@ -6,15 +6,8 @@ import socket
 import pytest
 
 from mimesis.exceptions import UnsupportedLocale
-from mimesis.utils import (
-    custom_code,
-    download_image,
-    locale_info,
-    luhn_checksum,
-    pull,
-    update_dict,
-    setup_locale,
-)
+from mimesis.utils import (custom_code, download_image, locale_info,
+                           luhn_checksum, pull, setup_locale, update_dict)
 
 
 def is_connected():

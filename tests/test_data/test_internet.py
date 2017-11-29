@@ -4,9 +4,8 @@ import re
 
 import pytest
 
-from mimesis import Internet
-from mimesis import data
-from mimesis.enums import PortRange, TLDType, Layer, MimeType
+from mimesis import Internet, data
+from mimesis.enums import Layer, MimeType, PortRange, TLDType
 from mimesis.exceptions import NonEnumerableError
 
 from . import _patterns as p

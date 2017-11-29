@@ -1,5 +1,5 @@
-from mimesis.utils import pull
 from mimesis.builtins.base import BaseSpecProvider
+from mimesis.utils import pull
 
 
 class GermanySpecProvider(BaseSpecProvider):

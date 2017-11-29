@@ -1,19 +1,11 @@
-import os
-from os.path import (
-    abspath,
-    dirname,
-    exists,
-    join,
-    splitext,
-    relpath,
-    getsize,
-)
 import json
+import os
 import re
-from shutil import rmtree
 import sys
-
 from distutils.core import setup
+from os.path import abspath, dirname, exists, getsize, join, relpath, splitext
+from shutil import rmtree
+
 from setuptools import Command
 from setuptools.command.test import test as TestCommand
 
@@ -249,7 +241,6 @@ setup(
         'mimesis.data',
         'mimesis.data.int',
         'mimesis.builtins',
-        'mimesis.constants',
         'mimesis.providers',
     ],
     keywords=[

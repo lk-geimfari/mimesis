@@ -24,9 +24,10 @@ USERNAME_REGEX = r'^[a-zA-Z0-9_.-]+$'
 
 CREDIT_CARD_REGEX = r'[\d]+((-|\s)?[\d]+)+'
 
-STR_REGEX = r'^(Address|Business|Code|Datetime|Food|Generic|' \
-            r'Personal|Science|Structured|Text|Games|Transport|' \
-            r'UnitSystem|Path):[a-z-]+:(.*)$'
+STR_REGEX = r'^(Address|Business|ClothingSizes|Code|Datetime|Development' \
+            r'|File|Food|Games|Hardware|Internet|Numbers|Path|Personal|' \
+            r'Science|Structured|Text|Transport|UnitSystem|Cryptographic|' \
+            r'Generic):[a-z-]+:(.*)$'
 
 _EN_GB_POST_CODE = \
     r'((([A-PR-UWYZ][0-9])|([A-PR-UWYZ][0-9][0-9])' \
@@ -75,6 +76,5 @@ POSTAL_CODE_REGEX = {
 
 HOME_PAGE = r'http[s]?://(?:[a-zA-Z]|[0-9]|[$_@.&+-]' \
             r'|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+'
-
 
 UUID_REGEX = r'[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'

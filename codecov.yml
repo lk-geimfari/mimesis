@@ -24,3 +24,6 @@ parsers:
       method: false
   javascript:
     enable_partials: false
+ignore:
+  - "mimesis/exceptions.py"
+  - "mimesis/__version__.py"

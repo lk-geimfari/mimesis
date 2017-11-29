@@ -1,4 +1,5 @@
-from mimesis.data import CURRENCIES, CURRENCY_SYMBOLS
+from mimesis.data import (CRYPTOCURRENCY_ISO_CODES, CRYPTOCURRENCY_SYMBOLS,
+                          CURRENCY_ISO_CODES, CURRENCY_SYMBOLS)
 from mimesis.providers.base import BaseProvider
 from mimesis.utils import pull
 
@@ -53,15 +54,35 @@ class Business(BaseProvider):
             ),
         )
 
-    def currency_iso(self) -> str:
+    def currency_iso_code(self, crypto: bool = False) -> str:
         """Get a currency code. ISO 4217 format.
 
+        :param crypto: Return ISO code of cryptocurrency.
         :return: Currency code.
 
         :Example:
             RUR.
         """
-        return self.random.choice(CURRENCIES)
+        if crypto:
+            codes = CRYPTOCURRENCY_ISO_CODES
+        else:
+            codes = CURRENCY_ISO_CODES
+
+        return self.random.choice(codes)
+
+    def currency_symbol(self, crypto: bool = False):
+        """Get a currency symbol for current locale.
+
+        :param crypto: Return symbol of cryptocurrency.
+        :return: Currency symbol.
+
+        :Example:
+            Ƀ
+        """
+        if crypto:
+            return self.random.choice(CRYPTOCURRENCY_SYMBOLS)
+        else:
+            return CURRENCY_SYMBOLS[self.locale]
 
     def price(self, minimum: float = 10.00,
               maximum: float = 1000.00) -> str:
@@ -75,11 +96,7 @@ class Business(BaseProvider):
             599.99 $.
         """
         currencies = CURRENCY_SYMBOLS
-
-        price = self.random.uniform(
-            float(minimum),
-            float(maximum),
-        )
+        price = self.random.uniform(minimum, maximum)
 
         fmt = '{0:.2f} {1}'
 
@@ -87,3 +104,16 @@ class Business(BaseProvider):
             return fmt.format(price, currencies[self.locale])
 
         return fmt.format(price, currencies['default'])
+
+    def price_in_btc(self, minimum: float = 0, maximum: float = 2) -> str:
+        """Generate random price in BTC.
+
+        :param minimum: Minimum value of price
+        :param maximum: Maximum value of price.
+        :return: Price in BTC.
+
+        :Example:
+            0.5885238 BTC
+        """
+        price = self.random.uniform(minimum, maximum)
+        return '{:.7f} BTC'.format(price)

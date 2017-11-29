@@ -1,4 +1,4 @@
-CURRENCIES = [
+CURRENCY_ISO_CODES = [
     'AED',
     'AFN',
     'ALL',
@@ -180,6 +180,21 @@ CURRENCIES = [
     'ZWL',
 ]
 
+CRYPTOCURRENCY_ISO_CODES = [
+    'DASH',
+    'ETH',
+    'IOT',
+    'VTC',
+    'XBC',
+    'XBT',
+    'BTC',
+    'XLM',
+    'XMR',
+    'XRP',
+    'XZC',
+    'ZEC',
+]
+
 CURRENCY_SYMBOLS = {
     'cs': 'Kč',
     'da': 'kr',
@@ -215,7 +230,10 @@ CURRENCY_SYMBOLS = {
     'uk': '₴',
     'zh': '¥',
     'default': '$',
-    'bitcoin': 'Ƀ',
-    'litecoin': 'Ł',
-    'ether': 'Ξ',
 }
+
+CRYPTOCURRENCY_SYMBOLS = [
+    'Ƀ',
+    'Ł',
+    'Ξ',
+]

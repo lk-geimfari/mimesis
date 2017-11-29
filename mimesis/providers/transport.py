@@ -1,4 +1,4 @@
-from mimesis.data import AIRPLANES, CARS, TRUCKS
+from mimesis.data import AIRPLANES, CARS, TRUCKS, VR_CODES, VRC_BY_LOCALES
 from mimesis.providers.base import BaseProvider
 from mimesis.utils import custom_code
 
@@ -46,3 +46,16 @@ class Transport(BaseProvider):
         model = custom_code(mask=model_mask)
         plane = self.random.choice(AIRPLANES)
         return '{} {}'.format(plane, model)
+
+    def vehicle_registration_code(self, allow_random: bool = True) -> str:
+        """Get vehicle registration code of country.
+
+        :param allow_random: If False return only code
+            for current locale (country).
+        :return: Vehicle registration code.
+        """
+
+        if not allow_random:
+            return VRC_BY_LOCALES[self.locale]
+
+        return self.random.choice(VR_CODES)

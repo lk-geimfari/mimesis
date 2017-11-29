@@ -1,6 +1,6 @@
-from binascii import hexlify
 import hashlib
 import uuid
+from binascii import hexlify
 from typing import Optional
 
 from mimesis.enums import Algorithm

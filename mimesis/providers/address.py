@@ -1,15 +1,11 @@
 from typing import Optional
 
+from mimesis.data import (CALLING_CODES, CONTINENT_CODES, COUNTRIES_ISO,
+                          SHORTENED_ADDRESS_FMT)
 from mimesis.enums import CountryCode
 from mimesis.exceptions import NonEnumerableError
-from mimesis.data import (
-    CALLING_CODES,
-    CONTINENT_CODES,
-    COUNTRIES_ISO,
-    SHORTENED_ADDRESS_FMT,
-)
 from mimesis.providers.base import BaseProvider
-from mimesis.utils import pull, custom_code
+from mimesis.utils import custom_code, pull
 
 
 class Address(BaseProvider):

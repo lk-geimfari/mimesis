@@ -3,8 +3,6 @@ import pytest
 import mimesis.decorators
 
 
-# --- romanized() ---
-
 @pytest.fixture
 @mimesis.decorators.romanized('ru')
 def russian_name():

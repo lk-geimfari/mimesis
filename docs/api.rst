@@ -47,12 +47,6 @@ Decorators
 Exceptions
 ==========
 
-JSONKeyError
-------------
-
-.. autoclass:: mimesis.exceptions.JSONKeyError
-   :members:
-
 UnsupportedAlgorithm
 --------------------
 

@@ -1,7 +1,6 @@
 import pytest
 
 import mimesis
-
 from mimesis import config
 
 locales = config.LIST_OF_LOCALES
@@ -51,3 +50,8 @@ def text(request):
 @pytest.fixture(params=platform)
 def path(request):
     return mimesis.Path(request.param)
+
+
+@pytest.fixture(params=locales)
+def transport(request):
+    return mimesis.Transport(request.param)

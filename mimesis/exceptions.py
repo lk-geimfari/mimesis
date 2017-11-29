@@ -1,13 +1,12 @@
 class UnsupportedLocale(KeyError):
     """ Raised when a locale isn't supported. """
 
+    def __init__(self, locale: str) -> None:
+        self.locale = locale
+        self.message = 'Locale «{}» is not supported'
 
-class JSONKeyError(KeyError):
-    """ Raised when a JSON key doesn't exist. """
-
-
-class UnexpectedGender(KeyError):
-    """ Raised when gender is wrong. """
+    def __str__(self) -> str:
+        return self.message.format(self.locale)
 
 
 class UnsupportedAlgorithm(AttributeError):
@@ -21,13 +20,15 @@ class UndefinedSchema(ValueError):
 class NonEnumerableError(TypeError):
     """ Raised when object is not instance of Enum """
 
-    def __init__(self, enum_obj):
+    message = 'You should use one item of: «{}» of the object mimesis.enums.{}'
+
+    def __init__(self, enum_obj) -> None:
         if enum_obj:
-            self.enum_name = str(enum_obj)
+            self.name = enum_obj
             self.items = ', '.join([str(i) for i in enum_obj])
         else:
             self.items = ''
 
-    def __str__(self):
-        return 'You should use one item of: «{}» of the object {} ' \
-               'from module mimesis.enums'.format(self.items, self.enum_name)
+    def __str__(self) -> str:
+        return self.message.format(self.items,
+                                   self.name.__name__)

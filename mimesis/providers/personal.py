@@ -1,18 +1,14 @@
 from string import ascii_letters, digits, punctuation
-from typing import Union, Optional
+from typing import Optional, Union
 
-from mimesis.data import (
-    CALLING_CODES, BLOOD_GROUPS,
-    EMAIL_DOMAINS, ENGLISH_LEVEL,
-    MUSIC_GENRE, GENDER_SYMBOLS,
-    SEXUALITY_SYMBOLS, USERNAMES,
-    SOCIAL_NETWORKS,
-)
-from mimesis.enums import Gender, TitleType, Algorithm, SocialNetwork
+from mimesis.config import SURNAMES_SEPARATED_BY_GENDER
+from mimesis.data import (BLOOD_GROUPS, CALLING_CODES, EMAIL_DOMAINS,
+                          ENGLISH_LEVEL, GENDER_SYMBOLS, MUSIC_GENRE,
+                          SEXUALITY_SYMBOLS, SOCIAL_NETWORKS, USERNAMES)
+from mimesis.enums import Algorithm, Gender, SocialNetwork, TitleType
 from mimesis.providers.base import BaseProvider
 from mimesis.providers.cryptographic import Cryptographic
-from mimesis.config import SURNAMES_SEPARATED_BY_GENDER
-from mimesis.utils import pull, custom_code
+from mimesis.utils import custom_code, pull
 
 __all__ = ['Personal']
 

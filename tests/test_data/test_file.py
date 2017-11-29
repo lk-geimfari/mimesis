@@ -3,9 +3,9 @@
 import pytest
 
 from mimesis import File
+from mimesis.data import EXTENSIONS, MIME_TYPES
 from mimesis.enums import FileType, MimeType
 from mimesis.exceptions import NonEnumerableError
-from mimesis.data import EXTENSIONS, MIME_TYPES
 
 
 @pytest.fixture

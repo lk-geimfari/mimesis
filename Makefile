@@ -14,7 +14,6 @@ help:
 	@echo "clean-build  - remove build artifacts"
 	@echo "clean        - remove build and Python file artifacts"
 	@echo "test         - run tests quickly with the default Python"
-	@echo "flake        - run py.test with flake8"
 	@echo "publish      - create dist and upload package to PyPI"
 	@echo "versioner    - update __version__ file"
 	@echo "install      - install the package to the active Python's site-packages"
@@ -41,14 +40,14 @@ clean-build:
 clean: clean-pyc clean-build
 
 
-.PHONY: flake
-flake:
-	py.test --flake8
-
-
 .PHONY: test
 test:
-	py.test --verbose --color=yes ./
+	py.test --color=yes ./
+
+
+.PHONY: type-check
+type-check:
+	mypy mimesis/
 
 
 .PHONY: publish
@@ -64,11 +63,6 @@ version:
 .PHONY: minify
 minify:
 	python3 setup.py minify
-
-
-.PHONY: type-hints
-type-hints:
-	mypy mimesis/
 
 
 .PHONY: install

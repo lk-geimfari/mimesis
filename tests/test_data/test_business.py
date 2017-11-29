@@ -3,15 +3,16 @@ import re
 
 import pytest
 
-import mimesis
-from mimesis.data import CURRENCIES, CURRENCY_SYMBOLS
+from mimesis import Business
+from mimesis.data import (CRYPTOCURRENCY_ISO_CODES, CRYPTOCURRENCY_SYMBOLS,
+                          CURRENCY_ISO_CODES, CURRENCY_SYMBOLS)
 
 from . import _patterns as p
 
 
 @pytest.fixture()
 def _business():
-    return mimesis.Business()
+    return Business()
 
 
 def test_str(business):
@@ -23,9 +24,18 @@ def test_copyright(business):
     assert '©' in result
 
 
-def test_currency_iso(_business):
-    result = _business.currency_iso()
-    assert result in CURRENCIES
+def test_currency_iso_code(_business):
+    result = _business.currency_iso_code()
+    assert result in CURRENCY_ISO_CODES
+    result = _business.currency_iso_code(crypto=True)
+    assert result in CRYPTOCURRENCY_ISO_CODES
+
+
+def test_currency_symbol(business):
+    result = business.currency_symbol()
+    assert result in CURRENCY_SYMBOLS.values()
+    result = business.currency_symbol(crypto=True)
+    assert result in CRYPTOCURRENCY_SYMBOLS
 
 
 def test_company_type(business):
@@ -52,3 +62,11 @@ def test_price(business):
 
     business.locale = 'xx'
     assert CURRENCY_SYMBOLS['default'] in business.price()
+
+
+def test_price_in_btc(_business):
+    result = _business.price_in_btc(minimum=0, maximum=2)
+    price, symbol = result.split(' ')
+    assert float(price) >= 0
+    assert float(price) <= 2
+    assert symbol == 'BTC'

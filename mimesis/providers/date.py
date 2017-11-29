@@ -1,11 +1,10 @@
+from calendar import monthrange, timegm
 from datetime import date, datetime, time
-from calendar import timegm
-from calendar import monthrange
 
 from mimesis.data import GMT_OFFSETS, ROMAN_NUMS, TIMEZONES
 from mimesis.providers.base import BaseProvider
+from mimesis.typing import DateTime, Timestamp
 from mimesis.utils import pull
-from mimesis.typing import Timestamp, DateTime
 
 
 class Datetime(BaseProvider):
