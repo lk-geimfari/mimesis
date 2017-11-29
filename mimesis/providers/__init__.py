@@ -2,6 +2,7 @@ from mimesis.providers.base import BaseProvider
 from mimesis.providers.address import Address
 from mimesis.providers.business import Business
 from mimesis.providers.clothing import ClothingSizes
+from mimesis.providers.cryptographic import Cryptographic
 from mimesis.providers.code import Code
 from mimesis.providers.date import Datetime
 from mimesis.providers.development import Development
@@ -19,7 +20,6 @@ from mimesis.providers.text import Text
 from mimesis.providers.transport import Transport
 from mimesis.providers.units import UnitSystem
 from mimesis.providers.games import Games
-from mimesis.providers.cryptographic import Cryptographic
 from mimesis.providers.generic import Generic
 
 __all__ = [

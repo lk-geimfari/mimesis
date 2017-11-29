@@ -5,6 +5,7 @@ from typing import Optional
 
 from mimesis.enums import Algorithm
 from mimesis.providers.base import BaseProvider
+from mimesis.providers.text import Text
 from mimesis.typing import Bytes
 
 
@@ -65,3 +66,16 @@ class Cryptographic(BaseProvider):
         :return: Salt.
         """
         return uuid.uuid4().hex
+
+    def mnemonic_code(self, length: int = 12) -> str:
+        """Generate pseudo mnemonic code.
+
+        :param length: Length of code (number of words).
+        :return: Mnemonic code.
+        """
+        text = Text().data
+        words = text['words']['normal']
+
+        self.random.shuffle(words)
+        code = [self.random.choice(words) for _ in range(length)]
+        return ' '.join(code)
