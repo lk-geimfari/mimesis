@@ -3,20 +3,16 @@ import re
 
 import pytest
 
-import mimesis
-from mimesis.data import (
-    CURRENCY_ISO_CODES,
-    CURRENCY_SYMBOLS,
-    CRYPTOCURRENCY_SYMBOLS,
-    CRYPTOCURRENCY_ISO_CODES,
-)
+from mimesis import Business
+from mimesis.data import (CRYPTOCURRENCY_ISO_CODES, CRYPTOCURRENCY_SYMBOLS,
+                          CURRENCY_ISO_CODES, CURRENCY_SYMBOLS)
 
 from . import _patterns as p
 
 
 @pytest.fixture()
 def _business():
-    return mimesis.Business()
+    return Business()
 
 
 def test_str(business):

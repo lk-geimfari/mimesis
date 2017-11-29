@@ -2,12 +2,12 @@ import re
 import string
 from typing import Optional
 
+from mimesis.data import CREDIT_CARD_NETWORKS
 from mimesis.enums import CardType, Gender
 from mimesis.exceptions import NonEnumerableError
-from mimesis.data import CREDIT_CARD_NETWORKS
-from mimesis.utils import luhn_checksum
 from mimesis.providers.base import BaseProvider
 from mimesis.providers.personal import Personal
+from mimesis.utils import luhn_checksum
 
 
 class Payment(BaseProvider):

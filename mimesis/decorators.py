@@ -1,9 +1,6 @@
 import functools
-from string import (
-    ascii_letters as letters,
-    digits,
-    punctuation,
-)
+from string import ascii_letters as letters
+from string import digits, punctuation
 from typing import Callable
 
 from mimesis import data

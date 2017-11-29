@@ -1,4 +1,4 @@
-from typing import Optional, Any
+from typing import Any, Optional
 
 from mimesis.exceptions import NonEnumerableError
 from mimesis.helpers import Random

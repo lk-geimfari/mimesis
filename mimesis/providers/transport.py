@@ -1,10 +1,4 @@
-from mimesis.data import (
-    CARS,
-    TRUCKS,
-    VR_CODES,
-    AIRPLANES,
-    VRC_BY_LOCALES,
-)
+from mimesis.data import AIRPLANES, CARS, TRUCKS, VR_CODES, VRC_BY_LOCALES
 from mimesis.providers.base import BaseProvider
 from mimesis.utils import custom_code
 

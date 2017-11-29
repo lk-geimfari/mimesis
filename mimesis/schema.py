@@ -1,5 +1,5 @@
-from typing import Any, List, Optional
 from types import LambdaType
+from typing import Any, List, Optional
 
 from mimesis.exceptions import UndefinedSchema
 from mimesis.providers import Generic

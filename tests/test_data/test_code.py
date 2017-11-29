@@ -4,9 +4,9 @@ import re
 import pytest
 
 from mimesis import Code
-from mimesis.enums import ISBNFormat, EANFormat
-from mimesis.exceptions import NonEnumerableError
 from mimesis.data import LOCALE_CODES
+from mimesis.enums import EANFormat, ISBNFormat
+from mimesis.exceptions import NonEnumerableError
 
 from . import _patterns as p
 

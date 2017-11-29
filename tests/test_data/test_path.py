@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import re
+
 from mimesis.data import FOLDERS, PROGRAMMING_LANGS, PROJECT_NAMES
 
 

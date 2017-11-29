@@ -2,13 +2,7 @@
 import pytest
 
 from mimesis import Transport
-from mimesis.data import (
-    AIRPLANES,
-    CARS,
-    TRUCKS,
-    VR_CODES,
-    VRC_BY_LOCALES,
-)
+from mimesis.data import AIRPLANES, CARS, TRUCKS, VR_CODES, VRC_BY_LOCALES
 
 
 @pytest.fixture

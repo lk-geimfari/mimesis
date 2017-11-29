@@ -1,8 +1,8 @@
 from typing import Optional
 
 from mimesis.builtins.base import BaseSpecProvider
-from mimesis.utils import pull
 from mimesis.enums import Gender
+from mimesis.utils import pull
 
 
 class RussiaSpecProvider(BaseSpecProvider):

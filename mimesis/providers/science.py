@@ -1,8 +1,8 @@
-from mimesis.data import MATH_FORMULAS
-from mimesis.utils import pull
 from typing import Union
 
+from mimesis.data import MATH_FORMULAS
 from mimesis.providers.base import BaseProvider
+from mimesis.utils import pull
 
 
 class Science(BaseProvider):

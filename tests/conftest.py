@@ -1,7 +1,6 @@
 import pytest
 
 import mimesis
-
 from mimesis import config
 
 locales = config.LIST_OF_LOCALES

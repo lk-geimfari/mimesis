@@ -1,8 +1,8 @@
 import sys
 from typing import Union
 
-from mimesis.data import PLATFORMS
-from mimesis.data import FOLDERS, PROGRAMMING_LANGS, PROJECT_NAMES, USERNAMES
+from mimesis.data import (FOLDERS, PLATFORMS, PROGRAMMING_LANGS, PROJECT_NAMES,
+                          USERNAMES)
 from mimesis.providers.base import BaseProvider
 
 

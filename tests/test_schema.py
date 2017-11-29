@@ -1,9 +1,9 @@
 import pytest
 
 from mimesis import config
-from mimesis.schema import Field
 from mimesis.enums import Gender
 from mimesis.exceptions import UndefinedSchema
+from mimesis.schema import Field
 
 
 @pytest.mark.parametrize(

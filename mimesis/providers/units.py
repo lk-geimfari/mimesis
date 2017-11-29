@@ -1,7 +1,7 @@
 from typing import Optional
 
-from mimesis.enums import PrefixSign, UnitName
 from mimesis.data import SI_PREFIXES, SI_PREFIXES_SYM
+from mimesis.enums import PrefixSign, UnitName
 from mimesis.providers.base import BaseProvider
 
 

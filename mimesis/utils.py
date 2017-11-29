@@ -1,18 +1,18 @@
 """This module is provide internal util functions for mimesis
 """
 
-import string
 import collections
 import functools
 import json
 import ssl
+import string
 from os import path
-from random import randint, choice
-from typing import Mapping, Union, Optional
+from random import choice, randint
+from typing import Mapping, Optional, Union
 from urllib import request
 
-from mimesis.exceptions import UnsupportedLocale
 from mimesis import config
+from mimesis.exceptions import UnsupportedLocale
 from mimesis.typing import JSON
 
 __all__ = ['custom_code', 'download_image']

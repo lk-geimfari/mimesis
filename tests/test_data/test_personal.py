@@ -6,21 +6,12 @@ import pytest
 
 import mimesis
 from mimesis import config
-from mimesis.data import (
-    BLOOD_GROUPS,
-    ENGLISH_LEVEL,
-    MUSIC_GENRE,
-    GENDER_SYMBOLS,
-    SEXUALITY_SYMBOLS,
-)
-from mimesis.enums import Gender, TitleType, SocialNetwork
+from mimesis.data import (BLOOD_GROUPS, ENGLISH_LEVEL, GENDER_SYMBOLS,
+                          MUSIC_GENRE, SEXUALITY_SYMBOLS)
+from mimesis.enums import Gender, SocialNetwork, TitleType
 from mimesis.exceptions import NonEnumerableError
 
-from ._patterns import (
-    USERNAME_REGEX,
-    STR_REGEX,
-    EMAIL_REGEX,
-)
+from ._patterns import EMAIL_REGEX, STR_REGEX, USERNAME_REGEX
 
 
 @pytest.fixture

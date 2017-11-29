@@ -1,7 +1,6 @@
 import os
 import random
-
-from typing import List, Any, Union
+from typing import Any, List, Union
 
 
 class Random(random.Random):

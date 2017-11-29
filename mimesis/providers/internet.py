@@ -1,10 +1,9 @@
-from typing import Union, Optional
+from typing import Optional, Union
 
-from mimesis.data import (TLD, EMOJI, HASHTAGS, HTTP_METHODS,
-                          TORRENT_CATEGORIES, HTTP_STATUS_CODES,
-                          NETWORK_PROTOCOLS, SUBREDDITS, SUBREDDITS_NSFW,
-                          USERNAMES, USER_AGENTS)
-from mimesis.enums import PortRange, TLDType, Layer, MimeType
+from mimesis.data import (EMOJI, HASHTAGS, HTTP_METHODS, HTTP_STATUS_CODES,
+                          NETWORK_PROTOCOLS, SUBREDDITS, SUBREDDITS_NSFW, TLD,
+                          TORRENT_CATEGORIES, USER_AGENTS, USERNAMES)
+from mimesis.enums import Layer, MimeType, PortRange, TLDType
 from mimesis.exceptions import NonEnumerableError
 from mimesis.providers.base import BaseProvider
 from mimesis.providers.file import File

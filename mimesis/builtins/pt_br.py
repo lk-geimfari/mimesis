@@ -1,4 +1,5 @@
 from random import randint
+
 from mimesis.builtins.base import BaseSpecProvider
 
 
