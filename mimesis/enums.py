@@ -17,6 +17,7 @@ class PortRange(Enum):
     takes parameter``port_range``.
 
     Example:
+
     >>> internet.port(port_range=PortRange.REGISTERED)
     '8080'
     """
@@ -31,6 +32,7 @@ class Gender(Enum, metaclass=AllowRandom):
     takes argument ``gender``.
 
     Example:
+
     >>> personal.full_name(gender=Gender.FEMALE)
     'Jessica Larson'
     """
@@ -43,6 +45,7 @@ class TitleType(Enum, metaclass=AllowRandom):
     takes parameter``title_type``.
 
     Example:
+
      >>> personal.title(title_type=TitleType.TYPICAL)
     'Mr.'
     """
@@ -55,6 +58,7 @@ class CardType(Enum, metaclass=AllowRandom):
     takes parameter ``card_type``.
 
     Example:
+
     >>> payment.credit_card_number(card_type=CardType.VISA)
     '4116 9018 7744 0125'
     """
@@ -67,6 +71,7 @@ class Algorithm(Enum, metaclass=AllowRandom):
     """Value for methods which take argument ``algorithm``.
 
     Example:
+
     >>> cryptographic.hash(algorithm=Algorithm.MD5)
     '6023658e8cc9c97edfd51cf2fabf1faf'
     """
@@ -83,6 +88,7 @@ class TLDType(Enum, metaclass=AllowRandom):
     takes parameter ``tld_type``.
 
     Example:
+
     >>> internet.top_level_domain(tld_type=TLDType.GEOTLD)
     '.moscow'
     """
@@ -98,6 +104,7 @@ class Layer(Enum, metaclass=AllowRandom):
     takes parameter ``layer``.
 
     Example:
+
     >>> internet.network_protocol(layer=Layer.APPLICATION)
     'BitTorrent'
     """
@@ -114,6 +121,7 @@ class FileType(Enum, metaclass=AllowRandom):
     """Value for methods which takes parameter ``file_type``.
 
     Example:
+
     >>> file.extension(file_type=FileType.SOURCE)
     '.py'
     """
@@ -132,6 +140,7 @@ class MimeType(Enum, metaclass=AllowRandom):
     takes parameter ``type_``.
 
     Example:
+
     >>> file.mime_type(type_=MimeType.APPLICATION)
     'application/alto-directory+json'
     """
@@ -148,6 +157,7 @@ class PrefixSign(Enum, metaclass=AllowRandom):
     takes parameter ``sign``.
 
     Example:
+
     >>> unitsystem.prefix(sign=PrefixSign.NEGATIVE)
     'yocto'
     """
@@ -160,6 +170,7 @@ class CountryCode(Enum, metaclass=AllowRandom):
     takes parameter ``fmt``.
 
     Example:
+
     >>> address.country_iso_code(fmt=CountryCode.ISO3)
     'AND'
     """
@@ -173,6 +184,7 @@ class ISBNFormat(Enum, metaclass=AllowRandom):
     takes parameter ``fmt``.
 
     Example:
+
     >>> code.isbn(fmt=ISBNFormat.ISBN10)
     '1-64396-236-2'
     """
@@ -185,6 +197,7 @@ class EANFormat(Enum, metaclass=AllowRandom):
     takes parameter ``fmt``.
 
     Example:
+
     >>> code.ean(fmt=EANFormat.EAN8)
     '09959590'
     """
@@ -195,6 +208,11 @@ class EANFormat(Enum, metaclass=AllowRandom):
 class SocialNetwork(Enum, metaclass=AllowRandom):
     """Value for method ``Personal.social_media_profile()`` which
     takes parameter ``site``.
+
+    Example:
+
+    >>> personal.social_media_profile(site=SocialNetwork.INSTAGRAM)
+    'https://www.instagram.com/cacara_1844'
     """
     FACEBOOK = 'facebook'
     TWITTER = 'twitter'
@@ -205,6 +223,11 @@ class SocialNetwork(Enum, metaclass=AllowRandom):
 class UnitName(Enum, metaclass=AllowRandom):
     """Value for method ``UnitSystem.unit()`` which
     takes parameter ``name``.
+
+    Example:
+
+    >>> unitsystem.unit(name=UnitName.MASS)
+    'gramm'
     """
     MASS = ('gram', 'gr')
     INFORMATION = ('byte', 'b')
