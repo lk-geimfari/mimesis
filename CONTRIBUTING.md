@@ -18,4 +18,4 @@
 
 - Do not write bad code!
 
-- Use `data/locale_template` if you want to add new locale.
+- Use `mimesis/data/locale_template` if you want to add new locale.
