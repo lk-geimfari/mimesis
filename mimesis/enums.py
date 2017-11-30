@@ -46,7 +46,7 @@ class TitleType(Enum, metaclass=AllowRandom):
 
     Example:
 
-     >>> personal.title(title_type=TitleType.TYPICAL)
+    >>> personal.title(title_type=TitleType.TYPICAL)
     'Mr.'
     """
     TYPICAL = 'typical'
