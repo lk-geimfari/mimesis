@@ -11,6 +11,7 @@ from mimesis.providers import *
 
 __all__ = [
     'Address',
+    'BaseProvider',
     'Business',
     'ClothingSizes',
     'Code',
