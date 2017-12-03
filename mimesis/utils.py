@@ -31,8 +31,7 @@ def locale_info(locale: str) -> str:
     supported = config.SUPPORTED_LOCALES
 
     if locale not in supported:
-        raise UnsupportedLocale(
-            'Locale {} is not supported'.format(locale))
+        raise UnsupportedLocale(locale)
 
     return supported[locale]['name']
 

@@ -73,7 +73,7 @@ class Cryptographic(BaseProvider):
         :param length: Length of code (number of words).
         :return: Mnemonic code.
         """
-        text = Text().data
+        text = Text('en').data
         words = text['words']['normal']
 
         self.random.shuffle(words)

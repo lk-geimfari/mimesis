@@ -15,7 +15,7 @@ class Payment(BaseProvider):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.__personal = Personal()
+        self.__personal = Personal('en')
 
     def cid(self) -> int:
         """Generate a random CID code.

@@ -29,9 +29,7 @@ def romanized(locale: str = '') -> Callable:
                 alphabet.update({s: s for s in
                                  letters + digits + punctuation})
             except KeyError:
-                raise UnsupportedLocale(
-                    'Locale {0} is not supported yet.'.format(locale),
-                )
+                raise UnsupportedLocale(locale)
             result = func(*args, **kwargs)
             txt = ''.join([alphabet[i] for i in result if i in alphabet])
             return txt
