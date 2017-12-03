@@ -78,7 +78,7 @@ class Numbers(BaseProvider):
     def rating(self, maximum: float = 5.0) -> float:
         """Generate random rating for something.
 
-        :param maximum: Minimum value (default is 5.0).
+        :param maximum: Maximum value (default is 5.0).
         :return: Rating.
 
         :Example:
