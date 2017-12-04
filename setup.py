@@ -14,8 +14,11 @@ VERSION_MICRO_MAX = 10
 
 here = abspath(dirname(__file__))
 
-with open('dev_requirements.txt') as f:
-    tests_requirements = f.read().splitlines()
+try:
+    with open('dev_requirements.txt') as f:
+        tests_requirements = f.read().splitlines()
+except FileNotFoundError:
+    tests_requirements = []
 
 # Long description.
 with open('PYPI_README.rst', 'r', encoding='utf-8') as f:
