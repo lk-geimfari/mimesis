@@ -41,8 +41,6 @@ Also you can install it manually:
 (env) ➜ make install
 ```
 
-**Note**: Version `1.0.0` has suffered significant [changes](/CHANGELOG.md#version-100), so there is no backwards compatibility with earlier versions of this library.
-
 ## Getting started
 
 As we said above, this library is really easy to use. A simple usage example is given below:

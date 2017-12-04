@@ -1,7 +1,10 @@
 ## Version 1.0.1
 
+**Updated**:
+
 - Fixed #304
 
+---
 
 ## Version 1.0.0
 
