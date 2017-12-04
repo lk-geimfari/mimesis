@@ -21,6 +21,7 @@ class Field(object):
 
     def __init__(self, locale: str = 'en') -> None:
         self.locale = locale
+        # TODO: Just *args, **kwargs, like in usual provider
         self.gen = Generic(self.locale)
 
     def __call__(self, name: Optional[str] = None, **kwargs) -> Any:
