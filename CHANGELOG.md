@@ -1,3 +1,8 @@
+## Version 1.0.1
+
+- Fixed #304
+
+
 ## Version 1.0.0
 
 This is a first major version of `mimesis` and here are **breaking changes** (including changes related to support for only the latest versions of `Python`, i.e `Python 3.5` and `Python 3.6`), so there is no backwards compatibility with early versions of this library.
