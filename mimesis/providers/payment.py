@@ -3,9 +3,10 @@ import string
 from typing import Optional
 
 from mimesis.data import CREDIT_CARD_NETWORKS
-from mimesis.enums import CardType, Gender
+from mimesis.enums import Algorithm, CardType, Gender
 from mimesis.exceptions import NonEnumerableError
 from mimesis.providers.base import BaseProvider
+from mimesis.providers.cryptographic import Cryptographic
 from mimesis.providers.personal import Personal
 from mimesis.utils import luhn_checksum
 
@@ -49,6 +50,22 @@ class Payment(BaseProvider):
         letters = string.ascii_letters + string.digits
         address = [self.random.choice(letters) for _ in range(33)]
         return type_ + ''.join(address)
+
+    @staticmethod
+    def ethereum_address() -> str:
+        """Get random dummy Ethereum address.
+
+        .. Note: The address will look like Ethereum address,
+        but keep in mind that it is not the valid address.
+        It is just a SHA1 hash with prefixed 0x.
+
+        :return: Ethereum address.
+
+        :Example:
+            0xe8ece9e6ff7dba52d4c07d37418036a89af9698d
+        """
+        sha1 = Cryptographic('en').hash(Algorithm.SHA1)
+        return '0x{hash}'.format(hash=sha1)
 
     def credit_card_network(self) -> str:
         """Get random credit card network

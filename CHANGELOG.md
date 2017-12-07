@@ -1,3 +1,11 @@
+## Version 1.0.2
+
+**Added**:
+
+- Added method `ethereum_address` to `Payment`
+
+---
+
 ## Version 1.0.1
 
 **Updated**:

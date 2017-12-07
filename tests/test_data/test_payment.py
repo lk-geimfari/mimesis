@@ -21,6 +21,12 @@ def test_bitcoin(payment):
     assert len(result) == 34
 
 
+def test_ethereum_address(payment):
+    pattern = r'^0x([a-zA-Z0-9]{40})$'
+    address = payment.ethereum_address()
+    assert re.match(pattern, address)
+
+
 def test_cvv(payment):
     result = payment.cvv()
     assert 100 <= result
