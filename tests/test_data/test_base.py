@@ -2,12 +2,12 @@ import pytest
 
 from mimesis.enums import Gender
 from mimesis.exceptions import NonEnumerableError
-from mimesis.providers.base import Boilerplate
+from mimesis.providers.base import ValidateEnumMixin
 
 
 @pytest.fixture
 def boilerplate():
-    return Boilerplate()
+    return ValidateEnumMixin()
 
 
 @pytest.mark.parametrize(

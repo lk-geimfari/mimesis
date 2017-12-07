@@ -5,9 +5,9 @@ from mimesis.helpers import Random
 from mimesis.utils import locale_info, setup_locale
 
 
-class Boilerplate(object):
+class ValidateEnumMixin(object):
     """
-    Boilerplate for builtins and usual providers.
+    ValidateEnumMixin for builtins and usual providers.
     """
 
     @staticmethod
@@ -41,7 +41,7 @@ class Boilerplate(object):
             self.__class__.__name__)
 
 
-class BaseProvider(Boilerplate):
+class BaseProvider(ValidateEnumMixin):
     """This is a base class for all providers."""
 
     def __init__(self, locale: str = '',
