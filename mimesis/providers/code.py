@@ -28,14 +28,13 @@ class Code(BaseProvider):
         locale = self.random.choice(LOCALE_CODES)
         return locale
 
-    @staticmethod
-    def issn(mask: str = '####-####') -> str:
+    def issn(self, mask: str = '####-####') -> str:
         """Generate a random International Standard Serial Number (ISSN).
 
         :param str mask: Mask of ISSN.
         :return: ISSN.
         """
-        return custom_code(mask=mask)
+        return custom_code(mask=mask, rnd=self.random)
 
     def isbn(self, fmt: Optional[ISBNFormat] = None) -> str:
         """Generate ISBN for current locale. Default is ISBN 10,
@@ -48,7 +47,11 @@ class Code(BaseProvider):
         :Example:
             132-1-15411-375-8.
         """
-        fmt_value = self._validate_enum(item=fmt, enum=ISBNFormat)
+        fmt_value = self._validate_enum(
+            item=fmt,
+            enum=ISBNFormat,
+            rnd=self.random,
+        )
         result = ISBN_MASKS[fmt_value]
 
         if self.locale in ISBN_GROUPS:
@@ -58,7 +61,7 @@ class Code(BaseProvider):
             mask = result.format(
                 ISBN_GROUPS['default'])
 
-        return custom_code(mask=mask)
+        return custom_code(mask=mask, rnd=self.random)
 
     def ean(self, fmt: Optional[EANFormat] = None) -> str:
         """Generate EAN (European Article Number) code. Default is
@@ -74,9 +77,10 @@ class Code(BaseProvider):
         key = self._validate_enum(
             item=fmt,
             enum=EANFormat,
+            rnd=self.random,
         )
         mask = EAN_MASKS[key]
-        return custom_code(mask=mask)
+        return custom_code(mask=mask, rnd=self.random)
 
     def imei(self) -> str:
         """Generate a random IMEI (International Mobile Station Equipment Identity).
@@ -86,7 +90,9 @@ class Code(BaseProvider):
         :Example:
             353918052107063
         """
-        num = self.random.choice(IMEI_TACS) + custom_code(mask='######')
+        num = self.random.choice(IMEI_TACS) + custom_code(
+            mask='######', rnd=self.random,
+        )
         return num + luhn_checksum(num)
 
     def pin(self, mask: str = '####') -> str:
@@ -98,4 +104,4 @@ class Code(BaseProvider):
         :Example:
             5241.
         """
-        return custom_code(mask=mask)
+        return custom_code(mask=mask, rnd=self.random)

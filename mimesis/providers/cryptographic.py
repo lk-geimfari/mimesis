@@ -31,6 +31,7 @@ class Cryptographic(BaseProvider):
         key = self._validate_enum(
             item=algorithm,
             enum=Algorithm,
+            rnd=self.random,
         )
 
         if hasattr(hashlib, key):
@@ -48,6 +49,8 @@ class Cryptographic(BaseProvider):
         :return: Bytes.
         :rtype: bytes
         """
+        if self.seed:
+            return bytes(self.random.getrandbits(8) for _ in range(entropy))
         return self.random.urandom(entropy)
 
     def token(self, entropy: int = 32) -> str:
@@ -59,12 +62,14 @@ class Cryptographic(BaseProvider):
         token = hexlify(self.bytes(entropy))
         return token.decode('ascii')
 
-    @staticmethod
-    def salt() -> str:
+    def salt(self) -> str:
         """Generate salt (not cryptographically safe) using uuid4().
 
         :return: Salt.
         """
+        if self.seed:
+            bits = self.random.getrandbits(128)
+            return uuid.UUID(int=bits, version=4).hex
         return uuid.uuid4().hex
 
     def mnemonic_code(self, length: int = 12) -> str:
@@ -75,6 +80,8 @@ class Cryptographic(BaseProvider):
         """
         text = Text('en').data
         words = text['words']['normal']
+        if self.seed:
+            words = sorted(words)
 
         self.random.shuffle(words)
         code = [self.random.choice(words) for _ in range(length)]
