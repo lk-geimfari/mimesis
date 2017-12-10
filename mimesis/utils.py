@@ -12,8 +12,8 @@ from urllib import request
 
 from mimesis import config
 from mimesis.exceptions import UnsupportedLocale
-from mimesis.typing import JSON
 from mimesis.helpers import Random
+from mimesis.typing import JSON
 
 __all__ = ['custom_code', 'download_image']
 
@@ -154,7 +154,6 @@ def setup_locale(locale: Optional[str] = None) -> str:
     return locale
 
 
-# Fix: pass to this function extended random parameter for seed supporting
 def custom_code(mask: str = '@###', char: str = '@',
                 digit: str = '#', rnd: Optional[Random] = Random()) -> str:
     """Generate custom code using ascii uppercase and random integers.
