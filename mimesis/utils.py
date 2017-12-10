@@ -7,13 +7,13 @@ import json
 import ssl
 import string
 from os import path
-from random import choice, randint
 from typing import Mapping, Optional, Union
 from urllib import request
 
 from mimesis import config
 from mimesis.exceptions import UnsupportedLocale
 from mimesis.typing import JSON
+from mimesis.helpers import Random
 
 __all__ = ['custom_code', 'download_image']
 
@@ -154,13 +154,15 @@ def setup_locale(locale: Optional[str] = None) -> str:
     return locale
 
 
-def custom_code(mask: str = '@###',
-                char: str = '@', digit: str = '#') -> str:
+# Fix: pass to this function extended random parameter for seed supporting
+def custom_code(mask: str = '@###', char: str = '@',
+                digit: str = '#', rnd: Optional[Random] = Random()) -> str:
     """Generate custom code using ascii uppercase and random integers.
 
     :param mask: Mask of code.
     :param char: Placeholder for characters.
     :param digit: Placeholder for digits.
+    :param rnd: Custom random generator.
     :return: Custom code.
 
     :Example:
@@ -169,9 +171,9 @@ def custom_code(mask: str = '@###',
     code = ''
     for p in mask:
         if p == char:
-            code += choice(string.ascii_uppercase)
+            code += rnd.choice(string.ascii_uppercase)
         elif p == digit:
-            code += str(randint(0, 9))
+            code += str(rnd.randint(0, 9))
         else:
             code += p
 

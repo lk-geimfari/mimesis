@@ -1,6 +1,7 @@
 from enum import Enum, EnumMeta
-from random import choice
-from typing import Any
+from typing import Any, Optional
+
+from .helpers import Random
 
 
 class AllowRandom(EnumMeta):
@@ -8,8 +9,8 @@ class AllowRandom(EnumMeta):
     returns random field of enum.
     """
 
-    def get_random_item(self) -> Any:
-        return choice(list(self))
+    def get_random_item(self, rnd: Optional[Random] = Random()) -> Any:
+        return rnd.choice(list(self))
 
 
 class PortRange(Enum):
