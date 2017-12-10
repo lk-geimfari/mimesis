@@ -10,9 +10,9 @@ from mimesis.providers.text import Text
 class File(BaseProvider):
     """Class for generate fake data for files."""
 
-    def __init__(self):
-        super().__init__()
-        self.__text = Text('en')
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.__text = Text('en', seed=self.seed)
 
     def __sub(self, string: str = '') -> str:
         """Replace spaces in string.
@@ -32,7 +32,9 @@ class File(BaseProvider):
         :Example:
             .py
         """
-        key = self._validate_enum(item=file_type, enum=FileType)
+        key = self._validate_enum(
+            item=file_type, enum=FileType, rnd=self.random,
+        )
         extensions = EXTENSIONS[key]
         return self.random.choice(extensions)
 
@@ -42,7 +44,9 @@ class File(BaseProvider):
         :param type_: Enum object MimeType.
         :return: Mime type.
         """
-        key = self._validate_enum(item=type_, enum=MimeType)
+        key = self._validate_enum(
+            item=type_, enum=MimeType, rnd=self.random,
+        )
         types = MIME_TYPES[key]
         return self.random.choice(types)
 
@@ -58,7 +62,8 @@ class File(BaseProvider):
         """
         num = self.random.randint(minimum, maximum)
         unit = self.random.choice(
-            ['bytes', 'kB', 'MB', 'GB', 'TB'])
+            ['bytes', 'kB', 'MB', 'GB', 'TB'],
+        )
 
         return '{num} {unit}'.format(
             num=num,
