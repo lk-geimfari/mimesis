@@ -123,25 +123,21 @@ class Internet(BaseProvider):
                     width: Size = 1900, height: Size = 1080) -> str:
         """Get a random beautiful stock image that hosted on Unsplash.com
 
-        :param category:
-            Category of image. Available: 'buildings', 'food', 'nature',
-            'people', 'technology', 'objects'.
+        :param category: Category of images.
         :param width: Width of the image.
         :type width: str or int
         :param height: Height of the image.
         :type height: str or int
         :return: An image (Link to image).
         """
-        # TODO: Refactoring
         url = 'https://source.unsplash.com/category/' \
               '{category}/{width}x{height}'
 
-        categories = (
-            'buildings', 'food', 'nature',
-            'people', 'technology', 'objects',
-        )
-
-        if not category or category not in categories:
+        if not category:
+            categories = [
+                'buildings', 'food', 'nature',
+                'people', 'technology', 'objects',
+            ]
             category = self.random.choice(categories)
 
         return url.format(category=category, width=width, height=height)
@@ -152,17 +148,14 @@ class Internet(BaseProvider):
         :param keyword: Keyword.
         :return: Link to image.
         """
-
-        # TODO: Refactoring
         url = 'https://source.unsplash.com/weekly?{keyword}'
 
-        keywords = [
-            'cat', 'girl', 'boy', 'beauty',
-            'nature', 'woman', 'man', 'tech',
-            'space',
-        ]
-
         if not keyword:
+            keywords = [
+                'cat', 'girl', 'boy', 'beauty',
+                'nature', 'woman', 'man', 'tech',
+                'space',
+            ]
             keyword = self.random.choice(keywords)
 
         return url.format(keyword=keyword)
