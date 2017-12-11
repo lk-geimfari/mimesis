@@ -25,9 +25,8 @@ class Development(BaseProvider):
         :Example:
             0.11.3-alpha.1
         """
-        version_fmt = '{}.{}.{}'
         major, minor, patch = self.random.randints(3, 0, 10)
-        version = version_fmt.format(major, minor, patch)
+        version = '{}.{}.{}'.format(major, minor, patch)
 
         if pre_release:
             suffixes = ('alpha', 'beta', 'rc')
