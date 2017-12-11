@@ -1,7 +1,15 @@
 # -*- coding: utf-8 -*-
 import re
 
+import pytest
+
+from mimesis import Path
 from mimesis.data import FOLDERS, PROGRAMMING_LANGS, PROJECT_NAMES
+
+
+@pytest.fixture
+def _seeded_path():
+    return Path(seed=42)
 
 
 def test_root(path):
@@ -28,6 +36,14 @@ def test_user(path):
     assert isinstance(result, type(re.search('', ''))) is True
 
 
+def test_seeded_user(_seeded_path):
+    result = _seeded_path.user()
+    # assert result ==
+    result = _seeded_path.user()
+    # assert result ==
+    pass
+
+
 def directory_separator(path):
     slash_character = ''
     if path.platform == 'win32':
@@ -44,6 +60,14 @@ def test_users_folder(path):
     assert folder[3] in FOLDERS
 
 
+def test_seeded_users_folder(_seeded_path):
+    result = _seeded_path.users_folder()
+    # assert result ==
+    result = _seeded_path.users_folder()
+    # assert result ==
+    pass
+
+
 def test_dev_dir(path):
     dev_dir = path.dev_dir()
     dev_dir = dev_dir.split(directory_separator(path))
@@ -51,8 +75,24 @@ def test_dev_dir(path):
     assert dev_dir[4] in PROGRAMMING_LANGS
 
 
+def test_seeded_dev_dir(_seeded_path):
+    result = _seeded_path.dev_dir()
+    # assert result ==
+    result = _seeded_path.dev_dir()
+    # assert result ==
+    pass
+
+
 def test_project_dir(path):
     project_path = path.project_dir()
     project_path = project_path.split(directory_separator(path))
     assert len(project_path) == 6
     assert project_path[5] in PROJECT_NAMES
+
+
+def test_seeded_project_dir(_seeded_path):
+    result = _seeded_path.project_dir()
+    # assert result ==
+    result = _seeded_path.project_dir()
+    # assert result ==
+    pass

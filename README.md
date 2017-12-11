@@ -280,10 +280,10 @@ Mimesis support generating data by schema only starting from version `1.0.0`.
 	- [ ] Hardware
 	- [x] Internet
 	- [ ] Numbers
-	- [ ] Path
-	- [ ] Payment
-	- [ ] Personal
-	- [ ] Science
+	- [x] Path
+	- [x] Payment
+	- [x] Personal
+	- [x] Science
 	- [x] Structured
 	- [ ] Text
 	- [x] Transport
@@ -294,6 +294,28 @@ Mimesis support generating data by schema only starting from version `1.0.0`.
 - [ ] Add reseed method to base provider
 - [ ] Write examples
 - [?] Micro optimisations
+- [ ] Refactor provides
+	- [ ] Address
+	- [ ] Business
+	- [ ] Clothing Sizes
+	- [ ] Code
+	- [ ] Cryptographic
+	- [ ] Datetime
+	- [ ] Development
+	- [ ] File
+	- [ ] Food
+	- [ ] Games
+	- [ ] Hardware
+	- [ ] Internet
+	- [ ] Numbers
+	- [ ] Path
+	- [ ] Payment
+	- [ ] Personal
+	- [ ] Science
+	- [ ] Structured
+	- [ ] Text
+	- [ ] Transport
+	- [ ] Unit system
 
 ## Integration with py.test and factory_boy
 We have created libraries which can help you easily use Mimesis with `factory_boy` and `py.test`.
