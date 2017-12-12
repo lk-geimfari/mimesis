@@ -13,6 +13,12 @@ def us():
     return UnitSystem()
 
 
+# TODO: Fill seed test cases
+@pytest.fixture
+def _seeded_us():
+    return UnitSystem(seed=42)
+
+
 @pytest.mark.parametrize(
     'name', [
         UnitName.MASS,
@@ -45,6 +51,16 @@ def test_unit(us, name):
     assert symbol in name.value
 
 
+def test_seeded_unit(_seeded_us):
+    result = _seeded_us.unit(name=UnitName.FORCE, symbol=True)
+    # assert result ==
+    result = _seeded_us.unit()
+    # assert result ==
+    result = _seeded_us.unit()
+    # assert result ==
+    pass
+
+
 @pytest.mark.parametrize(
     'sign, symbol', [
         (PrefixSign.POSITIVE, True),
@@ -61,3 +77,13 @@ def test_prefix(us, sign, symbol):
 
     with pytest.raises(NonEnumerableError):
         us.prefix(sign='nil')
+
+
+def test_seeded_prefix(_seeded_us):
+    prefix = _seeded_us.prefix(sign=PrefixSign.NEGATIVE, symbol=True)
+    # assert result ==
+    prefix = _seeded_us.prefix()
+    # assert result ==
+    prefix = _seeded_us.prefix()
+    # assert result ==
+    pass

@@ -112,7 +112,8 @@ class Personal(BaseProvider):
         :param gender: The gender.
         :param title_type: TitleType enum object.
         :return: The title.
-        :raises NonEnumerableError: if gender or title_type in incorrect format.
+        :raises NonEnumerableError: if gender or title_type in incorrect
+            format.
 
         :Example:
             PhD.
@@ -261,7 +262,8 @@ class Personal(BaseProvider):
             domain=domain,
         )
 
-    def social_media_profile(self, site: Optional[SocialNetwork] = None) -> str:
+    def social_media_profile(
+            self, site: Optional[SocialNetwork] = None) -> str:
         """Generate profile for random social network.
 
         :return: Profile in some network.

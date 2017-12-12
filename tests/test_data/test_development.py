@@ -44,6 +44,8 @@ def test_seeded_version_control_system(_seeded_dev):
 def test_version(dev):
     result = dev.version().split('.')
 
+    assert len(result) == 3
+
     major = int(result[0])
     assert major >= 0
     assert major <= 11
@@ -52,9 +54,12 @@ def test_version(dev):
     assert minor >= 0
     assert minor <= 11
 
-    micro = int(result[2])
-    assert micro >= 0
-    assert micro <= 11
+    patch = int(result[2])
+    assert patch >= 0
+    assert patch <= 11
+
+    pre_release = dev.version(pre_release=True)
+    assert len(pre_release.split('.')) == 4
 
 
 def test_seeded_version(_seeded_dev):

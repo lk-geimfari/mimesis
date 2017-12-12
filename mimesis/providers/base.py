@@ -60,3 +60,8 @@ class BaseProvider(ValidateEnumMixin):
 
         if seed is not None:
             self.random.seed(self.seed)
+
+    def get_current_locale(self) -> str:
+        """Current locale of provider. Default for all providers is ``en``.
+        """
+        return self.locale

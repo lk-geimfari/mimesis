@@ -16,16 +16,25 @@ class Development(BaseProvider):
         """
         return self.random.choice(LICENSES)
 
-    def version(self) -> str:
+    def version(self, pre_release: bool = False) -> str:
         """Generate a random version information.
 
+        :param pre_release: Pre-release.
         :return: The version of software.
 
         :Example:
-            0.11.3.
+            0.11.3-alpha.1
         """
-        n = (self.random.randint(0, 11) for _ in range(3))
-        return '{}.{}.{}'.format(*n)
+        major, minor, patch = self.random.randints(3, 0, 10)
+        version = '{}.{}.{}'.format(major, minor, patch)
+
+        if pre_release:
+            suffixes = ('alpha', 'beta', 'rc')
+            suffix = self.random.choice(suffixes)
+            number = self.random.randint(1, 11)
+            return '{}-{}.{}'.format(version, suffix, number)
+
+        return version
 
     def database(self, nosql: bool = False) -> str:
         """Get a random database name.

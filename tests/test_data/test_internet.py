@@ -16,9 +16,23 @@ def net():
     return Internet()
 
 
+# TODO: Fill seed test cases
+@pytest.fixture
+def _seeded_net():
+    return Internet(seed=42)
+
+
 def test_emoji(net):
     result = net.emoji()
     assert result in data.EMOJI
+
+
+def test_seeded_emoji(_seeded_net):
+    result = _seeded_net.emoji()
+    # assert result ==
+    result = _seeded_net.emoji()
+    # assert result ==
+    pass
 
 
 def test_hashtags(net):
@@ -29,9 +43,29 @@ def test_hashtags(net):
     assert result.replace('#', '') in data.HASHTAGS
 
 
+def test_seeded_hashtags(_seeded_net):
+    result = _seeded_net.hashtags(quantity=2)
+    # assert result ==
+    result = _seeded_net.hashtags()
+    # assert result ==
+    result = _seeded_net.hashtags()
+    # assert result ==
+    pass
+
+
 def test_home_page(net):
     result = net.home_page()
     assert re.match(p.HOME_PAGE, result)
+
+
+def test_seeded_home_page(_seeded_net):
+    result = _seeded_net.home_page(tld_type=TLDType.GEOTLD)
+    # assert result ==
+    result = _seeded_net.home_page()
+    # assert result ==
+    result = _seeded_net.home_page()
+    # assert result ==
+    pass
 
 
 def test_subreddit(net):
@@ -48,14 +82,42 @@ def test_subreddit(net):
     assert len(full_result) > 20
 
 
+def test_seeded_subreddit(_seeded_net):
+    result = _seeded_net.subreddit(nsfw=True, full_url=True)
+    # assert result ==
+    result = _seeded_net.subreddit()
+    # assert result ==
+    result = _seeded_net.subreddit()
+    # assert result ==
+    pass
+
+
 def test_user_agent(net):
     result = net.user_agent()
     assert result in data.USER_AGENTS
 
 
+def test_seeded_user_agent(_seeded_net):
+    result = _seeded_net.user_agent()
+    # assert result ==
+    result = _seeded_net.user_agent()
+    # assert result ==
+    pass
+
+
 def test_image_placeholder(net):
     result = net.image_placeholder(width=400, height=300)
     assert result is not None
+
+
+def test_seeded_image_placeholder(_seeded_net):
+    result = _seeded_net.image_placeholder(width=128, height=128)
+    # assert result ==
+    result = _seeded_net.image_placeholder()
+    # assert result ==
+    result = _seeded_net.image_placeholder()
+    # assert result ==
+    pass
 
 
 def test_stock_image(net):
@@ -69,12 +131,32 @@ def test_stock_image(net):
     assert result_3 == '1900x1080'
 
 
+def test_seeded_stock_image(_seeded_net):
+    result = _seeded_net.stock_image(category='space', width=800, height=600)
+    # assert result ==
+    result = _seeded_net.stock_image()
+    # assert result ==
+    result = _seeded_net.stock_image()
+    # assert result ==
+    pass
+
+
 def test_image_by_keyword(net):
     result = net.image_by_keyword(keyword='word').split('/')[-1]
     assert 'word' == result.split('?')[1]
 
     default = net.image_by_keyword()
     assert isinstance(default, str)
+
+
+def test_seeded_image_by_keyword(_seeded_net):
+    result = _seeded_net.image_by_keyword(keyword='word')
+    # assert result ==
+    result = _seeded_net.image_by_keyword()
+    # assert result ==
+    result = _seeded_net.image_by_keyword()
+    # assert result ==
+    pass
 
 
 @pytest.mark.parametrize(
@@ -93,6 +175,16 @@ def test_network_protocol(net, layer):
     assert result in data.NETWORK_PROTOCOLS[layer.value]
 
 
+def test_seeded_network_protocol(_seeded_net):
+    result = _seeded_net.network_protocol(layer=Layer.TRANSPORT)
+    # assert result ==
+    result = _seeded_net.network_protocol()
+    # assert result ==
+    result = _seeded_net.network_protocol()
+    # assert result ==
+    pass
+
+
 def test_network_protocol_exception(net):
     with pytest.raises(NonEnumerableError):
         net.network_protocol(layer='nil')
@@ -108,9 +200,27 @@ def test_ip_v4(net):
     assert (port >= 1) and (port <= 65535)
 
 
+def test_seeded_ip_v4(_seeded_net):
+    result = _seeded_net.ip_v4(with_port=True)
+    # assert result ==
+    result = _seeded_net.ip_v4()
+    # assert result ==
+    result = _seeded_net.ip_v4()
+    # assert result ==
+    pass
+
+
 def test_ip_v6(net):
     ip = net.ip_v6()
     assert re.match(p.IP_V6_REGEX, ip)
+
+
+def test_seeded_ip_v6(_seeded_net):
+    result = _seeded_net.ip_v6()
+    # assert result ==
+    result = _seeded_net.ip_v6()
+    # assert result ==
+    pass
 
 
 def test_mac_address(net):
@@ -118,9 +228,25 @@ def test_mac_address(net):
     assert re.match(p.MAC_ADDRESS_REGEX, mac)
 
 
+def test_seeded_mac_address(_seeded_net):
+    result = _seeded_net.mac_address()
+    # assert result ==
+    result = _seeded_net.mac_address()
+    # assert result ==
+    pass
+
+
 def test_http_method(net):
     result = net.http_method()
     assert result in data.HTTP_METHODS
+
+
+def test_seeded_http_method(_seeded_net):
+    result = _seeded_net.http_method()
+    # assert result ==
+    result = _seeded_net.http_method()
+    # assert result ==
+    pass
 
 
 @pytest.mark.parametrize(
@@ -139,6 +265,16 @@ def test_content_type(net, mime_type):
     assert ct in data.MIME_TYPES[mime_type.value]
 
 
+def test_seeded_content_type(_seeded_net):
+    result = _seeded_net.content_type(mime_type=MimeType.MESSAGE)
+    # assert result ==
+    result = _seeded_net.content_type()
+    # assert result ==
+    result = _seeded_net.content_type()
+    # assert result ==
+    pass
+
+
 def test_content_type_wrong_arg(net):
     with pytest.raises(NonEnumerableError):
         net.content_type(mime_type='nil')
@@ -150,6 +286,16 @@ def test_http_status_code(net):
 
     result = net.http_status_code()
     assert (int(result) >= 100) and (int(result) <= 511)
+
+
+def test_seeded_http_status_code(_seeded_net):
+    result = _seeded_net.http_status_code(code_only=False)
+    # assert result ==
+    result = _seeded_net.http_status_code()
+    # assert result ==
+    result = _seeded_net.http_status_code()
+    # assert result ==
+    pass
 
 
 @pytest.mark.parametrize(
@@ -165,6 +311,16 @@ def test_top_level_domain(net, domain_type):
     result = net.top_level_domain(tld_type=domain_type)
     assert result is not None
     assert result in data.TLD[domain_type.value]
+
+
+def test_seeded_top_level_domain(_seeded_net):
+    result = _seeded_net.top_level_domain(tld_type=TLDType.CCTLD)
+    # assert result ==
+    result = _seeded_net.top_level_domain()
+    # assert result ==
+    result = _seeded_net.top_level_domain()
+    # assert result ==
+    pass
 
 
 def test_top_level_domain_unsupported(net):
@@ -187,6 +343,24 @@ def test_port(net, range_, excepted):
         net.port('nill')
 
 
+def test_seeded_port(_seeded_net):
+    result = _seeded_net.port(port_range=PortRange.REGISTERED)
+    # assert result ==
+    result = _seeded_net.port()
+    # assert result ==
+    result = _seeded_net.port()
+    # assert result ==
+    pass
+
+
 def test_torrent_portal_category(net):
     result = net.category_of_website()
     assert result in data.TORRENT_CATEGORIES
+
+
+def test_seeded_category_of_website(_seeded_net):
+    result = _seeded_net.category_of_website()
+    # assert result ==
+    result = _seeded_net.category_of_website()
+    # assert result ==
+    pass
