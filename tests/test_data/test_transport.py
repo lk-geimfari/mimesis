@@ -10,7 +10,6 @@ def _transport():
     return Transport()
 
 
-# TODO: Fill seed test cases
 @pytest.fixture
 def _seeded_transport():
     return Transport(seed=42)
@@ -30,12 +29,11 @@ def test_truck(_transport):
 
 def test_seeded_truck(_seeded_transport):
     result = _seeded_transport.truck(model_mask='@@##@@_##')
-    # assert result ==
+    assert result == 'Union-UD04HH_21'
     result = _seeded_transport.truck()
-    # assert result ==
+    assert result == 'Bristol-8196 BA'
     result = _seeded_transport.truck()
-    # assert result ==
-    pass
+    assert result == 'Foden-3389 AR'
 
 
 def test_car(_transport):
@@ -45,10 +43,9 @@ def test_car(_transport):
 
 def test_seeded_car(_seeded_transport):
     result = _seeded_transport.car()
-    # assert result ==
+    assert result == 'Rolls-Royce Silver Shadow'
     result = _seeded_transport.car()
-    # assert result ==
-    pass
+    assert result == 'Volvo 200 Series'
 
 
 def test_airplane(_transport):
@@ -61,12 +58,11 @@ def test_airplane(_transport):
 
 def test_seeded_airplane(_seeded_transport):
     result = _seeded_transport.airplane(model_mask='@@##@@_@')
-    # assert result ==
+    assert result == 'Tu UD04HH_E'
     result = _seeded_transport.airplane()
-    # assert result ==
+    assert result == 'Tu 181'
     result = _seeded_transport.airplane()
-    # assert result ==
-    pass
+    assert result == 'Airbus 600'
 
 
 def test_vehicle_registration_code(transport):
@@ -79,9 +75,8 @@ def test_vehicle_registration_code(transport):
 
 def test_seeded_vehicle_registration_code(_seeded_transport):
     result = _seeded_transport.vehicle_registration_code(allow_random=True)
-    # assert result ==
+    assert result == 'RI'
     result = _seeded_transport.vehicle_registration_code()
-    # assert result ==
+    assert result == 'BUR'
     result = _seeded_transport.vehicle_registration_code()
-    # assert result ==
-    pass
+    assert result == 'AND'
