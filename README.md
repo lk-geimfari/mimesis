@@ -285,7 +285,7 @@ Mimesis support generating data by schema only starting from version `1.0.0`.
 	- [x] Personal
 	- [x] Science
 	- [x] Structured
-	- [ ] Text
+	- [x] Text
 	- [x] Transport
 	- [x] Unit system
 - [ ] Fix provides and utils for seed supporting

@@ -18,8 +18,7 @@ class Text(BaseProvider):
         :param str lower_case: Return alphabet in lower case.
         :return: Alphabet.
         """
-        case = 'uppercase' if \
-            not lower_case else 'lowercase'
+        case = 'uppercase' if not lower_case else 'lowercase'
 
         alpha = self.data['alphabet'].get(case)
         return alpha
@@ -106,6 +105,8 @@ class Text(BaseProvider):
             Damn.
         """
         bad_words = self.data['words'].get('bad')
+        if self.seed:
+            bad_words = sorted(bad_words)
         return self.random.choice(bad_words)
 
     def quote(self) -> str:
