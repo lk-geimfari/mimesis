@@ -31,10 +31,9 @@ def test_math_formula(default_science):
 
 def test_seeded_math_formula(_seeded_science):
     result = _seeded_science.math_formula()
-    # assert result ==
+    assert result == 'A = (h(a + b))/2'
     result = _seeded_science.math_formula()
-    # assert result ==
-    pass
+    assert result == 'A = (ab)/2'
 
 
 def test_scientific_article(science):
@@ -44,10 +43,9 @@ def test_scientific_article(science):
 
 def test_seeded_scientific_article(_seeded_science):
     result = _seeded_science.scientific_article()
-    # assert result ==
+    assert result == 'https://en.wikipedia.org/wiki/Supernova'
     result = _seeded_science.scientific_article()
-    # assert result ==
-    pass
+    assert result == 'https://en.wikipedia.org/wiki/Hypersurface'
 
 
 def test_chemical_element(science):
@@ -62,12 +60,11 @@ def test_chemical_element(science):
 
 def test_seeded_chemical_element(_seeded_science):
     result = _seeded_science.chemical_element(name_only=True)
-    # assert result ==
+    assert result == 'Roentgenium'
     result = _seeded_science.chemical_element()
-    # assert result ==
+    assert result == 'Cadmium'
     result = _seeded_science.chemical_element()
-    # assert result ==
-    pass
+    assert result == 'Antimony'
 
 
 def test_atomic_number(default_science):
@@ -78,10 +75,9 @@ def test_atomic_number(default_science):
 
 def test_seeded_atomic_number(_seeded_science):
     result = _seeded_science.atomic_number()
-    # assert result ==
+    assert result == 82
     result = _seeded_science.atomic_number()
-    # assert result ==
-    pass
+    assert result == 15
 
 
 def test_rna(default_science):
@@ -92,12 +88,11 @@ def test_rna(default_science):
 
 def test_seeded_rna(_seeded_science):
     result = _seeded_science.rna(length=5)
-    # assert result ==
+    assert result == 'UUGCC'
     result = _seeded_science.rna()
-    # assert result ==
+    assert result == 'CUUAUUUCCU'
     result = _seeded_science.rna()
-    # assert result ==
-    pass
+    assert result == 'CACAGUCAGG'
 
 
 def test_dna(default_science):
@@ -108,9 +103,8 @@ def test_dna(default_science):
 
 def test_seeded_dna(_seeded_science):
     result = _seeded_science.dna(length=5)
-    # assert result ==
+    assert result == 'TTGCC'
     result = _seeded_science.dna()
-    # assert result ==
+    assert result == 'CTTATTTCCT'
     result = _seeded_science.dna()
-    # assert result ==
-    pass
+    assert result == 'CACAGTCAGG'
