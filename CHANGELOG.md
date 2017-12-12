@@ -4,6 +4,7 @@
 
 - Added method `ethereum_address` to `Payment`
 - Added method `get_current_locale` for `BaseProvider`
+- Added method `boolean` for `Development` which returns random boolean value
 
 
 **Updated**:

@@ -67,7 +67,8 @@ class Development(BaseProvider):
         :Example:
             Git
         """
-        return self.random.choice(['Git', 'Subversion'])
+        vcs = ('Git', 'Subversion')
+        return self.random.choice(vcs)
 
     def programming_language(self) -> str:
         """Get a random programming language from the list.
@@ -108,3 +109,12 @@ class Development(BaseProvider):
             Gentoo
         """
         return self.random.choice(OS)
+
+    def boolean(self) -> bool:
+        """Get a random boolean value.
+
+        :return: True of False.
+        """
+        values = (0, 1)
+        value = self.random.choice(values)
+        return bool(value)

@@ -72,3 +72,8 @@ def test_backend(dev):
 def test_os(dev):
     result = dev.os()
     assert result in data.OS
+
+
+def test_boolean(dev):
+    result = dev.boolean()
+    assert result or (not result)
