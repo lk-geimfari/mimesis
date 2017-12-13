@@ -3,11 +3,12 @@ from typing import Any, List, Optional
 
 from mimesis.exceptions import UndefinedSchema
 from mimesis.providers import Generic
+from mimesis.providers.base import StrMixin
 from mimesis.providers.generic import GENERIC_ATTRS
 from mimesis.typing import JSON
 
 
-class Field(object):
+class Field(StrMixin):
     """Field for generating data by schema.
 
     Instance of this object takes any string which represents name
@@ -45,12 +46,6 @@ class Field(object):
                 raise ValueError('Field «{}» is not supported'.format(name))
         else:
             raise ValueError('Undefined field')
-
-    def __str__(self) -> str:
-        return '{}:{}'.format(
-            self.__class__.__name__,
-            self.locale,
-        )
 
     @staticmethod
     def fill(schema: LambdaType, iterations: int = 1) -> List[JSON]:

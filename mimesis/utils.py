@@ -15,7 +15,7 @@ from mimesis import config
 from mimesis.exceptions import UnsupportedLocale
 from mimesis.typing import JSON
 
-__all__ = ['custom_code', 'download_image']
+__all__ = ['custom_code', 'download_image', 'locale_info', 'setup_locale']
 
 PATH = path.abspath(path.join(path.dirname(__file__), 'data'))
 

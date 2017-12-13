@@ -7,7 +7,7 @@ from mimesis.utils import locale_info, setup_locale
 
 class ValidateEnumMixin(object):
     """
-    ValidateEnumMixin for builtins and usual providers.
+    A mixin which helps validate enums.
     """
 
     @staticmethod
@@ -29,6 +29,13 @@ class ValidateEnumMixin(object):
 
         return result.value
 
+
+class StrMixin(object):
+    """
+    A mixin for showing information about the current
+    locale of the current data provider.
+    """
+
     def __str__(self) -> str:
         if hasattr(self, 'locale'):
             locale = getattr(self, 'locale')
@@ -41,10 +48,12 @@ class ValidateEnumMixin(object):
             self.__class__.__name__)
 
 
-class BaseProvider(ValidateEnumMixin):
-    """This is a base class for all providers."""
+class BaseProvider(ValidateEnumMixin, StrMixin):
+    """
+    This is a base class for all data providers.
+    """
 
-    def __init__(self, locale: str = '',
+    def __init__(self, locale: Optional[str] = None,
                  seed: Optional[int] = None) -> None:
         """Base constructor for all providers.
 
@@ -59,6 +68,8 @@ class BaseProvider(ValidateEnumMixin):
             self.random.seed(self.seed)
 
     def get_current_locale(self) -> str:
-        """Current locale of provider. Default for all providers is ``en``.
+        """Current locale of provider.
+
+        ..Note: Default for all providers is locale ``en``.
         """
         return self.locale
