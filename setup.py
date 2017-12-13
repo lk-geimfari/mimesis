@@ -1,3 +1,44 @@
+"""
+Mimesis is a fast and easy to use library for Python programming
+language, which helps generate mock data for a variety of purposes in
+a variety of languages. This data can be particularly useful during
+software development and testing.
+
+Installation
+------------
+
+To install mimesis, simply:
+
+.. code:: bash
+    $ pip install mimesis
+
+
+Documentation
+-------------
+
+Mimesis is very simple to use, and the below examples should help you
+get started. Complete documentation for Mimesis is available on `Read
+the Docs <http://mimesis.readthedocs.io/>`__.
+
+
+Getting started
+---------------
+
+As we said above, this library is really easy to use. A simple usage
+example is given below:
+
+.. code:: python
+
+    >>> from mimesis import Personal
+    >>> from mimesis.enums import Gender
+    >>> person = Personal('en')
+    >>> person.full_name(gender=Gender.FEMALE)
+    'Antonetta Garrison'
+
+    >>> person.occupation()
+    'Backend Developer'
+"""
+
 import json
 import os
 import re
@@ -19,10 +60,6 @@ try:
         tests_requirements = f.read().splitlines()
 except FileNotFoundError:
     tests_requirements = []
-
-# Long description.
-with open('PYPI_README.rst', 'r', encoding='utf-8') as f:
-    readme = f.read()
 
 about = {}
 # Get meta-data from __version__.py
@@ -234,7 +271,7 @@ setup(
     name=about['__title__'],
     version=about['__version__'],
     description=about['__description__'],
-    long_description=readme,
+    long_description=__doc__,
     author=about['__author__'],
     author_email=about['__author_email__'],
     url=about['__url__'],
