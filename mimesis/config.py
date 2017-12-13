@@ -142,6 +142,3 @@ LIST_OF_LOCALES = list(SUPPORTED_LOCALES.keys())
 
 # Default locale.
 DEFAULT_LOCALE = 'en'
-
-# TODO: move this to json file as "separated_by_gender": True/False
-SURNAMES_SEPARATED_BY_GENDER = ('el', 'ru', 'is', 'uk', 'kk')
