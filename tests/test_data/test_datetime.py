@@ -42,13 +42,13 @@ def test_date(dt):
     assert result.year == 1999  # check range was applied correctly
 
     date = dt.date(start=2018, end=2018)
-    result_fmt = datetime.datetime.strptime(date, dt.data['formats']['date'])
+    result_fmt = datetime.datetime.strptime(date, dt._data['formats']['date'])
     assert result_fmt.year == 2018
 
 
 def test_time(dt):
     default = dt.time()
-    default = datetime.datetime.strptime(default, dt.data['formats']['time'])
+    default = datetime.datetime.strptime(default, dt._data['formats']['time'])
 
     assert isinstance(default, datetime.datetime)
 
@@ -65,10 +65,10 @@ def test_century(_datetime):
 
 def test_day_of_week(dt):
     result = dt.day_of_week()
-    assert result in dt.data['day']['name']
+    assert result in dt._data['day']['name']
 
     result_abbr = dt.day_of_week(abbr=True)
-    assert result_abbr in dt.data['day']['abbr']
+    assert result_abbr in dt._data['day']['abbr']
 
 
 def test_month(dt):
@@ -81,7 +81,7 @@ def test_month(dt):
 
 def test_periodicity(dt):
     result = dt.periodicity()
-    assert result in dt.data['periodicity']
+    assert result in dt._data['periodicity']
 
 
 def test_timezone(_datetime):

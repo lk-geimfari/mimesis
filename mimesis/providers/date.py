@@ -16,7 +16,7 @@ class Datetime(BaseProvider):
         :param str locale: Current locale.
         """
         super().__init__(*args, **kwargs)
-        self.data = pull('datetime.json', self.locale)
+        self._data = pull('datetime.json', self.locale)
 
     def week_date(self, start: int = 2017, end: int = 2018) -> str:
         """Get week number with year.
@@ -45,7 +45,7 @@ class Datetime(BaseProvider):
             Wednesday
         """
         key = 'abbr' if abbr else 'name'
-        days = self.data['day'].get(key)
+        days = self._data['day'].get(key)
         return self.random.choice(days)
 
     def month(self, abbr: bool = False) -> str:
@@ -58,7 +58,7 @@ class Datetime(BaseProvider):
             January
         """
         key = 'abbr' if abbr else 'name'
-        months = self.data['month'].get(key)
+        months = self._data['month'].get(key)
         return self.random.choice(months)
 
     def year(self, minimum: int = 1990,
@@ -92,7 +92,7 @@ class Datetime(BaseProvider):
         :Example:
             Never.
         """
-        periodicity = self.data['periodicity']
+        periodicity = self._data['periodicity']
         return self.random.choice(periodicity)
 
     def date(self, start: int = 2000, end: int = 2035,
@@ -109,7 +109,7 @@ class Datetime(BaseProvider):
             08/16/88 (en)
         """
         if not fmt:
-            fmt = self.data['formats'].get('date')
+            fmt = self._data['formats'].get('date')
 
         year = self.random.randint(start, end)
         month = self.random.randint(1, 12)
@@ -127,7 +127,7 @@ class Datetime(BaseProvider):
             21:30:00
         """
         if not fmt:
-            fmt = self.data['formats'].get('time')
+            fmt = self._data['formats'].get('time')
 
         t = time(
             self.random.randint(0, 23),
