@@ -21,7 +21,7 @@ class Personal(BaseProvider):
         :param str locale: Current locale.
         """
         super().__init__(*args, **kwargs)
-        self.data = pull('personal.json', self.locale)
+        self._data = pull('personal.json', self.locale)
         self._store = {
             'age': 0,
         }
@@ -75,7 +75,7 @@ class Personal(BaseProvider):
             John.
         """
         key = self._validate_enum(gender, Gender)
-        names = self.data['names'].get(key)
+        names = self._data['names'].get(key)
         return self.random.choice(names)
 
     def surname(self, gender: Optional[Gender] = None) -> str:
@@ -87,7 +87,7 @@ class Personal(BaseProvider):
         :Example:
             Smith.
         """
-        surnames = self.data['surnames']
+        surnames = self._data['surnames']
 
         # Surnames separated by gender.
         if isinstance(surnames, dict):
@@ -120,7 +120,7 @@ class Personal(BaseProvider):
         title_key = self._validate_enum(
             item=title_type, enum=TitleType)
 
-        titles = self.data['title'][gender_key][title_key]
+        titles = self._data['title'][gender_key][title_key]
         return self.random.choice(titles)
 
     def full_name(self, gender: Optional[Gender] = None,
@@ -302,7 +302,7 @@ class Personal(BaseProvider):
         if symbol:
             return self.random.choice(GENDER_SYMBOLS)
 
-        gender = self.random.choice(self.data['gender'])
+        gender = self.random.choice(self._data['gender'])
         return gender
 
     def height(self, minimum: float = 1.5, maximum: float = 2.0) -> str:
@@ -353,7 +353,7 @@ class Personal(BaseProvider):
         if symbol:
             return self.random.choice(SEXUALITY_SYMBOLS)
 
-        sexuality = self.data['sexuality']
+        sexuality = self._data['sexuality']
         return self.random.choice(sexuality)
 
     def occupation(self) -> str:
@@ -364,7 +364,7 @@ class Personal(BaseProvider):
         :Example:
             Programmer.
         """
-        jobs = self.data['occupation']
+        jobs = self._data['occupation']
         return self.random.choice(jobs)
 
     def political_views(self) -> str:
@@ -375,7 +375,7 @@ class Personal(BaseProvider):
         :Example:
             Liberal.
         """
-        views = self.data['political_views']
+        views = self._data['political_views']
         return self.random.choice(views)
 
     def worldview(self) -> str:
@@ -386,7 +386,7 @@ class Personal(BaseProvider):
         :Example:
             Pantheism.
         """
-        views = self.data['worldview']
+        views = self._data['worldview']
         return self.random.choice(views)
 
     def views_on(self) -> str:
@@ -397,7 +397,7 @@ class Personal(BaseProvider):
         :Example:
             Negative.
         """
-        views = self.data['views_on']
+        views = self._data['views_on']
         return self.random.choice(views)
 
     def nationality(self, gender: Optional[Gender] = None) -> str:
@@ -410,7 +410,7 @@ class Personal(BaseProvider):
         :Example:
             Russian
         """
-        nationalities = self.data['nationality']
+        nationalities = self._data['nationality']
 
         # Separated by gender
         if isinstance(nationalities, dict):
@@ -427,7 +427,7 @@ class Personal(BaseProvider):
         :Example:
             MIT.
         """
-        universities = self.data['university']
+        universities = self._data['university']
         return self.random.choice(universities)
 
     def academic_degree(self) -> str:
@@ -438,7 +438,7 @@ class Personal(BaseProvider):
         :Example:
             Bachelor.
         """
-        degrees = self.data['academic_degree']
+        degrees = self._data['academic_degree']
         return self.random.choice(degrees)
 
     def language(self) -> str:
@@ -449,7 +449,7 @@ class Personal(BaseProvider):
         :Example:
             Irish.
         """
-        languages = self.data['language']
+        languages = self._data['language']
         return self.random.choice(languages)
 
     def favorite_movie(self) -> str:
@@ -460,7 +460,7 @@ class Personal(BaseProvider):
         :Example:
             Interstellar.
         """
-        movies = self.data['favorite_movie']
+        movies = self._data['favorite_movie']
         return self.random.choice(movies)
 
     def favorite_music_genre(self) -> str:
@@ -486,7 +486,7 @@ class Personal(BaseProvider):
         if not mask:
             code = self.random.choice(CALLING_CODES)
             default = '{}-(###)-###-####'.format(code)
-            masks = self.data.get('telephone_fmt', [default])
+            masks = self._data.get('telephone_fmt', [default])
             mask = self.random.choice(masks)
 
         return custom_code(mask=mask, digit=placeholder)
