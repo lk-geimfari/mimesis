@@ -92,7 +92,7 @@ class Personal(BaseProvider):
         # Surnames separated by gender.
         if isinstance(surnames, dict):
             key = self._validate_enum(gender, Gender)
-            return self.random.choice(surnames[key])
+            surnames = surnames[key]
 
         return self.random.choice(surnames)
 
@@ -410,14 +410,14 @@ class Personal(BaseProvider):
         :Example:
             Russian
         """
-        nationality = self.data['nationality']
+        nationalities = self.data['nationality']
 
         # Separated by gender
-        if isinstance(nationality, dict):
+        if isinstance(nationalities, dict):
             key = self._validate_enum(gender, Gender)
-            return self.random.choice(nationality[key])
+            nationalities = nationalities[key]
 
-        return self.random.choice(nationality)
+        return self.random.choice(nationalities)
 
     def university(self) -> str:
         """Get a random university.
