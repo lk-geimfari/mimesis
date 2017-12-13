@@ -34,9 +34,9 @@ example is given below:
     >>> person = Personal('en')
     >>> person.full_name(gender=Gender.FEMALE)
     'Antonetta Garrison'
-
     >>> person.occupation()
     'Backend Developer'
+
 """
 
 import json
