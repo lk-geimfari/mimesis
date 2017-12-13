@@ -104,7 +104,7 @@ def test_state_aliases(address):
 
 def test_postal_code(address):
     result = address.postal_code()
-    current_locale = address.locale
+    current_locale = address.get_current_locale()
 
     if current_locale in p.POSTAL_CODE_REGEX:
         assert re.match(p.POSTAL_CODE_REGEX[current_locale], result)

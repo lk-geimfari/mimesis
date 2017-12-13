@@ -31,7 +31,7 @@ def test_scientific_article(science):
 
 def test_chemical_element(science):
     # Some issues with Farsi
-    if science.locale != 'fa':
+    if science.get_current_locale() != 'fa':
         result = science.chemical_element(name_only=True)
         assert len(result) >= 1
 

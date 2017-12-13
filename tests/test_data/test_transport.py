@@ -40,4 +40,4 @@ def test_vehicle_registration_code(transport):
     assert result in VR_CODES
 
     result = transport.vehicle_registration_code(allow_random=False)
-    assert result in VRC_BY_LOCALES[transport.locale]
+    assert result in VRC_BY_LOCALES[transport.get_current_locale()]

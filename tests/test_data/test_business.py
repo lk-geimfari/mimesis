@@ -52,7 +52,8 @@ def test_company(business):
 
 
 def test_price(business):
-    currencies = CURRENCY_SYMBOLS[business.locale]
+    locale = business.get_current_locale()
+    currencies = CURRENCY_SYMBOLS[locale]
     result = business.price(minimum=100.00, maximum=1999.99)
     price, symbol = result.split(' ')
     assert isinstance(price, str)
