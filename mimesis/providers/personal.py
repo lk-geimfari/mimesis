@@ -1,7 +1,6 @@
 from string import ascii_letters, digits, punctuation
 from typing import Optional, Union
 
-from mimesis.config import SURNAMES_SEPARATED_BY_GENDER
 from mimesis.data import (BLOOD_GROUPS, CALLING_CODES, EMAIL_DOMAINS,
                           ENGLISH_LEVEL, GENDER_SYMBOLS, MUSIC_GENRE,
                           SEXUALITY_SYMBOLS, SOCIAL_NETWORKS, USERNAMES)
@@ -90,10 +89,10 @@ class Personal(BaseProvider):
         """
         surnames = self.data['surnames']
 
-        # Separated by gender.
-        if self.locale in SURNAMES_SEPARATED_BY_GENDER:
+        # Surnames separated by gender.
+        if isinstance(surnames, dict):
             key = self._validate_enum(gender, Gender)
-            return self.random.choice(surnames.get(key))
+            return self.random.choice(surnames[key])
 
         return self.random.choice(surnames)
 
@@ -409,18 +408,16 @@ class Personal(BaseProvider):
         :return: Nationality.
 
         :Example:
-            Russian.
+            Russian
         """
-        # Subtleties of the orthography.
-        separated_locales = ['cs', 'ru', 'uk', 'kk']
+        nationality = self.data['nationality']
 
-        nations = self.data['nationality']
-
-        if self.locale in separated_locales:
+        # Separated by gender
+        if isinstance(nationality, dict):
             key = self._validate_enum(gender, Gender)
-            return self.random.choice(nations[key])
+            return self.random.choice(nationality[key])
 
-        return self.random.choice(nations)
+        return self.random.choice(nationality)
 
     def university(self) -> str:
         """Get a random university.

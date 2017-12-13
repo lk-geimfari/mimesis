@@ -5,7 +5,6 @@ import re
 import pytest
 
 import mimesis
-from mimesis import config
 from mimesis.data import (BLOOD_GROUPS, ENGLISH_LEVEL, GENDER_SYMBOLS,
                           MUSIC_GENRE, SEXUALITY_SYMBOLS)
 from mimesis.enums import Gender, SocialNetwork, TitleType
@@ -205,13 +204,15 @@ def test_telephone(personal):
     ],
 )
 def test_surname(personal, gender):
-    if personal.locale in config.SURNAMES_SEPARATED_BY_GENDER:
+    surnames = personal.data['surnames']
 
+    # Surnames separated by gender.
+    if isinstance(surnames, dict):
         result = personal.surname(gender=gender)
-        assert result in personal.data['surnames'][gender.value]
+        assert result in surnames[gender.value]
     else:
         result = personal.surname()
-        assert result in personal.data['surnames']
+        assert result in surnames
 
 
 @pytest.mark.parametrize(
@@ -318,7 +319,8 @@ def test_title(personal, gender, title_type):
     ],
 )
 def test_nationality(personal, gender):
-    if personal.locale in ['ru', 'uk', 'kk']:
+    nationality = personal.data['nationality']
+    if isinstance(nationality, dict):
         result = personal.nationality(gender=gender)
         assert result in personal.data['nationality'][gender.value]
 
