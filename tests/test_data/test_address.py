@@ -58,13 +58,13 @@ def test_coordinates(_address):
 def test_street_name(address):
     result = address.street_name()
     assert isinstance(result, str)
-    assert result in address.data['street']['name']
+    assert result in address._data['street']['name']
 
 
 def test_street_suffix(address):
     result = address.street_suffix()
     assert isinstance(result, str)
-    assert result in address.data['street']['suffix']
+    assert result in address._data['street']['suffix']
 
 
 def test_address(address):
@@ -75,10 +75,10 @@ def test_address(address):
 
 def test_state(address):
     result = address.state()
-    assert result in address.data['state']['name']
+    assert result in address._data['state']['name']
 
     result_abbr = address.state(abbr=True)
-    assert result_abbr in address.data['state']['abbr']
+    assert result_abbr in address._data['state']['abbr']
 
 
 def test_state_aliases(address):
@@ -86,7 +86,7 @@ def test_state_aliases(address):
     region = address.region()
     federal_subject = address.federal_subject()
 
-    states = address.data['state']['name']
+    states = address._data['state']['name']
 
     assert province in states
     assert region in states
@@ -96,7 +96,7 @@ def test_state_aliases(address):
     region = address.region(abbr=True)
     federal_subject = address.federal_subject(abbr=True)
 
-    abbreviations = address.data['state']['abbr']
+    abbreviations = address._data['state']['abbr']
     assert province in abbreviations
     assert region in abbreviations
     assert federal_subject in abbreviations
@@ -114,7 +114,7 @@ def test_postal_code(address):
 
 def test_country(address):
     result = address.country()
-    assert result in address.data['country']['name']
+    assert result in address._data['country']['name']
 
 
 @pytest.mark.parametrize(
@@ -136,12 +136,12 @@ def test_country_iso(_address, fmt, length):
 
 def test_city(address):
     result = address.city()
-    assert result in address.data['city']
+    assert result in address._data['city']
 
 
 def test_continent(address):
     result = address.continent()
-    assert result in address.data['continent']
+    assert result in address._data['continent']
 
     result = address.continent(code=True)
     assert result in CONTINENT_CODES

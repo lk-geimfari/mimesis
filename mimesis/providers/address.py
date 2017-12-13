@@ -16,7 +16,7 @@ class Address(BaseProvider):
         :param str locale: Current locale.
         """
         super().__init__(*args, **kwargs)
-        self.data = pull('address.json', self.locale)
+        self._data = pull('address.json', self.locale)
 
     def street_number(self, maximum: int = 1400) -> str:
         """Generate a random street number.
@@ -38,7 +38,7 @@ class Address(BaseProvider):
         :Example:
            Candlewood.
         """
-        names = self.data['street'].get('name')
+        names = self._data['street'].get('name')
         return self.random.choice(names)
 
     def street_suffix(self) -> str:
@@ -49,7 +49,7 @@ class Address(BaseProvider):
         :Example:
             Alley.
         """
-        suffixes = self.data['street'].get('suffix')
+        suffixes = self._data['street'].get('suffix')
         return self.random.choice(suffixes)
 
     def address(self) -> str:
@@ -60,7 +60,7 @@ class Address(BaseProvider):
         :Example:
             5 Central Sideline.
         """
-        fmt = self.data['address_fmt']
+        fmt = self._data['address_fmt']
 
         st_num = self.street_number()
         st_name = self.street_name()
@@ -72,7 +72,7 @@ class Address(BaseProvider):
             )
 
         if self.locale == 'ja':
-            cities = self.data['city']
+            cities = self._data['city']
             city = self.random.choice(cities)
 
             n, nn, nnn = self.random.randints(3, 1, 100)
@@ -95,7 +95,7 @@ class Address(BaseProvider):
             Alabama (for locale `en`).
         """
         key = 'abbr' if abbr else 'name'
-        states = self.data['state'].get(key)
+        states = self._data['state'].get(key)
         return self.random.choice(states)
 
     def region(self, abbr: bool = False) -> str:
@@ -131,7 +131,7 @@ class Address(BaseProvider):
             389213
         """
 
-        mask = self.data['postal_code_fmt']
+        mask = self._data['postal_code_fmt']
         return custom_code(mask=mask)
 
     def country_iso_code(self, fmt: Optional[CountryCode] = None) -> str:
@@ -161,7 +161,7 @@ class Address(BaseProvider):
         :Example:
             Russia.
         """
-        countries = self.data['country'].get('name')
+        countries = self._data['country'].get('name')
         return self.random.choice(countries)
 
     def city(self) -> str:
@@ -172,7 +172,7 @@ class Address(BaseProvider):
         :Example:
             Saint Petersburg.
         """
-        cities = self.data['city']
+        cities = self._data['city']
         return self.random.choice(cities)
 
     def latitude(self) -> float:
@@ -221,10 +221,9 @@ class Address(BaseProvider):
             Africa (en)
         """
         if code:
-            return self.random.choice(
-                CONTINENT_CODES)
+            return self.random.choice(CONTINENT_CODES)
 
-        continents = self.data['continent']
+        continents = self._data['continent']
         return self.random.choice(continents)
 
     def calling_code(self) -> str:
