@@ -2,9 +2,10 @@
 
 **Added**:
 
-- Added method `ethereum_address` to `Payment`
+- Added method `ethereum_address` for `Payment`
 - Added method `get_current_locale` for `BaseProvider`
 - Added method `boolean` for `Development` which returns random boolean value
+- Added method `integers` for `Numbers`
 
 
 **Updated**:

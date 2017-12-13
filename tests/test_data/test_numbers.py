@@ -19,6 +19,24 @@ def test_floats(numbers):
     assert isinstance(result, list)
 
 
+@pytest.mark.parametrize(
+    'start, end', [
+        (1, 10),
+        (10, 20),
+        (20, 30),
+    ],
+)
+def test_integers(numbers, start, end):
+    result = numbers.integers(start=start, end=end)
+
+    assert max(result) <= end
+    assert min(result) >= start
+    assert isinstance(result, list)
+
+    element = numbers.random.choice(result)
+    assert isinstance(element, int)
+
+
 def test_primes(numbers):
     result = numbers.primes()
     assert len(result) == 168

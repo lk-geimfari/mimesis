@@ -1,14 +1,13 @@
-from typing import List
+from typing import List, Union
 
 from mimesis.providers.base import BaseProvider
-from mimesis.typing import Number
 
 
 class Numbers(BaseProvider):
     """Class for generating numbers"""
 
     def floats(self, n: int = 2) -> List[float]:
-        """Generate an array of random float number of 10 ** n.
+        """Generate a list of random float numbers of 10 ** n.
 
         :param n: Raise 10 to the 'n' power.
         :return: The list of floating-point numbers.
@@ -17,6 +16,21 @@ class Numbers(BaseProvider):
         nums = [self.random.random()
                 for _ in range(10 ** int(n))]
         return nums
+
+    @staticmethod
+    def integers(start: int = 0, end: int = 10) -> List[int]:
+        """Generate a list of random integers, which
+        can be negative or positive numbers.
+
+        :param start: Start.
+        :param end: End.
+        :return: List of integers.
+
+        :Example:
+            [-20, -19, -18, -17]
+        """
+        numbers = [i for i in range(start, end)]
+        return numbers
 
     @staticmethod
     def primes(start: int = 1, end: int = 999) -> List[int]:
@@ -48,7 +62,7 @@ class Numbers(BaseProvider):
                 break
         return primes[chop_index:]
 
-    def digit(self, to_bin: bool = False) -> Number:
+    def digit(self, to_bin: bool = False) -> Union[str, int]:
         """Get a random digit.
 
         :param to_bin: If True then convert to binary.
@@ -72,8 +86,8 @@ class Numbers(BaseProvider):
         :param maximum: Maximum of range.
         :return: Number.
         """
-        num = self.random.randint(int(minimum), int(maximum))
-        return num
+        number = self.random.randint(minimum, maximum)
+        return number
 
     def rating(self, maximum: float = 5.0) -> float:
         """Generate random rating for something.

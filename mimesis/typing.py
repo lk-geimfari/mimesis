@@ -23,8 +23,6 @@ _StrOrInt = Union[str, int]
 
 Size = _StrOrInt
 
-Number = _StrOrInt
-
 Bytes = bytes
 
 DateTime = Union[datetime.datetime, Any]
