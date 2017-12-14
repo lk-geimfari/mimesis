@@ -306,10 +306,7 @@ setup(
         ],
     },
     data_files=[
-        ('', ['LICENSE',
-              'PYPI_README.rst',
-              ],
-         ),
+        ('', ['LICENSE']),
     ],
     classifiers=[
         'License :: OSI Approved :: MIT License',

@@ -66,33 +66,3 @@ def test_not_implemented_error():
 
     with pytest.raises(KeyError):
         user()
-
-
-# --- type_to() ---
-
-@mimesis.decorators.type_to(tuple)
-def fixture_list():
-    return ['this', 'is', 'a', 'list']
-
-
-@mimesis.decorators.type_to(list)
-def fixture_tuple():
-    return 'this', 'is', 'a', 'list'
-
-
-@mimesis.decorators.type_to(list, check_len=True)
-def fixture_check_len():
-    return ['one element']
-
-
-@pytest.mark.parametrize(
-    'fixture, fixture_type', [
-        (fixture_list(), tuple),
-        (fixture_tuple(), list),
-    ],
-)
-def test_type_to(fixture, fixture_type):
-    assert isinstance(fixture, fixture_type)
-    # When we use check_len=True and length of returned object == 1,
-    # decorator just returns first element.
-    assert isinstance(fixture_check_len(), str)

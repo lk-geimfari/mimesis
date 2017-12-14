@@ -51,7 +51,8 @@ def test_pull():
     ],
 )
 def test_download_image(ctx):
-    url = 'https://raw.githubusercontent.com/lk-geimfari/mimesis/master/media/logo.png'
+    url = 'https://raw.githubusercontent.com/lk-geimfari/' \
+          'mimesis/master/media/logo.png'
 
     if is_connected():
         verified = download_image(url=url, unverified_ctx=ctx)

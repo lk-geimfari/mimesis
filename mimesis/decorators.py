@@ -37,28 +37,3 @@ def romanized(locale: str = '') -> Callable:
         return wrapper
 
     return romanized_deco
-
-
-def type_to(new_type: Callable,
-            check_len: bool = False) -> Callable:
-    """Convert result of function to different type. This is
-    internal function.
-
-    :param new_type: New type.
-    :param bool check_len: Check length of object.
-    :return: Converted to new_type object.
-    """
-
-    def inner(func):
-        @functools.wraps(func)
-        def wrapper(*args, **kwargs):
-            result = func(*args, **kwargs)
-            result = new_type(result)
-
-            if check_len and len(result) == 1:
-                return result[0]
-            return result
-
-        return wrapper
-
-    return inner
