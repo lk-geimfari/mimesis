@@ -19,7 +19,7 @@ class UnsupportedLocale(KeyError):
 class UndefinedSchema(ValueError):
     """ Raised when schema is empty. """
 
-    def __str__(self):
+    def __str__(self) -> str:
         return 'Schema should be defined in lambda.'
 
 
@@ -41,14 +41,14 @@ class NonEnumerableError(TypeError):
 
 
 class UnsupportedField(ValueError):
-    def __init__(self, name: Optional[str] = None):
+    def __init__(self, name: Optional[str] = None) -> None:
         self.name = name
         self.message = 'Field «{}» is not supported.'
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.message.format(self.name)
 
 
 class UndefinedField(ValueError):
-    def __str__(self):
+    def __str__(self) -> str:
         return 'Undefined field. Filed cannot be None.'
