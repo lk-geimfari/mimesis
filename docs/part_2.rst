@@ -294,48 +294,46 @@ the object ``Generic()``. You can use it directly, as shown below:
 Generate data by schema
 -----------------------
 
-For generating data by schema, just create instance of ``Field`` object,
+For generating data by schema, just create instance of  ``Field`` object,
 which take any string which represents name of the any method of any
-supported data provider and the ``**kwargs`` of the method, after that
-you should describe the schema in ``lambda`` function and run filling the
-schema using method ``fill()``:
+supported data provider and the `**kwargs` of the method, after that
+you should describe the schema in lambda function and pass it to the object
+``Schema`` and call method ``create()``:
 
 .. code:: python
-
-    >>> from mimesis.schema import Field
+    >>> from mimesis.schema import Field, Schema
     >>> from mimesis.enums import Gender
     >>> _ = Field('en')
-    >>> app_schema = (
+    >>> description = (
     ...     lambda: {
     ...         "id": _('uuid'),
     ...         "name": _('word'),
-    ...         "version": _('version'),
+    ...         "version": _('version', pre_release=True),
     ...         "owner": {
-    ...             "email": _('email'),
+    ...             "email": _('email', key=str.lower),
     ...             "token": _('token'),
-    ...             "creator": _('full_name', gender=Gender.FEMALE)
-    ...         }
+    ...             "creator": _('full_name', gender=Gender.FEMALE),
+    ...         },
     ...     }
     ... )
-    >>>
-    >>> _.fill(schema=app_schema, iterations=10)
+    >>> schema = Schema(schema=description)
+    >>> schema.create(iterations=1)
 
-Result:
+Output:
 
 .. code:: json
 
     [
       {
-        "id": "790cce21-5f75-2652-2ee2-f9d90a26c43d",
-        "name": "container",
         "owner": {
-          "email": "anjelica8481@outlook.com",
-          "token": "0bf924125640c46aad2a860f40ec4b7f33a516c497957abd70375c548ed56978",
-          "creator": "Ileen Ellis"
+          "email": "aisling2032@yahoo.com",
+          "token": "cc8450298958f8b95891d90200f189ef591cf2c27e66e5c8f362f839fcc01370",
+          "creator": "Veronika Dyer"
         },
-        "version": "4.11.6"
-      },
-      ...
+        "version": "4.3.1-rc.5",
+        "name": "pleasure",
+        "id": "33abf08a-77fd-1d78-86ae-04d88443d0e0"
+      }
     ]
 
 
