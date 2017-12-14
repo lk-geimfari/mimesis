@@ -69,20 +69,20 @@ Generating by schema
 Builtin data providers
 ----------------------
 
-+------+--------------------------+------------------------------------------------------------------+
-| №    | Provider                 | Description                                                      |
-+======+==========================+==================================================================+
-|  1   | RussiaSpecProvider       | Specific data provider for Russia                                |
-+------+--------------------------+------------------------------------------------------------------+
-|  2   | BrazilSpecProvider       | Specific data provider for Brazil                                |
-+------+--------------------------+------------------------------------------------------------------+
-|  3   | JapanSpecProvider        | Specific data provider for Japan                                 |
-+------+--------------------------+------------------------------------------------------------------+
-|  4   | USASpecProvider          | Specific data provider for USA                                   |
-+------+--------------------------+------------------------------------------------------------------+
-|  5   | NetherlandsSpecProvider  | Specific data provider for Netherlands                           |
-+------+--------------------------+------------------------------------------------------------------+
-|  6   | GermanySpecProvider      | Specific data provider for Germany                               |
-+------+--------------------------+------------------------------------------------------------------+
-|  7   | UkraineSpecProvider      | Specific data provider for Ukraine                               |
-+------+--------------------------+------------------------------------------------------------------+
++------+----------------------------------+--------------------------------------------+
+| №    | Provider                         | Description                                |
++======+==================================+============================================+
+|  1   | builtins.RussiaSpecProvider      | Specific data provider for Russia          |
++------+----------------------------------+--------------------------------------------+
+|  2   | builtins.BrazilSpecProvider      | Specific data provider for Brazil          |
++------+----------------------------------+--------------------------------------------+
+|  3   | builtins.JapanSpecProvider       | Specific data provider for Japan           |
++------+----------------------------------+--------------------------------------------+
+|  4   | builtins.USASpecProvider         | Specific data provider for USA             |
++------+----------------------------------+--------------------------------------------+
+|  5   | builtins.NetherlandsSpecProvider | Specific data provider for Netherlands     |
++------+----------------------------------+--------------------------------------------+
+|  6   | builtins.GermanySpecProvider     | Specific data provider for Germany         |
++------+----------------------------------+--------------------------------------------+
+|  7   | builtins.UkraineSpecProvider     | Specific data provider for Ukraine         |
++------+----------------------------------+--------------------------------------------+
