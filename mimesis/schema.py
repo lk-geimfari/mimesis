@@ -2,20 +2,22 @@ from types import LambdaType
 from typing import Any, List, Optional
 
 from mimesis.exceptions import UndefinedSchema
-from mimesis.providers import Generic
 from mimesis.providers.base import StrMixin
-from mimesis.providers.generic import GENERIC_ATTRS
+from mimesis.providers.generic import GENERIC_ATTRS, Generic
 from mimesis.typing import JSON
 
+__all__ = ['AbstractField', 'Field']
 
-class Field(StrMixin):
-    """Field for generating data by schema.
+
+class AbstractField(StrMixin):
+    """
+    AbstractField is a class for generating data by the name of the method.
 
     Instance of this object takes any string which represents name
     of the any method of any supported data provider and the ``**kwargs``
     of the method:
 
-    >>> _ = Field('en')
+    >>> _ = AbstractField('en')
     >>> _('full_name')
     'Benedict Larson'
     """
@@ -46,6 +48,12 @@ class Field(StrMixin):
                 raise ValueError('Field «{}» is not supported'.format(name))
         else:
             raise ValueError('Undefined field')
+
+
+class Field(AbstractField):
+    """
+    Subclass of AbstractField which supports method ``fill()``.
+    """
 
     @staticmethod
     def fill(schema: LambdaType, iterations: int = 1) -> List[JSON]:

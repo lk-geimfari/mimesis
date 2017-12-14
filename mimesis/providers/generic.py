@@ -24,7 +24,7 @@ from mimesis.providers.units import UnitSystem
 
 # When you add new data provider, don't forget to add it's name
 # which you use in Generic to elements of this list in alphabetical order.
-# GENERIC ATTRS has used by the object mimesis.schema.Field
+# GENERIC ATTRS has used by the object mimesis.schema.AbstractField
 GENERIC_ATTRS = [
     'address',
     'business',
