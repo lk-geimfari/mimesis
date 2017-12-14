@@ -1,12 +1,13 @@
 from types import LambdaType
-from typing import Any, List, Optional
+from typing import Any, Callable, List, Optional
 
-from mimesis.exceptions import UndefinedSchema
+from mimesis.exceptions import (UndefinedField, UndefinedSchema,
+                                UnsupportedField)
 from mimesis.providers.base import StrMixin
-from mimesis.providers.generic import GENERIC_ATTRS, Generic
+from mimesis.providers.generic import Generic
 from mimesis.typing import JSON
 
-__all__ = ['AbstractField', 'Field']
+__all__ = ['AbstractField', 'Field', 'Schema']
 
 
 class AbstractField(StrMixin):
@@ -26,47 +27,53 @@ class AbstractField(StrMixin):
         self.locale = locale
         self.gen = Generic(self.locale)
 
-    def __call__(self, name: Optional[str] = None, **kwargs) -> Any:
+    def __call__(self, name: Optional[str] = None,
+                 key: Optional[Callable] = None, **kwargs) -> Any:
         """This magic override standard call so it's take any string which
         represents name of the any method of any supported data provider
         and the ``**kwargs`` of this method.
 
         :param name: Name of method.
+        :param key: A key function (or other callable object)
+            which will be applied to result.
         :param kwargs: Kwargs of method.
         :return: Value which represented by method.
         :raises ValueError: if provider is not
             supported or if field is not defined.
         """
-        if name is not None:
-            for provider in GENERIC_ATTRS:
-                if hasattr(self.gen, provider):
-                    provider = getattr(self.gen, provider)
-                    if hasattr(provider, name):
-                        method = getattr(provider, name)
-                        return method(**kwargs)
+        if name is None:
+            raise UndefinedField()
+
+        # TODO: This is a really slow solution. Fix it.
+        for provider in dir(self.gen):
+            if hasattr(self.gen, provider):
+                provider = getattr(self.gen, provider)
+                if name in dir(provider):
+                    method = getattr(provider, name)
+                    result = method(**kwargs)
+                    if key and callable(key):
+                        return key(result)
+                    return result
             else:
-                raise ValueError('Field «{}» is not supported'.format(name))
+                continue
         else:
-            raise ValueError('Undefined field')
+            raise UnsupportedField(name)
 
 
-class Field(AbstractField):
+class Schema(object):
     """
-    Subclass of AbstractField which supports method ``fill()``.
+    Class which return list of filled schemas.
     """
 
-    @staticmethod
-    def fill(schema: LambdaType, iterations: int = 1) -> List[JSON]:
-        """Fill schema with data.
-
-        :param lambda schema: Lambda function with schema.
-        :param int iterations: Count of iterations.
-        :return: Filled schema.
-        :raises UndefinedSchema: if schema is empty dict.
-        """
-        if schema() and isinstance(schema, LambdaType):
-            result = map(lambda _: schema(), range(iterations))
-            return list(result)
+    def __init__(self, schema: LambdaType) -> None:
+        if callable(schema) and isinstance(schema, LambdaType):
+            self.schema = schema
         else:
-            raise UndefinedSchema(
-                'Schema should be defined in lambda.')
+            raise UndefinedSchema()
+
+    def create(self, iterations: int = 1) -> List[JSON]:
+        data = map(lambda _: self.schema(), range(iterations))
+        return list(data)
+
+
+Field = AbstractField

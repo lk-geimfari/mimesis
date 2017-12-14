@@ -1,4 +1,5 @@
 import inspect
+from typing import List
 
 from mimesis.providers.address import Address
 from mimesis.providers.base import BaseProvider
@@ -21,32 +22,6 @@ from mimesis.providers.science import Science
 from mimesis.providers.text import Text
 from mimesis.providers.transport import Transport
 from mimesis.providers.units import UnitSystem
-
-# When you add new data provider, don't forget to add it's name
-# which you use in Generic to elements of this list in alphabetical order.
-# GENERIC ATTRS has used by the object mimesis.schema.AbstractField
-GENERIC_ATTRS = [
-    'address',
-    'business',
-    'clothing_sizes',
-    'code',
-    'cryptographic',
-    'datetime',
-    'development',
-    'file',
-    'food',
-    'games',
-    'hardware',
-    'internet',
-    'numbers',
-    'path',
-    'payment',
-    'personal',
-    'science',
-    'text',
-    'transport',
-    'unit_system',
-]
 
 
 class Generic(BaseProvider):
@@ -84,6 +59,12 @@ class Generic(BaseProvider):
         attribute = object.__getattribute__(self, '_' + attrname)
         if attribute and callable(attribute):
             return attribute(self.locale)
+
+    def __dir__(self) -> List[str]:
+        exclude = BaseProvider().__dict__.keys()
+        attrs = [a.replace('_', '') for a
+                 in self.__dict__ if a not in exclude]
+        return attrs
 
     def add_provider(self, cls) -> None:
         """Add a custom provider to Generic() object.
