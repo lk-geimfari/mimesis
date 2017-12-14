@@ -12,7 +12,7 @@ class Business(BaseProvider):
         :param str locale: Current locale.
         """
         super().__init__(*args, **kwargs)
-        self.data = pull('business.json', self.locale)
+        self._data = pull('business.json', self.locale)
 
     def company_type(self, abbr: bool = False) -> str:
         """Get a random type of business entity.
@@ -24,7 +24,7 @@ class Business(BaseProvider):
             Incorporated.
         """
         key = 'abbr' if abbr else 'title'
-        company_type = self.data['company'].get(
+        company_type = self._data['company'].get(
             'type').get(key)
         return self.random.choice(company_type)
 
@@ -36,7 +36,7 @@ class Business(BaseProvider):
         :Example:
             Gamma Systems.
         """
-        companies = self.data['company'].get('name')
+        companies = self._data['company'].get('name')
         return self.random.choice(companies)
 
     def copyright(self) -> str:

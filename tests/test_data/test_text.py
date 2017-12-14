@@ -36,13 +36,13 @@ def test_alphabet(text, case):
 
 def test_sentence(text):
     result = text.sentence().strip()
-    assert result in text.data['text']
+    assert result in text._data['text']
 
 
 def test_title(text):
     result = text.title()
     assert result is not None
-    assert result.strip() in text.data['text']
+    assert result.strip() in text._data['text']
 
 
 def test_text(text):
@@ -61,22 +61,22 @@ def test_words(text):
 
 def test_word(text):
     result = text.word()
-    assert result in text.data['words']['normal']
+    assert result in text._data['words']['normal']
 
 
 def test_swear_word(text):
     result = text.swear_word()
-    assert result in text.data['words']['bad']
+    assert result in text._data['words']['bad']
 
 
 def test_quote(text):
     result = text.quote()
-    assert result in text.data['quotes']
+    assert result in text._data['quotes']
 
 
 def test_color(text):
     result = text.color()
-    assert result in text.data['color']
+    assert result in text._data['color']
 
 
 def test_level(text):

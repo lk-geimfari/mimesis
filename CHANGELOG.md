@@ -8,6 +8,10 @@
 - Added method `integers` for `Numbers`
 - Added new built in specific provider `UkraineSpecProvider`
 
+**Fixed**:
+
+- Fixed issue `full_name` when method return female surname for male name and vice versa
+
 
 **Updated**:
 

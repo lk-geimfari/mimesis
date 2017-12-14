@@ -40,15 +40,15 @@ def test_currency_symbol(business):
 
 def test_company_type(business):
     result = business.company_type()
-    assert result in business.data['company']['type']['title']
+    assert result in business._data['company']['type']['title']
 
     result_2 = business.company_type(abbr=True)
-    assert result_2 in business.data['company']['type']['abbr']
+    assert result_2 in business._data['company']['type']['abbr']
 
 
 def test_company(business):
     result = business.company()
-    assert result in business.data['company']['name']
+    assert result in business._data['company']['name']
 
 
 def test_price(business):

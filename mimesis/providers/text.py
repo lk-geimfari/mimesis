@@ -10,7 +10,7 @@ class Text(BaseProvider):
         :param str locale: Current locale.
         """
         super().__init__(*args, **kwargs)
-        self.data = pull('text.json', self.locale)
+        self._data = pull('text.json', self.locale)
 
     def alphabet(self, lower_case: bool = False) -> list:
         """Get an alphabet for current locale.
@@ -21,7 +21,7 @@ class Text(BaseProvider):
         case = 'uppercase' if \
             not lower_case else 'lowercase'
 
-        alpha = self.data['alphabet'].get(case)
+        alpha = self._data['alphabet'].get(case)
         return alpha
 
     def level(self) -> str:
@@ -32,7 +32,7 @@ class Text(BaseProvider):
         :Example:
             critical.
         """
-        levels = self.data['level']
+        levels = self._data['level']
         return self.random.choice(levels)
 
     def text(self, quantity: int = 5) -> str:
@@ -48,7 +48,7 @@ class Text(BaseProvider):
         """
         text = ''
         for _ in range(quantity):
-            text += ' ' + self.random.choice(self.data['text'])
+            text += ' ' + self.random.choice(self._data['text'])
         return text.strip()
 
     def sentence(self) -> str:
@@ -81,7 +81,7 @@ class Text(BaseProvider):
         :Example:
             science, network, god, octopus, love.
         """
-        words = self.data['words'].get('normal')
+        words = self._data['words'].get('normal')
         words_list = [self.random.choice(words) for _ in range(quantity)]
         return words_list
 
@@ -103,7 +103,7 @@ class Text(BaseProvider):
         :Example:
             Damn.
         """
-        bad_words = self.data['words'].get('bad')
+        bad_words = self._data['words'].get('bad')
         return self.random.choice(bad_words)
 
     def quote(self) -> str:
@@ -114,7 +114,7 @@ class Text(BaseProvider):
         :Example:
             "Bond... James Bond."
         """
-        quotes = self.data['quotes']
+        quotes = self._data['quotes']
         return self.random.choice(quotes)
 
     def color(self) -> str:
@@ -125,7 +125,7 @@ class Text(BaseProvider):
         :Example:
             Red.
         """
-        colors = self.data['color']
+        colors = self._data['color']
         return self.random.choice(colors)
 
     def hex_color(self) -> str:
@@ -148,5 +148,5 @@ class Text(BaseProvider):
         :Example:
             No
         """
-        answers = self.data['answers']
+        answers = self._data['answers']
         return self.random.choice(answers)

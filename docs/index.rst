@@ -64,14 +64,20 @@ As we said above, this library is really easy to use:
     >>> person.occupation()
     'Backend Developer'
 
-    >>> templates = ['U_d', 'U-d', 'l_d', 'l-d']
+    >>> templates = ('U_d', 'U.d', 'U-d', 'ld',
+    ...              'l-d', 'Ud', 'l.d', 'l_d')
+    >>>
     >>> for template in templates:
     ...     person.username(template=template)
-
-    'Adders_1893'
-    'Abdel-1888'
-    'constructor_1884'
-    'chegre-2051'
+    ...
+    'Cristina_1889'
+    'Credenza.1845'
+    'Alger-1847'
+    'cabral1899'
+    'maimed-1856'
+    'Chenault1820'
+    'cobol.1951'
+    'dashed_2006'
 
 
 Locales

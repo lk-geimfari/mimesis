@@ -117,7 +117,7 @@ def test_blood_type(_personal):
 
 def test_favorite_movie(personal):
     result = personal.favorite_movie()
-    assert result in personal.data['favorite_movie']
+    assert result in personal._data['favorite_movie']
 
 
 def test_favorite_music_genre(_personal):
@@ -169,12 +169,12 @@ def test_level_of_english(_personal):
 )
 def test_name(personal, gender):
     result = personal.name(gender=gender)
-    assert result in personal.data['names'][gender.value]
+    assert result in personal._data['names'][gender.value]
 
 
 def test_name_with_none(_personal):
     result = _personal.name(gender=None)
-    names = _personal.data['names']
+    names = _personal._data['names']
 
     females = names['female']
     males = names['male']
@@ -204,7 +204,7 @@ def test_telephone(personal):
     ],
 )
 def test_surname(personal, gender):
-    surnames = personal.data['surnames']
+    surnames = personal._data['surnames']
 
     # Surnames separated by gender.
     if isinstance(surnames, dict):
@@ -234,7 +234,7 @@ def test_full_name(personal, gender):
 
 def test_gender(personal):
     result = personal.gender()
-    assert result in personal.data['gender']
+    assert result in personal._data['gender']
 
     result = personal.gender(symbol=True)
     assert result in GENDER_SYMBOLS
@@ -248,7 +248,7 @@ def test_gender(personal):
 
 def test_sexual_orientation(personal):
     result = personal.sexual_orientation()
-    assert result in personal.data['sexuality']
+    assert result in personal._data['sexuality']
 
     symbol = personal.sexual_orientation(symbol=True)
     assert symbol in SEXUALITY_SYMBOLS
@@ -256,37 +256,37 @@ def test_sexual_orientation(personal):
 
 def test_profession(personal):
     result = personal.occupation()
-    assert result in personal.data['occupation']
+    assert result in personal._data['occupation']
 
 
 def test_university(personal):
     result = personal.university()
-    assert result in personal.data['university']
+    assert result in personal._data['university']
 
 
 def test_academic_degree(personal):
     result = personal.academic_degree()
-    assert result in personal.data['academic_degree']
+    assert result in personal._data['academic_degree']
 
 
 def test_language(personal):
     result = personal.language()
-    assert result in personal.data['language']
+    assert result in personal._data['language']
 
 
 def test_worldview(personal):
     result = personal.worldview()
-    assert result in personal.data['worldview']
+    assert result in personal._data['worldview']
 
 
 def test_views_on(personal):
     result = personal.views_on()
-    assert result in personal.data['views_on']
+    assert result in personal._data['views_on']
 
 
 def test_political_views(personal):
     result = personal.political_views()
-    assert result in personal.data['political_views']
+    assert result in personal._data['political_views']
 
 
 @pytest.mark.parametrize(
@@ -319,10 +319,10 @@ def test_title(personal, gender, title_type):
     ],
 )
 def test_nationality(personal, gender):
-    nationality = personal.data['nationality']
+    nationality = personal._data['nationality']
     if isinstance(nationality, dict):
         result = personal.nationality(gender=gender)
-        assert result in personal.data['nationality'][gender.value]
+        assert result in personal._data['nationality'][gender.value]
 
     result = personal.nationality()
     assert result is not None

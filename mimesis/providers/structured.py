@@ -15,8 +15,8 @@ class Structured(BaseProvider):
         :param str locale: Current locale.
         """
         super().__init__(*args, **kwargs)
-        self.internet = Internet()
-        self.text = Text('en')
+        self.__inet = Internet()
+        self.__text = Text('en')
 
     def css(self) -> str:
         """Generates a random snippet of CSS.
@@ -24,7 +24,7 @@ class Structured(BaseProvider):
         :return: CSS.
         """
         selector = self.random.choice(CSS_SELECTORS)
-        css_sel = '{}{}'.format(selector, self.text.word())
+        css_sel = '{}{}'.format(selector, self.__text.word())
 
         cont_tag = self.random.choice(list(HTML_CONTAINER_TAGS.keys()))
         mrk_tag = self.random.choice(HTML_MARKUP_TAGS)
@@ -48,7 +48,7 @@ class Structured(BaseProvider):
         if isinstance(val, list):
             val = self.random.choice(val)
         elif val == 'color':
-            val = self.text.hex_color()
+            val = self.__text.hex_color()
         elif val == 'size':
             val = '{}{}'.format(self.random.randint(1, 99),
                                 self.random.choice(CSS_SIZE_UNITS))
@@ -79,7 +79,7 @@ class Structured(BaseProvider):
         return html_result.format(
             tag=tag_name,
             attrs=' '.join(attrs),
-            content=self.text.sentence(),
+            content=self.__text.sentence(),
         )
 
     def html_attribute_value(self, tag: str, attribute: str) -> str:
@@ -102,9 +102,9 @@ class Structured(BaseProvider):
         elif value == 'css':
             value = self.css_property()
         elif value == 'word':
-            value = self.text.word()
+            value = self.__text.word()
         elif value == 'url':
-            value = self.internet.home_page()
+            value = self.__inet.home_page()
         else:
             raise NotImplementedError(
                 'Attribute type {} is not implemented'.format(value))
@@ -127,11 +127,11 @@ class Structured(BaseProvider):
 
         for _ in range(items):
 
-            key = self.text.word()
+            key = self.__text.word()
 
             if max_depth > 0:
                 value = self.random.choice([
-                    self.text.sentence(),
+                    self.__text.sentence(),
                     self.random.randint(1, 10000),
                     self.random.random(),
                     self.json(max_depth=max_depth - 1,
