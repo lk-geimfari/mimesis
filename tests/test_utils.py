@@ -51,12 +51,11 @@ def test_pull():
     ],
 )
 def test_download_image(ctx):
-    url = 'https://github.com/lk-geimfari/mimesis/' \
-          'raw/master/media/mimesis.png'
+    url = 'https://raw.githubusercontent.com/lk-geimfari/mimesis/master/media/logo.png'
 
     if is_connected():
         verified = download_image(url=url, unverified_ctx=ctx)
-        assert verified == 'mimesis.png'
+        assert verified == 'logo.png'
         os.remove(verified)
 
 
@@ -113,6 +112,11 @@ def test_update_dict():
 def test_setup_locale(inp, out):
     result = setup_locale(inp)
     assert result == out
+
+
+def test_setup_locale_exception():
+    with pytest.raises(UnsupportedLocale):
+        setup_locale('nil')
 
 
 def test_custom_code():
