@@ -5,6 +5,7 @@ from mimesis.data import (BLOOD_GROUPS, CALLING_CODES, EMAIL_DOMAINS,
                           ENGLISH_LEVEL, GENDER_SYMBOLS, MUSIC_GENRE,
                           SEXUALITY_SYMBOLS, SOCIAL_NETWORKS, USERNAMES)
 from mimesis.enums import Algorithm, Gender, SocialNetwork, TitleType
+from mimesis.exceptions import NonEnumerableError
 from mimesis.providers.base import BaseProvider
 from mimesis.providers.cryptographic import Cryptographic
 from mimesis.utils import custom_code, pull
@@ -134,6 +135,14 @@ class Personal(BaseProvider):
         :Example:
             Johann Wolfgang.
         """
+
+        if gender is None:
+            gender = Gender.get_random_item()
+
+        if gender and isinstance(gender, Gender):
+            gender = gender
+        else:
+            raise NonEnumerableError(Gender)
 
         fmt = '{1} {0}' if reverse else '{0} {1}'
         return fmt.format(
