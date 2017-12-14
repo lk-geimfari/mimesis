@@ -13,7 +13,7 @@
     </a>
 </p>
 
-**Mimesis** is a fast and easy to use library for Python programming language, which helps generate mock data for a variety of purposes (see "[Data providers](#data-providers)") in a variety of languages (see "[Locales](#locales)"). This data can be particularly useful during software development and testing. For example, it could be used to populate a testing database for a web application with user information such as email addresses, usernames, first names, last names, etc. 
+**Mimesis** is a fast and easy to use library for Python programming language, which helps generate mock data for a variety of purposes (see "[Data providers](#data-providers)") in a variety of languages (see "[Locales](#locales)"). This data can be particularly useful during software development and testing. For example, it could be used to populate a testing database for a web application with user information such as email addresses, usernames, first names, last names, etc.
 
 Mimesis offers a number of advantages over other similar libraries, such as Faker:
 
@@ -240,25 +240,43 @@ You can use specific-provider without adding it to `Generic()`:
 ```
 
 ## Generate data by schema
-For generating data by schema, just create instance of  `Field` object, which take any string which represents name of the any method of any supported data provider and the `**kwargs` of the method, after that you should describe the schema in lambda function and run filling the schema using method `fill()`:
+For generating data by schema, just create instance of  `Field` object, which take any string which represents name of the any method of any supported data provider and the `**kwargs` of the method, after that you should describe the schema in lambda function and pass it to object `Schema` and call method `create()`:
 
 ```python
->>> from mimesis.schema import Field
+>>> from mimesis.schema import Field, Schema
 >>> from mimesis.enums import Gender
 >>> _ = Field('en')
->>> app_schema = (
+>>> description = (
 ...     lambda: {
 ...         "id": _('uuid'),
 ...         "name": _('word'),
-...         "version": _('version'),
+...         "version": _('version', pre_release=True),
 ...         "owner": {
-...             "email": _('email'),
+...             "email": _('email', key=str.lower),
 ...             "token": _('token'),
 ...             "creator": _('full_name', gender=Gender.FEMALE),
 ...         },
 ...     }
 ... )
->>> _.fill(schema=app_schema, iterations=10)
+>>> schema = Schema(schema=description)
+>>> schema.create(iterations=1)
+```
+
+Output:
+
+```python
+[
+  {
+    "owner": {
+      "email": "aisling2032@yahoo.com",
+      "token": "cc8450298958f8b95891d90200f189ef591cf2c27e66e5c8f362f839fcc01370",
+      "creator": "Veronika Dyer"
+    },
+    "version": "4.3.1-rc.5",
+    "name": "pleasure",
+    "id": "33abf08a-77fd-1d78-86ae-04d88443d0e0"
+  }
+]
 ```
 
 Mimesis support generating data by schema only starting from version `1.0.0`.

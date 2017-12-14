@@ -7,6 +7,8 @@
 - Added method `boolean` for `Development` which returns random boolean value
 - Added method `integers` for `Numbers`
 - Added new built in specific provider `UkraineSpecProvider`
+- Added support of `key functions` for the object `Field`
+- Added object `Schema` which helps generate data by schema
 
 **Fixed**:
 
