@@ -16,16 +16,28 @@ class Development(BaseProvider):
         """
         return self.random.choice(LICENSES)
 
-    def version(self, pre_release: bool = False) -> str:
+    def version(self, calver: bool = False, pre_release: bool = False) -> str:
         """Generate a random version information.
 
+        :param calver: Use calendar versioning.
         :param pre_release: Pre-release.
         :return: The version of software.
-
+.
         :Example:
             0.11.3-alpha.1
         """
+        version = '{}.{}.{}'
         major, minor, patch = self.random.randints(3, 0, 10)
+
+        if calver:
+            if minor == 0:
+                minor += 1
+
+            if patch == 0:
+                patch += 1
+            major = self.random.randint(2016, 2018)
+            return version.format(major, minor, patch)
+
         version = '{}.{}.{}'.format(major, minor, patch)
 
         if pre_release:

@@ -23,22 +23,26 @@ def test_version_control_system(dev):
 def test_version(dev):
     result = dev.version().split('.')
 
+    result = [int(i) for i in result]
+
     assert len(result) == 3
 
-    major = int(result[0])
-    assert major >= 0
-    assert major <= 11
+    major = result[0]
+    assert (major >= 0) and (major <= 11)
 
-    minor = int(result[1])
-    assert minor >= 0
-    assert minor <= 11
+    minor = result[1]
+    assert (minor >= 0) and (minor <= 11)
 
-    patch = int(result[2])
-    assert patch >= 0
-    assert patch <= 11
+    patch = result[2]
+    assert (patch >= 0) and (patch <= 11)
 
     pre_release = dev.version(pre_release=True)
     assert len(pre_release.split('.')) == 4
+
+    # Use calendar versioning
+    calver = dev.version(calver=True)
+    y, *_ = calver.split('.')
+    assert (int(y) >= 2016) and (int(y) <= 2018)
 
 
 def test_programming_language(dev):
