@@ -2,8 +2,9 @@ import pytest
 
 from mimesis import config
 from mimesis.enums import Gender
-from mimesis.exceptions import UndefinedSchema
-from mimesis.schema import Field
+from mimesis.exceptions import (UndefinedField, UndefinedSchema,
+                                UnsupportedField)
+from mimesis.schema import Field, Schema
 
 
 @pytest.mark.parametrize(
@@ -11,27 +12,15 @@ from mimesis.schema import Field
 )
 def test_field(locale):
     filed = Field(locale)
-    result = filed('username', template='l.d')
-    assert result.split('.')[1].isdigit()
+    result = filed('full_name')
+    assert result
+    assert isinstance(result, str)
 
-    with pytest.raises(ValueError):
-        filed()  # default is None
+    with pytest.raises(UnsupportedField):
         filed('unsupported_field')
 
-
-@pytest.fixture
-def valid():
-    _ = Field('en')
-    return lambda: {
-        'id': _('uuid'),
-        'name': _('word'),
-        'version': _('version'),
-        'owner': {
-            'email': _('email'),
-            'token': _('token'),
-            'creator': _('full_name', gender=Gender.FEMALE),
-        },
-    }
+    with pytest.raises(UndefinedField):
+        filed()
 
 
 @pytest.fixture
@@ -39,15 +28,37 @@ def _():
     return Field('en')
 
 
+@pytest.fixture
+def valid_schema(_):
+    return lambda: {
+        'id': _('uuid'),
+        'name': _('word'),
+        'version': _('version', key=str.lower, pre_release=True),
+        'owner': {
+            'email': _('email', key=str.lower),
+            'token': _('token'),
+            'creator': _('full_name', gender=Gender.FEMALE),
+        },
+    }
+
+
 def test_str(_):
     name = str(_).split(':')[0]
     assert name == _.__class__.__name__
 
 
-def test_fill(_, valid):
-    result = _.fill(schema=valid, iterations=2)
+def test_fill(_, valid_schema):
+    result = Schema(schema=valid_schema).create(iterations=2)
     assert isinstance(result, list)
     assert isinstance(result[0], dict)
 
     with pytest.raises(UndefinedSchema):
-        _.fill(schema=lambda: {})
+        Schema(schema=None).create()
+
+
+def test_field_with_key(_):
+    usual_result = _('age')
+    assert isinstance(usual_result, int)
+
+    result_on_key = _('age', key=lambda v: float(v))
+    assert isinstance(result_on_key, float)

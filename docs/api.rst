@@ -233,12 +233,17 @@ UnitSystem
 Schema
 =======
 
-Schema
+Field
 ------
 
 .. autoclass:: mimesis.schema.Field
    :members:
 
+Schema
+------
+
+.. autoclass:: mimesis.schema.Schema
+   :members:
 
 Enums
 =====
