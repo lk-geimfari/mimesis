@@ -7,17 +7,17 @@
 - Added method `boolean` for `Development` which returns random boolean value
 - Added method `integers` for `Numbers`
 - Added new built in specific provider `UkraineSpecProvider`
-- Added support of `key functions` for the object `Field`
-- Added object `Schema` which helps generate data by schema
+- Added support of `key functions` for the object `schema.Field`
+- Added object `schema.Schema` which helps generate data by schema
 
 **Fixed**:
 
 - Fixed issue `full_name` when method return female surname for male name and vice versa
-
+- Fixed bug with improper handling of attributes that begin with an underscore for class `schema.Field`
 
 **Updated**:
 
-- Updated method `version` for supporting pre-releases
+- Updated method `version` for supporting pre-releases and calendar versioning
 
 ---
 

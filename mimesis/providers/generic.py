@@ -50,7 +50,7 @@ class Generic(BaseProvider):
         self.games = Games()
         self.cryptographic = Cryptographic()
 
-    def __getattr__(self, attrname):
+    def __getattr__(self, attrname: str):
         """Get _attribute without underscore
 
         :param attrname: Attribute name.
@@ -61,10 +61,17 @@ class Generic(BaseProvider):
             return attribute(self.locale)
 
     def __dir__(self) -> List[str]:
+        attributes = []
         exclude = BaseProvider().__dict__.keys()
-        attrs = [a.replace('_', '') for a
-                 in self.__dict__ if a not in exclude]
-        return attrs
+
+        for a in self.__dict__:
+            if a not in exclude:
+                if a.startswith('_'):
+                    attribute = a.replace('_', '', 1)
+                    attributes.append(attribute)
+                else:
+                    attributes.append(a)
+        return attributes
 
     def add_provider(self, cls) -> None:
         """Add a custom provider to Generic() object.
