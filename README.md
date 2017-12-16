@@ -28,7 +28,7 @@ performance with other libraries.
 Mimesis is very simple to use, and the below examples should help you get started. Complete documentation for Mimesis is available on [Read the Docs](http://mimesis.readthedocs.io/).
 
 ## Installation
-To install mimesis, simply:
+To install mimesis, simply use pip (or [pipenv](https://pipenv.org)):
 
 ```zsh
 ➜  ~ pip install mimesis
