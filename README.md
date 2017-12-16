@@ -239,7 +239,7 @@ You can use specific-provider without adding it to `Generic()`:
 '712.455.163-37'
 ```
 
-## Generate data by schema
+## Generating data by schema
 For generating data by schema, just create instance of  `Field` object, which take any string which represents name of the any method of any supported data provider and the `**kwargs` of the method, after that you should describe the schema in lambda function and pass it to object `Schema` and call method `create()`:
 
 ```python
