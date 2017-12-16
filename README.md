@@ -248,13 +248,14 @@ For generating data by schema, just create instance of  `Field` object, which ta
 >>> _ = Field('en')
 >>> description = (
 ...     lambda: {
-...         "id": _('uuid'),
-...         "name": _('word'),
-...         "version": _('version', pre_release=True),
-...         "owner": {
-...             "email": _('email', key=str.lower),
-...             "token": _('token'),
-...             "creator": _('full_name', gender=Gender.FEMALE),
+...         'id': _('uuid'),
+...         'name': _('word'),
+...         'version': _('version', pre_release=True),
+...         'timestamp': _('timestamp', posix=False),
+...         'owner': {
+...             'email': _('email', key=str.lower),
+...             'token': _('token'),
+...             'creator': _('full_name', gender=Gender.FEMALE),
 ...         },
 ...     }
 ... )
@@ -274,7 +275,8 @@ Output:
     },
     "version": "4.3.1-rc.5",
     "name": "pleasure",
-    "id": "33abf08a-77fd-1d78-86ae-04d88443d0e0"
+    "id": "33abf08a-77fd-1d78-86ae-04d88443d0e0",
+    "timestamp": "2018-07-29T15:25:02Z"
   }
 ]
 ```

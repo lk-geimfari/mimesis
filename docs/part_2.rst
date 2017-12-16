@@ -307,13 +307,14 @@ you should describe the schema in lambda function and pass it to the object
     >>> _ = Field('en')
     >>> description = (
     ...     lambda: {
-    ...         "id": _('uuid'),
-    ...         "name": _('word'),
-    ...         "version": _('version', pre_release=True),
-    ...         "owner": {
-    ...             "email": _('email', key=str.lower),
-    ...             "token": _('token'),
-    ...             "creator": _('full_name', gender=Gender.FEMALE),
+    ...         'id': _('uuid'),
+    ...         'name': _('word'),
+    ...         'version': _('version', pre_release=True),
+    ...         'timestamp': _('timestamp', posix=False),
+    ...         'owner': {
+    ...             'email': _('email', key=str.lower),
+    ...             'token': _('token'),
+    ...             'creator': _('full_name', gender=Gender.FEMALE),
     ...         },
     ...     }
     ... )
@@ -331,9 +332,10 @@ Output:
           "token": "cc8450298958f8b95891d90200f189ef591cf2c27e66e5c8f362f839fcc01370",
           "creator": "Veronika Dyer"
         },
-        "version": "4.3.1-rc.5",
         "name": "pleasure",
-        "id": "33abf08a-77fd-1d78-86ae-04d88443d0e0"
+        "version": "4.3.1-rc.5",
+        "id": "33abf08a-77fd-1d78-86ae-04d88443d0e0",
+        "timestamp": "2018-07-29T15:25:02Z"
       }
     ]
 
