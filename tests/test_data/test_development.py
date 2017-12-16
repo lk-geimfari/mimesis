@@ -66,7 +66,7 @@ def test_seeded_version(_seeded_dev):
     result = _seeded_dev.version()
     assert result == '10.1.0'
     result = _seeded_dev.version()
-    assert result == '11.4.3'
+    assert result == '4.3.3'
 
 
 def test_programming_language(dev):

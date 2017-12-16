@@ -117,6 +117,7 @@ class Structured(BaseProvider):
                 'Attribute type {} is not implemented'.format(value))
         return value
 
+    # TODO: Optimize
     def json(self, items: int = 5,
              max_depth: int = 3, recursive: bool = False) -> str:
         """Generate a random snippet of JSON.

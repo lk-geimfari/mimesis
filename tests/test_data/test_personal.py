@@ -58,12 +58,11 @@ def test_child_count(_personal):
 
 def test_seeded_child_count(_seeded_personal):
     result = _seeded_personal.child_count(max_childs=100)
-    # assert result ==
+    assert result == 14
     result = _seeded_personal.child_count()
-    # assert result ==
+    assert result == 0
     result = _seeded_personal.child_count()
-    # assert result ==
-    pass
+    assert result == 5
 
 
 def test_work_experience(_personal):
@@ -74,12 +73,15 @@ def test_work_experience(_personal):
 
 def test_seeded_work_experience(_seeded_personal):
     result = _seeded_personal.work_experience(working_start_age=11)
-    # assert result ==
+    assert result == 45
     result = _seeded_personal.work_experience()
-    # assert result ==
+    assert result == 34
+    age = _seeded_personal.age()
     result = _seeded_personal.work_experience()
-    # assert result ==
-    pass
+    assert result == 1
+    age = _seeded_personal.age()
+    result = _seeded_personal.work_experience()
+    assert result == 0
 
 
 def test_work_experience_store(_personal):
@@ -102,12 +104,11 @@ def test_password(_personal):
 
 def test_seeded_password(_seeded_personal):
     result = _seeded_personal.password(length=15)
-    # assert result ==
+    assert result == '>odJFCrn](l.2ed'
     result = _seeded_personal.password()
-    # assert result ==
+    assert result == 'lBD#:d*z'
     result = _seeded_personal.password()
-    # assert result ==
-    pass
+    assert result == '|@`(1C5.'
 
 
 @pytest.mark.parametrize(
@@ -129,12 +130,11 @@ def test_username(_personal, template):
 
 def test_seeded_username(_seeded_personal):
     result = _seeded_personal.username(template='l.d')
-    # assert result ==
+    assert result == 'imagining.1857'
     result = _seeded_personal.username()
-    # assert result ==
+    assert result == 'Afterfuture1940'
     result = _seeded_personal.username()
-    # assert result ==
-    pass
+    assert result == 'Boons.1871'
 
 
 def test_username_unsupported_template(_personal):
@@ -154,10 +154,9 @@ def test_email(_personal):
 
 def test_seeded_email(_seeded_personal):
     result = _seeded_personal.email()
-    # assert result ==
+    assert result == 'afterfuture1940@gmail.com'
     result = _seeded_personal.email()
-    # assert result ==
-    pass
+    assert result == 'boons1871@yandex.com'
 
 
 def test_height(_personal):
@@ -168,12 +167,11 @@ def test_height(_personal):
 
 def test_seeded_height(_seeded_personal):
     result = _seeded_personal.height(minimum=1.60, maximum=1.90)
-    # assert result ==
+    assert result == '1.79'
     result = _seeded_personal.height()
-    # assert result ==
+    assert result == '1.51'
     result = _seeded_personal.height()
-    # assert result ==
-    pass
+    assert result == '1.64'
 
 
 def test_weight(_personal):
@@ -184,12 +182,11 @@ def test_weight(_personal):
 
 def test_seeded_weight(_seeded_personal):
     result = _seeded_personal.weight(minimum=40, maximum=60)
-    # assert result ==
+    assert result == 60
     result = _seeded_personal.weight()
-    # assert result ==
+    assert result == 45
     result = _seeded_personal.weight()
-    # assert result ==
-    pass
+    assert result == 39
 
 
 def test_blood_type(_personal):
@@ -199,10 +196,9 @@ def test_blood_type(_personal):
 
 def test_seeded_blood_type(_seeded_personal):
     result = _seeded_personal.blood_type()
-    # assert result ==
+    assert result == 'A+'
     result = _seeded_personal.blood_type()
-    # assert result ==
-    pass
+    assert result == 'O+'
 
 
 def test_favorite_movie(personal):
@@ -212,10 +208,9 @@ def test_favorite_movie(personal):
 
 def test_seeded_favorite_movie(_seeded_personal):
     result = _seeded_personal.favorite_movie()
-    # assert result ==
+    assert result == 'Creature'
     result = _seeded_personal.favorite_movie()
-    # assert result ==
-    pass
+    assert result == 'Air Bud'
 
 
 def test_favorite_music_genre(_personal):
@@ -225,10 +220,9 @@ def test_favorite_music_genre(_personal):
 
 def test_seeded_favorite_music_genre(_seeded_personal):
     result = _seeded_personal.favorite_music_genre()
-    # assert result ==
+    assert result == 'Ambient house'
     result = _seeded_personal.favorite_music_genre()
-    # assert result ==
-    pass
+    assert result == 'Rhythm & Blues (R&B)'
 
 
 @pytest.mark.parametrize(
@@ -247,12 +241,11 @@ def test_social_media_profile(_personal, site):
 
 def test_seeded_social_media_profile(_seeded_personal):
     result = _seeded_personal.social_media_profile(site=SocialNetwork.TWITTER)
-    # assert result ==
+    assert result == 'https://www.twitter.com/Imagining-1857'
     result = _seeded_personal.social_media_profile()
-    # assert result ==
+    assert result == 'https://www.instagram.com/Briolette_1914'
     result = _seeded_personal.social_media_profile()
-    # assert result ==
-    pass
+    assert result == 'https://www.facebook.com/mitten.1844'
 
 
 def test_avatar(_personal):
@@ -264,12 +257,11 @@ def test_avatar(_personal):
 
 def test_seeded_avatar(_seeded_personal):
     result = _seeded_personal.avatar(size=128)
-    # assert result ==
+    assert result.endswith('c5d90f155b758732c7da3f614e9783ce.png')
     result = _seeded_personal.avatar()
-    # assert result ==
+    assert result.endswith('a66ff795b40c9d5cffcaa98374f03d4d.png')
     result = _seeded_personal.avatar()
-    # assert result ==
-    pass
+    assert result.endswith('9290813a752fd4550f710567e564b474.png')
 
 
 def test_identifier(_personal):
@@ -284,12 +276,11 @@ def test_identifier(_personal):
 
 def test_seeded_identifier(_seeded_personal):
     result = _seeded_personal.identifier(mask='##-##/## @@')
-    # assert result ==
+    assert result == '10-43/32 XD'
     result = _seeded_personal.identifier()
-    # assert result ==
+    assert result == '81-96/00'
     result = _seeded_personal.identifier()
-    # assert result ==
-    pass
+    assert result == '13-38/90'
 
 
 def test_level_of_english(_personal):
@@ -299,10 +290,9 @@ def test_level_of_english(_personal):
 
 def test_seeded_level_of_english(_seeded_personal):
     result = _seeded_personal.level_of_english()
-    # assert result ==
+    assert result == 'Advanced'
     result = _seeded_personal.level_of_english()
-    # assert result ==
-    pass
+    assert result == 'Beginner'
 
 
 @pytest.mark.parametrize(
@@ -318,12 +308,11 @@ def test_name(personal, gender):
 
 def test_seeded_name(_seeded_personal):
     result = _seeded_personal.name(gender=Gender.FEMALE)
-    # assert result ==
+    assert result == 'Darlena'
     result = _seeded_personal.name()
-    # assert result ==
+    assert result == 'Krystin'
     result = _seeded_personal.name()
-    # assert result ==
-    pass
+    assert result == 'Jenee'
 
 
 def test_name_with_none(_personal):
@@ -353,12 +342,11 @@ def test_telephone(personal):
 
 def test_seeded_telephone(_seeded_personal):
     result = _seeded_personal.telephone(mask='+5 (###)-###-##-##')
-    # assert result ==
+    assert result == '+5 (104)-332-18-19'
     result = _seeded_personal.telephone()
-    # assert result ==
+    assert result == '013-389-0838'
     result = _seeded_personal.telephone()
-    # assert result ==
-    pass
+    assert result == '794.026.5423'
 
 
 @pytest.mark.parametrize(
@@ -379,12 +367,11 @@ def test_surname(personal, gender):
 
 def test_seeded_surname(_seeded_personal):
     result = _seeded_personal.surname(gender=Gender.FEMALE)
-    # assert result ==
+    assert result == 'Mullins'
     result = _seeded_personal.surname()
-    # assert result ==
+    assert result == 'Buckner'
     result = _seeded_personal.surname()
-    # assert result ==
-    pass
+    assert result == 'Avila'
 
 
 @pytest.mark.parametrize(
@@ -406,12 +393,11 @@ def test_full_name(personal, gender):
 
 def test_seeded_full_name(_seeded_personal):
     result = _seeded_personal.full_name(gender=Gender.MALE, reverse=True)
-    # assert result ==
+    assert result == 'Avila Cornelius'
     result = _seeded_personal.full_name()
-    # assert result ==
+    assert result == 'Hank Day'
     result = _seeded_personal.full_name()
-    # assert result ==
-    pass
+    assert result == 'Crystle Osborn'
 
 
 def test_gender(personal):
@@ -430,12 +416,11 @@ def test_gender(personal):
 
 def test_seeded_gender(_seeded_personal):
     result = _seeded_personal.gender(iso5218=True, symbol=True)
-    # assert result ==
+    assert result == 0
     result = _seeded_personal.gender()
-    # assert result ==
+    assert result == 'Male'
     result = _seeded_personal.gender()
-    # assert result ==
-    pass
+    assert result == 'Fluid'
 
 
 def test_sexual_orientation(personal):
@@ -448,12 +433,13 @@ def test_sexual_orientation(personal):
 
 def test_seeded_sexual_orientation(_seeded_personal):
     result = _seeded_personal.sexual_orientation(symbol=True)
-    # assert result ==
+    assert result == '⚪'
     result = _seeded_personal.sexual_orientation()
-    # assert result ==
+    assert result == 'Asexual'
     result = _seeded_personal.sexual_orientation()
-    # assert result ==
-    pass
+    assert result == 'Asexual'
+    result = _seeded_personal.sexual_orientation()
+    assert result == 'Heterosexual'
 
 
 def test_occupation(personal):
@@ -463,10 +449,9 @@ def test_occupation(personal):
 
 def test_seeded_occupation(_seeded_personal):
     result = _seeded_personal.occupation()
-    # assert result ==
+    assert result == 'Coroner'
     result = _seeded_personal.occupation()
-    # assert result ==
-    pass
+    assert result == 'Architect'
 
 
 def test_university(personal):
@@ -476,10 +461,9 @@ def test_university(personal):
 
 def test_seeded_university(_seeded_personal):
     result = _seeded_personal.university()
-    # assert result ==
+    assert result == 'University of South Florida (USF)'
     result = _seeded_personal.university()
-    # assert result ==
-    pass
+    assert result == 'California State University, Chico (Chico State)'
 
 
 def test_academic_degree(personal):
@@ -489,10 +473,9 @@ def test_academic_degree(personal):
 
 def test_seeded_academic_degree(_seeded_personal):
     result = _seeded_personal.academic_degree()
-    # assert result ==
+    assert result == 'PhD'
     result = _seeded_personal.academic_degree()
-    # assert result ==
-    pass
+    assert result == 'Bachelor'
 
 
 def test_language(personal):
@@ -502,10 +485,9 @@ def test_language(personal):
 
 def test_seeded_language(_seeded_personal):
     result = _seeded_personal.language()
-    # assert result ==
+    assert result == 'Sotho'
     result = _seeded_personal.language()
-    # assert result ==
-    pass
+    assert result == 'Catalan'
 
 
 def test_worldview(personal):
@@ -515,10 +497,9 @@ def test_worldview(personal):
 
 def test_seeded_worldview(_seeded_personal):
     result = _seeded_personal.worldview()
-    # assert result ==
+    assert result == 'Agnosticism'
     result = _seeded_personal.worldview()
-    # assert result ==
-    pass
+    assert result == 'Atheism'
 
 
 def test_views_on(personal):
@@ -528,10 +509,11 @@ def test_views_on(personal):
 
 def test_seeded_views_on(_seeded_personal):
     result = _seeded_personal.views_on()
-    # assert result ==
+    assert result == 'Negative'
     result = _seeded_personal.views_on()
-    # assert result ==
-    pass
+    assert result == 'Negative'
+    result = _seeded_personal.views_on()
+    assert result == 'Positive'
 
 
 def test_political_views(personal):
@@ -541,10 +523,9 @@ def test_political_views(personal):
 
 def test_seeded_political_views(_seeded_personal):
     result = _seeded_personal.political_views()
-    # assert result ==
+    assert result == 'Anarchism'
     result = _seeded_personal.political_views()
-    # assert result ==
-    pass
+    assert result == 'Apathetic'
 
 
 @pytest.mark.parametrize(
@@ -574,12 +555,11 @@ def test_seeded_title(_seeded_personal):
     result = _seeded_personal.title(
         gender=Gender.FEMALE, title_type=TitleType.ACADEMIC,
     )
-    # assert result ==
+    assert result == 'PhD'
     result = _seeded_personal.title()
-    # assert result ==
+    assert result == 'B.A.'
     result = _seeded_personal.title()
-    # assert result ==
-    pass
+    assert result == 'Mrs.'
 
 
 @pytest.mark.parametrize(
@@ -599,12 +579,11 @@ def test_nationality(personal, gender):
 
 def test_seeded_nationality(_seeded_personal):
     result = _seeded_personal.nationality(gender=Gender.FEMALE)
-    # assert result ==
+    assert result == 'Russian'
     result = _seeded_personal.nationality()
-    # assert result ==
+    assert result == 'Cameroonian'
     result = _seeded_personal.nationality()
-    # assert result ==
-    pass
+    assert result == 'Argentinian'
 
 
 @pytest.mark.parametrize(
@@ -624,9 +603,8 @@ def test_last_name(personal, gender):
 
 def test_seeded_last_name(_seeded_personal):
     result = _seeded_personal.last_name(gender=Gender.FEMALE)
-    # assert result ==
+    assert result == 'Mullins'
     result = _seeded_personal.last_name()
-    # assert result ==
+    assert result == 'Buckner'
     result = _seeded_personal.last_name()
-    # assert result ==
-    pass
+    assert result == 'Avila'
