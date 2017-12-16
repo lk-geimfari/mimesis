@@ -15,8 +15,8 @@ class AbstractField(StrMixin):
     AbstractField is a class for generating data by the name of the method.
 
     Instance of this object takes any string which represents name
-    of the any method of any supported data provider and the ``**kwargs``
-    of the method:
+    of any method of any supported data provider (class ``Generic()``)
+    and the ``**kwargs`` of the method:
 
     >>> _ = AbstractField('en')
     >>> _('full_name')

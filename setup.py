@@ -1,25 +1,39 @@
 """
-Mimesis is a fast and easy to use library for Python programming
-language, which helps generate mock data for a variety of purposes in
-a variety of languages. This data can be particularly useful during
-software development and testing.
+Mimesis
+-------
 
-Installation
-------------
-
-To install mimesis, simply:
-
-.. code:: bash
-    $ pip install mimesis
-
+**Mimesis** is a fast and easy to use the library for Python programming
+language, which helps generate mock data for a variety of purposes in a
+variety of languages. This data can be particularly useful during software
+development and testing. For example, it could be used to populate a
+testing database for a web application with user information such as
+email addresses, usernames, first names, last names, etc.
 
 Documentation
 -------------
 
 Mimesis is very simple to use, and the below examples should help you
 get started. Complete documentation for Mimesis is available on `Read
-the Docs <http://mimesis.readthedocs.io/>`__.
+the Docs`_.
 
+.. _Read the Docs: http://mimesis.readthedocs.io/
+
+Installation
+------------
+
+To install mimesis, simply use pip (or `pipenv <http://pipenv.org/>`_):
+
+.. code:: bash
+
+    ➜  ~ pip install mimesis
+
+Also, you can install it manually:
+
+.. code:: bash
+
+    (env) ➜ python3 setup.py install
+    # or
+    (env) ➜ make install
 
 Getting started
 ---------------
@@ -32,10 +46,33 @@ example is given below:
     >>> from mimesis import Personal
     >>> from mimesis.enums import Gender
     >>> person = Personal('en')
+
     >>> person.full_name(gender=Gender.FEMALE)
     'Antonetta Garrison'
+
     >>> person.occupation()
     'Backend Developer'
+
+    >>> templates = ['U_d', 'U-d', 'l_d', 'l-d']
+    >>> for template in templates:
+    ...     person.username(template=template)
+
+    'Adders_1893'
+    'Abdel-1888'
+    'constructor_1884'
+    'chegre-2051'
+
+Locales
+-------
+
+You can specify a locale when creating providers and they will return data that is appropriate for
+the language or country associated with that locale. `Mimesis` currently includes support
+for `33 different locales <http://mimesis.readthedocs.io/locales.html>`_.
+
+Data Providers
+--------------
+
+List of supported data providers available `here <http://mimesis.readthedocs.io/providers.html>`_
 
 """
 
