@@ -34,10 +34,31 @@ def valid_schema(_):
         'id': _('uuid'),
         'name': _('word'),
         'version': _('version', key=str.lower, pre_release=True),
+        'timestamp': _('timestamp'),
+        'mime_type': _('mime_type'),
+        'zip_code': _('postal_code'),
         'owner': {
             'email': _('email', key=str.lower),
             'token': _('token'),
             'creator': _('full_name', gender=Gender.FEMALE),
+            'billing': {
+                'ethereum_address': _('ethereum_address'),
+            },
+        },
+        'meta': {
+            'currency': _('currency_iso_code'),
+            'shirt_size': _('european_size'),
+            'issn': _('issn'),
+            'spices': _('spices'),
+            'gaming_platform': _('gaming_platform'),
+            'resolution': _('resolution'),
+            'http_code': _('http_status_code'),
+            'digit': _('digit'),
+            'home_path': _('home'),
+            'rna': _('rna'),
+            'alphabet': _('alphabet'),
+            'truck': _('truck'),
+            'unit': _('unit'),
         },
     }
 
