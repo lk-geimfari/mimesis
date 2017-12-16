@@ -15,17 +15,17 @@ def test_international(sizes):
         'XL', 'XS', 'XXL',
         'XXS', 'XXXL',
     )
-    result = sizes.international()
+    result = sizes.international_size()
     assert result in size_names
 
 
 def test_eur(sizes):
-    result = sizes.european()
+    result = sizes.european_size()
     assert result >= 40
     assert result <= 62
 
 
 def test_custom(sizes):
-    result = sizes.custom(minimum=40, maximum=62)
+    result = sizes.custom_size(minimum=40, maximum=62)
     assert result >= 40
     assert result <= 62

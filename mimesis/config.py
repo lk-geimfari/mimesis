@@ -138,7 +138,7 @@ SUPPORTED_LOCALES = {
 }
 
 # List of all supported locales.
-LIST_OF_LOCALES = list(SUPPORTED_LOCALES.keys())
+LIST_OF_LOCALES = list(SUPPORTED_LOCALES)
 
 # Default locale.
 DEFAULT_LOCALE = 'en'

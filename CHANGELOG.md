@@ -18,6 +18,7 @@
 **Updated**:
 
 - Updated method `version` for supporting pre-releases and calendar versioning
+- Renamed methods `international`, `european` and `custom` to `international_size`, `european_size` and `custom_size`
 
 ---
 
