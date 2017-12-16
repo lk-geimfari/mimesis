@@ -301,6 +301,7 @@ you should describe the schema in lambda function and pass it to the object
 ``Schema`` and call method ``create()``:
 
 .. code:: python
+
     >>> from mimesis.schema import Field, Schema
     >>> from mimesis.enums import Gender
     >>> _ = Field('en')
