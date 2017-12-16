@@ -41,9 +41,9 @@ def test_ethereum_address(payment):
 
 def test_seeded_ethereum_address(_seeded_payment):
     result = _seeded_payment.ethereum_address()
-    assert result == '0x46685257bdd640fb06671ad11c80317fa3b1799d'
+    assert result == '0x46685257BDD640FB06671AD11C80317FA3B1799D'
     result = _seeded_payment.ethereum_address()
-    assert result == '0x1a3d1fa7bc8960a923b8c1e9392456de3eb13b90'
+    assert result == '0x1A3D1FA7BC8960A923B8C1E9392456DE3EB13B90'
 
 
 def test_cvv(payment):

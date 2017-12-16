@@ -9,7 +9,7 @@ from mimesis.data import FOLDERS, PROGRAMMING_LANGS, PROJECT_NAMES
 
 @pytest.fixture
 def _seeded_path():
-    return Path(seed=42)
+    return Path(seed=42, platform='linux')
 
 
 def test_root(path):
@@ -26,21 +26,21 @@ def test_user(path):
     user = path.user()
     pattern_dictionary = {
         'win32': '(C)(:)(\\\\)(Users)(\\\\).*[^(\\\\)]',
-        'linux2': '(/)(home)(/).*',
+        'linux': '(/)(home)(/).*',
     }
     if path.platform == 'win32':
         pattern = pattern_dictionary.get('win32')
     else:
-        pattern = pattern_dictionary.get('linux2')
+        pattern = pattern_dictionary.get('linux')
     result = re.search(pattern, user)
     assert isinstance(result, type(re.search('', ''))) is True
 
 
 def test_seeded_user(_seeded_path):
     result = _seeded_path.user()
-    # assert result ==
+    assert result == '/home/imagining'
     result = _seeded_path.user()
-    # assert result ==
+    assert result == '/home/ashlie'
     pass
 
 
@@ -48,7 +48,7 @@ def directory_separator(path):
     slash_character = ''
     if path.platform == 'win32':
         slash_character = '\\'
-    elif path.platform == 'linux2':
+    elif path.platform == 'linux':
         slash_character = '/'
     return slash_character
 
@@ -62,10 +62,9 @@ def test_users_folder(path):
 
 def test_seeded_users_folder(_seeded_path):
     result = _seeded_path.users_folder()
-    # assert result ==
+    assert result == '/home/afterfuture/Downloads'
     result = _seeded_path.users_folder()
-    # assert result ==
-    pass
+    assert result == '/home/briolette/Video'
 
 
 def test_dev_dir(path):
@@ -77,10 +76,9 @@ def test_dev_dir(path):
 
 def test_seeded_dev_dir(_seeded_path):
     result = _seeded_path.dev_dir()
-    # assert result ==
+    assert result == '/home/schlock/Development/Assembly'
     result = _seeded_path.dev_dir()
-    # assert result ==
-    pass
+    assert result == '/home/boons/Dev/Dart'
 
 
 def test_project_dir(path):
@@ -92,7 +90,6 @@ def test_project_dir(path):
 
 def test_seeded_project_dir(_seeded_path):
     result = _seeded_path.project_dir()
-    # assert result ==
+    assert result == '/home/calcine/Development/Python/carnotaurus'
     result = _seeded_path.project_dir()
-    # assert result ==
-    pass
+    assert result == '/home/saxes/Development/C++/gobisaurus'
