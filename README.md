@@ -13,7 +13,7 @@
     </a>
 </p>
 
-**Mimesis** is a fast and easy to use library for Python programming language, which helps generate mock data for a variety of purposes (see "[Data providers](#data-providers)") in a variety of languages (see "[Locales](#locales)"). This data can be particularly useful during software development and testing. For example, it could be used to populate a testing database for a web application with user information such as email addresses, usernames, first names, last names, etc.
+**Mimesis** is a fast and easy to use library for Python programming language, which helps generate mock data for a variety of purposes (see «[Data providers](#data-providers)») in a variety of languages (see «[Locales](#locales)»). This data can be particularly useful during software development and testing. For example, it could be used to populate a testing database for a web application with user information such as email addresses, usernames, first names, last names, etc.
 
 Mimesis offers a number of advantages over other similar libraries, such as Faker:
 
@@ -240,7 +240,7 @@ You can use specific-provider without adding it to `Generic()`:
 ```
 
 ## Generating data by schema
-For generating data by schema, just create instance of  `Field` object, which take any string which represents name of the any method of any supported data provider and the `**kwargs` of the method, after that you should describe the schema in lambda function and pass it to object `Schema` and call method `create()`:
+For generating data by schema, just create instance of  `Field` object, which take any string which represents name of the any method of any supported data provider (see «[API reference](http://mimesis.readthedocs.io/api.html#providers)») and the `**kwargs` of the method, after that you should describe the schema in lambda function and pass it to object `Schema` and call method `create()`:
 
 ```python
 >>> from mimesis.schema import Field, Schema
