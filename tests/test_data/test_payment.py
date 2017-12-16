@@ -28,10 +28,9 @@ def test_bitcoin(payment):
 
 def test_seeded_bitcoin(_seeded_payment):
     result = _seeded_payment.bitcoin_address()
-    # assert result ==
+    assert result == '1bVrpoiVgRV5IfLBcbfnoGMbJmTPSIAoCL'
     result = _seeded_payment.bitcoin_address()
-    # assert result ==
-    pass
+    assert result == '3Z3aWZkSBvrjn9Wvgfygw2wMqZcUDIh7yf'
 
 
 def test_ethereum_address(payment):
@@ -41,11 +40,10 @@ def test_ethereum_address(payment):
 
 
 def test_seeded_ethereum_address(_seeded_payment):
-    address = _seeded_payment.ethereum_address()
-    # assert result ==
-    address = _seeded_payment.ethereum_address()
-    # assert result ==
-    pass
+    result = _seeded_payment.ethereum_address()
+    assert result == '0x46685257bdd640fb06671ad11c80317fa3b1799d'
+    result = _seeded_payment.ethereum_address()
+    assert result == '0x1a3d1fa7bc8960a923b8c1e9392456de3eb13b90'
 
 
 def test_cvv(payment):
@@ -56,10 +54,9 @@ def test_cvv(payment):
 
 def test_seeded_cvv(_seeded_payment):
     result = _seeded_payment.cvv()
-    # assert result ==
+    assert result == 754
     result = _seeded_payment.cvv()
-    # assert result ==
-    pass
+    assert result == 214
 
 
 @pytest.mark.parametrize(
@@ -79,12 +76,11 @@ def test_credit_card_number(payment, card_type):
 
 def test_seeded_credit_card_number(_seeded_payment):
     result = _seeded_payment.credit_card_number(card_type=CardType.VISA)
-    # assert result ==
+    assert result == '4654 1043 3218 1966'
     result = _seeded_payment.credit_card_number()
-    # assert result ==
+    assert result == '2236 3890 8386 3794'
     result = _seeded_payment.credit_card_number()
-    # assert result ==
-    pass
+    assert result == '4828 0265 4235 1165'
 
 
 def test_expiration_date(payment):
@@ -99,12 +95,11 @@ def test_expiration_date(payment):
 def test_seeded_expiration_date(_seeded_payment):
     result = _seeded_payment.credit_card_expiration_date(
         minimum=17, maximum=42)
-    # assert result ==
+    assert result == '11/20'
     result = _seeded_payment.credit_card_expiration_date()
-    # assert result ==
+    assert result == '01/20'
     result = _seeded_payment.credit_card_expiration_date()
-    # assert result ==
-    pass
+    assert result == '04/19'
 
 
 def test_cid(payment):
@@ -115,10 +110,9 @@ def test_cid(payment):
 
 def test_seeded_cid(_seeded_payment):
     result = _seeded_payment.cid()
-    # assert result ==
+    assert result == 2824
     result = _seeded_payment.cid()
-    # assert result ==
-    pass
+    assert result == 1409
 
 
 def test_paypal(payment):
@@ -128,10 +122,9 @@ def test_paypal(payment):
 
 def test_seeded_paypal(_seeded_payment):
     result = _seeded_payment.paypal()
-    # assert result ==
+    assert result == 'afterfuture1940@gmail.com'
     result = _seeded_payment.paypal()
-    # assert result ==
-    pass
+    assert result == 'boons1871@yandex.com'
 
 
 @pytest.mark.parametrize(
@@ -150,22 +143,34 @@ def test_credit_card_owner(payment, gender):
 
 def test_seeded_credit_card_owner(_seeded_payment):
     result = _seeded_payment.credit_card_owner(gender=Gender.FEMALE)
-    # assert result ==
+    assert result == {
+        'owner': 'DARLENA AVILA',
+        'credit_card': '3404 332181 96006',
+        'expiration_date': '02/19',
+    }
     result = _seeded_payment.credit_card_owner()
-    # assert result ==
+    assert result == {
+        'owner': 'HANK DAY',
+        'credit_card': '2479 8386 3794 0264',
+        'expiration_date': '06/20',
+    }
     result = _seeded_payment.credit_card_owner()
-    # assert result ==
-    pass
+    assert result == {
+        'owner': 'CRYSTLE OSBORN',
+        'credit_card': '5490 1161 5594 0786',
+        'expiration_date': '02/22',
+    }
 
 
-def credit_card_network(payment):
+def test_credit_card_network(payment):
     result = payment.credit_card_network()
     assert result in CREDIT_CARD_NETWORKS
 
 
-def credit_seeded_card_network(_seeded_payment):
+def test_credit_seeded_card_network(_seeded_payment):
     result = _seeded_payment.credit_card_network()
-    # assert result ==
+    assert result == 'Visa'
     result = _seeded_payment.credit_card_network()
-    # assert result ==
-    pass
+    assert result == 'Visa'
+    result = _seeded_payment.credit_card_network()
+    assert result == 'Chase'
