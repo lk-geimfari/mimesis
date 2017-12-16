@@ -15,7 +15,7 @@ pyflakes==1.5.0
 pytest==3.3.1
 pytest-isort==0.1.0
 pytest-cov==2.5.1
-pytest-flake8==0.8.1
+pytest-flake8==0.9.1
 pytest-mock==1.6.3
 requests==2.18.4
 urllib3==1.22
