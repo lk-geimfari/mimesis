@@ -18,8 +18,8 @@ Mimesis
 
 **Mimesis** is a fast and easy to use library for Python programming language, which helps generate mock data for a variety of purposes (see «\ `Data providers`_\ ») in a variety of languages (see «\ `Locales`_\ »). This data can be particularly useful during software development and testing. For example, it could be used to populate a testing database for a web application with user information such as email addresses, usernames, first names, last names, etc.
 
-.. _Locales: #locales
-.. _Data providers: #data-providers
+.. _Locales: /#locales
+.. _Data providers: /#data-providers
 
 Mimesis offers a number of advantages over other similar libraries, such
 as Faker:
