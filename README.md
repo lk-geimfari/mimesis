@@ -282,38 +282,36 @@ Output:
 
 Mimesis support generating data by schema only starting from version `1.0.0`.
 
-## Seed supporting
+## Generating seeded data
+For generating seeded data, just pass `seed: int` parameter to provider:
 
-#### TODO:
+```python
+>>> from mimesis import Generic
+>>> from mimesis.enums import TLDType
 
-- [x] Write seed tests for all providers
-- [x] Fix provides and utils for seed supporting
-- [ ] Write schema seed tests
-- [ ] Fix schema for seed support
-- [ ] Add reseed method to base provider
-- [ ] Write examples
-- [ ] Micro optimisations
-	- [ ] Address
-	- [ ] Business
-	- [ ] Clothing Sizes
-	- [ ] Code
-	- [ ] Cryptographic
-	- [ ] Datetime
-	- [ ] Development
-	- [ ] File
-	- [ ] Food
-	- [ ] Games
-	- [ ] Hardware
-	- [ ] Internet
-	- [ ] Numbers
-	- [ ] Path
-	- [ ] Payment
-	- [ ] Personal
-	- [ ] Science
-	- [ ] Structured
-	- [ ] Text
-	- [ ] Transport
-	- [ ] Unit system
+>>> g = Generic('en', seed=0x0123456789ABCDEF)
+
+>>> [g.datetime.month() for _ in range(4)]
+['June', 'July', 'May', 'September']
+
+>>> [g.food.fruit() for _ in range(4)]
+['Gooseberry', 'Jaltomata procumbens', 'Duku', 'Midyim']
+
+>>> [g.internet.top_level_domain(TLDType.GEOTLD) for _ in range(4)]
+['.zulu', '.hamburg', '.istanbul', '.doha']
+
+>>> g = Generic('en', seed=0x0123456789ABCDEF)
+
+>>> [g.internet.top_level_domain(TLDType.GEOTLD) for _ in range(4)]
+['.zulu', '.hamburg', '.istanbul', '.doha']
+
+>>> [g.datetime.month() for _ in range(4)]
+['June', 'July', 'May', 'September']
+
+>>> [g.food.fruit() for _ in range(4)]
+['Gooseberry', 'Jaltomata procumbens', 'Duku', 'Midyim']
+```
+
 
 ## Integration with py.test and factory_boy
 We have created libraries which can help you easily use Mimesis with `factory_boy` and `py.test`.
