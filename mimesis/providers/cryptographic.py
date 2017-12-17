@@ -78,8 +78,7 @@ class Cryptographic(BaseProvider):
         :param length: Length of code (number of words).
         :return: Mnemonic code.
         """
-        text = Text('en').data
-        words = text['words']['normal']
+        words = Text('en', seed=self.seed)._data['words']['normal']
         if self.seed:
             words = sorted(words)
 

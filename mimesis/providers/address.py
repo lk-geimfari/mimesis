@@ -131,7 +131,7 @@ class Address(BaseProvider):
             389213
         """
 
-        mask = self.data['postal_code_fmt']
+        mask = self._data['postal_code_fmt']
         return custom_code(mask=mask, rnd=self.random)
 
     def country_iso_code(self, fmt: Optional[CountryCode] = None) -> str:

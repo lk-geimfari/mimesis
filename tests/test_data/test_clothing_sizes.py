@@ -14,46 +14,46 @@ def _seeded_sizes():
     return ClothingSizes(seed=42)
 
 
-def test_international(_sizes):
+def test_international_size(_sizes):
     size_names = (
         'L', 'M', 'S',
         'XL', 'XS', 'XXL',
         'XXS', 'XXXL',
     )
-    result = _sizes.international()
+    result = _sizes.international_size()
     assert result in size_names
 
 
-def test_seeded_international(_seeded_sizes):
-    result = _seeded_sizes.international()
+def test_seeded_international_size(_seeded_sizes):
+    result = _seeded_sizes.international_size()
     assert result == 'M'
-    result = _seeded_sizes.international()
+    result = _seeded_sizes.international_size()
     assert result == 'L'
 
 
-def test_eur(_sizes):
-    result = _sizes.european()
+def test_european_size(_sizes):
+    result = _sizes.european_size()
     assert result >= 40
     assert result <= 62
 
 
-def test_seeded_eur(_seeded_sizes):
-    result = _seeded_sizes.european()
+def test_seeded_european_size(_seeded_sizes):
+    result = _seeded_sizes.european_size()
     assert result == 60
-    result = _seeded_sizes.european()
+    result = _seeded_sizes.european_size()
     assert result == 42
 
 
-def test_custom(_sizes):
-    result = _sizes.custom(minimum=40, maximum=62)
+def test_custom_size(_sizes):
+    result = _sizes.custom_size(minimum=40, maximum=62)
     assert result >= 40
     assert result <= 62
 
 
-def test_seeded_custom(_seeded_sizes):
-    result = _seeded_sizes.custom(minimum=42, maximum=142)
+def test_seeded_custom_size(_seeded_sizes):
+    result = _seeded_sizes.custom_size(minimum=42, maximum=142)
     assert result == 123
-    result = _seeded_sizes.custom()
+    result = _seeded_sizes.custom_size()
     assert result == 43
-    result = _seeded_sizes.custom()
+    result = _seeded_sizes.custom_size()
     assert result == 40

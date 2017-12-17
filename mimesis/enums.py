@@ -9,7 +9,9 @@ class AllowRandom(EnumMeta):
     returns random field of enum.
     """
 
-    def get_random_item(self, rnd: Optional[Random] = Random()) -> Any:
+    def get_random_item(self, rnd: Optional[Random] = None) -> Any:
+        if not rnd:
+            rnd = Random()
         return rnd.choice(list(self))
 
 

@@ -155,7 +155,7 @@ def setup_locale(locale: Optional[str] = None) -> str:
 
 
 def custom_code(mask: str = '@###', char: str = '@',
-                digit: str = '#', rnd: Optional[Random] = Random()) -> str:
+                digit: str = '#', rnd: Optional[Random] = None) -> str:
     """Generate custom code using ascii uppercase and random integers.
 
     :param mask: Mask of code.
@@ -167,6 +167,8 @@ def custom_code(mask: str = '@###', char: str = '@',
     :Example:
         5673-AGFR-SFSFF-1423-4/AD.
     """
+    if not rnd:
+        rnd = Random()
     code = ''
     for p in mask:
         if p == char:

@@ -65,6 +65,7 @@ def test_version(dev):
     y, *_ = calver.split('.')
     assert (int(y) >= 2016) and (int(y) <= 2018)
 
+
 def test_seeded_version(_seeded_dev):
     result = _seeded_dev.version()
     assert result == '10.1.0'

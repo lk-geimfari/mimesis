@@ -6,6 +6,7 @@ from mimesis.data import (BLOOD_GROUPS, CALLING_CODES, EMAIL_DOMAINS,
                           ENGLISH_LEVEL, GENDER_SYMBOLS, MUSIC_GENRE,
                           SEXUALITY_SYMBOLS, SOCIAL_NETWORKS, USERNAMES)
 from mimesis.enums import Gender, SocialNetwork, TitleType
+from mimesis.exceptions import NonEnumerableError
 from mimesis.providers.base import BaseProvider
 from mimesis.utils import custom_code, pull
 
@@ -75,7 +76,7 @@ class Personal(BaseProvider):
             John.
         """
         key = self._validate_enum(gender, Gender, rnd=self.random)
-        names = self.data['names'].get(key)
+        names = self._data['names'].get(key)
         return self.random.choice(names)
 
     def surname(self, gender: Optional[Gender] = None) -> str:
@@ -90,9 +91,9 @@ class Personal(BaseProvider):
         surnames = self._data['surnames']
 
         # Separated by gender.
-        if self.locale in SURNAMES_SEPARATED_BY_GENDER:
+        if isinstance(surnames, dict):
             key = self._validate_enum(gender, Gender, rnd=self.random)
-            return self.random.choice(surnames.get(key))
+            surnames = surnames[key]
 
         return self.random.choice(surnames)
 
@@ -138,7 +139,7 @@ class Personal(BaseProvider):
         """
 
         if gender is None:
-            gender = Gender.get_random_item()
+            gender = Gender.get_random_item(rnd=self.random)
 
         if gender and isinstance(gender, Gender):
             gender = gender
@@ -426,11 +427,10 @@ class Personal(BaseProvider):
         """
         nationalities = self._data['nationality']
 
-        nations = self.data['nationality']
-
-        if self.locale in separated_locales:
+        # Separated by gender
+        if isinstance(nationalities, dict):
             key = self._validate_enum(gender, Gender, rnd=self.random)
-            return self.random.choice(nations[key])
+            nationalities = nationalities[key]
 
         return self.random.choice(nationalities)
 

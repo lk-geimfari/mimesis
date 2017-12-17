@@ -80,7 +80,7 @@ class Text(BaseProvider):
         :Example:
             science, network, god, octopus, love.
         """
-        words = self.data['words'].get('normal')
+        words = self._data['words'].get('normal')
         if self.seed:
             words = sorted(words)
         words_list = [self.random.choice(words) for _ in range(quantity)]
@@ -104,7 +104,7 @@ class Text(BaseProvider):
         :Example:
             Damn.
         """
-        bad_words = self.data['words'].get('bad')
+        bad_words = self._data['words'].get('bad')
         if self.seed:
             bad_words = sorted(bad_words)
         return self.random.choice(bad_words)

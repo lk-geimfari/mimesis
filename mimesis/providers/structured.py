@@ -16,8 +16,8 @@ class Structured(BaseProvider):
         :param str locale: Current locale.
         """
         super().__init__(*args, **kwargs)
-        self.internet = Internet(seed=self.seed)
-        self.text = Text('en', seed=self.seed)
+        self.__inet = Internet(seed=self.seed)
+        self.__text = Text('en', seed=self.seed)
 
     def css(self) -> str:
         """Generates a random snippet of CSS.

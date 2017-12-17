@@ -4,7 +4,7 @@ import re
 
 import pytest
 
-from mimesis import Personal, config
+from mimesis import Personal
 from mimesis.data import (BLOOD_GROUPS, ENGLISH_LEVEL, GENDER_SYMBOLS,
                           MUSIC_GENRE, SEXUALITY_SYMBOLS)
 from mimesis.enums import Gender, SocialNetwork, TitleType
@@ -587,21 +587,6 @@ def test_seeded_nationality(_seeded_personal):
     assert result == 'Cameroonian'
     result = _seeded_personal.nationality()
     assert result == 'Argentinian'
-
-
-@pytest.mark.parametrize(
-    'gender', [
-        Gender.FEMALE,
-        Gender.MALE,
-    ],
-)
-def test_last_name(personal, gender):
-    if personal.locale in config.SURNAMES_SEPARATED_BY_GENDER:
-        result = personal.last_name(gender=gender)
-        assert result in personal.data['surnames'][gender.value]
-    else:
-        result = personal.last_name()
-        assert result in personal.data['surnames']
 
 
 def test_seeded_last_name(_seeded_personal):
