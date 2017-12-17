@@ -266,35 +266,13 @@ Mimesis support generating data by schema only starting from version `1.0.0`.
 
 #### TODO:
 
-- [-] Write seed tests for all providers
-	- [ ] Address
-	- [ ] Business
-	- [ ] Clothing Sizes
-	- [ ] Code
-	- [ ] Cryptographic
-	- [ ] Datetime
-	- [ ] Development
-	- [ ] File
-	- [ ] Food
-	- [ ] Games
-	- [ ] Hardware
-	- [x] Internet
-	- [ ] Numbers
-	- [x] Path
-	- [x] Payment
-	- [x] Personal
-	- [x] Science
-	- [x] Structured
-	- [x] Text
-	- [x] Transport
-	- [x] Unit system
-- [ ] Fix provides and utils for seed supporting
+- [x] Write seed tests for all providers
+- [x] Fix provides and utils for seed supporting
 - [ ] Write schema seed tests
 - [ ] Fix schema for seed support
 - [ ] Add reseed method to base provider
 - [ ] Write examples
-- [?] Micro optimisations
-- [ ] Refactor provides
+- [ ] Micro optimisations
 	- [ ] Address
 	- [ ] Business
 	- [ ] Clothing Sizes
