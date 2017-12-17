@@ -62,7 +62,9 @@ class Payment(BaseProvider):
         :Example:
             0xe8ece9e6ff7dba52d4c07d37418036a89af9698d
         """
-        return '0x{:02X}'.format(self.random.getrandbits(160))
+        return '0x' + (
+            self.random.getrandbits(160)
+        ).to_bytes(20, byteorder='big').hex()
 
     def credit_card_network(self) -> str:
         """Get random credit card network
