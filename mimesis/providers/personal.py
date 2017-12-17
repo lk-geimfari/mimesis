@@ -1,13 +1,12 @@
+import hashlib
 from string import ascii_letters, digits, punctuation
 from typing import Optional, Union
 
 from mimesis.data import (BLOOD_GROUPS, CALLING_CODES, EMAIL_DOMAINS,
                           ENGLISH_LEVEL, GENDER_SYMBOLS, MUSIC_GENRE,
                           SEXUALITY_SYMBOLS, SOCIAL_NETWORKS, USERNAMES)
-from mimesis.enums import Algorithm, Gender, SocialNetwork, TitleType
-from mimesis.exceptions import NonEnumerableError
+from mimesis.enums import Gender, SocialNetwork, TitleType
 from mimesis.providers.base import BaseProvider
-from mimesis.providers.cryptographic import Cryptographic
 from mimesis.utils import custom_code, pull
 
 __all__ = ['Personal']
@@ -75,8 +74,8 @@ class Personal(BaseProvider):
         :Example:
             John.
         """
-        key = self._validate_enum(gender, Gender)
-        names = self._data['names'].get(key)
+        key = self._validate_enum(gender, Gender, rnd=self.random)
+        names = self.data['names'].get(key)
         return self.random.choice(names)
 
     def surname(self, gender: Optional[Gender] = None) -> str:
@@ -90,10 +89,10 @@ class Personal(BaseProvider):
         """
         surnames = self._data['surnames']
 
-        # Surnames separated by gender.
-        if isinstance(surnames, dict):
-            key = self._validate_enum(gender, Gender)
-            surnames = surnames[key]
+        # Separated by gender.
+        if self.locale in SURNAMES_SEPARATED_BY_GENDER:
+            key = self._validate_enum(gender, Gender, rnd=self.random)
+            return self.random.choice(surnames.get(key))
 
         return self.random.choice(surnames)
 
@@ -112,14 +111,16 @@ class Personal(BaseProvider):
         :param gender: The gender.
         :param title_type: TitleType enum object.
         :return: The title.
-        :raises NonEnumerableError: if gender or title_type in incorrect format.
+        :raises NonEnumerableError: if gender or title_type in incorrect
+            format.
 
         :Example:
             PhD.
         """
-        gender_key = self._validate_enum(gender, Gender)
+        gender_key = self._validate_enum(gender, Gender, rnd=self.random)
         title_key = self._validate_enum(
-            item=title_type, enum=TitleType)
+            item=title_type, enum=TitleType, rnd=self.random,
+        )
 
         titles = self._data['title'][gender_key][title_key]
         return self.random.choice(titles)
@@ -164,6 +165,7 @@ class Personal(BaseProvider):
         name = self.random.choice(USERNAMES)
         date = self.random.randint(1800, 2070)
 
+        # FIX: Generate templates only when it needed (lambdas?)
         templates = {
             # UppercaseDate
             'Ud': '{U}{d}'.format(
@@ -212,7 +214,7 @@ class Personal(BaseProvider):
             ),
         }
 
-        supported = list(templates.keys())
+        supported = sorted(templates.keys())
 
         if template:
             try:
@@ -244,8 +246,9 @@ class Personal(BaseProvider):
         password = ''.join([self.random.choice(text) for _ in range(length)])
 
         if hashed:
-            crypto = Cryptographic()
-            return crypto.hash(algorithm=Algorithm.MD5)
+            md5 = hashlib.md5()
+            md5.update(password.encode())
+            return md5.hexdigest()
         else:
             return password
 
@@ -269,7 +272,8 @@ class Personal(BaseProvider):
             domain=domain,
         )
 
-    def social_media_profile(self, site: Optional[SocialNetwork] = None) -> str:
+    def social_media_profile(
+            self, site: Optional[SocialNetwork] = None) -> str:
         """Generate profile for random social network.
 
         :return: Profile in some network.
@@ -281,6 +285,7 @@ class Personal(BaseProvider):
         key = self._validate_enum(
             item=site,
             enum=SocialNetwork,
+            rnd=self.random,
         )
         website = SOCIAL_NETWORKS[key]
         url = 'https://www.' + website
@@ -421,10 +426,11 @@ class Personal(BaseProvider):
         """
         nationalities = self._data['nationality']
 
-        # Separated by gender
-        if isinstance(nationalities, dict):
-            key = self._validate_enum(gender, Gender)
-            nationalities = nationalities[key]
+        nations = self.data['nationality']
+
+        if self.locale in separated_locales:
+            key = self._validate_enum(gender, Gender, rnd=self.random)
+            return self.random.choice(nations[key])
 
         return self.random.choice(nationalities)
 
@@ -498,7 +504,7 @@ class Personal(BaseProvider):
             masks = self._data.get('telephone_fmt', [default])
             mask = self.random.choice(masks)
 
-        return custom_code(mask=mask, digit=placeholder)
+        return custom_code(mask=mask, digit=placeholder, rnd=self.random)
 
     def avatar(self, size: int = 256) -> str:
         """Generate a random avatar (link to avatar) using API of  Adorable.io.
@@ -509,8 +515,7 @@ class Personal(BaseProvider):
         url = 'https://api.adorable.io/avatars/{0}/{1}.png'
         return url.format(size, self.password(hashed=True))
 
-    @staticmethod
-    def identifier(mask: str = '##-##/##') -> str:
+    def identifier(self, mask: str = '##-##/##') -> str:
         """Generate a random identifier by mask. With this method you can generate
         any identifiers that you need. Simply select the mask that you need.
 
@@ -522,7 +527,7 @@ class Personal(BaseProvider):
         :Example:
             07-97/04
         """
-        return custom_code(mask=mask)
+        return custom_code(mask=mask, rnd=self.random)
 
     def level_of_english(self) -> str:
         """Get a random level of English.

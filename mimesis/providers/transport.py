@@ -19,7 +19,7 @@ class Transport(BaseProvider):
         :Example:
             Caledon-966O.
         """
-        model = custom_code(mask=model_mask)
+        model = custom_code(mask=model_mask, rnd=self.random)
         truck = self.random.choice(TRUCKS)
         return '{}-{}'.format(truck, model)
 
@@ -43,7 +43,7 @@ class Transport(BaseProvider):
         :Example:
             Boeing 727.
         """
-        model = custom_code(mask=model_mask)
+        model = custom_code(mask=model_mask, rnd=self.random)
         plane = self.random.choice(AIRPLANES)
         return '{} {}'.format(plane, model)
 

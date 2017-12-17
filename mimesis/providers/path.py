@@ -12,7 +12,7 @@ class Path(BaseProvider):
     def __init__(self, platform: str = sys.platform, *args, **kwargs) -> None:
         """
         :param str platform:
-            Required platform type ('linux2', 'darwin', 'win32', 'win64').
+            Required platform type ('linux', 'darwin', 'win32', 'win64').
             Supported platforms: mimesis/constant/platforms.py
         """
         super().__init__(*args, **kwargs)

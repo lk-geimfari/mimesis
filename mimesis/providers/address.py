@@ -131,8 +131,8 @@ class Address(BaseProvider):
             389213
         """
 
-        mask = self._data['postal_code_fmt']
-        return custom_code(mask=mask)
+        mask = self.data['postal_code_fmt']
+        return custom_code(mask=mask, rnd=self.random)
 
     def country_iso_code(self, fmt: Optional[CountryCode] = None) -> str:
         """Get a random ISO code of country.
@@ -145,7 +145,7 @@ class Address(BaseProvider):
             DE
         """
         if fmt is None:
-            fmt = CountryCode.get_random_item()
+            fmt = CountryCode.get_random_item(rnd=self.random)
 
         if fmt and fmt in CountryCode:
             codes = COUNTRIES_ISO[fmt.value]

@@ -216,7 +216,6 @@ or multiple custom providers using method `add_providers()`:
 
 Too lazy to search for data? No problem, we found them for you and collected them [here](https://github.com/mimesis-lab/mimesis-extra-data).
 
-
 ## Builtins specific data providers
 
 Some countries have data types specific to that country. For example «Social Security Number» (SSN) in the United States of America (`en`), and «Cadastro de Pessoas Físicas» (CPF) in Brazil (`pt-br`).
@@ -283,6 +282,38 @@ Output:
 
 Mimesis support generating data by schema only starting from version `1.0.0`.
 
+## Seed supporting
+
+#### TODO:
+
+- [x] Write seed tests for all providers
+- [x] Fix provides and utils for seed supporting
+- [ ] Write schema seed tests
+- [ ] Fix schema for seed support
+- [ ] Add reseed method to base provider
+- [ ] Write examples
+- [ ] Micro optimisations
+	- [ ] Address
+	- [ ] Business
+	- [ ] Clothing Sizes
+	- [ ] Code
+	- [ ] Cryptographic
+	- [ ] Datetime
+	- [ ] Development
+	- [ ] File
+	- [ ] Food
+	- [ ] Games
+	- [ ] Hardware
+	- [ ] Internet
+	- [ ] Numbers
+	- [ ] Path
+	- [ ] Payment
+	- [ ] Personal
+	- [ ] Science
+	- [ ] Structured
+	- [ ] Text
+	- [ ] Transport
+	- [ ] Unit system
 
 ## Integration with py.test and factory_boy
 We have created libraries which can help you easily use Mimesis with `factory_boy` and `py.test`.
