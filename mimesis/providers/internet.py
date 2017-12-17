@@ -12,9 +12,12 @@ from mimesis.typing import Size
 
 class Internet(BaseProvider):
     """Class for generate the internet data."""
+    def __init__(self, *args, **kwargs):
+        """"""
+        super().__init__(*args, **kwargs)
+        self._file = File(seed=self.seed)
 
-    @staticmethod
-    def content_type(mime_type: Optional[MimeType] = None) -> str:
+    def content_type(self, mime_type: Optional[MimeType] = None) -> str:
         """Get a random HTTP content type.
 
         :return: Content type.
@@ -22,7 +25,7 @@ class Internet(BaseProvider):
         :Example:
             Content-Type: application/json
         """
-        fmt = File().mime_type(type_=mime_type)
+        fmt = self._file.mime_type(type_=mime_type)
         return 'Content-Type: {}'.format(fmt)
 
     def http_status_code(self, code_only: bool = True) -> str:
@@ -204,7 +207,7 @@ class Internet(BaseProvider):
         :return: Top level domain.
         :raises NonEnumerableError: if tld_type not in DomainType.
         """
-        key = self._validate_enum(item=tld_type, enum=TLDType)
+        key = self._validate_enum(item=tld_type, enum=TLDType, rnd=self.random)
         return self.random.choice(TLD[key])
 
     def subreddit(self, nsfw: bool = False,
@@ -249,7 +252,7 @@ class Internet(BaseProvider):
         :Example:
             AMQP
         """
-        key = self._validate_enum(item=layer, enum=Layer)
+        key = self._validate_enum(item=layer, enum=Layer, rnd=self.random)
         protocols = NETWORK_PROTOCOLS[key]
         return self.random.choice(protocols)
 

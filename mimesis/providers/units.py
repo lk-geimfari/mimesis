@@ -16,7 +16,8 @@ class UnitSystem(BaseProvider):
         :param symbol: Return only symbol
         :return: Unit.
         """
-        result = self._validate_enum(item=name, enum=UnitName)
+
+        result = self._validate_enum(item=name, enum=UnitName, rnd=self.random)
 
         if symbol:
             return result[1]
@@ -34,8 +35,7 @@ class UnitSystem(BaseProvider):
         :Example:
             mega
         """
-        prefixes = SI_PREFIXES_SYM if \
-            symbol else SI_PREFIXES
+        prefixes = SI_PREFIXES_SYM if symbol else SI_PREFIXES
 
-        key = self._validate_enum(item=sign, enum=PrefixSign)
+        key = self._validate_enum(item=sign, enum=PrefixSign, rnd=self.random)
         return self.random.choice(prefixes[key])

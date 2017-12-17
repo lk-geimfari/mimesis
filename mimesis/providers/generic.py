@@ -19,6 +19,7 @@ from mimesis.providers.path import Path
 from mimesis.providers.payment import Payment
 from mimesis.providers.personal import Personal
 from mimesis.providers.science import Science
+from mimesis.providers.structured import Structured
 from mimesis.providers.text import Text
 from mimesis.providers.transport import Transport
 from mimesis.providers.units import UnitSystem
@@ -27,6 +28,7 @@ from mimesis.providers.units import UnitSystem
 class Generic(BaseProvider):
     """A lazy initialization of locale for all classes that have locales."""
 
+    # TODO: Refactor init
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self._personal = Personal
@@ -38,17 +40,18 @@ class Generic(BaseProvider):
         self._science = Science
         self._code = Code
         self._transport = Transport
-        self.unit_system = UnitSystem()
-        self.file = File()
-        self.numbers = Numbers()
-        self.development = Development()
-        self.hardware = Hardware()
-        self.clothing_sizes = ClothingSizes()
-        self.internet = Internet()
-        self.path = Path()
-        self.payment = Payment()
-        self.games = Games()
-        self.cryptographic = Cryptographic()
+        self._unit_system = UnitSystem
+        self._file = File
+        self._numbers = Numbers
+        self._development = Development
+        self._hardware = Hardware
+        self._clothing_sizes = ClothingSizes
+        self._internet = Internet
+        self._path = Path
+        self._payment = Payment
+        self._games = Games
+        self._cryptographic = Cryptographic
+        self._structured = Structured
 
     def __getattr__(self, attrname: str):
         """Get _attribute without underscore
@@ -58,7 +61,10 @@ class Generic(BaseProvider):
         """
         attribute = object.__getattribute__(self, '_' + attrname)
         if attribute and callable(attribute):
-            return attribute(self.locale)
+            self.__dict__[attrname] = attribute(
+                locale=self.locale, seed=self.seed,
+            )
+            return self.__dict__[attrname]
 
     def __dir__(self) -> List[str]:
         attributes = []

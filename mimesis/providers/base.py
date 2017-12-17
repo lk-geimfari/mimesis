@@ -10,18 +10,21 @@ class ValidateEnumMixin(object):
     A mixin which helps validate enums.
     """
 
+    # TODO: pass seed and init random field in ValidateEnumMixin class?
     @staticmethod
-    def _validate_enum(item: Any, enum: Any) -> Any:
+    def _validate_enum(item: Any, enum: Any,
+                       rnd: Optional[Random] = Random()) -> Any:
         """Validate enum parameter of method in subclasses of BaseProvider.
 
         :param item: Item of enum object.
         :param enum: Enum object.
+        :param rnd: Custom random object.
         :return: Value of item.
         :raises NonEnumerableError: if ``item`` not in ``enum``.
         """
 
         if item is None:
-            result = enum.get_random_item()
+            result = enum.get_random_item(rnd=rnd)
         elif item and isinstance(item, enum):
             result = item
         else:

@@ -13,8 +13,10 @@ class Numbers(BaseProvider):
         :return: The list of floating-point numbers.
         :rtype: List of floats
         """
-        nums = [self.random.random()
-                for _ in range(10 ** int(n))]
+        nums = [
+            self.random.random()
+            for _ in range(10 ** n)
+        ]
         return nums
 
     @staticmethod

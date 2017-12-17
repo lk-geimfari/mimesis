@@ -216,7 +216,6 @@ or multiple custom providers using method `add_providers()`:
 
 Too lazy to search for data? No problem, we found them for you and collected them [here](https://github.com/mimesis-lab/mimesis-extra-data).
 
-
 ## Builtins specific data providers
 
 Some countries have data types specific to that country. For example «Social Security Number» (SSN) in the United States of America (`en`), and «Cadastro de Pessoas Físicas» (CPF) in Brazil (`pt-br`).
@@ -282,6 +281,36 @@ Output:
 ```
 
 Mimesis support generating data by schema only starting from version `1.0.0`.
+
+## Generating seeded data
+For generating seeded data, just pass `seed: int` parameter to provider:
+
+```python
+>>> from mimesis import Generic
+>>> from mimesis.enums import TLDType
+
+>>> g = Generic('en', seed=0x0123456789ABCDEF)
+
+>>> [g.datetime.month() for _ in range(4)]
+['June', 'July', 'May', 'September']
+
+>>> [g.food.fruit() for _ in range(4)]
+['Gooseberry', 'Jaltomata procumbens', 'Duku', 'Midyim']
+
+>>> [g.internet.top_level_domain(TLDType.GEOTLD) for _ in range(4)]
+['.zulu', '.hamburg', '.istanbul', '.doha']
+
+>>> g = Generic('en', seed=0x0123456789ABCDEF)
+
+>>> [g.internet.top_level_domain(TLDType.GEOTLD) for _ in range(4)]
+['.zulu', '.hamburg', '.istanbul', '.doha']
+
+>>> [g.datetime.month() for _ in range(4)]
+['June', 'July', 'May', 'September']
+
+>>> [g.food.fruit() for _ in range(4)]
+['Gooseberry', 'Jaltomata procumbens', 'Duku', 'Midyim']
+```
 
 
 ## Integration with py.test and factory_boy
