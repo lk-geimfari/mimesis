@@ -82,6 +82,8 @@ class Text(BaseProvider):
             science, network, god, octopus, love.
         """
         words = self._data['words'].get('normal')
+        if self.seed:
+            words = sorted(words)
         words_list = [self.random.choice(words) for _ in range(quantity)]
         return words_list
 
