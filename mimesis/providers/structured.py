@@ -7,6 +7,7 @@ from mimesis.providers.internet import Internet
 from mimesis.providers.text import Text
 
 
+# TODO: Optimize this class
 class Structured(BaseProvider):
     """Provider for structured text data such as CSS, HTML, JSON etc."""
 
@@ -15,8 +16,8 @@ class Structured(BaseProvider):
         :param str locale: Current locale.
         """
         super().__init__(*args, **kwargs)
-        self.__inet = Internet()
-        self.__text = Text('en')
+        self.__inet = Internet(seed=self.seed)
+        self.__text = Text('en', seed=self.seed)
 
     def css(self) -> str:
         """Generates a random snippet of CSS.
@@ -26,7 +27,7 @@ class Structured(BaseProvider):
         selector = self.random.choice(CSS_SELECTORS)
         css_sel = '{}{}'.format(selector, self.__text.word())
 
-        cont_tag = self.random.choice(list(HTML_CONTAINER_TAGS.keys()))
+        cont_tag = self.random.choice(sorted(HTML_CONTAINER_TAGS.keys()))
         mrk_tag = self.random.choice(HTML_MARKUP_TAGS)
 
         base = '{}'.format(self.random.choice([cont_tag, mrk_tag, css_sel]))
@@ -42,7 +43,7 @@ class Structured(BaseProvider):
         :Examples:
             'background-color: #f4d3a1'
         """
-        prop = self.random.choice(list(CSS_PROPERTIES.keys()))
+        prop = self.random.choice(sorted(CSS_PROPERTIES.keys()))
         val = CSS_PROPERTIES[prop]
 
         if isinstance(val, list):
@@ -64,8 +65,8 @@ class Structured(BaseProvider):
             Ports are created with the built-in function open_port.
             </span>'
         """
-        tag_name = self.random.choice(list(HTML_CONTAINER_TAGS))
-        tag_attributes = list(HTML_CONTAINER_TAGS[tag_name])  # type: ignore
+        tag_name = self.random.choice(sorted(HTML_CONTAINER_TAGS))
+        tag_attributes = sorted(HTML_CONTAINER_TAGS[tag_name])  # type: ignore
         k = self.random.randint(1, len(tag_attributes))
 
         selected_attrs = self.random.sample(tag_attributes, k=k)
