@@ -1,15 +1,7 @@
 # -*- coding: utf-8 -*-
 import re
 
-import pytest
-
-from mimesis import Path
 from mimesis.data import FOLDERS, PROGRAMMING_LANGS, PROJECT_NAMES
-
-
-@pytest.fixture
-def _seeded_path():
-    return Path(seed=42, platform='linux')
 
 
 def test_root(path):
@@ -26,29 +18,21 @@ def test_user(path):
     user = path.user()
     pattern_dictionary = {
         'win32': '(C)(:)(\\\\)(Users)(\\\\).*[^(\\\\)]',
-        'linux': '(/)(home)(/).*',
+        'linux2': '(/)(home)(/).*',
     }
     if path.platform == 'win32':
         pattern = pattern_dictionary.get('win32')
     else:
-        pattern = pattern_dictionary.get('linux')
+        pattern = pattern_dictionary.get('linux2')
     result = re.search(pattern, user)
     assert isinstance(result, type(re.search('', ''))) is True
-
-
-def test_seeded_user(_seeded_path):
-    result = _seeded_path.user()
-    assert result == '/home/imagining'
-    result = _seeded_path.user()
-    assert result == '/home/ashlie'
-    pass
 
 
 def directory_separator(path):
     slash_character = ''
     if path.platform == 'win32':
         slash_character = '\\'
-    elif path.platform == 'linux':
+    elif path.platform == 'linux2':
         slash_character = '/'
     return slash_character
 
@@ -60,13 +44,6 @@ def test_users_folder(path):
     assert folder[3] in FOLDERS
 
 
-def test_seeded_users_folder(_seeded_path):
-    result = _seeded_path.users_folder()
-    assert result == '/home/afterfuture/Downloads'
-    result = _seeded_path.users_folder()
-    assert result == '/home/briolette/Video'
-
-
 def test_dev_dir(path):
     dev_dir = path.dev_dir()
     dev_dir = dev_dir.split(directory_separator(path))
@@ -74,22 +51,8 @@ def test_dev_dir(path):
     assert dev_dir[4] in PROGRAMMING_LANGS
 
 
-def test_seeded_dev_dir(_seeded_path):
-    result = _seeded_path.dev_dir()
-    assert result == '/home/schlock/Development/Assembly'
-    result = _seeded_path.dev_dir()
-    assert result == '/home/boons/Dev/Dart'
-
-
 def test_project_dir(path):
     project_path = path.project_dir()
     project_path = project_path.split(directory_separator(path))
     assert len(project_path) == 6
     assert project_path[5] in PROJECT_NAMES
-
-
-def test_seeded_project_dir(_seeded_path):
-    result = _seeded_path.project_dir()
-    assert result == '/home/calcine/Development/Python/carnotaurus'
-    result = _seeded_path.project_dir()
-    assert result == '/home/saxes/Development/C++/gobisaurus'
