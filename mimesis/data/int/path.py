@@ -1,6 +1,7 @@
+# https://docs.python.org/3.5/library/sys.html#sys.platform
 PLATFORMS = {
-    'LINUX2': {
-        'name': 'linux2',
+    'LINUX': {
+        'name': 'linux',
         'path_separator': '/',
         'root': '/',
         'home': '/home/',
