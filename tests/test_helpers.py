@@ -53,3 +53,7 @@ def test_custom_code(random):
     assert a.isalpha()
     assert b.isdigit()
     assert c.isalpha()
+
+    random.seed(50)
+    result = random.custom_code()
+    assert result == 'M262'
