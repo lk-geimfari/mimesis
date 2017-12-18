@@ -3,10 +3,9 @@ import string
 from typing import Optional
 
 from mimesis.data import CREDIT_CARD_NETWORKS
-from mimesis.enums import Algorithm, CardType, Gender
+from mimesis.enums import CardType, Gender
 from mimesis.exceptions import NonEnumerableError
 from mimesis.providers.base import BaseProvider
-from mimesis.providers.cryptographic import Cryptographic
 from mimesis.providers.personal import Personal
 from mimesis.utils import luhn_checksum
 
@@ -16,7 +15,7 @@ class Payment(BaseProvider):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.__personal = Personal('en')
+        self.__personal = Personal('en', seed=self.seed)
 
     def cid(self) -> int:
         """Generate a random CID code.
@@ -51,8 +50,7 @@ class Payment(BaseProvider):
         address = [self.random.choice(letters) for _ in range(33)]
         return type_ + ''.join(address)
 
-    @staticmethod
-    def ethereum_address() -> str:
+    def ethereum_address(self) -> str:
         """Get random dummy Ethereum address.
 
         .. Note: The address will look like Ethereum address,
@@ -64,8 +62,9 @@ class Payment(BaseProvider):
         :Example:
             0xe8ece9e6ff7dba52d4c07d37418036a89af9698d
         """
-        sha1 = Cryptographic('en').hash(Algorithm.SHA1)
-        return '0x{hash}'.format(hash=sha1)
+        return '0x' + (
+            self.random.getrandbits(160)
+        ).to_bytes(20, byteorder='big').hex()
 
     def credit_card_network(self) -> str:
         """Get random credit card network
