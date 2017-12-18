@@ -1,14 +1,14 @@
+import hashlib
 from string import ascii_letters, digits, punctuation
 from typing import Optional, Union
 
 from mimesis.data import (BLOOD_GROUPS, CALLING_CODES, EMAIL_DOMAINS,
                           ENGLISH_LEVEL, GENDER_SYMBOLS, MUSIC_GENRE,
                           SEXUALITY_SYMBOLS, SOCIAL_NETWORKS, USERNAMES)
-from mimesis.enums import Algorithm, Gender, SocialNetwork, TitleType
+from mimesis.enums import Gender, SocialNetwork, TitleType
 from mimesis.exceptions import NonEnumerableError
 from mimesis.providers.base import BaseProvider
-from mimesis.providers.cryptographic import Cryptographic
-from mimesis.utils import custom_code, pull
+from mimesis.utils import pull
 
 __all__ = ['Personal']
 
@@ -244,8 +244,9 @@ class Personal(BaseProvider):
         password = ''.join([self.random.choice(text) for _ in range(length)])
 
         if hashed:
-            crypto = Cryptographic()
-            return crypto.hash(algorithm=Algorithm.MD5)
+            md5 = hashlib.md5()
+            md5.update(password.encode())
+            return md5.hexdigest()
         else:
             return password
 
@@ -498,7 +499,7 @@ class Personal(BaseProvider):
             masks = self._data.get('telephone_fmt', [default])
             mask = self.random.choice(masks)
 
-        return custom_code(mask=mask, digit=placeholder)
+        return self.random.custom_code(mask=mask, digit=placeholder)
 
     def avatar(self, size: int = 256) -> str:
         """Generate a random avatar (link to avatar) using API of  Adorable.io.
@@ -509,8 +510,7 @@ class Personal(BaseProvider):
         url = 'https://api.adorable.io/avatars/{0}/{1}.png'
         return url.format(size, self.password(hashed=True))
 
-    @staticmethod
-    def identifier(mask: str = '##-##/##') -> str:
+    def identifier(self, mask: str = '##-##/##') -> str:
         """Generate a random identifier by mask. With this method you can generate
         any identifiers that you need. Simply select the mask that you need.
 
@@ -522,7 +522,7 @@ class Personal(BaseProvider):
         :Example:
             07-97/04
         """
-        return custom_code(mask=mask)
+        return self.random.custom_code(mask=mask)
 
     def level_of_english(self) -> str:
         """Get a random level of English.

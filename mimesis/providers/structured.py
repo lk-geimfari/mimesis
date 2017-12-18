@@ -11,12 +11,10 @@ class Structured(BaseProvider):
     """Provider for structured text data such as CSS, HTML, JSON etc."""
 
     def __init__(self, *args, **kwargs):
-        """
-        :param str locale: Current locale.
-        """
+        # TODO: Optimize this class
         super().__init__(*args, **kwargs)
-        self.__inet = Internet()
-        self.__text = Text('en')
+        self.__inet = Internet('en', seed=self.seed)
+        self.__text = Text('en', seed=self.seed)
 
     def css(self) -> str:
         """Generates a random snippet of CSS.

@@ -5,7 +5,7 @@ from mimesis.data import (CALLING_CODES, CONTINENT_CODES, COUNTRIES_ISO,
 from mimesis.enums import CountryCode
 from mimesis.exceptions import NonEnumerableError
 from mimesis.providers.base import BaseProvider
-from mimesis.utils import custom_code, pull
+from mimesis.utils import pull
 
 
 class Address(BaseProvider):
@@ -132,7 +132,7 @@ class Address(BaseProvider):
         """
 
         mask = self._data['postal_code_fmt']
-        return custom_code(mask=mask)
+        return self.random.custom_code(mask=mask)
 
     def country_iso_code(self, fmt: Optional[CountryCode] = None) -> str:
         """Get a random ISO code of country.
