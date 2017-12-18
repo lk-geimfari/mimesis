@@ -34,7 +34,7 @@ class USASpecProvider(BaseSpecProvider):
             ),
         }
         mask = self.random.choice(services[service])  # type: ignore
-        return self.code(mask=mask)
+        return self.random.custom_code(mask=mask)
 
     def ssn(self) -> str:
         """Generate a random, but valid Social Security Number.
