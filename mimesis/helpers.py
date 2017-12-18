@@ -1,5 +1,6 @@
 import os
 import random
+import string
 from typing import Any, List, Union
 
 
@@ -43,3 +44,26 @@ class Random(random.Random):
         """
         seq = [self.choice(seq) for _ in range(end)]
         return ''.join(seq)
+
+    def custom_code(self, mask: str = '@###',
+                    char: str = '@', digit: str = '#') -> str:
+        """Generate custom code using ascii uppercase and random integers.
+
+        :param mask: Mask of code.
+        :param char: Placeholder for characters.
+        :param digit: Placeholder for digits.
+        :return: Custom code.
+
+        :Example:
+            5673-AGFR-SFSFF-1423-4/AD.
+        """
+        code = ''
+        for p in mask:
+            if p == char:
+                code += self.choice(string.ascii_uppercase)
+            elif p == digit:
+                code += str(self.randint(0, 9))
+            else:
+                code += p
+
+        return code
