@@ -48,6 +48,8 @@ class Cryptographic(BaseProvider):
         :return: Bytes.
         :rtype: bytes
         """
+        if self.seed:
+            return bytes(self.random.getrandbits(8) for _ in range(entropy))
         return self.random.urandom(entropy)
 
     def token(self, entropy: int = 32) -> str:
@@ -59,12 +61,14 @@ class Cryptographic(BaseProvider):
         token = hexlify(self.bytes(entropy))
         return token.decode('ascii')
 
-    @staticmethod
-    def salt() -> str:
+    def salt(self) -> str:
         """Generate salt (not cryptographically safe) using uuid4().
 
         :return: Salt.
         """
+        if self.seed:
+            bits = self.random.getrandbits(128)
+            return uuid.UUID(int=bits, version=4).hex
         return uuid.uuid4().hex
 
     def mnemonic_code(self, length: int = 12) -> str:
@@ -73,8 +77,12 @@ class Cryptographic(BaseProvider):
         :param length: Length of code (number of words).
         :return: Mnemonic code.
         """
+        # ISSUE: for each call init provider and load locale data
         text = Text('en')
         words = text._data['words']['normal']
+
+        if self.seed:
+            words = sorted(words)
 
         self.random.shuffle(words)
         code = [self.random.choice(words) for _ in range(length)]

@@ -10,9 +10,9 @@ from mimesis.providers.text import Text
 class File(BaseProvider):
     """Class for generate fake data for files."""
 
-    def __init__(self):
-        super().__init__()
-        self.__text = Text('en')
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.__text = Text('en', seed=self.seed)
 
     def __sub(self, string: str = '') -> str:
         """Replace spaces in string.
