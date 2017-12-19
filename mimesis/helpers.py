@@ -2,6 +2,8 @@ import os
 import random
 from typing import Any, List, Union
 
+__all__ = ['Random']
+
 
 class Random(random.Random):
     """Custom Random() class for the possibility of extending."""
@@ -43,3 +45,32 @@ class Random(random.Random):
         """
         seq = [self.choice(seq) for _ in range(end)]
         return ''.join(seq)
+
+    def custom_code(self, mask: str = '@###',
+                    char: str = '@', digit: str = '#') -> str:
+        """Generate custom code using ascii uppercase and random integers.
+        :param mask: Mask of code.
+        :param char: Placeholder for characters.
+        :param digit: Placeholder for digits.
+        :return: Custom code.
+        :Example:
+            5673-AGFR-SFSFF-1423-4/AD.
+        """
+        char_code = ord(char)
+        digit_code = ord(digit)
+        code = bytearray(len(mask))
+
+        def random_int(a: int, b: int) -> int:
+            b = b - a
+            return int(self.random() * b) + a
+
+        _mask = mask.encode()
+        for i, p in enumerate(_mask):
+            if p == char_code:
+                a = random_int(65, 91)  # A-Z
+            elif p == digit_code:
+                a = random_int(48, 58)  # 0-9
+            else:
+                a = p
+            code[i] = a
+        return code.decode()

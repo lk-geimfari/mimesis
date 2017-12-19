@@ -6,8 +6,8 @@ import socket
 import pytest
 
 from mimesis.exceptions import UnsupportedLocale
-from mimesis.utils import (custom_code, download_image, locale_info,
-                           luhn_checksum, pull, setup_locale, update_dict)
+from mimesis.utils import (download_image, locale_info, luhn_checksum, pull,
+                           setup_locale, update_dict)
 
 
 def is_connected():
@@ -118,13 +118,3 @@ def test_setup_locale(inp, out):
 def test_setup_locale_exception():
     with pytest.raises(UnsupportedLocale):
         setup_locale('nil')
-
-
-def test_custom_code():
-    result = custom_code(mask='@@@-###-@@@', char='@', digit='#')
-    assert len(result) == 11
-
-    a, b, c = result.split('-')
-    assert a.isalpha()
-    assert b.isdigit()
-    assert c.isalpha()

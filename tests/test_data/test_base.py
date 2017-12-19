@@ -32,3 +32,13 @@ def test_validate_enum(validate_enum_mixin, gender, excepted):
 def test_get_current_locale(locale):
     base = BaseProvider(locale=locale)
     assert locale == base.get_current_locale()
+
+
+@pytest.fixture
+def seeded_base():
+    return BaseProvider(seed=42)
+
+
+def test_base_with_seed(seeded_base):
+    result = seeded_base.random.randint(1, 10)
+    assert result == 2

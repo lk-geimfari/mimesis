@@ -1,7 +1,19 @@
+## Version 1.0.3
+
+**Fixed**:
+- Fixed issue with `seed` [#325](https://github.com/lk-geimfari/mimesis/issues/325)
+
+**Mover/Removed**:
+- Moved `custom_code` to `helpers.Random`
+
+**Optimizations**:
+- Optimized `custom_code` and it works faster by ≈50%
+
+---
+
 ## Version 1.0.2
 
 **Added**:
-
 - Added method `ethereum_address` for `Payment`
 - Added method `get_current_locale` for `BaseProvider`
 - Added method `boolean` for `Development` which returns random boolean value
@@ -11,12 +23,10 @@
 - Added object `schema.Schema` which helps generate data by schema
 
 **Fixed**:
-
 - Fixed issue `full_name` when method return female surname for male name and vice versa
 - Fixed bug with improper handling of attributes that begin with an underscore for class `schema.Field`
 
 **Updated**:
-
 - Updated method `version` for supporting pre-releases and calendar versioning
 - Renamed methods `international`, `european` and `custom` to `international_size`, `european_size` and `custom_size`
 
@@ -25,7 +35,6 @@
 ## Version 1.0.1
 
 **Updated**:
-
 - Fixed #304
 
 ---
@@ -35,7 +44,6 @@
 This is a first major version of `mimesis` and here are **breaking changes** (including changes related to support for only the latest versions of `Python`, i.e `Python 3.5` and `Python 3.6`), so there is no backwards compatibility with early versions of this library.
 
 **Added**:
-
 - Added `Field` for generating data by schema
 - Added new module `typing.py` for custom types
 - Added new module `enums.py` and support of enums in arguments of methods

@@ -93,4 +93,4 @@ class RussiaSpecProvider(BaseSpecProvider):
             451-952-540-41.
         """
         mask = '###-###-###-##'
-        return self.code(mask=mask)
+        return self.random.custom_code(mask=mask)

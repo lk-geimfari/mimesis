@@ -43,3 +43,17 @@ def test_urandom(random, n):
 def test_schoice(random, seq, length):
     result = random.schoice(seq, length)
     assert len(result) == length
+
+
+def test_custom_code(random):
+    result = random.custom_code(mask='@@@-###-@@@', char='@', digit='#')
+    assert len(result) == 11
+
+    a, b, c = result.split('-')
+    assert a.isalpha()
+    assert b.isdigit()
+    assert c.isalpha()
+
+    random.seed(50)
+    result = random.custom_code()
+    assert result == 'M262'

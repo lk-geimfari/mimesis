@@ -13,6 +13,10 @@ class Cryptographic(BaseProvider):
     """This class provides support cryptographic data.
     """
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.__words = Text('en')._data['words']
+
     def uuid(self) -> str:
         """Generate random UUID.
 
@@ -73,9 +77,7 @@ class Cryptographic(BaseProvider):
         :param length: Length of code (number of words).
         :return: Mnemonic code.
         """
-        text = Text('en')
-        words = text._data['words']['normal']
-
+        words = self.__words.get('normal')
         self.random.shuffle(words)
         code = [self.random.choice(words) for _ in range(length)]
         return ' '.join(code)

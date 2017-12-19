@@ -1,6 +1,5 @@
 from mimesis.data import AIRPLANES, CARS, TRUCKS, VR_CODES, VRC_BY_LOCALES
 from mimesis.providers.base import BaseProvider
-from mimesis.utils import custom_code
 
 
 class Transport(BaseProvider):
@@ -19,7 +18,7 @@ class Transport(BaseProvider):
         :Example:
             Caledon-966O.
         """
-        model = custom_code(mask=model_mask)
+        model = self.random.custom_code(mask=model_mask)
         truck = self.random.choice(TRUCKS)
         return '{}-{}'.format(truck, model)
 
@@ -43,7 +42,7 @@ class Transport(BaseProvider):
         :Example:
             Boeing 727.
         """
-        model = custom_code(mask=model_mask)
+        model = self.random.custom_code(mask=model_mask)
         plane = self.random.choice(AIRPLANES)
         return '{} {}'.format(plane, model)
 
