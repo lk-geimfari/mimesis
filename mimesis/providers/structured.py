@@ -80,7 +80,8 @@ class Structured(BaseProvider):
             content=self.__text.sentence(),
         )
 
-    def html_attribute_value(self, tag: str, attribute: str) -> str:
+    def html_attribute_value(self, tag: str = None,
+                             attribute: str = None) -> str:
         """Random value for specified HTML tag attribute.
 
         :param str tag: An HTML tag.
@@ -88,6 +89,15 @@ class Structured(BaseProvider):
         :return: An attribute.
         :raises NotImplementedError: if tag is unsupported.
         """
+        if not tag:
+            tag = self.random.choice(
+                list(HTML_CONTAINER_TAGS.keys()),
+            )
+        if not attribute:
+            attribute = self.random.choice(
+                list(HTML_CONTAINER_TAGS[tag].keys()),
+            )
+
         try:
             value = HTML_CONTAINER_TAGS[tag][attribute]  # type: ignore
         except KeyError:
@@ -128,13 +138,18 @@ class Structured(BaseProvider):
             key = self.__text.word()
 
             if max_depth > 0:
-                value = self.random.choice([
-                    self.__text.sentence(),
-                    self.random.randint(1, 10000),
-                    self.random.random(),
-                    self.json(max_depth=max_depth - 1,
-                              recursive=True),
-                ])
+                json_values = {
+                    'str': lambda: self.__text.sentence(),
+                    'int': lambda: self.random.randint(1, 10000),
+                    'float': lambda: self.random.random(),
+                    'bool': lambda: self.random.choice([True, False]),
+                    'null': lambda: None,
+                    'json': lambda: self.json(max_depth=max_depth - 1,
+                                              recursive=True),
+                }
+                vkey = self.random.choice(list(json_values.keys()))
+                value = json_values[vkey]()
+
                 if isinstance(root, list):
                     root.append(value)
                 elif isinstance(root, dict):

@@ -27,8 +27,7 @@ class Address(BaseProvider):
         :Example:
             134.
         """
-        number = self.random.randint(1, int(maximum))
-        return '{}'.format(number)
+        return str(int(self.random.random() * maximum))
 
     def street_name(self) -> str:
         """Get a random street name.
@@ -72,8 +71,7 @@ class Address(BaseProvider):
             )
 
         if self.locale == 'ja':
-            cities = self._data['city']
-            city = self.random.choice(cities)
+            city = self.random.choice(self._data['city'])
 
             n, nn, nnn = self.random.randints(3, 1, 100)
             return fmt.format(city=city, n=n, nn=nn, nnn=nnn)

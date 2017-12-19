@@ -23,7 +23,7 @@ class Random(random.Random):
         if amount <= 0:
             raise ValueError('Amount out of range.')
 
-        return [self.randint(a, b)
+        return [int(self.random() * (b - a)) + a
                 for _ in range(amount)]
 
     @staticmethod
