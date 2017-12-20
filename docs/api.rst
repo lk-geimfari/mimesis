@@ -74,10 +74,22 @@ UnsupportedAlgorithm
 .. autoclass:: mimesis.exceptions.UnsupportedAlgorithm
    :members:
 
+UnsupportedField
+----------------
+
+.. autoclass:: mimesis.exceptions.UnsupportedField
+   :members:
+
 UnsupportedLocale
 -----------------
 
 .. autoclass:: mimesis.exceptions.UnsupportedLocale
+   :members:
+
+UndefinedField
+--------------
+
+.. autoclass:: mimesis.exceptions.UndefinedField
    :members:
 
 UndefinedSchema
