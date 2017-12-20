@@ -5,12 +5,6 @@ from mimesis import config
 
 locales = config.LIST_OF_LOCALES
 platform = ['win32', 'linux']
-PERFORMANCE_COUNTER = 100
-
-
-def runner(method, count, *args, **kwargs):
-    result = [method(*args, **kwargs) for _ in range(count)]
-    pass
 
 
 @pytest.fixture(params=locales)
