@@ -8,6 +8,7 @@
 
 **Optimizations**:
 - Optimized `custom_code` and it works faster by ≈50%
+- Other minor optimizations in data providers
 
 ---
 
