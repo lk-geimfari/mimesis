@@ -53,8 +53,7 @@ example is given below:
     >>> person.occupation()
     'Backend Developer'
 
-    >>> templates = ['U_d', 'U-d', 'l_d', 'l-d']
-    >>> for template in templates:
+    >>> for template in ('U_d', 'U-d', 'l_d', 'l-d'):
     ...     person.username(template=template)
 
     'Adders_1893'
