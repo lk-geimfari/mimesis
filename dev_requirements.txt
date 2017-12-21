@@ -2,7 +2,7 @@ certifi==2017.11.5
 chardet==3.0.4
 codecov==2.0.10
 coverage==4.4.2
-flake8==3.4.1
+flake8==3.5.0
 flake8-builtins==1.0
 flake8-commas==0.4.3
 flake8-quotes==0.13.0
