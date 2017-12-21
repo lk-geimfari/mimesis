@@ -1,33 +1,7 @@
 from typing import Any, Optional
 
-from mimesis.exceptions import NonEnumerableError
-from mimesis.helpers import Random
+from mimesis.helpers import Random, validate_enum
 from mimesis.utils import locale_info, setup_locale
-
-
-class ValidateEnumMixin(object):
-    """
-    A mixin which helps validate enums.
-    """
-
-    @staticmethod
-    def _validate_enum(item: Any, enum: Any) -> Any:
-        """Validate enum parameter of method in subclasses of BaseProvider.
-
-        :param item: Item of enum object.
-        :param enum: Enum object.
-        :return: Value of item.
-        :raises NonEnumerableError: if ``item`` not in ``enum``.
-        """
-
-        if item is None:
-            result = enum.get_random_item()
-        elif item and isinstance(item, enum):
-            result = item
-        else:
-            raise NonEnumerableError(enum)
-
-        return result.value
 
 
 class StrMixin(object):
@@ -48,7 +22,7 @@ class StrMixin(object):
             self.__class__.__name__)
 
 
-class BaseProvider(ValidateEnumMixin, StrMixin):
+class BaseProvider(StrMixin):
     """
     This is a base class for all data providers.
     """
@@ -73,3 +47,6 @@ class BaseProvider(ValidateEnumMixin, StrMixin):
         ..Note: Default for all providers is locale ``en``.
         """
         return self.locale
+
+    def _validate_enum(self, item: Any, enum: Any) -> Any:
+        return validate_enum(item, enum, self.seed)

@@ -5,6 +5,7 @@ from typing import Optional
 from mimesis.data import CREDIT_CARD_NETWORKS
 from mimesis.enums import CardType, Gender
 from mimesis.exceptions import NonEnumerableError
+from mimesis.helpers import get_random_item
 from mimesis.providers.base import BaseProvider
 from mimesis.providers.personal import Personal
 from mimesis.utils import luhn_checksum
@@ -90,7 +91,7 @@ class Payment(BaseProvider):
         regex = re.compile('(\d{4})(\d{4})(\d{4})(\d{4})')
 
         if card_type is None:
-            card_type = CardType.get_random_item()
+            card_type = get_random_item(CardType)
 
         if card_type == CardType.VISA:
             number = self.random.randint(4000, 4999)
