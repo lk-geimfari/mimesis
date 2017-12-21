@@ -9,8 +9,8 @@ from mimesis.utils import pull
 class RussiaSpecProvider(BaseSpecProvider):
     """Specific data for Russian language"""
 
-    def __init__(self):
-        super().__init__()
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self._data = pull('builtin.json', 'ru')
 
     class Meta:
@@ -38,7 +38,7 @@ class RussiaSpecProvider(BaseSpecProvider):
         :Example:
             Алексеевна.
         """
-        gender = validate_enum(gender, Gender)
+        gender = validate_enum(gender, Gender, seed=self.seed)
         patronymics = self._data['patronymic'][gender]
         return self.random.choice(patronymics)
 

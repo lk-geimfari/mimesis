@@ -7,8 +7,8 @@ from mimesis.utils import pull
 
 
 class UkraineSpecProvider(BaseSpecProvider):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self._data = pull('builtin.json', 'uk')
 
     class Meta:
@@ -21,6 +21,6 @@ class UkraineSpecProvider(BaseSpecProvider):
         :type gender: str or int
         :return: Patronymic name.
         """
-        gender = validate_enum(gender, Gender)
+        gender = validate_enum(gender, Gender, seed=self.seed)
         patronymics = self._data['patronymic'][gender]
         return self.random.choice(patronymics)
