@@ -9,4 +9,4 @@ class BaseSpecProvider(object):
         self.random = Random()
 
         if seed is not None:
-            self.random.seed(seed)
+            self.random.seed(self.seed)
