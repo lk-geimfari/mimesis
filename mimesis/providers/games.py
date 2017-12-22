@@ -1,10 +1,10 @@
 from mimesis.data import GAMES, GAMING_PLATFORMS, GENRES, SCORE_PHRASES
-from mimesis.providers.base import BaseProvider
+from mimesis.providers.base import BaseDataProvider
 
 __all__ = ['Games']
 
 
-class Games(BaseProvider):
+class Games(BaseDataProvider):
     """Data related to Gaming and Games.
     """
 

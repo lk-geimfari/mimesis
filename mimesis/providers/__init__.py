@@ -1,4 +1,4 @@
-from mimesis.providers.base import BaseProvider
+from mimesis.providers.base import BaseProvider, BaseDataProvider
 from mimesis.providers.address import Address
 from mimesis.providers.business import Business
 from mimesis.providers.clothing import ClothingSizes
@@ -25,6 +25,9 @@ from mimesis.providers.generic import Generic
 __all__ = [
     # The main class:
     'BaseProvider',
+
+    # Data base class:
+    'BaseDataProvider',
 
     # And data providers:
     'Address',

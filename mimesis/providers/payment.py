@@ -6,12 +6,12 @@ from mimesis.data import CREDIT_CARD_NETWORKS
 from mimesis.enums import CardType, Gender
 from mimesis.exceptions import NonEnumerableError
 from mimesis.helpers import get_random_item
-from mimesis.providers.base import BaseProvider
+from mimesis.providers.base import BaseDataProvider
 from mimesis.providers.personal import Personal
 from mimesis.utils import luhn_checksum
 
 
-class Payment(BaseProvider):
+class Payment(BaseDataProvider):
     """Data related to payments"""
 
     def __init__(self, *args, **kwargs):

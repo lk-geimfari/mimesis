@@ -8,13 +8,13 @@ from mimesis.data import (BLOOD_GROUPS, CALLING_CODES, EMAIL_DOMAINS,
 from mimesis.enums import Gender, SocialNetwork, TitleType
 from mimesis.exceptions import NonEnumerableError
 from mimesis.helpers import get_random_item
-from mimesis.providers.base import BaseProvider
+from mimesis.providers.base import BaseDataProvider
 from mimesis.utils import pull
 
 __all__ = ['Personal']
 
 
-class Personal(BaseProvider):
+class Personal(BaseDataProvider):
     """Class for generate personal data, i.e names, surnames,
     age and another."""
 
