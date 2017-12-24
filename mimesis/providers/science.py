@@ -1,11 +1,11 @@
 from typing import Union
 
 from mimesis.data import MATH_FORMULAS
-from mimesis.providers.base import BaseProvider
+from mimesis.providers.base import BaseDataProvider
 from mimesis.utils import pull
 
 
-class Science(BaseProvider):
+class Science(BaseDataProvider):
     """Class for getting scientific data"""
 
     def __init__(self, *args, **kwargs):

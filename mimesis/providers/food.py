@@ -1,8 +1,8 @@
-from mimesis.providers.base import BaseProvider
+from mimesis.providers.base import BaseDataProvider
 from mimesis.utils import pull
 
 
-class Food(BaseProvider):
+class Food(BaseDataProvider):
     """Class for Food, i.e fruits, vegetables, berries and other."""
 
     def __init__(self, *args, **kwargs):

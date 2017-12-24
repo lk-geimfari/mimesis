@@ -3,10 +3,10 @@ from typing import Union
 
 from mimesis.data import (FOLDERS, PLATFORMS, PROGRAMMING_LANGS, PROJECT_NAMES,
                           USERNAMES)
-from mimesis.providers.base import BaseProvider
+from mimesis.providers.base import BaseDataProvider
 
 
-class Path(BaseProvider):
+class Path(BaseDataProvider):
     """Class that provides methods and property for generate paths."""
 
     def __init__(self, platform: str = sys.platform, *args, **kwargs) -> None:

@@ -1,9 +1,9 @@
 from mimesis.data import (BACKEND, CONTAINER, FRONTEND, LICENSES, NOSQL, OS,
                           PROGRAMMING_LANGS, SQL)
-from mimesis.providers.base import BaseProvider
+from mimesis.providers.base import BaseDataProvider
 
 
-class Development(BaseProvider):
+class Development(BaseDataProvider):
     """Class for getting fake data for Developers."""
 
     def software_license(self) -> str:

@@ -3,11 +3,11 @@ from typing import Optional
 from mimesis.data import (EAN_MASKS, IMEI_TACS, ISBN_GROUPS, ISBN_MASKS,
                           LOCALE_CODES)
 from mimesis.enums import EANFormat, ISBNFormat
-from mimesis.providers.base import BaseProvider
+from mimesis.providers.base import BaseDataProvider
 from mimesis.utils import luhn_checksum
 
 
-class Code(BaseProvider):
+class Code(BaseDataProvider):
     """Class that provides methods for generating codes (isbn, asin & etc.)"""
 
     def __init__(self, *args, **kwargs):

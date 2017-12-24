@@ -4,12 +4,12 @@ from binascii import hexlify
 from typing import Optional
 
 from mimesis.enums import Algorithm
-from mimesis.providers.base import BaseProvider
+from mimesis.providers.base import BaseDataProvider
 from mimesis.providers.text import Text
 from mimesis.typing import Bytes
 
 
-class Cryptographic(BaseProvider):
+class Cryptographic(BaseDataProvider):
     """This class provides support cryptographic data.
     """
 

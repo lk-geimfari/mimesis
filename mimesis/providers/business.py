@@ -1,10 +1,10 @@
 from mimesis.data import (CRYPTOCURRENCY_ISO_CODES, CRYPTOCURRENCY_SYMBOLS,
                           CURRENCY_ISO_CODES, CURRENCY_SYMBOLS)
-from mimesis.providers.base import BaseProvider
+from mimesis.providers.base import BaseDataProvider
 from mimesis.utils import pull
 
 
-class Business(BaseProvider):
+class Business(BaseDataProvider):
     """Class for generating data for business."""
 
     def __init__(self, *args, **kwargs):

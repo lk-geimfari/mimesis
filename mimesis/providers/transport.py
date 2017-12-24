@@ -1,8 +1,8 @@
 from mimesis.data import AIRPLANES, CARS, TRUCKS, VR_CODES, VRC_BY_LOCALES
-from mimesis.providers.base import BaseProvider
+from mimesis.providers.base import BaseDataProvider
 
 
-class Transport(BaseProvider):
+class Transport(BaseDataProvider):
     """Class that provides dummy data about transport."""
 
     def __init__(self, *args, **kwargs):
