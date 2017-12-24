@@ -2,7 +2,7 @@ import inspect
 from typing import List
 
 from mimesis.providers.address import Address
-from mimesis.providers.base import BaseProvider
+from mimesis.providers.base import BaseDataProvider
 from mimesis.providers.business import Business
 from mimesis.providers.clothing import ClothingSizes
 from mimesis.providers.code import Code
@@ -24,7 +24,7 @@ from mimesis.providers.transport import Transport
 from mimesis.providers.units import UnitSystem
 
 
-class Generic(BaseProvider):
+class Generic(BaseDataProvider):
     """A lazy initialization of locale for all classes that have locales."""
 
     def __init__(self, *args, **kwargs):
@@ -62,7 +62,7 @@ class Generic(BaseProvider):
 
     def __dir__(self) -> List[str]:
         attributes = []
-        exclude = BaseProvider().__dict__.keys()
+        exclude = BaseDataProvider().__dict__.keys()
 
         for a in self.__dict__:
             if a not in exclude:

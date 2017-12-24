@@ -3,11 +3,11 @@ from typing import Optional
 
 from mimesis.data import EXTENSIONS, MIME_TYPES
 from mimesis.enums import FileType, MimeType
-from mimesis.providers.base import BaseProvider
+from mimesis.providers.base import BaseDataProvider
 from mimesis.providers.text import Text
 
 
-class File(BaseProvider):
+class File(BaseDataProvider):
     """Class for generate fake data for files."""
 
     def __init__(self, *args, **kwargs):
