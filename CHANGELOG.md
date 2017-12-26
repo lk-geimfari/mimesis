@@ -1,7 +1,11 @@
-## Version 1.0.3
+## Version 1.0.4
 
 **Fixed**:
 - Fixed issue with `seed` [#325](https://github.com/lk-geimfari/mimesis/issues/325)
+
+---
+
+## Version 1.0.3
 
 **Mover/Removed**:
 - Moved `custom_code` to `helpers.Random`
