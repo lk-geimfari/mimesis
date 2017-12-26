@@ -2,12 +2,12 @@ import json
 
 from mimesis.data import (CSS_PROPERTIES, CSS_SELECTORS, CSS_SIZE_UNITS,
                           HTML_CONTAINER_TAGS, HTML_MARKUP_TAGS)
-from mimesis.providers.base import BaseProvider
+from mimesis.providers.base import BaseDataProvider
 from mimesis.providers.internet import Internet
 from mimesis.providers.text import Text
 
 
-class Structured(BaseProvider):
+class Structured(BaseDataProvider):
     """Provider for structured text data such as CSS, HTML, JSON etc."""
 
     def __init__(self, *args, **kwargs):

@@ -2,7 +2,7 @@ import inspect
 from typing import List
 
 from mimesis.providers.address import Address
-from mimesis.providers.base import BaseProvider
+from mimesis.providers.base import BaseDataProvider
 from mimesis.providers.business import Business
 from mimesis.providers.clothing import ClothingSizes
 from mimesis.providers.code import Code
@@ -19,12 +19,15 @@ from mimesis.providers.path import Path
 from mimesis.providers.payment import Payment
 from mimesis.providers.personal import Personal
 from mimesis.providers.science import Science
+from mimesis.providers.structured import Structured
 from mimesis.providers.text import Text
 from mimesis.providers.transport import Transport
 from mimesis.providers.units import UnitSystem
 
+__all__ = ['Generic', ]
 
-class Generic(BaseProvider):
+
+class Generic(BaseDataProvider):
     """A lazy initialization of locale for all classes that have locales."""
 
     def __init__(self, *args, **kwargs):
@@ -38,31 +41,35 @@ class Generic(BaseProvider):
         self._science = Science
         self._code = Code
         self._transport = Transport
-        self.unit_system = UnitSystem()
-        self.file = File()
-        self.numbers = Numbers()
-        self.development = Development()
-        self.hardware = Hardware()
-        self.clothing_sizes = ClothingSizes()
-        self.internet = Internet()
-        self.path = Path()
-        self.payment = Payment()
-        self.games = Games()
-        self.cryptographic = Cryptographic()
+        self.unit_system = UnitSystem(seed=self.seed)
+        self.file = File(seed=self.seed)
+        self.numbers = Numbers(seed=self.seed)
+        self.development = Development(seed=self.seed)
+        self.hardware = Hardware(seed=self.seed)
+        self.clothing_sizes = ClothingSizes(seed=self.seed)
+        self.internet = Internet(seed=self.seed)
+        self.path = Path(seed=self.seed)
+        self.payment = Payment(seed=self.seed)
+        self.games = Games(seed=self.seed)
+        self.cryptographic = Cryptographic(seed=self.seed)
+        self.structured = Structured(seed=self.seed)
 
     def __getattr__(self, attrname: str):
         """Get _attribute without underscore
-
         :param attrname: Attribute name.
         :return: An attribute.
         """
         attribute = object.__getattribute__(self, '_' + attrname)
         if attribute and callable(attribute):
-            return attribute(self.locale)
+            self.__dict__[attrname] = attribute(
+                locale=self.locale,
+                seed=self.seed,
+            )
+            return self.__dict__[attrname]
 
     def __dir__(self) -> List[str]:
         attributes = []
-        exclude = BaseProvider().__dict__.keys()
+        exclude = BaseDataProvider().__dict__.keys()
 
         for a in self.__dict__:
             if a not in exclude:
