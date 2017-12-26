@@ -138,7 +138,7 @@ class Personal(BaseDataProvider):
         """
 
         if gender is None:
-            gender = get_random_item(Gender)
+            gender = get_random_item(Gender, rnd=self.random)
 
         if gender and isinstance(gender, Gender):
             gender = gender

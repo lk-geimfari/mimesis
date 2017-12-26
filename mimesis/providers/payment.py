@@ -91,7 +91,7 @@ class Payment(BaseDataProvider):
         regex = re.compile('(\d{4})(\d{4})(\d{4})(\d{4})')
 
         if card_type is None:
-            card_type = get_random_item(CardType)
+            card_type = get_random_item(CardType, rnd=self.random)
 
         if card_type == CardType.VISA:
             number = self.random.randint(4000, 4999)
