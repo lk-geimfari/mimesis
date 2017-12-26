@@ -24,7 +24,7 @@ from mimesis.providers.text import Text
 from mimesis.providers.transport import Transport
 from mimesis.providers.units import UnitSystem
 
-__all__ = ['Generic', ]
+__all__ = ['Generic']
 
 
 class Generic(BaseDataProvider):
@@ -56,6 +56,7 @@ class Generic(BaseDataProvider):
 
     def __getattr__(self, attrname: str):
         """Get _attribute without underscore
+
         :param attrname: Attribute name.
         :return: An attribute.
         """
