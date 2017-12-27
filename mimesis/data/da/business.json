@@ -1,33 +1,5 @@
 {
   "company": {
-    "type": {
-      "abbr": [
-        "I/S",
-        "IVS",
-        "ApS",
-        "A/S",
-        "K/S",
-        "P/S",
-        "A.M.B.A.",
-        "F.M.B.A.",
-        "S.M.B.A.",
-        "G/S"
-      ],
-      "title": [
-        "Enkeltmandsvirksomhed",
-        "Forening",
-        "Interessentskab",
-        "Iværksætterselskab",
-        "Anpartsselskab",
-        "Aktieselskab",
-        "Kommanditselskab",
-        "Partnerselskab or Kommanditaktieselskab",
-        "Andelsselskab med begrænset ansvar",
-        "Forening med begrænset ansvar",
-        "Selskab med begrænset ansvar",
-        "Gensidigt selskab"
-      ]
-    },
     "name": [
       "A. Enggaard",
       "A. Enggaard Holding",
@@ -209,6 +181,34 @@
       "Wright, Thomsen & Kier",
       "Zenvo",
       "Zleep Hotels"
-    ]
+    ],
+    "type": {
+      "abbr": [
+        "A.M.B.A.",
+        "A/S",
+        "ApS",
+        "F.M.B.A.",
+        "G/S",
+        "I/S",
+        "IVS",
+        "K/S",
+        "P/S",
+        "S.M.B.A."
+      ],
+      "title": [
+        "Aktieselskab",
+        "Andelsselskab med begrænset ansvar",
+        "Anpartsselskab",
+        "Enkeltmandsvirksomhed",
+        "Forening",
+        "Forening med begrænset ansvar",
+        "Gensidigt selskab",
+        "Interessentskab",
+        "Iværksætterselskab",
+        "Kommanditselskab",
+        "Partnerselskab or Kommanditaktieselskab",
+        "Selskab med begrænset ansvar"
+      ]
+    }
   }
 }

@@ -20,45 +20,45 @@
     ]
   },
   "formats": {
-	"date": "%d-%m-%Y",
-	"time": "%H:%M:%S"
+    "date": "%d-%m-%Y",
+    "time": "%H:%M:%S"
   },
   "month": {
     "abbr": [
-      "Ja.",
-      "Feb.",
-      "Mar.",
       "Apr.",
-      "Maj",
-      "Jun.",
-      "Jul.",
       "Aug.",
-      "Sep.",
-      "Okt.",
+      "Dec.",
+      "Feb.",
+      "Ja.",
+      "Jul.",
+      "Jun.",
+      "Maj",
+      "Mar.",
       "Nov.",
-      "Dec."
+      "Okt.",
+      "Sep."
     ],
     "name": [
-      "Januar",
-      "Februar",
-      "Marts",
       "April",
-      "Maj",
-      "Juni",
-      "Juli",
       "August",
-      "September",
-      "Oktober",
+      "December",
+      "Februar",
+      "Januar",
+      "Juli",
+      "Juni",
+      "Maj",
+      "Marts",
       "November",
-      "December"
+      "Oktober",
+      "September"
     ]
   },
   "periodicity": [
-    "Daglige",
-    "Ugentlig",
-    "Månedlige",
-    "Årligt",
     "Aldrig",
-    "Sjældent"
+    "Daglige",
+    "Månedlige",
+    "Sjældent",
+    "Ugentlig",
+    "Årligt"
   ]
 }

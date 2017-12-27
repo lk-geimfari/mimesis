@@ -3,6 +3,8 @@
     "And med agurkesalat og kål",
     "Biksemad med rodfrugter",
     "Boller i Karry",
+    "Boller i karry med hjemmelavet chutney",
+    "Brændende kærlighed",
     "Dyreryg med kvædekompot",
     "Farseret porre med bløde løg og æbler",
     "Fiskefrikadeller med hjemmelavet grov urteremoulade",
@@ -13,9 +15,11 @@
     "Gule ærter med svinekæber og salat med mormordressing",
     "Hakkeboef med bloede loeg",
     "Hakkebøf med bløde løg, spejlæg og stegte rodfrugter",
+    "Jomfruhummer med blomkål",
     "Karbonade med groenaerter",
     "Karbonader med stuvede grønærter",
     "Kogt torsk med sennepssauce",
+    "Rødspætte med kartofler, karryremoulade og agurkesalat",
     "Røget sandart med kartofler, syltede rødbeder og kapers",
     "Skipperlabskovs",
     "Smørrebrød med gravad laks og kartofler",
@@ -27,18 +31,14 @@
     "Tarteletter med hoens i asparges",
     "Tarteletter med kylling og svampe",
     "Æbleflæsk",
-    "Æbleskiver",
-    "Boller i karry med hjemmelavet chutney",
-    "Brændende kærlighed",
-    "Jomfruhummer med blomkål",
-    "Rødspætte med kartofler, karryremoulade og agurkesalat"
+    "Æbleskiver"
   ],
   "drinks": [
+    "Tekïlla",
+    "Vin",
     "Vodka",
     "Whisky",
-    "Tekïlla",
-    "Øl",
-    "Vin"
+    "Øl"
   ],
   "fruits": [
     "Abrikoser",
