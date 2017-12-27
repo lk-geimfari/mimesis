@@ -1,6 +1,6 @@
 {
   "day": {
-    "abbr": [
+	"abbr": [
 	  "E",
 	  "T",
 	  "K",
@@ -8,8 +8,8 @@
 	  "R",
 	  "L",
 	  "P"
-    ],
-    "name": [
+	],
+	"name": [
 	  "Esmaspäev",
 	  "Teisipäev",
 	  "Kolmapäev",
@@ -17,14 +17,14 @@
 	  "Reede",
 	  "Laupäev",
 	  "Pühapäev"
-    ]
+	]
   },
   "formats": {
 	"date": "%d/%m/%Y",
 	"time": "%H:%M:%S"
   },
   "month": {
-    "abbr": [
+	"abbr": [
 	  "Jaan",
 	  "Veebr",
 	  "Märts",
@@ -37,8 +37,8 @@
 	  "Okt",
 	  "Nov",
 	  "Dets"
-    ],
-    "name": [
+	],
+	"name": [
 	  "Jaanuar",
 	  "Veebruar",
 	  "Märts",
@@ -51,16 +51,16 @@
 	  "Oktoober",
 	  "November",
 	  "Detsember"
-    ]
+	]
   },
   "periodicity": [
-    "Ühel päeval",
-    "Mitte kunagi",
-    "Harva",
-    "Väga sageli",
-    "Igapäevaselt",
-    "Nädalas",
-    "Kuus",
-    "Kord aastas"
+	"Ühel päeval",
+	"Mitte kunagi",
+	"Harva",
+	"Väga sageli",
+	"Igapäevaselt",
+	"Nädalas",
+	"Kuus",
+	"Kord aastas"
   ]
 }

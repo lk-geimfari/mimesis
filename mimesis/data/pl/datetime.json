@@ -1,65 +1,65 @@
 {
   "day": {
-    "name": [
-      "Poniedziałek",
-      "Wtorek",
-      "Środa",
-      "Czwartek",
-      "Piątek",
-      "Sobota",
-      "Niedziela"
-    ],
-    "abbr": [
-      "Pt.",
-      "Wt.",
-      "Śr.",
-      "Czw.",
-      "Pn.",
-      "Sob.",
-      "Niedz."
-    ]
+	"name": [
+	  "Poniedziałek",
+	  "Wtorek",
+	  "Środa",
+	  "Czwartek",
+	  "Piątek",
+	  "Sobota",
+	  "Niedziela"
+	],
+	"abbr": [
+	  "Pt.",
+	  "Wt.",
+	  "Śr.",
+	  "Czw.",
+	  "Pn.",
+	  "Sob.",
+	  "Niedz."
+	]
   },
   "formats": {
 	"date": "%d.%m.%Y",
 	"time": "%H:%M:%S"
   },
   "month": {
-    "name": [
-      "Styczeń",
-      "Luty",
-      "Marzec",
-      "Kwiecień",
-      "Maj",
-      "Czerwiec",
-      "Lipiec",
-      "Sierpień",
-      "Wrzesień",
-      "Październik",
-      "Listopad",
-      "Grudzień"
-    ],
-    "abbr": [
-      "Stycz.",
-      "Luty",
-      "Mar.",
-      "Kwiec.",
-      "Maj",
-      "Czerw.",
-      "Lip.",
-      "Sierp.",
-      "Wrzes.",
-      "Pazdz.",
-      "Listop.",
-      "Grudz."
-    ]
+	"name": [
+	  "Styczeń",
+	  "Luty",
+	  "Marzec",
+	  "Kwiecień",
+	  "Maj",
+	  "Czerwiec",
+	  "Lipiec",
+	  "Sierpień",
+	  "Wrzesień",
+	  "Październik",
+	  "Listopad",
+	  "Grudzień"
+	],
+	"abbr": [
+	  "Stycz.",
+	  "Luty",
+	  "Mar.",
+	  "Kwiec.",
+	  "Maj",
+	  "Czerw.",
+	  "Lip.",
+	  "Sierp.",
+	  "Wrzes.",
+	  "Pazdz.",
+	  "Listop.",
+	  "Grudz."
+	]
   },
   "periodicity": [
-    "Codziennie",
-    "Często",
-    "Miesięcznie",
-    "Nigdy",
-    "Pewnego razu",
-    "Rocznie",
-    "Rzadko"
+	"Codziennie",
+	"Często",
+	"Miesięcznie",
+	"Nigdy",
+	"Pewnego razu",
+	"Rocznie",
+	"Rzadko"
   ]
 }

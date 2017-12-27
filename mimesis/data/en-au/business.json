@@ -1,7 +1,7 @@
 {
   "company": {
-    "name": [
-      "MOQ LIMITED",
+	"name": [
+	  "MOQ LIMITED",
 	  "1-PAGE LIMITED",
 	  "1300 SMILES LIMITED",
 	  "1ST GROUP LIMITED",
@@ -4385,30 +4385,30 @@
 	  "ZIPTEL LIMITED",
 	  "ZYBER HOLDINGS LTD",
 	  "ZYL LIMITED"
-    ],
-    "type": {
-      "title": [
-        "Corporation",
-        "Incorporated",
-        "Limited Liability Company",
-        "Limited Liability Partnership",
-        "Limited Partnership",
-        "Proprietary Limited Company",
+	],
+	"type": {
+	  "title": [
+		"Corporation",
+		"Incorporated",
+		"Limited Liability Company",
+		"Limited Liability Partnership",
+		"Limited Partnership",
+		"Proprietary Limited Company",
 		"Trust"
-      ],
-      "abbr": [
-        "Corp.",
-        "Inc.",
-        "Ltd.",
-        "CIC",
-        "CIO",
-        "IPS",
-        "LLP",
-        "LP",
-        "Pty. Ltd.",
+	  ],
+	  "abbr": [
+		"Corp.",
+		"Inc.",
+		"Ltd.",
+		"CIC",
+		"CIO",
+		"IPS",
+		"LLP",
+		"LP",
+		"Pty. Ltd.",
 		"Tr."
-      ]
-    }
+	  ]
+	}
   }
 }
 
