@@ -6,8 +6,8 @@ from mimesis.utils import pull
 
 
 class UkraineSpecProvider(BaseSpecProvider):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self._data = pull('builtin.json', 'uk')
 
     class Meta:

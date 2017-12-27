@@ -1,15 +1,4 @@
-from enum import Enum, EnumMeta
-from random import choice
-from typing import Any
-
-
-class AllowRandom(EnumMeta):
-    """This metaclass allows method ``get_random_item()`` which
-    returns random field of enum.
-    """
-
-    def get_random_item(self) -> Any:
-        return choice(list(self))
+from enum import Enum
 
 
 class PortRange(Enum):
@@ -27,7 +16,7 @@ class PortRange(Enum):
     REGISTERED = (1024, 49151)
 
 
-class Gender(Enum, metaclass=AllowRandom):
+class Gender(Enum):
     """Value for a lot of methods which
     takes argument ``gender``.
 
@@ -40,7 +29,7 @@ class Gender(Enum, metaclass=AllowRandom):
     MALE = 'male'
 
 
-class TitleType(Enum, metaclass=AllowRandom):
+class TitleType(Enum):
     """Value for a method ``Personal.title()`` which
     takes parameter``title_type``.
 
@@ -53,7 +42,7 @@ class TitleType(Enum, metaclass=AllowRandom):
     ACADEMIC = 'academic'
 
 
-class CardType(Enum, metaclass=AllowRandom):
+class CardType(Enum):
     """Value for a method ``Payment.credit_card_number()`` which
     takes parameter ``card_type``.
 
@@ -67,7 +56,7 @@ class CardType(Enum, metaclass=AllowRandom):
     AMERICAN_EXPRESS = 'American Express'
 
 
-class Algorithm(Enum, metaclass=AllowRandom):
+class Algorithm(Enum):
     """Value for methods which take argument ``algorithm``.
 
     Example:
@@ -83,7 +72,7 @@ class Algorithm(Enum, metaclass=AllowRandom):
     SHA512 = 'sha512'
 
 
-class TLDType(Enum, metaclass=AllowRandom):
+class TLDType(Enum):
     """Value for a method ``Internet.top_level_domain()`` which
     takes parameter ``tld_type``.
 
@@ -99,7 +88,7 @@ class TLDType(Enum, metaclass=AllowRandom):
     STLD = 'stld'
 
 
-class Layer(Enum, metaclass=AllowRandom):
+class Layer(Enum):
     """Value for method ``Internet.network_protocol()`` which
     takes parameter ``layer``.
 
@@ -117,7 +106,7 @@ class Layer(Enum, metaclass=AllowRandom):
     TRANSPORT = 'transport'
 
 
-class FileType(Enum, metaclass=AllowRandom):
+class FileType(Enum):
     """Value for methods which takes parameter ``file_type``.
 
     Example:
@@ -135,7 +124,7 @@ class FileType(Enum, metaclass=AllowRandom):
     COMPRESSED = 'compressed'
 
 
-class MimeType(Enum, metaclass=AllowRandom):
+class MimeType(Enum):
     """Value for method ``File.mime_type()`` which
     takes parameter ``type_``.
 
@@ -152,7 +141,7 @@ class MimeType(Enum, metaclass=AllowRandom):
     VIDEO = 'video'
 
 
-class PrefixSign(Enum, metaclass=AllowRandom):
+class PrefixSign(Enum):
     """Value for method ``UnitSystem.prefix()`` which
     takes parameter ``sign``.
 
@@ -165,7 +154,7 @@ class PrefixSign(Enum, metaclass=AllowRandom):
     NEGATIVE = 'negative'
 
 
-class CountryCode(Enum, metaclass=AllowRandom):
+class CountryCode(Enum):
     """Value for method ``Address.country_iso_code()`` which
     takes parameter ``fmt``.
 
@@ -179,7 +168,7 @@ class CountryCode(Enum, metaclass=AllowRandom):
     NUMERIC = 'numeric'
 
 
-class ISBNFormat(Enum, metaclass=AllowRandom):
+class ISBNFormat(Enum):
     """Value for method ``Code.isbn()`` which
     takes parameter ``fmt``.
 
@@ -192,7 +181,7 @@ class ISBNFormat(Enum, metaclass=AllowRandom):
     ISBN10 = 'isbn-10'
 
 
-class EANFormat(Enum, metaclass=AllowRandom):
+class EANFormat(Enum):
     """Value for method ``Code.ean()`` which
     takes parameter ``fmt``.
 
@@ -205,7 +194,7 @@ class EANFormat(Enum, metaclass=AllowRandom):
     EAN13 = 'ean-13'
 
 
-class SocialNetwork(Enum, metaclass=AllowRandom):
+class SocialNetwork(Enum):
     """Value for method ``Personal.social_media_profile()`` which
     takes parameter ``site``.
 
@@ -220,7 +209,7 @@ class SocialNetwork(Enum, metaclass=AllowRandom):
     VK = 'vk'
 
 
-class UnitName(Enum, metaclass=AllowRandom):
+class UnitName(Enum):
     """Value for method ``UnitSystem.unit()`` which
     takes parameter ``name``.
 

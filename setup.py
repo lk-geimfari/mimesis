@@ -1,4 +1,6 @@
 """
+.. image:: https://raw.githubusercontent.com/lk-geimfari/mimesis/master/media/logo-large-nodescr.png
+
 Mimesis
 -------
 
@@ -26,14 +28,6 @@ To install mimesis, simply use pip (or `pipenv <http://pipenv.org/>`_):
 .. code:: bash
 
     ➜  ~ pip install mimesis
-
-Also, you can install it manually:
-
-.. code:: bash
-
-    (env) ➜ python3 setup.py install
-    # or
-    (env) ➜ make install
 
 Getting started
 ---------------

@@ -13,6 +13,7 @@
 - Kevin Schellenberg [(wikkiewikkie)](https://github.com/wikkiewikkie)
 - Ryan Varley [(ryanvarley)](https://github.com/ryanvarley)
 - Ruslan Valerievich [(Valerievich)](https://github.com/Valerievich)
+- dy [(duckyou)](https://github.com/duckyou)
 
 ### Contributors
 - Kevin Schellenberg [(wikkiewikkie)](https://github.com/wikkiewikkie)

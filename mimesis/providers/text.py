@@ -1,8 +1,8 @@
-from mimesis.providers.base import BaseProvider
+from mimesis.providers.base import BaseDataProvider
 from mimesis.utils import pull
 
 
-class Text(BaseProvider):
+class Text(BaseDataProvider):
     """Class for generate text data, i.e text, lorem ipsum and another."""
 
     def __init__(self, *args, **kwargs):

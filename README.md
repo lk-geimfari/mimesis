@@ -34,7 +34,8 @@ To install mimesis, simply use pip (or [pipenv](https://docs.pipenv.org)):
 ➜  ~ pip install mimesis
 ```
 
-Also you can install it using `make`:
+Also you can install it manually, using [make]():
+
 ```zsh
 (env) ➜ make install
 ```
