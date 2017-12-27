@@ -1,40 +1,40 @@
 {
   "alphabet": {
-	"uppercase": [
-	  "Test"
-	],
-	"lowercase": [
-	  "Test"
-	]
+    "uppercase": [
+      "Test"
+    ],
+    "lowercase": [
+      "Test"
+    ]
   },
   "answers": [
-	"Yes",
-	"No",
-	"Maybe"
+    "Yes",
+    "No",
+    "Maybe"
   ],
   "color": [
-	"Test"
+    "Test"
   ],
   "level": [
-	"low",
-	"moderate",
-	"high",
-	"very high",
-	"extreme",
-	"critical"
+    "low",
+    "moderate",
+    "high",
+    "very high",
+    "extreme",
+    "critical"
   ],
   "quotes": [
-	"Test"
+    "Test"
   ],
   "text": [
-	"Test"
+    "Test"
   ],
   "words": {
-	"bad": [
-	  "Test"
-	],
-	"normal": [
-	  "Test"
-	]
+    "bad": [
+      "Test"
+    ],
+    "normal": [
+      "Test"
+    ]
   }
 }
