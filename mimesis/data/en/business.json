@@ -1,6 +1,7 @@
 {
   "company": {
     "name": [
+      "Infinity Investment Plan",
       "A Plus Lawn Care",
       "A+ Electronics",
       "A+ Investments",
@@ -407,6 +408,7 @@
       "Envirotecture Design Service",
       "Equifax",
       "Erie Insurance Group",
+      "Ernod",
       "Esselte",
       "Est�e Lauder Companies",
       "Eureka",
@@ -420,6 +422,7 @@
       "ExxonMobil",
       "Fabrik Inc.",
       "Fairchild Semiconductor",
+      "Farnod",
       "FedEx",
       "Federal Home Loan Mortgage Corporation",
       "Federal National Mortgage Association",
@@ -549,7 +552,6 @@
       "Indiewealth",
       "Infinite Wealth",
       "Infinite Wealth Planners",
-      "Infinity Investment Plan",
       "Infor",
       "Informix",
       "Integra Design",
@@ -638,6 +640,7 @@
       "Lumencraft",
       "MCI Inc.",
       "MTX Audio",
+      "Macro Design",
       "Macroserve",
       "Magik Gray",
       "Magik Grey",
@@ -672,7 +675,6 @@
       "Mauna Loa Macadamia Nut Corp.",
       "Maxaprofit",
       "Maxi-Tech",
-      "Parallel Px",
       "Maxiserve",
       "Maxtor Corporation",
       "McConn & Company",
@@ -680,13 +682,8 @@
       "MegaSolutions",
       "Megatronic",
       "Megatronic Mux",
-      "Farnod",
       "Memorec",
-      "Smith and Company",
-      "Pluto Marine",
       "Merrymaking",
-      "Macro Design",
-      "Ernod",
       "Microcat",
       "Midway Games",
       "Midwest Communications",
@@ -791,6 +788,7 @@
       "PalmSource, Inc.",
       "Pantone",
       "Papa John's Pizza",
+      "Parallel Px",
       "Paramount Pictures",
       "Parts and Pieces",
       "Paxton Media Group",
@@ -813,6 +811,7 @@
       "Planetbiz",
       "Platinum Interior Design",
       "Plochman's",
+      "Pluto Marine",
       "Pointers",
       "Polaris Industries",
       "Polaroid Corporation",
@@ -923,6 +922,7 @@
       "Six Flags",
       "Sky High Financial Advice",
       "SkyWest Airlines",
+      "Smith and Company",
       "Snap-on Tools",
       "Solid Future",
       "Solution Answers",
@@ -1149,16 +1149,6 @@
       "iRobot"
     ],
     "type": {
-      "title": [
-        "Corporation",
-        "Incorporated",
-        "Limited Liability Company",
-        "Limited Liability Limited Partnership",
-        "Limited Liability Partnership",
-        "Limited Partnership",
-        "Professional Limited Liability Company",
-        "Professional corporation"
-      ],
       "abbr": [
         "Corp.",
         "Inc.",
@@ -1168,6 +1158,16 @@
         "LP",
         "PLLC",
         "P.C"
+      ],
+      "title": [
+        "Corporation",
+        "Incorporated",
+        "Limited Liability Company",
+        "Limited Liability Limited Partnership",
+        "Limited Liability Partnership",
+        "Limited Partnership",
+        "Professional Limited Liability Company",
+        "Professional corporation"
       ]
     }
   }
