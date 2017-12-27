@@ -1,6 +1,6 @@
 {
   "company": {
-    "name": [
+	"name": [
 	  "A.L.A.R.A.",
 	  "A. Le Coq Group",
 	  "A. Le Coq",
@@ -374,22 +374,22 @@
 	  "Webmedia",
 	  "Wendre",
 	  "Werol"
-    ],
-    "type": {
-      "title": [
+	],
+	"type": {
+	  "title": [
 		"täisühing",
 		"usaldusühing",
 		"osaühing",
 		"aktsiaselts",
 		"tulundusühistu",
 		"füüsilisest isikust ettevõtja ehk FIE"
-      ],
-      "abbr": [
+	  ],
+	  "abbr": [
 		"OÜ",
 		"AS",
 		"FIE",
 		"TÜ"
-      ]
-    }
+	  ]
+	}
   }
 }

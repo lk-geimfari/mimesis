@@ -1,36 +1,5 @@
 {
   "alphabet": {
-	"uppercase": [
-	  "A",
-	  "B",
-	  "C",
-	  "D",
-	  "E",
-	  "F",
-	  "G",
-	  "H",
-	  "I",
-	  "J",
-	  "K",
-	  "L",
-	  "M",
-	  "N",
-	  "O",
-	  "P",
-	  "Q",
-	  "R",
-	  "S",
-	  "T",
-	  "U",
-	  "V",
-	  "W",
-	  "X",
-	  "Y",
-	  "Z",
-	  "Å",
-	  "Æ",
-	  "Ø"
-	],
 	"lowercase": [
 	  "a",
 	  "b",
@@ -61,11 +30,42 @@
 	  "å",
 	  "æ",
 	  "ø"
+	],
+	"uppercase": [
+	  "A",
+	  "B",
+	  "C",
+	  "D",
+	  "E",
+	  "F",
+	  "G",
+	  "H",
+	  "I",
+	  "J",
+	  "K",
+	  "L",
+	  "M",
+	  "N",
+	  "O",
+	  "P",
+	  "Q",
+	  "R",
+	  "S",
+	  "T",
+	  "U",
+	  "V",
+	  "W",
+	  "X",
+	  "Y",
+	  "Z",
+	  "Å",
+	  "Æ",
+	  "Ø"
 	]
   },
   "answers": [
-	"Ja",
 	"Ingen",
+	"Ja",
 	"Måske"
   ],
   "color": [
@@ -82,12 +82,12 @@
 	"sort"
   ],
   "level": [
-	"lav",
-	"moderat",
-	"høj",
-	"meget høj",
 	"ekstrem",
-	"kritisk"
+	"høj",
+	"kritisk",
+	"lav",
+	"meget høj",
+	"moderat"
   ],
   "quotes": [
 	"Test"

@@ -195,6 +195,15 @@
 	"Český Krumlov",
 	"Čáslav"
   ],
+  "continent": [
+	"Afrika",
+	"Amerika",
+	"Antarktida",
+	"Asie",
+	"Austrálie",
+	"Evropa",
+	"Oceánie"
+  ],
   "country": {
 	"name": [
 	  "Afghánistán",
@@ -452,15 +461,7 @@
 	  "Švýcarsko"
 	]
   },
-  "continent": [
-	"Afrika",
-	"Amerika",
-	"Antarktida",
-	"Asie",
-	"Austrálie",
-	"Evropa",
-	"Oceánie"
-  ],
+  "postal_code_fmt": "### ##",
   "state": {
 	"abbr": [
 	  "CZ-JC",
@@ -5481,6 +5482,5 @@
 	  "Žďárská",
 	  "Žďárského"
 	]
-  },
-  "postal_code_fmt": "### ##"
+  }
 }

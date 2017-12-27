@@ -570,6 +570,15 @@
 	"Øster Vrå",
 	"Østermarie"
   ],
+  "continent": [
+	"Afrika",
+	"Antarktis",
+	"Asien",
+	"Europa",
+	"Nordamerika",
+	"Oceanien",
+	"Sydamerika"
+  ],
   "country": {
 	"name": [
 	  "Afghanistan",
@@ -827,15 +836,7 @@
 	  "Østrig"
 	]
   },
-  "continent": [
-	"Afrika",
-	"Antarktis",
-	"Asien",
-	"Europa",
-	"Nordamerika",
-	"Oceanien",
-	"Sydamerika"
-  ],
+  "postal_code_fmt": "DK-####",
   "state": {
 	"abbr": [
 	  "DK.HS",
@@ -854,8 +855,8 @@
   },
   "street": {
 	"suffix": [
-	  "Plads",
-	  "Allé"
+	  "Allé",
+	  "Plads"
 	],
 	"name": [
 	  "A R Friis Vej",
@@ -5719,6 +5720,5 @@
 	  "Østrigsgade",
 	  "Østtoftevej"
 	]
-  },
-  "postal_code_fmt": "DK-####"
+  }
 }

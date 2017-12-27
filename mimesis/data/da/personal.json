@@ -2321,6 +2321,12 @@
 	"Østergaard",
 	"Østergård"
   ],
+  "telephone_fmt": [
+	"## ## ## ##",
+	"## ### ###",
+	"#### ####",
+	"+45 ### ### ###"
+  ],
   "title": {
 	"female": {
 	  "typical": [
@@ -2385,11 +2391,11 @@
 	"Vestjylland University College"
   ],
   "views_on": [
-	"Positiv",
-	"Neutral",
-	"Negativ",
+	"Kompromissøgende",
 	"Meget negativ",
-	"Kompromissøgende"
+	"Negativ",
+	"Neutral",
+	"Positiv"
   ],
   "worldview": [
 	"Agnosticism",
@@ -2402,11 +2408,5 @@
 	"Panteisme",
 	"Protestantisme",
 	"Sekulær Humanisme"
-  ],
-  "telephone_fmt": [
-	"+45 ### ### ###",
-	"## ## ## ##",
-	"#### ####",
-	"## ### ###"
   ]
 }

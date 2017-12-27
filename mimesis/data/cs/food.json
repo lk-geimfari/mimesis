@@ -1,17 +1,17 @@
 {
   "dishes": [
-	"Buchteln",
-	"Buzhenina",
-	"Goulash",
-	"Halušky",
-	"Knödel",
-	"Kulajda",
-	"Palatschinke",
-	"Smažený sýr",
-	"Svíčková",
-	"Trdelník",
+	"Žemlovka",
 	"Vánočka",
-	"Žemlovka"
+	"Trdelník",
+	"Svíčková",
+	"Smažený sýr",
+	"Palatschinke",
+	"Kulajda",
+	"Knödel",
+	"Halušky",
+	"Goulash",
+	"Buzhenina",
+	"Buchteln"
   ],
   "drinks": [
 	"Víno",
