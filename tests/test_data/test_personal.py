@@ -22,9 +22,16 @@ def test_str(personal):
     assert re.match(STR_REGEX, str(personal))
 
 
-def test_age(_personal):
-    result = _personal.age(maximum=55)
-    assert result <= 55
+@pytest.mark.parametrize(
+    'minimum, maximum', [
+        (16, 18),
+        (18, 21),
+        (22, 28),
+    ],
+)
+def test_age(_personal, minimum, maximum):
+    result = _personal.age(minimum, maximum)
+    assert (result >= minimum) and (result <= maximum)
 
 
 def test_age_store(_personal):

@@ -258,30 +258,30 @@
 	  "u-blox"
 	],
 	"type": {
-	  "title": [
-		"Aktiengesellschaft",
-		"Gesellschaft mit beschränkter Haftung",
-		"Gesellschaft des bürgerlichen Rechts",
-		"Kommanditerwerbsgesellschaft",
-		"Offene Erwerbsgesellschaft",
-		"Kollektivgesellschaft",
-		"Kommanditgesellschaft",
-		"Kommanditaktiengesellschaft",
-		"Genossenschaft",
-		"Wirtschaftliche Interessengemeinschaft"
-	  ],
 	  "abbr": [
 		"AG",
-		"GmbH",
 		"GesbR",
-		"KG",
-		"OG",
+		"GmbH",
 		"KEG",
-		"OEG",
-		"KoIG",
 		"KG",
+		"KG",
+		"KoIG",
 		"KomAG",
+		"OEG",
+		"OG",
 		"wIG"
+	  ],
+	  "title": [
+		"Aktiengesellschaft",
+		"Genossenschaft",
+		"Gesellschaft des bürgerlichen Rechts",
+		"Gesellschaft mit beschränkter Haftung",
+		"Kollektivgesellschaft",
+		"Kommanditaktiengesellschaft",
+		"Kommanditerwerbsgesellschaft",
+		"Kommanditgesellschaft",
+		"Offene Erwerbsgesellschaft",
+		"Wirtschaftliche Interessengemeinschaft"
 	  ]
 	}
   }

@@ -2,12 +2,12 @@ from calendar import monthrange, timegm
 from datetime import date, datetime, time
 
 from mimesis.data import GMT_OFFSETS, ROMAN_NUMS, TIMEZONES
-from mimesis.providers.base import BaseProvider
+from mimesis.providers.base import BaseDataProvider
 from mimesis.typing import DateTime, Timestamp
 from mimesis.utils import pull
 
 
-class Datetime(BaseProvider):
+class Datetime(BaseDataProvider):
     """Class for generate the fake data that you can use for
     working with date and time."""
 

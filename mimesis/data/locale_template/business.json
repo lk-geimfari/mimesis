@@ -1,15 +1,15 @@
 {
   "company": {
-	"name": [
-	  "Test"
-	],
-	"type": {
-	  "title": [
-		"Test"
-	  ],
-	  "abbr": [
-		"Test"
-	  ]
-	}
+    "name": [
+      "Test"
+    ],
+    "type": {
+      "abbr": [
+        "Test"
+      ],
+      "title": [
+        "Test"
+      ]
+    }
   }
 }

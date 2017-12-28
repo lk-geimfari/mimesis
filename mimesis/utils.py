@@ -13,9 +13,9 @@ from mimesis import config
 from mimesis.exceptions import UnsupportedLocale
 from mimesis.typing import JSON
 
-__all__ = ['download_image', 'locale_info', 'setup_locale']
+__all__ = ['download_image', 'locale_info', 'setup_locale', 'pull']
 
-PATH = path.abspath(path.join(path.dirname(__file__), 'data'))
+DATA_DIR = path.abspath(path.join(path.dirname(__file__), 'data'))
 
 
 def locale_info(locale: str) -> str:
@@ -95,7 +95,7 @@ def pull(file: str, locale: str = 'en') -> JSON:
         :param locale_name: Name of locale to pull.
         :return: Dict of data from file
         """
-        file_path = path.join(PATH + '/' + locale_name, file)
+        file_path = path.join(DATA_DIR + '/' + locale_name, file)
         # Needs explicit encoding for Windows
         with open(file_path, 'r', encoding='utf8') as f:
             return json.load(f)

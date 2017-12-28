@@ -556,6 +556,12 @@
 	"Zumthor",
 	"Zwyssig"
   ],
+  "telephone_fmt": [
+	"+41 43 ### ## ##",
+	"+41 56 ### ## ##",
+	"+41 78 ### ## ##",
+	"+41 ## ### ## ##"
+  ],
   "title": {
 	"female": {
 	  "academic": [
@@ -583,11 +589,5 @@
 	"Université de Genève",
 	"Université de Lausanne",
 	"École polytechnique fédérale de Lausanne"
-  ],
-  "telephone_fmt": [
-	"+41 43 ### ## ##",
-	"+41 56 ### ## ##",
-	"+41 78 ### ## ##",
-	"+41 ## ### ## ##"
   ]
 }

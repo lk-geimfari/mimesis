@@ -55,11 +55,11 @@
   },
   "periodicity": [
 	"Denní",
-	"Týdně",
-	"Měsíční",
-	"Roční",
-	"Zřídka",
 	"Jednou",
-	"Nikdy"
+	"Měsíční",
+	"Nikdy",
+	"Roční",
+	"Týdně",
+	"Zřídka"
   ]
 }

@@ -1,7 +1,7 @@
 {
   "article": [
-    "https://et.wikipedia.org/wiki/Massachusettsi_Tehnoloogiainstituut",
-    "https://et.wikipedia.org/wiki/Teadus",
+	"https://et.wikipedia.org/wiki/Massachusettsi_Tehnoloogiainstituut",
+	"https://et.wikipedia.org/wiki/Teadus",
 	"https://et.wikipedia.org/wiki/Algoritm",
 	"https://et.wikipedia.org/wiki/Krüptograafia",
 	"https://et.wikipedia.org/wiki/Edsger_Wybe_Dijkstra",
@@ -22,7 +22,7 @@
 	"https://et.wikipedia.org/wiki/MP3-mängija"
   ],
   "chemical_element": [
-    "Aktiinium|Ac|89",
+	"Aktiinium|Ac|89",
 	"Alumiinium|Al|13",
 	"Ameriitsium|Am|95",
 	"Antimon|Sb|51",

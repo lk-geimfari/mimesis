@@ -1,7 +1,8 @@
-from mimesis.helpers import Random
-from mimesis.providers.base import ValidateEnumMixin
+from mimesis.providers import BaseProvider
 
 
-class BaseSpecProvider(ValidateEnumMixin):
-    def __init__(self):
-        self.random = Random()
+class BaseSpecProvider(BaseProvider):
+    """Base provider for specific data providers."""
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)

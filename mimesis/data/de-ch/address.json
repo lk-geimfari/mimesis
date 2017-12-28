@@ -261,7 +261,36 @@
 	"Zürich",
 	"Échallens"
   ],
+  "postal_code_fmt": "####",
   "state": {
+	"abbr": [
+	  "CH-AG",
+	  "CH-AI",
+	  "CH-AR",
+	  "CH-BE",
+	  "CH-BL",
+	  "CH-BS",
+	  "CH-FR",
+	  "CH-GE",
+	  "CH-GL",
+	  "CH-GR",
+	  "CH-JU",
+	  "CH-LU",
+	  "CH-NE",
+	  "CH-NW",
+	  "CH-OW",
+	  "CH-SG",
+	  "CH-SH",
+	  "CH-SO",
+	  "CH-SZ",
+	  "CH-TG",
+	  "CH-TI",
+	  "CH-UR",
+	  "CH-VD",
+	  "CH-VS",
+	  "CH-ZG",
+	  "CH-ZH"
+	],
 	"name": [
 	  "Aargau",
 	  "Appenzell Ausserrhoden",
@@ -290,34 +319,6 @@
 	  "Wallis",
 	  "Zug",
 	  "Zürich"
-	],
-	"abbr": [
-	  "CH-AG",
-	  "CH-AR",
-	  "CH-AI",
-	  "CH-BL",
-	  "CH-BS",
-	  "CH-BE",
-	  "CH-FR",
-	  "CH-GE",
-	  "CH-GL",
-	  "CH-GR",
-	  "CH-JU",
-	  "CH-LU",
-	  "CH-NE",
-	  "CH-NW",
-	  "CH-OW",
-	  "CH-SG",
-	  "CH-SH",
-	  "CH-SZ",
-	  "CH-SO",
-	  "CH-TG",
-	  "CH-TI",
-	  "CH-UR",
-	  "CH-VS",
-	  "CH-VD",
-	  "CH-ZG",
-	  "CH-ZH"
 	]
   },
   "street": {
@@ -2702,6 +2703,5 @@
 	  "Zürichbergstrasse",
 	  "Zürichholzstrasse"
 	]
-  },
-  "postal_code_fmt": "####"
+  }
 }

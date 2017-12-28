@@ -1,31 +1,31 @@
 {
   "address_fmt": "{st_num} {st_name} {st_sfx}",
   "city": [
-	"Test"
+    "Test"
+  ],
+  "continent": [
+    "Test"
   ],
   "country": {
-	"name": [
-	  "Test"
-	]
+    "name": [
+      "Test"
+    ]
   },
-  "continent": [
-	"Test"
-  ],
+  "postal_code_fmt": "#####",
   "state": {
-	"name": [
-	  "Test"
-	],
-	"abbr": [
-	  "Test"
-	]
+    "abbr": [
+      "Test"
+    ],
+    "name": [
+      "Test"
+    ]
   },
   "street": {
-	"name": [
-	  "Test"
-	],
-	"suffix": [
-	  "Test"
-	]
-  },
-  "postal_code_fmt": "#####"
+    "name": [
+      "Test"
+    ],
+    "suffix": [
+      "Test"
+    ]
+  }
 }

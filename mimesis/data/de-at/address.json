@@ -3,9 +3,9 @@
   "city": [
 	"Amstetten",
 	"Ansfelden",
-	"Baden",
 	"Bad Ischl",
 	"Bad Vöslau",
+	"Baden",
 	"Bischofshofen",
 	"Bludenz",
 	"Braunau am Inn",
@@ -20,16 +20,16 @@
 	"Feldbach",
 	"Feldkirch",
 	"Feldkirchen in Kärnten",
-	"Gänserndorf",
 	"Gerasdorf bei Wien",
 	"Gleisdorf",
 	"Gmunden",
-	"Götzis",
 	"Gratwein-Straßengel",
 	"Graz",
 	"Groß-Enzersdorf",
-	"Hallein",
+	"Gänserndorf",
+	"Götzis",
 	"Hall in Tirol",
+	"Hallein",
 	"Hard",
 	"Hohenems",
 	"Hollabrunn",
@@ -40,10 +40,10 @@
 	"Klagenfurt am Wörthersee",
 	"Klosterneuburg",
 	"Knittelfeld",
-	"Köflach",
 	"Korneuburg",
 	"Krems an der Donau",
 	"Kufstein",
+	"Köflach",
 	"Laakirchen",
 	"Lauterach",
 	"Leibnitz",
@@ -79,8 +79,8 @@
 	"Trofaiach",
 	"Tulln an der Donau",
 	"Villach",
-	"Vöcklabruck",
 	"Voitsberg",
+	"Vöcklabruck",
 	"Völkermarkt",
 	"Waidhofen an der Ybbs",
 	"Wals-Siezenheim",
@@ -93,18 +93,8 @@
 	"Zell am See",
 	"Zwettl-Niederösterreich"
   ],
+  "postal_code_fmt": "####",
   "state": {
-	"name": [
-	  "Burgenland",
-	  "Kärnten",
-	  "Niederösterreich",
-	  "Oberösterreich",
-	  "Salzburg",
-	  "Steiermark",
-	  "Tirol",
-	  "Vorarlberg",
-	  "Wien"
-	],
 	"abbr": [
 	  "AT-1",
 	  "AT-2",
@@ -115,6 +105,17 @@
 	  "AT-7",
 	  "AT-8",
 	  "AT-9"
+	],
+	"name": [
+	  "Wien",
+	  "Vorarlberg",
+	  "Tirol",
+	  "Steiermark",
+	  "Salzburg",
+	  "Oberösterreich",
+	  "Niederösterreich",
+	  "Kärnten",
+	  "Burgenland"
 	]
   },
   "street": {
@@ -4242,6 +4243,5 @@
 	  "Zyklamengasse",
 	  "Zülowgasse"
 	]
-  },
-  "postal_code_fmt": "####"
+  }
 }

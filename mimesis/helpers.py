@@ -1,8 +1,10 @@
 import os
 import random
-from typing import Any, List, Union
+from typing import Any, List, Optional, Union
 
-__all__ = ['Random']
+from mimesis.exceptions import NonEnumerableError
+
+__all__ = ['Random', 'get_random_item', 'validate_enum']
 
 
 class Random(random.Random):
@@ -74,3 +76,35 @@ class Random(random.Random):
                 a = p
             code[i] = a
         return code.decode()
+
+
+def get_random_item(enum: Any, rnd: Optional[Random] = None) -> Any:
+    """Get random item of enum object.
+
+    :param enum: Enum object.
+    :param rnd: Custom random object.
+    :return: Random item of enum.
+    """
+    if rnd:
+        return rnd.choice(list(enum))
+    return random.choice(list(enum))
+
+
+def validate_enum(item: Any, enum: Any, rnd: Optional[Random] = None) -> Any:
+    """Validate enum parameter of method in subclasses of BaseProvider.
+
+    :param item: Item of enum object.
+    :param enum: Enum object.
+    :param rnd: Custom random object.
+    :return: Value of item.
+    :raises NonEnumerableError: if ``item`` not in ``enum``.
+    """
+
+    if item is None:
+        result = get_random_item(enum, rnd=rnd)
+    elif item and isinstance(item, enum):
+        result = item
+    else:
+        raise NonEnumerableError(enum)
+
+    return result.value

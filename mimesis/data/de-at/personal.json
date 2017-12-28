@@ -2824,6 +2824,13 @@
 	"Östringer",
 	"Überacker"
   ],
+  "telephone_fmt": [
+	"+43 ########",
+	"+43-1-#######",
+	"+43-6##-#######",
+	"+43-####-####",
+	"+431#######"
+  ],
   "title": {
 	"female": {
 	  "academic": [
@@ -2874,12 +2881,5 @@
 	"Veterinärmedizinische Universität Wien",
 	"Webster University Vienna",
 	"Wirtschaftsuniversität Wien"
-  ],
-  "telephone_fmt": [
-	"+43-1-#######",
-	"+431#######",
-	"+43-####-####",
-	"+43 ########",
-	"+43-6##-#######"
   ]
 }

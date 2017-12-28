@@ -34,10 +34,9 @@ To install mimesis, simply use pip (or [pipenv](https://docs.pipenv.org)):
 ➜  ~ pip install mimesis
 ```
 
-Also you can install it manually:
+Also you can install it manually, using [make](https://www.gnu.org/software/make/):
+
 ```zsh
-(env) ➜ python3 setup.py install
-# or
 (env) ➜ make install
 ```
 
@@ -219,7 +218,7 @@ Too lazy to search for data? No problem, we found them for you and collected the
 
 ## Builtins specific data providers
 
-Some countries have data types specific to that country. For example «Social Security Number» (SSN) in the United States of America (`en`), and «Cadastro de Pessoas Físicas» (CPF) in Brazil (`pt-br`).
+Some countries have data types specific to that country. For example «[Social Security Number](https://en.wikipedia.org/wiki/Social_Security_number)» (SSN) in the United States of America (`en`), and «[Cadastro de Pessoas Físicas](https://en.wikipedia.org/wiki/Cadastro_de_Pessoas_Físicas)» (CPF) in Brazil (`pt-br`).
 If you would like to use these country-specific providers, then you must import them explicitly:
 
 ```python

@@ -83,6 +83,19 @@ As we said above, this library is really easy to use:
     'dashed_2006'
 
 
+Seeded data
+-----------
+
+For using seeded data just pass argument ``seed`` to data provider:
+
+.. code-block:: python
+
+    >>> from mimesis import Personal
+    >>> personal = Personal('tr', seed=0xFF)
+    >>> personal.full_name()
+    'Gizem Tekand'
+
+
 Locales
 -------
 

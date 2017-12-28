@@ -23,7 +23,7 @@ class AbstractField(StrMixin):
     'Benedict Larson'
     """
 
-    def __init__(self, locale: str = 'en', seed: bool = None) -> None:
+    def __init__(self, locale: str = 'en', seed: Optional[int] = None) -> None:
         self.locale = locale
         self.seed = seed
         self.gen = Generic(self.locale, self.seed)

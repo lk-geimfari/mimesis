@@ -1,64 +1,64 @@
 {
   "day": {
-    "abbr": [
-      "Fre.",
-      "Lør.",
-      "Man.",
-      "Ons.",
-      "Søn.",
-      "Tirs.",
-      "Tors."
-    ],
-    "name": [
-      "Fredag",
-      "Lørdag",
-      "Mandag",
-      "Onsdag",
-      "Søndag",
-      "Tirsdag",
-      "Torsdag"
-    ]
+	"abbr": [
+	  "Fre.",
+	  "Lør.",
+	  "Man.",
+	  "Ons.",
+	  "Søn.",
+	  "Tirs.",
+	  "Tors."
+	],
+	"name": [
+	  "Fredag",
+	  "Lørdag",
+	  "Mandag",
+	  "Onsdag",
+	  "Søndag",
+	  "Tirsdag",
+	  "Torsdag"
+	]
   },
   "formats": {
 	"date": "%d-%m-%Y",
 	"time": "%H:%M:%S"
   },
   "month": {
-    "abbr": [
-      "Ja.",
-      "Feb.",
-      "Mar.",
-      "Apr.",
-      "Maj",
-      "Jun.",
-      "Jul.",
-      "Aug.",
-      "Sep.",
-      "Okt.",
-      "Nov.",
-      "Dec."
-    ],
-    "name": [
-      "Januar",
-      "Februar",
-      "Marts",
-      "April",
-      "Maj",
-      "Juni",
-      "Juli",
-      "August",
-      "September",
-      "Oktober",
-      "November",
-      "December"
-    ]
+	"abbr": [
+	  "Apr.",
+	  "Aug.",
+	  "Dec.",
+	  "Feb.",
+	  "Ja.",
+	  "Jul.",
+	  "Jun.",
+	  "Maj",
+	  "Mar.",
+	  "Nov.",
+	  "Okt.",
+	  "Sep."
+	],
+	"name": [
+	  "April",
+	  "August",
+	  "December",
+	  "Februar",
+	  "Januar",
+	  "Juli",
+	  "Juni",
+	  "Maj",
+	  "Marts",
+	  "November",
+	  "Oktober",
+	  "September"
+	]
   },
   "periodicity": [
-    "Daglige",
-    "Ugentlig",
-    "Månedlige",
-    "Årligt",
-    "Aldrig",
-    "Sjældent"
+	"Aldrig",
+	"Daglige",
+	"Månedlige",
+	"Sjældent",
+	"Ugentlig",
+	"Årligt"
   ]
 }

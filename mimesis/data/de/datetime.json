@@ -1,14 +1,5 @@
 {
   "day": {
-	"name": [
-	  "Montag",
-	  "Dienstag",
-	  "Mittwoch",
-	  "Donnerstag",
-	  "Freitag",
-	  "Samstag",
-	  "Sonntag"
-	],
 	"abbr": [
 	  "Mo.",
 	  "Di.",
@@ -17,6 +8,15 @@
 	  "Fr.",
 	  "Sa.",
 	  "So."
+	],
+	"name": [
+	  "Dienstag",
+	  "Donnerstag",
+	  "Freitag",
+	  "Mittwoch",
+	  "Montag",
+	  "Samstag",
+	  "Sonntag"
 	]
   },
   "formats": {
@@ -24,43 +24,43 @@
 	"time": "%H:%M:%S"
   },
   "month": {
-	"name": [
-	  "Januar",
-	  "Februar",
-	  "März",
-	  "April",
-	  "Mai",
-	  "Juni",
-	  "Juli",
-	  "August",
-	  "September",
-	  "Oktober",
-	  "November",
-	  "Dezember"
-	],
 	"abbr": [
-	  "Jan.",
-	  "Feb.",
-	  "März",
 	  "Apr.",
-	  "Mai",
-	  "Jun.",
-	  "Jul.",
 	  "Aug.",
-	  "Sept.",
-	  "Okt.",
+	  "Dez.",
+	  "Feb.",
+	  "Jan.",
+	  "Jul.",
+	  "Jun.",
+	  "Mai",
+	  "März",
 	  "Nov.",
-	  "Dez."
+	  "Okt.",
+	  "Sept."
+	],
+	"name": [
+	  "April",
+	  "August",
+	  "Dezember",
+	  "Februar",
+	  "Januar",
+	  "Juli",
+	  "Juni",
+	  "Mai",
+	  "März",
+	  "November",
+	  "Oktober",
+	  "September"
 	]
   },
   "periodicity": [
 	"Einmal",
+	"Häufig",
+	"Jährlich",
+	"Monatlich",
 	"Nie",
 	"Selten",
-	"Häufig",
 	"Täglich",
-	"Wöchentlich",
-	"Monatlich",
-	"Jährlich"
+	"Wöchentlich"
   ]
 }

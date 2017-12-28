@@ -15,6 +15,13 @@ BrazilSpecProvider
    :members:
    :special-members: __init__
 
+GermanySpecProvider
+-------------------
+
+.. autoclass:: mimesis.builtins.GermanySpecProvider
+   :members:
+   :special-members: __init__
+
 JapanSpecProvider
 -----------------
 
@@ -22,10 +29,24 @@ JapanSpecProvider
    :members:
    :special-members: __init__
 
+NetherlandsSpecProvider
+-----------------------
+
+.. autoclass:: mimesis.builtins.NetherlandsSpecProvider
+   :members:
+   :special-members: __init__
+
 RussiaSpecProvider
 ------------------
 
 .. autoclass:: mimesis.builtins.RussiaSpecProvider
+   :members:
+   :special-members: __init__
+
+UkraineSpecProvider
+-------------------
+
+.. autoclass:: mimesis.builtins.UkraineSpecProvider
    :members:
    :special-members: __init__
 
@@ -53,10 +74,22 @@ UnsupportedAlgorithm
 .. autoclass:: mimesis.exceptions.UnsupportedAlgorithm
    :members:
 
+UnsupportedField
+----------------
+
+.. autoclass:: mimesis.exceptions.UnsupportedField
+   :members:
+
 UnsupportedLocale
 -----------------
 
 .. autoclass:: mimesis.exceptions.UnsupportedLocale
+   :members:
+
+UndefinedField
+--------------
+
+.. autoclass:: mimesis.exceptions.UndefinedField
    :members:
 
 UndefinedSchema

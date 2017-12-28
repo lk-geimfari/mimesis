@@ -122,13 +122,16 @@ def test_country(address):
         (CountryCode.ISO2, 2),
         (CountryCode.ISO3, 3),
         (CountryCode.NUMERIC, 3),
+        (None, [2, 3]),
     ],
 )
 def test_country_iso(_address, fmt, length):
     iso = _address.country_iso_code(fmt=fmt)
 
-    assert iso in COUNTRIES_ISO[fmt.value]
-    assert len(iso) == length
+    if fmt is not None:
+        assert iso in COUNTRIES_ISO[fmt.value]
+
+    assert len(iso) == length or len(iso) in length
 
     with pytest.raises(NonEnumerableError):
         _address.country_iso_code(fmt='nil')

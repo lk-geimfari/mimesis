@@ -111,22 +111,22 @@
 	  "Österreichische Volksbanken"
 	],
 	"type": {
-	  "title": [
-		"Aktiengesellschaft",
-		"Gesellschaft mit beschränkter Haftung",
-		"Gesellschaft des bürgerlichen Rechts",
-		"Kommanditerwerbsgesellschaft",
-		"Offene Erwerbsgesellschaft"
-	  ],
 	  "abbr": [
 		"AG",
-		"GmbH",
 		"GesbR",
-		"KG",
-		"OG",
+		"GmbH",
 		"GmbH & Co. KG",
 		"KEG",
-		"OEG"
+		"KG",
+		"OEG",
+		"OG"
+	  ],
+	  "title": [
+		"Aktiengesellschaft",
+		"Gesellschaft des bürgerlichen Rechts",
+		"Gesellschaft mit beschränkter Haftung",
+		"Kommanditerwerbsgesellschaft",
+		"Offene Erwerbsgesellschaft"
 	  ]
 	}
   }

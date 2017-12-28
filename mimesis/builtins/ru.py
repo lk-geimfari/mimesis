@@ -8,8 +8,8 @@ from mimesis.utils import pull
 class RussiaSpecProvider(BaseSpecProvider):
     """Specific data for Russian language"""
 
-    def __init__(self):
-        super().__init__()
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self._data = pull('builtin.json', 'ru')
 
     class Meta:

@@ -3,12 +3,11 @@ from typing import Optional
 from mimesis.data import (CALLING_CODES, CONTINENT_CODES, COUNTRIES_ISO,
                           SHORTENED_ADDRESS_FMT)
 from mimesis.enums import CountryCode
-from mimesis.exceptions import NonEnumerableError
-from mimesis.providers.base import BaseProvider
+from mimesis.providers.base import BaseDataProvider
 from mimesis.utils import pull
 
 
-class Address(BaseProvider):
+class Address(BaseDataProvider):
     """Class for generate fake address data."""
 
     def __init__(self, *args, **kwargs):
@@ -142,14 +141,9 @@ class Address(BaseProvider):
         :Example:
             DE
         """
-        if fmt is None:
-            fmt = CountryCode.get_random_item()
-
-        if fmt and fmt in CountryCode:
-            codes = COUNTRIES_ISO[fmt.value]
-            return self.random.choice(codes)
-        else:
-            raise NonEnumerableError(CountryCode)
+        key = self._validate_enum(fmt, CountryCode)
+        codes = COUNTRIES_ISO[key]
+        return self.random.choice(codes)
 
     def country(self) -> str:
         """Get a random country.
