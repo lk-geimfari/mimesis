@@ -213,9 +213,9 @@ class Personal(BaseDataProvider):
             ),
         }
 
-        supported = list(templates.keys())
+        supported = list(templates)
 
-        if template:
+        if template is not None:
             try:
                 return templates[template]
             except KeyError:
