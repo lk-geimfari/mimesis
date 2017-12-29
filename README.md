@@ -37,6 +37,8 @@ To install mimesis, simply use pip (or [pipenv](https://docs.pipenv.org)):
 Also you can install it manually, using [make](https://www.gnu.org/software/make/):
 
 ```zsh
+(env) ➜ git clone git@github.com:lk-geimfari/mimesis.git
+(env) ➜ cd mimesis/
 (env) ➜ make install
 ```
 
