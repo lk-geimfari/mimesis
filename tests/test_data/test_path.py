@@ -18,12 +18,12 @@ def test_user(path):
     user = path.user()
     pattern_dictionary = {
         'win32': '(C)(:)(\\\\)(Users)(\\\\).*[^(\\\\)]',
-        'linux2': '(/)(home)(/).*',
+        'linux': '(/)(home)(/).*',
     }
     if path.platform == 'win32':
         pattern = pattern_dictionary.get('win32')
     else:
-        pattern = pattern_dictionary.get('linux2')
+        pattern = pattern_dictionary.get('linux')
     result = re.search(pattern, user)
     assert isinstance(result, type(re.search('', ''))) is True
 
@@ -32,7 +32,7 @@ def directory_separator(path):
     slash_character = ''
     if path.platform == 'win32':
         slash_character = '\\'
-    elif path.platform == 'linux2':
+    elif path.platform == 'linux':
         slash_character = '/'
     return slash_character
 
