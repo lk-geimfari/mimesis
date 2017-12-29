@@ -1,12 +1,14 @@
 from typing import Any, Optional
 
-from mimesis.helpers import Random, validate_enum
+from mimesis.exceptions import NonEnumerableError
+from mimesis.helpers import Random, get_random_item
 from mimesis.utils import locale_info, setup_locale
 
 
 class BaseProvider(object):
     """This is a base class for all providers.
     """
+
     def __init__(self, seed: Optional[int] = None) -> None:
         self.seed = seed
         self.random = Random()
@@ -15,7 +17,22 @@ class BaseProvider(object):
             self.random.seed(self.seed)
 
     def _validate_enum(self, item: Any, enum: Any) -> Any:
-        return validate_enum(item, enum, self.random)
+        """Validate enum parameter of method in subclasses of BaseProvider.
+
+        :param item: Item of enum object.
+        :param enum: Enum object.
+        :return: Value of item.
+        :raises NonEnumerableError: if ``item`` not in ``enum``.
+        """
+
+        if item is None:
+            result = get_random_item(enum, self.random)
+        elif item and isinstance(item, enum):
+            result = item
+        else:
+            raise NonEnumerableError(enum)
+
+        return result.value
 
 
 class StrMixin(object):
