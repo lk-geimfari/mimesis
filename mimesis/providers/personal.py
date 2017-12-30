@@ -154,7 +154,7 @@ class Personal(BaseDataProvider):
     def username(self, template: Optional[str] = None) -> str:
         """Generate username by template.
 
-        :param str template: Template ('U_d', 'U.d', 'U-d', 'ld', 'l-d', 'Ud',
+        :param template: Template ('U_d', 'U.d', 'U-d', 'ld', 'l-d', 'Ud',
             'l.d', 'l_d', 'default')
         :return: Username.
         :raises KeyError: if template is not supported.
@@ -165,70 +165,36 @@ class Personal(BaseDataProvider):
         name = self.random.choice(USERNAMES)
         date = self.random.randint(1800, 2070)
 
-        templates = {
-            # UppercaseDate
-            'Ud': '{U}{d}'.format(
-                U=name.capitalize(),
-                d=date,
-            ),
-            # Uppercase.Date
-            'U.d': '{U}.{d}'.format(
-                U=name.capitalize(),
-                d=date,
-            ),
-            # lowercaseDate
-            'ld': '{l}{d}'.format(
-                l=name,
-                d=date,
-            ),
-            # Uppercase-date
-            'U-d': '{U}-{d}'.format(
-                U=name.title(),
-                d=date,
-            ),
-            # Uppercase_date
-            'U_d': '{U}_{d}'.format(
-                U=name.title(),
-                d=date,
-            ),
-            # lowercase-date
-            'l-d': '{l}-{d}'.format(
-                l=name,
-                d=date,
-            ),
-            # lowercase_date
-            'l_d': '{l}_{d}'.format(
-                l=name,
-                d=date,
-            ),
-            # lowercase.date
-            'l.d': '{l}.{d}'.format(
-                l=name,
-                d=date,
-            ),
-            # Default is ld
-            'default': '{l}{d}'.format(
-                l=name,
-                d=date,
-            ),
-        }
+        templates = ('U_d', 'U.d', 'U-d', 'ld', 'l-d', 'Ud',
+                     'l.d', 'l_d', 'default')
 
-        supported = list(templates)
+        if template is None:
+            template = self.random.choice(templates)
 
-        if template is not None:
-            try:
-                return templates[template]
-            except KeyError:
-                raise KeyError(
-                    'Unsupported template {unsupported}.'
-                    'Use one of: {supported}'.format(
-                        unsupported=template,
-                        supported=', '.join(supported),
-                    ),
-                )
+        if template not in templates:
+            raise KeyError(
+                'Template «{template}» is not in {templates}'.format(
+                    template=template,
+                    templates=templates,
+                ),
+            )
 
-        templ = self.random.choice(supported)
-        return templates[templ]
+        if template == 'Ud':
+            return '{}{}'.format(name.capitalize(), date)
+        elif template == 'U.d':
+            return '{}.{}'.format(name.capitalize(), date)
+        elif template == 'ld':
+            return '{}{}'.format(name, date)
+        elif template == 'U-d':
+            return '{}-{}'.format(name.title(), date)
+        elif template == 'U_d':
+            return '{}_{}'.format(name.title(), date)
+        elif template == 'l-d':
+            return '{}-{}'.format(name, date)
+        elif template == 'l_d':
+            return '{}_{}'.format(name, date)
+
+        return '{}.{}'.format(name, date)
 
     def password(self, length: int = 8, hashed: bool = False) -> str:
         """Generate a password or hash of password.
