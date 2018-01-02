@@ -162,11 +162,11 @@ class Personal(BaseDataProvider):
         :Example:
             Celloid1873
         """
-        name = self.random.choice(USERNAMES)
+        name, name2 = [self.random.choice(USERNAMES) for _ in range(2)]
         date = self.random.randint(1800, 2070)
 
-        templates = ('U_d', 'U.d', 'U-d', 'ld', 'l-d', 'Ud',
-                     'l.d', 'l_d', 'default')
+        templates = ('U-d', 'U.d', 'UU-d', 'UU.d', 'UU_d', 'U_d',
+                     'Ud', 'l-d', 'l.d', 'l_d', 'ld', 'default')
 
         if template is None:
             template = self.random.choice(templates)
@@ -178,13 +178,18 @@ class Personal(BaseDataProvider):
                     templates=templates,
                 ),
             )
-
         if template == 'Ud':
             return '{}{}'.format(name.capitalize(), date)
         elif template == 'U.d':
             return '{}.{}'.format(name.capitalize(), date)
         elif template == 'ld':
             return '{}{}'.format(name, date)
+        elif template == 'UU.d':
+            return '{}{}.{}'.format(name.capitalize(), name2.capitalize(), date)
+        elif template == 'UU_d':
+            return '{}{}_{}'.format(name.capitalize(), name2.capitalize(), date)
+        elif template == 'UU-d':
+            return '{}{}-{}'.format(name.capitalize(), name2.capitalize(), date)
         elif template == 'U-d':
             return '{}-{}'.format(name.title(), date)
         elif template == 'U_d':
