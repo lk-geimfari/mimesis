@@ -57,3 +57,16 @@ def test_custom_code(random):
     random.seed(50)
     result = random.custom_code()
     assert result == 'M262'
+
+
+@pytest.mark.parametrize(
+    'amount', [
+        2,
+        3,
+        4,
+    ],
+)
+def test_multiple_choice(random, amount):
+    seq = [x for x in range(8)]
+    result = random.multiple_choice(seq, amount)
+    assert len(result) == amount
