@@ -13,7 +13,8 @@ from mimesis import config
 from mimesis.exceptions import UnsupportedLocale
 from mimesis.typing import JSON
 
-__all__ = ['download_image', 'locale_info', 'setup_locale', 'pull']
+__all__ = ['download_image', 'locale_info',
+           'luhn_checksum', 'setup_locale', 'pull']
 
 DATA_DIR = path.abspath(path.join(path.dirname(__file__), 'data'))
 
