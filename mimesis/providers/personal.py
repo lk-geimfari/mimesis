@@ -154,15 +154,21 @@ class Personal(BaseDataProvider):
     def username(self, template: Optional[str] = None) -> str:
         """Generate username by template.
 
-        :param template: Template ('U_d', 'U.d', 'U-d', 'ld', 'l-d', 'Ud',
-            'l.d', 'l_d', 'default')
+        :param template: Template ('U_d', 'U.d', 'U-d', 'UU-d', 'UU.d', 'UU_d',
+            'ld', 'l-d', 'Ud', 'l.d', 'l_d', 'default')
         :return: Username.
         :raises KeyError: if template is not supported.
 
         :Example:
             Celloid1873
         """
-        name, name2 = [self.random.choice(USERNAMES) for _ in range(2)]
+        # TODO: Optimize
+        _name = None
+        if template in ('UU-d', 'UU.d', 'UU_d'):
+            _name = self.random.choice(USERNAMES) \
+                .capitalize()
+
+        name = self.random.choice(USERNAMES)
         date = self.random.randint(1800, 2070)
 
         templates = ('U-d', 'U.d', 'UU-d', 'UU.d', 'UU_d', 'U_d',
@@ -185,11 +191,11 @@ class Personal(BaseDataProvider):
         elif template == 'ld':
             return '{}{}'.format(name, date)
         elif template == 'UU.d':
-            return '{}{}.{}'.format(name.capitalize(), name2.capitalize(), date)
+            return '{}{}.{}'.format(name.capitalize(), _name, date)
         elif template == 'UU_d':
-            return '{}{}_{}'.format(name.capitalize(), name2.capitalize(), date)
+            return '{}{}_{}'.format(name.capitalize(), _name, date)
         elif template == 'UU-d':
-            return '{}{}-{}'.format(name.capitalize(), name2.capitalize(), date)
+            return '{}{}-{}'.format(name.capitalize(), _name, date)
         elif template == 'U-d':
             return '{}-{}'.format(name.title(), date)
         elif template == 'U_d':
