@@ -57,10 +57,14 @@ As we said above, this library is really easy to use. A simple usage example is 
 >>> person.occupation()
 'Backend Developer'
 
->>> templates = ['U_d', 'U-d', 'l_d', 'l-d']
+>>> templates = ('UU.d', 'UU_d', 'UU-d',
+...              'U_d', 'U-d', 'l_d', 'l-d')
 >>> for template in templates:
 ...     person.username(template=template)
 
+'GuernseyBuccan.1906'
+'ScarpedErbach_2055'
+'BathedAnthonin-1824'
 'Adders_1893'
 'Abdel-1888'
 'constructor_1884'
