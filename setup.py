@@ -351,7 +351,7 @@ setup(
     tests_require=tests_requirements,
     cmdclass={
         'test': PyTest,
-        'versioner': Versioner,
+        'version': Versioner,
         'minify': Minimizer,
         'upload': Upload,
     },
