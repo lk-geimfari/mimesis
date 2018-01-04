@@ -95,7 +95,6 @@ class RussiaSpecProvider(BaseSpecProvider):
         mask = '###-###-###-##'
         return self.random.custom_code(mask=mask)
 
-    @property
     def inn(self) -> str:
         """Generate random, but valid ``ИИН``.
 
