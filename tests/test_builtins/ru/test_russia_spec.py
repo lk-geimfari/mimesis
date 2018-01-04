@@ -60,3 +60,9 @@ def test_snils(russia):
     result = russia.snils()
     number = result.replace('-', '')
     assert len(number) == 11
+
+
+def test_inn(russia):
+    result = russia.inn()
+    assert isinstance(result, str)
+    assert result is not None
