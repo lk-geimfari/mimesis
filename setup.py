@@ -163,12 +163,10 @@ class Minimizer(BaseCommand):
         for root, _, files in os.walk(self.data_dir):
             for file in sorted(files):
                 if splitext(file)[1] == '.json':
-                    self.paths.append(
-                        join(
-                            relpath(root, self.data_dir),
-                            file,
-                        )
-                    )
+                    self.paths.append(join(
+                        relpath(root, self.data_dir),
+                        file
+                    ))
 
     @staticmethod
     def size_of(num):
