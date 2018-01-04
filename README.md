@@ -13,7 +13,7 @@
     </a>
 </p>
 
-**Mimesis** is a fast and easy to use library for Python programming language, which helps generate mock data for a variety of purposes (see «[Data providers](#data-providers)») in a variety of languages (see «[Locales](#locales)»). This data can be particularly useful during software development and testing. For example, it could be used to populate a testing database for a web application with user information such as email addresses, usernames, first names, last names, etc.
+**Mimesis** is a fast and easy to use library for Python programming language, which helps generate synthetic data for a variety of purposes (see «[Data providers](#data-providers)») in a variety of languages (see «[Locales](#locales)»). This data can be particularly useful during software development and testing. For example, it could be used to populate a testing database for a web application with user information such as email addresses, usernames, first names, last names, etc.
 
 Mimesis offers a number of advantages over other similar libraries, such as Faker:
 
@@ -37,6 +37,8 @@ To install mimesis, simply use pip (or [pipenv](https://docs.pipenv.org)):
 Also you can install it manually, using [make](https://www.gnu.org/software/make/):
 
 ```zsh
+(env) ➜ git clone git@github.com:lk-geimfari/mimesis.git
+(env) ➜ cd mimesis/
 (env) ➜ make install
 ```
 
@@ -55,10 +57,14 @@ As we said above, this library is really easy to use. A simple usage example is 
 >>> person.occupation()
 'Backend Developer'
 
->>> templates = ['U_d', 'U-d', 'l_d', 'l-d']
+>>> templates = ('UU.d', 'UU_d', 'UU-d',
+...              'U_d', 'U-d', 'l_d', 'l-d')
 >>> for template in templates:
 ...     person.username(template=template)
 
+'GuernseyBuccan.1906'
+'ScarpedErbach_2055'
+'BathedAnthonin-1824'
 'Adders_1893'
 'Abdel-1888'
 'constructor_1884'

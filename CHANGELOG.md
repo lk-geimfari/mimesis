@@ -1,7 +1,24 @@
+## Version 1.0.5
+
+**Added**:
+- Added method `RussiaSpecProvider.inn`
+
+**Fixed**:
+- Fixed issue with seed for `providers.Cryptographic.bytes`
+
+---
+
 ## Version 1.0.4
+
+**Added**:
+- Added function for multiple choice  `helpers.Random.multiple_choice`
 
 **Fixed**:
 - Fixed issue with `seed` [#325](https://github.com/lk-geimfari/mimesis/issues/325)
+
+
+**Optimizations**:
+- Optimized method `username()`
 
 ---
 
@@ -11,7 +28,7 @@
 - Moved `custom_code` to `helpers.Random`
 
 **Optimizations**:
-- Optimized `custom_code` and it works faster by ≈50%
+- Optimized function `custom_code` and it works faster by ≈50%
 - Other minor optimizations in data providers
 
 ---

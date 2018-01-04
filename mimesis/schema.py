@@ -18,9 +18,9 @@ class AbstractField(StrMixin):
     of any method of any supported data provider (class ``Generic()``)
     and the ``**kwargs`` of the method:
 
-    >>> _ = AbstractField('en')
+    >>> _ = AbstractField('en', 0xf)
     >>> _('full_name')
-    'Benedict Larson'
+    'Jack Allison'
     """
 
     def __init__(self, locale: str = 'en', seed: Optional[int] = None) -> None:
@@ -77,4 +77,5 @@ class Schema(object):
         return list(data)
 
 
+# Alias for AbstractField
 Field = AbstractField

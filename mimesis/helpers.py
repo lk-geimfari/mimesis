@@ -1,14 +1,22 @@
 import os
 import random
-from typing import Any, List, Optional, Union
+from typing import Any, List, Optional, Sequence, Union
 
-from mimesis.exceptions import NonEnumerableError
-
-__all__ = ['Random', 'get_random_item', 'validate_enum']
+__all__ = ['Random', 'get_random_item']
 
 
 class Random(random.Random):
     """Custom Random() class for the possibility of extending."""
+
+    def multiple_choice(self, seq: Sequence[Any], amount: int = 2) -> list:
+        """Multiple choices of elements from the sequence
+        ``seq`` in an amount of ``amount``.
+
+        :param seq: Sequence of elements.
+        :param amount: Amount of elements.
+        :return: List of elements.
+        """
+        return [self.choice(seq) for _ in range(amount)]
 
     def randints(self, amount: int = 3,
                  a: int = 1, b: int = 100) -> List[int]:
@@ -88,23 +96,3 @@ def get_random_item(enum: Any, rnd: Optional[Random] = None) -> Any:
     if rnd:
         return rnd.choice(list(enum))
     return random.choice(list(enum))
-
-
-def validate_enum(item: Any, enum: Any, rnd: Optional[Random] = None) -> Any:
-    """Validate enum parameter of method in subclasses of BaseProvider.
-
-    :param item: Item of enum object.
-    :param enum: Enum object.
-    :param rnd: Custom random object.
-    :return: Value of item.
-    :raises NonEnumerableError: if ``item`` not in ``enum``.
-    """
-
-    if item is None:
-        result = get_random_item(enum, rnd=rnd)
-    elif item and isinstance(item, enum):
-        result = item
-    else:
-        raise NonEnumerableError(enum)
-
-    return result.value

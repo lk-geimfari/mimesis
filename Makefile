@@ -16,7 +16,7 @@ help:
 	@echo "test         - run tests quickly with the default Python"
 	@echo "type-check   - run mypy for checking types"
 	@echo "publish      - create dist and upload package to PyPI"
-	@echo "versioner    - update __version__ file"
+	@echo "version      - update __version__ file"
 	@echo "install      - install the package to the active Python's site-packages"
 	@echo "........................................................"
 

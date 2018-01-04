@@ -1,6 +1,5 @@
 import hashlib
 import uuid
-from binascii import hexlify
 from typing import Optional
 
 from mimesis.enums import Algorithm
@@ -52,7 +51,8 @@ class Cryptographic(BaseDataProvider):
         :return: Bytes.
         :rtype: bytes
         """
-        return self.random.urandom(entropy)
+        bits = [self.random.getrandbits(8) for _ in range(entropy)]
+        return bytes(bits)
 
     def token(self, entropy: int = 32) -> str:
         """Return a random text string, in hexadecimal.
@@ -60,8 +60,8 @@ class Cryptographic(BaseDataProvider):
         :param entropy: Number of bytes.
         :return: Token.
         """
-        token = hexlify(self.bytes(entropy))
-        return token.decode('ascii')
+        token = self.bytes(entropy)
+        return token.hex()
 
     @staticmethod
     def salt() -> str:

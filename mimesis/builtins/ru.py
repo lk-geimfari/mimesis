@@ -94,3 +94,29 @@ class RussiaSpecProvider(BaseSpecProvider):
         """
         mask = '###-###-###-##'
         return self.random.custom_code(mask=mask)
+
+    def inn(self) -> str:
+        """Generate random, but valid ``ИИН``.
+
+        :return: INN.
+        """
+        def control_sum(nums: list, t: str) -> int:
+            digits = {
+                'n2': [7, 2, 4, 10, 3, 5, 9, 4, 6, 8],
+                'n1': [3, 7, 2, 4, 10, 3, 5, 9, 4, 6, 8],
+            }
+            number = 0
+            length = digits[t]
+            for i in range(0, len(length)):
+                number += nums[i] * length[i]
+            return number % 11 % 10
+
+        numbers = []
+        for x in range(0, 10):
+            numbers.append(self.random.randint(1 if x == 0 else 0, 9))
+
+        n2 = control_sum(numbers, 'n2')
+        numbers.append(n2)
+        n1 = control_sum(numbers, 'n1')
+        numbers.append(n1)
+        return ''.join([str(x) for x in numbers])

@@ -75,13 +75,10 @@ def test_password(_personal):
 
 @pytest.mark.parametrize(
     'template', [
-        'U-d', 'U.d',
-        'U_d', 'Ud',
-        'l-d', 'l.d',
-        'l_d', 'ld',
-
-        # Default is ld
-        'default',
+        'U-d', 'U.d', 'UU-d',
+        'UU.d', 'UU_d', 'U_d',
+        'Ud', 'default', 'l-d',
+        'l.d', 'l_d', 'ld',
         None,
     ],
 )
