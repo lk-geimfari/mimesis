@@ -1,7 +1,14 @@
+## Version 1.0.5
+
+**Fixed**:
+- Fixed issue with seed for `providers.Cryptographic.bytes`
+
+---
+
 ## Version 1.0.4
 
 **Added**:
-- Added function for multiple choice  `helpers.Random.multiple_choice()`
+- Added function for multiple choice  `helpers.Random.multiple_choice`
 
 **Fixed**:
 - Fixed issue with `seed` [#325](https://github.com/lk-geimfari/mimesis/issues/325)
