@@ -1,5 +1,8 @@
 ## Version 1.0.5
 
+**Added**:
+- Added method `RussiaSpecProvider.inn`
+
 **Fixed**:
 - Fixed issue with seed for `providers.Cryptographic.bytes`
 
