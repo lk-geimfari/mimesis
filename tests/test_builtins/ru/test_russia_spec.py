@@ -63,6 +63,6 @@ def test_snils(russia):
 
 
 def test_inn(russia):
-    result = russia.inn()
+    result = russia.inn
     assert isinstance(result, str)
     assert result is not None
