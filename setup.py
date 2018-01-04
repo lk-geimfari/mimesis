@@ -233,7 +233,7 @@ class Minimizer(BaseCommand):
         print(template)
 
 
-class Versioner(BaseCommand):
+class Version(BaseCommand):
     """Custom command for versioning"""
 
     def initialize_options(self):
@@ -351,7 +351,7 @@ setup(
     tests_require=tests_requirements,
     cmdclass={
         'test': PyTest,
-        'version': Versioner,
+        'version': Version,
         'minify': Minimizer,
         'upload': Upload,
     },
