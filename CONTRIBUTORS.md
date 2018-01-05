@@ -51,5 +51,3 @@
 - Ruslan Valerievich [(Valerievich)](https://github.com/Valerievich)
 - Simon [(DefaltSimon)](https://github.com/DefaltSimon)
 - dy [(duckyou)](https://github.com/duckyou)
-### Design
- - The illustration is taken from internet. If you know the creator of this octopus, then let us know.
