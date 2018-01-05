@@ -95,7 +95,7 @@ class Structured(BaseDataProvider):
             )
         if not attribute:
             attribute = self.random.choice(
-                list(HTML_CONTAINER_TAGS[tag].keys()),
+                list(HTML_CONTAINER_TAGS[tag]),  # type: ignore
             )
 
         try:

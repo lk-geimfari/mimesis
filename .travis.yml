@@ -9,8 +9,8 @@ python:
 install: pip install -r dev_requirements.txt
 
 script:
-  - py.test --cov=mimesis/
-  - mypy mimesis/
+  - py.test --maxfail=2 --durations=3 --cov=mimesis --benchmark-skip
+  - mypy mimesis
 
 after_success:
   codecov
