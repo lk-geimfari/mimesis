@@ -15,6 +15,7 @@ help:
 	@echo "clean        - remove build and Python file artifacts"
 	@echo "test         - run tests quickly with the default Python"
 	@echo "type-check   - run mypy for checking types"
+	@echo "benchmarks   - run benchmark tests for providers"
 	@echo "publish      - create dist and upload package to PyPI"
 	@echo "version      - update __version__ file"
 	@echo "install      - install the package to the active Python's site-packages"
@@ -44,12 +45,17 @@ clean: clean-pyc clean-build
 
 .PHONY: test
 test:
-	py.test --color=yes ./
+	py.test --benchmark-skip --color=yes ./
 
 
 .PHONY: type-check
 type-check:
 	mypy mimesis/
+
+
+.PHONY: benchmarks
+benchmarks:
+	py.test -rf --benchmark-only --benchmark-sort=MEAN ./benchmarks
 
 
 .PHONY: publish
