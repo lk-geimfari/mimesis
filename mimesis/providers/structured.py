@@ -80,7 +80,8 @@ class Structured(BaseDataProvider):
             content=self.__text.sentence(),
         )
 
-    def html_attribute_value(self, tag: str, attribute: str) -> str:
+    def html_attribute_value(self, tag: str = None,
+                             attribute: str = None) -> str:
         """Random value for specified HTML tag attribute.
 
         :param str tag: An HTML tag.
@@ -88,6 +89,15 @@ class Structured(BaseDataProvider):
         :return: An attribute.
         :raises NotImplementedError: if tag is unsupported.
         """
+        if not tag:
+            tag = self.random.choice(
+                list(HTML_CONTAINER_TAGS.keys()),
+            )
+        if not attribute:
+            attribute = self.random.choice(
+                list(HTML_CONTAINER_TAGS[tag]),  # type: ignore
+            )
+
         try:
             value = HTML_CONTAINER_TAGS[tag][attribute]  # type: ignore
         except KeyError:
