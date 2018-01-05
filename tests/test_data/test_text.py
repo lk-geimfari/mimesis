@@ -20,6 +20,7 @@ def test_str(text):
 def test_hex_color(_text):
     result = _text.hex_color()
     assert '#' in result
+    assert len(result) == 7
 
 
 @pytest.mark.parametrize(

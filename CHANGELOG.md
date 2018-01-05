@@ -6,6 +6,9 @@
 **Fixed**:
 - Fixed issue with seed for `providers.Cryptographic.bytes`
 
+**Optimizations**:
+- Optimized method `Text.hex_color`
+
 ---
 
 ## Version 1.0.4
