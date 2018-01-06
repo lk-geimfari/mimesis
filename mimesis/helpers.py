@@ -53,8 +53,8 @@ class Random(random.Random):
         :param int end: Max value.
         :return: Single string.
         """
-        seq = [self.choice(seq) for _ in range(end)]
-        return ''.join(seq)
+        return ''.join([self.choice(seq)
+                        for _ in range(end)])
 
     def custom_code(self, mask: str = '@###',
                     char: str = '@', digit: str = '#') -> str:
