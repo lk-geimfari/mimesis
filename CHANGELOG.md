@@ -9,6 +9,7 @@
 **Optimizations**:
 - Optimized method `Text.hex_color`
 - Optimized method `Address.coordinates`
+- Optimized method `Internet.ip_v6`
 
 ---
 

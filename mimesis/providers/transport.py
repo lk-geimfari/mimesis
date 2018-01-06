@@ -20,7 +20,7 @@ class Transport(BaseDataProvider):
         """
         return '{}-{}'.format(
             self.random.choice(TRUCKS),
-            self.random.custom_code(model_mask)
+            self.random.custom_code(model_mask),
         )
 
     def car(self) -> str:
