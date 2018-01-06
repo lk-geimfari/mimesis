@@ -14,6 +14,17 @@ class Business(BaseDataProvider):
         super().__init__(*args, **kwargs)
         self._data = pull('business.json', self.locale)
 
+    def company(self) -> str:
+        """Get a random company name.
+
+        :return: Company name.
+
+        :Example:
+            Gamma Systems.
+        """
+        companies = self._data['company']['name']
+        return self.random.choice(companies)
+
     def company_type(self, abbr: bool = False) -> str:
         """Get a random type of business entity.
 
@@ -24,34 +35,22 @@ class Business(BaseDataProvider):
             Incorporated.
         """
         key = 'abbr' if abbr else 'title'
-        company_type = self._data['company'].get(
-            'type').get(key)
-        return self.random.choice(company_type)
-
-    def company(self) -> str:
-        """Get a random company name.
-
-        :return: Company name.
-
-        :Example:
-            Gamma Systems.
-        """
-        companies = self._data['company'].get('name')
-        return self.random.choice(companies)
+        company_type = self._data['company']['type']
+        return self.random.choice(
+            company_type.get(key),
+        )
 
     def copyright(self) -> str:
         """Generate a random copyright.
 
-        :return: Dummy copyright of company.
+        :return: Copyright of company.
 
         :Example:
-            © 1990-2016 Komercia, Inc.
+            © Komercia, Inc.
         """
-        return '© {company}, {company_type}'.format(
-            company=self.company(),
-            company_type=self.company_type(
-                abbr=True,
-            ),
+        return '© {}, {}'.format(
+            self.company(),
+            self.company_type(True),
         )
 
     def currency_iso_code(self, crypto: bool = False) -> str:
@@ -64,11 +63,10 @@ class Business(BaseDataProvider):
             RUR.
         """
         if crypto:
-            codes = CRYPTOCURRENCY_ISO_CODES
-        else:
-            codes = CURRENCY_ISO_CODES
+            return self.random.choice(
+                CRYPTOCURRENCY_ISO_CODES)
 
-        return self.random.choice(codes)
+        return self.random.choice(CURRENCY_ISO_CODES)
 
     def currency_symbol(self, crypto: bool = False):
         """Get a currency symbol for current locale.
@@ -81,8 +79,8 @@ class Business(BaseDataProvider):
         """
         if crypto:
             return self.random.choice(CRYPTOCURRENCY_SYMBOLS)
-        else:
-            return CURRENCY_SYMBOLS[self.locale]
+
+        return CURRENCY_SYMBOLS[self.locale]
 
     def price(self, minimum: float = 10.00,
               maximum: float = 1000.00) -> str:
@@ -115,5 +113,9 @@ class Business(BaseDataProvider):
         :Example:
             0.5885238 BTC
         """
-        price = self.random.uniform(minimum, maximum)
-        return '{:.7f} BTC'.format(price)
+        return '{:.7f} BTC'.format(
+            self.random.uniform(
+                minimum,
+                maximum,
+            ),
+        )
