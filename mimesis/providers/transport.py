@@ -18,9 +18,10 @@ class Transport(BaseDataProvider):
         :Example:
             Caledon-966O.
         """
-        model = self.random.custom_code(mask=model_mask)
-        truck = self.random.choice(TRUCKS)
-        return '{}-{}'.format(truck, model)
+        return '{}-{}'.format(
+            self.random.choice(TRUCKS),
+            self.random.custom_code(model_mask)
+        )
 
     def car(self) -> str:
         """Get a random vehicle.
