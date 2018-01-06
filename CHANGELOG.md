@@ -8,6 +8,7 @@
 
 **Optimizations**:
 - Optimized method `Text.hex_color`
+- Optimized method `Address.coordinates`
 
 ---
 
