@@ -11,7 +11,7 @@ help:
 	@echo "Available options:"
 	@echo "........................................................"
 	@echo "clean-pyc    - remove Python file artifacts"
-	@echo "clean-build  - remove build artifacts"
+	@echo "clean-meta   - remove meta artifacts"
 	@echo "clean        - remove build and Python file artifacts"
 	@echo "test         - run tests quickly with the default Python"
 	@echo "type-check   - run mypy for checking types"
@@ -30,17 +30,19 @@ clean-pyc:
 	find . -name '__pycache__' -exec rm -fr {} +
 
 
-.PHONY: clean-build
-clean-build:
+.PHONY: clean-meta
+clean-meta:
 	rm --force --recursive build/
 	rm --force --recursive dist/
 	rm --force --recursive .cache/
 	rm --force --recursive .mypy_cache/
 	rm --force --recursive mimesis.egg-info/
+	rm --force --recursive .benchmarks/
+	rm --force --recursive .tox/
 
 
 .PHONY: clean
-clean: clean-pyc clean-build
+clean: clean-pyc clean-meta
 
 
 .PHONY: test
@@ -65,7 +67,7 @@ publish:
 
 .PHONY: version
 version:
-	python3 setup.py versioner
+	python3 setup.py version
 
 
 .PHONY: minify
