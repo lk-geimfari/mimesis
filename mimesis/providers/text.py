@@ -136,12 +136,8 @@ class Text(BaseDataProvider):
         :Example:
             #d8346b
         """
-        return '#{:x}'.format(
-            self.random.randint(
-                0x000001,
-                0xffffff,
-            ),
-        ).ljust(6, '#')
+        return '#{:06x}'.format(
+            self.random.randint(0x000000, 0xffffff))
 
     def answer(self) -> str:
         """Get a random answer in current language.

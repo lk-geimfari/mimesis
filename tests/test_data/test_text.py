@@ -5,7 +5,7 @@ import pytest
 
 import mimesis
 
-from ._patterns import STR_REGEX
+from ._patterns import HEX_COLOR, STR_REGEX
 
 
 @pytest.fixture
@@ -19,8 +19,7 @@ def test_str(text):
 
 def test_hex_color(_text):
     result = _text.hex_color()
-    assert '#' in result
-    assert len(result) in (6, 7)
+    assert re.match(HEX_COLOR, result)
 
 
 @pytest.mark.parametrize(
