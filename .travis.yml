@@ -6,11 +6,13 @@ python:
   - "3.5"
   - "3.6"
 
-install: pip install -r dev_requirements.txt
+install:
+	- pip install pipenv
+	- pipenv install --dev --deploy
 
 script:
-  - py.test --maxfail=2 --durations=3 --cov=mimesis --benchmark-skip
-  - mypy mimesis
+  - pipenv run py.test --maxfail=2 --durations=3 --cov=mimesis --benchmark-skip
+  - pipenv run mypy mimesis
 
 after_success:
   codecov

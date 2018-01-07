@@ -8,9 +8,10 @@ environment:
     - PYTHON: "C:\\Python36-x64"
 
 install:
-  - "%PYTHON%\\python.exe -m pip install -r dev_requirements.txt"
+  - "%PYTHON%\\python.exe -m pip install pipenv"
+  - "%PYTHON%\\python.exe -m pipenv install --dev --deploy"
 
 build: off
 
 test_script:
-  - "%PYTHON%\\python.exe setup.py test -a --benchmark-skip"
+  - "%PYTHON%\\python.exe -m pipenv run py.test --maxfail=2 --durations=3 --cov=mimesis --benchmark-skip"
