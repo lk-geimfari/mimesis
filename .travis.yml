@@ -7,8 +7,8 @@ python:
   - "3.6"
 
 install:
-	- pip install pipenv
-	- pipenv install --dev --deploy
+  - pip install pipenv
+  - pipenv install --dev --deploy
 
 script:
   - pipenv run py.test --maxfail=2 --durations=3 --cov=mimesis --benchmark-skip
