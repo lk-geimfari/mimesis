@@ -4,6 +4,7 @@
 ### Maintainers
 - Likid Geimfari [(lk-geimfari)](https://github.com/lk-geimfari)
 - Sobolev Nikita [(sobolevn)](https://github.com/sobolevn)
+- dy [(duckyou)](https://github.com/duckyou)
 
 ### Inspirer
 - Sobolev Nikita [(sobolevn)](https://github.com/sobolevn)
