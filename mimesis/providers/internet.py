@@ -1,3 +1,4 @@
+from ipaddress import IPv6Address
 from typing import Optional, Union
 
 from mimesis.data import (EMOJI, HASHTAGS, HTTP_METHODS, HTTP_STATUS_CODES,
@@ -77,9 +78,12 @@ class Internet(BaseDataProvider):
         :Example:
             2001:c244:cf9d:1fb1:c56d:f52c:8a04:94f3
         """
-        ip = '2001:' + ':'.join(
-            '%x' % self.random.randint(0, 16 ** 4) for _ in range(7))
-        return ip
+        ipv6 = IPv6Address(
+            self.random.randint(
+                0, 2 ** 128 - 1,
+            ),
+        )
+        return str(ipv6)
 
     def mac_address(self) -> str:
         """Generate a random MAC address.

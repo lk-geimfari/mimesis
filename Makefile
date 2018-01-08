@@ -37,6 +37,7 @@ clean-build:
 	rm --force --recursive .cache/
 	rm --force --recursive .mypy_cache/
 	rm --force --recursive mimesis.egg-info/
+	rm --force --recursive .benchmarks/
 
 
 .PHONY: clean
@@ -65,7 +66,7 @@ publish:
 
 .PHONY: version
 version:
-	python3 setup.py versioner
+	python3 setup.py version
 
 
 .PHONY: minify

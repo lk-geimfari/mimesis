@@ -134,11 +134,10 @@ class Text(BaseDataProvider):
         :return: Hex color code.
 
         :Example:
-            #D8346B
+            #d8346b
         """
-        letters = '0123456789ABCDEF'
-        color_code = '#' + ''.join(self.random.sample(letters, 6))
-        return color_code
+        return '#{:06x}'.format(
+            self.random.randint(0x000000, 0xffffff))
 
     def answer(self) -> str:
         """Get a random answer in current language.

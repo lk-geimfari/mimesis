@@ -6,6 +6,11 @@
 **Fixed**:
 - Fixed issue with seed for `providers.Cryptographic.bytes`
 
+**Optimizations**:
+- Optimized method `Text.hex_color`
+- Optimized method `Address.coordinates`
+- Optimized method `Internet.ip_v6`
+
 ---
 
 ## Version 1.0.4
