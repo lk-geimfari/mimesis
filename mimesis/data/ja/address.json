@@ -1,5 +1,5 @@
 {
-  "address_fmt": "{city} {n}-{nn}-{nnn}",
+  "address_fmt": "{} {}-{}-{}",
   "city": [
 	"東京都",
 	"横浜市",
