@@ -12,18 +12,8 @@ class ClothingSizes(BaseDataProvider):
         :Example:
             XXL.
         """
-        sizes = (
-            'L',
-            'M',
-            'S',
-            'XL',
-            'XS',
-            'XXL',
-            'XXS',
-            'XXXL',
-        )
-
-        return self.random.choice(sizes)
+        return self.random.choice(['L', 'M', 'S', 'XL',
+                                   'XS', 'XXL', 'XXS', 'XXXL'])
 
     def european_size(self) -> int:
         """Generate a random clothing size in European format.
@@ -33,8 +23,7 @@ class ClothingSizes(BaseDataProvider):
         :Example:
             42
         """
-        sizes = [i for i in range(40, 62) if i % 2 == 0]
-        return self.random.choice(sizes)
+        return self.random.randint(38, 62)
 
     def custom_size(self, minimum: int = 40, maximum: int = 62) -> int:
         """Generate clothing size using custom format.
