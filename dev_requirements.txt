@@ -1,6 +1,6 @@
 certifi==2017.11.5
 chardet==3.0.4
-codecov==2.0.11
+codecov==2.0.13
 coverage==4.4.2
 flake8==3.4.1
 flake8-builtins==1.0
