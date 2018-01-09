@@ -31,15 +31,11 @@ class Cryptographic(BaseDataProvider):
         :return: Hash.
         :raises NonEnumerableError: if algorithm is not supported.
         """
-        key = self._validate_enum(
-            item=algorithm,
-            enum=Algorithm,
-        )
+        key = self._validate_enum(algorithm, Algorithm)
 
         if hasattr(hashlib, key):
             fn = getattr(hashlib, key)
-            _hash = fn(self.uuid().encode())
-            return _hash.hexdigest()
+            return fn(self.uuid().encode()).hexdigest()
 
     def bytes(self, entropy: int = 32) -> Bytes:
         """Get a random byte string containing *entropy* bytes.
@@ -51,8 +47,8 @@ class Cryptographic(BaseDataProvider):
         :return: Bytes.
         :rtype: bytes
         """
-        bits = [self.random.getrandbits(8) for _ in range(entropy)]
-        return bytes(bits)
+        return bytes(self.random.getrandbits(8)
+                     for _ in range(entropy))
 
     def token(self, entropy: int = 32) -> str:
         """Return a random text string, in hexadecimal.
@@ -60,8 +56,7 @@ class Cryptographic(BaseDataProvider):
         :param entropy: Number of bytes.
         :return: Token.
         """
-        token = self.bytes(entropy)
-        return token.hex()
+        return self.bytes(entropy).hex()
 
     @staticmethod
     def salt() -> str:
@@ -78,5 +73,4 @@ class Cryptographic(BaseDataProvider):
         :return: Mnemonic code.
         """
         words = self.__words['normal']
-        code = [self.random.choice(words) for _ in range(length)]
-        return ' '.join(code)
+        return ' '.join(self.random.choice(words) for _ in range(length))
