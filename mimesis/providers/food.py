@@ -12,6 +12,12 @@ class Food(BaseDataProvider):
         super().__init__(*args, **kwargs)
         self._data = pull('food.json', self.locale)
 
+    def _choice_from(self, key: str) -> str:
+        """Choice random element from self._data[key].
+        """
+        data = self._data[key]
+        return self.random.choice(data)
+
     def vegetable(self) -> str:
         """Get a random vegetable.
 
@@ -20,8 +26,7 @@ class Food(BaseDataProvider):
         :Example:
             Tomato.
         """
-        vegetables = self._data['vegetables']
-        return self.random.choice(vegetables)
+        return self._choice_from('vegetables')
 
     def fruit(self) -> str:
         """Get a random name of fruit or berry .
@@ -31,8 +36,7 @@ class Food(BaseDataProvider):
         :Example:
             Banana.
         """
-        fruits = self._data['fruits']
-        return self.random.choice(fruits)
+        return self._choice_from('fruits')
 
     def dish(self) -> str:
         """Get a random dish for current locale.
@@ -42,8 +46,7 @@ class Food(BaseDataProvider):
         :Example:
             Ratatouille.
         """
-        dishes = self._data['dishes']
-        return self.random.choice(dishes)
+        return self._choice_from('dishes')
 
     def spices(self) -> str:
         """Get a random spices or herbs.
@@ -53,8 +56,7 @@ class Food(BaseDataProvider):
         :Example:
             Anise.
         """
-        spices = self._data['spices']
-        return self.random.choice(spices)
+        return self._choice_from('spices')
 
     def drink(self) -> str:
         """Get a random drink.
@@ -64,5 +66,4 @@ class Food(BaseDataProvider):
         :Example:
             Vodka.
         """
-        drinks = self._data['drinks']
-        return self.random.choice(drinks)
+        return self._choice_from('drinks')

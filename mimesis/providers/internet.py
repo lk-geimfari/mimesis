@@ -2,8 +2,9 @@ from ipaddress import IPv6Address
 from typing import Optional, Union
 
 from mimesis.data import (EMOJI, HASHTAGS, HTTP_METHODS, HTTP_STATUS_CODES,
-                          NETWORK_PROTOCOLS, SUBREDDITS, SUBREDDITS_NSFW, TLD,
-                          TORRENT_CATEGORIES, USER_AGENTS, USERNAMES)
+                          HTTP_STATUS_MSGS, NETWORK_PROTOCOLS, SUBREDDITS,
+                          SUBREDDITS_NSFW, TLD, TORRENT_CATEGORIES,
+                          USER_AGENTS, USERNAMES)
 from mimesis.enums import Layer, MimeType, PortRange, TLDType
 from mimesis.exceptions import NonEnumerableError
 from mimesis.providers.base import BaseDataProvider
@@ -29,20 +30,26 @@ class Internet(BaseDataProvider):
         fmt = self.__file.mime_type(type_=mime_type)
         return 'Content-Type: {}'.format(fmt)
 
-    def http_status_code(self, code_only: bool = True) -> str:
-        """Get a random HTTP status.
+    def http_status_message(self) -> str:
+        """Get a random HTTP status message.
+
+        :return: HTTP status message.
+
+        :Example:
+            200 OK
+        """
+        return self.random.choice(HTTP_STATUS_MSGS)
+
+    def http_status_code(self) -> int:
+        """Get a random HTTP status code.
 
         :param code_only: Return only http status code.
         :return: HTTP status.
 
         :Example:
-            200 OK
+            200
         """
-        status = self.random.choice(HTTP_STATUS_CODES)
-
-        if code_only:
-            return status.split()[0]
-        return status
+        return self.random.choice(HTTP_STATUS_CODES)
 
     def http_method(self) -> str:
         """Get a random HTTP method.
@@ -63,7 +70,7 @@ class Internet(BaseDataProvider):
         :Example:
             19.121.223.58
         """
-        ip = '.'.join([str(self.random.randint(0, 255)) for _ in range(4)])
+        ip = '.'.join(str(self.random.randint(0, 255)) for _ in range(4))
 
         if with_port:
             ip += ':{}'.format(self.port())
@@ -171,7 +178,6 @@ class Internet(BaseDataProvider):
         """Create a list of hashtags (for Instagram, Twitter etc.)
 
         :param quantity: The quantity of hashtags.
-        :param category: Enum object Hashtag.
         :return: The list of hashtags.
         :rtype: str or list
         :raises NonEnumerableError: if category is not in Hashtag.
@@ -283,5 +289,4 @@ class Internet(BaseDataProvider):
         :Example:
             Video/TV shows
         """
-        categories = TORRENT_CATEGORIES
-        return self.random.choice(categories)
+        return self.random.choice(TORRENT_CATEGORIES)

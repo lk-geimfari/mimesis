@@ -59,10 +59,7 @@ class Path(BaseDataProvider):
         user = self.random.choice(USERNAMES)
         user = user.capitalize() if \
             self.platform == 'win32' else user.lower()
-        return '{home}{user}'.format(
-            home=self.home(),
-            user=user,
-        )
+        return '{}{}'.format(self.home(), user)
 
     def users_folder(self) -> Union[str, None]:
         """Generate a random path to user's folders.

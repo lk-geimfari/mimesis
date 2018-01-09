@@ -72,7 +72,7 @@ class Science(BaseDataProvider):
     def rna(self, length: int = 10) -> str:
         """Generate random RNA sequence.
 
-        :param int length: Length of block
+        :param length: Length of block.
         :return: RNA sequence.
 
         :Example:
@@ -84,7 +84,7 @@ class Science(BaseDataProvider):
     def dna(self, length: int = 10) -> str:
         """Generate random DNA sequence.
 
-        :param int length: Length of block
+        :param length: Length of block.
         :return: DNA sequence.
 
         :Example:

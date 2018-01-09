@@ -145,11 +145,13 @@ def test_content_type_wrong_arg(net):
 
 
 def test_http_status_code(net):
-    result = net.http_status_code(code_only=False)
-    assert result in data.HTTP_STATUS_CODES
-
     result = net.http_status_code()
     assert (int(result) >= 100) and (int(result) <= 511)
+
+
+def test_http_status_message(net):
+    result = net.http_status_message()
+    assert result in data.HTTP_STATUS_MSGS
 
 
 @pytest.mark.parametrize(

@@ -27,24 +27,15 @@ class Games(BaseDataProvider):
         """
         return self.random.randint(minimum * 10, maximum * 10) / 10
 
-    def pegi_rating(self, pt: bool = False) -> str:
+    def pegi_rating(self) -> str:
         """Get a random PEGI rating.
 
-        :param bool pt: PEGI rating for Portugal.
         :return: PEGI rating.
 
         :Example:
             PEGI 18
         """
         standard = [3, 7, 12, 16, 18]
-
-        # In Portugal, two of the PEGI categories were aligned with the age
-        # ratings of the film classification system to avoid confusion;
-        # 3 was changed to 4 and 7 was changed to 6.
-        if pt:
-            standard[0] = 4
-            standard[1] = 6
-
         digit = self.random.choice(standard)
         return '{0} {1}'.format('PEGI', digit)
 

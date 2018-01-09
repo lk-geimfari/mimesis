@@ -39,10 +39,12 @@ SCREEN_SIZES = (
 )
 CPU = (
     'AMD Ryzen 7 1800X',
-    'AMD Ryzen 7 1700'
+    'AMD Ryzen 7 1700',
+    'AMD Ryzen™ Threadripper™',
     'Intel® Core i3',
     'Intel® Core i5',
     'Intel® Core i7',
+    'Intel® Core i9',
 )
 GENERATION = (
     '2nd Generation',
@@ -52,7 +54,7 @@ GENERATION = (
     '6th Generation',
     '7th Generation',
 )
-GENERATION_ABBR = (
+CPU_MODEL_CODES = (
     '7500U',
     '7Y75',
     '7Y30',

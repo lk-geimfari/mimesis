@@ -85,21 +85,25 @@ def test_state_aliases(address):
     province = address.province()
     region = address.region()
     federal_subject = address.federal_subject()
+    prefecture = address.prefecture()
 
     states = address._data['state']['name']
 
     assert province in states
     assert region in states
     assert federal_subject in states
+    assert prefecture in states
 
     province = address.province(abbr=True)
     region = address.region(abbr=True)
     federal_subject = address.federal_subject(abbr=True)
+    prefecture = address.prefecture(abbr=True)
 
     abbreviations = address._data['state']['abbr']
     assert province in abbreviations
     assert region in abbreviations
     assert federal_subject in abbreviations
+    assert prefecture in abbreviations
 
 
 def test_postal_code(address):

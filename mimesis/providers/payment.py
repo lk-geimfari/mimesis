@@ -48,8 +48,8 @@ class Payment(BaseDataProvider):
         """
         type_ = self.random.choice(['1', '3'])
         letters = string.ascii_letters + string.digits
-        address = [self.random.choice(letters) for _ in range(33)]
-        return type_ + ''.join(address)
+        return type_ + ''.join(
+            self.random.choice(letters) for _ in range(33))
 
     def ethereum_address(self) -> str:
         """Get random dummy Ethereum address.

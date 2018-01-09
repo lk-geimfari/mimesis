@@ -26,7 +26,7 @@ class Address(BaseDataProvider):
         :Example:
             134.
         """
-        return str(int(self.random.random() * maximum))
+        return str(self.random.randint(1, maximum))
 
     def street_name(self) -> str:
         """Get a random street name.
@@ -36,8 +36,8 @@ class Address(BaseDataProvider):
         :Example:
            Candlewood.
         """
-        names = self._data['street'].get('name')
-        return self.random.choice(names)
+        return self.random.choice(
+            self._data['street']['name'])
 
     def street_suffix(self) -> str:
         """Get a random street suffix.
@@ -47,8 +47,8 @@ class Address(BaseDataProvider):
         :Example:
             Alley.
         """
-        suffixes = self._data['street'].get('suffix')
-        return self.random.choice(suffixes)
+        return self.random.choice(
+            self._data['street']['suffix'])
 
     def address(self) -> str:
         """Get a random full address (include Street number, suffix and name).
@@ -70,10 +70,10 @@ class Address(BaseDataProvider):
             )
 
         if self.locale == 'ja':
-            city = self.random.choice(self._data['city'])
-
-            n, nn, nnn = self.random.randints(3, 1, 100)
-            return fmt.format(city=city, n=n, nn=nn, nnn=nnn)
+            return fmt.format(
+                self.random.choice(self._data['city']),
+                *self.random.randints(3, 1, 100),
+            )
 
         return fmt.format(
             st_num=st_num,
@@ -89,35 +89,43 @@ class Address(BaseDataProvider):
         :return: Administrative district.
 
         :Example:
-            Alabama (for locale `en`).
+            Alabama.
         """
-        key = 'abbr' if abbr else 'name'
-        states = self._data['state'].get(key)
-        return self.random.choice(states)
+        return self.random.choice(
+            self._data['state']['abbr' if abbr else 'name'])
 
-    def region(self, abbr: bool = False) -> str:
+    def region(self, *args, **kwargs) -> str:
         """Get a random region.
 
         :param bool abbr: Return ISO 3166-2 code.
         :return: State.
         """
-        return self.state(abbr)
+        return self.state(*args, **kwargs)
 
-    def province(self, abbr: bool = False) -> str:
+    def province(self, *args, **kwargs) -> str:
         """Get a random province.
 
         :param bool abbr: Return ISO 3166-2 code.
         :return: Province.
         """
-        return self.state(abbr)
+        return self.state(*args, **kwargs)
 
-    def federal_subject(self, abbr: bool = False) -> str:
+    def federal_subject(self, *args, **kwargs) -> str:
         """Get a random region.
 
         :param bool abbr: Return ISO 3166-2 code.
         :return: Federal subject.
         """
-        return self.state(abbr)
+        return self.state(*args, **kwargs)
+
+    def prefecture(self, *args, **kwargs) -> str:
+        """Get a random prefecture.
+
+        :param args: Arguments.
+        :param kwargs: Keyword arguments.
+        :return: Prefecture.
+        """
+        return self.state(*args, **kwargs)
 
     def postal_code(self) -> str:
         """Generate a postal code for current locale.
@@ -128,8 +136,8 @@ class Address(BaseDataProvider):
             389213
         """
 
-        mask = self._data['postal_code_fmt']
-        return self.random.custom_code(mask=mask)
+        return self.random.custom_code(
+            self._data['postal_code_fmt'])
 
     def country_iso_code(self, fmt: Optional[CountryCode] = None) -> str:
         """Get a random ISO code of country.
@@ -142,8 +150,7 @@ class Address(BaseDataProvider):
             DE
         """
         key = self._validate_enum(fmt, CountryCode)
-        codes = COUNTRIES_ISO[key]
-        return self.random.choice(codes)
+        return self.random.choice(COUNTRIES_ISO[key])
 
     def country(self) -> str:
         """Get a random country.
@@ -153,8 +160,8 @@ class Address(BaseDataProvider):
         :Example:
             Russia.
         """
-        countries = self._data['country'].get('name')
-        return self.random.choice(countries)
+        return self.random.choice(
+            self._data['country']['name'])
 
     def city(self) -> str:
         """Get a random city for current locale.
@@ -164,8 +171,8 @@ class Address(BaseDataProvider):
         :Example:
             Saint Petersburg.
         """
-        cities = self._data['city']
-        return self.random.choice(cities)
+        return self.random.choice(
+            self._data['city'])
 
     def latitude(self) -> float:
         """Generate a random value of latitude (-90 to +90).
@@ -196,10 +203,10 @@ class Address(BaseDataProvider):
             {'latitude': 8.003968712834975,
             'longitude': 36.02811153405548}
         """
-        return dict(
-            longitude=self.longitude(),
-            latitude=self.latitude(),
-        )
+        return {
+            'longitude': self.longitude(),
+            'latitude': self.latitude(),
+        }
 
     def continent(self, code: bool = False) -> str:
         """Get a random continent name or continent
@@ -211,11 +218,10 @@ class Address(BaseDataProvider):
         :Example:
             Africa (en)
         """
-        if code:
-            return self.random.choice(CONTINENT_CODES)
+        codes = CONTINENT_CODES if \
+            code else self._data['continent']
 
-        continents = self._data['continent']
-        return self.random.choice(continents)
+        return self.random.choice(codes)
 
     def calling_code(self) -> str:
         """Get a random calling code of random country.
