@@ -25,8 +25,7 @@ class Code(BaseDataProvider):
         :Example:
             de-ch
         """
-        locale = self.random.choice(LOCALE_CODES)
-        return locale
+        return self.random.choice(LOCALE_CODES)
 
     def issn(self, mask: str = '####-####') -> str:
         """Generate a random International Standard Serial Number (ISSN).
@@ -48,16 +47,9 @@ class Code(BaseDataProvider):
             132-1-15411-375-8.
         """
         fmt_value = self._validate_enum(item=fmt, enum=ISBNFormat)
-        result = ISBN_MASKS[fmt_value]
-
-        if self.locale in ISBN_GROUPS:
-            mask = result.format(
-                ISBN_GROUPS[self.locale])
-        else:
-            mask = result.format(
-                ISBN_GROUPS['default'])
-
-        return self.random.custom_code(mask=mask)
+        mask = ISBN_MASKS[fmt_value].format(
+            ISBN_GROUPS[self.locale])
+        return self.random.custom_code(mask)
 
     def ean(self, fmt: Optional[EANFormat] = None) -> str:
         """Generate EAN (European Article Number) code. Default is
@@ -86,8 +78,7 @@ class Code(BaseDataProvider):
             353918052107063
         """
         num = self.random.choice(IMEI_TACS)
-        code = self.random.custom_code(mask='######')
-        num = num + code
+        num = num + str(self.random.randint(100000, 999999))
         return num + luhn_checksum(num)
 
     def pin(self, mask: str = '####') -> str:
