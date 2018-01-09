@@ -1,16 +1,36 @@
 environment:
   matrix:
 
+    # py35
     - PYTHON: "C:\\Python35"
+      PYTHON_VERSION: "3.5.3"
+      PYTHON_ARCH: "32"
     - PYTHON: "C:\\Python35-x64"
+      PYTHON_VERSION: "3.5.3"
+      PYTHON_ARCH: "64"
 
+    # py36
     - PYTHON: "C:\\Python36"
+      PYTHON_VERSION: "3.6.3"
+      PYTHON_ARCH: "32"
     - PYTHON: "C:\\Python36-x64"
+      PYTHON_VERSION: "3.6.3"
+      PYTHON_ARCH: "64"
 
 install:
-  - "%PYTHON%\\python.exe -m pip install -r dev_requirements.txt"
+  - "SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%"
+  - "python --version"
+  
+  # Upgrade to the latest version of pip to avoid it displaying warnings
+  # about it being out of date.
+  - "pip install --disable-pip-version-check --user --upgrade pip"
+  
+  # Setting up enviroment
+  - "pip install pipenv"
+  - "pipenv install --dev"
 
 build: off
 
 test_script:
-  - "%PYTHON%\\python.exe setup.py test -a --benchmark-skip"
+  - "pipenv run mypy mimesis"
+  - "pipenv run py.test --maxfail=2 --durations=3 --cov=mimesis --benchmark-skip"

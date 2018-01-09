@@ -85,12 +85,6 @@ VERSION_MICRO_MAX = 10
 
 here = abspath(dirname(__file__))
 
-try:
-    with open('dev_requirements.txt') as f:
-        tests_requirements = f.read().splitlines()
-except FileNotFoundError:
-    tests_requirements = []
-
 about = {}
 # Get meta-data from __version__.py
 with open(join(here, 'mimesis', '__version__.py')) as f:
@@ -123,26 +117,6 @@ class Upload(BaseCommand):
         os.system('{0} setup.py sdist bdist_wheel --universal'.format(sys.executable))
         os.system('twine upload dist/*')
         sys.exit()
-
-
-class PyTest(TestCommand):
-    """Custom command for running test using setup.py test"""
-
-    user_options = [('pytest-args=', 'a', 'Arguments to pass to py.test')]
-
-    def initialize_options(self):
-        TestCommand.initialize_options(self)
-        self.pytest_args = []
-
-    def finalize_options(self):
-        TestCommand.finalize_options(self)
-        self.test_args = []
-        self.test_suite = True
-
-    def run_tests(self):
-        import pytest
-        errno = pytest.main(self.pytest_args)
-        exit(errno)
 
 
 class Minimizer(BaseCommand):
@@ -346,9 +320,7 @@ setup(
         'Topic :: Software Development',
         'Topic :: Software Development :: Testing',
     ],
-    tests_require=tests_requirements,
     cmdclass={
-        'test': PyTest,
         'version': Version,
         'minify': Minimizer,
         'upload': Upload,

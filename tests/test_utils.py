@@ -15,9 +15,8 @@ def is_connected():
         host = socket.gethostbyname('https://github.com/')
         socket.create_connection((host, 80), 2)
         return True
-    except:
-        pass
-    return False
+    except Exception:
+        return False
 
 
 def test_luhn_checksum():
