@@ -23,11 +23,7 @@ def test_score(games):
 def test_pegi_rating(games):
     result = games.pegi_rating().split(' ')[1]
     standard = [3, 7, 12, 16, 18]
-
     assert int(result) in standard
-
-    result = games.pegi_rating(pt=True).split(' ')[1]
-    assert int(result) <= 18
 
 
 def test_genre(games):
