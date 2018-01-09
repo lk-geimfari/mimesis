@@ -203,7 +203,6 @@ class Address(BaseDataProvider):
             {'latitude': 8.003968712834975,
             'longitude': 36.02811153405548}
         """
-
         return {
             'longitude': self.longitude(),
             'latitude': self.latitude(),
