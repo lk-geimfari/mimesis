@@ -208,6 +208,7 @@ class Address(BaseDataProvider):
             'latitude': self.latitude(),
         }
 
+
     def continent(self, code: bool = False) -> str:
         """Get a random continent name or continent
         code (code in international format).
