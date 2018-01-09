@@ -2,7 +2,7 @@
 import pytest
 
 from mimesis import Hardware
-from mimesis.data import (CPU, CPU_CODENAMES, GENERATION, GENERATION_ABBR,
+from mimesis.data import (CPU, CPU_CODENAMES, CPU_MODEL_CODES, GENERATION,
                           GRAPHICS, HDD_SSD, MANUFACTURERS, PHONE_MODELS,
                           RESOLUTIONS, SCREEN_SIZES)
 
@@ -27,9 +27,11 @@ def test_generation(hard):
     assert result in GENERATION
     assert isinstance(result, str)
 
-    abbr = hard.generation(abbr=True)
-    assert abbr in GENERATION_ABBR
-    assert isinstance(abbr, str)
+
+def test_cpu_model_code(hard):
+    result = hard.cpu_model_code()
+    assert result in CPU_MODEL_CODES
+    assert isinstance(result, str)
 
 
 def test_cpu_frequency(hard):

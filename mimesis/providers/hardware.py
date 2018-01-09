@@ -1,4 +1,4 @@
-from mimesis.data import (CPU, CPU_CODENAMES, GENERATION, GENERATION_ABBR,
+from mimesis.data import (CPU, CPU_CODENAMES, CPU_MODEL_CODES, GENERATION,
                           GRAPHICS, HDD_SSD, MANUFACTURERS, PHONE_MODELS,
                           RESOLUTIONS, SCREEN_SIZES)
 from mimesis.providers.base import BaseDataProvider
@@ -48,7 +48,7 @@ class Hardware(BaseDataProvider):
         cf = self.random.uniform(1.5, 4.3)
         return '{0:.1f}GHz'.format(cf)
 
-    def generation(self, abbr: bool = False) -> str:
+    def generation(self) -> str:
         """Get a random generation.
 
         :return: Generation of something.
@@ -56,10 +56,14 @@ class Hardware(BaseDataProvider):
         :Example:
              6th Generation.
         """
-        if not abbr:
-            return self.random.choice(GENERATION)
+        return self.random.choice(GENERATION)
 
-        return self.random.choice(GENERATION_ABBR)
+    def cpu_model_code(self) -> str:
+        """Get a random CPU model.
+
+        :return: CPU model.
+        """
+        return self.random.choice(CPU_MODEL_CODES)
 
     def cpu_codename(self) -> str:
         """Get a random CPU code name.
