@@ -3812,7 +3812,7 @@ USERNAMES = [
     "vertebras",
     "vibrio",
     "viceless",
-    "vicuña",
+    "vicuna",
     "videotape",
     "viking",
     "vilification",
