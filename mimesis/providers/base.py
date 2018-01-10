@@ -9,7 +9,7 @@ class BaseProvider(object):
     """This is a base class for all providers.
     """
 
-    def __init__(self, seed: Optional[int] = None) -> None:
+    def __init__(self, seed: Optional[any] = None) -> None:
         self.seed = seed
         self.random = Random()
 
