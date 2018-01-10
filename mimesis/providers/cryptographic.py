@@ -58,12 +58,14 @@ class Cryptographic(BaseDataProvider):
         """
         return self.bytes(entropy).hex()
 
-    @staticmethod
-    def salt() -> str:
+    def salt(self) -> str:
         """Generate salt (not cryptographically safe) using uuid4().
 
         :return: Salt.
         """
+        if self.seed:
+            bits = self.random.getrandbits(128)
+            return uuid.UUID(int=bits, version=4).hex
         return uuid.uuid4().hex
 
     def mnemonic_code(self, length: int = 12) -> str:
