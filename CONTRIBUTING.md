@@ -11,13 +11,13 @@ We use `Pipenv` for managing development packages:
 ```
 
 ### Code Style
-1. Every contributor must follow the [PEP8](https://www.python.org/dev/peps/pep-0008/) code style.
-2. Always use single-quoted strings, unless a single-quote occurs within the string.
-3. Always run tests, because tests check code style too (`pytest-flake8`).
+
+Every contributor must follow the [PEP8](https://www.python.org/dev/peps/pep-0008/) code style.
 
 ### Annotating
-We are using optional static typing (`mypy`) and this means that every contributor should
-annotate his functions and methods (not variables, because Python 3.5 does not support annotation of variables).
+We use optional static typing ([mypy](https://github.com/python/mypy)). Every function and method should be annotated.
+
+Example of annotated function:
 
 ```python
 def plus(a: int, b: int) -> int:
@@ -54,11 +54,7 @@ def pi() -> float:
     return 3.14
 ```
 
-It's a good idea to add a comment to code line where what is happening is not clear from the context,
-but you shouldn't add comments to pretty obvious things.
-
-### Documentation
-If you have added a new class, module or function than ones should be added to the `docs/api.rst`.
+Comment only things that are not obvious: hacks, optimizations, complex algorithms. Obvious code does not require any additional comments.
 
 ### Testing
 You should write the test which shows that the bug was fixed or that the feature works as expected,
@@ -67,8 +63,6 @@ run test before you commit your changes to the branch and create PR.
 To run tests, simply:
 ```
 make test
-# or
-~ py.test --benchmark-skip --color=yes ./
 ```
 
 Check out logs of Travis CI or AppVeyor if tests were failed on creating PR, there you can find useful information.
@@ -78,8 +72,6 @@ It's good idea to run benchmark test, when you add your feature:
 
 ```
 ~ make benchmarks
-# or
-~ py.test -rf --benchmark-only --benchmark-sort=MEAN ./benchmarks
 ```
 
 Optimize the things which really must be optimized. There no need in using `C` or
@@ -90,16 +82,6 @@ After adding every feature you should run the type checking and make sure that e
 
 ```
 ~ make type-checking
-```
-
-directly using:
-```
-~ mypy mimesis/
-```
-
-or using `pipenv`:
-```
-~ pipenv run mypy mimesis/
 ```
 
 ### Code Review
