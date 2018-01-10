@@ -288,23 +288,13 @@ Output:
 
 Mimesis support generating data by schema only starting from version `1.0.0`.
 
-
-## Integration with py.test and factory_boy
-We have created libraries which can help you easily use Mimesis with `factory_boy` and `py.test`.
-
-- [mimesis-factory](https://github.com/mimesis-lab/mimesis-factory) - Integration with the `factory_boy`.
-- [pytest-mimesis](https://github.com/mimesis-lab/pytest-mimesis) -  Integration with the `py.test`.
-
-
 ## How to Contribute
 
-1. Fork it
-2. Take a look at contributions [guidelines](/CONTRIBUTING.md)
-3. Create your feature branch (`git checkout -b feature/new_locale`)
-4. Commit your changes (`git commit -am 'Add new_locale'`)
-5. Add yourself to list of contributors
-6. Push to the branch (`git push origin feature/new_locale`)
-7. Create a new Pull Request
+1. Take a look at [contributing guidelines](https://github.com/lk-geimfari/mimesis/blob/master/CONTRIBUTING.md).
+2. Check for open issues or open a fresh issue to start a discussion around a feature idea or a bug.
+3. Fork the repository on GitHub to start making your changes to the **your_branch** branch.
+4. Add yourself to the list of [CONTRIBUTORS](https://github.com/lk-geimfari/mimesis/blob/master/CONTRIBUTORS.md).
+5. Send a pull request and bug the maintainer until it gets merged and published.
 
 
 ## License
