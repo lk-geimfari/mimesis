@@ -31,3 +31,5 @@ pytest-mock = "==1.6.3"
 requests = "==2.18.4"
 "urllib3" = "==1.22"
 mypy = "*"
+# win deps
+colorama = { version="==0.3.9", os_name="=='nt'"}

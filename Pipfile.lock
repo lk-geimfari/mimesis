@@ -1,19 +1,17 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "bce2bc4d14397019a6342b2d8b1fe610cf4f7c0ec6cefa8623fc4d8b998842e4"
+            "sha256": "e93c820fec4d39c00ea096379868dac9e86b7aa762450409718a922aab2adc94"
         },
         "host-environment-markers": {
             "implementation_name": "cpython",
-            "implementation_version": "3.5.2",
+            "implementation_version": "3.6.4",
             "os_name": "posix",
             "platform_machine": "x86_64",
             "platform_python_implementation": "CPython",
-            "platform_release": "4.10.0-42-generic",
             "platform_system": "Linux",
-            "platform_version": "#46~16.04.1-Ubuntu SMP Mon Dec 4 15:57:59 UTC 2017",
-            "python_full_version": "3.5.2",
-            "python_version": "3.5",
+            "python_full_version": "3.6.4",
+            "python_version": "3.6",
             "sys_platform": "linux"
         },
         "pipfile-spec": 6,
@@ -62,6 +60,14 @@
                 "sha256:68fc87fbf45aa54b0d51696844ec02976f25a7e4e7e5584c8623c81efba36785"
             ],
             "version": "==2.0.11"
+        },
+        "colorama": {
+            "hashes": [
+                "sha256:463f8483208e921368c9f306094eb6f725c6ca42b0f97e313cb5d5512459feda",
+                "sha256:48eb22f4f8461b1df5734a074b57042430fb06e1d61bd1e11b078c0fe6d7a1f1"
+            ],
+            "markers": "os_name == 'nt'",
+            "version": "==0.3.9"
         },
         "coverage": {
             "hashes": [
