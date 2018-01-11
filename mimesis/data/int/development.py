@@ -4,7 +4,7 @@ CONTAINER = [
     'LXC',
     'Vagrant',
     'OpenVZ',
-    'Kubernetes'
+    'Kubernetes',
 ]
 
 LICENSES = [
@@ -16,7 +16,7 @@ LICENSES = [
     'MIT License (MIT)',
     'Mozilla Public License 2.0 (MPL-2.0)',
     'Common Development and Distribution License (CDDL-1.0)',
-    'Eclipse Public License (EPL-1.0)'
+    'Eclipse Public License (EPL-1.0)',
 ]
 
 PROGRAMMING_LANGS = [
@@ -79,10 +79,10 @@ PROGRAMMING_LANGS = [
     'Tex',
     'Transact-SQL',
     'TypeScript',
-    'Z shell'
+    'Z shell',
 ]
 
-NOSQL = (
+NOSQL = [
     'Aerospike',
     'Aerospike',
     'AllegroGraph',
@@ -98,17 +98,18 @@ NOSQL = (
     'Neo4J',
     'Redis',
     'RethinkDB',
-    'Riak'
-)
+    'Riak',
+]
 
-SQL = (
+SQL = [
     'MariaDB',
     'MySQL',
     'PostgreSQL',
     'Oracle DB',
-    'SQLite'
-    'DB2'
-)
+    'SQLite',
+    'DB2',
+]
+
 BACKEND = [
     'C#/ASP.NET',
     'Java',
@@ -293,7 +294,7 @@ HTML_MARKUP_TAGS = [
     'strong',
 ]
 
-FOLDERS = (
+FOLDERS = [
     'Development',
     'Downloads',
     'Documents',
@@ -303,7 +304,8 @@ FOLDERS = (
     'Pictures',
     'Desktop',
     'Study',
-)
+]
+
 PROJECT_NAMES = [
     'aardonyx',
     'abelisaurus',
