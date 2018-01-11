@@ -1,5 +1,7 @@
-# Here you can see data that used in all locales. "int" is
-# abbreviation of "International Data".
+"""
+Here you can see data that used in all locales. "int" is
+abbreviation of "International Data".
+"""
 
 from .address import *
 from .business import *
