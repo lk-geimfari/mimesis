@@ -3812,7 +3812,6 @@ USERNAMES = [
     'vertebras',
     'vibrio',
     'viceless',
-    'vicuña',
     'videotape',
     'viking',
     'vilification',
