@@ -11,7 +11,10 @@ class BaseProvider(object):
     """This is a base class for all providers."""
 
     def __init__(self, seed: Optional[int] = None) -> None:
-        """Initialize attributes."""
+        """Initialize attributes.
+
+        :param seed: Seed for random.
+        """
         self.seed = seed
         self.random = Random()
 
@@ -62,7 +65,6 @@ class BaseDataProvider(BaseProvider, StrMixin):
         :param locale: Current locale.
         :param seed: Seed to all the random functions.
         """
-        # TODO: Seed can be str and byte too.
         super().__init__(seed=seed)
         self.locale = setup_locale(locale)
 
