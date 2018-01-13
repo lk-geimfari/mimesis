@@ -1,26 +1,29 @@
+"""Provides data related to numbers."""
+
 from typing import List, Union
 
 from mimesis.providers.base import BaseDataProvider
 
 
 class Numbers(BaseDataProvider):
-    """Class for generating numbers"""
+    """Class for generating numbers."""
 
     def floats(self, n: int = 2) -> List[float]:
-        """Generate a list of random float numbers of 10 ** n.
+        """Generate a list of random float numbers.
 
         :param n: Raise 10 to the 'n' power.
         :return: The list of floating-point numbers.
-        :rtype: List of floats
         """
+        # TODO: Use yield?
         nums = [self.random.random()
                 for _ in range(10 ** int(n))]
         return nums
 
     @staticmethod
     def integers(start: int = 0, end: int = 10) -> List[int]:
-        """Generate a list of random integers, which
-        can be negative or positive numbers.
+        """Generate a list of random integers.
+
+        .. note: You can use both positive and negative numbers.
 
         :param start: Start.
         :param end: End.
@@ -34,12 +37,11 @@ class Numbers(BaseDataProvider):
 
     @staticmethod
     def primes(start: int = 1, end: int = 999) -> List[int]:
-        """Generate a list of prime numbers from start to end.
+        """Generate a list of prime numbers.
 
         :param start: First value of range.
         :param end: Last value of range.
         :return: A list of prime numbers from start to end.
-        :rtype: list
         """
         sieve_size = (end // 2 - 1) if end % 2 == 0 else (end // 2)
         sieve = [True] * sieve_size
@@ -67,7 +69,6 @@ class Numbers(BaseDataProvider):
 
         :param to_bin: If True then convert to binary.
         :return: Digit.
-        :rtype: str or int
 
         :Example:
             4.
@@ -90,7 +91,7 @@ class Numbers(BaseDataProvider):
         return number
 
     def rating(self, maximum: float = 5.0) -> float:
-        """Generate random rating for something.
+        """Generate a random rating for something.
 
         :param maximum: Maximum value (default is 5.0).
         :return: Rating.

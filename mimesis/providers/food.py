@@ -1,20 +1,22 @@
+"""Provides data related to food."""
+
 from mimesis.providers.base import BaseDataProvider
 from mimesis.utils import pull
 
 
 class Food(BaseDataProvider):
-    """Class for Food, i.e fruits, vegetables, berries and other."""
+    """Class for generating data related to food."""
 
     def __init__(self, *args, **kwargs):
-        """
-        :param str locale: Current locale.
+        """Initialize attributes.
+
+        :param locale: Current locale.
         """
         super().__init__(*args, **kwargs)
         self._data = pull('food.json', self.locale)
 
     def _choice_from(self, key: str) -> str:
-        """Choice random element from self._data[key].
-        """
+        """Choice random element."""
         data = self._data[key]
         return self.random.choice(data)
 
@@ -29,7 +31,7 @@ class Food(BaseDataProvider):
         return self._choice_from('vegetables')
 
     def fruit(self) -> str:
-        """Get a random name of fruit or berry .
+        """Get a random fruit or berry.
 
         :return: Fruit name.
 
@@ -39,7 +41,7 @@ class Food(BaseDataProvider):
         return self._choice_from('fruits')
 
     def dish(self) -> str:
-        """Get a random dish for current locale.
+        """Get a random dish.
 
         :return: Dish name.
 

@@ -1,3 +1,5 @@
+"""Provider of data related to date and time."""
+
 from calendar import monthrange, timegm
 from datetime import date, datetime, time
 
@@ -8,11 +10,11 @@ from mimesis.utils import pull
 
 
 class Datetime(BaseDataProvider):
-    """Class for generate the fake data that you can use for
-    working with date and time."""
+    """Class for generating data related to the date and time."""
 
     def __init__(self, *args, **kwargs):
-        """
+        """Initialize attributes.
+
         :param locale: Current locale.
         """
         super().__init__(*args, **kwargs)
@@ -38,8 +40,8 @@ class Datetime(BaseDataProvider):
     def day_of_week(self, abbr: bool = False) -> str:
         """Get a random day of week.
 
-        :param abbr: Abbreviated name of the day.
-        :return: Name of day of the week.
+        :param abbr: Abbreviated day name.
+        :return: Day of the week.
 
         :Example:
             Wednesday
@@ -51,7 +53,7 @@ class Datetime(BaseDataProvider):
     def month(self, abbr: bool = False) -> str:
         """Get a random month.
 
-        :param bool abbr: Return abbreviated month name.
+        :param abbr: Abbreviated month name.
         :return: Month name.
 
         :Example:
@@ -95,10 +97,12 @@ class Datetime(BaseDataProvider):
         periodicity = self._data['periodicity']
         return self.random.choice(periodicity)
 
-    def date(self, start: int = 2000, end: int = 2035,
-             fmt: str = '') -> str:
-        """Generate a string representing of random date formatted for
-        the locale or as specified.
+    def date(self, start: int = 2000,
+             end: int = 2035, fmt: str = '') -> str:
+        """Generate a string representing of random date.
+
+        Date can be automatically formatted for the current
+        locale or specified.
 
         :param start: Minimum value of year.
         :param end: Maximum value of year.
@@ -118,7 +122,10 @@ class Datetime(BaseDataProvider):
         return d.strftime(fmt)
 
     def time(self, fmt: str = '') -> str:
-        """Generate a random time formatted for the locale or as specified.
+        """Generate a random time.
+
+        Time can be automatically formatted for the current
+        locale or specified.
 
         :param fmt: Format of time.
         :return: Time.
@@ -148,7 +155,7 @@ class Datetime(BaseDataProvider):
         return self.random.randint(1, 31)
 
     def timezone(self) -> str:
-        """Get a random timezone
+        """Get a random timezone.
 
         :return: Timezone.
 

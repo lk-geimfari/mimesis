@@ -1,3 +1,5 @@
+"""Provides data related to internet."""
+
 from ipaddress import IPv6Address
 from typing import Optional, Union
 
@@ -13,9 +15,14 @@ from mimesis.typing import Size
 
 
 class Internet(BaseDataProvider):
-    """Class for generate the internet data."""
+    """Class for generating data related to the internet."""
 
     def __init__(self, *args, **kwargs):
+        """Initialize attributes.
+
+        :param args: Arguments.
+        :param kwargs: Keyword arguments.
+        """
         super().__init__(*args, **kwargs)
         self.__file = File('en', seed=self.seed)
 
@@ -43,7 +50,6 @@ class Internet(BaseDataProvider):
     def http_status_code(self) -> int:
         """Get a random HTTP status code.
 
-        :param code_only: Return only http status code.
         :return: HTTP status.
 
         :Example:
@@ -64,7 +70,7 @@ class Internet(BaseDataProvider):
     def ip_v4(self, with_port: bool = False) -> str:
         """Generate a random IPv4 address.
 
-        :param bool with_port: Add port to IP.
+        :param with_port: Add port to IP.
         :return: Random IPv4 address.
 
         :Example:
@@ -122,7 +128,7 @@ class Internet(BaseDataProvider):
     @staticmethod
     def image_placeholder(width: Size = 400,
                           height: Size = 300) -> str:
-        """Generate a link to the image placeholder.
+        """Generate link to image placeholder.
 
         :param width: Width of image.
         :type width: str or int
@@ -135,7 +141,7 @@ class Internet(BaseDataProvider):
 
     def stock_image(self, category: str = '',
                     width: Size = 1900, height: Size = 1080) -> str:
-        """Get a random beautiful stock image that hosted on Unsplash.com
+        """Generate random stock image hosted on Unsplash.
 
         :param category: Category of images.
         :param width: Width of the image.
@@ -157,7 +163,7 @@ class Internet(BaseDataProvider):
         return url.format(category=category, width=width, height=height)
 
     def image_by_keyword(self, keyword: str = '') -> str:
-        """Image by keyword.
+        """Generate image by keyword.
 
         :param keyword: Keyword.
         :return: Link to image.
@@ -175,7 +181,7 @@ class Internet(BaseDataProvider):
         return url.format(keyword=keyword)
 
     def hashtags(self, quantity: int = 4) -> Union[str, list]:
-        """Create a list of hashtags (for Instagram, Twitter etc.)
+        """Generate a list of hashtags.
 
         :param quantity: The quantity of hashtags.
         :return: The list of hashtags.

@@ -1,13 +1,19 @@
+"""Provides data related to text."""
+
+from typing import List
+
 from mimesis.providers.base import BaseDataProvider
 from mimesis.utils import pull
 
 
 class Text(BaseDataProvider):
-    """Class for generate text data, i.e text, lorem ipsum and another."""
+    """Class for generating text data."""
 
     def __init__(self, *args, **kwargs):
-        """
-        :param str locale: Current locale.
+        """Initialize attributes.
+
+        :param locale: Current locale.
+        :param seed: Seed.
         """
         super().__init__(*args, **kwargs)
         self._data = pull('text.json', self.locale)
@@ -15,7 +21,7 @@ class Text(BaseDataProvider):
     def alphabet(self, lower_case: bool = False) -> list:
         """Get an alphabet for current locale.
 
-        :param str lower_case: Return alphabet in lower case.
+        :param lower_case: Return alphabet in lower case.
         :return: Alphabet.
         """
         case = 'uppercase' if \
@@ -38,13 +44,8 @@ class Text(BaseDataProvider):
     def text(self, quantity: int = 5) -> str:
         """Generate the text.
 
-        :param int quantity: Quantity of sentences.
+        :param quantity: Quantity of sentences.
         :return: Text.
-
-        :Example:
-            Haskell is a standardized, general-purpose purely
-            functional programming language, with non-strict semantics
-            and strong static typing.
         """
         text = ''
         for _ in range(quantity):
@@ -55,9 +56,6 @@ class Text(BaseDataProvider):
         """Get a random sentence from text.
 
         :return: Sentence.
-
-        :Example:
-            Any element of a tuple can be accessed in constant time.
         """
         return self.text(quantity=1)
 
@@ -65,21 +63,17 @@ class Text(BaseDataProvider):
         """Get a random title.
 
         :return: The title.
-
-        :Example:
-            Erlang - is a general-purpose, concurrent,
-            functional programming language.
         """
         return self.text(quantity=1)
 
-    def words(self, quantity: int = 5) -> list:
-        """Get the random words.
+    def words(self, quantity: int = 5) -> List[str]:
+        """Generate lis of the random words.
 
-        :param int quantity: Quantity of words. Default is 5.
+        :param quantity: Quantity of words. Default is 5.
         :return: Word list.
 
         :Example:
-            science, network, god, octopus, love.
+            [science, network, god, octopus, love]
         """
         words = self._data['words'].get('normal')
         words_list = [self.random.choice(words) for _ in range(quantity)]
@@ -129,7 +123,7 @@ class Text(BaseDataProvider):
         return self.random.choice(colors)
 
     def hex_color(self) -> str:
-        """Generate a hex color.
+        """Generate a random hex color.
 
         :return: Hex color code.
 

@@ -1,3 +1,5 @@
+"""Cryptographic data provider."""
+
 import hashlib
 import uuid
 from typing import Optional
@@ -12,6 +14,7 @@ class Cryptographic(BaseDataProvider):
     """Class that provides cryptographic data."""
 
     def __init__(self, *args, **kwargs):
+        """Initialize attributes."""
         super().__init__(*args, **kwargs)
         self.__words = Text('en')._data['words']
 

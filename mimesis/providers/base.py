@@ -57,16 +57,17 @@ class BaseDataProvider(BaseProvider, StrMixin):
 
     def __init__(self, locale: Optional[str] = None,
                  seed: Optional[int] = None) -> None:
-        """Base constructor for all data providers.
+        """Initialize attributes for data providers.
 
-        :param locale: Current locale. Default is 'en'.
-        :param seed: Seed to all the random functions. Default is 'None'.
+        :param locale: Current locale.
+        :param seed: Seed to all the random functions.
         """
+        # TODO: Seed can be str and byte too.
         super().__init__(seed=seed)
         self.locale = setup_locale(locale)
 
     def get_current_locale(self) -> str:
-        """Current locale of provider.
+        """Get current locale.
 
         If locale is not defined then this method will always return ``en``,
         because ``en`` is default locale for all providers, excluding builtins.

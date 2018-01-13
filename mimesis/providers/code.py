@@ -1,3 +1,5 @@
+"""The data provider of a variety of codes."""
+
 from typing import Optional
 
 from mimesis.data import (EAN_MASKS, IMEI_TACS, ISBN_GROUPS, ISBN_MASKS,

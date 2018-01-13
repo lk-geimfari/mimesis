@@ -1,5 +1,5 @@
 """
-.. image:: https://raw.githubusercontent.com/lk-geimfari/mimesis/master/media/logo-large-nodescr.png
+.. image:: http://bit.ly/2D9cp18
 
 Mimesis
 -------
