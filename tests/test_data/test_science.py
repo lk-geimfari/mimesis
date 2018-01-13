@@ -4,54 +4,91 @@ import re
 
 import pytest
 
-import mimesis
+from mimesis import Science
 from mimesis.data import MATH_FORMULAS
 
+from ..conftest import seed
 from ._patterns import STR_REGEX
 
 
-@pytest.fixture
-def default_science():
-    return mimesis.Science()
+class TestScience(object):
+    @pytest.fixture
+    def default_science(self):
+        return Science()
+
+    def test_str(self, science):
+        assert re.match(STR_REGEX, str(science))
+
+    def test_math_formula(self, default_science):
+        result = default_science.math_formula()
+        assert result in MATH_FORMULAS
+
+    def test_scientific_article(self, science):
+        result = science.scientific_article()
+        assert result in science._data['article']
+
+    def test_chemical_element(self, science):
+        # Some issues with Farsi
+        if science.get_current_locale() != 'fa':
+            result = science.chemical_element(name_only=True)
+            assert len(result) >= 1
+
+            result = science.chemical_element(name_only=False)
+            assert isinstance(result, dict)
+
+    def test_atomic_number(self, default_science):
+        result = default_science.atomic_number()
+        assert isinstance(result, int)
+        assert result <= 119
+
+    def test_rna(self, default_science):
+        result = default_science.rna(length=10)
+        assert isinstance(result, str)
+        assert len(result) == 10
+
+    def test_dna(self, default_science):
+        result = default_science.dna(length=10)
+        assert isinstance(result, str)
+        assert len(result) == 10
 
 
-def test_str(science):
-    assert re.match(STR_REGEX, str(science))
+class TestSeededScience(object):
+    TIMES = 5
 
+    @pytest.fixture
+    def _sciences(self):
+        return Science(seed=seed), Science(seed=seed)
 
-def test_math_formula(default_science):
-    result = default_science.math_formula()
-    assert result in MATH_FORMULAS
+    def test_math_formula(self, _sciences):
+        s1, s2 = _sciences
+        for _ in range(self.TIMES):
+            assert s1.math_formula() == s2.math_formula()
 
+    def test_scientific_article(self, _sciences):
+        s1, s2 = _sciences
+        for _ in range(self.TIMES):
+            assert s1.scientific_article() == s2.scientific_article()
 
-def test_scientific_article(science):
-    result = science.scientific_article()
-    assert result in science._data['article']
+    def test_chemical_element(self, _sciences):
+        s1, s2 = _sciences
+        for _ in range(self.TIMES):
+            assert s1.chemical_element() == s2.chemical_element()
+            assert s1.chemical_element(name_only=True) == \
+                s2.chemical_element(name_only=True)
 
+    def test_atomic_number(self, _sciences):
+        s1, s2 = _sciences
+        for _ in range(self.TIMES):
+            assert s1.atomic_number() == s2.atomic_number()
 
-def test_chemical_element(science):
-    # Some issues with Farsi
-    if science.get_current_locale() != 'fa':
-        result = science.chemical_element(name_only=True)
-        assert len(result) >= 1
+    def test_rna(self, _sciences):
+        s1, s2 = _sciences
+        for _ in range(self.TIMES):
+            assert s1.rna() == s2.rna()
+            assert s1.rna(length=22) == s2.rna(length=22)
 
-        result = science.chemical_element(name_only=False)
-        assert isinstance(result, dict)
-
-
-def test_atomic_number(default_science):
-    result = default_science.atomic_number()
-    assert isinstance(result, int)
-    assert result <= 119
-
-
-def test_rna(default_science):
-    result = default_science.rna(length=10)
-    assert isinstance(result, str)
-    assert len(result) == 10
-
-
-def test_dna(default_science):
-    result = default_science.dna(length=10)
-    assert isinstance(result, str)
-    assert len(result) == 10
+    def test_dna(self, _sciences):
+        s1, s2 = _sciences
+        for _ in range(self.TIMES):
+            assert s1.dna() == s2.dna()
+            assert s1.dna(length=10) == s2.dna(length=10)
