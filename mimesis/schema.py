@@ -1,3 +1,5 @@
+"""Implements classes for generating data by schema."""
+
 from types import LambdaType
 from typing import Any, Callable, List, Optional
 
@@ -24,13 +26,20 @@ class AbstractField(StrMixin):
     """
 
     def __init__(self, locale: str = 'en', seed: Optional[int] = None) -> None:
+        """Initialize field.
+
+        :param locale: Locale
+        :param seed: Seed for random.
+        """
         self.locale = locale
         self.seed = seed
         self.gen = Generic(self.locale, self.seed)
 
     def __call__(self, name: Optional[str] = None,
                  key: Optional[Callable] = None, **kwargs) -> Any:
-        """This magic override standard call so it's take any string which
+        """Override standard call.
+
+        This magic method override standard call so it's take any string which
         represents name of the any method of any supported data provider
         and the ``**kwargs`` of this method.
 
@@ -62,17 +71,27 @@ class AbstractField(StrMixin):
 
 
 class Schema(object):
-    """
-    Class which return list of filled schemas.
-    """
+    """Class which return list of filled schemas."""
 
     def __init__(self, schema: LambdaType) -> None:
+        """Initialize schema.
+
+        :param schema: A schema.
+        """
         if callable(schema) and isinstance(schema, LambdaType):
             self.schema = schema
         else:
             raise UndefinedSchema()
 
     def create(self, iterations: int = 1) -> List[JSON]:
+        """Return filled schema.
+
+        Create a list of a filled schemas with elements in
+        an amount of ``iterations``.
+
+        :param iterations: Amount of iterations.
+        :return: List of willed schemas.
+        """
         data = map(lambda _: self.schema(), range(iterations))
         return list(data)
 

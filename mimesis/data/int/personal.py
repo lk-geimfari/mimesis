@@ -1,3 +1,5 @@
+"""Provides all the generic data related to the personal information."""
+
 BLOOD_GROUPS = (
     'O+',
     'A+',

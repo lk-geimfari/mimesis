@@ -1,26 +1,28 @@
+"""Specific data provider for Germany (de)."""
+
 from mimesis.builtins.base import BaseSpecProvider
 from mimesis.utils import pull
 
 
 class GermanySpecProvider(BaseSpecProvider):
-    """
-    Specific-provider of misc data for Deutschland.
-    """
+    """Specific-provider of misc data for Germany."""
 
     def __init__(self, *args, **kwargs):
+        """Initialize attributes."""
         super().__init__(*args, **kwargs)
         self._data = pull('builtin.json', 'de')
 
     class Meta:
+        """The name of the provider."""
+
         name = 'germany_provider'
 
     def noun(self, plural: bool = False) -> str:
         """Return a random noun in German.
 
-        :param bool plural: Return noun in plural.
+        :param plural: Return noun in plural.
         :return: Noun.
         """
-
         key = 'plural' if \
             plural else 'noun'
 

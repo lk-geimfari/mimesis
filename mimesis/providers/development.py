@@ -1,3 +1,5 @@
+"""Data related to the development."""
+
 from mimesis.data import (BACKEND, CONTAINER, FRONTEND, LICENSES, NOSQL, OS,
                           PROGRAMMING_LANGS, SQL)
 from mimesis.providers.base import BaseDataProvider
@@ -7,7 +9,7 @@ class Development(BaseDataProvider):
     """Class for getting fake data for Developers."""
 
     def software_license(self) -> str:
-        """Get a random software license from list.
+        """Get a random software license.
 
         :return: License name.
 
@@ -17,15 +19,16 @@ class Development(BaseDataProvider):
         return self.random.choice(LICENSES)
 
     def version(self, calver: bool = False, pre_release: bool = False) -> str:
-        """Generate a random version information.
+        """Generate version number.
 
-        :param calver: Use calendar versioning.
+        :param calver: Calendar versioning.
         :param pre_release: Pre-release.
-        :return: The version of software.
-.
+        :return: Version.
+
         :Example:
-            0.11.3-alpha.1
+            0.2.1
         """
+        # TODO: Optimize
         version = '{}.{}.{}'
         major, minor, patch = self.random.randints(3, 0, 10)
 
@@ -51,7 +54,7 @@ class Development(BaseDataProvider):
     def database(self, nosql: bool = False) -> str:
         """Get a random database name.
 
-        :param bool nosql: only NoSQL databases.
+        :param nosql: only NoSQL databases.
         :return: Database name.
 
         :Example:

@@ -1,3 +1,5 @@
+"""Provides all data related to decorators."""
+
 COMMON_LETTERS = {
     '\t': '\t',
     ' ': ' ',

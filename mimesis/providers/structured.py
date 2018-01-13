@@ -1,3 +1,5 @@
+"""Provides structured data."""
+
 import json
 
 from mimesis.data import (CSS_PROPERTIES, CSS_SELECTORS, CSS_SIZE_UNITS,
@@ -8,16 +10,20 @@ from mimesis.providers.text import Text
 
 
 class Structured(BaseDataProvider):
-    """Provider for structured text data such as CSS, HTML, JSON etc."""
+    """Class for generating structured data."""
 
-    def __init__(self, *args, **kwargs):
-        # TODO: Optimize this class
+    def __init__(self, *args, **kwargs) -> None:
+        """Initialize attributes.
+
+        :param locale: Current locale.
+        :param seed: Seed.
+        """
         super().__init__(*args, **kwargs)
         self.__inet = Internet('en', seed=self.seed)
         self.__text = Text('en', seed=self.seed)
 
     def css(self) -> str:
-        """Generates a random snippet of CSS.
+        """Generate a random snippet of CSS.
 
         :return: CSS.
         """
@@ -33,7 +39,7 @@ class Structured(BaseDataProvider):
         return '{} {{{}}}'.format(base, props)
 
     def css_property(self) -> str:
-        """Generates a random snippet of CSS that assigns value to a property.
+        """Generate a random snippet of CSS that assigns value to a property.
 
         :return: CSS property.
 
@@ -55,6 +61,7 @@ class Structured(BaseDataProvider):
 
     def html(self) -> str:
         """Generate a random HTML tag with text inside and some attrs set.
+
         :return: HTML.
 
         :Examples:
@@ -82,7 +89,7 @@ class Structured(BaseDataProvider):
 
     def html_attribute_value(self, tag: str = None,
                              attribute: str = None) -> str:
-        """Random value for specified HTML tag attribute.
+        """Generate random value for specified HTML tag attribute.
 
         :param str tag: An HTML tag.
         :param str attribute: An attribute of the specified tag.
@@ -122,15 +129,14 @@ class Structured(BaseDataProvider):
              max_depth: int = 3, recursive: bool = False) -> str:
         """Generate a random snippet of JSON.
 
-        :param int items: Number of top-level items to produce.
-        :param int max_depth: Maximum depth of each top-level item.
-        :param bool recursive:
+        :param items: Number of top-level items to produce.
+        :param max_depth: Maximum depth of each top-level item.
+        :param recursive:
             When used recursively, will return a Python object instead of JSON
             string.
         :return: JSON
+        ..todo: This method returns json too, not only str.
         """
-
-        # choose root element type
         root = self.random.choice([list, dict])()
 
         for _ in range(items):

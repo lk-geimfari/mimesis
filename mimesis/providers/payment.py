@@ -1,3 +1,5 @@
+"""Provides data related to payment."""
+
 import re
 import string
 from typing import Optional
@@ -12,14 +14,19 @@ from mimesis.utils import luhn_checksum
 
 
 class Payment(BaseDataProvider):
-    """Data related to payments"""
+    """Class that provides data related to payments."""
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs) -> None:
+        """Initialize attributes.
+
+        :param args: Arguments.
+        :param kwargs: Keyword arguments.
+        """
         super().__init__(*args, **kwargs)
         self.__personal = Personal('en', seed=self.seed)
 
     def cid(self) -> int:
-        """Generate a random CID code.
+        """Generate a random CID.
 
         :return: CID code.
 
@@ -52,11 +59,10 @@ class Payment(BaseDataProvider):
             self.random.choice(letters) for _ in range(33))
 
     def ethereum_address(self) -> str:
-        """Get random dummy Ethereum address.
+        """Generate a random Ethereum address.
 
         .. Note: The address will look like Ethereum address,
         but keep in mind that it is not the valid address.
-        It is just a SHA1 hash with prefixed 0x.
 
         :return: Ethereum address.
 
@@ -68,7 +74,7 @@ class Payment(BaseDataProvider):
         return '0x' + address.hex()
 
     def credit_card_network(self) -> str:
-        """Get random credit card network
+        """Generate a random credit card network.
 
         :return: Credit card network
 
@@ -80,7 +86,7 @@ class Payment(BaseDataProvider):
     def credit_card_number(self, card_type: Optional[CardType] = None) -> str:
         """Generate a random credit card number.
 
-        :param str card_type: Issuing Network. Default is Visa.
+        :param card_type: Issuing Network. Default is Visa.
         :return: Credit card number.
         :raises NotImplementedError: if cart_type is not supported.
 
@@ -119,8 +125,8 @@ class Payment(BaseDataProvider):
                                     maximum: int = 25) -> str:
         """Generate a random expiration date for credit card.
 
-        :param int minimum: Date of issue.
-        :param int maximum: Maximum of expiration_date.
+        :param minimum: Date of issue.
+        :param maximum: Maximum of expiration_date.
         :return: Expiration date of credit card.
 
         :Example:
@@ -131,7 +137,7 @@ class Payment(BaseDataProvider):
         return '{0:02d}/{1}'.format(month, year)
 
     def cvv(self) -> int:
-        """Generate a random card verification value (CVV).
+        """Generate a random CVV.
 
         :return: CVV code.
 
@@ -141,6 +147,12 @@ class Payment(BaseDataProvider):
         return self.random.randint(100, 999)
 
     def credit_card_owner(self, gender: Optional[Gender] = None) -> dict:
+        """Generate credit card owner.
+
+        :param gender: Gender of credit card owner.
+        :type gender: Gender's enum object.
+        :return:
+        """
         owner = {
             'credit_card': self.credit_card_number(),
             'expiration_date': self.credit_card_expiration_date(),

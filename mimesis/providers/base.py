@@ -1,3 +1,5 @@
+"""Base data provider."""
+
 from typing import Any, Optional
 
 from mimesis.exceptions import NonEnumerableError
@@ -6,10 +8,13 @@ from mimesis.utils import locale_info, setup_locale
 
 
 class BaseProvider(object):
-    """This is a base class for all providers.
-    """
+    """This is a base class for all providers."""
 
     def __init__(self, seed: Optional[int] = None) -> None:
+        """Initialize attributes.
+
+        :param seed: Seed for random.
+        """
         self.seed = seed
         self.random = Random()
 
@@ -24,7 +29,6 @@ class BaseProvider(object):
         :return: Value of item.
         :raises NonEnumerableError: if ``item`` not in ``enum``.
         """
-
         if item is None:
             result = get_random_item(enum, self.random)
         elif item and isinstance(item, enum):
@@ -36,12 +40,10 @@ class BaseProvider(object):
 
 
 class StrMixin(object):
-    """
-    A mixin for showing information about the current
-    locale of the current data provider.
-    """
+    """A mixin for showing information about the current locale."""
 
     def __str__(self) -> str:
+        """Human-readable representation of locale."""
         if hasattr(self, 'locale'):
             locale = getattr(self, 'locale')
             return '{}:{}:{}'.format(
@@ -54,23 +56,24 @@ class StrMixin(object):
 
 
 class BaseDataProvider(BaseProvider, StrMixin):
-    """
-    This is a base class for all data providers.
-    """
+    """This is a base class for all data providers."""
 
     def __init__(self, locale: Optional[str] = None,
                  seed: Optional[int] = None) -> None:
-        """Base constructor for all data providers.
+        """Initialize attributes for data providers.
 
-        :param str locale: Current locale. Default is 'en'.
-        :param int seed: Seed to all the random functions. Default is 'None'.
+        :param locale: Current locale.
+        :param seed: Seed to all the random functions.
         """
         super().__init__(seed=seed)
         self.locale = setup_locale(locale)
 
     def get_current_locale(self) -> str:
-        """Current locale of provider.
+        """Get current locale.
 
-        ..Note: Default for all providers is locale ``en``.
+        If locale is not defined then this method will always return ``en``,
+        because ``en`` is default locale for all providers, excluding builtins.
+
+        :return: Current locale.
         """
         return self.locale

@@ -1,3 +1,5 @@
+"""Provides data related to units."""
+
 from typing import Optional
 
 from mimesis.data import SI_PREFIXES, SI_PREFIXES_SYM
@@ -6,8 +8,7 @@ from mimesis.providers.base import BaseDataProvider
 
 
 class UnitSystem(BaseDataProvider):
-    """Class for generating name of unit.
-    """
+    """Class for generating data related to units."""
 
     def unit(self, name: Optional[UnitName] = None, symbol=False):
         """Get unit name.
@@ -24,9 +25,9 @@ class UnitSystem(BaseDataProvider):
 
     def prefix(self, sign: Optional[PrefixSign] = None,
                symbol: bool = False) -> str:
-        """Get a random prefix for the International System of Units (SI)
+        """Get a random prefix for the International System of Units.
 
-        :param sign: Sing of number (positive, negative)
+        :param sign: Sing of number.
         :param symbol: Return symbol of prefix.
         :return: Prefix for SI.
         :raises NonEnumerableError: if sign is not supported.

@@ -1,3 +1,5 @@
+"""Provider of data related to date and time."""
+
 from calendar import monthrange, timegm
 from datetime import date, datetime, time
 
@@ -8,12 +10,12 @@ from mimesis.utils import pull
 
 
 class Datetime(BaseDataProvider):
-    """Class for generate the fake data that you can use for
-    working with date and time."""
+    """Class for generating data related to the date and time."""
 
     def __init__(self, *args, **kwargs):
-        """
-        :param str locale: Current locale.
+        """Initialize attributes.
+
+        :param locale: Current locale.
         """
         super().__init__(*args, **kwargs)
         self._data = pull('datetime.json', self.locale)
@@ -21,8 +23,8 @@ class Datetime(BaseDataProvider):
     def week_date(self, start: int = 2017, end: int = 2018) -> str:
         """Get week number with year.
 
-        :param int start: From start.
-        :param int end: To end.
+        :param start: From start.
+        :param end: To end.
         :return: Week number.
 
         :Example:
@@ -38,8 +40,8 @@ class Datetime(BaseDataProvider):
     def day_of_week(self, abbr: bool = False) -> str:
         """Get a random day of week.
 
-        :param bool abbr: Abbreviated name of the day.
-        :return: Name of day of the week.
+        :param abbr: Abbreviated day name.
+        :return: Day of the week.
 
         :Example:
             Wednesday
@@ -51,7 +53,7 @@ class Datetime(BaseDataProvider):
     def month(self, abbr: bool = False) -> str:
         """Get a random month.
 
-        :param bool abbr: Return abbreviated month name.
+        :param abbr: Abbreviated month name.
         :return: Month name.
 
         :Example:
@@ -65,8 +67,8 @@ class Datetime(BaseDataProvider):
              maximum: int = 2050) -> int:
         """Generate a random year.
 
-        :param int minimum: Minimum value.
-        :param int maximum: Maximum value.
+        :param minimum: Minimum value.
+        :param maximum: Maximum value.
         :return: Year.
 
         :Example:
@@ -75,7 +77,7 @@ class Datetime(BaseDataProvider):
         return self.random.randint(minimum, maximum)
 
     def century(self) -> str:
-        """Get a random value from list of centuries (roman format).
+        """Get a random century.
 
         :return: Century.
 
@@ -95,14 +97,16 @@ class Datetime(BaseDataProvider):
         periodicity = self._data['periodicity']
         return self.random.choice(periodicity)
 
-    def date(self, start: int = 2000, end: int = 2035,
-             fmt: str = '') -> str:
-        """Generate a string representing of random date formatted for
-        the locale or as specified.
+    def date(self, start: int = 2000,
+             end: int = 2035, fmt: str = '') -> str:
+        """Generate a string representing of random date.
 
-        :param int start: Minimum value of year.
-        :param int end: Maximum value of year.
-        :param str fmt: Format string for date.
+        Date can be automatically formatted for the current
+        locale or specified.
+
+        :param start: Minimum value of year.
+        :param end: Maximum value of year.
+        :param fmt: Format string for date.
         :return: Formatted date.
 
         :Example:
@@ -118,9 +122,12 @@ class Datetime(BaseDataProvider):
         return d.strftime(fmt)
 
     def time(self, fmt: str = '') -> str:
-        """Generate a random time formatted for the locale or as specified.
+        """Generate a random time.
 
-        :param str fmt: Format of time.
+        Time can be automatically formatted for the current
+        locale or specified.
+
+        :param fmt: Format of time.
         :return: Time.
 
         :Example:
@@ -148,7 +155,7 @@ class Datetime(BaseDataProvider):
         return self.random.randint(1, 31)
 
     def timezone(self) -> str:
-        """Get a random timezone
+        """Get a random timezone.
 
         :return: Timezone.
 
@@ -170,7 +177,7 @@ class Datetime(BaseDataProvider):
     def datetime(self, humanized: bool = False, **kwargs) -> DateTime:
         """Generate random datetime.
 
-        :param bool humanized: Readable representation.
+        :param humanized: Readable representation.
         :param kwargs: Keyword arguments (start, end).
         :return: Datetime.
         :rtype: datetime.datetime
@@ -194,7 +201,7 @@ class Datetime(BaseDataProvider):
     def timestamp(self, posix: bool = True, **kwargs) -> Timestamp:
         """Generate random timestamp.
 
-        :param bool posix: POSIX time.
+        :param posix: POSIX time.
         :param kwargs: Keyword arguments (start, end).
         :return: Timestamp.
         :rtype: str or int

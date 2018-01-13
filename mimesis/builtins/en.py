@@ -1,16 +1,22 @@
+"""Specific data provider for USA (en)."""
+
 from typing import Union
 
 from mimesis.builtins.base import BaseSpecProvider
 
 
 class USASpecProvider(BaseSpecProvider):
-    """Class that provides special data for en"""
+    """Class that provides special data for USA (en)."""
 
     class Meta:
+        """The name of the provider."""
+
         name = 'usa_provider'
 
     def tracking_number(self, service: str = 'usps') -> str:
-        """Generate random tracking number for USPS, FedEx and UPS.
+        """Generate random tracking number.
+
+        Supported services: USPS, FedEx and UPS.
 
         :param str service: Post service.
         :return: Tracking number.
@@ -37,14 +43,13 @@ class USASpecProvider(BaseSpecProvider):
         return self.random.custom_code(mask=mask)
 
     def ssn(self) -> str:
-        """Generate a random, but valid Social Security Number.
+        """Generate a random, but valid SSN.
 
-        :returns: Random SSN
+        :returns: SSN.
 
         :Example:
             569-66-5801
         """
-        # Valid SSNs exclude 000, 666, and 900-999 in the area group
         area = self.random.randint(1, 899)
         if area == 666:
             area = 665
@@ -58,7 +63,7 @@ class USASpecProvider(BaseSpecProvider):
     def personality(self, category: str = 'mbti') -> Union[str, int]:
         """Generate a type of personality.
 
-        :param str category: Category.
+        :param category: Category.
         :return: Personality type.
         :rtype: str or int
 

@@ -1,3 +1,5 @@
+"""Provides personal data."""
+
 import hashlib
 from string import ascii_letters, digits, punctuation
 from typing import Optional, Union
@@ -15,12 +17,13 @@ __all__ = ['Personal']
 
 
 class Personal(BaseDataProvider):
-    """Class for generate personal data, i.e names, surnames,
-    age and another."""
+    """Class for generating personal data."""
 
-    def __init__(self, *args, **kwargs):
-        """
-        :param str locale: Current locale.
+    def __init__(self, *args, **kwargs) -> None:
+        """Initialize attributes.
+
+        :param locale: Current locale.
+        :param seed: Seed.
         """
         super().__init__(*args, **kwargs)
         self._data = pull('personal.json', self.locale)
@@ -45,7 +48,7 @@ class Personal(BaseDataProvider):
     def child_count(self, max_childs: int = 5) -> int:
         """Get a count of child's.
 
-        :param int max_childs: Maximum count of child's.
+        :param max_childs: Maximum count of child's.
         :return: Ints. Depend on previous generated age.
         """
         a = self._store['age']
@@ -68,7 +71,7 @@ class Personal(BaseDataProvider):
         return max(a - working_start_age, 0)
 
     def name(self, gender: Optional[Gender] = None) -> str:
-        """Get a random name.
+        """Generate a random name.
 
         :param gender: Gender's enum object.
         :return: Name.
@@ -81,7 +84,7 @@ class Personal(BaseDataProvider):
         return self.random.choice(names)
 
     def surname(self, gender: Optional[Gender] = None) -> str:
-        """Get a random surname.
+        """Generate a random surname.
 
         :param gender: Gender's enum object.
         :return: Surname.
@@ -99,7 +102,9 @@ class Personal(BaseDataProvider):
         return self.random.choice(surnames)
 
     def last_name(self, gender: Optional[Gender] = None) -> str:
-        """An alias of self.surname.
+        """Generate a random last name.
+
+        ..note: An alias for self.surname().
 
         :param gender: Gender's enum object.
         :return: Last name.
@@ -108,7 +113,10 @@ class Personal(BaseDataProvider):
 
     def title(self, gender: Optional[Gender] = None,
               title_type: Optional[TitleType] = None) -> str:
-        """Get a random title (prefix/suffix) for name.
+        """Generate a random title for name.
+
+        You can generate random prefix or suffix
+        for name using this method.
 
         :param gender: The gender.
         :param title_type: TitleType enum object.
@@ -119,8 +127,7 @@ class Personal(BaseDataProvider):
             PhD.
         """
         gender_key = self._validate_enum(gender, Gender)
-        title_key = self._validate_enum(
-            item=title_type, enum=TitleType)
+        title_key = self._validate_enum(title_type, TitleType)
 
         titles = self._data['title'][gender_key][title_key]
         return self.random.choice(titles)
@@ -136,7 +143,6 @@ class Personal(BaseDataProvider):
         :Example:
             Johann Wolfgang.
         """
-
         if gender is None:
             gender = get_random_item(Gender, rnd=self.random)
 
@@ -154,8 +160,10 @@ class Personal(BaseDataProvider):
     def username(self, template: Optional[str] = None) -> str:
         """Generate username by template.
 
-        :param template: Template ('U_d', 'U.d', 'U-d', 'UU-d', 'UU.d', 'UU_d',
-            'ld', 'l-d', 'Ud', 'l.d', 'l_d', 'default')
+        Supported templates: ('U_d', 'U.d', 'U-d', 'UU-d', 'UU.d', 'UU_d',
+        'ld', 'l-d', 'Ud', 'l.d', 'l_d', 'default')
+
+        :param template: Template
         :return: Username.
         :raises KeyError: if template is not supported.
 
@@ -217,7 +225,6 @@ class Personal(BaseDataProvider):
         :Example:
             k6dv2odff9#4h
         """
-
         text = ascii_letters + digits + punctuation
         password = ''.join([self.random.choice(text) for _ in range(length)])
 
@@ -256,28 +263,25 @@ class Personal(BaseDataProvider):
         :Example:
             http://facebook.com/some_user
         """
-
-        key = self._validate_enum(
-            item=site,
-            enum=SocialNetwork,
-        )
+        key = self._validate_enum(site, SocialNetwork)
         website = SOCIAL_NETWORKS[key]
         url = 'https://www.' + website
         return url.format(self.username())
 
     def gender(self, iso5218: bool = False,
                symbol: bool = False) -> Union[str, int]:
-        """Get a random title of gender, code for the representation
+        """Get a random gender.
+
+        Get a random title of gender, code for the representation
         of human sexes is an international standard that defines a
         representation of human sexes through a language-neutral single-digit
         code or symbol of gender.
 
-        :param bool iso5218:
+        :param iso5218:
             Codes for the representation of human sexes is an international
             standard (0 - not known, 1 - male, 2 - female, 9 - not applicable).
-        :param bool symbol: Symbol of gender.
+        :param symbol: Symbol of gender.
         :return: Title of gender.
-        :rtype: str or int
 
         :Example:
             Male
@@ -480,7 +484,7 @@ class Personal(BaseDataProvider):
         return self.random.custom_code(mask=mask, digit=placeholder)
 
     def avatar(self, size: int = 256) -> str:
-        """Generate a random avatar (link to avatar) using API of  Adorable.io.
+        """Generate a random avatar..
 
         :param int size: Size of avatar.
         :return: Link to avatar.
@@ -489,11 +493,13 @@ class Personal(BaseDataProvider):
         return url.format(size, self.password(hashed=True))
 
     def identifier(self, mask: str = '##-##/##') -> str:
-        """Generate a random identifier by mask. With this method you can generate
-        any identifiers that you need. Simply select the mask that you need.
+        """Generate a random identifier by mask.
 
-        :param str mask:
-            The mask. Here '@' is a placeholder for characters and '#' is
+        With this method you can generate any identifiers that
+        you need. Simply select the mask that you need.
+
+        :param mask:
+            The mask. Here ``@`` is a placeholder for characters and ``#`` is
             placeholder for digits.
         :return: An identifier.
 

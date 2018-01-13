@@ -46,8 +46,8 @@ def test_schoice(random, seq, length):
 
 
 def test_custom_code(random):
-    result = random.custom_code(mask='@@@-###-@@@', char='@', digit='#')
-    assert len(result) == 11
+    result = random.custom_code(mask='AB@@@-###-@@@', char='@', digit='#')
+    assert len(result) == 13
 
     a, b, c = result.split('-')
     assert a.isalpha()

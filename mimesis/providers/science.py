@@ -1,3 +1,5 @@
+"""Provides pseudo-scientific data."""
+
 from typing import Union
 
 from mimesis.data import MATH_FORMULAS
@@ -6,11 +8,13 @@ from mimesis.utils import pull
 
 
 class Science(BaseDataProvider):
-    """Class for getting scientific data"""
+    """Class for generating pseudo-scientific data."""
 
     def __init__(self, *args, **kwargs):
-        """
-        :param str locale: Current language.
+        """Initialize attributes.
+
+        :param locale: Current language.
+        :param seed: Seed.
         """
         super().__init__(*args, **kwargs)
         self._data = pull('science.json', self.locale)
@@ -29,7 +33,7 @@ class Science(BaseDataProvider):
     def chemical_element(self, name_only: bool = True) -> Union[dict, str]:
         """Generate a random chemical element.
 
-        :param bool name_only: If False then will be returned dict.
+        :param name_only: If False then will be returned dict.
         :return: Name of chemical element or dict.
         :rtype: dict or str
 
@@ -49,7 +53,7 @@ class Science(BaseDataProvider):
         return nm.strip()
 
     def atomic_number(self) -> int:
-        """Generate random atomic number
+        """Generate random atomic number.
 
         :return: Atomic number
 
@@ -61,7 +65,7 @@ class Science(BaseDataProvider):
     def scientific_article(self) -> str:
         """Generate a random link to scientific article on Wikipedia.
 
-        :return: Link to article on Wikipedia.
+        :return: Link to the article.
 
         :Example:
             https://en.wikipedia.org/wiki/Black_hole
@@ -70,7 +74,7 @@ class Science(BaseDataProvider):
         return self.random.choice(articles)
 
     def rna(self, length: int = 10) -> str:
-        """Generate random RNA sequence.
+        """Generate a random RNA sequence.
 
         :param length: Length of block.
         :return: RNA sequence.
@@ -82,7 +86,7 @@ class Science(BaseDataProvider):
         return self.random.schoice(letters, length)
 
     def dna(self, length: int = 10) -> str:
-        """Generate random DNA sequence.
+        """Generate a random DNA sequence.
 
         :param length: Length of block.
         :return: DNA sequence.

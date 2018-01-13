@@ -1,7 +1,5 @@
-# settings.py
-# Global settings of Mimesis library.
+"""Configuration file."""
 
-# Dictionary of supported locales with names.
 SUPPORTED_LOCALES = {
     'cs': {
         'name': 'Czech',

@@ -1,3 +1,5 @@
+"""Provides all at one."""
+
 import inspect
 from typing import List
 
@@ -28,9 +30,14 @@ __all__ = ['Generic']
 
 
 class Generic(BaseDataProvider):
-    """A lazy initialization of locale for all classes that have locales."""
+    """Class which contain all providers at one."""
 
     def __init__(self, *args, **kwargs):
+        """Initialize attributes lazily.
+
+        :param args: Arguments.
+        :param kwargs: Keyword arguments.
+        """
         super().__init__(*args, **kwargs)
         self._personal = Personal
         self._address = Address
@@ -55,7 +62,7 @@ class Generic(BaseDataProvider):
         self.structured = Structured(seed=self.seed)
 
     def __getattr__(self, attrname: str):
-        """Get _attribute without underscore
+        """Get attribute without underscore.
 
         :param attrname: Attribute name.
         :return: An attribute.
@@ -69,6 +76,10 @@ class Generic(BaseDataProvider):
             return self.__dict__[attrname]
 
     def __dir__(self) -> List[str]:
+        """Available data providers.
+
+        :return: List of attributes.
+        """
         attributes = []
         exclude = BaseDataProvider().__dict__.keys()
 

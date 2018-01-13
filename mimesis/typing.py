@@ -1,7 +1,4 @@
-"""
-Custom types and shortcuts for annotating Mimesis.
-Otherwise, simply import the types you need at the top of each file.
-"""
+"""Custom types and shortcuts for annotating Mimesis."""
 
 import datetime
 from typing import Any, Dict, Union

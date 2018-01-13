@@ -1,24 +1,23 @@
+"""Specific data provider for Japan (ja)."""
+
 from mimesis.builtins.base import BaseSpecProvider
 
 
 class JapanSpecProvider(BaseSpecProvider):
-    """Class that provides special data for ja"""
+    """Class that provides special data for ja."""
 
     class Meta:
+        """The name of the provider."""
+
         name = 'japan_provider'
 
     @staticmethod
     def full_to_half(text: str, alnum: bool = True) -> str:
-        """Convert all full width katakana, alphanumeric and few special
-        characters like （, ）, ・ to equivalent half width character.
+        """Convert all full width katakana to equivalent half width character.
 
-        :param str text: The text to be converted.
-        :param bool alnum: Convert alphanumeric, default True.
+        :param text: The text to be converted.
+        :param alnum: Convert alphanumeric, default True.
         :return: Text with full width characters converted to half width.
-        :rtype: str
-
-        :Example:
-            QVCｼﾞｬﾊﾟﾝ(0123)
         """
         fh_kana_special = {
             'ア': 'ｱ', 'イ': 'ｲ', 'ウ': 'ｳ', 'エ': 'ｴ', 'オ': 'ｵ', 'カ': 'ｶ',
@@ -56,16 +55,11 @@ class JapanSpecProvider(BaseSpecProvider):
 
     @staticmethod
     def half_to_full(text: str, alnum: bool = True) -> str:
-        """Convert all half width katakana, alphanumeric, and special characters
-        ((, ), ) to equivalent full width character.
+        """Convert all half width katakana, to equivalent full width character.
 
-        :param str text: The text to be converted.
-        :param bool alnum: Convert alphanumeric, default True.
+        :param text: The text to be converted.
+        :param alnum: Convert alphanumeric, default True.
         :return: Text with half width characters converted to full width.
-        :type: str
-
-        :Example:
-            ＱＶＣジャパン（０１２３）
         """
         _hf_alnum_offset = 65248
         result = ''
@@ -96,8 +90,7 @@ class JapanSpecProvider(BaseSpecProvider):
         }
 
         def hf_parse(char, result):
-            """Parse the char from half-width to full-width, append to result,
-            and return result.
+            """Parse the char from half-width to full-width.
 
             :param char: Character to be parsed from half-width to full-width.
             :param result: Previous result string.

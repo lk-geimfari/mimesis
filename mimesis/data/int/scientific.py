@@ -1,3 +1,5 @@
+"""Provides all the data related to science."""
+
 MATH_FORMULAS = [
     'A = (ab)/2',
     'A = a2',
