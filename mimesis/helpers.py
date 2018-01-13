@@ -6,6 +6,7 @@ but frequently used in this project.
 
 Also there are implemented function ``get_random_item()`` which helps
 get a random item of the enum object.
+
 """
 
 import os
@@ -16,7 +17,12 @@ __all__ = ['Random', 'get_random_item']
 
 
 class Random(random.Random):
-    """Custom Random() class for the possibility of extending."""
+    """Custom class for the possibility of extending.
+
+    The class is a subclass of the class ``Random()`` from the module ``random``
+    of the standard library, which provides the custom methods.
+
+    """
 
     def multiple_choice(self, seq: Sequence[Any], amount: int = 2) -> list:
         """Multiple choices of elements from the sequence.
