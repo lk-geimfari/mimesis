@@ -1,3 +1,5 @@
+"""Provides all the data related to transports."""
+
 TRUCKS = [
     'ACMAT',
     'AEC',

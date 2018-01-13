@@ -1,3 +1,5 @@
+"""Business data provider."""
+
 from mimesis.data import (CRYPTOCURRENCY_ISO_CODES, CRYPTOCURRENCY_SYMBOLS,
                           CURRENCY_ISO_CODES, CURRENCY_SYMBOLS)
 from mimesis.providers.base import BaseDataProvider
@@ -8,8 +10,9 @@ class Business(BaseDataProvider):
     """Class for generating data for business."""
 
     def __init__(self, *args, **kwargs):
-        """
-        :param str locale: Current locale.
+        """Initialize attributes.
+
+        :param locale: Current locale.
         """
         super().__init__(*args, **kwargs)
         self._data = pull('business.json', self.locale)
@@ -53,7 +56,7 @@ class Business(BaseDataProvider):
         )
 
     def currency_iso_code(self) -> str:
-        """Get a currency code. ISO 4217 format.
+        """Get code of the currency.
 
         :return: Currency code.
 

@@ -1,15 +1,32 @@
+"""Implements enums for a lot of methods.
+
+Enums from this module are used in a lot of methods.
+You should always import enums from this module if you want
+behavior for the methods that differ from the default behavior.
+
+You should never use your own enums in methods because in this case,
+there no guarantee that you will get the result which you actually expected.
+
+Below you can see an example of usage enums in methods of data providers.
+
+Example:
+    >>> from mimesis import Personal
+    >>> from mimesis.enums import Gender
+    >>> personal = Personal()
+    >>> personal.full_name(gender=Gender.FEMALE)
+    'Antonetta Garrison'
+"""
+
 from enum import Enum
 
 
 class PortRange(Enum):
-    """Value for a method ``Internet.port()`` which
-    takes parameter``port_range``.
+    """Represents port ranges.
 
-    Example:
-
-    >>> internet.port(port_range=PortRange.REGISTERED)
-    '8080'
+    Value for a method ``Internet.port()`` which
+    takes parameter ``port_range``.
     """
+
     ALL = (1, 65535)
     WELL_KNOWN = (1, 1023)
     EPHEMERAL = (49152, 65535)
@@ -17,53 +34,45 @@ class PortRange(Enum):
 
 
 class Gender(Enum):
-    """Value for a lot of methods which
+    """Represents genders.
+
+    Value for a lot of methods which
     takes argument ``gender``.
-
-    Example:
-
-    >>> personal.full_name(gender=Gender.FEMALE)
-    'Jessica Larson'
     """
+
     FEMALE = 'female'
     MALE = 'male'
 
 
 class TitleType(Enum):
-    """Value for a method ``Personal.title()`` which
+    """Represents title types.
+
+    Value for a method ``Personal.title()`` which
     takes parameter``title_type``.
-
-    Example:
-
-    >>> personal.title(title_type=TitleType.TYPICAL)
-    'Mr.'
     """
+
     TYPICAL = 'typical'
     ACADEMIC = 'academic'
 
 
 class CardType(Enum):
-    """Value for a method ``Payment.credit_card_number()`` which
+    """Provides cart types.
+
+    Value for a method ``Payment.credit_card_number()`` which
     takes parameter ``card_type``.
-
-    Example:
-
-    >>> payment.credit_card_number(card_type=CardType.VISA)
-    '4116 9018 7744 0125'
     """
+
     MASTER_CARD = 'MasterCard'
     VISA = 'Visa'
     AMERICAN_EXPRESS = 'American Express'
 
 
 class Algorithm(Enum):
-    """Value for methods which take argument ``algorithm``.
+    """Provides algorithms which available.
 
-    Example:
-
-    >>> cryptographic.hash(algorithm=Algorithm.MD5)
-    '6023658e8cc9c97edfd51cf2fabf1faf'
+    Value for methods which take argument ``algorithm``.
     """
+
     MD5 = 'md5'
     SHA1 = 'sha1'
     SHA224 = 'sha224'
@@ -73,14 +82,12 @@ class Algorithm(Enum):
 
 
 class TLDType(Enum):
-    """Value for a method ``Internet.top_level_domain()`` which
-    takes parameter ``tld_type``.
+    """Provides top level domain types.
 
-    Example:
-
-    >>> internet.top_level_domain(tld_type=TLDType.GEOTLD)
-    '.moscow'
+    Value for a method ``Internet.top_level_domain()``
+    which takes parameter ``tld_type``.
     """
+
     CCTLD = 'cctld'
     GTLD = 'gtld'
     GEOTLD = 'geotld'
@@ -89,14 +96,12 @@ class TLDType(Enum):
 
 
 class Layer(Enum):
-    """Value for method ``Internet.network_protocol()`` which
+    """Provides network protocol layers.
+
+    Value for method ``Internet.network_protocol()`` which
     takes parameter ``layer``.
-
-    Example:
-
-    >>> internet.network_protocol(layer=Layer.APPLICATION)
-    'BitTorrent'
     """
+
     APPLICATION = 'application'
     DATA_LINK = 'data_link'
     NETWORK = 'network'
@@ -107,13 +112,11 @@ class Layer(Enum):
 
 
 class FileType(Enum):
-    """Value for methods which takes parameter ``file_type``.
+    """Provides file types.
 
-    Example:
-
-    >>> file.extension(file_type=FileType.SOURCE)
-    '.py'
+    Value for methods which takes parameter ``file_type``.
     """
+
     SOURCE = 'source'
     TEXT = 'text'
     DATA = 'data'
@@ -125,14 +128,12 @@ class FileType(Enum):
 
 
 class MimeType(Enum):
-    """Value for method ``File.mime_type()`` which
+    """Provides common mime types.
+
+    Value for method ``File.mime_type()`` which
     takes parameter ``type_``.
-
-    Example:
-
-    >>> file.mime_type(type_=MimeType.APPLICATION)
-    'application/alto-directory+json'
     """
+
     APPLICATION = 'application'
     AUDIO = 'audio'
     IMAGE = 'image'
@@ -142,67 +143,57 @@ class MimeType(Enum):
 
 
 class PrefixSign(Enum):
-    """Value for method ``UnitSystem.prefix()`` which
+    """Provides prefix signs.
+
+    Value for method ``UnitSystem.prefix()`` which
     takes parameter ``sign``.
-
-    Example:
-
-    >>> unitsystem.prefix(sign=PrefixSign.NEGATIVE)
-    'yocto'
     """
+
     POSITIVE = 'positive'
     NEGATIVE = 'negative'
 
 
 class CountryCode(Enum):
-    """Value for method ``Address.country_iso_code()`` which
+    """Provides types of country codes.
+
+    Value for method ``Address.country_iso_code()`` which
     takes parameter ``fmt``.
-
-    Example:
-
-    >>> address.country_iso_code(fmt=CountryCode.ISO3)
-    'AND'
     """
+
     ISO2 = 'iso2'
     ISO3 = 'iso3'
     NUMERIC = 'numeric'
 
 
 class ISBNFormat(Enum):
-    """Value for method ``Code.isbn()`` which
+    """Provides formats of ISBN.
+
+    Value for method ``Code.isbn()`` which
     takes parameter ``fmt``.
-
-    Example:
-
-    >>> code.isbn(fmt=ISBNFormat.ISBN10)
-    '1-64396-236-2'
     """
+
     ISBN13 = 'isbn-13'
     ISBN10 = 'isbn-10'
 
 
 class EANFormat(Enum):
-    """Value for method ``Code.ean()`` which
+    """Provides formats of EAN.
+
+    Value for method ``Code.ean()`` which
     takes parameter ``fmt``.
-
-    Example:
-
-    >>> code.ean(fmt=EANFormat.EAN8)
-    '09959590'
     """
+
     EAN8 = 'ean-8'
     EAN13 = 'ean-13'
 
 
 class SocialNetwork(Enum):
-    """Value for method ``Personal.social_media_profile()`` which
+    """Provides most popular social networks.
+
+    Value for method ``Personal.social_media_profile()`` which
     takes parameter ``site``.
-
-    Example:
-
-    >>> personal.social_media_profile(site=SocialNetwork.INSTAGRAM)
-    'https://www.instagram.com/cacara_1844'
     """
+
     FACEBOOK = 'facebook'
     TWITTER = 'twitter'
     INSTAGRAM = 'instagram'
@@ -210,14 +201,12 @@ class SocialNetwork(Enum):
 
 
 class UnitName(Enum):
-    """Value for method ``UnitSystem.unit()`` which
+    """Provide unit names.
+
+    Value for method ``UnitSystem.unit()`` which
     takes parameter ``name``.
-
-    Example:
-
-    >>> unitsystem.unit(name=UnitName.MASS)
-    'gramm'
     """
+
     MASS = ('gram', 'gr')
     INFORMATION = ('byte', 'b')
     THERMODYNAMIC_TEMPERATURE = ('kelvin', 'K')

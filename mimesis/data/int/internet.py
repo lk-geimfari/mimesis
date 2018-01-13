@@ -1,3 +1,5 @@
+"""Provides all the data related to the internet."""
+
 HTTP_METHODS = [
     'GET',
     'POST',

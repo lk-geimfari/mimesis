@@ -1,32 +1,34 @@
+"""Specific data provider for Brazil (pt-br)."""
+
 from random import randint
 
 from mimesis.builtins.base import BaseSpecProvider
 
 
 class BrazilSpecProvider(BaseSpecProvider):
-    """Class that provides special data for pt-br"""
+    """Class that provides special data for Brazil (pt-br)."""
 
     class Meta:
+        """The name of the provider."""
+
         name = 'brazil_provider'
 
     @staticmethod
     def cpf(with_mask: bool = True) -> str:
-        """Get a random CPF (brazilian social security code)
+        """Get a random CPF.
 
-        :param bool with_mask: Use CPF mask (###.###.###-##).
+        :param with_mask: Use CPF mask (###.###.###-##).
         :returns: Random CPF.
-        :rtype: str
 
         :Example:
             001.137.297-40
         """
-
         def get_verifying_digit_cpf(cpf, peso):
-            """Calculates the verifying digit for the CPF
+            """Calculate the verifying digit for the CPF.
 
-            :param cpf: ist of integers with the CPF
-            :param peso: Integer with the weight for the modulo 11 calculate
-            :returns: the verifying digit for the CPF
+            :param cpf: List of integers with the CPF.
+            :param peso: Integer with the weight for the modulo 11 calculate.
+            :returns: The verifying digit for the CPF.
             """
             soma = 0
             for index, digit in enumerate(cpf):
@@ -51,21 +53,20 @@ class BrazilSpecProvider(BaseSpecProvider):
 
     @staticmethod
     def cnpj(with_mask: bool = True) -> str:
-        """Get a random cnpj (brazilian social security code)
+        """Get a random CNPJ.
 
-        :param bool with_mask: use cnpj mask (###.###.###-##)
+        :param with_mask: Use cnpj mask (###.###.###-##)
         :returns: Random cnpj.
-        :rtype: str
 
         :Example:
             77.732.230/0001-70
         """
-
         def get_verifying_digit_cnpj(cnpj, peso):
-            """Calculates the verifying digit for the cnpj
-            :param cnpj: list of integers with the cnpj
-            :param peso: integer with the weigth for the modulo 11 calcule
-            :returns: the verifying digit for the cnpj
+            """Calculate the verifying digit for the CNPJ.
+
+            :param cnpj: List of integers with the CNPJ.
+            :param peso: Integer with the weight for the modulo 11 calculate.
+            :returns: The verifying digit for the CNPJ.
             """
             soma = 0
             if peso == 5:

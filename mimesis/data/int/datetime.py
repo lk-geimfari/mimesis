@@ -1,3 +1,5 @@
+"""Provides all the data related to the data and time."""
+
 ROMAN_NUMS = [
     'I',
     'II',
