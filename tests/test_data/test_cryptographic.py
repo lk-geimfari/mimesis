@@ -66,7 +66,7 @@ def test_salt(crypto):
     ],
 )
 def test_mnemonic_code(crypto, length):
-    result = crypto.mnemonic_code(length=length)
+    result = crypto.mnemonic_phrase(length=length)
     assert isinstance(result, str)
     result = result.split(' ')
     assert len(result) == length

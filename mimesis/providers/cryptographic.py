@@ -13,8 +13,11 @@ from mimesis.typing import Bytes
 class Cryptographic(BaseDataProvider):
     """Class that provides cryptographic data."""
 
-    def __init__(self, *args, **kwargs):
-        """Initialize attributes."""
+    def __init__(self, *args, **kwargs) -> None:
+        """Initialize attributes.
+
+        :param seed: Seed.
+        """
         super().__init__(*args, **kwargs)
         self.__words = Text('en')._data['words']
 
@@ -68,8 +71,8 @@ class Cryptographic(BaseDataProvider):
         """
         return uuid.uuid4().hex
 
-    def mnemonic_code(self, length: int = 12) -> str:
-        """Generate pseudo mnemonic code.
+    def mnemonic_phrase(self, length: int = 12) -> str:
+        """Generate pseudo mnemonic phrase.
 
         :param length: Number of words.
         :return: Mnemonic code.
