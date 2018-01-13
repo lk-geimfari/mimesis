@@ -11,6 +11,11 @@
 - Optimized method `Address.coordinates`
 - Optimized method `Internet.ip_v6`
 
+**Tests**:
+- Grouped tests in classes
+- Added tests for seeded data providers
+- Other minor optimizations and improvements
+
 ---
 
 ## Version 1.0.4
