@@ -119,7 +119,8 @@ class Internet(BaseDataProvider):
         """
         return self.random.choice(EMOJI)
 
-    def image_placeholder(self, width: Size = 400, height: Size = 300) -> str:
+    # TODO: https://en.wikipedia.org/wiki/List_of_common_resolutions
+    def image_placeholder(self, width: int = 400, height: int = 300) -> str:
         """Generate a link to the image placeholder.
 
         :param width: Width of image.
@@ -128,11 +129,10 @@ class Internet(BaseDataProvider):
         :type height: str or int
         :return: URL to image placeholder.
         """
-        # TODO: https://en.wikipedia.org/wiki/List_of_common_resolutions
-        if self.seed:
-            width = self.random.randint(16, width) // 2
-            height = width * 2 % height
         url = 'http://placehold.it/{width}x{height}'
+        if self.seed:
+            width = self.random.randint(16, width)
+            height = self.random.randint(16, height)
         return url.format(width=width, height=height)
 
     def stock_image(self, category: str = '',
