@@ -111,3 +111,9 @@ class TestSeededNumbers(object):
         for _ in range(self.TIMES):
             assert n1.rating() == n2.rating()
             assert n1.rating(maximum=10.0) == n2.rating(maximum=10.0)
+
+    @pytest.mark.skip(reason='Method refactoring needed.')
+    def test_primes(self, _numbers):
+        n1, n2 = _numbers
+        for _ in range(self.TIMES):
+            assert n1.primes() == n2.primes()
