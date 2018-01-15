@@ -1,7 +1,8 @@
-from typing import Any, Optional, Union
+from typing import Any, Optional
 
 from mimesis.exceptions import NonEnumerableError
 from mimesis.helpers import Random, get_random_item
+from mimesis.typing import Seed
 from mimesis.utils import locale_info, setup_locale
 
 
@@ -9,7 +10,7 @@ class BaseProvider(object):
     """This is a base class for all providers.
     """
 
-    def __init__(self, seed: Union[int, str, bytes, bytearray] = None) -> None:
+    def __init__(self, seed: Optional[Seed] = None) -> None:
         self.seed = seed
         self.random = Random()
 
