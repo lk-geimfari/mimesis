@@ -49,7 +49,7 @@ class TestCryptographic(object):
     def test_salt(self, crypto):
         result = crypto.salt()
         assert result is not None
-        assert len(result) == 32
+        assert len(result) == 16
 
     @pytest.mark.parametrize(
         'length', [

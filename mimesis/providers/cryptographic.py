@@ -1,4 +1,5 @@
 import hashlib
+import string
 import uuid
 from typing import Optional
 
@@ -15,14 +16,16 @@ class Cryptographic(BaseDataProvider):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.__words = Text('en')._data['words']
+        self.__chars = string.ascii_letters + string.digits + string.punctuation
 
-    def uuid(self) -> str:
+    def uuid(self, version: Optional[int] = None) -> str:
         """Generate random UUID.
 
+        :param version: UUID version.
         :return: UUID
         """
         bits = self.random.getrandbits(128)
-        return str(uuid.UUID(int=bits))
+        return str(uuid.UUID(int=bits, version=version))
 
     def hash(self, algorithm: Optional[Algorithm] = None) -> str:
         """Generate random hash.
@@ -58,15 +61,18 @@ class Cryptographic(BaseDataProvider):
         """
         return self.bytes(entropy).hex()
 
-    def salt(self) -> str:
-        """Generate salt (not cryptographically safe) using uuid4().
+    def salt(self, size: Optional[int] = 16) -> str:
+        """Generate salt chars (not cryptographically safe).
 
+        :param size: Salt size.
         :return: Salt.
         """
-        if self.seed:
-            bits = self.random.getrandbits(128)
-            return uuid.UUID(int=bits, version=4).hex
-        return uuid.uuid4().hex
+
+        char_sequence = [
+            self.random.choice(self.__chars)
+            for _ in range(size)
+        ]
+        return ''.join(char_sequence)
 
     def mnemonic_code(self, length: int = 12) -> str:
         """Generate pseudo mnemonic code.
