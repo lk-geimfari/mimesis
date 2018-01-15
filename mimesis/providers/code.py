@@ -1,3 +1,5 @@
+"""The data provider of a variety of codes."""
+
 from typing import Optional
 
 from mimesis.data import (EAN_MASKS, IMEI_TACS, ISBN_GROUPS, ISBN_MASKS,
@@ -8,17 +10,20 @@ from mimesis.utils import luhn_checksum
 
 
 class Code(BaseDataProvider):
-    """Class that provides methods for generating codes (isbn, asin & etc.)"""
+    """Class that provides methods for generating codes."""
 
     def __init__(self, *args, **kwargs):
-        """
+        """Initialize attributes.
+
         :param locale: Current locale.
         """
         super().__init__(*args, **kwargs)
 
     def locale_code(self) -> str:
         """Get a random locale code (MS-LCID).
-        See Windows Language Code Identifier Reference for more information.
+
+        See Windows Language Code Identifier Reference
+        for more information.
 
         :return: Locale code.
 
@@ -28,18 +33,19 @@ class Code(BaseDataProvider):
         return self.random.choice(LOCALE_CODES)
 
     def issn(self, mask: str = '####-####') -> str:
-        """Generate a random International Standard Serial Number (ISSN).
+        """Generate a random ISSN.
 
-        :param str mask: Mask of ISSN.
+        :param mask: Mask of ISSN.
         :return: ISSN.
         """
         return self.random.custom_code(mask=mask)
 
     def isbn(self, fmt: Optional[ISBNFormat] = None) -> str:
-        """Generate ISBN for current locale. Default is ISBN 10,
-        but you also can use ISBN-13.
+        """Generate ISBN for current locale.
 
-        :param str fmt: ISBN format.
+        Default ``fmt`` is ISBN 10, but you also can use ISBN-13.
+
+        :param fmt: ISBN format.
         :return: ISBN.
         :raises NonEnumerableError: if fmt is not enum ISBNFormat.
 
@@ -52,8 +58,9 @@ class Code(BaseDataProvider):
         return self.random.custom_code(mask)
 
     def ean(self, fmt: Optional[EANFormat] = None) -> str:
-        """Generate EAN (European Article Number) code. Default is
-        EAN-13, but you also can use EAN-8.
+        """Generate EAN.
+
+        Default ``fmt`` is EAN-13, but you also can use EAN-8.
 
         :param str fmt: Format of EAN.
         :return: EAN.
@@ -70,7 +77,7 @@ class Code(BaseDataProvider):
         return self.random.custom_code(mask=mask)
 
     def imei(self) -> str:
-        """Generate a random IMEI (International Mobile Station Equipment Identity).
+        """Generate a random IMEI.
 
         :return: IMEI.
 
@@ -84,7 +91,7 @@ class Code(BaseDataProvider):
     def pin(self, mask: str = '####') -> str:
         """Generate a random PIN code.
 
-        :param str mask: Mask of pin code.
+        :param mask: Mask of pin code.
         :return: PIN code.
 
         :Example:

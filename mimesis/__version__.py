@@ -1,4 +1,4 @@
-"""Metadata of Mimesis. Don't modify this file."""
+"""Metadata of package."""
 
 __version__ = '1.0.4'
 __title__ = 'mimesis'

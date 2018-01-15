@@ -1,3 +1,5 @@
+"""Provides all the data related to the hardware."""
+
 RESOLUTIONS = [
     '1152x768',
     '1280x854',

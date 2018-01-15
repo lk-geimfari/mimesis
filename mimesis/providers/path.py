@@ -1,3 +1,5 @@
+"""Provides data related to paths."""
+
 import sys
 from typing import Union
 
@@ -10,10 +12,11 @@ class Path(BaseDataProvider):
     """Class that provides methods and property for generate paths."""
 
     def __init__(self, platform: str = sys.platform, *args, **kwargs) -> None:
-        """
-        :param str platform:
-            Required platform type ('linux2', 'darwin', 'win32', 'win64').
-            Supported platforms: mimesis/constant/platforms.py
+        """Initialize attributes.
+
+        Supported platforms: 'linux', 'darwin', 'win32', 'win64'.
+
+        :param platform: Required platform type.
         """
         super().__init__(*args, **kwargs)
         self.platform = platform
@@ -22,7 +25,6 @@ class Path(BaseDataProvider):
         """Generate a root dir path.
 
         :return: Root dir.
-        :rtype: str or None
 
         :Example:
             /
@@ -37,7 +39,6 @@ class Path(BaseDataProvider):
         """Generate a home path.
 
         :return: Home path.
-        :rtype: str or None
 
         :Example:
             /home/
@@ -52,7 +53,7 @@ class Path(BaseDataProvider):
         """Generate a random user.
 
         :return: Path to user.
-        :rtype: str or None
+
         :Example:
             /home/oretha
         """
@@ -65,7 +66,6 @@ class Path(BaseDataProvider):
         """Generate a random path to user's folders.
 
         :return: Path.
-        :rtype: str or None
 
         :Example:
             /home/taneka/Pictures
@@ -86,7 +86,6 @@ class Path(BaseDataProvider):
         """Generate a random path to development directory.
 
         :return: Path.
-        :rtype: str or None
 
         :Example:
             /home/sherrell/Development/Python/mercenary
@@ -108,7 +107,6 @@ class Path(BaseDataProvider):
         """Generate a random path to project directory.
 
         :return: Path to project.
-        :rtype: str or None
 
         :Example:
             /home/sherika/Development/Falcon/mercenary

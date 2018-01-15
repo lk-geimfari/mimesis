@@ -31,25 +31,82 @@ def plus(a: int, b: int) -> int:
 ```
 
 ### Documenting
-Always add docstrings for your functions, methods, and classes:
+Always add docstrings for your modules, classes, methods and functions. Below you can see a great example of module:
 
 ```python
+"""Demonstrate high quality docstrings.
+
+Module-level docstrings appear as the first "statement" in a module. Remember,
+that while strings are regular Python statements, comments are not, so an
+inline comment may precede the module-level docstring.
+
+After importing a module, you can access this special string object through the
+``__doc__`` attribute; yes, it's actually available as a runtime attribute,
+despite not being given an explicit name! The ``__doc__`` attribute is also
+what is rendered when you call ``help()`` on a module, or really any other
+object in Python.
+
+You can also document a package using the module-level docstring in the
+package's ``__init__.py`` file.
+
+"""
+
+
 class Example(object):
-    """Example class which was created to show how we
-    document our classes, methods, and functions.
+    """Illustrate class-level docstring.
+
+    Classes use a special whitespace convention: the opening and closing quotes
+    are preceded and followed by a blank line, respectively. No other
+    docstrings should be preceded or followed by anything but code.
+
+    A blank line at the end of a multi-line docstring before the closing
+    quotation marks simply makes it easier for tooling to auto-format
+    paragraphs (wrapping them at 79 characters, per PEP8), without the closing
+    quotation marks interfering.
+
     """
 
+    def __init__(self, *args, **kwargs) -> None:
+        """Illustrate method-level docstring.
+
+        All public callables should have docstrings, including magic methods
+        like ``__init__()``.
+
+        You'll notice that all these docstrings are wrapped in triple double
+        quotes, as opposed to just "double quotes", 'single quotes', or
+        '''triple single quotes.''' This is a convention for consistency and
+        readability.
+
+        ..note:: Note must look like that.
+
+        :param foo: Description of foo.
+        :param bar: Description of bar.
+
+        """
+        super().__init__(*args, **kwargs)
+
     def foo(self) -> str:
-        """This method always returns ``foo``.
+        """Return 'foo'.
+
+        You can also specify summary with a lot of details about
+        how the method works on multiple lines if it's really needed.
 
         :return: String ``foo``
         """
         return 'foo'
 
-def pi() -> float:
-    """Get Pi with two digits after the decimal point.
 
-    :return: Pi
+def pi() -> float:
+    """Illustrate function-level docstring.
+
+    Note that all docstrings begin with a one-line summary. The summary is
+    written in the imperative mood ("do", "use", "find", "return", "render",
+    etc) and ends with a period. The method signature is not, in any way,
+    duplicated into the comments (that would be difficult to maintain).
+
+    All subsequent paragraphs in a docstring are indented exactly the same as
+    the summary line. The same applies to the closing quotation marks.
+
     """
     return 3.14
 ```

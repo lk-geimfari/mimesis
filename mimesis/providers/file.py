@@ -1,3 +1,5 @@
+"""File data provider."""
+
 import re
 from typing import Optional
 
@@ -8,16 +10,21 @@ from mimesis.providers.text import Text
 
 
 class File(BaseDataProvider):
-    """Class for generate fake data for files."""
+    """Class for generate data related to files."""
 
     def __init__(self, *args, **kwargs):
+        """Initialize attributes.
+
+        :param args: Arguments.
+        :param kwargs: Keyword arguments.
+        """
         super().__init__(*args, **kwargs)
         self.__text = Text('en', seed=self.seed)
 
     def __sub(self, string: str = '') -> str:
         """Replace spaces in string.
 
-        :param str string: String.
+        :param string: String.
         :return: String without spaces.
         """
         replacer = self.random.choice(['_', '-'])
@@ -49,8 +56,8 @@ class File(BaseDataProvider):
     def size(self, minimum: int = 1, maximum: int = 100) -> str:
         """Get size of file.
 
-        :param int minimum: Maximum value.
-        :param int maximum: Minimum value.
+        :param minimum: Maximum value.
+        :param maximum: Minimum value.
         :return: Size of file.
 
         :Example:
@@ -68,7 +75,7 @@ class File(BaseDataProvider):
     def file_name(self, file_type: Optional[FileType] = None) -> str:
         """Get a random file name with some extension.
 
-        :param str file_type: Enum object FileType
+        :param file_type: Enum object FileType
         :return: File name.
 
         :Example:

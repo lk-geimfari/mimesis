@@ -1,3 +1,5 @@
+"""Provides all the data related to the development."""
+
 CONTAINER = [
     'Docker',
     'Rkt',
@@ -267,7 +269,7 @@ HTML_CONTAINER_TAGS = {
             '_blank',
             '_parent',
             '_top',
-        ]
+        ],
     },
     'div': {
         'class': 'word',

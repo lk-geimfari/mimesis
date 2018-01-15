@@ -1,5 +1,4 @@
-"""This module is provide internal util functions for mimesis
-"""
+"""This module is provide internal util functions."""
 
 import collections
 import functools
@@ -20,9 +19,9 @@ DATA_DIR = path.abspath(path.join(path.dirname(__file__), 'data'))
 
 
 def locale_info(locale: str) -> str:
-    """Return name (in english) or local name of the locale
+    """Check information about locale.
 
-    :param str locale: Locale abbreviation.
+    :param locale: Locale abbreviation.
     :return: Locale name.
     :raises UnsupportedLocale: if locale is not supported.
     """
@@ -38,7 +37,7 @@ def locale_info(locale: str) -> str:
 def luhn_checksum(num: str) -> str:
     """Calculate a checksum for num using the Luhn algorithm.
 
-    :param str num: The number to calculate a checksum for as a string.
+    :param num: The number to calculate a checksum for as a string.
     :return: Checksum for number.
     """
     check = 0
@@ -71,11 +70,13 @@ def update_dict(initial: JSON, other: Mapping) -> JSON:
 
 @functools.lru_cache(maxsize=None)
 def pull(file: str, locale: str = 'en') -> JSON:
-    """Open json file file and get content from file and memorize result using
-     lru_cache.
+    """Pull the content from the JSON and memorize one.
 
-    :param str file: The name of file.
-    :param str locale: Locale.
+    Opens JSON file ``file`` in the folder ``data/locale``
+    and get content from the file and memorize ones using lru_cache.
+
+    :param file: The name of file.
+    :param locale: Locale.
     :return: The content of the file.
     :rtype: dict
     :raises UnsupportedLocale: if locale is not supported.
@@ -89,12 +90,11 @@ def pull(file: str, locale: str = 'en') -> JSON:
         >>> en['day']['abbr'][0]
         'Mon.'
     """
-
     def get_data(locale_name: str) -> JSON:
         """Pull JSON data from file.
 
-        :param locale_name: Name of locale to pull.
-        :return: Dict of data from file
+        :param locale_name: Locale name.
+        :return: Content of JSON file as dict.
         """
         file_path = path.join(DATA_DIR + '/' + locale_name, file)
         # Needs explicit encoding for Windows
@@ -120,9 +120,9 @@ def download_image(url: str = '', save_path: str = '',
                    unverified_ctx: bool = False) -> Union[None, str]:
     """Download image and save in current directory on local machine.
 
-    :param str url: URL to image.
-    :param str save_path: Saving path.
-    :param bool unverified_ctx: Create unverified context.
+    :param url: URL to image.
+    :param save_path: Saving path.
+    :param unverified_ctx: Create unverified context.
     :return: Image name.
     :rtype: str or None
     """
@@ -137,7 +137,7 @@ def download_image(url: str = '', save_path: str = '',
 
 
 def setup_locale(locale: Optional[str] = None) -> str:
-    """Setup locale to BaseProvider.
+    """Set up locale after pre-check.
 
     :param str locale: Locale
     :return: Locale in lowercase.

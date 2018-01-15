@@ -11,6 +11,11 @@
 - Optimized method `Address.coordinates`
 - Optimized method `Internet.ip_v6`
 
+**Tests**:
+- Grouped tests in classes
+- Added tests for seeded data providers
+- Other minor optimizations and improvements
+
 ---
 
 ## Version 1.0.4
@@ -75,7 +80,7 @@ This is a first major version of `mimesis` and here are **breaking changes** (in
 - Added new module `typing.py` for custom types
 - Added new module `enums.py` and support of enums in arguments of methods
 - Added `category_of_website` and `port` to `Internet` data provider
-- Added `mnemonic_code` for `Cryptography` data provider
+- Added `mnemonic_phrase` for `Cryptography` data provider
 - Added `price_in_btc` and `currency_symbol` to `Business` data provider
 - Added `dna`, `rna` and `atomic_number` to `Science` data provider
 - Added `vehicle_registration_code` to `Transport` data provider

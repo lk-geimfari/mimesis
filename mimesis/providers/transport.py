@@ -1,18 +1,25 @@
+"""Provides data related to transports."""
+
 from mimesis.data import AIRPLANES, CARS, TRUCKS, VR_CODES, VRC_BY_LOCALES
 from mimesis.providers.base import BaseDataProvider
 
 
 class Transport(BaseDataProvider):
-    """Class that provides dummy data about transport."""
+    """Class for generating data related to transports."""
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs) -> None:
+        """Initialize attributes.
+
+        :param locale: Current locale.
+        :param seed: Seed.
+        """
         super().__init__(*args, **kwargs)
 
     def truck(self, model_mask: str = '#### @@') -> str:
         """Generate a truck model.
 
-        :param str model_mask: Mask of truck model. Here '@' is a \
-        placeholder of characters and '#' is a placeholder of digits.
+        :param model_mask: Mask of truck model. Here '@' is a
+            placeholder of characters and '#' is a placeholder of digits.
         :return: Dummy truck model.
 
         :Example:
@@ -36,8 +43,8 @@ class Transport(BaseDataProvider):
     def airplane(self, model_mask: str = '###') -> str:
         """Generate a dummy airplane model.
 
-        :param str model_mask: Mask of truck model. Here '@' is a \
-        placeholder of characters and '#' is a placeholder of digits.
+        :param model_mask: Mask of truck model. Here '@' is a
+            placeholder of characters and '#' is a placeholder of digits.
         :return: Airplane model.
 
         :Example:
@@ -54,7 +61,6 @@ class Transport(BaseDataProvider):
             for current locale (country).
         :return: Vehicle registration code.
         """
-
         if not allow_random:
             return VRC_BY_LOCALES[self.locale]
 

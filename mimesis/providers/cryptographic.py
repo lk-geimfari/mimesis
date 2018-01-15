@@ -1,3 +1,5 @@
+"""Cryptographic data provider."""
+
 import hashlib
 import string
 import uuid
@@ -10,10 +12,13 @@ from mimesis.typing import Bytes
 
 
 class Cryptographic(BaseDataProvider):
-    """This class provides support cryptographic data.
-    """
+    """Class that provides cryptographic data."""
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs) -> None:
+        """Initialize attributes.
+
+        :param seed: Seed.
+        """
         super().__init__(*args, **kwargs)
         self.__words = Text('en')._data['words']
         self.__chars = string.ascii_letters + string.digits + string.punctuation
@@ -30,7 +35,7 @@ class Cryptographic(BaseDataProvider):
     def hash(self, algorithm: Optional[Algorithm] = None) -> str:
         """Generate random hash.
 
-        :param algorithm: Enum object Algorithm.
+        :param algorithm: Enum object ``Algorithm``.
         :return: Hash.
         :raises NonEnumerableError: if algorithm is not supported.
         """
@@ -41,10 +46,10 @@ class Cryptographic(BaseDataProvider):
             return fn(self.uuid().encode()).hexdigest()
 
     def bytes(self, entropy: int = 32) -> Bytes:
-        """Get a random byte string containing *entropy* bytes.
+        """Generate byte string containing *entropy* bytes.
 
-        The string has *entropy* random bytes, each byte converted to two
-        hex digits.
+        The string has *entropy* random bytes, each byte
+        converted to two hex digits.
 
         :param entropy: Number of bytes.
         :return: Bytes.
@@ -54,14 +59,14 @@ class Cryptographic(BaseDataProvider):
                      for _ in range(entropy))
 
     def token(self, entropy: int = 32) -> str:
-        """Return a random text string, in hexadecimal.
+        """Generate hexadecimal string.
 
         :param entropy: Number of bytes.
         :return: Token.
         """
         return self.bytes(entropy).hex()
 
-    def salt(self, size: Optional[int] = 16) -> str:
+    def salt(self, size: int = 16) -> str:
         """Generate salt chars (not cryptographically safe).
 
         :param size: Salt size.
@@ -77,7 +82,7 @@ class Cryptographic(BaseDataProvider):
     def mnemonic_code(self, length: int = 12) -> str:
         """Generate pseudo mnemonic code.
 
-        :param length: Length of code (number of words).
+        :param length: Number of words.
         :return: Mnemonic code.
         """
         words = self.__words['normal']

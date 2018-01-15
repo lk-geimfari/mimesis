@@ -1,3 +1,14 @@
+"""Implements various helpers which are used in the various data providers.
+
+This module contains custom ``Random()`` class where implemented a lot of
+methods which are not included in standard ``random.Random()``,
+but frequently used in this project.
+
+Also there are implemented function ``get_random_item()`` which helps
+get a random item of the enum object.
+
+"""
+
 import os
 import random
 from typing import Any, List, Optional, Sequence, Union
@@ -6,11 +17,18 @@ __all__ = ['Random', 'get_random_item']
 
 
 class Random(random.Random):
-    """Custom Random() class for the possibility of extending."""
+    """Custom class for the possibility of extending.
+
+    The class is a subclass of the class ``Random()`` from the module ``random``
+    of the standard library, which provides the custom methods.
+
+    """
 
     def multiple_choice(self, seq: Sequence[Any], amount: int = 2) -> list:
-        """Multiple choices of elements from the sequence
-        ``seq`` in an amount of ``amount``.
+        """Multiple choices of elements from the sequence.
+
+        Choice an element from sequence ``seq``
+        in an amount of ``amount``.
 
         :param seq: Sequence of elements.
         :param amount: Amount of elements.
@@ -29,7 +47,6 @@ class Random(random.Random):
         :rtype: list
         :raises ValueError: if amount less or equal to zero.
         """
-
         if amount <= 0:
             raise ValueError('Amount out of range.')
 
@@ -38,7 +55,7 @@ class Random(random.Random):
 
     @staticmethod
     def urandom(*args: Any, **kwargs: Any) -> bytes:
-        """Return a bytes object containing random bytes
+        """Return a bytes object containing random bytes.
 
         :return: Bytes.
         :rtype: bytes
@@ -59,12 +76,11 @@ class Random(random.Random):
     def custom_code(self, mask: str = '@###',
                     char: str = '@', digit: str = '#') -> str:
         """Generate custom code using ascii uppercase and random integers.
+
         :param mask: Mask of code.
         :param char: Placeholder for characters.
         :param digit: Placeholder for digits.
         :return: Custom code.
-        :Example:
-            5673-AGFR-SFSFF-1423-4/AD.
         """
         char_code = ord(char)
         digit_code = ord(digit)

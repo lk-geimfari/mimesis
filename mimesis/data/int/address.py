@@ -1,3 +1,5 @@
+"""Provides all the generic data related to the address."""
+
 COUNTRIES_ISO = {
     'iso2': [
         'AD',

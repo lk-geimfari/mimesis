@@ -1,3 +1,5 @@
+"""Provides data related to gaming and games."""
+
 from mimesis.data import GAMES, GAMING_PLATFORMS, GENRES, SCORE_PHRASES
 from mimesis.providers.base import BaseDataProvider
 
@@ -5,8 +7,7 @@ __all__ = ['Games']
 
 
 class Games(BaseDataProvider):
-    """Data related to Gaming and Games.
-    """
+    """Class for generating data related to the games."""
 
     def gaming_platform(self) -> str:
         """Get random gaming platform.
@@ -21,8 +22,8 @@ class Games(BaseDataProvider):
     def score(self, minimum: int = 1, maximum: int = 10) -> float:
         """Score of game.
 
-        :param int minimum: Maximum value.
-        :param int maximum: Minimum value.
+        :param minimum: Maximum value.
+        :param maximum: Minimum value.
         :return: Score.
         """
         return self.random.randint(minimum * 10, maximum * 10) / 10

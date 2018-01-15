@@ -1,3 +1,5 @@
+"""Provides all data related to the codes."""
+
 IMEI_TACS = [
     '01124500',
     '01161200',

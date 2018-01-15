@@ -1,3 +1,5 @@
+"""Address data provider."""
+
 from typing import Optional
 
 from mimesis.data import (CALLING_CODES, CONTINENT_CODES, COUNTRIES_ISO,
@@ -11,8 +13,9 @@ class Address(BaseDataProvider):
     """Class for generate fake address data."""
 
     def __init__(self, *args, **kwargs):
-        """
-        :param str locale: Current locale.
+        """Initialize attributes.
+
+        :param locale: Current locale.
         """
         super().__init__(*args, **kwargs)
         self._data = pull('address.json', self.locale)
@@ -20,7 +23,7 @@ class Address(BaseDataProvider):
     def street_number(self, maximum: int = 1400) -> str:
         """Generate a random street number.
 
-        :param int maximum: Maximum value.
+        :param maximum: Maximum value.
         :return: Street number.
 
         :Example:
@@ -51,7 +54,7 @@ class Address(BaseDataProvider):
             self._data['street']['suffix'])
 
     def address(self) -> str:
-        """Get a random full address (include Street number, suffix and name).
+        """Generate a random full address.
 
         :return: Full address.
 
@@ -85,7 +88,7 @@ class Address(BaseDataProvider):
     def state(self, abbr: bool = False) -> str:
         """Get a random administrative district of country.
 
-        :param bool abbr: Return ISO 3166-2 code.
+        :param abbr: Return ISO 3166-2 code.
         :return: Administrative district.
 
         :Example:
@@ -105,7 +108,8 @@ class Address(BaseDataProvider):
     def province(self, *args, **kwargs) -> str:
         """Get a random province.
 
-        :param bool abbr: Return ISO 3166-2 code.
+        :param args: Arguments.
+        :param kwargs: Keyword arguments.
         :return: Province.
         """
         return self.state(*args, **kwargs)
@@ -113,7 +117,8 @@ class Address(BaseDataProvider):
     def federal_subject(self, *args, **kwargs) -> str:
         """Get a random region.
 
-        :param bool abbr: Return ISO 3166-2 code.
+        :param args: Arguments.
+        :param kwargs: Keyword arguments.
         :return: Federal subject.
         """
         return self.state(*args, **kwargs)
@@ -135,7 +140,6 @@ class Address(BaseDataProvider):
         :Example:
             389213
         """
-
         return self.random.custom_code(
             self._data['postal_code_fmt'])
 
@@ -164,7 +168,7 @@ class Address(BaseDataProvider):
             self._data['country']['name'])
 
     def city(self) -> str:
-        """Get a random city for current locale.
+        """Get a random city.
 
         :return: City name.
 
@@ -175,7 +179,7 @@ class Address(BaseDataProvider):
             self._data['city'])
 
     def latitude(self) -> float:
-        """Generate a random value of latitude (-90 to +90).
+        """Generate a random value of latitude.
 
         :return: Value of longitude.
 
@@ -185,7 +189,7 @@ class Address(BaseDataProvider):
         return self.random.uniform(-90, 90)
 
     def longitude(self) -> float:
-        """Generate a random value of longitude (-180 to +180).
+        """Generate a random value of longitude.
 
         :return: Value of longitude.
 
@@ -209,10 +213,9 @@ class Address(BaseDataProvider):
         }
 
     def continent(self, code: bool = False) -> str:
-        """Get a random continent name or continent
-        code (code in international format).
+        """Get a random continent name or continent code.
 
-        :param bool code: Return code of continent.
+        :param code: Return code of continent.
         :return: Continent name.
 
         :Example:

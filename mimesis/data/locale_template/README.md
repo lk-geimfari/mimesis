@@ -1,6 +1,6 @@
 ## How to add new locale
 
-This is a template of the locale structure. There are seven json 
+This is a template of the locale structure. There are seven json
 files (`File name`) which include data related to some data providers (`Provider`):
 
 ```
@@ -17,9 +17,9 @@ files (`File name`) which include data related to some data providers (`Provider
 └── text.json      # Text()
 ```
 
-Almost all locales have a similar structure, but the structure of the locale file may differ when there are any builtins specific data providers for this locale. 
-For example, locale `ru` has a different structure of `personal.json`, because in Russia there are mandatory patronymic names. 
-So, it is useful for this locale only (and a couple of other). 
+Almost all locales have a similar structure, but the structure of the locale file may differ when there are any builtins specific data providers for this locale.
+For example, locale `ru` has a different structure of `personal.json`, because in Russia there are mandatory patronymic names.
+So, it is useful for this locale only (and a couple of other).
 It means that if someone wants to use patronymic names then he must import builtin specific provider:
 
 ````python
@@ -34,6 +34,13 @@ You should not modify the provider object directly if the data which you add is 
 
 If you want to create `YourCountrySpecProvider()`, then you should add all related data to the file `locale/builtin.json`.
 
+## Sub-locale
+If your language is common for a lot of countries then you must inherit common data from the generic locale.
+
+For example, English (`en`) is the official language in a lot of countries and if we want to add support
+for New Zealand (`en-nz`) then you need specify only the data which is specific to this country.
+All the generic data will be automatically inherited from `en`.
+
 Before Pull Request:
 
 - Rename folder `locale_template` to `your-locale-code`.
@@ -41,9 +48,9 @@ Before Pull Request:
 - Make sure that you have **removed** all `"__COMMENT_KEY__": "Description"` from json files. This data only for developers.
 - Add your locale to `SUPPORTED_LOCALES` in `mimesis/settings.py`.
 - Format the content of json files alphabetically using [jsoneditoronline.org](http://jsoneditoronline.org)
-- If your locale uses shortened address format, then add your locale code to `SHORTENED_ADDRESS_FMT` in `mimesis/data/int/address.py` 
-- Make sure that you have added currency symbol for your locale to `CURRENCY_SYMBOLS` in `mimesis/data/int/business.py` 
-- Make sure that you have added your locale code to `ISBN_GROUPS` in  `mimesis/data/int/code.py` 
+- If your locale uses shortened address format, then add your locale code to `SHORTENED_ADDRESS_FMT` in `mimesis/data/int/address.py`
+- Make sure that you have added currency symbol for your locale to `CURRENCY_SYMBOLS` in `mimesis/data/int/business.py`
+- Make sure that you have added your locale code to `ISBN_GROUPS` in  `mimesis/data/int/code.py`
 - Run tests and make sure that all tests pass
 - Grab flag of your country from [this](https://emojipedia.org/flags/) page and add it to the table of locales in `README.md`.
 - Add yourself to (`CONTRIBUTORS.md`)

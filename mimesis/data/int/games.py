@@ -1,3 +1,5 @@
+"""Provides all the data related to the games."""
+
 GAMING_PLATFORMS = [
     'Nintendo 64',
     'Nintendo Switch',
@@ -1911,12 +1913,6 @@ GAMES = [
     'Sonic Jump',
     'Sonic the Hedgehog 4: Episode II',
     'Sonic: Lost World',
-    'Sonic: Lost World [3DS]',
-    'Sorcery',
-    'Sorcery Saga: The Curse of the Great Curry God',
-    'Sorcery Saga: The Curse of the Great Curry God (Hot and Spicy, Everything '
-    'Nicey Limited Edition)',
-    'Sorcery!',
     'Soul Sacrifice',
     'Soulcalibur V',
     'Sound Shapes',

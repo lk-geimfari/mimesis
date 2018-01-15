@@ -1,21 +1,24 @@
+"""Specific data provider for Netherlands (nl)."""
+
 from mimesis.builtins.base import BaseSpecProvider
 
 
 class NetherlandsSpecProvider(BaseSpecProvider):
-    """Provides data specific to nl locale"""
+    """Class that provides special data for Netherlands (nl)."""
 
     class Meta:
+        """The name of the provider."""
+
         name = 'netherlands_provider'
 
     def bsn(self) -> str:
-        """Generate a random, but valid ``Burgerservicenummer`` (BSN).
+        """Generate a random, but valid ``Burgerservicenummer``.
 
         :returns: Random BSN.
 
         :Example:
             255159705
         """
-
         def _is_valid_bsn(number: str) -> bool:
             total = 0
             multiplier = 9
