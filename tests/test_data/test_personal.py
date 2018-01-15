@@ -340,8 +340,8 @@ class TestSeededPersonal(object):
         p1, p2 = _personals
         for _ in range(self.TIMES):
             assert p1.email() == p2.email()
-            assert p1.email(domains=['@mimesis.io', ]) == \
-                p2.email(domains=['@mimesis.io', ])
+            assert p1.email(domains=['@mimesis.io']) == \
+                p2.email(domains=['@mimesis.io'])
 
     def test_height(self, _personals):
         p1, p2 = _personals

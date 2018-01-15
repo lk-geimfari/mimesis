@@ -21,9 +21,9 @@ class Numbers(BaseDataProvider):
 
     def integers(self, start: int = 0, end: int = 10,
                  length: int = 10) -> List[int]:
-        """Generate a list of random integers, which
-        can be negative or positive numbers.
+        """Generate a list of random integers.
 
+        Integers can be negative or positive numbers.
         .. note: You can use both positive and negative numbers.
 
         :param start: Start.

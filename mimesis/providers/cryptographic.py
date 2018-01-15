@@ -72,7 +72,6 @@ class Cryptographic(BaseDataProvider):
         :param size: Salt size.
         :return: Salt.
         """
-
         char_sequence = [
             self.random.choice(self.__chars)
             for _ in range(size)
