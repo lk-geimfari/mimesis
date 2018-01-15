@@ -10,7 +10,6 @@ from mimesis.enums import CountryCode
 from mimesis.exceptions import NonEnumerableError
 
 from . import _patterns as p
-from ..conftest import seed
 
 
 class TestAddress(object):
@@ -150,7 +149,7 @@ class TestSeededAddress(object):
     TIMES = 5
 
     @pytest.fixture
-    def _addresses(self):
+    def _addresses(self, seed):
         return Address(seed=seed), Address(seed=seed)
 
     def test_street_number(self, _addresses):

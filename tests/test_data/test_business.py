@@ -8,7 +8,6 @@ from mimesis.data import (CRYPTOCURRENCY_ISO_CODES, CRYPTOCURRENCY_SYMBOLS,
                           CURRENCY_ISO_CODES, CURRENCY_SYMBOLS)
 
 from . import _patterns as p
-from ..conftest import seed
 
 
 class TestBusiness(object):
@@ -80,7 +79,7 @@ class TestSeededBusiness(object):
     TIMES = 5
 
     @pytest.fixture()
-    def _businesses(self):
+    def _businesses(self, seed):
         return Business(seed=seed), Business(seed=seed)
 
     def test_copyright(self, _businesses):

@@ -5,7 +5,6 @@ import pytest
 
 from mimesis import Food
 
-from ..conftest import seed
 from ._patterns import STR_REGEX
 
 
@@ -38,7 +37,7 @@ class TestSeededFood(object):
     TIMES = 5
 
     @pytest.fixture
-    def _foods(self):
+    def _foods(self, seed):
         return Food(seed=seed), Food(seed=seed)
 
     def test_vegetable(self, _foods):

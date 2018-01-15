@@ -7,7 +7,6 @@ from mimesis.data import CREDIT_CARD_NETWORKS
 from mimesis.enums import CardType, Gender
 from mimesis.exceptions import NonEnumerableError
 
-from ..conftest import seed
 from ._patterns import CREDIT_CARD_REGEX
 
 
@@ -84,7 +83,7 @@ class TestSeededPayment(object):
     TIMES = 5
 
     @pytest.fixture
-    def _payments(self):
+    def _payments(self, seed):
         return Payment(seed=seed), Payment(seed=seed)
 
     def test_bitcoin_address(self, _payments):

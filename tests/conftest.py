@@ -5,7 +5,11 @@ from mimesis import config
 
 locales = config.LIST_OF_LOCALES
 platform = ['win32', 'linux']
-seed = 'mimesis'
+
+
+@pytest.fixture
+def seed():
+    return 'mimesis'
 
 
 @pytest.fixture(params=locales)

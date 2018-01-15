@@ -3,8 +3,6 @@ import pytest
 from mimesis import Games
 from mimesis.data import GAMES, GAMING_PLATFORMS, GENRES, SCORE_PHRASES
 
-from ..conftest import seed
-
 
 class TestGames(object):
     @pytest.fixture
@@ -42,7 +40,7 @@ class TestSeededGames(object):
     TIMES = 5
 
     @pytest.fixture
-    def _gameses(self):
+    def _gameses(self, seed):
         return Games(seed=seed), Games(seed=seed)
 
     def test_gaming_platform(self, _gameses):

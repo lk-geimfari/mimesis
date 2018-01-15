@@ -7,7 +7,6 @@ import pytest
 from mimesis import Datetime
 from mimesis.data import GMT_OFFSETS, TIMEZONES
 
-from ..conftest import seed
 from ._patterns import STR_REGEX
 
 
@@ -126,7 +125,7 @@ class TestSeededDatetime(object):
     TIMES = 5
 
     @pytest.fixture
-    def _datetimes(self):
+    def _datetimes(self, seed):
         return Datetime(seed=seed), Datetime(seed=seed)
 
     def test_year(self, _datetimes):

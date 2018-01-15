@@ -6,7 +6,6 @@ import pytest
 
 from mimesis import Generic
 
-from .conftest import seed
 from .test_data import _patterns as p
 
 
@@ -94,7 +93,7 @@ class TestSeededGeneric(object):
     TIMES = 5
 
     @pytest.fixture
-    def _generics(self):
+    def _generics(self, seed):
         return Generic(seed=seed), Generic(seed=seed)
 
     def test_generic_address(self, _generics):

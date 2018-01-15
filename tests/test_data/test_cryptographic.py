@@ -6,7 +6,6 @@ from mimesis import Cryptographic
 from mimesis.enums import Algorithm
 from mimesis.exceptions import NonEnumerableError
 
-from ..conftest import seed
 from ._patterns import UUID_REGEX
 
 
@@ -69,7 +68,7 @@ class TestSeededCryptographic(object):
     TIMES = 5
 
     @pytest.fixture
-    def _cryptographics(self):
+    def _cryptographics(self, seed):
         return Cryptographic(seed=seed), Cryptographic(seed=seed)
 
     def test_uuid(self, _cryptographics):

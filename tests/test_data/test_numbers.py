@@ -3,8 +3,6 @@ import pytest
 
 from mimesis import Numbers
 
-from ..conftest import seed
-
 
 class TestNumbers(object):
     @pytest.fixture
@@ -77,7 +75,7 @@ class TestSeededNumbers(object):
     TIMES = 5
 
     @pytest.fixture
-    def _numbers(self):
+    def _numbers(self, seed):
         return Numbers(seed=seed), Numbers(seed=seed)
 
     def test_floats(self, _numbers):

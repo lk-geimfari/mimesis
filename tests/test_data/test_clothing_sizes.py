@@ -3,8 +3,6 @@ import pytest
 
 from mimesis import ClothingSizes
 
-from ..conftest import seed
-
 
 class TestClothingSizes(object):
     @pytest.fixture
@@ -35,7 +33,7 @@ class TestSeededClothingSizes(object):
     TIMES = 5
 
     @pytest.fixture
-    def _clothing_sizes(self):
+    def _clothing_sizes(self, seed):
         return ClothingSizes(seed=seed), ClothingSizes(seed=seed)
 
     def test_international_size(self, _clothing_sizes):

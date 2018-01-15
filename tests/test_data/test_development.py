@@ -4,8 +4,6 @@ import pytest
 
 from mimesis import Development, data
 
-from ..conftest import seed
-
 
 class TestDevelopment(object):
     @pytest.fixture
@@ -80,7 +78,7 @@ class TestSeededDevelopment(object):
     TIMES = 5
 
     @pytest.fixture
-    def _developments(self):
+    def _developments(self, seed):
         return Development(seed=seed), Development(seed=seed)
 
     def test_software_license(self, _developments):

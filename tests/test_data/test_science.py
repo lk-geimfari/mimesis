@@ -7,7 +7,6 @@ import pytest
 from mimesis import Science
 from mimesis.data import MATH_FORMULAS
 
-from ..conftest import seed
 from ._patterns import STR_REGEX
 
 
@@ -56,7 +55,7 @@ class TestSeededScience(object):
     TIMES = 5
 
     @pytest.fixture
-    def _sciences(self):
+    def _sciences(self, seed):
         return Science(seed=seed), Science(seed=seed)
 
     def test_math_formula(self, _sciences):

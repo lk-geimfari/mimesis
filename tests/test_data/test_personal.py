@@ -10,7 +10,6 @@ from mimesis.data import (BLOOD_GROUPS, ENGLISH_LEVEL, GENDER_SYMBOLS,
 from mimesis.enums import Gender, SocialNetwork, TitleType
 from mimesis.exceptions import NonEnumerableError
 
-from ..conftest import seed
 from ._patterns import EMAIL_REGEX, STR_REGEX, USERNAME_REGEX
 
 
@@ -300,7 +299,7 @@ class TestSeededPersonal(object):
     TIMES = 5
 
     @pytest.fixture
-    def _personals(self):
+    def _personals(self, seed):
         return Personal(seed=seed), Personal(seed=seed)
 
     def test_age(self, _personals):

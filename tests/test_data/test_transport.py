@@ -4,8 +4,6 @@ import pytest
 from mimesis import Transport
 from mimesis.data import AIRPLANES, CARS, TRUCKS, VR_CODES, VRC_BY_LOCALES
 
-from ..conftest import seed
-
 
 class TestTransport(object):
     @pytest.fixture
@@ -46,7 +44,7 @@ class TestSeededTransport(object):
     TIMES = 5
 
     @pytest.fixture
-    def _transports(self):
+    def _transports(self, seed):
         return Transport(seed=seed), Transport(seed=seed)
 
     def test_truck(self, _transports):

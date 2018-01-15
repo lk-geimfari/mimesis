@@ -9,7 +9,6 @@ from mimesis.enums import Layer, MimeType, PortRange, TLDType
 from mimesis.exceptions import NonEnumerableError
 
 from . import _patterns as p
-from ..conftest import seed
 
 
 class TestInternet(object):
@@ -168,7 +167,7 @@ class TestSeededInternet(object):
     TIMES = 5
 
     @pytest.fixture
-    def _internets(self):
+    def _internets(self, seed):
         return Internet(seed=seed), Internet(seed=seed)
 
     def test_emoji(self, _internets):

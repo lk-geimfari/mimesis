@@ -9,7 +9,6 @@ from mimesis.enums import EANFormat, ISBNFormat
 from mimesis.exceptions import NonEnumerableError
 
 from . import _patterns as p
-from ..conftest import seed
 
 
 class TestCode(object):
@@ -70,7 +69,7 @@ class TestSeededCode(object):
     TIMES = 5
 
     @pytest.fixture
-    def _codes(self):
+    def _codes(self, seed):
         return Code(seed=seed), Code(seed=seed)
 
     def test_ean(self, _codes):

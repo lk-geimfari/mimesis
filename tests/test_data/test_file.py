@@ -7,8 +7,6 @@ from mimesis.data import EXTENSIONS, MIME_TYPES
 from mimesis.enums import FileType, MimeType
 from mimesis.exceptions import NonEnumerableError
 
-from ..conftest import seed
-
 
 class TestFile(object):
     @pytest.fixture
@@ -76,7 +74,7 @@ class TestSeededFile(object):
     TIMES = 5
 
     @pytest.fixture
-    def _files(self):
+    def _files(self, seed):
         return File(seed=seed), File(seed=seed)
 
     def test_extension(self, _files):

@@ -6,7 +6,6 @@ import pytest
 
 from mimesis import Structured
 
-from ..conftest import seed
 from ._patterns import STR_REGEX
 
 
@@ -69,7 +68,7 @@ class TestSeededStructured(object):
     TIMES = 5
 
     @pytest.fixture
-    def _structures(self):
+    def _structures(self, seed):
         return Structured(seed=seed), Structured(seed=seed)
 
     def test_css(self, _structures):

@@ -5,7 +5,6 @@ import pytest
 
 from mimesis import Text
 
-from ..conftest import seed
 from ._patterns import HEX_COLOR, STR_REGEX
 
 
@@ -84,7 +83,7 @@ class TestSeededText(object):
     TIMES = 5
 
     @pytest.fixture
-    def _texts(self):
+    def _texts(self, seed):
         return Text(seed=seed), Text(seed=seed)
 
     def test_hex_color(self, _texts):

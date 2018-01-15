@@ -6,8 +6,6 @@ import pytest
 from mimesis import Path
 from mimesis.data import FOLDERS, PROGRAMMING_LANGS, PROJECT_NAMES
 
-from ..conftest import seed
-
 
 class TestPath(object):
     def test_root(self, path):
@@ -62,7 +60,7 @@ class TestSeededPath(object):
     TIMES = 5
 
     @pytest.fixture
-    def _paths(self):
+    def _paths(self, seed):
         return Path(seed=seed), Path(seed=seed)
 
     def test_root(self, _paths):

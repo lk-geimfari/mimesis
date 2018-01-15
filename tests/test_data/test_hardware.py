@@ -6,8 +6,6 @@ from mimesis.data import (CPU, CPU_CODENAMES, CPU_MODEL_CODES, GENERATION,
                           GRAPHICS, HDD_SSD, MANUFACTURERS, PHONE_MODELS,
                           RESOLUTIONS, SCREEN_SIZES)
 
-from ..conftest import seed
-
 
 class TestHardware(object):
     @pytest.fixture
@@ -73,7 +71,7 @@ class TestSeededHardware(object):
     TIMES = 5
 
     @pytest.fixture
-    def _hardwares(self):
+    def _hardwares(self, seed):
         return Hardware(seed=seed), Hardware(seed=seed)
 
     def test_resolution(self, _hardwares):
