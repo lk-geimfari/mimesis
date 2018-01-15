@@ -79,8 +79,8 @@ class Cryptographic(BaseDataProvider):
         ]
         return ''.join(char_sequence)
 
-    def mnemonic_code(self, length: int = 12) -> str:
-        """Generate pseudo mnemonic code.
+    def mnemonic_phrase(self, length: int = 12) -> str:
+        """Generate pseudo mnemonic phrase.
 
         :param length: Number of words.
         :return: Mnemonic code.

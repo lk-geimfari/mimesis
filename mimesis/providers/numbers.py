@@ -37,8 +37,8 @@ class Numbers(BaseDataProvider):
         numbers = [self.random.randint(start, end) for _ in range(length)]
         return numbers
 
-    # TODO: Refactor this method. It should generate random primes with passed
-    # length attribute.
+    # .. todo:: Refactor this method. It should generate random primes with
+    #   passed length attribute.
     @staticmethod
     def primes(start: int = 1, end: int = 999) -> List[int]:
         """Generate a list of prime numbers.

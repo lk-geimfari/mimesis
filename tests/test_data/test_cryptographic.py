@@ -57,8 +57,8 @@ class TestCryptographic(object):
             16,
         ],
     )
-    def test_mnemonic_code(self, crypto, length):
-        result = crypto.mnemonic_code(length=length)
+    def test_mnemonic_phrase(self, crypto, length):
+        result = crypto.mnemonic_phrase(length=length)
         assert isinstance(result, str)
         result = result.split(' ')
         assert len(result) == length
@@ -100,8 +100,9 @@ class TestSeededCryptographic(object):
         for _ in range(self.TIMES):
             assert c1.salt() == c2.salt()
 
-    def test_mnemonic_code(self, _cryptographics):
+    def test_mnemonic_phrase(self, _cryptographics):
         c1, c2 = _cryptographics
         for _ in range(self.TIMES):
-            assert c1.mnemonic_code() == c2.mnemonic_code()
-            assert c1.mnemonic_code(length=16) == c2.mnemonic_code(length=16)
+            assert c1.mnemonic_phrase() == c2.mnemonic_phrase()
+            assert c1.mnemonic_phrase(length=16) == \
+                c2.mnemonic_phrase(length=16)
