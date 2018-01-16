@@ -7,6 +7,11 @@ locales = config.LIST_OF_LOCALES
 platform = ['win32', 'linux']
 
 
+@pytest.fixture
+def seed():
+    return 'mimesis'
+
+
 @pytest.fixture(params=locales)
 def generic(request):
     return mimesis.Generic(request.param)

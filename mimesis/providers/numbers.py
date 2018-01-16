@@ -19,22 +19,26 @@ class Numbers(BaseDataProvider):
                 for _ in range(10 ** int(n))]
         return nums
 
-    @staticmethod
-    def integers(start: int = 0, end: int = 10) -> List[int]:
+    def integers(self, start: int = 0, end: int = 10,
+                 length: int = 10) -> List[int]:
         """Generate a list of random integers.
 
+        Integers can be negative or positive numbers.
         .. note: You can use both positive and negative numbers.
 
         :param start: Start.
         :param end: End.
+        :param length: Length of list.
         :return: List of integers.
 
         :Example:
             [-20, -19, -18, -17]
         """
-        numbers = [i for i in range(start, end)]
+        numbers = [self.random.randint(start, end) for _ in range(length)]
         return numbers
 
+    # .. todo:: Refactor this method. It should generate random primes with
+    #   passed length attribute.
     @staticmethod
     def primes(start: int = 1, end: int = 999) -> List[int]:
         """Generate a list of prime numbers.

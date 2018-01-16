@@ -4,127 +4,202 @@ import re
 
 import pytest
 
-import mimesis
+from mimesis import Datetime
 from mimesis.data import GMT_OFFSETS, TIMEZONES
 
 from ._patterns import STR_REGEX
 
 
-@pytest.fixture
-def _datetime():
-    return mimesis.Datetime()
+class TestDatetime(object):
+    @pytest.fixture
+    def _datetime(self):
+        return Datetime()
+
+    def test_str(self, dt):
+        assert re.match(STR_REGEX, str(dt))
+
+    def test_year(self, _datetime):
+        result = _datetime.year(minimum=2000, maximum=2016)
+        assert result >= 2000
+        assert result <= 2016
+
+    def test_gmt_offset(self, _datetime):
+        result = _datetime.gmt_offset()
+        assert result in GMT_OFFSETS
+
+    def test_day_of_month(self, _datetime):
+        result = _datetime.day_of_month()
+        assert ((result >= 1) or (result <= 31))
+
+    def test_date(self, dt):
+        result = dt.date(start=1999, end=1999, fmt='%m/%d/%Y')
+
+        result = datetime.datetime.strptime(result, '%m/%d/%Y')
+        assert result.year == 1999  # check range was applied correctly
+
+        date = dt.date(start=2018, end=2018)
+        result_fmt = datetime.datetime.strptime(
+            date, dt._data['formats']['date'],
+        )
+        assert result_fmt.year == 2018
+
+    def test_time(self, dt):
+        default = dt.time()
+        default = datetime.datetime.strptime(
+            default, dt._data['formats']['time'],
+        )
+
+        assert isinstance(default, datetime.datetime)
+
+        result = dt.time(fmt='%H:%M')
+        result = datetime.datetime.strptime(result, '%H:%M')
+        assert isinstance(result, datetime.datetime)
+
+    def test_century(self, _datetime):
+        result = _datetime.century()
+        assert result is not None
+        assert isinstance(result, str)
+
+    def test_day_of_week(self, dt):
+        result = dt.day_of_week()
+        assert result in dt._data['day']['name']
+
+        result_abbr = dt.day_of_week(abbr=True)
+        assert result_abbr in dt._data['day']['abbr']
+
+    def test_month(self, dt):
+        result = dt.month()
+        assert result is not None
+
+        result_abbr = dt.month(abbr=True)
+        assert isinstance(result_abbr, str)
+
+    def test_periodicity(self, dt):
+        result = dt.periodicity()
+        assert result in dt._data['periodicity']
+
+    def test_timezone(self, _datetime):
+        result = _datetime.timezone()
+
+        assert result is not None
+        assert isinstance(result, str)
+        assert result in TIMEZONES
+
+    @pytest.mark.parametrize(
+        'posix, _type', [
+            (False, str),
+            (True, int),
+        ],
+    )
+    def test_timestamp(self, _datetime, posix, _type):
+        result = _datetime.timestamp(posix)
+        assert result is not None
+        assert isinstance(result, _type)
+
+    @pytest.mark.parametrize(
+        'start, end, humanized, _type', [
+            (2018, 2018, False, datetime.datetime),
+            (2018, 2018, True, str),
+        ],
+    )
+    def test_datetime(self, _datetime, start, end, humanized, _type):
+        dt = _datetime.datetime(start=start, end=end, humanized=humanized)
+
+        assert dt is not None
+        assert isinstance(dt, _type)
+
+        if _type is str:
+            year = int(dt.split(' ')[2])
+            assert year == 2018
+
+    def test_week_date(self, _datetime):
+        result = _datetime.week_date(start=2017, end=2018)
+        result = result.replace('-', ' ').replace('W', '')
+        year, week = result.split(' ')
+
+        assert (int(year) >= 2017) and (int(year) <= 2018)
+        assert int(week) <= 52
 
 
-def test_str(dt):
-    assert re.match(STR_REGEX, str(dt))
+class TestSeededDatetime(object):
+    TIMES = 5
 
+    @pytest.fixture
+    def _datetimes(self, seed):
+        return Datetime(seed=seed), Datetime(seed=seed)
 
-def test_year(_datetime):
-    result = _datetime.year(minimum=2000, maximum=2016)
-    assert result >= 2000
-    assert result <= 2016
+    def test_year(self, _datetimes):
+        d1, d2 = _datetimes
+        for _ in range(self.TIMES):
+            assert d1.year() == d2.year()
+            assert d1.year(minimum=1942, maximum=2048) == \
+                d2.year(minimum=1942, maximum=2048)
 
+    def test_gmt_offset(self, _datetimes):
+        d1, d2 = _datetimes
+        for _ in range(self.TIMES):
+            assert d1.gmt_offset() == d2.gmt_offset()
 
-def test_gmt_offset(_datetime):
-    result = _datetime.gmt_offset()
-    assert result in GMT_OFFSETS
+    def test_day_of_month(self, _datetimes):
+        d1, d2 = _datetimes
+        for _ in range(self.TIMES):
+            assert d1.day_of_month() == d2.day_of_month()
 
+    def test_date(self, _datetimes):
+        d1, d2 = _datetimes
+        for _ in range(self.TIMES):
+            assert d1.date() == d2.date()
+            assert d1.date(start=1024, end=2048, fmt='%m/%d/%Y') == \
+                d2.date(start=1024, end=2048, fmt='%m/%d/%Y')
 
-def test_day_of_month(_datetime):
-    result = _datetime.day_of_month()
-    assert ((result >= 1) or (result <= 31))
+    def test_time(self, _datetimes):
+        d1, d2 = _datetimes
+        for _ in range(self.TIMES):
+            assert d1.time() == d2.time()
+            assert d1.time(fmt='%H:%M') == d2.time(fmt='%H:%M')
 
+    def test_century(self, _datetimes):
+        d1, d2 = _datetimes
+        for _ in range(self.TIMES):
+            assert d1.century() == d2.century()
 
-def test_date(dt):
-    result = dt.date(start=1999, end=1999, fmt='%m/%d/%Y')
+    def test_day_of_week(self, _datetimes):
+        d1, d2 = _datetimes
+        for _ in range(self.TIMES):
+            assert d1.day_of_week() == d2.day_of_week()
+            assert d1.day_of_week(abbr=True) == d2.day_of_week(abbr=True)
 
-    result = datetime.datetime.strptime(result, '%m/%d/%Y')
-    assert result.year == 1999  # check range was applied correctly
+    def test_month(self, _datetimes):
+        d1, d2 = _datetimes
+        for _ in range(self.TIMES):
+            assert d1.month() == d2.month()
+            assert d1.month(abbr=True) == d2.month(abbr=True)
 
-    date = dt.date(start=2018, end=2018)
-    result_fmt = datetime.datetime.strptime(date, dt._data['formats']['date'])
-    assert result_fmt.year == 2018
+    def test_periodicity(self, _datetimes):
+        d1, d2 = _datetimes
+        for _ in range(self.TIMES):
+            assert d1.periodicity() == d2.periodicity()
 
+    def test_timezone(self, _datetimes):
+        d1, d2 = _datetimes
+        for _ in range(self.TIMES):
+            assert d1.timezone() == d2.timezone()
 
-def test_time(dt):
-    default = dt.time()
-    default = datetime.datetime.strptime(default, dt._data['formats']['time'])
+    def test_timestamp(self, _datetimes):
+        d1, d2 = _datetimes
+        for _ in range(self.TIMES):
+            assert d1.timestamp() == d2.timestamp()
+            assert d1.timestamp(posix=False) == d2.timestamp(posix=False)
 
-    assert isinstance(default, datetime.datetime)
+    def test_datetime(self, _datetimes):
+        d1, d2 = _datetimes
+        for _ in range(self.TIMES):
+            assert d1.datetime() == d2.datetime()
+            assert d1.datetime(humanized=True) == d2.datetime(humanized=True)
 
-    result = dt.time(fmt='%H:%M')
-    result = datetime.datetime.strptime(result, '%H:%M')
-    assert isinstance(result, datetime.datetime)
-
-
-def test_century(_datetime):
-    result = _datetime.century()
-    assert result is not None
-    assert isinstance(result, str)
-
-
-def test_day_of_week(dt):
-    result = dt.day_of_week()
-    assert result in dt._data['day']['name']
-
-    result_abbr = dt.day_of_week(abbr=True)
-    assert result_abbr in dt._data['day']['abbr']
-
-
-def test_month(dt):
-    result = dt.month()
-    assert result is not None
-
-    result_abbr = dt.month(abbr=True)
-    assert isinstance(result_abbr, str)
-
-
-def test_periodicity(dt):
-    result = dt.periodicity()
-    assert result in dt._data['periodicity']
-
-
-def test_timezone(_datetime):
-    result = _datetime.timezone()
-
-    assert result is not None
-    assert isinstance(result, str)
-    assert result in TIMEZONES
-
-
-@pytest.mark.parametrize(
-    'posix, _type', [
-        (False, str),
-        (True, int),
-    ],
-)
-def test_timestamp(_datetime, posix, _type):
-    result = _datetime.timestamp(posix)
-    assert result is not None
-    assert isinstance(result, _type)
-
-
-@pytest.mark.parametrize(
-    'start, end, humanized, _type', [
-        (2018, 2018, False, datetime.datetime),
-        (2018, 2018, True, str),
-    ],
-)
-def test_datetime(_datetime, start, end, humanized, _type):
-    dt = _datetime.datetime(start=start, end=end, humanized=humanized)
-
-    assert dt is not None
-    assert isinstance(dt, _type)
-
-    if _type is str:
-        year = int(dt.split(' ')[2])
-        assert year == 2018
-
-
-def test_week_date(_datetime):
-    result = _datetime.week_date(start=2017, end=2018)
-    result = result.replace('-', ' ').replace('W', '')
-    year, week = result.split(' ')
-
-    assert (int(year) >= 2017) and (int(year) <= 2018)
-    assert int(week) <= 52
+    def test_week_date(self, _datetimes):
+        d1, d2 = _datetimes
+        for _ in range(self.TIMES):
+            assert d1.week_date() == d2.week_date()
+            assert d1.week_date(start=2007, end=2018) == \
+                d2.week_date(start=2007, end=2018)

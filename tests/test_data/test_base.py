@@ -6,39 +6,41 @@ from mimesis.exceptions import NonEnumerableError
 from mimesis.providers.base import BaseDataProvider
 
 
-@pytest.fixture
-def base_data_provider():
-    return BaseDataProvider()
+class TestBase(object):
+    @pytest.fixture
+    def base_data_provider(self):
+        return BaseDataProvider()
+
+    @pytest.mark.parametrize(
+        'gender, excepted', [
+            (Gender.MALE, 'male'),
+            (Gender.FEMALE, 'female'),
+            (None, ['female', 'male']),
+        ],
+    )
+    def test_validate_enum(self, base_data_provider, gender, excepted):
+        result = base_data_provider._validate_enum(gender, Gender)
+
+        assert (result == excepted) or (result in excepted)
+        assert result in [item.value for item in Gender]
+
+        with pytest.raises(NonEnumerableError):
+            base_data_provider._validate_enum('', '')
+
+    @pytest.mark.parametrize('locale', config.LIST_OF_LOCALES)
+    def test_get_current_locale(self, locale):
+        base = BaseDataProvider(locale=locale)
+        assert locale == base.get_current_locale()
 
 
-@pytest.mark.parametrize(
-    'gender, excepted', [
-        (Gender.MALE, 'male'),
-        (Gender.FEMALE, 'female'),
-        (None, ['female', 'male']),
-    ],
-)
-def test_validate_enum(base_data_provider, gender, excepted):
-    result = base_data_provider._validate_enum(gender, Gender)
+class TestSeededBase(object):
+    TIMES = 5
 
-    assert (result == excepted) or (result in excepted)
-    assert result in [item.value for item in Gender]
+    @pytest.fixture
+    def _bases(self, seed):
+        return BaseDataProvider(seed=seed), BaseDataProvider(seed=seed)
 
-    with pytest.raises(NonEnumerableError):
-        base_data_provider._validate_enum('', '')
-
-
-@pytest.mark.parametrize('locale', config.LIST_OF_LOCALES)
-def test_get_current_locale(locale):
-    base = BaseDataProvider(locale=locale)
-    assert locale == base.get_current_locale()
-
-
-@pytest.fixture
-def seeded_base_data_provider():
-    return BaseDataProvider(seed=42)
-
-
-def test_base_with_seed(seeded_base_data_provider):
-    result = seeded_base_data_provider.random.randint(1, 10)
-    assert result == 2
+    def test_base_random(self, _bases):
+        b1, b2 = _bases
+        for _ in range(self.TIMES):
+            assert b1.random.randints() == b2.random.randints()

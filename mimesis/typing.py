@@ -9,6 +9,7 @@ __all__ = [
     'Bytes',
     'DateTime',
     'Timestamp',
+    'Seed',
 ]
 
 JSON = Union[
@@ -25,3 +26,5 @@ Bytes = bytes
 DateTime = Union[datetime.datetime, Any]
 
 Timestamp = _StrOrInt
+
+Seed = Union[int, str, bytes, bytearray]
