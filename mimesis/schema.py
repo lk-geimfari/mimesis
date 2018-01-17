@@ -7,7 +7,7 @@ from mimesis.exceptions import (UndefinedField, UndefinedSchema,
                                 UnsupportedField)
 from mimesis.providers.base import StrMixin
 from mimesis.providers.generic import Generic
-from mimesis.typing import JSON
+from mimesis.typing import JSON, Seed
 
 __all__ = ['AbstractField', 'Field', 'Schema']
 
@@ -25,7 +25,8 @@ class AbstractField(StrMixin):
     'Jack Allison'
     """
 
-    def __init__(self, locale: str = 'en', seed: Optional[int] = None) -> None:
+    def __init__(self, locale: str = 'en',
+                 seed: Optional[Seed] = None) -> None:
         """Initialize field.
 
         :param locale: Locale
@@ -43,7 +44,10 @@ class AbstractField(StrMixin):
         represents name of the any method of any supported data provider
         and the ``**kwargs`` of this method.
 
-        :param name: Name of method.
+        You can apply a *key function* to result returned by the method,
+        to do it, just pass a callable object which returns final result.
+
+        :param name: Name of the method.
         :param key: A key function (or other callable object)
             which will be applied to result.
         :param kwargs: Kwargs of method.
