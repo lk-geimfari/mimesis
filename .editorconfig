@@ -4,11 +4,23 @@ root = true
 
 [*]
 charset = utf-8
-indent_style = tab
 trim_trailing_whitespace = true
 end_of_line = lf
+indent_style = space
 insert_final_newline = true
 
 [*.py]
-indent_style = space
 indent_size = 4
+
+[*.yml]
+indent_size = 2
+
+[*.json]
+indent_size = 2
+
+[*.{md,rst,in}]
+indent_style = ignore
+indent_size = ignore
+
+[Makefile]
+indent_style = tab

@@ -1,71 +1,71 @@
 {
   "academic_degree": [
-	"Test"
+    "Test"
   ],
   "favorite_movie": [
-	"Test"
+    "Test"
   ],
   "gender": [
-	"Test"
+    "Test"
   ],
   "language": [
-	"Test"
+    "Test"
   ],
   "names": {
-	"female": [
-	  "Test"
-	],
-	"male": [
-	  "Test"
-	]
+    "female": [
+      "Test"
+    ],
+    "male": [
+      "Test"
+    ]
   },
   "__COMMENT_NATIONALITY__": "Optional -> nationality: {female: [], male: []}",
   "nationality": [
-	"Test"
+    "Test"
   ],
   "occupation": [
-	"Test"
+    "Test"
   ],
   "political_views": [
-	"Test"
+    "Test"
   ],
   "sexuality": [
-	"Test"
+    "Test"
   ],
   "__COMMENT_SURNAMES__": "Optional -> surnames: {female: [], male: []}",
   "surnames": [
-	"Test"
+    "Test"
   ],
   "title": {
-	"female": {
-	  "typical": [
-		"Test"
-	  ],
-	  "academic": [
-		"Test"
-	  ]
-	},
-	"male": {
-	  "typical": [
-		"Test"
-	  ],
-	  "academic": [
-		"Test"
-	  ]
-	}
+    "female": {
+      "typical": [
+        "Test"
+      ],
+      "academic": [
+        "Test"
+      ]
+    },
+    "male": {
+      "typical": [
+        "Test"
+      ],
+      "academic": [
+        "Test"
+      ]
+    }
   },
   "university": [
-	"Test"
+    "Test"
   ],
   "views_on": [
-	"Test"
+    "Test"
   ],
   "worldview": [
-	"Test"
+    "Test"
   ],
   "telephone_fmt": [
-	"###-###-####",
-	"(###) ###-####",
-	"1-###-###-####"
+    "###-###-####",
+    "(###) ###-####",
+    "1-###-###-####"
   ]
 }
