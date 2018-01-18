@@ -1,32 +1,29 @@
 Mimesis
 =======
 
-|Build Status| |Build status on Windows| |codecov| |PyPI version|
+|Build Status| |Build status on Windows| |PyPI version|
 |Python|
 
 .. |Build Status| image:: https://travis-ci.org/lk-geimfari/mimesis.svg?branch=master
 	:target: https://travis-ci.org/lk-geimfari/mimesis
 .. |Build status on Windows| image:: https://ci.appveyor.com/api/projects/status/chj8huslvn6vde18?svg=true
 	:target: https://ci.appveyor.com/project/lk-geimfari/mimesis
-.. |codecov| image:: https://codecov.io/gh/lk-geimfari/mimesis/branch/master/graph/badge.svg
-	:target: https://codecov.io/gh/lk-geimfari/mimesis
 .. |PyPI version| image:: https://badge.fury.io/py/mimesis.svg
 	:target: https://badge.fury.io/py/mimesis
 .. |Python| image:: https://img.shields.io/badge/python-3.5%2C%203.6-brightgreen.svg
 	:target: https://badge.fury.io/py/mimesis
 
 
-**Mimesis** is a fast and easy to use library for Python programming language, which helps generate mock data for a variety of purposes (see «\ `Data providers`_\ ») in a variety of languages (see «\ `Locales`_\ »). This data can be particularly useful during software development and testing. For example, it could be used to populate a testing database for a web application with user information such as email addresses, usernames, first names, last names, etc.
+**Mimesis** is a fast and easy to use library for Python programming language, which helps generate mock data for a variety of purposes (see «\ `Data providers`_\ ») in a variety of languages (see «\ `Locales`_\ »). This data can be particularly useful during software development and testing. For example, it could be used to populate a testing database, create beautiful JSON/XML/HTML files, anonymize data taken from a production service, etc.
 
 .. _Locales: #id1
 .. _Data providers: #id2
 
-Mimesis offers a number of advantages over other similar libraries, such
-as Faker:
+This library offers a number of advantages over other similar libraries:
 
--  Performance. Mimesis is significantly `faster`_ than other similar libraries.
--  Completeness. Mimesis strives to provide many detailed providers that offer a variety of data generators.
--  Simplicity. Mimesis does not require any modules other than the Python standard library.
+-  Performance. Significantly `faster`_ than other similar libraries.
+-  Completeness. Strives to provide many detailed providers that offer a variety of data generators.
+-  Simplicity. Does not require any modules other than the Python standard library.
 
 See `here <https://gist.github.com/lk-geimfari/461ce92fd32379d7b73c9e12164a9154>`_ for an example of how we compare performance with other
 libraries.
@@ -37,23 +34,25 @@ libraries.
 Installation
 ------------
 
+To install mimesis, simply use pip:
+
+.. code-block:: bash
+
+    ➜ pip install mimesis
+
+also you can install it manually:
+
 .. code-block:: bash
 
     ➜ git clone https://github.com/lk-geimfari/mimesis.git
     ➜ cd mimesis/
     ➜ make install
 
-or simply:
-
-.. code-block:: bash
-
-    ➜ pip install mimesis
-
 
 Basic Usage
 -----------
 
-As we said above, this library is really easy to use:
+That's library is really easy to use:
 
 .. code:: python
 
@@ -142,6 +141,8 @@ providers from one object.
 
 Data Providers
 --------------
+Mimesis support over twenty different data providers available, which can produce data related to food, people, computer hardware, transportation, addresses, and more.
+
 List of supported data providers available `here <http://mimesis.readthedocs.io/providers.html>`_
 
 Custom Data Providers
