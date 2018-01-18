@@ -49,7 +49,7 @@ test:
 	py.test --benchmark-skip --color=yes ./
 
 
-.PHONY:type-check
+.PHONY: type-check
 type-check:
 	mypy mimesis/
 
