@@ -1,66 +1,66 @@
 {
   "day": {
-	"abbr": [
-	  "Ma.",
-	  "Ti.",
-	  "On.",
-	  "To.",
-	  "Fr.",
-	  "Lö.",
-	  "Sö."
-	],
-	"name": [
-	  "Måndag",
-	  "Tisdag",
-	  "Onsdag",
-	  "Torsdag",
-	  "Fredag",
-	  "Lördag",
-	  "Söndag"
-	]
+    "abbr": [
+      "Ma.",
+      "Ti.",
+      "On.",
+      "To.",
+      "Fr.",
+      "Lö.",
+      "Sö."
+    ],
+    "name": [
+      "Måndag",
+      "Tisdag",
+      "Onsdag",
+      "Torsdag",
+      "Fredag",
+      "Lördag",
+      "Söndag"
+    ]
   },
   "formats": {
-	"date": "%d. %m. %Y",
-	"time": "%H:%M:%S"
+    "date": "%d. %m. %Y",
+    "time": "%H:%M:%S"
   },
   "month": {
-	"abbr": [
-	  "Jan.",
-	  "Febr.",
-	  "Mars",
-	  "April",
-	  "Maj",
-	  "Juni",
-	  "Juli",
-	  "Aug.",
-	  "Sept.",
-	  "Okt.",
-	  "Nov.",
-	  "Dec."
-	],
-	"name": [
-	  "Januari",
-	  "Februari",
-	  "Mars",
-	  "April",
-	  "Maj",
-	  "Juni",
-	  "Juli",
-	  "Augusti",
-	  "September",
-	  "Oktober",
-	  "November",
-	  "December"
-	]
+    "abbr": [
+      "Jan.",
+      "Febr.",
+      "Mars",
+      "April",
+      "Maj",
+      "Juni",
+      "Juli",
+      "Aug.",
+      "Sept.",
+      "Okt.",
+      "Nov.",
+      "Dec."
+    ],
+    "name": [
+      "Januari",
+      "Februari",
+      "Mars",
+      "April",
+      "Maj",
+      "Juni",
+      "Juli",
+      "Augusti",
+      "September",
+      "Oktober",
+      "November",
+      "December"
+    ]
   },
   "periodicity": [
-	"En gång",
-	"Aldrig",
-	"Sällan",
-	"Ofta",
-	"Dagligen",
-	"Veckovis",
-	"Månatlig",
-	"Årlig"
+    "En gång",
+    "Aldrig",
+    "Sällan",
+    "Ofta",
+    "Dagligen",
+    "Veckovis",
+    "Månatlig",
+    "Årlig"
   ]
 }
