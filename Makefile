@@ -49,7 +49,7 @@ test:
 	py.test --benchmark-skip --color=yes ./
 
 
-.PHONY: type-check
+.PHONY:type-check
 type-check:
 	mypy mimesis/
 
@@ -64,7 +64,7 @@ publish:
 	python3 setup.py sdist && twine upload dist/*
 
 
-.PHONY:	style-check
+.PHONY: style-check
 style-check:
 	py.test --flake mimesis/
 
