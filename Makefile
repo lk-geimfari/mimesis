@@ -64,6 +64,11 @@ publish:
 	python3 setup.py sdist && twine upload dist/*
 
 
+.PHONY:	style-check
+style-check:
+	py.test --flake mimesis/
+
+
 .PHONY: version
 version:
 	python3 setup.py version
