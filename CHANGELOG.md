@@ -5,6 +5,7 @@
 
 **Fixed**:
 - Fixed issue with seed for `providers.Cryptographic.bytes`
+- Fixed issue [#375](https://github.com/lk-geimfari/mimesis/issues/375)
 
 **Optimizations**:
 - Optimized method `Text.hex_color`
