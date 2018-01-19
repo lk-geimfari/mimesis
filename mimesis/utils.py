@@ -96,7 +96,7 @@ def pull(file: str, locale: str = 'en') -> JSON:
         :param locale_name: Locale name.
         :return: Content of JSON file as dict.
         """
-        file_path = path.join(DATA_DIR + '/' + locale_name, file)
+        file_path = path.join(DATA_DIR, locale_name, file)
         # Needs explicit encoding for Windows
         with open(file_path, 'r', encoding='utf8') as f:
             return json.load(f)
