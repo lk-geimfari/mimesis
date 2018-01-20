@@ -16,7 +16,7 @@ data for a variety of purposes in a variety of languages. This data can be parti
 
 This library offers a number of advantages over other similar libraries:
 
-* Performance. Significantly [faster](http://i.imgur.com/pCo6yPA.png) than other similar libraries.
+* Performance. Significantly [faster](https://gist.github.com/lk-geimfari/e76c12eb3c9a8afbf796c706d4ba779d) than other similar libraries.
 * Completeness. Strives to provide many detailed providers that offer a variety of data generators.
 * Simplicity. Does not require any modules other than the Python standard library.
 
