@@ -82,7 +82,7 @@ That's library is really easy to use:
     'dashed_2006'
 
 
-Seeded data
+Seeded Data
 -----------
 
 For using seeded data just pass argument ``seed`` to data provider:
@@ -103,8 +103,7 @@ the language or country associated with that locale. `Mimesis` currently include
 for `33 different locales <http://mimesis.readthedocs.io/locales.html>`_.
 
 
-Usage
-~~~~~
+Example of usage:
 
 .. code-block:: python
 
@@ -139,32 +138,32 @@ providers from one object.
     'GCTTTAGACC'
 
 
-Data Providers
---------------
+Providers
+---------
 Mimesis support over twenty different data providers available, which can produce data related to food, people, computer hardware, transportation, addresses, and more.
 
 List of supported data providers available `here <http://mimesis.readthedocs.io/providers.html>`_
 
-Custom Data Providers
----------------------
+Custom Providers
+----------------
 
-You also can add custom provider to ``Generic()``, using
-``add_provider()`` method:
+The library supports a vast amount of data and in most cases this would
+be enough. For those who want to create their own providers with more
+specific data. This can be done like this:
 
 .. code:: python
 
-    >>> import mimesis
-    >>> generic = mimesis.Generic('en')
-
-    >>> class SomeProvider(object):
+    >>> class SomeProvider():
     ...     class Meta:
     ...         name = "some_provider"
     ...
-    ...     def hello(self):
-    ...         return "Hello!"
+    ...     @staticmethod
+    ...     def hello():
+    ...         return 'Hello!'
 
-    >>> class Another(object):
-    ...     def bye(self):
+    >>> class Another():
+    ...     @staticmethod
+    ...     def bye():
     ...         return "Bye!"
 
     >>> generic.add_provider(SomeProvider)
@@ -176,21 +175,49 @@ You also can add custom provider to ``Generic()``, using
     >>> generic.another.bye()
     'Bye!'
 
-or multiple custom providers using method ``add_providers()``:
+You can also add multiple providers:
 
 .. code:: python
 
     >>> generic.add_providers(SomeProvider, Another)
+    >>> generic.some_provider.hello()
+    'Hello!'
+    >>> generic.another.bye()
+    'Bye!'
 
+Everything is pretty easy and self-explanatory here, therefore, we will
+only clarify one moment — attribute ``name``, class ``Meta`` is the name
+of a class through which access to methods of user-class providers is
+carried out. By default class name is the name of the class in the lower
+register.
 
-Builtins Data Providers
------------------------
+Built-in Providers
+------------------
 
-Some countries have data types specific to that country. For example
-«Social Security Number» (SSN) in the United States of America (``en``),
-and «Cadastro de Pessoas Físicas» (CPF) in Brazil (``pt-br``). If you
-would like to use these country-specific providers, then you must import
-them explicitly:
+Most countries, where only one language is official, have data typical
+only for these particular countries. For example, «CPF» for Brazil
+(``pt-br``), «SSN» for USA (``en``). This kind of data can cause
+discomfort and meddle with the order (or at least annoy) by being
+present in all the objects regardless of the chosen language standard.
+You can see that for yourselves by looking at the example (the code
+won’t run):
+
+.. code:: python
+
+    >>> from mimesis import Personal
+    >>> person = Personal('en')
+
+    >>> person.ssn()
+    >>> person.cpf()
+
+We bet everyone would agree that this does not look too good.
+Perfectionists, as we are, have taken care of this in a way that some
+specific regional provider would not bother other providers for other
+regions. For this reason, class providers with locally-specific data are
+separated into a special sub-package (``mimesis.builtins``) for keeping
+a common class structure for all languages and their objects.
+
+Here’s how it works:
 
 .. code:: python
 
@@ -198,9 +225,109 @@ them explicitly:
     >>> from mimesis.builtins import BrazilSpecProvider
 
     >>> generic = Generic('pt-br')
-    >>> generic.add_provider(BrazilSpecProvider)
+    >>> generic.add_provider(BrazilProvider)
     >>> generic.brazil_provider.cpf()
     '696.441.186-00'
+
+If you want to change default name of built-in provider, just change
+value of attribute ``name``, class ``Meta`` of the builtin provider:
+
+.. code:: python
+
+    >>> BrazilSpecProvider.Meta.name = 'brasil'
+    >>> generic.add_provider(BrazilSpecProvider)
+    >>> generic.brasil.cpf()
+    '019.775.929-70'
+
+Or just inherit the class and override the value of attribute ``name``
+of class ``Meta`` of the provider (in our case this is
+``BrazilSpecProvider()``) :
+
+.. code:: python
+
+    >>> class Brasil(BrazilSpecProvider):
+    ...
+    ...     class Meta:
+    ...         name = "brasil"
+    ...
+    >>> generic.add_provider(Brasil)
+    >>> generic.brasil.cnpj()
+    '55.806.487/7994-45'
+
+Generally, you don’t need to add built-it classes to the object
+``Generic()``. It was done in the example with the single purpose of
+demonstrating in which cases you should add a built-in class provider to
+the object ``Generic()``. You can use it directly, as shown below:
+
+.. code:: python
+
+    >>> from mimesis.builtins import RussiaSpecProvider
+    >>> from mimesis.enums import Gender
+    >>> ru = RussiaSpecProvider()
+
+    >>> ru.patronymic(gender=Gender.FEMALE)
+    'Петровна'
+
+    >>> ru.patronymic(gender=Gender.MALE)
+    'Бенедиктович'
+
+Generate Data by Schema
+-----------------------
+
+For generating data by schema, just create an instance of ``Field``
+object, which takes any string which represents the name of data
+provider in format ``provider.method_name`` (explicitly defines that the
+method belongs to data-provider ``provider``) or ``method`` (will be
+chosen the first provider which has a method ``method_name``) and the
+``**kwargs``\ of the method ``method_name``, after that you should
+describe the schema in lambda function and pass it to the object
+``Schema`` and call method ``create()``.
+
+Optionally, you can apply a *key function* to result returned by the
+method, to do it, just pass the parameter ``key`` with a callable object
+which returns final result.
+
+Example of usage:
+
+.. code:: python
+
+    >>> from mimesis.schema import Field, Schema
+    >>> from mimesis.enums import Gender
+    >>> _ = Field('en')
+    >>> description = (
+    ...     lambda: {
+    ...         'id': _('uuid'),
+    ...         'name': _('text.word'),
+    ...         'version': _('version', pre_release=True),
+    ...         'timestamp': _('timestamp', posix=False),
+    ...         'owner': {
+    ...             'email': _('email', key=str.lower),
+    ...             'token': _('token'),
+    ...             'creator': _('personal.full_name', gender=Gender.FEMALE),
+    ...         },
+    ...     }
+    ... )
+    >>> schema = Schema(schema=description)
+    >>> schema.create(iterations=1)
+
+Output:
+
+.. code:: json
+
+    [
+      {
+        "owner": {
+          "email": "aisling2032@yahoo.com",
+          "token": "cc8450298958f8b95891d90200f189ef591cf2c27e66e5c8f362f839fcc01370",
+          "creator": "Veronika Dyer"
+        },
+        "name": "pleasure",
+        "version": "4.3.1-rc.5",
+        "id": "33abf08a-77fd-1d78-86ae-04d88443d0e0",
+        "timestamp": "2018-07-29T15:25:02Z"
+      }
+    ]
+
 
 
 Decorators
@@ -232,7 +359,6 @@ best practices and a number of most useful features of the library.
    :maxdepth: 3
 
    part_1
-   part_2
 
 
 

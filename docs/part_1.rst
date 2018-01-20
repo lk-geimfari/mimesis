@@ -13,7 +13,7 @@ two following ones we will introduce you to a tool, which immensely
 simplifies generating mock data, initial database loading and testing in
 general.
 
-**Mimesis** is a Python library, which helps generate mock data
+**Mimesis** is a Python library, which helps generate synthetic data
 for various purposes. The library was written with the use of tools from
 the standard Python library, and therefore, it does not have any side
 dependencies. Currently the library supports over 33 languages and over 23 class
@@ -110,8 +110,6 @@ shown below:
     >>> from mimesis.enums import Gender
     >>> person = Personal('is')
     >>> for _ in range(0, 3):
-    ...     # Default gender value is None and this
-    ...     # mean that this value is random.
     ...     person.full_name(gender=Gender.MALE)
     ...
     'Karl Brynjúlfsson'
@@ -135,7 +133,7 @@ which grants access to all providers from one single object:
 .. code:: python
 
     >>> from mimesis import Generic
-    >>> g = Generic('pl') # pl – code of Poland.
+    >>> g = Generic('pl')
     >>> g.personal.full_name()
     'Lonisława Podsiadło'
     >>> g.datetime.birthday(readable=True)
@@ -154,18 +152,11 @@ you can create mock (female) Visa (Maestro, MasterCard) credit card
 holders:
 
 .. code:: python
-    >>> from mimesis import Personal
+    >>> from mimesis import Payment
     >>> from mimesis.enums import Gender, CardType
-    >>> user = Personal('en')
-    >>> def get_card():
-    ...     owner = {
-    ...       'owner': user.full_name(),
-    ...       'exp_date': user.credit_card_expiration_date(maximum=21),
-    ...       'number': user.credit_card_number(card_type=CardType.VISA)
-    ...       }
-    ...     return owner
+    >>> user = Payment('en')
     >>> for _ in range(0, 3):
-    ...     get_card()
+    ...     user.credit_card_owner()
     ...
     {'exp_date': '02/20', 'owner': 'Laverna Morrison', 'card_number': '4920 3598 2121 3328'}
     {'exp_date': '11/19', 'owner': 'Melany Martinez', 'card_number': '4980 9423 5464 1201'}
@@ -246,31 +237,115 @@ language. In this case it is an state of the USA:
     >>> address.state()
     'Texas'
 
-The library also has means to Romanize Cyrillic languages (for the
-moment only Russian and Ukrainian are supported):
+Note
+----
+
+First of all we would like to point out that Mimesis wasn’t developed to
+be used with a certain database or ORM. The main problem the library
+solves is generating valid data. Consequently, while there are no rigid
+rules of working with the library, here are a few recommendations that
+will help you keep your testing environment in order and will avert
+growth of entropy within your project. Recommendations are quite simple
+and are fully in tune with the Python spirit (if you disagree, feel free
+to let us know).
+
+ORM
+---
+
+Despite the previous note that the library isn’t to be used with a
+certain database or ORM, the need for test data usually occurs in
+web-apps that perform certain operations (mostly CRUD) with a database.
+We have some advice on organizing test data generation for web-apps.
+Functions responsible for data generation and importing it to the
+database should be kept close to the models, or even better as
+statistical methods of the model they are related to. This is necessary
+to avoid running around files when the model structure changes and you
+need to add a new filed.
+
+Creating objects
+----------------
+
+If your app requires data in one particular language, it’s preferable to
+use class ``Generic()``, giving access to all class providers through a
+single object, rather than through multiple separate class providers.
+Using ``Generic()`` will allow you to get rid of several extra lines of
+code.
+
+Incorrect:
 
 .. code:: python
 
-    >>> from mimesis.decorators import romanized
+    >>> from mimesis import Personal, Datetime, Text, Code
 
-    >>> @romanized('ru')
-    ... def name_ru():
-    ...     return 'Вероника Денисова'
-    ...
+    >>> personal = Personal('ru')
+    >>> datetime = Datetime('ru')
+    >>> text = Text('ru')
+    >>> code = Code('ru')
 
-    >>> @romanized('uk')
-    >>> def name_uk():
-    ...     return 'Емілія Акуленко'
-    ...
+Correct:
 
-    >>> name_ru()
-    'Veronika Denisova'
+.. code:: python
 
-    >>> name_uk()
-    'Emіlіja Akulenko'
+    >>> from mimesis import Generic
+    >>> generic = Generic('ru')
 
-In reality there are a lot of possibilities and you can come up with a
-huge number of great use-cases, where the data would look more useful
-than in our examples. We are looking forward to getting them from our
-users. And we would be happy to read how you are successfully applying
-the library to your projects.
+    >>> generic.personal.username()
+    'sherley3354'
+
+    >>> generic.datetime.date()
+    '14-05-2007'
+
+Still correct:
+
+.. code:: python
+
+    >>> from mimesis import Personal
+
+    >>> p_en = Personal('en')
+    >>> p_sv = Personal('sv')
+    >>> # …
+
+It means that importing class providers separately makes sense only if
+you limit yourself to the data available through the class you imported,
+otherwise it’s better to use ``Generic()``.
+
+Inserting data into database
+----------------------------
+
+If you need to generate data and import it into a database we strongly
+recommend generating data in chunks rather than ``600k`` at once. Keep
+in mind the possible limitations of databases, ORM, etc. The smaller the
+generated data chunks are, the faster the process will go.
+
+Good:
+
+.. code:: python
+
+    >>> Patient()._bootstrap(count=2000, locale='de')
+
+Very bad:
+
+.. code:: python
+
+    >>> Patient()._bootstrap(count=600000, locale='de')
+
+
+Importing images
+----------------
+
+Class ``Internet()`` boasts of several methods which generate image
+links (more details here). Links to images locate on remote servers
+would be enough, however, if you still want to have a number of random
+images locally, you can download images generated by the respective
+class ``Internet()`` methods with the help of function
+``download_image()`` from model utils:
+
+.. code:: python
+
+    >>> from mimesis import Internet
+    >>> from mimesis.utils import download_image
+
+    >>> net = Internet()
+
+    >>> img_url = net.stock_image(category='food', width=1920, height=1080)
+    >>> download_image(url=img_url, save_path='/some/path/')
