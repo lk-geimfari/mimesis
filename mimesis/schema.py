@@ -44,8 +44,13 @@ class AbstractField(StrMixin):
         represents name of the any method of any supported data provider
         and the ``**kwargs`` of this method.
 
+        ..note:: Some data providers have methods with the same name and
+        in such cases, you can explicitly define that the method belongs to
+        data-provider ``name='provider.name'``.
+
         You can apply a *key function* to result returned by the method,
-        to do it, just pass a callable object which returns final result.
+        to do it, just pass parameter ``key`` with a callable object which
+        returns final result.
 
         :param name: Name of the method.
         :param key: A key function (or other callable object)
@@ -58,8 +63,13 @@ class AbstractField(StrMixin):
         if name is None:
             raise UndefinedField()
 
-        # TODO: This is a really slow solution. Fix it.
-        for provider in dir(self.gen):
+        providers = []
+        if '.' in name:
+            cls, name = name.split('.', 1)
+            providers.append(cls)
+
+        # TODO: Optimization.
+        for provider in providers or dir(self.gen):
             if hasattr(self.gen, provider):
                 provider = getattr(self.gen, provider)
                 if name in dir(provider):
@@ -68,10 +78,9 @@ class AbstractField(StrMixin):
                     if key and callable(key):
                         return key(result)
                     return result
-            else:
-                continue
         else:
-            raise UnsupportedField(name)
+            raise UnsupportedField(name if not providers
+                                   else '{}.{}'.format(providers[0], name))
 
 
 class Schema(object):
@@ -82,7 +91,7 @@ class Schema(object):
 
         :param schema: A schema.
         """
-        if callable(schema) and isinstance(schema, LambdaType):
+        if isinstance(schema, LambdaType):
             self.schema = schema
         else:
             raise UndefinedSchema()
@@ -96,8 +105,7 @@ class Schema(object):
         :param iterations: Amount of iterations.
         :return: List of willed schemas.
         """
-        data = map(lambda _: self.schema(), range(iterations))
-        return list(data)
+        return [self.schema() for _ in range(iterations)]
 
 
 # Alias for AbstractField

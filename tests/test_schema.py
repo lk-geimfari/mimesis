@@ -45,20 +45,9 @@ def valid_schema(_):
                 'ethereum_address': _('ethereum_address'),
             },
         },
-        'meta': {
-            'currency': _('currency_iso_code'),
-            'shirt_size': _('european_size'),
-            'issn': _('issn'),
-            'spices': _('spices'),
-            'gaming_platform': _('gaming_platform'),
-            'resolution': _('resolution'),
-            'http_code': _('http_status_code'),
-            'digit': _('digit'),
-            'home_path': _('home'),
-            'rna': _('rna'),
-            'alphabet': _('alphabet'),
-            'truck': _('truck'),
-            'unit': _('unit'),
+        'defined_cls': {
+            'title': _('personal.title'),
+            'title2': _('text.title'),
         },
     }
 
