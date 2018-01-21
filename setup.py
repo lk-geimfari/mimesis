@@ -72,13 +72,10 @@ List of supported data providers available `here <http://mimesis.readthedocs.io/
 import json
 import os
 import re
-import sys
 from distutils.core import setup
 from os.path import abspath, dirname, exists, getsize, join, relpath, splitext
-from shutil import rmtree
 
 from setuptools import Command
-from setuptools.command.test import test as TestCommand
 
 VERSION_MINOR_MAX = 10
 VERSION_MICRO_MAX = 10
@@ -103,20 +100,6 @@ class BaseCommand(Command):
 
     def run(self):
         pass
-
-
-class Upload(BaseCommand):
-    """Support setup.py upload."""
-
-    def run(self):
-        try:
-            rmtree(os.path.join(here, 'dist'))
-        except OSError:
-            pass
-
-        os.system('{0} setup.py sdist bdist_wheel --universal'.format(sys.executable))
-        os.system('twine upload dist/*')
-        sys.exit()
 
 
 class Minimizer(BaseCommand):
@@ -323,6 +306,5 @@ setup(
     cmdclass={
         'version': Version,
         'minify': Minimizer,
-        'upload': Upload,
     },
 )

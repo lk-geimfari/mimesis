@@ -17,8 +17,7 @@ script:
 after_success:
   codecov
 
-before_deploy:
-  - python setup.py minify
+before_deploy: python setup.py minify
 
 deploy:
   provider: pypi

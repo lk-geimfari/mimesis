@@ -3,11 +3,6 @@ SHELL:=/usr/bin/env bash
 
 .PHONY: help
 help:
-	@echo "........................................................"
-	@echo "Author:     Likid Geimfari <likid.geimfari@gmail.com>"
-	@echo "Repository: https://github.com/lk-geimfari/mimesis"
-	@echo "........................................................"
-	@echo ""
 	@echo "Available options:"
 	@echo "........................................................"
 	@echo "clean-pyc    - remove Python file artifacts"
@@ -15,6 +10,7 @@ help:
 	@echo "clean        - remove build and Python file artifacts"
 	@echo "test         - run tests quickly with the default Python"
 	@echo "type-check   - run mypy for checking types"
+	@echo "style-check  - run style check (PEP)"
 	@echo "benchmarks   - run benchmark tests for providers"
 	@echo "publish      - create dist and upload package to PyPI"
 	@echo "version      - update __version__ file"
@@ -47,6 +43,7 @@ clean: clean-pyc clean-build
 .PHONY: test
 test:
 	py.test --benchmark-skip --color=yes ./
+	mypy mimesis/
 
 
 .PHONY: type-check
@@ -61,7 +58,8 @@ benchmarks:
 
 .PHONY: publish
 publish:
-	python3 setup.py sdist && twine upload dist/*
+	python3 setup.py sdist bdist_wheel && twine upload dist/*
+	clean
 
 
 .PHONY: style-check
