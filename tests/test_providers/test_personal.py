@@ -209,6 +209,9 @@ class TestPersonal(object):
         result = personal.full_name(reverse=True)
         assert result is not None
 
+        with pytest.raises(NonEnumerableError):
+            personal.full_name(gender='nil')
+
     def test_gender(self, personal):
         result = personal.gender()
         assert result in personal._data['gender']
