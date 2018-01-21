@@ -20,11 +20,11 @@ environment:
 install:
   - "SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%"
   - "python --version"
-  
+
   # Upgrade to the latest version of pip to avoid it displaying warnings
   # about it being out of date.
   - "pip install --disable-pip-version-check --user --upgrade pip"
-  
+
   # Setting up enviroment
   - "pip install pipenv"
   - "pipenv install --dev"
