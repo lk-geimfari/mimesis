@@ -6,7 +6,7 @@ import pytest
 
 from mimesis import Generic
 
-from .test_data import _patterns as p
+from .test_providers import _patterns as p
 
 
 class TestGeneric(object):
