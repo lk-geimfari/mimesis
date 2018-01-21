@@ -1,6 +1,7 @@
 import pytest
 
-from mimesis.helpers import Random
+from mimesis.enums import Gender
+from mimesis.helpers import Random, get_random_item
 
 
 @pytest.fixture
@@ -70,3 +71,13 @@ def test_multiple_choice(random, amount):
     seq = [x for x in range(8)]
     result = random.multiple_choice(seq, amount)
     assert len(result) == amount
+
+
+def test_get_random_item(random):
+    result = get_random_item(Gender)
+    assert result in Gender
+
+    random.seed(0xf)
+    result_1 = get_random_item(Gender, rnd=random)
+    result_2 = get_random_item(Gender, rnd=random)
+    assert result_1 == result_2

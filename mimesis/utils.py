@@ -129,7 +129,7 @@ def download_image(url: str = '', save_path: str = '',
     if unverified_ctx:
         ssl._create_default_https_context = ssl._create_unverified_context
 
-    if url is not None:
+    if url:
         image_name = url.rsplit('/')[-1]
         request.urlretrieve(url, save_path + image_name)
         return image_name

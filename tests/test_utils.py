@@ -1,22 +1,12 @@
 # -*- coding: utf-8 -*-
 
 import os
-import socket
 
 import pytest
 
 from mimesis.exceptions import UnsupportedLocale
 from mimesis.utils import (download_image, locale_info, luhn_checksum, pull,
                            setup_locale, update_dict)
-
-
-def is_connected():
-    try:
-        host = socket.gethostbyname('https://github.com/')
-        socket.create_connection((host, 80), 2)
-        return True
-    except Exception:
-        return False
 
 
 def test_luhn_checksum():
@@ -53,10 +43,12 @@ def test_download_image(ctx):
     url = 'https://raw.githubusercontent.com/lk-geimfari/' \
           'mimesis/master/media/logo.png'
 
-    if is_connected():
-        verified = download_image(url=url, unverified_ctx=ctx)
-        assert verified == 'logo.png'
-        os.remove(verified)
+    verified = download_image(url=url, unverified_ctx=ctx)
+    assert verified == 'logo.png'
+    os.remove(verified)
+
+    result = download_image('', unverified_ctx=ctx)
+    assert result is None
 
 
 def test_locale_information():

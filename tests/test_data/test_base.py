@@ -3,7 +3,12 @@ import pytest
 from mimesis import config
 from mimesis.enums import Gender
 from mimesis.exceptions import NonEnumerableError
-from mimesis.providers.base import BaseDataProvider
+from mimesis.providers.base import BaseDataProvider, StrMixin
+
+
+def test_str_mixin():
+    mixin = StrMixin()
+    assert mixin
 
 
 class TestBase(object):
