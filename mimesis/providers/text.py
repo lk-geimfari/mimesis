@@ -2,7 +2,7 @@
 
 from typing import List, Tuple
 
-from mimesis.data import FLAT_UI_COLORS
+from mimesis.data import SAFE_COLORS
 from mimesis.providers.base import BaseDataProvider
 from mimesis.utils import pull
 
@@ -144,7 +144,7 @@ class Text(BaseDataProvider):
             #d8346b
         """
         if safe:
-            return self.random.choice(FLAT_UI_COLORS)
+            return self.random.choice(SAFE_COLORS)
 
         return '#{:06x}'.format(
             self.random.randint(0x000000, 0xffffff))

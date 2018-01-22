@@ -4,7 +4,7 @@ import re
 import pytest
 
 from mimesis import Text
-from mimesis.data import FLAT_UI_COLORS
+from mimesis.data import SAFE_COLORS
 
 from ._patterns import HEX_COLOR, STR_REGEX
 
@@ -31,7 +31,7 @@ class TestText(object):
     def test_hex_color(self, _text, safe):
         result = _text.hex_color(safe=safe)
         assert re.match(HEX_COLOR, result)
-        assert result in FLAT_UI_COLORS if safe else result
+        assert result in SAFE_COLORS if safe else result
 
     @pytest.mark.parametrize(
         'safe', [

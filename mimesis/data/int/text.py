@@ -1,6 +1,6 @@
 """Provides all the data related to text."""
 
-FLAT_UI_COLORS = [
+SAFE_COLORS = [
     '#1abc9c', '#16a085',
     '#2ecc71', '#27ae60',
     '#3498db', '#2980b9',
