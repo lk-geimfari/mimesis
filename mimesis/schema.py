@@ -64,7 +64,7 @@ class AbstractField(StrMixin):
         if name is None:
             raise UndefinedField()
 
-        def tail_parser(tails, obj):
+        def tail_parser(tails: str, obj: Any) -> Any:
             """Return method from end of tail.
 
             :param tails: Tail string
