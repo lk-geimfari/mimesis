@@ -1,7 +1,8 @@
 ## Version 1.0.6
 
-**Added**:
-- Explicit definition of data-provider for `schema.Field`
+**Optimizations**:
+- Significantly improved performance of `schema.Field`
+- Other minor improvements
 
 ---
 
