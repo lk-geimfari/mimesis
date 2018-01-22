@@ -25,7 +25,7 @@ class AbstractField(StrMixin):
     'Jack Allison'
     """
 
-    def __init__(self, locale: str = 'en',
+    def __init__(self, locale: Optional[str] = None,
                  seed: Optional[Seed] = None) -> None:
         """Initialize field.
 
@@ -34,8 +34,8 @@ class AbstractField(StrMixin):
         """
         self.locale = locale
         self.seed = seed
-        self.gen = Generic(self.locale, self.seed)
-        self._table = {}    # type: ignore
+        self._gen = Generic(self.locale, self.seed)
+        self._table = {}  # type: ignore
 
     def __call__(self, name: Optional[str] = None,
                  key: Optional[Callable] = None, **kwargs) -> Any:
@@ -82,12 +82,12 @@ class AbstractField(StrMixin):
         try:
             if name not in self._table:
                 if '.' not in name:
-                    for provider in dir(self.gen):
-                        provider = getattr(self.gen, provider)
+                    for provider in dir(self._gen):
+                        provider = getattr(self._gen, provider)
                         if name in dir(provider):
                             self._table[name] = getattr(provider, name)
                 else:
-                    self._table[name] = tail_parser(name, self.gen)
+                    self._table[name] = tail_parser(name, self._gen)
 
             result = self._table[name](**kwargs)
             if key and callable(key):
