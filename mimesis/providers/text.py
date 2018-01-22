@@ -124,7 +124,7 @@ class Text(BaseDataProvider):
         return self.random.choice(colors)
 
     @staticmethod
-    def _hex_to_rgb(color: str) -> tuple:
+    def _hex_to_rgb(color: str) -> Tuple[int, ...]:
         """Convert hex color to RGB format.
 
         :param color: Hex color.
