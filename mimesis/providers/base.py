@@ -60,7 +60,7 @@ class BaseDataProvider(BaseProvider, StrMixin):
     """This is a base class for all data providers."""
 
     def __init__(self, locale: Optional[str] = None,
-                 seed: Optional[int] = None) -> None:
+                 seed: Optional[Seed] = None) -> None:
         """Initialize attributes for data providers.
 
         :param locale: Current locale.
