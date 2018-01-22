@@ -1,10 +1,11 @@
 <div align="center">
       <a href="https://github.com/lk-geimfari/mimesis">
-        <img src="https://raw.githubusercontent.com/lk-geimfari/mimesis/master/media/logo-nodescr.png">
+        <img src="https://raw.githubusercontent.com/lk-geimfari/mimesis/master/media/logo-no-descr.png">
     </a><br><br>
 </div>
 
------------------
+---
+
 
 | **`Linux`**  |  **`Windows`**  | **`Docs`**  | **`Coverage`**  | **`PyPi`**   | **`Python`**  |
 |---|---|---|---|---|---|
