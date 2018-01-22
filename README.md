@@ -7,9 +7,9 @@
 ---
 
 
-| **`Linux`**  |  **`Windows`**  | **`Docs`**  | **`Coverage`**  | **`PyPi`**   | **`Python`**  |
-|---|---|---|---|---|---|
-| [![Build Status](https://travis-ci.org/lk-geimfari/mimesis.svg?branch=master)](https://travis-ci.org/lk-geimfari/mimesis) | [![Build status on Windows](https://ci.appveyor.com/api/projects/status/chj8huslvn6vde18?svg=true)](https://ci.appveyor.com/project/lk-geimfari/mimesis) | [![Documentation Status](https://readthedocs.org/projects/mimesis/badge/?version=latest)](http://mimesis.readthedocs.io/?badge=latest) | [![codecov](https://codecov.io/gh/lk-geimfari/mimesis/branch/master/graph/badge.svg)](https://codecov.io/gh/lk-geimfari/mimesis)| [![PyPI version](https://badge.fury.io/py/mimesis.svg)](https://badge.fury.io/py/mimesis)| [![Python](https://img.shields.io/badge/python-3.5%2C%203.6-brightgreen.svg)](https://badge.fury.io/py/mimesis) |
+| **`Linux`**  |  **`Windows`**  | **`Docs`**  | **`Coverage`**  | **`PyPi`**   | **`Python`**  | **`License`**  |
+|---|---|---|---|---|---|---|
+| [![Build Status](https://travis-ci.org/lk-geimfari/mimesis.svg?branch=master)](https://travis-ci.org/lk-geimfari/mimesis) | [![Build status on Windows](https://ci.appveyor.com/api/projects/status/chj8huslvn6vde18?svg=true)](https://ci.appveyor.com/project/lk-geimfari/mimesis) | [![Documentation Status](https://readthedocs.org/projects/mimesis/badge/?version=latest)](http://mimesis.readthedocs.io/?badge=latest) | [![codecov](https://codecov.io/gh/lk-geimfari/mimesis/branch/master/graph/badge.svg)](https://codecov.io/gh/lk-geimfari/mimesis)| [![PyPI version](https://badge.fury.io/py/mimesis.svg)](https://badge.fury.io/py/mimesis)| [![Python](https://img.shields.io/badge/python-3.5%2C%203.6-brightgreen.svg)](https://badge.fury.io/py/mimesis) | [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/lk-geimfari/mimesis/blob/master/LICENSE)|
 
 
 **Mimesis** is a fast and easy to use library for Python programming language, which helps generate synthetic
