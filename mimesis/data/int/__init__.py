@@ -13,5 +13,6 @@ from .path import *
 from .personal import *
 from .payment import *
 from .scientific import *
+from .text import *
 from .transport import *
 from .games import *

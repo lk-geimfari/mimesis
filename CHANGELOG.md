@@ -1,5 +1,9 @@
 ## Version 1.0.6
 
+**Added**:
+- Added method `Text.rgb_color`
+- Added support of parameter `safe` for method `Text.hex_color`
+
 **Optimizations**:
 - Significantly improved performance of `schema.Field`
 - Other minor improvements

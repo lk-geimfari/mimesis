@@ -1,7 +1,8 @@
 """Provides data related to text."""
 
-from typing import List
+from typing import List, Tuple
 
+from mimesis.data import FLAT_UI_COLORS
 from mimesis.providers.base import BaseDataProvider
 from mimesis.utils import pull
 
@@ -122,16 +123,43 @@ class Text(BaseDataProvider):
         colors = self._data['color']
         return self.random.choice(colors)
 
-    def hex_color(self) -> str:
+    @staticmethod
+    def _hex_to_rgb(color: str) -> tuple:
+        """Convert hex color to RGB format.
+
+        :param color: Hex color.
+        :return: RGB tuple.
+        """
+        if color.startswith('#'):
+            color = color.lstrip('#')
+        return tuple(int(color[i:i + 2], 16) for i in (0, 2, 4))
+
+    def hex_color(self, safe: bool = False) -> str:
         """Generate a random hex color.
 
+        :param safe: Get safe Flat UI hex color.
         :return: Hex color code.
 
         :Example:
             #d8346b
         """
+        if safe:
+            return self.random.choice(FLAT_UI_COLORS)
+
         return '#{:06x}'.format(
             self.random.randint(0x000000, 0xffffff))
+
+    def rgb_color(self, safe: bool = False) -> Tuple[int, ...]:
+        """Generate a random rgb color tuple.
+
+        :param safe: Get safe RGB tuple.
+        :return: RGB tuple.
+
+        :Example:
+            (252, 85, 32)
+        """
+        color = self.hex_color(safe)
+        return self._hex_to_rgb(color)
 
     def answer(self) -> str:
         """Get a random answer in current language.
