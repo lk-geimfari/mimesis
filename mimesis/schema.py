@@ -35,6 +35,7 @@ class AbstractField(StrMixin):
         self.locale = locale
         self.seed = seed
         self.gen = Generic(self.locale, self.seed)
+        self._table = {}    # type: ignore
 
     def __call__(self, name: Optional[str] = None,
                  key: Optional[Callable] = None, **kwargs) -> Any:
@@ -63,24 +64,37 @@ class AbstractField(StrMixin):
         if name is None:
             raise UndefinedField()
 
-        providers = []
-        if '.' in name:
-            cls, name = name.split('.', 1)
-            providers.append(cls)
+        def tail_parser(tails: str, obj: Any) -> Any:
+            """Return method from end of tail.
 
-        # TODO: Optimization.
-        for provider in providers or dir(self.gen):
-            if hasattr(self.gen, provider):
-                provider = getattr(self.gen, provider)
-                if name in dir(provider):
-                    method = getattr(provider, name)
-                    result = method(**kwargs)
-                    if key and callable(key):
-                        return key(result)
-                    return result
-        else:
-            raise UnsupportedField(name if not providers
-                                   else '{}.{}'.format(providers[0], name))
+            :param tails: Tail string
+            :param obj: Search tail from this object
+            :return last tailed method
+            """
+            first, second = tails.split('.', 1)
+            if hasattr(obj, first):
+                attr = getattr(obj, first)
+                if '.' in second:
+                    return tail_parser(attr, second)
+                else:
+                    return getattr(attr, second)
+
+        try:
+            if name not in self._table:
+                if '.' not in name:
+                    for provider in dir(self.gen):
+                        provider = getattr(self.gen, provider)
+                        if name in dir(provider):
+                            self._table[name] = getattr(provider, name)
+                else:
+                    self._table[name] = tail_parser(name, self.gen)
+
+            result = self._table[name](**kwargs)
+            if key and callable(key):
+                return key(result)
+            return result
+        except Exception:
+            raise UnsupportedField(name)
 
 
 class Schema(object):
