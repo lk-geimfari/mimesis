@@ -1,7 +1,7 @@
 """Implements classes for generating data by schema."""
 
 from types import LambdaType
-from typing import Any, Callable, List, Optional, Dict
+from typing import Any, Callable, List, Optional
 
 from mimesis.exceptions import (UndefinedField, UndefinedSchema,
                                 UnsupportedField)
@@ -35,7 +35,7 @@ class AbstractField(StrMixin):
         self.locale = locale
         self.seed = seed
         self.gen = Generic(self.locale, self.seed)
-        self._table = {}    # type: Dict[str, Callable]
+        self._table = {}    # type: ignore
 
     def __call__(self, name: Optional[str] = None,
                  key: Optional[Callable] = None, **kwargs) -> Any:
