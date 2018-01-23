@@ -9,16 +9,17 @@ from mimesis.data import CALLING_CODES, CONTINENT_CODES, COUNTRIES_ISO
 from mimesis.enums import CountryCode
 from mimesis.exceptions import NonEnumerableError
 
-from . import _patterns as p
+from ._patterns import POSTAL_CODE_REGEX, STR_REGEX
 
 
 class TestAddress(object):
+
     @pytest.fixture
     def _address(self):
         return Address()
 
     def test_str(self, address):
-        assert re.match(p.STR_REGEX, str(address))
+        assert re.match(STR_REGEX, str(address))
 
     def test_street_number(self, _address):
         result = _address.street_number()
@@ -52,12 +53,10 @@ class TestAddress(object):
 
     def test_street_name(self, address):
         result = address.street_name()
-        assert isinstance(result, str)
         assert result in address._data['street']['name']
 
     def test_street_suffix(self, address):
         result = address.street_suffix()
-        assert isinstance(result, str)
         assert result in address._data['street']['suffix']
 
     def test_address(self, address):
@@ -65,45 +64,49 @@ class TestAddress(object):
         assert isinstance(result, str)
         assert result is not None
 
-    def test_state(self, address):
-        result = address.state()
+    @pytest.mark.parametrize(
+        'abbr, key', [
+            (False, 'name'),
+            (True, 'abbr'),
+        ],
+    )
+    def test_state(self, address, abbr, key):
+        result = address.state(abbr=abbr)
+        assert result in address._data['state'][key]
+
+    @pytest.mark.parametrize(
+        'alias, abbr', [
+            ('province', True),
+            ('region', True),
+            ('federal_subject', True),
+            ('prefecture', True),
+        ],
+    )
+    def test_state_aliases_abbreviated(self, address, alias, abbr):
+        method = getattr(address, alias)
+        result = method(abbr=abbr)
+        assert result in address._data['state']['abbr']
+
+    @pytest.mark.parametrize(
+        'alias', [
+            'province',
+            'region',
+            'federal_subject',
+            'prefecture',
+        ],
+    )
+    def test_state_aliases(self, address, alias):
+        result = getattr(address, alias)()
         assert result in address._data['state']['name']
-
-        result_abbr = address.state(abbr=True)
-        assert result_abbr in address._data['state']['abbr']
-
-    def test_state_aliases(self, address):
-        province = address.province()
-        region = address.region()
-        federal_subject = address.federal_subject()
-        prefecture = address.prefecture()
-
-        states = address._data['state']['name']
-
-        assert province in states
-        assert region in states
-        assert federal_subject in states
-        assert prefecture in states
-
-        province = address.province(abbr=True)
-        region = address.region(abbr=True)
-        federal_subject = address.federal_subject(abbr=True)
-        prefecture = address.prefecture(abbr=True)
-
-        abbreviations = address._data['state']['abbr']
-        assert province in abbreviations
-        assert region in abbreviations
-        assert federal_subject in abbreviations
-        assert prefecture in abbreviations
 
     def test_postal_code(self, address):
         result = address.postal_code()
         current_locale = address.get_current_locale()
 
-        if current_locale in p.POSTAL_CODE_REGEX:
-            assert re.match(p.POSTAL_CODE_REGEX[current_locale], result)
+        if current_locale in POSTAL_CODE_REGEX:
+            assert re.match(POSTAL_CODE_REGEX[current_locale], result)
         else:
-            assert re.match(p.POSTAL_CODE_REGEX['default'], result)
+            assert re.match(POSTAL_CODE_REGEX['default'], result)
 
     def test_country(self, address):
         result = address.country()
@@ -156,7 +159,6 @@ class TestSeededAddress(object):
         a1, a2 = _addresses
         for _ in range(self.TIMES):
             assert a1.street_number() == a2.street_number()
-            assert a1.street_number(maximum=42) == a2.street_number(maximum=42)
 
     def test_latitude(self, _addresses):
         a1, a2 = _addresses
@@ -208,8 +210,6 @@ class TestSeededAddress(object):
         a1, a2 = _addresses
         for _ in range(self.TIMES):
             assert a1.country_iso_code() == a2.country_iso_code()
-            assert a1.country_iso_code(fmt=CountryCode.ISO3) == \
-                a2.country_iso_code(fmt=CountryCode.ISO3)
 
     def test_city(self, _addresses):
         a1, a2 = _addresses
