@@ -154,5 +154,5 @@ class RussiaSpecProvider(BaseSpecProvider):
         code =  str(self.random.custom_code(mask='##'))
         bank_number =  str(self.random.custom_code(mask='##'))
         bank_office =  str(self.random.custom_code(mask='###'))
-        bic = country_code + code + bank_num + bank_office
+        bic = country_code + code + bank_number + bank_office
         return bic
