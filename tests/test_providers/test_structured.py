@@ -10,6 +10,7 @@ from ._patterns import STR_REGEX
 
 
 class TestStructured(object):
+
     @pytest.fixture
     def structured(self):
         return Structured()
@@ -65,37 +66,26 @@ class TestStructured(object):
 
 
 class TestSeededStructured(object):
-    TIMES = 5
 
     @pytest.fixture
-    def _structures(self, seed):
-        return Structured(seed=seed), Structured(seed=seed)
+    def s1(self, seed):
+        return Structured(seed=seed)
 
-    def test_css(self, _structures):
-        s1, s2 = _structures
-        for _ in range(self.TIMES):
-            assert s1.css() == s2.css()
+    @pytest.fixture
+    def s2(self, seed):
+        return Structured(seed=seed)
 
-    def test_css_property(self, _structures):
-        s1, s2 = _structures
-        for _ in range(self.TIMES):
-            assert s1.css_property() == s2.css_property()
+    def test_css(self, s1, s2):
+        assert s1.css() == s2.css()
 
-    def test_html_attribute_value(self, _structures):
-        s1, s2 = _structures
-        for _ in range(self.TIMES):
-            assert s1.html_attribute_value() == s2.html_attribute_value()
-            assert s1.html_attribute_value(tag='p', attribute='class') == \
-                s2.html_attribute_value(tag='p', attribute='class')
+    def test_css_property(self, s1, s2):
+        assert s1.css_property() == s2.css_property()
 
-    def test_html(self, _structures):
-        s1, s2 = _structures
-        for _ in range(self.TIMES):
-            assert s1.html() == s2.html()
+    def test_html_attribute_value(self, s1, s2):
+        assert s1.html_attribute_value() == s2.html_attribute_value()
 
-    def test_json(self, _structures):
-        s1, s2 = _structures
-        for _ in range(self.TIMES):
-            assert s1.json() == s2.json()
-            assert s1.json(items=2, max_depth=4, recursive=True) == \
-                s2.json(items=2, max_depth=4, recursive=True)
+    def test_html(self, s1, s2):
+        assert s1.html() == s2.html()
+
+    def test_json(self, s1, s2):
+        assert s1.json() == s2.json()

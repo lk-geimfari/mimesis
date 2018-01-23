@@ -12,6 +12,7 @@ def test_str_mixin():
 
 
 class TestBase(object):
+
     @pytest.fixture
     def base_data_provider(self):
         return BaseDataProvider()
@@ -39,7 +40,6 @@ class TestBase(object):
 
 
 class TestSeededBase(object):
-    TIMES = 5
 
     @pytest.fixture
     def _bases(self, seed):
@@ -47,5 +47,4 @@ class TestSeededBase(object):
 
     def test_base_random(self, _bases):
         b1, b2 = _bases
-        for _ in range(self.TIMES):
-            assert b1.random.randints() == b2.random.randints()
+        assert b1.random.randints() == b2.random.randints()

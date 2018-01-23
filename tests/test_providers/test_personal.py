@@ -14,6 +14,7 @@ from ._patterns import EMAIL_REGEX, STR_REGEX, USERNAME_REGEX
 
 
 class TestPersonal(object):
+
     @pytest.fixture
     def _personal(self):
         return Personal()
@@ -299,195 +300,101 @@ class TestPersonal(object):
 
 
 class TestSeededPersonal(object):
-    TIMES = 5
 
     @pytest.fixture
-    def _personals(self, seed):
-        return Personal(seed=seed), Personal(seed=seed)
+    def p1(self, seed):
+        return Personal(seed=seed)
 
-    def test_age(self, _personals):
-        p1, p2 = _personals
-        for _ in range(self.TIMES):
-            assert p1.age() == p2.age()
-            assert p1.age(minimum=12, maximum=42) == \
-                p2.age(minimum=12, maximum=42)
+    @pytest.fixture
+    def p2(self, seed):
+        return Personal(seed=seed)
 
-    def test_child_count(self, _personals):
-        p1, p2 = _personals
-        for _ in range(self.TIMES):
-            assert p1.child_count() == p2.child_count()
-            assert p1.child_count(max_childs=42) == \
-                p2.child_count(max_childs=42)
+    def test_age(self, p1, p2):
+        assert p1.age() == p2.age()
 
-    def test_work_experience(self, _personals):
-        p1, p2 = _personals
-        for _ in range(self.TIMES):
-            assert p1.work_experience() == p2.work_experience()
-            assert p1.work_experience(working_start_age=19) == \
-                p2.work_experience(working_start_age=19)
+    def test_child_count(self, p1, p2):
+        assert p1.child_count() == p2.child_count()
 
-    def test_password(self, _personals):
-        p1, p2 = _personals
-        for _ in range(self.TIMES):
-            assert p1.password() == p2.password()
-            assert p1.password(length=12, hashed=True) == \
-                p2.password(length=12, hashed=True)
+    def test_work_experience(self, p1, p2):
+        assert p1.work_experience() == p2.work_experience()
 
-    def test_username(self, _personals):
-        p1, p2 = _personals
-        for _ in range(self.TIMES):
-            assert p1.username() == p2.username()
-            assert p1.username(template='l_d') == p2.username(template='l_d')
+    def test_password(self, p1, p2):
+        assert p1.password() == p2.password()
 
-    def test_email(self, _personals):
-        p1, p2 = _personals
-        for _ in range(self.TIMES):
-            assert p1.email() == p2.email()
-            assert p1.email(domains=['@mimesis.io']) == \
-                p2.email(domains=['@mimesis.io'])
+    def test_username(self, p1, p2):
+        assert p1.username() == p2.username()
 
-    def test_height(self, _personals):
-        p1, p2 = _personals
-        for _ in range(self.TIMES):
-            assert p1.height() == p2.height()
-            assert p1.height(minimum=1.0, maximum=2.1) == \
-                p2.height(minimum=1.0, maximum=2.1)
+    def test_email(self, p1, p2):
+        assert p1.email() == p2.email()
 
-    def test_weight(self, _personals):
-        p1, p2 = _personals
-        for _ in range(self.TIMES):
-            assert p1.weight() == p2.weight()
-            assert p1.weight(minimum=16, maximum=42) == \
-                p2.weight(minimum=16, maximum=42)
+    def test_height(self, p1, p2):
+        assert p1.height() == p2.height()
 
-    def test_blood_type(self, _personals):
-        p1, p2 = _personals
-        for _ in range(self.TIMES):
-            assert p1.blood_type() == p2.blood_type()
+    def test_weight(self, p1, p2):
+        assert p1.weight() == p2.weight()
 
-    def test_favorite_movie(self, _personals):
-        p1, p2 = _personals
-        for _ in range(self.TIMES):
-            assert p1.favorite_movie() == p2.favorite_movie()
+    def test_blood_type(self, p1, p2):
+        assert p1.blood_type() == p2.blood_type()
 
-    def test_favorite_music_genre(self, _personals):
-        p1, p2 = _personals
-        for _ in range(self.TIMES):
-            assert p1.favorite_music_genre() == p2.favorite_music_genre()
+    def test_favorite_movie(self, p1, p2):
+        assert p1.favorite_movie() == p2.favorite_movie()
 
-    def test_social_media_profile(self, _personals):
-        p1, p2 = _personals
-        for _ in range(self.TIMES):
-            assert p1.social_media_profile() == p2.social_media_profile()
-            assert p1.social_media_profile(site=SocialNetwork.TWITTER) == \
-                p2.social_media_profile(site=SocialNetwork.TWITTER)
+    def test_favorite_music_genre(self, p1, p2):
+        assert p1.favorite_music_genre() == p2.favorite_music_genre()
 
-    def test_avatar(self, _personals):
-        p1, p2 = _personals
-        for _ in range(self.TIMES):
-            assert p1.avatar() == p2.avatar()
-            assert p1.avatar(size=64) == p2.avatar(size=64)
+    def test_social_media_profile(self, p1, p2):
+        assert p1.social_media_profile() == p2.social_media_profile()
 
-    def test_identifier(self, _personals):
-        p1, p2 = _personals
-        for _ in range(self.TIMES):
-            assert p1.identifier() == p2.identifier()
-            assert p1.identifier(mask='##_##') == p2.identifier(mask='##_##')
+    def test_avatar(self, p1, p2):
+        assert p1.avatar() == p2.avatar()
 
-    def test_level_of_english(self, _personals):
-        p1, p2 = _personals
-        for _ in range(self.TIMES):
-            assert p1.level_of_english() == p2.level_of_english()
+    def test_identifier(self, p1, p2):
+        assert p1.identifier() == p2.identifier()
 
-    def test_name(self, _personals):
-        p1, p2 = _personals
-        for _ in range(self.TIMES):
-            assert p1.name() == p2.name()
-            assert p1.name(gender=Gender.FEMALE) == \
-                p2.name(gender=Gender.FEMALE)
+    def test_level_of_english(self, p1, p2):
+        assert p1.level_of_english() == p2.level_of_english()
 
-    def test_telephone(self, _personals):
-        p1, p2 = _personals
-        for _ in range(self.TIMES):
-            assert p1.telephone() == p2.telephone()
-            assert p1.telephone(mask='(x)-xx-xxx', placeholder='x') == \
-                p2.telephone(mask='(x)-xx-xxx', placeholder='x')
+    def test_name(self, p1, p2):
+        assert p1.name() == p2.name()
 
-    def test_surname(self, _personals):
-        p1, p2 = _personals
-        for _ in range(self.TIMES):
-            assert p1.surname() == p2.surname()
-            assert p1.surname(gender=Gender.MALE) == \
-                p2.surname(gender=Gender.MALE)
+    def test_telephone(self, p1, p2):
+        assert p1.telephone() == p2.telephone()
 
-    def test_full_name(self, _personals):
-        p1, p2 = _personals
-        for _ in range(self.TIMES):
-            assert p1.full_name() == p2.full_name()
-            assert p1.full_name(gender=Gender.FEMALE, reverse=True) == \
-                p2.full_name(gender=Gender.FEMALE, reverse=True)
+    def test_surname(self, p1, p2):
+        assert p1.surname() == p2.surname()
 
-    def test_gender(self, _personals):
-        p1, p2 = _personals
-        for _ in range(self.TIMES):
-            assert p1.gender() == p2.gender()
-            assert p1.gender(iso5218=True, symbol=True) == \
-                p2.gender(iso5218=True, symbol=True)
+    def test_full_name(self, p1, p2):
+        assert p1.full_name() == p2.full_name()
 
-    def test_sexual_orientation(self, _personals):
-        p1, p2 = _personals
-        for _ in range(self.TIMES):
-            assert p1.sexual_orientation() == p2.sexual_orientation()
-            assert p1.sexual_orientation(symbol=True) == \
-                p2.sexual_orientation(symbol=True)
+    def test_gender(self, p1, p2):
+        assert p1.gender() == p2.gender()
 
-    def test_occupation(self, _personals):
-        p1, p2 = _personals
-        for _ in range(self.TIMES):
-            assert p1.occupation() == p2.occupation()
+    def test_sexual_orientation(self, p1, p2):
+        assert p1.sexual_orientation() == p2.sexual_orientation()
 
-    def test_university(self, _personals):
-        p1, p2 = _personals
-        for _ in range(self.TIMES):
-            assert p1.university() == p2.university()
+    def test_occupation(self, p1, p2):
+        assert p1.occupation() == p2.occupation()
 
-    def test_academic_degree(self, _personals):
-        p1, p2 = _personals
-        for _ in range(self.TIMES):
-            assert p1.academic_degree() == p2.academic_degree()
+    def test_university(self, p1, p2):
+        assert p1.university() == p2.university()
 
-    def test_language(self, _personals):
-        p1, p2 = _personals
-        for _ in range(self.TIMES):
-            assert p1.language() == p2.language()
+    def test_academic_degree(self, p1, p2):
+        assert p1.academic_degree() == p2.academic_degree()
 
-    def test_worldview(self, _personals):
-        p1, p2 = _personals
-        for _ in range(self.TIMES):
-            assert p1.worldview() == p2.worldview()
+    def test_language(self, p1, p2):
+        assert p1.language() == p2.language()
 
-    def test_views_on(self, _personals):
-        p1, p2 = _personals
-        for _ in range(self.TIMES):
-            assert p1.views_on() == p2.views_on()
+    def test_worldview(self, p1, p2):
+        assert p1.worldview() == p2.worldview()
 
-    def test_political_views(self, _personals):
-        p1, p2 = _personals
-        for _ in range(self.TIMES):
-            assert p1.political_views() == p2.political_views()
+    def test_views_on(self, p1, p2):
+        assert p1.views_on() == p2.views_on()
 
-    def test_title(self, _personals):
-        p1, p2 = _personals
-        for _ in range(self.TIMES):
-            assert p1.title() == p2.title()
-            assert p1.title(gender=Gender.FEMALE,
-                            title_type=TitleType.TYPICAL) == \
-                p2.title(gender=Gender.FEMALE,
-                         title_type=TitleType.TYPICAL)
+    def test_political_views(self, p1, p2):
+        assert p1.political_views() == p2.political_views()
 
-    def test_nationality(self, _personals):
-        p1, p2 = _personals
-        for _ in range(self.TIMES):
-            assert p1.nationality() == p2.nationality()
-            assert p1.nationality(gender=Gender.FEMALE) == \
-                p2.nationality(gender=Gender.FEMALE)
+    def test_title(self, p1, p2):
+        assert p1.title() == p2.title()
+
+    def test_nationality(self, p1, p2):
+        assert p1.nationality() == p2.nationality()

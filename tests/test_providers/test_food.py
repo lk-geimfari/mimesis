@@ -9,6 +9,7 @@ from ._patterns import STR_REGEX
 
 
 class TestFood(object):
+
     def test_str(self, food):
         assert re.match(STR_REGEX, str(food))
 
@@ -34,33 +35,26 @@ class TestFood(object):
 
 
 class TestSeededFood(object):
-    TIMES = 5
 
     @pytest.fixture
-    def _foods(self, seed):
-        return Food(seed=seed), Food(seed=seed)
+    def fd1(self, seed):
+        return Food(seed=seed)
 
-    def test_vegetable(self, _foods):
-        f1, f2 = _foods
-        for _ in range(self.TIMES):
-            assert f1.vegetable() == f2.vegetable()
+    @pytest.fixture
+    def fd2(self, seed):
+        return Food(seed=seed)
 
-    def test_fruit(self, _foods):
-        f1, f2 = _foods
-        for _ in range(self.TIMES):
-            assert f1.fruit() == f2.fruit()
+    def test_vegetable(self, fd1, fd2):
+        assert fd1.vegetable() == fd2.vegetable()
 
-    def test_dish(self, _foods):
-        f1, f2 = _foods
-        for _ in range(self.TIMES):
-            assert f1.dish() == f2.dish()
+    def test_fruit(self, fd1, fd2):
+        assert fd1.fruit() == fd2.fruit()
 
-    def test_drink(self, _foods):
-        f1, f2 = _foods
-        for _ in range(self.TIMES):
-            assert f1.drink() == f2.drink()
+    def test_dish(self, fd1, fd2):
+        assert fd1.dish() == fd2.dish()
 
-    def test_spices(self, _foods):
-        f1, f2 = _foods
-        for _ in range(self.TIMES):
-            assert f1.spices() == f2.spices()
+    def test_drink(self, fd1, fd2):
+        assert fd1.drink() == fd2.drink()
+
+    def test_spices(self, fd1, fd2):
+        assert fd1.spices() == fd2.spices()

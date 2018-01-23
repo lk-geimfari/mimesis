@@ -12,6 +12,7 @@ from . import _patterns as p
 
 
 class TestInternet(object):
+
     @pytest.fixture
     def net(self):
         return Internet()
@@ -164,123 +165,68 @@ class TestInternet(object):
 
 
 class TestSeededInternet(object):
-    TIMES = 5
 
     @pytest.fixture
-    def _internets(self, seed):
-        return Internet(seed=seed), Internet(seed=seed)
+    def i1(self, seed):
+        return Internet(seed=seed)
 
-    def test_emoji(self, _internets):
-        i1, i2 = _internets
-        for _ in range(self.TIMES):
-            assert i1.emoji() == i2.emoji()
+    @pytest.fixture
+    def i2(self, seed):
+        return Internet(seed=seed)
 
-    def test_hashtags(self, _internets):
-        i1, i2 = _internets
-        for _ in range(self.TIMES):
-            assert i1.hashtags() == i2.hashtags()
-            assert i1.hashtags(quantity=7) == i2.hashtags(quantity=7)
+    def test_emoji(self, i1, i2):
+        assert i1.emoji() == i2.emoji()
 
-    def test_home_page(self, _internets):
-        i1, i2 = _internets
-        for _ in range(self.TIMES):
-            assert i1.home_page() == i2.home_page()
-            assert i1.home_page(tld_type=TLDType.GEOTLD) == \
-                i2.home_page(tld_type=TLDType.GEOTLD)
+    def test_hashtags(self, i1, i2):
+        assert i1.hashtags() == i2.hashtags()
 
-    def test_subreddit(self, _internets):
-        i1, i2 = _internets
-        for _ in range(self.TIMES):
-            assert i1.subreddit() == i2.subreddit()
-            assert i1.subreddit(nsfw=True, full_url=True) == \
-                i2.subreddit(nsfw=True, full_url=True)
+    def test_home_page(self, i1, i2):
+        assert i1.home_page() == i2.home_page()
 
-    def test_user_agent(self, _internets):
-        i1, i2 = _internets
-        for _ in range(self.TIMES):
-            assert i1.user_agent() == i2.user_agent()
+    def test_subreddit(self, i1, i2):
+        assert i1.subreddit() == i2.subreddit()
 
-    def test_image_placeholder(self, _internets):
-        i1, i2 = _internets
-        for _ in range(self.TIMES):
-            assert i1.image_placeholder() == i2.image_placeholder()
-            assert i1.image_placeholder(width=128, height=128) == \
-                i2.image_placeholder(width=128, height=128)
+    def test_user_agent(self, i1, i2):
+        assert i1.user_agent() == i2.user_agent()
 
-    def test_stock_image(self, _internets):
-        i1, i2 = _internets
-        for _ in range(self.TIMES):
-            assert i1.stock_image() == i2.stock_image()
-            assert i1.stock_image(category='space', width=128, height=128) == \
-                i2.stock_image(category='space', width=128, height=128)
+    def test_image_placeholder(self, i1, i2):
+        assert i1.image_placeholder() == i2.image_placeholder()
 
-    def test_image_by_keyword(self, _internets):
-        i1, i2 = _internets
-        for _ in range(self.TIMES):
-            assert i1.image_by_keyword() == i2.image_by_keyword()
-            assert i1.image_by_keyword(keyword='food') == \
-                i2.image_by_keyword(keyword='food')
+    def test_stock_image(self, i1, i2):
+        assert i1.stock_image() == i2.stock_image()
 
-    def test_network_protocol(self, _internets):
-        i1, i2 = _internets
-        for _ in range(self.TIMES):
-            assert i1.network_protocol() == i2.network_protocol()
-            assert i1.network_protocol(layer=Layer.PHYSICAL) == \
-                i2.network_protocol(layer=Layer.PHYSICAL)
+    def test_image_by_keyword(self, i1, i2):
+        assert i1.image_by_keyword() == i2.image_by_keyword()
 
-    def test_ip_v4(self, _internets):
-        i1, i2 = _internets
-        for _ in range(self.TIMES):
-            assert i1.ip_v4() == i2.ip_v4()
-            assert i1.ip_v4(with_port=True) == i2.ip_v4(with_port=True)
+    def test_network_protocol(self, i1, i2):
+        assert i1.network_protocol() == i2.network_protocol()
 
-    def test_ip_v6(self, _internets):
-        i1, i2 = _internets
-        for _ in range(self.TIMES):
-            assert i1.ip_v6() == i2.ip_v6()
+    def test_ip_v4(self, i1, i2):
+        assert i1.ip_v4() == i2.ip_v4()
 
-    def test_mac_address(self, _internets):
-        i1, i2 = _internets
-        for _ in range(self.TIMES):
-            assert i1.mac_address() == i2.mac_address()
+    def test_ip_v6(self, i1, i2):
+        assert i1.ip_v6() == i2.ip_v6()
 
-    def test_http_method(self, _internets):
-        i1, i2 = _internets
-        for _ in range(self.TIMES):
-            assert i1.http_method() == i2.http_method()
+    def test_mac_address(self, i1, i2):
+        assert i1.mac_address() == i2.mac_address()
 
-    def test_content_type(self, _internets):
-        i1, i2 = _internets
-        for _ in range(self.TIMES):
-            assert i1.content_type() == i2.content_type()
-            assert i1.content_type(mime_type=MimeType.APPLICATION) == \
-                i2.content_type(mime_type=MimeType.APPLICATION)
+    def test_http_method(self, i1, i2):
+        assert i1.http_method() == i2.http_method()
 
-    def test_http_status_code(self, _internets):
-        i1, i2 = _internets
-        for _ in range(self.TIMES):
-            assert i1.http_status_code() == i2.http_status_code()
+    def test_content_type(self, i1, i2):
+        assert i1.content_type() == i2.content_type()
 
-    def test_http_status_message(self, _internets):
-        i1, i2 = _internets
-        for _ in range(self.TIMES):
-            assert i1.http_status_message() == i2.http_status_message()
+    def test_http_status_code(self, i1, i2):
+        assert i1.http_status_code() == i2.http_status_code()
 
-    def test_top_level_domain(self, _internets):
-        i1, i2 = _internets
-        for _ in range(self.TIMES):
-            assert i1.top_level_domain() == i2.top_level_domain()
-            assert i1.top_level_domain(tld_type=TLDType.UTLD) == \
-                i2.top_level_domain(tld_type=TLDType.UTLD)
+    def test_http_status_message(self, i1, i2):
+        assert i1.http_status_message() == i2.http_status_message()
 
-    def test_port(self, _internets):
-        i1, i2 = _internets
-        for _ in range(self.TIMES):
-            assert i1.port() == i2.port()
-            assert i1.port(port_range=PortRange.REGISTERED) == \
-                i2.port(port_range=PortRange.REGISTERED)
+    def test_top_level_domain(self, i1, i2):
+        assert i1.top_level_domain() == i2.top_level_domain()
 
-    def test_category_of_website(self, _internets):
-        i1, i2 = _internets
-        for _ in range(self.TIMES):
-            assert i1.category_of_website() == i2.category_of_website()
+    def test_port(self, i1, i2):
+        assert i1.port() == i2.port()
+
+    def test_category_of_website(self, i1, i2):
+        assert i1.category_of_website() == i2.category_of_website()

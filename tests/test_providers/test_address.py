@@ -149,80 +149,53 @@ class TestAddress(object):
 
 
 class TestSeededAddress(object):
-    TIMES = 5
 
     @pytest.fixture
-    def _addresses(self, seed):
-        return Address(seed=seed), Address(seed=seed)
+    def a1(self, seed):
+        return Address(seed=seed)
 
-    def test_street_number(self, _addresses):
-        a1, a2 = _addresses
-        for _ in range(self.TIMES):
-            assert a1.street_number() == a2.street_number()
+    @pytest.fixture
+    def a2(self, seed):
+        return Address(seed=seed)
 
-    def test_latitude(self, _addresses):
-        a1, a2 = _addresses
-        for _ in range(self.TIMES):
-            assert a1.latitude() == a2.latitude()
+    def test_street_number(self, a1, a2):
+        assert a1.street_number() == a2.street_number()
 
-    def test_longitude(self, _addresses):
-        a1, a2 = _addresses
-        for _ in range(self.TIMES):
-            assert a1.longitude() == a2.longitude()
+    def test_latitude(self, a1, a2):
+        assert a1.latitude() == a2.latitude()
 
-    def test_coordinates(self, _addresses):
-        a1, a2 = _addresses
-        for _ in range(self.TIMES):
-            assert a1.coordinates() == a2.coordinates()
+    def test_longitude(self, a1, a2):
+        assert a1.longitude() == a2.longitude()
 
-    def test_street_name(self, _addresses):
-        a1, a2 = _addresses
-        for _ in range(self.TIMES):
-            assert a1.street_name() == a2.street_name()
+    def test_coordinates(self, a1, a2):
+        assert a1.coordinates() == a2.coordinates()
 
-    def test_street_suffix(self, _addresses):
-        a1, a2 = _addresses
-        for _ in range(self.TIMES):
-            assert a1.street_suffix() == a2.street_suffix()
+    def test_street_name(self, a1, a2):
+        assert a1.street_name() == a2.street_name()
 
-    def test_address(self, _addresses):
-        a1, a2 = _addresses
-        for _ in range(self.TIMES):
-            assert a1.address() == a2.address()
+    def test_street_suffix(self, a1, a2):
+        assert a1.street_suffix() == a2.street_suffix()
 
-    def test_state(self, _addresses):
-        a1, a2 = _addresses
-        for _ in range(self.TIMES):
-            assert a1.state() == a2.state()
-            assert a1.state(abbr=True) == a2.state(abbr=True)
+    def test_address(self, a1, a2):
+        assert a1.address() == a2.address()
 
-    def test_postal_code(self, _addresses):
-        a1, a2 = _addresses
-        for _ in range(self.TIMES):
-            assert a1.postal_code() == a2.postal_code()
+    def test_state(self, a1, a2):
+        assert a1.state() == a2.state()
 
-    def test_country(self, _addresses):
-        a1, a2 = _addresses
-        for _ in range(self.TIMES):
-            assert a1.country() == a2.country()
+    def test_postal_code(self, a1, a2):
+        assert a1.postal_code() == a2.postal_code()
 
-    def test_country_iso(self, _addresses):
-        a1, a2 = _addresses
-        for _ in range(self.TIMES):
-            assert a1.country_iso_code() == a2.country_iso_code()
+    def test_country(self, a1, a2):
+        assert a1.country() == a2.country()
 
-    def test_city(self, _addresses):
-        a1, a2 = _addresses
-        for _ in range(self.TIMES):
-            assert a1.city() == a2.city()
+    def test_country_iso(self, a1, a2):
+        assert a1.country_iso_code() == a2.country_iso_code()
 
-    def test_continent(self, _addresses):
-        a1, a2 = _addresses
-        for _ in range(self.TIMES):
-            assert a1.continent() == a2.continent()
-            assert a1.continent(code=True) == a2.continent(code=True)
+    def test_city(self, a1, a2):
+        assert a1.city() == a2.city()
 
-    def test_calling_code(self, _addresses):
-        a1, a2 = _addresses
-        for _ in range(self.TIMES):
-            assert a1.calling_code() == a2.calling_code()
+    def test_continent(self, a1, a2):
+        assert a1.continent() == a2.continent()
+
+    def test_calling_code(self, a1, a2):
+        assert a1.calling_code() == a2.calling_code()

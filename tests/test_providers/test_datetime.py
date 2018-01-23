@@ -11,6 +11,7 @@ from ._patterns import STR_REGEX
 
 
 class TestDatetime(object):
+
     @pytest.fixture
     def _datetime(self):
         return Datetime()
@@ -122,84 +123,50 @@ class TestDatetime(object):
 
 
 class TestSeededDatetime(object):
-    TIMES = 5
 
     @pytest.fixture
-    def _datetimes(self, seed):
-        return Datetime(seed=seed), Datetime(seed=seed)
+    def d1(self, seed):
+        return Datetime(seed=seed)
 
-    def test_year(self, _datetimes):
-        d1, d2 = _datetimes
-        for _ in range(self.TIMES):
-            assert d1.year() == d2.year()
-            assert d1.year(minimum=1942, maximum=2048) == \
-                d2.year(minimum=1942, maximum=2048)
+    @pytest.fixture
+    def d2(self, seed):
+        return Datetime(seed=seed)
 
-    def test_gmt_offset(self, _datetimes):
-        d1, d2 = _datetimes
-        for _ in range(self.TIMES):
-            assert d1.gmt_offset() == d2.gmt_offset()
+    def test_year(self, d1, d2):
+        assert d1.year() == d2.year()
 
-    def test_day_of_month(self, _datetimes):
-        d1, d2 = _datetimes
-        for _ in range(self.TIMES):
-            assert d1.day_of_month() == d2.day_of_month()
+    def test_gmt_offset(self, d1, d2):
+        assert d1.gmt_offset() == d2.gmt_offset()
 
-    def test_date(self, _datetimes):
-        d1, d2 = _datetimes
-        for _ in range(self.TIMES):
-            assert d1.date() == d2.date()
-            assert d1.date(start=1024, end=2048, fmt='%m/%d/%Y') == \
-                d2.date(start=1024, end=2048, fmt='%m/%d/%Y')
+    def test_day_of_month(self, d1, d2):
+        assert d1.day_of_month() == d2.day_of_month()
 
-    def test_time(self, _datetimes):
-        d1, d2 = _datetimes
-        for _ in range(self.TIMES):
-            assert d1.time() == d2.time()
-            assert d1.time(fmt='%H:%M') == d2.time(fmt='%H:%M')
+    def test_date(self, d1, d2):
+        assert d1.date() == d2.date()
 
-    def test_century(self, _datetimes):
-        d1, d2 = _datetimes
-        for _ in range(self.TIMES):
-            assert d1.century() == d2.century()
+    def test_time(self, d1, d2):
+        assert d1.time() == d2.time()
 
-    def test_day_of_week(self, _datetimes):
-        d1, d2 = _datetimes
-        for _ in range(self.TIMES):
-            assert d1.day_of_week() == d2.day_of_week()
-            assert d1.day_of_week(abbr=True) == d2.day_of_week(abbr=True)
+    def test_century(self, d1, d2):
+        assert d1.century() == d2.century()
 
-    def test_month(self, _datetimes):
-        d1, d2 = _datetimes
-        for _ in range(self.TIMES):
-            assert d1.month() == d2.month()
-            assert d1.month(abbr=True) == d2.month(abbr=True)
+    def test_day_of_week(self, d1, d2):
+        assert d1.day_of_week() == d2.day_of_week()
 
-    def test_periodicity(self, _datetimes):
-        d1, d2 = _datetimes
-        for _ in range(self.TIMES):
-            assert d1.periodicity() == d2.periodicity()
+    def test_month(self, d1, d2):
+        assert d1.month() == d2.month()
 
-    def test_timezone(self, _datetimes):
-        d1, d2 = _datetimes
-        for _ in range(self.TIMES):
-            assert d1.timezone() == d2.timezone()
+    def test_periodicity(self, d1, d2):
+        assert d1.periodicity() == d2.periodicity()
 
-    def test_timestamp(self, _datetimes):
-        d1, d2 = _datetimes
-        for _ in range(self.TIMES):
-            assert d1.timestamp() == d2.timestamp()
-            assert d1.timestamp(posix=False) == d2.timestamp(posix=False)
+    def test_timezone(self, d1, d2):
+        assert d1.timezone() == d2.timezone()
 
-    def test_datetime(self, _datetimes):
-        d1, d2 = _datetimes
-        for _ in range(self.TIMES):
-            assert d1.datetime() == d2.datetime()
-            assert d1.datetime(humanized=True) == d2.datetime(humanized=True)
+    def test_timestamp(self, d1, d2):
+        assert d1.timestamp() == d2.timestamp()
 
-    def test_week_date(self, _datetimes):
-        d1, d2 = _datetimes
-        for _ in range(self.TIMES):
-            assert d1.week_date() == d2.week_date()
-            assert d1.week_date(start=2007, end=2018) == \
-                d2.week_date(start=2007, end=2018)
+    def test_datetime(self, d1, d2):
+        assert d1.datetime() == d2.datetime()
+
+    def test_week_date(self, d1, d2):
+        assert d1.week_date() == d2.week_date()

@@ -5,6 +5,7 @@ from mimesis.data import GAMES, GAMING_PLATFORMS, GENRES, SCORE_PHRASES
 
 
 class TestGames(object):
+
     @pytest.fixture
     def games(self):
         return Games()
@@ -37,38 +38,29 @@ class TestGames(object):
 
 
 class TestSeededGames(object):
-    TIMES = 5
 
     @pytest.fixture
-    def _gameses(self, seed):
-        return Games(seed=seed), Games(seed=seed)
+    def g1(self, seed):
+        return Games(seed=seed)
 
-    def test_gaming_platform(self, _gameses):
-        g1, g2 = _gameses
-        for _ in range(self.TIMES):
-            assert g1.gaming_platform() == g2.gaming_platform()
+    @pytest.fixture
+    def g2(self, seed):
+        return Games(seed=seed)
 
-    def test_score(self, _gameses):
-        g1, g2 = _gameses
-        for _ in range(self.TIMES):
-            assert g1.score() == g2.score()
+    def test_gaming_platform(self, g1, g2):
+        assert g1.gaming_platform() == g2.gaming_platform()
 
-    def test_pegi_rating(self, _gameses):
-        g1, g2 = _gameses
-        for _ in range(self.TIMES):
-            assert g1.pegi_rating() == g2.pegi_rating()
+    def test_score(self, g1, g2):
+        assert g1.score() == g2.score()
 
-    def test_genre(self, _gameses):
-        g1, g2 = _gameses
-        for _ in range(self.TIMES):
-            assert g1.genre() == g2.genre()
+    def test_pegi_rating(self, g1, g2):
+        assert g1.pegi_rating() == g2.pegi_rating()
 
-    def test_score_phrase(self, _gameses):
-        g1, g2 = _gameses
-        for _ in range(self.TIMES):
-            assert g1.score_phrase() == g2.score_phrase()
+    def test_genre(self, g1, g2):
+        assert g1.genre() == g2.genre()
 
-    def test_game(self, _gameses):
-        g1, g2 = _gameses
-        for _ in range(self.TIMES):
-            assert g1.game() == g2.game()
+    def test_score_phrase(self, g1, g2):
+        assert g1.score_phrase() == g2.score_phrase()
+
+    def test_game(self, g1, g2):
+        assert g1.game() == g2.game()

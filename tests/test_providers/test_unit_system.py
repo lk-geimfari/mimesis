@@ -9,6 +9,7 @@ from mimesis.exceptions import NonEnumerableError
 
 
 class TestUnitSystem(object):
+
     @pytest.fixture
     def us(self):
         return UnitSystem()
@@ -19,7 +20,8 @@ class TestUnitSystem(object):
             UnitName.INFORMATION,
             UnitName.THERMODYNAMIC_TEMPERATURE,
             UnitName.AMOUNT_OF_SUBSTANCE,
-            UnitName.ANGLE, UnitName.SOLID_ANGLE,
+            UnitName.ANGLE,
+            UnitName.SOLID_ANGLE,
             UnitName.FREQUENCY,
             UnitName.FORCE,
             UnitName.PRESSURE,
@@ -60,22 +62,17 @@ class TestUnitSystem(object):
 
 
 class TestSeededUnitSystem(object):
-    TIMES = 5
 
     @pytest.fixture
-    def _unit_systems(self, seed):
-        return UnitSystem(seed=seed), UnitSystem(seed=seed)
+    def us1(self, seed):
+        return UnitSystem(seed=seed)
 
-    def test_unit(self, _unit_systems):
-        us1, us2 = _unit_systems
-        for _ in range(self.TIMES):
-            assert us1.unit() == us2.unit()
-            assert us1.unit(name=UnitName.ANGLE, symbol=True) == \
-                us2.unit(name=UnitName.ANGLE, symbol=True)
+    @pytest.fixture
+    def us2(self, seed):
+        return UnitSystem(seed=seed)
 
-    def test_prefix(self, _unit_systems):
-        us1, us2 = _unit_systems
-        for _ in range(self.TIMES):
-            assert us1.prefix() == us2.prefix()
-            assert us1.prefix(sign=PrefixSign.POSITIVE, symbol=True) == \
-                us2.prefix(sign=PrefixSign.POSITIVE, symbol=True)
+    def test_unit(self, us1, us2):
+        assert us1.unit() == us2.unit()
+
+    def test_prefix(self, us1, us2):
+        assert us1.prefix() == us2.prefix()

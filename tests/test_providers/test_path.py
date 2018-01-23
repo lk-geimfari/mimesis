@@ -8,6 +8,7 @@ from mimesis.data import FOLDERS, PROGRAMMING_LANGS, PROJECT_NAMES
 
 
 class TestPath(object):
+
     def test_root(self, path):
         result = path.root()
         assert 'C:\\', '/' == result
@@ -57,38 +58,29 @@ class TestPath(object):
 
 
 class TestSeededPath(object):
-    TIMES = 5
 
     @pytest.fixture
-    def _paths(self, seed):
-        return Path(seed=seed), Path(seed=seed)
+    def p1(self, seed):
+        return Path(seed=seed)
 
-    def test_root(self, _paths):
-        p1, p2 = _paths
-        for _ in range(self.TIMES):
-            assert p1.root() == p2.root()
+    @pytest.fixture
+    def p2(self, seed):
+        return Path(seed=seed)
 
-    def test_home(self, _paths):
-        p1, p2 = _paths
-        for _ in range(self.TIMES):
-            assert p1.home() == p2.home()
+    def test_root(self, p1, p2):
+        assert p1.root() == p2.root()
 
-    def test_user(self, _paths):
-        p1, p2 = _paths
-        for _ in range(self.TIMES):
-            assert p1.user() == p2.user()
+    def test_home(self, p1, p2):
+        assert p1.home() == p2.home()
 
-    def test_users_folder(self, _paths):
-        p1, p2 = _paths
-        for _ in range(self.TIMES):
-            assert p1.users_folder() == p2.users_folder()
+    def test_user(self, p1, p2):
+        assert p1.user() == p2.user()
 
-    def test_dev_dir(self, _paths):
-        p1, p2 = _paths
-        for _ in range(self.TIMES):
-            assert p1.dev_dir() == p2.dev_dir()
+    def test_users_folder(self, p1, p2):
+        assert p1.users_folder() == p2.users_folder()
 
-    def test_project_dir(self, _paths):
-        p1, p2 = _paths
-        for _ in range(self.TIMES):
-            assert p1.project_dir() == p2.project_dir()
+    def test_dev_dir(self, p1, p2):
+        assert p1.dev_dir() == p2.dev_dir()
+
+    def test_project_dir(self, p1, p2):
+        assert p1.project_dir() == p2.project_dir()
