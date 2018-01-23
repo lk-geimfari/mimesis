@@ -71,3 +71,8 @@ def test_inn(russia):
 def test_ogrn(russia):
     result = russia.ogrn()
     assert len(result) == 13
+
+
+def test_bic(russia):
+    result = russia.bic()
+    assert len(result) == 9

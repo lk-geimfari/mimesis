@@ -141,3 +141,14 @@ class RussiaSpecProvider(BaseSpecProvider):
         check_sum = str(int(ogrn) % 11 % 10)
 
         return (ogrn + check_sum)
+
+    def bic(self) -> str:
+        """Generate random ``BIC`` (Bank ID Code).
+
+        :return: BIC.
+
+        :Example:
+            044025575.
+        """
+        mask = '04#######'
+        return self.random.custom_code(mask=mask)
