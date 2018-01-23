@@ -66,3 +66,8 @@ def test_inn(russia):
     result = russia.inn()
     assert isinstance(result, str)
     assert result is not None
+
+
+def test_ogrn(russia):
+    result = russia.ogrn()
+    assert len(result) == 13
