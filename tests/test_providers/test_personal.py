@@ -193,6 +193,8 @@ class TestPersonal(object):
         else:
             result = personal.surname()
             assert result in surnames
+            result = personal.last_name()
+            assert result in surnames
 
     @pytest.mark.parametrize(
         'gender', [
@@ -362,6 +364,9 @@ class TestSeededPersonal(object):
 
     def test_surname(self, p1, p2):
         assert p1.surname() == p2.surname()
+
+    def test_last_name(self, p1, p2):
+        assert p1.last_name() == p2.last_name()
 
     def test_full_name(self, p1, p2):
         assert p1.full_name() == p2.full_name()
