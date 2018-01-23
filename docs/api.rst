@@ -266,6 +266,12 @@ UnitSystem
 Schema
 =======
 
+AbstractField
+-------------
+
+.. autoclass:: mimesis.schema.AbstractField
+   :members:
+
 Field
 ------
 

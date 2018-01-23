@@ -11,5 +11,6 @@ from .int.path import *
 from .int.personal import *
 from .int.payment import *
 from .int.scientific import *
+from .int.text import *
 from .int.transport import *
 from .int.games import *

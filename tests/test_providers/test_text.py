@@ -4,6 +4,7 @@ import re
 import pytest
 
 from mimesis import Text
+from mimesis.data import SAFE_COLORS
 
 from ._patterns import HEX_COLOR, STR_REGEX
 
@@ -16,9 +17,31 @@ class TestText(object):
     def test_str(self, text):
         assert re.match(STR_REGEX, str(text))
 
-    def test_hex_color(self, _text):
-        result = _text.hex_color()
+    def test_hex_to_rgb(self, _text):
+        color = _text.hex_color()
+        rgb = _text._hex_to_rgb(color)
+        assert isinstance(rgb, tuple)
+
+    @pytest.mark.parametrize(
+        'safe', [
+            True,
+            False,
+        ],
+    )
+    def test_hex_color(self, _text, safe):
+        result = _text.hex_color(safe=safe)
         assert re.match(HEX_COLOR, result)
+        assert result in SAFE_COLORS if safe else result
+
+    @pytest.mark.parametrize(
+        'safe', [
+            True,
+            False,
+        ],
+    )
+    def test_rgb_color(self, _text, safe):
+        result = _text.rgb_color(safe=safe)
+        assert isinstance(result, tuple)
 
     @pytest.mark.parametrize(
         'case', [
@@ -90,6 +113,13 @@ class TestSeededText(object):
         t1, t2 = _texts
         for _ in range(self.TIMES):
             assert t1.hex_color() == t2.hex_color()
+            assert t1.hex_color(safe=True) == t2.hex_color(True)
+
+    def test_rgb_color(self, _texts):
+        t1, t2 = _texts
+        for _ in range(self.TIMES):
+            assert t1.rgb_color() == t2.rgb_color()
+            assert t1.rgb_color(safe=True) == t2.rgb_color(safe=True)
 
     def test_alphabet(self, _texts):
         t1, t2 = _texts
