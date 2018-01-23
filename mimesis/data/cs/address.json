@@ -195,6 +195,16 @@
     "Český Krumlov",
     "Čáslav"
   ],
+  "coordinates": {
+    "lat": [
+      48.73881,
+      51.00369
+    ],
+    "long": [
+      12.19499,
+      18.76458
+    ]
+  },
   "continent": [
     "Afrika",
     "Amerika",

@@ -135,6 +135,16 @@
     "Zottegem",
     "Zoutleeuw"
   ],
+  "coordinates": {
+    "lat": [
+      49.56652,
+      51.46791
+    ],
+    "long": [
+      2.59368,
+      6.25749
+    ]
+  },
   "state": {
     "name": [
       "Antwerpen",

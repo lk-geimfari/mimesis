@@ -261,6 +261,16 @@
     "Zürich",
     "Échallens"
   ],
+  "coordinates": {
+    "lat": [
+      45.83203,
+      47.69732
+    ],
+    "long": [
+      6.07544,
+      9.83723
+    ]
+  },
   "postal_code_fmt": "####",
   "state": {
     "abbr": [

@@ -917,6 +917,16 @@
     "Żyrardów",
     "Żywiec"
   ],
+  "coordinates": {
+    "lat": [
+      49.29899,
+      54.79086
+    ],
+    "long": [
+      14.24712,
+      23.89251
+    ]
+  },
   "country": {
     "name": [
       "Afganistan",

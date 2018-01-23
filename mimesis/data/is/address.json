@@ -109,6 +109,16 @@
     "Þorlákshöfn",
     "Þórshöfn"
   ],
+  "coordinates": {
+    "lat": [
+      63.93311,
+      66.07475
+    ],
+    "long": [
+      -23.13498,
+      -14.39484
+    ]
+  },
   "country": {
     "name": [
       "Afganistan",

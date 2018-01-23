@@ -203,6 +203,16 @@
     "Évora",
     "Ílhavo"
   ],
+  "coordinates": {
+    "lat": [
+      32.63333,
+      42.07892
+    ],
+    "long": [
+      -28.7,
+      -6.75719
+    ]
+  },
   "country": {
     "name": [
       "Afeganistão",

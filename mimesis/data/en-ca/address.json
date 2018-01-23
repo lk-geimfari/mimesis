@@ -1,5 +1,15 @@
 {
   "address_fmt": "{st_num} {st_name} {st_sfx}",
+  "coordinates": {
+    "lat": [
+      42.11679,
+      63.74697
+    ],
+    "long": [
+      -135.05375,
+      -52.70931
+    ]
+  },
   "state": {
     "name": [
       "Alberta",

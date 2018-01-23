@@ -83,6 +83,16 @@
     "Osmaniye",
     "Düzce"
   ],
+  "coordinates": {
+    "lat": [
+      35.9025,
+      42.02683
+    ],
+    "long": [
+      25.90902,
+      44.5742
+    ]
+  },
   "country": {
     "name": [
       "Afganistan",

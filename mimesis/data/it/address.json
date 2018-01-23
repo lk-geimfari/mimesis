@@ -146,6 +146,16 @@
     "Viterbo",
     "Vittoria"
   ],
+  "coordinates": {
+    "lat": [
+      36.71703,
+      46.99623
+    ],
+    "long": [
+      7.05809,
+      18.37819
+    ]
+  },
   "country": {
     "name": [
       "Afghanistan",
