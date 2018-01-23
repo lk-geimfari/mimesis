@@ -124,3 +124,35 @@ class RussiaSpecProvider(BaseSpecProvider):
         n1 = control_sum(numbers, 'n1')
         numbers.append(n1)
         return ''.join([str(x) for x in numbers])
+
+    def ogrn(self) -> str:
+        """Generate random valid ``OGRN``.
+
+        :return: OGRN.
+
+        :Example:
+            4715113303725.
+        """
+        numbers = []
+        for _ in range(0, 12):
+            numbers.append(self.random.randint(1 if _ == 0 else 0, 9))
+
+        ogrn = ''.join([str(x) for x in numbers])
+        check_sum = str(int(ogrn) % 11 % 10)
+
+        return (ogrn + check_sum)
+
+    def bic(self) -> str:
+        """Generate random ``BIC`` (Bank ID Code).
+
+        :return: BIC.
+
+        :Example:
+            044025575.
+        """
+        country_code = '04'
+        code =  str(self.random.custom_code(mask='##'))
+        bank_number =  str(self.random.custom_code(mask='##'))
+        bank_office =  str(self.random.custom_code(mask='###'))
+        bic = country_code + code + bank_number + bank_office
+        return bic
