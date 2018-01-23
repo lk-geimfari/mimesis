@@ -151,8 +151,8 @@ class RussiaSpecProvider(BaseSpecProvider):
             044025575.
         """
         country_code = '04'
-        сode = str(self.random.randint(01, 99))
-        bank_number = str(self.random.randint(00, 99))
-        bank_office = str(self.random.randint(050, 999))
+        code =  str(self.random.custom_code(mask='##')
+        bank_number =  str(self.random.custom_code(mask='##')
+        bank_office =  str(self.random.custom_code(mask='###')
         bic = country_code + code + bank_num + bank_office
         return self.random.custom_code(mask=mask)
