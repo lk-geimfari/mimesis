@@ -73,6 +73,10 @@ class TestSeededUnitSystem(object):
 
     def test_unit(self, us1, us2):
         assert us1.unit() == us2.unit()
+        assert us1.unit(name=UnitName.ANGLE, symbol=True) == \
+            us2.unit(name=UnitName.ANGLE, symbol=True)
 
     def test_prefix(self, us1, us2):
         assert us1.prefix() == us2.prefix()
+        assert us1.prefix(sign=PrefixSign.POSITIVE, symbol=True) == \
+            us2.prefix(sign=PrefixSign.POSITIVE, symbol=True)

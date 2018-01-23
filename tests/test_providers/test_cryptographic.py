@@ -80,15 +80,21 @@ class TestSeededCryptographic(object):
 
     def test_hash(self, c1, c2):
         assert c1.hash() == c2.hash()
+        assert c1.hash(algorithm=Algorithm.SHA512) == \
+            c2.hash(algorithm=Algorithm.SHA512)
 
     def test_bytes(self, c1, c2):
         assert c1.bytes() == c2.bytes()
+        assert c1.bytes(entropy=16) == c2.bytes(entropy=16)
 
     def test_token(self, c1, c2):
         assert c1.token() == c2.token()
+        assert c1.token(entropy=16) == c2.token(entropy=16)
 
     def test_salt(self, c1, c2):
         assert c1.salt() == c2.salt()
 
     def test_mnemonic_phrase(self, c1, c2):
         assert c1.mnemonic_phrase() == c2.mnemonic_phrase()
+        assert c1.mnemonic_phrase(length=16) == \
+            c2.mnemonic_phrase(length=16)

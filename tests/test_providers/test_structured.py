@@ -83,9 +83,13 @@ class TestSeededStructured(object):
 
     def test_html_attribute_value(self, s1, s2):
         assert s1.html_attribute_value() == s2.html_attribute_value()
+        assert s1.html_attribute_value(tag='p', attribute='class') == \
+            s2.html_attribute_value(tag='p', attribute='class')
 
     def test_html(self, s1, s2):
         assert s1.html() == s2.html()
 
     def test_json(self, s1, s2):
         assert s1.json() == s2.json()
+        assert s1.json(items=2, max_depth=4, recursive=True) == \
+            s2.json(items=2, max_depth=4, recursive=True)

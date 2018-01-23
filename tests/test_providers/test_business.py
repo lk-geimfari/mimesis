@@ -103,12 +103,15 @@ class TestSeededBusiness(object):
 
     def test_company_type(self, b1, b2):
         assert b1.company_type() == b2.company_type()
+        assert b1.company_type(abbr=True) == b2.company_type(abbr=True)
 
     def test_company(self, b1, b2):
         assert b1.company() == b2.company()
 
     def test_price(self, b1, b2):
         assert b1.price() == b2.price()
+        assert b1.price_in_btc(1.11, 22.2) == \
+            b2.price_in_btc(1.11, 22.2)
 
     def test_price_in_btc(self, b1, b2):
         assert b1.price_in_btc() == b2.price_in_btc()

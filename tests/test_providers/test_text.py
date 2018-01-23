@@ -115,12 +115,15 @@ class TestSeededText(object):
 
     def test_hex_color(self, t1, t2):
         assert t1.hex_color() == t2.hex_color()
+        assert t1.hex_color(safe=True) == t2.hex_color(safe=True)
 
     def test_rgb_color(self, t1, t2):
         assert t1.rgb_color() == t2.rgb_color()
+        assert t1.rgb_color(safe=True) == t2.rgb_color(safe=True)
 
     def test_alphabet(self, t1, t2):
         assert t1.alphabet() == t2.alphabet()
+        assert t1.alphabet(lower_case=True) == t2.alphabet(lower_case=True)
 
     def test_sentence(self, t1, t2):
         assert t1.sentence() == t2.sentence()
@@ -130,9 +133,11 @@ class TestSeededText(object):
 
     def test_text(self, t1, t2):
         assert t1.text() == t2.text()
+        assert t1.text(quantity=1) == t2.text(quantity=1)
 
     def test_words(self, t1, t2):
         assert t1.words() == t2.words()
+        assert t1.words(quantity=1) == t2.words(quantity=1)
 
     def test_word(self, t1, t2):
         assert t1.word() == t2.word()

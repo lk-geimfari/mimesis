@@ -160,6 +160,8 @@ class TestSeededAddress(object):
 
     def test_street_number(self, a1, a2):
         assert a1.street_number() == a2.street_number()
+        assert a1.street_number(maximum=42) == \
+            a2.street_number(maximum=42)
 
     def test_latitude(self, a1, a2):
         assert a1.latitude() == a2.latitude()
@@ -181,6 +183,7 @@ class TestSeededAddress(object):
 
     def test_state(self, a1, a2):
         assert a1.state() == a2.state()
+        assert a1.state(abbr=True) == a2.state(abbr=True)
 
     def test_postal_code(self, a1, a2):
         assert a1.postal_code() == a2.postal_code()
@@ -190,12 +193,15 @@ class TestSeededAddress(object):
 
     def test_country_iso(self, a1, a2):
         assert a1.country_iso_code() == a2.country_iso_code()
+        assert a1.country_iso_code(fmt=CountryCode.ISO3) == \
+            a2.country_iso_code(fmt=CountryCode.ISO3)
 
     def test_city(self, a1, a2):
         assert a1.city() == a2.city()
 
     def test_continent(self, a1, a2):
         assert a1.continent() == a2.continent()
+        assert a1.continent(code=True) == a2.continent(code=True)
 
     def test_calling_code(self, a1, a2):
         assert a1.calling_code() == a2.calling_code()

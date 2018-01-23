@@ -70,12 +70,16 @@ class TestSeededScience(object):
 
     def test_chemical_element(self, s1, s2):
         assert s1.chemical_element() == s2.chemical_element()
+        assert s1.chemical_element(name_only=True) == \
+            s2.chemical_element(name_only=True)
 
     def test_atomic_number(self, s1, s2):
         assert s1.atomic_number() == s2.atomic_number()
 
     def test_rna(self, s1, s2):
         assert s1.rna() == s2.rna()
+        assert s1.rna(length=22) == s2.rna(length=22)
 
     def test_dna(self, s1, s2):
         assert s1.dna() == s2.dna()
+        assert s1.dna(length=10) == s2.dna(length=10)

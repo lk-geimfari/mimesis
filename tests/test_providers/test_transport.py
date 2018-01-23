@@ -53,12 +53,17 @@ class TestSeededTransport(object):
 
     def test_truck(self, t1, t2):
         assert t1.truck() == t2.truck()
+        assert t1.truck(model_mask='#@') == t2.truck(model_mask='#@')
 
     def test_car(self, t1, t2):
         assert t1.car() == t2.car()
 
     def test_airplane(self, t1, t2):
         assert t1.airplane() == t2.airplane()
+        assert t1.airplane(model_mask='#_#_#') == \
+            t2.airplane(model_mask='#_#_#')
 
     def test_vehicle_registration_code(self, t1, t2):
         assert t1.vehicle_registration_code() == t2.vehicle_registration_code()
+        assert t1.vehicle_registration_code(allow_random=False) == \
+            t2.vehicle_registration_code(allow_random=False)

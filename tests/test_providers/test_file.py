@@ -83,12 +83,20 @@ class TestSeededFile(object):
 
     def test_extension(self, f1, f2):
         assert f1.extension() == f2.extension()
+        assert f1.extension(file_type=FileType.AUDIO) == \
+            f2.extension(file_type=FileType.AUDIO)
 
     def test_mime_type(self, f1, f2):
         assert f1.mime_type() == f2.mime_type()
+        assert f1.mime_type(type_=MimeType.IMAGE) == \
+            f2.mime_type(type_=MimeType.IMAGE)
 
     def test_file_name(self, f1, f2):
         assert f1.file_name() == f2.file_name()
+        assert f1.file_name(file_type=FileType.SOURCE) == \
+            f2.file_name(file_type=FileType.SOURCE)
 
     def test_size(self, f1, f2):
         assert f1.size() == f2.size()
+        assert f1.size(minimum=8, maximum=1024) == \
+            f2.size(minimum=8, maximum=1024)

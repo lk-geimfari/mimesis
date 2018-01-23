@@ -48,3 +48,4 @@ class TestSeededClothingSizes(object):
 
     def test_custom_size(self, cs1, cs2):
         assert cs1.custom_size() == cs2.custom_size()
+        assert cs1.custom_size(11, 22) == cs2.custom_size(11, 22)

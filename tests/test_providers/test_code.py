@@ -78,18 +78,24 @@ class TestSeededCode(object):
 
     def test_ean(self, c1, c2):
         assert c1.ean() == c2.ean()
+        assert c1.ean(fmt=EANFormat.EAN13) == \
+            c2.ean(fmt=EANFormat.EAN13)
 
     def test_imei(self, c1, c2):
         assert c1.imei() == c2.imei()
 
     def test_pin(self, c1, c2):
         assert c1.pin() == c2.pin()
+        assert c1.pin(mask='##') == c2.pin(mask='##')
 
     def test_issn(self, c1, c2):
         assert c1.issn() == c2.issn()
+        assert c1.issn(mask='##') == c2.issn(mask='##')
 
     def test_locale_code(self, c1, c2):
         assert c1.locale_code() == c2.locale_code()
 
     def test_isbn(self, c1, c2):
         assert c1.isbn() == c2.isbn()
+        assert c1.isbn(fmt=ISBNFormat.ISBN13) == \
+            c2.isbn(fmt=ISBNFormat.ISBN13)

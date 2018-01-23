@@ -84,18 +84,25 @@ class TestSeededNumbers(object):
 
     def test_floats(self, n1, n2):
         assert n1.floats() == n2.floats()
+        assert n1.floats(n=5) == n2.floats(n=5)
 
     def test_integers(self, n1, n2):
         assert n1.integers() == n2.integers()
+        assert n1.integers(start=-999, end=999, length=10) == \
+            n2.integers(start=-999, end=999, length=10)
 
     def test_digit(self, n1, n2):
         assert n1.digit() == n2.digit()
+        assert n1.digit(to_bin=True) == n2.digit(to_bin=True)
 
     def test_between(self, n1, n2):
         assert n1.between() == n2.between()
+        assert n1.between(minimum=42, maximum=2048) == \
+            n2.between(minimum=42, maximum=2048)
 
     def test_rating(self, n1, n2):
         assert n1.rating() == n2.rating()
+        assert n1.rating(maximum=10.0) == n2.rating(maximum=10.0)
 
     @pytest.mark.skip(reason='Method refactoring needed.')
     def test_primes(self, n1, n2):

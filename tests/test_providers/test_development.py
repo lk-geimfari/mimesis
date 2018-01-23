@@ -92,12 +92,15 @@ class TestSeededDevelopment(object):
 
     def test_version(self, dv1, dv2):
         assert dv1.version() == dv2.version()
+        assert dv1.version(calver=True, pre_release=True) == \
+            dv2.version(calver=True, pre_release=True)
 
     def test_programming_language(self, dv1, dv2):
         assert dv1.programming_language() == dv2.programming_language()
 
     def test_database(self, dv1, dv2):
         assert dv1.database() == dv2.database()
+        assert dv1.database(nosql=True) == dv2.database(nosql=True)
 
     def test_container(self, dv1, dv2):
         assert dv1.container() == dv2.container()
