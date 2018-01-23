@@ -11,6 +11,7 @@ from . import _patterns as p
 
 
 class TestBusiness(object):
+
     @pytest.fixture()
     def _business(self):
         return Business()
@@ -76,58 +77,41 @@ class TestBusiness(object):
 
 
 class TestSeededBusiness(object):
-    TIMES = 5
 
     @pytest.fixture()
-    def _businesses(self, seed):
-        return Business(seed=seed), Business(seed=seed)
+    def b1(self, seed):
+        return Business(seed=seed)
 
-    def test_copyright(self, _businesses):
-        b1, b2 = _businesses
-        for _ in range(self.TIMES):
-            assert b1.copyright() == b2.copyright()
+    @pytest.fixture()
+    def b2(self, seed):
+        return Business(seed=seed)
 
-    def test_currency_iso_code(self, _businesses):
-        b1, b2 = _businesses
-        for _ in range(self.TIMES):
-            assert b1.currency_iso_code() == b2.currency_iso_code()
+    def test_copyright(self, b1, b2):
+        assert b1.copyright() == b2.copyright()
 
-    def test_cryptocurrency_iso_code(self, _businesses):
-        b1, b2 = _businesses
-        for _ in range(self.TIMES):
-            assert b1.cryptocurrency_iso_code() == b2.cryptocurrency_iso_code()
+    def test_currency_iso_code(self, b1, b2):
+        assert b1.currency_iso_code() == b2.currency_iso_code()
 
-    def test_currency_symbol(self, _businesses):
-        b1, b2 = _businesses
-        for _ in range(self.TIMES):
-            assert b1.currency_symbol() == b2.currency_symbol()
+    def test_cryptocurrency_iso_code(self, b1, b2):
+        assert b1.cryptocurrency_iso_code() == b2.cryptocurrency_iso_code()
 
-    def test_cryptocurrency_symbol(self, _businesses):
-        b1, b2 = _businesses
-        for _ in range(self.TIMES):
-            assert b1.cryptocurrency_symbol() == b2.cryptocurrency_symbol()
+    def test_currency_symbol(self, b1, b2):
+        assert b1.currency_symbol() == b2.currency_symbol()
 
-    def test_company_type(self, _businesses):
-        b1, b2 = _businesses
-        for _ in range(self.TIMES):
-            assert b1.company_type() == b2.company_type()
-            assert b1.company_type(abbr=True) == b2.company_type(abbr=True)
+    def test_cryptocurrency_symbol(self, b1, b2):
+        assert b1.cryptocurrency_symbol() == b2.cryptocurrency_symbol()
 
-    def test_company(self, _businesses):
-        b1, b2 = _businesses
-        for _ in range(self.TIMES):
-            assert b1.company() == b2.company()
+    def test_company_type(self, b1, b2):
+        assert b1.company_type() == b2.company_type()
+        assert b1.company_type(abbr=True) == b2.company_type(abbr=True)
 
-    def test_price(self, _businesses):
-        b1, b2 = _businesses
-        for _ in range(self.TIMES):
-            assert b1.price() == b2.price()
-            assert b1.price(minimum=11.1, maximum=22.2) == \
-                b2.price(minimum=11.1, maximum=22.2)
+    def test_company(self, b1, b2):
+        assert b1.company() == b2.company()
 
-    def test_price_in_btc(self, _businesses):
-        b1, b2 = _businesses
-        for _ in range(self.TIMES):
-            assert b1.price_in_btc() == b2.price_in_btc()
-            assert b1.price_in_btc(minimum=1.11, maximum=22.2) == \
-                b2.price_in_btc(minimum=1.11, maximum=22.2)
+    def test_price(self, b1, b2):
+        assert b1.price() == b2.price()
+        assert b1.price_in_btc(1.11, 22.2) == \
+            b2.price_in_btc(1.11, 22.2)
+
+    def test_price_in_btc(self, b1, b2):
+        assert b1.price_in_btc() == b2.price_in_btc()

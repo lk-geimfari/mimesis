@@ -11,6 +11,7 @@ from ._patterns import STR_REGEX
 
 
 class TestScience(object):
+
     @pytest.fixture
     def default_science(self):
         return Science()
@@ -52,42 +53,33 @@ class TestScience(object):
 
 
 class TestSeededScience(object):
-    TIMES = 5
 
     @pytest.fixture
-    def _sciences(self, seed):
-        return Science(seed=seed), Science(seed=seed)
+    def s1(self, seed):
+        return Science(seed=seed)
 
-    def test_math_formula(self, _sciences):
-        s1, s2 = _sciences
-        for _ in range(self.TIMES):
-            assert s1.math_formula() == s2.math_formula()
+    @pytest.fixture
+    def s2(self, seed):
+        return Science(seed=seed)
 
-    def test_scientific_article(self, _sciences):
-        s1, s2 = _sciences
-        for _ in range(self.TIMES):
-            assert s1.scientific_article() == s2.scientific_article()
+    def test_math_formula(self, s1, s2):
+        assert s1.math_formula() == s2.math_formula()
 
-    def test_chemical_element(self, _sciences):
-        s1, s2 = _sciences
-        for _ in range(self.TIMES):
-            assert s1.chemical_element() == s2.chemical_element()
-            assert s1.chemical_element(name_only=True) == \
-                s2.chemical_element(name_only=True)
+    def test_scientific_article(self, s1, s2):
+        assert s1.scientific_article() == s2.scientific_article()
 
-    def test_atomic_number(self, _sciences):
-        s1, s2 = _sciences
-        for _ in range(self.TIMES):
-            assert s1.atomic_number() == s2.atomic_number()
+    def test_chemical_element(self, s1, s2):
+        assert s1.chemical_element() == s2.chemical_element()
+        assert s1.chemical_element(name_only=True) == \
+            s2.chemical_element(name_only=True)
 
-    def test_rna(self, _sciences):
-        s1, s2 = _sciences
-        for _ in range(self.TIMES):
-            assert s1.rna() == s2.rna()
-            assert s1.rna(length=22) == s2.rna(length=22)
+    def test_atomic_number(self, s1, s2):
+        assert s1.atomic_number() == s2.atomic_number()
 
-    def test_dna(self, _sciences):
-        s1, s2 = _sciences
-        for _ in range(self.TIMES):
-            assert s1.dna() == s2.dna()
-            assert s1.dna(length=10) == s2.dna(length=10)
+    def test_rna(self, s1, s2):
+        assert s1.rna() == s2.rna()
+        assert s1.rna(length=22) == s2.rna(length=22)
+
+    def test_dna(self, s1, s2):
+        assert s1.dna() == s2.dna()
+        assert s1.dna(length=10) == s2.dna(length=10)

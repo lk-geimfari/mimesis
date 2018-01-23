@@ -10,6 +10,7 @@ from ._patterns import HEX_COLOR, STR_REGEX
 
 
 class TestText(object):
+
     @pytest.fixture
     def _text(self):
         return Text()
@@ -103,78 +104,55 @@ class TestText(object):
 
 
 class TestSeededText(object):
-    TIMES = 5
 
     @pytest.fixture
-    def _texts(self, seed):
-        return Text(seed=seed), Text(seed=seed)
+    def t1(self, seed):
+        return Text(seed=seed)
 
-    def test_hex_color(self, _texts):
-        t1, t2 = _texts
-        for _ in range(self.TIMES):
-            assert t1.hex_color() == t2.hex_color()
-            assert t1.hex_color(safe=True) == t2.hex_color(True)
+    @pytest.fixture
+    def t2(self, seed):
+        return Text(seed=seed)
 
-    def test_rgb_color(self, _texts):
-        t1, t2 = _texts
-        for _ in range(self.TIMES):
-            assert t1.rgb_color() == t2.rgb_color()
-            assert t1.rgb_color(safe=True) == t2.rgb_color(safe=True)
+    def test_hex_color(self, t1, t2):
+        assert t1.hex_color() == t2.hex_color()
+        assert t1.hex_color(safe=True) == t2.hex_color(safe=True)
 
-    def test_alphabet(self, _texts):
-        t1, t2 = _texts
-        for _ in range(self.TIMES):
-            assert t1.alphabet() == t2.alphabet()
-            assert t1.alphabet(lower_case=True) == t2.alphabet(lower_case=True)
+    def test_rgb_color(self, t1, t2):
+        assert t1.rgb_color() == t2.rgb_color()
+        assert t1.rgb_color(safe=True) == t2.rgb_color(safe=True)
 
-    def test_sentence(self, _texts):
-        t1, t2 = _texts
-        for _ in range(self.TIMES):
-            assert t1.sentence() == t2.sentence()
+    def test_alphabet(self, t1, t2):
+        assert t1.alphabet() == t2.alphabet()
+        assert t1.alphabet(lower_case=True) == t2.alphabet(lower_case=True)
 
-    def test_title(self, _texts):
-        t1, t2 = _texts
-        for _ in range(self.TIMES):
-            assert t1.title() == t2.title()
+    def test_sentence(self, t1, t2):
+        assert t1.sentence() == t2.sentence()
 
-    def test_text(self, _texts):
-        t1, t2 = _texts
-        for _ in range(self.TIMES):
-            assert t1.text() == t2.text()
-            assert t1.text(quantity=1) == t2.text(quantity=1)
+    def test_title(self, t1, t2):
+        assert t1.title() == t2.title()
 
-    def test_words(self, _texts):
-        t1, t2 = _texts
-        for _ in range(self.TIMES):
-            assert t1.words() == t2.words()
-            assert t1.words(quantity=1) == t2.words(quantity=1)
+    def test_text(self, t1, t2):
+        assert t1.text() == t2.text()
+        assert t1.text(quantity=1) == t2.text(quantity=1)
 
-    def test_word(self, _texts):
-        t1, t2 = _texts
-        for _ in range(self.TIMES):
-            assert t1.word() == t2.word()
+    def test_words(self, t1, t2):
+        assert t1.words() == t2.words()
+        assert t1.words(quantity=1) == t2.words(quantity=1)
 
-    def test_swear_word(self, _texts):
-        t1, t2 = _texts
-        for _ in range(self.TIMES):
-            assert t1.swear_word() == t2.swear_word()
+    def test_word(self, t1, t2):
+        assert t1.word() == t2.word()
 
-    def test_quote(self, _texts):
-        t1, t2 = _texts
-        for _ in range(self.TIMES):
-            assert t1.quote() == t2.quote()
+    def test_swear_word(self, t1, t2):
+        assert t1.swear_word() == t2.swear_word()
 
-    def test_color(self, _texts):
-        t1, t2 = _texts
-        for _ in range(self.TIMES):
-            assert t1.color() == t2.color()
+    def test_quote(self, t1, t2):
+        assert t1.quote() == t2.quote()
 
-    def test_level(self, _texts):
-        t1, t2 = _texts
-        for _ in range(self.TIMES):
-            assert t1.level() == t2.level()
+    def test_color(self, t1, t2):
+        assert t1.color() == t2.color()
 
-    def test_answer(self, _texts):
-        t1, t2 = _texts
-        for _ in range(self.TIMES):
-            assert t1.answer() == t2.answer()
+    def test_level(self, t1, t2):
+        assert t1.level() == t2.level()
+
+    def test_answer(self, t1, t2):
+        assert t1.answer() == t2.answer()
