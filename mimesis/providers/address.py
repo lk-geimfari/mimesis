@@ -191,7 +191,7 @@ class Address(BaseDataProvider):
 
         if code:
             if code in COORDINATE_RANGE.keys():
-                range_seq = COORDINATE_RANGE.get(code).get(key)
+                range_seq = COORDINATE_RANGE[code][key]
             else:
                 raise ValueError('Country code must be "any" '
                                  'or ISO 3166-1 alpha-2 code string.')
