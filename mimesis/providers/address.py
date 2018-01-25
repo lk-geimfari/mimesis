@@ -182,19 +182,24 @@ class Address(BaseDataProvider):
                         code: Optional[str] = None) -> float:
         """Get range of latitude or longitude.
 
+        This function returns coordinates for current locale by default,
+        but you can change this behavior passed parameter ``country_code``
+        which represent country code ISO 3166-1 alpha-2.
+
         :param key: Key (``lat`` or ``long``).
         :param code: Country code (ISO 3166-1 alpha-2).
         :return: Float number.
         """
-        # Default is coordinates range for current locale.
-        range_seq = self._data['coordinates'].get(key)
-
         if code:
+            code = code.lower()
             if code in COORDINATE_RANGE.keys():
                 range_seq = COORDINATE_RANGE[code][key]
             else:
-                raise ValueError('Country code must be "any" '
+                raise ValueError('Country code must be "default" '
                                  'or ISO 3166-1 alpha-2 code string.')
+        else:
+            # Default is coordinates range for current locale.
+            range_seq = self._data['coordinates'].get(key)
 
         result = self.random.uniform(*range_seq)
         return float('{:.6f}'.format(result))
