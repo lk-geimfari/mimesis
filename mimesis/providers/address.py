@@ -191,15 +191,14 @@ class Address(BaseDataProvider):
         :return: Float number.
         """
         if code:
-            code = code.lower()
-            if code in COORDINATE_RANGE.keys():
+            if code in COORDINATE_RANGE:
                 range_seq = COORDINATE_RANGE[code][key]
             else:
                 raise ValueError('Country code must be "default" '
                                  'or ISO 3166-1 alpha-2 code string.')
         else:
             # Default is coordinates range for current locale.
-            range_seq = self._data['coordinates'].get(key)
+            range_seq = self._data['coordinates'][key]
 
         result = self.random.uniform(*range_seq)
         return float('{:.6f}'.format(result))
@@ -207,6 +206,7 @@ class Address(BaseDataProvider):
     def latitude(self, country_code: Optional[str] = None) -> float:
         """Generate a random value of latitude.
 
+        :param country_code: Country code (ISO 3166-1 alpha-2).
         :return: Value of longitude.
 
         :Example:
@@ -217,6 +217,7 @@ class Address(BaseDataProvider):
     def longitude(self, country_code: Optional[str] = None) -> float:
         """Generate a random value of longitude.
 
+        :param country_code: Country code (ISO 3166-1 alpha-2).
         :return: Value of longitude.
 
         :Example:
