@@ -145,6 +145,15 @@ class Address(BaseDataProvider):
         return self.random.custom_code(
             self._data['postal_code_fmt'])
 
+    def zip_code(self) -> str:
+        """Generate a zip code.
+
+        An alias for method self.postal_code.
+
+        :return: Zip code.
+        """
+        return self.postal_code()
+
     def country_iso_code(self, fmt: Optional[CountryCode] = None) -> str:
         """Get a random ISO code of country.
 

@@ -3,6 +3,7 @@
 **Added**:
 - Added method `Text.rgb_color`
 - Added support of parameter `safe` for method `Text.hex_color`
+- Added an alias `zip_code` for `Address.postal_code`
 
 **Optimizations**:
 - Significantly improved performance of `schema.Field`

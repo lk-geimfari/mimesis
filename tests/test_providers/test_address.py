@@ -108,6 +108,9 @@ class TestAddress(object):
         else:
             assert re.match(POSTAL_CODE_REGEX['default'], result)
 
+    def test_zip_code(self, address):
+        assert address.zip_code()
+
     def test_country(self, address):
         result = address.country()
         assert result in address._data['country']['name']
@@ -187,6 +190,9 @@ class TestSeededAddress(object):
 
     def test_postal_code(self, a1, a2):
         assert a1.postal_code() == a2.postal_code()
+
+    def test_zip_code(self, a1, a2):
+        assert a1.zip_code() == a2.zip_code()
 
     def test_country(self, a1, a2):
         assert a1.country() == a2.country()
