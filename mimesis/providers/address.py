@@ -75,6 +75,8 @@ class Address(BaseDataProvider):
         if self.locale == 'ja':
             return fmt.format(
                 self.random.choice(self._data['city']),
+                # Generate list of random integers
+                # in amount of 3, from 1 to 100.
                 *self.random.randints(3, 1, 100),
             )
 
