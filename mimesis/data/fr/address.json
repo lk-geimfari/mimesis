@@ -436,6 +436,16 @@
     "Sainte-Rose",
     "Saint-Michel-sur-Orge"
   ],
+  "coordinates": {
+    "lat": [
+      41.59101,
+      51.03457
+    ],
+    "long": [
+      -4.65,
+      9.45
+    ]
+  },
   "country": {
     "name": [
       "Afghanistan",

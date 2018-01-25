@@ -2,8 +2,8 @@
 
 from typing import Optional
 
-from mimesis.data import (CALLING_CODES, CONTINENT_CODES, COUNTRIES_ISO,
-                          SHORTENED_ADDRESS_FMT)
+from mimesis.data import (CALLING_CODES, CONTINENT_CODES, COORDINATE_RANGE,
+                          COUNTRIES_ISO, SHORTENED_ADDRESS_FMT)
 from mimesis.enums import CountryCode
 from mimesis.providers.base import BaseDataProvider
 from mimesis.utils import pull
@@ -178,39 +178,67 @@ class Address(BaseDataProvider):
         return self.random.choice(
             self._data['city'])
 
-    def latitude(self) -> float:
+    def _get_from_range(self, key: Optional[str] = None,
+                        code: Optional[str] = None) -> float:
+        """Get range of latitude or longitude.
+
+        This function returns coordinates for current locale by default,
+        but you can change this behavior passed parameter ``country_code``
+        which represent country code ISO 3166-1 alpha-2.
+
+        :param key: Key (``lat`` or ``long``).
+        :param code: Country code (ISO 3166-1 alpha-2).
+        :return: Float number.
+        """
+        if code:
+            if code in COORDINATE_RANGE:
+                range_seq = COORDINATE_RANGE[code][key]
+            else:
+                raise ValueError('Country code must be "default" '
+                                 'or ISO 3166-1 alpha-2 code string.')
+        else:
+            # Default is coordinates range for current locale.
+            range_seq = self._data['coordinates'][key]
+
+        result = self.random.uniform(*range_seq)
+        return float('{:.6f}'.format(result))
+
+    def latitude(self, country_code: Optional[str] = None) -> float:
         """Generate a random value of latitude.
 
+        :param country_code: Country code (ISO 3166-1 alpha-2).
         :return: Value of longitude.
 
         :Example:
-            -66.4214188124611
+            -66.421418
         """
-        return self.random.uniform(-90, 90)
+        return self._get_from_range('lat', country_code)
 
-    def longitude(self) -> float:
+    def longitude(self, country_code: Optional[str] = None) -> float:
         """Generate a random value of longitude.
 
+        :param country_code: Country code (ISO 3166-1 alpha-2).
         :return: Value of longitude.
 
         :Example:
-            112.18440260511943
+            112.184402
         """
-        return self.random.uniform(-180, 180)
+        return self._get_from_range('long', country_code)
 
-    def coordinates(self) -> dict:
+    def coordinates(self, *args, **kwargs) -> dict:
         """Generate random geo coordinates.
 
         :return: Dict with coordinates.
 
         :Example:
-            {'latitude': 8.003968712834975,
-            'longitude': 36.02811153405548}
+            {'latitude': 8.003968,
+            'longitude': 36.028111}
         """
-        return {
-            'longitude': self.longitude(),
-            'latitude': self.latitude(),
-        }
+        coordinates = dict(
+            longitude=self.longitude(*args, **kwargs),
+            latitude=self.latitude(*args, **kwargs),
+        )
+        return coordinates
 
     def continent(self, code: bool = False) -> str:
         """Get a random continent name or continent code.

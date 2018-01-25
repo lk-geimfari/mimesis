@@ -30,12 +30,16 @@ class TestAddress(object):
         assert isinstance(result, float)
         assert result <= 90
         assert result >= -90
+        with pytest.raises(ValueError):
+            _address.latitude(country_code='nil')
 
     def test_longitude(self, _address):
         result = _address.longitude()
         assert isinstance(result, float)
         assert result <= 180
         assert result >= -180
+        with pytest.raises(ValueError):
+            _address.latitude(country_code='nil')
 
     def test_coordinates(self, _address):
         result = _address.coordinates()
@@ -50,6 +54,8 @@ class TestAddress(object):
         assert isinstance(latitude, float)
         assert longitude <= 180
         assert longitude >= -180
+        with pytest.raises(ValueError):
+            _address.latitude(country_code='nil')
 
     def test_street_name(self, address):
         result = address.street_name()

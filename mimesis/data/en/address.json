@@ -1757,6 +1757,16 @@
     "Zanesville",
     "Zion"
   ],
+  "coordinates": {
+    "lat": [
+      19.50139,
+      64.85694
+    ],
+    "long": [
+      -161.75583,
+      -68.01197
+    ]
+  },
   "continent": [
     "Africa",
     "Antarctica",

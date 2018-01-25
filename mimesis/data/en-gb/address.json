@@ -1058,6 +1058,16 @@
     "Worcester",
     "York"
   ],
+  "coordinates": {
+    "lat": [
+      50.10319,
+      60.15456
+    ],
+    "long": [
+      -7.64133,
+      1.75159
+    ]
+  },
   "state": {
     "name": [
       "Avon",

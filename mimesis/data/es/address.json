@@ -78,6 +78,16 @@
     "Vizcaya",
     "Zaragoza"
   ],
+  "coordinates": {
+    "lat": [
+      27.7567,
+      43.68333
+    ],
+    "long": [
+      -17.93394,
+      4.2899
+    ]
+  },
   "country": {
     "name": [
       "Afganistán",

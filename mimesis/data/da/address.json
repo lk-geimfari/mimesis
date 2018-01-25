@@ -570,6 +570,16 @@
     "Øster Vrå",
     "Østermarie"
   ],
+  "coordinates": {
+    "lat": [
+      54.76906,
+      57.72093
+    ],
+    "long": [
+      8.24402,
+      14.70664
+    ]
+  },
   "continent": [
     "Afrika",
     "Antarktis",

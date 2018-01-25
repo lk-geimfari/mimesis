@@ -612,6 +612,16 @@
     "Zwanenburg",
     "Zwolle"
   ],
+  "coordinates": {
+    "lat": [
+      50.77083,
+      53.35917
+    ],
+    "long": [
+      3.57361,
+      7.10833
+    ]
+  },
   "country": {
     "name": [
       "Afghanistan",

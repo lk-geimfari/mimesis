@@ -78,6 +78,16 @@
     "Vizcaya",
     "Zaragoza"
   ],
+  "coordinates": {
+    "lat": [
+      14.53588,
+      32.62781
+    ],
+    "long": [
+      -117.06583,
+      -86.73105
+    ]
+  },
   "state": {
     "abbr": [
       "MX-AGU",

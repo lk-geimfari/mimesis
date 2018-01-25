@@ -19,6 +19,8 @@ Example:
 
 from enum import Enum
 
+from mimesis.data import COORDINATE_RANGE
+
 
 class PortRange(Enum):
     """Represents port ranges.
@@ -229,3 +231,6 @@ class UnitName(Enum):
     INDUCTANCE = ('henry', 'H')
     TEMPERATURE = ('Celsius', '°C')
     RADIOACTIVITY = ('becquerel', 'Bq')
+
+
+CoordRange = type('Enum', (), {k: k for k in COORDINATE_RANGE.keys()})

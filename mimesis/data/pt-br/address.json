@@ -5567,6 +5567,16 @@
     "Wanderlândia",
     "Xambioá"
   ],
+  "coordinates": {
+    "lat": [
+      -33.69111,
+      2.81972
+    ],
+    "long": [
+      -72.89583,
+      -34.80861
+    ]
+  },
   "state": {
     "name": [
       "Acre",

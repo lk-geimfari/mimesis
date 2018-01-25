@@ -111,6 +111,16 @@
     "Åndalsnes",
     "Åsgårdstrand"
   ],
+  "coordinates": {
+    "lat": [
+      58.0274,
+      70.66336
+    ],
+    "long": [
+      5.0328,
+      29.74943
+    ]
+  },
   "country": {
     "name": [
       "Afghanistan",

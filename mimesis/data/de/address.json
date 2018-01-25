@@ -1946,6 +1946,16 @@
     "Übach-Palenberg",
     "Überlingen"
   ],
+  "coordinates": {
+    "lat": [
+      47.40724,
+      54.9079
+    ],
+    "long": [
+      5.98815,
+      14.98853
+    ]
+  },
   "continent": [
     "Afrika",
     "Antarktika",

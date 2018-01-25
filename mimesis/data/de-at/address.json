@@ -93,6 +93,16 @@
     "Zell am See",
     "Zwettl-Niederösterreich"
   ],
+  "coordinates": {
+    "lat": [
+      46.52694,
+      48.81667
+    ],
+    "long": [
+      9.6,
+      16.94504
+    ]
+  },
   "postal_code_fmt": "####",
   "state": {
     "abbr": [

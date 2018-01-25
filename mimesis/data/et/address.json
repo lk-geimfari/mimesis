@@ -247,6 +247,16 @@
       "Vietnam Vietnam"
     ]
   },
+  "coordinates": {
+    "lat": [
+      57.77781,
+      59.47667
+    ],
+    "long": [
+      22.50389,
+      28.19028
+    ]
+  },
   "continent": [
     "Aafrika",
     "Antarktis",

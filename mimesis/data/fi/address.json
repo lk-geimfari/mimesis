@@ -112,6 +112,16 @@
     "Ähtäri",
     "Äänekoski"
   ],
+  "coordinates": {
+    "lat": [
+      59.83333,
+      68.90596
+    ],
+    "long": [
+      21.37596,
+      30.93276
+    ]
+  },
   "country": {
     "name": [
       "Afganistan",
