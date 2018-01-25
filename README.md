@@ -4,7 +4,6 @@
     </a><br><br>
 </div>
 
----
 
 
 | **`Linux`**  |  **`Windows`**  | **`Docs`**  | **`Coverage`**  | **`PyPi`**   | **`Python`**  | **`License`**  |
