@@ -9,6 +9,7 @@ from mimesis.exceptions import NonEnumerableError
 
 
 class TestFile(object):
+
     @pytest.fixture
     def file(self):
         return File()
@@ -71,36 +72,31 @@ class TestFile(object):
 
 
 class TestSeededFile(object):
-    TIMES = 5
 
     @pytest.fixture
-    def _files(self, seed):
-        return File(seed=seed), File(seed=seed)
+    def f1(self, seed):
+        return File(seed=seed)
 
-    def test_extension(self, _files):
-        f1, f2 = _files
-        for _ in range(self.TIMES):
-            assert f1.extension() == f2.extension()
-            assert f1.extension(file_type=FileType.AUDIO) == \
-                f2.extension(file_type=FileType.AUDIO)
+    @pytest.fixture
+    def f2(self, seed):
+        return File(seed=seed)
 
-    def test_mime_type(self, _files):
-        f1, f2 = _files
-        for _ in range(self.TIMES):
-            assert f1.mime_type() == f2.mime_type()
-            assert f1.mime_type(type_=MimeType.IMAGE) == \
-                f2.mime_type(type_=MimeType.IMAGE)
+    def test_extension(self, f1, f2):
+        assert f1.extension() == f2.extension()
+        assert f1.extension(file_type=FileType.AUDIO) == \
+            f2.extension(file_type=FileType.AUDIO)
 
-    def test_file_name(self, _files):
-        f1, f2 = _files
-        for _ in range(self.TIMES):
-            assert f1.file_name() == f2.file_name()
-            assert f1.file_name(file_type=FileType.SOURCE) == \
-                f2.file_name(file_type=FileType.SOURCE)
+    def test_mime_type(self, f1, f2):
+        assert f1.mime_type() == f2.mime_type()
+        assert f1.mime_type(type_=MimeType.IMAGE) == \
+            f2.mime_type(type_=MimeType.IMAGE)
 
-    def test_size(self, _files):
-        f1, f2 = _files
-        for _ in range(self.TIMES):
-            assert f1.size() == f2.size()
-            assert f1.size(minimum=8, maximum=1024) == \
-                f2.size(minimum=8, maximum=1024)
+    def test_file_name(self, f1, f2):
+        assert f1.file_name() == f2.file_name()
+        assert f1.file_name(file_type=FileType.SOURCE) == \
+            f2.file_name(file_type=FileType.SOURCE)
+
+    def test_size(self, f1, f2):
+        assert f1.size() == f2.size()
+        assert f1.size(minimum=8, maximum=1024) == \
+            f2.size(minimum=8, maximum=1024)

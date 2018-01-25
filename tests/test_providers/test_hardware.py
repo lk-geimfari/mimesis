@@ -8,6 +8,7 @@ from mimesis.data import (CPU, CPU_CODENAMES, CPU_MODEL_CODES, GENERATION,
 
 
 class TestHardware(object):
+
     @pytest.fixture
     def hard(self):
         return Hardware()
@@ -68,73 +69,50 @@ class TestHardware(object):
 
 
 class TestSeededHardware(object):
-    TIMES = 5
 
     @pytest.fixture
-    def _hardwares(self, seed):
-        return Hardware(seed=seed), Hardware(seed=seed)
+    def h1(self, seed):
+        return Hardware(seed=seed)
 
-    def test_resolution(self, _hardwares):
-        h1, h2 = _hardwares
-        for _ in range(self.TIMES):
-            assert h1.resolution() == h2.resolution()
+    @pytest.fixture
+    def h2(self, seed):
+        return Hardware(seed=seed)
 
-    def test_screen_size(self, _hardwares):
-        h1, h2 = _hardwares
-        for _ in range(self.TIMES):
-            assert h1.screen_size() == h2.screen_size()
+    def test_resolution(self, h1, h2):
+        assert h1.resolution() == h2.resolution()
 
-    def test_generation(self, _hardwares):
-        h1, h2 = _hardwares
-        for _ in range(self.TIMES):
-            assert h1.generation() == h2.generation()
+    def test_screen_size(self, h1, h2):
+        assert h1.screen_size() == h2.screen_size()
 
-    def test_cpu_model_code(self, _hardwares):
-        h1, h2 = _hardwares
-        for _ in range(self.TIMES):
-            assert h1.cpu_model_code() == h2.cpu_model_code()
+    def test_generation(self, h1, h2):
+        assert h1.generation() == h2.generation()
 
-    def test_cpu_frequency(self, _hardwares):
-        h1, h2 = _hardwares
-        for _ in range(self.TIMES):
-            assert h1.cpu_frequency() == h2.cpu_frequency()
+    def test_cpu_model_code(self, h1, h2):
+        assert h1.cpu_model_code() == h2.cpu_model_code()
 
-    def test_cpu(self, _hardwares):
-        h1, h2 = _hardwares
-        for _ in range(self.TIMES):
-            assert h1.cpu() == h2.cpu()
+    def test_cpu_frequency(self, h1, h2):
+        assert h1.cpu_frequency() == h2.cpu_frequency()
 
-    def test_cpu_codename(self, _hardwares):
-        h1, h2 = _hardwares
-        for _ in range(self.TIMES):
-            assert h1.cpu_codename() == h2.cpu_codename()
+    def test_cpu(self, h1, h2):
+        assert h1.cpu() == h2.cpu()
 
-    def test_ram_type(self, _hardwares):
-        h1, h2 = _hardwares
-        for _ in range(self.TIMES):
-            assert h1.ram_type() == h2.ram_type()
+    def test_cpu_codename(self, h1, h2):
+        assert h1.cpu_codename() == h2.cpu_codename()
 
-    def test_ram_size(self, _hardwares):
-        h1, h2 = _hardwares
-        for _ in range(self.TIMES):
-            assert h1.ram_size() == h2.ram_size()
+    def test_ram_type(self, h1, h2):
+        assert h1.ram_type() == h2.ram_type()
 
-    def test_ssd_or_hdd(self, _hardwares):
-        h1, h2 = _hardwares
-        for _ in range(self.TIMES):
-            assert h1.ssd_or_hdd() == h2.ssd_or_hdd()
+    def test_ram_size(self, h1, h2):
+        assert h1.ram_size() == h2.ram_size()
 
-    def test_graphics(self, _hardwares):
-        h1, h2 = _hardwares
-        for _ in range(self.TIMES):
-            assert h1.graphics() == h2.graphics()
+    def test_ssd_or_hdd(self, h1, h2):
+        assert h1.ssd_or_hdd() == h2.ssd_or_hdd()
 
-    def test_manufacturer(self, _hardwares):
-        h1, h2 = _hardwares
-        for _ in range(self.TIMES):
-            assert h1.manufacturer() == h2.manufacturer()
+    def test_graphics(self, h1, h2):
+        assert h1.graphics() == h2.graphics()
 
-    def test_phone_model(self, _hardwares):
-        h1, h2 = _hardwares
-        for _ in range(self.TIMES):
-            assert h1.phone_model() == h2.phone_model()
+    def test_manufacturer(self, h1, h2):
+        assert h1.manufacturer() == h2.manufacturer()
+
+    def test_phone_model(self, h1, h2):
+        assert h1.phone_model() == h2.phone_model()

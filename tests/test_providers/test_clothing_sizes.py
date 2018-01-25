@@ -5,6 +5,7 @@ from mimesis import ClothingSizes
 
 
 class TestClothingSizes(object):
+
     @pytest.fixture
     def sizes(self):
         return ClothingSizes()
@@ -30,25 +31,21 @@ class TestClothingSizes(object):
 
 
 class TestSeededClothingSizes(object):
-    TIMES = 5
 
     @pytest.fixture
-    def _clothing_sizes(self, seed):
-        return ClothingSizes(seed=seed), ClothingSizes(seed=seed)
+    def cs1(self, seed):
+        return ClothingSizes(seed=seed)
 
-    def test_international_size(self, _clothing_sizes):
-        cs1, cs2 = _clothing_sizes
-        for _ in range(self.TIMES):
-            assert cs1.international_size() == cs2.international_size()
+    @pytest.fixture
+    def cs2(self, seed):
+        return ClothingSizes(seed=seed)
 
-    def test_european_size(self, _clothing_sizes):
-        cs1, cs2 = _clothing_sizes
-        for _ in range(self.TIMES):
-            assert cs1.european_size() == cs2.european_size()
+    def test_international_size(self, cs1, cs2):
+        assert cs1.international_size() == cs2.international_size()
 
-    def test_custom_size(self, _clothing_sizes):
-        cs1, cs2 = _clothing_sizes
-        for _ in range(self.TIMES):
-            assert cs1.custom_size() == cs2.custom_size()
-            assert cs1.custom_size(minimum=11, maximum=22) == \
-                cs2.custom_size(minimum=11, maximum=22)
+    def test_european_size(self, cs1, cs2):
+        assert cs1.european_size() == cs2.european_size()
+
+    def test_custom_size(self, cs1, cs2):
+        assert cs1.custom_size() == cs2.custom_size()
+        assert cs1.custom_size(11, 22) == cs2.custom_size(11, 22)

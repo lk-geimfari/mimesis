@@ -74,66 +74,51 @@ class TestPayment(object):
         assert 'credit_card' in result
         assert 'expiration_date' in result
 
-    def credit_card_network(self, payment):
+    def test_credit_card_network(self, payment):
         result = payment.credit_card_network()
         assert result in CREDIT_CARD_NETWORKS
 
 
 class TestSeededPayment(object):
-    TIMES = 5
 
     @pytest.fixture
-    def _payments(self, seed):
-        return Payment(seed=seed), Payment(seed=seed)
+    def p1(self, seed):
+        return Payment(seed=seed)
 
-    def test_bitcoin_address(self, _payments):
-        p1, p2 = _payments
-        for _ in range(self.TIMES):
-            assert p1.bitcoin_address() == p2.bitcoin_address()
+    @pytest.fixture
+    def p2(self, seed):
+        return Payment(seed=seed)
 
-    def test_ethereum_address(self, _payments):
-        p1, p2 = _payments
-        for _ in range(self.TIMES):
-            assert p1.ethereum_address() == p2.ethereum_address()
+    def test_bitcoin_address(self, p1, p2):
+        assert p1.bitcoin_address() == p2.bitcoin_address()
 
-    def test_cvv(self, _payments):
-        p1, p2 = _payments
-        for _ in range(self.TIMES):
-            assert p1.cvv() == p2.cvv()
+    def test_ethereum_address(self, p1, p2):
+        assert p1.ethereum_address() == p2.ethereum_address()
 
-    def test_credit_card_number(self, _payments):
-        p1, p2 = _payments
-        for _ in range(self.TIMES):
-            assert p1.credit_card_number() == p2.credit_card_number()
-            assert p1.credit_card_number(card_type=CardType.VISA) == \
-                p2.credit_card_number(card_type=CardType.VISA)
+    def test_cvv(self, p1, p2):
+        assert p1.cvv() == p2.cvv()
 
-    def test_credit_card_expiration_date(self, _payments):
-        p1, p2 = _payments
-        for _ in range(self.TIMES):
-            assert p1.credit_card_expiration_date() == \
-                p2.credit_card_expiration_date()
-            assert p1.credit_card_expiration_date(minimum=18, maximum=24) == \
-                p2.credit_card_expiration_date(minimum=18, maximum=24)
+    def test_credit_card_number(self, p1, p2):
+        assert p1.credit_card_number() == p2.credit_card_number()
+        assert p1.credit_card_number(card_type=CardType.VISA) == \
+            p2.credit_card_number(card_type=CardType.VISA)
 
-    def test_cid(self, _payments):
-        p1, p2 = _payments
-        for _ in range(self.TIMES):
-            assert p1.cid() == p2.cid()
+    def test_credit_card_expiration_date(self, p1, p2):
+        assert p1.credit_card_expiration_date() == \
+            p2.credit_card_expiration_date()
+        assert p1.credit_card_expiration_date(minimum=18, maximum=24) == \
+            p2.credit_card_expiration_date(minimum=18, maximum=24)
 
-    def test_paypal(self, _payments):
-        p1, p2 = _payments
-        for _ in range(self.TIMES):
-            assert p1.paypal() == p2.paypal()
+    def test_cid(self, p1, p2):
+        assert p1.cid() == p2.cid()
 
-    def test_credit_card_owner(self, _payments):
-        p1, p2 = _payments
-        for _ in range(self.TIMES):
-            assert p1.credit_card_owner() == p2.credit_card_owner()
-            assert p1.credit_card_owner(gender=Gender.FEMALE) == \
-                p2.credit_card_owner(gender=Gender.FEMALE)
+    def test_paypal(self, p1, p2):
+        assert p1.paypal() == p2.paypal()
 
-    def credit_card_network(self, _payments):
-        p1, p2 = _payments
-        for _ in range(self.TIMES):
-            assert p1.credit_card_network() == p2.credit_card_network()
+    def test_credit_card_owner(self, p1, p2):
+        assert p1.credit_card_owner() == p2.credit_card_owner()
+        assert p1.credit_card_owner(gender=Gender.FEMALE) == \
+            p2.credit_card_owner(gender=Gender.FEMALE)
+
+    def test_credit_card_network(self, p1, p2):
+        assert p1.credit_card_network() == p2.credit_card_network()

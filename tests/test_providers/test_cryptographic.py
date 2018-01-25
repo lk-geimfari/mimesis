@@ -10,6 +10,7 @@ from ._patterns import UUID_REGEX
 
 
 class TestCryptographic(object):
+
     @pytest.fixture
     def crypto(self):
         return Cryptographic()
@@ -65,44 +66,35 @@ class TestCryptographic(object):
 
 
 class TestSeededCryptographic(object):
-    TIMES = 5
 
     @pytest.fixture
-    def _cryptographics(self, seed):
-        return Cryptographic(seed=seed), Cryptographic(seed=seed)
+    def c1(self, seed):
+        return Cryptographic(seed=seed)
 
-    def test_uuid(self, _cryptographics):
-        c1, c2 = _cryptographics
-        for _ in range(self.TIMES):
-            assert c1.uuid() == c2.uuid()
+    @pytest.fixture
+    def c2(self, seed):
+        return Cryptographic(seed=seed)
 
-    def test_hash(self, _cryptographics):
-        c1, c2 = _cryptographics
-        for _ in range(self.TIMES):
-            assert c1.hash() == c2.hash()
-            assert c1.hash(algorithm=Algorithm.SHA512) == \
-                c2.hash(algorithm=Algorithm.SHA512)
+    def test_uuid(self, c1, c2):
+        assert c1.uuid() == c2.uuid()
 
-    def test_bytes(self, _cryptographics):
-        c1, c2 = _cryptographics
-        for _ in range(self.TIMES):
-            assert c1.bytes() == c2.bytes()
-            assert c1.bytes(entropy=16) == c2.bytes(entropy=16)
+    def test_hash(self, c1, c2):
+        assert c1.hash() == c2.hash()
+        assert c1.hash(algorithm=Algorithm.SHA512) == \
+            c2.hash(algorithm=Algorithm.SHA512)
 
-    def test_token(self, _cryptographics):
-        c1, c2 = _cryptographics
-        for _ in range(self.TIMES):
-            assert c1.token() == c2.token()
-            assert c1.token(entropy=16) == c2.token(entropy=16)
+    def test_bytes(self, c1, c2):
+        assert c1.bytes() == c2.bytes()
+        assert c1.bytes(entropy=16) == c2.bytes(entropy=16)
 
-    def test_salt(self, _cryptographics):
-        c1, c2 = _cryptographics
-        for _ in range(self.TIMES):
-            assert c1.salt() == c2.salt()
+    def test_token(self, c1, c2):
+        assert c1.token() == c2.token()
+        assert c1.token(entropy=16) == c2.token(entropy=16)
 
-    def test_mnemonic_phrase(self, _cryptographics):
-        c1, c2 = _cryptographics
-        for _ in range(self.TIMES):
-            assert c1.mnemonic_phrase() == c2.mnemonic_phrase()
-            assert c1.mnemonic_phrase(length=16) == \
-                c2.mnemonic_phrase(length=16)
+    def test_salt(self, c1, c2):
+        assert c1.salt() == c2.salt()
+
+    def test_mnemonic_phrase(self, c1, c2):
+        assert c1.mnemonic_phrase() == c2.mnemonic_phrase()
+        assert c1.mnemonic_phrase(length=16) == \
+            c2.mnemonic_phrase(length=16)
