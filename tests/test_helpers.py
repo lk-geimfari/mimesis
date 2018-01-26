@@ -56,9 +56,8 @@ def test_uniform(random, fmt, length):
     result = random.uniform(2.3, 10.5, fmt)
     assert isinstance(result, float)
 
-    result = str(result)
-    after_point = len(result) - result.index('.') - 1
-    assert after_point == length
+    result = str(result).split('.')[1]
+    assert length == len(result)
 
 
 def test_custom_code(random):
