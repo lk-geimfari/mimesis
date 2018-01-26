@@ -30,8 +30,8 @@ class ClothingSizes(BaseDataProvider):
     def custom_size(self, minimum: int = 40, maximum: int = 62) -> int:
         """Generate clothing size using custom format.
 
-        :param int minimum: Minimum value.
-        :param int maximum: Maximum value.
+        :param minimum: Minimum value.
+        :param maximum: Maximum value.
         :return: Clothing size.
 
         :Example:

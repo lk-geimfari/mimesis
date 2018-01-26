@@ -37,13 +37,28 @@ def test_urandom(random, n):
 
 @pytest.mark.parametrize(
     'seq, length', [
-        (['U'], 10),
-        (['A'], 20),
+        ('U', 10),
+        ('A', 20),
     ],
 )
 def test_schoice(random, seq, length):
     result = random.schoice(seq, length)
     assert len(result) == length
+
+
+@pytest.mark.parametrize(
+    'fmt, length', [
+        ('{:0.04f}', 4),
+        ('{:0.06f}', 6),
+    ],
+)
+def test_uniform(random, fmt, length):
+    result = random.uniform(2.3, 10.5, fmt)
+    assert isinstance(result, float)
+
+    result = str(result)
+    after_point = len(result) - result.index('.') - 1
+    assert after_point == length
 
 
 def test_custom_code(random):

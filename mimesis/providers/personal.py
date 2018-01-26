@@ -34,8 +34,8 @@ class Personal(BaseDataProvider):
     def age(self, minimum: int = 16, maximum: int = 66) -> int:
         """Get a random integer value.
 
-        :param int maximum: Maximum value of age.
-        :param int minimum: Minimum value of age.
+        :param maximum: Maximum value of age.
+        :param minimum: Minimum value of age.
         :return: Random integer.
 
         :Example:
@@ -61,8 +61,8 @@ class Personal(BaseDataProvider):
     def work_experience(self, working_start_age: int = 22) -> int:
         """Get a work experience.
 
-        :param int working_start_age: Age then person start to work.
-        :return: Int. Depend on previous generated age.
+        :param working_start_age: Age then person start to work.
+        :return: Depend on previous generated age.
         """
         a = self._store['age']
         if a == 0:
@@ -286,21 +286,18 @@ class Personal(BaseDataProvider):
         :Example:
             Male
         """
-        codes = [0, 1, 2, 9]
-
         if iso5218:
-            return self.random.choice(codes)
+            return self.random.choice([0, 1, 2, 9])
 
         if symbol:
             return self.random.choice(GENDER_SYMBOLS)
 
-        gender = self.random.choice(self._data['gender'])
-        return gender
+        return self.random.choice(self._data['gender'])
 
     def height(self, minimum: float = 1.5, maximum: float = 2.0) -> str:
         """Generate a random height in M (Meter).
 
-        :param float minimum: Minimum value.
+        :param minimum: Minimum value.
         :param float maximum: Maximum value.
         :return: Height.
 
@@ -313,8 +310,8 @@ class Personal(BaseDataProvider):
     def weight(self, minimum: int = 38, maximum: int = 90) -> int:
         """Generate a random weight in Kg.
 
-        :param int minimum: min value
-        :param int maximum: max value
+        :param minimum: min value
+        :param maximum: max value
         :return: Weight.
 
         :Example:
@@ -336,7 +333,7 @@ class Personal(BaseDataProvider):
     def sexual_orientation(self, symbol: bool = False) -> str:
         """Get a random (LOL) sexual orientation.
 
-        :param bool symbol: Unicode symbol.
+        :param symbol: Unicode symbol.
         :return: Sexual orientation.
 
         :Example:
@@ -396,7 +393,6 @@ class Personal(BaseDataProvider):
         """Get a random nationality.
 
         :param gender: Gender.
-        :type gender: str or int
         :return: Nationality.
 
         :Example:
@@ -468,8 +464,8 @@ class Personal(BaseDataProvider):
     def telephone(self, mask: str = '', placeholder: str = '#') -> str:
         """Generate a random phone number.
 
-        :param str mask: Mask for formatting number.
-        :param str placeholder: A placeholder for a mask (default is #).
+        :param mask: Mask for formatting number.
+        :param placeholder: A placeholder for a mask (default is #).
         :return: Phone number.
 
         :Example:
@@ -486,7 +482,7 @@ class Personal(BaseDataProvider):
     def avatar(self, size: int = 256) -> str:
         """Generate a random avatar..
 
-        :param int size: Size of avatar.
+        :param size: Size of avatar.
         :return: Link to avatar.
         """
         url = 'https://api.adorable.io/avatars/{0}/{1}.png'
