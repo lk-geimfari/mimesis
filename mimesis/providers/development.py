@@ -130,6 +130,4 @@ class Development(BaseDataProvider):
 
         :return: True of False.
         """
-        values = (0, 1)
-        value = self.random.choice(values)
-        return bool(value)
+        return self.random.choice([True, False])
