@@ -207,7 +207,7 @@ class Internet(BaseDataProvider):
     def home_page(self, tld_type: Optional[TLDType] = None) -> str:
         """Generate a random home page.
 
-        :param str tld_type: TLD type.
+        :param tld_type: TLD type.
         :return: Random home page.
 
         :Example:
@@ -235,8 +235,8 @@ class Internet(BaseDataProvider):
                   full_url: bool = False) -> str:
         """Get a random subreddit from the list.
 
-        :param bool nsfw: NSFW subreddit.
-        :param bool full_url: Full URL address.
+        :param nsfw: NSFW subreddit.
+        :param full_url: Full URL address.
         :return: Subreddit or URL to subreddit.
 
         :Example:
