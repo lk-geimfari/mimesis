@@ -14,7 +14,6 @@ class Numbers(BaseDataProvider):
         :param n: Raise 10 to the 'n' power.
         :return: The list of floating-point numbers.
         """
-        # TODO: Use yield?
         nums = [self.random.random()
                 for _ in range(10 ** int(n))]
         return nums
@@ -37,8 +36,6 @@ class Numbers(BaseDataProvider):
         numbers = [self.random.randint(start, end) for _ in range(length)]
         return numbers
 
-    # .. todo:: Refactor this method. It should generate random primes with
-    #   passed length attribute.
     @staticmethod
     def primes(start: int = 1, end: int = 999) -> List[int]:
         """Generate a list of prime numbers.
@@ -46,6 +43,7 @@ class Numbers(BaseDataProvider):
         :param start: First value of range.
         :param end: Last value of range.
         :return: A list of prime numbers from start to end.
+        .. todo:: It should generate random primes with passed length.
         """
         sieve_size = (end // 2 - 1) if end % 2 == 0 else (end // 2)
         sieve = [True] * sieve_size
@@ -91,8 +89,7 @@ class Numbers(BaseDataProvider):
         :param maximum: Maximum of range.
         :return: Number.
         """
-        number = self.random.randint(minimum, maximum)
-        return number
+        return self.random.randint(minimum, maximum)
 
     def rating(self, maximum: float = 5.0) -> float:
         """Generate a random rating for something.
@@ -103,5 +100,4 @@ class Numbers(BaseDataProvider):
         :Example:
             4.7
         """
-        res = '{0:0.1f}'.format(self.random.uniform(0, maximum))
-        return float(res)
+        return self.random.uniform(0, maximum, '{0:0.1f}')

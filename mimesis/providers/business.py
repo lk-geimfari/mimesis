@@ -31,7 +31,7 @@ class Business(BaseDataProvider):
     def company_type(self, abbr: bool = False) -> str:
         """Get a random type of business entity.
 
-        :param bool abbr: Abbreviated company type.
+        :param abbr: Abbreviated company type.
         :return: Types of business entity.
 
         :Example:
@@ -93,14 +93,14 @@ class Business(BaseDataProvider):
               maximum: float = 1000.00) -> str:
         """Generate a random price.
 
-        :param float minimum: Max value of price.
-        :param float maximum: Min value of price.
+        :param minimum: Max value of price.
+        :param maximum: Min value of price.
         :return: Price.
 
         :Example:
             599.99 $.
         """
-        price = self.random.uniform(minimum, maximum)
+        price = self.random.uniform(minimum, maximum, '{0:.2f}')
         return '{0:.2f} {1}'.format(price, self.currency_symbol())
 
     def price_in_btc(self, minimum: float = 0, maximum: float = 2) -> str:
@@ -113,9 +113,10 @@ class Business(BaseDataProvider):
         :Example:
             0.5885238 BTC
         """
-        return '{:.7f} BTC'.format(
+        return '{} BTC'.format(
             self.random.uniform(
                 minimum,
                 maximum,
+                '{:.7f}',
             ),
         )

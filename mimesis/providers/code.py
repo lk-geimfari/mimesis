@@ -62,7 +62,7 @@ class Code(BaseDataProvider):
 
         Default ``fmt`` is EAN-13, but you also can use EAN-8.
 
-        :param str fmt: Format of EAN.
+        :param fmt: Format of EAN.
         :return: EAN.
         :raises NonEnumerableError: if fmt is not enum EANFormat.
 

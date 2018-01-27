@@ -11,7 +11,7 @@ get a random item of the enum object.
 
 import os
 import random
-from typing import Any, List, Optional, Sequence, Union
+from typing import Any, List, Optional, Sequence
 
 __all__ = ['Random', 'get_random_item']
 
@@ -62,15 +62,15 @@ class Random(random.Random):
         """
         return os.urandom(*args, **kwargs)
 
-    def schoice(self, seq: Union[tuple, list], end: int = 10) -> str:
+    def schoice(self, seq: str, end: int = 10) -> str:
         """Choice function which returns string created from sequence.
 
         :param seq: Sequence of letters or digits.
         :type seq: tuple or list
-        :param int end: Max value.
+        :param end: Max value.
         :return: Single string.
         """
-        return ''.join(self.choice(seq)
+        return ''.join(self.choice(list(seq))
                        for _ in range(end))
 
     def custom_code(self, mask: str = '@###',
@@ -101,6 +101,17 @@ class Random(random.Random):
             code[i] = a
         return code.decode()
 
+    def uniform(self, a, b, fmt: str = None) -> float:
+        """Get a random number in the range [a, b) or [a, b] depending on rounding.
+
+        :param a: Minimum value.
+        :param b: Maximum value.
+        :param fmt: Format.
+        :return:
+        """
+        fmt = '{}' if fmt is None else fmt
+        return float(fmt.format(a + (b - a) * self.random()))
+
 
 def get_random_item(enum: Any, rnd: Optional[Random] = None) -> Any:
     """Get random item of enum object.
@@ -109,6 +120,6 @@ def get_random_item(enum: Any, rnd: Optional[Random] = None) -> Any:
     :param rnd: Custom random object.
     :return: Random item of enum.
     """
-    if rnd:
+    if rnd and isinstance(rnd, Random):
         return rnd.choice(list(enum))
     return random.choice(list(enum))

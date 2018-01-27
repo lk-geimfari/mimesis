@@ -91,8 +91,8 @@ class Structured(BaseDataProvider):
                              attribute: str = None) -> str:
         """Generate random value for specified HTML tag attribute.
 
-        :param str tag: An HTML tag.
-        :param str attribute: An attribute of the specified tag.
+        :param tag: An HTML tag.
+        :param attribute: An attribute of the specified tag.
         :return: An attribute.
         :raises NotImplementedError: if tag is unsupported.
         """
@@ -135,7 +135,6 @@ class Structured(BaseDataProvider):
             When used recursively, will return a Python object instead of JSON
             string.
         :return: JSON
-        ..todo: This method returns json too, not only str.
         """
         root = self.random.choice([list, dict])()
 

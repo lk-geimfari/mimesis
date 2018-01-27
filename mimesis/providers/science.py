@@ -82,8 +82,7 @@ class Science(BaseDataProvider):
         :Example:
             AGUGACACAA
         """
-        letters = ['U', 'C', 'G', 'A']
-        return self.random.schoice(letters, length)
+        return self.random.schoice('UCGA', length)
 
     def dna(self, length: int = 10) -> str:
         """Generate a random DNA sequence.
@@ -94,5 +93,4 @@ class Science(BaseDataProvider):
         :Example:
             GCTTTAGACC
         """
-        letters = ['T', 'C', 'G', 'A']
-        return self.random.schoice(letters, length)
+        return self.random.schoice('TCGA', length)
