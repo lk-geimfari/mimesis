@@ -47,8 +47,13 @@ class Hardware(BaseDataProvider):
         :Example:
             4.0 GHz.
         """
-        cf = self.random.uniform(1.5, 4.3, '{0:.1f}')
-        return '{}GHz'.format(cf)
+        return '{}GHz'.format(
+            self.random.uniform(
+                a=1.5,
+                b=4.3,
+                precision=1,
+            ),
+        )
 
     def generation(self) -> str:
         """Get a random generation.

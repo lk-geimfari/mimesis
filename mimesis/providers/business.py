@@ -100,8 +100,8 @@ class Business(BaseDataProvider):
         :Example:
             599.99 $.
         """
-        price = self.random.uniform(minimum, maximum, '{0:.2f}')
-        return '{0:.2f} {1}'.format(price, self.currency_symbol())
+        price = self.random.uniform(minimum, maximum, precision=2)
+        return '{0} {1}'.format(price, self.currency_symbol())
 
     def price_in_btc(self, minimum: float = 0, maximum: float = 2) -> str:
         """Generate random price in BTC.
@@ -117,6 +117,6 @@ class Business(BaseDataProvider):
             self.random.uniform(
                 minimum,
                 maximum,
-                '{:.7f}',
+                precision=7,
             ),
         )

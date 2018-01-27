@@ -1,6 +1,7 @@
 ## Version 1.0.6
 
 **Added**:
+- Added support of parameter `dms` for `coordinates, longitude, latitude`
 - Added method `Text.rgb_color`
 - Added support of parameter `safe` for method `Text.hex_color`
 - Added an alias `zip_code` for `Address.postal_code`
