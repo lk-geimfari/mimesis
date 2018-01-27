@@ -57,14 +57,15 @@ Mimesis currently includes support for 33 different [locales](http://mimesis.rea
 
 ```python
 >>> from mimesis import Personal
+>>> from mimesis.enums import Gender
 
 >>> de = Personal('de')
 >>> pl = Personal('pl')
 
->>> de.full_name()
+>>> de.full_name(gender=Gender.FEMALE)
 'Sabrina Gutermuth'
 
->>> pl.full_name()
+>>> pl.full_name(gender=Gender.MALE)
 'Światosław Tomankiewicz'
 ```
 
