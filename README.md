@@ -70,7 +70,7 @@ Mimesis currently includes support for 33 different [locales](http://mimesis.rea
 
 ## Data providers
 
-Mimesis support over twenty different [data providers](http://mimesis.readthedocs.io/#id2) available, which can produce data related to food, people, computer hardware, transportation, addresses, and more.
+Mimesis support over twenty different [data providers](http://mimesis.readthedocs.io/#providers) available, which can produce data related to food, people, computer hardware, transportation, addresses, and more.
 
 ## How to Contribute
 1. Take a look at [contributing guidelines](https://github.com/lk-geimfari/mimesis/blob/master/CONTRIBUTING.md).

@@ -17,7 +17,7 @@ Mimesis
 **Mimesis** is a fast and easy to use library for Python programming language, which helps generate mock data for a variety of purposes (see «\ `Data providers`_\ ») in a variety of languages (see «\ `Locales`_\ »). This data can be particularly useful during software development and testing. For example, it could be used to populate a testing database, create beautiful JSON/XML/HTML files, anonymize data taken from a production service, etc.
 
 .. _Locales: #id1
-.. _Data providers: #id2
+.. _Data providers: #providers
 
 This library offers a number of advantages over other similar libraries:
 
@@ -25,10 +25,7 @@ This library offers a number of advantages over other similar libraries:
 -  Completeness. Strives to provide many detailed providers that offer a variety of data generators.
 -  Simplicity. Does not require any modules other than the Python standard library.
 
-See `here <https://gist.github.com/lk-geimfari/461ce92fd32379d7b73c9e12164a9154>`_ for an example of how we compare performance with other
-libraries.
-
-.. _faster: http://i.imgur.com/pCo6yPA.png
+.. _faster: https://gist.github.com/lk-geimfari/e76c12eb3c9a8afbf796c706d4ba779d
 
 
 Installation
@@ -142,7 +139,7 @@ Providers
 ---------
 Mimesis support over twenty different data providers available, which can produce data related to food, people, computer hardware, transportation, addresses, and more.
 
-List of supported data providers available `here <http://mimesis.readthedocs.io/providers.html>`_
+List of supported data providers available `here <http://mimesis.readthedocs.io/providers.html>`_.
 
 Custom Providers
 ----------------
