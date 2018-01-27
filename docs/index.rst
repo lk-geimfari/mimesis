@@ -19,13 +19,16 @@ Mimesis
 .. _Locales: #id1
 .. _Data providers: #providers
 
-This library offers a number of advantages over other similar libraries:
 
--  Performance. Significantly `faster`_ than other similar libraries.
+Advantages
+----------
+This library offers a number of advantages over other similar libraries, such as Faker:
+
+-  Performance. Significantly faster than other similar libraries.
 -  Completeness. Strives to provide many detailed providers that offer a variety of data generators.
 -  Simplicity. Does not require any modules other than the Python standard library.
 
-.. _faster: https://gist.github.com/lk-geimfari/e76c12eb3c9a8afbf796c706d4ba779d
+`Here <https://gist.github.com/lk-geimfari/e76c12eb3c9a8afbf796c706d4ba779d>`_ you can look how we compared performance.
 
 
 Installation
