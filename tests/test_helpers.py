@@ -57,7 +57,7 @@ def test_uniform(random, fmt, length):
     assert isinstance(result, float)
 
     result = str(result).split('.')[1]
-    assert length == len(result)
+    assert length >= len(result)
 
 
 def test_custom_code(random):
