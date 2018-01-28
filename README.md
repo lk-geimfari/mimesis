@@ -53,7 +53,7 @@ That's library is really easy to use and a simple usage example is given below:
 ```
 
 ## Locales
-Mimesis currently includes support for 33 different [locales](http://mimesis.readthedocs.io/#id1). You can specify a locale when creating providers and they will return data that is appropriate for the language or country associated with that locale:
+Mimesis currently includes support for 33 different [locales](http://mimesis.readthedocs.io/quickstart.html#supported-locales). You can specify a locale when creating providers and they will return data that is appropriate for the language or country associated with that locale:
 
 ```python
 >>> from mimesis import Personal
