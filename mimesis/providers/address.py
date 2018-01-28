@@ -191,13 +191,14 @@ class Address(BaseDataProvider):
         return self.random.choice(
             self._data['city'])
 
-    def _get_fs(self, key, dms: bool = False) -> Union[str, float]:
+    def _get_fs(self, key: str, dms: bool = False) -> Union[str, float]:
         """Get float number.
 
         :param key: Key (`lt` or `lg`).
         :param dms: DMS format.
         :return: Float number
         """
+        # Default range is a range of longitude.
         rng = (-90, 90) if key == 'lt' else (-180, 180)
         result = self.random.uniform(*rng, precision=6)
 
@@ -209,6 +210,7 @@ class Address(BaseDataProvider):
     def latitude(self, dms: bool = False) -> Union[str, float]:
         """Generate a random value of latitude.
 
+        :param dms: DMS format.
         :return: Value of longitude.
 
         :Example:
@@ -219,6 +221,7 @@ class Address(BaseDataProvider):
     def longitude(self, dms: bool = False) -> Union[str, float]:
         """Generate a random value of longitude.
 
+        :param dms: DMS format.
         :return: Value of longitude.
 
         :Example:
@@ -229,6 +232,7 @@ class Address(BaseDataProvider):
     def coordinates(self, dms: bool = False) -> dict:
         """Generate random geo coordinates.
 
+        :param dms: DMS format.
         :return: Dict with coordinates.
 
         :Example:

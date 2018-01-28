@@ -26,6 +26,13 @@ class TestAddress(object):
         result = _address.street_number()
         assert re.match(r'[0-9]{1,5}$', result)
 
+    @pytest.mark.parametrize('dms', [True, False])
+    def test__get_fs(self, _address, dms):
+        latitude = _address._get_fs('lt', dms=dms)
+        assert latitude
+        longitude = _address._get_fs('lg', dms=dms)
+        assert longitude
+
     def test_latitude(self, _address):
         result = _address.latitude()
         assert isinstance(result, float)
