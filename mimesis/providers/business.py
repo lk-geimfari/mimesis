@@ -52,7 +52,7 @@ class Business(BaseDataProvider):
         """
         return '© {}, {}'.format(
             self.company(),
-            self.company_type(True),
+            self.company_type(abbr=True),
         )
 
     def currency_iso_code(self) -> str:
