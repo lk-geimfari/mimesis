@@ -1,6 +1,7 @@
 ## Version 1.0.6
 
 **Added**:
+- Added support of custom providers for `schema.Field`
 - Added support of parameter `dms` for `coordinates, longitude, latitude`
 - Added method `Text.rgb_color`
 - Added support of parameter `safe` for method `Text.hex_color`

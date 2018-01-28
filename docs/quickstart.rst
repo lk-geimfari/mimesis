@@ -38,7 +38,7 @@ So what did the code above?
 Seeded Data
 -----------
 
-For using seeded data just pass an argument ``seed`` (which can be *int*, *str*, *bytes*, *bytearray*)
+For using seeded data just pass an argument *seed* (which can be *int*, *str*, *bytes*, *bytearray*)
 to data provider:
 
 .. code-block:: python
@@ -252,7 +252,9 @@ specific data. This can be done like this:
 
 .. code:: python
 
-    >>> class SomeProvider():
+    >>> from mimesis.providers.base import BaseProvider
+
+    >>> class SomeProvider(BaseProvider):
     ...     class Meta:
     ...         name = "some_provider"
     ...
@@ -260,7 +262,7 @@ specific data. This can be done like this:
     ...     def hello():
     ...         return 'Hello!'
 
-    >>> class Another():
+    >>> class Another(BaseProvider):
     ...     @staticmethod
     ...     def bye():
     ...         return "Bye!"
@@ -285,7 +287,7 @@ You can also add multiple providers:
     'Bye!'
 
 Everything is pretty easy and self-explanatory here, therefore, we will
-only clarify one moment — attribute ``name``, class ``Meta`` is the name
+only clarify one moment — attribute *name*, class *Meta* is the name
 of a class through which access to methods of user-class providers is
 carried out. By default class name is the name of the class in the lower
 register.
@@ -296,7 +298,7 @@ Built-in Providers
 
 Most countries, where only one language is official, have data typical
 only for these particular countries. For example, «CPF» for Brazil
-(``pt-br``), «SSN» for USA (``en``). This kind of data can cause
+(**pt-br**), «SSN» for USA (**en**). This kind of data can cause
 discomfort and meddle with the order (or at least annoy) by being
 present in all the objects regardless of the chosen language standard.
 You can see that for yourselves by looking at the example (the code
@@ -314,7 +316,7 @@ We bet everyone would agree that this does not look too good.
 Perfectionists, as we are, have taken care of this in a way that some
 specific regional provider would not bother other providers for other
 regions. For this reason, class providers with locally-specific data are
-separated into a special sub-package (*mimesis.builtins*) for keeping
+separated into a special sub-package (**mimesis.builtins**) for keeping
 a common class structure for all languages and their objects.
 
 Here’s how it works:
@@ -330,7 +332,7 @@ Here’s how it works:
     '696.441.186-00'
 
 If you want to change default name of built-in provider, just change
-value of attribute ``name``, class ``Meta`` of the builtin provider:
+value of attribute *name*, class *Meta* of the builtin provider:
 
 .. code:: python
 
@@ -339,8 +341,8 @@ value of attribute ``name``, class ``Meta`` of the builtin provider:
     >>> generic.brasil.cpf()
     '019.775.929-70'
 
-Or just inherit the class and override the value of attribute ``name``
-of class ``Meta`` of the provider (in our case this is :class:`~mimesis.builtins.BrazilSpecProvider`) :
+Or just inherit the class and override the value of attribute *name*
+of class *Meta* of the provider (in our case this is :class:`~mimesis.builtins.BrazilSpecProvider`) :
 
 .. code:: python
 
@@ -376,15 +378,15 @@ Generating by Schema
 
 For generating data by schema, just create an instance of :class:`~mimesis.schema.Field`
 object, which takes any string which represents the name of data
-provider in format ``provider.method_name`` (explicitly defines that the
-method ``method_name`` belongs to data-provider ``provider``) or ``method`` (will be
-chosen the first provider which has a method ``method_name``) and the
-``**kwargs``\ of the method ``method_name``, after that you should
+provider in format *provider.method_name* (explicitly defines that the
+method *method_name* belongs to data-provider *provider*) or *method* (will be
+chosen the first provider which has a method *method_name*) and the
+**\**kwargs** of the method *method_name*, after that you should
 describe the schema in lambda function and pass it to
 the object :class:`~mimesis.schema.Schema` and call method :meth:`~mimesis.schema.Schema.create`.
 
 Optionally, you can apply a *key function* to result returned by the
-method, to do it, just pass the parameter ``key`` with a callable object
+method, to do it, just pass the parameter `key` with a callable object
 which returns final result.
 
 Example of usage:
@@ -401,9 +403,9 @@ Example of usage:
     ...         'version': _('version', pre_release=True),
     ...         'timestamp': _('timestamp', posix=False),
     ...         'owner': {
-    ...             'email': _('email', key=str.lower),
+    ...             'email': _('personal.email', key=str.lower),
     ...             'token': _('token'),
-    ...             'creator': _('personal.full_name', gender=Gender.FEMALE),
+    ...             'creator': _('full_name', gender=Gender.FEMALE),
     ...         },
     ...     }
     ... )
@@ -428,6 +430,26 @@ Output:
       }
     ]
 
+By default, :class:`~mimesis.schema.Field` works only with providers which supported by :class:`~mimesis.Generic`,
+to change this behavior should be passed parameter *providers* with a sequence of data providers:
+
+.. code:: python
+
+    >>> from mimesis.schema import Field
+    >>> from mimesis import builtins as b
+
+    >>> extra = (
+    ...     b.RussiaSpecProvider,
+    ...     b.NetherlandsSpecProvider,
+    ... )
+    >>> _ = Field('en', providers=extra)
+
+    >>> _('snils')
+    '239-315-742-84'
+
+    >>> _('bsn')
+    '657340522'
+
 
 Decorators
 ----------
@@ -449,5 +471,5 @@ Example of usage for romanization of Russian full name:
     >>> russian_name()
     'Veronika Denisova'
 
-At this moment it’s works only for Russian (``ru``),
-Ukrainian (``uk``) and Kazakh (``kk``):
+At this moment it’s works only for Russian (**ru**),
+Ukrainian (**uk**) and Kazakh (**kk**):
