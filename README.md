@@ -12,7 +12,7 @@
 
 
 **Mimesis** is a fast and easy to use library for Python programming language, which helps generate synthetic
-data for a variety of purposes in a variety of languages. This data can be particularly useful during software development and testing. For example, it could be used to populate a testing database, create beautiful JSON/XML/HTML files, anonymize data taken from a production service, etc.
+data for a variety of purposes in a variety of languages. This data can be particularly useful during software development and testing. For example, it could be used to populate a testing database, create beautiful JSON and XML files, anonymize data taken from a production service, etc.
 
 This library offers a number of advantages over other similar libraries:
 
@@ -36,7 +36,7 @@ also you can install it manually:
 ```
 
 ## Documentation
-Examples below should help you get started. Complete documentation is available on [Read the Docs](http://mimesis.readthedocs.io/).
+Complete documentation is available on [Read the Docs](http://mimesis.readthedocs.io/).
 
 ## Getting started
 That's library is really easy to use and a simple usage example is given below:
@@ -53,7 +53,7 @@ That's library is really easy to use and a simple usage example is given below:
 ```
 
 ## Locales
-Mimesis currently includes support for 33 different [locales](http://mimesis.readthedocs.io/#id1). You can specify a locale when creating providers and they will return data that is appropriate for the language or country associated with that locale:
+Mimesis currently includes support for 33 different [locales](http://mimesis.readthedocs.io/quickstart.html#supported-locales). You can specify a locale when creating providers and they will return data that is appropriate for the language or country associated with that locale:
 
 ```python
 >>> from mimesis import Personal
@@ -68,10 +68,6 @@ Mimesis currently includes support for 33 different [locales](http://mimesis.rea
 >>> pl.full_name(gender=Gender.MALE)
 'Światosław Tomankiewicz'
 ```
-
-## Data providers
-
-Mimesis support over twenty different [data providers](http://mimesis.readthedocs.io/#providers) available, which can produce data related to food, people, computer hardware, transportation, addresses, and more.
 
 ## How to Contribute
 1. Take a look at [contributing guidelines](https://github.com/lk-geimfari/mimesis/blob/master/CONTRIBUTING.md).
