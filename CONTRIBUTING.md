@@ -1,5 +1,9 @@
 ## Contributing Guidelines
 
+The [source code](https://github.com/lk-geimfari/mimesis) and [issue tracker](https://github.com/lk-geimfari/mimesis/issues>) are
+hosted on GitHub. *Mimesis* is tested against Python 3.5 through 3.6 on [Travis-CI](https://travis-ci.org/lk-geimfari/mimesis).
+Test coverage is monitored with [Codecov](https://codecov.io/gh/lk-geimfari/mimesis).
+
 ### Development environment
 Mimesis does not have any need for third-party tools, but we use a lot of tools in development stage,
 which you should install on your system if you want to contribute.
