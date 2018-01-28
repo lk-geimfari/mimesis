@@ -1,6 +1,12 @@
-==========================================
-Generating mock data using Mimesis: Part I
-==========================================
+==============
+Advanced Usage
+==============
+
+Here we gonna speaking about integration with web frameworks, best practices
+and a number of most useful features of the library.
+
+Intro
+-----
 
 The ability to generate mock but valid data comes in handy in app
 development, where you need to work with databases. Filling in the
@@ -12,12 +18,6 @@ thousand users (or other types of data). In this article as well as the
 two following ones we will introduce you to a tool, which immensely
 simplifies generating mock data, initial database loading and testing in
 general.
-
-**Mimesis** is a Python library, which helps generate synthetic data
-for various purposes. The library was written with the use of tools from
-the standard Python library, and therefore, it does not have any side
-dependencies. Currently the library supports over 33 languages and over 23 class
-providers, supplying various data.
 
 Generating data
 ---------------
@@ -100,7 +100,7 @@ listed in the end of the article and find out more. The library is
 pretty simple. All you need to do to start working with the data is to
 create a class provider. The most common type of data in apps are
 personal users’ data, such as name, last name, credit card info, etc.
-There is a special class provider for this type of data — ``Personal()``,
+There is a special class provider for this type of data — :class:`~mimesis.Personal()`,
 which takes the code from the language standard in the form of a line as
 shown below:
 
@@ -118,7 +118,7 @@ shown below:
 
 Almost every web-application requires e-mail for registration.
 Naturally, the library supports the ability to generate e-mails with the
-help of ``email()`` method ``Personal()`` class, as below:
+help of :meth:`~mimesis.Personal.email()` method :class:`~mimesis.Personal()` class, as below:
 
 .. code:: python
 
@@ -127,7 +127,7 @@ help of ``email()`` method ``Personal()`` class, as below:
 
 There is a little problem with the method above, which may cause the
 code to be slightly “dirty” in case the app uses more than one type of
-class providers. In such situation you should use object ``Generic()``,
+class providers. In such situation you should use object :class:`~mimesis.Generic()`,
 which grants access to all providers from one single object:
 
 .. code:: python
@@ -147,27 +147,11 @@ which grants access to all providers from one single object:
     >>> g.science.math_formula()
     'A = (h * (a + b)) / 2'
 
-Combining data gives you a vast field for experimentation. For example,
-you can create mock (female) Visa (Maestro, MasterCard) credit card
-holders:
-
-.. code:: python
-    >>> from mimesis import Payment
-    >>> from mimesis.enums import Gender, CardType
-    >>> user = Payment('en')
-    >>> for _ in range(0, 3):
-    ...     user.credit_card_owner()
-    ...
-    {'exp_date': '02/20', 'owner': 'Laverna Morrison', 'card_number': '4920 3598 2121 3328'}
-    {'exp_date': '11/19', 'owner': 'Melany Martinez', 'card_number': '4980 9423 5464 1201'}
-    {'exp_date': '01/19', 'owner': 'Cleora Mcfarland', 'card_number': '4085 8037 5801 9703'}
-
 As mentioned above, the library supports over 23 class providers
-with data for all possible situations (if not, your PR with corrections
-of such an awful injustice are more than welcome). For example, if you
+with data for all possible situations. For example, if you
 are working on an app dedicated to transportation and logistics and you
 need to generate transportation models, you can easily do this by using
-``Transport()`` class provider, which contains data related to
+:class:`~mimesis.Transport()` class provider, which contains data related to
 transportation:
 
 .. code:: python
@@ -189,7 +173,6 @@ Or you could indicate the transport mask model:
 .. code:: python
 
     >>> for _ in range(0, 5):
-    ...     # sharp - placeholder for numbers, @ - for letters
     ...     trans.truck(model_mask="##@")
     ...
     'Henschel-16G'
@@ -201,15 +184,15 @@ Or you could indicate the transport mask model:
 Quite often when testing web-applications (blog would be an excellent
 example) you need to generate text data (text, sentences, tags, etc.).
 Manually inputting the text is long and boring, and Mimesis allows you
-to avoid this thanks to a class provider ``Text()``:
+to avoid this thanks to a class provider :class:`~mimesis.Text()`:
 
 .. code:: python
 
     >>> from mimesis import Text
     >>> text = Text('en')
 
-    >>> text.text(quantity=1)
-    'Python is a programming language that lets you work quickly and integrate systems more effectively'
+    >>> text.title()
+    'Python is a programming language.'
 
 You can get a list of random words:
 
@@ -246,11 +229,10 @@ solves is generating valid data. Consequently, while there are no rigid
 rules of working with the library, here are a few recommendations that
 will help you keep your testing environment in order and will avert
 growth of entropy within your project. Recommendations are quite simple
-and are fully in tune with the Python spirit (if you disagree, feel free
-to let us know).
+and are fully in tune with the Python spirit.
 
-ORM
----
+Using with ORM
+--------------
 
 Despite the previous note that the library isn’t to be used with a
 certain database or ORM, the need for test data usually occurs in
@@ -266,9 +248,9 @@ Creating objects
 ----------------
 
 If your app requires data in one particular language, it’s preferable to
-use class ``Generic()``, giving access to all class providers through a
+use class :class:`~mimesis.Generic()`, giving access to all class providers through a
 single object, rather than through multiple separate class providers.
-Using ``Generic()`` will allow you to get rid of several extra lines of
+Using :class:`~mimesis.Generic()` will allow you to get rid of several extra lines of
 code.
 
 Incorrect:
@@ -307,13 +289,13 @@ Still correct:
 
 It means that importing class providers separately makes sense only if
 you limit yourself to the data available through the class you imported,
-otherwise it’s better to use ``Generic()``.
+otherwise it’s better to use :class:`~mimesis.Generic()`.
 
 Inserting data into database
 ----------------------------
 
 If you need to generate data and import it into a database we strongly
-recommend generating data in chunks rather than ``600k`` at once. Keep
+recommend generating data in chunks rather than *600k* at once. Keep
 in mind the possible limitations of databases, ORM, etc. The smaller the
 generated data chunks are, the faster the process will go.
 
@@ -333,11 +315,11 @@ Very bad:
 Importing images
 ----------------
 
-Class ``Internet()`` boasts of several methods which generate image
+Class :class:`~mimesis.Internet()` boasts of several methods which generate image
 links (more details here). Links to images locate on remote servers
 would be enough, however, if you still want to have a number of random
 images locally, you can download images generated by the respective
-class ``Internet()`` methods with the help of function
+class :class:`~mimesis.Internet()` methods with the help of function
 ``download_image()`` from model utils:
 
 .. code:: python
@@ -347,5 +329,15 @@ class ``Internet()`` methods with the help of function
 
     >>> net = Internet()
 
-    >>> img_url = net.stock_image(category='food', width=1920, height=1080)
-    >>> download_image(url=img_url, save_path='/some/path/')
+    >>> url = net.stock_image(width=1920, height=1080)
+    >>> download_image(url=url, save_path='/some/path/')
+
+
+Integration with third-party libraries
+--------------------------------------
+
+- `mimesis-factory`_ - Integration with ``factory_boy``.
+- `pytest-mimesis`_ - is a pytest plugin that provides pytest fixtures for Mimesis providers.
+
+.. _mimesis-factory: https://github.com/mimesis-lab/mimesis-factory
+.. _pytest-mimesis: https://github.com/lk-geimfari/pytest-mimesis

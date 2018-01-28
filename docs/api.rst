@@ -2,11 +2,11 @@
 API Reference
 =============
 
-This part of the documentation covers all the interfaces of *Mimesis*.
+This part of the documentation covers all the public interfaces of *Mimesis*.
 
 
-Builtins
-========
+Builtin Data Providers
+======================
 
 BrazilSpecProvider
 ------------------
@@ -65,8 +65,8 @@ Decorators
    :members:
 
 
-Exceptions
-==========
+Custom Exceptions
+=================
 
 UnsupportedAlgorithm
 --------------------
@@ -105,8 +105,8 @@ NonEnumerableError
    :members:
 
 
-Providers
-=========
+Usual Data Providers
+====================
 
 Address
 -------
@@ -264,7 +264,7 @@ UnitSystem
 
 
 Schema
-=======
+======
 
 AbstractField
 -------------
