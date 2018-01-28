@@ -14,7 +14,7 @@ Mimesis
 	:target: https://badge.fury.io/py/mimesis
 
 
-**Mimesis** is a fast and easy to use library for Python programming language, which helps generate mock data for a variety of purposes (see «\ `Data providers`_\ ») in a variety of languages (see «\ `Locales`_\ »). This data can be particularly useful during software development and testing. For example, it could be used to populate a testing database, create beautiful JSON/XML/HTML files, anonymize data taken from a production service, etc.
+**Mimesis** is a fast and easy to use library for Python programming language, which helps generate synthetic data for a variety of purposes (see «\ `Data providers`_\ ») in a variety of languages (see «\ `Locales`_\ »). This data can be particularly useful during software development and testing. For example, it could be used to populate a testing database, create beautiful JSON/XML/HTML files, anonymize data taken from a production service, etc.
 
 .. _Locales: #id1
 .. _Data providers: #providers
@@ -28,7 +28,7 @@ This library offers a number of advantages over other similar libraries, such as
 -  Completeness. Strives to provide many detailed providers that offer a variety of data generators.
 -  Simplicity. Does not require any modules other than the Python standard library.
 
-`Here <https://gist.github.com/lk-geimfari/e76c12eb3c9a8afbf796c706d4ba779d>`_ you can look how we compared performance.
+`Here <http://mimesis.readthedocs.io/comparison.html>`_ you can look how we compared performance.
 
 
 Installation
@@ -90,6 +90,11 @@ For using seeded data just pass argument ``seed`` to data provider:
 .. code-block:: python
 
     >>> from mimesis import Personal
+
+    >>> personal = Personal('tr', seed=0xFF)
+    >>> personal.full_name()
+    'Gizem Tekand'
+
     >>> personal = Personal('tr', seed=0xFF)
     >>> personal.full_name()
     'Gizem Tekand'
@@ -99,23 +104,29 @@ Locales
 -------
 
 You can specify a locale when creating providers and they will return data that is appropriate for
-the language or country associated with that locale. `Mimesis` currently includes support
-for `33 different locales <http://mimesis.readthedocs.io/locales.html>`_.
-
-
-Example of usage:
+the language or country associated with that locale:
 
 .. code-block:: python
 
-    >>> from mimesis import Text
-    >>> en = Text('en')
-    >>> de = Text('de')
+    >>> from mimesis import Address
 
-    >>> en.color()
-    'Blue'
+    >>> de = Address('de')
+    >>> ru = Address('ru')
 
-    >>> de.color()
-    'Türkis'
+    >>> de.region()
+    'Brandenburg'
+
+    >>> ru.federal_subject()
+    'Алтайский край'
+
+    >>> de.address()
+    'Mainzer Landstraße 912'
+
+    >>> ru.address()
+    'ул. Пехотная 125'
+
+
+Mimesis currently includes support for `33 different locales <http://mimesis.readthedocs.io/locales.html>`_.
 
 When you only need to generate data for a single locale, use the ``Generic()`` provider, and you can access all Mimesis
 providers from one object.
@@ -142,7 +153,7 @@ Providers
 ---------
 Mimesis support over twenty different data providers available, which can produce data related to food, people, computer hardware, transportation, addresses, and more.
 
-List of supported data providers available `here <http://mimesis.readthedocs.io/providers.html>`_.
+List of supported data providers available `on this page <http://mimesis.readthedocs.io/providers.html>`_.
 
 Custom Providers
 ----------------
@@ -277,7 +288,7 @@ Generate Data by Schema
 For generating data by schema, just create an instance of ``Field``
 object, which takes any string which represents the name of data
 provider in format ``provider.method_name`` (explicitly defines that the
-method belongs to data-provider ``provider``) or ``method`` (will be
+method ``method_name`` belongs to data-provider ``provider``) or ``method`` (will be
 chosen the first provider which has a method ``method_name``) and the
 ``**kwargs``\ of the method ``method_name``, after that you should
 describe the schema in lambda function and pass it to the object
@@ -353,56 +364,12 @@ Ukrainian (``uk``) and Kazakh (``kk``):
 Best Practice
 -------------
 We strongly recommend to read articles which published below. There we are speak about
-best practices and a number of most useful features of the library.
+integration with web frameworks, best practices and a number of most useful features of the library.
 
 .. toctree::
    :maxdepth: 3
 
    part_1
-
-
-
-Integration with Web Application Frameworks
--------------------------------------------
-
-You can use Mimesis during development and testing of applications built
-on a variety of frameworks. Here is an example of integration with a
-Flask application:
-
-.. code:: python
-
-    class Patient(db.Model):
-        id = db.Column(db.Integer, primary_key=True)
-        full_name = db.Column(db.String(100))
-        blood_type = db.Column(db.String(64))
-
-        def __init__(self, **kwargs):
-            super(Patient, self).__init__(**kwargs)
-
-        @staticmethod
-        def populate(count=500, locale=None):
-            import mimesis
-
-            person =  mimesis.Personal(locale=locale)
-
-            for _ in range(count):
-                patient = Patient(
-                    full_name=person.full_name(),
-                    blood_type=person.blood_type(),
-                )
-
-                db.session.add(patient)
-                try:
-                    db.session.commit()
-                except IntegrityError:
-                    db.session.rollback()
-
-Just run shell mode and do following:
-
-.. code:: python
-
-    >>> Patient().populate(count=1000, locale='en')
-
 
 
 Integration with third-party libraries
@@ -417,36 +384,14 @@ Integration with third-party libraries
 Contributing
 ------------
 
-The `source code <https://github.com/lk-geimfari/mimesis>`_ and `issue tracker <https://github.com/lk-geimfari/mimesis/issues>`_ are hosted on GitHub.  *Mimesis* is tested against Python 3.5 through 3.6 on `Travis-CI <https://travis-ci.org/lk-geimfari/mimesis>`_.  Test coverage is monitored with `Codecov <https://codecov.io/gh/lk-geimfari/mimesis>`_.
-
-Guidelines
-~~~~~~~~~~
 Your contributions are always welcome! Please adhere to the contribution guidelines:
 
-- Add one change per one commit.
-- Include only commit in each pull request.
-- Document your code with comments in English.
-- Check your spelling and grammar.
-- Check code style with `pycodestyle <https://pycodestyle.readthedocs.io/en/latest/>`_, `pylint <https://www.pylint.org/>`_, or another similar tool.
-- `Run the test suite <#running-tests>`_ and ensure all tests pass.
-- Write additional tests to cover new functionality.
-- Do not write bad code!
+1. Take a look at `contributing guidelines <https://github.com/lk-geimfari/mimesis/blob/master/CONTRIBUTING.md>`_.
+2. Check for open issues or open a fresh issue to start a discussion around a feature idea or a bug.
+3. Fork the repository on GitHub to start making your changes to the *your_branch* branch.
+4. Add yourself to the list of `contributors <https://github.com/lk-geimfari/mimesis/blob/master/CONTRIBUTORS.md>`_.
+5. Send a pull request and bug the maintainer until it gets merged and published.
 
-
-Running Tests
-~~~~~~~~~~~~~
-
-.. code-block:: bash
-
-    ➜  ~ pip install -r dev_requirements.txt
-    ➜  ~ cd mimesis/
-    ➜  py.test
-
-or
-
-.. code-block:: bash
-
-    ➜ make test
 
 License and Disclaimer
 ----------------------
