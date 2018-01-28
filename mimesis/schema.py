@@ -17,7 +17,7 @@ class AbstractField(StrMixin):
     AbstractField is a class for generating data by the name of the method.
 
     Instance of this object takes any string which represents name
-    of any method of any supported data provider (class ``Generic()``)
+    of any method of any supported data provider (class :class:`~mimesis.Generic`)
     and the ``**kwargs`` of the method:
 
     >>> _ = AbstractField('en', 0xf)
@@ -26,7 +26,8 @@ class AbstractField(StrMixin):
     """
 
     def __init__(self, locale: Optional[str] = None,
-                 seed: Optional[Seed] = None) -> None:
+                 seed: Optional[Seed] = None,
+                 providers: Optional[Any] = None) -> None:
         """Initialize field.
 
         :param locale: Locale
@@ -35,6 +36,10 @@ class AbstractField(StrMixin):
         self.locale = locale
         self.seed = seed
         self._gen = Generic(self.locale, self.seed)
+
+        if providers:
+            self._gen.add_providers(*providers)
+
         self._table = {}  # type: ignore
 
     def __call__(self, name: Optional[str] = None,
@@ -50,7 +55,7 @@ class AbstractField(StrMixin):
         data-provider ``name='provider.name'``.
 
         You can apply a *key function* to result returned by the method,
-        to do it, just pass parameter ``key`` with a callable object which
+        to do it, just pass parameter **key** with a callable object which
         returns final result.
 
         :param name: Name of the method.
@@ -114,7 +119,7 @@ class Schema(object):
         """Return filled schema.
 
         Create a list of a filled schemas with elements in
-        an amount of ``iterations``.
+        an amount of **iterations**.
 
         :param iterations: Amount of iterations.
         :return: List of willed schemas.

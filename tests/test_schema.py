@@ -1,6 +1,7 @@
 import pytest
 
 from mimesis import config
+from mimesis.builtins import USASpecProvider
 from mimesis.enums import Gender
 from mimesis.exceptions import (UndefinedField, UndefinedSchema,
                                 UnsupportedField)
@@ -21,6 +22,12 @@ def test_field(locale):
 
     with pytest.raises(UndefinedField):
         filed()
+
+
+def test_field_with_custom_providers():
+    field = Field(providers=[USASpecProvider])
+    assert field('ssn')
+    assert field('usa_provider.ssn')
 
 
 @pytest.fixture
