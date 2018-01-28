@@ -47,17 +47,18 @@ def test_schoice(random, seq, length):
 
 
 @pytest.mark.parametrize(
-    'fmt, length', [
-        ('{:0.04f}', 4),
-        ('{:0.06f}', 6),
+    'precision', [
+        4,
+        6,
+        8,
     ],
 )
-def test_uniform(random, fmt, length):
-    result = random.uniform(2.3, 10.5, fmt)
+def test_uniform(random, precision):
+    result = random.uniform(2.3, 10.5, precision)
     assert isinstance(result, float)
 
     result = str(result).split('.')[1]
-    assert length >= len(result)
+    assert precision >= len(result)
 
 
 def test_custom_code(random):

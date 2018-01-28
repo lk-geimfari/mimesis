@@ -101,16 +101,15 @@ class Random(random.Random):
             code[i] = a
         return code.decode()
 
-    def uniform(self, a, b, fmt: str = None) -> float:
+    def uniform(self, a: float, b: float, precision: int = 15) -> float:
         """Get a random number in the range [a, b) or [a, b] depending on rounding.
 
         :param a: Minimum value.
         :param b: Maximum value.
-        :param fmt: Format.
-        :return:
+        :param precision: Round a number to a given
+            precision in decimal digits, default is 15.
         """
-        fmt = '{}' if fmt is None else fmt
-        return float(fmt.format(a + (b - a) * self.random()))
+        return round(a + (b - a) * self.random(), precision)
 
 
 def get_random_item(enum: Any, rnd: Optional[Random] = None) -> Any:

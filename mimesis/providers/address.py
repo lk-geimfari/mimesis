@@ -1,12 +1,14 @@
 """Address data provider."""
 
-from typing import Optional
+from typing import Optional, Union
 
 from mimesis.data import (CALLING_CODES, CONTINENT_CODES, COUNTRIES_ISO,
                           SHORTENED_ADDRESS_FMT)
 from mimesis.enums import CountryCode
 from mimesis.providers.base import BaseDataProvider
 from mimesis.utils import pull
+
+__all__ = ['Address']
 
 
 class Address(BaseDataProvider):
@@ -189,38 +191,57 @@ class Address(BaseDataProvider):
         return self.random.choice(
             self._data['city'])
 
-    def latitude(self) -> float:
+    def _get_fs(self, key: str, dms: bool = False) -> Union[str, float]:
+        """Get float number.
+
+        :param key: Key (`lt` or `lg`).
+        :param dms: DMS format.
+        :return: Float number
+        """
+        # Default range is a range of longitude.
+        rng = (-90, 90) if key == 'lt' else (-180, 180)
+        result = self.random.uniform(*rng, precision=6)
+
+        if dms:
+            return dd_to_dms(result, key)
+
+        return result
+
+    def latitude(self, dms: bool = False) -> Union[str, float]:
         """Generate a random value of latitude.
 
+        :param dms: DMS format.
         :return: Value of longitude.
 
         :Example:
-            -66.4214188124611
+            -66.421418
         """
-        return self.random.uniform(-90, 90)
+        return self._get_fs('lt', dms)
 
-    def longitude(self) -> float:
+    def longitude(self, dms: bool = False) -> Union[str, float]:
         """Generate a random value of longitude.
 
+        :param dms: DMS format.
         :return: Value of longitude.
 
         :Example:
-            112.18440260511943
+            112.184402
         """
-        return self.random.uniform(-180, 180)
+        return self._get_fs('lg', dms)
 
-    def coordinates(self) -> dict:
+    def coordinates(self, dms: bool = False) -> dict:
         """Generate random geo coordinates.
 
+        :param dms: DMS format.
         :return: Dict with coordinates.
 
         :Example:
-            {'latitude': 8.003968712834975,
-            'longitude': 36.02811153405548}
+            {'latitude': 8.003968,
+            'longitude': 36.028111}
         """
         return {
-            'longitude': self.longitude(),
-            'latitude': self.latitude(),
+            'longitude': self._get_fs('lg', dms),
+            'latitude': self._get_fs('lt', dms),
         }
 
     def continent(self, code: bool = False) -> str:
@@ -246,3 +267,29 @@ class Address(BaseDataProvider):
             +7
         """
         return self.random.choice(CALLING_CODES)
+
+
+# ==========================================#
+# INTERNAL FUNCTIONS OF PROVIDER <ADDRESS>  #
+# ==========================================#
+
+def dd_to_dms(num: float, _type: str) -> str:
+    """Convert decimal number to DMS format.
+
+    :param num: Decimal number.
+    :param _type: Type of number.
+    :return: Number in DMS format.
+    """
+    degrees = int(num)
+    minutes = int((num - degrees) * 60)
+    seconds = (num - degrees - minutes / 60) * 3600.00
+    seconds = round(seconds, 3)
+    result = [abs(i) for i in (degrees, minutes, seconds)]
+
+    direction = ''
+    if _type == 'lg':
+        direction = 'W' if degrees < 0 else 'E'
+    elif _type == 'lt':
+        direction = 'S' if degrees < 0 else 'N'
+
+    return ('{}º{}\'{:.3f}"' + direction).format(*result)

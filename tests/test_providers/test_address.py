@@ -8,6 +8,7 @@ from mimesis import Address
 from mimesis.data import CALLING_CODES, CONTINENT_CODES, COUNTRIES_ISO
 from mimesis.enums import CountryCode
 from mimesis.exceptions import NonEnumerableError
+from mimesis.providers import address as address_module
 
 from ._patterns import POSTAL_CODE_REGEX, STR_REGEX
 
@@ -25,17 +26,30 @@ class TestAddress(object):
         result = _address.street_number()
         assert re.match(r'[0-9]{1,5}$', result)
 
+    @pytest.mark.parametrize('dms', [True, False])
+    def test__get_fs(self, _address, dms):
+        latitude = _address._get_fs('lt', dms=dms)
+        assert latitude
+        longitude = _address._get_fs('lg', dms=dms)
+        assert longitude
+
     def test_latitude(self, _address):
         result = _address.latitude()
         assert isinstance(result, float)
         assert result <= 90
         assert result >= -90
 
+        dms = _address.latitude(dms=True)
+        assert isinstance(dms, str)
+
     def test_longitude(self, _address):
         result = _address.longitude()
         assert isinstance(result, float)
         assert result <= 180
         assert result >= -180
+
+        dms = _address.longitude(dms=True)
+        assert isinstance(dms, str)
 
     def test_coordinates(self, _address):
         result = _address.coordinates()
@@ -50,6 +64,10 @@ class TestAddress(object):
         assert isinstance(latitude, float)
         assert longitude <= 180
         assert longitude >= -180
+
+        coord = _address.coordinates(dms=True)
+        assert isinstance(coord['longitude'], str)
+        assert isinstance(coord['latitude'], str)
 
     def test_street_name(self, address):
         result = address.street_name()
@@ -211,3 +229,13 @@ class TestSeededAddress(object):
 
     def test_calling_code(self, a1, a2):
         assert a1.calling_code() == a2.calling_code()
+
+
+@pytest.mark.parametrize(
+    'fn_args, dms', [
+        ([-86.761305, 'lt'], '86º45\'40.698"S'),
+        ([-110.424307, 'lg'], '110º25\'27.505"W'),
+    ],
+)
+def test_dd_to_dms(fn_args, dms):
+    assert address_module.dd_to_dms(*fn_args) == dms

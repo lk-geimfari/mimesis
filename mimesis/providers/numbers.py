@@ -100,4 +100,4 @@ class Numbers(BaseDataProvider):
         :Example:
             4.7
         """
-        return self.random.uniform(0, maximum, '{0:0.1f}')
+        return self.random.uniform(0, maximum, 1)
