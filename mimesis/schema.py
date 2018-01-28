@@ -17,7 +17,7 @@ class AbstractField(StrMixin):
     AbstractField is a class for generating data by the name of the method.
 
     Instance of this object takes any string which represents name
-    of any method of any supported data provider (class :class:`~mimesis.Generic`)
+    of any method of any supported data provider (:class:`~mimesis.Generic`)
     and the ``**kwargs`` of the method:
 
     >>> _ = AbstractField('en', 0xf)
