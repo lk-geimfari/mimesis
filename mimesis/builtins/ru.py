@@ -140,7 +140,7 @@ class RussiaSpecProvider(BaseSpecProvider):
         ogrn = ''.join([str(x) for x in numbers])
         check_sum = str(int(ogrn) % 11 % 10)
 
-        return (ogrn + check_sum)
+        return '{}{}'.format(ogrn, check_sum)
 
     def bic(self) -> str:
         """Generate random ``BIC`` (Bank ID Code).

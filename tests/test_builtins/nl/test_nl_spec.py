@@ -9,7 +9,7 @@ def nl():
     return NetherlandsSpecProvider()
 
 
-def test_ssn(nl):
+def test_bsn(nl):
     result = nl.bsn()
     assert result is not None
     assert len(result) == 9
@@ -26,6 +26,10 @@ def test_ssn(nl):
         int(result[7:8]) * 2 + \
         int(result[8:9]) * -1
     assert test11 % 11 == 0
+
+
+def test_burgerservicenummer(nl):
+    assert nl.burgerservicenummer()
 
 
 def test_nl_meta():

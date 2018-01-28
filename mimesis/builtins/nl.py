@@ -38,3 +38,10 @@ class NetherlandsSpecProvider(BaseSpecProvider):
             sample = str(self.random.randint(a, b))
 
         return sample
+
+    def burgerservicenummer(self) -> str:
+        """Generate a random, but valid ``Burgerservicenummer``.
+
+        An alias for self.bsn()
+        """
+        return self.bsn()

@@ -43,8 +43,8 @@ class Numbers(BaseDataProvider):
         :param start: First value of range.
         :param end: Last value of range.
         :return: A list of prime numbers from start to end.
-        .. todo:: It should generate random primes with passed length.
         """
+        # TODO: It should generate random primes with passed length.
         sieve_size = (end // 2 - 1) if end % 2 == 0 else (end // 2)
         sieve = [True] * sieve_size
 
