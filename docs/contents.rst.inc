@@ -37,8 +37,8 @@ Your contributions are always welcome! Please adhere to the contribution guideli
 5. Send a pull request and bug the maintainer until it gets merged and published.
 
 
-Additional Notes
-----------------
+Additional Information
+----------------------
 
 Disclaimer, legal information and other information are here for the interested.
 

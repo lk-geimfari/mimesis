@@ -85,12 +85,17 @@ term that carries a wide range of meanings, which include imitation, representat
 mimicry, imitatio, receptivity, nonsensuous similarity, the act of resembling,
 the act of expression, and the presentation of the self.
 
-Where should I use it?
-----------------------
 
-You can use Mimesis at any phase of development where you need mock data.
-For example, you can use it to anonymize data taken from a production service,
-populate a testing database, create beautiful JSON and XML files, etc.
+What Mimesis is, What Mimesis is Not
+------------------------------------
 
-In case, when an answer to the question "Does I really need mock data?" is negative,
-then you absolutely don't need to use this library or another one alternative.
+The problem that **Mimesis** solves and solves it perfectly is generating data.
+When you need to populate database, create beautiful JSON or XML files,
+anonymize data taken from productive services then **Mimesis** is this is
+exactly what you need.
+
+**Mimesis** is **not object factory** and it was not developed for using with
+specific database or ORM (such as Django ORM, SQLAclhemy etc.).
+It does not mean that you can't use it with ORM on the contrary,
+this will be done very simply, this only means that possibly you'll
+need third-party libraries to do it.

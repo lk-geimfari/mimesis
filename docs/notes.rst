@@ -119,7 +119,7 @@ Disclaimer
 ==========
 
 The authors do not assume any responsibility for how you use this library or
-how you use data generated with it.  This library is designed only for developers
+how you use data generated with it. This library is designed only for developers
 and only with good intentions. Do not use the data generated with Mimesis for
 illegal purposes.
 

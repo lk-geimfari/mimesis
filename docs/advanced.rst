@@ -5,89 +5,6 @@ Advanced Usage
 Here we gonna speaking about integration with web frameworks, best practices
 and a number of most useful features of the library.
 
-Intro
------
-
-The ability to generate mock but valid data comes in handy in app
-development, where you need to work with databases. Filling in the
-database by hand is a time-consuming and tedious process, which can be
-done in three stages — gathering necessary information, post-processing
-the data and coding the data generator itself. It gets really
-complicated when you need to generate not just 10–15 users, but 100–150
-thousand users (or other types of data). In this article as well as the
-two following ones we will introduce you to a tool, which immensely
-simplifies generating mock data, initial database loading and testing in
-general.
-
-Generating data
----------------
-
-Initially, we planned on showing data generation using the example of a
-small web-application Flask, but we decided against it because not
-everyone is familiar with Flask nor they are willing to change that.
-Therefore, we are going to showcase that solely on Python. In case you
-want to transfer everything to your project on Flask or Django, you
-simply need to define a static method that will run all the
-manipulations related to the current model and call it when you need the
-initial database loading, as demonstrated in the example below. Model
-for Flask (Flask-SQLAlchemy) would look like this:
-
-.. code:: python
-
-    class Patient(db.Model):
-        id = db.Column(db.Integer, primary_key=True)
-        email = db.Column(db.String(120), unique=True)
-        phone_number = db.Column(db.String(25))
-        full_name = db.Column(db.String(100))
-        weight = db.Column(db.String(64))
-        height = db.Column(db.String(64))
-        blood_type = db.Column(db.String(64))
-        age = db.Column(db.Integer)
-
-        def __init__(self, **kwargs):
-            super(Patient, self).__init__(**kwargs)
-
-        @staticmethod
-        def _bootstrap(count=500, locale='en'):
-            from mimesis import Personal
-            person = Personal(locale)
-
-            for _ in range(count):
-                patient = Patient(
-                    email=person.email(),
-                    phone_number=person.telephone(),
-                    full_name=person.full_name(),
-                    age=person.age(minimum=18, maximum=45),
-                    weight=person.weight(),
-                    height=person.height(),
-                    blood_type=person.blood_type()
-                )
-
-                db.session.add(patient)
-                try:
-                    db.session.commit()
-                except IntegrityError:
-                    db.session.rollback()
-
-Now let’s transition to shell-mode:
-
-::
-
-    (venv) ➜ python3 manage.py shell
-
-And generate data. Beforehand, we need to make sure that the database
-and the model in question are available.
-
-.. code:: python
-
-    >>> db
-    <SQLAlchemy engine='sqlite:///db.sqlite'>
-
-    >>> Patient
-    <class 'app.models.Patient'>
-
-    >>> # Generate 40к entries in English.
-    >>> Patient()._bootstrap(count=40000, locale='en')
 
 Introduction
 ------------
@@ -220,29 +137,6 @@ language. In this case it is an state of the USA:
     >>> address.state()
     'Texas'
 
-Note
-----
-
-First of all we would like to point out that Mimesis wasn’t developed to
-be used with a certain database or ORM. The main problem the library
-solves is generating valid data. Consequently, while there are no rigid
-rules of working with the library, here are a few recommendations that
-will help you keep your testing environment in order and will avert
-growth of entropy within your project. Recommendations are quite simple
-and are fully in tune with the Python spirit.
-
-Using with ORM
---------------
-
-Despite the previous note that the library isn’t to be used with a
-certain database or ORM, the need for test data usually occurs in
-web-apps that perform certain operations (mostly CRUD) with a database.
-We have some advice on organizing test data generation for web-apps.
-Functions responsible for data generation and importing it to the
-database should be kept close to the models, or even better as
-statistical methods of the model they are related to. This is necessary
-to avoid running around files when the model structure changes and you
-need to add a new filed.
 
 Creating objects
 ----------------
@@ -290,6 +184,93 @@ Still correct:
 It means that importing class providers separately makes sense only if
 you limit yourself to the data available through the class you imported,
 otherwise it’s better to use :class:`~mimesis.Generic()`.
+
+
+Using with ORM
+--------------
+First of all we would like to point out that Mimesis wasn’t developed to
+be used with a certain database or ORM. The main problem the library
+solves is generating valid data. Consequently, while there are no rigid
+rules of working with the library, here are a few recommendations that
+will help you keep your testing environment in order and will avert
+growth of entropy within your project. Recommendations are quite simple
+and are fully in tune with the Python spirit.
+
+Despite the previous note, the need for test data usually occurs in
+web-apps that perform certain operations (mostly CRUD) with a database.
+We have some advice on organizing test data generation for web-apps.
+Functions responsible for data generation and importing it to the
+database should be kept close to the models, or even better as statistical
+methods of the model they are related to. This is necessary to avoid running
+around files when the model structure changes and you need to add a new filed.
+
+
+Integration with Web Frameworks
+-------------------------------
+
+You simply need to define a static method that will run all the
+manipulations related to the current model and call it when you need the
+initial database loading, as demonstrated in the example below. Model
+for Flask (Flask-SQLAlchemy) would look like this:
+
+.. code:: python
+
+    class Patient(db.Model):
+        id = db.Column(db.Integer, primary_key=True)
+        email = db.Column(db.String(120), unique=True)
+        phone_number = db.Column(db.String(25))
+        full_name = db.Column(db.String(100))
+        weight = db.Column(db.String(64))
+        height = db.Column(db.String(64))
+        blood_type = db.Column(db.String(64))
+        age = db.Column(db.Integer)
+
+        def __init__(self, **kwargs):
+            super(Patient, self).__init__(**kwargs)
+
+        @staticmethod
+        def _bootstrap(count=500, locale='en'):
+            from mimesis import Personal
+            person = Personal(locale)
+
+            for _ in range(count):
+                patient = Patient(
+                    email=person.email(),
+                    phone_number=person.telephone(),
+                    full_name=person.full_name(),
+                    age=person.age(minimum=18, maximum=45),
+                    weight=person.weight(),
+                    height=person.height(),
+                    blood_type=person.blood_type()
+                )
+
+                db.session.add(patient)
+                try:
+                    db.session.commit()
+                except IntegrityError:
+                    db.session.rollback()
+
+Now let’s transition to shell-mode:
+
+.. code:: text
+
+    (venv) ➜ python3 manage.py shell
+
+
+And generate data. Beforehand, we need to make sure that the database
+and the model in question are available.
+
+.. code:: python
+
+    >>> db
+    <SQLAlchemy engine='sqlite:///db.sqlite'>
+
+    >>> Patient
+    <class 'app.models.Patient'>
+
+    >>> # Generate 2к entries in English.
+    >>> Patient()._bootstrap(count=2000, locale='en')
+
 
 Inserting data into database
 ----------------------------
