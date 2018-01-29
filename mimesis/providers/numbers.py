@@ -33,8 +33,8 @@ class Numbers(BaseDataProvider):
         :Example:
             [-20, -19, -18, -17]
         """
-        numbers = [self.random.randint(start, end) for _ in range(length)]
-        return numbers
+        return self.random.randints(
+            length, start, end)
 
     @staticmethod
     def primes(start: int = 1, end: int = 999) -> List[int]:

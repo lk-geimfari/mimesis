@@ -11,6 +11,9 @@
 - Significantly improved performance of `schema.Field`
 - Other minor improvements
 
+**Updated**:
+- Updated method `integers`
+
 ---
 
 ## Version 1.0.5
