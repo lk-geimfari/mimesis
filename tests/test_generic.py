@@ -14,8 +14,8 @@ class TestGeneric(object):
     def test_str(self, generic):
         assert re.match(p.STR_REGEX, str(generic))
 
-    def test_base_personal(self, generic):
-        result = generic.personal.username()
+    def test_base_person(self, generic):
+        result = generic.person.username()
         assert result is not None
 
     def test_base_text(self, generic):
@@ -159,9 +159,9 @@ class TestSeededGeneric(object):
         assert g1.payment.cid() == g2.payment.cid()
         assert g1.payment.paypal() == g2.payment.paypal()
 
-    def test_generic_personal(self, g1, g2):
-        assert g1.personal.age() == g2.personal.age()
-        assert g1.personal.name() == g2.personal.name()
+    def test_generic_person(self, g1, g2):
+        assert g1.person.age() == g2.person.age()
+        assert g1.person.name() == g2.person.name()
 
     def test_generic_science(self, g1, g2):
         assert g1.science.math_formula() == g2.science.math_formula()

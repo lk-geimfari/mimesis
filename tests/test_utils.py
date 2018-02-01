@@ -14,7 +14,7 @@ def test_luhn_checksum():
 
 
 def test_pull():
-    data = pull('personal.json', 'en')
+    data = pull('person.json', 'en')
 
     assert data['views_on'] is not None
     assert isinstance(data['views_on'], list)

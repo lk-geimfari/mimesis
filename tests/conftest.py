@@ -38,8 +38,8 @@ def food(request):
 
 
 @pytest.fixture(params=locales)
-def personal(request):
-    return mimesis.Personal(request.param)
+def person(request):
+    return mimesis.Person(request.param)
 
 
 @pytest.fixture(params=locales)
