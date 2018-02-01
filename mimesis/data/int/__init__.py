@@ -10,7 +10,7 @@ from .file import *
 from .hardware import *
 from .internet import *
 from .path import *
-from .personal import *
+from .person import *
 from .payment import *
 from .scientific import *
 from .text import *

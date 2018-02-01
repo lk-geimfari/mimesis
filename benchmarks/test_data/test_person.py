@@ -1,6 +1,6 @@
 import pytest
 
-from mimesis.providers import Personal as Provider
+from mimesis.providers import Person as Provider
 
 
 @pytest.fixture
