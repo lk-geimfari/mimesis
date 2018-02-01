@@ -220,10 +220,10 @@ Path
    :members:
    :special-members: __init__
 
-Personal
+Person
 --------
 
-.. autoclass:: mimesis.Personal
+.. autoclass:: mimesis.Person
    :members:
    :special-members: __init__
 

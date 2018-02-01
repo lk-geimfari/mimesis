@@ -15,9 +15,9 @@ A minimal usage example:
 
 .. code:: python
 
-    >>> from mimesis import Personal
+    >>> from mimesis import Person
     >>> from mimesis.enums import Gender
-    >>> person = Personal('en')
+    >>> person = Person('en')
 
     >>> person.full_name(gender=Gender.FEMALE)
     'Antonetta Garrison'
@@ -27,10 +27,38 @@ A minimal usage example:
 
 So what did the code above?
 
-1. First we imported the :class:`~mimesis.Personal` class. An instance of this
+1. First we imported the
+
+    >>> from mimesis import Person
+    >>> from mimesis.enums import Gender
+    >>> person = Person('en')
+
+    >>> person.full_name(gender=Gender.FEMALE)
+    'Antonetta Garrison'
+
+    >>> person.full_name(gender=Gender.MALE)
+    'Jordon Hall'
+
+So what did the code above?
+
+1. First we imported the
+
+    >>> from mimesis import Person
+    >>> from mimesis.enums import Gender
+    >>> person = Person('en')
+
+    >>> person.full_name(gender=Gender.FEMALE)
+    'Antonetta Garrison'
+
+    >>> person.full_name(gender=Gender.MALE)
+    'Jordon Hall'
+
+So what did the code above?
+
+1. First we imported the :class:`~mimesis.Person` class. An instance of this
    class will be our provider of personal data.
 2. We import object :class:`~mimesis.enums.Gender` which we are used as a
-   parameter for the :meth:`~mimesis.Personal.full_name`.
+   parameter for the :meth:`~mimesis.Person.full_name`.
 3. Next we generate random female full name for locale **en**.
 4. The same as above, but for male.
 
@@ -43,10 +71,10 @@ to data provider:
 
 .. code-block:: python
 
-    >>> from mimesis import Personal
+    >>> from mimesis import Person
 
-    >>> personal = Personal('tr', seed=0xFF)
-    >>> personal.full_name()
+    >>> person = Person('tr', seed=0xFF)
+    >>> person.full_name()
     'Gizem Tekand'
 
 
@@ -155,7 +183,7 @@ Usual Providers
 +------+----------------------------------+------------------------------------------------------------------+
 | 9    | :class:`~mimesis.Games`          | Games data (game, score, pegi\_rating etc.)                      |
 +------+----------------------------------+------------------------------------------------------------------+
-| 10   | :class:`~mimesis.Personal`       | Personal data (name, surname, age, email etc.)                   |
+| 10   | :class:`~mimesis.Person`         | Personal data (name, surname, age, email etc.)                   |
 +------+----------------------------------+------------------------------------------------------------------+
 | 11   | :class:`~mimesis.Text`           | Text data (sentence, title etc.)                                 |
 +------+----------------------------------+------------------------------------------------------------------+
@@ -306,8 +334,32 @@ won’t run):
 
 .. code:: python
 
-    >>> from mimesis import Personal
-    >>> person = Personal('en')
+    >>> from mimesis import Person
+    >>> person = Person('en')
+
+    >>> person.ssn()
+    >>> person.cpf()
+
+We bet everyone would agree that this does not look too good.
+Perfectionists, as we are, have taken care of this in a way that some
+specific regional provider would not bother other providers for other
+regions. For this reason, class providers with locally-specific data are
+separated into a special sub-package (
+
+    >>> from mimesis import Person
+    >>> person = Person('en')
+
+    >>> person.ssn()
+    >>> person.cpf()
+
+We bet everyone would agree that this does not look too good.
+Perfectionists, as we are, have taken care of this in a way that some
+specific regional provider would not bother other providers for other
+regions. For this reason, class providers with locally-specific data are
+separated into a special sub-package (
+
+    >>> from mimesis import Person
+    >>> person = Person('en')
 
     >>> person.ssn()
     >>> person.cpf()
@@ -403,7 +455,7 @@ Example of usage:
     ...         'version': _('version', pre_release=True),
     ...         'timestamp': _('timestamp', posix=False),
     ...         'owner': {
-    ...             'email': _('personal.email', key=str.lower),
+    ...             'email': _('person.email', key=str.lower),
     ...             'token': _('token'),
     ...             'creator': _('full_name', gender=Gender.FEMALE),
     ...         },

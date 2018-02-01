@@ -11,8 +11,11 @@
 - Significantly improved performance of `schema.Field`
 - Other minor improvements
 
-**Updated**:
+**Updated/Renamed**:
 - Updated method `integers`
+- Renamed provider `Personal` to `Person`
+- Renamed json file `personal.json` to `person.json` for all locales
+
 
 ---
 

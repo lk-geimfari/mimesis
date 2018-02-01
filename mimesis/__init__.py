@@ -23,7 +23,7 @@ __all__ = [
     'Numbers',
     'Path',
     'Payment',
-    'Personal',
+    'Person',
     'Science',
     'Structured',
     'Text',

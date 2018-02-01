@@ -42,8 +42,8 @@ Complete documentation is available on [Read the Docs](http://mimesis.readthedoc
 That's library is really easy to use and a simple usage example is given below:
 
 ```python
->>> from mimesis import Personal
->>> person = Personal('en')
+>>> from mimesis import Person
+>>> person = Person('en')
 
 >>> person.full_name()
 'Antonetta Garrison'
@@ -56,11 +56,11 @@ That's library is really easy to use and a simple usage example is given below:
 Mimesis currently includes support for 33 different [locales](http://mimesis.readthedocs.io/quickstart.html#supported-locales). You can specify a locale when creating providers and they will return data that is appropriate for the language or country associated with that locale:
 
 ```python
->>> from mimesis import Personal
+>>> from mimesis import Person
 >>> from mimesis.enums import Gender
 
->>> de = Personal('de')
->>> pl = Personal('pl')
+>>> de = Person('de')
+>>> pl = Person('pl')
 
 >>> de.full_name(gender=Gender.FEMALE)
 'Sabrina Gutermuth'

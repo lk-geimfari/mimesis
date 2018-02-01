@@ -24,10 +24,10 @@ Importing needing classes and creating instances:
 
     import cProfile
 
-    from mimesis import Personal
+    from mimesis import Person
     from faker import Faker
 
-    personal = Personal()
+    person = Person()
     faker = Faker()
 
 
@@ -37,7 +37,7 @@ Generate 10k full names
 .. code:: python
 
     # Generating using Mimesis:
-    cProfile.run('[personal.full_name() for _ in range(10000)]')
+    cProfile.run('[person.full_name() for _ in range(10000)]')
 
     # Generating using Faker:
     cProfile.run('[faker.name() for _ in range(10000)]')
@@ -47,7 +47,7 @@ Result:
 +----------+----------------------------------------+---------------------+------------------------+
 | Library  | Method name                            | Iterations          |  Runtime (second)      |
 +==========+========================================+=====================+========================+
-|  Mimesis | :meth:`~mimesis.Personal.full_name`    | 10 000              |  0.254                 |
+|  Mimesis | :meth:`~mimesis.Person.full_name`    | 10 000              |  0.254                 |
 +----------+----------------------------------------+---------------------+------------------------+
 |  Faker   | **Faker.name()**                       | 10 000              |  15.144                |
 +----------+----------------------------------------+---------------------+------------------------+
@@ -58,7 +58,7 @@ Generate 10k last names
 .. code:: python
 
     # Generating using Mimesis:
-    cProfile.run('[personal.last_name() for _ in range(10000)]')
+    cProfile.run('[person.last_name() for _ in range(10000)]')
 
     # Generating using Faker:
     cProfile.run('[faker.last_name() for _ in range(10000)]')
@@ -69,7 +69,7 @@ Result:
 +----------+----------------------------------------+---------------------+------------------------+
 | Library  | Method name                            | Iterations          |  Runtime (second)      |
 +==========+========================================+=====================+========================+
-|  Mimesis | :meth:`~mimesis.Personal.last_name`    | 10 000              |  0.040                 |
+|  Mimesis | :meth:`~mimesis.Person.last_name`    | 10 000              |  0.040                 |
 +----------+----------------------------------------+---------------------+------------------------+
 |  Faker   | **Faker.last_name()**                  | 10 000              |  8.218                 |
 +----------+----------------------------------------+---------------------+------------------------+
