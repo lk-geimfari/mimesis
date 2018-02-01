@@ -14,7 +14,7 @@ from mimesis.providers.hardware import Hardware
 from mimesis.providers.internet import Internet
 from mimesis.providers.numbers import Numbers
 from mimesis.providers.path import Path
-from mimesis.providers.personal import Personal
+from mimesis.providers.person import Person
 from mimesis.providers.payment import Payment
 from mimesis.providers.science import Science
 from mimesis.providers.structured import Structured
@@ -46,7 +46,7 @@ __all__ = [
     'Numbers',
     'Path',
     'Payment',
-    'Personal',
+    'Person',
     'Science',
     'Structured',
     'Text',

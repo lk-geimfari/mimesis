@@ -19,7 +19,7 @@ from mimesis.providers.internet import Internet
 from mimesis.providers.numbers import Numbers
 from mimesis.providers.path import Path
 from mimesis.providers.payment import Payment
-from mimesis.providers.personal import Personal
+from mimesis.providers.person import Person
 from mimesis.providers.science import Science
 from mimesis.providers.structured import Structured
 from mimesis.providers.text import Text
@@ -39,7 +39,7 @@ class Generic(BaseDataProvider):
         :param kwargs: Keyword arguments.
         """
         super().__init__(*args, **kwargs)
-        self._personal = Personal
+        self._person = Person
         self._address = Address
         self._datetime = Datetime
         self._business = Business

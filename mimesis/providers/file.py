@@ -8,6 +8,8 @@ from mimesis.enums import FileType, MimeType
 from mimesis.providers.base import BaseDataProvider
 from mimesis.providers.text import Text
 
+__all__ = ['File']
+
 
 class File(BaseDataProvider):
     """Class for generate data related to files."""

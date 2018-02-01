@@ -6,6 +6,8 @@ from mimesis.data import MATH_FORMULAS
 from mimesis.providers.base import BaseDataProvider
 from mimesis.utils import pull
 
+__all__ = ['Science']
+
 
 class Science(BaseDataProvider):
     """Class for generating pseudo-scientific data."""

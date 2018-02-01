@@ -2,6 +2,8 @@
 
 from mimesis.providers.base import BaseDataProvider
 
+__all__ = ['ClothingSizes']
+
 
 class ClothingSizes(BaseDataProvider):
     """Class for generate clothing sizes data."""

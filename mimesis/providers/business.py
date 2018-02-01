@@ -5,6 +5,8 @@ from mimesis.data import (CRYPTOCURRENCY_ISO_CODES, CRYPTOCURRENCY_SYMBOLS,
 from mimesis.providers.base import BaseDataProvider
 from mimesis.utils import pull
 
+__all__ = ['Business']
+
 
 class Business(BaseDataProvider):
     """Class for generating data for business."""

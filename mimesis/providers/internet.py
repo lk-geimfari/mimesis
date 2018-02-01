@@ -13,6 +13,8 @@ from mimesis.providers.base import BaseDataProvider
 from mimesis.providers.file import File
 from mimesis.typing import Size
 
+__all__ = ['Internet']
+
 
 class Internet(BaseDataProvider):
     """Class for generating data related to the internet."""

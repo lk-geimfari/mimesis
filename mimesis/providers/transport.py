@@ -3,6 +3,8 @@
 from mimesis.data import AIRPLANES, CARS, TRUCKS, VR_CODES, VRC_BY_LOCALES
 from mimesis.providers.base import BaseDataProvider
 
+__all__ = ['Transport']
+
 
 class Transport(BaseDataProvider):
     """Class for generating data related to transports."""

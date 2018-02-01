@@ -8,6 +8,8 @@ from mimesis.providers.base import BaseDataProvider
 from mimesis.providers.internet import Internet
 from mimesis.providers.text import Text
 
+__all__ = ['Structured']
+
 
 class Structured(BaseDataProvider):
     """Class for generating structured data."""
