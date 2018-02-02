@@ -6,6 +6,8 @@ from mimesis.builtins.base import BaseSpecProvider
 from mimesis.enums import Gender
 from mimesis.utils import pull
 
+__all__ = ['RussiaSpecProvider']
+
 
 class RussiaSpecProvider(BaseSpecProvider):
     """Class that provides special data for Russia (ru)."""

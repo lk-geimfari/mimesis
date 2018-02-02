@@ -4,6 +4,8 @@ from typing import Union
 
 from mimesis.builtins.base import BaseSpecProvider
 
+__all__ = ['USASpecProvider']
+
 
 class USASpecProvider(BaseSpecProvider):
     """Class that provides special data for USA (en)."""
