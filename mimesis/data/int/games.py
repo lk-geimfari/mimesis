@@ -2320,7 +2320,7 @@ GAMES = [
     'Two Worlds II: Castle Defense',
     'TxK',
     'UEFA Euro 2012',
-    'UFC Person Trainer: The Ultimate Fitness System',
+    'UFC Personal Trainer: The Ultimate Fitness System',
     'UFC Undisputed 3',
     'Ultimate Marvel Vs. Capcom 3',
     'Ultra Street Fighter IV',
