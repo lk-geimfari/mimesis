@@ -3,7 +3,7 @@
 from mimesis.providers.base import BaseProvider, BaseDataProvider
 from mimesis.providers.address import Address
 from mimesis.providers.business import Business
-from mimesis.providers.clothing import ClothingSizes
+from mimesis.providers.clothing import ClothingSize
 from mimesis.providers.cryptographic import Cryptographic
 from mimesis.providers.code import Code
 from mimesis.providers.date import Datetime
@@ -17,7 +17,7 @@ from mimesis.providers.path import Path
 from mimesis.providers.person import Person
 from mimesis.providers.payment import Payment
 from mimesis.providers.science import Science
-from mimesis.providers.structured import Structured
+from mimesis.providers.structure import Structure
 from mimesis.providers.text import Text
 from mimesis.providers.transport import Transport
 from mimesis.providers.units import UnitSystem
@@ -34,7 +34,7 @@ __all__ = [
     # And data providers:
     'Address',
     'Business',
-    'ClothingSizes',
+    'ClothingSize',
     'Code',
     'Datetime',
     'Development',
@@ -48,7 +48,7 @@ __all__ = [
     'Payment',
     'Person',
     'Science',
-    'Structured',
+    'Structure',
     'Text',
     'Transport',
     'UnitSystem',

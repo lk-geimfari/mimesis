@@ -109,9 +109,9 @@ class TestSeededGeneric(object):
         assert g1.business.company() == g2.business.company()
         assert g1.business.copyright() == g2.business.copyright()
 
-    def test_generic_clothing_sizes(self, g1, g2):
-        assert g1.clothing_sizes.european_size() == \
-            g2.clothing_sizes.european_size()
+    def test_generic_clothing_size(self, g1, g2):
+        assert g1.clothing_size.european_size() == \
+            g2.clothing_size.european_size()
 
     def test_generic_code(self, g1, g2):
         assert g1.code.locale_code() == g2.code.locale_code()
@@ -166,9 +166,9 @@ class TestSeededGeneric(object):
     def test_generic_science(self, g1, g2):
         assert g1.science.math_formula() == g2.science.math_formula()
 
-    def test_generic_structured(self, g1, g2):
-        assert g1.structured.css() == g2.structured.css()
-        assert g1.structured.html() == g2.structured.html()
+    def test_generic_structure(self, g1, g2):
+        assert g1.structure.css() == g2.structure.css()
+        assert g1.structure.html() == g2.structure.html()
 
     def test_generic_text(self, g1, g2):
         assert g1.text.swear_word() == g2.text.swear_word()

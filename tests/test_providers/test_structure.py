@@ -4,19 +4,19 @@ import re
 
 import pytest
 
-from mimesis import Structured
+from mimesis import Structure
 
 from ._patterns import STR_REGEX
 
 
-class TestStructured(object):
+class TestStructure(object):
 
     @pytest.fixture
-    def structured(self):
-        return Structured()
+    def structure(self):
+        return Structure()
 
-    def test_str(self, structured):
-        assert re.match(STR_REGEX, str(structured))
+    def test_str(self, structure):
+        assert re.match(STR_REGEX, str(structure))
 
     def depth(self, x):
         """Calculates depth of object."""
@@ -26,31 +26,31 @@ class TestStructured(object):
             return 1 + max(self.depth(a) for a in x)
         return 0
 
-    def test_css(self, structured):
-        result = structured.css()
+    def test_css(self, structure):
+        result = structure.css()
         assert isinstance(result, str)  # returns string
         assert ':' in result  # contains property assignments
         assert result[-1] == '}'  # closed at end
         assert result.split(' ')[1][0] == '{'  # opened after selector
 
-    def test_css_property(self, structured):
-        result = structured.css_property()
+    def test_css_property(self, structure):
+        result = structure.css_property()
         assert len(result.split(' ')) == 2  # contains one property assignment
         assert ':' in result  # contains any property assignments
 
-    def test_html_attribute_value(self, structured):
-        result = structured.html_attribute_value('a', 'href')
+    def test_html_attribute_value(self, structure):
+        result = structure.html_attribute_value('a', 'href')
         assert result[0:4] == 'http'
         with pytest.raises(NotImplementedError):
-            structured.html_attribute_value('a', 'bogus')
+            structure.html_attribute_value('a', 'bogus')
 
-    def test_html(self, structured):
-        result = structured.html()
+    def test_html(self, structure):
+        result = structure.html()
         assert result[0] == '<'  # tag is enclosed
         assert result[-1] == '>'  # tag is enclosed
 
-    def test_json(self, structured):
-        result = structured.json(items=3, max_depth=4)
+    def test_json(self, structure):
+        result = structure.json(items=3, max_depth=4)
         assert isinstance(result, str)
 
         # Is valid json and root element is container with three items
@@ -60,20 +60,20 @@ class TestStructured(object):
 
         # Recursive returns python object, not JSON and
         # maximum depth of three elements
-        result = structured.json(items=3, max_depth=4, recursive=True)
+        result = structure.json(items=3, max_depth=4, recursive=True)
         assert isinstance(result, (dict, list))
         assert self.depth(result) <= 4
 
 
-class TestSeededStructured(object):
+class TestSeededStructure(object):
 
     @pytest.fixture
     def s1(self, seed):
-        return Structured(seed=seed)
+        return Structure(seed=seed)
 
     @pytest.fixture
     def s2(self, seed):
-        return Structured(seed=seed)
+        return Structure(seed=seed)
 
     def test_css(self, s1, s2):
         assert s1.css() == s2.css()

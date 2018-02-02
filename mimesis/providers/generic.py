@@ -6,7 +6,7 @@ from typing import List
 from mimesis.providers.address import Address
 from mimesis.providers.base import BaseDataProvider
 from mimesis.providers.business import Business
-from mimesis.providers.clothing import ClothingSizes
+from mimesis.providers.clothing import ClothingSize
 from mimesis.providers.code import Code
 from mimesis.providers.cryptographic import Cryptographic
 from mimesis.providers.date import Datetime
@@ -21,7 +21,7 @@ from mimesis.providers.path import Path
 from mimesis.providers.payment import Payment
 from mimesis.providers.person import Person
 from mimesis.providers.science import Science
-from mimesis.providers.structured import Structured
+from mimesis.providers.structure import Structure
 from mimesis.providers.text import Text
 from mimesis.providers.transport import Transport
 from mimesis.providers.units import UnitSystem
@@ -53,13 +53,13 @@ class Generic(BaseDataProvider):
         self.numbers = Numbers(seed=self.seed)
         self.development = Development(seed=self.seed)
         self.hardware = Hardware(seed=self.seed)
-        self.clothing_sizes = ClothingSizes(seed=self.seed)
+        self.clothing_size = ClothingSize(seed=self.seed)
         self.internet = Internet(seed=self.seed)
         self.path = Path(seed=self.seed)
         self.payment = Payment(seed=self.seed)
         self.games = Games(seed=self.seed)
         self.cryptographic = Cryptographic(seed=self.seed)
-        self.structured = Structured(seed=self.seed)
+        self.structure = Structure(seed=self.seed)
 
     def __getattr__(self, attrname: str):
         """Get attribute without underscore.

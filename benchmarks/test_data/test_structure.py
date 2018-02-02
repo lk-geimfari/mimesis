@@ -1,6 +1,6 @@
 import pytest
 
-from mimesis.providers import Structured as Provider
+from mimesis.providers import Structure as Provider
 
 
 @pytest.fixture

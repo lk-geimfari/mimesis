@@ -8,10 +8,10 @@ from mimesis.providers.base import BaseDataProvider
 from mimesis.providers.internet import Internet
 from mimesis.providers.text import Text
 
-__all__ = ['Structured']
+__all__ = ['Structure']
 
 
-class Structured(BaseDataProvider):
+class Structure(BaseDataProvider):
     """Class for generating structured data."""
 
     def __init__(self, *args, **kwargs) -> None:

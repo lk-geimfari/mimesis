@@ -1,6 +1,6 @@
 import pytest
 
-from mimesis.providers import ClothingSizes as Provider
+from mimesis.providers import ClothingSize as Provider
 
 
 @pytest.fixture
