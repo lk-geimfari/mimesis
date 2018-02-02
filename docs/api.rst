@@ -289,3 +289,4 @@ Enums
 
 .. automodule:: mimesis.enums
    :members:
+   :undoc-members:
