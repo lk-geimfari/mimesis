@@ -2,7 +2,7 @@
 
 from typing import Optional, Union
 
-from mimesis.data import (CALLING_CODES, CONTINENT_CODES, COUNTRIES_ISO,
+from mimesis.data import (CALLING_CODES, CONTINENT_CODES, COUNTRY_CODES,
                           SHORTENED_ADDRESS_FMT)
 from mimesis.enums import CountryCode
 from mimesis.providers.base import BaseDataProvider
@@ -156,18 +156,22 @@ class Address(BaseDataProvider):
         """
         return self.postal_code()
 
-    def country_iso_code(self, fmt: Optional[CountryCode] = None) -> str:
-        """Get a random ISO code of country.
+    def country_code(self, fmt: Optional[CountryCode] = CountryCode.A2) -> str:
+        """Get a random code of country.
+
+        Default format (``fmt``) is ISO 3166-1-alpha2 (``CountryCode.A2``),
+        you can change it by passing parameter ``fmt``
+        with enum object ``CountryCode``.
 
         :param fmt: Enum object CountryCode.
-        :return: ISO Code.
+        :return: Country code in selected format.
         :raises KeyError: if fmt is not supported.
 
         :Example:
             DE
         """
         key = self._validate_enum(fmt, CountryCode)
-        return self.random.choice(COUNTRIES_ISO[key])
+        return self.random.choice(COUNTRY_CODES[key])
 
     def country(self) -> str:
         """Get a random country.

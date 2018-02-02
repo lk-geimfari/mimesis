@@ -1,6 +1,7 @@
 ## Version 1.0.6
 
 **Added**:
+- Added items `IOC` and `FIFA` for enum object `CountryCode`
 - Added support of custom providers for `schema.Field`
 - Added support of parameter `dms` for `coordinates, longitude, latitude`
 - Added method `Text.rgb_color`
@@ -17,6 +18,7 @@
 - Renamed provider `Structured` to `Structure`
 - Renamed provider `ClothingSizes` to `ClothingSize`
 - Renamed json file `personal.json` to `person.json` for all locales
+- Renamed `country_iso_code` to `country_code` in `Address` data provider
 
 
 ---
@@ -133,5 +135,4 @@ This is a first major version of `mimesis` and here are **breaking changes** (in
 **Updated/Renamed**:
 - Updated data for `de-at`, `en`, `fr`, `pl`, `pt-br`, `pt`, `ru`, `uk`
 - Other minor updates in other languages
-- Renamed `country_iso` to `country_iso_code` in `Address` data provider
 - Renamed `currency_iso` to `currency_iso_code` `in Business` data provider

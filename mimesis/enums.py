@@ -156,13 +156,15 @@ class PrefixSign(Enum):
 class CountryCode(Enum):
     """Provides types of country codes.
 
-    Value for method ``Address.country_iso_code()`` which
+    Value for method ``Address.country_code()`` which
     takes parameter ``fmt``.
     """
 
-    ISO2 = 'iso2'
-    ISO3 = 'iso3'
+    A2 = 'a2'
+    A3 = 'a3'
     NUMERIC = 'numeric'
+    IOC = 'ioc'
+    FIFA = 'fifa'
 
 
 class ISBNFormat(Enum):
