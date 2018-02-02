@@ -17,15 +17,15 @@ listed in the end of the article and find out more. The library is
 pretty simple. All you need to do to start working with the data is to
 create a class provider. The most common type of data in apps are
 personal users’ data, such as name, last name, credit card info, etc.
-There is a special class provider for this type of data — :class:`~mimesis.Personal()`,
+There is a special class provider for this type of data — :class:`~mimesis.Person()`,
 which takes the code from the language standard in the form of a line as
 shown below:
 
 .. code:: python
 
-    >>> from mimesis import Personal
+    >>> from mimesis import Person
     >>> from mimesis.enums import Gender
-    >>> person = Personal('is')
+    >>> person = Person('is')
     >>> for _ in range(0, 3):
     ...     person.full_name(gender=Gender.MALE)
     ...
@@ -33,9 +33,10 @@ shown below:
     'Rögnvald Eiðsson'
     'Vésteinn Ríkharðsson'
 
+
 Almost every web-application requires e-mail for registration.
 Naturally, the library supports the ability to generate e-mails with the
-help of :meth:`~mimesis.Personal.email()` method :class:`~mimesis.Personal()` class, as below:
+help of :meth:`~mimesis.Person.email()` method :class:`~mimesis.Person()` class, as below:
 
 .. code:: python
 
@@ -51,7 +52,7 @@ which grants access to all providers from one single object:
 
     >>> from mimesis import Generic
     >>> g = Generic('pl')
-    >>> g.personal.full_name()
+    >>> g.person.full_name()
     'Lonisława Podsiadło'
     >>> g.datetime.birthday(readable=True)
     'Listopad 11, 1997'
@@ -151,12 +152,13 @@ Incorrect:
 
 .. code:: python
 
-    >>> from mimesis import Personal, Datetime, Text, Code
+    >>> from mimesis import Person, Datetime, Text, Code
 
-    >>> personal = Personal('ru')
+    >>> person = Person('ru')
     >>> datetime = Datetime('ru')
     >>> text = Text('ru')
     >>> code = Code('ru')
+
 
 Correct:
 
@@ -165,7 +167,7 @@ Correct:
     >>> from mimesis import Generic
     >>> generic = Generic('ru')
 
-    >>> generic.personal.username()
+    >>> generic.person.username()
     'sherley3354'
 
     >>> generic.datetime.date()
@@ -175,10 +177,10 @@ Still correct:
 
 .. code:: python
 
-    >>> from mimesis import Personal
+    >>> from mimesis import Person
 
-    >>> p_en = Personal('en')
-    >>> p_sv = Personal('sv')
+    >>> p_en = Person('en')
+    >>> p_sv = Person('sv')
     >>> # …
 
 It means that importing class providers separately makes sense only if
@@ -230,8 +232,8 @@ for Flask (Flask-SQLAlchemy) would look like this:
 
         @staticmethod
         def _bootstrap(count=500, locale='en'):
-            from mimesis import Personal
-            person = Personal(locale)
+            from mimesis import Person
+            person = Person(locale)
 
             for _ in range(count):
                 patient = Patient(

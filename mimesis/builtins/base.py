@@ -2,6 +2,8 @@
 
 from mimesis.providers import BaseProvider
 
+__all__ = ['BaseSpecProvider']
+
 
 class BaseSpecProvider(BaseProvider):
     """Base provider for specific data providers."""

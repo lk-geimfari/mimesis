@@ -6,6 +6,8 @@ from mimesis.data import SAFE_COLORS
 from mimesis.providers.base import BaseDataProvider
 from mimesis.utils import pull
 
+__all__ = ['Text']
+
 
 class Text(BaseDataProvider):
     """Class for generating text data."""

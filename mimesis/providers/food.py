@@ -3,6 +3,8 @@
 from mimesis.providers.base import BaseDataProvider
 from mimesis.utils import pull
 
+__all__ = ['Food']
+
 
 class Food(BaseDataProvider):
     """Class for generating data related to food."""

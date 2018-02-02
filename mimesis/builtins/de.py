@@ -3,6 +3,8 @@
 from mimesis.builtins.base import BaseSpecProvider
 from mimesis.utils import pull
 
+__all__ = ['GermanySpecProvider']
+
 
 class GermanySpecProvider(BaseSpecProvider):
     """Specific-provider of misc data for Germany."""

@@ -10,9 +10,10 @@ from .file import *
 from .hardware import *
 from .internet import *
 from .path import *
-from .personal import *
+from .person import *
 from .payment import *
 from .scientific import *
+from .structure import *
 from .text import *
 from .transport import *
 from .games import *

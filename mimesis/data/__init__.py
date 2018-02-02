@@ -8,9 +8,10 @@ from .int.file import *
 from .int.hardware import *
 from .int.internet import *
 from .int.path import *
-from .int.personal import *
+from .int.person import *
 from .int.payment import *
 from .int.scientific import *
+from .int.structure import *
 from .int.text import *
 from .int.transport import *
 from .int.games import *

@@ -4,7 +4,7 @@ import re
 
 import pytest
 
-from mimesis import Personal
+from mimesis import Person
 from mimesis.data import (BLOOD_GROUPS, ENGLISH_LEVEL, GENDER_SYMBOLS,
                           MUSIC_GENRE, SEXUALITY_SYMBOLS)
 from mimesis.enums import Gender, SocialNetwork, TitleType
@@ -13,14 +13,14 @@ from mimesis.exceptions import NonEnumerableError
 from ._patterns import EMAIL_REGEX, STR_REGEX, USERNAME_REGEX
 
 
-class TestPersonal(object):
+class TestPerson(object):
 
     @pytest.fixture
-    def _personal(self):
-        return Personal()
+    def _person(self):
+        return Person()
 
-    def test_str(self, personal):
-        assert re.match(STR_REGEX, str(personal))
+    def test_str(self, person):
+        assert re.match(STR_REGEX, str(person))
 
     @pytest.mark.parametrize(
         'minimum, maximum', [
@@ -29,40 +29,40 @@ class TestPersonal(object):
             (22, 28),
         ],
     )
-    def test_age(self, _personal, minimum, maximum):
-        result = _personal.age(minimum, maximum)
+    def test_age(self, _person, minimum, maximum):
+        result = _person.age(minimum, maximum)
         assert (result >= minimum) and (result <= maximum)
 
-    def test_age_store(self, _personal):
-        result = _personal._store['age']
+    def test_age_store(self, _person):
+        result = _person._store['age']
         assert result == 0
 
-    def test_age_update(self, _personal):
-        result = _personal.age() - _personal._store['age']
+    def test_age_update(self, _person):
+        result = _person.age() - _person._store['age']
         assert result == 0
 
-    def test_child_count(self, _personal):
-        result = _personal.child_count(max_childs=10)
+    def test_child_count(self, _person):
+        result = _person.child_count(max_childs=10)
         assert result <= 10
 
-    def test_work_experience(self, _personal):
-        result = _personal.work_experience(
-            working_start_age=0) - _personal._store['age']
+    def test_work_experience(self, _person):
+        result = _person.work_experience(
+            working_start_age=0) - _person._store['age']
         assert result == 0
 
-    def test_work_experience_store(self, _personal):
-        result = _personal.work_experience() - _personal.work_experience()
+    def test_work_experience_store(self, _person):
+        result = _person.work_experience() - _person.work_experience()
         assert result == 0
 
-    def test_work_experience_extreme(self, _personal):
-        result = _personal.work_experience(working_start_age=100000)
+    def test_work_experience_extreme(self, _person):
+        result = _person.work_experience(working_start_age=100000)
         assert result == 0
 
-    def test_password(self, _personal):
-        result = _personal.password(length=15)
+    def test_password(self, _person):
+        result = _person.password(length=15)
         assert len(result) == 15
 
-        result = _personal.password(hashed=True)
+        result = _person.password(hashed=True)
         assert len(result) == 32
 
     @pytest.mark.parametrize(
@@ -74,43 +74,43 @@ class TestPersonal(object):
             None,
         ],
     )
-    def test_username(self, _personal, template):
-        result = _personal.username(template=template)
+    def test_username(self, _person, template):
+        result = _person.username(template=template)
         assert re.match(USERNAME_REGEX, result)
 
-    def test_username_unsupported_template(self, _personal):
+    def test_username_unsupported_template(self, _person):
         with pytest.raises(KeyError):
-            _personal.username(template=':D')
+            _person.username(template=':D')
 
-    def test_email(self, _personal):
-        result = _personal.email()
+    def test_email(self, _person):
+        result = _person.email()
         assert re.match(EMAIL_REGEX, result)
 
         domains = ['@example.com']
-        result = _personal.email(domains=domains)
+        result = _person.email(domains=domains)
         assert re.match(EMAIL_REGEX, result)
         assert result.split('@')[1] == 'example.com'
 
-    def test_height(self, _personal):
-        result = _personal.height(minimum=1.60, maximum=1.90)
+    def test_height(self, _person):
+        result = _person.height(minimum=1.60, maximum=1.90)
         assert result.startswith('1')
         assert isinstance(result, str)
 
-    def test_weight(self, _personal):
-        result = _personal.weight(minimum=40, maximum=60)
+    def test_weight(self, _person):
+        result = _person.weight(minimum=40, maximum=60)
         assert result >= 40
         assert result <= 60
 
-    def test_blood_type(self, _personal):
-        result = _personal.blood_type()
+    def test_blood_type(self, _person):
+        result = _person.blood_type()
         assert result in BLOOD_GROUPS
 
-    def test_favorite_movie(self, personal):
-        result = personal.favorite_movie()
-        assert result in personal._data['favorite_movie']
+    def test_favorite_movie(self, person):
+        result = person.favorite_movie()
+        assert result in person._data['favorite_movie']
 
-    def test_favorite_music_genre(self, _personal):
-        result = _personal.favorite_music_genre()
+    def test_favorite_music_genre(self, _person):
+        result = _person.favorite_music_genre()
         assert result in MUSIC_GENRE
 
     @pytest.mark.parametrize(
@@ -122,27 +122,27 @@ class TestPersonal(object):
             None,
         ],
     )
-    def test_social_media_profile(self, _personal, site):
-        result = _personal.social_media_profile(site=site)
+    def test_social_media_profile(self, _person, site):
+        result = _person.social_media_profile(site=site)
         assert result is not None
 
-    def test_avatar(self, _personal):
-        result = _personal.avatar(size=512)
+    def test_avatar(self, _person):
+        result = _person.avatar(size=512)
         img, size, *__ = result.split('/')[::-1]
         assert int(size) == 512
         assert 32 == len(img.split('.')[0])
 
-    def test_identifier(self, _personal):
-        result = _personal.identifier()
+    def test_identifier(self, _person):
+        result = _person.identifier()
         mask = '##-##/##'
         assert len(mask) == len(result)
 
-        result = _personal.identifier(mask='##-##/## @@')
+        result = _person.identifier(mask='##-##/## @@')
         suffix = result.split(' ')[1]
         assert suffix.isalpha()
 
-    def test_level_of_english(self, _personal):
-        result = _personal.level_of_english()
+    def test_level_of_english(self, _person):
+        result = _person.level_of_english()
         assert result in ENGLISH_LEVEL
 
     @pytest.mark.parametrize(
@@ -151,29 +151,29 @@ class TestPersonal(object):
             Gender.MALE,
         ],
     )
-    def test_name(self, personal, gender):
-        result = personal.name(gender=gender)
-        assert result in personal._data['names'][gender.value]
+    def test_name(self, person, gender):
+        result = person.name(gender=gender)
+        assert result in person._data['names'][gender.value]
 
-    def test_name_with_none(self, _personal):
-        result = _personal.name(gender=None)
-        names = _personal._data['names']
+    def test_name_with_none(self, _person):
+        result = _person.name(gender=None)
+        names = _person._data['names']
 
         females = names['female']
         males = names['male']
         assert result is not None
         assert (result in females) or (result in males)
 
-    def test_name_unexpected_gender(self, personal):
+    def test_name_unexpected_gender(self, person):
         with pytest.raises(NonEnumerableError):
-            personal.name(gender='nil')
+            person.name(gender='nil')
 
-    def test_telephone(self, personal):
-        result = personal.telephone()
+    def test_telephone(self, person):
+        result = person.telephone()
         assert result is not None
 
         mask = '+5 (###)-###-##-##'
-        result = personal.telephone(mask=mask)
+        result = person.telephone(mask=mask)
         head = result.split(' ')[0]
         assert head == '+5'
 
@@ -183,17 +183,17 @@ class TestPersonal(object):
             Gender.MALE,
         ],
     )
-    def test_surname(self, personal, gender):
-        surnames = personal._data['surnames']
+    def test_surname(self, person, gender):
+        surnames = person._data['surnames']
 
         # Surnames separated by gender.
         if isinstance(surnames, dict):
-            result = personal.surname(gender=gender)
+            result = person.surname(gender=gender)
             assert result in surnames[gender.value]
         else:
-            result = personal.surname()
+            result = person.surname()
             assert result in surnames
-            result = personal.last_name()
+            result = person.last_name()
             assert result in surnames
 
     @pytest.mark.parametrize(
@@ -202,66 +202,66 @@ class TestPersonal(object):
             Gender.MALE,
         ],
     )
-    def test_full_name(self, personal, gender):
-        result = personal.full_name(gender=gender)
+    def test_full_name(self, person, gender):
+        result = person.full_name(gender=gender)
 
         result = result.split(' ')
         assert result[0] is not None
         assert result[1] is not None
 
-        result = personal.full_name(reverse=True)
+        result = person.full_name(reverse=True)
         assert result is not None
 
         with pytest.raises(NonEnumerableError):
-            personal.full_name(gender='nil')
+            person.full_name(gender='nil')
 
-    def test_gender(self, personal):
-        result = personal.gender()
-        assert result in personal._data['gender']
+    def test_gender(self, person):
+        result = person.gender()
+        assert result in person._data['gender']
 
-        result = personal.gender(symbol=True)
+        result = person.gender(symbol=True)
         assert result in GENDER_SYMBOLS
 
         # The four codes specified in ISO/IEC 5218 are:
         # 0 = not known, 1 = male, 2 = female, 9 = not applicable.
         codes = [0, 1, 2, 9]
-        iso5218 = personal.gender(iso5218=True)
+        iso5218 = person.gender(iso5218=True)
         assert iso5218 in codes
 
-    def test_sexual_orientation(self, personal):
-        result = personal.sexual_orientation()
-        assert result in personal._data['sexuality']
+    def test_sexual_orientation(self, person):
+        result = person.sexual_orientation()
+        assert result in person._data['sexuality']
 
-        symbol = personal.sexual_orientation(symbol=True)
+        symbol = person.sexual_orientation(symbol=True)
         assert symbol in SEXUALITY_SYMBOLS
 
-    def test_profession(self, personal):
-        result = personal.occupation()
-        assert result in personal._data['occupation']
+    def test_profession(self, person):
+        result = person.occupation()
+        assert result in person._data['occupation']
 
-    def test_university(self, personal):
-        result = personal.university()
-        assert result in personal._data['university']
+    def test_university(self, person):
+        result = person.university()
+        assert result in person._data['university']
 
-    def test_academic_degree(self, personal):
-        result = personal.academic_degree()
-        assert result in personal._data['academic_degree']
+    def test_academic_degree(self, person):
+        result = person.academic_degree()
+        assert result in person._data['academic_degree']
 
-    def test_language(self, personal):
-        result = personal.language()
-        assert result in personal._data['language']
+    def test_language(self, person):
+        result = person.language()
+        assert result in person._data['language']
 
-    def test_worldview(self, personal):
-        result = personal.worldview()
-        assert result in personal._data['worldview']
+    def test_worldview(self, person):
+        result = person.worldview()
+        assert result in person._data['worldview']
 
-    def test_views_on(self, personal):
-        result = personal.views_on()
-        assert result in personal._data['views_on']
+    def test_views_on(self, person):
+        result = person.views_on()
+        assert result in person._data['views_on']
 
-    def test_political_views(self, personal):
-        result = personal.political_views()
-        assert result in personal._data['political_views']
+    def test_political_views(self, person):
+        result = person.political_views()
+        assert result in person._data['political_views']
 
     @pytest.mark.parametrize(
         'title_type', [
@@ -277,13 +277,13 @@ class TestPersonal(object):
             None,
         ],
     )
-    def test_title(self, personal, gender, title_type):
-        result = personal.title(gender=gender, title_type=title_type)
+    def test_title(self, person, gender, title_type):
+        result = person.title(gender=gender, title_type=title_type)
         assert result is not None
 
         with pytest.raises(NonEnumerableError):
-            personal.title(title_type='nil')
-            personal.title(gender='nil')
+            person.title(title_type='nil')
+            person.title(gender='nil')
 
     @pytest.mark.parametrize(
         'gender', [
@@ -291,25 +291,25 @@ class TestPersonal(object):
             Gender.MALE,
         ],
     )
-    def test_nationality(self, personal, gender):
-        nationality = personal._data['nationality']
+    def test_nationality(self, person, gender):
+        nationality = person._data['nationality']
         if isinstance(nationality, dict):
-            result = personal.nationality(gender=gender)
-            assert result in personal._data['nationality'][gender.value]
+            result = person.nationality(gender=gender)
+            assert result in person._data['nationality'][gender.value]
 
-        result = personal.nationality()
+        result = person.nationality()
         assert result is not None
 
 
-class TestSeededPersonal(object):
+class TestSeededPerson(object):
 
     @pytest.fixture
     def p1(self, seed):
-        return Personal(seed=seed)
+        return Person(seed=seed)
 
     @pytest.fixture
     def p2(self, seed):
-        return Personal(seed=seed)
+        return Person(seed=seed)
 
     def test_age(self, p1, p2):
         assert p1.age() == p2.age()

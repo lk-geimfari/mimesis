@@ -5,6 +5,8 @@ from mimesis.data import (CPU, CPU_CODENAMES, CPU_MODEL_CODES, GENERATION,
                           RESOLUTIONS, SCREEN_SIZES)
 from mimesis.providers.base import BaseDataProvider
 
+__all__ = ['Hardware']
+
 
 class Hardware(BaseDataProvider):
     """Class for generate data related to hardware."""

@@ -9,8 +9,10 @@ from mimesis.enums import CardType, Gender
 from mimesis.exceptions import NonEnumerableError
 from mimesis.helpers import get_random_item
 from mimesis.providers.base import BaseDataProvider
-from mimesis.providers.personal import Personal
+from mimesis.providers.person import Person
 from mimesis.utils import luhn_checksum
+
+__all__ = ['Payment']
 
 
 class Payment(BaseDataProvider):
@@ -23,7 +25,7 @@ class Payment(BaseDataProvider):
         :param kwargs: Keyword arguments.
         """
         super().__init__(*args, **kwargs)
-        self.__personal = Personal('en', seed=self.seed)
+        self.__person = Person('en', seed=self.seed)
 
     def cid(self) -> int:
         """Generate a random CID.
@@ -43,7 +45,7 @@ class Payment(BaseDataProvider):
         :Example:
             wolf235@gmail.com
         """
-        return self.__personal.email()
+        return self.__person.email()
 
     def bitcoin_address(self) -> str:
         """Generate a random bitcoin address.
@@ -156,6 +158,6 @@ class Payment(BaseDataProvider):
         owner = {
             'credit_card': self.credit_card_number(),
             'expiration_date': self.credit_card_expiration_date(),
-            'owner': self.__personal.full_name(gender=gender).upper(),
+            'owner': self.__person.full_name(gender=gender).upper(),
         }
         return owner

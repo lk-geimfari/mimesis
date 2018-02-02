@@ -7,6 +7,8 @@ from mimesis.data import (FOLDERS, PLATFORMS, PROGRAMMING_LANGS, PROJECT_NAMES,
                           USERNAMES)
 from mimesis.providers.base import BaseDataProvider
 
+__all__ = ['Path']
+
 
 class Path(BaseDataProvider):
     """Class that provides methods and property for generate paths."""

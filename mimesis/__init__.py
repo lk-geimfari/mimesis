@@ -9,9 +9,10 @@ from mimesis.providers import *
 
 __all__ = [
     'Address',
+    'BaseDataProvider',
     'BaseProvider',
     'Business',
-    'ClothingSizes',
+    'ClothingSize',
     'Code',
     'Datetime',
     'Development',
@@ -23,9 +24,9 @@ __all__ = [
     'Numbers',
     'Path',
     'Payment',
-    'Personal',
+    'Person',
     'Science',
-    'Structured',
+    'Structure',
     'Text',
     'Transport',
     'UnitSystem',

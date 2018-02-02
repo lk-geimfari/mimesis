@@ -8,6 +8,8 @@ from mimesis.enums import EANFormat, ISBNFormat
 from mimesis.providers.base import BaseDataProvider
 from mimesis.utils import luhn_checksum
 
+__all__ = ['Code']
+
 
 class Code(BaseDataProvider):
     """Class that provides methods for generating codes."""

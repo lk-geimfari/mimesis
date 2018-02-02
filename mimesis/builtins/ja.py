@@ -2,6 +2,8 @@
 
 from mimesis.builtins.base import BaseSpecProvider
 
+__all__ = ['JapanSpecProvider']
+
 
 class JapanSpecProvider(BaseSpecProvider):
     """Class that provides special data for ja."""

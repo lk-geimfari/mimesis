@@ -12,13 +12,13 @@ files (`File name`) which include data related to some data providers (`Provider
 ├── business.json  # Business()
 ├── datetime.json  # Datetime()
 ├── food.json      # Food()
-├── personal.json  # Personal()
+├── person.json    # Person()
 ├── science.json   # Science()
 └── text.json      # Text()
 ```
 
 Almost all locales have a similar structure, but the structure of the locale file may differ when there are any builtins specific data providers for this locale.
-For example, locale `ru` has a different structure of `personal.json`, because in Russia there are mandatory patronymic names.
+For example, locale `ru` has a different structure of `person.json`, because in Russia there are mandatory patronymic names.
 So, it is useful for this locale only (and a couple of other).
 It means that if someone wants to use patronymic names then he must import builtin specific provider:
 

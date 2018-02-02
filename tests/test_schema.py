@@ -53,7 +53,7 @@ def valid_schema(_):
             },
         },
         'defined_cls': {
-            'title': _('personal.title'),
+            'title': _('person.title'),
             'title2': _('text.title'),
         },
     }

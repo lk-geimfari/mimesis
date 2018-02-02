@@ -10,10 +10,10 @@ there no guarantee that you will get the result which you actually expected.
 Below you can see an example of usage enums in methods of data providers.
 
 Example:
-    >>> from mimesis import Personal
+    >>> from mimesis import Person
     >>> from mimesis.enums import Gender
-    >>> personal = Personal()
-    >>> personal.full_name(gender=Gender.FEMALE)
+    >>> person = Person()
+    >>> person.full_name(gender=Gender.FEMALE)
     'Antonetta Garrison'
 """
 
@@ -47,7 +47,7 @@ class Gender(Enum):
 class TitleType(Enum):
     """Represents title types.
 
-    Value for a method ``Personal.title()`` which
+    Value for a method ``Person.title()`` which
     takes parameter``title_type``.
     """
 
@@ -190,7 +190,7 @@ class EANFormat(Enum):
 class SocialNetwork(Enum):
     """Provides most popular social networks.
 
-    Value for method ``Personal.social_media_profile()`` which
+    Value for method ``Person.social_media_profile()`` which
     takes parameter ``site``.
     """
 

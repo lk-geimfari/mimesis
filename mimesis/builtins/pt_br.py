@@ -4,6 +4,8 @@ from random import randint
 
 from mimesis.builtins.base import BaseSpecProvider
 
+__all__ = ['BrazilSpecProvider']
+
 
 class BrazilSpecProvider(BaseSpecProvider):
     """Class that provides special data for Brazil (pt-br)."""

@@ -13,10 +13,10 @@ from mimesis.helpers import get_random_item
 from mimesis.providers.base import BaseDataProvider
 from mimesis.utils import pull
 
-__all__ = ['Personal']
+__all__ = ['Person']
 
 
-class Personal(BaseDataProvider):
+class Person(BaseDataProvider):
     """Class for generating personal data."""
 
     def __init__(self, *args, **kwargs) -> None:
@@ -26,7 +26,7 @@ class Personal(BaseDataProvider):
         :param seed: Seed.
         """
         super().__init__(*args, **kwargs)
-        self._data = pull('personal.json', self.locale)
+        self._data = pull('person.json', self.locale)
         self._store = {
             'age': 0,
         }

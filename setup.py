@@ -37,9 +37,9 @@ example is given below:
 
 .. code:: python
 
-    >>> from mimesis import Personal
+    >>> from mimesis import Person
     >>> from mimesis.enums import Gender
-    >>> person = Personal('en')
+    >>> person = Person('en')
 
     >>> person.full_name(gender=Gender.FEMALE)
     'Antonetta Garrison'

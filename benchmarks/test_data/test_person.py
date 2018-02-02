@@ -1,6 +1,6 @@
 import pytest
 
-from mimesis.providers import Structured as Provider
+from mimesis.providers import Person as Provider
 
 
 @pytest.fixture
@@ -19,4 +19,4 @@ def _tested_provider():
 )
 def test_method(benchmark, method, _tested_provider):
     result = benchmark(_tested_provider.__getattribute__(method))
-    assert result
+    assert result is not None
