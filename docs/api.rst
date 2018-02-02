@@ -129,10 +129,10 @@ Business
    :members:
    :special-members: __init__
 
-ClothingSizes
+ClothingSize
 -------------
 
-.. autoclass:: mimesis.ClothingSizes
+.. autoclass:: mimesis.ClothingSize
    :members:
    :special-members: __init__
 
@@ -234,10 +234,10 @@ Science
    :members:
    :special-members: __init__
 
-Structured
+Structure
 ----------
 
-.. autoclass:: mimesis.Structured
+.. autoclass:: mimesis.Structure
    :members:
    :special-members: __init__
 
