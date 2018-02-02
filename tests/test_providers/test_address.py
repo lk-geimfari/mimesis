@@ -5,7 +5,7 @@ import re
 import pytest
 
 from mimesis import Address
-from mimesis.data import CALLING_CODES, CONTINENT_CODES, COUNTRIES_ISO
+from mimesis.data import CALLING_CODES, CONTINENT_CODES, COUNTRY_CODES
 from mimesis.enums import CountryCode
 from mimesis.exceptions import NonEnumerableError
 from mimesis.providers import address as address_module
@@ -135,22 +135,24 @@ class TestAddress(object):
 
     @pytest.mark.parametrize(
         'fmt, length', [
-            (CountryCode.ISO2, 2),
-            (CountryCode.ISO3, 3),
+            (CountryCode.A2, 2),
+            (CountryCode.A3, 3),
             (CountryCode.NUMERIC, 3),
+            (CountryCode.IOC, 3),
+            (CountryCode.FIFA, 3),
             (None, [2, 3]),
         ],
     )
-    def test_country_iso(self, _address, fmt, length):
-        iso = _address.country_iso_code(fmt=fmt)
+    def test_country_code(self, _address, fmt, length):
+        iso = _address.country_code(fmt=fmt)
 
         if fmt is not None:
-            assert iso in COUNTRIES_ISO[fmt.value]
+            assert iso in COUNTRY_CODES[fmt.value]
 
         assert len(iso) == length or len(iso) in length
 
         with pytest.raises(NonEnumerableError):
-            _address.country_iso_code(fmt='nil')
+            _address.country_code(fmt='nil')
 
     def test_city(self, address):
         result = address.city()
@@ -216,9 +218,9 @@ class TestSeededAddress(object):
         assert a1.country() == a2.country()
 
     def test_country_iso(self, a1, a2):
-        assert a1.country_iso_code() == a2.country_iso_code()
-        assert a1.country_iso_code(fmt=CountryCode.ISO3) == \
-            a2.country_iso_code(fmt=CountryCode.ISO3)
+        assert a1.country_code() == a2.country_code()
+        assert a1.country_code(fmt=CountryCode.A3) == \
+            a2.country_code(fmt=CountryCode.A3)
 
     def test_city(self, a1, a2):
         assert a1.city() == a2.city()
