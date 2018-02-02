@@ -25,33 +25,6 @@ A minimal usage example:
     >>> person.full_name(gender=Gender.MALE)
     'Jordon Hall'
 
-So what did the code above?
-
-1. First we imported the
-
-    >>> from mimesis import Person
-    >>> from mimesis.enums import Gender
-    >>> person = Person('en')
-
-    >>> person.full_name(gender=Gender.FEMALE)
-    'Antonetta Garrison'
-
-    >>> person.full_name(gender=Gender.MALE)
-    'Jordon Hall'
-
-So what did the code above?
-
-1. First we imported the
-
-    >>> from mimesis import Person
-    >>> from mimesis.enums import Gender
-    >>> person = Person('en')
-
-    >>> person.full_name(gender=Gender.FEMALE)
-    'Antonetta Garrison'
-
-    >>> person.full_name(gender=Gender.MALE)
-    'Jordon Hall'
 
 So what did the code above?
 
@@ -333,30 +306,6 @@ You can see that for yourselves by looking at the example (the code
 won’t run):
 
 .. code:: python
-
-    >>> from mimesis import Person
-    >>> person = Person('en')
-
-    >>> person.ssn()
-    >>> person.cpf()
-
-We bet everyone would agree that this does not look too good.
-Perfectionists, as we are, have taken care of this in a way that some
-specific regional provider would not bother other providers for other
-regions. For this reason, class providers with locally-specific data are
-separated into a special sub-package (
-
-    >>> from mimesis import Person
-    >>> person = Person('en')
-
-    >>> person.ssn()
-    >>> person.cpf()
-
-We bet everyone would agree that this does not look too good.
-Perfectionists, as we are, have taken care of this in a way that some
-specific regional provider would not bother other providers for other
-regions. For this reason, class providers with locally-specific data are
-separated into a special sub-package (
 
     >>> from mimesis import Person
     >>> person = Person('en')

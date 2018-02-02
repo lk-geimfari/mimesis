@@ -33,33 +33,6 @@ shown below:
     'Rögnvald Eiðsson'
     'Vésteinn Ríkharðsson'
 
-Almost every web-application requires e-mail for registration.
-Naturally, the library supports the ability to generate e-mails with the
-help of
-
-    >>> from mimesis import Person
-    >>> from mimesis.enums import Gender
-    >>> person = Person('is')
-    >>> for _ in range(0, 3):
-    ...     person.full_name(gender=Gender.MALE)
-    ...
-    'Karl Brynjúlfsson'
-    'Rögnvald Eiðsson'
-    'Vésteinn Ríkharðsson'
-
-Almost every web-application requires e-mail for registration.
-Naturally, the library supports the ability to generate e-mails with the
-help of
-
-    >>> from mimesis import Person
-    >>> from mimesis.enums import Gender
-    >>> person = Person('is')
-    >>> for _ in range(0, 3):
-    ...     person.full_name(gender=Gender.MALE)
-    ...
-    'Karl Brynjúlfsson'
-    'Rögnvald Eiðsson'
-    'Vésteinn Ríkharðsson'
 
 Almost every web-application requires e-mail for registration.
 Naturally, the library supports the ability to generate e-mails with the
@@ -186,49 +159,6 @@ Incorrect:
     >>> text = Text('ru')
     >>> code = Code('ru')
 
-Correct:
-
-
-
-    >>> from mimesis import Person, Datetime, Text, Code
-
-    >>> person = Person('ru')
-    >>> datetime = Datetime('ru')
-    >>> text = Text('ru')
-    >>> code = Code('ru')
-
-Correct:
-
-
-
-    >>> from mimesis import Person, Datetime, Text, Code
-
-    >>> person = Person('ru')
-    >>> datetime = Datetime('ru')
-    >>> text = Text('ru')
-    >>> code = Code('ru')
-
-Correct:
-
-
-
-    >>> from mimesis import Person, Datetime, Text, Code
-
-    >>> person = Person('ru')
-    >>> datetime = Datetime('ru')
-    >>> text = Text('ru')
-    >>> code = Code('ru')
-
-Correct:
-
-
-
-    >>> from mimesis import Person, Datetime, Text, Code
-
-    >>> person = Person('ru')
-    >>> datetime = Datetime('ru')
-    >>> text = Text('ru')
-    >>> code = Code('ru')
 
 Correct:
 
@@ -246,66 +176,6 @@ Correct:
 Still correct:
 
 .. code:: python
-
-    >>> from mimesis import Person
-
-    >>> p_en = Person('en')
-    >>> p_sv = Person('sv')
-    >>> # …
-
-It means that importing class providers separately makes sense only if
-you limit yourself to the data available through the class you imported,
-otherwise it’s better to use
-
-    >>> from mimesis import Person
-
-    >>> p_en = Person('en')
-    >>> p_sv = Person('sv')
-    >>> # …
-
-It means that importing class providers separately makes sense only if
-you limit yourself to the data available through the class you imported,
-otherwise it’s better to use
-
-    >>> from mimesis import Person
-
-    >>> p_en = Person('en')
-    >>> p_sv = Person('sv')
-    >>> # …
-
-It means that importing class providers separately makes sense only if
-you limit yourself to the data available through the class you imported,
-otherwise it’s better to use
-
-    >>> from mimesis import Person
-
-    >>> p_en = Person('en')
-    >>> p_sv = Person('sv')
-    >>> # …
-
-It means that importing class providers separately makes sense only if
-you limit yourself to the data available through the class you imported,
-otherwise it’s better to use
-
-    >>> from mimesis import Person
-
-    >>> p_en = Person('en')
-    >>> p_sv = Person('sv')
-    >>> # …
-
-It means that importing class providers separately makes sense only if
-you limit yourself to the data available through the class you imported,
-otherwise it’s better to use
-
-    >>> from mimesis import Person
-
-    >>> p_en = Person('en')
-    >>> p_sv = Person('sv')
-    >>> # …
-
-It means that importing class providers separately makes sense only if
-you limit yourself to the data available through the class you imported,
-otherwise it’s better to use
 
     >>> from mimesis import Person
 
