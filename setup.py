@@ -71,14 +71,10 @@ List of supported data providers available `here <http://mimesis.readthedocs.io/
 
 import json
 import os
-import re
 from distutils.core import setup
 from os.path import abspath, dirname, exists, getsize, join, relpath, splitext
 
 from setuptools import Command
-
-VERSION_MINOR_MAX = 10
-VERSION_MICRO_MAX = 10
 
 here = abspath(dirname(__file__))
 
@@ -111,9 +107,8 @@ class Minimizer(BaseCommand):
         """
 
         self.paths = []
-        self.data_path = '/mimesis/data'
         self.separators = (',', ':')
-        self.data_dir = here + self.data_path
+        self.data_dir = join(here, 'mimesis', 'data')
         self.before_total = 0
         self.after_total = 0
 
@@ -121,9 +116,7 @@ class Minimizer(BaseCommand):
             for file in sorted(files):
                 if splitext(file)[1] == '.json':
                     self.paths.append(join(
-                        relpath(root, self.data_dir),
-                        file
-                    ))
+                        relpath(root, self.data_dir), file))
 
     @staticmethod
     def size_of(num):
@@ -188,70 +181,6 @@ class Minimizer(BaseCommand):
         print(template)
 
 
-class Version(BaseCommand):
-    """Custom command for versioning"""
-
-    def initialize_options(self):
-        self.current = about['__version__']
-        print('Previous version: '
-              '\033[33m{}\033[0m.\n'.format(self.current))
-
-    @staticmethod
-    def automatically(version):
-        """Automatically increment version string.
-
-        :param version: Current version.
-        :return: Next version.
-        """
-        major, minor, micro = [
-            int(i) for i in version.split('.')
-        ]
-
-        if VERSION_MICRO_MAX > micro:
-            micro += 1
-        elif VERSION_MICRO_MAX == micro:
-            micro = 0
-            minor += 1
-        elif VERSION_MINOR_MAX > minor:
-            minor += 1
-        elif VERSION_MINOR_MAX == minor:
-            micro, minor = 0, 0
-            major += 1
-        if VERSION_MINOR_MAX < minor:
-            minor, micro = 0, 0
-            major += 1
-
-        return '.'.join([str(i) for i
-                         in (major, minor, micro)])
-
-    def rewrite(self, version=None):
-        if not version:
-            version = self.current
-
-        with open(join(here, 'mimesis', '__version__.py'), 'r+') as f:
-            version_str = '__version__ = \'{}\''.format(version)
-            regexp = r'__version__ = .*'
-
-            meta = re.sub(regexp, version_str, f.read())
-            f.seek(0)
-            f.write(meta)
-            f.truncate()
-
-        print('Updated! Current version is: '
-              '\033[34m{}\033[0m.\n'.format(version))
-
-        exit()
-
-    def run(self):
-        response = input('Are you sure? (yes/no): ')
-        if response.lower() in ('yes', 'y'):
-            self.rewrite(
-                self.automatically(
-                    self.current,
-                ),
-            )
-
-
 setup(
     name=about['__title__'],
     version=about['__version__'],
@@ -304,7 +233,6 @@ setup(
         'Topic :: Software Development :: Testing',
     ],
     cmdclass={
-        'version': Version,
         'minify': Minimizer,
     },
 )
