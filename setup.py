@@ -1,74 +1,3 @@
-"""
-.. image:: http://bit.ly/2D9cp18
-
-Mimesis
--------
-
-**Mimesis** is a fast and easy to use the library for Python programming
-language, which helps generate mock data for a variety of purposes in a
-variety of languages. This data can be particularly useful during software
-development and testing. For example, it could be used to populate a
-testing database for a web application with user information such as
-email addresses, usernames, first names, last names, etc.
-
-Documentation
--------------
-
-Mimesis is very simple to use, and the below examples should help you
-get started. Complete documentation for Mimesis is available on `Read
-the Docs`_.
-
-.. _Read the Docs: http://mimesis.readthedocs.io/
-
-Installation
-------------
-
-To install mimesis, simply use pip (or `pipenv <http://pipenv.org/>`_):
-
-.. code:: bash
-
-    ➜  ~ pip install mimesis
-
-Getting started
----------------
-
-As we said above, this library is really easy to use. A simple usage
-example is given below:
-
-.. code:: python
-
-    >>> from mimesis import Person
-    >>> from mimesis.enums import Gender
-    >>> person = Person('en')
-
-    >>> person.full_name(gender=Gender.FEMALE)
-    'Antonetta Garrison'
-
-    >>> person.occupation()
-    'Backend Developer'
-
-    >>> for template in ('U_d', 'U-d', 'l_d', 'l-d'):
-    ...     person.username(template=template)
-
-    'Adders_1893'
-    'Abdel-1888'
-    'constructor_1884'
-    'chegre-2051'
-
-Locales
--------
-
-You can specify a locale when creating providers and they will return data that is appropriate for
-the language or country associated with that locale. `Mimesis` currently includes support
-for `33 different locales <http://mimesis.readthedocs.io/locales.html>`_.
-
-Data Providers
---------------
-
-List of supported data providers available `here <http://mimesis.readthedocs.io/providers.html>`_
-
-"""
-
 import json
 import os
 from distutils.core import setup
@@ -181,11 +110,15 @@ class Minimizer(BaseCommand):
         print(template)
 
 
+with open('README.rst', 'r', encoding='utf-8') as f:
+    readme = f.read()
+
+
 setup(
     name=about['__title__'],
     version=about['__version__'],
     description=about['__description__'],
-    long_description=__doc__,
+    long_description=readme,
     author=about['__author__'],
     author_email=about['__author_email__'],
     url=about['__url__'],
