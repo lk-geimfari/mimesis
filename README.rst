@@ -60,12 +60,27 @@ also you can install it manually:
     (env) ➜ make install
 
 
+
 Documentation
 -------------
 
-Complete documentation is available on `Read the Docs`_.
+| You can find the complete documentation on the `Read the Docs`_.
+It is divided into several sections:
 
-.. _Read the Docs: http://mimesis.readthedocs.io/
+-  `Foreword`_
+-  `Quickstart`_
+-  `Advanced Usage`_
+-  `API Reference`_
+-  `Contributing`_
+
+You can improve it by sending pull requests to this repository.
+
+.. _Read the Docs: http://mimesis.readthedocs.io
+.. _Foreword: http://mimesis.readthedocs.io/foreword.html
+.. _Quickstart: http://mimesis.readthedocs.io/quickstart.html
+.. _API Reference: http://mimesis.readthedocs.io/api.html
+.. _Advanced Usage: http://mimesis.readthedocs.io/advanced.html
+.. _Contributing: http://mimesis.readthedocs.io/contributing.html
 
 
 Getting started
