@@ -8,6 +8,7 @@ help:
 	@echo "clean-pyc    - remove Python file artifacts"
 	@echo "clean-build  - remove build artifacts"
 	@echo "clean        - remove build and Python file artifacts"
+	@echo "docs         - build Sphinx HTML documentation"
 	@echo "test         - run tests quickly with the default Python"
 	@echo "type-check   - run mypy for checking types"
 	@echo "style-check  - run style check (PEP)"
@@ -24,6 +25,11 @@ clean-pyc:
 	find . -name '*.pyo' -exec rm -f {} +
 	find . -name '*~' -exec rm -f {} +
 	find . -name '__pycache__' -exec rm -fr {} +
+
+
+.PHONY: docs
+docs:
+	cd docs && make html && cd ..
 
 
 .PHONY: clean-build
