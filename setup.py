@@ -113,6 +113,7 @@ class Minimizer(BaseCommand):
 with open('README.rst', 'r', encoding='utf-8') as f:
     readme = f.read()
 
+
 setup(
     name=about['__title__'],
     version=about['__version__'],
