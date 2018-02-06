@@ -1,4 +1,4 @@
-.. image:: https://i.imgur.com/VVobd6O.png
+.. image:: https://raw.githubusercontent.com/lk-geimfari/mimesis/master/media/logo_media.png
      :target: https://github.com/lk-geimfari/mimesis
 
 
