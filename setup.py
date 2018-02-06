@@ -1,84 +1,9 @@
-"""
-.. image:: http://bit.ly/2D9cp18
-
-Mimesis
--------
-
-**Mimesis** is a fast and easy to use the library for Python programming
-language, which helps generate mock data for a variety of purposes in a
-variety of languages. This data can be particularly useful during software
-development and testing. For example, it could be used to populate a
-testing database for a web application with user information such as
-email addresses, usernames, first names, last names, etc.
-
-Documentation
--------------
-
-Mimesis is very simple to use, and the below examples should help you
-get started. Complete documentation for Mimesis is available on `Read
-the Docs`_.
-
-.. _Read the Docs: http://mimesis.readthedocs.io/
-
-Installation
-------------
-
-To install mimesis, simply use pip (or `pipenv <http://pipenv.org/>`_):
-
-.. code:: bash
-
-    ➜  ~ pip install mimesis
-
-Getting started
----------------
-
-As we said above, this library is really easy to use. A simple usage
-example is given below:
-
-.. code:: python
-
-    >>> from mimesis import Person
-    >>> from mimesis.enums import Gender
-    >>> person = Person('en')
-
-    >>> person.full_name(gender=Gender.FEMALE)
-    'Antonetta Garrison'
-
-    >>> person.occupation()
-    'Backend Developer'
-
-    >>> for template in ('U_d', 'U-d', 'l_d', 'l-d'):
-    ...     person.username(template=template)
-
-    'Adders_1893'
-    'Abdel-1888'
-    'constructor_1884'
-    'chegre-2051'
-
-Locales
--------
-
-You can specify a locale when creating providers and they will return data that is appropriate for
-the language or country associated with that locale. `Mimesis` currently includes support
-for `33 different locales <http://mimesis.readthedocs.io/locales.html>`_.
-
-Data Providers
---------------
-
-List of supported data providers available `here <http://mimesis.readthedocs.io/providers.html>`_
-
-"""
-
 import json
 import os
-import re
 from distutils.core import setup
 from os.path import abspath, dirname, exists, getsize, join, relpath, splitext
 
 from setuptools import Command
-
-VERSION_MINOR_MAX = 10
-VERSION_MICRO_MAX = 10
 
 here = abspath(dirname(__file__))
 
@@ -111,9 +36,8 @@ class Minimizer(BaseCommand):
         """
 
         self.paths = []
-        self.data_path = '/mimesis/data'
         self.separators = (',', ':')
-        self.data_dir = here + self.data_path
+        self.data_dir = join(here, 'mimesis', 'data')
         self.before_total = 0
         self.after_total = 0
 
@@ -121,9 +45,7 @@ class Minimizer(BaseCommand):
             for file in sorted(files):
                 if splitext(file)[1] == '.json':
                     self.paths.append(join(
-                        relpath(root, self.data_dir),
-                        file
-                    ))
+                        relpath(root, self.data_dir), file))
 
     @staticmethod
     def size_of(num):
@@ -188,75 +110,14 @@ class Minimizer(BaseCommand):
         print(template)
 
 
-class Version(BaseCommand):
-    """Custom command for versioning"""
-
-    def initialize_options(self):
-        self.current = about['__version__']
-        print('Previous version: '
-              '\033[33m{}\033[0m.\n'.format(self.current))
-
-    @staticmethod
-    def automatically(version):
-        """Automatically increment version string.
-
-        :param version: Current version.
-        :return: Next version.
-        """
-        major, minor, micro = [
-            int(i) for i in version.split('.')
-        ]
-
-        if VERSION_MICRO_MAX > micro:
-            micro += 1
-        elif VERSION_MICRO_MAX == micro:
-            micro = 0
-            minor += 1
-        elif VERSION_MINOR_MAX > minor:
-            minor += 1
-        elif VERSION_MINOR_MAX == minor:
-            micro, minor = 0, 0
-            major += 1
-        if VERSION_MINOR_MAX < minor:
-            minor, micro = 0, 0
-            major += 1
-
-        return '.'.join([str(i) for i
-                         in (major, minor, micro)])
-
-    def rewrite(self, version=None):
-        if not version:
-            version = self.current
-
-        with open(join(here, 'mimesis', '__version__.py'), 'r+') as f:
-            version_str = '__version__ = \'{}\''.format(version)
-            regexp = r'__version__ = .*'
-
-            meta = re.sub(regexp, version_str, f.read())
-            f.seek(0)
-            f.write(meta)
-            f.truncate()
-
-        print('Updated! Current version is: '
-              '\033[34m{}\033[0m.\n'.format(version))
-
-        exit()
-
-    def run(self):
-        response = input('Are you sure? (yes/no): ')
-        if response.lower() in ('yes', 'y'):
-            self.rewrite(
-                self.automatically(
-                    self.current,
-                ),
-            )
-
+with open('README.rst', 'r', encoding='utf-8') as f:
+    readme = f.read()
 
 setup(
     name=about['__title__'],
     version=about['__version__'],
     description=about['__description__'],
-    long_description=__doc__,
+    long_description=readme,
     author=about['__author__'],
     author_email=about['__author_email__'],
     url=about['__url__'],
@@ -304,7 +165,6 @@ setup(
         'Topic :: Software Development :: Testing',
     ],
     cmdclass={
-        'version': Version,
         'minify': Minimizer,
     },
 )
