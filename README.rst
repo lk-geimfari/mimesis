@@ -73,6 +73,7 @@ It is divided into several sections:
 -  `Advanced Usage`_
 -  `API Reference`_
 -  `Contributing`_
+-  `Changelog`_
 
 You can improve it by sending pull requests to this repository.
 
@@ -82,6 +83,7 @@ You can improve it by sending pull requests to this repository.
 .. _API Reference: http://mimesis.readthedocs.io/api.html
 .. _Advanced Usage: http://mimesis.readthedocs.io/advanced.html
 .. _Contributing: http://mimesis.readthedocs.io/contributing.html
+.. _Changelog: http://mimesis.readthedocs.io/changelog.html
 
 
 Getting started
