@@ -64,7 +64,8 @@ also you can install it manually:
 Documentation
 -------------
 
-| You can find the complete documentation on the `Read the Docs`_.
+You can find the complete documentation on the `Read the Docs`_.
+
 It is divided into several sections:
 
 -  `Foreword`_
