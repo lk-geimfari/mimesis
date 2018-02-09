@@ -1,6 +1,8 @@
 Version 2.0.0
 -------------
 
+.. note:: This release (2.0.0) contains some breaking changes and this means that you should update names of classes and methods in your code.
+
 **Added**:
 
 - Added items ``IOC`` and ``FIFA`` for enum object ``CountryCode``

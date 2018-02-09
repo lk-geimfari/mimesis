@@ -37,6 +37,17 @@ Disclaimer, legal information and other information are here for the interested.
    contributing
 
 
+Changelog
+---------
+
+Here you can see the full list of changes between each Mimesis release.
+
+.. toctree::
+   :maxdepth: 1
+
+   changelog
+
+
 Indices
 -------
 
