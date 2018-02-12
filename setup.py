@@ -83,13 +83,10 @@ class Minimizer(BaseCommand):
 
         template = "\033[34m{}\033[0m : " \
                    "\033[92mminimized\033[0m : " \
-                   "\033[33m{}\033[0m -> \033[92m{}\033[0m".format(
-            json_file,
-            size_before,
-            size_after,
-        )
+                   "\033[33m{}\033[0m -> \033[92m{}\033[0m"
 
-        print(template)
+        print(template.format(json_file,
+                              size_before, size_after))
 
     def run(self):
         """Start json minimizer and exit when all json
@@ -105,9 +102,9 @@ class Minimizer(BaseCommand):
 
         template = '\nTotal: ' \
                    '\033[92m{}\033[0m -> \033[92m{}\033[0m. ' \
-                   'Compressed: \033[92m{}\033[0m\n'.format(before, after, saved)
+                   'Compressed: \033[92m{}\033[0m\n'
 
-        print(template)
+        print(template.format(before, after, saved))
 
 
 with open('README.rst', 'r', encoding='utf-8') as f:
