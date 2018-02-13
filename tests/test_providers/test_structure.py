@@ -6,7 +6,7 @@ import pytest
 
 from mimesis import Structure
 
-from ._patterns import STR_REGEX
+from . import patterns
 
 
 class TestStructure(object):
@@ -16,7 +16,7 @@ class TestStructure(object):
         return Structure()
 
     def test_str(self, structure):
-        assert re.match(STR_REGEX, str(structure))
+        assert re.match(patterns.STR_REGEX, str(structure))
 
     def depth(self, x):
         """Calculates depth of object."""

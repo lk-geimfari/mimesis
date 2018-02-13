@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import re
+
 import pytest
 
 from mimesis import Hardware
@@ -6,12 +8,17 @@ from mimesis.data import (CPU, CPU_CODENAMES, CPU_MODEL_CODES, GENERATION,
                           GRAPHICS, HDD_SSD, MANUFACTURERS, PHONE_MODELS,
                           RESOLUTIONS, SCREEN_SIZES)
 
+from . import patterns
+
 
 class TestHardware(object):
 
     @pytest.fixture
     def hard(self):
         return Hardware()
+
+    def test_str(self, hard):
+        assert re.match(patterns.STR_REGEX, str(hard))
 
     def test_resolution(self, hard):
         result = hard.resolution()

@@ -1,7 +1,11 @@
 # -*- coding: utf-8 -*-
+import re
+
 import pytest
 
 from mimesis import ClothingSize
+
+from . import patterns
 
 
 class TestClothingSize(object):
@@ -9,6 +13,9 @@ class TestClothingSize(object):
     @pytest.fixture
     def clothing_size(self):
         return ClothingSize()
+
+    def test_str(self, clothing_size):
+        assert re.match(patterns.STR_REGEX, str(clothing_size))
 
     def test_international_size(self, clothing_size):
         size_names = (

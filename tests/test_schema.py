@@ -1,3 +1,5 @@
+import re
+
 import pytest
 
 from mimesis import config
@@ -6,6 +8,12 @@ from mimesis.enums import Gender
 from mimesis.exceptions import (UndefinedField, UndefinedSchema,
                                 UnsupportedField)
 from mimesis.schema import Field, Schema
+
+from .test_providers import patterns
+
+
+def test_str(_):
+    assert re.match(patterns.STR_REGEX, str(_))
 
 
 @pytest.mark.parametrize(
@@ -57,11 +65,6 @@ def valid_schema(_):
             'title2': _('text.title'),
         },
     }
-
-
-def test_str(_):
-    name = str(_).split(':')[0]
-    assert name == _.__class__.__name__
 
 
 def test_fill(_, valid_schema):

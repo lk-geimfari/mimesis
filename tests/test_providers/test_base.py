@@ -1,9 +1,13 @@
+import re
+
 import pytest
 
 from mimesis import config
 from mimesis.enums import Gender
 from mimesis.exceptions import NonEnumerableError
 from mimesis.providers.base import BaseDataProvider, StrMixin
+
+from . import patterns
 
 
 def test_str_mixin():
@@ -16,6 +20,9 @@ class TestBase(object):
     @pytest.fixture
     def base_data_provider(self):
         return BaseDataProvider()
+
+    def test_str(self, base_data_provider):
+        assert re.match(patterns.STR_REGEX, str(base_data_provider))
 
     @pytest.mark.parametrize(
         'gender, excepted', [

@@ -1,7 +1,11 @@
+import re
+
 import pytest
 
 from mimesis import Games
 from mimesis.data import GAMES, GAMING_PLATFORMS, GENRES, SCORE_PHRASES
+
+from . import patterns
 
 
 class TestGames(object):
@@ -9,6 +13,9 @@ class TestGames(object):
     @pytest.fixture
     def games(self):
         return Games()
+
+    def test_str(self, games):
+        assert re.match(patterns.STR_REGEX, str(games))
 
     def test_gaming_platform(self, games):
         platform = games.gaming_platform()

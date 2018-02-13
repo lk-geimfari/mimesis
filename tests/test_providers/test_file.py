@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import re
+
 import pytest
 
 from mimesis import File
@@ -7,12 +9,17 @@ from mimesis.data import EXTENSIONS, MIME_TYPES
 from mimesis.enums import FileType, MimeType
 from mimesis.exceptions import NonEnumerableError
 
+from . import patterns
+
 
 class TestFile(object):
 
     @pytest.fixture
     def file(self):
         return File()
+
+    def test_str(self, file):
+        assert re.match(patterns.STR_REGEX, str(file))
 
     @pytest.mark.parametrize(
         'extension', [

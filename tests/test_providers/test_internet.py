@@ -8,7 +8,7 @@ from mimesis import Internet, data
 from mimesis.enums import Layer, MimeType, PortRange, TLDType
 from mimesis.exceptions import NonEnumerableError
 
-from . import _patterns as p
+from . import patterns
 
 
 class TestInternet(object):
@@ -29,7 +29,7 @@ class TestInternet(object):
 
     def test_home_page(self, net):
         result = net.home_page()
-        assert re.match(p.HOME_PAGE, result)
+        assert re.match(patterns.HOME_PAGE, result)
 
     def test_subreddit(self, net):
         result = net.subreddit()
@@ -84,18 +84,18 @@ class TestInternet(object):
 
     def test_ip_v4(self, net):
         ip = net.ip_v4()
-        assert re.match(p.IP_V4_REGEX, ip)
+        assert re.match(patterns.IP_V4_REGEX, ip)
         ip_with_port = net.ip_v4(with_port=True)
         port = int(ip_with_port.split(':')[1])
         assert (port >= 1) and (port <= 65535)
 
     def test_ip_v6(self, net):
         ip = net.ip_v6()
-        assert re.match(p.IP_V6_REGEX, ip)
+        assert re.match(patterns.IP_V6_REGEX, ip)
 
     def test_mac_address(self, net):
         mac = net.mac_address()
-        assert re.match(p.MAC_ADDRESS_REGEX, mac)
+        assert re.match(patterns.MAC_ADDRESS_REGEX, mac)
 
     def test_http_method(self, net):
         result = net.http_method()

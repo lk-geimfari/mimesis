@@ -7,7 +7,7 @@ from mimesis.data import CREDIT_CARD_NETWORKS
 from mimesis.enums import CardType, Gender
 from mimesis.exceptions import NonEnumerableError
 
-from ._patterns import CREDIT_CARD_REGEX
+from . import patterns
 
 
 class TestPayment(object):
@@ -39,7 +39,7 @@ class TestPayment(object):
     )
     def test_credit_card_number(self, payment, card_type):
         result = payment.credit_card_number(card_type=card_type)
-        assert re.match(CREDIT_CARD_REGEX, result)
+        assert re.match(patterns.CREDIT_CARD_REGEX, result)
 
         with pytest.raises(NonEnumerableError):
             payment.credit_card_number(card_type='nil')

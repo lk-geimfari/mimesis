@@ -6,7 +6,7 @@ from mimesis import Cryptographic
 from mimesis.enums import Algorithm
 from mimesis.exceptions import NonEnumerableError
 
-from ._patterns import UUID_REGEX
+from . import patterns
 
 
 class TestCryptographic(object):
@@ -16,7 +16,7 @@ class TestCryptographic(object):
         return Cryptographic()
 
     def test_uuid(self, crypto):
-        assert re.match(UUID_REGEX, crypto.uuid())
+        assert re.match(patterns.UUID_REGEX, crypto.uuid())
 
     @pytest.mark.parametrize(
         'algorithm, length', [

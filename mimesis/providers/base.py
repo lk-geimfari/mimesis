@@ -2,7 +2,6 @@
 
 from typing import Any, Optional
 
-from mimesis.config import SUPPORTED_LOCALES
 from mimesis.exceptions import NonEnumerableError
 from mimesis.helpers import Random, get_random_item
 from mimesis.typing import Seed
@@ -48,11 +47,9 @@ class StrMixin(object):
 
     def __str__(self) -> str:
         """Human-readable representation of locale."""
-        cls_name = self.__class__.__name__
         locale = getattr(self, 'locale', 'en')
-        lang = SUPPORTED_LOCALES[locale]['name']
-        # TODO: Use format "locale:Provider"
-        return '{}:{}:{}'.format(cls_name, locale, lang)
+        return '{} <{}>'.format(
+            self.__class__.__name__, locale)
 
 
 class BaseDataProvider(BaseProvider, StrMixin):

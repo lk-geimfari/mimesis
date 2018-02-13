@@ -10,7 +10,7 @@ from mimesis.enums import CountryCode
 from mimesis.exceptions import NonEnumerableError
 from mimesis.providers import address as address_module
 
-from ._patterns import POSTAL_CODE_REGEX, STR_REGEX
+from . import patterns
 
 
 class TestAddress(object):
@@ -20,7 +20,7 @@ class TestAddress(object):
         return Address()
 
     def test_str(self, address):
-        assert re.match(STR_REGEX, str(address))
+        assert re.match(patterns.STR_REGEX, str(address))
 
     def test_street_number(self, _address):
         result = _address.street_number()
@@ -121,10 +121,10 @@ class TestAddress(object):
         result = address.postal_code()
         current_locale = address.get_current_locale()
 
-        if current_locale in POSTAL_CODE_REGEX:
-            assert re.match(POSTAL_CODE_REGEX[current_locale], result)
+        if current_locale in patterns.POSTAL_CODE_REGEX:
+            assert re.match(patterns.POSTAL_CODE_REGEX[current_locale], result)
         else:
-            assert re.match(POSTAL_CODE_REGEX['default'], result)
+            assert re.match(patterns.POSTAL_CODE_REGEX['default'], result)
 
     def test_zip_code(self, address):
         assert address.zip_code()

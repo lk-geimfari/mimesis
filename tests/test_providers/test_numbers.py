@@ -1,7 +1,11 @@
 # -*- coding: utf-8 -*-
+import re
+
 import pytest
 
 from mimesis import Numbers
+
+from . import patterns
 
 
 class TestNumbers(object):
@@ -9,6 +13,9 @@ class TestNumbers(object):
     @pytest.fixture
     def numbers(self):
         return Numbers()
+
+    def test_str(self, numbers):
+        assert re.match(patterns.STR_REGEX, str(numbers))
 
     def test_floats(self, numbers):
         result = numbers.floats()

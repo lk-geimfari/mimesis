@@ -25,7 +25,7 @@ class AbstractField(StrMixin):
     'Jack Allison'
     """
 
-    def __init__(self, locale: Optional[str] = None,
+    def __init__(self, locale: str = 'en',
                  seed: Optional[Seed] = None,
                  providers: Optional[Any] = None) -> None:
         """Initialize field.

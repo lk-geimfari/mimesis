@@ -7,7 +7,7 @@ from mimesis import Business
 from mimesis.data import (CRYPTOCURRENCY_ISO_CODES, CRYPTOCURRENCY_SYMBOLS,
                           CURRENCY_ISO_CODES, CURRENCY_SYMBOLS)
 
-from . import _patterns as p
+from . import patterns
 
 
 class TestBusiness(object):
@@ -17,7 +17,7 @@ class TestBusiness(object):
         return Business()
 
     def test_str(self, business):
-        assert re.match(p.STR_REGEX, str(business))
+        assert re.match(patterns.STR_REGEX, str(business))
 
     def test_copyright(self, business):
         result = business.copyright()
