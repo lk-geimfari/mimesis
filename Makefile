@@ -8,7 +8,7 @@ help:
 	@echo "clean-pyc    - remove Python file artifacts"
 	@echo "clean-build  - remove build artifacts"
 	@echo "clean        - remove build and Python file artifacts"
-	@echo "docs         - build Sphinx HTML documentation"
+	@echo "docs         - build Sphinx HTML documentation and open in browser"
 	@echo "test         - run tests quickly with the default Python"
 	@echo "type-check   - run mypy for checking types"
 	@echo "style-check  - run style check (PEP)"
@@ -29,7 +29,7 @@ clean-pyc:
 
 .PHONY: docs
 docs:
-	cd docs && make html && cd ..
+	cd docs && make html && cd .. && sensible-browser docs/_build/html/index.html
 
 
 .PHONY: clean-build
