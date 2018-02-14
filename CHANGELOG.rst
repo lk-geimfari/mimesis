@@ -5,7 +5,7 @@ Version 2.0.1
 
 **Removed**:
 
-- Removed internal function `utils.locale_info` which duplicate `utils.setup_locale`
+- Removed internal function ``utils.locale_info`` which duplicate ``utils.setup_locale``
 
 
 Version 2.0.0
