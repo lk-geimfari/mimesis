@@ -7,7 +7,7 @@ import pytest
 from mimesis import Science
 from mimesis.data import MATH_FORMULAS
 
-from ._patterns import STR_REGEX
+from . import patterns
 
 
 class TestScience(object):
@@ -17,7 +17,7 @@ class TestScience(object):
         return Science()
 
     def test_str(self, science):
-        assert re.match(STR_REGEX, str(science))
+        assert re.match(patterns.STR_REGEX, str(science))
 
     def test_math_formula(self, default_science):
         result = default_science.math_formula()

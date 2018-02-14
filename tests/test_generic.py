@@ -6,13 +6,13 @@ import pytest
 
 from mimesis import Generic
 
-from .test_providers import _patterns as p
+from .test_providers import patterns
 
 
 class TestGeneric(object):
 
     def test_str(self, generic):
-        assert re.match(p.STR_REGEX, str(generic))
+        assert re.match(patterns.STR_REGEX, str(generic))
 
     def test_base_person(self, generic):
         result = generic.person.username()

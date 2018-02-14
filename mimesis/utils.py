@@ -12,26 +12,10 @@ from mimesis import config
 from mimesis.exceptions import UnsupportedLocale
 from mimesis.typing import JSON
 
-__all__ = ['download_image', 'locale_info',
-           'luhn_checksum', 'setup_locale', 'pull']
+__all__ = ['download_image', 'luhn_checksum',
+           'setup_locale', 'pull']
 
 DATA_DIR = path.abspath(path.join(path.dirname(__file__), 'data'))
-
-
-def locale_info(locale: str) -> str:
-    """Check information about locale.
-
-    :param locale: Locale abbreviation.
-    :return: Locale name.
-    :raises UnsupportedLocale: if locale is not supported.
-    """
-    locale = locale.lower()
-    supported = config.SUPPORTED_LOCALES
-
-    if locale not in supported:
-        raise UnsupportedLocale(locale)
-
-    return supported[locale]['name']
 
 
 def luhn_checksum(num: str) -> str:
@@ -97,7 +81,6 @@ def pull(file: str, locale: str = 'en') -> JSON:
         :return: Content of JSON file as dict.
         """
         file_path = path.join(DATA_DIR, locale_name, file)
-        # Needs explicit encoding for Windows
         with open(file_path, 'r', encoding='utf8') as f:
             return json.load(f)
 

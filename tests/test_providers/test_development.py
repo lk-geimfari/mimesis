@@ -1,8 +1,11 @@
 # -*- coding: utf-8 -*-
+import re
 
 import pytest
 
 from mimesis import Development, data
+
+from . import patterns
 
 
 class TestDevelopment(object):
@@ -10,6 +13,9 @@ class TestDevelopment(object):
     @pytest.fixture
     def dev(self):
         return Development()
+
+    def test_str(self, dev):
+        assert re.match(patterns.STR_REGEX, str(dev))
 
     def test_license(self, dev):
         result = dev.software_license()

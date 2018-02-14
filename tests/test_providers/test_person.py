@@ -10,7 +10,7 @@ from mimesis.data import (BLOOD_GROUPS, ENGLISH_LEVEL, GENDER_SYMBOLS,
 from mimesis.enums import Gender, SocialNetwork, TitleType
 from mimesis.exceptions import NonEnumerableError
 
-from ._patterns import EMAIL_REGEX, STR_REGEX, USERNAME_REGEX
+from . import patterns
 
 
 class TestPerson(object):
@@ -20,7 +20,7 @@ class TestPerson(object):
         return Person()
 
     def test_str(self, person):
-        assert re.match(STR_REGEX, str(person))
+        assert re.match(patterns.STR_REGEX, str(person))
 
     @pytest.mark.parametrize(
         'minimum, maximum', [
@@ -76,7 +76,7 @@ class TestPerson(object):
     )
     def test_username(self, _person, template):
         result = _person.username(template=template)
-        assert re.match(USERNAME_REGEX, result)
+        assert re.match(patterns.USERNAME_REGEX, result)
 
     def test_username_unsupported_template(self, _person):
         with pytest.raises(KeyError):
@@ -84,11 +84,11 @@ class TestPerson(object):
 
     def test_email(self, _person):
         result = _person.email()
-        assert re.match(EMAIL_REGEX, result)
+        assert re.match(patterns.EMAIL_REGEX, result)
 
         domains = ['@example.com']
         result = _person.email(domains=domains)
-        assert re.match(EMAIL_REGEX, result)
+        assert re.match(patterns.EMAIL_REGEX, result)
         assert result.split('@')[1] == 'example.com'
 
     def test_height(self, _person):

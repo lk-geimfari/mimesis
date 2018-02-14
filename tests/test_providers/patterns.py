@@ -27,7 +27,7 @@ CREDIT_CARD_REGEX = r'[\d]+((-|\s)?[\d]+)+'
 STR_REGEX = r'^(Address|Business|ClothingSize|Code|Datetime|Development' \
             r'|File|Food|Games|Hardware|Internet|Numbers|Path|Person|' \
             r'Science|Structure|Text|Transport|UnitSystem|Cryptographic|' \
-            r'Generic):[a-z-]+:(.*)$'
+            r'Generic|Field|AbstractField|BaseDataProvider) <([a-z-]+)>$'
 
 _EN_GB_POST_CODE = \
     r'((([A-PR-UWYZ][0-9])|([A-PR-UWYZ][0-9][0-9])' \

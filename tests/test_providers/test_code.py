@@ -8,7 +8,7 @@ from mimesis.data import LOCALE_CODES
 from mimesis.enums import EANFormat, ISBNFormat
 from mimesis.exceptions import NonEnumerableError
 
-from . import _patterns as p
+from . import patterns
 
 
 class TestCode(object):
@@ -18,7 +18,7 @@ class TestCode(object):
         return Code()
 
     def test_str(self, code):
-        assert re.match(p.STR_REGEX, str(code))
+        assert re.match(patterns.STR_REGEX, str(code))
 
     @pytest.mark.parametrize(
         'fmt, length', [

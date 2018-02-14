@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import re
 
 import pytest
 
@@ -7,12 +8,17 @@ from mimesis.data import SI_PREFIXES, SI_PREFIXES_SYM
 from mimesis.enums import PrefixSign, UnitName
 from mimesis.exceptions import NonEnumerableError
 
+from . import patterns
+
 
 class TestUnitSystem(object):
 
     @pytest.fixture
     def us(self):
         return UnitSystem()
+
+    def test_str(self, us):
+        assert re.match(patterns.STR_REGEX, str(us))
 
     @pytest.mark.parametrize(
         'name', [

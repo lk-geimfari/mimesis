@@ -6,7 +6,7 @@ import pytest
 from mimesis import Text
 from mimesis.data import SAFE_COLORS
 
-from ._patterns import HEX_COLOR, STR_REGEX
+from . import patterns
 
 
 class TestText(object):
@@ -16,7 +16,7 @@ class TestText(object):
         return Text()
 
     def test_str(self, text):
-        assert re.match(STR_REGEX, str(text))
+        assert re.match(patterns.STR_REGEX, str(text))
 
     def test_hex_to_rgb(self, _text):
         color = _text.hex_color()
@@ -31,7 +31,7 @@ class TestText(object):
     )
     def test_hex_color(self, _text, safe):
         result = _text.hex_color(safe=safe)
-        assert re.match(HEX_COLOR, result)
+        assert re.match(patterns.HEX_COLOR, result)
         assert result in SAFE_COLORS if safe else result
 
     @pytest.mark.parametrize(

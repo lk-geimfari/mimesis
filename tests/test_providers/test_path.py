@@ -6,8 +6,13 @@ import pytest
 from mimesis import Path
 from mimesis.data import FOLDERS, PROGRAMMING_LANGS, PROJECT_NAMES
 
+from . import patterns
+
 
 class TestPath(object):
+
+    def test_str(self, path):
+        assert re.match(patterns.STR_REGEX, str(path))
 
     def test_root(self, path):
         result = path.root()

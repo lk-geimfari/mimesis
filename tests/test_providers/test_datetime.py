@@ -7,7 +7,7 @@ import pytest
 from mimesis import Datetime
 from mimesis.data import GMT_OFFSETS, TIMEZONES
 
-from ._patterns import STR_REGEX
+from . import patterns
 
 
 class TestDatetime(object):
@@ -17,7 +17,7 @@ class TestDatetime(object):
         return Datetime()
 
     def test_str(self, dt):
-        assert re.match(STR_REGEX, str(dt))
+        assert re.match(patterns.STR_REGEX, str(dt))
 
     def test_year(self, _datetime):
         result = _datetime.year(minimum=2000, maximum=2016)

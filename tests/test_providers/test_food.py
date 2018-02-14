@@ -5,13 +5,13 @@ import pytest
 
 from mimesis import Food
 
-from ._patterns import STR_REGEX
+from . import patterns
 
 
 class TestFood(object):
 
     def test_str(self, food):
-        assert re.match(STR_REGEX, str(food))
+        assert re.match(patterns.STR_REGEX, str(food))
 
     def test_vegetable(self, food):
         result = food.vegetable()

@@ -1,8 +1,12 @@
 # -*- coding: utf-8 -*-
+import re
+
 import pytest
 
 from mimesis import Transport
 from mimesis.data import AIRPLANES, CARS, TRUCKS, VR_CODES, VRC_BY_LOCALES
+
+from . import patterns
 
 
 class TestTransport(object):
@@ -10,6 +14,9 @@ class TestTransport(object):
     @pytest.fixture
     def _transport(self):
         return Transport()
+
+    def test_str(self, _transport):
+        assert re.match(patterns.STR_REGEX, str(_transport))
 
     def test_truck(self, _transport):
         result = _transport.truck().split('-')

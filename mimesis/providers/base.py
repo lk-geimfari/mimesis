@@ -5,7 +5,7 @@ from typing import Any, Optional
 from mimesis.exceptions import NonEnumerableError
 from mimesis.helpers import Random, get_random_item
 from mimesis.typing import Seed
-from mimesis.utils import locale_info, setup_locale
+from mimesis.utils import setup_locale
 
 __all__ = ['BaseDataProvider', 'BaseProvider']
 
@@ -47,15 +47,9 @@ class StrMixin(object):
 
     def __str__(self) -> str:
         """Human-readable representation of locale."""
-        if hasattr(self, 'locale'):
-            locale = getattr(self, 'locale')
-            return '{}:{}:{}'.format(
-                self.__class__.__name__,
-                locale,
-                locale_info(locale),
-            )
-        return '{}'.format(
-            self.__class__.__name__)
+        locale = getattr(self, 'locale', 'en')
+        return '{} <{}>'.format(
+            self.__class__.__name__, locale)
 
 
 class BaseDataProvider(BaseProvider, StrMixin):
