@@ -1,6 +1,6 @@
 ## How to add new locale
 
-This is a template of the locale structure. There are seven json
+This is a template of the locale structure. There are eight json
 files (`File name`) which include data related to some data providers (`Provider`):
 
 ```
