@@ -9,6 +9,12 @@ CONTAINER = [
     'Kubernetes',
 ]
 
+VERSION_CONTROL_SYSTEMS = [
+    'Git',
+    'Mercurial',
+    'Subversion',
+]
+
 LICENSES = [
     'Apache License, 2.0 (Apache-2.0)',
     'The BSD 3-Clause License',
