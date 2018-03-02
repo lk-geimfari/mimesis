@@ -42,7 +42,7 @@ class TestPerson(object):
         assert result == 0
 
     def test_child_count(self, _person):
-        result = _person.child_count(max_childs=10)
+        result = _person.child_count(max_children=10)
         assert result <= 10
 
     def test_work_experience(self, _person):

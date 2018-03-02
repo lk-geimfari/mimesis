@@ -45,17 +45,17 @@ class Person(BaseDataProvider):
         self._store['age'] = a
         return a
 
-    def child_count(self, max_childs: int = 5) -> int:
-        """Get a count of child's.
+    def child_count(self, max_children: int = 5) -> int:
+        """Get a count of children.
 
-        :param max_childs: Maximum count of child's.
+        :param max_children: Maximum count of children.
         :return: Ints. Depend on previous generated age.
         """
         a = self._store['age']
         if a == 0:
             a = self.age()
 
-        cc = 0 if a < 18 else self.random.randint(0, max_childs)
+        cc = 0 if a < 18 else self.random.randint(0, max_children)
         return cc
 
     def work_experience(self, working_start_age: int = 22) -> int:

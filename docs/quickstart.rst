@@ -328,7 +328,7 @@ Here’s how it works:
     >>> from mimesis.builtins import BrazilSpecProvider
 
     >>> generic = Generic('pt-br')
-    >>> generic.add_provider(BrazilProvider)
+    >>> generic.add_provider(BrazilSpecProvider)
     >>> generic.brazil_provider.cpf()
     '696.441.186-00'
 
