@@ -62,6 +62,7 @@ Contributors
 -  Ruslan Valerievich `(Valerievich)`_
 -  Simon `(DefaltSimon)`_
 -  dy `(duckyou)`_
+-  Arvind Prasanna `(aprasanna)`_
 
 .. _(lk-geimfari): https://github.com/lk-geimfari
 .. _(sobolevn): https://github.com/sobolevn
