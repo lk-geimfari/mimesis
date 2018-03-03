@@ -1,7 +1,7 @@
 """Data related to the development."""
 
 from mimesis.data import (BACKEND, CONTAINER, FRONTEND, LICENSES, NOSQL, OS,
-                          PROGRAMMING_LANGS, SQL)
+                          PROGRAMMING_LANGS, SQL, VERSION_CONTROL_SYSTEMS)
 from mimesis.providers.base import BaseDataProvider
 
 __all__ = ['Development']
@@ -84,8 +84,7 @@ class Development(BaseDataProvider):
         :Example:
             Git
         """
-        vcs = ('Git', 'Subversion')
-        return self.random.choice(vcs)
+        return self.random.choice(VERSION_CONTROL_SYSTEMS)
 
     def programming_language(self) -> str:
         """Get a random programming language from the list.

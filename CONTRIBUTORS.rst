@@ -62,6 +62,7 @@ Contributors
 -  Ruslan Valerievich `(Valerievich)`_
 -  Simon `(DefaltSimon)`_
 -  dy `(duckyou)`_
+-  Arvind Prasanna `(aprasanna)`_
 
 .. _(lk-geimfari): https://github.com/lk-geimfari
 .. _(sobolevn): https://github.com/sobolevn
@@ -100,3 +101,4 @@ Contributors
 .. _(zelds): https://github.com/zelds
 .. _(axce1): https://github.com/axce1
 .. _(DefaltSimon): https://github.com/DefaltSimon
+.. _(aprasanna): https://github.com/aprasanna
