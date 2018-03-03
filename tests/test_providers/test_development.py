@@ -22,7 +22,7 @@ class TestDevelopment(object):
         assert result in data.LICENSES
 
     def test_version_control_system(self, dev):
-        vcs = ['Git', 'Subversion', 'Mercurial']
+        vcs = data.VERSION_CONTROL_SYSTEMS
         assert dev.version_control_system() in vcs
 
     def test_version(self, dev):
