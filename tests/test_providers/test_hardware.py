@@ -6,7 +6,7 @@ import pytest
 from mimesis import Hardware
 from mimesis.data import (CPU, CPU_CODENAMES, CPU_MODEL_CODES, GENERATION,
                           GRAPHICS, HDD_SSD, MANUFACTURERS, PHONE_MODELS,
-                          RESOLUTIONS, SCREEN_SIZES)
+                          RAM_SIZES, RAM_TYPES, RESOLUTIONS, SCREEN_SIZES)
 
 from . import patterns
 
@@ -52,11 +52,11 @@ class TestHardware(object):
 
     def test_ram_type(self, hard):
         result = hard.ram_type()
-        assert result in ['DDR2', 'DDR3', 'DDR4']
+        assert result in RAM_TYPES
 
     def test_ram_size(self, hard):
-        result = hard.ram_size().split(' ')
-        assert len(result) > 0
+        result = hard.ram_size()
+        assert result in RAM_SIZES
 
     def test_ssd_or_hdd(self, hard):
         result = hard.ssd_or_hdd()

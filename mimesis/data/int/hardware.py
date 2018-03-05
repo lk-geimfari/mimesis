@@ -26,7 +26,7 @@ RESOLUTIONS = [
     '2560x1600',
 ]
 
-SCREEN_SIZES = (
+SCREEN_SIZES = [
     '14″',
     '12.1″',
     '12″',
@@ -38,8 +38,9 @@ SCREEN_SIZES = (
     '17″',
     '15.4″',
     '14.1″',
-)
-CPU = (
+]
+
+CPU = [
     'AMD Ryzen 7 1800X',
     'AMD Ryzen 7 1700',
     'AMD Ryzen™ Threadripper™',
@@ -47,16 +48,34 @@ CPU = (
     'Intel® Core i5',
     'Intel® Core i7',
     'Intel® Core i9',
-)
-GENERATION = (
+]
+
+RAM_TYPES = [
+    'SDRAM',
+    'DDR',
+    'DDR2',
+    'DDR3',
+    'DDR4',
+]
+
+RAM_SIZES = [
+    '4GB',
+    '8GB',
+    '16GB',
+    '32GB',
+    '64GB',
+]
+
+GENERATION = [
     '2nd Generation',
     '3rd Generation',
     '4th Generation',
     '5th Generation',
     '6th Generation',
     '7th Generation',
-)
-CPU_MODEL_CODES = (
+]
+
+CPU_MODEL_CODES = [
     '7500U',
     '7Y75',
     '7Y30',
@@ -85,8 +104,9 @@ CPU_MODEL_CODES = (
     '5750HQ',
     '5700HQ',
     '5650U',
-)
-CPU_CODENAMES = (
+]
+
+CPU_CODENAMES = [
     'Ivytown',
     'Haswell',
     'Fortville',
@@ -98,7 +118,8 @@ CPU_CODENAMES = (
     'Orchid Island',
     'Bear Ridge',
     'Cannonlake',
-)
+]
+
 HDD_SSD = [
     '64GB SSD',
     '128GB SSD',
@@ -150,7 +171,7 @@ GRAPHICS = [
     'AMD Radeon R9 M395',
 ]
 
-MANUFACTURERS = (
+MANUFACTURERS = [
     'Apple',
     'Acer',
     'Dell',
@@ -163,7 +184,8 @@ MANUFACTURERS = (
     'Samsung',
     'Fujitsu',
     'Apple',
-)
+]
+
 PHONE_MODELS = [
     'Apple iPhone 4',
     'Apple iPhone 4S',

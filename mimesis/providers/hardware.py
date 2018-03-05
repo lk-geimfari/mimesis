@@ -2,7 +2,7 @@
 
 from mimesis.data import (CPU, CPU_CODENAMES, CPU_MODEL_CODES, GENERATION,
                           GRAPHICS, HDD_SSD, MANUFACTURERS, PHONE_MODELS,
-                          RESOLUTIONS, SCREEN_SIZES)
+                          RAM_SIZES, RAM_TYPES, RESOLUTIONS, SCREEN_SIZES)
 from mimesis.providers.base import BaseDataProvider
 
 __all__ = ['Hardware']
@@ -92,8 +92,7 @@ class Hardware(BaseDataProvider):
         :Example:
             DDR3.
         """
-        ram_types = ('DDR2', 'DDR3', 'DDR4')
-        return self.random.choice(ram_types)
+        return self.random.choice(RAM_TYPES)
 
     def ram_size(self) -> str:
         """Get a random size of RAM.
@@ -103,8 +102,7 @@ class Hardware(BaseDataProvider):
         :Example:
             16GB.
         """
-        sizes = ('4', '6', '8', '16', '32', '64')
-        return self.random.choice(sizes) + 'GB'
+        return self.random.choice(RAM_SIZES)
 
     def ssd_or_hdd(self) -> str:
         """Get a random value from list.
