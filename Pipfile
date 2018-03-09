@@ -11,7 +11,7 @@ name = "pypi"
 
 [dev-packages]
 
-certifi = "==2017.11.5"
+certifi = "==2018.1.18"
 chardet = "==3.0.4"
 codecov = "==2.0.15"
 coverage = "==4.4.2"

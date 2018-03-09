@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "40ef1864a0c34ad3b47b280cf94e6cc190cb4bf44ecf462282741bced3b58251"
+            "sha256": "63baaa4099661a46870e91b638548764b7d3479dc69aa08f92735212b425738b"
         },
         "pipfile-spec": 6,
         "requires": {},
@@ -31,10 +31,10 @@
         },
         "certifi": {
             "hashes": [
-                "sha256:244be0d93b71e93fc0a0a479862051414d0e00e16435707e5bf5000f92e04694",
-                "sha256:5ec74291ca1136b40f0379e1128ff80e866597e4e2c1e755739a913bbc3613c0"
+                "sha256:14131608ad2fd56836d33a71ee60fa1c82bc9d2c8d98b7bdbc631fe1b3cd1296",
+                "sha256:edbc3f203427eef571f79a7692bb160a2b0f7ccaa31953e99bd17e307cf63f7d"
             ],
-            "version": "==2017.11.5"
+            "version": "==2018.1.18"
         },
         "chardet": {
             "hashes": [
@@ -206,6 +206,7 @@
                 "sha256:8cca5c229d225f8c1e3085be4fcf306090b00850fefad892f9d96c7b6e2f310f",
                 "sha256:ca18943e28235417756316bfada6cd96b23ce60dd532642690dcfdaba988a76d"
             ],
+            "markers": "python_version == '>=2.7,!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*'",
             "version": "==1.5.2"
         },
         "py-cpuinfo": {
