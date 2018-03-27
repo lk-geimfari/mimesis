@@ -13,6 +13,7 @@ install:
 script:
   - pipenv run py.test --maxfail=2 --durations=3 --cov=mimesis --benchmark-skip
   - pipenv run mypy mimesis
+  - pipenv run pyroma -d .
 
 after_success:
   codecov
