@@ -35,3 +35,5 @@ requests = "==2.18.4"
 mypy = "*"
 colorama = { version="==0.3.9", os_name="=='nt'"}
 "flake8-docstrings" = "*"
+pyroma = "*"
+pygments = "*"
