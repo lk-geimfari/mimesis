@@ -1,6 +1,6 @@
 """Metadata of package."""
 
-__version__ = '2.0.0'
+__version__ = '2.0.1'
 __title__ = 'mimesis'
 __description__ = 'Mimesis: mock data for developers.'
 __url__ = 'https://github.com/lk-geimfari/mimesis'

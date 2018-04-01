@@ -1,8 +1,6 @@
 Version 2.0.1
 -------------
 
-**Attention**: This version is not released.
-
 **Removed**:
 
 - Removed internal function ``utils.locale_info`` which duplicate ``utils.setup_locale``

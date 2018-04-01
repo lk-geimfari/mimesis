@@ -119,8 +119,8 @@ class Payment(BaseDataProvider):
         while len(str_num) < length - 1:
             str_num += self.random.choice(string.digits)
 
-        groups = regex.search(str_num + luhn_checksum(str_num))
-        card = ' '.join(groups.groups())
+        groups = regex.search(str_num + luhn_checksum(str_num)).groups()
+        card = ' '.join(groups)
         return card
 
     def credit_card_expiration_date(self, minimum: int = 16,
