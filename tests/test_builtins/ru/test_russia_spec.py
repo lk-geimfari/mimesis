@@ -11,15 +11,15 @@ def russia():
 
 
 def test_passport_series(russia):
-    result = russia.passport_series()
-    assert result is not None
-    result = result.split(' ')
-    assert isinstance(result, list)
+    series = russia.passport_series()
+    assert isinstance(series.split(' '), list)
 
-    result = russia.passport_series(year=10)
-    region, year = result.split(' ')
+
+def test_passport_series_parametrized(russia):
+    series = russia.passport_series(year=10)
+    region, year = series.split(' ')
     assert int(year) == 10
-    assert region is not None
+    assert 0 < int(region) < 100
 
 
 def test_passport_number(russia):

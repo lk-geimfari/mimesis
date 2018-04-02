@@ -73,7 +73,7 @@ def test_fill(_, valid_schema):
     assert isinstance(result[0], dict)
 
     with pytest.raises(UndefinedSchema):
-        Schema(schema=None).create()
+        Schema(schema=None).create()  # type: ignore
 
 
 def test_field_with_key(_):

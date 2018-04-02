@@ -20,17 +20,18 @@ environment:
 install:
   - "SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%"
   - "python --version"
-  
+
   # Upgrade to the latest version of pip to avoid it displaying warnings
   # about it being out of date.
   - "pip install --disable-pip-version-check --user --upgrade pip"
-  
+
   # Setting up enviroment
   - "pip install pipenv"
-  - "pipenv install --dev"
+  - "pipenv install --dev --ignore-pipfile"
 
 build: off
 
 test_script:
-  - "pipenv run mypy mimesis"
+  - "pipenv run mypy mimesis tests"
   - "pipenv run py.test --maxfail=2 --durations=3 --cov=mimesis --benchmark-skip"
+  - "pipenv run pyroma -d ."

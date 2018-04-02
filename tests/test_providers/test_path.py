@@ -28,10 +28,12 @@ class TestPath(object):
             'win32': '(C)(:)(\\\\)(Users)(\\\\).*[^(\\\\)]',
             'linux': '(/)(home)(/).*',
         }
+
         if path.platform == 'win32':
-            pattern = pattern_dictionary.get('win32')
+            pattern = pattern_dictionary['win32']
         else:
-            pattern = pattern_dictionary.get('linux')
+            pattern = pattern_dictionary['linux']
+
         result = re.search(pattern, user)
         assert isinstance(result, type(re.search('', ''))) is True
 

@@ -48,12 +48,12 @@ clean: clean-pyc clean-build
 .PHONY: test
 test:
 	py.test --benchmark-skip --color=yes ./
-	mypy mimesis/
+	mypy mimesis/ tests/
 
 
 .PHONY: type-check
 type-check:
-	mypy mimesis/
+	mypy mimesis/ tests/
 
 
 .PHONY: benchmarks
