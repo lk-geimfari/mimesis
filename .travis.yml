@@ -8,10 +8,10 @@ python:
 
 install:
   - pip install pipenv
-  - pipenv install --dev --deploy
+  - pipenv install --dev --ignore-pipfile
 
 script:
-  - pipenv run py.test --maxfail=2 --durations=3 --cov=mimesis --benchmark-skip
+  - pipenv run py.test --cov=mimesis
   - pipenv run mypy mimesis/ tests/
   - pipenv run pyroma -d .
 
