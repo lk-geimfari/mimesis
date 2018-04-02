@@ -28,13 +28,10 @@ class BaseCommand(Command):
 
 
 class Minimizer(BaseCommand):
-    """Minify content of all json file for all locales.
-    """
+    """Minify content of all json file for all locales."""
 
     def initialize_options(self):
-        """Find all files of all locales.
-        """
-
+        """Find all files of all locales."""
         self.paths = []
         self.separators = (',', ':')
         self.data_dir = join(here, 'mimesis', 'data')
@@ -51,9 +48,9 @@ class Minimizer(BaseCommand):
     def size_of(num):
         for unit in ['B', 'KB', 'MB']:
             if abs(num) < 1024.0:
-                return "%3.1f%s" % (num, unit)
+                return '%3.1f%s' % (num, unit)
             num = num / 1024.0
-        return "%.1f" % num
+        return '%.1f' % num
 
     def minify(self, file_path):
         size_before = getsize(file_path)
@@ -81,17 +78,15 @@ class Minimizer(BaseCommand):
 
         json_file = '/'.join(file_path.split('/')[-2:])
 
-        template = "\033[34m{}\033[0m : " \
-                   "\033[92mminimized\033[0m : " \
-                   "\033[33m{}\033[0m -> \033[92m{}\033[0m"
+        template = '\033[34m{}\033[0m : ' \
+                   '\033[92mminimized\033[0m : ' \
+                   '\033[33m{}\033[0m -> \033[92m{}\033[0m'
 
         print(template.format(json_file,
                               size_before, size_after))
 
     def run(self):
-        """Start json minimizer and exit when all json
-        files was minimized.
-        """
+        """Start json minimizer and exit when all json files were minimized."""
         for rel_path in sorted(self.paths):
             file_path = join(self.data_dir, rel_path)
             self.minify(file_path)
@@ -146,7 +141,7 @@ setup(
     exclude_package_data={
         'mimesis': [
             # It's for development.
-            'data/locale_template/*'
+            'data/locale_template/*',
         ],
     },
     data_files=[

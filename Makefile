@@ -11,7 +11,6 @@ help:
 	@echo "docs         - build Sphinx HTML documentation and open in browser"
 	@echo "test         - run tests quickly with the default Python"
 	@echo "type-check   - run mypy for checking types"
-	@echo "style-check  - run style check (PEP)"
 	@echo "benchmarks   - run benchmark tests for providers"
 	@echo "publish      - create dist and upload package to PyPI"
 	@echo "version      - update __version__ file"
@@ -66,11 +65,6 @@ benchmarks:
 publish:
 	python3 setup.py sdist bdist_wheel && twine upload dist/*
 	clean
-
-
-.PHONY: style-check
-style-check:
-	py.test --flake mimesis/
 
 
 .PHONY: version
