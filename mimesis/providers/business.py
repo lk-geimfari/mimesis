@@ -27,8 +27,7 @@ class Business(BaseDataProvider):
         :Example:
             Gamma Systems.
         """
-        return self.random.choice(
-            self._data['company']['name'])
+        return self.random.choice(self._data['company']['name'])
 
     def company_type(self, abbr: bool = False) -> str:
         """Get a random type of business entity.
@@ -40,11 +39,10 @@ class Business(BaseDataProvider):
             Incorporated.
         """
         return self.random.choice(
-            self._data['company']['type'].get(
-                'abbr' if abbr else 'title'),
+            self._data['company']['type'].get('abbr' if abbr else 'title'),
         )
 
-    def copyright(self) -> str:
+    def copyright(self) -> str:  # noqa: A002
         """Generate a random copyright.
 
         :return: Copyright of company.
