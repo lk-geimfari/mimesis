@@ -34,7 +34,7 @@ class Cryptographic(BaseDataProvider):
         bits = self.random.getrandbits(128)
         return str(uuid.UUID(int=bits, version=version))
 
-    def hash(self, algorithm: Optional[Algorithm] = None) -> str:
+    def hash(self, algorithm: Optional[Algorithm] = None) -> str:  # noqa: A002
         """Generate random hash.
 
         :param algorithm: Enum object ``Algorithm``.
@@ -47,7 +47,7 @@ class Cryptographic(BaseDataProvider):
             fn = getattr(hashlib, key)
             return fn(self.uuid().encode()).hexdigest()
 
-    def bytes(self, entropy: int = 32) -> Bytes:
+    def bytes(self, entropy: int = 32) -> Bytes:  # noqa: A002
         """Generate byte string containing *entropy* bytes.
 
         The string has *entropy* random bytes, each byte
