@@ -290,8 +290,8 @@ You can also add multiple providers:
 Everything is pretty easy and self-explanatory here, therefore, we will
 only clarify one moment — attribute *name*, class *Meta* is the name
 of a class through which access to methods of user-class providers is
-carried out. By default class name is the name of the class in the lower
-register.
+carried out. By default class name is the name of the class in lowercase 
+letters.
 
 
 Built-in Providers
@@ -472,5 +472,5 @@ Example of usage for romanization of Russian full name:
     >>> russian_name()
     'Veronika Denisova'
 
-At this moment it’s works only for Russian (**ru**),
+At this moment it works only for Russian (**ru**),
 Ukrainian (**uk**) and Kazakh (**kk**):
