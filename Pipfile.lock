@@ -126,11 +126,11 @@
         },
         "flake8-builtins": {
             "hashes": [
-                "sha256:35123ebd0885171f0c15fcb95c4374dbff1f71e6dc309d6b16abfa8dba18be4d",
-                "sha256:5d9687d470fec564689599aae12422b39c1bc6e6ed92291d2e8d7a1ebc9e983b"
+                "sha256:ad59b8bf6c9595c485003e6ccbf6da3b90c8e0e94279ab250f2113e698272b71",
+                "sha256:bebc4264548aa9d67f70b524527881b621c30be4cc639810a5f849e1ba85561f"
             ],
             "index": "pypi",
-            "version": "==1.2.1"
+            "version": "==1.2.2"
         },
         "flake8-commas": {
             "hashes": [
