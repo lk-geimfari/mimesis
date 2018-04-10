@@ -157,10 +157,10 @@
         },
         "flake8-quotes": {
             "hashes": [
-                "sha256:00c53e41be1cf6d04c4e5974a36320b081ee7e13fc394457a104836cbfc1399e"
+                "sha256:fd9127ad8bbcf3b546fa7871a5266fd8623ce765ebe3d5aa5eabb80c01212b26"
             ],
             "index": "pypi",
-            "version": "==0.14.1"
+            "version": "==1.0.0"
         },
         "idna": {
             "hashes": [
