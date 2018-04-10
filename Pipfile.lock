@@ -304,11 +304,11 @@
         },
         "pytest-mock": {
             "hashes": [
-                "sha256:03a2fea79d0a83a8de2e77e92afe5f0a5ca99a58cc68f843f9a74de34800a943",
-                "sha256:b879dff61e31fcd4727c227c182f15f222a155293cc64ed5a02d55e0020cf949"
+                "sha256:2dd545496af6a0559432b11de79f1fd4fa4a541ae2e01892d5ba6041f85f0994",
+                "sha256:2f980ff7b1e5c6945138b3572dcfdde18b5410bf12d3af751da820ab7f21f132"
             ],
             "index": "pypi",
-            "version": "==1.7.1"
+            "version": "==1.8.0"
         },
         "requests": {
             "hashes": [
