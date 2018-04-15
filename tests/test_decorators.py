@@ -3,6 +3,20 @@ import pytest
 import mimesis.decorators
 
 
+def test_romanization_dict_is_unchanged():
+    from copy import deepcopy
+    from mimesis.data import ROMANIZATION_DICT
+
+    old_data = deepcopy(ROMANIZATION_DICT)
+
+    @mimesis.decorators.romanized('ru')
+    def some_name():
+        return 'Абырвалг Аристархович'
+
+    some_name()
+    assert ROMANIZATION_DICT == old_data
+
+
 @pytest.fixture
 @mimesis.decorators.romanized('ru')
 def russian_name():
