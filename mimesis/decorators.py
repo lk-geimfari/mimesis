@@ -24,13 +24,13 @@ def romanized(locale: str = '') -> Callable:
         @functools.wraps(func)
         def wrapper(*args, **kwargs):
             try:
-                alphabet = data.ROMANIZATION_DICT[locale]
-                # Add common cyrillic common letters
-                alphabet.update(data.COMMON_LETTERS)
                 # String can contain ascii symbols, digits and
                 # punctuation symbols.
-                alphabet.update({s: s for s in
-                                 letters + digits + punctuation})
+                alphabet = {s: s for s in
+                            letters + digits + punctuation}
+                alphabet.update(data.ROMANIZATION_DICT[locale])
+                # Add common cyrillic letters
+                alphabet.update(data.COMMON_LETTERS)
             except KeyError:
                 raise UnsupportedLocale(locale)
             result = func(*args, **kwargs)
