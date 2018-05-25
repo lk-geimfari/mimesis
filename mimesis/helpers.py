@@ -40,11 +40,10 @@ class Random(random.Random):
                  a: int = 1, b: int = 100) -> List[int]:
         """Generate list of random integers.
 
-        :param int amount: Amount of elements.
-        :param int a: Minimum value of range.
-        :param int b: Maximum value of range.
+        :param amount: Amount of elements.
+        :param a: Minimum value of range.
+        :param b: Maximum value of range.
         :return: List of random integers.
-        :rtype: list
         :raises ValueError: if amount less or equal to zero.
         """
         if amount <= 0:
@@ -58,7 +57,6 @@ class Random(random.Random):
         """Return a bytes object containing random bytes.
 
         :return: Bytes.
-        :rtype: bytes
         """
         return os.urandom(*args, **kwargs)
 
