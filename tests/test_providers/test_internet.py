@@ -52,7 +52,7 @@ class TestInternet(object):
     def test_stock_image(self, net):
         result = net.stock_image()
         assert result is not None
-        result_2 = net.stock_image(category='nature').split("/")[-1][1:]
+        result_2 = net.stock_image(category='nature').split('/')[-1][1:]
         assert result_2 == 'nature'
         result_3 = net.stock_image(width=1900, height=1080).split('/')[-2]
         assert result_3 == '1900x1080'
