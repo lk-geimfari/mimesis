@@ -146,7 +146,7 @@ class Internet(BaseDataProvider):
 
         return url.format(width=width, height=height)
 
-    def stock_image(self, width: Size = 1900, 
+    def stock_image(self, width: Size = 1900,
                     height: Size = 1080, category: str = '') -> str:
         """Generate random stock image hosted on Unsplash.
 
