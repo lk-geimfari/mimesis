@@ -64,6 +64,7 @@ Contributors
 -  Simon `(DefaltSimon)`_
 -  dy `(duckyou)`_
 -  Arvind Prasanna `(aprasanna)`_
+-  Pavel Kasyanov `(RaidoS)`_
 
 .. _(lk-geimfari): https://github.com/lk-geimfari
 .. _(sobolevn): https://github.com/sobolevn
@@ -103,3 +104,4 @@ Contributors
 .. _(axce1): https://github.com/axce1
 .. _(DefaltSimon): https://github.com/DefaltSimon
 .. _(aprasanna): https://github.com/aprasanna
+.. _(RaidoS): https://github.com/RaidoS

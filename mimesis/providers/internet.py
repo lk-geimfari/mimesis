@@ -146,8 +146,8 @@ class Internet(BaseDataProvider):
 
         return url.format(width=width, height=height)
 
-    def stock_image(self, category: str = '',
-                    width: Size = 1900, height: Size = 1080) -> str:
+    def stock_image(self, width: Size = 1900,
+                    height: Size = 1080, category: str = '') -> str:
         """Generate random stock image hosted on Unsplash.
 
         :param category: Category of images.
@@ -157,8 +157,8 @@ class Internet(BaseDataProvider):
         :type height: str or int
         :return: An image (Link to image).
         """
-        url = 'https://source.unsplash.com/category/' \
-              '{category}/{width}x{height}'
+        url = 'https://source.unsplash.com/' \
+              '{width}x{height}/?{category}'
 
         if not category:
             categories = [
@@ -167,7 +167,7 @@ class Internet(BaseDataProvider):
             ]
             category = self.random.choice(categories)
 
-        return url.format(category=category, width=width, height=height)
+        return url.format(width=width, height=height, category=category)
 
     def image_by_keyword(self, keyword: str = '') -> str:
         """Generate image by keyword.
