@@ -1,12 +1,13 @@
 import pytest
 
 from mimesis.enums import Gender
-from mimesis.helpers import Random, get_random_item
+from mimesis.helpers import get_random_item
+from mimesis.helpers import random as _random
 
 
 @pytest.fixture
 def random():
-    return Random()
+    return _random
 
 
 def test_randints(random):

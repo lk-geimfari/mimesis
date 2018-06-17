@@ -3,7 +3,7 @@
 from typing import Any, Optional
 
 from mimesis.exceptions import NonEnumerableError
-from mimesis.helpers import Random, get_random_item
+from mimesis.helpers import Random, get_random_item, random
 from mimesis.typing import Seed
 from mimesis.utils import setup_locale
 
@@ -17,12 +17,29 @@ class BaseProvider(object):
         """Initialize attributes.
 
         :param seed: Seed for random.
+            When set to `None` the current system time is used.
         """
         self.seed = seed
-        self.random = Random()
+        self.random = random
 
         if seed is not None:
-            self.random.seed(self.seed)
+            self.reseed(seed)
+
+    def reseed(self, seed: Optional[Seed]) -> None:
+        """Reseed the internal random generator.
+
+        In case we use the default seed, we need to create a per instance
+        random generator, in this case two providers with the same seed
+        will always return the same values.
+
+        :param seed: Seed for random.
+            When set to `None` the current system time is used.
+        """
+        if self.random is random:
+            self.random = Random()
+
+        self.seed = seed
+        self.random.seed(self.seed)
 
     def _validate_enum(self, item: Any, enum: Any) -> Any:
         """Validate enum parameter of method in subclasses of BaseProvider.

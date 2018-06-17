@@ -10,13 +10,13 @@ get a random item of the enum object.
 """
 
 import os
-import random
+import random as random_module
 from typing import Any, List, Optional, Sequence
 
 __all__ = ['Random', 'get_random_item']
 
 
-class Random(random.Random):
+class Random(random_module.Random):
     """Custom class for the possibility of extending.
 
     The class is a subclass of the class ``Random()`` from the module ``random``
@@ -119,4 +119,9 @@ def get_random_item(enum: Any, rnd: Optional[Random] = None) -> Any:
     """
     if rnd and isinstance(rnd, Random):
         return rnd.choice(list(enum))
-    return random.choice(list(enum))
+    return random_module.choice(list(enum))
+
+
+# Compat
+# See: https://github.com/lk-geimfari/mimesis/issues/469
+random = Random()
