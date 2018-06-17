@@ -42,7 +42,7 @@ class Business(BaseDataProvider):
             self._data['company']['type'].get('abbr' if abbr else 'title'),
         )
 
-    def copyright(self) -> str:  # noqa: A002
+    def copyright(self) -> str:  # noqa: A003
         """Generate a random copyright.
 
         :return: Copyright of company.
