@@ -1,3 +1,24 @@
+Version 2.1.0
+-------------
+
+**Added**:
+
+- Added a list of all supported locales as ``mimesis/locales.py``
+
+**Updated**:
+
+- Changed how ``Internet`` provider works with ``stock_image``
+- Changed how ``random`` module works, now exposing global ``Random`` instance
+- Updated dependencies
+
+**Fixed**:
+
+- Prevents ``ROMANIZED_DICT`` from mutating
+- Fixed ``appveyour`` builds
+- Fixed ``flake8-builtins`` checks
+- Fixed some ``mypy`` issues with strict mode
+
+
 Version 2.0.1
 -------------
 
