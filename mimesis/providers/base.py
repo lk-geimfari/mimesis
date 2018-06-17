@@ -17,6 +17,7 @@ class BaseProvider(object):
         """Initialize attributes.
 
         :param seed: Seed for random.
+            When set to `None` the current system time is used.
         """
         self.seed = seed
         self.random = random
@@ -24,7 +25,7 @@ class BaseProvider(object):
         if seed is not None:
             self.reseed(seed)
 
-    def reseed(self, seed: Seed) -> None:
+    def reseed(self, seed: Optional[Seed]) -> None:
         """Reseed the internal random generator.
 
         In case we use the default seed, we need to create a per instance
@@ -32,6 +33,7 @@ class BaseProvider(object):
         will always return the same values.
 
         :param seed: Seed for random.
+            When set to `None` the current system time is used.
         """
         if self.random is random:
             self.random = Random()
