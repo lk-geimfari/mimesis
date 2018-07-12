@@ -102,6 +102,7 @@ class RussiaSpecProvider(BaseSpecProvider):
         return self.random.custom_code(mask=mask)
 
     def inn(self) -> str:
+
         """Generate random, but valid ``INN``.
 
         :return: INN.
@@ -162,7 +163,6 @@ class RussiaSpecProvider(BaseSpecProvider):
 
     def kpp(self) -> str:
         """Generate random `KPP`.
-        
         Read more here: https://bit.ly/2NLFhOA
 
         :return: 'KPP'.
