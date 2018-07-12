@@ -196,7 +196,7 @@ class RussiaSpecProvider(BaseSpecProvider):
                      '9998']
 
         tax_code = tax_codes[self.random.randint(0, len(tax_codes) - 1)]
-        reason_for_registration_code = '{:02}'.format(self.random.randint(1, 99))
+        registration_code = '{:02}'.format(self.random.randint(1, 99))
         registration_number = '{:03}'.format(self.random.randint(1, 999))
-        kpp = tax_code + reason_for_registration_code + registration_number
+        kpp = tax_code + registration_code + registration_number
         return kpp
