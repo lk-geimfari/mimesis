@@ -102,7 +102,6 @@ class RussiaSpecProvider(BaseSpecProvider):
         return self.random.custom_code(mask=mask)
 
     def inn(self) -> str:
-
         """Generate random, but valid ``INN``.
 
         :return: INN.
