@@ -78,6 +78,6 @@ def test_bic(russia):
     assert len(result) == 9
 
 
-def test_bic(russia):
+def test_kpp(russia):
     result = russia.kpp()
     assert len(result) == 9
