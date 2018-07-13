@@ -76,3 +76,8 @@ def test_ogrn(russia):
 def test_bic(russia):
     result = russia.bic()
     assert len(result) == 9
+
+
+def test_bic(russia):
+    result = russia.kpp()
+    assert len(result) == 9
