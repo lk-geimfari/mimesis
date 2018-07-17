@@ -90,10 +90,10 @@ class RussiaSpecProvider(BaseSpecProvider):
     def snils(self) -> str:
         """Generate snils with special algorithm.
 
-                :return: SNILS.
+        :return: SNILS.
 
-                :Example:
-                    41917492600.
+        :Example:
+            41917492600.
         """
         numbers = []
         control_codes = []
