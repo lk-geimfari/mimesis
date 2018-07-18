@@ -64,7 +64,7 @@ Contributors
 -  Simon `(DefaltSimon)`_
 -  dy `(duckyou)`_
 -  Arvind Prasanna `(aprasanna)`_
--  Pavel Kasyanov `(RaidoS)`_\
+-  Pavel Kasyanov `(RaidoS)`_
 -  Valentin Gorbachev `(Vlangf)`_
 
 .. _(lk-geimfari): https://github.com/lk-geimfari
