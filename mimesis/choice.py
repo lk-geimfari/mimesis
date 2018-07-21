@@ -44,4 +44,4 @@ class Choice(object):
                 return data
 
             return self.random.choice(items)
-        return []
+        return items
