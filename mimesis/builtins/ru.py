@@ -106,7 +106,7 @@ class RussiaSpecProvider(BaseSpecProvider):
         control_code = sum(control_codes)
         code = ''.join(str(number) for number in numbers)
 
-        if control_code == 100 or control_code == 101:
+        if control_code in (100, 101):
             snils = code + '00'
             return snils
 
