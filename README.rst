@@ -144,16 +144,6 @@ How to Contribute
 .. _contributors: https://github.com/lk-geimfari/mimesis/blob/master/CONTRIBUTORS.rst
 
 
-Discussion list
----------------
-
-*Mimesis* google group: `forum/mimesis`_.
-
-Feel free to post your questions and ideas here.
-
-.. _forum/mimesis: https://groups.google.com/forum/#!forum/mimeis
-
-
 License
 -------
 
