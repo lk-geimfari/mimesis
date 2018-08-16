@@ -39,7 +39,7 @@ This library offers a number of advantages over other similar libraries:
 -  Simplicity. Does not require any modules other than the Python
    standard library.
 
-.. _faster: https://gist.github.com/lk-geimfari/e76c12eb3c9a8afbf796c706d4ba779d
+.. _faster: https://mimesis.readthedocs.io/foreword.html#comparison
 
 
 Installation
