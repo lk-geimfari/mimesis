@@ -58,8 +58,7 @@ def test_generate_sentence(russia):
 
 def test_snils(russia):
     result = russia.snils()
-    number = result.replace('-', '')
-    assert len(number) == 11
+    assert len(result) == 11
 
 
 def test_inn(russia):
