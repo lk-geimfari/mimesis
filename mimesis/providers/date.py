@@ -2,12 +2,12 @@
 
 from calendar import monthrange, timegm
 from datetime import date, datetime, time
-import pytz
 
 from mimesis.data import GMT_OFFSETS, ROMAN_NUMS, TIMEZONES
 from mimesis.providers.base import BaseDataProvider
 from mimesis.typing import DateTime, Timestamp
 from mimesis.utils import pull
+from mimesis.compat import pytz
 
 __all__ = ['Datetime']
 
@@ -201,8 +201,11 @@ class Datetime(BaseDataProvider):
             return dt.strftime('%B, %d %Y')
 
         if timezone != '':
-            timezone = pytz.timezone(timezone)
-            dt = timezone.localize(dt)
+            if not pytz:
+                raise ImportError('Timezones are supported only with pytz')
+            else:
+                timezone = pytz.timezone(timezone)
+                dt = timezone.localize(dt)
 
         return dt
 
