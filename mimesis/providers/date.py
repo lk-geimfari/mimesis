@@ -200,7 +200,7 @@ class Datetime(BaseDataProvider):
         if humanized:
             return dt.strftime('%B, %d %Y')
 
-        if timezone != '' and not humanized:
+        if timezone != '':
             if not pytz:
                 raise ImportError('Timezones are supported only with pytz')
             else:
