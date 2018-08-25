@@ -181,7 +181,9 @@ class Datetime(BaseDataProvider):
         """Generate random datetime.
 
         :param humanized: Readable representation.
-        :param timezone: Custom timezone.
+        :param timezone: Set custom timezone,
+        pytz (timezone library) installation required for use.
+
         :param kwargs: Keyword arguments (start, end).
         :return: Datetime.
         :rtype: datetime.datetime
