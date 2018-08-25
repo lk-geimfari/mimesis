@@ -28,3 +28,4 @@ colorama = { version="*", os_name="=='nt'"}
 "flake8-docstrings" = "*"
 pyroma = "*"
 pygments = "*"
+pytz = "*"
