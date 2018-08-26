@@ -66,6 +66,7 @@ Contributors
 -  Arvind Prasanna `(aprasanna)`_
 -  Pavel Kasyanov `(RaidoS)`_
 -  Valentin Gorbachev `(Vlangf)`_
+-  Nazar Oleksiuk `(DevAerial)`_
 
 .. _(lk-geimfari): https://github.com/lk-geimfari
 .. _(sobolevn): https://github.com/sobolevn
@@ -107,3 +108,4 @@ Contributors
 .. _(aprasanna): https://github.com/aprasanna
 .. _(RaidoS): https://github.com/RaidoS
 .. _(Vlangf): https://github.com/Vlangf
+.. _(DevAerial): https://github.com/DevAerial
