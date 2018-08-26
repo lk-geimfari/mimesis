@@ -98,13 +98,14 @@ class TestDatetime(object):
         assert isinstance(result, _type)
 
     @pytest.mark.parametrize(
-        'start, end, humanized, _type', [
-            (2018, 2018, False, datetime.datetime),
-            (2018, 2018, True, str),
+        'start, end, humanized, timezone, _type', [
+            (2018, 2018, False, "Europe/Paris", datetime.datetime),
+            (2018, 2018, True, "", str),
+            (2018, 2018, False, "", datetime.datetime),
         ],
     )
-    def test_datetime(self, _datetime, start, end, humanized, _type):
-        dt = _datetime.datetime(start=start, end=end, humanized=humanized)
+    def test_datetime(self, _datetime, start, end, humanized, timezone, _type):
+        dt = _datetime.datetime(start=start, end=end, humanized=humanized, timezone=timezone)
 
         assert dt is not None
         assert isinstance(dt, _type)
@@ -112,6 +113,13 @@ class TestDatetime(object):
         if _type is str:
             year = int(dt.split(' ')[2])
             assert year == 2018
+
+        if humanized == True:
+            pass
+        elif timezone != "":
+            assert dt.tzinfo != None
+        else:
+            assert dt.tzinfo == None
 
     def test_week_date(self, _datetime):
         result = _datetime.week_date(start=2017, end=2018)
