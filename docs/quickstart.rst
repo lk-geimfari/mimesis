@@ -217,7 +217,8 @@ Builtin data providers
 +------+----------------------------------------------------+--------------------------------------------+
 |  7   | :class:`~mimesis.builtins.UkraineSpecProvider`     | Specific data provider for Ukraine         |
 +------+----------------------------------------------------+--------------------------------------------+
-
+|  8   | :class:`~mimesis.builtins.PolandSpecProvider`      | Specific data provider for Poland          |
++------+----------------------------------------------------+--------------------------------------------+
 
 Generic Provider
 ----------------

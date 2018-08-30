@@ -58,8 +58,9 @@ class PolandSpecProvider(BaseSpecProvider):
             else:
                 day = self.random.randint(1, 31)
         else:
-            year = birth_date.date().year
+            year = birth_date.date().year % 100
             month = birth_date.date().month
+            day = birth_date.date().day
         pesel_digits = list(map(int, '{:02d}'.format(year)))
         if 1800 <= year <= 1899:
             month += 80

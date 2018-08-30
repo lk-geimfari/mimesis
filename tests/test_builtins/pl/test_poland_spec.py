@@ -2,6 +2,7 @@ import pytest
 
 from mimesis.builtins.pl import PolandSpecProvider
 from mimesis.enums import Gender
+from mimesis.providers import Datetime
 
 
 def validate_nip(nip: str) -> bool:
@@ -59,6 +60,11 @@ def test_nip(pl):
 
 def test_pesel(pl):
     pesel = pl.pesel()
+    assert len(pesel) == 11
+    assert validate_pesel(pesel)
+
+    birth_date = Datetime().datetime()
+    pesel = pl.pesel(birth_date=birth_date)
     assert len(pesel) == 11
     assert validate_pesel(pesel)
 
