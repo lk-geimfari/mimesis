@@ -3,11 +3,11 @@
 from calendar import monthrange, timegm
 from datetime import date, datetime, time
 
+from mimesis.compat import pytz
 from mimesis.data import GMT_OFFSETS, ROMAN_NUMS, TIMEZONES
 from mimesis.providers.base import BaseDataProvider
 from mimesis.typing import DateTime, Timestamp
 from mimesis.utils import pull
-from mimesis.compat import pytz
 
 __all__ = ['Datetime']
 
@@ -177,7 +177,8 @@ class Datetime(BaseDataProvider):
         """
         return self.random.choice(GMT_OFFSETS)
 
-    def datetime(self, humanized: bool = False, timezone: str = '', **kwargs) -> DateTime:
+    def datetime(self, humanized: bool = False,
+                 timezone: str = '', **kwargs) -> DateTime:
         """Generate random datetime.
 
         :param humanized: Readable representation.
@@ -205,9 +206,8 @@ class Datetime(BaseDataProvider):
         if timezone != '':
             if not pytz:
                 raise ImportError('Timezones are supported only with pytz')
-            else:
-                timezone = pytz.timezone(timezone)
-                dt = timezone.localize(dt)
+            tz = pytz.timezone(timezone)
+            dt = tz.localize(dt)
 
         return dt
 
