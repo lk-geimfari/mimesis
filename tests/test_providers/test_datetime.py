@@ -105,9 +105,8 @@ class TestDatetime(object):
         ],
     )
     def test_datetime(self, _datetime, start, end, humanized, timezone, _type):
-        dt = _datetime.datetime(start=start, end=end,
-                                humanized=humanized, timezone=timezone)
-
+        dt = _datetime.datetime(start=start, end=end, humanized=humanized, timezone=timezone)
+        
         assert dt is not None
         assert isinstance(dt, _type)
 

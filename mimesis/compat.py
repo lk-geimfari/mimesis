@@ -1,6 +1,6 @@
 """Import additional dependancies only when needed."""
 
 try:
-    import pytz # type: ignore
+    import pytz
 except ImportError:
-    pytz = None # type: ignore
+    pytz = None   # type: ignore
