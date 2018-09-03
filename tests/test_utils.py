@@ -43,7 +43,7 @@ def test_download_image(ctx):
           'mimesis/master/media/logo.png'
 
     verified = utils.download_image(url=url, unverified_ctx=ctx)
-    assert verified == 'logo.png'
+    assert verified == str(verified)[:-4] + '.png'
     os.remove(verified)
 
     result = utils.download_image('', unverified_ctx=ctx)
