@@ -7,6 +7,7 @@ import ssl
 from os import path
 from typing import Mapping, Optional, Union
 from urllib import request
+from uuid import uuid4
 
 from mimesis import config
 from mimesis.exceptions import UnsupportedLocale
@@ -114,6 +115,14 @@ def download_image(url: str = '', save_path: str = '',
 
     if url:
         image_name = url.rsplit('/')[-1]
+
+        splitted_name = image_name.rsplit('.')
+        if len(splitted_name) < 2:
+            image_name = '{}.jpg'.format(uuid4())
+        else:
+            image_name = '{}.{}'.format(uuid4(), splitted_name[-1])
+        if save_path and not save_path.endswith('/'):
+            save_path = '{}/'.format(save_path)
         request.urlretrieve(url, save_path + image_name)
         return image_name
     return None
