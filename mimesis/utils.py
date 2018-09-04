@@ -107,7 +107,7 @@ def download_image(url: str = '', save_path: str = '',
     :param url: URL to image.
     :param save_path: Saving path.
     :param unverified_ctx: Create unverified context.
-    :return: Path to download image.
+    :return: Path to downloaded image.
     :rtype: str or None
     """
     if unverified_ctx:
