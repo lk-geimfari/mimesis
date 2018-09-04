@@ -39,11 +39,18 @@ def test_pull():
     ],
 )
 def test_download_image(ctx):
-    url = 'https://raw.githubusercontent.com/lk-geimfari/' \
-          'mimesis/master/media/logo.png'
+    url_with_extinsion = 'https://raw.githubusercontent.com/lk-geimfari/' \
+                         'mimesis/master/media/logo.png'
 
-    verified = utils.download_image(url=url, unverified_ctx=ctx)
+    verified = utils.download_image(url=url_with_extinsion, unverified_ctx=ctx)
     assert verified == str(verified)[:-4] + '.png'
+    os.remove(verified)
+
+    url_without_extension = 'https://source.unsplash.com/300x300/?people'
+    verified = utils.download_image(
+        url=url_without_extension, unverified_ctx=ctx,
+    )
+    assert verified == str(verified)[:-4] + '.jpg'
     os.remove(verified)
 
     result = utils.download_image('', unverified_ctx=ctx)
