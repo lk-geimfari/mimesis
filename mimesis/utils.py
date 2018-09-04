@@ -121,10 +121,9 @@ def download_image(url: str = '', save_path: str = '',
             image_name = '{}.jpg'.format(uuid4())
         else:
             image_name = '{}.{}'.format(uuid4(), splitted_name[-1])
-        if save_path and not save_path.endswith('/'):
-            save_path = '{}/'.format(save_path)
-        request.urlretrieve(url, save_path + image_name)
-        return image_name
+        full_image_path = path.join(save_path, image_name)
+        request.urlretrieve(url, full_image_path)
+        return full_image_path
     return None
 
 
