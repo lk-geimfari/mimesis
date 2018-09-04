@@ -7,6 +7,7 @@ import ssl
 from os import path
 from typing import Mapping, Optional, Union
 from urllib import request
+from uuid import uuid4
 
 from mimesis import config
 from mimesis.exceptions import UnsupportedLocale
@@ -106,7 +107,7 @@ def download_image(url: str = '', save_path: str = '',
     :param url: URL to image.
     :param save_path: Saving path.
     :param unverified_ctx: Create unverified context.
-    :return: Image name.
+    :return: Path to downloaded image.
     :rtype: str or None
     """
     if unverified_ctx:
@@ -114,8 +115,15 @@ def download_image(url: str = '', save_path: str = '',
 
     if url:
         image_name = url.rsplit('/')[-1]
-        request.urlretrieve(url, save_path + image_name)
-        return image_name
+
+        splitted_name = image_name.rsplit('.')
+        if len(splitted_name) < 2:
+            image_name = '{}.jpg'.format(uuid4())
+        else:
+            image_name = '{}.{}'.format(uuid4(), splitted_name[-1])
+        full_image_path = path.join(save_path, image_name)
+        request.urlretrieve(url, full_image_path)
+        return full_image_path
     return None
 
 
