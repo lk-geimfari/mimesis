@@ -102,6 +102,12 @@ below:
 
     >>> person.occupation()
     'Backend Developer'
+    
+    >>> person.telephone()
+    '1-408-855-5063'
+    
+    >>> person.identifier(mask='####/##-#')
+    '2714/48-4'
 
 
 Locales
