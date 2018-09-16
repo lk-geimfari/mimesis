@@ -49,15 +49,15 @@ To install mimesis, simply use pip:
 
 .. code:: text
 
-    ➜  ~ pip install mimesis
+    [env] ~ ⟩ pip install mimesis
 
 also you can install it manually:
 
 .. code:: text
 
-    (env) ➜ git clone git@github.com:lk-geimfari/mimesis.git
-    (env) ➜ cd mimesis/
-    (env) ➜ make install
+    [env] ⟩ git clone git@github.com:lk-geimfari/mimesis.git
+    [env] ⟩ cd mimesis/
+    [env] ⟩ make install
 
 
 
