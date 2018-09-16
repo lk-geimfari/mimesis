@@ -7,28 +7,27 @@ from setuptools import Command
 
 here = abspath(dirname(__file__))
 
+
+def get_package_metadata(about):
+    with open(join(here, 'mimesis', '__version__.py')) as f:
+        exec(f.read(), about)
+    return about
+
+
+def get_readme():
+    with open('README.rst', 'r', encoding='utf-8') as f:
+        return f.read()
+
+
 about = {}
-# Get meta-data from __version__.py
-with open(join(here, 'mimesis', '__version__.py')) as f:
-    exec(f.read(), about)
+about = get_package_metadata(about)
 
 
-class BaseCommand(Command):
-    description = ''
+class Minimizer(Command):
+    """Minify content of all json files for all locales."""
+
+    description = 'Minify content of all json files.'
     user_options = []
-
-    def initialize_options(self):
-        pass
-
-    def finalize_options(self):
-        pass
-
-    def run(self):
-        pass
-
-
-class Minimizer(BaseCommand):
-    """Minify content of all json file for all locales."""
 
     def initialize_options(self):
         """Find all files of all locales."""
@@ -43,6 +42,9 @@ class Minimizer(BaseCommand):
                 if splitext(file)[1] == '.json':
                     self.paths.append(join(
                         relpath(root, self.data_dir), file))
+
+    def finalize_options(self):
+        pass
 
     @staticmethod
     def size_of(num):
@@ -102,15 +104,11 @@ class Minimizer(BaseCommand):
         print(template.format(before, after, saved))
 
 
-with open('README.rst', 'r', encoding='utf-8') as f:
-    readme = f.read()
-
-
 setup(
     name=about['__title__'],
     version=about['__version__'],
     description=about['__description__'],
-    long_description=readme,
+    long_description=get_readme(),
     author=about['__author__'],
     author_email=about['__author_email__'],
     url=about['__url__'],
@@ -150,8 +148,8 @@ setup(
     classifiers=[
         'License :: OSI Approved :: MIT License',
         'Intended Audience :: Developers',
-        'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: Implementation :: CPython',
         'Operating System :: OS Independent',
         'Topic :: Software Development',
