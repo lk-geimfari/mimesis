@@ -5,19 +5,50 @@ The `source code`_ and `issue tracker`_ are hosted on GitHub. *Mimesis*
 is tested against Python 3.5 through 3.6 on `Travis-CI`_. Test coverage
 is monitored with `Codecov`_.
 
-Development environment
-~~~~~~~~~~~~~~~~~~~~~~~
+Dependencies
+~~~~~~~~~~~~
 
 Mimesis does not have any need for third-party tools, but we use a lot
 of tools in development stage, which you should install on your system
 if you want to contribute.
 
-We use **Pipenv** for managing development packages:
+We use ``pipenv`` to manage development dependencies.
+So, please do not use ``virtualenv`` or ``pip`` directly.
 
-.. code:: text
+Firstly, install ``pipenv``, it is recommended to do so with ``pip``:
 
-    ~ pip install pipenv
-    ~ pipenv install --dev
+.. code::
+
+  ~ ⟩ pip install pipenv
+
+
+**Installing all dependencies**
+
+Please, note that ``pipenv`` will automatically create a ``virtualenv`` for
+this project. It will use ``python_version`` specified in ``Pipfile``.
+To install (or renew) all existing dependencies run:
+
+.. code::
+
+  ⟩ pipenv install -d
+
+
+
+**Activating virtualenv**
+
+And to activate ``virtualenv`` created by ``pipenv`` run:
+
+.. code::
+
+  ⟩ pipenv shell
+
+
+**Adding new dependencies**
+
+To add a new dependency you can run:
+
+- ``pipenv install -d pytest`` to install ``pytest`` as a development dependency
+
 
 Code Style
 ~~~~~~~~~~
@@ -34,7 +65,7 @@ Example of annotated function:
 
 .. code:: python
 
-    def plus(a: int, b: int) -> int:
+    def plus(a: int = 0, b: int = 0) -> int:
         """Get sum of a and b.
 
         :param a: First number.
@@ -136,7 +167,8 @@ Below you can see a great example of module:
         return 3.14
 
 
-Comment only things that are not obvious: hacks, optimizations, complex algorithms. Obvious code does not require any additional comments.
+Comment only things that are not obvious: hacks, optimizations, complex algorithms.
+Obvious code does not require any additional comments.
 
 
 Testing
@@ -150,7 +182,7 @@ To run tests, simply:
 
 .. code:: text
 
-    make test
+    ⟩ make test
 
 Check out logs of Travis CI or AppVeyor if tests were failed on creating
 PR, there you can find useful information.
@@ -162,7 +194,7 @@ It’s good idea to run benchmark test, when you add your feature:
 
 .. code:: text
 
-    ~ make benchmarks
+    ⟩ make benchmarks
 
 Optimize the things which really must be optimized. There no need in
 using ``C`` or other overheads to win 0.0000001 seconds of runtime.
@@ -176,7 +208,7 @@ sure that everything is okay. You can do it using make:
 
 ::
 
-    ~ make type-checking
+    ⟩ make type-checking
 
 Code Review
 ~~~~~~~~~~~
@@ -209,6 +241,7 @@ will be published on PyPi after pushing the new **tag** to the master
 branch. The new release can be approved or disapproved by maintainers of
 this project. If the new release was disapproved, then maintainer should
 justify why the new release cannot be created.
+
 
 Summary
 ~~~~~~~
