@@ -20,7 +20,7 @@
 .. image:: https://badge.fury.io/py/mimesis.svg
      :target: https://badge.fury.io/py/mimesis
 
-.. image:: https://img.shields.io/badge/python-3.5%2C%203.6-brightgreen.svg
+.. image:: https://img.shields.io/badge/python-3.5%20%7C%203.6%20%7C%203.7-brightgreen.svg
      :target: https://badge.fury.io/py/mimesis
 
 
