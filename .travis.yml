@@ -2,9 +2,28 @@ language: python
 
 sudo: false
 
-python:
-  - "3.5"
-  - "3.6"
+matrix:
+    include:
+        - os: linux
+          sudo: required
+          python: "3.6"
+          dist: trusty
+
+        - os: linux
+          sudo: required
+          python: "3.7"
+          dist: xenial
+
+        - os: osx
+          osx_image: xcode10
+          language: generic
+          python: "3.6"
+
+        - os: osx
+          osx_image: xcode10
+          language: generic
+          python: "3.7"
+
 
 install:
   - pip install pipenv
@@ -28,7 +47,7 @@ deploy:
   on:
     branch: master
     tags: true
-    condition: $TRAVIS_PYTHON_VERSION = "3.6"
+    condition: $TRAVIS_PYTHON_VERSION = "3.6" && $TRAVIS_OS_NAME != "osx"
 
 notifications:
   email:
