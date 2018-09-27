@@ -75,8 +75,8 @@ def test_update_dict():
 
     result = utils.update_dict(first, second)
 
-    assert 'cats' in result['animals']
-    assert 'dogs' in result['animals']
+    assert 'cats' in result['animal']
+    assert 'dogs' in result['animal']
 
     third = {
         'animals': {
@@ -104,4 +104,4 @@ def test_setup_locale(inp, out):
 
 def test_setup_locale_unsupported_locale():
     with pytest.raises(UnsupportedLocale):
-        utils.setup_locale('nil')
+        utils.setup_locale('ru')
