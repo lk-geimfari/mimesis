@@ -14,6 +14,11 @@ matrix:
           python: "3.7"
           dist: xenial
 
+        - os: linux
+          sudo: required
+          python: "pypy3.5"
+          dist: xenial
+
         - os: osx
           language: generic
           env: PYTHON=3.6.6
@@ -26,7 +31,6 @@ matrix:
 before_install: |
   if [ "$TRAVIS_OS_NAME" == "osx" ]; then
     brew update
-    brew install openssl readline
     brew install pyenv
     brew install pyenv-virtualenv
     pyenv install $PYTHON
