@@ -15,14 +15,27 @@ matrix:
           dist: xenial
 
         - os: osx
-          osx_image: xcode10
           language: generic
-          python: "3.6"
+          env: PYTHON=3.6.6
 
         - os: osx
-          osx_image: xcode10
           language: generic
-          python: "3.7"
+          env: PYTHON=3.7.0
+
+
+before_install: |
+  if [ "$TRAVIS_OS_NAME" == "osx" ]; then
+    brew update
+    brew install openssl readline
+    brew install pyenv
+    brew install pyenv-virtualenv
+    pyenv install $PYTHON
+    export PYENV_VERSION=$PYTHON
+    export PATH="/Users/travis/.pyenv/shims:${PATH}"
+    pyenv-virtualenv venv
+    source venv/bin/activate
+    python --version
+  fi
 
 
 install:
