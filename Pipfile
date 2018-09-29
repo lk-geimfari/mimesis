@@ -1,16 +1,11 @@
 [[source]]
-
 url = "https://pypi.python.org/simple"
 verify_ssl = true
 name = "pypi"
 
-
 [packages]
 
-
-
 [dev-packages]
-
 codecov = "*"
 "flake8" = "*"
 "flake8-builtins" = "*"
@@ -28,3 +23,4 @@ colorama = { version="*", os_name="=='nt'"}
 "flake8-docstrings" = "*"
 pyroma = "*"
 pygments = "*"
+"flake8-type-annotations" = "*"
