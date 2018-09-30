@@ -1,6 +1,8 @@
 """Configuration file."""
 
-SUPPORTED_LOCALES = {
+from typing import Dict, List
+
+SUPPORTED_LOCALES: Dict[str, dict] = {
     'cs': {
         'name': 'Czech',
         'name_local': 'česky',
@@ -136,7 +138,7 @@ SUPPORTED_LOCALES = {
 }
 
 # List of all supported locales.
-LIST_OF_LOCALES = list(SUPPORTED_LOCALES)
+LIST_OF_LOCALES: List[str] = list(SUPPORTED_LOCALES)
 
 # Default locale.
-DEFAULT_LOCALE = 'en'
+DEFAULT_LOCALE: str = 'en'

@@ -1,7 +1,7 @@
 """Implements classes for generating data by schema."""
 
 from types import LambdaType
-from typing import Any, Callable, List, Optional
+from typing import Any, Callable, List, Optional, Type
 
 from mimesis.exceptions import (UndefinedField, UndefinedSchema,
                                 UnsupportedField)
@@ -26,16 +26,16 @@ class AbstractField(StrMixin):
     """
 
     def __init__(self, locale: str = 'en',
-                 seed: Optional[Seed] = None,
+                 seed: Seed = None,
                  providers: Optional[Any] = None) -> None:
         """Initialize field.
 
         :param locale: Locale
         :param seed: Seed for random.
         """
-        self.locale = locale
-        self.seed = seed
-        self._gen = Generic(self.locale, self.seed)
+        self.locale: str = locale
+        self.seed: Seed = seed
+        self._gen: Generic = Generic(self.locale, self.seed)
 
         if providers:
             self._gen.add_providers(*providers)
@@ -111,7 +111,7 @@ class Schema(object):
         :param schema: A schema.
         """
         if isinstance(schema, LambdaType):
-            self.schema = schema
+            self.schema: LambdaType = schema
         else:
             raise UndefinedSchema()
 
@@ -128,4 +128,4 @@ class Schema(object):
 
 
 # Alias for AbstractField
-Field = AbstractField
+Field: Type[AbstractField] = AbstractField

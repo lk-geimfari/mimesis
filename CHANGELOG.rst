@@ -1,3 +1,27 @@
+Version 2.2.0
+-------------
+
+.. note:: In this release (2.2.0) we've reject support of Python 3.5.
+Please make sure that you're using Python 3.6 or higher or use previous versions of Mimesis.
+
+**Updated**:
+- Updated documentation and fixed typos
+- Completely annotated all variables and functions
+
+**Removed**:
+- Removed providers Games and Units and moved them data to provider ``Misc()``
+
+**Fixed**:
+
+**Added** (Work in Progress):
+
+- Added ``PolandSpecProvider``
+- Added support of timezones for ``Datetime().datetime()``
+- Added new provider ``choice.Choice()``
+- Added method to bulk create datetime objects (``Datetime().bulk_create_datetimes()``)
+- Added support of second, thrid and fourth level domains
+
+
 Version 2.1.0
 -------------
 

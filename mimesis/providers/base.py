@@ -25,7 +25,7 @@ class BaseProvider(object):
         if seed is not None:
             self.reseed(seed)
 
-    def reseed(self, seed: Optional[Seed]) -> None:
+    def reseed(self, seed: Optional[Seed] = None) -> None:
         """Reseed the internal random generator.
 
         In case we use the default seed, we need to create a per instance
@@ -38,7 +38,7 @@ class BaseProvider(object):
         if self.random is random:
             self.random = Random()
 
-        self.seed = seed
+        self.seed: Optional[seed] = seed
         self.random.seed(self.seed)
 
     def _validate_enum(self, item: Any, enum: Any) -> Any:
@@ -64,7 +64,7 @@ class StrMixin(object):
 
     def __str__(self) -> str:
         """Human-readable representation of locale."""
-        locale = getattr(self, 'locale', 'en')
+        locale: str = getattr(self, 'locale', 'en')
         return '{} <{}>'.format(
             self.__class__.__name__, locale)
 
@@ -80,7 +80,7 @@ class BaseDataProvider(BaseProvider, StrMixin):
         :param seed: Seed to all the random functions.
         """
         super().__init__(seed=seed)
-        self.locale = setup_locale(locale)
+        self.locale: str = setup_locale(locale)
 
     def get_current_locale(self) -> str:
         """Get current locale.

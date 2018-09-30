@@ -3,7 +3,7 @@
 import functools
 from string import ascii_letters as letters
 from string import digits, punctuation
-from typing import Callable
+from typing import Callable, Dict
 
 from mimesis import data
 from mimesis.exceptions import UnsupportedLocale
@@ -20,14 +20,15 @@ def romanized(locale: str = '') -> Callable:
     :param locale: Locale code.
     :return: Latinized text.
     """
-    def romanized_deco(func):
+    def romanized_deco(func) -> Callable:
         @functools.wraps(func)
-        def wrapper(*args, **kwargs):
+        def wrapper(*args, **kwargs) -> str:
             try:
                 # String can contain ascii symbols, digits and
                 # punctuation symbols.
-                alphabet = {s: s for s in
-                            letters + digits + punctuation}
+                alphabet: Dict[str, str] = {
+                    s: s for s in letters + digits + punctuation
+                }
                 alphabet.update(data.ROMANIZATION_DICT[locale])
                 # Add common cyrillic letters
                 alphabet.update(data.COMMON_LETTERS)

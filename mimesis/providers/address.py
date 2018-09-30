@@ -1,6 +1,6 @@
 """Address data provider."""
 
-from typing import Optional, Union
+from typing import List, Optional, Tuple, Union
 
 from mimesis.data import (CALLING_CODES, CONTINENT_CODES, COUNTRY_CODES,
                           SHORTENED_ADDRESS_FMT)
@@ -20,7 +20,29 @@ class Address(BaseDataProvider):
         :param locale: Current locale.
         """
         super().__init__(*args, **kwargs)
-        self._data = pull('address.json', self.locale)
+        self._data: dict = pull('address.json', self.locale)
+
+    @staticmethod
+    def _dd_to_dms(num: float, _type: str) -> str:
+        """Convert decimal number to DMS format.
+
+        :param num: Decimal number.
+        :param _type: Type of number.
+        :return: Number in DMS format.
+        """
+        degrees = int(num)
+        minutes = int((num - degrees) * 60)
+        seconds = (num - degrees - minutes / 60) * 3600.00
+        seconds = round(seconds, 3)
+        result: list = [abs(i) for i in (degrees, minutes, seconds)]
+
+        direction: str = ''
+        if _type == 'lg':
+            direction = 'W' if degrees < 0 else 'E'
+        elif _type == 'lt':
+            direction = 'S' if degrees < 0 else 'N'
+
+        return ('{}º{}\'{:.3f}"' + direction).format(*result)
 
     def street_number(self, maximum: int = 1400) -> str:
         """Generate a random street number.
@@ -63,10 +85,10 @@ class Address(BaseDataProvider):
         :Example:
             5 Central Sideline.
         """
-        fmt = self._data['address_fmt']
+        fmt: str = self._data['address_fmt']
 
-        st_num = self.street_number()
-        st_name = self.street_name()
+        st_num: str = self.street_number()
+        st_name: str = self.street_name()
 
         if self.locale in SHORTENED_ADDRESS_FMT:
             return fmt.format(
@@ -170,7 +192,7 @@ class Address(BaseDataProvider):
         :Example:
             DE
         """
-        key = self._validate_enum(fmt, CountryCode)
+        key: str = self._validate_enum(fmt, CountryCode)
         return self.random.choice(COUNTRY_CODES[key])
 
     def country(self) -> str:
@@ -203,11 +225,11 @@ class Address(BaseDataProvider):
         :return: Float number
         """
         # Default range is a range of longitude.
-        rng = (-90, 90) if key == 'lt' else (-180, 180)
-        result = self.random.uniform(*rng, precision=6)
+        rng: Tuple[int, int] = (-90, 90) if key == 'lt' else (-180, 180)
+        result: float = self.random.uniform(*rng, precision=6)
 
         if dms:
-            return dd_to_dms(result, key)
+            return self._dd_to_dms(result, key)
 
         return result
 
@@ -257,8 +279,11 @@ class Address(BaseDataProvider):
         :Example:
             Africa (en)
         """
-        codes = CONTINENT_CODES if \
-            code else self._data['continent']
+        codes: List[str] = []
+        if code:
+            codes += CONTINENT_CODES
+        else:
+            codes += self._data['continent']
 
         return self.random.choice(codes)
 
@@ -271,29 +296,3 @@ class Address(BaseDataProvider):
             +7
         """
         return self.random.choice(CALLING_CODES)
-
-
-# ==========================================#
-# INTERNAL FUNCTIONS OF PROVIDER <ADDRESS>  #
-# ==========================================#
-
-def dd_to_dms(num: float, _type: str) -> str:
-    """Convert decimal number to DMS format.
-
-    :param num: Decimal number.
-    :param _type: Type of number.
-    :return: Number in DMS format.
-    """
-    degrees = int(num)
-    minutes = int((num - degrees) * 60)
-    seconds = (num - degrees - minutes / 60) * 3600.00
-    seconds = round(seconds, 3)
-    result = [abs(i) for i in (degrees, minutes, seconds)]
-
-    direction = ''
-    if _type == 'lg':
-        direction = 'W' if degrees < 0 else 'E'
-    elif _type == 'lt':
-        direction = 'S' if degrees < 0 else 'N'
-
-    return ('{}º{}\'{:.3f}"' + direction).format(*result)

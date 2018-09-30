@@ -15,8 +15,8 @@ class UnsupportedLocale(KeyError):
 
         :param locale: Locale.
         """
-        self.locale = locale
-        self.message = 'Locale «{}» is not supported'
+        self.locale: Optional[str] = locale
+        self.message: str = 'Locale «{}» is not supported'
 
     def __str__(self) -> str:
         return self.message.format(self.locale)
@@ -32,7 +32,8 @@ class UndefinedSchema(ValueError):
 class NonEnumerableError(TypeError):
     """Raised when object is not instance of Enum."""
 
-    message = 'You should use one item of: «{}» of the object mimesis.enums.{}'
+    message: str = 'You should use one item ' \
+                   'of: «{}» of the object mimesis.enums.{}'
 
     def __init__(self, enum_obj: Any) -> None:
         """Initialize attributes for informative output.
@@ -40,10 +41,10 @@ class NonEnumerableError(TypeError):
         :param enum_obj: Enum object.
         """
         if enum_obj:
-            self.name = enum_obj
-            self.items = ', '.join([str(i) for i in enum_obj])
+            self.name: Any = enum_obj
+            self.items: str = ', '.join([str(i) for i in enum_obj])
         else:
-            self.items = ''
+            self.items: str = ''
 
     def __str__(self) -> str:
         return self.message.format(self.items,
@@ -58,8 +59,8 @@ class UnsupportedField(ValueError):
 
         :param name: Name of the field..
         """
-        self.name = name
-        self.message = 'Field «{}» is not supported.'
+        self.name: Optional[str] = name
+        self.message: str = 'Field «{}» is not supported.'
 
     def __str__(self) -> str:
         return self.message.format(self.name)

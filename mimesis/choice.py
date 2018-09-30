@@ -14,7 +14,7 @@ class Choice(object):
 
         :param seed: Seed for random.
         """
-        self.random = Random()
+        self.random: Random = Random()
 
         if seed is not None:
             self.random.seed = seed  # type: ignore
