@@ -182,6 +182,8 @@ Usual Providers
 +------+----------------------------------+------------------------------------------------------------------+
 | 22   | :class:`~mimesis.Cryptographic`  | Cryptographic data.                                              |
 +------+----------------------------------+------------------------------------------------------------------+
+| 23   | :class:`~mimesis.Industry`       | Industry codes                                                   |
++------+----------------------------------+------------------------------------------------------------------+
 
 
 Generating by schema
@@ -290,7 +292,7 @@ You can also add multiple providers:
 Everything is pretty easy and self-explanatory here, therefore, we will
 only clarify one moment — attribute *name*, class *Meta* is the name
 of a class through which access to methods of user-class providers is
-carried out. By default class name is the name of the class in lowercase 
+carried out. By default class name is the name of the class in lowercase
 letters.
 
 

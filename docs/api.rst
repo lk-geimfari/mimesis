@@ -199,6 +199,13 @@ Hardware
    :members:
    :special-members: __init__
 
+Industry
+--------
+
+.. autoclass:: mimesis.Industry
+   :members:
+   :special-members: __init__
+
 Internet
 --------
 

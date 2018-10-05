@@ -12,6 +12,7 @@ from mimesis.providers.file import File
 from mimesis.providers.food import Food
 from mimesis.providers.hardware import Hardware
 from mimesis.providers.internet import Internet
+from mimesis.providers.industry import Industry
 from mimesis.providers.numbers import Numbers
 from mimesis.providers.path import Path
 from mimesis.providers.person import Person
@@ -43,6 +44,7 @@ __all__ = [
     'Games',
     'Hardware',
     'Internet',
+    'Industry',
     'Numbers',
     'Path',
     'Payment',
