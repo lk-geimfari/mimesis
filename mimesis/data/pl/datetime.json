@@ -10,11 +10,11 @@
       "Niedziela"
     ],
     "abbr": [
-      "Pt.",
+      "Pn.",
       "Wt.",
       "Śr.",
       "Czw.",
-      "Pn.",
+      "Pt.",
       "Sob.",
       "Niedz."
     ]
@@ -48,18 +48,19 @@
       "Lip.",
       "Sierp.",
       "Wrzes.",
-      "Pazdz.",
+      "Paźdz.",
       "Listop.",
       "Grudz."
     ]
   },
   "periodicity": [
     "Codziennie",
-    "Często",
     "Miesięcznie",
     "Nigdy",
-    "Pewnego razu",
-    "Rocznie",
-    "Rzadko"
+    "Często",
+    "Jednorazowo",
+    "Rzadko",
+    "Cotygodniowo",
+    "Corocznie"
   ]
 }

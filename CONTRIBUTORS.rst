@@ -67,6 +67,8 @@ Contributors
 -  Pavel Kasyanov `(RaidoS)`_
 -  Valentin Gorbachev `(Vlangf)`_
 -  Oleg Smedyuk `(conformist-mw)`_
+-  Przemysław Pietras `(destag)`_
+-  Wiktor Matuszewski `(pywkm)`_
 -  Lukasz Kimber `(lukkim)`_
 
 .. _(lk-geimfari): https://github.com/lk-geimfari
@@ -110,4 +112,6 @@ Contributors
 .. _(RaidoS): https://github.com/RaidoS
 .. _(Vlangf): https://github.com/Vlangf
 .. _(conformist-mw): https://github.com/conformist-mw
+.. _(destag): https://github.com/destag
+.. _(pywkm): https://github.com/pywkm
 .. _(lukkim): https://github.com/lukkim

@@ -110,8 +110,11 @@ class Business(BaseDataProvider):
         :param maximum: Maximum value of price.
         :return: Price in BTC.
 
-        :Example:
-            0.5885238 BTC
+        >>> from mimesis import Business
+        >>> provider  = Business()
+        >>> provider.price_in_btc(minimum=0.2456789,maximum=0.2456789)
+        '0.2456789 BTC'
+
         """
         return '{} BTC'.format(
             self.random.uniform(
