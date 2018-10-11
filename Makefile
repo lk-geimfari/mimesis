@@ -80,3 +80,8 @@ minify:
 .PHONY: install
 install:
 	python3 setup.py install
+
+
+.PHONY: install-hooks
+install-hooks:
+	pre-commit install
