@@ -16,6 +16,7 @@ from mimesis.providers.food import Food
 from mimesis.providers.games import Games
 from mimesis.providers.hardware import Hardware
 from mimesis.providers.internet import Internet
+from mimesis.providers.industry import Industry
 from mimesis.providers.numbers import Numbers
 from mimesis.providers.path import Path
 from mimesis.providers.payment import Payment
@@ -48,6 +49,7 @@ class Generic(BaseDataProvider):
         self._science = Science
         self._code = Code
         self._transport = Transport
+        self._industry = Industry
         self.unit_system = UnitSystem(seed=self.seed)
         self.file = File(seed=self.seed)
         self.numbers = Numbers(seed=self.seed)
