@@ -17,7 +17,7 @@ class Choice(object):
         self.random = Random()
 
         if seed is not None:
-            self.random.seed = seed  # type: ignore
+            self.random.seed(seed)
 
     def __call__(self, items: Optional[Sequence] = None, number: int = 1,
                  unique: bool = False) -> Union[Sequence[Any], Any]:
