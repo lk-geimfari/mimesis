@@ -50,7 +50,10 @@ script:
 after_success:
   codecov
 
-before_deploy: python setup.py minify
+before_deploy:
+  - python setup.py minify
+  - pipenv run check-manifest
+  - pipenv run python setup.py check --restructuredtext --strict
 
 deploy:
   provider: pypi
