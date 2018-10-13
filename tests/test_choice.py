@@ -40,3 +40,8 @@ def test_choice_seed(n):
 
     result = choice(items=items, number=number)
     assert result == 'f'
+
+
+def test_choice_no_items(choice):
+    result = choice(items=None)
+    assert result is None
