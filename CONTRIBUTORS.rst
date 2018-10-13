@@ -39,6 +39,7 @@ Contributors
 -  Eliz Kiliç `(el)`_
 -  Flavio Curella `(fcurella)`_
 -  FliegendeWurst `(FliegendeWurst)`_
+-  Gustavo Sampaio `(GustavoKatel)`_
 -  JLWT90 `(jlwt90)`_
 -  Jack McMorrow `(jackmcmorrow)`_
 -  Jakub Wilk `(jwilk)`_
@@ -113,3 +114,4 @@ Contributors
 .. _(conformist-mw): https://github.com/conformist-mw
 .. _(destag): https://github.com/destag
 .. _(pywkm): https://github.com/pywkm
+.. _(GustavoKatel): https://github.com/GustavoKatel
