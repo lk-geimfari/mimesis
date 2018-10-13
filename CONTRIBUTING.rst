@@ -219,6 +219,16 @@ feedback, you should make your case clearly and calmly. If, after doing
 so, the feedback is judged to still apply, you must either apply the
 feedback or withdraw your contribution.
 
+Git Pre-Commit Hooks
+~~~~~~~~~~~~~~~~~~~~
+
+You can install git `pre-commit <https://pre-commit.com/>`_ hooks to make sure everything is okay.
+The hooks will perform type checking and style checking before every commit.
+
+.. code:: text
+
+    ⟩ make install-hooks
+
 Questions
 ~~~~~~~~~
 
