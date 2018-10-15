@@ -72,7 +72,7 @@ def pull(file: str, locale: str = 'en') -> JSON:
         >>> en = pull(file='datetime.json', locale='en')
         >>> isinstance(en, dict)
         True
-        >>> en['day']['abbr'][0]
+        >>> en['day']['abbr'][1]
         'Mon.'
     """
     def get_data(locale_name: str) -> JSON:
