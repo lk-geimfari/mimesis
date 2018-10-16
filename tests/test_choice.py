@@ -30,3 +30,18 @@ def test_choice_unique(choice, items):
 def test_choice_one_element(choice, items):
     result = choice(items=items)
     assert isinstance(result, str)
+
+
+@pytest.mark.parametrize('n', range(5))
+def test_choice_seed(n):
+    choice = Choice(seed=0xF1)
+    items = ['a', 'b', 'c', 'd', 'e', 'f', 'g']
+    number = 1
+
+    result = choice(items=items, number=number)
+    assert result == 'f'
+
+
+def test_choice_no_items(choice):
+    result = choice(items=None)
+    assert result is None
