@@ -1,7 +1,8 @@
 """Provider of data related to date and time."""
 
 from calendar import monthrange, timegm
-from datetime import date, datetime, time
+from datetime import date, datetime, time, timedelta
+from typing import List, Optional, Union
 
 from mimesis.data import GMT_OFFSETS, ROMAN_NUMS, TIMEZONES
 from mimesis.providers.base import BaseDataProvider
@@ -21,6 +22,45 @@ class Datetime(BaseDataProvider):
         """
         super().__init__(*args, **kwargs)
         self._data = pull('datetime.json', self.locale)
+
+    @staticmethod
+    def bulk_create_datetimes(date_start: DateTime,
+                              date_end: DateTime, **kwargs) -> List[DateTime]:
+        """Bulk create datetime objects.
+
+        This method creates list of datetime objects from
+        **date_start** to **date_end**.
+
+        You can use the following keyword arguments:
+
+        * ``days``
+        * ``hours``
+        * ``minutes``
+        * ``seconds``
+        * ``microseconds``
+
+        See datetime module documentation for more:
+        https://docs.python.org/3.7/library/datetime.html#timedelta-objects
+
+
+        :param date_start: Begin of the range.
+        :param date_end: End of the range.
+        :param kwargs: Keyword arguments for datetime.timedelta
+        :return: List of datetime objects
+        """
+        dt_objects = []
+
+        if not date_start and not date_end:
+            raise ValueError('You must pass date_start and date_end')
+
+        if date_end < date_start:
+            raise ValueError('date_start can not be larger than date_end')
+
+        while date_start <= date_end:
+            date_start += timedelta(**kwargs)
+            dt_objects.append(date_start)
+
+        return dt_objects
 
     def week_date(self, start: int = 2017, end: int = 2018) -> str:
         """Get week number with year.
@@ -65,8 +105,7 @@ class Datetime(BaseDataProvider):
         months = self._data['month'].get(key)
         return self.random.choice(months)
 
-    def year(self, minimum: int = 1990,
-             maximum: int = 2050) -> int:
+    def year(self, minimum: int = 1990, maximum: int = 2050) -> int:
         """Generate a random year.
 
         :param minimum: Minimum value.

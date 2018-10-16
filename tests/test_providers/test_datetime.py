@@ -19,6 +19,33 @@ class TestDatetime(object):
     def test_str(self, dt):
         assert re.match(patterns.STR_REGEX, str(dt))
 
+    @pytest.mark.parametrize(
+        'days, objects_count', [
+            (7, 169),
+            (14, 337),
+            (28, 673),
+        ],
+    )
+    def test_bulk_create_datetimes(self, _datetime, days, objects_count):
+        date_start = datetime.datetime.now()
+        date_end = date_start + datetime.timedelta(days=days)
+        datetime_objects = _datetime.bulk_create_datetimes(
+            date_start=date_start,
+            date_end=date_end,
+            minutes=60,
+        )
+        assert len(datetime_objects) == objects_count
+
+    def test_bulk_create_datetimes_error(self, _datetime):
+        date_start = datetime.datetime.now()
+        date_end = date_start - datetime.timedelta(days=7)
+
+        with pytest.raises(ValueError):
+            _datetime.bulk_create_datetimes(date_start, date_end)
+
+        with pytest.raises(ValueError):
+            _datetime.bulk_create_datetimes(None, None)
+
     def test_year(self, _datetime):
         result = _datetime.year(minimum=2000, maximum=2016)
         assert result >= 2000
@@ -109,7 +136,7 @@ class TestDatetime(object):
         assert dt is not None
         assert isinstance(dt, _type)
 
-        if _type is str:
+        if isinstance(_type, str):
             year = int(dt.split(' ')[2])
             assert year == 2018
 
@@ -145,7 +172,7 @@ class TestSeededDatetime(object):
     def test_date(self, d1, d2):
         assert d1.date() == d2.date()
         assert d1.date(start=1024, end=2048, fmt='%m/%d/%Y') == \
-            d2.date(start=1024, end=2048, fmt='%m/%d/%Y')
+               d2.date(start=1024, end=2048, fmt='%m/%d/%Y')
 
     def test_time(self, d1, d2):
         assert d1.time() == d2.time()
@@ -179,4 +206,10 @@ class TestSeededDatetime(object):
     def test_week_date(self, d1, d2):
         assert d1.week_date() == d2.week_date()
         assert d1.week_date(start=2007, end=2018) == \
-            d2.week_date(start=2007, end=2018)
+               d2.week_date(start=2007, end=2018)
+
+    def test_bulk_create_datetimes(self, d1, d2):
+        date_start = datetime.datetime.now()
+        date_end = date_start + datetime.timedelta(days=7)
+        assert d1.bulk_create_datetimes(date_start, date_end, minutes=10) == \
+               d2.bulk_create_datetimes(date_start, date_end, minutes=10)
