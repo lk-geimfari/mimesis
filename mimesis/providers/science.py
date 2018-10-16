@@ -64,18 +64,7 @@ class Science(BaseDataProvider):
         """
         return self.random.randint(1, 119)
 
-    def scientific_article(self) -> str:
-        """Generate a random link to scientific article on Wikipedia.
-
-        :return: Link to the article.
-
-        :Example:
-            https://en.wikipedia.org/wiki/Black_hole
-        """
-        articles = self._data['article']
-        return self.random.choice(articles)
-
-    def rna(self, length: int = 10) -> str:
+    def rna_sequence(self, length: int = 10) -> str:
         """Generate a random RNA sequence.
 
         :param length: Length of block.
@@ -86,7 +75,7 @@ class Science(BaseDataProvider):
         """
         return self.random.schoice('UCGA', length)
 
-    def dna(self, length: int = 10) -> str:
+    def dna_sequence(self, length: int = 10) -> str:
         """Generate a random DNA sequence.
 
         :param length: Length of block.
