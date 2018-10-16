@@ -129,6 +129,13 @@ Business
    :members:
    :special-members: __init__
 
+Choice
+------
+
+.. autoclass:: mimesis.Choice
+   :members:
+   :special-members: __init__, __call__
+
 ClothingSize
 -------------
 
@@ -149,7 +156,6 @@ Cryptographic
 .. autoclass:: mimesis.Cryptographic
    :members:
    :special-members: __init__
-
 
 Datetime
 --------

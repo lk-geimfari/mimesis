@@ -10,6 +10,7 @@ Version 2.1.0
 - Changed how ``Internet`` provider works with ``stock_image``
 - Changed how ``random`` module works, now exposing global ``Random`` instance
 - Updated dependencies
+- Updated ``choice`` to make it a provider with more output types
 
 **Fixed**:
 
@@ -17,6 +18,7 @@ Version 2.1.0
 - Fixed ``appveyour`` builds
 - Fixed ``flake8-builtins`` checks
 - Fixed some ``mypy`` issues with strict mode
+- Fixed number of elements returned by ``choice`` with ``unique=True``
 
 
 Version 2.0.1
