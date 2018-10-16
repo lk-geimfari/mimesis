@@ -35,7 +35,7 @@ class TestGeneric(object):
         assert result is not None
 
     def test_base_science(self, generic):
-        result = generic.science.scientific_article()
+        result = generic.science.chemical_element()
         assert result is not None
 
     def test_base_business(self, generic):
