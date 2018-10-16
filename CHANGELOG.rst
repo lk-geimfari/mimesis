@@ -1,5 +1,5 @@
-Version 2.2.0 [WIP]
--------------------
+Version 2.2.0
+-------------
 
 .. note:: In this release (2.2.0) we've reject support of Python 3.5.
 Please make sure that you're using Python 3.6 or higher or use previous versions of Mimesis.
