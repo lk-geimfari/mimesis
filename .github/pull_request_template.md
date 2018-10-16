@@ -13,7 +13,7 @@ Cheers!
 
 <!-- Please check everything that applies: -->
 
-- [ ] I have read [contributing guidlines](https://github.com/lk-geimfari/mimesis/blob/master/CONTRIBUTING.rst).
+- [ ] I have read [contributing guidelines](https://github.com/lk-geimfari/mimesis/blob/master/CONTRIBUTING.rst).
 - [ ] I'm sure that the cat did not jump to the keyboard and did not unrelated changes in this pull request
 - [ ] I have created at least one test case for the changes I have made
 - [ ] I have updated the documentation for the changes I have made
