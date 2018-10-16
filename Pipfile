@@ -24,4 +24,7 @@ colorama = { version="*", os_name="=='nt'"}
 pyroma = "*"
 pygments = "*"
 "flake8-type-annotations" = "*"
+pytest-randomly = "*"
+check-manifest = "*"
+readme-renderer = "*"
 pytz = "*"
