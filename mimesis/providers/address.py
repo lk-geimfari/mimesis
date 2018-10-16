@@ -146,35 +146,28 @@ class Address(BaseDataProvider):
     def region(self, *args, **kwargs) -> str:
         """Get a random region.
 
-        :param bool abbr: Return ISO 3166-2 code.
-        :return: State.
+        An alias for method self.state().
         """
         return self.state(*args, **kwargs)
 
     def province(self, *args, **kwargs) -> str:
         """Get a random province.
 
-        :param args: Arguments.
-        :param kwargs: Keyword arguments.
-        :return: Province.
+        An alias for method self.state().
         """
         return self.state(*args, **kwargs)
 
     def federal_subject(self, *args, **kwargs) -> str:
         """Get a random region.
 
-        :param args: Arguments.
-        :param kwargs: Keyword arguments.
-        :return: Federal subject.
+        An alias for method self.state().
         """
         return self.state(*args, **kwargs)
 
     def prefecture(self, *args, **kwargs) -> str:
         """Get a random prefecture.
 
-        :param args: Arguments.
-        :param kwargs: Keyword arguments.
-        :return: Prefecture.
+        An alias for method self.state().
         """
         return self.state(*args, **kwargs)
 
