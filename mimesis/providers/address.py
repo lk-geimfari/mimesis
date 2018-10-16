@@ -14,13 +14,35 @@ __all__ = ['Address']
 class Address(BaseDataProvider):
     """Class for generate fake address data."""
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs) -> None:
         """Initialize attributes.
 
         :param locale: Current locale.
         """
         super().__init__(*args, **kwargs)
         self._data = pull('address.json', self.locale)
+
+    @staticmethod
+    def _dd_to_dms(num: float, _type: str) -> str:
+        """Convert decimal number to DMS format.
+
+        :param num: Decimal number.
+        :param _type: Type of number.
+        :return: Number in DMS format.
+        """
+        degrees = int(num)
+        minutes = int((num - degrees) * 60)
+        seconds = (num - degrees - minutes / 60) * 3600.00
+        seconds = round(seconds, 3)
+        result = [abs(i) for i in (degrees, minutes, seconds)]
+
+        direction = ''
+        if _type == 'lg':
+            direction = 'W' if degrees < 0 else 'E'
+        elif _type == 'lt':
+            direction = 'S' if degrees < 0 else 'N'
+
+        return ('{}º{}\'{:.3f}"' + direction).format(*result)
 
     def street_number(self, maximum: int = 1400) -> str:
         """Generate a random street number.
@@ -79,7 +101,7 @@ class Address(BaseDataProvider):
                 self.random.choice(self._data['city']),
                 # Generate list of random integers
                 # in amount of 3, from 1 to 100.
-                *self.random.randints(3, 1, 100),
+                *self.random.randints(amount=3, a=1, b=100),
             )
 
         return fmt.format(
@@ -207,7 +229,7 @@ class Address(BaseDataProvider):
         result = self.random.uniform(*rng, precision=6)
 
         if dms:
-            return dd_to_dms(result, key)
+            return self._dd_to_dms(result, key)
 
         return result
 
@@ -271,29 +293,3 @@ class Address(BaseDataProvider):
             +7
         """
         return self.random.choice(CALLING_CODES)
-
-
-# ==========================================#
-# INTERNAL FUNCTIONS OF PROVIDER <ADDRESS>  #
-# ==========================================#
-
-def dd_to_dms(num: float, _type: str) -> str:
-    """Convert decimal number to DMS format.
-
-    :param num: Decimal number.
-    :param _type: Type of number.
-    :return: Number in DMS format.
-    """
-    degrees = int(num)
-    minutes = int((num - degrees) * 60)
-    seconds = (num - degrees - minutes / 60) * 3600.00
-    seconds = round(seconds, 3)
-    result = [abs(i) for i in (degrees, minutes, seconds)]
-
-    direction = ''
-    if _type == 'lg':
-        direction = 'W' if degrees < 0 else 'E'
-    elif _type == 'lt':
-        direction = 'S' if degrees < 0 else 'N'
-
-    return ('{}º{}\'{:.3f}"' + direction).format(*result)
