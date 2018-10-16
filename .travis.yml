@@ -39,6 +39,7 @@ before_install: |
 
 install:
   - pip install pipenv
+  - pipenv run pip install pip==18.0
   - pipenv install --dev --ignore-pipfile
 
 script:
@@ -49,7 +50,10 @@ script:
 after_success:
   codecov
 
-before_deploy: python setup.py minify
+before_deploy:
+  - python setup.py minify
+  - pipenv run check-manifest
+  - pipenv run python setup.py check --restructuredtext --strict
 
 deploy:
   provider: pypi

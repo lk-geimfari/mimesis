@@ -191,3 +191,6 @@ fabric.properties
 .test.py
 
 .pytest_cache/
+
+#vscode
+*.code-workspace

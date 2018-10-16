@@ -13,8 +13,9 @@ Example:
     >>> from mimesis import Person
     >>> from mimesis.enums import Gender
     >>> person = Person()
-    >>> person.full_name(gender=Gender.FEMALE)
-    'Antonetta Garrison'
+    >>> name = person.name(gender=Gender.FEMALE)
+    >>> name in person._data['names']['female']
+    True
 """
 
 from enum import Enum

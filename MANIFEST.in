@@ -1,0 +1,18 @@
+include LICENSE
+include setup.py
+recursive-include mimesis *.py
+recursive-include mimesis/data *.json
+
+exclude MANIFEST.in
+exclude *.rst
+include README.rst
+prune benchmarks
+prune docs
+prune media
+prune tests
+prune mimesis/data/locale_template
+exclude *.lock
+exclude *.yml
+exclude Makefile
+exclude Pipfile
+exclude .editorconfig
