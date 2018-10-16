@@ -6,8 +6,7 @@ Please make sure that you're using Python 3.6 or higher or use previous versions
 
 **Updated**:
 
-- Updated documentation and fixed typos
-- Completely annotated all variables and functions
+- Completely annotated all functions
 - Updated data for locale ``pl``
 - Updated snils algorithm for ``RussiaSpecProvider``
 
@@ -21,14 +20,11 @@ Please make sure that you're using Python 3.6 or higher or use previous versions
 - Fixed bug with seed
 - Fixed issue with names on downloading images
 
-**Added** (Work in Progress):
+**Added**:
 
 - Added generate KPP for ``RussiaSpecProvider``
-- Added ``PolandSpecProvider``
 - Added support of timezones for ``Datetime().datetime()``
-- Added new provider ``choice.Choice()``
-- Added method to bulk create datetime objects (``Datetime().bulk_create_datetimes()``) #497
-- Added support of second, third and fourth level domains
+- Added method to bulk create datetime objects (``Datetime().bulk_create_datetimes()``)
 
 
 Version 2.1.0
