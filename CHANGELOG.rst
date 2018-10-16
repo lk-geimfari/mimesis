@@ -5,12 +5,14 @@ Version 2.2.0
 Please make sure that you're using Python 3.6 or higher or use previous versions of Mimesis.
 
 **Updated**:
+
 - Updated documentation and fixed typos
 - Completely annotated all variables and functions
 - Updated data for locale ``pl``
 - Updated snils algorithm for ``RussiaSpecProvider``
 
 **Removed**:
+
 - Removed deprecated method ``Science.scientific_article()``
 - Removed deprecated method ``Structure().json()``, use ``schema.Schema()`` instead
 
