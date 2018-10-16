@@ -21,7 +21,7 @@ Please make sure that you're using Python 3.6 or higher or use previous versions
 
 **Added** (Work in Progress):
 
-- Added generate KPP for `RussiaSpecProvider`
+- Added generate KPP for ``RussiaSpecProvider``
 - Added ``PolandSpecProvider``
 - Added support of timezones for ``Datetime().datetime()``
 - Added new provider ``choice.Choice()``
