@@ -51,7 +51,12 @@ class Address(BaseDataProvider):
         :return: Street number.
 
         :Example:
-            134.
+        >>> address = Address()
+        >>> number = address.street_number(128)
+        >>> isinstance(number, str)
+        True
+        >>> int(number) <= 128
+        True
         """
         return str(self.random.randint(1, maximum))
 
@@ -61,7 +66,10 @@ class Address(BaseDataProvider):
         :return: Street name.
 
         :Example:
-           Candlewood.
+        >>> address = Address()
+        >>> street_name = address.street_name()
+        >>> street_name in address._data['street']['name']
+        True
         """
         return self.random.choice(
             self._data['street']['name'])
@@ -72,7 +80,10 @@ class Address(BaseDataProvider):
         :return: Street suffix.
 
         :Example:
-            Alley.
+        >>> address = Address()
+        >>> suffix = address.street_suffix()
+        >>> suffix in address._data['street']['suffix']
+        True
         """
         return self.random.choice(
             self._data['street']['suffix'])
@@ -83,7 +94,10 @@ class Address(BaseDataProvider):
         :return: Full address.
 
         :Example:
-            5 Central Sideline.
+        >>> address = Address()
+        >>> suffix = address.address()
+        >>> isinstance(suffix, str)
+        True
         """
         fmt = self._data['address_fmt']
 
@@ -118,7 +132,13 @@ class Address(BaseDataProvider):
         :return: Administrative district.
 
         :Example:
-            Alabama.
+        >>> address = Address()
+        >>> state = address.state()
+        >>> state in address._data['state']['name']
+        True
+        >>> state_abbr = address.state(abbr=True)
+        >>> state_abbr in address._data['state']['abbr']
+        True
         """
         return self.random.choice(
             self._data['state']['abbr' if abbr else 'name'])
@@ -164,7 +184,10 @@ class Address(BaseDataProvider):
         :return: Postal code.
 
         :Example:
-            389213
+        >>> address = Address()
+        >>> postal_code = address.postal_code()
+        >>> len(postal_code) == 5
+        True
         """
         return self.random.custom_code(
             self._data['postal_code_fmt'])
@@ -172,7 +195,7 @@ class Address(BaseDataProvider):
     def zip_code(self) -> str:
         """Generate a zip code.
 
-        An alias for method self.postal_code.
+        An alias for method self.postal_code().
 
         :return: Zip code.
         """
@@ -190,7 +213,13 @@ class Address(BaseDataProvider):
         :raises KeyError: if fmt is not supported.
 
         :Example:
-            DE
+        >>> address = Address()
+        >>> code = address.country_code(fmt=CountryCode.A2)
+        >>> len(code) == 2
+        True
+        >>> code = address.country_code(fmt=CountryCode.A3)
+        >>> len(code) == 3
+        True
         """
         key = self._validate_enum(fmt, CountryCode)
         return self.random.choice(COUNTRY_CODES[key])
@@ -201,7 +230,10 @@ class Address(BaseDataProvider):
         :return: The Country.
 
         :Example:
-            Russia.
+        >>> address = Address()
+        >>> country = address.country()
+        >>> country in address._data['country']['name']
+        True
         """
         return self.random.choice(
             self._data['country']['name'])
@@ -212,7 +244,10 @@ class Address(BaseDataProvider):
         :return: City name.
 
         :Example:
-            Saint Petersburg.
+        >>> address = Address()
+        >>> city = address.city()
+        >>> city in address._data['city']
+        True
         """
         return self.random.choice(
             self._data['city'])
@@ -240,7 +275,13 @@ class Address(BaseDataProvider):
         :return: Value of longitude.
 
         :Example:
-            -66.421418
+        >>> address = Address()
+        >>> latitude = address.latitude()
+        >>> isinstance(latitude, float)
+        True
+        >>> latitude = address.latitude(dms=True)
+        >>> isinstance(latitude, str)
+        True
         """
         return self._get_fs('lt', dms)
 
@@ -251,7 +292,13 @@ class Address(BaseDataProvider):
         :return: Value of longitude.
 
         :Example:
-            112.184402
+        >>> address = Address()
+        >>> longitude = address.longitude()
+        >>> isinstance(longitude, float)
+        True
+        >>> longitude = address.longitude(dms=True)
+        >>> isinstance(longitude, str)
+        True
         """
         return self._get_fs('lg', dms)
 
@@ -262,8 +309,10 @@ class Address(BaseDataProvider):
         :return: Dict with coordinates.
 
         :Example:
-            {'latitude': 8.003968,
-            'longitude': 36.028111}
+        >>> address = Address()
+        >>> coordinates = address.coordinates()
+        >>> isinstance(coordinates, dict)
+        True
         """
         return {
             'longitude': self._get_fs('lg', dms),
@@ -277,7 +326,13 @@ class Address(BaseDataProvider):
         :return: Continent name.
 
         :Example:
-            Africa (en)
+        >>> address = Address()
+        >>> continent = address.continent()
+        >>> continent in address._data['continent']
+        True
+        >>> continent = address.continent(code=True)
+        >>> continent in CONTINENT_CODES
+        True
         """
         codes = CONTINENT_CODES if \
             code else self._data['continent']
@@ -290,6 +345,9 @@ class Address(BaseDataProvider):
         :return: Calling code.
 
         :Example:
-            +7
+        >>> address = Address()
+        >>> calling_code = address.calling_code()
+        >>> calling_code in CALLING_CODES
+        True
         """
         return self.random.choice(CALLING_CODES)
