@@ -24,7 +24,7 @@ class Random(random_module.Random):
 
     """
 
-    def multiple_choice(self, seq: Sequence[Any], amount: int = 2) -> list:
+    def multiple_choice(self, seq: Sequence[Any], amount: int = 2) -> List[Any]:
         """Multiple choices of elements from the sequence.
 
         Choice an element from sequence ``seq``
@@ -80,22 +80,23 @@ class Random(random_module.Random):
         :param digit: Placeholder for digits.
         :return: Custom code.
         """
-        char_code = ord(char)
-        digit_code = ord(digit)
-        code = bytearray(len(mask))
+        char_code: int = ord(char)
+        digit_code: int = ord(digit)
+        code: bytearray = bytearray(len(mask))
 
         def random_int(a: int, b: int) -> int:
             b = b - a
             return int(self.random() * b) + a
 
-        _mask = mask.encode()
+        _mask: bytes = mask.encode()
+
         for i, p in enumerate(_mask):
             if p == char_code:
-                a = random_int(65, 91)  # A-Z
+                a: int = random_int(65, 91)  # A-Z
             elif p == digit_code:
-                a = random_int(48, 58)  # 0-9
+                a: int = random_int(48, 58)  # 0-9
             else:
-                a = p
+                a: int = p
             code[i] = a
         return code.decode()
 
@@ -124,4 +125,4 @@ def get_random_item(enum: Any, rnd: Optional[Random] = None) -> Any:
 
 # Compat
 # See: https://github.com/lk-geimfari/mimesis/issues/469
-random = Random()
+random: Random = Random()

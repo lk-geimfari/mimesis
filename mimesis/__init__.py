@@ -4,10 +4,11 @@ Copyright (c) 2016 - 2018 Likid Geimfari (Isaak Uchakaev)
 Repository: https://github.com/lk-geimfari/mimesis
 Email: <likid.geimfari@gmail.com>
 """
+from typing import List
 
 from mimesis.providers import *
 
-__all__ = [
+__all__: List[str] = [
     'Address',
     'BaseDataProvider',
     'BaseProvider',
