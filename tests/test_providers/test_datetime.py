@@ -147,7 +147,7 @@ class TestDatetime(object):
 
         if humanized:
             pass
-        elif timezone is not '':
+        elif timezone:
             assert dt.tzinfo is not None
         else:
             assert dt.tzinfo is None
