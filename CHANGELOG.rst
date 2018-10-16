@@ -7,12 +7,12 @@ Please make sure that you're using Python 3.6 or higher or use previous versions
 **Updated**:
 - Updated documentation and fixed typos
 - Completely annotated all variables and functions
-- Updated data for locale `pl`
-- Updated snils algorithm for `RussiaSpecProvider`
+- Updated data for locale ``pl``
+- Updated snils algorithm for ``RussiaSpecProvider``
 
 **Removed**:
-- Removed deprecated method `Science.scientific_article()`
-- Removed deprecated method `Structure().json()`, use `schema.Schema()` instead
+- Removed deprecated method ``Science.scientific_article()``
+- Removed deprecated method ``Structure().json()``, use ``schema.Schema()`` instead
 
 **Fixed**:
 
@@ -22,11 +22,11 @@ Please make sure that you're using Python 3.6 or higher or use previous versions
 **Added** (Work in Progress):
 
 - Added generate KPP for `RussiaSpecProvider`
-- Added ``PolandSpecProvider`` [wip]
-- Added support of timezones for ``Datetime().datetime()`` [wip]
-- Added new provider ``choice.Choice()`` [wip]
-- Added method to bulk create datetime objects (``Datetime().bulk_create_datetimes()``) [wip]
-- Added support of second, third and fourth level domains [wip]
+- Added ``PolandSpecProvider``
+- Added support of timezones for ``Datetime().datetime()``
+- Added new provider ``choice.Choice()``
+- Added method to bulk create datetime objects (``Datetime().bulk_create_datetimes()``) #497
+- Added support of second, third and fourth level domains
 
 
 Version 2.1.0
