@@ -12,10 +12,7 @@ __all__ = [
     'Seed',
 ]
 
-JSON = Union[
-    Dict[Any, Any],
-    Any,
-]
+JSON = Dict[str, Any]
 
 _StrOrInt = Union[str, int]
 
