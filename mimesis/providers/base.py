@@ -25,7 +25,7 @@ class BaseProvider(object):
         if seed is not None:
             self.reseed(seed)
 
-    def reseed(self, seed: Optional[Seed]) -> None:
+    def reseed(self, seed: Optional[Seed] = None) -> None:
         """Reseed the internal random generator.
 
         In case we use the default seed, we need to create a per instance
