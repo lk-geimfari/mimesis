@@ -51,6 +51,7 @@ class Address(BaseDataProvider):
         :return: Street number.
 
         :Example:
+
         >>> address = Address()
         >>> number = address.street_number(128)
         >>> isinstance(number, str)
@@ -66,6 +67,7 @@ class Address(BaseDataProvider):
         :return: Street name.
 
         :Example:
+
         >>> address = Address()
         >>> street_name = address.street_name()
         >>> street_name in address._data['street']['name']
@@ -80,6 +82,7 @@ class Address(BaseDataProvider):
         :return: Street suffix.
 
         :Example:
+
         >>> address = Address()
         >>> suffix = address.street_suffix()
         >>> suffix in address._data['street']['suffix']
@@ -94,6 +97,7 @@ class Address(BaseDataProvider):
         :return: Full address.
 
         :Example:
+
         >>> address = Address()
         >>> suffix = address.address()
         >>> isinstance(suffix, str)
@@ -132,6 +136,7 @@ class Address(BaseDataProvider):
         :return: Administrative district.
 
         :Example:
+
         >>> address = Address()
         >>> state = address.state()
         >>> state in address._data['state']['name']
@@ -146,28 +151,28 @@ class Address(BaseDataProvider):
     def region(self, *args, **kwargs) -> str:
         """Get a random region.
 
-        An alias for method self.state().
+        An alias for :meth:`~Address.state()`.
         """
         return self.state(*args, **kwargs)
 
     def province(self, *args, **kwargs) -> str:
         """Get a random province.
 
-        An alias for method self.state().
+        An alias for :meth:`~Address.state()`.
         """
         return self.state(*args, **kwargs)
 
     def federal_subject(self, *args, **kwargs) -> str:
         """Get a random region.
 
-        An alias for method self.state().
+        An alias for :meth:`~Address.state()`.
         """
         return self.state(*args, **kwargs)
 
     def prefecture(self, *args, **kwargs) -> str:
         """Get a random prefecture.
 
-        An alias for method self.state().
+        An alias for :meth:`~Address.state()`.
         """
         return self.state(*args, **kwargs)
 
@@ -177,6 +182,7 @@ class Address(BaseDataProvider):
         :return: Postal code.
 
         :Example:
+
         >>> address = Address()
         >>> postal_code = address.postal_code()
         >>> len(postal_code) == 5
@@ -188,7 +194,7 @@ class Address(BaseDataProvider):
     def zip_code(self) -> str:
         """Generate a zip code.
 
-        An alias for method self.postal_code().
+        An alias for :meth:`~Address.postal_code()`.
 
         :return: Zip code.
         """
@@ -206,6 +212,7 @@ class Address(BaseDataProvider):
         :raises KeyError: if fmt is not supported.
 
         :Example:
+
         >>> address = Address()
         >>> code = address.country_code(fmt=CountryCode.A2)
         >>> len(code) == 2
@@ -223,6 +230,7 @@ class Address(BaseDataProvider):
         :return: The Country.
 
         :Example:
+
         >>> address = Address()
         >>> country = address.country()
         >>> country in address._data['country']['name']
@@ -237,6 +245,7 @@ class Address(BaseDataProvider):
         :return: City name.
 
         :Example:
+
         >>> address = Address()
         >>> city = address.city()
         >>> city in address._data['city']
@@ -268,6 +277,7 @@ class Address(BaseDataProvider):
         :return: Value of longitude.
 
         :Example:
+
         >>> address = Address()
         >>> latitude = address.latitude()
         >>> isinstance(latitude, float)
@@ -285,6 +295,7 @@ class Address(BaseDataProvider):
         :return: Value of longitude.
 
         :Example:
+
         >>> address = Address()
         >>> longitude = address.longitude()
         >>> isinstance(longitude, float)
@@ -302,6 +313,7 @@ class Address(BaseDataProvider):
         :return: Dict with coordinates.
 
         :Example:
+
         >>> address = Address()
         >>> coordinates = address.coordinates()
         >>> isinstance(coordinates, dict)
@@ -319,6 +331,7 @@ class Address(BaseDataProvider):
         :return: Continent name.
 
         :Example:
+
         >>> address = Address()
         >>> continent = address.continent()
         >>> continent in address._data['continent']
@@ -338,6 +351,7 @@ class Address(BaseDataProvider):
         :return: Calling code.
 
         :Example:
+
         >>> address = Address()
         >>> calling_code = address.calling_code()
         >>> calling_code in CALLING_CODES
