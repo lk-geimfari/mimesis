@@ -25,7 +25,11 @@ class Business(BaseDataProvider):
         :return: Company name.
 
         :Example:
-            Gamma Systems.
+
+        >>> business = Business()
+        >>> company = business.company()
+        >>> company in business._data['company']['name']
+        True
         """
         return self.random.choice(self._data['company']['name'])
 
@@ -36,10 +40,18 @@ class Business(BaseDataProvider):
         :return: Types of business entity.
 
         :Example:
-            Incorporated.
+
+        >>> business = Business()
+        >>> company_type = business.company_type()
+        >>> company_type in business._data['company']['type']['title']
+        True
+        >>> company_type = business.company_type(abbr=True)
+        >>> company_type in business._data['company']['type']['abbr']
+        True
         """
+        key = 'abbr' if abbr else 'title'
         return self.random.choice(
-            self._data['company']['type'].get('abbr' if abbr else 'title'),
+            self._data['company']['type'][key],
         )
 
     def copyright(self) -> str:  # noqa: A003
@@ -48,7 +60,11 @@ class Business(BaseDataProvider):
         :return: Copyright of company.
 
         :Example:
-            © Komercia, Inc.
+
+        >>> business = Business()
+        >>> _copyright = business.copyright()
+        >>> isinstance(_copyright, str)
+        True
         """
         return '© {}, {}'.format(
             self.company(),
@@ -61,7 +77,11 @@ class Business(BaseDataProvider):
         :return: Currency code.
 
         :Example:
-            RUR.
+
+        >>> business = Business()
+        >>> code = business.currency_iso_code()
+        >>> code in CURRENCY_ISO_CODES
+        True
         """
         return self.random.choice(CURRENCY_ISO_CODES)
 
@@ -69,6 +89,13 @@ class Business(BaseDataProvider):
         """Get symbol of random cryptocurrency.
 
         :return: Symbol of cryptocurrency.
+
+        :Example:
+
+        >>> business = Business()
+        >>> code = business.cryptocurrency_iso_code()
+        >>> code in CRYPTOCURRENCY_ISO_CODES
+        True
         """
         return self.random.choice(CRYPTOCURRENCY_ISO_CODES)
 
@@ -76,6 +103,13 @@ class Business(BaseDataProvider):
         """Get a currency symbol for current locale.
 
         :return: Currency symbol.
+
+        :Example:
+
+        >>> business = Business()
+        >>> symbol = business.currency_symbol()
+        >>> symbol in CURRENCY_SYMBOLS.values()
+        True
         """
         return CURRENCY_SYMBOLS[self.locale]
 
@@ -85,7 +119,11 @@ class Business(BaseDataProvider):
         :return: Symbol of cryptocurrency.
 
         :Example:
-            Ƀ
+
+        >>> business = Business()
+        >>> symbol = business.cryptocurrency_symbol()
+        >>> symbol in CRYPTOCURRENCY_SYMBOLS
+        True
         """
         return self.random.choice(CRYPTOCURRENCY_SYMBOLS)
 
@@ -98,7 +136,13 @@ class Business(BaseDataProvider):
         :return: Price.
 
         :Example:
-            599.99 $.
+
+        >>> business = Business()
+        >>> price = business.price()
+        >>> isinstance(price, str)
+        True
+        >>> '$' in price
+        True
         """
         price = self.random.uniform(minimum, maximum, precision=2)
         return '{0} {1}'.format(price, self.currency_symbol())
@@ -106,15 +150,16 @@ class Business(BaseDataProvider):
     def price_in_btc(self, minimum: float = 0, maximum: float = 2) -> str:
         """Generate random price in BTC.
 
-        :param minimum: Minimum value of price
+        :param minimum: Minimum value of price.
         :param maximum: Maximum value of price.
         :return: Price in BTC.
 
-        >>> from mimesis import Business
-        >>> provider  = Business()
-        >>> provider.price_in_btc(minimum=0.2456789,maximum=0.2456789)
-        '0.2456789 BTC'
+        :Example:
 
+        >>> business = Business()
+        >>> price = business.price_in_btc()
+        >>> isinstance(price, str)
+        True
         """
         return '{} BTC'.format(
             self.random.uniform(
