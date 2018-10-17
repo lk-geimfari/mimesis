@@ -1,4 +1,8 @@
-"""Address data provider."""
+"""Address module.
+
+This module contains provider Address() and other utils which represents
+data related to location, such as street name, city, country and etc.
+"""
 
 from typing import Optional, Union
 
@@ -12,7 +16,11 @@ __all__ = ['Address']
 
 
 class Address(BaseDataProvider):
-    """Class for generate fake address data."""
+    """Class for generate fake address data.
+
+    This object provides all the data related to
+    geographical location.
+    """
 
     def __init__(self, *args, **kwargs) -> None:
         """Initialize attributes.
@@ -203,9 +211,9 @@ class Address(BaseDataProvider):
     def country_code(self, fmt: Optional[CountryCode] = CountryCode.A2) -> str:
         """Get a random code of country.
 
-        Default format (``fmt``) is ISO 3166-1-alpha2 (``CountryCode.A2``),
-        you can change it by passing parameter ``fmt``
-        with enum object ``CountryCode``.
+        Default format is :attr:`~enums.CountryCode.A2` (ISO 3166-1-alpha2),
+        you can change it by passing parameter ``fmt`` with enum object
+        :class:`~enums.CountryCode`.
 
         :param fmt: Enum object CountryCode.
         :return: Country code in selected format.
