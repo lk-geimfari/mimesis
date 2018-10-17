@@ -14,7 +14,11 @@ class ClothingSize(BaseDataProvider):
         :return: Clothing size.
 
         :Example:
-            XXL.
+
+        >>> size = ClothingSize()
+        >>> int_size = size.international_size()
+        >>> len(int_size) <= 4
+        True
         """
         return self.random.choice(['L', 'M', 'S', 'XL',
                                    'XS', 'XXL', 'XXS', 'XXXL'])
@@ -25,7 +29,11 @@ class ClothingSize(BaseDataProvider):
         :return: Clothing size.
 
         :Example:
-            42
+
+        >>> size = ClothingSize()
+        >>> eur_size = size.european_size()
+        >>> 38 <= eur_size <= 62
+        True
         """
         return self.random.randint(38, 62)
 
@@ -37,6 +45,10 @@ class ClothingSize(BaseDataProvider):
         :return: Clothing size.
 
         :Example:
-            44
+
+        >>> size = ClothingSize()
+        >>> custom_size = size.custom_size(51, 53)
+        >>> 51 <= custom_size <= 53
+        True
         """
         return self.random.randint(minimum, maximum)
