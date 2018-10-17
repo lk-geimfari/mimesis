@@ -30,7 +30,7 @@ class Datetime(BaseDataProvider):
         """Bulk create datetime objects.
 
         This method creates list of datetime objects from
-        **date_start** to **date_end**.
+        ``date_start`` to ``date_end``.
 
         You can use the following keyword arguments:
 
@@ -48,6 +48,17 @@ class Datetime(BaseDataProvider):
         :param date_end: End of the range.
         :param kwargs: Keyword arguments for datetime.timedelta
         :return: List of datetime objects
+        :raises: ValueError: When ``date_start``/``date_end`` not passed and
+            when ``date_start`` larger than ``date_end``.
+
+        :Example:
+
+        >>> dt = Datetime()
+        >>> now = datetime.now()
+        >>> week_ago = datetime.now() - timedelta(days=9)
+        >>> datetimes = dt.bulk_create_datetimes(week_ago, now, days=1)
+        >>> isinstance(datetimes, list)
+        True
         """
         dt_objects = []
 
@@ -71,7 +82,11 @@ class Datetime(BaseDataProvider):
         :return: Week number.
 
         :Example:
-            2017-W32
+
+        >>> dt = Datetime()
+        >>> week_date = dt.week_date(2018, 2018)
+        >>> '2018' in week_date
+        True
         """
         year = self.year(start, end)
         week = self.random.randint(1, 52)
@@ -87,7 +102,14 @@ class Datetime(BaseDataProvider):
         :return: Day of the week.
 
         :Example:
-            Wednesday
+
+        >>> dt = Datetime()
+        >>> day_of_week = dt.day_of_week()
+        >>> day_of_week in dt._data['day']['name']
+        True
+         >>> day_of_week = dt.day_of_week(abbr=True)
+        >>> day_of_week in dt._data['day']['abbr']
+        True
         """
         key = 'abbr' if abbr else 'name'
         days = self._data['day'].get(key)
@@ -114,7 +136,11 @@ class Datetime(BaseDataProvider):
         :return: Year.
 
         :Example:
-            2023
+
+        >>> dt = Datetime()
+        >>> year = dt.year(2015, 2019)
+        >>> 2015 <= year <= 2019
+        True
         """
         return self.random.randint(minimum, maximum)
 
@@ -124,7 +150,11 @@ class Datetime(BaseDataProvider):
         :return: Century.
 
         :Example:
-            XXI
+
+        >>> dt = Datetime()
+        >>> century = dt.century()
+        >>> century in ROMAN_NUMS
+        True
         """
         return self.random.choice(ROMAN_NUMS)
 
@@ -134,7 +164,11 @@ class Datetime(BaseDataProvider):
         :return: Periodicity.
 
         :Example:
-            Never.
+
+        >>> dt = Datetime()
+        >>> periodicity = dt.periodicity()
+        >>> periodicity in dt._data['periodicity']
+        True
         """
         periodicity = self._data['periodicity']
         return self.random.choice(periodicity)
@@ -152,7 +186,11 @@ class Datetime(BaseDataProvider):
         :return: Formatted date.
 
         :Example:
-            08/16/88 (en)
+
+        >>> dt = Datetime()
+        >>> date = dt.date()
+        >>> isinstance(date, str)
+        True
         """
         if not fmt:
             fmt = self._data['formats'].get('date')
@@ -173,7 +211,11 @@ class Datetime(BaseDataProvider):
         :return: Time.
 
         :Example:
-            21:30:00
+
+        >>> dt = Datetime()
+        >>> _time = dt.time()
+        >>> isinstance(_time, str)
+        True
         """
         if not fmt:
             fmt = self._data['formats'].get('time')
@@ -192,7 +234,11 @@ class Datetime(BaseDataProvider):
         :return: Random value from 1 to 31.
 
         :Example:
-            23
+
+        >>> dt = Datetime()
+        >>> day = dt.day_of_month()
+        >>> 1 <= day <= 31
+        True
         """
         return self.random.randint(1, 31)
 
@@ -202,7 +248,11 @@ class Datetime(BaseDataProvider):
         :return: Timezone.
 
         :Example:
-            Europe/Paris
+
+        >>> dt = Datetime()
+        >>> timezone = dt.timezone()
+        >>> timezone in TIMEZONES
+        True
         """
         return self.random.choice(TIMEZONES)
 
@@ -212,7 +262,11 @@ class Datetime(BaseDataProvider):
         :return: GMT Offset.
 
         :Example:
-            'UTC +03:00'
+
+        >>> dt = Datetime()
+        >>> gmt_offset = dt.gmt_offset()
+        >>> gmt_offset in GMT_OFFSETS
+        True
         """
         return self.random.choice(GMT_OFFSETS)
 
@@ -227,7 +281,11 @@ class Datetime(BaseDataProvider):
         :rtype: datetime.datetime
 
         :Example:
-            March, 24 2002
+
+        >>> dt = Datetime()
+        >>> datetime_obj = dt.datetime()
+        >>> isinstance(datetime_obj, datetime)
+        True
         """
         fmt = '%Y-%m-%d %H:%M:%S'
         dt_str = '{date} {time}'.format(
@@ -257,7 +315,14 @@ class Datetime(BaseDataProvider):
         :rtype: str or int
 
         :Example:
-            2018-01-02T06:19:19Z
+
+        >>> dt = Datetime()
+        >>> timestamp = dt.timestamp(posix=True)
+        >>> isinstance(timestamp, int)
+        True
+        >>> timestamp = dt.timestamp(posix=False)
+        >>> isinstance(timestamp, str)
+        True
         """
         stamp = self.datetime(**kwargs)
 
