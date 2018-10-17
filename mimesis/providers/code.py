@@ -30,7 +30,11 @@ class Code(BaseDataProvider):
         :return: Locale code.
 
         :Example:
-            de-ch
+
+        >>> code = Code()
+        >>> locale_code = code.locale_code()
+        >>> locale_code in LOCALE_CODES
+        True
         """
         return self.random.choice(LOCALE_CODES)
 
@@ -39,20 +43,32 @@ class Code(BaseDataProvider):
 
         :param mask: Mask of ISSN.
         :return: ISSN.
+
+        :Example:
+
+        >>> code = Code()
+        >>> issn = code.issn()
+        >>> len(issn) == 9
+        True
         """
         return self.random.custom_code(mask=mask)
 
     def isbn(self, fmt: Optional[ISBNFormat] = None) -> str:
         """Generate ISBN for current locale.
 
-        Default ``fmt`` is ISBN 10, but you also can use ISBN-13.
+        To change ISBN format, pass parameter ``fmt`` with needed value of
+        the enum object :class:`~mimesis.enums.ISBNFormat`
 
         :param fmt: ISBN format.
         :return: ISBN.
         :raises NonEnumerableError: if fmt is not enum ISBNFormat.
 
         :Example:
-            132-1-15411-375-8.
+
+        >>> code = Code()
+        >>> isbn = code.isbn()
+        >>> isinstance(isbn, str)
+        True
         """
         fmt_value = self._validate_enum(item=fmt, enum=ISBNFormat)
         mask = ISBN_MASKS[fmt_value].format(
@@ -62,14 +78,19 @@ class Code(BaseDataProvider):
     def ean(self, fmt: Optional[EANFormat] = None) -> str:
         """Generate EAN.
 
-        Default ``fmt`` is EAN-13, but you also can use EAN-8.
+        To change EAN format, pass parameter ``fmt`` with needed value of
+        the enum object :class:`~mimesis.enums.EANFormat`.
 
         :param fmt: Format of EAN.
         :return: EAN.
         :raises NonEnumerableError: if fmt is not enum EANFormat.
 
         :Example:
-            3953753179567.
+
+        >>> code = Code()
+        >>> ean = code.ean()
+        >>> 8 <=len(ean) <= 13
+        True
         """
         key = self._validate_enum(
             item=fmt,
@@ -84,7 +105,11 @@ class Code(BaseDataProvider):
         :return: IMEI.
 
         :Example:
-            353918052107063
+
+        >>> code = Code()
+        >>> imei = code.imei()
+        >>> len(imei) <= 15
+        True
         """
         num = self.random.choice(IMEI_TACS)
         num = num + str(self.random.randint(100000, 999999))
@@ -97,6 +122,10 @@ class Code(BaseDataProvider):
         :return: PIN code.
 
         :Example:
-            5241.
+
+        >>> code = Code()
+        >>> pin_code = code.pin()
+        >>> len(pin_code) == 4
+        True
         """
         return self.random.custom_code(mask=mask)
