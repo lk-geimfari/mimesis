@@ -9,6 +9,7 @@ Please make sure that you're using Python 3.6 or higher or use previous versions
 - Completely annotated all functions
 - Updated data for locale ``pl``
 - Updated snils algorithm for ``RussiaSpecProvider``
+- Added support for date and time object
 
 **Removed**:
 
