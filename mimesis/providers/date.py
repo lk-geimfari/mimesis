@@ -50,15 +50,6 @@ class Datetime(BaseDataProvider):
         :return: List of datetime objects
         :raises: ValueError: When ``date_start``/``date_end`` not passed and
             when ``date_start`` larger than ``date_end``.
-
-        :Example:
-
-        >>> dt = Datetime()
-        >>> now = datetime.now()
-        >>> week_ago = datetime.now() - timedelta(days=9)
-        >>> datetimes = dt.bulk_create_datetimes(week_ago, now, days=1)
-        >>> isinstance(datetimes, list)
-        True
         """
         dt_objects = []
 
@@ -80,13 +71,6 @@ class Datetime(BaseDataProvider):
         :param start: From start.
         :param end: To end.
         :return: Week number.
-
-        :Example:
-
-        >>> dt = Datetime()
-        >>> week_date = dt.week_date(2018, 2018)
-        >>> '2018' in week_date
-        True
         """
         year = self.year(start, end)
         week = self.random.randint(1, 52)
@@ -100,16 +84,6 @@ class Datetime(BaseDataProvider):
 
         :param abbr: Abbreviated day name.
         :return: Day of the week.
-
-        :Example:
-
-        >>> dt = Datetime()
-        >>> day_of_week = dt.day_of_week()
-        >>> day_of_week in dt._data['day']['name']
-        True
-         >>> day_of_week = dt.day_of_week(abbr=True)
-        >>> day_of_week in dt._data['day']['abbr']
-        True
         """
         key = 'abbr' if abbr else 'name'
         days = self._data['day'].get(key)
@@ -120,9 +94,6 @@ class Datetime(BaseDataProvider):
 
         :param abbr: Abbreviated month name.
         :return: Month name.
-
-        :Example:
-            January
         """
         key = 'abbr' if abbr else 'name'
         months = self._data['month'].get(key)
@@ -134,13 +105,6 @@ class Datetime(BaseDataProvider):
         :param minimum: Minimum value.
         :param maximum: Maximum value.
         :return: Year.
-
-        :Example:
-
-        >>> dt = Datetime()
-        >>> year = dt.year(2015, 2019)
-        >>> 2015 <= year <= 2019
-        True
         """
         return self.random.randint(minimum, maximum)
 
@@ -148,13 +112,6 @@ class Datetime(BaseDataProvider):
         """Get a random century.
 
         :return: Century.
-
-        :Example:
-
-        >>> dt = Datetime()
-        >>> century = dt.century()
-        >>> century in ROMAN_NUMS
-        True
         """
         return self.random.choice(ROMAN_NUMS)
 
@@ -162,13 +119,6 @@ class Datetime(BaseDataProvider):
         """Get a random periodicity string.
 
         :return: Periodicity.
-
-        :Example:
-
-        >>> dt = Datetime()
-        >>> periodicity = dt.periodicity()
-        >>> periodicity in dt._data['periodicity']
-        True
         """
         periodicity = self._data['periodicity']
         return self.random.choice(periodicity)
@@ -231,13 +181,6 @@ class Datetime(BaseDataProvider):
         """Generate a random day of month, from 1 to 31.
 
         :return: Random value from 1 to 31.
-
-        :Example:
-
-        >>> dt = Datetime()
-        >>> day = dt.day_of_month()
-        >>> 1 <= day <= 31
-        True
         """
         return self.random.randint(1, 31)
 
@@ -245,13 +188,6 @@ class Datetime(BaseDataProvider):
         """Get a random timezone.
 
         :return: Timezone.
-
-        :Example:
-
-        >>> dt = Datetime()
-        >>> timezone = dt.timezone()
-        >>> timezone in TIMEZONES
-        True
         """
         return self.random.choice(TIMEZONES)
 
@@ -259,13 +195,6 @@ class Datetime(BaseDataProvider):
         """Get a random GMT offset value.
 
         :return: GMT Offset.
-
-        :Example:
-
-        >>> dt = Datetime()
-        >>> gmt_offset = dt.gmt_offset()
-        >>> gmt_offset in GMT_OFFSETS
-        True
         """
         return self.random.choice(GMT_OFFSETS)
 

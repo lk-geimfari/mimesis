@@ -28,13 +28,6 @@ class Code(BaseDataProvider):
         for more information.
 
         :return: Locale code.
-
-        :Example:
-
-        >>> code = Code()
-        >>> locale_code = code.locale_code()
-        >>> locale_code in LOCALE_CODES
-        True
         """
         return self.random.choice(LOCALE_CODES)
 
@@ -43,13 +36,6 @@ class Code(BaseDataProvider):
 
         :param mask: Mask of ISSN.
         :return: ISSN.
-
-        :Example:
-
-        >>> code = Code()
-        >>> issn = code.issn()
-        >>> len(issn) == 9
-        True
         """
         return self.random.custom_code(mask=mask)
 
@@ -62,13 +48,6 @@ class Code(BaseDataProvider):
         :param fmt: ISBN format.
         :return: ISBN.
         :raises NonEnumerableError: if fmt is not enum ISBNFormat.
-
-        :Example:
-
-        >>> code = Code()
-        >>> isbn = code.isbn()
-        >>> isinstance(isbn, str)
-        True
         """
         fmt_value = self._validate_enum(item=fmt, enum=ISBNFormat)
         mask = ISBN_MASKS[fmt_value].format(
@@ -84,13 +63,6 @@ class Code(BaseDataProvider):
         :param fmt: Format of EAN.
         :return: EAN.
         :raises NonEnumerableError: if fmt is not enum EANFormat.
-
-        :Example:
-
-        >>> code = Code()
-        >>> ean = code.ean()
-        >>> 8 <=len(ean) <= 13
-        True
         """
         key = self._validate_enum(
             item=fmt,
@@ -103,13 +75,6 @@ class Code(BaseDataProvider):
         """Generate a random IMEI.
 
         :return: IMEI.
-
-        :Example:
-
-        >>> code = Code()
-        >>> imei = code.imei()
-        >>> len(imei) <= 15
-        True
         """
         num = self.random.choice(IMEI_TACS)
         num = num + str(self.random.randint(100000, 999999))
@@ -120,12 +85,5 @@ class Code(BaseDataProvider):
 
         :param mask: Mask of pin code.
         :return: PIN code.
-
-        :Example:
-
-        >>> code = Code()
-        >>> pin_code = code.pin()
-        >>> len(pin_code) == 4
-        True
         """
         return self.random.custom_code(mask=mask)

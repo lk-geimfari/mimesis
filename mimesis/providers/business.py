@@ -23,13 +23,6 @@ class Business(BaseDataProvider):
         """Get a random company name.
 
         :return: Company name.
-
-        :Example:
-
-        >>> business = Business()
-        >>> company = business.company()
-        >>> company in business._data['company']['name']
-        True
         """
         return self.random.choice(self._data['company']['name'])
 
@@ -38,16 +31,6 @@ class Business(BaseDataProvider):
 
         :param abbr: Abbreviated company type.
         :return: Types of business entity.
-
-        :Example:
-
-        >>> business = Business()
-        >>> company_type = business.company_type()
-        >>> company_type in business._data['company']['type']['title']
-        True
-        >>> company_type = business.company_type(abbr=True)
-        >>> company_type in business._data['company']['type']['abbr']
-        True
         """
         key = 'abbr' if abbr else 'title'
         return self.random.choice(
@@ -58,13 +41,6 @@ class Business(BaseDataProvider):
         """Generate a random copyright.
 
         :return: Copyright of company.
-
-        :Example:
-
-        >>> business = Business()
-        >>> _copyright = business.copyright()
-        >>> isinstance(_copyright, str)
-        True
         """
         return '© {}, {}'.format(
             self.company(),
@@ -75,13 +51,6 @@ class Business(BaseDataProvider):
         """Get code of the currency.
 
         :return: Currency code.
-
-        :Example:
-
-        >>> business = Business()
-        >>> code = business.currency_iso_code()
-        >>> code in CURRENCY_ISO_CODES
-        True
         """
         return self.random.choice(CURRENCY_ISO_CODES)
 
@@ -89,13 +58,6 @@ class Business(BaseDataProvider):
         """Get symbol of random cryptocurrency.
 
         :return: Symbol of cryptocurrency.
-
-        :Example:
-
-        >>> business = Business()
-        >>> code = business.cryptocurrency_iso_code()
-        >>> code in CRYPTOCURRENCY_ISO_CODES
-        True
         """
         return self.random.choice(CRYPTOCURRENCY_ISO_CODES)
 
@@ -103,13 +65,6 @@ class Business(BaseDataProvider):
         """Get a currency symbol for current locale.
 
         :return: Currency symbol.
-
-        :Example:
-
-        >>> business = Business()
-        >>> symbol = business.currency_symbol()
-        >>> symbol in CURRENCY_SYMBOLS.values()
-        True
         """
         return CURRENCY_SYMBOLS[self.locale]
 
@@ -117,13 +72,6 @@ class Business(BaseDataProvider):
         """Get a cryptocurrency symbol.
 
         :return: Symbol of cryptocurrency.
-
-        :Example:
-
-        >>> business = Business()
-        >>> symbol = business.cryptocurrency_symbol()
-        >>> symbol in CRYPTOCURRENCY_SYMBOLS
-        True
         """
         return self.random.choice(CRYPTOCURRENCY_SYMBOLS)
 
@@ -134,15 +82,6 @@ class Business(BaseDataProvider):
         :param minimum: Max value of price.
         :param maximum: Min value of price.
         :return: Price.
-
-        :Example:
-
-        >>> business = Business()
-        >>> price = business.price()
-        >>> isinstance(price, str)
-        True
-        >>> '$' in price
-        True
         """
         price = self.random.uniform(minimum, maximum, precision=2)
         return '{0} {1}'.format(price, self.currency_symbol())
@@ -153,13 +92,6 @@ class Business(BaseDataProvider):
         :param minimum: Minimum value of price.
         :param maximum: Maximum value of price.
         :return: Price in BTC.
-
-        :Example:
-
-        >>> business = Business()
-        >>> price = business.price_in_btc()
-        >>> isinstance(price, str)
-        True
         """
         return '{} BTC'.format(
             self.random.uniform(
