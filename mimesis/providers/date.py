@@ -2,7 +2,7 @@
 
 from calendar import monthrange, timegm
 from datetime import date, datetime, time, timedelta
-from typing import List, Optional
+from typing import List, Optional, Union
 
 from mimesis.compat import pytz
 from mimesis.data import GMT_OFFSETS, ROMAN_NUMS, TIMEZONES
@@ -174,7 +174,7 @@ class Datetime(BaseDataProvider):
         return self.random.choice(periodicity)
 
     def date(self, start: int = 2000,
-             end: int = 2035, fmt: str = '') -> str:
+             end: int = 2035, fmt: str = '', as_string: bool = False) -> Union[date, str]:
         """Generate a string representing of random date.
 
         Date can be automatically formatted for the current
@@ -183,14 +183,21 @@ class Datetime(BaseDataProvider):
         :param start: Minimum value of year.
         :param end: Maximum value of year.
         :param fmt: Format string for date.
+        :param as_string: Boolean if return as string.
         :return: Formatted date.
 
         :Example:
 
         >>> dt = Datetime()
         >>> date = dt.date()
+        >>> isinstance(date, datetime.date)
+        True
+
+        >>> dt = Datetime()
+        >>> date = dt.date(as_string=True)
         >>> isinstance(date, str)
         True
+
         """
         if not fmt:
             fmt = self._data['formats'].get('date')
@@ -199,23 +206,32 @@ class Datetime(BaseDataProvider):
         month = self.random.randint(1, 12)
         d = date(year, month, self.random.randint(
             1, monthrange(year, month)[1]))
-        return d.strftime(fmt)
+        if as_string:
+            return d.strftime(fmt)
+        return d
 
-    def time(self, fmt: str = '') -> str:
+    def time(self, fmt: str = '', as_string: bool = False) -> Union[time, str]:
         """Generate a random time.
 
         Time can be automatically formatted for the current
         locale or specified.
 
         :param fmt: Format of time.
+        :param as_string: Boolean if return as string.
         :return: Time.
 
         :Example:
 
         >>> dt = Datetime()
         >>> _time = dt.time()
+        >>> isinstance(_time, datetime.time)
+        True
+
+        >>> dt = Datetime()
+        >>> _time = dt.time(as_string=True)
         >>> isinstance(_time, str)
         True
+
         """
         if not fmt:
             fmt = self._data['formats'].get('time')
@@ -226,7 +242,9 @@ class Datetime(BaseDataProvider):
             self.random.randint(0, 59),
             self.random.randint(0, 999999),
         )
-        return t.strftime(fmt)
+        if as_string:
+            return t.strftime(fmt)
+        return t
 
     def day_of_month(self) -> int:
         """Generate a random day of month, from 1 to 31.

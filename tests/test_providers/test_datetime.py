@@ -60,26 +60,33 @@ class TestDatetime(object):
         assert ((result >= 1) or (result <= 31))
 
     def test_date(self, dt):
-        result = dt.date(start=1999, end=1999, fmt='%m/%d/%Y')
+        result_as_string = dt.date(start=1999, end=1999, fmt='%m/%d/%Y', as_string=True)
+        result_as_date = dt.date(start=1999, end=1999, fmt='%m/%d/%Y')
 
-        result = datetime.datetime.strptime(result, '%m/%d/%Y')
-        assert result.year == 1999  # check range was applied correctly
+        assert isinstance(result_as_date, datetime.date)
 
-        date = dt.date(start=2018, end=2018)
+        result_as_string = datetime.datetime.strptime(result_as_string, '%m/%d/%Y')
+        assert result_as_string.year == 1999  # check range was applied correctly
+
+        date = dt.date(start=2018, end=2018, as_string=True)
         result_fmt = datetime.datetime.strptime(
             date, dt._data['formats']['date'],
         )
         assert result_fmt.year == 2018
 
     def test_time(self, dt):
-        default = dt.time()
-        default = datetime.datetime.strptime(
-            default, dt._data['formats']['time'],
+        default_as_string = dt.time(as_string=True)
+        default_as_string = datetime.datetime.strptime(
+            default_as_string, dt._data['formats']['time']
         )
 
-        assert isinstance(default, datetime.datetime)
+        assert isinstance(default_as_string, datetime.datetime)
 
-        result = dt.time(fmt='%H:%M')
+        default_as_date = dt.time()
+
+        assert isinstance(default_as_date, datetime.time)
+
+        result = dt.time(fmt='%H:%M', as_string=True)
         result = datetime.datetime.strptime(result, '%H:%M')
         assert isinstance(result, datetime.datetime)
 
