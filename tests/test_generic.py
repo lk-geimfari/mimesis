@@ -111,7 +111,7 @@ class TestSeededGeneric(object):
 
     def test_generic_clothing_size(self, g1, g2):
         assert g1.clothing_size.european_size() == \
-            g2.clothing_size.european_size()
+               g2.clothing_size.european_size()
 
     def test_generic_code(self, g1, g2):
         assert g1.code.locale_code() == g2.code.locale_code()
@@ -126,7 +126,8 @@ class TestSeededGeneric(object):
         assert g1.datetime.day_of_week() == g2.datetime.day_of_week()
 
     def test_generic_development(self, g1, g2):
-        assert g1.development.container() == g2.development.container()
+        assert g1.development.software_license() == \
+               g2.development.software_license()
 
     def test_generic_file(self, g1, g2):
         assert g1.file.size() == g2.file.size()

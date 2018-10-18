@@ -1,16 +1,17 @@
 Version 2.2.0
 -------------
 
+.. note:: This release (2.2.0) contains some breaking changes in API.
+
 .. note:: In this release (2.2.0) we've reject support of Python 3.5.
-Please make sure that you're using Python 3.6 or higher or use previous versions of Mimesis.
 
 **Updated**:
 
-- Completely annotated all functions
 - Updated data for locale ``pl``
 - Updated snils algorithm for ``RussiaSpecProvider``
 - Updated method ``Datetime().time()`` to return only ``datetime.time`` object
 - Updated method ``Datetime().date()`` to return only ``datetime.date`` object
+- Completely annotated all functions
 
 **Renamed**:
 
@@ -33,6 +34,13 @@ Please make sure that you're using Python 3.6 or higher or use previous versions
 - Removed deprecated argument ``humanize`` for ``Datetime().datetime()``, use ``Datetime().formatted_datetime()`` instead
 - Removed deprecated method ``Science.scientific_article()``
 - Removed deprecated method ``Structure().json()``, use ``schema.Schema()`` instead
+- Removed deprecated and useless method:
+- Removed deprecated and useless method:
+- Removed deprecated and useless method:
+- Removed deprecated and useless method:
+- Removed deprecated and useless method:
+- Removed deprecated and useless method:
+- Removed deprecated and useless method: ``backend``, ``frontend``, ``version_control_system``, ``container``, ``database``
 
 **Fixed**:
 
