@@ -12,18 +12,23 @@ Please make sure that you're using Python 3.6 or higher or use previous versions
 - Updated method ``Datetime().time()`` to return only ``datetime.time`` object
 - Updated method ``Datetime().date()`` to return only ``datetime.date`` object
 
+**Renamed**:
+
+- Renamed ``Science().dna()`` to ``Science().dna_sequence()``
+- Renamed ``Science().rna()`` to ``Science().rna_sequence()``
+
 **Added**:
 
 - Added method ``formatted_time()``
 - Added method ``formatted_date()``
 - Added method ``formatted_datetime()``
-- Added generate KPP for ``RussiaSpecProvider``
 - Added support of timezones for ``Datetime().datetime()``
-- Added method to bulk create datetime objects (``Datetime().bulk_create_datetimes()``)
+- Added method to bulk create datetime objects: ``Datetime().bulk_create_datetimes()``
+- Added generate KPP for ``RussiaSpecProvider``
 
 **Removed**:
 
-- Removed deprecated argument ``fmt`` for ``Datetime().date()``, use ``Datetime().formatted_time()`` instead
+- Removed deprecated argument ``fmt`` for ``Datetime().date()``, use ``Datetime().formatted_date()`` instead
 - Removed deprecated argument ``fmt`` for ``Datetime().time()``, use ``Datetime().formatted_time()`` instead
 - Removed deprecated argument ``humanize`` for ``Datetime().datetime()``, use ``Datetime().formatted_datetime()`` instead
 - Removed deprecated method ``Science.scientific_article()``
