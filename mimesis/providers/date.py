@@ -2,12 +2,12 @@
 
 from calendar import monthrange, timegm
 from datetime import date, datetime, time, timedelta
-from typing import List, Optional
+from typing import List, Optional, Union
 
 from mimesis.compat import pytz
 from mimesis.data import GMT_OFFSETS, ROMAN_NUMS, TIMEZONES
 from mimesis.providers.base import BaseDataProvider
-from mimesis.typing import DateTime, Timestamp
+from mimesis.typing import Date, DateTime, Time
 from mimesis.utils import pull
 
 __all__ = ['Datetime']
@@ -173,60 +173,59 @@ class Datetime(BaseDataProvider):
         periodicity = self._data['periodicity']
         return self.random.choice(periodicity)
 
-    def date(self, start: int = 2000,
-             end: int = 2035, fmt: str = '') -> str:
-        """Generate a string representing of random date.
-
-        Date can be automatically formatted for the current
-        locale or specified.
+    def date(self, start: int = 2000, end: int = 2019) -> Date:
+        """Generate random date object.
 
         :param start: Minimum value of year.
         :param end: Maximum value of year.
-        :param fmt: Format string for date.
         :return: Formatted date.
-
-        :Example:
-
-        >>> dt = Datetime()
-        >>> date = dt.date()
-        >>> isinstance(date, str)
-        True
         """
+        year = self.random.randint(start, end)
+        month = self.random.randint(1, 12)
+        day = self.random.randint(1, monthrange(year, month)[1])
+        date_object = date(year, month, day)
+        return date_object
+
+    def formatted_date(self, fmt: str = '', **kwargs) -> str:
+        """Generate random date as string.
+
+        :param fmt: Format of date, if None then use standard
+            for accepted for current locale
+        :param kwargs: Keyword arguments for :meth:`~Datetime.date()`
+        :return: Formatted date.
+        """
+        date_obj = self.date(**kwargs)
+
         if not fmt:
             fmt = self._data['formats'].get('date')
 
-        year = self.random.randint(start, end)
-        month = self.random.randint(1, 12)
-        d = date(year, month, self.random.randint(
-            1, monthrange(year, month)[1]))
-        return d.strftime(fmt)
+        return date_obj.strftime(fmt)
 
-    def time(self, fmt: str = '') -> str:
-        """Generate a random time.
+    def time(self) -> Time:
+        """Generate a random time object.
 
-        Time can be automatically formatted for the current
-        locale or specified.
-
-        :param fmt: Format of time.
-        :return: Time.
-
-        :Example:
-
-        >>> dt = Datetime()
-        >>> _time = dt.time()
-        >>> isinstance(_time, str)
-        True
+        :return: ``datetime.time`` object.
         """
-        if not fmt:
-            fmt = self._data['formats'].get('time')
-
-        t = time(
+        random_time = time(
             self.random.randint(0, 23),
             self.random.randint(0, 59),
             self.random.randint(0, 59),
             self.random.randint(0, 999999),
         )
-        return t.strftime(fmt)
+        return random_time
+
+    def formatted_time(self, fmt: str = '') -> str:
+        """Generate string formatted time.
+
+        :param fmt: Format of time, if None then use standard
+            for accepted for current locale
+        :return: String formatted time.
+        """
+        time_obj = self.time()
+
+        if not fmt:
+            fmt = self._data['formats'].get('time')
+        return time_obj.strftime(fmt)
 
     def day_of_month(self) -> int:
         """Generate a random day of month, from 1 to 31.
@@ -270,59 +269,49 @@ class Datetime(BaseDataProvider):
         """
         return self.random.choice(GMT_OFFSETS)
 
-    def datetime(self, humanized: bool = False,
-                 timezone: Optional[str] = None, **kwargs) -> DateTime:
+    def datetime(self, start: int = 2000, end: int = 2035,
+                 timezone: Optional[str] = None) -> DateTime:
         """Generate random datetime.
 
-        :param timezone: Set custom timezone (pytz required)
-        :param humanized: Readable representation.
-        :param kwargs: Keyword arguments (start, end).
-        :return: Datetime.
-        :rtype: datetime.datetime
-
-        :Example:
-
-        >>> dt = Datetime()
-        >>> datetime_obj = dt.datetime()
-        >>> isinstance(datetime_obj, datetime)
-        True
+        :param start: Minimum value of year.
+        :param end: Maximum value of year.
+        :param timezone: Set custom timezone (pytz required).
+        :return: Datetime
         """
-        fmt = '%Y-%m-%d %H:%M:%S'
-        dt_str = '{date} {time}'.format(
-            date=self.date(fmt='%Y-%m-%d', **kwargs),
+        datetime_obj = datetime.combine(
+            date=self.date(start, end),
             time=self.time(),
         )
-
-        dt = datetime.strptime(dt_str, fmt)
-
         if timezone:
             if not pytz:
                 raise ImportError('Timezones are supported only with pytz')
             tz = pytz.timezone(timezone)
-            dt = tz.localize(dt)
+            datetime_obj = tz.localize(datetime_obj)
 
-        if humanized:
-            return dt.strftime('%B, %d %Y')
+        return datetime_obj
 
-        return dt
+    def formatted_datetime(self, fmt: str = '', **kwargs) -> str:
+        """Generate datetime string in human readable format.
 
-    def timestamp(self, posix: bool = True, **kwargs) -> Timestamp:
+        :param fmt: Custom format (default is format for current locale)
+        :param kwargs: Keyword arguments for :meth:`~Datetime.datetime()`
+        :return: Formatted datetime string.
+        """
+        dt_obj = self.datetime(**kwargs)
+
+        if not fmt:
+            date_fmt = self._data['formats'].get('date')
+            time_fmt = self._data['formats'].get('time')
+            fmt = '{} {}'.format(date_fmt, time_fmt)
+
+        return dt_obj.strftime(fmt)
+
+    def timestamp(self, posix: bool = True, **kwargs) -> Union[str, int]:
         """Generate random timestamp.
 
         :param posix: POSIX time.
-        :param kwargs: Keyword arguments (start, end).
+        :param kwargs: Kwargs for :meth:`~Datetime.datetime()`.
         :return: Timestamp.
-        :rtype: str or int
-
-        :Example:
-
-        >>> dt = Datetime()
-        >>> timestamp = dt.timestamp(posix=True)
-        >>> isinstance(timestamp, int)
-        True
-        >>> timestamp = dt.timestamp(posix=False)
-        >>> isinstance(timestamp, str)
-        True
         """
         stamp = self.datetime(**kwargs)
 

@@ -60,28 +60,22 @@ class TestDatetime(object):
         assert ((result >= 1) or (result <= 31))
 
     def test_date(self, dt):
-        result = dt.date(start=1999, end=1999, fmt='%m/%d/%Y')
+        date_object = dt.date(start=1999, end=1999)
+        assert isinstance(date_object, datetime.date)
+        assert date_object.year == 1999
 
-        result = datetime.datetime.strptime(result, '%m/%d/%Y')
-        assert result.year == 1999  # check range was applied correctly
-
-        date = dt.date(start=2018, end=2018)
-        result_fmt = datetime.datetime.strptime(
-            date, dt._data['formats']['date'],
-        )
-        assert result_fmt.year == 2018
+    def test_formatted_date(self, dt):
+        fmt_date = dt.formatted_date('%Y', start=2000, end=2000)
+        assert int(fmt_date) == 2000
+        assert isinstance(fmt_date, str)
 
     def test_time(self, dt):
         default = dt.time()
-        default = datetime.datetime.strptime(
-            default, dt._data['formats']['time'],
-        )
+        assert isinstance(default, datetime.time)
 
-        assert isinstance(default, datetime.datetime)
-
-        result = dt.time(fmt='%H:%M')
-        result = datetime.datetime.strptime(result, '%H:%M')
-        assert isinstance(result, datetime.datetime)
+    def test_formatted_time(self, dt):
+        default = dt.formatted_time()
+        assert isinstance(default, str)
 
     def test_century(self, _datetime):
         result = _datetime.century()
@@ -125,32 +119,32 @@ class TestDatetime(object):
         assert isinstance(result, _type)
 
     @pytest.mark.parametrize(
-        'start, end, humanized, timezone, _type', [
-            (2018, 2018, False, 'Europe/Paris', datetime.datetime),
-            (2018, 2018, True, '', str),
-            (2018, 2018, False, '', datetime.datetime),
+        'start, end, timezone', [
+            (2014, 2019, 'Europe/Paris'),
+            (2014, 2019, None),
         ],
     )
-    def test_datetime(self, _datetime, start, end, humanized, timezone, _type):
-        dt = _datetime.datetime(
-            start=start,
-            end=end,
-            humanized=humanized,
-            timezone=timezone,
-        )
-        assert dt is not None
-        assert isinstance(dt, _type)
+    def test_datetime(self, _datetime, start, end, timezone):
+        dt_obj = _datetime.datetime(start=start, end=end, timezone=timezone)
 
-        if isinstance(_type, str):
-            year = int(dt.split(' ')[2])
-            assert year == 2018
+        assert start <= dt_obj.year <= end
+        assert isinstance(dt_obj, datetime.datetime)
 
-        if humanized:
-            pass
-        elif timezone:
-            assert dt.tzinfo is not None
+        if timezone:
+            assert dt_obj.tzinfo is not None
         else:
-            assert dt.tzinfo is None
+            assert dt_obj.tzinfo is None
+
+    @pytest.mark.parametrize(
+        'start, end', [
+            (2018, 2018),
+            (2019, 2019),
+        ],
+    )
+    def test_formatted_datetime(self, _datetime, start, end):
+        dt_str = _datetime.formatted_date(fmt='%Y', start=start, end=end)
+        assert isinstance(dt_str, str)
+        assert start <= int(dt_str) <= end
 
     def test_week_date(self, _datetime):
         result = _datetime.week_date(start=2017, end=2018)
@@ -183,12 +177,19 @@ class TestSeededDatetime(object):
 
     def test_date(self, d1, d2):
         assert d1.date() == d2.date()
-        assert d1.date(start=1024, end=2048, fmt='%m/%d/%Y') == \
-               d2.date(start=1024, end=2048, fmt='%m/%d/%Y')
+        assert d1.date(start=1024, end=2048) == \
+               d2.date(start=1024, end=2048)
+
+    def test_formatted_date(self, d1, d2):
+        assert d1.formatted_date() == d2.formatted_date()
+        assert d1.formatted_date(start=1024, end=2048) == \
+               d2.formatted_date(start=1024, end=2048)
 
     def test_time(self, d1, d2):
         assert d1.time() == d2.time()
-        assert d1.time(fmt='%H:%M') == d2.time(fmt='%H:%M')
+
+    def test_formatted_time(self, d1, d2):
+        assert d1.formatted_time() == d2.formatted_time()
 
     def test_century(self, d1, d2):
         assert d1.century() == d2.century()
@@ -211,9 +212,8 @@ class TestSeededDatetime(object):
         assert d1.timestamp() == d2.timestamp()
         assert d1.timestamp(posix=False) == d2.timestamp(posix=False)
 
-    def test_datetime(self, d1, d2):
-        assert d1.datetime() == d2.datetime()
-        assert d1.datetime(humanized=True) == d2.datetime(humanized=True)
+    def test_formatted_datetime(self, d1, d2):
+        assert d1.formatted_date() == d2.formatted_date()
 
     def test_week_date(self, d1, d2):
         assert d1.week_date() == d2.week_date()

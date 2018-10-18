@@ -9,9 +9,23 @@ Please make sure that you're using Python 3.6 or higher or use previous versions
 - Completely annotated all functions
 - Updated data for locale ``pl``
 - Updated snils algorithm for ``RussiaSpecProvider``
+- Updated method ``Datetime().time()`` to return only ``datetime.time`` object
+- Updated method ``Datetime().date()`` to return only ``datetime.date`` object
+
+**Added**:
+
+- Added method ``formatted_time()``
+- Added method ``formatted_date()``
+- Added method ``formatted_datetime()``
+- Added generate KPP for ``RussiaSpecProvider``
+- Added support of timezones for ``Datetime().datetime()``
+- Added method to bulk create datetime objects (``Datetime().bulk_create_datetimes()``)
 
 **Removed**:
 
+- Removed deprecated argument ``fmt`` for ``Datetime().date()``, use ``Datetime().formatted_time()`` instead
+- Removed deprecated argument ``fmt`` for ``Datetime().time()``, use ``Datetime().formatted_time()`` instead
+- Removed deprecated argument ``humanize`` for ``Datetime().datetime()``, use ``Datetime().formatted_datetime()`` instead
 - Removed deprecated method ``Science.scientific_article()``
 - Removed deprecated method ``Structure().json()``, use ``schema.Schema()`` instead
 
@@ -19,12 +33,6 @@ Please make sure that you're using Python 3.6 or higher or use previous versions
 
 - Fixed bug with seed
 - Fixed issue with names on downloading images
-
-**Added**:
-
-- Added generate KPP for ``RussiaSpecProvider``
-- Added support of timezones for ``Datetime().datetime()``
-- Added method to bulk create datetime objects (``Datetime().bulk_create_datetimes()``)
 
 
 Version 2.1.0

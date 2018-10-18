@@ -9,6 +9,8 @@ __all__ = [
     'Bytes',
     'DateTime',
     'Timestamp',
+    'Time',
+    'Date',
     'Seed',
 ]
 
@@ -20,7 +22,11 @@ Size = _StrOrInt
 
 Bytes = bytes
 
-DateTime = Union[datetime.datetime, Any]
+DateTime = datetime.datetime
+
+Time = datetime.time
+
+Date = datetime.date
 
 Timestamp = _StrOrInt
 
