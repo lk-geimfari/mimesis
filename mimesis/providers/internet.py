@@ -1,5 +1,6 @@
 """Provides data related to internet."""
 
+import urllib.request
 from ipaddress import IPv6Address
 from typing import Optional, Union
 
@@ -127,7 +128,7 @@ class Internet(BaseDataProvider):
         return self.random.choice(EMOJI)
 
     @staticmethod
-    def image_placeholder(width: Union[int, str] = 1900,
+    def image_placeholder(width: Union[int, str] = 1920,
                           height: Union[int, str] = 1080) -> str:
         """Generate a link to the image placeholder.
 
@@ -139,7 +140,7 @@ class Internet(BaseDataProvider):
         return url.format(width=width, height=height)
 
     @staticmethod
-    def stock_image(width: Union[int, str] = 1900,
+    def stock_image(width: Union[int, str] = 1920,
                     height: Union[int, str] = 1080) -> str:
         """Generate random stock image hosted on Unsplash.
 
@@ -147,22 +148,25 @@ class Internet(BaseDataProvider):
         :param height: Height of the image.
         :return: Link to the image.
         """
-        url = 'https://source.unsplash.com/{width}x{height}'
-        return url.format(width=width, height=height)
+        url = 'https://source.unsplash.com/{width}x{height}'.format(
+            width=width,
+            height=height,
+        )
+        response = urllib.request.urlopen(url)
+        url = response.geturl()
+        return url
 
     @staticmethod
-    def image_by_keyword(keyword: Optional[str] = None) -> str:
+    def image_by_keyword(keyword: str = '') -> str:
         """Generate image by keyword.
 
         :param keyword: Keyword.
         :return: Link to image.
         """
-        url = 'https://source.unsplash.com/featured/?{keyword}'
-
-        if not keyword:
-            return 'https://source.unsplash.com/random'
-
-        return url.format(keyword=keyword)
+        url = 'https://source.unsplash.com/featured/?{}'.format(keyword)
+        response = urllib.request.urlopen(url)
+        url = response.geturl()
+        return url
 
     def hashtags(self, quantity: int = 4) -> Union[str, list]:
         """Generate a list of hashtags.
