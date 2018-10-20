@@ -145,7 +145,7 @@ class Internet(BaseDataProvider):
                     height: Union[int, str] = 1080,
                     keywords: Optional[List[str]] = None,
                     writable: bool = False) -> Union[str, bytes]:
-        """Generate random stock image hosted on Unsplash.
+        """Generate random stock image (JPEG) hosted on Unsplash.
 
         .. note:: This method required an active HTTP connection.
 
