@@ -312,7 +312,7 @@ class :class:`~mimesis.Internet()` methods with the help of function
 
     >>> net = Internet()
 
-    >>> url = net.stock_image(width=1920, height=1080)
+    >>> url = net.stock_image(width=1920, height=1080, keywords=['love', 'passion'])
     >>> download_image(url=url, save_path='/some/path/')
 
 

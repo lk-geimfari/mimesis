@@ -49,12 +49,14 @@ class TestInternet(object):
         result = net.image_placeholder(width=400, height=300)
         assert result is not None
 
-    def test_stock_image(self, net):
-        result = net.stock_image()
-        assert isinstance(result, str)
-
-    def test_image_by_keyword(self, net):
-        result = net.image_by_keyword(keyword='word')
+    @pytest.mark.parametrize(
+        'w, h, keywords', [
+            (900, 900, ['kids', 'girl', 'boy']),
+            (800, 800, ['love', 'passion', 'death']),
+        ],
+    )
+    def test_stock_image(self, net, w, h, keywords):
+        result = net.stock_image(width=w, height=h, keywords=keywords)
         assert isinstance(result, str)
 
     @pytest.mark.parametrize(

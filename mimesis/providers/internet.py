@@ -2,7 +2,7 @@
 
 import urllib.request
 from ipaddress import IPv6Address
-from typing import Optional, Union
+from typing import Optional, Union, List
 
 from mimesis.data import (EMOJI, HASHTAGS, HTTP_METHODS, HTTP_STATUS_CODES,
                           HTTP_STATUS_MSGS, NETWORK_PROTOCOLS, SUBREDDITS,
@@ -141,29 +141,25 @@ class Internet(BaseDataProvider):
 
     @staticmethod
     def stock_image(width: Union[int, str] = 1920,
-                    height: Union[int, str] = 1080) -> str:
+                    height: Union[int, str] = 1080,
+                    keywords: Optional[List[str]] = None) -> str:
         """Generate random stock image hosted on Unsplash.
 
         :param width: Width of the image.
         :param height: Height of the image.
+        :param keywords: List of search keywords.
         :return: Link to the image.
         """
-        url = 'https://source.unsplash.com/{width}x{height}'.format(
-            width=width,
-            height=height,
+        if keywords is not None:
+            keywords = ','.join(keywords)
+        else:
+            keywords = ''
+
+        url = 'https://source.unsplash.com/{}x{}?{}'.format(
+            width,
+            height,
+            keywords,
         )
-        response = urllib.request.urlopen(url)
-        url = response.geturl()
-        return url
-
-    @staticmethod
-    def image_by_keyword(keyword: str = '') -> str:
-        """Generate image by keyword.
-
-        :param keyword: Keyword.
-        :return: Link to image.
-        """
-        url = 'https://source.unsplash.com/featured/?{}'.format(keyword)
         response = urllib.request.urlopen(url)
         url = response.geturl()
         return url
@@ -173,7 +169,6 @@ class Internet(BaseDataProvider):
 
         :param quantity: The quantity of hashtags.
         :return: The list of hashtags.
-        :rtype: str or list
         :raises NonEnumerableError: if category is not in Hashtag.
 
         :Example:
