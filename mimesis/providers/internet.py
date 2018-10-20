@@ -160,13 +160,6 @@ class Internet(BaseDataProvider):
         url = 'https://source.unsplash.com/' \
               '{width}x{height}/?{category}'
 
-        if not category:
-            categories = [
-                'buildings', 'food', 'nature',
-                'people', 'technology', 'objects',
-            ]
-            category = self.random.choice(categories)
-
         return url.format(width=width, height=height, category=category)
 
     def image_by_keyword(self, keyword: str = '') -> str:

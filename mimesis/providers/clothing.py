@@ -12,9 +12,6 @@ class ClothingSize(BaseDataProvider):
         """Get a random size in international format.
 
         :return: Clothing size.
-
-        :Example:
-            XXL.
         """
         return self.random.choice(['L', 'M', 'S', 'XL',
                                    'XS', 'XXL', 'XXS', 'XXXL'])
@@ -23,9 +20,6 @@ class ClothingSize(BaseDataProvider):
         """Generate a random clothing size in European format.
 
         :return: Clothing size.
-
-        :Example:
-            42
         """
         return self.random.randint(38, 62)
 
@@ -35,8 +29,5 @@ class ClothingSize(BaseDataProvider):
         :param minimum: Minimum value.
         :param maximum: Maximum value.
         :return: Clothing size.
-
-        :Example:
-            44
         """
         return self.random.randint(minimum, maximum)

@@ -23,9 +23,6 @@ class Business(BaseDataProvider):
         """Get a random company name.
 
         :return: Company name.
-
-        :Example:
-            Gamma Systems.
         """
         return self.random.choice(self._data['company']['name'])
 
@@ -34,21 +31,16 @@ class Business(BaseDataProvider):
 
         :param abbr: Abbreviated company type.
         :return: Types of business entity.
-
-        :Example:
-            Incorporated.
         """
+        key = 'abbr' if abbr else 'title'
         return self.random.choice(
-            self._data['company']['type'].get('abbr' if abbr else 'title'),
+            self._data['company']['type'][key],
         )
 
     def copyright(self) -> str:  # noqa: A003
         """Generate a random copyright.
 
         :return: Copyright of company.
-
-        :Example:
-            © Komercia, Inc.
         """
         return '© {}, {}'.format(
             self.company(),
@@ -59,9 +51,6 @@ class Business(BaseDataProvider):
         """Get code of the currency.
 
         :return: Currency code.
-
-        :Example:
-            RUR.
         """
         return self.random.choice(CURRENCY_ISO_CODES)
 
@@ -83,9 +72,6 @@ class Business(BaseDataProvider):
         """Get a cryptocurrency symbol.
 
         :return: Symbol of cryptocurrency.
-
-        :Example:
-            Ƀ
         """
         return self.random.choice(CRYPTOCURRENCY_SYMBOLS)
 
@@ -96,9 +82,6 @@ class Business(BaseDataProvider):
         :param minimum: Max value of price.
         :param maximum: Min value of price.
         :return: Price.
-
-        :Example:
-            599.99 $.
         """
         price = self.random.uniform(minimum, maximum, precision=2)
         return '{0} {1}'.format(price, self.currency_symbol())
@@ -106,15 +89,9 @@ class Business(BaseDataProvider):
     def price_in_btc(self, minimum: float = 0, maximum: float = 2) -> str:
         """Generate random price in BTC.
 
-        :param minimum: Minimum value of price
+        :param minimum: Minimum value of price.
         :param maximum: Maximum value of price.
         :return: Price in BTC.
-
-        >>> from mimesis import Business
-        >>> provider  = Business()
-        >>> provider.price_in_btc(minimum=0.2456789,maximum=0.2456789)
-        '0.2456789 BTC'
-
         """
         return '{} BTC'.format(
             self.random.uniform(

@@ -35,7 +35,7 @@ class TestGeneric(object):
         assert result is not None
 
     def test_base_science(self, generic):
-        result = generic.science.scientific_article()
+        result = generic.science.chemical_element()
         assert result is not None
 
     def test_base_business(self, generic):
@@ -110,8 +110,9 @@ class TestSeededGeneric(object):
         assert g1.business.copyright() == g2.business.copyright()
 
     def test_generic_clothing_size(self, g1, g2):
-        assert g1.clothing_size.european_size() == \
-            g2.clothing_size.european_size()
+        s1 = g1.clothing_size.european_size()
+        s2 = g2.clothing_size.european_size()
+        assert s1 == s2
 
     def test_generic_code(self, g1, g2):
         assert g1.code.locale_code() == g2.code.locale_code()
@@ -126,7 +127,9 @@ class TestSeededGeneric(object):
         assert g1.datetime.day_of_week() == g2.datetime.day_of_week()
 
     def test_generic_development(self, g1, g2):
-        assert g1.development.container() == g2.development.container()
+        sl1 = g1.development.software_license()
+        sl2 = g2.development.software_license()
+        assert sl1 == sl2
 
     def test_generic_file(self, g1, g2):
         assert g1.file.size() == g2.file.size()

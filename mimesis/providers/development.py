@@ -1,7 +1,6 @@
 """Data related to the development."""
 
-from mimesis.data import (BACKEND, CONTAINER, FRONTEND, LICENSES, NOSQL, OS,
-                          PROGRAMMING_LANGS, SQL, VERSION_CONTROL_SYSTEMS)
+from mimesis.data import LICENSES, OS, PROGRAMMING_LANGS
 from mimesis.providers.base import BaseDataProvider
 
 __all__ = ['Development']
@@ -53,39 +52,6 @@ class Development(BaseDataProvider):
 
         return version
 
-    def database(self, nosql: bool = False) -> str:
-        """Get a random database name.
-
-        :param nosql: only NoSQL databases.
-        :return: Database name.
-
-        :Example:
-            PostgreSQL.
-        """
-        if nosql:
-            return self.random.choice(NOSQL)
-        return self.random.choice(SQL)
-
-    def container(self) -> str:
-        """Get a random containerization system.
-
-        :return: Containerization system.
-
-        :Example:
-            Docker.
-        """
-        return self.random.choice(CONTAINER)
-
-    def version_control_system(self) -> str:
-        """Get a random version control system.
-
-        :return: Version control system
-
-        :Example:
-            Git
-        """
-        return self.random.choice(VERSION_CONTROL_SYSTEMS)
-
     def programming_language(self) -> str:
         """Get a random programming language from the list.
 
@@ -95,26 +61,6 @@ class Development(BaseDataProvider):
             Erlang.
         """
         return self.random.choice(PROGRAMMING_LANGS)
-
-    def backend(self) -> str:
-        """Get a random backend stack.
-
-        :return: Stack.
-
-        :Example:
-            Elixir/Phoenix
-        """
-        return self.random.choice(BACKEND)
-
-    def frontend(self) -> str:
-        """Get a random front-end stack.
-
-        :return: Stack.
-
-        :Example:
-            JS/React.
-        """
-        return self.random.choice(FRONTEND)
 
     def os(self) -> str:
         """Get a random operating system or distributive name.

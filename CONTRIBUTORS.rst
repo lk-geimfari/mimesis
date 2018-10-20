@@ -68,6 +68,7 @@ Contributors
 -  Pavel Kasyanov `(RaidoS)`_
 -  Valentin Gorbachev `(Vlangf)`_
 -  Oleg Smedyuk `(conformist-mw)`_
+-  e-vandenberg `(e-vandenberg)`_
 -  Przemysław Pietras `(destag)`_
 -  Wiktor Matuszewski `(pywkm)`_
 
@@ -112,6 +113,7 @@ Contributors
 .. _(RaidoS): https://github.com/RaidoS
 .. _(Vlangf): https://github.com/Vlangf
 .. _(conformist-mw): https://github.com/conformist-mw
+.. _(e-vandenberg): https://github.com/e-vandenberg
 .. _(destag): https://github.com/destag
 .. _(pywkm): https://github.com/pywkm
 .. _(GustavoKatel): https://github.com/GustavoKatel

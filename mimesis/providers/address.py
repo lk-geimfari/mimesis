@@ -1,4 +1,8 @@
-"""Address data provider."""
+"""Address module.
+
+This module contains provider Address() and other utils which represents
+data related to location, such as street name, city, country and etc.
+"""
 
 from typing import Optional, Union
 
@@ -12,9 +16,13 @@ __all__ = ['Address']
 
 
 class Address(BaseDataProvider):
-    """Class for generate fake address data."""
+    """Class for generate fake address data.
 
-    def __init__(self, *args, **kwargs):
+    This object provides all the data related to
+    geographical location.
+    """
+
+    def __init__(self, *args, **kwargs) -> None:
         """Initialize attributes.
 
         :param locale: Current locale.
@@ -22,14 +30,33 @@ class Address(BaseDataProvider):
         super().__init__(*args, **kwargs)
         self._data = pull('address.json', self.locale)
 
+    @staticmethod
+    def _dd_to_dms(num: float, _type: str) -> str:
+        """Convert decimal number to DMS format.
+
+        :param num: Decimal number.
+        :param _type: Type of number.
+        :return: Number in DMS format.
+        """
+        degrees = int(num)
+        minutes = int((num - degrees) * 60)
+        seconds = (num - degrees - minutes / 60) * 3600.00
+        seconds = round(seconds, 3)
+        result = [abs(i) for i in (degrees, minutes, seconds)]
+
+        direction = ''
+        if _type == 'lg':
+            direction = 'W' if degrees < 0 else 'E'
+        elif _type == 'lt':
+            direction = 'S' if degrees < 0 else 'N'
+
+        return ('{}º{}\'{:.3f}"' + direction).format(*result)
+
     def street_number(self, maximum: int = 1400) -> str:
         """Generate a random street number.
 
         :param maximum: Maximum value.
         :return: Street number.
-
-        :Example:
-            134.
         """
         return str(self.random.randint(1, maximum))
 
@@ -37,9 +64,6 @@ class Address(BaseDataProvider):
         """Get a random street name.
 
         :return: Street name.
-
-        :Example:
-           Candlewood.
         """
         return self.random.choice(
             self._data['street']['name'])
@@ -48,9 +72,6 @@ class Address(BaseDataProvider):
         """Get a random street suffix.
 
         :return: Street suffix.
-
-        :Example:
-            Alley.
         """
         return self.random.choice(
             self._data['street']['suffix'])
@@ -59,9 +80,6 @@ class Address(BaseDataProvider):
         """Generate a random full address.
 
         :return: Full address.
-
-        :Example:
-            5 Central Sideline.
         """
         fmt = self._data['address_fmt']
 
@@ -79,7 +97,7 @@ class Address(BaseDataProvider):
                 self.random.choice(self._data['city']),
                 # Generate list of random integers
                 # in amount of 3, from 1 to 100.
-                *self.random.randints(3, 1, 100),
+                *self.random.randints(amount=3, a=1, b=100),
             )
 
         return fmt.format(
@@ -94,9 +112,6 @@ class Address(BaseDataProvider):
 
         :param abbr: Return ISO 3166-2 code.
         :return: Administrative district.
-
-        :Example:
-            Alabama.
         """
         return self.random.choice(
             self._data['state']['abbr' if abbr else 'name'])
@@ -104,35 +119,28 @@ class Address(BaseDataProvider):
     def region(self, *args, **kwargs) -> str:
         """Get a random region.
 
-        :param bool abbr: Return ISO 3166-2 code.
-        :return: State.
+        An alias for :meth:`~Address.state()`.
         """
         return self.state(*args, **kwargs)
 
     def province(self, *args, **kwargs) -> str:
         """Get a random province.
 
-        :param args: Arguments.
-        :param kwargs: Keyword arguments.
-        :return: Province.
+        An alias for :meth:`~Address.state()`.
         """
         return self.state(*args, **kwargs)
 
     def federal_subject(self, *args, **kwargs) -> str:
         """Get a random region.
 
-        :param args: Arguments.
-        :param kwargs: Keyword arguments.
-        :return: Federal subject.
+        An alias for :meth:`~Address.state()`.
         """
         return self.state(*args, **kwargs)
 
     def prefecture(self, *args, **kwargs) -> str:
         """Get a random prefecture.
 
-        :param args: Arguments.
-        :param kwargs: Keyword arguments.
-        :return: Prefecture.
+        An alias for :meth:`~Address.state()`.
         """
         return self.state(*args, **kwargs)
 
@@ -140,9 +148,6 @@ class Address(BaseDataProvider):
         """Generate a postal code for current locale.
 
         :return: Postal code.
-
-        :Example:
-            389213
         """
         return self.random.custom_code(
             self._data['postal_code_fmt'])
@@ -150,7 +155,7 @@ class Address(BaseDataProvider):
     def zip_code(self) -> str:
         """Generate a zip code.
 
-        An alias for method self.postal_code.
+        An alias for :meth:`~Address.postal_code()`.
 
         :return: Zip code.
         """
@@ -159,16 +164,13 @@ class Address(BaseDataProvider):
     def country_code(self, fmt: Optional[CountryCode] = CountryCode.A2) -> str:
         """Get a random code of country.
 
-        Default format (``fmt``) is ISO 3166-1-alpha2 (``CountryCode.A2``),
-        you can change it by passing parameter ``fmt``
-        with enum object ``CountryCode``.
+        Default format is :attr:`~enums.CountryCode.A2` (ISO 3166-1-alpha2),
+        you can change it by passing parameter ``fmt`` with enum object
+        :class:`~enums.CountryCode`.
 
         :param fmt: Enum object CountryCode.
         :return: Country code in selected format.
         :raises KeyError: if fmt is not supported.
-
-        :Example:
-            DE
         """
         key = self._validate_enum(fmt, CountryCode)
         return self.random.choice(COUNTRY_CODES[key])
@@ -177,9 +179,6 @@ class Address(BaseDataProvider):
         """Get a random country.
 
         :return: The Country.
-
-        :Example:
-            Russia.
         """
         return self.random.choice(
             self._data['country']['name'])
@@ -188,9 +187,6 @@ class Address(BaseDataProvider):
         """Get a random city.
 
         :return: City name.
-
-        :Example:
-            Saint Petersburg.
         """
         return self.random.choice(
             self._data['city'])
@@ -207,7 +203,7 @@ class Address(BaseDataProvider):
         result = self.random.uniform(*rng, precision=6)
 
         if dms:
-            return dd_to_dms(result, key)
+            return self._dd_to_dms(result, key)
 
         return result
 
@@ -216,9 +212,6 @@ class Address(BaseDataProvider):
 
         :param dms: DMS format.
         :return: Value of longitude.
-
-        :Example:
-            -66.421418
         """
         return self._get_fs('lt', dms)
 
@@ -227,9 +220,6 @@ class Address(BaseDataProvider):
 
         :param dms: DMS format.
         :return: Value of longitude.
-
-        :Example:
-            112.184402
         """
         return self._get_fs('lg', dms)
 
@@ -238,10 +228,6 @@ class Address(BaseDataProvider):
 
         :param dms: DMS format.
         :return: Dict with coordinates.
-
-        :Example:
-            {'latitude': 8.003968,
-            'longitude': 36.028111}
         """
         return {
             'longitude': self._get_fs('lg', dms),
@@ -253,9 +239,6 @@ class Address(BaseDataProvider):
 
         :param code: Return code of continent.
         :return: Continent name.
-
-        :Example:
-            Africa (en)
         """
         codes = CONTINENT_CODES if \
             code else self._data['continent']
@@ -266,34 +249,5 @@ class Address(BaseDataProvider):
         """Get a random calling code of random country.
 
         :return: Calling code.
-
-        :Example:
-            +7
         """
         return self.random.choice(CALLING_CODES)
-
-
-# ==========================================#
-# INTERNAL FUNCTIONS OF PROVIDER <ADDRESS>  #
-# ==========================================#
-
-def dd_to_dms(num: float, _type: str) -> str:
-    """Convert decimal number to DMS format.
-
-    :param num: Decimal number.
-    :param _type: Type of number.
-    :return: Number in DMS format.
-    """
-    degrees = int(num)
-    minutes = int((num - degrees) * 60)
-    seconds = (num - degrees - minutes / 60) * 3600.00
-    seconds = round(seconds, 3)
-    result = [abs(i) for i in (degrees, minutes, seconds)]
-
-    direction = ''
-    if _type == 'lg':
-        direction = 'W' if degrees < 0 else 'E'
-    elif _type == 'lt':
-        direction = 'S' if degrees < 0 else 'N'
-
-    return ('{}º{}\'{:.3f}"' + direction).format(*result)

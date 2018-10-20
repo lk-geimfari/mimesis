@@ -1,20 +1,5 @@
 """Provides all the data related to the development."""
 
-CONTAINER = [
-    'Docker',
-    'Rkt',
-    'LXC',
-    'Vagrant',
-    'OpenVZ',
-    'Kubernetes',
-]
-
-VERSION_CONTROL_SYSTEMS = [
-    'Git',
-    'Mercurial',
-    'Subversion',
-]
-
 LICENSES = [
     'Apache License, 2.0 (Apache-2.0)',
     'The BSD 3-Clause License',
@@ -90,98 +75,6 @@ PROGRAMMING_LANGS = [
     'Z shell',
 ]
 
-NOSQL = [
-    'Aerospike',
-    'Aerospike',
-    'AllegroGraph',
-    'Apache Cassandra',
-    'CouchDB',
-    'Couchbase',
-    'Hyperdex',
-    'InfiniteGraph',
-    'MUMPS',
-    'MemcacheDB',
-    'Memcached',
-    'MongoDB',
-    'Neo4J',
-    'Redis',
-    'RethinkDB',
-    'Riak',
-]
-
-SQL = [
-    'MariaDB',
-    'MySQL',
-    'PostgreSQL',
-    'Oracle DB',
-    'SQLite',
-    'DB2',
-]
-
-BACKEND = [
-    'C#/ASP.NET',
-    'Java',
-    'Java/Tapestry',
-    'Go/Beego',
-    'Python/Bottle',
-    'Python/CherryPy',
-    'Erlang',
-    'Erlang/ChicagoBoss',
-    'Erlang/Cowboy',
-    'Clojure',
-    'Django',
-    'Python/Django',
-    'Python/Flask/Gunicorn',
-    'Elixir/Phoenix',
-    'Node/Express',
-    'Python/Falcon',
-    'Python/Flask',
-    'Go/Gin',
-    'Go/Martini',
-    'Go/Gorilla',
-    'Groovy/Grails',
-    'PHP/Laravel',
-    'Java/Ninja',
-    'PHP/Yii 2',
-    'Pyramid',
-    'Python/Pyramid',
-    'Python/SQLAlchemy',
-    'Python/Twisted',
-    'Python/web2py',
-    'Go/Revel',
-    'Ruby on Rails',
-    'Ruby/Sinatra',
-    'Java/Spring',
-    'PHP/Symfony',
-    'Python/Tornado',
-    'PHP/Zend Framework',
-]
-
-FRONTEND = [
-    'JavaScript/Angular 2',
-    'JavaScript/Backbone',
-    'Gulp/Bower/Sass',
-    'JS/HTML/CSS/Canvas/SVG',
-    'JavaScript/Ember',
-    'JavaScript/React',
-    'JavaScript/React/Redux',
-    'JavaScript/React/Redux/Flux',
-    'JS/HTML/CSS',
-    'JavaScript/Highcharts.js',
-    'JS/Twitter Bootstrap',
-    'React/Canvas/SVG',
-    'React/D3.js',
-    'React/Redux/Babel',
-    'JavaScript/Reflux/Redux',
-    'JS/Sass/Less/Gulp',
-    'Stylus/Sass/Webpack',
-    'JavaScript/Vue',
-    'JavaScript/jQuery',
-    'TypeScript/React',
-    'TypeScript/CSS/HTML',
-    'Webpack/Grunt/PostCSS',
-]
-
 OS = [
     'Arch',
     'CentOS',
@@ -194,6 +87,7 @@ OS = [
     'Manjaro',
     'Mint',
     'OS X',
+    'macOS',
     'OpenBSD',
     'PCLinuxOS',
     'Slackware',

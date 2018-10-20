@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import json
+
 import re
 
 import pytest
@@ -49,21 +49,6 @@ class TestStructure(object):
         assert result[0] == '<'  # tag is enclosed
         assert result[-1] == '>'  # tag is enclosed
 
-    def test_json(self, structure):
-        result = structure.json(items=3, max_depth=4)
-        assert isinstance(result, str)
-
-        # Is valid json and root element is container with three items
-        data = json.loads(result)
-        assert isinstance(data, (dict, list))
-        assert len(data) == 3
-
-        # Recursive returns python object, not JSON and
-        # maximum depth of three elements
-        result = structure.json(items=3, max_depth=4, recursive=True)
-        assert isinstance(result, (dict, list))
-        assert self.depth(result) <= 4
-
 
 class TestSeededStructure(object):
 
@@ -84,12 +69,7 @@ class TestSeededStructure(object):
     def test_html_attribute_value(self, s1, s2):
         assert s1.html_attribute_value() == s2.html_attribute_value()
         assert s1.html_attribute_value(tag='p', attribute='class') == \
-            s2.html_attribute_value(tag='p', attribute='class')
+               s2.html_attribute_value(tag='p', attribute='class')
 
     def test_html(self, s1, s2):
         assert s1.html() == s2.html()
-
-    def test_json(self, s1, s2):
-        assert s1.json() == s2.json()
-        assert s1.json(items=2, max_depth=4, recursive=True) == \
-            s2.json(items=2, max_depth=4, recursive=True)

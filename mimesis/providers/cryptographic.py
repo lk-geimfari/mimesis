@@ -37,7 +37,10 @@ class Cryptographic(BaseDataProvider):
     def hash(self, algorithm: Optional[Algorithm] = None) -> str:  # noqa: A003
         """Generate random hash.
 
-        :param algorithm: Enum object ``Algorithm``.
+        To change hashing algorithm, pass parameter ``algorithm``
+        with needed value of the enum object :class:`~mimesis.enums.Algorithm`
+
+        :param algorithm: Enum object :class:`~mimesis.enums.Algorithm`.
         :return: Hash.
         :raises NonEnumerableError: if algorithm is not supported.
         """
@@ -48,14 +51,13 @@ class Cryptographic(BaseDataProvider):
             return fn(self.uuid().encode()).hexdigest()
 
     def bytes(self, entropy: int = 32) -> Bytes:  # noqa: A003
-        """Generate byte string containing *entropy* bytes.
+        """Generate byte string containing ``entropy`` bytes.
 
-        The string has *entropy* random bytes, each byte
+        The string has ``entropy`` random bytes, each byte
         converted to two hex digits.
 
         :param entropy: Number of bytes.
         :return: Bytes.
-        :rtype: bytes
         """
         return bytes(self.random.getrandbits(8)
                      for _ in range(entropy))

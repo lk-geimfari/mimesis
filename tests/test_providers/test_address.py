@@ -8,7 +8,6 @@ from mimesis import Address
 from mimesis.data import CALLING_CODES, CONTINENT_CODES, COUNTRY_CODES
 from mimesis.enums import CountryCode
 from mimesis.exceptions import NonEnumerableError
-from mimesis.providers import address as address_module
 
 from . import patterns
 
@@ -184,7 +183,7 @@ class TestSeededAddress(object):
     def test_street_number(self, a1, a2):
         assert a1.street_number() == a2.street_number()
         assert a1.street_number(maximum=42) == \
-            a2.street_number(maximum=42)
+               a2.street_number(maximum=42)
 
     def test_latitude(self, a1, a2):
         assert a1.latitude() == a2.latitude()
@@ -220,7 +219,7 @@ class TestSeededAddress(object):
     def test_country_iso(self, a1, a2):
         assert a1.country_code() == a2.country_code()
         assert a1.country_code(fmt=CountryCode.A3) == \
-            a2.country_code(fmt=CountryCode.A3)
+               a2.country_code(fmt=CountryCode.A3)
 
     def test_city(self, a1, a2):
         assert a1.city() == a2.city()
@@ -239,5 +238,5 @@ class TestSeededAddress(object):
         ([-110.424307, 'lg'], '110º25\'27.505"W'),
     ],
 )
-def test_dd_to_dms(fn_args, dms):
-    assert address_module.dd_to_dms(*fn_args) == dms
+def test_dd_to_dms(address, fn_args, dms):
+    assert address._dd_to_dms(*fn_args) == dms

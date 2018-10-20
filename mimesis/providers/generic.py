@@ -1,7 +1,7 @@
 """Provides all at one."""
 
 import inspect
-from typing import List
+from typing import Any, Callable, List
 
 from mimesis.providers.address import Address
 from mimesis.providers.base import BaseDataProvider
@@ -25,6 +25,7 @@ from mimesis.providers.structure import Structure
 from mimesis.providers.text import Text
 from mimesis.providers.transport import Transport
 from mimesis.providers.units import UnitSystem
+from mimesis.typing import Seed
 
 __all__ = ['Generic']
 
@@ -32,7 +33,7 @@ __all__ = ['Generic']
 class Generic(BaseDataProvider):
     """Class which contain all providers at one."""
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs) -> None:
         """Initialize attributes lazily.
 
         :param args: Arguments.
@@ -61,17 +62,18 @@ class Generic(BaseDataProvider):
         self.cryptographic = Cryptographic(seed=self.seed)
         self.structure = Structure(seed=self.seed)
 
-    def __getattr__(self, attrname: str):
+    def __getattr__(self, attrname: str) -> Any:
         """Get attribute without underscore.
 
         :param attrname: Attribute name.
         :return: An attribute.
         """
-        attribute = object.__getattribute__(self, '_' + attrname)
+        attribute = object.__getattribute__(
+            self, '_' + attrname)
         if attribute and callable(attribute):
             self.__dict__[attrname] = attribute(
-                locale=self.locale,
-                seed=self.seed,
+                self.locale,
+                self.seed,
             )
             return self.__dict__[attrname]
 

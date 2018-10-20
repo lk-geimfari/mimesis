@@ -28,7 +28,7 @@ clean-pyc:
 
 .PHONY: docs
 docs:
-	cd docs && make html && cd .. && sensible-browser docs/_build/html/index.html
+	cd docs && make html
 
 
 .PHONY: clean-build

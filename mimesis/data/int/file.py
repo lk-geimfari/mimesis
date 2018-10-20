@@ -501,7 +501,7 @@ MIME_TYPES = {
         'application/vnd.desmume.movie',
         'application/vnd.dir-bi.plate-dl-nosuffix',
         'application/vnd.dm.delegation+xml',
-        'application/vnd.dna',
+        'application/vnd.dna_sequence',
         'application/vnd.document+json',
         'application/vnd.dolby.mobile.1',
         'application/vnd.dolby.mobile.2',

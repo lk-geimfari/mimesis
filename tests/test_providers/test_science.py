@@ -23,10 +23,6 @@ class TestScience(object):
         result = default_science.math_formula()
         assert result in MATH_FORMULAS
 
-    def test_scientific_article(self, science):
-        result = science.scientific_article()
-        assert result in science._data['article']
-
     def test_chemical_element(self, science):
         # Some issues with Farsi
         if science.get_current_locale() != 'fa':
@@ -41,13 +37,13 @@ class TestScience(object):
         assert isinstance(result, int)
         assert result <= 119
 
-    def test_rna(self, default_science):
-        result = default_science.rna(length=10)
+    def test_rna_sequence(self, default_science):
+        result = default_science.rna_sequence(length=10)
         assert isinstance(result, str)
         assert len(result) == 10
 
-    def test_dna(self, default_science):
-        result = default_science.dna(length=10)
+    def test_dna_sequence(self, default_science):
+        result = default_science.dna_sequence(length=10)
         assert isinstance(result, str)
         assert len(result) == 10
 
@@ -65,21 +61,18 @@ class TestSeededScience(object):
     def test_math_formula(self, s1, s2):
         assert s1.math_formula() == s2.math_formula()
 
-    def test_scientific_article(self, s1, s2):
-        assert s1.scientific_article() == s2.scientific_article()
-
     def test_chemical_element(self, s1, s2):
         assert s1.chemical_element() == s2.chemical_element()
         assert s1.chemical_element(name_only=True) == \
-            s2.chemical_element(name_only=True)
+               s2.chemical_element(name_only=True)
 
     def test_atomic_number(self, s1, s2):
         assert s1.atomic_number() == s2.atomic_number()
 
-    def test_rna(self, s1, s2):
-        assert s1.rna() == s2.rna()
-        assert s1.rna(length=22) == s2.rna(length=22)
+    def test_rna_sequence(self, s1, s2):
+        assert s1.rna_sequence() == s2.rna_sequence()
+        assert s1.rna_sequence(length=22) == s2.rna_sequence(length=22)
 
-    def test_dna(self, s1, s2):
-        assert s1.dna() == s2.dna()
-        assert s1.dna(length=10) == s2.dna(length=10)
+    def test_dna_sequence(self, s1, s2):
+        assert s1.dna_sequence() == s2.dna_sequence()
+        assert s1.dna_sequence(length=10) == s2.dna_sequence(length=10)

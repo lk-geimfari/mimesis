@@ -24,8 +24,7 @@ from enum import Enum
 class PortRange(Enum):
     """Represents port ranges.
 
-    Value for a method ``Internet.port()`` which
-    takes parameter ``port_range``.
+    An argument for :meth:`~mimesis.Internet.port()`.
     """
 
     ALL = (1, 65535)
@@ -37,7 +36,7 @@ class PortRange(Enum):
 class Gender(Enum):
     """Represents genders.
 
-    Value for a lot of methods which
+    An argument for a lot of methods which
     takes argument ``gender``.
     """
 
@@ -48,8 +47,7 @@ class Gender(Enum):
 class TitleType(Enum):
     """Represents title types.
 
-    Value for a method ``Person.title()`` which
-    takes parameter``title_type``.
+    An argument for :meth:`~mimesis.Person.title()`.
     """
 
     TYPICAL = 'typical'
@@ -57,10 +55,9 @@ class TitleType(Enum):
 
 
 class CardType(Enum):
-    """Provides cart types.
+    """Provides credit card types.
 
-    Value for a method ``Payment.credit_card_number()`` which
-    takes parameter ``card_type``.
+    An argument for :meth:`~mimesis.Payment.credit_card_number()`.
     """
 
     MASTER_CARD = 'MasterCard'
@@ -69,10 +66,7 @@ class CardType(Enum):
 
 
 class Algorithm(Enum):
-    """Provides algorithms which available.
-
-    Value for methods which take argument ``algorithm``.
-    """
+    """Provides algorithms which available."""
 
     MD5 = 'md5'
     SHA1 = 'sha1'
@@ -85,8 +79,7 @@ class Algorithm(Enum):
 class TLDType(Enum):
     """Provides top level domain types.
 
-    Value for a method ``Internet.top_level_domain()``
-    which takes parameter ``tld_type``.
+    An argument for :meth:`~mimesis.Internet.top_level_domain()`.
     """
 
     CCTLD = 'cctld'
@@ -99,8 +92,7 @@ class TLDType(Enum):
 class Layer(Enum):
     """Provides network protocol layers.
 
-    Value for method ``Internet.network_protocol()`` which
-    takes parameter ``layer``.
+    An argument for :meth:`~mimesis.Internet.network_protocol()`.
     """
 
     APPLICATION = 'application'
@@ -113,10 +105,7 @@ class Layer(Enum):
 
 
 class FileType(Enum):
-    """Provides file types.
-
-    Value for methods which takes parameter ``file_type``.
-    """
+    """Provides file types."""
 
     SOURCE = 'source'
     TEXT = 'text'
@@ -131,8 +120,7 @@ class FileType(Enum):
 class MimeType(Enum):
     """Provides common mime types.
 
-    Value for method ``File.mime_type()`` which
-    takes parameter ``type_``.
+    An argument for :meth:`~mimesis.File.mime_type()`.
     """
 
     APPLICATION = 'application'
@@ -146,8 +134,7 @@ class MimeType(Enum):
 class PrefixSign(Enum):
     """Provides prefix signs.
 
-    Value for method ``UnitSystem.prefix()`` which
-    takes parameter ``sign``.
+    An argument for :meth:`~mimesis.UnitSystem.prefix()``.
     """
 
     POSITIVE = 'positive'
@@ -157,8 +144,7 @@ class PrefixSign(Enum):
 class CountryCode(Enum):
     """Provides types of country codes.
 
-    Value for method ``Address.country_code()`` which
-    takes parameter ``fmt``.
+    An argument for :meth:`~mimesis.Address.country_code()`.
     """
 
     A2 = 'a2'
@@ -171,8 +157,7 @@ class CountryCode(Enum):
 class ISBNFormat(Enum):
     """Provides formats of ISBN.
 
-    Value for method ``Code.isbn()`` which
-    takes parameter ``fmt``.
+    An argument for :meth:`~mimesis.Code.isbn()`.
     """
 
     ISBN13 = 'isbn-13'
@@ -182,8 +167,7 @@ class ISBNFormat(Enum):
 class EANFormat(Enum):
     """Provides formats of EAN.
 
-    Value for method ``Code.ean()`` which
-    takes parameter ``fmt``.
+    An argument for :meth:`~mimesis.Code.ean()`.
     """
 
     EAN8 = 'ean-8'
@@ -193,8 +177,7 @@ class EANFormat(Enum):
 class SocialNetwork(Enum):
     """Provides most popular social networks.
 
-    Value for method ``Person.social_media_profile()`` which
-    takes parameter ``site``.
+    An argument for :meth:`~mimesis.Person.social_media_profile()``.
     """
 
     FACEBOOK = 'facebook'
@@ -206,8 +189,7 @@ class SocialNetwork(Enum):
 class UnitName(Enum):
     """Provide unit names.
 
-    Value for method ``UnitSystem.unit()`` which
-    takes parameter ``name``.
+    An argument for :meth:`~mimesis.UnitSystem.unit()`.
     """
 
     MASS = ('gram', 'gr')

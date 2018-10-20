@@ -1,3 +1,52 @@
+Version 2.2.0
+-------------
+
+.. note:: This release (2.2.0) contains some breaking changes in API.
+
+.. note:: In this release (2.2.0) we've reject support of Python 3.5.
+
+**Updated**:
+
+- Updated data for locale ``pl``
+- Updated snils algorithm for ``RussiaSpecProvider``
+- Updated method ``Datetime().time()`` to return only ``datetime.time`` object
+- Updated method ``Datetime().date()`` to return only ``datetime.date`` object
+- Completely annotated all functions
+
+**Renamed**:
+
+- Renamed ``Science().dna()`` to ``Science().dna_sequence()``
+- Renamed ``Science().rna()`` to ``Science().rna_sequence()``
+
+**Added**:
+
+- Added method ``formatted_time()``
+- Added method ``formatted_date()``
+- Added method ``formatted_datetime()``
+- Added support of timezones for ``Datetime().datetime()``
+- Added method to bulk create datetime objects: ``Datetime().bulk_create_datetimes()``
+- Added generate KPP for ``RussiaSpecProvider``
+
+**Removed**:
+
+- Removed deprecated argument ``fmt`` for ``Datetime().date()``, use ``Datetime().formatted_date()`` instead
+- Removed deprecated argument ``fmt`` for ``Datetime().time()``, use ``Datetime().formatted_time()`` instead
+- Removed deprecated argument ``humanize`` for ``Datetime().datetime()``, use ``Datetime().formatted_datetime()`` instead
+- Removed deprecated method ``Science.scientific_article()``
+- Removed deprecated method ``Structure().json()``, use ``schema.Schema()`` instead
+- Removed deprecated and useless method: ``Development().backend()``
+- Removed deprecated and useless method: ``Development().frontend()``
+- Removed deprecated and useless method: ``Development().version_control_system()``
+- Removed deprecated and useless method: ``Development().container()``
+- Removed deprecated and useless method: ``Development().database()``
+
+
+**Fixed**:
+
+- Fixed bug with seed
+- Fixed issue with names on downloading images
+
+
 Version 2.1.0
 -------------
 

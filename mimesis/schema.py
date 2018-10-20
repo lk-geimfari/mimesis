@@ -21,8 +21,9 @@ class AbstractField(StrMixin):
     and the ``**kwargs`` of the method:
 
     >>> _ = AbstractField('en', 0xf)
-    >>> _('full_name')
-    'Jack Allison'
+    >>> surname = _('surname')
+    >>> isinstance(surname, str)
+    True
     """
 
     def __init__(self, locale: str = 'en',
