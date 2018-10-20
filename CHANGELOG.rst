@@ -34,13 +34,12 @@ Version 2.2.0
 - Removed deprecated argument ``humanize`` for ``Datetime().datetime()``, use ``Datetime().formatted_datetime()`` instead
 - Removed deprecated method ``Science.scientific_article()``
 - Removed deprecated method ``Structure().json()``, use ``schema.Schema()`` instead
-- Removed deprecated and useless method:
-- Removed deprecated and useless method:
-- Removed deprecated and useless method:
-- Removed deprecated and useless method:
-- Removed deprecated and useless method:
-- Removed deprecated and useless method:
-- Removed deprecated and useless method: ``backend``, ``frontend``, ``version_control_system``, ``container``, ``database``
+- Removed deprecated and useless method: ``Development().backend()``
+- Removed deprecated and useless method: ``Development().frontend()``
+- Removed deprecated and useless method: ``Development().version_control_system()``
+- Removed deprecated and useless method: ``Development().container()``
+- Removed deprecated and useless method: ``Development().database()``
+
 
 **Fixed**:
 
