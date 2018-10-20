@@ -39,6 +39,7 @@ Version 2.2.0
 - Removed deprecated and useless method: ``Development().version_control_system()``
 - Removed deprecated and useless method: ``Development().container()``
 - Removed deprecated and useless method: ``Development().database()``
+- Removed argument ``category`` for ``Internet().stock_image()``, use ``Internet().image_by_keyword()`` instead
 
 
 **Fixed**:

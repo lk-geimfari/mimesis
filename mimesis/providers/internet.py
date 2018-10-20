@@ -11,7 +11,6 @@ from mimesis.enums import Layer, MimeType, PortRange, TLDType
 from mimesis.exceptions import NonEnumerableError
 from mimesis.providers.base import BaseDataProvider
 from mimesis.providers.file import File
-from mimesis.typing import Size
 
 __all__ = ['Internet']
 
@@ -127,56 +126,41 @@ class Internet(BaseDataProvider):
         """
         return self.random.choice(EMOJI)
 
-    def image_placeholder(self, width: Optional[Size] = None,
-                          height: Optional[Size] = None) -> str:
+    @staticmethod
+    def image_placeholder(width: Union[int, str] = 1900,
+                          height: Union[int, str] = 1080) -> str:
         """Generate a link to the image placeholder.
 
         :param width: Width of image.
-        :type width: str or int
         :param height: Height of image.
-        :type height: str or int
         :return: URL to image placeholder.
         """
         url = 'http://placehold.it/{width}x{height}'
-        if not width:
-            width = self.random.randint(16, 1024)
-
-        if not height:
-            height = self.random.randint(16, int(width))
-
         return url.format(width=width, height=height)
 
-    def stock_image(self, width: Size = 1900,
-                    height: Size = 1080, category: str = '') -> str:
+    @staticmethod
+    def stock_image(width: Union[int, str] = 1900,
+                    height: Union[int, str] = 1080) -> str:
         """Generate random stock image hosted on Unsplash.
 
-        :param category: Category of images.
         :param width: Width of the image.
-        :type width: str or int
         :param height: Height of the image.
-        :type height: str or int
-        :return: An image (Link to image).
+        :return: Link to the image.
         """
-        url = 'https://source.unsplash.com/' \
-              '{width}x{height}/?{category}'
+        url = 'https://source.unsplash.com/{width}x{height}'
+        return url.format(width=width, height=height)
 
-        return url.format(width=width, height=height, category=category)
-
-    def image_by_keyword(self, keyword: str = '') -> str:
+    @staticmethod
+    def image_by_keyword(keyword: Optional[str] = None) -> str:
         """Generate image by keyword.
 
         :param keyword: Keyword.
         :return: Link to image.
         """
-        url = 'https://source.unsplash.com/weekly?{keyword}'
+        url = 'https://source.unsplash.com/featured/?{keyword}'
 
         if not keyword:
-            keywords = [
-                'cat', 'girl', 'boy', 'beauty',
-                'nature', 'woman', 'man', 'tech',
-                'space',
-            ]
-            keyword = self.random.choice(keywords)
+            return 'https://source.unsplash.com/random'
 
         return url.format(keyword=keyword)
 
