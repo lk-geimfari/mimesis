@@ -1,5 +1,6 @@
 """Provides data related to internet."""
 
+import urllib.error
 import urllib.request
 from ipaddress import IPv6Address
 from typing import Optional, Union, List
@@ -142,12 +143,16 @@ class Internet(BaseDataProvider):
     @staticmethod
     def stock_image(width: Union[int, str] = 1920,
                     height: Union[int, str] = 1080,
-                    keywords: Optional[List[str]] = None) -> str:
+                    keywords: Optional[List[str]] = None,
+                    writable: bool = False) -> Union[str, bytes]:
         """Generate random stock image hosted on Unsplash.
+
+        .. note:: This method required an active HTTP connection.
 
         :param width: Width of the image.
         :param height: Height of the image.
         :param keywords: List of search keywords.
+        :param writable: Return image as sequence ob bytes.
         :return: Link to the image.
         """
         api = 'https://source.unsplash.com/{}x{}?{}'
@@ -158,9 +163,16 @@ class Internet(BaseDataProvider):
             keywords = ''
 
         url = api.format(width, height, keywords)
-        response = urllib.request.urlopen(url)
-        url = response.geturl()
-        return url
+
+        try:
+            response = urllib.request.urlopen(url)
+            if writable:
+                return response.read()
+            url = response.geturl()
+            return url
+        except urllib.error.URLError:
+            raise urllib.error.URLError(
+                'Required an active HTTP connection')
 
     def hashtags(self, quantity: int = 4) -> Union[str, list]:
         """Generate a list of hashtags.

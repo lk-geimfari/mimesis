@@ -50,14 +50,20 @@ class TestInternet(object):
         assert result is not None
 
     @pytest.mark.parametrize(
-        'w, h, keywords', [
-            (900, 900, ['kids', 'girl', 'boy']),
-            (800, 800, ['love', 'passion', 'death']),
+        'w, h, keywords, writable, res_type', [
+            (900, 900, ['love', 'passion', 'death'], False, str),
+            (800, 800, ['love', 'passion', 'death'], False, str),
+            (700, 700, ['love', 'passion', 'death'], True, bytes),
         ],
     )
-    def test_stock_image(self, net, w, h, keywords):
-        result = net.stock_image(width=w, height=h, keywords=keywords)
-        assert isinstance(result, str)
+    def test_stock_image(self, net, w, h, keywords, writable, res_type):
+        result = net.stock_image(
+            width=w,
+            height=h,
+            keywords=keywords,
+            writable=writable,
+        )
+        assert isinstance(result, res_type)
 
     @pytest.mark.parametrize(
         'layer', [
