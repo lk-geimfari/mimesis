@@ -150,16 +150,14 @@ class Internet(BaseDataProvider):
         :param keywords: List of search keywords.
         :return: Link to the image.
         """
+        api = 'https://source.unsplash.com/{}x{}?{}'
+
         if keywords is not None:
             keywords = ','.join(keywords)
         else:
             keywords = ''
 
-        url = 'https://source.unsplash.com/{}x{}?{}'.format(
-            width,
-            height,
-            keywords,
-        )
+        url = api.format(width, height, keywords)
         response = urllib.request.urlopen(url)
         url = response.geturl()
         return url
