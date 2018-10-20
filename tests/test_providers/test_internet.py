@@ -193,9 +193,6 @@ class TestSeededInternet(object):
         assert i1.image_placeholder(width=128, height=128) == \
                i2.image_placeholder(width=128, height=128)
 
-    def test_stock_image(self, i1, i2):
-        assert i1.stock_image() == i2.stock_image()
-
     def test_network_protocol(self, i1, i2):
         assert i1.network_protocol() == i2.network_protocol()
         assert i1.network_protocol(layer=Layer.PHYSICAL) == \
