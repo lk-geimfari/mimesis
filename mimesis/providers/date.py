@@ -139,8 +139,8 @@ class Datetime(BaseDataProvider):
     def formatted_date(self, fmt: str = '', **kwargs) -> str:
         """Generate random date as string.
 
-        :param fmt: Format of date, if None then use standard
-            for accepted for current locale
+        :param fmt: The format of date, if None then use standard
+            accepted in the current locale.
         :param kwargs: Keyword arguments for :meth:`~Datetime.date()`
         :return: Formatted date.
         """
@@ -167,8 +167,8 @@ class Datetime(BaseDataProvider):
     def formatted_time(self, fmt: str = '') -> str:
         """Generate string formatted time.
 
-        :param fmt: Format of time, if None then use standard
-            for accepted for current locale
+        :param fmt: The format of time, if None then use standard
+            accepted in the current locale.
         :return: String formatted time.
         """
         time_obj = self.time()
