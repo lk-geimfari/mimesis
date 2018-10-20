@@ -49,21 +49,13 @@ class TestInternet(object):
         result = net.image_placeholder(width=400, height=300)
         assert result is not None
 
-    @pytest.mark.parametrize(
-        'width, height, wh', [
-            (1920, 1080, '1920x1080'),
-            (800, 800, '800x800'),
-        ],
-    )
-    def test_stock_image(self, net, width, height, wh):
-        result = net.stock_image(width=width, height=height)
-        assert wh in result
+    def test_stock_image(self, net):
+        result = net.stock_image()
+        assert isinstance(result, str)
 
     def test_image_by_keyword(self, net):
-        result = net.image_by_keyword(keyword='word').split('/')[-1]
-        assert 'word' == result.split('?')[1]
-        default = net.image_by_keyword()
-        assert isinstance(default, str)
+        result = net.image_by_keyword(keyword='word')
+        assert isinstance(result, str)
 
     @pytest.mark.parametrize(
         'layer', [
@@ -203,11 +195,6 @@ class TestSeededInternet(object):
 
     def test_stock_image(self, i1, i2):
         assert i1.stock_image() == i2.stock_image()
-
-    def test_image_by_keyword(self, i1, i2):
-        assert i1.image_by_keyword() == i2.image_by_keyword()
-        assert i1.image_by_keyword(keyword='food') == \
-               i2.image_by_keyword(keyword='food')
 
     def test_network_protocol(self, i1, i2):
         assert i1.network_protocol() == i2.network_protocol()
