@@ -106,7 +106,7 @@ class Payment(BaseDataProvider):
         elif card_type == CardType.MASTER_CARD:
             number = self.random.choice([
                 self.random.randint(2221, 2720),
-                self.random.randint(5100, 5500),
+                self.random.randint(5100, 5599),
             ])
         elif card_type == CardType.AMERICAN_EXPRESS:
             number = self.random.choice([34, 37])
