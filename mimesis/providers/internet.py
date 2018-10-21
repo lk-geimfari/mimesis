@@ -158,11 +158,11 @@ class Internet(BaseDataProvider):
         api = 'https://source.unsplash.com/{}x{}?{}'
 
         if keywords is not None:
-            keywords = ','.join(keywords)
+            keywords_str = ','.join(keywords)
         else:
-            keywords = ''
+            keywords_str = ''
 
-        url = api.format(width, height, keywords)
+        url = api.format(width, height, keywords_str)
 
         try:
             response = urllib.request.urlopen(url)
