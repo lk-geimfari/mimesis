@@ -75,7 +75,6 @@ def pull(file: str, locale: str = 'en') -> JSON:
         >>> en['day']['abbr'][1]
         'Mon.'
     """
-
     def get_data(locale_name: str) -> JSON:
         """Pull JSON data from file.
 
