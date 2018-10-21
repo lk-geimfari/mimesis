@@ -3,7 +3,7 @@
 import urllib.error
 import urllib.request
 from ipaddress import IPv6Address
-from typing import Optional, Union, List
+from typing import List, Optional, Union
 
 from mimesis.data import (EMOJI, HASHTAGS, HTTP_METHODS, HTTP_STATUS_CODES,
                           HTTP_STATUS_MSGS, NETWORK_PROTOCOLS, SUBREDDITS,
