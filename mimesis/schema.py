@@ -20,9 +20,13 @@ class AbstractField(StrMixin):
     of any method of any supported data provider (:class:`~mimesis.Generic`)
     and the ``**kwargs`` of the method:
 
+    >>> from mimesis import Person
+    >>> from mimesis.enums import Gender
+    >>> person = Person()
     >>> _ = AbstractField('en', 0xf)
-    >>> _('full_name')
-    'Jack Allison'
+    >>> name = _('name')
+    >>> name in person._data['names']['female']
+    True
     """
 
     def __init__(self, locale: str = 'en',
