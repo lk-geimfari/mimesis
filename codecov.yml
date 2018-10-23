@@ -26,5 +26,6 @@ parsers:
     enable_partials: false
 ignore:
   - "mimesis/compat.py"
+  - "mimesis/locales.py"
   - "mimesis/exceptions.py"
   - "mimesis/__version__.py"
