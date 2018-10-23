@@ -6,6 +6,7 @@ from typing import Any, Callable, List
 from mimesis.providers.address import Address
 from mimesis.providers.base import BaseDataProvider
 from mimesis.providers.business import Business
+from mimesis.providers.choice import Choice
 from mimesis.providers.clothing import ClothingSize
 from mimesis.providers.code import Code
 from mimesis.providers.cryptographic import Cryptographic
@@ -61,6 +62,7 @@ class Generic(BaseDataProvider):
         self.games = Games(seed=self.seed)
         self.cryptographic = Cryptographic(seed=self.seed)
         self.structure = Structure(seed=self.seed)
+        self.choice = Choice(seed=self.seed)
 
     def __getattr__(self, attrname: str) -> Any:
         """Get attribute without underscore.
