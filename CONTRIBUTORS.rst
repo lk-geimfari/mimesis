@@ -120,8 +120,4 @@ Contributors
 .. _(pywkm): https://github.com/pywkm
 .. _(GustavoKatel): https://github.com/GustavoKatel
 .. _(sadielbartholomew): https://github.com/sadielbartholomew
-<<<<<<< HEAD
 .. _(DevAerial): https://github.com/DevAerial
-=======
-.. _(devaerial): https://github.com/DevAerial
->>>>>>> ce585ca... Added builtin data provider for Poland.
