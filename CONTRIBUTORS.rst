@@ -72,6 +72,7 @@ Contributors
 -  Przemysław Pietras `(destag)`_
 -  Wiktor Matuszewski `(pywkm)`_
 -  Sadie Bartholomew `(sadielbartholomew)`_
+-  Nazar Oleksiuk `(DevAerial)`_
 
 .. _(lk-geimfari): https://github.com/lk-geimfari
 .. _(sobolevn): https://github.com/sobolevn
@@ -119,3 +120,4 @@ Contributors
 .. _(pywkm): https://github.com/pywkm
 .. _(GustavoKatel): https://github.com/GustavoKatel
 .. _(sadielbartholomew): https://github.com/sadielbartholomew
+.. _(DevAerial): https://github.com/DevAerial
