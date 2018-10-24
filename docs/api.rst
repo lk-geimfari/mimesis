@@ -57,6 +57,12 @@ USASpecProvider
    :members:
    :special-members: __init__
 
+PolandSpecProvider
+---------------
+
+.. autoclass:: mimesis.builtins.PolandSpecProvider
+   :members:
+   :special-members: __init__
 
 Decorators
 ==========
