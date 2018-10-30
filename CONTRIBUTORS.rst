@@ -120,4 +120,4 @@ Contributors
 .. _(pywkm): https://github.com/pywkm
 .. _(GustavoKatel): https://github.com/GustavoKatel
 .. _(sadielbartholomew): https://github.com/sadielbartholomew
-.. _(expandedmind):): https://github.com/ExpandedMind
+.. _(expandedmind): https://github.com/ExpandedMind
