@@ -73,6 +73,7 @@ Contributors
 -  Wiktor Matuszewski `(pywkm)`_
 -  Sadie Bartholomew `(sadielbartholomew)`_
 -  Nazar Oleksiuk `(DevAerial)`_
+-  Ivan Ramos `(expandedmind)`_
 
 .. _(lk-geimfari): https://github.com/lk-geimfari
 .. _(sobolevn): https://github.com/sobolevn
@@ -121,3 +122,4 @@ Contributors
 .. _(GustavoKatel): https://github.com/GustavoKatel
 .. _(sadielbartholomew): https://github.com/sadielbartholomew
 .. _(DevAerial): https://github.com/DevAerial
+.. _(expandedmind): https://github.com/ExpandedMind
