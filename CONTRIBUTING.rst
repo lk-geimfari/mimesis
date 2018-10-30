@@ -75,7 +75,7 @@ Example of annotated function:
         return a + b
 
 .. _source code: https://github.com/lk-geimfari/mimesis
-.. _issue tracker: https://github.com/lk-geimfari/mimesis/issues%3E
+.. _issue tracker: https://github.com/lk-geimfari/mimesis/issues
 .. _Travis-CI: https://travis-ci.org/lk-geimfari/mimesis
 .. _Codecov: https://codecov.io/gh/lk-geimfari/mimesis
 .. _PEP8: https://www.python.org/dev/peps/pep-0008/
