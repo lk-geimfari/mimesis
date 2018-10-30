@@ -1,3 +1,13 @@
+Version 2.2.1
+-------------
+
+**Added**:
+
+- Added ``PolandSpecProvider`` builtin data provider for Poland
+- Added PESEL generation for ``PolandSpecProvider``
+- Added NIP generation for ``PolandSpecProvider``
+- Added REGON generation for ``PolandSpecProvider``
+
 Version 2.2.0
 -------------
 
