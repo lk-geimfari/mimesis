@@ -1,13 +1,3 @@
-Version 2.2.1
--------------
-
-**Added**:
-
-- Added ``PolandSpecProvider`` builtin data provider for Poland
-- Added PESEL generation for ``PolandSpecProvider``
-- Added NIP generation for ``PolandSpecProvider``
-- Added REGON generation for ``PolandSpecProvider``
-
 Version 2.2.0
 -------------
 
@@ -36,6 +26,7 @@ Version 2.2.0
 - Added support of timezones for ``Datetime().datetime()``
 - Added method to bulk create datetime objects: ``Datetime().bulk_create_datetimes()``
 - Added generate KPP for ``RussiaSpecProvider``
+- Added ``PolandSpecProvider`` builtin data provider for Poland
 
 **Removed**:
 
