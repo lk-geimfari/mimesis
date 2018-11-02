@@ -123,3 +123,4 @@ Contributors
 .. _(sadielbartholomew): https://github.com/sadielbartholomew
 .. _(DevAerial): https://github.com/DevAerial
 .. _(expandedmind): https://github.com/ExpandedMind
+.. _(lucasmarcel): https://github.com/lucasmarcel
