@@ -1,8 +1,8 @@
 {
   "academic_degree": [
-    "Célibataire",
-    "Spécialiste",
-    "Maître"
+    "Licence",
+    "Master",
+    "Doctorat"
   ],
   "favorite_movie": [
     "Citizen Kane (Orson Welles, 1941)",
@@ -1869,9 +1869,9 @@
     "Zoologiste"
   ],
   "political_views": [
-    "Anarchisme",
+    "Anarchiste",
     "Libéral",
-    "Communisme",
+    "Communiste",
     "Socialiste",
     "Conservateur",
     "Libertaire"
@@ -3851,7 +3851,7 @@
     "Négatif",
     "Positif",
     "Neutre",
-    "Kompromisable"
+    "Indécis"
   ],
   "worldview": [
     "Athéisme",
