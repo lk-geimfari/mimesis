@@ -1,4 +1,4 @@
-"""Import additional dependancies only when needed."""
+"""Import optional dependencies only when needed."""
 
 try:
     import pytz
