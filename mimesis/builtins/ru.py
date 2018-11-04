@@ -97,6 +97,7 @@ class RussiaSpecProvider(BaseSpecProvider):
         """
         numbers = []
         control_codes = []
+
         for i in range(0, 9):
             numbers.append(self.random.randint(0, 9))
 
@@ -217,7 +218,7 @@ class RussiaSpecProvider(BaseSpecProvider):
         ]
 
         tax_code = tax_codes[self.random.randint(0, len(tax_codes) - 1)]
-        registration_code = '{:02}'.format(self.random.randint(1, 99))
-        registration_number = '{:03}'.format(self.random.randint(1, 999))
-        kpp = tax_code + registration_code + registration_number
+        reg_code = '{:02}'.format(self.random.randint(1, 99))
+        reg_number = '{:03}'.format(self.random.randint(1, 999))
+        kpp = tax_code + reg_code + reg_number
         return kpp
