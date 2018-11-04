@@ -7,9 +7,20 @@ Version 2.2.0
 
 .. note:: Work still in progress and this version will be released only at beginning of December.
 
+**Added**:
+
+- Added method ``formatted_time()``
+- Added method ``formatted_date()``
+- Added method ``formatted_datetime()``
+- Added support of timezones for ``Datetime().datetime()``
+- Added method to bulk create datetime objects: ``Datetime().bulk_create_datetimes()``
+- Added generate KPP for ``RussiaSpecProvider``
+- Added ``PolandSpecProvider`` builtin data provider for Poland
+
+
 **Updated**:
 
-- Updated data for locale ``pl``
+- Updated data for ``pl`` and ``fr``
 - Updated snils algorithm for ``RussiaSpecProvider``
 - Updated method ``Datetime().time()`` to return only ``datetime.time`` object
 - Updated method ``Datetime().date()`` to return only ``datetime.date`` object
@@ -20,15 +31,6 @@ Version 2.2.0
 - Renamed ``Science().dna()`` to ``Science().dna_sequence()``
 - Renamed ``Science().rna()`` to ``Science().rna_sequence()``
 
-**Added**:
-
-- Added method ``formatted_time()``
-- Added method ``formatted_date()``
-- Added method ``formatted_datetime()``
-- Added support of timezones for ``Datetime().datetime()``
-- Added method to bulk create datetime objects: ``Datetime().bulk_create_datetimes()``
-- Added generate KPP for ``RussiaSpecProvider``
-- Added ``PolandSpecProvider`` builtin data provider for Poland
 
 **Removed**:
 
