@@ -5,7 +5,7 @@ Version 2.2.0
 
 .. note:: In this release (2.2.0) we've reject support of Python 3.5.
 
-.. note:: Work still in progress and this version will be released only at beginning of December.
+.. note:: Work still in progress and this version will be released only at beginning of December 2018.
 
 **Added**:
 
