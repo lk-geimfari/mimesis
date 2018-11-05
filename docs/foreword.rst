@@ -90,7 +90,7 @@ What Mimesis is, What Mimesis is Not
 ------------------------------------
 
 The problem that **Mimesis** solves and solves it perfectly is generating data.
-When you need to populate database, create beautiful JSON or XML files,
+When you need to populate database, create complex structured JSON/XML files,
 anonymize data taken from productive services then **Mimesis** is this is
 exactly what you need.
 
