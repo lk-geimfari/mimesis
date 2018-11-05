@@ -23,12 +23,13 @@
      :target: https://badge.fury.io/py/mimesis
 
 
-**Mimesis** is a fast and easy to use Python programming library, 
+**Mimesis** (/maɪˈmiːsəs/; Ancient Greek: μίμησις (mīmēsis), from μιμεῖσθαι (mīmeisthai), “to imitate”, from μῖμος (mimos), “imitator, actor”) is a fast and easy to use Python programming library, 
 which helps generate synthetic data for a variety of purposes
-in a variety of languages. This data can be particularly useful during
-software development and testing. For example, it could be used to
-populate a testing database, create beautiful JSON and XML files,
-anonymize data taken from a production service, etc.
+in a variety of languages. This data can be particularly useful during development, 
+testing, prototyping and a lot where else. For example, it could be used то populate a testing database, create complex structured JSON/XML files, anonymize data taken from a production service, etc. Basically 
+
+Advantages
+----------
 
 This library offers a number of advantages over other similar libraries:
 
@@ -62,7 +63,7 @@ also you can install it manually:
 Getting started
 ---------------
 
-This library is really easy to use and everyting you need is just import an object which represents type of data you need (we call such object *Provider*). In example below we import provider *Person*, which represents data related to personal information, such as name, surname, email and etc:
+This library is really easy to use and everyting you need is just import an object which represents type of data you need (we call such object *Provider*). In example below we import provider `Person <https://mimesis.readthedocs.io/api.html#person>`_, which represents data related to personal information, such as name, surname, email and etc:
 
 .. code:: python
 
