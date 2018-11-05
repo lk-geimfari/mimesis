@@ -28,7 +28,8 @@ class Address(BaseDataProvider):
         :param locale: Current locale.
         """
         super().__init__(*args, **kwargs)
-        self._data = pull('address.json', self.locale)
+        self._datafile = 'address.json'
+        self._data = pull(self._datafile, self.locale)
 
     @staticmethod
     def _dd_to_dms(num: float, _type: str) -> str:

@@ -58,7 +58,7 @@ USASpecProvider
    :special-members: __init__
 
 PolandSpecProvider
----------------
+------------------
 
 .. autoclass:: mimesis.builtins.PolandSpecProvider
    :members:
@@ -70,6 +70,16 @@ Decorators
 .. automodule:: mimesis.decorators
    :members:
 
+
+Locales
+=======
+
+
+override
+--------
+
+.. autoclass:: mimesis.locales.override
+   :members:
 
 Custom Exceptions
 =================

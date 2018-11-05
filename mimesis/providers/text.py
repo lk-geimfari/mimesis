@@ -19,7 +19,8 @@ class Text(BaseDataProvider):
         :param seed: Seed.
         """
         super().__init__(*args, **kwargs)
-        self._data = pull('text.json', self.locale)
+        self._datafile = 'text.json'
+        self._data = pull(self._datafile, self.locale)
 
     def alphabet(self, lower_case: bool = False) -> list:
         """Get an alphabet for current locale.

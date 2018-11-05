@@ -15,7 +15,8 @@ class Food(BaseDataProvider):
         :param locale: Current locale.
         """
         super().__init__(*args, **kwargs)
-        self._data = pull('food.json', self.locale)
+        self._datafile = 'food.json'
+        self._data = pull(self._datafile, self.locale)
 
     def _choice_from(self, key: str) -> str:
         """Choice random element."""

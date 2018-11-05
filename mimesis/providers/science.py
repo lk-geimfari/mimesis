@@ -19,7 +19,8 @@ class Science(BaseDataProvider):
         :param seed: Seed.
         """
         super().__init__(*args, **kwargs)
-        self._data = pull('science.json', self.locale)
+        self._datafile = 'science.json'
+        self._data = pull(self._datafile, self.locale)
 
     def math_formula(self) -> str:
         """Get a random mathematical formula.
