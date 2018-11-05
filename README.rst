@@ -26,7 +26,7 @@
 **Mimesis** (/maɪˈmiːsəs/; Ancient Greek: μίμησις (mīmēsis), from μιμεῖσθαι (mīmeisthai), “to imitate”, from μῖμος (mimos), “imitator, actor”) is a fast and easy to use Python programming library, 
 which helps generate synthetic data for a variety of purposes
 in a variety of languages. This data can be particularly useful during development, 
-testing, prototyping and a lot where else. For example, it could be used то populate a testing database, create complex structured JSON/XML files, anonymize data taken from a production service, etc. Basically 
+testing, prototyping and a lot where else. For example, it could be used то populate a testing database, create complex structured JSON/XML files, anonymize data taken from a production service, etc. 
 
 Advantages
 ----------
