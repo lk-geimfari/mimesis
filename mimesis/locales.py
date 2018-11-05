@@ -63,6 +63,5 @@ class override(object):  # noqa
         self.instance._data = pull(self.datafile, self.locale)
 
     def __exit__(self, *args) -> None:
-        self.instance._data.clear()
         self.instance.locale = self.origin_locale
         self.instance._data = pull(self.datafile, self.origin_locale)
