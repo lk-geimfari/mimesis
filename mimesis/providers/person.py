@@ -171,10 +171,7 @@ class Person(BaseDataProvider):
             Celloid1873
         """
         # TODO: Optimize
-        _name = None
-        if template in ('UU-d', 'UU.d', 'UU_d'):
-            _name = self.random.choice(USERNAMES) \
-                .capitalize()
+        _name = self.random.choice(USERNAMES).capitalize()
 
         name = self.random.choice(USERNAMES)
         date = self.random.randint(1800, 2070)

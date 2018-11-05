@@ -25,6 +25,7 @@ Version 2.2.0
 - Updated method ``Datetime().time()`` to return only ``datetime.time`` object
 - Updated method ``Datetime().date()`` to return only ``datetime.date`` object
 - Completely annotated all functions
+- Added 6k+ username words
 
 **Renamed**:
 
@@ -51,6 +52,7 @@ Version 2.2.0
 
 - Fixed bug with seed
 - Fixed issue with names on downloading images
+- Fixed issue with ``None`` in username for ``Person().username()``
 
 
 Version 2.1.0
