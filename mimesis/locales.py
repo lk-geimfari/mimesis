@@ -1,3 +1,5 @@
+import contextlib
+
 from mimesis.utils import pull
 
 CS = 'cs'
@@ -35,33 +37,28 @@ UK = 'uk'
 ZH = 'zh'
 
 
-class override(object):  # noqa
+@contextlib.contextmanager
+def override(provider, locale: str = EN):
     """Context manager which allows overriding current locale.
 
-     .. note:: This feature does not works with :class:`~mimesis.Generic()`.
-        Usually, you don't need data from other locales,
-        when you use :class:`~mimesis.Generic()`.
+    .. note:: This feature does not works with :class:`~mimesis.Generic()`.
+
+    :param provider: Locale dependent data provider.
+    :param locale: Locale.
+    :return:
     """
+    origin_locale = getattr(provider, 'locale', None)
+    datafile = getattr(provider, '_datafile', None)
 
-    def __init__(self, provider, locale: str = EN) -> None:
-        """Initialize attributes.
+    if not datafile or not locale:
+        raise ValueError('«{}» has not locale dependent'.format(
+            provider.__class__.__name__))
 
-        :param provider: Provider's instance.
-        :param locale: Locale code.
-        """
-        self.instance = provider
-        self.locale = locale
-        self.origin_locale = getattr(provider, 'locale', None)
-        self.datafile = getattr(self.instance, '_datafile', None)
+    provider.locale = locale
+    provider._data = pull(datafile, locale)
 
-    def __enter__(self) -> None:
-        if not self.datafile or not self.locale:
-            raise ValueError('«{}» has not locale dependent'.format(
-                self.instance.__class__.__name__))
-
-        self.instance.locale = self.locale
-        self.instance._data = pull(self.datafile, self.locale)
-
-    def __exit__(self, *args) -> None:
-        self.instance.locale = self.origin_locale
-        self.instance._data = pull(self.datafile, self.origin_locale)
+    try:
+        yield provider
+    finally:
+        provider.locale = origin_locale
+        provider._data = pull(datafile, origin_locale)
