@@ -78,8 +78,8 @@ Locales
 override
 --------
 
-.. autoclass:: mimesis.locales.override
-   :members:
+.. automodule:: mimesis.locales
+   :members: override
 
 Custom Exceptions
 =================
