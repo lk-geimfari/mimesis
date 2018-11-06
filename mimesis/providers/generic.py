@@ -48,8 +48,8 @@ class Generic(BaseDataProvider):
         self._text = Text
         self._food = Food
         self._science = Science
-        self._code = Code
-        self._transport = Transport
+        self.transport = Transport(seed=self.seed)
+        self.code = Code(seed=self.seed)
         self.unit_system = UnitSystem(seed=self.seed)
         self.file = File(seed=self.seed)
         self.numbers = Numbers(seed=self.seed)

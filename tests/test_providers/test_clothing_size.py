@@ -15,7 +15,7 @@ class TestClothingSize(object):
         return ClothingSize()
 
     def test_str(self, clothing_size):
-        assert re.match(patterns.STR_REGEX, str(clothing_size))
+        assert re.match(patterns.PROVIDER_STR_REGEX, str(clothing_size))
 
     def test_international_size(self, clothing_size):
         size_names = (

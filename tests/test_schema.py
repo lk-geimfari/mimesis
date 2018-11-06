@@ -11,9 +11,8 @@ from mimesis.schema import Field, Schema
 
 from .test_providers import patterns
 
-
-def test_str(_):
-    assert re.match(patterns.STR_REGEX, str(_))
+# def test_str(_):
+#     assert re.match(patterns.STR_REGEX, str(_))
 
 
 @pytest.mark.parametrize(

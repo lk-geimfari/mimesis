@@ -102,6 +102,27 @@ is not really good,  so it's better just temporarily override current locale for
     'Waldo Foster'
 
 
+You can also use it with :class:`~mimesis.Generic()`:
+
+.. code-block:: python
+
+    >>> from mimesis import Generic
+    >>> from mimesis import locales
+
+    >>> generic = Generic(locales.EN)
+    >>> generic.text.word()
+    'anyone'
+
+    >>> with locales.override(generic.text, locales.FR):
+    ...     generic.text.word()
+
+    'mieux'
+
+    >>> generic.text.word()
+    'responsibilities'
+
+
+
 Supported locales
 ~~~~~~~~~~~~~~~~~
 

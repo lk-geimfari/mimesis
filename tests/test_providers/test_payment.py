@@ -11,9 +11,13 @@ from . import patterns
 
 
 class TestPayment(object):
+
     @pytest.fixture
     def payment(self):
         return Payment()
+
+    def test_str(self, payment):
+        assert re.match(patterns.PROVIDER_STR_REGEX, str(payment))
 
     def test_bitcoin(self, payment):
         result = payment.bitcoin_address()

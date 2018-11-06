@@ -20,7 +20,7 @@ class TestPerson(object):
         return Person()
 
     def test_str(self, person):
-        assert re.match(patterns.STR_REGEX, str(person))
+        assert re.match(patterns.DATA_PROVIDER_STR_REGEX, str(person))
 
     @pytest.mark.parametrize(
         'minimum, maximum', [

@@ -1,11 +1,11 @@
 """Clothing sizes data provider."""
 
-from mimesis.providers.base import BaseDataProvider
+from mimesis.providers.base import BaseProvider
 
 __all__ = ['ClothingSize']
 
 
-class ClothingSize(BaseDataProvider):
+class ClothingSize(BaseProvider):
     """Class for generate clothing sizes data."""
 
     def international_size(self) -> str:

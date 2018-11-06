@@ -5,13 +5,13 @@ from typing import Optional
 
 from mimesis.data import EXTENSIONS, MIME_TYPES
 from mimesis.enums import FileType, MimeType
-from mimesis.providers.base import BaseDataProvider
+from mimesis.providers.base import BaseProvider
 from mimesis.providers.text import Text
 
 __all__ = ['File']
 
 
-class File(BaseDataProvider):
+class File(BaseProvider):
     """Class for generate data related to files."""
 
     def __init__(self, *args, **kwargs):

@@ -3,12 +3,12 @@
 from mimesis.data import (CPU, CPU_CODENAMES, CPU_MODEL_CODES, GENERATION,
                           GRAPHICS, HDD_SSD, MANUFACTURERS, PHONE_MODELS,
                           RAM_SIZES, RAM_TYPES, RESOLUTIONS, SCREEN_SIZES)
-from mimesis.providers.base import BaseDataProvider
+from mimesis.providers.base import BaseProvider
 
 __all__ = ['Hardware']
 
 
-class Hardware(BaseDataProvider):
+class Hardware(BaseProvider):
     """Class for generate data related to hardware."""
 
     def resolution(self) -> str:

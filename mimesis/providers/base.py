@@ -58,18 +58,12 @@ class BaseProvider(object):
 
         return result.value
 
-
-class StrMixin(object):
-    """A mixin for showing information about the current locale."""
-
     def __str__(self) -> str:
         """Human-readable representation of locale."""
-        locale = getattr(self, 'locale', 'en')
-        return '{} <{}>'.format(
-            self.__class__.__name__, locale)
+        return self.__class__.__name__
 
 
-class BaseDataProvider(BaseProvider, StrMixin):
+class BaseDataProvider(BaseProvider):
     """This is a base class for all data providers."""
 
     def __init__(self, locale: Optional[str] = None,
@@ -80,6 +74,8 @@ class BaseDataProvider(BaseProvider, StrMixin):
         :param seed: Seed to all the random functions.
         """
         super().__init__(seed=seed)
+        self._data: dict
+        self._datafile: str
         self.locale = setup_locale(locale)
 
     def get_current_locale(self) -> str:
@@ -91,3 +87,8 @@ class BaseDataProvider(BaseProvider, StrMixin):
         :return: Current locale.
         """
         return self.locale
+
+    def __str__(self) -> str:
+        """Human-readable representation of locale."""
+        locale = getattr(self, 'locale', 'en')
+        return '{} <{}>'.format(self.__class__.__name__, locale)

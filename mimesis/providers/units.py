@@ -4,12 +4,12 @@ from typing import Optional
 
 from mimesis.data import SI_PREFIXES, SI_PREFIXES_SYM
 from mimesis.enums import PrefixSign, UnitName
-from mimesis.providers.base import BaseDataProvider
+from mimesis.providers.base import BaseProvider
 
 __all__ = ['UnitSystem']
 
 
-class UnitSystem(BaseDataProvider):
+class UnitSystem(BaseProvider):
     """Class for generating data related to units."""
 
     def unit(self, name: Optional[UnitName] = None, symbol=False):

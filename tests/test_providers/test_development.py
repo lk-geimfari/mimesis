@@ -15,7 +15,7 @@ class TestDevelopment(object):
         return Development()
 
     def test_str(self, dev):
-        assert re.match(patterns.STR_REGEX, str(dev))
+        assert re.match(patterns.PROVIDER_STR_REGEX, str(dev))
 
     def test_license(self, dev):
         result = dev.software_license()

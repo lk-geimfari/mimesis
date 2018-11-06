@@ -17,6 +17,9 @@ class TestInternet(object):
     def net(self):
         return Internet()
 
+    def test_str(self, net):
+        assert re.match(patterns.PROVIDER_STR_REGEX, str(net))
+
     def test_emoji(self, net):
         result = net.emoji()
         assert result in data.EMOJI

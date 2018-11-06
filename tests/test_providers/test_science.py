@@ -17,7 +17,7 @@ class TestScience(object):
         return Science()
 
     def test_str(self, science):
-        assert re.match(patterns.STR_REGEX, str(science))
+        assert re.match(patterns.DATA_PROVIDER_STR_REGEX, str(science))
 
     def test_math_formula(self, default_science):
         result = default_science.math_formula()

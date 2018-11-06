@@ -6,14 +6,14 @@ import uuid
 from typing import Optional
 
 from mimesis.enums import Algorithm
-from mimesis.providers.base import BaseDataProvider
+from mimesis.providers.base import BaseProvider
 from mimesis.providers.text import Text
 from mimesis.typing import Bytes
 
 __all__ = ['Cryptographic']
 
 
-class Cryptographic(BaseDataProvider):
+class Cryptographic(BaseProvider):
     """Class that provides cryptographic data."""
 
     def __init__(self, *args, **kwargs) -> None:
@@ -22,7 +22,7 @@ class Cryptographic(BaseDataProvider):
         :param seed: Seed.
         """
         super().__init__(*args, **kwargs)
-        self.__words = Text('en')._data['words']
+        self.__words = Text('en')._data.get('words', {})
         self.__chars = string.ascii_letters + string.digits + string.punctuation
 
     def uuid(self, version: Optional[int] = None) -> str:

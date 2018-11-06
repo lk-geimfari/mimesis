@@ -17,7 +17,7 @@ class TestDatetime(object):
         return Datetime()
 
     def test_str(self, dt):
-        assert re.match(patterns.STR_REGEX, str(dt))
+        assert re.match(patterns.DATA_PROVIDER_STR_REGEX, str(dt))
 
     @pytest.mark.parametrize(
         'days, objects_count', [

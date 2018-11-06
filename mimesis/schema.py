@@ -5,14 +5,13 @@ from typing import Any, Callable, List, Optional
 
 from mimesis.exceptions import (UndefinedField, UndefinedSchema,
                                 UnsupportedField)
-from mimesis.providers.base import StrMixin
 from mimesis.providers.generic import Generic
 from mimesis.typing import JSON, Seed
 
 __all__ = ['AbstractField', 'Field', 'Schema']
 
 
-class AbstractField(StrMixin):
+class AbstractField(object):
     """
     AbstractField is a class for generating data by the name of the method.
 

@@ -11,3 +11,5 @@ class BaseSpecProvider(BaseProvider):
     def __init__(self, *args, **kwargs):
         """Initialize attributes of superclass."""
         super().__init__(*args, **kwargs)
+        self._datafile = 'builtin.json'
+        self._data: dict

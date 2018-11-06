@@ -6,6 +6,7 @@ from mimesis import config
 locales = config.LIST_OF_LOCALES
 platform = ['win32', 'linux']
 
+
 #
 # @pytest.fixture(autouse=True)
 # def add_providers(doctest_namespace):
@@ -81,8 +82,3 @@ def text(request):
 @pytest.fixture(params=platform)
 def path(request):
     return mimesis.Path(request.param)
-
-
-@pytest.fixture(params=locales)
-def transport(request):
-    return mimesis.Transport(request.param)
