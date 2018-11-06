@@ -17,7 +17,8 @@ class Business(BaseDataProvider):
         :param locale: Current locale.
         """
         super().__init__(*args, **kwargs)
-        self._data = pull('business.json', self.locale)
+        self._datafile = 'business.json'
+        self._data = pull(self._datafile, self.locale)
 
     def company(self) -> str:
         """Get a random company name.

@@ -22,7 +22,8 @@ class Datetime(BaseDataProvider):
         :param locale: Current locale.
         """
         super().__init__(*args, **kwargs)
-        self._data = pull('datetime.json', self.locale)
+        self._datafile = 'datetime.json'
+        self._data = pull(self._datafile, self.locale)
 
     @staticmethod
     def bulk_create_datetimes(date_start: DateTime,

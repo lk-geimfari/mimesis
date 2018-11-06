@@ -1,11 +1,11 @@
-Version 2.2.0
+Version 3.0.0
 -------------
 
-.. note:: This release (2.2.0) contains some breaking changes in API.
+.. note:: This release (3.0.0) contains some breaking changes in API.
 
-.. note:: In this release (2.2.0) we've reject support of Python 3.5.
+.. note:: In this release (3.0.0) we've reject support of Python 3.5.
 
-.. note:: Work still in progress and this version will be released only at beginning of December.
+.. note:: Work still in progress and this version will be released only in December 2018.
 
 **Added**:
 
@@ -16,6 +16,8 @@ Version 2.2.0
 - Added method to bulk create datetime objects: ``Datetime().bulk_create_datetimes()``
 - Added generate KPP for ``RussiaSpecProvider``
 - Added ``PolandSpecProvider`` builtin data provider for Poland
+- Added context manager for overriding locales - ``locales.override()``
+- Added 6k+ username words
 
 
 **Updated**:
@@ -25,7 +27,7 @@ Version 2.2.0
 - Updated method ``Datetime().time()`` to return only ``datetime.time`` object
 - Updated method ``Datetime().date()`` to return only ``datetime.date`` object
 - Completely annotated all functions
-- Added 6k+ username words
+
 
 **Renamed**:
 

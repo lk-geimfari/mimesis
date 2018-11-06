@@ -26,7 +26,8 @@ class Person(BaseDataProvider):
         :param seed: Seed.
         """
         super().__init__(*args, **kwargs)
-        self._data = pull('person.json', self.locale)
+        self._datafile = 'person.json'
+        self._data = pull(self._datafile, self.locale)
         self._store = {
             'age': 0,
         }

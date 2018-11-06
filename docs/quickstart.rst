@@ -81,6 +81,27 @@ the language or country associated with that locale:
 
 
 
+Sometimes you need only some data from other locale and creating an instance for such cases
+is not really good,  so it's better just temporarily override current locale for provider's instance:
+
+.. code-block:: python
+
+    >>> from mimesis import Person
+    >>> from mimesis import locales
+
+    >>> person = Person(locales.EN)
+    >>> person.full_name()
+    'Ozie Melton'
+
+    >>> with locales.override(person, locales.RU):
+    ...     person.full_name()
+
+    'Симона Богданова'
+
+    >>> person.full_name()
+    'Waldo Foster'
+
+
 Supported locales
 ~~~~~~~~~~~~~~~~~
 
