@@ -101,6 +101,10 @@ class AbstractField(object):
         except Exception:
             raise UnsupportedField(name)
 
+    def __str__(self):
+        return '{} <{}>'.format(
+            self.__class__.__name__, self.locale)
+
 
 class Schema(object):
     """Class which return list of filled schemas."""

@@ -29,6 +29,7 @@ Version 3.0.0
 - Updated method ``Datetime().date()`` to return only ``datetime.date`` object
 - Completely annotated all functions
 - Locale independent providers inherit ``BaseProvider`` instead of ``BaseDataProvider``
+- Now you can add to Generic only providers which are subclasses of ``BaseProvider`` to ensure a single instance of ``random.Random()`` for all providers
 
 
 **Renamed**:

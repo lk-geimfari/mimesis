@@ -11,8 +11,9 @@ from mimesis.schema import Field, Schema
 
 from .test_providers import patterns
 
-# def test_str(_):
-#     assert re.match(patterns.STR_REGEX, str(_))
+
+def test_str(field):
+    assert re.match(patterns.DATA_PROVIDER_STR_REGEX, str(field))
 
 
 @pytest.mark.parametrize(
@@ -38,35 +39,35 @@ def test_field_with_custom_providers():
 
 
 @pytest.fixture
-def _():
+def field():
     return Field('en')
 
 
 @pytest.fixture
-def valid_schema(_):
+def valid_schema(field):
     return lambda: {
-        'id': _('uuid'),
-        'name': _('word'),
-        'version': _('version', key=str.lower, pre_release=True),
-        'timestamp': _('timestamp'),
-        'mime_type': _('mime_type'),
-        'zip_code': _('postal_code'),
+        'id': field('uuid'),
+        'name': field('word'),
+        'version': field('version', key=str.lower, pre_release=True),
+        'timestamp': field('timestamp'),
+        'mime_type': field('mime_type'),
+        'zip_code': field('postal_code'),
         'owner': {
-            'email': _('email', key=str.lower),
-            'token': _('token'),
-            'creator': _('full_name', gender=Gender.FEMALE),
+            'email': field('email', key=str.lower),
+            'token': field('token'),
+            'creator': field('full_name', gender=Gender.FEMALE),
             'billing': {
-                'ethereum_address': _('ethereum_address'),
+                'ethereum_address': field('ethereum_address'),
             },
         },
         'defined_cls': {
-            'title': _('person.title'),
-            'title2': _('text.title'),
+            'title': field('person.title'),
+            'title2': field('text.title'),
         },
     }
 
 
-def test_fill(_, valid_schema):
+def test_fill(field, valid_schema):
     result = Schema(schema=valid_schema).create(iterations=2)
     assert isinstance(result, list)
     assert isinstance(result[0], dict)
@@ -75,9 +76,9 @@ def test_fill(_, valid_schema):
         Schema(schema=None).create()  # type: ignore
 
 
-def test_field_with_key(_):
-    usual_result = _('age')
+def test_field_with_key(field):
+    usual_result = field('age')
     assert isinstance(usual_result, int)
 
-    result_on_key = _('age', key=lambda v: float(v))
+    result_on_key = field('age', key=lambda v: float(v))
     assert isinstance(result_on_key, float)

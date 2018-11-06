@@ -30,7 +30,7 @@ PROVIDER_STR_REGEX = r'^(Business|ClothingSize|Code|Development' \
 
 DATA_PROVIDER_STR_REGEX = r'^(Address|Business|Datetime|Food|' \
                           r'Person|Science|Text|Generic|' \
-                          r'BaseDataProvider) <([a-z-]+)>$'
+                          r'BaseDataProvider|AbstractField) <([a-z-]+)>$'
 
 _EN_GB_POST_CODE = \
     r'((([A-PR-UWYZ][0-9])|([A-PR-UWYZ][0-9][0-9])' \
