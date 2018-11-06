@@ -24,6 +24,8 @@ def test_override(provider, locale, new_locale):
     with locales.override(provider, locales.RU):
         assert provider.locale == new_locale
 
+    assert provider.locale == locale
+
 
 @pytest.mark.parametrize(
     'provider', [
