@@ -1,7 +1,7 @@
 """Provides all at one."""
 
 import inspect
-from typing import Any, List, Sequence
+from typing import Any, List, Type
 
 from mimesis.providers.address import Address
 from mimesis.providers.base import BaseDataProvider, BaseProvider
@@ -95,7 +95,7 @@ class Generic(BaseDataProvider):
                     attributes.append(a)
         return attributes
 
-    def add_provider(self, cls) -> None:
+    def add_provider(self, cls: Type[BaseProvider]) -> None:
         """Add a custom provider to Generic() object.
 
         :param cls: Custom provider.
@@ -106,18 +106,16 @@ class Generic(BaseDataProvider):
             if not issubclass(cls, BaseProvider):
                 raise TypeError('The provider must inherit BaseProvider.')
 
-            name = ''
-            if hasattr(cls, 'Meta'):
-                if inspect.isclass(cls.Meta) and hasattr(cls.Meta, 'name'):
-                    name = cls.Meta.name
-            else:
-                name = cls.__name__.lower()
-
+            meta = getattr(cls, 'Meta', None)
+            name = cls.__name__.lower()
+            if meta and hasattr(meta, 'name'):
+                if meta.name:
+                    name = meta.name
             setattr(self, name, cls())
         else:
             raise TypeError('Provider must be a class')
 
-    def add_providers(self, *providers: Sequence[BaseProvider]) -> None:
+    def add_providers(self, *providers: Type[BaseProvider]) -> None:
         """Add a lot of custom providers to Generic() object.
 
         :param providers: Custom providers.
