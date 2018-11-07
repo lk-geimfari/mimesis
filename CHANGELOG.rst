@@ -18,6 +18,7 @@ Version 3.0.0
 - Added ``PolandSpecProvider`` builtin data provider for Poland
 - Added context manager for overriding locales - ``locales.override()``
 - Added 6k+ username words
+- Different superclasses for different types of data provider
 
 
 **Updated**:
@@ -27,6 +28,8 @@ Version 3.0.0
 - Updated method ``Datetime().time()`` to return only ``datetime.time`` object
 - Updated method ``Datetime().date()`` to return only ``datetime.date`` object
 - Completely annotated all functions
+- Locale independent providers inherit ``BaseProvider`` instead of ``BaseDataProvider``
+- Now you can add to Generic only providers which are subclasses of ``BaseProvider`` to ensure a single instance of ``random.Random()`` for all providers
 
 
 **Renamed**:
@@ -37,6 +40,7 @@ Version 3.0.0
 
 **Removed**:
 
+- Locale independent providers does not support parameter `locale` anymore
 - Removed deprecated argument ``fmt`` for ``Datetime().date()``, use ``Datetime().formatted_date()`` instead
 - Removed deprecated argument ``fmt`` for ``Datetime().time()``, use ``Datetime().formatted_time()`` instead
 - Removed deprecated argument ``humanize`` for ``Datetime().datetime()``, use ``Datetime().formatted_datetime()`` instead

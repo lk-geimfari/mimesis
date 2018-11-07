@@ -4,7 +4,7 @@ import re
 
 import pytest
 
-from mimesis import Generic
+from mimesis import BaseProvider, Generic
 
 from .test_providers import patterns
 
@@ -12,7 +12,7 @@ from .test_providers import patterns
 class TestGeneric(object):
 
     def test_str(self, generic):
-        assert re.match(patterns.STR_REGEX, str(generic))
+        assert re.match(patterns.DATA_PROVIDER_STR_REGEX, str(generic))
 
     def test_base_person(self, generic):
         result = generic.person.username()
@@ -55,12 +55,12 @@ class TestGeneric(object):
             _ = generic.bad_argument  # noqa
 
     def test_add_providers(self, generic):
-        class Provider1(object):
+        class Provider1(BaseProvider):
             @staticmethod
             def one():
                 return 1
 
-        class Provider2(object):
+        class Provider2(BaseProvider):
             class Meta:
                 name = 'custom_provider'
 
@@ -68,10 +68,15 @@ class TestGeneric(object):
             def two():
                 return 2
 
-        class Provider3(object):
+        class Provider3(BaseProvider):
             @staticmethod
             def three():
                 return 3
+
+        class Provider4(object):
+            @staticmethod
+            def empty():
+                ...
 
         generic.add_providers(Provider1, Provider2, Provider3)
         assert generic.provider1.one() == 1
@@ -79,9 +84,9 @@ class TestGeneric(object):
         assert generic.provider3.three() == 3
 
         with pytest.raises(TypeError):
-            generic.add_providers(True)
+            generic.add_providers(Provider4)
 
-        class UnnamedProvider(object):
+        class UnnamedProvider(BaseProvider):
             @staticmethod
             def nothing():
                 return None

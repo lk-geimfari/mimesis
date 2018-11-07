@@ -16,7 +16,7 @@ class TestText(object):
         return Text()
 
     def test_str(self, text):
-        assert re.match(patterns.STR_REGEX, str(text))
+        assert re.match(patterns.DATA_PROVIDER_STR_REGEX, str(text))
 
     def test_hex_to_rgb(self, _text):
         color = _text.hex_color()

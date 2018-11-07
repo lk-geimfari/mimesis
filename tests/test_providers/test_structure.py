@@ -16,15 +16,7 @@ class TestStructure(object):
         return Structure()
 
     def test_str(self, structure):
-        assert re.match(patterns.STR_REGEX, str(structure))
-
-    def depth(self, x):
-        """Calculates depth of object."""
-        if isinstance(x, dict) and x:
-            return 1 + max(self.depth(x[a]) for a in x)
-        if isinstance(x, list) and x:
-            return 1 + max(self.depth(a) for a in x)
-        return 0
+        assert re.match(patterns.PROVIDER_STR_REGEX, str(structure))
 
     def test_css(self, structure):
         result = structure.css()

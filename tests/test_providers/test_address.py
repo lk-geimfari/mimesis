@@ -19,7 +19,7 @@ class TestAddress(object):
         return Address()
 
     def test_str(self, address):
-        assert re.match(patterns.STR_REGEX, str(address))
+        assert re.match(patterns.DATA_PROVIDER_STR_REGEX, str(address))
 
     def test_street_number(self, _address):
         result = _address.street_number()

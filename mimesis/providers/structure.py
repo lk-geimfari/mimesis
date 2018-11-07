@@ -19,7 +19,7 @@ class Structure(BaseDataProvider):
         :param seed: Seed.
         """
         super().__init__(*args, **kwargs)
-        self.__inet = Internet('en', seed=self.seed)
+        self.__inet = Internet(seed=self.seed)
         self.__text = Text('en', seed=self.seed)
 
     def css(self) -> str:

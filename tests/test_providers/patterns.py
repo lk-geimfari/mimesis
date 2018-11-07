@@ -24,10 +24,13 @@ USERNAME_REGEX = r'^[a-zA-Z0-9_.-]+$'
 
 CREDIT_CARD_REGEX = r'[\d]+((-|\s)?[\d]+)+'
 
-STR_REGEX = r'^(Address|Business|ClothingSize|Code|Datetime|Development' \
-            r'|File|Food|Games|Hardware|Internet|Numbers|Path|Person|' \
-            r'Science|Structure|Text|Transport|UnitSystem|Cryptographic|' \
-            r'Generic|Field|AbstractField|BaseDataProvider) <([a-z-]+)>$'
+PROVIDER_STR_REGEX = r'^(Business|ClothingSize|Code|Development' \
+                     r'|File|Games|Hardware|Internet|Numbers|Path|Payment|' \
+                     r'Structure|Transport|UnitSystem|Cryptographic)'
+
+DATA_PROVIDER_STR_REGEX = r'^(Address|Business|Datetime|Food|' \
+                          r'Person|Science|Text|Generic|' \
+                          r'BaseDataProvider|AbstractField) <([a-z-]+)>$'
 
 _EN_GB_POST_CODE = \
     r'((([A-PR-UWYZ][0-9])|([A-PR-UWYZ][0-9][0-9])' \

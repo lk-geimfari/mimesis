@@ -1,12 +1,12 @@
 """Data related to the development."""
 
 from mimesis.data import LICENSES, OS, PROGRAMMING_LANGS
-from mimesis.providers.base import BaseDataProvider
+from mimesis.providers.base import BaseProvider
 
 __all__ = ['Development']
 
 
-class Development(BaseDataProvider):
+class Development(BaseProvider):
     """Class for getting fake data for Developers."""
 
     def software_license(self) -> str:

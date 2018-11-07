@@ -5,12 +5,12 @@ from typing import Union
 
 from mimesis.data import (FOLDERS, PLATFORMS, PROGRAMMING_LANGS, PROJECT_NAMES,
                           USERNAMES)
-from mimesis.providers.base import BaseDataProvider
+from mimesis.providers.base import BaseProvider
 
 __all__ = ['Path']
 
 
-class Path(BaseDataProvider):
+class Path(BaseProvider):
     """Class that provides methods and property for generate paths."""
 
     def __init__(self, platform: str = sys.platform, *args, **kwargs) -> None:

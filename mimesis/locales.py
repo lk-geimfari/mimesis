@@ -1,5 +1,5 @@
 import contextlib
-from typing import Generator, Union
+from typing import Generator
 
 from mimesis import providers
 from mimesis.utils import pull
@@ -38,23 +38,13 @@ TR = 'tr'
 UK = 'uk'
 ZH = 'zh'
 
-LocaleDepProvider = Union[
-    providers.Address,
-    providers.Business,
-    providers.Datetime,
-    providers.Food,
-    providers.Person,
-    providers.Science,
-    providers.Text,
-]
+DataProviderType = providers.BaseDataProvider
 
 
 @contextlib.contextmanager
-def override(provider: LocaleDepProvider,
-             locale: str = EN) -> Generator[LocaleDepProvider, None, None]:
+def override(provider: DataProviderType,
+             locale: str = EN) -> Generator[DataProviderType, None, None]:
     """Context manager which allows overriding current locale.
-
-    .. note:: This feature does not works with :class:`~mimesis.Generic()`.
 
     :param provider: Locale dependent data provider.
     :param locale: Locale.

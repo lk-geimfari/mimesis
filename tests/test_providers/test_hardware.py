@@ -18,7 +18,7 @@ class TestHardware(object):
         return Hardware()
 
     def test_str(self, hard):
-        assert re.match(patterns.STR_REGEX, str(hard))
+        assert re.match(patterns.PROVIDER_STR_REGEX, str(hard))
 
     def test_resolution(self, hard):
         result = hard.resolution()

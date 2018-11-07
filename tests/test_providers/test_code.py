@@ -4,6 +4,7 @@ import re
 import pytest
 
 from mimesis import Code
+from mimesis.config import LIST_OF_LOCALES
 from mimesis.data import LOCALE_CODES
 from mimesis.enums import EANFormat, ISBNFormat
 from mimesis.exceptions import NonEnumerableError
@@ -18,7 +19,7 @@ class TestCode(object):
         return Code()
 
     def test_str(self, code):
-        assert re.match(patterns.STR_REGEX, str(code))
+        assert re.match(patterns.PROVIDER_STR_REGEX, str(code))
 
     @pytest.mark.parametrize(
         'fmt, length', [
@@ -56,8 +57,11 @@ class TestCode(object):
             (ISBNFormat.ISBN13, 13),
         ],
     )
-    def test_isbn(self, code, fmt, length):
-        result = code.isbn(fmt=fmt)
+    @pytest.mark.parametrize(
+        'locale', LIST_OF_LOCALES,
+    )
+    def test_isbn(self, code, fmt, length, locale):
+        result = code.isbn(fmt=fmt, locale=locale)
         assert result is not None
         assert len(result) >= length
 
@@ -79,7 +83,7 @@ class TestSeededCode(object):
     def test_ean(self, c1, c2):
         assert c1.ean() == c2.ean()
         assert c1.ean(fmt=EANFormat.EAN13) == \
-            c2.ean(fmt=EANFormat.EAN13)
+               c2.ean(fmt=EANFormat.EAN13)
 
     def test_imei(self, c1, c2):
         assert c1.imei() == c2.imei()
@@ -98,4 +102,4 @@ class TestSeededCode(object):
     def test_isbn(self, c1, c2):
         assert c1.isbn() == c2.isbn()
         assert c1.isbn(fmt=ISBNFormat.ISBN13) == \
-            c2.isbn(fmt=ISBNFormat.ISBN13)
+               c2.isbn(fmt=ISBNFormat.ISBN13)

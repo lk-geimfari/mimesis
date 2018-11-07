@@ -11,8 +11,8 @@ from . import patterns
 
 class TestPath(object):
 
-    def test_str(self, path):
-        assert re.match(patterns.STR_REGEX, str(path))
+    # def test_str(self, path):
+    #     assert re.match(patterns.STR_REGEX, str(path))
 
     def test_root(self, path):
         result = path.root()

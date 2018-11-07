@@ -4,6 +4,7 @@ import re
 import pytest
 
 from mimesis import Transport
+from mimesis.config import LIST_OF_LOCALES
 from mimesis.data import AIRPLANES, CARS, TRUCKS, VR_CODES, VRC_BY_LOCALES
 
 from . import patterns
@@ -12,40 +13,43 @@ from . import patterns
 class TestTransport(object):
 
     @pytest.fixture
-    def _transport(self):
+    def transport(self):
         return Transport()
 
-    def test_str(self, _transport):
-        assert re.match(patterns.STR_REGEX, str(_transport))
+    def test_str(self, transport):
+        assert re.match(patterns.PROVIDER_STR_REGEX, str(transport))
 
-    def test_truck(self, _transport):
-        result = _transport.truck().split('-')
+    def test_truck(self, transport):
+        result = transport.truck().split('-')
         manufacturer, model = result[0], result[1]
         assert manufacturer in TRUCKS
         assert len(model) == 7
 
-        result = _transport.truck(model_mask='###').split('-')
+        result = transport.truck(model_mask='###').split('-')
         manufacturer, model = result[0], result[1]
         assert manufacturer in TRUCKS
         assert len(model) == 3
 
-    def test_car(self, _transport):
-        result = _transport.car()
+    def test_car(self, transport):
+        result = transport.car()
         assert result in CARS
 
-    def test_airplane(self, _transport):
+    def test_airplane(self, transport):
         mask = '@###'
-        result = _transport.airplane(model_mask=mask).split()
+        result = transport.airplane(model_mask=mask).split()
         manufacturer, model = result[0], result[1]
         assert manufacturer in AIRPLANES
         assert len(model) == len(mask)
 
-    def test_vehicle_registration_code(self, transport):
-        result = transport.vehicle_registration_code()
-        assert result in VR_CODES
-
-        result = transport.vehicle_registration_code(allow_random=False)
-        assert result in VRC_BY_LOCALES[transport.locale]
+    @pytest.mark.parametrize(
+        'locale', LIST_OF_LOCALES,
+    )
+    def test_vehicle_registration_code(self, transport, locale):
+        result = transport.vehicle_registration_code(locale=locale)
+        if locale:
+            assert result in VRC_BY_LOCALES[locale]
+        else:
+            assert result in VR_CODES
 
 
 class TestSeededTransport(object):
@@ -68,9 +72,13 @@ class TestSeededTransport(object):
     def test_airplane(self, t1, t2):
         assert t1.airplane() == t2.airplane()
         assert t1.airplane(model_mask='#_#_#') == \
-            t2.airplane(model_mask='#_#_#')
+               t2.airplane(model_mask='#_#_#')
 
-    def test_vehicle_registration_code(self, t1, t2):
-        assert t1.vehicle_registration_code() == t2.vehicle_registration_code()
-        assert t1.vehicle_registration_code(allow_random=False) == \
-            t2.vehicle_registration_code(allow_random=False)
+    @pytest.mark.parametrize(
+        'locale', LIST_OF_LOCALES,
+    )
+    def test_vehicle_registration_code(self, t1, t2, locale):
+        assert (
+            t1.vehicle_registration_code(locale) ==
+            t2.vehicle_registration_code(locale)
+        )

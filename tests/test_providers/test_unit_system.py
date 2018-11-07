@@ -18,7 +18,7 @@ class TestUnitSystem(object):
         return UnitSystem()
 
     def test_str(self, us):
-        assert re.match(patterns.STR_REGEX, str(us))
+        assert re.match(patterns.PROVIDER_STR_REGEX, str(us))
 
     @pytest.mark.parametrize(
         'name', [

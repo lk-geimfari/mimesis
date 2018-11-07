@@ -1,10 +1,10 @@
 """Provides all at one."""
 
 import inspect
-from typing import Any, Callable, List
+from typing import Any, List, Type
 
 from mimesis.providers.address import Address
-from mimesis.providers.base import BaseDataProvider
+from mimesis.providers.base import BaseDataProvider, BaseProvider
 from mimesis.providers.business import Business
 from mimesis.providers.choice import Choice
 from mimesis.providers.clothing import ClothingSize
@@ -26,7 +26,6 @@ from mimesis.providers.structure import Structure
 from mimesis.providers.text import Text
 from mimesis.providers.transport import Transport
 from mimesis.providers.units import UnitSystem
-from mimesis.typing import Seed
 
 __all__ = ['Generic']
 
@@ -48,8 +47,8 @@ class Generic(BaseDataProvider):
         self._text = Text
         self._food = Food
         self._science = Science
-        self._code = Code
-        self._transport = Transport
+        self.transport = Transport(seed=self.seed)
+        self.code = Code(seed=self.seed)
         self.unit_system = UnitSystem(seed=self.seed)
         self.file = File(seed=self.seed)
         self.numbers = Numbers(seed=self.seed)
@@ -96,7 +95,7 @@ class Generic(BaseDataProvider):
                     attributes.append(a)
         return attributes
 
-    def add_provider(self, cls) -> None:
+    def add_provider(self, cls: Type[BaseProvider]) -> None:
         """Add a custom provider to Generic() object.
 
         :param cls: Custom provider.
@@ -104,17 +103,19 @@ class Generic(BaseDataProvider):
         :raises TypeError: if cls is not class.
         """
         if inspect.isclass(cls):
-            name = ''
-            if hasattr(cls, 'Meta'):
-                if inspect.isclass(cls.Meta) and hasattr(cls.Meta, 'name'):
-                    name = cls.Meta.name
-            else:
-                name = cls.__name__.lower()
+            if not issubclass(cls, BaseProvider):
+                raise TypeError('The provider must inherit BaseProvider.')
+
+            meta = getattr(cls, 'Meta', None)
+            name = cls.__name__.lower()
+            if meta and hasattr(meta, 'name'):
+                if meta.name:
+                    name = meta.name
             setattr(self, name, cls())
         else:
             raise TypeError('Provider must be a class')
 
-    def add_providers(self, *providers) -> None:
+    def add_providers(self, *providers: Type[BaseProvider]) -> None:
         """Add a lot of custom providers to Generic() object.
 
         :param providers: Custom providers.

@@ -2,12 +2,12 @@
 
 from typing import List, Union
 
-from mimesis.providers.base import BaseDataProvider
+from mimesis.providers.base import BaseProvider
 
 __all__ = ['Numbers']
 
 
-class Numbers(BaseDataProvider):
+class Numbers(BaseProvider):
     """Class for generating numbers."""
 
     def floats(self, n: int = 2) -> List[float]:

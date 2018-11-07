@@ -11,7 +11,7 @@ from . import patterns
 class TestFood(object):
 
     def test_str(self, food):
-        assert re.match(patterns.STR_REGEX, str(food))
+        assert re.match(patterns.DATA_PROVIDER_STR_REGEX, str(food))
 
     def test_vegetable(self, food):
         result = food.vegetable()

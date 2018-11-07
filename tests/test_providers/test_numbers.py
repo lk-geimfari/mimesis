@@ -15,7 +15,7 @@ class TestNumbers(object):
         return Numbers()
 
     def test_str(self, numbers):
-        assert re.match(patterns.STR_REGEX, str(numbers))
+        assert re.match(patterns.PROVIDER_STR_REGEX, str(numbers))
 
     def test_floats(self, numbers):
         result = numbers.floats()

@@ -36,6 +36,33 @@ So what did the code above?
 4. The same as above, but for male.
 
 
+Generic Provider
+----------------
+
+When you only need to generate data for a single locale, use the :class:`~mimesis.Generic` provider,
+and you can access all Mimesis providers from one object.
+
+.. code-block:: python
+
+    >>> from mimesis import Generic
+    >>> g = Generic('es')
+
+    >>> g.datetime.month()
+    'Agosto'
+
+    >>> g.code.imei()
+    '353918052107063'
+
+    >>> g.food.fruit()
+    'Limón'
+
+    >>> g.science.rna()
+    'GCTTTAGACC'
+
+
+
+
+
 Seeded Data
 -----------
 
@@ -102,6 +129,27 @@ is not really good,  so it's better just temporarily override current locale for
     'Waldo Foster'
 
 
+You can also use it with :class:`~mimesis.Generic()`:
+
+.. code-block:: python
+
+    >>> from mimesis import Generic
+    >>> from mimesis import locales
+
+    >>> generic = Generic(locales.EN)
+    >>> generic.text.word()
+    'anyone'
+
+    >>> with locales.override(generic.text, locales.FR):
+    ...     generic.text.word()
+
+    'mieux'
+
+    >>> generic.text.word()
+    'responsibilities'
+
+
+
 Supported locales
 ~~~~~~~~~~~~~~~~~
 
@@ -152,6 +200,19 @@ Mimesis support over twenty different data providers available,
 which can produce data related to food, people, computer hardware,
 transportation, addresses, and more. List of supported data providers
 available in the tables below.
+
+
+Base Providers
+~~~~~~~~~~~~~~
+
++------+------------------------------------------+----------------------------------------------+
+| №    | Provider                                 | Description                                  |
++======+==========================================+==============================================+
+|  1   | :class:`~mimesis.schema.BaseProvider`    | Superclass for all providers                 |
++------+------------------------------------------+----------------------------------------------+
+|  2   | :class:`~mimesis.schema.BaseDataProvider`| Superclass for locale dependent providers    |
++------+------------------------------------------+----------------------------------------------+
+
 
 Usual Providers
 ~~~~~~~~~~~~~~~
@@ -243,30 +304,6 @@ Builtin data providers
 |  8   | :class:`~mimesis.builtins.PolandSpecProvider`      | Specific data provider for Poland          |
 +------+----------------------------------------------------+--------------------------------------------+
 
-Generic Provider
-----------------
-
-When you only need to generate data for a single locale, use the :class:`~mimesis.Generic` provider,
-and you can access all Mimesis providers from one object.
-
-.. code-block:: python
-
-    >>> from mimesis import Generic
-    >>> g = Generic('es')
-
-    >>> g.datetime.month()
-    'Agosto'
-
-    >>> g.code.imei()
-    '353918052107063'
-
-    >>> g.food.fruit()
-    'Limón'
-
-    >>> g.science.rna()
-    'GCTTTAGACC'
-
-
 
 Custom Providers
 ----------------
@@ -310,6 +347,26 @@ You can also add multiple providers:
     'Hello!'
     >>> generic.another.bye()
     'Bye!'
+
+If you'll try to add provider which does not inherit :class:`~mimesis.BaseProvider`
+then you got ``TypeError`` exception:
+
+.. code:: python
+
+    >>> class InvalidProvider(object):
+    ...     @staticmethod
+    ...     def hello():
+    ...         return 'Hello!'
+
+    >>> generic.add_provider(InvalidProvider)
+    Traceback (most recent call last):
+      ...
+    TypeError: The provider must inherit BaseProvider.
+
+
+All providers must be subclasses of :class:`~mimesis.BaseProvider`
+because of ensuring a single instance of object ``Random``.
+
 
 Everything is pretty easy and self-explanatory here, therefore, we will
 only clarify one moment — attribute *name*, class *Meta* is the name

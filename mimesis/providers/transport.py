@@ -1,12 +1,14 @@
 """Provides data related to transports."""
 
+from typing import Optional
+
 from mimesis.data import AIRPLANES, CARS, TRUCKS, VR_CODES, VRC_BY_LOCALES
-from mimesis.providers.base import BaseDataProvider
+from mimesis.providers.base import BaseProvider
 
 __all__ = ['Transport']
 
 
-class Transport(BaseDataProvider):
+class Transport(BaseProvider):
     """Class for generating data related to transports."""
 
     def __init__(self, *args, **kwargs) -> None:
@@ -56,14 +58,13 @@ class Transport(BaseDataProvider):
         plane = self.random.choice(AIRPLANES)
         return '{} {}'.format(plane, model)
 
-    def vehicle_registration_code(self, allow_random: bool = True) -> str:
+    def vehicle_registration_code(self, locale: Optional[str] = None) -> str:
         """Get vehicle registration code of country.
 
-        :param allow_random: If False return only code
-            for current locale (country).
+        :param locale: Registration code for locale (country).
         :return: Vehicle registration code.
         """
-        if not allow_random:
-            return VRC_BY_LOCALES[self.locale]
+        if locale:
+            return VRC_BY_LOCALES[locale]
 
         return self.random.choice(VR_CODES)

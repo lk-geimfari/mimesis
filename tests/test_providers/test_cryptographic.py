@@ -15,6 +15,9 @@ class TestCryptographic(object):
     def crypto(self):
         return Cryptographic()
 
+    def test_str(self, crypto):
+        assert re.match(patterns.PROVIDER_STR_REGEX, str(crypto))
+
     def test_uuid(self, crypto):
         assert re.match(patterns.UUID_REGEX, crypto.uuid())
 
@@ -81,7 +84,7 @@ class TestSeededCryptographic(object):
     def test_hash(self, c1, c2):
         assert c1.hash() == c2.hash()
         assert c1.hash(algorithm=Algorithm.SHA512) == \
-            c2.hash(algorithm=Algorithm.SHA512)
+               c2.hash(algorithm=Algorithm.SHA512)
 
     def test_bytes(self, c1, c2):
         assert c1.bytes() == c2.bytes()
@@ -97,4 +100,4 @@ class TestSeededCryptographic(object):
     def test_mnemonic_phrase(self, c1, c2):
         assert c1.mnemonic_phrase() == c2.mnemonic_phrase()
         assert c1.mnemonic_phrase(length=16) == \
-            c2.mnemonic_phrase(length=16)
+               c2.mnemonic_phrase(length=16)

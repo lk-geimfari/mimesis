@@ -2,12 +2,12 @@
 
 from typing import Any, Optional, Sequence, Union
 
-from mimesis.providers.base import BaseDataProvider
+from mimesis.providers.base import BaseProvider
 
 __all__ = ['Choice']
 
 
-class Choice(BaseDataProvider):
+class Choice(BaseProvider):
     """Class for generating a random choice from items in a sequence."""
 
     def __init__(self, *args, **kwargs) -> None:

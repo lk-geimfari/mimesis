@@ -15,16 +15,16 @@ class TestGames(object):
         return Games()
 
     def test_str(self, games):
-        assert re.match(patterns.STR_REGEX, str(games))
+        assert re.match(patterns.PROVIDER_STR_REGEX, str(games))
 
     def test_gaming_platform(self, games):
         platform = games.gaming_platform()
         assert platform in GAMING_PLATFORMS
 
     def test_score(self, games):
-        result = games.score(minimum=5.5, maximum=10)
+        result = games.score(minimum=5, maximum=10)
         assert isinstance(result, float)
-        assert (result >= 5.5) and (result <= 10)
+        assert (result >= 5) and (result <= 10)
 
     def test_pegi_rating(self, games):
         result = games.pegi_rating().split(' ')[1]

@@ -17,7 +17,7 @@ class TestBusiness(object):
         return Business()
 
     def test_str(self, business):
-        assert re.match(patterns.STR_REGEX, str(business))
+        assert re.match(patterns.DATA_PROVIDER_STR_REGEX, str(business))
 
     def test_copyright(self, business):
         result = business.copyright()

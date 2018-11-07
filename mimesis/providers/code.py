@@ -5,13 +5,13 @@ from typing import Optional
 from mimesis.data import (EAN_MASKS, IMEI_TACS, ISBN_GROUPS, ISBN_MASKS,
                           LOCALE_CODES)
 from mimesis.enums import EANFormat, ISBNFormat
-from mimesis.providers.base import BaseDataProvider
+from mimesis.providers.base import BaseProvider
 from mimesis.utils import luhn_checksum
 
 __all__ = ['Code']
 
 
-class Code(BaseDataProvider):
+class Code(BaseProvider):
     """Class that provides methods for generating codes."""
 
     def __init__(self, *args, **kwargs):
@@ -39,19 +39,20 @@ class Code(BaseDataProvider):
         """
         return self.random.custom_code(mask=mask)
 
-    def isbn(self, fmt: Optional[ISBNFormat] = None) -> str:
+    def isbn(self, fmt: Optional[ISBNFormat] = None, locale: str = 'en') -> str:
         """Generate ISBN for current locale.
 
         To change ISBN format, pass parameter ``fmt`` with needed value of
         the enum object :class:`~mimesis.enums.ISBNFormat`
 
         :param fmt: ISBN format.
+        :param locale: Locale code.
         :return: ISBN.
         :raises NonEnumerableError: if fmt is not enum ISBNFormat.
         """
         fmt_value = self._validate_enum(item=fmt, enum=ISBNFormat)
         mask = ISBN_MASKS[fmt_value].format(
-            ISBN_GROUPS[self.locale])
+            ISBN_GROUPS[locale])
         return self.random.custom_code(mask)
 
     def ean(self, fmt: Optional[EANFormat] = None) -> str:

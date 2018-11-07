@@ -11,13 +11,13 @@ from mimesis.data import (EMOJI, HASHTAGS, HTTP_METHODS, HTTP_STATUS_CODES,
                           USER_AGENTS, USERNAMES)
 from mimesis.enums import Layer, MimeType, PortRange, TLDType
 from mimesis.exceptions import NonEnumerableError
-from mimesis.providers.base import BaseDataProvider
+from mimesis.providers.base import BaseProvider
 from mimesis.providers.file import File
 
 __all__ = ['Internet']
 
 
-class Internet(BaseDataProvider):
+class Internet(BaseProvider):
     """Class for generating data related to the internet."""
 
     def __init__(self, *args, **kwargs):
@@ -27,7 +27,7 @@ class Internet(BaseDataProvider):
         :param kwargs: Keyword arguments.
         """
         super().__init__(*args, **kwargs)
-        self.__file = File('en', seed=self.seed)
+        self.__file = File(seed=self.seed)
 
     def content_type(self, mime_type: Optional[MimeType] = None) -> str:
         """Get a random HTTP content type.

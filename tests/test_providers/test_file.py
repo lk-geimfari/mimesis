@@ -19,7 +19,7 @@ class TestFile(object):
         return File()
 
     def test_str(self, file):
-        assert re.match(patterns.STR_REGEX, str(file))
+        assert re.match(patterns.PROVIDER_STR_REGEX, str(file))
 
     @pytest.mark.parametrize(
         'extension', [

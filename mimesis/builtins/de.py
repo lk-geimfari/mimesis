@@ -12,7 +12,7 @@ class GermanySpecProvider(BaseSpecProvider):
     def __init__(self, *args, **kwargs):
         """Initialize attributes."""
         super().__init__(*args, **kwargs)
-        self._data = pull('builtin.json', 'de')
+        self._data = pull(self._datafile, 'de')
 
     class Meta:
         """The name of the provider."""
