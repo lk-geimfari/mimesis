@@ -5,7 +5,7 @@ import functools
 import json
 import ssl
 from os import path
-from typing import Mapping, Optional, Union
+from typing import Mapping, Union
 from urllib import request
 from uuid import uuid4
 
@@ -14,7 +14,7 @@ from mimesis.exceptions import UnsupportedLocale
 from mimesis.typing import JSON
 
 __all__ = ['download_image', 'luhn_checksum',
-           'setup_locale', 'pull']
+           'pull']
 
 DATA_DIR = path.abspath(path.join(path.dirname(__file__), 'data'))
 
@@ -125,20 +125,3 @@ def download_image(url: str = '', save_path: str = '',
         request.urlretrieve(url, full_image_path)
         return full_image_path
     return None
-
-
-def setup_locale(locale: Optional[str] = None) -> str:
-    """Set up locale after pre-check.
-
-    :param str locale: Locale
-    :return: Locale in lowercase.
-    :raises UnsupportedLocale: if locales is not supported.
-    """
-    if not locale:
-        return locales.DEFAULT_LOCALE
-
-    locale = locale.lower()
-    if locale not in locales.SUPPORTED_LOCALES:
-        raise UnsupportedLocale(locale)
-
-    return locale

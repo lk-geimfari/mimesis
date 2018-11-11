@@ -3,7 +3,7 @@ import re
 import pytest
 
 from mimesis.enums import Gender
-from mimesis.exceptions import NonEnumerableError
+from mimesis.exceptions import NonEnumerableError, UnsupportedLocale
 from mimesis.locales import LIST_OF_LOCALES
 from mimesis.providers.base import BaseDataProvider
 
@@ -15,6 +15,21 @@ class TestBase(object):
     @pytest.fixture
     def base_data_provider(self):
         return BaseDataProvider()
+
+    @pytest.mark.parametrize(
+        'inp, out', [
+            ('EN', 'en'),
+            ('DE', 'de'),
+            ('RU', 'ru'),
+        ],
+    )
+    def test_setup_locale(self, base_data_provider, inp, out):
+        result = BaseDataProvider(locale=inp)
+        assert result.locale == out
+
+    def test_setup_locale_unsupported_locale(self):
+        with pytest.raises(UnsupportedLocale):
+            BaseDataProvider(locale='nil')
 
     def test_str(self, base_data_provider):
         assert re.match(

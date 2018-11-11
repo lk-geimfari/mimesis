@@ -88,20 +88,3 @@ def test_update_dict():
 
     result = utils.update_dict(first, third)
     assert 'spaniel' not in result['animals']['dogs']
-
-
-@pytest.mark.parametrize(
-    'inp, out', [
-        ('EN', 'en'),
-        ('DE', 'de'),
-        ('RU', 'ru'),
-    ],
-)
-def test_setup_locale(inp, out):
-    result = utils.setup_locale(inp)
-    assert result == out
-
-
-def test_setup_locale_unsupported_locale():
-    with pytest.raises(UnsupportedLocale):
-        utils.setup_locale('nil')

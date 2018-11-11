@@ -2,10 +2,10 @@
 
 from typing import Any, Optional
 
-from mimesis.exceptions import NonEnumerableError
+from mimesis import locales
+from mimesis.exceptions import NonEnumerableError, UnsupportedLocale
 from mimesis.helpers import Random, get_random_item, random
 from mimesis.typing import Seed
-from mimesis.utils import setup_locale
 
 __all__ = ['BaseDataProvider', 'BaseProvider']
 
@@ -76,7 +76,23 @@ class BaseDataProvider(BaseProvider):
         super().__init__(seed=seed)
         self._data: dict
         self._datafile: str
-        self.locale = setup_locale(locale)
+        self._setup_locale(locale)
+
+    def _setup_locale(self, locale: Optional[str] = None) -> None:
+        """Set up locale after pre-check.
+
+        :param str locale: Locale
+        :raises UnsupportedLocale: When locale is not supported.
+        :return: Nothing.
+        """
+        if not locale:
+            locale = locales.DEFAULT_LOCALE
+
+        locale = locale.lower()
+        if locale not in locales.SUPPORTED_LOCALES:
+            raise UnsupportedLocale(locale)
+
+        self.locale = locale
 
     def get_current_locale(self) -> str:
         """Get current locale.
