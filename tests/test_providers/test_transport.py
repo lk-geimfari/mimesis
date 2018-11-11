@@ -4,8 +4,8 @@ import re
 import pytest
 
 from mimesis import Transport
-from mimesis.config import LIST_OF_LOCALES
 from mimesis.data import AIRPLANES, CARS, TRUCKS, VR_CODES, VRC_BY_LOCALES
+from mimesis.locales import LIST_OF_LOCALES
 
 from . import patterns
 

@@ -9,7 +9,7 @@ from typing import Mapping, Optional, Union
 from urllib import request
 from uuid import uuid4
 
-from mimesis import config
+from mimesis import locales
 from mimesis.exceptions import UnsupportedLocale
 from mimesis.typing import JSON
 
@@ -87,7 +87,7 @@ def pull(file: str, locale: str = 'en') -> JSON:
 
     locale = locale.lower()
 
-    if locale not in config.SUPPORTED_LOCALES:
+    if locale not in locales.SUPPORTED_LOCALES:
         raise UnsupportedLocale(locale)
 
     master_locale = locale.split('-')[0]
@@ -135,10 +135,10 @@ def setup_locale(locale: Optional[str] = None) -> str:
     :raises UnsupportedLocale: if locales is not supported.
     """
     if not locale:
-        return config.DEFAULT_LOCALE
+        return locales.DEFAULT_LOCALE
 
     locale = locale.lower()
-    if locale not in config.SUPPORTED_LOCALES:
+    if locale not in locales.SUPPORTED_LOCALES:
         raise UnsupportedLocale(locale)
 
     return locale

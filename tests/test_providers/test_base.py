@@ -2,9 +2,9 @@ import re
 
 import pytest
 
-from mimesis import config
 from mimesis.enums import Gender
 from mimesis.exceptions import NonEnumerableError
+from mimesis.locales import LIST_OF_LOCALES
 from mimesis.providers.base import BaseDataProvider
 
 from . import patterns
@@ -37,7 +37,7 @@ class TestBase(object):
         with pytest.raises(NonEnumerableError):
             base_data_provider._validate_enum('', '')
 
-    @pytest.mark.parametrize('locale', config.LIST_OF_LOCALES)
+    @pytest.mark.parametrize('locale', LIST_OF_LOCALES)
     def test_get_current_locale(self, locale):
         base = BaseDataProvider(locale=locale)
         assert locale == base.get_current_locale()

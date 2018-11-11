@@ -4,10 +4,10 @@ import re
 import pytest
 
 from mimesis import Code
-from mimesis.config import LIST_OF_LOCALES
 from mimesis.data import LOCALE_CODES
 from mimesis.enums import EANFormat, ISBNFormat
 from mimesis.exceptions import NonEnumerableError
+from mimesis.locales import LIST_OF_LOCALES
 
 from . import patterns
 

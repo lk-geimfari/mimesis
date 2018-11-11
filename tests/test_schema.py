@@ -2,7 +2,7 @@ import re
 
 import pytest
 
-from mimesis import config
+from mimesis import locales
 from mimesis.builtins import USASpecProvider
 from mimesis.enums import Gender
 from mimesis.exceptions import (UndefinedField, UndefinedSchema,
@@ -17,7 +17,7 @@ def test_str(field):
 
 
 @pytest.mark.parametrize(
-    'locale', config.LIST_OF_LOCALES,
+    'locale', locales.LIST_OF_LOCALES,
 )
 def test_field(locale):
     filed = Field(locale)
