@@ -33,12 +33,13 @@ docs:
 
 .PHONY: clean-build
 clean-build:
-	rm --force --recursive build/
-	rm --force --recursive dist/
-	rm --force --recursive .cache/
-	rm --force --recursive .mypy_cache/
-	rm --force --recursive mimesis.egg-info/
-	rm --force --recursive .benchmarks/
+	rm -rf build/
+	rm -rf dist/
+	rm -rf .cache/
+	rm -rf .mypy_cache/
+	rm -rf mimesis.egg-info/
+	rm -rf .benchmarks/
+	rm -rf .pytest_cache/
 
 
 .PHONY: clean
