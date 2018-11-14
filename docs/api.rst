@@ -71,16 +71,6 @@ Decorators
    :members:
 
 
-Locales
-=======
-
-
-override
---------
-
-.. automodule:: mimesis.locales
-   :members: override
-
 Custom Exceptions
 =================
 
