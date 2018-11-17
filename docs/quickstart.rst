@@ -291,17 +291,15 @@ Builtin data providers
 +------+----------------------------------------------------+--------------------------------------------+
 |  2   | :class:`~mimesis.builtins.BrazilSpecProvider`      | Specific data provider for Brazil          |
 +------+----------------------------------------------------+--------------------------------------------+
-|  3   | :class:`~mimesis.builtins.JapanSpecProvider`       | Specific data provider for Japan           |
+|  3   | :class:`~mimesis.builtins.USASpecProvider`         | Specific data provider for USA             |
 +------+----------------------------------------------------+--------------------------------------------+
-|  4   | :class:`~mimesis.builtins.USASpecProvider`         | Specific data provider for USA             |
+|  4   | :class:`~mimesis.builtins.NetherlandsSpecProvider` | Specific data provider for Netherlands     |
 +------+----------------------------------------------------+--------------------------------------------+
-|  5   | :class:`~mimesis.builtins.NetherlandsSpecProvider` | Specific data provider for Netherlands     |
+|  5   | :class:`~mimesis.builtins.GermanySpecProvider`     | Specific data provider for Germany         |
 +------+----------------------------------------------------+--------------------------------------------+
-|  6   | :class:`~mimesis.builtins.GermanySpecProvider`     | Specific data provider for Germany         |
+|  6   | :class:`~mimesis.builtins.UkraineSpecProvider`     | Specific data provider for Ukraine         |
 +------+----------------------------------------------------+--------------------------------------------+
-|  7   | :class:`~mimesis.builtins.UkraineSpecProvider`     | Specific data provider for Ukraine         |
-+------+----------------------------------------------------+--------------------------------------------+
-|  8   | :class:`~mimesis.builtins.PolandSpecProvider`      | Specific data provider for Poland          |
+|  7   | :class:`~mimesis.builtins.PolandSpecProvider`      | Specific data provider for Poland          |
 +------+----------------------------------------------------+--------------------------------------------+
 
 

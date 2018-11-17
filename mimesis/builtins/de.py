@@ -1,7 +1,9 @@
 """Specific data provider for Germany (de)."""
 
+from typing import Optional
+
 from mimesis.builtins.base import BaseSpecProvider
-from mimesis.utils import pull
+from mimesis.typing import Seed
 
 __all__ = ['GermanySpecProvider']
 
@@ -9,10 +11,10 @@ __all__ = ['GermanySpecProvider']
 class GermanySpecProvider(BaseSpecProvider):
     """Specific-provider of misc data for Germany."""
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, seed: Optional[Seed] = None):
         """Initialize attributes."""
-        super().__init__(*args, **kwargs)
-        self._data = pull(self._datafile, 'de')
+        super().__init__(locale='de', seed=seed)
+        self.pull(self._datafile)
 
     class Meta:
         """The name of the provider."""

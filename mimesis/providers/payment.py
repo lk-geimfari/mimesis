@@ -7,9 +7,9 @@ from typing import Optional
 from mimesis.data import CREDIT_CARD_NETWORKS
 from mimesis.enums import CardType, Gender
 from mimesis.exceptions import NonEnumerableError
-from mimesis.helpers import get_random_item
 from mimesis.providers.base import BaseProvider
 from mimesis.providers.person import Person
+from mimesis.random import get_random_item
 from mimesis.utils import luhn_checksum
 
 __all__ = ['Payment']

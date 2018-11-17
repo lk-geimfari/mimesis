@@ -29,7 +29,7 @@ class Address(BaseDataProvider):
         """
         super().__init__(*args, **kwargs)
         self._datafile = 'address.json'
-        self._data = pull(self._datafile, self.locale)
+        self.pull(self._datafile)
 
     @staticmethod
     def _dd_to_dms(num: float, _type: str) -> str:

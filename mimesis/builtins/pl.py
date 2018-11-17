@@ -5,13 +5,17 @@ from typing import Optional
 from mimesis.builtins.base import BaseSpecProvider
 from mimesis.enums import Gender
 from mimesis.providers import Datetime
-from mimesis.typing import DateTime
+from mimesis.typing import DateTime, Seed
 
 __all__ = ['PolandSpecProvider']
 
 
 class PolandSpecProvider(BaseSpecProvider):
     """Class that provides special data for Poland (pl)."""
+
+    def __init__(self, seed: Optional[Seed] = None):
+        """Initialize attributes."""
+        super().__init__(locale='pl', seed=seed)
 
     class Meta:
         """The name of the provider."""

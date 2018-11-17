@@ -36,11 +36,13 @@ Version 3.0.0
 
 - Renamed ``Science().dna()`` to ``Science().dna_sequence()``
 - Renamed ``Science().rna()`` to ``Science().rna_sequence()``
+- Renamed module ``helpers.py`` to ``random.py``
+- Renamed module ``config.py`` to ``locales.py``
 
 
 **Removed**:
 
-- Locale independent providers does not support parameter `locale` anymore
+- Locale independent providers does not support parameter ``locale`` anymore
 - Removed deprecated argument ``fmt`` for ``Datetime().date()``, use ``Datetime().formatted_date()`` instead
 - Removed deprecated argument ``fmt`` for ``Datetime().time()``, use ``Datetime().formatted_time()`` instead
 - Removed deprecated argument ``humanize`` for ``Datetime().datetime()``, use ``Datetime().formatted_datetime()`` instead
@@ -52,6 +54,7 @@ Version 3.0.0
 - Removed deprecated and useless method: ``Development().container()``
 - Removed deprecated and useless method: ``Development().database()``
 - Removed duplicated method ``Internet().image_by_keyword()``, use ``Internet().stock_image()`` with ``keywords`` instead
+- Removed deprecated JapanSpecProvider
 
 
 **Fixed**:

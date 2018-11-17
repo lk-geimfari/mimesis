@@ -1,8 +1,5 @@
-# import contextlib
-# from typing import Generator
-#
-# from mimesis import providers
-# from mimesis.utils import pull
+import contextlib
+from typing import Generator
 
 CS = 'cs'
 DA = 'da'
@@ -41,135 +38,135 @@ ZH = 'zh'
 DEFAULT_LOCALE = EN
 
 SUPPORTED_LOCALES = {
-    'cs': {
+    CS: {
         'name': 'Czech',
         'name_local': 'česky',
     },
-    'da': {
+    DA: {
         'name': 'Danish',
         'name_local': 'Dansk',
     },
-    'de': {
+    DE: {
         'name': 'German',
         'name_local': 'Deutsch',
     },
-    'de-at': {
+    DE_AT: {
         'name': 'Austrian German',
         'name_local': 'Deutsch',
     },
-    'de-ch': {
+    DE_CH: {
         'name': 'Swiss German',
         'name_local': 'Deutsch',
     },
-    'el': {
+    EL: {
         'name': 'Greek',
         'name_local': 'Ελληνικά',
     },
-    'en': {
+    EN: {
         'name': 'English',
         'name_local': 'English',
     },
-    'en-gb': {
+    EN_GB: {
         'name': 'British English',
         'name_local': 'English',
     },
-    'en-au': {
+    EN_AU: {
         'name': 'Australian English',
         'name_local': 'English',
     },
-    'en-ca': {
+    EN_CA: {
         'name': 'Canadian English',
         'name_local': 'English',
     },
-    'es': {
+    ES: {
         'name': 'Spanish',
         'name_local': 'Español',
     },
-    'es-mx': {
+    ES_MX: {
         'name': 'Mexican Spanish',
         'name_local': 'Español',
     },
-    'et': {
+    ET: {
         'name': 'Estonian',
         'name_local': 'Eesti',
     },
-    'fa': {
+    FA: {
         'name': 'Farsi',
         'name_local': 'فارسی',
     },
-    'fi': {
+    FI: {
         'name': 'Finnish',
         'name_local': 'Suomi',
     },
-    'fr': {
+    FR: {
         'name': 'French',
         'name_local': 'Français',
     },
-    'hu': {
+    HU: {
         'name': 'Hungarian',
         'name_local': 'Magyar',
     },
-    'is': {
+    IS: {
         'name': 'Icelandic',
         'name_local': 'Íslenska',
     },
-    'it': {
+    IT: {
         'name': 'Italian',
         'name_local': 'Italiano',
     },
-    'ja': {
+    JA: {
         'name': 'Japanese',
         'name_local': '日本語',
     },
-    'kk': {
+    KK: {
         'name': 'Kazakh',
         'name_local': 'Қазақша',
     },
-    'ko': {
+    KO: {
         'name': 'Korean',
         'name_local': '한국어',
     },
-    'nl': {
+    NL: {
         'name': 'Dutch',
         'name_local': 'Nederlands',
     },
-    'nl-be': {
+    NL_BE: {
         'name': 'Belgium Dutch',
         'name_local': 'Nederlands',
     },
-    'no': {
+    NO: {
         'name': 'Norwegian',
         'name_local': 'Norsk',
     },
-    'pl': {
+    PL: {
         'name': 'Polish',
         'name_local': 'Polski',
     },
-    'pt': {
+    PT: {
         'name': 'Portuguese',
         'name_local': 'Português',
     },
-    'pt-br': {
+    PT_BR: {
         'name': 'Brazilian Portuguese',
         'name_local': 'Português Brasileiro',
     },
-    'ru': {
+    RU: {
         'name': 'Russian',
         'name_local': 'Русский',
     },
-    'sv': {
+    SV: {
         'name': 'Swedish',
         'name_local': 'Svenska',
     },
-    'tr': {
+    TR: {
         'name': 'Turkish',
         'name_local': 'Türkçe',
     },
-    'uk': {
+    UK: {
         'name': 'Ukrainian',
         'name_local': 'Українська',
     },
-    'zh': {
+    ZH: {
         'name': 'Chinese',
         'name_local': '汉语',
     },
@@ -177,30 +174,22 @@ SUPPORTED_LOCALES = {
 
 LIST_OF_LOCALES = list(SUPPORTED_LOCALES)
 
-# DataProviderType = providers.BaseDataProvider
-#
-#
-# @contextlib.contextmanager
-# def override(provider: DataProviderType,
-#              locale: str = EN) -> Generator[DataProviderType, None, None]:
-#     """Context manager which allows overriding current locale.
-#
-#     :param provider: Locale dependent data provider.
-#     :param locale: Locale.
-#     :return:
-#     """
-#     origin_locale = getattr(provider, 'locale', None)
-#     datafile = getattr(provider, '_datafile', None)
-#
-#     if not datafile or not locale:
-#         raise ValueError('«{}» has not locale dependent'.format(
-#             provider.__class__.__name__))
-#
-#     provider.locale = locale
-#     provider._data = pull(datafile, locale)
-#
-#     try:
-#         yield provider
-#     finally:
-#         provider.locale = origin_locale
-#         provider._data = pull(datafile, origin_locale)
+
+@contextlib.contextmanager
+def override(provider, locale: str = EN):
+    """Context manager which allows overriding current locale.
+
+    :param provider: Locale dependent data provider.
+    :param locale: Locale.
+    :return:
+    """
+    origin_locale = getattr(provider, 'locale', None)
+    if not hasattr(provider, '_datafile') or not origin_locale:
+        raise ValueError('«{}» has not locale dependent'.format(
+            provider.__class__.__name__))
+
+    provider.override_locale(locale)
+    try:
+        yield provider
+    finally:
+        provider.override_locale(origin_locale)

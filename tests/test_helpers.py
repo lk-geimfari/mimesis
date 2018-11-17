@@ -1,8 +1,8 @@
 import pytest
 
 from mimesis.enums import Gender
-from mimesis.helpers import get_random_item
-from mimesis.helpers import random as _random
+from mimesis.random import get_random_item
+from mimesis.random import random as _random
 
 
 @pytest.fixture

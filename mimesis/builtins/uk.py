@@ -4,7 +4,7 @@ from typing import Optional
 
 from mimesis.builtins.base import BaseSpecProvider
 from mimesis.enums import Gender
-from mimesis.utils import pull
+from mimesis.typing import Seed
 
 __all__ = ['UkraineSpecProvider']
 
@@ -12,10 +12,10 @@ __all__ = ['UkraineSpecProvider']
 class UkraineSpecProvider(BaseSpecProvider):
     """Class that provides special data for Ukraine (uk)."""
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, seed: Optional[Seed] = None):
         """Initialize attributes."""
-        super().__init__(*args, **kwargs)
-        self._data = pull(self._datafile, 'uk')
+        super().__init__(locale='uk', seed=seed)
+        self.pull(self._datafile)
 
     class Meta:
         """The name of the provider."""

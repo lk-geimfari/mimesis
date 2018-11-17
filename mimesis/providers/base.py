@@ -3,13 +3,13 @@
 import collections
 import functools
 import json
-
-from os import path
-from typing import Any, Optional, Mapping
+import os
+from pathlib import Path
+from typing import Any, Mapping, Optional, Union
 
 from mimesis import locales
 from mimesis.exceptions import NonEnumerableError, UnsupportedLocale
-from mimesis.helpers import Random, get_random_item, random
+from mimesis.random import Random, get_random_item, random
 from mimesis.typing import JSON, Seed
 
 __all__ = ['BaseDataProvider', 'BaseProvider']
@@ -79,11 +79,13 @@ class BaseDataProvider(BaseProvider):
         :param seed: Seed to all the random functions.
         """
         super().__init__(seed=seed)
-        self._data = {}
+        self._data: dict = {}
         self._datafile: Optional[str] = None
         self._setup_locale(locale)
-        self._data_dir = path.abspath(
-            path.join('mimesis', 'data'))
+        # TODO: Use pathlib instead
+        self._data_dir: Union[str, Path] = os.path.abspath(
+            os.path.join(os.path.join(
+                os.path.dirname(__file__), os.pardir), 'data'))
 
     def _setup_locale(self, locale: Optional[str] = None) -> None:
         """Set up locale after pre-check.
@@ -117,28 +119,21 @@ class BaseDataProvider(BaseProvider):
         return initial
 
     @functools.lru_cache(maxsize=None)
-    def pull(self, data_dir: Optional[str] = None,
-             datafile: Optional[str] = None, locale: Optional[str] = None):
+    def pull(self, datafile: Optional[str] = None):
         """Pull the content from the JSON and memorize one.
 
         Opens JSON file ``file`` in the folder ``data/locale``
         and get content from the file and memorize ones using lru_cache.
 
-        :param data_dir: Data directory.
         :param datafile: The name of file.
-        :param locale: Locale.
         :return: The content of the file.
         :raises UnsupportedLocale: if locale is not supported.
         """
-
-        if not data_dir:
-            data_dir = self._data_dir
+        locale = self.locale
+        data_dir = self._data_dir
 
         if not datafile:
             datafile = self._datafile
-
-        if not locale:
-            locale = self.locale
 
         def get_data(locale_name: str) -> JSON:
             """Pull JSON data from file.
@@ -146,11 +141,9 @@ class BaseDataProvider(BaseProvider):
             :param locale_name: Locale name.
             :return: Content of JSON file as dict.
             """
-            file_path = path.join(data_dir, locale_name, datafile)
+            file_path = os.path.join(data_dir, locale_name, datafile)
             with open(file_path, 'r', encoding='utf8') as f:
                 return json.load(f)
-
-        locale = locale.lower()
 
         if locale not in locales.SUPPORTED_LOCALES:
             raise UnsupportedLocale(locale)
@@ -173,6 +166,16 @@ class BaseDataProvider(BaseProvider):
         :return: Current locale.
         """
         return self.locale
+
+    def override_locale(self, locale: Optional[str] = 'en') -> None:
+        """Overrides current locale with passed and pull data for new locale.
+
+        :param locale: Locale
+        :return: Nothing.
+        """
+        self.locale = locale
+        self.pull.cache_clear()
+        self.pull()
 
     def __str__(self) -> str:
         """Human-readable representation of locale."""
