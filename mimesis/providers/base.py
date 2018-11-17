@@ -82,10 +82,7 @@ class BaseDataProvider(BaseProvider):
         self._data: dict = {}
         self._datafile: Optional[str] = None
         self._setup_locale(locale)
-        # TODO: Use pathlib instead
-        self._data_dir: Union[str, Path] = os.path.abspath(
-            os.path.join(os.path.join(
-                os.path.dirname(__file__), os.pardir), 'data'))
+        self._data_dir = Path(__file__).parent.parent.joinpath('data')
 
     def _setup_locale(self, locale: Optional[str] = None) -> None:
         """Set up locale after pre-check.
