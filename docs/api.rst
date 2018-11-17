@@ -63,7 +63,6 @@ Decorators
 .. automodule:: mimesis.decorators
    :members:
 
-
 Locales
 =======
 
