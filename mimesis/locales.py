@@ -1,5 +1,8 @@
 import contextlib
-from typing import Generator
+from typing import Generator, TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from mimesis.providers.base import BaseDataProvider
 
 CS = 'cs'
 DA = 'da'
@@ -176,7 +179,8 @@ LIST_OF_LOCALES = list(SUPPORTED_LOCALES)
 
 
 @contextlib.contextmanager
-def override(provider, locale: str = EN):
+def override(provider: 'BaseDataProvider',
+             locale: str = EN) -> Generator['BaseDataProvider', None, None]:
     """Context manager which allows overriding current locale.
 
     :param provider: Locale dependent data provider.

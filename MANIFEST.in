@@ -6,7 +6,6 @@ recursive-include mimesis/data *.json
 exclude MANIFEST.in
 exclude *.rst
 include README.rst
-prune benchmarks
 prune docs
 prune media
 prune tests
