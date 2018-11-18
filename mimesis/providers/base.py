@@ -142,14 +142,12 @@ class BaseDataProvider(BaseProvider):
             with open(file_path, 'r', encoding='utf8') as f:
                 return json.load(f)
 
-        if locale not in locales.SUPPORTED_LOCALES:
-            raise UnsupportedLocale(locale)
-
-        master_locale = locale.split('-')[0]
+        separator = '-'
+        # TODO: Refactoring
+        master_locale = locale.split(separator)[0]
         data = get_data(master_locale)
 
-        # Handle sub-locales
-        if '-' in locale:
+        if separator in locale:
             data = self._update_dict(data, get_data(locale))
 
         self._data = data

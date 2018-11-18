@@ -10,7 +10,7 @@ from mimesis.exceptions import NonEnumerableError
 from mimesis.providers.base import BaseProvider
 from mimesis.providers.person import Person
 from mimesis.random import get_random_item
-from mimesis.utils import luhn_checksum
+from mimesis.shortcuts import luhn_checksum
 
 __all__ = ['Payment']
 

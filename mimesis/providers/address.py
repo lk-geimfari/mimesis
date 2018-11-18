@@ -10,7 +10,6 @@ from mimesis.data import (CALLING_CODES, CONTINENT_CODES, COUNTRY_CODES,
                           SHORTENED_ADDRESS_FMT)
 from mimesis.enums import CountryCode
 from mimesis.providers.base import BaseDataProvider
-from mimesis.utils import pull
 
 __all__ = ['Address']
 

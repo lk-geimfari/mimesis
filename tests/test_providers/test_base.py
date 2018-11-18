@@ -17,6 +17,56 @@ class TestBase(object):
         return BaseDataProvider()
 
     @pytest.mark.parametrize(
+        'locale, city', [
+            ('en', 'New York'),
+            ('en-gb', 'Aberystwyth'),
+            ('ru', 'Москва'),
+        ],
+    )
+    def test_pull(self, locale, city):
+        data_provider = BaseDataProvider(locale)
+        data_provider.pull('address.json')
+        assert city in data_provider._data['city']
+
+    @pytest.mark.parametrize('locale', LIST_OF_LOCALES)
+    def test_pull_raises(self, locale):
+        data_provider = BaseDataProvider(locale=locale)
+        with pytest.raises(FileNotFoundError):
+            data_provider.pull('something.json')
+
+    def test_update_dict(self, base_data_provider):
+        first = {
+            'animals': {
+                'dogs': [
+                    'spaniel',
+                ],
+            },
+        }
+        second = {
+            'animals': {
+                'cats': [
+                    'maine coon',
+                ],
+            },
+        }
+
+        result = base_data_provider._update_dict(first, second)
+
+        assert 'cats' in result['animals']
+        assert 'dogs' in result['animals']
+
+        third = {
+            'animals': {
+                'dogs': [
+                    'golden retriever',
+                ],
+            },
+        }
+
+        result = base_data_provider._update_dict(first, third)
+        assert 'spaniel' not in result['animals']['dogs']
+
+    @pytest.mark.parametrize(
         'inp, out', [
             ('EN', 'en'),
             ('DE', 'de'),
