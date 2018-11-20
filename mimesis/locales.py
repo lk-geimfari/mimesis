@@ -1,6 +1,7 @@
 import contextlib
 from typing import TYPE_CHECKING, Generator
 
+# Enables string-based type annotations
 if TYPE_CHECKING:
     from mimesis.providers.base import BaseDataProvider
 
@@ -176,24 +177,26 @@ SUPPORTED_LOCALES = {
 }
 
 LIST_OF_LOCALES = list(SUPPORTED_LOCALES)
+LOCALE_SEPARATOR = '-'
 
 
 @contextlib.contextmanager
 def override(provider: 'BaseDataProvider',
-             locale: str = EN) -> Generator['BaseDataProvider', None, None]:
+             locale: str = DEFAULT_LOCALE,
+             ) -> Generator['BaseDataProvider', None, None]:
     """Context manager which allows overriding current locale.
 
     :param provider: Locale dependent data provider.
     :param locale: Locale.
-    :return:
+    :return: Provider with overridden locale.
     """
-    origin_locale = getattr(provider, 'locale', None)
-    if not hasattr(provider, '_datafile') or not origin_locale:
+    try:
+        origin_locale = provider.locale
+        provider.override_locale(locale)
+        try:
+            yield provider
+        finally:
+            provider.override_locale(origin_locale)
+    except AttributeError:
         raise ValueError('«{}» has not locale dependent'.format(
             provider.__class__.__name__))
-
-    provider.override_locale(locale)
-    try:
-        yield provider
-    finally:
-        provider.override_locale(origin_locale)

@@ -5,7 +5,7 @@ import functools
 import json
 import os
 from pathlib import Path
-from typing import Any, Mapping, Optional, Union
+from typing import Any, Mapping, Optional
 
 from mimesis import locales
 from mimesis.exceptions import NonEnumerableError, UnsupportedLocale
@@ -18,7 +18,7 @@ __all__ = ['BaseDataProvider', 'BaseProvider']
 class BaseProvider(object):
     """This is a base class for all providers."""
 
-    def __init__(self, seed: Optional[Seed] = None) -> None:
+    def __init__(self, seed: Seed = None) -> None:
         """Initialize attributes.
 
         :param seed: Seed for random.
@@ -142,9 +142,9 @@ class BaseDataProvider(BaseProvider):
             with open(file_path, 'r', encoding='utf8') as f:
                 return json.load(f)
 
-        separator = '-'
-        # TODO: Refactoring
-        master_locale = locale.split(separator)[0]
+        separator = locales.LOCALE_SEPARATOR
+
+        master_locale = locale.split(separator).pop(0)
         data = get_data(master_locale)
 
         if separator in locale:
@@ -162,7 +162,7 @@ class BaseDataProvider(BaseProvider):
         """
         return self.locale
 
-    def override_locale(self, locale: Optional[str] = 'en') -> None:
+    def override_locale(self, locale: str = locales.DEFAULT_LOCALE) -> None:
         """Overrides current locale with passed and pull data for new locale.
 
         :param locale: Locale
@@ -174,5 +174,5 @@ class BaseDataProvider(BaseProvider):
 
     def __str__(self) -> str:
         """Human-readable representation of locale."""
-        locale = getattr(self, 'locale', 'en')
+        locale = getattr(self, 'locale', locales.DEFAULT_LOCALE)
         return '{} <{}>'.format(self.__class__.__name__, locale)

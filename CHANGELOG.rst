@@ -38,6 +38,7 @@ Version 3.0.0
 - Renamed ``Science().rna()`` to ``Science().rna_sequence()``
 - Renamed module ``helpers.py`` to ``random.py``
 - Renamed module ``config.py`` to ``locales.py``
+- Renamed module ``utils.py`` to ``shortcuts.py``
 
 
 **Removed**:
