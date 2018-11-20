@@ -91,6 +91,9 @@ class BaseDataProvider(BaseProvider):
         :raises UnsupportedLocale: When locale is not supported.
         :return: Nothing.
         """
+        if not locale:
+            locale = locales.DEFAULT_LOCALE
+
         locale = locale.lower()
         if locale not in locales.SUPPORTED_LOCALES:
             raise UnsupportedLocale(locale)

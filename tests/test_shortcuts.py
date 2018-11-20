@@ -7,8 +7,15 @@ import pytest
 from mimesis import shortcuts
 
 
-def test_luhn_checksum():
-    assert shortcuts.luhn_checksum('7992739871') == '3'
+@pytest.mark.parametrize(
+    'number, check_sum', [
+        ('5563455651', '2'),
+        ('7992739871', '3'),
+        ('5161675549', '5'),
+    ],
+)
+def test_luhn_checksum(number, check_sum):
+    assert shortcuts.luhn_checksum(number) == check_sum
 
 
 @pytest.mark.parametrize(
@@ -18,11 +25,11 @@ def test_luhn_checksum():
     ],
 )
 def test_download_image(ctx):
-    url_with_extinsion = 'https://raw.githubusercontent.com/lk-geimfari/' \
-                         'mimesis/master/media/logo.png'
+    url = 'https://raw.githubusercontent.com/' \
+          'lk-geimfari/mimesis/master/media/logo.png'
 
     verified = shortcuts.download_image(
-        url=url_with_extinsion,
+        url=url,
         unverified_ctx=ctx,
     )
     assert verified == str(verified)[:-4] + '.png'
