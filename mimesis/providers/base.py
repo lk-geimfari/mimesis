@@ -84,16 +84,13 @@ class BaseDataProvider(BaseProvider):
         self._setup_locale(locale)
         self._data_dir = Path(__file__).parent.parent.joinpath('data')
 
-    def _setup_locale(self, locale: Optional[str] = None) -> None:
+    def _setup_locale(self, locale: str = locales.DEFAULT_LOCALE) -> None:
         """Set up locale after pre-check.
 
         :param str locale: Locale
         :raises UnsupportedLocale: When locale is not supported.
         :return: Nothing.
         """
-        if not locale:
-            locale = locales.DEFAULT_LOCALE
-
         locale = locale.lower()
         if locale not in locales.SUPPORTED_LOCALES:
             raise UnsupportedLocale(locale)
