@@ -80,7 +80,7 @@ class BaseDataProvider(BaseProvider):
         """
         super().__init__(seed=seed)
         self._data: dict = {}
-        self._datafile: str = ''
+        self._datafile = ''
         self._setup_locale(locale)
         self._data_dir = Path(__file__).parent.parent.joinpath('data')
 
