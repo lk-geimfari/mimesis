@@ -30,7 +30,7 @@ class BaseProvider(object):
         if seed is not None:
             self.reseed(seed)
 
-    def reseed(self, seed: Optional[Seed] = None) -> None:
+    def reseed(self, seed: Seed = None) -> None:
         """Reseed the internal random generator.
 
         In case we use the default seed, we need to create a per instance
@@ -71,8 +71,8 @@ class BaseProvider(object):
 class BaseDataProvider(BaseProvider):
     """This is a base class for all data providers."""
 
-    def __init__(self, locale: Optional[str] = None,
-                 seed: Optional[Seed] = None) -> None:
+    def __init__(self, locale: str = locales.DEFAULT_LOCALE,
+                 seed: Seed = None) -> None:
         """Initialize attributes for data providers.
 
         :param locale: Current locale.
@@ -80,7 +80,7 @@ class BaseDataProvider(BaseProvider):
         """
         super().__init__(seed=seed)
         self._data: dict = {}
-        self._datafile: Optional[str] = None
+        self._datafile: str = ''
         self._setup_locale(locale)
         self._data_dir = Path(__file__).parent.parent.joinpath('data')
 
@@ -138,7 +138,7 @@ class BaseDataProvider(BaseProvider):
             :param locale_name: Locale name.
             :return: Content of JSON file as dict.
             """
-            file_path = os.path.join(data_dir, locale_name, datafile)
+            file_path = Path(data_dir).joinpath(locale_name, datafile)
             with open(file_path, 'r', encoding='utf8') as f:
                 return json.load(f)
 
