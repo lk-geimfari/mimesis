@@ -3,9 +3,8 @@
 import collections
 import functools
 import json
-import os
 from pathlib import Path
-from typing import Any, Mapping, Optional
+from typing import Any, Dict, Mapping
 
 from mimesis import locales
 from mimesis.exceptions import NonEnumerableError, UnsupportedLocale
@@ -79,7 +78,7 @@ class BaseDataProvider(BaseProvider):
         :param seed: Seed to all the random functions.
         """
         super().__init__(seed=seed)
-        self._data: dict = {}
+        self._data: Dict[str, Any] = {}
         self._datafile = ''
         self._setup_locale(locale)
         self._data_dir = Path(__file__).parent.parent.joinpath('data')
