@@ -116,7 +116,7 @@ class BaseDataProvider(BaseProvider):
         return initial
 
     @functools.lru_cache(maxsize=None)
-    def pull(self, datafile: Optional[str] = None):
+    def pull(self, datafile: str = ''):
         """Pull the content from the JSON and memorize one.
 
         Opens JSON file ``file`` in the folder ``data/locale``
