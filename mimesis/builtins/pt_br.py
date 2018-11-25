@@ -27,7 +27,6 @@ class BrazilSpecProvider(BaseSpecProvider):
         :Example:
             001.137.297-40
         """
-
         def get_verifying_digit_cpf(cpf, peso):
             """Calculate the verifying digit for the CPF.
 
@@ -65,7 +64,6 @@ class BrazilSpecProvider(BaseSpecProvider):
         :Example:
             77.732.230/0001-70
         """
-
         def get_verifying_digit_cnpj(cnpj, peso):
             """Calculate the verifying digit for the CNPJ.
 

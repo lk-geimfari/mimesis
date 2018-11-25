@@ -125,7 +125,6 @@ class RussiaSpecProvider(BaseSpecProvider):
 
         :return: INN.
         """
-
         def control_sum(nums: list, t: str) -> int:
             digits = {
                 'n2': [7, 2, 4, 10, 3, 5, 9, 4, 6, 8],
