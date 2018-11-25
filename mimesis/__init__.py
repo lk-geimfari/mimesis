@@ -46,7 +46,7 @@ __all__ = [
     '__license__',
 ]
 
-__version__ = '2.1.0'
+__version__ = '3.0.0'
 __title__ = 'mimesis'
 __description__ = 'Mimesis: mock data for developers.'
 __url__ = 'https://github.com/lk-geimfari/mimesis'
