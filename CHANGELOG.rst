@@ -9,6 +9,7 @@ Version 3.0.0
 
 **Added**:
 
+- Added provider ``Choice()``
 - Added method ``formatted_time()``
 - Added method ``formatted_date()``
 - Added method ``formatted_datetime()``

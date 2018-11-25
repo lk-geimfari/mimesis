@@ -159,6 +159,13 @@ Code
    :members:
    :special-members: __init__
 
+Choice
+------
+
+.. autoclass:: mimesis.Choice
+   :members:
+   :special-members: __init__
+
 Cryptographic
 -------------
 
