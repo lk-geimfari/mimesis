@@ -39,7 +39,7 @@ before_install: |
 
 install:
   - pip install pipenv
-  - pipenv run pip install pip==18.0
+#  - pipenv run pip install pip==18.0
   - pipenv install --dev --ignore-pipfile
 
 script:
