@@ -4,6 +4,7 @@ from distutils.core import setup
 from os.path import abspath, dirname, exists, getsize, join, relpath, splitext
 
 import setuptools
+
 from mimesis import (__author__, __author_email__, __description__,
                      __license__, __title__, __url__, __version__)
 
