@@ -1,7 +1,5 @@
 """Specific data provider for Russia (ru)."""
 
-from typing import Optional
-
 from mimesis.builtins.base import BaseSpecProvider
 from mimesis.enums import Gender
 from mimesis.typing import Seed
@@ -12,7 +10,7 @@ __all__ = ['RussiaSpecProvider']
 class RussiaSpecProvider(BaseSpecProvider):
     """Class that provides special data for Russia (ru)."""
 
-    def __init__(self, seed: Optional[Seed] = None):
+    def __init__(self, seed: Seed = None):
         """Initialize attributes."""
         super().__init__(locale='ru', seed=seed)
         self.pull(self._datafile)
@@ -34,7 +32,7 @@ class RussiaSpecProvider(BaseSpecProvider):
         ]
         return '{0} {1} {2} {3}'.format(*sentence)
 
-    def patronymic(self, gender: Optional[Gender] = None) -> str:
+    def patronymic(self, gender: Gender = None) -> str:
         """Generate random patronymic name.
 
         :param gender: Gender of person.
@@ -127,6 +125,7 @@ class RussiaSpecProvider(BaseSpecProvider):
 
         :return: INN.
         """
+
         def control_sum(nums: list, t: str) -> int:
             digits = {
                 'n2': [7, 2, 4, 10, 3, 5, 9, 4, 6, 8],

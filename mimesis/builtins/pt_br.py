@@ -1,7 +1,5 @@
 """Specific data provider for Brazil (pt-br)."""
 
-from typing import Optional
-
 from mimesis.builtins.base import BaseSpecProvider
 from mimesis.typing import Seed
 
@@ -11,7 +9,7 @@ __all__ = ['BrazilSpecProvider']
 class BrazilSpecProvider(BaseSpecProvider):
     """Class that provides special data for Brazil (pt-br)."""
 
-    def __init__(self, seed: Optional[Seed] = None):
+    def __init__(self, seed: Seed = None):
         """Initialize attributes."""
         super().__init__(locale='pt-br', seed=seed)
 
@@ -29,6 +27,7 @@ class BrazilSpecProvider(BaseSpecProvider):
         :Example:
             001.137.297-40
         """
+
         def get_verifying_digit_cpf(cpf, peso):
             """Calculate the verifying digit for the CPF.
 
@@ -66,6 +65,7 @@ class BrazilSpecProvider(BaseSpecProvider):
         :Example:
             77.732.230/0001-70
         """
+
         def get_verifying_digit_cnpj(cnpj, peso):
             """Calculate the verifying digit for the CNPJ.
 
