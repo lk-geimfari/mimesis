@@ -26,7 +26,6 @@ class NetherlandsSpecProvider(BaseSpecProvider):
         :Example:
             255159705
         """
-
         def _is_valid_bsn(number: str) -> bool:
             total = 0
             multiplier = 9
