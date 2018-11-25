@@ -78,7 +78,6 @@ class TestSeededTransport(object):
         'locale', LIST_OF_LOCALES,
     )
     def test_vehicle_registration_code(self, t1, t2, locale):
-        assert (
-            t1.vehicle_registration_code(locale) ==
-            t2.vehicle_registration_code(locale)
-        )
+        a = t1.vehicle_registration_code(locale)
+        b = t2.vehicle_registration_code(locale)
+        assert a == b
