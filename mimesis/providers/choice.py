@@ -1,5 +1,5 @@
 """Provides a random choice from items in a sequence."""
-
+import collections
 from typing import Any, Optional, Sequence, Union
 
 from mimesis.providers.base import BaseProvider
@@ -49,21 +49,21 @@ class Choice(BaseProvider):
         >>> choice(items='aabbbccccddddd', length=4, unique=True)
         'cdba'
         """
-        # Ensure valid type and value for inputs
-        if not (isinstance(items, (list, tuple, str)) and
-                isinstance(length, int)):
-            raise TypeError('List, tuple or string **items** and integer '
-                            '**number** required.')
-        # Technically allow length=0 input, but apply as default for 'not set'
-        elif len(items) == 0 or length < 0:
-            raise ValueError('**Items** must be a non-empty sequence and '
-                             '**number** should be a positive integer.')
+        if not isinstance(length, int):
+            raise TypeError('**length** must be integer.')
 
-        if length == 0:  # else hereafter number >= 1 from constraints above
+        if not isinstance(items, collections.Sequence):
+            raise TypeError('**items** must be non-empty sequence.')
+
+        if not items:
+            raise ValueError('**items** must be a non-empty sequence.')
+
+        if length == 0:
             return self.random.choice(items)
+        elif length < 0:
+            raise ValueError('**length** should be a positive integer.')
 
-        # Process result as list then convert back to original type if non-list
-        data = []  # type: ignore
+        data = []
         if unique and len(set(items)) < length:  # avoid an infinite while loop
             raise ValueError('There are not enough unique elements in '
                              '**items** to provide the specified **number**.')
@@ -71,6 +71,8 @@ class Choice(BaseProvider):
             item = self.random.choice(items)
             if (unique and item not in data) or not unique:
                 data.append(item)
+
+        # TODO: Always return list
         if isinstance(items, list):
             return data
         elif isinstance(items, tuple):
