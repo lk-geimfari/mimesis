@@ -63,7 +63,7 @@ class Choice(BaseProvider):
         elif length < 0:
             raise ValueError('**length** should be a positive integer.')
 
-        data = []
+        data = []  # type: ignore
         if unique and len(set(items)) < length:  # avoid an infinite while loop
             raise ValueError('There are not enough unique elements in '
                              '**items** to provide the specified **number**.')

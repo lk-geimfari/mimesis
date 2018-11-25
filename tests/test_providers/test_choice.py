@@ -59,12 +59,12 @@ def test_choice_seed(n):
     assert result == 'f'
 
 
-def test_choice_nonsequence_items(choice):
+def test_choice_non_sequence_items(choice):
     with pytest.raises(TypeError):
         choice(items=5)
 
 
-def test_choice_noninteger_length(choice):
+def test_choice_non_integer_length(choice):
     with pytest.raises(TypeError):
         choice(items='abc', length=3.4)
 
