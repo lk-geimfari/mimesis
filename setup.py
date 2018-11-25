@@ -3,24 +3,15 @@ import os
 from distutils.core import setup
 from os.path import abspath, dirname, exists, getsize, join, relpath, splitext
 
+import mimesis
 from setuptools import Command
 
 here = abspath(dirname(__file__))
 
 
-def get_package_metadata(about):
-    with open(join(here, 'mimesis', '__version__.py')) as f:
-        exec(f.read(), about)
-    return about
-
-
 def get_readme():
     with open('README.rst', 'r', encoding='utf-8') as f:
         return f.read()
-
-
-about = {}
-about = get_package_metadata(about)
 
 
 class Minimizer(Command):
@@ -105,14 +96,14 @@ class Minimizer(Command):
 
 
 setup(
-    name=about['__title__'],
-    version=about['__version__'],
-    description=about['__description__'],
+    name=mimesis.__title__,
+    version=mimesis.__version__,
+    description=mimesis.__description__,
     long_description=get_readme(),
-    author=about['__author__'],
-    author_email=about['__author_email__'],
-    url=about['__url__'],
-    license=about['__license__'],
+    author=mimesis.__author__,
+    author_email=mimesis.__author_email__,
+    url=mimesis.__url__,
+    license=mimesis.__license__,
     packages=[
         'mimesis',
         'mimesis.data',
