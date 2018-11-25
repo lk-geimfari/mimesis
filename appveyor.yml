@@ -30,6 +30,6 @@ install:
 build: off
 
 test_script:
-  - "pipenv run py.test --cov=mimesis --benchmark-skip"
+  - "pipenv run py.test --cov=mimesis"
   - "pipenv run mypy mimesis tests"
   - "pipenv run pyroma -d ."
