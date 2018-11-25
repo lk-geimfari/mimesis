@@ -35,6 +35,15 @@ __all__ = [
 
     # Has all:
     'Generic',
+
+    # Meta:
+    '__version__',
+    '__title__',
+    '__description__',
+    '__url__',
+    '__author__',
+    '__author_email__',
+    '__license__',
 ]
 
 __version__ = '2.1.0'
