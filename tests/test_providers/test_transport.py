@@ -4,8 +4,8 @@ import re
 import pytest
 
 from mimesis import Transport
-from mimesis.config import LIST_OF_LOCALES
 from mimesis.data import AIRPLANES, CARS, TRUCKS, VR_CODES, VRC_BY_LOCALES
+from mimesis.locales import LIST_OF_LOCALES
 
 from . import patterns
 
@@ -78,7 +78,6 @@ class TestSeededTransport(object):
         'locale', LIST_OF_LOCALES,
     )
     def test_vehicle_registration_code(self, t1, t2, locale):
-        assert (
-            t1.vehicle_registration_code(locale) ==
-            t2.vehicle_registration_code(locale)
-        )
+        a = t1.vehicle_registration_code(locale)
+        b = t2.vehicle_registration_code(locale)
+        assert a == b

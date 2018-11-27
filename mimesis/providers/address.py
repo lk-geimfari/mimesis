@@ -10,7 +10,6 @@ from mimesis.data import (CALLING_CODES, CONTINENT_CODES, COUNTRY_CODES,
                           SHORTENED_ADDRESS_FMT)
 from mimesis.enums import CountryCode
 from mimesis.providers.base import BaseDataProvider
-from mimesis.utils import pull
 
 __all__ = ['Address']
 
@@ -29,7 +28,7 @@ class Address(BaseDataProvider):
         """
         super().__init__(*args, **kwargs)
         self._datafile = 'address.json'
-        self._data = pull(self._datafile, self.locale)
+        self.pull(self._datafile)
 
     @staticmethod
     def _dd_to_dms(num: float, _type: str) -> str:

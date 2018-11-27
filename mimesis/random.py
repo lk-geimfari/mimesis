@@ -13,7 +13,7 @@ import os
 import random as random_module
 from typing import Any, List, Optional, Sequence
 
-__all__ = ['Random', 'get_random_item']
+__all__ = ['Random', 'get_random_item', 'random']
 
 
 class Random(random_module.Random):

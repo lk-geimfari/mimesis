@@ -22,13 +22,6 @@ GermanySpecProvider
    :members:
    :special-members: __init__
 
-JapanSpecProvider
------------------
-
-.. autoclass:: mimesis.builtins.JapanSpecProvider
-   :members:
-   :special-members: __init__
-
 NetherlandsSpecProvider
 -----------------------
 
@@ -69,6 +62,16 @@ Decorators
 
 .. automodule:: mimesis.decorators
    :members:
+
+Locales
+=======
+
+
+override
+--------
+
+.. automodule:: mimesis.locales
+   :members: override
 
 
 Custom Exceptions
@@ -153,6 +156,13 @@ Code
 ----
 
 .. autoclass:: mimesis.Code
+   :members:
+   :special-members: __init__
+
+Choice
+------
+
+.. autoclass:: mimesis.Choice
    :members:
    :special-members: __init__
 

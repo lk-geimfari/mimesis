@@ -1,30 +1,25 @@
 import pytest
 
 from mimesis import locales
-from mimesis.providers import (Address, Business, Code, Cryptographic,
-                               Datetime, Food, Internet, Person, Science, Text)
+from mimesis.providers import Code, Cryptographic, Internet, Person
 
 
 @pytest.mark.parametrize(
-    'provider, locale, new_locale', [
-        (Address, 'en', 'ru'),
-        (Business, 'en', 'ru'),
-        (Datetime, 'en', 'ru'),
-        (Food, 'en', 'ru'),
-        (Person, 'en', 'ru'),
-        (Science, 'en', 'ru'),
-        (Text, 'en', 'ru'),
+    'locale, new_locale', [
+        ('en', 'ru'),
 
     ],
 )
-def test_override(provider, locale, new_locale):
-    provider = provider(locale)
+def test_override(locale, new_locale):
+    provider = Person(locale)
     assert provider.locale == locale
 
     with locales.override(provider, locales.RU):
+        assert 'Жен.' in provider._data['gender']
         assert provider.locale == new_locale
 
     assert provider.locale == locale
+    assert 'Жен.' not in provider._data['gender']
 
 
 @pytest.mark.parametrize(

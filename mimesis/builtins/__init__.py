@@ -1,7 +1,6 @@
 """Builtin specific data providers."""
 
 from .en import USASpecProvider
-from .ja import JapanSpecProvider
 from .ru import RussiaSpecProvider
 from .pt_br import BrazilSpecProvider
 from .de import GermanySpecProvider
@@ -11,7 +10,6 @@ from .pl import PolandSpecProvider
 
 __all__ = [
     'USASpecProvider',
-    'JapanSpecProvider',
     'RussiaSpecProvider',
     'BrazilSpecProvider',
     'GermanySpecProvider',

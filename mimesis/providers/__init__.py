@@ -38,6 +38,7 @@ __all__ = [
     'Choice',
     'ClothingSize',
     'Code',
+    'Choice',
     'Datetime',
     'Development',
     'File',

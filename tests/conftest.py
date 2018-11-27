@@ -1,37 +1,10 @@
 import pytest
 
 import mimesis
-from mimesis import config
+from mimesis.locales import LIST_OF_LOCALES
 
-locales = config.LIST_OF_LOCALES
+locales = LIST_OF_LOCALES
 platform = ['win32', 'linux']
-
-
-#
-# @pytest.fixture(autouse=True)
-# def add_providers(doctest_namespace):
-#     seed = 0xFF
-#     doctest_namespace['address'] = mimesis.Address('en', seed=seed)
-#     doctest_namespace['business'] = mimesis.Business('en', seed=seed)
-#     doctest_namespace['dt'] = mimesis.Datetime('en', seed=seed)
-#     doctest_namespace['food'] = mimesis.Food('en', seed=seed)
-#     doctest_namespace['person'] = mimesis.Person('en', seed=seed)
-#     doctest_namespace['science'] = mimesis.Science('en', seed=seed)
-#     doctest_namespace['text'] = mimesis.Text('en', seed=seed)
-#     doctest_namespace['path'] = mimesis.Path('en', seed=seed)
-#     doctest_namespace['transport'] = mimesis.Transport('en', seed=seed)
-#     doctest_namespace['sizes'] = mimesis.ClothingSize(seed=seed)
-#     doctest_namespace['code'] = mimesis.Code('en', seed=seed)
-#     doctest_namespace['file'] = mimesis.File(seed=seed)
-#     doctest_namespace['development'] = mimesis.Development(seed=seed)
-#     doctest_namespace['games'] = mimesis.Games(seed=seed)
-#     doctest_namespace['hardware'] = mimesis.Hardware(seed=seed)
-#     doctest_namespace['internet'] = mimesis.Internet(seed=seed)
-#     doctest_namespace['numbers'] = mimesis.Numbers(seed=seed)
-#     doctest_namespace['payment'] = mimesis.Payment(seed=seed)
-#     doctest_namespace['structure'] = mimesis.Structure(seed=seed)
-#     doctest_namespace['units'] = mimesis.UnitSystem(seed=seed)
-#     doctest_namespace['cryptographic'] = mimesis.Cryptographic(seed=seed)
 
 
 @pytest.fixture

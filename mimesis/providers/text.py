@@ -4,7 +4,6 @@ from typing import List, Tuple
 
 from mimesis.data import SAFE_COLORS
 from mimesis.providers.base import BaseDataProvider
-from mimesis.utils import pull
 
 __all__ = ['Text']
 
@@ -20,7 +19,7 @@ class Text(BaseDataProvider):
         """
         super().__init__(*args, **kwargs)
         self._datafile = 'text.json'
-        self._data = pull(self._datafile, self.locale)
+        self.pull(self._datafile)
 
     def alphabet(self, lower_case: bool = False) -> list:
         """Get an alphabet for current locale.

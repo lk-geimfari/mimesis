@@ -3,15 +3,12 @@ import os
 from distutils.core import setup
 from os.path import abspath, dirname, exists, getsize, join, relpath, splitext
 
-from setuptools import Command
+import setuptools
+
+from mimesis import (__author__, __author_email__, __description__,
+                     __license__, __title__, __url__, __version__)
 
 here = abspath(dirname(__file__))
-
-
-def get_package_metadata(about):
-    with open(join(here, 'mimesis', '__version__.py')) as f:
-        exec(f.read(), about)
-    return about
 
 
 def get_readme():
@@ -19,11 +16,7 @@ def get_readme():
         return f.read()
 
 
-about = {}
-about = get_package_metadata(about)
-
-
-class Minimizer(Command):
+class Minimizer(setuptools.Command):
     """Minify content of all json files for all locales."""
 
     description = 'Minify content of all json files.'
@@ -105,14 +98,14 @@ class Minimizer(Command):
 
 
 setup(
-    name=about['__title__'],
-    version=about['__version__'],
-    description=about['__description__'],
+    name=__title__,
+    version=__version__,
+    description=__description__,
     long_description=get_readme(),
-    author=about['__author__'],
-    author_email=about['__author_email__'],
-    url=about['__url__'],
-    license=about['__license__'],
+    author=__author__,
+    author_email=__author_email__,
+    url=__url__,
+    license=__license__,
     packages=[
         'mimesis',
         'mimesis.data',

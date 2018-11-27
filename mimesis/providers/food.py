@@ -1,7 +1,6 @@
 """Provides data related to food."""
 
 from mimesis.providers.base import BaseDataProvider
-from mimesis.utils import pull
 
 __all__ = ['Food']
 
@@ -16,7 +15,7 @@ class Food(BaseDataProvider):
         """
         super().__init__(*args, **kwargs)
         self._datafile = 'food.json'
-        self._data = pull(self._datafile, self.locale)
+        self.pull(self._datafile)
 
     def _choice_from(self, key: str) -> str:
         """Choice random element."""

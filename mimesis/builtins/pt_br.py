@@ -1,8 +1,7 @@
 """Specific data provider for Brazil (pt-br)."""
 
-from random import randint
-
 from mimesis.builtins.base import BaseSpecProvider
+from mimesis.typing import Seed
 
 __all__ = ['BrazilSpecProvider']
 
@@ -10,13 +9,16 @@ __all__ = ['BrazilSpecProvider']
 class BrazilSpecProvider(BaseSpecProvider):
     """Class that provides special data for Brazil (pt-br)."""
 
+    def __init__(self, seed: Seed = None):
+        """Initialize attributes."""
+        super().__init__(locale='pt-br', seed=seed)
+
     class Meta:
         """The name of the provider."""
 
         name = 'brazil_provider'
 
-    @staticmethod
-    def cpf(with_mask: bool = True) -> str:
+    def cpf(self, with_mask: bool = True) -> str:
         """Get a random CPF.
 
         :param with_mask: Use CPF mask (###.###.###-##).
@@ -40,7 +42,7 @@ class BrazilSpecProvider(BaseSpecProvider):
                 return 0
             return 11 - resto
 
-        cpf_without_dv = [randint(0, 9) for _ in range(9)]
+        cpf_without_dv = [self.random.randint(0, 9) for _ in range(9)]
         first_dv = get_verifying_digit_cpf(cpf_without_dv, 10)
 
         cpf_without_dv.append(first_dv)
@@ -53,8 +55,7 @@ class BrazilSpecProvider(BaseSpecProvider):
             return cpf[:3] + '.' + cpf[3:6] + '.' + cpf[6:9] + '-' + cpf[9:]
         return cpf
 
-    @staticmethod
-    def cnpj(with_mask: bool = True) -> str:
+    def cnpj(self, with_mask: bool = True) -> str:
         """Get a random CNPJ.
 
         :param with_mask: Use cnpj mask (###.###.###-##)
@@ -82,7 +83,7 @@ class BrazilSpecProvider(BaseSpecProvider):
                 return 0
             return 11 - resto
 
-        cnpj_without_dv = [randint(0, 9) for _ in range(12)]
+        cnpj_without_dv = [self.random.randint(0, 9) for _ in range(12)]
 
         first_dv = get_verifying_digit_cnpj(cnpj_without_dv, 5)
         cnpj_without_dv.append(first_dv)
@@ -93,8 +94,6 @@ class BrazilSpecProvider(BaseSpecProvider):
         cnpj = ''.join([str(i) for i in cnpj_without_dv])
 
         if with_mask:
-            return (
-                cnpj[:2] + '.' + cnpj[2:5] + '.' + cnpj[5:8] + '/' +
-                cnpj[8:12] + '-' + cnpj[12:]
-            )
+            return '{}.{}.{}/{}-{}'.format(cnpj[:2], cnpj[2:5],
+                                           cnpj[5:8], cnpj[8:12], cnpj[12:])
         return cnpj

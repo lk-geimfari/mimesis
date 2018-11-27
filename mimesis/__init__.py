@@ -14,6 +14,7 @@ __all__ = [
     'Business',
     'ClothingSize',
     'Code',
+    'Choice',
     'Datetime',
     'Development',
     'File',
@@ -34,4 +35,21 @@ __all__ = [
 
     # Has all:
     'Generic',
+
+    # Meta:
+    '__version__',
+    '__title__',
+    '__description__',
+    '__url__',
+    '__author__',
+    '__author_email__',
+    '__license__',
 ]
+
+__version__ = '3.0.0'
+__title__ = 'mimesis'
+__description__ = 'Mimesis: mock data for developers.'
+__url__ = 'https://github.com/lk-geimfari/mimesis'
+__author__ = 'Likid Geimfari (Isaak Uchakaev)'
+__author_email__ = 'likid.geimfari@gmail.com'
+__license__ = 'MIT License'

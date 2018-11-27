@@ -6,7 +6,7 @@ from mimesis.data import (EAN_MASKS, IMEI_TACS, ISBN_GROUPS, ISBN_MASKS,
                           LOCALE_CODES)
 from mimesis.enums import EANFormat, ISBNFormat
 from mimesis.providers.base import BaseProvider
-from mimesis.utils import luhn_checksum
+from mimesis.shortcuts import luhn_checksum
 
 __all__ = ['Code']
 

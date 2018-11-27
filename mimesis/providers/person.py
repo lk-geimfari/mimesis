@@ -9,9 +9,8 @@ from mimesis.data import (BLOOD_GROUPS, CALLING_CODES, EMAIL_DOMAINS,
                           SEXUALITY_SYMBOLS, SOCIAL_NETWORKS, USERNAMES)
 from mimesis.enums import Gender, SocialNetwork, TitleType
 from mimesis.exceptions import NonEnumerableError
-from mimesis.helpers import get_random_item
 from mimesis.providers.base import BaseDataProvider
-from mimesis.utils import pull
+from mimesis.random import get_random_item
 
 __all__ = ['Person']
 
@@ -27,7 +26,7 @@ class Person(BaseDataProvider):
         """
         super().__init__(*args, **kwargs)
         self._datafile = 'person.json'
-        self._data = pull(self._datafile, self.locale)
+        self.pull(self._datafile)
         self._store = {
             'age': 0,
         }

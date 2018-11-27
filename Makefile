@@ -11,7 +11,6 @@ help:
 	@echo "docs         - build Sphinx HTML documentation and open in browser"
 	@echo "test         - run tests quickly with the default Python"
 	@echo "type-check   - run mypy for checking types"
-	@echo "benchmarks   - run benchmark tests for providers"
 	@echo "publish      - create dist and upload package to PyPI"
 	@echo "version      - update __version__ file"
 	@echo "install      - install the package to the active Python's site-packages"
@@ -33,12 +32,13 @@ docs:
 
 .PHONY: clean-build
 clean-build:
-	rm --force --recursive build/
-	rm --force --recursive dist/
-	rm --force --recursive .cache/
-	rm --force --recursive .mypy_cache/
-	rm --force --recursive mimesis.egg-info/
-	rm --force --recursive .benchmarks/
+	rm -rf build/
+	rm -rf dist/
+	rm -rf .cache/
+	rm -rf .mypy_cache/
+	rm -rf mimesis.egg-info/
+	rm -rf .benchmarks/
+	rm -rf .pytest_cache/
 
 
 .PHONY: clean
@@ -47,18 +47,13 @@ clean: clean-pyc clean-build
 
 .PHONY: test
 test:
-	py.test --benchmark-skip --color=yes ./
+	py.test --color=yes ./
 	mypy mimesis/ tests/
 
 
 .PHONY: type-check
 type-check:
 	mypy mimesis/ tests/
-
-
-.PHONY: benchmarks
-benchmarks:
-	py.test -rf --benchmark-only --benchmark-sort=MEAN ./benchmarks
 
 
 .PHONY: publish

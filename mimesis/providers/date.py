@@ -8,7 +8,6 @@ from mimesis.compat import pytz
 from mimesis.data import GMT_OFFSETS, ROMAN_NUMS, TIMEZONES
 from mimesis.providers.base import BaseDataProvider
 from mimesis.typing import Date, DateTime, Time
-from mimesis.utils import pull
 
 __all__ = ['Datetime']
 
@@ -23,7 +22,7 @@ class Datetime(BaseDataProvider):
         """
         super().__init__(*args, **kwargs)
         self._datafile = 'datetime.json'
-        self._data = pull(self._datafile, self.locale)
+        self.pull(self._datafile)
 
     @staticmethod
     def bulk_create_datetimes(date_start: DateTime,

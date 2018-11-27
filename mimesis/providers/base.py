@@ -1,11 +1,15 @@
 """Base data provider."""
 
-from typing import Any, Optional
+import collections
+import functools
+import json
+from pathlib import Path
+from typing import Any, Dict, Mapping
 
-from mimesis.exceptions import NonEnumerableError
-from mimesis.helpers import Random, get_random_item, random
-from mimesis.typing import Seed
-from mimesis.utils import setup_locale
+from mimesis import locales
+from mimesis.exceptions import NonEnumerableError, UnsupportedLocale
+from mimesis.random import Random, get_random_item, random
+from mimesis.typing import JSON, Seed
 
 __all__ = ['BaseDataProvider', 'BaseProvider']
 
@@ -13,7 +17,7 @@ __all__ = ['BaseDataProvider', 'BaseProvider']
 class BaseProvider(object):
     """This is a base class for all providers."""
 
-    def __init__(self, seed: Optional[Seed] = None) -> None:
+    def __init__(self, seed: Seed = None) -> None:
         """Initialize attributes.
 
         :param seed: Seed for random.
@@ -25,7 +29,7 @@ class BaseProvider(object):
         if seed is not None:
             self.reseed(seed)
 
-    def reseed(self, seed: Optional[Seed] = None) -> None:
+    def reseed(self, seed: Seed = None) -> None:
         """Reseed the internal random generator.
 
         In case we use the default seed, we need to create a per instance
@@ -66,17 +70,86 @@ class BaseProvider(object):
 class BaseDataProvider(BaseProvider):
     """This is a base class for all data providers."""
 
-    def __init__(self, locale: Optional[str] = None,
-                 seed: Optional[Seed] = None) -> None:
+    def __init__(self, locale: str = locales.DEFAULT_LOCALE,
+                 seed: Seed = None) -> None:
         """Initialize attributes for data providers.
 
         :param locale: Current locale.
         :param seed: Seed to all the random functions.
         """
         super().__init__(seed=seed)
-        self._data: dict
-        self._datafile: str
-        self.locale = setup_locale(locale)
+        self._data: Dict[str, Any] = {}
+        self._datafile = ''
+        self._setup_locale(locale)
+        self._data_dir = Path(__file__).parent.parent.joinpath('data')
+
+    def _setup_locale(self, locale: str = locales.DEFAULT_LOCALE) -> None:
+        """Set up locale after pre-check.
+
+        :param str locale: Locale
+        :raises UnsupportedLocale: When locale is not supported.
+        :return: Nothing.
+        """
+        if not locale:
+            locale = locales.DEFAULT_LOCALE
+
+        locale = locale.lower()
+        if locale not in locales.SUPPORTED_LOCALES:
+            raise UnsupportedLocale(locale)
+
+        self.locale = locale
+
+    def _update_dict(self, initial: JSON, other: Mapping) -> JSON:
+        """Recursively update a dictionary.
+
+        :param initial: Dict to update.
+        :param other: Dict to update from.
+        :return: Updated dict.
+        """
+        for key, value in other.items():
+            if isinstance(value, collections.Mapping):
+                r = self._update_dict(initial.get(key, {}), value)
+                initial[key] = r
+            else:
+                initial[key] = other[key]
+        return initial
+
+    @functools.lru_cache(maxsize=None)
+    def pull(self, datafile: str = ''):
+        """Pull the content from the JSON and memorize one.
+
+        Opens JSON file ``file`` in the folder ``data/locale``
+        and get content from the file and memorize ones using lru_cache.
+
+        :param datafile: The name of file.
+        :return: The content of the file.
+        :raises UnsupportedLocale: if locale is not supported.
+        """
+        locale = self.locale
+        data_dir = self._data_dir
+
+        if not datafile:
+            datafile = self._datafile
+
+        def get_data(locale_name: str) -> JSON:
+            """Pull JSON data from file.
+
+            :param locale_name: Locale name.
+            :return: Content of JSON file as dict.
+            """
+            file_path = Path(data_dir).joinpath(locale_name, datafile)
+            with open(file_path, 'r', encoding='utf8') as f:
+                return json.load(f)
+
+        separator = locales.LOCALE_SEPARATOR
+
+        master_locale = locale.split(separator).pop(0)
+        data = get_data(master_locale)
+
+        if separator in locale:
+            data = self._update_dict(data, get_data(locale))
+
+        self._data = data
 
     def get_current_locale(self) -> str:
         """Get current locale.
@@ -88,7 +161,17 @@ class BaseDataProvider(BaseProvider):
         """
         return self.locale
 
+    def override_locale(self, locale: str = locales.DEFAULT_LOCALE) -> None:
+        """Overrides current locale with passed and pull data for new locale.
+
+        :param locale: Locale
+        :return: Nothing.
+        """
+        self.locale = locale
+        self.pull.cache_clear()
+        self.pull()
+
     def __str__(self) -> str:
         """Human-readable representation of locale."""
-        locale = getattr(self, 'locale', 'en')
+        locale = getattr(self, 'locale', locales.DEFAULT_LOCALE)
         return '{} <{}>'.format(self.__class__.__name__, locale)

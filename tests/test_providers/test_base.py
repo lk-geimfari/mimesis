@@ -2,9 +2,9 @@ import re
 
 import pytest
 
-from mimesis import config
 from mimesis.enums import Gender
-from mimesis.exceptions import NonEnumerableError
+from mimesis.exceptions import NonEnumerableError, UnsupportedLocale
+from mimesis.locales import LIST_OF_LOCALES
 from mimesis.providers.base import BaseDataProvider
 
 from . import patterns
@@ -15,6 +15,71 @@ class TestBase(object):
     @pytest.fixture
     def base_data_provider(self):
         return BaseDataProvider()
+
+    @pytest.mark.parametrize(
+        'locale, city', [
+            ('en', 'New York'),
+            ('en-gb', 'Aberystwyth'),
+            ('ru', 'Москва'),
+        ],
+    )
+    def test_pull(self, locale, city):
+        data_provider = BaseDataProvider(locale)
+        data_provider.pull('address.json')
+        assert city in data_provider._data['city']
+
+    @pytest.mark.parametrize('locale', LIST_OF_LOCALES)
+    def test_pull_raises(self, locale):
+        data_provider = BaseDataProvider(locale=locale)
+        with pytest.raises(FileNotFoundError):
+            data_provider.pull('something.json')
+
+    def test_update_dict(self, base_data_provider):
+        first = {
+            'animals': {
+                'dogs': [
+                    'spaniel',
+                ],
+            },
+        }
+        second = {
+            'animals': {
+                'cats': [
+                    'maine coon',
+                ],
+            },
+        }
+
+        result = base_data_provider._update_dict(first, second)
+
+        assert 'cats' in result['animals']
+        assert 'dogs' in result['animals']
+
+        third = {
+            'animals': {
+                'dogs': [
+                    'golden retriever',
+                ],
+            },
+        }
+
+        result = base_data_provider._update_dict(first, third)
+        assert 'spaniel' not in result['animals']['dogs']
+
+    @pytest.mark.parametrize(
+        'inp, out', [
+            ('EN', 'en'),
+            ('DE', 'de'),
+            ('RU', 'ru'),
+        ],
+    )
+    def test_setup_locale(self, base_data_provider, inp, out):
+        result = BaseDataProvider(locale=inp)
+        assert result.locale == out
+
+    def test_setup_locale_unsupported_locale(self):
+        with pytest.raises(UnsupportedLocale):
+            BaseDataProvider(locale='nil')
 
     def test_str(self, base_data_provider):
         assert re.match(
@@ -37,7 +102,7 @@ class TestBase(object):
         with pytest.raises(NonEnumerableError):
             base_data_provider._validate_enum('', '')
 
-    @pytest.mark.parametrize('locale', config.LIST_OF_LOCALES)
+    @pytest.mark.parametrize('locale', LIST_OF_LOCALES)
     def test_get_current_locale(self, locale):
         base = BaseDataProvider(locale=locale)
         assert locale == base.get_current_locale()

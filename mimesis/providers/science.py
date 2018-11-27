@@ -4,7 +4,6 @@ from typing import Union
 
 from mimesis.data import MATH_FORMULAS
 from mimesis.providers.base import BaseDataProvider
-from mimesis.utils import pull
 
 __all__ = ['Science']
 
@@ -20,7 +19,7 @@ class Science(BaseDataProvider):
         """
         super().__init__(*args, **kwargs)
         self._datafile = 'science.json'
-        self._data = pull(self._datafile, self.locale)
+        self.pull(self._datafile)
 
     def math_formula(self) -> str:
         """Get a random mathematical formula.

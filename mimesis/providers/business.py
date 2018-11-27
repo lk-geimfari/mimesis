@@ -3,7 +3,6 @@
 from mimesis.data import (CRYPTOCURRENCY_ISO_CODES, CRYPTOCURRENCY_SYMBOLS,
                           CURRENCY_ISO_CODES, CURRENCY_SYMBOLS)
 from mimesis.providers.base import BaseDataProvider
-from mimesis.utils import pull
 
 __all__ = ['Business']
 
@@ -18,7 +17,7 @@ class Business(BaseDataProvider):
         """
         super().__init__(*args, **kwargs)
         self._datafile = 'business.json'
-        self._data = pull(self._datafile, self.locale)
+        self.pull(self._datafile)
 
     def company(self) -> str:
         """Get a random company name.
