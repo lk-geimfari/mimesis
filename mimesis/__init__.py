@@ -48,7 +48,7 @@ __all__ = [
 
 __version__ = '3.0.0'
 __title__ = 'mimesis'
-__description__ = 'Mimesis: mock data for developers.'
+__description__ = 'Mimesis: fake data generator.'
 __url__ = 'https://github.com/lk-geimfari/mimesis'
 __author__ = 'Likid Geimfari (Isaak Uchakaev)'
 __author_email__ = 'likid.geimfari@gmail.com'
