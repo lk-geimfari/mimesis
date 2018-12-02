@@ -173,7 +173,7 @@ class BaseDataProvider(BaseProvider):
         self.pull()
 
     @contextlib.contextmanager
-    def override_locale(self, locale: str = locales.EN
+    def override_locale(self, locale: str = locales.EN,
                         ) -> Generator['BaseDataProvider', None, None]:
         """Context manager which allows overriding current locale.
 

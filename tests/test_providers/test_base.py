@@ -5,8 +5,8 @@ import pytest
 from mimesis.enums import Gender
 from mimesis.exceptions import NonEnumerableError, UnsupportedLocale
 from mimesis.locales import LIST_OF_LOCALES
-from mimesis.providers.base import BaseDataProvider
 from mimesis.providers import Code, Cryptographic, Internet, Person
+from mimesis.providers.base import BaseDataProvider
 
 from . import patterns
 

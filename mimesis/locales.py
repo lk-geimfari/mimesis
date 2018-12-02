@@ -1,4 +1,4 @@
-"""This module provides constants for locale-dependent providers"""
+"""This module provides constants for locale-dependent providers."""
 
 CS = 'cs'
 DA = 'da'
