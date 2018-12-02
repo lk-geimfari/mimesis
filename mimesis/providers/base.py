@@ -1,10 +1,11 @@
 """Base data provider."""
 
 import collections
+import contextlib
 import functools
 import json
 from pathlib import Path
-from typing import Any, Dict, Mapping
+from typing import Any, Dict, Generator, Mapping
 
 from mimesis import locales
 from mimesis.exceptions import NonEnumerableError, UnsupportedLocale
@@ -161,7 +162,7 @@ class BaseDataProvider(BaseProvider):
         """
         return self.locale
 
-    def override_locale(self, locale: str = locales.DEFAULT_LOCALE) -> None:
+    def _override_locale(self, locale: str = locales.DEFAULT_LOCALE) -> None:
         """Overrides current locale with passed and pull data for new locale.
 
         :param locale: Locale
@@ -170,6 +171,28 @@ class BaseDataProvider(BaseProvider):
         self.locale = locale
         self.pull.cache_clear()
         self.pull()
+
+    @contextlib.contextmanager
+    def override_locale(self, locale: str = locales.EN
+                        ) -> Generator['BaseDataProvider', None, None]:
+        """Context manager which allows overriding current locale.
+
+        Temporarily overrides current locale for
+        locale-dependent providers.
+
+        :param locale: Locale.
+        :return: Provider with overridden locale.
+        """
+        try:
+            origin_locale = self.locale
+            self._override_locale(locale)
+            try:
+                yield self
+            finally:
+                self._override_locale(origin_locale)
+        except AttributeError:
+            raise ValueError('«{}» has not locale dependent'.format(
+                self.__class__.__name__))
 
     def __str__(self) -> str:
         """Human-readable representation of locale."""

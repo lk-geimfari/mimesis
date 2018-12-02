@@ -120,7 +120,7 @@ is not really good,  so it's better just temporarily override current locale for
     >>> person.full_name()
     'Ozie Melton'
 
-    >>> with locales.override(person, locales.RU):
+    >>> with person.override_locale(locales.RU):
     ...     person.full_name()
 
     'Симона Богданова'
@@ -140,7 +140,7 @@ You can also use it with :class:`~mimesis.Generic()`:
     >>> generic.text.word()
     'anyone'
 
-    >>> with locales.override(generic.text, locales.FR):
+    >>> with generic.text.override_locale(locales.FR):
     ...     generic.text.word()
 
     'mieux'
@@ -213,9 +213,18 @@ Base Providers
 |  2   | :class:`~mimesis.schema.BaseDataProvider`| Superclass for locale dependent providers    |
 +------+------------------------------------------+----------------------------------------------+
 
+Generic Providers
+~~~~~~~~~~~~~~~~~
 
-Usual Providers
-~~~~~~~~~~~~~~~
++------+----------------------------------+------------------------------------------------------------------+
+| №    | Provider                         | Description                                                      |
++======+==================================+==================================================================+
+|  1   | :class:`~mimesis.Generic`        | All providers at once.                                           |
++------+----------------------------------+------------------------------------------------------------------+
+
+
+Locale-Dependent Providers
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 +------+----------------------------------+------------------------------------------------------------------+
 | №    | Provider                         | Description                                                      |
@@ -224,47 +233,53 @@ Usual Providers
 +------+----------------------------------+------------------------------------------------------------------+
 | 2    | :class:`~mimesis.Business`       | Business data (company, company\_type, copyright etc.)           |
 +------+----------------------------------+------------------------------------------------------------------+
-| 3    | :class:`~mimesis.Code`           | Codes (ISBN, EAN, IMEI etc.).                                    |
+| 3    | :class:`~mimesis.Datetime`       | Datetime (day of week, month, year etc.)                         |
 +------+----------------------------------+------------------------------------------------------------------+
-| 4    | :class:`~mimesis.ClothingSize`   | Clothing sizes (international sizes, european etc.)              |
+| 4    | :class:`~mimesis.Food`           | Information on food (vegetables, fruits, measurements etc.)      |
 +------+----------------------------------+------------------------------------------------------------------+
-| 5    | :class:`~mimesis.Datetime`       | Datetime (day of week, month, year etc.)                         |
+| 5    | :class:`~mimesis.Person`         | Personal data (name, surname, age, email etc.)                   |
 +------+----------------------------------+------------------------------------------------------------------+
-| 6    | :class:`~mimesis.Development`    | Data for developers (version, programming language etc.)         |
+| 6    | :class:`~mimesis.Text`           | Text data (sentence, title etc.)                                 |
 +------+----------------------------------+------------------------------------------------------------------+
-| 7    | :class:`~mimesis.File`           | File data (extension etc.)                                       |
+| 7    | :class:`~mimesis.Science`        | Scientific data (rna sequence dna sequence, etc.)                |
 +------+----------------------------------+------------------------------------------------------------------+
-| 8    | :class:`~mimesis.Food`           | Information on food (vegetables, fruits, measurements etc.)      |
+
+
+Locale-Independent Providers
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 +------+----------------------------------+------------------------------------------------------------------+
-| 9    | :class:`~mimesis.Games`          | Games data (game, score, pegi\_rating etc.)                      |
+| №    | Provider                         | Description                                                      |
++======+==================================+==================================================================+
+| 1    | :class:`~mimesis.Code`           | Codes (ISBN, EAN, IMEI etc.).                                    |
 +------+----------------------------------+------------------------------------------------------------------+
-| 10   | :class:`~mimesis.Person`         | Personal data (name, surname, age, email etc.)                   |
+| 2    | :class:`~mimesis.ClothingSize`   | Clothing sizes (international sizes, european etc.)              |
 +------+----------------------------------+------------------------------------------------------------------+
-| 11   | :class:`~mimesis.Text`           | Text data (sentence, title etc.)                                 |
+| 3    | :class:`~mimesis.Development`    | Data for developers (version, programming language etc.)         |
 +------+----------------------------------+------------------------------------------------------------------+
-| 12   | :class:`~mimesis.Transport`      | Dummy data about transport (truck model, car etc.)               |
+| 4    | :class:`~mimesis.File`           | File data (extension etc.)                                       |
 +------+----------------------------------+------------------------------------------------------------------+
-| 13   | :class:`~mimesis.Science`        | Scientific data (rna sequence dna sequence, etc.)                |
+| 5    | :class:`~mimesis.Games`          | Games data (game, score, pegi\_rating etc.)                      |
 +------+----------------------------------+------------------------------------------------------------------+
-| 14   | :class:`~mimesis.Structure`      | Structured data (html, css etc.)                                 |
+| 6    | :class:`~mimesis.Transport`      | Dummy data about transport (truck model, car etc.)               |
 +------+----------------------------------+------------------------------------------------------------------+
-| 15   | :class:`~mimesis.Internet`       | Internet data (facebook, twitter etc.)                           |
+| 7    | :class:`~mimesis.Structure`      | Structured data (html, css etc.)                                 |
 +------+----------------------------------+------------------------------------------------------------------+
-| 16   | :class:`~mimesis.Hardware`       | The data about the hardware (resolution, cpu, graphics etc.)     |
+| 8    | :class:`~mimesis.Internet`       | Internet data (facebook, twitter etc.)                           |
 +------+----------------------------------+------------------------------------------------------------------+
-| 17   | :class:`~mimesis.Numbers`        | Numerical data (floats, primes, digit etc.)                      |
+| 9    | :class:`~mimesis.Hardware`       | The data about the hardware (resolution, cpu, graphics etc.)     |
 +------+----------------------------------+------------------------------------------------------------------+
-| 18   | :class:`~mimesis.Path`           | Provides methods and property for generate paths.                |
+| 10   | :class:`~mimesis.Numbers`        | Numerical data (floats, primes, digit etc.)                      |
 +------+----------------------------------+------------------------------------------------------------------+
-| 19   | :class:`~mimesis.Payment`        | Payment data (credit_card, credit_card_network, etc.)            |
+| 11   | :class:`~mimesis.Path`           | Provides methods and property for generate paths.                |
 +------+----------------------------------+------------------------------------------------------------------+
-| 20   | :class:`~mimesis.UnitSystem`     | Provides names of unit systems in international format.          |
+| 12   | :class:`~mimesis.Payment`        | Payment data (credit_card, credit_card_network, etc.)            |
 +------+----------------------------------+------------------------------------------------------------------+
-| 21   | :class:`~mimesis.Generic`        | All at once.                                                     |
+| 13   | :class:`~mimesis.UnitSystem`     | Provides names of unit systems in international format.          |
 +------+----------------------------------+------------------------------------------------------------------+
-| 22   | :class:`~mimesis.Cryptographic`  | Cryptographic data.                                              |
+| 14   | :class:`~mimesis.Cryptographic`  | Cryptographic data.                                              |
 +------+----------------------------------+------------------------------------------------------------------+
-| 23   | :class:`~mimesis.Choice`         | Random choices out of elements from a sequence.                  |
+| 15   | :class:`~mimesis.Choice`         | Random choices out of elements from a sequence.                  |
 +------+----------------------------------+------------------------------------------------------------------+
 
 
@@ -280,8 +295,7 @@ Generating by schema
 +------+----------------------------------------+----------------------------------------------+
 
 
-
-Builtin data providers
+Builtin Data Providers
 ~~~~~~~~~~~~~~~~~~~~~~
 
 +------+----------------------------------------------------+--------------------------------------------+

@@ -17,7 +17,7 @@ Version 3.0.0
 - Added method to bulk create datetime objects: ``Datetime().bulk_create_datetimes()``
 - Added generate KPP for ``RussiaSpecProvider``
 - Added ``PolandSpecProvider`` builtin data provider for Poland
-- Added context manager for overriding locales - ``locales.override()``
+- Added context manager for overriding locales - ``BaseDataProvider.override_locale()``
 - Added 6k+ username words
 - Different superclasses for different types of data provider
 

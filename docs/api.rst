@@ -63,16 +63,6 @@ Decorators
 .. automodule:: mimesis.decorators
    :members:
 
-Locales
-=======
-
-
-override
---------
-
-.. automodule:: mimesis.locales
-   :members: override
-
 
 Custom Exceptions
 =================
@@ -114,20 +104,43 @@ NonEnumerableError
    :members:
 
 
-Usual Data Providers
-====================
-
-Address
--------
-
-.. autoclass:: mimesis.Address
-   :members:
-   :special-members: __init__
+Base Providers
+==============
 
 BaseProvider
 ------------
 
 .. autoclass:: mimesis.providers.BaseProvider
+   :members:
+   :special-members: __init__
+
+BaseDataProvider
+----------------
+
+.. autoclass:: mimesis.providers.BaseDataProvider
+   :members:
+   :special-members: __init__
+
+
+Generic Providers
+=================
+
+Generic
+-------
+
+.. autoclass:: mimesis.Generic
+   :members:
+   :special-members: __init__
+
+
+
+Locale-Dependent Providers
+==========================
+
+Address
+-------
+
+.. autoclass:: mimesis.Address
    :members:
    :special-members: __init__
 
@@ -138,12 +151,43 @@ Business
    :members:
    :special-members: __init__
 
-Choice
-------
+Datetime
+--------
 
-.. autoclass:: mimesis.Choice
+.. autoclass:: mimesis.Datetime
    :members:
-   :special-members: __init__, __call__
+   :special-members: __init__
+
+Food
+----
+.. autoclass:: mimesis.Food
+   :members:
+   :special-members: __init__
+
+Person
+--------
+
+.. autoclass:: mimesis.Person
+   :members:
+   :special-members: __init__
+
+Science
+-------
+
+.. autoclass:: mimesis.Science
+   :members:
+   :special-members: __init__
+
+Text
+----
+
+.. autoclass:: mimesis.Text
+   :members:
+   :special-members: __init__
+
+
+Locale-Independent Providers
+=============================
 
 ClothingSize
 -------------
@@ -173,13 +217,6 @@ Cryptographic
    :members:
    :special-members: __init__
 
-Datetime
---------
-
-.. autoclass:: mimesis.Datetime
-   :members:
-   :special-members: __init__
-
 Development
 -----------
 
@@ -194,23 +231,10 @@ File
    :members:
    :special-members: __init__
 
-Food
-----
-.. autoclass:: mimesis.Food
-   :members:
-   :special-members: __init__
-
 Games
 -----
 
 .. autoclass:: mimesis.Games
-   :members:
-   :special-members: __init__
-
-Generic
--------
-
-.. autoclass:: mimesis.Generic
    :members:
    :special-members: __init__
 
@@ -242,31 +266,10 @@ Path
    :members:
    :special-members: __init__
 
-Person
---------
-
-.. autoclass:: mimesis.Person
-   :members:
-   :special-members: __init__
-
-Science
--------
-
-.. autoclass:: mimesis.Science
-   :members:
-   :special-members: __init__
-
 Structure
 ----------
 
 .. autoclass:: mimesis.Structure
-   :members:
-   :special-members: __init__
-
-Text
-----
-
-.. autoclass:: mimesis.Text
    :members:
    :special-members: __init__
 
@@ -283,6 +286,8 @@ UnitSystem
 .. autoclass:: mimesis.UnitSystem
    :members:
    :special-members: __init__
+
+
 
 
 Schema

@@ -6,6 +6,7 @@ from mimesis.enums import Gender
 from mimesis.exceptions import NonEnumerableError, UnsupportedLocale
 from mimesis.locales import LIST_OF_LOCALES
 from mimesis.providers.base import BaseDataProvider
+from mimesis.providers import Code, Cryptographic, Internet, Person
 
 from . import patterns
 
@@ -15,6 +16,35 @@ class TestBase(object):
     @pytest.fixture
     def base_data_provider(self):
         return BaseDataProvider()
+
+    @pytest.mark.parametrize(
+        'locale, new_locale', [
+            ('en', 'ru'),
+
+        ],
+    )
+    def test_override(self, locale, new_locale):
+        provider = Person(locale)
+        assert provider.locale == locale
+
+        with provider.override_locale(new_locale):
+            assert 'Жен.' in provider._data['gender']
+            assert provider.locale == new_locale
+
+        assert provider.locale == locale
+        assert 'Жен.' not in provider._data['gender']
+
+    @pytest.mark.parametrize(
+        'provider', [
+            Code,
+            Cryptographic,
+            Internet,
+        ],
+    )
+    def test_override_locale_independent(self, provider):
+        with pytest.raises(AttributeError):
+            with provider.override_locale():
+                pass
 
     @pytest.mark.parametrize(
         'locale, city', [
