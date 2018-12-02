@@ -23,10 +23,13 @@
      :target: https://badge.fury.io/py/mimesis
 
 
-**Mimesis** (/maɪˈmiːsəs/; Ancient Greek: μίμησις (mīmēsis), from μιμεῖσθαι (mīmeisthai), “to imitate”, from μῖμος (mimos), “imitator, actor”) is a fast and easy to use Python programming library, 
-which helps generate synthetic data for a variety of purposes
-in a variety of languages. This data can be particularly useful during development, 
-testing, prototyping and a lot where else. For example, it could be used то populate a testing database, create complex structured JSON/XML files, anonymize data taken from a production service, etc. 
+**Mimesis** (/maɪˈmiːsəs/ “to imitate”, from μῖμος (mimos), “imitator, actor”)
+is a fast and easy to use library, which helps generate the big volumes of fake data
+for a variety of purposes in a variety of languages.
+The fake data can be particularly useful during software development and testing.
+For example, it could be used to populate a testing database, create beautiful
+JSON and XML files, anonymize data taken from a production service, etc.
+
 
 Advantages
 ----------
@@ -63,7 +66,11 @@ also you can install it manually:
 Getting started
 ---------------
 
-This library is really easy to use and everyting you need is just import an object which represents type of data you need (we call such object *Provider*). In example below we import provider `Person <https://mimesis.readthedocs.io/api.html#person>`_, which represents data related to personal information, such as name, surname, email and etc:
+This library is really easy to use and everything you need is just import an object which
+represents type of data you need (we call such object *Provider*).
+
+In example below we import provider `Person <https://mimesis.readthedocs.io/api.html#person>`_,
+which represents data related to personal information, such as name, surname, email and etc:
 
 .. code:: python
 
@@ -85,7 +92,7 @@ This library is really easy to use and everyting you need is just import an obje
 
 More about the other providers you can read in `here`_.
 
-.. _here: https://mimesis.readthedocs.io/quickstart.html#providers
+.. _here: https://mimesis.readthedocs.io/getting_started.html#providers
 
 
 Locales
@@ -120,8 +127,8 @@ You can find the complete documentation on the `Read the Docs`_.
 It is divided into several sections:
 
 -  `Foreword`_
--  `Quickstart`_
--  `Advanced Usage`_
+-  `Getting Started`_
+-  `Tips and Tricks`_
 -  `API Reference`_
 -  `Contributing`_
 -  `Changelog`_
@@ -129,10 +136,10 @@ It is divided into several sections:
 You can improve it by sending pull requests to this repository.
 
 .. _Read the Docs: http://mimesis.readthedocs.io
-.. _Foreword: http://mimesis.readthedocs.io/foreword.html
-.. _Quickstart: http://mimesis.readthedocs.io/quickstart.html
+.. _Foreword: https://mimesis.readthedocs.io/foreword.html
+.. _Getting Started: https://mimesis.readthedocs.io/getting_started.html
+.. _Tips and Tricks: https://mimesis.readthedocs.io/tips.html
 .. _API Reference: http://mimesis.readthedocs.io/api.html
-.. _Advanced Usage: http://mimesis.readthedocs.io/advanced.html
 .. _Contributing: http://mimesis.readthedocs.io/contributing.html
 .. _Changelog: http://mimesis.readthedocs.io/changelog.html
 

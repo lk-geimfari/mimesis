@@ -2,7 +2,7 @@ Contributing Guidelines
 -----------------------
 
 The `source code`_ and `issue tracker`_ are hosted on GitHub. *Mimesis*
-is tested against Python 3.5 through 3.6 on `Travis-CI`_. Test coverage
+is tested against Python 3.6 through 3.7 on `Travis-CI`_ and `AppVeyor_`. Test coverage
 is monitored with `Codecov`_.
 
 Dependencies
@@ -77,6 +77,7 @@ Example of annotated function:
 .. _source code: https://github.com/lk-geimfari/mimesis
 .. _issue tracker: https://github.com/lk-geimfari/mimesis/issues
 .. _Travis-CI: https://travis-ci.org/lk-geimfari/mimesis
+.. _AppVeyor: https://ci.appveyor.com/project/lk-geimfari/mimesis
 .. _Codecov: https://codecov.io/gh/lk-geimfari/mimesis
 .. _PEP8: https://www.python.org/dev/peps/pep-0008/
 .. _mypy: https://github.com/python/mypy

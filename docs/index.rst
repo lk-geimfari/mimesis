@@ -2,7 +2,7 @@
 Mimesis - Fake Data Generator
 =============================
 
-Mimesis is fast and easy to use a library, which helps generate the big volumes of
+Mimesis is fast and easy to use library, which helps generate the big volumes of
 fake data for a variety of purposes in a variety of languages.
 
 The fake data can be particularly useful during software development and testing.
