@@ -1,16 +1,12 @@
-User's Guide
-------------
-
-This part of the documentation begins with some background information about
-Mimesis then focuses on step-by-step instructions for using Mimesis.
+Contents
+--------
 
 .. toctree::
    :maxdepth: 2
 
    foreword
-   installation
-   quickstart
-   advanced
+   getting_started
+   tips
 
 
 API Reference

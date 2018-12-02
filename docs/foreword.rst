@@ -1,10 +1,6 @@
 Foreword
 ========
 
-This hopefully answers some questions about the purpose and goals of this library,
-and when you should or should not be using one.
-
-
 Advantages
 ----------
 This library offers a number of advantages over other similar libraries, such as Faker:
@@ -13,12 +9,7 @@ This library offers a number of advantages over other similar libraries, such as
 -  Completeness. Strives to provide many detailed providers that offer a variety of data generators.
 -  Simplicity. Does not require any modules other than the Python standard library.
 
-
-Comparison
-----------
-Below you can look how we compared performance.
-
-Importing needing classes and creating instances:
+Below you can look how we compared performance:
 
 .. code:: python
 
@@ -85,6 +76,12 @@ term that carries a wide range of meanings, which include imitation, representat
 mimicry, imitatio, receptivity, nonsensuous similarity, the act of resembling,
 the act of expression, and the presentation of the self.
 
+What is the fake data?
+----------------------
+
+The fake data is a kind of data which uses in the development and testing stage of software.
+
+That data looks like a real data, but they are not.
 
 What Mimesis is, What Mimesis is Not
 ------------------------------------
@@ -98,4 +95,4 @@ exactly what you need.
 specific database or ORM (such as Django ORM, SQLAclhemy etc.).
 It does not mean that you can't use it with ORM on the contrary,
 this will be done very simply, this only means that possibly you'll
-need third-party libraries to do it.
+need third-party libraries to do it, like `mimesis-factory` or another one.

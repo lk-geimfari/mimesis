@@ -1,13 +1,6 @@
-==============
-Advanced Usage
-==============
-
-Here we gonna speaking about integration with web frameworks, best practices
-and a number of most useful features of the library.
-
-
-Introduction
-------------
+===============
+Tips and Tricks
+===============
 
 It is worth noting that we will be showing the basic capabilities of the
 library and we will be using a few most common class providers, since
@@ -183,95 +176,21 @@ Still correct:
     >>> p_sv = Person('sv')
     >>> # …
 
+Also correct:
+
+.. code:: python
+
+    >>> from mimesis import Person
+
+    >>> person = Person('en')
+    >>> with person.override_locale('sv')
+    >>>     pass
+    >>> # …
+
+
 It means that importing class providers separately makes sense only if
 you limit yourself to the data available through the class you imported,
 otherwise it’s better to use :class:`~mimesis.Generic()`.
-
-
-Using with ORM
---------------
-First of all we would like to point out that Mimesis wasn’t developed to
-be used with a certain database or ORM. The main problem the library
-solves is generating valid data. Consequently, while there are no rigid
-rules of working with the library, here are a few recommendations that
-will help you keep your testing environment in order and will avert
-growth of entropy within your project. Recommendations are quite simple
-and are fully in tune with the Python spirit.
-
-Despite the previous note, the need for test data usually occurs in
-web-apps that perform certain operations (mostly CRUD) with a database.
-We have some advice on organizing test data generation for web-apps.
-Functions responsible for data generation and importing it to the
-database should be kept close to the models, or even better as statistical
-methods of the model they are related to. This is necessary to avoid running
-around files when the model structure changes and you need to add a new filed.
-
-
-Integration with Web Frameworks
--------------------------------
-
-You simply need to define a static method that will run all the
-manipulations related to the current model and call it when you need the
-initial database loading, as demonstrated in the example below. Model
-for Flask (Flask-SQLAlchemy) would look like this:
-
-.. code:: python
-
-    class Patient(db.Model):
-        id = db.Column(db.Integer, primary_key=True)
-        email = db.Column(db.String(120), unique=True)
-        phone_number = db.Column(db.String(25))
-        full_name = db.Column(db.String(100))
-        weight = db.Column(db.String(64))
-        height = db.Column(db.String(64))
-        blood_type = db.Column(db.String(64))
-        age = db.Column(db.Integer)
-
-        def __init__(self, **kwargs):
-            super(Patient, self).__init__(**kwargs)
-
-        @staticmethod
-        def _bootstrap(count=500, locale='en'):
-            from mimesis import Person
-            person = Person(locale)
-
-            for _ in range(count):
-                patient = Patient(
-                    email=person.email(),
-                    phone_number=person.telephone(),
-                    full_name=person.full_name(),
-                    age=person.age(minimum=18, maximum=45),
-                    weight=person.weight(),
-                    height=person.height(),
-                    blood_type=person.blood_type()
-                )
-
-                db.session.add(patient)
-                try:
-                    db.session.commit()
-                except IntegrityError:
-                    db.session.rollback()
-
-Now let’s transition to shell-mode:
-
-.. code:: text
-
-    (venv) ➜ python3 manage.py shell
-
-
-And generate data. Beforehand, we need to make sure that the database
-and the model in question are available.
-
-.. code:: python
-
-    >>> db
-    <SQLAlchemy engine='sqlite:///db.sqlite'>
-
-    >>> Patient
-    <class 'app.models.Patient'>
-
-    >>> # Generate 2к entries in English.
-    >>> Patient()._bootstrap(count=2000, locale='en')
 
 
 Inserting data into database
@@ -308,12 +227,37 @@ class :class:`~mimesis.Internet()` methods with the help of function
 .. code:: python
 
     >>> from mimesis import Internet
-    >>> from mimesis.utils import download_image
+    >>> from mimesis.shortcuts import download_image
 
     >>> net = Internet()
 
     >>> url = net.stock_image(width=1920, height=1080, keywords=['love', 'passion'])
     >>> download_image(url=url, save_path='/some/path/')
+
+
+Romanization of Cyrillic data
+-----------------------------
+
+If your locale belongs to the family of Cyrillic languages, but you need
+latinized locale-specific data, then you can use decorator :func:`~mimesis.decorators.romanized` which
+help you romanize your data.
+
+Example of usage for romanization of Russian full name:
+
+.. code:: python
+
+    >>> from mimesis.decorators import romanized
+
+    >>> @romanized('ru')
+    ... def russian_name():
+    ...     return 'Вероника Денисова'
+
+    >>> russian_name()
+    'Veronika Denisova'
+
+At this moment it works only for Russian (**ru**),
+Ukrainian (**uk**) and Kazakh (**kk**):
+
 
 
 Integration with third-party libraries
