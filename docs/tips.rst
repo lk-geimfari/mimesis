@@ -75,13 +75,13 @@ Good:
 
 .. code:: python
 
-    >>> Patient()._bootstrap(count=2000, locale='de')
+    >>> User().fill_fake(count=2000, locale='de')
 
 Very bad:
 
 .. code:: python
 
-    >>> Patient()._bootstrap(count=600000, locale='de')
+    >>> User().fill_fake(count=600000, locale='de')
 
 
 Importing images
