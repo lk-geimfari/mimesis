@@ -122,26 +122,6 @@ is appropriate for the language or country associated with that locale:
     >>> ru.address()
     'ул. Пехотная 125'
 
-
-You can also use it with :class:`~mimesis.Generic()`:
-
-.. code-block:: python
-
-    >>> from mimesis import Generic
-    >>> from mimesis import locales
-
-    >>> generic = Generic(locales.EN)
-    >>> generic.text.word()
-    'anyone'
-
-    >>> with generic.text.override_locale(locales.FR):
-    ...     generic.text.word()
-
-    'mieux'
-
-    >>> generic.text.word()
-    'responsibilities'
-
 Override locale
 ~~~~~~~~~~~~~~~
 
@@ -164,6 +144,25 @@ is not really good,  so it's better just temporarily override current locale for
 
     >>> person.full_name()
     'Waldo Foster'
+
+You can also use it with :class:`~mimesis.Generic()`:
+
+.. code-block:: python
+
+    >>> from mimesis import Generic
+    >>> from mimesis import locales
+
+    >>> generic = Generic(locales.EN)
+    >>> generic.text.word()
+    'anyone'
+
+    >>> with generic.text.override_locale(locales.FR):
+    ...     generic.text.word()
+
+    'mieux'
+
+    >>> generic.text.word()
+    'responsibilities'
 
 Supported locales
 ~~~~~~~~~~~~~~~~~
