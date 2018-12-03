@@ -61,7 +61,7 @@ So what did the code above?
    class will be our provider of personal data.
 2. We import object :class:`~mimesis.enums.Gender` which we are used as a
    parameter for the :meth:`~mimesis.Person.full_name`.
-3. Next we generate random female full name for locale **en**.
+3. Next we generate random female full name.
 4. The same as above, but for male.
 
 
@@ -69,8 +69,7 @@ Providers
 ---------
 Mimesis support over twenty different data providers available,
 which can produce data related to food, people, computer hardware,
-transportation, addresses, and more. List of supported data providers
-available in the tables below. See `API Reference <https://mimesis.readthedocs.io/index.html#api-reference>`_ for more info.
+transportation, addresses, and more. See `API Reference <https://mimesis.readthedocs.io/index.html#api-reference>`_ for more info.
 
 Generic Provider
 ----------------
