@@ -90,7 +90,7 @@ which represents data related to personal information, such as name, surname, em
     '2714/48-4'
 
 
-More about the other providers you can read in `here`_.
+More about the other providers you can read `here`_.
 
 .. _here: https://mimesis.readthedocs.io/getting_started.html#providers
 
