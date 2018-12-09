@@ -1,7 +1,7 @@
 Version 3.0.0
 -------------
 
-.. note:: This release (3.0.0) contains some breaking changes in API.
+.. warning:: This release (3.0.0) contains some breaking changes in API.
 
 .. note:: In this release (3.0.0) we've reject support of Python 3.5.
 
@@ -10,31 +10,32 @@ Version 3.0.0
 **Added**:
 
 - Added provider ``Choice()``
-- Added method ``formatted_time()``
-- Added method ``formatted_date()``
-- Added method ``formatted_datetime()``
-- Added support of timezones for ``Datetime().datetime()``
+- Added method ``formatted_time()`` for ``Datetime()`` provider
+- Added method ``formatted_date()`` for ``Datetime()`` provider
+- Added method ``formatted_datetime()`` for ``Datetime()`` provider
+- Added support of timezones (optional) for ``Datetime().datetime()``
 - Added method to bulk create datetime objects: ``Datetime().bulk_create_datetimes()``
-- Added generate KPP for ``RussiaSpecProvider``
-- Added ``PolandSpecProvider`` builtin data provider for Poland
-- Added context manager for overriding locales - ``BaseDataProvider.override_locale()``
+- Added ``kpp`` for ``RussiaSpecProvider``
+- Added ``PolandSpecProvider`` builtin data provider
+- Added context manager to temporarily overriding locale - ``BaseDataProvider.override_locale()``
 - Added 6k+ username words
-- Different superclasses for different types of data provider
 
 
 **Updated**:
 
+- Updated documentation
 - Updated data for ``pl`` and ``fr``
-- Updated snils algorithm for ``RussiaSpecProvider``
+- Updated SNILS algorithm for ``RussiaSpecProvider``
 - Updated method ``Datetime().time()`` to return only ``datetime.time`` object
 - Updated method ``Datetime().date()`` to return only ``datetime.date`` object
 - Completely annotated all functions
-- Locale independent providers inherit ``BaseProvider`` instead of ``BaseDataProvider``
+- Locale independent providers inherit ``BaseProvider`` instead of ``BaseDataProvider`` (it's mean that locale independent providers does not support parameter ``locale`` anymore)
 - Now you can add to Generic only providers which are subclasses of ``BaseProvider`` to ensure a single instance of ``random.Random()`` for all providers
 
 
 **Renamed**:
 
+- Renamed provider ``ClothingSizes`` to ``Clothing``, so now it can contain any data related to clothing, not sizes only
 - Renamed ``Science().dna()`` to ``Science().dna_sequence()``
 - Renamed ``Science().rna()`` to ``Science().rna_sequence()``
 - Renamed module ``helpers.py`` to ``random.py``
@@ -44,26 +45,26 @@ Version 3.0.0
 
 **Removed**:
 
-- Locale independent providers does not support parameter ``locale`` anymore
 - Removed deprecated argument ``fmt`` for ``Datetime().date()``, use ``Datetime().formatted_date()`` instead
 - Removed deprecated argument ``fmt`` for ``Datetime().time()``, use ``Datetime().formatted_time()`` instead
 - Removed deprecated argument ``humanize`` for ``Datetime().datetime()``, use ``Datetime().formatted_datetime()`` instead
 - Removed deprecated method ``Science.scientific_article()``
-- Removed deprecated method ``Structure().json()``, use ``schema.Schema()`` instead
+- Removed deprecated method ``Structure().json()``, use ``schema.Schema()`` and ``schema.Field`` instead
 - Removed deprecated and useless method: ``Development().backend()``
 - Removed deprecated and useless method: ``Development().frontend()``
 - Removed deprecated and useless method: ``Development().version_control_system()``
 - Removed deprecated and useless method: ``Development().container()``
 - Removed deprecated and useless method: ``Development().database()``
 - Removed duplicated method ``Internet().image_by_keyword()``, use ``Internet().stock_image()`` with ``keywords`` instead
-- Removed deprecated JapanSpecProvider
-
+- Removed deprecated JapanSpecProvider (it didn't fit the definition of the data provider)
+- Removed methods ``Person.favorite_movie()``, ``Person.favorite_music_genre()``, ``Person.level_of_english()`` because they did not related to ``Person`` provider
 
 **Fixed**:
 
 - Fixed bug with seed
 - Fixed issue with names on downloading images
 - Fixed issue with ``None`` in username for ``Person().username()``
+- Other minor improvements and fix
 
 
 Version 2.1.0
@@ -122,7 +123,7 @@ Version 2.0.0
 - Updated method ``integers``
 - Renamed provider ``Personal`` to ``Person``
 - Renamed provider ``Structured`` to ``Structure``
-- Renamed provider ``ClothingSizes`` to ``ClothingSize``
+- Renamed provider ``ClothingSizes`` to ``Clothing``
 - Renamed json file ``personal.json`` to ``person.json`` for all locales
 - Renamed ``country_iso_code`` to ``country_code`` in ``Address`` data provider
 

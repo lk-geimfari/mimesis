@@ -4,7 +4,7 @@ from mimesis.providers.base import BaseProvider, BaseDataProvider
 from mimesis.providers.address import Address
 from mimesis.providers.business import Business
 from mimesis.providers.choice import Choice
-from mimesis.providers.clothing import ClothingSize
+from mimesis.providers.clothing import Clothing
 from mimesis.providers.cryptographic import Cryptographic
 from mimesis.providers.code import Code
 from mimesis.providers.date import Datetime
@@ -36,7 +36,7 @@ __all__ = [
     'Address',
     'Business',
     'Choice',
-    'ClothingSize',
+    'Clothing',
     'Code',
     'Choice',
     'Datetime',

@@ -24,7 +24,7 @@ USERNAME_REGEX = r'^[a-zA-Z0-9_.-]+$'
 
 CREDIT_CARD_REGEX = r'[\d]+((-|\s)?[\d]+)+'
 
-PROVIDER_STR_REGEX = r'^(Business|ClothingSize|Code|Development' \
+PROVIDER_STR_REGEX = r'^(Business|Clothing|Code|Development' \
                      r'|File|Games|Hardware|Internet|Numbers|Path|Payment|' \
                      r'Structure|Transport|UnitSystem|Cryptographic)'
 

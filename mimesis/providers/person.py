@@ -5,8 +5,8 @@ from string import ascii_letters, digits, punctuation
 from typing import Optional, Union
 
 from mimesis.data import (BLOOD_GROUPS, CALLING_CODES, EMAIL_DOMAINS,
-                          ENGLISH_LEVEL, GENDER_SYMBOLS, MUSIC_GENRE,
-                          SEXUALITY_SYMBOLS, SOCIAL_NETWORKS, USERNAMES)
+                          GENDER_SYMBOLS, SEXUALITY_SYMBOLS, SOCIAL_NETWORKS,
+                          USERNAMES)
 from mimesis.enums import Gender, SocialNetwork, TitleType
 from mimesis.exceptions import NonEnumerableError
 from mimesis.providers.base import BaseDataProvider
@@ -437,27 +437,6 @@ class Person(BaseDataProvider):
         languages = self._data['language']
         return self.random.choice(languages)
 
-    def favorite_movie(self) -> str:
-        """Get a random movie for current locale.
-
-        :return: The name of the movie.
-
-        :Example:
-            Interstellar.
-        """
-        movies = self._data['favorite_movie']
-        return self.random.choice(movies)
-
-    def favorite_music_genre(self) -> str:
-        """Get a random music genre.
-
-        :return: A music genre.
-
-        :Example:
-            Ambient.
-        """
-        return self.random.choice(MUSIC_GENRE)
-
     def telephone(self, mask: str = '', placeholder: str = '#') -> str:
         """Generate a random phone number.
 
@@ -500,13 +479,3 @@ class Person(BaseDataProvider):
             07-97/04
         """
         return self.random.custom_code(mask=mask)
-
-    def level_of_english(self) -> str:
-        """Get a random level of English.
-
-        :return: Level of english.
-
-        :Example:
-            Intermediate.
-        """
-        return self.random.choice(ENGLISH_LEVEL)

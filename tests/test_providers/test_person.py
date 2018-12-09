@@ -5,8 +5,7 @@ import re
 import pytest
 
 from mimesis import Person
-from mimesis.data import (BLOOD_GROUPS, ENGLISH_LEVEL, GENDER_SYMBOLS,
-                          MUSIC_GENRE, SEXUALITY_SYMBOLS)
+from mimesis.data import BLOOD_GROUPS, GENDER_SYMBOLS, SEXUALITY_SYMBOLS
 from mimesis.enums import Gender, SocialNetwork, TitleType
 from mimesis.exceptions import NonEnumerableError
 
@@ -105,14 +104,6 @@ class TestPerson(object):
         result = _person.blood_type()
         assert result in BLOOD_GROUPS
 
-    def test_favorite_movie(self, person):
-        result = person.favorite_movie()
-        assert result in person._data['favorite_movie']
-
-    def test_favorite_music_genre(self, _person):
-        result = _person.favorite_music_genre()
-        assert result in MUSIC_GENRE
-
     @pytest.mark.parametrize(
         'site', [
             SocialNetwork.INSTAGRAM,
@@ -140,10 +131,6 @@ class TestPerson(object):
         result = _person.identifier(mask='##-##/## @@')
         suffix = result.split(' ')[1]
         assert suffix.isalpha()
-
-    def test_level_of_english(self, _person):
-        result = _person.level_of_english()
-        assert result in ENGLISH_LEVEL
 
     @pytest.mark.parametrize(
         'gender', [
@@ -326,7 +313,7 @@ class TestSeededPerson(object):
     def test_password(self, p1, p2):
         assert p1.password() == p2.password()
         assert p1.password(length=12, hashed=True) == \
-            p2.password(length=12, hashed=True)
+               p2.password(length=12, hashed=True)
 
     def test_username(self, p1, p2):
         assert p1.username() == p2.username()
@@ -335,7 +322,7 @@ class TestSeededPerson(object):
     def test_email(self, p1, p2):
         assert p1.email() == p2.email()
         assert p1.email(domains=['@mimesis.io']) == \
-            p2.email(domains=['@mimesis.io'])
+               p2.email(domains=['@mimesis.io'])
 
     def test_height(self, p1, p2):
         assert p1.height() == p2.height()
@@ -348,16 +335,10 @@ class TestSeededPerson(object):
     def test_blood_type(self, p1, p2):
         assert p1.blood_type() == p2.blood_type()
 
-    def test_favorite_movie(self, p1, p2):
-        assert p1.favorite_movie() == p2.favorite_movie()
-
-    def test_favorite_music_genre(self, p1, p2):
-        assert p1.favorite_music_genre() == p2.favorite_music_genre()
-
     def test_social_media_profile(self, p1, p2):
         assert p1.social_media_profile() == p2.social_media_profile()
         assert p1.social_media_profile(site=SocialNetwork.TWITTER) == \
-            p2.social_media_profile(site=SocialNetwork.TWITTER)
+               p2.social_media_profile(site=SocialNetwork.TWITTER)
 
     def test_avatar(self, p1, p2):
         assert p1.avatar() == p2.avatar()
@@ -367,38 +348,35 @@ class TestSeededPerson(object):
         assert p1.identifier() == p2.identifier()
         assert p1.identifier(mask='##') == p2.identifier(mask='##')
 
-    def test_level_of_english(self, p1, p2):
-        assert p1.level_of_english() == p2.level_of_english()
-
     def test_name(self, p1, p2):
         assert p1.name() == p2.name()
         assert p1.name(gender=Gender.FEMALE) == \
-            p2.name(gender=Gender.FEMALE)
+               p2.name(gender=Gender.FEMALE)
 
     def test_telephone(self, p1, p2):
         assert p1.telephone() == p2.telephone()
         assert p1.telephone(mask='(x)-xx-xxx', placeholder='x') == \
-            p2.telephone(mask='(x)-xx-xxx', placeholder='x')
+               p2.telephone(mask='(x)-xx-xxx', placeholder='x')
 
     def test_surname(self, p1, p2):
         assert p1.surname() == p2.surname()
         assert p1.last_name(gender=Gender.MALE) == \
-            p2.last_name(gender=Gender.MALE)
+               p2.last_name(gender=Gender.MALE)
 
     def test_full_name(self, p1, p2):
         assert p1.full_name() == p2.full_name()
         assert p1.full_name(gender=Gender.FEMALE, reverse=True) == \
-            p2.full_name(gender=Gender.FEMALE, reverse=True)
+               p2.full_name(gender=Gender.FEMALE, reverse=True)
 
     def test_gender(self, p1, p2):
         assert p1.gender() == p2.gender()
         assert p1.gender(iso5218=True, symbol=True) == \
-            p2.gender(iso5218=True, symbol=True)
+               p2.gender(iso5218=True, symbol=True)
 
     def test_sexual_orientation(self, p1, p2):
         assert p1.sexual_orientation() == p2.sexual_orientation()
         assert p1.sexual_orientation(symbol=True) == \
-            p2.sexual_orientation(symbol=True)
+               p2.sexual_orientation(symbol=True)
 
     def test_occupation(self, p1, p2):
         assert p1.occupation() == p2.occupation()
@@ -424,9 +402,9 @@ class TestSeededPerson(object):
     def test_title(self, p1, p2):
         assert p1.title() == p2.title()
         assert p1.title(gender=Gender.FEMALE, title_type=TitleType.TYPICAL) == \
-            p2.title(gender=Gender.FEMALE, title_type=TitleType.TYPICAL)
+               p2.title(gender=Gender.FEMALE, title_type=TitleType.TYPICAL)
 
     def test_nationality(self, p1, p2):
         assert p1.nationality() == p2.nationality()
         assert p1.nationality(Gender.FEMALE) == \
-            p2.nationality(Gender.FEMALE)
+               p2.nationality(Gender.FEMALE)

@@ -6,7 +6,7 @@ import pytest
 
 from mimesis import BaseProvider, Generic
 
-from .test_providers import patterns
+from . import patterns
 
 
 class TestGeneric(object):
@@ -114,9 +114,9 @@ class TestSeededGeneric(object):
         assert g1.business.company() == g2.business.company()
         assert g1.business.copyright() == g2.business.copyright()
 
-    def test_generic_clothing_size(self, g1, g2):
-        s1 = g1.clothing_size.european_size()
-        s2 = g2.clothing_size.european_size()
+    def test_generic_clothing(self, g1, g2):
+        s1 = g1.clothing.european_size()
+        s2 = g2.clothing.european_size()
         assert s1 == s2
 
     def test_generic_code(self, g1, g2):

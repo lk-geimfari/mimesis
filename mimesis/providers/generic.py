@@ -7,7 +7,7 @@ from mimesis.providers.address import Address
 from mimesis.providers.base import BaseDataProvider, BaseProvider
 from mimesis.providers.business import Business
 from mimesis.providers.choice import Choice
-from mimesis.providers.clothing import ClothingSize
+from mimesis.providers.clothing import Clothing
 from mimesis.providers.code import Code
 from mimesis.providers.cryptographic import Cryptographic
 from mimesis.providers.date import Datetime
@@ -54,7 +54,7 @@ class Generic(BaseDataProvider):
         self.numbers = Numbers(seed=self.seed)
         self.development = Development(seed=self.seed)
         self.hardware = Hardware(seed=self.seed)
-        self.clothing_size = ClothingSize(seed=self.seed)
+        self.clothing = Clothing(seed=self.seed)
         self.internet = Internet(seed=self.seed)
         self.path = Path(seed=self.seed)
         self.payment = Payment(seed=self.seed)

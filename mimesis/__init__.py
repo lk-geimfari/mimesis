@@ -12,7 +12,7 @@ __all__ = [
     'BaseDataProvider',
     'BaseProvider',
     'Business',
-    'ClothingSize',
+    'Clothing',
     'Code',
     'Choice',
     'Datetime',

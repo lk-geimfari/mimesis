@@ -189,10 +189,10 @@ Text
 Locale-Independent Providers
 =============================
 
-ClothingSize
+Clothing
 -------------
 
-.. autoclass:: mimesis.ClothingSize
+.. autoclass:: mimesis.Clothing
    :members:
    :special-members: __init__
 

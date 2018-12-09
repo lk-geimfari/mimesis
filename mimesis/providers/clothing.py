@@ -1,12 +1,12 @@
-"""Clothing sizes data provider."""
+"""Clothing data provider."""
 
 from mimesis.providers.base import BaseProvider
 
-__all__ = ['ClothingSize']
+__all__ = ['Clothing']
 
 
-class ClothingSize(BaseProvider):
-    """Class for generate clothing sizes data."""
+class Clothing(BaseProvider):
+    """Class for generate data related to clothing."""
 
     def international_size(self) -> str:
         """Get a random size in international format.
