@@ -1,8 +1,13 @@
+Mimesis - Fake Data Generator
+-----------------------------
+
+
 .. image:: https://raw.githubusercontent.com/lk-geimfari/mimesis/master/media/logo_media.png
      :target: https://github.com/lk-geimfari/mimesis
 
---------------
-
+|
+|
+|
 
 .. image:: https://travis-ci.org/lk-geimfari/mimesis.svg?branch=master
      :target: https://travis-ci.org/lk-geimfari/mimesis
@@ -23,26 +28,21 @@
      :target: https://badge.fury.io/py/mimesis
 
 
-**Mimesis** (/maɪˈmiːsəs/ “to imitate”, from μῖμος (mimos), “imitator, actor”)
-is a fast and easy to use library, which helps generate the big volumes of fake data
-for a variety of purposes in a variety of languages.
-The fake data can be particularly useful during software development and testing.
-For example, it could be used to populate a testing database, create beautiful
-JSON and XML files, anonymize data taken from a production service, etc.
-
+Mimesis is fast and easy to use library, which helps generate the big volumes of fake data for a 
+variety of purposes in a variety of languages. The fake data can be particularly useful during software development and testing. For example, it could be 
+used to populate a testing database, create beautiful JSON and XML files, anonymize data taken from 
+a production service, create dummy HTTP API and etc.
 
 Advantages
 ----------
 
 This library offers a number of advantages over other similar libraries:
 
--  Performance. Significantly `faster`_ than other similar libraries.
+-  Performance. Significantly faster than other similar libraries.
 -  Completeness. Strives to provide many detailed providers that offer a
    variety of data generators.
 -  Simplicity. Does not require any modules other than the Python
    standard library.
-
-.. _faster: https://mimesis.readthedocs.io/foreword.html#comparison
 
 
 Installation
