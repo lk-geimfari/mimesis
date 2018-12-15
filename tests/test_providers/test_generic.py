@@ -144,10 +144,6 @@ class TestSeededGeneric(object):
         assert g1.food.dish() == g2.food.dish()
         assert g1.food.spices() == g2.food.spices()
 
-    def test_generic_games(self, g1, g2):
-        assert g1.games.gaming_platform() == g2.games.gaming_platform()
-        assert g1.games.score() == g2.games.score()
-
     def test_generic_hardware(self, g1, g2):
         assert g1.hardware.screen_size() == g2.hardware.screen_size()
         assert g1.hardware.cpu() == g2.hardware.cpu()

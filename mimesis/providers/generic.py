@@ -14,7 +14,6 @@ from mimesis.providers.date import Datetime
 from mimesis.providers.development import Development
 from mimesis.providers.file import File
 from mimesis.providers.food import Food
-from mimesis.providers.games import Games
 from mimesis.providers.hardware import Hardware
 from mimesis.providers.internet import Internet
 from mimesis.providers.numbers import Numbers
@@ -58,7 +57,6 @@ class Generic(BaseDataProvider):
         self.internet = Internet(seed=self.seed)
         self.path = Path(seed=self.seed)
         self.payment = Payment(seed=self.seed)
-        self.games = Games(seed=self.seed)
         self.cryptographic = Cryptographic(seed=self.seed)
         self.structure = Structure(seed=self.seed)
         self.choice = Choice(seed=self.seed)

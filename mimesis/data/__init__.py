@@ -14,4 +14,3 @@ from .int.scientific import *
 from .int.structure import *
 from .int.text import *
 from .int.transport import *
-from .int.games import *

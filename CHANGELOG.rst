@@ -49,14 +49,17 @@ Version 3.0.0
 - Removed deprecated argument ``fmt`` for ``Datetime().time()``, use ``Datetime().formatted_time()`` instead
 - Removed deprecated argument ``humanize`` for ``Datetime().datetime()``, use ``Datetime().formatted_datetime()`` instead
 - Removed deprecated method ``Science.scientific_article()``
+- Removed deprecated providers ``Games``
 - Removed deprecated method ``Structure().json()``, use ``schema.Schema()`` and ``schema.Field`` instead
 - Removed deprecated and useless method: ``Development().backend()``
 - Removed deprecated and useless method: ``Development().frontend()``
 - Removed deprecated and useless method: ``Development().version_control_system()``
 - Removed deprecated and useless method: ``Development().container()``
 - Removed deprecated and useless method: ``Development().database()``
+- Removed deprecated method ``Internet().category_of_website()``
 - Removed duplicated method ``Internet().image_by_keyword()``, use ``Internet().stock_image()`` with ``keywords`` instead
 - Removed deprecated JapanSpecProvider (it didn't fit the definition of the data provider)
+- Removed deprecated method ``Internet().subreddit()``
 - Removed methods ``Person.favorite_movie()``, ``Person.favorite_music_genre()``, ``Person.level_of_english()`` because they did not related to ``Person`` provider
 
 **Fixed**:

@@ -22,7 +22,6 @@ from mimesis.providers.structure import Structure
 from mimesis.providers.text import Text
 from mimesis.providers.transport import Transport
 from mimesis.providers.units import UnitSystem
-from mimesis.providers.games import Games
 from mimesis.providers.generic import Generic
 
 __all__ = [
@@ -43,7 +42,6 @@ __all__ = [
     'Development',
     'File',
     'Food',
-    'Games',
     'Hardware',
     'Internet',
     'Numbers',

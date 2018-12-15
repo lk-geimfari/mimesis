@@ -34,16 +34,6 @@ class TestInternet(object):
         result = net.home_page()
         assert re.match(patterns.HOME_PAGE, result)
 
-    def test_subreddit(self, net):
-        result = net.subreddit()
-        assert result in data.SUBREDDITS
-        full_result = net.subreddit(full_url=True)
-        assert len(full_result) > 20
-        result_nsfw = net.subreddit(nsfw=True)
-        assert result_nsfw in data.SUBREDDITS_NSFW
-        full_result = net.subreddit(nsfw=True, full_url=True)
-        assert len(full_result) > 20
-
     def test_user_agent(self, net):
         result = net.user_agent()
         assert result in data.USER_AGENTS
@@ -165,10 +155,6 @@ class TestInternet(object):
         with pytest.raises(NonEnumerableError):
             net.port('nill')
 
-    def test_torrent_portal_category(self, net):
-        result = net.category_of_website()
-        assert result in data.TORRENT_CATEGORIES
-
 
 class TestSeededInternet(object):
 
@@ -191,11 +177,6 @@ class TestSeededInternet(object):
         assert i1.home_page() == i2.home_page()
         assert i1.home_page(tld_type=TLDType.GEOTLD) == \
                i2.home_page(tld_type=TLDType.GEOTLD)
-
-    def test_subreddit(self, i1, i2):
-        assert i1.subreddit() == i2.subreddit()
-        assert i1.subreddit(nsfw=True, full_url=True) == \
-               i2.subreddit(nsfw=True, full_url=True)
 
     def test_user_agent(self, i1, i2):
         assert i1.user_agent() == i2.user_agent()
@@ -243,6 +224,3 @@ class TestSeededInternet(object):
         assert i1.port() == i2.port()
         assert i1.port(port_range=PortRange.REGISTERED) == \
                i2.port(port_range=PortRange.REGISTERED)
-
-    def test_category_of_website(self, i1, i2):
-        assert i1.category_of_website() == i2.category_of_website()

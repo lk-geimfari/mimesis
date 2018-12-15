@@ -6,8 +6,7 @@ from ipaddress import IPv6Address
 from typing import List, Optional, Union
 
 from mimesis.data import (EMOJI, HASHTAGS, HTTP_METHODS, HTTP_STATUS_CODES,
-                          HTTP_STATUS_MSGS, NETWORK_PROTOCOLS, SUBREDDITS,
-                          SUBREDDITS_NSFW, TLD, TORRENT_CATEGORIES,
+                          HTTP_STATUS_MSGS, NETWORK_PROTOCOLS, TLD,
                           USER_AGENTS, USERNAMES)
 from mimesis.enums import Layer, MimeType, PortRange, TLDType
 from mimesis.exceptions import NonEnumerableError
@@ -219,28 +218,6 @@ class Internet(BaseProvider):
         key = self._validate_enum(item=tld_type, enum=TLDType)
         return self.random.choice(TLD[key])
 
-    def subreddit(self, nsfw: bool = False,
-                  full_url: bool = False) -> str:
-        """Get a random subreddit from the list.
-
-        :param nsfw: NSFW subreddit.
-        :param full_url: Full URL address.
-        :return: Subreddit or URL to subreddit.
-
-        :Example:
-            https://www.reddit.com/r/flask/
-        """
-        url = 'http://www.reddit.com'
-        if not nsfw:
-            if not full_url:
-                return self.random.choice(SUBREDDITS)
-            else:
-                return url + self.random.choice(SUBREDDITS)
-
-        nsfw_sr = self.random.choice(SUBREDDITS_NSFW)
-        result = url + nsfw_sr if full_url else nsfw_sr
-        return result
-
     def user_agent(self) -> str:
         """Get a random user agent.
 
@@ -279,13 +256,3 @@ class Internet(BaseProvider):
             return self.random.randint(*port_range.value)
         else:
             raise NonEnumerableError(PortRange)
-
-    def category_of_website(self):
-        """Get random category of torrent portal.
-
-        :return: Category name.
-
-        :Example:
-            Video/TV shows
-        """
-        return self.random.choice(TORRENT_CATEGORIES)

@@ -231,13 +231,6 @@ File
    :members:
    :special-members: __init__
 
-Games
------
-
-.. autoclass:: mimesis.Games
-   :members:
-   :special-members: __init__
-
 Hardware
 --------
 
