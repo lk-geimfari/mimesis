@@ -39,21 +39,24 @@ class TestCryptographic(object):
         with pytest.raises(NonEnumerableError):
             crypto.hash(algorithm='nil')
 
-    def test_bytes(self, crypto):
-        result = crypto.bytes(entropy=64)
-        assert result is not None
+    @pytest.mark.parametrize('entropy', [32, 64, 128])
+    def test_token_bytes(self, crypto, entropy):
+        result = crypto.token_bytes(entropy=entropy)
+        assert len(result) == entropy
         assert isinstance(result, bytes)
 
-    def test_token(self, crypto):
-        result = crypto.token(entropy=16)
+    @pytest.mark.parametrize('entropy', [32, 64, 128])
+    def test_token_hex(self, crypto, entropy):
+        result = crypto.token_hex(entropy=entropy)
         # Each byte converted to two hex digits.
-        assert len(result) == 32
+        assert len(result) == entropy * 2
         assert isinstance(result, str)
 
-    def test_salt(self, crypto):
-        result = crypto.salt()
-        assert result is not None
-        assert len(result) == 16
+    @pytest.mark.parametrize('entropy', [32, 64, 128])
+    def test_token_urlsafe(self, crypto, entropy):
+        result = crypto.token_urlsafe(entropy=entropy)
+        assert len(result) > entropy
+        assert isinstance(result, str)
 
     @pytest.mark.parametrize(
         'length', [
@@ -85,17 +88,6 @@ class TestSeededCryptographic(object):
         assert c1.hash() == c2.hash()
         assert c1.hash(algorithm=Algorithm.SHA512) == \
                c2.hash(algorithm=Algorithm.SHA512)
-
-    def test_bytes(self, c1, c2):
-        assert c1.bytes() == c2.bytes()
-        assert c1.bytes(entropy=16) == c2.bytes(entropy=16)
-
-    def test_token(self, c1, c2):
-        assert c1.token() == c2.token()
-        assert c1.token(entropy=16) == c2.token(entropy=16)
-
-    def test_salt(self, c1, c2):
-        assert c1.salt() == c2.salt()
 
     def test_mnemonic_phrase(self, c1, c2):
         assert c1.mnemonic_phrase() == c2.mnemonic_phrase()

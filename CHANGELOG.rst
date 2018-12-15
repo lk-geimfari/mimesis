@@ -17,6 +17,7 @@ Version 3.0.0
 - Added ``kpp`` for ``RussiaSpecProvider``
 - Added ``PolandSpecProvider`` builtin data provider
 - Added context manager to temporarily overriding locale - ``BaseDataProvider.override_locale()``
+- Added method ``token_urlsafe()`` for ``Cryptographic`` provider
 - Added 6k+ username words
 
 
@@ -40,6 +41,8 @@ Version 3.0.0
 - Renamed module ``helpers.py`` to ``random.py``
 - Renamed module ``config.py`` to ``locales.py``
 - Renamed module ``utils.py`` to ``shortcuts.py``
+- Renamed ``Cryptographic().bytes()`` to ``Cryptographic.token_bytes()``
+- Renamed ``Cryptographic().token()`` to ``Cryptographic.token_hex()``
 
 
 **Removed**:
@@ -59,6 +62,7 @@ Version 3.0.0
 - Removed duplicated method ``Internet().image_by_keyword()``, use ``Internet().stock_image()`` with ``keywords`` instead
 - Removed deprecated JapanSpecProvider (it didn't fit the definition of the data provider)
 - Removed deprecated method ``Internet().subreddit()``
+- Removed ``Cryptographic().salt()`` use ``Cryptographic().token_hex()`` or  ``Cryptographic().token_bytes()`` instead
 - Removed methods ``Person.favorite_movie()``, ``Person.favorite_music_genre()``, ``Person.level_of_english()`` because they did not related to ``Person`` provider
 
 **Fixed**:

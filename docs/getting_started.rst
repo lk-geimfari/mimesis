@@ -403,7 +403,7 @@ Example of usage:
     ...         'timestamp': _('timestamp', posix=False),
     ...         'owner': {
     ...             'email': _('person.email', key=str.lower),
-    ...             'token': _('token'),
+    ...             'token': _('token_hex'),
     ...             'creator': _('full_name', gender=Gender.FEMALE),
     ...         },
     ...     }

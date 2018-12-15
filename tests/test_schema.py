@@ -54,7 +54,7 @@ def valid_schema(field):
         'zip_code': field('postal_code'),
         'owner': {
             'email': field('email', key=str.lower),
-            'token': field('token'),
+            'token': field('token_hex'),
             'creator': field('full_name', gender=Gender.FEMALE),
             'billing': {
                 'ethereum_address': field('ethereum_address'),

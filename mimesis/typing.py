@@ -5,7 +5,6 @@ from typing import Any, Dict, Union
 
 __all__ = [
     'JSON',
-    'Bytes',
     'DateTime',
     'Timestamp',
     'Time',
@@ -16,8 +15,6 @@ __all__ = [
 JSON = Dict[str, Any]
 
 _StrOrInt = Union[str, int]
-
-Bytes = bytes
 
 DateTime = datetime.datetime
 
