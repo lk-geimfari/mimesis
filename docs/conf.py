@@ -327,7 +327,7 @@ man_pages = [
 #  dir menu entry, description, category)
 texinfo_documents = [
     (master_doc, 'Mimesis', 'Mimesis Documentation',
-     author, 'Mimesis', 'Mimesis is a library to generate dummy data.',
+     author, 'Mimesis', 'Mimesis is a fast and easy to use fake data generator.',
      'Miscellaneous'),
 ]
 
