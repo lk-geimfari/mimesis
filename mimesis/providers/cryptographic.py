@@ -2,7 +2,6 @@
 
 import hashlib
 import secrets
-import string
 import uuid
 
 from mimesis.enums import Algorithm
@@ -22,9 +21,6 @@ class Cryptographic(BaseProvider):
         """
         super().__init__(*args, **kwargs)
         self.__words = Text('en')._data.get('words', {})
-        # This is not a tuple
-        self.__chars = (string.ascii_letters +
-                        string.digits + string.punctuation)
 
     def uuid(self, version: int = None) -> str:
         """Generate random UUID.
