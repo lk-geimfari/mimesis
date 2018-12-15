@@ -145,7 +145,7 @@ Let's define the structure of the dummy response.
     from mimesis.enums import Gender
 
     _ = Field('en')
-    dummy_users = (
+    dummy_users = Schema(
         lambda: {
             'id': _('uuid'),
             'name': _('name', gender=Gender.MALE),
