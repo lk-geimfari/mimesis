@@ -9,9 +9,13 @@ include README.rst
 prune docs
 prune media
 prune tests
+prune .github
+prune *.pyc
+
 prune mimesis/data/locale_template
 exclude *.lock
 exclude *.yml
 exclude Makefile
 exclude Pipfile
 exclude .editorconfig
+exclude __pycache__
