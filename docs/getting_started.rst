@@ -69,7 +69,7 @@ Providers
 ---------
 Mimesis support over twenty different data providers available,
 which can produce data related to food, people, computer hardware,
-transportation, addresses, and more. See `API Reference <https://mimesis.readthedocs.io/index.html#api-reference>`_ for more info.
+transportation, addresses, and more. See :ref:`api-reference` for more info.
 
 Generic Provider
 ----------------
@@ -301,8 +301,7 @@ the object :class:`~mimesis.Generic`. You can use it directly, as shown below:
     'Бенедиктович'
 
 
-See `API Reference for more info <https://mimesis.readthedocs.io/api.html#builtin-data-providers>`_ for
-more info about built-in providers.
+See :ref:`api-reference` for more info about built-in providers.
 
 Custom Providers
 ----------------
