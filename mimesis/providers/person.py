@@ -4,9 +4,15 @@ import hashlib
 from string import ascii_letters, digits, punctuation
 from typing import Optional, Union
 
-from mimesis.data import (BLOOD_GROUPS, CALLING_CODES, EMAIL_DOMAINS,
-                          GENDER_SYMBOLS, SEXUALITY_SYMBOLS, SOCIAL_NETWORKS,
-                          USERNAMES)
+from mimesis.data import (
+    BLOOD_GROUPS,
+    CALLING_CODES,
+    EMAIL_DOMAINS,
+    GENDER_SYMBOLS,
+    SEXUALITY_SYMBOLS,
+    SOCIAL_NETWORKS,
+    USERNAMES,
+)
 from mimesis.enums import Gender, SocialNetwork, TitleType
 from mimesis.exceptions import NonEnumerableError
 from mimesis.providers.base import BaseDataProvider

@@ -1,7 +1,12 @@
 """Provides structured data."""
 
-from mimesis.data import (CSS_PROPERTIES, CSS_SELECTORS, CSS_SIZE_UNITS,
-                          HTML_CONTAINER_TAGS, HTML_MARKUP_TAGS)
+from mimesis.data import (
+    CSS_PROPERTIES,
+    CSS_SELECTORS,
+    CSS_SIZE_UNITS,
+    HTML_CONTAINER_TAGS,
+    HTML_MARKUP_TAGS,
+)
 from mimesis.providers.base import BaseDataProvider
 from mimesis.providers.internet import Internet
 from mimesis.providers.text import Text

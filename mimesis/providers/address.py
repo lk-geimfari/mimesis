@@ -6,8 +6,12 @@ data related to location, such as street name, city, country and etc.
 
 from typing import Optional, Union
 
-from mimesis.data import (CALLING_CODES, CONTINENT_CODES, COUNTRY_CODES,
-                          SHORTENED_ADDRESS_FMT)
+from mimesis.data import (
+    CALLING_CODES,
+    CONTINENT_CODES,
+    COUNTRY_CODES,
+    SHORTENED_ADDRESS_FMT,
+)
 from mimesis.enums import CountryCode
 from mimesis.providers.base import BaseDataProvider
 

@@ -1,7 +1,11 @@
 """Business data provider."""
 
-from mimesis.data import (CRYPTOCURRENCY_ISO_CODES, CRYPTOCURRENCY_SYMBOLS,
-                          CURRENCY_ISO_CODES, CURRENCY_SYMBOLS)
+from mimesis.data import (
+    CRYPTOCURRENCY_ISO_CODES,
+    CRYPTOCURRENCY_SYMBOLS,
+    CURRENCY_ISO_CODES,
+    CURRENCY_SYMBOLS,
+)
 from mimesis.providers.base import BaseDataProvider
 
 __all__ = ['Business']

@@ -3,8 +3,13 @@
 import sys
 from typing import Union
 
-from mimesis.data import (FOLDERS, PLATFORMS, PROGRAMMING_LANGS, PROJECT_NAMES,
-                          USERNAMES)
+from mimesis.data import (
+    FOLDERS,
+    PLATFORMS,
+    PROGRAMMING_LANGS,
+    PROJECT_NAMES,
+    USERNAMES,
+)
 from mimesis.providers.base import BaseProvider
 
 __all__ = ['Path']

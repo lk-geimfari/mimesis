@@ -5,9 +5,17 @@ import urllib.request
 from ipaddress import IPv6Address
 from typing import List, Optional, Union
 
-from mimesis.data import (EMOJI, HASHTAGS, HTTP_METHODS, HTTP_STATUS_CODES,
-                          HTTP_STATUS_MSGS, NETWORK_PROTOCOLS, TLD,
-                          USER_AGENTS, USERNAMES)
+from mimesis.data import (
+    EMOJI,
+    HASHTAGS,
+    HTTP_METHODS,
+    HTTP_STATUS_CODES,
+    HTTP_STATUS_MSGS,
+    NETWORK_PROTOCOLS,
+    TLD,
+    USER_AGENTS,
+    USERNAMES,
+)
 from mimesis.enums import Layer, MimeType, PortRange, TLDType
 from mimesis.exceptions import NonEnumerableError
 from mimesis.providers.base import BaseProvider

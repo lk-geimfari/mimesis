@@ -3,8 +3,11 @@
 from types import LambdaType
 from typing import Any, Callable, List, Optional
 
-from mimesis.exceptions import (UndefinedField, UndefinedSchema,
-                                UnsupportedField)
+from mimesis.exceptions import (
+    UndefinedField,
+    UndefinedSchema,
+    UnsupportedField,
+)
 from mimesis.providers.generic import Generic
 from mimesis.typing import JSON, Seed
 
