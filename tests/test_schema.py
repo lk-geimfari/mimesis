@@ -5,8 +5,11 @@ import pytest
 from mimesis import locales
 from mimesis.builtins import USASpecProvider
 from mimesis.enums import Gender
-from mimesis.exceptions import (UndefinedField, UndefinedSchema,
-                                UnsupportedField)
+from mimesis.exceptions import (
+    UndefinedField,
+    UndefinedSchema,
+    UnsupportedField,
+)
 from mimesis.schema import Field, Schema
 
 from .test_providers import patterns

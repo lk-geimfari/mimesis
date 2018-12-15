@@ -4,9 +4,20 @@ import re
 import pytest
 
 from mimesis import Hardware
-from mimesis.data import (CPU, CPU_CODENAMES, CPU_MODEL_CODES, GENERATION,
-                          GRAPHICS, HDD_SSD, MANUFACTURERS, PHONE_MODELS,
-                          RAM_SIZES, RAM_TYPES, RESOLUTIONS, SCREEN_SIZES)
+from mimesis.data import (
+    CPU,
+    CPU_CODENAMES,
+    CPU_MODEL_CODES,
+    GENERATION,
+    GRAPHICS,
+    HDD_SSD,
+    MANUFACTURERS,
+    PHONE_MODELS,
+    RAM_SIZES,
+    RAM_TYPES,
+    RESOLUTIONS,
+    SCREEN_SIZES,
+)
 
 from . import patterns
 

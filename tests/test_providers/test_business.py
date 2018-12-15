@@ -4,8 +4,12 @@ import re
 import pytest
 
 from mimesis import Business
-from mimesis.data import (CRYPTOCURRENCY_ISO_CODES, CRYPTOCURRENCY_SYMBOLS,
-                          CURRENCY_ISO_CODES, CURRENCY_SYMBOLS)
+from mimesis.data import (
+    CRYPTOCURRENCY_ISO_CODES,
+    CRYPTOCURRENCY_SYMBOLS,
+    CURRENCY_ISO_CODES,
+    CURRENCY_SYMBOLS,
+)
 
 from . import patterns
 
