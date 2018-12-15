@@ -1,9 +1,9 @@
 Version 3.0.0
 -------------
 
-.. warning:: This release (3.0.0) contains some breaking changes in API.
+.. warning:: This release (3.0.0) contains some breaking changes in API
 
-.. warning:: In this release (3.0.0) we've reject support of Python 3.5.
+.. warning:: In this release (3.0.0) we've reject support of Python 3.5
 
 
 **Added**:
