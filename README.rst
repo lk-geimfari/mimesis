@@ -16,7 +16,7 @@ Mimesis - Fake Data Generator
      :target: https://ci.appveyor.com/project/lk-geimfari/mimesis
 
 .. image:: https://readthedocs.org/projects/mimesis/badge/?version=latest
-     :target: https://mimesis.name/?badge=latest
+     :target: https://mimesis.name/
      :alt: Documentation Status
 
 .. image:: https://codecov.io/gh/lk-geimfari/mimesis/branch/master/graph/badge.svg
