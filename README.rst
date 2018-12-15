@@ -16,7 +16,8 @@ Mimesis - Fake Data Generator
      :target: https://ci.appveyor.com/project/lk-geimfari/mimesis
 
 .. image:: https://readthedocs.org/projects/mimesis/badge/?version=latest
-     :target: http://mimesis.readthedocs.io/?badge=latest
+     :target: https://mimesis.name/
+     :alt: Documentation Status
 
 .. image:: https://codecov.io/gh/lk-geimfari/mimesis/branch/master/graph/badge.svg
      :target: https://codecov.io/gh/lk-geimfari/mimesis
@@ -67,7 +68,7 @@ Getting started
 This library is really easy to use and everything you need is just import an object which
 represents type of data you need (we call such object *Provider*).
 
-In example below we import provider `Person <https://mimesis.readthedocs.io/api.html#person>`_,
+In example below we import provider `Person <https://mimesis.name/api.html#person>`_,
 which represents data related to personal information, such as name, surname, email and etc:
 
 .. code:: python
@@ -90,7 +91,7 @@ which represents data related to personal information, such as name, surname, em
 
 More about the other providers you can read `here`_.
 
-.. _here: https://mimesis.readthedocs.io/getting_started.html#providers
+.. _here: https://mimesis.name/getting_started.html#providers
 
 
 Locales
@@ -114,7 +115,7 @@ is appropriate for the language or country associated with that locale:
     >>> pl.full_name(gender=Gender.MALE)
     'Światosław Tomankiewicz'
 
-.. _locales: http://mimesis.readthedocs.io/quickstart.html#supported-locales
+.. _locales: https://mimesis.name/getting_started.html#locales
 
 
 Documentation
@@ -133,13 +134,13 @@ It is divided into several sections:
 
 You can improve it by sending pull requests to this repository.
 
-.. _Read the Docs: http://mimesis.readthedocs.io
-.. _Foreword: https://mimesis.readthedocs.io/foreword.html
-.. _Getting Started: https://mimesis.readthedocs.io/getting_started.html
-.. _Tips and Tricks: https://mimesis.readthedocs.io/tips.html
+.. _Read the Docs: https://mimesis.name
+.. _Foreword: https://mimesis.name/foreword.html
+.. _Getting Started: https://mimesis.name/getting_started.html
+.. _Tips and Tricks: https://mimesis.name/tips.html
 .. _API Reference: http://mimesis.readthedocs.io/api.html
-.. _Contributing: http://mimesis.readthedocs.io/contributing.html
-.. _Changelog: http://mimesis.readthedocs.io/changelog.html
+.. _Contributing: http://mimesis.name/contributing.html
+.. _Changelog: http://mimesis.name/changelog.html
 
 
 How to Contribute
