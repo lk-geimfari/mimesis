@@ -19,7 +19,6 @@ __all__ = [
     'Development',
     'File',
     'Food',
-    'Games',
     'Hardware',
     'Internet',
     'Numbers',
