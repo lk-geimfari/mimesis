@@ -79,9 +79,9 @@ the act of expression, and the presentation of the self.
 What is the fake data?
 ----------------------
 
-The fake data is a kind of data which uses in the development and testing stage of software.
+The fake data is a kind of data which uses in the development and testing stage of software development.
 
-That data looks like a real data, but they are not.
+That data looks like a real data, but it is not.
 
 What Mimesis is, What Mimesis is Not
 ------------------------------------
