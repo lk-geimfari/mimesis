@@ -138,9 +138,9 @@ You can improve it by sending pull requests to this repository.
 .. _Foreword: https://mimesis.name/foreword.html
 .. _Getting Started: https://mimesis.name/getting_started.html
 .. _Tips and Tricks: https://mimesis.name/tips.html
-.. _API Reference: http://mimesis.name/api.html
-.. _Contributing: http://mimesis.name/contributing.html
-.. _Changelog: http://mimesis.name/changelog.html
+.. _API Reference: https://mimesis.name/api.html
+.. _Contributing: https://mimesis.name/contributing.html
+.. _Changelog: https://mimesis.name/changelog.html
 
 
 How to Contribute
