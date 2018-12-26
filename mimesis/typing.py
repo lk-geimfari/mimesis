@@ -14,14 +14,12 @@ __all__ = [
 
 JSON = Dict[str, Any]
 
-_StrOrInt = Union[str, int]
-
 DateTime = datetime.datetime
 
 Time = datetime.time
 
 Date = datetime.date
 
-Timestamp = _StrOrInt
+Timestamp = Union[str, int]
 
 Seed = Union[int, str, bytes, bytearray]
