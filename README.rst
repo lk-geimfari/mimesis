@@ -32,8 +32,9 @@ Mimesis - Fake Data Generator
 Mimesis is fast and easy to use library, which helps generate the big volumes of fake data for a 
 variety of purposes in a variety of languages. The fake data can be particularly useful during software development and testing. For example, it could be used to populate a testing database, create beautiful JSON and XML files, anonymize data taken from a production service and etc.
 
+
 Advantages
-~~~~~~~~~~
+----------
 
 This library offers a number of advantages over other similar libraries:
 
@@ -42,6 +43,14 @@ This library offers a number of advantages over other similar libraries:
    variety of data generators.
 -  Simplicity. Does not require any modules other than the Python
    standard library.
+
+Features
+--------
+
+- More than 21 data providers
+- Built-In country-specific providers
+- Generic data provider
+- Data generation by schema
 
 Installation
 ------------
