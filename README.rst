@@ -33,7 +33,7 @@ Mimesis is fast and easy to use library, which helps generate the big volumes of
 variety of purposes in a variety of languages. The fake data can be particularly useful during software development and testing. For example, it could be used to populate a testing database, create beautiful JSON and XML files, anonymize data taken from a production service and etc.
 
 Advantages
-----------
+~~~~~~~~~~
 
 This library offers a number of advantages over other similar libraries:
 
@@ -43,7 +43,6 @@ This library offers a number of advantages over other similar libraries:
 -  Simplicity. Does not require any modules other than the Python
    standard library.
 
-
 Installation
 ------------
 
@@ -52,15 +51,6 @@ To install mimesis, simply use pip:
 .. code:: text
 
     [env] ~ ⟩ pip install mimesis
-
-also you can install it manually:
-
-.. code:: text
-
-    [env] ⟩ git clone git@github.com:lk-geimfari/mimesis.git
-    [env] ⟩ cd mimesis/
-    [env] ⟩ make install
-
 
 Getting started
 ---------------
@@ -116,7 +106,6 @@ is appropriate for the language or country associated with that locale:
     'Światosław Tomankiewicz'
 
 .. _locales: https://mimesis.name/getting_started.html#locales
-
 
 Documentation
 -------------
