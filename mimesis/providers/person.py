@@ -249,7 +249,7 @@ class Person(BaseDataProvider):
 
         :param domains: List of custom domains for emails.
         :type domains: list or tuple
-        :param unique: Flag to generate a unique email
+        :param unique: Flag to generate a unique email.
         :type unique: bool
         :return: Email address.
 
