@@ -268,7 +268,6 @@ class Person(BaseDataProvider):
 
         if unique:
             while email in self._previously_generated['emails']:
-                # Get new random domain and name and check if already generated
                 domain = self.random.choice(domains)
                 name = self.username(template='ld')
                 email = '{name}{domain}'.format(

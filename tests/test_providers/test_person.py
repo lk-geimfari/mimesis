@@ -113,6 +113,14 @@ class TestPerson(object):
         assert re.match(patterns.EMAIL_REGEX, result)
         assert result.split('@')[1] == 'example.com'
 
+        TEST_THRESHOLD = 1000000
+        previously_generated = set()  # type: ignore
+        for i in range(TEST_THRESHOLD):
+            result = _person.email(unique=True)
+            assert re.match(patterns.EMAIL_REGEX, result)
+            assert result not in previously_generated
+            previously_generated.add(result)
+
     def test_height(self, _person):
         result = _person.height(minimum=1.60, maximum=1.90)
         assert result.startswith('1')
@@ -346,6 +354,7 @@ class TestSeededPerson(object):
         assert p1.email() == p2.email()
         assert p1.email(domains=['@mimesis.io']) == \
                p2.email(domains=['@mimesis.io'])
+        assert p1.email(unique=True) == p2.email(unique=True)
 
     def test_height(self, p1, p2):
         assert p1.height() == p2.height()
