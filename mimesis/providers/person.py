@@ -2,7 +2,7 @@
 
 import hashlib
 from string import ascii_letters, digits, punctuation
-from typing import Optional, Union
+from typing import Dict, Optional, Set, Union
 
 from mimesis.data import (
     BLOOD_GROUPS,
@@ -35,6 +35,9 @@ class Person(BaseDataProvider):
         self.pull(self._datafile)
         self._store = {
             'age': 0,
+        }
+        self._previously_generated: Dict[str, Set] = {
+            'emails': set(),
         }
 
     def age(self, minimum: int = 16, maximum: int = 66) -> int:
@@ -240,11 +243,14 @@ class Person(BaseDataProvider):
         else:
             return password
 
-    def email(self, domains: Union[tuple, list] = None) -> str:
+    def email(self, domains: Union[tuple, list] = None,
+              unique: bool = False) -> str:
         """Generate a random email.
 
         :param domains: List of custom domains for emails.
         :type domains: list or tuple
+        :param unique: Flag to generate a unique email
+        :type unique: bool
         :return: Email address.
 
         :Example:
@@ -255,10 +261,24 @@ class Person(BaseDataProvider):
 
         domain = self.random.choice(domains)
         name = self.username(template='ld')
-        return '{name}{domain}'.format(
+        email = '{name}{domain}'.format(
             name=name,
             domain=domain,
         )
+
+        if unique:
+            while email in self._previously_generated['emails']:
+                # Get new random domain and name and check if already generated
+                domain = self.random.choice(domains)
+                name = self.username(template='ld')
+                email = '{name}{domain}'.format(
+                    name=name,
+                    domain=domain,
+                )
+
+        self._previously_generated['emails'].add(email)
+
+        return email
 
     def social_media_profile(self, site: Optional[SocialNetwork] = None) -> str:
         """Generate profile for random social network.
