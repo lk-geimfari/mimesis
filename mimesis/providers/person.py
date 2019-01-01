@@ -180,7 +180,9 @@ class Person(BaseDataProvider):
         _name = self.random.choice(USERNAMES).capitalize()
 
         name = self.random.choice(USERNAMES)
-        date = self.random.randint(1800, 2070)
+        MIN_DATE = 1800
+        MAX_DATE = 2070
+        date = self.random.randint(MIN_DATE, MAX_DATE)
 
         templates = ('U-d', 'U.d', 'UU-d', 'UU.d', 'UU_d', 'U_d',
                      'Ud', 'l-d', 'l.d', 'l_d', 'ld', 'default')
