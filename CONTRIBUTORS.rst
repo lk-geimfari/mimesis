@@ -74,6 +74,7 @@ Contributors
 -  Sadie Bartholomew `(sadielbartholomew)`_
 -  Nazar Oleksiuk `(DevAerial)`_
 -  Ivan Ramos `(expandedmind)`_
+-  Jack Henry `(jackhenry)`_
 
 .. _(lk-geimfari): https://github.com/lk-geimfari
 .. _(sobolevn): https://github.com/sobolevn
@@ -124,3 +125,4 @@ Contributors
 .. _(DevAerial): https://github.com/DevAerial
 .. _(expandedmind): https://github.com/ExpandedMind
 .. _(lucasmarcel): https://github.com/lucasmarcel
+.. _(jackhenry): https://github.com/jackhenry
