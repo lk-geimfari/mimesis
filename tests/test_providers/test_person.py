@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import random
 import re
 
 import pytest
@@ -74,8 +75,30 @@ class TestPerson(object):
         ],
     )
     def test_username(self, _person, template):
+
+        templates = ('U-d', 'U.d', 'UU-d', 'UU.d', 'UU_d', 'U_d',
+                     'Ud', 'l-d', 'l.d', 'l_d', 'ld', 'default')
+
+        template_patterns = {
+            'U-d': r'^[A-Z][a-z]+-[0-9]+$',
+            'U.d': r'^[A-Z][a-z]+\.[0-9]+$',
+            'U_d': r'^[A-Z][a-z]+_[0-9]+$',
+            'UU-d': r'^[A-Z][a-z]+[A-Z][a-z]+-[0-9]+$',
+            'UU.d': r'^[A-Z][a-z]+[A-Z][a-z]+\.[0-9]+$',
+            'UU_d': r'^[A-Z][a-z]+[A-Z][a-z]+_[0-9]+$',
+            'Ud': r'^[A-Z][a-z]+[0-9]+$',
+            'l-d': r'^[a-z]+-[0-9]+$',
+            'l.d': r'^[a-z]+\.[0-9]+$',
+            'l_d': r'^[a-z]+_[0-9]+$',
+            'ld': r'^[a-z]+[0-9]+$',
+            'default': r'^[a-z]+\.[0-9]+',
+        }
+
+        if template is None:
+            template = random.choice(templates)
+
         result = _person.username(template=template)
-        assert re.match(patterns.USERNAME_REGEX, result)
+        assert re.match(template_patterns[template], result)
 
     def test_username_unsupported_template(self, _person):
         with pytest.raises(KeyError):
