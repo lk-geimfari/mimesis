@@ -1,6 +1,7 @@
 """Provides personal data."""
 
 import hashlib
+import re
 from string import ascii_letters, digits, punctuation
 from typing import Optional, Union
 
@@ -176,19 +177,18 @@ class Person(BaseDataProvider):
         :Example:
             Celloid1873
         """
-        # TODO: Optimize
-        _name = self.random.choice(USERNAMES).capitalize()
-
-        name = self.random.choice(USERNAMES)
         MIN_DATE = 1800
         MAX_DATE = 2070
-        date = self.random.randint(MIN_DATE, MAX_DATE)
 
-        templates = ('U-d', 'U.d', 'UU-d', 'UU.d', 'UU_d', 'U_d',
-                     'Ud', 'l-d', 'l.d', 'l_d', 'ld', 'default')
+        templates = ('U_d', 'U.d', 'U-d', 'UU-d', 'UU.d', 'UU_d',
+                     'ld', 'l-d', 'Ud', 'l.d', 'l_d', 'default')
+        DEFAULT_TEMPLATE = 'l.d'
 
         if template is None:
             template = self.random.choice(templates)
+
+        if template is 'default':
+            template = DEFAULT_TEMPLATE
 
         if template not in templates:
             raise KeyError(
@@ -197,28 +197,23 @@ class Person(BaseDataProvider):
                     templates=templates,
                 ),
             )
-        if template == 'Ud':
-            return '{}{}'.format(name.capitalize(), date)
-        elif template == 'U.d':
-            return '{}.{}'.format(name.capitalize(), date)
-        elif template == 'ld':
-            return '{}{}'.format(name, date)
-        elif template == 'UU.d':
-            return '{}{}.{}'.format(name.capitalize(), _name, date)
-        elif template == 'UU_d':
-            return '{}{}_{}'.format(name.capitalize(), _name, date)
-        elif template == 'UU-d':
-            return '{}{}-{}'.format(name.capitalize(), _name, date)
-        elif template == 'U-d':
-            return '{}-{}'.format(name.title(), date)
-        elif template == 'U_d':
-            return '{}_{}'.format(name.title(), date)
-        elif template == 'l-d':
-            return '{}-{}'.format(name, date)
-        elif template == 'l_d':
-            return '{}_{}'.format(name, date)
 
-        return '{}.{}'.format(name, date)
+        VALID_CHARS = r'[Uld\.\-\_]'
+        VALID_SEPERATORS = r'[\.\-\_]'
+        tags = re.findall(VALID_CHARS, template)
+
+        username = ''
+        for tag in tags:
+            if tag == 'U':
+                username += self.random.choice(USERNAMES).capitalize()
+            if tag == 'l':
+                username += self.random.choice(USERNAMES)
+            if tag == 'd':
+                username += str(self.random.randint(MIN_DATE, MAX_DATE))
+            if re.match(VALID_SEPERATORS, tag) is not None:
+                username += tag
+
+        return username
 
     def password(self, length: int = 8, hashed: bool = False) -> str:
         """Generate a password or hash of password.
