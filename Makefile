@@ -12,7 +12,6 @@ help:
 	@echo "test         - run tests quickly with the default Python"
 	@echo "type-check   - run mypy for checking types"
 	@echo "publish      - create dist and upload package to PyPI"
-	@echo "version      - update __version__ file"
 	@echo "install      - install the package to the active Python's site-packages"
 	@echo "........................................................"
 
@@ -25,20 +24,16 @@ clean-pyc:
 	find . -name '__pycache__' -exec rm -fr {} +
 
 
-.PHONY: docs
-docs:
-	cd docs && make html
-
-
 .PHONY: clean-build
 clean-build:
 	rm -rf build/
 	rm -rf dist/
 	rm -rf .cache/
 	rm -rf .mypy_cache/
-	rm -rf mimesis.egg-info/
 	rm -rf .benchmarks/
 	rm -rf .pytest_cache/
+	rm -rf docs/_build
+	rm -rf mimesis.egg-info/
 
 
 .PHONY: clean
@@ -51,6 +46,11 @@ test:
 	mypy mimesis/ tests/
 
 
+.PHONY: docs
+docs:
+	cd docs && make html
+
+
 .PHONY: type-check
 type-check:
 	mypy mimesis/ tests/
@@ -60,11 +60,6 @@ type-check:
 publish:
 	python3 setup.py sdist bdist_wheel && twine upload dist/*
 	clean
-
-
-.PHONY: version
-version:
-	python3 setup.py version
 
 
 .PHONY: minify
