@@ -33,3 +33,6 @@ You can also accuse another party at being more asshole than you if that's actua
 ## Scope
 
 It applies to your whole life.
+
+## About this CoC
+This Code of Conduct was brazenly stolen from [Moscow Python Beer](https://github.com/moscow-python-beer/moscow-code-of-conduct), but shhhh they don't know about it.
