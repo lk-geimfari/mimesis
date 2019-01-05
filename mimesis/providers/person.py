@@ -187,7 +187,7 @@ class Person(BaseDataProvider):
         if template is None:
             template = self.random.choice(templates)
 
-        if template is 'default':
+        if template == 'default':
             template = DEFAULT_TEMPLATE
 
         if template not in templates:
