@@ -192,7 +192,8 @@ class Person(BaseDataProvider):
 
         if template not in templates:
             raise KeyError(
-                'Template «{template}» is not in {templates}'.format(
+                'Template \'{template}\' is not supported. '
+                'Use one of the following templates: {templates}'.format(
                     template=template,
                     templates=templates,
                 ),
