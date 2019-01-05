@@ -179,10 +179,10 @@ class Person(BaseDataProvider):
         """
         MIN_DATE = 1800
         MAX_DATE = 2070
+        DEFAULT_TEMPLATE = 'l.d'
 
         templates = ('U_d', 'U.d', 'U-d', 'UU-d', 'UU.d', 'UU_d',
                      'ld', 'l-d', 'Ud', 'l.d', 'l_d', 'default')
-        DEFAULT_TEMPLATE = 'l.d'
 
         if template is None:
             template = self.random.choice(templates)
