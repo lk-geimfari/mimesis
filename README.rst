@@ -7,7 +7,6 @@ Mimesis - Fake Data Generator
 
 |
 |
-|
 
 Description
 -----------
