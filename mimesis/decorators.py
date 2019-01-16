@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 """Decorators for the public API and for internal purpose."""
 
 import functools

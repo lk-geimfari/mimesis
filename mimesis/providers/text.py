@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 """Provides data related to text."""
 
 from typing import List, Tuple

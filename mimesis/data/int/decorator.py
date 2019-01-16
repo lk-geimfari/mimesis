@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 """Provides all data related to decorators."""
 
 COMMON_LETTERS = {

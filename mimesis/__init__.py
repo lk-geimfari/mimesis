@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 """Mimesis is a Python library, which helps generate synthetic data.
 
 Copyright (c) 2016 - 2018 Likid Geimfari (Isaak Uchakaev)

@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 """Provides all the data for Structure."""
 
 CSS_PROPERTIES = {

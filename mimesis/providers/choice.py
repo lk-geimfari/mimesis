@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 """Provides a random choice from items in a sequence."""
 import collections
 from typing import Any, Optional, Sequence, Union

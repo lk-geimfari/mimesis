@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 """Custom types and shortcuts for annotating Mimesis."""
 
 import datetime

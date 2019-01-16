@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 """Business data provider."""
 
 from mimesis.data import (

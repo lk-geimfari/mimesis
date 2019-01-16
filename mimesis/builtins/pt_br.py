@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 """Specific data provider for Brazil (pt-br)."""
 
 from mimesis.builtins.base import BaseSpecProvider

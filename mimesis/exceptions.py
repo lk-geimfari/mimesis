@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 """Custom exceptions which used in Mimesis."""
 
 from typing import Any, Optional

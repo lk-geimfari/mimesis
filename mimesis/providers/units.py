@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 """Provides data related to units."""
 
 from typing import Optional

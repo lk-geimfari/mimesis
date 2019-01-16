@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 """Builtin specific data providers."""
 
 from .en import USASpecProvider

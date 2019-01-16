@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 """Implements classes for generating data by schema."""
 
 from types import LambdaType

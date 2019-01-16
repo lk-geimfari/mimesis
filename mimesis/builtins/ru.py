@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 """Specific data provider for Russia (ru)."""
 
 from mimesis.builtins.base import BaseSpecProvider

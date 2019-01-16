@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 """Cryptographic data provider."""
 
 import hashlib

@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 """Provider of data related to date and time."""
 
 from calendar import monthrange, timegm

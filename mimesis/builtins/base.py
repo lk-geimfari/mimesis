@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 """Base specific data provider."""
 
 from mimesis.providers import BaseDataProvider

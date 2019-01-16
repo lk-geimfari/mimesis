@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 """Data related to the development."""
 
 from mimesis.data import LICENSES, OS, PROGRAMMING_LANGS

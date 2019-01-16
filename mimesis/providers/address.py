@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 """Address module.
 
 This module contains provider Address() and other utils which represents

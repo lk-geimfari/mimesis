@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 """Provides all the data related to science."""
 
 MATH_FORMULAS = [

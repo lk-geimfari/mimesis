@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 """Provides structured data."""
 
 from mimesis.data import (

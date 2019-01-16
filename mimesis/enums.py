@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 """Implements enums for a lot of methods.
 
 Enums from this module are used in a lot of methods.

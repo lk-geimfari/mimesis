@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 """Provides pseudo-scientific data."""
 
 from typing import Union

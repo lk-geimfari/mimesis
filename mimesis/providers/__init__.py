@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 """Contains all the available data providers."""
 
 from mimesis.providers.base import BaseProvider, BaseDataProvider

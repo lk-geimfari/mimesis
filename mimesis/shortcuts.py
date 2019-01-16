@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 """This module is provide internal util functions."""
 
 import ssl

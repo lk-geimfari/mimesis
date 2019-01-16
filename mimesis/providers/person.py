@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 """Provides personal data."""
 
 import hashlib

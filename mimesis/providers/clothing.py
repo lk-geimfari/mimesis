@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 """Clothing data provider."""
 
 from mimesis.providers.base import BaseProvider
