@@ -105,16 +105,15 @@ class Generic(BaseDataProvider):
         """
         if inspect.isclass(cls):
             if not issubclass(cls, BaseProvider):
-                raise TypeError('The provider must inherit BaseProvider.')
-
-            meta = getattr(cls, 'Meta', None)
-            name = cls.__name__.lower()
-            if meta and hasattr(meta, 'name'):
-                if meta.name:
-                    name = meta.name
+                raise TypeError('The provider must be a subclass of BaseProvider')
+            try:
+                meta = getattr(cls, 'Meta')
+                name = getattr(meta, 'name')
+            except AttributeError:
+                name = cls.__name__.lower()
             setattr(self, name, cls())
         else:
-            raise TypeError('Provider must be a class')
+            raise TypeError('The provider must be a class')
 
     def add_providers(self, *providers: Type[BaseProvider]) -> None:
         """Add a lot of custom providers to Generic() object.
