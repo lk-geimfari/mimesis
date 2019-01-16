@@ -107,7 +107,8 @@ class Generic(BaseDataProvider):
         """
         if inspect.isclass(cls):
             if not issubclass(cls, BaseProvider):
-                raise TypeError('The provider must be a subclass of BaseProvider')
+                raise TypeError('The provider must be a '
+                                'subclass of BaseProvider')
             try:
                 meta = getattr(cls, 'Meta')
                 name = getattr(meta, 'name')
