@@ -35,4 +35,4 @@ You can also accuse another party at being more asshole than you if that's actua
 It applies to your whole life.
 
 ## About this Code of Conduct 
-This Code of Conduct was brazenly stolen from [Moscow Python Beer Meetup](https://github.com/moscow-python-beer/moscow-code-of-conduct), but shhhh they don't know about it.
+This Code of Conduct was brazenly stolen from [Moscow Python Beer Meetup](https://github.com/moscow-python-beer/moscow-code-of-conduct), but shhh they don't know about it.
