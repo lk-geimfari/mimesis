@@ -66,6 +66,14 @@ Result:
 +----------+----------------------------------------+---------------------+------------------------+
 
 
+Why octopus?
+------------
+Basically, because octopuses are cool guys, but also because of the
+fantastic `mimicry <https://en.wikipedia.org/wiki/Mimicry>`_ abilities of some families of octopuses.
+Have you ever hear about `Thaumoctopus mimicus <https://en.wikipedia.org/wiki/Mimic_octopus>`_?
+Just read about that guy, because he is a really badass one.
+
+
 What does name mean?
 --------------------
 

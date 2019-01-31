@@ -27,9 +27,9 @@ Additional Information
 Disclaimer, legal information and other information are here for the interested.
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
 
-   notes
+   additional-info
    contributing
 
 

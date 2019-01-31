@@ -10,9 +10,6 @@ Installation
     Mimesis works only on Python 3.6 and higher. Developers have not plans related to adding support
     for old versions of Python.
 
-    Also, possibly Mimesis will work fine on latest version of PyPy 3, but we have not tested it on PyPy,
-    therefore, use it with PyPy at your own risk.
-
 
 Within the pre-activated environment, use the following command to install Mimesis:
 
