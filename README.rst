@@ -1,11 +1,11 @@
 Mimesis - Fake Data Generator
 -----------------------------
 
+|
 
-.. image:: https://raw.githubusercontent.com/lk-geimfari/mimesis/master/media/logo_media.png
+.. image:: https://raw.githubusercontent.com/lk-geimfari/mimesis/master/media/logo.png
      :target: https://github.com/lk-geimfari/mimesis
 
-|
 |
 
 Description
