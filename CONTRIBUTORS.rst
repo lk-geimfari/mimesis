@@ -75,6 +75,7 @@ Contributors
 -  Nazar Oleksiuk `(DevAerial)`_
 -  Ivan Ramos `(expandedmind)`_
 -  Jack Henry `(jackhenry)`_
+-  Nikita Serba `(Nekit10)`_
 
 .. _(lk-geimfari): https://github.com/lk-geimfari
 .. _(sobolevn): https://github.com/sobolevn
@@ -126,3 +127,4 @@ Contributors
 .. _(expandedmind): https://github.com/ExpandedMind
 .. _(lucasmarcel): https://github.com/lucasmarcel
 .. _(jackhenry): https://github.com/jackhenry
+.. _(Nekit10): https://github.com/Nekit10
