@@ -72,3 +72,10 @@ class UndefinedField(ValueError):
 
     def __str__(self) -> str:
         return 'Undefined field. Filed cannot be None.'
+
+
+class UnacceptableField(ValueError):
+    """Raises when passed ``field`` in unacceptable format."""
+
+    def __str__(self) -> str:
+        return 'Unacceptable field format, use **provider.method**.'

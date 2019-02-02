@@ -26,7 +26,7 @@ def test_luhn_checksum(number, check_sum):
 )
 def test_download_image(ctx):
     url = 'https://raw.githubusercontent.com/' \
-          'lk-geimfari/mimesis/master/media/logo.png'
+          'lk-geimfari/mimesis/master/media/readme-logo.png'
 
     verified = shortcuts.download_image(
         url=url,

@@ -6,6 +6,7 @@ from types import LambdaType
 from typing import Any, Callable, List, Optional
 
 from mimesis.exceptions import (
+    UnacceptableField,
     UndefinedField,
     UndefinedSchema,
     UnsupportedField,
@@ -81,21 +82,26 @@ class AbstractField(object):
             :param obj: Search tail from this object
             :return last tailed method
             """
-            first, second = tails.split('.', 1)
-            if hasattr(obj, first):
-                attr = getattr(obj, first)
-                if '.' in second:
-                    return tail_parser(attr, second)
-                else:
-                    return getattr(attr, second)
+            provider_name, method_name = tails.split('.', 1)
+
+            if '.' in method_name:
+                raise UnacceptableField()
+
+            attr = getattr(obj, provider_name)
+            if attr is not None:
+                return getattr(attr, method_name)
 
         try:
             if name not in self._table:
                 if '.' not in name:
-                    for provider in dir(self._gen):
-                        provider = getattr(self._gen, provider)
-                        if name in dir(provider):
-                            self._table[name] = getattr(provider, name)
+                    # Fix https://github.com/lk-geimfari/mimesis/issues/619
+                    if name == self._gen.choice.Meta.name:
+                        self._table[name] = self._gen.choice
+                    else:
+                        for provider in dir(self._gen):
+                            provider = getattr(self._gen, provider)
+                            if name in dir(provider):
+                                self._table[name] = getattr(provider, name)
                 else:
                     self._table[name] = tail_parser(name, self._gen)
 
@@ -103,7 +109,7 @@ class AbstractField(object):
             if key and callable(key):
                 return key(result)
             return result
-        except Exception:
+        except KeyError:
             raise UnsupportedField(name)
 
     def __str__(self):

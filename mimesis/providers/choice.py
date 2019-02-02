@@ -12,6 +12,11 @@ __all__ = ['Choice']
 class Choice(BaseProvider):
     """Class for generating a random choice from items in a sequence."""
 
+    class Meta:
+        """Class for metadata."""
+
+        name = 'choice'
+
     def __init__(self, *args, **kwargs) -> None:
         """Initialize attributes.
 
