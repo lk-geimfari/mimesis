@@ -1,9 +1,6 @@
 Version 3.1.0
 -------------
 
-.. warning:: This version has not released yet, work still in progress.
-
-
 **Fixed**:
 
 - Fixed UnsupportedField on using field ``choice``, `#619 <https://github.com/lk-geimfari/mimesis/issues/619>`_
