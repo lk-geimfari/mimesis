@@ -75,7 +75,7 @@ class UndefinedField(ValueError):
 
 
 class UnacceptableField(ValueError):
-    """Raises when passed ``field`` in unacceptable format."""
+    """Raises when the ``field`` has an unacceptable format."""
 
     def __str__(self) -> str:
         return 'Unacceptable field format, use **provider.method**.'

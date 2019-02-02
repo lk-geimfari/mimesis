@@ -3,7 +3,7 @@ Version 3.1.0
 
 **Fixed**:
 
-- Fixed UnsupportedField on using field ``choice``, `#619 <https://github.com/lk-geimfari/mimesis/issues/619>`_
+- Fixed ``UnsupportedField`` on using field ``choice``, `#619 <https://github.com/lk-geimfari/mimesis/issues/619>`_
 
 
 

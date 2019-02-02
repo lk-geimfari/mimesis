@@ -99,6 +99,12 @@ UndefinedSchema
 .. autoclass:: mimesis.exceptions.UndefinedSchema
    :members:
 
+UnacceptableField
+-----------------
+
+.. autoclass:: mimesis.exceptions.UnacceptableField
+   :members:
+
 NonEnumerableError
 ------------------
 

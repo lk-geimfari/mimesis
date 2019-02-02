@@ -44,6 +44,7 @@ clean: clean-pyc clean-build
 test:
 	py.test --color=yes ./
 	mypy mimesis/ tests/
+	make clean
 
 
 .PHONY: docs
