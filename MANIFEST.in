@@ -5,7 +5,7 @@ recursive-include mimesis/data *.json
 
 exclude MANIFEST.in
 exclude *.rst
-exclude CODE_OF_CONDUCT.md
+exclude *.md
 include README.rst
 prune docs
 prune media
