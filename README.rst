@@ -37,7 +37,7 @@ Description
 
 
 
-Mimesis is fast and extremely `easy to use <https://mimesis.name/getting_started.html>`_ Python package, which helps generate big volumes of fake data for a variety of purposes in a variety of languages. The fake data can be particularly useful during software development and testing. For example, it could be used to populate a testing database, create beautiful JSON and XML files, anonymize data taken from a production service and etc.
+**Mimesis** is fast and extremely easy to use Python package, which helps generate big volumes of fake data for a variety of purposes in a variety of languages. The fake data can be particularly useful during software development and testing. For example, it could be used to populate a testing database, create beautiful JSON and XML files, anonymize data taken from a production service and etc.
 
 
 Installation
@@ -84,7 +84,7 @@ More about the other providers you can read in our `documentation`_.
 Locales
 -------
 
-Mimesis currently includes support for 33 different `locales`_. You can
+**Mimesis** currently includes support for 33 different `locales`_. You can
 specify a locale when creating providers and they will return data that
 is appropriate for the language or country associated with that locale.
 
