@@ -76,6 +76,7 @@ Contributors
 -  Ivan Ramos `(expandedmind)`_
 -  Jack Henry `(jackhenry)`_
 -  Nikita Serba `(Nekit10)`_
+-  Julien Surloppe `(jsurloppe)`_
 
 .. _(lk-geimfari): https://github.com/lk-geimfari
 .. _(sobolevn): https://github.com/sobolevn
@@ -128,3 +129,4 @@ Contributors
 .. _(lucasmarcel): https://github.com/lucasmarcel
 .. _(jackhenry): https://github.com/jackhenry
 .. _(Nekit10): https://github.com/Nekit10
+.. _(jsurloppe): https://github.com/jsurloppe
