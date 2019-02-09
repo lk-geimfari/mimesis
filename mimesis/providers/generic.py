@@ -114,7 +114,7 @@ class Generic(BaseDataProvider):
                 name = getattr(meta, 'name')
             except AttributeError:
                 name = cls.__name__.lower()
-            setattr(self, name, cls())
+            setattr(self, name, cls(seed=self.seed))
         else:
             raise TypeError('The provider must be a class')
 
