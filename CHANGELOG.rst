@@ -1,10 +1,17 @@
+Version 3.2.0
+-------------
+
+**Fixed**:
+
+- Pass seed to custom providers
+
+
 Version 3.1.0
 -------------
 
 **Fixed**:
 
 - Fixed ``UnsupportedField`` on using field ``choice``, `#619 <https://github.com/lk-geimfari/mimesis/issues/619>`_
-
 
 
 Version 3.0.0
