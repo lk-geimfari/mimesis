@@ -98,7 +98,7 @@ class Payment(BaseProvider):
             4455 5299 1152 2450
         """
         length = 16
-        regex = re.compile('(\d{4})(\d{4})(\d{4})(\d{4})')
+        regex = re.compile(r'(\d{4})(\d{4})(\d{4})(\d{4})')
 
         if card_type is None:
             card_type = get_random_item(CardType, rnd=self.random)
@@ -113,7 +113,7 @@ class Payment(BaseProvider):
         elif card_type == CardType.AMERICAN_EXPRESS:
             number = self.random.choice([34, 37])
             length = 15
-            regex = re.compile('(\d{4})(\d{6})(\d{5})')
+            regex = re.compile(r'(\d{4})(\d{6})(\d{5})')
         else:
             raise NonEnumerableError(CardType)
 
