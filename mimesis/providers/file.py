@@ -32,7 +32,7 @@ class File(BaseProvider):
         :return: String without spaces.
         """
         replacer = self.random.choice(['_', '-'])
-        return re.sub('\s+', replacer, string.strip())
+        return re.sub(r'\s+', replacer, string.strip())
 
     def extension(self, file_type: Optional[FileType] = None) -> str:
         """Get a random file extension from list.
