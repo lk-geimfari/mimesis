@@ -209,7 +209,7 @@ sure that everything is okay. You can do it using make:
 
 ::
 
-    ⟩ make type-checking
+    ⟩ make type-check
 
 Code Review
 ~~~~~~~~~~~
