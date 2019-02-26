@@ -188,19 +188,6 @@ To run tests, simply:
 Check out logs of Travis CI or AppVeyor if tests were failed on creating
 PR, there you can find useful information.
 
-Performance
-~~~~~~~~~~~
-
-It’s good idea to run benchmark test, when you add your feature:
-
-.. code:: text
-
-    ⟩ make benchmarks
-
-Optimize the things which really must be optimized. There no need in
-using ``C`` or other overheads to win 0.0000001 seconds of runtime.
-
-
 Type checking
 ~~~~~~~~~~~~~
 
@@ -209,7 +196,7 @@ sure that everything is okay. You can do it using make:
 
 ::
 
-    ⟩ make type-checking
+    ⟩ make type-check
 
 Code Review
 ~~~~~~~~~~~
