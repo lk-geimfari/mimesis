@@ -6,36 +6,25 @@ import pytest
 from mimesis import Path
 from mimesis.data import FOLDERS, PROGRAMMING_LANGS, PROJECT_NAMES
 
-from . import patterns
-
 
 class TestPath(object):
 
-    # def test_str(self, path):
-    #     assert re.match(patterns.STR_REGEX, str(path))
-
     def test_root(self, path):
         result = path.root()
-        assert 'C:\\', '/' == result
+        assert result == 'C:\\' or result == '/'
 
     def test_home(self, path):
         result = path.home()
-        assert 'С:\\Users\\', '/home/' == result
+        assert result == 'C:\\Users' or result == '/home'
 
     def test_user(self, path):
         user = path.user()
-        pattern_dictionary = {
-            'win32': '(C)(:)(\\\\)(Users)(\\\\).*[^(\\\\)]',
-            'linux': '(/)(home)(/).*',
-        }
 
-        if path.platform == 'win32':
-            pattern = pattern_dictionary['win32']
-        else:
-            pattern = pattern_dictionary['linux']
+        pattern = r'C:\\Users\\[A-Z].*' if path.platform == 'win32' \
+                  else r'/home/[a-z].'
 
         result = re.search(pattern, user)
-        assert isinstance(result, type(re.search('', ''))) is True
+        assert result
 
     def directory_separator(self, path):
         slash_character = ''
