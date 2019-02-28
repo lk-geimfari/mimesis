@@ -2,12 +2,13 @@
 
 """Specific data provider for Denmark (da)."""
 
+import random
+
 from mimesis.builtins.base import BaseSpecProvider
 from mimesis.typing import Seed
 
-import random
-
 __all__ = ['DenmarkSpecProvider']
+
 
 class DenmarkSpecProvider(BaseSpecProvider):
     """Class that provides special data for Denmark (da)."""
@@ -20,7 +21,7 @@ class DenmarkSpecProvider(BaseSpecProvider):
         """The name of the provider."""
 
         name = 'denmark_provider'
-    
+
     def cpr(self) -> str:
         """Generate a random CPR number (Central Person Registry).
 
@@ -29,5 +30,11 @@ class DenmarkSpecProvider(BaseSpecProvider):
         :Example:
             0105865167
         """
-        cpr_nr = f'{"{:02d}".format(random.randint(1,31))}{"{:02d}".format(random.randint(1,12))}{"{:02d}".format(random.randint(0, 99))}{"{:04d}".format(random.randint(0, 9999))}'
+        day = '{:02d}'.format(random.randint(1, 31))
+        month = '{:02d}'.format(random.randint(1, 12))
+        year = '{:02d}'.format(random.randint(0, 99))
+        serial_number = '{:04d}'.format(random.randint(0, 9999))
+
+        cpr_nr = f'{day}{month}{year}{serial_number}'
+
         return cpr_nr

@@ -1,6 +1,11 @@
 Version 3.2.0
 -------------
 
+**Added**:
+
+- Added built-in provider DenmarkSpecProvider
+
+
 **Fixed**:
 
 - Pass seed to custom providers
