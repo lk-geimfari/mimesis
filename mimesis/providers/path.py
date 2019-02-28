@@ -3,7 +3,7 @@
 """Provides data related to paths."""
 
 import sys
-from typing import Union
+from pathlib import PurePosixPath, PureWindowsPath
 
 from mimesis.data import (
     FOLDERS,
@@ -29,8 +29,11 @@ class Path(BaseProvider):
         """
         super().__init__(*args, **kwargs)
         self.platform = platform
+        self._pathlib_home = PureWindowsPath() if 'win' in platform \
+                             else PurePosixPath()
+        self._pathlib_home /= PLATFORMS[platform]['home']
 
-    def root(self) -> Union[str, None]:
+    def root(self) -> str:
         """Generate a root dir path.
 
         :return: Root dir.
@@ -38,25 +41,19 @@ class Path(BaseProvider):
         :Example:
             /
         """
-        for platform in PLATFORMS:
-            if self.platform == PLATFORMS[platform]['name']:
-                root = PLATFORMS[platform]['root']
-                return root
+        return str(self._pathlib_home.parent)
 
-    def home(self) -> Union[str, None]:
+    def home(self) -> str:
         """Generate a home path.
 
         :return: Home path.
 
         :Example:
-            /home/
+            /home
         """
-        for platform in PLATFORMS:
-            if self.platform == PLATFORMS[platform]['name']:
-                home = PLATFORMS[platform]['home']
-                return home
+        return str(self._pathlib_home)
 
-    def user(self) -> Union[str, None]:
+    def user(self) -> str:
         """Generate a random user.
 
         :return: Path to user.
@@ -65,11 +62,10 @@ class Path(BaseProvider):
             /home/oretha
         """
         user = self.random.choice(USERNAMES)
-        user = user.capitalize() if \
-            self.platform == 'win32' else user.lower()
-        return '{}{}'.format(self.home(), user)
+        user = user.capitalize() if 'win' in self.platform else user.lower()
+        return str(self._pathlib_home / user)
 
-    def users_folder(self) -> Union[str, None]:
+    def users_folder(self) -> str:
         """Generate a random path to user's folders.
 
         :return: Path.
@@ -77,38 +73,24 @@ class Path(BaseProvider):
         :Example:
             /home/taneka/Pictures
         """
-        folder = self.random.choice(FOLDERS)
         user = self.user()
-        for platform in PLATFORMS:
-            if self.platform == PLATFORMS[platform]['name']:
-                sep = PLATFORMS[platform]['path_separator']
-                return '{user}{sep}{folder}'.format(
-                    user=user,
-                    sep=sep,
-                    folder=folder,
-                )
+        folder = self.random.choice(FOLDERS)
+        return str(self._pathlib_home / user / folder)
 
-    def dev_dir(self) -> Union[str, None]:
+    def dev_dir(self) -> str:
         """Generate a random path to development directory.
 
         :return: Path.
 
         :Example:
-            /home/sherrell/Development/Python/mercenary
+            /home/sherrell/Development/Python
         """
+        user = self.user()
         folder = self.random.choice(['Development', 'Dev'])
         stack = self.random.choice(PROGRAMMING_LANGS)
-        for platform in PLATFORMS:
-            if self.platform == PLATFORMS[platform]['name']:
-                sep = PLATFORMS[platform]['path_separator']
-                return '{user}{sep}{folder}{sep}{stack}'.format(
-                    user=self.user(),
-                    sep=sep,
-                    folder=folder,
-                    stack=stack,
-                )
+        return str(self._pathlib_home / user / folder / stack)
 
-    def project_dir(self) -> Union[str, None]:
+    def project_dir(self) -> str:
         """Generate a random path to project directory.
 
         :return: Path to project.
@@ -116,14 +98,6 @@ class Path(BaseProvider):
         :Example:
             /home/sherika/Development/Falcon/mercenary
         """
-        project = self.random.choice(PROJECT_NAMES)
         dev_dir = self.dev_dir()
-        for platform in PLATFORMS:
-            if self.platform == PLATFORMS[platform]['name']:
-                sep = PLATFORMS[platform]['path_separator']
-
-                return '{dev_dir}{sep}{project}'.format(
-                    dev_dir=dev_dir,
-                    sep=sep,
-                    project=project,
-                )
+        project = self.random.choice(PROJECT_NAMES)
+        return str(self._pathlib_home / dev_dir / project)
