@@ -4,28 +4,16 @@
 
 # https://docs.python.org/3.5/library/sys.html?highlight=sys#sys.platform
 PLATFORMS = {
-    'LINUX': {
-        'name': 'linux',
-        'path_separator': '/',
-        'root': '/',
+    'linux': {
         'home': '/home/',
     },
-    'MACOS': {
-        'name': 'darwin',
-        'path_separator': '/',
-        'root': '/',
+    'darwin': {
         'home': '/home/',
     },
-    'WINDOWS': {
-        'name': 'win32',
-        'path_separator': '\\',
-        'root': 'C:\\',
+    'win32': {
         'home': 'C:\\Users\\',
     },
-    'WINDOWS64': {
-        'name': 'win64',
-        'path_separator': '\\',
-        'root': 'C:\\',
+    'win64': {
         'home': 'C:\\Users\\',
     },
 }
