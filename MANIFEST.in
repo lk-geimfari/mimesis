@@ -1,5 +1,6 @@
 include LICENSE
 include setup.py
+include mimesis/py.typed
 recursive-include mimesis *.py
 recursive-include mimesis/data *.json
 
