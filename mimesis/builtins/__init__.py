@@ -9,6 +9,7 @@ from .de import GermanySpecProvider
 from .nl import NetherlandsSpecProvider
 from .uk import UkraineSpecProvider
 from .pl import PolandSpecProvider
+from .da import DenmarkSpecProvider
 
 __all__ = [
     'USASpecProvider',
@@ -18,4 +19,5 @@ __all__ = [
     'NetherlandsSpecProvider',
     'UkraineSpecProvider',
     'PolandSpecProvider',
+    'DenmarkSpecProvider',
 ]
