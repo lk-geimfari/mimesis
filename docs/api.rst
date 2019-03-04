@@ -17,6 +17,13 @@ BrazilSpecProvider
    :members:
    :special-members: __init__
 
+DenmarkSpecProvider
+------------------
+
+.. autoclass:: mimesis.builtins.DenmarkSpecProvider
+   :members:
+   :special-members: __init__
+
 GermanySpecProvider
 -------------------
 
