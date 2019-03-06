@@ -2,8 +2,6 @@
 
 """Specific data provider for Denmark (da)."""
 
-import random
-
 from mimesis.builtins.base import BaseSpecProvider
 from mimesis.typing import Seed
 
