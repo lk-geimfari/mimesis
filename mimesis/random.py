@@ -26,18 +26,6 @@ class Random(random_module.Random):
 
     """
 
-    def multiple_choice(self, seq: Sequence[Any], amount: int = 2) -> list:
-        """Multiple choices of elements from the sequence.
-
-        Choice an element from sequence ``seq``
-        in an amount of ``amount``.
-
-        :param seq: Sequence of elements.
-        :param amount: Amount of elements.
-        :return: List of elements.
-        """
-        return [self.choice(seq) for _ in range(amount)]
-
     def randints(self, amount: int = 3,
                  a: int = 1, b: int = 100) -> List[int]:
         """Generate list of random integers.
