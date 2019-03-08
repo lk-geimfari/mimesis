@@ -76,19 +76,6 @@ def test_custom_code(random):
     assert result == 'M262'
 
 
-@pytest.mark.parametrize(
-    'amount', [
-        2,
-        3,
-        4,
-    ],
-)
-def test_multiple_choice(random, amount):
-    seq = [x for x in range(8)]
-    result = random.multiple_choice(seq, amount)
-    assert len(result) == amount
-
-
 def test_get_random_item(random):
     result = get_random_item(Gender)
     assert result in Gender

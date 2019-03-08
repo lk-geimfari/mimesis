@@ -10,6 +10,10 @@ Version 3.2.0
 
 - Pass seed to custom providers
 
+**Removed**:
+
+- Removed ``multiple_choice()`` in the ``random`` module because it was unusued and it could be replaced with ``random.choices``.
+
 
 Version 3.1.0
 -------------
