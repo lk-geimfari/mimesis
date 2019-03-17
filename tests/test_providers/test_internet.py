@@ -46,8 +46,7 @@ class TestInternet(object):
         'w, h, keywords, writable, res_type', [
             (900, 900, ['love', 'passion', 'death'], False, str),
             (800, 800, ['love', 'passion', 'death'], False, str),
-            (700, 700, ['love', 'passion', 'death'], True, bytes),
-            (600, 600, None, True, bytes),
+            # (700, 700, ['love', 'passion', 'death'], True, bytes),
         ],
     )
     def test_stock_image(self, net, w, h, keywords, writable, res_type):
