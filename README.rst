@@ -71,9 +71,6 @@ which represents data related to personal information, such as name, surname, em
     
     >>> person.telephone()
     '1-408-855-5063'
-    
-    >>> person.identifier(mask='####/##-#')
-    '2714/48-4'
 
 
 More about the other providers you can read in our `documentation`_.
@@ -84,7 +81,7 @@ More about the other providers you can read in our `documentation`_.
 Locales
 -------
 
-**Mimesis** currently includes support for 33 different `locales`_. You can
+Mimesis currently includes support for 33 different `locales`_. You can
 specify a locale when creating providers and they will return data that
 is appropriate for the language or country associated with that locale.
 
@@ -96,15 +93,26 @@ Let's take a look how it works:
     >>> from mimesis.enums import Gender
 
     >>> de = Person('de')
-    >>> pl = Person('pl')
+    >>> en = Person('en')
 
     >>> de.full_name(gender=Gender.FEMALE)
     'Sabrina Gutermuth'
 
-    >>> pl.full_name(gender=Gender.MALE)
-    'Światosław Tomankiewicz'
+    >>> en.full_name(gender=Gender.MALE)
+    'Layne Gallagher'
 
 .. _locales: https://mimesis.name/getting_started.html#locales
+
+Providers
+---------
+
+Mimesis support over twenty different data providers available,
+which can produce data related to people, food, computer hardware,
+transportation, addresses,
+ and more.
+
+See `API Reference <https://mimesis.name/api.html>`_ for more info.
+
 
 Documentation
 -------------
