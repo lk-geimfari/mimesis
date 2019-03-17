@@ -108,8 +108,7 @@ Providers
 
 Mimesis support over twenty different data providers available,
 which can produce data related to people, food, computer hardware,
-transportation, addresses,
- and more.
+transportation, addresses, and more.
 
 See `API Reference <https://mimesis.name/api.html>`_ for more info.
 
