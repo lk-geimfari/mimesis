@@ -26,6 +26,11 @@ class Datetime(BaseDataProvider):
         self._datafile = 'datetime.json'
         self.pull(self._datafile)
 
+    class Meta:
+        """Class for metadata."""
+
+        name = 'datetime'
+
     @staticmethod
     def bulk_create_datetimes(date_start: DateTime,
                               date_end: DateTime, **kwargs) -> List[DateTime]:

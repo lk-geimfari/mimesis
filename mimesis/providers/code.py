@@ -28,6 +28,11 @@ class Code(BaseProvider):
         """
         super().__init__(*args, **kwargs)
 
+    class Meta:
+        """Class for metadata."""
+
+        name = 'code'
+
     def locale_code(self) -> str:
         """Get a random locale code (MS-LCID).
 
@@ -46,7 +51,8 @@ class Code(BaseProvider):
         """
         return self.random.custom_code(mask=mask)
 
-    def isbn(self, fmt: Optional[ISBNFormat] = None, locale: str = 'en') -> str:
+    def isbn(self, fmt: Optional[ISBNFormat] = None,
+             locale: str = 'en') -> str:
         """Generate ISBN for current locale.
 
         To change ISBN format, pass parameter ``fmt`` with needed value of

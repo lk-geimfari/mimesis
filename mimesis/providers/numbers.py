@@ -12,6 +12,11 @@ __all__ = ['Numbers']
 class Numbers(BaseProvider):
     """Class for generating numbers."""
 
+    class Meta:
+        """Class for metadata."""
+
+        name = 'numbers'
+
     def floats(self, n: int = 2) -> List[float]:
         """Generate a list of random float numbers.
 

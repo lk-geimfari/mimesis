@@ -11,6 +11,11 @@ __all__ = ['Development']
 class Development(BaseProvider):
     """Class for getting fake data for Developers."""
 
+    class Meta:
+        """Class for metadata."""
+
+        name = 'development'
+
     def software_license(self) -> str:
         """Get a random software license.
 

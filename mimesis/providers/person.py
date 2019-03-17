@@ -40,6 +40,11 @@ class Person(BaseDataProvider):
             'age': 0,
         }
 
+    class Meta:
+        """Class for metadata."""
+
+        name = 'person'
+
     def age(self, minimum: int = 16, maximum: int = 66) -> int:
         """Get a random integer value.
 
@@ -258,7 +263,8 @@ class Person(BaseDataProvider):
             domain=domain,
         )
 
-    def social_media_profile(self, site: Optional[SocialNetwork] = None) -> str:
+    def social_media_profile(self,
+                             site: Optional[SocialNetwork] = None) -> str:
         """Generate profile for random social network.
 
         :return: Profile in some network.

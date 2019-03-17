@@ -29,6 +29,11 @@ class Structure(BaseDataProvider):
         self.__inet = Internet(seed=self.seed)
         self.__text = Text('en', seed=self.seed)
 
+    class Meta:
+        """Class for metadata."""
+
+        name = 'structure'
+
     def css(self) -> str:
         """Generate a random snippet of CSS.
 

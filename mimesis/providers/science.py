@@ -23,6 +23,11 @@ class Science(BaseDataProvider):
         self._datafile = 'science.json'
         self.pull(self._datafile)
 
+    class Meta:
+        """Class for metadata."""
+
+        name = 'science'
+
     def math_formula(self) -> str:
         """Get a random mathematical formula.
 

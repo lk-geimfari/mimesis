@@ -25,6 +25,11 @@ class Business(BaseDataProvider):
         self._datafile = 'business.json'
         self.pull(self._datafile)
 
+    class Meta:
+        """Class for metadata."""
+
+        name = 'business'
+
     def company(self) -> str:
         """Get a random company name.
 

@@ -36,6 +36,11 @@ class Address(BaseDataProvider):
         self._datafile = 'address.json'
         self.pull(self._datafile)
 
+    class Meta:
+        """Class for metadata."""
+
+        name = 'address'
+
     @staticmethod
     def _dd_to_dms(num: float, _type: str) -> str:
         """Convert decimal number to DMS format.

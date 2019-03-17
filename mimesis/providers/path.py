@@ -33,6 +33,11 @@ class Path(BaseProvider):
                              else PurePosixPath()
         self._pathlib_home /= PLATFORMS[platform]['home']
 
+    class Meta:
+        """Class for metadata."""
+
+        name = 'path'
+
     def root(self) -> str:
         """Generate a root dir path.
 

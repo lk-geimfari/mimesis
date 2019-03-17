@@ -38,6 +38,11 @@ class Internet(BaseProvider):
         super().__init__(*args, **kwargs)
         self.__file = File(seed=self.seed)
 
+    class Meta:
+        """Class for metadata."""
+
+        name = 'internet'
+
     def content_type(self, mime_type: Optional[MimeType] = None) -> str:
         """Get a random HTTP content type.
 

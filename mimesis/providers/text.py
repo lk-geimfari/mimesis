@@ -23,6 +23,11 @@ class Text(BaseDataProvider):
         self._datafile = 'text.json'
         self.pull(self._datafile)
 
+    class Meta:
+        """Class for metadata."""
+
+        name = 'text'
+
     def alphabet(self, lower_case: bool = False) -> list:
         """Get an alphabet for current locale.
 

@@ -21,6 +21,11 @@ class Transport(BaseProvider):
         """
         super().__init__(*args, **kwargs)
 
+    class Meta:
+        """Class for metadata."""
+
+        name = 'transport'
+
     def truck(self, model_mask: str = '#### @@') -> str:
         """Generate a truck model.
 

@@ -24,6 +24,11 @@ __all__ = ['Hardware']
 class Hardware(BaseProvider):
     """Class for generate data related to hardware."""
 
+    class Meta:
+        """Class for metadata."""
+
+        name = 'hardware'
+
     def resolution(self) -> str:
         """Get a random screen resolution.
 

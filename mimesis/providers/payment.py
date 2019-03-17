@@ -29,6 +29,11 @@ class Payment(BaseProvider):
         super().__init__(*args, **kwargs)
         self.__person = Person('en', seed=self.seed)
 
+    class Meta:
+        """Class for metadata."""
+
+        name = 'payment'
+
     def cid(self) -> int:
         """Generate a random CID.
 

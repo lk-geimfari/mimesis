@@ -63,6 +63,11 @@ class Generic(BaseDataProvider):
         self.structure = Structure(seed=self.seed)
         self.choice = Choice(seed=self.seed)
 
+    class Meta:
+        """Class for metadata."""
+
+        name = 'generic'
+
     def __getattr__(self, attrname: str) -> Any:
         """Get attribute without underscore.
 

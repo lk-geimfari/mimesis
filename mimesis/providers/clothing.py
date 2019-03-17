@@ -10,6 +10,11 @@ __all__ = ['Clothing']
 class Clothing(BaseProvider):
     """Class for generate data related to clothing."""
 
+    class Meta:
+        """Class for metadata."""
+
+        name = 'clothing'
+
     def international_size(self) -> str:
         """Get a random size in international format.
 

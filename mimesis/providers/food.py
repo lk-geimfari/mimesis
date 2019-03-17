@@ -19,6 +19,11 @@ class Food(BaseDataProvider):
         self._datafile = 'food.json'
         self.pull(self._datafile)
 
+    class Meta:
+        """Class for metadata."""
+
+        name = 'food'
+
     def _choice_from(self, key: str) -> str:
         """Choice random element."""
         data = self._data[key]

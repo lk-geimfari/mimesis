@@ -14,6 +14,11 @@ __all__ = ['UnitSystem']
 class UnitSystem(BaseProvider):
     """Class for generating data related to units."""
 
+    class Meta:
+        """Class for metadata."""
+
+        name = 'unit_system'
+
     def unit(self, name: Optional[UnitName] = None, symbol=False):
         """Get unit name.
 

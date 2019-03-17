@@ -24,6 +24,11 @@ class Cryptographic(BaseProvider):
         super().__init__(*args, **kwargs)
         self.__words = Text('en')._data.get('words', {})
 
+    class Meta:
+        """Class for metadata."""
+
+        name = 'cryptographic'
+
     def uuid(self, version: int = None) -> str:
         """Generate random UUID.
 

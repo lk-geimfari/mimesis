@@ -4,7 +4,7 @@ Version 3.2.0
 **Added**:
 
 - Added built-in provider DenmarkSpecProvider
-
+- Added meta classes for providers for internal usage (see `#619 <https://github.com/lk-geimfari/mimesis/issues/619>`_.)
 
 **Fixed**:
 

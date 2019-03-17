@@ -25,6 +25,11 @@ class File(BaseProvider):
         super().__init__(*args, **kwargs)
         self.__text = Text('en', seed=self.seed)
 
+    class Meta:
+        """Class for metadata."""
+
+        name = 'file'
+
     def __sub(self, string: str = '') -> str:
         """Replace spaces in string.
 
