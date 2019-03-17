@@ -55,22 +55,9 @@ class Person(BaseDataProvider):
         :Example:
             23.
         """
-        a = self.random.randint(int(minimum), int(maximum))
-        self._store['age'] = a
-        return a
-
-    def child_count(self, max_children: int = 5) -> int:
-        """Get a count of children.
-
-        :param max_children: Maximum count of children.
-        :return: Ints. Depend on previous generated age.
-        """
-        a = self._store['age']
-        if a == 0:
-            a = self.age()
-
-        cc = 0 if a < 18 else self.random.randint(0, max_children)
-        return cc
+        age = self.random.randint(minimum, maximum)
+        self._store['age'] = age
+        return age
 
     def work_experience(self, working_start_age: int = 22) -> int:
         """Get a work experience.
@@ -78,11 +65,11 @@ class Person(BaseDataProvider):
         :param working_start_age: Age then person start to work.
         :return: Depend on previous generated age.
         """
-        a = self._store['age']
-        if a == 0:
-            a = self.age()
+        age = self._store['age']
+        if age == 0:
+            age = self.age()
 
-        return max(a - working_start_age, 0)
+        return max(age - working_start_age, 0)
 
     def name(self, gender: Optional[Gender] = None) -> str:
         """Generate a random name.

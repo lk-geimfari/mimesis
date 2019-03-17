@@ -41,10 +41,6 @@ class TestPerson(object):
         result = _person.age() - _person._store['age']
         assert result == 0
 
-    def test_child_count(self, _person):
-        result = _person.child_count(max_children=10)
-        assert result <= 10
-
     def test_work_experience(self, _person):
         result = _person.work_experience(
             working_start_age=0) - _person._store['age']
@@ -324,10 +320,6 @@ class TestSeededPerson(object):
     def test_age(self, p1, p2):
         assert p1.age() == p2.age()
         assert p1.age(12, 42) == p2.age(12, 42)
-
-    def test_child_count(self, p1, p2):
-        assert p1.child_count() == p2.child_count()
-        assert p1.child_count(2) == p2.child_count(2)
 
     def test_work_experience(self, p1, p2):
         assert p1.work_experience() == p2.work_experience()

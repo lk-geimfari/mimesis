@@ -4,16 +4,16 @@ Version 3.2.0
 **Added**:
 
 - Added built-in provider DenmarkSpecProvider
-- Added meta classes for providers for internal usage (see `#619 <https://github.com/lk-geimfari/mimesis/issues/619>`_.)
+- Added meta classes for providers for internal usage (see `#621 <https://github.com/lk-geimfari/mimesis/issues/621>`_.)
 
 **Fixed**:
 
-- Pass seed to custom providers
+- Support of seed for custom providers
 
 **Removed**:
 
 - Removed ``multiple_choice()`` in the ``random`` module because it was unusued and it could be replaced with ``random.choices``.
-
+- Removed legacy method ``child_count()`` from provider ``Person()``
 
 Version 3.1.0
 -------------
