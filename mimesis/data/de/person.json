@@ -2,7 +2,9 @@
   "academic_degree": [
     "Bachelor",
     "Diplom",
-    "Master"
+    "Master",
+    "Doktor",
+    "Professor"
   ],
   "gender": [
     "Andere",
@@ -15,7 +17,7 @@
     "Amharisch",
     "Arabisch",
     "Armenisch",
-    "Assamese",
+    "Assamesisch",
     "Aymara",
     "Azeri",
     "Bengali",
@@ -71,9 +73,9 @@
     "Maltesisch",
     "Marathi",
     "Mazedonisch",
-    "Moldovan",
+    "Moldauisch",
     "Mongolisch",
-    "Montenegros",
+    "Montenegrinisch",
     "Māori",
     "Ndebele",
     "Nepali",
@@ -96,7 +98,7 @@
     "Spanisch",
     "Swahili",
     "Swati",
-    "Tajik",
+    "Tadschikisch",
     "Tamilisch",
     "Telugu",
     "Tetum",
@@ -1249,7 +1251,7 @@
     "Amharisch",
     "Arabisch",
     "Armenisch",
-    "Assamese",
+    "Assamesisch",
     "Aymara",
     "Azeri",
     "Bengali",
@@ -1304,7 +1306,7 @@
     "Mazedonisch",
     "Moldovan",
     "Mongolisch",
-    "Montenegros",
+    "Montenegrinisch",
     "Māori",
     "Ndebele",
     "Nepali",
@@ -1327,7 +1329,7 @@
     "Spanisch",
     "Swahili",
     "Swati",
-    "Tajik",
+    "Tadschikisch",
     "Tamilisch",
     "Telugu",
     "Tetum",
@@ -1339,8 +1341,8 @@
     "Ungarisch",
     "Weißrusse",
     "Zulu",
-    "bosnisch",
-    "kroatisch"
+    "Bosnisch",
+    "Kroatisch"
   ],
   "occupation": [
     "Anwalt / Anwältin",
@@ -1400,12 +1402,12 @@
     "Traditionalistisch"
   ],
   "sexuality": [
-    "Asexualität",
-    "Bisexualität",
-    "Heterosexualität",
-    "Homosexualität",
-    "Pansexualität",
-    "Polysexualität"
+    "Asexuell",
+    "Bisexuell",
+    "Heterosexuell",
+    "Homosexuell",
+    "Pansexuell",
+    "Polysexuell"
   ],
   "surnames": [
     "Abeln",
@@ -1765,6 +1767,7 @@
       "academic": [
         "Dr.",
         "Dr. rer. nat.",
+        "Dr. med.",
         "Prof. Dr."
       ]
     },
@@ -1774,25 +1777,26 @@
       ],
       "academic": [
         "Dr.",
+        "Dr. med.",
         "Dr. rer. nat.",
         "Prof. Dr."
       ]
     }
   },
   "university": [
-    "Bundeswehr Universität München",
-    "Catholic Universität Applied Sciences Freiburg",
+    "Universität der Bundeswehr München",
+    "Katholische Hochschule Freiburg",
     "Deutsche Universität für Verwaltungswissenschaften Speyer",
     "Europa-Universität Viadrina",
     "Freie Universität Berlin",
-    "Helmut Schmidt University",
-    "Humboldt Universität Berlin",
+    "Helmut-Schmidt-Universität",
+    "Humboldt-Universität Berlin",
     "Jacobs University Bremen",
     "Katholische Universität Eichstätt-Ingolstadt",
     "Leuphana Universität Lüneburg",
-    "Ludwig Maximilians Universität München",
-    "Ruhr University Bochum",
-    "Saarland Universität",
+    "Ludwig-Maximilians-Universität München",
+    "Ruhr-Universität Bochum",
+    "Universität des Saarlandes",
     "Technische Hochschule Köln",
     "Technische Universität Dortmund",
     "Technische Universität Dresden",
@@ -1806,15 +1810,13 @@
     "Universität Bonn",
     "Universität Bremen",
     "Universität Duisburg-Essen",
-    "Universität Duisburg-Essen",
     "Universität Düsseldorf",
     "Universität Erfurt",
-    "Universität Erlangen-Nuremberg",
-    "Universität Erlangen-Nuremberg",
+    "Universität Erlangen-Nürnberg",
     "Universität Flensburg",
     "Universität Frankfurt am Main",
     "Universität Freiburg",
-    "Universität Giessen",
+    "Universität Gießen",
     "Universität Greifswald",
     "Universität Göttingen",
     "Universität Hagen",
