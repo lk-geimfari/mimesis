@@ -8,7 +8,7 @@ Maintainers
 
 -  Likid Geimfari `(lk-geimfari)`_
 -  Sobolev Nikita `(sobolevn)`_
--  dy `(duckyou)`_
+-  Emilio Cecchini `(ceccoemi)`_
 
 Inspirer
 ~~~~~~~~
