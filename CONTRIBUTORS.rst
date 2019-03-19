@@ -78,6 +78,7 @@ Contributors
 -  Nikita Serba `(Nekit10)`_
 -  Julien Surloppe `(jsurloppe)`_
 -  Emilio Cecchini `(ceccoemi)`_
+-  Anphisa `(anphisa)`_
 
 .. _(lk-geimfari): https://github.com/lk-geimfari
 .. _(sobolevn): https://github.com/sobolevn
@@ -132,3 +133,4 @@ Contributors
 .. _(Nekit10): https://github.com/Nekit10
 .. _(jsurloppe): https://github.com/jsurloppe
 .. _(ceccoemi): https://github.com/ceccoemi
+.. _(anphisa): https://github.com/Anphisa
