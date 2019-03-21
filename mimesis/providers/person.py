@@ -5,7 +5,7 @@
 import hashlib
 import re
 from string import ascii_letters, digits, punctuation
-from typing import Optional, Union
+from typing import Dict, Optional, Union
 
 from mimesis.data import (
     BLOOD_GROUPS,
@@ -39,6 +39,7 @@ class Person(BaseDataProvider):
         self._store = {
             'age': 0,
         }
+        self._unique_values: Dict[str, str] = {}
 
     class Meta:
         """Class for metadata."""
@@ -158,19 +159,24 @@ class Person(BaseDataProvider):
             self.surname(gender),
         )
 
-    def username(self, template: Optional[str] = None) -> str:
+    def username(self, template: Optional[str] = None,
+                 unique: bool = False) -> str:
         """Generate username by template.
 
         Supported templates: ('U_d', 'U.d', 'U-d', 'UU-d', 'UU.d', 'UU_d',
         'ld', 'l-d', 'Ud', 'l.d', 'l_d', 'default')
 
         :param template: Template
+        :param unique: Return an unique value in the same instance.
         :return: Username.
         :raises KeyError: if template is not supported.
 
         :Example:
             Celloid1873
         """
+        if unique and 'username' in self._unique_values:
+            return self._unique_values['username']
+
         MIN_DATE = 1800
         MAX_DATE = 2070
         DEFAULT_TEMPLATE = 'l.d'
@@ -208,6 +214,9 @@ class Person(BaseDataProvider):
             if re.match(VALID_SEPERATORS, tag) is not None:
                 username += tag
 
+        if unique:
+            self._unique_values['username'] = username
+
         return username
 
     def password(self, length: int = 8, hashed: bool = False) -> str:
@@ -230,25 +239,31 @@ class Person(BaseDataProvider):
         else:
             return password
 
-    def email(self, domains: Union[tuple, list] = None) -> str:
+    def email(self, domains: Union[tuple, list] = None,
+              unique: bool = False) -> str:
         """Generate a random email.
 
         :param domains: List of custom domains for emails.
+        :param unique: Return an unique value in the same instance.
         :type domains: list or tuple
         :return: Email address.
 
         :Example:
             foretime10@live.com
         """
+        if unique and 'email' in self._unique_values:
+            return self._unique_values['email']
+
         if not domains:
             domains = EMAIL_DOMAINS
-
         domain = self.random.choice(domains)
         name = self.username(template='ld')
-        return '{name}{domain}'.format(
-            name=name,
-            domain=domain,
-        )
+        email = '{}{}'.format(name, domain)
+
+        if unique:
+            self._unique_values['email'] = email
+
+        return email
 
     def social_media_profile(self,
                              site: Optional[SocialNetwork] = None) -> str:
@@ -436,23 +451,33 @@ class Person(BaseDataProvider):
         languages = self._data['language']
         return self.random.choice(languages)
 
-    def telephone(self, mask: str = '', placeholder: str = '#') -> str:
+    def telephone(self, mask: str = '', placeholder: str = '#',
+                  unique: bool = False) -> str:
         """Generate a random phone number.
 
         :param mask: Mask for formatting number.
+        :param unique: Return an unique value in the same instance.
         :param placeholder: A placeholder for a mask (default is #).
         :return: Phone number.
 
         :Example:
             +7-(963)-409-11-22.
         """
+        if unique and 'telephone' in self._unique_values:
+            return self._unique_values['telephone']
+
         if not mask:
             code = self.random.choice(CALLING_CODES)
             default = '{}-(###)-###-####'.format(code)
             masks = self._data.get('telephone_fmt', [default])
             mask = self.random.choice(masks)
 
-        return self.random.custom_code(mask=mask, digit=placeholder)
+        telephone = self.random.custom_code(mask=mask, digit=placeholder)
+
+        if unique:
+            self._unique_values['telephone'] = telephone
+
+        return telephone
 
     def avatar(self, size: int = 256) -> str:
         """Generate a random avatar..

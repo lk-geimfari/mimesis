@@ -306,6 +306,15 @@ class TestPerson(object):
         result = person.nationality()
         assert result is not None
 
+    def test_unique_username(self, person):
+        assert person.username(unique=True) == person.username(unique=True)
+
+    def test_unique_email(self, person):
+        assert person.email(unique=True) == person.email(unique=True)
+
+    def test_unique_telephone(self, person):
+        assert person.telephone(unique=True) == person.telephone(unique=True)
+
 
 class TestSeededPerson(object):
 
