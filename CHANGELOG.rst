@@ -5,6 +5,7 @@ Version 3.2.0
 
 - Added built-in provider DenmarkSpecProvider
 - Added meta classes for providers for internal usage (see `#621 <https://github.com/lk-geimfari/mimesis/issues/621>`_.)
+- Added unique parameter for some functions of the Person provider
 
 **Fixed**:
 
