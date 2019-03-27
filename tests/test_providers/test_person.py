@@ -91,9 +91,16 @@ class TestPerson(object):
         result = _person.username(template=template)
         assert re.match(template_patterns[template], result)
 
+    def test_username_custom_template(self, _person):
+        result = _person.username(template='d-U.l_d')
+        assert re.fullmatch(r'[0-9]+\-[A-Z][a-z]+\.[a-z]+\_[0-9]+', result)
+
     def test_username_unsupported_template(self, _person):
         with pytest.raises(KeyError):
-            _person.username(template=':D')
+            _person.username(template='.d-')
+
+        with pytest.raises(KeyError):
+            _person.username(template='dd-.dd')
 
     def test_email(self, _person):
         result = _person.email()
