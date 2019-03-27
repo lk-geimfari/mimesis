@@ -191,7 +191,7 @@ class Person(BaseDataProvider):
         if template == 'default':
             template = DEFAULT_TEMPLATE
 
-        if re.fullmatch(r'[Ul\.\-\_d]*[Ul]+[Ul\.\-\_d]*', template) is None:
+        if not re.fullmatch(r'[Ul\.\-\_d]*[Ul]+[Ul\.\-\_d]*', template):
             raise KeyError(
                 "Template '{}' is not supported.".format(template))
 
