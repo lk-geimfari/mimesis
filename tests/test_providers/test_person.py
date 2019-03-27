@@ -96,10 +96,10 @@ class TestPerson(object):
         assert re.fullmatch(r'[0-9]+\-[A-Z][a-z]+\.[a-z]+\_[0-9]+', result)
 
     def test_username_unsupported_template(self, _person):
-        with pytest.raises(KeyError):
+        with pytest.raises(ValueError):
             _person.username(template='.d-')
 
-        with pytest.raises(KeyError):
+        with pytest.raises(ValueError):
             _person.username(template='dd-.dd')
 
     def test_email(self, _person):

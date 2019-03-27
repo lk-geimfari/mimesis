@@ -173,7 +173,7 @@ class Person(BaseDataProvider):
 
         :param template: Template.
         :return: Username.
-        :raises KeyError: If template is not supported.
+        :raises ValueError: If template is not supported.
 
         :Example:
             Celloid1873
@@ -192,7 +192,7 @@ class Person(BaseDataProvider):
             template = DEFAULT_TEMPLATE
 
         if not re.fullmatch(r'[Ul\.\-\_d]*[Ul]+[Ul\.\-\_d]*', template):
-            raise KeyError(
+            raise ValueError(
                 "Template '{}' is not supported.".format(template))
 
         tags = re.findall(r'[Uld\.\-\_]', template)
