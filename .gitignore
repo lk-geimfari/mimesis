@@ -194,3 +194,6 @@ fabric.properties
 
 #vscode
 *.code-workspace
+
+# vim
+*.swp
