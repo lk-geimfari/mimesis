@@ -161,12 +161,19 @@ class Person(BaseDataProvider):
     def username(self, template: Optional[str] = None) -> str:
         """Generate username by template.
 
-        Supported templates: ('U_d', 'U.d', 'U-d', 'UU-d', 'UU.d', 'UU_d',
+        Supported template placeholders: (U, l, d)
+
+        Supported separators: (-, ., _)
+
+        Template must contain at least one "U" or "l" placeholder.
+
+        If template is None one of the following templates is used:
+        ('U_d', 'U.d', 'U-d', 'UU-d', 'UU.d', 'UU_d',
         'ld', 'l-d', 'Ud', 'l.d', 'l_d', 'default')
 
-        :param template: Template
+        :param template: Template.
         :return: Username.
-        :raises KeyError: if template is not supported.
+        :raises ValueError: If template is not supported.
 
         :Example:
             Celloid1873
@@ -184,28 +191,21 @@ class Person(BaseDataProvider):
         if template == 'default':
             template = DEFAULT_TEMPLATE
 
-        if template not in templates:
-            raise KeyError(
-                'Template \'{template}\' is not supported. '
-                'Use one of the following templates: {templates}'.format(
-                    template=template,
-                    templates=templates,
-                ),
-            )
+        if not re.fullmatch(r'[Ul\.\-\_d]*[Ul]+[Ul\.\-\_d]*', template):
+            raise ValueError(
+                "Template '{}' is not supported.".format(template))
 
-        VALID_CHARS = r'[Uld\.\-\_]'
-        VALID_SEPERATORS = r'[\.\-\_]'
-        tags = re.findall(VALID_CHARS, template)
+        tags = re.findall(r'[Uld\.\-\_]', template)
 
         username = ''
         for tag in tags:
             if tag == 'U':
                 username += self.random.choice(USERNAMES).capitalize()
-            if tag == 'l':
+            elif tag == 'l':
                 username += self.random.choice(USERNAMES)
-            if tag == 'd':
+            elif tag == 'd':
                 username += str(self.random.randint(MIN_DATE, MAX_DATE))
-            if re.match(VALID_SEPERATORS, tag) is not None:
+            elif tag in '-_.':
                 username += tag
 
         return username

@@ -72,9 +72,6 @@ class TestPerson(object):
     )
     def test_username(self, _person, template):
 
-        templates = ('U-d', 'U.d', 'UU-d', 'UU.d', 'UU_d', 'U_d',
-                     'Ud', 'l-d', 'l.d', 'l_d', 'ld', 'default')
-
         template_patterns = {
             'U-d': r'^[A-Z][a-z]+-[0-9]+$',
             'U.d': r'^[A-Z][a-z]+\.[0-9]+$',
@@ -88,17 +85,22 @@ class TestPerson(object):
             'l_d': r'^[a-z]+_[0-9]+$',
             'ld': r'^[a-z]+[0-9]+$',
             'default': r'^[a-z]+\.[0-9]+',
+            None: r'^[A-Za-z]{2,}[\.\-\_]?[0-9]+$',
         }
-
-        if template is None:
-            template = random.choice(templates)
 
         result = _person.username(template=template)
         assert re.match(template_patterns[template], result)
 
+    def test_username_custom_template(self, _person):
+        result = _person.username(template='d-U.l_d')
+        assert re.fullmatch(r'[0-9]+\-[A-Z][a-z]+\.[a-z]+\_[0-9]+', result)
+
     def test_username_unsupported_template(self, _person):
-        with pytest.raises(KeyError):
-            _person.username(template=':D')
+        with pytest.raises(ValueError):
+            _person.username(template='.d-')
+
+        with pytest.raises(ValueError):
+            _person.username(template='dd-.dd')
 
     def test_email(self, _person):
         result = _person.email()
