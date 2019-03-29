@@ -1,8 +1,8 @@
 {
   "academic_degree": [
-    "Sapolo",
-    "Dottorato",
-    "Dottorato di ricerca"
+    "Laurea breve",
+    "Laurea magistrale",
+    "Dottorato"
   ],
   "gender": [
     "Maschio",
@@ -2323,21 +2323,20 @@
     "Zoccolaio"
   ],
   "political_views": [
-    "Indifferente",
+    "Anarchico",
     "Comunista",
     "Socialista",
     "Moderato",
     "Liberale",
-    "Convervatore",
-    "Ultraconvervatore",
+    "Conservatore",
+    "Ultraconservatore",
     "Libertario"
   ],
   "sexuality": [
-    "Asessualità",
-    "Bisessualità",
-    "Eterosessualità",
-    "Omosessualità",
-    "Polisessualità"
+    "Asessuale",
+    "Bisessuale",
+    "Eterosessuale",
+    "Omosessuale"
   ],
   "surnames": [
     "Abate",
@@ -5961,32 +5960,26 @@
     "female": {
       "typical": [
         "Signorina",
-        "La signorina",
-        "La signora",
-        "Signora"
+        "Signora",
+        "Sig.ra"
       ],
       "academic": [
         "Dott.",
         "Avv.",
         "Ing.",
-        "PhD",
-        "Dr.",
-        "Dott. Ric"
+        "Dr."
       ]
     },
     "male": {
       "typical": [
         "Signore",
-        "Sig.",
-        "Mister"
+        "Sig."
       ],
       "academic": [
         "Dott.",
         "Avv.",
         "Ing.",
-        "PhD",
-        "Dr.",
-        "Dott. Ric"
+        "Dr."
       ]
     }
   },
@@ -6011,15 +6004,15 @@
     "Università degli Studi di Firenze",
     "Università degli Studi di Genova",
     "Università degli Studi di Milano",
-    "Università degli Studi di Modena and Reggio Emilia",
-    "Università degli Studi di Naples Federico II",
+    "Università degli Studi di Modena e Reggio Emilia",
+    "Università degli Studi di Napoli Federico II",
     "Università degli Studi di Padova",
     "Università degli Studi di Palermo",
     "Università degli Studi di Parma",
     "Università degli Studi di Pavia",
     "Università degli Studi di Perugia",
     "Università degli Studi di Pisa",
-    "Università degli Studi di Rome III",
+    "Università degli Studi di Roma Tre",
     "Università degli Studi di Salento",
     "Università degli Studi di Salerno",
     "Università degli Studi di Siena",
@@ -6039,15 +6032,14 @@
     "Neutro"
   ],
   "worldview": [
-    "Agnosticismo",
-    "Ateismo",
-    "Buddismo",
-    "Cattolecesimo",
-    "Confucianesimo",
-    "Ebraismo",
-    "Ortodossia",
-    "Panteismo",
-    "Umamanesimo Secolare"
+    "Agnostico",
+    "Ateo",
+    "Buddista",
+    "Cattolico",
+    "Confuciano",
+    "Ebreo",
+    "Ortodosso",
+    "Panteico"
   ],
   "telephone_fmt": [
     "+39 0## ### ###",
