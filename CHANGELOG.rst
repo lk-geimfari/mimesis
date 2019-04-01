@@ -11,6 +11,7 @@ Version 3.2.0
 **Fixed**:
 
 - Support of seed for custom providers
+- ``currency_iso_code`` from the ``Business()`` provider now by default returns the currency code of the current locale.
 
 **Removed**:
 
