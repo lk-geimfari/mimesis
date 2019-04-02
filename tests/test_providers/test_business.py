@@ -27,8 +27,12 @@ class TestBusiness(object):
         result = business.copyright()
         assert '©' in result
 
-    def test_currency_iso_code(self, _business):
-        result = _business.currency_iso_code()
+    def test_currency_iso_code(self, business):
+        result1 = business.currency_iso_code()
+        result2 = business.currency_iso_code()
+        assert result1 == result2
+
+        result = business.currency_iso_code(allow_random=True)
         assert result in CURRENCY_ISO_CODES
 
     def test_cryptocurrency_iso_code(self, _business):

@@ -58,12 +58,16 @@ class Business(BaseDataProvider):
             self.company_type(abbr=True),
         )
 
-    def currency_iso_code(self) -> str:
-        """Get code of the currency.
+    def currency_iso_code(self, allow_random: bool = False) -> str:
+        """Get code of the currency for current locale.
 
+        :param allow_random: Get a random ISO code.
         :return: Currency code.
         """
-        return self.random.choice(CURRENCY_ISO_CODES)
+        if allow_random:
+            return self.random.choice(CURRENCY_ISO_CODES)
+        else:
+            return self._data['currency-code']
 
     def cryptocurrency_iso_code(self) -> str:
         """Get symbol of random cryptocurrency.
