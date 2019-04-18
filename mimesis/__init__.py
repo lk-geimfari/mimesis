@@ -2,12 +2,37 @@
 
 """Mimesis is a Python library, which helps generate synthetic data.
 
-Copyright (c) 2016 - 2018 Likid Geimfari (Isaak Uchakaev)
+Copyright (c) 2016 - 2019 Likid Geimfari (Isaak Uchakaev)
 Repository: https://github.com/lk-geimfari/mimesis
 Email: <likid.geimfari@gmail.com>
 """
 
-from mimesis.providers import *
+from mimesis.providers import (
+    Address,
+    BaseDataProvider,
+    BaseProvider,
+    Business,
+    Choice,
+    Clothing,
+    Code,
+    Cryptographic,
+    Datetime,
+    Development,
+    File,
+    Food,
+    Generic,
+    Hardware,
+    Internet,
+    Numbers,
+    Path,
+    Payment,
+    Person,
+    Science,
+    Structure,
+    Text,
+    Transport,
+    UnitSystem,
+)
 
 __all__ = [
     'Address',

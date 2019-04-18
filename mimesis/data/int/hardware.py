@@ -112,7 +112,7 @@ CPU_CODENAMES = [
     'Ivytown',
     'Haswell',
     'Fortville',
-    'Devil\'s Canyon',
+    'Devil\'s Canyon',  # noqa: Q003
     'Valley Island',
     'Broadwell',
     'Bay Trail',
@@ -185,7 +185,6 @@ MANUFACTURERS = [
     'Sony',
     'Samsung',
     'Fujitsu',
-    'Apple',
 ]
 
 PHONE_MODELS = [
@@ -202,7 +201,7 @@ PHONE_MODELS = [
     'Apple iPhone SE',
     'BlackBerry 10 Classic',
     'BlackBerry 10 Leap',
-    'BlackBerry 10 P\'9982',
+    'BlackBerry 10 P\'9982',  # noqa: Q003
     'BlackBerry 10 Passport',
     'BlackBerry 10 Q10',
     'BlackBerry 10 Q5',
