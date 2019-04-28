@@ -134,7 +134,8 @@ class Generic(BaseDataProvider):
 
         :param cls: Custom provider.
         :return: None
-        :raises TypeError: if cls is not class.
+        :raises TypeError: if cls is not class or is not a subclass
+            of BaseProvider.
         """
         if inspect.isclass(cls):
             if not issubclass(cls, BaseProvider):

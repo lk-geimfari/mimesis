@@ -95,6 +95,9 @@ class TestGeneric(object):
         with pytest.raises(TypeError):
             generic.add_providers(Provider4)
 
+        with pytest.raises(TypeError):
+            generic.add_providers(3)
+
         class UnnamedProvider(BaseProvider):
             @staticmethod
             def nothing():
