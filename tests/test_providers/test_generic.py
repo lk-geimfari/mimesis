@@ -50,6 +50,15 @@ class TestGeneric(object):
         result = generic.code.isbn()
         assert result is not None
 
+    def test_base_spec_provider(self):
+        generic = Generic()
+        result = generic.usa_provider.ssn()
+        assert result is not None
+
+        generic = Generic(locale='it')
+        result = generic.italy_provider.fiscal_code()
+        assert result is not None
+
     def test_bad_argument(self, generic):
         with pytest.raises(AttributeError):
             _ = generic.bad_argument  # noqa
@@ -96,7 +105,6 @@ class TestGeneric(object):
 
 
 class TestSeededGeneric(object):
-    TIMES = 5
 
     @pytest.fixture
     def g1(self, seed):
