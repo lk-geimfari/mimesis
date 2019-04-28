@@ -103,6 +103,11 @@ class TestGeneric(object):
         generic.add_provider(UnnamedProvider)
         assert generic.unnamedprovider.nothing() is None
 
+    def test_dir(self, generic):
+        providers = generic.__dir__()
+        for p in providers:
+            assert not p.startswith('_')
+
 
 class TestSeededGeneric(object):
 
