@@ -50,6 +50,15 @@ class TestGeneric(object):
         result = generic.code.isbn()
         assert result is not None
 
+    def test_base_spec_provider(self):
+        generic = Generic()
+        result = generic.usa_provider.ssn()
+        assert result is not None
+
+        generic = Generic(locale='it')
+        result = generic.italy_provider.fiscal_code()
+        assert result is not None
+
     def test_bad_argument(self, generic):
         with pytest.raises(AttributeError):
             _ = generic.bad_argument  # noqa
@@ -86,6 +95,9 @@ class TestGeneric(object):
         with pytest.raises(TypeError):
             generic.add_providers(Provider4)
 
+        with pytest.raises(TypeError):
+            generic.add_providers(3)
+
         class UnnamedProvider(BaseProvider):
             @staticmethod
             def nothing():
@@ -94,9 +106,13 @@ class TestGeneric(object):
         generic.add_provider(UnnamedProvider)
         assert generic.unnamedprovider.nothing() is None
 
+    def test_dir(self, generic):
+        providers = generic.__dir__()
+        for p in providers:
+            assert not p.startswith('_')
+
 
 class TestSeededGeneric(object):
-    TIMES = 5
 
     @pytest.fixture
     def g1(self, seed):

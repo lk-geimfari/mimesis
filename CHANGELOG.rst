@@ -7,6 +7,7 @@ Version 3.2.0
 - Added meta classes for providers for internal usage (see `#621 <https://github.com/lk-geimfari/mimesis/issues/621>`_.)
 - Added support for custom templates in ``Person().username()``
 - Added ``ItalianSpecProvider()``
+- Added an implementation of a mechanism for automatically add a built-in provider for a current locale to Generic (see `#674 <https://github.com/lk-geimfari/mimesis/issues/674>`_).
 
 **Fixed**:
 
