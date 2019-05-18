@@ -59,21 +59,6 @@ class Generic(BaseDataProvider):
         self._text = Text
         self._food = Food
         self._science = Science
-
-        _spec_providers = {
-            'de': DenmarkSpecProvider,
-            'ge': GermanySpecProvider,
-            'en': USASpecProvider,
-            'it': ItalySpecProvider,
-            'nl': NetherlandsSpecProvider,
-            'pl': PolandSpecProvider,
-            'pt-br': BrazilSpecProvider,
-            'ru': RussiaSpecProvider,
-            'uk': UkraineSpecProvider,
-        }
-        if self.locale in _spec_providers:
-            self.add_provider(_spec_providers[self.locale])
-
         self.transport = Transport(seed=self.seed)
         self.code = Code(seed=self.seed)
         self.unit_system = UnitSystem(seed=self.seed)
