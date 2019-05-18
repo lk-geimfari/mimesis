@@ -1,41 +1,41 @@
+Mimesis - Fake Data Generator
+-----------------------------
+
+|
+
 .. image:: https://raw.githubusercontent.com/lk-geimfari/mimesis/master/media/readme-logo.png
      :target: https://github.com/lk-geimfari/mimesis
 
 |
 
-.. raw:: html
-   
-   <br>
-   <p align="center">
-     Mimesis - Fake Data Generator
-   <br>
-   <a href="https://mimesis.name/"><strong> -- Browse the docs -- </strong></a>
-   <br>
-   <br>
-   <a href="https://travis-ci.org/lk-geimfari/mimesis">
-     <img src="https://travis-ci.org/lk-geimfari/mimesis.svg?branch=master" alt="Travis CI">
-   </a>
-   <a href="https://ci.appveyor.com/project/lk-geimfari/mimesis">
-     <img src="https://ci.appveyor.com/api/projects/status/chj8huslvn6vde18?svg=true" alt="AppVeyor">
-   </a>
-   <a href="https://mimesis.name/">
-     <img src="https://readthedocs.org/projects/mimesis/badge/?version=latest" alt="Documentation Status">
-   </a>
-   <a href="https://codecov.io/gh/lk-geimfari/mimesis">
-     <img src="https://codecov.io/gh/lk-geimfari/mimesis/branch/master/graph/badge.svg" alt="Code Coverage">
-   </a>
-   <a href="https://badge.fury.io/py/mimesis">
-     <img src="https://badge.fury.io/py/mimesis.svg" alt="Package version">
-   </a>
-   <a href="https://badge.fury.io/py/mimesis">
-     <img src="https://img.shields.io/badge/python-3.6%20%7C%203.7-brightgreen.svg" alt="Python version">
-   </a>
-   </p>
-
-|
-
 Description
 -----------
+
+.. image:: https://travis-ci.org/lk-geimfari/mimesis.svg?branch=master
+     :target: https://travis-ci.org/lk-geimfari/mimesis
+     :alt: Travi CI
+
+.. image:: https://ci.appveyor.com/api/projects/status/chj8huslvn6vde18?svg=true
+     :target: https://ci.appveyor.com/project/lk-geimfari/mimesis
+     :alt: AppVeyor CI
+
+.. image:: https://readthedocs.org/projects/mimesis/badge/?version=latest
+     :target: https://mimesis.name/
+     :alt: Documentation Status
+
+.. image:: https://codecov.io/gh/lk-geimfari/mimesis/branch/master/graph/badge.svg
+     :target: https://codecov.io/gh/lk-geimfari/mimesis
+     :alt: Code Coverage
+
+.. image:: https://badge.fury.io/py/mimesis.svg
+     :target: https://badge.fury.io/py/mimesis
+     :alt: Package version
+
+.. image:: https://img.shields.io/badge/python-3.6%20%7C%203.7-brightgreen.svg
+     :target: https://badge.fury.io/py/mimesis
+     :alt: Python version
+
+
 
 Mimesis is a package for Python, which helps generate big volumes of fake data for a variety of purposes in a variety of languages. The fake data could be used to populate a testing database, create beautiful JSON and XML files, anonymize data taken from production and etc.
 
