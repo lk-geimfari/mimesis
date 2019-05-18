@@ -15,7 +15,7 @@ Version 3.2.0
 
 **Removed**:
 
-- Removed ``multiple_choice()`` in the ``random`` module because it was unusued and it could be replaced with ``random.choices``.
+- Removed ``multiple_choice()`` in the ``random`` module because it was unused and it could be replaced with ``random.choices``.
 - Removed legacy method ``child_count()`` from provider ``Person()``
 
 Version 3.1.0
