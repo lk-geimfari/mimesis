@@ -23,7 +23,6 @@ Special thanks
 -  Ryan Varley `(ryanvarley)`_
 -  Ruslan Valerievich `(Valerievich)`_
 -  dy `(duckyou)`_
--  Unknown hero which created a logo.
 
 Contributors
 ~~~~~~~~~~~~
