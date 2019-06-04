@@ -189,10 +189,10 @@
         },
         "importlib-metadata": {
             "hashes": [
-                "sha256:027cfc6524613de726789072f95d2e4cc64dd1dee8096d42d13f2ead5bd302f5",
-                "sha256:0d05199e1f0b1a8707a1b9c46476d4a49807fb56cb1b0737db1d37feb42fe31d"
+                "sha256:a9f185022cfa69e9ca5f7eabfd5a58b689894cb78a11e3c8c89398a8ccbb8e7f",
+                "sha256:df1403cd3aebeb2b1dcd3515ca062eecb5bd3ea7611f18cba81130c68707e879"
             ],
-            "version": "==0.15"
+            "version": "==0.17"
         },
         "isort": {
             "hashes": [
@@ -286,11 +286,11 @@
         },
         "pyroma": {
             "hashes": [
-                "sha256:3ed770a0ed1616ee2ffa576852e34fb1ea5b54c37ff78dd33cff67d0e4bb584b",
-                "sha256:94a11cb077976bff9bd37ac8b487902556f216c4ee90b74a2344367f73b6ee7f"
+                "sha256:54d332f540d4828bc5672b75ccf9e12d4b2f72a42a4f304bcec1c73565aecc26",
+                "sha256:6b94feb609e1896579302f0836ef2fad3f17e0557e3ddcd0d76206cd3e366d27"
             ],
             "index": "pypi",
-            "version": "==2.4"
+            "version": "==2.5"
         },
         "pytest": {
             "hashes": [
