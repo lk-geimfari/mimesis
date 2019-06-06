@@ -78,6 +78,7 @@ Contributors
 -  Julien Surloppe `(jsurloppe)`_
 -  Emilio Cecchini `(ceccoemi)`_
 -  Anphisa `(anphisa)`_
+-  Gary Donovan `(garyd203)`_
 
 .. _(lk-geimfari): https://github.com/lk-geimfari
 .. _(sobolevn): https://github.com/sobolevn
@@ -133,3 +134,4 @@ Contributors
 .. _(jsurloppe): https://github.com/jsurloppe
 .. _(ceccoemi): https://github.com/ceccoemi
 .. _(anphisa): https://github.com/Anphisa
+.. _(garyd203): https://github.com/garyd203
