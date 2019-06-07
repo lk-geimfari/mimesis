@@ -7,6 +7,7 @@
       "Queensland",
       "South Australia",
       "Tasmania",
+      "Victoria",
       "Western Australia"
     ],
     "abbr": [
@@ -16,6 +17,7 @@
       "QLD",
       "SA",
       "TAS",
+      "VIC",
       "WA"
     ]
   },
