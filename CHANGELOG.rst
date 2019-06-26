@@ -2,7 +2,10 @@ Version 3.3.0
 -------------
 
 **Fixed**:
+
 - ``country()`` from the ``Address()`` provider now by default returns the country name of the current locale.
+- Separated Europe and Asia continents in Italian locale.
+- Removed duplicated names in the countries of ``et`` locale.
 
 Version 3.2.0
 -------------
