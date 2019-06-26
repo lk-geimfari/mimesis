@@ -261,6 +261,9 @@
     "Zürich",
     "Échallens"
   ],
+  "country": {
+    "current_locale": "Schweiz"
+  },
   "postal_code_fmt": "####",
   "state": {
     "abbr": [
