@@ -24,8 +24,8 @@ Special thanks
 -  Ruslan Valerievich `(Valerievich)`_
 -  dy `(duckyou)`_
 
-Contributors
-~~~~~~~~~~~~
+Patches and Suggestions
+~~~~~~~~~~~~~~~~~~~~~~~
 
 -  Kevin Schellenberg `(wikkiewikkie)`_
 -  Casey Weed `(Battleroid)`_
