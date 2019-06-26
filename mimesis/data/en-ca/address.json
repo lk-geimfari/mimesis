@@ -1,5 +1,8 @@
 {
   "address_fmt": "{st_num} {st_name} {st_sfx}",
+  "country": {
+    "current_locale": "Canada"
+  },
   "state": {
     "name": [
       "Alberta",

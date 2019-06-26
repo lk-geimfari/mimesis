@@ -93,6 +93,9 @@
     "Zell am See",
     "Zwettl-Niederösterreich"
   ],
+  "country": {
+    "current_locale": "Österreich"
+  },
   "postal_code_fmt": "####",
   "state": {
     "abbr": [

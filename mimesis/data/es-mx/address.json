@@ -149,6 +149,9 @@
       "Zacatecas"
     ]
   },
+  "country": {
+    "current_locale": "Mexico"
+  },
   "street": {
     "suffix": [
       "Rua",

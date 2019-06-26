@@ -1058,6 +1058,9 @@
     "Worcester",
     "York"
   ],
+  "country": {
+    "current_locale": "United Kingdom"
+  },
   "state": {
     "name": [
       "Avon",

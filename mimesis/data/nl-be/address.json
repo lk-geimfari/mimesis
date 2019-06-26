@@ -1,5 +1,8 @@
 {
   "address_fmt": "{st_num} {st_name}",
+  "country": {
+    "current_locale": "België"
+  },
   "city": [
     "Aalst",
     "Aarlen",
