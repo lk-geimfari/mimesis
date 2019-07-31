@@ -244,6 +244,10 @@ class Person(BaseDataProvider):
             domains = EMAIL_DOMAINS
 
         domain = self.random.choice(domains)
+
+        if not domain.startswith('@'):
+            domain = '@{}'.format(domain)
+
         name = self.username(template='ld')
         return '{name}{domain}'.format(
             name=name,

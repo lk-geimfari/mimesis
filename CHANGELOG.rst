@@ -1,3 +1,13 @@
+Version 3.4.0
+-------------
+
+.. note:: This version is still under development.
+
+**Fixed**:
+
+- Fixed issue with invalid email addresses on using custom domains without `@` for `Person().email()`
+
+
 Version 3.3.0
 -------------
 

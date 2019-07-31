@@ -106,7 +106,7 @@ class TestPerson(object):
         result = _person.email()
         assert re.match(patterns.EMAIL_REGEX, result)
 
-        domains = ['@example.com']
+        domains = ['@example.com', 'example.com']
         result = _person.email(domains=domains)
         assert re.match(patterns.EMAIL_REGEX, result)
         assert result.split('@')[1] == 'example.com'

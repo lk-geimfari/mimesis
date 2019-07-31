@@ -1034,6 +1034,7 @@ EMAIL_DOMAINS = (
     '@yahoo.com',
     '@live.com',
     '@outlook.com',
+    '@protonmail.com',
 )
 EMOJI = (
     ':bowtie:',
