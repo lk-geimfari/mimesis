@@ -98,7 +98,7 @@ anonymize data taken from productive services then **Mimesis** is this is
 exactly what you need.
 
 **Mimesis** is **not object factory** and it was not developed for using with
-specific database or ORM (such as Django ORM, SQLAclhemy etc.).
+specific database or ORM (such as Django ORM, SQLAlchemy etc.).
 It does not mean that you can't use it with ORM on the contrary,
 this will be done very simply, this only means that possibly you'll
 need third-party libraries to do it, like `mimesis-factory` or another one.
