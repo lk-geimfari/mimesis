@@ -75,7 +75,6 @@ term that carries a wide range of meanings, which include imitation, representat
 mimicry, imitatio, receptivity, nonsensuous similarity, the act of resembling,
 the act of expression, and the presentation of the self.
 
-
 Why octopus?
 ------------
 Basically, because octopuses are cool guys, but also because of the
