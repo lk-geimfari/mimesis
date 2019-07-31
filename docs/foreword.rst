@@ -65,15 +65,6 @@ Result:
 |  Faker   | **Faker.last_name()**                  | 10 000              |  8.218                 |
 +----------+----------------------------------------+---------------------+------------------------+
 
-
-Why octopus?
-------------
-Basically, because octopuses are cool guys, but also because of the
-fantastic `mimicry <https://en.wikipedia.org/wiki/Mimicry>`_ abilities of some families of octopuses.
-Have you ever hear about `Thaumoctopus mimicus <https://en.wikipedia.org/wiki/Mimic_octopus>`_?
-Just read about that guy, because he is a really badass one.
-
-
 What does name mean?
 --------------------
 
@@ -83,6 +74,14 @@ Mimesis (`/maɪˈmiːsəs/ <https://en.wikipedia.org/wiki/Help:IPA/English>`_;
 term that carries a wide range of meanings, which include imitation, representation,
 mimicry, imitatio, receptivity, nonsensuous similarity, the act of resembling,
 the act of expression, and the presentation of the self.
+
+
+Why octopus?
+------------
+Basically, because octopuses are cool guys, but also because of the
+fantastic `mimicry <https://en.wikipedia.org/wiki/Mimicry>`_ abilities of some families of octopuses.
+Have you ever hear about `Thaumoctopus mimicus <https://en.wikipedia.org/wiki/Mimic_octopus>`_?
+Just read about that guy, because he is a really badass one.
 
 What is the fake data?
 ----------------------
