@@ -8,19 +8,23 @@ matrix:
           sudo: required
           python: "3.6"
           dist: trusty
+          name: "Python 3.7 on Linux (Ubuntu Trusty Tahr)"
 
         - os: linux
           sudo: required
           python: "3.7"
           dist: xenial
+          name: "Python 3.7 on Linux (Ubuntu Xenial Xerus)"
 
         - os: osx
           language: generic
           env: PYTHON=3.6.6
+          name: "Python 3.6 on macOS"
 
         - os: osx
           language: generic
           env: PYTHON=3.7.0
+          name: "Python 3.7 on macOS"
 
         - os: windows
           language: shell
@@ -80,7 +84,7 @@ deploy:
   on:
     branch: master
     tags: true
-    condition: $TRAVIS_PYTHON_VERSION = "3.6" && $TRAVIS_OS_NAME != "osx"
+    condition: $TRAVIS_PYTHON_VERSION = "3.6" && $TRAVIS_OS_NAME == "linux"
 
 notifications:
   email:
