@@ -35,6 +35,7 @@ Maintainers
 
 -  Likid Geimfari (`lk-geimfari`_)
 -  Sobolev Nikita (`sobolevn`_)
+-  Emilio Cecchini `(ceccoemi)`_
 
 
 Patches and Suggestions
@@ -112,6 +113,7 @@ Patches and Suggestions
 .. _zelds: https://github.com/zelds
 .. _axce1: https://github.com/axce1
 .. _DefaltSimon: https://github.com/DefaltSimon
+.. _(ceccoemi): https://github.com/ceccoemi
 
 Disclaimer
 ==========

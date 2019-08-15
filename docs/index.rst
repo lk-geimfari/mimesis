@@ -2,7 +2,7 @@
 Mimesis - Fake Data Generator
 =============================
 
-Mimesis is fast and extremely easy to use Python package, which helps generate big volumes of
+`Mimesis <https://github.com/lk-geimfari/mimesis>`_ is fast and extremely easy to use Python package, which helps generate big volumes of
 fake data for a variety of purposes in a variety of languages.
 
 The fake data can be particularly useful
