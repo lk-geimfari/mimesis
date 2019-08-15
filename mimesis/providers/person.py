@@ -84,6 +84,16 @@ class Person(BaseDataProvider):
         names = self._data['names'].get(key)
         return self.random.choice(names)
 
+    def first_name(self, gender: Optional[Gender] = None):
+        """Generate a random first name.
+
+        ..note: An alias for self.name().
+
+        :param gender: Gender's enum object.
+        :return: First name.
+        """
+        return self.name(gender)
+
     def surname(self, gender: Optional[Gender] = None) -> str:
         """Generate a random surname.
 

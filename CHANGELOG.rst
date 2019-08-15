@@ -3,9 +3,14 @@ Version 3.4.0
 
 .. note:: This version is still under development.
 
+**Added**:
+
+- Added an alias ``first_name()`` for ``Person().name()``
+
+
 **Fixed**:
 
-- Fixed issue with invalid email addresses on using custom domains without `@` for `Person().email()`
+- Fixed issue with invalid email addresses on using custom domains without ``@`` for ``Person().email()``
 
 
 Version 3.3.0

@@ -163,6 +163,16 @@ class TestPerson(object):
         result = person.name(gender=gender)
         assert result in person._data['names'][gender.value]
 
+    @pytest.mark.parametrize(
+        'gender', [
+            Gender.FEMALE,
+            Gender.MALE,
+        ],
+    )
+    def test_first_name(self, person, gender):
+        result = person.first_name(gender=gender)
+        assert result in person._data['names'][gender.value]
+
     def test_name_with_none(self, _person):
         result = _person.name(gender=None)
         names = _person._data['names']
@@ -369,6 +379,11 @@ class TestSeededPerson(object):
         assert p1.name() == p2.name()
         assert p1.name(gender=Gender.FEMALE) == \
                p2.name(gender=Gender.FEMALE)
+
+    def test_first_name(self, p1, p2):
+        assert p1.first_name() == p2.first_name()
+        assert p1.first_name(gender=Gender.FEMALE) == \
+               p2.first_name(gender=Gender.FEMALE)
 
     def test_telephone(self, p1, p2):
         assert p1.telephone() == p2.telephone()
