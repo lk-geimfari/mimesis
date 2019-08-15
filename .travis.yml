@@ -8,13 +8,13 @@ matrix:
           sudo: required
           python: "3.6"
           dist: trusty
-          name: "Python 3.7 on Linux (Ubuntu Trusty Tahr)"
+          name: "Python 3.6 on Linux"
 
         - os: linux
           sudo: required
           python: "3.7"
           dist: xenial
-          name: "Python 3.7 on Linux (Ubuntu Xenial Xerus)"
+          name: "Python 3.7 on Linux"
 
         - os: osx
           language: generic
