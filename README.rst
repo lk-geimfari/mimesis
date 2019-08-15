@@ -13,11 +13,7 @@ Description
 
 .. image:: https://travis-ci.org/lk-geimfari/mimesis.svg?branch=master
      :target: https://travis-ci.org/lk-geimfari/mimesis
-     :alt: Travi CI
-
-.. image:: https://ci.appveyor.com/api/projects/status/chj8huslvn6vde18?svg=true
-     :target: https://ci.appveyor.com/project/lk-geimfari/mimesis
-     :alt: AppVeyor CI
+     :alt: Travis CI
 
 .. image:: https://readthedocs.org/projects/mimesis/badge/?version=latest
      :target: https://mimesis.name/
