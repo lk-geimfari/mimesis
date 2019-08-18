@@ -115,7 +115,7 @@ Generating structured data
 You can generate dictionaries which can be easily converted to any
 format you want (JSON/XML/YAML etc.)  with any structure you want.
 
-Just use object ``Field()``, as shown below:
+Just use object ``Field()`` as shown below:
 
 .. code:: python
 
