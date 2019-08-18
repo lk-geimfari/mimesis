@@ -14,7 +14,7 @@ from mimesis.exceptions import (
 from mimesis.providers.generic import Generic
 from mimesis.typing import JSON, Seed
 
-__all__ = ['AbstractField', 'Field', 'Schema']
+__all__ = ['Field', 'Schema']
 
 
 class AbstractField(object):
