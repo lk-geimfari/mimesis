@@ -144,18 +144,17 @@ Output:
 
     [
       {
-        "owner": {
-          "email": "aisling2032@yahoo.com",
-          "token": "cc8450298958f8b95891d90200f189ef591cf2c27e66e5c8f362f839fcc01370",
-          "creator": "Veronika Dyer"
-        },
-        "name": "pleasure",
-        "version": "4.3.1-rc.5",
-        "id": "33abf08a-77fd-1d78-86ae-04d88443d0e0",
-        "timestamp": "2018-07-29T15:25:02Z"
+        'id': '7a41f446-57a8-ec17-b9ad-367742251679',
+        'name': 'desert',
+        'version': '7.3.7-alpha.6',
+        'timestamp': '2026-06-06T14:00:52Z',
+        'owner': {
+          'email': 'damaged1829@gmail.com',
+          'token': 'acfd799af9b46e5560a51dabace593033171ec81e997905acfc602c93a741735',
+          'creator': 'Keena Hendricks'
+        }
       }
     ]
-
 
 
 You can read more `here <https://mimesis.name/getting_started.html#schema-and-fields>`_.
