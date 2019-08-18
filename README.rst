@@ -109,6 +109,59 @@ transportation, addresses, and more.
 See `API Reference <https://mimesis.name/api.html>`_ for more info.
 
 
+Generating structured data
+--------------------------
+
+You can generate dictionaries which can be easily converted to any
+format you want (JSON/XML/YAML etc.)  with any structure you want.
+
+Just use object ``Field()``, as shown below:
+
+.. code:: python
+
+    >>> from mimesis.schema import Field, Schema
+    >>> from mimesis.enums import Gender
+    >>> _ = Field('en')
+    >>> description = (
+    ...     lambda: {
+    ...         'id': _('uuid'),
+    ...         'name': _('text.word'),
+    ...         'version': _('version', pre_release=True),
+    ...         'timestamp': _('timestamp', posix=False),
+    ...         'owner': {
+    ...             'email': _('person.email', key=str.lower),
+    ...             'token': _('token_hex'),
+    ...             'creator': _('full_name', gender=Gender.FEMALE),
+    ...         },
+    ...     }
+    ... )
+    >>> schema = Schema(schema=description)
+    >>> schema.create(iterations=1)
+
+Output:
+
+.. code:: json
+
+    [
+      {
+        "owner": {
+          "email": "aisling2032@yahoo.com",
+          "token": "cc8450298958f8b95891d90200f189ef591cf2c27e66e5c8f362f839fcc01370",
+          "creator": "Veronika Dyer"
+        },
+        "name": "pleasure",
+        "version": "4.3.1-rc.5",
+        "id": "33abf08a-77fd-1d78-86ae-04d88443d0e0",
+        "timestamp": "2018-07-29T15:25:02Z"
+      }
+    ]
+
+
+
+You can read more `here <https://mimesis.name/getting_started.html#schema-and-fields>`_.
+
+
+
 Documentation
 -------------
 
