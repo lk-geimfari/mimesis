@@ -157,7 +157,7 @@ Output:
     ]
 
 
-You can read more `here <https://mimesis.name/getting_started.html#schema-and-fields>`_.
+See `Schema and Fields <https://mimesis.name/getting_started.html#schema-and-fields>`_ for more info.
 
 
 
