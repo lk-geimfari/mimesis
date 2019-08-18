@@ -140,7 +140,7 @@ Just use object ``Field()``, as shown below:
 
 Output:
 
-.. code:: json
+.. code:: text
 
     [
       {
