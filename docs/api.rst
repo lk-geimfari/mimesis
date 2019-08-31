@@ -7,6 +7,17 @@ API Reference
 This part of the documentation covers all the public interfaces of *Mimesis*.
 
 
+Random object
+=============
+
+Random
+------
+
+.. autoclass:: mimesis.random.Random
+   :members:
+   :special-members: __init__
+
+
 Builtin Data Providers
 ======================
 
@@ -18,7 +29,7 @@ BrazilSpecProvider
    :special-members: __init__
 
 DenmarkSpecProvider
-------------------
+-------------------
 
 .. autoclass:: mimesis.builtins.DenmarkSpecProvider
    :members:

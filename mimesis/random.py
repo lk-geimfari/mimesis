@@ -13,6 +13,8 @@ get a random item of the enum object.
 
 import os
 import random as random_module
+import secrets
+import string
 import uuid
 from typing import Any, List, Optional
 
@@ -100,13 +102,31 @@ class Random(random_module.Random):
         """
         return round(a + (b - a) * self.random(), precision)
 
-    @staticmethod
-    def randstr() -> str:
-        """Generate random unique string.
+    def randstr(self, unique: bool = False,
+                length: Optional[int] = None) -> str:
+        """Generate random string value.
 
-        :return: Unique string.
+        This method can be especially useful when you need to generate
+        only unique values in your provider. Just pass parameter unique=True.
+
+        Basically, this method is just a simple wrapper around uuid.uuid4().
+
+        :param unique: Generate only unique values.
+        :param length: Length of string. Default range is (min=16, max=128).
+        :return: Random string.
+
         """
-        return str(uuid.uuid4().hex)
+        if unique:
+            return str(uuid.uuid4().hex)
+
+        if length is None:
+            length = self.randint(16, 128)
+
+        _string = string.ascii_letters + string.digits
+        _string = ''.join(
+            secrets.choice(_string) for _ in range(length)
+        )
+        return _string
 
 
 def get_random_item(enum: Any, rnd: Optional[Random] = None) -> Any:

@@ -87,12 +87,24 @@ def test_get_random_item(random):
 
 
 @pytest.mark.parametrize(
+    'length', [
+        64,
+        128,
+        256,
+    ],
+)
+def test_randstr(random, length):
+    result = random.randstr(length=length)
+    assert len(result) == length
+
+
+@pytest.mark.parametrize(
     'count', [
         1000,
         10000,
         100000,
     ],
 )
-def test_unique_str(random, count):
-    results = [random.randstr() for _ in range(count)]
+def test_randstr_unique(random, count):
+    results = [random.randstr(unique=True) for _ in range(count)]
     assert len(results) == len(set(results))
