@@ -101,7 +101,7 @@ class Random(random_module.Random):
         return round(a + (b - a) * self.random(), precision)
 
     @staticmethod
-    def unique_str() -> str:
+    def randstr() -> str:
         """Generate random unique string.
 
         :return: Unique string.

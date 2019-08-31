@@ -6,7 +6,7 @@ Version 3.4.0
 **Added**:
 
 - Added an alias ``first_name()`` for ``Person().name()``
-- Added method ``unique_str()`` for class ``Random()``
+- Added method ``randstr()`` for class ``Random()``
 
 
 **Fixed**:

@@ -94,5 +94,5 @@ def test_get_random_item(random):
     ],
 )
 def test_unique_str(random, count):
-    results = [random.unique_str() for _ in range(count)]
+    results = [random.randstr() for _ in range(count)]
     assert len(results) == len(set(results))
