@@ -84,3 +84,15 @@ def test_get_random_item(random):
     result_1 = get_random_item(Gender, rnd=random)
     result_2 = get_random_item(Gender, rnd=random)
     assert result_1 == result_2
+
+
+@pytest.mark.parametrize(
+    'count', [
+        1000,
+        10000,
+        100000,
+    ],
+)
+def test_unique_str(random, count):
+    results = [random.unique_str() for _ in range(count)]
+    assert len(results) == len(set(results))

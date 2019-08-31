@@ -6,12 +6,16 @@ Version 3.4.0
 **Added**:
 
 - Added an alias ``first_name()`` for ``Person().name()``
+- Added method ``unique_str()`` for class ``Random()``
 
 
 **Fixed**:
 
 - Fixed issue with invalid email addresses on using custom domains without ``@`` for ``Person().email()``
 
+**Updated**:
+
+- Updated names and surnames for locale ``ru``
 
 Version 3.3.0
 -------------

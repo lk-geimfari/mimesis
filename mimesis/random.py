@@ -13,7 +13,8 @@ get a random item of the enum object.
 
 import os
 import random as random_module
-from typing import Any, List, Optional, Sequence
+import uuid
+from typing import Any, List, Optional
 
 __all__ = ['Random', 'get_random_item', 'random']
 
@@ -98,6 +99,14 @@ class Random(random_module.Random):
             precision in decimal digits, default is 15.
         """
         return round(a + (b - a) * self.random(), precision)
+
+    @staticmethod
+    def unique_str() -> str:
+        """Generate random unique string.
+
+        :return: Unique string.
+        """
+        return str(uuid.uuid4().hex)
 
 
 def get_random_item(enum: Any, rnd: Optional[Random] = None) -> Any:
