@@ -69,19 +69,21 @@ Inserting data into database
 If you need to generate data and import it into a database we strongly
 recommend generating data in chunks rather than *600k* at once. Keep
 in mind the possible limitations of databases, ORM, etc. The smaller the
-generated data chunks are, the faster the process will go.
+generated data chunks are, the faster the process will go. Below you can
+see an abstract example of a `Django command <https://docs.djangoproject.com/en/2.2/howto/custom-management-commands/>`_ which uses Mimesis to bootstrap database.
 
 Good:
 
-.. code:: python
+.. code:: text
 
-    >>> User().fill_fake(count=2000, locale='de')
+    ~ python manage.py fill_fake_db --count=1000 --locale=de
 
 Very bad:
 
 .. code:: python
 
-    >>> User().fill_fake(count=600000, locale='de')
+    >>> python manage.py fill_fake_db --count=600000 --locale=de
+
 
 
 Importing images
