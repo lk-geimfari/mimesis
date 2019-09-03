@@ -80,9 +80,9 @@ Good:
 
 Very bad:
 
-.. code:: python
+.. code:: text
 
-    >>> python manage.py fill_fake_db --count=600000 --locale=de
+    ~ python manage.py fill_fake_db --count=600000 --locale=de
 
 
 
