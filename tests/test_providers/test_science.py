@@ -24,13 +24,11 @@ class TestScience(object):
         assert result in MATH_FORMULAS
 
     def test_chemical_element(self, science):
-        # Some issues with Farsi
-        if science.get_current_locale() != 'fa':
-            result = science.chemical_element(name_only=True)
-            assert len(result) >= 1
+        result = science.chemical_element(name_only=True)
+        assert len(result) >= 1
 
-            result = science.chemical_element(name_only=False)
-            assert isinstance(result, dict)
+        result = science.chemical_element(name_only=False)
+        assert isinstance(result, dict)
 
     def test_atomic_number(self, default_science):
         result = default_science.atomic_number()
