@@ -80,6 +80,7 @@ Patches and Suggestions
 -  Anphisa `(anphisa)`_
 -  Gary Donovan `(garyd203)`_
 -  Shanmuga Priya R `(Shanmugapriya03)`_
+- Harsh Vijay `(hvijaycse)`_
 
 .. _(lk-geimfari): https://github.com/lk-geimfari
 .. _(sobolevn): https://github.com/sobolevn
