@@ -206,11 +206,11 @@ class Internet(BaseProvider):
 
         return tags
 
-    def home_page(self, Level=1, tld_type: Optional[TLDType] = None) -> str:
+    def home_page(self, L = 1, tld_type: Optional[TLDType] = None) -> str:
         """Generate a random home page.
 
         :param tld_type: TLD type.
-        :param Level : Domain level Example :- .co.in .
+        :param L : Domain level Example :- .co.in .
         :return: Random home page.
 
         :Example:
@@ -218,7 +218,7 @@ class Internet(BaseProvider):
         """
         resource = self.random.choice(USERNAMES)
         domain = self.top_level_domain(
-            Level,
+            L,
             tld_type=tld_type,
         )
 
@@ -240,9 +240,9 @@ class Internet(BaseProvider):
         while(L) :
             dom = self.random.choice(TLD[key])
             if dom not in domain:
-                domain+ = dom
+                domain = domain + dom
                 L- = 1
-            return domain
+        return domain
 
     def user_agent(self) -> str:
         """Get a random user agent.
