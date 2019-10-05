@@ -17,6 +17,12 @@ Within the pre-activated environment, use the following command to install Mimes
 
     (env) ➜ pip install mimesis
 
+Use the following command to install Mimesis in Jupyter Notebook:
+
+.. code-block:: sh
+
+    (env) ➜ ! pip install mimesis
+
 Installation using *Pipenv* is pretty same:
 
 .. code-block:: sh
