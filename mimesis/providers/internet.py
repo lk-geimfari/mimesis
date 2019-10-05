@@ -241,7 +241,7 @@ class Internet(BaseProvider):
             dom = self.random.choice(TLD[key])
             if dom not in domain:
                 domain = domain + dom
-                L- = 1
+                L = L - 1
         return domain
 
     def user_agent(self) -> str:
