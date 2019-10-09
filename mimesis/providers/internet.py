@@ -206,12 +206,12 @@ class Internet(BaseProvider):
 
         return tags
 
-    def home_page(self, Level: int = 1,
+    def home_page(self, level: int = 1,
                   tld_type: Optional[TLDType] = None) -> str:
         """Generate a random home page.
 
         :param tld_type: TLD type.
-        :param Level : Domain level Example :- .co.in .
+        :param level : The level of domain, example :- .co.in .
         :return: Random home page.
 
         :Example:
@@ -219,32 +219,33 @@ class Internet(BaseProvider):
         """
         resource = self.random.choice(USERNAMES)
         domain = self.top_level_domain(
-            Level,
+            level,
             tld_type=tld_type,
         )
 
         return 'http://www.{}{}'.format(
             resource, domain)
 
-    def top_level_domain(self, Level: int = 1,
+    def top_level_domain(self, level: int = 1,
                          tld_type: Optional[TLDType] = None) -> str:
         """Return random top level domain.
 
         :param tld_type: Enum object DomainType
-        :param L : Domain level Example :- .co.in .
+        :param level : The level of domain, example :- .co.in .
         :return: Top level domain.
         :raises NonEnumerableError: if tld_type not in DomainType.
         """
-        if Level < 1:
-
-            Level = 1
         key = self._validate_enum(item=tld_type, enum=TLDType)
+        if level == 1:
+            return self.random.choice(TLD[key])
         domain = ''
-        while(Level):
-            dom = self.random.choice(TLD[key])
-            if dom not in domain:
-                domain = domain + dom
-                Level = Level - 1
+        while(level):
+            sub_domain = self.random.choice(TLD[key])
+            if len(sub_domain.split('.')) > 2:
+                continue
+            if sub_domain not in domain:
+                domain = domain + sub_domain
+                level = level - 1
         return domain
 
     def user_agent(self) -> str:

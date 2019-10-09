@@ -133,6 +133,8 @@ class TestInternet(object):
         ],
     )
     def test_top_level_domain(self, net, domain_type):
+        result = net.top_level_domain(level=3, tld_type=domain_type)
+        assert len(result[1:].split('.')) == 3
         result = net.top_level_domain(tld_type=domain_type)
         assert result is not None
         assert result in data.TLD[domain_type.value]
