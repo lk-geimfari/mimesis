@@ -27,7 +27,7 @@ Description
      :target: https://badge.fury.io/py/mimesis
      :alt: Package version
 
-.. image:: https://img.shields.io/badge/python-3.6%20%7C%203.7-brightgreen.svg
+.. image:: https://img.shields.io/badge/python-3.6%20%7C%203.7%20%7C%203.8-brightgreen.svg
      :target: https://badge.fury.io/py/mimesis
      :alt: Python version
 
