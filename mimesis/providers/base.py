@@ -2,7 +2,7 @@
 
 """Base data provider."""
 
-import collections
+import collections.abc
 import contextlib
 import functools
 import json
@@ -110,7 +110,7 @@ class BaseDataProvider(BaseProvider):
         :return: Updated dict.
         """
         for key, value in other.items():
-            if isinstance(value, collections.Mapping):
+            if isinstance(value, collections.abc.Mapping):
                 r = self._update_dict(initial.get(key, {}), value)
                 initial[key] = r
             else:
