@@ -29,7 +29,7 @@ matrix:
         - os: windows
           language: shell
           before_install:
-            - choco install python --version 3.6.7
+            - choco install python3 --version 3.6.8
             - python -m pip install --upgrade pip
           env: PATH=/c/Python36:/c/Python36/Scripts:$PATH
           name: "Python 3.6 on Windows 10"
@@ -37,7 +37,7 @@ matrix:
         - os: windows
           language: shell
           before_install:
-            - choco install python
+            - choco install python3 --version 3.7.5
             - python -m pip install --upgrade pip
           env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
           name: "Python 3.7 on Windows 10"
