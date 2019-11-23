@@ -81,7 +81,6 @@ deploy:
   user: lk-geimfari
   password: $SECURE_PASS
   distributions: sdist bdist_wheel
-  skip_existing: true
   on:
     branch: master
     tags: true
