@@ -1,4 +1,4 @@
-Version 3.4.0
+Version 3.3.1
 -------------
 
 .. note:: This version is still under development.
