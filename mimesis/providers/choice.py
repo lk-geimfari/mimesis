@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """Provides a random choice from items in a sequence."""
-import collections
+import collections.abc
 from typing import Any, Optional, Sequence, Union
 
 from mimesis.providers.base import BaseProvider
@@ -59,7 +59,7 @@ class Choice(BaseProvider):
         if not isinstance(length, int):
             raise TypeError('**length** must be integer.')
 
-        if not isinstance(items, collections.Sequence):
+        if not isinstance(items, collections.abc.Sequence):
             raise TypeError('**items** must be non-empty sequence.')
 
         if not items:
