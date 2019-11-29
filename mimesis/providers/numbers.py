@@ -32,7 +32,8 @@ class Numbers(BaseProvider):
         """Generate a list of random integers.
 
         Integers can be negative or positive numbers.
-        .. note: You can use both positive and negative numbers.
+
+        note: You can use both positive and negative numbers.
 
         :param start: Start.
         :param end: End.
@@ -42,8 +43,7 @@ class Numbers(BaseProvider):
         :Example:
             [-20, -19, -18, -17]
         """
-        return self.random.randints(
-            length, start, end)
+        return self.random.randints(length, start, end)
 
     @staticmethod
     def primes(start: int = 1, end: int = 999) -> List[int]:
