@@ -45,6 +45,21 @@ class Numbers(BaseProvider):
         """
         return self.random.randints(length, start, end)
 
+    def matrix(self, m: int = 3, n: int = 3,
+               start: int = 0, end: int = 10) -> list:
+        """Creates a m x n matrix of random integers.
+
+        :param m: Number of rows.
+        :param n: Number of columns.
+        :param start: Start range.
+        :param end: End range.
+        :return: Matrix with m rows and n columns.
+
+        :Example:
+            [[-2, 29, 0], [33, -42, 3], [66, -43, -12]]
+        """
+        return [self.integers(start, end, m) for _ in range(n)]
+
     @staticmethod
     def primes(start: int = 1, end: int = 999) -> List[int]:
         """Generate a list of prime numbers.

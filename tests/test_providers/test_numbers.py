@@ -43,6 +43,20 @@ class TestNumbers(object):
         element = numbers.random.choice(result)
         assert isinstance(element, int)
 
+    @pytest.mark.parametrize(
+        'start, end', [
+            (1, 10),
+            (10, 20),
+            (20, 30),
+        ],
+    )
+    def test_matrix(self, numbers, start, end):
+        result = numbers.matrix(start=start, end=end)
+        for row in result:
+            assert max(row) <= end
+            assert min(row) >= start
+            assert all(isinstance(x, int) for x in row)
+
     def test_primes(self, numbers):
         result = numbers.primes()
         assert len(result) == 168
