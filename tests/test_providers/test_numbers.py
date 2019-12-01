@@ -111,11 +111,6 @@ class TestNumbers(object):
         assert result >= 90
         assert result <= 100
 
-    def test_rating(self, numbers):
-        result = numbers.rating(maximum=5.0)
-        assert isinstance(result, float)
-        assert (result >= 0) and (result <= 5.0)
-
 
 class TestSeededNumbers(object):
 
@@ -144,10 +139,6 @@ class TestSeededNumbers(object):
         assert n1.between() == n2.between()
         assert n1.between(minimum=42, maximum=2048) == \
             n2.between(minimum=42, maximum=2048)
-
-    def test_rating(self, n1, n2):
-        assert n1.rating() == n2.rating()
-        assert n1.rating(maximum=10.0) == n2.rating(maximum=10.0)
 
     @pytest.mark.skip(reason='Method refactoring needed.')
     def test_primes(self, n1, n2):

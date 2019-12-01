@@ -122,14 +122,3 @@ class Numbers(BaseProvider):
         :return: Number.
         """
         return self.random.randint(minimum, maximum)
-
-    def rating(self, maximum: float = 5.0) -> float:
-        """Generate a random rating for something.
-
-        :param maximum: Maximum value (default is 5.0).
-        :return: Rating.
-
-        :Example:
-            4.7
-        """
-        return self.random.uniform(0, maximum, 1)
