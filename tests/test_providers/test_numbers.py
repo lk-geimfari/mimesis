@@ -62,9 +62,9 @@ class TestNumbers(object):
             (20.3, 30.8, 2.4, 4.5),
         ],
     )
-    def test_complexnums(self, numbers,
+    def test_complexes(self, numbers,
                          start_real, end_real, start_imag, end_imag):
-        result = numbers.complexnums(start_real, end_real,
+        result = numbers.complexes(start_real, end_real,
                                      start_imag, end_imag)
         assert max(e.real for e in result) <= end_real
         assert min(e.real for e in result) >= start_real
@@ -73,10 +73,10 @@ class TestNumbers(object):
         assert len(result) == 10
         assert isinstance(result, list)
 
-        result = numbers.complexnums(length=1000)
+        result = numbers.complexes(length=1000)
         assert len(result) == 1000
 
-        result = numbers.complexnums(rounding_real=4, rounding_imag=6)
+        result = numbers.complexes(rounding_real=4, rounding_imag=6)
         for e in result:
             assert len(str(e.real).split('.')[1]) <= 4
             assert len(str(e.imag).split('.')[1]) <= 6
@@ -131,9 +131,9 @@ class TestSeededNumbers(object):
         assert n1.integers(start=-999, end=999, length=10) == \
             n2.integers(start=-999, end=999, length=10)
 
-    def test_complexnums(self, n1, n2):
-        assert n1.complexnums() == n2.complexnums()
-        assert n1.complexnums(length=5) == n2.complexnums(length=5)
+    def test_complexes(self, n1, n2):
+        assert n1.complexes() == n2.complexes()
+        assert n1.complexes(length=5) == n2.complexes(length=5)
 
     def test_digit(self, n1, n2):
         assert n1.digit() == n2.digit()
