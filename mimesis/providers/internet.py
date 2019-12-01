@@ -267,7 +267,7 @@ class Internet(BaseProvider):
         :Example:
             8080
         """
-        if port_range and port_range in PortRange:
+        if isinstance(port_range, PortRange):
             return self.random.randint(*port_range.value)
         else:
             raise NonEnumerableError(PortRange)
