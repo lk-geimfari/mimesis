@@ -48,6 +48,26 @@ class Numbers(BaseProvider):
         return self.random.randints(
             length, start, end)
 
+    def complexnums(self, start_real: float = 0, end_real: float = 1,
+                    start_imag: float = 0, end_imag: float = 1,
+                    rounding_real: int = 15,  rounding_imag: int = 15,
+                    length: int = 10) -> List[complex]:
+        """Generate a list of random complex numbers.
+
+        :param start_real: Start real range.
+        :param end_real: End real range.
+        :param start_imag: Start imaginary range.
+        :param end_imag: End imaginary range.
+        :param rounding_real: Rounding real part.
+        :param rounding_imag: Roungind imaginary part.
+        :param length: Length of the list.
+        :return: A list of random complex numbers.
+        """
+        return [
+            complex(self.random.uniform(start_real, end_real, rounding_real),
+                    self.random.uniform(start_imag, end_imag, rounding_imag))
+            for _ in range(length)]
+
     @staticmethod
     def primes(start: int = 1, end: int = 999) -> List[int]:
         """Generate a list of prime numbers.

@@ -55,6 +55,32 @@ class TestNumbers(object):
         element = numbers.random.choice(result)
         assert isinstance(element, int)
 
+    @pytest.mark.parametrize(
+        'start_real, end_real, start_imag, end_imag', [
+            (1.2, 10, 1, 2.4),
+            (10.4, 20.0, 2.3, 10),
+            (20.3, 30.8, 2.4, 4.5),
+        ],
+    )
+    def test_complex(self, numbers,
+                     start_real, end_real, start_imag, end_imag):
+        result = numbers.complexnums(start_real, end_real,
+                                     start_imag, end_imag)
+        assert max(e.real for e in result) <= end_real
+        assert min(e.real for e in result) >= start_real
+        assert max(e.imag for e in result) <= end_imag
+        assert min(e.imag for e in result) >= start_imag
+        assert len(result) == 10
+        assert isinstance(result, list)
+
+        result = numbers.complex(length=1000)
+        assert len(result) == 1000
+
+        result = numbers.complex(rounding_real=4, rounding_imag=6)
+        for e in result:
+            assert len(str(e.real).split('.')[1]) <= 4
+            assert len(str(e.imag).split('.')[1]) <= 6
+
     def test_primes(self, numbers):
         result = numbers.primes()
         assert len(result) == 168
