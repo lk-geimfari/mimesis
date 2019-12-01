@@ -50,7 +50,7 @@ class Numbers(BaseProvider):
 
     def complexnums(self, start_real: float = 0, end_real: float = 1,
                     start_imag: float = 0, end_imag: float = 1,
-                    rounding_real: int = 15,  rounding_imag: int = 15,
+                    rounding_real: int = 15, rounding_imag: int = 15,
                     length: int = 10) -> List[complex]:
         """Generate a list of random complex numbers.
 
