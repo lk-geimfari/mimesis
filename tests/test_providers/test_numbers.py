@@ -19,9 +19,9 @@ class TestNumbers(object):
 
     @pytest.mark.parametrize(
         'start, end', [
-            (1, 10),
-            (10, 20),
-            (20, 30),
+            (1.2, 10),
+            (10.4, 20.0),
+            (20.3, 30.8),
         ],
     )
     def test_floats(self, numbers, start, end):

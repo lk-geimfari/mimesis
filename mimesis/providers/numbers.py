@@ -17,7 +17,7 @@ class Numbers(BaseProvider):
 
         name = 'numbers'
 
-    def floats(self, start: int = 0, end: int = 1, n: int = 2,
+    def floats(self, start: float = 0, end: float = 1, n: int = 2,
                rounding: int = 15) -> List[float]:
         """Generate a list of 10^n random float numbers.
 
