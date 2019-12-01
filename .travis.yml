@@ -16,15 +16,26 @@ matrix:
           dist: xenial
           name: "Python 3.7 on Linux"
 
+        - os: linux
+          sudo: required
+          python: "3.8"
+          dist: xenial
+          name: "Python 3.8 on Linux"
+
         - os: osx
           language: generic
-          env: PYTHON=3.6.6
+          env: PYTHON=3.6.8
           name: "Python 3.6 on macOS"
 
         - os: osx
           language: generic
-          env: PYTHON=3.7.0
+          env: PYTHON=3.7.5
           name: "Python 3.7 on macOS"
+
+        - os: osx
+          language: generic
+          env: PYTHON=3.8.0
+          name: "Python 3.8 on macOS"
 
         - os: windows
           language: shell
@@ -42,6 +53,13 @@ matrix:
           env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
           name: "Python 3.7 on Windows 10"
 
+        - os: windows
+          language: shell
+          before_install:
+            - choco install python3 --version 3.8.0
+            - python -m pip install --upgrade pip
+          env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
+          name: "Python 3.8 on Windows 10"
 
 
 
