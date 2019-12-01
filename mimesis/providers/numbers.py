@@ -17,15 +17,18 @@ class Numbers(BaseProvider):
 
         name = 'numbers'
 
-    def floats(self, n: int = 2) -> List[float]:
-        """Generate a list of random float numbers.
+    def floats(self, start: int = 0, end: int = 1, n: int = 2,
+               rounding: int = 15) -> List[float]:
+        """Generate a list of 10^n random float numbers.
 
+        :param start: Start range.
+        :param end: End range.
         :param n: Raise 10 to the 'n' power.
+        :param rounding: Max number of decimal digits.
         :return: The list of floating-point numbers.
         """
-        nums = [self.random.random()
+        return [self.random.uniform(start, end, rounding)
                 for _ in range(10 ** int(n))]
-        return nums
 
     def integers(self, start: int = 0, end: int = 10,
                  length: int = 10) -> List[int]:

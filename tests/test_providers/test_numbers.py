@@ -17,14 +17,26 @@ class TestNumbers(object):
     def test_str(self, numbers):
         assert re.match(patterns.PROVIDER_STR_REGEX, str(numbers))
 
-    def test_floats(self, numbers):
-        result = numbers.floats()
+    @pytest.mark.parametrize(
+        'start, end', [
+            (1, 10),
+            (10, 20),
+            (20, 30),
+        ],
+    )
+    def test_floats(self, numbers, start, end):
+        result = numbers.floats(start, end)
+        assert max(result) <= end
+        assert min(result) >= start
         assert len(result) == 100
         assert isinstance(result, list)
 
         result = numbers.floats(n=3)
         assert len(result) == 1000
-        assert isinstance(result, list)
+
+        result = numbers.floats(rounding=4)
+        for e in result:
+            assert len(str(e).split('.')[1]) <= 4
 
     @pytest.mark.parametrize(
         'start, end', [
