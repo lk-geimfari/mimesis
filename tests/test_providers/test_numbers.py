@@ -28,10 +28,10 @@ class TestNumbers(object):
         result = numbers.floats(start, end)
         assert max(result) <= end
         assert min(result) >= start
-        assert len(result) == 100
+        assert len(result) == 10
         assert isinstance(result, list)
 
-        result = numbers.floats(n=3)
+        result = numbers.floats(n=1000)
         assert len(result) == 1000
 
         result = numbers.floats(rounding=4)
@@ -73,7 +73,7 @@ class TestNumbers(object):
         assert len(result) == 10
         assert isinstance(result, list)
 
-        result = numbers.complexes(length=1000)
+        result = numbers.complexes(n=1000)
         assert len(result) == 1000
 
         result = numbers.complexes(rounding_real=4, rounding_imag=6)
@@ -128,12 +128,12 @@ class TestSeededNumbers(object):
 
     def test_integers(self, n1, n2):
         assert n1.integers() == n2.integers()
-        assert n1.integers(start=-999, end=999, length=10) == \
-            n2.integers(start=-999, end=999, length=10)
+        assert n1.integers(start=-999, end=999, n=10) == \
+            n2.integers(start=-999, end=999, n=10)
 
     def test_complexes(self, n1, n2):
         assert n1.complexes() == n2.complexes()
-        assert n1.complexes(length=5) == n2.complexes(length=5)
+        assert n1.complexes(n=5) == n2.complexes(n=5)
 
     def test_digit(self, n1, n2):
         assert n1.digit() == n2.digit()
