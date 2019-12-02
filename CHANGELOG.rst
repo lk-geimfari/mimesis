@@ -17,7 +17,8 @@ Version 3.3.1
 **Updated**:
 
 - Updated names and surnames for locale ``ru``
-- The ``floats()`` function in the ``Numbers`` provider now accepts arguments about the range of the generated float numbers and the rounding used.
+- The ``floats()`` function in the ``Numbers`` provider now accepts arguments about the range of the generated float numbers and the rounding used. By default, it generates a list of ``n`` float numbers insted of a list of 10^n elements.
+- The argument ``length`` of the function ``integers`` is renamed with ``n``.
 
 **Removed**:
 
