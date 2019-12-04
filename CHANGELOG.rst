@@ -7,6 +7,7 @@ Version 3.3.1
 
 - Added an alias ``first_name()`` for ``Person().name()``
 - Added method ``randstr()`` for class ``Random()``
+- Added method ``complexes()`` for provider ``Numbers()``
 
 
 **Fixed**:
@@ -16,6 +17,12 @@ Version 3.3.1
 **Updated**:
 
 - Updated names and surnames for locale ``ru``
+- The ``floats()`` function in the ``Numbers`` provider now accepts arguments about the range of the generated float numbers and the rounding used. By default, it generates a list of ``n`` float numbers insted of a list of 10^n elements.
+- The argument ``length`` of the function ``integers`` is renamed with ``n``.
+
+**Removed**:
+
+- Removed the ``rating()`` function in the ``Numbers`` provider. It can be replaced with ``floats(end=5, n=0, rounding=1)[0]``.
 
 Version 3.3.0
 -------------

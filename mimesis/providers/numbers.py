@@ -17,18 +17,20 @@ class Numbers(BaseProvider):
 
         name = 'numbers'
 
-    def floats(self, n: int = 2) -> List[float]:
+    def floats(self, start: float = 0, end: float = 1, n: int = 10,
+               rounding: int = 15) -> List[float]:
         """Generate a list of random float numbers.
 
-        :param n: Raise 10 to the 'n' power.
+        :param start: Start range.
+        :param end: End range.
+        :param n: Length of the list.
+        :param rounding: Max number of decimal digits.
         :return: The list of floating-point numbers.
         """
-        nums = [self.random.random()
-                for _ in range(10 ** int(n))]
-        return nums
+        return [self.random.uniform(start, end, rounding) for _ in range(n)]
 
     def integers(self, start: int = 0, end: int = 10,
-                 length: int = 10) -> List[int]:
+                 n: int = 10) -> List[int]:
         """Generate a list of random integers.
 
         Integers can be negative or positive numbers.
@@ -36,14 +38,33 @@ class Numbers(BaseProvider):
 
         :param start: Start.
         :param end: End.
-        :param length: Length of list.
+        :param n: Length of list.
         :return: List of integers.
 
         :Example:
             [-20, -19, -18, -17]
         """
-        return self.random.randints(
-            length, start, end)
+        return self.random.randints(n, start, end)
+
+    def complexes(self, start_real: float = 0, end_real: float = 1,
+                  start_imag: float = 0, end_imag: float = 1,
+                  rounding_real: int = 15, rounding_imag: int = 15,
+                  n: int = 10) -> List[complex]:
+        """Generate a list of random complex numbers.
+
+        :param start_real: Start real range.
+        :param end_real: End real range.
+        :param start_imag: Start imaginary range.
+        :param end_imag: End imaginary range.
+        :param rounding_real: Rounding real part.
+        :param rounding_imag: Roungind imaginary part.
+        :param n: Length of the list.
+        :return: A list of random complex numbers.
+        """
+        return [
+            complex(self.random.uniform(start_real, end_real, rounding_real),
+                    self.random.uniform(start_imag, end_imag, rounding_imag))
+            for _ in range(n)]
 
     @staticmethod
     def primes(start: int = 1, end: int = 999) -> List[int]:
@@ -99,14 +120,3 @@ class Numbers(BaseProvider):
         :return: Number.
         """
         return self.random.randint(minimum, maximum)
-
-    def rating(self, maximum: float = 5.0) -> float:
-        """Generate a random rating for something.
-
-        :param maximum: Maximum value (default is 5.0).
-        :return: Rating.
-
-        :Example:
-            4.7
-        """
-        return self.random.uniform(0, maximum, 1)
