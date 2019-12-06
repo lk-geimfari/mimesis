@@ -2,7 +2,7 @@
 
 """Provides data related to numbers."""
 
-from typing import Callable, List, Union,
+from typing import Callable, List, Union
 
 from mimesis.providers.base import BaseProvider
 
