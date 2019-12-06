@@ -2,7 +2,7 @@
 
 """Provides data related to numbers."""
 
-from typing import List, Union, Callable
+from typing import Callable, List, Union,
 
 from mimesis.providers.base import BaseProvider
 
@@ -66,7 +66,7 @@ class Numbers(BaseProvider):
                     self.random.uniform(start_imag, end_imag, rounding_imag))
             for _ in range(n)]
 
-    def matrix(self, m: int = 10, n: int = 10, num_type: str = "floats",
+    def matrix(self, m: int = 10, n: int = 10, num_type: str = 'floats',
                **kwargs) -> List[List]:
         """Generate a m x n matrix with random numbers.
 
