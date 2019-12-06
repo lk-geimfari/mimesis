@@ -2,7 +2,7 @@
 
 """Provides data related to numbers."""
 
-from typing import List, Union
+from typing import List, Union, Callable
 
 from mimesis.providers.base import BaseProvider
 
@@ -65,6 +65,32 @@ class Numbers(BaseProvider):
             complex(self.random.uniform(start_real, end_real, rounding_real),
                     self.random.uniform(start_imag, end_imag, rounding_imag))
             for _ in range(n)]
+
+    def matrix(self, m: int = 10, n: int = 10, num_type: str = "floats",
+               **kwargs) -> List[List]:
+        """Generate a m x n matrix with random numbers.
+
+        num_type could be "float", "integers" or "complexes".
+
+        :param m: Number of rows.
+        :param n: Number of columns.
+        :param num_type: Type of numbers to generate.
+        :param **kwargs: Other specific arguments.
+        :return: A matrix of random numbers.
+        """
+        gen_func: Callable
+        if num_type == 'floats':
+            gen_func = self.floats
+        elif num_type == 'integers':
+            gen_func = self.integers
+        elif num_type == 'complexes':
+            gen_func = self.complexes
+        else:
+            raise ValueError(
+                'num_type should be "floats", "integers" or "complexes"')
+
+        kwargs.update({'n': n})
+        return [gen_func(**kwargs) for _ in range(m)]
 
     @staticmethod
     def primes(start: int = 1, end: int = 999) -> List[int]:
