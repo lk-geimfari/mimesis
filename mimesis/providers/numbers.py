@@ -4,6 +4,7 @@
 
 from typing import Callable, List, Union
 
+from mimesis.enums import NumType
 from mimesis.providers.base import BaseProvider
 
 __all__ = ['Numbers']
@@ -66,31 +67,20 @@ class Numbers(BaseProvider):
                     self.random.uniform(start_imag, end_imag, rounding_imag))
             for _ in range(n)]
 
-    def matrix(self, m: int = 10, n: int = 10, num_type: str = 'floats',
-               **kwargs) -> List[List]:
+    def matrix(self, m: int = 10, n: int = 10,
+               num_type: NumType = NumType.FLOATS, **kwargs) -> List[List]:
         """Generate a m x n matrix with random numbers.
-
-        num_type could be "float", "integers" or "complexes".
 
         :param m: Number of rows.
         :param n: Number of columns.
-        :param num_type: Type of numbers to generate.
+        :param num_type: NumType enum object.
         :param **kwargs: Other specific arguments.
         :return: A matrix of random numbers.
         """
-        gen_func: Callable
-        if num_type == 'floats':
-            gen_func = self.floats
-        elif num_type == 'integers':
-            gen_func = self.integers
-        elif num_type == 'complexes':
-            gen_func = self.complexes
-        else:
-            raise ValueError(
-                'num_type should be "floats", "integers" or "complexes"')
-
+        key = self._validate_enum(num_type, NumType)
         kwargs.update({'n': n})
-        return [gen_func(**kwargs) for _ in range(m)]
+        gen_fun = getattr(self, key)
+        return [gen_fun(**kwargs) for _ in range(m)]
 
     @staticmethod
     def primes(start: int = 1, end: int = 999) -> List[int]:
