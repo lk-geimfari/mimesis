@@ -4,7 +4,7 @@ import re
 import pytest
 
 from mimesis import Numbers
-from mimesis.enums import NumType
+from mimesis.enums import NumTypes
 from mimesis.exceptions import NonEnumerableError
 
 from . import patterns
@@ -96,7 +96,7 @@ class TestNumbers(object):
                 assert isinstance(e, float)
                 assert len(str(e).split('.')[1]) <= 4
 
-        result = numbers.matrix(m=5, n=5, num_type=NumType.INTEGERS, start=5)
+        result = numbers.matrix(m=5, n=5, num_type=NumTypes.INTEGERS, start=5)
         assert len(result) == 5
         for row in result:
             assert len(row) == 5
@@ -105,7 +105,7 @@ class TestNumbers(object):
                 assert isinstance(e, int)
 
         result = numbers.matrix(
-            num_type=NumType.COMPLEXES, rounding_real=4, rounding_imag=6)
+            num_type=NumTypes.COMPLEXES, rounding_real=4, rounding_imag=6)
         assert len(result) == 10
         for row in result:
             assert len(row) == 10

@@ -4,7 +4,7 @@
 
 from typing import Callable, List, Union
 
-from mimesis.enums import NumType
+from mimesis.enums import NumTypes
 from mimesis.providers.base import BaseProvider
 
 __all__ = ['Numbers']
@@ -68,19 +68,19 @@ class Numbers(BaseProvider):
             for _ in range(n)]
 
     def matrix(self, m: int = 10, n: int = 10,
-               num_type: NumType = NumType.FLOATS, **kwargs) -> List[List]:
+               num_type: NumTypes = NumTypes.FLOATS, **kwargs) -> List[List]:
         """Generate a m x n matrix with random numbers.
 
         :param m: Number of rows.
         :param n: Number of columns.
-        :param num_type: NumType enum object.
+        :param num_type: NumTypes enum object.
         :param **kwargs: Other specific arguments.
         :return: A matrix of random numbers.
         """
-        key = self._validate_enum(num_type, NumType)
+        key = self._validate_enum(num_type, NumTypes)
         kwargs.update({'n': n})
-        gen_fun = getattr(self, key)
-        return [gen_fun(**kwargs) for _ in range(m)]
+        method = getattr(self, key)
+        return [method(**kwargs) for _ in range(m)]
 
     @staticmethod
     def primes(start: int = 1, end: int = 999) -> List[int]:

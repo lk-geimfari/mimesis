@@ -218,7 +218,7 @@ class UnitName(Enum):
     RADIOACTIVITY = ('becquerel', 'Bq')
 
 
-class NumType(Enum):
+class NumTypes(Enum):
     """Provide number types.
 
     An argument for :meth:`~mimesis.Numbers.matrix()`.
