@@ -2,8 +2,9 @@
 
 """Provides data related to numbers."""
 
-from typing import List, Union
+from typing import Callable, List, Union
 
+from mimesis.enums import NumTypes
 from mimesis.providers.base import BaseProvider
 
 __all__ = ['Numbers']
@@ -65,6 +66,21 @@ class Numbers(BaseProvider):
             complex(self.random.uniform(start_real, end_real, rounding_real),
                     self.random.uniform(start_imag, end_imag, rounding_imag))
             for _ in range(n)]
+
+    def matrix(self, m: int = 10, n: int = 10,
+               num_type: NumTypes = NumTypes.FLOATS, **kwargs) -> List[List]:
+        """Generate a m x n matrix with random numbers.
+
+        :param m: Number of rows.
+        :param n: Number of columns.
+        :param num_type: NumTypes enum object.
+        :param **kwargs: Other specific arguments.
+        :return: A matrix of random numbers.
+        """
+        key = self._validate_enum(num_type, NumTypes)
+        kwargs.update({'n': n})
+        method = getattr(self, key)
+        return [method(**kwargs) for _ in range(m)]
 
     @staticmethod
     def primes(start: int = 1, end: int = 999) -> List[int]:

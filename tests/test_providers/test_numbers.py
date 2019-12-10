@@ -4,6 +4,8 @@ import re
 import pytest
 
 from mimesis import Numbers
+from mimesis.enums import NumTypes
+from mimesis.exceptions import NonEnumerableError
 
 from . import patterns
 
@@ -81,6 +83,36 @@ class TestNumbers(object):
             assert len(str(e.real).split('.')[1]) <= 4
             assert len(str(e.imag).split('.')[1]) <= 6
 
+    def test_matrix(self, numbers):
+
+        with pytest.raises(NonEnumerableError):
+            numbers.matrix(num_type='int')
+
+        result = numbers.matrix(rounding=4)
+        assert len(result) == 10
+        for row in result:
+            assert len(row) == 10
+            for e in row:
+                assert isinstance(e, float)
+                assert len(str(e).split('.')[1]) <= 4
+
+        result = numbers.matrix(m=5, n=5, num_type=NumTypes.INTEGERS, start=5)
+        assert len(result) == 5
+        for row in result:
+            assert len(row) == 5
+            assert min(row) >= 5
+            for e in row:
+                assert isinstance(e, int)
+
+        result = numbers.matrix(
+            num_type=NumTypes.COMPLEXES, rounding_real=4, rounding_imag=6)
+        assert len(result) == 10
+        for row in result:
+            assert len(row) == 10
+            for e in row:
+                assert len(str(e.real).split('.')[1]) <= 4
+                assert len(str(e.imag).split('.')[1]) <= 6
+
     def test_primes(self, numbers):
         result = numbers.primes()
         assert len(result) == 168
@@ -134,6 +166,10 @@ class TestSeededNumbers(object):
     def test_complexes(self, n1, n2):
         assert n1.complexes() == n2.complexes()
         assert n1.complexes(n=5) == n2.complexes(n=5)
+
+    def test_matrix(self, n1, n2):
+        assert n1.matrix() == n2.matrix()
+        assert n1.matrix(n=5) == n2.matrix(n=5)
 
     def test_digit(self, n1, n2):
         assert n1.digit() == n2.digit()

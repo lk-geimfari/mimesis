@@ -216,3 +216,14 @@ class UnitName(Enum):
     INDUCTANCE = ('henry', 'H')
     TEMPERATURE = ('Celsius', '°C')
     RADIOACTIVITY = ('becquerel', 'Bq')
+
+
+class NumTypes(Enum):
+    """Provide number types.
+
+    An argument for :meth:`~mimesis.Numbers.matrix()`.
+    """
+
+    FLOATS = 'floats'
+    INTEGERS = 'integers'
+    COMPLEXES = 'complexes'

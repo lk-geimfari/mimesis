@@ -8,7 +8,7 @@ Version 3.3.1
 - Added an alias ``first_name()`` for ``Person().name()``
 - Added method ``randstr()`` for class ``Random()``
 - Added method ``complexes()`` for provider ``Numbers()``
-
+- Added method ``matrix`` for provider ``Numbers()``
 
 **Fixed**:
 
