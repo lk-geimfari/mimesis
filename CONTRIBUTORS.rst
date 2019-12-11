@@ -23,6 +23,7 @@ Special thanks
 -  Ryan Varley `(ryanvarley)`_
 -  Ruslan Valerievich `(Valerievich)`_
 -  dy `(duckyou)`_
+-  Emilio Cecchini `(ceccoemi)`_
 
 Patches and Suggestions
 ~~~~~~~~~~~~~~~~~~~~~~~
