@@ -11,7 +11,7 @@ from mimesis.data import GMT_OFFSETS, ROMAN_NUMS, TIMEZONES
 from mimesis.providers.base import BaseDataProvider
 from mimesis.typing import Date, DateTime, Time
 
-__all__ = ['Datetime']
+__all__ = ['Datetime', 'FutureDatetime']
 
 
 class Datetime(BaseDataProvider):
@@ -255,3 +255,38 @@ class Datetime(BaseDataProvider):
             return timegm(stamp.utctimetuple())
 
         return stamp.strftime('%Y-%m-%dT%H:%M:%SZ')
+
+
+class FutureDatetime(Datetime):
+    """Class for generating data related to the date and time in the future."""
+
+    def __init__(self, days: int = 1, weeks: int = 0, hours: int = 0,
+                 minutes: int = 0, seconds: int = 0, *args, **kwargs):
+        """Initialize attributes.
+
+        :param days: Number of days to add to the current date.
+        :param weeks: Number of weeks to add to the current date.
+        :param hours: Number of hours to add to the current date.
+        :param minutes: Number of minutes to add to the current date.
+        :param seconds: Number of seconds to add to the current date.
+        """
+        super().__init__(*args, **kwargs)
+        self.future = datetime.now() + timedelta(
+            days=days, weeks=weeks, hours=hours, minutes=minutes,
+            seconds=seconds)
+
+    class Meta:
+        """Class for metadata."""
+
+        name = 'future_datetime'
+
+    def week_date(self, end: int = None) -> str:
+        """Get week number with year from the year of the current future.
+
+        :param end: To end.
+        :raises: ValueError: When ``end`` is before the current future.
+        :return: Week number.
+        """
+        if not end:
+            end = (self.future + timedelta(days=360)).year
+        return super().week_date(start=self.future.year, end=end)
