@@ -288,5 +288,7 @@ class FutureDatetime(Datetime):
         :return: Week number.
         """
         if not end:
-            end = (self.future + timedelta(days=360)).year
+            end = self.future.year + 1
+        elif end < self.future.year:
+            raise ValueError('Year {end} is before the current future')
         return super().week_date(start=self.future.year, end=end)

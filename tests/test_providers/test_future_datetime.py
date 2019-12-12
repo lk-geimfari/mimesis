@@ -27,6 +27,9 @@ class TestFutureDatetime(object):
         assert int(year) <= _future_datetime.future.year + 1
         assert int(week) <= 52
 
+        with pytest.raises(ValueError):
+            _future_datetime.week_date(end=1950)
+
 
 class TestSeededFutureDatetime(object):
 
