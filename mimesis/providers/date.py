@@ -257,7 +257,7 @@ class Datetime(BaseDataProvider):
         return stamp.strftime('%Y-%m-%dT%H:%M:%SZ')
 
 
-class FutureDatetime(Datetime):
+class FutureDatetime(BaseDataProvider):
     """Class for generating data related to the date and time in the future."""
 
     def __init__(self, days: int = 1, weeks: int = 0, hours: int = 0,
@@ -271,6 +271,7 @@ class FutureDatetime(Datetime):
         :param seconds: Number of seconds to add to the current date.
         """
         super().__init__(*args, **kwargs)
+        self._dt = Datetime(*args, **kwargs)
         self.future = datetime.now() + timedelta(
             days=days, weeks=weeks, hours=hours, minutes=minutes,
             seconds=seconds)
@@ -280,15 +281,71 @@ class FutureDatetime(Datetime):
 
         name = 'future_datetime'
 
+    def _validate_future_year(self, year: int) -> int:
+        """Check if the year is after the year of the current future.
+
+        :param year: Year to validate.
+        :raise ValueError: If ``year`` is before the year of the
+            current future
+        """
+        if year < self.future.year:
+            raise ValueError(f'Year {year} is before the current future')
+
     def week_date(self, end: int = None) -> str:
         """Get week number with year from the year of the current future.
 
         :param end: To end.
-        :raises: ValueError: When ``end`` is before the current future.
+        :raises ValueError: When ``end`` is before the year of the
+            current future.
         :return: Week number.
         """
         if not end:
             end = self.future.year + 1
-        elif end < self.future.year:
-            raise ValueError('Year {end} is before the current future')
-        return super().week_date(start=self.future.year, end=end)
+        else:
+            self._validate_future_year(end)
+        return self._dt.week_date(start=self.future.year, end=end)
+
+    def year(self, maximum: int = None) -> int:
+        """Generate a random year from the year of the current future.
+
+        :param maximum: Maximum value.
+        :raises ValueError: When ``maximum`` is before the year of the
+            current future.
+        :return: Year.
+        """
+        if not maximum:
+            maximum = self.future.year + 65
+        else:
+            self._validate_future_year(maximum)
+        return self._dt.year(minimum=self.future.year, maximum=maximum)
+
+    def date(self, end: int = None) -> Date:
+        """Generate random date object from the year of the current future.
+
+        :param end: Maximum value of year.
+        :raises ValueError: When ``end`` is before the year of the
+            current future.
+        :return: Formatted date.
+        """
+        if not end:
+            end = self.future.year + 19
+        else:
+            self._validate_future_year(end)
+        return self._dt.date(start=self.future.year, end=end)
+
+    def datetime(self, end: int = None,
+                 timezone: Optional[str] = None) -> DateTime:
+        """Generate random datetime from the year of the current future.
+
+        :param end: Maximum value of year.
+        :raises ValueError: When ``end`` is before the year of the
+            current future.
+        :param timezone: Set custom timezone (pytz required).
+        :return: Datetime
+        """
+        if not end:
+            end = self.future.year + 19
+        else:
+            self._validate_future_year(end)
+        return self._dt.datetime(
+            start=self.future.year, end=end, timezone=timezone)
