@@ -1,4 +1,4 @@
-Version 3.3.1
+Version 4.0.0
 -------------
 
 .. note:: This version is still under development.
@@ -9,6 +9,8 @@ Version 3.3.1
 - Added method ``randstr()`` for class ``Random()``
 - Added method ``complexes()`` for provider ``Numbers()``
 - Added method ``matrix`` for provider ``Numbers()``
+- Added method ``ip_v4_object()`` and ``ip_v6_object`` for provider ``Internet()``. Now you can generate IP objects, not just strings.
+- Added new parameter ``port_range`` for method ``ip_v4()``
 
 **Fixed**:
 
@@ -18,7 +20,7 @@ Version 3.3.1
 
 - Updated names and surnames for locale ``ru``
 - The ``floats()`` function in the ``Numbers`` provider now accepts arguments about the range of the generated float numbers and the rounding used. By default, it generates a list of ``n`` float numbers insted of a list of 10^n elements.
-- The argument ``length`` of the function ``integers`` is renamed with ``n``.
+- The argument ``length`` of the function ``integers`` is renamed to ``n``.
 
 **Removed**:
 

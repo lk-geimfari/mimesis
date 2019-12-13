@@ -4,7 +4,7 @@
 
 import urllib.error
 import urllib.request
-from ipaddress import IPv6Address
+from ipaddress import IPv4Address, IPv6Address
 from typing import List, Optional, Union
 
 from mimesis.data import (
@@ -37,6 +37,8 @@ class Internet(BaseProvider):
         """
         super().__init__(*args, **kwargs)
         self.__file = File(seed=self.seed)
+        self._MAX_IPV4 = (2 ** 32) - 1
+        self._MAX_IPV6 = (2 ** 128) - 1
 
     class Meta:
         """Class for metadata."""
@@ -84,36 +86,60 @@ class Internet(BaseProvider):
         """
         return self.random.choice(HTTP_METHODS)
 
-    def ip_v4(self, with_port: bool = False) -> str:
-        """Generate a random IPv4 address.
+    def ip_v4_object(self) -> IPv4Address:
+        """Generate random IPv4Address object.
 
-        :param with_port: Add port to IP.
-        :return: Random IPv4 address.
+        See documentation for module ipaddress:
+        https://docs.python.org/3.7/library/ipaddress.html
+
+        :return: IPv4Address object.
+        """
+        return IPv4Address(
+            self.random.randint(0, self._MAX_IPV4),
+        )
+
+    def ip_v6_object(self) -> IPv6Address:
+        """Generate random IPv6Address object.
+
+        See documentation for module ipaddress:
+        https://docs.python.org/3.7/library/ipaddress.html
+
+        :return: IPv6Address object.
+        """
+        return IPv6Address(
+            self.random.randint(
+                0, self._MAX_IPV6,
+            ),
+        )
+
+    def ip_v4(self, with_port: bool = False,
+              port_range: PortRange = PortRange.ALL) -> str:
+        """Generate a random IPv4 address as string.
+
+        :param port_range: PortRange enum object.
+        :param with_port: Add port from PortRange to IP.
+        :return: IPv4 address as string.
 
         :Example:
-            19.121.223.58
+            19.121.223.58 or 19.121.223.58:8000
         """
-        ip = '.'.join(str(self.random.randint(0, 255)) for _ in range(4))
+        ip = str(self.ip_v4_object())
 
         if with_port:
-            ip += ':{}'.format(self.port())
+            port = self.port(port_range=port_range)
+            return '{}:{}'.format(ip, port)
 
         return ip
 
     def ip_v6(self) -> str:
-        """Generate a random IPv6 address.
+        """Generate a random IPv6 address as string.
 
-        :return: Random IPv6 address.
+        :return: IPv6 address string.
 
         :Example:
             2001:c244:cf9d:1fb1:c56d:f52c:8a04:94f3
         """
-        ipv6 = IPv6Address(
-            self.random.randint(
-                0, 2 ** 128 - 1,
-            ),
-        )
-        return str(ipv6)
+        return str(self.ip_v6_object())
 
     def mac_address(self) -> str:
         """Generate a random MAC address.
@@ -260,7 +286,7 @@ class Internet(BaseProvider):
     def port(self, port_range: PortRange = PortRange.ALL) -> int:
         """Generate random port.
 
-        :param port_range: Range enum object.
+        :param port_range: PortRange enum object.
         :return: Port number.
         :raises NonEnumerableError: if port_range is not in PortRange.
 

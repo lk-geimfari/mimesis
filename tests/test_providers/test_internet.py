@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import re
+from ipaddress import IPv4Address, IPv6Address
 
 import pytest
 
@@ -77,12 +78,38 @@ class TestInternet(object):
         with pytest.raises(NonEnumerableError):
             net.network_protocol(layer='nil')
 
-    def test_ip_v4(self, net):
-        ip = net.ip_v4()
-        assert re.match(patterns.IP_V4_REGEX, ip)
-        ip_with_port = net.ip_v4(with_port=True)
-        port = int(ip_with_port.split(':')[1])
-        assert (port >= 1) and (port <= 65535)
+    def test_ip_v4_object(self, net):
+        ip = net.ip_v4_object()
+        assert ip.version == 4
+        assert ip.max_prefixlen == 32
+        assert re.match(patterns.IP_V4_REGEX, ip.exploded)
+        assert isinstance(ip, IPv4Address)
+
+    @pytest.mark.parametrize(
+        'with_port, port_range', [
+            (False, PortRange.ALL),
+            (True, PortRange.ALL),
+            (True, PortRange.WELL_KNOWN),
+            (True, PortRange.EPHEMERAL),
+            (True, PortRange.REGISTERED),
+        ],
+    )
+    def test_ip_v4(self, net, with_port, port_range):
+        ip = net.ip_v4(with_port, port_range)
+
+        if not with_port:
+            assert re.match(patterns.IP_V4_REGEX, ip)
+        else:
+            port = int(ip.split(':')[-1])
+            port_start, port_end = port_range.value
+            assert port_start <= port <= port_end
+
+    def test_ip_v6_object(self, net):
+        ip = net.ip_v6_object()
+        assert ip.version == 6
+        assert ip.max_prefixlen == 128
+        assert re.match(patterns.IP_V6_REGEX, ip.exploded)
+        assert isinstance(ip, IPv6Address)
 
     def test_ip_v6(self, net):
         ip = net.ip_v6()
@@ -193,9 +220,17 @@ class TestSeededInternet(object):
     def test_ip_v4(self, i1, i2):
         assert i1.ip_v4() == i2.ip_v4()
         assert i1.ip_v4(with_port=True) == i2.ip_v4(with_port=True)
+        assert i1.ip_v4(with_port=True, port_range=PortRange.ALL) == \
+               i2.ip_v4(with_port=True, port_range=PortRange.ALL)
+
+    def test_ip_v4_object(self, i1, i2):
+        assert i1.ip_v4_object() == i2.ip_v4_object()
 
     def test_ip_v6(self, i1, i2):
         assert i1.ip_v6() == i2.ip_v6()
+
+    def test_ip_v6_object(self, i1, i2):
+        assert i1.ip_v6_object() == i2.ip_v6_object()
 
     def test_mac_address(self, i1, i2):
         assert i1.mac_address() == i2.mac_address()
