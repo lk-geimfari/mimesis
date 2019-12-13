@@ -75,7 +75,7 @@ class TestFutureDatetime(object):
     def test_is_subclass(self, future_dt):
         datetime_methods = [method for method in dir(Datetime)
                             if callable(getattr(Datetime, method))]
-        assert len(datetime_methods) > 0
+        assert datetime_methods
         for method in datetime_methods:
             assert method in dir(future_dt)
 
