@@ -9,6 +9,8 @@ Version 3.3.1
 - Added method ``randstr()`` for class ``Random()``
 - Added method ``complexes()`` for provider ``Numbers()``
 - Added method ``matrix`` for provider ``Numbers()``
+- Added ``FutureDatetime`` provider to generate future dates and times
+- Added ``PastDatetime`` provider to generate past dates and times
 
 **Fixed**:
 
