@@ -9,7 +9,7 @@ from mimesis.providers.choice import Choice
 from mimesis.providers.clothing import Clothing
 from mimesis.providers.code import Code
 from mimesis.providers.cryptographic import Cryptographic
-from mimesis.providers.date import Datetime, FutureDatetime
+from mimesis.providers.date import Datetime, FutureDatetime, PastDatetime
 from mimesis.providers.development import Development
 from mimesis.providers.file import File
 from mimesis.providers.food import Food
@@ -48,6 +48,7 @@ __all__ = [
     'Hardware',
     'Internet',
     'Numbers',
+    'PastDatetime',
     'Path',
     'Payment',
     'Person',

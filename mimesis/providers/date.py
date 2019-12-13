@@ -11,7 +11,7 @@ from mimesis.data import GMT_OFFSETS, ROMAN_NUMS, TIMEZONES
 from mimesis.providers.base import BaseDataProvider
 from mimesis.typing import Date, DateTime, Time
 
-__all__ = ['Datetime', 'FutureDatetime']
+__all__ = ['Datetime', 'FutureDatetime', 'PastDatetime']
 
 
 class Datetime(BaseDataProvider):
@@ -290,34 +290,6 @@ class FutureDatetime(BaseDataProvider):
         if year < self.future.year:
             raise ValueError(f'Year {year} is before the current future')
 
-    def week_date(self, end: int = None) -> str:
-        """Get week number with year from the year of the current future.
-
-        :param end: To end.
-        :raises ValueError: When ``end`` is before the year of the
-            current future.
-        :return: Week number.
-        """
-        if not end:
-            end = self.future.year + 1
-        else:
-            self._validate_future_year(end)
-        return self._dt.week_date(start=self.future.year, end=end)
-
-    def year(self, maximum: int = None) -> int:
-        """Generate a random year from the year of the current future.
-
-        :param maximum: Maximum value.
-        :raises ValueError: When ``maximum`` is before the year of the
-            current future.
-        :return: Year.
-        """
-        if not maximum:
-            maximum = self.future.year + 65
-        else:
-            self._validate_future_year(maximum)
-        return self._dt.year(minimum=self.future.year, maximum=maximum)
-
     def date(self, end: int = None) -> Date:
         """Generate random date object from the year of the current future.
 
@@ -377,3 +349,98 @@ class FutureDatetime(BaseDataProvider):
         """
         return self._dt.timestamp(
             posix=posix, start=self.future.year, end=self.future.year + 19)
+
+
+class PastDatetime(BaseDataProvider):
+    """Class for generating data related to the date and time in the past."""
+
+    def __init__(self, days: int = 1, weeks: int = 0, hours: int = 0,
+                 minutes: int = 0, seconds: int = 0, *args, **kwargs):
+        """Initialize attributes.
+
+        :param days: Number of days to subtract to the current date.
+        :param weeks: Number of weeks to subtract to the current date.
+        :param hours: Number of hours to subtract to the current date.
+        :param minutes: Number of minutes to subtract to the current date.
+        :param seconds: Number of seconds to subtract to the current date.
+        """
+        super().__init__(*args, **kwargs)
+        self.past = datetime.now() - timedelta(
+            days=days, weeks=weeks, hours=hours, minutes=minutes,
+            seconds=seconds)
+        self._dt = Datetime(*args, **kwargs)
+
+    class Meta:
+        """Class for metadata."""
+
+        name = 'past_datetime'
+
+    def _validate_past_year(self, year: int) -> int:
+        """Check if the year is after the year of the current past.
+
+        :param year: Year to validate.
+        :raise ValueError: If ``year`` is after the year of the
+            current past
+        """
+        if year > self.past.year:
+            raise ValueError(f'Year {year} is after the current past')
+
+    def date(self, start: int = None) -> Date:
+        """Generate random date object from the year of the current past.
+
+        :param start: Maximum value of year.
+        :raises ValueError: When ``start`` is after the year of the
+            current past.
+        :return: Formatted date.
+        """
+        if not start:
+            start = self.past.year - 19
+        else:
+            self._validate_past_year(start)
+        return self._dt.date(start=start, end=self.past.year)
+
+    def formatted_date(self, fmt: str = '', **kwargs) -> str:
+        """Generate random date as string.
+
+        :param fmt: The format of date, if None then use standard
+            accepted in the current locale.
+        :param kwargs: Keyword arguments for :meth:`~Datetime.date()`
+        :return: Formatted date.
+        """
+        return self._dt.formatted_date(fmt=fmt, start=self.past.year)
+
+    def datetime(self, start: int = None,
+                 timezone: Optional[str] = None) -> DateTime:
+        """Generate random datetime from the year of the current past.
+
+        :param start: Maximum value of year.
+        :raises ValueError: When ``start`` is after the year of the
+            current past.
+        :param timezone: Set custom timezone (pytz required).
+        :return: Datetime
+        """
+        if not start:
+            start = self.past.year - 19
+        else:
+            self._validate_past_year(start)
+        return self._dt.datetime(
+            start=start, end=self.past.year, timezone=timezone)
+
+    def formatted_datetime(self, fmt: str = '', **kwargs) -> str:
+        """Generate datetime string in human readable format.
+
+        :param fmt: Custom format (default is format for current locale)
+        :param kwargs: Keyword arguments for :meth:`~Datetime.datetime()`
+        :return: Formatted datetime string.
+        """
+        return self._dt.formatted_datetime(fmt=fmt, end=self.past.year)
+
+    def timestamp(self, posix: bool = True, **kwargs) -> Union[str, int]:
+        """Generate random timestamp.
+
+        :param posix: POSIX time.
+        :param kwargs: Kwargs for :meth:`~pastDatetime.datetime()`.
+        :return: Timestamp.
+        """
+        return self._dt.timestamp(
+            posix=posix, start=self.past.year - 19, end=self.past.year)

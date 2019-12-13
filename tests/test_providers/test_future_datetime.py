@@ -19,25 +19,6 @@ class TestFutureDatetime(object):
     def test_str(self, dt):
         assert re.match(patterns.DATA_PROVIDER_STR_REGEX, str(dt))
 
-    def test_week_date(self, future_dt):
-        result = future_dt.week_date()
-        result = result.replace('-', ' ').replace('W', '')
-        year, week = result.split(' ')
-        assert int(year) >= future_dt.future.year
-        assert int(year) <= future_dt.future.year + 1
-        assert int(week) <= 52
-
-        with pytest.raises(ValueError):
-            future_dt.week_date(end=datetime.MINYEAR)
-
-    def test_year(self, future_dt):
-        result = future_dt.year()
-        assert result >= future_dt.future.year
-        assert result <= future_dt.future.year + 65
-
-        with pytest.raises(ValueError):
-            future_dt.year(maximum=datetime.MINYEAR)
-
     def test_date(self, future_dt):
         date_object = future_dt.date()
         assert isinstance(date_object, datetime.date)
@@ -92,16 +73,6 @@ class TestSeededFutureDatetime(object):
     @pytest.fixture
     def d2(self, seed):
         return FutureDatetime(seed=seed)
-
-    def test_week_date(self, d1, d2):
-        assert d1.week_date() == d2.week_date()
-        assert d1.week_date(end=datetime.MAXYEAR) == \
-               d2.week_date(end=datetime.MAXYEAR)
-
-    def test_year(self, d1, d2):
-        assert d1.year() == d2.year()
-        assert d1.year(maximum=datetime.MAXYEAR) == \
-               d2.year(maximum=datetime.MAXYEAR)
 
     def test_date(self, d1, d2):
         assert d1.date() == d2.date()
