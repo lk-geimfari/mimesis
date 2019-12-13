@@ -4,7 +4,7 @@ import re
 
 import pytest
 
-from mimesis import FutureDatetime
+from mimesis import Datetime, FutureDatetime
 from mimesis.data import GMT_OFFSETS, TIMEZONES
 
 from . import patterns
@@ -13,39 +13,44 @@ from . import patterns
 class TestFutureDatetime(object):
 
     @pytest.fixture
-    def _future_datetime(self):
+    def future_dt(self):
         return FutureDatetime()
 
     def test_str(self, dt):
         assert re.match(patterns.DATA_PROVIDER_STR_REGEX, str(dt))
 
-    def test_week_date(self, _future_datetime):
-        result = _future_datetime.week_date()
+    def test_week_date(self, future_dt):
+        result = future_dt.week_date()
         result = result.replace('-', ' ').replace('W', '')
         year, week = result.split(' ')
-        assert int(year) >= _future_datetime.future.year
-        assert int(year) <= _future_datetime.future.year + 1
+        assert int(year) >= future_dt.future.year
+        assert int(year) <= future_dt.future.year + 1
         assert int(week) <= 52
 
         with pytest.raises(ValueError):
-            _future_datetime.week_date(end=datetime.MINYEAR)
+            future_dt.week_date(end=datetime.MINYEAR)
 
-    def test_year(self, _future_datetime):
-        result = _future_datetime.year()
-        assert result >= _future_datetime.future.year
-        assert result <= _future_datetime.future.year + 65
+    def test_year(self, future_dt):
+        result = future_dt.year()
+        assert result >= future_dt.future.year
+        assert result <= future_dt.future.year + 65
 
         with pytest.raises(ValueError):
-            _future_datetime.year(maximum=datetime.MINYEAR)
+            future_dt.year(maximum=datetime.MINYEAR)
 
-    def test_date(self, _future_datetime):
-        date_object = _future_datetime.date()
+    def test_date(self, future_dt):
+        date_object = future_dt.date()
         assert isinstance(date_object, datetime.date)
-        assert date_object.year >= _future_datetime.future.year
-        assert date_object.year <= _future_datetime.future.year + 19
+        assert date_object.year >= future_dt.future.year
+        assert date_object.year <= future_dt.future.year + 19
 
         with pytest.raises(ValueError):
-            _future_datetime.date(end=datetime.MINYEAR)
+            future_dt.date(end=datetime.MINYEAR)
+
+    def test_formatted_date(self, future_dt):
+        fmt_date = future_dt.formatted_date('%Y', end=datetime.MAXYEAR)
+        assert int(fmt_date) >= future_dt.future.year
+        assert isinstance(fmt_date, str)
 
     @pytest.mark.parametrize(
         'end, timezone', [
@@ -53,15 +58,26 @@ class TestFutureDatetime(object):
             (datetime.MAXYEAR, None),
         ],
     )
-    def test_datetime(self, _future_datetime, end, timezone):
-        dt_obj = _future_datetime.datetime(end=end, timezone=timezone)
+    def test_datetime(self, future_dt, end, timezone):
+        dt_obj = future_dt.datetime(end=end, timezone=timezone)
 
-        assert _future_datetime.future.year <= dt_obj.year
-        assert dt_obj.year <= datetime.MAXYEAR
+        assert future_dt.future.year <= dt_obj.year <= datetime.MAXYEAR
         assert isinstance(dt_obj, datetime.datetime)
 
         with pytest.raises(ValueError):
-            _future_datetime.datetime(end=datetime.MINYEAR)
+            future_dt.datetime(end=datetime.MINYEAR)
+
+    def test_formatted_datetime(self, future_dt):
+        dt_obj = future_dt.formatted_datetime('%Y', end=datetime.MAXYEAR)
+        assert int(dt_obj) >= future_dt.future.year
+        assert isinstance(dt_obj, str)
+
+    def test_is_subclass(self, future_dt):
+        datetime_methods = [method for method in dir(Datetime)
+                            if callable(getattr(Datetime, method))]
+        assert len(datetime_methods) > 0
+        for method in datetime_methods:
+            assert method in dir(future_dt)
 
 
 class TestSeededFutureDatetime(object):
@@ -88,7 +104,13 @@ class TestSeededFutureDatetime(object):
         assert d1.date() == d2.date()
         assert d1.date(end=datetime.MAXYEAR) == d2.date(end=datetime.MAXYEAR)
 
+    def test_formatted_date(self, d1, d2):
+        assert d1.formatted_date() == d2.formatted_date()
+
     def test_datetime(self, d1, d2):
         assert d1.datetime() == d2.datetime()
         assert d1.datetime(end=datetime.MAXYEAR) == \
                d2.datetime(end=datetime.MAXYEAR)
+
+    def test_formatted_datetime(self, d1, d2):
+        assert d1.formatted_datetime() == d2.formatted_datetime()

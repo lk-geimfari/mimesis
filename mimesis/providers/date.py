@@ -50,7 +50,6 @@ class Datetime(BaseDataProvider):
         See datetime module documentation for more:
         https://docs.python.org/3.7/library/datetime.html#timedelta-objects
 
-
         :param date_start: Begin of the range.
         :param date_end: End of the range.
         :param kwargs: Keyword arguments for datetime.timedelta
@@ -135,7 +134,7 @@ class Datetime(BaseDataProvider):
 
         :param start: Minimum value of year.
         :param end: Maximum value of year.
-        :return: Formatted date.
+        :return: Date.
         """
         year = self.random.randint(start, end)
         month = self.random.randint(1, 12)
@@ -271,10 +270,22 @@ class FutureDatetime(BaseDataProvider):
         :param seconds: Number of seconds to add to the current date.
         """
         super().__init__(*args, **kwargs)
-        self._dt = Datetime(*args, **kwargs)
         self.future = datetime.now() + timedelta(
             days=days, weeks=weeks, hours=hours, minutes=minutes,
             seconds=seconds)
+        self._dt = Datetime(*args, **kwargs)
+        self.day_of_week = self._dt.day_of_week
+        self.month = self._dt.month
+        self.century = self._dt.century
+        self.periodicity = self._dt.periodicity
+        self.time = self._dt.time
+        self.formatted_time = self._dt.formatted_time
+        self.day_of_month = self._dt.day_of_month
+        self.timezone = self._dt.timezone
+        self.gmt_offset = self._dt.gmt_offset
+        self.timestamp = self._dt.timestamp
+
+    bulk_create_datetimes = staticmethod(Datetime.bulk_create_datetimes)
 
     class Meta:
         """Class for metadata."""
@@ -333,6 +344,16 @@ class FutureDatetime(BaseDataProvider):
             self._validate_future_year(end)
         return self._dt.date(start=self.future.year, end=end)
 
+    def formatted_date(self, fmt: str = '', **kwargs) -> str:
+        """Generate random date as string.
+
+        :param fmt: The format of date, if None then use standard
+            accepted in the current locale.
+        :param kwargs: Keyword arguments for :meth:`~Datetime.date()`
+        :return: Formatted date.
+        """
+        return self._dt.formatted_date(fmt=fmt, start=self.future.year)
+
     def datetime(self, end: int = None,
                  timezone: Optional[str] = None) -> DateTime:
         """Generate random datetime from the year of the current future.
@@ -349,3 +370,12 @@ class FutureDatetime(BaseDataProvider):
             self._validate_future_year(end)
         return self._dt.datetime(
             start=self.future.year, end=end, timezone=timezone)
+
+    def formatted_datetime(self, fmt: str = '', **kwargs) -> str:
+        """Generate datetime string in human readable format.
+
+        :param fmt: Custom format (default is format for current locale)
+        :param kwargs: Keyword arguments for :meth:`~Datetime.datetime()`
+        :return: Formatted datetime string.
+        """
+        return self._dt.formatted_datetime(fmt=fmt, start=self.future.year)

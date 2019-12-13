@@ -142,7 +142,7 @@ class TestDatetime(object):
         ],
     )
     def test_formatted_datetime(self, _datetime, start, end):
-        dt_str = _datetime.formatted_date(fmt='%Y', start=start, end=end)
+        dt_str = _datetime.formatted_datetime(fmt='%Y', start=start, end=end)
         assert isinstance(dt_str, str)
         assert start <= int(dt_str) <= end
 
@@ -213,7 +213,7 @@ class TestSeededDatetime(object):
         assert d1.timestamp(posix=False) == d2.timestamp(posix=False)
 
     def test_formatted_datetime(self, d1, d2):
-        assert d1.formatted_date() == d2.formatted_date()
+        assert d1.formatted_datetime() == d2.formatted_datetime()
 
     def test_week_date(self, d1, d2):
         assert d1.week_date() == d2.week_date()
