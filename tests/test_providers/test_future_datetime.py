@@ -4,7 +4,7 @@ import re
 
 import pytest
 
-from mimesis import Datetime, FutureDatetime
+from mimesis import FutureDatetime
 from mimesis.data import GMT_OFFSETS, TIMEZONES
 
 from . import patterns
@@ -72,12 +72,15 @@ class TestFutureDatetime(object):
         assert int(dt_obj) >= future_dt.future.year
         assert isinstance(dt_obj, str)
 
-    def test_is_subclass(self, future_dt):
-        datetime_methods = [method for method in dir(Datetime)
-                            if callable(getattr(Datetime, method))]
-        assert datetime_methods
-        for method in datetime_methods:
-            assert method in dir(future_dt)
+    def test_timestamp(self, future_dt):
+        result = future_dt.timestamp(end=datetime.MAXYEAR)
+        assert result is not None
+        assert isinstance(result, int)
+        year = datetime.datetime.fromtimestamp(int(result)).year
+        assert year >= future_dt.future.year
+
+        result = future_dt.timestamp(posix=False, end=datetime.MAXYEAR)
+        assert isinstance(result, str)
 
 
 class TestSeededFutureDatetime(object):
@@ -114,3 +117,7 @@ class TestSeededFutureDatetime(object):
 
     def test_formatted_datetime(self, d1, d2):
         assert d1.formatted_datetime() == d2.formatted_datetime()
+
+    def test_timestamp(self, d1, d2):
+        assert d1.timestamp() == d2.timestamp()
+        assert d1.timestamp(posix=False) == d2.timestamp(posix=False)

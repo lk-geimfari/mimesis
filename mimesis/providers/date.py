@@ -274,18 +274,6 @@ class FutureDatetime(BaseDataProvider):
             days=days, weeks=weeks, hours=hours, minutes=minutes,
             seconds=seconds)
         self._dt = Datetime(*args, **kwargs)
-        self.day_of_week = self._dt.day_of_week
-        self.month = self._dt.month
-        self.century = self._dt.century
-        self.periodicity = self._dt.periodicity
-        self.time = self._dt.time
-        self.formatted_time = self._dt.formatted_time
-        self.day_of_month = self._dt.day_of_month
-        self.timezone = self._dt.timezone
-        self.gmt_offset = self._dt.gmt_offset
-        self.timestamp = self._dt.timestamp
-
-    bulk_create_datetimes = staticmethod(Datetime.bulk_create_datetimes)
 
     class Meta:
         """Class for metadata."""
@@ -379,3 +367,13 @@ class FutureDatetime(BaseDataProvider):
         :return: Formatted datetime string.
         """
         return self._dt.formatted_datetime(fmt=fmt, start=self.future.year)
+
+    def timestamp(self, posix: bool = True, **kwargs) -> Union[str, int]:
+        """Generate random timestamp.
+
+        :param posix: POSIX time.
+        :param kwargs: Kwargs for :meth:`~FutureDatetime.datetime()`.
+        :return: Timestamp.
+        """
+        return self._dt.timestamp(
+            posix=posix, start=self.future.year, end=self.future.year + 19)
