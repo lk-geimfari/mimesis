@@ -8,47 +8,43 @@ is monitored with `Codecov`_.
 Dependencies
 ~~~~~~~~~~~~
 
-Mimesis does not have any need for third-party tools, but we use a lot
-of tools in development stage, which you should install on your system
-if you want to contribute.
-
-We use ``pipenv`` to manage development dependencies.
+We use ``poetry`` to manage dependencies.
 So, please do not use ``virtualenv`` or ``pip`` directly.
+Before going any further, please,
+take a moment to read the `official documentation <https://poetry.eustace.io/>`_
+about ``poetry`` to know some basics.
 
-Firstly, install ``pipenv``, it is recommended to do so with ``pip``:
-
-.. code::
-
-  ~ ⟩ pip install pipenv
-
-
-**Installing all dependencies**
-
-Please, note that ``pipenv`` will automatically create a ``virtualenv`` for
-this project. It will use ``python_version`` specified in ``Pipfile``.
-To install (or renew) all existing dependencies run:
+Firstly, install ``poetry``, it is recommended to do so with ``pip``:
 
 .. code::
 
-  ⟩ pipenv install -d
+  ~ ⟩ pip install poetry
 
 
 
-**Activating virtualenv**
+Installing dependencies
+~~~~~~~~~~~~~~~~~~~~~~~
 
-And to activate ``virtualenv`` created by ``pipenv`` run:
+Please, note that ``poetry`` will automatically create a ``virtualenv`` for
+this project. It will use you current ``python`` version.
+To install all existing dependencies run:
 
-.. code::
+.. code:: bash
 
-  ⟩ pipenv shell
+  poetry install
 
+And to activate ``virtualenv`` created by ``poetry`` run:
 
-**Adding new dependencies**
+.. code:: bash
+
+  poetry shell
+
+Adding new dependencies
+~~~~~~~~~~~~~~~~~~~~~~~
 
 To add a new dependency you can run:
 
-- ``pipenv install -d pytest`` to install ``pytest`` as a development dependency
-
+- ``poetry add --dev pytest`` to install ``pytest`` as a development dependency
 
 Code Style
 ~~~~~~~~~~
