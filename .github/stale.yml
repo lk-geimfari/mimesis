@@ -1,7 +1,7 @@
 staleLabel: stale
 
-daysUntilStale: 30
-daysUntilClose: 7
+daysUntilStale: 50
+daysUntilClose: 10
 
 markComment: >
   This issue has been automatically marked as stale because it has not had
