@@ -78,21 +78,21 @@ before_install: |
 
 
 install:
-  - pip install pipenv
-  - pipenv install --dev --ignore-pipfile
+  - pip install poetry
+  - poetry install --no-interaction
 
 script:
-  - pipenv run py.test --cov=mimesis
-  - pipenv run mypy mimesis/ tests/
-  - pipenv run pyroma -d .
+  - poetry run py.test --cov=mimesis
+  - poetry run mypy mimesis/ tests/
+  - poetry run pyroma -d .
 
 after_success:
   codecov
 
 before_deploy:
-  - python setup.py minify
-  - pipenv run check-manifest
-  - pipenv run python setup.py check --restructuredtext --strict
+  - poetry python setup.py minify
+  - poetry run check-manifest
+  - poetry run python setup.py check --restructuredtext --strict
 
 deploy:
   provider: pypi
