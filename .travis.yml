@@ -90,7 +90,7 @@ after_success:
   codecov
 
 before_deploy:
-  - poetry setup.py minify
+  - poetry python setup.py minify
   - poetry run check-manifest
   - poetry run python setup.py check --restructuredtext --strict
 
