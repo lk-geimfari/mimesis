@@ -1,0 +1,36 @@
+[tool.poetry]
+name = "mimesis"
+version = "4.0.0"
+description = "Mimesis: fake data generator."
+authors = ["Likid Geimfari <likid.geimfari@gmail.com>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.6"
+
+[tool.poetry.dev-dependencies]
+codecov = "^2.0"
+flake8 = "^3.7"
+flake8-builtins = "^1.4"
+flake8-commas = "^2.0"
+flake8-quotes = "^2.1"
+pytest = "^5.3"
+pytest-isort = "^0.3.1"
+pytest-cov = "^2.8"
+pytest-flake8 = "^1.0"
+pytest-mock = "^1.13"
+requests = "^2.22"
+mypy = "^0.750.0"
+colorama = "^0.4.3"
+flake8-docstrings = "^1.5"
+pyroma = "^2.6"
+pygments = "^2.5"
+flake8-type-annotations = "^0.1.0"
+pytest-randomly = "^3.1"
+check-manifest = "^0.40.0"
+readme-renderer = "^24.0"
+pytz = "^2019.3"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
