@@ -79,7 +79,7 @@ before_install: |
 
 install:
   - pip install poetry
-  - poetry install --dev
+  - poetry install --no-interaction
 
 script:
   - poetry run py.test --cov=mimesis
