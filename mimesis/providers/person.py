@@ -352,7 +352,10 @@ class Person(BaseDataProvider):
         return self.random.choice(BLOOD_GROUPS)
 
     def sexual_orientation(self, symbol: bool = False) -> str:
-        """Get a random (LOL) sexual orientation.
+        """Get a random sexual orientation.
+
+        Obviously, this option will be useful for various
+        dating sites and so on.
 
         :param symbol: Unicode symbol.
         :return: Sexual orientation.
