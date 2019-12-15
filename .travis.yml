@@ -82,7 +82,7 @@ install:
   - poetry install --no-interaction
 
 script:
-  - poetry run py.test --cov=mimesis/
+  - poetry run py.test --cov=mimesis tests/
   - poetry run mypy mimesis/ tests/
   - poetry run pyroma -d .
 
