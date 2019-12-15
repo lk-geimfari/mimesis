@@ -3,63 +3,63 @@ language: python
 sudo: false
 
 matrix:
-    include:
-        - os: linux
-          sudo: required
-          python: "3.6"
-          dist: trusty
-          name: "Python 3.6 on Linux"
+  include:
+    - os: linux
+      sudo: required
+      python: "3.6"
+      dist: trusty
+      name: "Python 3.6 on Linux"
 
-        - os: linux
-          sudo: required
-          python: "3.7"
-          dist: xenial
-          name: "Python 3.7 on Linux"
+    - os: linux
+      sudo: required
+      python: "3.7"
+      dist: xenial
+      name: "Python 3.7 on Linux"
 
-        - os: linux
-          sudo: required
-          python: "3.8"
-          dist: xenial
-          name: "Python 3.8 on Linux"
+    - os: linux
+      sudo: required
+      python: "3.8"
+      dist: xenial
+      name: "Python 3.8 on Linux"
 
-        - os: osx
-          language: generic
-          env: PYTHON=3.6.8
-          name: "Python 3.6 on macOS"
+    - os: osx
+      language: generic
+      env: PYTHON=3.6.8
+      name: "Python 3.6 on macOS"
 
-        - os: osx
-          language: generic
-          env: PYTHON=3.7.5
-          name: "Python 3.7 on macOS"
+    - os: osx
+      language: generic
+      env: PYTHON=3.7.5
+      name: "Python 3.7 on macOS"
 
-        - os: osx
-          language: generic
-          env: PYTHON=3.8.0
-          name: "Python 3.8 on macOS"
+    - os: osx
+      language: generic
+      env: PYTHON=3.8.0
+      name: "Python 3.8 on macOS"
 
-        - os: windows
-          language: shell
-          before_install:
-            - choco install python3 --version 3.6.8
-            - python -m pip install --upgrade pip
-          env: PATH=/c/Python36:/c/Python36/Scripts:$PATH
-          name: "Python 3.6 on Windows 10"
+    - os: windows
+      language: shell
+      before_install:
+        - choco install python3 --version 3.6.8
+        - python -m pip install --upgrade pip
+      env: PATH=/c/Python36:/c/Python36/Scripts:$PATH
+      name: "Python 3.6 on Windows 10"
 
-        - os: windows
-          language: shell
-          before_install:
-            - choco install python3 --version 3.7.5
-            - python -m pip install --upgrade pip
-          env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
-          name: "Python 3.7 on Windows 10"
+    - os: windows
+      language: shell
+      before_install:
+        - choco install python3 --version 3.7.5
+        - python -m pip install --upgrade pip
+      env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
+      name: "Python 3.7 on Windows 10"
 
-        - os: windows
-          language: shell
-          before_install:
-            - choco install python3 --version 3.8.0
-            - python -m pip install --upgrade pip
-          env: PATH=/c/Python38:/c/Python38/Scripts:$PATH
-          name: "Python 3.8 on Windows 10"
+    - os: windows
+      language: shell
+      before_install:
+        - choco install python3 --version 3.8.0
+        - python -m pip install --upgrade pip
+      env: PATH=/c/Python38:/c/Python38/Scripts:$PATH
+      name: "Python 3.8 on Windows 10"
 
 
 
@@ -81,10 +81,16 @@ install:
   - pip install poetry
   - poetry install --no-interaction
 
-script:
-  - poetry run py.test --cov=mimesis
-  - poetry run mypy mimesis/ tests/
-  - poetry run pyroma -d .
+script: |
+  if [ "$TRAVIS_OS_NAME" == "windows" ]; then
+    poetry run py.test
+    poetry run mypy mimesis/ tests/
+    poetry run pyroma -d .
+  else
+    poetry run py.test --cov=mimesis
+    poetry run mypy mimesis/ tests/
+    poetry run pyroma -d .
+  fi
 
 after_success:
   codecov
