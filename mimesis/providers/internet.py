@@ -155,7 +155,7 @@ class Internet(BaseProvider):
             self.random.randint(0x00, 0xff),
             self.random.randint(0x00, 0xff),
         ]
-        mac = map(lambda x: '%02x' % x, mac_hex)
+        mac = map(lambda x: '{:02x}'.format(x), mac_hex)
         return ':'.join(mac)
 
     def emoji(self) -> str:
