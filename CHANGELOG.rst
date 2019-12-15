@@ -6,6 +6,7 @@ Version 4.0.0
 **Added**:
 
 - Added an alias ``first_name()`` for ``Person().name()``
+- Added an alias ``Person().sex(*args, **kwargs)`` for ``Person().gender()``
 - Added method ``randstr()`` for class ``Random()``
 - Added method ``complexes()`` for provider ``Numbers()``
 - Added method ``matrix`` for provider ``Numbers()``
