@@ -12,6 +12,7 @@ Version 4.0.0
 - Added method ``matrix`` for provider ``Numbers()``
 - Added method ``ip_v4_object()`` and ``ip_v6_object`` for provider ``Internet()``. Now you can generate IP objects, not just strings.
 - Added new parameter ``port_range`` for method ``ip_v4()``
+- Added new parameter ``separator`` for method ``Cryptographic().mnemonic_phrase()``
 
 **Fixed**:
 

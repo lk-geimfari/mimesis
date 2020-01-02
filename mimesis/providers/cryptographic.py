@@ -5,6 +5,7 @@
 import hashlib
 import secrets
 import uuid
+from typing import Optional
 
 from mimesis.enums import Algorithm
 from mimesis.providers.base import BaseProvider
@@ -101,11 +102,20 @@ class Cryptographic(BaseProvider):
         """
         return secrets.token_urlsafe(entropy)
 
-    def mnemonic_phrase(self, length: int = 12) -> str:
+    def mnemonic_phrase(self, length: int = 12,
+                        separator: Optional[str] = None) -> str:
         """Generate pseudo mnemonic phrase.
 
+        Please, keep in mind that this method generates
+        crypto-insecure values.
+
+        :param separator: Separator of phrases (Default is " ").
         :param length: Number of words.
-        :return: Mnemonic code.
+        :return: Mnemonic phrase.
         """
+        if not separator:
+            separator = ' '
+
         words = self.__words['normal']
-        return ' '.join(self.random.choice(words) for _ in range(length))
+        words_generator = (self.random.choice(words) for _ in range(length))
+        return '{}'.format(separator).join(words_generator)
