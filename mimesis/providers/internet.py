@@ -244,14 +244,14 @@ class Internet(BaseProvider):
         :return: Random home page.
 
         :Example:
-            http://www.fontir.info
+            https://fontir.info
         """
         resource = self.random.choice(USERNAMES)
         domain = self.top_level_domain(
             tld_type=tld_type,
         )
 
-        return 'http://www.{}{}'.format(
+        return 'https://{}{}'.format(
             resource, domain)
 
     def top_level_domain(self, tld_type: Optional[TLDType] = None) -> str:
