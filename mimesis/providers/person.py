@@ -188,9 +188,9 @@ class Person(BaseDataProvider):
         :Example:
             Celloid1873
         """
-        MIN_DATE = 1800
-        MAX_DATE = 2070
-        DEFAULT_TEMPLATE = 'l.d'
+        min_date = 1800
+        max_date = 2070
+        default_template = 'l.d'
 
         templates = ('U_d', 'U.d', 'U-d', 'UU-d', 'UU.d', 'UU_d',
                      'ld', 'l-d', 'Ud', 'l.d', 'l_d', 'default')
@@ -199,7 +199,7 @@ class Person(BaseDataProvider):
             template = self.random.choice(templates)
 
         if template == 'default':
-            template = DEFAULT_TEMPLATE
+            template = default_template
 
         if not re.fullmatch(r'[Ul\.\-\_d]*[Ul]+[Ul\.\-\_d]*', template):
             raise ValueError(
@@ -214,7 +214,7 @@ class Person(BaseDataProvider):
             elif tag == 'l':
                 username += self.random.choice(USERNAMES)
             elif tag == 'd':
-                username += str(self.random.randint(MIN_DATE, MAX_DATE))
+                username += str(self.random.randint(min_date, max_date))
             elif tag in '-_.':
                 username += tag
 
