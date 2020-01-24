@@ -227,3 +227,4 @@ class NumTypes(Enum):
     FLOATS = 'floats'
     INTEGERS = 'integers'
     COMPLEXES = 'complexes'
+    DECIMALS = 'decimals'
