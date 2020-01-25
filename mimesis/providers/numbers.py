@@ -2,7 +2,8 @@
 
 """Provides data related to numbers."""
 
-from typing import Callable, List, Union
+from decimal import Decimal
+from typing import List
 
 from mimesis.enums import NumTypes
 from mimesis.providers.base import BaseProvider
@@ -18,17 +19,39 @@ class Numbers(BaseProvider):
 
         name = 'numbers'
 
-    def floats(self, start: float = 0, end: float = 1, n: int = 10,
-               rounding: int = 15) -> List[float]:
+    def floating(self, start: float = -1000.0,
+                 end: float = 1000.0, precision: int = 15) -> float:
+        """Generate random float number in range [start, end].
+
+        :param start: Start range.
+        :param end:  End range.
+        :param precision: Round a number to a given
+            precision in decimal digits, default is 15.
+        :return: Float.
+        """
+        return self.random.uniform(start, end, precision)
+
+    def floats(self, start: float = 0, end: float = 1,
+               n: int = 10, precision: int = 15) -> List[float]:
         """Generate a list of random float numbers.
 
         :param start: Start range.
         :param end: End range.
         :param n: Length of the list.
-        :param rounding: Max number of decimal digits.
+        :param precision: Round a number to a given
+            precision in decimal digits, default is 15.
         :return: The list of floating-point numbers.
         """
-        return [self.random.uniform(start, end, rounding) for _ in range(n)]
+        return [self.floating(start, end, precision) for _ in range(n)]
+
+    def integer(self, start: int = -1000, end: int = 1000) -> int:
+        """Generate random integer from start to end.
+
+        :param start: Start range.
+        :param end: End range.
+        :return: Integer.
+        """
+        return self.random.randint(start, end)
 
     def integers(self, start: int = 0, end: int = 10,
                  n: int = 10) -> List[int]:
@@ -47,9 +70,31 @@ class Numbers(BaseProvider):
         """
         return self.random.randints(n, start, end)
 
+    def complex_number(self, start_real: float = 0.0,
+                       end_real: float = 1.0,
+                       start_imag: float = 0.0,
+                       end_imag: float = 1.0,
+                       precision_real: int = 15,
+                       precision_imag: int = 15) -> complex:
+        """Generate random complex number.
+
+        :param start_real: Start real range.
+        :param end_real: End real range.
+        :param start_imag: Start imaginary range.
+        :param end_imag: End imaginary range.
+        :param precision_real:  Round a real part of
+            number to a given precision.
+        :param precision_imag:  Round the imaginary part of
+            number to a given precision.
+        :return: Complex numbers.
+        """
+        real_part = self.random.uniform(start_real, end_real, precision_real)
+        imag_part = self.random.uniform(start_imag, end_imag, precision_imag)
+        return complex(real_part, imag_part)
+
     def complexes(self, start_real: float = 0, end_real: float = 1,
                   start_imag: float = 0, end_imag: float = 1,
-                  rounding_real: int = 15, rounding_imag: int = 15,
+                  precision_real: int = 15, precision_imag: int = 15,
                   n: int = 10) -> List[complex]:
         """Generate a list of random complex numbers.
 
@@ -57,82 +102,63 @@ class Numbers(BaseProvider):
         :param end_real: End real range.
         :param start_imag: Start imaginary range.
         :param end_imag: End imaginary range.
-        :param rounding_real: Rounding real part.
-        :param rounding_imag: Roungind imaginary part.
+        :param precision_real:  Round a real part of
+            number to a given precision.
+        :param precision_imag:  Round the imaginary part of
+            number to a given precision.
         :param n: Length of the list.
         :return: A list of random complex numbers.
         """
-        return [
-            complex(self.random.uniform(start_real, end_real, rounding_real),
-                    self.random.uniform(start_imag, end_imag, rounding_imag))
-            for _ in range(n)]
+        numbers = []
+        for _ in range(n):
+            numbers.append(
+                self.complex_number(
+                    start_real=start_real,
+                    end_real=end_real,
+                    start_imag=start_imag,
+                    end_imag=end_imag,
+                    precision_real=precision_real,
+                    precision_imag=precision_imag,
+                ),
+            )
+        return numbers
+
+    def decimal(self, start: float = -1000.0, end: float = 1000.0) -> Decimal:
+        """Generate random decimal number.
+
+        :param start:  Start range.
+        :param end: End range.
+        :return: Decimal object.
+        """
+        return Decimal.from_float(self.floating(start, end))
+
+    def decimals(self, start: float = 0.0,
+                 end: float = 1000.0, n: int = 10) -> List[Decimal]:
+        """Generate decimal number as Decimal objects
+
+        :param start: Start range.
+        :param end: End range.
+        :param n: Length of the list.
+        :return: A list of random decimal numbers.
+        """
+        return [self.decimal(start, end) for _ in range(n)]
 
     def matrix(self, m: int = 10, n: int = 10,
                num_type: NumTypes = NumTypes.FLOATS, **kwargs) -> List[List]:
-        """Generate a m x n matrix with random numbers.
+        """Generate m x n matrix with random numbers.
+
+        This method works with variety of types,
+        so you can pass method-specific **kwargs.
+
+        See code for more details.
 
         :param m: Number of rows.
         :param n: Number of columns.
         :param num_type: NumTypes enum object.
-        :param **kwargs: Other specific arguments.
+        :param kwargs: Other method-specific arguments.
         :return: A matrix of random numbers.
         """
         key = self._validate_enum(num_type, NumTypes)
         kwargs.update({'n': n})
         method = getattr(self, key)
         return [method(**kwargs) for _ in range(m)]
-
-    @staticmethod
-    def primes(start: int = 1, end: int = 999) -> List[int]:
-        """Generate a list of prime numbers.
-
-        :param start: First value of range.
-        :param end: Last value of range.
-        :return: A list of prime numbers from start to end.
-        """
-        # TODO: It should generate random primes with passed length.
-        sieve_size = (end // 2 - 1) if end % 2 == 0 else (end // 2)
-        sieve = [True] * sieve_size
-
-        primes = []  # list of primes
-        # add 2 to the list if it's in the given range
-        if end >= 2:
-            primes.append(2)
-        for i in range(sieve_size):
-            if sieve[i]:
-                value_at_i = i * 2 + 3
-                primes.append(value_at_i)
-                for j in range(i, sieve_size, value_at_i):
-                    sieve[j] = False
-
-        chop_index = 0
-        for i in range(len(primes)):
-            if primes[i] >= start:
-                chop_index = i
-                break
-        return primes[chop_index:]
-
-    def digit(self, to_bin: bool = False) -> Union[str, int]:
-        """Get a random digit.
-
-        :param to_bin: If True then convert to binary.
-        :return: Digit.
-
-        :Example:
-            4.
-        """
-        digit = self.random.randint(0, 9)
-
-        if to_bin:
-            return bin(digit)
-
-        return digit
-
-    def between(self, minimum: int = 1, maximum: int = 1000) -> int:
-        """Generate a random number between minimum and maximum.
-
-        :param minimum: Minimum of range.
-        :param maximum: Maximum of range.
-        :return: Number.
-        """
-        return self.random.randint(minimum, maximum)

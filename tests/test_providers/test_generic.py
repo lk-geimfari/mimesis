@@ -160,7 +160,6 @@ class TestSeededGeneric(object):
 
     def test_generic_numbers(self, g1, g2):
         assert g1.numbers.integers() == g2.numbers.integers()
-        assert g1.numbers.digit() == g2.numbers.digit()
 
     def test_generic_path(self, g1, g2):
         assert g1.path.root() == g2.path.root()
