@@ -145,17 +145,17 @@ class Numbers(BaseProvider):
 
     def matrix(self, m: int = 10, n: int = 10,
                num_type: NumTypes = NumTypes.FLOATS, **kwargs) -> List[List]:
-        """Generate a m x n matrix with random numbers.
+        """Generate m x n matrix with random numbers.
 
         This method works with variety of types,
         so you can pass method-specific **kwargs.
 
-        See NumType enum object.
+        See code for more details.
 
         :param m: Number of rows.
         :param n: Number of columns.
         :param num_type: NumTypes enum object.
-        :param kwargs: Other specific arguments .
+        :param kwargs: Other method-specific arguments.
         :return: A matrix of random numbers.
         """
         key = self._validate_enum(num_type, NumTypes)
