@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-import re
 import decimal
+import re
 
 import pytest
 
@@ -58,6 +58,13 @@ class TestNumbers(object):
         element = numbers.random.choice(result)
         assert isinstance(element, int)
 
+    @pytest.mark.parametrize(
+        'start, end', [
+            (1, 10),
+            (10, 20),
+            (20, 30),
+        ],
+    )
     def test_decimals(self, numbers, start, end):
         result = numbers.decimals(start=start, end=end)
 
@@ -127,18 +134,17 @@ class TestNumbers(object):
     def test_integer(self, numbers):
         result = numbers.integer(-100, 100)
         assert isinstance(result, int)
-        assert result >= -100
-        assert result <= 100
+        assert -100 <= result <= 100
 
     def test_float(self, numbers):
-        result = numbers.float(-100, 100, precision=15)
+        result = numbers.floating(-100, 100, precision=15)
         assert isinstance(result, float)
-        assert result >= -100
-        assert result <= 100
+        assert -100 <= result <= 100
         assert len(str(result).split('.')[1]) <= 15
 
     def test_decimal(self, numbers):
         result = numbers.decimal(-100, 100)
+        assert -100 <= result <= 100
         assert isinstance(result, decimal.Decimal)
 
 
@@ -155,6 +161,10 @@ class TestSeededNumbers(object):
     def test_floats(self, n1, n2):
         assert n1.floats() == n2.floats()
         assert n1.floats(n=5) == n2.floats(n=5)
+
+    def test_decimals(self, n1, n2):
+        assert n1.decimals() == n2.decimals()
+        assert n1.decimals(n=5) == n2.decimals(n=5)
 
     def test_integers(self, n1, n2):
         assert n1.integers() == n2.integers()
@@ -173,7 +183,7 @@ class TestSeededNumbers(object):
         assert n1.integer() == n2.integer()
 
     def test_float(self, n1, n2):
-        assert n1.float() == n2.float()
+        assert n1.floating() == n2.floating()
 
     def test_decimal(self, n1, n2):
         assert n1.decimal() == n2.decimal()

@@ -86,10 +86,15 @@ class Numbers(BaseProvider):
                num_type: NumTypes = NumTypes.FLOATS, **kwargs) -> List[List]:
         """Generate a m x n matrix with random numbers.
 
+        This method works with variety of types,
+        so you can pass method-specific **kwargs.
+
+        See NumType enum object.
+
         :param m: Number of rows.
         :param n: Number of columns.
         :param num_type: NumTypes enum object.
-        :param kwargs: Other specific arguments.
+        :param kwargs: Other specific arguments .
         :return: A matrix of random numbers.
         """
         key = self._validate_enum(num_type, NumTypes)
@@ -106,8 +111,8 @@ class Numbers(BaseProvider):
         """
         return self.random.randint(start, end)
 
-    def float(self, start: float = -1000.0,
-              end: float = 1000.0, precision: int = 15):  # noqa: A003
+    def floating(self, start: float = -1000.0,
+                 end: float = 1000.0, precision: int = 15) -> float:
         """Generate random float number in range [start, end].
 
         :param start: Start range.
@@ -125,4 +130,4 @@ class Numbers(BaseProvider):
         :param end: End range.
         :return: Decimal object.
         """
-        return Decimal(self.float(start, end))
+        return Decimal.from_float(self.floating(start, end))
