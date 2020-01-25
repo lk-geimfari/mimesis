@@ -101,7 +101,28 @@ class TestNumbers(object):
             assert len(str(e.real).split('.')[1]) <= 4
             assert len(str(e.imag).split('.')[1]) <= 6
 
+    @pytest.mark.parametrize(
+        'sr, er, si, ei, pr, pi', [
+            (1.2, 10, 1, 2.4, 15, 15),
+            (10.4, 20.0, 2.3, 10, 10, 10),
+            (20.3, 30.8, 2.4, 4.5, 12, 12),
+        ],
+    )
+    def test_complex_number(self, numbers, sr, er, si, ei, pr, pi):
+        result = numbers.complex_number(
+            start_real=sr,
+            end_real=er,
+            start_imag=si,
+            end_imag=ei,
+            precision_real=pr,
+            precision_imag=pi,
+        )
+        assert isinstance(result, complex)
+        assert len(str(result.real).split('.')[1]) <= pr
+        assert len(str(result.imag).split('.')[1]) <= pi
+
     def test_matrix(self, numbers):
+        # TODO: Rewrite it to cover all cases
 
         with pytest.raises(NonEnumerableError):
             numbers.matrix(num_type='int')
@@ -187,3 +208,6 @@ class TestSeededNumbers(object):
 
     def test_decimal(self, n1, n2):
         assert n1.decimal() == n2.decimal()
+
+    def test_complex_number(self, n1, n2):
+        assert n1.complex_number() == n2.complex_number()
