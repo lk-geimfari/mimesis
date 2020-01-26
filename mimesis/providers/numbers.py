@@ -19,8 +19,8 @@ class Numbers(BaseProvider):
 
         name = 'numbers'
 
-    def floating(self, start: float = -1000.0,
-                 end: float = 1000.0, precision: int = 15) -> float:
+    def float_number(self, start: float = -1000.0,
+                     end: float = 1000.0, precision: int = 15) -> float:
         """Generate random float number in range [start, end].
 
         :param start: Start range.
@@ -42,9 +42,9 @@ class Numbers(BaseProvider):
             precision in decimal digits, default is 15.
         :return: The list of floating-point numbers.
         """
-        return [self.floating(start, end, precision) for _ in range(n)]
+        return [self.float_number(start, end, precision) for _ in range(n)]
 
-    def integer(self, start: int = -1000, end: int = 1000) -> int:
+    def integer_number(self, start: int = -1000, end: int = 1000) -> int:
         """Generate random integer from start to end.
 
         :param start: Start range.
@@ -123,14 +123,15 @@ class Numbers(BaseProvider):
             )
         return numbers
 
-    def decimal(self, start: float = -1000.0, end: float = 1000.0) -> Decimal:
+    def decimal_number(self, start: float = -1000.0,
+                       end: float = 1000.0) -> Decimal:
         """Generate random decimal number.
 
         :param start:  Start range.
         :param end: End range.
         :return: Decimal object.
         """
-        return Decimal.from_float(self.floating(start, end))
+        return Decimal.from_float(self.float_number(start, end))
 
     def decimals(self, start: float = 0.0,
                  end: float = 1000.0, n: int = 10) -> List[Decimal]:
@@ -141,7 +142,7 @@ class Numbers(BaseProvider):
         :param n: Length of the list.
         :return: A list of random decimal numbers.
         """
-        return [self.decimal(start, end) for _ in range(n)]
+        return [self.decimal_number(start, end) for _ in range(n)]
 
     def matrix(self, m: int = 10, n: int = 10,
                num_type: NumTypes = NumTypes.FLOATS, **kwargs) -> List[List]:
