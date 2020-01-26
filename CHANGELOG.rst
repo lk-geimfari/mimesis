@@ -12,10 +12,10 @@ Version 4.0.0
 - Added method ``randstr()`` for class ``Random()``
 - Added method ``complexes()`` for provider ``Numbers()``
 - Added method ``matrix`` for provider ``Numbers()``
-- Added method ``integer`` for provider ``Numbers()``
-- Added method ``float`` for provider ``Numbers()``
-- Added method ``complex`` for provider ``Numbers()``
-- Added method ``decimal`` for provider ``Numbers()``
+- Added method ``integer_number()`` for provider ``Numbers()``
+- Added method ``float_number()`` for provider ``Numbers()``
+- Added method ``complex_number()`` for provider ``Numbers()``
+- Added method ``decimal_number()`` for provider ``Numbers()``
 - Added method ``ip_v4_object()`` and ``ip_v6_object`` for provider ``Internet()``. Now you can generate IP objects, not just strings.
 - Added new parameter ``port_range`` for method ``ip_v4()``
 - Added new parameter ``separator`` for method ``Cryptographic().mnemonic_phrase()``
@@ -34,9 +34,9 @@ Version 4.0.0
 
 - Removed the ``rating()`` method from the ``Numbers`` provider. It can be replaced with ``float(end=5, n=0, precision=1)``.
 - Removed the ``primes()`` method from the ``Numbers`` provider.
-- Removed the ``digit()`` method from the ``Numbers`` provider. Use ``integer`` instead.
-- Removed the ``between()`` method from the ``Numbers`` provider. Use ``integer`` instead.
-- Removed ``rounding`` argument from ``float()``. Now it's ``precision``.
+- Removed the ``digit()`` method from the ``Numbers`` provider. Use ``integer_number()`` instead.
+- Removed the ``between()`` method from the ``Numbers`` provider. Use ``integer_number()`` instead.
+- Removed ``rounding`` argument from ``floats()``. Now it's ``precision``.
 
 Version 3.3.0
 -------------

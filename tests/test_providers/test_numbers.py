@@ -153,18 +153,18 @@ class TestNumbers(object):
                 assert len(str(e.imag).split('.')[1]) <= 6
 
     def test_integer(self, numbers):
-        result = numbers.integer(-100, 100)
+        result = numbers.integer_number(-100, 100)
         assert isinstance(result, int)
         assert -100 <= result <= 100
 
     def test_float(self, numbers):
-        result = numbers.floating(-100, 100, precision=15)
+        result = numbers.float_number(-100, 100, precision=15)
         assert isinstance(result, float)
         assert -100 <= result <= 100
         assert len(str(result).split('.')[1]) <= 15
 
     def test_decimal(self, numbers):
-        result = numbers.decimal(-100, 100)
+        result = numbers.decimal_number(-100, 100)
         assert -100 <= result <= 100
         assert isinstance(result, decimal.Decimal)
 
@@ -201,13 +201,13 @@ class TestSeededNumbers(object):
         assert n1.matrix(n=5) == n2.matrix(n=5)
 
     def test_integer(self, n1, n2):
-        assert n1.integer() == n2.integer()
+        assert n1.integer_number() == n2.integer_number()
 
     def test_float(self, n1, n2):
-        assert n1.floating() == n2.floating()
+        assert n1.float_number() == n2.float_number()
 
     def test_decimal(self, n1, n2):
-        assert n1.decimal() == n2.decimal()
+        assert n1.decimal_number() == n2.decimal_number()
 
     def test_complex_number(self, n1, n2):
         assert n1.complex_number() == n2.complex_number()
