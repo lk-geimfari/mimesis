@@ -20,7 +20,7 @@ def romanized(locale: str = '') -> Callable:
     .. note:: At this moment it works only for `ru`, `uk`, `kk`.
 
     :param locale: Locale code.
-    :return: Latinized text.
+    :return: Romanized text.
     """
     def romanized_deco(func):
         @functools.wraps(func)
