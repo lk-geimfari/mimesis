@@ -47,7 +47,7 @@ class Cryptographic(BaseProvider):
 
         :param algorithm: Enum object :class:`~mimesis.enums.Algorithm`.
         :return: Hash.
-        :raises NonEnumerableError: if algorithm is not supported.
+        :raises NonEnumerableError: When algorithm is unsupported.
         """
         key = self._validate_enum(algorithm, Algorithm)
 
@@ -64,7 +64,6 @@ class Cryptographic(BaseProvider):
 
         .. warning:: Seed is not applicable to this method,
             because of its cryptographic-safe nature.
-
 
         :param entropy: Number of bytes (default: 32).
         :return: Random bytes.
