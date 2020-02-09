@@ -1,14 +1,12 @@
 Version 4.0.0
 -------------
 
-.. note:: This version is still under development.
-
 .. warning:: This release (4.0.0) contains some insignificant but breaking changes in API, please be careful.
 
 **Added**:
 
-- Added an alias ``.first_name(*args, **kwargs)`` for the method ``Person().name()``
-- Added an alias ``.sex(*args, **kwargs)`` for the method ``Person().gender()``
+- Added an alias ``first_name(*args, **kwargs)`` for the method ``Person().name()``
+- Added an alias ``sex(*args, **kwargs)`` for the method ``Person().gender()``
 - Added method ``randstr()`` for class ``Random()``
 - Added method ``complexes()`` for the provider ``Numbers()``
 - Added method ``matrix`` for the provider ``Numbers()``
