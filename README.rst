@@ -35,31 +35,6 @@ Description
 
 Mimesis is a package for Python, which helps generate big volumes of fake data for a variety of purposes in a variety of languages. The fake data could be used to populate a testing database, create beautiful JSON and XML files, anonymize data taken from production and etc.
 
-Documentation
--------------
-
-You can find the complete documentation on the `Read the Docs`_.
-
-It is divided into several sections:
-
--  `Foreword`_
--  `Getting Started`_
--  `Tips and Tricks`_
--  `API Reference`_
--  `Contributing`_
--  `Changelog`_
-
-You can improve it by sending pull requests to this repository.
-
-.. _Read the Docs: https://mimesis.name
-.. _Foreword: https://mimesis.name/foreword.html
-.. _Getting Started: https://mimesis.name/getting_started.html
-.. _Tips and Tricks: https://mimesis.name/tips.html
-.. _API Reference: https://mimesis.name/api.html
-.. _Contributing: https://mimesis.name/contributing.html
-.. _Changelog: https://mimesis.name/changelog.html
-
-
 Getting started
 ---------------
 
@@ -73,6 +48,9 @@ To install mimesis, simply use pip:
 
     [env] ~ ⟩ pip install mimesis
 
+Usage
+~~~~~
+
 This library is really easy to use and everything you need is just import an object which
 represents a type of data you need (we call such object *Provider*).
 
@@ -85,13 +63,13 @@ which represents data related to personal information, such as name, surname, em
     >>> person = Person('en')
 
     >>> person.full_name()
-    'Antonetta Garrison'
+    'Brande Sears'
 
-    >>> person.occupation()
-    'Backend Developer'
+    >>> person.email(domains=['mimesis.name'])
+    'roccelline1878@mimesis.name'
 
-    >>> person.telephone()
-    '1-408-855-5063'
+    >>> person.telephone(mask='1-4##-8##-5##3')
+    '1-436-896-5213'
 
 
 More about the other providers you can read in our `documentation`_.
@@ -129,7 +107,7 @@ Providers
 
 Mimesis support over twenty different data providers available,
 which can produce data related to people, food, computer hardware,
-transportation, addresses, and more.
+transportation, addresses, internet and more.
 
 See `API Reference <https://mimesis.name/api.html>`_ for more info.
 
@@ -140,49 +118,31 @@ Generating structured data
 You can generate dictionaries which can be easily converted to any
 format you want (JSON/XML/YAML etc.)  with any structure you want.
 
-Just use object ``Field()`` as shown below:
-
-.. code:: python
-
-    >>> from mimesis.schema import Field, Schema
-    >>> from mimesis.enums import Gender
-    >>> _ = Field('en')
-    >>> description = (
-    ...     lambda: {
-    ...         'id': _('uuid'),
-    ...         'name': _('text.word'),
-    ...         'version': _('version', pre_release=True),
-    ...         'timestamp': _('timestamp', posix=False),
-    ...         'owner': {
-    ...             'email': _('person.email', key=str.lower),
-    ...             'token': _('token_hex'),
-    ...             'creator': _('full_name', gender=Gender.FEMALE),
-    ...         },
-    ...     }
-    ... )
-    >>> schema = Schema(schema=description)
-    >>> schema.create(iterations=1)
-
-Output:
-
-.. code:: text
-
-    [
-      {
-        'id': '7a41f446-57a8-ec17-b9ad-367742251679',
-        'name': 'desert',
-        'version': '7.3.7-alpha.6',
-        'timestamp': '2026-06-06T14:00:52Z',
-        'owner': {
-          'email': 'damaged1829@gmail.com',
-          'token': 'acfd799af9b46e5560a51dabace593033171ec81e997905acfc602c93a741735',
-          'creator': 'Keena Hendricks'
-        }
-      }
-    ]
-
-
 See `Schema and Fields <https://mimesis.name/getting_started.html#schema-and-fields>`_ for more info.
+
+Documentation
+-------------
+
+You can find the complete documentation on the `Read the Docs`_.
+
+It is divided into several sections:
+
+-  `Foreword`_
+-  `Getting Started`_
+-  `Tips and Tricks`_
+-  `API Reference`_
+-  `Contributing`_
+-  `Changelog`_
+
+You can improve it by sending pull requests to this repository.
+
+.. _Read the Docs: https://mimesis.name
+.. _Foreword: https://mimesis.name/foreword.html
+.. _Getting Started: https://mimesis.name/getting_started.html
+.. _Tips and Tricks: https://mimesis.name/tips.html
+.. _API Reference: https://mimesis.name/api.html
+.. _Contributing: https://mimesis.name/contributing.html
+.. _Changelog: https://mimesis.name/changelog.html
 
 
 How to Contribute
