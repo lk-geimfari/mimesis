@@ -97,7 +97,7 @@ class Payment(BaseProvider):
 
         :param card_type: Issuing Network. Default is Visa.
         :return: Credit card number.
-        :raises NotImplementedError: if cart_type is not supported.
+        :raises NotImplementedError: if card_type not supported.
 
         :Example:
             4455 5299 1152 2450

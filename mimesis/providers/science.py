@@ -4,7 +4,6 @@
 
 from typing import Union
 
-from mimesis.data import MATH_FORMULAS
 from mimesis.providers.base import BaseDataProvider
 
 __all__ = ['Science']
@@ -27,17 +26,6 @@ class Science(BaseDataProvider):
         """Class for metadata."""
 
         name = 'science'
-
-    def math_formula(self) -> str:
-        """Get a random mathematical formula.
-
-        :return: Math formula.
-
-        :Example:
-            A = (ab)/2.
-        """
-        formula = self.random.choice(MATH_FORMULAS)
-        return formula
 
     def chemical_element(self, name_only: bool = True) -> Union[dict, str]:
         """Generate a random chemical element.

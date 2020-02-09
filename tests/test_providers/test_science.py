@@ -5,7 +5,6 @@ import re
 import pytest
 
 from mimesis import Science
-from mimesis.data import MATH_FORMULAS
 
 from . import patterns
 
@@ -18,10 +17,6 @@ class TestScience(object):
 
     def test_str(self, science):
         assert re.match(patterns.DATA_PROVIDER_STR_REGEX, str(science))
-
-    def test_math_formula(self, default_science):
-        result = default_science.math_formula()
-        assert result in MATH_FORMULAS
 
     def test_chemical_element(self, science):
         result = science.chemical_element(name_only=True)
@@ -55,9 +50,6 @@ class TestSeededScience(object):
     @pytest.fixture
     def s2(self, seed):
         return Science(seed=seed)
-
-    def test_math_formula(self, s1, s2):
-        assert s1.math_formula() == s2.math_formula()
 
     def test_chemical_element(self, s1, s2):
         assert s1.chemical_element() == s2.chemical_element()

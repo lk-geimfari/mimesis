@@ -174,7 +174,7 @@ class TestSeededGeneric(object):
         assert g1.person.name() == g2.person.name()
 
     def test_generic_science(self, g1, g2):
-        assert g1.science.math_formula() == g2.science.math_formula()
+        assert g1.science.rna_sequence() == g2.science.rna_sequence()
 
     def test_generic_structure(self, g1, g2):
         assert g1.structure.css() == g2.structure.css()

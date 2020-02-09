@@ -3,20 +3,20 @@ Version 4.0.0
 
 .. note:: This version is still under development.
 
-.. warning:: This release (4.0.0) contains some insignificant but breaking changes in API
+.. warning:: This release (4.0.0) contains some insignificant but breaking changes in API, please be careful.
 
 **Added**:
 
-- Added an alias ``first_name()`` for ``Person().name()``
-- Added an alias ``Person().sex(*args, **kwargs)`` for ``Person().gender()``
+- Added an alias ``.first_name(*args, **kwargs)`` for the method ``Person().name()``
+- Added an alias ``.sex(*args, **kwargs)`` for the method ``Person().gender()``
 - Added method ``randstr()`` for class ``Random()``
-- Added method ``complexes()`` for provider ``Numbers()``
-- Added method ``matrix`` for provider ``Numbers()``
-- Added method ``integer_number()`` for provider ``Numbers()``
-- Added method ``float_number()`` for provider ``Numbers()``
-- Added method ``complex_number()`` for provider ``Numbers()``
-- Added method ``decimal_number()`` for provider ``Numbers()``
-- Added method ``ip_v4_object()`` and ``ip_v6_object`` for provider ``Internet()``. Now you can generate IP objects, not just strings.
+- Added method ``complexes()`` for the provider ``Numbers()``
+- Added method ``matrix`` for the provider ``Numbers()``
+- Added method ``integer_number()`` for the provider ``Numbers()``
+- Added method ``float_number()`` for the provider ``Numbers()``
+- Added method ``complex_number()`` for the provider ``Numbers()``
+- Added method ``decimal_number()`` for the provider ``Numbers()``
+- Added method ``ip_v4_object()`` and ``ip_v6_object`` for the provider ``Internet()``. Now you can generate IP objects, not just strings.
 - Added new parameter ``port_range`` for method ``ip_v4()``
 - Added new parameter ``separator`` for method ``Cryptographic().mnemonic_phrase()``
 
@@ -27,15 +27,17 @@ Version 4.0.0
 **Updated**:
 
 - Updated names and surnames for locale ``ru``
-- The ``floats()`` function in the ``Numbers`` provider now accepts arguments about the range of the generated float numbers and the rounding used. By default, it generates a list of ``n`` float numbers insted of a list of 10^n elements.
+- The ``floats()`` function in the ``Numbers`` provider now accepts arguments about the range of the generated float
+numbers and the rounding used. By default, it generates a list of ``n`` float numbers insted of a list of 10^n elements.
 - The argument ``length`` of the function ``integers`` is renamed to ``n``.
 
 **Removed**:
 
-- Removed the ``rating()`` method from the ``Numbers`` provider. It can be replaced with ``float(end=5, n=0, precision=1)``.
+- Removed the ``rating()`` method from the ``Numbers`` provider. It can be replaced with ``float_number()``.
 - Removed the ``primes()`` method from the ``Numbers`` provider.
 - Removed the ``digit()`` method from the ``Numbers`` provider. Use ``integer_number()`` instead.
 - Removed the ``between()`` method from the ``Numbers`` provider. Use ``integer_number()`` instead.
+- Removed the ``math_formula()`` method from the ``Science`` provider.
 - Removed ``rounding`` argument from ``floats()``. Now it's ``precision``.
 
 Version 3.3.0
