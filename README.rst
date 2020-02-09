@@ -35,18 +35,43 @@ Description
 
 Mimesis is a package for Python, which helps generate big volumes of fake data for a variety of purposes in a variety of languages. The fake data could be used to populate a testing database, create beautiful JSON and XML files, anonymize data taken from production and etc.
 
+Documentation
+-------------
+
+You can find the complete documentation on the `Read the Docs`_.
+
+It is divided into several sections:
+
+-  `Foreword`_
+-  `Getting Started`_
+-  `Tips and Tricks`_
+-  `API Reference`_
+-  `Contributing`_
+-  `Changelog`_
+
+You can improve it by sending pull requests to this repository.
+
+.. _Read the Docs: https://mimesis.name
+.. _Foreword: https://mimesis.name/foreword.html
+.. _Getting Started: https://mimesis.name/getting_started.html
+.. _Tips and Tricks: https://mimesis.name/tips.html
+.. _API Reference: https://mimesis.name/api.html
+.. _Contributing: https://mimesis.name/contributing.html
+.. _Changelog: https://mimesis.name/changelog.html
+
+
+Getting started
+---------------
 
 Installation
-------------
+~~~~~~~~~~~~
+
 
 To install mimesis, simply use pip:
 
 .. code:: text
 
     [env] ~ ⟩ pip install mimesis
-
-Getting started
----------------
 
 This library is really easy to use and everything you need is just import an object which
 represents a type of data you need (we call such object *Provider*).
@@ -64,7 +89,7 @@ which represents data related to personal information, such as name, surname, em
 
     >>> person.occupation()
     'Backend Developer'
-    
+
     >>> person.telephone()
     '1-408-855-5063'
 
@@ -75,7 +100,7 @@ More about the other providers you can read in our `documentation`_.
 
 
 Locales
--------
+~~~~~~~
 
 Mimesis currently includes support for 33 different `locales`_. You can
 specify a locale when creating providers and they will return data that
@@ -100,7 +125,7 @@ Let's take a look how it works:
 .. _locales: https://mimesis.name/getting_started.html#locales
 
 Providers
----------
+~~~~~~~~~
 
 Mimesis support over twenty different data providers available,
 which can produce data related to people, food, computer hardware,
@@ -110,7 +135,7 @@ See `API Reference <https://mimesis.name/api.html>`_ for more info.
 
 
 Generating structured data
---------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You can generate dictionaries which can be easily converted to any
 format you want (JSON/XML/YAML etc.)  with any structure you want.
@@ -158,32 +183,6 @@ Output:
 
 
 See `Schema and Fields <https://mimesis.name/getting_started.html#schema-and-fields>`_ for more info.
-
-
-
-Documentation
--------------
-
-You can find the complete documentation on the `Read the Docs`_.
-
-It is divided into several sections:
-
--  `Foreword`_
--  `Getting Started`_
--  `Tips and Tricks`_
--  `API Reference`_
--  `Contributing`_
--  `Changelog`_
-
-You can improve it by sending pull requests to this repository.
-
-.. _Read the Docs: https://mimesis.name
-.. _Foreword: https://mimesis.name/foreword.html
-.. _Getting Started: https://mimesis.name/getting_started.html
-.. _Tips and Tricks: https://mimesis.name/tips.html
-.. _API Reference: https://mimesis.name/api.html
-.. _Contributing: https://mimesis.name/contributing.html
-.. _Changelog: https://mimesis.name/changelog.html
 
 
 How to Contribute
