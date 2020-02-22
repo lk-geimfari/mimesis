@@ -2,20 +2,22 @@
 
 """Specific data provider for USA (en)."""
 
-from typing import Optional, Union
+from typing import Union, Optional
 
 from mimesis.builtins.base import BaseSpecProvider
+from mimesis.builtins.enums.en import State
 from mimesis.typing import Seed
 
 __all__ = ['USASpecProvider']
 
 
 class USASpecProvider(BaseSpecProvider):
-    """Class that provides special data for USA (en)."""
+    """Class which provides special data for USA (en)."""
 
     def __init__(self, seed: Seed = None):
         """Initialize attributes."""
         super().__init__(locale='en', seed=seed)
+        self.pull(self._datafile)
 
     class Meta:
         """The name of the provider."""
@@ -88,3 +90,19 @@ class USASpecProvider(BaseSpecProvider):
             return self.random.randint(1, 10)
 
         return self.random.choice(mbtis)
+
+    def telephone(self, state: Optional[State] = None) -> str:
+        """Generate a random phone number by state.
+
+        :param state: State enum.
+        :return: Phone number.
+
+        :Example:
+           1-253-427-5903
+        """
+        state_code = self._validate_enum(state, State)
+        codes = self._data['area_codes_by_states'][state_code]
+        masks = self._data['telephone_fmt']
+        telephone_mask = self.random.choice(masks)
+        telephone_mask = telephone_mask.format(self.random.choice(codes))
+        return self.random.custom_code(mask=telephone_mask)
