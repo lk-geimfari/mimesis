@@ -98,20 +98,6 @@ class Internet(BaseProvider):
             self.random.randint(0, self._MAX_IPV4),
         )
 
-    def ip_v6_object(self) -> IPv6Address:
-        """Generate random IPv6Address object.
-
-        See documentation for module ipaddress:
-        https://docs.python.org/3.7/library/ipaddress.html
-
-        :return: IPv6Address object.
-        """
-        return IPv6Address(
-            self.random.randint(
-                0, self._MAX_IPV6,
-            ),
-        )
-
     def ip_v4(self, with_port: bool = False,
               port_range: PortRange = PortRange.ALL) -> str:
         """Generate a random IPv4 address as string.
@@ -130,6 +116,20 @@ class Internet(BaseProvider):
             return '{}:{}'.format(ip, port)
 
         return ip
+
+    def ip_v6_object(self) -> IPv6Address:
+        """Generate random IPv6Address object.
+
+        See documentation for module ipaddress:
+        https://docs.python.org/3.7/library/ipaddress.html
+
+        :return: IPv6Address object.
+        """
+        return IPv6Address(
+            self.random.randint(
+                0, self._MAX_IPV6,
+            ),
+        )
 
     def ip_v6(self) -> str:
         """Generate a random IPv6 address as string.
@@ -155,7 +155,7 @@ class Internet(BaseProvider):
             self.random.randint(0x00, 0xff),
             self.random.randint(0x00, 0xff),
         ]
-        mac = map(lambda x: '%02x' % x, mac_hex)
+        mac = map(lambda x: '{:02x}'.format(x), mac_hex)
         return ':'.join(mac)
 
     def emoji(self) -> str:
@@ -185,9 +185,13 @@ class Internet(BaseProvider):
                     height: Union[int, str] = 1080,
                     keywords: Optional[List[str]] = None,
                     writable: bool = False) -> Union[str, bytes]:
-        """Generate random stock image (JPEG) hosted on Unsplash.
+        """Generate random stock image (JPEG) hosted on
+        Unsplash (link to the image of writable sequence ob bytes).
 
-        .. note:: This method required an active HTTP connection
+        See «Random search term» on https://source.unsplash.com/
+        for more details.
+
+        .. note:: This method required an active HTTP connection.
 
         :param width: Width of the image.
         :param height: Height of the image.
@@ -239,14 +243,14 @@ class Internet(BaseProvider):
         :return: Random home page.
 
         :Example:
-            http://www.fontir.info
+            https://fontir.info
         """
         resource = self.random.choice(USERNAMES)
         domain = self.top_level_domain(
             tld_type=tld_type,
         )
 
-        return 'http://www.{}{}'.format(
+        return 'https://{}{}'.format(
             resource, domain)
 
     def top_level_domain(self, tld_type: Optional[TLDType] = None) -> str:

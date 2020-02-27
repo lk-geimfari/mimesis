@@ -5,17 +5,6 @@
 import inspect
 from typing import Any, List, Type
 
-from mimesis.builtins import (
-    BrazilSpecProvider,
-    DenmarkSpecProvider,
-    GermanySpecProvider,
-    ItalySpecProvider,
-    NetherlandsSpecProvider,
-    PolandSpecProvider,
-    RussiaSpecProvider,
-    UkraineSpecProvider,
-    USASpecProvider,
-)
 from mimesis.providers.address import Address
 from mimesis.providers.base import BaseDataProvider, BaseProvider
 from mimesis.providers.business import Business

@@ -118,7 +118,7 @@ class BaseDataProvider(BaseProvider):
         return initial
 
     @functools.lru_cache(maxsize=None)
-    def pull(self, datafile: str = ''):
+    def pull(self, datafile: str = '') -> None:
         """Pull the content from the JSON and memorize one.
 
         Opens JSON file ``file`` in the folder ``data/locale``
@@ -126,7 +126,7 @@ class BaseDataProvider(BaseProvider):
 
         :param datafile: The name of file.
         :return: The content of the file.
-        :raises UnsupportedLocale: if locale is not supported.
+        :raises UnsupportedLocale: Raises if locale is unsupported.
         """
         locale = self.locale
         data_dir = self._data_dir

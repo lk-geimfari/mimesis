@@ -59,16 +59,20 @@ class TestCryptographic(object):
         assert isinstance(result, str)
 
     @pytest.mark.parametrize(
-        'length', [
-            8,
-            16,
+        'length, separator', [
+            (8, None),
+            (16, ' - '),
+            (16, '_'),
         ],
     )
-    def test_mnemonic_phrase(self, crypto, length):
-        result = crypto.mnemonic_phrase(length=length)
+    def test_mnemonic_phrase(self, crypto, length, separator):
+        if not separator:
+            separator = ' '
+
+        result = crypto.mnemonic_phrase(length=length, separator=separator)
         assert isinstance(result, str)
-        result = result.split(' ')
-        assert len(result) == length
+        assert len(result.split(separator)) == length
+        assert separator in result
 
 
 class TestSeededCryptographic(object):
@@ -91,5 +95,5 @@ class TestSeededCryptographic(object):
 
     def test_mnemonic_phrase(self, c1, c2):
         assert c1.mnemonic_phrase() == c2.mnemonic_phrase()
-        assert c1.mnemonic_phrase(length=16) == \
-               c2.mnemonic_phrase(length=16)
+        assert c1.mnemonic_phrase(length=16, separator=' | ') == \
+               c2.mnemonic_phrase(length=16, separator=' | ')

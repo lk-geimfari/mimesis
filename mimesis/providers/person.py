@@ -188,9 +188,9 @@ class Person(BaseDataProvider):
         :Example:
             Celloid1873
         """
-        MIN_DATE = 1800
-        MAX_DATE = 2070
-        DEFAULT_TEMPLATE = 'l.d'
+        min_date = 1800
+        max_date = 2070
+        default_template = 'l.d'
 
         templates = ('U_d', 'U.d', 'U-d', 'UU-d', 'UU.d', 'UU_d',
                      'ld', 'l-d', 'Ud', 'l.d', 'l_d', 'default')
@@ -199,7 +199,7 @@ class Person(BaseDataProvider):
             template = self.random.choice(templates)
 
         if template == 'default':
-            template = DEFAULT_TEMPLATE
+            template = default_template
 
         if not re.fullmatch(r'[Ul\.\-\_d]*[Ul]+[Ul\.\-\_d]*', template):
             raise ValueError(
@@ -214,7 +214,7 @@ class Person(BaseDataProvider):
             elif tag == 'l':
                 username += self.random.choice(USERNAMES)
             elif tag == 'd':
-                username += str(self.random.randint(MIN_DATE, MAX_DATE))
+                username += str(self.random.randint(min_date, max_date))
             elif tag in '-_.':
                 username += tag
 
@@ -304,6 +304,17 @@ class Person(BaseDataProvider):
 
         return self.random.choice(self._data['gender'])
 
+    def sex(self, *args, **kwargs):
+        """An alias for method self.gender()
+
+        See docstrings of method self.gender() for details.
+
+        :param args: Positional arguments.
+        :param kwargs: Keyword arguments.
+        :return: Sex
+        """
+        return self.gender(*args, **kwargs)
+
     def height(self, minimum: float = 1.5, maximum: float = 2.0) -> str:
         """Generate a random height in meters.
 
@@ -341,7 +352,10 @@ class Person(BaseDataProvider):
         return self.random.choice(BLOOD_GROUPS)
 
     def sexual_orientation(self, symbol: bool = False) -> str:
-        """Get a random (LOL) sexual orientation.
+        """Get a random sexual orientation.
+
+        Obviously, this option will be useful for various
+        dating sites and so on.
 
         :param symbol: Unicode symbol.
         :return: Sexual orientation.

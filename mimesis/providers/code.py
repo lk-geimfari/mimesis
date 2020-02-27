@@ -19,7 +19,7 @@ __all__ = ['Code']
 
 
 class Code(BaseProvider):
-    """Class that provides methods for generating codes."""
+    """A class, which provides methods for generating codes."""
 
     def __init__(self, *args, **kwargs):
         """Initialize attributes.

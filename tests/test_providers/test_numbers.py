@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import decimal
 import re
 
 import pytest
@@ -36,7 +37,7 @@ class TestNumbers(object):
         result = numbers.floats(n=1000)
         assert len(result) == 1000
 
-        result = numbers.floats(rounding=4)
+        result = numbers.floats(precision=4)
         for e in result:
             assert len(str(e).split('.')[1]) <= 4
 
@@ -58,6 +59,23 @@ class TestNumbers(object):
         assert isinstance(element, int)
 
     @pytest.mark.parametrize(
+        'start, end', [
+            (1, 10),
+            (10, 20),
+            (20, 30),
+        ],
+    )
+    def test_decimals(self, numbers, start, end):
+        result = numbers.decimals(start=start, end=end)
+
+        assert max(result) <= end
+        assert min(result) >= start
+        assert isinstance(result, list)
+
+        element = numbers.random.choice(result)
+        assert isinstance(element, decimal.Decimal)
+
+    @pytest.mark.parametrize(
         'start_real, end_real, start_imag, end_imag', [
             (1.2, 10, 1, 2.4),
             (10.4, 20.0, 2.3, 10),
@@ -65,9 +83,9 @@ class TestNumbers(object):
         ],
     )
     def test_complexes(self, numbers,
-                         start_real, end_real, start_imag, end_imag):
+                       start_real, end_real, start_imag, end_imag):
         result = numbers.complexes(start_real, end_real,
-                                     start_imag, end_imag)
+                                   start_imag, end_imag)
         assert max(e.real for e in result) <= end_real
         assert min(e.real for e in result) >= start_real
         assert max(e.imag for e in result) <= end_imag
@@ -78,17 +96,38 @@ class TestNumbers(object):
         result = numbers.complexes(n=1000)
         assert len(result) == 1000
 
-        result = numbers.complexes(rounding_real=4, rounding_imag=6)
+        result = numbers.complexes(precision_real=4, precision_imag=6)
         for e in result:
             assert len(str(e.real).split('.')[1]) <= 4
             assert len(str(e.imag).split('.')[1]) <= 6
 
+    @pytest.mark.parametrize(
+        'sr, er, si, ei, pr, pi', [
+            (1.2, 10, 1, 2.4, 15, 15),
+            (10.4, 20.0, 2.3, 10, 10, 10),
+            (20.3, 30.8, 2.4, 4.5, 12, 12),
+        ],
+    )
+    def test_complex_number(self, numbers, sr, er, si, ei, pr, pi):
+        result = numbers.complex_number(
+            start_real=sr,
+            end_real=er,
+            start_imag=si,
+            end_imag=ei,
+            precision_real=pr,
+            precision_imag=pi,
+        )
+        assert isinstance(result, complex)
+        assert len(str(result.real).split('.')[1]) <= pr
+        assert len(str(result.imag).split('.')[1]) <= pi
+
     def test_matrix(self, numbers):
+        # TODO: Rewrite it to cover all cases
 
         with pytest.raises(NonEnumerableError):
             numbers.matrix(num_type='int')
 
-        result = numbers.matrix(rounding=4)
+        result = numbers.matrix(precision=4)
         assert len(result) == 10
         for row in result:
             assert len(row) == 10
@@ -105,7 +144,7 @@ class TestNumbers(object):
                 assert isinstance(e, int)
 
         result = numbers.matrix(
-            num_type=NumTypes.COMPLEXES, rounding_real=4, rounding_imag=6)
+            num_type=NumTypes.COMPLEXES, precision_real=4, precision_imag=6)
         assert len(result) == 10
         for row in result:
             assert len(row) == 10
@@ -113,35 +152,21 @@ class TestNumbers(object):
                 assert len(str(e.real).split('.')[1]) <= 4
                 assert len(str(e.imag).split('.')[1]) <= 6
 
-    def test_primes(self, numbers):
-        result = numbers.primes()
-        assert len(result) == 168
-        assert isinstance(result, list)
+    def test_integer(self, numbers):
+        result = numbers.integer_number(-100, 100)
+        assert isinstance(result, int)
+        assert -100 <= result <= 100
 
-        result = numbers.primes(500, 500000)
-        assert len(result) == 41443
-        assert isinstance(result, list)
+    def test_float(self, numbers):
+        result = numbers.float_number(-100, 100, precision=15)
+        assert isinstance(result, float)
+        assert -100 <= result <= 100
+        assert len(str(result).split('.')[1]) <= 15
 
-        result = numbers.primes(start=10, end=200)[1]
-        assert result == 13
-
-    def test_digit(self, numbers):
-        digits = (
-            0, 1, 2,
-            3, 4, 5,
-            6, 7, 8,
-            9,
-        )
-        result = numbers.digit()
-        assert result in digits
-
-        result = numbers.digit(to_bin=True)
-        assert isinstance(result, str)
-
-    def test_between(self, numbers):
-        result = numbers.between(90, 100)
-        assert result >= 90
-        assert result <= 100
+    def test_decimal(self, numbers):
+        result = numbers.decimal_number(-100, 100)
+        assert -100 <= result <= 100
+        assert isinstance(result, decimal.Decimal)
 
 
 class TestSeededNumbers(object):
@@ -158,10 +183,14 @@ class TestSeededNumbers(object):
         assert n1.floats() == n2.floats()
         assert n1.floats(n=5) == n2.floats(n=5)
 
+    def test_decimals(self, n1, n2):
+        assert n1.decimals() == n2.decimals()
+        assert n1.decimals(n=5) == n2.decimals(n=5)
+
     def test_integers(self, n1, n2):
         assert n1.integers() == n2.integers()
         assert n1.integers(start=-999, end=999, n=10) == \
-            n2.integers(start=-999, end=999, n=10)
+               n2.integers(start=-999, end=999, n=10)
 
     def test_complexes(self, n1, n2):
         assert n1.complexes() == n2.complexes()
@@ -171,15 +200,14 @@ class TestSeededNumbers(object):
         assert n1.matrix() == n2.matrix()
         assert n1.matrix(n=5) == n2.matrix(n=5)
 
-    def test_digit(self, n1, n2):
-        assert n1.digit() == n2.digit()
-        assert n1.digit(to_bin=True) == n2.digit(to_bin=True)
+    def test_integer(self, n1, n2):
+        assert n1.integer_number() == n2.integer_number()
 
-    def test_between(self, n1, n2):
-        assert n1.between() == n2.between()
-        assert n1.between(minimum=42, maximum=2048) == \
-            n2.between(minimum=42, maximum=2048)
+    def test_float(self, n1, n2):
+        assert n1.float_number() == n2.float_number()
 
-    @pytest.mark.skip(reason='Method refactoring needed.')
-    def test_primes(self, n1, n2):
-        assert n1.primes() == n2.primes()
+    def test_decimal(self, n1, n2):
+        assert n1.decimal_number() == n2.decimal_number()
+
+    def test_complex_number(self, n1, n2):
+        assert n1.complex_number() == n2.complex_number()

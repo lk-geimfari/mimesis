@@ -246,6 +246,19 @@ class TestPerson(object):
         iso5218 = person.gender(iso5218=True)
         assert iso5218 in codes
 
+    def test_sex(self, person):
+        result = person.sex()
+        assert result in person._data['gender']
+
+        result = person.gender(symbol=True)
+        assert result in GENDER_SYMBOLS
+
+        # The four codes specified in ISO/IEC 5218 are:
+        # 0 = not known, 1 = male, 2 = female, 9 = not applicable.
+        codes = [0, 1, 2, 9]
+        iso5218 = person.gender(iso5218=True)
+        assert iso5218 in codes
+
     def test_sexual_orientation(self, person):
         result = person.sexual_orientation()
         assert result in person._data['sexuality']
@@ -404,6 +417,11 @@ class TestSeededPerson(object):
         assert p1.gender() == p2.gender()
         assert p1.gender(iso5218=True, symbol=True) == \
                p2.gender(iso5218=True, symbol=True)
+
+    def test_sex(self, p1, p2):
+        assert p1.sex() == p2.sex()
+        assert p1.sex(iso5218=True, symbol=True) == \
+               p2.sex(iso5218=True, symbol=True)
 
     def test_sexual_orientation(self, p1, p2):
         assert p1.sexual_orientation() == p2.sexual_orientation()
