@@ -305,7 +305,7 @@ class Person(BaseDataProvider):
         return self.random.choice(self._data['gender'])
 
     def sex(self, *args, **kwargs):
-        """An alias for method self.gender()
+        """An alias for method self.gender().
 
         See docstrings of method self.gender() for details.
 

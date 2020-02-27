@@ -185,8 +185,7 @@ class Internet(BaseProvider):
                     height: Union[int, str] = 1080,
                     keywords: Optional[List[str]] = None,
                     writable: bool = False) -> Union[str, bytes]:
-        """Generate random stock image (JPEG) hosted on
-        Unsplash (link to the image of writable sequence ob bytes).
+        """Generate random stock image (JPEG) hosted on Unsplash.
 
         See «Random search term» on https://source.unsplash.com/
         for more details.
