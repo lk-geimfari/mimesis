@@ -135,7 +135,7 @@ class Numbers(BaseProvider):
 
     def decimals(self, start: float = 0.0,
                  end: float = 1000.0, n: int = 10) -> List[Decimal]:
-        """Generate decimal number as Decimal objects
+        """Generate decimal number as Decimal objects.
 
         :param start: Start range.
         :param end: End range.

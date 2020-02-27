@@ -47,6 +47,6 @@ def test_ssn(usa):
 
 
 def test_cpf_with_666_prefix(mocker, usa):
-    with mocker.patch.object(usa.random, 'randint', return_value=666):
-        result = usa.ssn()
-        assert '665' == result[:3]
+    mocker.patch.object(usa.random, 'randint', return_value=666)
+    result = usa.ssn()
+    assert '665' == result[:3]

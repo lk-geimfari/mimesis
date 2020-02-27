@@ -305,7 +305,7 @@ class Person(BaseDataProvider):
         return self.random.choice(self._data['gender'])
 
     def sex(self, *args, **kwargs):
-        """An alias for method self.gender()
+        """An alias for method self.gender().
 
         See docstrings of method self.gender() for details.
 
@@ -316,7 +316,7 @@ class Person(BaseDataProvider):
         return self.gender(*args, **kwargs)
 
     def height(self, minimum: float = 1.5, maximum: float = 2.0) -> str:
-        """Generate a random height in M (Meter).
+        """Generate a random height in meters.
 
         :param minimum: Minimum value.
         :param float maximum: Maximum value.
