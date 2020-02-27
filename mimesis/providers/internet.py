@@ -187,7 +187,7 @@ class Internet(BaseProvider):
                     writable: bool = False) -> Union[str, bytes]:
         """Generate random stock image (JPEG) hosted on Unsplash.
 
-        .. note:: This method required an active HTTP connection.
+        .. note:: This method required an active HTTP connection
 
         :param width: Width of the image.
         :param height: Height of the image.

@@ -305,7 +305,7 @@ class Person(BaseDataProvider):
         return self.random.choice(self._data['gender'])
 
     def height(self, minimum: float = 1.5, maximum: float = 2.0) -> str:
-        """Generate a random height in M (Meter).
+        """Generate a random height in meters.
 
         :param minimum: Minimum value.
         :param float maximum: Maximum value.
