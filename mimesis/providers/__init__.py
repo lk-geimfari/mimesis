@@ -33,7 +33,7 @@ __all__ = [
     # Data base class:
     'BaseDataProvider',
 
-    # And data providers:
+    # Data providers:
     'Address',
     'Business',
     'Choice',
@@ -56,7 +56,5 @@ __all__ = [
     'Transport',
     'UnitSystem',
     'Cryptographic',
-
-    # Has all:
     'Generic',
 ]
