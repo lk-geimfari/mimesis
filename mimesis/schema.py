@@ -69,8 +69,8 @@ class AbstractField(object):
             which will be applied to result.
         :param kwargs: Kwargs of method.
         :return: Value which represented by method.
-        :raises ValueError: if provider is not
-            supported or if field is not defined.
+        :raises ValueError: if provider not
+            supported or if field not defined.
         """
         if name is None:
             raise UndefinedField()
