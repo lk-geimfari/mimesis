@@ -23,33 +23,34 @@ Description
      :target: https://codecov.io/gh/lk-geimfari/mimesis
      :alt: Code Coverage
 
-.. image:: https://badge.fury.io/py/mimesis.svg
-     :target: https://badge.fury.io/py/mimesis
-     :alt: Package version
+.. image:: https://img.shields.io/pypi/v/mimesis?color=bright-green
+     :target: https://pypi.org/project/mimesis/
+     :alt: PyPi Version
 
-.. image:: https://img.shields.io/badge/python-3.6%20%7C%203.7%20%7C%203.8-brightgreen.svg
+.. image:: https://img.shields.io/badge/python-3.6+-brightgreen.svg
      :target: https://badge.fury.io/py/mimesis
      :alt: Python version
 
+.. image:: https://img.shields.io/pypi/dm/mimesis
+     :target: https://pypi.org/project/mimesis/
+     :alt: Mimesis on PyPi
 
 
-Mimesis is a package for Python, which helps generate big volumes of fake data for a variety of purposes in a variety of languages. The fake data could be used to populate a testing database, create beautiful JSON and XML files, anonymize data taken from production and etc.
+Mimesis is a package for Python, which helps generate big volumes of fake data for a variety of purposes in a variety of languages. The fake data could be used to populate a testing database, create JSON and XML files of arbitrary structure, anonymize data taken from production and etc.
 
-Getting started
----------------
 
 Installation
-~~~~~~~~~~~~
+------------
 
 
 To install mimesis, simply use pip:
 
 .. code:: text
 
-    [env] ~ ⟩ pip install mimesis
+    [venv] ~ ⟩ pip install mimesis
 
 Usage
-~~~~~
+-----
 
 This library is really easy to use and everything you need is just import an object which
 represents a type of data you need (we call such object *Provider*).
@@ -78,7 +79,7 @@ More about the other providers you can read in our `documentation`_.
 
 
 Locales
-~~~~~~~
+-------
 
 Mimesis currently includes support for 33 different `locales`_. You can
 specify a locale when creating providers and they will return data that
@@ -103,7 +104,7 @@ Let's take a look how it works:
 .. _locales: https://mimesis.name/getting_started.html#locales
 
 Providers
-~~~~~~~~~
+---------
 
 Mimesis support over twenty different data providers available,
 which can produce data related to people, food, computer hardware,
@@ -113,7 +114,7 @@ See `API Reference <https://mimesis.name/api.html>`_ for more info.
 
 
 Generating structured data
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+--------------------------
 
 You can generate dictionaries which can be easily converted to any
 format you want (JSON/XML/YAML etc.)  with any structure you want.
