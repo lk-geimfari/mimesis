@@ -90,7 +90,7 @@ class BaseDataProvider(BaseProvider):
         """Set up locale after pre-check.
 
         :param str locale: Locale
-        :raises UnsupportedLocale: When locale is not supported.
+        :raises UnsupportedLocale: When locale not supported.
         :return: Nothing.
         """
         if not locale:
