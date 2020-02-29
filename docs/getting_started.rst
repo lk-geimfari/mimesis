@@ -404,7 +404,7 @@ Example of usage:
     ...         'version': _('version', pre_release=True),
     ...         'timestamp': _('timestamp', posix=False),
     ...         'owner': {
-    ...             'email': _('person.email', key=str.lower),
+    ...             'email': _('person.email', domains=['test.com'], key=str.lower),
     ...             'token': _('token_hex'),
     ...             'creator': _('full_name', gender=Gender.FEMALE),
     ...         },
@@ -420,7 +420,7 @@ Output:
     [
       {
         "owner": {
-          "email": "aisling2032@yahoo.com",
+          "email": "aisling2032@test.com",
           "token": "cc8450298958f8b95891d90200f189ef591cf2c27e66e5c8f362f839fcc01370",
           "creator": "Veronika Dyer"
         },
@@ -437,13 +437,13 @@ to change this behavior should be passed parameter *providers* with a sequence o
 .. code:: python
 
     >>> from mimesis.schema import Field
-    >>> from mimesis import builtins as b
+    >>> from mimesis import builtins
 
-    >>> extra = (
-    ...     b.RussiaSpecProvider,
-    ...     b.NetherlandsSpecProvider,
+    >>> custom_providers = (
+    ...     builtins.RussiaSpecProvider,
+    ...     builtins.NetherlandsSpecProvider,
     ... )
-    >>> _ = Field('en', providers=extra)
+    >>> _ = Field('en', providers=custom_providers)
 
     >>> _('snils')
     '239-315-742-84'
