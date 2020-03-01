@@ -77,6 +77,10 @@ class Random(random_module.Random):
         digit_code = ord(digit)
         code = bytearray(len(mask))
 
+        if char_code == digit_code:
+            raise ValueError('You cannot use the same '
+                             'placeholder for digits and chars!')
+
         def random_int(a: int, b: int) -> int:
             b = b - a
             return int(self.random() * b) + a

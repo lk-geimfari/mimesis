@@ -62,18 +62,40 @@ def test_uniform(random, precision):
     assert precision >= len(result)
 
 
-def test_custom_code(random):
-    result = random.custom_code(mask='AB@@@-###-@@@', char='@', digit='#')
-    assert len(result) == 13
+@pytest.mark.parametrize(
+    'mask, digit, char', [
+        ('##-FA-@@', '#', '@'),
+        ('**-AF-$$', '*', '$'),
+    ],
+)
+def test_custom_code(random, mask, digit, char):
+    result = random.custom_code(mask=mask, char=char, digit=digit)
+    digit, _, char = result.split('-')
+    assert char.isalpha()
+    assert digit.isdigit()
 
-    a, b, c = result.split('-')
-    assert a.isalpha()
-    assert b.isdigit()
-    assert c.isalpha()
 
-    random.seed(50)
-    result = random.custom_code()
-    assert result == 'M262'
+@pytest.mark.parametrize(
+    'mask, digit, char', [
+        ('??-FF-??', '?', '?'),
+        ('@@-FF-@@', '@', '@'),
+    ],
+)
+def test_custom_code_with_same_placeholders(random, mask, digit, char):
+    with pytest.raises(ValueError):
+        random.custom_code(mask=mask, char=char, digit=digit)
+
+
+@pytest.mark.parametrize(
+    'seed, expected', [
+        (32, 'C239'),
+        (0xff, 'B670'),
+        ('👽', 'B806'),
+    ],
+)
+def test_custom_code_with_seed(random, seed, expected):
+    random.seed(seed)
+    assert random.custom_code() == expected
 
 
 def test_get_random_item(random):
