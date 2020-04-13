@@ -47,6 +47,7 @@ Patches and Suggestions
 -  Jin Yang `(redus)`_
 -  Json701 `(jasonwaiting-dev)`_
 -  Jérôme Christ `(jeromechrist)`_
+-  Jürg Rast `(jrast)`_
 -  Michael Crilly `(mrcrilly)`_
 -  Michael Hand `(mipaaa)`_
 -  Paul Walters `(PaulWaltersDev)`_
@@ -140,3 +141,4 @@ Patches and Suggestions
 .. _(garyd203): https://github.com/garyd203
 .. _(Shanmugapriya03): https://github.com/Shanmugapriya03
 .. _(jwilges): https://github.com/jwilges
+.. _(jrast): https://github.com/jrast
