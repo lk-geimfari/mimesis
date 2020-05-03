@@ -423,17 +423,17 @@ dev = ["mock"]
 
 [[package]]
 category = "dev"
-description = "Thin-wrapper around the mock package for easier use with py.test"
+description = "Thin-wrapper around the mock package for easier use with pytest"
 name = "pytest-mock"
 optional = false
-python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
-version = "1.13.0"
+python-versions = ">=3.5"
+version = "3.1.0"
 
 [package.dependencies]
 pytest = ">=2.7"
 
 [package.extras]
-dev = ["pre-commit", "tox"]
+dev = ["pre-commit", "tox", "pytest-asyncio"]
 
 [[package]]
 category = "dev"
@@ -576,7 +576,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["jaraco.itertools", "func-timeout"]
 
 [metadata]
-content-hash = "eb8dee20dc97da93ce95d7d202af78eab60aa7a107adfc87bb234ce1d7652ed2"
+content-hash = "85d7b85bc2e8448aeebae29a43b28785f1aeb518cd9aacce28990699506b6b11"
 python-versions = "^3.6"
 
 [metadata.files]
@@ -769,8 +769,8 @@ pytest-isort = [
     {file = "pytest_isort-1.0.0-py2.py3-none-any.whl", hash = "sha256:5d47dd4c45a7c2eb4a0401ae4febe143724dd8a2acf1e7317c80145bac8b608a"},
 ]
 pytest-mock = [
-    {file = "pytest-mock-1.13.0.tar.gz", hash = "sha256:e24a911ec96773022ebcc7030059b57cd3480b56d4f5d19b7c370ec635e6aed5"},
-    {file = "pytest_mock-1.13.0-py2.py3-none-any.whl", hash = "sha256:67e414b3caef7bff6fc6bd83b22b5bc39147e4493f483c2679bc9d4dc485a94d"},
+    {file = "pytest-mock-3.1.0.tar.gz", hash = "sha256:ce610831cedeff5331f4e2fc453a5dd65384303f680ab34bee2c6533855b431c"},
+    {file = "pytest_mock-3.1.0-py2.py3-none-any.whl", hash = "sha256:997729451dfc36b851a9accf675488c7020beccda15e11c75632ee3d1b1ccd71"},
 ]
 pytest-randomly = [
     {file = "pytest-randomly-3.3.1.tar.gz", hash = "sha256:568b6a3bd251b566e8d99fc7bcb15c3c39561babd07e16412563b7dab1b0290a"},
