@@ -28,7 +28,7 @@ pygments = "^2.5"
 flake8-type-annotations = "^0.1.0"
 pytest-randomly = "^3.3"
 check-manifest = "^0.40.0"
-readme-renderer = "^25.0"
+readme-renderer = "^26.0"
 pytz = "^2020.1"
 
 [build-system]
