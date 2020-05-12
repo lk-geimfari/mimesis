@@ -1,18 +1,25 @@
 SHELL:=/usr/bin/env bash
 
+SEED = unspecified
+
+ifneq ("$(SEED)", "unspecified")
+RANDOM_SEED = --randomly-seed=$(SEED)
+endif
 
 .PHONY: help
 help:
 	@echo "Available options:"
 	@echo "........................................................"
-	@echo "clean-pyc    - remove Python file artifacts"
-	@echo "clean-build  - remove build artifacts"
-	@echo "clean        - remove build and Python file artifacts"
-	@echo "docs         - build Sphinx HTML documentation and open in browser"
-	@echo "test         - run tests quickly with the default Python"
-	@echo "type-check   - run mypy for checking types"
-	@echo "publish      - create dist and upload package to PyPI"
-	@echo "install      - install the package to the active Python's site-packages"
+	@echo "clean-pyc      - remove Python file artifacts"
+	@echo "clean-build    - remove build artifacts"
+	@echo "clean          - remove build and Python file artifacts"
+	@echo "docs           - build Sphinx HTML documentation and open in browser"
+	@echo "test           - run tests quickly with the default Python"
+	@echo "test SEED=last - rerun tests with identical seed for pytest-randomly"
+	@echo "test SEED=1234 - run tests with specified seed for pytest-randomly"
+	@echo "type-check     - run mypy for checking types"
+	@echo "publish        - create dist and upload package to PyPI"
+	@echo "install        - install the package to the active Python's site-packages"
 	@echo "........................................................"
 
 
@@ -42,7 +49,7 @@ clean: clean-pyc clean-build
 
 .PHONY: test
 test:
-	pytest --color=yes ./
+	pytest --color=yes $(RANDOM_SEED) ./
 	mypy mimesis/ tests/
 	make clean
 
