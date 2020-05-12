@@ -83,6 +83,9 @@ Patches and Suggestions
 -  Gary Donovan `(garyd203)`_
 -  Shanmuga Priya R `(Shanmugapriya03)`_
 -  Jeffrey Wilges `(jwilges)`_
+-  Tim Kreitner `(tabassco)`_
+
+
 
 .. _(lk-geimfari): https://github.com/lk-geimfari
 .. _(sobolevn): https://github.com/sobolevn
@@ -142,3 +145,4 @@ Patches and Suggestions
 .. _(Shanmugapriya03): https://github.com/Shanmugapriya03
 .. _(jwilges): https://github.com/jwilges
 .. _(jrast): https://github.com/jrast
+.. _(tabassco): https://github.com/tabassco
