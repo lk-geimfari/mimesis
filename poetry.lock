@@ -421,7 +421,7 @@ description = "pytest plugin to check FLAKE8 requirements"
 name = "pytest-flake8"
 optional = false
 python-versions = "*"
-version = "1.0.5"
+version = "1.0.6"
 
 [package.dependencies]
 flake8 = ">=3.5"
@@ -786,8 +786,8 @@ pytest-cov = [
     {file = "pytest_cov-2.8.1-py2.py3-none-any.whl", hash = "sha256:cdbdef4f870408ebdbfeb44e63e07eb18bb4619fae852f6e760645fa36172626"},
 ]
 pytest-flake8 = [
-    {file = "pytest-flake8-1.0.5.tar.gz", hash = "sha256:d85efaafbdb9580791cfa8671799dd40d482fc30bd4476c1ca5efd661e751333"},
-    {file = "pytest_flake8-1.0.5-py2.py3-none-any.whl", hash = "sha256:6e26d94ad41184d9a5113a90179b303efddb53eda505f827418ca78f5b39403a"},
+    {file = "pytest-flake8-1.0.6.tar.gz", hash = "sha256:1b82bb58c88eb1db40524018d3fcfd0424575029703b4e2d8e3ee873f2b17027"},
+    {file = "pytest_flake8-1.0.6-py2.py3-none-any.whl", hash = "sha256:2e91578ecd9b200066f99c1e1de0f510fbb85bcf43712d46ea29fe47607cc234"},
 ]
 pytest-isort = [
     {file = "pytest-isort-1.0.0.tar.gz", hash = "sha256:758156cb4dc1db72adc1b7e253011f5eea117fab32af03cedb4cbfc6058b5f8f"},
