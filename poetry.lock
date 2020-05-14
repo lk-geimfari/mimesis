@@ -169,7 +169,7 @@ description = "Flake8 lint for quotes."
 name = "flake8-quotes"
 optional = false
 python-versions = "*"
-version = "2.1.1"
+version = "3.2.0"
 
 [package.dependencies]
 flake8 = "*"
@@ -597,7 +597,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["jaraco.itertools", "func-timeout"]
 
 [metadata]
-content-hash = "02f4322e3219c99800c39ed1367d2548236f13c230729a0a3278e93eba84ab6a"
+content-hash = "de1a91f567c42229918bf25329b78541391c75ad46caa3a9a1adfad41d01bcbc"
 python-versions = "^3.6"
 
 [metadata.files]
@@ -691,7 +691,7 @@ flake8-docstrings = [
     {file = "flake8_docstrings-1.5.0-py2.py3-none-any.whl", hash = "sha256:a256ba91bc52307bef1de59e2a009c3cf61c3d0952dbe035d6ff7208940c2edc"},
 ]
 flake8-quotes = [
-    {file = "flake8-quotes-2.1.1.tar.gz", hash = "sha256:11a15d30c92ca5f04c2791bd7019cf62b6f9d3053eb050d02a135557eb118bfc"},
+    {file = "flake8-quotes-3.2.0.tar.gz", hash = "sha256:3f1116e985ef437c130431ac92f9b3155f8f652fda7405ac22ffdfd7a9d1055e"},
 ]
 flake8-type-annotations = [
     {file = "flake8-type-annotations-0.1.0.tar.gz", hash = "sha256:88775455792ad7bbd63a71bc94e8a077deb5608eacb5add7e5a7a648c7636426"},
