@@ -184,6 +184,19 @@ To run tests, simply:
 Check out logs of Travis CI or AppVeyor if tests were failed on creating
 PR, there you can find useful information.
 
+The tests are randomly shuffled by pytest-randomly. To rerun the tests with the previous seed use:
+
+.. code:: text
+
+    ) make test SEED=last
+
+If you want to specify a seed ahead of time use:
+
+.. code:: text
+
+    ) make test SEED=$int
+    
+
 Type checking
 ~~~~~~~~~~~~~
 
