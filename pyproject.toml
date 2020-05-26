@@ -10,7 +10,7 @@ python = "^3.6"
 
 [tool.poetry.dev-dependencies]
 codecov = "^2.1"
-flake8 = "^3.7"
+flake8 = "^3.8"
 flake8-builtins = "^1.5"
 flake8-commas = "^2.0"
 flake8-quotes = "^3.2"
