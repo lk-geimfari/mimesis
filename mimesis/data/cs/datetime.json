@@ -20,23 +20,23 @@
     ]
   },
   "formats": {
-    "date": "%d-%m-%Y",
+    "date": "%d.%m.%Y",
     "time": "%H:%M:%S"
   },
   "month": {
     "abbr": [
-      "Brez.",
-      "Cerv.",
-      "Cerven.",
+      "Bře.",
       "Dub.",
-      "Kvet.",
       "Led.",
-      "List.",
-      "Pros.",
-      "Ríj.",
+      "Lis.",
+      "Pro.",
       "Srp.",
-      "Zár.",
-      "Ún."
+      "Zář.",
+      "Kvě.",
+      "Úno.",
+      "Čvc.",
+      "Čvn.",
+      "Říj."
     ],
     "name": [
       "Březen",
