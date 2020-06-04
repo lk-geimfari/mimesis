@@ -574,6 +574,7 @@ VRC_BY_LOCALES = {
     'pt': 'P',
     'pt-br': 'BR',
     'ru': 'RUS',
+    'sk': 'SK',
     'sv': 'S',
     'tr': 'TR',
     'uk': 'UA',

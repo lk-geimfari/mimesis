@@ -31,6 +31,7 @@ PL = 'pl'
 PT = 'pt'
 PT_BR = 'pt-br'
 RU = 'ru'
+SK = 'sk'
 SV = 'sv'
 TR = 'tr'
 UK = 'uk'
@@ -154,6 +155,10 @@ SUPPORTED_LOCALES = {
     RU: {
         'name': 'Russian',
         'name_local': 'Русский',
+    },
+    SK: {
+        'name': 'Slovak',
+        'name_local': 'slovensky',
     },
     SV: {
         'name': 'Swedish',

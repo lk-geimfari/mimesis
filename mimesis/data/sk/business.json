@@ -1,0 +1,22 @@
+{
+  "company": {
+    "name": [
+      "Kvetináreň",
+      "Paštikáreň",
+      "Záhradkáreň",
+      "Šalátičkáreň",
+      "Šróbikáreň"
+    ],
+    "type": {
+      "abbr": [
+        "a.s.",
+        "s.r.o."
+      ],
+      "title": [
+        "Akciová spoločnosť",
+        "Spoločnosť s ručením obmedzeným"
+      ]
+    }
+  },
+  "currency-code": "EUR"
+}

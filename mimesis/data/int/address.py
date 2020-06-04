@@ -146,6 +146,7 @@ SHORTENED_ADDRESS_FMT = [
     'nl',
     'nl-be',
     'no',
+    'sk',
     'sv',
 ]
 

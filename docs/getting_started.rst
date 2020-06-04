@@ -204,6 +204,7 @@ Code     Name                  Native Name
 `pt`     Portuguese            Português
 `pt-br`  Brazilian Portuguese  Português Brasileiro
 `ru`     Russian               Русский
+`sk`     Slovak                Slovensky
 `sv`     Swedish               Svenska
 `tr`     Turkish               Türkçe
 `uk`     Ukrainian             Український
