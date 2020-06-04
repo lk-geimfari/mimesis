@@ -84,6 +84,7 @@ Patches and Suggestions
 -  Shanmuga Priya R `(Shanmugapriya03)`_
 -  Jeffrey Wilges `(jwilges)`_
 -  Tim Kreitner `(tabassco)`_
+-  Miroslav Šedivý `(eumiro)`_
 
 
 
@@ -146,3 +147,4 @@ Patches and Suggestions
 .. _(jwilges): https://github.com/jwilges
 .. _(jrast): https://github.com/jrast
 .. _(tabassco): https://github.com/tabassco
+.. _(eumiro): https://github.com/eumiro
