@@ -206,7 +206,7 @@ Code     Name                  Native Name
 `ru`     Russian               Русский
 `sv`     Swedish               Svenska
 `tr`     Turkish               Türkçe
-`uk`     Ukrainian             Український
+`uk`     Ukrainian             Українська
 `zh`     Chinese               汉语
 =======  ====================  ====================
 
