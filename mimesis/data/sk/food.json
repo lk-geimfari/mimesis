@@ -1,0 +1,33 @@
+{
+  "dishes": [
+    "bravčový rezeň",
+    "bryndzové halušky",
+    "pizza",
+    "vyprážaný syr"
+  ],
+  "drinks": [
+    "kofola",
+    "káva",
+    "pivo",
+    "slivovica",
+    "voda",
+    "víno",
+    "čaj"
+  ],
+  "fruits": [
+    "banán",
+    "broskyňa",
+    "hruška",
+    "jablko",
+    "marhuľa",
+    "pomaranč",
+    "slivka"
+  ],
+  "spices": [
+    "chili"
+  ],
+  "vegetables": [
+    "mrkva",
+    "zemiak"
+  ]
+}

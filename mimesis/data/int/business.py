@@ -229,6 +229,7 @@ CURRENCY_SYMBOLS = {
     'pt': '€',
     'pt-br': 'R$',
     'ru': '₽',
+    'sk': '€',
     'sv': 'kr',
     'tr': '₺',
     'uk': '₴',
