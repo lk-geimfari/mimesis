@@ -1,12 +1,12 @@
 Creator
 ~~~~~~~
 
--  Likid Geimfari `(lk-geimfari)`_
+-  Isaak Uchakaev (Likid Geimfari) `(lk-geimfari)`_
 
 Maintainers
 ~~~~~~~~~~~
 
--  Likid Geimfari `(lk-geimfari)`_
+-  Isaak Uchakaev (Likid Geimfari) `(lk-geimfari)`_
 -  Sobolev Nikita `(sobolevn)`_
 -  Emilio Cecchini `(ceccoemi)`_
 
