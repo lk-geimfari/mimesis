@@ -1,3 +1,13 @@
+Version 4.1.0
+-------------
+
+.. warning:: Work still in progress.
+
+**Added**:
+
+- Added method ``manufacturer()`` for class ``Transport()``
+
+
 Version 4.0.0
 -------------
 

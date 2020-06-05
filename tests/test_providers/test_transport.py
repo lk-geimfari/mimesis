@@ -4,7 +4,14 @@ import re
 import pytest
 
 from mimesis import Transport
-from mimesis.data import AIRPLANES, CARS, TRUCKS, VR_CODES, VRC_BY_LOCALES
+from mimesis.data import (
+    AIRPLANES,
+    CARS,
+    MANUFACTURERS,
+    TRUCKS,
+    VR_CODES,
+    VRC_BY_LOCALES,
+)
 from mimesis.locales import LIST_OF_LOCALES
 
 from . import patterns
@@ -33,6 +40,9 @@ class TestTransport(object):
     def test_car(self, transport):
         result = transport.car()
         assert result in CARS
+
+    def test_manufacturer(self, transport):
+        assert transport.manufacturer() in MANUFACTURERS
 
     def test_airplane(self, transport):
         mask = '@###'
@@ -68,6 +78,9 @@ class TestSeededTransport(object):
 
     def test_car(self, t1, t2):
         assert t1.car() == t2.car()
+
+    def test_manufacturer(self, t1, t2):
+        assert t1.manufacturer() == t2.manufacturer()
 
     def test_airplane(self, t1, t2):
         assert t1.airplane() == t2.airplane()

@@ -4,7 +4,14 @@
 
 from typing import Optional
 
-from mimesis.data import AIRPLANES, CARS, TRUCKS, VR_CODES, VRC_BY_LOCALES
+from mimesis.data import (
+    AIRPLANES,
+    CARS,
+    MANUFACTURERS,
+    TRUCKS,
+    VR_CODES,
+    VRC_BY_LOCALES,
+)
 from mimesis.providers.base import BaseProvider
 
 __all__ = ['Transport']
@@ -40,6 +47,16 @@ class Transport(BaseProvider):
             self.random.choice(TRUCKS),
             self.random.custom_code(model_mask),
         )
+
+    def manufacturer(self) -> str:
+        """Get a random card manufacturer.
+
+        :return: A car manufacturer
+
+        :Example:
+            Tesla.
+        """
+        return self.random.choice(MANUFACTURERS)
 
     def car(self) -> str:
         """Get a random vehicle.
