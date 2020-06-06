@@ -194,8 +194,8 @@ class Address(BaseDataProvider):
         """
         if allow_random:
             return self.random.choice(self._data['country']['name'])
-        else:
-            return self._data['country']['current_locale']
+
+        return self._data['country']['current_locale']
 
     def city(self) -> str:
         """Get a random city.
