@@ -65,10 +65,11 @@ class Choice(BaseProvider):
         if not items:
             raise ValueError('**items** must be a non-empty sequence.')
 
+        if length < 0:
+            raise ValueError('**length** should be a positive integer.')
+
         if length == 0:
             return self.random.choice(items)
-        elif length < 0:
-            raise ValueError('**length** should be a positive integer.')
 
         data = []  # type: ignore
         if unique and len(set(items)) < length:  # avoid an infinite while loop
