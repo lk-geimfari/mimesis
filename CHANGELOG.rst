@@ -8,6 +8,10 @@ Version 4.1.0
 - Added method ``manufacturer()`` for class ``Transport()``
 - Added ``sk`` (Slovak) locale support
 
+**Updated**:
+
+- Update parameter ``end`` for some methods of provider ``Datetime()`` (Fix #870)
+
 **Removed**:
 
 - Removed the deprecated ``download_image()`` function from the ``shortcuts`` module, use your custom downloader instead.
