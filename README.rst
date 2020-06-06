@@ -23,6 +23,10 @@ Description
      :target: https://codecov.io/gh/lk-geimfari/mimesis
      :alt: Code Coverage
 
+.. image:: https://www.codefactor.io/repository/github/lk-geimfari/mimesis/badge
+   :target: https://www.codefactor.io/repository/github/lk-geimfari/mimesis
+   :alt: CodeFactor
+
 .. image:: https://img.shields.io/pypi/v/mimesis?color=bright-green
      :target: https://pypi.org/project/mimesis/
      :alt: PyPi Version
