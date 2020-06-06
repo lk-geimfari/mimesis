@@ -54,7 +54,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'Mimesis'
-copyright = '2017-2019, Isaak Uchakaev (Likid Geimfari) & contributors'
+copyright = '2017-2020, Isaak Uchakaev (Likid Geimfari) & contributors'
 author = 'Isaak Uchakaev (Likid Geimfari)'
 
 # The version info for the project you're documenting, acts as replacement for
