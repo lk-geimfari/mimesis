@@ -2,12 +2,6 @@
 
 """This module is provide internal util functions."""
 
-import ssl
-from os import path
-from typing import Union
-from urllib import request
-from uuid import uuid4
-
 __all__ = ['luhn_checksum']
 
 
