@@ -6,7 +6,7 @@ Version 4.1.0
 **Added**:
 
 - Added method ``manufacturer()`` for class ``Transport()``
-
+- Added ``sk`` (Slovak) locale support
 
 Version 4.0.0
 -------------
