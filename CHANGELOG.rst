@@ -12,6 +12,9 @@ Version 4.1.0
 
 - Update parameter ``end`` for some methods of provider ``Datetime()`` (Fix #870)
 
+**Removed**:
+
+- Removed the deprecated ``download_image()`` function from the ``shortcuts`` module, use your custom downloader instead.
 
 Version 4.0.0
 -------------

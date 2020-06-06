@@ -185,12 +185,13 @@ class Internet(BaseProvider):
                     height: Union[int, str] = 1080,
                     keywords: Optional[List[str]] = None,
                     writable: bool = False) -> Union[str, bytes]:
-        """Generate random stock image (JPEG) hosted on Unsplash.
+        """Generate random stock image (JPG/JPEG) hosted on Unsplash.
 
         See «Random search term» on https://source.unsplash.com/
         for more details.
 
-        .. note:: This method required an active HTTP connection.
+        .. note:: This method required an active HTTP connection
+            if you want to get writable object
 
         :param width: Width of the image.
         :param height: Height of the image.
@@ -198,24 +199,23 @@ class Internet(BaseProvider):
         :param writable: Return image as sequence ob bytes.
         :return: Link to the image.
         """
-        api = 'https://source.unsplash.com/{}x{}?{}'
+        api_url = 'https://source.unsplash.com/{}x{}?{}'
 
         if keywords is not None:
             keywords_str = ','.join(keywords)
         else:
             keywords_str = ''
 
-        url = api.format(width, height, keywords_str)
+        url = api_url.format(width, height, keywords_str)
 
-        try:
-            response = urllib.request.urlopen(url)
-            if writable:
+        if writable:
+            try:
+                response = urllib.request.urlopen(url)
                 return response.read()
-            url = response.geturl()
-            return url
-        except urllib.error.URLError:
-            raise urllib.error.URLError(
-                'Required an active HTTP connection')
+            except urllib.error.URLError:
+                raise urllib.error.URLError(
+                    'Required an active HTTP connection')
+        return url
 
     def hashtags(self, quantity: int = 4) -> Union[str, list]:
         """Generate a list of hashtags.
