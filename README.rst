@@ -81,7 +81,7 @@ More about the other providers you can read in our `documentation`_.
 Locales
 -------
 
-Mimesis currently includes support for 33 different `locales`_. You can
+Mimesis currently includes support for 34 different `locales`_. You can
 specify a locale when creating providers and they will return data that
 is appropriate for the language or country associated with that locale.
 
