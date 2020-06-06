@@ -237,8 +237,8 @@ class Person(BaseDataProvider):
             md5 = hashlib.md5()
             md5.update(password.encode())
             return md5.hexdigest()
-        else:
-            return password
+
+        return password
 
     def email(self, domains: Union[tuple, list] = None) -> str:
         """Generate a random email.
