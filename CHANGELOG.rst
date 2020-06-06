@@ -10,7 +10,7 @@ Version 4.1.0
 
 **Removed**:
 
-- Removed the deprecated ``download_image()`` functions from the ``shortcuts`` module, use your custom downloader instead.
+- Removed the deprecated ``download_image()`` function from the ``shortcuts`` module, use your custom downloader instead.
 
 Version 4.0.0
 -------------
