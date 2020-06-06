@@ -47,9 +47,9 @@ class TestDatetime(object):
             _datetime.bulk_create_datetimes(None, None)
 
     def test_year(self, _datetime):
-        result = _datetime.year(minimum=2000, maximum=2016)
+        result = _datetime.year(minimum=2000, maximum=_datetime.CURRENT_YEAR)
         assert result >= 2000
-        assert result <= 2016
+        assert result <= _datetime.CURRENT_YEAR
 
     def test_gmt_offset(self, _datetime):
         result = _datetime.gmt_offset()
@@ -60,9 +60,9 @@ class TestDatetime(object):
         assert ((result >= 1) or (result <= 31))
 
     def test_date(self, dt):
-        date_object = dt.date(start=1999, end=1999)
+        date_object = dt.date(start=dt.CURRENT_YEAR, end=dt.CURRENT_YEAR)
         assert isinstance(date_object, datetime.date)
-        assert date_object.year == 1999
+        assert date_object.year == dt.CURRENT_YEAR
 
     def test_formatted_date(self, dt):
         fmt_date = dt.formatted_date('%Y', start=2000, end=2000)
@@ -147,11 +147,11 @@ class TestDatetime(object):
         assert start <= int(dt_str) <= end
 
     def test_week_date(self, _datetime):
-        result = _datetime.week_date(start=2017, end=2018)
+        result = _datetime.week_date(start=2017, end=_datetime.CURRENT_YEAR)
         result = result.replace('-', ' ').replace('W', '')
         year, week = result.split(' ')
 
-        assert (int(year) >= 2017) and (int(year) <= 2018)
+        assert (int(year) >= 2017) and (int(year) <= _datetime.CURRENT_YEAR)
         assert int(week) <= 52
 
 

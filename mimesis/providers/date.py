@@ -13,12 +13,12 @@ from mimesis.typing import Date, DateTime, Time
 
 __all__ = ['Datetime']
 
-# See: https://git.io/Jf15A
-CURRENT_YEAR = datetime.now().year
-
 
 class Datetime(BaseDataProvider):
     """Class for generating data related to the date and time."""
+
+    # See: https://git.io/Jf15A
+    CURRENT_YEAR = datetime.now().year
 
     def __init__(self, *args, **kwargs):
         """Initialize attributes.
