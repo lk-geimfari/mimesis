@@ -560,5 +560,9 @@
       ]
     }
   },
-  "currency-code": "NOK"
+  "currency-code": "NOK",
+  "price-format": "kr #",
+  "numeric-decimal": ".",
+  "numeric-thousands": ",",
+  "numeric-frac-digits": 2
 }

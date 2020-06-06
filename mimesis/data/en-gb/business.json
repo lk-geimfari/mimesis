@@ -339,5 +339,9 @@
       ]
     }
   },
-  "currency-code": "GBP"
+  "currency-code": "GBP",
+  "price-format": "£#",
+  "numeric-decimal": ".",
+  "numeric-thousands": ",",
+  "numeric-frac-digits": 2
 }

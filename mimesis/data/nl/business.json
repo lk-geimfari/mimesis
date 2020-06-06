@@ -102,5 +102,9 @@
       ]
     }
   },
-  "currency-code": "EUR"
+  "currency-code": "EUR",
+  "numeric-decimal": ",",
+  "numeric-frac-digits": 2,
+  "numeric-thousands": ".",
+  "price-format": "# €"
 }

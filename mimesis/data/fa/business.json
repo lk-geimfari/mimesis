@@ -94,5 +94,9 @@
       ]
     }
   },
-  "currency-code": "IRR"
+  "currency-code": "IRR",
+  "price-format": "#",
+  "numeric-decimal": ",",
+  "numeric-thousands": ".",
+  "numeric-frac-digits": 2
 }

@@ -98,8 +98,19 @@ class Business(BaseDataProvider):
         :param maximum: Min value of price.
         :return: Price.
         """
-        price = self.random.uniform(minimum, maximum, precision=2)
-        return '{0} {1}'.format(price, self.currency_symbol())
+        price_format = self._data['price-format']
+        numeric_frac_digits = self._data['numeric-frac-digits']
+        delims = {
+            '.': self._data['numeric-decimal'],
+            ',': self._data['numeric-thousands'],
+        }
+
+        value = self.random.uniform(minimum, maximum)
+        price = '{:,.{}f}'.format(value, numeric_frac_digits)
+
+        price = ''.join(delims.get(char, char) for char in price)
+
+        return price_format.replace('#', price)
 
     def price_in_btc(self, minimum: float = 0, maximum: float = 2) -> str:
         """Generate random price in BTC.
