@@ -24,18 +24,8 @@ matrix:
 
         - os: osx
           language: generic
-          env: PYTHON=3.6.8
-          name: "Python 3.6 on macOS"
-
-        - os: osx
-          language: generic
-          env: PYTHON=3.7.5
-          name: "Python 3.7 on macOS"
-
-        - os: osx
-          language: generic
           env: PYTHON=3.8.0
-          name: "Python 3.8 on macOS"
+          name: "Python 3.8.0 on macOS"
 
         - os: windows
           language: shell
