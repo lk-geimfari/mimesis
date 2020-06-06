@@ -155,7 +155,7 @@ class Internet(BaseProvider):
             self.random.randint(0x00, 0xff),
             self.random.randint(0x00, 0xff),
         ]
-        mac = map(lambda x: '{:02x}'.format(x), mac_hex)
+        mac = ['{:02x}'.format(x) for x in mac_hex]
         return ':'.join(mac)
 
     def emoji(self) -> str:
@@ -298,5 +298,5 @@ class Internet(BaseProvider):
         """
         if isinstance(port_range, PortRange):
             return self.random.randint(*port_range.value)
-        else:
-            raise NonEnumerableError(PortRange)
+
+        raise NonEnumerableError(PortRange)

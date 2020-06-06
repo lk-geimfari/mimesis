@@ -128,14 +128,15 @@ class RussiaSpecProvider(BaseSpecProvider):
         :return: INN.
         """
         def control_sum(nums: list, t: str) -> int:
-            digits = {
+            digits_dict = {
                 'n2': [7, 2, 4, 10, 3, 5, 9, 4, 6, 8],
                 'n1': [3, 7, 2, 4, 10, 3, 5, 9, 4, 6, 8],
             }
             number = 0
-            length = digits[t]
-            for i in range(0, len(length)):
-                number += nums[i] * length[i]
+            digits = digits_dict[t]
+
+            for i in range(0, len(digits)):
+                number += nums[i] * digits[i]
             return number % 11 % 10
 
         numbers = []
