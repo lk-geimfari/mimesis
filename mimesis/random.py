@@ -75,7 +75,6 @@ class Random(random_module.Random):
         """
         char_code = ord(char)
         digit_code = ord(digit)
-        code = bytearray(len(mask))
 
         if char_code == digit_code:
             raise ValueError('You cannot use the same '
@@ -86,6 +85,7 @@ class Random(random_module.Random):
             return int(self.random() * b) + a
 
         _mask = mask.encode()
+        code = bytearray(len(_mask))
         for i, p in enumerate(_mask):
             if p == char_code:
                 a = random_int(65, 91)  # A-Z

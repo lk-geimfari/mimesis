@@ -66,13 +66,16 @@ def test_uniform(random, precision):
     'mask, digit, char', [
         ('##-FA-@@', '#', '@'),
         ('**-AF-$$', '*', '$'),
+        ('**-š好-$$', '*', '$'),
     ],
 )
 def test_custom_code(random, mask, digit, char):
     result = random.custom_code(mask=mask, char=char, digit=digit)
-    digit, _, char = result.split('-')
+    digit, middle, char = result.split('-')
+    _, middle_mask, _ = mask.split('-')
     assert char.isalpha()
     assert digit.isdigit()
+    assert middle == middle_mask
 
 
 @pytest.mark.parametrize(
