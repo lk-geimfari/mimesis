@@ -46,13 +46,12 @@ Before Pull Request:
 - Rename folder `locale_template` to `your-locale-code`.
 - Make sure that you have replaced all `["Tests""]` sections with data for your locale.
 - Make sure that you have **removed** all `"__COMMENT_KEY__": "Description"` from json files. This data only for developers.
-- Add your locale to `SUPPORTED_LOCALES` in `mimesis/settings.py`.
+- Add your locale to `SUPPORTED_LOCALES` in `mimesis/locales.py`.
 - Format the content of json files alphabetically using [jsoneditoronline.org](http://jsoneditoronline.org)
 - If your locale uses shortened address format, then add your locale code to `SHORTENED_ADDRESS_FMT` in `mimesis/data/int/address.py`
 - Make sure that you have added currency symbol for your locale to `CURRENCY_SYMBOLS` in `mimesis/data/int/business.py`
 - Make sure that you have added your locale code to `ISBN_GROUPS` in  `mimesis/data/int/code.py`
 - Run tests and make sure that all tests pass
-- Grab flag of your country from [this](https://emojipedia.org/flags/) page and add it to the table of locales in `README.md`.
 - Add yourself to (`CONTRIBUTORS.md`)
 
 
