@@ -603,5 +603,9 @@
       ]
     }
   },
-  "currency-code": "RUB"
+  "currency-code": "RUB",
+  "price-format": "# р",
+  "numeric-decimal": ",",
+  "numeric-thousands": ".",
+  "numeric-frac-digits": 2
 }

@@ -285,5 +285,9 @@
       ]
     }
   },
-  "currency-code": "CHF"
+  "currency-code": "CHF",
+  "price-format": "fr. #",
+  "numeric-decimal": ",",
+  "numeric-thousands": ".",
+  "numeric-frac-digits": 2
 }

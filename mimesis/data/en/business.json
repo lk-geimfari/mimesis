@@ -1171,5 +1171,9 @@
       ]
     }
   },
-  "currency-code": "USD"
+  "currency-code": "USD",
+  "price-format": "$#",
+  "numeric-decimal": ".",
+  "numeric-thousands": ",",
+  "numeric-frac-digits": 2
 }

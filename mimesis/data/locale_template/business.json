@@ -12,5 +12,9 @@
       ]
     }
   },
-  "currency-code": "Test"
+  "currency-code": "Test",
+  "price-format": "# Test",
+  "numeric-decimal": ".",
+  "numeric-thousands": ",",
+  "numeric-frac-digits": 2
 }

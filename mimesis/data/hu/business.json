@@ -38,5 +38,9 @@
       "Zwack"
     ]
   },
-  "currency-code": "HUF"
+  "currency-code": "HUF",
+  "price-format": "# Ft",
+  "numeric-decimal": ",",
+  "numeric-thousands": ".",
+  "numeric-frac-digits": 2
 }

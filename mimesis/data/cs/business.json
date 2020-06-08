@@ -27,5 +27,9 @@
       "DATASCAN"
     ]
   },
-  "currency-code": "CZK"
+  "currency-code": "CZK",
+  "price-format": "# Kč",
+  "numeric-decimal": ",",
+  "numeric-thousands": ".",
+  "numeric-frac-digits": 2
 }
