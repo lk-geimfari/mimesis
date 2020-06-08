@@ -11,6 +11,7 @@ Version 4.1.0
 **Updated**:
 
 - Update parameter ``end`` for some methods of provider ``Datetime()`` (Fix #870)
+- Update ``.price()`` to make it supported locales (Fix #875)
 
 **Removed**:
 
