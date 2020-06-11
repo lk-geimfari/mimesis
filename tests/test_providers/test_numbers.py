@@ -143,14 +143,22 @@ class TestNumbers(object):
             for e in row:
                 assert isinstance(e, int)
 
+        precision_real, precision_imag = 4, 6
         result = numbers.matrix(
-            num_type=NumTypes.COMPLEXES, precision_real=4, precision_imag=6)
+            num_type=NumTypes.COMPLEXES,
+            precision_real=precision_real,
+            precision_imag=precision_imag)
+        result[0][0] = 0.0001 + 0.000001j
         assert len(result) == 10
         for row in result:
             assert len(row) == 10
             for e in row:
-                assert len(str(e.real).split('.')[1]) <= 4
-                assert len(str(e.imag).split('.')[1]) <= 6
+                real_str = '{:.{}f}'.format(e.real, precision_real)
+                imag_str = '{:.{}f}'.format(e.imag, precision_imag)
+                assert float(real_str) == e.real
+                assert float(imag_str) == e.imag
+                assert len(real_str.split('.')[1]) <= precision_real
+                assert len(imag_str.split('.')[1]) <= precision_imag
 
     def test_integer(self, numbers):
         result = numbers.integer_number(-100, 100)
