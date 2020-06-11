@@ -1,22 +1,22 @@
 {
   "day": {
     "name": [
-      "Poniedziałek",
-      "Wtorek",
-      "Środa",
-      "Czwartek",
-      "Piątek",
-      "Sobota",
-      "Niedziela"
+      "poniedziałek",
+      "wtorek",
+      "środa",
+      "czwartek",
+      "piątek",
+      "sobota",
+      "niedziela"
     ],
     "abbr": [
-      "Pn.",
-      "Wt.",
-      "Śr.",
-      "Czw.",
-      "Pt.",
-      "Sob.",
-      "Niedz."
+      "pn.",
+      "wt.",
+      "śr.",
+      "czw.",
+      "pt.",
+      "sob.",
+      "niedz."
     ]
   },
   "formats": {
@@ -25,32 +25,32 @@
   },
   "month": {
     "name": [
-      "Styczeń",
-      "Luty",
-      "Marzec",
-      "Kwiecień",
-      "Maj",
-      "Czerwiec",
-      "Lipiec",
-      "Sierpień",
-      "Wrzesień",
-      "Październik",
-      "Listopad",
-      "Grudzień"
+      "styczeń",
+      "luty",
+      "marzec",
+      "kwiecień",
+      "maj",
+      "czerwiec",
+      "lipiec",
+      "sierpień",
+      "wrzesień",
+      "październik",
+      "listopad",
+      "grudzień"
     ],
     "abbr": [
-      "Stycz.",
-      "Luty",
-      "Mar.",
-      "Kwiec.",
-      "Maj",
-      "Czerw.",
-      "Lip.",
-      "Sierp.",
-      "Wrzes.",
-      "Paźdz.",
-      "Listop.",
-      "Grudz."
+      "stycz.",
+      "luty",
+      "mar.",
+      "kwiec.",
+      "maj",
+      "czerw.",
+      "lip.",
+      "sierp.",
+      "wrzes.",
+      "paźdz.",
+      "listop.",
+      "grudz."
     ]
   },
   "periodicity": [

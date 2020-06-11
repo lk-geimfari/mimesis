@@ -1,22 +1,22 @@
 {
   "day": {
     "abbr": [
-      "ne",
-      "pi",
       "po",
-      "so",
-      "st",
       "ut",
-      "št"
+      "st",
+      "št",
+      "pi",
+      "so",
+      "ne"
     ],
     "name": [
-      "nedeľa",
-      "piatok",
       "pondelok",
-      "sobota",
-      "streda",
       "utorok",
-      "štvrtok"
+      "streda",
+      "štvrtok",
+      "piatok",
+      "sobota",
+      "nedeľa"
     ]
   },
   "formats": {
@@ -25,32 +25,32 @@
   },
   "month": {
     "abbr": [
-      "apr.",
-      "aug.",
-      "dec.",
-      "feb.",
-      "jan.",
-      "júl",
-      "jún",
-      "mar.",
+      "jan",
+      "feb",
+      "mar",
+      "apr",
       "máj",
-      "nov.",
-      "okt.",
-      "sep."
+      "jún",
+      "júl",
+      "aug",
+      "sep",
+      "okt",
+      "nov",
+      "dec"
     ],
     "name": [
-      "apríl",
-      "august",
-      "december",
-      "február",
       "január",
-      "júl",
-      "jún",
+      "február",
       "marec",
+      "apríl",
       "máj",
+      "jún",
+      "júl",
+      "august",
+      "september",
       "november",
       "október",
-      "september"
+      "december"
     ]
   },
   "periodicity": [

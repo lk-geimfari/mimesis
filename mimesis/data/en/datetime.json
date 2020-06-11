@@ -1,22 +1,22 @@
 {
   "day": {
     "abbr": [
-      "Fri.",
-      "Mon.",
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
       "Sat",
-      "Sun.",
-      "Thu.",
-      "Tue.",
-      "Wed."
+      "Sun"
     ],
     "name": [
-      "Friday",
       "Monday",
-      "Saturday",
-      "Sunday",
-      "Thursday",
       "Tuesday",
-      "Wednesday"
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday"
     ]
   },
   "formats": {
@@ -25,18 +25,18 @@
   },
   "month": {
     "abbr": [
-      "Jan.",
-      "Feb.",
-      "Mar.",
-      "Apr.",
-      "May.",
-      "Jun.",
-      "Jul.",
-      "Aug.",
-      "Sept.",
-      "Oct.",
-      "Nov.",
-      "Dec."
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sept",
+      "Oct",
+      "Nov",
+      "Dec"
     ],
     "name": [
       "January",

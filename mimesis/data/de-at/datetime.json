@@ -1,2 +1,32 @@
 {
+  "month": {
+    "abbr": [
+      "Jän.",
+      "Feb.",
+      "März",
+      "Apr.",
+      "Mai",
+      "Jun.",
+      "Jul.",
+      "Aug.",
+      "Sept.",
+      "Okt.",
+      "Nov.",
+      "Dez."
+    ],
+    "name": [
+      "Jänner",
+      "Februar",
+      "März",
+      "April",
+      "Mai",
+      "Juni",
+      "Juli",
+      "August",
+      "September",
+      "Oktober",
+      "November",
+      "Dezember"
+    ]
+  }
 }

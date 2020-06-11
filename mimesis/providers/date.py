@@ -4,7 +4,7 @@
 
 from calendar import monthrange, timegm
 from datetime import date, datetime, time, timedelta
-from typing import List, Optional, Union
+from typing import Any, List, Optional, Union
 
 from mimesis.compat import pytz
 from mimesis.data import GMT_OFFSETS, ROMAN_NUMS, TIMEZONES
@@ -159,7 +159,7 @@ class Datetime(BaseDataProvider):
         if not fmt:
             fmt = self._data['formats'].get('date')
 
-        return date_obj.strftime(fmt)
+        return self._strftime(date_obj, fmt)
 
     def time(self) -> Time:
         """Generate a random time object.
@@ -242,8 +242,7 @@ class Datetime(BaseDataProvider):
             date_fmt = self._data['formats'].get('date')
             time_fmt = self._data['formats'].get('time')
             fmt = '{} {}'.format(date_fmt, time_fmt)
-
-        return dt_obj.strftime(fmt)
+        return self._strftime(dt_obj, fmt)
 
     def timestamp(self, posix: bool = True, **kwargs) -> Union[str, int]:
         """Generate random timestamp.
@@ -258,3 +257,22 @@ class Datetime(BaseDataProvider):
             return timegm(stamp.utctimetuple())
 
         return stamp.strftime('%Y-%m-%dT%H:%M:%SZ')
+
+    def _strftime(self, dt_obj: Any, fmt: str) -> str:
+        """Apply a localized strftime.
+
+        :param dt_obj: a datetime/date object.
+        :param fmt: a strftime format.
+        :return: formatted datetime/date string.
+        """
+        days = self._data['day']
+        months = self._data['month']
+        if '%a' in fmt:
+            fmt = fmt.replace('%a', days['abbr'][dt_obj.weekday()])
+        if '%A' in fmt:
+            fmt = fmt.replace('%A', days['name'][dt_obj.weekday()])
+        if '%b' in fmt:
+            fmt = fmt.replace('%b', months['abbr'][dt_obj.month - 1])
+        if '%B' in fmt:
+            fmt = fmt.replace('%B', months['name'][dt_obj.month - 1])
+        return dt_obj.strftime(fmt)

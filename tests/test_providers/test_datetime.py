@@ -154,6 +154,17 @@ class TestDatetime(object):
         assert (int(year) >= 2017) and (int(year) <= _datetime.CURRENT_YEAR)
         assert int(week) <= 52
 
+    @pytest.mark.parametrize('locale, expected', [
+        ('en', 'Thu Thursday Jan January 02 01 2020 03 04 05'),
+        ('de', 'Do Donnerstag Jan. Januar 02 01 2020 03 04 05'),
+        ('sk', 'št štvrtok jan január 02 01 2020 03 04 05'),
+    ])
+    def test_strftime(self, locale, expected):
+        fmt = '%a %A %b %B %d %m %Y %H %M %S'
+        now = datetime.datetime(2020, 1, 2, 3, 4, 5)
+        result = Datetime(locale)._strftime(now, fmt)
+        assert result == expected
+
 
 class TestSeededDatetime(object):
 
