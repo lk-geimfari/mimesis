@@ -3,42 +3,45 @@
 """Decorators for the public API and for internal purpose."""
 
 import functools
-from string import ascii_letters as letters
-from string import digits, punctuation
+from string import ascii_letters, digits, punctuation
 from typing import Callable
 
 from mimesis import data
 from mimesis.exceptions import UnsupportedLocale
 
+__all__ = ['romanize']
 
-def romanized(locale: str = '') -> Callable:
-    """Romanize the Cyrillic text.
 
-    Transliterate the Cyrillic language from the Cyrillic
-    script into the Latin alphabet.
+def romanize(locale: str = '') -> Callable:
+    """Romanize the cyrillic text.
+
+    Transliterate the cyrillic script into the latin alphabet.
 
     .. note:: At this moment it works only for `ru`, `uk`, `kk`.
 
     :param locale: Locale code.
     :return: Romanized text.
     """
-    def romanized_deco(func):
+
+    def romanize_deco(func):
         @functools.wraps(func)
         def wrapper(*args, **kwargs):
             try:
-                # String can contain ascii symbols, digits and
-                # punctuation symbols.
+                # Cyrillic string can contain ascii
+                # symbols, digits and punctuation.
                 alphabet = {s: s for s in
-                            letters + digits + punctuation}
-                alphabet.update(data.ROMANIZATION_DICT[locale])
-                # Add common cyrillic letters
-                alphabet.update(data.COMMON_LETTERS)
+                            ascii_letters + digits + punctuation}
+                alphabet.update({
+                    **data.ROMANIZATION_DICT[locale],
+                    **data.COMMON_LETTERS,
+                })
             except KeyError:
                 raise UnsupportedLocale(locale)
+
             result = func(*args, **kwargs)
             txt = ''.join([alphabet[i] for i in result if i in alphabet])
             return txt
 
         return wrapper
 
-    return romanized_deco
+    return romanize_deco

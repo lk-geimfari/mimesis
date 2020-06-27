@@ -13,6 +13,10 @@ Version 4.1.0
 - Update parameter ``end`` for some methods of provider ``Datetime()`` (Fix #870)
 - Update ``.price()`` to make it supported locales (Fix #875)
 
+**Rename**:
+
+- Renamed ``decorators.romanized`` to ``decorators.romanize``
+
 **Removed**:
 
 - Removed the deprecated ``download_image()`` function from the ``shortcuts`` module, use your own custom downloader instead.

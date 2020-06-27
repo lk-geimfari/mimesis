@@ -9,7 +9,7 @@ def test_romanization_dict_is_unchanged():
 
     old_data = deepcopy(ROMANIZATION_DICT)
 
-    @mimesis.decorators.romanized('ru')
+    @mimesis.decorators.romanize('ru')
     def some_name():
         return 'Абырвалг Аристархович'
 
@@ -18,7 +18,7 @@ def test_romanization_dict_is_unchanged():
 
 
 @pytest.fixture
-@mimesis.decorators.romanized('ru')
+@mimesis.decorators.romanize('ru')
 def russian_name():
     return 'Ликид Геимфари'
 
@@ -28,7 +28,7 @@ def test_russian(russian_name):
 
 
 @pytest.fixture
-@mimesis.decorators.romanized('ru')
+@mimesis.decorators.romanize('ru')
 def mixed_text():
     return 'Что-то там_4352-!@#$%^&*()_+?"<>"'
 
@@ -38,13 +38,13 @@ def test_russian_mixed_text(mixed_text):
 
 
 @pytest.fixture
-@mimesis.decorators.romanized('ru')
+@mimesis.decorators.romanize('ru')
 def russian_alphabet():
     return ' '.join('АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ'
                     'абвгдеёжзийклмнопрстуфхцчшщъыьэюя')
 
 
-def test_romanized_russian_alphabet(russian_alphabet):
+def test_romanize_russian_alphabet(russian_alphabet):
     result = 'A B V G D E Yo Zh Z I Ye K L M N O P R S T U F Kh Ts ' \
              'Ch Sh Shch  Y  E Yu Ja a b v g d e yo zh z i ye k l m n' \
              ' o p r s t u f kh ts ch sh shch  y  e yu ja'
@@ -53,7 +53,7 @@ def test_romanized_russian_alphabet(russian_alphabet):
 
 
 @pytest.fixture
-@mimesis.decorators.romanized('uk')
+@mimesis.decorators.romanize('uk')
 def ukrainian_text():
     return 'Українська мова!'
 
@@ -63,7 +63,7 @@ def test_ukrainian(ukrainian_text):
 
 
 @pytest.fixture
-@mimesis.decorators.romanized('kk')
+@mimesis.decorators.romanize('kk')
 def kazakh_text():
     return 'Python - ең жақсы бағдарламалау тілі!'
 
@@ -74,7 +74,7 @@ def test_kazakh(kazakh_text):
 
 
 def test_not_implemented_error():
-    @mimesis.decorators.romanized('nil')
+    @mimesis.decorators.romanize('nil')
     def user():
         return 'Mimesis'
 
