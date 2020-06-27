@@ -45,3 +45,7 @@ def romanize(locale: str = '') -> Callable:
         return wrapper
 
     return romanize_deco
+
+
+# For backward compatibility
+romanized = romanize
