@@ -4,6 +4,7 @@
 
 import hashlib
 import re
+import uuid
 from string import ascii_letters, digits, punctuation
 from typing import Optional, Union
 
@@ -240,10 +241,12 @@ class Person(BaseDataProvider):
 
         return password
 
-    def email(self, domains: Union[tuple, list] = None) -> str:
+    def email(self, domains: Union[tuple, list] = None,
+              unique: bool = False) -> str:
         """Generate a random email.
 
         :param domains: List of custom domains for emails.
+        :param unique: Make emails unique.
         :type domains: list or tuple
         :return: Email address.
 
@@ -258,7 +261,11 @@ class Person(BaseDataProvider):
         if not domain.startswith('@'):
             domain = '@{}'.format(domain)
 
-        name = self.username(template='ld')
+        if unique:
+            name = uuid.uuid4().hex
+        else:
+            name = self.username(template='ld')
+
         return '{name}{domain}'.format(
             name=name,
             domain=domain,
