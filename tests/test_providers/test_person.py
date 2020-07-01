@@ -102,7 +102,13 @@ class TestPerson(object):
         with pytest.raises(ValueError):
             _person.username(template='dd-.dd')
 
-    def test_email(self, _person):
+    @pytest.mark.parametrize(
+        'unique', [
+            False,
+            True,
+        ],
+    )
+    def test_email(self, _person, unique):
         result = _person.email()
         assert re.match(patterns.EMAIL_REGEX, result)
 
@@ -110,6 +116,20 @@ class TestPerson(object):
         result = _person.email(domains=domains)
         assert re.match(patterns.EMAIL_REGEX, result)
         assert result.split('@')[1] == 'example.com'
+
+        if unique:
+            count = 1000000
+            generated = set()
+
+            for i in range(count):
+                email = _person.email(
+                    domains=['example.com'],
+                    unique=unique,
+                )
+                email_username = email.split('@')[0].strip()
+                generated.add(email_username)
+
+            assert len(generated) == count
 
     def test_height(self, _person):
         result = _person.height(minimum=1.60, maximum=1.90)
