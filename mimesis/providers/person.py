@@ -246,8 +246,7 @@ class Person(BaseDataProvider):
         """Generate a random email.
 
         :param domains: List of custom domains for emails.
-        :param unique: Make emails unique.
-        :type domains: list or tuple
+        :param unique: Makes email addresses unique.
         :return: Email address.
         :raises ValueError: if «unique» is True and the provider was seeded.
 
