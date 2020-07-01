@@ -249,6 +249,7 @@ class Person(BaseDataProvider):
         :param unique: Make emails unique.
         :type domains: list or tuple
         :return: Email address.
+        :raises ValueError: if «unique» is True and the provider was seeded.
 
         :Example:
             foretime10@live.com
