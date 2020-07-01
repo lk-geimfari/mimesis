@@ -253,6 +253,10 @@ class Person(BaseDataProvider):
         :Example:
             foretime10@live.com
         """
+        if unique and self.seed is not None:
+            raise ValueError('You cannot use «unique» '
+                             'parameter with a seeded provider')
+
         if not domains:
             domains = EMAIL_DOMAINS
 

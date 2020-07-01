@@ -384,6 +384,9 @@ class TestSeededPerson(object):
         assert p1.email(domains=['@mimesis.io']) == \
                p2.email(domains=['@mimesis.io'])
 
+        with pytest.raises(ValueError):
+            p1.email(unique=True)
+
     def test_height(self, p1, p2):
         assert p1.height() == p2.height()
         assert p1.height(1.7, 2.1) == p2.height(1.7, 2.1)
