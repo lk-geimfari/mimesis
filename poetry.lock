@@ -428,7 +428,7 @@ description = "py.test plugin to check import ordering using isort"
 name = "pytest-isort"
 optional = false
 python-versions = "*"
-version = "1.0.0"
+version = "1.1.0"
 
 [package.dependencies]
 isort = ">=4.0"
@@ -592,7 +592,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["jaraco.itertools", "func-timeout"]
 
 [metadata]
-content-hash = "de7fb223adf92d4ea6ad337059c3a3ffefa78b6805eebf8e130535d27b5a774e"
+content-hash = "e0cf8ac5cf33bbc99d2499df5bc79815b2284fd01280de7e6d629abdb689eaa2"
 python-versions = "^3.6"
 
 [metadata.files]
@@ -782,8 +782,8 @@ pytest-flake8 = [
     {file = "pytest_flake8-1.0.6-py2.py3-none-any.whl", hash = "sha256:2e91578ecd9b200066f99c1e1de0f510fbb85bcf43712d46ea29fe47607cc234"},
 ]
 pytest-isort = [
-    {file = "pytest-isort-1.0.0.tar.gz", hash = "sha256:758156cb4dc1db72adc1b7e253011f5eea117fab32af03cedb4cbfc6058b5f8f"},
-    {file = "pytest_isort-1.0.0-py2.py3-none-any.whl", hash = "sha256:5d47dd4c45a7c2eb4a0401ae4febe143724dd8a2acf1e7317c80145bac8b608a"},
+    {file = "pytest-isort-1.1.0.tar.gz", hash = "sha256:30bd29927ac1b92f0701c1c43de52abaf7ccedaec8f8c9775dfab4ee51d74006"},
+    {file = "pytest_isort-1.1.0-py2.py3-none-any.whl", hash = "sha256:e952482dd56cbc9b0cbd748d7734e856c4acbb1db6c4acd92259136e78a41db5"},
 ]
 pytest-mock = [
     {file = "pytest-mock-3.1.1.tar.gz", hash = "sha256:636e792f7dd9e2c80657e174c04bf7aa92672350090736d82e97e92ce8f68737"},
