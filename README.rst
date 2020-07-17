@@ -204,7 +204,7 @@ How to Contribute
 3. Fork the repository on GitHub to start making your changes to the
    *your_branch* branch.
 4. Add yourself to the list of `contributors`_.
-5. Send a pull request and bug the maintainer until it gets merged and
+5. Send a _pull request and bug the maintainer until it gets merged and
    published.
 
 .. _contributing guidelines: https://github.com/lk-geimfari/mimesis/blob/master/CONTRIBUTING.rst

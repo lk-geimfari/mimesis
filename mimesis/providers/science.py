@@ -20,7 +20,7 @@ class Science(BaseDataProvider):
         """
         super().__init__(*args, **kwargs)
         self._datafile = 'science.json'
-        self.pull(self._datafile)
+        self._pull(self._datafile)
 
     class Meta:
         """Class for metadata."""
@@ -68,7 +68,7 @@ class Science(BaseDataProvider):
         :Example:
             AGUGACACAA
         """
-        return self.random.schoice('UCGA', length)
+        return self.random.generate_string('UCGA', length)
 
     def dna_sequence(self, length: int = 10) -> str:
         """Generate a random DNA sequence.
@@ -79,4 +79,4 @@ class Science(BaseDataProvider):
         :Example:
             GCTTTAGACC
         """
-        return self.random.schoice('TCGA', length)
+        return self.random.generate_string('TCGA', length)

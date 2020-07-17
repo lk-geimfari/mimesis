@@ -317,6 +317,7 @@ AbstractField
 
 .. autoclass:: mimesis.schema.AbstractField
    :members:
+   :special-members: __call__
 
 Field
 ------

@@ -4,7 +4,6 @@
 
 import hashlib
 import re
-import uuid
 from string import ascii_letters, digits, punctuation
 from typing import Optional, Union
 
@@ -36,7 +35,7 @@ class Person(BaseDataProvider):
         """
         super().__init__(*args, **kwargs)
         self._datafile = 'person.json'
-        self.pull(self._datafile)
+        self._pull(self._datafile)
         self._store = {
             'age': 0,
         }
@@ -263,10 +262,10 @@ class Person(BaseDataProvider):
         domain = self.random.choice(domains)
 
         if not domain.startswith('@'):
-            domain = '@{}'.format(domain)
+            domain = '@' + domain
 
         if unique:
-            name = uuid.uuid4().hex
+            name = self.random.randstr(unique)
         else:
             name = self.username(template='ld')
 
@@ -286,7 +285,7 @@ class Person(BaseDataProvider):
         """
         key = self._validate_enum(site, SocialNetwork)
         website = SOCIAL_NETWORKS[key]
-        url = 'https://www.' + website
+        url = 'https://' + website
         return url.format(self.username())
 
     def gender(self, iso5218: bool = False,

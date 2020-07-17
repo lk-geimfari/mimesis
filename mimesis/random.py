@@ -53,16 +53,14 @@ class Random(random_module.Random):
         """
         return os.urandom(*args, **kwargs)
 
-    def schoice(self, seq: str, end: int = 10) -> str:
-        """Choice function which returns string created from sequence.
+    def generate_string(self, str_seq: str, length: int = 10) -> str:
+        """Generate random string created from string sequence.
 
-        :param seq: Sequence of letters or digits.
-        :type seq: tuple or list
-        :param end: Max value.
+        :param str_seq: String sequence of letters or digits.
+        :param length: Max value.
         :return: Single string.
         """
-        return ''.join(self.choice(list(seq))
-                       for _ in range(end))
+        return ''.join(self.choice(str_seq) for _ in range(length))
 
     def custom_code(self, mask: str = '@###',
                     char: str = '@', digit: str = '#') -> str:

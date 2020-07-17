@@ -17,6 +17,8 @@ Version 5.0.0
 **Rename**:
 
 - Renamed ``decorators.romanized`` to ``decorators.romanize``
+- Renamed ``Random.schoice`` to ``Random.generate_string``
+- Renamed ``BaseDataProvider.pull`` to ``BaseDataProvider._pull``
 
 **Removed**:
 
@@ -343,7 +345,7 @@ is no backwards compatibility with early versions of this library.
 - Added ``price_in_btc`` and ``currency_symbol`` to ``Business`` data provider
 - Added ``dna``, ``rna`` and ``atomic_number`` to ``Science`` data provider
 - Added ``vehicle_registration_code`` to ``Transport`` data provider
-- Added ``schoice`` method for ``Random``
+- Added ``generate_string`` method for ``Random``
 - Added alias ``last_name`` for ``surname`` in ``Personal`` data provider
 - Added alias ``province``, ``region``, ``federal_subject`` for ``state`` in ``Address`` data provider
 - Added annotations for all methods and functions for supporting type hints
