@@ -81,7 +81,7 @@ class BaseDataProvider(BaseProvider):
         :param seed: Seed to all the random functions.
         """
         super().__init__(seed=seed)
-        self._data: Dict[str, Any] = {}
+        self._data: JSON = {}
         self._datafile = ''
         self._setup_locale(locale)
         self._data_dir = Path(__file__).parent.parent.joinpath('data')
@@ -118,7 +118,7 @@ class BaseDataProvider(BaseProvider):
         return initial
 
     @functools.lru_cache(maxsize=None)
-    def pull(self, datafile: str = '') -> None:
+    def _pull(self, datafile: str = '') -> None:
         """Pull the content from the JSON and memorize one.
 
         Opens JSON file ``file`` in the folder ``data/locale``
@@ -171,8 +171,8 @@ class BaseDataProvider(BaseProvider):
         :return: Nothing.
         """
         self.locale = locale
-        self.pull.cache_clear()
-        self.pull()
+        self._pull.cache_clear()
+        self._pull()
 
     @contextlib.contextmanager
     def override_locale(self, locale: str = locales.EN,

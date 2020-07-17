@@ -18,6 +18,7 @@ Version 5.0.0
 
 - Renamed ``decorators.romanized`` to ``decorators.romanize``
 - Renamed ``Random.schoice`` to ``Random.generate_string``
+- Renamed ``BaseDataProvider.pull`` to ``BaseDataProvider._pull``
 
 **Removed**:
 

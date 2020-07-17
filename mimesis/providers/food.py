@@ -17,7 +17,7 @@ class Food(BaseDataProvider):
         """
         super().__init__(*args, **kwargs)
         self._datafile = 'food.json'
-        self.pull(self._datafile)
+        self._pull(self._datafile)
 
     class Meta:
         """Class for metadata."""

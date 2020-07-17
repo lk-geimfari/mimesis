@@ -35,7 +35,7 @@ class Person(BaseDataProvider):
         """
         super().__init__(*args, **kwargs)
         self._datafile = 'person.json'
-        self.pull(self._datafile)
+        self._pull(self._datafile)
         self._store = {
             'age': 0,
         }

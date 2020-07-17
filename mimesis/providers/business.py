@@ -23,7 +23,7 @@ class Business(BaseDataProvider):
         """
         super().__init__(*args, **kwargs)
         self._datafile = 'business.json'
-        self.pull(self._datafile)
+        self._pull(self._datafile)
 
     class Meta:
         """Class for metadata."""
