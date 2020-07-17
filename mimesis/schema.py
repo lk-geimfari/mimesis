@@ -23,12 +23,9 @@ class AbstractField(object):
 
     Instance of this object takes any string which represents name
     of any method of any supported data provider (:class:`~mimesis.Generic`)
-    and the ``**kwargs`` of the method:
+    and the ``**kwargs`` of the method.
 
-    >>> _ = AbstractField('en', 0xf)
-    >>> surname = _('surname')
-    >>> isinstance(surname, str)
-    True
+    See :class:`~mimesis.schema.AbstractField.__call__` for more details.
     """
 
     def __init__(self, locale: str = 'en',
@@ -52,17 +49,19 @@ class AbstractField(object):
                  key: Optional[Callable] = None, **kwargs) -> Any:
         """Override standard call.
 
-        This magic method override standard call so it's take any string which
-        represents name of the any method of any supported data provider
-        and the ``**kwargs`` of this method.
+        This magic method overrides standard call so it takes any string
+        which represents the name of any method of any supported data
+        provider and the ``**kwargs`` of this method.
 
-        ..note:: Some data providers have methods with the same name and
-        in such cases, you can explicitly define that the method belongs to
-        data-provider ``name='provider.name'``.
+        .. note:: Some data providers have methods with the same names
+            and in such cases, you can explicitly define that the method
+            belongs to data-provider ``name='provider.name'`` otherwise
+            it will return the data from the first provider which
+            has a method ``name``.
 
-        You can apply a *key function* to result returned by the method,
-        to do it, just pass parameter **key** with a callable object which
-        returns final result.
+        You can apply a *key function* to the result returned by
+        the method, bt passing a parameter **key** with a callable
+        object which returns the final result.
 
         :param name: Name of the method.
         :param key: A key function (or other callable object)
