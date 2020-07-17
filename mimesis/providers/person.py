@@ -286,7 +286,7 @@ class Person(BaseDataProvider):
         """
         key = self._validate_enum(site, SocialNetwork)
         website = SOCIAL_NETWORKS[key]
-        url = 'https://www.' + website
+        url = 'https://' + website
         return url.format(self.username())
 
     def gender(self, iso5218: bool = False,
