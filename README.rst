@@ -111,52 +111,6 @@ transportation, addresses, internet and more.
 
 See `API Reference <https://mimesis.name/api.html>`_ for more info.
 
-
-Generating structured data
---------------------------
-
-You can generate dictionaries which can be easily converted to any
-the format you want (JSON/XML/YAML etc.)  with any structure you want.
-
-Let's build dummy API endpoint, using Flask to illustrate the idea:
-
-.. code:: python
-     
-     from flask import Flask, jsonify, request
-     from mimesis.schema import Field, Schema
-     from mimesis.enums import Gender
-
-     app = Flask(__name__)
-
-
-     @app.route('/apps', methods=('GET',))
-     def apps_view():
-         locale = request.args.get('locale', default='en', type=str)
-         count = request.args.get('count', default=1, type=int)
-
-         _ = Field(locale)
-
-         schema = Schema(schema=lambda: {
-             'id': _('uuid'),
-             'name': _('text.word'),
-             'version': _('version', pre_release=True),
-             'timestamp': _('timestamp', posix=False),
-             'owner': {
-                 'email': _('person.email', domains=['test.com'], key=str.lower),
-                 'token': _('token_hex'),
-                 'creator': _('full_name', gender=Gender.FEMALE)},
-         })
-         data = schema.create(iterations=count)
-         return jsonify(data)
-
-Below, on the screenshot, you can see a response from this fake API (``/apps``):
-
-.. image:: https://user-images.githubusercontent.com/15812620/84743283-64e92400-afba-11ea-8252-76e2ea168972.png
-     :target: https://mimesis.name/getting_started.html#schema-and-fields
-     :alt: Schema and Fields
-
-See `Schema and Fields <https://mimesis.name/getting_started.html#schema-and-fields>`_ for more info.
-
 Documentation
 -------------
 
