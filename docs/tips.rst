@@ -173,7 +173,7 @@ Basically you need just create simple view, which returns `JsonResponse`:
     from dummy_endpoints import dummy_users
 
     def users(request):
-        dummy_data = dummy_users.create(iterations=100)
+        dummy_data = dummy_users.create(iterations=1)
         return JsonResponse(dummy_data)
 
 
@@ -185,7 +185,7 @@ For DRF the same, but in terms of DRF:
 
     class Users(APIView):
         def get(self, request):
-            data = dummy_users.create(iterations=100)
+            data = dummy_users.create(iterations=1)
             return Response(data)
 
 Response:
@@ -206,9 +206,7 @@ Response:
           "city": "Urbandale",
           "zipcode": "03983"
         }
-      }
-    # ...,
-    # ...,
+      },
     ]
 
 Flask Dummy API Endpoint
@@ -222,7 +220,7 @@ The same way as above:
 
     @app.route('/users')
     def users():
-        dummy_data = dummy_users.create(iterations=100)
+        dummy_data = dummy_users.create(iterations=1)
         return jsonify(dummy_data)
 
 
@@ -245,8 +243,6 @@ Response:
           "zipcode": "30328"
         }
       },
-    # ...,
-    # ...,
     ]
 
 
