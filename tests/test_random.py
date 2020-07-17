@@ -37,13 +37,13 @@ def test_urandom(random, n):
 
 
 @pytest.mark.parametrize(
-    'seq, length', [
+    'str_seq, length', [
         ('U', 10),
         ('A', 20),
     ],
 )
-def test_schoice(random, seq, length):
-    result = random.schoice(seq, length)
+def test_generate_string(random, str_seq, length):
+    result = random.generate_string(str_seq, length)
     assert len(result) == length
 
 
