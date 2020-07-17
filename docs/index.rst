@@ -17,7 +17,6 @@ The key features are:
 - **Multilingual**: Supports data for `a lot of languages <https://mimesis.name/getting_started.html#locales>`_.
 - **Data variety**: Supports data for  `a lot of data providers <https://mimesis.name/api.html>`_ for a variety of proposes.
 - **Schema-based generators**: Provides an easy mechanism to generate data by the schema of any complexity.
-- **Romanization of Cyrillic data**: Allows romanization of Cyrillic data.
 - **Country-specific data providers**: Provides data specific only for `some countries <https://mimesis.name/api.html#builtin-data-providers>`_.
 
 .. include:: contents.rst.inc
