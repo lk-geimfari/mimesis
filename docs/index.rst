@@ -10,6 +10,7 @@ create JSON and XML files of arbitrary structure, anonymize data taken from prod
 
 
 The key features are:
+
 - **Performance**: The `fastest <https://mimesis.name/foreword.html#performance>`_ data generator available for Python.
 - **Extensibility**: You can create your own data providers and use them with Mimesis.
 - **Generic data provider**: The `simplified <https://mimesis.name/getting_started.html#generic-provider>`_ access to all the providers from a single object.
