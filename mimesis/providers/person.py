@@ -4,7 +4,6 @@
 
 import hashlib
 import re
-import uuid
 from string import ascii_letters, digits, punctuation
 from typing import Optional, Union
 
@@ -266,7 +265,7 @@ class Person(BaseDataProvider):
             domain = '@' + domain
 
         if unique:
-            name = uuid.uuid4().hex
+            name = self.random.randstr(unique)
         else:
             name = self.username(template='ld')
 
