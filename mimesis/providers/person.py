@@ -263,7 +263,7 @@ class Person(BaseDataProvider):
         domain = self.random.choice(domains)
 
         if not domain.startswith('@'):
-            domain = '@{}'.format(domain)
+            domain = '@' + domain
 
         if unique:
             name = uuid.uuid4().hex
