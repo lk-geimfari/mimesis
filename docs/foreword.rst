@@ -9,12 +9,11 @@ This library offers a number of advantages over other similar libraries, such as
 -  Completeness. Strives to provide many detailed providers that offer a variety of data generators.
 -  Simplicity. Does not require any modules other than the Python standard library.
 
-Below you can look how we compared performance:
 
 Performance
 -----------
 
-You can see `an example of comparison <https://gist.github.com/lk-geimfari/99c5b45906be5299a3088f42c3f55bf4>`_ below:
+Below you can see the result of `performance comparison <https://gist.github.com/lk-geimfari/99c5b45906be5299a3088f42c3f55bf4>`_ of Mimesis and Faker:
 
 
 Generating 10k full names
