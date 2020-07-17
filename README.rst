@@ -35,7 +35,15 @@ Description
      :target: https://badge.fury.io/py/mimesis
      :alt: Python version
 
-Mimesis is a Python package for generating big volumes of fake data for a variety of purposes in a variety of languages. The fake data could be used to populate a testing database, create fake API endpoints, create JSON and XML files of arbitrary structure, anonymize data taken from production and etc.
+Mimesis is a high-performance fake data generator for a variety of purposes in a variety of languages.
+The fake data could be used to populate a testing database, create fake API endpoints, create JSON and XML files of
+arbitrary structure, anonymize data taken from production and etc.
+
+Mimesis offers a number of advantages over other similar libraries, such as Faker:
+
+-  Performance. Significantly [faster](https://mimesis.name/foreword.html#performance) than other similar libraries.
+-  Completeness. Strives to provide many detailed providers that offer a variety of data generators.
+-  Simplicity. Does not require any modules other than the Python standard library.
 
 
 Installation
