@@ -2,24 +2,21 @@
 Mimesis - Fake Data Generator
 =============================
 
-`Mimesis <https://github.com/lk-geimfari/mimesis>`_ is fast and extremely easy to use Python package, which helps generate big volumes of
-fake data for a variety of purposes in a variety of languages.
+`Mimesis <https://github.com/lk-geimfari/mimesis>`_ is a high-performance fake data generator for Python,
+which provides data for a variety of purposes in a variety of languages.
 
-The fake data can be particularly useful
-during software development and testing. For example, it could be used to populate a testing database,
-create beautiful JSON and XML files, anonymize data taken from a production service and etc.
+The fake data could be used to populate a testing database, create fake API endpoints,
+create JSON and XML files of arbitrary structure, anonymize data taken from production and etc.
 
-Features
---------
 
-Mimesis provides a lot of useful features, here are some of them:
-
-- Custom providers
-- Generic data provider
-- More than 33 locales
-- More than 21 data providers
-- Data generation by the schema
-- Romanization of Cyrillic data
-- Built-In country-specific data providers
+The key features are:
+- **Performance**: The `fastest <https://mimesis.name/foreword.html#performance>`_ data generator available for Python.
+- **Extensibility**: You can create your own data providers and use them with Mimesis.
+- **Generic data provider**: The `simplified <https://mimesis.name/getting_started.html#generic-provider>`_ access to all the providers from a single object.
+- **Multilingual**: Supports data for `a lot of languages <https://mimesis.name/getting_started.html#locales>`_.
+- **Data variety**: Supports data for  `a lot of data providers <https://mimesis.name/api.html>`_ for a variety of proposes.
+- **Schema-based generators**: Provides an easy mechanism to generate data by the schema of any complexity.
+- **Romanization of Cyrillic data**: Allows romanization of Cyrillic data.
+- **Country-specific data providers**: Provides data specific only for `some countries <https://mimesis.name/api.html#builtin-data-providers>`_.
 
 .. include:: contents.rst.inc
