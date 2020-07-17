@@ -22,11 +22,6 @@ matrix:
           dist: xenial
           name: "Python 3.8 on Linux"
 
-        - os: osx
-          language: generic
-          env: PYTHON=3.8.0
-          name: "Python 3.8.0 on macOS"
-
         - os: windows
           language: shell
           before_install:
@@ -50,22 +45,6 @@ matrix:
             - python -m pip install --upgrade pip
           env: PATH=/c/Python38:/c/Python38/Scripts:$PATH
           name: "Python 3.8 on Windows 10"
-
-
-
-before_install: |
-  if [ "$TRAVIS_OS_NAME" == "osx" ]; then
-    brew update
-    brew install pyenv
-    brew install pyenv-virtualenv
-    pyenv install $PYTHON
-    export PYENV_VERSION=$PYTHON
-    export PATH="/Users/travis/.pyenv/shims:${PATH}"
-    pyenv-virtualenv venv
-    source venv/bin/activate
-    python --version
-  fi
-
 
 install:
   - pip install poetry
