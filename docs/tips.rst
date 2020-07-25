@@ -98,30 +98,14 @@ Example of usage for romanization of Russian full name:
 
     >>> from mimesis.decorators import romanize
 
-        >>> @romanize('ru')
-        ... def russian_name():
-        ...     return 'Вероника Денисова'
-
-        >>> russian_name()
-        'Veronika Denisova'
-
-    At this moment it works only for Russian (
-
-        >>> @romanize('ru')
-        ... def russian_name():
-        ...     return 'Вероника Денисова'
-
-        >>> russian_name()
-        'Veronika Denisova'
-
-    At this moment it works only for Russian (
-
     >>> @romanize('ru')
     ... def russian_name():
     ...     return 'Вероника Денисова'
 
     >>> russian_name()
     'Veronika Denisova'
+
+
 
 At this moment it works only for Russian (**ru**),
 Ukrainian (**uk**) and Kazakh (**kk**):
