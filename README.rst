@@ -46,7 +46,7 @@ The key features are:
 - **Extensibility**: You can create your own data providers and use them with Mimesis.
 - **Generic data provider**: The `simplified <https://mimesis.name/getting_started.html#generic-provider>`_ access to all the providers from a single object.
 - **Multilingual**: Supports data for `a lot of languages <https://mimesis.name/getting_started.html#locales>`_.
-- **Data variety**: Supports data for  `a lot of data providers <https://mimesis.name/api.html>`_ for a variety of proposes.
+- **Data variety**: Supports `a lot of data providers <https://mimesis.name/api.html>`_ for a variety of purposes.
 - **Schema-based generators**: Provides an easy mechanism to generate data by the schema of any complexity.
 - **Country-specific data providers**: Provides data specific only for `some countries <https://mimesis.name/api.html#builtin-data-providers>`_.
 
