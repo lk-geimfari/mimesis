@@ -8,8 +8,6 @@ Version 4.1.1
 Version 4.1.0
 -------------
 
-.. warning:: Work still in progress.
-
 **Added**:
 
 - Added method ``manufacturer()`` for class ``Transport()``
