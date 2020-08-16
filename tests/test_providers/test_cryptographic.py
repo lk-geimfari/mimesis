@@ -20,26 +20,17 @@ class TestCryptographic(object):
         assert re.match(patterns.PROVIDER_STR_REGEX, str(crypto))
 
     @pytest.mark.parametrize(
-        'version, as_object', [
-            (0, False),
-            (1, True),
-            (2, False),
-            (3, True),
-            (4, True),
-            (5, False),
-            (6, False),
+        'as_object', [
+            True,
+            False,
         ],
     )
-    def test_uuid(self, crypto, version, as_object):
-        if 1 <= version <= 5:
-            uuid_result = crypto.uuid(version, as_object=as_object)
-            if as_object:
-                assert isinstance(uuid_result, uuid.UUID)
-            else:
-                assert re.match(patterns.UUID_REGEX, crypto.uuid(version))
+    def test_uuid(self, crypto, as_object):
+        uuid_result = crypto.uuid(as_object=as_object)
+        if as_object:
+            assert isinstance(uuid_result, uuid.UUID)
         else:
-            with pytest.raises(ValueError):
-                re.match(patterns.UUID_REGEX, crypto.uuid(version))
+            assert re.match(patterns.UUID_REGEX, crypto.uuid(as_object))
 
     @pytest.mark.parametrize(
         'algorithm, length', [
@@ -106,11 +97,11 @@ class TestSeededCryptographic(object):
         return Cryptographic(seed=seed)
 
     def test_uuid(self, c1, c2):
-        assert c1.uuid() == c2.uuid()
+        assert c1.uuid() != c2.uuid()
 
     def test_hash(self, c1, c2):
-        assert c1.hash() == c2.hash()
-        assert c1.hash(algorithm=Algorithm.SHA512) == \
+        assert c1.hash() != c2.hash()
+        assert c1.hash(algorithm=Algorithm.SHA512) != \
                c2.hash(algorithm=Algorithm.SHA512)
 
     def test_mnemonic_phrase(self, c1, c2):

@@ -5,7 +5,7 @@
 import hashlib
 import secrets
 from typing import Optional, Union
-from uuid import UUID
+from uuid import UUID, uuid4
 
 from mimesis.enums import Algorithm
 from mimesis.providers.base import BaseProvider
@@ -30,25 +30,23 @@ class Cryptographic(BaseProvider):
 
         name = 'cryptographic'
 
-    def uuid(self, version: int = None,
-             as_object: bool = False) -> Union[UUID, str]:
-        """Generate random UUID.
+    @staticmethod
+    def uuid(as_object: bool = False) -> Union[UUID, str]:
+        """Generate random UUID4.
 
         This method returns string by default,
-        but yoy can make it return uuid.UUID object using
+        but you can make it return uuid.UUID object using
         parameter **as_object**
 
-        :param as_object: Returns uuid.UUID object instead of string.
-        :param version: UUID version.
+        :param as_object: Returns uuid.UUID.
         :return: UUID.
         """
-        bits = self.random.getrandbits(128)
-        uuid_obj = UUID(int=bits, version=version)
+        _uuid = uuid4()
 
         if not as_object:
-            return str(uuid_obj)
+            return str(_uuid)
 
-        return uuid_obj
+        return _uuid
 
     def hash(self, algorithm: Algorithm = None) -> str:  # noqa: A003
         """Generate random hash.
@@ -64,7 +62,7 @@ class Cryptographic(BaseProvider):
 
         if hasattr(hashlib, key):
             fn = getattr(hashlib, key)
-            return fn(self.uuid().encode()).hexdigest()
+            return fn(self.uuid().encode()).hexdigest()  # type: ignore
 
     @staticmethod
     def token_bytes(entropy: int = 32) -> bytes:
