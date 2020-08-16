@@ -1,4 +1,5 @@
 import re
+import uuid
 
 import pytest
 
@@ -18,8 +19,27 @@ class TestCryptographic(object):
     def test_str(self, crypto):
         assert re.match(patterns.PROVIDER_STR_REGEX, str(crypto))
 
-    def test_uuid(self, crypto):
-        assert re.match(patterns.UUID_REGEX, crypto.uuid())
+    @pytest.mark.parametrize(
+        'version, as_object', [
+            (0, False),
+            (1, True),
+            (2, False),
+            (3, True),
+            (4, True),
+            (5, False),
+            (6, False),
+        ],
+    )
+    def test_uuid(self, crypto, version, as_object):
+        if 1 <= version <= 5:
+            uuid_result = crypto.uuid(version, as_object=as_object)
+            if as_object:
+                assert isinstance(uuid_result, uuid.UUID)
+            else:
+                assert re.match(patterns.UUID_REGEX, crypto.uuid(version))
+        else:
+            with pytest.raises(ValueError):
+                re.match(patterns.UUID_REGEX, crypto.uuid(version))
 
     @pytest.mark.parametrize(
         'algorithm, length', [
