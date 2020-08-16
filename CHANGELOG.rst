@@ -1,3 +1,10 @@
+Version 4.1.1
+-------------
+
+**Fix**:
+
+- Fixed issue with non-unique uuid
+
 Version 4.1.0
 -------------
 
@@ -24,6 +31,7 @@ Version 4.1.0
 **Removed**:
 
 - Removed the deprecated ``download_image()`` function from the ``shortcuts`` module, use your own custom downloader instead.
+- Removed parameter ``version`` for method ``Cryptographic().uuid()``
 
 Version 4.0.0
 -------------
