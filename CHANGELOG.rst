@@ -1,4 +1,4 @@
-Version 5.0.0
+Version 4.1.0
 -------------
 
 .. warning:: Work still in progress.
@@ -8,6 +8,7 @@ Version 5.0.0
 - Added method ``manufacturer()`` for class ``Transport()``
 - Added ``sk`` (Slovak) locale support
 - Added new parameter ``unique`` for method ``Person().email()``
+- Added new parameter ``as_object`` for method ``Cryptographic().uuid()``
 
 **Updated**:
 
