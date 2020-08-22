@@ -81,6 +81,9 @@ which represents data related to personal information, such as name, surname, em
     >>> person.email(domains=['mimesis.name'])
     'roccelline1878@mimesis.name'
 
+    >>> person.email(domains=['mimesis.name'], unique=True)
+    'f272a05d39ec46fdac5be4ac7be45f3f@mimesis.name'
+
     >>> person.telephone(mask='1-4##-8##-5##3')
     '1-436-896-5213'
 

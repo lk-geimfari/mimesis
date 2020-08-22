@@ -8,8 +8,6 @@ Version 4.1.1
 Version 4.1.0
 -------------
 
-.. warning:: Work still in progress.
-
 **Added**:
 
 - Added method ``manufacturer()`` for class ``Transport()``
@@ -19,8 +17,8 @@ Version 4.1.0
 
 **Updated**:
 
-- Update parameter ``end`` for some methods of provider ``Datetime()`` (Fix #870)
-- Update ``.price()`` to make it supported locales (Fix #875)
+- Updated parameter ``end`` for some methods of provider ``Datetime()`` (Fix #870)
+- Updated ``.price()`` to make it supported locales (Fix #875)
 
 **Rename**:
 
