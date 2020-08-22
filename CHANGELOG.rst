@@ -17,8 +17,8 @@ Version 4.1.0
 
 **Updated**:
 
-- Update parameter ``end`` for some methods of provider ``Datetime()`` (Fix #870)
-- Update ``.price()`` to make it supported locales (Fix #875)
+- Updated parameter ``end`` for some methods of provider ``Datetime()`` (Fix #870)
+- Updated ``.price()`` to make it supported locales (Fix #875)
 
 **Rename**:
 
@@ -58,8 +58,7 @@ Version 4.0.0
 **Updated**:
 
 - Updated names and surnames for locale ``ru``
-- The ``floats()`` function in the ``Numbers`` provider now accepts arguments about the range of the generated float
-numbers and the rounding used. By default, it generates a list of ``n`` float numbers insted of a list of 10^n elements.
+- The ``floats()`` function in the ``Numbers`` provider now accepts arguments about the range of the generated float numbers and the rounding used. By default, it generates a list of ``n`` float numbers instead of a list of 10^n elements.
 - The argument ``length`` of the function ``integers`` is renamed to ``n``.
 
 **Removed**:
