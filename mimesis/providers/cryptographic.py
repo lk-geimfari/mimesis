@@ -38,6 +38,9 @@ class Cryptographic(BaseProvider):
         but you can make it return uuid.UUID object using
         parameter **as_object**
 
+        .. warning:: Seed is not applicable to this method,
+            because of its cryptographic-safe nature.
+
         :param as_object: Returns uuid.UUID.
         :return: UUID.
         """
@@ -53,6 +56,9 @@ class Cryptographic(BaseProvider):
 
         To change hashing algorithm, pass parameter ``algorithm``
         with needed value of the enum object :class:`~mimesis.enums.Algorithm`
+
+        .. warning:: Seed is not applicable to this method,
+            because of its cryptographic-safe nature.
 
         :param algorithm: Enum object :class:`~mimesis.enums.Algorithm`.
         :return: Hash.
