@@ -2,7 +2,6 @@
 
 """Implements classes for generating data by schema."""
 
-from types import LambdaType
 from typing import Any, Callable, List, Optional
 
 from mimesis.exceptions import (
@@ -17,7 +16,7 @@ from mimesis.typing import JSON, Seed
 __all__ = ['Field', 'Schema']
 
 
-class AbstractField(object):
+class AbstractField:
     """
     AbstractField is a class for generating data by the name of the method.
 
@@ -116,15 +115,15 @@ class AbstractField(object):
             self.__class__.__name__, self.locale)
 
 
-class Schema(object):
+class Schema:
     """Class which return list of filled schemas."""
 
-    def __init__(self, schema: LambdaType) -> None:
+    def __init__(self, schema: Callable) -> None:
         """Initialize schema.
 
         :param schema: A schema.
         """
-        if isinstance(schema, LambdaType):
+        if callable(schema):
             self.schema = schema
         else:
             raise UndefinedSchema()
