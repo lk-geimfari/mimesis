@@ -3,7 +3,7 @@
 """Custom types and shortcuts for annotating Mimesis."""
 
 import datetime
-from typing import Any, Dict, Union
+from typing import Any, Callable, Dict, Union
 
 __all__ = [
     'JSON',
@@ -11,6 +11,7 @@ __all__ = [
     'Timestamp',
     'Time',
     'Date',
+    'SchemaType',
     'Seed',
 ]
 
@@ -25,3 +26,5 @@ Date = datetime.date
 Timestamp = Union[str, int]
 
 Seed = Union[int, str, bytes, bytearray]
+
+SchemaType = Callable[[], JSON]

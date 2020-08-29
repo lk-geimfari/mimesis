@@ -11,7 +11,7 @@ from mimesis.exceptions import (
     UnsupportedField,
 )
 from mimesis.providers.generic import Generic
-from mimesis.typing import JSON, Seed
+from mimesis.typing import JSON, SchemaType, Seed
 
 __all__ = ['Field', 'Schema']
 
@@ -118,10 +118,10 @@ class AbstractField:
 class Schema:
     """Class which return list of filled schemas."""
 
-    def __init__(self, schema: Callable) -> None:
+    def __init__(self, schema: SchemaType) -> None:
         """Initialize schema.
 
-        :param schema: A schema.
+        :param schema: A schema (must be a callable object).
         """
         if callable(schema):
             self.schema = schema

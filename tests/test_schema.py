@@ -93,9 +93,10 @@ def test_fill(field, valid_schema):
     assert isinstance(result[0], dict)
 
 
-def test_none_schema(field):
+def test_none_schema():
     with pytest.raises(UndefinedSchema):
-        Schema(schema=None).create()  # type: ignore
+        schema = Schema(schema=None)  # type: ignore
+        schema.create()
 
 
 def test_schema_with_unacceptable_field(field):
@@ -110,7 +111,7 @@ def test_schema_with_unacceptable_field(field):
     })
 
     with pytest.raises(UnacceptableField):
-        Schema(schema=invalid_schema).create()  # type: ignore
+        Schema(schema=invalid_schema).create()
 
 
 def test_field_with_key(field):
