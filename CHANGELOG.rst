@@ -1,3 +1,11 @@
+Version 4.1.2
+-------------
+
+**Fix**:
+
+- Fixed type hint issue for ``schema.Schema`` (`#928 <https://github.com/lk-geimfari/mimesis/issues/928>`_)
+
+
 Version 4.1.1
 -------------
 

@@ -2,7 +2,7 @@
 
 """Implements classes for generating data by schema."""
 
-from typing import Any, Callable, List, Optional, Dict
+from typing import Any, Callable, List, Optional
 
 from mimesis.exceptions import (
     UnacceptableField,
