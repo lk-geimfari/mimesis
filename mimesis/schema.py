@@ -2,7 +2,7 @@
 
 """Implements classes for generating data by schema."""
 
-from typing import Any, Callable, List, Optional
+from typing import Any, Callable, List, Optional, Dict
 
 from mimesis.exceptions import (
     UnacceptableField,
@@ -118,7 +118,7 @@ class AbstractField:
 class Schema:
     """Class which return list of filled schemas."""
 
-    def __init__(self, schema: Callable) -> None:
+    def __init__(self, schema: Callable[[], JSON]) -> None:
         """Initialize schema.
 
         :param schema: A schema.
