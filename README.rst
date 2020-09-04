@@ -214,6 +214,13 @@ How to Contribute
 .. _contributors: https://github.com/lk-geimfari/mimesis/blob/master/CONTRIBUTORS.rst
 
 
+
+Thanks
+------
+
+Supported by `JetBrains <https://www.jetbrains.com/?from=mimesis>`_.
+
+
 License
 -------
 
