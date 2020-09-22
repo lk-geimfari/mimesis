@@ -55,7 +55,7 @@ description = "Check MANIFEST.in in a Python source package for completeness"
 name = "check-manifest"
 optional = false
 python-versions = ">=3.5"
-version = "0.42"
+version = "0.43"
 
 [package.dependencies]
 pep517 = "*"
@@ -593,7 +593,8 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["jaraco.itertools", "func-timeout"]
 
 [metadata]
-content-hash = "066d35be4170d6e575f25ebe5d4c494a9295ef2e115a960ff4d613dea5edf0fc"
+content-hash = "6b77106aa0bbf99996ca49ad5803dae0a184da69aa028ee23421d0561948e1ab"
+lock-version = "1.0"
 python-versions = "^3.6"
 
 [metadata.files]
@@ -618,8 +619,8 @@ chardet = [
     {file = "chardet-3.0.4.tar.gz", hash = "sha256:84ab92ed1c4d4f16916e05906b6b75a6c0fb5db821cc65e70cbd64a3e2a5eaae"},
 ]
 check-manifest = [
-    {file = "check-manifest-0.42.tar.gz", hash = "sha256:0d8e1b0944a667dd4a75274f6763e558f0d268fde2c725e894dfd152aae23300"},
-    {file = "check_manifest-0.42-py2.py3-none-any.whl", hash = "sha256:3131d1b32d88ea3eb222a09c6277d78f43d1e780901e5d60e1b4a8d15169e9ee"},
+    {file = "check-manifest-0.43.tar.gz", hash = "sha256:1f787b81e5a2a3c69a9e4a2a44788ab672efbac43d7d5bd0b9e8fe49a0929e55"},
+    {file = "check_manifest-0.43-py2.py3-none-any.whl", hash = "sha256:885a867d6d3f6ed68bb2862f2580c3bc3ec52d20d49ad601f1b112a89d74ae15"},
 ]
 codecov = [
     {file = "codecov-2.1.7-py2.py3-none-any.whl", hash = "sha256:b67bb8029e8340a7bf22c71cbece5bd18c96261fdebc2f105ee4d5a005bc8728"},
