@@ -123,6 +123,22 @@ def test_randstr(random, length):
     assert len(result) == length
 
 
+def test_randstr_nonunique_with_same_seed(random):
+    random.seed(1)
+    firstSet = [random.randstr(unique=False) for _ in range(10)]
+    random.seed(1)
+    secondSet = [random.randstr(unique=False) for _ in range(10)]
+    assert firstSet == secondSet
+
+
+def test_randstr_nonunique_with_different_seed(random):
+    random.seed(1)
+    firstSet = [random.randstr(unique=False) for _ in range(10)]
+    random.seed(2)
+    secondSet = [random.randstr(unique=False) for _ in range(10)]
+    assert firstSet != secondSet
+
+
 @pytest.mark.parametrize(
     'count', [
         1000,
