@@ -126,7 +126,9 @@ class Random(random_module.Random):
 
         _string = string.ascii_letters + string.digits
         _string = ''.join(
-            secrets.choice(_string) for _ in range(length)
+            _string[i] for i in self.randints(
+                length, 0, len(_string) - 1,
+            )
         )
         return _string
 
