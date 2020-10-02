@@ -85,7 +85,7 @@ Patches and Suggestions
 -  Jeffrey Wilges `(jwilges)`_
 -  Tim Kreitner `(tabassco)`_
 -  Miroslav Šedivý `(eumiro)`_
-
+-  Thanarathanam `(Thanarathanam)`_
 
 
 .. _(lk-geimfari): https://github.com/lk-geimfari
@@ -148,3 +148,4 @@ Patches and Suggestions
 .. _(jrast): https://github.com/jrast
 .. _(tabassco): https://github.com/tabassco
 .. _(eumiro): https://github.com/eumiro
+.. _(Thanarathanam): https://github.com/Thanarathanam
