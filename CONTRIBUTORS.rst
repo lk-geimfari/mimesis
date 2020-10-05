@@ -86,6 +86,7 @@ Patches and Suggestions
 -  Tim Kreitner `(tabassco)`_
 -  Miroslav Šedivý `(eumiro)`_
 -  Thanarathanam `(Thanarathanam)`_
+-  Yusan `(aekt)`_
 
 
 .. _(lk-geimfari): https://github.com/lk-geimfari
@@ -149,3 +150,4 @@ Patches and Suggestions
 .. _(tabassco): https://github.com/tabassco
 .. _(eumiro): https://github.com/eumiro
 .. _(Thanarathanam): https://github.com/Thanarathanam
+.. _(aekt): https://github.com/aekt
