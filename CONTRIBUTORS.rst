@@ -85,6 +85,7 @@ Patches and Suggestions
 -  Jeffrey Wilges `(jwilges)`_
 -  Tim Kreitner `(tabassco)`_
 -  Miroslav Šedivý `(eumiro)`_
+-  Yusan `(aekt)`_
 
 
 
@@ -148,3 +149,4 @@ Patches and Suggestions
 .. _(jrast): https://github.com/jrast
 .. _(tabassco): https://github.com/tabassco
 .. _(eumiro): https://github.com/eumiro
+.. _(aekt): https://github.com/aekt
