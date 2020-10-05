@@ -27,7 +27,7 @@ pyroma = "^2.6"
 pygments = "^2.5"
 flake8-type-annotations = "^0.1.0"
 pytest-randomly = "^3.4"
-check-manifest = "^0.42"
+check-manifest = "^0.44"
 readme-renderer = "^26.0"
 pytz = "^2020.1"
 
