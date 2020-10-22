@@ -1,3 +1,12 @@
+Version 4.1.3
+-------------
+
+.. warning:: Presumptive version; work still in progress.
+
+**Added**:
+
+- Added method ``hostname()`` for class ``Internet()``
+
 Version 4.1.2
 -------------
 

@@ -151,7 +151,7 @@ class TestInternet(object):
         assert result in data.HTTP_STATUS_MSGS
 
     @pytest.mark.parametrize(
-        'domain_type', [
+        'tld_type', [
             TLDType.CCTLD,
             TLDType.GTLD,
             TLDType.GEOTLD,
@@ -159,10 +159,34 @@ class TestInternet(object):
             TLDType.STLD,
         ],
     )
-    def test_top_level_domain(self, net, domain_type):
-        result = net.top_level_domain(tld_type=domain_type)
+    def test_hostname(self, net, tld_type):
+        short_name = net.hostname(tld_type=tld_type)
+        long_name = net.hostname(tld_type=tld_type, depth=2)
+        tld = net.hostname(tld_type=tld_type, depth=0)
+        for name in (short_name, long_name, tld):
+            assert name is not None
+            assert re.match(patterns.HOST_NAME, name)
+        assert len(short_name.split('.')) == 2
+        assert len(long_name.split('.')) == 3
+        assert ('.' + tld) in data.TLD[tld_type.value]
+
+    def test_hostname_unsupported(self, net):
+        with pytest.raises(NonEnumerableError):
+            net.hostname(tld_type='nil')
+
+    @pytest.mark.parametrize(
+        'tld_type', [
+            TLDType.CCTLD,
+            TLDType.GTLD,
+            TLDType.GEOTLD,
+            TLDType.UTLD,
+            TLDType.STLD,
+        ],
+    )
+    def test_top_level_domain(self, net, tld_type):
+        result = net.top_level_domain(tld_type=tld_type)
         assert result is not None
-        assert result in data.TLD[domain_type.value]
+        assert result in data.TLD[tld_type.value]
 
     def test_top_level_domain_unsupported(self, net):
         with pytest.raises(NonEnumerableError):
@@ -248,6 +272,12 @@ class TestSeededInternet(object):
 
     def test_http_status_message(self, i1, i2):
         assert i1.http_status_message() == i2.http_status_message()
+
+    def test_hostname(self, i1, i2):
+        assert i1.hostname() == i2.hostname()
+        assert i1.hostname(depth=3) == i2.hostname(depth=3)
+        assert i1.hostname(tld_type=TLDType.UTLD) == \
+               i2.hostname(tld_type=TLDType.UTLD)
 
     def test_top_level_domain(self, i1, i2):
         assert i1.top_level_domain() == i2.top_level_domain()

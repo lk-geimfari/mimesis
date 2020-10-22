@@ -2,6 +2,7 @@
 
 """Provides data related to internet."""
 
+import re
 import urllib.error
 import urllib.request
 from ipaddress import IPv4Address, IPv6Address
@@ -22,6 +23,7 @@ from mimesis.enums import Layer, MimeType, PortRange, TLDType
 from mimesis.exceptions import NonEnumerableError
 from mimesis.providers.base import BaseProvider
 from mimesis.providers.file import File
+from mimesis.providers.text import Text
 
 __all__ = ['Internet']
 
@@ -37,6 +39,11 @@ class Internet(BaseProvider):
         """
         super().__init__(*args, **kwargs)
         self.__file = File(seed=self.seed)
+        # host names consist of syntax-restricted labels
+        # https://tools.ietf.org/html/rfc8499#page-8
+        self.__LDHs = [w for w in Text('en')._data['words']['normal']
+                       if len(w) <= 63 and re.fullmatch(
+                           r'[a-z0-9](?:[a-z0-9-]*[a-z0-9])?', w, re.I)]
         self._MAX_IPV4 = (2 ** 32) - 1
         self._MAX_IPV6 = (2 ** 128) - 1
 
@@ -251,6 +258,20 @@ class Internet(BaseProvider):
 
         return 'https://{}{}'.format(
             resource, domain)
+
+    def hostname(self,
+                 tld_type: Optional[TLDType] = None,
+                 depth: int = 1) -> str:
+        """Return random host name.
+
+        :param tld_type: Enum object DomainType
+        :param depth: The number of labels before the TLD.
+        :return: Host name.
+        :raises NonEnumerableError: if tld_type not in DomainType.
+        """
+        tld = self.top_level_domain(tld_type=tld_type)
+        labels = [self.random.choice(self.__LDHs) for i in range(depth)]
+        return '.'.join(labels + [tld[1:]])
 
     def top_level_domain(self, tld_type: Optional[TLDType] = None) -> str:
         """Return random top level domain.
