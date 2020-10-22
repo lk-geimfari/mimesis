@@ -47,6 +47,7 @@ class TestInternet(object):
         'w, h, keywords, writable, res_type', [
             (900, 900, ['love', 'passion', 'death'], False, str),
             (800, 800, ['love', 'passion', 'death'], False, str),
+            (800, 800, None, False, str),
             # (700, 700, ['love', 'passion', 'death'], True, bytes),
         ],
     )
@@ -58,6 +59,9 @@ class TestInternet(object):
             writable=writable,
         )
         assert isinstance(result, res_type)
+        if res_type == str:
+            assert re.match(patterns.STOCK_IMAGE, result)
+            assert result.endswith('?' + ','.join(keywords or []))
 
     @pytest.mark.parametrize(
         'layer', [
