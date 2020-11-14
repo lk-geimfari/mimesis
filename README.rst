@@ -125,6 +125,9 @@ Mimesis support over twenty different data providers available,
 which can produce data related to people, food, computer hardware,
 transportation, addresses, internet and more.
 
+Data providers are **heavy objects** since each instance of provider keeps in memory all
+the data from the provider's JSON file so you **should not** construct too many providers.
+
 See `API Reference <https://mimesis.name/api.html>`_ for more info.
 
 
@@ -137,7 +140,7 @@ the format you want (JSON/XML/YAML etc.)  with any structure you want.
 Let's build dummy API endpoint, using Flask to illustrate the idea:
 
 .. code:: python
-     
+
      from flask import Flask, jsonify, request
      from mimesis.schema import Field, Schema
      from mimesis.enums import Gender
