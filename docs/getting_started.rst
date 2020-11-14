@@ -6,11 +6,6 @@ Getting Started
 Installation
 ------------
 
-.. attention::
-    Mimesis works only on Python 3.6 and higher. Developers have not plans related to adding support
-    for old versions of Python.
-
-
 Within the pre-activated environment, use the following command to install Mimesis:
 
 .. code-block:: sh
@@ -68,11 +63,19 @@ So what did the code above?
 4. The same as above, but for male.
 
 
-Providers
----------
+Data Providers
+--------------
 Mimesis support over twenty different data providers available,
 which can produce data related to food, people, computer hardware,
-transportation, addresses, and more. See :ref:`api-reference` for more info.
+transportation, addresses, and more.
+
+See :ref:`api-reference` for more info.
+
+.. attention::
+    Data providers are **heavy objects** since each instance of provider keeps in memory all
+    the data from the provider's JSON file so you **should not** construct too many providers.
+
+    You can read more about the heaviness of providers in `this issue <https://github.com/lk-geimfari/mimesis/issues/968>`_.
 
 Generic Provider
 ----------------
@@ -214,6 +217,10 @@ Code     Name                  Native Name
 Seeded Data
 -----------
 
+.. note::
+    Keep in mind that some methods of some providers cannot be used with seeded
+    providers since their crypto secure nature.
+
 For using seeded data just pass an argument *seed* (which can be *int*, *str*, *bytes*, *bytearray*)
 to data provider:
 
@@ -224,6 +231,8 @@ to data provider:
     >>> person = Person('tr', seed=0xFF)
     >>> person.full_name()
     'Gizem Tekand'
+
+
 
 Built-in Providers
 ------------------
