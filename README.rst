@@ -221,6 +221,11 @@ Thanks
 Supported by `JetBrains <https://www.jetbrains.com/?from=mimesis>`_.
 
 
+Disclaimer
+----------
+
+The authors of `Mimesis` do not assume any responsibility for how you use it or how you use data generated with it. This library was designed with good intentions to make testing easier. Do not use the data generated with Mimesis for illegal purposes.
+
 License
 -------
 

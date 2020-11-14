@@ -1,0 +1,11 @@
+data-changes:
+  - mimesis/data/*
+
+provider-changes:
+  - mimesis/providers/*.py
+
+documentation:
+  - docs/*
+
+tests:
+  - tests/* 
