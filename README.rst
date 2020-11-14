@@ -127,7 +127,7 @@ transportation, addresses, internet and more.
 
 See `API Reference <https://mimesis.name/api.html>`_ for more info.
 
-Data providers are **heavy objects** since each instance of provider keeps in memory all
+The data providers are **heavy objects** since each instance of provider keeps in memory all
 the data from the provider's JSON file so you **should not** construct too many providers.
 
 
