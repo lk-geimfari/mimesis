@@ -125,10 +125,10 @@ Mimesis support over twenty different data providers available,
 which can produce data related to people, food, computer hardware,
 transportation, addresses, internet and more.
 
+See `API Reference <https://mimesis.name/api.html>`_ for more info.
+
 Data providers are **heavy objects** since each instance of provider keeps in memory all
 the data from the provider's JSON file so you **should not** construct too many providers.
-
-See `API Reference <https://mimesis.name/api.html>`_ for more info.
 
 
 Generating structured data
