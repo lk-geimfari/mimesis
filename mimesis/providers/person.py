@@ -482,11 +482,11 @@ class Person(BaseDataProvider):
         :return: Phone number.
 
         :Example:
-            +7-(963)-409-11-22.
+            +7 (963) 409 11 22
         """
         if not mask:
             code = self.random.choice(CALLING_CODES)
-            default = '{}-(###)-###-####'.format(code)
+            default = '{} (###) ### ####'.format(code)
             masks = self._data.get('telephone_fmt', [default])
             mask = self.random.choice(masks)
 
