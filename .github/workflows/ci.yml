@@ -6,9 +6,11 @@ jobs:
   build:
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
-        python-version: [3.6, 3.7, 3.8, 3.9]
+        python-version: [3.6, 3.7, 3.8]
+
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python ${{ matrix.python-version }}
@@ -23,12 +25,17 @@ jobs:
           path: .venv
           key: venv-${{ runner.os }}-${{ matrix.python-version }}-${{ hashFiles('**/poetry.lock') }}
       - name: Install dependencies
-        run: |
-          poetry install --no-interaction
-      - run: |
-          poetry run pytest --cov=mimesis
-          poetry run mypy mimesis/ tests/
-          poetry run pyroma -d .
+        run: poetry install --no-interaction
+      - name: pytest
+        run: poetry run pytest --cov=mimesis
+      - name: mypy
+        run: poetry run mypy mimesis/ tests/
+      - name: pyroma
+        run: poetry run pyroma -d .
+      - name: codecov
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+        run: poetry run codecov --token $CODECOV_TOKEN
 
   deploy:
     if: ${{ github.ref == 'ref/head/master' }}
