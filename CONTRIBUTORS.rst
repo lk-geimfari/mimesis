@@ -86,6 +86,7 @@ Patches and Suggestions
 -  Tim Kreitner `(tabassco)`_
 -  Miroslav Šedivý `(eumiro)`_
 -  Yusan `(aekt)`_
+-  Michael Oliver `michael0liver`_
 
 
 
@@ -150,3 +151,4 @@ Patches and Suggestions
 .. _(tabassco): https://github.com/tabassco
 .. _(eumiro): https://github.com/eumiro
 .. _(aekt): https://github.com/aekt
+.. _(michael0liver): https://github.com/aekt
