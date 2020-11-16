@@ -35,7 +35,7 @@ jobs:
       - name: codecov
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-        run: poetry run codecov --token $CODECOV_TOKEN
+        run: poetry run codecov --token ${{ env.CODECOV_TOKEN }}
 
   deploy:
     if: ${{ github.ref == 'ref/head/master' }}
@@ -52,4 +52,4 @@ jobs:
           PYPI_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
         run: |
           poetry build
-          poetry publish --username $PYPI_USERNAME --password $PYPI_PASSWORD
+          poetry publish --username ${{ env.PYPI_USERNAME }} --password ${{ env.PYPI_PASSWORD }}
