@@ -27,7 +27,6 @@ jobs:
       - name: Publish
         env:
           # https://python-poetry.org/docs/repositories/#configuring-credentials
-          POETRY_HTTP_BASIC_PYPI_USERNAME: lk-geimfari
-          POETRY_HTTP_BASIC_PYPI_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+          POETRY_PYPI_TOKEN_PYPI: ${{ secrets.POETRY_PYPI_TOKEN_PYPI }}
         run: |
           poetry publish --build
