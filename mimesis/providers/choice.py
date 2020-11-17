@@ -85,5 +85,4 @@ class Choice(BaseProvider):
             return data
         elif isinstance(items, tuple):
             return tuple(data)
-        else:
-            return ''.join(data)
+        return ''.join(data)

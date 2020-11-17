@@ -8,4 +8,4 @@ documentation:
   - docs/*
 
 tests:
-  - tests/* 
+  - tests/*

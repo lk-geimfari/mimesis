@@ -66,8 +66,7 @@ class Business(BaseDataProvider):
         """
         if allow_random:
             return self.random.choice(CURRENCY_ISO_CODES)
-        else:
-            return self._data['currency-code']
+        return self._data['currency-code']
 
     def cryptocurrency_iso_code(self) -> str:
         """Get symbol of random cryptocurrency.

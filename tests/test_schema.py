@@ -118,5 +118,5 @@ def test_field_with_key(field):
     usual_result = field('age')
     assert isinstance(usual_result, int)
 
-    result_on_key = field('age', key=lambda v: float(v))
+    result_on_key = field('age', key=float)
     assert isinstance(result_on_key, float)

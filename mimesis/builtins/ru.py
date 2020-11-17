@@ -135,7 +135,7 @@ class RussiaSpecProvider(BaseSpecProvider):
             number = 0
             digits = digits_dict[t]
 
-            for i in range(0, len(digits)):
+            for i, _ in enumerate(digits, start=0):
                 number += nums[i] * digits[i]
             return number % 11 % 10
 
