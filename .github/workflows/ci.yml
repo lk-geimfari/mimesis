@@ -35,8 +35,9 @@ jobs:
         run: poetry run pyroma -d .
       # - name: codecov
       #   env:
+      #     # https://github.com/codecov/codecov-python#configuration
       #     CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-      #   run: poetry run codecov --token ${{ env.CODECOV_TOKEN }}
+      #   run: poetry run codecov
 
   deploy:
     if: ${{ github.ref == 'ref/head/master' }}
@@ -49,8 +50,8 @@ jobs:
           poetry run python setup.py check --restructuredtext --strict
       - name: Publish
         env:
-          PYPI_USERNAME: lk-geimfari
-          PYPI_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+          # https://python-poetry.org/docs/repositories/#configuring-credentials
+          POETRY_HTTP_BASIC_PYPI_USERNAME: lk-geimfari
+          POETRY_HTTP_BASIC_PYPI_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
         run: |
-          poetry build
-          poetry publish --username ${{ env.PYPI_USERNAME }} --password ${{ env.PYPI_PASSWORD }}
+          poetry publish --build
