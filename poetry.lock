@@ -454,7 +454,7 @@ dev = ["pre-commit", "tox", "pytest-asyncio"]
 
 [[package]]
 name = "pytest-randomly"
-version = "3.4.0"
+version = "3.5.0"
 description = "Pytest plugin to randomly order tests and control random.seed."
 category = "dev"
 optional = false
@@ -583,7 +583,7 @@ testing = ["jaraco.itertools", "func-timeout"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.6"
-content-hash = "50b70082560d46dab64666250367f57095405832e5f8aa7f8c12a6202de9162a"
+content-hash = "1e65433e2e1648df66d44f85fcf57992023a7b8657f6b87da24ba43fd9126664"
 
 [metadata.files]
 atomicwrites = [
@@ -783,8 +783,8 @@ pytest-mock = [
     {file = "pytest_mock-3.1.1-py3-none-any.whl", hash = "sha256:a9fedba70e37acf016238bb2293f2652ce19985ceb245bbd3d7f3e4032667402"},
 ]
 pytest-randomly = [
-    {file = "pytest-randomly-3.4.0.tar.gz", hash = "sha256:e44a69623237e47cc4ee77da9c04c6b505ed1a7b00656dc1409f8344c707b87b"},
-    {file = "pytest_randomly-3.4.0-py3-none-any.whl", hash = "sha256:4e02887ba52f021cc8d5429e91e93be2b5df4adf38bf1715c7c153968b260b59"},
+    {file = "pytest-randomly-3.5.0.tar.gz", hash = "sha256:440cec143fd9b0adeb072006c71e0294402a2bc2ccd08079c2341087ba4cf2d1"},
+    {file = "pytest_randomly-3.5.0-py3-none-any.whl", hash = "sha256:9db10d160237f3f8ee60cef72e4cb9ea88d2893c9dd5c8aa334b060cdeb67c3a"},
 ]
 pytz = [
     {file = "pytz-2020.4-py2.py3-none-any.whl", hash = "sha256:5c55e189b682d420be27c6995ba6edce0c0a77dd67bfbe2ae6607134d5851ffd"},
