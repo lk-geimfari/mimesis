@@ -9,7 +9,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
-        python-version: [3.6, 3.7, 3.8]
+        python-version: [3.6.x, 3.7.x, 3.8.x]
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python ${{ matrix.python-version }}
@@ -27,22 +27,26 @@ jobs:
           key: ${{ runner.os }}-python-${{ matrix.python-version }}-venv-${{ hashFiles('**/poetry.lock') }}
       - name: Install dependencies
         run: poetry install --no-interaction
-      - name: pytest
-        run: poetry run pytest --cov=mimesis
+      - name: pytest and coverage
+        run: poetry run pytest --cov=mimesis --cov-report=xml
       - name: mypy
         run: poetry run mypy mimesis/ tests/
       - name: pyroma
         run: poetry run pyroma -d .
-      - name: codecov
+      - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v1
         with:
+          file: ./coverage.xml
+          env_vars: OS,PYTHON
           fail_ci_if_error: true
+          verbose: true
 
   deploy:
     if: ${{ github.ref == 'ref/head/master' }}
     runs-on: ubuntu-latest
     needs: [build]
     steps:
+      - uses: actions/checkout@v2
       - run: |
           poetry python setup.py minify
           poetry run check-manifest
