@@ -1,9 +1,12 @@
-name: Python package
+name: Test
 
-on: [push]
+on:
+  push:
+    branches:
+      - "*"
 
 jobs:
-  build:
+  test:
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -40,21 +43,3 @@ jobs:
       #     file: ./coverage.xml
       #     env_vars: OS,PYTHON
       #     fail_ci_if_error: true
-
-  deploy:
-    if: ${{ github.ref == 'ref/head/master' }}
-    runs-on: ubuntu-latest
-    needs: [build]
-    steps:
-      - uses: actions/checkout@v2
-      - run: |
-          poetry python setup.py minify
-          poetry run check-manifest
-          poetry run python setup.py check --restructuredtext --strict
-      - name: Publish
-        env:
-          # https://python-poetry.org/docs/repositories/#configuring-credentials
-          POETRY_HTTP_BASIC_PYPI_USERNAME: lk-geimfari
-          POETRY_HTTP_BASIC_PYPI_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
-        run: |
-          poetry publish --build

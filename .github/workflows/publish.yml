@@ -1,0 +1,33 @@
+name: Publish
+
+on:
+  release:
+    types:
+      - created
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.8.x
+      - name: Install Poetry
+        run: pip install poetry
+      - name: Cache virtual environment
+        uses: actions/cache@v2
+        with:
+          path: .venv
+          key: ${{ runner.os }}-python-${{ matrix.python-version }}-venv-${{ hashFiles('**/poetry.lock') }}
+      - run: |
+          poetry python setup.py minify
+          poetry run check-manifest
+          poetry run python setup.py check --restructuredtext --strict
+      - name: Publish
+        env:
+          # https://python-poetry.org/docs/repositories/#configuring-credentials
+          POETRY_HTTP_BASIC_PYPI_USERNAME: lk-geimfari
+          POETRY_HTTP_BASIC_PYPI_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+        run: |
+          poetry publish --build
