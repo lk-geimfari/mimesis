@@ -76,6 +76,8 @@ POSTAL_CODE_REGEX = {
     'default': r'[0-9]{5}$',
 }
 
+STOCK_IMAGE = r'http[s]?://.*/\d+x\d+\?.*$'
+
 HOME_PAGE = r'http[s]?://(?:[a-zA-Z]|[0-9]|[$_@.&+-]' \
             r'|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+'
 
