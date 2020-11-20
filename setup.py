@@ -136,6 +136,7 @@ setup(
     package_data={
         'mimesis': [
             'data/*/*',
+            'py.typed',
         ],
     },
     exclude_package_data={
