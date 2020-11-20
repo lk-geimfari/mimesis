@@ -36,10 +36,10 @@ jobs:
         run: poetry run mypy mimesis/ tests/
       - name: pyroma
         run: poetry run pyroma -d .
-       - name: Upload coverage to Codecov
-         uses: codecov/codecov-action@v1
-         with:
-           token: ${{ secrets.CODECOV_TOKEN }}
-           file: ./coverage.xml
-           env_vars: OS,PYTHON
-           fail_ci_if_error: true
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          file: ./coverage.xml
+          env_vars: OS,PYTHON
+          fail_ci_if_error: true
