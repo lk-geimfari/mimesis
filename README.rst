@@ -11,7 +11,7 @@ Mimesis - Fake Data Generator
 Description
 -----------
 
-.. image:: https://github.com/lk-geimfari/mimesis/workflows/.github/workflows/test.yml/badge.svg?branch=master
+.. image:: https://github.com/lk-geimfari/mimesis/workflows/test/badge.svg?branch=master
      :target: https://github.com/lk-geimfari/mimesis/actions
      :alt: Github Actions Test
 
