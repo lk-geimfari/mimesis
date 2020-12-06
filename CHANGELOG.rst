@@ -1,3 +1,11 @@
+next version
+------------
+
+**Added**:
+
+- Added Python 3.9 support
+
+
 Version 4.1.2
 -------------
 
