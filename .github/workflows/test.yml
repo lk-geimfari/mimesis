@@ -1,9 +1,10 @@
 name: Test
-#
+
+# https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows
 on:
   push:
-    branches:
-      - "*"
+  pull_request:
+    types: [opened, synchronize]
 
 jobs:
   test:
