@@ -375,25 +375,24 @@ pygments = "*"
 
 [[package]]
 name = "pytest"
-version = "6.1.2"
+version = "6.2.0"
 description = "pytest: simple powerful testing with Python"
 category = "dev"
 optional = false
-python-versions = ">=3.5"
+python-versions = ">=3.6"
 
 [package.dependencies]
 atomicwrites = {version = ">=1.0", markers = "sys_platform == \"win32\""}
-attrs = ">=17.4.0"
+attrs = ">=19.2.0"
 colorama = {version = "*", markers = "sys_platform == \"win32\""}
 importlib-metadata = {version = ">=0.12", markers = "python_version < \"3.8\""}
 iniconfig = "*"
 packaging = "*"
-pluggy = ">=0.12,<1.0"
+pluggy = ">=0.12,<1.0.0a1"
 py = ">=1.8.2"
 toml = "*"
 
 [package.extras]
-checkqa_mypy = ["mypy (==0.780)"]
 testing = ["argcomplete", "hypothesis (>=3.56)", "mock", "nose", "requests", "xmlschema"]
 
 [[package]]
@@ -583,7 +582,7 @@ testing = ["jaraco.itertools", "func-timeout"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.6"
-content-hash = "1e65433e2e1648df66d44f85fcf57992023a7b8657f6b87da24ba43fd9126664"
+content-hash = "0ecc8e167436dc69aad38152cb1f79f0db3fc4894fc459482b1a27609184e987"
 
 [metadata.files]
 atomicwrites = [
@@ -763,8 +762,8 @@ pyroma = [
     {file = "pyroma-2.6.tar.gz", hash = "sha256:c49c00377219626bf83df42adf018cc231e6162b68cc7aaf2ff1c63803924102"},
 ]
 pytest = [
-    {file = "pytest-6.1.2-py3-none-any.whl", hash = "sha256:4288fed0d9153d9646bfcdf0c0428197dba1ecb27a33bb6e031d002fa88653fe"},
-    {file = "pytest-6.1.2.tar.gz", hash = "sha256:c0a7e94a8cdbc5422a51ccdad8e6f1024795939cc89159a0ae7f0b316ad3823e"},
+    {file = "pytest-6.2.0-py3-none-any.whl", hash = "sha256:d69e1a80b34fe4d596c9142f35d9e523d98a2838976f1a68419a8f051b24cec6"},
+    {file = "pytest-6.2.0.tar.gz", hash = "sha256:b12e09409c5bdedc28d308469e156127004a436b41e9b44f9bff6446cbab9152"},
 ]
 pytest-cov = [
     {file = "pytest-cov-2.10.1.tar.gz", hash = "sha256:47bd0ce14056fdd79f93e1713f88fad7bdcc583dcd7783da86ef2f085a0bb88e"},
