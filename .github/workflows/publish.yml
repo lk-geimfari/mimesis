@@ -22,6 +22,8 @@ jobs:
         with:
           path: .venv
           key: ${{ runner.os }}-python-${{ matrix.python-version }}-venv-${{ hashFiles('**/poetry.lock') }}
+      - name: Install dependencies
+        run: poetry install --no-interaction
       - run: |
           poetry python setup.py minify
           poetry run check-manifest
