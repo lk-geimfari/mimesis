@@ -1,9 +1,10 @@
 name: Test
 
+# https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows
 on:
   push:
-    branches:
-      - "*"
+  pull_request:
+    types: [opened, synchronize]
 
 jobs:
   test:
@@ -20,7 +21,7 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - name: Upgrade pip
-        run: pip install --upgrade pip
+        run: pip install --upgrade --user pip
       - name: Install Poetry
         run: pip install poetry
       - name: Cache virtual environment
