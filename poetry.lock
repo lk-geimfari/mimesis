@@ -412,7 +412,7 @@ testing = ["fields", "hunter", "process-tests (==2.0.2)", "six", "pytest-xdist",
 
 [[package]]
 name = "pytest-flake8"
-version = "1.0.6"
+version = "1.0.7"
 description = "pytest plugin to check FLAKE8 requirements"
 category = "dev"
 optional = false
@@ -770,8 +770,8 @@ pytest-cov = [
     {file = "pytest_cov-2.10.1-py2.py3-none-any.whl", hash = "sha256:45ec2d5182f89a81fc3eb29e3d1ed3113b9e9a873bcddb2a71faaab066110191"},
 ]
 pytest-flake8 = [
-    {file = "pytest-flake8-1.0.6.tar.gz", hash = "sha256:1b82bb58c88eb1db40524018d3fcfd0424575029703b4e2d8e3ee873f2b17027"},
-    {file = "pytest_flake8-1.0.6-py2.py3-none-any.whl", hash = "sha256:2e91578ecd9b200066f99c1e1de0f510fbb85bcf43712d46ea29fe47607cc234"},
+    {file = "pytest-flake8-1.0.7.tar.gz", hash = "sha256:f0259761a903563f33d6f099914afef339c085085e643bee8343eb323b32dd6b"},
+    {file = "pytest_flake8-1.0.7-py2.py3-none-any.whl", hash = "sha256:c28cf23e7d359753c896745fd4ba859495d02e16c84bac36caa8b1eec58f5bc1"},
 ]
 pytest-isort = [
     {file = "pytest-isort-1.1.0.tar.gz", hash = "sha256:30bd29927ac1b92f0701c1c43de52abaf7ccedaec8f8c9775dfab4ee51d74006"},
