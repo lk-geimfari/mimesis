@@ -1,3 +1,11 @@
+Version 4.1.3
+-------------
+
+**Add**:
+
+- Added ``py.typed`` file to the package
+
+
 Version 4.1.2
 -------------
 
