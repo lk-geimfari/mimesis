@@ -1,9 +1,10 @@
 Version 4.1.3
 -------------
 
-**Add**:
+**Added**:
 
 - Added ``py.typed`` file to the package
+- Added ``Python 3.9`` support
 
 
 Version 4.1.2

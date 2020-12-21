@@ -2,7 +2,7 @@ Contributing Guidelines
 -----------------------
 
 The `source code`_ and `issue tracker`_ are hosted on GitHub. *Mimesis*
-is tested against Python 3.6 through 3.8 on `Travis-CI`_ and `AppVeyor_`. Test coverage
+is tested against Python 3.6 through 3.9 on `GitHub Actions`_ and `AppVeyor_`. Test coverage
 is monitored with `Codecov`_.
 
 Dependencies
@@ -72,7 +72,6 @@ Example of annotated function:
 
 .. _source code: https://github.com/lk-geimfari/mimesis
 .. _issue tracker: https://github.com/lk-geimfari/mimesis/issues
-.. _Travis-CI: https://travis-ci.org/lk-geimfari/mimesis
 .. _AppVeyor: https://ci.appveyor.com/project/lk-geimfari/mimesis
 .. _Codecov: https://codecov.io/gh/lk-geimfari/mimesis
 .. _PEP8: https://www.python.org/dev/peps/pep-0008/
@@ -181,7 +180,7 @@ To run tests, simply:
 
     ⟩ make test
 
-Check out logs of Travis CI or AppVeyor if tests were failed on creating
+Check out logs of GitHub Actions or AppVeyor if tests were failed on creating
 PR, there you can find useful information.
 
 The tests are randomly shuffled by pytest-randomly. To rerun the tests with the previous seed use:
@@ -195,7 +194,7 @@ If you want to specify a seed ahead of time use:
 .. code:: text
 
     ) make test SEED=$int
-    
+
 
 Type checking
 ~~~~~~~~~~~~~
@@ -233,7 +232,7 @@ locale.
 Releases
 ~~~~~~~~
 
-We use **Travis CI** for automatically creating releases. The package
+We use **GitHub Actions** for automatically creating releases. The package
 will be published on PyPi after pushing the new **tag** to the master
 branch. The new release can be approved or disapproved by maintainers of
 this project. If the new release was disapproved, then maintainer should

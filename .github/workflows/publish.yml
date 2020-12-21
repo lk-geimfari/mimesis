@@ -13,6 +13,8 @@ jobs:
       - uses: actions/setup-python@v2
         with:
           python-version: 3.8.x
+      - name: Upgrade pip
+        run: pip install --upgrade --user pip
       - name: Install Poetry
         run: pip install poetry
       - name: Cache virtual environment
@@ -20,6 +22,8 @@ jobs:
         with:
           path: .venv
           key: ${{ runner.os }}-python-${{ matrix.python-version }}-venv-${{ hashFiles('**/poetry.lock') }}
+      - name: Install dependencies
+        run: poetry install --no-interaction
       - run: |
           poetry python setup.py minify
           poetry run check-manifest
