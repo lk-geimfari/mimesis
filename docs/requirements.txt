@@ -1,2 +1,2 @@
-sphinx==3.4.0
+sphinx==3.4.1
 sphinx-autodoc-typehints==1.11.1
