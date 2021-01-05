@@ -69,7 +69,7 @@ python-versions = "*"
 
 [[package]]
 name = "check-manifest"
-version = "0.45"
+version = "0.46"
 description = "Check MANIFEST.in in a Python source package for completeness"
 category = "dev"
 optional = false
@@ -80,7 +80,7 @@ build = ">=0.1"
 toml = "*"
 
 [package.extras]
-test = ["mock (>=3.0.0)"]
+test = ["mock (>=3.0.0)", "pytest"]
 
 [[package]]
 name = "codecov"
@@ -582,7 +582,7 @@ testing = ["jaraco.itertools", "func-timeout"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.6"
-content-hash = "80de6523ed4f2e7786f969db340584d061a48f260cdd5d912dba97715e6a7143"
+content-hash = "a1ade8113b4ca088d819594b25757fed899fce9831e8b1ab03509ffc22f4a2ee"
 
 [metadata.files]
 atomicwrites = [
@@ -610,8 +610,8 @@ chardet = [
     {file = "chardet-3.0.4.tar.gz", hash = "sha256:84ab92ed1c4d4f16916e05906b6b75a6c0fb5db821cc65e70cbd64a3e2a5eaae"},
 ]
 check-manifest = [
-    {file = "check-manifest-0.45.tar.gz", hash = "sha256:636b65a3b685374ad429ff22fe213966765b145f08bc560c8d033b604c7bee4c"},
-    {file = "check_manifest-0.45-py2.py3-none-any.whl", hash = "sha256:79dfd287348504a6f5195507dd15d0a6f66574feb34d3dbe1b33c80e24d2ceb9"},
+    {file = "check-manifest-0.46.tar.gz", hash = "sha256:5895e42a012989bdc51854a02c82c8d6898112a4ab11f2d7878200520b49d428"},
+    {file = "check_manifest-0.46-py3-none-any.whl", hash = "sha256:b59b0e7c7ed3946537677c9ab9b2c2cb7be9b1807fd40bc4dfc1eef31d42cff5"},
 ]
 codecov = [
     {file = "codecov-2.1.11-py2.py3-none-any.whl", hash = "sha256:ba8553a82942ce37d4da92b70ffd6d54cf635fc1793ab0a7dc3fecd6ebfb3df8"},
