@@ -82,7 +82,7 @@ class RussiaSpecProvider(BaseSpecProvider):
         :Example:
             57 16 805199.
         """
-        return '{}{}'.format(
+        return '{} {}'.format(
             self.passport_series(),
             self.passport_number(),
         )
