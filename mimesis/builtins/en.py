@@ -48,7 +48,7 @@ class USASpecProvider(BaseSpecProvider):
                 '1Z@####@##########',
             ),
         }
-        mask = self.random.choice(services[service])  # type: ignore
+        mask = self.random.choice(services[service])
         return self.random.custom_code(mask=mask)
 
     def ssn(self) -> str:
