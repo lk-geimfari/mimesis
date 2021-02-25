@@ -46,12 +46,13 @@ class Random(random_module.Random):
                 for _ in range(amount)]
 
     @staticmethod
-    def urandom(*args: Any, **kwargs: Any) -> bytes:
+    def urandom(size: int = 8) -> bytes:
         """Return a bytes object containing random bytes.
 
+        :param size: The size of byte object.
         :return: Bytes.
         """
-        return os.urandom(*args, **kwargs)
+        return os.urandom(size)
 
     def generate_string(self, str_seq: str, length: int = 10) -> str:
         """Generate random string created from string sequence.

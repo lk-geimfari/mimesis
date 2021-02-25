@@ -27,12 +27,12 @@ def test_randints(random):
 
 
 @pytest.mark.parametrize(
-    'n', (8, 16, 32, 64),
+    'size', (8, 16, 32, 64),
 )
-def test_urandom(random, n):
-    result = random.urandom(n)
+def test_urandom(random, size):
+    result = random.urandom(size=size)
 
-    assert len(result) == n
+    assert len(result) == size
     assert isinstance(result, bytes)
 
 
