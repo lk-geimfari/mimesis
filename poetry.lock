@@ -472,7 +472,7 @@ python-versions = "*"
 
 [[package]]
 name = "readme-renderer"
-version = "28.0"
+version = "29.0"
 description = "readme_renderer is a library for rendering \"readme\" descriptions for Warehouse"
 category = "dev"
 optional = false
@@ -485,7 +485,7 @@ Pygments = ">=2.5.1"
 six = "*"
 
 [package.extras]
-md = ["cmarkgfm (>=0.2.0)"]
+md = ["cmarkgfm (>=0.5.0,<0.6.0)"]
 
 [[package]]
 name = "requests"
@@ -581,7 +581,7 @@ testing = ["jaraco.itertools", "func-timeout"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.6"
-content-hash = "86cc551caa41ae0417831a5be56492b7d62de0027ebaa90481e91de24dd98538"
+content-hash = "34cbfd05d130fc1c9465d75cc410d61edbab2e5315a8b1b911f760280ae8661f"
 
 [metadata.files]
 atomicwrites = [
@@ -815,8 +815,8 @@ pytz = [
     {file = "pytz-2021.1.tar.gz", hash = "sha256:83a4a90894bf38e243cf052c8b58f381bfe9a7a483f6a9cab140bc7f702ac4da"},
 ]
 readme-renderer = [
-    {file = "readme_renderer-28.0-py2.py3-none-any.whl", hash = "sha256:267854ac3b1530633c2394ead828afcd060fc273217c42ac36b6be9c42cd9a9d"},
-    {file = "readme_renderer-28.0.tar.gz", hash = "sha256:6b7e5aa59210a40de72eb79931491eaf46fefca2952b9181268bd7c7c65c260a"},
+    {file = "readme_renderer-29.0-py2.py3-none-any.whl", hash = "sha256:63b4075c6698fcfa78e584930f07f39e05d46f3ec97f65006e430b595ca6348c"},
+    {file = "readme_renderer-29.0.tar.gz", hash = "sha256:92fd5ac2bf8677f310f3303aa4bce5b9d5f9f2094ab98c29f13791d7b805a3db"},
 ]
 requests = [
     {file = "requests-2.25.1-py2.py3-none-any.whl", hash = "sha256:c210084e36a42ae6b9219e00e48287def368a26d03a048ddad7bfee44f75871e"},
