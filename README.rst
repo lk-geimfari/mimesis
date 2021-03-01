@@ -3,7 +3,7 @@ Mimesis - Fake Data Generator
 
 |
 
-.. image:: https://raw.githubusercontent.com/lk-geimfari/mimesis/master/.github/media/readme-logo.png
+.. image:: https://raw.githubusercontent.com/lk-geimfari/mimesis/master/.github/images/readme-logo.png
      :target: https://github.com/lk-geimfari/mimesis
 
 |
