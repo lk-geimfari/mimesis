@@ -3,7 +3,7 @@ Mimesis - Fake Data Generator
 
 |
 
-.. image:: https://raw.githubusercontent.com/lk-geimfari/mimesis/master/media/readme-logo.png
+.. image:: https://raw.githubusercontent.com/lk-geimfari/mimesis/master/.github/media/readme-logo.png
      :target: https://github.com/lk-geimfari/mimesis
 
 |
@@ -50,7 +50,7 @@ The key features are:
 - **Data variety**: Supports `a lot of data providers <https://mimesis.name/api.html>`_ for a variety of purposes.
 - **Schema-based generators**: Provides an easy mechanism to generate data by the schema of any complexity.
 - **Country-specific data providers**: Provides data specific only for `some countries <https://mimesis.name/api.html#builtin-data-providers>`_.
-- **Zero hard dependencies**: Does not require any modules other than the Python standard library. 
+- **Zero hard dependencies**: Does not require any modules other than the Python standard library.
 
 
 
