@@ -363,7 +363,7 @@ python-versions = ">=2.6, !=3.0.*, !=3.1.*, !=3.2.*"
 
 [[package]]
 name = "pyroma"
-version = "3.0.1"
+version = "3.1"
 description = "Test your project's packaging friendliness"
 category = "dev"
 optional = false
@@ -581,7 +581,7 @@ testing = ["jaraco.itertools", "func-timeout"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.6"
-content-hash = "c452c1952cbf95f615ac9a39197a9e7f3fb450435f4f6eb9f5d677cd615b99f8"
+content-hash = "3b0e1360e23093217b26b26a6173055f4100cec3dd073070dbcd3244f10921d6"
 
 [metadata.files]
 atomicwrites = [
@@ -783,8 +783,8 @@ pyparsing = [
     {file = "pyparsing-2.4.6.tar.gz", hash = "sha256:4c830582a84fb022400b85429791bc551f1f4871c33f23e44f353119e92f969f"},
 ]
 pyroma = [
-    {file = "pyroma-3.0.1-py3-none-any.whl", hash = "sha256:b4d288de16686f169e8bcefb1b599d5047e1c938692e7c583ae9cb2f56a62106"},
-    {file = "pyroma-3.0.1.tar.gz", hash = "sha256:7c3dd0ee8980626b683a70491694c7a35b4952f2ed8c19e6f09eb96fdb74bae5"},
+    {file = "pyroma-3.1-py3-none-any.whl", hash = "sha256:a97e116b6e9f4ca4b66bdd530c9a18c1db99d4400f6eead8d9297b9205640bef"},
+    {file = "pyroma-3.1.tar.gz", hash = "sha256:45ad8201da9a813b5597bb85c80bbece93af9ec89170fc2be5ad85fa9463cef1"},
 ]
 pytest = [
     {file = "pytest-6.2.2-py3-none-any.whl", hash = "sha256:b574b57423e818210672e07ca1fa90aaf194a4f63f3ab909a2c67ebb22913839"},
