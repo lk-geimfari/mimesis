@@ -44,7 +44,19 @@ purposes in a variety of languages. The fake data could be used to populate a te
 create fake API endpoints, create JSON and XML files of arbitrary structure, anonymize data taken
 from production and etc.
 
-The key features are:
+Installation
+------------
+
+
+To install mimesis, simply use pip:
+
+.. code:: text
+
+    ~ ⟩ pip install mimesis
+
+
+Supported Features
+------------------
 
 - **Easy**: Designed to be easy to use and learn.
 - **Multilingual**: Supports data for `a lot of languages <https://mimesis.name/getting_started.html#locales>`_.
@@ -55,17 +67,6 @@ The key features are:
 - **Generic data provider**: The `simplified <https://mimesis.name/getting_started.html#generic-provider>`_ access to all the providers from a single object.
 - **Zero hard dependencies**: Does not require any modules other than the Python standard library.
 - **Schema-based generators**: Provides an easy mechanism to generate data by the schema of any complexity.
-
-
-Installation
-------------
-
-
-To install mimesis, simply use pip:
-
-.. code:: text
-
-    [venv] ~ ⟩ pip install mimesis
 
 
 Documentation
@@ -88,7 +89,7 @@ Usage
 -----
 
 This library is really easy to use and everything you need is just import an object which
-represents a type of data you need (we call such object *Provider*).
+represents a type of data you need (we call such object a *Provider*).
 
 In example below we import provider `Person <https://mimesis.name/api.html#person>`_,
 which represents data related to personal information, such as name, surname, email and etc:
