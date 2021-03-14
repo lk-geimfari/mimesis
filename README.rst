@@ -166,6 +166,11 @@ How to Contribute
 .. _contributors: https://github.com/lk-geimfari/mimesis/blob/master/CONTRIBUTORS.rst
 
 
+Useful links
+------------
+
+I have a Telegram channel where I daily post news, announces and all the open-source 
+goodies I found, so subscribe: `@the_art_of_development <https://t.me/the_art_of_development>`_.
 
 Thanks
 ------
