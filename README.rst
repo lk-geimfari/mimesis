@@ -31,6 +31,10 @@ Description
      :target: https://pypi.org/project/mimesis/
      :alt: PyPi Version
 
+.. image:: https://img.shields.io/pypi/dm/mimesis   
+     :target: https://pypi.org/project/mimesis/
+     :alt: PyPI - Downloads
+
 .. image:: https://img.shields.io/badge/python-3.6+-brightgreen.svg
      :target: https://badge.fury.io/py/mimesis
      :alt: Python version
