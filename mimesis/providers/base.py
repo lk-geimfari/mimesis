@@ -7,7 +7,7 @@ import contextlib
 import functools
 import json
 from pathlib import Path
-from typing import Any, Dict, Generator, Mapping
+from typing import Any, Generator, Mapping
 
 from mimesis import locales
 from mimesis.exceptions import NonEnumerableError, UnsupportedLocale
