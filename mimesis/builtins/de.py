@@ -2,6 +2,7 @@
 
 """Specific data provider for Germany (de)."""
 
+from mimesis import locales
 from mimesis.builtins.base import BaseSpecProvider
 from mimesis.typing import Seed
 
@@ -13,7 +14,7 @@ class GermanySpecProvider(BaseSpecProvider):
 
     def __init__(self, seed: Seed = None):
         """Initialize attributes."""
-        super().__init__(locale='de', seed=seed)
+        super().__init__(locale=locales.DE, seed=seed)
         self._pull(self._datafile)
 
     class Meta:

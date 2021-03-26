@@ -4,6 +4,7 @@
 
 from typing import Union
 
+from mimesis import locales
 from mimesis.builtins.base import BaseSpecProvider
 from mimesis.typing import Seed
 
@@ -15,7 +16,7 @@ class USASpecProvider(BaseSpecProvider):
 
     def __init__(self, seed: Seed = None):
         """Initialize attributes."""
-        super().__init__(locale='en', seed=seed)
+        super().__init__(locale=locales.EN, seed=seed)
 
     class Meta:
         """The name of the provider."""

@@ -2,6 +2,7 @@
 
 """Specific data provider for Russia (ru)."""
 
+from mimesis import locales
 from mimesis.builtins.base import BaseSpecProvider
 from mimesis.enums import Gender
 from mimesis.typing import Seed
@@ -14,7 +15,7 @@ class RussiaSpecProvider(BaseSpecProvider):
 
     def __init__(self, seed: Seed = None):
         """Initialize attributes."""
-        super().__init__(locale='ru', seed=seed)
+        super().__init__(locale=locales.RU, seed=seed)
         self._pull(self._datafile)
 
     class Meta:

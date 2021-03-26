@@ -2,6 +2,7 @@
 
 """Specific data provider for Poland (pl)."""
 
+from mimesis import locales
 from mimesis.builtins.base import BaseSpecProvider
 from mimesis.enums import Gender
 from mimesis.providers import Datetime
@@ -15,7 +16,7 @@ class PolandSpecProvider(BaseSpecProvider):
 
     def __init__(self, seed: Seed = None):
         """Initialize attributes."""
-        super().__init__(locale='pl', seed=seed)
+        super().__init__(locale=locales.PL, seed=seed)
 
     class Meta:
         """The name of the provider."""
