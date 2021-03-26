@@ -2,7 +2,7 @@
 
 """Specific data provider for USA (en)."""
 
-from typing import Optional, Union
+from typing import Union
 
 from mimesis.builtins.base import BaseSpecProvider
 from mimesis.typing import Seed
