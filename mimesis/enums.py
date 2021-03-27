@@ -10,14 +10,6 @@ You should never use your own enums in methods because in this case,
 there no guarantee that you will get the result which you actually expected.
 
 Below you can see an example of usage enums in methods of data providers.
-
-Example:
-    >>> from mimesis import Person
-    >>> from mimesis.enums import Gender
-    >>> person = Person()
-    >>> name = person.name(gender=Gender.FEMALE)
-    >>> name in person._data['names']['female']
-    True
 """
 
 from enum import Enum
