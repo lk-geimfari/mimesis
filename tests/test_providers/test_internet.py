@@ -46,7 +46,7 @@ class TestInternet(object):
     @pytest.mark.parametrize(
         'w, h, keywords, writable, res_type', [
             (900, 900, ['love', 'passion', 'death'], False, str),
-            (800, 800, ['love', 'passion', 'death'], False, str),
+            (800, 800, {'love', 'passion', 'death'}, False, str),
             (800, 800, None, False, str),
             # (700, 700, ['love', 'passion', 'death'], True, bytes),
         ],

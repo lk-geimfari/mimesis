@@ -22,6 +22,7 @@ from mimesis.enums import Layer, MimeType, PortRange, TLDType
 from mimesis.exceptions import NonEnumerableError
 from mimesis.providers.base import BaseProvider
 from mimesis.providers.file import File
+from mimesis.typing import KeywordsType
 
 __all__ = ['Internet']
 
@@ -183,7 +184,7 @@ class Internet(BaseProvider):
     @staticmethod
     def stock_image(width: Union[int, str] = 1920,
                     height: Union[int, str] = 1080,
-                    keywords: Optional[List[str]] = None,
+                    keywords: Optional[KeywordsType] = None,
                     writable: bool = False) -> Union[str, bytes]:
         """Generate random stock image (JPG/JPEG) hosted on Unsplash.
 
