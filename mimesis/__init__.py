@@ -7,7 +7,7 @@ Repository: https://github.com/lk-geimfari/mimesis
 Email: <likid.geimfari@gmail.com>
 """
 
-from mimesis.providers import (
+from .providers import (
     Address,
     BaseDataProvider,
     BaseProvider,
