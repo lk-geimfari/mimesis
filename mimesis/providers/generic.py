@@ -5,6 +5,7 @@
 import inspect
 from typing import Any, List, Type
 
+from mimesis.locales import DEFAULT_LOCALE
 from mimesis.providers.address import Address
 from mimesis.providers.base import BaseDataProvider, BaseProvider
 from mimesis.providers.business import Business
@@ -26,11 +27,12 @@ from mimesis.providers.science import Science
 from mimesis.providers.structure import Structure
 from mimesis.providers.text import Text
 from mimesis.providers.transport import Transport
+from mimesis.typing import Seed
 
 __all__ = ['Generic']
 
 
-class Generic(BaseDataProvider):
+class Generic(BaseProvider):
     """Class which contain all providers at one."""
 
     _DEFAULT_PROVIDERS = (
@@ -57,13 +59,12 @@ class Generic(BaseDataProvider):
         Cryptographic,
     )
 
-    def __init__(self, *args, **kwargs) -> None:
+    def __init__(self, locale: str = DEFAULT_LOCALE,
+                 seed: Seed = None) -> None:
         """Initialize attributes lazily.
-
-        :param args: Arguments.
-        :param kwargs: Keyword arguments.
         """
-        super().__init__(*args, **kwargs)
+        super().__init__(seed=seed)
+        self.locale = locale
 
         for provider in self._DEFAULT_PROVIDERS:
             name = getattr(provider.Meta, 'name')  # type: ignore
@@ -143,3 +144,7 @@ class Generic(BaseDataProvider):
         """
         for provider in providers:
             self.add_provider(provider)
+
+    def __str__(self) -> str:
+        """Human-readable representation of locale."""
+        return '{} <{}>'.format(self.__class__.__name__, self.locale)

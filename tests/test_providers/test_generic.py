@@ -1,18 +1,11 @@
 # -*- coding: utf-8 -*-
 
-import re
-
 import pytest
 
 from mimesis import BaseProvider, Generic
 
-from . import patterns
-
 
 class TestGeneric(object):
-
-    def test_str(self, generic):
-        assert re.match(patterns.DATA_PROVIDER_STR_REGEX, str(generic))
 
     def test_base_person(self, generic):
         result = generic.person.username()
