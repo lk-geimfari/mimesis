@@ -33,6 +33,30 @@ __all__ = ['Generic']
 class Generic(BaseDataProvider):
     """Class which contain all providers at one."""
 
+    _DEFAULT_PROVIDERS = (
+        Address,
+        Business,
+        Choice,
+        Clothing,
+        Code,
+        Choice,
+        Datetime,
+        Development,
+        File,
+        Food,
+        Hardware,
+        Internet,
+        Numbers,
+        Path,
+        Payment,
+        Person,
+        Science,
+        Structure,
+        Text,
+        Transport,
+        Cryptographic,
+    )
+
     def __init__(self, *args, **kwargs) -> None:
         """Initialize attributes lazily.
 
@@ -40,26 +64,15 @@ class Generic(BaseDataProvider):
         :param kwargs: Keyword arguments.
         """
         super().__init__(*args, **kwargs)
-        self._person = Person
-        self._address = Address
-        self._datetime = Datetime
-        self._business = Business
-        self._text = Text
-        self._food = Food
-        self.science = Science(seed=self.seed)
-        self.transport = Transport(seed=self.seed)
-        self.code = Code(seed=self.seed)
-        self.file = File(seed=self.seed)
-        self.numbers = Numbers(seed=self.seed)
-        self.development = Development(seed=self.seed)
-        self.hardware = Hardware(seed=self.seed)
-        self.clothing = Clothing(seed=self.seed)
-        self.internet = Internet(seed=self.seed)
-        self.path = Path(seed=self.seed)
-        self.payment = Payment(seed=self.seed)
-        self.cryptographic = Cryptographic(seed=self.seed)
-        self.structure = Structure(seed=self.seed)
-        self.choice = Choice(seed=self.seed)
+
+        for provider in self._DEFAULT_PROVIDERS:
+            name = getattr(provider.Meta, 'name')  # type: ignore
+
+            # Check if a provider is locale dependent.
+            if hasattr(provider, '_data'):
+                setattr(self, f'_{name}', provider)
+            else:
+                setattr(self, name, provider(seed=self.seed))
 
     class Meta:
         """Class for metadata."""
