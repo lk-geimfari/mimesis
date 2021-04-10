@@ -125,10 +125,10 @@ class MimeType(Enum):
     VIDEO = 'video'
 
 
-class PrefixSign(Enum):
+class MetricPrefixSign(Enum):
     """Provides prefix signs.
 
-    An argument for :meth:`~mimesis.UnitSystem.prefix()``.
+    An argument for :meth:`~mimesis.Science.metric_prefix()``.
     """
 
     POSITIVE = 'positive'
@@ -180,10 +180,10 @@ class SocialNetwork(Enum):
     VK = 'vk'
 
 
-class UnitName(Enum):
+class MeasureUnit(Enum):
     """Provide unit names.
 
-    An argument for :meth:`~mimesis.UnitSystem.unit()`.
+    An argument for :meth:`~mimesis.Science.measure_unit()`.
     """
 
     MASS = ('gram', 'gr')

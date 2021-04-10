@@ -26,7 +26,6 @@ from mimesis.providers.science import Science
 from mimesis.providers.structure import Structure
 from mimesis.providers.text import Text
 from mimesis.providers.transport import Transport
-from mimesis.providers.units import UnitSystem
 
 __all__ = ['Generic']
 
@@ -47,10 +46,9 @@ class Generic(BaseDataProvider):
         self._business = Business
         self._text = Text
         self._food = Food
-        self._science = Science
+        self.science = Science(seed=self.seed)
         self.transport = Transport(seed=self.seed)
         self.code = Code(seed=self.seed)
-        self.unit_system = UnitSystem(seed=self.seed)
         self.file = File(seed=self.seed)
         self.numbers = Numbers(seed=self.seed)
         self.development = Development(seed=self.seed)

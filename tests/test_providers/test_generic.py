@@ -34,16 +34,8 @@ class TestGeneric(object):
         result = generic.food.fruit()
         assert result is not None
 
-    def test_base_science(self, generic):
-        result = generic.science.chemical_element()
-        assert result is not None
-
     def test_base_business(self, generic):
         result = generic.business.copyright()
-        assert result is not None
-
-    def test_base_unit_system(self, generic):
-        result = generic.unit_system.unit()
         assert result is not None
 
     def test_base_code(self, generic):
@@ -187,7 +179,3 @@ class TestSeededGeneric(object):
     def test_generic_transport(self, g1, g2):
         assert g1.transport.truck() == g2.transport.truck()
         assert g1.transport.airplane() == g2.transport.airplane()
-
-    def test_generic_unit_system(self, g1, g2):
-        assert g1.unit_system.unit() == g2.unit_system.unit()
-        assert g1.unit_system.prefix() == g2.unit_system.prefix()

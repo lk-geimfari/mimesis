@@ -299,15 +299,6 @@ Transport
    :members:
    :special-members: __init__
 
-UnitSystem
-----------
-
-.. autoclass:: mimesis.UnitSystem
-   :members:
-   :special-members: __init__
-
-
-
 
 Schema
 ======

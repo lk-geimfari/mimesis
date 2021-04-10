@@ -31,7 +31,6 @@ from mimesis.providers import (
     Structure,
     Text,
     Transport,
-    UnitSystem,
 )
 
 __all__ = [
@@ -56,7 +55,6 @@ __all__ = [
     'Structure',
     'Text',
     'Transport',
-    'UnitSystem',
     'Cryptographic',
 
     # Has all:

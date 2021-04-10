@@ -24,10 +24,10 @@ CREDIT_CARD_REGEX = r'[\d]+((-|\s)?[\d]+)+'
 
 PROVIDER_STR_REGEX = r'^(Business|Clothing|Code|Development' \
                      r'|File|Games|Hardware|Internet|Numbers|Path|Payment|' \
-                     r'Structure|Transport|UnitSystem|Cryptographic)'
+                     r'Structure|Transport|Cryptographic|Science)'
 
 DATA_PROVIDER_STR_REGEX = r'^(Address|Business|Datetime|Food|' \
-                          r'Person|Science|Text|Generic|' \
+                          r'Person|Text|Generic|' \
                           r'BaseDataProvider|AbstractField) <([a-z-]+)>$'
 
 _EN_GB_POST_CODE = \

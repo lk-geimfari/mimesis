@@ -2,14 +2,16 @@
 
 """Provides pseudo-scientific data."""
 
-from typing import Union
+from typing import Optional
 
-from mimesis.providers.base import BaseDataProvider
+from mimesis.data import SI_PREFIXES, SI_PREFIXES_SYM
+from mimesis.enums import MeasureUnit, MetricPrefixSign
+from mimesis.providers.base import BaseProvider
 
 __all__ = ['Science']
 
 
-class Science(BaseDataProvider):
+class Science(BaseProvider):
     """Class for generating pseudo-scientific data."""
 
     def __init__(self, *args, **kwargs):
@@ -19,45 +21,11 @@ class Science(BaseDataProvider):
         :param seed: Seed.
         """
         super().__init__(*args, **kwargs)
-        self._datafile = 'science.json'
-        self._pull(self._datafile)
 
     class Meta:
         """Class for metadata."""
 
         name = 'science'
-
-    def chemical_element(self, name_only: bool = True) -> Union[dict, str]:
-        """Generate a random chemical element.
-
-        :param name_only: If False then will be returned dict.
-        :return: Name of chemical element or dict.
-        :rtype: dict or str
-
-        :Example:
-            {'Symbol': 'S', 'Name': 'Sulfur', 'Atomic number': '16'}
-        """
-        elements = self._data['chemical_element']
-        nm, sm, an = self.random.choice(elements).split('|')
-
-        if not name_only:
-            return {
-                'name': nm.strip(),
-                'symbol': sm.strip(),
-                'atomic_number': an.strip(),
-            }
-
-        return nm.strip()
-
-    def atomic_number(self) -> int:
-        """Generate random atomic number.
-
-        :return: Atomic number
-
-        :Example:
-            92
-        """
-        return self.random.randint(1, 119)
 
     def rna_sequence(self, length: int = 10) -> str:
         """Generate a random RNA sequence.
@@ -80,3 +48,34 @@ class Science(BaseDataProvider):
             GCTTTAGACC
         """
         return self.random.generate_string('TCGA', length)
+
+    def measure_unit(self, name: Optional[MeasureUnit] = None, symbol=False):
+        """Get unit name from International System of Units.
+
+        :param name: Enum object UnitName.
+        :param symbol: Return only symbol
+        :return: Unit.
+        """
+        result = self._validate_enum(item=name, enum=MeasureUnit)
+
+        if symbol:
+            return result[1]
+        return result[0]
+
+    def metric_prefix(self, sign: Optional[MetricPrefixSign] = None,
+                      symbol: bool = False) -> str:
+        """Get a random prefix for the International System of Units.
+
+        :param sign: Sing of prefix (positive/negative).
+        :param symbol: Return the symbol of the prefix.
+        :return: Metric prefix for SI measure units.
+        :raises NonEnumerableError: if sign is not supported.
+
+        :Example:
+            mega
+        """
+        prefixes = SI_PREFIXES_SYM if \
+            symbol else SI_PREFIXES
+
+        key = self._validate_enum(item=sign, enum=MetricPrefixSign)
+        return self.random.choice(prefixes[key])

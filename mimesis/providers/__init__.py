@@ -24,7 +24,6 @@ from mimesis.providers.science import Science
 from mimesis.providers.structure import Structure
 from mimesis.providers.text import Text
 from mimesis.providers.transport import Transport
-from mimesis.providers.units import UnitSystem
 
 __all__ = [
     # The main class:
@@ -54,7 +53,6 @@ __all__ = [
     'Structure',
     'Text',
     'Transport',
-    'UnitSystem',
     'Cryptographic',
     'Generic',
 ]

@@ -43,11 +43,6 @@ def person(request):
 
 
 @pytest.fixture(params=locales)
-def science(request):
-    return mimesis.Science(request.param)
-
-
-@pytest.fixture(params=locales)
 def text(request):
     return mimesis.Text(request.param)
 
