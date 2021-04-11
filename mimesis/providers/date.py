@@ -4,7 +4,7 @@
 
 from calendar import monthrange, timegm
 from datetime import date, datetime, time, timedelta
-from typing import List, Optional, Union
+from typing import Any, List, Optional, Union
 
 from mimesis.compat import pytz
 from mimesis.data import GMT_OFFSETS, ROMAN_NUMS, TIMEZONES
@@ -20,7 +20,7 @@ class Datetime(BaseDataProvider):
     # See: https://git.io/Jf15A
     CURRENT_YEAR = datetime.now().year
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
         """Initialize attributes.
 
         :param locale: Current locale.
@@ -36,7 +36,7 @@ class Datetime(BaseDataProvider):
 
     @staticmethod
     def bulk_create_datetimes(date_start: DateTime,
-                              date_end: DateTime, **kwargs) -> List[DateTime]:
+                              date_end: DateTime, **kwargs: Any) -> List[DateTime]:
         """Bulk create datetime objects.
 
         This method creates list of datetime objects from
@@ -146,7 +146,7 @@ class Datetime(BaseDataProvider):
         date_object = date(year, month, day)
         return date_object
 
-    def formatted_date(self, fmt: str = '', **kwargs) -> str:
+    def formatted_date(self, fmt: str = '', **kwargs: Any) -> str:
         """Generate random date as string.
 
         :param fmt: The format of date, if None then use standard
@@ -229,7 +229,7 @@ class Datetime(BaseDataProvider):
 
         return datetime_obj
 
-    def formatted_datetime(self, fmt: str = '', **kwargs) -> str:
+    def formatted_datetime(self, fmt: str = '', **kwargs: Any) -> str:
         """Generate datetime string in human readable format.
 
         :param fmt: Custom format (default is format for current locale)
@@ -245,7 +245,7 @@ class Datetime(BaseDataProvider):
 
         return dt_obj.strftime(fmt)
 
-    def timestamp(self, posix: bool = True, **kwargs) -> Union[str, int]:
+    def timestamp(self, posix: bool = True, **kwargs: Any) -> Union[str, int]:
         """Generate random timestamp.
 
         :param posix: POSIX time.

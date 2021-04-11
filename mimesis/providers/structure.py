@@ -16,6 +16,7 @@ from mimesis.providers.text import Text
 __all__ = ['Structure']
 
 
+# TODO: Remove this class
 class Structure(BaseDataProvider):
     """Class for generating structured data."""
 

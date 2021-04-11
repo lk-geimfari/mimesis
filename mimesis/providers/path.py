@@ -4,6 +4,7 @@
 
 import sys
 from pathlib import PurePosixPath, PureWindowsPath
+from typing import Any
 
 from mimesis.data import (
     FOLDERS,
@@ -20,7 +21,7 @@ __all__ = ['Path']
 class Path(BaseProvider):
     """Class that provides methods and property for generate paths."""
 
-    def __init__(self, platform: str = sys.platform, *args, **kwargs) -> None:
+    def __init__(self, platform: str = sys.platform, *args: Any, **kwargs: Any) -> None:
         """Initialize attributes.
 
         Supported platforms: 'linux', 'darwin', 'win32', 'win64'.
@@ -30,7 +31,7 @@ class Path(BaseProvider):
         super().__init__(*args, **kwargs)
         self.platform = platform
         self._pathlib_home = PureWindowsPath() if 'win' in platform \
-                             else PurePosixPath()
+            else PurePosixPath()
         self._pathlib_home /= PLATFORMS[platform]['home']
 
     class Meta:

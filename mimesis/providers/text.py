@@ -2,7 +2,7 @@
 
 """Provides data related to text."""
 
-from typing import List, Tuple
+from typing import Any, List, Tuple
 
 from mimesis.data import SAFE_COLORS
 from mimesis.providers.base import BaseDataProvider
@@ -13,7 +13,7 @@ __all__ = ['Text']
 class Text(BaseDataProvider):
     """Class for generating text data."""
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
         """Initialize attributes.
 
         :param locale: Current locale.
@@ -28,7 +28,7 @@ class Text(BaseDataProvider):
 
         name = 'text'
 
-    def alphabet(self, lower_case: bool = False) -> list:
+    def alphabet(self, lower_case: bool = False) -> List[str]:
         """Get an alphabet for current locale.
 
         :param lower_case: Return alphabet in lower case.
@@ -37,7 +37,7 @@ class Text(BaseDataProvider):
         case = 'uppercase' if \
             not lower_case else 'lowercase'
 
-        alpha = self._data['alphabet'].get(case)
+        alpha: List[str] = self._data['alphabet'].get(case)
         return alpha
 
     def level(self) -> str:

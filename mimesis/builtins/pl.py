@@ -2,6 +2,8 @@
 
 """Specific data provider for Poland (pl)."""
 
+from typing import Optional
+
 from mimesis import locales
 from mimesis.builtins.base import BaseSpecProvider
 from mimesis.enums import Gender
@@ -14,7 +16,7 @@ __all__ = ['PolandSpecProvider']
 class PolandSpecProvider(BaseSpecProvider):
     """Class that provides special data for Poland (pl)."""
 
-    def __init__(self, seed: Seed = None):
+    def __init__(self, seed: Optional[Seed] = None):
         """Initialize attributes."""
         super().__init__(locale=locales.PL, seed=seed)
 
@@ -40,8 +42,8 @@ class PolandSpecProvider(BaseSpecProvider):
         nip_digits.append(checksum_digit)
         return ''.join(str(d) for d in nip_digits)
 
-    def pesel(self, birth_date: DateTime = None,
-              gender: Gender = None) -> str:
+    def pesel(self, birth_date: Optional[DateTime] = None,
+              gender: Optional[Gender] = None) -> str:
         """Generate random 11-digit PESEL.
 
         :param birth_date: Initial birth date (optional)

@@ -51,7 +51,7 @@ class Cryptographic(BaseProvider):
 
         return _uuid
 
-    def hash(self, algorithm: Algorithm = None) -> str:  # noqa: A003
+    def hash(self, algorithm: Optional[Algorithm] = None) -> str:  # noqa: A003
         """Generate random hash.
 
         To change hashing algorithm, pass parameter ``algorithm``
@@ -102,7 +102,7 @@ class Cryptographic(BaseProvider):
         return secrets.token_hex(entropy)
 
     @staticmethod
-    def token_urlsafe(entropy: int = 32):
+    def token_urlsafe(entropy: int = 32) -> str:
         """Return a random URL-safe text string, in Base64 encoding.
 
         The string has *entropy* random bytes.  If *entropy* is ``None``

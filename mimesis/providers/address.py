@@ -6,7 +6,7 @@ This module contains provider Address() and other utils which represents
 data related to location, such as street name, city, country and etc.
 """
 
-from typing import Optional, Union
+from typing import Any, Dict, Optional, Union
 
 from mimesis.data import (
     CALLING_CODES,
@@ -27,7 +27,7 @@ class Address(BaseDataProvider):
     geographical location.
     """
 
-    def __init__(self, *args, **kwargs) -> None:
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
         """Initialize attributes.
 
         :param locale: Current locale.
@@ -127,28 +127,28 @@ class Address(BaseDataProvider):
         return self.random.choice(
             self._data['state']['abbr' if abbr else 'name'])
 
-    def region(self, *args, **kwargs) -> str:
+    def region(self, *args: Any, **kwargs: Any) -> str:
         """Get a random region.
 
         An alias for :meth:`~Address.state()`.
         """
         return self.state(*args, **kwargs)
 
-    def province(self, *args, **kwargs) -> str:
+    def province(self, *args: Any, **kwargs: Any) -> str:
         """Get a random province.
 
         An alias for :meth:`~Address.state()`.
         """
         return self.state(*args, **kwargs)
 
-    def federal_subject(self, *args, **kwargs) -> str:
+    def federal_subject(self, *args: Any, **kwargs: Any) -> str:
         """Get a random region.
 
         An alias for :meth:`~Address.state()`.
         """
         return self.state(*args, **kwargs)
 
-    def prefecture(self, *args, **kwargs) -> str:
+    def prefecture(self, *args: Any, **kwargs: Any) -> str:
         """Get a random prefecture.
 
         An alias for :meth:`~Address.state()`.
@@ -237,7 +237,7 @@ class Address(BaseDataProvider):
         """
         return self._get_fs('lg', dms)
 
-    def coordinates(self, dms: bool = False) -> dict:
+    def coordinates(self, dms: bool = False) -> Dict[str, Union[str, float]]:
         """Generate random geo coordinates.
 
         :param dms: DMS format.

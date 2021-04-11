@@ -3,7 +3,7 @@
 """Provides all at one."""
 
 import inspect
-from typing import Any, List, Type
+from typing import Any, List, Optional, Type
 
 from mimesis.locales import DEFAULT_LOCALE
 from mimesis.providers.address import Address
@@ -60,7 +60,7 @@ class Generic(BaseProvider):
     )
 
     def __init__(self, locale: str = DEFAULT_LOCALE,
-                 seed: Seed = None) -> None:
+                 seed: Optional[Seed] = None) -> None:
         """Initialize attributes lazily."""
         super().__init__(seed=seed)
         self.locale = locale

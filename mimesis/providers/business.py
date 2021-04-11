@@ -2,6 +2,8 @@
 
 """Business data provider."""
 
+from typing import Any
+
 from mimesis.data import (
     CRYPTOCURRENCY_ISO_CODES,
     CRYPTOCURRENCY_SYMBOLS,
@@ -16,7 +18,7 @@ __all__ = ['Business']
 class Business(BaseDataProvider):
     """Class for generating data for business."""
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
         """Initialize attributes.
 
         :param locale: Current locale.
@@ -75,7 +77,7 @@ class Business(BaseDataProvider):
         """
         return self.random.choice(CRYPTOCURRENCY_ISO_CODES)
 
-    def currency_symbol(self):
+    def currency_symbol(self) -> str:
         """Get a currency symbol for current locale.
 
         :return: Currency symbol.

@@ -5,7 +5,7 @@
 import hashlib
 import re
 from string import ascii_letters, digits, punctuation
-from typing import Optional, Union
+from typing import Any, List, Optional, Tuple, Union
 
 from mimesis.data import (
     BLOOD_GROUPS,
@@ -27,7 +27,7 @@ __all__ = ['Person']
 class Person(BaseDataProvider):
     """Class for generating personal data."""
 
-    def __init__(self, *args, **kwargs) -> None:
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
         """Initialize attributes.
 
         :param locale: Current locale.
@@ -240,7 +240,7 @@ class Person(BaseDataProvider):
 
         return password
 
-    def email(self, domains: Union[tuple, list] = None,
+    def email(self, domains: Optional[Union[Tuple[str], List[str]]] = None,
               unique: bool = False) -> str:
         """Generate a random email.
 
@@ -314,7 +314,7 @@ class Person(BaseDataProvider):
 
         return self.random.choice(self._data['gender'])
 
-    def sex(self, *args, **kwargs):
+    def sex(self, *args: Any, **kwargs: Any) -> Union[str, int]:
         """An alias for method self.gender().
 
         See docstrings of method self.gender() for details.

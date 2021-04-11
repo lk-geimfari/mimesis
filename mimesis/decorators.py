@@ -4,15 +4,17 @@
 
 import functools
 from string import ascii_letters, digits, punctuation
-from typing import Callable
+from typing import Any, Callable, TypeVar, cast
 
 from mimesis import data
 from mimesis.exceptions import UnsupportedLocale
 
 __all__ = ['romanize']
 
+F = TypeVar('F', bound=Callable[..., Any])
 
-def romanize(locale: str = '') -> Callable:
+
+def romanize(locale: str = '') -> Callable[[F], F]:
     """Romanize the cyrillic text.
 
     Transliterate the cyrillic script into the latin alphabet.
@@ -23,9 +25,9 @@ def romanize(locale: str = '') -> Callable:
     :return: Romanized text.
     """
 
-    def romanize_deco(func):
+    def romanize_deco(func: F) -> F:
         @functools.wraps(func)
-        def wrapper(*args, **kwargs):
+        def wrapper(*args: Any, **kwargs: Any) -> Any:
             try:
                 # Cyrillic string can contain ascii
                 # symbols, digits and punctuation.
@@ -42,7 +44,7 @@ def romanize(locale: str = '') -> Callable:
             txt = ''.join([alphabet[i] for i in result if i in alphabet])
             return txt
 
-        return wrapper
+        return cast(F, wrapper)
 
     return romanize_deco
 

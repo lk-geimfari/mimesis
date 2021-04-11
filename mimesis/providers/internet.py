@@ -5,7 +5,7 @@
 import urllib.error
 import urllib.request
 from ipaddress import IPv4Address, IPv6Address
-from typing import List, Optional, Union
+from typing import Any, List, Optional, Union
 
 from mimesis.data import (
     EMOJI,
@@ -30,7 +30,7 @@ __all__ = ['Internet']
 class Internet(BaseProvider):
     """Class for generating data related to the internet."""
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
         """Initialize attributes.
 
         :param args: Arguments.
@@ -218,7 +218,7 @@ class Internet(BaseProvider):
                     'Required an active HTTP connection')
         return url
 
-    def hashtags(self, quantity: int = 4) -> Union[str, list]:
+    def hashtags(self, quantity: int = 4) -> Union[str, List[str]]:
         """Generate a list of hashtags.
 
         :param quantity: The quantity of hashtags.

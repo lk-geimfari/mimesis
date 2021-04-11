@@ -32,7 +32,7 @@ class BaseProvider(object):
         if seed is not None:
             self.reseed(seed)
 
-    def reseed(self, seed: Seed = None) -> None:
+    def reseed(self, seed: Optional[Seed] = None) -> None:
         """Reseed the internal random generator.
 
         In case we use the default seed, we need to create a per instance
@@ -102,7 +102,7 @@ class BaseDataProvider(BaseProvider):
 
         self.locale = locale
 
-    def _update_dict(self, initial: JSON, other: Mapping) -> JSON:
+    def _update_dict(self, initial: JSON, other: JSON) -> JSON:
         """Recursively update a dictionary.
 
         :param initial: Dict to update.
@@ -110,7 +110,7 @@ class BaseDataProvider(BaseProvider):
         :return: Updated dict.
         """
         for key, value in other.items():
-            if isinstance(value, collections.abc.Mapping):
+            if isinstance(value, dict):
                 r = self._update_dict(initial.get(key, {}), value)
                 initial[key] = r
             else:
@@ -134,7 +134,7 @@ class BaseDataProvider(BaseProvider):
         if not datafile:
             datafile = self._datafile
 
-        def get_data(locale_name: str) -> JSON:
+        def get_data(locale_name: str) -> Any:
             """Pull JSON data from file.
 
             :param locale_name: Locale name.

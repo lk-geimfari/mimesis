@@ -3,6 +3,7 @@
 """Custom types and shortcuts for annotating Mimesis."""
 
 import datetime
+from decimal import Decimal
 from typing import Any, Callable, Dict, List, Set, Union
 
 __all__ = [
@@ -13,6 +14,7 @@ __all__ = [
     'Date',
     'SchemaType',
     'Seed',
+    'Matrix',
 ]
 
 JSON = Dict[str, Any]
@@ -30,3 +32,5 @@ Seed = Union[int, str, bytes, bytearray]
 SchemaType = Callable[[], JSON]
 
 KeywordsType = Union[List[str], Set[str]]
+
+Matrix = Union[List[float], List[complex], List[int], List[Decimal]]
