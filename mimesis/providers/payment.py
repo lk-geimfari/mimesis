@@ -157,7 +157,10 @@ class Payment(BaseProvider):
         """
         return self.random.randint(100, 999)
 
-    def credit_card_owner(self, gender: Optional[Gender] = None) -> Dict[str, str]:
+    def credit_card_owner(
+        self,
+        gender: Optional[Gender] = None,
+    ) -> Dict[str, str]:
         """Generate credit card owner.
 
         :param gender: Gender of credit card owner.

@@ -21,7 +21,12 @@ __all__ = ['Path']
 class Path(BaseProvider):
     """Class that provides methods and property for generate paths."""
 
-    def __init__(self, platform: str = sys.platform, *args: Any, **kwargs: Any) -> None:
+    def __init__(
+        self,
+        platform: str = sys.platform,
+        *args: Any,
+        **kwargs: Any,
+    ) -> None:
         """Initialize attributes.
 
         Supported platforms: 'linux', 'darwin', 'win32', 'win64'.

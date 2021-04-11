@@ -45,7 +45,8 @@ class AbstractField:
         self._table = {}  # type: ignore
 
     def __call__(self, name: Optional[str] = None,
-                 key: Optional[Callable[[Any], Any]] = None, **kwargs: Any) -> Any:
+                 key: Optional[Callable[[Any], Any]] = None,
+                 **kwargs: Any) -> Any:
         """Override standard call.
 
         This magic method overrides standard call so it takes any string

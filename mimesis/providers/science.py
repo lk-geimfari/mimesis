@@ -49,14 +49,21 @@ class Science(BaseProvider):
         """
         return self.random.generate_string('TCGA', length)
 
-    def measure_unit(self, name: Optional[MeasureUnit] = None, symbol: bool = False) -> str:
+    def measure_unit(
+        self,
+        name: Optional[MeasureUnit] = None,
+        symbol: bool = False,
+    ) -> str:
         """Get unit name from International System of Units.
 
         :param name: Enum object UnitName.
         :param symbol: Return only symbol
         :return: Unit.
         """
-        result: Tuple[str, str] = self._validate_enum(item=name, enum=MeasureUnit)
+        result: Tuple[str, str] = self._validate_enum(
+            item=name,
+            enum=MeasureUnit,
+        )
 
         if symbol:
             return result[1]

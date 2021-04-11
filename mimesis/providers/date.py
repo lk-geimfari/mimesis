@@ -35,8 +35,11 @@ class Datetime(BaseDataProvider):
         name = 'datetime'
 
     @staticmethod
-    def bulk_create_datetimes(date_start: DateTime,
-                              date_end: DateTime, **kwargs: Any) -> List[DateTime]:
+    def bulk_create_datetimes(
+        date_start: DateTime,
+        date_end: DateTime,
+        **kwargs: Any,
+    ) -> List[DateTime]:
         """Bulk create datetime objects.
 
         This method creates list of datetime objects from

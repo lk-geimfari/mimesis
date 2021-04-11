@@ -21,7 +21,6 @@ from mimesis.providers.path import Path
 from mimesis.providers.payment import Payment
 from mimesis.providers.person import Person
 from mimesis.providers.science import Science
-from mimesis.providers.structure import Structure
 from mimesis.providers.text import Text
 from mimesis.providers.transport import Transport
 
@@ -50,7 +49,6 @@ __all__ = [
     'Payment',
     'Person',
     'Science',
-    'Structure',
     'Text',
     'Transport',
     'Cryptographic',
