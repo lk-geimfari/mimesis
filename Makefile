@@ -50,7 +50,7 @@ clean: clean-pyc clean-build
 .PHONY: test
 test:
 	pytest --color=yes $(RANDOM_SEED) ./
-	mypy mimesis/ tests/
+	mypy mimesis/
 	make clean
 
 
