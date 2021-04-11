@@ -125,8 +125,9 @@ class Address(BaseDataProvider):
         :param abbr: Return ISO 3166-2 code.
         :return: Administrative district.
         """
-        return self.random.choice(
-            self._data['state']['abbr' if abbr else 'name'])
+        key = 'abbr' if abbr else 'name'
+        states: List[str] = self._data['state'][key]
+        return self.random.choice(states)
 
     def region(self, *args: Any, **kwargs: Any) -> str:
         """Get a random region.

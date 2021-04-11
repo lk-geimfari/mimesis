@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 
+from typing import List
+
 """Provides all the generic data related to the business."""
 
-CURRENCY_ISO_CODES = [
+CURRENCY_ISO_CODES: List[str] = [
     'AED',
     'AFN',
     'ALL',
