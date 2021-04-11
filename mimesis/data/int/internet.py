@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """Provides all the data related to the internet."""
+from typing import List
 
 HTTP_METHODS = [
     'GET',
@@ -1028,14 +1029,15 @@ TLD = {
     ],
 }
 
-EMAIL_DOMAINS = (
+EMAIL_DOMAINS: List[str] = [
     '@gmail.com',
     '@yandex.com',
     '@yahoo.com',
     '@live.com',
     '@outlook.com',
     '@protonmail.com',
-)
+]
+
 EMOJI = (
     ':bowtie:',
     ':smile:',

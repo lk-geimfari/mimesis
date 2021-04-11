@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """Specific data provider for Ukraine (uk)."""
+from typing import List, Optional
 
 from mimesis import locales
 from mimesis.builtins.base import BaseSpecProvider
@@ -13,7 +14,7 @@ __all__ = ['UkraineSpecProvider']
 class UkraineSpecProvider(BaseSpecProvider):
     """Class that provides special data for Ukraine (uk)."""
 
-    def __init__(self, seed: Seed = None):
+    def __init__(self, seed: Optional[Seed] = None):
         """Initialize attributes."""
         super().__init__(locale=locales.UK, seed=seed)
         self._pull(self._datafile)
@@ -23,7 +24,7 @@ class UkraineSpecProvider(BaseSpecProvider):
 
         name = 'ukraine_provider'
 
-    def patronymic(self, gender: Gender = None) -> str:
+    def patronymic(self, gender: Optional[Gender] = None) -> str:
         """Generate random patronymic name.
 
         :param gender: Gender of person.
@@ -31,5 +32,5 @@ class UkraineSpecProvider(BaseSpecProvider):
         :return: Patronymic name.
         """
         gender = self._validate_enum(gender, Gender)
-        patronymics = self._data['patronymic'][gender]
+        patronymics: List[str] = self._data['patronymic'][gender]
         return self.random.choice(patronymics)

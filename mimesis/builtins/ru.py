@@ -2,6 +2,8 @@
 
 """Specific data provider for Russia (ru)."""
 
+from typing import List, Optional
+
 from mimesis import locales
 from mimesis.builtins.base import BaseSpecProvider
 from mimesis.enums import Gender
@@ -13,7 +15,7 @@ __all__ = ['RussiaSpecProvider']
 class RussiaSpecProvider(BaseSpecProvider):
     """Class that provides special data for Russia (ru)."""
 
-    def __init__(self, seed: Seed = None):
+    def __init__(self, seed: Optional[Seed] = None):
         """Initialize attributes."""
         super().__init__(locale=locales.RU, seed=seed)
         self._pull(self._datafile)
@@ -35,7 +37,7 @@ class RussiaSpecProvider(BaseSpecProvider):
         ]
         return '{0} {1} {2} {3}'.format(*sentence)
 
-    def patronymic(self, gender: Gender = None) -> str:
+    def patronymic(self, gender: Optional[Gender] = None) -> str:
         """Generate random patronymic name.
 
         :param gender: Gender of person.
@@ -45,10 +47,10 @@ class RussiaSpecProvider(BaseSpecProvider):
             Алексеевна.
         """
         gender = self._validate_enum(gender, Gender)
-        patronymics = self._data['patronymic'][gender]
+        patronymics: List[str] = self._data['patronymic'][gender]
         return self.random.choice(patronymics)
 
-    def passport_series(self, year: int = None) -> str:
+    def passport_series(self, year: Optional[int] = None) -> str:
         """Generate random series of passport.
 
         :param year: Year of manufacture.
@@ -128,7 +130,7 @@ class RussiaSpecProvider(BaseSpecProvider):
 
         :return: INN.
         """
-        def control_sum(nums: list, t: str) -> int:
+        def control_sum(nums: List[int], t: str) -> int:
             digits_dict = {
                 'n2': [7, 2, 4, 10, 3, 5, 9, 4, 6, 8],
                 'n1': [3, 7, 2, 4, 10, 3, 5, 9, 4, 6, 8],

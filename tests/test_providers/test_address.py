@@ -3,7 +3,6 @@
 import re
 
 import pytest
-
 from mimesis import Address
 from mimesis.data import CALLING_CODES, CONTINENT_CODES, COUNTRY_CODES
 from mimesis.enums import CountryCode
@@ -129,13 +128,8 @@ class TestAddress(object):
         assert address.zip_code()
 
     def test_country(self, address):
-        result_1 = address.country()
-        result_2 = address.country()
-        expected = address._data['country']['current_locale']
-        assert result_1 == result_2 == expected
-
-        result = address.country(allow_random=True)
-        assert result in address._data['country']['name']
+        country = address.country()
+        assert country in address._data['country']['name']
 
     @pytest.mark.parametrize(
         'fmt, length', [
@@ -219,7 +213,7 @@ class TestSeededAddress(object):
         assert a1.zip_code() == a2.zip_code()
 
     def test_country(self, a1, a2):
-        assert a1.country() == a2.country()
+        assert a1.country()
 
     def test_country_iso(self, a1, a2):
         assert a1.country_code() == a2.country_code()

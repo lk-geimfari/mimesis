@@ -1,5 +1,4 @@
 import pytest
-
 from mimesis import Generic
 from mimesis.builtins import NetherlandsSpecProvider
 

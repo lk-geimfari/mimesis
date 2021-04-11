@@ -2,7 +2,6 @@
 import re
 
 import pytest
-
 from mimesis import Hardware
 from mimesis.data import (
     CPU,

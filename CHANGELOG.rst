@@ -4,7 +4,8 @@ Version 5.0.0
 **Note**: This release is still under active development.
 **Warning**: This release contains some breaking changes in API.
 
-- Removed redundant data provider ``UnitSystem``
+- Removed redundant data provider ``UnitSystem()``
+- Removed useless data provider ``Structure()``
 - Rename ``enums.UnitName`` to ``enums.MeasureUnit``
 - Rename ``enums.PrefixSign`` to ``enums.MetricPrefixSign``
 - Added ``measure_unit()`` and ``metric_prefix()`` methods for ``Science``

@@ -1,7 +1,6 @@
 import re
 
 import pytest
-
 from mimesis.enums import Gender
 from mimesis.exceptions import NonEnumerableError, UnsupportedLocale
 from mimesis.locales import LIST_OF_LOCALES

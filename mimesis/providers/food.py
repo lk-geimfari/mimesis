@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """Provides data related to food."""
+from typing import Any, List
 
 from mimesis.providers.base import BaseDataProvider
 
@@ -10,7 +11,7 @@ __all__ = ['Food']
 class Food(BaseDataProvider):
     """Class for generating data related to food."""
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
         """Initialize attributes.
 
         :param locale: Current locale.
@@ -26,7 +27,7 @@ class Food(BaseDataProvider):
 
     def _choice_from(self, key: str) -> str:
         """Choice random element."""
-        data = self._data[key]
+        data: List[str] = self._data[key]
         return self.random.choice(data)
 
     def vegetable(self) -> str:

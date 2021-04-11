@@ -285,13 +285,6 @@ Path
    :members:
    :special-members: __init__
 
-Structure
-----------
-
-.. autoclass:: mimesis.Structure
-   :members:
-   :special-members: __init__
-
 Transport
 ---------
 

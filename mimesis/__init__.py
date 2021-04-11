@@ -28,7 +28,6 @@ from .providers import (
     Payment,
     Person,
     Science,
-    Structure,
     Text,
     Transport,
 )
@@ -52,7 +51,6 @@ __all__ = [
     'Payment',
     'Person',
     'Science',
-    'Structure',
     'Text',
     'Transport',
     'Cryptographic',
@@ -70,7 +68,7 @@ __all__ = [
     '__license__',
 ]
 
-__version__ = '4.1.3'
+__version__ = '5.0.0'
 __title__ = 'mimesis'
 __description__ = 'Mimesis: fake data generator.'
 __url__ = 'https://github.com/lk-geimfari/mimesis'

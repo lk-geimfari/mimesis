@@ -2,7 +2,7 @@
 
 """Provides data related to transports."""
 
-from typing import Optional
+from typing import Any, Optional
 
 from mimesis.data import (
     AIRPLANES,
@@ -20,7 +20,7 @@ __all__ = ['Transport']
 class Transport(BaseProvider):
     """Class for generating data related to transports."""
 
-    def __init__(self, *args, **kwargs) -> None:
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
         """Initialize attributes.
 
         :param locale: Current locale.

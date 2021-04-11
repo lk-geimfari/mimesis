@@ -3,10 +3,11 @@
 """Provides data related to numbers."""
 
 from decimal import Decimal
-from typing import List
+from typing import Any, List
 
 from mimesis.enums import NumTypes
 from mimesis.providers.base import BaseProvider
+from mimesis.typing import Matrix
 
 __all__ = ['Numbers']
 
@@ -145,7 +146,7 @@ class Numbers(BaseProvider):
         return [self.decimal_number(start, end) for _ in range(n)]
 
     def matrix(self, m: int = 10, n: int = 10,
-               num_type: NumTypes = NumTypes.FLOATS, **kwargs) -> List[List]:
+               num_type: NumTypes = NumTypes.FLOATS, **kwargs: Any) -> Matrix:
         """Generate m x n matrix with random numbers.
 
         This method works with variety of types,

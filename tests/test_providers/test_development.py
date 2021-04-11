@@ -2,7 +2,6 @@
 import re
 
 import pytest
-
 from mimesis import Development, data
 
 from . import patterns

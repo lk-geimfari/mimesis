@@ -2,7 +2,7 @@
 
 """Provides pseudo-scientific data."""
 
-from typing import Optional
+from typing import Any, Optional, Tuple
 
 from mimesis.data import SI_PREFIXES, SI_PREFIXES_SYM
 from mimesis.enums import MeasureUnit, MetricPrefixSign
@@ -14,7 +14,7 @@ __all__ = ['Science']
 class Science(BaseProvider):
     """Class for generating pseudo-scientific data."""
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
         """Initialize attributes.
 
         :param locale: Current language.
@@ -49,14 +49,21 @@ class Science(BaseProvider):
         """
         return self.random.generate_string('TCGA', length)
 
-    def measure_unit(self, name: Optional[MeasureUnit] = None, symbol=False):
+    def measure_unit(
+        self,
+        name: Optional[MeasureUnit] = None,
+        symbol: bool = False,
+    ) -> str:
         """Get unit name from International System of Units.
 
         :param name: Enum object UnitName.
         :param symbol: Return only symbol
         :return: Unit.
         """
-        result = self._validate_enum(item=name, enum=MeasureUnit)
+        result: Tuple[str, str] = self._validate_enum(
+            item=name,
+            enum=MeasureUnit,
+        )
 
         if symbol:
             return result[1]

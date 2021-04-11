@@ -3,7 +3,6 @@
 import re
 
 import pytest
-
 from mimesis import Science
 from mimesis.data.int.scientific import SI_PREFIXES, SI_PREFIXES_SYM
 from mimesis.enums import MeasureUnit, MetricPrefixSign

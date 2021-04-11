@@ -1,7 +1,6 @@
 import re
 
 import pytest
-
 from mimesis import Payment
 from mimesis.data import CREDIT_CARD_NETWORKS
 from mimesis.enums import CardType, Gender

@@ -1,7 +1,6 @@
 import re
 
 import pytest
-
 from mimesis import locales
 from mimesis.builtins import USASpecProvider
 from mimesis.enums import Gender

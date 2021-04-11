@@ -2,7 +2,6 @@
 import re
 
 import pytest
-
 from mimesis import Transport
 from mimesis.data import (
     AIRPLANES,

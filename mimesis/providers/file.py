@@ -3,7 +3,7 @@
 """File data provider."""
 
 import re
-from typing import Optional
+from typing import Any, Optional
 
 from mimesis.data import EXTENSIONS, MIME_TYPES
 from mimesis.enums import FileType, MimeType
@@ -16,7 +16,7 @@ __all__ = ['File']
 class File(BaseProvider):
     """Class for generate data related to files."""
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
         """Initialize attributes.
 
         :param args: Arguments.

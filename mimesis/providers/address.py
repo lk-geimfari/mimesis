@@ -6,7 +6,7 @@ This module contains provider Address() and other utils which represents
 data related to location, such as street name, city, country and etc.
 """
 
-from typing import Optional, Union
+from typing import Any, Dict, List, Optional, Union
 
 from mimesis.data import (
     CALLING_CODES,
@@ -27,7 +27,7 @@ class Address(BaseDataProvider):
     geographical location.
     """
 
-    def __init__(self, *args, **kwargs) -> None:
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
         """Initialize attributes.
 
         :param locale: Current locale.
@@ -76,23 +76,24 @@ class Address(BaseDataProvider):
 
         :return: Street name.
         """
-        return self.random.choice(
-            self._data['street']['name'])
+        street_names: List[str] = self._data['street']['name']
+
+        return self.random.choice(street_names)
 
     def street_suffix(self) -> str:
         """Get a random street suffix.
 
         :return: Street suffix.
         """
-        return self.random.choice(
-            self._data['street']['suffix'])
+        suffixes: List[str] = self._data['street']['suffix']
+        return self.random.choice(suffixes)
 
     def address(self) -> str:
         """Generate a random full address.
 
         :return: Full address.
         """
-        fmt = self._data['address_fmt']
+        fmt: str = self._data['address_fmt']
 
         st_num = self.street_number()
         st_name = self.street_name()
@@ -124,31 +125,32 @@ class Address(BaseDataProvider):
         :param abbr: Return ISO 3166-2 code.
         :return: Administrative district.
         """
-        return self.random.choice(
-            self._data['state']['abbr' if abbr else 'name'])
+        key = 'abbr' if abbr else 'name'
+        states: List[str] = self._data['state'][key]
+        return self.random.choice(states)
 
-    def region(self, *args, **kwargs) -> str:
+    def region(self, *args: Any, **kwargs: Any) -> str:
         """Get a random region.
 
         An alias for :meth:`~Address.state()`.
         """
         return self.state(*args, **kwargs)
 
-    def province(self, *args, **kwargs) -> str:
+    def province(self, *args: Any, **kwargs: Any) -> str:
         """Get a random province.
 
         An alias for :meth:`~Address.state()`.
         """
         return self.state(*args, **kwargs)
 
-    def federal_subject(self, *args, **kwargs) -> str:
+    def federal_subject(self, *args: Any, **kwargs: Any) -> str:
         """Get a random region.
 
         An alias for :meth:`~Address.state()`.
         """
         return self.state(*args, **kwargs)
 
-    def prefecture(self, *args, **kwargs) -> str:
+    def prefecture(self, *args: Any, **kwargs: Any) -> str:
         """Get a random prefecture.
 
         An alias for :meth:`~Address.state()`.
@@ -186,24 +188,22 @@ class Address(BaseDataProvider):
         key = self._validate_enum(fmt, CountryCode)
         return self.random.choice(COUNTRY_CODES[key])
 
-    def country(self, allow_random: bool = False) -> str:
+    def country(self) -> str:
         """Get the country of the current locale.
 
         :allow_random: Return a random country name.
         :return: The Country.
         """
-        if allow_random:
-            return self.random.choice(self._data['country']['name'])
-
-        return self._data['country']['current_locale']
+        countries: List[str] = self._data['country']['name']
+        return self.random.choice(countries)
 
     def city(self) -> str:
         """Get a random city.
 
         :return: City name.
         """
-        return self.random.choice(
-            self._data['city'])
+        cities: List[str] = self._data['city']
+        return self.random.choice(cities)
 
     def _get_fs(self, key: str, dms: bool = False) -> Union[str, float]:
         """Get float number.
@@ -237,7 +237,7 @@ class Address(BaseDataProvider):
         """
         return self._get_fs('lg', dms)
 
-    def coordinates(self, dms: bool = False) -> dict:
+    def coordinates(self, dms: bool = False) -> Dict[str, Union[str, float]]:
         """Generate random geo coordinates.
 
         :param dms: DMS format.
@@ -254,7 +254,7 @@ class Address(BaseDataProvider):
         :param code: Return code of continent.
         :return: Continent name.
         """
-        codes = CONTINENT_CODES if \
+        codes: List[str] = CONTINENT_CODES if \
             code else self._data['continent']
 
         return self.random.choice(codes)

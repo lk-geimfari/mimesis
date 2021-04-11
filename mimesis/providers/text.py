@@ -2,7 +2,7 @@
 
 """Provides data related to text."""
 
-from typing import List, Tuple
+from typing import Any, List, Tuple
 
 from mimesis.data import SAFE_COLORS
 from mimesis.providers.base import BaseDataProvider
@@ -13,7 +13,7 @@ __all__ = ['Text']
 class Text(BaseDataProvider):
     """Class for generating text data."""
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
         """Initialize attributes.
 
         :param locale: Current locale.
@@ -28,7 +28,7 @@ class Text(BaseDataProvider):
 
         name = 'text'
 
-    def alphabet(self, lower_case: bool = False) -> list:
+    def alphabet(self, lower_case: bool = False) -> List[str]:
         """Get an alphabet for current locale.
 
         :param lower_case: Return alphabet in lower case.
@@ -37,7 +37,7 @@ class Text(BaseDataProvider):
         case = 'uppercase' if \
             not lower_case else 'lowercase'
 
-        alpha = self._data['alphabet'].get(case)
+        alpha: List[str] = self._data['alphabet'].get(case)
         return alpha
 
     def level(self) -> str:
@@ -48,7 +48,7 @@ class Text(BaseDataProvider):
         :Example:
             critical.
         """
-        levels = self._data['level']
+        levels: List[str] = self._data['level']
         return self.random.choice(levels)
 
     def text(self, quantity: int = 5) -> str:
@@ -107,7 +107,7 @@ class Text(BaseDataProvider):
         :Example:
             Damn.
         """
-        bad_words = self._data['words'].get('bad')
+        bad_words: List[str] = self._data['words'].get('bad')
         return self.random.choice(bad_words)
 
     def quote(self) -> str:
@@ -118,7 +118,7 @@ class Text(BaseDataProvider):
         :Example:
             "Bond... James Bond."
         """
-        quotes = self._data['quotes']
+        quotes: List[str] = self._data['quotes']
         return self.random.choice(quotes)
 
     def color(self) -> str:
@@ -129,7 +129,7 @@ class Text(BaseDataProvider):
         :Example:
             Red.
         """
-        colors = self._data['color']
+        colors: List[str] = self._data['color']
         return self.random.choice(colors)
 
     @staticmethod
@@ -178,5 +178,5 @@ class Text(BaseDataProvider):
         :Example:
             No
         """
-        answers = self._data['answers']
+        answers: List[str] = self._data['answers']
         return self.random.choice(answers)

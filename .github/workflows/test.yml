@@ -34,7 +34,7 @@ jobs:
       - name: pytest and coverage
         run: poetry run pytest --cov=mimesis --cov-report=xml
       - name: mypy
-        run: poetry run mypy mimesis/ tests/
+        run: poetry run mypy mimesis/
       - name: pyroma
         run: poetry run pyroma -d .
       - name: Upload coverage to Codecov

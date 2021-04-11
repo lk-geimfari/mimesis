@@ -24,7 +24,7 @@ CREDIT_CARD_REGEX = r'[\d]+((-|\s)?[\d]+)+'
 
 PROVIDER_STR_REGEX = r'^(Business|Clothing|Code|Development' \
                      r'|File|Games|Hardware|Internet|Numbers|Path|Payment|' \
-                     r'Structure|Transport|Cryptographic|Science)'
+                     r'Transport|Cryptographic|Science)'
 
 DATA_PROVIDER_STR_REGEX = r'^(Address|Business|Datetime|Food|' \
                           r'Person|Text|' \

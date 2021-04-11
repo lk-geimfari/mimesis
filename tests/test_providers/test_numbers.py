@@ -3,7 +3,6 @@ import decimal
 import re
 
 import pytest
-
 from mimesis import Numbers
 from mimesis.enums import NumTypes
 from mimesis.exceptions import NonEnumerableError

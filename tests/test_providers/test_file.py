@@ -3,7 +3,6 @@
 import re
 
 import pytest
-
 from mimesis import File
 from mimesis.data import EXTENSIONS, MIME_TYPES
 from mimesis.enums import FileType, MimeType
