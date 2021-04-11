@@ -2,7 +2,6 @@ import re
 import uuid
 
 import pytest
-
 from mimesis import Cryptographic
 from mimesis.enums import Algorithm
 from mimesis.exceptions import NonEnumerableError

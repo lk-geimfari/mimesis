@@ -3,13 +3,10 @@
 """File data provider."""
 
 import re
-from typing import Any
-from typing import Optional
+from typing import Any, Optional
 
-from mimesis.data import EXTENSIONS
-from mimesis.data import MIME_TYPES
-from mimesis.enums import FileType
-from mimesis.enums import MimeType
+from mimesis.data import EXTENSIONS, MIME_TYPES
+from mimesis.enums import FileType, MimeType
 from mimesis.providers.base import BaseProvider
 from mimesis.providers.text import Text
 

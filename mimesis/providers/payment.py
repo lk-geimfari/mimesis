@@ -4,13 +4,10 @@
 
 import re
 import string
-from typing import Any
-from typing import Dict
-from typing import Optional
+from typing import Any, Dict, Optional
 
 from mimesis.data import CREDIT_CARD_NETWORKS
-from mimesis.enums import CardType
-from mimesis.enums import Gender
+from mimesis.enums import CardType, Gender
 from mimesis.exceptions import NonEnumerableError
 from mimesis.providers.base import BaseProvider
 from mimesis.providers.person import Person

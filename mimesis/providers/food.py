@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """Provides data related to food."""
-from typing import Any
-from typing import List
+from typing import Any, List
 
 from mimesis.providers.base import BaseDataProvider
 

@@ -2,9 +2,7 @@
 
 """Provides data related to text."""
 
-from typing import Any
-from typing import List
-from typing import Tuple
+from typing import Any, List, Tuple
 
 from mimesis.data import SAFE_COLORS
 from mimesis.providers.base import BaseDataProvider

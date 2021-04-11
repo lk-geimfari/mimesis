@@ -6,16 +6,14 @@ This module contains provider Address() and other utils which represents
 data related to location, such as street name, city, country and etc.
 """
 
-from typing import Any
-from typing import Dict
-from typing import List
-from typing import Optional
-from typing import Union
+from typing import Any, Dict, List, Optional, Union
 
-from mimesis.data import CALLING_CODES
-from mimesis.data import CONTINENT_CODES
-from mimesis.data import COUNTRY_CODES
-from mimesis.data import SHORTENED_ADDRESS_FMT
+from mimesis.data import (
+    CALLING_CODES,
+    CONTINENT_CODES,
+    COUNTRY_CODES,
+    SHORTENED_ADDRESS_FMT,
+)
 from mimesis.enums import CountryCode
 from mimesis.providers.base import BaseDataProvider
 

@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """Specific data provider for Ukraine (uk)."""
-from typing import List
-from typing import Optional
+from typing import List, Optional
 
 from mimesis import locales
 from mimesis.builtins.base import BaseSpecProvider

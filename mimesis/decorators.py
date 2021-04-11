@@ -3,13 +3,8 @@
 """Decorators for the public API and for internal purpose."""
 
 import functools
-from string import ascii_letters
-from string import digits
-from string import punctuation
-from typing import Any
-from typing import Callable
-from typing import TypeVar
-from typing import cast
+from string import ascii_letters, digits, punctuation
+from typing import Any, Callable, TypeVar, cast
 
 from mimesis import data
 from mimesis.exceptions import UnsupportedLocale

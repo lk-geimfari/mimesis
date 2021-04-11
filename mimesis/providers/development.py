@@ -2,9 +2,7 @@
 
 """Data related to the development."""
 
-from mimesis.data import LICENSES
-from mimesis.data import OS
-from mimesis.data import PROGRAMMING_LANGS
+from mimesis.data import LICENSES, OS, PROGRAMMING_LANGS
 from mimesis.providers.base import BaseProvider
 
 __all__ = ['Development']

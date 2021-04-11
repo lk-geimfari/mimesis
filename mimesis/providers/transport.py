@@ -2,15 +2,16 @@
 
 """Provides data related to transports."""
 
-from typing import Any
-from typing import Optional
+from typing import Any, Optional
 
-from mimesis.data import AIRPLANES
-from mimesis.data import CARS
-from mimesis.data import MANUFACTURERS
-from mimesis.data import TRUCKS
-from mimesis.data import VR_CODES
-from mimesis.data import VRC_BY_LOCALES
+from mimesis.data import (
+    AIRPLANES,
+    CARS,
+    MANUFACTURERS,
+    TRUCKS,
+    VR_CODES,
+    VRC_BY_LOCALES,
+)
 from mimesis.providers.base import BaseProvider
 
 __all__ = ['Transport']

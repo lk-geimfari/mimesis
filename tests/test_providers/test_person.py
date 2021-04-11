@@ -4,7 +4,6 @@ import random
 import re
 
 import pytest
-
 from mimesis import Person
 from mimesis.data import BLOOD_GROUPS, GENDER_SYMBOLS, SEXUALITY_SYMBOLS
 from mimesis.enums import Gender, SocialNetwork, TitleType

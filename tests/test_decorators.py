@@ -1,10 +1,10 @@
-import pytest
-
 import mimesis.decorators
+import pytest
 
 
 def test_romanization_dict_is_unchanged():
     from copy import deepcopy
+
     from mimesis.data import ROMANIZATION_DICT
 
     old_data = deepcopy(ROMANIZATION_DICT)

@@ -3,15 +3,11 @@
 """Provides all at one."""
 
 import inspect
-from typing import Any
-from typing import List
-from typing import Optional
-from typing import Type
+from typing import Any, List, Optional, Type
 
 from mimesis.locales import DEFAULT_LOCALE
 from mimesis.providers.address import Address
-from mimesis.providers.base import BaseDataProvider
-from mimesis.providers.base import BaseProvider
+from mimesis.providers.base import BaseDataProvider, BaseProvider
 from mimesis.providers.business import Business
 from mimesis.providers.choice import Choice
 from mimesis.providers.clothing import Clothing

@@ -4,26 +4,21 @@
 
 import urllib.error
 import urllib.request
-from ipaddress import IPv4Address
-from ipaddress import IPv6Address
-from typing import Any
-from typing import List
-from typing import Optional
-from typing import Union
+from ipaddress import IPv4Address, IPv6Address
+from typing import Any, List, Optional, Union
 
-from mimesis.data import EMOJI
-from mimesis.data import HASHTAGS
-from mimesis.data import HTTP_METHODS
-from mimesis.data import HTTP_STATUS_CODES
-from mimesis.data import HTTP_STATUS_MSGS
-from mimesis.data import NETWORK_PROTOCOLS
-from mimesis.data import TLD
-from mimesis.data import USER_AGENTS
-from mimesis.data import USERNAMES
-from mimesis.enums import Layer
-from mimesis.enums import MimeType
-from mimesis.enums import PortRange
-from mimesis.enums import TLDType
+from mimesis.data import (
+    EMOJI,
+    HASHTAGS,
+    HTTP_METHODS,
+    HTTP_STATUS_CODES,
+    HTTP_STATUS_MSGS,
+    NETWORK_PROTOCOLS,
+    TLD,
+    USER_AGENTS,
+    USERNAMES,
+)
+from mimesis.enums import Layer, MimeType, PortRange, TLDType
 from mimesis.exceptions import NonEnumerableError
 from mimesis.providers.base import BaseProvider
 from mimesis.providers.file import File

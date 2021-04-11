@@ -8,8 +8,7 @@ from mimesis import locales
 from mimesis.builtins.base import BaseSpecProvider
 from mimesis.enums import Gender
 from mimesis.providers import Datetime
-from mimesis.typing import DateTime
-from mimesis.typing import Seed
+from mimesis.typing import DateTime, Seed
 
 __all__ = ['PolandSpecProvider']
 

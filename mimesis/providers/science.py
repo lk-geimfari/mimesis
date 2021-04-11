@@ -2,14 +2,10 @@
 
 """Provides pseudo-scientific data."""
 
-from typing import Any
-from typing import Optional
-from typing import Tuple
+from typing import Any, Optional, Tuple
 
-from mimesis.data import SI_PREFIXES
-from mimesis.data import SI_PREFIXES_SYM
-from mimesis.enums import MeasureUnit
-from mimesis.enums import MetricPrefixSign
+from mimesis.data import SI_PREFIXES, SI_PREFIXES_SYM
+from mimesis.enums import MeasureUnit, MetricPrefixSign
 from mimesis.providers.base import BaseProvider
 
 __all__ = ['Science']

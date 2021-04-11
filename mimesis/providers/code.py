@@ -2,16 +2,16 @@
 
 """The data provider of a variety of codes."""
 
-from typing import Any
-from typing import Optional
+from typing import Any, Optional
 
-from mimesis.data import EAN_MASKS
-from mimesis.data import IMEI_TACS
-from mimesis.data import ISBN_GROUPS
-from mimesis.data import ISBN_MASKS
-from mimesis.data import LOCALE_CODES
-from mimesis.enums import EANFormat
-from mimesis.enums import ISBNFormat
+from mimesis.data import (
+    EAN_MASKS,
+    IMEI_TACS,
+    ISBN_GROUPS,
+    ISBN_MASKS,
+    LOCALE_CODES,
+)
+from mimesis.enums import EANFormat, ISBNFormat
 from mimesis.providers.base import BaseProvider
 from mimesis.shortcuts import luhn_checksum
 

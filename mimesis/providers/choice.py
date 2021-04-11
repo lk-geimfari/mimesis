@@ -2,10 +2,7 @@
 
 """Provides a random choice from items in a sequence."""
 import collections.abc
-from typing import Any
-from typing import Optional
-from typing import Sequence
-from typing import Union
+from typing import Any, Optional, Sequence, Union
 
 from mimesis.providers.base import BaseProvider
 

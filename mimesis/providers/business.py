@@ -2,13 +2,14 @@
 
 """Business data provider."""
 
-from typing import Any
-from typing import List
+from typing import Any, List
 
-from mimesis.data import CRYPTOCURRENCY_ISO_CODES
-from mimesis.data import CRYPTOCURRENCY_SYMBOLS
-from mimesis.data import CURRENCY_ISO_CODES
-from mimesis.data import CURRENCY_SYMBOLS
+from mimesis.data import (
+    CRYPTOCURRENCY_ISO_CODES,
+    CRYPTOCURRENCY_SYMBOLS,
+    CURRENCY_ISO_CODES,
+    CURRENCY_SYMBOLS,
+)
 from mimesis.providers.base import BaseDataProvider
 
 __all__ = ['Business']

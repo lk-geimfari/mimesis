@@ -2,19 +2,16 @@
 
 """Implements classes for generating data by schema."""
 
-from typing import Any
-from typing import Callable
-from typing import List
-from typing import Optional
+from typing import Any, Callable, List, Optional
 
-from mimesis.exceptions import UnacceptableField
-from mimesis.exceptions import UndefinedField
-from mimesis.exceptions import UndefinedSchema
-from mimesis.exceptions import UnsupportedField
+from mimesis.exceptions import (
+    UnacceptableField,
+    UndefinedField,
+    UndefinedSchema,
+    UnsupportedField,
+)
 from mimesis.providers.generic import Generic
-from mimesis.typing import JSON
-from mimesis.typing import SchemaType
-from mimesis.typing import Seed
+from mimesis.typing import JSON, SchemaType, Seed
 
 __all__ = ['Field', 'Schema']
 

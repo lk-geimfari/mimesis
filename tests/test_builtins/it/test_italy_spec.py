@@ -3,7 +3,6 @@
 import re
 
 import pytest
-
 from mimesis.builtins import ItalySpecProvider
 from mimesis.enums import Gender
 

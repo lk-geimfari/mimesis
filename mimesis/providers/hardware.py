@@ -2,18 +2,20 @@
 
 """Provides data related to hardware."""
 
-from mimesis.data import CPU
-from mimesis.data import CPU_CODENAMES
-from mimesis.data import CPU_MODEL_CODES
-from mimesis.data import GENERATION
-from mimesis.data import GRAPHICS
-from mimesis.data import HDD_SSD
-from mimesis.data import MANUFACTURERS
-from mimesis.data import PHONE_MODELS
-from mimesis.data import RAM_SIZES
-from mimesis.data import RAM_TYPES
-from mimesis.data import RESOLUTIONS
-from mimesis.data import SCREEN_SIZES
+from mimesis.data import (
+    CPU,
+    CPU_CODENAMES,
+    CPU_MODEL_CODES,
+    GENERATION,
+    GRAPHICS,
+    HDD_SSD,
+    MANUFACTURERS,
+    PHONE_MODELS,
+    RAM_SIZES,
+    RAM_TYPES,
+    RESOLUTIONS,
+    SCREEN_SIZES,
+)
 from mimesis.providers.base import BaseProvider
 
 __all__ = ['Hardware']

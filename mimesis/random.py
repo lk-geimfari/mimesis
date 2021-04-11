@@ -16,9 +16,7 @@ import random as random_module
 import secrets
 import string
 import uuid
-from typing import Any
-from typing import List
-from typing import Optional
+from typing import Any, List, Optional
 
 __all__ = ['Random', 'get_random_item', 'random']
 

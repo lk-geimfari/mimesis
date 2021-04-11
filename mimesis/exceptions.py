@@ -2,8 +2,7 @@
 
 """Custom exceptions which used in Mimesis."""
 
-from typing import Any
-from typing import Optional
+from typing import Any, Optional
 
 
 class UnsupportedAlgorithm(AttributeError):

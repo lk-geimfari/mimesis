@@ -2,25 +2,14 @@
 
 """Provider of data related to date and time."""
 
-from calendar import monthrange
-from calendar import timegm
-from datetime import date
-from datetime import datetime
-from datetime import time
-from datetime import timedelta
-from typing import Any
-from typing import List
-from typing import Optional
-from typing import Union
+from calendar import monthrange, timegm
+from datetime import date, datetime, time, timedelta
+from typing import Any, List, Optional, Union
 
 from mimesis.compat import pytz
-from mimesis.data import GMT_OFFSETS
-from mimesis.data import ROMAN_NUMS
-from mimesis.data import TIMEZONES
+from mimesis.data import GMT_OFFSETS, ROMAN_NUMS, TIMEZONES
 from mimesis.providers.base import BaseDataProvider
-from mimesis.typing import Date
-from mimesis.typing import DateTime
-from mimesis.typing import Time
+from mimesis.typing import Date, DateTime, Time
 
 __all__ = ['Datetime']
 

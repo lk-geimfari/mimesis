@@ -2,7 +2,6 @@
 import re
 
 import pytest
-
 from mimesis import Code
 from mimesis.data import LOCALE_CODES
 from mimesis.enums import EANFormat, ISBNFormat

@@ -1,6 +1,5 @@
-import pytest
-
 import mimesis
+import pytest
 from mimesis.locales import LIST_OF_LOCALES
 
 locales = LIST_OF_LOCALES
