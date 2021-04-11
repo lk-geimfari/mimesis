@@ -96,7 +96,7 @@ class Datetime(BaseDataProvider):
         :return: Day of the week.
         """
         key = 'abbr' if abbr else 'name'
-        days = self._data['day'].get(key)
+        days: List[str] = self._data['day'].get(key)
         return self.random.choice(days)
 
     def month(self, abbr: bool = False) -> str:
@@ -106,7 +106,7 @@ class Datetime(BaseDataProvider):
         :return: Month name.
         """
         key = 'abbr' if abbr else 'name'
-        months = self._data['month'].get(key)
+        months: List[str] = self._data['month'].get(key)
         return self.random.choice(months)
 
     def year(self, minimum: int = 1990, maximum: int = CURRENT_YEAR) -> int:
@@ -130,7 +130,7 @@ class Datetime(BaseDataProvider):
 
         :return: Periodicity.
         """
-        periodicity = self._data['periodicity']
+        periodicity: List[str] = self._data['periodicity']
         return self.random.choice(periodicity)
 
     def date(self, start: int = 2000, end: int = CURRENT_YEAR) -> Date:

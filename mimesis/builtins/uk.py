@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """Specific data provider for Ukraine (uk)."""
-from typing import Optional
+from typing import List, Optional
 
 from mimesis import locales
 from mimesis.builtins.base import BaseSpecProvider
@@ -32,5 +32,5 @@ class UkraineSpecProvider(BaseSpecProvider):
         :return: Patronymic name.
         """
         gender = self._validate_enum(gender, Gender)
-        patronymics = self._data['patronymic'][gender]
+        patronymics: List[str] = self._data['patronymic'][gender]
         return self.random.choice(patronymics)

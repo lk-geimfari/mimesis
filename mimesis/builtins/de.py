@@ -2,7 +2,7 @@
 
 """Specific data provider for Germany (de)."""
 
-from typing import Optional
+from typing import List, Optional
 
 from mimesis import locales
 from mimesis.builtins.base import BaseSpecProvider
@@ -32,5 +32,5 @@ class GermanySpecProvider(BaseSpecProvider):
         """
         key = 'plural' if \
             plural else 'noun'
-
-        return self.random.choice(self._data[key])
+        nouns: List[str] = self._data[key]
+        return self.random.choice(nouns)

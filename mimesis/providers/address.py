@@ -6,7 +6,7 @@ This module contains provider Address() and other utils which represents
 data related to location, such as street name, city, country and etc.
 """
 
-from typing import Any, Dict, Optional, Union
+from typing import Any, Dict, List, Optional, Union
 
 from mimesis.data import (
     CALLING_CODES,
@@ -76,23 +76,24 @@ class Address(BaseDataProvider):
 
         :return: Street name.
         """
-        return self.random.choice(
-            self._data['street']['name'])
+        street_names: List[str] = self._data['street']['name']
+
+        return self.random.choice(street_names)
 
     def street_suffix(self) -> str:
         """Get a random street suffix.
 
         :return: Street suffix.
         """
-        return self.random.choice(
-            self._data['street']['suffix'])
+        suffixes: List[str] = self._data['street']['suffix']
+        return self.random.choice(suffixes)
 
     def address(self) -> str:
         """Generate a random full address.
 
         :return: Full address.
         """
-        fmt = self._data['address_fmt']
+        fmt: str = self._data['address_fmt']
 
         st_num = self.street_number()
         st_name = self.street_name()
@@ -186,6 +187,7 @@ class Address(BaseDataProvider):
         key = self._validate_enum(fmt, CountryCode)
         return self.random.choice(COUNTRY_CODES[key])
 
+    # TODO: Must return random value by default
     def country(self, allow_random: bool = False) -> str:
         """Get the country of the current locale.
 
@@ -202,8 +204,8 @@ class Address(BaseDataProvider):
 
         :return: City name.
         """
-        return self.random.choice(
-            self._data['city'])
+        cities: List[str] = self._data['city']
+        return self.random.choice(cities)
 
     def _get_fs(self, key: str, dms: bool = False) -> Union[str, float]:
         """Get float number.
@@ -254,7 +256,7 @@ class Address(BaseDataProvider):
         :param code: Return code of continent.
         :return: Continent name.
         """
-        codes = CONTINENT_CODES if \
+        codes: List[str] = CONTINENT_CODES if \
             code else self._data['continent']
 
         return self.random.choice(codes)

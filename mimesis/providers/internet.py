@@ -212,7 +212,8 @@ class Internet(BaseProvider):
         if writable:
             try:
                 response = urllib.request.urlopen(url)
-                return response.read()
+                content: bytes = response.read()
+                return content
             except urllib.error.URLError:
                 raise urllib.error.URLError(
                     'Required an active HTTP connection')

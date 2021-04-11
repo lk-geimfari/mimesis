@@ -2,7 +2,7 @@
 
 """Business data provider."""
 
-from typing import Any
+from typing import Any, List
 
 from mimesis.data import (
     CRYPTOCURRENCY_ISO_CODES,
@@ -37,7 +37,9 @@ class Business(BaseDataProvider):
 
         :return: Company name.
         """
-        return self.random.choice(self._data['company']['name'])
+        names: List[str] = self._data['company']['name']
+
+        return self.random.choice(names)
 
     def company_type(self, abbr: bool = False) -> str:
         """Get a random type of business entity.
@@ -46,9 +48,9 @@ class Business(BaseDataProvider):
         :return: Types of business entity.
         """
         key = 'abbr' if abbr else 'title'
-        return self.random.choice(
-            self._data['company']['type'][key],
-        )
+
+        company_types: List[str] = self._data['company']['type'][key]
+        return self.random.choice(company_types)
 
     def copyright(self) -> str:  # noqa: A003
         """Generate a random copyright.
@@ -99,7 +101,7 @@ class Business(BaseDataProvider):
         :param maximum: Min value of price.
         :return: Price.
         """
-        price_format = self._data['price-format']
+        price_format: str = self._data['price-format']
         numeric_frac_digits = self._data['numeric-frac-digits']
         delims = {
             '.': self._data['numeric-decimal'],

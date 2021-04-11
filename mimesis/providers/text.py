@@ -48,7 +48,7 @@ class Text(BaseDataProvider):
         :Example:
             critical.
         """
-        levels = self._data['level']
+        levels: List[str] = self._data['level']
         return self.random.choice(levels)
 
     def text(self, quantity: int = 5) -> str:
@@ -107,7 +107,7 @@ class Text(BaseDataProvider):
         :Example:
             Damn.
         """
-        bad_words = self._data['words'].get('bad')
+        bad_words: List[str] = self._data['words'].get('bad')
         return self.random.choice(bad_words)
 
     def quote(self) -> str:
@@ -118,7 +118,7 @@ class Text(BaseDataProvider):
         :Example:
             "Bond... James Bond."
         """
-        quotes = self._data['quotes']
+        quotes: List[str] = self._data['quotes']
         return self.random.choice(quotes)
 
     def color(self) -> str:
@@ -129,7 +129,7 @@ class Text(BaseDataProvider):
         :Example:
             Red.
         """
-        colors = self._data['color']
+        colors: List[str] = self._data['color']
         return self.random.choice(colors)
 
     @staticmethod
@@ -178,5 +178,5 @@ class Text(BaseDataProvider):
         :Example:
             No
         """
-        answers = self._data['answers']
+        answers: List[str] = self._data['answers']
         return self.random.choice(answers)

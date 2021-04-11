@@ -5,7 +5,7 @@
 import hashlib
 import re
 from string import ascii_letters, digits, punctuation
-from typing import Any, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Optional, Sequence, Tuple, Union
 
 from mimesis.data import (
     BLOOD_GROUPS,
@@ -81,10 +81,10 @@ class Person(BaseDataProvider):
             John.
         """
         key = self._validate_enum(gender, Gender)
-        names = self._data['names'].get(key)
+        names: List[str] = self._data['names'].get(key)
         return self.random.choice(names)
 
-    def first_name(self, gender: Optional[Gender] = None):
+    def first_name(self, gender: Optional[Gender] = None) -> str:
         """Generate a random first name.
 
         ..note: An alias for self.name().
@@ -103,7 +103,7 @@ class Person(BaseDataProvider):
         :Example:
             Smith.
         """
-        surnames = self._data['surnames']
+        surnames: Sequence[str] = self._data['surnames']
 
         # Surnames separated by gender.
         if isinstance(surnames, dict):
@@ -140,7 +140,7 @@ class Person(BaseDataProvider):
         gender_key = self._validate_enum(gender, Gender)
         title_key = self._validate_enum(title_type, TitleType)
 
-        titles = self._data['title'][gender_key][title_key]
+        titles: List[str] = self._data['title'][gender_key][title_key]
         return self.random.choice(titles)
 
     def full_name(self, gender: Optional[Gender] = None,
@@ -312,7 +312,8 @@ class Person(BaseDataProvider):
         if symbol:
             return self.random.choice(GENDER_SYMBOLS)
 
-        return self.random.choice(self._data['gender'])
+        genders: List[str] = self._data['gender']
+        return self.random.choice(genders)
 
     def sex(self, *args: Any, **kwargs: Any) -> Union[str, int]:
         """An alias for method self.gender().
@@ -376,7 +377,7 @@ class Person(BaseDataProvider):
         if symbol:
             return self.random.choice(SEXUALITY_SYMBOLS)
 
-        sexuality = self._data['sexuality']
+        sexuality: List[str] = self._data['sexuality']
         return self.random.choice(sexuality)
 
     def occupation(self) -> str:
@@ -387,7 +388,7 @@ class Person(BaseDataProvider):
         :Example:
             Programmer.
         """
-        jobs = self._data['occupation']
+        jobs: List[str] = self._data['occupation']
         return self.random.choice(jobs)
 
     def political_views(self) -> str:
@@ -398,7 +399,7 @@ class Person(BaseDataProvider):
         :Example:
             Liberal.
         """
-        views = self._data['political_views']
+        views: List[str] = self._data['political_views']
         return self.random.choice(views)
 
     def worldview(self) -> str:
@@ -409,7 +410,7 @@ class Person(BaseDataProvider):
         :Example:
             Pantheism.
         """
-        views = self._data['worldview']
+        views: List[str] = self._data['worldview']
         return self.random.choice(views)
 
     def views_on(self) -> str:
@@ -420,7 +421,7 @@ class Person(BaseDataProvider):
         :Example:
             Negative.
         """
-        views = self._data['views_on']
+        views: List[str] = self._data['views_on']
         return self.random.choice(views)
 
     def nationality(self, gender: Optional[Gender] = None) -> str:
@@ -432,7 +433,7 @@ class Person(BaseDataProvider):
         :Example:
             Russian
         """
-        nationalities = self._data['nationality']
+        nationalities: Sequence[str] = self._data['nationality']
 
         # Separated by gender
         if isinstance(nationalities, dict):
@@ -449,7 +450,7 @@ class Person(BaseDataProvider):
         :Example:
             MIT.
         """
-        universities = self._data['university']
+        universities: List[str] = self._data['university']
         return self.random.choice(universities)
 
     def academic_degree(self) -> str:
@@ -460,7 +461,7 @@ class Person(BaseDataProvider):
         :Example:
             Bachelor.
         """
-        degrees = self._data['academic_degree']
+        degrees: List[str] = self._data['academic_degree']
         return self.random.choice(degrees)
 
     def language(self) -> str:
@@ -471,7 +472,7 @@ class Person(BaseDataProvider):
         :Example:
             Irish.
         """
-        languages = self._data['language']
+        languages: List[str] = self._data['language']
         return self.random.choice(languages)
 
     def telephone(self, mask: str = '', placeholder: str = '#') -> str:

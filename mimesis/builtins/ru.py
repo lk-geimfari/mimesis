@@ -47,7 +47,7 @@ class RussiaSpecProvider(BaseSpecProvider):
             Алексеевна.
         """
         gender = self._validate_enum(gender, Gender)
-        patronymics = self._data['patronymic'][gender]
+        patronymics: List[str] = self._data['patronymic'][gender]
         return self.random.choice(patronymics)
 
     def passport_series(self, year: Optional[int] = None) -> str:

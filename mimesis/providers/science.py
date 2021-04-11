@@ -2,7 +2,7 @@
 
 """Provides pseudo-scientific data."""
 
-from typing import Any, Optional
+from typing import Any, Optional, Tuple
 
 from mimesis.data import SI_PREFIXES, SI_PREFIXES_SYM
 from mimesis.enums import MeasureUnit, MetricPrefixSign
@@ -56,7 +56,7 @@ class Science(BaseProvider):
         :param symbol: Return only symbol
         :return: Unit.
         """
-        result = self._validate_enum(item=name, enum=MeasureUnit)
+        result: Tuple[str, str] = self._validate_enum(item=name, enum=MeasureUnit)
 
         if symbol:
             return result[1]
