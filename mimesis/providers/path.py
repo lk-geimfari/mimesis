@@ -3,16 +3,15 @@
 """Provides data related to paths."""
 
 import sys
-from pathlib import PurePosixPath, PureWindowsPath
+from pathlib import PurePosixPath
+from pathlib import PureWindowsPath
 from typing import Any
 
-from mimesis.data import (
-    FOLDERS,
-    PLATFORMS,
-    PROGRAMMING_LANGS,
-    PROJECT_NAMES,
-    USERNAMES,
-)
+from mimesis.data import FOLDERS
+from mimesis.data import PLATFORMS
+from mimesis.data import PROGRAMMING_LANGS
+from mimesis.data import PROJECT_NAMES
+from mimesis.data import USERNAMES
 from mimesis.providers.base import BaseProvider
 
 __all__ = ['Path']

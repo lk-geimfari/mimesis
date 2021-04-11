@@ -3,7 +3,8 @@
 """Contains all the available data providers."""
 
 from mimesis.providers.address import Address
-from mimesis.providers.base import BaseDataProvider, BaseProvider
+from mimesis.providers.base import BaseDataProvider
+from mimesis.providers.base import BaseProvider
 from mimesis.providers.business import Business
 from mimesis.providers.choice import Choice
 from mimesis.providers.clothing import Clothing

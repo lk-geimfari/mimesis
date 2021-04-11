@@ -4,19 +4,26 @@
 
 import hashlib
 import re
-from string import ascii_letters, digits, punctuation
-from typing import Any, Dict, List, Optional, Sequence, Tuple, Union
+from string import ascii_letters
+from string import digits
+from string import punctuation
+from typing import Any
+from typing import List
+from typing import Optional
+from typing import Sequence
+from typing import Tuple
+from typing import Union
 
-from mimesis.data import (
-    BLOOD_GROUPS,
-    CALLING_CODES,
-    EMAIL_DOMAINS,
-    GENDER_SYMBOLS,
-    SEXUALITY_SYMBOLS,
-    SOCIAL_NETWORKS,
-    USERNAMES,
-)
-from mimesis.enums import Gender, SocialNetwork, TitleType
+from mimesis.data import BLOOD_GROUPS
+from mimesis.data import CALLING_CODES
+from mimesis.data import EMAIL_DOMAINS
+from mimesis.data import GENDER_SYMBOLS
+from mimesis.data import SEXUALITY_SYMBOLS
+from mimesis.data import SOCIAL_NETWORKS
+from mimesis.data import USERNAMES
+from mimesis.enums import Gender
+from mimesis.enums import SocialNetwork
+from mimesis.enums import TitleType
 from mimesis.exceptions import NonEnumerableError
 from mimesis.providers.base import BaseDataProvider
 from mimesis.random import get_random_item

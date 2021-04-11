@@ -4,7 +4,12 @@
 
 import datetime
 from decimal import Decimal
-from typing import Any, Callable, Dict, List, Set, Union
+from typing import Any
+from typing import Callable
+from typing import Dict
+from typing import List
+from typing import Set
+from typing import Union
 
 __all__ = [
     'JSON',

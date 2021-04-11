@@ -7,30 +7,28 @@ Repository: https://github.com/lk-geimfari/mimesis
 Email: <likid.geimfari@gmail.com>
 """
 
-from .providers import (
-    Address,
-    BaseDataProvider,
-    BaseProvider,
-    Business,
-    Choice,
-    Clothing,
-    Code,
-    Cryptographic,
-    Datetime,
-    Development,
-    File,
-    Food,
-    Generic,
-    Hardware,
-    Internet,
-    Numbers,
-    Path,
-    Payment,
-    Person,
-    Science,
-    Text,
-    Transport,
-)
+from .providers import Address
+from .providers import BaseDataProvider
+from .providers import BaseProvider
+from .providers import Business
+from .providers import Choice
+from .providers import Clothing
+from .providers import Code
+from .providers import Cryptographic
+from .providers import Datetime
+from .providers import Development
+from .providers import File
+from .providers import Food
+from .providers import Generic
+from .providers import Hardware
+from .providers import Internet
+from .providers import Numbers
+from .providers import Path
+from .providers import Payment
+from .providers import Person
+from .providers import Science
+from .providers import Text
+from .providers import Transport
 
 __all__ = [
     'Address',

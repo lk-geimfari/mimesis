@@ -3,7 +3,8 @@
 """Provides data related to numbers."""
 
 from decimal import Decimal
-from typing import Any, List
+from typing import Any
+from typing import List
 
 from mimesis.enums import NumTypes
 from mimesis.providers.base import BaseProvider

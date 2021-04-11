@@ -2,17 +2,22 @@
 
 """Base data provider."""
 
-import collections.abc
 import contextlib
 import functools
 import json
 from pathlib import Path
-from typing import Any, Generator, Mapping, Optional
+from typing import Any
+from typing import Generator
+from typing import Optional
 
 from mimesis import locales
-from mimesis.exceptions import NonEnumerableError, UnsupportedLocale
-from mimesis.random import Random, get_random_item, random
-from mimesis.typing import JSON, Seed
+from mimesis.exceptions import NonEnumerableError
+from mimesis.exceptions import UnsupportedLocale
+from mimesis.random import Random
+from mimesis.random import get_random_item
+from mimesis.random import random
+from mimesis.typing import JSON
+from mimesis.typing import Seed
 
 __all__ = ['BaseDataProvider', 'BaseProvider']
 
