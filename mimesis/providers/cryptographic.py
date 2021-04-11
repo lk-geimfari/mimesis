@@ -4,7 +4,7 @@
 
 import hashlib
 import secrets
-from typing import Optional, Union
+from typing import Any, Optional, Union
 from uuid import UUID, uuid4
 
 from mimesis.enums import Algorithm
@@ -17,7 +17,7 @@ __all__ = ['Cryptographic']
 class Cryptographic(BaseProvider):
     """Class that provides cryptographic data."""
 
-    def __init__(self, *args, **kwargs) -> None:
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
         """Initialize attributes.
 
         :param seed: Seed.

@@ -2,6 +2,8 @@
 
 """Specific data provider for Denmark (da)."""
 
+from typing import Optional
+
 from mimesis import locales
 from mimesis.builtins.base import BaseSpecProvider
 from mimesis.typing import Seed
@@ -12,7 +14,7 @@ __all__ = ['DenmarkSpecProvider']
 class DenmarkSpecProvider(BaseSpecProvider):
     """Class that provides special data for Denmark (da)."""
 
-    def __init__(self, seed: Seed = None):
+    def __init__(self, seed: Optional[Seed] = None) -> None:
         """Initialize attributes."""
         super().__init__(locale=locales.DE, seed=seed)
 

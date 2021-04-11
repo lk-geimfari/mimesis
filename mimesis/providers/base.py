@@ -7,7 +7,7 @@ import contextlib
 import functools
 import json
 from pathlib import Path
-from typing import Any, Generator, Mapping
+from typing import Any, Generator, Mapping, Optional
 
 from mimesis import locales
 from mimesis.exceptions import NonEnumerableError, UnsupportedLocale
@@ -20,7 +20,7 @@ __all__ = ['BaseDataProvider', 'BaseProvider']
 class BaseProvider(object):
     """This is a base class for all providers."""
 
-    def __init__(self, seed: Seed = None) -> None:
+    def __init__(self, seed: Optional[Seed] = None) -> None:
         """Initialize attributes.
 
         :param seed: Seed for random.
@@ -74,7 +74,7 @@ class BaseDataProvider(BaseProvider):
     """This is a base class for all data providers."""
 
     def __init__(self, locale: str = locales.DEFAULT_LOCALE,
-                 seed: Seed = None) -> None:
+                 seed: Optional[Seed] = None) -> None:
         """Initialize attributes for data providers.
 
         :param locale: Current locale.
