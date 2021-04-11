@@ -31,11 +31,13 @@ jobs:
           key: ${{ runner.os }}-python-${{ matrix.python-version }}-venv-${{ hashFiles('**/poetry.lock') }}
       - name: Install dependencies
         run: poetry install --no-interaction
-      - name: pytest and coverage
+      - name: pytest and codecov
         run: poetry run pytest --cov=mimesis --cov-report=xml
       - name: mypy
         run: poetry run mypy mimesis/
-      - name: pyroma
+      - name: Check code style
+        run: poetry run black mimesis tests --check --skip-string-normalization
+      - name: Check packages friendliness
         run: poetry run pyroma -d .
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v1
