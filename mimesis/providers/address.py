@@ -188,17 +188,14 @@ class Address(BaseDataProvider):
         key = self._validate_enum(fmt, CountryCode)
         return self.random.choice(COUNTRY_CODES[key])
 
-    # TODO: Must return random value by default
-    def country(self, allow_random: bool = False) -> str:
+    def country(self) -> str:
         """Get the country of the current locale.
 
         :allow_random: Return a random country name.
         :return: The Country.
         """
-        if allow_random:
-            return self.random.choice(self._data['country']['name'])
-
-        return self._data['country']['current_locale']
+        countries: List[str] = self._data['country']['name']
+        return self.random.choice(countries)
 
     def city(self) -> str:
         """Get a random city.
