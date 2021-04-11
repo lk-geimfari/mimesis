@@ -45,9 +45,7 @@ class USASpecProvider(BaseSpecProvider):
                 '#### #### ####',
                 '#### #### #### ###',
             ),
-            'ups': (
-                '1Z@####@##########',
-            ),
+            'ups': ('1Z@####@##########',),
         }
         mask = self.random.choice(services[service])
         return self.random.custom_code(mask=mask)
@@ -80,10 +78,24 @@ class USASpecProvider(BaseSpecProvider):
         :Example:
             ISFJ.
         """
-        mbtis = ('ISFJ', 'ISTJ', 'INFJ', 'INTJ',
-                 'ISTP', 'ISFP', 'INFP', 'INTP',
-                 'ESTP', 'ESFP', 'ENFP', 'ENTP',
-                 'ESTJ', 'ESFJ', 'ENFJ', 'ENTJ')
+        mbtis = (
+            'ISFJ',
+            'ISTJ',
+            'INFJ',
+            'INTJ',
+            'ISTP',
+            'ISFP',
+            'INFP',
+            'INTP',
+            'ESTP',
+            'ESFP',
+            'ENFP',
+            'ENTP',
+            'ESTJ',
+            'ESFJ',
+            'ENFJ',
+            'ENTJ',
+        )
 
         if category.lower() == 'rheti':
             return self.random.randint(1, 10)

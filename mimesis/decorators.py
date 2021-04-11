@@ -31,12 +31,13 @@ def romanize(locale: str = '') -> Callable[[F], F]:
             try:
                 # Cyrillic string can contain ascii
                 # symbols, digits and punctuation.
-                alphabet = {s: s for s in
-                            ascii_letters + digits + punctuation}
-                alphabet.update({
-                    **data.ROMANIZATION_DICT[locale],
-                    **data.COMMON_LETTERS,
-                })
+                alphabet = {s: s for s in ascii_letters + digits + punctuation}
+                alphabet.update(
+                    {
+                        **data.ROMANIZATION_DICT[locale],
+                        **data.COMMON_LETTERS,
+                    }
+                )
             except KeyError:
                 raise UnsupportedLocale(locale)
 

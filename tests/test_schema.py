@@ -20,7 +20,8 @@ def test_str(field):
 
 
 @pytest.mark.parametrize(
-    'locale', locales.LIST_OF_LOCALES,
+    'locale',
+    locales.LIST_OF_LOCALES,
 )
 def test_field(locale):
     filed = Field(locale)
@@ -52,7 +53,9 @@ def valid_schema(field):
         'id': field('uuid'),
         'name': field('word'),
         'version': field(
-            'version', key=str.lower, pre_release=True,
+            'version',
+            key=str.lower,
+            pre_release=True,
         ),
         'timestamp': field('timestamp'),
         'mime_type': field('mime_type'),
@@ -61,7 +64,8 @@ def valid_schema(field):
             'email': field('email', key=str.lower),
             'token': field('token_hex'),
             'creator': field(
-                'full_name', gender=Gender.FEMALE,
+                'full_name',
+                gender=Gender.FEMALE,
             ),
             'billing': {
                 'ethereum_address': field('ethereum_address'),
@@ -72,11 +76,19 @@ def valid_schema(field):
             'title2': field('text.title'),
         },
         'items': field(
-            'choice', items=[
-                .1, .3, .4,
-                .5, .6, .7,
-                .8, .9, .10,
-            ]),
+            'choice',
+            items=[
+                0.1,
+                0.3,
+                0.4,
+                0.5,
+                0.6,
+                0.7,
+                0.8,
+                0.9,
+                0.10,
+            ],
+        ),
         'unique_items': field(
             'choice',
             items='aabbcccddd',
@@ -99,15 +111,23 @@ def test_none_schema():
 
 
 def test_schema_with_unacceptable_field(field):
-    invalid_schema = (lambda: {
+    invalid_schema = lambda: {
         'word': field('text.word.invalid'),
         'items': field(
-            'choice.choice.choice', items=[
-                .1, .3, .4,
-                .5, .6, .7,
-                .8, .9, .10,
-            ]),
-    })
+            'choice.choice.choice',
+            items=[
+                0.1,
+                0.3,
+                0.4,
+                0.5,
+                0.6,
+                0.7,
+                0.8,
+                0.9,
+                0.10,
+            ],
+        ),
+    }
 
     with pytest.raises(UnacceptableField):
         Schema(schema=invalid_schema).create()

@@ -9,7 +9,6 @@ from . import patterns
 
 
 class TestText(object):
-
     @pytest.fixture
     def _text(self):
         return Text()
@@ -23,7 +22,8 @@ class TestText(object):
         assert isinstance(rgb, tuple)
 
     @pytest.mark.parametrize(
-        'safe', [
+        'safe',
+        [
             True,
             False,
         ],
@@ -34,7 +34,8 @@ class TestText(object):
         assert result in SAFE_COLORS if safe else result
 
     @pytest.mark.parametrize(
-        'safe', [
+        'safe',
+        [
             True,
             False,
         ],
@@ -44,7 +45,8 @@ class TestText(object):
         assert isinstance(result, tuple)
 
     @pytest.mark.parametrize(
-        'case', [
+        'case',
+        [
             True,
             False,
         ],
@@ -103,7 +105,6 @@ class TestText(object):
 
 
 class TestSeededText(object):
-
     @pytest.fixture
     def t1(self, seed):
         return Text(seed=seed)

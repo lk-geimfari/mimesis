@@ -73,8 +73,7 @@ class File(BaseProvider):
             56 kB
         """
         num = self.random.randint(minimum, maximum)
-        unit = self.random.choice(
-            ['bytes', 'kB', 'MB', 'GB', 'TB'])
+        unit = self.random.choice(['bytes', 'kB', 'MB', 'GB', 'TB'])
 
         return '{num} {unit}'.format(
             num=num,

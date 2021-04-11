@@ -14,7 +14,6 @@ from . import patterns
 
 
 class TestBusiness(object):
-
     @pytest.fixture()
     def _business(self):
         return Business()
@@ -47,7 +46,8 @@ class TestBusiness(object):
         assert result in CRYPTOCURRENCY_SYMBOLS
 
     @pytest.mark.parametrize(
-        'abbr, key', [
+        'abbr, key',
+        [
             (False, 'title'),
             (True, 'abbr'),
         ],
@@ -65,7 +65,8 @@ class TestBusiness(object):
         assert isinstance(result, str)
 
     @pytest.mark.parametrize(
-        'minimum, maximum', [
+        'minimum, maximum',
+        [
             (1, 2),
             (2, 4),
             (4, 16),
@@ -80,7 +81,6 @@ class TestBusiness(object):
 
 
 class TestSeededBusiness(object):
-
     @pytest.fixture()
     def b1(self, seed):
         return Business(seed=seed)
@@ -113,8 +113,7 @@ class TestSeededBusiness(object):
 
     def test_price(self, b1, b2):
         assert b1.price() == b2.price()
-        assert b1.price_in_btc(1.11, 22.2) == \
-            b2.price_in_btc(1.11, 22.2)
+        assert b1.price_in_btc(1.11, 22.2) == b2.price_in_btc(1.11, 22.2)
 
     def test_price_in_btc(self, b1, b2):
         assert b1.price_in_btc() == b2.price_in_btc()

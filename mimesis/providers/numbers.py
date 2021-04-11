@@ -20,8 +20,9 @@ class Numbers(BaseProvider):
 
         name = 'numbers'
 
-    def float_number(self, start: float = -1000.0,
-                     end: float = 1000.0, precision: int = 15) -> float:
+    def float_number(
+        self, start: float = -1000.0, end: float = 1000.0, precision: int = 15
+    ) -> float:
         """Generate random float number in range [start, end].
 
         :param start: Start range.
@@ -32,8 +33,9 @@ class Numbers(BaseProvider):
         """
         return self.random.uniform(start, end, precision)
 
-    def floats(self, start: float = 0, end: float = 1,
-               n: int = 10, precision: int = 15) -> List[float]:
+    def floats(
+        self, start: float = 0, end: float = 1, n: int = 10, precision: int = 15
+    ) -> List[float]:
         """Generate a list of random float numbers.
 
         :param start: Start range.
@@ -54,8 +56,7 @@ class Numbers(BaseProvider):
         """
         return self.random.randint(start, end)
 
-    def integers(self, start: int = 0, end: int = 10,
-                 n: int = 10) -> List[int]:
+    def integers(self, start: int = 0, end: int = 10, n: int = 10) -> List[int]:
         """Generate a list of random integers.
 
         Integers can be negative or positive numbers.
@@ -71,12 +72,15 @@ class Numbers(BaseProvider):
         """
         return self.random.randints(n, start, end)
 
-    def complex_number(self, start_real: float = 0.0,
-                       end_real: float = 1.0,
-                       start_imag: float = 0.0,
-                       end_imag: float = 1.0,
-                       precision_real: int = 15,
-                       precision_imag: int = 15) -> complex:
+    def complex_number(
+        self,
+        start_real: float = 0.0,
+        end_real: float = 1.0,
+        start_imag: float = 0.0,
+        end_imag: float = 1.0,
+        precision_real: int = 15,
+        precision_imag: int = 15,
+    ) -> complex:
         """Generate random complex number.
 
         :param start_real: Start real range.
@@ -93,10 +97,16 @@ class Numbers(BaseProvider):
         imag_part = self.random.uniform(start_imag, end_imag, precision_imag)
         return complex(real_part, imag_part)
 
-    def complexes(self, start_real: float = 0, end_real: float = 1,
-                  start_imag: float = 0, end_imag: float = 1,
-                  precision_real: int = 15, precision_imag: int = 15,
-                  n: int = 10) -> List[complex]:
+    def complexes(
+        self,
+        start_real: float = 0,
+        end_real: float = 1,
+        start_imag: float = 0,
+        end_imag: float = 1,
+        precision_real: int = 15,
+        precision_imag: int = 15,
+        n: int = 10,
+    ) -> List[complex]:
         """Generate a list of random complex numbers.
 
         :param start_real: Start real range.
@@ -124,8 +134,7 @@ class Numbers(BaseProvider):
             )
         return numbers
 
-    def decimal_number(self, start: float = -1000.0,
-                       end: float = 1000.0) -> Decimal:
+    def decimal_number(self, start: float = -1000.0, end: float = 1000.0) -> Decimal:
         """Generate random decimal number.
 
         :param start:  Start range.
@@ -134,8 +143,9 @@ class Numbers(BaseProvider):
         """
         return Decimal.from_float(self.float_number(start, end))
 
-    def decimals(self, start: float = 0.0,
-                 end: float = 1000.0, n: int = 10) -> List[Decimal]:
+    def decimals(
+        self, start: float = 0.0, end: float = 1000.0, n: int = 10
+    ) -> List[Decimal]:
         """Generate decimal number as Decimal objects.
 
         :param start: Start range.
@@ -145,8 +155,13 @@ class Numbers(BaseProvider):
         """
         return [self.decimal_number(start, end) for _ in range(n)]
 
-    def matrix(self, m: int = 10, n: int = 10,
-               num_type: NumTypes = NumTypes.FLOATS, **kwargs: Any) -> Matrix:
+    def matrix(
+        self,
+        m: int = 10,
+        n: int = 10,
+        num_type: NumTypes = NumTypes.FLOATS,
+        **kwargs: Any
+    ) -> Matrix:
         """Generate m x n matrix with random numbers.
 
         This method works with variety of types,

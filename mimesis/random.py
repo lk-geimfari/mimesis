@@ -29,8 +29,7 @@ class Random(random_module.Random):
 
     """
 
-    def randints(self, amount: int = 3,
-                 a: int = 1, b: int = 100) -> List[int]:
+    def randints(self, amount: int = 3, a: int = 1, b: int = 100) -> List[int]:
         """Generate list of random integers.
 
         :param amount: Amount of elements.
@@ -42,8 +41,7 @@ class Random(random_module.Random):
         if amount <= 0:
             raise ValueError('Amount out of range.')
 
-        return [int(self.random() * (b - a)) + a
-                for _ in range(amount)]
+        return [int(self.random() * (b - a)) + a for _ in range(amount)]
 
     @staticmethod
     def urandom(size: int = 8) -> bytes:
@@ -63,8 +61,7 @@ class Random(random_module.Random):
         """
         return ''.join(self.choice(str_seq) for _ in range(length))
 
-    def custom_code(self, mask: str = '@###',
-                    char: str = '@', digit: str = '#') -> str:
+    def custom_code(self, mask: str = '@###', char: str = '@', digit: str = '#') -> str:
         """Generate custom code using ascii uppercase and random integers.
 
         :param mask: Mask of code.
@@ -76,8 +73,9 @@ class Random(random_module.Random):
         digit_code = ord(digit)
 
         if char_code == digit_code:
-            raise ValueError('You cannot use the same '
-                             'placeholder for digits and chars!')
+            raise ValueError(
+                'You cannot use the same ' 'placeholder for digits and chars!'
+            )
 
         def random_int(a: int, b: int) -> int:
             b = b - a
@@ -105,8 +103,7 @@ class Random(random_module.Random):
         """
         return round(a + (b - a) * self.random(), precision)
 
-    def randstr(self, unique: bool = False,
-                length: Optional[int] = None) -> str:
+    def randstr(self, unique: bool = False, length: Optional[int] = None) -> str:
         """Generate random string value.
 
         This method can be especially useful when you need to generate
@@ -126,9 +123,7 @@ class Random(random_module.Random):
             length = self.randint(16, 128)
 
         _string = string.ascii_letters + string.digits
-        _string = ''.join(
-            secrets.choice(_string) for _ in range(length)
-        )
+        _string = ''.join(secrets.choice(_string) for _ in range(length))
         return _string
 
 

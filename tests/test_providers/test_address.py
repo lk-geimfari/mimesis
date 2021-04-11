@@ -12,7 +12,6 @@ from . import patterns
 
 
 class TestAddress(object):
-
     @pytest.fixture
     def _address(self):
         return Address()
@@ -81,7 +80,8 @@ class TestAddress(object):
         assert result is not None
 
     @pytest.mark.parametrize(
-        'abbr, key', [
+        'abbr, key',
+        [
             (False, 'name'),
             (True, 'abbr'),
         ],
@@ -91,7 +91,8 @@ class TestAddress(object):
         assert result in address._data['state'][key]
 
     @pytest.mark.parametrize(
-        'alias, abbr', [
+        'alias, abbr',
+        [
             ('province', True),
             ('region', True),
             ('federal_subject', True),
@@ -104,7 +105,8 @@ class TestAddress(object):
         assert result in address._data['state']['abbr']
 
     @pytest.mark.parametrize(
-        'alias', [
+        'alias',
+        [
             'province',
             'region',
             'federal_subject',
@@ -132,7 +134,8 @@ class TestAddress(object):
         assert country in address._data['country']['name']
 
     @pytest.mark.parametrize(
-        'fmt, length', [
+        'fmt, length',
+        [
             (CountryCode.A2, 2),
             (CountryCode.A3, 3),
             (CountryCode.NUMERIC, 3),
@@ -170,7 +173,6 @@ class TestAddress(object):
 
 
 class TestSeededAddress(object):
-
     @pytest.fixture
     def a1(self, seed):
         return Address(seed=seed)
@@ -181,8 +183,7 @@ class TestSeededAddress(object):
 
     def test_street_number(self, a1, a2):
         assert a1.street_number() == a2.street_number()
-        assert a1.street_number(maximum=42) == \
-               a2.street_number(maximum=42)
+        assert a1.street_number(maximum=42) == a2.street_number(maximum=42)
 
     def test_latitude(self, a1, a2):
         assert a1.latitude() == a2.latitude()
@@ -217,8 +218,9 @@ class TestSeededAddress(object):
 
     def test_country_iso(self, a1, a2):
         assert a1.country_code() == a2.country_code()
-        assert a1.country_code(fmt=CountryCode.A3) == \
-               a2.country_code(fmt=CountryCode.A3)
+        assert a1.country_code(fmt=CountryCode.A3) == a2.country_code(
+            fmt=CountryCode.A3
+        )
 
     def test_city(self, a1, a2):
         assert a1.city() == a2.city()
@@ -232,7 +234,8 @@ class TestSeededAddress(object):
 
 
 @pytest.mark.parametrize(
-    'fn_args, dms', [
+    'fn_args, dms',
+    [
         ([-86.761305, 'lt'], '86º45\'40.698"S'),
         ([-110.424307, 'lg'], '110º25\'27.505"W'),
     ],

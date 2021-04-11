@@ -30,7 +30,6 @@ class GermanySpecProvider(BaseSpecProvider):
         :param plural: Return noun in plural.
         :return: Noun.
         """
-        key = 'plural' if \
-            plural else 'noun'
+        key = 'plural' if plural else 'noun'
         nouns: List[str] = self._data[key]
         return self.random.choice(nouns)

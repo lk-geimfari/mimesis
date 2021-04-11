@@ -27,10 +27,8 @@ from mimesis.providers.transport import Transport
 __all__ = [
     # The main class:
     'BaseProvider',
-
     # Data base class:
     'BaseDataProvider',
-
     # Data providers:
     'Address',
     'Business',

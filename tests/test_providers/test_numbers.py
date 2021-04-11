@@ -11,7 +11,6 @@ from . import patterns
 
 
 class TestNumbers(object):
-
     @pytest.fixture
     def numbers(self):
         return Numbers()
@@ -20,7 +19,8 @@ class TestNumbers(object):
         assert re.match(patterns.PROVIDER_STR_REGEX, str(numbers))
 
     @pytest.mark.parametrize(
-        'start, end', [
+        'start, end',
+        [
             (1.2, 10),
             (10.4, 20.0),
             (20.3, 30.8),
@@ -41,7 +41,8 @@ class TestNumbers(object):
             assert len(str(e).split('.')[1]) <= 4
 
     @pytest.mark.parametrize(
-        'start, end', [
+        'start, end',
+        [
             (1, 10),
             (10, 20),
             (20, 30),
@@ -58,7 +59,8 @@ class TestNumbers(object):
         assert isinstance(element, int)
 
     @pytest.mark.parametrize(
-        'start, end', [
+        'start, end',
+        [
             (1, 10),
             (10, 20),
             (20, 30),
@@ -75,16 +77,15 @@ class TestNumbers(object):
         assert isinstance(element, decimal.Decimal)
 
     @pytest.mark.parametrize(
-        'start_real, end_real, start_imag, end_imag', [
+        'start_real, end_real, start_imag, end_imag',
+        [
             (1.2, 10, 1, 2.4),
             (10.4, 20.0, 2.3, 10),
             (20.3, 30.8, 2.4, 4.5),
         ],
     )
-    def test_complexes(self, numbers,
-                       start_real, end_real, start_imag, end_imag):
-        result = numbers.complexes(start_real, end_real,
-                                   start_imag, end_imag)
+    def test_complexes(self, numbers, start_real, end_real, start_imag, end_imag):
+        result = numbers.complexes(start_real, end_real, start_imag, end_imag)
         assert max(e.real for e in result) <= end_real
         assert min(e.real for e in result) >= start_real
         assert max(e.imag for e in result) <= end_imag
@@ -101,7 +102,8 @@ class TestNumbers(object):
             assert len(str(e.imag).split('.')[1]) <= 6
 
     @pytest.mark.parametrize(
-        'sr, er, si, ei, pr, pi', [
+        'sr, er, si, ei, pr, pi',
+        [
             (1.2, 10, 1, 2.4, 15, 15),
             (10.4, 20.0, 2.3, 10, 10, 10),
             (20.3, 30.8, 2.4, 4.5, 12, 12),
@@ -146,7 +148,8 @@ class TestNumbers(object):
         result = numbers.matrix(
             num_type=NumTypes.COMPLEXES,
             precision_real=precision_real,
-            precision_imag=precision_imag)
+            precision_imag=precision_imag,
+        )
         result[0][0] = 0.0001 + 0.000001j
         assert len(result) == 10
         for row in result:
@@ -177,7 +180,6 @@ class TestNumbers(object):
 
 
 class TestSeededNumbers(object):
-
     @pytest.fixture
     def n1(self, seed):
         return Numbers(seed=seed)
@@ -196,8 +198,9 @@ class TestSeededNumbers(object):
 
     def test_integers(self, n1, n2):
         assert n1.integers() == n2.integers()
-        assert n1.integers(start=-999, end=999, n=10) == \
-               n2.integers(start=-999, end=999, n=10)
+        assert n1.integers(start=-999, end=999, n=10) == n2.integers(
+            start=-999, end=999, n=10
+        )
 
     def test_complexes(self, n1, n2):
         assert n1.complexes() == n2.complexes()

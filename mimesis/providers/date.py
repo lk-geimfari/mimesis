@@ -211,8 +211,9 @@ class Datetime(BaseDataProvider):
         """
         return self.random.choice(GMT_OFFSETS)
 
-    def datetime(self, start: int = 2000, end: int = CURRENT_YEAR,
-                 timezone: Optional[str] = None) -> DateTime:
+    def datetime(
+        self, start: int = 2000, end: int = CURRENT_YEAR, timezone: Optional[str] = None
+    ) -> DateTime:
         """Generate random datetime.
 
         :param start: Minimum value of year.

@@ -72,8 +72,9 @@ class BaseProvider(object):
 class BaseDataProvider(BaseProvider):
     """This is a base class for all data providers."""
 
-    def __init__(self, locale: str = locales.DEFAULT_LOCALE,
-                 seed: Optional[Seed] = None) -> None:
+    def __init__(
+        self, locale: str = locales.DEFAULT_LOCALE, seed: Optional[Seed] = None
+    ) -> None:
         """Initialize attributes for data providers.
 
         :param locale: Current locale.
@@ -174,8 +175,10 @@ class BaseDataProvider(BaseProvider):
         self._pull()
 
     @contextlib.contextmanager
-    def override_locale(self, locale: str = locales.EN,
-                        ) -> Generator['BaseDataProvider', None, None]:
+    def override_locale(
+        self,
+        locale: str = locales.EN,
+    ) -> Generator['BaseDataProvider', None, None]:
         """Context manager which allows overriding current locale.
 
         Temporarily overrides current locale for
@@ -192,8 +195,9 @@ class BaseDataProvider(BaseProvider):
             finally:
                 self._override_locale(origin_locale)
         except AttributeError:
-            raise ValueError('«{}» has not locale dependent'.format(
-                self.__class__.__name__))
+            raise ValueError(
+                '«{}» has not locale dependent'.format(self.__class__.__name__)
+            )
 
     def __str__(self) -> str:
         """Human-readable representation of locale."""

@@ -69,8 +69,9 @@ class Science(BaseProvider):
             return result[1]
         return result[0]
 
-    def metric_prefix(self, sign: Optional[MetricPrefixSign] = None,
-                      symbol: bool = False) -> str:
+    def metric_prefix(
+        self, sign: Optional[MetricPrefixSign] = None, symbol: bool = False
+    ) -> str:
         """Get a random prefix for the International System of Units.
 
         :param sign: Sing of prefix (positive/negative).
@@ -81,8 +82,7 @@ class Science(BaseProvider):
         :Example:
             mega
         """
-        prefixes = SI_PREFIXES_SYM if \
-            symbol else SI_PREFIXES
+        prefixes = SI_PREFIXES_SYM if symbol else SI_PREFIXES
 
         key = self._validate_enum(item=sign, enum=MetricPrefixSign)
         return self.random.choice(prefixes[key])

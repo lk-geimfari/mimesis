@@ -22,7 +22,6 @@ from . import patterns
 
 
 class TestHardware(object):
-
     @pytest.fixture
     def hard(self):
         return Hardware()
@@ -86,7 +85,6 @@ class TestHardware(object):
 
 
 class TestSeededHardware(object):
-
     @pytest.fixture
     def h1(self, seed):
         return Hardware(seed=seed)

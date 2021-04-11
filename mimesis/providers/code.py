@@ -51,8 +51,7 @@ class Code(BaseProvider):
         """
         return self.random.custom_code(mask=mask)
 
-    def isbn(self, fmt: Optional[ISBNFormat] = None,
-             locale: str = 'en') -> str:
+    def isbn(self, fmt: Optional[ISBNFormat] = None, locale: str = 'en') -> str:
         """Generate ISBN for current locale.
 
         To change ISBN format, pass parameter ``fmt`` with needed value of
@@ -64,8 +63,7 @@ class Code(BaseProvider):
         :raises NonEnumerableError: if fmt is not enum ISBNFormat.
         """
         fmt_value = self._validate_enum(item=fmt, enum=ISBNFormat)
-        mask = ISBN_MASKS[fmt_value].format(
-            ISBN_GROUPS[locale])
+        mask = ISBN_MASKS[fmt_value].format(ISBN_GROUPS[locale])
         return self.random.custom_code(mask)
 
     def ean(self, fmt: Optional[EANFormat] = None) -> str:

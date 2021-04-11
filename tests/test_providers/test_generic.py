@@ -5,7 +5,6 @@ from mimesis import BaseProvider, Generic
 
 
 class TestGeneric(object):
-
     def test_base_person(self, generic):
         result = generic.person.username()
         assert result is not None
@@ -88,7 +87,6 @@ class TestGeneric(object):
 
 
 class TestSeededGeneric(object):
-
     @pytest.fixture
     def g1(self, seed):
         return Generic(seed=seed)

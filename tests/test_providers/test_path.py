@@ -7,7 +7,6 @@ from mimesis.data import FOLDERS, PROGRAMMING_LANGS, PROJECT_NAMES
 
 
 class TestPath(object):
-
     def test_root(self, path):
         result = path.root()
         assert result == 'C:\\' or result == '/'
@@ -19,8 +18,7 @@ class TestPath(object):
     def test_user(self, path):
         user = path.user()
 
-        pattern = r'C:\\Users\\[A-Z].*' if path.platform == 'win32' \
-                  else r'/home/[a-z].'
+        pattern = r'C:\\Users\\[A-Z].*' if path.platform == 'win32' else r'/home/[a-z].'
 
         result = re.search(pattern, user)
         assert result
@@ -53,7 +51,6 @@ class TestPath(object):
 
 
 class TestSeededPath(object):
-
     @pytest.fixture
     def p1(self, seed):
         return Path(seed=seed)

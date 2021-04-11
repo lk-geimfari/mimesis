@@ -101,6 +101,7 @@ class BrazilSpecProvider(BaseSpecProvider):
         cnpj = ''.join([str(i) for i in cnpj_without_dv])
 
         if with_mask:
-            return '{}.{}.{}/{}-{}'.format(cnpj[:2], cnpj[2:5],
-                                           cnpj[5:8], cnpj[8:12], cnpj[12:])
+            return '{}.{}.{}/{}-{}'.format(
+                cnpj[:2], cnpj[2:5], cnpj[5:8], cnpj[8:12], cnpj[12:]
+            )
         return cnpj

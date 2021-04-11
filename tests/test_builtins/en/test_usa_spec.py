@@ -10,7 +10,8 @@ def usa():
 
 
 @pytest.mark.parametrize(
-    'service, length', [
+    'service, length',
+    [
         ('usps', 24),
         ('fedex', 18),
         ('ups', 18),

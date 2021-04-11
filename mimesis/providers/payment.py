@@ -64,8 +64,7 @@ class Payment(BaseProvider):
         """
         type_ = self.random.choice(['1', '3'])
         letters = string.ascii_letters + string.digits
-        return type_ + ''.join(
-            self.random.choice(letters) for _ in range(33))
+        return type_ + ''.join(self.random.choice(letters) for _ in range(33))
 
     def ethereum_address(self) -> str:
         """Generate a random Ethereum address.
@@ -111,10 +110,12 @@ class Payment(BaseProvider):
         if card_type == CardType.VISA:
             number = self.random.randint(4000, 4999)
         elif card_type == CardType.MASTER_CARD:
-            number = self.random.choice([
-                self.random.randint(2221, 2720),
-                self.random.randint(5100, 5599),
-            ])
+            number = self.random.choice(
+                [
+                    self.random.randint(2221, 2720),
+                    self.random.randint(5100, 5599),
+                ]
+            )
         elif card_type == CardType.AMERICAN_EXPRESS:
             number = self.random.choice([34, 37])
             length = 15
@@ -132,8 +133,7 @@ class Payment(BaseProvider):
         card = ' '.join(groups)
         return card
 
-    def credit_card_expiration_date(self, minimum: int = 16,
-                                    maximum: int = 25) -> str:
+    def credit_card_expiration_date(self, minimum: int = 16, maximum: int = 25) -> str:
         """Generate a random expiration date for credit card.
 
         :param minimum: Date of issue.

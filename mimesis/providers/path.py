@@ -35,8 +35,7 @@ class Path(BaseProvider):
         """
         super().__init__(*args, **kwargs)
         self.platform = platform
-        self._pathlib_home = PureWindowsPath() if 'win' in platform \
-            else PurePosixPath()
+        self._pathlib_home = PureWindowsPath() if 'win' in platform else PurePosixPath()
         self._pathlib_home /= PLATFORMS[platform]['home']
 
     class Meta:

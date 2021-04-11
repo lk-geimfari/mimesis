@@ -12,7 +12,6 @@ from . import patterns
 
 
 class TestCode(object):
-
     @pytest.fixture
     def code(self):
         return Code()
@@ -21,7 +20,8 @@ class TestCode(object):
         assert re.match(patterns.PROVIDER_STR_REGEX, str(code))
 
     @pytest.mark.parametrize(
-        'fmt, length', [
+        'fmt, length',
+        [
             (EANFormat.EAN8, 8),
             (EANFormat.EAN13, 13),
         ],
@@ -51,13 +51,15 @@ class TestCode(object):
         assert result in LOCALE_CODES
 
     @pytest.mark.parametrize(
-        'fmt, length', [
+        'fmt, length',
+        [
             (ISBNFormat.ISBN10, 10),
             (ISBNFormat.ISBN13, 13),
         ],
     )
     @pytest.mark.parametrize(
-        'locale', LIST_OF_LOCALES,
+        'locale',
+        LIST_OF_LOCALES,
     )
     def test_isbn(self, code, fmt, length, locale):
         result = code.isbn(fmt=fmt, locale=locale)
@@ -70,7 +72,6 @@ class TestCode(object):
 
 
 class TestSeededCode(object):
-
     @pytest.fixture
     def c1(self, seed):
         return Code(seed=seed)
@@ -81,8 +82,7 @@ class TestSeededCode(object):
 
     def test_ean(self, c1, c2):
         assert c1.ean() == c2.ean()
-        assert c1.ean(fmt=EANFormat.EAN13) == \
-               c2.ean(fmt=EANFormat.EAN13)
+        assert c1.ean(fmt=EANFormat.EAN13) == c2.ean(fmt=EANFormat.EAN13)
 
     def test_imei(self, c1, c2):
         assert c1.imei() == c2.imei()
@@ -100,5 +100,4 @@ class TestSeededCode(object):
 
     def test_isbn(self, c1, c2):
         assert c1.isbn() == c2.isbn()
-        assert c1.isbn(fmt=ISBNFormat.ISBN13) == \
-               c2.isbn(fmt=ISBNFormat.ISBN13)
+        assert c1.isbn(fmt=ISBNFormat.ISBN13) == c2.isbn(fmt=ISBNFormat.ISBN13)

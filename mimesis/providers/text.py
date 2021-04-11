@@ -34,8 +34,7 @@ class Text(BaseDataProvider):
         :param lower_case: Return alphabet in lower case.
         :return: Alphabet.
         """
-        case = 'uppercase' if \
-            not lower_case else 'lowercase'
+        case = 'uppercase' if not lower_case else 'lowercase'
 
         alpha: List[str] = self._data['alphabet'].get(case)
         return alpha
@@ -141,7 +140,7 @@ class Text(BaseDataProvider):
         """
         if color.startswith('#'):
             color = color.lstrip('#')
-        return tuple(int(color[i:i + 2], 16) for i in (0, 2, 4))
+        return tuple(int(color[i : i + 2], 16) for i in (0, 2, 4))
 
     def hex_color(self, safe: bool = False) -> str:
         """Generate a random hex color.
@@ -155,8 +154,7 @@ class Text(BaseDataProvider):
         if safe:
             return self.random.choice(SAFE_COLORS)
 
-        return '#{:06x}'.format(
-            self.random.randint(0x000000, 0xffffff))
+        return '#{:06x}'.format(self.random.randint(0x000000, 0xFFFFFF))
 
     def rgb_color(self, safe: bool = False) -> Tuple[int, ...]:
         """Generate a random rgb color tuple.

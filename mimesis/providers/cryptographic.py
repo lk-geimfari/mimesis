@@ -116,8 +116,7 @@ class Cryptographic(BaseProvider):
         """
         return secrets.token_urlsafe(entropy)
 
-    def mnemonic_phrase(self, length: int = 12,
-                        separator: Optional[str] = None) -> str:
+    def mnemonic_phrase(self, length: int = 12, separator: Optional[str] = None) -> str:
         """Generate pseudo mnemonic phrase.
 
         Please, keep in mind that this method generates

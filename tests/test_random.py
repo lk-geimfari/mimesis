@@ -26,7 +26,8 @@ def test_randints(random):
 
 
 @pytest.mark.parametrize(
-    'size', (8, 16, 32, 64),
+    'size',
+    (8, 16, 32, 64),
 )
 def test_urandom(random, size):
     result = random.urandom(size=size)
@@ -36,7 +37,8 @@ def test_urandom(random, size):
 
 
 @pytest.mark.parametrize(
-    'str_seq, length', [
+    'str_seq, length',
+    [
         ('U', 10),
         ('A', 20),
     ],
@@ -47,7 +49,8 @@ def test_generate_string(random, str_seq, length):
 
 
 @pytest.mark.parametrize(
-    'precision', [
+    'precision',
+    [
         4,
         6,
         8,
@@ -62,7 +65,8 @@ def test_uniform(random, precision):
 
 
 @pytest.mark.parametrize(
-    'mask, digit, char', [
+    'mask, digit, char',
+    [
         ('##-FA-@@', '#', '@'),
         ('**-AF-$$', '*', '$'),
         ('**-š好-$$', '*', '$'),
@@ -78,7 +82,8 @@ def test_custom_code(random, mask, digit, char):
 
 
 @pytest.mark.parametrize(
-    'mask, digit, char', [
+    'mask, digit, char',
+    [
         ('??-FF-??', '?', '?'),
         ('@@-FF-@@', '@', '@'),
     ],
@@ -89,9 +94,10 @@ def test_custom_code_with_same_placeholders(random, mask, digit, char):
 
 
 @pytest.mark.parametrize(
-    'seed, expected', [
+    'seed, expected',
+    [
         (32, 'C239'),
-        (0xff, 'B670'),
+        (0xFF, 'B670'),
         ('👽', 'B806'),
     ],
 )
@@ -104,14 +110,15 @@ def test_get_random_item(random):
     result = get_random_item(Gender)
     assert result in Gender
 
-    random.seed(0xf)
+    random.seed(0xF)
     result_1 = get_random_item(Gender, rnd=random)
     result_2 = get_random_item(Gender, rnd=random)
     assert result_1 == result_2
 
 
 @pytest.mark.parametrize(
-    'length', [
+    'length',
+    [
         64,
         128,
         256,
@@ -123,7 +130,8 @@ def test_randstr(random, length):
 
 
 @pytest.mark.parametrize(
-    'count', [
+    'count',
+    [
         1000,
         10000,
         100000,

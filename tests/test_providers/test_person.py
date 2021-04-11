@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import random
 import re
 
 import pytest
@@ -13,7 +12,6 @@ from . import patterns
 
 
 class TestPerson(object):
-
     @pytest.fixture
     def _person(self):
         return Person()
@@ -22,7 +20,8 @@ class TestPerson(object):
         assert re.match(patterns.DATA_PROVIDER_STR_REGEX, str(person))
 
     @pytest.mark.parametrize(
-        'minimum, maximum', [
+        'minimum, maximum',
+        [
             (16, 18),
             (18, 21),
             (22, 28),
@@ -41,8 +40,7 @@ class TestPerson(object):
         assert result == 0
 
     def test_work_experience(self, _person):
-        result = _person.work_experience(
-            working_start_age=0) - _person._store['age']
+        result = _person.work_experience(working_start_age=0) - _person._store['age']
         assert result == 0
 
     def test_work_experience_store(self, _person):
@@ -61,11 +59,20 @@ class TestPerson(object):
         assert len(result) == 32
 
     @pytest.mark.parametrize(
-        'template', [
-            'U-d', 'U.d', 'UU-d',
-            'UU.d', 'UU_d', 'U_d',
-            'Ud', 'default', 'l-d',
-            'l.d', 'l_d', 'ld',
+        'template',
+        [
+            'U-d',
+            'U.d',
+            'UU-d',
+            'UU.d',
+            'UU_d',
+            'U_d',
+            'Ud',
+            'default',
+            'l-d',
+            'l.d',
+            'l_d',
+            'ld',
             None,
         ],
     )
@@ -102,7 +109,8 @@ class TestPerson(object):
             _person.username(template='dd-.dd')
 
     @pytest.mark.parametrize(
-        'unique', [
+        'unique',
+        [
             False,
             True,
         ],
@@ -145,7 +153,8 @@ class TestPerson(object):
         assert result in BLOOD_GROUPS
 
     @pytest.mark.parametrize(
-        'site', [
+        'site',
+        [
             SocialNetwork.INSTAGRAM,
             SocialNetwork.FACEBOOK,
             SocialNetwork.TWITTER,
@@ -173,7 +182,8 @@ class TestPerson(object):
         assert suffix.isalpha()
 
     @pytest.mark.parametrize(
-        'gender', [
+        'gender',
+        [
             Gender.FEMALE,
             Gender.MALE,
         ],
@@ -183,7 +193,8 @@ class TestPerson(object):
         assert result in person._data['names'][gender.value]
 
     @pytest.mark.parametrize(
-        'gender', [
+        'gender',
+        [
             Gender.FEMALE,
             Gender.MALE,
         ],
@@ -215,7 +226,8 @@ class TestPerson(object):
         assert head == '+5'
 
     @pytest.mark.parametrize(
-        'gender', [
+        'gender',
+        [
             Gender.FEMALE,
             Gender.MALE,
         ],
@@ -234,7 +246,8 @@ class TestPerson(object):
             assert result in surnames
 
     @pytest.mark.parametrize(
-        'gender', [
+        'gender',
+        [
             Gender.FEMALE,
             Gender.MALE,
         ],
@@ -314,14 +327,16 @@ class TestPerson(object):
         assert result in person._data['political_views']
 
     @pytest.mark.parametrize(
-        'title_type', [
+        'title_type',
+        [
             TitleType.ACADEMIC,
             TitleType.TYPICAL,
             None,
         ],
     )
     @pytest.mark.parametrize(
-        'gender', [
+        'gender',
+        [
             Gender.FEMALE,
             Gender.MALE,
             None,
@@ -336,7 +351,8 @@ class TestPerson(object):
             person.title(gender='nil')
 
     @pytest.mark.parametrize(
-        'gender', [
+        'gender',
+        [
             Gender.FEMALE,
             Gender.MALE,
         ],
@@ -352,7 +368,6 @@ class TestPerson(object):
 
 
 class TestSeededPerson(object):
-
     @pytest.fixture
     def p1(self, seed):
         return Person(seed=seed)
@@ -371,8 +386,9 @@ class TestSeededPerson(object):
 
     def test_password(self, p1, p2):
         assert p1.password() == p2.password()
-        assert p1.password(length=12, hashed=True) == \
-               p2.password(length=12, hashed=True)
+        assert p1.password(length=12, hashed=True) == p2.password(
+            length=12, hashed=True
+        )
 
     def test_username(self, p1, p2):
         assert p1.username() == p2.username()
@@ -380,8 +396,7 @@ class TestSeededPerson(object):
 
     def test_email(self, p1, p2):
         assert p1.email() == p2.email()
-        assert p1.email(domains=['@mimesis.io']) == \
-               p2.email(domains=['@mimesis.io'])
+        assert p1.email(domains=['@mimesis.io']) == p2.email(domains=['@mimesis.io'])
 
         with pytest.raises(ValueError):
             p1.email(unique=True)
@@ -399,8 +414,9 @@ class TestSeededPerson(object):
 
     def test_social_media_profile(self, p1, p2):
         assert p1.social_media_profile() == p2.social_media_profile()
-        assert p1.social_media_profile(site=SocialNetwork.TWITTER) == \
-               p2.social_media_profile(site=SocialNetwork.TWITTER)
+        assert p1.social_media_profile(
+            site=SocialNetwork.TWITTER
+        ) == p2.social_media_profile(site=SocialNetwork.TWITTER)
 
     def test_avatar(self, p1, p2):
         assert p1.avatar() == p2.avatar()
@@ -412,43 +428,43 @@ class TestSeededPerson(object):
 
     def test_name(self, p1, p2):
         assert p1.name() == p2.name()
-        assert p1.name(gender=Gender.FEMALE) == \
-               p2.name(gender=Gender.FEMALE)
+        assert p1.name(gender=Gender.FEMALE) == p2.name(gender=Gender.FEMALE)
 
     def test_first_name(self, p1, p2):
         assert p1.first_name() == p2.first_name()
-        assert p1.first_name(gender=Gender.FEMALE) == \
-               p2.first_name(gender=Gender.FEMALE)
+        assert p1.first_name(gender=Gender.FEMALE) == p2.first_name(
+            gender=Gender.FEMALE
+        )
 
     def test_telephone(self, p1, p2):
         assert p1.telephone() == p2.telephone()
-        assert p1.telephone(mask='(x)-xx-xxx', placeholder='x') == \
-               p2.telephone(mask='(x)-xx-xxx', placeholder='x')
+        assert p1.telephone(mask='(x)-xx-xxx', placeholder='x') == p2.telephone(
+            mask='(x)-xx-xxx', placeholder='x'
+        )
 
     def test_surname(self, p1, p2):
         assert p1.surname() == p2.surname()
-        assert p1.last_name(gender=Gender.MALE) == \
-               p2.last_name(gender=Gender.MALE)
+        assert p1.last_name(gender=Gender.MALE) == p2.last_name(gender=Gender.MALE)
 
     def test_full_name(self, p1, p2):
         assert p1.full_name() == p2.full_name()
-        assert p1.full_name(gender=Gender.FEMALE, reverse=True) == \
-               p2.full_name(gender=Gender.FEMALE, reverse=True)
+        assert p1.full_name(gender=Gender.FEMALE, reverse=True) == p2.full_name(
+            gender=Gender.FEMALE, reverse=True
+        )
 
     def test_gender(self, p1, p2):
         assert p1.gender() == p2.gender()
-        assert p1.gender(iso5218=True, symbol=True) == \
-               p2.gender(iso5218=True, symbol=True)
+        assert p1.gender(iso5218=True, symbol=True) == p2.gender(
+            iso5218=True, symbol=True
+        )
 
     def test_sex(self, p1, p2):
         assert p1.sex() == p2.sex()
-        assert p1.sex(iso5218=True, symbol=True) == \
-               p2.sex(iso5218=True, symbol=True)
+        assert p1.sex(iso5218=True, symbol=True) == p2.sex(iso5218=True, symbol=True)
 
     def test_sexual_orientation(self, p1, p2):
         assert p1.sexual_orientation() == p2.sexual_orientation()
-        assert p1.sexual_orientation(symbol=True) == \
-               p2.sexual_orientation(symbol=True)
+        assert p1.sexual_orientation(symbol=True) == p2.sexual_orientation(symbol=True)
 
     def test_occupation(self, p1, p2):
         assert p1.occupation() == p2.occupation()
@@ -473,10 +489,10 @@ class TestSeededPerson(object):
 
     def test_title(self, p1, p2):
         assert p1.title() == p2.title()
-        assert p1.title(gender=Gender.FEMALE, title_type=TitleType.TYPICAL) == \
-               p2.title(gender=Gender.FEMALE, title_type=TitleType.TYPICAL)
+        assert p1.title(gender=Gender.FEMALE, title_type=TitleType.TYPICAL) == p2.title(
+            gender=Gender.FEMALE, title_type=TitleType.TYPICAL
+        )
 
     def test_nationality(self, p1, p2):
         assert p1.nationality() == p2.nationality()
-        assert p1.nationality(Gender.FEMALE) == \
-               p2.nationality(Gender.FEMALE)
+        assert p1.nationality(Gender.FEMALE) == p2.nationality(Gender.FEMALE)

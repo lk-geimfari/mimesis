@@ -27,9 +27,12 @@ class AbstractField:
     See :class:`~mimesis.schema.AbstractField.__call__` for more details.
     """
 
-    def __init__(self, locale: str = 'en',
-                 seed: Optional[Seed] = None,
-                 providers: Optional[Any] = None) -> None:
+    def __init__(
+        self,
+        locale: str = 'en',
+        seed: Optional[Seed] = None,
+        providers: Optional[Any] = None,
+    ) -> None:
         """Initialize field.
 
         :param locale: Locale
@@ -44,9 +47,12 @@ class AbstractField:
 
         self._table = {}  # type: ignore
 
-    def __call__(self, name: Optional[str] = None,
-                 key: Optional[Callable[[Any], Any]] = None,
-                 **kwargs: Any) -> Any:
+    def __call__(
+        self,
+        name: Optional[str] = None,
+        key: Optional[Callable[[Any], Any]] = None,
+        **kwargs: Any
+    ) -> Any:
         """Override standard call.
 
         This magic method overrides standard call so it takes any string
@@ -112,8 +118,7 @@ class AbstractField:
             raise UnsupportedField(name)
 
     def __str__(self) -> str:
-        return '{} <{}>'.format(
-            self.__class__.__name__, self.locale)
+        return '{} <{}>'.format(self.__class__.__name__, self.locale)
 
 
 class Schema:

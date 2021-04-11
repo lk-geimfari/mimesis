@@ -40,14 +40,17 @@ def test_russian_mixed_text(mixed_text):
 @pytest.fixture
 @mimesis.decorators.romanize('ru')
 def russian_alphabet():
-    return ' '.join('АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ'
-                    'абвгдеёжзийклмнопрстуфхцчшщъыьэюя')
+    return ' '.join(
+        'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ' 'абвгдеёжзийклмнопрстуфхцчшщъыьэюя'
+    )
 
 
 def test_romanize_russian_alphabet(russian_alphabet):
-    result = 'A B V G D E Yo Zh Z I Ye K L M N O P R S T U F Kh Ts ' \
-             'Ch Sh Shch  Y  E Yu Ja a b v g d e yo zh z i ye k l m n' \
-             ' o p r s t u f kh ts ch sh shch  y  e yu ja'
+    result = (
+        'A B V G D E Yo Zh Z I Ye K L M N O P R S T U F Kh Ts '
+        'Ch Sh Shch  Y  E Yu Ja a b v g d e yo zh z i ye k l m n'
+        ' o p r s t u f kh ts ch sh shch  y  e yu ja'
+    )
 
     assert russian_alphabet == result
 

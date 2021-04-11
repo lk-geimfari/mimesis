@@ -12,7 +12,6 @@ from . import patterns
 
 
 class TestScience(object):
-
     @pytest.fixture
     def science(self):
         return Science()
@@ -31,7 +30,8 @@ class TestScience(object):
         assert len(result) == 10
 
     @pytest.mark.parametrize(
-        'name', [
+        'name',
+        [
             MeasureUnit.MASS,
             MeasureUnit.INFORMATION,
             MeasureUnit.THERMODYNAMIC_TEMPERATURE,
@@ -62,7 +62,8 @@ class TestScience(object):
         assert symbol in name.value
 
     @pytest.mark.parametrize(
-        'sign, symbol', [
+        'sign, symbol',
+        [
             (MetricPrefixSign.POSITIVE, True),
             (MetricPrefixSign.POSITIVE, False),
             (MetricPrefixSign.NEGATIVE, True),
@@ -78,7 +79,6 @@ class TestScience(object):
 
 
 class TestSeededScience(object):
-
     @pytest.fixture
     def s1(self, seed):
         return Science(seed=seed)

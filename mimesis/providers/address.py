@@ -116,7 +116,6 @@ class Address(BaseDataProvider):
             st_num=st_num,
             st_name=st_name,
             st_sfx=self.street_suffix(),
-
         )
 
     def state(self, abbr: bool = False) -> str:
@@ -162,8 +161,7 @@ class Address(BaseDataProvider):
 
         :return: Postal code.
         """
-        return self.random.custom_code(
-            self._data['postal_code_fmt'])
+        return self.random.custom_code(self._data['postal_code_fmt'])
 
     def zip_code(self) -> str:
         """Generate a zip code.
@@ -254,8 +252,7 @@ class Address(BaseDataProvider):
         :param code: Return code of continent.
         :return: Continent name.
         """
-        codes: List[str] = CONTINENT_CODES if \
-            code else self._data['continent']
+        codes: List[str] = CONTINENT_CODES if code else self._data['continent']
 
         return self.random.choice(codes)
 

@@ -9,7 +9,8 @@ def choice():
 
 
 @pytest.mark.parametrize(
-    'items, length', [
+    'items, length',
+    [
         (['a', 'b', 'c', 'd', 'e', 'f', 'g'], 4),
         (['a', 'b', 'c', 'd', 'e', 'f', 'g'], 5),
         (['a', 'b', 'c', 'd', 'e', 'f', 'g'], 1),
@@ -19,7 +20,8 @@ def choice():
         ('abcdefg', 4),
         ('abcdefg', 5),
         ('abcdefg', 1),
-    ])
+    ],
+)
 def test_choice(choice, items, length):
     result = choice(items=items, length=length)
     assert len(result) == length
@@ -27,11 +29,13 @@ def test_choice(choice, items, length):
 
 
 @pytest.mark.parametrize(
-    'items', [
+    'items',
+    [
         ['a', 'b', 'c', 'd', 'c', 'b', 'a'],
         ('a', 'b', 'c', 'd', 'c', 'b', 'a'),
         'abcdcba',
-    ])
+    ],
+)
 def test_choice_unique(choice, items):
     result = choice(items=items, length=4, unique=True)
     assert len(result) == len(set(result))
@@ -39,11 +43,13 @@ def test_choice_unique(choice, items):
 
 
 @pytest.mark.parametrize(
-    'items', [
+    'items',
+    [
         ['a', 'b', 'c', 'd', 'e'],
         ('a', 'b', 'c', 'd', 'e'),
         'abcde',
-    ])
+    ],
+)
 def test_choice_one_element(choice, items):
     result = choice(items=items)
     assert isinstance(result, str)

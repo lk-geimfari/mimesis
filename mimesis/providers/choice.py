@@ -25,8 +25,9 @@ class Choice(BaseProvider):
         """
         super().__init__(*args, **kwargs)
 
-    def __call__(self, items: Optional[Sequence[Any]], length: int = 0,
-                 unique: bool = False) -> Union[Sequence[Any], Any]:
+    def __call__(
+        self, items: Optional[Sequence[Any]], length: int = 0, unique: bool = False
+    ) -> Union[Sequence[Any], Any]:
         """Generate a randomly-chosen sequence or bare element from a sequence.
 
         Provide elements randomly chosen from the elements in a sequence
@@ -73,8 +74,10 @@ class Choice(BaseProvider):
 
         data = []  # type: ignore
         if unique and len(set(items)) < length:  # avoid an infinite while loop
-            raise ValueError('There are not enough unique elements in '
-                             '**items** to provide the specified **number**.')
+            raise ValueError(
+                'There are not enough unique elements in '
+                '**items** to provide the specified **number**.'
+            )
         while len(data) < length:
             item = self.random.choice(items)
             if (unique and item not in data) or not unique:

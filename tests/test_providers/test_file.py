@@ -12,7 +12,6 @@ from . import patterns
 
 
 class TestFile(object):
-
     @pytest.fixture
     def file(self):
         return File()
@@ -21,7 +20,8 @@ class TestFile(object):
         assert re.match(patterns.PROVIDER_STR_REGEX, str(file))
 
     @pytest.mark.parametrize(
-        'extension', [
+        'extension',
+        [
             FileType.AUDIO,
             FileType.COMPRESSED,
             FileType.DATA,
@@ -37,7 +37,8 @@ class TestFile(object):
         assert ext in EXTENSIONS[extension.value]
 
     @pytest.mark.parametrize(
-        'type_', [
+        'type_',
+        [
             MimeType.APPLICATION,
             MimeType.AUDIO,
             MimeType.IMAGE,
@@ -54,7 +55,8 @@ class TestFile(object):
             file.mime_type(type_='nil')
 
     @pytest.mark.parametrize(
-        'file_type', [
+        'file_type',
+        [
             FileType.AUDIO,
             FileType.COMPRESSED,
             FileType.DATA,
@@ -78,7 +80,6 @@ class TestFile(object):
 
 
 class TestSeededFile(object):
-
     @pytest.fixture
     def f1(self, seed):
         return File(seed=seed)
@@ -89,20 +90,20 @@ class TestSeededFile(object):
 
     def test_extension(self, f1, f2):
         assert f1.extension() == f2.extension()
-        assert f1.extension(file_type=FileType.AUDIO) == \
-            f2.extension(file_type=FileType.AUDIO)
+        assert f1.extension(file_type=FileType.AUDIO) == f2.extension(
+            file_type=FileType.AUDIO
+        )
 
     def test_mime_type(self, f1, f2):
         assert f1.mime_type() == f2.mime_type()
-        assert f1.mime_type(type_=MimeType.IMAGE) == \
-            f2.mime_type(type_=MimeType.IMAGE)
+        assert f1.mime_type(type_=MimeType.IMAGE) == f2.mime_type(type_=MimeType.IMAGE)
 
     def test_file_name(self, f1, f2):
         assert f1.file_name() == f2.file_name()
-        assert f1.file_name(file_type=FileType.SOURCE) == \
-            f2.file_name(file_type=FileType.SOURCE)
+        assert f1.file_name(file_type=FileType.SOURCE) == f2.file_name(
+            file_type=FileType.SOURCE
+        )
 
     def test_size(self, f1, f2):
         assert f1.size() == f2.size()
-        assert f1.size(minimum=8, maximum=1024) == \
-            f2.size(minimum=8, maximum=1024)
+        assert f1.size(minimum=8, maximum=1024) == f2.size(minimum=8, maximum=1024)

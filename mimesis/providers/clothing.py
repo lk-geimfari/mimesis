@@ -20,8 +20,7 @@ class Clothing(BaseProvider):
 
         :return: Clothing size.
         """
-        return self.random.choice(['L', 'M', 'S', 'XL',
-                                   'XS', 'XXL', 'XXS', 'XXXL'])
+        return self.random.choice(['L', 'M', 'S', 'XL', 'XS', 'XXL', 'XXS', 'XXXL'])
 
     def european_size(self) -> int:
         """Generate a random clothing size in European format.

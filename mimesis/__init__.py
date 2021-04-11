@@ -54,10 +54,8 @@ __all__ = [
     'Text',
     'Transport',
     'Cryptographic',
-
     # Has all:
     'Generic',
-
     # Meta:
     '__version__',
     '__title__',

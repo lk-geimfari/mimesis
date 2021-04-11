@@ -24,8 +24,7 @@ def test_passport_series_parametrized(russia):
 def test_passport_number(russia):
     result = russia.passport_number()
     assert isinstance(result, int)
-    assert (result <= 999999) and (
-        result >= 100000)
+    assert (result <= 999999) and (result >= 100000)
 
 
 def test_series_and_number(russia):
@@ -34,7 +33,8 @@ def test_series_and_number(russia):
 
 
 @pytest.mark.parametrize(
-    'gender', [
+    'gender',
+    [
         Gender.FEMALE,
         Gender.MALE,
     ],

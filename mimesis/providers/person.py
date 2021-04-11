@@ -122,8 +122,9 @@ class Person(BaseDataProvider):
         """
         return self.surname(gender)
 
-    def title(self, gender: Optional[Gender] = None,
-              title_type: Optional[TitleType] = None) -> str:
+    def title(
+        self, gender: Optional[Gender] = None, title_type: Optional[TitleType] = None
+    ) -> str:
         """Generate a random title for name.
 
         You can generate random prefix or suffix
@@ -143,8 +144,7 @@ class Person(BaseDataProvider):
         titles: List[str] = self._data['title'][gender_key][title_key]
         return self.random.choice(titles)
 
-    def full_name(self, gender: Optional[Gender] = None,
-                  reverse: bool = False) -> str:
+    def full_name(self, gender: Optional[Gender] = None, reverse: bool = False) -> str:
         """Generate a random full name.
 
         :param reverse: Return reversed full name.
@@ -192,8 +192,20 @@ class Person(BaseDataProvider):
         max_date = 2070
         default_template = 'l.d'
 
-        templates = ('U_d', 'U.d', 'U-d', 'UU-d', 'UU.d', 'UU_d',
-                     'ld', 'l-d', 'Ud', 'l.d', 'l_d', 'default')
+        templates = (
+            'U_d',
+            'U.d',
+            'U-d',
+            'UU-d',
+            'UU.d',
+            'UU_d',
+            'ld',
+            'l-d',
+            'Ud',
+            'l.d',
+            'l_d',
+            'default',
+        )
 
         if template is None:
             template = self.random.choice(templates)
@@ -202,8 +214,7 @@ class Person(BaseDataProvider):
             template = default_template
 
         if not re.fullmatch(r'[Ul\.\-\_d]*[Ul]+[Ul\.\-\_d]*', template):
-            raise ValueError(
-                "Template '{}' is not supported.".format(template))
+            raise ValueError("Template '{}' is not supported.".format(template))
 
         tags = re.findall(r'[Uld\.\-\_]', template)
 
@@ -240,8 +251,11 @@ class Person(BaseDataProvider):
 
         return password
 
-    def email(self, domains: Optional[Union[Tuple[str], List[str]]] = None,
-              unique: bool = False) -> str:
+    def email(
+        self,
+        domains: Optional[Union[Tuple[str], List[str]]] = None,
+        unique: bool = False,
+    ) -> str:
         """Generate a random email.
 
         :param domains: List of custom domains for emails.
@@ -253,8 +267,9 @@ class Person(BaseDataProvider):
             foretime10@live.com
         """
         if unique and self.seed is not None:
-            raise ValueError('You cannot use «unique» '
-                             'parameter with a seeded provider')
+            raise ValueError(
+                'You cannot use «unique» ' 'parameter with a seeded provider'
+            )
 
         if not domains:
             domains = EMAIL_DOMAINS
@@ -274,8 +289,7 @@ class Person(BaseDataProvider):
             domain=domain,
         )
 
-    def social_media_profile(self,
-                             site: Optional[SocialNetwork] = None) -> str:
+    def social_media_profile(self, site: Optional[SocialNetwork] = None) -> str:
         """Generate profile for random social network.
 
         :return: Profile in some network.
@@ -288,8 +302,7 @@ class Person(BaseDataProvider):
         url = 'https://' + website
         return url.format(self.username())
 
-    def gender(self, iso5218: bool = False,
-               symbol: bool = False) -> Union[str, int]:
+    def gender(self, iso5218: bool = False, symbol: bool = False) -> Union[str, int]:
         """Get a random gender.
 
         Get a random title of gender, code for the representation

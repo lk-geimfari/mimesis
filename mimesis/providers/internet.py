@@ -99,8 +99,9 @@ class Internet(BaseProvider):
             self.random.randint(0, self._MAX_IPV4),
         )
 
-    def ip_v4(self, with_port: bool = False,
-              port_range: PortRange = PortRange.ALL) -> str:
+    def ip_v4(
+        self, with_port: bool = False, port_range: PortRange = PortRange.ALL
+    ) -> str:
         """Generate a random IPv4 address as string.
 
         :param port_range: PortRange enum object.
@@ -128,7 +129,8 @@ class Internet(BaseProvider):
         """
         return IPv6Address(
             self.random.randint(
-                0, self._MAX_IPV6,
+                0,
+                self._MAX_IPV6,
             ),
         )
 
@@ -151,10 +153,12 @@ class Internet(BaseProvider):
             00:16:3e:25:e7:b1
         """
         mac_hex = [
-            0x00, 0x16, 0x3e,
-            self.random.randint(0x00, 0x7f),
-            self.random.randint(0x00, 0xff),
-            self.random.randint(0x00, 0xff),
+            0x00,
+            0x16,
+            0x3E,
+            self.random.randint(0x00, 0x7F),
+            self.random.randint(0x00, 0xFF),
+            self.random.randint(0x00, 0xFF),
         ]
         mac = ['{:02x}'.format(x) for x in mac_hex]
         return ':'.join(mac)
@@ -170,8 +174,9 @@ class Internet(BaseProvider):
         return self.random.choice(EMOJI)
 
     @staticmethod
-    def image_placeholder(width: Union[int, str] = 1920,
-                          height: Union[int, str] = 1080) -> str:
+    def image_placeholder(
+        width: Union[int, str] = 1920, height: Union[int, str] = 1080
+    ) -> str:
         """Generate a link to the image placeholder.
 
         :param width: Width of image.
@@ -182,10 +187,12 @@ class Internet(BaseProvider):
         return url.format(width=width, height=height)
 
     @staticmethod
-    def stock_image(width: Union[int, str] = 1920,
-                    height: Union[int, str] = 1080,
-                    keywords: Optional[KeywordsType] = None,
-                    writable: bool = False) -> Union[str, bytes]:
+    def stock_image(
+        width: Union[int, str] = 1920,
+        height: Union[int, str] = 1080,
+        keywords: Optional[KeywordsType] = None,
+        writable: bool = False,
+    ) -> Union[str, bytes]:
         """Generate random stock image (JPG/JPEG) hosted on Unsplash.
 
         See «Random search term» on https://source.unsplash.com/
@@ -215,8 +222,7 @@ class Internet(BaseProvider):
                 content: bytes = response.read()
                 return content
             except urllib.error.URLError:
-                raise urllib.error.URLError(
-                    'Required an active HTTP connection')
+                raise urllib.error.URLError('Required an active HTTP connection')
         return url
 
     def hashtags(self, quantity: int = 4) -> Union[str, List[str]]:
@@ -229,8 +235,7 @@ class Internet(BaseProvider):
         :Example:
             ['#love', '#sky', '#nice']
         """
-        tags = ['#' + self.random.choice(HASHTAGS)
-                for _ in range(quantity)]
+        tags = ['#' + self.random.choice(HASHTAGS) for _ in range(quantity)]
 
         if int(quantity) == 1:
             return tags[0]
@@ -251,8 +256,7 @@ class Internet(BaseProvider):
             tld_type=tld_type,
         )
 
-        return 'https://{}{}'.format(
-            resource, domain)
+        return 'https://{}{}'.format(resource, domain)
 
     def top_level_domain(self, tld_type: Optional[TLDType] = None) -> str:
         """Return random top level domain.

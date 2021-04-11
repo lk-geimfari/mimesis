@@ -57,8 +57,9 @@ class Generic(BaseProvider):
         Cryptographic,
     )
 
-    def __init__(self, locale: str = DEFAULT_LOCALE,
-                 seed: Optional[Seed] = None) -> None:
+    def __init__(
+        self, locale: str = DEFAULT_LOCALE, seed: Optional[Seed] = None
+    ) -> None:
         """Initialize attributes lazily."""
         super().__init__(seed=seed)
         self.locale = locale
@@ -83,8 +84,7 @@ class Generic(BaseProvider):
         :param attrname: Attribute name.
         :return: An attribute.
         """
-        attribute = object.__getattribute__(
-            self, '_' + attrname)
+        attribute = object.__getattribute__(self, '_' + attrname)
         if attribute and callable(attribute):
             self.__dict__[attrname] = attribute(
                 self.locale,
@@ -122,8 +122,10 @@ class Generic(BaseProvider):
         """
         if inspect.isclass(cls):
             if not issubclass(cls, BaseProvider):
-                raise TypeError('The provider must be a '
-                                'subclass of mimesis.providers.BaseProvider')
+                raise TypeError(
+                    'The provider must be a '
+                    'subclass of mimesis.providers.BaseProvider'
+                )
             try:
                 meta = getattr(cls, 'Meta')
                 name = getattr(meta, 'name')

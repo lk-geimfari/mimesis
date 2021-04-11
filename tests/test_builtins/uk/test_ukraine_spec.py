@@ -10,7 +10,8 @@ def ukraine():
 
 
 @pytest.mark.parametrize(
-    'gender', [
+    'gender',
+    [
         Gender.FEMALE,
         Gender.MALE,
     ],

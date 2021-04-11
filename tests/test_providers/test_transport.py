@@ -17,7 +17,6 @@ from . import patterns
 
 
 class TestTransport(object):
-
     @pytest.fixture
     def transport(self):
         return Transport()
@@ -51,7 +50,8 @@ class TestTransport(object):
         assert len(model) == len(mask)
 
     @pytest.mark.parametrize(
-        'locale', LIST_OF_LOCALES,
+        'locale',
+        LIST_OF_LOCALES,
     )
     def test_vehicle_registration_code(self, transport, locale):
         result = transport.vehicle_registration_code(locale=locale)
@@ -62,7 +62,6 @@ class TestTransport(object):
 
 
 class TestSeededTransport(object):
-
     @pytest.fixture
     def t1(self, seed):
         return Transport(seed=seed)
@@ -83,11 +82,11 @@ class TestSeededTransport(object):
 
     def test_airplane(self, t1, t2):
         assert t1.airplane() == t2.airplane()
-        assert t1.airplane(model_mask='#_#_#') == \
-               t2.airplane(model_mask='#_#_#')
+        assert t1.airplane(model_mask='#_#_#') == t2.airplane(model_mask='#_#_#')
 
     @pytest.mark.parametrize(
-        'locale', LIST_OF_LOCALES,
+        'locale',
+        LIST_OF_LOCALES,
     )
     def test_vehicle_registration_code(self, t1, t2, locale):
         a = t1.vehicle_registration_code(locale)

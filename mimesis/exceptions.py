@@ -48,8 +48,7 @@ class NonEnumerableError(TypeError):
             self.items = ''
 
     def __str__(self) -> str:
-        return self.message.format(self.items,
-                                   self.name.__name__)
+        return self.message.format(self.items, self.name.__name__)
 
 
 class UnsupportedField(ValueError):

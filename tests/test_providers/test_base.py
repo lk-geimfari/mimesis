@@ -11,15 +11,14 @@ from . import patterns
 
 
 class TestBase(object):
-
     @pytest.fixture
     def base_data_provider(self):
         return BaseDataProvider()
 
     @pytest.mark.parametrize(
-        'locale, new_locale', [
+        'locale, new_locale',
+        [
             ('en', 'ru'),
-
         ],
     )
     def test_override(self, locale, new_locale):
@@ -34,7 +33,8 @@ class TestBase(object):
         assert 'Жен.' not in provider._data['gender']
 
     @pytest.mark.parametrize(
-        'provider', [
+        'provider',
+        [
             Code,
             Cryptographic,
             Internet,
@@ -46,7 +46,8 @@ class TestBase(object):
                 pass
 
     @pytest.mark.parametrize(
-        'locale, city', [
+        'locale, city',
+        [
             ('en', 'New York'),
             ('en-gb', 'Aberystwyth'),
             ('ru', 'Москва'),
@@ -96,7 +97,8 @@ class TestBase(object):
         assert 'spaniel' not in result['animals']['dogs']
 
     @pytest.mark.parametrize(
-        'inp, out', [
+        'inp, out',
+        [
             ('EN', 'en'),
             ('DE', 'de'),
             ('RU', 'ru'),
@@ -111,12 +113,11 @@ class TestBase(object):
             BaseDataProvider(locale='nil')
 
     def test_str(self, base_data_provider):
-        assert re.match(
-            patterns.DATA_PROVIDER_STR_REGEX,
-            str(base_data_provider))
+        assert re.match(patterns.DATA_PROVIDER_STR_REGEX, str(base_data_provider))
 
     @pytest.mark.parametrize(
-        'gender, excepted', [
+        'gender, excepted',
+        [
             (Gender.MALE, 'male'),
             (Gender.FEMALE, 'female'),
             (None, ['female', 'male']),
@@ -138,7 +139,6 @@ class TestBase(object):
 
 
 class TestSeededBase(object):
-
     @pytest.fixture
     def _bases(self, seed):
         return BaseDataProvider(seed=seed), BaseDataProvider(seed=seed)

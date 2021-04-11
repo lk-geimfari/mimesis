@@ -95,8 +95,7 @@ class Business(BaseDataProvider):
         """
         return self.random.choice(CRYPTOCURRENCY_SYMBOLS)
 
-    def price(self, minimum: float = 10.00,
-              maximum: float = 1000.00) -> str:
+    def price(self, minimum: float = 10.00, maximum: float = 1000.00) -> str:
         """Generate a random price.
 
         :param minimum: Max value of price.

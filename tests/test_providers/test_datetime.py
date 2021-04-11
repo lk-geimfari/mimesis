@@ -10,7 +10,6 @@ from . import patterns
 
 
 class TestDatetime(object):
-
     @pytest.fixture
     def _datetime(self):
         return Datetime()
@@ -19,7 +18,8 @@ class TestDatetime(object):
         assert re.match(patterns.DATA_PROVIDER_STR_REGEX, str(dt))
 
     @pytest.mark.parametrize(
-        'days, objects_count', [
+        'days, objects_count',
+        [
             (7, 169),
             (14, 337),
             (28, 673),
@@ -56,7 +56,7 @@ class TestDatetime(object):
 
     def test_day_of_month(self, _datetime):
         result = _datetime.day_of_month()
-        assert ((result >= 1) or (result <= 31))
+        assert (result >= 1) or (result <= 31)
 
     def test_date(self, dt):
         date_object = dt.date(start=dt.CURRENT_YEAR, end=dt.CURRENT_YEAR)
@@ -107,7 +107,8 @@ class TestDatetime(object):
         assert result in TIMEZONES
 
     @pytest.mark.parametrize(
-        'posix, _type', [
+        'posix, _type',
+        [
             (False, str),
             (True, int),
         ],
@@ -118,7 +119,8 @@ class TestDatetime(object):
         assert isinstance(result, _type)
 
     @pytest.mark.parametrize(
-        'start, end, timezone', [
+        'start, end, timezone',
+        [
             (2014, 2019, 'Europe/Paris'),
             (2014, 2019, None),
         ],
@@ -135,7 +137,8 @@ class TestDatetime(object):
             assert dt_obj.tzinfo is None
 
     @pytest.mark.parametrize(
-        'start, end', [
+        'start, end',
+        [
             (2018, 2018),
             (2019, 2019),
         ],
@@ -155,7 +158,6 @@ class TestDatetime(object):
 
 
 class TestSeededDatetime(object):
-
     @pytest.fixture
     def d1(self, seed):
         return Datetime(seed=seed)
@@ -176,13 +178,13 @@ class TestSeededDatetime(object):
 
     def test_date(self, d1, d2):
         assert d1.date() == d2.date()
-        assert d1.date(start=1024, end=2048) == \
-               d2.date(start=1024, end=2048)
+        assert d1.date(start=1024, end=2048) == d2.date(start=1024, end=2048)
 
     def test_formatted_date(self, d1, d2):
         assert d1.formatted_date() == d2.formatted_date()
-        assert d1.formatted_date(start=1024, end=2048) == \
-               d2.formatted_date(start=1024, end=2048)
+        assert d1.formatted_date(start=1024, end=2048) == d2.formatted_date(
+            start=1024, end=2048
+        )
 
     def test_time(self, d1, d2):
         assert d1.time() == d2.time()
@@ -216,11 +218,11 @@ class TestSeededDatetime(object):
 
     def test_week_date(self, d1, d2):
         assert d1.week_date() == d2.week_date()
-        assert d1.week_date(start=2007, end=2018) == \
-               d2.week_date(start=2007, end=2018)
+        assert d1.week_date(start=2007, end=2018) == d2.week_date(start=2007, end=2018)
 
     def test_bulk_create_datetimes(self, d1, d2):
         date_start = datetime.datetime.now()
         date_end = date_start + datetime.timedelta(days=7)
-        assert d1.bulk_create_datetimes(date_start, date_end, minutes=10) == \
-               d2.bulk_create_datetimes(date_start, date_end, minutes=10)
+        assert d1.bulk_create_datetimes(
+            date_start, date_end, minutes=10
+        ) == d2.bulk_create_datetimes(date_start, date_end, minutes=10)

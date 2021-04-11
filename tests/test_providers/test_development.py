@@ -8,7 +8,6 @@ from . import patterns
 
 
 class TestDevelopment(object):
-
     @pytest.fixture
     def dev(self):
         return Development()
@@ -57,7 +56,6 @@ class TestDevelopment(object):
 
 
 class TestSeededDevelopment(object):
-
     @pytest.fixture
     def dv1(self, seed):
         return Development(seed=seed)
@@ -71,8 +69,9 @@ class TestSeededDevelopment(object):
 
     def test_version(self, dv1, dv2):
         assert dv1.version() == dv2.version()
-        assert dv1.version(calver=True, pre_release=True) == \
-               dv2.version(calver=True, pre_release=True)
+        assert dv1.version(calver=True, pre_release=True) == dv2.version(
+            calver=True, pre_release=True
+        )
 
     def test_programming_language(self, dv1, dv2):
         assert dv1.programming_language() == dv2.programming_language()
