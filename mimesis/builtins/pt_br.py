@@ -7,7 +7,7 @@ from mimesis import locales
 from mimesis.builtins.base import BaseSpecProvider
 from mimesis.typing import Seed
 
-__all__ = ['BrazilSpecProvider']
+__all__ = ["BrazilSpecProvider"]
 
 
 # TODO: Refactor this piece of s... some code.
@@ -21,7 +21,7 @@ class BrazilSpecProvider(BaseSpecProvider):
     class Meta:
         """The name of the provider."""
 
-        name = 'brazil_provider'
+        name = "brazil_provider"
 
     def cpf(self, with_mask: bool = True) -> str:
         """Get a random CPF.
@@ -55,10 +55,10 @@ class BrazilSpecProvider(BaseSpecProvider):
         second_dv = get_verifying_digit_cpf(cpf_without_dv, 11)
         cpf_without_dv.append(second_dv)
 
-        cpf = ''.join([str(i) for i in cpf_without_dv])
+        cpf = "".join([str(i) for i in cpf_without_dv])
 
         if with_mask:
-            return cpf[:3] + '.' + cpf[3:6] + '.' + cpf[6:9] + '-' + cpf[9:]
+            return cpf[:3] + "." + cpf[3:6] + "." + cpf[6:9] + "-" + cpf[9:]
         return cpf
 
     def cnpj(self, with_mask: bool = True) -> str:
@@ -98,10 +98,10 @@ class BrazilSpecProvider(BaseSpecProvider):
         second_dv = get_verifying_digit_cnpj(cnpj_without_dv, 6)
         cnpj_without_dv.append(second_dv)
 
-        cnpj = ''.join([str(i) for i in cnpj_without_dv])
+        cnpj = "".join([str(i) for i in cnpj_without_dv])
 
         if with_mask:
-            return '{}.{}.{}/{}-{}'.format(
+            return "{}.{}.{}/{}-{}".format(
                 cnpj[:2], cnpj[2:5], cnpj[5:8], cnpj[8:12], cnpj[12:]
             )
         return cnpj

@@ -10,7 +10,7 @@ from mimesis.enums import FileType, MimeType
 from mimesis.providers.base import BaseProvider
 from mimesis.providers.text import Text
 
-__all__ = ['File']
+__all__ = ["File"]
 
 
 class File(BaseProvider):
@@ -23,21 +23,21 @@ class File(BaseProvider):
         :param kwargs: Keyword arguments.
         """
         super().__init__(*args, **kwargs)
-        self.__text = Text('en', seed=self.seed)
+        self.__text = Text("en", seed=self.seed)
 
     class Meta:
         """Class for metadata."""
 
-        name = 'file'
+        name = "file"
 
-    def __sub(self, string: str = '') -> str:
+    def __sub(self, string: str = "") -> str:
         """Replace spaces in string.
 
         :param string: String.
         :return: String without spaces.
         """
-        replacer = self.random.choice(['_', '-'])
-        return re.sub(r'\s+', replacer, string.strip())
+        replacer = self.random.choice(["_", "-"])
+        return re.sub(r"\s+", replacer, string.strip())
 
     def extension(self, file_type: Optional[FileType] = None) -> str:
         """Get a random file extension from list.
@@ -73,9 +73,9 @@ class File(BaseProvider):
             56 kB
         """
         num = self.random.randint(minimum, maximum)
-        unit = self.random.choice(['bytes', 'kB', 'MB', 'GB', 'TB'])
+        unit = self.random.choice(["bytes", "kB", "MB", "GB", "TB"])
 
-        return '{num} {unit}'.format(
+        return "{num} {unit}".format(
             num=num,
             unit=unit,
         )
@@ -92,7 +92,7 @@ class File(BaseProvider):
         name = self.__text.word()
         ext = self.extension(file_type)
 
-        return '{name}{ext}'.format(
+        return "{name}{ext}".format(
             name=self.__sub(name),
             ext=ext,
         )

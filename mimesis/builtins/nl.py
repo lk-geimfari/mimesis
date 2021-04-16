@@ -8,7 +8,7 @@ from mimesis import locales
 from mimesis.builtins.base import BaseSpecProvider
 from mimesis.typing import Seed
 
-__all__ = ['NetherlandsSpecProvider']
+__all__ = ["NetherlandsSpecProvider"]
 
 
 class NetherlandsSpecProvider(BaseSpecProvider):
@@ -21,7 +21,7 @@ class NetherlandsSpecProvider(BaseSpecProvider):
     class Meta:
         """The name of the provider."""
 
-        name = 'netherlands_provider'
+        name = "netherlands_provider"
 
     def bsn(self) -> str:
         """Generate a random, but valid ``Burgerservicenummer``.

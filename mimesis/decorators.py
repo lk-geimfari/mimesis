@@ -9,12 +9,12 @@ from typing import Any, Callable, TypeVar, cast
 from mimesis import data
 from mimesis.exceptions import UnsupportedLocale
 
-__all__ = ['romanize']
+__all__ = ["romanize"]
 
-F = TypeVar('F', bound=Callable[..., Any])
+F = TypeVar("F", bound=Callable[..., Any])
 
 
-def romanize(locale: str = '') -> Callable[[F], F]:
+def romanize(locale: str = "") -> Callable[[F], F]:
     """Romanize the cyrillic text.
 
     Transliterate the cyrillic script into the latin alphabet.
@@ -42,7 +42,7 @@ def romanize(locale: str = '') -> Callable[[F], F]:
                 raise UnsupportedLocale(locale)
 
             result = func(*args, **kwargs)
-            txt = ''.join([alphabet[i] for i in result if i in alphabet])
+            txt = "".join([alphabet[i] for i in result if i in alphabet])
             return txt
 
         return cast(F, wrapper)

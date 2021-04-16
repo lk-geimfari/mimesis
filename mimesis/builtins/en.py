@@ -8,7 +8,7 @@ from mimesis import locales
 from mimesis.builtins.base import BaseSpecProvider
 from mimesis.typing import Seed
 
-__all__ = ['USASpecProvider']
+__all__ = ["USASpecProvider"]
 
 
 class USASpecProvider(BaseSpecProvider):
@@ -21,9 +21,9 @@ class USASpecProvider(BaseSpecProvider):
     class Meta:
         """The name of the provider."""
 
-        name = 'usa_provider'
+        name = "usa_provider"
 
-    def tracking_number(self, service: str = 'usps') -> str:
+    def tracking_number(self, service: str = "usps") -> str:
         """Generate random tracking number.
 
         Supported services: USPS, FedEx and UPS.
@@ -33,19 +33,19 @@ class USASpecProvider(BaseSpecProvider):
         """
         service = service.lower()
 
-        if service not in ('usps', 'fedex', 'ups'):
-            raise ValueError('Unsupported post service')
+        if service not in ("usps", "fedex", "ups"):
+            raise ValueError("Unsupported post service")
 
         services = {
-            'usps': (
-                '#### #### #### #### ####',
-                '@@ ### ### ### US',
+            "usps": (
+                "#### #### #### #### ####",
+                "@@ ### ### ### US",
             ),
-            'fedex': (
-                '#### #### ####',
-                '#### #### #### ###',
+            "fedex": (
+                "#### #### ####",
+                "#### #### #### ###",
             ),
-            'ups': ('1Z@####@##########',),
+            "ups": ("1Z@####@##########",),
         }
         mask = self.random.choice(services[service])
         return self.random.custom_code(mask=mask)
@@ -62,13 +62,13 @@ class USASpecProvider(BaseSpecProvider):
         if area == 666:
             area = 665
 
-        return '{:03}-{:02}-{:04}'.format(
+        return "{:03}-{:02}-{:04}".format(
             area,
             self.random.randint(1, 99),
             self.random.randint(1, 9999),
         )
 
-    def personality(self, category: str = 'mbti') -> Union[str, int]:
+    def personality(self, category: str = "mbti") -> Union[str, int]:
         """Generate a type of personality.
 
         :param category: Category.
@@ -79,25 +79,25 @@ class USASpecProvider(BaseSpecProvider):
             ISFJ.
         """
         mbtis = (
-            'ISFJ',
-            'ISTJ',
-            'INFJ',
-            'INTJ',
-            'ISTP',
-            'ISFP',
-            'INFP',
-            'INTP',
-            'ESTP',
-            'ESFP',
-            'ENFP',
-            'ENTP',
-            'ESTJ',
-            'ESFJ',
-            'ENFJ',
-            'ENTJ',
+            "ISFJ",
+            "ISTJ",
+            "INFJ",
+            "INTJ",
+            "ISTP",
+            "ISFP",
+            "INFP",
+            "INTP",
+            "ESTP",
+            "ESFP",
+            "ENFP",
+            "ENTP",
+            "ESTJ",
+            "ESFJ",
+            "ENFJ",
+            "ENTJ",
         )
 
-        if category.lower() == 'rheti':
+        if category.lower() == "rheti":
             return self.random.randint(1, 10)
 
         return self.random.choice(mbtis)

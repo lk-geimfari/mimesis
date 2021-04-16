@@ -11,7 +11,7 @@ from mimesis.data import GMT_OFFSETS, ROMAN_NUMS, TIMEZONES
 from mimesis.providers.base import BaseDataProvider
 from mimesis.typing import Date, DateTime, Time
 
-__all__ = ['Datetime']
+__all__ = ["Datetime"]
 
 
 class Datetime(BaseDataProvider):
@@ -26,13 +26,13 @@ class Datetime(BaseDataProvider):
         :param locale: Current locale.
         """
         super().__init__(*args, **kwargs)
-        self._datafile = 'datetime.json'
+        self._datafile = "datetime.json"
         self._pull(self._datafile)
 
     class Meta:
         """Class for metadata."""
 
-        name = 'datetime'
+        name = "datetime"
 
     @staticmethod
     def bulk_create_datetimes(
@@ -67,10 +67,10 @@ class Datetime(BaseDataProvider):
         dt_objects = []
 
         if not date_start and not date_end:
-            raise ValueError('You must pass date_start and date_end')
+            raise ValueError("You must pass date_start and date_end")
 
         if date_end < date_start:
-            raise ValueError('date_start can not be larger than date_end')
+            raise ValueError("date_start can not be larger than date_end")
 
         while date_start <= date_end:
             date_start += timedelta(**kwargs)
@@ -87,7 +87,7 @@ class Datetime(BaseDataProvider):
         """
         year = self.year(start, end)
         week = self.random.randint(1, 52)
-        return '{year}-W{week}'.format(
+        return "{year}-W{week}".format(
             year=year,
             week=week,
         )
@@ -98,8 +98,8 @@ class Datetime(BaseDataProvider):
         :param abbr: Abbreviated day name.
         :return: Day of the week.
         """
-        key = 'abbr' if abbr else 'name'
-        days: List[str] = self._data['day'].get(key)
+        key = "abbr" if abbr else "name"
+        days: List[str] = self._data["day"].get(key)
         return self.random.choice(days)
 
     def month(self, abbr: bool = False) -> str:
@@ -108,8 +108,8 @@ class Datetime(BaseDataProvider):
         :param abbr: Abbreviated month name.
         :return: Month name.
         """
-        key = 'abbr' if abbr else 'name'
-        months: List[str] = self._data['month'].get(key)
+        key = "abbr" if abbr else "name"
+        months: List[str] = self._data["month"].get(key)
         return self.random.choice(months)
 
     def year(self, minimum: int = 1990, maximum: int = CURRENT_YEAR) -> int:
@@ -133,7 +133,7 @@ class Datetime(BaseDataProvider):
 
         :return: Periodicity.
         """
-        periodicity: List[str] = self._data['periodicity']
+        periodicity: List[str] = self._data["periodicity"]
         return self.random.choice(periodicity)
 
     def date(self, start: int = 2000, end: int = CURRENT_YEAR) -> Date:
@@ -149,7 +149,7 @@ class Datetime(BaseDataProvider):
         date_object = date(year, month, day)
         return date_object
 
-    def formatted_date(self, fmt: str = '', **kwargs: Any) -> str:
+    def formatted_date(self, fmt: str = "", **kwargs: Any) -> str:
         """Generate random date as string.
 
         :param fmt: The format of date, if None then use standard
@@ -160,7 +160,7 @@ class Datetime(BaseDataProvider):
         date_obj = self.date(**kwargs)
 
         if not fmt:
-            fmt = self._data['formats'].get('date')
+            fmt = self._data["formats"].get("date")
 
         return date_obj.strftime(fmt)
 
@@ -177,7 +177,7 @@ class Datetime(BaseDataProvider):
         )
         return random_time
 
-    def formatted_time(self, fmt: str = '') -> str:
+    def formatted_time(self, fmt: str = "") -> str:
         """Generate string formatted time.
 
         :param fmt: The format of time, if None then use standard
@@ -187,7 +187,7 @@ class Datetime(BaseDataProvider):
         time_obj = self.time()
 
         if not fmt:
-            fmt = self._data['formats'].get('time')
+            fmt = self._data["formats"].get("time")
         return time_obj.strftime(fmt)
 
     def day_of_month(self) -> int:
@@ -227,13 +227,13 @@ class Datetime(BaseDataProvider):
         )
         if timezone:
             if not pytz:
-                raise ImportError('Timezones are supported only with pytz')
+                raise ImportError("Timezones are supported only with pytz")
             tz = pytz.timezone(timezone)
             datetime_obj = tz.localize(datetime_obj)
 
         return datetime_obj
 
-    def formatted_datetime(self, fmt: str = '', **kwargs: Any) -> str:
+    def formatted_datetime(self, fmt: str = "", **kwargs: Any) -> str:
         """Generate datetime string in human readable format.
 
         :param fmt: Custom format (default is format for current locale)
@@ -243,9 +243,9 @@ class Datetime(BaseDataProvider):
         dt_obj = self.datetime(**kwargs)
 
         if not fmt:
-            date_fmt = self._data['formats'].get('date')
-            time_fmt = self._data['formats'].get('time')
-            fmt = '{} {}'.format(date_fmt, time_fmt)
+            date_fmt = self._data["formats"].get("date")
+            time_fmt = self._data["formats"].get("time")
+            fmt = "{} {}".format(date_fmt, time_fmt)
 
         return dt_obj.strftime(fmt)
 
@@ -261,4 +261,4 @@ class Datetime(BaseDataProvider):
         if posix:
             return timegm(stamp.utctimetuple())
 
-        return stamp.strftime('%Y-%m-%dT%H:%M:%SZ')
+        return stamp.strftime("%Y-%m-%dT%H:%M:%SZ")

@@ -8,7 +8,7 @@ from mimesis.builtins.base import BaseSpecProvider
 from mimesis.enums import Gender
 from mimesis.typing import Seed
 
-__all__ = ['UkraineSpecProvider']
+__all__ = ["UkraineSpecProvider"]
 
 
 class UkraineSpecProvider(BaseSpecProvider):
@@ -22,7 +22,7 @@ class UkraineSpecProvider(BaseSpecProvider):
     class Meta:
         """The name of the provider."""
 
-        name = 'ukraine_provider'
+        name = "ukraine_provider"
 
     def patronymic(self, gender: Optional[Gender] = None) -> str:
         """Generate random patronymic name.
@@ -32,5 +32,5 @@ class UkraineSpecProvider(BaseSpecProvider):
         :return: Patronymic name.
         """
         gender = self._validate_enum(gender, Gender)
-        patronymics: List[str] = self._data['patronymic'][gender]
+        patronymics: List[str] = self._data["patronymic"][gender]
         return self.random.choice(patronymics)

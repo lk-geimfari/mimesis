@@ -14,7 +14,7 @@ from mimesis.data import (
 )
 from mimesis.providers.base import BaseProvider
 
-__all__ = ['Transport']
+__all__ = ["Transport"]
 
 
 class Transport(BaseProvider):
@@ -31,9 +31,9 @@ class Transport(BaseProvider):
     class Meta:
         """Class for metadata."""
 
-        name = 'transport'
+        name = "transport"
 
-    def truck(self, model_mask: str = '#### @@') -> str:
+    def truck(self, model_mask: str = "#### @@") -> str:
         """Generate a truck model.
 
         :param model_mask: Mask of truck model. Here '@' is a
@@ -43,7 +43,7 @@ class Transport(BaseProvider):
         :Example:
             Caledon-966O.
         """
-        return '{}-{}'.format(
+        return "{}-{}".format(
             self.random.choice(TRUCKS),
             self.random.custom_code(model_mask),
         )
@@ -68,7 +68,7 @@ class Transport(BaseProvider):
         """
         return self.random.choice(CARS)
 
-    def airplane(self, model_mask: str = '###') -> str:
+    def airplane(self, model_mask: str = "###") -> str:
         """Generate a dummy airplane model.
 
         :param model_mask: Mask of truck model. Here '@' is a
@@ -80,7 +80,7 @@ class Transport(BaseProvider):
         """
         model = self.random.custom_code(mask=model_mask)
         plane = self.random.choice(AIRPLANES)
-        return '{} {}'.format(plane, model)
+        return "{} {}".format(plane, model)
 
     def vehicle_registration_code(self, locale: Optional[str] = None) -> str:
         """Get vehicle registration code of country.

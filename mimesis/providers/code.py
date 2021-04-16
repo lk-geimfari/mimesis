@@ -15,7 +15,7 @@ from mimesis.enums import EANFormat, ISBNFormat
 from mimesis.providers.base import BaseProvider
 from mimesis.shortcuts import luhn_checksum
 
-__all__ = ['Code']
+__all__ = ["Code"]
 
 
 class Code(BaseProvider):
@@ -31,7 +31,7 @@ class Code(BaseProvider):
     class Meta:
         """Class for metadata."""
 
-        name = 'code'
+        name = "code"
 
     def locale_code(self) -> str:
         """Get a random locale code (MS-LCID).
@@ -43,7 +43,7 @@ class Code(BaseProvider):
         """
         return self.random.choice(LOCALE_CODES)
 
-    def issn(self, mask: str = '####-####') -> str:
+    def issn(self, mask: str = "####-####") -> str:
         """Generate a random ISSN.
 
         :param mask: Mask of ISSN.
@@ -51,7 +51,7 @@ class Code(BaseProvider):
         """
         return self.random.custom_code(mask=mask)
 
-    def isbn(self, fmt: Optional[ISBNFormat] = None, locale: str = 'en') -> str:
+    def isbn(self, fmt: Optional[ISBNFormat] = None, locale: str = "en") -> str:
         """Generate ISBN for current locale.
 
         To change ISBN format, pass parameter ``fmt`` with needed value of
@@ -92,7 +92,7 @@ class Code(BaseProvider):
         num = num + str(self.random.randint(100000, 999999))
         return num + luhn_checksum(num)
 
-    def pin(self, mask: str = '####') -> str:
+    def pin(self, mask: str = "####") -> str:
         """Generate a random PIN code.
 
         :param mask: Mask of pin code.

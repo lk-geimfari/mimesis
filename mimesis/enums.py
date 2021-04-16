@@ -34,8 +34,8 @@ class Gender(Enum):
     takes argument ``gender``.
     """
 
-    FEMALE = 'female'
-    MALE = 'male'
+    FEMALE = "female"
+    MALE = "male"
 
 
 class TitleType(Enum):
@@ -44,8 +44,8 @@ class TitleType(Enum):
     An argument for :meth:`~mimesis.Person.title()`.
     """
 
-    TYPICAL = 'typical'
-    ACADEMIC = 'academic'
+    TYPICAL = "typical"
+    ACADEMIC = "academic"
 
 
 class CardType(Enum):
@@ -54,20 +54,20 @@ class CardType(Enum):
     An argument for :meth:`~mimesis.Payment.credit_card_number()`.
     """
 
-    MASTER_CARD = 'MasterCard'
-    VISA = 'Visa'
-    AMERICAN_EXPRESS = 'American Express'
+    MASTER_CARD = "MasterCard"
+    VISA = "Visa"
+    AMERICAN_EXPRESS = "American Express"
 
 
 class Algorithm(Enum):
     """Provides algorithms which available."""
 
-    MD5 = 'md5'
-    SHA1 = 'sha1'
-    SHA224 = 'sha224'
-    SHA256 = 'sha256'
-    SHA384 = 'sha384'
-    SHA512 = 'sha512'
+    MD5 = "md5"
+    SHA1 = "sha1"
+    SHA224 = "sha224"
+    SHA256 = "sha256"
+    SHA384 = "sha384"
+    SHA512 = "sha512"
 
 
 class TLDType(Enum):
@@ -76,11 +76,11 @@ class TLDType(Enum):
     An argument for :meth:`~mimesis.Internet.top_level_domain()`.
     """
 
-    CCTLD = 'cctld'
-    GTLD = 'gtld'
-    GEOTLD = 'geotld'
-    UTLD = 'utld'
-    STLD = 'stld'
+    CCTLD = "cctld"
+    GTLD = "gtld"
+    GEOTLD = "geotld"
+    UTLD = "utld"
+    STLD = "stld"
 
 
 class Layer(Enum):
@@ -89,26 +89,26 @@ class Layer(Enum):
     An argument for :meth:`~mimesis.Internet.network_protocol()`.
     """
 
-    APPLICATION = 'application'
-    DATA_LINK = 'data_link'
-    NETWORK = 'network'
-    PHYSICAL = 'physical'
-    PRESENTATION = 'presentation'
-    SESSION = 'session'
-    TRANSPORT = 'transport'
+    APPLICATION = "application"
+    DATA_LINK = "data_link"
+    NETWORK = "network"
+    PHYSICAL = "physical"
+    PRESENTATION = "presentation"
+    SESSION = "session"
+    TRANSPORT = "transport"
 
 
 class FileType(Enum):
     """Provides file types."""
 
-    SOURCE = 'source'
-    TEXT = 'text'
-    DATA = 'data'
-    AUDIO = 'audio'
-    VIDEO = 'video'
-    IMAGE = 'image'
-    EXECUTABLE = 'executable'
-    COMPRESSED = 'compressed'
+    SOURCE = "source"
+    TEXT = "text"
+    DATA = "data"
+    AUDIO = "audio"
+    VIDEO = "video"
+    IMAGE = "image"
+    EXECUTABLE = "executable"
+    COMPRESSED = "compressed"
 
 
 class MimeType(Enum):
@@ -117,12 +117,12 @@ class MimeType(Enum):
     An argument for :meth:`~mimesis.File.mime_type()`.
     """
 
-    APPLICATION = 'application'
-    AUDIO = 'audio'
-    IMAGE = 'image'
-    MESSAGE = 'message'
-    TEXT = 'text'
-    VIDEO = 'video'
+    APPLICATION = "application"
+    AUDIO = "audio"
+    IMAGE = "image"
+    MESSAGE = "message"
+    TEXT = "text"
+    VIDEO = "video"
 
 
 class MetricPrefixSign(Enum):
@@ -131,8 +131,8 @@ class MetricPrefixSign(Enum):
     An argument for :meth:`~mimesis.Science.metric_prefix()``.
     """
 
-    POSITIVE = 'positive'
-    NEGATIVE = 'negative'
+    POSITIVE = "positive"
+    NEGATIVE = "negative"
 
 
 class CountryCode(Enum):
@@ -141,11 +141,11 @@ class CountryCode(Enum):
     An argument for :meth:`~mimesis.Address.country_code()`.
     """
 
-    A2 = 'a2'
-    A3 = 'a3'
-    NUMERIC = 'numeric'
-    IOC = 'ioc'
-    FIFA = 'fifa'
+    A2 = "a2"
+    A3 = "a3"
+    NUMERIC = "numeric"
+    IOC = "ioc"
+    FIFA = "fifa"
 
 
 class ISBNFormat(Enum):
@@ -154,8 +154,8 @@ class ISBNFormat(Enum):
     An argument for :meth:`~mimesis.Code.isbn()`.
     """
 
-    ISBN13 = 'isbn-13'
-    ISBN10 = 'isbn-10'
+    ISBN13 = "isbn-13"
+    ISBN10 = "isbn-10"
 
 
 class EANFormat(Enum):
@@ -164,8 +164,8 @@ class EANFormat(Enum):
     An argument for :meth:`~mimesis.Code.ean()`.
     """
 
-    EAN8 = 'ean-8'
-    EAN13 = 'ean-13'
+    EAN8 = "ean-8"
+    EAN13 = "ean-13"
 
 
 class SocialNetwork(Enum):
@@ -174,10 +174,10 @@ class SocialNetwork(Enum):
     An argument for :meth:`~mimesis.Person.social_media_profile()``.
     """
 
-    FACEBOOK = 'facebook'
-    TWITTER = 'twitter'
-    INSTAGRAM = 'instagram'
-    VK = 'vk'
+    FACEBOOK = "facebook"
+    TWITTER = "twitter"
+    INSTAGRAM = "instagram"
+    VK = "vk"
 
 
 class MeasureUnit(Enum):
@@ -186,28 +186,28 @@ class MeasureUnit(Enum):
     An argument for :meth:`~mimesis.Science.measure_unit()`.
     """
 
-    MASS = ('gram', 'gr')
-    INFORMATION = ('byte', 'b')
-    THERMODYNAMIC_TEMPERATURE = ('kelvin', 'K')
-    AMOUNT_OF_SUBSTANCE = ('mole', 'mol')
-    ANGLE = ('radian', 'r')
-    SOLID_ANGLE = ('steradian', '㏛')
-    FREQUENCY = ('hertz', 'Hz')
-    FORCE = ('newton', 'N')
-    PRESSURE = ('pascal', 'P')
-    ENERGY = ('joule', 'J')
-    POWER = ('watt', 'W')
-    FLUX = ('watt', 'W')
-    ELECTRIC_CHARGE = ('coulomb', 'C')
-    VOLTAGE = ('volt', 'V')
-    ELECTRIC_CAPACITANCE = ('farad', 'F')
-    ELECTRIC_RESISTANCE = ('ohm', 'Ω')
-    ELECTRICAL_CONDUCTANCE = ('siemens', 'S')
-    MAGNETIC_FLUX = ('weber', 'Wb')
-    MAGNETIC_FLUX_DENSITY = ('tesla', 'T')
-    INDUCTANCE = ('henry', 'H')
-    TEMPERATURE = ('Celsius', '°C')
-    RADIOACTIVITY = ('becquerel', 'Bq')
+    MASS = ("gram", "gr")
+    INFORMATION = ("byte", "b")
+    THERMODYNAMIC_TEMPERATURE = ("kelvin", "K")
+    AMOUNT_OF_SUBSTANCE = ("mole", "mol")
+    ANGLE = ("radian", "r")
+    SOLID_ANGLE = ("steradian", "㏛")
+    FREQUENCY = ("hertz", "Hz")
+    FORCE = ("newton", "N")
+    PRESSURE = ("pascal", "P")
+    ENERGY = ("joule", "J")
+    POWER = ("watt", "W")
+    FLUX = ("watt", "W")
+    ELECTRIC_CHARGE = ("coulomb", "C")
+    VOLTAGE = ("volt", "V")
+    ELECTRIC_CAPACITANCE = ("farad", "F")
+    ELECTRIC_RESISTANCE = ("ohm", "Ω")
+    ELECTRICAL_CONDUCTANCE = ("siemens", "S")
+    MAGNETIC_FLUX = ("weber", "Wb")
+    MAGNETIC_FLUX_DENSITY = ("tesla", "T")
+    INDUCTANCE = ("henry", "H")
+    TEMPERATURE = ("Celsius", "°C")
+    RADIOACTIVITY = ("becquerel", "Bq")
 
 
 class NumTypes(Enum):
@@ -216,7 +216,7 @@ class NumTypes(Enum):
     An argument for :meth:`~mimesis.Numbers.matrix()`.
     """
 
-    FLOATS = 'floats'
-    INTEGERS = 'integers'
-    COMPLEXES = 'complexes'
-    DECIMALS = 'decimals'
+    FLOATS = "floats"
+    INTEGERS = "integers"
+    COMPLEXES = "complexes"
+    DECIMALS = "decimals"

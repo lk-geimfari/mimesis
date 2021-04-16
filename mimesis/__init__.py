@@ -33,43 +33,43 @@ from .providers import (
 )
 
 __all__ = [
-    'Address',
-    'BaseDataProvider',
-    'BaseProvider',
-    'Business',
-    'Clothing',
-    'Code',
-    'Choice',
-    'Datetime',
-    'Development',
-    'File',
-    'Food',
-    'Hardware',
-    'Internet',
-    'Numbers',
-    'Path',
-    'Payment',
-    'Person',
-    'Science',
-    'Text',
-    'Transport',
-    'Cryptographic',
+    "Address",
+    "BaseDataProvider",
+    "BaseProvider",
+    "Business",
+    "Clothing",
+    "Code",
+    "Choice",
+    "Datetime",
+    "Development",
+    "File",
+    "Food",
+    "Hardware",
+    "Internet",
+    "Numbers",
+    "Path",
+    "Payment",
+    "Person",
+    "Science",
+    "Text",
+    "Transport",
+    "Cryptographic",
     # Has all:
-    'Generic',
+    "Generic",
     # Meta:
-    '__version__',
-    '__title__',
-    '__description__',
-    '__url__',
-    '__author__',
-    '__author_email__',
-    '__license__',
+    "__version__",
+    "__title__",
+    "__description__",
+    "__url__",
+    "__author__",
+    "__author_email__",
+    "__license__",
 ]
 
-__version__ = '5.0.0'
-__title__ = 'mimesis'
-__description__ = 'Mimesis: fake data generator.'
-__url__ = 'https://github.com/lk-geimfari/mimesis'
-__author__ = 'Isaak Uchakaev (Likid Geimfari)'
-__author_email__ = 'likid.geimfari@gmail.com'
-__license__ = 'MIT License'
+__version__ = "5.0.0"
+__title__ = "mimesis"
+__description__ = "Mimesis: fake data generator."
+__url__ = "https://github.com/lk-geimfari/mimesis"
+__author__ = "Isaak Uchakaev (Likid Geimfari)"
+__author_email__ = "likid.geimfari@gmail.com"
+__license__ = "MIT License"

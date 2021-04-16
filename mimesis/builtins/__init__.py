@@ -13,13 +13,13 @@ from .ru import RussiaSpecProvider
 from .uk import UkraineSpecProvider
 
 __all__ = [
-    'USASpecProvider',
-    'RussiaSpecProvider',
-    'BrazilSpecProvider',
-    'GermanySpecProvider',
-    'NetherlandsSpecProvider',
-    'UkraineSpecProvider',
-    'PolandSpecProvider',
-    'DenmarkSpecProvider',
-    'ItalySpecProvider',
+    "USASpecProvider",
+    "RussiaSpecProvider",
+    "BrazilSpecProvider",
+    "GermanySpecProvider",
+    "NetherlandsSpecProvider",
+    "UkraineSpecProvider",
+    "PolandSpecProvider",
+    "DenmarkSpecProvider",
+    "ItalySpecProvider",
 ]

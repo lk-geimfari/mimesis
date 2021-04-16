@@ -5,7 +5,7 @@
 from mimesis.data import LICENSES, OS, PROGRAMMING_LANGS
 from mimesis.providers.base import BaseProvider
 
-__all__ = ['Development']
+__all__ = ["Development"]
 
 
 class Development(BaseProvider):
@@ -14,7 +14,7 @@ class Development(BaseProvider):
     class Meta:
         """Class for metadata."""
 
-        name = 'development'
+        name = "development"
 
     def software_license(self) -> str:
         """Get a random software license.
@@ -37,7 +37,7 @@ class Development(BaseProvider):
             0.2.1
         """
         # TODO: Optimize
-        version = '{}.{}.{}'
+        version = "{}.{}.{}"
         major, minor, patch = self.random.randints(3, 0, 10)
 
         if calver:
@@ -49,13 +49,13 @@ class Development(BaseProvider):
             major = self.random.randint(2016, 2018)
             return version.format(major, minor, patch)
 
-        version = '{}.{}.{}'.format(major, minor, patch)
+        version = "{}.{}.{}".format(major, minor, patch)
 
         if pre_release:
-            suffixes = ('alpha', 'beta', 'rc')
+            suffixes = ("alpha", "beta", "rc")
             suffix = self.random.choice(suffixes)
             number = self.random.randint(1, 11)
-            return '{}-{}.{}'.format(version, suffix, number)
+            return "{}-{}.{}".format(version, suffix, number)
 
         return version
 

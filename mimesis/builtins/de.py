@@ -8,7 +8,7 @@ from mimesis import locales
 from mimesis.builtins.base import BaseSpecProvider
 from mimesis.typing import Seed
 
-__all__ = ['GermanySpecProvider']
+__all__ = ["GermanySpecProvider"]
 
 
 class GermanySpecProvider(BaseSpecProvider):
@@ -22,7 +22,7 @@ class GermanySpecProvider(BaseSpecProvider):
     class Meta:
         """The name of the provider."""
 
-        name = 'germany_provider'
+        name = "germany_provider"
 
     def noun(self, plural: bool = False) -> str:
         """Return a random noun in German.
@@ -30,6 +30,6 @@ class GermanySpecProvider(BaseSpecProvider):
         :param plural: Return noun in plural.
         :return: Noun.
         """
-        key = 'plural' if plural else 'noun'
+        key = "plural" if plural else "noun"
         nouns: List[str] = self._data[key]
         return self.random.choice(nouns)

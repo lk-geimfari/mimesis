@@ -5,7 +5,7 @@ from typing import Any, List
 
 from mimesis.providers.base import BaseDataProvider
 
-__all__ = ['Food']
+__all__ = ["Food"]
 
 
 class Food(BaseDataProvider):
@@ -17,13 +17,13 @@ class Food(BaseDataProvider):
         :param locale: Current locale.
         """
         super().__init__(*args, **kwargs)
-        self._datafile = 'food.json'
+        self._datafile = "food.json"
         self._pull(self._datafile)
 
     class Meta:
         """Class for metadata."""
 
-        name = 'food'
+        name = "food"
 
     def _choice_from(self, key: str) -> str:
         """Choice random element."""
@@ -38,7 +38,7 @@ class Food(BaseDataProvider):
         :Example:
             Tomato.
         """
-        return self._choice_from('vegetables')
+        return self._choice_from("vegetables")
 
     def fruit(self) -> str:
         """Get a random fruit or berry.
@@ -48,7 +48,7 @@ class Food(BaseDataProvider):
         :Example:
             Banana.
         """
-        return self._choice_from('fruits')
+        return self._choice_from("fruits")
 
     def dish(self) -> str:
         """Get a random dish.
@@ -58,7 +58,7 @@ class Food(BaseDataProvider):
         :Example:
             Ratatouille.
         """
-        return self._choice_from('dishes')
+        return self._choice_from("dishes")
 
     def spices(self) -> str:
         """Get a random spices or herbs.
@@ -68,7 +68,7 @@ class Food(BaseDataProvider):
         :Example:
             Anise.
         """
-        return self._choice_from('spices')
+        return self._choice_from("spices")
 
     def drink(self) -> str:
         """Get a random drink.
@@ -78,4 +78,4 @@ class Food(BaseDataProvider):
         :Example:
             Vodka.
         """
-        return self._choice_from('drinks')
+        return self._choice_from("drinks")

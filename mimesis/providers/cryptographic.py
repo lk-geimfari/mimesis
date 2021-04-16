@@ -11,7 +11,7 @@ from mimesis.enums import Algorithm
 from mimesis.providers.base import BaseProvider
 from mimesis.providers.text import Text
 
-__all__ = ['Cryptographic']
+__all__ = ["Cryptographic"]
 
 
 class Cryptographic(BaseProvider):
@@ -23,12 +23,12 @@ class Cryptographic(BaseProvider):
         :param seed: Seed.
         """
         super().__init__(*args, **kwargs)
-        self.__words = Text('en')._data.get('words', {})
+        self.__words = Text("en")._data.get("words", {})
 
     class Meta:
         """Class for metadata."""
 
-        name = 'cryptographic'
+        name = "cryptographic"
 
     @staticmethod
     def uuid(as_object: bool = False) -> Union[UUID, str]:
@@ -127,8 +127,8 @@ class Cryptographic(BaseProvider):
         :return: Mnemonic phrase.
         """
         if not separator:
-            separator = ' '
+            separator = " "
 
-        words = self.__words['normal']
+        words = self.__words["normal"]
         words_generator = (self.random.choice(words) for _ in range(length))
-        return '{}'.format(separator).join(words_generator)
+        return "{}".format(separator).join(words_generator)

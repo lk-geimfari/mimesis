@@ -24,7 +24,7 @@ from mimesis.providers.base import BaseProvider
 from mimesis.providers.file import File
 from mimesis.typing import KeywordsType
 
-__all__ = ['Internet']
+__all__ = ["Internet"]
 
 
 class Internet(BaseProvider):
@@ -44,7 +44,7 @@ class Internet(BaseProvider):
     class Meta:
         """Class for metadata."""
 
-        name = 'internet'
+        name = "internet"
 
     def content_type(self, mime_type: Optional[MimeType] = None) -> str:
         """Get a random HTTP content type.
@@ -55,7 +55,7 @@ class Internet(BaseProvider):
             Content-Type: application/json
         """
         fmt = self.__file.mime_type(type_=mime_type)
-        return 'Content-Type: {}'.format(fmt)
+        return "Content-Type: {}".format(fmt)
 
     def http_status_message(self) -> str:
         """Get a random HTTP status message.
@@ -115,7 +115,7 @@ class Internet(BaseProvider):
 
         if with_port:
             port = self.port(port_range=port_range)
-            return '{}:{}'.format(ip, port)
+            return "{}:{}".format(ip, port)
 
         return ip
 
@@ -160,8 +160,8 @@ class Internet(BaseProvider):
             self.random.randint(0x00, 0xFF),
             self.random.randint(0x00, 0xFF),
         ]
-        mac = ['{:02x}'.format(x) for x in mac_hex]
-        return ':'.join(mac)
+        mac = ["{:02x}".format(x) for x in mac_hex]
+        return ":".join(mac)
 
     def emoji(self) -> str:
         """Get a random emoji shortcut code.
@@ -183,7 +183,7 @@ class Internet(BaseProvider):
         :param height: Height of image.
         :return: URL to image placeholder.
         """
-        url = 'http://placehold.it/{width}x{height}'
+        url = "http://placehold.it/{width}x{height}"
         return url.format(width=width, height=height)
 
     @staticmethod
@@ -207,12 +207,12 @@ class Internet(BaseProvider):
         :param writable: Return image as sequence ob bytes.
         :return: Link to the image.
         """
-        api_url = 'https://source.unsplash.com/{}x{}?{}'
+        api_url = "https://source.unsplash.com/{}x{}?{}"
 
         if keywords is not None:
-            keywords_str = ','.join(keywords)
+            keywords_str = ",".join(keywords)
         else:
-            keywords_str = ''
+            keywords_str = ""
 
         url = api_url.format(width, height, keywords_str)
 
@@ -222,7 +222,7 @@ class Internet(BaseProvider):
                 content: bytes = response.read()
                 return content
             except urllib.error.URLError:
-                raise urllib.error.URLError('Required an active HTTP connection')
+                raise urllib.error.URLError("Required an active HTTP connection")
         return url
 
     def hashtags(self, quantity: int = 4) -> Union[str, List[str]]:
@@ -235,7 +235,7 @@ class Internet(BaseProvider):
         :Example:
             ['#love', '#sky', '#nice']
         """
-        tags = ['#' + self.random.choice(HASHTAGS) for _ in range(quantity)]
+        tags = ["#" + self.random.choice(HASHTAGS) for _ in range(quantity)]
 
         if int(quantity) == 1:
             return tags[0]
@@ -256,7 +256,7 @@ class Internet(BaseProvider):
             tld_type=tld_type,
         )
 
-        return 'https://{}{}'.format(resource, domain)
+        return "https://{}{}".format(resource, domain)
 
     def top_level_domain(self, tld_type: Optional[TLDType] = None) -> str:
         """Return random top level domain.

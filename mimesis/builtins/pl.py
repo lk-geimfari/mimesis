@@ -10,7 +10,7 @@ from mimesis.enums import Gender
 from mimesis.providers import Datetime
 from mimesis.typing import DateTime, Seed
 
-__all__ = ['PolandSpecProvider']
+__all__ = ["PolandSpecProvider"]
 
 
 class PolandSpecProvider(BaseSpecProvider):
@@ -23,7 +23,7 @@ class PolandSpecProvider(BaseSpecProvider):
     class Meta:
         """The name of the provider."""
 
-        name = 'poland_provider'
+        name = "poland_provider"
 
     def nip(self) -> str:
         """Generate random valid 10-digit NIP.
@@ -39,7 +39,7 @@ class PolandSpecProvider(BaseSpecProvider):
         if checksum_digit > 9:
             return self.nip()
         nip_digits.append(checksum_digit)
-        return ''.join(str(d) for d in nip_digits)
+        return "".join(str(d) for d in nip_digits)
 
     def pesel(
         self, birth_date: Optional[DateTime] = None, gender: Optional[Gender] = None
@@ -68,10 +68,10 @@ class PolandSpecProvider(BaseSpecProvider):
         elif 2200 <= year <= 2299:
             month += 60
 
-        pesel_digits += [int(d) for d in '{:02d}'.format(month)]
-        pesel_digits += [int(d) for d in '{:02d}'.format(day)]
+        pesel_digits += [int(d) for d in "{:02d}".format(month)]
+        pesel_digits += [int(d) for d in "{:02d}".format(day)]
         series_number = self.random.randint(0, 999)
-        pesel_digits += [int(d) for d in '{:03d}'.format(series_number)]
+        pesel_digits += [int(d) for d in "{:03d}".format(series_number)]
 
         if gender == Gender.MALE:
             gender_digit = self.random.choice((1, 3, 5, 7, 9))
@@ -85,7 +85,7 @@ class PolandSpecProvider(BaseSpecProvider):
         sum_v = sum([nc * nd for nc, nd in zip(pesel_coeffs, pesel_digits)])
         checksum_digit = sum_v % 10
         pesel_digits.append(checksum_digit)
-        return ''.join(str(d) for d in pesel_digits)
+        return "".join(str(d) for d in pesel_digits)
 
     def regon(self) -> str:
         """Generate random valid 9-digit REGON.
@@ -99,4 +99,4 @@ class PolandSpecProvider(BaseSpecProvider):
         if checksum_digit > 9:
             checksum_digit = 0
         regon_digits.append(checksum_digit)
-        return ''.join(str(d) for d in regon_digits)
+        return "".join(str(d) for d in regon_digits)

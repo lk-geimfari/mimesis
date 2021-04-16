@@ -13,7 +13,7 @@ from mimesis.exceptions import NonEnumerableError, UnsupportedLocale
 from mimesis.random import Random, get_random_item, random
 from mimesis.typing import JSON, Seed
 
-__all__ = ['BaseDataProvider', 'BaseProvider']
+__all__ = ["BaseDataProvider", "BaseProvider"]
 
 
 class BaseProvider(object):
@@ -82,9 +82,9 @@ class BaseDataProvider(BaseProvider):
         """
         super().__init__(seed=seed)
         self._data: JSON = {}
-        self._datafile = ''
+        self._datafile = ""
         self._setup_locale(locale)
-        self._data_dir = Path(__file__).parent.parent.joinpath('data')
+        self._data_dir = Path(__file__).parent.parent.joinpath("data")
 
     def _setup_locale(self, locale: str = locales.DEFAULT_LOCALE) -> None:
         """Set up locale after pre-check.
@@ -118,7 +118,7 @@ class BaseDataProvider(BaseProvider):
         return initial
 
     @functools.lru_cache(maxsize=None)
-    def _pull(self, datafile: str = '') -> None:
+    def _pull(self, datafile: str = "") -> None:
         """Pull the content from the JSON and memorize one.
 
         Opens JSON file ``file`` in the folder ``data/locale``
@@ -141,7 +141,7 @@ class BaseDataProvider(BaseProvider):
             :return: Content of JSON file as dict.
             """
             file_path = Path(data_dir).joinpath(locale_name, datafile)
-            with open(file_path, 'r', encoding='utf8') as f:
+            with open(file_path, "r", encoding="utf8") as f:
                 return json.load(f)
 
         separator = locales.LOCALE_SEPARATOR
@@ -178,7 +178,7 @@ class BaseDataProvider(BaseProvider):
     def override_locale(
         self,
         locale: str = locales.EN,
-    ) -> Generator['BaseDataProvider', None, None]:
+    ) -> Generator["BaseDataProvider", None, None]:
         """Context manager which allows overriding current locale.
 
         Temporarily overrides current locale for
@@ -196,10 +196,10 @@ class BaseDataProvider(BaseProvider):
                 self._override_locale(origin_locale)
         except AttributeError:
             raise ValueError(
-                '«{}» has not locale dependent'.format(self.__class__.__name__)
+                "«{}» has not locale dependent".format(self.__class__.__name__)
             )
 
     def __str__(self) -> str:
         """Human-readable representation of locale."""
-        locale = getattr(self, 'locale', locales.DEFAULT_LOCALE)
-        return '{} <{}>'.format(self.__class__.__name__, locale)
+        locale = getattr(self, "locale", locales.DEFAULT_LOCALE)
+        return "{} <{}>".format(self.__class__.__name__, locale)

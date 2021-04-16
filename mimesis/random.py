@@ -18,7 +18,7 @@ import string
 import uuid
 from typing import Any, List, Optional
 
-__all__ = ['Random', 'get_random_item', 'random']
+__all__ = ["Random", "get_random_item", "random"]
 
 
 class Random(random_module.Random):
@@ -39,7 +39,7 @@ class Random(random_module.Random):
         :raises ValueError: if amount less or equal to zero.
         """
         if amount <= 0:
-            raise ValueError('Amount out of range.')
+            raise ValueError("Amount out of range.")
 
         return [int(self.random() * (b - a)) + a for _ in range(amount)]
 
@@ -59,9 +59,9 @@ class Random(random_module.Random):
         :param length: Max value.
         :return: Single string.
         """
-        return ''.join(self.choice(str_seq) for _ in range(length))
+        return "".join(self.choice(str_seq) for _ in range(length))
 
-    def custom_code(self, mask: str = '@###', char: str = '@', digit: str = '#') -> str:
+    def custom_code(self, mask: str = "@###", char: str = "@", digit: str = "#") -> str:
         """Generate custom code using ascii uppercase and random integers.
 
         :param mask: Mask of code.
@@ -74,7 +74,7 @@ class Random(random_module.Random):
 
         if char_code == digit_code:
             raise ValueError(
-                'You cannot use the same ' 'placeholder for digits and chars!'
+                "You cannot use the same " "placeholder for digits and chars!"
             )
 
         def random_int(a: int, b: int) -> int:
@@ -123,7 +123,7 @@ class Random(random_module.Random):
             length = self.randint(16, 128)
 
         _string = string.ascii_letters + string.digits
-        _string = ''.join(secrets.choice(_string) for _ in range(length))
+        _string = "".join(secrets.choice(_string) for _ in range(length))
         return _string
 
 

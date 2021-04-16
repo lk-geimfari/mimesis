@@ -21,7 +21,7 @@ from mimesis.exceptions import NonEnumerableError
 from mimesis.providers.base import BaseDataProvider
 from mimesis.random import get_random_item
 
-__all__ = ['Person']
+__all__ = ["Person"]
 
 
 class Person(BaseDataProvider):
@@ -34,16 +34,16 @@ class Person(BaseDataProvider):
         :param seed: Seed.
         """
         super().__init__(*args, **kwargs)
-        self._datafile = 'person.json'
+        self._datafile = "person.json"
         self._pull(self._datafile)
         self._store = {
-            'age': 0,
+            "age": 0,
         }
 
     class Meta:
         """Class for metadata."""
 
-        name = 'person'
+        name = "person"
 
     def age(self, minimum: int = 16, maximum: int = 66) -> int:
         """Get a random integer value.
@@ -56,7 +56,7 @@ class Person(BaseDataProvider):
             23.
         """
         age = self.random.randint(minimum, maximum)
-        self._store['age'] = age
+        self._store["age"] = age
         return age
 
     def work_experience(self, working_start_age: int = 22) -> int:
@@ -65,7 +65,7 @@ class Person(BaseDataProvider):
         :param working_start_age: Age then person start to work.
         :return: Depend on previous generated age.
         """
-        age = self._store['age']
+        age = self._store["age"]
         if age == 0:
             age = self.age()
 
@@ -81,7 +81,7 @@ class Person(BaseDataProvider):
             John.
         """
         key = self._validate_enum(gender, Gender)
-        names: List[str] = self._data['names'].get(key)
+        names: List[str] = self._data["names"].get(key)
         return self.random.choice(names)
 
     def first_name(self, gender: Optional[Gender] = None) -> str:
@@ -103,7 +103,7 @@ class Person(BaseDataProvider):
         :Example:
             Smith.
         """
-        surnames: Sequence[str] = self._data['surnames']
+        surnames: Sequence[str] = self._data["surnames"]
 
         # Surnames separated by gender.
         if isinstance(surnames, dict):
@@ -141,7 +141,7 @@ class Person(BaseDataProvider):
         gender_key = self._validate_enum(gender, Gender)
         title_key = self._validate_enum(title_type, TitleType)
 
-        titles: List[str] = self._data['title'][gender_key][title_key]
+        titles: List[str] = self._data["title"][gender_key][title_key]
         return self.random.choice(titles)
 
     def full_name(self, gender: Optional[Gender] = None, reverse: bool = False) -> str:
@@ -162,7 +162,7 @@ class Person(BaseDataProvider):
         else:
             raise NonEnumerableError(Gender)
 
-        fmt = '{1} {0}' if reverse else '{0} {1}'
+        fmt = "{1} {0}" if reverse else "{0} {1}"
         return fmt.format(
             self.name(gender),
             self.surname(gender),
@@ -190,43 +190,43 @@ class Person(BaseDataProvider):
         """
         min_date = 1800
         max_date = 2070
-        default_template = 'l.d'
+        default_template = "l.d"
 
         templates = (
-            'U_d',
-            'U.d',
-            'U-d',
-            'UU-d',
-            'UU.d',
-            'UU_d',
-            'ld',
-            'l-d',
-            'Ud',
-            'l.d',
-            'l_d',
-            'default',
+            "U_d",
+            "U.d",
+            "U-d",
+            "UU-d",
+            "UU.d",
+            "UU_d",
+            "ld",
+            "l-d",
+            "Ud",
+            "l.d",
+            "l_d",
+            "default",
         )
 
         if template is None:
             template = self.random.choice(templates)
 
-        if template == 'default':
+        if template == "default":
             template = default_template
 
-        if not re.fullmatch(r'[Ul\.\-\_d]*[Ul]+[Ul\.\-\_d]*', template):
+        if not re.fullmatch(r"[Ul\.\-\_d]*[Ul]+[Ul\.\-\_d]*", template):
             raise ValueError("Template '{}' is not supported.".format(template))
 
-        tags = re.findall(r'[Uld\.\-\_]', template)
+        tags = re.findall(r"[Uld\.\-\_]", template)
 
-        username = ''
+        username = ""
         for tag in tags:
-            if tag == 'U':
+            if tag == "U":
                 username += self.random.choice(USERNAMES).capitalize()
-            elif tag == 'l':
+            elif tag == "l":
                 username += self.random.choice(USERNAMES)
-            elif tag == 'd':
+            elif tag == "d":
                 username += str(self.random.randint(min_date, max_date))
-            elif tag in '-_.':
+            elif tag in "-_.":
                 username += tag
 
         return username
@@ -242,7 +242,7 @@ class Person(BaseDataProvider):
             k6dv2odff9#4h
         """
         text = ascii_letters + digits + punctuation
-        password = ''.join([self.random.choice(text) for _ in range(length)])
+        password = "".join([self.random.choice(text) for _ in range(length)])
 
         if hashed:
             md5 = hashlib.md5()
@@ -268,7 +268,7 @@ class Person(BaseDataProvider):
         """
         if unique and self.seed is not None:
             raise ValueError(
-                'You cannot use «unique» ' 'parameter with a seeded provider'
+                "You cannot use «unique» " "parameter with a seeded provider"
             )
 
         if not domains:
@@ -276,15 +276,15 @@ class Person(BaseDataProvider):
 
         domain = self.random.choice(domains)
 
-        if not domain.startswith('@'):
-            domain = '@' + domain
+        if not domain.startswith("@"):
+            domain = "@" + domain
 
         if unique:
             name = self.random.randstr(unique)
         else:
-            name = self.username(template='ld')
+            name = self.username(template="ld")
 
-        return '{name}{domain}'.format(
+        return "{name}{domain}".format(
             name=name,
             domain=domain,
         )
@@ -299,7 +299,7 @@ class Person(BaseDataProvider):
         """
         key = self._validate_enum(site, SocialNetwork)
         website = SOCIAL_NETWORKS[key]
-        url = 'https://' + website
+        url = "https://" + website
         return url.format(self.username())
 
     def gender(self, iso5218: bool = False, symbol: bool = False) -> Union[str, int]:
@@ -325,7 +325,7 @@ class Person(BaseDataProvider):
         if symbol:
             return self.random.choice(GENDER_SYMBOLS)
 
-        genders: List[str] = self._data['gender']
+        genders: List[str] = self._data["gender"]
         return self.random.choice(genders)
 
     def sex(self, *args: Any, **kwargs: Any) -> Union[str, int]:
@@ -350,7 +350,7 @@ class Person(BaseDataProvider):
             1.85.
         """
         h = self.random.uniform(minimum, maximum)
-        return '{:0.2f}'.format(h)
+        return "{:0.2f}".format(h)
 
     def weight(self, minimum: int = 38, maximum: int = 90) -> int:
         """Generate a random weight in Kg.
@@ -390,7 +390,7 @@ class Person(BaseDataProvider):
         if symbol:
             return self.random.choice(SEXUALITY_SYMBOLS)
 
-        sexuality: List[str] = self._data['sexuality']
+        sexuality: List[str] = self._data["sexuality"]
         return self.random.choice(sexuality)
 
     def occupation(self) -> str:
@@ -401,7 +401,7 @@ class Person(BaseDataProvider):
         :Example:
             Programmer.
         """
-        jobs: List[str] = self._data['occupation']
+        jobs: List[str] = self._data["occupation"]
         return self.random.choice(jobs)
 
     def political_views(self) -> str:
@@ -412,7 +412,7 @@ class Person(BaseDataProvider):
         :Example:
             Liberal.
         """
-        views: List[str] = self._data['political_views']
+        views: List[str] = self._data["political_views"]
         return self.random.choice(views)
 
     def worldview(self) -> str:
@@ -423,7 +423,7 @@ class Person(BaseDataProvider):
         :Example:
             Pantheism.
         """
-        views: List[str] = self._data['worldview']
+        views: List[str] = self._data["worldview"]
         return self.random.choice(views)
 
     def views_on(self) -> str:
@@ -434,7 +434,7 @@ class Person(BaseDataProvider):
         :Example:
             Negative.
         """
-        views: List[str] = self._data['views_on']
+        views: List[str] = self._data["views_on"]
         return self.random.choice(views)
 
     def nationality(self, gender: Optional[Gender] = None) -> str:
@@ -446,7 +446,7 @@ class Person(BaseDataProvider):
         :Example:
             Russian
         """
-        nationalities: Sequence[str] = self._data['nationality']
+        nationalities: Sequence[str] = self._data["nationality"]
 
         # Separated by gender
         if isinstance(nationalities, dict):
@@ -463,7 +463,7 @@ class Person(BaseDataProvider):
         :Example:
             MIT.
         """
-        universities: List[str] = self._data['university']
+        universities: List[str] = self._data["university"]
         return self.random.choice(universities)
 
     def academic_degree(self) -> str:
@@ -474,7 +474,7 @@ class Person(BaseDataProvider):
         :Example:
             Bachelor.
         """
-        degrees: List[str] = self._data['academic_degree']
+        degrees: List[str] = self._data["academic_degree"]
         return self.random.choice(degrees)
 
     def language(self) -> str:
@@ -485,10 +485,10 @@ class Person(BaseDataProvider):
         :Example:
             Irish.
         """
-        languages: List[str] = self._data['language']
+        languages: List[str] = self._data["language"]
         return self.random.choice(languages)
 
-    def telephone(self, mask: str = '', placeholder: str = '#') -> str:
+    def telephone(self, mask: str = "", placeholder: str = "#") -> str:
         """Generate a random phone number.
 
         :param mask: Mask for formatting number.
@@ -500,8 +500,8 @@ class Person(BaseDataProvider):
         """
         if not mask:
             code = self.random.choice(CALLING_CODES)
-            default = '{}-(###)-###-####'.format(code)
-            masks = self._data.get('telephone_fmt', [default])
+            default = "{}-(###)-###-####".format(code)
+            masks = self._data.get("telephone_fmt", [default])
             mask = self.random.choice(masks)
 
         return self.random.custom_code(mask=mask, digit=placeholder)
@@ -512,10 +512,10 @@ class Person(BaseDataProvider):
         :param size: Size of avatar.
         :return: Link to avatar.
         """
-        url = 'https://api.adorable.io/avatars/{0}/{1}.png'
+        url = "https://api.adorable.io/avatars/{0}/{1}.png"
         return url.format(size, self.password(hashed=True))
 
-    def identifier(self, mask: str = '##-##/##') -> str:
+    def identifier(self, mask: str = "##-##/##") -> str:
         """Generate a random identifier by mask.
 
         With this method you can generate any identifiers that

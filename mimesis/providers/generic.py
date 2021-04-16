@@ -28,7 +28,7 @@ from mimesis.providers.text import Text
 from mimesis.providers.transport import Transport
 from mimesis.typing import Seed
 
-__all__ = ['Generic']
+__all__ = ["Generic"]
 
 
 class Generic(BaseProvider):
@@ -65,18 +65,18 @@ class Generic(BaseProvider):
         self.locale = locale
 
         for provider in self._DEFAULT_PROVIDERS:
-            name = getattr(provider.Meta, 'name')  # type: ignore
+            name = getattr(provider.Meta, "name")  # type: ignore
 
             # Check if a provider is locale dependent.
-            if hasattr(provider, '_data'):
-                setattr(self, f'_{name}', provider)
+            if hasattr(provider, "_data"):
+                setattr(self, f"_{name}", provider)
             else:
                 setattr(self, name, provider(seed=self.seed))
 
     class Meta:
         """Class for metadata."""
 
-        name = 'generic'
+        name = "generic"
 
     def __getattr__(self, attrname: str) -> Any:
         """Get attribute without underscore.
@@ -84,7 +84,7 @@ class Generic(BaseProvider):
         :param attrname: Attribute name.
         :return: An attribute.
         """
-        attribute = object.__getattribute__(self, '_' + attrname)
+        attribute = object.__getattribute__(self, "_" + attrname)
         if attribute and callable(attribute):
             self.__dict__[attrname] = attribute(
                 self.locale,
@@ -105,8 +105,8 @@ class Generic(BaseProvider):
 
         for a in self.__dict__:
             if a not in exclude:
-                if a.startswith('_'):
-                    attribute = a.replace('_', '', 1)
+                if a.startswith("_"):
+                    attribute = a.replace("_", "", 1)
                     attributes.append(attribute)
                 else:
                     attributes.append(a)
@@ -123,17 +123,17 @@ class Generic(BaseProvider):
         if inspect.isclass(cls):
             if not issubclass(cls, BaseProvider):
                 raise TypeError(
-                    'The provider must be a '
-                    'subclass of mimesis.providers.BaseProvider'
+                    "The provider must be a "
+                    "subclass of mimesis.providers.BaseProvider"
                 )
             try:
-                meta = getattr(cls, 'Meta')
-                name = getattr(meta, 'name')
+                meta = getattr(cls, "Meta")
+                name = getattr(meta, "name")
             except AttributeError:
                 name = cls.__name__.lower()
             setattr(self, name, cls(seed=self.seed))
         else:
-            raise TypeError('The provider must be a class')
+            raise TypeError("The provider must be a class")
 
     def add_providers(self, *providers: Type[BaseProvider]) -> None:
         """Add a lot of custom providers to Generic() object.
@@ -146,4 +146,4 @@ class Generic(BaseProvider):
 
     def __str__(self) -> str:
         """Human-readable representation of locale."""
-        return '{} <{}>'.format(self.__class__.__name__, self.locale)
+        return "{} <{}>".format(self.__class__.__name__, self.locale)

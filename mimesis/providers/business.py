@@ -12,7 +12,7 @@ from mimesis.data import (
 )
 from mimesis.providers.base import BaseDataProvider
 
-__all__ = ['Business']
+__all__ = ["Business"]
 
 
 class Business(BaseDataProvider):
@@ -24,20 +24,20 @@ class Business(BaseDataProvider):
         :param locale: Current locale.
         """
         super().__init__(*args, **kwargs)
-        self._datafile = 'business.json'
+        self._datafile = "business.json"
         self._pull(self._datafile)
 
     class Meta:
         """Class for metadata."""
 
-        name = 'business'
+        name = "business"
 
     def company(self) -> str:
         """Get a random company name.
 
         :return: Company name.
         """
-        names: List[str] = self._data['company']['name']
+        names: List[str] = self._data["company"]["name"]
 
         return self.random.choice(names)
 
@@ -47,9 +47,9 @@ class Business(BaseDataProvider):
         :param abbr: Abbreviated company type.
         :return: Types of business entity.
         """
-        key = 'abbr' if abbr else 'title'
+        key = "abbr" if abbr else "title"
 
-        company_types: List[str] = self._data['company']['type'][key]
+        company_types: List[str] = self._data["company"]["type"][key]
         return self.random.choice(company_types)
 
     def copyright(self) -> str:  # noqa: A003
@@ -57,7 +57,7 @@ class Business(BaseDataProvider):
 
         :return: Copyright of company.
         """
-        return '© {}, {}'.format(
+        return "© {}, {}".format(
             self.company(),
             self.company_type(abbr=True),
         )
@@ -68,7 +68,7 @@ class Business(BaseDataProvider):
         :param allow_random: Get a random ISO code.
         :return: Currency code.
         """
-        code: str = self._data['currency-code']
+        code: str = self._data["currency-code"]
 
         if allow_random:
             return self.random.choice(CURRENCY_ISO_CODES)
@@ -102,19 +102,19 @@ class Business(BaseDataProvider):
         :param maximum: Min value of price.
         :return: Price.
         """
-        price_format: str = self._data['price-format']
-        numeric_frac_digits = self._data['numeric-frac-digits']
+        price_format: str = self._data["price-format"]
+        numeric_frac_digits = self._data["numeric-frac-digits"]
         delims = {
-            '.': self._data['numeric-decimal'],
-            ',': self._data['numeric-thousands'],
+            ".": self._data["numeric-decimal"],
+            ",": self._data["numeric-thousands"],
         }
 
         value = self.random.uniform(minimum, maximum)
-        price = '{:,.{}f}'.format(value, numeric_frac_digits)
+        price = "{:,.{}f}".format(value, numeric_frac_digits)
 
-        price = ''.join(delims.get(char, char) for char in price)
+        price = "".join(delims.get(char, char) for char in price)
 
-        return price_format.replace('#', price)
+        return price_format.replace("#", price)
 
     def price_in_btc(self, minimum: float = 0, maximum: float = 2) -> str:
         """Generate random price in BTC.
@@ -123,7 +123,7 @@ class Business(BaseDataProvider):
         :param maximum: Maximum value of price.
         :return: Price in BTC.
         """
-        return '{} BTC'.format(
+        return "{} BTC".format(
             self.random.uniform(
                 minimum,
                 maximum,

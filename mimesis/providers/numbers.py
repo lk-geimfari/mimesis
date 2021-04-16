@@ -9,7 +9,7 @@ from mimesis.enums import NumTypes
 from mimesis.providers.base import BaseProvider
 from mimesis.typing import Matrix
 
-__all__ = ['Numbers']
+__all__ = ["Numbers"]
 
 
 class Numbers(BaseProvider):
@@ -18,7 +18,7 @@ class Numbers(BaseProvider):
     class Meta:
         """Class for metadata."""
 
-        name = 'numbers'
+        name = "numbers"
 
     def float_number(
         self, start: float = -1000.0, end: float = 1000.0, precision: int = 15
@@ -176,6 +176,6 @@ class Numbers(BaseProvider):
         :return: A matrix of random numbers.
         """
         key = self._validate_enum(num_type, NumTypes)
-        kwargs.update({'n': n})
+        kwargs.update({"n": n})
         method = getattr(self, key)
         return [method(**kwargs) for _ in range(m)]

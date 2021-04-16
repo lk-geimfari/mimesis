@@ -5,7 +5,7 @@ from typing import Any
 
 from mimesis.providers import BaseDataProvider
 
-__all__ = ['BaseSpecProvider']
+__all__ = ["BaseSpecProvider"]
 
 
 class BaseSpecProvider(BaseDataProvider):
@@ -14,4 +14,4 @@ class BaseSpecProvider(BaseDataProvider):
     def __init__(self, *args: Any, **kwargs: Any):
         """Initialize attributes of superclass."""
         super().__init__(*args, **kwargs)
-        self._datafile = 'builtin.json'
+        self._datafile = "builtin.json"

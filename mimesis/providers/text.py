@@ -7,7 +7,7 @@ from typing import Any, List, Tuple
 from mimesis.data import SAFE_COLORS
 from mimesis.providers.base import BaseDataProvider
 
-__all__ = ['Text']
+__all__ = ["Text"]
 
 
 class Text(BaseDataProvider):
@@ -20,13 +20,13 @@ class Text(BaseDataProvider):
         :param seed: Seed.
         """
         super().__init__(*args, **kwargs)
-        self._datafile = 'text.json'
+        self._datafile = "text.json"
         self._pull(self._datafile)
 
     class Meta:
         """Class for metadata."""
 
-        name = 'text'
+        name = "text"
 
     def alphabet(self, lower_case: bool = False) -> List[str]:
         """Get an alphabet for current locale.
@@ -34,9 +34,9 @@ class Text(BaseDataProvider):
         :param lower_case: Return alphabet in lower case.
         :return: Alphabet.
         """
-        case = 'uppercase' if not lower_case else 'lowercase'
+        case = "uppercase" if not lower_case else "lowercase"
 
-        alpha: List[str] = self._data['alphabet'].get(case)
+        alpha: List[str] = self._data["alphabet"].get(case)
         return alpha
 
     def level(self) -> str:
@@ -47,7 +47,7 @@ class Text(BaseDataProvider):
         :Example:
             critical.
         """
-        levels: List[str] = self._data['level']
+        levels: List[str] = self._data["level"]
         return self.random.choice(levels)
 
     def text(self, quantity: int = 5) -> str:
@@ -56,9 +56,9 @@ class Text(BaseDataProvider):
         :param quantity: Quantity of sentences.
         :return: Text.
         """
-        text = ''
+        text = ""
         for _ in range(quantity):
-            text += ' ' + self.random.choice(self._data['text'])
+            text += " " + self.random.choice(self._data["text"])
         return text.strip()
 
     def sentence(self) -> str:
@@ -84,7 +84,7 @@ class Text(BaseDataProvider):
         :Example:
             [science, network, god, octopus, love]
         """
-        words = self._data['words'].get('normal')
+        words = self._data["words"].get("normal")
         words_list = [self.random.choice(words) for _ in range(quantity)]
         return words_list
 
@@ -106,7 +106,7 @@ class Text(BaseDataProvider):
         :Example:
             Damn.
         """
-        bad_words: List[str] = self._data['words'].get('bad')
+        bad_words: List[str] = self._data["words"].get("bad")
         return self.random.choice(bad_words)
 
     def quote(self) -> str:
@@ -117,7 +117,7 @@ class Text(BaseDataProvider):
         :Example:
             "Bond... James Bond."
         """
-        quotes: List[str] = self._data['quotes']
+        quotes: List[str] = self._data["quotes"]
         return self.random.choice(quotes)
 
     def color(self) -> str:
@@ -128,7 +128,7 @@ class Text(BaseDataProvider):
         :Example:
             Red.
         """
-        colors: List[str] = self._data['color']
+        colors: List[str] = self._data["color"]
         return self.random.choice(colors)
 
     @staticmethod
@@ -138,8 +138,8 @@ class Text(BaseDataProvider):
         :param color: Hex color.
         :return: RGB tuple.
         """
-        if color.startswith('#'):
-            color = color.lstrip('#')
+        if color.startswith("#"):
+            color = color.lstrip("#")
         return tuple(int(color[i : i + 2], 16) for i in (0, 2, 4))
 
     def hex_color(self, safe: bool = False) -> str:
@@ -154,7 +154,7 @@ class Text(BaseDataProvider):
         if safe:
             return self.random.choice(SAFE_COLORS)
 
-        return '#{:06x}'.format(self.random.randint(0x000000, 0xFFFFFF))
+        return "#{:06x}".format(self.random.randint(0x000000, 0xFFFFFF))
 
     def rgb_color(self, safe: bool = False) -> Tuple[int, ...]:
         """Generate a random rgb color tuple.
@@ -176,5 +176,5 @@ class Text(BaseDataProvider):
         :Example:
             No
         """
-        answers: List[str] = self._data['answers']
+        answers: List[str] = self._data["answers"]
         return self.random.choice(answers)

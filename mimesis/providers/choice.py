@@ -6,7 +6,7 @@ from typing import Any, Optional, Sequence, Union
 
 from mimesis.providers.base import BaseProvider
 
-__all__ = ['Choice']
+__all__ = ["Choice"]
 
 
 class Choice(BaseProvider):
@@ -15,7 +15,7 @@ class Choice(BaseProvider):
     class Meta:
         """Class for metadata."""
 
-        name = 'choice'
+        name = "choice"
 
     def __init__(self, *args: Any, **kwargs: Any) -> None:
         """Initialize attributes.
@@ -58,16 +58,16 @@ class Choice(BaseProvider):
         'cdba'
         """
         if not isinstance(length, int):
-            raise TypeError('**length** must be integer.')
+            raise TypeError("**length** must be integer.")
 
         if not isinstance(items, collections.abc.Sequence):
-            raise TypeError('**items** must be non-empty sequence.')
+            raise TypeError("**items** must be non-empty sequence.")
 
         if not items:
-            raise ValueError('**items** must be a non-empty sequence.')
+            raise ValueError("**items** must be a non-empty sequence.")
 
         if length < 0:
-            raise ValueError('**length** should be a positive integer.')
+            raise ValueError("**length** should be a positive integer.")
 
         if length == 0:
             return self.random.choice(items)
@@ -75,8 +75,8 @@ class Choice(BaseProvider):
         data = []  # type: ignore
         if unique and len(set(items)) < length:  # avoid an infinite while loop
             raise ValueError(
-                'There are not enough unique elements in '
-                '**items** to provide the specified **number**.'
+                "There are not enough unique elements in "
+                "**items** to provide the specified **number**."
             )
         while len(data) < length:
             item = self.random.choice(items)
@@ -88,4 +88,4 @@ class Choice(BaseProvider):
             return data
         elif isinstance(items, tuple):
             return tuple(data)
-        return ''.join(data)
+        return "".join(data)
