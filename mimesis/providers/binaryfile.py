@@ -37,7 +37,7 @@ class BinaryFile(BaseProvider):
     def _read_file(
         self,
         *,
-        extension: Union[
+        file_type: Union[
             AudioFile,
             CompressedFile,
             DocumentFile,
@@ -45,58 +45,58 @@ class BinaryFile(BaseProvider):
             VideoFile,
         ],
     ) -> bytes:
-        extension = self._validate_enum(extension, extension.__class__)
-        file_path = self._data_dir.joinpath("data", "bin", f"sample.{extension}")
+        file_type = self._validate_enum(file_type, file_type.__class__)
+        file_path = self._data_dir.joinpath("data", "bin", f"sample.{file_type}")
 
         with open(file_path, "rb") as file:
             return file.read()
 
-    def video(self, *, extension: VideoFile = VideoFile.MP4) -> bytes:
+    def video(self, *, file_type: VideoFile = VideoFile.MP4) -> bytes:
         """Generates video file of given format and returns it as bytes.
 
         .. note:: This method accepts keyword-only arguments.
 
-        :param extension: File extension.
+        :param file_type: File extension.
         :return: File as a sequence of bytes.
         """
-        return self._read_file(extension=extension)
+        return self._read_file(file_type=file_type)
 
-    def audio(self, *, extension: AudioFile = AudioFile.MP3) -> bytes:
+    def audio(self, *, file_type: AudioFile = AudioFile.MP3) -> bytes:
         """Generates audio file of given format and returns it as bytes.
 
         .. note:: This method accepts keyword-only arguments.
 
-        :param extension: File extension.
+        :param file_type: File extension.
         :return: File as a sequence of bytes.
         """
-        return self._read_file(extension=extension)
+        return self._read_file(file_type=file_type)
 
-    def document(self, *, extension: DocumentFile = DocumentFile.PDF) -> bytes:
+    def document(self, *, file_type: DocumentFile = DocumentFile.PDF) -> bytes:
         """Generates document of given format and returns it as bytes.
 
         .. note:: This method accepts keyword-only arguments.
 
-        :param extension: File extension.
+        :param file_type: File extension.
         :return: File as a sequence of bytes.
         """
-        return self._read_file(extension=extension)
+        return self._read_file(file_type=file_type)
 
-    def image(self, *, extension: ImageFile = ImageFile.PNG) -> bytes:
+    def image(self, *, file_type: ImageFile = ImageFile.PNG) -> bytes:
         """Generates image of given format and returns it as bytes.
 
         .. note:: This method accepts keyword-only arguments.
 
-        :param extension: File extension.
+        :param file_type: File extension.
         :return: File as a sequence of bytes.
         """
-        return self._read_file(extension=extension)
+        return self._read_file(file_type=file_type)
 
-    def compressed(self, *, extension: CompressedFile = CompressedFile.ZIP) -> bytes:
+    def compressed(self, *, file_type: CompressedFile = CompressedFile.ZIP) -> bytes:
         """Generates compressed file of given format and returns it as bytes.
 
         .. note:: This method accepts keyword-only arguments.
 
-        :param extension: File extension.
+        :param file_type: File extension.
         :return: File as a sequence of bytes.
         """
-        return self._read_file(extension=extension)
+        return self._read_file(file_type=file_type)

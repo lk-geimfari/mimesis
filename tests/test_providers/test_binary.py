@@ -35,7 +35,7 @@ class TestBinaryFile:
                 method(extension)
 
         for extension in extensions:
-            content = method(extension=extension)
+            content = method(file_type=extension)
             assert isinstance(content, bytes)
 
             with tempfile.TemporaryFile() as f:
