@@ -33,6 +33,10 @@ class TestGeneric(object):
         result = generic.code.isbn()
         assert result is not None
 
+    def test_base_binary_file(self, generic):
+        result = generic.binaryfile.video()
+        assert isinstance(result, bytes)
+
     def test_bad_argument(self, generic):
         with pytest.raises(AttributeError):
             _ = generic.bad_argument  # noqa

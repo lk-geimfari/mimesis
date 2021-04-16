@@ -32,7 +32,7 @@ class BinaryFile(BaseProvider):
     class Meta:
         """Class for metadata."""
 
-        name = "binary_file"
+        name = "binaryfile"
 
     def _read_file(
         self,

@@ -5,7 +5,7 @@
 import hashlib
 import re
 from string import ascii_letters, digits, punctuation
-from typing import Any, List, Optional, Sequence, Tuple, Union
+from typing import Any, List, Optional, Sequence, Union
 
 from mimesis.data import (
     BLOOD_GROUPS,
