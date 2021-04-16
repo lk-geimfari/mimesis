@@ -35,13 +35,6 @@ DenmarkSpecProvider
    :members:
    :special-members: __init__
 
-GermanySpecProvider
--------------------
-
-.. autoclass:: mimesis.builtins.GermanySpecProvider
-   :members:
-   :special-members: __init__
-
 NetherlandsSpecProvider
 -----------------------
 

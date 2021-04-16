@@ -4,16 +4,28 @@ Version 5.0.0
 **Note**: This release is still under active development.
 **Warning**: This release contains some breaking changes in API.
 
-- Removed redundant data provider ``UnitSystem()``
-- Removed useless data provider ``Structure()``
+**Renamed**:
+
 - Rename ``enums.UnitName`` to ``enums.MeasureUnit``
 - Rename ``enums.PrefixSign`` to ``enums.MetricPrefixSign``
-- Added ``measure_unit()`` and ``metric_prefix()`` methods for ``Science``
-- Removed completely useless ``chemical_element`` and ``atomic_number`` methods of ``Science`` data provider and made it locale-independent
+
+**Fixed**:
 - Fix inheritance issues for ``Generic``, now it inherits ``BaseProvider`` instead of ``BaseDataProvider``
+
+**Added**:
+
+- Added ``measure_unit()`` and ``metric_prefix()`` methods for ``Science``
 - Added methods ``.iterator()`` and ``.infinite()`` for ``schema.Schema``
-- Removed a bunch of useless custom exceptions and replaced them with ``FieldError``
 - Added ``BinaryFile`` data provider which provides binary data files, such as ``.mp3``, ``.mp4``, ``.png``, etc.
+
+**Removed**:
+
+- Removed data provider ``UnitSystem()``, use ``Science()``
+- Removed data provider ``Structure()``, use ``schema.Schema``
+- Removed ``GermanySpecProvider``
+- Removed a bunch of useless custom exceptions and replaced them with ``FieldError``
+- Removed completely useless ``chemical_element`` and ``atomic_number`` methods of ``Science`` data provider and made it locale-independent
+
 
 Version 4.1.3
 -------------
