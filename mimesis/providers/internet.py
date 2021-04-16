@@ -13,16 +13,15 @@ from mimesis.data import (
     HTTP_METHODS,
     HTTP_STATUS_CODES,
     HTTP_STATUS_MSGS,
-    NETWORK_PROTOCOLS,
     TLD,
     USER_AGENTS,
     USERNAMES,
 )
-from mimesis.enums import Layer, MimeType, PortRange, TLDType
+from mimesis.enums import MimeType, PortRange, TLDType
 from mimesis.exceptions import NonEnumerableError
 from mimesis.providers.base import BaseProvider
 from mimesis.providers.file import File
-from mimesis.typing import KeywordsType
+from mimesis.typing import Keywords
 
 __all__ = ["Internet"]
 
@@ -190,7 +189,7 @@ class Internet(BaseProvider):
     def stock_image(
         width: Union[int, str] = 1920,
         height: Union[int, str] = 1080,
-        keywords: Optional[KeywordsType] = None,
+        keywords: Optional[Keywords] = None,
         writable: bool = False,
     ) -> Union[str, bytes]:
         """Generate random stock image (JPG/JPEG) hosted on Unsplash.
@@ -278,19 +277,6 @@ class Internet(BaseProvider):
             Gecko/20100101 Firefox/15.0.1
         """
         return self.random.choice(USER_AGENTS)
-
-    def network_protocol(self, layer: Optional[Layer] = None) -> str:
-        """Get a random network protocol form OSI model.
-
-        :param layer: Enum object Layer.
-        :return: Protocol name.
-
-        :Example:
-            AMQP
-        """
-        key = self._validate_enum(item=layer, enum=Layer)
-        protocols = NETWORK_PROTOCOLS[key]
-        return self.random.choice(protocols)
 
     def port(self, port_range: PortRange = PortRange.ALL) -> int:
         """Generate random port.

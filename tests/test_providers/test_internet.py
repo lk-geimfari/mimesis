@@ -5,7 +5,7 @@ from ipaddress import IPv4Address, IPv6Address
 
 import pytest
 from mimesis import Internet, data
-from mimesis.enums import Layer, MimeType, PortRange, TLDType
+from mimesis.enums import MimeType, PortRange, TLDType
 from mimesis.exceptions import NonEnumerableError
 
 from . import patterns
@@ -61,26 +61,6 @@ class TestInternet(object):
         if res_type == str:
             assert re.match(patterns.STOCK_IMAGE, result)
             assert result.endswith("?" + ",".join(keywords or []))
-
-    @pytest.mark.parametrize(
-        "layer",
-        [
-            Layer.APPLICATION,
-            Layer.DATA_LINK,
-            Layer.NETWORK,
-            Layer.PHYSICAL,
-            Layer.PRESENTATION,
-            Layer.SESSION,
-            Layer.TRANSPORT,
-        ],
-    )
-    def test_network_protocol(self, net, layer):
-        result = net.network_protocol(layer=layer)
-        assert result in data.NETWORK_PROTOCOLS[layer.value]
-
-    def test_network_protocol_exception(self, net):
-        with pytest.raises(NonEnumerableError):
-            net.network_protocol(layer="nil")
 
     def test_ip_v4_object(self, net):
         ip = net.ip_v4_object()
@@ -219,12 +199,6 @@ class TestSeededInternet(object):
         assert i1.image_placeholder() == i2.image_placeholder()
         assert i1.image_placeholder(width=128, height=128) == i2.image_placeholder(
             width=128, height=128
-        )
-
-    def test_network_protocol(self, i1, i2):
-        assert i1.network_protocol() == i2.network_protocol()
-        assert i1.network_protocol(layer=Layer.PHYSICAL) == i2.network_protocol(
-            layer=Layer.PHYSICAL
         )
 
     def test_ip_v4(self, i1, i2):

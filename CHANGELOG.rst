@@ -23,6 +23,7 @@ Version 5.0.0
 - Removed data provider ``UnitSystem()``, use ``Science()``
 - Removed data provider ``Structure()``, use ``schema.Schema``
 - Removed ``GermanySpecProvider``
+- Removed method ``network_protocol()`` of ``Internet()``
 - Removed a bunch of useless custom exceptions and replaced them with ``FieldError``
 - Removed completely useless ``chemical_element`` and ``atomic_number`` methods of ``Science`` data provider and made it locale-independent
 

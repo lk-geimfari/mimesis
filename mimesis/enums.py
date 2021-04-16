@@ -83,21 +83,6 @@ class TLDType(Enum):
     STLD = "stld"
 
 
-class Layer(Enum):
-    """Provides network protocol layers.
-
-    An argument for :meth:`~mimesis.Internet.network_protocol()`.
-    """
-
-    APPLICATION = "application"
-    DATA_LINK = "data_link"
-    NETWORK = "network"
-    PHYSICAL = "physical"
-    PRESENTATION = "presentation"
-    SESSION = "session"
-    TRANSPORT = "transport"
-
-
 class FileType(Enum):
     """Provides file types."""
 
