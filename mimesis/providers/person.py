@@ -20,7 +20,6 @@ from mimesis.enums import Gender, SocialNetwork, TitleType
 from mimesis.exceptions import NonEnumerableError
 from mimesis.providers.base import BaseDataProvider
 from mimesis.random import get_random_item
-from mimesis.typing import UsernameTemplate
 
 __all__ = ["Person"]
 
@@ -169,7 +168,7 @@ class Person(BaseDataProvider):
             self.surname(gender),
         )
 
-    def username(self, template: Optional[UsernameTemplate] = None) -> str:
+    def username(self, template: Optional[str] = None) -> str:
         """Generate username by template.
 
         Supported template placeholders: (U, l, d)
@@ -191,7 +190,7 @@ class Person(BaseDataProvider):
         """
         min_date, max_date = (1800, 2070)
 
-        templates: List[UsernameTemplate] = [
+        templates: List[str] = [
             "U_d",
             "U.d",
             "U-d",

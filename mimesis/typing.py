@@ -4,7 +4,7 @@
 
 import datetime
 from decimal import Decimal
-from typing import Any, Dict, List, Literal, Set, Union
+from typing import Any, Dict, List, Set, Union
 
 __all__ = [
     "Date",
@@ -14,7 +14,6 @@ __all__ = [
     "Seed",
     "Time",
     "Timestamp",
-    "UsernameTemplate",
 ]
 
 JSON = Dict[str, Any]
@@ -36,19 +35,4 @@ Matrix = Union[
     List[float],
     List[complex],
     List[Decimal],
-]
-
-UsernameTemplate = Literal[
-    "U_d",
-    "U.d",
-    "U-d",
-    "Ud",
-    "UU-d",
-    "UU.d",
-    "UU_d",
-    "ld",
-    "l-d",
-    "l.d",
-    "l_d",
-    "default",
 ]
