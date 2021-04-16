@@ -36,7 +36,7 @@ jobs:
       - name: mypy
         run: poetry run mypy mimesis/
       - name: Check code style
-        run: poetry run black mimesis tests --check --skip-string-normalization
+        run: poetry run black mimesis tests --check
       - name: Check packages friendliness
         run: poetry run pyroma -d .
       - name: Upload coverage to Codecov
