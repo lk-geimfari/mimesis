@@ -30,7 +30,7 @@ jobs:
           path: .venv
           key: ${{ runner.os }}-python-${{ matrix.python-version }}-venv-${{ hashFiles('**/poetry.lock') }}
       - name: Install dependencies
-        run: poetry install --no-interaction --no-ansi --quiet
+        run: poetry install --no-interaction
       - name: pytest and codecov
         run: poetry run pytest --cov=mimesis --cov-report=xml
       - name: mypy
