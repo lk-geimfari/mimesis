@@ -12,6 +12,7 @@ Version 5.0.0
 - Removed completely useless ``chemical_element`` and ``atomic_number`` methods of ``Science`` data provider and made it locale-independent
 - Fix inheritance issues for ``Generic``, now it inherits ``BaseProvider`` instead of ``BaseDataProvider``
 - Added methods ``.iterator()`` and ``.infinite()`` for ``schema.Schema``
+- Removed a bunch of useless custom exceptions and replaced them with ``FieldError``
 
 Version 4.1.3
 -------------

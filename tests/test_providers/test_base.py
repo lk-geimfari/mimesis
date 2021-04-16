@@ -2,7 +2,7 @@ import re
 
 import pytest
 from mimesis.enums import Gender
-from mimesis.exceptions import NonEnumerableError, UnsupportedLocale
+from mimesis.exceptions import LocaleError, NonEnumerableError
 from mimesis.locales import LIST_OF_LOCALES
 from mimesis.providers import Code, Cryptographic, Internet, Person
 from mimesis.providers.base import BaseDataProvider
@@ -109,7 +109,7 @@ class TestBase(object):
         assert result.locale == out
 
     def test_setup_locale_unsupported_locale(self):
-        with pytest.raises(UnsupportedLocale):
+        with pytest.raises(LocaleError):
             BaseDataProvider(locale='nil')
 
     def test_str(self, base_data_provider):

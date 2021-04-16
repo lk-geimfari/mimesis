@@ -4,7 +4,7 @@
 
 import datetime
 from decimal import Decimal
-from typing import Any, Callable, Dict, List, Set, Union
+from typing import Any, Dict, List, Set, Union
 
 __all__ = [
     "JSON",
@@ -12,7 +12,6 @@ __all__ = [
     "Timestamp",
     "Time",
     "Date",
-    "SchemaType",
     "Seed",
     "Matrix",
 ]
@@ -28,8 +27,6 @@ Date = datetime.date
 Timestamp = Union[str, int]
 
 Seed = Union[int, str, bytes, bytearray]
-
-SchemaType = Union[Callable[[], JSON]]
 
 KeywordsType = Union[List[str], Set[str]]
 

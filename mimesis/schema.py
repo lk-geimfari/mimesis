@@ -1,18 +1,13 @@
 # -*- coding: utf-8 -*-
 
 """Implements classes for generating data by schema."""
-
+import warnings
 from typing import Any, Callable, Iterator, List, Optional
 
-from mimesis.exceptions import (
-    UnacceptableField,
-    UndefinedFieldName,
-    UndefinedSchema,
-    UnsupportedField,
-)
+from mimesis.exceptions import FieldError, SchemaError
 from mimesis.locales import EN
 from mimesis.providers.generic import Generic
-from mimesis.typing import JSON, SchemaType, Seed
+from mimesis.typing import JSON, Seed
 
 __all__ = ["BaseField", "Field", "Schema"]
 
@@ -81,7 +76,7 @@ class BaseField:
             supported or if field not defined.
         """
         if name is None:
-            raise UndefinedFieldName()
+            raise FieldError()
 
         def tail_parser(tails: str, obj: Any) -> Any:
             """Return method from end of tail.
@@ -93,14 +88,14 @@ class BaseField:
             provider_name, method_name = tails.split(".", 1)
 
             if "." in method_name:
-                raise UnacceptableField()
+                raise FieldError(name)
 
             attr = getattr(obj, provider_name)
             if attr is not None:
                 try:
                     return getattr(attr, method_name)
                 except AttributeError:
-                    raise UnsupportedField(name)
+                    raise FieldError(name)
 
         try:
             if name not in self._table:
@@ -121,7 +116,7 @@ class BaseField:
                 return key(result)
             return result
         except KeyError:
-            raise UnsupportedField(name)
+            raise FieldError(name)
 
 
 class Field(BaseField):
@@ -137,7 +132,7 @@ class Field(BaseField):
 class Schema:
     """Class which return list of filled schemas."""
 
-    def __init__(self, schema: SchemaType) -> None:
+    def __init__(self, schema: Callable[[], JSON]) -> None:
         """Initialize schema.
 
         :param schema: A schema (must be a callable object).
@@ -145,7 +140,7 @@ class Schema:
         if schema and callable(schema):
             self.schema = schema
         else:
-            raise UndefinedSchema()
+            raise SchemaError()
 
     def create(self, iterations: int = 1) -> List[JSON]:
         """Creates a list of a fulfilled schemas.
@@ -165,16 +160,34 @@ class Schema:
     def loop(self) -> Iterator[JSON]:
         """Fulfills a schema **infinitely** in a lazy way.
 
+        This method can be useful when you have some dynamic
+        conditions in depend on which the generation must be stopped.
+
+        Please, read all the notes and warnings below.
+
         .. note::
             Since data `mimesis` provides are limited, frequent calls of
             this method can cause data duplication.
 
         .. warning::
             Do not use this method without interrupt conditions, otherwise,
-            otherwise you're risking running out of memory.
+            you're risking running out of memory.
+
+        .. warning::
+            **Never** call `list()`, `tuple()` or any other callable which tries to
+            evaluate the whole lazy object on this method.
+
+            No, I'm serious, kiddo, **NEVER!**.
 
         :return: An infinite iterator with fulfilled schemas.
         """
+
+        warnings.warn(
+            "You're iterating over the infinite object! "
+            "The Schema.loop() can cause a serious memory leak."
+            "Please, see: https://mimesis.name/api.html#mimesis.schema.Schema.loop"
+        )
+
         while True:
             yield self.schema()
 
@@ -184,5 +197,9 @@ class Schema:
         :param iterations: Number of iterations.
         :return: List of fulfilled schemas.
         """
+
+        if iterations < 1:
+            raise ValueError('The number of iterations must be greater than 0.')
+
         for item in range(iterations):
             yield self.schema()

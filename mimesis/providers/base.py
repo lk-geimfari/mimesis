@@ -9,7 +9,7 @@ from pathlib import Path
 from typing import Any, Generator, Optional
 
 from mimesis import locales
-from mimesis.exceptions import NonEnumerableError, UnsupportedLocale
+from mimesis.exceptions import LocaleError, NonEnumerableError
 from mimesis.random import Random, get_random_item, random
 from mimesis.typing import JSON, Seed
 
@@ -98,7 +98,7 @@ class BaseDataProvider(BaseProvider):
 
         locale = locale.lower()
         if locale not in locales.SUPPORTED_LOCALES:
-            raise UnsupportedLocale(locale)
+            raise LocaleError(locale)
 
         self.locale = locale
 

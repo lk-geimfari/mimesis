@@ -5,11 +5,7 @@
 from typing import Any, Optional
 
 
-class UnsupportedAlgorithm(AttributeError):
-    """Raised when the user wants to use an unsupported algorithm."""
-
-
-class UnsupportedLocale(KeyError):
+class LocaleError(KeyError):
     """Raised when a locale isn't supported."""
 
     def __init__(self, locale: Optional[str] = None) -> None:
@@ -24,11 +20,11 @@ class UnsupportedLocale(KeyError):
         return self.message.format(self.locale)
 
 
-class UndefinedSchema(ValueError):
-    """Raised when schema is empty."""
+class SchemaError(ValueError):
+    """Raised when schema is unsupported."""
 
     def __str__(self) -> str:
-        return "Schema should be defined in lambda."
+        return "Schema should a callable object."
 
 
 class NonEnumerableError(TypeError):
@@ -51,30 +47,17 @@ class NonEnumerableError(TypeError):
         return self.message.format(self.items, self.name.__name__)
 
 
-class UnsupportedField(ValueError):
-    """Raises when ``field`` is not supported."""
-
+class FieldError(ValueError):
     def __init__(self, name: Optional[str] = None) -> None:
         """Initialize attributes for more informative output.
 
         :param name: Name of the field..
         """
         self.name = name
-        self.message = "Field «{}» is not supported."
+        self.message = "A field «{}» is not supported."
+        self.message_none = "Field cannot be None."
 
     def __str__(self) -> str:
+        if self.name is None:
+            return self.message_none
         return self.message.format(self.name)
-
-
-class UndefinedField(ValueError):
-    """Raises when ``field`` is None."""
-
-    def __str__(self) -> str:
-        return "Undefined field. Filed cannot be None."
-
-
-class UnacceptableField(ValueError):
-    """Raises when the ``field`` has an unacceptable format."""
-
-    def __str__(self) -> str:
-        return "Unacceptable field format, use **provider.method**."

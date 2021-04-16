@@ -7,7 +7,7 @@ from string import ascii_letters, digits, punctuation
 from typing import Any, Callable, TypeVar, cast
 
 from mimesis import data
-from mimesis.exceptions import UnsupportedLocale
+from mimesis.exceptions import LocaleError
 
 __all__ = ["romanize"]
 
@@ -39,7 +39,7 @@ def romanize(locale: str = "") -> Callable[[F], F]:
                     }
                 )
             except KeyError:
-                raise UnsupportedLocale(locale)
+                raise LocaleError(locale)
 
             result = func(*args, **kwargs)
             txt = "".join([alphabet[i] for i in result if i in alphabet])

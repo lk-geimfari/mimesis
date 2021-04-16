@@ -87,40 +87,22 @@ Decorators
 Custom Exceptions
 =================
 
-UnsupportedAlgorithm
---------------------
+LocaleError
+-----------
 
-.. autoclass:: mimesis.exceptions.UnsupportedAlgorithm
+.. autoclass:: mimesis.exceptions.LocaleError
    :members:
 
-UnsupportedField
-----------------
+FieldError
+----------
 
-.. autoclass:: mimesis.exceptions.UnsupportedField
+.. autoclass:: mimesis.exceptions.FieldError
    :members:
 
-UnsupportedLocale
------------------
+SchemaError
+-----------
 
-.. autoclass:: mimesis.exceptions.UnsupportedLocale
-   :members:
-
-UndefinedFieldName
-------------------
-
-.. autoclass:: mimesis.exceptions.UndefinedFieldName
-   :members:
-
-UndefinedSchema
----------------
-
-.. autoclass:: mimesis.exceptions.UndefinedSchema
-   :members:
-
-UnacceptableField
------------------
-
-.. autoclass:: mimesis.exceptions.UnacceptableField
+.. autoclass:: mimesis.exceptions.SchemaError
    :members:
 
 NonEnumerableError
