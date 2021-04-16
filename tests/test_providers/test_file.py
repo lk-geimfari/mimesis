@@ -1,52 +1,14 @@
 # -*- coding: utf-8 -*-
 
 import re
-import tempfile
 
 import pytest
 from mimesis.data import EXTENSIONS, MIME_TYPES
-from mimesis.enums import (
-    FileType,
-    MimeType,
-    VideoFile,
-    AudioFile,
-    ImageFile,
-    DocumentFile,
-    CompressedFile,
-)
+from mimesis.enums import FileType, MimeType
 from mimesis.exceptions import NonEnumerableError
-from mimesis.providers.file import File, Writable
+from mimesis.providers.file import File
 
 from . import patterns
-
-
-class TestWritable:
-    @pytest.fixture
-    def writable(self):
-        return Writable()
-
-    @pytest.mark.parametrize(
-        "method_name, extensions",
-        [
-            ('video', (VideoFile.MP4, VideoFile.MOV)),
-            ('audio', (AudioFile.MP3, AudioFile.AAC)),
-            ('image', (ImageFile.PNG, ImageFile.JPG, ImageFile.GIF)),
-            ('document', (DocumentFile.DOCX, DocumentFile.XLSX, DocumentFile.PDF)),
-            ('compressed', (CompressedFile.ZIP, CompressedFile.GZIP)),
-        ]
-    )
-    def test_all_methods(self, writable, method_name, extensions):
-        method = getattr(writable, method_name)
-        with pytest.raises(TypeError):
-            for extension in extensions:
-                method(extension)
-
-        for extension in extensions:
-            content = method(extension=extension)
-            assert isinstance(content, bytes)
-
-            with tempfile.TemporaryFile() as f:
-                f.write(content)
 
 
 class TestFile:

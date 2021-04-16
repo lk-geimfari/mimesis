@@ -4,6 +4,7 @@
 
 from mimesis.providers.address import Address
 from mimesis.providers.base import BaseDataProvider, BaseProvider
+from mimesis.providers.binaryfile import BinaryFile
 from mimesis.providers.business import Business
 from mimesis.providers.choice import Choice
 from mimesis.providers.clothing import Clothing
@@ -31,6 +32,7 @@ __all__ = [
     "BaseDataProvider",
     # Data providers:
     "Address",
+    "BinaryFile",
     "Business",
     "Choice",
     "Clothing",

@@ -165,7 +165,7 @@ class Numbers(BaseProvider):
         """Generate m x n matrix with random numbers.
 
         This method works with variety of types,
-        so you can pass method-specific **kwargs.
+        so you can pass method-specific `**kwargs`.
 
         See code for more details.
 

@@ -197,6 +197,14 @@ Text
 Locale-Independent Providers
 =============================
 
+BinaryFile
+----------
+
+.. autoclass:: mimesis.BinaryFile
+   :members:
+   :special-members: __init__
+
+
 Clothing
 -------------
 
