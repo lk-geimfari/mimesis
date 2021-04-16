@@ -13,7 +13,7 @@ Version 5.0.0
 - Fix inheritance issues for ``Generic``, now it inherits ``BaseProvider`` instead of ``BaseDataProvider``
 - Added methods ``.iterator()`` and ``.infinite()`` for ``schema.Schema``
 - Removed a bunch of useless custom exceptions and replaced them with ``FieldError``
-- Added ``Writable`` data provider which provides binary data files, such as ``.mp3``, ``.mp4``, ``.png``, etc.
+- Added ``BinaryFile`` data provider which provides binary data files, such as ``.mp3``, ``.mp4``, ``.png``, etc.
 
 Version 4.1.3
 -------------
