@@ -68,11 +68,11 @@ class TestPerson(object):
             "UU_d",
             "U_d",
             "Ud",
-            "default",
             "l-d",
             "l.d",
             "l_d",
             "ld",
+            "default",
             None,
         ],
     )
@@ -97,16 +97,12 @@ class TestPerson(object):
         result = _person.username(template=template)
         assert re.match(template_patterns[template], result)
 
-    def test_username_custom_template(self, _person):
-        result = _person.username(template="d-U.l_d")
-        assert re.fullmatch(r"[0-9]+\-[A-Z][a-z]+\.[a-z]+\_[0-9]+", result)
-
     def test_username_unsupported_template(self, _person):
         with pytest.raises(ValueError):
             _person.username(template=".d-")
 
         with pytest.raises(ValueError):
-            _person.username(template="dd-.dd")
+            _person.username(template="d-U.l_d")
 
     @pytest.mark.parametrize(
         "unique",

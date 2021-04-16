@@ -20,6 +20,7 @@ from mimesis.enums import Gender, SocialNetwork, TitleType
 from mimesis.exceptions import NonEnumerableError
 from mimesis.providers.base import BaseDataProvider
 from mimesis.random import get_random_item
+from mimesis.typing import UsernameTemplate
 
 __all__ = ["Person"]
 
@@ -168,7 +169,7 @@ class Person(BaseDataProvider):
             self.surname(gender),
         )
 
-    def username(self, template: Optional[str] = None) -> str:
+    def username(self, template: Optional[UsernameTemplate] = None) -> str:
         """Generate username by template.
 
         Supported template placeholders: (U, l, d)
@@ -188,11 +189,9 @@ class Person(BaseDataProvider):
         :Example:
             Celloid1873
         """
-        min_date = 1800
-        max_date = 2070
-        default_template = "l.d"
+        min_date, max_date = (1800, 2070)
 
-        templates = (
+        templates: List[UsernameTemplate] = [
             "U_d",
             "U.d",
             "U-d",
@@ -205,18 +204,18 @@ class Person(BaseDataProvider):
             "l.d",
             "l_d",
             "default",
-        )
+        ]
 
         if template is None:
             template = self.random.choice(templates)
 
         if template == "default":
-            template = default_template
+            template = "l.d"
 
-        if not re.fullmatch(r"[Ul\.\-\_d]*[Ul]+[Ul\.\-\_d]*", template):
+        if template not in templates:
             raise ValueError("Template '{}' is not supported.".format(template))
 
-        tags = re.findall(r"[Uld\.\-\_]", template)
+        tags = re.findall(r"[Uld.\-_]", template)
 
         username = ""
         for tag in tags:
@@ -253,7 +252,7 @@ class Person(BaseDataProvider):
 
     def email(
         self,
-        domains: Optional[Union[Tuple[str], List[str]]] = None,
+        domains: Optional[Union[Sequence[str]]] = None,
         unique: bool = False,
     ) -> str:
         """Generate a random email.

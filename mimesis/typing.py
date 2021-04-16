@@ -4,16 +4,17 @@
 
 import datetime
 from decimal import Decimal
-from typing import Any, Dict, List, Set, Union
+from typing import Any, Dict, List, Literal, Set, Union
 
 __all__ = [
-    "JSON",
-    "DateTime",
-    "Timestamp",
-    "Time",
     "Date",
-    "Seed",
+    "DateTime",
+    "JSON",
     "Matrix",
+    "Seed",
+    "Time",
+    "Timestamp",
+    "UsernameTemplate",
 ]
 
 JSON = Dict[str, Any]
@@ -30,4 +31,24 @@ Seed = Union[int, str, bytes, bytearray]
 
 KeywordsType = Union[List[str], Set[str]]
 
-Matrix = Union[List[float], List[complex], List[int], List[Decimal]]
+Matrix = Union[
+    List[int],
+    List[float],
+    List[complex],
+    List[Decimal],
+]
+
+UsernameTemplate = Literal[
+    "U_d",
+    "U.d",
+    "U-d",
+    "Ud",
+    "UU-d",
+    "UU.d",
+    "UU_d",
+    "ld",
+    "l-d",
+    "l.d",
+    "l_d",
+    "default",
+]
