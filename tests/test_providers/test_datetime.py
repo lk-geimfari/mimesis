@@ -18,7 +18,7 @@ class TestDatetime(object):
         assert re.match(patterns.DATA_PROVIDER_STR_REGEX, str(dt))
 
     @pytest.mark.parametrize(
-        'days, objects_count',
+        "days, objects_count",
         [
             (7, 169),
             (14, 337),
@@ -64,7 +64,7 @@ class TestDatetime(object):
         assert date_object.year == dt.CURRENT_YEAR
 
     def test_formatted_date(self, dt):
-        fmt_date = dt.formatted_date('%Y', start=2000, end=2000)
+        fmt_date = dt.formatted_date("%Y", start=2000, end=2000)
         assert int(fmt_date) == 2000
         assert isinstance(fmt_date, str)
 
@@ -83,10 +83,10 @@ class TestDatetime(object):
 
     def test_day_of_week(self, dt):
         result = dt.day_of_week()
-        assert result in dt._data['day']['name']
+        assert result in dt._data["day"]["name"]
 
         result_abbr = dt.day_of_week(abbr=True)
-        assert result_abbr in dt._data['day']['abbr']
+        assert result_abbr in dt._data["day"]["abbr"]
 
     def test_month(self, dt):
         result = dt.month()
@@ -97,7 +97,7 @@ class TestDatetime(object):
 
     def test_periodicity(self, dt):
         result = dt.periodicity()
-        assert result in dt._data['periodicity']
+        assert result in dt._data["periodicity"]
 
     def test_timezone(self, _datetime):
         result = _datetime.timezone()
@@ -107,7 +107,7 @@ class TestDatetime(object):
         assert result in TIMEZONES
 
     @pytest.mark.parametrize(
-        'posix, _type',
+        "posix, _type",
         [
             (False, str),
             (True, int),
@@ -119,9 +119,9 @@ class TestDatetime(object):
         assert isinstance(result, _type)
 
     @pytest.mark.parametrize(
-        'start, end, timezone',
+        "start, end, timezone",
         [
-            (2014, 2019, 'Europe/Paris'),
+            (2014, 2019, "Europe/Paris"),
             (2014, 2019, None),
         ],
     )
@@ -137,21 +137,21 @@ class TestDatetime(object):
             assert dt_obj.tzinfo is None
 
     @pytest.mark.parametrize(
-        'start, end',
+        "start, end",
         [
             (2018, 2018),
             (2019, 2019),
         ],
     )
     def test_formatted_datetime(self, _datetime, start, end):
-        dt_str = _datetime.formatted_date(fmt='%Y', start=start, end=end)
+        dt_str = _datetime.formatted_date(fmt="%Y", start=start, end=end)
         assert isinstance(dt_str, str)
         assert start <= int(dt_str) <= end
 
     def test_week_date(self, _datetime):
         result = _datetime.week_date(start=2017, end=_datetime.CURRENT_YEAR)
-        result = result.replace('-', ' ').replace('W', '')
-        year, week = result.split(' ')
+        result = result.replace("-", " ").replace("W", "")
+        year, week = result.split(" ")
 
         assert (int(year) >= 2017) and (int(year) <= _datetime.CURRENT_YEAR)
         assert int(week) <= 52

@@ -199,7 +199,7 @@ class Schema:
         """
 
         if iterations < 1:
-            raise ValueError('The number of iterations must be greater than 0.')
+            raise ValueError("The number of iterations must be greater than 0.")
 
         for item in range(iterations):
             yield self.schema()

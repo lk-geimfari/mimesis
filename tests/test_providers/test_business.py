@@ -23,7 +23,7 @@ class TestBusiness(object):
 
     def test_copyright(self, business):
         result = business.copyright()
-        assert '©' in result
+        assert "©" in result
 
     def test_currency_iso_code(self, business):
         result1 = business.currency_iso_code()
@@ -46,26 +46,26 @@ class TestBusiness(object):
         assert result in CRYPTOCURRENCY_SYMBOLS
 
     @pytest.mark.parametrize(
-        'abbr, key',
+        "abbr, key",
         [
-            (False, 'title'),
-            (True, 'abbr'),
+            (False, "title"),
+            (True, "abbr"),
         ],
     )
     def test_company_type(self, business, abbr, key):
         result = business.company_type(abbr=abbr)
-        assert result in business._data['company']['type'][key]
+        assert result in business._data["company"]["type"][key]
 
     def test_company(self, business):
         result = business.company()
-        assert result in business._data['company']['name']
+        assert result in business._data["company"]["name"]
 
     def test_price(self, business):
         result = business.price(minimum=100.00, maximum=1999.99)
         assert isinstance(result, str)
 
     @pytest.mark.parametrize(
-        'minimum, maximum',
+        "minimum, maximum",
         [
             (1, 2),
             (2, 4),
@@ -74,10 +74,10 @@ class TestBusiness(object):
     )
     def test_price_in_btc(self, _business, minimum, maximum):
         result = _business.price_in_btc(minimum, maximum)
-        price, symbol = result.split(' ')
+        price, symbol = result.split(" ")
         assert float(price) >= minimum
         assert float(price) <= maximum
-        assert symbol == 'BTC'
+        assert symbol == "BTC"
 
 
 class TestSeededBusiness(object):

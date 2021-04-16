@@ -10,7 +10,7 @@ def ukraine():
 
 
 @pytest.mark.parametrize(
-    'gender',
+    "gender",
     [
         Gender.FEMALE,
         Gender.MALE,
@@ -23,4 +23,4 @@ def test_patronymic(ukraine, gender):
     assert len(result) >= 4
 
     with pytest.raises(NonEnumerableError):
-        ukraine.patronymic(gender='nil')
+        ukraine.patronymic(gender="nil")

@@ -45,7 +45,7 @@ class TestGeneric(object):
 
         class Provider2(BaseProvider):
             class Meta:
-                name = 'custom_provider'
+                name = "custom_provider"
 
             @staticmethod
             def two():
@@ -83,7 +83,7 @@ class TestGeneric(object):
     def test_dir(self, generic):
         providers = generic.__dir__()
         for p in providers:
-            assert not p.startswith('_')
+            assert not p.startswith("_")
 
 
 class TestSeededGeneric(object):

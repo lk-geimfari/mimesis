@@ -27,7 +27,7 @@ class TestInternet(object):
         result = net.hashtags(quantity=5)
         assert len(result) == 5
         result = net.hashtags(quantity=1)
-        assert result.replace('#', '') in data.HASHTAGS
+        assert result.replace("#", "") in data.HASHTAGS
 
     def test_home_page(self, net):
         result = net.home_page()
@@ -42,10 +42,10 @@ class TestInternet(object):
         assert result is not None
 
     @pytest.mark.parametrize(
-        'w, h, keywords, writable, res_type',
+        "w, h, keywords, writable, res_type",
         [
-            (900, 900, ['love', 'passion', 'death'], False, str),
-            (800, 800, {'love', 'passion', 'death'}, False, str),
+            (900, 900, ["love", "passion", "death"], False, str),
+            (800, 800, {"love", "passion", "death"}, False, str),
             (800, 800, None, False, str),
             # (700, 700, ['love', 'passion', 'death'], True, bytes),
         ],
@@ -60,10 +60,10 @@ class TestInternet(object):
         assert isinstance(result, res_type)
         if res_type == str:
             assert re.match(patterns.STOCK_IMAGE, result)
-            assert result.endswith('?' + ','.join(keywords or []))
+            assert result.endswith("?" + ",".join(keywords or []))
 
     @pytest.mark.parametrize(
-        'layer',
+        "layer",
         [
             Layer.APPLICATION,
             Layer.DATA_LINK,
@@ -80,7 +80,7 @@ class TestInternet(object):
 
     def test_network_protocol_exception(self, net):
         with pytest.raises(NonEnumerableError):
-            net.network_protocol(layer='nil')
+            net.network_protocol(layer="nil")
 
     def test_ip_v4_object(self, net):
         ip = net.ip_v4_object()
@@ -90,7 +90,7 @@ class TestInternet(object):
         assert isinstance(ip, IPv4Address)
 
     @pytest.mark.parametrize(
-        'with_port, port_range',
+        "with_port, port_range",
         [
             (False, PortRange.ALL),
             (True, PortRange.ALL),
@@ -105,7 +105,7 @@ class TestInternet(object):
         if not with_port:
             assert re.match(patterns.IP_V4_REGEX, ip)
         else:
-            port = int(ip.split(':')[-1])
+            port = int(ip.split(":")[-1])
             port_start, port_end = port_range.value
             assert port_start <= port <= port_end
 
@@ -129,7 +129,7 @@ class TestInternet(object):
         assert result in data.HTTP_METHODS
 
     @pytest.mark.parametrize(
-        'mime_type',
+        "mime_type",
         [
             MimeType.APPLICATION,
             MimeType.AUDIO,
@@ -141,12 +141,12 @@ class TestInternet(object):
     )
     def test_content_type(self, net, mime_type):
         ct = net.content_type(mime_type=mime_type)
-        ct = ct.split(':')[1].strip()
+        ct = ct.split(":")[1].strip()
         assert ct in data.MIME_TYPES[mime_type.value]
 
     def test_content_type_wrong_arg(self, net):
         with pytest.raises(NonEnumerableError):
-            net.content_type(mime_type='nil')
+            net.content_type(mime_type="nil")
 
     def test_http_status_code(self, net):
         result = net.http_status_code()
@@ -157,7 +157,7 @@ class TestInternet(object):
         assert result in data.HTTP_STATUS_MSGS
 
     @pytest.mark.parametrize(
-        'domain_type',
+        "domain_type",
         [
             TLDType.CCTLD,
             TLDType.GTLD,
@@ -173,10 +173,10 @@ class TestInternet(object):
 
     def test_top_level_domain_unsupported(self, net):
         with pytest.raises(NonEnumerableError):
-            net.top_level_domain(tld_type='nil')
+            net.top_level_domain(tld_type="nil")
 
     @pytest.mark.parametrize(
-        'range_, excepted',
+        "range_, excepted",
         [
             (PortRange.ALL, (1, 65535)),
             (PortRange.EPHEMERAL, (49152, 65535)),
@@ -187,7 +187,7 @@ class TestInternet(object):
         result = net.port(port_range=range_)
         assert (result >= excepted[0]) and (result <= excepted[1])
         with pytest.raises(NonEnumerableError):
-            net.port('nill')
+            net.port("nill")
 
 
 class TestSeededInternet(object):

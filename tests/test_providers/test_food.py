@@ -13,23 +13,23 @@ class TestFood(object):
 
     def test_vegetable(self, food):
         result = food.vegetable()
-        assert result in food._data['vegetables']
+        assert result in food._data["vegetables"]
 
     def test_fruit(self, food):
         result = food.fruit()
-        assert result in food._data['fruits']
+        assert result in food._data["fruits"]
 
     def test_dish(self, food):
         result = food.dish()
-        assert result in food._data['dishes']
+        assert result in food._data["dishes"]
 
     def test_drink(self, food):
         result = food.drink()
-        assert result in food._data['drinks']
+        assert result in food._data["drinks"]
 
     def test_spices(self, food):
         result = food.spices()
-        assert result in food._data['spices']
+        assert result in food._data["spices"]
 
 
 class TestSeededFood(object):

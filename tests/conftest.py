@@ -3,12 +3,12 @@ import pytest
 from mimesis.locales import LIST_OF_LOCALES
 
 locales = LIST_OF_LOCALES
-platform = ['win32', 'linux']
+platform = ["win32", "linux"]
 
 
 @pytest.fixture
 def seed():
-    return 'mimesis'
+    return "mimesis"
 
 
 @pytest.fixture(params=locales)

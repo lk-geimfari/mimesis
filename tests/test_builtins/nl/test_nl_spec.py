@@ -34,7 +34,7 @@ def test_burgerservicenummer(nl):
 
 
 def test_nl_meta():
-    generic = Generic('nl')
+    generic = Generic("nl")
     generic.add_provider(NetherlandsSpecProvider)
     result = generic.netherlands_provider.bsn()
     assert result is not None

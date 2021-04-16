@@ -20,7 +20,7 @@ class TestDevelopment(object):
         assert result in data.LICENSES
 
     def test_version(self, dev):
-        result = dev.version().split('.')
+        result = dev.version().split(".")
         result = [int(i) for i in result]
 
         assert len(result) == 3
@@ -35,11 +35,11 @@ class TestDevelopment(object):
         assert (patch >= 0) and (patch <= 11)
 
         pre_release = dev.version(pre_release=True)
-        assert len(pre_release.split('.')) == 4
+        assert len(pre_release.split(".")) == 4
 
         # Use calendar versioning
         calver = dev.version(calver=True)
-        y, *_ = calver.split('.')
+        y, *_ = calver.split(".")
         assert (int(y) >= 2016) and (int(y) <= 2018)
 
     def test_programming_language(self, dev):

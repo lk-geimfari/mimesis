@@ -20,7 +20,7 @@ class TestPerson(object):
         assert re.match(patterns.DATA_PROVIDER_STR_REGEX, str(person))
 
     @pytest.mark.parametrize(
-        'minimum, maximum',
+        "minimum, maximum",
         [
             (16, 18),
             (18, 21),
@@ -32,15 +32,15 @@ class TestPerson(object):
         assert (result >= minimum) and (result <= maximum)
 
     def test_age_store(self, _person):
-        result = _person._store['age']
+        result = _person._store["age"]
         assert result == 0
 
     def test_age_update(self, _person):
-        result = _person.age() - _person._store['age']
+        result = _person.age() - _person._store["age"]
         assert result == 0
 
     def test_work_experience(self, _person):
-        result = _person.work_experience(working_start_age=0) - _person._store['age']
+        result = _person.work_experience(working_start_age=0) - _person._store["age"]
         assert result == 0
 
     def test_work_experience_store(self, _person):
@@ -59,57 +59,57 @@ class TestPerson(object):
         assert len(result) == 32
 
     @pytest.mark.parametrize(
-        'template',
+        "template",
         [
-            'U-d',
-            'U.d',
-            'UU-d',
-            'UU.d',
-            'UU_d',
-            'U_d',
-            'Ud',
-            'default',
-            'l-d',
-            'l.d',
-            'l_d',
-            'ld',
+            "U-d",
+            "U.d",
+            "UU-d",
+            "UU.d",
+            "UU_d",
+            "U_d",
+            "Ud",
+            "default",
+            "l-d",
+            "l.d",
+            "l_d",
+            "ld",
             None,
         ],
     )
     def test_username(self, _person, template):
 
         template_patterns = {
-            'U-d': r'^[A-Z][a-z]+-[0-9]+$',
-            'U.d': r'^[A-Z][a-z]+\.[0-9]+$',
-            'U_d': r'^[A-Z][a-z]+_[0-9]+$',
-            'UU-d': r'^[A-Z][a-z]+[A-Z][a-z]+-[0-9]+$',
-            'UU.d': r'^[A-Z][a-z]+[A-Z][a-z]+\.[0-9]+$',
-            'UU_d': r'^[A-Z][a-z]+[A-Z][a-z]+_[0-9]+$',
-            'Ud': r'^[A-Z][a-z]+[0-9]+$',
-            'l-d': r'^[a-z]+-[0-9]+$',
-            'l.d': r'^[a-z]+\.[0-9]+$',
-            'l_d': r'^[a-z]+_[0-9]+$',
-            'ld': r'^[a-z]+[0-9]+$',
-            'default': r'^[a-z]+\.[0-9]+',
-            None: r'^[A-Za-z]{2,}[\.\-\_]?[0-9]+$',
+            "U-d": r"^[A-Z][a-z]+-[0-9]+$",
+            "U.d": r"^[A-Z][a-z]+\.[0-9]+$",
+            "U_d": r"^[A-Z][a-z]+_[0-9]+$",
+            "UU-d": r"^[A-Z][a-z]+[A-Z][a-z]+-[0-9]+$",
+            "UU.d": r"^[A-Z][a-z]+[A-Z][a-z]+\.[0-9]+$",
+            "UU_d": r"^[A-Z][a-z]+[A-Z][a-z]+_[0-9]+$",
+            "Ud": r"^[A-Z][a-z]+[0-9]+$",
+            "l-d": r"^[a-z]+-[0-9]+$",
+            "l.d": r"^[a-z]+\.[0-9]+$",
+            "l_d": r"^[a-z]+_[0-9]+$",
+            "ld": r"^[a-z]+[0-9]+$",
+            "default": r"^[a-z]+\.[0-9]+",
+            None: r"^[A-Za-z]{2,}[\.\-\_]?[0-9]+$",
         }
 
         result = _person.username(template=template)
         assert re.match(template_patterns[template], result)
 
     def test_username_custom_template(self, _person):
-        result = _person.username(template='d-U.l_d')
-        assert re.fullmatch(r'[0-9]+\-[A-Z][a-z]+\.[a-z]+\_[0-9]+', result)
+        result = _person.username(template="d-U.l_d")
+        assert re.fullmatch(r"[0-9]+\-[A-Z][a-z]+\.[a-z]+\_[0-9]+", result)
 
     def test_username_unsupported_template(self, _person):
         with pytest.raises(ValueError):
-            _person.username(template='.d-')
+            _person.username(template=".d-")
 
         with pytest.raises(ValueError):
-            _person.username(template='dd-.dd')
+            _person.username(template="dd-.dd")
 
     @pytest.mark.parametrize(
-        'unique',
+        "unique",
         [
             False,
             True,
@@ -119,10 +119,10 @@ class TestPerson(object):
         result = _person.email()
         assert re.match(patterns.EMAIL_REGEX, result)
 
-        domains = ['@example.com', 'example.com']
+        domains = ["@example.com", "example.com"]
         result = _person.email(domains=domains)
         assert re.match(patterns.EMAIL_REGEX, result)
-        assert result.split('@')[1] == 'example.com'
+        assert result.split("@")[1] == "example.com"
 
         if unique:
             count = 1000000
@@ -130,17 +130,17 @@ class TestPerson(object):
 
             for i in range(count):
                 email = _person.email(
-                    domains=['example.com'],
+                    domains=["example.com"],
                     unique=unique,
                 )
-                email_username = email.split('@')[0].strip()
+                email_username = email.split("@")[0].strip()
                 generated.add(email_username)
 
             assert len(generated) == count
 
     def test_height(self, _person):
         result = _person.height(minimum=1.60, maximum=1.90)
-        assert result.startswith('1')
+        assert result.startswith("1")
         assert isinstance(result, str)
 
     def test_weight(self, _person):
@@ -153,7 +153,7 @@ class TestPerson(object):
         assert result in BLOOD_GROUPS
 
     @pytest.mark.parametrize(
-        'site',
+        "site",
         [
             SocialNetwork.INSTAGRAM,
             SocialNetwork.FACEBOOK,
@@ -168,21 +168,21 @@ class TestPerson(object):
 
     def test_avatar(self, _person):
         result = _person.avatar(size=512)
-        img, size, *__ = result.split('/')[::-1]
+        img, size, *__ = result.split("/")[::-1]
         assert int(size) == 512
-        assert 32 == len(img.split('.')[0])
+        assert 32 == len(img.split(".")[0])
 
     def test_identifier(self, _person):
         result = _person.identifier()
-        mask = '##-##/##'
+        mask = "##-##/##"
         assert len(mask) == len(result)
 
-        result = _person.identifier(mask='##-##/## @@')
-        suffix = result.split(' ')[1]
+        result = _person.identifier(mask="##-##/## @@")
+        suffix = result.split(" ")[1]
         assert suffix.isalpha()
 
     @pytest.mark.parametrize(
-        'gender',
+        "gender",
         [
             Gender.FEMALE,
             Gender.MALE,
@@ -190,10 +190,10 @@ class TestPerson(object):
     )
     def test_name(self, person, gender):
         result = person.name(gender=gender)
-        assert result in person._data['names'][gender.value]
+        assert result in person._data["names"][gender.value]
 
     @pytest.mark.parametrize(
-        'gender',
+        "gender",
         [
             Gender.FEMALE,
             Gender.MALE,
@@ -201,39 +201,39 @@ class TestPerson(object):
     )
     def test_first_name(self, person, gender):
         result = person.first_name(gender=gender)
-        assert result in person._data['names'][gender.value]
+        assert result in person._data["names"][gender.value]
 
     def test_name_with_none(self, _person):
         result = _person.name(gender=None)
-        names = _person._data['names']
+        names = _person._data["names"]
 
-        females = names['female']
-        males = names['male']
+        females = names["female"]
+        males = names["male"]
         assert result is not None
         assert (result in females) or (result in males)
 
     def test_name_unexpected_gender(self, person):
         with pytest.raises(NonEnumerableError):
-            person.name(gender='nil')
+            person.name(gender="nil")
 
     def test_telephone(self, person):
         result = person.telephone()
         assert result is not None
 
-        mask = '+5 (###)-###-##-##'
+        mask = "+5 (###)-###-##-##"
         result = person.telephone(mask=mask)
-        head = result.split(' ')[0]
-        assert head == '+5'
+        head = result.split(" ")[0]
+        assert head == "+5"
 
     @pytest.mark.parametrize(
-        'gender',
+        "gender",
         [
             Gender.FEMALE,
             Gender.MALE,
         ],
     )
     def test_surname(self, person, gender):
-        surnames = person._data['surnames']
+        surnames = person._data["surnames"]
 
         # Surnames separated by gender.
         if isinstance(surnames, dict):
@@ -246,7 +246,7 @@ class TestPerson(object):
             assert result in surnames
 
     @pytest.mark.parametrize(
-        'gender',
+        "gender",
         [
             Gender.FEMALE,
             Gender.MALE,
@@ -255,7 +255,7 @@ class TestPerson(object):
     def test_full_name(self, person, gender):
         result = person.full_name(gender=gender)
 
-        result = result.split(' ')
+        result = result.split(" ")
         assert result[0] is not None
         assert result[1] is not None
 
@@ -263,11 +263,11 @@ class TestPerson(object):
         assert result is not None
 
         with pytest.raises(NonEnumerableError):
-            person.full_name(gender='nil')
+            person.full_name(gender="nil")
 
     def test_gender(self, person):
         result = person.gender()
-        assert result in person._data['gender']
+        assert result in person._data["gender"]
 
         result = person.gender(symbol=True)
         assert result in GENDER_SYMBOLS
@@ -280,7 +280,7 @@ class TestPerson(object):
 
     def test_sex(self, person):
         result = person.sex()
-        assert result in person._data['gender']
+        assert result in person._data["gender"]
 
         result = person.gender(symbol=True)
         assert result in GENDER_SYMBOLS
@@ -293,41 +293,41 @@ class TestPerson(object):
 
     def test_sexual_orientation(self, person):
         result = person.sexual_orientation()
-        assert result in person._data['sexuality']
+        assert result in person._data["sexuality"]
 
         symbol = person.sexual_orientation(symbol=True)
         assert symbol in SEXUALITY_SYMBOLS
 
     def test_profession(self, person):
         result = person.occupation()
-        assert result in person._data['occupation']
+        assert result in person._data["occupation"]
 
     def test_university(self, person):
         result = person.university()
-        assert result in person._data['university']
+        assert result in person._data["university"]
 
     def test_academic_degree(self, person):
         result = person.academic_degree()
-        assert result in person._data['academic_degree']
+        assert result in person._data["academic_degree"]
 
     def test_language(self, person):
         result = person.language()
-        assert result in person._data['language']
+        assert result in person._data["language"]
 
     def test_worldview(self, person):
         result = person.worldview()
-        assert result in person._data['worldview']
+        assert result in person._data["worldview"]
 
     def test_views_on(self, person):
         result = person.views_on()
-        assert result in person._data['views_on']
+        assert result in person._data["views_on"]
 
     def test_political_views(self, person):
         result = person.political_views()
-        assert result in person._data['political_views']
+        assert result in person._data["political_views"]
 
     @pytest.mark.parametrize(
-        'title_type',
+        "title_type",
         [
             TitleType.ACADEMIC,
             TitleType.TYPICAL,
@@ -335,7 +335,7 @@ class TestPerson(object):
         ],
     )
     @pytest.mark.parametrize(
-        'gender',
+        "gender",
         [
             Gender.FEMALE,
             Gender.MALE,
@@ -347,21 +347,21 @@ class TestPerson(object):
         assert result is not None
 
         with pytest.raises(NonEnumerableError):
-            person.title(title_type='nil')
-            person.title(gender='nil')
+            person.title(title_type="nil")
+            person.title(gender="nil")
 
     @pytest.mark.parametrize(
-        'gender',
+        "gender",
         [
             Gender.FEMALE,
             Gender.MALE,
         ],
     )
     def test_nationality(self, person, gender):
-        nationality = person._data['nationality']
+        nationality = person._data["nationality"]
         if isinstance(nationality, dict):
             result = person.nationality(gender=gender)
-            assert result in person._data['nationality'][gender.value]
+            assert result in person._data["nationality"][gender.value]
 
         result = person.nationality()
         assert result is not None
@@ -392,11 +392,11 @@ class TestSeededPerson(object):
 
     def test_username(self, p1, p2):
         assert p1.username() == p2.username()
-        assert p1.username('l_d') == p2.username('l_d')
+        assert p1.username("l_d") == p2.username("l_d")
 
     def test_email(self, p1, p2):
         assert p1.email() == p2.email()
-        assert p1.email(domains=['@mimesis.io']) == p2.email(domains=['@mimesis.io'])
+        assert p1.email(domains=["@mimesis.io"]) == p2.email(domains=["@mimesis.io"])
 
         with pytest.raises(ValueError):
             p1.email(unique=True)
@@ -424,7 +424,7 @@ class TestSeededPerson(object):
 
     def test_identifier(self, p1, p2):
         assert p1.identifier() == p2.identifier()
-        assert p1.identifier(mask='##') == p2.identifier(mask='##')
+        assert p1.identifier(mask="##") == p2.identifier(mask="##")
 
     def test_name(self, p1, p2):
         assert p1.name() == p2.name()
@@ -438,8 +438,8 @@ class TestSeededPerson(object):
 
     def test_telephone(self, p1, p2):
         assert p1.telephone() == p2.telephone()
-        assert p1.telephone(mask='(x)-xx-xxx', placeholder='x') == p2.telephone(
-            mask='(x)-xx-xxx', placeholder='x'
+        assert p1.telephone(mask="(x)-xx-xxx", placeholder="x") == p2.telephone(
+            mask="(x)-xx-xxx", placeholder="x"
         )
 
     def test_surname(self, p1, p2):

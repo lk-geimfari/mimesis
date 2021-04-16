@@ -18,82 +18,82 @@ def test_str(field):
 
 @pytest.fixture
 def default_field():
-    return Field('en')
+    return Field("en")
 
 
-@pytest.fixture(scope='module', params=locales.LIST_OF_LOCALES)
+@pytest.fixture(scope="module", params=locales.LIST_OF_LOCALES)
 def field(request):
     return Field(request.param)
 
 
 @pytest.fixture
 def modified_field():
-    return Field('en', providers=(USASpecProvider,))
+    return Field("en", providers=(USASpecProvider,))
 
 
 def test_field(field):
-    assert field('uuid')
-    assert field('full_name')
-    assert field('street_name')
+    assert field("uuid")
+    assert field("full_name")
+    assert field("street_name")
 
 
 def test_field_with_custom_providers(default_field, modified_field):
     with pytest.raises(FieldError):
-        default_field('ssn')
+        default_field("ssn")
 
-    assert modified_field('ssn')
+    assert modified_field("ssn")
 
 
 def test_field_with_key_function(field):
-    name = field('person.name', key=str.upper)
+    name = field("person.name", key=str.upper)
     assert name.isupper()
 
 
 def test_field_raises_field_error(default_field):
     with pytest.raises(FieldError):
-        default_field('person.unsupported_field')
+        default_field("person.unsupported_field")
 
     with pytest.raises(FieldError):
-        default_field('unsupported_field')
+        default_field("unsupported_field")
 
     with pytest.raises(FieldError):
         default_field()
 
     with pytest.raises(FieldError):
-        default_field('person.full_name.invalid')
+        default_field("person.full_name.invalid")
 
 
-@pytest.fixture(scope='module', params=locales.LIST_OF_LOCALES)
+@pytest.fixture(scope="module", params=locales.LIST_OF_LOCALES)
 def test_base_field(request):
     field = BaseField(request.param)
 
-    assert field.perform('uuid')
-    assert field.perform('full_name')
-    assert field.perform('street_name')
+    assert field.perform("uuid")
+    assert field.perform("full_name")
+    assert field.perform("street_name")
 
 
 @pytest.fixture
 def schema(field):
     return Schema(
         schema=lambda: {
-            'id': field('uuid'),
-            'name': field('word'),
-            'timestamp': field('timestamp'),
-            'zip_code': field('postal_code'),
-            'owner': {
-                'email': field('email', key=str.lower),
-                'creator': field('full_name', gender=Gender.FEMALE),
+            "id": field("uuid"),
+            "name": field("word"),
+            "timestamp": field("timestamp"),
+            "zip_code": field("postal_code"),
+            "owner": {
+                "email": field("email", key=str.lower),
+                "creator": field("full_name", gender=Gender.FEMALE),
             },
-            'defined_cls': {
-                'title': field('person.title'),
-                'title2': field('text.title'),
+            "defined_cls": {
+                "title": field("person.title"),
+                "title2": field("text.title"),
             },
         }
     )
 
 
 @pytest.mark.parametrize(
-    'invalid_schema', [None, {'a': 'uuid'}, [True, False], (1, 2, 3)]
+    "invalid_schema", [None, {"a": "uuid"}, [True, False], (1, 2, 3)]
 )
 def test_schema_raises_schema_error(invalid_schema):
     with pytest.raises(SchemaError):
@@ -108,8 +108,8 @@ def test_schema_create(schema):
 
     first, *mid, last = result
 
-    assert first['timestamp'] != last['timestamp']
-    assert first['owner']['creator'] != last['owner']['creator']
+    assert first["timestamp"] != last["timestamp"]
+    assert first["owner"]["creator"] != last["owner"]["creator"]
 
     assert schema.create(0) == []
 
@@ -136,5 +136,5 @@ def test_schema_loop(schema):
         result_1 = next(infinite)
         result_2 = next(infinite)
 
-        assert result_1['timestamp'] != result_2['timestamp']
-        assert result_1['owner']['creator'] != result_2['owner']['creator']
+        assert result_1["timestamp"] != result_2["timestamp"]
+        assert result_1["owner"]["creator"] != result_2["owner"]["creator"]

@@ -1,17 +1,55 @@
 # -*- coding: utf-8 -*-
 
 import re
+import tempfile
 
 import pytest
-from mimesis import File
 from mimesis.data import EXTENSIONS, MIME_TYPES
-from mimesis.enums import FileType, MimeType
+from mimesis.enums import (
+    FileType,
+    MimeType,
+    VideoFile,
+    AudioFile,
+    ImageFile,
+    DocumentFile,
+    CompressedFile,
+)
 from mimesis.exceptions import NonEnumerableError
+from mimesis.providers.file import File, Writable
 
 from . import patterns
 
 
-class TestFile(object):
+class TestWritable:
+    @pytest.fixture
+    def writable(self):
+        return Writable()
+
+    @pytest.mark.parametrize(
+        "method_name, extensions",
+        [
+            ('video', (VideoFile.MP4, VideoFile.MOV)),
+            ('audio', (AudioFile.MP3, AudioFile.AAC)),
+            ('image', (ImageFile.PNG, ImageFile.JPG, ImageFile.GIF)),
+            ('document', (DocumentFile.DOCX, DocumentFile.XLSX, DocumentFile.PDF)),
+            ('compressed', (CompressedFile.ZIP, CompressedFile.GZIP)),
+        ]
+    )
+    def test_all_methods(self, writable, method_name, extensions):
+        method = getattr(writable, method_name)
+        with pytest.raises(TypeError):
+            for extension in extensions:
+                method(extension)
+
+        for extension in extensions:
+            content = method(extension=extension)
+            assert isinstance(content, bytes)
+
+            with tempfile.TemporaryFile() as f:
+                f.write(content)
+
+
+class TestFile:
     @pytest.fixture
     def file(self):
         return File()
@@ -20,7 +58,7 @@ class TestFile(object):
         assert re.match(patterns.PROVIDER_STR_REGEX, str(file))
 
     @pytest.mark.parametrize(
-        'extension',
+        "extension",
         [
             FileType.AUDIO,
             FileType.COMPRESSED,
@@ -37,7 +75,7 @@ class TestFile(object):
         assert ext in EXTENSIONS[extension.value]
 
     @pytest.mark.parametrize(
-        'type_',
+        "type_",
         [
             MimeType.APPLICATION,
             MimeType.AUDIO,
@@ -52,10 +90,10 @@ class TestFile(object):
         assert result in MIME_TYPES[type_.value]
 
         with pytest.raises(NonEnumerableError):
-            file.mime_type(type_='nil')
+            file.mime_type(type_="nil")
 
     @pytest.mark.parametrize(
-        'file_type',
+        "file_type",
         [
             FileType.AUDIO,
             FileType.COMPRESSED,
@@ -75,11 +113,11 @@ class TestFile(object):
 
     def test_size(self, file):
         result = file.size(10, 10)
-        size = result.split(' ')[0].strip()
+        size = result.split(" ")[0].strip()
         assert int(size) == 10
 
 
-class TestSeededFile(object):
+class TestSeededFile:
     @pytest.fixture
     def f1(self, seed):
         return File(seed=seed)

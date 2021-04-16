@@ -11,12 +11,12 @@ def russia():
 
 def test_passport_series(russia):
     series = russia.passport_series()
-    assert isinstance(series.split(' '), list)
+    assert isinstance(series.split(" "), list)
 
 
 def test_passport_series_parametrized(russia):
     series = russia.passport_series(year=10)
-    region, year = series.split(' ')
+    region, year = series.split(" ")
     assert int(year) == 10
     assert 0 < int(region) < 100
 
@@ -33,7 +33,7 @@ def test_series_and_number(russia):
 
 
 @pytest.mark.parametrize(
-    'gender',
+    "gender",
     [
         Gender.FEMALE,
         Gender.MALE,
@@ -46,7 +46,7 @@ def test_patronymic(russia, gender):
     assert len(result) >= 4
 
     with pytest.raises(NonEnumerableError):
-        russia.patronymic(gender='nil')
+        russia.patronymic(gender="nil")
 
 
 def test_generate_sentence(russia):

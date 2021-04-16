@@ -48,7 +48,7 @@ class TestHardware(object):
         assert isinstance(result, str)
 
     def test_cpu_frequency(self, hard):
-        result = hard.cpu_frequency().split('G')[0]
+        result = hard.cpu_frequency().split("G")[0]
         assert float(result) < 4.4
 
     def test_cpu(self, hard):

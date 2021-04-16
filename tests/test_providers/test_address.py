@@ -21,13 +21,13 @@ class TestAddress(object):
 
     def test_street_number(self, _address):
         result = _address.street_number()
-        assert re.match(r'[0-9]{1,5}$', result)
+        assert re.match(r"[0-9]{1,5}$", result)
 
-    @pytest.mark.parametrize('dms', [True, False])
+    @pytest.mark.parametrize("dms", [True, False])
     def test__get_fs(self, _address, dms):
-        latitude = _address._get_fs('lt', dms=dms)
+        latitude = _address._get_fs("lt", dms=dms)
         assert latitude
-        longitude = _address._get_fs('lg', dms=dms)
+        longitude = _address._get_fs("lg", dms=dms)
         assert longitude
 
     def test_latitude(self, _address):
@@ -52,27 +52,27 @@ class TestAddress(object):
         result = _address.coordinates()
         assert isinstance(result, dict)
 
-        latitude = result['latitude']
+        latitude = result["latitude"]
         assert isinstance(latitude, float)
         assert latitude <= 90
         assert latitude >= -90
 
-        longitude = result['longitude']
+        longitude = result["longitude"]
         assert isinstance(latitude, float)
         assert longitude <= 180
         assert longitude >= -180
 
         coord = _address.coordinates(dms=True)
-        assert isinstance(coord['longitude'], str)
-        assert isinstance(coord['latitude'], str)
+        assert isinstance(coord["longitude"], str)
+        assert isinstance(coord["latitude"], str)
 
     def test_street_name(self, address):
         result = address.street_name()
-        assert result in address._data['street']['name']
+        assert result in address._data["street"]["name"]
 
     def test_street_suffix(self, address):
         result = address.street_suffix()
-        assert result in address._data['street']['suffix']
+        assert result in address._data["street"]["suffix"]
 
     def test_address(self, address):
         result = address.address()
@@ -80,42 +80,42 @@ class TestAddress(object):
         assert result is not None
 
     @pytest.mark.parametrize(
-        'abbr, key',
+        "abbr, key",
         [
-            (False, 'name'),
-            (True, 'abbr'),
+            (False, "name"),
+            (True, "abbr"),
         ],
     )
     def test_state(self, address, abbr, key):
         result = address.state(abbr=abbr)
-        assert result in address._data['state'][key]
+        assert result in address._data["state"][key]
 
     @pytest.mark.parametrize(
-        'alias, abbr',
+        "alias, abbr",
         [
-            ('province', True),
-            ('region', True),
-            ('federal_subject', True),
-            ('prefecture', True),
+            ("province", True),
+            ("region", True),
+            ("federal_subject", True),
+            ("prefecture", True),
         ],
     )
     def test_state_aliases_abbreviated(self, address, alias, abbr):
         method = getattr(address, alias)
         result = method(abbr=abbr)
-        assert result in address._data['state']['abbr']
+        assert result in address._data["state"]["abbr"]
 
     @pytest.mark.parametrize(
-        'alias',
+        "alias",
         [
-            'province',
-            'region',
-            'federal_subject',
-            'prefecture',
+            "province",
+            "region",
+            "federal_subject",
+            "prefecture",
         ],
     )
     def test_state_aliases(self, address, alias):
         result = getattr(address, alias)()
-        assert result in address._data['state']['name']
+        assert result in address._data["state"]["name"]
 
     def test_postal_code(self, address):
         result = address.postal_code()
@@ -124,17 +124,17 @@ class TestAddress(object):
         if current_locale in patterns.POSTAL_CODE_REGEX:
             assert re.match(patterns.POSTAL_CODE_REGEX[current_locale], result)
         else:
-            assert re.match(patterns.POSTAL_CODE_REGEX['default'], result)
+            assert re.match(patterns.POSTAL_CODE_REGEX["default"], result)
 
     def test_zip_code(self, address):
         assert address.zip_code()
 
     def test_country(self, address):
         country = address.country()
-        assert country in address._data['country']['name']
+        assert country in address._data["country"]["name"]
 
     @pytest.mark.parametrize(
-        'fmt, length',
+        "fmt, length",
         [
             (CountryCode.A2, 2),
             (CountryCode.A3, 3),
@@ -153,15 +153,15 @@ class TestAddress(object):
         assert len(iso) == length or len(iso) in length
 
         with pytest.raises(NonEnumerableError):
-            _address.country_code(fmt='nil')
+            _address.country_code(fmt="nil")
 
     def test_city(self, address):
         result = address.city()
-        assert result in address._data['city']
+        assert result in address._data["city"]
 
     def test_continent(self, address):
         result = address.continent()
-        assert result in address._data['continent']
+        assert result in address._data["continent"]
 
         result = address.continent(code=True)
         assert result in CONTINENT_CODES
@@ -234,10 +234,10 @@ class TestSeededAddress(object):
 
 
 @pytest.mark.parametrize(
-    'fn_args, dms',
+    "fn_args, dms",
     [
-        ([-86.761305, 'lt'], '86º45\'40.698"S'),
-        ([-110.424307, 'lg'], '110º25\'27.505"W'),
+        ([-86.761305, "lt"], "86º45'40.698\"S"),
+        ([-110.424307, "lg"], "110º25'27.505\"W"),
     ],
 )
 def test_dd_to_dms(address, fn_args, dms):

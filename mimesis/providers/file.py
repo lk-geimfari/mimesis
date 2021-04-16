@@ -3,14 +3,23 @@
 """File data provider."""
 
 import re
+from pathlib import Path
 from typing import Any, Optional
 
 from mimesis.data import EXTENSIONS, MIME_TYPES
-from mimesis.enums import FileType, MimeType
+from mimesis.enums import (
+    AudioFile,
+    CompressedFile,
+    DocumentFile,
+    FileType,
+    ImageFile,
+    MimeType,
+    VideoFile,
+)
 from mimesis.providers.base import BaseProvider
 from mimesis.providers.text import Text
 
-__all__ = ["File"]
+__all__ = ["File", "Writable"]
 
 
 class File(BaseProvider):
@@ -96,3 +105,68 @@ class File(BaseProvider):
             name=self.__sub(name),
             ext=ext,
         )
+
+
+class Writable(BaseProvider):
+    """Class for generating data related to transports."""
+
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
+        """Initialize attributes.
+
+        :param locale: Current locale.
+        :param seed: Seed.
+        """
+        super().__init__(*args, **kwargs)
+        self._data_dir = Path(__file__).parent.parent.joinpath("data", "int", "files")
+
+    class Meta:
+        """Class for metadata."""
+
+        name = "writable"
+
+    def _read_file(self, /, extension: Any, enum: Any) -> bytes:
+        extension = self._validate_enum(extension, enum)
+        file_path = self._data_dir.joinpath(f"sample.{extension}")
+
+        with open(file_path, "rb") as file:
+            return file.read()
+
+    def video(self, *, extension: VideoFile = VideoFile.MP4) -> bytes:
+        """Generates video file of given format.
+
+        :param extension: File extension.
+        :return: File as a sequence of bytes.
+        """
+        return self._read_file(extension, VideoFile)
+
+    def audio(self, *, extension: AudioFile = AudioFile.MP3) -> bytes:
+        """
+
+        :param extension: File extension.
+        :return: File as a sequence of bytes.
+        """
+        return self._read_file(extension, AudioFile)
+
+    def document(self, *, extension: DocumentFile = DocumentFile.PDF) -> bytes:
+        """
+
+        :param extension: File extension.
+        :return: File as a sequence of bytes.
+        """
+        return self._read_file(extension, DocumentFile)
+
+    def image(self, *, extension: ImageFile = ImageFile.PNG) -> bytes:
+        """
+
+        :param extension: File extension.
+        :return: File as a sequence of bytes.
+        """
+        return self._read_file(extension, ImageFile)
+
+    def compressed(self, *, extension: CompressedFile = CompressedFile.ZIP) -> bytes:
+        """
+
+        :param extension: File extension.
+        :return: File as a sequence of bytes.
+        """
+        return self._read_file(extension, CompressedFile)

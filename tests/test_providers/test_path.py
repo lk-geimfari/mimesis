@@ -9,26 +9,26 @@ from mimesis.data import FOLDERS, PROGRAMMING_LANGS, PROJECT_NAMES
 class TestPath(object):
     def test_root(self, path):
         result = path.root()
-        assert result == 'C:\\' or result == '/'
+        assert result == "C:\\" or result == "/"
 
     def test_home(self, path):
         result = path.home()
-        assert result == 'C:\\Users' or result == '/home'
+        assert result == "C:\\Users" or result == "/home"
 
     def test_user(self, path):
         user = path.user()
 
-        pattern = r'C:\\Users\\[A-Z].*' if path.platform == 'win32' else r'/home/[a-z].'
+        pattern = r"C:\\Users\\[A-Z].*" if path.platform == "win32" else r"/home/[a-z]."
 
         result = re.search(pattern, user)
         assert result
 
     def directory_separator(self, path):
-        slash_character = ''
-        if path.platform == 'win32':
-            slash_character = '\\'
-        elif path.platform == 'linux':
-            slash_character = '/'
+        slash_character = ""
+        if path.platform == "win32":
+            slash_character = "\\"
+        elif path.platform == "linux":
+            slash_character = "/"
         return slash_character
 
     def test_users_folder(self, path):

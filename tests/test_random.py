@@ -26,7 +26,7 @@ def test_randints(random):
 
 
 @pytest.mark.parametrize(
-    'size',
+    "size",
     (8, 16, 32, 64),
 )
 def test_urandom(random, size):
@@ -37,10 +37,10 @@ def test_urandom(random, size):
 
 
 @pytest.mark.parametrize(
-    'str_seq, length',
+    "str_seq, length",
     [
-        ('U', 10),
-        ('A', 20),
+        ("U", 10),
+        ("A", 20),
     ],
 )
 def test_generate_string(random, str_seq, length):
@@ -49,7 +49,7 @@ def test_generate_string(random, str_seq, length):
 
 
 @pytest.mark.parametrize(
-    'precision',
+    "precision",
     [
         4,
         6,
@@ -60,32 +60,32 @@ def test_uniform(random, precision):
     result = random.uniform(2.3, 10.5, precision)
     assert isinstance(result, float)
 
-    result = str(result).split('.')[1]
+    result = str(result).split(".")[1]
     assert precision >= len(result)
 
 
 @pytest.mark.parametrize(
-    'mask, digit, char',
+    "mask, digit, char",
     [
-        ('##-FA-@@', '#', '@'),
-        ('**-AF-$$', '*', '$'),
-        ('**-š好-$$', '*', '$'),
+        ("##-FA-@@", "#", "@"),
+        ("**-AF-$$", "*", "$"),
+        ("**-š好-$$", "*", "$"),
     ],
 )
 def test_custom_code(random, mask, digit, char):
     result = random.custom_code(mask=mask, char=char, digit=digit)
-    digit, middle, char = result.split('-')
-    _, middle_mask, _ = mask.split('-')
+    digit, middle, char = result.split("-")
+    _, middle_mask, _ = mask.split("-")
     assert char.isalpha()
     assert digit.isdigit()
     assert middle == middle_mask
 
 
 @pytest.mark.parametrize(
-    'mask, digit, char',
+    "mask, digit, char",
     [
-        ('??-FF-??', '?', '?'),
-        ('@@-FF-@@', '@', '@'),
+        ("??-FF-??", "?", "?"),
+        ("@@-FF-@@", "@", "@"),
     ],
 )
 def test_custom_code_with_same_placeholders(random, mask, digit, char):
@@ -94,11 +94,11 @@ def test_custom_code_with_same_placeholders(random, mask, digit, char):
 
 
 @pytest.mark.parametrize(
-    'seed, expected',
+    "seed, expected",
     [
-        (32, 'C239'),
-        (0xFF, 'B670'),
-        ('👽', 'B806'),
+        (32, "C239"),
+        (0xFF, "B670"),
+        ("👽", "B806"),
     ],
 )
 def test_custom_code_with_seed(random, seed, expected):
@@ -117,7 +117,7 @@ def test_get_random_item(random):
 
 
 @pytest.mark.parametrize(
-    'length',
+    "length",
     [
         64,
         128,
@@ -130,7 +130,7 @@ def test_randstr(random, length):
 
 
 @pytest.mark.parametrize(
-    'count',
+    "count",
     [
         1000,
         10000,

@@ -19,7 +19,7 @@ class TestNumbers(object):
         assert re.match(patterns.PROVIDER_STR_REGEX, str(numbers))
 
     @pytest.mark.parametrize(
-        'start, end',
+        "start, end",
         [
             (1.2, 10),
             (10.4, 20.0),
@@ -38,10 +38,10 @@ class TestNumbers(object):
 
         result = numbers.floats(precision=4)
         for e in result:
-            assert len(str(e).split('.')[1]) <= 4
+            assert len(str(e).split(".")[1]) <= 4
 
     @pytest.mark.parametrize(
-        'start, end',
+        "start, end",
         [
             (1, 10),
             (10, 20),
@@ -59,7 +59,7 @@ class TestNumbers(object):
         assert isinstance(element, int)
 
     @pytest.mark.parametrize(
-        'start, end',
+        "start, end",
         [
             (1, 10),
             (10, 20),
@@ -77,7 +77,7 @@ class TestNumbers(object):
         assert isinstance(element, decimal.Decimal)
 
     @pytest.mark.parametrize(
-        'start_real, end_real, start_imag, end_imag',
+        "start_real, end_real, start_imag, end_imag",
         [
             (1.2, 10, 1, 2.4),
             (10.4, 20.0, 2.3, 10),
@@ -98,11 +98,11 @@ class TestNumbers(object):
 
         result = numbers.complexes(precision_real=4, precision_imag=6)
         for e in result:
-            assert len(str(e.real).split('.')[1]) <= 4
-            assert len(str(e.imag).split('.')[1]) <= 6
+            assert len(str(e.real).split(".")[1]) <= 4
+            assert len(str(e.imag).split(".")[1]) <= 6
 
     @pytest.mark.parametrize(
-        'sr, er, si, ei, pr, pi',
+        "sr, er, si, ei, pr, pi",
         [
             (1.2, 10, 1, 2.4, 15, 15),
             (10.4, 20.0, 2.3, 10, 10, 10),
@@ -119,14 +119,14 @@ class TestNumbers(object):
             precision_imag=pi,
         )
         assert isinstance(result, complex)
-        assert len(str(result.real).split('.')[1]) <= pr
-        assert len(str(result.imag).split('.')[1]) <= pi
+        assert len(str(result.real).split(".")[1]) <= pr
+        assert len(str(result.imag).split(".")[1]) <= pi
 
     def test_matrix(self, numbers):
         # TODO: Rewrite it to cover all cases
 
         with pytest.raises(NonEnumerableError):
-            numbers.matrix(num_type='int')
+            numbers.matrix(num_type="int")
 
         result = numbers.matrix(precision=4)
         assert len(result) == 10
@@ -134,7 +134,7 @@ class TestNumbers(object):
             assert len(row) == 10
             for e in row:
                 assert isinstance(e, float)
-                assert len(str(e).split('.')[1]) <= 4
+                assert len(str(e).split(".")[1]) <= 4
 
         result = numbers.matrix(m=5, n=5, num_type=NumTypes.INTEGERS, start=5)
         assert len(result) == 5
@@ -155,12 +155,12 @@ class TestNumbers(object):
         for row in result:
             assert len(row) == 10
             for e in row:
-                real_str = '{:.{}f}'.format(e.real, precision_real)
-                imag_str = '{:.{}f}'.format(e.imag, precision_imag)
+                real_str = "{:.{}f}".format(e.real, precision_real)
+                imag_str = "{:.{}f}".format(e.imag, precision_imag)
                 assert float(real_str) == e.real
                 assert float(imag_str) == e.imag
-                assert len(real_str.split('.')[1]) <= precision_real
-                assert len(imag_str.split('.')[1]) <= precision_imag
+                assert len(real_str.split(".")[1]) <= precision_real
+                assert len(imag_str.split(".")[1]) <= precision_imag
 
     def test_integer(self, numbers):
         result = numbers.integer_number(-100, 100)
@@ -171,7 +171,7 @@ class TestNumbers(object):
         result = numbers.float_number(-100, 100, precision=15)
         assert isinstance(result, float)
         assert -100 <= result <= 100
-        assert len(str(result).split('.')[1]) <= 15
+        assert len(str(result).split(".")[1]) <= 15
 
     def test_decimal(self, numbers):
         result = numbers.decimal_number(-100, 100)

@@ -220,3 +220,31 @@ class NumTypes(Enum):
     INTEGERS = "integers"
     COMPLEXES = "complexes"
     DECIMALS = "decimals"
+
+
+class VideoFile(Enum):
+    MP4 = "mp4"
+    MOV = "mov"
+
+
+class AudioFile(Enum):
+    MP3 = "mp3"
+    AAC = "aac"
+
+
+class ImageFile(Enum):
+    JPG = "jpg"
+    PNG = "png"
+    GIF = "gif"
+
+
+class DocumentFile(Enum):
+    PDF = "pdf"
+    DOCX = "docx"
+    PPTX = "pptx"
+    XLSX = "xlsx"
+
+
+class CompressedFile(Enum):
+    ZIP = "zip"
+    GZIP = "gz"

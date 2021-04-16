@@ -30,7 +30,7 @@ class TestScience(object):
         assert len(result) == 10
 
     @pytest.mark.parametrize(
-        'name',
+        "name",
         [
             MeasureUnit.MASS,
             MeasureUnit.INFORMATION,
@@ -62,7 +62,7 @@ class TestScience(object):
         assert symbol in name.value
 
     @pytest.mark.parametrize(
-        'sign, symbol',
+        "sign, symbol",
         [
             (MetricPrefixSign.POSITIVE, True),
             (MetricPrefixSign.POSITIVE, False),
@@ -75,7 +75,7 @@ class TestScience(object):
         prefixes = SI_PREFIXES_SYM if symbol else SI_PREFIXES
         assert prefix in prefixes[sign.value]
         with pytest.raises(NonEnumerableError):
-            science.metric_prefix(sign='nil')
+            science.metric_prefix(sign="nil")
 
 
 class TestSeededScience(object):

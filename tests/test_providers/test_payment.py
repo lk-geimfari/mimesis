@@ -19,11 +19,11 @@ class TestPayment(object):
 
     def test_bitcoin(self, payment):
         result = payment.bitcoin_address()
-        assert result[0] in ['1', '3']
+        assert result[0] in ["1", "3"]
         assert len(result) == 34
 
     def test_ethereum_address(self, payment):
-        pattern = r'^0x([a-zA-Z0-9]{40})$'
+        pattern = r"^0x([a-zA-Z0-9]{40})$"
         address = payment.ethereum_address()
         assert re.match(pattern, address)
 
@@ -33,7 +33,7 @@ class TestPayment(object):
         assert result <= 999
 
     @pytest.mark.parametrize(
-        'card_type',
+        "card_type",
         [
             CardType.VISA,
             CardType.MASTER_CARD,
@@ -45,12 +45,12 @@ class TestPayment(object):
         assert re.match(patterns.CREDIT_CARD_REGEX, result)
 
         with pytest.raises(NonEnumerableError):
-            payment.credit_card_number(card_type='nil')
+            payment.credit_card_number(card_type="nil")
 
     def test_expiration_date(self, payment):
         result = payment.credit_card_expiration_date(minimum=16, maximum=25)
 
-        year = result.split('/')[1]
+        year = result.split("/")[1]
         assert int(year) >= 16
         assert int(year) <= 25
 
@@ -64,7 +64,7 @@ class TestPayment(object):
         assert result is not None
 
     @pytest.mark.parametrize(
-        'gender',
+        "gender",
         [
             Gender.MALE,
             Gender.FEMALE,
@@ -73,9 +73,9 @@ class TestPayment(object):
     def test_credit_card_owner(self, payment, gender):
         result = payment.credit_card_owner(gender=gender)
         assert isinstance(result, dict)
-        assert 'owner' in result
-        assert 'credit_card' in result
-        assert 'expiration_date' in result
+        assert "owner" in result
+        assert "credit_card" in result
+        assert "expiration_date" in result
 
     def test_credit_card_network(self, payment):
         result = payment.credit_card_network()

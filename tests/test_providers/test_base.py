@@ -16,9 +16,9 @@ class TestBase(object):
         return BaseDataProvider()
 
     @pytest.mark.parametrize(
-        'locale, new_locale',
+        "locale, new_locale",
         [
-            ('en', 'ru'),
+            ("en", "ru"),
         ],
     )
     def test_override(self, locale, new_locale):
@@ -26,14 +26,14 @@ class TestBase(object):
         assert provider.locale == locale
 
         with provider.override_locale(new_locale):
-            assert 'Жен.' in provider._data['gender']
+            assert "Жен." in provider._data["gender"]
             assert provider.locale == new_locale
 
         assert provider.locale == locale
-        assert 'Жен.' not in provider._data['gender']
+        assert "Жен." not in provider._data["gender"]
 
     @pytest.mark.parametrize(
-        'provider',
+        "provider",
         [
             Code,
             Cryptographic,
@@ -46,62 +46,62 @@ class TestBase(object):
                 pass
 
     @pytest.mark.parametrize(
-        'locale, city',
+        "locale, city",
         [
-            ('en', 'New York'),
-            ('en-gb', 'Aberystwyth'),
-            ('ru', 'Москва'),
+            ("en", "New York"),
+            ("en-gb", "Aberystwyth"),
+            ("ru", "Москва"),
         ],
     )
     def test_pull(self, locale, city):
         data_provider = BaseDataProvider(locale)
-        data_provider._pull('address.json')
-        assert city in data_provider._data['city']
+        data_provider._pull("address.json")
+        assert city in data_provider._data["city"]
 
-    @pytest.mark.parametrize('locale', LIST_OF_LOCALES)
+    @pytest.mark.parametrize("locale", LIST_OF_LOCALES)
     def test_pull_raises(self, locale):
         data_provider = BaseDataProvider(locale=locale)
         with pytest.raises(FileNotFoundError):
-            data_provider._pull('something.json')
+            data_provider._pull("something.json")
 
     def test_update_dict(self, base_data_provider):
         first = {
-            'animals': {
-                'dogs': [
-                    'spaniel',
+            "animals": {
+                "dogs": [
+                    "spaniel",
                 ],
             },
         }
         second = {
-            'animals': {
-                'cats': [
-                    'maine coon',
+            "animals": {
+                "cats": [
+                    "maine coon",
                 ],
             },
         }
 
         result = base_data_provider._update_dict(first, second)
 
-        assert 'cats' in result['animals']
-        assert 'dogs' in result['animals']
+        assert "cats" in result["animals"]
+        assert "dogs" in result["animals"]
 
         third = {
-            'animals': {
-                'dogs': [
-                    'golden retriever',
+            "animals": {
+                "dogs": [
+                    "golden retriever",
                 ],
             },
         }
 
         result = base_data_provider._update_dict(first, third)
-        assert 'spaniel' not in result['animals']['dogs']
+        assert "spaniel" not in result["animals"]["dogs"]
 
     @pytest.mark.parametrize(
-        'inp, out',
+        "inp, out",
         [
-            ('EN', 'en'),
-            ('DE', 'de'),
-            ('RU', 'ru'),
+            ("EN", "en"),
+            ("DE", "de"),
+            ("RU", "ru"),
         ],
     )
     def test_setup_locale(self, base_data_provider, inp, out):
@@ -110,17 +110,17 @@ class TestBase(object):
 
     def test_setup_locale_unsupported_locale(self):
         with pytest.raises(LocaleError):
-            BaseDataProvider(locale='nil')
+            BaseDataProvider(locale="nil")
 
     def test_str(self, base_data_provider):
         assert re.match(patterns.DATA_PROVIDER_STR_REGEX, str(base_data_provider))
 
     @pytest.mark.parametrize(
-        'gender, excepted',
+        "gender, excepted",
         [
-            (Gender.MALE, 'male'),
-            (Gender.FEMALE, 'female'),
-            (None, ['female', 'male']),
+            (Gender.MALE, "male"),
+            (Gender.FEMALE, "female"),
+            (None, ["female", "male"]),
         ],
     )
     def test_validate_enum(self, base_data_provider, gender, excepted):
@@ -130,9 +130,9 @@ class TestBase(object):
         assert result in [item.value for item in Gender]
 
         with pytest.raises(NonEnumerableError):
-            base_data_provider._validate_enum('', '')
+            base_data_provider._validate_enum("", "")
 
-    @pytest.mark.parametrize('locale', LIST_OF_LOCALES)
+    @pytest.mark.parametrize("locale", LIST_OF_LOCALES)
     def test_get_current_locale(self, locale):
         base = BaseDataProvider(locale=locale)
         assert locale == base.get_current_locale()

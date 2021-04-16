@@ -22,7 +22,7 @@ class TestText(object):
         assert isinstance(rgb, tuple)
 
     @pytest.mark.parametrize(
-        'safe',
+        "safe",
         [
             True,
             False,
@@ -34,7 +34,7 @@ class TestText(object):
         assert result in SAFE_COLORS if safe else result
 
     @pytest.mark.parametrize(
-        'safe',
+        "safe",
         [
             True,
             False,
@@ -45,7 +45,7 @@ class TestText(object):
         assert isinstance(result, tuple)
 
     @pytest.mark.parametrize(
-        'case',
+        "case",
         [
             True,
             False,
@@ -58,12 +58,12 @@ class TestText(object):
 
     def test_sentence(self, text):
         result = text.sentence().strip()
-        assert result in text._data['text']
+        assert result in text._data["text"]
 
     def test_title(self, text):
         result = text.title()
         assert result is not None
-        assert result.strip() in text._data['text']
+        assert result.strip() in text._data["text"]
 
     def test_text(self, text):
         result = text.text(quantity=4)
@@ -79,19 +79,19 @@ class TestText(object):
 
     def test_word(self, text):
         result = text.word()
-        assert result in text._data['words']['normal']
+        assert result in text._data["words"]["normal"]
 
     def test_swear_word(self, text):
         result = text.swear_word()
-        assert result in text._data['words']['bad']
+        assert result in text._data["words"]["bad"]
 
     def test_quote(self, text):
         result = text.quote()
-        assert result in text._data['quotes']
+        assert result in text._data["quotes"]
 
     def test_color(self, text):
         result = text.color()
-        assert result in text._data['color']
+        assert result in text._data["color"]
 
     def test_level(self, text):
         result = text.level()

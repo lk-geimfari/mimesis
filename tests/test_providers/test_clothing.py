@@ -17,14 +17,14 @@ class TestClothing(object):
 
     def test_international_size(self, clothing):
         size_names = (
-            'L',
-            'M',
-            'S',
-            'XL',
-            'XS',
-            'XXL',
-            'XXS',
-            'XXXL',
+            "L",
+            "M",
+            "S",
+            "XL",
+            "XS",
+            "XXL",
+            "XXS",
+            "XXXL",
         )
         result = clothing.international_size()
         assert result in size_names
