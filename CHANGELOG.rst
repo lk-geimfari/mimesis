@@ -20,8 +20,8 @@ Version 5.0.0
 
 **Removed**:
 
-- Removed data provider ``UnitSystem()``, use ``Science()``
-- Removed data provider ``Structure()``, use ``schema.Schema``
+- Removed data provider ``UnitSystem()``, use instead ``Science()``
+- Removed data provider ``Structure()``, use instead ``schema.Schema``
 - Removed ``GermanySpecProvider``
 - Removed method ``network_protocol()`` of ``Internet()``
 - Removed a bunch of useless custom exceptions and replaced them with ``FieldError``
