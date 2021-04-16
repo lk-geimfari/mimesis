@@ -149,7 +149,7 @@ class Datetime(BaseDataProvider):
         date_object = date(year, month, day)
         return date_object
 
-    def formatted_date(self, fmt: str = "", **kwargs: Any) -> str:
+    def formatted_date(self, fmt: Optional[str] = None, **kwargs: Any) -> str:
         """Generate random date as string.
 
         :param fmt: The format of date, if None then use standard
@@ -177,7 +177,7 @@ class Datetime(BaseDataProvider):
         )
         return random_time
 
-    def formatted_time(self, fmt: str = "") -> str:
+    def formatted_time(self, fmt: Optional[str] = None) -> str:
         """Generate string formatted time.
 
         :param fmt: The format of time, if None then use standard
