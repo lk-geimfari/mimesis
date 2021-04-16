@@ -7,14 +7,14 @@ from decimal import Decimal
 from typing import Any, Callable, Dict, List, Set, Union
 
 __all__ = [
-    'JSON',
-    'DateTime',
-    'Timestamp',
-    'Time',
-    'Date',
-    'SchemaType',
-    'Seed',
-    'Matrix',
+    "JSON",
+    "DateTime",
+    "Timestamp",
+    "Time",
+    "Date",
+    "SchemaType",
+    "Seed",
+    "Matrix",
 ]
 
 JSON = Dict[str, Any]
@@ -29,7 +29,7 @@ Timestamp = Union[str, int]
 
 Seed = Union[int, str, bytes, bytearray]
 
-SchemaType = Callable[[], JSON]
+SchemaType = Union[Callable[[], JSON]]
 
 KeywordsType = Union[List[str], Set[str]]
 

@@ -2,12 +2,10 @@ import re
 
 import pytest
 from mimesis import locales
-from mimesis.builtins import USASpecProvider
 from mimesis.enums import Gender
 from mimesis.exceptions import (
     UnacceptableField,
-    UndefinedField,
-    UndefinedSchema,
+    UndefinedFieldName,
     UnsupportedField,
 )
 from mimesis.schema import Field, Schema
@@ -24,118 +22,73 @@ def test_str(field):
     locales.LIST_OF_LOCALES,
 )
 def test_field(locale):
-    filed = Field(locale)
-    result = filed('full_name')
-    assert result
-    assert isinstance(result, str)
+    field = Field(locale)
+    full_name = field('full_name')
+    assert full_name
+    assert isinstance(full_name, str)
+
+    uppercase_uuid = field('uuid', key=str.upper)
+    assert uppercase_uuid.isupper()
 
     with pytest.raises(UnsupportedField):
-        filed('unsupported_field')
+        field('person.unsupported_field')
 
-    with pytest.raises(UndefinedField):
-        filed()
-
-
-def test_field_with_custom_providers():
-    field = Field(providers=[USASpecProvider])
-    assert field('ssn')
-    assert field('usa_provider.ssn')
-
-
-@pytest.fixture
-def field():
-    return Field('en')
-
-
-@pytest.fixture
-def valid_schema(field):
-    return lambda: {
-        'id': field('uuid'),
-        'name': field('word'),
-        'version': field(
-            'version',
-            key=str.lower,
-            pre_release=True,
-        ),
-        'timestamp': field('timestamp'),
-        'mime_type': field('mime_type'),
-        'zip_code': field('postal_code'),
-        'owner': {
-            'email': field('email', key=str.lower),
-            'token': field('token_hex'),
-            'creator': field(
-                'full_name',
-                gender=Gender.FEMALE,
-            ),
-            'billing': {
-                'ethereum_address': field('ethereum_address'),
-            },
-        },
-        'defined_cls': {
-            'title': field('person.title'),
-            'title2': field('text.title'),
-        },
-        'items': field(
-            'choice',
-            items=[
-                0.1,
-                0.3,
-                0.4,
-                0.5,
-                0.6,
-                0.7,
-                0.8,
-                0.9,
-                0.10,
-            ],
-        ),
-        'unique_items': field(
-            'choice',
-            items='aabbcccddd',
-            length=4,
-            unique=True,
-        ),
-    }
-
-
-def test_fill(field, valid_schema):
-    result = Schema(schema=valid_schema).create(iterations=2)
-    assert isinstance(result, list)
-    assert isinstance(result[0], dict)
-
-
-def test_none_schema():
-    with pytest.raises(UndefinedSchema):
-        schema = Schema(schema=None)  # type: ignore
-        schema.create()
-
-
-def test_schema_with_unacceptable_field(field):
-    invalid_schema = lambda: {
-        'word': field('text.word.invalid'),
-        'items': field(
-            'choice.choice.choice',
-            items=[
-                0.1,
-                0.3,
-                0.4,
-                0.5,
-                0.6,
-                0.7,
-                0.8,
-                0.9,
-                0.10,
-            ],
-        ),
-    }
+    with pytest.raises(UnsupportedField):
+        field('unsupported_field')
 
     with pytest.raises(UnacceptableField):
-        Schema(schema=invalid_schema).create()
+        field('person.full_name.invalid')
+
+    with pytest.raises(UndefinedFieldName):
+        field()
 
 
-def test_field_with_key(field):
-    usual_result = field('age')
-    assert isinstance(usual_result, int)
+@pytest.fixture
+def schema(field):
+    return Schema(
+        schema=lambda: {
+            'id': field('uuid'),
+            'name': field('word'),
+            'version': field(
+                'version',
+                key=str.lower,
+                pre_release=True,
+            ),
+            'timestamp': field('timestamp'),
+            'mime_type': field('mime_type'),
+            'zip_code': field('postal_code'),
+            'owner': {
+                'email': field('email', key=str.lower),
+                'token': field('token_hex'),
+                'creator': field('full_name', gender=Gender.FEMALE),
+            },
+            'defined_cls': {
+                'title': field('person.title'),
+                'title2': field('text.title'),
+            },
+            'items': field(
+                'choice',
+                items=[
+                    0.1,
+                    0.2,
+                    0.3,
+                    0.4,
+                ],
+            ),
+        }
+    )
 
-    result_on_key = field('age', key=float)
-    assert isinstance(result_on_key, float)
+
+#
+# def test_schema_create(schema):
+#     result = schema.create(5)
+#
+#     first, *mid, last = result
+#
+#     assert first['timestamp'] != last['timestamp']
+#     assert first['owner']['creator'] != last['owner']['creator']
+#     assert isinstance(result, list)
+#     assert len(result) == 5
+#
+#     assert schema.create(0) == []
+#

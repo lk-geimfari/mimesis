@@ -32,8 +32,7 @@ PROVIDER_STR_REGEX = (
 
 DATA_PROVIDER_STR_REGEX = (
     r'^(Address|Business|Datetime|Food|'
-    r'Person|Text|'
-    r'BaseDataProvider|AbstractField) <([a-z-]+)>$'
+    r'Person|Text|BaseDataProvider|BaseField|Field) <([a-z-]+)>$'
 )
 
 _EN_GB_POST_CODE = (

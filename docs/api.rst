@@ -105,10 +105,10 @@ UnsupportedLocale
 .. autoclass:: mimesis.exceptions.UnsupportedLocale
    :members:
 
-UndefinedField
---------------
+UndefinedFieldName
+------------------
 
-.. autoclass:: mimesis.exceptions.UndefinedField
+.. autoclass:: mimesis.exceptions.UndefinedFieldName
    :members:
 
 UndefinedSchema
@@ -296,10 +296,10 @@ Transport
 Schema
 ======
 
-AbstractField
--------------
+BaseField
+---------
 
-.. autoclass:: mimesis.schema.AbstractField
+.. autoclass:: mimesis.schema.BaseField
    :members:
    :special-members: __call__
 

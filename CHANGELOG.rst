@@ -11,6 +11,7 @@ Version 5.0.0
 - Added ``measure_unit()`` and ``metric_prefix()`` methods for ``Science``
 - Removed completely useless ``chemical_element`` and ``atomic_number`` methods of ``Science`` data provider and made it locale-independent
 - Fix inheritance issues for ``Generic``, now it inherits ``BaseProvider`` instead of ``BaseDataProvider``
+- Added methods ``.iterator()`` and ``.infinite()`` for ``schema.Schema``
 
 Version 4.1.3
 -------------
