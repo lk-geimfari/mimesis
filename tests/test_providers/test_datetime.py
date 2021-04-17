@@ -148,6 +148,9 @@ class TestDatetime(object):
         assert isinstance(dt_str, str)
         assert start <= int(dt_str) <= end
 
+        dt_without_fmt = _datetime.formatted_date(fmt=None, start=start, end=end)
+        assert dt_without_fmt
+
     def test_week_date(self, _datetime):
         result = _datetime.week_date(start=2017, end=_datetime.CURRENT_YEAR)
         result = result.replace("-", " ").replace("W", "")
