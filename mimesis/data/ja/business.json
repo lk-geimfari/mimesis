@@ -1095,5 +1095,5 @@
   "numeric-decimal": ".",
   "numeric-frac-digits": 2,
   "numeric-thousands": ",",
-  "price-format": "¥ #"
+  "price-format": "¥#"
 }

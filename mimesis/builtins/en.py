@@ -67,37 +67,3 @@ class USASpecProvider(BaseSpecProvider):
             self.random.randint(1, 99),
             self.random.randint(1, 9999),
         )
-
-    def personality(self, category: str = "mbti") -> Union[str, int]:
-        """Generate a type of personality.
-
-        :param category: Category.
-        :return: Personality type.
-        :rtype: str or int
-
-        :Example:
-            ISFJ.
-        """
-        mbtis = (
-            "ISFJ",
-            "ISTJ",
-            "INFJ",
-            "INTJ",
-            "ISTP",
-            "ISFP",
-            "INFP",
-            "INTP",
-            "ESTP",
-            "ESFP",
-            "ENFP",
-            "ENTP",
-            "ESTJ",
-            "ESFJ",
-            "ENFJ",
-            "ENTJ",
-        )
-
-        if category.lower() == "rheti":
-            return self.random.randint(1, 10)
-
-        return self.random.choice(mbtis)

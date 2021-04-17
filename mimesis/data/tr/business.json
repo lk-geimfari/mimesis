@@ -407,7 +407,7 @@
     }
   },
   "currency-code": "TRY",
-  "price-format": "# ₺",
+  "price-format": "#₺",
   "numeric-decimal": ".",
   "numeric-thousands": ",",
   "numeric-frac-digits": 2

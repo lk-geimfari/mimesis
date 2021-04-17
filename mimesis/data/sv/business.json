@@ -322,7 +322,7 @@
     }
   },
   "currency-code": "SEK",
-  "price-format": "# kr",
+  "price-format": "#kr",
   "numeric-decimal": ",",
   "numeric-thousands": ".",
   "numeric-frac-digits": 2

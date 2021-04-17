@@ -26,27 +26,14 @@ def test_usps_tracking_number(usa, service, length):
         usa.tracking_number(service="x")
 
 
-def test_personality(usa):
-    result = usa.personality(category="rheti")
-    assert int(result) <= 9 or int(result) >= 1
-
-    result_1 = usa.personality(category="mbti")
-    assert isinstance(result_1, str)
-    assert len(result_1) == 4
-    assert result_1.isupper()
-
-
-def test_ssn(usa):
+def test_ssn(usa, mocker):
     result = usa.ssn()
     assert result is not None
     assert "666" != result[:3]
     assert re.match("^\d{3}-\d{2}-\d{4}$", result)
-
     assert result.replace("-", "").isdigit()
     assert len(result.replace("-", "")) == 9
 
-
-def test_cpf_with_666_prefix(mocker, usa):
     mocker.patch.object(usa.random, "randint", return_value=666)
     result = usa.ssn()
     assert "665" == result[:3]

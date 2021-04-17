@@ -104,7 +104,8 @@ class Business(BaseDataProvider):
         """
         price_format: str = self._data["price-format"]
         numeric_frac_digits = self._data["numeric-frac-digits"]
-        delims = {
+
+        delimiters = {
             ".": self._data["numeric-decimal"],
             ",": self._data["numeric-thousands"],
         }
@@ -112,7 +113,7 @@ class Business(BaseDataProvider):
         value = self.random.uniform(minimum, maximum)
         price = "{:,.{}f}".format(value, numeric_frac_digits)
 
-        price = "".join(delims.get(char, char) for char in price)
+        price = "".join(delimiters.get(char, char) for char in price)
 
         return price_format.replace("#", price)
 

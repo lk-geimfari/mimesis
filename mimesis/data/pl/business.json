@@ -1010,7 +1010,7 @@
     }
   },
   "currency-code": "PLN",
-  "price-format": "# zł",
+  "price-format": "#zł",
   "numeric-decimal": ",",
   "numeric-thousands": ".",
   "numeric-frac-digits": 2

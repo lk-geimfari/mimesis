@@ -74,7 +74,7 @@ class Random(random_module.Random):
 
         if char_code == digit_code:
             raise ValueError(
-                "You cannot use the same " "placeholder for digits and chars!"
+                "You cannot use the same placeholder for digits and chars!"
             )
 
         def random_int(a: int, b: int) -> int:

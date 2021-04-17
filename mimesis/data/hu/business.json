@@ -39,7 +39,7 @@
     ]
   },
   "currency-code": "HUF",
-  "price-format": "# Ft",
+  "price-format": "#Ft",
   "numeric-decimal": ",",
   "numeric-thousands": ".",
   "numeric-frac-digits": 2
