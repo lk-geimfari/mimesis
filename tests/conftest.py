@@ -22,8 +22,8 @@ def address(request):
 
 
 @pytest.fixture(params=locales)
-def business(request):
-    return mimesis.Business(request.param)
+def finance(request):
+    return mimesis.Finance(request.param)
 
 
 @pytest.fixture(params=locales)

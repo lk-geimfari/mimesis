@@ -9,7 +9,7 @@ files (`File name`) which include data related to some data providers (`Provider
 .----------------------------.
 ├── address.json   # Address()
 ├── builtin.json   # YourSpecProvider()
-├── business.json  # Business()
+├── business.json  # Finance()
 ├── datetime.json  # Datetime()
 ├── food.json      # Food()
 ├── person.json    # Person()

@@ -25,8 +25,8 @@ class TestGeneric(object):
         result = generic.food.fruit()
         assert result is not None
 
-    def test_base_business(self, generic):
-        result = generic.business.copyright()
+    def test_base_finance(self, generic):
+        result = generic.finance.copyright()
         assert result is not None
 
     def test_base_code(self, generic):
@@ -103,9 +103,9 @@ class TestSeededGeneric(object):
         assert g1.address.street_number() == g2.address.street_number()
         assert g1.address.street_name() == g2.address.street_name()
 
-    def test_generic_business(self, g1, g2):
-        assert g1.business.company() == g2.business.company()
-        assert g1.business.copyright() == g2.business.copyright()
+    def test_generic_finance(self, g1, g2):
+        assert g1.finance.company() == g2.finance.company()
+        assert g1.finance.copyright() == g2.finance.copyright()
 
     def test_generic_clothing(self, g1, g2):
         s1 = g1.clothing.european_size()

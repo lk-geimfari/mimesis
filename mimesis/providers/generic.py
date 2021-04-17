@@ -9,7 +9,6 @@ from mimesis.locales import DEFAULT_LOCALE
 from mimesis.providers.address import Address
 from mimesis.providers.base import BaseDataProvider, BaseProvider
 from mimesis.providers.binaryfile import BinaryFile
-from mimesis.providers.business import Business
 from mimesis.providers.choice import Choice
 from mimesis.providers.clothing import Clothing
 from mimesis.providers.code import Code
@@ -17,6 +16,7 @@ from mimesis.providers.cryptographic import Cryptographic
 from mimesis.providers.date import Datetime
 from mimesis.providers.development import Development
 from mimesis.providers.file import File
+from mimesis.providers.finance import Finance
 from mimesis.providers.food import Food
 from mimesis.providers.hardware import Hardware
 from mimesis.providers.internet import Internet
@@ -38,7 +38,7 @@ class Generic(BaseProvider):
     _DEFAULT_PROVIDERS = (
         Address,
         BinaryFile,
-        Business,
+        Finance,
         Choice,
         Clothing,
         Code,

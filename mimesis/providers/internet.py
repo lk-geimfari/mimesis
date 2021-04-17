@@ -151,7 +151,7 @@ class Internet(BaseProvider):
         :return: Random MAC address.
 
         :Example:
-            00:16:3e:25:e7:b1
+            00:16:3e:25:e7:f1
         """
         mac_hex = [
             0x00,
@@ -313,6 +313,6 @@ class Internet(BaseProvider):
             raise ValueError("Slug's parts count must be parts_count <= 12")
 
         if parts_count < 2:
-            raise ValueError('Slug must contain more than 2 parts')
+            raise ValueError("Slug must contain more than 2 parts")
 
-        return '-'.join(self.text.words(parts_count))
+        return "-".join(self.text.words(parts_count))

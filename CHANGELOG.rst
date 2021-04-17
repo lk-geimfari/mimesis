@@ -8,6 +8,7 @@ Version 5.0.0
 
 - Rename ``enums.UnitName`` to ``enums.MeasureUnit``
 - Rename ``enums.PrefixSign`` to ``enums.MetricPrefixSign``
+- Rename ``Business()`` to ``Finance()``
 
 **Fixed**:
 - Fix inheritance issues for ``Generic``, now it inherits ``BaseProvider`` instead of ``BaseDataProvider``

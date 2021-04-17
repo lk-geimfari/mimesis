@@ -12,11 +12,11 @@ from mimesis.data import (
 )
 from mimesis.providers.base import BaseDataProvider
 
-__all__ = ["Business"]
+__all__ = ["Finance"]
 
 
-class Business(BaseDataProvider):
-    """Class for generating data for business."""
+class Finance(BaseDataProvider):
+    """Class for generating finance data."""
 
     def __init__(self, *args: Any, **kwargs: Any) -> None:
         """Initialize attributes.
@@ -24,13 +24,13 @@ class Business(BaseDataProvider):
         :param locale: Current locale.
         """
         super().__init__(*args, **kwargs)
-        self._datafile = "business.json"
+        self._datafile = "finance.json"
         self._pull(self._datafile)
 
     class Meta:
         """Class for metadata."""
 
-        name = "business"
+        name = "finance"
 
     def company(self) -> str:
         """Get a random company name.

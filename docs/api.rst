@@ -145,10 +145,10 @@ Address
    :members:
    :special-members: __init__
 
-Business
---------
+Finance
+-------
 
-.. autoclass:: mimesis.Business
+.. autoclass:: mimesis.Finance
    :members:
    :special-members: __init__
 

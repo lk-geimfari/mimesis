@@ -44,7 +44,7 @@ class TestInternet(object):
             net.slug(parts_count=1)
 
         parts_count = 5
-        parts = net.slug(parts_count=parts_count).split('-')
+        parts = net.slug(parts_count=parts_count).split("-")
         assert len(parts) == parts_count
 
     def test_user_agent(self, net):
