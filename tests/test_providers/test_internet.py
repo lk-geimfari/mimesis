@@ -33,6 +33,22 @@ class TestInternet(object):
         result = net.home_page()
         assert re.match(patterns.HOME_PAGE, result)
 
+    def test_slug(self, net):
+        with pytest.raises(TypeError):
+            net.slug(3)
+
+        with pytest.raises(ValueError):
+            net.slug(parts_count=13)
+
+        with pytest.raises(ValueError):
+            net.slug(parts_count=1)
+
+        parts_count = 5
+        parts = net.slug(parts_count=parts_count).split('-')
+        assert len(parts) == parts_count
+
+
+
     def test_user_agent(self, net):
         result = net.user_agent()
         assert result in data.USER_AGENTS

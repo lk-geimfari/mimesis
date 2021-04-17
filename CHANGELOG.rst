@@ -11,11 +11,13 @@ Version 5.0.0
 
 **Fixed**:
 - Fix inheritance issues for ``Generic``, now it inherits ``BaseProvider`` instead of ``BaseDataProvider``
+- Fix locale-independent provider to make them accepts keyword-only arguments
 
 **Added**:
 
-- Added ``measure_unit()`` and ``metric_prefix()`` methods for ``Science``
+- Added ``measure_unit()`` and ``.metric_prefix()`` methods for ``Science``
 - Added methods ``.iterator()`` and ``.infinite()`` for ``schema.Schema``
+- Added methods ``.slug()`` for ``Internet()``
 - Added ``BinaryFile`` data provider which provides binary data files, such as ``.mp3``, ``.mp4``, ``.png``, etc.
 
 **Removed**:

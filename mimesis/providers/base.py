@@ -19,7 +19,7 @@ __all__ = ["BaseDataProvider", "BaseProvider"]
 class BaseProvider(object):
     """This is a base class for all providers."""
 
-    def __init__(self, seed: Optional[Seed] = None) -> None:
+    def __init__(self, *, seed: Optional[Seed] = None) -> None:
         """Initialize attributes.
 
         :param seed: Seed for random.

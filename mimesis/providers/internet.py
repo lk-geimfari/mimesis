@@ -21,6 +21,7 @@ from mimesis.enums import MimeType, PortRange, TLDType
 from mimesis.exceptions import NonEnumerableError
 from mimesis.providers.base import BaseProvider
 from mimesis.providers.file import File
+from mimesis.providers.text import Text
 from mimesis.typing import Keywords
 
 __all__ = ["Internet"]
@@ -36,7 +37,8 @@ class Internet(BaseProvider):
         :param kwargs: Keyword arguments.
         """
         super().__init__(*args, **kwargs)
-        self.__file = File(seed=self.seed)
+        self.text = Text(seed=self.seed)
+        self.file = File(seed=self.seed)
         self._MAX_IPV4 = (2 ** 32) - 1
         self._MAX_IPV6 = (2 ** 128) - 1
 
@@ -53,7 +55,7 @@ class Internet(BaseProvider):
         :Example:
             Content-Type: application/json
         """
-        fmt = self.__file.mime_type(type_=mime_type)
+        fmt = self.file.mime_type(type_=mime_type)
         return "Content-Type: {}".format(fmt)
 
     def http_status_message(self) -> str:
@@ -292,3 +294,18 @@ class Internet(BaseProvider):
             return self.random.randint(*port_range.value)
 
         raise NonEnumerableError(PortRange)
+
+    def slug(self, *, parts_count: Optional[int] = 5) -> str:
+        """Generate a random slug of given parts count.
+
+        :param parts_count: Slug's parts count.
+        :return: Slug.
+        """
+
+        if parts_count > 12:
+            raise ValueError("Slug's parts count must be parts_count <= 12")
+
+        if parts_count < 2:
+            raise ValueError('Slug must contain more than 2 parts')
+
+        return '-'.join(self.text.words(parts_count))
