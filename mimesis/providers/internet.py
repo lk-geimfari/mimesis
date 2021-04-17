@@ -260,7 +260,7 @@ class Internet(BaseProvider):
         return "https://{}{}".format(resource, domain)
 
     def top_level_domain(self, tld_type: Optional[TLDType] = None) -> str:
-        """Return random top level domain.
+        """Generates random top level domain.
 
         :param tld_type: Enum object DomainType
         :return: Top level domain.
@@ -268,6 +268,13 @@ class Internet(BaseProvider):
         """
         key = self._validate_enum(item=tld_type, enum=TLDType)
         return self.random.choice(TLD[key])
+
+    def tld(self, *args: Any, **kwargs: Any) -> str:
+        """Generates random top level domain.
+
+        An alias for self.top_level_domain()
+        """
+        return self.top_level_domain(*args, **kwargs)
 
     def user_agent(self) -> str:
         """Get a random user agent.

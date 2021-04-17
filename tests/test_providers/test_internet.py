@@ -47,8 +47,6 @@ class TestInternet(object):
         parts = net.slug(parts_count=parts_count).split('-')
         assert len(parts) == parts_count
 
-
-
     def test_user_agent(self, net):
         result = net.user_agent()
         assert result in data.USER_AGENTS
@@ -163,9 +161,10 @@ class TestInternet(object):
         ],
     )
     def test_top_level_domain(self, net, domain_type):
-        result = net.top_level_domain(tld_type=domain_type)
-        assert result is not None
-        assert result in data.TLD[domain_type.value]
+        res_a = net.top_level_domain(tld_type=domain_type)
+        res_b = net.tld(tld_type=domain_type)
+        assert res_a in data.TLD[domain_type.value]
+        assert res_b in data.TLD[domain_type.value]
 
     def test_top_level_domain_unsupported(self, net):
         with pytest.raises(NonEnumerableError):
@@ -229,6 +228,9 @@ class TestSeededInternet(object):
 
     def test_ip_v6(self, i1, i2):
         assert i1.ip_v6() == i2.ip_v6()
+
+    def test_slug(self, i1, i2):
+        assert i1.slug(parts_count=2) == i2.slug(parts_count=2)
 
     def test_ip_v6_object(self, i1, i2):
         assert i1.ip_v6_object() == i2.ip_v6_object()
