@@ -12,7 +12,6 @@ from mimesis.data import (
     CALLING_CODES,
     EMAIL_DOMAINS,
     GENDER_SYMBOLS,
-    SEXUALITY_SYMBOLS,
     SOCIAL_NETWORKS,
     USERNAMES,
 )
@@ -372,24 +371,6 @@ class Person(BaseDataProvider):
             A+
         """
         return self.random.choice(BLOOD_GROUPS)
-
-    def sexual_orientation(self, symbol: bool = False) -> str:
-        """Get a random sexual orientation.
-
-        Obviously, this option will be useful for various
-        dating sites and so on.
-
-        :param symbol: Unicode symbol.
-        :return: Sexual orientation.
-
-        :Example:
-            Heterosexuality.
-        """
-        if symbol:
-            return self.random.choice(SEXUALITY_SYMBOLS)
-
-        sexuality: List[str] = self._data["sexuality"]
-        return self.random.choice(sexuality)
 
     def occupation(self) -> str:
         """Get a random job.

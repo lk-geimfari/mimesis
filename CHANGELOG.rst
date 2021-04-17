@@ -24,6 +24,7 @@ Version 5.0.0
 - Removed data provider ``Structure()``, use instead ``schema.Schema``
 - Removed ``GermanySpecProvider``
 - Removed method ``network_protocol()`` of ``Internet()``
+- Removed method ``sexual_orientation()`` of ``Person()``
 - Removed a bunch of useless custom exceptions and replaced them with ``FieldError``
 - Removed completely useless ``chemical_element`` and ``atomic_number`` methods of ``Science`` data provider and made it locale-independent
 

@@ -21,15 +21,6 @@ GENDER_SYMBOLS: Tuple[str, str, str] = (
     "⚲",
 )
 
-SEXUALITY_SYMBOLS = (
-    "⚤",
-    "⚢",
-    "⚣",
-    "⚥",
-    "⚧",
-    "⚪",
-)
-
 USERNAMES = _ = [
     "deemphasize",
     "creamier",

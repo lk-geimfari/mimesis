@@ -4,7 +4,7 @@ import re
 
 import pytest
 from mimesis import Person
-from mimesis.data import BLOOD_GROUPS, GENDER_SYMBOLS, SEXUALITY_SYMBOLS
+from mimesis.data import BLOOD_GROUPS, GENDER_SYMBOLS
 from mimesis.enums import Gender, SocialNetwork, TitleType
 from mimesis.exceptions import NonEnumerableError
 
@@ -287,13 +287,6 @@ class TestPerson(object):
         iso5218 = person.gender(iso5218=True)
         assert iso5218 in codes
 
-    def test_sexual_orientation(self, person):
-        result = person.sexual_orientation()
-        assert result in person._data["sexuality"]
-
-        symbol = person.sexual_orientation(symbol=True)
-        assert symbol in SEXUALITY_SYMBOLS
-
     def test_profession(self, person):
         result = person.occupation()
         assert result in person._data["occupation"]
@@ -457,10 +450,6 @@ class TestSeededPerson(object):
     def test_sex(self, p1, p2):
         assert p1.sex() == p2.sex()
         assert p1.sex(iso5218=True, symbol=True) == p2.sex(iso5218=True, symbol=True)
-
-    def test_sexual_orientation(self, p1, p2):
-        assert p1.sexual_orientation() == p2.sexual_orientation()
-        assert p1.sexual_orientation(symbol=True) == p2.sexual_orientation(symbol=True)
 
     def test_occupation(self, p1, p2):
         assert p1.occupation() == p2.occupation()
