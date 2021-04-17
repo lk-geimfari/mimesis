@@ -302,7 +302,7 @@ class Internet(BaseProvider):
 
         raise NonEnumerableError(PortRange)
 
-    def slug(self, *, parts_count: Optional[int] = 5) -> str:
+    def slug(self, *, parts_count: int = 5) -> str:
         """Generate a random slug of given parts count.
 
         :param parts_count: Slug's parts count.
