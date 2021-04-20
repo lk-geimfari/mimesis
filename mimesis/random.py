@@ -123,7 +123,7 @@ class Random(random_module.Random):
             length = self.randint(16, 128)
 
         _string = string.ascii_letters + string.digits
-        _string = "".join(secrets.choice(_string) for _ in range(length))
+        _string = "".join(self.choice(_string) for _ in range(length))
         return _string
 
 

@@ -9,6 +9,14 @@ def random():
     return _random
 
 
+def test_randstr_non_unique_with_same_seed(random):
+    random.seed(1)
+    first = random.randstr(unique=False)
+    random.seed(1)
+    second = random.randstr(unique=False)
+    assert first == second
+
+
 def test_randints(random):
     result = random.randints()
 
@@ -126,7 +134,9 @@ def test_get_random_item(random):
 )
 def test_randstr(random, length):
     result = random.randstr(length=length)
+    result2 = random.randstr(length=length)
     assert len(result) == length
+    assert result != result2
 
 
 @pytest.mark.parametrize(
