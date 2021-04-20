@@ -145,7 +145,7 @@ Below you can see a great example of module:
 
             :return: String ``foo``
             """
-            return 'foo'
+            return "foo"
 
 
     def pi() -> float:
