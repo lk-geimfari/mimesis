@@ -9,6 +9,9 @@ from mimesis.data import (
     CRYPTOCURRENCY_SYMBOLS,
     CURRENCY_ISO_CODES,
     CURRENCY_SYMBOLS,
+    STOCK_EXCHANGES,
+    STOCK_NAMES,
+    STOCK_TICKERS,
 )
 from mimesis.providers.base import BaseDataProvider
 
@@ -131,3 +134,24 @@ class Finance(BaseDataProvider):
                 precision=7,
             ),
         )
+
+    def stock_ticker(self) -> str:
+        """Returns random stock ticker.
+
+        :return: Ticker.
+        """
+        return self.random.choice(STOCK_TICKERS)
+
+    def stock_name(self) -> str:
+        """Returns stock name.
+
+        :return: Stock name.
+        """
+        return self.random.choice(STOCK_NAMES)
+
+    def stock_exchange(self) -> str:
+        """Returns stock exchange name.
+
+        :return: Returns exchange name.
+        """
+        return self.random.choice(STOCK_EXCHANGES)

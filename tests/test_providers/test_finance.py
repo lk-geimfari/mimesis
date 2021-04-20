@@ -8,6 +8,9 @@ from mimesis.data import (
     CRYPTOCURRENCY_SYMBOLS,
     CURRENCY_ISO_CODES,
     CURRENCY_SYMBOLS,
+    STOCK_EXCHANGES,
+    STOCK_NAMES,
+    STOCK_TICKERS,
 )
 
 from . import patterns
@@ -24,6 +27,18 @@ class TestFinance(object):
     def test_copyright(self, finance):
         result = finance.copyright()
         assert "©" in result
+
+    def test_stock_ticker(self, finance):
+        result = finance.stock_ticker()
+        assert result in STOCK_TICKERS
+
+    def test_stock_name(self, finance):
+        result = finance.stock_name()
+        assert result in STOCK_NAMES
+
+    def test_stock_exchange(self, finance):
+        result = finance.stock_exchange()
+        assert result in STOCK_EXCHANGES
 
     def test_currency_iso_code(self, finance):
         result1 = finance.currency_iso_code()
@@ -91,6 +106,15 @@ class TestSeededFinance(object):
 
     def test_copyright(self, f1, f2):
         assert f1.copyright() == f2.copyright()
+
+    def test_stock_ticker(self, f1, f2):
+        assert f1.stock_ticker() == f2.stock_ticker()
+
+    def test_stock_name(self, f1, f2):
+        assert f1.stock_name() == f2.stock_name()
+
+    def test_stock_exchange(self, f1, f2):
+        assert f1.stock_exchange() == f2.stock_exchange()
 
     def test_currency_iso_code(self, f1, f2):
         assert f1.currency_iso_code() == f2.currency_iso_code()
