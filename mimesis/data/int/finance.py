@@ -222,7 +222,7 @@ CURRENCY_SYMBOLS = {
     "is": "kr",
     "it": "€",
     "ja": "¥",
-    "kk": "‎₸",
+    "kk": "₸",
     "ko": "₩",
     "nl": "€",
     "nl-be": "€",
