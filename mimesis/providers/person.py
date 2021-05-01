@@ -265,7 +265,7 @@ class Person(BaseDataProvider):
         """
         if unique and self.seed is not None:
             raise ValueError(
-                "You cannot use «unique» " "parameter with a seeded provider"
+                "You cannot use «unique» parameter with a seeded provider"
             )
 
         if not domains:
@@ -292,7 +292,7 @@ class Person(BaseDataProvider):
         :return: Profile in some network.
 
         :Example:
-            http://facebook.com/some_user
+            https://facebook.com/some_user
         """
         key = self._validate_enum(site, SocialNetwork)
         website = SOCIAL_NETWORKS[key]
