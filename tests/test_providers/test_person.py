@@ -5,7 +5,7 @@ import re
 import pytest
 from mimesis import Person
 from mimesis.data import BLOOD_GROUPS, GENDER_SYMBOLS
-from mimesis.enums import Gender, SocialNetwork, TitleType
+from mimesis.enums import Gender, TitleType
 from mimesis.exceptions import NonEnumerableError
 
 from . import patterns
@@ -147,20 +147,6 @@ class TestPerson(object):
     def test_blood_type(self, _person):
         result = _person.blood_type()
         assert result in BLOOD_GROUPS
-
-    @pytest.mark.parametrize(
-        "site",
-        [
-            SocialNetwork.INSTAGRAM,
-            SocialNetwork.FACEBOOK,
-            SocialNetwork.TWITTER,
-            SocialNetwork.VK,
-            None,
-        ],
-    )
-    def test_social_media_profile(self, _person, site):
-        result = _person.social_media_profile(site=site)
-        assert result is not None
 
     def test_identifier(self, _person):
         result = _person.identifier()
@@ -394,12 +380,6 @@ class TestSeededPerson(object):
 
     def test_blood_type(self, p1, p2):
         assert p1.blood_type() == p2.blood_type()
-
-    def test_social_media_profile(self, p1, p2):
-        assert p1.social_media_profile() == p2.social_media_profile()
-        assert p1.social_media_profile(
-            site=SocialNetwork.TWITTER
-        ) == p2.social_media_profile(site=SocialNetwork.TWITTER)
 
     def test_identifier(self, p1, p2):
         assert p1.identifier() == p2.identifier()

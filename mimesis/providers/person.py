@@ -12,10 +12,9 @@ from mimesis.data import (
     CALLING_CODES,
     EMAIL_DOMAINS,
     GENDER_SYMBOLS,
-    SOCIAL_NETWORKS,
     USERNAMES,
 )
-from mimesis.enums import Gender, SocialNetwork, TitleType
+from mimesis.enums import Gender, TitleType
 from mimesis.exceptions import NonEnumerableError
 from mimesis.providers.base import BaseDataProvider
 from mimesis.random import get_random_item
@@ -283,19 +282,6 @@ class Person(BaseDataProvider):
             name=name,
             domain=domain,
         )
-
-    def social_media_profile(self, site: Optional[SocialNetwork] = None) -> str:
-        """Generate profile for random social network.
-
-        :return: Profile in some network.
-
-        :Example:
-            https://facebook.com/some_user
-        """
-        key = self._validate_enum(site, SocialNetwork)
-        website = SOCIAL_NETWORKS[key]
-        url = "https://" + website
-        return url.format(self.username())
 
     def gender(self, iso5218: bool = False, symbol: bool = False) -> Union[str, int]:
         """Get a random gender.

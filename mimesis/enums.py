@@ -153,18 +153,6 @@ class EANFormat(Enum):
     EAN13 = "ean-13"
 
 
-class SocialNetwork(Enum):
-    """Provides most popular social networks.
-
-    An argument for :meth:`~mimesis.Person.social_media_profile()``.
-    """
-
-    FACEBOOK = "facebook"
-    TWITTER = "twitter"
-    INSTAGRAM = "instagram"
-    VK = "vk"
-
-
 class MeasureUnit(Enum):
     """Provide unit names.
 
