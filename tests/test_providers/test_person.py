@@ -162,12 +162,6 @@ class TestPerson(object):
         result = _person.social_media_profile(site=site)
         assert result is not None
 
-    def test_avatar(self, _person):
-        result = _person.avatar(size=512)
-        img, size, *__ = result.split("/")[::-1]
-        assert int(size) == 512
-        assert 32 == len(img.split(".")[0])
-
     def test_identifier(self, _person):
         result = _person.identifier()
         mask = "##-##/##"
@@ -406,10 +400,6 @@ class TestSeededPerson(object):
         assert p1.social_media_profile(
             site=SocialNetwork.TWITTER
         ) == p2.social_media_profile(site=SocialNetwork.TWITTER)
-
-    def test_avatar(self, p1, p2):
-        assert p1.avatar() == p2.avatar()
-        assert p1.avatar(size=64) == p2.avatar(size=64)
 
     def test_identifier(self, p1, p2):
         assert p1.identifier() == p2.identifier()

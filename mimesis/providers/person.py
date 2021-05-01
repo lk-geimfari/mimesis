@@ -264,9 +264,7 @@ class Person(BaseDataProvider):
             foretime10@live.com
         """
         if unique and self.seed is not None:
-            raise ValueError(
-                "You cannot use «unique» parameter with a seeded provider"
-            )
+            raise ValueError("You cannot use «unique» parameter with a seeded provider")
 
         if not domains:
             domains = EMAIL_DOMAINS
@@ -484,15 +482,6 @@ class Person(BaseDataProvider):
             mask = self.random.choice(masks)
 
         return self.random.custom_code(mask=mask, digit=placeholder)
-
-    def avatar(self, size: int = 256) -> str:
-        """Generate a random avatar..
-
-        :param size: Size of avatar.
-        :return: Link to avatar.
-        """
-        url = "https://api.adorable.io/avatars/{0}/{1}.png"
-        return url.format(size, self.password(hashed=True))
 
     def identifier(self, mask: str = "##-##/##") -> str:
         """Generate a random identifier by mask.
