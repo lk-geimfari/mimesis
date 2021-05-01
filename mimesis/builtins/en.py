@@ -14,7 +14,7 @@ __all__ = ["USASpecProvider"]
 class USASpecProvider(BaseSpecProvider):
     """Class that provides special data for USA (en)."""
 
-    def __init__(self, seed: Optional[Seed] = None):
+    def __init__(self, seed: Optional[Seed] = None) -> None:
         """Initialize attributes."""
         super().__init__(locale=locales.EN, seed=seed)
 
