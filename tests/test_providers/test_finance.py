@@ -24,10 +24,6 @@ class TestFinance(object):
     def test_str(self, finance):
         assert re.match(patterns.DATA_PROVIDER_STR_REGEX, str(finance))
 
-    def test_copyright(self, finance):
-        result = finance.copyright()
-        assert "©" in result
-
     def test_stock_ticker(self, finance):
         result = finance.stock_ticker()
         assert result in STOCK_TICKERS
@@ -88,11 +84,9 @@ class TestFinance(object):
         ],
     )
     def test_price_in_btc(self, _finance, minimum, maximum):
-        result = _finance.price_in_btc(minimum, maximum)
-        price, symbol = result.split(" ")
+        price = _finance.price_in_btc(minimum, maximum)
         assert float(price) >= minimum
         assert float(price) <= maximum
-        assert symbol == "BTC"
 
 
 class TestSeededFinance(object):
@@ -103,9 +97,6 @@ class TestSeededFinance(object):
     @pytest.fixture()
     def f2(self, seed):
         return Finance(seed=seed)
-
-    def test_copyright(self, f1, f2):
-        assert f1.copyright() == f2.copyright()
 
     def test_stock_ticker(self, f1, f2):
         assert f1.stock_ticker() == f2.stock_ticker()

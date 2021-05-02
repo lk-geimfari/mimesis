@@ -26,7 +26,7 @@ class TestGeneric(object):
         assert result is not None
 
     def test_base_finance(self, generic):
-        result = generic.finance.copyright()
+        result = generic.finance.currency_symbol()
         assert result is not None
 
     def test_base_code(self, generic):
@@ -105,7 +105,6 @@ class TestSeededGeneric(object):
 
     def test_generic_finance(self, g1, g2):
         assert g1.finance.company() == g2.finance.company()
-        assert g1.finance.copyright() == g2.finance.copyright()
 
     def test_generic_clothing(self, g1, g2):
         s1 = g1.clothing.european_size()

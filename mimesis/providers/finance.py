@@ -55,16 +55,6 @@ class Finance(BaseDataProvider):
         company_types: List[str] = self._data["company"]["type"][key]
         return self.random.choice(company_types)
 
-    def copyright(self) -> str:  # noqa: A003
-        """Generate a random copyright.
-
-        :return: Copyright of company.
-        """
-        return "© {}, {}".format(
-            self.company(),
-            self.company_type(abbr=True),
-        )
-
     def currency_iso_code(self, allow_random: bool = False) -> str:
         """Get code of the currency for current locale.
 
@@ -120,19 +110,17 @@ class Finance(BaseDataProvider):
 
         return price_format.replace("#", price)
 
-    def price_in_btc(self, minimum: float = 0, maximum: float = 2) -> str:
+    def price_in_btc(self, minimum: float = 0, maximum: float = 2) -> float:
         """Generate random price in BTC.
 
         :param minimum: Minimum value of price.
         :param maximum: Maximum value of price.
         :return: Price in BTC.
         """
-        return "{} BTC".format(
-            self.random.uniform(
-                minimum,
-                maximum,
-                precision=7,
-            ),
+        return self.random.uniform(
+            minimum,
+            maximum,
+            precision=7,
         )
 
     def stock_ticker(self) -> str:

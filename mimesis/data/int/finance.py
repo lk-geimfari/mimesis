@@ -187,19 +187,27 @@ CURRENCY_ISO_CODES: List[str] = [
 ]
 
 CRYPTOCURRENCY_ISO_CODES = [
+    "BCH",
+    "BNB",
+    "BTC",
     "DASH",
+    "DOT",
+    "EOS",
     "ETH",
     "IOT",
+    "LTC",
+    "USDT",
     "VTC",
+    "WBTC",
     "XBC",
     "XBT",
-    "BTC",
     "XLM",
     "XMR",
     "XRP",
     "XZC",
     "ZEC",
 ]
+
 
 CURRENCY_SYMBOLS = {
     "cs": "Kč",
@@ -240,7 +248,7 @@ CURRENCY_SYMBOLS = {
 }
 
 CRYPTOCURRENCY_SYMBOLS = [
-    "Ƀ",
+    "₿",
     "Ł",
     "Ξ",
 ]

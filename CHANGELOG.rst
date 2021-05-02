@@ -28,6 +28,7 @@ Version 5.0.0
 - Removed data provider ``UnitSystem()``, use instead ``Science()``
 - Removed data provider ``Structure()``, use instead ``schema.Schema``
 - Removed ``GermanySpecProvider``
+- Removed method ``copyright()`` of ``Finance()``
 - Removed method ``network_protocol()`` of ``Internet()``
 - Removed method ``.sexual_orientation()``, ``.social_media_profile()`` and ``.avatar()`` of ``Person()``
 - Removed a bunch of useless custom exceptions and replaced them with ``FieldError``
