@@ -22,6 +22,9 @@ class BaseProvider(object):
     def __init__(self, *, seed: Optional[Seed] = None) -> None:
         """Initialize attributes.
 
+        Keep in mind, that locale-independent data providers will work
+        only with keyword-only arguments since version 5.0.0.
+
         :param seed: Seed for random.
             When set to `None` the current system time is used.
         """
