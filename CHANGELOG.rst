@@ -18,7 +18,7 @@ Version 5.0.0
 
 - Added ``measure_unit()`` and ``.metric_prefix()`` methods for ``Science``
 - Added methods ``.iterator()`` and ``.infinite()`` for ``schema.Schema``
-- Added methods ``.slug()`` for ``Internet()``
+- Added methods ``.slug()`` and ``ip_v4_with_port()`` for ``Internet()``
 - Added methods ``.stock_ticker()``, ``.stock_name()`` and ``.stock_exchange()`` for ``Finance()``
 - Added ``BinaryFile`` data provider which provides binary data files, such as ``.mp3``, ``.mp4``, ``.png``, etc.
 
@@ -30,6 +30,7 @@ Version 5.0.0
 - Removed ``GermanySpecProvider``
 - Removed method ``copyright()`` of ``Finance()``
 - Removed method ``network_protocol()`` of ``Internet()``
+- Removed params ``with_port`` and ``port_range`` for ``ip_v4()`` of ``Internet()``. Use ``ip_v4_with_port()`` instead
 - Removed method ``.sexual_orientation()``, ``.social_media_profile()`` and ``.avatar()`` of ``Person()``
 - Removed a bunch of useless custom exceptions and replaced them with ``FieldError``
 - Removed completely useless ``chemical_element`` and ``atomic_number`` methods of ``Science`` data provider and made it locale-independent

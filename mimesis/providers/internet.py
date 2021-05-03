@@ -100,25 +100,24 @@ class Internet(BaseProvider):
             self.random.randint(0, self._MAX_IPV4),
         )
 
-    def ip_v4(
-        self, with_port: bool = False, port_range: PortRange = PortRange.ALL
-    ) -> str:
+    def ip_v4_with_port(self, port_range: PortRange = PortRange.ALL) -> str:
         """Generate a random IPv4 address as string.
 
         :param port_range: PortRange enum object.
-        :param with_port: Add port from PortRange to IP.
         :return: IPv4 address as string.
 
         :Example:
-            19.121.223.58 or 19.121.223.58:8000
+            19.121.223.58:8000
         """
-        ip = str(self.ip_v4_object())
+        return "{}:{}".format(self.ip_v4(), self.port(port_range))
 
-        if with_port:
-            port = self.port(port_range=port_range)
-            return "{}:{}".format(ip, port)
+    def ip_v4(self) -> str:
+        """Generate a random IPv4 address as string.
 
-        return ip
+        :Example:
+            19.121.223.58
+        """
+        return str(self.ip_v4_object())
 
     def ip_v6_object(self) -> IPv6Address:
         """Generate random IPv6Address object.

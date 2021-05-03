@@ -83,25 +83,26 @@ class TestInternet(object):
         assert re.match(patterns.IP_V4_REGEX, ip.exploded)
         assert isinstance(ip, IPv4Address)
 
+    def test_ip_v4(
+        self,
+        net,
+    ):
+        assert re.match(patterns.IP_V4_REGEX, net.ip_v4())
+
     @pytest.mark.parametrize(
-        "with_port, port_range",
+        "port_range",
         [
-            (False, PortRange.ALL),
-            (True, PortRange.ALL),
-            (True, PortRange.WELL_KNOWN),
-            (True, PortRange.EPHEMERAL),
-            (True, PortRange.REGISTERED),
+            PortRange.ALL,
+            PortRange.WELL_KNOWN,
+            PortRange.EPHEMERAL,
+            PortRange.REGISTERED,
         ],
     )
-    def test_ip_v4(self, net, with_port, port_range):
-        ip = net.ip_v4(with_port, port_range)
-
-        if not with_port:
-            assert re.match(patterns.IP_V4_REGEX, ip)
-        else:
-            port = int(ip.split(":")[-1])
-            port_start, port_end = port_range.value
-            assert port_start <= port <= port_end
+    def test_ip_v4_with_port(self, net, port_range):
+        ip = net.ip_v4_with_port(port_range)
+        port = int(ip.split(":")[-1])
+        port_start, port_end = port_range.value
+        assert port_start <= port <= port_end
 
     def test_ip_v6_object(self, net):
         ip = net.ip_v6_object()
@@ -218,9 +219,10 @@ class TestSeededInternet(object):
 
     def test_ip_v4(self, i1, i2):
         assert i1.ip_v4() == i2.ip_v4()
-        assert i1.ip_v4(with_port=True) == i2.ip_v4(with_port=True)
-        assert i1.ip_v4(with_port=True, port_range=PortRange.ALL) == i2.ip_v4(
-            with_port=True, port_range=PortRange.ALL
+
+    def test_ip_v4_with_port(self, i1, i2):
+        assert i1.ip_v4_with_port(port_range=PortRange.ALL) == i2.ip_v4_with_port(
+            port_range=PortRange.ALL
         )
 
     def test_ip_v4_object(self, i1, i2):
