@@ -16,7 +16,7 @@ from mimesis.typing import JSON, Seed
 __all__ = ["BaseDataProvider", "BaseProvider"]
 
 
-class BaseProvider(object):
+class BaseProvider:
     """This is a base class for all providers."""
 
     def __init__(self, *, seed: Optional[Seed] = None) -> None:
