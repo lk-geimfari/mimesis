@@ -172,18 +172,19 @@ class TestInternet(object):
             net.top_level_domain(tld_type="nil")
 
     @pytest.mark.parametrize(
-        "range_, excepted",
+        "port_range, excepted",
         [
             (PortRange.ALL, (1, 65535)),
             (PortRange.EPHEMERAL, (49152, 65535)),
             (PortRange.REGISTERED, (1024, 49151)),
         ],
     )
-    def test_port(self, net, range_, excepted):
-        result = net.port(port_range=range_)
+    def test_port(self, net, port_range, excepted):
+        result = net.port(port_range=port_range)
         assert (result >= excepted[0]) and (result <= excepted[1])
+
         with pytest.raises(NonEnumerableError):
-            net.port("nill")
+            net.port("nil")
 
 
 class TestSeededInternet(object):

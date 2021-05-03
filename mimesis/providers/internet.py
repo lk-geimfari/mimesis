@@ -296,10 +296,9 @@ class Internet(BaseProvider):
         :Example:
             8080
         """
-        if isinstance(port_range, PortRange):
-            return self.random.randint(*port_range.value)
 
-        raise NonEnumerableError(PortRange)
+        rng = self._validate_enum(port_range, PortRange)
+        return self.random.randint(*rng)
 
     def slug(self, *, parts_count: int = 5) -> str:
         """Generate a random slug of given parts count.
