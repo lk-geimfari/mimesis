@@ -18,7 +18,6 @@ from mimesis.data import (
     USERNAMES,
 )
 from mimesis.enums import MimeType, PortRange, TLDType
-from mimesis.exceptions import NonEnumerableError
 from mimesis.providers.base import BaseProvider
 from mimesis.providers.file import File
 from mimesis.providers.text import Text
