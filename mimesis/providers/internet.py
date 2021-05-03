@@ -265,7 +265,7 @@ class Internet(BaseProvider):
         :return: Top level domain.
         :raises NonEnumerableError: if tld_type not in DomainType.
         """
-        key = self._validate_enum(item=tld_type, enum=TLDType)
+        key = self.validate_enum(item=tld_type, enum=TLDType)
         return self.random.choice(TLD[key])
 
     def tld(self, *args: Any, **kwargs: Any) -> str:
@@ -297,7 +297,7 @@ class Internet(BaseProvider):
             8080
         """
 
-        rng = self._validate_enum(port_range, PortRange)
+        rng = self.validate_enum(port_range, PortRange)
         return self.random.randint(*rng)
 
     def slug(self, *, parts_count: int = 5) -> str:

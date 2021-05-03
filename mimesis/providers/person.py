@@ -78,7 +78,7 @@ class Person(BaseDataProvider):
         :Example:
             John.
         """
-        key = self._validate_enum(gender, Gender)
+        key = self.validate_enum(gender, Gender)
         names: List[str] = self._data["names"].get(key)
         return self.random.choice(names)
 
@@ -105,7 +105,7 @@ class Person(BaseDataProvider):
 
         # Surnames separated by gender.
         if isinstance(surnames, dict):
-            key = self._validate_enum(gender, Gender)
+            key = self.validate_enum(gender, Gender)
             surnames = surnames[key]
 
         return self.random.choice(surnames)
@@ -136,8 +136,8 @@ class Person(BaseDataProvider):
         :Example:
             PhD.
         """
-        gender_key = self._validate_enum(gender, Gender)
-        title_key = self._validate_enum(title_type, TitleType)
+        gender_key = self.validate_enum(gender, Gender)
+        title_key = self.validate_enum(title_type, TitleType)
 
         titles: List[str] = self._data["title"][gender_key][title_key]
         return self.random.choice(titles)
@@ -413,7 +413,7 @@ class Person(BaseDataProvider):
 
         # Separated by gender
         if isinstance(nationalities, dict):
-            key = self._validate_enum(gender, Gender)
+            key = self.validate_enum(gender, Gender)
             nationalities = nationalities[key]
 
         return self.random.choice(nationalities)

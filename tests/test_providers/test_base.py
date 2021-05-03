@@ -124,13 +124,13 @@ class TestBase(object):
         ],
     )
     def test_validate_enum(self, base_data_provider, gender, excepted):
-        result = base_data_provider._validate_enum(gender, Gender)
+        result = base_data_provider.validate_enum(gender, Gender)
 
         assert (result == excepted) or (result in excepted)
         assert result in [item.value for item in Gender]
 
         with pytest.raises(NonEnumerableError):
-            base_data_provider._validate_enum("", "")
+            base_data_provider.validate_enum("", "")
 
     @pytest.mark.parametrize("locale", LIST_OF_LOCALES)
     def test_get_current_locale(self, locale):

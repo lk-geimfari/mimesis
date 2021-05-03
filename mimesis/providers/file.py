@@ -48,7 +48,7 @@ class File(BaseProvider):
         :Example:
             .py
         """
-        key = self._validate_enum(item=file_type, enum=FileType)
+        key = self.validate_enum(item=file_type, enum=FileType)
         extensions = EXTENSIONS[key]
         return self.random.choice(extensions)
 
@@ -58,7 +58,7 @@ class File(BaseProvider):
         :param type_: Enum object MimeType.
         :return: Mime type.
         """
-        key = self._validate_enum(item=type_, enum=MimeType)
+        key = self.validate_enum(item=type_, enum=MimeType)
         types = MIME_TYPES[key]
         return self.random.choice(types)
 

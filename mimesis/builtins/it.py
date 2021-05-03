@@ -43,7 +43,7 @@ class ItalySpecProvider(BaseSpecProvider):
         code += self.random.choice(month_codes)
 
         birth_day = self.random.randint(101, 131)
-        self._validate_enum(gender, Gender)
+        self.validate_enum(gender, Gender)
         if gender == Gender.FEMALE:
             birth_day += 40
         code += str(birth_day)[1:]

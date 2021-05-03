@@ -183,7 +183,7 @@ class Address(BaseDataProvider):
         :return: Country code in selected format.
         :raises KeyError: if fmt is not supported.
         """
-        key = self._validate_enum(fmt, CountryCode)
+        key = self.validate_enum(fmt, CountryCode)
         return self.random.choice(COUNTRY_CODES[key])
 
     def country(self) -> str:

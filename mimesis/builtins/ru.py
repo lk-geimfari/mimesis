@@ -45,7 +45,7 @@ class RussiaSpecProvider(BaseSpecProvider):
         :Example:
             Алексеевна.
         """
-        gender = self._validate_enum(gender, Gender)
+        gender = self.validate_enum(gender, Gender)
         patronymics: List[str] = self._data["patronymic"][gender]
         return self.random.choice(patronymics)
 

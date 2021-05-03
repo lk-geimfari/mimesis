@@ -64,7 +64,7 @@ class Cryptographic(BaseProvider):
         :return: Hash.
         :raises NonEnumerableError: When algorithm is unsupported.
         """
-        key = self._validate_enum(algorithm, Algorithm)
+        key = self.validate_enum(algorithm, Algorithm)
 
         if hasattr(hashlib, key):
             fn = getattr(hashlib, key)

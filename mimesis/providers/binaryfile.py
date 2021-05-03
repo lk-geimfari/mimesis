@@ -45,7 +45,7 @@ class BinaryFile(BaseProvider):
             VideoFile,
         ],
     ) -> bytes:
-        file_type = self._validate_enum(file_type, file_type.__class__)
+        file_type = self.validate_enum(file_type, file_type.__class__)
         file_path = self._data_dir.joinpath("data", "bin", f"sample.{file_type}")
 
         with open(file_path, "rb") as file:

@@ -47,7 +47,7 @@ class BaseProvider(object):
         self.seed = seed
         self.random.seed(self.seed)
 
-    def _validate_enum(self, item: Any, enum: Any) -> Any:
+    def validate_enum(self, item: Any, enum: Any) -> Any:
         """Validate enum parameter of method in subclasses of BaseProvider.
 
         :param item: Item of enum object.

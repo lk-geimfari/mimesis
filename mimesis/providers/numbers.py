@@ -175,7 +175,7 @@ class Numbers(BaseProvider):
         :param kwargs: Other method-specific arguments.
         :return: A matrix of random numbers.
         """
-        key = self._validate_enum(num_type, NumTypes)
+        key = self.validate_enum(num_type, NumTypes)
         kwargs.update({"n": n})
         method = getattr(self, key)
         return [method(**kwargs) for _ in range(m)]

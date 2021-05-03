@@ -60,7 +60,7 @@ class Science(BaseProvider):
         :param symbol: Return only symbol
         :return: Unit.
         """
-        result: Tuple[str, str] = self._validate_enum(
+        result: Tuple[str, str] = self.validate_enum(
             item=name,
             enum=MeasureUnit,
         )
@@ -84,5 +84,5 @@ class Science(BaseProvider):
         """
         prefixes = SI_PREFIXES_SYM if symbol else SI_PREFIXES
 
-        key = self._validate_enum(item=sign, enum=MetricPrefixSign)
+        key = self.validate_enum(item=sign, enum=MetricPrefixSign)
         return self.random.choice(prefixes[key])

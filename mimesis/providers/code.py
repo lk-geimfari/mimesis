@@ -62,7 +62,7 @@ class Code(BaseProvider):
         :return: ISBN.
         :raises NonEnumerableError: if fmt is not enum ISBNFormat.
         """
-        fmt_value = self._validate_enum(item=fmt, enum=ISBNFormat)
+        fmt_value = self.validate_enum(item=fmt, enum=ISBNFormat)
         mask = ISBN_MASKS[fmt_value].format(ISBN_GROUPS[locale])
         return self.random.custom_code(mask)
 
@@ -76,7 +76,7 @@ class Code(BaseProvider):
         :return: EAN.
         :raises NonEnumerableError: if fmt is not enum EANFormat.
         """
-        key = self._validate_enum(
+        key = self.validate_enum(
             item=fmt,
             enum=EANFormat,
         )
