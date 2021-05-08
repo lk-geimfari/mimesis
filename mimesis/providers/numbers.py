@@ -15,10 +15,23 @@ __all__ = ["Numbers"]
 class Numbers(BaseProvider):
     """Class for generating numbers."""
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.__inc = 0
+
     class Meta:
         """Class for metadata."""
 
         name = "numbers"
+
+    def incremental(self) -> int:
+        """Generate incremental number.
+
+        :return: Integer.
+        """
+        self.__inc += 1
+        return self.__inc
 
     def float_number(
         self, start: float = -1000.0, end: float = 1000.0, precision: int = 15

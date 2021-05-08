@@ -18,6 +18,11 @@ class TestNumbers(object):
     def test_str(self, numbers):
         assert re.match(patterns.PROVIDER_STR_REGEX, str(numbers))
 
+    def test_incremental(self):
+        numbers = Numbers()
+        for i in range(1, 50):
+            assert numbers.incremental() == i
+
     @pytest.mark.parametrize(
         "start, end",
         [
@@ -187,6 +192,9 @@ class TestSeededNumbers(object):
     @pytest.fixture
     def n2(self, seed):
         return Numbers(seed=seed)
+
+    def test_incremental(self, n1, n2):
+        assert n1.incremental() == n2.incremental()
 
     def test_floats(self, n1, n2):
         assert n1.floats() == n2.floats()

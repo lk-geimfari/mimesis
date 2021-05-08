@@ -19,6 +19,7 @@ Version 5.0.0
 - Added ``measure_unit()`` and ``.metric_prefix()`` methods for ``Science``
 - Added methods ``.iterator()`` and ``.infinite()`` for ``schema.Schema``
 - Added methods ``.slug()`` and ``ip_v4_with_port()`` for ``Internet()``
+- Added ``incremental()`` method for ``Numbers()``
 - Added methods ``.stock_ticker()``, ``.stock_name()`` and ``.stock_exchange()`` for ``Finance()``
 - Added ``BinaryFile`` data provider which provides binary data files, such as ``.mp3``, ``.mp4``, ``.png``, etc.
 
