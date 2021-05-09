@@ -6,5 +6,5 @@ def test_locales_count():
 
 
 def test_locale_in():
-    assert 'ru' in Locale
-    assert 'en' in Locale
+    assert "ru" in Locale
+    assert "en" in Locale

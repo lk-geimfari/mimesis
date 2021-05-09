@@ -14,8 +14,7 @@ class _Locale:
     """
 
     def __init__(self) -> None:
-        """Initialize all the locales.
-        """
+        """Initialize all the locales."""
         self.CS = "cs"
         self.DA = "da"
         self.DE = "de"
