@@ -58,49 +58,12 @@ So what did the code above?
 
 1. First we imported the :class:`~mimesis.Person` provider. An instance of this
    class will be our provider of personal data.
-2. We import object :class:`~mimesis.enums.Gender` which we are used as a
+2. We import the object ``Locale`` which provides locale codes (its own attributes) and must
+   be used as a parameter for locale-depend data providers.
+3. We import object :class:`~mimesis.enums.Gender` which we are used as a
    parameter for the :meth:`~mimesis.Person.full_name`.
-3. Next we generate random female full name.
-4. The same as above, but for male.
-
-
-Data Providers
---------------
-Mimesis support over twenty different data providers available,
-which can produce data related to food, people, computer hardware,
-transportation, addresses, and more.
-
-See :ref:`api-reference` for more info.
-
-.. attention::
-    Data providers are **heavy objects** since each instance of provider keeps in memory all
-    the data from the provider's JSON file so you **should not** construct too many providers.
-
-    You can read more about the heaviness of providers in `this issue <https://github.com/lk-geimfari/mimesis/issues/968>`_.
-
-Generic Provider
-----------------
-
-When you only need to generate data for a single locale, use the :class:`~mimesis.Generic` provider,
-and you can access all Mimesis providers from one object.
-
-.. code-block:: python
-
-    >>> from mimesis import Generic
-    >>> from mimesis.locales import Locale
-    >>> g = Generic(Locale.ES)
-
-    >>> g.datetime.month()
-    'Agosto'
-
-    >>> g.code.imei()
-    '353918052107063'
-
-    >>> g.food.fruit()
-    'Limón'
-
-
-.. _locales:
+4. Next we generate random female full name.
+5. The same as above, but for male.
 
 Locales
 -------
@@ -129,7 +92,51 @@ is appropriate for the language or country associated with that locale:
     'ул. Пехотная 125'
 
 
-See ``mimesis.locales.Locale`` for more details.
+See the table below for more details.
+
+Supported locales
+~~~~~~~~~~~~~~~~~
+
+Mimesis currently includes support for 34 different locales:
+
+=======  ====================  ====================  ====================
+Code     Associated attribute  Name                  Native Name
+=======  ====================  ====================  ====================
+`cs`     ``Locale.CS``         Czech                 Česky
+`da`     ``Locale.DA``         Danish                Dansk
+`de`     ``Locale.DE``         German                Deutsch
+`de-at`  ``Locale.DE_AT``      Austrian german       Deutsch
+`de-ch`  ``Locale.DE_CH``      Swiss german          Deutsch
+`el`	 ``Locale.EL``         Greek                 Ελληνικά
+`en`     ``Locale.EN``         English               English
+`en-au`  ``Locale.EN_AU``      Australian English    English
+`en-ca`  ``LocALE.EN_CA``      Canadian English      English
+`en-gb`  ``Locale.EN_GB``      British English       English
+`es`     ``Locale.ES``         Spanish               Español
+`es-mx`  ``Locale.ES_MX``      Mexican Spanish       Español
+`et`     ``Locale.ET``         Estonian              Eesti
+`fa`     ``Locale.FA``         Farsi                 فارسی
+`fi`     ``Locale.FI``         Finnish               Suomi
+`fr`     ``Locale.FR``         French                Français
+`hu`     ``Locale.HU``         Hungarian             Magyar
+`is`     ``Locale.IS``         Icelandic             Íslenska
+`it`     ``Locale.IT``         Italian               Italiano
+`ja`     ``Locale.JA``         Japanese              日本語
+`kk`     ``Locale.KK``         Kazakh                Қазақша
+`ko`	 ``Locale.KO``         Korean                한국어
+`nl`     ``Locale.NL``         Dutch                 Nederlands
+`nl-be`  ``Locale.NL_BE``      Belgium Dutch         Nederlands
+`no`     ``Locale.NO``         Norwegian             Norsk
+`pl`     ``Locale.PL``         Polish                Polski
+`pt`     ``Locale.PT``         Portuguese            Português
+`pt-br`  ``Locale.PT_BR``      Brazilian Portuguese  Português Brasileiro
+`ru`     ``Locale.RU``         Russian               Русский
+`sk`     ``Locale.SK``         Slovak                Slovensky
+`sv`     ``Locale.SV``         Swedish               Svenska
+`tr`     ``Locale.TR``         Turkish               Türkçe
+`uk`     ``Locale.UK``         Ukrainian             Українська
+`zh`     ``Locale.ZH``         Chinese               汉语
+=======  ====================  ====================  ====================
 
 Override locale
 ~~~~~~~~~~~~~~~
@@ -173,49 +180,44 @@ You can also use it with :class:`~mimesis.Generic()`:
     >>> generic.text.word()
     'responsibilities'
 
-Supported locales
-~~~~~~~~~~~~~~~~~
 
-Mimesis currently includes support for 33 different locales:
+Data Providers
+--------------
+Mimesis support over twenty different data providers available,
+which can produce data related to food, people, computer hardware,
+transportation, addresses, and more.
 
-=======  ====================  ====================  ====================
-Code     Locale attribute       Name                  Native Name
-=======  ====================  ====================  ====================
-`cs`     ``Locale.CS``         Czech                 Česky
-`da`     ``Locale.DA``         Danish                Dansk
-`de`     ``Locale.DE``         German                Deutsch
-`de-at`  ``Locale.DE_AT``      Austrian german       Deutsch
-`de-ch`  ``Locale.DE_CH``      Swiss german          Deutsch
-`el`	 ``Locale.EL``         Greek                 Ελληνικά
-`en`     ``Locale.EN``         English               English
-`en-au`  ``Locale.EN_AU``      Australian English    English
-`en-ca`  ``LocALE.EN_CA``      Canadian English      English
-`en-gb`  ``Locale.EN_GB``      British English       English
-`es`     ``Locale.ES``         Spanish               Español
-`es-mx`  ``Locale.ES_MX``      Mexican Spanish       Español
-`et`     ``Locale.ET``         Estonian              Eesti
-`fa`     ``Locale.FA``         Farsi                 فارسی
-`fi`     ``Locale.FI``         Finnish               Suomi
-`fr`     ``Locale.FR``         French                Français
-`hu`     ``Locale.HU``         Hungarian             Magyar
-`is`     ``Locale.IS``         Icelandic             Íslenska
-`it`     ``Locale.IT``         Italian               Italiano
-`ja`     ``Locale.JA``         Japanese              日本語
-`kk`     ``Locale.KK``         Kazakh                Қазақша
-`ko`	 ``Locale.KO``         Korean                한국어
-`nl`     ``Locale.NL``         Dutch                 Nederlands
-`nl-be`  ``Locale.NL_BE``      Belgium Dutch         Nederlands
-`no`     ``Locale.NO``         Norwegian             Norsk
-`pl`     ``Locale.PL``         Polish                Polski
-`pt`     ``Locale.PT``         Portuguese            Português
-`pt-br`  ``Locale.PT_BR``      Brazilian Portuguese  Português Brasileiro
-`ru`     ``Locale.RU``         Russian               Русский
-`sk`     ``Locale.SK``         Slovak                Slovensky
-`sv`     ``Locale.SV``         Swedish               Svenska
-`tr`     ``Locale.TR``         Turkish               Türkçe
-`uk`     ``Locale.UK``         Ukrainian             Українська
-`zh`     ``Locale.ZH``         Chinese               汉语
-=======  ====================  ====================  ====================
+See :ref:`api-reference` for more info.
+
+.. attention::
+    Data providers are **heavy objects** since each instance of provider keeps in memory all
+    the data from the provider's JSON file so you **should not** construct too many providers.
+
+    You can read more about the heaviness of providers in `this issue <https://github.com/lk-geimfari/mimesis/issues/968>`_.
+
+Generic Provider
+----------------
+
+When you only need to generate data for a single locale, use the :class:`~mimesis.Generic` provider,
+and you can access all Mimesis providers from one object.
+
+.. code-block:: python
+
+    >>> from mimesis import Generic
+    >>> from mimesis.locales import Locale
+    >>> g = Generic(Locale.ES)
+
+    >>> g.datetime.month()
+    'Agosto'
+
+    >>> g.code.imei()
+    '353918052107063'
+
+    >>> g.food.fruit()
+    'Limón'
+
+
+.. _locales:
 
 Seeded Data
 -----------

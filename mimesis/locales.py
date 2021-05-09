@@ -7,10 +7,12 @@ from typing import Iterator, List
 __all__ = ["Locale"]
 
 
-class _LocaleModel:
-    """This class provides an object which can be used to access all
-    the supported locales from one place.
+class _Locale:
+    """This class provides access to the supported locales from one place.
+
+    You should not use this class directly, use ``mimesis.locales.Locale`` instead.
     """
+
     def __init__(self) -> None:
         """Initialize all the locales.
         """
@@ -67,4 +69,4 @@ class _LocaleModel:
             yield item
 
 
-Locale = _LocaleModel()
+Locale = _Locale()

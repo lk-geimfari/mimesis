@@ -18,14 +18,6 @@ Random
    :special-members: __init__
 
 
-Locale object
-=============
-
-.. autoclass:: mimesis.locales.Locale
-   :members:
-   :special-members: __init__
-
-
 Builtin Data Providers
 ======================
 
