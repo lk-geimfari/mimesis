@@ -3,7 +3,7 @@ import re
 import pytest
 from mimesis.enums import Gender
 from mimesis.exceptions import LocaleError, NonEnumerableError
-from mimesis.locales import LIST_OF_LOCALES
+from mimesis.locales import Locale
 from mimesis.providers import Code, Cryptographic, Internet, Person
 from mimesis.providers.base import BaseDataProvider
 
@@ -58,7 +58,7 @@ class TestBase(object):
         data_provider._pull("address.json")
         assert city in data_provider._data["city"]
 
-    @pytest.mark.parametrize("locale", LIST_OF_LOCALES)
+    @pytest.mark.parametrize("locale", list(Locale))
     def test_pull_raises(self, locale):
         data_provider = BaseDataProvider(locale=locale)
         with pytest.raises(FileNotFoundError):
@@ -132,7 +132,7 @@ class TestBase(object):
         with pytest.raises(NonEnumerableError):
             base_data_provider.validate_enum("", "")
 
-    @pytest.mark.parametrize("locale", LIST_OF_LOCALES)
+    @pytest.mark.parametrize("locale", list(Locale))
     def test_get_current_locale(self, locale):
         base = BaseDataProvider(locale=locale)
         assert locale == base.get_current_locale()

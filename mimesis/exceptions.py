@@ -5,7 +5,7 @@
 from typing import Any, Optional
 
 
-class LocaleError(KeyError):
+class LocaleError(ValueError):
     """Raised when a locale isn't supported."""
 
     def __init__(self, locale: Optional[str] = None) -> None:

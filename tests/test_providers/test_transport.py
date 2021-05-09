@@ -11,7 +11,7 @@ from mimesis.data import (
     VR_CODES,
     VRC_BY_LOCALES,
 )
-from mimesis.locales import LIST_OF_LOCALES
+from mimesis.locales import Locale
 
 from . import patterns
 
@@ -51,7 +51,7 @@ class TestTransport(object):
 
     @pytest.mark.parametrize(
         "locale",
-        LIST_OF_LOCALES,
+        list(Locale),
     )
     def test_vehicle_registration_code(self, transport, locale):
         result = transport.vehicle_registration_code(locale=locale)
@@ -86,7 +86,7 @@ class TestSeededTransport(object):
 
     @pytest.mark.parametrize(
         "locale",
-        LIST_OF_LOCALES,
+        list(Locale),
     )
     def test_vehicle_registration_code(self, t1, t2, locale):
         a = t1.vehicle_registration_code(locale)

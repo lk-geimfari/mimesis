@@ -16,6 +16,7 @@ Version 5.0.0
 
 **Added**:
 
+- Added class ``Locale`` to ``mimesis.locales``
 - Added ``measure_unit()`` and ``.metric_prefix()`` methods for ``Science``
 - Added methods ``.iterator()`` and ``.infinite()`` for ``schema.Schema``
 - Added methods ``.slug()`` and ``ip_v4_with_port()`` for ``Internet()``

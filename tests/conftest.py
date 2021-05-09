@@ -1,8 +1,8 @@
 import mimesis
 import pytest
-from mimesis.locales import LIST_OF_LOCALES
+from mimesis.locales import Locale
 
-locales = LIST_OF_LOCALES
+locales = list(Locale)
 platform = ["win32", "linux"]
 
 

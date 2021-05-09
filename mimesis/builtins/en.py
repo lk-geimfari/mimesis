@@ -4,8 +4,8 @@
 
 from typing import Optional
 
-from mimesis import locales
 from mimesis.builtins.base import BaseSpecProvider
+from mimesis.locales import Locale
 from mimesis.typing import Seed
 
 __all__ = ["USASpecProvider"]
@@ -16,7 +16,7 @@ class USASpecProvider(BaseSpecProvider):
 
     def __init__(self, seed: Optional[Seed] = None) -> None:
         """Initialize attributes."""
-        super().__init__(locale=locales.EN, seed=seed)
+        super().__init__(locale=Locale.EN, seed=seed)
 
     class Meta:
         """The name of the provider."""

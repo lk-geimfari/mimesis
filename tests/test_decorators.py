@@ -1,5 +1,6 @@
 import mimesis.decorators
 import pytest
+from mimesis.exceptions import LocaleError
 
 
 def test_romanization_dict_is_unchanged():
@@ -81,5 +82,5 @@ def test_not_implemented_error():
     def user():
         return "Mimesis"
 
-    with pytest.raises(KeyError):
+    with pytest.raises(LocaleError):
         user()

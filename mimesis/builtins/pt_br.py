@@ -3,8 +3,8 @@
 """Specific data provider for Brazil (pt-br)."""
 from typing import List, Optional
 
-from mimesis import locales
 from mimesis.builtins.base import BaseSpecProvider
+from mimesis.locales import Locale
 from mimesis.typing import Seed
 
 __all__ = ["BrazilSpecProvider"]
@@ -16,7 +16,7 @@ class BrazilSpecProvider(BaseSpecProvider):
 
     def __init__(self, seed: Optional[Seed] = None) -> None:
         """Initialize attributes."""
-        super().__init__(locale=locales.PT_BR, seed=seed)
+        super().__init__(locale=Locale.PT_BR, seed=seed)
 
     class Meta:
         """The name of the provider."""

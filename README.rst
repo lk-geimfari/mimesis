@@ -44,6 +44,7 @@ purposes in a variety of languages. The fake data could be used to populate a te
 create fake API endpoints, create JSON and XML files of arbitrary structure, anonymize data taken
 from production and etc.
 
+
 Installation
 ------------
 
@@ -97,7 +98,8 @@ which represents data related to personal information, such as name, surname, em
 .. code:: python
 
     >>> from mimesis import Person
-    >>> person = Person('en')
+    >>> from mimesis.locales import Locale
+    >>> person = Person(Locale.EN)
 
     >>> person.full_name()
     'Brande Sears'
@@ -129,16 +131,29 @@ Let's take a look how it works:
 .. code:: python
 
     >>> from mimesis import Person
+    >>> from mimesis.locales import Locale
     >>> from mimesis.enums import Gender
 
-    >>> de = Person('de')
-    >>> en = Person('en')
+    >>> de = Person(locale=Locale.DE)
+    >>> en = Person(locale=Locale.EN)
 
     >>> de.full_name(gender=Gender.FEMALE)
     'Sabrina Gutermuth'
 
     >>> en.full_name(gender=Gender.MALE)
     'Layne Gallagher'
+
+You don't have to import locale if you don't want to, just pass the locale code manually, like this:
+
+.. code:: python
+
+    >>> from mimesis import Person
+
+    >>> en = Person('en')
+
+    >>> en.email()
+    'slete1963@live.com'
+
 
 .. _locales: https://mimesis.name/getting_started.html#locales
 

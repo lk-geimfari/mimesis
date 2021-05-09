@@ -2,181 +2,64 @@
 
 """This module provides constants for locale-dependent providers."""
 
-CS = "cs"
-DA = "da"
-DE = "de"
-DE_AT = "de-at"
-DE_CH = "de-ch"
-EL = "el"
-EN = "en"
-EN_AU = "en-au"
-EN_CA = "en-ca"
-EN_GB = "en-gb"
-ES = "es"
-ES_MX = "es-mx"
-ET = "et"
-FA = "fa"
-FI = "fi"
-FR = "fr"
-HU = "hu"
-IS = "is"
-IT = "it"
-JA = "ja"
-KK = "kk"
-KO = "ko"
-NL = "nl"
-NL_BE = "nl-be"
-NO = "no"
-PL = "pl"
-PT = "pt"
-PT_BR = "pt-br"
-RU = "ru"
-SK = "sk"
-SV = "sv"
-TR = "tr"
-UK = "uk"
-ZH = "zh"
+from typing import List
 
-DEFAULT_LOCALE = EN
+__all__ = ['Locale']
 
-SUPPORTED_LOCALES = {
-    CS: {
-        "name": "Czech",
-        "name_local": "česky",
-    },
-    DA: {
-        "name": "Danish",
-        "name_local": "Dansk",
-    },
-    DE: {
-        "name": "German",
-        "name_local": "Deutsch",
-    },
-    DE_AT: {
-        "name": "Austrian German",
-        "name_local": "Deutsch",
-    },
-    DE_CH: {
-        "name": "Swiss German",
-        "name_local": "Deutsch",
-    },
-    EL: {
-        "name": "Greek",
-        "name_local": "Ελληνικά",
-    },
-    EN: {
-        "name": "English",
-        "name_local": "English",
-    },
-    EN_GB: {
-        "name": "British English",
-        "name_local": "English",
-    },
-    EN_AU: {
-        "name": "Australian English",
-        "name_local": "English",
-    },
-    EN_CA: {
-        "name": "Canadian English",
-        "name_local": "English",
-    },
-    ES: {
-        "name": "Spanish",
-        "name_local": "Español",
-    },
-    ES_MX: {
-        "name": "Mexican Spanish",
-        "name_local": "Español",
-    },
-    ET: {
-        "name": "Estonian",
-        "name_local": "Eesti",
-    },
-    FA: {
-        "name": "Farsi",
-        "name_local": "فارسی",
-    },
-    FI: {
-        "name": "Finnish",
-        "name_local": "Suomi",
-    },
-    FR: {
-        "name": "French",
-        "name_local": "Français",
-    },
-    HU: {
-        "name": "Hungarian",
-        "name_local": "Magyar",
-    },
-    IS: {
-        "name": "Icelandic",
-        "name_local": "Íslenska",
-    },
-    IT: {
-        "name": "Italian",
-        "name_local": "Italiano",
-    },
-    JA: {
-        "name": "Japanese",
-        "name_local": "日本語",
-    },
-    KK: {
-        "name": "Kazakh",
-        "name_local": "Қазақша",
-    },
-    KO: {
-        "name": "Korean",
-        "name_local": "한국어",
-    },
-    NL: {
-        "name": "Dutch",
-        "name_local": "Nederlands",
-    },
-    NL_BE: {
-        "name": "Belgium Dutch",
-        "name_local": "Nederlands",
-    },
-    NO: {
-        "name": "Norwegian",
-        "name_local": "Norsk",
-    },
-    PL: {
-        "name": "Polish",
-        "name_local": "Polski",
-    },
-    PT: {
-        "name": "Portuguese",
-        "name_local": "Português",
-    },
-    PT_BR: {
-        "name": "Brazilian Portuguese",
-        "name_local": "Português Brasileiro",
-    },
-    RU: {
-        "name": "Russian",
-        "name_local": "Русский",
-    },
-    SK: {
-        "name": "Slovak",
-        "name_local": "slovensky",
-    },
-    SV: {
-        "name": "Swedish",
-        "name_local": "Svenska",
-    },
-    TR: {
-        "name": "Turkish",
-        "name_local": "Türkçe",
-    },
-    UK: {
-        "name": "Ukrainian",
-        "name_local": "Українська",
-    },
-    ZH: {
-        "name": "Chinese",
-        "name_local": "汉语",
-    },
-}
 
-LIST_OF_LOCALES = list(SUPPORTED_LOCALES)
-LOCALE_SEPARATOR = "-"
+class _LocaleModel:
+    def __init__(self) -> None:
+        self.CS = "cs"
+        self.DA = "da"
+        self.DE = "de"
+        self.DE_AT = "de-at"
+        self.DE_CH = "de-ch"
+        self.EL = "el"
+        self.EN = "en"
+        self.EN_AU = "en-au"
+        self.EN_CA = "en-ca"
+        self.EN_GB = "en-gb"
+        self.ES = "es"
+        self.ES_MX = "es-mx"
+        self.ET = "et"
+        self.FA = "fa"
+        self.FI = "fi"
+        self.FR = "fr"
+        self.HU = "hu"
+        self.IS = "is"
+        self.IT = "it"
+        self.JA = "ja"
+        self.KK = "kk"
+        self.KO = "ko"
+        self.NL = "nl"
+        self.NL_BE = "nl-be"
+        self.NO = "no"
+        self.PL = "pl"
+        self.PT = "pt"
+        self.PT_BR = "pt-br"
+        self.RU = "ru"
+        self.SK = "sk"
+        self.SV = "sv"
+        self.TR = "tr"
+        self.UK = "uk"
+        self.ZH = "zh"
+        self.DEFAULT = self.EN
+
+    def _get_all(self) -> List[str]:
+        values = set()
+
+        for name, code in self.__dict__.items():
+            if name.isupper():
+                values.add(code)
+
+        return list(values)
+
+    def __contains__(self, item: str) -> bool:
+        return item in self._get_all()
+
+    def __iter__(self):
+        for item in self._get_all():
+            yield item
+
+
+Locale = _LocaleModel()

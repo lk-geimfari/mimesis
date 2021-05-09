@@ -15,7 +15,7 @@ __all__ = ["Numbers"]
 class Numbers(BaseProvider):
     """Class for generating numbers."""
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)
 
         self.__inc = 0

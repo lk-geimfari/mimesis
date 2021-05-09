@@ -43,8 +43,9 @@ A minimal basic usage example looks something like this:
 .. code:: python
 
     >>> from mimesis import Person
+    >>> from mimesis.locales import Locale
     >>> from mimesis.enums import Gender
-    >>> person = Person('en')
+    >>> person = Person(Locale.EN)
 
     >>> person.full_name(gender=Gender.FEMALE)
     'Antonetta Garrison'
@@ -86,7 +87,8 @@ and you can access all Mimesis providers from one object.
 .. code-block:: python
 
     >>> from mimesis import Generic
-    >>> g = Generic('es')
+    >>> from mimesis.locales import Locale
+    >>> g = Generic(Locale.ES)
 
     >>> g.datetime.month()
     'Agosto'
@@ -96,9 +98,6 @@ and you can access all Mimesis providers from one object.
 
     >>> g.food.fruit()
     'Limón'
-
-    >>> g.science.rna()
-    'GCTTTAGACC'
 
 
 .. _locales:
@@ -112,9 +111,10 @@ is appropriate for the language or country associated with that locale:
 .. code-block:: python
 
     >>> from mimesis import Address
+    >>> from mimesis.locales import Locale
 
-    >>> de = Address('de')
-    >>> ru = Address('ru')
+    >>> de = Address(locale=Locale.DE)
+    >>> ru = Address(locale=Locale.RU)
 
     >>> de.region()
     'Brandenburg'
@@ -137,13 +137,13 @@ is not really good,  so it's better just temporarily override current locale for
 .. code-block:: python
 
     >>> from mimesis import Person
-    >>> from mimesis import locales
+    >>> from mimesis.locales import Locale
 
-    >>> person = Person(locales.EN)
+    >>> person = Person(Locale.EN)
     >>> person.full_name()
     'Ozie Melton'
 
-    >>> with person.override_locale(locales.RU):
+    >>> with person.override_locale(Locale.RU):
     ...     person.full_name()
 
     'Симона Богданова'
@@ -156,13 +156,13 @@ You can also use it with :class:`~mimesis.Generic()`:
 .. code-block:: python
 
     >>> from mimesis import Generic
-    >>> from mimesis import locales
+    >>> from mimesis.locales import Locale
 
-    >>> generic = Generic(locales.EN)
+    >>> generic = Generic(Locale.EN)
     >>> generic.text.word()
     'anyone'
 
-    >>> with generic.text.override_locale(locales.FR):
+    >>> with generic.text.override_locale(Locale.FR):
     ...     generic.text.word()
 
     'mieux'
@@ -265,9 +265,10 @@ Here’s how it works:
 .. code:: python
 
     >>> from mimesis import Generic
+    >>> from mimesis.locales import Locale
     >>> from mimesis.builtins import BrazilSpecProvider
 
-    >>> generic = Generic('pt-br')
+    >>> generic = Generic(Locale.PT_BR)
     >>> generic.add_provider(BrazilSpecProvider)
     >>> generic.brazil_provider.cpf()
     '696.441.186-00'
@@ -364,7 +365,7 @@ then you got ``TypeError`` exception:
 
 .. code:: python
 
-    >>> class InvalidProvider(object):
+    >>> class InvalidProvider:
     ...     @staticmethod
     ...     def hello():
     ...         return 'Hello!'
@@ -405,8 +406,9 @@ Example of usage:
 .. code:: python
 
     >>> from mimesis.schema import Field, Schema
+    >>> from mimesis.locales import Locale
     >>> from mimesis.enums import Gender
-    >>> _ = Field('en')
+    >>> _ = Field(locale=Locale.EN)
     >>> description = (
     ...     lambda: {
     ...         'id': _('uuid'),
@@ -447,13 +449,14 @@ to change this behavior should be passed parameter *providers* with a sequence o
 .. code:: python
 
     >>> from mimesis.schema import Field
+    >>> from mimesis.locales import Locale
     >>> from mimesis import builtins
 
     >>> custom_providers = (
     ...     builtins.RussiaSpecProvider,
     ...     builtins.NetherlandsSpecProvider,
     ... )
-    >>> _ = Field('en', providers=custom_providers)
+    >>> _ = Field(Locale.EN, providers=custom_providers)
 
     >>> _('snils')
     '239-315-742-84'

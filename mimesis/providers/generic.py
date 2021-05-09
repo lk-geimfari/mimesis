@@ -5,7 +5,7 @@
 import inspect
 from typing import Any, List, Optional, Type
 
-from mimesis.locales import DEFAULT_LOCALE
+from mimesis.locales import Locale
 from mimesis.providers.address import Address
 from mimesis.providers.base import BaseDataProvider, BaseProvider
 from mimesis.providers.binaryfile import BinaryFile
@@ -60,7 +60,7 @@ class Generic(BaseProvider):
     )
 
     def __init__(
-        self, locale: str = DEFAULT_LOCALE, seed: Optional[Seed] = None
+        self, locale: str = Locale.DEFAULT, seed: Optional[Seed] = None
     ) -> None:
         """Initialize attributes lazily."""
         super().__init__(seed=seed)

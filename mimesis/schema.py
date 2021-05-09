@@ -5,7 +5,7 @@ import warnings
 from typing import Any, Callable, Iterator, List, Optional
 
 from mimesis.exceptions import FieldError, SchemaError
-from mimesis.locales import EN
+from mimesis.locales import Locale
 from mimesis.providers.generic import Generic
 from mimesis.typing import JSON, Seed
 
@@ -28,7 +28,7 @@ class BaseField:
 
     def __init__(
         self,
-        locale: str = EN,
+        locale: str = Locale.DEFAULT,
         seed: Optional[Seed] = None,
         providers: Optional[Any] = None,
     ) -> None:

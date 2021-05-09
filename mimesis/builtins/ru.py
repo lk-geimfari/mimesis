@@ -4,9 +4,9 @@
 
 from typing import List, Optional
 
-from mimesis import locales
 from mimesis.builtins.base import BaseSpecProvider
 from mimesis.enums import Gender
+from mimesis.locales import Locale
 from mimesis.typing import Seed
 
 __all__ = ["RussiaSpecProvider"]
@@ -17,7 +17,7 @@ class RussiaSpecProvider(BaseSpecProvider):
 
     def __init__(self, seed: Optional[Seed] = None) -> None:
         """Initialize attributes."""
-        super().__init__(locale=locales.RU, seed=seed)
+        super().__init__(locale=Locale.RU, seed=seed)
         self._pull(self._datafile)
 
     class Meta:

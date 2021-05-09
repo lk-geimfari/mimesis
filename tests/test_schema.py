@@ -3,10 +3,10 @@ import warnings
 from collections import Iterator
 
 import pytest
-from mimesis import locales
 from mimesis.builtins.en import USASpecProvider
 from mimesis.enums import Gender
 from mimesis.exceptions import FieldError, SchemaError
+from mimesis.locales import Locale
 from mimesis.schema import BaseField, Field, Schema
 
 from .test_providers import patterns
@@ -21,7 +21,7 @@ def default_field():
     return Field("en")
 
 
-@pytest.fixture(scope="module", params=locales.LIST_OF_LOCALES)
+@pytest.fixture(scope="module", params=list(Locale))
 def field(request):
     return Field(request.param)
 
@@ -63,7 +63,7 @@ def test_field_raises_field_error(default_field):
         default_field("person.full_name.invalid")
 
 
-@pytest.fixture(scope="module", params=locales.LIST_OF_LOCALES)
+@pytest.fixture(scope="module", params=list(Locale))
 def test_base_field(request):
     field = BaseField(request.param)
 

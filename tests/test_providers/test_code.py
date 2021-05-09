@@ -6,7 +6,7 @@ from mimesis import Code
 from mimesis.data import LOCALE_CODES
 from mimesis.enums import EANFormat, ISBNFormat
 from mimesis.exceptions import NonEnumerableError
-from mimesis.locales import LIST_OF_LOCALES
+from mimesis.locales import Locale
 
 from . import patterns
 
@@ -59,7 +59,7 @@ class TestCode(object):
     )
     @pytest.mark.parametrize(
         "locale",
-        LIST_OF_LOCALES,
+        list(Locale),
     )
     def test_isbn(self, code, fmt, length, locale):
         result = code.isbn(fmt=fmt, locale=locale)
