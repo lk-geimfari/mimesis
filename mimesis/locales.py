@@ -2,7 +2,7 @@
 
 """This module provides constants for locale-dependent providers."""
 
-from typing import List
+from typing import List, Iterator
 
 __all__ = ['Locale']
 
@@ -57,7 +57,7 @@ class _LocaleModel:
     def __contains__(self, item: str) -> bool:
         return item in self._get_all()
 
-    def __iter__(self):
+    def __iter__(self) -> Iterator[str]:
         for item in self._get_all():
             yield item
 
