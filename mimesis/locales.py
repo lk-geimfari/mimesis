@@ -2,9 +2,9 @@
 
 """This module provides constants for locale-dependent providers."""
 
-from typing import List, Iterator
+from typing import Iterator, List
 
-__all__ = ['Locale']
+__all__ = ["Locale"]
 
 
 class _LocaleModel:
