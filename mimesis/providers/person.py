@@ -249,7 +249,7 @@ class Person(BaseDataProvider):
 
     def email(
         self,
-        domains: Optional[Union[Sequence[str]]] = None,
+        domains: Optional[Sequence[str]] = None,
         unique: bool = False,
     ) -> str:
         """Generate a random email.

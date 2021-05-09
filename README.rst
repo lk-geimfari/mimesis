@@ -106,8 +106,8 @@ which represents data related to personal information, such as name, surname, em
     >>> person.full_name()
     'Brande Sears'
 
-    >>> person.email(domains=['mimesis.name'])
-    'roccelline1878@mimesis.name'
+    >>> person.email(domains=['example.com'])
+    'roccelline1878@example.com'
 
     >>> person.email(domains=['mimesis.name'], unique=True)
     'f272a05d39ec46fdac5be4ac7be45f3f@mimesis.name'
@@ -144,17 +144,6 @@ Let's take a look how it works:
 
     >>> en.full_name(gender=Gender.MALE)
     'Layne Gallagher'
-
-You don't have to import locale if you don't want to, just pass the locale code manually, like this:
-
-.. code:: python
-
-    >>> from mimesis import Person
-
-    >>> en = Person('en')
-
-    >>> en.email()
-    'slete1963@live.com'
 
 
 .. _locales: https://mimesis.name/getting_started.html#locales

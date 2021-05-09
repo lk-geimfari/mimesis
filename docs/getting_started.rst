@@ -178,44 +178,44 @@ Supported locales
 
 Mimesis currently includes support for 33 different locales:
 
-=======  ====================  ====================
-Code     Name                  Native Name
-=======  ====================  ====================
-`cs`     Czech                 Česky
-`da`     Danish                Dansk
-`de`     German                Deutsch
-`de-at`  Austrian german       Deutsch
-`de-ch`  Swiss german          Deutsch
-`el`	 Greek                 Ελληνικά
-`en`     English               English
-`en-au`  Australian English    English
-`en-ca`  Canadian English      English
-`en-gb`  British English       English
-`es`     Spanish               Español
-`es-mx`  Mexican Spanish       Español
-`et`     Estonian              Eesti
-`fa`     Farsi                 فارسی
-`fi`     Finnish               Suomi
-`fr`     French                Français
-`hu`     Hungarian             Magyar
-`is`     Icelandic             Íslenska
-`it`     Italian               Italiano
-`ja`     Japanese              日本語
-`kk`     Kazakh                Қазақша
-`ko`	 Korean                한국어
-`nl`     Dutch                 Nederlands
-`nl-be`  Belgium Dutch         Nederlands
-`no`     Norwegian             Norsk
-`pl`     Polish                Polski
-`pt`     Portuguese            Português
-`pt-br`  Brazilian Portuguese  Português Brasileiro
-`ru`     Russian               Русский
-`sk`     Slovak                Slovensky
-`sv`     Swedish               Svenska
-`tr`     Turkish               Türkçe
-`uk`     Ukrainian             Українська
-`zh`     Chinese               汉语
-=======  ====================  ====================
+=======  ====================  ====================  ====================
+Code     Locale attribute       Name                  Native Name
+=======  ====================  ====================  ====================
+`cs`     ``Locale.CS``         Czech                 Česky
+`da`     ``Locale.DA``         Danish                Dansk
+`de`     ``Locale.DE``         German                Deutsch
+`de-at`  ``Locale.DE_AT``      Austrian german       Deutsch
+`de-ch`  ``Locale.DE_CH``      Swiss german          Deutsch
+`el`	 ``Locale.EL``         Greek                 Ελληνικά
+`en`     ``Locale.EN``         English               English
+`en-au`  ``Locale.EN_AU``      Australian English    English
+`en-ca`  ``LocALE.EN_CA``      Canadian English      English
+`en-gb`  ``Locale.EN_GB``      British English       English
+`es`     ``Locale.ES``         Spanish               Español
+`es-mx`  ``Locale.ES_MX``      Mexican Spanish       Español
+`et`     ``Locale.ET``         Estonian              Eesti
+`fa`     ``Locale.FA``         Farsi                 فارسی
+`fi`     ``Locale.FI``         Finnish               Suomi
+`fr`     ``Locale.FR``         French                Français
+`hu`     ``Locale.HU``         Hungarian             Magyar
+`is`     ``Locale.IS``         Icelandic             Íslenska
+`it`     ``Locale.IT``         Italian               Italiano
+`ja`     ``Locale.JA``         Japanese              日本語
+`kk`     ``Locale.KK``         Kazakh                Қазақша
+`ko`	 ``Locale.KO``         Korean                한국어
+`nl`     ``Locale.NL``         Dutch                 Nederlands
+`nl-be`  ``Locale.NL_BE``      Belgium Dutch         Nederlands
+`no`     ``Locale.NO``         Norwegian             Norsk
+`pl`     ``Locale.PL``         Polish                Polski
+`pt`     ``Locale.PT``         Portuguese            Português
+`pt-br`  ``Locale.PT_BR``      Brazilian Portuguese  Português Brasileiro
+`ru`     ``Locale.RU``         Russian               Русский
+`sk`     ``Locale.SK``         Slovak                Slovensky
+`sv`     ``Locale.SV``         Swedish               Svenska
+`tr`     ``Locale.TR``         Turkish               Türkçe
+`uk`     ``Locale.UK``         Ukrainian             Українська
+`zh`     ``Locale.ZH``         Chinese               汉语
+=======  ====================  ====================  ====================
 
 Seeded Data
 -----------
@@ -230,8 +230,9 @@ to data provider:
 .. code-block:: python
 
     >>> from mimesis import Person
+    >>> from mimesis.locales import Locale
 
-    >>> person = Person('tr', seed=0xFF)
+    >>> person = Person(Locale.TR, seed=0xFF)
     >>> person.full_name()
     'Gizem Tekand'
 
@@ -251,7 +252,8 @@ won’t run):
 .. code:: python
 
     >>> from mimesis import Person
-    >>> person = Person('en')
+    >>> from mimesis.locales import Locale
+    >>> person = Person(Locale.EN)
 
     >>> person.ssn()
     >>> person.cpf()
@@ -383,7 +385,7 @@ All providers must be subclasses of :class:`~mimesis.BaseProvider`
 because of ensuring a single instance of object ``Random``.
 
 Everything is pretty easy and self-explanatory here, therefore, we will
-only clarify one moment — attribute *name*, class *Meta* is the name
+only clarify one moment — attribute *name*, class *Meta* is the name
 of a class through which access to methods of user-class providers is
 carried out. By default class name is the name of the class in lowercase
 letters.
