@@ -8,7 +8,12 @@ __all__ = ["Locale"]
 
 
 class _LocaleModel:
+    """This class provides an object which can be used to access all
+    the supported locales from one place.
+    """
     def __init__(self) -> None:
+        """Initialize all the locales.
+        """
         self.CS = "cs"
         self.DA = "da"
         self.DE = "de"
