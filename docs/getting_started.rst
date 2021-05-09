@@ -128,6 +128,9 @@ is appropriate for the language or country associated with that locale:
     >>> ru.address()
     'ул. Пехотная 125'
 
+
+See ``mimesis.locales.Locale`` for more details.
+
 Override locale
 ~~~~~~~~~~~~~~~
 
