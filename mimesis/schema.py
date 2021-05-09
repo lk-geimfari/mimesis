@@ -122,6 +122,9 @@ class BaseField:
 class Field(BaseField):
     """Greedy evaluation field"""
 
+    class Meta:
+        eager = True
+
     def __call__(self, *args: Any, **kwargs: Any) -> Any:
         return self.perform(*args, **kwargs)
 
