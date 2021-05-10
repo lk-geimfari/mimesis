@@ -149,7 +149,7 @@ is not really good,  so it's better just temporarily override current locale for
     >>> from mimesis import Person
     >>> from mimesis.locales import Locale
 
-    >>> person = Person(Locale.EN)
+    >>> person = Person(locale=Locale.EN)
     >>> person.full_name()
     'Ozie Melton'
 
@@ -168,7 +168,7 @@ You can also use it with :class:`~mimesis.Generic()`:
     >>> from mimesis import Generic
     >>> from mimesis.locales import Locale
 
-    >>> generic = Generic(Locale.EN)
+    >>> generic = Generic(locale=Locale.EN)
     >>> generic.text.word()
     'anyone'
 
@@ -205,7 +205,7 @@ and you can access all Mimesis providers from one object.
 
     >>> from mimesis import Generic
     >>> from mimesis.locales import Locale
-    >>> g = Generic(Locale.ES)
+    >>> g = Generic(locale=Locale.ES)
 
     >>> g.datetime.month()
     'Agosto'
@@ -255,7 +255,7 @@ won’t run):
 
     >>> from mimesis import Person
     >>> from mimesis.locales import Locale
-    >>> person = Person(Locale.EN)
+    >>> person = Person(locale=Locale.EN)
 
     >>> person.ssn()
     >>> person.cpf()
@@ -275,7 +275,7 @@ Here’s how it works:
     >>> from mimesis.locales import Locale
     >>> from mimesis.builtins import BrazilSpecProvider
 
-    >>> generic = Generic(Locale.PT_BR)
+    >>> generic = Generic(locale=Locale.PT_BR)
     >>> generic.add_provider(BrazilSpecProvider)
     >>> generic.brazil_provider.cpf()
     '696.441.186-00'
