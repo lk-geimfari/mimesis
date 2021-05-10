@@ -234,7 +234,7 @@ to data provider:
     >>> from mimesis import Person
     >>> from mimesis.locales import Locale
 
-    >>> person = Person(Locale.TR, seed=0xFF)
+    >>> person = Person(locale=Locale.TR, seed=0xFF)
     >>> person.full_name()
     'Gizem Tekand'
 
