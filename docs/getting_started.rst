@@ -189,7 +189,7 @@ transportation, addresses, and more.
 
 See :ref:`api-reference` for more info.
 
-.. attention::
+.. warning::
     Data providers are **heavy objects** since each instance of provider keeps in memory all
     the data from the provider's JSON file so you **should not** construct too many providers.
 
