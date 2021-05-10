@@ -87,6 +87,7 @@ Patches and Suggestions
 -  Miroslav Šedivý `(eumiro)`_
 -  Yusan `(aekt)`_
 -  Michael Oliver `michael0liver`_
+-  Emil Madsen `(Skeen)`_
 
 
 
@@ -152,3 +153,4 @@ Patches and Suggestions
 .. _(eumiro): https://github.com/eumiro
 .. _(aekt): https://github.com/aekt
 .. _(michael0liver): https://github.com/aekt
+.. _(Skeen): https://github.com/Skeen

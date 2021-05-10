@@ -13,6 +13,7 @@ Version 5.0.0
 **Fixed**:
 - Fix inheritance issues for ``Generic``, now it inherits ``BaseProvider`` instead of ``BaseDataProvider``
 - Fix locale-independent provider to make them accepts keyword-only arguments
+- Fix DenmarkSpecProvider CPR to generate valid CPR numbers.
 
 **Added**:
 
