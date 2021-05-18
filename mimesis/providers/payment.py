@@ -9,6 +9,7 @@ from typing import Any, Dict, Optional
 from mimesis.data import CREDIT_CARD_NETWORKS
 from mimesis.enums import CardType, Gender
 from mimesis.exceptions import NonEnumerableError
+from mimesis.locales import Locale
 from mimesis.providers.base import BaseProvider
 from mimesis.providers.person import Person
 from mimesis.random import get_random_item
@@ -27,14 +28,14 @@ class Payment(BaseProvider):
         :param kwargs: Keyword arguments.
         """
         super().__init__(*args, **kwargs)
-        self._person = Person("en", seed=self.seed)
+        self._person = Person(Locale.EN, seed=self.seed)
 
     class Meta:
         """Class for metadata."""
 
         name = "payment"
 
-    def cid(self) -> int:
+    def cid(self) -> str:
         """Generate a random CID.
 
         :return: CID code.
@@ -42,7 +43,7 @@ class Payment(BaseProvider):
         :Example:
             7452
         """
-        return self.random.randint(1000, 9999)
+        return "{:04d}".format(self.random.randint(1, 9999))
 
     def paypal(self) -> str:
         """Generate a random PayPal account.
