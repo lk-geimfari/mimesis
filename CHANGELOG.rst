@@ -14,6 +14,7 @@ Version 5.0.0
 - Fix inheritance issues for ``Generic``, now it inherits ``BaseProvider`` instead of ``BaseDataProvider``
 - Fix locale-independent provider to make them accepts keyword-only arguments
 - Fix ``.cvv()`` to make it return string
+- Fix ``.cid()`` to make it return string
 
 **Added**:
 
