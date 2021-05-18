@@ -27,7 +27,7 @@ class Payment(BaseProvider):
         :param kwargs: Keyword arguments.
         """
         super().__init__(*args, **kwargs)
-        self.__person = Person("en", seed=self.seed)
+        self._person = Person("en", seed=self.seed)
 
     class Meta:
         """Class for metadata."""
@@ -52,7 +52,7 @@ class Payment(BaseProvider):
         :Example:
             wolf235@gmail.com
         """
-        return self.__person.email()
+        return self._person.email()
 
     def bitcoin_address(self) -> str:
         """Generate a random bitcoin address.
@@ -170,6 +170,6 @@ class Payment(BaseProvider):
         owner = {
             "credit_card": self.credit_card_number(),
             "expiration_date": self.credit_card_expiration_date(),
-            "owner": self.__person.full_name(gender=gender).upper(),
+            "owner": self._person.full_name(gender=gender).upper(),
         }
         return owner
