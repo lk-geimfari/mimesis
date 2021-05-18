@@ -21,10 +21,7 @@ class Datetime(BaseDataProvider):
     CURRENT_YEAR = datetime.now().year
 
     def __init__(self, *args: Any, **kwargs: Any) -> None:
-        """Initialize attributes.
-
-        :param locale: Current locale.
-        """
+        """Initialize attributes."""
         super().__init__(*args, **kwargs)
         self._datafile = "datetime.json"
         self._pull(self._datafile)
@@ -53,13 +50,11 @@ class Datetime(BaseDataProvider):
         * ``seconds``
         * ``microseconds``
 
-        See datetime module documentation for more:
-        https://docs.python.org/3.7/library/datetime.html#timedelta-objects
-
+        See :py:class:`datetime.timedelta` for more details.
 
         :param date_start: Begin of the range.
         :param date_end: End of the range.
-        :param kwargs: Keyword arguments for datetime.timedelta
+        :param kwargs: Keyword arguments for :py:class:`datetime.timedelta`
         :return: List of datetime objects
         :raises: ValueError: When ``date_start``/``date_end`` not passed and
             when ``date_start`` larger than ``date_end``.

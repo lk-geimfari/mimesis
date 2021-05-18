@@ -36,13 +36,13 @@ class Cryptographic(BaseProvider):
         """Generate random UUID4.
 
         This method returns string by default,
-        but you can make it return uuid.UUID object using
+        but you can make it return :py:class:`uuid.UUID` object using
         parameter **as_object**
 
         .. warning:: Seed is not applicable to this method,
             because of its cryptographic-safe nature.
 
-        :param as_object: Returns uuid.UUID.
+        :param as_object: Returns :py:class:`uuid.UUID`.
         :return: UUID.
         """
         _uuid = uuid4()

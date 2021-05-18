@@ -33,8 +33,18 @@ sys.path.insert(0, os.path.abspath('..'))
 # ones.
 extensions = [
     'sphinx.ext.autodoc',
+    'sphinx.ext.todo',
+    'sphinx.ext.viewcode',
+    'sphinx.ext.duration',
+
+    # See https://www.sphinx-doc.org/en/master/usage/extensions/intersphinx.html
+    'sphinx.ext.intersphinx',
+
+    'sphinx.ext.autosectionlabel',
     'sphinx_autodoc_typehints',
 ]
+
+intersphinx_mapping = {'python': ('https://docs.python.org/3', None)}
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']

@@ -13,9 +13,8 @@ Random object
 Random
 ------
 
-.. autoclass:: mimesis.random.Random
+.. automodule:: mimesis.random
    :members:
-   :special-members: __init__
 
 
 Builtin Data Providers
