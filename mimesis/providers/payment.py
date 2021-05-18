@@ -147,15 +147,15 @@ class Payment(BaseProvider):
         year = self.random.randint(minimum, maximum)
         return "{0:02d}/{1}".format(month, year)
 
-    def cvv(self) -> int:
+    def cvv(self) -> str:
         """Generate a random CVV.
 
         :return: CVV code.
 
         :Example:
-            324
+            069
         """
-        return self.random.randint(100, 999)
+        return "{:03d}".format(self.random.randint(1, 999))
 
     def credit_card_owner(
         self,

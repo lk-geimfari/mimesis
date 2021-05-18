@@ -29,8 +29,8 @@ class TestPayment(object):
 
     def test_cvv(self, payment):
         result = payment.cvv()
-        assert 100 <= result
-        assert result <= 999
+        assert isinstance(result, str)
+        assert len(result) == 3
 
     @pytest.mark.parametrize(
         "card_type",
