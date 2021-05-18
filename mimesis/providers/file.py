@@ -7,6 +7,7 @@ from typing import Any, Optional
 
 from mimesis.data import EXTENSIONS, MIME_TYPES
 from mimesis.enums import FileType, MimeType
+from mimesis.locales import Locale
 from mimesis.providers.base import BaseProvider
 from mimesis.providers.text import Text
 
@@ -23,7 +24,7 @@ class File(BaseProvider):
         :param kwargs: Keyword arguments.
         """
         super().__init__(*args, **kwargs)
-        self.__text = Text("en", seed=self.seed)
+        self._text = Text(Locale.EN, seed=self.seed)
 
     class Meta:
         """Class for metadata."""
@@ -89,7 +90,7 @@ class File(BaseProvider):
         :Example:
             legislative.txt
         """
-        name = self.__text.word()
+        name = self._text.word()
         ext = self.extension(file_type)
 
         return "{name}{ext}".format(
