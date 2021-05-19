@@ -3,12 +3,8 @@
 """Implements various helpers which are used in the various data providers.
 
 This module contains custom ``Random()`` class where implemented a lot of
-methods which are not included in standard ``random.Random()``,
+methods which are not included in standard :py:class:`random.Random`,
 but frequently used in this project.
-
-Also there are implemented function ``get_random_item()`` which helps
-get a random item of the enum object.
-
 """
 
 import os
@@ -23,8 +19,8 @@ __all__ = ["Random", "get_random_item", "random"]
 class Random(random_module.Random):
     """Custom class for the possibility of extending.
 
-    The class is a subclass of the class ``Random()`` from the module ``random``
-    of the standard library, which provides the custom methods.
+    The class is a subclass of the class :py:class:`random.Random`
+    from the module random of the standard library, which provides the custom methods.
 
     """
 
@@ -108,7 +104,7 @@ class Random(random_module.Random):
         This method can be especially useful when you need to generate
         only unique values in your provider. Just pass parameter unique=True.
 
-        Basically, this method is just a simple wrapper around uuid.uuid4().
+        Basically, this method is just a simple wrapper around :py:class:`uuid.UUID`.
 
         :param unique: Generate only unique values.
         :param length: Length of string. Default range is (min=16, max=128).

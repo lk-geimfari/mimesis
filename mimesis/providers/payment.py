@@ -9,6 +9,7 @@ from typing import Any, Dict, Optional
 from mimesis.data import CREDIT_CARD_NETWORKS
 from mimesis.enums import CardType, Gender
 from mimesis.exceptions import NonEnumerableError
+from mimesis.locales import Locale
 from mimesis.providers.base import BaseProvider
 from mimesis.providers.person import Person
 from mimesis.random import get_random_item
@@ -27,14 +28,14 @@ class Payment(BaseProvider):
         :param kwargs: Keyword arguments.
         """
         super().__init__(*args, **kwargs)
-        self.__person = Person("en", seed=self.seed)
+        self._person = Person(Locale.EN, seed=self.seed)
 
     class Meta:
         """Class for metadata."""
 
         name = "payment"
 
-    def cid(self) -> int:
+    def cid(self) -> str:
         """Generate a random CID.
 
         :return: CID code.
@@ -42,7 +43,7 @@ class Payment(BaseProvider):
         :Example:
             7452
         """
-        return self.random.randint(1000, 9999)
+        return "{:04d}".format(self.random.randint(1, 9999))
 
     def paypal(self) -> str:
         """Generate a random PayPal account.
@@ -52,7 +53,7 @@ class Payment(BaseProvider):
         :Example:
             wolf235@gmail.com
         """
-        return self.__person.email()
+        return self._person.email()
 
     def bitcoin_address(self) -> str:
         """Generate a random bitcoin address.
@@ -147,15 +148,15 @@ class Payment(BaseProvider):
         year = self.random.randint(minimum, maximum)
         return "{0:02d}/{1}".format(month, year)
 
-    def cvv(self) -> int:
+    def cvv(self) -> str:
         """Generate a random CVV.
 
         :return: CVV code.
 
         :Example:
-            324
+            069
         """
-        return self.random.randint(100, 999)
+        return "{:03d}".format(self.random.randint(1, 999))
 
     def credit_card_owner(
         self,
@@ -170,6 +171,6 @@ class Payment(BaseProvider):
         owner = {
             "credit_card": self.credit_card_number(),
             "expiration_date": self.credit_card_expiration_date(),
-            "owner": self.__person.full_name(gender=gender).upper(),
+            "owner": self._person.full_name(gender=gender).upper(),
         }
         return owner

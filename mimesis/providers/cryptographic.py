@@ -8,6 +8,7 @@ from typing import Any, Optional, Union
 from uuid import UUID, uuid4
 
 from mimesis.enums import Algorithm
+from mimesis.locales import Locale
 from mimesis.providers.base import BaseProvider
 from mimesis.providers.text import Text
 
@@ -23,7 +24,7 @@ class Cryptographic(BaseProvider):
         :param seed: Seed.
         """
         super().__init__(*args, **kwargs)
-        self.__words = Text("en")._data.get("words", {})
+        self._text = Text(Locale.EN, seed=self.seed)
 
     class Meta:
         """Class for metadata."""
@@ -35,13 +36,13 @@ class Cryptographic(BaseProvider):
         """Generate random UUID4.
 
         This method returns string by default,
-        but you can make it return uuid.UUID object using
+        but you can make it return :py:class:`uuid.UUID` object using
         parameter **as_object**
 
         .. warning:: Seed is not applicable to this method,
             because of its cryptographic-safe nature.
 
-        :param as_object: Returns uuid.UUID.
+        :param as_object: Returns :py:class:`uuid.UUID`.
         :return: UUID.
         """
         _uuid = uuid4()
@@ -129,6 +130,5 @@ class Cryptographic(BaseProvider):
         if not separator:
             separator = " "
 
-        words = self.__words["normal"]
-        words_generator = (self.random.choice(words) for _ in range(length))
-        return "{}".format(separator).join(words_generator)
+        words = self._text.words(quantity=length)
+        return "{}".format(separator).join(words)

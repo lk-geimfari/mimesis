@@ -88,12 +88,9 @@ class Internet(BaseProvider):
         return self.random.choice(HTTP_METHODS)
 
     def ip_v4_object(self) -> IPv4Address:
-        """Generate random IPv4Address object.
+        """Generate random :py:class:`ipaddress.IPv4Address` object.
 
-        See documentation for module ipaddress:
-        https://docs.python.org/3.7/library/ipaddress.html
-
-        :return: IPv4Address object.
+        :return: :py:class:`ipaddress.IPv4Address` object.
         """
         return IPv4Address(
             self.random.randint(0, self._MAX_IPV4),
@@ -119,12 +116,9 @@ class Internet(BaseProvider):
         return str(self.ip_v4_object())
 
     def ip_v6_object(self) -> IPv6Address:
-        """Generate random IPv6Address object.
+        """Generate random :py:class:`ipaddress.IPv6Address` object.
 
-        See documentation for module ipaddress:
-        https://docs.python.org/3.7/library/ipaddress.html
-
-        :return: IPv6Address object.
+        :return: :py:class:`ipaddress.IPv6Address` object.
         """
         return IPv6Address(
             self.random.randint(
@@ -198,7 +192,7 @@ class Internet(BaseProvider):
         for more details.
 
         .. note:: This method required an active HTTP connection
-            if you want to get writable object
+            if you want to get a writable object.
 
         :param width: Width of the image.
         :param height: Height of the image.
@@ -260,9 +254,9 @@ class Internet(BaseProvider):
     def top_level_domain(self, tld_type: Optional[TLDType] = None) -> str:
         """Generates random top level domain.
 
-        :param tld_type: Enum object DomainType
+        :param tld_type: Enum object :class:`enums.TLDType`
         :return: Top level domain.
-        :raises NonEnumerableError: if tld_type not in DomainType.
+        :raises NonEnumerableError: if tld_type not in :class:`enums.TLDType`.
         """
         key = self.validate_enum(item=tld_type, enum=TLDType)
         return self.random.choice(TLD[key])

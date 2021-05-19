@@ -14,6 +14,8 @@ Version 5.0.0
 - Fix inheritance issues for ``Generic``, now it inherits ``BaseProvider`` instead of ``BaseDataProvider``
 - Fix locale-independent provider to make them accepts keyword-only arguments
 - Fix DenmarkSpecProvider CPR to generate valid CPR numbers.
+- Fix ``.cvv()`` to make it return string
+- Fix ``.cid()`` to make it return string
 
 **Added**:
 
@@ -27,7 +29,7 @@ Version 5.0.0
 
 **Removed**:
 
-— Removed invalid names and surnames from ``person.json`` for ``ru`` locale
+- Removed invalid names and surnames from ``person.json`` for ``ru`` locale
 - Removed data provider ``UnitSystem()``, use instead ``Science()``
 - Removed data provider ``Structure()``, use instead ``schema.Schema``
 - Removed ``GermanySpecProvider``

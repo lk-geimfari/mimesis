@@ -12,6 +12,7 @@ from mimesis.data import (
     LOCALE_CODES,
 )
 from mimesis.enums import EANFormat, ISBNFormat
+from mimesis.locales import Locale
 from mimesis.providers.base import BaseProvider
 from mimesis.shortcuts import luhn_checksum
 
@@ -51,7 +52,9 @@ class Code(BaseProvider):
         """
         return self.random.custom_code(mask=mask)
 
-    def isbn(self, fmt: Optional[ISBNFormat] = None, locale: str = "en") -> str:
+    def isbn(
+        self, fmt: Optional[ISBNFormat] = None, locale: str = Locale.DEFAULT
+    ) -> str:
         """Generate ISBN for current locale.
 
         To change ISBN format, pass parameter ``fmt`` with needed value of
