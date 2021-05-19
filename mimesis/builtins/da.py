@@ -19,7 +19,7 @@ class DenmarkSpecProvider(BaseSpecProvider):
     def __init__(self, seed: Optional[Seed] = None) -> None:
         """Initialize attributes."""
         super().__init__(locale=Locale.DA, seed=seed)
-        self._gen_datetime = Datetime(locale=locales.DA, seed=seed)
+        self._gen_datetime = Datetime(locale=Locale.DA, seed=seed)
         self._checksum_factors = [4, 3, 2, 7, 6, 5, 4, 3, 2]
 
     class Meta:
