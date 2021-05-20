@@ -2,8 +2,7 @@
 
 """Specific data provider for Denmark (da)."""
 import operator
-from typing import Tuple
-from typing import Optional
+from typing import Optional, Tuple
 
 from mimesis import Datetime
 from mimesis.builtins.base import BaseSpecProvider
@@ -19,7 +18,7 @@ class DenmarkSpecProvider(BaseSpecProvider):
     def __init__(self, seed: Optional[Seed] = None) -> None:
         """Initialize attributes."""
         super().__init__(locale=Locale.DA, seed=seed)
-        self._gen_datetime = Datetime(locale=Locale.DA, seed=seed)
+        self._datetime = Datetime(locale=Locale.DA, seed=seed)
         self._checksum_factors = [4, 3, 2, 7, 6, 5, 4, 3, 2]
 
     class Meta:
@@ -36,9 +35,8 @@ class DenmarkSpecProvider(BaseSpecProvider):
             return self.random.choice([4, 9])
         elif 2000 <= year < 2037:
             return self.random.randint(4, 9)
-        # elif 2037 <= year < 2058:
-        #     return self.random.randint(5, 9)
-        raise ValueError('Invalid year')
+
+        raise ValueError("Invalid year")
 
     def _calculate_checksum(self, cpr_nr_no_checksum: str) -> int:
         """Calculate the CPR number checksum.
@@ -63,9 +61,13 @@ class DenmarkSpecProvider(BaseSpecProvider):
               It is handled by recursion in _generate_serial_checksum.
         """
         cpr_digits = map(int, cpr_nr_no_checksum)
-        cpr_digit_products = list(map(
-            operator.mul, cpr_digits, self._checksum_factors,
-        ))
+        cpr_digit_products = list(
+            map(
+                operator.mul,
+                cpr_digits,
+                self._checksum_factors,
+            )
+        )
         remainder = sum(cpr_digit_products) % 11
         if remainder == 0:
             return 0
@@ -73,11 +75,11 @@ class DenmarkSpecProvider(BaseSpecProvider):
 
     def _generate_serial_checksum(self, cpr_century: str) -> Tuple[str, int]:
         """Generate a serial number and checksum from cpr_century."""
-        serial_number = '{:02d}'.format(self.random.randint(0, 99))
+        serial_number = "{:02d}".format(self.random.randint(0, 99))
 
-        cpr_nr_no_checksum = '{}{}'.format(cpr_century, serial_number)
+        cpr_nr_no_checksum = "{}{}".format(cpr_century, serial_number)
         checksum = self._calculate_checksum(cpr_nr_no_checksum)
-        if checksum == 10:  # serial_number invalid, try another
+        if checksum == 10:
             return self._generate_serial_checksum(cpr_century)
         return serial_number, checksum
 
@@ -89,12 +91,14 @@ class DenmarkSpecProvider(BaseSpecProvider):
         :Example:
             0405420694
         """
-        date = self._gen_datetime.date(start=1858, end=2021)  # end=2057)
-        cpr_date = '{:02d}{:02d}{}'.format(
-            date.day, date.month, str(date.year)[-2:],
+        date = self._datetime.date(start=1858, end=2021)
+        cpr_date = "{:02d}{:02d}{}".format(
+            date.day,
+            date.month,
+            str(date.year)[-2:],
         )
         century_selector = self._calculate_century_selector(date.year)
-        cpr_century = '{}{}'.format(cpr_date, century_selector)
+        cpr_century = "{}{}".format(cpr_date, century_selector)
         serial_number, checksum = self._generate_serial_checksum(cpr_century)
-        cpr_nr = '{}{}{}'.format(cpr_century, serial_number, checksum)
+        cpr_nr = "{}{}{}".format(cpr_century, serial_number, checksum)
         return cpr_nr

@@ -40,15 +40,15 @@ def test_cpr(denmark):
         ("1234", TypeError),
         (-1, ValueError),
         (1857, ValueError),
-        (1858, [5,6,7,8]),
-        (1888, [5,6,7,8]),
-        (1900, [0,1,2,3]),
-        (1921, [0,1,2,3]),
-        (1937, [4,9]),
-        (1942, [4,9]),
-        (1999, [4,9]),
-        (2000, [4,5,6,7,8,9]),
-        (2021, [4,5,6,7,8,9]),
+        (1858, [5, 6, 7, 8]),
+        (1888, [5, 6, 7, 8]),
+        (1900, [0, 1, 2, 3]),
+        (1921, [0, 1, 2, 3]),
+        (1937, [4, 9]),
+        (1942, [4, 9]),
+        (1999, [4, 9]),
+        (2000, [4, 5, 6, 7, 8, 9]),
+        (2021, [4, 5, 6, 7, 8, 9]),
         (2037, ValueError),
         (2222, ValueError),
     ],
@@ -58,4 +58,4 @@ def test_calculate_century_selector(denmark, year, expected_values):
         assert denmark._calculate_century_selector(year) in expected_values
     else:
         with pytest.raises(expected_values):
-            denmark._calculate_century_selector(year) 
+            denmark._calculate_century_selector(year)
