@@ -45,12 +45,12 @@ class Cryptographic(BaseProvider):
         :param as_object: Returns :py:class:`uuid.UUID`.
         :return: UUID.
         """
-        _uuid = uuid4()
+        uid = uuid4()
 
         if not as_object:
-            return str(_uuid)
+            return str(uid)
 
-        return _uuid
+        return uid
 
     def hash(self, algorithm: Optional[Algorithm] = None) -> str:  # noqa: A003
         """Generate random hash.
