@@ -2,6 +2,7 @@
 
 """Specific data provider for Russia (ru)."""
 
+from datetime import datetime
 from typing import List, Optional
 
 from mimesis.builtins.base import BaseSpecProvider
@@ -19,6 +20,7 @@ class RussiaSpecProvider(BaseSpecProvider):
         """Initialize attributes."""
         super().__init__(locale=Locale.RU, seed=seed)
         self._pull(self._datafile)
+        self._current_year = datetime.now().year
 
     class Meta:
         """The name of the provider."""
@@ -60,7 +62,7 @@ class RussiaSpecProvider(BaseSpecProvider):
             02 15.
         """
         if not year:
-            year = self.random.randint(10, 18)
+            year = self.random.randint(10, str(self._current_year)[2:])
 
         region = self.random.randint(1, 99)
         return "{:02d} {}".format(region, year)
