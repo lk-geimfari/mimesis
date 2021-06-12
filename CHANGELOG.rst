@@ -16,6 +16,7 @@ Version 5.0.0
 - Fix DenmarkSpecProvider CPR to generate valid CPR numbers.
 - Fix ``.cvv()`` to make it return string
 - Fix ``.cid()`` to make it return string
+- Fix ``.price()`` of ``Finance`` to make it return float.
 
 **Added**:
 
