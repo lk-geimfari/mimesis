@@ -121,9 +121,5 @@
       ]
     }
   },
-  "currency-code": "EUR",
-  "price-format": "#€",
-  "numeric-decimal": ",",
-  "numeric-thousands": ".",
-  "numeric-frac-digits": 2
+  "currency-code": "EUR"
 }

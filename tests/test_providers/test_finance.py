@@ -73,7 +73,7 @@ class TestFinance(object):
 
     def test_price(self, finance):
         result = finance.price(minimum=100.00, maximum=1999.99)
-        assert isinstance(result, str)
+        assert isinstance(result, float)
 
     @pytest.mark.parametrize(
         "minimum, maximum",
@@ -128,7 +128,8 @@ class TestSeededFinance(object):
 
     def test_price(self, f1, f2):
         assert f1.price() == f2.price()
-        assert f1.price_in_btc(1.11, 22.2) == f2.price_in_btc(1.11, 22.2)
+        assert f1.price(1.11, 22.2) == f2.price(1.11, 22.2)
 
     def test_price_in_btc(self, f1, f2):
         assert f1.price_in_btc() == f2.price_in_btc()
+        assert f1.price_in_btc(1.11, 22.2) == f2.price_in_btc(1.11, 22.2)

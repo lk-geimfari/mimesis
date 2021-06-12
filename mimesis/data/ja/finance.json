@@ -1091,9 +1091,5 @@
       ]
     }
   },
-  "currency-code": "JPY",
-  "numeric-decimal": ".",
-  "numeric-frac-digits": 2,
-  "numeric-thousands": ",",
-  "price-format": "¥#"
+  "currency-code": "JPY"
 }

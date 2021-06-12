@@ -1009,9 +1009,5 @@
       ]
     }
   },
-  "currency-code": "PLN",
-  "price-format": "#zł",
-  "numeric-decimal": ",",
-  "numeric-thousands": ".",
-  "numeric-frac-digits": 2
+  "currency-code": "PLN"
 }

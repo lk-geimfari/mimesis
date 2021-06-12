@@ -1010,9 +1010,5 @@
       ]
     }
   },
-  "currency-code": "KRW",
-  "numeric-decimal": ".",
-  "numeric-frac-digits": 2,
-  "numeric-thousands": ",",
-  "price-format": "₩#"
+  "currency-code": "KRW"
 }

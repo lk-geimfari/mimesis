@@ -180,7 +180,7 @@ class Schema:
             **Never** call `list()`, `tuple()` or any other callable which tries to
             evaluate the whole lazy object on this method.
 
-            No, I'm serious, kiddo, **NEVER!**.
+            No, I'm serious, mate, **NEVER!**.
 
         :return: An infinite iterator with fulfilled schemas.
         """

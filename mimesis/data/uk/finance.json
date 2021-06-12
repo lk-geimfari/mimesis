@@ -236,9 +236,5 @@
       ]
     }
   },
-  "currency-code": "UAH",
-  "price-format": "₴#",
-  "numeric-decimal": ",",
-  "numeric-thousands": ".",
-  "numeric-frac-digits": 2
+  "currency-code": "UAH"
 }

@@ -216,9 +216,5 @@
       ]
     }
   },
-  "currency-code": "KZT",
-  "price-format": "#",
-  "numeric-decimal": ",",
-  "numeric-thousands": ".",
-  "numeric-frac-digits": 2
+  "currency-code": "KZT"
 }

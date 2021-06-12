@@ -88,27 +88,18 @@ class Finance(BaseDataProvider):
         """
         return self.random.choice(CRYPTOCURRENCY_SYMBOLS)
 
-    def price(self, minimum: float = 10.00, maximum: float = 1000.00) -> str:
-        """Generate a random price.
+    def price(self, minimum: float = 500, maximum: float = 1500) -> float:
+        """Generate random price.
 
-        :param minimum: Max value of price.
-        :param maximum: Min value of price.
+        :param minimum: Minimum value of price.
+        :param maximum: Maximum value of price.
         :return: Price.
         """
-        price_format: str = self._data["price-format"]
-        numeric_frac_digits = self._data["numeric-frac-digits"]
-
-        delimiters = {
-            ".": self._data["numeric-decimal"],
-            ",": self._data["numeric-thousands"],
-        }
-
-        value = self.random.uniform(minimum, maximum)
-        price = "{:,.{}f}".format(value, numeric_frac_digits)
-
-        price = "".join(delimiters.get(char, char) for char in price)
-
-        return price_format.replace("#", price)
+        return self.random.uniform(
+            minimum,
+            maximum,
+            precision=2,
+        )
 
     def price_in_btc(self, minimum: float = 0, maximum: float = 2) -> float:
         """Generate random price in BTC.

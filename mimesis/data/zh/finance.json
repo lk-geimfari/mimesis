@@ -105,9 +105,5 @@
       ]
     }
   },
-  "currency-code": "CNY",
-  "numeric-decimal": ".",
-  "numeric-frac-digits": 2,
-  "numeric-thousands": ",",
-  "price-format": "¥#"
+  "currency-code": "CNY"
 }
