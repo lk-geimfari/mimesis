@@ -76,8 +76,7 @@ class Address(BaseDataProvider):
 
         :return: Street name.
         """
-        street_names = self.extract(["street", "name"])
-
+        street_names: List[str] = self.extract(["street", "name"])
         return self.random.choice(street_names)
 
     def street_suffix(self) -> str:
@@ -85,7 +84,7 @@ class Address(BaseDataProvider):
 
         :return: Street suffix.
         """
-        suffixes = self.extract(["street", "suffix"])
+        suffixes: List[str] = self.extract(["street", "suffix"])
         return self.random.choice(suffixes)
 
     def address(self) -> str:
@@ -93,7 +92,7 @@ class Address(BaseDataProvider):
 
         :return: Full address.
         """
-        fmt: str = self._data["address_fmt"]
+        fmt: str = self.extract(["address_fmt"])
 
         st_num = self.street_number()
         st_name = self.street_name()
@@ -106,7 +105,7 @@ class Address(BaseDataProvider):
 
         if self.locale == "ja":
             return fmt.format(
-                self.random.choice(self._data["city"]),
+                self.random.choice(self.extract(["city"])),
                 # Generate list of random integers
                 # in amount of 3, from 1 to 100.
                 *self.random.randints(amount=3, a=1, b=100),
@@ -125,7 +124,7 @@ class Address(BaseDataProvider):
         :return: Administrative district.
         """
         key = "abbr" if abbr else "name"
-        states: List[str] = self._data["state"][key]
+        states: List[str] = self.extract(["state", key])
         return self.random.choice(states)
 
     def region(self, *args: Any, **kwargs: Any) -> str:
@@ -252,7 +251,7 @@ class Address(BaseDataProvider):
         :param code: Return code of continent.
         :return: Continent name.
         """
-        codes = self.extract(["continent"])
+        codes: List[str] = self.extract(["continent"])
 
         if code:
             codes = CONTINENT_CODES

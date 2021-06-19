@@ -94,7 +94,7 @@ class Datetime(BaseDataProvider):
         :return: Day of the week.
         """
         key = "abbr" if abbr else "name"
-        days: List[str] = self._data["day"].get(key)
+        days: List[str] = self.extract(["day", key])
         return self.random.choice(days)
 
     def month(self, abbr: bool = False) -> str:
@@ -104,7 +104,7 @@ class Datetime(BaseDataProvider):
         :return: Month name.
         """
         key = "abbr" if abbr else "name"
-        months: List[str] = self._data["month"].get(key)
+        months: List[str] = self.extract(["month", key])
         return self.random.choice(months)
 
     def year(self, minimum: int = 1990, maximum: int = CURRENT_YEAR) -> int:
@@ -128,7 +128,7 @@ class Datetime(BaseDataProvider):
 
         :return: Periodicity.
         """
-        periodicity: List[str] = self._data["periodicity"]
+        periodicity: List[str] = self.extract(["periodicity"])
         return self.random.choice(periodicity)
 
     def date(self, start: int = 2000, end: int = CURRENT_YEAR) -> Date:
@@ -155,7 +155,7 @@ class Datetime(BaseDataProvider):
         date_obj = self.date(**kwargs)
 
         if not fmt:
-            fmt = self._data["formats"].get("date")
+            fmt = self.extract(["formats", "date"])
 
         return date_obj.strftime(fmt)
 
@@ -182,7 +182,7 @@ class Datetime(BaseDataProvider):
         time_obj = self.time()
 
         if not fmt:
-            fmt = self._data["formats"].get("time")
+            fmt = self.extract(["formats", "time"])
         return time_obj.strftime(fmt)
 
     def day_of_month(self) -> int:
@@ -238,8 +238,8 @@ class Datetime(BaseDataProvider):
         dt_obj = self.datetime(**kwargs)
 
         if not fmt:
-            date_fmt = self._data["formats"].get("date")
-            time_fmt = self._data["formats"].get("time")
+            date_fmt = self.extract(["formats", "date"])
+            time_fmt = self.extract(["formats", "time"])
             fmt = "{} {}".format(date_fmt, time_fmt)
 
         return dt_obj.strftime(fmt)

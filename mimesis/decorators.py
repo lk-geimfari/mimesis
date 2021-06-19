@@ -4,7 +4,7 @@
 
 import functools
 from string import ascii_letters, digits, punctuation
-from typing import Any, Callable, TypeVar, cast
+from typing import Any, Callable, Optional, TypeVar, cast
 
 from mimesis import data
 from mimesis.exceptions import LocaleError

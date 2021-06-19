@@ -27,7 +27,7 @@ class Food(BaseDataProvider):
 
     def _choice_from(self, key: str) -> str:
         """Choice random element."""
-        data: List[str] = self._data[key]
+        data: List[str] = self.extract([key])
         return self.random.choice(data)
 
     def vegetable(self) -> str:

@@ -40,7 +40,7 @@ class Finance(BaseDataProvider):
 
         :return: Company name.
         """
-        names: List[str] = self._data["company"]["name"]
+        names: List[str] = self.extract(["company", "name"])
 
         return self.random.choice(names)
 
@@ -52,7 +52,7 @@ class Finance(BaseDataProvider):
         """
         key = "abbr" if abbr else "title"
 
-        company_types: List[str] = self._data["company"]["type"][key]
+        company_types: List[str] = self.extract(["company", "type", key])
         return self.random.choice(company_types)
 
     def currency_iso_code(self, allow_random: bool = False) -> str:
@@ -61,7 +61,7 @@ class Finance(BaseDataProvider):
         :param allow_random: Get a random ISO code.
         :return: Currency code.
         """
-        code: str = self._data["currency-code"]
+        code: str = self.extract(["currency-code"])
 
         if allow_random:
             return self.random.choice(CURRENCY_ISO_CODES)

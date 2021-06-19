@@ -32,7 +32,7 @@ class RussiaSpecProvider(BaseSpecProvider):
 
         :return: Sentence.
         """
-        sentences = self._data["sentence"]
+        sentences = self.extract(["sentence"])
         sentence = [
             self.random.choice(sentences[k]) for k in ("head", "p1", "p2", "tail")
         ]
@@ -48,7 +48,7 @@ class RussiaSpecProvider(BaseSpecProvider):
             Алексеевна.
         """
         gender = self.validate_enum(gender, Gender)
-        patronymics: List[str] = self._data["patronymic"][gender]
+        patronymics: List[str] = self.extract(["patronymic", str(gender)])
         return self.random.choice(patronymics)
 
     def passport_series(self, year: Optional[int] = None) -> str:

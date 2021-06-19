@@ -32,5 +32,5 @@ class UkraineSpecProvider(BaseSpecProvider):
         :return: Patronymic name.
         """
         gender = self.validate_enum(gender, Gender)
-        patronymics: List[str] = self._data["patronymic"][gender]
+        patronymics: List[str] = self.extract(["patronymic", str(gender)])
         return self.random.choice(patronymics)

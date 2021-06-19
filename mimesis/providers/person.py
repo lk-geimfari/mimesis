@@ -79,7 +79,7 @@ class Person(BaseDataProvider):
             John.
         """
         key = self.validate_enum(gender, Gender)
-        names: List[str] = self._data["names"].get(key)
+        names: List[str] = self.extract(["names", key])
         return self.random.choice(names)
 
     def first_name(self, gender: Optional[Gender] = None) -> str:
@@ -101,7 +101,7 @@ class Person(BaseDataProvider):
         :Example:
             Smith.
         """
-        surnames: Sequence[str] = self._data["surnames"]
+        surnames: Sequence[str] = self.extract(["surnames"])
 
         # Surnames separated by gender.
         if isinstance(surnames, dict):
@@ -139,7 +139,7 @@ class Person(BaseDataProvider):
         gender_key = self.validate_enum(gender, Gender)
         title_key = self.validate_enum(title_type, TitleType)
 
-        titles: List[str] = self._data["title"][gender_key][title_key]
+        titles: List[str] = self.extract(["title", gender_key, title_key])
         return self.random.choice(titles)
 
     def full_name(self, gender: Optional[Gender] = None, reverse: bool = False) -> str:
@@ -306,7 +306,7 @@ class Person(BaseDataProvider):
         if symbol:
             return self.random.choice(GENDER_SYMBOLS)
 
-        genders: List[str] = self._data["gender"]
+        genders: List[str] = self.extract(["gender"])
         return self.random.choice(genders)
 
     def sex(self, *args: Any, **kwargs: Any) -> Union[str, int]:
@@ -364,7 +364,7 @@ class Person(BaseDataProvider):
         :Example:
             Programmer.
         """
-        jobs: List[str] = self._data["occupation"]
+        jobs: List[str] = self.extract(["occupation"])
         return self.random.choice(jobs)
 
     def political_views(self) -> str:
@@ -375,7 +375,7 @@ class Person(BaseDataProvider):
         :Example:
             Liberal.
         """
-        views: List[str] = self._data["political_views"]
+        views: List[str] = self.extract(["political_views"])
         return self.random.choice(views)
 
     def worldview(self) -> str:
@@ -386,7 +386,7 @@ class Person(BaseDataProvider):
         :Example:
             Pantheism.
         """
-        views: List[str] = self._data["worldview"]
+        views: List[str] = self.extract(["worldview"])
         return self.random.choice(views)
 
     def views_on(self) -> str:
@@ -397,7 +397,7 @@ class Person(BaseDataProvider):
         :Example:
             Negative.
         """
-        views: List[str] = self._data["views_on"]
+        views: List[str] = self.extract(["views_on"])
         return self.random.choice(views)
 
     def nationality(self, gender: Optional[Gender] = None) -> str:
@@ -409,7 +409,7 @@ class Person(BaseDataProvider):
         :Example:
             Russian
         """
-        nationalities: Sequence[str] = self._data["nationality"]
+        nationalities: Sequence[str] = self.extract(["nationality"])
 
         # Separated by gender
         if isinstance(nationalities, dict):
@@ -426,7 +426,7 @@ class Person(BaseDataProvider):
         :Example:
             MIT.
         """
-        universities: List[str] = self._data["university"]
+        universities: List[str] = self.extract(["university"])
         return self.random.choice(universities)
 
     def academic_degree(self) -> str:
@@ -437,7 +437,7 @@ class Person(BaseDataProvider):
         :Example:
             Bachelor.
         """
-        degrees: List[str] = self._data["academic_degree"]
+        degrees: List[str] = self.extract(["academic_degree"])
         return self.random.choice(degrees)
 
     def language(self) -> str:
@@ -448,7 +448,7 @@ class Person(BaseDataProvider):
         :Example:
             Irish.
         """
-        languages: List[str] = self._data["language"]
+        languages: List[str] = self.extract(["language"])
         return self.random.choice(languages)
 
     def telephone(self, mask: str = "", placeholder: str = "#") -> str:
@@ -464,7 +464,7 @@ class Person(BaseDataProvider):
         if not mask:
             code = self.random.choice(CALLING_CODES)
             default = "{}-(###)-###-####".format(code)
-            masks = self._data.get("telephone_fmt", [default])
+            masks = self.extract(["telephone_fmt"], default=[default])
             mask = self.random.choice(masks)
 
         return self.random.custom_code(mask=mask, digit=placeholder)
