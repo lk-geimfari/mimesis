@@ -76,7 +76,7 @@ class Address(BaseDataProvider):
 
         :return: Street name.
         """
-        street_names: List[str] = self._data["street"]["name"]
+        street_names = self.extract(["street", "name"])
 
         return self.random.choice(street_names)
 
@@ -85,7 +85,7 @@ class Address(BaseDataProvider):
 
         :return: Street suffix.
         """
-        suffixes: List[str] = self._data["street"]["suffix"]
+        suffixes = self.extract(["street", "suffix"])
         return self.random.choice(suffixes)
 
     def address(self) -> str:
@@ -161,7 +161,7 @@ class Address(BaseDataProvider):
 
         :return: Postal code.
         """
-        return self.random.custom_code(self._data["postal_code_fmt"])
+        return self.random.custom_code(self.extract(["postal_code_fmt"]))
 
     def zip_code(self) -> str:
         """Generate a zip code.
@@ -192,7 +192,7 @@ class Address(BaseDataProvider):
         :allow_random: Return a random country name.
         :return: The Country.
         """
-        countries: List[str] = self._data["country"]["name"]
+        countries: List[str] = self.extract(["country", "name"])
         return self.random.choice(countries)
 
     def city(self) -> str:
@@ -200,7 +200,7 @@ class Address(BaseDataProvider):
 
         :return: City name.
         """
-        cities: List[str] = self._data["city"]
+        cities: List[str] = self.extract(["city"])
         return self.random.choice(cities)
 
     def _get_fs(self, key: str, dms: bool = False) -> Union[str, float]:
@@ -252,7 +252,10 @@ class Address(BaseDataProvider):
         :param code: Return code of continent.
         :return: Continent name.
         """
-        codes: List[str] = CONTINENT_CODES if code else self._data["continent"]
+        codes = self.extract(["continent"])
+
+        if code:
+            codes = CONTINENT_CODES
 
         return self.random.choice(codes)
 

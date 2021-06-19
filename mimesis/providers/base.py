@@ -5,8 +5,10 @@
 import contextlib
 import functools
 import json
+import operator
+from functools import reduce
 from pathlib import Path
-from typing import Any, Generator, Optional
+from typing import Any, Generator, List, Optional
 
 from mimesis.exceptions import LocaleError, NonEnumerableError
 from mimesis.locales import Locale
@@ -88,6 +90,24 @@ class BaseDataProvider(BaseProvider):
         self._datafile = ""
         self._setup_locale(locale)
         self._data_dir = Path(__file__).parent.parent.joinpath("data")
+
+    def extract(self, keys: List[str], default: Optional[Any] = None) -> Any:
+        """Extracts nested values from JSON file by list of keys.
+
+        :param keys: List of keys (order extremely matters).
+        :param default: Default value.
+        :return: Data.
+        """
+
+        if not keys:
+            raise ValueError("List of keys cannot be empty.")
+
+        try:
+            if len(keys) == 1:
+                return self._data[keys[0]]
+            return reduce(operator.getitem, keys, self._data)
+        except (TypeError, KeyError):
+            return default
 
     def _setup_locale(self, locale: str = Locale.DEFAULT) -> None:
         """Set up locale after pre-check.

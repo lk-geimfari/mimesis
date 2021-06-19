@@ -64,6 +64,22 @@ class TestBase(object):
         with pytest.raises(FileNotFoundError):
             data_provider._pull("something.json")
 
+    def test_extract(self, base_data_provider):
+        dictionary = {"names": {"female": "Ariel", "male": "John"}}
+
+        base_data_provider._data = dictionary
+
+        a = list(sorted(dictionary["names"].keys()))
+        b = list(sorted(base_data_provider.extract(["names"]).keys()))
+
+        assert base_data_provider.extract(["names", "male"]) == "John"
+        assert base_data_provider.extract(["names", "female"]) == "Ariel"
+        assert base_data_provider.extract(["names", "other"], default="Sam") == "Sam"
+        assert a == b
+
+        with pytest.raises(ValueError):
+            assert base_data_provider.extract([])
+
     def test_update_dict(self, base_data_provider):
         first = {
             "animals": {
