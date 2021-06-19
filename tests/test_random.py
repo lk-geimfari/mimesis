@@ -130,6 +130,7 @@ def test_get_random_item(random):
         64,
         128,
         256,
+        None,
     ],
 )
 def test_randstr(random, length):
@@ -137,6 +138,11 @@ def test_randstr(random, length):
     result2 = random.randstr(length=length)
     assert len(result) == length
     assert result != result2
+
+
+def test_randstr_no_length(random):
+    string = len(random.randstr(length=None))
+    assert 16 <= string <= 128
 
 
 @pytest.mark.parametrize(
