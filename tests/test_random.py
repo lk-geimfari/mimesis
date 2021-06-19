@@ -130,7 +130,6 @@ def test_get_random_item(random):
         64,
         128,
         256,
-        None,
     ],
 )
 def test_randstr(random, length):
