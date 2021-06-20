@@ -1,19 +1,10 @@
 # -*- coding: utf-8 -*-
 
-import re
-
 import pytest
-
 from mimesis import BaseProvider, Generic
-
-from . import patterns
 
 
 class TestGeneric(object):
-
-    def test_str(self, generic):
-        assert re.match(patterns.DATA_PROVIDER_STR_REGEX, str(generic))
-
     def test_base_person(self, generic):
         result = generic.person.username()
         assert result is not None
@@ -34,21 +25,17 @@ class TestGeneric(object):
         result = generic.food.fruit()
         assert result is not None
 
-    def test_base_science(self, generic):
-        result = generic.science.chemical_element()
-        assert result is not None
-
-    def test_base_business(self, generic):
-        result = generic.business.copyright()
-        assert result is not None
-
-    def test_base_unit_system(self, generic):
-        result = generic.unit_system.unit()
+    def test_base_finance(self, generic):
+        result = generic.finance.currency_symbol()
         assert result is not None
 
     def test_base_code(self, generic):
         result = generic.code.isbn()
         assert result is not None
+
+    def test_base_binary_file(self, generic):
+        result = generic.binaryfile.video()
+        assert isinstance(result, bytes)
 
     def test_bad_argument(self, generic):
         with pytest.raises(AttributeError):
@@ -62,7 +49,7 @@ class TestGeneric(object):
 
         class Provider2(BaseProvider):
             class Meta:
-                name = 'custom_provider'
+                name = "custom_provider"
 
             @staticmethod
             def two():
@@ -100,11 +87,10 @@ class TestGeneric(object):
     def test_dir(self, generic):
         providers = generic.__dir__()
         for p in providers:
-            assert not p.startswith('_')
+            assert not p.startswith("_")
 
 
 class TestSeededGeneric(object):
-
     @pytest.fixture
     def g1(self, seed):
         return Generic(seed=seed)
@@ -117,9 +103,8 @@ class TestSeededGeneric(object):
         assert g1.address.street_number() == g2.address.street_number()
         assert g1.address.street_name() == g2.address.street_name()
 
-    def test_generic_business(self, g1, g2):
-        assert g1.business.company() == g2.business.company()
-        assert g1.business.copyright() == g2.business.copyright()
+    def test_generic_finance(self, g1, g2):
+        assert g1.finance.company() == g2.finance.company()
 
     def test_generic_clothing(self, g1, g2):
         s1 = g1.clothing.european_size()
@@ -176,10 +161,6 @@ class TestSeededGeneric(object):
     def test_generic_science(self, g1, g2):
         assert g1.science.rna_sequence() == g2.science.rna_sequence()
 
-    def test_generic_structure(self, g1, g2):
-        assert g1.structure.css() == g2.structure.css()
-        assert g1.structure.html() == g2.structure.html()
-
     def test_generic_text(self, g1, g2):
         assert g1.text.swear_word() == g2.text.swear_word()
         assert g1.text.color() == g2.text.color()
@@ -187,7 +168,3 @@ class TestSeededGeneric(object):
     def test_generic_transport(self, g1, g2):
         assert g1.transport.truck() == g2.transport.truck()
         assert g1.transport.airplane() == g2.transport.airplane()
-
-    def test_generic_unit_system(self, g1, g2):
-        assert g1.unit_system.unit() == g2.unit_system.unit()
-        assert g1.unit_system.prefix() == g2.unit_system.prefix()

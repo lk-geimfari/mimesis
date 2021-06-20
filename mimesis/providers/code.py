@@ -2,7 +2,7 @@
 
 """The data provider of a variety of codes."""
 
-from typing import Optional
+from typing import Any, Optional
 
 from mimesis.data import (
     EAN_MASKS,
@@ -12,16 +12,17 @@ from mimesis.data import (
     LOCALE_CODES,
 )
 from mimesis.enums import EANFormat, ISBNFormat
+from mimesis.locales import Locale
 from mimesis.providers.base import BaseProvider
 from mimesis.shortcuts import luhn_checksum
 
-__all__ = ['Code']
+__all__ = ["Code"]
 
 
 class Code(BaseProvider):
     """A class, which provides methods for generating codes."""
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
         """Initialize attributes.
 
         :param locale: Current locale.
@@ -31,7 +32,7 @@ class Code(BaseProvider):
     class Meta:
         """Class for metadata."""
 
-        name = 'code'
+        name = "code"
 
     def locale_code(self) -> str:
         """Get a random locale code (MS-LCID).
@@ -43,7 +44,7 @@ class Code(BaseProvider):
         """
         return self.random.choice(LOCALE_CODES)
 
-    def issn(self, mask: str = '####-####') -> str:
+    def issn(self, mask: str = "####-####") -> str:
         """Generate a random ISSN.
 
         :param mask: Mask of ISSN.
@@ -51,8 +52,9 @@ class Code(BaseProvider):
         """
         return self.random.custom_code(mask=mask)
 
-    def isbn(self, fmt: Optional[ISBNFormat] = None,
-             locale: str = 'en') -> str:
+    def isbn(
+        self, fmt: Optional[ISBNFormat] = None, locale: str = Locale.DEFAULT
+    ) -> str:
         """Generate ISBN for current locale.
 
         To change ISBN format, pass parameter ``fmt`` with needed value of
@@ -63,9 +65,8 @@ class Code(BaseProvider):
         :return: ISBN.
         :raises NonEnumerableError: if fmt is not enum ISBNFormat.
         """
-        fmt_value = self._validate_enum(item=fmt, enum=ISBNFormat)
-        mask = ISBN_MASKS[fmt_value].format(
-            ISBN_GROUPS[locale])
+        fmt_value = self.validate_enum(item=fmt, enum=ISBNFormat)
+        mask = ISBN_MASKS[fmt_value].format(ISBN_GROUPS[locale])
         return self.random.custom_code(mask)
 
     def ean(self, fmt: Optional[EANFormat] = None) -> str:
@@ -78,7 +79,7 @@ class Code(BaseProvider):
         :return: EAN.
         :raises NonEnumerableError: if fmt is not enum EANFormat.
         """
-        key = self._validate_enum(
+        key = self.validate_enum(
             item=fmt,
             enum=EANFormat,
         )
@@ -94,7 +95,7 @@ class Code(BaseProvider):
         num = num + str(self.random.randint(100000, 999999))
         return num + luhn_checksum(num)
 
-    def pin(self, mask: str = '####') -> str:
+    def pin(self, mask: str = "####") -> str:
         """Generate a random PIN code.
 
         :param mask: Mask of pin code.

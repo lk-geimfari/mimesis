@@ -1,0 +1,42 @@
+{
+  "company": {
+    "type": {
+      "abbr": [
+        "e.v.",
+        "e.c.",
+        "bt.",
+        "kkt.",
+        "kft.",
+        "kht.",
+        "kv.",
+        "rt.",
+        "Nyrt.",
+        "Zrt."
+      ],
+      "title": [
+        "Egyéni vállalkozó",
+        "Egyéni cég",
+        "Betéti társaság",
+        "Közkereseti társaság",
+        "Korlátolt felelősségű társaság",
+        "Közhasznú társaság",
+        "Közös vállalat",
+        "Részvénytársaság",
+        "Nyilvánosan működő részvénytársaság",
+        "Zártközűen működő részvénytársaság"
+      ]
+    },
+    "name": [
+      "Borsod Brewery",
+      "Dreher Brewery",
+      "Győri Keksz",
+      "Hell Energy",
+      "Pick Szeged",
+      "Pécs Brewery",
+      "Traubi",
+      "Törley",
+      "Zwack"
+    ]
+  },
+  "currency-code": "HUF"
+}

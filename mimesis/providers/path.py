@@ -4,6 +4,7 @@
 
 import sys
 from pathlib import PurePosixPath, PureWindowsPath
+from typing import Any
 
 from mimesis.data import (
     FOLDERS,
@@ -14,13 +15,18 @@ from mimesis.data import (
 )
 from mimesis.providers.base import BaseProvider
 
-__all__ = ['Path']
+__all__ = ["Path"]
 
 
 class Path(BaseProvider):
     """Class that provides methods and property for generate paths."""
 
-    def __init__(self, platform: str = sys.platform, *args, **kwargs) -> None:
+    def __init__(
+        self,
+        platform: str = sys.platform,
+        *args: Any,
+        **kwargs: Any,
+    ) -> None:
         """Initialize attributes.
 
         Supported platforms: 'linux', 'darwin', 'win32', 'win64'.
@@ -29,14 +35,13 @@ class Path(BaseProvider):
         """
         super().__init__(*args, **kwargs)
         self.platform = platform
-        self._pathlib_home = PureWindowsPath() if 'win' in platform \
-                             else PurePosixPath()
-        self._pathlib_home /= PLATFORMS[platform]['home']
+        self._pathlib_home = PureWindowsPath() if "win" in platform else PurePosixPath()
+        self._pathlib_home /= PLATFORMS[platform]["home"]
 
     class Meta:
         """Class for metadata."""
 
-        name = 'path'
+        name = "path"
 
     def root(self) -> str:
         """Generate a root dir path.
@@ -67,7 +72,7 @@ class Path(BaseProvider):
             /home/oretha
         """
         user = self.random.choice(USERNAMES)
-        user = user.capitalize() if 'win' in self.platform else user.lower()
+        user = user.capitalize() if "win" in self.platform else user.lower()
         return str(self._pathlib_home / user)
 
     def users_folder(self) -> str:
@@ -91,7 +96,7 @@ class Path(BaseProvider):
             /home/sherrell/Development/Python
         """
         user = self.user()
-        folder = self.random.choice(['Development', 'Dev'])
+        folder = self.random.choice(["Development", "Dev"])
         stack = self.random.choice(PROGRAMMING_LANGS)
         return str(self._pathlib_home / user / folder / stack)
 

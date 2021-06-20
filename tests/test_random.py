@@ -1,5 +1,4 @@
 import pytest
-
 from mimesis.enums import Gender
 from mimesis.random import get_random_item
 from mimesis.random import random as _random
@@ -8,6 +7,14 @@ from mimesis.random import random as _random
 @pytest.fixture
 def random():
     return _random
+
+
+def test_randstr_non_unique_with_same_seed(random):
+    random.seed(1)
+    first = random.randstr(unique=False)
+    random.seed(1)
+    second = random.randstr(unique=False)
+    assert first == second
 
 
 def test_randints(random):
@@ -27,7 +34,8 @@ def test_randints(random):
 
 
 @pytest.mark.parametrize(
-    'size', (8, 16, 32, 64),
+    "size",
+    (8, 16, 32, 64),
 )
 def test_urandom(random, size):
     result = random.urandom(size=size)
@@ -37,9 +45,10 @@ def test_urandom(random, size):
 
 
 @pytest.mark.parametrize(
-    'str_seq, length', [
-        ('U', 10),
-        ('A', 20),
+    "str_seq, length",
+    [
+        ("U", 10),
+        ("A", 20),
     ],
 )
 def test_generate_string(random, str_seq, length):
@@ -48,7 +57,8 @@ def test_generate_string(random, str_seq, length):
 
 
 @pytest.mark.parametrize(
-    'precision', [
+    "precision",
+    [
         4,
         6,
         8,
@@ -58,30 +68,32 @@ def test_uniform(random, precision):
     result = random.uniform(2.3, 10.5, precision)
     assert isinstance(result, float)
 
-    result = str(result).split('.')[1]
+    result = str(result).split(".")[1]
     assert precision >= len(result)
 
 
 @pytest.mark.parametrize(
-    'mask, digit, char', [
-        ('##-FA-@@', '#', '@'),
-        ('**-AF-$$', '*', '$'),
-        ('**-š好-$$', '*', '$'),
+    "mask, digit, char",
+    [
+        ("##-FA-@@", "#", "@"),
+        ("**-AF-$$", "*", "$"),
+        ("**-š好-$$", "*", "$"),
     ],
 )
 def test_custom_code(random, mask, digit, char):
     result = random.custom_code(mask=mask, char=char, digit=digit)
-    digit, middle, char = result.split('-')
-    _, middle_mask, _ = mask.split('-')
+    digit, middle, char = result.split("-")
+    _, middle_mask, _ = mask.split("-")
     assert char.isalpha()
     assert digit.isdigit()
     assert middle == middle_mask
 
 
 @pytest.mark.parametrize(
-    'mask, digit, char', [
-        ('??-FF-??', '?', '?'),
-        ('@@-FF-@@', '@', '@'),
+    "mask, digit, char",
+    [
+        ("??-FF-??", "?", "?"),
+        ("@@-FF-@@", "@", "@"),
     ],
 )
 def test_custom_code_with_same_placeholders(random, mask, digit, char):
@@ -90,10 +102,11 @@ def test_custom_code_with_same_placeholders(random, mask, digit, char):
 
 
 @pytest.mark.parametrize(
-    'seed, expected', [
-        (32, 'C239'),
-        (0xff, 'B670'),
-        ('👽', 'B806'),
+    "seed, expected",
+    [
+        (32, "C239"),
+        (0xFF, "B670"),
+        ("👽", "B806"),
     ],
 )
 def test_custom_code_with_seed(random, seed, expected):
@@ -105,14 +118,15 @@ def test_get_random_item(random):
     result = get_random_item(Gender)
     assert result in Gender
 
-    random.seed(0xf)
+    random.seed(0xF)
     result_1 = get_random_item(Gender, rnd=random)
     result_2 = get_random_item(Gender, rnd=random)
     assert result_1 == result_2
 
 
 @pytest.mark.parametrize(
-    'length', [
+    "length",
+    [
         64,
         128,
         256,
@@ -120,11 +134,19 @@ def test_get_random_item(random):
 )
 def test_randstr(random, length):
     result = random.randstr(length=length)
+    result2 = random.randstr(length=length)
     assert len(result) == length
+    assert result != result2
+
+
+def test_randstr_no_length(random):
+    string = len(random.randstr(length=None))
+    assert 16 <= string <= 128
 
 
 @pytest.mark.parametrize(
-    'count', [
+    "count",
+    [
         1000,
         10000,
         100000,

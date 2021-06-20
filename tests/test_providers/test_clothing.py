@@ -2,14 +2,12 @@
 import re
 
 import pytest
-
 from mimesis import Clothing
 
 from . import patterns
 
 
 class TestClothing(object):
-
     @pytest.fixture
     def clothing(self):
         return Clothing()
@@ -19,9 +17,14 @@ class TestClothing(object):
 
     def test_international_size(self, clothing):
         size_names = (
-            'L', 'M', 'S',
-            'XL', 'XS', 'XXL',
-            'XXS', 'XXXL',
+            "L",
+            "M",
+            "S",
+            "XL",
+            "XS",
+            "XXL",
+            "XXS",
+            "XXXL",
         )
         result = clothing.international_size()
         assert result in size_names
@@ -38,7 +41,6 @@ class TestClothing(object):
 
 
 class TestSeededClothing(object):
-
     @pytest.fixture
     def cs1(self, seed):
         return Clothing(seed=seed)

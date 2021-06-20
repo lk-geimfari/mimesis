@@ -4,54 +4,55 @@
 
 import hashlib
 import secrets
-from typing import Optional, Union
+from typing import Any, Optional, Union
 from uuid import UUID, uuid4
 
 from mimesis.enums import Algorithm
+from mimesis.locales import Locale
 from mimesis.providers.base import BaseProvider
 from mimesis.providers.text import Text
 
-__all__ = ['Cryptographic']
+__all__ = ["Cryptographic"]
 
 
 class Cryptographic(BaseProvider):
     """Class that provides cryptographic data."""
 
-    def __init__(self, *args, **kwargs) -> None:
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
         """Initialize attributes.
 
         :param seed: Seed.
         """
         super().__init__(*args, **kwargs)
-        self.__words = Text('en')._data.get('words', {})
+        self._text = Text(Locale.EN, seed=self.seed)
 
     class Meta:
         """Class for metadata."""
 
-        name = 'cryptographic'
+        name = "cryptographic"
 
     @staticmethod
     def uuid(as_object: bool = False) -> Union[UUID, str]:
         """Generate random UUID4.
 
         This method returns string by default,
-        but you can make it return uuid.UUID object using
+        but you can make it return :py:class:`uuid.UUID` object using
         parameter **as_object**
 
         .. warning:: Seed is not applicable to this method,
             because of its cryptographic-safe nature.
 
-        :param as_object: Returns uuid.UUID.
+        :param as_object: Returns :py:class:`uuid.UUID`.
         :return: UUID.
         """
-        _uuid = uuid4()
+        uid = uuid4()
 
         if not as_object:
-            return str(_uuid)
+            return str(uid)
 
-        return _uuid
+        return uid
 
-    def hash(self, algorithm: Algorithm = None) -> str:  # noqa: A003
+    def hash(self, algorithm: Optional[Algorithm] = None) -> str:  # noqa: A003
         """Generate random hash.
 
         To change hashing algorithm, pass parameter ``algorithm``
@@ -64,7 +65,7 @@ class Cryptographic(BaseProvider):
         :return: Hash.
         :raises NonEnumerableError: When algorithm is unsupported.
         """
-        key = self._validate_enum(algorithm, Algorithm)
+        key = self.validate_enum(algorithm, Algorithm)
 
         if hasattr(hashlib, key):
             fn = getattr(hashlib, key)
@@ -102,7 +103,7 @@ class Cryptographic(BaseProvider):
         return secrets.token_hex(entropy)
 
     @staticmethod
-    def token_urlsafe(entropy: int = 32):
+    def token_urlsafe(entropy: int = 32) -> str:
         """Return a random URL-safe text string, in Base64 encoding.
 
         The string has *entropy* random bytes.  If *entropy* is ``None``
@@ -116,8 +117,7 @@ class Cryptographic(BaseProvider):
         """
         return secrets.token_urlsafe(entropy)
 
-    def mnemonic_phrase(self, length: int = 12,
-                        separator: Optional[str] = None) -> str:
+    def mnemonic_phrase(self, length: int = 12, separator: Optional[str] = None) -> str:
         """Generate pseudo mnemonic phrase.
 
         Please, keep in mind that this method generates
@@ -128,8 +128,7 @@ class Cryptographic(BaseProvider):
         :return: Mnemonic phrase.
         """
         if not separator:
-            separator = ' '
+            separator = " "
 
-        words = self.__words['normal']
-        words_generator = (self.random.choice(words) for _ in range(length))
-        return '{}'.format(separator).join(words_generator)
+        words = self._text.words(quantity=length)
+        return "{}".format(separator).join(words)

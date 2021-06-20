@@ -1,14 +1,13 @@
 Creator
 ~~~~~~~
 
--  Isaak Uchakaev (Likid Geimfari) `(lk-geimfari)`_
+-  Isaak Uchakaev `(lk-geimfari)`_
 
 Maintainers
 ~~~~~~~~~~~
 
--  Isaak Uchakaev (Likid Geimfari) `(lk-geimfari)`_
+-  Isaak Uchakaev `(lk-geimfari)`_
 -  Sobolev Nikita `(sobolevn)`_
--  Emilio Cecchini `(ceccoemi)`_
 
 Inspirer
 ~~~~~~~~
@@ -86,8 +85,8 @@ Patches and Suggestions
 -  Tim Kreitner `(tabassco)`_
 -  Miroslav Šedivý `(eumiro)`_
 -  Yusan `(aekt)`_
--  Michael Oliver `michael0liver`_
-
+-  Emil Madsen `(Skeen)`_
+-  Michael Oliver `(michael0liver)`_
 
 
 .. _(lk-geimfari): https://github.com/lk-geimfari
@@ -152,3 +151,4 @@ Patches and Suggestions
 .. _(eumiro): https://github.com/eumiro
 .. _(aekt): https://github.com/aekt
 .. _(michael0liver): https://github.com/aekt
+.. _(Skeen): https://github.com/Skeen

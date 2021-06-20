@@ -6,7 +6,7 @@ This module contains provider Address() and other utils which represents
 data related to location, such as street name, city, country and etc.
 """
 
-from typing import Optional, Union
+from typing import Any, Dict, List, Optional, Union
 
 from mimesis.data import (
     CALLING_CODES,
@@ -17,7 +17,7 @@ from mimesis.data import (
 from mimesis.enums import CountryCode
 from mimesis.providers.base import BaseDataProvider
 
-__all__ = ['Address']
+__all__ = ["Address"]
 
 
 class Address(BaseDataProvider):
@@ -27,19 +27,19 @@ class Address(BaseDataProvider):
     geographical location.
     """
 
-    def __init__(self, *args, **kwargs) -> None:
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
         """Initialize attributes.
 
         :param locale: Current locale.
         """
         super().__init__(*args, **kwargs)
-        self._datafile = 'address.json'
+        self._datafile = "address.json"
         self._pull(self._datafile)
 
     class Meta:
         """Class for metadata."""
 
-        name = 'address'
+        name = "address"
 
     @staticmethod
     def _dd_to_dms(num: float, _type: str) -> str:
@@ -55,13 +55,13 @@ class Address(BaseDataProvider):
         seconds = round(seconds, 3)
         result = [abs(i) for i in (degrees, minutes, seconds)]
 
-        direction = ''
-        if _type == 'lg':
-            direction = 'W' if degrees < 0 else 'E'
-        elif _type == 'lt':
-            direction = 'S' if degrees < 0 else 'N'
+        direction = ""
+        if _type == "lg":
+            direction = "W" if degrees < 0 else "E"
+        elif _type == "lt":
+            direction = "S" if degrees < 0 else "N"
 
-        return ('{}º{}\'{:.3f}"' + direction).format(*result)
+        return ("{}º{}'{:.3f}\"" + direction).format(*result)
 
     def street_number(self, maximum: int = 1400) -> str:
         """Generate a random street number.
@@ -76,23 +76,23 @@ class Address(BaseDataProvider):
 
         :return: Street name.
         """
-        return self.random.choice(
-            self._data['street']['name'])
+        street_names: List[str] = self.extract(["street", "name"])
+        return self.random.choice(street_names)
 
     def street_suffix(self) -> str:
         """Get a random street suffix.
 
         :return: Street suffix.
         """
-        return self.random.choice(
-            self._data['street']['suffix'])
+        suffixes: List[str] = self.extract(["street", "suffix"])
+        return self.random.choice(suffixes)
 
     def address(self) -> str:
         """Generate a random full address.
 
         :return: Full address.
         """
-        fmt = self._data['address_fmt']
+        fmt: str = self.extract(["address_fmt"])
 
         st_num = self.street_number()
         st_name = self.street_name()
@@ -103,9 +103,9 @@ class Address(BaseDataProvider):
                 st_name=st_name,
             )
 
-        if self.locale == 'ja':
+        if self.locale == "ja":
             return fmt.format(
-                self.random.choice(self._data['city']),
+                self.random.choice(self.extract(["city"])),
                 # Generate list of random integers
                 # in amount of 3, from 1 to 100.
                 *self.random.randints(amount=3, a=1, b=100),
@@ -115,7 +115,6 @@ class Address(BaseDataProvider):
             st_num=st_num,
             st_name=st_name,
             st_sfx=self.street_suffix(),
-
         )
 
     def state(self, abbr: bool = False) -> str:
@@ -124,31 +123,32 @@ class Address(BaseDataProvider):
         :param abbr: Return ISO 3166-2 code.
         :return: Administrative district.
         """
-        return self.random.choice(
-            self._data['state']['abbr' if abbr else 'name'])
+        key = "abbr" if abbr else "name"
+        states: List[str] = self.extract(["state", key])
+        return self.random.choice(states)
 
-    def region(self, *args, **kwargs) -> str:
+    def region(self, *args: Any, **kwargs: Any) -> str:
         """Get a random region.
 
         An alias for :meth:`~Address.state()`.
         """
         return self.state(*args, **kwargs)
 
-    def province(self, *args, **kwargs) -> str:
+    def province(self, *args: Any, **kwargs: Any) -> str:
         """Get a random province.
 
         An alias for :meth:`~Address.state()`.
         """
         return self.state(*args, **kwargs)
 
-    def federal_subject(self, *args, **kwargs) -> str:
+    def federal_subject(self, *args: Any, **kwargs: Any) -> str:
         """Get a random region.
 
         An alias for :meth:`~Address.state()`.
         """
         return self.state(*args, **kwargs)
 
-    def prefecture(self, *args, **kwargs) -> str:
+    def prefecture(self, *args: Any, **kwargs: Any) -> str:
         """Get a random prefecture.
 
         An alias for :meth:`~Address.state()`.
@@ -160,8 +160,7 @@ class Address(BaseDataProvider):
 
         :return: Postal code.
         """
-        return self.random.custom_code(
-            self._data['postal_code_fmt'])
+        return self.random.custom_code(self.extract(["postal_code_fmt"]))
 
     def zip_code(self) -> str:
         """Generate a zip code.
@@ -183,27 +182,25 @@ class Address(BaseDataProvider):
         :return: Country code in selected format.
         :raises KeyError: if fmt is not supported.
         """
-        key = self._validate_enum(fmt, CountryCode)
+        key = self.validate_enum(fmt, CountryCode)
         return self.random.choice(COUNTRY_CODES[key])
 
-    def country(self, allow_random: bool = False) -> str:
+    def country(self) -> str:
         """Get the country of the current locale.
 
         :allow_random: Return a random country name.
         :return: The Country.
         """
-        if allow_random:
-            return self.random.choice(self._data['country']['name'])
-
-        return self._data['country']['current_locale']
+        countries: List[str] = self.extract(["country", "name"])
+        return self.random.choice(countries)
 
     def city(self) -> str:
         """Get a random city.
 
         :return: City name.
         """
-        return self.random.choice(
-            self._data['city'])
+        cities: List[str] = self.extract(["city"])
+        return self.random.choice(cities)
 
     def _get_fs(self, key: str, dms: bool = False) -> Union[str, float]:
         """Get float number.
@@ -213,7 +210,7 @@ class Address(BaseDataProvider):
         :return: Float number
         """
         # Default range is a range of longitude.
-        rng = (-90, 90) if key == 'lt' else (-180, 180)
+        rng = (-90, 90) if key == "lt" else (-180, 180)
         result = self.random.uniform(*rng, precision=6)
 
         if dms:
@@ -227,7 +224,7 @@ class Address(BaseDataProvider):
         :param dms: DMS format.
         :return: Value of longitude.
         """
-        return self._get_fs('lt', dms)
+        return self._get_fs("lt", dms)
 
     def longitude(self, dms: bool = False) -> Union[str, float]:
         """Generate a random value of longitude.
@@ -235,17 +232,17 @@ class Address(BaseDataProvider):
         :param dms: DMS format.
         :return: Value of longitude.
         """
-        return self._get_fs('lg', dms)
+        return self._get_fs("lg", dms)
 
-    def coordinates(self, dms: bool = False) -> dict:
+    def coordinates(self, dms: bool = False) -> Dict[str, Union[str, float]]:
         """Generate random geo coordinates.
 
         :param dms: DMS format.
         :return: Dict with coordinates.
         """
         return {
-            'longitude': self._get_fs('lg', dms),
-            'latitude': self._get_fs('lt', dms),
+            "longitude": self._get_fs("lg", dms),
+            "latitude": self._get_fs("lt", dms),
         }
 
     def continent(self, code: bool = False) -> str:
@@ -254,8 +251,10 @@ class Address(BaseDataProvider):
         :param code: Return code of continent.
         :return: Continent name.
         """
-        codes = CONTINENT_CODES if \
-            code else self._data['continent']
+        codes: List[str] = self.extract(["continent"])
+
+        if code:
+            codes = CONTINENT_CODES
 
         return self.random.choice(codes)
 

@@ -1,32 +1,33 @@
 # -*- coding: utf-8 -*-
 
 """Provides data related to food."""
+from typing import Any, List
 
 from mimesis.providers.base import BaseDataProvider
 
-__all__ = ['Food']
+__all__ = ["Food"]
 
 
 class Food(BaseDataProvider):
     """Class for generating data related to food."""
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
         """Initialize attributes.
 
         :param locale: Current locale.
         """
         super().__init__(*args, **kwargs)
-        self._datafile = 'food.json'
+        self._datafile = "food.json"
         self._pull(self._datafile)
 
     class Meta:
         """Class for metadata."""
 
-        name = 'food'
+        name = "food"
 
     def _choice_from(self, key: str) -> str:
         """Choice random element."""
-        data = self._data[key]
+        data: List[str] = self.extract([key])
         return self.random.choice(data)
 
     def vegetable(self) -> str:
@@ -37,7 +38,7 @@ class Food(BaseDataProvider):
         :Example:
             Tomato.
         """
-        return self._choice_from('vegetables')
+        return self._choice_from("vegetables")
 
     def fruit(self) -> str:
         """Get a random fruit or berry.
@@ -47,7 +48,7 @@ class Food(BaseDataProvider):
         :Example:
             Banana.
         """
-        return self._choice_from('fruits')
+        return self._choice_from("fruits")
 
     def dish(self) -> str:
         """Get a random dish.
@@ -57,7 +58,7 @@ class Food(BaseDataProvider):
         :Example:
             Ratatouille.
         """
-        return self._choice_from('dishes')
+        return self._choice_from("dishes")
 
     def spices(self) -> str:
         """Get a random spices or herbs.
@@ -67,7 +68,7 @@ class Food(BaseDataProvider):
         :Example:
             Anise.
         """
-        return self._choice_from('spices')
+        return self._choice_from("spices")
 
     def drink(self) -> str:
         """Get a random drink.
@@ -77,4 +78,4 @@ class Food(BaseDataProvider):
         :Example:
             Vodka.
         """
-        return self._choice_from('drinks')
+        return self._choice_from("drinks")

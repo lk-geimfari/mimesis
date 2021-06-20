@@ -4,7 +4,7 @@
 
 from mimesis.providers.base import BaseProvider
 
-__all__ = ['Clothing']
+__all__ = ["Clothing"]
 
 
 class Clothing(BaseProvider):
@@ -13,15 +13,14 @@ class Clothing(BaseProvider):
     class Meta:
         """Class for metadata."""
 
-        name = 'clothing'
+        name = "clothing"
 
     def international_size(self) -> str:
         """Get a random size in international format.
 
         :return: Clothing size.
         """
-        return self.random.choice(['L', 'M', 'S', 'XL',
-                                   'XS', 'XXL', 'XXS', 'XXXL'])
+        return self.random.choice(["L", "M", "S", "XL", "XS", "XXL", "XXS", "XXXL"])
 
     def european_size(self) -> int:
         """Generate a random clothing size in European format.

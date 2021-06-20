@@ -43,8 +43,9 @@ A minimal basic usage example looks something like this:
 .. code:: python
 
     >>> from mimesis import Person
+    >>> from mimesis.locales import Locale
     >>> from mimesis.enums import Gender
-    >>> person = Person('en')
+    >>> person = Person(Locale.EN)
 
     >>> person.full_name(gender=Gender.FEMALE)
     'Antonetta Garrison'
@@ -57,10 +58,127 @@ So what did the code above?
 
 1. First we imported the :class:`~mimesis.Person` provider. An instance of this
    class will be our provider of personal data.
-2. We import object :class:`~mimesis.enums.Gender` which we are used as a
+2. We import the object ``Locale`` which provides locale codes (its own attributes) and must
+   be used as a parameter for locale-depend data providers.
+3. We import object :class:`~mimesis.enums.Gender` which we are used as a
    parameter for the :meth:`~mimesis.Person.full_name`.
-3. Next we generate random female full name.
-4. The same as above, but for male.
+4. Next we generate random female full name.
+5. The same as above, but for male.
+
+Locales
+-------
+
+You can specify a locale when creating providers and they will return data that
+is appropriate for the language or country associated with that locale:
+
+.. code-block:: python
+
+    >>> from mimesis import Address
+    >>> from mimesis.locales import Locale
+
+    >>> de = Address(locale=Locale.DE)
+    >>> ru = Address(locale=Locale.RU)
+
+    >>> de.region()
+    'Brandenburg'
+
+    >>> ru.federal_subject()
+    'Алтайский край'
+
+    >>> de.address()
+    'Mainzer Landstraße 912'
+
+    >>> ru.address()
+    'ул. Пехотная 125'
+
+
+See the table below for more details.
+
+Supported locales
+~~~~~~~~~~~~~~~~~
+
+Mimesis currently includes support for 34 different locales:
+
+=======  ====================  ====================  ====================
+Code     Associated attribute  Name                  Native Name
+=======  ====================  ====================  ====================
+`cs`     ``Locale.CS``         Czech                 Česky
+`da`     ``Locale.DA``         Danish                Dansk
+`de`     ``Locale.DE``         German                Deutsch
+`de-at`  ``Locale.DE_AT``      Austrian german       Deutsch
+`de-ch`  ``Locale.DE_CH``      Swiss german          Deutsch
+`el`	 ``Locale.EL``         Greek                 Ελληνικά
+`en`     ``Locale.EN``         English               English
+`en-au`  ``Locale.EN_AU``      Australian English    English
+`en-ca`  ``LocALE.EN_CA``      Canadian English      English
+`en-gb`  ``Locale.EN_GB``      British English       English
+`es`     ``Locale.ES``         Spanish               Español
+`es-mx`  ``Locale.ES_MX``      Mexican Spanish       Español
+`et`     ``Locale.ET``         Estonian              Eesti
+`fa`     ``Locale.FA``         Farsi                 فارسی
+`fi`     ``Locale.FI``         Finnish               Suomi
+`fr`     ``Locale.FR``         French                Français
+`hu`     ``Locale.HU``         Hungarian             Magyar
+`is`     ``Locale.IS``         Icelandic             Íslenska
+`it`     ``Locale.IT``         Italian               Italiano
+`ja`     ``Locale.JA``         Japanese              日本語
+`kk`     ``Locale.KK``         Kazakh                Қазақша
+`ko`	 ``Locale.KO``         Korean                한국어
+`nl`     ``Locale.NL``         Dutch                 Nederlands
+`nl-be`  ``Locale.NL_BE``      Belgium Dutch         Nederlands
+`no`     ``Locale.NO``         Norwegian             Norsk
+`pl`     ``Locale.PL``         Polish                Polski
+`pt`     ``Locale.PT``         Portuguese            Português
+`pt-br`  ``Locale.PT_BR``      Brazilian Portuguese  Português Brasileiro
+`ru`     ``Locale.RU``         Russian               Русский
+`sk`     ``Locale.SK``         Slovak                Slovensky
+`sv`     ``Locale.SV``         Swedish               Svenska
+`tr`     ``Locale.TR``         Turkish               Türkçe
+`uk`     ``Locale.UK``         Ukrainian             Українська
+`zh`     ``Locale.ZH``         Chinese               汉语
+=======  ====================  ====================  ====================
+
+Override locale
+~~~~~~~~~~~~~~~
+
+Sometimes you need only some data from other locale and creating an instance for such cases
+is not really good,  so it's better just temporarily override current locale for provider's instance:
+
+.. code-block:: python
+
+    >>> from mimesis import Person
+    >>> from mimesis.locales import Locale
+
+    >>> person = Person(locale=Locale.EN)
+    >>> person.full_name()
+    'Ozie Melton'
+
+    >>> with person.override_locale(Locale.RU):
+    ...     person.full_name()
+
+    'Симона Богданова'
+
+    >>> person.full_name()
+    'Waldo Foster'
+
+You can also use it with :class:`~mimesis.Generic()`:
+
+.. code-block:: python
+
+    >>> from mimesis import Generic
+    >>> from mimesis.locales import Locale
+
+    >>> generic = Generic(locale=Locale.EN)
+    >>> generic.text.word()
+    'anyone'
+
+    >>> with generic.text.override_locale(Locale.FR):
+    ...     generic.text.word()
+
+    'mieux'
+
+    >>> generic.text.word()
+    'responsibilities'
 
 
 Data Providers
@@ -71,7 +189,7 @@ transportation, addresses, and more.
 
 See :ref:`api-reference` for more info.
 
-.. attention::
+.. warning::
     Data providers are **heavy objects** since each instance of provider keeps in memory all
     the data from the provider's JSON file so you **should not** construct too many providers.
 
@@ -86,7 +204,8 @@ and you can access all Mimesis providers from one object.
 .. code-block:: python
 
     >>> from mimesis import Generic
-    >>> g = Generic('es')
+    >>> from mimesis.locales import Locale
+    >>> g = Generic(locale=Locale.ES)
 
     >>> g.datetime.month()
     'Agosto'
@@ -97,122 +216,8 @@ and you can access all Mimesis providers from one object.
     >>> g.food.fruit()
     'Limón'
 
-    >>> g.science.rna()
-    'GCTTTAGACC'
-
 
 .. _locales:
-
-Locales
--------
-
-You can specify a locale when creating providers and they will return data that
-is appropriate for the language or country associated with that locale:
-
-.. code-block:: python
-
-    >>> from mimesis import Address
-
-    >>> de = Address('de')
-    >>> ru = Address('ru')
-
-    >>> de.region()
-    'Brandenburg'
-
-    >>> ru.federal_subject()
-    'Алтайский край'
-
-    >>> de.address()
-    'Mainzer Landstraße 912'
-
-    >>> ru.address()
-    'ул. Пехотная 125'
-
-Override locale
-~~~~~~~~~~~~~~~
-
-Sometimes you need only some data from other locale and creating an instance for such cases
-is not really good,  so it's better just temporarily override current locale for provider's instance:
-
-.. code-block:: python
-
-    >>> from mimesis import Person
-    >>> from mimesis import locales
-
-    >>> person = Person(locales.EN)
-    >>> person.full_name()
-    'Ozie Melton'
-
-    >>> with person.override_locale(locales.RU):
-    ...     person.full_name()
-
-    'Симона Богданова'
-
-    >>> person.full_name()
-    'Waldo Foster'
-
-You can also use it with :class:`~mimesis.Generic()`:
-
-.. code-block:: python
-
-    >>> from mimesis import Generic
-    >>> from mimesis import locales
-
-    >>> generic = Generic(locales.EN)
-    >>> generic.text.word()
-    'anyone'
-
-    >>> with generic.text.override_locale(locales.FR):
-    ...     generic.text.word()
-
-    'mieux'
-
-    >>> generic.text.word()
-    'responsibilities'
-
-Supported locales
-~~~~~~~~~~~~~~~~~
-
-Mimesis currently includes support for 33 different locales:
-
-=======  ====================  ====================
-Code     Name                  Native Name
-=======  ====================  ====================
-`cs`     Czech                 Česky
-`da`     Danish                Dansk
-`de`     German                Deutsch
-`de-at`  Austrian german       Deutsch
-`de-ch`  Swiss german          Deutsch
-`el`	 Greek                 Ελληνικά
-`en`     English               English
-`en-au`  Australian English    English
-`en-ca`  Canadian English      English
-`en-gb`  British English       English
-`es`     Spanish               Español
-`es-mx`  Mexican Spanish       Español
-`et`     Estonian              Eesti
-`fa`     Farsi                 فارسی
-`fi`     Finnish               Suomi
-`fr`     French                Français
-`hu`     Hungarian             Magyar
-`is`     Icelandic             Íslenska
-`it`     Italian               Italiano
-`ja`     Japanese              日本語
-`kk`     Kazakh                Қазақша
-`ko`	 Korean                한국어
-`nl`     Dutch                 Nederlands
-`nl-be`  Belgium Dutch         Nederlands
-`no`     Norwegian             Norsk
-`pl`     Polish                Polski
-`pt`     Portuguese            Português
-`pt-br`  Brazilian Portuguese  Português Brasileiro
-`ru`     Russian               Русский
-`sk`     Slovak                Slovensky
-`sv`     Swedish               Svenska
-`tr`     Turkish               Türkçe
-`uk`     Ukrainian             Українська
-`zh`     Chinese               汉语
-=======  ====================  ====================
 
 Seeded Data
 -----------
@@ -227,8 +232,9 @@ to data provider:
 .. code-block:: python
 
     >>> from mimesis import Person
+    >>> from mimesis.locales import Locale
 
-    >>> person = Person('tr', seed=0xFF)
+    >>> person = Person(locale=Locale.TR, seed=0xFF)
     >>> person.full_name()
     'Gizem Tekand'
 
@@ -248,7 +254,8 @@ won’t run):
 .. code:: python
 
     >>> from mimesis import Person
-    >>> person = Person('en')
+    >>> from mimesis.locales import Locale
+    >>> person = Person(locale=Locale.EN)
 
     >>> person.ssn()
     >>> person.cpf()
@@ -265,9 +272,10 @@ Here’s how it works:
 .. code:: python
 
     >>> from mimesis import Generic
+    >>> from mimesis.locales import Locale
     >>> from mimesis.builtins import BrazilSpecProvider
 
-    >>> generic = Generic('pt-br')
+    >>> generic = Generic(locale=Locale.PT_BR)
     >>> generic.add_provider(BrazilSpecProvider)
     >>> generic.brazil_provider.cpf()
     '696.441.186-00'
@@ -364,7 +372,7 @@ then you got ``TypeError`` exception:
 
 .. code:: python
 
-    >>> class InvalidProvider(object):
+    >>> class InvalidProvider:
     ...     @staticmethod
     ...     def hello():
     ...         return 'Hello!'
@@ -379,7 +387,7 @@ All providers must be subclasses of :class:`~mimesis.BaseProvider`
 because of ensuring a single instance of object ``Random``.
 
 Everything is pretty easy and self-explanatory here, therefore, we will
-only clarify one moment — attribute *name*, class *Meta* is the name
+only clarify one moment — attribute *name*, class *Meta* is the name
 of a class through which access to methods of user-class providers is
 carried out. By default class name is the name of the class in lowercase
 letters.
@@ -405,8 +413,9 @@ Example of usage:
 .. code:: python
 
     >>> from mimesis.schema import Field, Schema
+    >>> from mimesis.locales import Locale
     >>> from mimesis.enums import Gender
-    >>> _ = Field('en')
+    >>> _ = Field(locale=Locale.EN)
     >>> description = (
     ...     lambda: {
     ...         'id': _('uuid'),
@@ -447,13 +456,14 @@ to change this behavior should be passed parameter *providers* with a sequence o
 .. code:: python
 
     >>> from mimesis.schema import Field
+    >>> from mimesis.locales import Locale
     >>> from mimesis import builtins
 
     >>> custom_providers = (
     ...     builtins.RussiaSpecProvider,
     ...     builtins.NetherlandsSpecProvider,
     ... )
-    >>> _ = Field('en', providers=custom_providers)
+    >>> _ = Field(Locale.EN, providers=custom_providers)
 
     >>> _('snils')
     '239-315-742-84'

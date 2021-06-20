@@ -2,7 +2,6 @@
 import re
 
 import pytest
-
 from mimesis import Transport
 from mimesis.data import (
     AIRPLANES,
@@ -12,13 +11,12 @@ from mimesis.data import (
     VR_CODES,
     VRC_BY_LOCALES,
 )
-from mimesis.locales import LIST_OF_LOCALES
+from mimesis.locales import Locale
 
 from . import patterns
 
 
 class TestTransport(object):
-
     @pytest.fixture
     def transport(self):
         return Transport()
@@ -27,12 +25,12 @@ class TestTransport(object):
         assert re.match(patterns.PROVIDER_STR_REGEX, str(transport))
 
     def test_truck(self, transport):
-        result = transport.truck().split('-')
+        result = transport.truck().split("-")
         manufacturer, model = result[0], result[1]
         assert manufacturer in TRUCKS
         assert len(model) == 7
 
-        result = transport.truck(model_mask='###').split('-')
+        result = transport.truck(model_mask="###").split("-")
         manufacturer, model = result[0], result[1]
         assert manufacturer in TRUCKS
         assert len(model) == 3
@@ -45,14 +43,15 @@ class TestTransport(object):
         assert transport.manufacturer() in MANUFACTURERS
 
     def test_airplane(self, transport):
-        mask = '@###'
+        mask = "@###"
         result = transport.airplane(model_mask=mask).split()
         manufacturer, model = result[0], result[1]
         assert manufacturer in AIRPLANES
         assert len(model) == len(mask)
 
     @pytest.mark.parametrize(
-        'locale', LIST_OF_LOCALES,
+        "locale",
+        list(Locale),
     )
     def test_vehicle_registration_code(self, transport, locale):
         result = transport.vehicle_registration_code(locale=locale)
@@ -63,7 +62,6 @@ class TestTransport(object):
 
 
 class TestSeededTransport(object):
-
     @pytest.fixture
     def t1(self, seed):
         return Transport(seed=seed)
@@ -74,7 +72,7 @@ class TestSeededTransport(object):
 
     def test_truck(self, t1, t2):
         assert t1.truck() == t2.truck()
-        assert t1.truck(model_mask='#@') == t2.truck(model_mask='#@')
+        assert t1.truck(model_mask="#@") == t2.truck(model_mask="#@")
 
     def test_car(self, t1, t2):
         assert t1.car() == t2.car()
@@ -84,11 +82,11 @@ class TestSeededTransport(object):
 
     def test_airplane(self, t1, t2):
         assert t1.airplane() == t2.airplane()
-        assert t1.airplane(model_mask='#_#_#') == \
-               t2.airplane(model_mask='#_#_#')
+        assert t1.airplane(model_mask="#_#_#") == t2.airplane(model_mask="#_#_#")
 
     @pytest.mark.parametrize(
-        'locale', LIST_OF_LOCALES,
+        "locale",
+        list(Locale),
     )
     def test_vehicle_registration_code(self, t1, t2, locale):
         a = t1.vehicle_registration_code(locale)

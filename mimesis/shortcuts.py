@@ -2,7 +2,7 @@
 
 """This module is provide internal util functions."""
 
-__all__ = ['luhn_checksum']
+__all__ = ["luhn_checksum"]
 
 
 def luhn_checksum(num: str) -> str:

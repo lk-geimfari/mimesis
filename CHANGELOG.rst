@@ -1,3 +1,47 @@
+Version 5.0.0
+-------------
+
+**Note**: This release is still under active development.
+**Warning**: This release contains some breaking changes in API.
+
+**Renamed**:
+
+- Rename ``enums.UnitName`` to ``enums.MeasureUnit``
+- Rename ``enums.PrefixSign`` to ``enums.MetricPrefixSign``
+- Rename ``Business()`` to ``Finance()``
+
+**Fixed**:
+- Fix inheritance issues for ``Generic``, now it inherits ``BaseProvider`` instead of ``BaseDataProvider``
+- Fix locale-independent provider to make them accepts keyword-only arguments
+- Fix DenmarkSpecProvider CPR to generate valid CPR numbers.
+- Fix ``.cvv()`` to make it return string
+- Fix ``.cid()`` to make it return string
+- Fix ``.price()`` of ``Finance`` to make it return float.
+
+**Added**:
+
+- Added class ``Locale`` to ``mimesis.locales``
+- Added ``measure_unit()`` and ``.metric_prefix()`` methods for ``Science``
+- Added methods ``.iterator()`` and ``.infinite()`` for ``schema.Schema``
+- Added methods ``.slug()`` and ``ip_v4_with_port()`` for ``Internet()``
+- Added ``incremental()`` method for ``Numbers()``
+- Added methods ``.stock_ticker()``, ``.stock_name()`` and ``.stock_exchange()`` for ``Finance()``
+- Added ``BinaryFile`` data provider which provides binary data files, such as ``.mp3``, ``.mp4``, ``.png``, etc.
+
+**Removed**:
+
+- Removed invalid names and surnames from ``person.json`` for ``ru`` locale
+- Removed data provider ``UnitSystem()``, use instead ``Science()``
+- Removed data provider ``Structure()``, use instead ``schema.Schema``
+- Removed ``GermanySpecProvider``
+- Removed method ``copyright()`` of ``Finance()``
+- Removed method ``network_protocol()`` of ``Internet()``
+- Removed params ``with_port`` and ``port_range`` for ``ip_v4()`` of ``Internet()``. Use ``ip_v4_with_port()`` instead
+- Removed method ``.sexual_orientation()``, ``.social_media_profile()`` and ``.avatar()`` of ``Person()``
+- Removed a bunch of useless custom exceptions and replaced them with ``FieldError``
+- Removed completely useless ``chemical_element`` and ``atomic_number`` methods of ``Science`` data provider and made it locale-independent
+
+
 Version 4.1.3
 -------------
 

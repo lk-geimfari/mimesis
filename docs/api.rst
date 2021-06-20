@@ -13,9 +13,8 @@ Random object
 Random
 ------
 
-.. autoclass:: mimesis.random.Random
+.. automodule:: mimesis.random
    :members:
-   :special-members: __init__
 
 
 Builtin Data Providers
@@ -32,13 +31,6 @@ DenmarkSpecProvider
 -------------------
 
 .. autoclass:: mimesis.builtins.DenmarkSpecProvider
-   :members:
-   :special-members: __init__
-
-GermanySpecProvider
--------------------
-
-.. autoclass:: mimesis.builtins.GermanySpecProvider
    :members:
    :special-members: __init__
 
@@ -87,40 +79,22 @@ Decorators
 Custom Exceptions
 =================
 
-UnsupportedAlgorithm
---------------------
+LocaleError
+-----------
 
-.. autoclass:: mimesis.exceptions.UnsupportedAlgorithm
+.. autoclass:: mimesis.exceptions.LocaleError
    :members:
 
-UnsupportedField
-----------------
+FieldError
+----------
 
-.. autoclass:: mimesis.exceptions.UnsupportedField
+.. autoclass:: mimesis.exceptions.FieldError
    :members:
 
-UnsupportedLocale
------------------
+SchemaError
+-----------
 
-.. autoclass:: mimesis.exceptions.UnsupportedLocale
-   :members:
-
-UndefinedField
---------------
-
-.. autoclass:: mimesis.exceptions.UndefinedField
-   :members:
-
-UndefinedSchema
----------------
-
-.. autoclass:: mimesis.exceptions.UndefinedSchema
-   :members:
-
-UnacceptableField
------------------
-
-.. autoclass:: mimesis.exceptions.UnacceptableField
+.. autoclass:: mimesis.exceptions.SchemaError
    :members:
 
 NonEnumerableError
@@ -170,10 +144,10 @@ Address
    :members:
    :special-members: __init__
 
-Business
---------
+Finance
+-------
 
-.. autoclass:: mimesis.Business
+.. autoclass:: mimesis.Finance
    :members:
    :special-members: __init__
 
@@ -214,6 +188,14 @@ Text
 
 Locale-Independent Providers
 =============================
+
+BinaryFile
+----------
+
+.. autoclass:: mimesis.BinaryFile
+   :members:
+   :special-members: __init__
+
 
 Clothing
 -------------
@@ -285,13 +267,6 @@ Path
    :members:
    :special-members: __init__
 
-Structure
-----------
-
-.. autoclass:: mimesis.Structure
-   :members:
-   :special-members: __init__
-
 Transport
 ---------
 
@@ -299,23 +274,14 @@ Transport
    :members:
    :special-members: __init__
 
-UnitSystem
-----------
-
-.. autoclass:: mimesis.UnitSystem
-   :members:
-   :special-members: __init__
-
-
-
 
 Schema
 ======
 
-AbstractField
--------------
+BaseField
+---------
 
-.. autoclass:: mimesis.schema.AbstractField
+.. autoclass:: mimesis.schema.BaseField
    :members:
    :special-members: __call__
 

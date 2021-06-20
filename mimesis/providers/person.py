@@ -5,45 +5,43 @@
 import hashlib
 import re
 from string import ascii_letters, digits, punctuation
-from typing import Optional, Union
+from typing import Any, List, Optional, Sequence, Union
 
 from mimesis.data import (
     BLOOD_GROUPS,
     CALLING_CODES,
     EMAIL_DOMAINS,
     GENDER_SYMBOLS,
-    SEXUALITY_SYMBOLS,
-    SOCIAL_NETWORKS,
     USERNAMES,
 )
-from mimesis.enums import Gender, SocialNetwork, TitleType
+from mimesis.enums import Gender, TitleType
 from mimesis.exceptions import NonEnumerableError
 from mimesis.providers.base import BaseDataProvider
 from mimesis.random import get_random_item
 
-__all__ = ['Person']
+__all__ = ["Person"]
 
 
 class Person(BaseDataProvider):
     """Class for generating personal data."""
 
-    def __init__(self, *args, **kwargs) -> None:
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
         """Initialize attributes.
 
         :param locale: Current locale.
         :param seed: Seed.
         """
         super().__init__(*args, **kwargs)
-        self._datafile = 'person.json'
+        self._datafile = "person.json"
         self._pull(self._datafile)
         self._store = {
-            'age': 0,
+            "age": 0,
         }
 
     class Meta:
         """Class for metadata."""
 
-        name = 'person'
+        name = "person"
 
     def age(self, minimum: int = 16, maximum: int = 66) -> int:
         """Get a random integer value.
@@ -56,7 +54,7 @@ class Person(BaseDataProvider):
             23.
         """
         age = self.random.randint(minimum, maximum)
-        self._store['age'] = age
+        self._store["age"] = age
         return age
 
     def work_experience(self, working_start_age: int = 22) -> int:
@@ -65,7 +63,7 @@ class Person(BaseDataProvider):
         :param working_start_age: Age then person start to work.
         :return: Depend on previous generated age.
         """
-        age = self._store['age']
+        age = self._store["age"]
         if age == 0:
             age = self.age()
 
@@ -80,11 +78,11 @@ class Person(BaseDataProvider):
         :Example:
             John.
         """
-        key = self._validate_enum(gender, Gender)
-        names = self._data['names'].get(key)
+        key = self.validate_enum(gender, Gender)
+        names: List[str] = self.extract(["names", key])
         return self.random.choice(names)
 
-    def first_name(self, gender: Optional[Gender] = None):
+    def first_name(self, gender: Optional[Gender] = None) -> str:
         """Generate a random first name.
 
         ..note: An alias for self.name().
@@ -103,11 +101,11 @@ class Person(BaseDataProvider):
         :Example:
             Smith.
         """
-        surnames = self._data['surnames']
+        surnames: Sequence[str] = self.extract(["surnames"])
 
         # Surnames separated by gender.
         if isinstance(surnames, dict):
-            key = self._validate_enum(gender, Gender)
+            key = self.validate_enum(gender, Gender)
             surnames = surnames[key]
 
         return self.random.choice(surnames)
@@ -122,8 +120,9 @@ class Person(BaseDataProvider):
         """
         return self.surname(gender)
 
-    def title(self, gender: Optional[Gender] = None,
-              title_type: Optional[TitleType] = None) -> str:
+    def title(
+        self, gender: Optional[Gender] = None, title_type: Optional[TitleType] = None
+    ) -> str:
         """Generate a random title for name.
 
         You can generate random prefix or suffix
@@ -137,14 +136,13 @@ class Person(BaseDataProvider):
         :Example:
             PhD.
         """
-        gender_key = self._validate_enum(gender, Gender)
-        title_key = self._validate_enum(title_type, TitleType)
+        gender_key = self.validate_enum(gender, Gender)
+        title_key = self.validate_enum(title_type, TitleType)
 
-        titles = self._data['title'][gender_key][title_key]
+        titles: List[str] = self.extract(["title", gender_key, title_key])
         return self.random.choice(titles)
 
-    def full_name(self, gender: Optional[Gender] = None,
-                  reverse: bool = False) -> str:
+    def full_name(self, gender: Optional[Gender] = None, reverse: bool = False) -> str:
         """Generate a random full name.
 
         :param reverse: Return reversed full name.
@@ -162,7 +160,7 @@ class Person(BaseDataProvider):
         else:
             raise NonEnumerableError(Gender)
 
-        fmt = '{1} {0}' if reverse else '{0} {1}'
+        fmt = "{1} {0}" if reverse else "{0} {1}"
         return fmt.format(
             self.name(gender),
             self.surname(gender),
@@ -188,34 +186,43 @@ class Person(BaseDataProvider):
         :Example:
             Celloid1873
         """
-        min_date = 1800
-        max_date = 2070
-        default_template = 'l.d'
+        min_date, max_date = (1800, 2070)
 
-        templates = ('U_d', 'U.d', 'U-d', 'UU-d', 'UU.d', 'UU_d',
-                     'ld', 'l-d', 'Ud', 'l.d', 'l_d', 'default')
+        templates: List[str] = [
+            "U_d",
+            "U.d",
+            "U-d",
+            "UU-d",
+            "UU.d",
+            "UU_d",
+            "ld",
+            "l-d",
+            "Ud",
+            "l.d",
+            "l_d",
+            "default",
+        ]
 
         if template is None:
             template = self.random.choice(templates)
 
-        if template == 'default':
-            template = default_template
+        if template == "default":
+            template = "l.d"
 
-        if not re.fullmatch(r'[Ul\.\-\_d]*[Ul]+[Ul\.\-\_d]*', template):
-            raise ValueError(
-                "Template '{}' is not supported.".format(template))
+        if template not in templates:
+            raise ValueError("Template '{}' is not supported.".format(template))
 
-        tags = re.findall(r'[Uld\.\-\_]', template)
+        tags = re.findall(r"[Uld.\-_]", template)
 
-        username = ''
+        username = ""
         for tag in tags:
-            if tag == 'U':
+            if tag == "U":
                 username += self.random.choice(USERNAMES).capitalize()
-            elif tag == 'l':
+            elif tag == "l":
                 username += self.random.choice(USERNAMES)
-            elif tag == 'd':
+            elif tag == "d":
                 username += str(self.random.randint(min_date, max_date))
-            elif tag in '-_.':
+            elif tag in "-_.":
                 username += tag
 
         return username
@@ -231,7 +238,7 @@ class Person(BaseDataProvider):
             k6dv2odff9#4h
         """
         text = ascii_letters + digits + punctuation
-        password = ''.join([self.random.choice(text) for _ in range(length)])
+        password = "".join([self.random.choice(text) for _ in range(length)])
 
         if hashed:
             md5 = hashlib.md5()
@@ -240,8 +247,11 @@ class Person(BaseDataProvider):
 
         return password
 
-    def email(self, domains: Union[tuple, list] = None,
-              unique: bool = False) -> str:
+    def email(
+        self,
+        domains: Optional[Sequence[str]] = None,
+        unique: bool = False,
+    ) -> str:
         """Generate a random email.
 
         :param domains: List of custom domains for emails.
@@ -253,43 +263,27 @@ class Person(BaseDataProvider):
             foretime10@live.com
         """
         if unique and self.seed is not None:
-            raise ValueError('You cannot use «unique» '
-                             'parameter with a seeded provider')
+            raise ValueError("You cannot use «unique» parameter with a seeded provider")
 
         if not domains:
             domains = EMAIL_DOMAINS
 
         domain = self.random.choice(domains)
 
-        if not domain.startswith('@'):
-            domain = '@' + domain
+        if not domain.startswith("@"):
+            domain = "@" + domain
 
         if unique:
             name = self.random.randstr(unique)
         else:
-            name = self.username(template='ld')
+            name = self.username(template="ld")
 
-        return '{name}{domain}'.format(
+        return "{name}{domain}".format(
             name=name,
             domain=domain,
         )
 
-    def social_media_profile(self,
-                             site: Optional[SocialNetwork] = None) -> str:
-        """Generate profile for random social network.
-
-        :return: Profile in some network.
-
-        :Example:
-            http://facebook.com/some_user
-        """
-        key = self._validate_enum(site, SocialNetwork)
-        website = SOCIAL_NETWORKS[key]
-        url = 'https://' + website
-        return url.format(self.username())
-
-    def gender(self, iso5218: bool = False,
-               symbol: bool = False) -> Union[str, int]:
+    def gender(self, iso5218: bool = False, symbol: bool = False) -> Union[str, int]:
         """Get a random gender.
 
         Get a random title of gender, code for the representation
@@ -312,9 +306,10 @@ class Person(BaseDataProvider):
         if symbol:
             return self.random.choice(GENDER_SYMBOLS)
 
-        return self.random.choice(self._data['gender'])
+        genders: List[str] = self.extract(["gender"])
+        return self.random.choice(genders)
 
-    def sex(self, *args, **kwargs):
+    def sex(self, *args: Any, **kwargs: Any) -> Union[str, int]:
         """An alias for method self.gender().
 
         See docstrings of method self.gender() for details.
@@ -336,7 +331,7 @@ class Person(BaseDataProvider):
             1.85.
         """
         h = self.random.uniform(minimum, maximum)
-        return '{:0.2f}'.format(h)
+        return "{:0.2f}".format(h)
 
     def weight(self, minimum: int = 38, maximum: int = 90) -> int:
         """Generate a random weight in Kg.
@@ -361,24 +356,6 @@ class Person(BaseDataProvider):
         """
         return self.random.choice(BLOOD_GROUPS)
 
-    def sexual_orientation(self, symbol: bool = False) -> str:
-        """Get a random sexual orientation.
-
-        Obviously, this option will be useful for various
-        dating sites and so on.
-
-        :param symbol: Unicode symbol.
-        :return: Sexual orientation.
-
-        :Example:
-            Heterosexuality.
-        """
-        if symbol:
-            return self.random.choice(SEXUALITY_SYMBOLS)
-
-        sexuality = self._data['sexuality']
-        return self.random.choice(sexuality)
-
     def occupation(self) -> str:
         """Get a random job.
 
@@ -387,7 +364,7 @@ class Person(BaseDataProvider):
         :Example:
             Programmer.
         """
-        jobs = self._data['occupation']
+        jobs: List[str] = self.extract(["occupation"])
         return self.random.choice(jobs)
 
     def political_views(self) -> str:
@@ -398,7 +375,7 @@ class Person(BaseDataProvider):
         :Example:
             Liberal.
         """
-        views = self._data['political_views']
+        views: List[str] = self.extract(["political_views"])
         return self.random.choice(views)
 
     def worldview(self) -> str:
@@ -409,7 +386,7 @@ class Person(BaseDataProvider):
         :Example:
             Pantheism.
         """
-        views = self._data['worldview']
+        views: List[str] = self.extract(["worldview"])
         return self.random.choice(views)
 
     def views_on(self) -> str:
@@ -420,7 +397,7 @@ class Person(BaseDataProvider):
         :Example:
             Negative.
         """
-        views = self._data['views_on']
+        views: List[str] = self.extract(["views_on"])
         return self.random.choice(views)
 
     def nationality(self, gender: Optional[Gender] = None) -> str:
@@ -432,11 +409,11 @@ class Person(BaseDataProvider):
         :Example:
             Russian
         """
-        nationalities = self._data['nationality']
+        nationalities: Sequence[str] = self.extract(["nationality"])
 
         # Separated by gender
         if isinstance(nationalities, dict):
-            key = self._validate_enum(gender, Gender)
+            key = self.validate_enum(gender, Gender)
             nationalities = nationalities[key]
 
         return self.random.choice(nationalities)
@@ -449,7 +426,7 @@ class Person(BaseDataProvider):
         :Example:
             MIT.
         """
-        universities = self._data['university']
+        universities: List[str] = self.extract(["university"])
         return self.random.choice(universities)
 
     def academic_degree(self) -> str:
@@ -460,7 +437,7 @@ class Person(BaseDataProvider):
         :Example:
             Bachelor.
         """
-        degrees = self._data['academic_degree']
+        degrees: List[str] = self.extract(["academic_degree"])
         return self.random.choice(degrees)
 
     def language(self) -> str:
@@ -471,10 +448,10 @@ class Person(BaseDataProvider):
         :Example:
             Irish.
         """
-        languages = self._data['language']
+        languages: List[str] = self.extract(["language"])
         return self.random.choice(languages)
 
-    def telephone(self, mask: str = '', placeholder: str = '#') -> str:
+    def telephone(self, mask: str = "", placeholder: str = "#") -> str:
         """Generate a random phone number.
 
         :param mask: Mask for formatting number.
@@ -486,22 +463,13 @@ class Person(BaseDataProvider):
         """
         if not mask:
             code = self.random.choice(CALLING_CODES)
-            default = '{}-(###)-###-####'.format(code)
-            masks = self._data.get('telephone_fmt', [default])
+            default = "{}-(###)-###-####".format(code)
+            masks = self.extract(["telephone_fmt"], default=[default])
             mask = self.random.choice(masks)
 
         return self.random.custom_code(mask=mask, digit=placeholder)
 
-    def avatar(self, size: int = 256) -> str:
-        """Generate a random avatar..
-
-        :param size: Size of avatar.
-        :return: Link to avatar.
-        """
-        url = 'https://api.adorable.io/avatars/{0}/{1}.png'
-        return url.format(size, self.password(hashed=True))
-
-    def identifier(self, mask: str = '##-##/##') -> str:
+    def identifier(self, mask: str = "##-##/##") -> str:
         """Generate a random identifier by mask.
 
         With this method you can generate any identifiers that

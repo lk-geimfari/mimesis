@@ -1,15 +1,14 @@
-import pytest
-
 import mimesis
-from mimesis.locales import LIST_OF_LOCALES
+import pytest
+from mimesis.locales import Locale
 
-locales = LIST_OF_LOCALES
-platform = ['win32', 'linux']
+locales = list(Locale)
+platform = ["win32", "linux"]
 
 
 @pytest.fixture
 def seed():
-    return 'mimesis'
+    return "mimesis"
 
 
 @pytest.fixture(params=locales)
@@ -23,8 +22,8 @@ def address(request):
 
 
 @pytest.fixture(params=locales)
-def business(request):
-    return mimesis.Business(request.param)
+def finance(request):
+    return mimesis.Finance(request.param)
 
 
 @pytest.fixture(params=locales)
@@ -40,11 +39,6 @@ def food(request):
 @pytest.fixture(params=locales)
 def person(request):
     return mimesis.Person(request.param)
-
-
-@pytest.fixture(params=locales)
-def science(request):
-    return mimesis.Science(request.param)
 
 
 @pytest.fixture(params=locales)

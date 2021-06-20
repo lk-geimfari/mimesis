@@ -1,35 +1,37 @@
 # -*- coding: utf-8 -*-
 
 """Implements classes for generating data by schema."""
+import warnings
+from typing import Any, Callable, Iterator, List, Optional
 
-from typing import Any, Callable, List, Optional
-
-from mimesis.exceptions import (
-    UnacceptableField,
-    UndefinedField,
-    UndefinedSchema,
-    UnsupportedField,
-)
+from mimesis.exceptions import FieldError, SchemaError
+from mimesis.locales import Locale
 from mimesis.providers.generic import Generic
-from mimesis.typing import JSON, SchemaType, Seed
+from mimesis.typing import JSON, Seed
 
-__all__ = ['Field', 'Schema']
+__all__ = ["BaseField", "Field", "Schema"]
 
 
-class AbstractField:
+class BaseField:
     """
-    AbstractField is a class for generating data by the name of the method.
+    BaseField is a class for generating data by the name of the method.
 
     Instance of this object takes any string which represents name
     of any method of any supported data provider (:class:`~mimesis.Generic`)
     and the ``**kwargs`` of the method.
 
-    See :class:`~mimesis.schema.AbstractField.__call__` for more details.
+    See :class:`~mimesis.schema.BaseField.perform` for more details.
     """
 
-    def __init__(self, locale: str = 'en',
-                 seed: Optional[Seed] = None,
-                 providers: Optional[Any] = None) -> None:
+    class Meta:
+        base = True
+
+    def __init__(
+        self,
+        locale: str = Locale.DEFAULT,
+        seed: Optional[Seed] = None,
+        providers: Optional[Any] = None,
+    ) -> None:
         """Initialize field.
 
         :param locale: Locale
@@ -44,13 +46,16 @@ class AbstractField:
 
         self._table = {}  # type: ignore
 
-    def __call__(self, name: Optional[str] = None,
-                 key: Optional[Callable] = None, **kwargs) -> Any:
-        """Override standard call.
+    def perform(
+        self,
+        name: Optional[str] = None,
+        key: Optional[Callable[[Any], Any]] = None,
+        **kwargs: Any
+    ) -> Any:
+        """Performs the value of the field by its name.
 
-        This magic method overrides standard call so it takes any string
-        which represents the name of any method of any supported data
-        provider and the ``**kwargs`` of this method.
+        It takes any string which represents the name of any method of
+        any supported data provider and the ``**kwargs`` of this method.
 
         .. note:: Some data providers have methods with the same names
             and in such cases, you can explicitly define that the method
@@ -63,7 +68,7 @@ class AbstractField:
         object which returns the final result.
 
         :param name: Name of the method.
-        :param key: A key function (or other callable object)
+        :param key: A key function (or any other callable object)
             which will be applied to result.
         :param kwargs: Kwargs of method.
         :return: Value which represented by method.
@@ -71,7 +76,7 @@ class AbstractField:
             supported or if field not defined.
         """
         if name is None:
-            raise UndefinedField()
+            raise FieldError()
 
         def tail_parser(tails: str, obj: Any) -> Any:
             """Return method from end of tail.
@@ -80,18 +85,21 @@ class AbstractField:
             :param obj: Search tail from this object
             :return last tailed method
             """
-            provider_name, method_name = tails.split('.', 1)
+            provider_name, method_name = tails.split(".", 1)
 
-            if '.' in method_name:
-                raise UnacceptableField()
+            if "." in method_name:
+                raise FieldError(name)
 
             attr = getattr(obj, provider_name)
             if attr is not None:
-                return getattr(attr, method_name)
+                try:
+                    return getattr(attr, method_name)
+                except AttributeError:
+                    raise FieldError(name)
 
         try:
             if name not in self._table:
-                if '.' not in name:
+                if "." not in name:
                     # Fix https://github.com/lk-geimfari/mimesis/issues/619
                     if name == self._gen.choice.Meta.name:
                         self._table[name] = self._gen.choice
@@ -108,37 +116,93 @@ class AbstractField:
                 return key(result)
             return result
         except KeyError:
-            raise UnsupportedField(name)
+            raise FieldError(name)
 
-    def __str__(self):
-        return '{} <{}>'.format(
-            self.__class__.__name__, self.locale)
+
+class Field(BaseField):
+    """Greedy evaluation field"""
+
+    class Meta:
+        eager = True
+
+    def __call__(self, *args: Any, **kwargs: Any) -> Any:
+        return self.perform(*args, **kwargs)
+
+    def __str__(self) -> str:
+        return "{} <{}>".format(self.__class__.__name__, self.locale)
 
 
 class Schema:
     """Class which return list of filled schemas."""
 
-    def __init__(self, schema: SchemaType) -> None:
+    def __init__(self, schema: Callable[[], JSON]) -> None:
         """Initialize schema.
 
         :param schema: A schema (must be a callable object).
         """
-        if callable(schema):
+        if schema and callable(schema):
             self.schema = schema
         else:
-            raise UndefinedSchema()
+            raise SchemaError()
 
     def create(self, iterations: int = 1) -> List[JSON]:
-        """Return filled schema.
+        """Creates a list of a fulfilled schemas.
 
-        Create a list of a filled schemas with elements in
-        an amount of **iterations**.
+        .. note::
+            This method evaluates immediately, so be careful on creating
+            large datasets otherwise you're risking running out of memory.
 
-        :param iterations: Amount of iterations.
-        :return: List of willed schemas.
+            If you need a lazy version of this method, see
+            :class:`~mimesis.schema.Schema.iterator`
+
+        :param iterations: Number of iterations.
+        :return: List of fulfilled schemas.
         """
         return [self.schema() for _ in range(iterations)]
 
+    def loop(self) -> Iterator[JSON]:
+        """Fulfills a schema **infinitely** in a lazy way.
 
-# Alias for AbstractField
-Field = AbstractField
+        This method can be useful when you have some dynamic
+        conditions in depend on which the generation must be stopped.
+
+        Please, read all the notes and warnings below.
+
+        .. note::
+            Since data `mimesis` provides are limited, frequent calls of
+            this method can cause data duplication.
+
+        .. warning::
+            Do not use this method without interrupt conditions, otherwise,
+            you're risking running out of memory.
+
+        .. warning::
+            **Never** call `list()`, `tuple()` or any other callable which tries to
+            evaluate the whole lazy object on this method.
+
+            No, I'm serious, mate, **NEVER!**.
+
+        :return: An infinite iterator with fulfilled schemas.
+        """
+
+        warnings.warn(
+            "You're iterating over the infinite object! "
+            "The Schema.loop() can cause a serious memory leak."
+            "Please, see: https://mimesis.name/api.html#mimesis.schema.Schema.loop"
+        )
+
+        while True:
+            yield self.schema()
+
+    def iterator(self, iterations: int = 1) -> Iterator[JSON]:
+        """Fulfills schema in a lazy way.
+
+        :param iterations: Number of iterations.
+        :return: List of fulfilled schemas.
+        """
+
+        if iterations < 1:
+            raise ValueError("The number of iterations must be greater than 0.")
+
+        for item in range(iterations):
+            yield self.schema()

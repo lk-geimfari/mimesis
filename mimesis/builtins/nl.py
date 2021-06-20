@@ -2,24 +2,26 @@
 
 """Specific data provider for Netherlands (nl)."""
 
-from mimesis import locales
+from typing import Optional
+
 from mimesis.builtins.base import BaseSpecProvider
+from mimesis.locales import Locale
 from mimesis.typing import Seed
 
-__all__ = ['NetherlandsSpecProvider']
+__all__ = ["NetherlandsSpecProvider"]
 
 
 class NetherlandsSpecProvider(BaseSpecProvider):
     """Class that provides special data for Netherlands (nl)."""
 
-    def __init__(self, seed: Seed = None):
+    def __init__(self, seed: Optional[Seed] = None) -> None:
         """Initialize attributes."""
-        super().__init__(locale=locales.NL, seed=seed)
+        super().__init__(locale=Locale.NL, seed=seed)
 
     class Meta:
         """The name of the provider."""
 
-        name = 'netherlands_provider'
+        name = "netherlands_provider"
 
     def bsn(self) -> str:
         """Generate a random, but valid ``Burgerservicenummer``.
@@ -29,6 +31,7 @@ class NetherlandsSpecProvider(BaseSpecProvider):
         :Example:
             255159705
         """
+
         def _is_valid_bsn(number: str) -> bool:
             total = 0
             multiplier = 9

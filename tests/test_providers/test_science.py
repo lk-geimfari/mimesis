@@ -3,46 +3,82 @@
 import re
 
 import pytest
-
 from mimesis import Science
+from mimesis.data.int.scientific import SI_PREFIXES, SI_PREFIXES_SYM
+from mimesis.enums import MeasureUnit, MetricPrefixSign
+from mimesis.exceptions import NonEnumerableError
 
 from . import patterns
 
 
 class TestScience(object):
-
     @pytest.fixture
-    def default_science(self):
+    def science(self):
         return Science()
 
     def test_str(self, science):
-        assert re.match(patterns.DATA_PROVIDER_STR_REGEX, str(science))
+        assert re.match(patterns.PROVIDER_STR_REGEX, str(science))
 
-    def test_chemical_element(self, science):
-        result = science.chemical_element(name_only=True)
-        assert len(result) >= 1
-
-        result = science.chemical_element(name_only=False)
-        assert isinstance(result, dict)
-
-    def test_atomic_number(self, default_science):
-        result = default_science.atomic_number()
-        assert isinstance(result, int)
-        assert result <= 119
-
-    def test_rna_sequence(self, default_science):
-        result = default_science.rna_sequence(length=10)
+    def test_rna_sequence(self, science):
+        result = science.rna_sequence(length=10)
         assert isinstance(result, str)
         assert len(result) == 10
 
-    def test_dna_sequence(self, default_science):
-        result = default_science.dna_sequence(length=10)
+    def test_dna_sequence(self, science):
+        result = science.dna_sequence(length=10)
         assert isinstance(result, str)
         assert len(result) == 10
+
+    @pytest.mark.parametrize(
+        "name",
+        [
+            MeasureUnit.MASS,
+            MeasureUnit.INFORMATION,
+            MeasureUnit.THERMODYNAMIC_TEMPERATURE,
+            MeasureUnit.AMOUNT_OF_SUBSTANCE,
+            MeasureUnit.ANGLE,
+            MeasureUnit.SOLID_ANGLE,
+            MeasureUnit.FREQUENCY,
+            MeasureUnit.FORCE,
+            MeasureUnit.PRESSURE,
+            MeasureUnit.ENERGY,
+            MeasureUnit.POWER,
+            MeasureUnit.ELECTRIC_CHARGE,
+            MeasureUnit.VOLTAGE,
+            MeasureUnit.ELECTRIC_CAPACITANCE,
+            MeasureUnit.ELECTRIC_RESISTANCE,
+            MeasureUnit.ELECTRICAL_CONDUCTANCE,
+            MeasureUnit.MAGNETIC_FLUX,
+            MeasureUnit.MAGNETIC_FLUX_DENSITY,
+            MeasureUnit.INDUCTANCE,
+            MeasureUnit.TEMPERATURE,
+            MeasureUnit.RADIOACTIVITY,
+        ],
+    )
+    def test_measure_unit(self, science, name):
+        result = science.measure_unit(name)
+        assert result in name.value
+        symbol = science.measure_unit(name, symbol=True)
+        assert symbol in name.value
+
+    @pytest.mark.parametrize(
+        "sign, symbol",
+        [
+            (MetricPrefixSign.POSITIVE, True),
+            (MetricPrefixSign.POSITIVE, False),
+            (MetricPrefixSign.NEGATIVE, True),
+            (MetricPrefixSign.NEGATIVE, False),
+        ],
+    )
+    def test_prefix(self, science, sign, symbol):
+        prefix = science.metric_prefix(sign=sign, symbol=symbol)
+        prefixes = SI_PREFIXES_SYM if symbol else SI_PREFIXES
+        assert prefix in prefixes[sign.value]
+        with pytest.raises(NonEnumerableError):
+            science.metric_prefix(sign="nil")
 
 
 class TestSeededScience(object):
-
     @pytest.fixture
     def s1(self, seed):
         return Science(seed=seed)
@@ -50,14 +86,6 @@ class TestSeededScience(object):
     @pytest.fixture
     def s2(self, seed):
         return Science(seed=seed)
-
-    def test_chemical_element(self, s1, s2):
-        assert s1.chemical_element() == s2.chemical_element()
-        assert s1.chemical_element(name_only=True) == \
-               s2.chemical_element(name_only=True)
-
-    def test_atomic_number(self, s1, s2):
-        assert s1.atomic_number() == s2.atomic_number()
 
     def test_rna_sequence(self, s1, s2):
         assert s1.rna_sequence() == s2.rna_sequence()

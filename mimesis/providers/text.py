@@ -2,42 +2,41 @@
 
 """Provides data related to text."""
 
-from typing import List, Tuple
+from typing import Any, List, Tuple
 
 from mimesis.data import SAFE_COLORS
 from mimesis.providers.base import BaseDataProvider
 
-__all__ = ['Text']
+__all__ = ["Text"]
 
 
 class Text(BaseDataProvider):
     """Class for generating text data."""
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
         """Initialize attributes.
 
         :param locale: Current locale.
         :param seed: Seed.
         """
         super().__init__(*args, **kwargs)
-        self._datafile = 'text.json'
+        self._datafile = "text.json"
         self._pull(self._datafile)
 
     class Meta:
         """Class for metadata."""
 
-        name = 'text'
+        name = "text"
 
-    def alphabet(self, lower_case: bool = False) -> list:
+    def alphabet(self, lower_case: bool = False) -> List[str]:
         """Get an alphabet for current locale.
 
         :param lower_case: Return alphabet in lower case.
         :return: Alphabet.
         """
-        case = 'uppercase' if \
-            not lower_case else 'lowercase'
+        case = "uppercase" if not lower_case else "lowercase"
 
-        alpha = self._data['alphabet'].get(case)
+        alpha: List[str] = self.extract(["alphabet", case])
         return alpha
 
     def level(self) -> str:
@@ -48,7 +47,7 @@ class Text(BaseDataProvider):
         :Example:
             critical.
         """
-        levels = self._data['level']
+        levels: List[str] = self.extract(["level"])
         return self.random.choice(levels)
 
     def text(self, quantity: int = 5) -> str:
@@ -57,9 +56,9 @@ class Text(BaseDataProvider):
         :param quantity: Quantity of sentences.
         :return: Text.
         """
-        text = ''
+        text = ""
         for _ in range(quantity):
-            text += ' ' + self.random.choice(self._data['text'])
+            text += " " + self.random.choice(self.extract(["text"]))
         return text.strip()
 
     def sentence(self) -> str:
@@ -85,7 +84,7 @@ class Text(BaseDataProvider):
         :Example:
             [science, network, god, octopus, love]
         """
-        words = self._data['words'].get('normal')
+        words = self.extract(["words", "normal"])
         words_list = [self.random.choice(words) for _ in range(quantity)]
         return words_list
 
@@ -107,8 +106,8 @@ class Text(BaseDataProvider):
         :Example:
             Damn.
         """
-        bad_words = self._data['words'].get('bad')
-        return self.random.choice(bad_words)
+        words: List[str] = self.extract(["words", "bad"])
+        return self.random.choice(words)
 
     def quote(self) -> str:
         """Get a random quote.
@@ -118,7 +117,7 @@ class Text(BaseDataProvider):
         :Example:
             "Bond... James Bond."
         """
-        quotes = self._data['quotes']
+        quotes: List[str] = self.extract(["quotes"])
         return self.random.choice(quotes)
 
     def color(self) -> str:
@@ -129,7 +128,7 @@ class Text(BaseDataProvider):
         :Example:
             Red.
         """
-        colors = self._data['color']
+        colors: List[str] = self.extract(["color"])
         return self.random.choice(colors)
 
     @staticmethod
@@ -139,9 +138,9 @@ class Text(BaseDataProvider):
         :param color: Hex color.
         :return: RGB tuple.
         """
-        if color.startswith('#'):
-            color = color.lstrip('#')
-        return tuple(int(color[i:i + 2], 16) for i in (0, 2, 4))
+        if color.startswith("#"):
+            color = color.lstrip("#")
+        return tuple(int(color[i : i + 2], 16) for i in (0, 2, 4))
 
     def hex_color(self, safe: bool = False) -> str:
         """Generate a random hex color.
@@ -155,8 +154,7 @@ class Text(BaseDataProvider):
         if safe:
             return self.random.choice(SAFE_COLORS)
 
-        return '#{:06x}'.format(
-            self.random.randint(0x000000, 0xffffff))
+        return "#{:06x}".format(self.random.randint(0x000000, 0xFFFFFF))
 
     def rgb_color(self, safe: bool = False) -> Tuple[int, ...]:
         """Generate a random rgb color tuple.
@@ -178,5 +176,5 @@ class Text(BaseDataProvider):
         :Example:
             No
         """
-        answers = self._data['answers']
+        answers: List[str] = self.extract(["answers"])
         return self.random.choice(answers)

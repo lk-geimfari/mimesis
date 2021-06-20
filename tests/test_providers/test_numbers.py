@@ -3,7 +3,6 @@ import decimal
 import re
 
 import pytest
-
 from mimesis import Numbers
 from mimesis.enums import NumTypes
 from mimesis.exceptions import NonEnumerableError
@@ -12,7 +11,6 @@ from . import patterns
 
 
 class TestNumbers(object):
-
     @pytest.fixture
     def numbers(self):
         return Numbers()
@@ -20,8 +18,14 @@ class TestNumbers(object):
     def test_str(self, numbers):
         assert re.match(patterns.PROVIDER_STR_REGEX, str(numbers))
 
+    def test_incremental(self):
+        numbers = Numbers()
+        for i in range(1, 50):
+            assert numbers.incremental() == i
+
     @pytest.mark.parametrize(
-        'start, end', [
+        "start, end",
+        [
             (1.2, 10),
             (10.4, 20.0),
             (20.3, 30.8),
@@ -39,10 +43,11 @@ class TestNumbers(object):
 
         result = numbers.floats(precision=4)
         for e in result:
-            assert len(str(e).split('.')[1]) <= 4
+            assert len(str(e).split(".")[1]) <= 4
 
     @pytest.mark.parametrize(
-        'start, end', [
+        "start, end",
+        [
             (1, 10),
             (10, 20),
             (20, 30),
@@ -59,7 +64,8 @@ class TestNumbers(object):
         assert isinstance(element, int)
 
     @pytest.mark.parametrize(
-        'start, end', [
+        "start, end",
+        [
             (1, 10),
             (10, 20),
             (20, 30),
@@ -76,16 +82,15 @@ class TestNumbers(object):
         assert isinstance(element, decimal.Decimal)
 
     @pytest.mark.parametrize(
-        'start_real, end_real, start_imag, end_imag', [
+        "start_real, end_real, start_imag, end_imag",
+        [
             (1.2, 10, 1, 2.4),
             (10.4, 20.0, 2.3, 10),
             (20.3, 30.8, 2.4, 4.5),
         ],
     )
-    def test_complexes(self, numbers,
-                       start_real, end_real, start_imag, end_imag):
-        result = numbers.complexes(start_real, end_real,
-                                   start_imag, end_imag)
+    def test_complexes(self, numbers, start_real, end_real, start_imag, end_imag):
+        result = numbers.complexes(start_real, end_real, start_imag, end_imag)
         assert max(e.real for e in result) <= end_real
         assert min(e.real for e in result) >= start_real
         assert max(e.imag for e in result) <= end_imag
@@ -98,11 +103,12 @@ class TestNumbers(object):
 
         result = numbers.complexes(precision_real=4, precision_imag=6)
         for e in result:
-            assert len(str(e.real).split('.')[1]) <= 4
-            assert len(str(e.imag).split('.')[1]) <= 6
+            assert len(str(e.real).split(".")[1]) <= 4
+            assert len(str(e.imag).split(".")[1]) <= 6
 
     @pytest.mark.parametrize(
-        'sr, er, si, ei, pr, pi', [
+        "sr, er, si, ei, pr, pi",
+        [
             (1.2, 10, 1, 2.4, 15, 15),
             (10.4, 20.0, 2.3, 10, 10, 10),
             (20.3, 30.8, 2.4, 4.5, 12, 12),
@@ -118,14 +124,14 @@ class TestNumbers(object):
             precision_imag=pi,
         )
         assert isinstance(result, complex)
-        assert len(str(result.real).split('.')[1]) <= pr
-        assert len(str(result.imag).split('.')[1]) <= pi
+        assert len(str(result.real).split(".")[1]) <= pr
+        assert len(str(result.imag).split(".")[1]) <= pi
 
     def test_matrix(self, numbers):
         # TODO: Rewrite it to cover all cases
 
         with pytest.raises(NonEnumerableError):
-            numbers.matrix(num_type='int')
+            numbers.matrix(num_type="int")
 
         result = numbers.matrix(precision=4)
         assert len(result) == 10
@@ -133,7 +139,7 @@ class TestNumbers(object):
             assert len(row) == 10
             for e in row:
                 assert isinstance(e, float)
-                assert len(str(e).split('.')[1]) <= 4
+                assert len(str(e).split(".")[1]) <= 4
 
         result = numbers.matrix(m=5, n=5, num_type=NumTypes.INTEGERS, start=5)
         assert len(result) == 5
@@ -147,18 +153,19 @@ class TestNumbers(object):
         result = numbers.matrix(
             num_type=NumTypes.COMPLEXES,
             precision_real=precision_real,
-            precision_imag=precision_imag)
+            precision_imag=precision_imag,
+        )
         result[0][0] = 0.0001 + 0.000001j
         assert len(result) == 10
         for row in result:
             assert len(row) == 10
             for e in row:
-                real_str = '{:.{}f}'.format(e.real, precision_real)
-                imag_str = '{:.{}f}'.format(e.imag, precision_imag)
+                real_str = "{:.{}f}".format(e.real, precision_real)
+                imag_str = "{:.{}f}".format(e.imag, precision_imag)
                 assert float(real_str) == e.real
                 assert float(imag_str) == e.imag
-                assert len(real_str.split('.')[1]) <= precision_real
-                assert len(imag_str.split('.')[1]) <= precision_imag
+                assert len(real_str.split(".")[1]) <= precision_real
+                assert len(imag_str.split(".")[1]) <= precision_imag
 
     def test_integer(self, numbers):
         result = numbers.integer_number(-100, 100)
@@ -169,7 +176,7 @@ class TestNumbers(object):
         result = numbers.float_number(-100, 100, precision=15)
         assert isinstance(result, float)
         assert -100 <= result <= 100
-        assert len(str(result).split('.')[1]) <= 15
+        assert len(str(result).split(".")[1]) <= 15
 
     def test_decimal(self, numbers):
         result = numbers.decimal_number(-100, 100)
@@ -178,7 +185,6 @@ class TestNumbers(object):
 
 
 class TestSeededNumbers(object):
-
     @pytest.fixture
     def n1(self, seed):
         return Numbers(seed=seed)
@@ -186,6 +192,9 @@ class TestSeededNumbers(object):
     @pytest.fixture
     def n2(self, seed):
         return Numbers(seed=seed)
+
+    def test_incremental(self, n1, n2):
+        assert n1.incremental() == n2.incremental()
 
     def test_floats(self, n1, n2):
         assert n1.floats() == n2.floats()
@@ -197,8 +206,9 @@ class TestSeededNumbers(object):
 
     def test_integers(self, n1, n2):
         assert n1.integers() == n2.integers()
-        assert n1.integers(start=-999, end=999, n=10) == \
-               n2.integers(start=-999, end=999, n=10)
+        assert n1.integers(start=-999, end=999, n=10) == n2.integers(
+            start=-999, end=999, n=10
+        )
 
     def test_complexes(self, n1, n2):
         assert n1.complexes() == n2.complexes()

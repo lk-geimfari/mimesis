@@ -9,7 +9,7 @@ files (`File name`) which include data related to some data providers (`Provider
 .----------------------------.
 ├── address.json   # Address()
 ├── builtin.json   # YourSpecProvider()
-├── business.json  # Business()
+├── business.json  # Finance()
 ├── datetime.json  # Datetime()
 ├── food.json      # Food()
 ├── person.json    # Person()
@@ -46,7 +46,7 @@ Before Pull Request:
 - Rename folder `locale_template` to `your-locale-code`.
 - Make sure that you have replaced all `["Tests""]` sections with data for your locale.
 - Make sure that you have **removed** all `"__COMMENT_KEY__": "Description"` from json files. This data only for developers.
-- Add your locale to `SUPPORTED_LOCALES` in `mimesis/locales.py`.
+- Add your locale to `mimesis.locales.Locale` in `mimesis/locales.py`.
 - Format the content of json files alphabetically using [jsoneditoronline.org](http://jsoneditoronline.org)
 - If your locale uses shortened address format, then add your locale code to `SHORTENED_ADDRESS_FMT` in `mimesis/data/int/address.py`
 - Make sure that you have added currency symbol for your locale to `CURRENCY_SYMBOLS` in `mimesis/data/int/business.py`

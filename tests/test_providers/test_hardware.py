@@ -2,7 +2,6 @@
 import re
 
 import pytest
-
 from mimesis import Hardware
 from mimesis.data import (
     CPU,
@@ -23,7 +22,6 @@ from . import patterns
 
 
 class TestHardware(object):
-
     @pytest.fixture
     def hard(self):
         return Hardware()
@@ -50,7 +48,7 @@ class TestHardware(object):
         assert isinstance(result, str)
 
     def test_cpu_frequency(self, hard):
-        result = hard.cpu_frequency().split('G')[0]
+        result = hard.cpu_frequency().split("G")[0]
         assert float(result) < 4.4
 
     def test_cpu(self, hard):
@@ -87,7 +85,6 @@ class TestHardware(object):
 
 
 class TestSeededHardware(object):
-
     @pytest.fixture
     def h1(self, seed):
         return Hardware(seed=seed)

@@ -18,7 +18,7 @@ from mimesis.data import (
 )
 from mimesis.providers.base import BaseProvider
 
-__all__ = ['Hardware']
+__all__ = ["Hardware"]
 
 
 class Hardware(BaseProvider):
@@ -27,7 +27,7 @@ class Hardware(BaseProvider):
     class Meta:
         """Class for metadata."""
 
-        name = 'hardware'
+        name = "hardware"
 
     def resolution(self) -> str:
         """Get a random screen resolution.
@@ -67,7 +67,7 @@ class Hardware(BaseProvider):
         :Example:
             4.0 GHz.
         """
-        return '{}GHz'.format(
+        return "{}GHz".format(
             self.random.uniform(
                 a=1.5,
                 b=4.3,

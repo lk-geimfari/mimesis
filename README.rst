@@ -31,7 +31,7 @@ Description
      :target: https://pypi.org/project/mimesis/
      :alt: PyPi Version
 
-.. image:: https://img.shields.io/pypi/dm/mimesis   
+.. image:: https://img.shields.io/pypi/dm/mimesis
      :target: https://pypi.org/project/mimesis/
      :alt: PyPI - Downloads
 
@@ -39,10 +39,13 @@ Description
      :target: https://badge.fury.io/py/mimesis
      :alt: Python version
 
-Mimesis is a high-performance fake data generator for Python, which provides data for a variety of
+Mimesis (/mɪˈmiːsɪs, Ancient Greek: μίμησις, mīmēsis) is a high-performance fake data generator for Python, which provides data for a variety of
 purposes in a variety of languages. The fake data could be used to populate a testing database,
 create fake API endpoints, create JSON and XML files of arbitrary structure, anonymize data taken
 from production and etc.
+
+Mimesis 5.0.0 contains breaking changes, so make sure you've pinned a version of the package you use.
+
 
 Installation
 ------------
@@ -91,19 +94,20 @@ Usage
 This library is really easy to use and everything you need is just import an object which
 represents a type of data you need (we call such object a *Provider*).
 
-In example below we import provider `Person <https://mimesis.name/api.html#person>`_,
+In the example below we import provider `Person <https://mimesis.name/api.html#person>`_,
 which represents data related to personal information, such as name, surname, email and etc:
 
 .. code:: python
 
     >>> from mimesis import Person
-    >>> person = Person('en')
+    >>> from mimesis.locales import Locale
+    >>> person = Person(Locale.EN)
 
     >>> person.full_name()
     'Brande Sears'
 
-    >>> person.email(domains=['mimesis.name'])
-    'roccelline1878@mimesis.name'
+    >>> person.email(domains=['example.com'])
+    'roccelline1878@example.com'
 
     >>> person.email(domains=['mimesis.name'], unique=True)
     'f272a05d39ec46fdac5be4ac7be45f3f@mimesis.name'
@@ -129,16 +133,18 @@ Let's take a look how it works:
 .. code:: python
 
     >>> from mimesis import Person
+    >>> from mimesis.locales import Locale
     >>> from mimesis.enums import Gender
 
-    >>> de = Person('de')
-    >>> en = Person('en')
+    >>> de = Person(locale=Locale.DE)
+    >>> en = Person(locale=Locale.EN)
 
     >>> de.full_name(gender=Gender.FEMALE)
     'Sabrina Gutermuth'
 
     >>> en.full_name(gender=Gender.MALE)
     'Layne Gallagher'
+
 
 .. _locales: https://mimesis.name/getting_started.html#locales
 
@@ -149,7 +155,7 @@ Mimesis support over twenty different data providers available,
 which can produce data related to people, food, computer hardware,
 transportation, addresses, internet and more.
 
-See `API Reference <https://mimesis.name/getting_started.html#data-providers>`_ for more info.
+See `Data Providers <https://mimesis.name/getting_started.html#data-providers>`_ for more info.
 
 How to Contribute
 -----------------
@@ -170,7 +176,7 @@ How to Contribute
 Useful links
 ------------
 
-I have a Telegram channel where I daily post news, announces and all the open-source 
+I have a Telegram channel where I daily post news, announces and all the open-source
 goodies I found, so subscribe: `@the_art_of_development <https://t.me/the_art_of_development>`_.
 
 Thanks
@@ -182,7 +188,8 @@ Supported by `JetBrains <https://www.jetbrains.com/?from=mimesis>`_.
 Disclaimer
 ----------
 
-The authors of `Mimesis` do not assume any responsibility for how you use it or how you use data generated with it. This library was designed with good intentions to make testing easier. Do not use the data generated with Mimesis for illegal purposes.
+The authors of `Mimesis` do not assume any responsibility for how you use it or how you use data generated with it.
+This library was designed with good intentions to make testing easier. Do not use the data generated with Mimesis for illegal purposes.
 
 License
 -------

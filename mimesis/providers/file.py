@@ -3,41 +3,42 @@
 """File data provider."""
 
 import re
-from typing import Optional
+from typing import Any, Optional
 
 from mimesis.data import EXTENSIONS, MIME_TYPES
 from mimesis.enums import FileType, MimeType
+from mimesis.locales import Locale
 from mimesis.providers.base import BaseProvider
 from mimesis.providers.text import Text
 
-__all__ = ['File']
+__all__ = ["File"]
 
 
 class File(BaseProvider):
     """Class for generate data related to files."""
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
         """Initialize attributes.
 
         :param args: Arguments.
         :param kwargs: Keyword arguments.
         """
         super().__init__(*args, **kwargs)
-        self.__text = Text('en', seed=self.seed)
+        self._text = Text(Locale.EN, seed=self.seed)
 
     class Meta:
         """Class for metadata."""
 
-        name = 'file'
+        name = "file"
 
-    def __sub(self, string: str = '') -> str:
+    def __sub(self, string: str = "") -> str:
         """Replace spaces in string.
 
         :param string: String.
         :return: String without spaces.
         """
-        replacer = self.random.choice(['_', '-'])
-        return re.sub(r'\s+', replacer, string.strip())
+        replacer = self.random.choice(["_", "-"])
+        return re.sub(r"\s+", replacer, string.strip())
 
     def extension(self, file_type: Optional[FileType] = None) -> str:
         """Get a random file extension from list.
@@ -48,7 +49,7 @@ class File(BaseProvider):
         :Example:
             .py
         """
-        key = self._validate_enum(item=file_type, enum=FileType)
+        key = self.validate_enum(item=file_type, enum=FileType)
         extensions = EXTENSIONS[key]
         return self.random.choice(extensions)
 
@@ -58,7 +59,7 @@ class File(BaseProvider):
         :param type_: Enum object MimeType.
         :return: Mime type.
         """
-        key = self._validate_enum(item=type_, enum=MimeType)
+        key = self.validate_enum(item=type_, enum=MimeType)
         types = MIME_TYPES[key]
         return self.random.choice(types)
 
@@ -73,10 +74,9 @@ class File(BaseProvider):
             56 kB
         """
         num = self.random.randint(minimum, maximum)
-        unit = self.random.choice(
-            ['bytes', 'kB', 'MB', 'GB', 'TB'])
+        unit = self.random.choice(["bytes", "kB", "MB", "GB", "TB"])
 
-        return '{num} {unit}'.format(
+        return "{num} {unit}".format(
             num=num,
             unit=unit,
         )
@@ -90,10 +90,10 @@ class File(BaseProvider):
         :Example:
             legislative.txt
         """
-        name = self.__text.word()
+        name = self._text.word()
         ext = self.extension(file_type)
 
-        return '{name}{ext}'.format(
+        return "{name}{ext}".format(
             name=self.__sub(name),
             ext=ext,
         )

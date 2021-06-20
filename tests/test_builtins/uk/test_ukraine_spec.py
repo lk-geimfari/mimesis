@@ -1,5 +1,4 @@
 import pytest
-
 from mimesis.builtins import UkraineSpecProvider
 from mimesis.enums import Gender
 from mimesis.exceptions import NonEnumerableError
@@ -11,7 +10,8 @@ def ukraine():
 
 
 @pytest.mark.parametrize(
-    'gender', [
+    "gender",
+    [
         Gender.FEMALE,
         Gender.MALE,
     ],
@@ -23,4 +23,4 @@ def test_patronymic(ukraine, gender):
     assert len(result) >= 4
 
     with pytest.raises(NonEnumerableError):
-        ukraine.patronymic(gender='nil')
+        ukraine.patronymic(gender="nil")

@@ -2,16 +2,16 @@ Contributing Guidelines
 -----------------------
 
 The `source code`_ and `issue tracker`_ are hosted on GitHub. *Mimesis*
-is tested against Python 3.6 through 3.9 on `GitHub Actions`_ and `AppVeyor_`. Test coverage
-is monitored with `Codecov`_.
+is tested against Python 3.6 through 3.9 on `GitHub Actions`_ and `AppVeyor_`.
+
+Test coverage is monitored with `Codecov`_.
 
 Dependencies
 ~~~~~~~~~~~~
 
 We use ``poetry`` to manage dependencies.
 So, please do not use ``virtualenv`` or ``pip`` directly.
-Before going any further, please,
-take a moment to read the `official documentation <https://poetry.eustace.io/>`_
+Before going any further, please, take a moment to read the `official documentation <https://poetry.eustace.io/>`_
 about ``poetry`` to know some basics.
 
 Firstly, install ``poetry``, it is recommended to do so with ``pip``:
@@ -49,7 +49,7 @@ To add a new dependency you can run:
 Code Style
 ~~~~~~~~~~
 
-Every contributor must follow the `PEP8`_ code style.
+Every contributor must follow the `PEP8`_ code style. We're using ``black`` for formatting code.
 
 Annotating
 ~~~~~~~~~~
@@ -82,86 +82,6 @@ Documenting
 ~~~~~~~~~~~
 
 Always add docstrings for your modules, classes, methods and functions.
-Below you can see a great example of module:
-
-.. code:: python
-
-    """Demonstrate high quality docstrings.
-
-    Module-level docstrings appear as the first "statement" in a module. Remember,
-    that while strings are regular Python statements, comments are not, so an
-    inline comment may precede the module-level docstring.
-
-    After importing a module, you can access this special string object through the
-    ``__doc__`` attribute; yes, it's actually available as a runtime attribute,
-    despite not being given an explicit name! The ``__doc__`` attribute is also
-    what is rendered when you call ``help()`` on a module, or really any other
-    object in Python.
-
-    You can also document a package using the module-level docstring in the
-    package's ``__init__.py`` file.
-
-    """
-
-
-    class Example(object):
-        """Illustrate class-level docstring.
-
-        Classes use a special whitespace convention: the opening and closing quotes
-        are preceded and followed by a blank line, respectively. No other
-        docstrings should be preceded or followed by anything but code.
-
-        A blank line at the end of a multi-line docstring before the closing
-        quotation marks simply makes it easier for tooling to auto-format
-        paragraphs (wrapping them at 79 characters, per PEP8), without the closing
-        quotation marks interfering.
-
-        """
-
-        def __init__(self, *args, **kwargs) -> None:
-            """Illustrate method-level docstring.
-
-            All public callables should have docstrings, including magic methods
-            like ``__init__()``.
-
-            You'll notice that all these docstrings are wrapped in triple double
-            quotes, as opposed to just "double quotes", 'single quotes', or
-            '''triple single quotes.''' This is a convention for consistency and
-            readability.
-
-            ..note:: Note must look like that.
-
-            :param foo: Description of foo.
-            :param bar: Description of bar.
-
-            """
-            super().__init__(*args, **kwargs)
-
-        def foo(self) -> str:
-            """Return 'foo'.
-
-            You can also specify summary with a lot of details about
-            how the method works on multiple lines if it's really needed.
-
-            :return: String ``foo``
-            """
-            return 'foo'
-
-
-    def pi() -> float:
-        """Illustrate function-level docstring.
-
-        Note that all docstrings begin with a one-line summary. The summary is
-        written in the imperative mood ("do", "use", "find", "return", "render",
-        etc) and ends with a period. The method signature is not, in any way,
-        duplicated into the comments (that would be difficult to maintain).
-
-        All subsequent paragraphs in a docstring are indented exactly the same as
-        the summary line. The same applies to the closing quotation marks.
-
-        """
-        return 3.14
-
 
 Comment only things that are not obvious: hacks, optimizations, complex algorithms.
 Obvious code does not require any additional comments.
@@ -180,10 +100,10 @@ To run tests, simply:
 
     ⟩ make test
 
-Check out logs of GitHub Actions or AppVeyor if tests were failed on creating
+Check out logs of **GitHub Actions** or **AppVeyor** if tests were failed on creating
 PR, there you can find useful information.
 
-The tests are randomly shuffled by pytest-randomly. To rerun the tests with the previous seed use:
+The tests are randomly shuffled by ``pytest-randomly``. To rerun the tests with the previous seed use:
 
 .. code:: text
 
@@ -224,10 +144,260 @@ do not create issue which does not related to features or bug reports.
 New Locale
 ~~~~~~~~~~
 
+Add following files to the directory ``mimesis/data/{LOCALE_CODE}/``:
+
+``address.json``:
+
+.. code:: json
+
+   {
+     "address_fmt": "{st_num} {st_name} {st_sfx}",
+     "city": [
+       "Test"
+     ],
+     "continent": [
+       "Test"
+     ],
+     "country": {
+       "current_locale": "Test",
+       "name": [
+         "Test"
+       ]
+     },
+     "postal_code_fmt": "#####",
+     "state": {
+       "abbr": [
+         "Test"
+       ],
+       "name": [
+         "Test"
+       ]
+     },
+     "street": {
+       "name": [
+         "Test"
+       ],
+       "suffix": [
+         "Test"
+       ]
+     }
+   }
+
+
+``builtin.json``:
+
+.. code:: json
+
+   {
+     "any": {
+       "structure": [
+         "which",
+         "you",
+         "need"
+       ]
+     }
+   }
+
+``business.json``:
+
+.. code:: json
+
+   {
+     "company": {
+       "name": [
+         "Test"
+       ],
+       "type": {
+         "abbr": [
+           "Test"
+         ],
+         "title": [
+           "Test"
+         ]
+       }
+     },
+     "currency-code": "Test",
+     "price-format": "# Test",
+     "numeric-decimal": ".",
+     "numeric-thousands": ",",
+     "numeric-frac-digits": 2
+   }
+
+
+``datetime.json``:
+
+.. code:: json
+
+   {
+     "day": {
+       "abbr": [
+         "Test"
+       ],
+       "name": [
+         "Test"
+       ]
+     },
+     "formats": {
+       "date": "%m/%d/%Y",
+       "time": "%H:%M:%S"
+     },
+     "month": {
+       "abbr": [
+         "Test"
+       ],
+       "name": [
+         "Test"
+       ]
+     },
+     "periodicity": [
+       "Test"
+     ]
+   }
+
+``food.json``:
+
+.. code:: json
+
+   {
+     "dishes": [
+       "Test"
+     ],
+     "drinks": [
+       "Test"
+     ],
+     "fruits": [
+       "Test"
+     ],
+     "spices": [
+       "Test"
+     ],
+     "vegetables": [
+       "Test"
+     ]
+   }
+
+
+``person.json``:
+
+.. code:: json
+
+   {
+     "academic_degree": [
+       "Test"
+     ],
+     "gender": [
+       "Test"
+     ],
+     "language": [
+       "Test"
+     ],
+     "names": {
+       "female": [
+         "Test"
+       ],
+       "male": [
+         "Test"
+       ]
+     },
+     "__COMMENT_NATIONALITY__": "Optional -> nationality: {female: [], male: []}",
+     "nationality": [
+       "Test"
+     ],
+     "occupation": [
+       "Test"
+     ],
+     "political_views": [
+       "Test"
+     ],
+     "__COMMENT_SURNAMES__": "Optional -> surnames: {female: [], male: []}",
+     "surnames": [
+       "Test"
+     ],
+     "title": {
+       "female": {
+         "typical": [
+           "Test"
+         ],
+         "academic": [
+           "Test"
+         ]
+       },
+       "male": {
+         "typical": [
+           "Test"
+         ],
+         "academic": [
+           "Test"
+         ]
+       }
+     },
+     "university": [
+       "Test"
+     ],
+     "views_on": [
+       "Test"
+     ],
+     "worldview": [
+       "Test"
+     ],
+     "telephone_fmt": [
+       "###-###-####",
+       "(###) ###-####",
+       "1-###-###-####"
+     ]
+   }
+
+
+``text.json``:
+
+.. code:: json
+
+   {
+     "alphabet": {
+       "uppercase": [
+         "Test"
+       ],
+       "lowercase": [
+         "Test"
+       ]
+     },
+     "answers": [
+       "Yes",
+       "No",
+       "Maybe"
+     ],
+     "color": [
+       "Test"
+     ],
+     "level": [
+       "low",
+       "moderate",
+       "high",
+       "very high",
+       "extreme",
+       "critical"
+     ],
+     "quotes": [
+       "Test"
+     ],
+     "text": [
+       "Test"
+     ],
+     "words": {
+       "bad": [
+         "Test"
+       ],
+       "normal": [
+         "Test"
+       ]
+     }
+   }
+
+
+
 We have created a directory with a real structure which you can use as
 great example ``mimesis/data/locale_template`` if you want to add a new
 locale.
-
 
 Releases
 ~~~~~~~~

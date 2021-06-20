@@ -4,14 +4,14 @@
 
 from calendar import monthrange, timegm
 from datetime import date, datetime, time, timedelta
-from typing import List, Optional, Union
+from typing import Any, List, Optional, Union
 
 from mimesis.compat import pytz
 from mimesis.data import GMT_OFFSETS, ROMAN_NUMS, TIMEZONES
 from mimesis.providers.base import BaseDataProvider
 from mimesis.typing import Date, DateTime, Time
 
-__all__ = ['Datetime']
+__all__ = ["Datetime"]
 
 
 class Datetime(BaseDataProvider):
@@ -20,23 +20,23 @@ class Datetime(BaseDataProvider):
     # See: https://git.io/Jf15A
     CURRENT_YEAR = datetime.now().year
 
-    def __init__(self, *args, **kwargs):
-        """Initialize attributes.
-
-        :param locale: Current locale.
-        """
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
+        """Initialize attributes."""
         super().__init__(*args, **kwargs)
-        self._datafile = 'datetime.json'
+        self._datafile = "datetime.json"
         self._pull(self._datafile)
 
     class Meta:
         """Class for metadata."""
 
-        name = 'datetime'
+        name = "datetime"
 
     @staticmethod
-    def bulk_create_datetimes(date_start: DateTime,
-                              date_end: DateTime, **kwargs) -> List[DateTime]:
+    def bulk_create_datetimes(
+        date_start: DateTime,
+        date_end: DateTime,
+        **kwargs: Any,
+    ) -> List[DateTime]:
         """Bulk create datetime objects.
 
         This method creates list of datetime objects from
@@ -50,13 +50,11 @@ class Datetime(BaseDataProvider):
         * ``seconds``
         * ``microseconds``
 
-        See datetime module documentation for more:
-        https://docs.python.org/3.7/library/datetime.html#timedelta-objects
-
+        See :py:class:`datetime.timedelta` for more details.
 
         :param date_start: Begin of the range.
         :param date_end: End of the range.
-        :param kwargs: Keyword arguments for datetime.timedelta
+        :param kwargs: Keyword arguments for :py:class:`datetime.timedelta`
         :return: List of datetime objects
         :raises: ValueError: When ``date_start``/``date_end`` not passed and
             when ``date_start`` larger than ``date_end``.
@@ -64,10 +62,10 @@ class Datetime(BaseDataProvider):
         dt_objects = []
 
         if not date_start and not date_end:
-            raise ValueError('You must pass date_start and date_end')
+            raise ValueError("You must pass date_start and date_end")
 
         if date_end < date_start:
-            raise ValueError('date_start can not be larger than date_end')
+            raise ValueError("date_start can not be larger than date_end")
 
         while date_start <= date_end:
             date_start += timedelta(**kwargs)
@@ -84,7 +82,7 @@ class Datetime(BaseDataProvider):
         """
         year = self.year(start, end)
         week = self.random.randint(1, 52)
-        return '{year}-W{week}'.format(
+        return "{year}-W{week}".format(
             year=year,
             week=week,
         )
@@ -95,8 +93,8 @@ class Datetime(BaseDataProvider):
         :param abbr: Abbreviated day name.
         :return: Day of the week.
         """
-        key = 'abbr' if abbr else 'name'
-        days = self._data['day'].get(key)
+        key = "abbr" if abbr else "name"
+        days: List[str] = self.extract(["day", key])
         return self.random.choice(days)
 
     def month(self, abbr: bool = False) -> str:
@@ -105,8 +103,8 @@ class Datetime(BaseDataProvider):
         :param abbr: Abbreviated month name.
         :return: Month name.
         """
-        key = 'abbr' if abbr else 'name'
-        months = self._data['month'].get(key)
+        key = "abbr" if abbr else "name"
+        months: List[str] = self.extract(["month", key])
         return self.random.choice(months)
 
     def year(self, minimum: int = 1990, maximum: int = CURRENT_YEAR) -> int:
@@ -130,7 +128,7 @@ class Datetime(BaseDataProvider):
 
         :return: Periodicity.
         """
-        periodicity = self._data['periodicity']
+        periodicity: List[str] = self.extract(["periodicity"])
         return self.random.choice(periodicity)
 
     def date(self, start: int = 2000, end: int = CURRENT_YEAR) -> Date:
@@ -146,7 +144,7 @@ class Datetime(BaseDataProvider):
         date_object = date(year, month, day)
         return date_object
 
-    def formatted_date(self, fmt: str = '', **kwargs) -> str:
+    def formatted_date(self, fmt: str = "", **kwargs: Any) -> str:
         """Generate random date as string.
 
         :param fmt: The format of date, if None then use standard
@@ -157,7 +155,7 @@ class Datetime(BaseDataProvider):
         date_obj = self.date(**kwargs)
 
         if not fmt:
-            fmt = self._data['formats'].get('date')
+            fmt = self.extract(["formats", "date"])
 
         return date_obj.strftime(fmt)
 
@@ -174,7 +172,7 @@ class Datetime(BaseDataProvider):
         )
         return random_time
 
-    def formatted_time(self, fmt: str = '') -> str:
+    def formatted_time(self, fmt: str = "") -> str:
         """Generate string formatted time.
 
         :param fmt: The format of time, if None then use standard
@@ -184,7 +182,7 @@ class Datetime(BaseDataProvider):
         time_obj = self.time()
 
         if not fmt:
-            fmt = self._data['formats'].get('time')
+            fmt = self.extract(["formats", "time"])
         return time_obj.strftime(fmt)
 
     def day_of_month(self) -> int:
@@ -208,8 +206,9 @@ class Datetime(BaseDataProvider):
         """
         return self.random.choice(GMT_OFFSETS)
 
-    def datetime(self, start: int = 2000, end: int = CURRENT_YEAR,
-                 timezone: Optional[str] = None) -> DateTime:
+    def datetime(
+        self, start: int = 2000, end: int = CURRENT_YEAR, timezone: Optional[str] = None
+    ) -> DateTime:
         """Generate random datetime.
 
         :param start: Minimum value of year.
@@ -223,13 +222,13 @@ class Datetime(BaseDataProvider):
         )
         if timezone:
             if not pytz:
-                raise ImportError('Timezones are supported only with pytz')
+                raise ImportError("Timezones are supported only with pytz")
             tz = pytz.timezone(timezone)
             datetime_obj = tz.localize(datetime_obj)
 
         return datetime_obj
 
-    def formatted_datetime(self, fmt: str = '', **kwargs) -> str:
+    def formatted_datetime(self, fmt: str = "", **kwargs: Any) -> str:
         """Generate datetime string in human readable format.
 
         :param fmt: Custom format (default is format for current locale)
@@ -239,13 +238,13 @@ class Datetime(BaseDataProvider):
         dt_obj = self.datetime(**kwargs)
 
         if not fmt:
-            date_fmt = self._data['formats'].get('date')
-            time_fmt = self._data['formats'].get('time')
-            fmt = '{} {}'.format(date_fmt, time_fmt)
+            date_fmt = self.extract(["formats", "date"])
+            time_fmt = self.extract(["formats", "time"])
+            fmt = "{} {}".format(date_fmt, time_fmt)
 
         return dt_obj.strftime(fmt)
 
-    def timestamp(self, posix: bool = True, **kwargs) -> Union[str, int]:
+    def timestamp(self, posix: bool = True, **kwargs: Any) -> Union[str, int]:
         """Generate random timestamp.
 
         :param posix: POSIX time.
@@ -257,4 +256,4 @@ class Datetime(BaseDataProvider):
         if posix:
             return timegm(stamp.utctimetuple())
 
-        return stamp.strftime('%Y-%m-%dT%H:%M:%SZ')
+        return stamp.strftime("%Y-%m-%dT%H:%M:%SZ")

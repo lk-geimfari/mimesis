@@ -1,5 +1,4 @@
 import pytest
-
 from mimesis.builtins.pl import PolandSpecProvider
 from mimesis.enums import Gender
 from mimesis.providers import Datetime
@@ -56,8 +55,16 @@ def test_nip(pl):
     assert validate_nip(nip)
 
 
-def test_pesel(pl):
-    pesel = pl.pesel()
+@pytest.mark.parametrize(
+    "gender",
+    [
+        Gender.FEMALE,
+        Gender.MALE,
+        None,
+    ],
+)
+def test_pesel(pl, gender):
+    pesel = pl.pesel(gender=gender)
     assert len(pesel) == 11
     assert validate_pesel(pesel)
 

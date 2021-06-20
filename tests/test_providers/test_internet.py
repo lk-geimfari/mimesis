@@ -4,16 +4,14 @@ import re
 from ipaddress import IPv4Address, IPv6Address
 
 import pytest
-
 from mimesis import Internet, data
-from mimesis.enums import Layer, MimeType, PortRange, TLDType
+from mimesis.enums import MimeType, PortRange, TLDType
 from mimesis.exceptions import NonEnumerableError
 
 from . import patterns
 
 
 class TestInternet(object):
-
     @pytest.fixture
     def net(self):
         return Internet()
@@ -29,11 +27,25 @@ class TestInternet(object):
         result = net.hashtags(quantity=5)
         assert len(result) == 5
         result = net.hashtags(quantity=1)
-        assert result.replace('#', '') in data.HASHTAGS
+        assert result.replace("#", "") in data.HASHTAGS
 
     def test_home_page(self, net):
         result = net.home_page()
         assert re.match(patterns.HOME_PAGE, result)
+
+    def test_slug(self, net):
+        with pytest.raises(TypeError):
+            net.slug(3)
+
+        with pytest.raises(ValueError):
+            net.slug(parts_count=13)
+
+        with pytest.raises(ValueError):
+            net.slug(parts_count=1)
+
+        parts_count = 5
+        parts = net.slug(parts_count=parts_count).split("-")
+        assert len(parts) == parts_count
 
     def test_user_agent(self, net):
         result = net.user_agent()
@@ -44,9 +56,10 @@ class TestInternet(object):
         assert result is not None
 
     @pytest.mark.parametrize(
-        'w, h, keywords, writable, res_type', [
-            (900, 900, ['love', 'passion', 'death'], False, str),
-            (800, 800, {'love', 'passion', 'death'}, False, str),
+        "w, h, keywords, writable, res_type",
+        [
+            (900, 900, ["love", "passion", "death"], False, str),
+            (800, 800, {"love", "passion", "death"}, False, str),
             (800, 800, None, False, str),
             # (700, 700, ['love', 'passion', 'death'], True, bytes),
         ],
@@ -61,26 +74,7 @@ class TestInternet(object):
         assert isinstance(result, res_type)
         if res_type == str:
             assert re.match(patterns.STOCK_IMAGE, result)
-            assert result.endswith('?' + ','.join(keywords or []))
-
-    @pytest.mark.parametrize(
-        'layer', [
-            Layer.APPLICATION,
-            Layer.DATA_LINK,
-            Layer.NETWORK,
-            Layer.PHYSICAL,
-            Layer.PRESENTATION,
-            Layer.SESSION,
-            Layer.TRANSPORT,
-        ],
-    )
-    def test_network_protocol(self, net, layer):
-        result = net.network_protocol(layer=layer)
-        assert result in data.NETWORK_PROTOCOLS[layer.value]
-
-    def test_network_protocol_exception(self, net):
-        with pytest.raises(NonEnumerableError):
-            net.network_protocol(layer='nil')
+            assert result.endswith("?" + ",".join(keywords or []))
 
     def test_ip_v4_object(self, net):
         ip = net.ip_v4_object()
@@ -89,24 +83,26 @@ class TestInternet(object):
         assert re.match(patterns.IP_V4_REGEX, ip.exploded)
         assert isinstance(ip, IPv4Address)
 
+    def test_ip_v4(
+        self,
+        net,
+    ):
+        assert re.match(patterns.IP_V4_REGEX, net.ip_v4())
+
     @pytest.mark.parametrize(
-        'with_port, port_range', [
-            (False, PortRange.ALL),
-            (True, PortRange.ALL),
-            (True, PortRange.WELL_KNOWN),
-            (True, PortRange.EPHEMERAL),
-            (True, PortRange.REGISTERED),
+        "port_range",
+        [
+            PortRange.ALL,
+            PortRange.WELL_KNOWN,
+            PortRange.EPHEMERAL,
+            PortRange.REGISTERED,
         ],
     )
-    def test_ip_v4(self, net, with_port, port_range):
-        ip = net.ip_v4(with_port, port_range)
-
-        if not with_port:
-            assert re.match(patterns.IP_V4_REGEX, ip)
-        else:
-            port = int(ip.split(':')[-1])
-            port_start, port_end = port_range.value
-            assert port_start <= port <= port_end
+    def test_ip_v4_with_port(self, net, port_range):
+        ip = net.ip_v4_with_port(port_range)
+        port = int(ip.split(":")[-1])
+        port_start, port_end = port_range.value
+        assert port_start <= port <= port_end
 
     def test_ip_v6_object(self, net):
         ip = net.ip_v6_object()
@@ -128,7 +124,8 @@ class TestInternet(object):
         assert result in data.HTTP_METHODS
 
     @pytest.mark.parametrize(
-        'mime_type', [
+        "mime_type",
+        [
             MimeType.APPLICATION,
             MimeType.AUDIO,
             MimeType.IMAGE,
@@ -139,12 +136,12 @@ class TestInternet(object):
     )
     def test_content_type(self, net, mime_type):
         ct = net.content_type(mime_type=mime_type)
-        ct = ct.split(':')[1].strip()
+        ct = ct.split(":")[1].strip()
         assert ct in data.MIME_TYPES[mime_type.value]
 
     def test_content_type_wrong_arg(self, net):
         with pytest.raises(NonEnumerableError):
-            net.content_type(mime_type='nil')
+            net.content_type(mime_type="nil")
 
     def test_http_status_code(self, net):
         result = net.http_status_code()
@@ -155,7 +152,8 @@ class TestInternet(object):
         assert result in data.HTTP_STATUS_MSGS
 
     @pytest.mark.parametrize(
-        'domain_type', [
+        "domain_type",
+        [
             TLDType.CCTLD,
             TLDType.GTLD,
             TLDType.GEOTLD,
@@ -164,30 +162,32 @@ class TestInternet(object):
         ],
     )
     def test_top_level_domain(self, net, domain_type):
-        result = net.top_level_domain(tld_type=domain_type)
-        assert result is not None
-        assert result in data.TLD[domain_type.value]
+        res_a = net.top_level_domain(tld_type=domain_type)
+        res_b = net.tld(tld_type=domain_type)
+        assert res_a in data.TLD[domain_type.value]
+        assert res_b in data.TLD[domain_type.value]
 
     def test_top_level_domain_unsupported(self, net):
         with pytest.raises(NonEnumerableError):
-            net.top_level_domain(tld_type='nil')
+            net.top_level_domain(tld_type="nil")
 
     @pytest.mark.parametrize(
-        'range_, excepted', [
+        "port_range, excepted",
+        [
             (PortRange.ALL, (1, 65535)),
             (PortRange.EPHEMERAL, (49152, 65535)),
             (PortRange.REGISTERED, (1024, 49151)),
         ],
     )
-    def test_port(self, net, range_, excepted):
-        result = net.port(port_range=range_)
+    def test_port(self, net, port_range, excepted):
+        result = net.port(port_range=port_range)
         assert (result >= excepted[0]) and (result <= excepted[1])
+
         with pytest.raises(NonEnumerableError):
-            net.port('nill')
+            net.port("nil")
 
 
 class TestSeededInternet(object):
-
     @pytest.fixture
     def i1(self, seed):
         return Internet(seed=seed)
@@ -205,33 +205,35 @@ class TestSeededInternet(object):
 
     def test_home_page(self, i1, i2):
         assert i1.home_page() == i2.home_page()
-        assert i1.home_page(tld_type=TLDType.GEOTLD) == \
-               i2.home_page(tld_type=TLDType.GEOTLD)
+        assert i1.home_page(tld_type=TLDType.GEOTLD) == i2.home_page(
+            tld_type=TLDType.GEOTLD
+        )
 
     def test_user_agent(self, i1, i2):
         assert i1.user_agent() == i2.user_agent()
 
     def test_image_placeholder(self, i1, i2):
         assert i1.image_placeholder() == i2.image_placeholder()
-        assert i1.image_placeholder(width=128, height=128) == \
-               i2.image_placeholder(width=128, height=128)
-
-    def test_network_protocol(self, i1, i2):
-        assert i1.network_protocol() == i2.network_protocol()
-        assert i1.network_protocol(layer=Layer.PHYSICAL) == \
-               i2.network_protocol(layer=Layer.PHYSICAL)
+        assert i1.image_placeholder(width=128, height=128) == i2.image_placeholder(
+            width=128, height=128
+        )
 
     def test_ip_v4(self, i1, i2):
         assert i1.ip_v4() == i2.ip_v4()
-        assert i1.ip_v4(with_port=True) == i2.ip_v4(with_port=True)
-        assert i1.ip_v4(with_port=True, port_range=PortRange.ALL) == \
-               i2.ip_v4(with_port=True, port_range=PortRange.ALL)
+
+    def test_ip_v4_with_port(self, i1, i2):
+        assert i1.ip_v4_with_port(port_range=PortRange.ALL) == i2.ip_v4_with_port(
+            port_range=PortRange.ALL
+        )
 
     def test_ip_v4_object(self, i1, i2):
         assert i1.ip_v4_object() == i2.ip_v4_object()
 
     def test_ip_v6(self, i1, i2):
         assert i1.ip_v6() == i2.ip_v6()
+
+    def test_slug(self, i1, i2):
+        assert i1.slug(parts_count=2) == i2.slug(parts_count=2)
 
     def test_ip_v6_object(self, i1, i2):
         assert i1.ip_v6_object() == i2.ip_v6_object()
@@ -244,8 +246,9 @@ class TestSeededInternet(object):
 
     def test_content_type(self, i1, i2):
         assert i1.content_type() == i2.content_type()
-        assert i1.content_type(mime_type=MimeType.APPLICATION) == \
-               i2.content_type(mime_type=MimeType.APPLICATION)
+        assert i1.content_type(mime_type=MimeType.APPLICATION) == i2.content_type(
+            mime_type=MimeType.APPLICATION
+        )
 
     def test_http_status_code(self, i1, i2):
         assert i1.http_status_code() == i2.http_status_code()
@@ -255,10 +258,12 @@ class TestSeededInternet(object):
 
     def test_top_level_domain(self, i1, i2):
         assert i1.top_level_domain() == i2.top_level_domain()
-        assert i1.top_level_domain(tld_type=TLDType.UTLD) == \
-               i2.top_level_domain(tld_type=TLDType.UTLD)
+        assert i1.top_level_domain(tld_type=TLDType.UTLD) == i2.top_level_domain(
+            tld_type=TLDType.UTLD
+        )
 
     def test_port(self, i1, i2):
         assert i1.port() == i2.port()
-        assert i1.port(port_range=PortRange.REGISTERED) == \
-               i2.port(port_range=PortRange.REGISTERED)
+        assert i1.port(port_range=PortRange.REGISTERED) == i2.port(
+            port_range=PortRange.REGISTERED
+        )

@@ -1,0 +1,31 @@
+{
+  "company": {
+    "type": {
+      "abbr": [
+        "a.s.",
+        "akc.",
+        "k.s.",
+        "o.p.s.",
+        "s.p.",
+        "s.r.o.",
+        "spol.",
+        "v.o.s.",
+        "z.s."
+      ],
+      "title": [
+        "Akciová společnost",
+        "Komanditní společnost",
+        "Obecně prospěšná společnost",
+        "Společnost s ručením omezeným",
+        "Státní podnik",
+        "Veřejná obchodní společnost",
+        "Zapsaný spolek"
+      ]
+    },
+    "name": [
+      "Building Audit",
+      "DATASCAN"
+    ]
+  },
+  "currency-code": "CZK"
+}
