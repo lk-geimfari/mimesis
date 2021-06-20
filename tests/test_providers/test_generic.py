@@ -106,11 +106,6 @@ class TestSeededGeneric(object):
     def test_generic_finance(self, g1, g2):
         assert g1.finance.company() == g2.finance.company()
 
-    def test_generic_clothing(self, g1, g2):
-        s1 = g1.clothing.european_size()
-        s2 = g2.clothing.european_size()
-        assert s1 == s2
-
     def test_generic_code(self, g1, g2):
         assert g1.code.locale_code() == g2.code.locale_code()
         assert g1.code.issn() == g2.code.issn()
