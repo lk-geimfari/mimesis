@@ -69,11 +69,6 @@ def test_choice_non_sequence_items(choice):
         choice(items=5)
 
 
-def test_choice_non_integer_length(choice):
-    with pytest.raises(TypeError):
-        choice(items="abc", length=3.4)
-
-
 def test_choice_empty_items(choice):
     with pytest.raises(ValueError):
         choice(items=[])

@@ -2,7 +2,7 @@
 
 """Provides a random choice from items in a sequence."""
 import collections.abc
-from typing import Any, Optional, Sequence, Union
+from typing import Any, List, Optional, Sequence, Union
 
 from mimesis.providers.base import BaseProvider
 
@@ -57,8 +57,6 @@ class Choice(BaseProvider):
         >>> choice(items='aabbbccccddddd', length=4, unique=True)
         'cdba'
         """
-        if not isinstance(length, int):
-            raise TypeError("**length** must be integer.")
 
         if not isinstance(items, collections.abc.Sequence):
             raise TypeError("**items** must be non-empty sequence.")
@@ -72,7 +70,7 @@ class Choice(BaseProvider):
         if length == 0:
             return self.random.choice(items)
 
-        data = []  # type: ignore
+        data: List[str] = []
         if unique and len(set(items)) < length:  # avoid an infinite while loop
             raise ValueError(
                 "There are not enough unique elements in "
@@ -83,7 +81,6 @@ class Choice(BaseProvider):
             if (unique and item not in data) or not unique:
                 data.append(item)
 
-        # TODO: Always return list
         if isinstance(items, list):
             return data
         elif isinstance(items, tuple):
