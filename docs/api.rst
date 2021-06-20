@@ -196,14 +196,6 @@ BinaryFile
    :members:
    :special-members: __init__
 
-
-Clothing
--------------
-
-.. autoclass:: mimesis.Clothing
-   :members:
-   :special-members: __init__
-
 Code
 ----
 

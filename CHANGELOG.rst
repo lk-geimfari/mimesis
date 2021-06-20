@@ -34,6 +34,7 @@ Version 5.0.0
 - Removed data provider ``UnitSystem()``, use instead ``Science()``
 - Removed data provider ``Structure()``, use instead ``schema.Schema``
 - Removed ``GermanySpecProvider``
+- Removed ``Clothing``
 - Removed method ``copyright()`` of ``Finance()``
 - Removed method ``network_protocol()`` of ``Internet()``
 - Removed params ``with_port`` and ``port_range`` for ``ip_v4()`` of ``Internet()``. Use ``ip_v4_with_port()`` instead

@@ -6,7 +6,6 @@ from mimesis.providers.address import Address
 from mimesis.providers.base import BaseDataProvider, BaseProvider
 from mimesis.providers.binaryfile import BinaryFile
 from mimesis.providers.choice import Choice
-from mimesis.providers.clothing import Clothing
 from mimesis.providers.code import Code
 from mimesis.providers.cryptographic import Cryptographic
 from mimesis.providers.date import Datetime
@@ -35,7 +34,6 @@ __all__ = [
     "BinaryFile",
     "Finance",
     "Choice",
-    "Clothing",
     "Code",
     "Choice",
     "Datetime",

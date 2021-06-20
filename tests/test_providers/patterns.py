@@ -25,7 +25,7 @@ EMAIL_REGEX = r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)"
 CREDIT_CARD_REGEX = r"[\d]+((-|\s)?[\d]+)+"
 
 PROVIDER_STR_REGEX = (
-    r"^(Finance|Clothing|Code|Development"
+    r"^(Finance|Code|Development"
     r"|File|Games|Hardware|Internet|Numbers|Path|Payment|"
     r"Transport|Cryptographic|Science)"
 )
