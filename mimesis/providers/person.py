@@ -343,8 +343,7 @@ class Person(BaseDataProvider):
         :Example:
             48.
         """
-        weight = self.random.randint(minimum, maximum)
-        return weight
+        return self.random.randint(minimum, maximum)
 
     def blood_type(self) -> str:
         """Get a random blood type.
