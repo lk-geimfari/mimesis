@@ -11,6 +11,7 @@ Version 5.0.0
 - Rename ``Business()`` to ``Finance()``
 
 **Fixed**:
+
 - Fix inheritance issues for ``Generic``, now it inherits ``BaseProvider`` instead of ``BaseDataProvider``
 - Fix locale-independent provider to make them accepts keyword-only arguments
 - Fix DenmarkSpecProvider CPR to generate valid CPR numbers.
@@ -31,10 +32,10 @@ Version 5.0.0
 **Removed**:
 
 - Removed invalid names and surnames from ``person.json`` for ``ru`` locale
-- Removed data provider ``UnitSystem()``, use instead ``Science()``
-- Removed data provider ``Structure()``, use instead ``schema.Schema``
-- Removed ``GermanySpecProvider``
-- Removed ``Clothing``
+- Removed data provider ``UnitSystem()``, use ``Science()`` instead
+- Removed data provider ``Structure()``, use ``schema.Schema`` instead
+- Removed builtin provider ``GermanySpecProvider``
+- Removed data provider ``Clothing``, use ``Numbers`` instead
 - Removed method ``copyright()`` of ``Finance()``
 - Removed method ``network_protocol()`` of ``Internet()``
 - Removed params ``with_port`` and ``port_range`` for ``ip_v4()`` of ``Internet()``. Use ``ip_v4_with_port()`` instead
