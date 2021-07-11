@@ -22,7 +22,7 @@ Version 5.0.0
 
 - Added class ``Locale`` to ``mimesis.locales``
 - Added ``measure_unit()`` and ``.metric_prefix()`` methods for ``Science``
-- Added methods ``.iterator()`` and ``.infinite()`` for ``schema.Schema``
+- Added ``.iterator()`` for ``schema.Schema``
 - Added methods ``.slug()`` and ``ip_v4_with_port()`` for ``Internet()``
 - Added ``incremental()`` method for ``Numbers()``
 - Added methods ``.stock_ticker()``, ``.stock_name()`` and ``.stock_exchange()`` for ``Finance()``

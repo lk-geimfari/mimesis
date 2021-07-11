@@ -1,5 +1,4 @@
 import re
-import warnings
 from collections import Iterator
 
 import pytest
@@ -125,16 +124,3 @@ def test_schema_iterator(schema):
 
     with pytest.raises(ValueError):
         next(schema.iterator(0))
-
-
-def test_schema_loop(schema):
-
-    with warnings.catch_warnings():
-        warnings.simplefilter("ignore")
-        infinite = schema.loop()
-
-        result_1 = next(infinite)
-        result_2 = next(infinite)
-
-        assert result_1["timestamp"] != result_2["timestamp"]
-        assert result_1["owner"]["creator"] != result_2["owner"]["creator"]
