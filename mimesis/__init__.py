@@ -32,6 +32,8 @@ from .providers import (
     Transport,
 )
 
+from mimesis.schema import Schema, Field
+
 __all__ = [
     "Address",
     "BaseDataProvider",
@@ -56,6 +58,9 @@ __all__ = [
     "Cryptographic",
     # Has all:
     "Generic",
+    # Schema:
+    "Field",
+    "Schema",
     # Meta:
     "__version__",
     "__title__",
