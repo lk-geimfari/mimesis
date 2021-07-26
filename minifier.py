@@ -2,6 +2,8 @@ import json
 from pathlib import Path
 from typing import Iterable
 
+from colorama import Fore, Style
+
 
 def human_repr(num: float) -> str:
     for unit in ["B", "KB", "MB"]:
@@ -31,8 +33,8 @@ class Minimizer:
 
         info = (
             "\nTotal: "
-            f"\033[92m{before}\033[0m -> \033[92m{after}\033[0m. "
-            f"Compressed: \033[92m{saved}\033[0m\n"
+            f"{Fore.LIGHTGREEN_EX}{before}{Style.RESET_ALL} -> {Fore.LIGHTGREEN_EX}{after}{Style.RESET_ALL}. "
+            f"Compressed: {Fore.LIGHTGREEN_EX}{saved}{Style.RESET_ALL}\n"
         )
         print(info)
 
@@ -52,14 +54,14 @@ class Minimizer:
 
         rel_file = file.relative_to(file.parent.parent)
         info = (
-            f"\033[34m{rel_file}\033[0m : "
-            "\033[92mminimized\033[0m : "
-            f"\033[33m{before}\033[0m -> \033[92m{after}\033[0m"
+            f"{Fore.BLUE}{str(rel_file):<30}{Style.RESET_ALL} : "
+            f"{Fore.LIGHTGREEN_EX}minimized{Style.RESET_ALL} : "
+            f"{Fore.YELLOW}{before:<7}{Style.RESET_ALL} -> {Fore.LIGHTGREEN_EX}{after:<7}{Style.RESET_ALL}"
         )
         print(info)
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # pragma: no cover
     data_dir = Path(__file__).parent / "mimesis" / "data"
     files = sorted(data_dir.rglob("*.json"))
     Minimizer(files=files).run()
