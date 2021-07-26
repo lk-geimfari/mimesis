@@ -94,10 +94,6 @@ no_implicit_optional = true
 warn_return_any = true
 strict_equality = true
 
-[[tool.mypy.overrides]]
-module = "setup"
-ignore_errors = true
-
 [tool.isort]
 multi_line_output = 3
 include_trailing_comma = true
