@@ -24,12 +24,15 @@ jobs:
           key: ${{ runner.os }}-python-${{ matrix.python-version }}-venv-${{ hashFiles('**/poetry.lock') }}
       - name: Install dependencies
         run: poetry install --no-interaction
-      - run: |
-          poetry run python setup.py minify
-          poetry run python setup.py check --restructuredtext --strict
+      - name: Build and validate
+        run: |
+          poetry run task minify
+          poetry build
+          poetry run pip install --quiet --disable-pip-version-check "twine>=1.12"
+          poetry run twine check dist/*
       - name: Publish
         env:
           # https://python-poetry.org/docs/repositories/#configuring-credentials
           POETRY_PYPI_TOKEN_PYPI: ${{ secrets.POETRY_PYPI_TOKEN_PYPI }}
         run: |
-          poetry publish --build
+          poetry publish
