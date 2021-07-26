@@ -29,7 +29,7 @@ jobs:
           poetry run task minify
           poetry build
           poetry run pip install --quiet --disable-pip-version-check "twine>=1.12"
-          poetry run twine check dist/*
+          poetry run twine check --strict dist/*
       - name: Publish
         env:
           # https://python-poetry.org/docs/repositories/#configuring-credentials
