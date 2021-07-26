@@ -8,7 +8,7 @@ Email: <likid.geimfari@gmail.com>
 Repository: https://github.com/lk-geimfari/mimesis
 """
 
-from mimesis.schema import Schema, Field
+from mimesis.schema import Field, Schema
 
 from .providers import (
     Address,
