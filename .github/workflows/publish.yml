@@ -25,7 +25,7 @@ jobs:
       - name: Install dependencies
         run: poetry install --no-interaction
       - run: |
-          poetry python setup.py minify
+          poetry run python setup.py minify
           poetry run check-manifest
           poetry run python setup.py check --restructuredtext --strict
       - name: Publish
