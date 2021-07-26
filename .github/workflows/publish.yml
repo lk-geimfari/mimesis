@@ -26,7 +26,6 @@ jobs:
         run: poetry install --no-interaction
       - run: |
           poetry run python setup.py minify
-          poetry run check-manifest
           poetry run python setup.py check --restructuredtext --strict
       - name: Publish
         env:
