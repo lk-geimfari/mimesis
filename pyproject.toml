@@ -7,7 +7,7 @@ license = "MIT"
 readme = "README.rst"
 homepage = "https://github.com/lk-geimfari/mimesis"
 repository = "https://github.com/lk-geimfari/mimesis"
-documentation = "https://mimesis.readthedocs.io"
+documentation = "https://mimesis.name"
 keywords = [
     "fake",
     "mock",
