@@ -87,6 +87,7 @@ Patches and Suggestions
 -  Yusan `(aekt)`_
 -  Emil Madsen `(Skeen)`_
 -  Michael Oliver `(michael0liver)`_
+-  Oleg Höfling `(hoefling)`_
 
 
 .. _(lk-geimfari): https://github.com/lk-geimfari
@@ -152,3 +153,4 @@ Patches and Suggestions
 .. _(aekt): https://github.com/aekt
 .. _(michael0liver): https://github.com/aekt
 .. _(Skeen): https://github.com/Skeen
+.. _(hoefling): https://github.com/hoefling
