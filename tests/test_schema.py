@@ -1,5 +1,5 @@
 import re
-from collections import Iterator
+from collections.abc import Iterator
 
 import pytest
 from mimesis.builtins.en import USASpecProvider
