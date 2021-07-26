@@ -67,3 +67,45 @@ types-pytz = "^2021.1.0"
 [build-system]
 requires = ["poetry>=0.12"]
 build-backend = "poetry.masonry.api"
+
+[tool.pytest.ini_options]
+addopts = "--isort"
+testpaths = [
+    "mimesis",
+    "tests",
+]
+
+[tool.mypy]
+strict_optional = true
+check_untyped_defs = true
+ignore_errors = false
+ignore_missing_imports = true
+warn_no_return = false
+warn_unused_ignores = true
+warn_redundant_casts = true
+warn_unused_configs = true
+disallow_any_generics = true
+disallow_subclassing_any = true
+disallow_untyped_calls = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+warn_return_any = true
+strict_equality = true
+
+[[tool.mypy.overrides]]
+module = "setup"
+ignore_errors = true
+
+[tool.isort]
+multi_line_output = 3
+include_trailing_comma = true
+sections = [
+    "FUTURE",
+    "STDLIB",
+    "THIRDPARTY",
+    "FIRSTPARTY",
+    "LOCALFOLDER",
+]
+default_section = "FIRSTPARTY"
