@@ -8,6 +8,8 @@ Email: <likid.geimfari@gmail.com>
 Repository: https://github.com/lk-geimfari/mimesis
 """
 
+from mimesis.schema import Schema, Field
+
 from .providers import (
     Address,
     BaseDataProvider,
@@ -32,8 +34,6 @@ from .providers import (
     Text,
     Transport,
 )
-
-from mimesis.schema import Schema, Field
 
 __all__ = [
     "Address",
