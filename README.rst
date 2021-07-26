@@ -44,9 +44,6 @@ purposes in a variety of languages. The fake data could be used to populate a te
 create fake API endpoints, create JSON and XML files of arbitrary structure, anonymize data taken
 from production and etc.
 
-Mimesis 5.0.0 contains breaking changes, so make sure you've pinned a version of the package you use.
-
-
 Installation
 ------------
 
