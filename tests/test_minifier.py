@@ -37,7 +37,7 @@ def disable_colorama_codes(monkeypatch):
 @pytest.mark.usefixtures(disable_colorama_codes.__name__)
 def test_minimizer_reports_to_stdout(capsys, tmp_path):
     file = tmp_path / "spam.json"
-    file.write_text('{\n}')
+    file.write_text("{\n}")
     minifier = Minimizer(files=(file,))
     minifier.run()
     lines = capsys.readouterr().out.split("\n")
