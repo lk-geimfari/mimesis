@@ -432,7 +432,7 @@ dev = ["pre-commit", "tox", "pytest-asyncio"]
 
 [[package]]
 name = "pytest-randomly"
-version = "3.8.0"
+version = "3.10.0"
 description = "Pytest plugin to randomly order tests and control random.seed."
 category = "dev"
 optional = false
@@ -583,7 +583,7 @@ testing = ["pytest (>=4.6)", "pytest-checkdocs (>=1.2.3)", "pytest-flake8", "pyt
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.6"
-content-hash = "8762d1f0e5c44f6681d4973130a606f19d2acab585c1a67e4b7d764b05e29c97"
+content-hash = "4787baca388253035e82f712046d179cc4c7d0be2ad31f0193d26f9a9c9125f5"
 
 [metadata.files]
 appdirs = [
@@ -831,8 +831,8 @@ pytest-mock = [
     {file = "pytest_mock-3.6.1-py3-none-any.whl", hash = "sha256:30c2f2cc9759e76eee674b81ea28c9f0b94f8f0445a1b87762cadf774f0df7e3"},
 ]
 pytest-randomly = [
-    {file = "pytest-randomly-3.8.0.tar.gz", hash = "sha256:d9e21a72446757129378beea00bc9a32df1fb1cfd0bbe408be1ae9685bdf1209"},
-    {file = "pytest_randomly-3.8.0-py3-none-any.whl", hash = "sha256:f5b7a09e84ee1eabcdedbb73c51d0929ae2f582bab6941dbb513bb49296d6340"},
+    {file = "pytest-randomly-3.10.0.tar.gz", hash = "sha256:2252e597cc7cb383a29efac31f3e8f2a61aa68e30e4c126724f96dcc1f09371a"},
+    {file = "pytest_randomly-3.10.0-py3-none-any.whl", hash = "sha256:6935f7e4ec830307c8f699b04d8b04b370442315b5fde952f5b6e904e0525c99"},
 ]
 pytz = [
     {file = "pytz-2021.1-py2.py3-none-any.whl", hash = "sha256:eb10ce3e7736052ed3623d49975ce333bcd712c7bb19a58b9e2089d4057d0798"},
