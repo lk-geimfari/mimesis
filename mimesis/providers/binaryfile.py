@@ -27,7 +27,7 @@ class BinaryFile(BaseProvider):
         :param seed: Seed.
         """
         super().__init__(*args, **kwargs)
-        self._data_dir = Path(__file__).parent.parent
+        self._data_dir = Path(__file__).parent.parent.joinpath("data", "bin")
         self._sample_name = 'sample'
 
     class Meta:
@@ -47,7 +47,7 @@ class BinaryFile(BaseProvider):
         ],
     ) -> bytes:
         file_type = self.validate_enum(file_type, file_type.__class__)
-        file_path = self._data_dir.joinpath("data", "bin", f"{self._sample_name}.{file_type}")
+        file_path = self._data_dir.joinpath(f"{self._sample_name}.{file_type}")
 
         with open(file_path, "rb") as file:
             return file.read()
