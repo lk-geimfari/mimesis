@@ -107,7 +107,7 @@ class Random(random_module.Random):
         Basically, this method is just a simple wrapper around :py:class:`uuid.UUID`.
 
         :param unique: Generate only unique values.
-        :param length: Length of string. Default range is (min=16, max=128).
+        :param length: Length of string. Default range is [a, b].
         :return: Random string.
 
         """
