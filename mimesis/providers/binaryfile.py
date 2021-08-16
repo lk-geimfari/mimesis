@@ -28,7 +28,7 @@ class BinaryFile(BaseProvider):
         """
         super().__init__(*args, **kwargs)
         self._data_dir = Path(__file__).parent.parent.joinpath("data", "bin")
-        self._sample_name = 'sample'
+        self._sample_name = "sample"
 
     class Meta:
         """Class for metadata."""
