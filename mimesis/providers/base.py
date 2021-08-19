@@ -103,6 +103,9 @@ class BaseDataProvider(BaseProvider):
             locale = Locale.DEFAULT
 
         if isinstance(locale, str):
+            if locale not in Locale.values():
+                raise LocaleError(locale)
+
             locale = Locale(locale)
 
         if locale not in Locale:
