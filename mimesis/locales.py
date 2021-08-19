@@ -1,71 +1,54 @@
 # -*- coding: utf-8 -*-
 
 """This module provides constants for locale-dependent providers."""
+from enum import Enum
+from typing import Union
 
-from typing import Iterator, List
+from mimesis.exceptions import LocaleError
 
 __all__ = ["Locale"]
 
 
-class _Locale:
-    """This class provides access to the supported locales from one place.
+class Locale(Enum):
+    """This class provides access to the supported locales from one place."""
 
-    You should not use this class directly, use ``mimesis.locales.Locale`` instead.
-    """
+    CS = "cs"
+    DA = "da"
+    DE = "de"
+    DE_AT = "de-at"
+    DE_CH = "de-ch"
+    EL = "el"
+    EN = "en"
+    EN_AU = "en-au"
+    EN_CA = "en-ca"
+    EN_GB = "en-gb"
+    ES = "es"
+    ES_MX = "es-mx"
+    ET = "et"
+    FA = "fa"
+    FI = "fi"
+    FR = "fr"
+    HU = "hu"
+    IS = "is"
+    IT = "it"
+    JA = "ja"
+    KK = "kk"
+    KO = "ko"
+    NL = "nl"
+    NL_BE = "nl-be"
+    NO = "no"
+    PL = "pl"
+    PT = "pt"
+    PT_BR = "pt-br"
+    RU = "ru"
+    SK = "sk"
+    SV = "sv"
+    TR = "tr"
+    UK = "uk"
+    ZH = "zh"
+    DEFAULT = EN
 
-    def __init__(self) -> None:
-        """Initialize all the locales."""
-        self.CS = "cs"
-        self.DA = "da"
-        self.DE = "de"
-        self.DE_AT = "de-at"
-        self.DE_CH = "de-ch"
-        self.EL = "el"
-        self.EN = "en"
-        self.EN_AU = "en-au"
-        self.EN_CA = "en-ca"
-        self.EN_GB = "en-gb"
-        self.ES = "es"
-        self.ES_MX = "es-mx"
-        self.ET = "et"
-        self.FA = "fa"
-        self.FI = "fi"
-        self.FR = "fr"
-        self.HU = "hu"
-        self.IS = "is"
-        self.IT = "it"
-        self.JA = "ja"
-        self.KK = "kk"
-        self.KO = "ko"
-        self.NL = "nl"
-        self.NL_BE = "nl-be"
-        self.NO = "no"
-        self.PL = "pl"
-        self.PT = "pt"
-        self.PT_BR = "pt-br"
-        self.RU = "ru"
-        self.SK = "sk"
-        self.SV = "sv"
-        self.TR = "tr"
-        self.UK = "uk"
-        self.ZH = "zh"
-        self.DEFAULT = self.EN
+    @classmethod
+    def values(cls):
+        return [i.value for i in cls.__members__.values()]
 
-    def _get_all(self) -> List[str]:
-        values = set()
-
-        for name, code in self.__dict__.items():
-            if name.isupper():
-                values.add(code)
-
-        return list(values)
-
-    def __contains__(self, item: str) -> bool:
-        return item in self._get_all()
-
-    def __iter__(self) -> Iterator[str]:
-        for item in self._get_all():
-            yield item
-
-
-Locale = _Locale()
