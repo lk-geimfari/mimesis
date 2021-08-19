@@ -214,7 +214,7 @@ class BaseDataProvider(BaseProvider):
         :return: Provider with overridden locale.
         """
         try:
-            origin_locale = self.locale
+            origin_locale = Locale(self.locale)
             self._override_locale(locale)
             try:
                 yield self

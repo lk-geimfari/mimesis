@@ -18,7 +18,7 @@ class TestBase(object):
     @pytest.mark.parametrize(
         "locale, new_locale",
         [
-            ("en", "ru"),
+            (Locale.EN, Locale.RU),
         ],
     )
     def test_override(self, locale, new_locale):
@@ -48,9 +48,9 @@ class TestBase(object):
     @pytest.mark.parametrize(
         "locale, city",
         [
-            ("en", "New York"),
-            ("en-gb", "Aberystwyth"),
-            ("ru", "Москва"),
+            (Locale.EN, "New York"),
+            (Locale.EN_GB, "Aberystwyth"),
+            (Locale.RU, "Москва"),
         ],
     )
     def test_pull(self, locale, city):
@@ -115,9 +115,9 @@ class TestBase(object):
     @pytest.mark.parametrize(
         "inp, out",
         [
-            ("EN", "en"),
-            ("DE", "de"),
-            ("RU", "ru"),
+            (Locale.EN, "en"),
+            (Locale.DE, "de"),
+            (Locale.RU, "ru"),
         ],
     )
     def test_setup_locale(self, base_data_provider, inp, out):
@@ -148,10 +148,10 @@ class TestBase(object):
         with pytest.raises(NonEnumerableError):
             base_data_provider.validate_enum("", "")
 
-    @pytest.mark.parametrize("locale", list(Locale))
+    @pytest.mark.parametrize("locale", Locale)
     def test_get_current_locale(self, locale):
         base = BaseDataProvider(locale=locale)
-        assert locale == base.get_current_locale()
+        assert locale.value == base.get_current_locale()
 
 
 class TestSeededBase(object):

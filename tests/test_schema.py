@@ -17,7 +17,7 @@ def test_str(field):
 
 @pytest.fixture
 def default_field():
-    return Field("en")
+    return Field(locale=Locale.EN)
 
 
 @pytest.fixture(scope="module", params=list(Locale))
@@ -27,7 +27,7 @@ def field(request):
 
 @pytest.fixture
 def modified_field():
-    return Field("en", providers=(USASpecProvider,))
+    return Field(locale=Locale.EN, providers=(USASpecProvider,))
 
 
 def test_field(field):

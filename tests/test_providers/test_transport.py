@@ -51,12 +51,12 @@ class TestTransport(object):
 
     @pytest.mark.parametrize(
         "locale",
-        list(Locale),
+        Locale
     )
     def test_vehicle_registration_code(self, transport, locale):
         result = transport.vehicle_registration_code(locale=locale)
         if locale:
-            assert result in VRC_BY_LOCALES[locale]
+            assert result in VRC_BY_LOCALES[locale.value]
         else:
             assert result in VR_CODES
 

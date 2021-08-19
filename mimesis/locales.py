@@ -3,7 +3,6 @@
 """This module provides constants for locale-dependent providers."""
 from enum import Enum
 
-
 __all__ = ["Locale"]
 
 

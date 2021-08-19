@@ -12,6 +12,7 @@ from mimesis.data import (
     VR_CODES,
     VRC_BY_LOCALES,
 )
+from mimesis.locales import Locale
 from mimesis.providers.base import BaseProvider
 
 __all__ = ["Transport"]
@@ -82,13 +83,13 @@ class Transport(BaseProvider):
         plane = self.random.choice(AIRPLANES)
         return "{} {}".format(plane, model)
 
-    def vehicle_registration_code(self, locale: Optional[str] = None) -> str:
+    def vehicle_registration_code(self, locale: Optional[Locale] = None) -> str:
         """Get vehicle registration code of country.
 
         :param locale: Registration code for locale (country).
         :return: Vehicle registration code.
         """
         if locale:
-            return VRC_BY_LOCALES[locale]
+            return VRC_BY_LOCALES[locale.value]
 
         return self.random.choice(VR_CODES)
