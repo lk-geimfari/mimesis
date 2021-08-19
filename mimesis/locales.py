@@ -2,9 +2,7 @@
 
 """This module provides constants for locale-dependent providers."""
 from enum import Enum
-from typing import Union
 
-from mimesis.exceptions import LocaleError
 
 __all__ = ["Locale"]
 
@@ -51,4 +49,3 @@ class Locale(Enum):
     @classmethod
     def values(cls):
         return [i.value for i in cls.__members__.values()]
-

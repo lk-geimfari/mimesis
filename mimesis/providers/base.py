@@ -10,7 +10,7 @@ from functools import reduce
 from pathlib import Path
 from typing import Any, Generator, List, Optional
 
-from mimesis.exceptions import NonEnumerableError, LocaleError
+from mimesis.exceptions import LocaleError, NonEnumerableError
 from mimesis.locales import Locale
 from mimesis.random import Random, get_random_item, random
 from mimesis.typing import JSON, Seed
@@ -78,7 +78,7 @@ class BaseDataProvider(BaseProvider):
     """This is a base class for all data providers."""
 
     def __init__(
-            self, locale: Locale = Locale.DEFAULT, seed: Optional[Seed] = None
+        self, locale: Locale = Locale.DEFAULT, seed: Optional[Seed] = None
     ) -> None:
         """Initialize attributes for data providers.
 
@@ -196,14 +196,14 @@ class BaseDataProvider(BaseProvider):
         :param locale: Locale
         :return: Nothing.
         """
-        self.locale = locale
+        self._setup_locale(locale)
         self._pull.cache_clear()
         self._pull()
 
     @contextlib.contextmanager
     def override_locale(
-            self,
-            locale: Locale = Locale.DEFAULT,
+        self,
+        locale: Locale = Locale.DEFAULT,
     ) -> Generator["BaseDataProvider", None, None]:
         """Context manager which allows overriding current locale.
 

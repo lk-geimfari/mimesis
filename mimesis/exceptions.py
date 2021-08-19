@@ -4,11 +4,13 @@
 
 from typing import Any, Optional
 
+from mimesis.locales import Locale
+
 
 class LocaleError(ValueError):
     """Raised when a locale isn't supported."""
 
-    def __init__(self, locale: Optional[str] = None) -> None:
+    def __init__(self, locale: Optional[Locale] = None) -> None:
         """Initialize attributes for informative output.
 
         :param locale: Locale.

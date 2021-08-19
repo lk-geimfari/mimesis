@@ -27,7 +27,7 @@ class BaseField:
 
     def __init__(
         self,
-        locale: str = Locale.DEFAULT,
+        locale: Locale = Locale.DEFAULT,
         seed: Optional[Seed] = None,
         providers: Optional[Any] = None,
     ) -> None:
