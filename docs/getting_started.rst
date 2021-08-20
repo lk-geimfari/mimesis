@@ -380,7 +380,7 @@ then you got ``TypeError`` exception:
 
     >>> class InvalidProvider:
     ...     @staticmethod
-    ...     def hello():
+    ...     def hello() -> str:
     ...         return 'Hello!'
 
     >>> generic.add_provider(InvalidProvider)
