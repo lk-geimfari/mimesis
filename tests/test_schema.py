@@ -7,8 +7,7 @@ from mimesis.enums import Gender
 from mimesis.exceptions import FieldError, SchemaError
 from mimesis.locales import Locale
 from mimesis.schema import BaseField, Field, Schema
-
-from .test_providers import patterns
+from tests.test_providers import patterns
 
 
 def test_str(field):

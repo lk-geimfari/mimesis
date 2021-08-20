@@ -21,15 +21,15 @@ class TestBase(object):
             (Locale.EN, Locale.RU),
         ],
     )
-    def test_override(self, locale, new_locale):
+    def test_override_locale(self, locale, new_locale):
         provider = Person(locale)
-        assert provider.locale == locale
+        assert Locale(provider.locale) == locale
 
         with provider.override_locale(new_locale):
             assert "Жен." in provider._data["gender"]
-            assert provider.locale == new_locale
+            assert Locale(provider.locale) == new_locale
 
-        assert provider.locale == locale
+        assert Locale(provider.locale) == locale
         assert "Жен." not in provider._data["gender"]
 
     @pytest.mark.parametrize(

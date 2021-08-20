@@ -231,4 +231,4 @@ class BaseDataProvider(BaseProvider):
     def __str__(self) -> str:
         """Human-readable representation of locale."""
         locale = getattr(self, "locale", Locale.DEFAULT)
-        return "{} <{}>".format(self.__class__.__name__, locale)
+        return "{} <{}>".format(self.__class__.__name__, Locale(locale))

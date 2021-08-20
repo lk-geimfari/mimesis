@@ -49,10 +49,7 @@ class TestTransport(object):
         assert manufacturer in AIRPLANES
         assert len(model) == len(mask)
 
-    @pytest.mark.parametrize(
-        "locale",
-        Locale
-    )
+    @pytest.mark.parametrize("locale", Locale)
     def test_vehicle_registration_code(self, transport, locale):
         result = transport.vehicle_registration_code(locale=locale)
         if locale:
