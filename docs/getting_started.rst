@@ -333,6 +333,8 @@ specific data. This can be done like this:
 
 .. code:: python
 
+    >>> from mimesis import Generic
+    >>> from mimesis.locales import Locale
     >>> from mimesis.providers.base import BaseProvider
 
     >>> class SomeProvider(BaseProvider):
@@ -340,16 +342,20 @@ specific data. This can be done like this:
     ...         name = "some_provider"
     ...
     ...     @staticmethod
-    ...     def hello():
-    ...         return 'Hello!'
+    ...     def hello() -> str:
+    ...         return "Hello!"
 
     >>> class Another(BaseProvider):
-    ...     @staticmethod
-    ...     def bye():
-    ...         return "Bye!"
+    ...     def __init__(self, seed, message: str) -> None:
+    ...         super().__init__(seed=seed)
+    ...         self.message = message
+    ...
+    ...     def bye(self) -> str:
+    ...         return self.message
 
+    >>> generic = Generic(locale=Locale.DEFAULT)
     >>> generic.add_provider(SomeProvider)
-    >>> generic.add_provider(Another)
+    >>> generic.add_provider(Another, message="Bye!")
 
     >>> generic.some_provider.hello()
     'Hello!'
