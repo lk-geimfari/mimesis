@@ -40,7 +40,6 @@ class Address(BaseDataProvider):
         """Class for metadata."""
 
         name = "address"
-        data_provider = True
 
     @staticmethod
     def _dd_to_dms(num: float, _type: str) -> str:

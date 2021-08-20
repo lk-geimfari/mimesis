@@ -27,7 +27,6 @@ class Text(BaseDataProvider):
         """Class for metadata."""
 
         name = "text"
-        data_provider = True
 
     def alphabet(self, lower_case: bool = False) -> List[str]:
         """Get an alphabet for current locale.

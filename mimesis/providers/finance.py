@@ -34,7 +34,6 @@ class Finance(BaseDataProvider):
         """Class for metadata."""
 
         name = "finance"
-        data_provider = True
 
     def company(self) -> str:
         """Get a random company name.
