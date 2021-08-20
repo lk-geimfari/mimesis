@@ -89,20 +89,17 @@ Romanization of Cyrillic data
 -----------------------------
 
 If your locale belongs to the family of Cyrillic languages, but you need
-latinized locale-specific data, then you can use decorator :func:`~mimesis.decorators.romanize` which
+romanized locale-specific data, then you can use function :func:`~mimesis.shortcuts.romanize` which
 help you romanize your data.
 
 Example of usage for romanization of Russian full name:
 
 .. code:: python
 
-    >>> from mimesis.decorators import romanize
+    >>> from mimesis.shortcuts import romanize
+    >>> from mimesis.locales import Locale
 
-    >>> @romanize('ru')
-    ... def russian_name():
-    ...     return 'Вероника Денисова'
-
-    >>> russian_name()
+    >>> romanize('Вероника Денисова', locale=Locale.RU)
     'Veronika Denisova'
 
 
