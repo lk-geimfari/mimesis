@@ -93,13 +93,13 @@ class TestGeneric(object):
                 self.c = c
 
             class Meta:
-                name = 'custom_provider'
+                name = "custom_provider"
 
-        generic.add_provider(CustomProvider, a='a', b='b', c='c')
+        generic.add_provider(CustomProvider, a="a", b="b", c="c")
 
-        assert generic.custom_provider.a == 'a'
-        assert generic.custom_provider.b == 'b'
-        assert generic.custom_provider.c == 'c'
+        assert generic.custom_provider.a == "a"
+        assert generic.custom_provider.b == "b"
+        assert generic.custom_provider.c == "c"
 
     def test_dir(self, generic):
         providers = generic.__dir__()

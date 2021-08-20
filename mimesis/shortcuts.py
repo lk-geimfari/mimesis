@@ -4,6 +4,12 @@
 
 __all__ = ["luhn_checksum"]
 
+from string import ascii_letters, digits, punctuation
+from typing import Optional
+
+from mimesis import data
+from mimesis.locales import Locale, validate_locale
+
 
 def luhn_checksum(num: str) -> str:
     """Calculate a checksum for num using the Luhn algorithm.
@@ -18,3 +24,30 @@ def luhn_checksum(num: str) -> str:
         sx = sx - 9 if sx > 9 else sx
         check += sx
     return str(check * 9 % 10)
+
+
+def romanize(string: str, locale: Optional[Locale] = None) -> str:
+    """Romanize given string.
+
+    Supported locales are:
+        Locale.RU
+        Locale.UK
+        Locale.KK
+
+    :param string: Cyrillic string.
+    :param locale: Locale.
+    :return: Romanized string.
+    """
+    locale = validate_locale(locale)
+
+    # Cyrillic string can contain ascii
+    # symbols, digits and punctuation.
+    alphabet = {s: s for s in ascii_letters + digits + punctuation}
+    alphabet.update(
+        {
+            **data.ROMANIZATION_DICT[locale.value],
+            **data.COMMON_LETTERS,
+        }
+    )
+
+    return "".join([alphabet[i] for i in string if i in alphabet])

@@ -33,6 +33,7 @@ Version 5.0.0
 
 **Removed**:
 
+- Removed module ``decorators``. Use ``shortcuts.romanize`` to romanize Cyrillic strings.
 - Removed ``as_object`` parameter for ``.uuid()``. Now it returns string by default, if you need uuid4 object then use ``.uuid_object()``
 - Removed invalid names and surnames from ``person.json`` for ``ru`` locale
 - Removed data provider ``UnitSystem()``, use ``Science()`` instead
