@@ -5,7 +5,7 @@
 from string import ascii_letters, digits, punctuation
 from typing import Optional
 
-from mimesis import data
+from mimesis.data import COMMON_LETTERS, ROMANIZATION_DICT
 from mimesis.locales import Locale, validate_locale
 
 __all__ = ["romanize", "luhn_checksum"]
@@ -41,14 +41,14 @@ def romanize(string: str, locale: Optional[Locale] = None) -> str:
     locale = validate_locale(locale)
 
     if locale not in (Locale.RU, Locale.UK, Locale.KK):
-        raise ValueError(f'Romanization is not available for: {locale}')
+        raise ValueError(f"Romanization is not available for: {locale}")
 
     # Cyrillic string can contain ascii symbols, digits and punctuation.
     alphabet = {s: s for s in ascii_letters + digits + punctuation}
     alphabet.update(
         {
-            **data.ROMANIZATION_DICT[locale.value],
-            **data.COMMON_LETTERS,
+            **ROMANIZATION_DICT[locale.value],
+            **COMMON_LETTERS,
         }
     )
 
