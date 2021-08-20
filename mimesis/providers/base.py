@@ -21,7 +21,7 @@ __all__ = ["BaseDataProvider", "BaseProvider"]
 class BaseProvider:
     """This is a base class for all providers."""
 
-    def __init__(self, *, seed: Optional[Seed] = None) -> None:
+    def __init__(self, *, seed: Optional[Seed] = None, **kwargs: Any) -> None:
         """Initialize attributes.
 
         Keep in mind, that locale-independent data providers will work

@@ -112,7 +112,7 @@ class Generic(BaseProvider):
                     attributes.append(a)
         return attributes
 
-    def add_provider(self, cls: Type[BaseProvider], **kwargs) -> None:
+    def add_provider(self, cls: Type[BaseProvider], **kwargs: Any) -> None:
         """Add a custom provider to Generic() object.
 
         :param cls: Custom provider.
