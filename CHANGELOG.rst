@@ -41,10 +41,10 @@ Version 5.0.0
 - Removed data provider ``Clothing``, use ``Numbers`` instead
 - Removed method ``copyright()`` of ``Finance()``
 - Removed method ``network_protocol()`` of ``Internet()``
-- Removed params ``with_port`` and ``port_range`` for ``ip_v4()`` of ``Internet()``. Use ``ip_v4_with_port()`` instead
-- Removed method ``.sexual_orientation()``, ``.social_media_profile()`` and ``.avatar()`` of ``Person()``
-- Removed a bunch of useless custom exceptions and replaced them with ``FieldError``
-- Removed completely useless ``chemical_element`` and ``atomic_number`` methods of ``Science`` data provider and made it locale-independent
+- Removed params ``with_port`` and ``port_range`` for ``ip_v4()`` of ``Internet()``. Use ``ip_v4_with_port()`` instead.
+- Removed methods ``sexual_orientation``, ``social_media_profile`` and ``avatar`` of the ``Person()`` provider.
+- Removed a bunch of useless custom exceptions and replaced them with ``FieldError``.
+- Removed completely useless ``chemical_element`` and ``atomic_number`` methods of ``Science`` data provider and made it locale-independent.
 
 
 Version 4.1.3
