@@ -24,8 +24,8 @@ def test_russian_to_roma():
 
 def test_russian_mixed_text():
     assert (
-        shortcuts.romanize("Что-то там_4352-!@", locale=Locale.RU)
-        == "Chto-to tam_4352-!@"
+            shortcuts.romanize("Что-то там_4352-!@", locale=Locale.RU)
+            == "Chto-to tam_4352-!@"
     )
 
 
@@ -45,23 +45,23 @@ def test_romanize_russian_alphabet():
 
 def test_ukrainian():
     assert (
-        shortcuts.romanize("Українська мова!", locale=Locale.UK) == "Ukrayins’ka mova!"
+            shortcuts.romanize("Українська мова!", locale=Locale.UK) == "Ukrayins’ka mova!"
     )
 
 
 def test_kazakh():
     expected_result = "Python - eñ zhaqsy bağdarlamalau tili!"
     assert (
-        shortcuts.romanize("Python - ең жақсы бағдарламалау тілі!", locale=Locale.KK)
-        == expected_result
+            shortcuts.romanize("Python - ең жақсы бағдарламалау тілі!", locale=Locale.KK)
+            == expected_result
     )
 
 
-def test_not_implemented_error():
+def test_invalid_locale():
     with pytest.raises(LocaleError):
         shortcuts.romanize("Mimesis", locale="sdsdsd")
 
 
-# TODO: Fix me
-def test_error():
-    assert shortcuts.romanize("Mimesis", locale=Locale.DE)
+def test_romanize_unsupported_locale():
+    with pytest.raises(ValueError):
+        shortcuts.romanize("Mimesis", locale=Locale.DE)

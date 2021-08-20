@@ -40,8 +40,10 @@ def romanize(string: str, locale: Optional[Locale] = None) -> str:
     """
     locale = validate_locale(locale)
 
-    # Cyrillic string can contain ascii
-    # symbols, digits and punctuation.
+    if locale not in (Locale.RU, Locale.UK, Locale.KK):
+        raise ValueError(f'Romanization is not available for: {locale}')
+
+    # Cyrillic string can contain ascii symbols, digits and punctuation.
     alphabet = {s: s for s in ascii_letters + digits + punctuation}
     alphabet.update(
         {
