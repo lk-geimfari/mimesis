@@ -4,7 +4,7 @@
 
 import hashlib
 import secrets
-from typing import Any, Optional, Union
+from typing import Any, Optional
 from uuid import UUID, uuid4
 
 from mimesis.enums import Algorithm

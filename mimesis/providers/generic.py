@@ -70,7 +70,7 @@ class Generic(BaseProvider):
             # Check if a provider is locale-dependent.
             if issubclass(provider, BaseDataProvider):
                 setattr(self, f"_{name}", provider)
-            else:
+            elif issubclass(provider, BaseProvider):
                 setattr(self, name, provider(seed=self.seed))
 
     class Meta:
