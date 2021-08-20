@@ -69,10 +69,10 @@ PolandSpecProvider
    :members:
    :special-members: __init__
 
-Decorators
-==========
+Shortcuts
+=========
 
-.. automodule:: mimesis.decorators
+.. automodule:: mimesis.shortcuts
    :members:
 
 
