@@ -84,6 +84,23 @@ class TestGeneric(object):
         generic.add_provider(UnnamedProvider)
         assert generic.unnamedprovider.nothing() is None
 
+    def test_add_provider(self, generic):
+        class CustomProvider(BaseProvider):
+            def __init__(self, seed, a, b, c):
+                super().__init__(seed=seed)
+                self.a = a
+                self.b = b
+                self.c = c
+
+            class Meta:
+                name = 'custom_provider'
+
+        generic.add_provider(CustomProvider, a='a', b='b', c='c')
+
+        assert generic.custom_provider.a == 'a'
+        assert generic.custom_provider.b == 'b'
+        assert generic.custom_provider.c == 'c'
+
     def test_dir(self, generic):
         providers = generic.__dir__()
         for p in providers:

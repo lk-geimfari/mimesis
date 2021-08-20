@@ -58,7 +58,7 @@ class Generic(BaseProvider):
     )
 
     def __init__(
-        self, locale: Locale = Locale.DEFAULT, seed: Optional[Seed] = None
+            self, locale: Locale = Locale.DEFAULT, seed: Optional[Seed] = None
     ) -> None:
         """Initialize attributes lazily."""
         super().__init__(seed=seed)
@@ -112,7 +112,7 @@ class Generic(BaseProvider):
                     attributes.append(a)
         return attributes
 
-    def add_provider(self, cls: Type[BaseProvider]) -> None:
+    def add_provider(self, cls: Type[BaseProvider], **kwargs) -> None:
         """Add a custom provider to Generic() object.
 
         :param cls: Custom provider.
@@ -130,7 +130,11 @@ class Generic(BaseProvider):
                 name = cls.Meta.name  # type: ignore
             except AttributeError:
                 name = cls.__name__.lower()
-            setattr(self, name, cls(seed=self.seed))
+
+            if 'seed' in kwargs:
+                kwargs.pop('seed')
+
+            setattr(self, name, cls(seed=self.seed, **kwargs))
         else:
             raise TypeError("The provider must be a class")
 
