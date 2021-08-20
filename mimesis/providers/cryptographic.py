@@ -32,25 +32,19 @@ class Cryptographic(BaseProvider):
         name = "cryptographic"
 
     @staticmethod
-    def uuid(as_object: bool = False) -> Union[UUID, str]:
-        """Generate random UUID4.
+    def uuid_object() -> UUID:
+        """Generate UUID4 object.
 
-        This method returns string by default,
-        but you can make it return :py:class:`uuid.UUID` object using
-        parameter **as_object**
-
-        .. warning:: Seed is not applicable to this method,
-            because of its cryptographic-safe nature.
-
-        :param as_object: Returns :py:class:`uuid.UUID`.
-        :return: UUID.
+        :return: UUID4 object.
         """
-        uid = uuid4()
+        return uuid4()
 
-        if not as_object:
-            return str(uid)
+    def uuid(self) -> str:
+        """Generate UUID4 string.
 
-        return uid
+        :return: UUID4 as string.
+        """
+        return str(self.uuid_object())
 
     def hash(self, algorithm: Optional[Algorithm] = None) -> str:  # noqa: A003
         """Generate random hash.

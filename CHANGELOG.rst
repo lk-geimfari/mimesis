@@ -22,7 +22,7 @@ Version 5.0.0
 
 **Added**:
 
-- Added class ``Locale`` to ``mimesis.locales``
+- Added enum ``Locale`` to ``mimesis.enums`` and ``mimesis.locales``
 - Added ``measure_unit()`` and ``.metric_prefix()`` methods for ``Science``
 - Added ``.iterator()`` for ``schema.Schema``
 - Added methods ``.slug()`` and ``ip_v4_with_port()`` for ``Internet()``
@@ -32,6 +32,7 @@ Version 5.0.0
 
 **Removed**:
 
+- Removed ``as_object`` parameter for ``.uuid()``. Now it returns string by default, if you need uuid4 object then use ``.uuid_object()``
 - Removed invalid names and surnames from ``person.json`` for ``ru`` locale
 - Removed data provider ``UnitSystem()``, use ``Science()`` instead
 - Removed data provider ``Structure()``, use ``schema.Schema`` instead

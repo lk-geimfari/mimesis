@@ -17,19 +17,13 @@ class TestCryptographic(object):
     def test_str(self, crypto):
         assert re.match(patterns.PROVIDER_STR_REGEX, str(crypto))
 
-    @pytest.mark.parametrize(
-        "as_object",
-        [
-            True,
-            False,
-        ],
-    )
-    def test_uuid(self, crypto, as_object):
-        uuid_result = crypto.uuid(as_object=as_object)
-        if as_object:
-            assert isinstance(uuid_result, uuid.UUID)
-        else:
-            assert re.match(patterns.UUID_REGEX, crypto.uuid(as_object))
+    def test_uuid_object(self, crypto):
+        assert isinstance(crypto.uuid_object(), uuid.UUID)
+
+    def test_uuid(self, crypto):
+        uuid_result = crypto.uuid()
+        assert isinstance(uuid_result, str)
+        assert re.match(patterns.UUID_REGEX, uuid_result)
 
     @pytest.mark.parametrize(
         "algorithm, length",
@@ -95,9 +89,6 @@ class TestSeededCryptographic(object):
     @pytest.fixture
     def c2(self, seed):
         return Cryptographic(seed=seed)
-
-    def test_uuid(self, c1, c2):
-        assert c1.uuid() != c2.uuid()
 
     def test_hash(self, c1, c2):
         assert c1.hash() != c2.hash()
