@@ -60,3 +60,8 @@ def test_kazakh():
 def test_not_implemented_error():
     with pytest.raises(LocaleError):
         shortcuts.romanize("Mimesis", locale="sdsdsd")
+
+
+# TODO: Fix me
+def test_error():
+    assert shortcuts.romanize("Mimesis", locale=Locale.DE)
