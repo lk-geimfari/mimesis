@@ -42,6 +42,7 @@ class Person(BaseDataProvider):
         """Class for metadata."""
 
         name = "person"
+        data_provider = True
 
     def age(self, minimum: int = 16, maximum: int = 66) -> int:
         """Get a random integer value.

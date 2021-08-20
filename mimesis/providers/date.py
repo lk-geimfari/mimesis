@@ -30,6 +30,7 @@ class Datetime(BaseDataProvider):
         """Class for metadata."""
 
         name = "datetime"
+        data_provider = True
 
     @staticmethod
     def bulk_create_datetimes(

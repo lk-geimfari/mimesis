@@ -10,8 +10,8 @@ from functools import reduce
 from pathlib import Path
 from typing import Any, Generator, List, Optional
 
-from mimesis.exceptions import LocaleError, NonEnumerableError
-from mimesis.locales import Locale
+from mimesis.exceptions import NonEnumerableError
+from mimesis.locales import Locale, validate_locale
 from mimesis.random import Random, get_random_item, random
 from mimesis.typing import JSON, Seed
 
@@ -99,19 +99,8 @@ class BaseDataProvider(BaseProvider):
         :return: Nothing.
         """
 
-        if not locale:
-            locale = Locale.DEFAULT
-
-        if isinstance(locale, str):
-            if locale not in Locale.values():
-                raise LocaleError(locale)
-
-            locale = Locale(locale)
-
-        if locale not in Locale:
-            raise LocaleError(locale)
-
-        self.locale = locale.value
+        locale_obj = validate_locale(locale)
+        self.locale = locale_obj.value
 
     def extract(self, keys: List[str], default: Optional[Any] = None) -> Any:
         """Extracts nested values from JSON file by list of keys.

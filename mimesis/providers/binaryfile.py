@@ -34,6 +34,7 @@ class BinaryFile(BaseProvider):
         """Class for metadata."""
 
         name = "binaryfile"
+        data_provider = True
 
     def _read_file(
         self,

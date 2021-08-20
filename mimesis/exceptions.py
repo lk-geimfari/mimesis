@@ -4,7 +4,7 @@
 
 from typing import Any, Optional, Union
 
-from mimesis.locales import Locale
+from mimesis.enums import Locale
 
 
 class LocaleError(ValueError):

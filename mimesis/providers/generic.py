@@ -67,8 +67,8 @@ class Generic(BaseProvider):
         for provider in self._DEFAULT_PROVIDERS:
             name = getattr(provider.Meta, "name")  # type: ignore
 
-            # Check if a provider is locale dependent.
-            if hasattr(provider, "_data"):
+            # Check if a provider is locale-dependent.
+            if issubclass(provider, BaseDataProvider):
                 setattr(self, f"_{name}", provider)
             else:
                 setattr(self, name, provider(seed=self.seed))
@@ -101,7 +101,7 @@ class Generic(BaseProvider):
         :return: List of attributes.
         """
         attributes = []
-        exclude = BaseDataProvider().__dict__.keys()
+        exclude = BaseProvider().__dict__.keys()
 
         for a in self.__dict__:
             if a not in exclude:

@@ -24,6 +24,7 @@ class Food(BaseDataProvider):
         """Class for metadata."""
 
         name = "food"
+        data_provider = True
 
     def _choice_from(self, key: str) -> str:
         """Choice random element."""
