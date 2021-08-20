@@ -2,23 +2,27 @@
 
 """This module provides constants for locale-dependent providers."""
 
+from typing import Optional, Union
+
 from mimesis.enums import Locale
 from mimesis.exceptions import LocaleError
 
-__all__ = ["Locale"]
+__all__ = ["Locale", "validate_locale"]
 
 
-def validate_locale(locale: Locale) -> Locale:
+# TODO: Refactor
+def validate_locale(locale: Optional[Union[Locale, str]] = None) -> Locale:
     if not locale:
-        locale = Locale.DEFAULT
+        raise ValueError(f"Invalid locale: {locale}")
 
+    # Validates deprecated locale format.
     if isinstance(locale, str):
-        if locale not in Locale.values():
+        try:
+            return Locale(locale)
+        except ValueError:
             raise LocaleError(locale)
 
-        locale = Locale(locale)
-
-    if locale not in Locale:
+    if not isinstance(locale, Locale):
         raise LocaleError(locale)
 
     return locale

@@ -127,8 +127,7 @@ class Generic(BaseProvider):
                     "subclass of mimesis.providers.BaseProvider"
                 )
             try:
-                meta = getattr(cls, "Meta")
-                name = getattr(meta, "name")
+                name = cls.Meta.name
             except AttributeError:
                 name = cls.__name__.lower()
             setattr(self, name, cls(seed=self.seed))

@@ -43,8 +43,12 @@ def test_field_with_custom_providers(default_field, modified_field):
 
 
 def test_field_with_key_function(field):
-    name = field("person.name", key=str.upper)
-    assert name.isupper()
+    locale = field.locale
+    if locale in (Locale.ZH, Locale.KO, Locale.FA, Locale.JA):
+        return
+
+    name = field("person.name", key=str.lower)
+    assert name.islower()
 
 
 def test_field_raises_field_error(default_field):
