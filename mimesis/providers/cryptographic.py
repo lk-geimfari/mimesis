@@ -24,7 +24,7 @@ class Cryptographic(BaseProvider):
         :param seed: Seed.
         """
         super().__init__(*args, **kwargs)
-        self._text = Text(Locale.EN, seed=self.seed)
+        self._text = Text(locale=Locale.EN, seed=self.seed)
 
     class Meta:
         """Class for metadata."""

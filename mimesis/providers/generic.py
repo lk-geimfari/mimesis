@@ -58,7 +58,7 @@ class Generic(BaseProvider):
     )
 
     def __init__(
-            self, locale: Locale = Locale.DEFAULT, seed: Optional[Seed] = None
+        self, locale: Locale = Locale.DEFAULT, seed: Optional[Seed] = None
     ) -> None:
         """Initialize attributes lazily."""
         super().__init__(seed=seed)

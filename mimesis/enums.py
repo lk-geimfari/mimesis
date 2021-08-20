@@ -13,6 +13,7 @@ Below you can see an example of usage enums in methods of data providers.
 """
 
 from enum import Enum
+from typing import List
 
 
 class Locale(Enum):
@@ -55,7 +56,7 @@ class Locale(Enum):
     DEFAULT = EN
 
     @classmethod
-    def values(cls):
+    def values(cls) -> List[str]:
         return [i.value for i in cls.__members__.values()]
 
 
