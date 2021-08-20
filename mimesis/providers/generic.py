@@ -58,7 +58,7 @@ class Generic(BaseProvider):
     )
 
     def __init__(
-        self, locale: Locale = Locale.DEFAULT, seed: Optional[Seed] = None
+            self, locale: Locale = Locale.DEFAULT, seed: Optional[Seed] = None
     ) -> None:
         """Initialize attributes lazily."""
         super().__init__(seed=seed)
@@ -127,7 +127,7 @@ class Generic(BaseProvider):
                     "subclass of mimesis.providers.BaseProvider"
                 )
             try:
-                name = cls.Meta.name
+                name = cls.Meta.name  # type: ignore
             except AttributeError:
                 name = cls.__name__.lower()
             setattr(self, name, cls(seed=self.seed))
