@@ -27,7 +27,7 @@ def luhn_checksum(num: str) -> str:
 
 
 def romanize(string: str, locale: Optional[Locale] = None) -> str:
-    """Romanize given string.
+    """Romanize a given string.
 
     Supported locales are:
         Locale.RU
