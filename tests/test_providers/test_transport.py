@@ -17,6 +17,7 @@ from . import patterns
 
 
 class TestTransport(object):
+
     @pytest.fixture
     def transport(self):
         return Transport()

@@ -77,6 +77,8 @@ class BaseProvider:
 class BaseDataProvider(BaseProvider):
     """This is a base class for all data providers."""
 
+    _LOCALE_SEPARATOR = "-"
+
     def __init__(
         self, locale: Locale = Locale.DEFAULT, seed: Optional[Seed] = None
     ) -> None:
@@ -162,12 +164,10 @@ class BaseDataProvider(BaseProvider):
             with open(file_path, "r", encoding="utf8") as f:
                 return json.load(f)
 
-        separator = "-"
-
-        master_locale = locale.split(separator).pop(0)
+        master_locale = locale.split(self._LOCALE_SEPARATOR).pop(0)
         data = get_data(master_locale)
 
-        if separator in locale:
+        if self._LOCALE_SEPARATOR in locale:
             data = self._update_dict(data, get_data(locale))
 
         self._data = data
