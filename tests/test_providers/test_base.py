@@ -91,6 +91,13 @@ class TestBase(object):
         with pytest.raises(ValueError):
             assert base_data_provider.extract([])
 
+    def test_extract_missing_positional_arguments(self, base_data_provider):
+        with pytest.raises(TypeError):
+            assert base_data_provider.extract(default=None)
+
+        with pytest.raises(TypeError):
+            assert base_data_provider.extract()
+
     def test_update_dict(self, base_data_provider):
         first = {
             "animals": {
