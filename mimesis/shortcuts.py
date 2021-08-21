@@ -3,7 +3,7 @@
 """This module is provide internal util functions."""
 
 from string import ascii_letters, digits, punctuation
-from typing import Optional
+from typing import Union
 
 from mimesis.data import COMMON_LETTERS, ROMANIZATION_DICT
 from mimesis.locales import Locale, validate_locale
@@ -26,7 +26,7 @@ def luhn_checksum(num: str) -> str:
     return str(check * 9 % 10)
 
 
-def romanize(string: str, locale: Optional[Locale] = None) -> str:
+def romanize(string: str, locale: Union[Locale, str]) -> str:
     """Romanize a given string.
 
     Supported locales are:

@@ -18,11 +18,11 @@ def test_luhn_checksum(number, check_sum):
     assert shortcuts.luhn_checksum(number) == check_sum
 
 
-def test_russian_to_roma():
+def test_romanize_russian_string():
     assert shortcuts.romanize("Ликид Геимфари", locale=Locale.RU) == "Likid Geimfari"
 
 
-def test_russian_mixed_text():
+def test_romanize_russian_mixed_text():
     assert (
         shortcuts.romanize("Что-то там_4352-!@", locale=Locale.RU)
         == "Chto-to tam_4352-!@"
@@ -43,13 +43,13 @@ def test_romanize_russian_alphabet():
     assert shortcuts.romanize(russian_alphabet, locale=Locale.RU) == result
 
 
-def test_ukrainian():
+def test_romanize_ukrainian_text():
     assert (
         shortcuts.romanize("Українська мова!", locale=Locale.UK) == "Ukrayins’ka mova!"
     )
 
 
-def test_kazakh():
+def test_romanize_kazakh_text():
     expected_result = "Python - eñ zhaqsy bağdarlamalau tili!"
     assert (
         shortcuts.romanize("Python - ең жақсы бағдарламалау тілі!", locale=Locale.KK)
@@ -57,7 +57,7 @@ def test_kazakh():
     )
 
 
-def test_invalid_locale():
+def test_romanize_invalid_locale():
     with pytest.raises(LocaleError):
         shortcuts.romanize("Mimesis", locale="sdsdsd")
 
@@ -65,3 +65,14 @@ def test_invalid_locale():
 def test_romanize_unsupported_locale():
     with pytest.raises(ValueError):
         shortcuts.romanize("Mimesis", locale=Locale.DE)
+
+
+def test_romanize_missing_positional_arguments():
+    with pytest.raises(TypeError):
+        shortcuts.romanize()
+
+    with pytest.raises(TypeError):
+        shortcuts.romanize(locale=Locale.RU)
+
+    with pytest.raises(TypeError):
+        shortcuts.romanize(string="ТЕСТ")
