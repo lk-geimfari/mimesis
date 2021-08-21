@@ -10,7 +10,6 @@ from mimesis.exceptions import LocaleError
 __all__ = ["Locale", "validate_locale"]
 
 
-# TODO: Refactor
 def validate_locale(locale: Optional[Union[Locale, str]] = None) -> Locale:
     if not locale:
         raise ValueError(f"Invalid locale: {locale}")
