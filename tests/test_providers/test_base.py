@@ -32,6 +32,12 @@ class TestBase(object):
         assert Locale(provider.locale) == locale
         assert "Жен." not in provider._data["gender"]
 
+    def test_override_missing_locale_argument(self):
+        provider = Person(Locale.EN)
+        with pytest.raises(TypeError):
+            with provider.override_locale():
+                pass
+
     @pytest.mark.parametrize(
         "provider",
         [
