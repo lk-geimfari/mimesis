@@ -10,6 +10,7 @@ Version 5.0.0
 - Rename ``enums.UnitName`` to ``enums.MeasureUnit``
 - Rename ``enums.PrefixSign`` to ``enums.MetricPrefixSign``
 - Rename ``Business()`` to ``Finance()``
+- Renamed ``BaseDataProvider.pull`` to ``BaseDataProvider._load_datafile``
 
 **Fixed**:
 

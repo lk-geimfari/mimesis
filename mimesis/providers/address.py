@@ -34,7 +34,7 @@ class Address(BaseDataProvider):
         """
         super().__init__(*args, **kwargs)
         self._datafile = "address.json"
-        self._pull(self._datafile)
+        self._load_datafile(self._datafile)
 
     class Meta:
         """Class for metadata."""

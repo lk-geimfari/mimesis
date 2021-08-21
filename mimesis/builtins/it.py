@@ -19,7 +19,7 @@ class ItalySpecProvider(BaseSpecProvider):
     def __init__(self, seed: Optional[Seed] = None) -> None:
         """Initialize attributes."""
         super().__init__(locale=Locale.IT, seed=seed)
-        self._pull(self._datafile)
+        self._load_datafile(self._datafile)
 
     class Meta:
         """The name of the provider."""

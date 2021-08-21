@@ -138,7 +138,7 @@ class BaseDataProvider(BaseProvider):
         return initial
 
     @functools.lru_cache(maxsize=None)
-    def _pull(self, datafile: str = "") -> None:
+    def _load_datafile(self, datafile: str = "") -> None:
         """Pull the content from the JSON and memorize one.
 
         Opens JSON file ``file`` in the folder ``data/locale``
@@ -189,8 +189,8 @@ class BaseDataProvider(BaseProvider):
         :return: Nothing.
         """
         self._setup_locale(locale)
-        self._pull.cache_clear()
-        self._pull()
+        self._load_datafile.cache_clear()
+        self._load_datafile()
 
     @contextlib.contextmanager
     def override_locale(
