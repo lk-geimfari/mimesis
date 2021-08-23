@@ -174,12 +174,16 @@ Useful links
 ------------
 
 I have a Telegram channel where I daily post news, announces and all the open-source
-goodies I found, so subscribe: `@the_art_of_development <https://t.me/the_art_of_development>`_.
+goodies I found, so subscribe: `@software_dev_channelt <https://t.me/software_dev_channelt>`_.
 
-Thanks
-------
+Supported by
+------------
 
-Supported by `JetBrains <https://www.jetbrains.com/?from=mimesis>`_.
+.. raw:: html
+    
+    <a target="_blank" href="https://www.jetbrains.com/?from=mimesis">
+       <img width="350" height="auto" src="https://user-images.githubusercontent.com/15812620/130522788-8ab324bc-7db2-44f3-a51a-0eda5fe9a9a7.png">
+    </a>
 
 
 Disclaimer
