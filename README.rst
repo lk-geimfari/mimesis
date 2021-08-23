@@ -174,7 +174,7 @@ Useful links
 ------------
 
 I have a Telegram channel where I daily post news, announces and all the open-source
-goodies I found, so subscribe: `@software_dev_channelt <https://t.me/software_dev_channelt>`_.
+goodies I found, so subscribe: `@software_dev_channel <https://t.me/software_dev_channel>`_.
 
 Supported by
 ------------
