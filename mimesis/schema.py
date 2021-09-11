@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """Implements classes for generating data by schema."""
-from typing import Any, Callable, Iterator, List, Optional
+from typing import Any, Callable, Iterator, List, Optional, Sequence
 
 from mimesis.exceptions import FieldError, SchemaError
 from mimesis.locales import Locale
@@ -29,16 +29,14 @@ class BaseField:
         self,
         locale: Locale = Locale.DEFAULT,
         seed: Optional[Seed] = None,
-        providers: Optional[Any] = None,
+        providers: Optional[Sequence[Any]] = None,
     ) -> None:
         """Initialize field.
 
         :param locale: Locale
         :param seed: Seed for random.
         """
-        self.locale = locale
-        self.seed = seed
-        self._gen = Generic(self.locale, self.seed)
+        self._gen = Generic(locale, seed)
 
         if providers:
             self._gen.add_providers(*providers)
@@ -121,14 +119,11 @@ class BaseField:
 class Field(BaseField):
     """Greedy evaluation field"""
 
-    class Meta:
-        eager = True
-
     def __call__(self, *args: Any, **kwargs: Any) -> Any:
         return self.perform(*args, **kwargs)
 
     def __str__(self) -> str:
-        return "{} <{}>".format(self.__class__.__name__, self.locale)
+        return "{} <{}>".format(self.__class__.__name__, self._gen.locale)
 
 
 class Schema:

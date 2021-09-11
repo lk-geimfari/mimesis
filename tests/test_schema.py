@@ -43,12 +43,8 @@ def test_field_with_custom_providers(default_field, modified_field):
 
 
 def test_field_with_key_function(field):
-    locale = field.locale
-    if locale in (Locale.ZH, Locale.KO, Locale.FA, Locale.JA):
-        return
-
-    name = field("person.name", key=str.lower)
-    assert name.islower()
+    result = field("person.name", key=list)
+    assert isinstance(result, list) and len(result) > 1
 
 
 def test_field_raises_field_error(default_field):
