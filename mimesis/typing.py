@@ -4,6 +4,7 @@
 
 import datetime
 from decimal import Decimal
+from types import LambdaType
 from typing import Any, Dict, List, Set, Tuple, Union
 
 __all__ = [
@@ -15,6 +16,7 @@ __all__ = [
     "Time",
     "Timestamp",
     "Keywords",
+    "SchemaType",
 ]
 
 JSON = Dict[str, Any]
@@ -37,3 +39,5 @@ Matrix = Union[
     List[complex],
     List[Decimal],
 ]
+
+SchemaType = Union[Dict[Any, Any], LambdaType]
