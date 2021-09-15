@@ -23,7 +23,7 @@ class BaseField:
     """
     BaseField is a class for generating data by the name of the method.
 
-    Instance of this object takes any string which represents name
+    Instance of this object takes any string which represents the name
     of any method of any supported data provider (:class:`~mimesis.Generic`)
     and the ``**kwargs`` of the method.
 
@@ -128,14 +128,32 @@ class BaseField:
 
 
 class Field(BaseField):
-    """Greedy evaluation field"""
+    """Greedy field.
+
+    The field evaluates its final value immediately.
+
+    Example:
+        >>> _ = Field()
+        >>> _('username')
+        Dogtag_1836
+    """
 
     def __call__(self, *args: Any, **kwargs: Any) -> Any:
         return self.perform(*args, **kwargs)
 
 
 class LazyField(Field):
-    """Lazy evaluation field"""
+    """Lazy field.
+
+    Same as :class:`Field`, but returns a lambda instead of final value.
+
+    Example:
+        >>> _ = LazyField()
+        >>> _('username')
+        <function LazyField.__call__.<locals>.<lambda> at 0x10b2a1c10>
+        >>> _('username')()
+        Suez1979
+    """
 
     def __call__(self, *args: Any, **kwargs: Any) -> Callable[[], Any]:
         return lambda: self.perform(*args, **kwargs)
