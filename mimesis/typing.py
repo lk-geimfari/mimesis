@@ -40,4 +40,4 @@ Matrix = Union[
     List[Decimal],
 ]
 
-SchemaType = Union[Dict[Any, Any], LambdaType]
+SchemaType = Union[JSON, LambdaType]
