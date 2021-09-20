@@ -6,7 +6,7 @@ from typing import Any, Callable, Iterator, List, Optional, Sequence
 from mimesis.exceptions import FieldError, SchemaError
 from mimesis.locales import Locale
 from mimesis.providers.generic import Generic
-from mimesis.typing import JSON, Seed, SchemaType
+from mimesis.typing import JSON, SchemaType, Seed
 
 __all__ = ["BaseField", "Field", "Schema"]
 
@@ -26,10 +26,10 @@ class BaseField:
         base = True
 
     def __init__(
-        self,
-        locale: Locale = Locale.DEFAULT,
-        seed: Optional[Seed] = None,
-        providers: Optional[Sequence[Any]] = None,
+            self,
+            locale: Locale = Locale.DEFAULT,
+            seed: Optional[Seed] = None,
+            providers: Optional[Sequence[Any]] = None,
     ) -> None:
         """Initialize field.
 
@@ -44,10 +44,10 @@ class BaseField:
         self._table = {}  # type: ignore
 
     def perform(
-        self,
-        name: Optional[str] = None,
-        key: Optional[Callable[[Any], Any]] = None,
-        **kwargs: Any
+            self,
+            name: Optional[str] = None,
+            key: Optional[Callable[[Any], Any]] = None,
+            **kwargs: Any
     ) -> Any:
         """Performs the value of the field by its name.
 
@@ -137,6 +137,10 @@ class Field(BaseField):
 class Schema:
     """Class which return list of filled schemas."""
 
+    _MIN_ITERATIONS_VALUE = 1
+
+    __slots__ = ("_schema",)
+
     def __init__(self, schema: SchemaType) -> None:
         """Initialize schema.
 
@@ -161,7 +165,7 @@ class Schema:
         :return: List of fulfilled schemas.
         """
 
-        if iterations < 1:
+        if iterations < self._MIN_ITERATIONS_VALUE:
             raise ValueError("The number of iterations must be greater than 0.")
 
         return [self._schema() for _ in range(iterations)]
@@ -173,7 +177,7 @@ class Schema:
         :return: List of fulfilled schemas.
         """
 
-        if iterations < 1:
+        if iterations < self._MIN_ITERATIONS_VALUE:
             raise ValueError("The number of iterations must be greater than 0.")
 
         for item in range(iterations):

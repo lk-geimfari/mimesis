@@ -4,7 +4,7 @@
 
 import datetime
 from decimal import Decimal
-from typing import Any, Dict, List, Set, Tuple, Union, Callable
+from typing import Any, Callable, Dict, List, Set, Tuple, Union
 
 __all__ = [
     "Date",
