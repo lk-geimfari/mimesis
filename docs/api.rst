@@ -283,12 +283,6 @@ Field
 .. autoclass:: mimesis.schema.Field
    :members:
 
-LazyField
----------
-
-.. autoclass:: mimesis.schema.LazyField
-   :members:
-
 Schema
 ------
 

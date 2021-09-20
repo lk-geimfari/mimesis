@@ -109,7 +109,8 @@ def test_schema_create(schema):
     assert first["timestamp"] != last["timestamp"]
     assert first["owner"]["creator"] != last["owner"]["creator"]
 
-    assert schema.create(0) == []
+    with pytest.raises(ValueError):
+        schema.create(0)
 
 
 def test_schema_iterator(schema):

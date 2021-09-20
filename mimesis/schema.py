@@ -1,22 +1,14 @@
 # -*- coding: utf-8 -*-
 
 """Implements classes for generating data by schema."""
-from types import LambdaType
-from typing import (
-    Any,
-    Callable,
-    Iterator,
-    List,
-    Optional,
-    Sequence,
-)
+from typing import Any, Callable, Iterator, List, Optional, Sequence
 
 from mimesis.exceptions import FieldError, SchemaError
 from mimesis.locales import Locale
 from mimesis.providers.generic import Generic
-from mimesis.typing import JSON, SchemaType, Seed
+from mimesis.typing import JSON, Seed
 
-__all__ = ["BaseField", "Field", "LazyField", "Schema"]
+__all__ = ["BaseField", "Field", "Schema"]
 
 
 class BaseField:
@@ -34,10 +26,10 @@ class BaseField:
         base = True
 
     def __init__(
-            self,
-            locale: Locale = Locale.DEFAULT,
-            seed: Optional[Seed] = None,
-            providers: Optional[Sequence[Any]] = None,
+        self,
+        locale: Locale = Locale.DEFAULT,
+        seed: Optional[Seed] = None,
+        providers: Optional[Sequence[Any]] = None,
     ) -> None:
         """Initialize field.
 
@@ -52,10 +44,10 @@ class BaseField:
         self._table = {}  # type: ignore
 
     def perform(
-            self,
-            name: Optional[str] = None,
-            key: Optional[Callable[[Any], Any]] = None,
-            **kwargs: Any
+        self,
+        name: Optional[str] = None,
+        key: Optional[Callable[[Any], Any]] = None,
+        **kwargs: Any
     ) -> Any:
         """Performs the value of the field by its name.
 
@@ -130,7 +122,7 @@ class BaseField:
 class Field(BaseField):
     """Greedy field.
 
-    The field evaluates its final value immediately.
+    The field whcih evaluates immediately.
 
     Example:
         >>> _ = Field()
@@ -142,52 +134,18 @@ class Field(BaseField):
         return self.perform(*args, **kwargs)
 
 
-class LazyField(Field):
-    """Lazy field.
-
-    Same as :class:`Field`, but returns a lambda instead of final value.
-
-    Example:
-        >>> _ = LazyField()
-        >>> _('username')
-        <function LazyField.__call__.<locals>.<lambda> at 0x10b2a1c10>
-        >>> _('username')()
-        Suez1979
-    """
-
-    def __call__(self, *args: Any, **kwargs: Any) -> Callable[[], Any]:
-        return lambda: self.perform(*args, **kwargs)
-
-
 class Schema:
     """Class which return list of filled schemas."""
 
-    def __init__(self, schema: SchemaType) -> None:
+    def __init__(self, schema: Callable[[], JSON]) -> None:
         """Initialize schema.
 
         :param schema: A schema (must be a callable object).
         """
-
-        if schema and (callable(schema) or isinstance(schema, dict)):
-            self.schema: SchemaType = schema
+        if schema and callable(schema):
+            self.schema = schema
         else:
             raise SchemaError()
-
-    def _evaluate_lazy_schema(self, schema: JSON) -> JSON:
-        """Recursively evaluate all the lazy values in the schema.
-
-        :param schema: Schema with lazy fields (values).
-        :return: Evaluated schema.
-        """
-        result: JSON = {}
-        for key, value in schema.items():
-            if isinstance(value, LambdaType):
-                result[key] = value()
-            elif isinstance(value, dict):
-                result[key] = self._evaluate_lazy_schema(value)
-            else:
-                result[key] = value
-        return result
 
     def create(self, iterations: int = 1) -> List[JSON]:
         """Creates a list of a fulfilled schemas.
@@ -197,20 +155,16 @@ class Schema:
             large datasets otherwise you're risking running out of memory.
 
             If you need a lazy version of this method, see
-            :class:`~mimesis.schema.Schema.iterator`
+            :meth:`iterator`
 
         :param iterations: Number of iterations.
         :return: List of fulfilled schemas.
         """
-        result: List[JSON] = []
 
-        for item in range(iterations):
-            if isinstance(self.schema, dict):
-                result.append(self._evaluate_lazy_schema(self.schema))
-            if isinstance(self.schema, LambdaType):
-                result.append(self.schema())
+        if iterations < 1:
+            raise ValueError("The number of iterations must be greater than 0.")
 
-        return result
+        return [self.schema() for _ in range(iterations)]
 
     def iterator(self, iterations: int = 1) -> Iterator[JSON]:
         """Fulfills schema in a lazy way.
@@ -223,7 +177,4 @@ class Schema:
             raise ValueError("The number of iterations must be greater than 0.")
 
         for item in range(iterations):
-            if isinstance(self.schema, dict):
-                yield self._evaluate_lazy_schema(self.schema)
-            if isinstance(self.schema, LambdaType):
-                yield self.schema()
+            yield self.schema()
