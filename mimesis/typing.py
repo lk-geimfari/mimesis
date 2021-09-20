@@ -4,8 +4,7 @@
 
 import datetime
 from decimal import Decimal
-from types import LambdaType
-from typing import Any, Dict, List, Set, Tuple, Union
+from typing import Any, Dict, List, Set, Tuple, Union, Callable
 
 __all__ = [
     "Date",
@@ -40,4 +39,4 @@ Matrix = Union[
     List[Decimal],
 ]
 
-SchemaType = Union[JSON, LambdaType]
+SchemaType = Callable[[], JSON]
