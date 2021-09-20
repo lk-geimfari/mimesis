@@ -6,7 +6,7 @@ from typing import Any, Callable, Iterator, List, Optional, Sequence
 from mimesis.exceptions import FieldError, SchemaError
 from mimesis.locales import Locale
 from mimesis.providers.generic import Generic
-from mimesis.typing import JSON, Seed
+from mimesis.typing import JSON, Seed, SchemaType
 
 __all__ = ["BaseField", "Field", "Schema"]
 
@@ -137,13 +137,13 @@ class Field(BaseField):
 class Schema:
     """Class which return list of filled schemas."""
 
-    def __init__(self, schema: Callable[[], JSON]) -> None:
+    def __init__(self, schema: SchemaType) -> None:
         """Initialize schema.
 
         :param schema: A schema (must be a callable object).
         """
         if schema and callable(schema):
-            self.schema = schema
+            self._schema = schema
         else:
             raise SchemaError()
 
@@ -164,7 +164,7 @@ class Schema:
         if iterations < 1:
             raise ValueError("The number of iterations must be greater than 0.")
 
-        return [self.schema() for _ in range(iterations)]
+        return [self._schema() for _ in range(iterations)]
 
     def iterator(self, iterations: int = 1) -> Iterator[JSON]:
         """Fulfills schema in a lazy way.
@@ -177,4 +177,4 @@ class Schema:
             raise ValueError("The number of iterations must be greater than 0.")
 
         for item in range(iterations):
-            yield self.schema()
+            yield self._schema()
