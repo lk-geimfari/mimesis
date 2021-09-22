@@ -245,10 +245,10 @@ Internet
    :members:
    :special-members: __init__
 
-Numbers
--------
+Numerical
+---------
 
-.. autoclass:: mimesis.Numbers
+.. autoclass:: mimesis.Numerical
    :members:
    :special-members: __init__
 
