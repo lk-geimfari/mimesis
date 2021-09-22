@@ -79,8 +79,8 @@ class Gender(Enum):
     takes argument ``gender``.
     """
 
-    FEMALE = "female"
     MALE = "male"
+    FEMALE = "female"
 
 
 class TitleType(Enum):
@@ -99,8 +99,8 @@ class CardType(Enum):
     An argument for :meth:`~mimesis.Payment.credit_card_number()`.
     """
 
-    MASTER_CARD = "MasterCard"
     VISA = "Visa"
+    MASTER_CARD = "MasterCard"
     AMERICAN_EXPRESS = "American Express"
 
 
@@ -228,16 +228,16 @@ class MeasureUnit(Enum):
     RADIOACTIVITY = ("becquerel", "Bq")
 
 
-class NumTypes(Enum):
+class NumType(Enum):
     """Provide number types.
 
     An argument for :meth:`~mimesis.Numerical.matrix()`.
     """
 
-    FLOATS = "floats"
-    INTEGERS = "integers"
-    COMPLEXES = "complexes"
-    DECIMALS = "decimals"
+    FLOAT = "floats"
+    INTEGER = "integers"
+    COMPLEX = "complexes"
+    DECIMAL = "decimals"
 
 
 class VideoFile(Enum):

@@ -5,7 +5,7 @@
 from decimal import Decimal
 from typing import Any, List
 
-from mimesis.enums import NumTypes
+from mimesis.enums import NumType
 from mimesis.providers.base import BaseProvider
 from mimesis.typing import Matrix
 
@@ -172,7 +172,7 @@ class Numerical(BaseProvider):
         self,
         m: int = 10,
         n: int = 10,
-        num_type: NumTypes = NumTypes.FLOATS,
+        num_type: NumType = NumType.FLOAT,
         **kwargs: Any
     ) -> Matrix:
         """Generate m x n matrix with random numbers.
@@ -184,11 +184,11 @@ class Numerical(BaseProvider):
 
         :param m: Number of rows.
         :param n: Number of columns.
-        :param num_type: NumTypes enum object.
+        :param num_type: NumType enum object.
         :param kwargs: Other method-specific arguments.
         :return: A matrix of random numbers.
         """
-        key = self.validate_enum(num_type, NumTypes)
+        key = self.validate_enum(num_type, NumType)
         kwargs.update({"n": n})
         method = getattr(self, key)
         return [method(**kwargs) for _ in range(m)]
