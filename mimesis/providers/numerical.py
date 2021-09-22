@@ -9,11 +9,11 @@ from mimesis.enums import NumTypes
 from mimesis.providers.base import BaseProvider
 from mimesis.typing import Matrix
 
-__all__ = ["Numbers"]
+__all__ = ["Numerical"]
 
 
-class Numbers(BaseProvider):
-    """Class for generating numbers."""
+class Numerical(BaseProvider):
+    """A provider for generating numerical data."""
 
     def __init__(self, *args: Any, **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)
@@ -23,7 +23,7 @@ class Numbers(BaseProvider):
     class Meta:
         """Class for metadata."""
 
-        name = "numbers"
+        name = "numerical"
 
     def incremental(self) -> int:
         """Generate incremental number.
@@ -94,7 +94,7 @@ class Numbers(BaseProvider):
         precision_real: int = 15,
         precision_imag: int = 15,
     ) -> complex:
-        """Generate random complex number.
+        """Generate a random complex number.
 
         :param start_real: Start real range.
         :param end_real: End real range.
@@ -159,7 +159,7 @@ class Numbers(BaseProvider):
     def decimals(
         self, start: float = 0.0, end: float = 1000.0, n: int = 10
     ) -> List[Decimal]:
-        """Generate decimal number as :py:class:`decimal.Decimal` objects.
+        """Generate a decimal number as :py:class:`decimal.Decimal` objects.
 
         :param start: Start range.
         :param end: End range.

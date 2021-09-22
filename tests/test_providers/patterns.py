@@ -26,7 +26,7 @@ CREDIT_CARD_REGEX = r"[\d]+((-|\s)?[\d]+)+"
 
 PROVIDER_STR_REGEX = (
     r"^(Finance|Code|Development"
-    r"|File|Games|Hardware|Internet|Numbers|Path|Payment|"
+    r"|File|Games|Hardware|Internet|Numerical|Path|Payment|"
     r"Transport|Cryptographic|Science)"
 )
 
