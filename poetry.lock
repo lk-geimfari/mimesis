@@ -116,7 +116,7 @@ unicode_backport = ["unicodedata2"]
 
 [[package]]
 name = "check-manifest"
-version = "0.46"
+version = "0.47"
 description = "Check MANIFEST.in in a Python source package for completeness"
 category = "dev"
 optional = false
@@ -583,7 +583,7 @@ testing = ["pytest (>=4.6)", "pytest-checkdocs (>=1.2.3)", "pytest-flake8", "pyt
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.6"
-content-hash = "e9bd6f8e8008aaa2fc589c400a1f75cc4cb8159232ed47464df778c1c70deb2a"
+content-hash = "bd6c68a52e579b9ac6ae83270992fdd384b522e4fedce083a7df89a3276bc5c3"
 
 [metadata.files]
 appdirs = [
@@ -621,8 +621,8 @@ charset-normalizer = [
     {file = "charset_normalizer-2.0.1-py3-none-any.whl", hash = "sha256:b68b38179052975093d71c1b5361bf64afd80484697c1f27056e50593e695ceb"},
 ]
 check-manifest = [
-    {file = "check-manifest-0.46.tar.gz", hash = "sha256:5895e42a012989bdc51854a02c82c8d6898112a4ab11f2d7878200520b49d428"},
-    {file = "check_manifest-0.46-py3-none-any.whl", hash = "sha256:b59b0e7c7ed3946537677c9ab9b2c2cb7be9b1807fd40bc4dfc1eef31d42cff5"},
+    {file = "check-manifest-0.47.tar.gz", hash = "sha256:56dadd260a9c7d550b159796d2894b6d0bcc176a94cbc426d9bb93e5e48d12ce"},
+    {file = "check_manifest-0.47-py3-none-any.whl", hash = "sha256:365c94d65de4c927d9d8b505371d08ee19f9f369c86b9ac3db97c2754c827c95"},
 ]
 click = [
     {file = "click-7.1.2-py2.py3-none-any.whl", hash = "sha256:dacca89f4bfadd5de3d7489b7c8a566eee0d3676333fbb50030263894c38c0dc"},
