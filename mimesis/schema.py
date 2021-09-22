@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """Implements classes for generating data by schema."""
-from typing import Any, Callable, Iterator, List, Optional, Sequence
+from typing import Any, Callable, Iterator, List, Optional, Sequence, Final
 
 from mimesis.exceptions import FieldError, SchemaError
 from mimesis.locales import Locale
@@ -137,7 +137,7 @@ class Field(BaseField):
 class Schema:
     """Class which return list of filled schemas."""
 
-    _MIN_ITERATIONS_VALUE = 1
+    _MIN_ITERATIONS_VALUE: Final = 1
 
     __slots__ = ("_schema",)
 
