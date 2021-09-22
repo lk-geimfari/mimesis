@@ -38,5 +38,6 @@ def test_cnpj(pt_br):
 
     # test for the cnpj without mask
     cnpj_without_mask = pt_br.cnpj(False)
-    assert len(cnpj_without_mask) == 1    non_numeric_digits = re.sub("\d", "", cnpj_without_mask)
+    assert len(cnpj_without_mask) == 14
+    non_numeric_digits = re.sub("\d", "", cnpj_without_mask)
     assert "" == non_numeric_digits
