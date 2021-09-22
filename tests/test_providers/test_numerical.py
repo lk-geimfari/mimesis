@@ -3,7 +3,7 @@ import decimal
 import re
 
 import pytest
-from mimesis import Numbers
+from mimesis import Numerical
 from mimesis.enums import NumTypes
 from mimesis.exceptions import NonEnumerableError
 
@@ -12,16 +12,16 @@ from . import patterns
 
 class TestNumbers(object):
     @pytest.fixture
-    def numbers(self):
-        return Numbers()
+    def numerical(self):
+        return Numerical()
 
-    def test_str(self, numbers):
-        assert re.match(patterns.PROVIDER_STR_REGEX, str(numbers))
+    def test_str(self, numerical):
+        assert re.match(patterns.PROVIDER_STR_REGEX, str(numerical))
 
     def test_incremental(self):
-        numbers = Numbers()
+        numerical = Numerical()
         for i in range(1, 50):
-            assert numbers.incremental() == i
+            assert numerical.incremental() == i
 
     @pytest.mark.parametrize(
         "start, end",
@@ -31,17 +31,17 @@ class TestNumbers(object):
             (20.3, 30.8),
         ],
     )
-    def test_floats(self, numbers, start, end):
-        result = numbers.floats(start, end)
+    def test_floats(self, numerical, start, end):
+        result = numerical.floats(start, end)
         assert max(result) <= end
         assert min(result) >= start
         assert len(result) == 10
         assert isinstance(result, list)
 
-        result = numbers.floats(n=1000)
+        result = numerical.floats(n=1000)
         assert len(result) == 1000
 
-        result = numbers.floats(precision=4)
+        result = numerical.floats(precision=4)
         for e in result:
             assert len(str(e).split(".")[1]) <= 4
 
@@ -53,14 +53,14 @@ class TestNumbers(object):
             (20, 30),
         ],
     )
-    def test_integers(self, numbers, start, end):
-        result = numbers.integers(start=start, end=end)
+    def test_integers(self, numerical, start, end):
+        result = numerical.integers(start=start, end=end)
 
         assert max(result) <= end
         assert min(result) >= start
         assert isinstance(result, list)
 
-        element = numbers.random.choice(result)
+        element = numerical.random.choice(result)
         assert isinstance(element, int)
 
     @pytest.mark.parametrize(
@@ -71,14 +71,14 @@ class TestNumbers(object):
             (20, 30),
         ],
     )
-    def test_decimals(self, numbers, start, end):
-        result = numbers.decimals(start=start, end=end)
+    def test_decimals(self, numerical, start, end):
+        result = numerical.decimals(start=start, end=end)
 
         assert max(result) <= end
         assert min(result) >= start
         assert isinstance(result, list)
 
-        element = numbers.random.choice(result)
+        element = numerical.random.choice(result)
         assert isinstance(element, decimal.Decimal)
 
     @pytest.mark.parametrize(
@@ -89,8 +89,8 @@ class TestNumbers(object):
             (20.3, 30.8, 2.4, 4.5),
         ],
     )
-    def test_complexes(self, numbers, start_real, end_real, start_imag, end_imag):
-        result = numbers.complexes(start_real, end_real, start_imag, end_imag)
+    def test_complexes(self, numerical, start_real, end_real, start_imag, end_imag):
+        result = numerical.complexes(start_real, end_real, start_imag, end_imag)
         assert max(e.real for e in result) <= end_real
         assert min(e.real for e in result) >= start_real
         assert max(e.imag for e in result) <= end_imag
@@ -98,10 +98,10 @@ class TestNumbers(object):
         assert len(result) == 10
         assert isinstance(result, list)
 
-        result = numbers.complexes(n=1000)
+        result = numerical.complexes(n=1000)
         assert len(result) == 1000
 
-        result = numbers.complexes(precision_real=4, precision_imag=6)
+        result = numerical.complexes(precision_real=4, precision_imag=6)
         for e in result:
             assert len(str(e.real).split(".")[1]) <= 4
             assert len(str(e.imag).split(".")[1]) <= 6
@@ -114,8 +114,8 @@ class TestNumbers(object):
             (20.3, 30.8, 2.4, 4.5, 12, 12),
         ],
     )
-    def test_complex_number(self, numbers, sr, er, si, ei, pr, pi):
-        result = numbers.complex_number(
+    def test_complex_number(self, numerical, sr, er, si, ei, pr, pi):
+        result = numerical.complex_number(
             start_real=sr,
             end_real=er,
             start_imag=si,
@@ -127,13 +127,13 @@ class TestNumbers(object):
         assert len(str(result.real).split(".")[1]) <= pr
         assert len(str(result.imag).split(".")[1]) <= pi
 
-    def test_matrix(self, numbers):
+    def test_matrix(self, numerical):
         # TODO: Rewrite it to cover all cases
 
         with pytest.raises(NonEnumerableError):
-            numbers.matrix(num_type="int")
+            numerical.matrix(num_type="int")
 
-        result = numbers.matrix(precision=4)
+        result = numerical.matrix(precision=4)
         assert len(result) == 10
         for row in result:
             assert len(row) == 10
@@ -141,7 +141,7 @@ class TestNumbers(object):
                 assert isinstance(e, float)
                 assert len(str(e).split(".")[1]) <= 4
 
-        result = numbers.matrix(m=5, n=5, num_type=NumTypes.INTEGERS, start=5)
+        result = numerical.matrix(m=5, n=5, num_type=NumTypes.INTEGERS, start=5)
         assert len(result) == 5
         for row in result:
             assert len(row) == 5
@@ -150,7 +150,7 @@ class TestNumbers(object):
                 assert isinstance(e, int)
 
         precision_real, precision_imag = 4, 6
-        result = numbers.matrix(
+        result = numerical.matrix(
             num_type=NumTypes.COMPLEXES,
             precision_real=precision_real,
             precision_imag=precision_imag,
@@ -167,19 +167,19 @@ class TestNumbers(object):
                 assert len(real_str.split(".")[1]) <= precision_real
                 assert len(imag_str.split(".")[1]) <= precision_imag
 
-    def test_integer(self, numbers):
-        result = numbers.integer_number(-100, 100)
+    def test_integer(self, numerical):
+        result = numerical.integer_number(-100, 100)
         assert isinstance(result, int)
         assert -100 <= result <= 100
 
-    def test_float(self, numbers):
-        result = numbers.float_number(-100, 100, precision=15)
+    def test_float(self, numerical):
+        result = numerical.float_number(-100, 100, precision=15)
         assert isinstance(result, float)
         assert -100 <= result <= 100
         assert len(str(result).split(".")[1]) <= 15
 
-    def test_decimal(self, numbers):
-        result = numbers.decimal_number(-100, 100)
+    def test_decimal(self, numerical):
+        result = numerical.decimal_number(-100, 100)
         assert -100 <= result <= 100
         assert isinstance(result, decimal.Decimal)
 
@@ -187,11 +187,11 @@ class TestNumbers(object):
 class TestSeededNumbers(object):
     @pytest.fixture
     def n1(self, seed):
-        return Numbers(seed=seed)
+        return Numerical(seed=seed)
 
     @pytest.fixture
     def n2(self, seed):
-        return Numbers(seed=seed)
+        return Numerical(seed=seed)
 
     def test_incremental(self, n1, n2):
         assert n1.incremental() == n2.incremental()

@@ -11,6 +11,7 @@ Version 5.0.0
 - Rename ``enums.PrefixSign`` to ``enums.MetricPrefixSign``
 - Rename ``Business()`` to ``Finance()``
 - Renamed ``BaseDataProvider.pull`` to ``BaseDataProvider._load_datafile``
+- Renamed ``mimesis.providers.numbers.Numbers`` to ``mimesis.providers.numerical.Numerical``
 
 **Fixed**:
 
