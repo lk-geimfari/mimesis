@@ -5,7 +5,7 @@
 import urllib.error
 import urllib.request
 from ipaddress import IPv4Address, IPv6Address
-from typing import Any, List, Optional, Union
+from typing import Any, Final, List, Optional, Union
 
 from mimesis.data import (
     EMOJI,
@@ -38,13 +38,13 @@ class Internet(BaseProvider):
         super().__init__(*args, **kwargs)
         self.text = Text(seed=self.seed)
         self.file = File(seed=self.seed)
-        self._MAX_IPV4 = (2 ** 32) - 1
-        self._MAX_IPV6 = (2 ** 128) - 1
+        self._MAX_IPV4: Final[int] = (2 ** 32) - 1
+        self._MAX_IPV6: Final[int] = (2 ** 128) - 1
 
     class Meta:
         """Class for metadata."""
 
-        name = "internet"
+        name: Final[str] = "internet"
 
     def content_type(self, mime_type: Optional[MimeType] = None) -> str:
         """Get a random HTTP content type.

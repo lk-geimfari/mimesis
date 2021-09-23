@@ -3,7 +3,7 @@
 """Specific data provider for Russia (ru)."""
 
 from datetime import datetime
-from typing import List, Optional
+from typing import Final, List, Optional
 
 from mimesis.builtins.base import BaseSpecProvider
 from mimesis.enums import Gender
@@ -25,7 +25,7 @@ class RussiaSpecProvider(BaseSpecProvider):
     class Meta:
         """The name of the provider."""
 
-        name = "russia_provider"
+        name: Final[str] = "russia_provider"
 
     def generate_sentence(self) -> str:
         """Generate sentence from the parts.

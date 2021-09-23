@@ -3,7 +3,7 @@
 """Provides all at one."""
 
 import inspect
-from typing import Any, List, Optional, Type
+from typing import Any, Final, List, Optional, Type
 
 from mimesis.locales import Locale
 from mimesis.providers.address import Address
@@ -76,7 +76,7 @@ class Generic(BaseProvider):
     class Meta:
         """Class for metadata."""
 
-        name = "generic"
+        name: Final[str] = "generic"
 
     def __getattr__(self, attrname: str) -> Any:
         """Get attribute without underscore.

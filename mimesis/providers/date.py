@@ -4,7 +4,7 @@
 
 from calendar import monthrange, timegm
 from datetime import date, datetime, time, timedelta
-from typing import Any, List, Optional, Union
+from typing import Any, Final, List, Optional, Union
 
 from mimesis.compat import pytz
 from mimesis.data import GMT_OFFSETS, ROMAN_NUMS, TIMEZONES
@@ -29,7 +29,7 @@ class Datetime(BaseDataProvider):
     class Meta:
         """Class for metadata."""
 
-        name = "datetime"
+        name: Final[str] = "datetime"
 
     @staticmethod
     def bulk_create_datetimes(

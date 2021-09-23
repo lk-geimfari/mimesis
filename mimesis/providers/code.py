@@ -2,7 +2,7 @@
 
 """The data provider of a variety of codes."""
 
-from typing import Any, Optional
+from typing import Any, Final, Optional
 
 from mimesis.data import (
     EAN_MASKS,
@@ -32,7 +32,7 @@ class Code(BaseProvider):
     class Meta:
         """Class for metadata."""
 
-        name = "code"
+        name: Final[str] = "code"
 
     def locale_code(self) -> str:
         """Get a random locale code (MS-LCID).

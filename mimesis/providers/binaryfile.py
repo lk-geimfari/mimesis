@@ -3,7 +3,7 @@
 """Binary data provider."""
 
 from pathlib import Path
-from typing import Any, Union
+from typing import Any, Final, Union
 
 from mimesis.enums import (
     AudioFile,
@@ -28,13 +28,12 @@ class BinaryFile(BaseProvider):
         """
         super().__init__(*args, **kwargs)
         self._data_dir = Path(__file__).parent.parent.joinpath("data", "bin")
-        self._sample_name = "sample"
+        self._sample_name: Final[str] = "sample"
 
     class Meta:
         """Class for metadata."""
 
-        name = "binaryfile"
-        data_provider = True
+        name: Final[str] = "binaryfile"
 
     def _read_file(
         self,

@@ -5,7 +5,7 @@
 import hashlib
 import re
 from string import ascii_letters, digits, punctuation
-from typing import Any, List, Optional, Sequence, Union
+from typing import Any, Final, List, Optional, Sequence, Union
 
 from mimesis.data import (
     BLOOD_GROUPS,
@@ -41,7 +41,7 @@ class Person(BaseDataProvider):
     class Meta:
         """Class for metadata."""
 
-        name = "person"
+        name: Final[str] = "person"
 
     def age(self, minimum: int = 16, maximum: int = 66) -> int:
         """Get a random integer value.

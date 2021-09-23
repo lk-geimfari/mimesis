@@ -2,7 +2,7 @@
 
 """Provides data related to transports."""
 
-from typing import Any, Optional
+from typing import Any, Final, Optional
 
 from mimesis.data import (
     AIRPLANES,
@@ -32,7 +32,7 @@ class Transport(BaseProvider):
     class Meta:
         """Class for metadata."""
 
-        name = "transport"
+        name: Final[str] = "transport"
 
     def truck(self, model_mask: str = "#### @@") -> str:
         """Generate a truck model.

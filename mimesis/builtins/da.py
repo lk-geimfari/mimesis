@@ -2,7 +2,7 @@
 
 """Specific data provider for Denmark (da)."""
 import operator
-from typing import Optional, Tuple
+from typing import Final, Optional, Tuple
 
 from mimesis import Datetime
 from mimesis.builtins.base import BaseSpecProvider
@@ -24,7 +24,7 @@ class DenmarkSpecProvider(BaseSpecProvider):
     class Meta:
         """The name of the provider."""
 
-        name = "denmark_provider"
+        name: Final[str] = "denmark_provider"
 
     def _calculate_century_selector(self, year: int) -> int:
         if 1858 <= year < 1900:

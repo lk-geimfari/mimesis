@@ -6,7 +6,7 @@ This module contains provider Address() and other utils which represents
 data related to location, such as street name, city, country and etc.
 """
 
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, Final, List, Optional, Union
 
 from mimesis.data import (
     CALLING_CODES,
@@ -39,7 +39,7 @@ class Address(BaseDataProvider):
     class Meta:
         """Class for metadata."""
 
-        name = "address"
+        name: Final = "address"
 
     @staticmethod
     def _dd_to_dms(num: float, _type: str) -> str:

@@ -4,7 +4,7 @@
 
 import sys
 from pathlib import PurePosixPath, PureWindowsPath
-from typing import Any
+from typing import Any, Final
 
 from mimesis.data import (
     FOLDERS,
@@ -41,7 +41,7 @@ class Path(BaseProvider):
     class Meta:
         """Class for metadata."""
 
-        name = "path"
+        name: Final[str] = "path"
 
     def root(self) -> str:
         """Generate a root dir path.

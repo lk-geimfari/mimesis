@@ -3,7 +3,7 @@
 """Specific data provider for Italy (it)."""
 
 import string
-from typing import Optional
+from typing import Final, Optional
 
 from mimesis.builtins.base import BaseSpecProvider
 from mimesis.enums import Gender
@@ -24,7 +24,7 @@ class ItalySpecProvider(BaseSpecProvider):
     class Meta:
         """The name of the provider."""
 
-        name = "italy_provider"
+        name: Final[str] = "italy_provider"
 
     def fiscal_code(self, gender: Optional[Gender] = None) -> str:
         """Return a random fiscal code.

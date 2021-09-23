@@ -4,7 +4,7 @@
 
 import hashlib
 import secrets
-from typing import Any, Optional
+from typing import Any, Final, Optional
 from uuid import UUID, uuid4
 
 from mimesis.enums import Algorithm
@@ -29,7 +29,7 @@ class Cryptographic(BaseProvider):
     class Meta:
         """Class for metadata."""
 
-        name = "cryptographic"
+        name: Final[str] = "cryptographic"
 
     @staticmethod
     def uuid_object() -> UUID:
