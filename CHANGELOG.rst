@@ -5,6 +5,13 @@ Version 5.0.0
 
 **Warning**: This release contains some breaking changes in API.
 
+
+**Python compatibility**:
+
+Mimesis 5.0 supports Python 3.8, 3.9, and 3.10.
+
+The Mimesis 4.1.3 is the last to support Python 3.6 and 3.7.
+
 **Renamed**:
 
 - Rename ``enums.UnitName`` to ``enums.MeasureUnit``
