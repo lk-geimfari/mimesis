@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """Implements classes for generating data by schema."""
-from typing import Any, Callable, Iterator, List, Optional, Sequence, Final
+from typing import Any, Callable, Final, Iterator, List, Optional, Sequence
 
 from mimesis.exceptions import FieldError, SchemaError
 from mimesis.locales import Locale

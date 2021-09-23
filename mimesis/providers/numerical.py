@@ -169,11 +169,7 @@ class Numerical(BaseProvider):
         return [self.decimal_number(start, end) for _ in range(n)]
 
     def matrix(
-        self,
-        m: int = 10,
-        n: int = 10,
-        num_type: NumType = NumType.FLOAT,
-        **kwargs: Any
+        self, m: int = 10, n: int = 10, num_type: NumType = NumType.FLOAT, **kwargs: Any
     ) -> Matrix:
         """Generate m x n matrix with random numbers.
 
