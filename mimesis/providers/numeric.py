@@ -3,17 +3,17 @@
 """Provides data related to numbers."""
 
 from decimal import Decimal
-from typing import Any, List
+from typing import Any, Final, List
 
 from mimesis.enums import NumType
 from mimesis.providers.base import BaseProvider
 from mimesis.typing import Matrix
 
-__all__ = ["Numerical"]
+__all__ = ["Numeric"]
 
 
-class Numerical(BaseProvider):
-    """A provider for generating numerical data."""
+class Numeric(BaseProvider):
+    """A provider for generating numeric data."""
 
     def __init__(self, *args: Any, **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)
@@ -23,7 +23,7 @@ class Numerical(BaseProvider):
     class Meta:
         """Class for metadata."""
 
-        name = "numerical"
+        name: Final = "numeric"
 
     def incremental(self) -> int:
         """Generate incremental number.

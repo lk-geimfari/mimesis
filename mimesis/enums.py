@@ -231,7 +231,7 @@ class MeasureUnit(Enum):
 class NumType(Enum):
     """Provide number types.
 
-    An argument for :meth:`~mimesis.Numerical.matrix()`.
+    An argument for :meth:`~mimesis.Numeric.matrix()`.
     """
 
     FLOAT = "floats"

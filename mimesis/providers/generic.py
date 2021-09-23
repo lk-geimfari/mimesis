@@ -19,7 +19,7 @@ from mimesis.providers.finance import Finance
 from mimesis.providers.food import Food
 from mimesis.providers.hardware import Hardware
 from mimesis.providers.internet import Internet
-from mimesis.providers.numerical import Numerical
+from mimesis.providers.numeric import Numeric
 from mimesis.providers.path import Path
 from mimesis.providers.payment import Payment
 from mimesis.providers.person import Person
@@ -47,7 +47,7 @@ class Generic(BaseProvider):
         Food,
         Hardware,
         Internet,
-        Numerical,
+        Numeric,
         Path,
         Payment,
         Person,
