@@ -12,11 +12,14 @@ Mimesis 5.0 supports Python 3.8, 3.9, and 3.10.
 
 The Mimesis 4.1.3 is the last to support Python 3.6 and 3.7.
 
+**Reworked**:
+- A method ``Person().username()``. Now it accepts a parameter ``mask`` (``enums.UsernameMask``) instead of ``template`` (str).
+
 **Renamed**:
 
-- Rename ``enums.UnitName`` to ``enums.MeasureUnit``
-- Rename ``enums.PrefixSign`` to ``enums.MetricPrefixSign``
-- Rename ``Business()`` to ``Finance()``
+- Renamed ``enums.UnitName`` to ``enums.MeasureUnit``
+- Renamed ``enums.PrefixSign`` to ``enums.MetricPrefixSign``
+- Renamed ``Business()`` to ``Finance()``
 - Renamed ``BaseDataProvider.pull`` to ``BaseDataProvider._load_datafile``
 - Renamed ``mimesis.providers.numbers.Numbers`` to ``mimesis.providers.numeric.Numeric``
 

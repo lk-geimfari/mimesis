@@ -14,7 +14,7 @@ from mimesis.data import (
     GENDER_SYMBOLS,
     USERNAMES,
 )
-from mimesis.enums import Gender, TitleType
+from mimesis.enums import Gender, TitleType, UsernameMask
 from mimesis.exceptions import NonEnumerableError
 from mimesis.providers.base import BaseDataProvider
 from mimesis.random import get_random_item
@@ -166,62 +166,35 @@ class Person(BaseDataProvider):
             self.surname(gender),
         )
 
-    def username(self, template: Optional[str] = None) -> str:
+    def username(self, mask: Optional[UsernameMask] = None) -> str:
         """Generate username by template.
 
-        Supported template placeholders: (U, l, d)
+        See :class:`mimesis.enums.UsernameMask` for all supported templates.
 
-        Supported separators: (-, ., _)
-
-        Template must contain at least one "U" or "l" placeholder.
-
-        If template is None one of the following templates is used:
-        ('U_d', 'U.d', 'U-d', 'UU-d', 'UU.d', 'UU_d',
-        'ld', 'l-d', 'Ud', 'l.d', 'l_d', 'default')
-
-        :param template: Template.
-        :return: Username.
+        :param mask: UsernameMask enum object.
         :raises ValueError: If template is not supported.
+        :raises NonEnumerableError: If maks is not UsernameMask.
+        :return: Username as string.
 
         :Example:
             Celloid1873
         """
-        min_date, max_date = (1800, 2070)
+        date = (1800, 2100)
 
-        templates: List[str] = [
-            "U_d",
-            "U.d",
-            "U-d",
-            "UU-d",
-            "UU.d",
-            "UU_d",
-            "ld",
-            "l-d",
-            "Ud",
-            "l.d",
-            "l_d",
-            "default",
-        ]
+        mask = self.validate_enum(mask, UsernameMask)
+        if mask is None:
+            mask = get_random_item(UsernameMask, rnd=self.random)
 
-        if template is None:
-            template = self.random.choice(templates)
-
-        if template == "default":
-            template = "l.d"
-
-        if template not in templates:
-            raise ValueError("Template '{}' is not supported.".format(template))
-
-        tags = re.findall(r"[Uld.\-_]", template)
+        tags = re.findall(r"[Uld.\-_]", mask)
 
         username = ""
         for tag in tags:
             if tag == "U":
                 username += self.random.choice(USERNAMES).capitalize()
             elif tag == "l":
-                username += self.random.choice(USERNAMES)
+                username += self.random.choice(USERNAMES).lower()
             elif tag == "d":
-                username += str(self.random.randint(min_date, max_date))
+                username += str(self.random.randint(*date))
             elif tag in "-_.":
                 username += tag
 
@@ -276,7 +249,7 @@ class Person(BaseDataProvider):
         if unique:
             name = self.random.randstr(unique)
         else:
-            name = self.username(template="ld")
+            name = self.username(mask=UsernameMask.LOWER_DIGIT)
 
         return "{name}{domain}".format(
             name=name,
