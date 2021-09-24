@@ -267,8 +267,8 @@ Transport
    :special-members: __init__
 
 
-Schema
-======
+Schema-based Generators
+=======================
 
 BaseField
 ---------

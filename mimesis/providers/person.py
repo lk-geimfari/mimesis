@@ -181,11 +181,12 @@ class Person(BaseDataProvider):
         """
         date = (1800, 2100)
 
-        mask = self.validate_enum(mask, UsernameMask)
         if mask is None:
             mask = get_random_item(UsernameMask, rnd=self.random)
 
-        tags = re.findall(r"[Uld.\-_]", mask)
+        mask_value = self.validate_enum(mask, UsernameMask)
+
+        tags = re.findall(r"[Uld.\-_]", mask_value)
 
         username = ""
         for tag in tags:
