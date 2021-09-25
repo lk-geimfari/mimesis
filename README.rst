@@ -182,7 +182,7 @@ Supported by
 .. raw:: html
     
     <a target="_blank" href="https://www.jetbrains.com/?from=mimesis">
-       <img width="350" height="auto" src="https://user-images.githubusercontent.com/15812620/130522788-8ab324bc-7db2-44f3-a51a-0eda5fe9a9a7.png">
+       <img width="300" height="auto" src="https://user-images.githubusercontent.com/15812620/130522788-8ab324bc-7db2-44f3-a51a-0eda5fe9a9a7.png">
     </a>
 
 
