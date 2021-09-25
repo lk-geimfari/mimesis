@@ -29,7 +29,7 @@ class TestNumbers(object):
     def test_incremental_with_accumulator(self, numeric):
         for i in range(1, 50):
             for key in ("a", "b", "c"):
-                assert numeric.increment(accumulator=key) == i
+                assert numeric.increment(accumulator_key=key) == i
 
         for key in ("a", "b", "c"):
             del numeric._increment_dict[key]
