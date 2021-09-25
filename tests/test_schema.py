@@ -44,7 +44,7 @@ def test_field_with_custom_providers(default_field, modified_field):
 
 def test_field_with_key_function(field):
     result = field("person.name", key=list)
-    assert isinstance(result, list) and len(result) > 1
+    assert isinstance(result, list) and len(result) >= 1
 
 
 def test_field_raises_field_error(default_field):
