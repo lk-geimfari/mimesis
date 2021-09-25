@@ -13,7 +13,8 @@ Mimesis 5.0 supports Python 3.8, 3.9, and 3.10.
 The Mimesis 4.1.3 is the last to support Python 3.6 and 3.7.
 
 **Reworked**:
-- A method ``Person().username()``. Now it accepts a parameter ``mask`` (``enums.UsernameMask``) instead of ``template`` (str).
+
+- A method ``Person().username()``, now it accepts a parameter ``mask`` (``enums.UsernameMask``) instead of ``template`` (str).
 
 **Renamed**:
 
@@ -39,7 +40,7 @@ The Mimesis 4.1.3 is the last to support Python 3.6 and 3.7.
 - Added ``measure_unit`` and ``metric_prefix`` methods for the ``Science`` provider.
 - Added ``.iterator()`` for ``schema.Schema``
 - Added methods ``.slug()`` and ``ip_v4_with_port()`` for ``Internet()``
-- Added ``incremental()`` method for ``Numbers()``
+- Added ``increment()`` method for ``Numbers()``
 - Added methods ``.stock_ticker()``, ``.stock_name()`` and ``.stock_exchange()`` for ``Finance()``
 - Added ``BinaryFile`` data provider which provides binary data files, such as ``.mp3``, ``.mp4``, ``.png``, etc.
 

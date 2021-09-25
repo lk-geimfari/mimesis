@@ -20,8 +20,19 @@ class TestNumbers(object):
 
     def test_incremental(self):
         numeric = Numeric()
+        for i in range(1, 50 + 1):
+            assert numeric.increment() == i
+
+        assert numeric._default_accumulator_value == "default"
+        assert numeric._increment_dict["default"] == 50
+
+    def test_incremental_with_accumulator(self, numeric):
         for i in range(1, 50):
-            assert numeric.incremental() == i
+            for key in ("a", "b", "c"):
+                assert numeric.increment(accumulator=key) == i
+
+        for key in ("a", "b", "c"):
+            del numeric._increment_dict[key]
 
     @pytest.mark.parametrize(
         "start, end",
@@ -194,7 +205,7 @@ class TestSeededNumbers(object):
         return Numeric(seed=seed)
 
     def test_incremental(self, n1, n2):
-        assert n1.incremental() == n2.incremental()
+        assert n1.increment() == n2.increment()
 
     def test_floats(self, n1, n2):
         assert n1.floats() == n2.floats()
