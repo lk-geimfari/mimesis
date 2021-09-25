@@ -2,7 +2,7 @@
 
 """Provides a random choice from items in a sequence."""
 import collections.abc
-from typing import Any, List, Optional, Sequence, Union
+from typing import Any, Final, List, Optional, Sequence, Union
 
 from mimesis.providers.base import BaseProvider
 
@@ -15,7 +15,7 @@ class Choice(BaseProvider):
     class Meta:
         """Class for metadata."""
 
-        name = "choice"
+        name: Final[str] = "choice"
 
     def __init__(self, *args: Any, **kwargs: Any) -> None:
         """Initialize attributes.

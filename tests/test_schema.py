@@ -7,8 +7,7 @@ from mimesis.enums import Gender
 from mimesis.exceptions import FieldError, SchemaError
 from mimesis.locales import Locale
 from mimesis.schema import BaseField, Field, Schema
-
-from .test_providers import patterns
+from tests.test_providers import patterns
 
 
 def test_str(field):
@@ -17,7 +16,7 @@ def test_str(field):
 
 @pytest.fixture
 def default_field():
-    return Field("en")
+    return Field(locale=Locale.EN)
 
 
 @pytest.fixture(scope="module", params=list(Locale))
@@ -27,7 +26,7 @@ def field(request):
 
 @pytest.fixture
 def modified_field():
-    return Field("en", providers=(USASpecProvider,))
+    return Field(locale=Locale.EN, providers=(USASpecProvider,))
 
 
 def test_field(field):
@@ -44,8 +43,8 @@ def test_field_with_custom_providers(default_field, modified_field):
 
 
 def test_field_with_key_function(field):
-    name = field("person.name", key=str.upper)
-    assert name.isupper()
+    result = field("person.name", key=list)
+    assert isinstance(result, list) and len(result) >= 1
 
 
 def test_field_raises_field_error(default_field):
@@ -110,7 +109,8 @@ def test_schema_create(schema):
     assert first["timestamp"] != last["timestamp"]
     assert first["owner"]["creator"] != last["owner"]["creator"]
 
-    assert schema.create(0) == []
+    with pytest.raises(ValueError):
+        schema.create(0)
 
 
 def test_schema_iterator(schema):

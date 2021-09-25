@@ -3,7 +3,7 @@
 """File data provider."""
 
 import re
-from typing import Any, Optional
+from typing import Any, Final, Optional
 
 from mimesis.data import EXTENSIONS, MIME_TYPES
 from mimesis.enums import FileType, MimeType
@@ -29,7 +29,7 @@ class File(BaseProvider):
     class Meta:
         """Class for metadata."""
 
-        name = "file"
+        name: Final[str] = "file"
 
     def __sub(self, string: str = "") -> str:
         """Replace spaces in string.

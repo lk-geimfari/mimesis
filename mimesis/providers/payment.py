@@ -4,7 +4,7 @@
 
 import re
 import string
-from typing import Any, Dict, Optional
+from typing import Any, Dict, Final, Optional
 
 from mimesis.data import CREDIT_CARD_NETWORKS
 from mimesis.enums import CardType, Gender
@@ -33,7 +33,7 @@ class Payment(BaseProvider):
     class Meta:
         """Class for metadata."""
 
-        name = "payment"
+        name: Final[str] = "payment"
 
     def cid(self) -> str:
         """Generate a random CID.

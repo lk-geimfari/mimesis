@@ -2,22 +2,23 @@
 
 """Custom exceptions which used in Mimesis."""
 
-from typing import Any, Optional
+from typing import Any, Optional, Union
+
+from mimesis.enums import Locale
 
 
 class LocaleError(ValueError):
     """Raised when a locale isn't supported."""
 
-    def __init__(self, locale: Optional[str] = None) -> None:
+    def __init__(self, locale: Union[Locale, str]) -> None:
         """Initialize attributes for informative output.
 
         :param locale: Locale.
         """
         self.locale = locale
-        self.message = "Locale «{}» is not supported"
 
     def __str__(self) -> str:
-        return self.message.format(self.locale)
+        return f"Invalid locale «{self.locale}»"
 
 
 class SchemaError(ValueError):

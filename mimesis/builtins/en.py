@@ -2,7 +2,7 @@
 
 """Specific data provider for USA (en)."""
 
-from typing import Optional
+from typing import Final, Optional
 
 from mimesis.builtins.base import BaseSpecProvider
 from mimesis.locales import Locale
@@ -21,7 +21,7 @@ class USASpecProvider(BaseSpecProvider):
     class Meta:
         """The name of the provider."""
 
-        name = "usa_provider"
+        name: Final[str] = "usa_provider"
 
     def tracking_number(self, service: str = "usps") -> str:
         """Generate random tracking number.

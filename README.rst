@@ -35,13 +35,13 @@ Description
      :target: https://pypi.org/project/mimesis/
      :alt: PyPI - Downloads
 
-.. image:: https://img.shields.io/badge/python-3.6+-brightgreen.svg
-     :target: https://badge.fury.io/py/mimesis
+.. image:: https://img.shields.io/badge/python-3.8%20%7C%203.9-brightgreen
+     :target: https://pypi.org/project/mimesis/
      :alt: Python version
 
-Mimesis (/mɪˈmiːsɪs, Ancient Greek: μίμησις, mīmēsis) is a high-performance fake data generator for Python, which provides data for a variety of
-purposes in a variety of languages. The fake data could be used to populate a testing database,
-create fake API endpoints, create JSON and XML files of arbitrary structure, anonymize data taken
+Mimesis (/mɪˈmiːsɪs, Ancient Greek: μίμησις, mīmēsis) is a high-performance fake data generator for Python,
+which provides data for a variety of purposes in a variety of languages. The fake data could be used to populate
+a testing database, create fake API endpoints, create JSON and XML files of arbitrary structure, anonymize data taken
 from production and etc.
 
 Installation
@@ -182,7 +182,7 @@ Supported by
 .. raw:: html
     
     <a target="_blank" href="https://www.jetbrains.com/?from=mimesis">
-       <img width="350" height="auto" src="https://user-images.githubusercontent.com/15812620/130522788-8ab324bc-7db2-44f3-a51a-0eda5fe9a9a7.png">
+       <img width="300" height="auto" src="https://user-images.githubusercontent.com/15812620/130522788-8ab324bc-7db2-44f3-a51a-0eda5fe9a9a7.png">
     </a>
 
 

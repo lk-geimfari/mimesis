@@ -18,19 +18,30 @@ class TestBase(object):
     @pytest.mark.parametrize(
         "locale, new_locale",
         [
-            ("en", "ru"),
+            (Locale.EN, Locale.RU),
         ],
     )
-    def test_override(self, locale, new_locale):
+    def test_override_locale(self, locale, new_locale):
         provider = Person(locale)
-        assert provider.locale == locale
+        assert Locale(provider.locale) == locale
 
         with provider.override_locale(new_locale):
             assert "Жен." in provider._data["gender"]
-            assert provider.locale == new_locale
+            assert Locale(provider.locale) == new_locale
 
-        assert provider.locale == locale
+        assert Locale(provider.locale) == locale
         assert "Жен." not in provider._data["gender"]
+
+        del provider.locale
+        with pytest.raises(ValueError):
+            with provider.override_locale(new_locale):
+                pass
+
+    def test_override_missing_locale_argument(self):
+        provider = Person(Locale.EN)
+        with pytest.raises(TypeError):
+            with provider.override_locale():
+                pass
 
     @pytest.mark.parametrize(
         "provider",
@@ -48,21 +59,21 @@ class TestBase(object):
     @pytest.mark.parametrize(
         "locale, city",
         [
-            ("en", "New York"),
-            ("en-gb", "Aberystwyth"),
-            ("ru", "Москва"),
+            (Locale.EN, "New York"),
+            (Locale.EN_GB, "Aberystwyth"),
+            (Locale.RU, "Москва"),
         ],
     )
     def test_pull(self, locale, city):
         data_provider = BaseDataProvider(locale)
-        data_provider._pull("address.json")
+        data_provider._load_datafile("address.json")
         assert city in data_provider._data["city"]
 
     @pytest.mark.parametrize("locale", list(Locale))
     def test_pull_raises(self, locale):
         data_provider = BaseDataProvider(locale=locale)
         with pytest.raises(FileNotFoundError):
-            data_provider._pull("something.json")
+            data_provider._load_datafile("something.json")
 
     def test_extract(self, base_data_provider):
         dictionary = {"names": {"female": "Ariel", "male": "John"}}
@@ -79,6 +90,13 @@ class TestBase(object):
 
         with pytest.raises(ValueError):
             assert base_data_provider.extract([])
+
+    def test_extract_missing_positional_arguments(self, base_data_provider):
+        with pytest.raises(TypeError):
+            assert base_data_provider.extract(default=None)
+
+        with pytest.raises(TypeError):
+            assert base_data_provider.extract()
 
     def test_update_dict(self, base_data_provider):
         first = {
@@ -115,9 +133,9 @@ class TestBase(object):
     @pytest.mark.parametrize(
         "inp, out",
         [
-            ("EN", "en"),
-            ("DE", "de"),
-            ("RU", "ru"),
+            (Locale.EN, "en"),
+            (Locale.DE, "de"),
+            (Locale.RU, "ru"),
         ],
     )
     def test_setup_locale(self, base_data_provider, inp, out):
@@ -148,10 +166,10 @@ class TestBase(object):
         with pytest.raises(NonEnumerableError):
             base_data_provider.validate_enum("", "")
 
-    @pytest.mark.parametrize("locale", list(Locale))
+    @pytest.mark.parametrize("locale", Locale)
     def test_get_current_locale(self, locale):
         base = BaseDataProvider(locale=locale)
-        assert locale == base.get_current_locale()
+        assert locale.value == base.get_current_locale()
 
 
 class TestSeededBase(object):

@@ -4,7 +4,7 @@
 
 import datetime
 from decimal import Decimal
-from typing import Any, Dict, List, Set, Tuple, Union
+from typing import Any, Callable, Dict, List, Set, Tuple, Union
 
 __all__ = [
     "Date",
@@ -15,6 +15,7 @@ __all__ = [
     "Time",
     "Timestamp",
     "Keywords",
+    "SchemaType",
 ]
 
 JSON = Dict[str, Any]
@@ -37,3 +38,5 @@ Matrix = Union[
     List[complex],
     List[Decimal],
 ]
+
+SchemaType = Callable[[], JSON]

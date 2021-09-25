@@ -2,36 +2,43 @@
 
 """Provides data related to numbers."""
 
+from collections import defaultdict
 from decimal import Decimal
-from typing import Any, List
+from typing import Any, DefaultDict, Final, List, Optional
 
-from mimesis.enums import NumTypes
+from mimesis.enums import NumType
 from mimesis.providers.base import BaseProvider
 from mimesis.typing import Matrix
 
-__all__ = ["Numbers"]
+__all__ = ["Numeric"]
 
 
-class Numbers(BaseProvider):
-    """Class for generating numbers."""
+class Numeric(BaseProvider):
+    """A provider for generating numeric data."""
 
     def __init__(self, *args: Any, **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)
-
-        self.__inc = 0
+        self._increment_dict: DefaultDict[str, int] = defaultdict(int)
+        self._default_accumulator_value: Final = "default"
 
     class Meta:
         """Class for metadata."""
 
-        name = "numbers"
+        name: Final = "numeric"
 
-    def incremental(self) -> int:
+    def increment(self, accumulator_key: Optional[str] = None) -> int:
         """Generate incremental number.
 
+        Each call of this method returns incremented number.
+
+        :param accumulator_key: Accumulator name.
         :return: Integer.
         """
-        self.__inc += 1
-        return self.__inc
+        if not accumulator_key:
+            accumulator_key = self._default_accumulator_value
+
+        self._increment_dict[accumulator_key] += 1
+        return self._increment_dict[accumulator_key]
 
     def float_number(
         self, start: float = -1000.0, end: float = 1000.0, precision: int = 15
@@ -94,7 +101,7 @@ class Numbers(BaseProvider):
         precision_real: int = 15,
         precision_imag: int = 15,
     ) -> complex:
-        """Generate random complex number.
+        """Generate a random complex number.
 
         :param start_real: Start real range.
         :param end_real: End real range.
@@ -159,7 +166,7 @@ class Numbers(BaseProvider):
     def decimals(
         self, start: float = 0.0, end: float = 1000.0, n: int = 10
     ) -> List[Decimal]:
-        """Generate decimal number as :py:class:`decimal.Decimal` objects.
+        """Generate a decimal number as :py:class:`decimal.Decimal` objects.
 
         :param start: Start range.
         :param end: End range.
@@ -169,11 +176,7 @@ class Numbers(BaseProvider):
         return [self.decimal_number(start, end) for _ in range(n)]
 
     def matrix(
-        self,
-        m: int = 10,
-        n: int = 10,
-        num_type: NumTypes = NumTypes.FLOATS,
-        **kwargs: Any
+        self, m: int = 10, n: int = 10, num_type: NumType = NumType.FLOAT, **kwargs: Any
     ) -> Matrix:
         """Generate m x n matrix with random numbers.
 
@@ -184,11 +187,11 @@ class Numbers(BaseProvider):
 
         :param m: Number of rows.
         :param n: Number of columns.
-        :param num_type: NumTypes enum object.
+        :param num_type: NumType enum object.
         :param kwargs: Other method-specific arguments.
         :return: A matrix of random numbers.
         """
-        key = self.validate_enum(num_type, NumTypes)
+        key = self.validate_enum(num_type, NumType)
         kwargs.update({"n": n})
         method = getattr(self, key)
         return [method(**kwargs) for _ in range(m)]

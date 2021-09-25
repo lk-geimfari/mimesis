@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """Specific data provider for Brazil (pt-br)."""
-from typing import List, Optional
+from typing import Final, List, Optional
 
 from mimesis.builtins.base import BaseSpecProvider
 from mimesis.locales import Locale
@@ -21,7 +21,7 @@ class BrazilSpecProvider(BaseSpecProvider):
     class Meta:
         """The name of the provider."""
 
-        name = "brazil_provider"
+        name: Final[str] = "brazil_provider"
 
     def cpf(self, with_mask: bool = True) -> str:
         """Get a random CPF.

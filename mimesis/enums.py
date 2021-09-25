@@ -13,6 +13,51 @@ Below you can see an example of usage enums in methods of data providers.
 """
 
 from enum import Enum
+from typing import List
+
+
+class Locale(Enum):
+    """This class provides access to the supported locales from one place."""
+
+    CS = "cs"
+    DA = "da"
+    DE = "de"
+    DE_AT = "de-at"
+    DE_CH = "de-ch"
+    EL = "el"
+    EN = "en"
+    EN_AU = "en-au"
+    EN_CA = "en-ca"
+    EN_GB = "en-gb"
+    ES = "es"
+    ES_MX = "es-mx"
+    ET = "et"
+    FA = "fa"
+    FI = "fi"
+    FR = "fr"
+    HU = "hu"
+    IS = "is"
+    IT = "it"
+    JA = "ja"
+    KK = "kk"
+    KO = "ko"
+    NL = "nl"
+    NL_BE = "nl-be"
+    NO = "no"
+    PL = "pl"
+    PT = "pt"
+    PT_BR = "pt-br"
+    RU = "ru"
+    SK = "sk"
+    SV = "sv"
+    TR = "tr"
+    UK = "uk"
+    ZH = "zh"
+    DEFAULT = EN
+
+    @classmethod
+    def values(cls) -> List[str]:
+        return [i.value for i in cls.__members__.values()]
 
 
 class PortRange(Enum):
@@ -34,8 +79,8 @@ class Gender(Enum):
     takes argument ``gender``.
     """
 
-    FEMALE = "female"
     MALE = "male"
+    FEMALE = "female"
 
 
 class TitleType(Enum):
@@ -54,8 +99,8 @@ class CardType(Enum):
     An argument for :meth:`~mimesis.Payment.credit_card_number()`.
     """
 
-    MASTER_CARD = "MasterCard"
     VISA = "Visa"
+    MASTER_CARD = "MasterCard"
     AMERICAN_EXPRESS = "American Express"
 
 
@@ -183,16 +228,16 @@ class MeasureUnit(Enum):
     RADIOACTIVITY = ("becquerel", "Bq")
 
 
-class NumTypes(Enum):
+class NumType(Enum):
     """Provide number types.
 
-    An argument for :meth:`~mimesis.Numbers.matrix()`.
+    An argument for :meth:`~mimesis.Numeric.matrix()`.
     """
 
-    FLOATS = "floats"
-    INTEGERS = "integers"
-    COMPLEXES = "complexes"
-    DECIMALS = "decimals"
+    FLOAT = "floats"
+    INTEGER = "integers"
+    COMPLEX = "complexes"
+    DECIMAL = "decimals"
 
 
 class VideoFile(Enum):
@@ -221,3 +266,23 @@ class DocumentFile(Enum):
 class CompressedFile(Enum):
     ZIP = "zip"
     GZIP = "gz"
+
+
+class UsernameMask(Enum):
+    """Provide username masks.
+
+    An argument for :meth:`~mimesis.Person.username()`.
+    """
+
+    UPPER_DIGIT = "Ud"
+    LOWER_DIGIT = "ld"
+    UPPER_DOT_DIGIT = "U.d"
+    LOWER_DOT_DIGIT = "l.d"
+    LOWER_DASH_DIGIT = "l-d"
+    UPPER_DASH_DIGIT = "U-d"
+    UPPER_UPPER_DOT_DIGIT = "UU.d"
+    LOWER_UNDERSCORE_DIGIT = "l_d"
+    UPPER_UNDERSCORE_DIGIT = "U_d"
+    UPPER_UPPER_DASH_DIGIT = "UU-d"
+    UPPER_UPPER_UNDERSCORE_DIGIT = "UU_d"
+    DEFAULT = "l.d"

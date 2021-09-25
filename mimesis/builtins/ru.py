@@ -3,7 +3,7 @@
 """Specific data provider for Russia (ru)."""
 
 from datetime import datetime
-from typing import List, Optional
+from typing import Final, List, Optional
 
 from mimesis.builtins.base import BaseSpecProvider
 from mimesis.enums import Gender
@@ -19,13 +19,13 @@ class RussiaSpecProvider(BaseSpecProvider):
     def __init__(self, seed: Optional[Seed] = None) -> None:
         """Initialize attributes."""
         super().__init__(locale=Locale.RU, seed=seed)
-        self._pull(self._datafile)
+        self._load_datafile(self._datafile)
         self._current_year = str(datetime.now().year)
 
     class Meta:
         """The name of the provider."""
 
-        name = "russia_provider"
+        name: Final[str] = "russia_provider"
 
     def generate_sentence(self) -> str:
         """Generate sentence from the parts.

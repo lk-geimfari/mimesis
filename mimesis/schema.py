@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 
 """Implements classes for generating data by schema."""
-from typing import Any, Callable, Iterator, List, Optional
+from typing import Any, Callable, Final, Iterator, List, Optional, Sequence
 
 from mimesis.exceptions import FieldError, SchemaError
 from mimesis.locales import Locale
 from mimesis.providers.generic import Generic
-from mimesis.typing import JSON, Seed
+from mimesis.typing import JSON, SchemaType, Seed
 
 __all__ = ["BaseField", "Field", "Schema"]
 
@@ -15,7 +15,7 @@ class BaseField:
     """
     BaseField is a class for generating data by the name of the method.
 
-    Instance of this object takes any string which represents name
+    Instance of this object takes any string which represents the name
     of any method of any supported data provider (:class:`~mimesis.Generic`)
     and the ``**kwargs`` of the method.
 
@@ -27,18 +27,16 @@ class BaseField:
 
     def __init__(
         self,
-        locale: str = Locale.DEFAULT,
+        locale: Locale = Locale.DEFAULT,
         seed: Optional[Seed] = None,
-        providers: Optional[Any] = None,
+        providers: Optional[Sequence[Any]] = None,
     ) -> None:
         """Initialize field.
 
         :param locale: Locale
         :param seed: Seed for random.
         """
-        self.locale = locale
-        self.seed = seed
-        self._gen = Generic(self.locale, self.seed)
+        self._gen = Generic(locale, seed)
 
         if providers:
             self._gen.add_providers(*providers)
@@ -117,30 +115,39 @@ class BaseField:
         except KeyError:
             raise FieldError(name)
 
+    def __str__(self) -> str:
+        return "{} <{}>".format(self.__class__.__name__, self._gen.locale)
+
 
 class Field(BaseField):
-    """Greedy evaluation field"""
+    """Greedy field.
 
-    class Meta:
-        eager = True
+    The field whcih evaluates immediately.
+
+    Example:
+        >>> _ = Field()
+        >>> _('username')
+        Dogtag_1836
+    """
 
     def __call__(self, *args: Any, **kwargs: Any) -> Any:
         return self.perform(*args, **kwargs)
-
-    def __str__(self) -> str:
-        return "{} <{}>".format(self.__class__.__name__, self.locale)
 
 
 class Schema:
     """Class which return list of filled schemas."""
 
-    def __init__(self, schema: Callable[[], JSON]) -> None:
+    _MIN_ITERATIONS_VALUE: Final = 1
+
+    __slots__ = ("_schema",)
+
+    def __init__(self, schema: SchemaType) -> None:
         """Initialize schema.
 
         :param schema: A schema (must be a callable object).
         """
         if schema and callable(schema):
-            self.schema = schema
+            self._schema = schema
         else:
             raise SchemaError()
 
@@ -152,12 +159,16 @@ class Schema:
             large datasets otherwise you're risking running out of memory.
 
             If you need a lazy version of this method, see
-            :class:`~mimesis.schema.Schema.iterator`
+            :meth:`iterator`
 
         :param iterations: Number of iterations.
         :return: List of fulfilled schemas.
         """
-        return [self.schema() for _ in range(iterations)]
+
+        if iterations < self._MIN_ITERATIONS_VALUE:
+            raise ValueError("The number of iterations must be greater than 0.")
+
+        return [self._schema() for _ in range(iterations)]
 
     def iterator(self, iterations: int = 1) -> Iterator[JSON]:
         """Fulfills schema in a lazy way.
@@ -166,8 +177,8 @@ class Schema:
         :return: List of fulfilled schemas.
         """
 
-        if iterations < 1:
+        if iterations < self._MIN_ITERATIONS_VALUE:
             raise ValueError("The number of iterations must be greater than 0.")
 
         for item in range(iterations):
-            yield self.schema()
+            yield self._schema()

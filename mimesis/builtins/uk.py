@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """Specific data provider for Ukraine (uk)."""
-from typing import List, Optional
+from typing import Final, List, Optional
 
 from mimesis.builtins.base import BaseSpecProvider
 from mimesis.enums import Gender
@@ -17,12 +17,12 @@ class UkraineSpecProvider(BaseSpecProvider):
     def __init__(self, seed: Optional[Seed] = None) -> None:
         """Initialize attributes."""
         super().__init__(locale=Locale.UK, seed=seed)
-        self._pull(self._datafile)
+        self._load_datafile(self._datafile)
 
     class Meta:
         """The name of the provider."""
 
-        name = "ukraine_provider"
+        name: Final[str] = "ukraine_provider"
 
     def patronymic(self, gender: Optional[Gender] = None) -> str:
         """Generate random patronymic name.

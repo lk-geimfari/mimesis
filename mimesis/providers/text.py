@@ -2,7 +2,7 @@
 
 """Provides data related to text."""
 
-from typing import Any, List, Tuple
+from typing import Any, Final, List, Tuple
 
 from mimesis.data import SAFE_COLORS
 from mimesis.providers.base import BaseDataProvider
@@ -21,12 +21,12 @@ class Text(BaseDataProvider):
         """
         super().__init__(*args, **kwargs)
         self._datafile = "text.json"
-        self._pull(self._datafile)
+        self._load_datafile(self._datafile)
 
     class Meta:
         """Class for metadata."""
 
-        name = "text"
+        name: Final[str] = "text"
 
     def alphabet(self, lower_case: bool = False) -> List[str]:
         """Get an alphabet for current locale.

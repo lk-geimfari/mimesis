@@ -4,7 +4,7 @@
 
 import hashlib
 import secrets
-from typing import Any, Optional, Union
+from typing import Any, Final, Optional
 from uuid import UUID, uuid4
 
 from mimesis.enums import Algorithm
@@ -24,33 +24,27 @@ class Cryptographic(BaseProvider):
         :param seed: Seed.
         """
         super().__init__(*args, **kwargs)
-        self._text = Text(Locale.EN, seed=self.seed)
+        self._text = Text(locale=Locale.EN, seed=self.seed)
 
     class Meta:
         """Class for metadata."""
 
-        name = "cryptographic"
+        name: Final[str] = "cryptographic"
 
     @staticmethod
-    def uuid(as_object: bool = False) -> Union[UUID, str]:
-        """Generate random UUID4.
+    def uuid_object() -> UUID:
+        """Generate UUID4 object.
 
-        This method returns string by default,
-        but you can make it return :py:class:`uuid.UUID` object using
-        parameter **as_object**
-
-        .. warning:: Seed is not applicable to this method,
-            because of its cryptographic-safe nature.
-
-        :param as_object: Returns :py:class:`uuid.UUID`.
-        :return: UUID.
+        :return: UUID4 object.
         """
-        uid = uuid4()
+        return uuid4()
 
-        if not as_object:
-            return str(uid)
+    def uuid(self) -> str:
+        """Generate UUID4 string.
 
-        return uid
+        :return: UUID4 as string.
+        """
+        return str(self.uuid_object())
 
     def hash(self, algorithm: Optional[Algorithm] = None) -> str:  # noqa: A003
         """Generate random hash.

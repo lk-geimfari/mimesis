@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """Provides data related to food."""
-from typing import Any, List
+from typing import Any, Final, List
 
 from mimesis.providers.base import BaseDataProvider
 
@@ -18,12 +18,12 @@ class Food(BaseDataProvider):
         """
         super().__init__(*args, **kwargs)
         self._datafile = "food.json"
-        self._pull(self._datafile)
+        self._load_datafile(self._datafile)
 
     class Meta:
         """Class for metadata."""
 
-        name = "food"
+        name: Final[str] = "food"
 
     def _choice_from(self, key: str) -> str:
         """Choice random element."""

@@ -4,7 +4,7 @@
 
 from calendar import monthrange, timegm
 from datetime import date, datetime, time, timedelta
-from typing import Any, List, Optional, Union
+from typing import Any, Final, List, Optional, Union
 
 from mimesis.compat import pytz
 from mimesis.data import GMT_OFFSETS, ROMAN_NUMS, TIMEZONES
@@ -24,12 +24,12 @@ class Datetime(BaseDataProvider):
         """Initialize attributes."""
         super().__init__(*args, **kwargs)
         self._datafile = "datetime.json"
-        self._pull(self._datafile)
+        self._load_datafile(self._datafile)
 
     class Meta:
         """Class for metadata."""
 
-        name = "datetime"
+        name: Final[str] = "datetime"
 
     @staticmethod
     def bulk_create_datetimes(

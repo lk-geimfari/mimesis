@@ -3,7 +3,7 @@
 """Provides all at one."""
 
 import inspect
-from typing import Any, List, Optional, Type
+from typing import Any, Final, List, Optional, Type
 
 from mimesis.locales import Locale
 from mimesis.providers.address import Address
@@ -19,7 +19,7 @@ from mimesis.providers.finance import Finance
 from mimesis.providers.food import Food
 from mimesis.providers.hardware import Hardware
 from mimesis.providers.internet import Internet
-from mimesis.providers.numbers import Numbers
+from mimesis.providers.numeric import Numeric
 from mimesis.providers.path import Path
 from mimesis.providers.payment import Payment
 from mimesis.providers.person import Person
@@ -47,7 +47,7 @@ class Generic(BaseProvider):
         Food,
         Hardware,
         Internet,
-        Numbers,
+        Numeric,
         Path,
         Payment,
         Person,
@@ -58,7 +58,7 @@ class Generic(BaseProvider):
     )
 
     def __init__(
-        self, locale: str = Locale.DEFAULT, seed: Optional[Seed] = None
+        self, locale: Locale = Locale.DEFAULT, seed: Optional[Seed] = None
     ) -> None:
         """Initialize attributes lazily."""
         super().__init__(seed=seed)
@@ -67,16 +67,16 @@ class Generic(BaseProvider):
         for provider in self._DEFAULT_PROVIDERS:
             name = getattr(provider.Meta, "name")  # type: ignore
 
-            # Check if a provider is locale dependent.
-            if hasattr(provider, "_data"):
+            # Check if a provider is locale-dependent.
+            if issubclass(provider, BaseDataProvider):
                 setattr(self, f"_{name}", provider)
-            else:
+            elif issubclass(provider, BaseProvider):
                 setattr(self, name, provider(seed=self.seed))
 
     class Meta:
         """Class for metadata."""
 
-        name = "generic"
+        name: Final[str] = "generic"
 
     def __getattr__(self, attrname: str) -> Any:
         """Get attribute without underscore.
@@ -101,7 +101,7 @@ class Generic(BaseProvider):
         :return: List of attributes.
         """
         attributes = []
-        exclude = BaseDataProvider().__dict__.keys()
+        exclude = BaseProvider().__dict__.keys()
 
         for a in self.__dict__:
             if a not in exclude:
@@ -112,7 +112,7 @@ class Generic(BaseProvider):
                     attributes.append(a)
         return attributes
 
-    def add_provider(self, cls: Type[BaseProvider]) -> None:
+    def add_provider(self, cls: Type[BaseProvider], **kwargs: Any) -> None:
         """Add a custom provider to Generic() object.
 
         :param cls: Custom provider.
@@ -127,11 +127,14 @@ class Generic(BaseProvider):
                     "subclass of mimesis.providers.BaseProvider"
                 )
             try:
-                meta = getattr(cls, "Meta")
-                name = getattr(meta, "name")
+                name = cls.Meta.name  # type: ignore
             except AttributeError:
                 name = cls.__name__.lower()
-            setattr(self, name, cls(seed=self.seed))
+
+            if "seed" in kwargs:
+                kwargs.pop("seed")
+
+            setattr(self, name, cls(seed=self.seed, **kwargs))
         else:
             raise TypeError("The provider must be a class")
 

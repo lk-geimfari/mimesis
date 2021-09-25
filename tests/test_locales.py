@@ -1,10 +1,31 @@
-from mimesis.locales import Locale
+from enum import Enum
+
+import pytest
+from mimesis.exceptions import LocaleError
+from mimesis.locales import Locale, validate_locale
 
 
-def test_locales_count():
+def test_locale_enum():
     assert len(list(Locale)) == 34
+    assert issubclass(Locale, Enum)
 
 
-def test_locale_in():
-    assert "ru" in Locale
-    assert "en" in Locale
+def test_validate_locale_missing_locale():
+    with pytest.raises(TypeError):
+        validate_locale()
+
+
+def test_validate_locale_invalid_locale():
+    with pytest.raises(LocaleError):
+        validate_locale(locale=None)
+
+    with pytest.raises(LocaleError):
+        validate_locale(locale="nil")
+
+
+def test_validate_locale():
+    validated_locale = validate_locale("en")
+
+    assert validated_locale == Locale.EN
+    assert issubclass(validated_locale.__class__, Enum)
+    assert isinstance(validate_locale(Locale.EN), Locale)

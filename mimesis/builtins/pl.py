@@ -2,7 +2,7 @@
 
 """Specific data provider for Poland (pl)."""
 
-from typing import Optional
+from typing import Final, Optional
 
 from mimesis.builtins.base import BaseSpecProvider
 from mimesis.enums import Gender
@@ -23,7 +23,7 @@ class PolandSpecProvider(BaseSpecProvider):
     class Meta:
         """The name of the provider."""
 
-        name = "poland_provider"
+        name: Final[str] = "poland_provider"
 
     def nip(self) -> str:
         """Generate random valid 10-digit NIP.

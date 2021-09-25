@@ -69,10 +69,10 @@ PolandSpecProvider
    :members:
    :special-members: __init__
 
-Decorators
-==========
+Shortcuts
+=========
 
-.. automodule:: mimesis.decorators
+.. automodule:: mimesis.shortcuts
    :members:
 
 
@@ -245,10 +245,10 @@ Internet
    :members:
    :special-members: __init__
 
-Numbers
+Numeric
 -------
 
-.. autoclass:: mimesis.Numbers
+.. autoclass:: mimesis.Numeric
    :members:
    :special-members: __init__
 
@@ -267,8 +267,8 @@ Transport
    :special-members: __init__
 
 
-Schema
-======
+Schema-based Generators
+=======================
 
 BaseField
 ---------

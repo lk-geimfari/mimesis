@@ -2,6 +2,8 @@
 
 """Data related to the development."""
 
+from typing import Final
+
 from mimesis.data import LICENSES, OS, PROGRAMMING_LANGS
 from mimesis.providers.base import BaseProvider
 
@@ -14,7 +16,7 @@ class Development(BaseProvider):
     class Meta:
         """Class for metadata."""
 
-        name = "development"
+        name: Final[str] = "development"
 
     def software_license(self) -> str:
         """Get a random software license.

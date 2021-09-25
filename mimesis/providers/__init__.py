@@ -16,7 +16,7 @@ from mimesis.providers.food import Food
 from mimesis.providers.generic import Generic
 from mimesis.providers.hardware import Hardware
 from mimesis.providers.internet import Internet
-from mimesis.providers.numbers import Numbers
+from mimesis.providers.numeric import Numeric
 from mimesis.providers.path import Path
 from mimesis.providers.payment import Payment
 from mimesis.providers.person import Person
@@ -42,7 +42,7 @@ __all__ = [
     "Food",
     "Hardware",
     "Internet",
-    "Numbers",
+    "Numeric",
     "Path",
     "Payment",
     "Person",

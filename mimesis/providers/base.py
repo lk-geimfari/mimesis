@@ -10,8 +10,8 @@ from functools import reduce
 from pathlib import Path
 from typing import Any, Generator, List, Optional
 
-from mimesis.exceptions import LocaleError, NonEnumerableError
-from mimesis.locales import Locale
+from mimesis.exceptions import NonEnumerableError
+from mimesis.locales import Locale, validate_locale
 from mimesis.random import Random, get_random_item, random
 from mimesis.typing import JSON, Seed
 
@@ -21,7 +21,7 @@ __all__ = ["BaseDataProvider", "BaseProvider"]
 class BaseProvider:
     """This is a base class for all providers."""
 
-    def __init__(self, *, seed: Optional[Seed] = None) -> None:
+    def __init__(self, *, seed: Optional[Seed] = None, **kwargs: Any) -> None:
         """Initialize attributes.
 
         Keep in mind, that locale-independent data providers will work
@@ -77,8 +77,10 @@ class BaseProvider:
 class BaseDataProvider(BaseProvider):
     """This is a base class for all data providers."""
 
+    _LOCALE_SEPARATOR = "-"
+
     def __init__(
-        self, locale: str = Locale.DEFAULT, seed: Optional[Seed] = None
+        self, locale: Locale = Locale.DEFAULT, seed: Optional[Seed] = None
     ) -> None:
         """Initialize attributes for data providers.
 
@@ -90,6 +92,17 @@ class BaseDataProvider(BaseProvider):
         self._datafile = ""
         self._setup_locale(locale)
         self._data_dir = Path(__file__).parent.parent.joinpath("data")
+
+    def _setup_locale(self, locale: Locale = Locale.DEFAULT) -> None:
+        """Set up locale after pre-check.
+
+        :param str locale: Locale
+        :raises UnsupportedLocale: When locale not supported.
+        :return: Nothing.
+        """
+
+        locale_obj = validate_locale(locale)
+        self.locale = locale_obj.value
 
     def extract(self, keys: List[str], default: Optional[Any] = None) -> Any:
         """Extracts nested values from JSON file by list of keys.
@@ -109,22 +122,6 @@ class BaseDataProvider(BaseProvider):
         except (TypeError, KeyError):
             return default
 
-    def _setup_locale(self, locale: str = Locale.DEFAULT) -> None:
-        """Set up locale after pre-check.
-
-        :param str locale: Locale
-        :raises UnsupportedLocale: When locale not supported.
-        :return: Nothing.
-        """
-        if not locale:
-            locale = Locale.DEFAULT
-
-        locale = locale.lower()
-        if locale not in Locale:
-            raise LocaleError(locale)
-
-        self.locale = locale
-
     def _update_dict(self, initial: JSON, other: JSON) -> JSON:
         """Recursively update a dictionary.
 
@@ -141,7 +138,7 @@ class BaseDataProvider(BaseProvider):
         return initial
 
     @functools.lru_cache(maxsize=None)
-    def _pull(self, datafile: str = "") -> None:
+    def _load_datafile(self, datafile: str = "") -> None:
         """Pull the content from the JSON and memorize one.
 
         Opens JSON file ``file`` in the folder ``data/locale``
@@ -167,12 +164,10 @@ class BaseDataProvider(BaseProvider):
             with open(file_path, "r", encoding="utf8") as f:
                 return json.load(f)
 
-        separator = "-"
-
-        master_locale = locale.split(separator).pop(0)
+        master_locale = locale.split(self._LOCALE_SEPARATOR).pop(0)
         data = get_data(master_locale)
 
-        if separator in locale:
+        if self._LOCALE_SEPARATOR in locale:
             data = self._update_dict(data, get_data(locale))
 
         self._data = data
@@ -187,20 +182,20 @@ class BaseDataProvider(BaseProvider):
         """
         return self.locale
 
-    def _override_locale(self, locale: str = Locale.DEFAULT) -> None:
+    def _override_locale(self, locale: Locale = Locale.DEFAULT) -> None:
         """Overrides current locale with passed and pull data for new locale.
 
         :param locale: Locale
         :return: Nothing.
         """
-        self.locale = locale
-        self._pull.cache_clear()
-        self._pull()
+        self._setup_locale(locale)
+        self._load_datafile.cache_clear()
+        self._load_datafile()
 
     @contextlib.contextmanager
     def override_locale(
         self,
-        locale: str = Locale.DEFAULT,
+        locale: Locale,
     ) -> Generator["BaseDataProvider", None, None]:
         """Context manager which allows overriding current locale.
 
@@ -211,7 +206,7 @@ class BaseDataProvider(BaseProvider):
         :return: Provider with overridden locale.
         """
         try:
-            origin_locale = self.locale
+            origin_locale = Locale(self.locale)
             self._override_locale(locale)
             try:
                 yield self
@@ -225,4 +220,4 @@ class BaseDataProvider(BaseProvider):
     def __str__(self) -> str:
         """Human-readable representation of locale."""
         locale = getattr(self, "locale", Locale.DEFAULT)
-        return "{} <{}>".format(self.__class__.__name__, locale)
+        return "{} <{}>".format(self.__class__.__name__, Locale(locale))

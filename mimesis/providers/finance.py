@@ -2,7 +2,7 @@
 
 """Business data provider."""
 
-from typing import Any, List
+from typing import Any, Final, List
 
 from mimesis.data import (
     CRYPTOCURRENCY_ISO_CODES,
@@ -28,12 +28,12 @@ class Finance(BaseDataProvider):
         """
         super().__init__(*args, **kwargs)
         self._datafile = "finance.json"
-        self._pull(self._datafile)
+        self._load_datafile(self._datafile)
 
     class Meta:
         """Class for metadata."""
 
-        name = "finance"
+        name: Final[str] = "finance"
 
     def company(self) -> str:
         """Get a random company name.

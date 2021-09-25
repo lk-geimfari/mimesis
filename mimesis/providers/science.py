@@ -2,7 +2,7 @@
 
 """Provides pseudo-scientific data."""
 
-from typing import Any, Optional, Tuple
+from typing import Any, Final, Optional, Tuple
 
 from mimesis.data import SI_PREFIXES, SI_PREFIXES_SYM
 from mimesis.enums import MeasureUnit, MetricPrefixSign
@@ -25,7 +25,7 @@ class Science(BaseProvider):
     class Meta:
         """Class for metadata."""
 
-        name = "science"
+        name: Final[str] = "science"
 
     def rna_sequence(self, length: int = 10) -> str:
         """Generate a random RNA sequence.

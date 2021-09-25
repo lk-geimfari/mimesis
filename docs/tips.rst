@@ -16,11 +16,12 @@ Incorrect:
 .. code:: python
 
     >>> from mimesis import Person, Datetime, Text, Code
+    >>> from mimesis.locales import Locale
 
-    >>> person = Person('ru')
-    >>> datetime = Datetime('ru')
-    >>> text = Text('ru')
-    >>> code = Code('ru')
+    >>> person = Person(Locale.RU)
+    >>> datetime = Datetime(Locale.RU)
+    >>> text = Text(Locale.RU)
+    >>> code = Code(Locale.RU)
 
 
 Correct:
@@ -28,7 +29,8 @@ Correct:
 .. code:: python
 
     >>> from mimesis import Generic
-    >>> generic = Generic('ru')
+    >>> from mimesis.locales import Locale
+    >>> generic = Generic(locale=Locale.EN)
 
     >>> generic.person.username()
     'sherley3354'
@@ -41,9 +43,10 @@ Still correct:
 .. code:: python
 
     >>> from mimesis import Person
+    >>> from mimesis.locales import Locale
 
-    >>> p_en = Person('en')
-    >>> p_sv = Person('sv')
+    >>> p_en = Person(Locale.EN)
+    >>> p_sv = Person(Locale.SV)
     >>> # …
 
 Also correct:
@@ -52,8 +55,8 @@ Also correct:
 
     >>> from mimesis import Person
 
-    >>> person = Person('en')
-    >>> with person.override_locale('sv')
+    >>> person = Person(Locale.EN)
+    >>> with person.override_locale(Locale.SV)
     >>>     pass
     >>> # …
 
@@ -89,20 +92,17 @@ Romanization of Cyrillic data
 -----------------------------
 
 If your locale belongs to the family of Cyrillic languages, but you need
-latinized locale-specific data, then you can use decorator :func:`~mimesis.decorators.romanize` which
+romanized locale-specific data, then you can use function :func:`~mimesis.shortcuts.romanize` which
 help you romanize your data.
 
 Example of usage for romanization of Russian full name:
 
 .. code:: python
 
-    >>> from mimesis.decorators import romanize
+    >>> from mimesis.shortcuts import romanize
+    >>> from mimesis.locales import Locale
 
-    >>> @romanize('ru')
-    ... def russian_name():
-    ...     return 'Вероника Денисова'
-
-    >>> russian_name()
+    >>> romanize("Вероника Денисова", locale=Locale.RU)
     'Veronika Denisova'
 
 
@@ -124,9 +124,10 @@ Let's define the structure of the dummy response.
 .. code:: python
 
     from mimesis.schema import Field, Schema
+    from mimesis.locales import Locale
     from mimesis.enums import Gender
 
-    _ = Field('en')
+    _ = Field(Locale.EN)
     dummy_users = Schema(
         lambda: {
             'id': _('uuid'),

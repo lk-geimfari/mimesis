@@ -5,11 +5,24 @@ Version 5.0.0
 
 **Warning**: This release contains some breaking changes in API.
 
+
+**Python compatibility**:
+
+Mimesis 5.0 supports Python 3.8, 3.9, and 3.10.
+
+The Mimesis 4.1.3 is the last to support Python 3.6 and 3.7.
+
+**Reworked**:
+
+- A method ``Person().username()``, now it accepts a parameter ``mask`` (``enums.UsernameMask``) instead of ``template`` (str).
+
 **Renamed**:
 
-- Rename ``enums.UnitName`` to ``enums.MeasureUnit``
-- Rename ``enums.PrefixSign`` to ``enums.MetricPrefixSign``
-- Rename ``Business()`` to ``Finance()``
+- Renamed ``enums.UnitName`` to ``enums.MeasureUnit``
+- Renamed ``enums.PrefixSign`` to ``enums.MetricPrefixSign``
+- Renamed ``Business()`` to ``Finance()``
+- Renamed ``BaseDataProvider.pull`` to ``BaseDataProvider._load_datafile``
+- Renamed ``mimesis.providers.numbers.Numbers`` to ``mimesis.providers.numeric.Numeric``
 
 **Fixed**:
 
@@ -22,16 +35,19 @@ Version 5.0.0
 
 **Added**:
 
-- Added class ``Locale`` to ``mimesis.locales``
-- Added ``measure_unit()`` and ``.metric_prefix()`` methods for ``Science``
+- Added support of ``**kwargs`` for a method ``add_provider`` of ``Generic()`` provider
+- Added enum ``Locale`` to ``mimesis.enums`` and ``mimesis.locales``
+- Added ``measure_unit`` and ``metric_prefix`` methods for the ``Science`` provider.
 - Added ``.iterator()`` for ``schema.Schema``
 - Added methods ``.slug()`` and ``ip_v4_with_port()`` for ``Internet()``
-- Added ``incremental()`` method for ``Numbers()``
+- Added ``increment()`` method for ``Numbers()``
 - Added methods ``.stock_ticker()``, ``.stock_name()`` and ``.stock_exchange()`` for ``Finance()``
 - Added ``BinaryFile`` data provider which provides binary data files, such as ``.mp3``, ``.mp4``, ``.png``, etc.
 
 **Removed**:
 
+- Removed module ``decorators``. Use ``shortcuts.romanize`` to romanize Cyrillic strings.
+- Removed ``as_object`` parameter for ``.uuid()``. Now it returns string by default, if you need uuid4 object then use ``.uuid_object()``
 - Removed invalid names and surnames from ``person.json`` for ``ru`` locale
 - Removed data provider ``UnitSystem()``, use ``Science()`` instead
 - Removed data provider ``Structure()``, use ``schema.Schema`` instead
@@ -39,10 +55,10 @@ Version 5.0.0
 - Removed data provider ``Clothing``, use ``Numbers`` instead
 - Removed method ``copyright()`` of ``Finance()``
 - Removed method ``network_protocol()`` of ``Internet()``
-- Removed params ``with_port`` and ``port_range`` for ``ip_v4()`` of ``Internet()``. Use ``ip_v4_with_port()`` instead
-- Removed method ``.sexual_orientation()``, ``.social_media_profile()`` and ``.avatar()`` of ``Person()``
-- Removed a bunch of useless custom exceptions and replaced them with ``FieldError``
-- Removed completely useless ``chemical_element`` and ``atomic_number`` methods of ``Science`` data provider and made it locale-independent
+- Removed params ``with_port`` and ``port_range`` for ``ip_v4()`` of ``Internet()``. Use ``ip_v4_with_port()`` instead.
+- Removed methods ``sexual_orientation``, ``social_media_profile`` and ``avatar`` of the ``Person()`` provider.
+- Removed a bunch of useless custom exceptions and replaced them with ``FieldError``.
+- Removed completely useless ``chemical_element`` and ``atomic_number`` methods of ``Science`` data provider and made it locale-independent.
 
 
 Version 4.1.3

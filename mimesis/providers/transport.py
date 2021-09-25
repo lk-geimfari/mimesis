@@ -2,7 +2,7 @@
 
 """Provides data related to transports."""
 
-from typing import Any, Optional
+from typing import Any, Final, Optional
 
 from mimesis.data import (
     AIRPLANES,
@@ -12,6 +12,7 @@ from mimesis.data import (
     VR_CODES,
     VRC_BY_LOCALES,
 )
+from mimesis.locales import Locale
 from mimesis.providers.base import BaseProvider
 
 __all__ = ["Transport"]
@@ -31,7 +32,7 @@ class Transport(BaseProvider):
     class Meta:
         """Class for metadata."""
 
-        name = "transport"
+        name: Final[str] = "transport"
 
     def truck(self, model_mask: str = "#### @@") -> str:
         """Generate a truck model.
@@ -82,13 +83,13 @@ class Transport(BaseProvider):
         plane = self.random.choice(AIRPLANES)
         return "{} {}".format(plane, model)
 
-    def vehicle_registration_code(self, locale: Optional[str] = None) -> str:
+    def vehicle_registration_code(self, locale: Optional[Locale] = None) -> str:
         """Get vehicle registration code of country.
 
         :param locale: Registration code for locale (country).
         :return: Vehicle registration code.
         """
         if locale:
-            return VRC_BY_LOCALES[locale]
+            return VRC_BY_LOCALES[locale.value]
 
         return self.random.choice(VR_CODES)

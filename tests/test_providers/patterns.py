@@ -26,13 +26,13 @@ CREDIT_CARD_REGEX = r"[\d]+((-|\s)?[\d]+)+"
 
 PROVIDER_STR_REGEX = (
     r"^(Finance|Code|Development"
-    r"|File|Games|Hardware|Internet|Numbers|Path|Payment|"
+    r"|File|Games|Hardware|Internet|Numeric|Path|Payment|"
     r"Transport|Cryptographic|Science)"
 )
 
 DATA_PROVIDER_STR_REGEX = (
     r"^(Address|Finance|Datetime|Food|"
-    r"Person|Text|BaseDataProvider|BaseField|Field) <([a-z-]+)>$"
+    r"Person|Text|BaseDataProvider|BaseField|Field) <Locale.(.+?)>$"
 )
 
 _EN_GB_POST_CODE = (

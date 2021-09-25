@@ -5,7 +5,7 @@ import re
 import pytest
 from mimesis import Person
 from mimesis.data import BLOOD_GROUPS, GENDER_SYMBOLS
-from mimesis.enums import Gender, TitleType
+from mimesis.enums import Gender, TitleType, UsernameMask
 from mimesis.exceptions import NonEnumerableError
 
 from . import patterns
@@ -59,50 +59,49 @@ class TestPerson(object):
         assert len(result) == 32
 
     @pytest.mark.parametrize(
-        "template",
+        "mask",
         [
-            "U-d",
-            "U.d",
-            "UU-d",
-            "UU.d",
-            "UU_d",
-            "U_d",
-            "Ud",
-            "l-d",
-            "l.d",
-            "l_d",
-            "ld",
-            "default",
+            UsernameMask.UPPER_DASH_DIGIT,
+            UsernameMask.UPPER_DOT_DIGIT,
+            UsernameMask.UPPER_UPPER_DASH_DIGIT,
+            UsernameMask.UPPER_UPPER_DOT_DIGIT,
+            UsernameMask.UPPER_UPPER_UNDERSCORE_DIGIT,
+            UsernameMask.UPPER_UNDERSCORE_DIGIT,
+            UsernameMask.UPPER_DIGIT,
+            UsernameMask.LOWER_DASH_DIGIT,
+            UsernameMask.LOWER_DOT_DIGIT,
+            UsernameMask.LOWER_UNDERSCORE_DIGIT,
+            UsernameMask.LOWER_DIGIT,
+            UsernameMask.DEFAULT,
             None,
         ],
     )
-    def test_username(self, _person, template):
-
+    def test_username(self, _person, mask):
         template_patterns = {
-            "U-d": r"^[A-Z][a-z]+-[0-9]+$",
-            "U.d": r"^[A-Z][a-z]+\.[0-9]+$",
-            "U_d": r"^[A-Z][a-z]+_[0-9]+$",
-            "UU-d": r"^[A-Z][a-z]+[A-Z][a-z]+-[0-9]+$",
-            "UU.d": r"^[A-Z][a-z]+[A-Z][a-z]+\.[0-9]+$",
-            "UU_d": r"^[A-Z][a-z]+[A-Z][a-z]+_[0-9]+$",
-            "Ud": r"^[A-Z][a-z]+[0-9]+$",
-            "l-d": r"^[a-z]+-[0-9]+$",
-            "l.d": r"^[a-z]+\.[0-9]+$",
-            "l_d": r"^[a-z]+_[0-9]+$",
-            "ld": r"^[a-z]+[0-9]+$",
-            "default": r"^[a-z]+\.[0-9]+",
+            UsernameMask.UPPER_DASH_DIGIT: r"^[A-Z][a-z]+-[0-9]+$",
+            UsernameMask.UPPER_DOT_DIGIT: r"^[A-Z][a-z]+\.[0-9]+$",
+            UsernameMask.UPPER_UNDERSCORE_DIGIT: r"^[A-Z][a-z]+_[0-9]+$",
+            UsernameMask.UPPER_UPPER_DASH_DIGIT: r"^[A-Z][a-z]+[A-Z][a-z]+-[0-9]+$",
+            UsernameMask.UPPER_UPPER_DOT_DIGIT: r"^[A-Z][a-z]+[A-Z][a-z]+\.[0-9]+$",
+            UsernameMask.UPPER_UPPER_UNDERSCORE_DIGIT: r"^[A-Z][a-z]+[A-Z][a-z]+_[0-9]+$",
+            UsernameMask.UPPER_DIGIT: r"^[A-Z][a-z]+[0-9]+$",
+            UsernameMask.LOWER_DASH_DIGIT: r"^[a-z]+-[0-9]+$",
+            UsernameMask.LOWER_DOT_DIGIT: r"^[a-z]+\.[0-9]+$",
+            UsernameMask.LOWER_UNDERSCORE_DIGIT: r"^[a-z]+_[0-9]+$",
+            UsernameMask.LOWER_DIGIT: r"^[a-z]+[0-9]+$",
+            UsernameMask.DEFAULT: r"^[a-z]+\.[0-9]+",
             None: r"^[A-Za-z]{2,}[\.\-\_]?[0-9]+$",
         }
 
-        result = _person.username(template=template)
-        assert re.match(template_patterns[template], result)
+        result = _person.username(mask=mask)
+        assert re.match(template_patterns[mask], result)
 
     def test_username_unsupported_template(self, _person):
-        with pytest.raises(ValueError):
-            _person.username(template=".d-")
+        with pytest.raises(NonEnumerableError):
+            _person.username(mask="ld")
 
-        with pytest.raises(ValueError):
-            _person.username(template="d-U.l_d")
+        with pytest.raises(NonEnumerableError):
+            _person.username(mask="d-U.l_d")
 
     @pytest.mark.parametrize(
         "unique",
@@ -361,7 +360,9 @@ class TestSeededPerson(object):
 
     def test_username(self, p1, p2):
         assert p1.username() == p2.username()
-        assert p1.username("l_d") == p2.username("l_d")
+        assert p1.username(UsernameMask.LOWER_DASH_DIGIT) == p2.username(
+            UsernameMask.LOWER_DASH_DIGIT
+        )
 
     def test_email(self, p1, p2):
         assert p1.email() == p2.email()
