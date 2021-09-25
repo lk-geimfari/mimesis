@@ -35,8 +35,8 @@ Description
      :target: https://pypi.org/project/mimesis/
      :alt: PyPI - Downloads
 
-.. image:: https://img.shields.io/badge/python-3.6+-brightgreen.svg
-     :target: https://badge.fury.io/py/mimesis
+.. image:: https://img.shields.io/badge/python-3.8%20%7C%203.9-brightgreen
+     :target: https://pypi.org/project/mimesis/
      :alt: Python version
 
 Mimesis (/mɪˈmiːsɪs, Ancient Greek: μίμησις, mīmēsis) is a high-performance fake data generator for Python,
