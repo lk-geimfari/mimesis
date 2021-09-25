@@ -41,7 +41,7 @@ class Numeric(BaseProvider):
         return self._increment_dict[accumulator_key]
 
     def float_number(
-            self, start: float = -1000.0, end: float = 1000.0, precision: int = 15
+        self, start: float = -1000.0, end: float = 1000.0, precision: int = 15
     ) -> float:
         """Generate random float number in range [start, end].
 
@@ -54,7 +54,7 @@ class Numeric(BaseProvider):
         return self.random.uniform(start, end, precision)
 
     def floats(
-            self, start: float = 0, end: float = 1, n: int = 10, precision: int = 15
+        self, start: float = 0, end: float = 1, n: int = 10, precision: int = 15
     ) -> List[float]:
         """Generate a list of random float numbers.
 
@@ -93,13 +93,13 @@ class Numeric(BaseProvider):
         return self.random.randints(n, start, end)
 
     def complex_number(
-            self,
-            start_real: float = 0.0,
-            end_real: float = 1.0,
-            start_imag: float = 0.0,
-            end_imag: float = 1.0,
-            precision_real: int = 15,
-            precision_imag: int = 15,
+        self,
+        start_real: float = 0.0,
+        end_real: float = 1.0,
+        start_imag: float = 0.0,
+        end_imag: float = 1.0,
+        precision_real: int = 15,
+        precision_imag: int = 15,
     ) -> complex:
         """Generate a random complex number.
 
@@ -118,14 +118,14 @@ class Numeric(BaseProvider):
         return complex(real_part, imag_part)
 
     def complexes(
-            self,
-            start_real: float = 0,
-            end_real: float = 1,
-            start_imag: float = 0,
-            end_imag: float = 1,
-            precision_real: int = 15,
-            precision_imag: int = 15,
-            n: int = 10,
+        self,
+        start_real: float = 0,
+        end_real: float = 1,
+        start_imag: float = 0,
+        end_imag: float = 1,
+        precision_real: int = 15,
+        precision_imag: int = 15,
+        n: int = 10,
     ) -> List[complex]:
         """Generate a list of random complex numbers.
 
@@ -164,7 +164,7 @@ class Numeric(BaseProvider):
         return Decimal.from_float(self.float_number(start, end))
 
     def decimals(
-            self, start: float = 0.0, end: float = 1000.0, n: int = 10
+        self, start: float = 0.0, end: float = 1000.0, n: int = 10
     ) -> List[Decimal]:
         """Generate a decimal number as :py:class:`decimal.Decimal` objects.
 
@@ -176,7 +176,7 @@ class Numeric(BaseProvider):
         return [self.decimal_number(start, end) for _ in range(n)]
 
     def matrix(
-            self, m: int = 10, n: int = 10, num_type: NumType = NumType.FLOAT, **kwargs: Any
+        self, m: int = 10, n: int = 10, num_type: NumType = NumType.FLOAT, **kwargs: Any
     ) -> Matrix:
         """Generate m x n matrix with random numbers.
 
