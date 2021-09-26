@@ -5,7 +5,7 @@
 import hashlib
 import re
 from string import ascii_letters, digits, punctuation
-from typing import Any, Final, List, Optional, Sequence, Union
+from typing import Any, Final, List, Optional, Sequence, Tuple, Union
 
 from mimesis.data import (
     BLOOD_GROUPS,
@@ -121,7 +121,7 @@ class Person(BaseDataProvider):
         return self.surname(gender)
 
     def title(
-        self, gender: Optional[Gender] = None, title_type: Optional[TitleType] = None
+            self, gender: Optional[Gender] = None, title_type: Optional[TitleType] = None
     ) -> str:
         """Generate a random title for name.
 
@@ -166,7 +166,9 @@ class Person(BaseDataProvider):
             self.surname(gender),
         )
 
-    def username(self, mask: Optional[str] = None) -> str:
+    def username(
+            self, mask: Optional[str] = None, drange: Tuple[int, int] = (1800, 2100)
+    ) -> str:
         """Generate username by template.
 
         You can create many different usernames using masks.
@@ -180,6 +182,7 @@ class Person(BaseDataProvider):
         of the username: **.** **_** **-**
 
         :param mask: Mask.
+        :param drange: Digits range.
         :raises ValueError: If template is not supported.
         :return: Username as string.
 
@@ -188,10 +191,11 @@ class Person(BaseDataProvider):
             Cotte_Article_1923
             >>> username(mask='U.l.d')
             ELKINS.wolverine.2013
-            >>> username(mask='l_l_d')
+            >>> username(mask='l_l_d', drange=(1900, 2021))
             plasmic_blockader_1907
         """
-        date = (1800, 2100)
+        if len(drange) != 2:
+            raise ValueError("The drange parameter must contain only two integers.")
 
         if mask is None:
             mask = "l_d"
@@ -201,7 +205,7 @@ class Person(BaseDataProvider):
 
         if not any(tag in tags for tag in required_tags):
             raise ValueError(
-                "Username mask must contain at least one of these: (U, C, l)"
+                "Username mask must contain at least one of these: (U, C, l)."
             )
 
         final_username = ""
@@ -214,7 +218,7 @@ class Person(BaseDataProvider):
             elif tag == "l":
                 final_username += username.lower()
             elif tag == "d":
-                final_username += str(self.random.randint(*date))
+                final_username += str(self.random.randint(*drange))
             elif tag in "-_.":
                 final_username += tag
 
@@ -241,9 +245,9 @@ class Person(BaseDataProvider):
         return password
 
     def email(
-        self,
-        domains: Optional[Sequence[str]] = None,
-        unique: bool = False,
+            self,
+            domains: Optional[Sequence[str]] = None,
+            unique: bool = False,
     ) -> str:
         """Generate a random email.
 

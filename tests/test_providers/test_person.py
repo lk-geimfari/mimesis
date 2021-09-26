@@ -94,6 +94,14 @@ class TestPerson(object):
         result = _person.username(mask=mask)
         assert re.match(template_patterns[mask], result)
 
+    def test_username_drange(self, _person):
+        username = _person.username(mask="U.d", drange=(1000, 2000))
+        username, digits = username.split(".")
+        assert 1000 <= int(digits.strip()) <= 2000
+
+        with pytest.raises(ValueError):
+            _person.username(drange=(1000, 2000, 3000))  # type: ignore
+
     def test_username_unsupported_mask(self, _person):
         with pytest.raises(ValueError):
             _person.username(mask="cda")
