@@ -205,7 +205,7 @@ class Person(BaseDataProvider):
 
         if not any(tag in tags for tag in required_tags):
             raise ValueError(
-                "Username mask must contain at least one of these: (U, C, l)."
+                "Username mask must contain at least one of these: (C, U, l)."
             )
 
         final_username = ""
