@@ -14,7 +14,7 @@ from mimesis.data import (
     GENDER_SYMBOLS,
     USERNAMES,
 )
-from mimesis.enums import Gender, TitleType, UsernameMask
+from mimesis.enums import Gender, TitleType
 from mimesis.exceptions import NonEnumerableError
 from mimesis.providers.base import BaseDataProvider
 from mimesis.random import get_random_item
@@ -166,32 +166,50 @@ class Person(BaseDataProvider):
             self.surname(gender),
         )
 
-    def username(self, mask: Optional[UsernameMask] = None) -> str:
+    def username(self, mask: Optional[str] = None) -> str:
         """Generate username by template.
 
-        See :class:`mimesis.enums.UsernameMask` for all supported templates.
+        You can create many different usernames using masks.
 
-        :param mask: UsernameMask enum object.
+        - **C** stands for capitalized username.
+        - **U** stands for uppercase username.
+        - **l** stands for lowercase username.
+        - **d** stands for digits in username.
+
+        You can also use symbols to separate the different parts
+        of the username: **.** **_** **-**
+
+        :param mask: Mask.
         :raises ValueError: If template is not supported.
-        :raises NonEnumerableError: If maks is not UsernameMask.
         :return: Username as string.
 
-        :Example:
-            Celloid1873
+        Example:
+            >>> username(mask='C_C_d')
+            Cotte_Article_1923
+            >>> username(mask='U.l.d')
+            ELKINS.wolverine.2013
+            >>> username(mask='l_l_d')
+            plasmic_blockader_1907
         """
         date = (1800, 2100)
 
         if mask is None:
-            mask = get_random_item(UsernameMask, rnd=self.random)
+            mask = "l_d"
 
-        mask_value = self.validate_enum(mask, UsernameMask)
+        tags = re.findall(r"[CUld.\-_]", mask)
 
-        tags = re.findall(r"[Uld.\-_]", mask_value)
+        # TODO: Refactor
+        if "C" not in tags and "U" not in tags and "l" not in tags:
+            raise ValueError(
+                "Username mask must contain at least one of these: (U, C, l)"
+            )
 
         username = ""
         for tag in tags:
-            if tag == "U":
+            if tag == "C":
                 username += self.random.choice(USERNAMES).capitalize()
+            if tag == "U":
+                username += self.random.choice(USERNAMES).upper()
             elif tag == "l":
                 username += self.random.choice(USERNAMES).lower()
             elif tag == "d":
@@ -252,7 +270,7 @@ class Person(BaseDataProvider):
         if unique:
             name = self.random.randstr(unique)
         else:
-            name = self.username(mask=UsernameMask.LOWER_DIGIT)
+            name = self.username(mask="ld")
 
         return "{name}{domain}".format(
             name=name,
