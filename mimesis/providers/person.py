@@ -196,28 +196,29 @@ class Person(BaseDataProvider):
         if mask is None:
             mask = "l_d"
 
+        required_tags = "CUl"
         tags = re.findall(r"[CUld.\-_]", mask)
 
-        # TODO: Refactor
-        if "C" not in tags and "U" not in tags and "l" not in tags:
+        if not any(tag in tags for tag in required_tags):
             raise ValueError(
                 "Username mask must contain at least one of these: (U, C, l)"
             )
 
-        username = ""
+        final_username = ""
         for tag in tags:
+            username = self.random.choice(USERNAMES)
             if tag == "C":
-                username += self.random.choice(USERNAMES).capitalize()
+                final_username += username.capitalize()
             if tag == "U":
-                username += self.random.choice(USERNAMES).upper()
+                final_username += username.upper()
             elif tag == "l":
-                username += self.random.choice(USERNAMES).lower()
+                final_username += username.lower()
             elif tag == "d":
-                username += str(self.random.randint(*date))
+                final_username += str(self.random.randint(*date))
             elif tag in "-_.":
-                username += tag
+                final_username += tag
 
-        return username
+        return final_username
 
     def password(self, length: int = 8, hashed: bool = False) -> str:
         """Generate a password or hash of password.
