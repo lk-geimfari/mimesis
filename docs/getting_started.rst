@@ -65,8 +65,8 @@ So what did the code above?
 4. Next we generate random female full name.
 5. The same as above, but for male.
 
-Locales
--------
+Locale
+------
 
 You can specify a locale when creating providers and they will return data that
 is appropriate for the language or country associated with that locale:
