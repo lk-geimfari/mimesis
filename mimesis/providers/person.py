@@ -121,7 +121,7 @@ class Person(BaseDataProvider):
         return self.surname(gender)
 
     def title(
-            self, gender: Optional[Gender] = None, title_type: Optional[TitleType] = None
+        self, gender: Optional[Gender] = None, title_type: Optional[TitleType] = None
     ) -> str:
         """Generate a random title for name.
 
@@ -167,7 +167,7 @@ class Person(BaseDataProvider):
         )
 
     def username(
-            self, mask: Optional[str] = None, drange: Tuple[int, int] = (1800, 2100)
+        self, mask: Optional[str] = None, drange: Tuple[int, int] = (1800, 2100)
     ) -> str:
         """Generate username by template.
 
@@ -245,9 +245,9 @@ class Person(BaseDataProvider):
         return password
 
     def email(
-            self,
-            domains: Optional[Sequence[str]] = None,
-            unique: bool = False,
+        self,
+        domains: Optional[Sequence[str]] = None,
+        unique: bool = False,
     ) -> str:
         """Generate a random email.
 
