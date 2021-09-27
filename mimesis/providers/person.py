@@ -5,7 +5,7 @@
 import hashlib
 import re
 from string import ascii_letters, digits, punctuation
-from typing import Any, Final, List, Optional, Sequence, Union
+from typing import Any, Final, List, Optional, Sequence, Tuple, Union
 
 from mimesis.data import (
     BLOOD_GROUPS,
@@ -14,7 +14,7 @@ from mimesis.data import (
     GENDER_SYMBOLS,
     USERNAMES,
 )
-from mimesis.enums import Gender, TitleType, UsernameMask
+from mimesis.enums import Gender, TitleType
 from mimesis.exceptions import NonEnumerableError
 from mimesis.providers.base import BaseDataProvider
 from mimesis.random import get_random_item
@@ -166,40 +166,63 @@ class Person(BaseDataProvider):
             self.surname(gender),
         )
 
-    def username(self, mask: Optional[UsernameMask] = None) -> str:
+    def username(
+        self, mask: Optional[str] = None, drange: Tuple[int, int] = (1800, 2100)
+    ) -> str:
         """Generate username by template.
 
-        See :class:`mimesis.enums.UsernameMask` for all supported templates.
+        You can create many different usernames using masks.
 
-        :param mask: UsernameMask enum object.
+        - **C** stands for capitalized username.
+        - **U** stands for uppercase username.
+        - **l** stands for lowercase username.
+        - **d** stands for digits in username.
+
+        You can also use symbols to separate the different parts
+        of the username: **.** **_** **-**
+
+        :param mask: Mask.
+        :param drange: Digits range.
         :raises ValueError: If template is not supported.
-        :raises NonEnumerableError: If maks is not UsernameMask.
         :return: Username as string.
 
-        :Example:
-            Celloid1873
+        Example:
+            >>> username(mask='C_C_d')
+            Cotte_Article_1923
+            >>> username(mask='U.l.d')
+            ELKINS.wolverine.2013
+            >>> username(mask='l_l_d', drange=(1900, 2021))
+            plasmic_blockader_1907
         """
-        date = (1800, 2100)
+        if len(drange) != 2:
+            raise ValueError("The drange parameter must contain only two integers.")
 
         if mask is None:
-            mask = get_random_item(UsernameMask, rnd=self.random)
+            mask = "l_d"
 
-        mask_value = self.validate_enum(mask, UsernameMask)
+        required_tags = "CUl"
+        tags = re.findall(r"[CUld.\-_]", mask)
 
-        tags = re.findall(r"[Uld.\-_]", mask_value)
+        if not any(tag in tags for tag in required_tags):
+            raise ValueError(
+                "Username mask must contain at least one of these: (C, U, l)."
+            )
 
-        username = ""
+        final_username = ""
         for tag in tags:
+            username = self.random.choice(USERNAMES)
+            if tag == "C":
+                final_username += username.capitalize()
             if tag == "U":
-                username += self.random.choice(USERNAMES).capitalize()
+                final_username += username.upper()
             elif tag == "l":
-                username += self.random.choice(USERNAMES).lower()
+                final_username += username.lower()
             elif tag == "d":
-                username += str(self.random.randint(*date))
+                final_username += str(self.random.randint(*drange))
             elif tag in "-_.":
-                username += tag
+                final_username += tag
 
-        return username
+        return final_username
 
     def password(self, length: int = 8, hashed: bool = False) -> str:
         """Generate a password or hash of password.
@@ -252,7 +275,7 @@ class Person(BaseDataProvider):
         if unique:
             name = self.random.randstr(unique)
         else:
-            name = self.username(mask=UsernameMask.LOWER_DIGIT)
+            name = self.username(mask="ld")
 
         return "{name}{domain}".format(
             name=name,

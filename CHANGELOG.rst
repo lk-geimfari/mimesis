@@ -14,7 +14,7 @@ The Mimesis 4.1.3 is the last to support Python 3.6 and 3.7.
 
 **Reworked**:
 
-- A method ``Person().username()``, now it accepts a parameter ``mask`` (``enums.UsernameMask``) instead of ``template`` (str).
+- A method ``Person().username()``, now it accepts a parameters ``mask`` and ``drange``.
 
 **Renamed**:
 

@@ -266,23 +266,3 @@ class DocumentFile(Enum):
 class CompressedFile(Enum):
     ZIP = "zip"
     GZIP = "gz"
-
-
-class UsernameMask(Enum):
-    """Provide username masks.
-
-    An argument for :meth:`~mimesis.Person.username()`.
-    """
-
-    UPPER_DIGIT = "Ud"
-    LOWER_DIGIT = "ld"
-    UPPER_DOT_DIGIT = "U.d"
-    LOWER_DOT_DIGIT = "l.d"
-    LOWER_DASH_DIGIT = "l-d"
-    UPPER_DASH_DIGIT = "U-d"
-    UPPER_UPPER_DOT_DIGIT = "UU.d"
-    LOWER_UNDERSCORE_DIGIT = "l_d"
-    UPPER_UNDERSCORE_DIGIT = "U_d"
-    UPPER_UPPER_DASH_DIGIT = "UU-d"
-    UPPER_UPPER_UNDERSCORE_DIGIT = "UU_d"
-    DEFAULT = "l.d"
