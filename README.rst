@@ -62,8 +62,6 @@ Mimesis 5.0 supports Python 3.8, 3.9, and 3.10.
 
 The Mimesis 4.1.3 is the last to support Python 3.6 and 3.7.
 
-Mimesis 5.0.0 is still under active development.
-
 Supported Features
 ------------------
 
@@ -96,6 +94,9 @@ You can improve it by sending pull requests to this repository.
 
 Usage
 -----
+
+This readme file contains information for Mimesis 5.0.0 which is not released yet, so If you're 
+looking for actual docs for 4.1.3 then see: https://mimesis.name/
 
 This library is really easy to use and everything you need is just import an object which
 represents a type of data you need (we call such object a *Provider*).
