@@ -235,21 +235,27 @@ class Internet(BaseProvider):
 
         return tags
 
-    def home_page(self, tld_type: Optional[TLDType] = None) -> str:
+    def home_page(self, level: int = 2, tld_type: Optional[TLDType] = None) -> str:
         """Generate a random home page.
 
+        :param level: The level of domain
         :param tld_type: TLD type.
         :return: Random home page.
 
         :Example:
             https://fontir.info
         """
-        resource = self.random.choice(USERNAMES)
+        if level < 2:
+            raise ValueError("level must be larger or equal 2")
+
         domain = self.top_level_domain(
             tld_type=tld_type,
         )
+        resources = list()
+        for _ in range(level - 1):
+            resources.append(self.random.choice(USERNAMES))
 
-        return "https://{}{}".format(resource, domain)
+        return "https://{}{}".format(".".join(resources), domain)
 
     def top_level_domain(self, tld_type: Optional[TLDType] = None) -> str:
         """Generates random top level domain.

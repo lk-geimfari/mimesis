@@ -33,6 +33,14 @@ class TestInternet(object):
         result = net.home_page()
         assert re.match(patterns.HOME_PAGE, result)
 
+    def test_home_page_valueerror(self, net):
+        with pytest.raises(ValueError):
+            net.home_page(level=1)
+
+    def test_home_page_level(self, net):
+        result = net.home_page(level=4)
+        assert re.match(patterns.HOME_PAGE, result)
+
     def test_slug(self, net):
         with pytest.raises(TypeError):
             net.slug(3)
@@ -205,6 +213,7 @@ class TestSeededInternet(object):
 
     def test_home_page(self, i1, i2):
         assert i1.home_page() == i2.home_page()
+        assert i1.home_page(level=4) == i2.home_page(level=4)
         assert i1.home_page(tld_type=TLDType.GEOTLD) == i2.home_page(
             tld_type=TLDType.GEOTLD
         )
