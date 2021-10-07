@@ -9,7 +9,6 @@ from typing import Any, Final, List, Optional, Union
 
 from mimesis.data import (
     EMOJI,
-    HASHTAGS,
     HTTP_METHODS,
     HTTP_STATUS_CODES,
     HTTP_STATUS_MSGS,
@@ -220,7 +219,7 @@ class Internet(BaseProvider):
                 raise urllib.error.URLError("Required an active HTTP connection")
         return url
 
-    def hashtags(self, quantity: int = 4) -> Union[str, List[str]]:
+    def hashtags(self, quantity: int = 4) -> List[str]:
         """Generate a list of hashtags.
 
         :param quantity: The quantity of hashtags.
@@ -230,22 +229,21 @@ class Internet(BaseProvider):
         :Example:
             ['#love', '#sky', '#nice']
         """
-        tags = ["#" + self.random.choice(HASHTAGS) for _ in range(quantity)]
 
-        if int(quantity) == 1:
-            return tags[0]
+        if quantity < 1:
+            raise ValueError('Quantity must be a positive integer.')
 
-        return tags
+        return ["#" + self.text.word() for _ in range(quantity)]
 
     def hostname(
         self,
         tld_type: Optional[TLDType] = None,
         subdomains: Optional[List[str]] = None,
     ) -> str:
-        """Generate a random hostname without protocol.
+        """Generate a random hostname without scheme.
 
         :param tld_type: TLDType.
-        :param subdomains: Subdomains (use random word if it's None).
+        :param subdomains: Subdomains.
         :return: Hostname.
         """
         tld = self.tld(tld_type=tld_type)
@@ -257,19 +255,18 @@ class Internet(BaseProvider):
 
         return f"{host}{tld}"
 
-    def url(self, tld_type: Optional[TLDType] = None) -> str:
-        """Generate a random url.
+    def url(self, scheme: Optional[str] = None, **kwargs: Any) -> str:
+        """Generate random URL.
 
-        :param tld_type: TLD type.
-        :return: Random home page.
-
-        :Example:
-            https://fontir.info
+        :param scheme: Scheme.
+        :param kwargs: Keyword-arguments for meth:`hostname`
+        :return: URL.
         """
-        return f"https://{self.hostname(tld_type=tld_type)}/"
 
-    def uri(self, tld_type: Optional[TLDType] = None) -> str:
-        raise NotImplementedError
+        if not scheme:
+            scheme = "https"
+
+        return f"{scheme}://{self.hostname(**kwargs)}"
 
     def top_level_domain(self, tld_type: Optional[TLDType] = None) -> str:
         """Generates random top level domain.

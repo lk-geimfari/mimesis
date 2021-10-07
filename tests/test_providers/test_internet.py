@@ -26,8 +26,12 @@ class TestInternet(object):
     def test_hashtags(self, net):
         result = net.hashtags(quantity=5)
         assert len(result) == 5
-        result = net.hashtags(quantity=1)
-        assert result.replace("#", "") in data.HASHTAGS
+
+        with pytest.raises(ValueError):
+            net.hashtags(quantity=0)
+
+        with pytest.raises(ValueError):
+            net.hashtags(quantity=-1)
 
     @pytest.mark.parametrize(
         "subdomains",
@@ -102,8 +106,8 @@ class TestInternet(object):
         assert isinstance(ip, IPv4Address)
 
     def test_ip_v4(
-        self,
-        net,
+            self,
+            net,
     ):
         assert re.match(patterns.IP_V4_REGEX, net.ip_v4())
 
