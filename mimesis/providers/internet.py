@@ -18,6 +18,7 @@ from mimesis.data import (
     USERNAMES,
 )
 from mimesis.enums import MimeType, PortRange, TLDType
+from mimesis.locales import Locale
 from mimesis.providers.base import BaseProvider
 from mimesis.providers.file import File
 from mimesis.providers.text import Text
@@ -29,6 +30,9 @@ __all__ = ["Internet"]
 class Internet(BaseProvider):
     """Class for generating data related to the internet."""
 
+    _MAX_IPV4: Final[int] = (2 ** 32) - 1
+    _MAX_IPV6: Final[int] = (2 ** 128) - 1
+
     def __init__(self, *args: Any, **kwargs: Any) -> None:
         """Initialize attributes.
 
@@ -36,10 +40,8 @@ class Internet(BaseProvider):
         :param kwargs: Keyword arguments.
         """
         super().__init__(*args, **kwargs)
-        self.text = Text(seed=self.seed)
         self.file = File(seed=self.seed)
-        self._MAX_IPV4: Final[int] = (2 ** 32) - 1
-        self._MAX_IPV6: Final[int] = (2 ** 128) - 1
+        self.text = Text(locale=Locale.EN, seed=self.seed)
 
     class Meta:
         """Class for metadata."""
@@ -235,8 +237,28 @@ class Internet(BaseProvider):
 
         return tags
 
-    def home_page(self, tld_type: Optional[TLDType] = None) -> str:
-        """Generate a random home page.
+    def hostname(
+        self,
+        tld_type: Optional[TLDType] = None,
+        subdomains: Optional[List[str]] = None,
+    ) -> str:
+        """Generate a random hostname without protocol.
+
+        :param tld_type: TLDType.
+        :param subdomains: Subdomains (use random word if it's None).
+        :return: Hostname.
+        """
+        tld = self.tld(tld_type=tld_type)
+        host = self.random.choice(USERNAMES)
+
+        if subdomains:
+            subdomain = self.random.choice(subdomains)
+            host = f"{subdomain}.{host}"
+
+        return f"{host}{tld}"
+
+    def url(self, tld_type: Optional[TLDType] = None) -> str:
+        """Generate a random url.
 
         :param tld_type: TLD type.
         :return: Random home page.
@@ -244,12 +266,10 @@ class Internet(BaseProvider):
         :Example:
             https://fontir.info
         """
-        resource = self.random.choice(USERNAMES)
-        domain = self.top_level_domain(
-            tld_type=tld_type,
-        )
+        return f"https://{self.hostname(tld_type=tld_type)}/"
 
-        return "https://{}{}".format(resource, domain)
+    def uri(self, tld_type: Optional[TLDType] = None) -> str:
+        raise NotImplementedError
 
     def top_level_domain(self, tld_type: Optional[TLDType] = None) -> str:
         """Generates random top level domain.
