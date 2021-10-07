@@ -106,8 +106,8 @@ class TestInternet(object):
         assert isinstance(ip, IPv4Address)
 
     def test_ip_v4(
-            self,
-            net,
+        self,
+        net,
     ):
         assert re.match(patterns.IP_V4_REGEX, net.ip_v4())
 

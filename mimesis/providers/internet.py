@@ -231,7 +231,7 @@ class Internet(BaseProvider):
         """
 
         if quantity < 1:
-            raise ValueError('Quantity must be a positive integer.')
+            raise ValueError("Quantity must be a positive integer.")
 
         return ["#" + self.text.word() for _ in range(quantity)]
 
@@ -243,7 +243,7 @@ class Internet(BaseProvider):
         """Generate a random hostname without scheme.
 
         :param tld_type: TLDType.
-        :param subdomains: Subdomains.
+        :param subdomains: Subdomains (make sure they are valid).
         :return: Hostname.
         """
         tld = self.tld(tld_type=tld_type)
@@ -259,7 +259,7 @@ class Internet(BaseProvider):
         """Generate random URL.
 
         :param scheme: Scheme.
-        :param kwargs: Keyword-arguments for meth:`hostname`
+        :param kwargs: Keyword-arguments for :meth:`hostname`
         :return: URL.
         """
 
