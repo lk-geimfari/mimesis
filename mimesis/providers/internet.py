@@ -281,7 +281,7 @@ class Internet(BaseProvider):
     def tld(self, *args: Any, **kwargs: Any) -> str:
         """Generates random top level domain.
 
-        An alias for self.top_level_domain()
+        An alias for :meth:`top_level_domain`
         """
         return self.top_level_domain(*args, **kwargs)
 
