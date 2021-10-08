@@ -9,7 +9,6 @@ from typing import Any, Final, List, Optional, Union
 
 from mimesis.data import (
     EMOJI,
-    HASHTAGS,
     HTTP_METHODS,
     HTTP_STATUS_CODES,
     HTTP_STATUS_MSGS,
@@ -17,7 +16,8 @@ from mimesis.data import (
     USER_AGENTS,
     USERNAMES,
 )
-from mimesis.enums import MimeType, PortRange, TLDType
+from mimesis.enums import MimeType, PortRange, TLDType, URLScheme
+from mimesis.locales import Locale
 from mimesis.providers.base import BaseProvider
 from mimesis.providers.file import File
 from mimesis.providers.text import Text
@@ -29,6 +29,9 @@ __all__ = ["Internet"]
 class Internet(BaseProvider):
     """Class for generating data related to the internet."""
 
+    _MAX_IPV4: Final[int] = (2 ** 32) - 1
+    _MAX_IPV6: Final[int] = (2 ** 128) - 1
+
     def __init__(self, *args: Any, **kwargs: Any) -> None:
         """Initialize attributes.
 
@@ -36,10 +39,8 @@ class Internet(BaseProvider):
         :param kwargs: Keyword arguments.
         """
         super().__init__(*args, **kwargs)
-        self.text = Text(seed=self.seed)
         self.file = File(seed=self.seed)
-        self._MAX_IPV4: Final[int] = (2 ** 32) - 1
-        self._MAX_IPV6: Final[int] = (2 ** 128) - 1
+        self.text = Text(locale=Locale.EN, seed=self.seed)
 
     class Meta:
         """Class for metadata."""
@@ -218,7 +219,7 @@ class Internet(BaseProvider):
                 raise urllib.error.URLError("Required an active HTTP connection")
         return url
 
-    def hashtags(self, quantity: int = 4) -> Union[str, List[str]]:
+    def hashtags(self, quantity: int = 4) -> List[str]:
         """Generate a list of hashtags.
 
         :param quantity: The quantity of hashtags.
@@ -228,28 +229,41 @@ class Internet(BaseProvider):
         :Example:
             ['#love', '#sky', '#nice']
         """
-        tags = ["#" + self.random.choice(HASHTAGS) for _ in range(quantity)]
 
-        if int(quantity) == 1:
-            return tags[0]
+        if quantity < 1:
+            raise ValueError("Quantity must be a positive integer.")
 
-        return tags
+        return ["#" + self.text.word() for _ in range(quantity)]
 
-    def home_page(self, tld_type: Optional[TLDType] = None) -> str:
-        """Generate a random home page.
+    def hostname(
+        self,
+        tld_type: Optional[TLDType] = None,
+        subdomains: Optional[List[str]] = None,
+    ) -> str:
+        """Generate a random hostname without scheme.
 
-        :param tld_type: TLD type.
-        :return: Random home page.
-
-        :Example:
-            https://fontir.info
+        :param tld_type: TLDType.
+        :param subdomains: Subdomains (make sure they are valid).
+        :return: Hostname.
         """
-        resource = self.random.choice(USERNAMES)
-        domain = self.top_level_domain(
-            tld_type=tld_type,
-        )
+        tld = self.tld(tld_type=tld_type)
+        host = self.random.choice(USERNAMES)
 
-        return "https://{}{}".format(resource, domain)
+        if subdomains:
+            subdomain = self.random.choice(subdomains)
+            host = f"{subdomain}.{host}"
+
+        return f"{host}{tld}"
+
+    def url(self, scheme: Optional[URLScheme] = URLScheme.HTTPS, **kwargs: Any) -> str:
+        """Generate random URL.
+
+        :param scheme: Scheme.
+        :param kwargs: Keyword-arguments for :meth:`hostname`
+        :return: URL.
+        """
+        _scheme = self.validate_enum(scheme, URLScheme)
+        return f"{_scheme}://{self.hostname(**kwargs)}/"
 
     def top_level_domain(self, tld_type: Optional[TLDType] = None) -> str:
         """Generates random top level domain.
@@ -264,7 +278,7 @@ class Internet(BaseProvider):
     def tld(self, *args: Any, **kwargs: Any) -> str:
         """Generates random top level domain.
 
-        An alias for self.top_level_domain()
+        An alias for :meth:`top_level_domain`
         """
         return self.top_level_domain(*args, **kwargs)
 

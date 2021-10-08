@@ -5,7 +5,7 @@ from ipaddress import IPv4Address, IPv6Address
 
 import pytest
 from mimesis import Internet, data
-from mimesis.enums import MimeType, PortRange, TLDType
+from mimesis.enums import MimeType, PortRange, TLDType, URLScheme
 from mimesis.exceptions import NonEnumerableError
 
 from . import patterns
@@ -26,12 +26,45 @@ class TestInternet(object):
     def test_hashtags(self, net):
         result = net.hashtags(quantity=5)
         assert len(result) == 5
-        result = net.hashtags(quantity=1)
-        assert result.replace("#", "") in data.HASHTAGS
 
-    def test_home_page(self, net):
-        result = net.home_page()
-        assert re.match(patterns.HOME_PAGE, result)
+        with pytest.raises(ValueError):
+            net.hashtags(quantity=0)
+
+        with pytest.raises(ValueError):
+            net.hashtags(quantity=-1)
+
+    @pytest.mark.parametrize(
+        "subdomains",
+        [
+            [],
+            ["app", "core", "api"],
+            ["dev", "prod", "test"],
+            ["admin", "smtp", "pop3"],
+        ],
+    )
+    def test_hostname(self, net, subdomains):
+        hostname = net.hostname(subdomains=subdomains)
+        subdomain, *_ = hostname.split(".", 1)
+
+        if not subdomains:
+            assert len(hostname.split(".")) == 2
+        else:
+            assert subdomain in subdomains
+
+    @pytest.mark.parametrize(
+        "scheme",
+        (
+            URLScheme.HTTP,
+            URLScheme.HTTPS,
+            URLScheme.FTP,
+            URLScheme.SFTP,
+            URLScheme.WS,
+            URLScheme.WSS,
+        ),
+    )
+    def test_url(self, net, scheme):
+        result = net.url(scheme=scheme)
+        assert result.startswith(scheme.value)
 
     def test_slug(self, net):
         with pytest.raises(TypeError):
@@ -203,11 +236,15 @@ class TestSeededInternet(object):
         assert i1.hashtags() == i2.hashtags()
         assert i1.hashtags(quantity=7) == i2.hashtags(quantity=7)
 
-    def test_home_page(self, i1, i2):
-        assert i1.home_page() == i2.home_page()
-        assert i1.home_page(tld_type=TLDType.GEOTLD) == i2.home_page(
-            tld_type=TLDType.GEOTLD
+    def test_hostname(self, i1, i2):
+        assert i1.hostname() == i2.hostname()
+        assert i1.hostname(subdomains=["app", "core", "api"]) == i2.hostname(
+            subdomains=["app", "core", "api"]
         )
+
+    def test_url(self, i1, i2):
+        assert i1.url() == i2.url()
+        assert i1.url(tld_type=TLDType.GEOTLD) == i2.url(tld_type=TLDType.GEOTLD)
 
     def test_user_agent(self, i1, i2):
         assert i1.user_agent() == i2.user_agent()

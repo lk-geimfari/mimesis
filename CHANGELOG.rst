@@ -35,6 +35,7 @@ The Mimesis 4.1.3 is the last to support Python 3.6 and 3.7.
 
 **Added**:
 
+- Added method ``hostname()`` for ``Internet`` data provider
 - Added support of ``**kwargs`` for a method ``add_provider`` of ``Generic()`` provider
 - Added enum ``Locale`` to ``mimesis.enums`` and ``mimesis.locales``
 - Added ``measure_unit`` and ``metric_prefix`` methods for the ``Science`` provider.

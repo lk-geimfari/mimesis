@@ -266,3 +266,12 @@ class DocumentFile(Enum):
 class CompressedFile(Enum):
     ZIP = "zip"
     GZIP = "gz"
+
+
+class URLScheme(Enum):
+    WS = "ws"
+    WSS = "wss"
+    FTP = "ftp"
+    SFTP = "sftp"
+    HTTP = "http"
+    HTTPS = "https"
