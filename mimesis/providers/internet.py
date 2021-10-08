@@ -16,7 +16,7 @@ from mimesis.data import (
     USER_AGENTS,
     USERNAMES,
 )
-from mimesis.enums import MimeType, PortRange, TLDType
+from mimesis.enums import MimeType, PortRange, TLDType, URLScheme
 from mimesis.locales import Locale
 from mimesis.providers.base import BaseProvider
 from mimesis.providers.file import File
@@ -255,18 +255,15 @@ class Internet(BaseProvider):
 
         return f"{host}{tld}"
 
-    def url(self, scheme: Optional[str] = None, **kwargs: Any) -> str:
+    def url(self, scheme: Optional[URLScheme] = URLScheme.HTTPS, **kwargs: Any) -> str:
         """Generate random URL.
 
         :param scheme: Scheme.
         :param kwargs: Keyword-arguments for :meth:`hostname`
         :return: URL.
         """
-
-        if not scheme:
-            scheme = "https"
-
-        return f"{scheme}://{self.hostname(**kwargs)}"
+        _scheme = self.validate_enum(scheme, URLScheme)
+        return f"{_scheme}://{self.hostname(**kwargs)}/"
 
     def top_level_domain(self, tld_type: Optional[TLDType] = None) -> str:
         """Generates random top level domain.

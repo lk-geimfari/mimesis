@@ -5,7 +5,7 @@ from ipaddress import IPv4Address, IPv6Address
 
 import pytest
 from mimesis import Internet, data
-from mimesis.enums import MimeType, PortRange, TLDType
+from mimesis.enums import MimeType, PortRange, TLDType, URLScheme
 from mimesis.exceptions import NonEnumerableError
 
 from . import patterns
@@ -51,9 +51,20 @@ class TestInternet(object):
         else:
             assert subdomain in subdomains
 
-    def test_url(self, net):
-        result = net.url()
-        assert re.match(patterns.HOME_PAGE, result)
+    @pytest.mark.parametrize(
+        "scheme",
+        (
+            URLScheme.HTTP,
+            URLScheme.HTTPS,
+            URLScheme.FTP,
+            URLScheme.SFTP,
+            URLScheme.WS,
+            URLScheme.WSS,
+        ),
+    )
+    def test_url(self, net, scheme):
+        result = net.url(scheme=scheme)
+        assert result.startswith(scheme.value)
 
     def test_slug(self, net):
         with pytest.raises(TypeError):
