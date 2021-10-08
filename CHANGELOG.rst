@@ -23,6 +23,7 @@ The Mimesis 4.1.3 is the last to support Python 3.6 and 3.7.
 - Renamed ``Business()`` to ``Finance()``
 - Renamed ``BaseDataProvider.pull`` to ``BaseDataProvider._load_datafile``
 - Renamed ``mimesis.providers.numbers.Numbers`` to ``mimesis.providers.numeric.Numeric``
+- Renamed ``fmt`` argument of ``Address().country_code()`` to ``code``
 
 **Fixed**:
 

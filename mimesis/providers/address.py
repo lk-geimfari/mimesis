@@ -171,18 +171,18 @@ class Address(BaseDataProvider):
         """
         return self.postal_code()
 
-    def country_code(self, fmt: Optional[CountryCode] = CountryCode.A2) -> str:
+    def country_code(self, code: Optional[CountryCode] = CountryCode.A2) -> str:
         """Get a random code of country.
 
         Default format is :attr:`~enums.CountryCode.A2` (ISO 3166-1-alpha2),
         you can change it by passing parameter ``fmt`` with enum object
         :class:`~enums.CountryCode`.
 
-        :param fmt: Enum object CountryCode.
+        :param code: Enum object CountryCode.
         :return: Country code in selected format.
         :raises KeyError: if fmt is not supported.
         """
-        key = self.validate_enum(fmt, CountryCode)
+        key = self.validate_enum(code, CountryCode)
         return self.random.choice(COUNTRY_CODES[key])
 
     def country(self) -> str:

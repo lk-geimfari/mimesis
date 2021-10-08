@@ -57,13 +57,13 @@ class Code(BaseProvider):
     ) -> str:
         """Generate ISBN for current locale.
 
-        To change ISBN format, pass parameter ``fmt`` with needed value of
+        To change ISBN format, pass parameter ``code`` with needed value of
         the enum object :class:`~mimesis.enums.ISBNFormat`
 
         :param fmt: ISBN format.
         :param locale: Locale code.
         :return: ISBN.
-        :raises NonEnumerableError: if fmt is not enum ISBNFormat.
+        :raises NonEnumerableError: if code is not enum ISBNFormat.
         """
         fmt_value = self.validate_enum(item=fmt, enum=ISBNFormat)
         mask = ISBN_MASKS[fmt_value].format(ISBN_GROUPS[locale.value])
@@ -72,12 +72,12 @@ class Code(BaseProvider):
     def ean(self, fmt: Optional[EANFormat] = None) -> str:
         """Generate EAN.
 
-        To change EAN format, pass parameter ``fmt`` with needed value of
+        To change EAN format, pass parameter ``code`` with needed value of
         the enum object :class:`~mimesis.enums.EANFormat`.
 
         :param fmt: Format of EAN.
         :return: EAN.
-        :raises NonEnumerableError: if fmt is not enum EANFormat.
+        :raises NonEnumerableError: if code is not enum EANFormat.
         """
         key = self.validate_enum(
             item=fmt,

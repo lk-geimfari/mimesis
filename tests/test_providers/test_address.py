@@ -134,7 +134,7 @@ class TestAddress(object):
         assert country in address._data["country"]["name"]
 
     @pytest.mark.parametrize(
-        "fmt, length",
+        "code, length",
         [
             (CountryCode.A2, 2),
             (CountryCode.A3, 3),
@@ -144,16 +144,16 @@ class TestAddress(object):
             (None, [2, 3]),
         ],
     )
-    def test_country_code(self, _address, fmt, length):
-        iso = _address.country_code(fmt=fmt)
+    def test_country_code(self, _address, code, length):
+        iso = _address.country_code(code=code)
 
-        if fmt is not None:
-            assert iso in COUNTRY_CODES[fmt.value]
+        if code is not None:
+            assert iso in COUNTRY_CODES[code.value]
 
         assert len(iso) == length or len(iso) in length
 
         with pytest.raises(NonEnumerableError):
-            _address.country_code(fmt="nil")
+            _address.country_code(code="nil")
 
     def test_city(self, address):
         result = address.city()
@@ -218,8 +218,8 @@ class TestSeededAddress(object):
 
     def test_country_iso(self, a1, a2):
         assert a1.country_code() == a2.country_code()
-        assert a1.country_code(fmt=CountryCode.A3) == a2.country_code(
-            fmt=CountryCode.A3
+        assert a1.country_code(code=CountryCode.A3) == a2.country_code(
+            code=CountryCode.A3
         )
 
     def test_city(self, a1, a2):
