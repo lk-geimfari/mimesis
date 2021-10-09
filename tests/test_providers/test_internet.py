@@ -66,6 +66,21 @@ class TestInternet(object):
         result = net.url(scheme=scheme)
         assert result.startswith(scheme.value)
 
+    @pytest.mark.parametrize(
+        "port",
+        (
+            PortRange.ALL,
+            PortRange.WELL_KNOWN,
+            PortRange.EPHEMERAL,
+            PortRange.REGISTERED,
+        ),
+    )
+    def test_url_with_port(self, net, port):
+        url = net.url(port=port)
+        port_val = int(url.split(":")[-1].replace("/", ""))
+        port_start, port_end = port.value
+        assert port_start <= port_val <= port_end
+
     def test_slug(self, net):
         with pytest.raises(TypeError):
             net.slug(3)

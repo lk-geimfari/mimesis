@@ -243,7 +243,7 @@ class Internet(BaseProvider):
         """Generate a random hostname without scheme.
 
         :param tld_type: TLDType.
-        :param subdomains: Subdomains (make sure they are valid).
+        :param subdomains: List of subdomains (make sure they are valid).
         :return: Hostname.
         """
         tld = self.tld(tld_type=tld_type)
@@ -255,15 +255,31 @@ class Internet(BaseProvider):
 
         return f"{host}{tld}"
 
-    def url(self, scheme: Optional[URLScheme] = URLScheme.HTTPS, **kwargs: Any) -> str:
+    def url(
+        self,
+        scheme: Optional[URLScheme] = URLScheme.HTTPS,
+        port: Optional[PortRange] = None,
+        **kwargs: Any,
+    ) -> str:
         """Generate random URL.
 
+        :param port: PortRange enum object.
         :param scheme: Scheme.
         :param kwargs: Keyword-arguments for :meth:`hostname`
         :return: URL.
         """
-        _scheme = self.validate_enum(scheme, URLScheme)
-        return f"{_scheme}://{self.hostname(**kwargs)}/"
+        host = self.hostname(**kwargs)
+        url_scheme = self.validate_enum(scheme, URLScheme)
+
+        url = f"{url_scheme}://{host}"
+
+        if port is not None:
+            url = f"{url}:{self.port(port)}"
+
+        return f"{url}/"
+
+    def uri(self, levels: int = 1) -> str:
+        raise NotImplementedError
 
     def top_level_domain(self, tld_type: Optional[TLDType] = None) -> str:
         """Generates random top level domain.
