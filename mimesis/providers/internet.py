@@ -262,16 +262,18 @@ class Internet(BaseProvider):
         self,
         scheme: Optional[URLScheme] = URLScheme.HTTPS,
         port: Optional[PortRange] = None,
-        **kwargs: Any,
+        tld_type: Optional[TLDType] = None,
+        subdomains: Optional[List[str]] = None,
     ) -> str:
         """Generate random URL.
 
-        :param port: PortRange enum object.
         :param scheme: Scheme.
-        :param kwargs: Keyword-arguments for :meth:`hostname`
+        :param port: PortRange enum object.
+        :param tld_type: TLDType.
+        :param subdomains: List of subdomains (make sure they are valid).
         :return: URL.
         """
-        host = self.hostname(**kwargs)
+        host = self.hostname(tld_type, subdomains)
         url_scheme = self.validate_enum(scheme, URLScheme)
 
         url = f"{url_scheme}://{host}"
@@ -281,11 +283,21 @@ class Internet(BaseProvider):
 
         return f"{url}/"
 
-    def uri(self, query_params_count: Optional[int] = None, **kwargs) -> str:
+    def uri(
+        self,
+        scheme: Optional[URLScheme] = URLScheme.HTTPS,
+        port: Optional[PortRange] = None,
+        tld_type: Optional[TLDType] = None,
+        subdomains: Optional[List[str]] = None,
+        query_params_count: Optional[int] = None,
+    ) -> str:
         """Generate a random URI.
 
+        :param scheme: Scheme.
+        :param port: PortRange enum object.
+        :param tld_type: TLDType.
+        :param subdomains: List of subdomains (make sure they are valid).
         :param query_params_count: Query params.
-        :param kwargs: Keyword-arguments for :meth:`url`
         :return: URI.
         """
         directory = (
@@ -293,7 +305,7 @@ class Internet(BaseProvider):
             .strftime("%Y-%m-%d")
             .replace("-", "/")
         )
-        url = self.url(**kwargs)
+        url = self.url(scheme, port, tld_type, subdomains)
         uri = f"{url}{directory}/{self.slug()}"
 
         if query_params_count:

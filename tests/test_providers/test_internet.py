@@ -4,6 +4,7 @@ import re
 from ipaddress import IPv4Address, IPv6Address
 
 import pytest
+import validators
 from mimesis import Internet, data
 from mimesis.enums import MimeType, PortRange, TLDType, URLScheme
 from mimesis.exceptions import NonEnumerableError
@@ -82,7 +83,7 @@ class TestInternet(object):
         assert port_start <= port_val <= port_end
 
     def test_uri(self, net):
-        assert False
+        assert validators.url(net.uri())
 
     @pytest.mark.parametrize("length", [4, 6, 8, None])
     def test_query_string(self, net, length):
