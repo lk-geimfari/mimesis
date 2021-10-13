@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """Implements classes for generating data by schema."""
+import warnings
 from typing import Any, Callable, Final, Iterator, List, Optional, Sequence
 
 from mimesis.exceptions import FieldError, SchemaError
@@ -169,6 +170,49 @@ class Schema:
             raise ValueError("The number of iterations must be greater than 0.")
 
         return [self._schema() for _ in range(iterations)]
+
+    def loop(self) -> Iterator[JSON]:
+        """Fulfills a schema **infinitely** in a lazy way.
+
+        This method can be useful when you have some dynamic
+        conditions in depend on which the generation must be interrupted.
+
+        Please, read all the notes and warnings below.
+
+        .. note::
+            Since data `mimesis` provides are limited, frequent calls of
+            this method can cause data duplication.
+
+        .. note::
+            Before using this method, ask yourself: **Do I really need this**?
+
+            In most cases, the answer is: Nah, meth:`iterator` is enough.
+
+        .. warning::
+            Do not use this method without interrupt conditions, otherwise,
+            you're risking running out of memory.
+
+        .. warning::
+            **Never** (seriously) call `list()`, `tuple()` or any other callable which tries to
+            evaluate the whole lazy object on this method — infinite called infinite
+            for a reason.
+
+            If you do intend to do this, then make sure you have a fire extinguisher
+            and call the fire department, because your computer will most likely burn out.
+
+            I just hope that you're not an idiot.
+
+        :return: An infinite iterator with fulfilled schemas.
+        """
+
+        warnings.warn(
+            "You're iterating over the infinite object! "
+            "The schema.loop() can cause a serious memory leak."
+            "Please, see: https://mimesis.name/api.html#mimesis.schema.Schema.loop"
+        )
+
+        while True:
+            yield self._schema()
 
     def iterator(self, iterations: int = 1) -> Iterator[JSON]:
         """Fulfills schema in a lazy way.
