@@ -177,7 +177,8 @@ class Schema:
         This method can be useful when you have some dynamic
         conditions in depend on which the generation must be interrupted.
 
-        Please, read all the notes and warnings below.
+        If you accepting all risks below and want to suppress
+        the warnings then use :py:class:`warnings.catch_warnings`
 
         .. note::
             Since data `mimesis` provides are limited, frequent calls of
@@ -196,11 +197,6 @@ class Schema:
             **Never** (seriously) call `list()`, `tuple()` or any other callable which tries to
             evaluate the whole lazy object on this method — infinite called infinite
             for a reason.
-
-            If you do intend to do this, then make sure you have a fire extinguisher
-            and call the fire department, because your computer will most likely burn out.
-
-            I just hope that you're not an idiot.
 
         :return: An infinite iterator with fulfilled schemas.
         """
