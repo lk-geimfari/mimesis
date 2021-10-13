@@ -186,7 +186,7 @@ class Schema:
         .. note::
             Before using this method, ask yourself: **Do I really need this**?
 
-            In most cases, the answer is: Nah, meth:`iterator` is enough.
+            In most cases, the answer is: Nah, :meth:`iterator` is enough.
 
         .. warning::
             Do not use this method without interrupt conditions, otherwise,
