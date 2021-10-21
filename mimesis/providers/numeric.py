@@ -26,19 +26,31 @@ class Numeric(BaseProvider):
 
         name: Final = "numeric"
 
-    def increment(self, accumulator_key: Optional[str] = None) -> int:
+    def increment(self, accumulator: Optional[str] = None) -> int:
         """Generate incremental number.
 
         Each call of this method returns incremented number.
 
-        :param accumulator_key: Accumulator name.
+        Example:
+            >>> self.increment()
+            1
+            >>> self.increment()
+            2
+            >>> self.increment(accumulator="new-inc")
+            1
+            >>> self.increment()
+            3
+            >>> self.increment(accumulator="new-inc")
+            2
+
+        :param accumulator: Accumulator name.
         :return: Integer.
         """
-        if not accumulator_key:
-            accumulator_key = self._default_accumulator_value
+        if not accumulator:
+            accumulator = self._default_accumulator_value
 
-        self._increment_dict[accumulator_key] += 1
-        return self._increment_dict[accumulator_key]
+        self._increment_dict[accumulator] += 1
+        return self._increment_dict[accumulator]
 
     def float_number(
         self, start: float = -1000.0, end: float = 1000.0, precision: int = 15
