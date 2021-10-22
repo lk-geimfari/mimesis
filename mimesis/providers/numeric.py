@@ -18,8 +18,8 @@ class Numeric(BaseProvider):
 
     def __init__(self, *args: Any, **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)
-        self._increment_dict: DefaultDict[str, int] = defaultdict(int)
-        self._default_accumulator_value: Final = "default"
+        self.__increment_dict: DefaultDict[str, int] = defaultdict(int)
+        self.__default_accumulator_value: Final = "default"
 
     class Meta:
         """Class for metadata."""
@@ -36,21 +36,21 @@ class Numeric(BaseProvider):
             1
             >>> self.increment()
             2
-            >>> self.increment(accumulator="new-inc")
+            >>> self.increment(accumulator="abc")
             1
             >>> self.increment()
             3
-            >>> self.increment(accumulator="new-inc")
+            >>> self.increment(accumulator="abc")
             2
 
         :param accumulator: Accumulator name.
         :return: Integer.
         """
         if not accumulator:
-            accumulator = self._default_accumulator_value
+            accumulator = self.__default_accumulator_value
 
-        self._increment_dict[accumulator] += 1
-        return self._increment_dict[accumulator]
+        self.__increment_dict[accumulator] += 1
+        return self.__increment_dict[accumulator]
 
     def float_number(
         self, start: float = -1000.0, end: float = 1000.0, precision: int = 15
