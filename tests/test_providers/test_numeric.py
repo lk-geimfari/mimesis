@@ -23,16 +23,10 @@ class TestNumbers(object):
         for i in range(1, 50 + 1):
             assert numeric.increment() == i
 
-        assert numeric._default_accumulator_value == "default"
-        assert numeric._increment_dict["default"] == 50
-
     def test_incremental_with_accumulator(self, numeric):
         for i in range(1, 50):
             for key in ("a", "b", "c"):
-                assert numeric.increment(accumulator_key=key) == i
-
-        for key in ("a", "b", "c"):
-            del numeric._increment_dict[key]
+                assert numeric.increment(accumulator=key) == i
 
     @pytest.mark.parametrize(
         "start, end",
