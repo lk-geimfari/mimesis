@@ -30,7 +30,7 @@ def test_ssn(usa, mocker):
     result = usa.ssn()
     assert result is not None
     assert "666" != result[:3]
-    assert re.match("^\d{3}-\d{2}-\d{4}$", result)
+    assert re.match(r"^\d{3}-\d{2}-\d{4}$", result)
     assert result.replace("-", "").isdigit()
     assert len(result.replace("-", "")) == 9
 

@@ -407,7 +407,7 @@ class Person(BaseDataProvider):
         :Example:
             Russian
         """
-        nationalities: Sequence[str] = self.extract(["nationality"])
+        nationalities: List[str] = self.extract(["nationality"])
 
         # Separated by gender
         if isinstance(nationalities, dict):
