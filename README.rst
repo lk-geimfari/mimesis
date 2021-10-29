@@ -186,16 +186,6 @@ Useful links
 I have a Telegram channel where I daily post news, announces and all the open-source
 goodies I found, so subscribe: `@software_dev_channel <https://t.me/software_dev_channel>`_.
 
-Supported by
-------------
-
-.. raw:: html
-    
-    <a target="_blank" href="https://www.jetbrains.com/?from=mimesis">
-       <img width="300" height="auto" src="https://user-images.githubusercontent.com/15812620/130522788-8ab324bc-7db2-44f3-a51a-0eda5fe9a9a7.png">
-    </a>
-
-
 Disclaimer
 ----------
 
