@@ -1,10 +1,7 @@
 Version 5.0.0
 -------------
 
-**Note**: This release is still under active development.
-
 **Warning**: This release contains some breaking changes in API.
-
 
 **Python compatibility**:
 
