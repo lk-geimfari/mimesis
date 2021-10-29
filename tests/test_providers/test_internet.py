@@ -47,9 +47,7 @@ class TestInternet(object):
         hostname = net.hostname(subdomains=subdomains)
         subdomain, *_ = hostname.split(".", 1)
 
-        if not subdomains:
-            assert len(hostname.split(".")) == 2
-        else:
+        if subdomains:
             assert subdomain in subdomains
 
     @pytest.mark.parametrize(
