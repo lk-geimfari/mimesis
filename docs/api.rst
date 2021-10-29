@@ -5,10 +5,6 @@ API Reference
 
 This part of the documentation covers all the public interfaces of *Mimesis*.
 
-
-Random object
-=============
-
 Random
 ------
 
@@ -78,28 +74,7 @@ Shortcuts
 Custom Exceptions
 =================
 
-LocaleError
------------
-
-.. autoclass:: mimesis.exceptions.LocaleError
-   :members:
-
-FieldError
-----------
-
-.. autoclass:: mimesis.exceptions.FieldError
-   :members:
-
-SchemaError
------------
-
-.. autoclass:: mimesis.exceptions.SchemaError
-   :members:
-
-NonEnumerableError
-------------------
-
-.. autoclass:: mimesis.exceptions.NonEnumerableError
+.. automodule:: mimesis.exceptions
    :members:
 
 

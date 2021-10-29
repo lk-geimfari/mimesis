@@ -162,7 +162,26 @@ Mimesis support over twenty different data providers available,
 which can produce data related to people, food, computer hardware,
 transportation, addresses, internet and more.
 
-See `Data Providers <https://mimesis.name/getting_started.html#data-providers>`_ for more info.
+
+You can generate a lot of extremely detailed data:
+
+.. code:: python
+
+    >>> from mimesis import Internet
+    >>> from mimesis.enums import URLScheme
+    >>> internet = Internet()
+    >>> internet.hostname()
+    'blasted.net'
+    >>> internet.url(
+        scheme=URLScheme.WSS,
+        port_range=PortRange.WELL_KNOWN,
+        tld_type=TLDType.CCTLD,
+        subdomains=["api"],
+    )
+    'wss://api.system.fr:482/'
+
+
+See `API Reference <https://mimesis.name/api.html>`_ and `Data Providers <https://mimesis.name/getting_started.html#data-providers>`_ for more info.
 
 How to Contribute
 -----------------
