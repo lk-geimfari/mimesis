@@ -77,13 +77,39 @@ class TestInternet(object):
         ),
     )
     def test_url_with_port(self, net, port):
-        url = net.url(port=port)
+        url = net.url(port_range=port)
         port_val = int(url.split(":")[-1].replace("/", ""))
         port_start, port_end = port.value
         assert port_start <= port_val <= port_end
 
-    def test_uri(self, net):
-        assert validators.url(net.uri())
+    def test_default(self, net):
+        uri = net.uri()
+        assert uri.split(":")[0].strip() == "https"
+
+    @pytest.mark.parametrize(
+        "scheme, port_range, tld_type, subdomains, query_params_count",
+        [
+            (
+                URLScheme.HTTPS,
+                PortRange.WELL_KNOWN,
+                TLDType.GTLD,
+                ["core", "app", "test", "dev"],
+                5,
+            ),
+        ],
+    )
+    def test_uri_with_parameters(
+        self, net, scheme, port_range, tld_type, subdomains, query_params_count
+    ):
+        uri = net.uri(
+            scheme=scheme,
+            port_range=port_range,
+            tld_type=tld_type,
+            subdomains=subdomains,
+            query_params_count=query_params_count,
+        )
+        assert uri.split(":")[0].strip() == scheme.value
+        assert validators.url(uri)
 
     @pytest.mark.parametrize("length", [4, 6, 8, None])
     def test_query_string(self, net, length):

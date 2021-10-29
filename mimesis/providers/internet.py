@@ -261,14 +261,14 @@ class Internet(BaseProvider):
     def url(
         self,
         scheme: Optional[URLScheme] = URLScheme.HTTPS,
-        port: Optional[PortRange] = None,
+        port_range: Optional[PortRange] = None,
         tld_type: Optional[TLDType] = None,
         subdomains: Optional[List[str]] = None,
     ) -> str:
         """Generate random URL.
 
         :param scheme: Scheme.
-        :param port: PortRange enum object.
+        :param port_range: PortRange enum object.
         :param tld_type: TLDType.
         :param subdomains: List of subdomains (make sure they are valid).
         :return: URL.
@@ -278,15 +278,15 @@ class Internet(BaseProvider):
 
         url = f"{url_scheme}://{host}"
 
-        if port is not None:
-            url = f"{url}:{self.port(port)}"
+        if port_range is not None:
+            url = f"{url}:{self.port(port_range)}"
 
         return f"{url}/"
 
     def uri(
         self,
         scheme: Optional[URLScheme] = URLScheme.HTTPS,
-        port: Optional[PortRange] = None,
+        port_range: Optional[PortRange] = None,
         tld_type: Optional[TLDType] = None,
         subdomains: Optional[List[str]] = None,
         query_params_count: Optional[int] = None,
@@ -294,7 +294,7 @@ class Internet(BaseProvider):
         """Generate a random URI.
 
         :param scheme: Scheme.
-        :param port: PortRange enum object.
+        :param port_range: PortRange enum object.
         :param tld_type: TLDType.
         :param subdomains: List of subdomains (make sure they are valid).
         :param query_params_count: Query params.
@@ -305,7 +305,7 @@ class Internet(BaseProvider):
             .strftime("%Y-%m-%d")
             .replace("-", "/")
         )
-        url = self.url(scheme, port, tld_type, subdomains)
+        url = self.url(scheme, port_range, tld_type, subdomains)
         uri = f"{url}{directory}/{self.slug()}"
 
         if query_params_count:
