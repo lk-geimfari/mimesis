@@ -39,6 +39,7 @@ extensions = [
 
     # See https://www.sphinx-doc.org/en/master/usage/extensions/intersphinx.html
     'sphinx.ext.intersphinx',
+    'sphinx_copybutton',
 
     'sphinx.ext.autosectionlabel',
     'sphinx_autodoc_typehints',

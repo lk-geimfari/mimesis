@@ -15,50 +15,49 @@ Incorrect:
 
 .. code:: python
 
-    >>> from mimesis import Person, Datetime, Text, Code
-    >>> from mimesis.locales import Locale
+    from mimesis import Person, Datetime, Text, Code
+    from mimesis.locales import Locale
 
-    >>> person = Person(Locale.RU)
-    >>> datetime = Datetime(Locale.RU)
-    >>> text = Text(Locale.RU)
-    >>> code = Code(Locale.RU)
+    person = Person(Locale.RU)
+    datetime = Datetime(Locale.RU)
+    text = Text(Locale.RU)
+    code = Code(Locale.RU)
 
 
 Correct:
 
 .. code:: python
 
-    >>> from mimesis import Generic
-    >>> from mimesis.locales import Locale
-    >>> generic = Generic(locale=Locale.EN)
+    from mimesis import Generic
+    from mimesis.locales import Locale
+    generic = Generic(locale=Locale.EN)
 
-    >>> generic.person.username()
-    'sherley3354'
+    generic.person.username()
+    # Output: 'sherley3354'
 
-    >>> generic.datetime.date()
-    '14-05-2007'
+    generic.datetime.date()
+    # Output: '14-05-2007'
 
 Still correct:
 
 .. code:: python
 
-    >>> from mimesis import Person
-    >>> from mimesis.locales import Locale
+    from mimesis import Person
+    from mimesis.locales import Locale
 
-    >>> p_en = Person(Locale.EN)
-    >>> p_sv = Person(Locale.SV)
-    >>> # …
+    p_en = Person(Locale.EN)
+    p_sv = Person(Locale.SV)
+
 
 Also correct:
 
 .. code:: python
 
-    >>> from mimesis import Person
+    from mimesis import Person
 
-    >>> person = Person(Locale.EN)
-    >>> with person.override_locale(Locale.SV)
-    >>>     pass
-    >>> # …
+    person = Person(Locale.EN)
+    with person.override_locale(Locale.SV)
+        pass
 
 
 It means that importing class providers separately makes sense only if
@@ -99,11 +98,11 @@ Example of usage for romanization of Russian full name:
 
 .. code:: python
 
-    >>> from mimesis.shortcuts import romanize
-    >>> from mimesis.locales import Locale
+    from mimesis.shortcuts import romanize
+    from mimesis.locales import Locale
 
-    >>> romanize("Вероника Денисова", locale=Locale.RU)
-    'Veronika Denisova'
+    romanize("Вероника Денисова", locale=Locale.RU)
+    # Output: 'Veronika Denisova'
 
 
 
