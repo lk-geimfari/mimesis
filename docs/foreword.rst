@@ -85,10 +85,9 @@ Just read about that guy, because he is a really badass one.
 
 What is the fake data?
 ----------------------
-
-Fake data is a kind of data which is used in software development.
-
-That data looks like real data, but it is not.
+Fake data is a type of data that does not contain any useful or sensitive data, but serves to
+reserve space where real data is nominally present. Fake data can be used as a placeholder for
+both testing and operational purposes. For testing, dummy data can also be used as stubs.
 
 What Mimesis is, What Mimesis is Not
 ------------------------------------
