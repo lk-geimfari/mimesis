@@ -8,5 +8,12 @@
     backgroundColor: 'hsl(0, 0%, 21%)',
     textColor: '#fff'
   })
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const documents = document.getElementsByClassName('injected')
+    for (const doc of documents) {
+      doc.remove()
+    }
+  }, false);
 </script>
 {% endblock %}
