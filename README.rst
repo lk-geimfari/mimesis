@@ -95,9 +95,6 @@ You can improve it by sending pull requests to this repository.
 Usage
 -----
 
-This readme file contains information for Mimesis 5.0.0 which is not released yet, so If you're 
-looking for actual docs for 4.1.3 then see: https://mimesis.name/
-
 This library is really easy to use and everything you need is just import an object which
 represents a type of data you need (we call such object a *Provider*).
 
