@@ -4,7 +4,7 @@ Contents
 .. toctree::
    :maxdepth: 2
 
-   foreword
+   about
    getting_started
    tips
 

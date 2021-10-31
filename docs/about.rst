@@ -1,5 +1,13 @@
-Foreword
-========
+About Mimesis
+=============
+
+Advantages
+----------
+This library offers a number of advantages over other similar libraries, such as Faker:
+
+-  **Performance**: Significantly faster than other similar libraries.
+-  **Completeness**: Strives to provide many detailed providers that offer a variety of data generators.
+-  **Simplicity**: Does not require any modules other than the Python standard library.
 
 
 Features
@@ -15,16 +23,6 @@ The key features are:
 - **Generic data provider**: The `simplified <https://mimesis.name/getting_started.html#generic-provider>`_ access to all the providers from a single object.
 - **Zero hard dependencies**: Does not require any modules other than the Python standard library.
 - **Schema-based generators**: Provides an easy mechanism to generate data by the schema of any complexity.
-
-
-Advantages
-----------
-This library offers a number of advantages over other similar libraries, such as Faker:
-
--  Performance. Significantly faster than other similar libraries.
--  Completeness. Strives to provide many detailed providers that offer a variety of data generators.
--  Simplicity. Does not require any modules other than the Python standard library.
-
 
 Performance
 -----------
@@ -101,4 +99,4 @@ exactly what you need.
 specific database or ORM (such as Django ORM, SQLAlchemy etc.).
 It does not mean that you can't use it with ORM on the contrary,
 this will be done very simply, this only means that possibly you'll
-need third-party libraries to do it, like `mimesis-factory` or another one.
+need third-party libraries to do it, like `mimesis-factory <https://github.com/lk-geimfari/mimesis-factory>`_ or another one.
