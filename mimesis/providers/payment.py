@@ -70,7 +70,7 @@ class Payment(BaseProvider):
     def ethereum_address(self) -> str:
         """Generate a random Ethereum address.
 
-        .. Note: The address will look like Ethereum address,
+        ..note: The address will look like Ethereum address,
         but keep in mind that it is not the valid address.
 
         :return: Ethereum address.

@@ -233,6 +233,13 @@ Path
    :members:
    :special-members: __init__
 
+Payment
+-------
+
+.. autoclass:: mimesis.Payment
+   :members:
+   :special-members: __init__
+
 Transport
 ---------
 
