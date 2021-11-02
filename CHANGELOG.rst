@@ -1,3 +1,11 @@
+Version 5.1.0
+-------------
+
+**Fixed**:
+
+- Fix mechanism of reseeding of the internal providers of ``Generic`` (See `#1115 <https://github.com/lk-geimfari/mimesis/issues/1115>`_).
+
+
 Version 5.0.0
 -------------
 
