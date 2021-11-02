@@ -1,3 +1,11 @@
+Version 5.0.1
+-------------
+
+**Reworked**:
+
+- A method ``Address().country()``, now accepts a parameter ``allow_random`` to be consistent with docs.
+
+
 Version 5.0.0
 -------------
 
