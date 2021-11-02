@@ -129,9 +129,19 @@ class TestAddress(object):
     def test_zip_code(self, address):
         assert address.zip_code()
 
-    def test_country(self, address):
-        country = address.country()
-        assert country in address._data["country"]["name"]
+    @pytest.mark.parametrize(
+        "allow_random, key",
+        [
+            (False, "current_locale"),
+            (True, "name"),
+        ],
+    )
+    def test_country(self, address, allow_random, key):
+        country = address.country(allow_random=allow_random)
+        if allow_random:
+            assert country in address._data["country"][key]
+        else:
+            assert country == address._data["country"][key]
 
     @pytest.mark.parametrize(
         "code, length",
