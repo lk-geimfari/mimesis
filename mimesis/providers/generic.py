@@ -112,6 +112,20 @@ class Generic(BaseProvider):
                     attributes.append(a)
         return attributes
 
+    def reseed(self, seed: Optional[Seed] = None) -> None:
+        """Reseed the internal random generator.
+
+        Overrides method `BaseProvider.reseed()`.
+
+        :param seed: Seed for random.
+        """
+        for attr in self.__dir__():
+            try:
+                provider = getattr(self, attr)
+                provider.reseed(seed)
+            except AttributeError:
+                continue
+
     def add_provider(self, cls: Type[BaseProvider], **kwargs: Any) -> None:
         """Add a custom provider to Generic() object.
 

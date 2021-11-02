@@ -5,6 +5,13 @@ from mimesis import BaseProvider, Generic
 
 
 class TestGeneric(object):
+    def test_reseed(self, generic):
+        generic.reseed(0xFFF)
+        address_1 = generic.address.address()
+        generic.reseed(0xFFF)
+        address_2 = generic.address.address()
+        assert address_1 == address_2
+
     def test_base_person(self, generic):
         result = generic.person.username()
         assert result is not None
