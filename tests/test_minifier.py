@@ -1,3 +1,5 @@
+import sys
+
 import pytest
 from minifier import Minimizer, human_repr
 
@@ -34,6 +36,7 @@ def disable_colorama_codes(monkeypatch):
             monkeypatch.setattr(Fore, name, "")
 
 
+@pytest.mark.skipif(sys.platform.startswith("win"), reason="windows")
 @pytest.mark.usefixtures(disable_colorama_codes.__name__)
 def test_minimizer_reports_to_stdout(capsys, tmp_path):
     file = tmp_path / "spam.json"
