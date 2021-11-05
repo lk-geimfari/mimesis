@@ -24,7 +24,7 @@ class Numeric(BaseProvider):
     class Meta:
         """Class for metadata."""
 
-        name: Final = "numeric"
+        name: Final[str] = "numeric"
 
     def increment(self, accumulator: Optional[str] = None) -> int:
         """Generate incremental number.
