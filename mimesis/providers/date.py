@@ -7,8 +7,8 @@ from datetime import date, datetime, time, timedelta
 from typing import Any, Final, List, Optional, Union
 
 from mimesis.compat import pytz
-from mimesis.enums import TimezoneRegion
 from mimesis.data import GMT_OFFSETS, ROMAN_NUMS, TIMEZONES
+from mimesis.enums import TimezoneRegion
 from mimesis.providers.base import BaseDataProvider
 from mimesis.typing import Date, DateTime, Time
 
