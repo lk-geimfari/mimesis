@@ -35,7 +35,7 @@ Description
      :target: https://pypi.org/project/mimesis/
      :alt: PyPI - Downloads
 
-.. image:: https://img.shields.io/badge/python-3.8%20%7C%203.9-brightgreen
+.. image:: https://img.shields.io/badge/python-3.8%20%7C%203.9%20%7C%203.10-brightgreen
      :target: https://pypi.org/project/mimesis/
      :alt: Python version
 
