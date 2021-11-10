@@ -275,3 +275,16 @@ class URLScheme(Enum):
     SFTP = "sftp"
     HTTP = "http"
     HTTPS = "https"
+
+
+class TimezoneRegion(Enum):
+    AFRICA = "Africa"
+    AMERICA = "America"
+    ANTARCTICA = "Antarctica"
+    ARCTIC = "Arctic"
+    ASIA = "Asia"
+    ATLANTIC = "Atlantic"
+    AUSTRALIA = "Australia"
+    EUROPE = "Europe"
+    INDIAN = "Indian"
+    PACIFIC = "Pacific"
