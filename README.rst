@@ -35,7 +35,7 @@ Description
      :target: https://pypi.org/project/mimesis/
      :alt: PyPI - Downloads
 
-.. image:: https://img.shields.io/badge/python-3.8%20%7C%203.9-brightgreen
+.. image:: https://img.shields.io/badge/python-3.8%20%7C%203.9%20%7C%203.10-brightgreen
      :target: https://pypi.org/project/mimesis/
      :alt: Python version
 
@@ -58,7 +58,7 @@ To install mimesis, simply use pip:
 Python compatibility
 ---------------------
 
-Mimesis 5.0 supports Python 3.8, 3.9, and 3.10.
+Mimesis 5.x.x supports Python 3.8, 3.9, and 3.10.
 
 The Mimesis 4.1.3 is the last to support Python 3.6 and 3.7.
 
