@@ -273,6 +273,7 @@ class URLScheme(Enum):
 
     An argument for some methods of :class:`~mimesis.Internet()`.
     """
+
     WS = "ws"
     WSS = "wss"
     FTP = "ftp"
