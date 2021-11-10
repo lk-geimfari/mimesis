@@ -1,5 +1,5 @@
-Mimesis - Fake Data Generator
------------------------------
+Mimesis: The Fake Data Generator
+--------------------------------
 
 |
 
