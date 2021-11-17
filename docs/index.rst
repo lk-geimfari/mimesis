@@ -1,6 +1,6 @@
-=============================
-Mimesis - Fake Data Generator
-=============================
+============================
+Mimesis: Fake Data Generator
+============================
 
 `Mimesis <https://github.com/lk-geimfari/mimesis>`_ is a high-performance fake data generator for Python,
 which provides data for a variety of purposes in a variety of languages.
