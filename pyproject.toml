@@ -9,16 +9,17 @@ homepage = "https://github.com/lk-geimfari/mimesis"
 repository = "https://github.com/lk-geimfari/mimesis"
 documentation = "https://mimesis.name"
 keywords = [
-    "fake",
-    "mock",
     "data",
-    "populate",
     "database",
-    "testing",
+    "dummy",
+    "fake",
+    "faker",
+    "fixtures",
     "generate",
     "mimesis",
-    "dummy",
-    "faker",
+    "mock",
+    "populate",
+    "testing"
 ]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
