@@ -1,14 +1,45 @@
 About Mimesis
 =============
 
-Advantages
-----------
-This library offers a number of advantages over other similar libraries, such as Faker:
+What Mimesis is?
+----------------
 
--  **Performance**: Significantly faster than other similar libraries.
--  **Completeness**: Strives to provide many detailed providers that offer a variety of data generators.
--  **Simplicity**: Does not require any modules other than the Python standard library.
+The problem that **Mimesis** solves and solves it perfectly is generating data.
+When you need to populate database, create complex structured JSON/XML files,
+anonymize data taken from productive services then **Mimesis** is this is
+exactly what you need.
 
+What Mimesis is Not?
+--------------------
+
+**Mimesis** is **not object factory** and it was not developed for using with
+specific database or ORM (such as Django ORM, SQLAlchemy etc.).
+It does not mean that you can't use it with ORM on the contrary,
+this will be done very simply, this only means that possibly you'll
+need third-party libraries to do it, like `mimesis-factory <https://github.com/lk-geimfari/mimesis-factory>`_ or another one.
+
+What is the fake data?
+----------------------
+Fake data is a type of data that does not contain any useful or sensitive data, but serves to
+reserve space where real data is nominally present. Fake data can be used as a placeholder for
+both testing and operational purposes. For testing, dummy data can also be used as stubs.
+
+What does name mean?
+--------------------
+
+Mimesis (`/maɪˈmiːsəs/ <https://en.wikipedia.org/wiki/Help:IPA/English>`_;
+`Ancient Greek <https://en.wikipedia.org/wiki/Ancient_Greek_language>`_: μίμησις (*mīmēsis*), from μιμεῖσθαι (*mīmeisthai*),
+"to imitate", from μῖμος (mimos), "imitator, actor") is a critical and philosophical
+term that carries a wide range of meanings, which include imitation, representation,
+mimicry, imitatio, receptivity, nonsensuous similarity, the act of resembling,
+the act of expression, and the presentation of the self.
+
+Why octopus?
+------------
+Basically, because octopuses are cool guys, but also because of the
+fantastic `mimicry <https://en.wikipedia.org/wiki/Mimicry>`_ abilities of some families of octopuses.
+Have you ever hear about `Thaumoctopus mimicus <https://en.wikipedia.org/wiki/Mimic_octopus>`_?
+Just read about that guy, because he is a really badass one.
 
 Features
 --------
@@ -23,6 +54,16 @@ The key features are:
 - **Generic data provider**: The `simplified <https://mimesis.name/getting_started.html#generic-provider>`_ access to all the providers from a single object.
 - **Zero hard dependencies**: Does not require any modules other than the Python standard library.
 - **Schema-based generators**: Provides an easy mechanism to generate data by the schema of any complexity.
+
+
+Advantages
+----------
+This library offers a number of advantages over other similar libraries, such as Faker:
+
+-  **Performance**: Significantly faster than other similar libraries.
+-  **Completeness**: Strives to provide many detailed providers that offer a variety of data generators.
+-  **Simplicity**: Does not require any modules other than the Python standard library.
+
 
 Performance
 -----------
@@ -62,41 +103,3 @@ Generating 1 million full names
 +----------+----------------------------------------+---------------------+------------------------+------------------------+
 |  Faker   | **Faker.name()**                       | 1 000 000           |  330 166 (33.02%)      |  185.945               |
 +----------+----------------------------------------+---------------------+------------------------+------------------------+
-
-
-What does name mean?
---------------------
-
-Mimesis (`/maɪˈmiːsəs/ <https://en.wikipedia.org/wiki/Help:IPA/English>`_;
-`Ancient Greek <https://en.wikipedia.org/wiki/Ancient_Greek_language>`_: μίμησις (*mīmēsis*), from μιμεῖσθαι (*mīmeisthai*),
-"to imitate", from μῖμος (mimos), "imitator, actor") is a critical and philosophical
-term that carries a wide range of meanings, which include imitation, representation,
-mimicry, imitatio, receptivity, nonsensuous similarity, the act of resembling,
-the act of expression, and the presentation of the self.
-
-Why octopus?
-------------
-Basically, because octopuses are cool guys, but also because of the
-fantastic `mimicry <https://en.wikipedia.org/wiki/Mimicry>`_ abilities of some families of octopuses.
-Have you ever hear about `Thaumoctopus mimicus <https://en.wikipedia.org/wiki/Mimic_octopus>`_?
-Just read about that guy, because he is a really badass one.
-
-What is the fake data?
-----------------------
-Fake data is a type of data that does not contain any useful or sensitive data, but serves to
-reserve space where real data is nominally present. Fake data can be used as a placeholder for
-both testing and operational purposes. For testing, dummy data can also be used as stubs.
-
-What Mimesis is, What Mimesis is Not
-------------------------------------
-
-The problem that **Mimesis** solves and solves it perfectly is generating data.
-When you need to populate database, create complex structured JSON/XML files,
-anonymize data taken from productive services then **Mimesis** is this is
-exactly what you need.
-
-**Mimesis** is **not object factory** and it was not developed for using with
-specific database or ORM (such as Django ORM, SQLAlchemy etc.).
-It does not mean that you can't use it with ORM on the contrary,
-this will be done very simply, this only means that possibly you'll
-need third-party libraries to do it, like `mimesis-factory <https://github.com/lk-geimfari/mimesis-factory>`_ or another one.
