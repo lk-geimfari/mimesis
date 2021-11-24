@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "mimesis"
-version = "5.1.0"
-description = "Mimesis: fake data generator."
+version = "5.1.1"
+description = "Mimesis: Fake Data Generator."
 authors = ["Isaak Uchakaev <likid.geimfari@gmail.com>"]
 license = "MIT"
 readme = "README.rst"
@@ -9,16 +9,17 @@ homepage = "https://github.com/lk-geimfari/mimesis"
 repository = "https://github.com/lk-geimfari/mimesis"
 documentation = "https://mimesis.name"
 keywords = [
-    "fake",
-    "mock",
     "data",
-    "populate",
     "database",
-    "testing",
+    "dummy",
+    "fake",
+    "faker",
+    "fixtures",
     "generate",
     "mimesis",
-    "dummy",
-    "faker",
+    "mock",
+    "populate",
+    "testing"
 ]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
@@ -59,7 +60,7 @@ pytest-randomly = "^3.10"
 check-manifest = "^0.47"
 readme-renderer = "^30.0"
 pytz = "^2021.3"
-black = "^21.11b0"
+black = "^21.11b1"
 autoflake = "^1.4"
 types-pytz = "^2021.3.0"
 taskipy = "^1.9.0"

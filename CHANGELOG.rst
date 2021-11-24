@@ -1,3 +1,10 @@
+Version 5.1.1
+-------------
+
+**Added**:
+
+- Added parameter ``region`` for ``Datetime().timezone()`` and enum object ``enums.TimezoneRegion``
+
 Version 5.1.0
 -------------
 
