@@ -88,6 +88,7 @@ Patches and Suggestions
 -  Emil Madsen `(Skeen)`_
 -  Michael Oliver `(michael0liver)`_
 -  Oleg Höfling `(hoefling)`_
+-  Nick Pope `(ngnpope)`_
 
 
 .. _(lk-geimfari): https://github.com/lk-geimfari
@@ -154,3 +155,4 @@ Patches and Suggestions
 .. _(michael0liver): https://github.com/aekt
 .. _(Skeen): https://github.com/Skeen
 .. _(hoefling): https://github.com/hoefling
+.. _(ngnpope): https://github.com/ngnpope
