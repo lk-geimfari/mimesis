@@ -98,7 +98,7 @@ To run tests, simply:
 
 .. code:: text
 
-    ⟩ make test
+    ⟩ poetry run pytest
 
 Check out logs of **GitHub Actions** or **AppVeyor** if tests were failed on creating
 PR, there you can find useful information.
@@ -107,24 +107,24 @@ The tests are randomly shuffled by ``pytest-randomly``. To rerun the tests with 
 
 .. code:: text
 
-    ) make test SEED=last
+    ) poetry run pytest --randomly-seed=last
 
 If you want to specify a seed ahead of time use:
 
 .. code:: text
 
-    ) make test SEED=$int
+    ) poetry run pytest --randomly-seed=$int
 
 
 Type checking
 ~~~~~~~~~~~~~
 
 After adding every feature you should run the type checking and make
-sure that everything is okay. You can do it using make:
+sure that everything is okay. You can do it using the following command:
 
 ::
 
-    ⟩ make type-check
+    ⟩ poetry run mypy mimesis/ tests/
 
 Code Review
 ~~~~~~~~~~~
