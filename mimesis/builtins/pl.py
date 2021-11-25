@@ -39,7 +39,7 @@ class PolandSpecProvider(BaseSpecProvider):
         if checksum_digit > 9:
             return self.nip()
         nip_digits.append(checksum_digit)
-        return "".join(str(d) for d in nip_digits)
+        return "".join(map(str, nip_digits))
 
     def pesel(
         self, birth_date: Optional[DateTime] = None, gender: Optional[Gender] = None
@@ -85,7 +85,7 @@ class PolandSpecProvider(BaseSpecProvider):
         sum_v = sum([nc * nd for nc, nd in zip(pesel_coeffs, pesel_digits)])
         checksum_digit = sum_v % 10
         pesel_digits.append(checksum_digit)
-        return "".join(str(d) for d in pesel_digits)
+        return "".join(map(str, pesel_digits))
 
     def regon(self) -> str:
         """Generate random valid 9-digit REGON.
@@ -99,4 +99,4 @@ class PolandSpecProvider(BaseSpecProvider):
         if checksum_digit > 9:
             checksum_digit = 0
         regon_digits.append(checksum_digit)
-        return "".join(str(d) for d in regon_digits)
+        return "".join(map(str, regon_digits))
