@@ -64,8 +64,8 @@ class Payment(BaseProvider):
             3EktnHQD7RiAE6uzMj2ZifT9YgRrkSgzQX
         """
         type_ = self.random.choice(["1", "3"])
-        letters = string.ascii_letters + string.digits
-        return type_ + "".join(self.random.choice(letters) for _ in range(33))
+        characters = string.ascii_letters + string.digits
+        return type_ + "".join(self.random.choices(characters, k=33))
 
     def ethereum_address(self) -> str:
         """Generate a random Ethereum address.
