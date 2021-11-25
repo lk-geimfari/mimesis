@@ -211,11 +211,9 @@ class BaseDataProvider(BaseProvider):
             finally:
                 self._override_locale(origin_locale)
         except AttributeError:
-            raise ValueError(
-                "«{}» has not locale dependent".format(self.__class__.__name__)
-            )
+            raise ValueError(f"«{self.__class__.__name__}» has not locale dependent")
 
     def __str__(self) -> str:
         """Human-readable representation of locale."""
-        locale = getattr(self, "locale", Locale.DEFAULT)
-        return "{} <{}>".format(self.__class__.__name__, Locale(locale))
+        locale = Locale(getattr(self, "locale", Locale.DEFAULT))
+        return f"{self.__class__.__name__} <{locale}>"

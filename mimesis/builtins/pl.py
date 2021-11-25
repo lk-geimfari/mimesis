@@ -68,10 +68,10 @@ class PolandSpecProvider(BaseSpecProvider):
         elif 2200 <= year <= 2299:
             month += 60
 
-        pesel_digits += [int(d) for d in "{:02d}".format(month)]
-        pesel_digits += [int(d) for d in "{:02d}".format(day)]
+        pesel_digits += [int(d) for d in f"{month:02d}"]
+        pesel_digits += [int(d) for d in f"{day:02d}"]
         series_number = self.random.randint(0, 999)
-        pesel_digits += [int(d) for d in "{:03d}".format(series_number)]
+        pesel_digits += [int(d) for d in f"{series_number:03d}"]
 
         if gender == Gender.MALE:
             gender_digit = self.random.choice((1, 3, 5, 7, 9))

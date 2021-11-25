@@ -165,8 +165,8 @@ class TestNumbers(object):
         for row in result:
             assert len(row) == 10
             for e in row:
-                real_str = "{:.{}f}".format(e.real, precision_real)
-                imag_str = "{:.{}f}".format(e.imag, precision_imag)
+                real_str = f"{e.real:.{precision_real}f}"
+                imag_str = f"{e.imag:.{precision_imag}f}"
                 assert float(real_str) == e.real
                 assert float(imag_str) == e.imag
                 assert len(real_str.split(".")[1]) <= precision_real

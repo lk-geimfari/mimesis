@@ -160,11 +160,9 @@ class Person(BaseDataProvider):
         else:
             raise NonEnumerableError(Gender)
 
-        fmt = "{1} {0}" if reverse else "{0} {1}"
-        return fmt.format(
-            self.name(gender),
-            self.surname(gender),
-        )
+        name = self.name(gender)
+        surname = self.surname(gender)
+        return f"{surname} {name}" if reverse else f"{name} {surname}"
 
     def username(
         self, mask: Optional[str] = None, drange: Tuple[int, int] = (1800, 2100)
@@ -277,10 +275,7 @@ class Person(BaseDataProvider):
         else:
             name = self.username(mask="ld")
 
-        return "{name}{domain}".format(
-            name=name,
-            domain=domain,
-        )
+        return f"{name}{domain}"
 
     def gender(self, iso5218: bool = False, symbol: bool = False) -> Union[str, int]:
         """Get a random gender.
@@ -330,7 +325,7 @@ class Person(BaseDataProvider):
             1.85.
         """
         h = self.random.uniform(minimum, maximum)
-        return "{:0.2f}".format(h)
+        return f"{h:0.2f}"
 
     def weight(self, minimum: int = 38, maximum: int = 90) -> int:
         """Generate a random weight in Kg.
@@ -461,7 +456,7 @@ class Person(BaseDataProvider):
         """
         if not mask:
             code = self.random.choice(CALLING_CODES)
-            default = "{}-(###)-###-####".format(code)
+            default = f"{code}-(###)-###-####"
             masks = self.extract(["telephone_fmt"], default=[default])
             mask = self.random.choice(masks)
 

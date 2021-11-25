@@ -65,7 +65,7 @@ class RussiaSpecProvider(BaseSpecProvider):
             year = self.random.randint(10, int(self._current_year[2:]))
 
         region = self.random.randint(1, 99)
-        return "{:02d} {}".format(region, year)
+        return f"{region:02d} {year}"
 
     def passport_number(self) -> int:
         """Generate random passport number.
@@ -85,10 +85,9 @@ class RussiaSpecProvider(BaseSpecProvider):
         :Example:
             57 16 805199.
         """
-        return "{} {}".format(
-            self.passport_series(),
-            self.passport_number(),
-        )
+        series = self.passport_series()
+        number = self.passport_number()
+        return f"{series} {number}"
 
     def snils(self) -> str:
         """Generate snils with special algorithm.
@@ -122,7 +121,7 @@ class RussiaSpecProvider(BaseSpecProvider):
             control_code = control_code % 101
             if control_code == 100:
                 control_code = 0
-            snils = code + "{:02}".format(control_code)
+            snils = code + f"{control_code:02}"
             return snils
 
     def inn(self) -> str:
@@ -168,7 +167,7 @@ class RussiaSpecProvider(BaseSpecProvider):
         ogrn = "".join(map(str, numbers))
         check_sum = str(int(ogrn) % 11 % 10)
 
-        return "{}{}".format(ogrn, check_sum)
+        return f"{ogrn}{check_sum}"
 
     def bic(self) -> str:
         """Generate random ``BIC`` (Bank ID Code).
