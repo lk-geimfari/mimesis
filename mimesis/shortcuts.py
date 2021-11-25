@@ -2,13 +2,18 @@
 
 """This module is provide internal util functions."""
 
-from string import ascii_letters, digits, punctuation
-from typing import Union
+import functools
+from typing import Dict, Union
 
 from mimesis.data import COMMON_LETTERS, ROMANIZATION_DICT
 from mimesis.locales import Locale, validate_locale
 
 __all__ = ["romanize", "luhn_checksum"]
+
+
+@functools.lru_cache(maxsize=None)
+def _get_translation_table(locale: Locale) -> Dict[int, str]:
+    return str.maketrans({**ROMANIZATION_DICT[locale.value], **COMMON_LETTERS})
 
 
 def luhn_checksum(num: str) -> str:
@@ -43,13 +48,6 @@ def romanize(string: str, locale: Union[Locale, str]) -> str:
     if locale not in (Locale.RU, Locale.UK, Locale.KK):
         raise ValueError(f"Romanization is not available for: {locale}")
 
-    # Cyrillic string can contain ascii symbols, digits and punctuation.
-    alphabet = {s: s for s in ascii_letters + digits + punctuation}
-    alphabet.update(
-        {
-            **ROMANIZATION_DICT[locale.value],
-            **COMMON_LETTERS,
-        }
-    )
+    table = _get_translation_table(locale)
 
-    return "".join([alphabet[i] for i in string if i in alphabet])
+    return string.translate(table)
