@@ -2,7 +2,7 @@
 
 """Specific data provider for Netherlands (nl)."""
 
-from typing import Final, Optional
+from typing import Final
 
 from mimesis.builtins.base import BaseSpecProvider
 from mimesis.locales import Locale
@@ -14,7 +14,7 @@ __all__ = ["NetherlandsSpecProvider"]
 class NetherlandsSpecProvider(BaseSpecProvider):
     """Class that provides special data for Netherlands (nl)."""
 
-    def __init__(self, seed: Optional[Seed] = None) -> None:
+    def __init__(self, seed: Seed = None) -> None:
         """Initialize attributes."""
         super().__init__(locale=Locale.NL, seed=seed)
 

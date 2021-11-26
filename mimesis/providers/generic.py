@@ -3,7 +3,7 @@
 """Provides all at one."""
 
 import inspect
-from typing import Any, Final, List, Optional, Type
+from typing import Any, Final, List, Type
 
 from mimesis.locales import Locale
 from mimesis.providers.address import Address
@@ -57,9 +57,7 @@ class Generic(BaseProvider):
         Cryptographic,
     )
 
-    def __init__(
-        self, locale: Locale = Locale.DEFAULT, seed: Optional[Seed] = None
-    ) -> None:
+    def __init__(self, locale: Locale = Locale.DEFAULT, seed: Seed = None) -> None:
         """Initialize attributes lazily."""
         super().__init__(seed=seed)
         self.locale = locale
@@ -112,7 +110,7 @@ class Generic(BaseProvider):
                     attributes.append(a)
         return attributes
 
-    def reseed(self, seed: Optional[Seed] = None) -> None:
+    def reseed(self, seed: Seed = None) -> None:
         """Reseed the internal random generator.
 
         Overrides method `BaseProvider.reseed()`.

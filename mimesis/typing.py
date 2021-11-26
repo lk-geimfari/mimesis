@@ -28,7 +28,7 @@ Date = datetime.date
 
 Timestamp = Union[str, int]
 
-Seed = Union[int, str, bytes, bytearray]
+Seed = Union[None, int, float, str, bytes, bytearray]
 
 Keywords = Union[List[str], Set[str], Tuple[str, ...]]
 
