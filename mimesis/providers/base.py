@@ -21,7 +21,7 @@ __all__ = ["BaseDataProvider", "BaseProvider"]
 class BaseProvider:
     """This is a base class for all providers."""
 
-    def __init__(self, *, seed: Optional[Seed] = None, **kwargs: Any) -> None:
+    def __init__(self, *, seed: Seed = None, **kwargs: Any) -> None:
         """Initialize attributes.
 
         Keep in mind, that locale-independent data providers will work
@@ -36,7 +36,7 @@ class BaseProvider:
         if seed is not None:
             self.reseed(seed)
 
-    def reseed(self, seed: Optional[Seed] = None) -> None:
+    def reseed(self, seed: Seed = None) -> None:
         """Reseed the internal random generator.
 
         In case we use the default seed, we need to create a per instance
@@ -79,9 +79,7 @@ class BaseDataProvider(BaseProvider):
 
     _LOCALE_SEPARATOR = "-"
 
-    def __init__(
-        self, locale: Locale = Locale.DEFAULT, seed: Optional[Seed] = None
-    ) -> None:
+    def __init__(self, locale: Locale = Locale.DEFAULT, seed: Seed = None) -> None:
         """Initialize attributes for data providers.
 
         :param locale: Current locale.

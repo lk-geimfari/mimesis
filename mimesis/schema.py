@@ -29,7 +29,7 @@ class BaseField:
     def __init__(
         self,
         locale: Locale = Locale.DEFAULT,
-        seed: Optional[Seed] = None,
+        seed: Seed = None,
         providers: Optional[Sequence[Any]] = None,
     ) -> None:
         """Initialize field.
