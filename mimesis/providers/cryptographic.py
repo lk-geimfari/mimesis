@@ -7,10 +7,9 @@ import secrets
 from typing import Any, Final, Optional
 from uuid import UUID, uuid4
 
+from mimesis.data.int.cryptographic import WORDLIST
 from mimesis.enums import Algorithm
-from mimesis.locales import Locale
 from mimesis.providers.base import BaseProvider
-from mimesis.providers.text import Text
 
 __all__ = ["Cryptographic"]
 
@@ -24,7 +23,6 @@ class Cryptographic(BaseProvider):
         :param seed: Seed.
         """
         super().__init__(*args, **kwargs)
-        self._text = Text(locale=Locale.EN, seed=self.seed)
 
     class Meta:
         """Class for metadata."""
@@ -111,18 +109,11 @@ class Cryptographic(BaseProvider):
         """
         return secrets.token_urlsafe(entropy)
 
-    def mnemonic_phrase(self, length: int = 12, separator: Optional[str] = None) -> str:
-        """Generate pseudo mnemonic phrase.
+    def mnemonic_phrase(self) -> str:
+        """Generate BIP-39-compatible mnemonic phrase.
 
-        Please, keep in mind that this method generates
-        crypto-insecure values.
-
-        :param separator: Separator of phrases (Default is " ").
-        :param length: Number of words.
         :return: Mnemonic phrase.
         """
-        if not separator:
-            separator = " "
-
-        words = self._text.words(quantity=length)
-        return "{}".format(separator).join(words)
+        length = self.random.choice([12, 24])
+        phrases = self.random.choices(WORDLIST, k=length)
+        return " ".join(phrases)
