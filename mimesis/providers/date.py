@@ -8,6 +8,7 @@ from typing import Any, Final, List, Optional, Union
 
 from mimesis.compat import pytz
 from mimesis.data import GMT_OFFSETS, ROMAN_NUMS, TIMEZONES
+from mimesis.enums import TimezoneRegion
 from mimesis.providers.base import BaseDataProvider
 from mimesis.typing import Date, DateTime, Time
 
@@ -192,12 +193,16 @@ class Datetime(BaseDataProvider):
         """
         return self.random.randint(1, 31)
 
-    def timezone(self) -> str:
+    def timezone(self, region: Optional[TimezoneRegion] = None) -> str:
         """Get a random timezone.
 
+        :param region: Timezone region.
         :return: Timezone.
         """
-        return self.random.choice(TIMEZONES)
+        region_name = self.validate_enum(region, TimezoneRegion)
+        return self.random.choice(
+            [tz for tz in TIMEZONES if tz.startswith(region_name)]
+        )
 
     def gmt_offset(self) -> str:
         """Get a random GMT offset value.

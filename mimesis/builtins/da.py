@@ -2,7 +2,7 @@
 
 """Specific data provider for Denmark (da)."""
 import operator
-from typing import Final, Optional, Tuple
+from typing import Final, Tuple
 
 from mimesis import Datetime
 from mimesis.builtins.base import BaseSpecProvider
@@ -15,7 +15,7 @@ __all__ = ["DenmarkSpecProvider"]
 class DenmarkSpecProvider(BaseSpecProvider):
     """Class that provides special data for Denmark (da)."""
 
-    def __init__(self, seed: Optional[Seed] = None) -> None:
+    def __init__(self, seed: Seed = None) -> None:
         """Initialize attributes."""
         super().__init__(locale=Locale.DA, seed=seed)
         self._datetime = Datetime(locale=Locale.DA, seed=seed)

@@ -5,6 +5,7 @@ import re
 import pytest
 from mimesis import Datetime
 from mimesis.data import GMT_OFFSETS, TIMEZONES
+from mimesis.enums import TimezoneRegion
 
 from . import patterns
 
@@ -99,12 +100,30 @@ class TestDatetime(object):
         result = dt.periodicity()
         assert result in dt._data["periodicity"]
 
-    def test_timezone(self, _datetime):
-        result = _datetime.timezone()
-
-        assert result is not None
-        assert isinstance(result, str)
+    @pytest.mark.parametrize(
+        "region",
+        [
+            TimezoneRegion.AFRICA,
+            TimezoneRegion.AMERICA,
+            TimezoneRegion.ANTARCTICA,
+            TimezoneRegion.ARCTIC,
+            TimezoneRegion.ASIA,
+            TimezoneRegion.ATLANTIC,
+            TimezoneRegion.AUSTRALIA,
+            TimezoneRegion.EUROPE,
+            TimezoneRegion.INDIAN,
+            TimezoneRegion.PACIFIC,
+        ],
+    )
+    def test_timezone(self, _datetime, region):
+        result = _datetime.timezone(region=region)
         assert result in TIMEZONES
+        assert result.startswith(region.value)
+
+    def test_timezone_without_region(self, _datetime):
+        result = _datetime.timezone()
+        region = result.split("/")[0]
+        assert region in set([tz.split("/")[0] for tz in TIMEZONES])
 
     @pytest.mark.parametrize(
         "posix, _type",
@@ -211,6 +230,10 @@ class TestSeededDatetime(object):
 
     def test_timezone(self, d1, d2):
         assert d1.timezone() == d2.timezone()
+        assert d1.timezone(region=None) == d2.timezone(region=None)
+        assert d1.timezone(region=TimezoneRegion.EUROPE) == d2.timezone(
+            region=TimezoneRegion.EUROPE
+        )
 
     def test_timestamp(self, d1, d2):
         assert d1.timestamp() == d2.timestamp()

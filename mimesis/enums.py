@@ -269,9 +269,32 @@ class CompressedFile(Enum):
 
 
 class URLScheme(Enum):
+    """Provides URL schemes.
+
+    An argument for some methods of :class:`~mimesis.Internet()`.
+    """
+
     WS = "ws"
     WSS = "wss"
     FTP = "ftp"
     SFTP = "sftp"
     HTTP = "http"
     HTTPS = "https"
+
+
+class TimezoneRegion(Enum):
+    """Provides regions of timezones.
+
+    An argument for :meth:`~mimesis.Datetime.timezone()`.
+    """
+
+    AFRICA = "Africa"
+    AMERICA = "America"
+    ANTARCTICA = "Antarctica"
+    ARCTIC = "Arctic"
+    ASIA = "Asia"
+    ATLANTIC = "Atlantic"
+    AUSTRALIA = "Australia"
+    EUROPE = "Europe"
+    INDIAN = "Indian"
+    PACIFIC = "Pacific"
