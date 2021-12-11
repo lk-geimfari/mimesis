@@ -63,22 +63,11 @@ class TestCryptographic(object):
         assert len(result) > entropy
         assert isinstance(result, str)
 
-    @pytest.mark.parametrize(
-        "length, separator",
-        [
-            (8, None),
-            (16, " - "),
-            (16, "_"),
-        ],
-    )
-    def test_mnemonic_phrase(self, crypto, length, separator):
-        if not separator:
-            separator = " "
-
-        result = crypto.mnemonic_phrase(length=length, separator=separator)
+    def test_mnemonic_phrase(self, crypto):
+        result = crypto.mnemonic_phrase()
         assert isinstance(result, str)
-        assert len(result.split(separator)) == length
-        assert separator in result
+        phrase_len = len(result.split(" "))
+        assert phrase_len == 12 or phrase_len == 24
 
 
 class TestSeededCryptographic(object):
@@ -98,6 +87,3 @@ class TestSeededCryptographic(object):
 
     def test_mnemonic_phrase(self, c1, c2):
         assert c1.mnemonic_phrase() == c2.mnemonic_phrase()
-        assert c1.mnemonic_phrase(length=16, separator=" | ") == c2.mnemonic_phrase(
-            length=16, separator=" | "
-        )

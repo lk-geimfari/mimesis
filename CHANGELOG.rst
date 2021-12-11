@@ -1,3 +1,11 @@
+Version 5.2.1
+-------------
+
+**Removed**:
+
+- Removed all params of ``mnemonic_phrase()``
+
+
 Version 5.1.1
 -------------
 
