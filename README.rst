@@ -167,15 +167,8 @@ You can generate a lot of extremely detailed data:
     >>> from mimesis import Internet
     >>> from mimesis.enums import URLScheme
     >>> internet = Internet()
-    >>> internet.hostname()
-    'blasted.net'
-    >>> internet.url(
-        scheme=URLScheme.WSS,
-        port_range=PortRange.WELL_KNOWN,
-        tld_type=TLDType.CCTLD,
-        subdomains=["api"],
-    )
-    'wss://api.system.fr:482/'
+    >>> internet.url(scheme=URLScheme.WSS, subdomains=["chat"])
+    'wss://chat.system.io/'
 
 
 See `API Reference <https://mimesis.name/api.html>`_ and `Data Providers <https://mimesis.name/getting_started.html#data-providers>`_ for more info.
