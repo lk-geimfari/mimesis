@@ -8,7 +8,7 @@ from typing import Final, List, Optional
 from mimesis.builtins.base import BaseSpecProvider
 from mimesis.enums import Gender
 from mimesis.locales import Locale
-from mimesis.typing import Seed
+from mimesis.types import Seed
 
 __all__ = ["RussiaSpecProvider"]
 

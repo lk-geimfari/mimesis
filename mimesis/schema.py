@@ -7,7 +7,7 @@ from typing import Any, Callable, ClassVar, Iterator, List, Optional, Sequence
 from mimesis.exceptions import FieldError, SchemaError
 from mimesis.locales import Locale
 from mimesis.providers.generic import Generic
-from mimesis.typing import JSON, SchemaType, Seed
+from mimesis.types import JSON, SchemaType, Seed
 
 __all__ = ["BaseField", "Field", "Schema"]
 

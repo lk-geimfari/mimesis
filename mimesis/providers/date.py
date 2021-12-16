@@ -10,7 +10,7 @@ from mimesis.compat import pytz
 from mimesis.data import GMT_OFFSETS, ROMAN_NUMS, TIMEZONES
 from mimesis.enums import TimezoneRegion
 from mimesis.providers.base import BaseDataProvider
-from mimesis.typing import Date, DateTime, Time
+from mimesis.types import Date, DateTime, Time
 
 __all__ = ["Datetime"]
 

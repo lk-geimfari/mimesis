@@ -23,7 +23,7 @@ from mimesis.providers.base import BaseProvider
 from mimesis.providers.date import Datetime
 from mimesis.providers.file import File
 from mimesis.providers.text import Text
-from mimesis.typing import Keywords
+from mimesis.types import Keywords
 
 __all__ = ["Internet"]
 

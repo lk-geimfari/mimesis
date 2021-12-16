@@ -26,7 +26,7 @@ from mimesis.providers.person import Person
 from mimesis.providers.science import Science
 from mimesis.providers.text import Text
 from mimesis.providers.transport import Transport
-from mimesis.typing import Seed
+from mimesis.types import Seed
 
 __all__ = ["Generic"]
 

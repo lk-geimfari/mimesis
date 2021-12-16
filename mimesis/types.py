@@ -1,6 +1,18 @@
 # -*- coding: utf-8 -*-
 
-"""Custom types and shortcuts for annotating Mimesis."""
+"""
+This module contains knowledge about the types we use.
+
+Policy
+~~~~~~
+
+If any of the following statements is true, move the type to this file:
+
+- if type is used in multiple files
+- if type is complex enough it has to be documented
+- if type is very important for the public API
+
+"""
 
 import datetime
 from decimal import Decimal

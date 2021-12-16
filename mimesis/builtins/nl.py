@@ -6,7 +6,7 @@ from typing import Final
 
 from mimesis.builtins.base import BaseSpecProvider
 from mimesis.locales import Locale
-from mimesis.typing import Seed
+from mimesis.types import Seed
 
 __all__ = ["NetherlandsSpecProvider"]
 

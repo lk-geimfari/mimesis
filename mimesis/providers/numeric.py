@@ -8,7 +8,7 @@ from typing import Any, DefaultDict, Final, List, Optional
 
 from mimesis.enums import NumType
 from mimesis.providers.base import BaseProvider
-from mimesis.typing import Matrix
+from mimesis.types import Matrix
 
 __all__ = ["Numeric"]
 
