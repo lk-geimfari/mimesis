@@ -463,7 +463,7 @@ python-versions = "*"
 
 [[package]]
 name = "readme-renderer"
-version = "31.0"
+version = "32.0"
 description = "readme_renderer is a library for rendering \"readme\" descriptions for Warehouse"
 category = "dev"
 optional = false
@@ -600,7 +600,7 @@ testing = ["pytest (>=4.6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytes
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "656f7da8f25d15b19429a5a35cb1a5a8a28d7f0a331f853171f27c8e532a2039"
+content-hash = "da64e8c218408ef1c61e58b91b37c7edb0b4d6fbaca4c4a70f20aeec3171f978"
 
 [metadata.files]
 atomicwrites = [
@@ -849,8 +849,8 @@ pytz = [
     {file = "pytz-2021.3.tar.gz", hash = "sha256:acad2d8b20a1af07d4e4c9d2e9285c5ed9104354062f275f3fcd88dcef4f1326"},
 ]
 readme-renderer = [
-    {file = "readme_renderer-31.0-py3-none-any.whl", hash = "sha256:03b3cca3d1a8ef9d2200258c282eae4b8b60bc53b674c0588cb214785465213a"},
-    {file = "readme_renderer-31.0.tar.gz", hash = "sha256:8ceeb608a1bc6f474430db890a4b9b6006e16d9d26b81a84a1e2e2aae4454f9b"},
+    {file = "readme_renderer-32.0-py3-none-any.whl", hash = "sha256:a50a0f2123a4c1145ac6f420e1a348aafefcc9211c846e3d51df05fe3d865b7d"},
+    {file = "readme_renderer-32.0.tar.gz", hash = "sha256:b512beafa6798260c7d5af3e1b1f097e58bfcd9a575da7c4ddd5e037490a5b85"},
 ]
 requests = [
     {file = "requests-2.26.0-py2.py3-none-any.whl", hash = "sha256:6c1246513ecd5ecd4528a0906f910e8f0f9c6b8ec72030dc9fd154dc1a6efd24"},
