@@ -105,7 +105,8 @@ class BaseField:
                         for provider in dir(self._gen):
                             provider = getattr(self._gen, provider)
                             if name in dir(provider):
-                                self._table[name] = getattr(provider, name)
+                                if name not in self._table:
+                                    self._table[name] = getattr(provider, name)
                 else:
                     self._table[name] = tail_parser(name, self._gen)
 

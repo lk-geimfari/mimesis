@@ -78,6 +78,8 @@ def schema(field):
             "id": field("uuid"),
             "name": field("word"),
             "timestamp": field("timestamp"),
+            "datetime": field("datetime"),
+            "dt": field("datetime.datetime"),
             "zip_code": field("postal_code"),
             "owner": {
                 "email": field("email", key=str.lower),
