@@ -54,7 +54,7 @@ class Random(random_module.Random):
         :param length: Max value.
         :return: Single string.
         """
-        return "".join(self.choice(str_seq) for _ in range(length))
+        return "".join(self.choices(str_seq, k=length))
 
     def custom_code(self, mask: str = "@###", char: str = "@", digit: str = "#") -> str:
         """Generate custom code using ascii uppercase and random integers.
@@ -117,9 +117,8 @@ class Random(random_module.Random):
         if length is None:
             length = self.randint(16, 128)
 
-        _string = string.ascii_letters + string.digits
-        _string = "".join(self.choice(_string) for _ in range(length))
-        return _string
+        characters = string.ascii_letters + string.digits
+        return "".join(self.choices(characters, k=length))
 
 
 def get_random_item(enum: Any, rnd: Optional[Random] = None) -> Any:

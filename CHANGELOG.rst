@@ -4,6 +4,7 @@ Version 5.3.0
 **Optimizations**:
 
 - Significantly improved performance of ``shortcuts.romanize()``
+- Use ``random.choices()`` to generate random strings instead of ``random.choice()`` for selecting individual characters. This can lead to a significant speed up, but will also change the reproducibility of values when upgrading to this version as the two methods use different algorithms.
 - Optimized ``Address.latitude()``, ``Address.longitude()``, and ``Address.coordinates()`` when passing ``dms=True``.
 
 

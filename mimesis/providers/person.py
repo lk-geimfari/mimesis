@@ -234,8 +234,8 @@ class Person(BaseDataProvider):
         :Example:
             k6dv2odff9#4h
         """
-        text = ascii_letters + digits + punctuation
-        password = "".join([self.random.choice(text) for _ in range(length)])
+        characters = ascii_letters + digits + punctuation
+        password = "".join(self.random.choices(characters, k=length))
 
         if hashed:
             md5 = hashlib.md5()
