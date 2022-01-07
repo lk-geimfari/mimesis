@@ -4,6 +4,7 @@ Version 5.3.0
 **Optimizations**:
 
 - Significantly improved performance of ``shortcuts.romanize()``
+- Optimized ``Address.latitude()``, ``Address.longitude()``, and ``Address.coordinates()`` when passing ``dms=True``.
 
 
 Version 5.2.1
