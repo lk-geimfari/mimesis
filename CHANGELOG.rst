@@ -1,3 +1,11 @@
+Version 5.3.0
+-------------
+
+**Optimizations**:
+
+- Significantly improved performance of ``shortcuts.romanize()``
+
+
 Version 5.2.1
 -------------
 
