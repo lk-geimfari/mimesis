@@ -54,10 +54,10 @@ class PolandSpecProvider(BaseSpecProvider):
         if not date_object:
             date_object = Datetime().datetime(1940, 2018)
 
-        year = date_object.date().year
-        month = date_object.date().month
-        day = date_object.date().day
-        pesel_digits = [int(d) for d in str(year)][-2:]
+        date = date_object.date()
+        year = date.year % 100
+        month = date.month
+        day = date.day
 
         if 1800 <= year <= 1899:
             month += 80
@@ -68,10 +68,11 @@ class PolandSpecProvider(BaseSpecProvider):
         elif 2200 <= year <= 2299:
             month += 60
 
-        pesel_digits += [int(d) for d in "{:02d}".format(month)]
-        pesel_digits += [int(d) for d in "{:02d}".format(day)]
         series_number = self.random.randint(0, 999)
-        pesel_digits += [int(d) for d in "{:03d}".format(series_number)]
+
+        pesel_digits = list(
+            map(int, f"{year:02d}{month:02d}{day:02d}{series_number:03d}")
+        )
 
         if gender == Gender.MALE:
             gender_digit = self.random.choice((1, 3, 5, 7, 9))
