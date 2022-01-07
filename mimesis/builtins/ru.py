@@ -36,7 +36,7 @@ class RussiaSpecProvider(BaseSpecProvider):
         sentence = [
             self.random.choice(sentences[k]) for k in ("head", "p1", "p2", "tail")
         ]
-        return "{0} {1} {2} {3}".format(*sentence)
+        return " ".join(sentence)
 
     def patronymic(self, gender: Optional[Gender] = None) -> str:
         """Generate random patronymic name.
