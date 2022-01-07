@@ -117,6 +117,9 @@ class Generic(BaseProvider):
 
         :param seed: Seed for random.
         """
+        # Ensure that we reseed the random generator on Generic itself.
+        super().reseed(seed)
+
         for attr in self.__dir__():
             try:
                 provider = getattr(self, attr)
