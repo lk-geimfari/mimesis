@@ -5,7 +5,7 @@ from mimesis.enums import Gender
 from mimesis.exceptions import LocaleError, NonEnumerableError
 from mimesis.locales import Locale
 from mimesis.providers import Code, Cryptographic, Internet, Person
-from mimesis.providers.base import BaseDataProvider
+from mimesis.providers.base import BaseDataProvider, BaseProvider
 
 from . import patterns
 
@@ -180,3 +180,11 @@ class TestSeededBase(object):
     def test_base_random(self, _bases):
         b1, b2 = _bases
         assert b1.random.randints() == b2.random.randints()
+
+    @pytest.mark.parametrize("seed", [None, 123, 0.5, "string", b"bytes", bytearray(1)])
+    def test_per_instance_random(self, seed):
+        b1 = BaseProvider(seed=seed)
+        b2 = BaseProvider(seed=seed)
+
+        assert b1.seed == b2.seed
+        assert b1.random is not b2.random

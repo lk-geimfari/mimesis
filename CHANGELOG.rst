@@ -12,6 +12,7 @@ Version 5.3.0
 
 - Fix reseeding of the random generator of ``Generic``. This was a regression in v5.1.0. (See `#1150 <https://github.com/lk-geimfari/mimesis/issues/1150>`_).
 - ``Development.version()`` now supports use of both the ``calver`` and ``pre_release`` flags together.
+- Providers now have an isolated ``random`` instance when using a seed of ``None``.
 
 
 Version 5.2.1
