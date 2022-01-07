@@ -49,19 +49,20 @@ class Address(BaseDataProvider):
         :param _type: Type of number.
         :return: Number in DMS format.
         """
-        degrees = int(num)
-        minutes = int((num - degrees) * 60)
-        seconds = (num - degrees - minutes / 60) * 3600.00
-        seconds = round(seconds, 3)
-        result = [abs(i) for i in (degrees, minutes, seconds)]
-
         direction = ""
         if _type == "lg":
-            direction = "W" if degrees < 0 else "E"
+            direction = "W" if num < 0 else "E"
         elif _type == "lt":
-            direction = "S" if degrees < 0 else "N"
+            direction = "S" if num < 0 else "N"
 
-        return ("{}º{}'{:.3f}\"" + direction).format(*result)
+        num = abs(num)
+        degrees = int(num)
+        part = num - degrees
+        minutes = int(part * 60)
+        seconds = 3600 * part - 60 * minutes
+        seconds = round(seconds, 3)
+
+        return f"{degrees}º{minutes}'{seconds:.3f}\"{direction}"
 
     def street_number(self, maximum: int = 1400) -> str:
         """Generate a random street number.

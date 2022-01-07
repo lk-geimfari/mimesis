@@ -40,7 +40,7 @@ class NonEnumerableError(TypeError):
         """
         if enum_obj:
             self.name = enum_obj
-            self.items = ", ".join([str(i) for i in enum_obj])
+            self.items = ", ".join(map(str, enum_obj))
         else:
             self.items = ""
 

@@ -36,7 +36,7 @@ class RussiaSpecProvider(BaseSpecProvider):
         sentence = [
             self.random.choice(sentences[k]) for k in ("head", "p1", "p2", "tail")
         ]
-        return "{0} {1} {2} {3}".format(*sentence)
+        return " ".join(sentence)
 
     def patronymic(self, gender: Optional[Gender] = None) -> str:
         """Generate random patronymic name.
@@ -108,7 +108,7 @@ class RussiaSpecProvider(BaseSpecProvider):
             control_codes.append(numbers[9 - i] * i)
 
         control_code = sum(control_codes)
-        code = "".join(str(number) for number in numbers)
+        code = "".join(map(str, numbers))
 
         if control_code in (100, 101):
             snils = code + "00"
@@ -151,7 +151,7 @@ class RussiaSpecProvider(BaseSpecProvider):
         numbers.append(n2)
         n1 = control_sum(numbers, "n1")
         numbers.append(n1)
-        return "".join([str(x) for x in numbers])
+        return "".join(map(str, numbers))
 
     def ogrn(self) -> str:
         """Generate random valid ``OGRN``.
@@ -165,7 +165,7 @@ class RussiaSpecProvider(BaseSpecProvider):
         for _ in range(0, 12):
             numbers.append(self.random.randint(1 if _ == 0 else 0, 9))
 
-        ogrn = "".join([str(x) for x in numbers])
+        ogrn = "".join(map(str, numbers))
         check_sum = str(int(ogrn) % 11 % 10)
 
         return "{}{}".format(ogrn, check_sum)
