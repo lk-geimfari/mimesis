@@ -7,9 +7,12 @@ from mimesis import BaseProvider, Generic
 class TestGeneric(object):
     def test_reseed(self, generic):
         generic.reseed(0xFFF)
+        number_1 = generic.random.uniform(0, 1000)
         address_1 = generic.address.address()
         generic.reseed(0xFFF)
+        number_2 = generic.random.uniform(0, 1000)
         address_2 = generic.address.address()
+        assert number_1 == number_2
         assert address_1 == address_2
 
     def test_base_person(self, generic):

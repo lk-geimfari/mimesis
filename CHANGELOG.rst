@@ -5,6 +5,10 @@ Version 5.3.0
 
 - Significantly improved performance of ``shortcuts.romanize()``
 
+**Fixed**:
+
+- Fix reseeding of the random generator of ``Generic``. This was a regression in v5.1.0. (See `#1150 <https://github.com/lk-geimfari/mimesis/issues/1150>`_).
+
 
 Version 5.2.1
 -------------
