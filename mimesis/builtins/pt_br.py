@@ -55,7 +55,7 @@ class BrazilSpecProvider(BaseSpecProvider):
         second_dv = get_verifying_digit_cpf(cpf_without_dv, 11)
         cpf_without_dv.append(second_dv)
 
-        cpf = "".join([str(i) for i in cpf_without_dv])
+        cpf = "".join(map(str, cpf_without_dv))
 
         if with_mask:
             return cpf[:3] + "." + cpf[3:6] + "." + cpf[6:9] + "-" + cpf[9:]
@@ -98,7 +98,7 @@ class BrazilSpecProvider(BaseSpecProvider):
         second_dv = get_verifying_digit_cnpj(cnpj_without_dv, 6)
         cnpj_without_dv.append(second_dv)
 
-        cnpj = "".join([str(i) for i in cnpj_without_dv])
+        cnpj = "".join(map(str, cnpj_without_dv))
 
         if with_mask:
             return "{}.{}.{}/{}-{}".format(
