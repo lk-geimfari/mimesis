@@ -48,7 +48,7 @@ class BaseField:
         self,
         name: Optional[str] = None,
         key: Optional[Callable[[Any], Any]] = None,
-        **kwargs: Any
+        **kwargs: Any,
     ) -> Any:
         """Performs the value of the field by its name.
 
