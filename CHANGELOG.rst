@@ -6,10 +6,12 @@ Version 5.3.0
 - Significantly improved performance of ``shortcuts.romanize()``
 - Use ``random.choices()`` to generate random strings instead of ``random.choice()`` for selecting individual characters. This can lead to a significant speed up, but will also change the reproducibility of values when upgrading to this version as the two methods use different algorithms.
 - Optimized ``Address.latitude()``, ``Address.longitude()``, and ``Address.coordinates()`` when passing ``dms=True``.
+- Optimized ``Development.version()``.
 
 **Fixed**:
 
 - Fix reseeding of the random generator of ``Generic``. This was a regression in v5.1.0. (See `#1150 <https://github.com/lk-geimfari/mimesis/issues/1150>`_).
+- ``Development.version()`` now supports use of both the ``calver`` and ``pre_release`` flags together.
 
 
 Version 5.2.1

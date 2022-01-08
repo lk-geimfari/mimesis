@@ -38,26 +38,18 @@ class Development(BaseProvider):
         :Example:
             0.2.1
         """
-        # TODO: Optimize
-        version = "{}.{}.{}"
-        major, minor, patch = self.random.randints(3, 0, 10)
-
         if calver:
-            if minor == 0:
-                minor += 1
-
-            if patch == 0:
-                patch += 1
             major = self.random.randint(2016, 2018)
-            return version.format(major, minor, patch)
+            minor, patch = self.random.randints(2, 1, 10)
+        else:
+            major, minor, patch = self.random.randints(3, 0, 10)
 
-        version = "{}.{}.{}".format(major, minor, patch)
+        version = f"{major}.{minor}.{patch}"
 
         if pre_release:
-            suffixes = ("alpha", "beta", "rc")
-            suffix = self.random.choice(suffixes)
+            suffix = self.random.choice(("alpha", "beta", "rc"))
             number = self.random.randint(1, 11)
-            return "{}-{}.{}".format(version, suffix, number)
+            version = f"{version}-{suffix}.{number}"
 
         return version
 
