@@ -77,7 +77,7 @@ class DenmarkSpecProvider(BaseSpecProvider):
         """Generate a serial number and checksum from cpr_century."""
         serial_number = "{:02d}".format(self.random.randint(0, 99))
 
-        cpr_nr_no_checksum = "{}{}".format(cpr_century, serial_number)
+        cpr_nr_no_checksum = f"{cpr_century}{serial_number}"
         checksum = self._calculate_checksum(cpr_nr_no_checksum)
         if checksum == 10:
             return self._generate_serial_checksum(cpr_century)
@@ -92,13 +92,9 @@ class DenmarkSpecProvider(BaseSpecProvider):
             0405420694
         """
         date = self._datetime.date(start=1858, end=2021)
-        cpr_date = "{:02d}{:02d}{}".format(
-            date.day,
-            date.month,
-            str(date.year)[-2:],
-        )
+        cpr_date = f"{date:%d%m%y}"
         century_selector = self._calculate_century_selector(date.year)
-        cpr_century = "{}{}".format(cpr_date, century_selector)
+        cpr_century = f"{cpr_date}{century_selector}"
         serial_number, checksum = self._generate_serial_checksum(cpr_century)
-        cpr_nr = "{}{}{}".format(cpr_century, serial_number, checksum)
+        cpr_nr = f"{cpr_century}{serial_number}{checksum}"
         return cpr_nr

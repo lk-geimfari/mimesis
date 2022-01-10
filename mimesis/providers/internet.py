@@ -59,7 +59,7 @@ class Internet(BaseProvider):
             Content-Type: application/json
         """
         fmt = self.file.mime_type(type_=mime_type)
-        return "Content-Type: {}".format(fmt)
+        return f"Content-Type: {fmt}"
 
     def http_status_message(self) -> str:
         """Get a random HTTP status message.
@@ -109,7 +109,9 @@ class Internet(BaseProvider):
         :Example:
             19.121.223.58:8000
         """
-        return "{}:{}".format(self.ip_v4(), self.port(port_range))
+        addr = self.ip_v4()
+        port = self.port(port_range)
+        return f"{addr}:{port}"
 
     def ip_v4(self) -> str:
         """Generate a random IPv4 address as string.
@@ -157,7 +159,7 @@ class Internet(BaseProvider):
             self.random.randint(0x00, 0xFF),
             self.random.randint(0x00, 0xFF),
         ]
-        mac = ["{:02x}".format(x) for x in mac_hex]
+        mac = [f"{x:02x}" for x in mac_hex]
         return ":".join(mac)
 
     def emoji(self) -> str:
@@ -180,8 +182,7 @@ class Internet(BaseProvider):
         :param height: Height of image.
         :return: URL to image placeholder.
         """
-        url = "http://placehold.it/{width}x{height}"
-        return url.format(width=width, height=height)
+        return f"http://placehold.it/{width}x{height}"
 
     @staticmethod
     def stock_image(
@@ -204,14 +205,12 @@ class Internet(BaseProvider):
         :param writable: Return image as sequence ob bytes.
         :return: Link to the image.
         """
-        api_url = "https://source.unsplash.com/{}x{}?{}"
-
         if keywords is not None:
             keywords_str = ",".join(keywords)
         else:
             keywords_str = ""
 
-        url = api_url.format(width, height, keywords_str)
+        url = f"https://source.unsplash.com/{width}x{height}?{keywords_str}"
 
         if writable:
             try:

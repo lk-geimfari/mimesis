@@ -146,7 +146,7 @@ class Payment(BaseProvider):
         """
         month = self.random.randint(1, 12)
         year = self.random.randint(minimum, maximum)
-        return "{0:02d}/{1}".format(month, year)
+        return f"{month:02d}/{year}"
 
     def cvv(self) -> str:
         """Generate a random CVV.

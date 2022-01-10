@@ -83,10 +83,7 @@ class Datetime(BaseDataProvider):
         """
         year = self.year(start, end)
         week = self.random.randint(1, 52)
-        return "{year}-W{week}".format(
-            year=year,
-            week=week,
-        )
+        return f"{year}-W{week}"
 
     def day_of_week(self, abbr: bool = False) -> str:
         """Get a random day of week.
@@ -245,7 +242,7 @@ class Datetime(BaseDataProvider):
         if not fmt:
             date_fmt = self.extract(["formats", "date"])
             time_fmt = self.extract(["formats", "time"])
-            fmt = "{} {}".format(date_fmt, time_fmt)
+            fmt = f"{date_fmt} {time_fmt}"
 
         return dt_obj.strftime(fmt)
 
