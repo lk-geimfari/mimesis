@@ -164,4 +164,4 @@ class Generic(BaseProvider):
 
     def __str__(self) -> str:
         """Human-readable representation of locale."""
-        return "{} <{}>".format(self.__class__.__name__, self.locale)
+        return f"{self.__class__.__name__} <{self.locale}>"

@@ -48,7 +48,7 @@ class BaseField:
         self,
         name: Optional[str] = None,
         key: Optional[Callable[[Any], Any]] = None,
-        **kwargs: Any
+        **kwargs: Any,
     ) -> Any:
         """Performs the value of the field by its name.
 
@@ -117,7 +117,7 @@ class BaseField:
             raise FieldError(name)
 
     def __str__(self) -> str:
-        return "{} <{}>".format(self.__class__.__name__, self._gen.locale)
+        return f"{self.__class__.__name__} <{self._gen.locale}>"
 
 
 class Field(BaseField):

@@ -44,10 +44,9 @@ class Transport(BaseProvider):
         :Example:
             Caledon-966O.
         """
-        return "{}-{}".format(
-            self.random.choice(TRUCKS),
-            self.random.custom_code(model_mask),
-        )
+        model = self.random.custom_code(model_mask)
+        truck = self.random.choice(TRUCKS)
+        return f"{truck}-{model}"
 
     def manufacturer(self) -> str:
         """Get a random card manufacturer.
@@ -81,7 +80,7 @@ class Transport(BaseProvider):
         """
         model = self.random.custom_code(mask=model_mask)
         plane = self.random.choice(AIRPLANES)
-        return "{} {}".format(plane, model)
+        return f"{plane} {model}"
 
     def vehicle_registration_code(self, locale: Optional[Locale] = None) -> str:
         """Get vehicle registration code of country.

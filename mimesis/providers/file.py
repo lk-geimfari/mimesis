@@ -75,11 +75,7 @@ class File(BaseProvider):
         """
         num = self.random.randint(minimum, maximum)
         unit = self.random.choice(["bytes", "kB", "MB", "GB", "TB"])
-
-        return "{num} {unit}".format(
-            num=num,
-            unit=unit,
-        )
+        return f"{num} {unit}"
 
     def file_name(self, file_type: Optional[FileType] = None) -> str:
         """Get a random file name with some extension.
@@ -90,10 +86,6 @@ class File(BaseProvider):
         :Example:
             legislative.txt
         """
-        name = self._text.word()
+        name = self.__sub(self._text.word())
         ext = self.extension(file_type)
-
-        return "{name}{ext}".format(
-            name=self.__sub(name),
-            ext=ext,
-        )
+        return f"{name}{ext}"
