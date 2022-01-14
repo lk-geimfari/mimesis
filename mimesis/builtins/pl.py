@@ -31,7 +31,7 @@ class PolandSpecProvider(BaseSpecProvider):
         nip_digits = [int(d) for d in str(self.random.randint(101, 998))]
         nip_digits += [self.random.randint(0, 9) for _ in range(6)]
         nip_coefficients = (6, 5, 7, 2, 3, 4, 5, 6, 7)
-        sum_v = sum([nc * nd for nc, nd in zip(nip_coefficients, nip_digits)])
+        sum_v = sum(nc * nd for nc, nd in zip(nip_coefficients, nip_digits))
 
         checksum_digit = sum_v % 11
         if checksum_digit > 9:
@@ -81,7 +81,7 @@ class PolandSpecProvider(BaseSpecProvider):
 
         pesel_digits.append(gender_digit)
         pesel_coeffs = (9, 7, 3, 1, 9, 7, 3, 1, 9, 7)
-        sum_v = sum([nc * nd for nc, nd in zip(pesel_coeffs, pesel_digits)])
+        sum_v = sum(nc * nd for nc, nd in zip(pesel_coeffs, pesel_digits))
         checksum_digit = sum_v % 10
         pesel_digits.append(checksum_digit)
         return "".join(map(str, pesel_digits))
@@ -93,7 +93,7 @@ class PolandSpecProvider(BaseSpecProvider):
         """
         regon_coeffs = (8, 9, 2, 3, 4, 5, 6, 7)
         regon_digits = [self.random.randint(0, 9) for _ in range(8)]
-        sum_v = sum([nc * nd for nc, nd in zip(regon_coeffs, regon_digits)])
+        sum_v = sum(nc * nd for nc, nd in zip(regon_coeffs, regon_digits))
         checksum_digit = sum_v % 11
         if checksum_digit > 9:
             checksum_digit = 0
