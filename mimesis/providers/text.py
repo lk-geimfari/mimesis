@@ -76,7 +76,7 @@ class Text(BaseDataProvider):
         return self.text(quantity=1)
 
     def words(self, quantity: int = 5) -> List[str]:
-        """Generate lis of the random words.
+        """Generate a list of random words.
 
         :param quantity: Quantity of words. Default is 5.
         :return: Word list.
