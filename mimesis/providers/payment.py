@@ -41,7 +41,7 @@ class Payment(BaseProvider):
         :Example:
             7452
         """
-        return "{:04d}".format(self.random.randint(1, 9999))
+        return f"{self.random.randint(1, 9999):04d}"
 
     def paypal(self) -> str:
         """Generate a random PayPal account.
@@ -154,7 +154,7 @@ class Payment(BaseProvider):
         :Example:
             069
         """
-        return "{:03d}".format(self.random.randint(1, 999))
+        return f"{self.random.randint(1, 999):03d}"
 
     def credit_card_owner(
         self,

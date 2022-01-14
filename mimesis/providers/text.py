@@ -152,7 +152,7 @@ class Text(BaseDataProvider):
         if safe:
             return self.random.choice(SAFE_COLORS)
 
-        return "#{:06x}".format(self.random.randint(0x000000, 0xFFFFFF))
+        return f"#{self.random.randint(0x000000, 0xFFFFFF):06x}"
 
     def rgb_color(self, safe: bool = False) -> Tuple[int, ...]:
         """Generate a random rgb color tuple.
