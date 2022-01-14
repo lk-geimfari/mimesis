@@ -50,7 +50,7 @@ Installation
 
 To install mimesis, simply use pip:
 
-.. code:: text
+.. code:: bash
 
     ~ ⟩ pip install mimesis
 
