@@ -157,7 +157,7 @@ class BaseDataProvider(BaseProvider):
             :return: Content of JSON file as dict.
             """
             file_path = Path(data_dir).joinpath(locale_name, datafile)
-            with open(file_path, "r", encoding="utf8") as f:
+            with open(file_path, encoding="utf8") as f:
                 return json.load(f)
 
         master_locale = locale.split(self._LOCALE_SEPARATOR).pop(0)
