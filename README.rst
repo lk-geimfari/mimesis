@@ -52,7 +52,7 @@ To install mimesis, simply use pip:
 
 .. code:: bash
 
-    ~ ⟩ pip install mimesis
+    pip install mimesis
 
 
 Python compatibility
