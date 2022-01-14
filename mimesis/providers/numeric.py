@@ -29,21 +29,25 @@ class Numeric(BaseProvider):
     def increment(self, accumulator: Optional[str] = None) -> int:
         """Generate incremental number.
 
-        Each call of this method returns incremented number.
+        Each call of this method returns an incrementing number (with the step of +1).
+
+        If **accumulator** passed then increments number associated with it.
 
         Example:
             >>> self.increment()
             1
-            >>> self.increment()
-            2
-            >>> self.increment(accumulator="abc")
+            >>> self.increment(accumulator="a")
             1
             >>> self.increment()
-            3
-            >>> self.increment(accumulator="abc")
             2
+            >>> self.increment(accumulator="a")
+            >> 2
+            >>> self.increment(accumulator="b")
+            1
+            >>> self.increment(accumulator="a")
+            3
 
-        :param accumulator: Accumulator name.
+        :param accumulator: Accumulator (used to create associative incrementation).
         :return: Integer.
         """
         if not accumulator:
