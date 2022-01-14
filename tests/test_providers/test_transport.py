@@ -15,7 +15,7 @@ from mimesis.locales import Locale
 from . import patterns
 
 
-class TestTransport(object):
+class TestTransport:
     @pytest.fixture
     def transport(self):
         return Transport()
@@ -57,7 +57,7 @@ class TestTransport(object):
             assert result in VR_CODES
 
 
-class TestSeededTransport(object):
+class TestSeededTransport:
     @pytest.fixture
     def t1(self, seed):
         return Transport(seed=seed)

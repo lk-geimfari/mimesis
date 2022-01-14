@@ -9,7 +9,7 @@ from mimesis.enums import TimezoneRegion
 from . import patterns
 
 
-class TestDatetime(object):
+class TestDatetime:
     @pytest.fixture
     def _datetime(self):
         return Datetime()
@@ -178,7 +178,7 @@ class TestDatetime(object):
         assert int(week) <= 52
 
 
-class TestSeededDatetime(object):
+class TestSeededDatetime:
     @pytest.fixture
     def d1(self, seed):
         return Datetime(seed=seed)

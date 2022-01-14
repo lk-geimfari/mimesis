@@ -20,7 +20,7 @@ from mimesis.data import (
 from . import patterns
 
 
-class TestHardware(object):
+class TestHardware:
     @pytest.fixture
     def hard(self):
         return Hardware()
@@ -83,7 +83,7 @@ class TestHardware(object):
         assert result in PHONE_MODELS
 
 
-class TestSeededHardware(object):
+class TestSeededHardware:
     @pytest.fixture
     def h1(self, seed):
         return Hardware(seed=seed)

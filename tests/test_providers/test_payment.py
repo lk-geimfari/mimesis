@@ -9,7 +9,7 @@ from mimesis.exceptions import NonEnumerableError
 from . import patterns
 
 
-class TestPayment(object):
+class TestPayment:
     @pytest.fixture
     def payment(self):
         return Payment()
@@ -83,7 +83,7 @@ class TestPayment(object):
         assert result in CREDIT_CARD_NETWORKS
 
 
-class TestSeededPayment(object):
+class TestSeededPayment:
     @pytest.fixture
     def p1(self, seed):
         return Payment(seed=seed)

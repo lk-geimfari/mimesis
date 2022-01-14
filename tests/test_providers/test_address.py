@@ -9,7 +9,7 @@ from mimesis.exceptions import NonEnumerableError
 from . import patterns
 
 
-class TestAddress(object):
+class TestAddress:
     @pytest.fixture
     def _address(self):
         return Address()
@@ -170,7 +170,7 @@ class TestAddress(object):
         assert result in CALLING_CODES
 
 
-class TestSeededAddress(object):
+class TestSeededAddress:
     @pytest.fixture
     def a1(self, seed):
         return Address(seed=seed)

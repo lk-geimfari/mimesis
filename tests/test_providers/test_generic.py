@@ -2,7 +2,7 @@ import pytest
 from mimesis import BaseProvider, Generic
 
 
-class TestGeneric(object):
+class TestGeneric:
     def test_reseed(self, generic):
         generic.reseed(0xFFF)
         number_1 = generic.random.uniform(0, 1000)
@@ -68,7 +68,7 @@ class TestGeneric(object):
             def three():
                 return 3
 
-        class Provider4(object):
+        class Provider4:
             @staticmethod
             def empty():
                 ...
@@ -115,7 +115,7 @@ class TestGeneric(object):
             assert not p.startswith("_")
 
 
-class TestSeededGeneric(object):
+class TestSeededGeneric:
     @pytest.fixture
     def g1(self, seed):
         return Generic(seed=seed)

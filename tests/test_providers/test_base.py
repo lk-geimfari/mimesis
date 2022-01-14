@@ -10,7 +10,7 @@ from mimesis.providers.base import BaseDataProvider
 from . import patterns
 
 
-class TestBase(object):
+class TestBase:
     @pytest.fixture
     def base_data_provider(self):
         return BaseDataProvider()
@@ -172,7 +172,7 @@ class TestBase(object):
         assert locale.value == base.get_current_locale()
 
 
-class TestSeededBase(object):
+class TestSeededBase:
     @pytest.fixture
     def _bases(self, seed):
         return BaseDataProvider(seed=seed), BaseDataProvider(seed=seed)

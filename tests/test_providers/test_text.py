@@ -7,7 +7,7 @@ from mimesis.data import SAFE_COLORS
 from . import patterns
 
 
-class TestText(object):
+class TestText:
     @pytest.fixture
     def _text(self):
         return Text()
@@ -103,7 +103,7 @@ class TestText(object):
         assert isinstance(result, str)
 
 
-class TestSeededText(object):
+class TestSeededText:
     @pytest.fixture
     def t1(self, seed):
         return Text(seed=seed)

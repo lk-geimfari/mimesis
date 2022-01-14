@@ -9,7 +9,7 @@ from mimesis.exceptions import NonEnumerableError
 from . import patterns
 
 
-class TestScience(object):
+class TestScience:
     @pytest.fixture
     def science(self):
         return Science()
@@ -76,7 +76,7 @@ class TestScience(object):
             science.metric_prefix(sign="nil")
 
 
-class TestSeededScience(object):
+class TestSeededScience:
     @pytest.fixture
     def s1(self, seed):
         return Science(seed=seed)
