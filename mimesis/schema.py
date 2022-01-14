@@ -175,7 +175,7 @@ class Schema:
         This method can be useful when you have some dynamic
         conditions in depend on which the generation must be interrupted.
 
-        If you accepting all risks below and want to suppress
+        If you're accepting all risks below and want to suppress
         the warnings then use :py:class:`warnings.catch_warnings`
 
         .. note::
@@ -202,7 +202,7 @@ class Schema:
         warnings.warn(
             "You're iterating over the infinite object! "
             "The schema.loop() can cause a serious memory leak."
-            "Please, see: https://mimesis.name/api.html#mimesis.schema.Schema.loop"
+            "Please, see: https://mimesis.name/en/latest/api.html#mimesis.schema.Schema.loop"
         )
 
         while True:

@@ -505,3 +505,69 @@ to change this behavior should be passed parameter *providers* with a sequence o
 
     _('bsn')
     # Output: '657340522'
+
+
+You can create infinite lazy schema-based data generators using :meth:`~mimesis.schema.Schema.loop`.:
+
+.. code:: python
+
+    from mimesis import Schema, Field
+    from mimesis.locales import Locale
+
+    field = Field(Locale.DE)
+
+    schema = Schema(
+        schema=lambda: {
+            "pk": field("increment"),
+            "name": field("full_name"),
+            "email": field("email", domains=["example.org"]),
+        }
+    )
+
+
+    for obj in schema.loop():
+        pk = obj.get("pk")
+
+        if pk > 100:
+            break
+
+        print(obj)
+
+Output:
+
+.. code:: text
+
+    {'pk': 1, 'name': 'Wenzel Feigenbaum', 'email': 'cambridge1883@example.org'}
+    ...
+    {'pk': 100, 'name': 'Gerard Garber', 'email': 'travelers1947@example.org'}
+
+
+or create lazy data generator of limited length, using :meth:`~mimesis.schema.Schema.iterator`:
+
+
+.. code:: python
+
+    from mimesis import Schema, Field
+    from mimesis.locales import Locale
+
+    field = Field(Locale.DE)
+
+    schema = Schema(
+        schema=lambda: {
+            "pk": field("increment"),
+            "name": field("full_name"),
+            "email": field("email", domains=["example.org"]),
+        }
+    )
+
+
+    for obj in schema.iterator(100):
+        print(obj)
+
+Output:
+
+.. code:: text
+
+    {'pk': 1, 'name': 'Lea Bohn', 'email': 'best2045@example.org'}
+    ...
+    {'pk': 100, 'name': 'Karsten Haase', 'email': 'dennis2024@example.org'}
