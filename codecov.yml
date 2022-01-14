@@ -15,6 +15,7 @@ coverage:
     changes: false
     patch: true
     project: true
+    threshold: 3%
 parsers:
   gcov:
     branch_detection:
