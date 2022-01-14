@@ -10,7 +10,7 @@ from typing import Any, Generator, List, Optional
 
 from mimesis.exceptions import NonEnumerableError
 from mimesis.locales import Locale, validate_locale
-from mimesis.random import Random, get_random_item, random
+from mimesis.random import Random, get_random_item
 from mimesis.types import JSON, Seed
 
 __all__ = ["BaseDataProvider", "BaseProvider"]

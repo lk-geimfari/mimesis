@@ -99,6 +99,11 @@ def test_schema_raises_schema_error(invalid_schema):
         Schema(schema=invalid_schema)  # type: ignore
 
 
+def test_choice_field(field):
+    result = field("choice", items=["a", "b", "c", "d"], length=2)
+    assert len(result) == 2
+
+
 def test_schema_create(schema):
     result = schema.create(5)
 

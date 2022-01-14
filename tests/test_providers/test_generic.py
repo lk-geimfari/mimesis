@@ -13,6 +13,9 @@ class TestGeneric:
         assert number_1 == number_2
         assert address_1 == address_2
 
+    def test_str(self, generic):
+        assert str(generic).startswith("Generic")
+
     def test_base_person(self, generic):
         result = generic.person.username()
         assert result is not None
@@ -103,8 +106,11 @@ class TestGeneric:
             class Meta:
                 name = "custom_provider"
 
-        generic.add_provider(CustomProvider, a="a", b="b", c="c")
+        generic.add_provider(CustomProvider, a="a", b="b", c="c", seed=0xFFF)
 
+        # See https://github.com/lk-geimfari/mimesis/issues/1172
+        assert generic.custom_provider.seed != 0xFFF
+        assert generic.custom_provider.seed == generic.seed
         assert generic.custom_provider.a == "a"
         assert generic.custom_provider.b == "b"
         assert generic.custom_provider.c == "c"

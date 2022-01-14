@@ -169,6 +169,16 @@ class TestDatetime:
         dt_without_fmt = _datetime.formatted_date(fmt=None, start=start, end=end)
         assert dt_without_fmt
 
+    @pytest.mark.parametrize(
+        "fmt",
+        [
+            None,
+        ],
+    )
+    def test_formatted_datetime_without_fmt(self, dt, fmt):
+        dt_str = dt.formatted_date(fmt=fmt, start=2010, end=2030)
+        assert isinstance(dt_str, str)
+
     def test_week_date(self, _datetime):
         result = _datetime.week_date(start=2017, end=_datetime.CURRENT_YEAR)
         result = result.replace("-", " ").replace("W", "")
