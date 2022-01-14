@@ -58,10 +58,9 @@ class Cryptographic(BaseProvider):
         :raises NonEnumerableError: When algorithm is unsupported.
         """
         key = self.validate_enum(algorithm, Algorithm)
-
-        if hasattr(hashlib, key):
-            fn = getattr(hashlib, key)
-            return fn(self.uuid().encode()).hexdigest()  # type: ignore
+        func = getattr(hashlib, key)
+        value = func(self.uuid().encode())
+        return str(value.hexdigest())
 
     @staticmethod
     def token_bytes(entropy: int = 32) -> bytes:
