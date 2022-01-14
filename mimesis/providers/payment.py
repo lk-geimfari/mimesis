@@ -56,6 +56,9 @@ class Payment(BaseProvider):
     def bitcoin_address(self) -> str:
         """Generate a random bitcoin address.
 
+        Keep in mind that although it generates **valid-looking** addresses,
+        it does not mean that they are actually valid.
+
         :return: Bitcoin address.
 
         :Example:
