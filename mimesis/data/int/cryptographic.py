@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """Provides all the data related to text."""
 
 __all__ = ["WORDLIST"]

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """Provides platforms."""
 
 # https://docs.python.org/3.5/library/sys.html?highlight=sys#sys.platform

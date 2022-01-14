@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """Binary data provider."""
 
 from pathlib import Path

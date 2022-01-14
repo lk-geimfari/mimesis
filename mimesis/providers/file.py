@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """File data provider."""
 
 import re

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """Provides all the data related to science."""
 
 SI_PREFIXES = {

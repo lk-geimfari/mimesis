@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """Provides all the data related to the internet."""
 from typing import List
 

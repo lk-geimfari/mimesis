@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """This module provides constants for locale-dependent providers."""
 
 from typing import Union

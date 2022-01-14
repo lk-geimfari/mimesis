@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """Import optional dependencies only when needed."""
 
 try:

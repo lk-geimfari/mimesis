@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """Provides all the generic data related to the personal information."""
 
 from typing import Tuple

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import re
 from ipaddress import IPv4Address, IPv6Address
 

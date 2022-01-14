@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """Specific data provider for Brazil (pt-br)."""
 from typing import Final, List
 

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """Specific data provider for Denmark (da)."""
 import operator
 from typing import Final, Tuple

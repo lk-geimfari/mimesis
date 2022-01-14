@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """Specific data provider for Russia (ru)."""
 
 from datetime import datetime

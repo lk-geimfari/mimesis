@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """Specific data provider for Poland (pl)."""
 
 from typing import Final, Optional

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """Provides data related to text."""
 
 from typing import Any, Final, List, Tuple

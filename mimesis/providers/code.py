@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """The data provider of a variety of codes."""
 
 from typing import Any, Final, Optional

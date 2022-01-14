@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """Contains all the available data providers."""
 
 from mimesis.providers.address import Address
