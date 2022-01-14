@@ -56,10 +56,8 @@ class Text(BaseDataProvider):
         :param quantity: Quantity of sentences.
         :return: Text.
         """
-        text = ""
-        for _ in range(quantity):
-            text += " " + self.random.choice(self.extract(["text"]))
-        return text.strip()
+        text = self.extract(["text"])
+        return " ".join(self.random.choices(text, k=quantity))
 
     def sentence(self) -> str:
         """Get a random sentence from text.
@@ -85,8 +83,7 @@ class Text(BaseDataProvider):
             [science, network, god, octopus, love]
         """
         words = self.extract(["words", "normal"])
-        words_list = [self.random.choice(words) for _ in range(quantity)]
-        return words_list
+        return self.random.choices(words, k=quantity)
 
     def word(self) -> str:
         """Get a random word.
