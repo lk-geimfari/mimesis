@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """The data provider of a variety of codes."""
 
 from typing import Any, Final, Optional
@@ -92,7 +90,7 @@ class Code(BaseProvider):
         :return: IMEI.
         """
         num = self.random.choice(IMEI_TACS)
-        num = num + str(self.random.randint(100000, 999999))
+        num += str(self.random.randint(100000, 999999))
         return num + luhn_checksum(num)
 
     def pin(self, mask: str = "####") -> str:

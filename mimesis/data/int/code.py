@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """Provides all data related to the codes."""
 
 IMEI_TACS = [

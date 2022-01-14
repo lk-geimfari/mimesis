@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """This module is provide internal util functions."""
 
 import functools
@@ -25,8 +23,10 @@ def luhn_checksum(num: str) -> str:
     check = 0
     for i, s in enumerate(reversed(num)):
         sx = int(s)
-        sx = sx * 2 if i % 2 == 0 else sx
-        sx = sx - 9 if sx > 9 else sx
+        if i % 2 == 0:
+            sx *= 2
+        if sx > 9:
+            sx -= 9
         check += sx
     return str(check * 9 % 10)
 

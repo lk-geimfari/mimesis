@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import re
 
 import pytest
@@ -6,7 +5,7 @@ from mimesis import Path
 from mimesis.data import FOLDERS, PROGRAMMING_LANGS, PROJECT_NAMES
 
 
-class TestPath(object):
+class TestPath:
     def test_root(self, path):
         result = path.root()
         assert result == "C:\\" or result == "/"
@@ -50,7 +49,7 @@ class TestPath(object):
         assert project_path[5] in PROJECT_NAMES
 
 
-class TestSeededPath(object):
+class TestSeededPath:
     @pytest.fixture
     def p1(self, seed):
         return Path(seed=seed)

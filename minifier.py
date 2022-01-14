@@ -9,7 +9,7 @@ def human_repr(num: float) -> str:
     for unit in ["B", "KB", "MB"]:
         if abs(num) < 1024.0:
             return f"{num:3.1f}{unit}"
-        num = num / 1024.0
+        num /= 1024.0
     return f"{num:.1f}"
 
 

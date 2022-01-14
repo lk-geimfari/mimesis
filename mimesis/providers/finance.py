@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """Business data provider."""
 
 from typing import Any, Final, List

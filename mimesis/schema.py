@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """Implements classes for generating data by schema."""
 import warnings
 from typing import Any, Callable, ClassVar, Iterator, List, Optional, Sequence

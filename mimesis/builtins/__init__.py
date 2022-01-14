@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """Builtin specific data providers."""
 
 from .da import DenmarkSpecProvider

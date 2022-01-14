@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """Data related to the development."""
 
 from typing import Final

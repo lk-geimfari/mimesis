@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import re
 
 import pytest
@@ -7,7 +6,7 @@ from mimesis import Development, data
 from . import patterns
 
 
-class TestDevelopment(object):
+class TestDevelopment:
     @pytest.fixture
     def dev(self):
         return Development()
@@ -61,7 +60,7 @@ class TestDevelopment(object):
         assert result or (not result)
 
 
-class TestSeededDevelopment(object):
+class TestSeededDevelopment:
     @pytest.fixture
     def dv1(self, seed):
         return Development(seed=seed)

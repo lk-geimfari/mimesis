@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 #
 # Mimesis documentation build configuration file, created by
 # sphinx-quickstart on Tue Oct 18 14:11:49 2016.

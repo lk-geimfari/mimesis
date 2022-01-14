@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """Specific data provider for Russia (ru)."""
 
 from datetime import datetime
@@ -178,9 +176,9 @@ class RussiaSpecProvider(BaseSpecProvider):
             044025575.
         """
         country_code = "04"
-        code = "{:02}".format(self.random.randint(1, 10))
-        bank_number = "{:02}".format(self.random.randint(0, 99))
-        bank_office = "{:03}".format(self.random.randint(50, 999))
+        code = f"{self.random.randint(1, 10):02}"
+        bank_number = f"{self.random.randint(0, 99):02}"
+        bank_office = f"{self.random.randint(50, 999):03}"
         bic = country_code + code + bank_number + bank_office
         return bic
 
@@ -297,7 +295,7 @@ class RussiaSpecProvider(BaseSpecProvider):
         ]
 
         tax_code = tax_codes[self.random.randint(0, len(tax_codes) - 1)]
-        reg_code = "{:02}".format(self.random.randint(1, 99))
-        reg_number = "{:03}".format(self.random.randint(1, 999))
+        reg_code = f"{self.random.randint(1, 99):02}"
+        reg_number = f"{self.random.randint(1, 999):03}"
         kpp = tax_code + reg_code + reg_number
         return kpp

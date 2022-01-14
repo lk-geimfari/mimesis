@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import re
 
 import pytest
@@ -16,7 +15,7 @@ from mimesis.data import (
 from . import patterns
 
 
-class TestFinance(object):
+class TestFinance:
     @pytest.fixture()
     def _finance(self):
         return Finance()
@@ -89,7 +88,7 @@ class TestFinance(object):
         assert float(price) <= maximum
 
 
-class TestSeededFinance(object):
+class TestSeededFinance:
     @pytest.fixture()
     def f1(self, seed):
         return Finance(seed=seed)

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """
 This module contains knowledge about the types we use.
 

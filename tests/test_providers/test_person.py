@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import re
 
 import pytest
@@ -11,7 +9,7 @@ from mimesis.exceptions import NonEnumerableError
 from . import patterns
 
 
-class TestPerson(object):
+class TestPerson:
     @pytest.fixture
     def _person(self):
         return Person()
@@ -338,7 +336,7 @@ class TestPerson(object):
         assert result is not None
 
 
-class TestSeededPerson(object):
+class TestSeededPerson:
     @pytest.fixture
     def p1(self, seed):
         return Person(seed=seed)

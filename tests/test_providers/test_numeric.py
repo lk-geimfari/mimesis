@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import decimal
 import re
 
@@ -10,7 +9,7 @@ from mimesis.exceptions import NonEnumerableError
 from . import patterns
 
 
-class TestNumbers(object):
+class TestNumbers:
     @pytest.fixture
     def numeric(self):
         return Numeric()
@@ -189,7 +188,7 @@ class TestNumbers(object):
         assert isinstance(result, decimal.Decimal)
 
 
-class TestSeededNumbers(object):
+class TestSeededNumbers:
     @pytest.fixture
     def n1(self, seed):
         return Numeric(seed=seed)

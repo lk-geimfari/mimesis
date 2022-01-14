@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """Provides data related to food."""
 from typing import Any, Final, List
 

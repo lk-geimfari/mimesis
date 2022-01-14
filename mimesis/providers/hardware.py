@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """Provides data related to hardware."""
 from typing import Final
 

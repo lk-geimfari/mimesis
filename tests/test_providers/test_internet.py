@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import re
 from ipaddress import IPv4Address, IPv6Address
 
@@ -12,7 +10,7 @@ from mimesis.exceptions import NonEnumerableError
 from . import patterns
 
 
-class TestInternet(object):
+class TestInternet:
     @pytest.fixture
     def net(self):
         return Internet()
@@ -280,7 +278,7 @@ class TestInternet(object):
             net.port("nil")
 
 
-class TestSeededInternet(object):
+class TestSeededInternet:
     @pytest.fixture
     def i1(self, seed):
         return Internet(seed=seed)

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """Here you can see data that used in all locales."""
 
 from .address import *

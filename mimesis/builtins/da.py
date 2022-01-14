@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """Specific data provider for Denmark (da)."""
 import operator
 from typing import Final, Tuple
@@ -75,7 +73,7 @@ class DenmarkSpecProvider(BaseSpecProvider):
 
     def _generate_serial_checksum(self, cpr_century: str) -> Tuple[str, int]:
         """Generate a serial number and checksum from cpr_century."""
-        serial_number = "{:02d}".format(self.random.randint(0, 99))
+        serial_number = f"{self.random.randint(0, 99):02d}"
 
         cpr_nr_no_checksum = f"{cpr_century}{serial_number}"
         checksum = self._calculate_checksum(cpr_nr_no_checksum)

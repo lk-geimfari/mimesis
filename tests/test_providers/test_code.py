@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import re
 
 import pytest
@@ -11,7 +10,7 @@ from mimesis.locales import Locale
 from . import patterns
 
 
-class TestCode(object):
+class TestCode:
     @pytest.fixture
     def code(self):
         return Code()
@@ -71,7 +70,7 @@ class TestCode(object):
             code.isbn(fmt="nil")
 
 
-class TestSeededCode(object):
+class TestSeededCode:
     @pytest.fixture
     def c1(self, seed):
         return Code(seed=seed)

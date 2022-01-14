@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import re
 
 import pytest
@@ -7,7 +6,7 @@ from mimesis import Food
 from . import patterns
 
 
-class TestFood(object):
+class TestFood:
     def test_str(self, food):
         assert re.match(patterns.DATA_PROVIDER_STR_REGEX, str(food))
 
@@ -32,7 +31,7 @@ class TestFood(object):
         assert result in food._data["spices"]
 
 
-class TestSeededFood(object):
+class TestSeededFood:
     @pytest.fixture
     def fd1(self, seed):
         return Food(seed=seed)

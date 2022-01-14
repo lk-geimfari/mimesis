@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """Provides all at one."""
 
 import inspect

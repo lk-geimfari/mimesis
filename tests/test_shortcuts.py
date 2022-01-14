@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import pytest
 from mimesis import shortcuts
 from mimesis.exceptions import LocaleError

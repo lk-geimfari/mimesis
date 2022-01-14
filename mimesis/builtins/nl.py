@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """Specific data provider for Netherlands (nl)."""
 
 from typing import Final

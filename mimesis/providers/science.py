@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """Provides pseudo-scientific data."""
 
 from typing import Any, Final, Optional, Tuple

@@ -9,7 +9,7 @@ from mimesis.exceptions import NonEnumerableError
 from . import patterns
 
 
-class TestCryptographic(object):
+class TestCryptographic:
     @pytest.fixture
     def crypto(self):
         return Cryptographic()
@@ -70,7 +70,7 @@ class TestCryptographic(object):
         assert phrase_len == 12 or phrase_len == 24
 
 
-class TestSeededCryptographic(object):
+class TestSeededCryptographic:
     @pytest.fixture
     def c1(self, seed):
         return Cryptographic(seed=seed)

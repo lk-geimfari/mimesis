@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """Implements various helpers which are used in the various data providers.
 
 This module contains custom ``Random()`` class where implemented a lot of
