@@ -29,10 +29,8 @@ class BaseProvider:
             When set to `None` the current system time is used.
         """
         self.seed = seed
-        self.random = random
-
-        if seed is not None:
-            self.reseed(seed)
+        self.random = Random()
+        self.reseed(seed)
 
     def reseed(self, seed: Seed = None) -> None:
         """Reseed the internal random generator.
@@ -44,11 +42,8 @@ class BaseProvider:
         :param seed: Seed for random.
             When set to `None` the current system time is used.
         """
-        if self.random is random:
-            self.random = Random()
-
         self.seed = seed
-        self.random.seed(self.seed)
+        self.random.seed(seed)
 
     def validate_enum(self, item: Any, enum: Any) -> Any:
         """Validate enum parameter of method in subclasses of BaseProvider.
