@@ -15,7 +15,10 @@ from typing import List
 
 
 class Locale(Enum):
-    """This class provides access to the supported locales from one place."""
+    """This class provides access to the supported locales from one place.
+
+    An argument for all locale-depend providers.
+    """
 
     CS = "cs"
     DA = "da"
@@ -73,8 +76,7 @@ class PortRange(Enum):
 class Gender(Enum):
     """Represents genders.
 
-    An argument for a lot of methods which
-    takes argument ``gender``.
+    An argument for a lot of methods which are taking parameter ``gender``.
     """
 
     MALE = "male"
@@ -103,7 +105,10 @@ class CardType(Enum):
 
 
 class Algorithm(Enum):
-    """Provides algorithms which available."""
+    """Provides algorithms which available.
+
+    An argument for :meth:`~mimesis.Cryptographic.hash()`.
+    """
 
     MD5 = "md5"
     SHA1 = "sha1"
@@ -116,7 +121,7 @@ class Algorithm(Enum):
 class TLDType(Enum):
     """Provides top level domain types.
 
-    An argument for :meth:`~mimesis.Internet.top_level_domain()`.
+    An argument for a few methods which are taking parameter **tld_type**`.
     """
 
     CCTLD = "cctld"
@@ -127,7 +132,10 @@ class TLDType(Enum):
 
 
 class FileType(Enum):
-    """Provides file types."""
+    """Provides file types.
+
+    An argument for :meth:`~mimesis.File.extension()` and :meth:`~mimesis.File.file_name()`.
+    """
 
     SOURCE = "source"
     TEXT = "text"
@@ -227,7 +235,7 @@ class MeasureUnit(Enum):
 
 
 class NumType(Enum):
-    """Provide number types.
+    """Provides the number types.
 
     An argument for :meth:`~mimesis.Numeric.matrix()`.
     """
@@ -239,22 +247,42 @@ class NumType(Enum):
 
 
 class VideoFile(Enum):
+    """Provides the vide file types.
+
+    An argument for :meth:`~mimesis.BinaryFile.video()`
+    """
+
     MP4 = "mp4"
     MOV = "mov"
 
 
 class AudioFile(Enum):
+    """Provides the audio file types.
+
+    An argument for :meth:`~mimesis.BinaryFile.audio()`
+    """
+
     MP3 = "mp3"
     AAC = "aac"
 
 
 class ImageFile(Enum):
+    """Provides the image file types.
+
+    An argument for :meth:`~mimesis.BinaryFile.image()`
+    """
+
     JPG = "jpg"
     PNG = "png"
     GIF = "gif"
 
 
 class DocumentFile(Enum):
+    """Provides the document file types.
+
+    An argument for :meth:`~mimesis.BinaryFile.document()`
+    """
+
     PDF = "pdf"
     DOCX = "docx"
     PPTX = "pptx"
@@ -262,6 +290,11 @@ class DocumentFile(Enum):
 
 
 class CompressedFile(Enum):
+    """Provides the compressed file types.
+
+    An argument for :meth:`~mimesis.BinaryFile.compressed()`
+    """
+
     ZIP = "zip"
     GZIP = "gz"
 
