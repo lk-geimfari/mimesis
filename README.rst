@@ -16,7 +16,7 @@ Description
      :alt: Github Actions Test
 
 .. image:: https://readthedocs.org/projects/mimesis/badge/?version=latest
-     :target: https://mimesis.name/
+     :target: https://mimesis.name/en/latest/
      :alt: Documentation Status
 
 .. image:: https://codecov.io/gh/lk-geimfari/mimesis/branch/master/graph/badge.svg
@@ -66,12 +66,12 @@ Supported Features
 ------------------
 
 - **Easy**: Designed to be easy to use and learn.
-- **Multilingual**: Supports data for `a lot of languages <https://mimesis.name/getting_started.html#locales>`_.
-- **Performance**: The `fastest <https://mimesis.name/foreword.html#performance>`_ data generator available for Python.
-- **Data variety**: Supports `a lot of data providers <https://mimesis.name/api.html>`_ for a variety of purposes.
-- **Country-specific data providers**: Provides data specific only for `some countries <https://mimesis.name/api.html#builtin-data-providers>`_.
+- **Multilingual**: Supports data for `a lot of languages <https://mimesis.name/en/latest/getting_started.html#supported-locales>`_.
+- **Performance**: The `fastest <https://mimesis.name/en/latest/about.html#performance>`_ data generator available for Python.
+- **Data variety**: Supports `a lot of data providers <https://mimesis.name/en/latest/api.html>`_ for a variety of purposes.
+- **Country-specific data providers**: Provides data specific only for `some countries <https://mimesis.name/en/latest/api.html#builtin-data-providers>`_.
 - **Extensibility**: You can create your own data providers and use them with Mimesis.
-- **Generic data provider**: The `simplified <https://mimesis.name/getting_started.html#generic-provider>`_ access to all the providers from a single object.
+- **Generic data provider**: The `simplified <https://mimesis.name/en/latest/getting_started.html#generic-provider>`_ access to all the providers from a single object.
 - **Zero hard dependencies**: Does not require any modules other than the Python standard library.
 - **Schema-based generators**: Provides an easy mechanism to generate data by the schema of any complexity.
 
@@ -79,16 +79,16 @@ Supported Features
 Documentation
 -------------
 
-You can find the complete documentation on the `Read the Docs <https://mimesis.name>`_.
+You can find the complete documentation on the `Read the Docs <https://mimesis.name/en/latest/>`_.
 
 It is divided into several sections:
 
--  `Foreword <https://mimesis.name/foreword.html>`_
--  `Getting Started <https://mimesis.name/getting_started.html>`_
--  `Tips and Tricks <https://mimesis.name/tips.html>`_
--  `API Reference <https://mimesis.name/api.html>`_
--  `Contributing <https://mimesis.name/contributing.html>`_
--  `Changelog <https://mimesis.name/changelog.html>`_
+-  `About Mimesis <https://mimesis.name/en/latest/about.html>`_
+-  `Getting Started <https://mimesis.name/en/latest/getting_started.html>`_
+-  `Tips and Tricks <https://mimesis.name/en/latest/tips.html>`_
+-  `API Reference <https://mimesis.name/en/latest/api.html>`_
+-  `Contributing <https://mimesis.name/en/latest/contributing.html>`_
+-  `Changelog <https://mimesis.name/en/latest/changelog.html>`_
 
 You can improve it by sending pull requests to this repository.
 
@@ -98,7 +98,7 @@ Usage
 This library is really easy to use and everything you need is just import an object which
 represents a type of data you need (we call such object a *Provider*).
 
-In the example below we import provider `Person <https://mimesis.name/api.html#person>`_,
+In the example below we import provider `Person <https://mimesis.name/en/latest/api.html#person>`_,
 which represents data related to personal information, such as name, surname, email and etc:
 
 .. code:: python
@@ -122,7 +122,7 @@ which represents data related to personal information, such as name, surname, em
 
 More about the other providers you can read in our `documentation`_.
 
-.. _documentation: https://mimesis.name/getting_started.html#providers
+.. _documentation: https://mimesis.name/en/latest/getting_started.html#data-providers
 
 
 Locales
@@ -150,7 +150,7 @@ Let's take a look how it works:
     'Layne Gallagher'
 
 
-.. _locales: https://mimesis.name/getting_started.html#locales
+.. _locales: https://mimesis.name/en/latest/getting_started.html#supported-locales
 
 Providers
 ---------
@@ -171,7 +171,7 @@ You can generate a lot of extremely detailed data:
     'wss://chat.system.io/'
 
 
-See `API Reference <https://mimesis.name/api.html>`_ and `Data Providers <https://mimesis.name/getting_started.html#data-providers>`_ for more info.
+See `API Reference <https://mimesis.name/en/latest/api.html>`_ and `Data Providers <https://mimesis.name/en/latest/getting_started.html#data-providers>`_ for more info.
 
 How to Contribute
 -----------------
