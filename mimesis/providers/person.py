@@ -224,7 +224,7 @@ class Person(BaseDataProvider):
         """Generate a password or hash of password.
 
         :param length: Length of password.
-        :param hashed: MD5 hash.
+        :param hashed: SHA256 hash.
         :return: Password or hash of password.
 
         :Example:
@@ -234,9 +234,9 @@ class Person(BaseDataProvider):
         password = "".join(self.random.choices(characters, k=length))
 
         if hashed:
-            md5 = hashlib.md5()
-            md5.update(password.encode())
-            return md5.hexdigest()
+            sha256 = hashlib.sha256()
+            sha256.update(password.encode())
+            return sha256.hexdigest()
 
         return password
 

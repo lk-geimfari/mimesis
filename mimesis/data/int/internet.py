@@ -1028,12 +1028,15 @@ TLD = {
 }
 
 EMAIL_DOMAINS: List[str] = [
+    "@duck.com",
     "@gmail.com",
     "@yandex.com",
     "@yahoo.com",
     "@live.com",
     "@outlook.com",
     "@protonmail.com",
+    "@example.com",
+    "@example.org",
 ]
 
 EMOJI = (

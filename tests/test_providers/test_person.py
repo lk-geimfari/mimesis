@@ -54,7 +54,7 @@ class TestPerson:
         assert len(result) == 15
 
         result = _person.password(hashed=True)
-        assert len(result) == 32
+        assert len(result) == 64
 
     @pytest.mark.parametrize(
         "mask",
