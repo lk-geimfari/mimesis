@@ -32,7 +32,7 @@ jobs:
       - name: Install dependencies
         run: poetry install --no-interaction
       - name: pytest and codecov
-        run: poetry run pytest --cov=mimesis --cov=minifier --cov-report=xml
+        run: poetry run pytest --cov=mimesis --cov=minifier --cov-report=xml --randomly-seed=$RANDOM
       - name: mypy
         run: poetry run mypy mimesis/
       - name: Check code style
