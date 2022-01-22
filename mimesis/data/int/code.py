@@ -110,7 +110,6 @@ LOCALE_CODES = [
     "de-lu",
     "el",
     "en",
-    "en",
     "en-au",
     "en-bz",
     "en-ca",

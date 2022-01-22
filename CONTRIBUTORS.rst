@@ -89,6 +89,7 @@ Patches and Suggestions
 -  Michael Oliver `(michael0liver)`_
 -  Oleg Höfling `(hoefling)`_
 -  Nick Pope `(ngnpope)`_
+-  Arul Prabakaran `(arulprabakaran)`_
 
 
 .. _(lk-geimfari): https://github.com/lk-geimfari
@@ -156,3 +157,4 @@ Patches and Suggestions
 .. _(Skeen): https://github.com/Skeen
 .. _(hoefling): https://github.com/hoefling
 .. _(ngnpope): https://github.com/ngnpope
+.. _(arulprabakaran): https://github.com/arulprabakaran
