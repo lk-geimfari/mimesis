@@ -1,4 +1,7 @@
+import csv
+import json
 import re
+import tempfile
 import warnings
 from collections.abc import Iterator
 
@@ -142,3 +145,37 @@ def test_schema_loop(schema):
 
         assert result_1["timestamp"] != result_2["timestamp"]
         assert result_1["owner"]["creator"] != result_2["owner"]["creator"]
+
+
+@pytest.mark.parametrize(
+    "iterations",
+    [
+        5,
+        10,
+    ],
+)
+def test_schema_to_csv(schema, iterations):
+    with tempfile.NamedTemporaryFile("w") as tf:
+        schema.to_csv(tf.name, iterations=iterations)
+
+        with open(tf.name) as f:
+            dict_reader = csv.DictReader(f)
+
+        assert len(list(dict_reader)) == iterations
+
+
+@pytest.mark.parametrize(
+    "iterations",
+    [
+        5,
+        10,
+    ],
+)
+def test_schema_to_json(schema, iterations):
+    with tempfile.NamedTemporaryFile("w") as tf:
+        schema.to_json(tf.name, iterations=iterations, sort_keys=True)
+
+        with open(tf.name, "r") as f:
+            data = json.load(f)
+
+        assert len(list(data)) == iterations
