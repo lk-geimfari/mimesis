@@ -159,10 +159,10 @@ class Schema:
         :param iterations: The required number of rows.
         :param kwargs: The keyword arguments for :py:class:`csv.DictWriter` class.
 
-        New in version 5.3.0
+        *New in version 5.3.0*
         """
         data = self.create(iterations)
-        fieldnames = list(data[0].keys())
+        fieldnames = list(data[0])
 
         with open(file_path, "w", newline="") as fp:
             dict_writer = DictWriter(fp, fieldnames, **kwargs)
@@ -176,7 +176,7 @@ class Schema:
         :param iterations: The required number of rows.
         :param kwargs: Extra keyword arguments for :py:func:`json.dump` class.
 
-        New in version 5.3.0
+        *New in version 5.3.0*
         """
         data = self.create(iterations)
         with open(file_path, "w") as fp:
