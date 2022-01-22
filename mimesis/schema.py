@@ -152,7 +152,7 @@ class Schema:
         else:
             raise SchemaError()
 
-    def to_csv(self, file_path: str, iterations: int = 100, **kwargs) -> None:
+    def to_csv(self, file_path: str, iterations: int = 100, **kwargs: Any) -> None:
         """Exports a schema as a CSV file.
 
         :param file_path: File path.
@@ -162,14 +162,14 @@ class Schema:
         New in version 5.3.0
         """
         data = self.create(iterations)
-        fieldnames = data[0].keys()
+        fieldnames = list(data[0].keys())
 
         with open(file_path, "w", newline="") as fp:
             dict_writer = DictWriter(fp, fieldnames, **kwargs)
             dict_writer.writeheader()
             dict_writer.writerows(data)
 
-    def to_json(self, file_path: str, iterations: int = 1, **kwargs) -> None:
+    def to_json(self, file_path: str, iterations: int = 1, **kwargs: Any) -> None:
         """Exports a schema as a JSON file.
 
         :param file_path: File path.

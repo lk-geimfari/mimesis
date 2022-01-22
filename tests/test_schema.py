@@ -155,13 +155,12 @@ def test_schema_loop(schema):
     ],
 )
 def test_schema_to_csv(schema, iterations):
-    with tempfile.NamedTemporaryFile("w") as tf:
-        schema.to_csv(tf.name, iterations=iterations)
-
-        with open(tf.name) as f:
-            dict_reader = csv.DictReader(f)
+    with tempfile.NamedTemporaryFile("r+") as temp_file:
+        schema.to_csv(temp_file.name, iterations=iterations)
+        dict_reader = csv.DictReader(temp_file)
 
         assert len(list(dict_reader)) == iterations
+        assert isinstance(dict_reader, csv.DictReader)
 
 
 @pytest.mark.parametrize(
@@ -172,10 +171,8 @@ def test_schema_to_csv(schema, iterations):
     ],
 )
 def test_schema_to_json(schema, iterations):
-    with tempfile.NamedTemporaryFile("w") as tf:
-        schema.to_json(tf.name, iterations=iterations, sort_keys=True)
+    with tempfile.NamedTemporaryFile("r+") as temp_file:
+        schema.to_json(temp_file.name, iterations, sort_keys=True, ensure_ascii=False)
 
-        with open(tf.name, "r") as f:
-            data = json.load(f)
-
+        data = json.load(temp_file)
         assert len(list(data)) == iterations
