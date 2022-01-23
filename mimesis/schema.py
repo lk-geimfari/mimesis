@@ -170,7 +170,7 @@ class Schema:
             dict_writer.writeheader()
             dict_writer.writerows(data)
 
-    def to_json(self, file_path: str, iterations: int = 1, **kwargs: Any) -> None:
+    def to_json(self, file_path: str, iterations: int = 100, **kwargs: Any) -> None:
         """Export a schema as a JSON file.
 
         :param file_path: File path.
@@ -183,7 +183,7 @@ class Schema:
         with open(file_path, "w") as fp:
             json.dump(data, fp, **kwargs)
 
-    def to_pickle(self, file_path: str, iterations: int = 1, **kwargs: Any) -> None:
+    def to_pickle(self, file_path: str, iterations: int = 100, **kwargs: Any) -> None:
         """Export a schema as the pickled representation of the object to the file.
 
         :param file_path: File path.
