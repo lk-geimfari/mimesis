@@ -1,6 +1,11 @@
 Version 5.3.0
 -------------
 
+**Added**:
+
+- Added method ``to_json()`` and ``to_csv()`` for ``schema.Schema``.
+
+
 **Optimizations**:
 
 - Significantly improved performance of ``shortcuts.romanize()``

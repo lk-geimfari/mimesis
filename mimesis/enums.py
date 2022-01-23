@@ -121,7 +121,7 @@ class Algorithm(Enum):
 class TLDType(Enum):
     """Provides top level domain types.
 
-    An argument for a few methods which are taking parameter **tld_type**`.
+    An argument for a few methods which are taking parameter **tld_type**.
     """
 
     CCTLD = "cctld"

@@ -1,5 +1,7 @@
 """Implements classes for generating data by schema."""
+import json
 import warnings
+from csv import DictWriter
 from typing import Any, Callable, ClassVar, Iterator, List, Optional, Sequence
 
 from mimesis.exceptions import FieldError, SchemaError
@@ -150,6 +152,36 @@ class Schema:
         else:
             raise SchemaError()
 
+    def to_csv(self, file_path: str, iterations: int = 100, **kwargs: Any) -> None:
+        """Exports a schema as a CSV file.
+
+        :param file_path: File path.
+        :param iterations: The required number of rows.
+        :param kwargs: The keyword arguments for :py:class:`csv.DictWriter` class.
+
+        *New in version 5.3.0*
+        """
+        data = self.create(iterations)
+        fieldnames = list(data[0])
+
+        with open(file_path, "w", newline="") as fp:
+            dict_writer = DictWriter(fp, fieldnames, **kwargs)
+            dict_writer.writeheader()
+            dict_writer.writerows(data)
+
+    def to_json(self, file_path: str, iterations: int = 1, **kwargs: Any) -> None:
+        """Exports a schema as a JSON file.
+
+        :param file_path: File path.
+        :param iterations: The required number of rows.
+        :param kwargs: Extra keyword arguments for :py:func:`json.dump` class.
+
+        *New in version 5.3.0*
+        """
+        data = self.create(iterations)
+        with open(file_path, "w") as fp:
+            json.dump(data, fp, **kwargs)
+
     def create(self, iterations: int = 1) -> List[JSON]:
         """Creates a list of a fulfilled schemas.
 
@@ -157,8 +189,7 @@ class Schema:
             This method evaluates immediately, so be careful on creating
             large datasets otherwise you're risking running out of memory.
 
-            If you need a lazy version of this method, see
-            :meth:`iterator`
+            If you need a lazy version of this method, see :meth:`iterator`.
 
         :param iterations: Number of iterations.
         :return: List of fulfilled schemas.
