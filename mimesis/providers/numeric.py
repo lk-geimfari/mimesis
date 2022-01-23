@@ -39,7 +39,7 @@ class Numeric(BaseProvider):
             >>> self.increment()
             2
             >>> self.increment(accumulator="a")
-            >> 2
+            2
             >>> self.increment(accumulator="b")
             1
             >>> self.increment(accumulator="a")
