@@ -485,6 +485,7 @@ Output:
       }
     ]
 
+
 By default, :class:`~mimesis.schema.Field` works only with providers which supported by :class:`~mimesis.Generic`,
 to change this behavior should be passed parameter *providers* with a sequence of data providers:
 
@@ -571,3 +572,36 @@ Output:
     {'pk': 1, 'name': 'Lea Bohn', 'email': 'best2045@example.org'}
     ...
     {'pk': 100, 'name': 'Karsten Haase', 'email': 'dennis2024@example.org'}
+
+
+Exporting Data
+--------------
+
+You can export data as JSON, CSV or as pickled representations of objects:
+
+.. code:: python
+
+    from mimesis.locales import Locale
+    from mimesis.schema import Field, Schema
+
+    _ = Field(locale=Locale.EN)
+    schema = Schema(schema=lambda: {
+        "pk": _("increment"),
+        "name": _("text.word"),
+        "version": _("version"),
+        "timestamp": _("timestamp", posix=False),
+    })
+    schema.to_csv(file_path='data.csv', iterations=1000)
+    schema.to_json(file_path='data.json', iterations=1000)
+    schema.to_pickle(file_path='data.obj', iterations=1000)
+
+
+Example of the content of ``data.csv`` (truncated):
+
+.. code:: text
+
+    pk,uid,name,version,timestamp
+    1,save,6.8.6-alpha.3,2018-09-21T21:30:43Z
+    2,sponsors,6.9.6-rc.7,2015-03-02T06:18:44Z
+    3,after,4.5.6-rc.8,2022-03-31T02:56:15Z
+    4,queen,9.0.6-alpha.11,2008-07-22T05:56:59Z
