@@ -1,5 +1,6 @@
 import csv
 import json
+import pickle
 import re
 import tempfile
 import warnings
@@ -176,3 +177,19 @@ def test_schema_to_json(schema, iterations):
 
         data = json.load(temp_file)
         assert len(list(data)) == iterations
+
+
+@pytest.mark.parametrize(
+    "iterations",
+    [
+        5,
+        10,
+    ],
+)
+def test_schema_to_pickle(schema, iterations):
+    with tempfile.NamedTemporaryFile("rb") as temp_file:
+        schema.to_pickle(temp_file.name, iterations)
+
+        data = pickle.load(temp_file)
+        assert isinstance(data, list)
+        assert len(data) == iterations

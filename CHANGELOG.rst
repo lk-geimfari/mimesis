@@ -3,7 +3,7 @@ Version 5.3.0
 
 **Added**:
 
-- Added method ``to_json()`` and ``to_csv()`` for ``schema.Schema``.
+- Added method ``to_pickle()``, ``to_json()`` and ``to_csv()`` for ``schema.Schema``.
 
 
 **Optimizations**:

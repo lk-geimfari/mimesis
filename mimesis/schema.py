@@ -1,5 +1,6 @@
 """Implements classes for generating data by schema."""
 import json
+import pickle
 import warnings
 from csv import DictWriter
 from typing import Any, Callable, ClassVar, Iterator, List, Optional, Sequence
@@ -153,7 +154,7 @@ class Schema:
             raise SchemaError()
 
     def to_csv(self, file_path: str, iterations: int = 100, **kwargs: Any) -> None:
-        """Exports a schema as a CSV file.
+        """Export a schema as a CSV file.
 
         :param file_path: File path.
         :param iterations: The required number of rows.
@@ -170,7 +171,7 @@ class Schema:
             dict_writer.writerows(data)
 
     def to_json(self, file_path: str, iterations: int = 1, **kwargs: Any) -> None:
-        """Exports a schema as a JSON file.
+        """Export a schema as a JSON file.
 
         :param file_path: File path.
         :param iterations: The required number of rows.
@@ -181,6 +182,19 @@ class Schema:
         data = self.create(iterations)
         with open(file_path, "w") as fp:
             json.dump(data, fp, **kwargs)
+
+    def to_pickle(self, file_path: str, iterations: int = 1, **kwargs: Any) -> None:
+        """Export a schema as the pickled representation of the object to the file.
+
+        :param file_path: File path.
+        :param iterations: The required number of rows.
+        :param kwargs: Extra keyword arguments for :py:func:`pickle.dump` class.
+
+        *New in version 5.3.0*
+        """
+        data = self.create(iterations)
+        with open(file_path, "wb") as fp:
+            pickle.dump(data, fp, **kwargs)
 
     def create(self, iterations: int = 1) -> List[JSON]:
         """Creates a list of a fulfilled schemas.
