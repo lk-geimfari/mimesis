@@ -1,8 +1,8 @@
 """Implements classes for generating data by schema."""
+import csv
 import json
 import pickle
 import warnings
-from csv import DictWriter
 from typing import Any, Callable, ClassVar, Iterator, List, Optional, Sequence
 
 from mimesis.exceptions import FieldError, SchemaError
@@ -166,7 +166,7 @@ class Schema:
         fieldnames = list(data[0])
 
         with open(file_path, "w", newline="") as fp:
-            dict_writer = DictWriter(fp, fieldnames, **kwargs)
+            dict_writer = csv.DictWriter(fp, fieldnames, **kwargs)
             dict_writer.writeheader()
             dict_writer.writerows(data)
 
