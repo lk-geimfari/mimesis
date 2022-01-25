@@ -107,7 +107,8 @@ class TestInternet:
         assert uri.split(":")[0].strip() == scheme.value
         assert validators.url(uri)
 
-    @pytest.mark.parametrize("length", [4, 6, 8])
+    @pytest.mark.repeat(10)
+    @pytest.mark.parametrize("length", [5, 10, 15])
     def test_query_string(self, net, length):
         assert len(net.query_string(length).split("&")) == length
 
@@ -119,7 +120,8 @@ class TestInternet:
         query_params_count = len(net.query_string().split("&"))
         assert 1 <= query_params_count <= 10
 
-    @pytest.mark.parametrize("length", [4, 6, 8])
+    @pytest.mark.repeat(10)
+    @pytest.mark.parametrize("length", [5, 10, 15])
     def test_query_parameters(self, net, length):
         assert len(net.query_parameters(length)) == length
 

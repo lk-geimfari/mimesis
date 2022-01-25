@@ -65,6 +65,7 @@ autoflake = "^1.4"
 types-pytz = "^2021.3.4"
 taskipy = "^1.9.0"
 validators = "^0.18.2"
+pytest-repeat = "^0.9.1"
 
 [tool.pytest.ini_options]
 addopts = "--isort"
