@@ -23,9 +23,8 @@ from mimesis.providers.text import Text
 from mimesis.providers.transport import Transport
 
 __all__ = [
-    # The main class:
+    # Base classes:
     "BaseProvider",
-    # Data base class:
     "BaseDataProvider",
     # Data providers:
     "Address",

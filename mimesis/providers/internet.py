@@ -4,7 +4,7 @@ import urllib.error
 import urllib.parse
 import urllib.request
 from ipaddress import IPv4Address, IPv6Address
-from typing import Any, Dict, Final, List, Optional, Union
+from typing import Any, Dict, Final, List, Optional, Set, Union
 
 from mimesis.data import (
     EMOJI,
@@ -321,14 +321,25 @@ class Internet(BaseProvider):
     def query_parameters(self, length: Optional[int] = None) -> Dict[str, str]:
         """Generate arbitrary query parameters as a dict.
 
-        :param length: Length of dictionary (key/value pair).
+        :param length: Length of query parameters dictionary (maximum is 32).
         :return: Dict of query parameters.
         """
+
+        def pick_unique_words(quantity: int = 5) -> List[str]:
+            words: Set[str] = set()
+
+            while len(words) != quantity:
+                words.add(self.text.word())
+
+            return list(words)
 
         if not length:
             length = self.random.randint(1, 10)
 
-        return dict(zip(self.text.words(length), self.text.words(length)))
+        if length > 32:
+            raise ValueError("Maximum allowed length of query parameters is 32.")
+
+        return dict(zip(pick_unique_words(length), self.text.words(length)))
 
     def top_level_domain(self, tld_type: Optional[TLDType] = None) -> str:
         """Generates random top level domain.

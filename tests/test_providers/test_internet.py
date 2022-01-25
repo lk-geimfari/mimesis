@@ -107,25 +107,29 @@ class TestInternet:
         assert uri.split(":")[0].strip() == scheme.value
         assert validators.url(uri)
 
-    @pytest.mark.parametrize("length", [4, 6, 8, None])
+    @pytest.mark.parametrize("length", [4, 6, 8])
     def test_query_string(self, net, length):
-        query_string = net.query_string(length)
-        query_params_count = len(query_string.split("&"))
+        assert len(net.query_string(length).split("&")) == length
 
-        if length is None:
-            assert 1 <= query_params_count <= 10
-        else:
-            assert query_params_count == length
+    def test_query_string_raise_error_on_invalid_length(self, net):
+        with pytest.raises(ValueError):
+            net.query_string(33)
 
-    @pytest.mark.parametrize("length", [4, 6, 8, None])
+    def test_query_string_with_length_of_none(self, net):
+        query_params_count = len(net.query_string().split("&"))
+        assert 1 <= query_params_count <= 10
+
+    @pytest.mark.parametrize("length", [4, 6, 8])
     def test_query_parameters(self, net, length):
-        query_dict = net.query_parameters(length)
-        query_params_count = len(query_dict)
+        assert len(net.query_parameters(length)) == length
 
-        if length is None:
-            assert 1 <= query_params_count <= 10
-        else:
-            assert query_params_count == length
+    def test_query_parameters_raise_error_on_invalid_length(self, net):
+        with pytest.raises(ValueError):
+            net.query_parameters(33)
+
+    def test_query_parameters_with_length_of_none(self, net):
+        query_params_count = len(net.query_parameters())
+        assert 1 <= query_params_count <= 10
 
     def test_slug(self, net):
         with pytest.raises(ValueError):
