@@ -415,17 +415,15 @@ testing = ["fields", "hunter", "process-tests", "six", "pytest-xdist", "virtuale
 
 [[package]]
 name = "pytest-isort"
-version = "1.3.0"
+version = "3.0.0"
 description = "py.test plugin to check import ordering using isort"
 category = "dev"
 optional = false
-python-versions = "*"
+python-versions = ">=3.6,<4"
 
 [package.dependencies]
 isort = ">=4.0"
-
-[package.extras]
-tests = ["mock"]
+pytest = ">=5.0"
 
 [[package]]
 name = "pytest-mock"
@@ -611,7 +609,7 @@ testing = ["pytest (>=4.6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytes
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "068d4a55717d45b0172ee415db44280c8310a198f0db9b3ba2c0211ad210d7c9"
+content-hash = "ceab9e44933a73146c2ee458ca2f42f11fcfde326e7988104ac287d860a0bff9"
 
 [metadata.files]
 atomicwrites = [
@@ -844,8 +842,8 @@ pytest-cov = [
     {file = "pytest_cov-3.0.0-py3-none-any.whl", hash = "sha256:578d5d15ac4a25e5f961c938b85a05b09fdaae9deef3bb6de9a6e766622ca7a6"},
 ]
 pytest-isort = [
-    {file = "pytest-isort-1.3.0.tar.gz", hash = "sha256:46a12331a701e2f21d48548b2828c8b0a7956dbf1cd5347163f537deb24332dd"},
-    {file = "pytest_isort-1.3.0-py3-none-any.whl", hash = "sha256:074255ad393088a2daee6ca7f2305b7b86358ff632f62302896d8d4b2b339107"},
+    {file = "pytest-isort-3.0.0.tar.gz", hash = "sha256:4fe4b26ead2af776730ec23f5870d7421f35aace22a41c4e938586ef4d8787cb"},
+    {file = "pytest_isort-3.0.0-py3-none-any.whl", hash = "sha256:2d96a25a135d6fd084ac36878e7d54f26f27c6987c2c65f0d12809bffade9cb9"},
 ]
 pytest-mock = [
     {file = "pytest-mock-3.7.0.tar.gz", hash = "sha256:5112bd92cc9f186ee96e1a92efc84969ea494939c3aead39c50f421c4cc69534"},
