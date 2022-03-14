@@ -47,7 +47,7 @@ python = "^3.8"
 
 [tool.poetry.dev-dependencies]
 codecov = "^2.1"
-pytest = "^7.0"
+pytest = "^7.1"
 pytest-isort = "^3.0.0"
 pytest-cov = "^3.0"
 pytest-mock = "^3.7"
