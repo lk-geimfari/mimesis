@@ -14,10 +14,12 @@ __all__ = ["RussiaSpecProvider"]
 class RussiaSpecProvider(BaseSpecProvider):
     """Class that provides special data for Russia (ru)."""
 
+    datafile = "builtin.json"
+
     def __init__(self, seed: Seed = None) -> None:
         """Initialize attributes."""
         super().__init__(locale=Locale.RU, seed=seed)
-        self._load_datafile(self._datafile)
+        self._load_datafile()
         self._current_year = str(datetime.now().year)
 
     class Meta:

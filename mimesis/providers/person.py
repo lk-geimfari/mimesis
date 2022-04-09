@@ -23,6 +23,8 @@ __all__ = ["Person"]
 class Person(BaseDataProvider):
     """Class for generating personal data."""
 
+    datafile = "person.json"
+
     def __init__(self, *args: Any, **kwargs: Any) -> None:
         """Initialize attributes.
 
@@ -30,8 +32,7 @@ class Person(BaseDataProvider):
         :param seed: Seed.
         """
         super().__init__(*args, **kwargs)
-        self._datafile = "person.json"
-        self._load_datafile(self._datafile)
+        self._load_datafile()
         self._store = {
             "age": 0,
         }

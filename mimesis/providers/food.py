@@ -9,14 +9,15 @@ __all__ = ["Food"]
 class Food(BaseDataProvider):
     """Class for generating data related to food."""
 
+    datafile = "food.json"
+
     def __init__(self, *args: Any, **kwargs: Any) -> None:
         """Initialize attributes.
 
         :param locale: Current locale.
         """
         super().__init__(*args, **kwargs)
-        self._datafile = "food.json"
-        self._load_datafile(self._datafile)
+        self._load_datafile()
 
     class Meta:
         """Class for metadata."""

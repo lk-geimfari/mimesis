@@ -16,14 +16,15 @@ __all__ = ["Datetime"]
 class Datetime(BaseDataProvider):
     """Class for generating data related to the date and time."""
 
+    datafile = "datetime.json"
+
     # See: https://git.io/Jf15A
     CURRENT_YEAR = datetime.now().year
 
     def __init__(self, *args: Any, **kwargs: Any) -> None:
         """Initialize attributes."""
         super().__init__(*args, **kwargs)
-        self._datafile = "datetime.json"
-        self._load_datafile(self._datafile)
+        self._load_datafile()
 
     class Meta:
         """Class for metadata."""

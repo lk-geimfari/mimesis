@@ -2,7 +2,7 @@
 
 import hashlib
 import secrets
-from typing import Any, Final, Optional
+from typing import Final, Optional
 from uuid import UUID, uuid4
 
 from mimesis.data.int.cryptographic import WORDLIST
@@ -14,13 +14,6 @@ __all__ = ["Cryptographic"]
 
 class Cryptographic(BaseProvider):
     """Class that provides cryptographic data."""
-
-    def __init__(self, *args: Any, **kwargs: Any) -> None:
-        """Initialize attributes.
-
-        :param seed: Seed.
-        """
-        super().__init__(*args, **kwargs)
 
     class Meta:
         """Class for metadata."""

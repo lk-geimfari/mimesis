@@ -11,6 +11,8 @@ __all__ = ["Text"]
 class Text(BaseDataProvider):
     """Class for generating text data."""
 
+    datafile = "text.json"
+
     def __init__(self, *args: Any, **kwargs: Any) -> None:
         """Initialize attributes.
 
@@ -18,8 +20,7 @@ class Text(BaseDataProvider):
         :param seed: Seed.
         """
         super().__init__(*args, **kwargs)
-        self._datafile = "text.json"
-        self._load_datafile(self._datafile)
+        self._load_datafile()
 
     class Meta:
         """Class for metadata."""

@@ -25,14 +25,15 @@ class Address(BaseDataProvider):
     geographical location.
     """
 
+    datafile = "address.json"
+
     def __init__(self, *args: Any, **kwargs: Any) -> None:
         """Initialize attributes.
 
         :param locale: Current locale.
         """
         super().__init__(*args, **kwargs)
-        self._datafile = "address.json"
-        self._load_datafile(self._datafile)
+        self._load_datafile()
 
     class Meta:
         """Class for metadata."""

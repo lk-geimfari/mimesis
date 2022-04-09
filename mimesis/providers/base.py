@@ -72,6 +72,8 @@ class BaseDataProvider(BaseProvider):
 
     _LOCALE_SEPARATOR = "-"
 
+    datafile: Optional[str] = None
+
     def __init__(self, locale: Locale = Locale.DEFAULT, seed: Seed = None) -> None:
         """Initialize attributes for data providers.
 
@@ -80,9 +82,17 @@ class BaseDataProvider(BaseProvider):
         """
         super().__init__(seed=seed)
         self._data: JSON = {}
-        self._datafile = ""
         self._setup_locale(locale)
         self._data_dir = Path(__file__).parent.parent.joinpath("data")
+        # self._load_datafile()
+
+    def get_datafile(self) -> str:
+        if not self.datafile:
+            raise ValueError(
+                "Provider should either include a `datafile` attribute, "
+                "or override the `get_datafile()` method."
+            )
+        return self.datafile
 
     def _setup_locale(self, locale: Locale = Locale.DEFAULT) -> None:
         """Set up locale after pre-check.
@@ -129,21 +139,15 @@ class BaseDataProvider(BaseProvider):
         return initial
 
     @functools.lru_cache(maxsize=None)
-    def _load_datafile(self, datafile: str = "") -> None:
-        """Pull the content from the JSON and memorize one.
+    def _load_datafile(self) -> None:
+        """Get the content from the JSON file and memorize
+        its content using ``lru_cache``.
 
-        Opens JSON file ``file`` in the folder ``data/locale``
-        and get content from the file and memorize ones using lru_cache.
-
-        :param datafile: The name of file.
-        :return: The content of the file.
+        :return: JSON file as dict.
         :raises UnsupportedLocale: Raises if locale is unsupported.
         """
         locale = self.locale
-        data_dir = self._data_dir
-
-        if not datafile:
-            datafile = self._datafile
+        datafile = self.get_datafile()
 
         def get_data(locale_name: str) -> Any:
             """Pull JSON data from file.
@@ -151,7 +155,7 @@ class BaseDataProvider(BaseProvider):
             :param locale_name: Locale name.
             :return: Content of JSON file as dict.
             """
-            file_path = Path(data_dir).joinpath(locale_name, datafile)
+            file_path = Path(self._data_dir).joinpath(locale_name, datafile)
             with open(file_path, encoding="utf8") as f:
                 return json.load(f)
 

@@ -19,14 +19,15 @@ __all__ = ["Finance"]
 class Finance(BaseDataProvider):
     """Class for generating finance data."""
 
+    datafile = "finance.json"
+
     def __init__(self, *args: Any, **kwargs: Any) -> None:
         """Initialize attributes.
 
         :param locale: Current locale.
         """
         super().__init__(*args, **kwargs)
-        self._datafile = "finance.json"
-        self._load_datafile(self._datafile)
+        self._load_datafile()
 
     class Meta:
         """Class for metadata."""
