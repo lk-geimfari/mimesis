@@ -15,14 +15,6 @@ class Choice(BaseProvider):
 
         name: Final[str] = "choice"
 
-    def __init__(self, *args: Any, **kwargs: Any) -> None:
-        """Initialize attributes.
-
-        :param args: Arguments.
-        :param kwargs: Keyword arguments.
-        """
-        super().__init__(*args, **kwargs)
-
     def __call__(
         self, items: Optional[Sequence[Any]], length: int = 0, unique: bool = False
     ) -> Union[Sequence[Any], Any]:

@@ -31,8 +31,7 @@ class Address(BaseDataProvider):
         :param locale: Current locale.
         """
         super().__init__(*args, **kwargs)
-        self._datafile = "address.json"
-        self._load_datafile(self._datafile)
+        self._load_datafile("address.json")
 
     class Meta:
         """Class for metadata."""

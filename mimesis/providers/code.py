@@ -1,6 +1,6 @@
 """The data provider of a variety of codes."""
 
-from typing import Any, Final, Optional
+from typing import Final, Optional
 
 from mimesis.data import (
     EAN_MASKS,
@@ -19,13 +19,6 @@ __all__ = ["Code"]
 
 class Code(BaseProvider):
     """A class, which provides methods for generating codes."""
-
-    def __init__(self, *args: Any, **kwargs: Any) -> None:
-        """Initialize attributes.
-
-        :param locale: Current locale.
-        """
-        super().__init__(*args, **kwargs)
 
     class Meta:
         """Class for metadata."""

@@ -1,6 +1,6 @@
 """Provides pseudo-scientific data."""
 
-from typing import Any, Final, Optional, Tuple
+from typing import Final, Optional, Tuple
 
 from mimesis.data import SI_PREFIXES, SI_PREFIXES_SYM
 from mimesis.enums import MeasureUnit, MetricPrefixSign
@@ -11,14 +11,6 @@ __all__ = ["Science"]
 
 class Science(BaseProvider):
     """Class for generating pseudo-scientific data."""
-
-    def __init__(self, *args: Any, **kwargs: Any) -> None:
-        """Initialize attributes.
-
-        :param locale: Current language.
-        :param seed: Seed.
-        """
-        super().__init__(*args, **kwargs)
 
     class Meta:
         """Class for metadata."""

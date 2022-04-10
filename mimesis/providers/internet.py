@@ -39,9 +39,9 @@ class Internet(BaseProvider):
         :param kwargs: Keyword arguments.
         """
         super().__init__(*args, **kwargs)
-        self.file = File(seed=self.seed)
-        self.text = Text(locale=Locale.EN, seed=self.seed)
-        self.datetime = Datetime(locale=Locale.EN)
+        self._file = File(seed=self.seed)
+        self._text = Text(locale=Locale.EN, seed=self.seed)
+        self._datetime = Datetime(locale=Locale.EN)
 
     class Meta:
         """Class for metadata."""
@@ -56,7 +56,7 @@ class Internet(BaseProvider):
         :Example:
             Content-Type: application/json
         """
-        fmt = self.file.mime_type(type_=mime_type)
+        fmt = self._file.mime_type(type_=mime_type)
         return f"Content-Type: {fmt}"
 
     def http_status_message(self) -> str:
@@ -233,7 +233,7 @@ class Internet(BaseProvider):
         if quantity < 1:
             raise ValueError("Quantity must be a positive integer.")
 
-        return ["#" + self.text.word() for _ in range(quantity)]
+        return ["#" + self._text.word() for _ in range(quantity)]
 
     def hostname(
         self,
@@ -298,7 +298,7 @@ class Internet(BaseProvider):
         :return: URI.
         """
         directory = (
-            self.datetime.date(start=2010, end=self.datetime.CURRENT_YEAR)
+            self._datetime.date(start=2010, end=self._datetime.CURRENT_YEAR)
             .strftime("%Y-%m-%d")
             .replace("-", "/")
         )
@@ -329,7 +329,7 @@ class Internet(BaseProvider):
             words: Set[str] = set()
 
             while len(words) != quantity:
-                words.add(self.text.word())
+                words.add(self._text.word())
 
             return list(words)
 
@@ -339,7 +339,7 @@ class Internet(BaseProvider):
         if length > 32:
             raise ValueError("Maximum allowed length of query parameters is 32.")
 
-        return dict(zip(pick_unique_words(length), self.text.words(length)))
+        return dict(zip(pick_unique_words(length), self._text.words(length)))
 
     def top_level_domain(self, tld_type: Optional[TLDType] = None) -> str:
         """Generates random top level domain.
@@ -399,4 +399,4 @@ class Internet(BaseProvider):
         if parts_count < 2:
             raise ValueError("Slug must contain more than 2 parts")
 
-        return "-".join(self.text.words(parts_count))
+        return "-".join(self._text.words(parts_count))
