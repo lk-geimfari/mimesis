@@ -64,13 +64,13 @@ class TestBase:
             (Locale.RU, "Москва"),
         ],
     )
-    def test_pull(self, locale, city):
+    def test_load_datafile(self, locale, city):
         data_provider = BaseDataProvider(locale)
         data_provider._load_datafile("address.json")
         assert city in data_provider._data["city"]
 
     @pytest.mark.parametrize("locale", list(Locale))
-    def test_pull_raises(self, locale):
+    def test_load_datafile_raises(self, locale):
         data_provider = BaseDataProvider(locale=locale)
         with pytest.raises(FileNotFoundError):
             data_provider._load_datafile("something.json")
