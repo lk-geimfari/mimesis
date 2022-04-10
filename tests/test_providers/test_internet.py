@@ -148,10 +148,6 @@ class TestInternet:
         result = net.user_agent()
         assert result in data.USER_AGENTS
 
-    def test_image_placeholder(self, net):
-        result = net.image_placeholder(width=400, height=300)
-        assert result is not None
-
     @pytest.mark.parametrize(
         "w, h, keywords, writable, res_type",
         [
@@ -312,12 +308,6 @@ class TestSeededInternet:
 
     def test_user_agent(self, i1, i2):
         assert i1.user_agent() == i2.user_agent()
-
-    def test_image_placeholder(self, i1, i2):
-        assert i1.image_placeholder() == i2.image_placeholder()
-        assert i1.image_placeholder(width=128, height=128) == i2.image_placeholder(
-            width=128, height=128
-        )
 
     def test_ip_v4(self, i1, i2):
         assert i1.ip_v4() == i2.ip_v4()

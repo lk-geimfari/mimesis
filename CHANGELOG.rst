@@ -1,3 +1,12 @@
+Version 5.4.0
+-------------
+
+**Removed**:
+
+- Removed deprecated method ``image_placeholder()`` from ``Internet()``
+
+
+
 Version 5.3.0
 -------------
 

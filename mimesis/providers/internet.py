@@ -171,18 +171,6 @@ class Internet(BaseProvider):
         return self.random.choice(EMOJI)
 
     @staticmethod
-    def image_placeholder(
-        width: Union[int, str] = 1920, height: Union[int, str] = 1080
-    ) -> str:
-        """Generate a link to the image placeholder.
-
-        :param width: Width of image.
-        :param height: Height of image.
-        :return: URL to image placeholder.
-        """
-        return f"http://placehold.it/{width}x{height}"
-
-    @staticmethod
     def stock_image(
         width: Union[int, str] = 1920,
         height: Union[int, str] = 1080,
