@@ -367,13 +367,14 @@ diagrams = ["jinja2", "railroad-diagrams"]
 
 [[package]]
 name = "pyroma"
-version = "3.3"
+version = "4.0"
 description = "Test your project's packaging friendliness"
 category = "dev"
 optional = false
 python-versions = "*"
 
 [package.dependencies]
+build = "*"
 docutils = "*"
 pygments = "*"
 requests = "*"
@@ -605,7 +606,7 @@ testing = ["pytest (>=4.6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytes
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "03cd7817344d963848b9447d32f924ab8ee1a42758d27d9045990a9a251d2724"
+content-hash = "a5cf540262587a6b41b1f5ba1f68dc54ac015612549fb21c4d4ccd21de14c49f"
 
 [metadata.files]
 atomicwrites = [
@@ -829,8 +830,8 @@ pyparsing = [
     {file = "pyparsing-3.0.6.tar.gz", hash = "sha256:d9bdec0013ef1eb5a84ab39a3b3868911598afa494f5faa038647101504e2b81"},
 ]
 pyroma = [
-    {file = "pyroma-3.3-py2.py3-none-any.whl", hash = "sha256:4729cb7020201793f050ac446d1e9e6e4ed10a55a9f4c59034b89d334de66428"},
-    {file = "pyroma-3.3.tar.gz", hash = "sha256:78df2f1617ced9a9a1d114918fc4650ad0e3892d238017dee842ed859967b0fe"},
+    {file = "pyroma-4.0-py2.py3-none-any.whl", hash = "sha256:8aab9bc66f6bbd8a23a545a10ceea62d858bfdd1a3bd0144c2ac0854d029aacb"},
+    {file = "pyroma-4.0.tar.gz", hash = "sha256:b41ed0e080fb3aa9a7b8359d0ce7af39bc9b59cb9e7d696c6521f525257cc128"},
 ]
 pytest = [
     {file = "pytest-7.1.1-py3-none-any.whl", hash = "sha256:92f723789a8fdd7180b6b06483874feca4c48a5c76968e03bb3e7f806a1869ea"},
