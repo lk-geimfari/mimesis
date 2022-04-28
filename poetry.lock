@@ -541,7 +541,7 @@ python-versions = ">=3.6"
 
 [[package]]
 name = "types-pytz"
-version = "2021.3.6"
+version = "2021.3.7"
 description = "Typing stubs for pytz"
 category = "dev"
 optional = false
@@ -606,7 +606,7 @@ testing = ["pytest (>=4.6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytes
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "ce21331d26043f187c72ac4cd09143d2e19b50006fd5a98b0ef8ebe4fcbea681"
+content-hash = "2525bb7d85aad81446b4663ad222c5abf626165973f0d0ec85e53b6a61e58e0e"
 
 [metadata.files]
 atomicwrites = [
@@ -882,8 +882,8 @@ tomli = [
     {file = "tomli-1.2.3.tar.gz", hash = "sha256:05b6166bff487dc068d322585c7ea4ef78deed501cc124060e0f238e89a9231f"},
 ]
 types-pytz = [
-    {file = "types-pytz-2021.3.6.tar.gz", hash = "sha256:74547fd90d8d8ab4f1eedf3a344a7d186d97486973895f81221a712e1e2cd993"},
-    {file = "types_pytz-2021.3.6-py3-none-any.whl", hash = "sha256:6805c72d51118923c5bf98633c39593d5b464d2ab49a803440e2d7ab6b8920df"},
+    {file = "types-pytz-2021.3.7.tar.gz", hash = "sha256:11d5ba06268167953ccc4a3eee192c24b42d00d2aef456c160a8798893cb2081"},
+    {file = "types_pytz-2021.3.7-py3-none-any.whl", hash = "sha256:0f67528c1df2017b61a45f2f9cfa2d45b16ce1dc135f09c7d2fd258998aade58"},
 ]
 typing-extensions = [
     {file = "typing_extensions-4.0.0-py3-none-any.whl", hash = "sha256:829704698b22e13ec9eaf959122315eabb370b0884400e9818334d8b677023d9"},
