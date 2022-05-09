@@ -4,9 +4,9 @@ import contextlib
 import functools
 import json
 import operator
+import typing as t
 from functools import reduce
 from pathlib import Path
-from typing import Any, Generator, List, Optional
 
 from mimesis.exceptions import NonEnumerableError
 from mimesis.locales import Locale, validate_locale
@@ -19,7 +19,7 @@ __all__ = ["BaseDataProvider", "BaseProvider"]
 class BaseProvider:
     """This is a base class for all providers."""
 
-    def __init__(self, *, seed: Seed = None, **kwargs: Any) -> None:
+    def __init__(self, *, seed: Seed = None, **kwargs: t.Any) -> None:
         """Initialize attributes.
 
         Keep in mind, that locale-independent data providers will work
@@ -45,7 +45,7 @@ class BaseProvider:
         self.seed = seed
         self.random.seed(seed)
 
-    def validate_enum(self, item: Any, enum: Any) -> Any:
+    def validate_enum(self, item: t.Any, enum: t.Any) -> t.Any:
         """Validate enum parameter of method in subclasses of BaseProvider.
 
         :param item: Item of enum object.
@@ -95,7 +95,7 @@ class BaseDataProvider(BaseProvider):
         locale_obj = validate_locale(locale)
         self.locale = locale_obj.value
 
-    def extract(self, keys: List[str], default: Optional[Any] = None) -> Any:
+    def extract(self, keys: t.List[str], default: t.Optional[t.Any] = None) -> t.Any:
         """Extracts nested values from JSON file by list of keys.
 
         :param keys: List of keys (order extremely matters).
@@ -145,7 +145,7 @@ class BaseDataProvider(BaseProvider):
         if not datafile:
             datafile = self._datafile
 
-        def get_data(locale_name: str) -> Any:
+        def get_data(locale_name: str) -> t.Any:
             """Pull JSON data from file.
 
             :param locale_name: Locale name.
@@ -187,7 +187,7 @@ class BaseDataProvider(BaseProvider):
     def override_locale(
         self,
         locale: Locale,
-    ) -> Generator["BaseDataProvider", None, None]:
+    ) -> t.Generator["BaseDataProvider", None, None]:
         """Context manager which allows overriding current locale.
 
         Temporarily overrides current locale for

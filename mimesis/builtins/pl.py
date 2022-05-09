@@ -1,6 +1,6 @@
 """Specific data provider for Poland (pl)."""
 
-from typing import Final, Optional
+import typing as t
 
 from mimesis.builtins.base import BaseSpecProvider
 from mimesis.enums import Gender
@@ -21,7 +21,7 @@ class PolandSpecProvider(BaseSpecProvider):
     class Meta:
         """The name of the provider."""
 
-        name: Final[str] = "poland_provider"
+        name: t.Final[str] = "poland_provider"
 
     def nip(self) -> str:
         """Generate random valid 10-digit NIP.
@@ -40,7 +40,7 @@ class PolandSpecProvider(BaseSpecProvider):
         return "".join(map(str, nip_digits))
 
     def pesel(
-        self, birth_date: Optional[DateTime] = None, gender: Optional[Gender] = None
+        self, birth_date: t.Optional[DateTime] = None, gender: t.Optional[Gender] = None
     ) -> str:
         """Generate random 11-digit PESEL.
 

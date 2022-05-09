@@ -1,6 +1,6 @@
 """Provides a random choice from items in a sequence."""
 import collections.abc
-from typing import Any, Final, List, Optional, Sequence, Union
+import typing as t
 
 from mimesis.providers.base import BaseProvider
 
@@ -13,11 +13,14 @@ class Choice(BaseProvider):
     class Meta:
         """Class for metadata."""
 
-        name: Final[str] = "choice"
+        name: t.Final[str] = "choice"
 
     def __call__(
-        self, items: Optional[Sequence[Any]], length: int = 0, unique: bool = False
-    ) -> Union[Sequence[Any], Any]:
+        self,
+        items: t.Optional[t.Sequence[t.Any]],
+        length: int = 0,
+        unique: bool = False,
+    ) -> t.Union[t.Sequence[t.Any], t.Any]:
         """Generate a randomly-chosen sequence or bare element from a sequence.
 
         Provide elements randomly chosen from the elements in a sequence
@@ -60,7 +63,7 @@ class Choice(BaseProvider):
         if length == 0:
             return self.random.choice(items)
 
-        data: List[str] = []
+        data: t.List[str] = []
         if unique and len(set(items)) < length:  # avoid an infinite while loop
             raise ValueError(
                 "There are not enough unique elements in "

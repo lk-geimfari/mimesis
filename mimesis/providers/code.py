@@ -1,6 +1,6 @@
 """The data provider of a variety of codes."""
 
-from typing import Final, Optional
+import typing as t
 
 from mimesis.data import (
     EAN_MASKS,
@@ -23,7 +23,7 @@ class Code(BaseProvider):
     class Meta:
         """Class for metadata."""
 
-        name: Final[str] = "code"
+        name: t.Final[str] = "code"
 
     def locale_code(self) -> str:
         """Get a random locale code (MS-LCID).
@@ -44,7 +44,7 @@ class Code(BaseProvider):
         return self.random.custom_code(mask=mask)
 
     def isbn(
-        self, fmt: Optional[ISBNFormat] = None, locale: Locale = Locale.DEFAULT
+        self, fmt: t.Optional[ISBNFormat] = None, locale: Locale = Locale.DEFAULT
     ) -> str:
         """Generate ISBN for current locale.
 
@@ -60,7 +60,7 @@ class Code(BaseProvider):
         mask = ISBN_MASKS[fmt_value].format(ISBN_GROUPS[locale.value])
         return self.random.custom_code(mask)
 
-    def ean(self, fmt: Optional[EANFormat] = None) -> str:
+    def ean(self, fmt: t.Optional[EANFormat] = None) -> str:
         """Generate EAN.
 
         To change EAN format, pass parameter ``code`` with needed value of

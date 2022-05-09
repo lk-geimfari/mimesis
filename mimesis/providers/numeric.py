@@ -1,8 +1,8 @@
 """Provides data related to numbers."""
 
+import typing as t
 from collections import defaultdict
 from decimal import Decimal
-from typing import Any, DefaultDict, Final, List, Optional
 
 from mimesis.enums import NumType
 from mimesis.providers.base import BaseProvider
@@ -14,17 +14,17 @@ __all__ = ["Numeric"]
 class Numeric(BaseProvider):
     """A provider for generating numeric data."""
 
-    def __init__(self, *args: Any, **kwargs: Any) -> None:
+    def __init__(self, *args: t.Any, **kwargs: t.Any) -> None:
         super().__init__(*args, **kwargs)
-        self.__increment_dict: DefaultDict[str, int] = defaultdict(int)
-        self.__default_accumulator_value: Final = "default"
+        self.__increment_dict: t.DefaultDict[str, int] = defaultdict(int)
+        self.__default_accumulator_value: t.Final = "default"
 
     class Meta:
         """Class for metadata."""
 
-        name: Final[str] = "numeric"
+        name: t.Final[str] = "numeric"
 
-    def increment(self, accumulator: Optional[str] = None) -> int:
+    def increment(self, accumulator: t.Optional[str] = None) -> int:
         """Generate incremental number.
 
         Each call of this method returns an incrementing number (with the step of +1).
@@ -69,7 +69,7 @@ class Numeric(BaseProvider):
 
     def floats(
         self, start: float = 0, end: float = 1, n: int = 10, precision: int = 15
-    ) -> List[float]:
+    ) -> t.List[float]:
         """Generate a list of random float numbers.
 
         :param start: Start range.
@@ -90,7 +90,7 @@ class Numeric(BaseProvider):
         """
         return self.random.randint(start, end)
 
-    def integers(self, start: int = 0, end: int = 10, n: int = 10) -> List[int]:
+    def integers(self, start: int = 0, end: int = 10, n: int = 10) -> t.List[int]:
         """Generate a list of random integers.
 
         Integers can be negative or positive numbers.
@@ -140,7 +140,7 @@ class Numeric(BaseProvider):
         precision_real: int = 15,
         precision_imag: int = 15,
         n: int = 10,
-    ) -> List[complex]:
+    ) -> t.List[complex]:
         """Generate a list of random complex numbers.
 
         :param start_real: Start real range.
@@ -179,7 +179,7 @@ class Numeric(BaseProvider):
 
     def decimals(
         self, start: float = 0.0, end: float = 1000.0, n: int = 10
-    ) -> List[Decimal]:
+    ) -> t.List[Decimal]:
         """Generate a decimal number as :py:class:`decimal.Decimal` objects.
 
         :param start: Start range.
@@ -190,7 +190,11 @@ class Numeric(BaseProvider):
         return [self.decimal_number(start, end) for _ in range(n)]
 
     def matrix(
-        self, m: int = 10, n: int = 10, num_type: NumType = NumType.FLOAT, **kwargs: Any
+        self,
+        m: int = 10,
+        n: int = 10,
+        num_type: NumType = NumType.FLOAT,
+        **kwargs: t.Any
     ) -> Matrix:
         """Generate m x n matrix with random numbers.
 

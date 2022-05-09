@@ -1,10 +1,10 @@
 """Provides data related to internet."""
 
+import typing as t
 import urllib.error
 import urllib.parse
 import urllib.request
 from ipaddress import IPv4Address, IPv6Address
-from typing import Any, Dict, Final, List, Optional, Set, Union
 
 from mimesis.data import (
     EMOJI,
@@ -29,10 +29,10 @@ __all__ = ["Internet"]
 class Internet(BaseProvider):
     """Class for generating data related to the internet."""
 
-    _MAX_IPV4: Final[int] = (2 ** 32) - 1
-    _MAX_IPV6: Final[int] = (2 ** 128) - 1
+    _MAX_IPV4: t.Final[int] = (2 ** 32) - 1
+    _MAX_IPV6: t.Final[int] = (2 ** 128) - 1
 
-    def __init__(self, *args: Any, **kwargs: Any) -> None:
+    def __init__(self, *args: t.Any, **kwargs: t.Any) -> None:
         """Initialize attributes.
 
         :param args: Arguments.
@@ -46,9 +46,9 @@ class Internet(BaseProvider):
     class Meta:
         """Class for metadata."""
 
-        name: Final[str] = "internet"
+        name: t.Final[str] = "internet"
 
-    def content_type(self, mime_type: Optional[MimeType] = None) -> str:
+    def content_type(self, mime_type: t.Optional[MimeType] = None) -> str:
         """Get a random HTTP content type.
 
         :return: Content type.
@@ -172,11 +172,11 @@ class Internet(BaseProvider):
 
     @staticmethod
     def stock_image(
-        width: Union[int, str] = 1920,
-        height: Union[int, str] = 1080,
-        keywords: Optional[Keywords] = None,
+        width: t.Union[int, str] = 1920,
+        height: t.Union[int, str] = 1080,
+        keywords: t.Optional[Keywords] = None,
         writable: bool = False,
-    ) -> Union[str, bytes]:
+    ) -> t.Union[str, bytes]:
         """Generate random stock image (JPG/JPEG) hosted on Unsplash.
 
         See «Random search term» on https://source.unsplash.com/
@@ -207,7 +207,7 @@ class Internet(BaseProvider):
                 raise urllib.error.URLError("Required an active HTTP connection")
         return url
 
-    def hashtags(self, quantity: int = 4) -> List[str]:
+    def hashtags(self, quantity: int = 4) -> t.List[str]:
         """Generate a list of hashtags.
 
         :param quantity: The quantity of hashtags.
@@ -225,8 +225,8 @@ class Internet(BaseProvider):
 
     def hostname(
         self,
-        tld_type: Optional[TLDType] = None,
-        subdomains: Optional[List[str]] = None,
+        tld_type: t.Optional[TLDType] = None,
+        subdomains: t.Optional[t.List[str]] = None,
     ) -> str:
         """Generate a random hostname without scheme.
 
@@ -245,10 +245,10 @@ class Internet(BaseProvider):
 
     def url(
         self,
-        scheme: Optional[URLScheme] = URLScheme.HTTPS,
-        port_range: Optional[PortRange] = None,
-        tld_type: Optional[TLDType] = None,
-        subdomains: Optional[List[str]] = None,
+        scheme: t.Optional[URLScheme] = URLScheme.HTTPS,
+        port_range: t.Optional[PortRange] = None,
+        tld_type: t.Optional[TLDType] = None,
+        subdomains: t.Optional[t.List[str]] = None,
     ) -> str:
         """Generate random URL.
 
@@ -270,11 +270,11 @@ class Internet(BaseProvider):
 
     def uri(
         self,
-        scheme: Optional[URLScheme] = URLScheme.HTTPS,
-        port_range: Optional[PortRange] = None,
-        tld_type: Optional[TLDType] = None,
-        subdomains: Optional[List[str]] = None,
-        query_params_count: Optional[int] = None,
+        scheme: t.Optional[URLScheme] = URLScheme.HTTPS,
+        port_range: t.Optional[PortRange] = None,
+        tld_type: t.Optional[TLDType] = None,
+        subdomains: t.Optional[t.List[str]] = None,
+        query_params_count: t.Optional[int] = None,
     ) -> str:
         """Generate a random URI.
 
@@ -298,7 +298,7 @@ class Internet(BaseProvider):
 
         return uri
 
-    def query_string(self, length: Optional[int] = None) -> str:
+    def query_string(self, length: t.Optional[int] = None) -> str:
         """Generate arbitrary query string of given length.
 
         :param length: Length of query string.
@@ -306,15 +306,15 @@ class Internet(BaseProvider):
         """
         return urllib.parse.urlencode(self.query_parameters(length))
 
-    def query_parameters(self, length: Optional[int] = None) -> Dict[str, str]:
+    def query_parameters(self, length: t.Optional[int] = None) -> t.Dict[str, str]:
         """Generate arbitrary query parameters as a dict.
 
         :param length: Length of query parameters dictionary (maximum is 32).
         :return: Dict of query parameters.
         """
 
-        def pick_unique_words(quantity: int = 5) -> List[str]:
-            words: Set[str] = set()
+        def pick_unique_words(quantity: int = 5) -> t.List[str]:
+            words: t.Set[str] = set()
 
             while len(words) != quantity:
                 words.add(self._text.word())
@@ -329,7 +329,7 @@ class Internet(BaseProvider):
 
         return dict(zip(pick_unique_words(length), self._text.words(length)))
 
-    def top_level_domain(self, tld_type: Optional[TLDType] = None) -> str:
+    def top_level_domain(self, tld_type: t.Optional[TLDType] = None) -> str:
         """Generates random top level domain.
 
         :param tld_type: Enum object :class:`enums.TLDType`
@@ -339,7 +339,7 @@ class Internet(BaseProvider):
         key = self.validate_enum(item=tld_type, enum=TLDType)
         return self.random.choice(TLD[key])
 
-    def tld(self, *args: Any, **kwargs: Any) -> str:
+    def tld(self, *args: t.Any, **kwargs: t.Any) -> str:
         """Generates random top level domain.
 
         An alias for :meth:`top_level_domain`
@@ -371,7 +371,7 @@ class Internet(BaseProvider):
         rng = self.validate_enum(port_range, PortRange)
         return self.random.randint(*rng)
 
-    def slug(self, parts_count: Optional[int] = None) -> str:
+    def slug(self, parts_count: t.Optional[int] = None) -> str:
         """Generate a random slug of given parts count.
 
         :param parts_count: Slug's parts count.

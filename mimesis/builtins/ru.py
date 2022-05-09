@@ -1,7 +1,7 @@
 """Specific data provider for Russia (ru)."""
 
+import typing as t
 from datetime import datetime
-from typing import Final, List, Optional
 
 from mimesis.builtins.base import BaseSpecProvider
 from mimesis.enums import Gender
@@ -23,7 +23,7 @@ class RussiaSpecProvider(BaseSpecProvider):
     class Meta:
         """The name of the provider."""
 
-        name: Final[str] = "russia_provider"
+        name: t.Final[str] = "russia_provider"
 
     def generate_sentence(self) -> str:
         """Generate sentence from the parts.
@@ -36,7 +36,7 @@ class RussiaSpecProvider(BaseSpecProvider):
         ]
         return " ".join(sentence)
 
-    def patronymic(self, gender: Optional[Gender] = None) -> str:
+    def patronymic(self, gender: t.Optional[Gender] = None) -> str:
         """Generate random patronymic name.
 
         :param gender: Gender of person.
@@ -46,10 +46,10 @@ class RussiaSpecProvider(BaseSpecProvider):
             Алексеевна.
         """
         gender = self.validate_enum(gender, Gender)
-        patronymics: List[str] = self.extract(["patronymic", str(gender)])
+        patronymics: t.List[str] = self.extract(["patronymic", str(gender)])
         return self.random.choice(patronymics)
 
-    def passport_series(self, year: Optional[int] = None) -> str:
+    def passport_series(self, year: t.Optional[int] = None) -> str:
         """Generate random series of passport.
 
         :param year: Year of manufacture.
@@ -128,7 +128,7 @@ class RussiaSpecProvider(BaseSpecProvider):
         :return: INN.
         """
 
-        def control_sum(nums: List[int], t: str) -> int:
+        def control_sum(nums: t.List[int], t: str) -> int:
             digits_dict = {
                 "n2": [7, 2, 4, 10, 3, 5, 9, 4, 6, 8],
                 "n1": [3, 7, 2, 4, 10, 3, 5, 9, 4, 6, 8],

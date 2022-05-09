@@ -1,6 +1,6 @@
 """Provides data related to transports."""
 
-from typing import Final, Optional
+import typing as t
 
 from mimesis.data import (
     AIRPLANES,
@@ -22,7 +22,7 @@ class Transport(BaseProvider):
     class Meta:
         """Class for metadata."""
 
-        name: Final[str] = "transport"
+        name: t.Final[str] = "transport"
 
     def truck(self, model_mask: str = "#### @@") -> str:
         """Generate a truck model.
@@ -72,7 +72,7 @@ class Transport(BaseProvider):
         plane = self.random.choice(AIRPLANES)
         return f"{plane} {model}"
 
-    def vehicle_registration_code(self, locale: Optional[Locale] = None) -> str:
+    def vehicle_registration_code(self, locale: t.Optional[Locale] = None) -> str:
         """Get vehicle registration code of country.
 
         :param locale: Registration code for locale (country).

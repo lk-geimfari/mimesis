@@ -1,8 +1,8 @@
 """Provides data related to paths."""
 
 import sys
+import typing as t
 from pathlib import PurePosixPath, PureWindowsPath
-from typing import Any, Final
 
 from mimesis.data import (
     FOLDERS,
@@ -22,8 +22,8 @@ class Path(BaseProvider):
     def __init__(
         self,
         platform: str = sys.platform,
-        *args: Any,
-        **kwargs: Any,
+        *args: t.Any,
+        **kwargs: t.Any,
     ) -> None:
         """Initialize attributes.
 
@@ -39,7 +39,7 @@ class Path(BaseProvider):
     class Meta:
         """Class for metadata."""
 
-        name: Final[str] = "path"
+        name: t.Final[str] = "path"
 
     def root(self) -> str:
         """Generate a root dir path.

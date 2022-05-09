@@ -1,6 +1,6 @@
 """Specific data provider for Netherlands (nl)."""
 
-from typing import Final
+import typing as t
 
 from mimesis.builtins.base import BaseSpecProvider
 from mimesis.locales import Locale
@@ -19,7 +19,7 @@ class NetherlandsSpecProvider(BaseSpecProvider):
     class Meta:
         """The name of the provider."""
 
-        name: Final[str] = "netherlands_provider"
+        name: t.Final[str] = "netherlands_provider"
 
     def bsn(self) -> str:
         """Generate a random, but valid ``Burgerservicenummer``.

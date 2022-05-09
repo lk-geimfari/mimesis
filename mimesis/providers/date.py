@@ -1,8 +1,8 @@
 """Provider of data related to date and time."""
 
+import typing as t
 from calendar import monthrange, timegm
 from datetime import date, datetime, time, timedelta
-from typing import Any, Final, List, Optional, Union
 
 from mimesis.compat import pytz
 from mimesis.data import GMT_OFFSETS, ROMAN_NUMS, TIMEZONES
@@ -19,7 +19,7 @@ class Datetime(BaseDataProvider):
     # See: https://git.io/Jf15A
     CURRENT_YEAR = datetime.now().year
 
-    def __init__(self, *args: Any, **kwargs: Any) -> None:
+    def __init__(self, *args: t.Any, **kwargs: t.Any) -> None:
         """Initialize attributes."""
         super().__init__(*args, **kwargs)
         self._datafile = "datetime.json"
@@ -28,14 +28,14 @@ class Datetime(BaseDataProvider):
     class Meta:
         """Class for metadata."""
 
-        name: Final[str] = "datetime"
+        name: t.Final[str] = "datetime"
 
     @staticmethod
     def bulk_create_datetimes(
         date_start: DateTime,
         date_end: DateTime,
-        **kwargs: Any,
-    ) -> List[DateTime]:
+        **kwargs: t.Any,
+    ) -> t.List[DateTime]:
         """Bulk create datetime objects.
 
         This method creates list of datetime objects from
@@ -90,7 +90,7 @@ class Datetime(BaseDataProvider):
         :return: Day of the week.
         """
         key = "abbr" if abbr else "name"
-        days: List[str] = self.extract(["day", key])
+        days: t.List[str] = self.extract(["day", key])
         return self.random.choice(days)
 
     def month(self, abbr: bool = False) -> str:
@@ -100,7 +100,7 @@ class Datetime(BaseDataProvider):
         :return: Month name.
         """
         key = "abbr" if abbr else "name"
-        months: List[str] = self.extract(["month", key])
+        months: t.List[str] = self.extract(["month", key])
         return self.random.choice(months)
 
     def year(self, minimum: int = 1990, maximum: int = CURRENT_YEAR) -> int:
@@ -124,7 +124,7 @@ class Datetime(BaseDataProvider):
 
         :return: Periodicity.
         """
-        periodicity: List[str] = self.extract(["periodicity"])
+        periodicity: t.List[str] = self.extract(["periodicity"])
         return self.random.choice(periodicity)
 
     def date(self, start: int = 2000, end: int = CURRENT_YEAR) -> Date:
@@ -140,7 +140,7 @@ class Datetime(BaseDataProvider):
         date_object = date(year, month, day)
         return date_object
 
-    def formatted_date(self, fmt: str = "", **kwargs: Any) -> str:
+    def formatted_date(self, fmt: str = "", **kwargs: t.Any) -> str:
         """Generate random date as string.
 
         :param fmt: The format of date, if None then use standard
@@ -188,7 +188,7 @@ class Datetime(BaseDataProvider):
         """
         return self.random.randint(1, 31)
 
-    def timezone(self, region: Optional[TimezoneRegion] = None) -> str:
+    def timezone(self, region: t.Optional[TimezoneRegion] = None) -> str:
         """Get a random timezone.
 
         :param region: Timezone region.
@@ -207,7 +207,10 @@ class Datetime(BaseDataProvider):
         return self.random.choice(GMT_OFFSETS)
 
     def datetime(
-        self, start: int = 2000, end: int = CURRENT_YEAR, timezone: Optional[str] = None
+        self,
+        start: int = 2000,
+        end: int = CURRENT_YEAR,
+        timezone: t.Optional[str] = None,
     ) -> DateTime:
         """Generate random datetime.
 
@@ -228,7 +231,7 @@ class Datetime(BaseDataProvider):
 
         return datetime_obj
 
-    def formatted_datetime(self, fmt: str = "", **kwargs: Any) -> str:
+    def formatted_datetime(self, fmt: str = "", **kwargs: t.Any) -> str:
         """Generate datetime string in human readable format.
 
         :param fmt: Custom format (default is format for current locale)
@@ -244,7 +247,7 @@ class Datetime(BaseDataProvider):
 
         return dt_obj.strftime(fmt)
 
-    def timestamp(self, posix: bool = True, **kwargs: Any) -> Union[str, int]:
+    def timestamp(self, posix: bool = True, **kwargs: t.Any) -> t.Union[str, int]:
         """Generate random timestamp.
 
         :param posix: POSIX time.

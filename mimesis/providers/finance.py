@@ -1,6 +1,6 @@
 """Business data provider."""
 
-from typing import Any, Final, List
+import typing as t
 
 from mimesis.data import (
     CRYPTOCURRENCY_ISO_CODES,
@@ -19,7 +19,7 @@ __all__ = ["Finance"]
 class Finance(BaseDataProvider):
     """Class for generating finance data."""
 
-    def __init__(self, *args: Any, **kwargs: Any) -> None:
+    def __init__(self, *args: t.Any, **kwargs: t.Any) -> None:
         """Initialize attributes.
 
         :param locale: Current locale.
@@ -31,14 +31,14 @@ class Finance(BaseDataProvider):
     class Meta:
         """Class for metadata."""
 
-        name: Final[str] = "finance"
+        name: t.Final[str] = "finance"
 
     def company(self) -> str:
         """Get a random company name.
 
         :return: Company name.
         """
-        names: List[str] = self.extract(["company", "name"])
+        names: t.List[str] = self.extract(["company", "name"])
 
         return self.random.choice(names)
 
@@ -50,7 +50,7 @@ class Finance(BaseDataProvider):
         """
         key = "abbr" if abbr else "title"
 
-        company_types: List[str] = self.extract(["company", "type", key])
+        company_types: t.List[str] = self.extract(["company", "type", key])
         return self.random.choice(company_types)
 
     def currency_iso_code(self, allow_random: bool = False) -> str:

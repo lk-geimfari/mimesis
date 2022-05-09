@@ -1,7 +1,7 @@
 """This module is provide internal util functions."""
 
 import functools
-from typing import Dict, Union
+import typing as t
 
 from mimesis.data import COMMON_LETTERS, ROMANIZATION_DICT
 from mimesis.locales import Locale, validate_locale
@@ -10,7 +10,7 @@ __all__ = ["romanize", "luhn_checksum"]
 
 
 @functools.lru_cache(maxsize=None)
-def _get_translation_table(locale: Locale) -> Dict[int, str]:
+def _get_translation_table(locale: Locale) -> t.Dict[int, str]:
     return str.maketrans({**ROMANIZATION_DICT[locale.value], **COMMON_LETTERS})
 
 
@@ -31,7 +31,7 @@ def luhn_checksum(num: str) -> str:
     return str(check * 9 % 10)
 
 
-def romanize(string: str, locale: Union[Locale, str]) -> str:
+def romanize(string: str, locale: t.Union[Locale, str]) -> str:
     """Romanize a given string.
 
     Supported locales are:

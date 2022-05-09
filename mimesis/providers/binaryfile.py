@@ -1,7 +1,7 @@
 """Binary data provider."""
 
+import typing as t
 from pathlib import Path
-from typing import Any, Final, Union
 
 from mimesis.enums import (
     AudioFile,
@@ -18,7 +18,7 @@ __all__ = ["BinaryFile"]
 class BinaryFile(BaseProvider):
     """Class for generating binary data"""
 
-    def __init__(self, *args: Any, **kwargs: Any) -> None:
+    def __init__(self, *args: t.Any, **kwargs: t.Any) -> None:
         """Initialize attributes.
 
         :param locale: Current locale.
@@ -26,17 +26,17 @@ class BinaryFile(BaseProvider):
         """
         super().__init__(*args, **kwargs)
         self._data_dir = Path(__file__).parent.parent.joinpath("data", "bin")
-        self._sample_name: Final[str] = "sample"
+        self._sample_name: t.Final[str] = "sample"
 
     class Meta:
         """Class for metadata."""
 
-        name: Final[str] = "binaryfile"
+        name: t.Final[str] = "binaryfile"
 
     def _read_file(
         self,
         *,
-        file_type: Union[
+        file_type: t.Union[
             AudioFile,
             CompressedFile,
             DocumentFile,

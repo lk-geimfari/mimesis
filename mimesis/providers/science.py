@@ -1,6 +1,6 @@
 """Provides pseudo-scientific data."""
 
-from typing import Final, Optional, Tuple
+import typing as t
 
 from mimesis.data import SI_PREFIXES, SI_PREFIXES_SYM
 from mimesis.enums import MeasureUnit, MetricPrefixSign
@@ -15,7 +15,7 @@ class Science(BaseProvider):
     class Meta:
         """Class for metadata."""
 
-        name: Final[str] = "science"
+        name: t.Final[str] = "science"
 
     def rna_sequence(self, length: int = 10) -> str:
         """Generate a random RNA sequence.
@@ -41,7 +41,7 @@ class Science(BaseProvider):
 
     def measure_unit(
         self,
-        name: Optional[MeasureUnit] = None,
+        name: t.Optional[MeasureUnit] = None,
         symbol: bool = False,
     ) -> str:
         """Get unit name from International System of Units.
@@ -50,7 +50,7 @@ class Science(BaseProvider):
         :param symbol: Return only symbol
         :return: Unit.
         """
-        result: Tuple[str, str] = self.validate_enum(
+        result: t.Tuple[str, str] = self.validate_enum(
             item=name,
             enum=MeasureUnit,
         )
@@ -60,7 +60,7 @@ class Science(BaseProvider):
         return result[0]
 
     def metric_prefix(
-        self, sign: Optional[MetricPrefixSign] = None, symbol: bool = False
+        self, sign: t.Optional[MetricPrefixSign] = None, symbol: bool = False
     ) -> str:
         """Get a random prefix for the International System of Units.
 

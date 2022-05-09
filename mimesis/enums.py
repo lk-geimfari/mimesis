@@ -10,8 +10,8 @@ there no guarantee that you will get the result which you actually expected.
 Below you can see an example of usage enums in methods of data providers.
 """
 
+import typing as t
 from enum import Enum
-from typing import List
 
 
 class Locale(Enum):
@@ -57,7 +57,7 @@ class Locale(Enum):
     DEFAULT = EN
 
     @classmethod
-    def values(cls) -> List[str]:
+    def values(cls) -> t.List[str]:
         return [i.value for i in cls.__members__.values()]
 
 

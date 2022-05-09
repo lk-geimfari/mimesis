@@ -1,6 +1,6 @@
 """Provides data related to text."""
 
-from typing import Any, Final, List, Tuple
+import typing as t
 
 from mimesis.data import SAFE_COLORS
 from mimesis.providers.base import BaseDataProvider
@@ -11,7 +11,7 @@ __all__ = ["Text"]
 class Text(BaseDataProvider):
     """Class for generating text data."""
 
-    def __init__(self, *args: Any, **kwargs: Any) -> None:
+    def __init__(self, *args: t.Any, **kwargs: t.Any) -> None:
         """Initialize attributes.
 
         :param locale: Current locale.
@@ -24,9 +24,9 @@ class Text(BaseDataProvider):
     class Meta:
         """Class for metadata."""
 
-        name: Final[str] = "text"
+        name: t.Final[str] = "text"
 
-    def alphabet(self, lower_case: bool = False) -> List[str]:
+    def alphabet(self, lower_case: bool = False) -> t.List[str]:
         """Get an alphabet for current locale.
 
         :param lower_case: Return alphabet in lower case.
@@ -34,7 +34,7 @@ class Text(BaseDataProvider):
         """
         case = "uppercase" if not lower_case else "lowercase"
 
-        alpha: List[str] = self.extract(["alphabet", case])
+        alpha: t.List[str] = self.extract(["alphabet", case])
         return alpha
 
     def level(self) -> str:
@@ -45,7 +45,7 @@ class Text(BaseDataProvider):
         :Example:
             critical.
         """
-        levels: List[str] = self.extract(["level"])
+        levels: t.List[str] = self.extract(["level"])
         return self.random.choice(levels)
 
     def text(self, quantity: int = 5) -> str:
@@ -71,7 +71,7 @@ class Text(BaseDataProvider):
         """
         return self.text(quantity=1)
 
-    def words(self, quantity: int = 5) -> List[str]:
+    def words(self, quantity: int = 5) -> t.List[str]:
         """Generate a list of random words.
 
         :param quantity: Quantity of words. Default is 5.
@@ -101,7 +101,7 @@ class Text(BaseDataProvider):
         :Example:
             Damn.
         """
-        words: List[str] = self.extract(["words", "bad"])
+        words: t.List[str] = self.extract(["words", "bad"])
         return self.random.choice(words)
 
     def quote(self) -> str:
@@ -112,7 +112,7 @@ class Text(BaseDataProvider):
         :Example:
             "Bond... James Bond."
         """
-        quotes: List[str] = self.extract(["quotes"])
+        quotes: t.List[str] = self.extract(["quotes"])
         return self.random.choice(quotes)
 
     def color(self) -> str:
@@ -123,11 +123,11 @@ class Text(BaseDataProvider):
         :Example:
             Red.
         """
-        colors: List[str] = self.extract(["color"])
+        colors: t.List[str] = self.extract(["color"])
         return self.random.choice(colors)
 
     @staticmethod
-    def _hex_to_rgb(color: str) -> Tuple[int, ...]:
+    def _hex_to_rgb(color: str) -> t.Tuple[int, ...]:
         """Convert hex color to RGB format.
 
         :param color: Hex color.
@@ -151,7 +151,7 @@ class Text(BaseDataProvider):
 
         return f"#{self.random.randint(0x000000, 0xFFFFFF):06x}"
 
-    def rgb_color(self, safe: bool = False) -> Tuple[int, ...]:
+    def rgb_color(self, safe: bool = False) -> t.Tuple[int, ...]:
         """Generate a random rgb color tuple.
 
         :param safe: Get safe RGB tuple.
@@ -171,5 +171,5 @@ class Text(BaseDataProvider):
         :Example:
             No
         """
-        answers: List[str] = self.extract(["answers"])
+        answers: t.List[str] = self.extract(["answers"])
         return self.random.choice(answers)

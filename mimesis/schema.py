@@ -2,13 +2,13 @@
 import csv
 import json
 import pickle
+import typing as t
 import warnings
-from typing import Any, Callable, ClassVar, Iterator, List, Optional, Sequence
 
 from mimesis.exceptions import FieldError, SchemaError
 from mimesis.locales import Locale
 from mimesis.providers.generic import Generic
-from mimesis.types import JSON, SchemaType, Seed
+from mimesis.types import JSON, CallableSchema, Key, Seed
 
 __all__ = ["BaseField", "Field", "Schema"]
 
@@ -31,7 +31,7 @@ class BaseField:
         self,
         locale: Locale = Locale.DEFAULT,
         seed: Seed = None,
-        providers: Optional[Sequence[Any]] = None,
+        providers: t.Optional[t.Sequence[t.Any]] = None,
     ) -> None:
         """Initialize field.
 
@@ -47,10 +47,10 @@ class BaseField:
 
     def perform(
         self,
-        name: Optional[str] = None,
-        key: Optional[Callable[[Any], Any]] = None,
-        **kwargs: Any,
-    ) -> Any:
+        name: t.Optional[str] = None,
+        key: Key = None,
+        **kwargs: t.Any,
+    ) -> t.Any:
         """Performs the value of the field by its name.
 
         It takes any string which represents the name of any method of
@@ -77,7 +77,7 @@ class BaseField:
         if name is None:
             raise FieldError()
 
-        def tail_parser(tails: str, obj: Any) -> Any:
+        def tail_parser(tails: str, obj: t.Any) -> t.Any:
             """Return method from end of tail.
 
             :param tails: Tail string
@@ -132,18 +132,18 @@ class Field(BaseField):
         Dogtag_1836
     """
 
-    def __call__(self, *args: Any, **kwargs: Any) -> Any:
+    def __call__(self, *args: t.Any, **kwargs: t.Any) -> t.Any:
         return self.perform(*args, **kwargs)
 
 
 class Schema:
     """Class which return list of filled schemas."""
 
-    _MIN_ITERATIONS_VALUE: ClassVar[int] = 1
+    _MIN_ITERATIONS_VALUE: t.ClassVar[int] = 1
 
     __slots__ = ("_schema",)
 
-    def __init__(self, schema: SchemaType) -> None:
+    def __init__(self, schema: CallableSchema) -> None:
         """Initialize schema.
 
         :param schema: A schema (must be a callable object).
@@ -153,7 +153,7 @@ class Schema:
         else:
             raise SchemaError()
 
-    def to_csv(self, file_path: str, iterations: int = 100, **kwargs: Any) -> None:
+    def to_csv(self, file_path: str, iterations: int = 100, **kwargs: t.Any) -> None:
         """Export a schema as a CSV file.
 
         :param file_path: File path.
@@ -170,7 +170,7 @@ class Schema:
             dict_writer.writeheader()
             dict_writer.writerows(data)
 
-    def to_json(self, file_path: str, iterations: int = 100, **kwargs: Any) -> None:
+    def to_json(self, file_path: str, iterations: int = 100, **kwargs: t.Any) -> None:
         """Export a schema as a JSON file.
 
         :param file_path: File path.
@@ -183,7 +183,7 @@ class Schema:
         with open(file_path, "w") as fp:
             json.dump(data, fp, **kwargs)
 
-    def to_pickle(self, file_path: str, iterations: int = 100, **kwargs: Any) -> None:
+    def to_pickle(self, file_path: str, iterations: int = 100, **kwargs: t.Any) -> None:
         """Export a schema as the pickled representation of the object to the file.
 
         :param file_path: File path.
@@ -196,7 +196,7 @@ class Schema:
         with open(file_path, "wb") as fp:
             pickle.dump(data, fp, **kwargs)
 
-    def create(self, iterations: int = 1) -> List[JSON]:
+    def create(self, iterations: int = 1) -> t.List[JSON]:
         """Creates a list of a fulfilled schemas.
 
         .. note::
@@ -214,7 +214,7 @@ class Schema:
 
         return [self._schema() for _ in range(iterations)]
 
-    def loop(self) -> Iterator[JSON]:
+    def loop(self) -> t.Iterator[JSON]:
         """Fulfills a schema **infinitely** in a lazy way.
 
         This method can be useful when you have some dynamic
@@ -253,7 +253,7 @@ class Schema:
         while True:
             yield self._schema()
 
-    def iterator(self, iterations: int = 1) -> Iterator[JSON]:
+    def iterator(self, iterations: int = 1) -> t.Iterator[JSON]:
         """Fulfills schema in a lazy way.
 
         :param iterations: Number of iterations.

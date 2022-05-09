@@ -1,6 +1,6 @@
 """Custom exceptions which used in Mimesis."""
 
-from typing import Any, Optional, Union
+import typing as t
 
 from mimesis.enums import Locale
 
@@ -8,7 +8,7 @@ from mimesis.enums import Locale
 class LocaleError(ValueError):
     """Raised when a locale isn't supported."""
 
-    def __init__(self, locale: Union[Locale, str]) -> None:
+    def __init__(self, locale: t.Union[Locale, str]) -> None:
         """Initialize attributes for informative output.
 
         :param locale: Locale.
@@ -31,7 +31,7 @@ class NonEnumerableError(TypeError):
 
     message = "You should use one item of: «{}» of the object mimesis.enums.{}"
 
-    def __init__(self, enum_obj: Any) -> None:
+    def __init__(self, enum_obj: t.Any) -> None:
         """Initialize attributes for informative output.
 
         :param enum_obj: Enum object.
@@ -47,7 +47,7 @@ class NonEnumerableError(TypeError):
 
 
 class FieldError(ValueError):
-    def __init__(self, name: Optional[str] = None) -> None:
+    def __init__(self, name: t.Optional[str] = None) -> None:
         """Initialize attributes for more informative output.
 
         :param name: Name of the field..

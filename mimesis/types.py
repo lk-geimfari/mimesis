@@ -13,8 +13,8 @@ If any of the following statements is true, move the type to this file:
 """
 
 import datetime
+import typing as t
 from decimal import Decimal
-from typing import Any, Callable, Dict, List, Set, Tuple, Union
 
 __all__ = [
     "Date",
@@ -25,10 +25,11 @@ __all__ = [
     "Time",
     "Timestamp",
     "Keywords",
-    "SchemaType",
+    "CallableSchema",
+    "Key",
 ]
 
-JSON = Dict[str, Any]
+JSON = t.Dict[str, t.Any]
 
 DateTime = datetime.datetime
 
@@ -36,17 +37,19 @@ Time = datetime.time
 
 Date = datetime.date
 
-Timestamp = Union[str, int]
+Timestamp = t.Union[str, int]
 
-Seed = Union[None, int, float, str, bytes, bytearray]
+Seed = t.Union[None, int, float, str, bytes, bytearray]
 
-Keywords = Union[List[str], Set[str], Tuple[str, ...]]
+Keywords = t.Union[t.List[str], t.Set[str], t.Tuple[str, ...]]
 
-Matrix = Union[
-    List[int],
-    List[float],
-    List[complex],
-    List[Decimal],
+Matrix = t.Union[
+    t.List[int],
+    t.List[float],
+    t.List[complex],
+    t.List[Decimal],
 ]
 
-SchemaType = Callable[[], JSON]
+CallableSchema = t.Callable[[], JSON]
+
+Key = t.Optional[t.Callable[[t.Any], t.Any]]

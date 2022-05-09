@@ -1,7 +1,7 @@
 """Provides all at one."""
 
 import inspect
-from typing import Any, Final, List, Type
+import typing as t
 
 from mimesis.locales import Locale
 from mimesis.providers.address import Address
@@ -72,9 +72,9 @@ class Generic(BaseProvider):
     class Meta:
         """Class for metadata."""
 
-        name: Final[str] = "generic"
+        name: t.Final[str] = "generic"
 
-    def __getattr__(self, attrname: str) -> Any:
+    def __getattr__(self, attrname: str) -> t.Any:
         """Get attribute without underscore.
 
         :param attrname: Attribute name.
@@ -88,7 +88,7 @@ class Generic(BaseProvider):
             )
             return self.__dict__[attrname]
 
-    def __dir__(self) -> List[str]:
+    def __dir__(self) -> t.List[str]:
         """Available data providers.
 
         The list of result will be used in AbstractField to
@@ -125,7 +125,7 @@ class Generic(BaseProvider):
             except AttributeError:
                 continue
 
-    def add_provider(self, cls: Type[BaseProvider], **kwargs: Any) -> None:
+    def add_provider(self, cls: t.Type[BaseProvider], **kwargs: t.Any) -> None:
         """Add a custom provider to Generic() object.
 
         :param cls: Custom provider.
@@ -151,7 +151,7 @@ class Generic(BaseProvider):
         else:
             raise TypeError("The provider must be a class")
 
-    def add_providers(self, *providers: Type[BaseProvider]) -> None:
+    def add_providers(self, *providers: t.Type[BaseProvider]) -> None:
         """Add a lot of custom providers to Generic() object.
 
         :param providers: Custom providers.

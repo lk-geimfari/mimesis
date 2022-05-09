@@ -8,8 +8,8 @@ but frequently used in this project.
 import os
 import random as random_module
 import string
+import typing as t
 import uuid
-from typing import Any, List, Optional
 
 __all__ = ["Random", "get_random_item", "random"]
 
@@ -22,7 +22,7 @@ class Random(random_module.Random):
 
     """
 
-    def randints(self, amount: int = 3, a: int = 1, b: int = 100) -> List[int]:
+    def randints(self, amount: int = 3, a: int = 1, b: int = 100) -> t.List[int]:
         """Generate list of random integers.
 
         :param amount: Amount of elements.
@@ -96,7 +96,7 @@ class Random(random_module.Random):
         """
         return round(a + (b - a) * self.random(), precision)
 
-    def randstr(self, unique: bool = False, length: Optional[int] = None) -> str:
+    def randstr(self, unique: bool = False, length: t.Optional[int] = None) -> str:
         """Generate random string value.
 
         This method can be especially useful when you need to generate
@@ -119,7 +119,7 @@ class Random(random_module.Random):
         return "".join(self.choices(characters, k=length))
 
 
-def get_random_item(enum: Any, rnd: Optional[Random] = None) -> Any:
+def get_random_item(enum: t.Any, rnd: t.Optional[Random] = None) -> t.Any:
     """Get random item of enum object.
 
     :param enum: Enum object.

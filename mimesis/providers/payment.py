@@ -2,7 +2,7 @@
 
 import re
 import string
-from typing import Any, Dict, Final, Optional
+import typing as t
 
 from mimesis.data import CREDIT_CARD_NETWORKS
 from mimesis.enums import CardType, Gender
@@ -19,7 +19,7 @@ __all__ = ["Payment"]
 class Payment(BaseProvider):
     """Class that provides data related to payments."""
 
-    def __init__(self, *args: Any, **kwargs: Any) -> None:
+    def __init__(self, *args: t.Any, **kwargs: t.Any) -> None:
         """Initialize attributes.
 
         :param args: Arguments.
@@ -31,7 +31,7 @@ class Payment(BaseProvider):
     class Meta:
         """Class for metadata."""
 
-        name: Final[str] = "payment"
+        name: t.Final[str] = "payment"
 
     def cid(self) -> str:
         """Generate a random CID.
@@ -93,7 +93,7 @@ class Payment(BaseProvider):
         """
         return self.random.choice(CREDIT_CARD_NETWORKS)
 
-    def credit_card_number(self, card_type: Optional[CardType] = None) -> str:
+    def credit_card_number(self, card_type: t.Optional[CardType] = None) -> str:
         """Generate a random credit card number.
 
         :param card_type: Issuing Network. Default is Visa.
@@ -161,8 +161,8 @@ class Payment(BaseProvider):
 
     def credit_card_owner(
         self,
-        gender: Optional[Gender] = None,
-    ) -> Dict[str, str]:
+        gender: t.Optional[Gender] = None,
+    ) -> t.Dict[str, str]:
         """Generate credit card owner.
 
         :param gender: Gender of credit card owner.

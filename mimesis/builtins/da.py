@@ -1,6 +1,6 @@
 """Specific data provider for Denmark (da)."""
 import operator
-from typing import Final, Tuple
+import typing as t
 
 from mimesis import Datetime
 from mimesis.builtins.base import BaseSpecProvider
@@ -22,7 +22,7 @@ class DenmarkSpecProvider(BaseSpecProvider):
     class Meta:
         """The name of the provider."""
 
-        name: Final[str] = "denmark_provider"
+        name: t.Final[str] = "denmark_provider"
 
     def _calculate_century_selector(self, year: int) -> int:
         if 1858 <= year < 1900:
@@ -71,7 +71,7 @@ class DenmarkSpecProvider(BaseSpecProvider):
             return 0
         return 11 - remainder
 
-    def _generate_serial_checksum(self, cpr_century: str) -> Tuple[str, int]:
+    def _generate_serial_checksum(self, cpr_century: str) -> t.Tuple[str, int]:
         """Generate a serial number and checksum from cpr_century."""
         serial_number = f"{self.random.randint(0, 99):02d}"
 
