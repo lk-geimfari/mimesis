@@ -1,6 +1,11 @@
 Version 5.4.0
 -------------
 
+**Added**:
+
+- Added items ``Algorithm.BLAKE2B`` and ``Algorithm.BLAKE2S``.
+
+
 **Removed**:
 
 - Removed deprecated method ``image_placeholder()`` from ``Internet()``

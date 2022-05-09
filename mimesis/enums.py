@@ -116,6 +116,8 @@ class Algorithm(Enum):
     SHA256 = "sha256"
     SHA384 = "sha384"
     SHA512 = "sha512"
+    BLAKE2B = "blake2b"
+    BLAKE2S = "blake2s"
 
 
 class TLDType(Enum):
