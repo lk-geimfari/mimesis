@@ -163,6 +163,9 @@ def test_schema_to_csv(schema, iterations):
         assert len(list(dict_reader)) == iterations
         assert isinstance(dict_reader, csv.DictReader)
 
+        for row in dict_reader:
+            assert "id" in row and "timestamp" in row
+
 
 @pytest.mark.parametrize(
     "iterations",
@@ -177,6 +180,7 @@ def test_schema_to_json(schema, iterations):
 
         data = json.load(temp_file)
         assert len(list(data)) == iterations
+        assert "id" in data[0] and "id" in data[-1]
 
 
 @pytest.mark.parametrize(
@@ -191,5 +195,6 @@ def test_schema_to_pickle(schema, iterations):
         schema.to_pickle(temp_file.name, iterations)
 
         data = pickle.load(temp_file)
+        assert "id" in data[0] and "id" in data[-1]
         assert isinstance(data, list)
         assert len(data) == iterations

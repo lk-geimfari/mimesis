@@ -165,7 +165,7 @@ class Schema:
         data = self.create(iterations)
         fieldnames = list(data[0])
 
-        with open(file_path, "w", newline="") as fp:
+        with open(file_path, "w", encoding="utf-8", newline="") as fp:
             dict_writer = csv.DictWriter(fp, fieldnames, **kwargs)
             dict_writer.writeheader()
             dict_writer.writerows(data)
@@ -180,7 +180,7 @@ class Schema:
         *New in version 5.3.0*
         """
         data = self.create(iterations)
-        with open(file_path, "w") as fp:
+        with open(file_path, "w", encoding="utf-8") as fp:
             json.dump(data, fp, **kwargs)
 
     def to_pickle(self, file_path: str, iterations: int = 100, **kwargs: t.Any) -> None:
