@@ -1,6 +1,10 @@
 Version 5.4.0
 -------------
 
+**Fixed**:
+
+- Fixed TypeError: 'Datetime' object is not callable error on using ``Field`` (See `#1139 <https://github.com/lk-geimfari/mimesis/issues/1139>`_).
+
 **Added**:
 
 - Added items ``Algorithm.BLAKE2B`` and ``Algorithm.BLAKE2S``.
