@@ -220,26 +220,23 @@ class Schema:
         This method can be useful when you have some dynamic
         conditions in depend on which the generation must be interrupted.
 
+        Since data `mimesis` provides are limited, frequent calls of
+        this method can cause data duplication.
+
+        Before using this method, ask yourself: **Do I really need this**?
+        In most cases, the answer is: Nah, :meth:`iterator` is enough.
+
+        **Do not use** this method without **interrupt conditions**, otherwise,
+        you're risking running out of memory.
+
         If you're accepting all risks below and want to suppress
         the warnings then use :py:class:`warnings.catch_warnings`
 
-        .. note::
-            Since data `mimesis` provides are limited, frequent calls of
-            this method can cause data duplication.
-
-        .. note::
-            Before using this method, ask yourself: **Do I really need this**?
-
-            In most cases, the answer is: Nah, :meth:`iterator` is enough.
-
         .. warning::
-            Do not use this method without interrupt conditions, otherwise,
-            you're risking running out of memory.
 
-        .. warning::
-            **Never** (seriously) call `list()`, `tuple()` or any other callable which tries to
-            evaluate the whole lazy object on this method — infinite called infinite
-            for a reason.
+            **Never** (seriously) call :py:class:`list`, :py:class:`tuple`, :py:class:`set`
+            or any other callable which tries to evaluate the whole lazy object on this
+            method — **infinite** called infinite for a reason.
 
         :return: An infinite iterator with fulfilled schemas.
         """
