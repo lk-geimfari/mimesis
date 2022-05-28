@@ -3,7 +3,7 @@ Mimesis: The Fake Data Generator
 
 |
 
-.. image:: https://raw.githubusercontent.com/lk-geimfari/mimesis/master/.github/images/octopus-no-retina-sm.png
+.. image:: https://raw.githubusercontent.com/lk-geimfari/mimesis/master/.github/images/logo-white-bg.png
      :target: https://github.com/lk-geimfari/mimesis
 
 |
