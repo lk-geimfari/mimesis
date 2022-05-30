@@ -28,39 +28,39 @@ from mimesis.types import Seed
 
 __all__ = ["Generic"]
 
+DEFAULT_PROVIDERS = (
+    Address,
+    BinaryFile,
+    Finance,
+    Choice,
+    Code,
+    Choice,
+    Datetime,
+    Development,
+    File,
+    Food,
+    Hardware,
+    Internet,
+    Numeric,
+    Path,
+    Payment,
+    Person,
+    Science,
+    Text,
+    Transport,
+    Cryptographic,
+)
+
 
 class Generic(BaseProvider):
     """Class which contain all providers at one."""
-
-    _DEFAULT_PROVIDERS = (
-        Address,
-        BinaryFile,
-        Finance,
-        Choice,
-        Code,
-        Choice,
-        Datetime,
-        Development,
-        File,
-        Food,
-        Hardware,
-        Internet,
-        Numeric,
-        Path,
-        Payment,
-        Person,
-        Science,
-        Text,
-        Transport,
-        Cryptographic,
-    )
 
     def __init__(self, locale: Locale = Locale.DEFAULT, seed: Seed = None) -> None:
         """Initialize attributes lazily."""
         super().__init__(seed=seed)
         self.locale = locale
 
-        for provider in self._DEFAULT_PROVIDERS:
+        for provider in DEFAULT_PROVIDERS:
             name = getattr(provider.Meta, "name")  # type: ignore
 
             # Check if a provider is locale-dependent.
@@ -99,13 +99,13 @@ class Generic(BaseProvider):
         attributes = []
         exclude = BaseProvider().__dict__.keys()
 
-        for a in self.__dict__:
-            if a not in exclude:
-                if a.startswith("_"):
-                    attribute = a.replace("_", "", 1)
+        for attr in self.__dict__:
+            if attr not in exclude:
+                if attr.startswith("_"):
+                    attribute = attr.replace("_", "", 1)
                     attributes.append(attribute)
                 else:
-                    attributes.append(a)
+                    attributes.append(attr)
         return attributes
 
     def reseed(self, seed: Seed = None) -> None:
