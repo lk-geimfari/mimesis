@@ -17,7 +17,7 @@ class Numeric(BaseProvider):
     def __init__(self, *args: t.Any, **kwargs: t.Any) -> None:
         super().__init__(*args, **kwargs)
         self.__increment_dict: t.DefaultDict[str, int] = defaultdict(int)
-        self.__default_accumulator_value: t.Final = "default"
+        self.__default_accumulator_value: t.Final[str] = "default"
 
     class Meta:
         """Class for metadata."""
