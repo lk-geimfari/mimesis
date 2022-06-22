@@ -90,6 +90,7 @@ Patches and Suggestions
 -  Oleg Höfling `(hoefling)`_
 -  Nick Pope `(ngnpope)`_
 -  Arul Prabakaran `(arulprabakaran)`_
+-  Florian Kroiß `(Wooza)`_
 
 
 .. _(lk-geimfari): https://github.com/lk-geimfari
@@ -158,3 +159,4 @@ Patches and Suggestions
 .. _(hoefling): https://github.com/hoefling
 .. _(ngnpope): https://github.com/ngnpope
 .. _(arulprabakaran): https://github.com/arulprabakaran
+.. _(Wooza): https://github.com/Wooza

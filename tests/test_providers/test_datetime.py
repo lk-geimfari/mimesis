@@ -45,6 +45,11 @@ class TestDatetime:
         with pytest.raises(ValueError):
             _datetime.bulk_create_datetimes(None, None)
 
+        with pytest.raises(ValueError):
+            _datetime.bulk_create_datetimes(
+                date_start, date_start + datetime.timedelta(days=1)
+            )
+
     def test_year(self, _datetime):
         result = _datetime.year(minimum=2000, maximum=_datetime.CURRENT_YEAR)
         assert result >= 2000
