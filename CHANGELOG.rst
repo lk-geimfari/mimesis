@@ -1,3 +1,11 @@
+Version 5.5.0
+-------------
+
+**Fixed**:
+
+- Fixed infinite loop on using ``Datetime.bulk_create_datetimes()``.
+- Fixed some typing issues
+
 Version 5.4.0
 -------------
 
