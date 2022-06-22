@@ -55,8 +55,9 @@ class Datetime(BaseDataProvider):
         :param date_end: End of the range.
         :param kwargs: Keyword arguments for :py:class:`datetime.timedelta`
         :return: List of datetime objects
-        :raises: ValueError: When ``date_start``/``date_end`` not passed and
-            when ``date_start`` larger than ``date_end``.
+        :raises: ValueError: When ``date_start``/``date_end`` not passed,
+            when ``date_start`` larger than ``date_end`` or when the given
+            keywords for `datetime.timedelta` represent a non-positive timedelta.
         """
         dt_objects = []
 
@@ -65,6 +66,9 @@ class Datetime(BaseDataProvider):
 
         if date_end < date_start:
             raise ValueError("date_start can not be larger than date_end")
+
+        if timedelta(**kwargs) <= timedelta():
+            raise ValueError("timedelta must be positive")
 
         while date_start <= date_end:
             date_start += timedelta(**kwargs)
