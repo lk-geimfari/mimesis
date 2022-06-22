@@ -37,8 +37,6 @@ jobs:
         run: poetry run mypy mimesis/
       - name: Check code style
         run: poetry run black mimesis tests --check
-      - name: Check packages friendliness
-        run: poetry run pyroma -d . || echo -e "ignore result, since pyroma seems to have no support for PEP 518 right now"
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v1
         with:
