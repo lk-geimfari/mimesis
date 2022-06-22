@@ -29,8 +29,8 @@ __all__ = ["Internet"]
 class Internet(BaseProvider):
     """Class for generating data related to the internet."""
 
-    _MAX_IPV4: t.Final[int] = (2 ** 32) - 1
-    _MAX_IPV6: t.Final[int] = (2 ** 128) - 1
+    _MAX_IPV4: t.Final[int] = (2**32) - 1
+    _MAX_IPV6: t.Final[int] = (2**128) - 1
 
     def __init__(self, *args: t.Any, **kwargs: t.Any) -> None:
         """Initialize attributes.
