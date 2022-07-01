@@ -29,15 +29,6 @@ class File(BaseProvider):
 
         name: t.Final[str] = "file"
 
-    def __sub(self, string: str = "") -> str:
-        """Replace spaces in string.
-
-        :param string: String.
-        :return: String without spaces.
-        """
-        replacer = self.random.choice(["_", "-"])
-        return re.sub(r"\s+", replacer, string.strip())
-
     def extension(self, file_type: t.Optional[FileType] = None) -> str:
         """Get a random file extension from list.
 
@@ -84,6 +75,8 @@ class File(BaseProvider):
         :Example:
             legislative.txt
         """
-        name = self.__sub(self._text.word())
+        word = self._text.word().strip()
+        replacer = self.random.choice(["_", "-"])
+        name = re.sub(r"\s+", replacer, word)
         ext = self.extension(file_type)
         return f"{name}{ext}"

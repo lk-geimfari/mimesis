@@ -286,7 +286,7 @@ class Internet(BaseProvider):
         :return: URI.
         """
         directory = (
-            self._datetime.date(start=2010, end=self._datetime.CURRENT_YEAR)
+            self._datetime.date(start=2010, end=self._datetime._CURRENT_YEAR)
             .strftime("%Y-%m-%d")
             .replace("-", "/")
         )

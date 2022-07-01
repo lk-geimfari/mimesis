@@ -17,7 +17,7 @@ class Datetime(BaseDataProvider):
     """Class for generating data related to the date and time."""
 
     # See: https://git.io/Jf15A
-    CURRENT_YEAR = datetime.now().year
+    _CURRENT_YEAR = datetime.now().year
 
     def __init__(self, *args: t.Any, **kwargs: t.Any) -> None:
         """Initialize attributes."""
@@ -83,7 +83,7 @@ class Datetime(BaseDataProvider):
 
         return dt_objects
 
-    def week_date(self, start: int = 2017, end: int = CURRENT_YEAR) -> str:
+    def week_date(self, start: int = 2017, end: int = _CURRENT_YEAR) -> str:
         """Get week number with year.
 
         :param start: From start.
@@ -114,7 +114,7 @@ class Datetime(BaseDataProvider):
         months: t.List[str] = self.extract(["month", key])
         return self.random.choice(months)
 
-    def year(self, minimum: int = 1990, maximum: int = CURRENT_YEAR) -> int:
+    def year(self, minimum: int = 1990, maximum: int = _CURRENT_YEAR) -> int:
         """Generate a random year.
 
         :param minimum: Minimum value.
@@ -138,7 +138,7 @@ class Datetime(BaseDataProvider):
         periodicity: t.List[str] = self.extract(["periodicity"])
         return self.random.choice(periodicity)
 
-    def date(self, start: int = 2000, end: int = CURRENT_YEAR) -> Date:
+    def date(self, start: int = 2000, end: int = _CURRENT_YEAR) -> Date:
         """Generate random date object.
 
         :param start: Minimum value of year.
@@ -220,7 +220,7 @@ class Datetime(BaseDataProvider):
     def datetime(
         self,
         start: int = 2000,
-        end: int = CURRENT_YEAR,
+        end: int = _CURRENT_YEAR,
         timezone: t.Optional[str] = None,
     ) -> DateTime:
         """Generate random datetime.

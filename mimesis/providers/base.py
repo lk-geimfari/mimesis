@@ -70,7 +70,7 @@ class BaseProvider:
 class BaseDataProvider(BaseProvider):
     """This is a base class for all data providers."""
 
-    _LOCALE_SEPARATOR = "-"
+    _LOCALE_SEPARATOR: t.Final[str] = "-"
 
     def __init__(self, locale: Locale = Locale.DEFAULT, seed: Seed = None) -> None:
         """Initialize attributes for data providers.
@@ -80,7 +80,7 @@ class BaseDataProvider(BaseProvider):
         """
         super().__init__(seed=seed)
         self._data: JSON = {}
-        self._datafile = ""
+        self._datafile: str = ""
         self._setup_locale(locale)
         self._data_dir = Path(__file__).parent.parent.joinpath("data")
 
