@@ -65,6 +65,7 @@ types-pytz = "^2022.1.0"
 taskipy = "^1.10.1"
 validators = "^0.20.0"
 pytest-repeat = "^0.9.1"
+memory-profiler = "^0.60.0"
 
 [tool.pytest.ini_options]
 addopts = "--isort"

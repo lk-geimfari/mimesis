@@ -231,6 +231,17 @@ colors = ["colorama (>=0.4.3,<0.5.0)"]
 plugins = ["setuptools"]
 
 [[package]]
+name = "memory-profiler"
+version = "0.60.0"
+description = "A module for monitoring memory usage of a python program"
+category = "dev"
+optional = false
+python-versions = ">=3.4"
+
+[package.dependencies]
+psutil = "*"
+
+[[package]]
 name = "mslex"
 version = "0.3.0"
 description = "shlex for windows"
@@ -587,7 +598,7 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "779aa42af07f3dd3c18520f4932537fdb6872636c0c2efd1567edbb99f482534"
+content-hash = "553591471f47dd610e8642cb015827942296059dc754e79737e0b954c3fb8b71"
 
 [metadata.files]
 atomicwrites = [
@@ -725,6 +736,9 @@ iniconfig = [
 isort = [
     {file = "isort-5.10.1-py3-none-any.whl", hash = "sha256:6f62d78e2f89b4500b080fe3a81690850cd254227f27f75c3a0c491a1f351ba7"},
     {file = "isort-5.10.1.tar.gz", hash = "sha256:e8443a5e7a020e9d7f97f1d7d9cd17c88bcb3bc7e218bf9cf5095fe550be2951"},
+]
+memory-profiler = [
+    {file = "memory_profiler-0.60.0.tar.gz", hash = "sha256:6a12869511d6cebcb29b71ba26985675a58e16e06b3c523b49f67c5497a33d1c"},
 ]
 mslex = [
     {file = "mslex-0.3.0-py2.py3-none-any.whl", hash = "sha256:380cb14abf8fabf40e56df5c8b21a6d533dc5cbdcfe42406bbf08dda8f42e42a"},
