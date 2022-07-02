@@ -102,11 +102,8 @@ class BaseDataProvider(BaseProvider):
         """
 
         if not keys:
-            raise ValueError("List of keys cannot be empty.")
-
+            raise ValueError("The list of keys cannot be empty.")
         try:
-            if len(keys) == 1:
-                return self._data[keys[0]]
             return reduce(operator.getitem, keys, self._data)
         except (TypeError, KeyError):
             return default
