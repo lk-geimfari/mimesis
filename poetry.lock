@@ -414,7 +414,7 @@ pytest = ">=5.0"
 
 [[package]]
 name = "pytest-mock"
-version = "3.8.1"
+version = "3.8.2"
 description = "Thin-wrapper around the mock package for easier use with pytest"
 category = "dev"
 optional = false
@@ -842,8 +842,8 @@ pytest-isort = [
     {file = "pytest_isort-3.0.0-py3-none-any.whl", hash = "sha256:2d96a25a135d6fd084ac36878e7d54f26f27c6987c2c65f0d12809bffade9cb9"},
 ]
 pytest-mock = [
-    {file = "pytest-mock-3.8.1.tar.gz", hash = "sha256:2c6d756d5d3bf98e2e80797a959ca7f81f479e7d1f5f571611b0fdd6d1745240"},
-    {file = "pytest_mock-3.8.1-py3-none-any.whl", hash = "sha256:d989f11ca4a84479e288b0cd1e6769d6ad0d3d7743dcc75e460d1416a5f2135a"},
+    {file = "pytest-mock-3.8.2.tar.gz", hash = "sha256:77f03f4554392558700295e05aed0b1096a20d4a60a4f3ddcde58b0c31c8fca2"},
+    {file = "pytest_mock-3.8.2-py3-none-any.whl", hash = "sha256:8a9e226d6c0ef09fcf20c94eb3405c388af438a90f3e39687f84166da82d5948"},
 ]
 pytest-randomly = [
     {file = "pytest-randomly-3.12.0.tar.gz", hash = "sha256:d60c2db71ac319aee0fc6c4110a7597d611a8b94a5590918bfa8583f00caccb2"},
