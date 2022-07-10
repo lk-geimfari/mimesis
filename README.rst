@@ -39,7 +39,7 @@ Description
      :target: https://pypi.org/project/mimesis/
      :alt: Python version
 
-Mimesis (/mɪˈmiːsɪs, Ancient Greek: μίμησις, mīmēsis) is a high-performance fake data generator for Python,
+Mimesis (/mɪˈmiːsɪs) is a high-performance fake data generator for Python,
 which provides data for a variety of purposes in a variety of languages. The fake data could be used to populate
 a testing database, create fake API endpoints, create JSON and XML files of arbitrary structure, anonymize data taken
 from production and etc.
