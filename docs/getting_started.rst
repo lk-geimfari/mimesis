@@ -357,7 +357,7 @@ specific data. This can be done like this:
 
 
     generic = Generic(locale=Locale.DEFAULT)
-    generic.add_provider(SomeProvider)
+    generic.add_provider(SomeProvider) # or generic += SomeProvider
     generic.add_provider(Another, message="Bye!")
 
     generic.some_provider.hello()

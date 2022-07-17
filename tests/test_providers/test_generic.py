@@ -76,10 +76,18 @@ class TestGeneric:
             def empty():
                 ...
 
+        class Provider5(BaseProvider):
+            @staticmethod
+            def five():
+                return 5
+
         generic.add_providers(Provider1, Provider2, Provider3)
         assert generic.provider1.one() == 1
         assert generic.custom_provider.two() == 2
         assert generic.provider3.three() == 3
+
+        generic += Provider5
+        assert generic.provider5.five() == 5
 
         with pytest.raises(TypeError):
             generic.add_providers(Provider4)

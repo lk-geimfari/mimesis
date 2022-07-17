@@ -160,6 +160,17 @@ class Generic(BaseProvider):
         for provider in providers:
             self.add_provider(provider)
 
+    def __iadd__(self, other: t.Type['BaseProvider']) -> 'Generic':
+        """Add a custom provider to Generic() object.
+
+        :param other: Custom provider.
+        :return: None
+        :raises TypeError: if cls is not class or is not a subclass
+            of BaseProvider.
+        """
+        self.add_provider(other)
+        return self
+
     def __str__(self) -> str:
         """Human-readable representation of locale."""
         return f"{self.__class__.__name__} <{self.locale}>"
