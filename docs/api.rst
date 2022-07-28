@@ -1,7 +1,7 @@
 .. _api-reference:
 
-API Reference
-=============
+API
+===
 
 This part of the documentation covers all the public interfaces of *Mimesis*.
 
@@ -269,6 +269,7 @@ Schema
 
 .. autoclass:: mimesis.schema.Schema
    :members:
+   :special-members: __init__, __mul__, __rmul__
 
 Enums
 =====

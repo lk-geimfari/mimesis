@@ -414,6 +414,9 @@ chosen the first provider which has a method *method_name*) and the
 describe the schema in lambda function and pass it to
 the object :class:`~mimesis.schema.Schema` and call method :meth:`~mimesis.schema.Schema.create`.
 
+Since **v5.6.0** you can use multiplication, instead of the explicit :meth:`~mimesis.schema.Schema.create`.
+Please, see :meth:`~mimesis.schema.Schema.__mul__` of :class:`~mimesis.schema.Schema` for more details.
+
 Optionally, you can apply a *key function* to result returned by the
 method, to do it, just pass the parameter `key` with a callable object
 which returns final result.
@@ -440,6 +443,8 @@ Example of usage:
         },
     })
     schema.create(iterations=3)
+    # Since v5.6.0 you can do the same thing using multiplication:
+    schema * 3
 
 
 Output:
