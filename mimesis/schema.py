@@ -28,10 +28,10 @@ class BaseField:
         base = True
 
     def __init__(
-            self,
-            locale: Locale = Locale.DEFAULT,
-            seed: Seed = None,
-            providers: t.Optional[t.Sequence[t.Any]] = None,
+        self,
+        locale: Locale = Locale.DEFAULT,
+        seed: Seed = None,
+        providers: t.Optional[t.Sequence[t.Any]] = None,
     ) -> None:
         """Initialize field.
 
@@ -46,10 +46,10 @@ class BaseField:
         self._table = {}  # type: ignore
 
     def perform(
-            self,
-            name: t.Optional[str] = None,
-            key: Key = None,
-            **kwargs: t.Any,
+        self,
+        name: t.Optional[str] = None,
+        key: Key = None,
+        **kwargs: t.Any,
     ) -> t.Any:
         """Performs the value of the field by its name.
 

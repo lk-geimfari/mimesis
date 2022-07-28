@@ -123,13 +123,13 @@ def test_schema_multiplication(schema, count):
 
 def test_schema_multiplication_order(schema):
     result = schema * 1 * 10
-    assert result[0]['id'] == result[-1]['id']
+    assert result[0]["id"] == result[-1]["id"]
     result = schema * (1 * 10)
-    assert result[0]['id'] != result[-1]['id']
+    assert result[0]["id"] != result[-1]["id"]
     result = 1 * schema * 10
-    assert result[0]['id'] == result[-1]['id']
+    assert result[0]["id"] == result[-1]["id"]
     result = 1 * (schema * 10)
-    assert result[0]['id'] != result[-1]['id']
+    assert result[0]["id"] != result[-1]["id"]
 
 
 def test_schema_zero_multiplication(schema):
