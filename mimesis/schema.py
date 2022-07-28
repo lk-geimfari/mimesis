@@ -153,6 +153,68 @@ class Schema:
         else:
             raise SchemaError()
 
+    def __mul__(self, other: int) -> t.List[JSON]:
+        """Multiplies the schema by the number of iterations.
+
+        Schema multiplication is not lazy, so it will be performed immediately (in fact,
+        you're using :meth:`~mimesis.schema.Schema.create` under the hood).
+
+        .. warning::
+
+            Multiplying the large and nested schema with a large number is obviously
+            a `stupid`_ idea, so **be reasonable** on choosing a multiplier.
+
+            .. _stupid: https://dictionary.cambridge.org/dictionary/english/stupid
+
+        Usage:
+
+        .. code-block:: python
+
+            schema = Schema(lambda: {
+                'email': _('username'),
+                'token': _('token_hex', key=lambda x: x[:8])
+            })
+            print(schema * 2)
+            print(2 * schema)
+
+        .. note::
+
+            Keep in mind the priority and order of multipliers.
+
+            Instead of doing this:
+
+            >>> schema * 2 * 10
+
+            Where you evaluate the schema 2 times and then multiply the resulting list 10 times, you should do this:
+
+            >>> schema * (2 * 10) # Evaluates the schema 20 times.
+
+            In other words, the first multiplier evaluetes the schema:
+
+            >>> 1 * schema * 5
+
+            The result will be:
+
+            .. code-block:: json
+
+                [
+                    {"email": "efforts1859@test.com", "token": "f4a29754"},
+                    {"email": "efforts1859@test.com", "token": "f4a29754"},
+                    {"email": "efforts1859@test.com", "token": "f4a29754"},
+                    {"email": "efforts1859@test.com", "token": "f4a29754"},
+                    {"email": "efforts1859@test.com", "token": "f4a29754"},
+                ]
+
+            Because schema is evaluated first (`1 * schema`), and then the second multiplier is
+            applied on the result of the first expression since.
+
+        :param other: The multiplier.
+        """
+        return self.create(other)
+
+    def __rmul__(self, other: int) -> t.List[JSON]:
+        return self.__mul__(other)
+
     def to_csv(self, file_path: str, iterations: int = 100, **kwargs: t.Any) -> None:
         """Export a schema as a CSV file.
 

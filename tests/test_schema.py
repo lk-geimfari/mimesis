@@ -108,6 +108,38 @@ def test_choice_field(field):
     assert len(result) == 2
 
 
+@pytest.mark.parametrize(
+    "count",
+    [
+        8,
+        32,
+    ],
+)
+def test_schema_multiplication(schema, count):
+    result = 1 * (schema * count)
+    assert len(result) == count
+    assert result[0] != result[-1]
+
+
+def test_schema_multiplication_order(schema):
+    result = schema * 1 * 10
+    assert result[0]["id"] == result[-1]["id"]
+    result = schema * (1 * 10)
+    assert result[0]["id"] != result[-1]["id"]
+    result = 1 * schema * 10
+    assert result[0]["id"] == result[-1]["id"]
+    result = 1 * (schema * 10)
+    assert result[0]["id"] != result[-1]["id"]
+
+
+def test_schema_zero_multiplication(schema):
+    with pytest.raises(ValueError):
+        schema * 0
+
+    with pytest.raises(ValueError):
+        0 * schema
+
+
 def test_schema_create(schema):
     result = schema.create(5)
 

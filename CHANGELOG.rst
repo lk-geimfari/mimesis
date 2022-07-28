@@ -1,3 +1,11 @@
+Version 5.6.0
+
+*Work is still in progresss*
+
+**Added**:
+
+- Multiplication support for schemas. Now you can use `*` on the schema to specify the number of iterations. See docs for more information.
+
 Version 5.5.0
 -------------
 
