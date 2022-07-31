@@ -2,8 +2,9 @@
 
 import typing as t
 
-from mimesis.data import LICENSES, OS, PROGRAMMING_LANGS
+from mimesis.data import LICENSES, OS, PROGRAMMING_LANGS, PROJECT_NAMES
 from mimesis.providers.base import BaseProvider
+from mimesis.providers.internet import Internet
 
 __all__ = ["Development"]
 
@@ -11,10 +12,28 @@ __all__ = ["Development"]
 class Development(BaseProvider):
     """Class for getting fake data for Developers."""
 
+    def __init__(self, *args: t.Any, **kwargs: t.Any) -> None:
+        super().__init__(*args, **kwargs)
+        self._internet = Internet(*args, **kwargs)
+
     class Meta:
         """Class for metadata."""
 
         name: t.Final[str] = "development"
+
+    def postgres_dsn(self) -> str:
+        """Get a random PostgreSQL DSN.
+
+        :Example:
+            postgres://user:password@host:port
+
+        :return: DSN.
+        """
+        scheme_designator = self.random.choice(["postgres://", "postgresql://"])
+        hostname = self._internet.hostname()
+        password = self.random.randstr(length=8)
+        username = self.random.choice(PROJECT_NAMES)
+        return f"{scheme_designator}{username}:{password}@{hostname}:5432"
 
     def software_license(self) -> str:
         """Get a random software license.

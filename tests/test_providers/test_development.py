@@ -59,6 +59,10 @@ class TestDevelopment:
         result = dev.boolean()
         assert result or (not result)
 
+    def test_postgres_dsn(self, dev):
+        result = dev.postgres_dsn()
+        assert result.startswith("postgres://") or result.startswith("postgresql://")
+
 
 class TestSeededDevelopment:
     @pytest.fixture
@@ -86,3 +90,6 @@ class TestSeededDevelopment:
 
     def test_boolean(self, dv1, dv2):
         assert dv1.boolean() == dv2.boolean()
+
+    def test_postgres_dsn(self, dv1, dv2):
+        assert dv1.postgres_dsn() == dv2.postgres_dsn()
