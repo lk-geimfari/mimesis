@@ -475,7 +475,7 @@ Output:
       {
         "pk": 1,
         "uid": "c1b2fda1-762b-4c0b-aef7-e995e19758b6",
-        "name": "lesbian",
+        "name": "brother",
         "version": "3.0.6-alpha.9",
         "timestamp": "2016-12-07T13:26:54Z",
         "owner": {
