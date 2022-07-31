@@ -140,7 +140,7 @@ class Generic(BaseProvider):
                     "subclass of mimesis.providers.BaseProvider"
                 )
             try:
-                name = cls.Meta.name  # type: ignore
+                name = cls.Meta.name
             except AttributeError:
                 name = cls.__name__.lower()
 

@@ -263,13 +263,14 @@ If you want to use the same seed for all your data providers, then using :class:
 Built-in Providers
 ------------------
 
-Most countries, where only one language is official, have data typical
+Most countries, where only one language is official, have data that is typical
 only for these particular countries. For example, «CPF» for Brazil
-(**pt-br**), «SSN» for USA (**en**). This kind of data can cause
-discomfort and meddle with the order (or at least annoy) by being
-present in all the objects regardless of the chosen language standard.
-You can see that for yourselves by looking at the example (the code
-won’t run):
+(**pt-br**), «SSN» for USA (**en**).
+
+This kind of data can be annoying when they are present in all the objects regardless of the
+chosen language standard.
+
+You can see that for yourselves by looking at the example (the code won’t run):
 
 .. code:: python
 
@@ -280,12 +281,10 @@ won’t run):
     person.ssn()
     person.cpf()
 
-We bet everyone would agree that this does not look too good.
-Perfectionists, as we are, have taken care of this in a way that some
-specific regional provider would not bother other providers for other
-regions. For this reason, class providers with locally-specific data are
-separated into a special sub-package (**mimesis.builtins**) for keeping
-a common class structure for all languages and their objects.
+Perfectionists, as we are, have taken care of this in a way that some specific regional providers would
+not bother other providers for other regions. For this reason, class providers with locally-specific data are
+separated into a special sub-package (**mimesis.builtins**) for keeping a common class structure for
+all languages and their objects.
 
 Here’s how it works:
 

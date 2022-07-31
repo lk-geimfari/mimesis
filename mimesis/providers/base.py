@@ -19,6 +19,9 @@ __all__ = ["BaseDataProvider", "BaseProvider"]
 class BaseProvider:
     """This is a base class for all providers."""
 
+    class Meta:
+        name: str
+
     def __init__(self, *, seed: Seed = None, **kwargs: t.Any) -> None:
         """Initialize attributes.
 
