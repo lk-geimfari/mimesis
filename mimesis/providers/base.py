@@ -105,7 +105,7 @@ class BaseDataProvider(BaseProvider):
         """
 
         if not keys:
-            raise ValueError("The list of keys cannot be empty.")
+            raise ValueError("The list of keys to extract cannot be empty.")
         try:
             return reduce(operator.getitem, keys, self._data)
         except (TypeError, KeyError):
