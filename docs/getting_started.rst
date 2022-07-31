@@ -240,7 +240,7 @@ to data provider:
 
 
 
-If you want to use the same seed for all your data providers, then a better option is to use :class:`~mimesis.Generic()`, like this:
+If you want to use the same seed for all your data providers, then using :class:`~mimesis.Generic()` is your option:
 
 .. code-block:: python
 
