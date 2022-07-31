@@ -198,7 +198,7 @@ See :ref:`api-reference` for more info.
 Generic Provider
 ----------------
 
-When you only need to generate data for a single locale, use the :class:`~mimesis.Generic` provider,
+When you only need to generate data for a single locale, use the :class:`~mimesis.Generic()` provider,
 and you can access all Mimesis providers from one object.
 
 .. code-block:: python
@@ -237,6 +237,26 @@ to data provider:
     person = Person(locale=Locale.TR, seed=0xFF)
     person.full_name()
     # Output: 'Gizem Tekand'
+
+
+
+If you want to use the same seed for all your data providers, then a better option is to use :class:`~mimesis.providers.Generic()`, like this:
+
+.. code-block:: python
+
+    from mimesis import Generic
+    from mimesis.locales import Locale
+
+    generic = Generic(Locale.EN, seed='Wow. Much seed. Much random.')
+
+    generic.person.name()
+    # Output: 'Donn'
+    generic.datetime.date()
+    # Output: '2021-09-04'
+    generic.text.word()
+    # Output: 'platform'
+
+
 
 
 
