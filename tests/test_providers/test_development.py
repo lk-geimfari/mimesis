@@ -2,6 +2,7 @@ import re
 
 import pytest
 from mimesis import Development, data
+from mimesis.enums import TLDType
 
 from . import patterns
 
@@ -59,8 +60,16 @@ class TestDevelopment:
         result = dev.boolean()
         assert result or (not result)
 
-    def test_postgres_dsn(self, dev):
-        result = dev.postgres_dsn()
+    @pytest.mark.parametrize(
+        "tld_type, subdomains, localhost, credentials",
+        [
+            (TLDType.CCTLD, ["db"], False, True),
+            (TLDType.CCTLD, ["db"], True, False),
+            (TLDType.CCTLD, [], True, False),
+        ],
+    )
+    def test_postgres_dsn(self, dev, tld_type, subdomains, localhost, credentials):
+        result = dev.postgres_dsn(tld_type, subdomains, localhost, credentials)
         assert result.startswith("postgres://") or result.startswith("postgresql://")
 
 
