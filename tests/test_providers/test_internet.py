@@ -82,6 +82,7 @@ class TestInternet:
         uri = net.uri()
         assert uri.split(":")[0].strip() == "https"
 
+    @pytest.mark.repeat(10)
     @pytest.mark.parametrize(
         "scheme, port_range, tld_type, subdomains, query_params_count",
         [
@@ -279,6 +280,9 @@ class TestInternet:
         with pytest.raises(NonEnumerableError):
             net.port("nil")
 
+    def test_public_dns(self, net):
+        assert net.public_dns() in data.PUBLIC_DNS
+
 
 class TestSeededInternet:
     @pytest.fixture
@@ -366,3 +370,6 @@ class TestSeededInternet:
         assert i1.port(port_range=PortRange.REGISTERED) == i2.port(
             port_range=PortRange.REGISTERED
         )
+
+    def test_public_dns(self, i1, i2):
+        assert i1.public_dns() == i2.public_dns()

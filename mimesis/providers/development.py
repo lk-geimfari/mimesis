@@ -3,7 +3,7 @@
 import typing as t
 
 from mimesis.data import LICENSES, OS, PROGRAMMING_LANGS, PROJECT_NAMES
-from mimesis.enums import TLDType
+from mimesis.enums import DSNType, TLDType
 from mimesis.providers.base import BaseProvider
 from mimesis.providers.internet import Internet
 
@@ -22,40 +22,15 @@ class Development(BaseProvider):
 
         name: t.Final[str] = "development"
 
-    def postgres_dsn(
-        self,
-        tld_type: t.Optional[TLDType] = None,
-        subdomains: t.Optional[t.List[str]] = None,
-        localhost: bool = False,
-        credentials: bool = False,
-    ) -> str:
-        """Get a random PostgreSQL DSN.
+    def dsn(self, dsn_type: t.Optional[DSNType] = None, **kwargs: t.Any) -> str:
+        """Generates a random DSN (Data Source Name).
 
-        :Example:
-            postgresql://db.emma.pk:5432
-
-        :return: DSN.
+        :param dsn_type: DSN type.
+        :param kwargs: Additional arguments for Internet.hostname().
         """
-        scheme = self.random.choice(["postgres", "postgresql"])
-        hostname = self._internet.hostname(
-            tld_type=tld_type,
-            subdomains=subdomains,
-        )
-
-        if localhost:
-            hostname = self.random.choice(
-                [
-                    "127.0.0.1",
-                    "localhost",
-                ]
-            )
-
-        user = ""
-        if credentials:
-            password = self.random.randstr(length=8)
-            username = self.random.choice(PROJECT_NAMES)
-            user = f"{username}:{password}@"
-        return f"{scheme}://{user}{hostname}:5432"
+        hostname = self._internet.hostname(**kwargs)
+        scheme, port = self.validate_enum(dsn_type, DSNType)
+        return f"{scheme}://{hostname}:{port}"
 
     def software_license(self) -> str:
         """Get a random software license.

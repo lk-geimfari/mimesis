@@ -5,7 +5,8 @@ Version 5.6.0
 **Added**:
 
 - Multiplication support for schemas. Now you can use `*` on the schema to specify the number of iterations. See docs for more information.
-- Method ``.postgres_dsn()`` for ``Development()``
+- Method ``dsn()`` for ``Development()``
+- Method ``public_dns()`` for ``Internet()``
 
 Version 5.5.0
 -------------

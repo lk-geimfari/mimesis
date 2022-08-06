@@ -2,7 +2,7 @@ import re
 
 import pytest
 from mimesis import Development, data
-from mimesis.enums import TLDType
+from mimesis.enums import DSNType, TLDType
 
 from . import patterns
 
@@ -61,16 +61,21 @@ class TestDevelopment:
         assert result or (not result)
 
     @pytest.mark.parametrize(
-        "tld_type, subdomains, localhost, credentials",
+        "dsn_type",
         [
-            (TLDType.CCTLD, ["db"], False, True),
-            (TLDType.CCTLD, ["db"], True, False),
-            (TLDType.CCTLD, [], True, False),
+            DSNType.POSTGRES,
+            DSNType.MYSQL,
+            DSNType.MONGODB,
+            DSNType.REDIS,
+            DSNType.COUCHBASE,
+            DSNType.MEMCACHED,
+            DSNType.RABBITMQ,
         ],
     )
-    def test_postgres_dsn(self, dev, tld_type, subdomains, localhost, credentials):
-        result = dev.postgres_dsn(tld_type, subdomains, localhost, credentials)
-        assert result.startswith("postgres://") or result.startswith("postgresql://")
+    def test_dsn(self, dev, dsn_type):
+        scheme, port = dsn_type.value
+        assert dev.dsn(dsn_type=dsn_type).endswith(f":{port}")
+        assert dev.dsn(dsn_type=dsn_type).startswith(f"{scheme}://")
 
 
 class TestSeededDevelopment:
@@ -100,5 +105,5 @@ class TestSeededDevelopment:
     def test_boolean(self, dv1, dv2):
         assert dv1.boolean() == dv2.boolean()
 
-    def test_postgres_dsn(self, dv1, dv2):
-        assert dv1.postgres_dsn() == dv2.postgres_dsn()
+    def test_dsn(self, dv1, dv2):
+        assert dv1.dsn() == dv2.dsn()

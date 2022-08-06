@@ -331,3 +331,13 @@ class TimezoneRegion(Enum):
     EUROPE = "Europe"
     INDIAN = "Indian"
     PACIFIC = "Pacific"
+
+
+class DSNType(Enum):
+    POSTGRES = ("postgres", 5432)
+    MYSQL = ("mysql", 3306)
+    MONGODB = ("mongodb", 27017)
+    REDIS = ("redis", 6379)
+    COUCHBASE = ("couchbase", 8092)
+    MEMCACHED = ("memcached", 11211)
+    RABBITMQ = ("rabbitmq", 5672)

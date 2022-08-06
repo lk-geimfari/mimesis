@@ -11,6 +11,7 @@ from mimesis.data import (
     HTTP_METHODS,
     HTTP_STATUS_CODES,
     HTTP_STATUS_MSGS,
+    PUBLIC_DNS,
     TLD,
     USER_AGENTS,
     USERNAMES,
@@ -294,7 +295,7 @@ class Internet(BaseProvider):
         uri = f"{url}{directory}/{self.slug()}"
 
         if query_params_count:
-            uri += self.query_string(query_params_count)
+            uri += f"?{self.query_string(query_params_count)}"
 
         return uri
 
@@ -329,7 +330,7 @@ class Internet(BaseProvider):
 
         return dict(zip(pick_unique_words(length), self._text.words(length)))
 
-    def top_level_domain(self, tld_type: t.Optional[TLDType] = None) -> str:
+    def top_level_domain(self, tld_type: TLDType = TLDType.CCTLD) -> str:
         """Generates random top level domain.
 
         :param tld_type: Enum object :class:`enums.TLDType`
@@ -388,3 +389,11 @@ class Internet(BaseProvider):
             raise ValueError("Slug must contain more than 2 parts")
 
         return "-".join(self._text.words(parts_count))
+
+    def public_dns(self) -> str:
+        """Generates a random public DNS.
+
+        :Example:
+            1.1.1.1
+        """
+        return self.random.choice(PUBLIC_DNS)
