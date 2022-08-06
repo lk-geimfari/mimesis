@@ -84,11 +84,10 @@ class TestInternet:
 
     @pytest.mark.repeat(10)
     @pytest.mark.parametrize(
-        "scheme, port_range, tld_type, subdomains, query_params_count",
+        "scheme, tld_type, subdomains, query_params_count",
         [
             (
                 URLScheme.HTTPS,
-                PortRange.WELL_KNOWN,
                 TLDType.GTLD,
                 ["core", "app", "test", "dev"],
                 5,
@@ -96,11 +95,10 @@ class TestInternet:
         ],
     )
     def test_uri_with_parameters(
-        self, net, scheme, port_range, tld_type, subdomains, query_params_count
+        self, net, scheme, tld_type, subdomains, query_params_count
     ):
         uri = net.uri(
             scheme=scheme,
-            port_range=port_range,
             tld_type=tld_type,
             subdomains=subdomains,
             query_params_count=query_params_count,

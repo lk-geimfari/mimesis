@@ -272,7 +272,6 @@ class Internet(BaseProvider):
     def uri(
         self,
         scheme: t.Optional[URLScheme] = URLScheme.HTTPS,
-        port_range: t.Optional[PortRange] = None,
         tld_type: t.Optional[TLDType] = None,
         subdomains: t.Optional[t.List[str]] = None,
         query_params_count: t.Optional[int] = None,
@@ -280,7 +279,6 @@ class Internet(BaseProvider):
         """Generate a random URI.
 
         :param scheme: Scheme.
-        :param port_range: PortRange enum object.
         :param tld_type: TLDType.
         :param subdomains: List of subdomains (make sure they are valid).
         :param query_params_count: Query params.
@@ -291,7 +289,7 @@ class Internet(BaseProvider):
             .strftime("%Y-%m-%d")
             .replace("-", "/")
         )
-        url = self.url(scheme, port_range, tld_type, subdomains)
+        url = self.url(scheme, None, tld_type, subdomains)
         uri = f"{url}{directory}/{self.slug()}"
 
         if query_params_count:

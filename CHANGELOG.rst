@@ -1,3 +1,14 @@
+Version 5.6.1
+-------------
+
+**Fixed**:
+
+- Fixed ``ValidationFailure`` for ``Internet().uri()``.
+
+**Removed**:
+
+- Removed support of ``port`` parameter in ``Internet().uri()``.
+
 Version 5.6.0
 
 **Added**:
