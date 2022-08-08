@@ -126,6 +126,21 @@ class Field(BaseField):
 
     The field whcih evaluates immediately.
 
+    .. warning::
+
+        There is no case when you need to instance **field** in loops.
+
+        If you doing this:
+
+        .. code-block:: python
+
+            for i in range(1000):
+                field = Field()
+
+        You doing it **wrong**! It is a terrible idea that will lead to a memory leak.
+
+        Forewarned is forearmed.
+
     Example:
         >>> _ = Field()
         >>> _('username')

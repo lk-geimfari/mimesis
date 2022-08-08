@@ -1,7 +1,6 @@
 """Base data provider."""
 
 import contextlib
-import functools
 import json
 import operator
 import typing as t
@@ -126,12 +125,8 @@ class BaseDataProvider(BaseProvider):
                 initial[key] = other[key]
         return initial
 
-    @functools.lru_cache(maxsize=None)
     def _load_datafile(self, datafile: str = "") -> None:
-        """Pull the content from the JSON and memorize one.
-
-        Opens JSON file ``file`` in the folder ``data/locale``
-        and get content from the file and memorize ones using lru_cache.
+        """Loads the content from the JSON.
 
         :param datafile: The name of file.
         :return: The content of the file.
@@ -170,6 +165,7 @@ class BaseDataProvider(BaseProvider):
 
         :return: Current locale.
         """
+        # noinspection PyTypeChecker
         return self.locale
 
     def _override_locale(self, locale: Locale = Locale.DEFAULT) -> None:
@@ -179,7 +175,6 @@ class BaseDataProvider(BaseProvider):
         :return: Nothing.
         """
         self._setup_locale(locale)
-        self._load_datafile.cache_clear()
         self._load_datafile()
 
     @contextlib.contextmanager

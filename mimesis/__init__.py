@@ -69,9 +69,9 @@ __all__ = [
     "__license__",
 ]
 
-__version__ = "5.6.1"
+__version__ = "6.0.0"
 __title__ = "mimesis"
-__description__ = "Mimesis: fake data generator."
+__description__ = "Mimesis: Fake Data Generator."
 __url__ = "https://github.com/lk-geimfari/mimesis"
 __author__ = "Isaak Uchakaev (Likid Geimfari)"
 __author_email__ = "likid.geimfari@gmail.com"

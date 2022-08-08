@@ -1,3 +1,15 @@
+Version 6.0.0
+-------------
+
+**Fixed**:
+
+- Fixed memory leak on using ``Field``.
+
+**Optimizations**:
+
+- Improved performance of ``_load_data()``.
+
+
 Version 5.6.1
 -------------
 
