@@ -523,7 +523,7 @@ python-versions = "*"
 
 [[package]]
 name = "readme-renderer"
-version = "36.0"
+version = "37.0"
 description = "readme_renderer is a library for rendering \"readme\" descriptions for Warehouse"
 category = "dev"
 optional = false
@@ -800,7 +800,7 @@ testing = ["func-timeout", "jaraco.itertools", "pytest (>=6)", "pytest-black (>=
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "74a226d963df9dda23f9b1eeaf78fbb824f201e34325104319c3fd3e1053cdda"
+content-hash = "5f1ec92f4f4bbd9cb14cbe03fb0a3354f9763ac68846918a2f770a7b66d3a1be"
 
 [metadata.files]
 alabaster = [
@@ -1132,8 +1132,8 @@ pytz = [
     {file = "pytz-2022.2.tar.gz", hash = "sha256:bc824559e43e8ab983426a49525079d186b25372ff63aa3430ccd527d95edc3a"},
 ]
 readme-renderer = [
-    {file = "readme_renderer-36.0-py3-none-any.whl", hash = "sha256:2c37e472ca96755caba6cc58bcbf673a5574bc033385a2ac91d85dfef2799876"},
-    {file = "readme_renderer-36.0.tar.gz", hash = "sha256:f71aeef9a588fcbed1f4cc001ba611370e94a0cd27c75b1140537618ec78f0a2"},
+    {file = "readme_renderer-37.0-py3-none-any.whl", hash = "sha256:9fa416704703e509eeb900696751c908ddeb2011319d93700d8f18baff887a69"},
+    {file = "readme_renderer-37.0.tar.gz", hash = "sha256:07b7ea234e03e58f77cc222e206e6abb8f4c0435becce5104794ee591f9301c5"},
 ]
 requests = [
     {file = "requests-2.28.1-py3-none-any.whl", hash = "sha256:8fefa2a1a1365bf5520aac41836fbee479da67864514bdb821f31ce07ce65349"},
