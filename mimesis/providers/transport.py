@@ -39,7 +39,7 @@ class Transport(BaseProvider):
         return f"{truck}-{model}"
 
     def manufacturer(self) -> str:
-        """Get a random card manufacturer.
+        """Get a random car manufacturer.
 
         :return: A car manufacturer
 
