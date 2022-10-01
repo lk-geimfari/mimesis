@@ -63,7 +63,12 @@ class BaseField:
             it will return the data from the first provider which
             has a method ``name``.
 
-            Allowed delimiters: ``.``, ``:``, ``/`` and space.
+            Allowed delimiters: ``.``, ``:``, ``/`` and space:
+
+            - ``provider.name``
+            - ``provider:name``
+            - ``provider/name``
+            - ``provider name``
 
         You can apply a *key function* to the result returned by
         the method, by passing a parameter **key** with a callable
