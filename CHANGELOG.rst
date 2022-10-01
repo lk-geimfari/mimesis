@@ -1,3 +1,9 @@
+Version 6.1.0
+-------------
+
+- Make field support different delimiters for ``provider.method``.
+
+
 Version 6.0.0
 -------------
 
