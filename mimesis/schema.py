@@ -2,6 +2,7 @@
 import csv
 import json
 import pickle
+import re
 import typing as t
 import warnings
 
@@ -62,8 +63,10 @@ class BaseField:
             it will return the data from the first provider which
             has a method ``name``.
 
+            Allowed delimiters: ``.``, ``:``, ``/`` and space.
+
         You can apply a *key function* to the result returned by
-        the method, bt passing a parameter **key** with a callable
+        the method, by passing a parameter **key** with a callable
         object which returns the final result.
 
         :param name: Name of the method.
@@ -76,6 +79,9 @@ class BaseField:
         """
         if name is None:
             raise FieldError()
+
+        # Support additional delimiters
+        name = re.sub(r"[/:\s]", ".", name)
 
         def tail_parser(tails: str, obj: t.Any) -> t.Any:
             """Return method from end of tail.

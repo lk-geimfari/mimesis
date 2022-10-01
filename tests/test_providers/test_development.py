@@ -2,7 +2,7 @@ import re
 
 import pytest
 from mimesis import Development, data
-from mimesis.enums import DSNType, TLDType
+from mimesis.enums import DSNType
 
 from . import patterns
 

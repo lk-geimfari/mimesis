@@ -2,8 +2,8 @@
 
 import typing as t
 
-from mimesis.data import LICENSES, OS, PROGRAMMING_LANGS, PROJECT_NAMES
-from mimesis.enums import DSNType, TLDType
+from mimesis.data import LICENSES, OS, PROGRAMMING_LANGS
+from mimesis.enums import DSNType
 from mimesis.providers.base import BaseProvider
 from mimesis.providers.internet import Internet
 

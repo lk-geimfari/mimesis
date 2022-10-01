@@ -88,8 +88,10 @@ def schema(field):
                 "creator": field("full_name", gender=Gender.FEMALE),
             },
             "defined_cls": {
-                "title": field("person.title"),
-                "title2": field("text.title"),
+                "t1": field("person.title"),
+                "t2": field("person/title"),
+                "t3": field("person:title"),
+                "t4": field("text title"),
             },
         }
     )
