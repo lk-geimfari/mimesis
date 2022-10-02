@@ -1,3 +1,9 @@
+Version 6.1.1
+-------------
+
+- Improve random sampling performance.
+
+
 Version 6.1.0
 -------------
 
