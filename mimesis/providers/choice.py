@@ -62,16 +62,15 @@ class Choice(BaseProvider):
         if length == 0:
             return self.random.choice(items)
 
-        data: t.List[str] = []
-        if unique and len(set(items)) < length:  # avoid an infinite while loop
+        if unique and len(set(items)) < length:  # Sanity check
             raise ValueError(
                 "There are not enough unique elements in "
                 "**items** to provide the specified **number**."
             )
-        while len(data) < length:
-            item = self.random.choice(items)
-            if (unique and item not in data) or not unique:
-                data.append(item)
+        if unique:
+            data: t.List[str] = self.random.sample(list(set(items)), k=length)
+        else:
+            data = self.random.choices(items, k=length)
 
         if isinstance(items, list):
             return data
