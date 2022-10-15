@@ -1,3 +1,16 @@
+Version 7.0.0
+-------------
+
+**Updated**:
+
+- Actualized data
+- Removed outdated data
+
+**Removed**:
+
+- Removed parameter `model_mask` for `.airplane()`
+- Removed method `.truck()` of `Transport()`, since you can use `.menufacturer()` instead.
+
 Version 6.1.1
 -------------
 

@@ -4,9 +4,8 @@ import pytest
 from mimesis import Transport
 from mimesis.data import (
     AIRPLANES,
+    AUTO_MANUFACTURERS,
     CARS,
-    MANUFACTURERS,
-    TRUCKS,
     VR_CODES,
     VRC_BY_LOCALES,
 )
@@ -23,30 +22,16 @@ class TestTransport:
     def test_str(self, transport):
         assert re.match(patterns.PROVIDER_STR_REGEX, str(transport))
 
-    def test_truck(self, transport):
-        result = transport.truck().split("-")
-        manufacturer, model = result[0], result[1]
-        assert manufacturer in TRUCKS
-        assert len(model) == 7
-
-        result = transport.truck(model_mask="###").split("-")
-        manufacturer, model = result[0], result[1]
-        assert manufacturer in TRUCKS
-        assert len(model) == 3
-
     def test_car(self, transport):
         result = transport.car()
         assert result in CARS
 
     def test_manufacturer(self, transport):
-        assert transport.manufacturer() in MANUFACTURERS
+        assert transport.manufacturer() in AUTO_MANUFACTURERS
 
     def test_airplane(self, transport):
-        mask = "@###"
-        result = transport.airplane(model_mask=mask).split()
-        manufacturer, model = result[0], result[1]
-        assert manufacturer in AIRPLANES
-        assert len(model) == len(mask)
+        result = transport.airplane()
+        assert result in AIRPLANES
 
     @pytest.mark.parametrize("locale", Locale)
     def test_vehicle_registration_code(self, transport, locale):
@@ -66,10 +51,6 @@ class TestSeededTransport:
     def t2(self, seed):
         return Transport(seed=seed)
 
-    def test_truck(self, t1, t2):
-        assert t1.truck() == t2.truck()
-        assert t1.truck(model_mask="#@") == t2.truck(model_mask="#@")
-
     def test_car(self, t1, t2):
         assert t1.car() == t2.car()
 
@@ -78,7 +59,6 @@ class TestSeededTransport:
 
     def test_airplane(self, t1, t2):
         assert t1.airplane() == t2.airplane()
-        assert t1.airplane(model_mask="#_#_#") == t2.airplane(model_mask="#_#_#")
 
     @pytest.mark.parametrize(
         "locale",

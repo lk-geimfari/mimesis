@@ -1,6 +1,5 @@
 """Provides all the generic data related to the personal information."""
 
-from typing import Tuple
 
 BLOOD_GROUPS = (
     "O+",
@@ -13,7 +12,7 @@ BLOOD_GROUPS = (
     "AB−",
 )
 
-GENDER_SYMBOLS: Tuple[str, str, str] = (
+GENDER_SYMBOLS = (
     "♂",
     "♀",
     "⚲",

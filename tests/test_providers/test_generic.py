@@ -200,5 +200,4 @@ class TestSeededGeneric:
         assert g1.text.color() == g2.text.color()
 
     def test_generic_transport(self, g1, g2):
-        assert g1.transport.truck() == g2.transport.truck()
         assert g1.transport.airplane() == g2.transport.airplane()

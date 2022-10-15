@@ -4,9 +4,8 @@ import typing as t
 
 from mimesis.data import (
     AIRPLANES,
+    AUTO_MANUFACTURERS,
     CARS,
-    MANUFACTURERS,
-    TRUCKS,
     VR_CODES,
     VRC_BY_LOCALES,
 )
@@ -24,20 +23,6 @@ class Transport(BaseProvider):
 
         name: t.Final[str] = "transport"
 
-    def truck(self, model_mask: str = "#### @@") -> str:
-        """Generate a truck model.
-
-        :param model_mask: Mask of truck model. Here '@' is a
-            placeholder of characters and '#' is a placeholder of digits.
-        :return: Dummy truck model.
-
-        :Example:
-            Caledon-966O.
-        """
-        model = self.random.custom_code(model_mask)
-        truck = self.random.choice(TRUCKS)
-        return f"{truck}-{model}"
-
     def manufacturer(self) -> str:
         """Get a random car manufacturer.
 
@@ -46,7 +31,7 @@ class Transport(BaseProvider):
         :Example:
             Tesla.
         """
-        return self.random.choice(MANUFACTURERS)
+        return self.random.choice(AUTO_MANUFACTURERS)
 
     def car(self) -> str:
         """Get a random vehicle.
@@ -58,19 +43,15 @@ class Transport(BaseProvider):
         """
         return self.random.choice(CARS)
 
-    def airplane(self, model_mask: str = "###") -> str:
+    def airplane(self) -> str:
         """Generate a dummy airplane model.
 
-        :param model_mask: Mask of truck model. Here '@' is a
-            placeholder of characters and '#' is a placeholder of digits.
         :return: Airplane model.
 
         :Example:
             Boeing 727.
         """
-        model = self.random.custom_code(mask=model_mask)
-        plane = self.random.choice(AIRPLANES)
-        return f"{plane} {model}"
+        return self.random.choice(AIRPLANES)
 
     def vehicle_registration_code(self, locale: t.Optional[Locale] = None) -> str:
         """Get vehicle registration code of country.
