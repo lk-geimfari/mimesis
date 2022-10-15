@@ -73,7 +73,7 @@ Supported Features
 - **Extensibility**: You can create your own data providers and use them with Mimesis.
 - **Generic data provider**: The `simplified <https://mimesis.name/en/latest/getting_started.html#generic-provider>`_ access to all the providers from a single object.
 - **Zero hard dependencies**: Does not require any modules other than the Python standard library.
-- **Schema-based generators**: Provides an easy mechanism to generate data by the schema of any complexity.
+- **Schema-based generators**: Provides an easy mechanism to `generate data by the schema <https://mimesis.name/en/master/getting_started.html#schema-and-fields>`_ of any complexity.
 
 
 Documentation
