@@ -21,22 +21,22 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - name: Upgrade pip
-        run: pip install --upgrade --user pip
+        run: pip install --upgrade --user pip >> $GITHUB_OUTPUT
       - name: Install Poetry
-        run: pip install poetry
+        run: pip install poetry >> $GITHUB_OUTPUT
       - name: Cache virtual environment
         uses: actions/cache@v2
         with:
           path: .venv
           key: ${{ runner.os }}-python-${{ matrix.python-version }}-venv-${{ hashFiles('**/poetry.lock') }}
       - name: Install dependencies
-        run: poetry install --no-interaction
+        run: poetry install --no-interaction >> $GITHUB_OUTPUT
       - name: pytest and codecov
-        run: poetry run pytest --cov=mimesis --cov=minifier --cov-report=xml --randomly-seed=$RANDOM
+        run: poetry run pytest --cov=mimesis --cov=minifier --cov-report=xml --randomly-seed=$RANDOM >> $GITHUB_OUTPUT
       - name: mypy
-        run: poetry run mypy mimesis/
+        run: poetry run mypy mimesis/ >> $GITHUB_OUTPUT
       - name: Check code style
-        run: poetry run black mimesis tests --check
+        run: poetry run black mimesis tests --check >> $GITHUB_OUTPUT
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v1
         with:
