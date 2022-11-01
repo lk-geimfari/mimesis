@@ -458,11 +458,11 @@ testing = ["fields", "hunter", "process-tests", "pytest-xdist", "six", "virtuale
 
 [[package]]
 name = "pytest-isort"
-version = "3.0.0"
+version = "3.1.0"
 description = "py.test plugin to check import ordering using isort"
 category = "dev"
 optional = false
-python-versions = ">=3.6,<4"
+python-versions = ">=3.7,<4"
 
 [package.dependencies]
 isort = ">=4.0"
@@ -797,7 +797,7 @@ testing = ["func-timeout", "jaraco.itertools", "pytest (>=6)", "pytest-black (>=
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "79499d0c88a9089a364296295d1f90db0343143edba553e133038807670a9516"
+content-hash = "f56446467d5f94a13e7ca470c71fbeefa0277a86c7787c28b8d4bf74a9114251"
 
 [metadata.files]
 alabaster = [
@@ -1104,8 +1104,8 @@ pytest-cov = [
     {file = "pytest_cov-3.0.0-py3-none-any.whl", hash = "sha256:578d5d15ac4a25e5f961c938b85a05b09fdaae9deef3bb6de9a6e766622ca7a6"},
 ]
 pytest-isort = [
-    {file = "pytest-isort-3.0.0.tar.gz", hash = "sha256:4fe4b26ead2af776730ec23f5870d7421f35aace22a41c4e938586ef4d8787cb"},
-    {file = "pytest_isort-3.0.0-py3-none-any.whl", hash = "sha256:2d96a25a135d6fd084ac36878e7d54f26f27c6987c2c65f0d12809bffade9cb9"},
+    {file = "pytest_isort-3.1.0-py3-none-any.whl", hash = "sha256:13e68d84b35d4f79d20d3d165f491bffc9e4b9509f420381a4186118c4454bd3"},
+    {file = "pytest_isort-3.1.0.tar.gz", hash = "sha256:067801dc5e54a474330d074d521c815948ff6d5cf0ed3b9d057b78216851186c"},
 ]
 pytest-mock = [
     {file = "pytest-mock-3.10.0.tar.gz", hash = "sha256:fbbdb085ef7c252a326fd8cdcac0aa3b1333d8811f131bdcc701002e1be7ed4f"},
