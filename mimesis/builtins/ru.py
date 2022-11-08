@@ -20,7 +20,9 @@ class RussiaSpecProvider(BaseSpecProvider):
         self._load_datafile(self._datafile)
         self._current_year = str(datetime.now().year)
         # Local tax office code. Used in tax-related identifiers - KPP, INN, OGRN.
+        # Format: XXYY, where XX - code of Russian region, YY - ID of local tax office.
         # Tax offices on contested territories between Ukraine and Russia are not included.
+        # The codes below are parsed from the public database of the Federal Tax Service.
         self._tax_office_codes: t.Final[t.Sequence[str, ...]] = (
             "0001", "0002", "0003", "0004", "0005", "0006", "0007", "0008", "0009", "0010",
             "0019", "0023", "0100", "0101", "0102", "0103", "0104", "0105", "0106", "0107",
@@ -525,12 +527,20 @@ class RussiaSpecProvider(BaseSpecProvider):
     def kpp(self,
             include_russian_organizations_codes=True,
             include_foreign_organizations_codes=True) -> str:
-        """Generate random ``KPP``.
+        """Generate random ``KPP``- tax registration reason code.
+        Format: XXYYZZNN, where:
+        - XX - code of Russian region (self._tax_office_codes);
+        - YY - ID of local tax office (self._tax_office_codes);
+        - ZZ - registration reason: range 1-50 used by Russian companies, 51-99- offices of foreign companies;
+          not every number in ranges used right now.
+        - NN - index among organizations with same XXYYZZ codes.
+        KPP does not have way to be validated by itself, such as a check digit.
+
         :return: 'KPP'.
         :Example:
             560058652.
         """
-        russian_registration_reasons: t.Final[t.Sequence[str]] = (  # 02, 03, 04, 05, 31, 32 are legacy codes and don't apply to new identifiers
+        russian_registration_reasons: t.Final[t.Sequence[str]] = (  # 02, 03, 04, 05, 31, 32 are legacy codes and don't apply to new KPPs.
             "01", "02", "03", "04", "05", "06", "07", "08",
             "10", "12", "14", "16", "17", "18", "19", "26",
             "27", "28", "29", "30", "31", "32", "33", "34",
@@ -550,7 +560,7 @@ class RussiaSpecProvider(BaseSpecProvider):
             registration_reason_codes.extend(russian_registration_reasons)
             registration_reason_codes.extend(foreign_registration_reasons)
 
-        local_tax_office_code = self.random.choice(self._tax_office_codes)
-        registration_reason = self.random.choice(registration_reason_codes)
+        local_tax_office_code: str = self.random.choice(self._tax_office_codes)
+        registration_reason: str = self.random.choice(registration_reason_codes)
         index: str = f"{self.random.randint(10, 20):03d}"
         return f"{local_tax_office_code}{registration_reason}{index}"
