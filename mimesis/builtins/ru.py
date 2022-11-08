@@ -2,6 +2,7 @@
 
 import typing as t
 from datetime import datetime
+from warnings import warn
 
 from mimesis.builtins.base import BaseSpecProvider
 from mimesis.enums import Gender
@@ -521,16 +522,35 @@ class RussiaSpecProvider(BaseSpecProvider):
         bic = country_code + code + bank_number + bank_office
         return bic
 
-    def kpp(self) -> str:
+    def kpp(self,
+            include_russian_organizations_codes=True,
+            include_foreign_organizations_codes=True) -> str:
         """Generate random ``KPP``.
-
         :return: 'KPP'.
-
         :Example:
             560058652.
         """
-        tax_code = self.random.choice(self._tax_office_codes)
-        reg_code = f"{self.random.randint(1, 99):02}"
-        reg_number = f"{self.random.randint(1, 999):03}"
-        kpp = tax_code + reg_code + reg_number
-        return kpp
+        russian_registration_reasons: t.Final[t.Sequence[str]] = (  # 02, 03, 04, 05, 31, 32 are legacy codes and don't apply to new identifiers
+            "01", "02", "03", "04", "05", "06", "07", "08",
+            "10", "12", "14", "16", "17", "18", "19", "26",
+            "27", "28", "29", "30", "31", "32", "33", "34",
+            "35", "36", "37", "40", "41", "42", "49", "50"
+        )
+        foreign_registration_reasons: t.Final[t.Sequence[str]] = (
+            "51", "52", "53", "60", "61", "62", "63", "70",
+            "71", "72", "73", "74", "75", "76", "87"
+        )
+        registration_reason_codes: t.List[str, ...] = []
+        if include_russian_organizations_codes:
+            registration_reason_codes.extend(russian_registration_reasons)
+        if include_foreign_organizations_codes:
+            registration_reason_codes.extend(foreign_registration_reasons)
+        if not registration_reason_codes:
+            warn("KPP cannot be generated without a registration reason code, the setting will be ignored.")
+            registration_reason_codes.extend(russian_registration_reasons)
+            registration_reason_codes.extend(foreign_registration_reasons)
+
+        local_tax_office_code = self.random.choice(self._tax_office_codes)
+        registration_reason = self.random.choice(registration_reason_codes)
+        index: str = f"{self.random.randint(10, 20):03d}"
+        return f"{local_tax_office_code}{registration_reason}{index}"
