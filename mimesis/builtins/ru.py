@@ -14,6 +14,7 @@ __all__ = ["RussiaSpecProvider"]
 
 class RussiaSpecProvider(BaseSpecProvider):
     """Class that provides special data for Russia (ru)."""
+
     def __init__(self, seed: Seed = None) -> None:
         """Initialize attributes."""
         super().__init__(locale=Locale.RU, seed=seed)
@@ -23,7 +24,7 @@ class RussiaSpecProvider(BaseSpecProvider):
         # Format: XXYY, where XX - code of Russian region, YY - ID of local tax office.
         # Tax offices on contested territories between Ukraine and Russia are not included.
         # The codes below are parsed from the public database of the Federal Tax Service.
-        self._tax_office_codes: t.Final[t.Sequence[str, ...]] = (
+        self._tax_office_codes: t.Final[t.Sequence[str]] = (
             "0001", "0002", "0003", "0004", "0005", "0006", "0007", "0008", "0009", "0010",
             "0019", "0023", "0100", "0101", "0102", "0103", "0104", "0105", "0106", "0107",
             "0108", "0109", "0110", "0200", "0201", "0202", "0203", "0204", "0205", "0206",
@@ -525,8 +526,8 @@ class RussiaSpecProvider(BaseSpecProvider):
         return bic
 
     def kpp(self,
-            include_russian_organizations_codes=True,
-            include_foreign_organizations_codes=True) -> str:
+            include_russian_organizations_codes: bool = True,
+            include_foreign_organizations_codes: bool = True) -> str:
         """Generate random ``KPP``- tax registration reason code.
         Format: XXYYZZNN, where:
         - XX - code of Russian region (self._tax_office_codes);
@@ -550,7 +551,7 @@ class RussiaSpecProvider(BaseSpecProvider):
             "51", "52", "53", "60", "61", "62", "63", "70",
             "71", "72", "73", "74", "75", "76", "87"
         )
-        registration_reason_codes: t.List[str, ...] = []
+        registration_reason_codes: t.List[str] = []
         if include_russian_organizations_codes:
             registration_reason_codes.extend(russian_registration_reasons)
         if include_foreign_organizations_codes:
