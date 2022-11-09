@@ -563,5 +563,5 @@ class RussiaSpecProvider(BaseSpecProvider):
 
         local_tax_office_code: str = self.random.choice(self._tax_office_codes)
         registration_reason: str = self.random.choice(registration_reason_codes)
-        index: str = f"{self.random.randint(10, 20):03d}"
+        index: str = f"{self.random.randint(1, 999):03d}"
         return f"{local_tax_office_code}{registration_reason}{index}"
