@@ -1,5 +1,4 @@
 import re
-import typing
 
 import pytest
 
@@ -9,8 +8,8 @@ from mimesis.locales import Locale
 NON_RU_LETTERS = re.compile(r"(?:(?![а-яё\d])[\w])+", re.IGNORECASE)
 
 
-def params(data: typing.Dict):
-    def extract_data(data: typing.Dict, result: typing.List, key: str = '') -> None:
+def params(data):
+    def extract_data(data, result, key=''):
         for k, v in data.items():
             name = f"{key}_{k}" if key else k
             if isinstance(v, list):
