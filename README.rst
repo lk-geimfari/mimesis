@@ -54,7 +54,7 @@ To install mimesis, simply use pip:
 Python compatibility
 ---------------------
 
-Mimesis supports Python 3.8 (also PyPy 3.8), 3.9, and 3.10.
+Mimesis supports Python 3.8^ (also PyPy 3.8) or higher.
 
 The Mimesis 4.1.3 is the last to support Python 3.6 and 3.7.
 
