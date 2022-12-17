@@ -6,7 +6,6 @@ from mimesis.data import (
     AUTO_MANUFACTURERS,
     CPU,
     CPU_CODENAMES,
-    CPU_MODEL_CODES,
     GENERATION,
     GRAPHICS,
     HDD_SSD,
@@ -39,11 +38,6 @@ class TestHardware:
     def test_generation(self, hard):
         result = hard.generation()
         assert result in GENERATION
-        assert isinstance(result, str)
-
-    def test_cpu_model_code(self, hard):
-        result = hard.cpu_model_code()
-        assert result in CPU_MODEL_CODES
         assert isinstance(result, str)
 
     def test_cpu_frequency(self, hard):
@@ -100,9 +94,6 @@ class TestSeededHardware:
 
     def test_generation(self, h1, h2):
         assert h1.generation() == h2.generation()
-
-    def test_cpu_model_code(self, h1, h2):
-        assert h1.cpu_model_code() == h2.cpu_model_code()
 
     def test_cpu_frequency(self, h1, h2):
         assert h1.cpu_frequency() == h2.cpu_frequency()

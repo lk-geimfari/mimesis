@@ -5,7 +5,6 @@ from mimesis.data import (
     AUTO_MANUFACTURERS,
     CPU,
     CPU_CODENAMES,
-    CPU_MODEL_CODES,
     GENERATION,
     GRAPHICS,
     HDD_SSD,
@@ -78,13 +77,6 @@ class Hardware(BaseProvider):
              6th Generation.
         """
         return self.random.choice(GENERATION)
-
-    def cpu_model_code(self) -> str:
-        """Get a random CPU model.
-
-        :return: CPU model.
-        """
-        return self.random.choice(CPU_MODEL_CODES)
 
     def cpu_codename(self) -> str:
         """Get a random CPU code name.
