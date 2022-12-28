@@ -76,6 +76,14 @@ def test_bic(russia):
     assert len(result) == 9
 
 
-def test_kpp(russia):
+def test_kpp_length(russia):
     result = russia.kpp()
     assert len(result) == 9
+
+
+def test_kpp_incorrect_params_warning(russia):
+    with pytest.warns(UserWarning):
+        russia.kpp(
+            include_russian_organizations_codes=False,
+            include_foreign_organizations_codes=False,
+        )
