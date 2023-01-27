@@ -1,6 +1,7 @@
 """Data related to the development."""
 
 import typing as t
+from datetime import datetime
 
 from mimesis.data import LICENSES, OS, PROGRAMMING_LANGS
 from mimesis.enums import DSNType
@@ -16,6 +17,7 @@ class Development(BaseProvider):
     def __init__(self, *args: t.Any, **kwargs: t.Any) -> None:
         super().__init__(*args, **kwargs)
         self._internet = Internet(*args, **kwargs)
+        self._now = datetime.now()
 
     class Meta:
         """Class for metadata."""
@@ -53,7 +55,7 @@ class Development(BaseProvider):
             0.2.1
         """
         if calver:
-            major = self.random.randint(2016, 2018)
+            major = self.random.randint(2016, self._now.year)
             minor, patch = self.random.randints(2, 1, 10)
         else:
             major, minor, patch = self.random.randints(3, 0, 10)
