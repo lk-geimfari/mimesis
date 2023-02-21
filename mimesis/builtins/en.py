@@ -1,4 +1,4 @@
-"""Specific data provider for USA (en)."""
+"""Specific data provider for the USA (en)."""
 
 import typing as t
 
@@ -10,7 +10,7 @@ __all__ = ["USASpecProvider"]
 
 
 class USASpecProvider(BaseSpecProvider):
-    """Class that provides special data for USA (en)."""
+    """Class that provides special data for the USA (en)."""
 
     def __init__(self, seed: Seed = None) -> None:
         """Initialize attributes."""
