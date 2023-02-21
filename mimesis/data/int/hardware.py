@@ -250,6 +250,8 @@ PHONE_MODELS = [
     "iPhone 14 Plus",
     "iPhone 14 Pro",
     "iPhone 14 Pro Max",
+    "iPhone 15 Pro",
+    "iPhone 15 Pro Max",
     "Nothing Phone",
     "Samsung Galaxy S22 Ultra",
     "Samsung Galaxy S22 Plus",
