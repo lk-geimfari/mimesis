@@ -160,7 +160,7 @@ class Generic(BaseProvider):
         for provider in providers:
             self.add_provider(provider)
 
-    def __iadd__(self, other: t.Type["BaseProvider"]) -> "Generic":
+    def __iadd__(self, other: t.Type[BaseProvider]) -> "Generic":
         """Add a custom provider to Generic() object.
 
         :param other: Custom provider.
