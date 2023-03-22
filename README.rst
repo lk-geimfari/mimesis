@@ -94,11 +94,9 @@ You can improve it by sending pull requests to this repository.
 Usage
 -----
 
-This library is really easy to use and everything you need is just import an object which
-represents a type of data you need (we call such object a *Provider*).
+The library is exceptionally user-friendly, and it only requires you to import a **Data Provider** object that corresponds to the desired data type. 
 
-In the example below we import provider `Person <https://mimesis.name/en/latest/api.html#person>`_,
-which represents data related to personal information, such as name, surname, email and etc:
+For instance, the `Person <https://mimesis.name/en/latest/api.html#person>`_ provider can be imported to access personal information, including name, surname, email, and other related fields:
 
 .. code:: python
 
