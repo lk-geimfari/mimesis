@@ -58,11 +58,11 @@ Mimesis is compatible with Python, including `PyPy`, version `3.8` or higher. Th
 Supported Features
 ------------------
 
-- 👌 **Easy**: Mimesis is crafted to be user-friendly, facilitating ease of use and learning. Its simple design and clear documentation make it easy for users to comprehend and employ it for data generation swiftly.
-- 🌍 **Multilingual**: Mimesis is a multilingual tool that caters to numerous languages, providing support for generating data in a vast range of `languages <https://mimesis.name/en/latest/getting_started.html#supported-locales>`_.
+- 👌 **Easy**: User-friendly data generator, with a simple design and clear documentation for easy and swift data generation.
+- 🌍 **Multilingual**: Mimesis generates data in a vast range of `languages <https://mimesis.name/en/latest/getting_started.html#supported-locales>`_, making it a multilingual tool that caters to numerous language requirements.
 - 🚀 **Performance**: Mimesis has excellent performance and is widely regarded as the fastest data generator among all Python solutions available.
-- 📊 **Data variety**: Mimesis provides support for a broad range of data providers, enabling users to generate data for various purposes, including but not limited to names, addresses, phone numbers, email addresses, dates, times, and more.
-- 🌐 **Country-specific data providers**: Mimesis also supports country-specific data providers equipped to produce data specific to particular countries, like address formats, currencies, names, and more.
+- 📊 **Data variety**: Mimesis supports a broad range of data providers, including names, addresses, phone numbers, email addresses, dates, times, and more, enabling users to generate data for various purposes.
+- 🌐 **Country-specific data providers**: Mimesis supports country-specific data providers for generating country-specific data.
 - 🔧 **Extensibility**: Mimesis is extensible, allowing users to create and integrate their own data providers with the library, thus enabling them to generate custom datasets that meet their unique data generation requirements.
 - 🗝️ **Generic data provider**: Mimesis provides a generic data provider that offers easy access to all the available data providers within the library from a single object, enabling the creation of customized data generation workflows with a simplified and streamlined approach.
 - 🙅‍♀️ **Zero hard dependencies**: Mimesis has zero hard dependencies on external modules and does not require the installation of any libraries other than the Python standard library, making it easy to install and use.
