@@ -38,12 +38,6 @@ Description
 
 Mimesis (`/mɪˈmiːsɪs <https://mimesis.name/en/master/about.html#what-does-name-mean>`_) is a fast and reliable data generator for Python that can produce a wide range of fake data in various languages. This tool is useful for populating testing databases, creating fake API endpoints, generating JSON and XML files with custom structures, and anonymizing production data, among other purposes. With Mimesis, developers can easily obtain realistic, randomized data to facilitate development and testing.
 
-- Mimesis offers support for numerous data types, such as names, addresses, phone numbers, email addresses, dates, times, and more.
-- It also allows for customization of the generated data, such as specifying the gender or country of origin for a name, or configuring the format of a phone number or date.
-- Mimesis can be integrated with other Python libraries and frameworks, such as Flask and Django, to simplify the process of generating fake data for web applications.
-- The library is actively maintained and regularly updated, with new features and improvements being added with each release.
-- Mimesis is open-source software, released under the MIT license, and can be freely used and modified by anyone.
-- The tool has proven to be useful for preventing data leaks since the anonymization of production data is a critical security measure.
 
 Installation
 ------------
@@ -64,16 +58,15 @@ Mimesis is compatible with Python, including `PyPy`, version `3.8` or higher. Th
 Supported Features
 ------------------
 
-- **Easy**: Designed to be easy to use and learn.
-- **Multilingual**: Supports data for `a lot of languages <https://mimesis.name/en/latest/getting_started.html#supported-locales>`_.
-- **Performance**: The `fastest <https://mimesis.name/en/latest/about.html#performance>`_ data generator available for Python.
-- **Data variety**: Supports `a lot of data providers <https://mimesis.name/en/latest/api.html>`_ for a variety of purposes.
-- **Country-specific data providers**: Provides data specific only for `some countries <https://mimesis.name/en/latest/api.html#builtin-data-providers>`_.
-- **Extensibility**: You can create your own data providers and use them with Mimesis.
-- **Generic data provider**: The `simplified <https://mimesis.name/en/latest/getting_started.html#generic-provider>`_ access to all the providers from a single object.
-- **Zero hard dependencies**: Does not require any modules other than the Python standard library.
-- **Schema-based generators**: Provides an easy mechanism to `generate data by the schema <https://mimesis.name/en/master/getting_started.html#schema-and-fields>`_ of any complexity.
-
+- 👌 **Easy**: Mimesis is crafted to be user-friendly, facilitating ease of use and learning. Its simple design and clear documentation make it easy for users to comprehend and employ it for data generation swiftly.
+- 🌍 **Multilingual**: Mimesis is a multilingual tool that caters to numerous languages, providing support for generating data in a vast range of `languages <https://mimesis.name/en/latest/getting_started.html#supported-locales>`_.
+- 🚀 **Performance**: Mimesis has excellent performance and is widely regarded as the fastest data generator among all Python solutions available.
+- 📊 **Data variety**: Mimesis provides support for a broad range of data providers, enabling users to generate data for various purposes, including but not limited to names, addresses, phone numbers, email addresses, dates, times, and more.
+- 🌐 **Country-specific data providers**: Mimesis also supports country-specific data providers equipped to produce data specific to particular countries, like address formats, currencies, names, and more.
+- 🔧 **Extensibility**: Mimesis is extensible, allowing users to create and integrate their own data providers with the library, thus enabling them to generate custom datasets that meet their unique data generation requirements.
+- 🗝️ **Generic data provider**: Mimesis provides a generic data provider that offers easy access to all the available data providers within the library from a single object, enabling the creation of customized data generation workflows with a simplified and streamlined approach.
+- 🙅‍♀️ **Zero hard dependencies**: Mimesis has zero hard dependencies on external modules and does not require the installation of any libraries other than the Python standard library, making it easy to install and use.
+- 🗄️ **Schema-based generators**: Mimesis provides schema-based data generators, offering an effortless way to produce data by the schema of any complexity. This feature enables users to generate customized data that follows a predefined structure or schema, making it especially helpful when creating test data for applications.
 
 Documentation
 -------------
