@@ -125,11 +125,9 @@ More about the other providers you can read in our `documentation`_.
 Locales
 -------
 
-Mimesis currently includes support for 34 different `locales`_. You can
-specify a locale when creating providers and they will return data that
-is appropriate for the language or country associated with that locale.
+Mimesis presently encompasses 34 distinct `locales`_, enabling users to specify the desired region or language when creating providers. Following this approach, providers will provide data relevant to the corresponding location or language. 
 
-Let's take a look how it works:
+Here's how it operates practically:
 
 .. code:: python
 
@@ -152,12 +150,9 @@ Let's take a look how it works:
 Providers
 ---------
 
-Mimesis support over twenty different data providers available,
-which can produce data related to people, food, computer hardware,
-transportation, addresses, internet and more.
+Mimesis provides more than twenty data providers which can generate a broad range of data related to food, transportation, computer hardware, people, internet, addresses, and more. 
 
-
-You can generate a lot of extremely detailed data:
+This makes it possible to generate exceedingly detailed data:
 
 .. code:: python
 
@@ -194,8 +189,7 @@ How to Contribute
 Disclaimer
 ----------
 
-The authors of `Mimesis` do not assume any responsibility for how you use it or how you use data generated with it.
-This library was designed with good intentions to make testing easier. Do not use the data generated with Mimesis for illegal purposes.
+The creators of `Mimesis` do not hold themselves accountable for how you employ the library's functionalities or the data generated with it. Mimesis is designed to facilitate testing and with good intentions. Mimesis should not be used for illicit purposes.
 
 License
 -------
