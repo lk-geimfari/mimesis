@@ -35,10 +35,15 @@ Description
      :target: https://pypi.org/project/mimesis/
      :alt: Python version
 
-Mimesis (`/mɪˈmiːsɪs <https://mimesis.name/en/master/about.html#what-does-name-mean>`_) is a high-performance fake data generator for Python,
-which provides data for a variety of purposes in a variety of languages. The fake data could be used to populate
-a testing database, create fake API endpoints, create JSON and XML files of arbitrary structure, anonymize data taken
-from production and etc.
+
+Mimesis (`/mɪˈmiːsɪs <https://mimesis.name/en/master/about.html#what-does-name-mean>`_) is a fast and reliable data generator for Python that can produce a wide range of fake data in various languages. This tool is useful for populating testing databases, creating fake API endpoints, generating JSON and XML files with custom structures, and anonymizing production data, among other purposes. With Mimesis, developers can easily obtain realistic, randomized data to facilitate development and testing.
+
+- Mimesis offers support for numerous data types, such as names, addresses, phone numbers, email addresses, dates, times, and more.
+- It also allows for customization of the generated data, such as specifying the gender or country of origin for a name, or configuring the format of a phone number or date.
+- Mimesis can be integrated with other Python libraries and frameworks, such as Flask and Django, to simplify the process of generating fake data for web applications.
+- The library is actively maintained and regularly updated, with new features and improvements being added with each release.
+- Mimesis is open-source software, released under the MIT license, and can be freely used and modified by anyone.
+- The tool has proven to be useful for preventing data leaks since the anonymization of production data is a critical security measure.
 
 Installation
 ------------
