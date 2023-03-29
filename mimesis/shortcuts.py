@@ -1,4 +1,4 @@
-"""This module is provide internal util functions."""
+"""This module provides internal util functions."""
 
 import functools
 import typing as t

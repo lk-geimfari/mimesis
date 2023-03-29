@@ -40,13 +40,13 @@ class TestDevelopment:
         # Use calendar versioning
         calver = dev.version(calver=True)
         y, *_ = calver.split(".")
-        assert (int(y) >= 2016) and (int(y) <= 2018)
+        assert (int(y) >= 2016) and (int(y) <= dev._now.year)
 
         # Use calendar versioning with pre_release
         calver_pre_release = dev.version(calver=True, pre_release=True)
         y, *_ = calver_pre_release.split(".")
         assert len(calver_pre_release.split(".")) == 4
-        assert (int(y) >= 2016) and (int(y) <= 2018)
+        assert (int(y) >= 2016) and (int(y) <= dev._now.year)
 
     def test_programming_language(self, dev):
         result = dev.programming_language()

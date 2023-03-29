@@ -1,3 +1,26 @@
 .function, .method, .class, .exception {
-  padding-bottom: 15px;
+    padding-bottom: 15px;
+}
+
+a.reference:hover {
+    border-bottom: 1px rgb(225, 83, 67);
+}
+
+div.note {
+    border-radius: 10px;
+}
+
+div.warning {
+    border-radius: 10px;
+}
+
+pre, div[class*="highlight-"] {
+    clear: both;
+    border-radius: 10px !important;
+}
+
+div.highlight pre, table.highlighttable pre {
+    margin: 0;
+    border-radius: 10px !important;
+    padding: 20px !important;
 }

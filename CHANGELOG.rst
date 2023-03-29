@@ -10,6 +10,7 @@ Version 7.0.0
 
 - Removed parameter `model_mask` for `.airplane()`
 - Removed method `.truck()` of `Transport()`, use `.menufacturer()` instead.
+- Removed method `.cpu_model()` of `Hardware()`.
 
 Version 6.1.1
 -------------
