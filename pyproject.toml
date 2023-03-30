@@ -100,16 +100,7 @@ warn_return_any = true
 strict_equality = true
 
 [tool.isort]
-multi_line_output = 3
-include_trailing_comma = true
-sections = [
-    "FUTURE",
-    "STDLIB",
-    "THIRDPARTY",
-    "FIRSTPARTY",
-    "LOCALFOLDER",
-]
-default_section = "FIRSTPARTY"
+profile = "wemake"
 
 [tool.taskipy.tasks]
 minify = "python minifier.py"
