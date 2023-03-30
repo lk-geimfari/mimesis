@@ -1,11 +1,13 @@
 import re
 
 import pytest
+from mimesis import random
 from mimesis.enums import Gender
 from mimesis.exceptions import LocaleError, NonEnumerableError
 from mimesis.locales import Locale
 from mimesis.providers import Code, Cryptographic, Internet, Person
 from mimesis.providers.base import BaseDataProvider, BaseProvider
+from mimesis.types import MissingSeed
 
 from . import patterns
 
@@ -188,3 +190,32 @@ class TestSeededBase:
 
         assert b1.seed == b2.seed
         assert b1.random is not b2.random
+
+    @pytest.mark.parametrize("seed", [123, 0.5, "string", b"bytes", bytearray(1)])
+    @pytest.mark.parametrize("global_seed", [None, MissingSeed])
+    def test_has_seed_no_global(self, monkeypatch, seed, global_seed):
+        # We run this test with `pytest-randomly` enabled,
+        # so we clean things up first.
+        monkeypatch.setattr(random, "global_seed", global_seed)
+
+        b1 = BaseProvider()
+        assert b1._has_seed() is False
+
+        b2 = BaseProvider(seed=None)
+        assert b2._has_seed() is False
+
+        b3 = BaseProvider(seed=seed)
+        assert b3._has_seed() is True
+
+    @pytest.mark.parametrize("seed", [123, 0.5, "string", b"bytes", bytearray(1)])
+    def test_has_seed_global(self, monkeypatch, seed):
+        monkeypatch.setattr(random, "global_seed", seed)
+
+        b1 = BaseProvider()
+        assert b1._has_seed() is True
+
+        b2 = BaseProvider(seed=None)
+        assert b2._has_seed() is True
+
+        b3 = BaseProvider(seed=seed)
+        assert b3._has_seed() is True

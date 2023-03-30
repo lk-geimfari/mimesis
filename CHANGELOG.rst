@@ -1,3 +1,11 @@
+Version 7.1.0
+-------------
+
+**Added**
+
+- `pytest-randomly` integration, not by default it will set the global seed for every provider and all fields. This can still be reseeded as usual.
+
+
 Version 7.0.0
 -------------
 

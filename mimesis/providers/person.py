@@ -259,7 +259,7 @@ class Person(BaseDataProvider):
         :Example:
             foretime10@live.com
         """
-        if unique and self.seed is not None:
+        if unique and self._has_seed():
             raise ValueError(
                 "You cannot use «unique» parameter with the seeded provider"
             )

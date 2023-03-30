@@ -71,6 +71,9 @@ Sphinx = "^5.1.1"
 sphinx-copybutton = "^0.5.0"
 sphinx-autodoc-typehints = "^1.19.2"
 
+[tool.poetry.plugins."pytest_randomly.random_seeder"]
+mimesis = "mimesis.entrypoints:pytest_randomly_reseed"
+
 [tool.pytest.ini_options]
 addopts = "--isort"
 testpaths = [

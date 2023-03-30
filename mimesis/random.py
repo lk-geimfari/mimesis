@@ -11,7 +11,15 @@ import string
 import typing as t
 import uuid
 
+from mimesis.types import MissingSeed, Seed
+
 __all__ = ["Random", "get_random_item", "random"]
+
+
+#: Different plugins (like `pytest-randomly`)
+#: can set custom values to a global seed,
+#: which are going to be the new default.
+global_seed: Seed = MissingSeed
 
 
 class Random(random_module.Random):
