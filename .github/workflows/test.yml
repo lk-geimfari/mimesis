@@ -3,6 +3,7 @@ name: Test
 # https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows
 on:
   push:
+    branches: [master]
   pull_request:
     types: [opened, synchronize]
 
@@ -13,7 +14,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, macos-latest]
-        python-version: [3.8.x, 3.9.x, 3.10.x, 3.11.x, 'pypy3.8', 'pypy3.9']
+        python-version: ['3.8', '3.9', '3.10', '3.11', 'pypy3.8', 'pypy3.9']
     steps:
       - uses: actions/checkout@v3
       - name: Set up Python ${{ matrix.python-version }}
@@ -32,13 +33,14 @@ jobs:
       - name: Install dependencies
         run: poetry install --no-interaction
       - name: pytest and codecov
-        run: poetry run pytest --cov=mimesis --cov=minifier --cov-report=xml --randomly-seed=$RANDOM
+        run: poetry run pytest --cov=mimesis --cov=minifier --cov-report=xml
       - name: mypy
         run: poetry run mypy mimesis/
       - name: Check code style
         run: poetry run black mimesis tests --check
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
+        if: "github.repository == 'lk-geimfari/mimesis' && matrix.os == 'ubuntu-latest' && matrix.python-version == '3.10'"
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           file: ./coverage.xml
