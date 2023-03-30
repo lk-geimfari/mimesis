@@ -32,10 +32,8 @@ jobs:
           key: ${{ runner.os }}-python-${{ matrix.python-version }}-venv-${{ hashFiles('**/poetry.lock') }}
       - name: Install dependencies
         run: poetry install --no-interaction
-      - name: pytest and codecov
-        run: poetry run pytest --cov=mimesis --cov=minifier --cov-report=xml
-      - name: mypy
-        run: poetry run mypy mimesis/
+      - name: mypy, pytest, codecov
+        run: make test
       - name: Check code style
         run: make lint
       - name: Upload coverage to Codecov
