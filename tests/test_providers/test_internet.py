@@ -52,12 +52,12 @@ class TestInternet:
     @pytest.mark.parametrize(
         "scheme",
         (
-                URLScheme.HTTP,
-                URLScheme.HTTPS,
-                URLScheme.FTP,
-                URLScheme.SFTP,
-                URLScheme.WS,
-                URLScheme.WSS,
+            URLScheme.HTTP,
+            URLScheme.HTTPS,
+            URLScheme.FTP,
+            URLScheme.SFTP,
+            URLScheme.WS,
+            URLScheme.WSS,
         ),
     )
     def test_url(self, net, scheme):
@@ -67,10 +67,10 @@ class TestInternet:
     @pytest.mark.parametrize(
         "port",
         (
-                PortRange.ALL,
-                PortRange.WELL_KNOWN,
-                PortRange.EPHEMERAL,
-                PortRange.REGISTERED,
+            PortRange.ALL,
+            PortRange.WELL_KNOWN,
+            PortRange.EPHEMERAL,
+            PortRange.REGISTERED,
         ),
     )
     def test_url_with_port(self, net, port):
@@ -88,15 +88,15 @@ class TestInternet:
         "scheme, tld_type, subdomains, query_params_count",
         [
             (
-                    URLScheme.HTTPS,
-                    TLDType.GTLD,
-                    ["core", "app", "test", "dev"],
-                    5,
+                URLScheme.HTTPS,
+                TLDType.GTLD,
+                ["core", "app", "test", "dev"],
+                5,
             ),
         ],
     )
     def test_uri_with_parameters(
-            self, net, scheme, tld_type, subdomains, query_params_count
+        self, net, scheme, tld_type, subdomains, query_params_count
     ):
         uri = net.uri(
             scheme=scheme,
@@ -187,8 +187,8 @@ class TestInternet:
         assert isinstance(ip, IPv4Address)
 
     def test_ip_v4(
-            self,
-            net,
+        self,
+        net,
     ):
         assert re.match(patterns.IP_V4_REGEX, net.ip_v4())
 

@@ -4,12 +4,12 @@ import pytest
 
 from mimesis import Hardware
 from mimesis.data import (
-    MANUFACTURERS,
     CPU,
     CPU_CODENAMES,
     GENERATION,
     GRAPHICS,
     HDD_SSD,
+    MANUFACTURERS,
     PHONE_MODELS,
     RAM_SIZES,
     RAM_TYPES,
