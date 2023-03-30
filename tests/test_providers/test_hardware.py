@@ -1,6 +1,7 @@
 import re
 
 import pytest
+
 from mimesis import Hardware
 from mimesis.data import (
     AUTO_MANUFACTURERS,

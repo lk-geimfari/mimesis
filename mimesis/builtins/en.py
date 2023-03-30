@@ -4,7 +4,7 @@ import typing as t
 
 from mimesis.builtins.base import BaseSpecProvider
 from mimesis.locales import Locale
-from mimesis.types import Seed
+from mimesis.types import MissingSeed, Seed
 
 __all__ = ["USASpecProvider"]
 
@@ -12,7 +12,7 @@ __all__ = ["USASpecProvider"]
 class USASpecProvider(BaseSpecProvider):
     """Class that provides special data for the USA (en)."""
 
-    def __init__(self, seed: Seed = None) -> None:
+    def __init__(self, seed: Seed = MissingSeed) -> None:
         """Initialize attributes."""
         super().__init__(locale=Locale.EN, seed=seed)
 

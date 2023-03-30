@@ -1,4 +1,5 @@
 import pytest
+
 from mimesis.builtins import DenmarkSpecProvider
 
 

@@ -1,6 +1,7 @@
 import re
 
 import pytest
+
 from mimesis import Address
 from mimesis.data import CALLING_CODES, CONTINENT_CODES, COUNTRY_CODES
 from mimesis.enums import CountryCode

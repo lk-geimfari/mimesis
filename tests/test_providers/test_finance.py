@@ -1,6 +1,7 @@
 import re
 
 import pytest
+
 from mimesis import Finance
 from mimesis.data import (
     CRYPTOCURRENCY_ISO_CODES,

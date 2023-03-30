@@ -1,6 +1,7 @@
 import re
 
 import pytest
+
 from mimesis import Text
 from mimesis.data import SAFE_COLORS
 
