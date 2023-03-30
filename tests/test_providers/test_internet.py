@@ -51,12 +51,12 @@ class TestInternet:
     @pytest.mark.parametrize(
         "scheme",
         (
-            URLScheme.HTTP,
-            URLScheme.HTTPS,
-            URLScheme.FTP,
-            URLScheme.SFTP,
-            URLScheme.WS,
-            URLScheme.WSS,
+                URLScheme.HTTP,
+                URLScheme.HTTPS,
+                URLScheme.FTP,
+                URLScheme.SFTP,
+                URLScheme.WS,
+                URLScheme.WSS,
         ),
     )
     def test_url(self, net, scheme):
@@ -66,10 +66,10 @@ class TestInternet:
     @pytest.mark.parametrize(
         "port",
         (
-            PortRange.ALL,
-            PortRange.WELL_KNOWN,
-            PortRange.EPHEMERAL,
-            PortRange.REGISTERED,
+                PortRange.ALL,
+                PortRange.WELL_KNOWN,
+                PortRange.EPHEMERAL,
+                PortRange.REGISTERED,
         ),
     )
     def test_url_with_port(self, net, port):
@@ -87,15 +87,15 @@ class TestInternet:
         "scheme, tld_type, subdomains, query_params_count",
         [
             (
-                URLScheme.HTTPS,
-                TLDType.GTLD,
-                ["core", "app", "test", "dev"],
-                5,
+                    URLScheme.HTTPS,
+                    TLDType.GTLD,
+                    ["core", "app", "test", "dev"],
+                    5,
             ),
         ],
     )
     def test_uri_with_parameters(
-        self, net, scheme, tld_type, subdomains, query_params_count
+            self, net, scheme, tld_type, subdomains, query_params_count
     ):
         uri = net.uri(
             scheme=scheme,
@@ -143,6 +143,17 @@ class TestInternet:
         parts = net.slug(parts_count=parts_count).split("-")
         assert len(parts) == parts_count
 
+    def test_path(self, net):
+        with pytest.raises(ValueError):
+            net.path(parts_count=13)
+
+        with pytest.raises(ValueError):
+            net.path(parts_count=1)
+
+        parts_count = 5
+        parts = net.path(parts_count=parts_count).split("/")
+        assert len(parts) == parts_count
+
     def test_user_agent(self, net):
         result = net.user_agent()
         assert result in data.USER_AGENTS
@@ -153,7 +164,6 @@ class TestInternet:
             (900, 900, ["love", "passion", "death"], False, str),
             (800, 800, {"love", "passion", "death"}, False, str),
             (800, 800, None, False, str),
-            # (700, 700, ['love', 'passion', 'death'], True, bytes),
         ],
     )
     def test_stock_image(self, net, w, h, keywords, writable, res_type):
@@ -176,8 +186,8 @@ class TestInternet:
         assert isinstance(ip, IPv4Address)
 
     def test_ip_v4(
-        self,
-        net,
+            self,
+            net,
     ):
         assert re.match(patterns.IP_V4_REGEX, net.ip_v4())
 
@@ -281,6 +291,16 @@ class TestInternet:
     def test_public_dns(self, net):
         assert net.public_dns() in data.PUBLIC_DNS
 
+    def test_http_response_headers(self, net):
+        result = net.http_response_headers()
+        assert isinstance(result, dict)
+        assert result["Allow"] == "*"
+
+    def test_http_request_headers(self, net):
+        result = net.http_request_headers()
+        assert isinstance(result, dict)
+        assert result["Cookie"].startswith("csrftoken")
+
 
 class TestSeededInternet:
     @pytest.fixture
@@ -290,6 +310,17 @@ class TestSeededInternet:
     @pytest.fixture
     def i2(self, seed):
         return Internet(seed=seed)
+
+    def test_http_request_headers(self, i1, i2):
+        r1 = i1.http_request_headers()
+        r2 = i2.http_request_headers()
+        assert r1["X-CSRF-Token"] == r2["X-CSRF-Token"]
+
+    def test_http_response_headers(self, i1, i2):
+        r1 = i1.http_response_headers()
+        r2 = i2.http_response_headers()
+        assert r1["Set-Cookie"] == r2["Set-Cookie"]
+        assert r1["X-Request-ID"] == r2["X-Request-ID"]
 
     def test_emoji(self, i1, i2):
         assert i1.emoji() == i2.emoji()
@@ -327,6 +358,9 @@ class TestSeededInternet:
 
     def test_slug(self, i1, i2):
         assert i1.slug(parts_count=2) == i2.slug(parts_count=2)
+
+    def test_path(self, i1, i2):
+        assert i1.path(parts_count=2) == i2.path(parts_count=2)
 
     def test_query_string(self, i1, i2):
         assert i1.query_string(length=2) == i2.query_string(length=2)

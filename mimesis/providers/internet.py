@@ -4,11 +4,16 @@ import typing as t
 import urllib.error
 import urllib.parse
 import urllib.request
+from base64 import b64encode
 from ipaddress import IPv4Address, IPv6Address
 
 from mimesis.data import (
+    CONTENT_ENCODING_DIRECTIVES,
+    CORS_OPENER_POLICIES,
+    CORS_RESOURCE_POLICIES,
     EMOJI,
     HTTP_METHODS,
+    HTTP_SERVERS,
     HTTP_STATUS_CODES,
     HTTP_STATUS_MSGS,
     PUBLIC_DNS,
@@ -19,6 +24,7 @@ from mimesis.data import (
 from mimesis.enums import MimeType, PortRange, TLDType, URLScheme
 from mimesis.locales import Locale
 from mimesis.providers.base import BaseProvider
+from mimesis.providers.code import Code
 from mimesis.providers.date import Datetime
 from mimesis.providers.file import File
 from mimesis.providers.text import Text
@@ -42,7 +48,8 @@ class Internet(BaseProvider):
         super().__init__(*args, **kwargs)
         self._file = File(seed=self.seed)
         self._text = Text(locale=Locale.EN, seed=self.seed)
-        self._datetime = Datetime(locale=Locale.EN)
+        self._datetime = Datetime(locale=Locale.EN, seed=self.seed)
+        self._code = Code(seed=self.seed)
 
     class Meta:
         """Class for metadata."""
@@ -370,6 +377,15 @@ class Internet(BaseProvider):
         rng = self.validate_enum(port_range, PortRange)
         return self.random.randint(*rng)
 
+    def path(self, *args: t.Any, **kwargs: t.Any) -> str:
+        """Generates a random path.
+
+        :param args: Arguments to pass to :meth:`slug`.
+        :param kwargs: Keyword arguments to pass to :meth:`slug`.
+        :return: Path.
+        """
+        return self.slug(*args, **kwargs).replace("-", "/")
+
     def slug(self, parts_count: t.Optional[int] = None) -> str:
         """Generate a random slug of given parts count.
 
@@ -395,3 +411,79 @@ class Internet(BaseProvider):
             1.1.1.1
         """
         return self.random.choice(PUBLIC_DNS)
+
+    def http_response_headers(self) -> t.Dict[str, t.Any]:
+        max_age = self.random.randint(0, 60 * 60 * 15)
+        cookie_attributes = [
+            "Secure",
+            "HttpOnly",
+            "SameSite=Lax",
+            "SameSite=Strict",
+            f"Max-Age={max_age}",
+            f"Domain={self.hostname()}",
+        ]
+        k, v = self._text.words(quantity=2)
+        cookie_attr = self.random.choice(cookie_attributes)
+        csrf_token = b64encode(self.random.randbytes(n=32)).decode()
+        cookie_value = f"csrftoken={csrf_token}; {k}={v}; {cookie_attr}"
+
+        headers = {
+            "Allow": "*",
+            "Age": max_age,
+            "Server": self.random.choice(HTTP_SERVERS),
+            "Content-Type": self._file.mime_type(),
+            "X-Request-ID": self.random.randbytes(16).hex(),
+            "Content-Language": self._code.locale_code(),
+            "Content-Location": self.path(parts_count=4),
+            "Set-Cookie": cookie_value,
+            "Upgrade-Insecure-Requests": 1,
+            "X-Content-Type-Options": "nosniff",
+            "X-XSS-Protection": 1,
+            "Connection": self.random.choice(["close", "keep-alive"]),
+            "X-Frame-Options": self.random.choice(["DENY", "SAMEORIGIN"]),
+            "Content-Encoding": self.random.choice(CONTENT_ENCODING_DIRECTIVES),
+            "Cross-Origin-Opener-Policy": self.random.choice(CORS_OPENER_POLICIES),
+            "Cross-Origin-Resource-Policy": self.random.choice(CORS_RESOURCE_POLICIES),
+            "Strict-Transport-Security": f"max-age={max_age}",
+        }
+        return headers
+
+    def http_request_headers(self) -> t.Dict[str, t.Any]:
+        k, v = self._text.words(quantity=2)
+        max_age = self.random.randint(0, 60 * 60 * 15)
+        token = b64encode(self.random.randbytes(64)).hex()
+        csrf_token = b64encode(self.random.randbytes(n=32)).decode()
+        headers = {
+            "Referer": self.uri(),
+            "Authorization": f"Bearer {token}",
+            "Cookie": f"csrftoken={csrf_token}; {k}={v}",
+            "User-Agent": self.user_agent(),
+            "X-CSRF-Token": b64encode(self.random.randbytes(32)).hex(),
+            "Content-Type": self._file.mime_type(),
+            "Content-Length": self.random.randint(0, 10000),
+            "Connection": self.random.choice(["close", "keep-alive"]),
+            "Cache-Control": self.random.choice(
+                [
+                    "no-cache",
+                    "no-store",
+                    "must-revalidate",
+                    "public",
+                    "private",
+                    f"max-age={max_age}",
+                ]
+            ),
+            "Accept": self.random.choice(
+                [
+                    "*/*",
+                    self._file.mime_type(),
+                ]
+            ),
+            "Host": self.hostname(),
+            "Accept-Language": self.random.choice(
+                [
+                    "*",
+                    self._code.locale_code(),
+                ]
+            ),
+        }
+        return headers
