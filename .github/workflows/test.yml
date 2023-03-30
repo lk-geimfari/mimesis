@@ -46,3 +46,24 @@ jobs:
           file: ./coverage.xml
           env_vars: OS,PYTHON
           fail_ci_if_error: true
+
+  quick-test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ['pypy3.8', 'pypy3.9']
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Upgrade pip
+        run: pip install --upgrade --user pip
+      - name: Install Poetry
+        run: pip install poetry
+      - name: Install dependencies
+        run: poetry install --no-interaction
+      - name: pytest and codecov
+        run: poetry run pytest
