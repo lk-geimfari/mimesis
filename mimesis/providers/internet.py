@@ -413,6 +413,7 @@ class Internet(BaseProvider):
         return self.random.choice(PUBLIC_DNS)
 
     def http_response_headers(self) -> t.Dict[str, t.Any]:
+        """Generate a random HTTP response headers."""
         max_age = self.random.randint(0, 60 * 60 * 15)
         cookie_attributes = [
             "Secure",
@@ -449,6 +450,7 @@ class Internet(BaseProvider):
         return headers
 
     def http_request_headers(self) -> t.Dict[str, t.Any]:
+        """Generates a random HTTP request headers."""
         k, v = self._text.words(quantity=2)
         max_age = self.random.randint(0, 60 * 60 * 15)
         token = b64encode(self.random.randbytes(64)).hex()
