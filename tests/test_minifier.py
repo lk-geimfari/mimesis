@@ -1,6 +1,7 @@
 import sys
 
 import pytest
+
 from minifier import Minimizer, human_repr
 
 

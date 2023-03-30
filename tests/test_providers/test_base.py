@@ -1,6 +1,7 @@
 import re
 
 import pytest
+
 from mimesis import random
 from mimesis.enums import Gender
 from mimesis.exceptions import LocaleError, NonEnumerableError

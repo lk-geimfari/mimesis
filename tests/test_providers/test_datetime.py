@@ -2,6 +2,7 @@ import datetime
 import re
 
 import pytest
+
 from mimesis import Datetime
 from mimesis.data import GMT_OFFSETS, TIMEZONES
 from mimesis.enums import TimezoneRegion

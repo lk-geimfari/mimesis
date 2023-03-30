@@ -1,6 +1,7 @@
 import tempfile
 
 import pytest
+
 from mimesis.enums import (
     AudioFile,
     CompressedFile,
