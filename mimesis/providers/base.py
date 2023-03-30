@@ -46,10 +46,11 @@ class BaseProvider:
         """
         self.seed = seed
         if seed is MissingSeed:
+            # Remove casts after mypy will fix this inference:
             if _random.global_seed is not MissingSeed:
-                self.random.seed(_random.global_seed)  # type: ignore[arg-type]
+                self.random.seed(t.cast(t.Any, _random.global_seed))
         else:
-            self.random.seed(seed)  # type: ignore[arg-type]
+            self.random.seed(t.cast(t.Any, seed))
 
     def validate_enum(self, item: t.Any, enum: t.Any) -> t.Any:
         """Validate enum parameter of method in subclasses of BaseProvider.
