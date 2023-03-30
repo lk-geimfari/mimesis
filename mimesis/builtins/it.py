@@ -6,7 +6,7 @@ import typing as t
 from mimesis.builtins.base import BaseSpecProvider
 from mimesis.enums import Gender
 from mimesis.locales import Locale
-from mimesis.types import Seed
+from mimesis.types import MissingSeed, Seed
 
 __all__ = ["ItalySpecProvider"]
 
@@ -14,7 +14,7 @@ __all__ = ["ItalySpecProvider"]
 class ItalySpecProvider(BaseSpecProvider):
     """Specific-provider of misc data for Italy."""
 
-    def __init__(self, seed: Seed = None) -> None:
+    def __init__(self, seed: Seed = MissingSeed) -> None:
         """Initialize attributes."""
         super().__init__(locale=Locale.IT, seed=seed)
         self._load_datafile(self._datafile)

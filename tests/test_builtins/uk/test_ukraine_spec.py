@@ -1,4 +1,5 @@
 import pytest
+
 from mimesis.builtins import UkraineSpecProvider
 from mimesis.enums import Gender
 from mimesis.exceptions import NonEnumerableError

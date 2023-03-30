@@ -71,6 +71,9 @@ Sphinx = "^5.1.1"
 sphinx-copybutton = "^0.5.0"
 sphinx-autodoc-typehints = "^1.19.2"
 
+[tool.poetry.plugins."pytest_randomly.random_seeder"]
+mimesis = "mimesis.entrypoints:pytest_randomly_reseed"
+
 [tool.pytest.ini_options]
 addopts = "--isort"
 testpaths = [
@@ -100,16 +103,7 @@ warn_return_any = true
 strict_equality = true
 
 [tool.isort]
-multi_line_output = 3
-include_trailing_comma = true
-sections = [
-    "FUTURE",
-    "STDLIB",
-    "THIRDPARTY",
-    "FIRSTPARTY",
-    "LOCALFOLDER",
-]
-default_section = "FIRSTPARTY"
+profile = "wemake"
 
 [tool.taskipy.tasks]
 minify = "python minifier.py"

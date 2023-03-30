@@ -24,7 +24,7 @@ from mimesis.providers.person import Person
 from mimesis.providers.science import Science
 from mimesis.providers.text import Text
 from mimesis.providers.transport import Transport
-from mimesis.types import Seed
+from mimesis.types import MissingSeed, Seed
 
 __all__ = ["Generic"]
 
@@ -55,7 +55,11 @@ DEFAULT_PROVIDERS = (
 class Generic(BaseProvider):
     """Class which contain all providers at one."""
 
-    def __init__(self, locale: Locale = Locale.DEFAULT, seed: Seed = None) -> None:
+    def __init__(
+        self,
+        locale: Locale = Locale.DEFAULT,
+        seed: Seed = MissingSeed,
+    ) -> None:
         """Initialize attributes lazily."""
         super().__init__(seed=seed)
         self.locale = locale
@@ -108,7 +112,7 @@ class Generic(BaseProvider):
                     attributes.append(attr)
         return attributes
 
-    def reseed(self, seed: Seed = None) -> None:
+    def reseed(self, seed: Seed = MissingSeed) -> None:
         """Reseed the internal random generator.
 
         Overrides method `BaseProvider.reseed()`.

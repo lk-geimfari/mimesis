@@ -1,7 +1,8 @@
 import re
 
 import pytest
-from mimesis import Person
+
+from mimesis import Person, random
 from mimesis.data import BLOOD_GROUPS, GENDER_SYMBOLS
 from mimesis.enums import Gender, TitleType
 from mimesis.exceptions import NonEnumerableError
@@ -111,7 +112,11 @@ class TestPerson:
             True,
         ],
     )
-    def test_email(self, _person, unique):
+    def test_email(self, _person, unique, monkeypatch):
+        if unique:
+            # We need to prepare the env to remove seeds:
+            monkeypatch.setattr(random, "global_seed", None)
+
         result = _person.email()
         assert re.match(patterns.EMAIL_REGEX, result)
 
@@ -133,6 +138,11 @@ class TestPerson:
                 generated.add(email_username)
 
             assert len(generated) == count
+
+    def test_email_unique_seed(self):
+        person = Person(seed=1)
+        with pytest.raises(ValueError):
+            person.email(unique=True)
 
     def test_height(self, _person):
         result = _person.height(minimum=1.60, maximum=1.90)

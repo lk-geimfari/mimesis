@@ -39,7 +39,13 @@ Date = datetime.date
 
 Timestamp = t.Union[str, int]
 
-Seed = t.Union[None, int, float, str, bytes, bytearray]
+
+class _MissingSeed:
+    """We use this type as a placeholder for cases when seed is not set."""
+
+
+MissingSeed: t.Final = _MissingSeed()
+Seed = t.Union[None, int, float, str, bytes, bytearray, _MissingSeed]
 
 Keywords = t.Union[t.List[str], t.Set[str], t.Tuple[str, ...]]
 

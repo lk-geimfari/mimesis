@@ -2,7 +2,7 @@
 import typing as t
 
 from mimesis.data import (
-    AUTO_MANUFACTURERS,
+    MANUFACTURERS,
     CPU,
     CPU_CODENAMES,
     GENERATION,
@@ -136,7 +136,7 @@ class Hardware(BaseProvider):
         :Example:
             Dell.
         """
-        return self.random.choice(AUTO_MANUFACTURERS)
+        return self.random.choice(MANUFACTURERS)
 
     def phone_model(self) -> str:
         """Get a random phone model.

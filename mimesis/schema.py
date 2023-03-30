@@ -9,7 +9,7 @@ import warnings
 from mimesis.exceptions import FieldError, SchemaError
 from mimesis.locales import Locale
 from mimesis.providers.generic import Generic
-from mimesis.types import JSON, CallableSchema, Key, Seed
+from mimesis.types import JSON, CallableSchema, Key, MissingSeed, Seed
 
 __all__ = ["BaseField", "Field", "Schema"]
 
@@ -31,7 +31,7 @@ class BaseField:
     def __init__(
         self,
         locale: Locale = Locale.DEFAULT,
-        seed: Seed = None,
+        seed: Seed = MissingSeed,
         providers: t.Optional[t.Sequence[t.Any]] = None,
     ) -> None:
         """Initialize field.

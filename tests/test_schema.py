@@ -7,6 +7,7 @@ import warnings
 from collections.abc import Iterator
 
 import pytest
+
 from mimesis.builtins.en import USASpecProvider
 from mimesis.enums import Gender
 from mimesis.exceptions import FieldError, SchemaError

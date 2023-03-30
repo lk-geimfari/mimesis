@@ -1,4 +1,5 @@
 import pytest
+
 from mimesis import shortcuts
 from mimesis.exceptions import LocaleError
 from mimesis.locales import Locale

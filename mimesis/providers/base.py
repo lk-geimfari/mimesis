@@ -7,10 +7,10 @@ import typing as t
 from functools import reduce
 from pathlib import Path
 
+from mimesis import random as _random
 from mimesis.exceptions import NonEnumerableError
 from mimesis.locales import Locale, validate_locale
-from mimesis.random import Random, get_random_item
-from mimesis.types import JSON, Seed
+from mimesis.types import JSON, MissingSeed, Seed
 
 __all__ = ["BaseDataProvider", "BaseProvider"]
 
@@ -21,7 +21,7 @@ class BaseProvider:
     class Meta:
         name: str
 
-    def __init__(self, *, seed: Seed = None, **kwargs: t.Any) -> None:
+    def __init__(self, *, seed: Seed = MissingSeed, **kwargs: t.Any) -> None:
         """Initialize attributes.
 
         Keep in mind, that locale-independent data providers will work
@@ -31,10 +31,10 @@ class BaseProvider:
             When set to `None` the current system time is used.
         """
         self.seed = seed
-        self.random = Random()
+        self.random = _random.Random()
         self.reseed(seed)
 
-    def reseed(self, seed: Seed = None) -> None:
+    def reseed(self, seed: Seed = MissingSeed) -> None:
         """Reseed the internal random generator.
 
         In case we use the default seed, we need to create a per instance
@@ -45,7 +45,12 @@ class BaseProvider:
             When set to `None` the current system time is used.
         """
         self.seed = seed
-        self.random.seed(seed)
+        if seed is MissingSeed:
+            # Remove casts after mypy will fix this inference:
+            if _random.global_seed is not MissingSeed:
+                self.random.seed(t.cast(t.Any, _random.global_seed))
+        else:
+            self.random.seed(t.cast(t.Any, seed))
 
     def validate_enum(self, item: t.Any, enum: t.Any) -> t.Any:
         """Validate enum parameter of method in subclasses of BaseProvider.
@@ -56,13 +61,19 @@ class BaseProvider:
         :raises NonEnumerableError: if ``item`` not in ``enum``.
         """
         if item is None:
-            result = get_random_item(enum, self.random)
+            result = _random.get_random_item(enum, self.random)
         elif item and isinstance(item, enum):
             result = item
         else:
             raise NonEnumerableError(enum)
 
         return result.value
+
+    def _has_seed(self) -> bool:
+        """Internal API to check if seed is set."""
+        return (self.seed is not None and self.seed is not MissingSeed) or (
+            _random.global_seed is not None and _random.global_seed is not MissingSeed
+        )
 
     def __str__(self) -> str:
         """Human-readable representation of locale."""
@@ -72,7 +83,11 @@ class BaseProvider:
 class BaseDataProvider(BaseProvider):
     """This is a base class for all data providers."""
 
-    def __init__(self, locale: Locale = Locale.DEFAULT, seed: Seed = None) -> None:
+    def __init__(
+        self,
+        locale: Locale = Locale.DEFAULT,
+        seed: Seed = MissingSeed,
+    ) -> None:
         """Initialize attributes for data providers.
 
         :param locale: Current locale.

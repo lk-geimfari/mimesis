@@ -1,6 +1,7 @@
 import re
 
 import pytest
+
 from mimesis import Path
 from mimesis.data import FOLDERS, PROGRAMMING_LANGS, PROJECT_NAMES
 

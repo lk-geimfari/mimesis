@@ -3,6 +3,7 @@ from ipaddress import IPv4Address, IPv6Address
 
 import pytest
 import validators
+
 from mimesis import Internet, data
 from mimesis.enums import MimeType, PortRange, TLDType, URLScheme
 from mimesis.exceptions import NonEnumerableError

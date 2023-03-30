@@ -1,6 +1,7 @@
 from enum import Enum
 
 import pytest
+
 from mimesis.exceptions import LocaleError
 from mimesis.locales import Locale, validate_locale
 

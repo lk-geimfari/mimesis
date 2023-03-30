@@ -226,6 +226,12 @@ Seeded Data
     Keep in mind that some methods of some providers cannot be used with seeded
     providers since their crypto secure nature.
 
+.. note::
+    We support ``pytest_randomly`` and its global seed.
+    If you use it during ``pytest`` runs,
+    ``mimesis`` will have the same seed as shown in your ``pytest`` output:
+    ``Using --randomly-seed=XXX``
+
 For using seeded data just pass an argument *seed* (which can be *int*, *str*, *bytes*, *bytearray*)
 to data provider:
 

@@ -6,7 +6,7 @@ from mimesis.builtins.base import BaseSpecProvider
 from mimesis.enums import Gender
 from mimesis.locales import Locale
 from mimesis.providers import Datetime
-from mimesis.types import DateTime, Seed
+from mimesis.types import DateTime, MissingSeed, Seed
 
 __all__ = ["PolandSpecProvider"]
 
@@ -14,7 +14,7 @@ __all__ = ["PolandSpecProvider"]
 class PolandSpecProvider(BaseSpecProvider):
     """Class that provides special data for Poland (pl)."""
 
-    def __init__(self, seed: Seed = None) -> None:
+    def __init__(self, seed: Seed = MissingSeed) -> None:
         """Initialize attributes."""
         super().__init__(locale=Locale.PL, seed=seed)
 
