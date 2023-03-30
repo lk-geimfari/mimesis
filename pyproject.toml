@@ -73,7 +73,6 @@ sphinx-autodoc-typehints = "^1.19.2"
 mimesis = "mimesis.entrypoints:pytest_randomly_reseed"
 
 [tool.pytest.ini_options]
-addopts = "--isort"
 testpaths = [
     "mimesis",
     "tests",
