@@ -26,7 +26,6 @@ class Random(random_module.Random):
 
     The class is a subclass of the class :py:class:`random.Random`
     from the module random of the standard library, which provides the custom methods.
-
     """
 
     def randints(self, amount: int = 3, a: int = 1, b: int = 100) -> t.List[int]:
@@ -42,15 +41,6 @@ class Random(random_module.Random):
             raise ValueError("Amount out of range.")
 
         return [int(self.random() * (b - a)) + a for _ in range(amount)]
-
-    @staticmethod
-    def urandom(size: int = 8) -> bytes:
-        """Return a bytes object containing random bytes.
-
-        :param size: The size of byte object.
-        :return: Bytes.
-        """
-        return os.urandom(size)
 
     def generate_string(self, str_seq: str, length: int = 10) -> str:
         """Generate random string created from string sequence.
