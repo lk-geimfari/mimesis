@@ -66,7 +66,7 @@ class DenmarkSpecProvider(BaseSpecProvider):
                 self._checksum_factors,
             )
         )
-        remainder = sum(cpr_digit_products) % 11
+        remainder: int = sum(cpr_digit_products) % 11
         if remainder == 0:
             return 0
         return 11 - remainder

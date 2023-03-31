@@ -1,3 +1,4 @@
+LINT_CHECK=0
 
 .PHONY: help
 help:
@@ -5,20 +6,17 @@ help:
 	@echo "  release    to create a release"
 	@echo "  docs       to build documentations"
 	@echo "  clean      to remove build artifacts"
-	@echo "  format     to format code using Black and isort"
+	@echo "  format     to format code using autoformatters"
+	@echo "  lint       to check code using autoformatters"
 	@echo "  test       to run tests"
 	@echo "  all        run pipeline format -> test -> docs -> clean"
 
 .PHONY: all
-all:
-	make format
-	make test
-	make docs
-	make clean
+all: format test docs clean
 
 .PHONY: format
 format:
-	bash scripts/format.sh
+	CHECK=$(LINT_CHECK) bash scripts/format.sh
 
 .PHONY: docs
 docs:
@@ -31,6 +29,11 @@ clean:
 .PHONY: release
 release:
 	bash scripts/release.sh
+
+.PHONY: lint
+lint: LINT_CHECK=1
+lint: format
+	@echo 'Lint finished'
 
 .PHONY: test
 test:

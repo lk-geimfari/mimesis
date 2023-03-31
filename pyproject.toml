@@ -31,6 +31,7 @@ classifiers = [
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: Implementation :: CPython",
     "Programming Language :: Python :: Implementation :: PyPy",
     "Operating System :: OS Independent",
@@ -46,36 +47,33 @@ exclude = [
 [tool.poetry.dependencies]
 python = "^3.8"
 
-[tool.poetry.dev-dependencies]
+[tool.poetry.group.dev.dependencies]
 codecov = "^2.1"
-pytest = "^7.1"
-pytest-isort = "^3.0.0"
+pytest = "^7.2"
 pytest-cov = "^3.0"
 pytest-mock = "^3.10"
 requests = "^2.28"
-mypy = "^0.960"
-colorama = "^0.4.5"
+mypy = "^1.1"
+colorama = "^0.4.6"
 pygments = "^2.13"
 pytest-randomly = "^3.12"
-check-manifest = "^0.48"
-readme-renderer = "^36.0"
-pytz = "^2022.5"
-black = "^22.10.0"
-autoflake = "^1.7"
-types-pytz = "^2022.4.0"
+pytz = "^2023.3"
+black = "^22.10"
+autoflake = "^2.0"
+types-pytz = "^2023.3"
 taskipy = "^1.10.1"
 validators = "^0.20.0"
 pytest-repeat = "^0.9.1"
-memory-profiler = "^0.60.0"
+memory-profiler = "^0.61.0"
 Sphinx = "^5.1.1"
 sphinx-copybutton = "^0.5.0"
 sphinx-autodoc-typehints = "^1.19.2"
+isort = "^5.12"
 
 [tool.poetry.plugins."pytest_randomly.random_seeder"]
 mimesis = "mimesis.entrypoints:pytest_randomly_reseed"
 
 [tool.pytest.ini_options]
-addopts = "--isort"
 testpaths = [
     "mimesis",
     "tests",

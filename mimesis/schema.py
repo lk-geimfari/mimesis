@@ -174,9 +174,10 @@ class Schema:
 
         :param schema: A schema (must be a callable object).
         """
-        if schema and callable(schema):
+        if schema and callable(schema):  # type: ignore[truthy-function]
             self._schema = schema
         else:
+            # This is just a better error message
             raise SchemaError()
 
     def __mul__(self, other: int) -> t.List[JSON]:

@@ -121,6 +121,7 @@ class RussiaSpecProvider(BaseSpecProvider):
                 control_code = 0
             snils = code + f"{control_code:02}"
             return snils
+        raise RuntimeError("Must not be reached")
 
     def inn(self) -> str:
         """Generate random, but valid ``INN``.
