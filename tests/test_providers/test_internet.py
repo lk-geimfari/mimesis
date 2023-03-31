@@ -160,24 +160,22 @@ class TestInternet:
         assert result in data.USER_AGENTS
 
     @pytest.mark.parametrize(
-        "w, h, keywords, writable, res_type",
+        "w, h, keywords",
         [
-            (900, 900, ["love", "passion", "death"], False, str),
-            (800, 800, {"love", "passion", "death"}, False, str),
-            (800, 800, None, False, str),
+            (900, 900, ["octopus", "mimicry"]),
+            (800, 800, {"octopus", "mimicry"}),
+            (800, 800, None),
         ],
     )
-    def test_stock_image(self, net, w, h, keywords, writable, res_type):
-        result = net.stock_image(
+    def test_stock_image_url(self, net, w, h, keywords):
+        result = net.stock_image_url(
             width=w,
             height=h,
             keywords=keywords,
-            writable=writable,
         )
-        assert isinstance(result, res_type)
-        if res_type == str:
-            assert re.match(patterns.STOCK_IMAGE, result)
-            assert result.endswith("?" + ",".join(keywords or []))
+        assert isinstance(result, str)
+        assert re.match(patterns.STOCK_IMAGE, result)
+        assert result.endswith("?" + ",".join(keywords or []))
 
     def test_ip_v4_object(self, net):
         ip = net.ip_v4_object()

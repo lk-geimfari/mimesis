@@ -179,24 +179,19 @@ class Internet(BaseProvider):
         return self.random.choice(EMOJI)
 
     @staticmethod
-    def stock_image(
+    def stock_image_url(
         width: t.Union[int, str] = 1920,
         height: t.Union[int, str] = 1080,
         keywords: t.Optional[Keywords] = None,
-        writable: bool = False,
-    ) -> t.Union[str, bytes]:
+    ) -> str:
         """Generate random stock image (JPG/JPEG) hosted on Unsplash.
 
         See «Random search term» on https://source.unsplash.com/
         for more details.
 
-        .. note:: This method required an active HTTP connection
-            if you want to get a writable object.
-
         :param width: Width of the image.
         :param height: Height of the image.
         :param keywords: List of search keywords.
-        :param writable: Return image as sequence ob bytes.
         :return: Link to the image.
         """
         if keywords is not None:
@@ -204,16 +199,7 @@ class Internet(BaseProvider):
         else:
             keywords_str = ""
 
-        url = f"https://source.unsplash.com/{width}x{height}?{keywords_str}"
-
-        if writable:
-            try:
-                response = urllib.request.urlopen(url)
-                content: bytes = response.read()
-                return content
-            except urllib.error.URLError:
-                raise urllib.error.URLError("Required an active HTTP connection")
-        return url
+        return f"https://source.unsplash.com/{width}x{height}?{keywords_str}"
 
     def hashtags(self, quantity: int = 4) -> t.List[str]:
         """Generate a list of hashtags.
