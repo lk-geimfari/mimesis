@@ -1,13 +1,10 @@
 """File data provider."""
 
-import re
 import typing as t
 
-from mimesis.data import EXTENSIONS, MIME_TYPES
+from mimesis.data import EXTENSIONS, FILENAMES, MIME_TYPES
 from mimesis.enums import FileType, MimeType
-from mimesis.locales import Locale
 from mimesis.providers.base import BaseProvider
-from mimesis.providers.text import Text
 
 __all__ = ["File"]
 
@@ -22,7 +19,6 @@ class File(BaseProvider):
         :param kwargs: Keyword arguments.
         """
         super().__init__(*args, **kwargs)
-        self._text = Text(Locale.EN, seed=self.seed)
 
     class Meta:
         """Class for metadata."""
@@ -75,8 +71,6 @@ class File(BaseProvider):
         :Example:
             legislative.txt
         """
-        word = self._text.word().strip()
-        replacer = self.random.choice(["_", "-"])
-        name = re.sub(r"\s+", replacer, word)
         ext = self.extension(file_type)
+        name = self.random.choice(FILENAMES)
         return f"{name}{ext}"
