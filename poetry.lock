@@ -32,19 +32,18 @@ tests-no-zope = ["cloudpickle", "coverage[toml] (>=5.0.2)", "hypothesis", "mypy 
 
 [[package]]
 name = "autoflake"
-version = "1.7.5"
+version = "2.0.2"
 description = "Removes unused imports and unused variables"
 category = "dev"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "autoflake-1.7.5-py2.py3-none-any.whl", hash = "sha256:bedb29201b07876cd9cad3a804760b1127b9bf156cf9689762a12eabd1683b65"},
-    {file = "autoflake-1.7.5-py3-none-any.whl", hash = "sha256:5ce7977d4f9905b01ef12d572f69252406009718ec1bac95fb5d74eb4faca58b"},
-    {file = "autoflake-1.7.5.tar.gz", hash = "sha256:9848061faca11745e6ca9feb010a8caa9d62ec3ea1817413c226eb3b58bbdada"},
+    {file = "autoflake-2.0.2-py3-none-any.whl", hash = "sha256:a82d8efdcbbb7129a8a23238c529fb9d9919c562e26bb7963ea6890fbfff7d02"},
+    {file = "autoflake-2.0.2.tar.gz", hash = "sha256:e0164421ff13f805f08a023e249d84200bd00463d213b490906bfefa67e83830"},
 ]
 
 [package.dependencies]
-pyflakes = ">=1.1.0"
+pyflakes = ">=3.0.0"
 tomli = {version = ">=2.0.1", markers = "python_version < \"3.11\""}
 
 [[package]]
@@ -669,14 +668,14 @@ files = [
 
 [[package]]
 name = "pyflakes"
-version = "2.5.0"
+version = "3.0.1"
 description = "passive checker of Python programs"
 category = "dev"
 optional = false
 python-versions = ">=3.6"
 files = [
-    {file = "pyflakes-2.5.0-py2.py3-none-any.whl", hash = "sha256:4579f67d887f804e67edb544428f264b7b24f435b263c4614f384135cea553d2"},
-    {file = "pyflakes-2.5.0.tar.gz", hash = "sha256:491feb020dca48ccc562a8c0cbe8df07ee13078df59813b83959cbdada312ea3"},
+    {file = "pyflakes-3.0.1-py2.py3-none-any.whl", hash = "sha256:ec55bf7fe21fff7f1ad2f7da62363d749e2a470500eab1b555334b67aa1ef8cf"},
+    {file = "pyflakes-3.0.1.tar.gz", hash = "sha256:ec8b276a6b60bd80defed25add7e439881c19e64850afd9b346283d4165fd0fd"},
 ]
 
 [[package]]
@@ -1200,4 +1199,4 @@ testing = ["func-timeout", "jaraco.itertools", "pytest (>=6)", "pytest-black (>=
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "79499d0c88a9089a364296295d1f90db0343143edba553e133038807670a9516"
+content-hash = "7588da8f76c52e6fb0129db11808ab62a5ef70cb54bc8a672304223a0c9e9d63"
