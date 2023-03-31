@@ -315,13 +315,16 @@ class TestSeededInternet:
     def test_http_request_headers(self, i1, i2):
         r1 = i1.http_request_headers()
         r2 = i2.http_request_headers()
-        assert r1["X-CSRF-Token"] == r2["X-CSRF-Token"]
+
+        for key, val in r1.items():
+            assert r2[key] == val
 
     def test_http_response_headers(self, i1, i2):
         r1 = i1.http_response_headers()
         r2 = i2.http_response_headers()
-        assert r1["Set-Cookie"] == r2["Set-Cookie"]
-        assert r1["X-Request-ID"] == r2["X-Request-ID"]
+
+        for key, val in r1.items():
+            assert r2[key] == val
 
     def test_emoji(self, i1, i2):
         assert i1.emoji() == i2.emoji()
