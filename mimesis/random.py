@@ -127,7 +127,7 @@ class Random(random_module.Random):
 
     def randbytes(self, n: int = 16) -> bytes:
         """Generate n random bytes."""
-        return self.getrandbits(n * 8).to_bytes(n, 'little')
+        return self.getrandbits(n * 8).to_bytes(n, "little")
 
 
 def get_random_item(enum: t.Any, rnd: t.Optional[Random] = None) -> t.Any:
