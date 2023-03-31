@@ -1964,3 +1964,29 @@ PUBLIC_DNS = [
     "94.140.14.14",
     "94.140.15.15",
 ]
+
+CONTENT_ENCODING_DIRECTIVES = [
+    "*",
+    "gzip",
+    "compress",
+    "deflate",
+    "br",
+    "identity",
+]
+CORS_RESOURCE_POLICIES = [
+    "same-origin",
+    "same-site",
+    "cross-origin",
+]
+
+CORS_OPENER_POLICIES = [
+    "same-origin",
+    "unsafe-none",
+    "same-origin-allow-popups",
+]
+
+HTTP_SERVERS = [
+    "cloudflare",
+    "Apache/2.4.1 (Unix)",
+    "nginx/1.14.0 (Ubuntu)",
+]

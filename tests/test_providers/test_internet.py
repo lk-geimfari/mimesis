@@ -144,30 +144,38 @@ class TestInternet:
         parts = net.slug(parts_count=parts_count).split("-")
         assert len(parts) == parts_count
 
+    def test_path(self, net):
+        with pytest.raises(ValueError):
+            net.path(parts_count=13)
+
+        with pytest.raises(ValueError):
+            net.path(parts_count=1)
+
+        parts_count = 5
+        parts = net.path(parts_count=parts_count).split("/")
+        assert len(parts) == parts_count
+
     def test_user_agent(self, net):
         result = net.user_agent()
         assert result in data.USER_AGENTS
 
     @pytest.mark.parametrize(
-        "w, h, keywords, writable, res_type",
+        "w, h, keywords",
         [
-            (900, 900, ["love", "passion", "death"], False, str),
-            (800, 800, {"love", "passion", "death"}, False, str),
-            (800, 800, None, False, str),
-            # (700, 700, ['love', 'passion', 'death'], True, bytes),
+            (900, 900, ["octopus", "mimicry"]),
+            (800, 800, {"octopus", "mimicry"}),
+            (800, 800, None),
         ],
     )
-    def test_stock_image(self, net, w, h, keywords, writable, res_type):
-        result = net.stock_image(
+    def test_stock_image_url(self, net, w, h, keywords):
+        result = net.stock_image_url(
             width=w,
             height=h,
             keywords=keywords,
-            writable=writable,
         )
-        assert isinstance(result, res_type)
-        if res_type == str:
-            assert re.match(patterns.STOCK_IMAGE, result)
-            assert result.endswith("?" + ",".join(keywords or []))
+        assert isinstance(result, str)
+        assert re.match(patterns.STOCK_IMAGE, result)
+        assert result.endswith("?" + ",".join(keywords or []))
 
     def test_ip_v4_object(self, net):
         ip = net.ip_v4_object()
@@ -282,6 +290,16 @@ class TestInternet:
     def test_public_dns(self, net):
         assert net.public_dns() in data.PUBLIC_DNS
 
+    def test_http_response_headers(self, net):
+        result = net.http_response_headers()
+        assert isinstance(result, dict)
+        assert result["Allow"] == "*"
+
+    def test_http_request_headers(self, net):
+        result = net.http_request_headers()
+        assert isinstance(result, dict)
+        assert result["Cookie"].startswith("csrftoken")
+
 
 class TestSeededInternet:
     @pytest.fixture
@@ -291,6 +309,20 @@ class TestSeededInternet:
     @pytest.fixture
     def i2(self, seed):
         return Internet(seed=seed)
+
+    def test_http_request_headers(self, i1, i2):
+        r1 = i1.http_request_headers()
+        r2 = i2.http_request_headers()
+
+        for key, val in r1.items():
+            assert r2[key] == val
+
+    def test_http_response_headers(self, i1, i2):
+        r1 = i1.http_response_headers()
+        r2 = i2.http_response_headers()
+
+        for key, val in r1.items():
+            assert r2[key] == val
 
     def test_emoji(self, i1, i2):
         assert i1.emoji() == i2.emoji()
@@ -328,6 +360,9 @@ class TestSeededInternet:
 
     def test_slug(self, i1, i2):
         assert i1.slug(parts_count=2) == i2.slug(parts_count=2)
+
+    def test_path(self, i1, i2):
+        assert i1.path(parts_count=2) == i2.path(parts_count=2)
 
     def test_query_string(self, i1, i2):
         assert i1.query_string(length=2) == i2.query_string(length=2)

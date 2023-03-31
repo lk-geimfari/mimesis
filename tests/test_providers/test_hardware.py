@@ -4,12 +4,12 @@ import pytest
 
 from mimesis import Hardware
 from mimesis.data import (
-    AUTO_MANUFACTURERS,
     CPU,
     CPU_CODENAMES,
     GENERATION,
     GRAPHICS,
     HDD_SSD,
+    MANUFACTURERS,
     PHONE_MODELS,
     RAM_SIZES,
     RAM_TYPES,
@@ -71,7 +71,7 @@ class TestHardware:
 
     def test_manufacturer(self, hard):
         result = hard.manufacturer()
-        assert result in AUTO_MANUFACTURERS
+        assert result in MANUFACTURERS
 
     def test_phone_model(self, hard):
         result = hard.phone_model()

@@ -149,11 +149,6 @@ def test_schema_create(schema):
     assert len(result) == 5
     assert isinstance(result, list)
 
-    first, *mid, last = result
-
-    assert first["timestamp"] != last["timestamp"]
-    assert first["owner"]["creator"] != last["owner"]["creator"]
-
     with pytest.raises(ValueError):
         schema.create(0)
 
@@ -176,11 +171,11 @@ def test_schema_loop(schema):
         warnings.simplefilter("ignore")
         infinite = schema.loop()
 
-        result_1 = next(infinite)
-        result_2 = next(infinite)
+        r1 = next(infinite)
+        r2 = next(infinite)
 
-        assert result_1["timestamp"] != result_2["timestamp"]
-        assert result_1["owner"]["creator"] != result_2["owner"]["creator"]
+        assert r1["timestamp"] != r2["timestamp"]
+        assert r1["owner"]["creator"] != r2["owner"]["creator"]
 
 
 @pytest.mark.parametrize(

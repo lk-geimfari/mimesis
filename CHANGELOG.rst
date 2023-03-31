@@ -3,8 +3,12 @@ Version 7.1.0
 
 **Added**
 
-- `pytest-randomly` integration, not by default it will set the global seed for every provider and all fields. This can still be reseeded as usual.
+- ``pytest-randomly`` integration, not by default it will set the global seed for every provider and all fields. This can still be reseeded as usual.
+- ``http_request_headers()`` and ``http_response_headers()`` methods for ``Internet`` provider. These methods return a dictionary of common headers.
 
+**Removed**:
+
+- ``stock_image()`` method which required an active HTTP connection. Use ``stock_image_url`` instead.
 
 Version 7.0.0
 -------------
@@ -16,9 +20,9 @@ Version 7.0.0
 
 **Removed**:
 
-- Removed parameter `model_mask` for `.airplane()`
-- Removed method `.truck()` of `Transport()`, use `.menufacturer()` instead.
-- Removed method `.cpu_model()` of `Hardware()`.
+- Removed parameter ``model_mask`` for ``airplane()``
+- Removed method ``truck()`` of ``Transport()``, use ``menufacturer()`` instead.
+- Removed method ``cpu_model()`` of ``Hardware()``.
 
 Version 6.1.1
 -------------

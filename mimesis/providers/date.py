@@ -18,6 +18,7 @@ class Datetime(BaseDataProvider):
 
     # See: https://git.io/Jf15A
     _CURRENT_YEAR = datetime.now().year
+    CURRENT_YEAR = datetime.now().year
 
     def __init__(self, *args: t.Any, **kwargs: t.Any) -> None:
         """Initialize attributes."""
