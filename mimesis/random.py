@@ -5,7 +5,6 @@ methods which are not included in standard :py:class:`random.Random`,
 but frequently used in this project.
 """
 
-import os
 import random as random_module
 import string
 import typing as t
