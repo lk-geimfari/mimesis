@@ -68,7 +68,7 @@ validators = "^0.20.0"
 pytest-repeat = "^0.9.1"
 memory-profiler = "^0.60.0"
 Sphinx = "^5.1.1"
-sphinx-copybutton = "^0.5.0"
+sphinx-copybutton = "^0.5.1"
 sphinx-autodoc-typehints = "^1.19.2"
 
 [tool.poetry.plugins."pytest_randomly.random_seeder"]
