@@ -15,7 +15,6 @@ from mimesis.types import MissingSeed, Seed
 
 __all__ = ["Random", "get_random_item", "random"]
 
-
 #: Different plugins (like `pytest-randomly`)
 #: can set custom values to a global seed,
 #: which are going to be the new default.
@@ -125,6 +124,10 @@ class Random(random_module.Random):
 
         characters = string.ascii_letters + string.digits
         return "".join(self.choices(characters, k=length))
+
+    def randbytes(self, n: int = 16) -> bytes:
+        """Generate n random bytes."""
+        return self.getrandbits(n * 8).to_bytes(n, 'little')
 
 
 def get_random_item(enum: t.Any, rnd: t.Optional[Random] = None) -> t.Any:
