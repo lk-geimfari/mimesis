@@ -16,7 +16,11 @@ class Development(BaseProvider):
 
     def __init__(self, *args: t.Any, **kwargs: t.Any) -> None:
         super().__init__(*args, **kwargs)
-        self._internet = Internet(*args, **kwargs)
+        self._internet = Internet(
+            random=self.random,
+            *args,
+            **kwargs,
+        )
         self._now = datetime.now()
 
     class Meta:

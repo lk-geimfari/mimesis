@@ -21,7 +21,12 @@ class BaseProvider:
     class Meta:
         name: str
 
-    def __init__(self, *, seed: Seed = MissingSeed, **kwargs: t.Any) -> None:
+    def __init__(
+        self,
+        *,
+        seed: Seed = MissingSeed,
+        random: t.Optional[_random.Random] = None,
+    ) -> None:
         """Initialize attributes.
 
         Keep in mind, that locale-independent data providers will work
@@ -29,9 +34,18 @@ class BaseProvider:
 
         :param seed: Seed for random.
             When set to `None` the current system time is used.
+        :param random: Custom random.
+            See https://github.com/lk-geimfari/mimesis/issues/1313 for details.
         """
+        if random is not None:
+            if not isinstance(random, _random.Random):
+                raise TypeError(
+                    "The random must be an " "instance of mimesis.random.Random"
+                )
+            self.random = random
+        else:
+            self.random = _random.Random()
         self.seed = seed
-        self.random = _random.Random()
         self.reseed(seed)
 
     def reseed(self, seed: Seed = MissingSeed) -> None:
@@ -87,13 +101,15 @@ class BaseDataProvider(BaseProvider):
         self,
         locale: Locale = Locale.DEFAULT,
         seed: Seed = MissingSeed,
+        *args: t.Any,
+        **kwargs: t.Any,
     ) -> None:
         """Initialize attributes for data providers.
 
         :param locale: Current locale.
         :param seed: Seed to all the random functions.
         """
-        super().__init__(seed=seed)
+        super().__init__(seed=seed, *args, **kwargs)
         self._data: JSON = {}
         self._datafile: str = ""
         self._setup_locale(locale)

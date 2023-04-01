@@ -46,10 +46,24 @@ class Internet(BaseProvider):
         :param kwargs: Keyword arguments.
         """
         super().__init__(*args, **kwargs)
-        self._file = File(seed=self.seed)
-        self._text = Text(locale=Locale.EN, seed=self.seed)
-        self._datetime = Datetime(locale=Locale.EN, seed=self.seed)
-        self._code = Code(seed=self.seed)
+        self._file = File(
+            seed=self.seed,
+            random=self.random,
+        )
+        self._code = Code(
+            seed=self.seed,
+            random=self.random,
+        )
+        self._text = Text(
+            locale=Locale.EN,
+            seed=self.seed,
+            random=self.random,
+        )
+        self._datetime = Datetime(
+            locale=Locale.EN,
+            seed=self.seed,
+            random=self.random,
+        )
 
     class Meta:
         """Class for metadata."""
@@ -62,10 +76,9 @@ class Internet(BaseProvider):
         :return: Content type.
 
         :Example:
-            Content-Type: application/json
+            application/json
         """
-        fmt = self._file.mime_type(type_=mime_type)
-        return f"Content-Type: {fmt}"
+        return self._file.mime_type(type_=mime_type)
 
     def http_status_message(self) -> str:
         """Get a random HTTP status message.
