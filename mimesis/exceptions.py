@@ -50,7 +50,7 @@ class FieldError(ValueError):
     def __init__(self, name: t.Optional[str] = None) -> None:
         """Initialize attributes for more informative output.
 
-        :param name: Name of the field..
+        :param name: Name of the field.
         """
         self.name = name
         self.message = "Field «{}» is not supported."

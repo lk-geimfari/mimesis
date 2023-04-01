@@ -1,4 +1,5 @@
 """Implements classes for generating data by schema."""
+
 import csv
 import json
 import pickle
@@ -9,25 +10,19 @@ import warnings
 from mimesis.exceptions import FieldError, SchemaError
 from mimesis.locales import Locale
 from mimesis.providers.generic import Generic
-from mimesis.types import JSON, CallableSchema, Key, MissingSeed, Seed
+from mimesis.types import (
+    JSON,
+    CallableSchema,
+    FieldCache,
+    Key,
+    MissingSeed,
+    Seed,
+)
 
 __all__ = ["BaseField", "Field", "Schema"]
 
 
 class BaseField:
-    """
-    BaseField is a class for generating data by the name of the method.
-
-    Instance of this object takes any string which represents the name
-    of any method of any supported data provider (:class:`~mimesis.Generic`)
-    and the ``**kwargs`` of the method.
-
-    See :class:`~mimesis.schema.BaseField.perform` for more details.
-    """
-
-    class Meta:
-        base = True
-
     def __init__(
         self,
         locale: Locale = Locale.DEFAULT,
@@ -44,7 +39,62 @@ class BaseField:
         if providers:
             self._gen.add_providers(*providers)
 
-        self._table = {}  # type: ignore
+        self._cache: FieldCache = {}
+
+    def _explicit_lookup(self, name: str) -> t.Any:
+        """An explicit method lookup.
+
+        This method is called when the field name
+        defined explicitly, like this: ``provider.method``
+
+        :param name: The field name.
+        :return: Callable object.
+        :raise FieldError: When field is invalid.
+        """
+        provider_name, method_name = name.split(".", 1)
+        try:
+            provider = getattr(self._gen, provider_name)
+            return getattr(provider, method_name)
+        except AttributeError:
+            raise FieldError(name)
+
+    def _fuzzy_lookup(self, name: str) -> t.Any:
+        """A fuzzy method lookup.
+
+        This method is called when the field name
+        defined explicitly, like this: ``method``
+
+        :param name: The field name.
+        :return: Callable object.
+        :raise FieldError: When field is invalid.
+        """
+        for provider in dir(self._gen):
+            provider = getattr(self._gen, provider)
+            if name in dir(provider):
+                return getattr(provider, name)
+
+        raise FieldError(name)
+
+    def _lookup_method(self, name: str) -> t.Any:
+        """Lookup method by the field name.
+
+        :param name: The field name.
+        :return: Callable object.
+        :raise FieldError: When field is invalid.
+        """
+        # Support additional delimiters
+        name = re.sub(r"[/:\s]", ".", name)
+
+        if name.count(".") > 1:
+            raise FieldError(name)
+
+        if name not in self._cache:
+            if "." not in name:
+                self._cache[name] = self._fuzzy_lookup(name)
+            else:
+                self._cache[name] = self._explicit_lookup(name)
+
+        return self._cache[name]
 
     def perform(
         self,
@@ -85,48 +135,12 @@ class BaseField:
         if name is None:
             raise FieldError()
 
-        # Support additional delimiters
-        name = re.sub(r"[/:\s]", ".", name)
+        result = self._lookup_method(name)(**kwargs)
 
-        def tail_parser(tails: str, obj: t.Any) -> t.Any:
-            """Return method from end of tail.
+        if key and callable(key):
+            return key(result)
 
-            :param tails: Tail string
-            :param obj: Search tail from this object
-            :return last tailed method
-            """
-            provider_name, method_name = tails.split(".", 1)
-
-            if "." in method_name:
-                raise FieldError(name)
-
-            attr = getattr(obj, provider_name)
-            if attr is not None:
-                try:
-                    return getattr(attr, method_name)
-                except AttributeError:
-                    raise FieldError(name)
-
-        try:
-            if name not in self._table:
-                if "." not in name:
-                    # Fix https://github.com/lk-geimfari/mimesis/issues/619
-                    if name == self._gen.choice.Meta.name:
-                        self._table[name] = self._gen.choice
-                    else:
-                        for provider in dir(self._gen):
-                            provider = getattr(self._gen, provider)
-                            if name in dir(provider):
-                                self._table[name] = getattr(provider, name)
-                else:
-                    self._table[name] = tail_parser(name, self._gen)
-
-            result = self._table[name](**kwargs)
-            if key and callable(key):
-                return key(result)
-            return result
-        except KeyError:
-            raise FieldError(name)
+        return result
 
     def __str__(self) -> str:
         return f"{self.__class__.__name__} <{self._gen.locale}>"
@@ -218,15 +232,13 @@ class Schema:
 
             In other words, the first multiplier evaluetes the schema:
 
-            >>> 1 * schema * 5
+            >>> 1 * schema * 3
 
             The result will be:
 
             .. code-block:: json
 
                 [
-                    {"email": "efforts1859@test.com", "token": "f4a29754"},
-                    {"email": "efforts1859@test.com", "token": "f4a29754"},
                     {"email": "efforts1859@test.com", "token": "f4a29754"},
                     {"email": "efforts1859@test.com", "token": "f4a29754"},
                     {"email": "efforts1859@test.com", "token": "f4a29754"},

@@ -67,6 +67,54 @@ def test_field_raises_field_error(default_field):
         default_field("person.full_name.invalid")
 
 
+def test_explicit_lookup(field):
+    result = field._explicit_lookup("person.surname")
+
+    assert callable(result)
+    assert isinstance(result(), str)
+
+
+def test_fuzzy_lookup(field):
+    result = field._fuzzy_lookup("surname")
+
+    assert callable(result)
+    assert isinstance(result(), str)
+
+
+@pytest.mark.parametrize(
+    "field_name",
+    (
+        "surname",
+        "person.surname",
+    ),
+)
+def test_lookup_method(field, field_name):
+    result = field._lookup_method(field_name)
+
+    assert callable(result)
+    assert isinstance(result(), str)
+
+
+@pytest.mark.parametrize(
+    "field_name",
+    (
+        "",
+        "foo",
+        "foo.bar",
+        "person.surname.male",
+    ),
+)
+def test_lookup_method_field_error(field, field_name):
+    with pytest.raises(FieldError):
+        field._lookup_method(field_name)
+
+    with pytest.raises(ValueError):
+        field._explicit_lookup(field_name)
+
+    with pytest.raises(FieldError):
+        field._fuzzy_lookup(field_name)
+
+
 @pytest.fixture(scope="module", params=list(Locale))
 def test_base_field(request):
     field = BaseField(request.param)
