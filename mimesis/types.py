@@ -25,6 +25,7 @@ __all__ = [
     "Time",
     "Timestamp",
     "Keywords",
+    "MissingSeed",
     "CallableSchema",
     "Key",
 ]
