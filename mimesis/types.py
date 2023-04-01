@@ -17,17 +17,18 @@ import typing as t
 from decimal import Decimal
 
 __all__ = [
+    "CallableSchema",
     "Date",
     "DateTime",
+    "FieldCache",
     "JSON",
+    "Key",
+    "Keywords",
     "Matrix",
+    "MissingSeed",
     "Seed",
     "Time",
     "Timestamp",
-    "Keywords",
-    "MissingSeed",
-    "CallableSchema",
-    "Key",
 ]
 
 JSON = t.Dict[str, t.Any]
@@ -60,3 +61,5 @@ Matrix = t.Union[
 CallableSchema = t.Callable[[], JSON]
 
 Key = t.Optional[t.Callable[[t.Any], t.Any]]
+
+FieldCache = t.Dict[str, t.Callable[[t.Any], t.Any]]

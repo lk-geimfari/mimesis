@@ -14,6 +14,19 @@ class Choice(BaseProvider):
 
         name: t.Final[str] = "choice"
 
+    def choice(self, *args: t.Any, **kwargs: t.Any) -> t.Any:
+        """Choice random item form sequence.
+
+        The call of this method is equal to self.__call__(*args, **kwargs)
+
+        See https://github.com/lk-geimfari/mimesis/issues/619
+
+        :param args: Positional arguments.
+        :param kwargs: Keyword arguments.
+        :return:
+        """
+        return self.__call__(*args, **kwargs)
+
     def __call__(
         self,
         items: t.Optional[t.Sequence[t.Any]],
