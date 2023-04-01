@@ -26,7 +26,11 @@ class Payment(BaseProvider):
         :param kwargs: Keyword arguments.
         """
         super().__init__(*args, **kwargs)
-        self._person = Person(Locale.EN, seed=self.seed)
+        self._person = Person(
+            locale=Locale.EN,
+            seed=self.seed,
+            random=self.random,
+        )
 
     class Meta:
         """Class for metadata."""

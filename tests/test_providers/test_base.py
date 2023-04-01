@@ -174,6 +174,10 @@ class TestBase:
         base = BaseDataProvider(locale=locale)
         assert locale.value == base.get_current_locale()
 
+    def test_base_wrong_random_type(self):
+        with pytest.raises(TypeError):
+            BaseProvider(random="")
+
 
 class TestSeededBase:
     @pytest.fixture

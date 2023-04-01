@@ -237,7 +237,6 @@ class TestInternet:
     )
     def test_content_type(self, net, mime_type):
         ct = net.content_type(mime_type=mime_type)
-        ct = ct.split(":")[1].strip()
         assert ct in data.MIME_TYPES[mime_type.value]
 
     def test_content_type_wrong_arg(self, net):
