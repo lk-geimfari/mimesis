@@ -184,15 +184,15 @@ class Internet(BaseProvider):
         height: t.Union[int, str] = 1080,
         keywords: t.Optional[Keywords] = None,
     ) -> str:
-        """Generate random stock image (JPG/JPEG) hosted on Unsplash.
+        """Generate a random stock image URL hosted on Unsplash.
 
         See «Random search term» on https://source.unsplash.com/
         for more details.
 
         :param width: Width of the image.
         :param height: Height of the image.
-        :param keywords: List of search keywords.
-        :return: Link to the image.
+        :param keywords: Sequence of search keywords.
+        :return: URL of the image.
         """
         if keywords is not None:
             keywords_str = ",".join(keywords)
@@ -222,7 +222,7 @@ class Internet(BaseProvider):
         tld_type: t.Optional[TLDType] = None,
         subdomains: t.Optional[t.List[str]] = None,
     ) -> str:
-        """Generate a random hostname without scheme.
+        """Generate a random hostname without a scheme.
 
         :param tld_type: TLDType.
         :param subdomains: List of subdomains (make sure they are valid).
@@ -244,9 +244,9 @@ class Internet(BaseProvider):
         tld_type: t.Optional[TLDType] = None,
         subdomains: t.Optional[t.List[str]] = None,
     ) -> str:
-        """Generate random URL.
+        """Generate a random URL.
 
-        :param scheme: Scheme.
+        :param scheme: The scheme.
         :param port_range: PortRange enum object.
         :param tld_type: TLDType.
         :param subdomains: List of subdomains (make sure they are valid).
