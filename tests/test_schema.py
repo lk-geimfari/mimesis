@@ -73,24 +73,12 @@ def test_explicit_lookup(field):
     assert callable(result)
     assert isinstance(result(), str)
 
-    with pytest.raises(ValueError):
-        field._explicit_lookup("")
-
-    with pytest.raises(ValueError):
-        field._explicit_lookup("foo.bar")
-
 
 def test_fuzzy_lookup(field):
     result = field._fuzzy_lookup("surname")
 
     assert callable(result)
     assert isinstance(result(), str)
-
-    with pytest.raises(ValueError):
-        field._explicit_lookup("")
-
-    with pytest.raises(ValueError):
-        field._explicit_lookup("foo")
 
 
 @pytest.mark.parametrize(
@@ -106,11 +94,25 @@ def test_lookup_method(field, field_name):
     assert callable(result)
     assert isinstance(result(), str)
 
-    with pytest.raises(ValueError):
-        field._lookup_method("")
+
+@pytest.mark.parametrize(
+    "field_name",
+    (
+        "",
+        "foo",
+        "foo.bar",
+        "person.surname.male",
+    ),
+)
+def test_lookup_method_field_error(field, field_name):
+    with pytest.raises(FieldError):
+        field._lookup_method(field_name)
 
     with pytest.raises(ValueError):
-        field._lookup_method("foo")
+        field._explicit_lookup(field_name)
+
+    with pytest.raises(FieldError):
+        field._fuzzy_lookup(field_name)
 
 
 @pytest.fixture(scope="module", params=list(Locale))

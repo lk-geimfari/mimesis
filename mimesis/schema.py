@@ -49,7 +49,7 @@ class BaseField:
 
         :param name: The field name.
         :return: Callable object.
-        :raise FieldError: If field is unsupported.
+        :raise FieldError: When field is invalid.
         """
         provider_name, method_name = name.split(".", 1)
         try:
@@ -66,7 +66,7 @@ class BaseField:
 
         :param name: The field name.
         :return: Callable object.
-        :raise FieldError: If field is unsupported.
+        :raise FieldError: When field is invalid.
         """
         for provider in dir(self._gen):
             provider = getattr(self._gen, provider)
@@ -80,7 +80,14 @@ class BaseField:
 
         :param name: The field name.
         :return: Callable object.
+        :raise FieldError: When field is invalid.
         """
+        # Support additional delimiters
+        name = re.sub(r"[/:\s]", ".", name)
+
+        if name.count(".") > 1:
+            raise FieldError(name)
+
         if name not in self._cache:
             if "." not in name:
                 self._cache[name] = self._fuzzy_lookup(name)
@@ -125,11 +132,8 @@ class BaseField:
         :raises ValueError: if provider not
             supported or if field not defined.
         """
-        if name is None or name.count(".") > 1:
+        if name is None:
             raise FieldError()
-
-        # Support additional delimiters
-        name = re.sub(r"[/:\s]", ".", name)
 
         result = self._lookup_method(name)(**kwargs)
 
