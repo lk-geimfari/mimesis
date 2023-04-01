@@ -407,3 +407,11 @@ class TestSeededInternet:
 
     def test_public_dns(self, i1, i2):
         assert i1.public_dns() == i2.public_dns()
+
+    def test_reseed(self, i1, i2):
+        # Reseed with the same number should return same values
+        # issue #1313
+        i1.reseed(1)
+        ip = i1.http_request_headers()
+        i1.reseed(1)
+        assert ip == i1.http_request_headers()

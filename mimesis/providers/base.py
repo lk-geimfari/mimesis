@@ -44,6 +44,14 @@ class BaseProvider:
         :param seed: Seed for random.
             When set to `None` the current system time is used.
         """
+        providers = [
+            sub_provider
+            for _, sub_provider in self.__dict__.items()
+            if isinstance(sub_provider, BaseProvider)
+        ]
+        for p in providers:
+            p.reseed(seed)
+
         self.seed = seed
         if seed is MissingSeed:
             # Remove casts after mypy will fix this inference:

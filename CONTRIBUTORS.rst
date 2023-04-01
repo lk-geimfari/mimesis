@@ -91,6 +91,7 @@ Patches and Suggestions
 -  Nick Pope `(ngnpope)`_
 -  Arul Prabakaran `(arulprabakaran)`_
 -  Florian Kroiß `(Wooza)`_
+-  Sven Steinbauer `(Svenito)`_
 
 
 .. _(lk-geimfari): https://github.com/lk-geimfari
@@ -160,3 +161,4 @@ Patches and Suggestions
 .. _(ngnpope): https://github.com/ngnpope
 .. _(arulprabakaran): https://github.com/arulprabakaran
 .. _(Wooza): https://github.com/Wooza
+.. _(Svenito): https://github.com/Svenito
