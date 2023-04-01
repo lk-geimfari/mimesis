@@ -69,10 +69,19 @@ class TestDatetime:
         assert isinstance(date_object, datetime.date)
         assert date_object.year == dt._CURRENT_YEAR
 
-    def test_formatted_date(self, dt):
-        fmt_date = dt.formatted_date("%Y", start=2000, end=2000)
+    def test_formatted_date(self, _datetime):
+        fmt_date = _datetime.formatted_date("%Y", start=2000, end=2000)
         assert int(fmt_date) == 2000
         assert isinstance(fmt_date, str)
+
+    def test_formatted_datetime(self, dt):
+        year, hour = dt.formatted_datetime("%Y %H", start=2000, end=2000).split(" ")
+        assert int(year.strip()) == 2000
+        assert int(hour.strip()) <= 23
+        assert isinstance(year, str)
+
+        result = dt.formatted_datetime(fmt="")
+        assert result
 
     def test_time(self, dt):
         default = dt.time()
@@ -255,7 +264,7 @@ class TestSeededDatetime:
         assert d1.timestamp(posix=False) == d2.timestamp(posix=False)
 
     def test_formatted_datetime(self, d1, d2):
-        assert d1.formatted_date() == d2.formatted_date()
+        assert d1.formatted_datetime() == d2.formatted_datetime()
 
     def test_week_date(self, d1, d2):
         assert d1.week_date() == d2.week_date()

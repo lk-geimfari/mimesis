@@ -37,10 +37,11 @@ class TestTransport:
     @pytest.mark.parametrize("locale", Locale)
     def test_vehicle_registration_code(self, transport, locale):
         result = transport.vehicle_registration_code(locale=locale)
-        if locale:
-            assert result in VRC_BY_LOCALES[locale.value]
-        else:
-            assert result in VR_CODES
+        assert result in VRC_BY_LOCALES[locale.value]
+
+    def test_random_vehicle_registration_code(self, transport):
+        result = transport.vehicle_registration_code(locale=None)
+        assert result in VR_CODES
 
 
 class TestSeededTransport:
@@ -63,7 +64,7 @@ class TestSeededTransport:
 
     @pytest.mark.parametrize(
         "locale",
-        list(Locale),
+        list(Locale) + [None],
     )
     def test_vehicle_registration_code(self, t1, t2, locale):
         a = t1.vehicle_registration_code(locale)

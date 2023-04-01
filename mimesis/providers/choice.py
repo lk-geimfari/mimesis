@@ -17,13 +17,11 @@ class Choice(BaseProvider):
     def choice(self, *args: t.Any, **kwargs: t.Any) -> t.Any:
         """Choice random item form sequence.
 
-        The call of this method is equal to self.__call__(*args, **kwargs)
-
         See https://github.com/lk-geimfari/mimesis/issues/619
 
         :param args: Positional arguments.
         :param kwargs: Keyword arguments.
-        :return:
+        :return: Sequence or uncontained element randomly chosen from items.
         """
         return self.__call__(*args, **kwargs)
 
@@ -61,6 +59,7 @@ class Choice(BaseProvider):
         ('c', 'a', 'a', 'b', 'c')
         >>> choice(items='aabbbccccddddd', length=4, unique=True)
         'cdba'
+
         """
 
         if not isinstance(items, t.Sequence):
