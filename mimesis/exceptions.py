@@ -1,4 +1,4 @@
-"""Custom exceptions which used in Mimesis."""
+"""Custom exceptions which are used in Mimesis."""
 
 import typing as t
 
@@ -20,10 +20,10 @@ class LocaleError(ValueError):
 
 
 class SchemaError(ValueError):
-    """Raised when schema is unsupported."""
+    """Raised when a schema is unsupported."""
 
     def __str__(self) -> str:
-        return "Schema should a callable object."
+        return "The schema must be a callable object."
 
 
 class NonEnumerableError(TypeError):
@@ -53,8 +53,8 @@ class FieldError(ValueError):
         :param name: Name of the field..
         """
         self.name = name
-        self.message = "A field «{}» is not supported."
-        self.message_none = "Field cannot be None."
+        self.message = "Field «{}» is not supported."
+        self.message_none = "The field cannot have the value None."
 
     def __str__(self) -> str:
         if self.name is None:
