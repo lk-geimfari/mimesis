@@ -144,22 +144,6 @@ Providers
 
 Mimesis provides more than twenty data providers which can generate a broad range of data related to food, transportation, computer hardware, people, internet, addresses, and more. 
 
-This makes it possible to generate exceedingly detailed data:
-
-.. code:: python
-
-    >>> from mimesis import Internet, Development
-    >>> from mimesis.enums import URLScheme, DSNType
-    >>> internet = Internet()
-    >>> development = Development()
-    >>> internet.url(scheme=URLScheme.WSS, subdomains=["chat"])
-    'wss://chat.system.io/'
-    >>> development.dsn(dsn_type=DSNType.REDIS, subdomains=["cache"])
-    'redis://cache.fisher.app:5432'
-    >>> development.dsn(dsn_type=DSNType.POSTGRES, tld_type=TLDType.CCTLD)
-    'postgres://posted.sy:5432'
-
-
 See `API Reference <https://mimesis.name/en/latest/api.html>`_ and `Data Providers <https://mimesis.name/en/latest/getting_started.html#data-providers>`_ for more info.
 
 How to Contribute
