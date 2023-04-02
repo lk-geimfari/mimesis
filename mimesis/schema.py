@@ -90,9 +90,10 @@ class BaseField:
 
         if name not in self._cache:
             if "." not in name:
-                self._cache[name] = self._fuzzy_lookup(name)
+                method = self._fuzzy_lookup(name)
             else:
-                self._cache[name] = self._explicit_lookup(name)
+                method = self._explicit_lookup(name)
+            self._cache[name] = method
 
         return self._cache[name]
 
