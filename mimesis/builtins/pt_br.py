@@ -8,7 +8,6 @@ from mimesis.types import MissingSeed, Seed
 __all__ = ["BrazilSpecProvider"]
 
 
-# TODO: Refactor this piece of s... some code.
 class BrazilSpecProvider(BaseSpecProvider):
     """Class that provides special data for Brazil (pt-br)."""
 
@@ -21,6 +20,26 @@ class BrazilSpecProvider(BaseSpecProvider):
 
         name: t.Final[str] = "brazil_provider"
 
+    @staticmethod
+    def __get_verifying_digit_cpf(cpf: t.List[int], weight: int) -> int:
+        """Calculate the verifying digit for the CPF.
+
+        :param cpf: List of integers with the CPF.
+        :param weight: Integer with the weight for the modulo 11 calculate.
+        :returns: The verifying digit for the CPF.
+        """
+        total = 0
+
+        for index, digit in enumerate(cpf):
+            total += digit * (weight - index)
+
+        remainder = total % 11
+
+        if remainder == 0 or remainder == 1 or remainder >= 11:
+            return 0
+
+        return 11 - remainder
+
     def cpf(self, with_mask: bool = True) -> str:
         """Get a random CPF.
 
@@ -31,33 +50,39 @@ class BrazilSpecProvider(BaseSpecProvider):
             001.137.297-40
         """
 
-        def get_verifying_digit_cpf(cpf: t.List[int], peso: int) -> int:
-            """Calculate the verifying digit for the CPF.
-
-            :param cpf: List of integers with the CPF.
-            :param peso: Integer with the weight for the modulo 11 calculate.
-            :returns: The verifying digit for the CPF.
-            """
-            soma = 0
-            for index, digit in enumerate(cpf):
-                soma += digit * (peso - index)
-            resto = soma % 11
-            if resto == 0 or resto == 1 or resto >= 11:
-                return 0
-            return 11 - resto
-
         cpf_without_dv = [self.random.randint(0, 9) for _ in range(9)]
-        first_dv = get_verifying_digit_cpf(cpf_without_dv, 10)
+        first_dv = self.__get_verifying_digit_cpf(cpf_without_dv, 10)
 
         cpf_without_dv.append(first_dv)
-        second_dv = get_verifying_digit_cpf(cpf_without_dv, 11)
+        second_dv = self.__get_verifying_digit_cpf(cpf_without_dv, 11)
         cpf_without_dv.append(second_dv)
 
-        cpf = "".join(map(str, cpf_without_dv))
+        cpf = "".join(str(i) for i in cpf_without_dv)
 
         if with_mask:
-            return cpf[:3] + "." + cpf[3:6] + "." + cpf[6:9] + "-" + cpf[9:]
+            return f"{cpf[:3]}.{cpf[3:6]}.{cpf[6:9]}-{cpf[9:]}"
         return cpf
+
+    @staticmethod
+    def __get_verifying_digit_cnpj(cnpj: t.List[int], weight: int) -> int:
+        """Calculate the verifying digit for the CNPJ.
+
+        :param cnpj: List of integers with the CNPJ.
+        :param weight: Integer with the weight for the modulo 11 calculate.
+        :returns: The verifying digit for the CNPJ.
+        """
+        total = 0
+        weights_dict = {
+            5: [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2],
+            6: [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2],
+        }
+        weights = weights_dict[weight]
+
+        for i, _ in enumerate(cnpj):
+            total += weights[i] * cnpj[i]
+
+        remainder = total % 11
+        return 0 if (remainder < 2) else (11 - remainder)
 
     def cnpj(self, with_mask: bool = True) -> str:
         """Get a random CNPJ.
@@ -69,34 +94,15 @@ class BrazilSpecProvider(BaseSpecProvider):
             77.732.230/0001-70
         """
 
-        def get_verifying_digit_cnpj(cnpj: t.List[int], peso: int) -> int:
-            """Calculate the verifying digit for the CNPJ.
-
-            :param cnpj: List of integers with the CNPJ.
-            :param peso: Integer with the weight for the modulo 11 calculate.
-            :returns: The verifying digit for the CNPJ.
-            """
-            soma = 0
-            if peso == 5:
-                peso_list = [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2]
-            elif peso == 6:
-                peso_list = [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2]
-            for i, _ in enumerate(cnpj):
-                soma += peso_list[i] * cnpj[i]
-            resto = soma % 11
-            if resto < 2:
-                return 0
-            return 11 - resto
-
         cnpj_without_dv = [self.random.randint(0, 9) for _ in range(12)]
 
-        first_dv = get_verifying_digit_cnpj(cnpj_without_dv, 5)
+        first_dv = self.__get_verifying_digit_cnpj(cnpj_without_dv, 5)
         cnpj_without_dv.append(first_dv)
 
-        second_dv = get_verifying_digit_cnpj(cnpj_without_dv, 6)
+        second_dv = self.__get_verifying_digit_cnpj(cnpj_without_dv, 6)
         cnpj_without_dv.append(second_dv)
 
-        cnpj = "".join(map(str, cnpj_without_dv))
+        cnpj = "".join(str(i) for i in cnpj_without_dv)
 
         if with_mask:
             return "{}.{}.{}/{}-{}".format(
