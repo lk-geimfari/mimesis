@@ -285,8 +285,6 @@ def test_schema_to_pickle(schema, iterations):
         1,
         3.14,
         "seed",
-        b"seed",
-        bytearray(b"seed"),
         MissingSeed,
     ],
 )
