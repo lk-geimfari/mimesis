@@ -119,9 +119,9 @@ class Person(BaseDataProvider):
         return self.surname(gender)
 
     def title(
-        self,
-        gender: t.Optional[Gender] = None,
-        title_type: t.Optional[TitleType] = None,
+            self,
+            gender: t.Optional[Gender] = None,
+            title_type: t.Optional[TitleType] = None,
     ) -> str:
         """Generate a random title for name.
 
@@ -143,7 +143,7 @@ class Person(BaseDataProvider):
         return self.random.choice(titles)
 
     def full_name(
-        self, gender: t.Optional[Gender] = None, reverse: bool = False
+            self, gender: t.Optional[Gender] = None, reverse: bool = False
     ) -> str:
         """Generate a random full name.
 
@@ -167,16 +167,16 @@ class Person(BaseDataProvider):
         return f"{surname} {name}" if reverse else f"{name} {surname}"
 
     def username(
-        self, mask: t.Optional[str] = None, drange: t.Tuple[int, int] = (1800, 2100)
+            self, mask: t.Optional[str] = None, drange: t.Tuple[int, int] = (1800, 2100)
     ) -> str:
-        """Generate username by template.
+        """Generate username by mask.
 
-        You can create many different usernames using masks.
+        Masks allow you to generate a variety of usernames.
 
         - **C** stands for capitalized username.
         - **U** stands for uppercase username.
         - **l** stands for lowercase username.
-        - **d** stands for digits in username.
+        - **d** stands for digits in the username.
 
         You can also use symbols to separate the different parts
         of the username: **.** **_** **-**
@@ -245,9 +245,9 @@ class Person(BaseDataProvider):
         return password
 
     def email(
-        self,
-        domains: t.Optional[t.Sequence[str]] = None,
-        unique: bool = False,
+            self,
+            domains: t.Optional[t.Sequence[str]] = None,
+            unique: bool = False,
     ) -> str:
         """Generate a random email.
 
@@ -446,7 +446,7 @@ class Person(BaseDataProvider):
         languages: t.List[str] = self.extract(["language"])
         return self.random.choice(languages)
 
-    def telephone(self, mask: str = "", placeholder: str = "#") -> str:
+    def phone_number(self, mask: str = "", placeholder: str = "#") -> str:
         """Generate a random phone number.
 
         :param mask: Mask for formatting number.
@@ -463,6 +463,9 @@ class Person(BaseDataProvider):
             mask = self.random.choice(masks)
 
         return self.random.custom_code(mask=mask, digit=placeholder)
+
+    def telephone(self, *args: t.Any, **kwargs: t.Any) -> str:
+        return self.phone_number(*args, **kwargs)
 
     def identifier(self, mask: str = "##-##/##") -> str:
         """Generate a random identifier by mask.
