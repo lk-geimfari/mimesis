@@ -41,6 +41,13 @@ class BaseField:
 
         self._cache: FieldCache = {}
 
+    def reseed(self, seed: Seed = MissingSeed) -> None:
+        """Reseed the random generator.
+
+        :param seed: Seed for random.
+        """
+        self._gen.reseed(seed)
+
     def _explicit_lookup(self, name: str) -> t.Any:
         """An explicit method lookup.
 

@@ -13,6 +13,7 @@ from mimesis.enums import Gender
 from mimesis.exceptions import FieldError, SchemaError
 from mimesis.locales import Locale
 from mimesis.schema import BaseField, Field, Schema
+from mimesis.types import MissingSeed
 from tests.test_providers import patterns
 
 
@@ -276,3 +277,24 @@ def test_schema_to_pickle(schema, iterations):
         assert "id" in data[0] and "id" in data[-1]
         assert isinstance(data, list)
         assert len(data) == iterations
+
+
+@pytest.mark.parametrize(
+    "seed",
+    [
+        1,
+        3.14,
+        "seed",
+        b"seed",
+        bytearray(b"seed"),
+        MissingSeed,
+    ],
+)
+def test_field_reseed(field, seed):
+    field.reseed(seed)
+    result1 = field("dsn")
+
+    field.reseed(seed)
+    result2 = field("dsn")
+
+    assert result1 == result2

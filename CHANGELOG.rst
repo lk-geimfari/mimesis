@@ -5,6 +5,7 @@ Version 7.1.0
 
 - ``pytest-randomly`` integration, not by default it will set the global seed for every provider and all fields. This can still be reseeded as usual.
 - ``http_request_headers()`` and ``http_response_headers()`` methods for ``Internet`` provider. These methods return a dictionary of common headers.
+- ``reseed()`` method for ``Field``.
 
 **Removed**:
 
