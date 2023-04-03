@@ -51,7 +51,7 @@ class BaseField:
     def _explicit_lookup(self, name: str) -> t.Any:
         """An explicit method lookup.
 
-        This method is called when the field name
+        This method is called when the field 
         defined explicitly, like this: ``provider.method``
 
         :param name: The field name.
@@ -68,8 +68,8 @@ class BaseField:
     def _fuzzy_lookup(self, name: str) -> t.Any:
         """A fuzzy method lookup.
 
-        This method is called when the field name
-        defined explicitly, like this: ``method``
+        This method is called when the field defenition 
+        is fuzzy, like this: ``method``
 
         :param name: The field name.
         :return: Callable object.
