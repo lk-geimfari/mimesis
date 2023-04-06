@@ -326,11 +326,11 @@ class Schema:
     def loop(self) -> t.Iterator[JSON]:
         """Fulfills a schema **infinitely** in a lazy way.
 
-        This method can be useful when you have some dynamic
-        conditions in depend on which the generation must be interrupted.
+        This method can be useful when you have dynamic conditions
+        on which the generation must depend and be interrupted accordingly.
 
-        Since data `mimesis` provides are limited, frequent calls of
-        this method can cause data duplication.
+        Since the data provided by mimesis is limited, frequent
+        calls of this method may cause data duplication.
 
         Before using this method, ask yourself: **Do I really need this**?
         In most cases, the answer is: Nah, :meth:`iterator` is enough.
@@ -352,7 +352,7 @@ class Schema:
 
         warnings.warn(
             "You're iterating over the infinite object! "
-            "The schema.loop() can cause a serious memory leak."
+            "The schema.loop() may cause a serious memory leak."
             "Please, see: https://mimesis.name/en/latest/api.html#mimesis.schema.Schema.loop"
         )
 
