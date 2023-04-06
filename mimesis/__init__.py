@@ -6,6 +6,31 @@ Email: <likid.geimfari@gmail.com>
 Repository: https://github.com/lk-geimfari/mimesis
 """
 
+from mimesis.enums import (
+    Algorithm,
+    AudioFile,
+    CardType,
+    CompressedFile,
+    CountryCode,
+    DocumentFile,
+    DSNType,
+    EANFormat,
+    FileType,
+    Gender,
+    ImageFile,
+    ISBNFormat,
+    MeasureUnit,
+    MetricPrefixSign,
+    MimeType,
+    NumType,
+    PortRange,
+    TimezoneRegion,
+    TitleType,
+    TLDType,
+    URLScheme,
+    VideoFile,
+)
+from mimesis.locales import Locale
 from mimesis.providers import (
     Address,
     BaseDataProvider,
@@ -59,6 +84,31 @@ __all__ = [
     # Schema:
     "Field",
     "Schema",
+    # Locale:
+    "Locale",
+    # Enums:
+    "Algorithm",
+    "AudioFile",
+    "CardType",
+    "CompressedFile",
+    "CountryCode",
+    "DocumentFile",
+    "DSNType",
+    "EANFormat",
+    "FileType",
+    "Gender",
+    "ImageFile",
+    "ISBNFormat",
+    "MeasureUnit",
+    "MetricPrefixSign",
+    "MimeType",
+    "NumType",
+    "PortRange",
+    "TimezoneRegion",
+    "TitleType",
+    "TLDType",
+    "URLScheme",
+    "VideoFile",
     # Meta:
     "__version__",
     "__title__",
