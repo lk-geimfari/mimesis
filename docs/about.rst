@@ -4,22 +4,22 @@ About Mimesis
 What Mimesis is?
 ----------------
 
-**Mimesis** provides a perfect solution for generating data. It effectively populates databases, 
-creates intricate JSON/XML files, and anonymizes productive service data. 
+**Mimesis** provides a perfect solution for generating data. It effectively populates databases,
+creates intricate JSON/XML files, and anonymizes productive service data.
 If you require these functions, Mimesis is the ideal tool for you.
 
 What Mimesis is Not?
 --------------------
 
-Mimesis was not created as an object factory intended for use with a specific database or 
-ORM (e.g., Django ORM, SQLAlchemy, etc.). However, this does not mean that it cannot be 
+Mimesis was not created as an object factory intended for use with a specific database or
+ORM (e.g., Django ORM, SQLAlchemy, etc.). However, this does not mean that it cannot be
 used with an ORM. In fact, it can be easily integrated with an ORM using third-party libraries like `mimesis-factory <https://github.com/lk-geimfari/mimesis-factory>`_ or others.
 
 What is the fake data?
 ----------------------
 
-Fake data refers to data that is not useful or sensitive, but is used to occupy a space 
-where real data is typically located. This type of data can act as a placeholder for both 
+Fake data refers to data that is not useful or sensitive, but is used to occupy a space
+where real data is typically located. This type of data can act as a placeholder for both
 testing and operational purposes. In testing, it can also serve as stubs or placeholders.
 
 What does name mean?
@@ -27,16 +27,17 @@ What does name mean?
 
 Mimesis (`/maɪˈmiːsəs/ <https://en.wikipedia.org/wiki/Help:IPA/English>`_;
 `Ancient Greek <https://en.wikipedia.org/wiki/Ancient_Greek_language>`_: μίμησις (*mīmēsis*), from μιμεῖσθαι (*mīmeisthai*),
-"to imitate", from μῖμος (mimos), "imitator, actor") is a term of critical and philosophical 
-significance, rooted in Ancient Greek, with various connotations such as imitation, representation, 
+"to imitate", from μῖμος (mimos), "imitator, actor") is a term of critical and philosophical
+significance, rooted in Ancient Greek, with various connotations such as imitation, representation,
 mimicry, receptivity, nonsensuous similarity, resemblance, expression, and the presentation of the self.
 
 Why octopus?
 ------------
-Basically, because octopuses are cool guys, but also because of the
-fantastic `mimicry <https://en.wikipedia.org/wiki/Mimicry>`_ abilities of some families of octopuses.
-Have you ever hear about `Thaumoctopus mimicus <https://en.wikipedia.org/wiki/Mimic_octopus>`_?
-Just read about that guy, because he is a really badass one.
+
+Octopuses are fascinating creatures, and some families of octopuses
+have incredible `mimicry <https://en.wikipedia.org/wiki/Mimicry>`_ abilities.
+`Thaumoctopus mimicus <https://en.wikipedia.org/wiki/Mimic_octopus>`_ is a particularly
+impressive example, and if you haven't heard of it yet, you should definitely read up on this remarkable species.
 
 Features
 --------
