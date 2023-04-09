@@ -195,7 +195,11 @@ html_css_files = [
 # Custom sidebar templates, maps document names to template names.
 #
 html_sidebars = {
-    "index": ["sidebar_intro.html"],
+    "**": [
+        "sidebars/head.html",
+        "searchbox.html",
+        "sidebars/rest.html"
+    ],
 }
 
 # Additional templates that should be rendered to pages, maps page names to
