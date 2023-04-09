@@ -415,7 +415,7 @@ then you got ``TypeError`` exception:
     generic.add_provider(InvalidProvider)
     Traceback (most recent call last):
       ...
-    TypeError: The provider must inherit BaseProvider.
+    TypeError: The provider must be a subclass of mimesis.providers.BaseProvider.
 
 
 All providers must be subclasses of :class:`~mimesis.BaseProvider`
