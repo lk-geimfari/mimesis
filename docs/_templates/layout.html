@@ -1,5 +1,20 @@
 {% extends '!layout.html' %}
 
+{% block extrahead %}
+    <meta property="og:title" content="Mimesis: Fake Data Generator" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:url" content="https://mimesis.name/" />
+    <meta property="og:image" content="https://mimesis.name/en/master/_static/preview.png" />
+    <meta property="og:description" content="A robust data generator for Python, capable of rapidly producing large volumes of synthetic data for various use cases." />
+    <meta name="description" content="A robust data generator for Python, capable of rapidly producing large volumes of synthetic data for various use cases.">
+    <meta name="keywords" content="mimesis, fake data, faker, dummy, testing, python, django, mock, testing, pytest, api, json, synthetic data, datascience, fixtures, schema, generator" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Mimesis: Fake Data Generator" />
+    <meta name="twitter:description" content="A robust data generator for Python, capable of rapidly producing large volumes of synthetic data for various use cases." />
+    <meta name="twitter:image" content="https://mimesis.name/en/master/_static/preview.png" />
+{% endblock %}
+
 {% block footer %}
   <style type="text/css">
     .rst-versions.rst-badge {
