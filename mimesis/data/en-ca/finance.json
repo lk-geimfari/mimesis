@@ -1,4 +1,12 @@
 {
+  "banks": [
+    "Bank of Montreal",
+    "Bank of Nova Scotia",
+    "Canadian Imperial Bank of Commerce",
+    "Royal Bank of Canada",
+    "Toronto-Dominion Bank",
+    "National Bank of Canada"
+  ],
   "company": {
     "name": [
       "ATI technologies",

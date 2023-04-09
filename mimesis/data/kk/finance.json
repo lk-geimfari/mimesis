@@ -1,4 +1,16 @@
 {
+  "banks": [
+    "Halyk Bank Kazakhstan",
+    "Kazkommertsbank",
+    "ForteBank",
+    "Eurasian Bank",
+    "Bank CenterCredit",
+    "First Heartland Jysan Bank",
+    "Bank RBK",
+    "Bank ATFBank",
+    "Tsesnabank",
+    "Bank Kaspi"
+  ],
   "company": {
     "name": [
       "ADVANCE MANAGEMENT",

@@ -1,4 +1,15 @@
 {
+  "banks": [
+    "Aktia Bank plc",
+    "Danske Bank plc",
+    "Handelsbanken",
+    "Nordea Bank",
+    "Oma Säästöpankki",
+    "OP Financial Group",
+    "POP Bank Group",
+    "S-Bank",
+    "Ålandsbanken"
+  ],
   "company": {
     "name": [
       "9lives",

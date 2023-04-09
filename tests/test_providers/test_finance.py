@@ -67,6 +67,10 @@ class TestFinance:
         result = finance.company_type(abbr=abbr)
         assert result in finance._data["company"]["type"][key]
 
+    def test_bank(self, finance):
+        result = finance.bank()
+        assert result in finance._data["banks"]
+
     def test_company(self, finance):
         result = finance.company()
         assert result in finance._data["company"]["name"]
@@ -133,3 +137,6 @@ class TestSeededFinance:
     def test_price_in_btc(self, f1, f2):
         assert f1.price_in_btc() == f2.price_in_btc()
         assert f1.price_in_btc(1.11, 22.2) == f2.price_in_btc(1.11, 22.2)
+
+    def test_bank(self, f1, f2):
+        assert f1.bank() == f2.bank()

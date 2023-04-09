@@ -1,3 +1,10 @@
+Version 7.2.0
+-------------
+
+**Added**
+
+- ``bank()`` method for ``Finance()``.
+
 Version 7.1.0
 -------------
 

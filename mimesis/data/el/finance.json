@@ -1,4 +1,24 @@
 {
+  "banks": [
+    "Αlpha Βank Α.Ε.",
+    "Eurobank Ergasias Α.Ε.",
+    "National Bank of Greece Α.Ε.",
+    "Piraeus Bank Α.Ε.",
+    "Attica Bank Α.Ε.",
+    "Cooperative Bank of Chania Α.Ε.",
+    "Cooperative Bank of Drama Α.Ε.",
+    "Cooperative Bank of Epirus Α.Ε.",
+    "Cooperative Bank of Evros Α.Ε.",
+    "Cooperative Bank of Karditsa Α.Ε.",
+    "Cooperative Bank of Kastoria Α.Ε.",
+    "Cooperative Bank of Kefalonia, Ithaca & Lefkada Α.Ε.",
+    "Cooperative Bank of Peloponnese Α.Ε.",
+    "Cooperative Bank of Pieria Α.Ε.",
+    "Cooperative Bank of Serres Α.Ε.",
+    "Cooperative Bank of Thessaly Α.Ε.",
+    "Pancretan Cooperative Bank Α.Ε.",
+    "Credicom Consumer Finance Bank Α.Ε."
+  ],
   "company": {
     "name": [
       "ANEK Lines",

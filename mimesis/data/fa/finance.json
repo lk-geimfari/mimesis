@@ -1,4 +1,16 @@
 {
+  "banks": [
+    "Bank Melli Iran",
+    "Bank Mellat",
+    "Bank Saderat Iran",
+    "Export Development Bank of Iran",
+    "Bank Pasargad",
+    "Karafarin Bank",
+    "Eghtesad Novin Bank",
+    "EN Bank",
+    "Tejarat Bank",
+    "Parsian Bank"
+  ],
   "company": {
     "name": [
       "شرکت ملی نفت ایران",

@@ -1,4 +1,19 @@
 {
+  "banks": [
+    "Swedbank AS",
+    "SEB Pank AS",
+    "LHV Pank AS",
+    "Luminor Bank AS",
+    "Coop Pank AS",
+    "Citadele Banka Eesti Filiaal",
+    "Bigbank AS",
+    "Versobank AS",
+    "Inbank AS",
+    "Eesti Krediidipank AS",
+    "Tallinna Äripank AS",
+    "Tartu Hoiu-laenuühistu",
+    "MTÜ Eesti Ühistupank"
+  ],
   "company": {
     "name": [
       "A.L.A.R.A.",

@@ -1,4 +1,9 @@
 {
+  "banks": [
+    "Arion Banki hf.",
+    "Islandsbanki hf.",
+    "Landsbankinn hf."
+  ],
   "company": {
     "name": [
       "365 - miðlar",

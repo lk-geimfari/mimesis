@@ -1,4 +1,26 @@
 {
+  "banks": [
+    "Banco Santander, S.A.",
+    "Banco Bilbao Vizcaya Argentaria, S.A.",
+    "CaixaBank, S.A.",
+    "Banco Sabadell, S.A.",
+    "Bankinter, S.A.",
+    "Banco Popular Español, S.A.",
+    "Unicaja Banco, S.A.",
+    "Ibercaja Banco, S.A.",
+    "Abanca Corporación Bancaria, S.A.",
+    "Kutxabank, S.A.",
+    "Banco Mare Nostrum, S.A.",
+    "Liberbank, S.A.",
+    "Banco Cooperativo Español, S.A.",
+    "Caja Rural de Navarra, S.C.C.",
+    "Caja Rural del Sur, S.C.C.",
+    "Banco Mediolanum, S.A.",
+    "Caja Rural Central, S.C.C.",
+    "Banca March, S.A.",
+    "Caja de Crédito de los Ingenieros, S.C.C.",
+    "Caja Laboral Popular, Coop. de Crédito"
+  ],
   "company": {
     "type": {
       "abbr": [

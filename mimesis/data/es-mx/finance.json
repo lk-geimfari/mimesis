@@ -1,4 +1,16 @@
 {
+  "banks": [
+    "BBVA Bancomer",
+    "Grupo Financiero Banorte",
+    "Santander México",
+    "Citibanamex",
+    "HSBC México",
+    "Scotiabank México",
+    "Inbursa",
+    "Banco Azteca",
+    "Afirme Grupo Financiero",
+    "Invex Grupo Financiero"
+  ],
   "company": {
     "type": {
       "abbr": [

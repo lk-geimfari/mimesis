@@ -65,6 +65,14 @@ class Finance(BaseDataProvider):
             return self.random.choice(CURRENCY_ISO_CODES)
         return code
 
+    def bank(self) -> str:
+        """Get a random USA bank name.
+
+        :return: Bank name.
+        """
+        banks: t.List[str] = self.extract(["banks"])
+        return self.random.choice(banks)
+
     def cryptocurrency_iso_code(self) -> str:
         """Get symbol of random cryptocurrency.
 

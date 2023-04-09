@@ -1,4 +1,16 @@
 {
+  "banks": [
+    "KBC Bank NV",
+    "Belfius Banque SA",
+    "BNP Paribas Fortis SA/NV",
+    "ING Belgique SA/NV",
+    "CBC Banque SA",
+    "Bpost Banque SA",
+    "AXA Bank Belgium SA",
+    "Euroclear Bank SA/NV",
+    "Crelan NV",
+    "Argenta Spaarbank NV"
+  ],
   "company": {
     "name": [
       "AG Real Estate",

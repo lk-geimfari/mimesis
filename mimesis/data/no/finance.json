@@ -1,4 +1,11 @@
 {
+  "banks": [
+    "DNB Bank ASA",
+    "Nordea Bank Abp filial i Norge",
+    "Danske Bank",
+    "Handelsbanken",
+    "Sparebank 1"
+  ],
   "company": {
     "name": [
       "A Wilhelmsen",
