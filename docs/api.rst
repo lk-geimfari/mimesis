@@ -1,12 +1,13 @@
 .. _api-reference:
 
+===
 API
 ===
 
 This part of the documentation covers all the public interfaces of *Mimesis*.
 
-Random
-------
+Random object
+=============
 
 .. automodule:: mimesis.random
    :members:

@@ -11,7 +11,7 @@
 #
 # All configuration values have a default; values that are commented out
 # serve to show the default.
-
+import copy
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
@@ -141,6 +141,7 @@ html_theme_options = {
     "font_family": 'Optima, Segoe, "Segoe UI", Candara, Calibri, Arial',
     "font_size": "16px",
     "code_font_family": "'Consolas', 'Menlo', 'Deja Vu Sans Mono', 'Bitstream Vera Sans Mono', monospace;",
+    "sidebar_collapse": True,
 }
 
 # Add any paths that contain custom themes here, relative to this directory.
@@ -194,12 +195,18 @@ html_css_files = [
 
 # Custom sidebar templates, maps document names to template names.
 #
+
+_default_sidebars = [
+    "sidebars/head.html",
+    "searchbox.html",
+    "sidebars/toc.html",
+    "sidebars/support.html",
+    "sidebars/follow_me.html",
+    "sidebars/useful_links.html",
+]
+
 html_sidebars = {
-    "**": [
-        "sidebars/head.html",
-        "searchbox.html",
-        "sidebars/rest.html"
-    ],
+    "index": _default_sidebars,
 }
 
 # Additional templates that should be rendered to pages, maps page names to
