@@ -66,7 +66,7 @@ class Finance(BaseDataProvider):
         return code
 
     def bank(self) -> str:
-        """Get a random USA bank name.
+        """Get a random bank name.
 
         :return: Bank name.
         """
