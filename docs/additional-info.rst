@@ -35,7 +35,6 @@ Maintainers
 
 -  Likid Geimfari (`lk-geimfari`_)
 -  Sobolev Nikita (`sobolevn`_)
--  Emilio Cecchini `(ceccoemi)`_
 
 
 Patches and Suggestions
@@ -118,8 +117,7 @@ Patches and Suggestions
 Disclaimer
 ==========
 
-The authors do not assume any responsibility for how you use this library or
-how you use data generated with it. This library is designed only for developers
-and only with good intentions. Do not use the data generated with Mimesis for
-illegal purposes.
-
+The creators of Mimesis do not hold themselves accountable for how you
+employ the library's functionalities or the data generated with it.
+Mimesis is designed to facilitate testing and with good intentions.
+Mimesis should not be used for illicit purposes.
