@@ -3,38 +3,6 @@
 Getting Started
 ===============
 
-Installation
-------------
-
-Within the pre-activated environment, use the following command to install Mimesis:
-
-.. code-block:: sh
-
-    (env) ➜ pip install mimesis
-
-Use the following command to install Mimesis in Jupyter Notebook:
-
-.. code-block:: sh
-
-    (env) ➜ ! pip install mimesis
-
-Installation using *Pipenv* is pretty same:
-
-.. code-block:: sh
-
-    (env) ➜ pipenv install --dev mimesis
-
-
-If you want to work with the latest Mimesis code before it's released, install or
-update the code from the master branch:
-
-.. code-block:: sh
-
-    (env) ➜ git clone git@github.com:lk-geimfari/mimesis.git
-    (env) ➜ cd mimesis/
-    (env) ➜ make install
-
-
 Basic Usage
 -----------
 

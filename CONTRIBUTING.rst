@@ -6,8 +6,8 @@ is tested against Python 3.8 through 3.10 on **GitHub Actions** and **AppVeyor**
 
 Test coverage is monitored with `Codecov`_.
 
-Dependencies
-~~~~~~~~~~~~
+Manage Dependencies
+~~~~~~~~~~~~~~~~~~~
 
 We use ``poetry`` to manage dependencies.
 So, please do not use ``virtualenv`` or ``pip`` directly.

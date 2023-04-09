@@ -55,16 +55,6 @@ The key features are:
 - **Schema-based generators**: Mimesis provides schema-based data generators, offering an effortless way to produce data by the schema of any complexity. This feature enables users to generate customized data that follows a predefined structure or schema, making it especially helpful when creating test data for applications.
 
 
-Advantages
-----------
-
-Compared to other similar libraries, such as Faker, this library offers several advantages, including:
-
--  **Performance**: It is notably faster than other similar libraries.
--  **Completeness**: It offers a wide range of detailed providers that generate various types of data.
--  **Simplicity**: It solely relies on the Python standard library and does not require any additional modules or dependencies.
-
-
 Performance
 -----------
 
