@@ -609,8 +609,7 @@ Using with Pandas
 -----------------
 
 If your aim is to create synthetic data for your Pandas dataframes,
-you can make use of the Mimesis library, which is a fantastic tool that
-can assist you in accomplishing this task with minimal effort.
+you can make use of the Mimesis.
 
 With Mimesis, you can create datasets that are similar in structure to your real-world data,
 allowing you to perform accurate and reliable testing and analysis:
