@@ -603,3 +603,44 @@ Example of the content of ``data.csv`` (truncated):
     2,sponsors,6.9.6-rc.7,2015-03-02T06:18:44Z
     3,after,4.5.6-rc.8,2022-03-31T02:56:15Z
     4,queen,9.0.6-alpha.11,2008-07-22T05:56:59Z
+
+
+Using with Pandas
+-----------------
+
+If your aim is to create synthetic data for your Pandas dataframes,
+you can make use of the Mimesis library, which is a fantastic tool that
+can assist you in accomplishing this task with minimal effort.
+
+With Mimesis, you can create datasets that are similar in structure to your real-world data,
+allowing you to perform accurate and reliable testing and analysis:
+
+.. code:: python
+
+    import pandas as pd
+    from mimesis import Generic
+    from mimesis.locales import Locale
+
+    rows_number = 500
+
+    generic = Generic(locale=Locale.EN)
+    df = pd.DataFrame(columns=['ID', 'Name', 'Username', 'Email', 'Phone'])
+
+    for _ in range(rows_number):
+        pk = generic.numeric.incremental()
+        name = generic.person.full_name()
+        username = generic.person.username()
+        email = generic.person.email()
+        phone = generic.person.telephone()
+        df.loc[i] = [pk, name, username, email, phone]
+
+
+Let's see what happening here.
+
+1. First we imported the ``pandas`` and :class:`~mimesis.Generic` provider
+2. We import a locale enum (:class:`~mimesis.Locale`) to define the language in which the data will be generated.
+3. Then we define the number of rows we want in the dataset
+4. After that, we create an empty DataFrame with the desired column names
+5. Finally, we loop through the number of rows and use Mimesis to generate random data for each column
+
+You can achieve the same result using :class:`~mimesis.Schema` and :class:`~mimesis.Field` as described in sections above.
