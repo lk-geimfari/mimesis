@@ -3,6 +3,7 @@ Version 8.0.0
 
 **Added**
 
+- ``Fieldset()`` to generate a set of fields at once. See docs for more information.
 - ``bank()`` method for ``Finance()``.
 - ``default_country`` for ``Address()``, which always returns the country associated with the current locale (i.e ``United States`` for ``en``, ``Россия`` for ``ru``).
 

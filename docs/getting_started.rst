@@ -572,6 +572,53 @@ Output:
     {'pk': 100, 'name': 'Karsten Haase', 'email': 'dennis2024@example.org'}
 
 
+Since **8.0.0** you can use th :class:`~mimesis.schema.Fieldset` for creating set of fields.
+
+See **Fieldset and Pandas** section for more details.
+
+Fieldset and Pandas
+-------------------
+
+If your aim is to create synthetic data for your Pandas dataframes,
+you can make use of the Mimesis.
+
+With Mimesis, you can create datasets that are similar in structure to your real-world data,
+allowing you to perform accurate and reliable testing and analysis:
+
+.. code:: python
+
+    import pandas as pd
+    from mimesis.schema import Fieldset
+    from mimesis.locales import Locale
+
+    fs = Fieldset(locale=Locale.EN)
+
+    df = pd.DataFrame.from_dict({
+        "ID": fs("increment", i=5),
+        "Name": fs("person.full_name", i=5),
+        "Email": fs("email", i=5),
+        "Phone": fs("telephone", mask="+1 (###) #5#-7#9#", i=5),
+    })
+
+    # Disable truncation of rows.
+    pd.set_option('display.max_rows', None)
+    # Disable truncation of columns
+    pd.set_option('display.max_columns', None)
+
+    print(df)
+
+Output:
+
+.. code:: text
+
+    ID             Name                          Email              Phone
+    1     Jamal Woodard              ford1925@live.com  +1 (202) 752-7396
+    2       Loma Farley               seq1926@live.com  +1 (762) 655-7893
+    3  Kiersten Barrera      relationship1991@duck.com  +1 (588) 956-7099
+    4   Jesus Frederick  troubleshooting1901@gmail.com  +1 (514) 255-7091
+    5   Blondell Bolton       strongly2081@example.com  +1 (327) 952-7799
+
+
 Exporting Data
 --------------
 
@@ -604,42 +651,3 @@ Example of the content of ``data.csv`` (truncated):
     3,after,4.5.6-rc.8,2022-03-31T02:56:15Z
     4,queen,9.0.6-alpha.11,2008-07-22T05:56:59Z
 
-
-Using with Pandas
------------------
-
-If your aim is to create synthetic data for your Pandas dataframes,
-you can make use of the Mimesis.
-
-With Mimesis, you can create datasets that are similar in structure to your real-world data,
-allowing you to perform accurate and reliable testing and analysis:
-
-.. code:: python
-
-    import pandas as pd
-    from mimesis import Generic
-    from mimesis.locales import Locale
-
-    rows_number = 500
-
-    generic = Generic(locale=Locale.EN)
-    df = pd.DataFrame(columns=['ID', 'Name', 'Username', 'Email', 'Phone'])
-
-    for _ in range(rows_number):
-        pk = generic.numeric.incremental()
-        name = generic.person.full_name()
-        username = generic.person.username()
-        email = generic.person.email()
-        phone = generic.person.telephone()
-        df.loc[i] = [pk, name, username, email, phone]
-
-
-Let's see what happening here.
-
-1. First we imported the ``pandas`` and :class:`~mimesis.Generic` provider
-2. We import a locale enum (:class:`~mimesis.Locale`) to define the language in which the data will be generated.
-3. Then we define the number of rows we want in the dataset
-4. After that, we create an empty DataFrame with the desired column names
-5. Finally, we loop through the number of rows and use Mimesis to generate random data for each column
-
-You can achieve the same result using :class:`~mimesis.Schema` and :class:`~mimesis.Field` as described in sections above.
