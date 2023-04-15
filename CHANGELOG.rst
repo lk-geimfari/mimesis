@@ -1,6 +1,10 @@
 Version 8.0.0
 -------------
 
+.. warning::
+
+    Work in progress. This release contains some breaking changes in API.
+
 **Added**
 
 - ``Fieldset()`` to generate a set of fields at once. See docs for more information.
