@@ -581,11 +581,14 @@ Let's take a look at the example:
     >>> field = Field(locale=Locale.EN)
     >>> fieldset = Fieldset(locale=Locale.EN)
 
-    >>> field("full_name")
-    Chase Porter
+    >>> field("name")
+    Chase
 
-    >>> fieldset("full_name", i=5)
-    ['Danuta Glover', 'Aide Buck', 'Bong Santiago', 'Kieth Jensen', 'Dannie Knight']
+    >> [field("name") for _ in range(3)]
+    ['Nicolle', 'Kelvin', 'Adaline']
+
+    >>> fieldset("name", i=3)
+    ['Basil', 'Carlee', 'Sheryll']
 
 
 The keyword argument **i** is used to specify the number of values to generate.
