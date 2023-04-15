@@ -7,9 +7,9 @@ import re
 import typing as t
 import warnings
 
-from mimesis.providers.base import BaseProvider
 from mimesis.exceptions import FieldError, FieldsetError, SchemaError
 from mimesis.locales import Locale
+from mimesis.providers.base import BaseProvider
 from mimesis.providers.generic import Generic
 from mimesis.types import (
     JSON,
@@ -176,12 +176,11 @@ class Field(BaseField):
 
         Forewarned is forearmed.
 
-    Example:
+    Here is usage example:
+
         >>> _ = Field()
         >>> _('username')
         Dogtag_1836
-
-        >>> _('username')
     """
 
     def __call__(self, *args: t.Any, **kwargs: t.Any) -> t.Any:
@@ -189,13 +188,11 @@ class Field(BaseField):
 
 
 class Fieldset(BaseField):
-    """Greedy fieldset.
+    """Greedy fieldset (evaluates immediately).
 
     Works like a field, but returns a list of values.
 
-    Here's an example of how to use it:
-
-    .. code-block:: python
+    Here is usage example:
 
         >>> fieldset = Fieldset()
         >>> fieldset('username', i=100)
@@ -203,12 +200,12 @@ class Fieldset(BaseField):
 
     When **i** is not specified, the reasonable default is used — **10**.
 
-    If you're looking for something that will work well with pandas
-    then this is what you need.
+    :cvar fieldset_default_iterations: Default iterations. Default is **10**.
+    :cvar fieldset_iterations_kwarg: Keyword argument for iterations. Default is **i**.
     """
 
-    _fieldset_default_iterations: int = 10
-    _fieldset_iterations_kwargs: str = "i"
+    fieldset_default_iterations: int = 10
+    fieldset_iterations_kwarg: str = "i"
     _fieldset_min_iterations: int = 1
 
     def __call__(self, *args: t.Any, **kwargs: t.Any) -> t.List[t.Any]:
@@ -220,7 +217,7 @@ class Fieldset(BaseField):
         :return: List of values.
         """
         iterations = kwargs.pop(
-            self._fieldset_iterations_kwargs, self._fieldset_default_iterations
+            self.fieldset_iterations_kwarg, self.fieldset_default_iterations
         )
 
         if iterations < self._fieldset_min_iterations:

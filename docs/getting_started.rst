@@ -395,8 +395,8 @@ of a class through which access to methods of user-class providers is
 carried out. By default class name is the name of the class in lowercase
 letters.
 
-Schema and Fields
------------------
+Schema and Field
+----------------
 
 For generating data by schema, just create an instance of :class:`~mimesis.schema.Field`
 object, which takes any string which represents the name of data
@@ -435,9 +435,9 @@ Example of usage:
             "creator": _("full_name", gender=Gender.FEMALE),
         },
     })
-    schema.create(iterations=3)
+    schema.create(iterations=2)
     # Since v5.6.0 you can do the same thing using multiplication:
-    schema * 3
+    schema * 2
 
 
 Output:
@@ -469,18 +469,6 @@ Output:
           "creator": "Dot Anderson"
         }
       },
-      {
-        "pk": 3,
-        "uid": "19b782f0-abd3-468c-9fe2-a82d47212d0c",
-        "name": "mar",
-        "version": "4.7.0-beta.4",
-        "timestamp": "2003-08-22T08:22:24Z",
-        "owner": {
-          "email": "artiller1822@test.com",
-          "token": "d35edc15e74c101e3c2fb6a9b8b74bf40ed21d45b984cc5516105f3853e375e9",
-          "creator": "Enda Martinez"
-        }
-      }
     ]
 
 
@@ -541,7 +529,7 @@ Output:
     {'pk': 100, 'name': 'Gerard Garber', 'email': 'travelers1947@example.org'}
 
 
-or create lazy data generator of limited length, using :meth:`~mimesis.schema.Schema.iterator`:
+or create a lazy data generator of limited length, using :meth:`~mimesis.schema.Schema.iterator`:
 
 
 .. code:: python
@@ -572,15 +560,62 @@ Output:
     {'pk': 100, 'name': 'Karsten Haase', 'email': 'dennis2024@example.org'}
 
 
-Since **8.0.0** you can use th :class:`~mimesis.schema.Fieldset` for creating set of fields.
+Since **8.0.0** you can use a :class:`~mimesis.schema.Fieldset` class for creating set of fields.
 
-See **Fieldset and Pandas** section for more details.
+See **Fieldset vs Fields** section below for more details.
+
+Field vs Fieldset
+-----------------
+
+The main difference between :class:`~mimesis.schema.Field` and :class:`~mimesis.schema.Fieldset` is that
+:class:`~mimesis.schema.Fieldset` generates a set (well, actually a ``list``) of values for a given field,
+while :class:`~mimesis.schema.Field` generates a single value.
+
+Let's take a look at the example:
+
+.. code:: python
+
+    >>> from mimesis import Field, Fieldset
+    >>> from mimesis.locales import Locale
+
+    >>> field = Field(locale=Locale.EN)
+    >>> fieldset = Fieldset(locale=Locale.EN)
+
+    >>> field("full_name")
+    Chase Porter
+
+    >>> fieldset("full_name", i=5)
+    ['Danuta Glover', 'Aide Buck', 'Bong Santiago', 'Kieth Jensen', 'Dannie Knight']
+
+
+The keyword argument **i** is used to specify the number of values to generate.
+If **i** is not specified, a reasonable default value (which to 10) is used.
+
+The :class:`~mimesis.schema.Fieldset` class is a subclass of :class:`~mimesis.schema.BaseField` and inherits
+all its methods, attributes and properties. This means that API of :class:`~mimesis.schema.Fieldset` is almost the same
+as for :class:`~mimesis.schema.Field` which is also a subclass of :class:`~mimesis.schema.BaseField`.
+
+Almost, because :class:`~mimesis.schema.Fieldset` accepts keyword argument **i**.
+
+
+I don't have an idea why should you do this, but you can override the name of keyword argument **i** for a given field:
+
+.. code:: python
+
+    >>> from mimesis import Fieldset
+    >>> class MyFieldset(Fieldset):
+    ...     fieldset_iterations_kwarg = "wubba_lubba_dub_dub"
+
+    >>> fs = MyFieldset(locale=Locale.EN)
+    >>> fs("full_name", wubba_lubba_dub_dub=3)
+    ['Danuta Glover', 'Aide Buck', 'Bong Santiago', 'Kieth Jensen', 'Dannie Knight']
+
 
 Fieldset and Pandas
 -------------------
 
 If your aim is to create synthetic data for your Pandas dataframes,
-you can make use of the :class:`~mimesis.schema.Fieldset`.
+you can make use of the :class:`~mimesis.schema.Fieldset` as well.
 
 With ``Fieldset``, you can create datasets that are similar in structure to your real-world data,
 allowing you to perform accurate and reliable testing and analysis:
@@ -599,11 +634,6 @@ allowing you to perform accurate and reliable testing and analysis:
         "Email": fs("email", i=5),
         "Phone": fs("telephone", mask="+1 (###) #5#-7#9#", i=5),
     })
-
-    # Disable truncation of rows.
-    pd.set_option('display.max_rows', None)
-    # Disable truncation of columns
-    pd.set_option('display.max_columns', None)
 
     print(df)
 

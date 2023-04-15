@@ -36,6 +36,14 @@ def fieldset(request):
     return Fieldset(request.param)
 
 
+@pytest.fixture(scope="module", params=list(Locale))
+def custom_fieldset(request):
+    class MyFieldSet(Fieldset):
+        fieldset_iterations_kwarg = "wubba_lubba_dub_dub"
+
+    return MyFieldSet(request.param)
+
+
 @pytest.fixture
 def modified_field():
     return Field(locale=Locale.EN, providers=(USASpecProvider,))
@@ -52,7 +60,7 @@ def test_field(field):
     [
         ("bank", 8),
         ("address", 4),
-        ("full_name", 2),
+        ("name", 2),
     ],
 )
 def test_fieldset(fieldset, field_name, i):
@@ -60,9 +68,37 @@ def test_fieldset(fieldset, field_name, i):
     assert isinstance(result, list) and len(result) == i
 
 
+@pytest.mark.parametrize(
+    "field_name",
+    [
+        "bank",
+        "address",
+        "full_name",
+    ],
+)
+def test_fieldset_with_default_i(fieldset, field_name):
+    result = fieldset(field_name)
+    assert (
+        isinstance(result, list) and len(result) == fieldset.fieldset_default_iterations
+    )
+
+
+def test_custom_fieldset(custom_fieldset):
+    result = custom_fieldset("name", wubba_lubba_dub_dub=3)
+    assert isinstance(result, list) and len(result) == 3
+
+    with pytest.raises(TypeError):
+        custom_fieldset("name", i=4)
+
+
 def test_fieldset_error(fieldset):
     with pytest.raises(FieldsetError):
         fieldset("username", key=str.upper, i=0)
+
+
+def test_fieldset_field_error(fieldset):
+    with pytest.raises(FieldError):
+        fieldset("unsupported_field")
 
 
 def test_field_with_custom_providers(default_field, modified_field):
