@@ -7,6 +7,7 @@ import re
 import typing as t
 import warnings
 
+from mimesis.providers.base import BaseProvider
 from mimesis.exceptions import FieldError, FieldsetError, SchemaError
 from mimesis.locales import Locale
 from mimesis.providers.generic import Generic
@@ -77,8 +78,9 @@ class BaseField:
         """
         for provider in dir(self._gen):
             provider = getattr(self._gen, provider)
-            if name in dir(provider):
-                return getattr(provider, name)
+            if isinstance(provider, BaseProvider):
+                if name in dir(provider):
+                    return getattr(provider, name)
 
         raise FieldError(name)
 

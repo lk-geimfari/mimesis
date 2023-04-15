@@ -65,5 +65,5 @@ class FieldError(ValueError):
 class FieldsetError(ValueError):
     """Raised when a resulting fieldset is empty."""
 
-    def __str__(self):
+    def __str__(self) -> str:
         return "The «iterations» parameter must be greater than 1."

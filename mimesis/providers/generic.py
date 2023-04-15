@@ -101,7 +101,10 @@ class Generic(BaseProvider):
         :return: List of attributes.
         """
         attributes = []
-        exclude = BaseProvider().__dict__.keys()
+        exclude = list(BaseProvider().__dict__.keys())
+        # Exclude locale explicitly because
+        # it is not a provider.
+        exclude.append('locale')
 
         for attr in self.__dict__:
             if attr not in exclude:

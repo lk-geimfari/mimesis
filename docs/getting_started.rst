@@ -580,9 +580,9 @@ Fieldset and Pandas
 -------------------
 
 If your aim is to create synthetic data for your Pandas dataframes,
-you can make use of the Mimesis.
+you can make use of the :class:`~mimesis.schema.Fieldset`.
 
-With Mimesis, you can create datasets that are similar in structure to your real-world data,
+With ``Fieldset``, you can create datasets that are similar in structure to your real-world data,
 allowing you to perform accurate and reliable testing and analysis:
 
 .. code:: python
@@ -618,6 +618,8 @@ Output:
     4   Jesus Frederick  troubleshooting1901@gmail.com  +1 (514) 255-7091
     5   Blondell Bolton       strongly2081@example.com  +1 (327) 952-7799
 
+
+Isn't it cool? Of course, it is!
 
 Exporting Data
 --------------
