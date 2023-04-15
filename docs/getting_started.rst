@@ -595,8 +595,7 @@ The :class:`~mimesis.schema.Fieldset` class is a subclass of :class:`~mimesis.sc
 all its methods, attributes and properties. This means that API of :class:`~mimesis.schema.Fieldset` is almost the same
 as for :class:`~mimesis.schema.Field` which is also a subclass of :class:`~mimesis.schema.BaseField`.
 
-Almost, because :class:`~mimesis.schema.Fieldset` accepts keyword argument **i**.
-
+Almost, because an instance of :class:`~mimesis.schema.Fieldset` accepts keyword argument **i**.
 
 I don't have an idea why should you do this, but you can override the name of keyword argument **i** for a given field:
 
@@ -607,8 +606,12 @@ I don't have an idea why should you do this, but you can override the name of ke
     ...     fieldset_iterations_kwarg = "wubba_lubba_dub_dub"
 
     >>> fs = MyFieldset(locale=Locale.EN)
-    >>> fs("full_name", wubba_lubba_dub_dub=3)
-    ['Danuta Glover', 'Aide Buck', 'Bong Santiago', 'Kieth Jensen', 'Dannie Knight']
+    >>> fs("name", wubba_lubba_dub_dub=3)
+    ['Janella', 'Beckie', 'Jeremiah']
+
+    # The order of keyword arguments doesn't matter.
+    >>> fs("name", wubba_lubba_dub_dub=3, key=str.upper)
+    ['RICKY', 'LEONORE', 'DORIAN']
 
 
 Fieldset and Pandas
