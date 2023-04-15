@@ -128,19 +128,13 @@ class TestAddress:
     def test_zip_code(self, address):
         assert address.zip_code()
 
-    @pytest.mark.parametrize(
-        "allow_random, key",
-        [
-            (False, "current_locale"),
-            (True, "name"),
-        ],
-    )
-    def test_country(self, address, allow_random, key):
-        country = address.country(allow_random=allow_random)
-        if allow_random:
-            assert country in address._data["country"][key]
-        else:
-            assert country == address._data["country"][key]
+    def test_country(self, address):
+        country = address.country()
+        assert country in address.extract(["country", "name"])
+
+    def test_country_for_current_locale(self, address):
+        country = address.default_country()
+        assert country in address.extract(["country", "current_locale"])
 
     @pytest.mark.parametrize(
         "code, length",
@@ -223,7 +217,10 @@ class TestSeededAddress:
         assert a1.zip_code() == a2.zip_code()
 
     def test_country(self, a1, a2):
-        assert a1.country()
+        assert a1.country() == a2.country()
+
+    def test_country_for_current_locale(self, a1, a2):
+        assert a1.default_country() == a2.default_country()
 
     def test_country_iso(self, a1, a2):
         assert a1.country_code() == a2.country_code()
