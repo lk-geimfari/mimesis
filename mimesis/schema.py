@@ -7,7 +7,7 @@ import re
 import typing as t
 import warnings
 
-from mimesis.exceptions import FieldError, SchemaError
+from mimesis.exceptions import FieldError, FieldsetError, SchemaError
 from mimesis.locales import Locale
 from mimesis.providers.generic import Generic
 from mimesis.types import (
@@ -19,7 +19,7 @@ from mimesis.types import (
     Seed,
 )
 
-__all__ = ["BaseField", "Field", "Schema"]
+__all__ = ["BaseField", "Field", "Fieldset", "Schema"]
 
 
 class BaseField:
@@ -178,10 +178,53 @@ class Field(BaseField):
         >>> _ = Field()
         >>> _('username')
         Dogtag_1836
+
+        >>> _('username')
     """
 
     def __call__(self, *args: t.Any, **kwargs: t.Any) -> t.Any:
         return self.perform(*args, **kwargs)
+
+
+class Fieldset(BaseField):
+    """Greedy fieldset.
+
+    Works like a field, but returns a list of values.
+
+    Here's an example of how to use it:
+
+    .. code-block:: python
+
+        >>> fieldset = Fieldset()
+        >>> fieldset('username', i=100)
+        ['pot_1821', 'vhs_1915', ..., 'reviewed_1849']
+
+    When **i** is not specified, the reasonable default is used — **10**.
+
+    If you're looking for something that will work well with pandas
+    then this is what you need.
+    """
+
+    _fieldset_default_iterations: int = 10
+    _fieldset_iterations_kwargs: str = "i"
+    _fieldset_min_iterations: int = 1
+
+    def __call__(self, *args: t.Any, **kwargs: t.Any) -> t.List[t.Any]:
+        """Perform fieldset.
+
+        :param args: Arguments for field.
+        :param kwargs: Keyword arguments for field.
+        :raises FieldsetError: If iterations less than 1.
+        :return: List of values.
+        """
+        iterations = kwargs.pop(
+            self._fieldset_iterations_kwargs, self._fieldset_default_iterations
+        )
+
+        if iterations < self._fieldset_min_iterations:
+            raise FieldsetError()
+
+        return [self.perform(*args, **kwargs) for _ in range(iterations)]
 
 
 class Schema:

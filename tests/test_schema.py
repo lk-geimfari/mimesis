@@ -10,9 +10,9 @@ import pytest
 
 from mimesis.builtins.en import USASpecProvider
 from mimesis.enums import Gender
-from mimesis.exceptions import FieldError, SchemaError
+from mimesis.exceptions import FieldError, FieldsetError, SchemaError
 from mimesis.locales import Locale
-from mimesis.schema import BaseField, Field, Schema
+from mimesis.schema import BaseField, Field, Fieldset, Schema
 from mimesis.types import MissingSeed
 from tests.test_providers import patterns
 
@@ -31,6 +31,11 @@ def field(request):
     return Field(request.param)
 
 
+@pytest.fixture(scope="module", params=list(Locale))
+def fieldset(request):
+    return Fieldset(request.param)
+
+
 @pytest.fixture
 def modified_field():
     return Field(locale=Locale.EN, providers=(USASpecProvider,))
@@ -40,6 +45,24 @@ def test_field(field):
     assert field("uuid")
     assert field("full_name")
     assert field("street_name")
+
+
+@pytest.mark.parametrize(
+    "field_name, i",
+    [
+        ("bank", 8),
+        ("address", 4),
+        ("full_name", 2),
+    ],
+)
+def test_fieldset(fieldset, field_name, i):
+    result = fieldset(field_name, i=i)
+    assert isinstance(result, list) and len(result) == i
+
+
+def test_fieldset_error(fieldset):
+    with pytest.raises(FieldsetError):
+        fieldset("username", key=str.upper, i=0)
 
 
 def test_field_with_custom_providers(default_field, modified_field):

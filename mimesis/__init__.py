@@ -55,7 +55,7 @@ from mimesis.providers import (
     Text,
     Transport,
 )
-from mimesis.schema import Field, Schema
+from mimesis.schema import Field, Fieldset, Schema
 
 __all__ = [
     "Address",
@@ -83,6 +83,7 @@ __all__ = [
     "Generic",
     # Schema:
     "Field",
+    "Fieldset",
     "Schema",
     # Locale:
     "Locale",
@@ -119,7 +120,7 @@ __all__ = [
     "__license__",
 ]
 
-__version__ = "7.1.0"
+__version__ = "8.0.0"
 __title__ = "mimesis"
 __description__ = "Mimesis: Fake Data Generator."
 __url__ = "https://github.com/lk-geimfari/mimesis"

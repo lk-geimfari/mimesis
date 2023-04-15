@@ -265,6 +265,12 @@ Field
 .. autoclass:: mimesis.schema.Field
    :members:
 
+Fieldset
+--------
+
+.. autoclass:: mimesis.schema.Fieldset
+   :members:
+
 Schema
 ------
 

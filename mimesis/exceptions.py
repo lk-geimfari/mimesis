@@ -60,3 +60,10 @@ class FieldError(ValueError):
         if self.name is None:
             return self.message_none
         return self.message.format(self.name)
+
+
+class FieldsetError(ValueError):
+    """Raised when a resulting fieldset is empty."""
+
+    def __str__(self):
+        return "The «iterations» parameter must be greater than 1."
