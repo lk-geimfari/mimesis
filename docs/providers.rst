@@ -20,8 +20,8 @@ Types of Providers
 
 There are two types of providers:
 
-- Locale-dependent providers: These providers offer data that is specific to a particular locale/country.
-- Locale-independent providers: These providers offer data that is universal and applicable to all countries.
+- Locale-dependent providers (These providers offer data that is specific to a particular locale/country).
+- Locale-independent providers (These providers offer data that is universal and applicable to all countries).
 
 Here is an example of a locale-dependent provider:
 

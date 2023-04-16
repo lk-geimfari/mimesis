@@ -3,6 +3,7 @@
 Quickstart
 ==========
 
+
 Basic Usage
 -----------
 
@@ -32,3 +33,29 @@ So what did the code above?
    parameter for the :meth:`~mimesis.Person.full_name`.
 4. Next we generate random female full name.
 5. The same as above, but for male.
+
+Typical Flow
+------------
+
+The usual process for using Mimesis involves importing the necessary provider, locale,
+and enums (if required), followed by creating a provider instance and invoking the
+desired method with the appropriate parameters.
+
+Consider the following example:
+
+.. code:: python
+
+    from mimesis import Person
+    from mimesis.locales import Locale
+    from mimesis.enums import Gender
+
+    person = Person(Locale.DE)
+
+    person.full_name(gender=Gender.FEMALE)
+    'Amelia Hasek'
+
+    person.full_name(gender=Gender.MALE)
+    'Leonard Holzknecht'
+
+    person.email(domains=['gmail.com'])
+    'job1953@gmail.com'
