@@ -216,7 +216,7 @@ class Fieldset(BaseField):
     fieldset_default_iterations: int = 10
     fieldset_iterations_kwarg: str = "i"
 
-    def __init__(self, *args, **kwargs) -> None:
+    def __init__(self, *args: t.Any, **kwargs: t.Any) -> None:
         """Initialize fieldset.
 
         Accepts additional keyword argument **i** which is used
@@ -241,7 +241,8 @@ class Fieldset(BaseField):
         """
         min_iterations = 1
         iterations = kwargs.pop(
-            self.fieldset_iterations_kwarg, self._iterations,
+            self.fieldset_iterations_kwarg,
+            self._iterations,
         )
 
         if iterations < min_iterations:

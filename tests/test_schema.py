@@ -84,7 +84,7 @@ def test_fieldset(fieldset, field_name, i):
 def test_fieldset_with_default_i(fieldset, field_name):
     result = fieldset(field_name)
     assert (
-            isinstance(result, list) and len(result) == fieldset.fieldset_default_iterations
+        isinstance(result, list) and len(result) == fieldset.fieldset_default_iterations
     )
 
 
@@ -157,8 +157,8 @@ def test_fuzzy_lookup(field):
 @pytest.mark.parametrize(
     "field_name",
     (
-            "surname",
-            "person.surname",
+        "surname",
+        "person.surname",
     ),
 )
 def test_lookup_method(field, field_name):
@@ -171,10 +171,10 @@ def test_lookup_method(field, field_name):
 @pytest.mark.parametrize(
     "field_name",
     (
-            "",
-            "foo",
-            "foo.bar",
-            "person.surname.male",
+        "",
+        "foo",
+        "foo.bar",
+        "person.surname.male",
     ),
 )
 def test_lookup_method_field_error(field, field_name):
