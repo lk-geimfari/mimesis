@@ -44,6 +44,11 @@ def custom_fieldset(request):
     return MyFieldSet(request.param)
 
 
+@pytest.fixture(scope="module", params=list(Locale))
+def fieldset_with_common_i(request):
+    return Fieldset(request.param, i=100)
+
+
 @pytest.fixture
 def modified_field():
     return Field(locale=Locale.EN, providers=(USASpecProvider,))
@@ -79,7 +84,7 @@ def test_fieldset(fieldset, field_name, i):
 def test_fieldset_with_default_i(fieldset, field_name):
     result = fieldset(field_name)
     assert (
-        isinstance(result, list) and len(result) == fieldset.fieldset_default_iterations
+            isinstance(result, list) and len(result) == fieldset.fieldset_default_iterations
     )
 
 
@@ -89,6 +94,14 @@ def test_custom_fieldset(custom_fieldset):
 
     with pytest.raises(TypeError):
         custom_fieldset("name", i=4)
+
+
+def test_fieldset_with_common_i(fieldset_with_common_i):
+    result = fieldset_with_common_i("name")
+    assert isinstance(result, list) and len(result) == 100
+
+    result = fieldset_with_common_i("name", i=3)
+    assert isinstance(result, list) and len(result) == 3
 
 
 def test_fieldset_error(fieldset):
@@ -144,8 +157,8 @@ def test_fuzzy_lookup(field):
 @pytest.mark.parametrize(
     "field_name",
     (
-        "surname",
-        "person.surname",
+            "surname",
+            "person.surname",
     ),
 )
 def test_lookup_method(field, field_name):
@@ -158,10 +171,10 @@ def test_lookup_method(field, field_name):
 @pytest.mark.parametrize(
     "field_name",
     (
-        "",
-        "foo",
-        "foo.bar",
-        "person.surname.male",
+            "",
+            "foo",
+            "foo.bar",
+            "person.surname.male",
     ),
 )
 def test_lookup_method_field_error(field, field_name):

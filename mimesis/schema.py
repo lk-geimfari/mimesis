@@ -194,11 +194,20 @@ class Fieldset(BaseField):
 
     Here is usage example:
 
-        >>> fieldset = Fieldset()
-        >>> fieldset('username', i=100)
+        >>> fieldset = Fieldset(i=100)
+        >>> fieldset('username')
         ['pot_1821', 'vhs_1915', ..., 'reviewed_1849']
 
+    You may also specify the number of iterations by passing the **i** keyword
+    argument to the callable instance of fieldset:
+
+        >>> fieldset = Fieldset()
+        >>> fieldset('username', i=2)
+        ['pot_1821', 'vhs_1915']
+
     When **i** is not specified, the reasonable default is used — **10**.
+
+    See "Field vs Fieldset" section of documentation for more details.
 
     :cvar fieldset_default_iterations: Default iterations. Default is **10**.
     :cvar fieldset_iterations_kwarg: Keyword argument for iterations. Default is **i**.
@@ -206,7 +215,21 @@ class Fieldset(BaseField):
 
     fieldset_default_iterations: int = 10
     fieldset_iterations_kwarg: str = "i"
-    _fieldset_min_iterations: int = 1
+
+    def __init__(self, *args, **kwargs) -> None:
+        """Initialize fieldset.
+
+        Accepts additional keyword argument **i** which is used
+        to specify the number of iterations.
+
+        The name of the keyword argument can be changed by
+        overriding **fieldset_iterations_kwarg** attribute of this class.
+        """
+        self._iterations = kwargs.pop(
+            self.fieldset_iterations_kwarg,
+            self.fieldset_default_iterations,
+        )
+        super().__init__(*args, **kwargs)
 
     def __call__(self, *args: t.Any, **kwargs: t.Any) -> t.List[t.Any]:
         """Perform fieldset.
@@ -216,11 +239,12 @@ class Fieldset(BaseField):
         :raises FieldsetError: If iterations less than 1.
         :return: List of values.
         """
+        min_iterations = 1
         iterations = kwargs.pop(
-            self.fieldset_iterations_kwarg, self.fieldset_default_iterations
+            self.fieldset_iterations_kwarg, self._iterations,
         )
 
-        if iterations < self._fieldset_min_iterations:
+        if iterations < min_iterations:
             raise FieldsetError()
 
         return [self.perform(*args, **kwargs) for _ in range(iterations)]
