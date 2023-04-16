@@ -209,7 +209,10 @@ as for :class:`~mimesis.schema.Field` which is also a subclass of :class:`~mimes
 
 Almost, because an instance of :class:`~mimesis.schema.Fieldset` accepts keyword argument **i**.
 
-I don't have an idea why should you do this, but you can override the name of keyword argument **i** for a given field:
+While it may not be necessary in most cases, it is possible to override the default name
+of a keyword argument **i** for a specific field.
+
+Let's take a look at the example:
 
 .. code:: python
 
@@ -232,8 +235,9 @@ Fieldset and Pandas
 If your aim is to create synthetic data for your Pandas dataframes,
 you can make use of the :class:`~mimesis.schema.Fieldset` as well.
 
-With ``Fieldset``, you can create datasets that are similar in structure to your real-world data,
-allowing you to perform accurate and reliable testing and analysis:
+With :class:`~mimesis.schema.Fieldset`, you can create datasets that are
+similar in structure to your real-world data, allowing you to perform accurate
+and reliable testing and analysis:
 
 .. code:: python
 

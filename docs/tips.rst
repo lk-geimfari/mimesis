@@ -1,72 +1,8 @@
-===============
-Tips and Tricks
+Tricks and Tips
 ===============
 
-Creating objects
+Working with ORM
 ----------------
-
-If your app requires data in one particular language, it’s preferable to
-use class :class:`~mimesis.Generic()`, giving access to all class providers through a
-single object, rather than through multiple separate class providers.
-Using :class:`~mimesis.Generic()` will allow you to get rid of several extra lines of
-code.
-
-Incorrect:
-
-.. code:: python
-
-    from mimesis import Person, Datetime, Text, Code
-    from mimesis.locales import Locale
-
-    person = Person(Locale.RU)
-    datetime = Datetime(Locale.RU)
-    text = Text(Locale.RU)
-    code = Code(Locale.RU)
-
-
-Correct:
-
-.. code:: python
-
-    from mimesis import Generic
-    from mimesis.locales import Locale
-    generic = Generic(locale=Locale.EN)
-
-    generic.person.username()
-    # Output: 'sherley3354'
-
-    generic.datetime.date()
-    # Output: '14-05-2007'
-
-Still correct:
-
-.. code:: python
-
-    from mimesis import Person
-    from mimesis.locales import Locale
-
-    p_en = Person(Locale.EN)
-    p_sv = Person(Locale.SV)
-
-
-Also correct:
-
-.. code:: python
-
-    from mimesis import Person
-
-    person = Person(Locale.EN)
-    with person.override_locale(Locale.SV)
-        pass
-
-
-It means that importing class providers separately makes sense only if
-you limit yourself to the data available through the class you imported,
-otherwise it’s better to use :class:`~mimesis.Generic()`.
-
-
-Inserting data into database
-----------------------------
 
 If you need to generate data and import it into a database we strongly
 recommend generating data in chunks rather than *600k* at once. Keep
@@ -147,8 +83,8 @@ Let's define the structure of the dummy response.
 
 Now, you can return unique response with JSON for each request.
 
-Django/DRF Dummy API Endpoint
------------------------------
+Django Dummy API Endpoint
+-------------------------
 
 Basically you need just create simple view, which returns `JsonResponse`:
 
