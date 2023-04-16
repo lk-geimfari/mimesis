@@ -16,7 +16,11 @@ __all__ = ["BaseDataProvider", "BaseProvider"]
 
 
 class BaseProvider:
-    """This is a base class for all providers."""
+    """This is a base class for all providers.
+
+
+    :attr: random: Instance of :class:`mimesis.random.Random`.
+    """
 
     class Meta:
         name: str

@@ -21,10 +21,13 @@ global_seed: Seed = MissingSeed
 
 
 class Random(random_module.Random):
-    """Custom class for the possibility of extending.
+    """A custom random class.
 
-    The class is a subclass of the class :py:class:`random.Random`
-    from the module random of the standard library, which provides the custom methods.
+    This is a class that can be extended as needed.
+
+    It's a subclass of the random.Random class from the random
+    module in the standard library. The class includes additional
+    custom methods.
     """
 
     def randints(self, amount: int = 3, a: int = 1, b: int = 100) -> t.List[int]:
