@@ -632,13 +632,13 @@ allowing you to perform accurate and reliable testing and analysis:
     from mimesis.schema import Fieldset
     from mimesis.locales import Locale
 
-    fs = Fieldset(locale=Locale.EN)
+    fs = Fieldset(locale=Locale.EN, i=5)
 
     df = pd.DataFrame.from_dict({
-        "ID": fs("increment", i=5),
-        "Name": fs("person.full_name", i=5),
-        "Email": fs("email", i=5),
-        "Phone": fs("telephone", mask="+1 (###) #5#-7#9#", i=5),
+        "ID": fs("increment"),
+        "Name": fs("person.full_name"),
+        "Email": fs("email"),
+        "Phone": fs("telephone", mask="+1 (###) #5#-7#9#"),
     })
 
     print(df)
