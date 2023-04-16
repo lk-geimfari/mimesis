@@ -9,9 +9,12 @@ documentation explains the different parts of the Mimesis and how they can be us
 
    about
    installation
-   getting_started
+   quickstart
+   locales
+   providers
+   schema
+   seeded_data
    tips
-
 
 
 API Reference
