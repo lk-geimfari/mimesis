@@ -1,9 +1,20 @@
-.. _locales:
+.. _locale:
 
 Locales
 =======
 
-You can specify a locale when creating providers and they will return data that
+The Mimesis supports multiple locales. This means that you can generate
+data in different languages and for different countries.
+
+The default locale for all providers is English (United States) (``Locale.EN``).
+
+You have to import :class:`~mimesis.enums.Locale` object first, like this:
+
+.. code-block:: python
+
+    from mimesis.locales import Locale
+
+Now you can specify a locale when creating providers and they will return data that
 is appropriate for the language or country associated with that locale:
 
 .. code-block:: python
@@ -26,9 +37,7 @@ is appropriate for the language or country associated with that locale:
     >>> ru.address()
     # Output: 'ул. Пехотная 125'
 
-
 See the table below for more details.
-
 
 Overriding locale
 -----------------

@@ -15,11 +15,62 @@ See :ref:`api-reference` for more info.
 
     You can read more about the heaviness of providers in `this issue <https://github.com/lk-geimfari/mimesis/issues/968>`_.
 
+Types of Providers
+------------------
+
+There are two types of providers:
+
+- Locale-dependent providers: These providers offer data that is specific to a particular locale/country.
+- Locale-independent providers: These providers offer data that is universal and applicable to all countries.
+
+Here is an example of a locale-dependent provider:
+
+.. code-block:: python
+
+    from mimesis import Person
+    from mimesis.locales import Locale
+
+    person = Person(locale=Locale.EN)
+
+    person.name()
+    # Output: 'John'
+
+If you don't specify the locale for a provider that is dependent on the locale,
+the default locale (i.e. **Locale.EN**) will be used.
+
+Locale-independent providers do not require a locale to be specified:
+
+.. code-block:: python
+
+    from mimesis import Code
+
+    code = Code()
+
+    code.imei()
+    # Output: '353918052107063'
+
+Moreover, locale-independent providers raise an exception if you try to specify a locale:
+
+.. code-block:: python
+
+    from mimesis import Code
+    from mimesis.locales import Locale
+
+    code = Code(locale=Locale.EN)
+    # TypeError: BaseProvider.__init__() got an unexpected keyword argument 'locale'
+
+
+See :ref:`api-reference` to see which providers are locale-dependent and which are not.
+
 Generic Provider
 ----------------
 
-When you only need to generate data for a single locale, use the :class:`~mimesis.Generic()` provider,
-and you can access all Mimesis providers from one object.
+If you only require generating data for a specific locale, you may opt to
+use the :class:`~mimesis.Generic()` provider. It provides access to all the
+other Mimesis providers through a single object, allowing you to generate
+a wide range of data types using for the same locale.
+
+Let's take a look at an example:
 
 .. code-block:: python
 
@@ -37,17 +88,20 @@ and you can access all Mimesis providers from one object.
     # Output: 'Limón'
 
 
+When using :class:`~mimesis.Generic()`, Mimesis automatically detects which provider depends
+on the locale and which does not, so you don't have to worry about it.
+
 Built-in Providers
 ------------------
 
-Most countries, where only one language is official, have data that is typical
-only for these particular countries. For example, «CPF» for Brazil
-(**pt-br**), «SSN» for USA (**en**).
+Typically, in countries where only one language is the official language, there are specific types
+of data that are unique to those countries. For instance, in Brazil (**Locale.PT_BR**) the "CPF" is used,
+while in the USA (**Locale.EN**) the "SSN" is used.
 
-This kind of data can be annoying when they are present in all the objects regardless of the
-chosen language standard.
+However, this type of data can become bothersome when it appears in all objects
+irrespective of the selected locale.
 
-You can see that for yourselves by looking at the example (the code won’t run):
+By examining the example provided (the code won't execute), you can see this for yourself:
 
 .. code:: python
 
@@ -58,10 +112,10 @@ You can see that for yourselves by looking at the example (the code won’t run)
     person.ssn()
     person.cpf()
 
-Perfectionists, as we are, have taken care of this in a way that some specific regional providers would
-not bother other providers for other regions. For this reason, class providers with locally-specific data are
-separated into a special sub-package (**mimesis.builtins**) for keeping a common class structure for
-all languages and their objects.
+As perfectionists, we have addressed this issue by separating class providers with locally-specific
+data into a special sub-package (mimesis.builtins). This ensures that providers for specific regions
+do not cause any inconvenience for providers for other regions. This approach helps to maintain a common
+class structure for all languages and their objects.
 
 Here’s how it works:
 
@@ -76,8 +130,7 @@ Here’s how it works:
     generic.brazil_provider.cpf()
     # Output: '696.441.186-00'
 
-If you want to change default name of built-in provider, just change
-value of attribute *name*, class *Meta* of the builtin provider:
+To modify the default name of the built-in provider, you can change the value of the attribute **Meta.name**:
 
 .. code:: python
 
@@ -123,9 +176,9 @@ See :ref:`api-reference` for more info about built-in providers.
 Custom Providers
 ----------------
 
-The library supports a vast amount of data and in most cases this would
-be enough. For those who want to create their own providers with more
-specific data. This can be done like this:
+The library provides support for a wide range of data, which is sufficient
+for most use cases. However, for those who wish to create their own providers
+with more specific data, this can be achieved as follows:
 
 .. code:: python
 
@@ -163,7 +216,7 @@ specific data. This can be done like this:
     # Output: 'Bye!'
 
 
-You can also add multiple providers:
+In addition, you can also add multiple providers:
 
 .. code:: python
 
@@ -173,8 +226,8 @@ You can also add multiple providers:
     generic.another.bye()
     # Output: 'Bye!'
 
-If you'll try to add provider which does not inherit :class:`~mimesis.BaseProvider`
-then you got ``TypeError`` exception:
+If you attempt to add a provider that does not inherit from :class:`~mimesis.providers.base.BaseProvider`,
+you will receive a **TypeError** exception:
 
 .. code:: python
 
@@ -189,11 +242,10 @@ then you got ``TypeError`` exception:
     TypeError: The provider must be a subclass of mimesis.providers.BaseProvider.
 
 
-All providers must be subclasses of :class:`~mimesis.BaseProvider`
-because of ensuring a single instance of object ``Random``.
+All providers must be subclasses of :class:`~mimesis.providers.base.BaseProvider` to ensure
+that only a single instance of the Random object is used.
 
-Everything is pretty easy and self-explanatory here, therefore, we will
-only clarify one moment — attribute *name*, class *Meta* is the name
-of a class through which access to methods of user-class providers is
-carried out. By default class name is the name of the class in lowercase
-letters.
+Everything here is quite straightforward, but we would like to clarify one point:
+the name attribute in the Meta class refers to the name of the class through which access
+to methods of user-class providers is carried out. By default, the class name is used in
+lowercase letters.
