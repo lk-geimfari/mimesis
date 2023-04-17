@@ -201,7 +201,7 @@ Let's take a look at the example:
 
 
 The keyword argument **i** is used to specify the number of values to generate.
-If **i** is not specified, a reasonable default value (which to 10) is used.
+If **i** is not specified, a reasonable default value (which is 10) is used.
 
 The :class:`~mimesis.schema.Fieldset` class is a subclass of :class:`~mimesis.schema.BaseField` and inherits
 all its methods, attributes and properties. This means that API of :class:`~mimesis.schema.Fieldset` is almost the same
