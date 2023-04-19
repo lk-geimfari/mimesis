@@ -330,11 +330,13 @@ class Schema:
         return [self._schema() for _ in range(self.iterations)]
 
     def __next__(self) -> JSON:
+        """Return the next item from the iterator."""
         if self._count < self.iterations:
             self._count += 1
             return self._schema()
         raise StopIteration
 
     def __iter__(self) -> "Schema":
+        """Return the iterator object itself."""
         self._count = 0
         return self
