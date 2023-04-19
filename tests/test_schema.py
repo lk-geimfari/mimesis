@@ -37,12 +37,6 @@ def schema(field):
                 "email": field("email", key=str.lower),
                 "creator": field("full_name", gender=Gender.FEMALE),
             },
-            "defined_cls": {
-                "t1": field("person.title"),
-                "t2": field("person/title"),
-                "t3": field("person:title"),
-                "t4": field("text title"),
-            },
         },
         iterations=10,
     )
@@ -75,6 +69,19 @@ def test_field(field):
     assert field("uuid")
     assert field("full_name")
     assert field("street_name")
+
+
+@pytest.mark.parametrize(
+    "field_name",
+    [
+        "text title",
+        "person.title",
+        "person/title",
+        "person:title",
+    ]
+)
+def test_field_different_separator(field, field_name):
+    assert isinstance(field(field_name), str)
 
 
 @pytest.mark.parametrize(
@@ -130,10 +137,19 @@ def test_fieldset_field_error(fieldset):
         fieldset("unsupported_field")
 
 
-def test_field_with_custom_providers(field, extended_field):
+@pytest.mark.parametrize(
+    "field_name", [
+        "person.full_name.invalid",
+        "invalid_field",
+        "unsupported_field"
+    ]
+)
+def test_field_error(field, field_name):
     with pytest.raises(FieldError):
-        field("ssn")
+        field(field_name)
 
+
+def test_field_with_custom_providers(extended_field):
     assert extended_field("ssn")
 
 
