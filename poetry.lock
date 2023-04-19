@@ -14,14 +14,14 @@ files = [
 
 [[package]]
 name = "autoflake"
-version = "2.1.0"
+version = "2.1.1"
 description = "Removes unused imports and unused variables"
 category = "dev"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "autoflake-2.1.0-py3-none-any.whl", hash = "sha256:bc15c8a2e5f259d07667ea7896643494f8422ff4cd9f8393c5d12b08fa7f2fc4"},
-    {file = "autoflake-2.1.0.tar.gz", hash = "sha256:8044ba1f6c204a816df74cece0f353c6902ea08df28693ecaae82f5b1011ecd2"},
+    {file = "autoflake-2.1.1-py3-none-any.whl", hash = "sha256:94e330a2bcf5ac01384fb2bf98bea60c6383eaa59ea62be486e376622deba985"},
+    {file = "autoflake-2.1.1.tar.gz", hash = "sha256:75524b48d42d6537041d91f17573b8a98cb645642f9f05c7fcc68de10b1cade3"},
 ]
 
 [package.dependencies]
