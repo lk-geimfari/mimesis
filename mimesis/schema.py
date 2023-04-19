@@ -5,7 +5,6 @@ import json
 import pickle
 import re
 import typing as t
-import warnings
 
 from mimesis.exceptions import FieldError, FieldsetError, SchemaError
 from mimesis.locales import Locale
@@ -254,91 +253,38 @@ class Fieldset(BaseField):
 class Schema:
     """Class which return list of filled schemas."""
 
-    _MIN_ITERATIONS_VALUE: t.ClassVar[int] = 1
+    __slots__ = ("_schema", "iterations", "_count", "_min_iterations")
 
-    __slots__ = ("_schema",)
-
-    def __init__(self, schema: CallableSchema) -> None:
+    def __init__(self, schema: CallableSchema, iterations: int = 10) -> None:
         """Initialize schema.
 
+        :param iterations: Number of iterations.
+            This parameter is keyword-only. The default value is 10.
         :param schema: A schema (must be a callable object).
         """
         if schema and callable(schema):  # type: ignore[truthy-function]
             self._schema = schema
+            self._count = 0
+            self._min_iterations = 1
+            if iterations >= self._min_iterations:
+                self.iterations = iterations
+            else:
+                raise ValueError(
+                    f"Iterations must be greater than {self._min_iterations}"
+                )
         else:
             # This is just a better error message
             raise SchemaError()
 
-    def __mul__(self, other: int) -> t.List[JSON]:
-        """Multiplies the schema by the number of iterations.
-
-        Schema multiplication is not lazy, so it will be performed immediately (in fact,
-        you're using :meth:`~mimesis.schema.Schema.create` under the hood).
-
-        .. warning::
-
-            Multiplying the large and nested schema with a large number is obviously
-            a `stupid`_ idea, so **be reasonable** on choosing a multiplier.
-
-            .. _stupid: https://dictionary.cambridge.org/dictionary/english/stupid
-
-        Usage:
-
-        .. code-block:: python
-
-            schema = Schema(lambda: {
-                'email': _('username'),
-                'token': _('token_hex', key=lambda x: x[:8])
-            })
-            print(schema * 2)
-            print(2 * schema)
-
-        .. note::
-
-            Keep in mind the priority and order of multipliers.
-
-            Instead of doing this:
-
-            >>> schema * 2 * 10
-
-            Where you evaluate the schema 2 times and then multiply the resulting list 10 times, you should do this:
-
-            >>> schema * (2 * 10) # Evaluates the schema 20 times.
-
-            In other words, the first multiplier evaluetes the schema:
-
-            >>> 1 * schema * 3
-
-            The result will be:
-
-            .. code-block:: json
-
-                [
-                    {"email": "efforts1859@test.com", "token": "f4a29754"},
-                    {"email": "efforts1859@test.com", "token": "f4a29754"},
-                    {"email": "efforts1859@test.com", "token": "f4a29754"},
-                ]
-
-            Because schema is evaluated first (`1 * schema`), and then the second multiplier is
-            applied on the result of the first expression since.
-
-        :param other: The multiplier.
-        """
-        return self.create(other)
-
-    def __rmul__(self, other: int) -> t.List[JSON]:
-        return self.__mul__(other)
-
-    def to_csv(self, file_path: str, iterations: int = 100, **kwargs: t.Any) -> None:
+    def to_csv(self, file_path: str, **kwargs: t.Any) -> None:
         """Export a schema as a CSV file.
 
         :param file_path: File path.
-        :param iterations: The required number of rows.
         :param kwargs: The keyword arguments for :py:class:`csv.DictWriter` class.
 
         *New in version 5.3.0*
         """
-        data = self.create(iterations)
+        data = self.create()
         fieldnames = list(data[0])
 
         with open(file_path, "w", encoding="utf-8", newline="") as fp:
@@ -346,33 +292,31 @@ class Schema:
             dict_writer.writeheader()
             dict_writer.writerows(data)
 
-    def to_json(self, file_path: str, iterations: int = 100, **kwargs: t.Any) -> None:
+    def to_json(self, file_path: str, **kwargs: t.Any) -> None:
         """Export a schema as a JSON file.
 
         :param file_path: File path.
-        :param iterations: The required number of rows.
         :param kwargs: Extra keyword arguments for :py:func:`json.dump` class.
 
         *New in version 5.3.0*
         """
-        data = self.create(iterations)
+        data = self.create()
         with open(file_path, "w", encoding="utf-8") as fp:
             json.dump(data, fp, **kwargs)
 
-    def to_pickle(self, file_path: str, iterations: int = 100, **kwargs: t.Any) -> None:
+    def to_pickle(self, file_path: str, **kwargs: t.Any) -> None:
         """Export a schema as the pickled representation of the object to the file.
 
         :param file_path: File path.
-        :param iterations: The required number of rows.
         :param kwargs: Extra keyword arguments for :py:func:`pickle.dump` class.
 
         *New in version 5.3.0*
         """
-        data = self.create(iterations)
+        data = self.create()
         with open(file_path, "wb") as fp:
             pickle.dump(data, fp, **kwargs)
 
-    def create(self, iterations: int = 1) -> t.List[JSON]:
+    def create(self) -> t.List[JSON]:
         """Creates a list of a fulfilled schemas.
 
         .. note::
@@ -381,60 +325,16 @@ class Schema:
 
             If you need a lazy version of this method, see :meth:`iterator`.
 
-        :param iterations: Number of iterations.
         :return: List of fulfilled schemas.
         """
+        return [self._schema() for _ in range(self.iterations)]
 
-        if iterations < self._MIN_ITERATIONS_VALUE:
-            raise ValueError("The number of iterations must be greater than 0.")
+    def __next__(self) -> JSON:
+        if self._count < self.iterations:
+            self._count += 1
+            return self._schema()
+        raise StopIteration
 
-        return [self._schema() for _ in range(iterations)]
-
-    def loop(self) -> t.Iterator[JSON]:
-        """Fulfills a schema **infinitely** in a lazy way.
-
-        This method can be useful when you have dynamic conditions
-        on which the generation must depend and be interrupted accordingly.
-
-        Since the data provided by mimesis is limited, frequent
-        calls of this method may cause data duplication.
-
-        Before using this method, ask yourself: **Do I really need this**?
-        In most cases, the answer is: Nah, :meth:`iterator` is enough.
-
-        **Do not use** this method without **interrupt conditions**, otherwise,
-        you're risking running out of memory.
-
-        If you're accepting all risks below and want to suppress
-        the warnings then use :py:class:`warnings.catch_warnings`
-
-        .. warning::
-
-            **Never** (seriously) call :py:class:`list`, :py:class:`tuple`, :py:class:`set`
-            or any other callable which tries to evaluate the whole lazy object on this
-            method — **infinite** called infinite for a reason.
-
-        :return: An infinite iterator with fulfilled schemas.
-        """
-
-        warnings.warn(
-            "You're iterating over the infinite object! "
-            "The schema.loop() may cause a serious memory leak."
-            "Please, see: https://mimesis.name/en/latest/api.html#mimesis.schema.Schema.loop"
-        )
-
-        while True:
-            yield self._schema()
-
-    def iterator(self, iterations: int = 1) -> t.Iterator[JSON]:
-        """Fulfills schema in a lazy way.
-
-        :param iterations: Number of iterations.
-        :return: List of fulfilled schemas.
-        """
-
-        if iterations < self._MIN_ITERATIONS_VALUE:
-            raise ValueError("The number of iterations must be greater than 0.")
-
-        for item in range(iterations):
-            yield self._schema()
+    def __iter__(self) -> "Schema":
+        self._count = 0
+        return self
