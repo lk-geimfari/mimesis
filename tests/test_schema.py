@@ -11,13 +11,13 @@ from mimesis.builtins.en import USASpecProvider
 from mimesis.enums import Gender
 from mimesis.exceptions import FieldError, FieldsetError, SchemaError
 from mimesis.locales import Locale
-from mimesis.schema import BaseField, Field, Fieldset, Schema
+from mimesis.schema import Field, Fieldset, Schema
 from mimesis.types import MissingSeed
-from tests.test_providers import patterns
+from tests.test_providers.patterns import DATA_PROVIDER_STR_REGEX
 
 
 def test_str(field):
-    assert re.match(patterns.DATA_PROVIDER_STR_REGEX, str(field))
+    assert re.match(DATA_PROVIDER_STR_REGEX, str(field))
 
 
 @pytest.fixture(scope="module", params=list(Locale))
@@ -65,10 +65,16 @@ def fieldset_with_default_i(request):
     return Fieldset(request.param, i=100)
 
 
-def test_field(field):
-    assert field("uuid")
-    assert field("full_name")
-    assert field("street_name")
+@pytest.mark.parametrize(
+    "field_name",
+    [
+        "uuid",
+        "full_name",
+        "street_name",
+    ],
+)
+def test_field(field, field_name):
+    assert field(field_name)
 
 
 @pytest.mark.parametrize(
@@ -78,7 +84,7 @@ def test_field(field):
         "person.title",
         "person/title",
         "person:title",
-    ]
+    ],
 )
 def test_field_different_separator(field, field_name):
     assert isinstance(field(field_name), str)
@@ -138,11 +144,7 @@ def test_fieldset_field_error(fieldset):
 
 
 @pytest.mark.parametrize(
-    "field_name", [
-        "person.full_name.invalid",
-        "invalid_field",
-        "unsupported_field"
-    ]
+    "field_name", ["person.full_name.invalid", "invalid_field", "unsupported_field"]
 )
 def test_field_error(field, field_name):
     with pytest.raises(FieldError):
@@ -188,26 +190,25 @@ def test_fuzzy_lookup(field):
 
 @pytest.mark.parametrize(
     "field_name",
-    (
-            "surname",
-            "person.surname",
-    ),
+    [
+        "surname",
+        "person.surname",
+    ],
 )
 def test_lookup_method(field, field_name):
     result = field._lookup_method(field_name)
-
     assert callable(result)
     assert isinstance(result(), str)
 
 
 @pytest.mark.parametrize(
     "field_name",
-    (
-            "",
-            "foo",
-            "foo.bar",
-            "person.surname.male",
-    ),
+    [
+        "",
+        "foo",
+        "foo.bar",
+        "person.surname.male",
+    ],
 )
 def test_lookup_method_field_error(field, field_name):
     with pytest.raises(FieldError):
@@ -218,15 +219,6 @@ def test_lookup_method_field_error(field, field_name):
 
     with pytest.raises(FieldError):
         field._fuzzy_lookup(field_name)
-
-
-@pytest.fixture(scope="module", params=list(Locale))
-def test_base_field(request):
-    field = BaseField(request.param)
-
-    assert field.perform("uuid")
-    assert field.perform("full_name")
-    assert field.perform("street_name")
 
 
 @pytest.mark.parametrize(
