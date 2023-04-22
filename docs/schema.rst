@@ -16,9 +16,6 @@ chosen the first provider which has a method *method_name*) and the
 describe the schema in lambda function (or any other callable object) and pass it to
 the object :class:`~mimesis.schema.Schema` and call method :meth:`~mimesis.schema.Schema.create`.
 
-Since **v5.6.0** you can use multiplication, instead of the explicit call of :meth:`~mimesis.schema.Schema.create`.
-Please, see :meth:`~mimesis.schema.Schema.__mul__` of :class:`~mimesis.schema.Schema` for more details.
-
 Optionally, you can apply a *key function* to result returned by the
 method, to do it, just pass the parameter `key` with a callable object
 which returns final result.
@@ -32,21 +29,21 @@ Example of usage:
     from mimesis.schema import Field, Schema
 
     _ = Field(locale=Locale.EN)
-    schema = Schema(schema=lambda: {
-        "pk": _("increment"),
-        "uid": _("uuid"),
-        "name": _("text.word"),
-        "version": _("version", pre_release=True),
-        "timestamp": _("timestamp", posix=False),
-        "owner": {
-            "email": _("person.email", domains=["test.com"], key=str.lower),
-            "token": _("token_hex"),
-            "creator": _("full_name", gender=Gender.FEMALE),
-        },
+    schema = Schema(
+        schema=lambda: {
+            "pk": _("increment"),
+            "uid": _("uuid"),
+            "name": _("text.word"),
+            "version": _("version", pre_release=True),
+            "timestamp": _("timestamp", posix=False),
+            "owner": {
+                "email": _("person.email", domains=["test.com"], key=str.lower),
+                "token": _("token_hex"),
+                "creator": _("full_name", gender=Gender.FEMALE),
+            },
+        iterations=2
     })
-    schema.create(iterations=2)
-    # Since v5.6.0 you can do the same thing using multiplication:
-    schema * 2
+    schema.create()
 
 
 Output:
@@ -103,42 +100,7 @@ to change this behavior should be passed parameter *providers* with a sequence o
     # Output: '657340522'
 
 
-You can create infinite lazy schema-based data generators using :meth:`~mimesis.schema.Schema.loop`.:
-
-.. code:: python
-
-    from mimesis import Schema, Field
-    from mimesis.locales import Locale
-
-    field = Field(Locale.DE)
-
-    schema = Schema(
-        schema=lambda: {
-            "pk": field("increment"),
-            "name": field("full_name"),
-            "email": field("email", domains=["example.org"]),
-        }
-    )
-
-
-    for obj in schema.loop():
-        pk = obj.get("pk")
-
-        if pk > 100:
-            break
-
-        print(obj)
-
-Output:
-
-.. code:: text
-
-    {'pk': 1, 'name': 'Wenzel Feigenbaum', 'email': 'cambridge1883@example.org'}
-    ...
-    {'pk': 100, 'name': 'Gerard Garber', 'email': 'travelers1947@example.org'}
-
-
-or create a lazy data generator of limited length, using :meth:`~mimesis.schema.Schema.iterator`:
+You can create lazy data generator of limited length:
 
 
 .. code:: python
@@ -153,11 +115,12 @@ or create a lazy data generator of limited length, using :meth:`~mimesis.schema.
             "pk": field("increment"),
             "name": field("full_name"),
             "email": field("email", domains=["example.org"]),
-        }
+        },
+        iterations=100,
     )
 
 
-    for obj in schema.iterator(100):
+    for obj in schema:
         print(obj)
 
 Output:
@@ -269,6 +232,32 @@ Output:
 
 
 Isn't it cool? Of course, it is!
+
+
+None Values
+-----------
+
+Real-world data can be messy and may contain missing values.
+This is why generating data with **None** values may be useful
+to create more realistic synthetic data.
+
+Luckily, you can achieve this by using **key** callable on the instance of :class:`~mimesis.schema.Fieldset`:
+
+.. code:: python
+
+    >>> from mimesis import Fieldset
+    >>> from mimesis.locales import Locale
+    >>> from mimesis.random import random
+
+    >>> fieldset = Fieldset(Locale.EN, i=5)
+
+    >>> def distribute_none(value):
+    ...    return random.choices([value, None], weights=[0.4, 0.3])[0]
+
+    >>> fieldset("email", key=distribute_none)
+
+    [None, None, None, 'bobby1882@gmail.com', None]
+
 
 Exporting Data
 --------------

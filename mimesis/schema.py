@@ -2,8 +2,6 @@
 
 import csv
 import json
-import os
-import os.path
 import pickle
 import re
 import typing as t
@@ -26,10 +24,10 @@ __all__ = ["BaseField", "Field", "Fieldset", "Schema"]
 
 class BaseField:
     def __init__(
-            self,
-            locale: Locale = Locale.DEFAULT,
-            seed: Seed = MissingSeed,
-            providers: t.Optional[t.Sequence[t.Any]] = None,
+        self,
+        locale: Locale = Locale.DEFAULT,
+        seed: Seed = MissingSeed,
+        providers: t.Optional[t.Sequence[t.Any]] = None,
     ) -> None:
         """Initialize field.
 
@@ -108,10 +106,10 @@ class BaseField:
         return self._cache[name]
 
     def perform(
-            self,
-            name: t.Optional[str] = None,
-            key: Key = None,
-            **kwargs: t.Any,
+        self,
+        name: t.Optional[str] = None,
+        key: Key = None,
+        **kwargs: t.Any,
     ) -> t.Any:
         """Performs the value of the field by its name.
 
