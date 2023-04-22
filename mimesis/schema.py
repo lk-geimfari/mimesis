@@ -2,6 +2,8 @@
 
 import csv
 import json
+import os
+import os.path
 import pickle
 import re
 import typing as t
@@ -24,10 +26,10 @@ __all__ = ["BaseField", "Field", "Fieldset", "Schema"]
 
 class BaseField:
     def __init__(
-        self,
-        locale: Locale = Locale.DEFAULT,
-        seed: Seed = MissingSeed,
-        providers: t.Optional[t.Sequence[t.Any]] = None,
+            self,
+            locale: Locale = Locale.DEFAULT,
+            seed: Seed = MissingSeed,
+            providers: t.Optional[t.Sequence[t.Any]] = None,
     ) -> None:
         """Initialize field.
 
@@ -106,10 +108,10 @@ class BaseField:
         return self._cache[name]
 
     def perform(
-        self,
-        name: t.Optional[str] = None,
-        key: Key = None,
-        **kwargs: t.Any,
+            self,
+            name: t.Optional[str] = None,
+            key: Key = None,
+            **kwargs: t.Any,
     ) -> t.Any:
         """Performs the value of the field by its name.
 
@@ -285,9 +287,8 @@ class Schema:
         *New in version 5.3.0*
         """
         data = self.create()
-        fieldnames = list(data[0])
-
         with open(file_path, "w", encoding="utf-8", newline="") as fp:
+            fieldnames = list(data[0])
             dict_writer = csv.DictWriter(fp, fieldnames, **kwargs)
             dict_writer.writeheader()
             dict_writer.writerows(data)
@@ -300,9 +301,8 @@ class Schema:
 
         *New in version 5.3.0*
         """
-        data = self.create()
         with open(file_path, "w", encoding="utf-8") as fp:
-            json.dump(data, fp, **kwargs)
+            json.dump(self.create(), fp, **kwargs)
 
     def to_pickle(self, file_path: str, **kwargs: t.Any) -> None:
         """Export a schema as the pickled representation of the object to the file.
@@ -312,9 +312,8 @@ class Schema:
 
         *New in version 5.3.0*
         """
-        data = self.create()
         with open(file_path, "wb") as fp:
-            pickle.dump(data, fp, **kwargs)
+            pickle.dump(self.create(), fp, **kwargs)
 
     def create(self) -> t.List[JSON]:
         """Creates a list of a fulfilled schemas.
