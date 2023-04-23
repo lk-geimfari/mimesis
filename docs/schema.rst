@@ -252,7 +252,7 @@ Luckily, you can achieve this by using **key** callable on the instance of :clas
     >>> fieldset = Fieldset(Locale.EN, i=5)
 
     >>> def distribute_none(value):
-    ...    return random.choices([value, None], weights=[0.4, 0.3])[0]
+    ...    return random.choices([value, None], weights=[0.4, 0.3], k=1)[0]
 
     >>> fieldset("email", key=distribute_none)
 
