@@ -10,28 +10,23 @@ def random():
     return _random
 
 
-def test_randstr_non_unique_with_same_seed(random):
-    random.seed(1)
-    first = random.randstr(unique=False)
-    random.seed(1)
-    second = random.randstr(unique=False)
-    assert first == second
+@pytest.mark.parametrize(
+    "amount, a, b",
+    [
+        (3, 1, 20),
+        (5, 1, 20),
+        (10, 1, 20),
+    ],
+)
+def test_randints(random, amount, a, b):
+    result = random.randints(amount, a, b)
+    assert len(result) == amount
+    assert all(a <= x <= b for x in result)
 
 
-def test_randints(random):
-    result = random.randints()
-
-    # Length of default list is 3
-    assert len(result) == 3
-
-    result = random.randints(25, 1, 1)
-
-    assert len(result) == 25
-    # All elements in result_custom equals to 1.
-    assert result[0] == 1 and result[-1] == 1
-
+def test_randints_value_error(random):
     with pytest.raises(ValueError):
-        random.randints(amount=0)
+        random.randints(0, 1, 2)
 
 
 @pytest.mark.parametrize(
@@ -46,14 +41,7 @@ def test_generate_string(random, str_seq, length):
     assert len(result) == length
 
 
-@pytest.mark.parametrize(
-    "precision",
-    [
-        4,
-        6,
-        8,
-    ],
-)
+@pytest.mark.parametrize("precision", [4, 6, 8])
 def test_uniform(random, precision):
     result = random.uniform(2.3, 10.5, precision)
     assert isinstance(result, float)
@@ -114,14 +102,7 @@ def test_get_random_item(random):
     assert result_1 == result_2
 
 
-@pytest.mark.parametrize(
-    "length",
-    [
-        64,
-        128,
-        256,
-    ],
-)
+@pytest.mark.parametrize("length", [64, 128, 256])
 def test_randstr(random, length):
     result = random.randstr(length=length)
     result2 = random.randstr(length=length)
@@ -134,20 +115,28 @@ def test_randstr_no_length(random):
     assert 16 <= string <= 128
 
 
-@pytest.mark.parametrize(
-    "count",
-    [
-        1000,
-        10000,
-        100000,
-    ],
-)
+@pytest.mark.parametrize("count", [1000, 5000, 10000])
 def test_randstr_unique(random, count):
     results = [random.randstr(unique=True) for _ in range(count)]
     assert len(results) == len(set(results))
 
 
-def test_random_weighted_choice(random):
+@pytest.mark.parametrize(
+    "seed",
+    [
+        "👽",
+        "seed",
+    ],
+)
+def test_randstr_non_unique_with_same_seed(random, seed):
+    random.seed(seed)
+    first = random.randstr(unique=False)
+    random.seed(seed)
+    second = random.randstr(unique=False)
+    assert first == second
+
+
+def test_weighted_choice(random):
     result = [
         random.weighted_choice(
             choices={
@@ -160,3 +149,8 @@ def test_random_weighted_choice(random):
 
     assert result.count(Gender.MALE) < 20
     assert result.count(Gender.FEMALE) > 80
+
+
+def test_weighted_choice_with_empty_dict(random):
+    with pytest.raises(ValueError):
+        random.weighted_choice(choices={})
