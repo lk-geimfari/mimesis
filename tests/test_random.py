@@ -92,12 +92,12 @@ def test_custom_code_with_seed(random, seed, expected):
 
 
 def test_get_random_item(random):
-    result = random._choice_enum_item(Gender)
+    result = random.choice_enum_item(Gender)
     assert result in Gender
 
     random.seed(0xF)
-    result_1 = random._choice_enum_item(Gender)
-    result_2 = random._choice_enum_item(Gender)
+    result_1 = random.choice_enum_item(Gender)
+    result_2 = random.choice_enum_item(Gender)
     assert result_1 == result_2
 
 

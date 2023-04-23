@@ -34,7 +34,7 @@ class Text(BaseDataProvider):
         """
         case = "uppercase" if not lower_case else "lowercase"
 
-        alpha: t.List[str] = self.extract(["alphabet", case])
+        alpha: t.List[str] = self._extract(["alphabet", case])
         return alpha
 
     def level(self) -> str:
@@ -45,7 +45,7 @@ class Text(BaseDataProvider):
         :Example:
             critical.
         """
-        levels: t.List[str] = self.extract(["level"])
+        levels: t.List[str] = self._extract(["level"])
         return self.random.choice(levels)
 
     def text(self, quantity: int = 5) -> str:
@@ -54,7 +54,7 @@ class Text(BaseDataProvider):
         :param quantity: Quantity of sentences.
         :return: Text.
         """
-        text = self.extract(["text"])
+        text = self._extract(["text"])
         return " ".join(self.random.choices(text, k=quantity))
 
     def sentence(self) -> str:
@@ -80,7 +80,7 @@ class Text(BaseDataProvider):
         :Example:
             [science, network, god, octopus, love]
         """
-        words = self.extract(["words", "normal"])
+        words = self._extract(["words", "normal"])
         return self.random.choices(words, k=quantity)
 
     def word(self) -> str:
@@ -101,7 +101,7 @@ class Text(BaseDataProvider):
         :Example:
             Damn.
         """
-        words: t.List[str] = self.extract(["words", "bad"])
+        words: t.List[str] = self._extract(["words", "bad"])
         return self.random.choice(words)
 
     def quote(self) -> str:
@@ -112,7 +112,7 @@ class Text(BaseDataProvider):
         :Example:
             "Bond... James Bond."
         """
-        quotes: t.List[str] = self.extract(["quotes"])
+        quotes: t.List[str] = self._extract(["quotes"])
         return self.random.choice(quotes)
 
     def color(self) -> str:
@@ -123,7 +123,7 @@ class Text(BaseDataProvider):
         :Example:
             Red.
         """
-        colors: t.List[str] = self.extract(["color"])
+        colors: t.List[str] = self._extract(["color"])
         return self.random.choice(colors)
 
     @staticmethod
@@ -171,5 +171,5 @@ class Text(BaseDataProvider):
         :Example:
             No
         """
-        answers: t.List[str] = self.extract(["answers"])
+        answers: t.List[str] = self._extract(["answers"])
         return self.random.choice(answers)

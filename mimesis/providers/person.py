@@ -13,7 +13,6 @@ from mimesis.data import (
     USERNAMES,
 )
 from mimesis.enums import Gender, TitleType
-from mimesis.exceptions import NonEnumerableError
 from mimesis.providers.base import BaseDataProvider
 
 __all__ = ["Person"]
@@ -76,7 +75,7 @@ class Person(BaseDataProvider):
             John.
         """
         key = self.validate_enum(gender, Gender)
-        names: t.List[str] = self.extract(["names", key])
+        names: t.List[str] = self._extract(["names", key])
         return self.random.choice(names)
 
     def first_name(self, gender: t.Optional[Gender] = None) -> str:
@@ -98,7 +97,7 @@ class Person(BaseDataProvider):
         :Example:
             Smith.
         """
-        surnames: t.Sequence[str] = self.extract(["surnames"])
+        surnames: t.Sequence[str] = self._extract(["surnames"])
 
         # Surnames separated by gender.
         if isinstance(surnames, dict):
@@ -138,7 +137,7 @@ class Person(BaseDataProvider):
         gender_key = self.validate_enum(gender, Gender)
         title_key = self.validate_enum(title_type, TitleType)
 
-        titles: t.List[str] = self.extract(["title", gender_key, title_key])
+        titles: t.List[str] = self._extract(["title", gender_key, title_key])
         return self.random.choice(titles)
 
     def full_name(
@@ -153,14 +152,6 @@ class Person(BaseDataProvider):
         :Example:
             Johann Wolfgang.
         """
-        if gender is None:
-            gender = self.random._choice_enum_item(Gender)
-
-        if gender and isinstance(gender, Gender):
-            gender = gender
-        else:
-            raise NonEnumerableError(Gender)
-
         name = self.name(gender)
         surname = self.surname(gender)
         return f"{surname} {name}" if reverse else f"{name} {surname}"
@@ -301,7 +292,7 @@ class Person(BaseDataProvider):
         if symbol:
             return self.random.choice(GENDER_SYMBOLS)
 
-        genders: t.List[str] = self.extract(["gender"])
+        genders: t.List[str] = self._extract(["gender"])
         return self.random.choice(genders)
 
     def sex(self, *args: t.Any, **kwargs: t.Any) -> t.Union[str, int]:
@@ -358,7 +349,7 @@ class Person(BaseDataProvider):
         :Example:
             Programmer.
         """
-        jobs: t.List[str] = self.extract(["occupation"])
+        jobs: t.List[str] = self._extract(["occupation"])
         return self.random.choice(jobs)
 
     def political_views(self) -> str:
@@ -369,7 +360,7 @@ class Person(BaseDataProvider):
         :Example:
             Liberal.
         """
-        views: t.List[str] = self.extract(["political_views"])
+        views: t.List[str] = self._extract(["political_views"])
         return self.random.choice(views)
 
     def worldview(self) -> str:
@@ -380,7 +371,7 @@ class Person(BaseDataProvider):
         :Example:
             Pantheism.
         """
-        views: t.List[str] = self.extract(["worldview"])
+        views: t.List[str] = self._extract(["worldview"])
         return self.random.choice(views)
 
     def views_on(self) -> str:
@@ -391,7 +382,7 @@ class Person(BaseDataProvider):
         :Example:
             Negative.
         """
-        views: t.List[str] = self.extract(["views_on"])
+        views: t.List[str] = self._extract(["views_on"])
         return self.random.choice(views)
 
     def nationality(self, gender: t.Optional[Gender] = None) -> str:
@@ -403,7 +394,7 @@ class Person(BaseDataProvider):
         :Example:
             Russian
         """
-        nationalities: t.List[str] = self.extract(["nationality"])
+        nationalities: t.List[str] = self._extract(["nationality"])
 
         # Separated by gender
         if isinstance(nationalities, dict):
@@ -420,7 +411,7 @@ class Person(BaseDataProvider):
         :Example:
             MIT.
         """
-        universities: t.List[str] = self.extract(["university"])
+        universities: t.List[str] = self._extract(["university"])
         return self.random.choice(universities)
 
     def academic_degree(self) -> str:
@@ -431,7 +422,7 @@ class Person(BaseDataProvider):
         :Example:
             Bachelor.
         """
-        degrees: t.List[str] = self.extract(["academic_degree"])
+        degrees: t.List[str] = self._extract(["academic_degree"])
         return self.random.choice(degrees)
 
     def language(self) -> str:
@@ -442,7 +433,7 @@ class Person(BaseDataProvider):
         :Example:
             Irish.
         """
-        languages: t.List[str] = self.extract(["language"])
+        languages: t.List[str] = self._extract(["language"])
         return self.random.choice(languages)
 
     def phone_number(self, mask: str = "", placeholder: str = "#") -> str:
@@ -458,7 +449,7 @@ class Person(BaseDataProvider):
         if not mask:
             code = self.random.choice(CALLING_CODES)
             default = f"{code}-(###)-###-####"
-            masks = self.extract(["telephone_fmt"], default=[default])
+            masks = self._extract(["telephone_fmt"], default=[default])
             mask = self.random.choice(masks)
 
         return self.random.custom_code(mask=mask, digit=placeholder)

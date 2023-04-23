@@ -79,7 +79,7 @@ class BaseProvider:
         :raises NonEnumerableError: if ``item`` not in ``enum``.
         """
         if item is None:
-            result = self.random._choice_enum_item(enum)
+            result = self.random.choice_enum_item(enum)
         elif item and isinstance(item, enum):
             result = item
         else:
@@ -130,14 +130,13 @@ class BaseDataProvider(BaseProvider):
         locale_obj = validate_locale(locale)
         self.locale = locale_obj.value
 
-    def extract(self, keys: t.List[str], default: t.Optional[t.Any] = None) -> t.Any:
+    def _extract(self, keys: t.List[str], default: t.Optional[t.Any] = None) -> t.Any:
         """Extracts nested values from JSON file by list of keys.
 
         :param keys: List of keys (order extremely matters).
         :param default: Default value.
         :return: Data.
         """
-
         if not keys:
             raise ValueError("The list of keys to extract cannot be empty.")
         try:

@@ -130,11 +130,11 @@ class TestAddress:
 
     def test_country(self, address):
         country = address.country()
-        assert country in address.extract(["country", "name"])
+        assert country in address._extract(["country", "name"])
 
     def test_country_for_current_locale(self, address):
         country = address.default_country()
-        assert country in address.extract(["country", "current_locale"])
+        assert country in address._extract(["country", "current_locale"])
 
     @pytest.mark.parametrize(
         "code, length",

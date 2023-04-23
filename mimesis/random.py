@@ -136,7 +136,7 @@ class Random(random_module.Random):
         weights = list(choices.values())
         return self.choices(population, weights=weights, k=1)[0]
 
-    def _choice_enum_item(self, enum: t.Any) -> t.Any:
+    def choice_enum_item(self, enum: t.Any) -> t.Any:
         """Get random value of enum object.
 
         :param enum: Enum object.

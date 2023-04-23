@@ -74,7 +74,7 @@ class Address(BaseDataProvider):
 
         :return: Street name.
         """
-        street_names: t.List[str] = self.extract(["street", "name"])
+        street_names: t.List[str] = self._extract(["street", "name"])
         return self.random.choice(street_names)
 
     def street_suffix(self) -> str:
@@ -82,7 +82,7 @@ class Address(BaseDataProvider):
 
         :return: Street suffix.
         """
-        suffixes: t.List[str] = self.extract(["street", "suffix"])
+        suffixes: t.List[str] = self._extract(["street", "suffix"])
         return self.random.choice(suffixes)
 
     def address(self) -> str:
@@ -90,7 +90,7 @@ class Address(BaseDataProvider):
 
         :return: Full address.
         """
-        fmt: str = self.extract(["address_fmt"])
+        fmt: str = self._extract(["address_fmt"])
 
         st_num = self.street_number()
         st_name = self.street_name()
@@ -103,7 +103,7 @@ class Address(BaseDataProvider):
 
         if self.locale == "ja":
             return fmt.format(
-                self.random.choice(self.extract(["city"])),
+                self.random.choice(self._extract(["city"])),
                 # Generate list of random integers
                 # in amount of 3, from 1 to 100.
                 *self.random.randints(amount=3, a=1, b=100),
@@ -122,7 +122,7 @@ class Address(BaseDataProvider):
         :return: Administrative district.
         """
         key = "abbr" if abbr else "name"
-        states: t.List[str] = self.extract(["state", key])
+        states: t.List[str] = self._extract(["state", key])
         return self.random.choice(states)
 
     def region(self, *args: t.Any, **kwargs: t.Any) -> str:
@@ -158,7 +158,7 @@ class Address(BaseDataProvider):
 
         :return: Postal code.
         """
-        return self.random.custom_code(self.extract(["postal_code_fmt"]))
+        return self.random.custom_code(self._extract(["postal_code_fmt"]))
 
     def zip_code(self) -> str:
         """Generate a zip code.
@@ -188,7 +188,7 @@ class Address(BaseDataProvider):
 
         :return: The country associated with current locale.
         """
-        country: str = self.extract(["country", "current_locale"])
+        country: str = self._extract(["country", "current_locale"])
         return country
 
     def country(self) -> str:
@@ -196,7 +196,7 @@ class Address(BaseDataProvider):
 
         :return: The Country.
         """
-        countries: t.List[str] = self.extract(["country", "name"])
+        countries: t.List[str] = self._extract(["country", "name"])
         return self.random.choice(countries)
 
     def city(self) -> str:
@@ -204,7 +204,7 @@ class Address(BaseDataProvider):
 
         :return: City name.
         """
-        cities: t.List[str] = self.extract(["city"])
+        cities: t.List[str] = self._extract(["city"])
         return self.random.choice(cities)
 
     def _get_fs(self, key: str, dms: bool = False) -> t.Union[str, float]:
@@ -256,7 +256,7 @@ class Address(BaseDataProvider):
         :param code: Return code of continent.
         :return: Continent name.
         """
-        codes: t.List[str] = self.extract(["continent"])
+        codes: t.List[str] = self._extract(["continent"])
 
         if code:
             codes = CONTINENT_CODES
