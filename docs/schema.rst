@@ -100,7 +100,7 @@ to change this behavior should be passed parameter *providers* with a sequence o
     # Output: '657340522'
 
 
-You can create lazy data generator of limited length:
+The scheme is an iterator, so you can iterate over it, for example like this:
 
 
 .. code:: python
@@ -131,10 +131,6 @@ Output:
     ...
     {'pk': 100, 'name': 'Karsten Haase', 'email': 'dennis2024@example.org'}
 
-
-Since **8.0.0** you can use a :class:`~mimesis.schema.Fieldset` class for creating set of fields.
-
-See **Fieldset vs Fields** section below for more details.
 
 Field vs Fieldset
 -----------------
@@ -195,7 +191,7 @@ Let's take a look at the example:
 Fieldset and Pandas
 -------------------
 
-If your aim is to create synthetic data for your Pandas dataframes,
+If your aim is to create synthetic data for your `Pandas dataframes <https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html>`_ ,
 you can make use of the :class:`~mimesis.schema.Fieldset` as well.
 
 With :class:`~mimesis.schema.Fieldset`, you can create datasets that are
