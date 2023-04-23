@@ -96,3 +96,53 @@ If you want to use the same seed for all your data providers, then using :class:
     # Output: '2021-09-04'
     generic.text.word()
     # Output: 'platform'
+
+
+Probability and Weighted Choice
+-------------------------------
+
+You might wish to produce data with a specific likelihood of appearing.
+
+To illustrate, suppose you aim to produce random complete names for males
+and females, but with a greater likelihood of female names being generated.
+
+Here's one approach to accomplish this:
+
+.. code-block:: python
+
+    from mimesis import Person, Locale, Gender
+
+    person = Person(Locale.EN)
+
+    for _ in range(10):
+        full_name = person.full_name(
+            gender=person.random.weighted_choice(
+                choices={
+                    Gender.MALE: 0.2,
+                    Gender.FEMALE: 0.8,
+                }
+            ),
+        )
+        print(full_name)
+
+
+Output:
+
+.. code-block:: text
+
+    Chieko Flynn
+    Jannet William
+    Rozella Church
+    Dorotha Flowers
+    Annis Garcia
+    Trudie Mcclure
+    Alfonzo Cox
+    Elsy Bridges
+    Darby Bates
+    Serita Cleveland
+
+
+.. note::
+
+    We are accessing **random** attribute of the :class:`~mimesis.Person` class to ensure same seed.
+

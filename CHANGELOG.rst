@@ -4,9 +4,13 @@ Version 9.0.0
 **Removed**:
 
 - The ``loop`` method for the ``Schema``, which was considered deprecated and unsafe, has been removed.
-- The ``iterations`` parameter for all methods of ``Schema`` has been removed. Instead, you now have to specify the number of iterations on instantiation of ``Schema`` passing the ``i`` parameter.
+- The ``iterations`` parameter for all methods of ``Schema`` has been removed. Instead, you now have to specify the number of iterations on instantiation of ``Schema`` passing the ``iterations`` parameter.
 - The ``iterator`` method for ``Schema`` has been removed. Instead, you can now use an instance of ``Schema`` directly as an iterator.
 - The multiplication is no longer supported for ``Schema``. Instead, you can use the ``i`` parameter on instantiation of ``Schema``.
+
+**Added**:
+
+- Add ``weighted_choice()`` method for ``Random()``. See docs for more information.
 
 
 Version 8.0.0

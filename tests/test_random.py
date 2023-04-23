@@ -145,3 +145,18 @@ def test_randstr_no_length(random):
 def test_randstr_unique(random, count):
     results = [random.randstr(unique=True) for _ in range(count)]
     assert len(results) == len(set(results))
+
+
+def test_random_weighted_choice(random):
+    result = [
+        random.weighted_choice(
+            choices={
+                Gender.MALE: 0.1,
+                Gender.FEMALE: 0.9,
+            },
+        )
+        for _ in range(100)
+    ]
+
+    assert result.count(Gender.MALE) < 20
+    assert result.count(Gender.FEMALE) > 80
