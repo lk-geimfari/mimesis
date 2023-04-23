@@ -12,7 +12,7 @@ import uuid
 
 from mimesis.types import MissingSeed, Seed
 
-__all__ = ["Random", "get_random_item", "random"]
+__all__ = ["Random", "random"]
 
 #: Different plugins (like `pytest-randomly`)
 #: can set custom values to a global seed,
@@ -44,7 +44,7 @@ class Random(random_module.Random):
 
         return [int(self.random() * (b - a)) + a for _ in range(amount)]
 
-    def generate_string(self, str_seq: str, length: int = 10) -> str:
+    def _generate_string(self, str_seq: str, length: int = 10) -> str:
         """Generate random string created from string sequence.
 
         :param str_seq: String sequence of letters or digits.
@@ -66,7 +66,8 @@ class Random(random_module.Random):
 
         if char_code == digit_code:
             raise ValueError(
-                "You cannot use the same placeholder for digits and chars!"
+                "The same placeholder cannot be "
+                "used for both numbers and characters."
             )
 
         def random_int(a: int, b: int) -> int:
@@ -95,7 +96,7 @@ class Random(random_module.Random):
         """
         return round(a + (b - a) * self.random(), precision)
 
-    def randstr(self, unique: bool = False, length: t.Optional[int] = None) -> str:
+    def _randstr(self, unique: bool = False, length: t.Optional[int] = None) -> str:
         """Generate random string value.
 
         This method can be especially useful when you need to generate
@@ -135,17 +136,13 @@ class Random(random_module.Random):
         weights = list(choices.values())
         return self.choices(population, weights=weights, k=1)[0]
 
+    def _choice_enum_item(self, enum: t.Any) -> t.Any:
+        """Get random value of enum object.
 
-def get_random_item(enum: t.Any, rnd: t.Optional[Random] = None) -> t.Any:
-    """Get random item of enum object.
-
-    :param enum: Enum object.
-    :param rnd: Custom random object.
-    :return: Random item of enum.
-    """
-    if rnd and isinstance(rnd, Random):
-        return rnd.choice(list(enum))
-    return random_module.choice(list(enum))
+        :param enum: Enum object.
+        :return: Random value of enum.
+        """
+        return self.choice(list(enum))
 
 
 # Compat

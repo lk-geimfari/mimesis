@@ -1,7 +1,6 @@
 import pytest
 
 from mimesis.enums import Gender
-from mimesis.random import get_random_item
 from mimesis.random import random as _random
 
 
@@ -37,7 +36,7 @@ def test_randints_value_error(random):
     ],
 )
 def test_generate_string(random, str_seq, length):
-    result = random.generate_string(str_seq, length)
+    result = random._generate_string(str_seq, length)
     assert len(result) == length
 
 
@@ -93,31 +92,31 @@ def test_custom_code_with_seed(random, seed, expected):
 
 
 def test_get_random_item(random):
-    result = get_random_item(Gender)
+    result = random._choice_enum_item(Gender)
     assert result in Gender
 
     random.seed(0xF)
-    result_1 = get_random_item(Gender, rnd=random)
-    result_2 = get_random_item(Gender, rnd=random)
+    result_1 = random._choice_enum_item(Gender)
+    result_2 = random._choice_enum_item(Gender)
     assert result_1 == result_2
 
 
 @pytest.mark.parametrize("length", [64, 128, 256])
 def test_randstr(random, length):
-    result = random.randstr(length=length)
-    result2 = random.randstr(length=length)
+    result = random._randstr(length=length)
+    result2 = random._randstr(length=length)
     assert len(result) == length
     assert result != result2
 
 
 def test_randstr_no_length(random):
-    string = len(random.randstr(length=None))
+    string = len(random._randstr(length=None))
     assert 16 <= string <= 128
 
 
 @pytest.mark.parametrize("count", [1000, 5000, 10000])
 def test_randstr_unique(random, count):
-    results = [random.randstr(unique=True) for _ in range(count)]
+    results = [random._randstr(unique=True) for _ in range(count)]
     assert len(results) == len(set(results))
 
 
@@ -130,9 +129,9 @@ def test_randstr_unique(random, count):
 )
 def test_randstr_non_unique_with_same_seed(random, seed):
     random.seed(seed)
-    first = random.randstr(unique=False)
+    first = random._randstr(unique=False)
     random.seed(seed)
-    second = random.randstr(unique=False)
+    second = random._randstr(unique=False)
     assert first == second
 
 

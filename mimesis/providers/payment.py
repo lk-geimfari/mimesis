@@ -10,7 +10,6 @@ from mimesis.exceptions import NonEnumerableError
 from mimesis.locales import Locale
 from mimesis.providers.base import BaseProvider
 from mimesis.providers.person import Person
-from mimesis.random import get_random_item
 from mimesis.shortcuts import luhn_checksum
 
 __all__ = ["Payment"]
@@ -111,7 +110,7 @@ class Payment(BaseProvider):
         regex = re.compile(r"(\d{4})(\d{4})(\d{4})(\d{4})")
 
         if card_type is None:
-            card_type = get_random_item(CardType, rnd=self.random)
+            card_type = self.random._choice_enum_item(CardType)
 
         if card_type == CardType.VISA:
             number = self.random.randint(4000, 4999)

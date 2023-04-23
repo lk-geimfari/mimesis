@@ -15,7 +15,6 @@ from mimesis.data import (
 from mimesis.enums import Gender, TitleType
 from mimesis.exceptions import NonEnumerableError
 from mimesis.providers.base import BaseDataProvider
-from mimesis.random import get_random_item
 
 __all__ = ["Person"]
 
@@ -155,7 +154,7 @@ class Person(BaseDataProvider):
             Johann Wolfgang.
         """
         if gender is None:
-            gender = get_random_item(Gender, rnd=self.random)
+            gender = self.random._choice_enum_item(Gender)
 
         if gender and isinstance(gender, Gender):
             gender = gender
@@ -273,7 +272,7 @@ class Person(BaseDataProvider):
             domain = "@" + domain
 
         if unique:
-            name = self.random.randstr(unique)
+            name = self.random._randstr(unique)
         else:
             name = self.username(mask="ld")
 

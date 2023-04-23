@@ -79,7 +79,7 @@ class BaseProvider:
         :raises NonEnumerableError: if ``item`` not in ``enum``.
         """
         if item is None:
-            result = _random.get_random_item(enum, self.random)
+            result = self.random._choice_enum_item(enum)
         elif item and isinstance(item, enum):
             result = item
         else:

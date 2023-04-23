@@ -26,7 +26,7 @@ class Science(BaseProvider):
         :Example:
             AGUGACACAA
         """
-        return self.random.generate_string("UCGA", length)
+        return self.random._generate_string("UCGA", length)
 
     def dna_sequence(self, length: int = 10) -> str:
         """Generate a random DNA sequence.
@@ -37,7 +37,7 @@ class Science(BaseProvider):
         :Example:
             GCTTTAGACC
         """
-        return self.random.generate_string("TCGA", length)
+        return self.random._generate_string("TCGA", length)
 
     def measure_unit(
         self,
