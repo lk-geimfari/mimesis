@@ -253,7 +253,12 @@ class Fieldset(BaseField):
 class Schema:
     """Class which return list of filled schemas."""
 
-    __slots__ = ("_schema", "iterations", "_count", "_min_iterations")
+    __slots__ = (
+        "_count",
+        "_schema",
+        "iterations",
+        "_min_iterations",
+    )
 
     def __init__(self, schema: CallableSchema, iterations: int = 10) -> None:
         """Initialize schema.
