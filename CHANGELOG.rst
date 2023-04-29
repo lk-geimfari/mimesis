@@ -1,5 +1,8 @@
 Version 9.0.0
 -------------
+.. note::
+
+    This release contains some breaking changes in Schema's API.
 
 **Removed**:
 
