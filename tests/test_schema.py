@@ -193,6 +193,9 @@ def test_fuzzy_lookup(field):
     [
         "surname",
         "person.surname",
+        "person/surname",
+        "person:surname",
+        "person.surname[none=0.5]",
     ],
 )
 def test_lookup_method(field, field_name):
@@ -308,3 +311,42 @@ def test_field_reseed(field, seed):
     result2 = field("dsn")
 
     assert result1 == result2
+
+
+@pytest.mark.parametrize(
+    "expression, expected", [
+        ("email[none=1]", 1.0),
+        ("email[none=0]", 0.0),
+        ("email[none=.5]", 0.5),
+        ("email[none = .5 ]", 0.5),
+    ]
+)
+def test_field_parse_none_expression(field, expression, expected):
+    assert field._parse_none_expression(expression) == expected
+
+
+def test_field_with_none_expression_ignore_key(field):
+    result = field("email[none=1]", key=str.lower)
+    assert result is None
+
+
+def test_field_with_invalid_none_expression(field):
+    with pytest.raises(ValueError):
+        field("email[null=.5]")
+
+
+def test_field_with_none_expression(field):
+    result = field("email[none=1]")
+    assert result is None
+
+    result = field("email[none=0]")
+    assert result is not None
+
+
+def test_fieldset_with_none_expression(fieldset):
+    result = fieldset("email[none=1]")
+    assert result.count(None) == len(result)
+
+    result = fieldset("email[none=0]")
+    assert all(result)
+

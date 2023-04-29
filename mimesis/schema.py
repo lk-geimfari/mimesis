@@ -92,6 +92,8 @@ class BaseField:
         """
         # Support additional delimiters
         name = re.sub(r"[/:\s]", ".", name)
+        # Remove [none=float] expression
+        name = re.sub(r"\[(.*?)]", "", name)
 
         if name.count(".") > 1:
             raise FieldError(name)
@@ -104,6 +106,31 @@ class BaseField:
             self._cache[name] = method
 
         return self._cache[name]
+
+    def _parse_none_expression(self, field_expr: str) -> float:
+        """Parses the none expression.
+
+        Accepts the following formats:
+
+            - ``field[none=0.1]``
+            - ``provider.field[none=.1]``
+
+        :param field_expr: The field expression
+        :return: Weight of none expression.
+        :raises ValueError: if none expression is invalid.
+        """
+        try:
+            expression = re.search(r"\[(.*?)]", field_expr).group(0)
+            expression = re.sub(r"[\[\]]", "", expression)
+            none, weight = expression.split("=")
+
+            if none.lower().strip() != "none":
+                raise ValueError(
+                    f"Use [none={weight}] as a probability expression, not [{none}={weight}]."
+                )
+            return float(weight)
+        except AttributeError:
+            return 0.0
 
     def perform(
         self,
@@ -133,6 +160,20 @@ class BaseField:
         the method, by passing a parameter **key** with a callable
         object which returns the final result.
 
+        Optionally, you can apply probability-expression to the field, which
+        will return ``None`` with a given probability.
+
+        Allowed expressions to control probability of ``None``:
+
+            - ``field[none=.1]
+            - ``provider.field[none=1]``
+
+        If weight of ``None`` is equal to 1, then it will be
+        returned with a probability of 100%.
+
+        If the probability-expression and key function are **both defined**,
+        then the key function is **exclusively applied** to non-None values.
+
         :param name: Name of the method.
         :param key: A key function (or any other callable object)
             which will be applied to result.
@@ -146,7 +187,17 @@ class BaseField:
 
         result = self._lookup_method(name)(**kwargs)
 
-        if key and callable(key):
+        none_weight = self._parse_none_expression(name)
+        if 0 < none_weight <= 1:
+            value_weight = 1 - none_weight
+            # Unpack the result from the list.
+            result, = self._gen.random.choices(
+                population=[result, None],
+                weights=[value_weight, none_weight],
+                k=1,
+            )
+
+        if result and key and callable(key):
             return key(result)
 
         return result

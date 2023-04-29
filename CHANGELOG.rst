@@ -11,7 +11,7 @@ Version 9.0.0
 **Added**:
 
 - Add ``weighted_choice()`` method for ``Random()``. See docs for more information.
-
+- Add probability expressions support for ``Field()``. See docs for more information.
 
 Version 8.0.0
 -------------

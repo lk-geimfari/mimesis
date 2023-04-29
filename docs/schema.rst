@@ -3,10 +3,6 @@
 Structured Data Generation
 ==========================
 
-
-Schema
-------
-
 For generating data by schema, just create an instance of :class:`~mimesis.schema.Field`
 object, which takes any string which represents the name of data
 provider in format *provider.method_name* (explicitly defines that the
@@ -230,14 +226,14 @@ Output:
 Isn't it cool? Of course, it is!
 
 
-None Values
------------
+Probability-Expression Syntax
+-----------------------------
 
 Real-world data can be messy and may contain missing values.
 This is why generating data with **None** values may be useful
 to create more realistic synthetic data.
 
-Luckily, you can achieve this by using **key** callable on the instance of :class:`~mimesis.schema.Fieldset`:
+Luckily, you can achieve this by using **probability-expression** syntax:
 
 .. code:: python
 
@@ -246,14 +242,21 @@ Luckily, you can achieve this by using **key** callable on the instance of :clas
     >>> from mimesis.random import random
 
     >>> fieldset = Fieldset(Locale.EN, i=5)
-
-    >>> def distribute_none(value):
-    ...    return random.choices([value, None], weights=[0.4, 0.3], k=1)[0]
-
-    >>> fieldset("email", key=distribute_none)
+    >>> fieldset("email[none=0.3]")
 
     [None, None, None, 'bobby1882@gmail.com', None]
 
+In the example above, the probability of generating a **None** value is 0.3, which is 30%.
+
+If the probability-expression and key function are **both defined**,
+then the key function is **exclusively applied** to truthy values.
+
+.. code:: python
+
+    >>> fieldset = Fieldset(Locale.EN, i=5)
+    >>> fieldset("email[none=0.3]", key=str.upper)
+
+    [None, 'BOB1235@DUCK.COM', None, None, None]
 
 Exporting Data
 --------------
