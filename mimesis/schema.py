@@ -191,7 +191,7 @@ class BaseField:
         if 0 < none_weight <= 1:
             value_weight = 1 - none_weight
             # Unpack the result from the list.
-            result, = self._gen.random.choices(
+            (result,) = self._gen.random.choices(
                 population=[result, None],
                 weights=[value_weight, none_weight],
                 k=1,

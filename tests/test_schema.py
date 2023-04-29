@@ -314,12 +314,13 @@ def test_field_reseed(field, seed):
 
 
 @pytest.mark.parametrize(
-    "expression, expected", [
+    "expression, expected",
+    [
         ("email[none=1]", 1.0),
         ("email[none=0]", 0.0),
         ("email[none=.5]", 0.5),
         ("email[none = .5 ]", 0.5),
-    ]
+    ],
 )
 def test_field_parse_none_expression(field, expression, expected):
     assert field._parse_none_expression(expression) == expected
@@ -349,4 +350,3 @@ def test_fieldset_with_none_expression(fieldset):
 
     result = fieldset("email[none=0]")
     assert all(result)
-
