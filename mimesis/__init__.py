@@ -6,6 +6,7 @@ Email: <likid.geimfari@gmail.com>
 Repository: https://github.com/lk-geimfari/mimesis
 """
 
+from mimesis import keys
 from mimesis.enums import (
     Algorithm,
     AudioFile,
@@ -81,6 +82,8 @@ __all__ = [
     "Cryptographic",
     # Has all:
     "Generic",
+    # Keys:
+    "keys",
     # Schema:
     "Field",
     "Fieldset",
@@ -120,7 +123,7 @@ __all__ = [
     "__license__",
 ]
 
-__version__ = "8.0.0"
+__version__ = "9.0.0"
 __title__ = "mimesis"
 __description__ = "Mimesis: Fake Data Generator."
 __url__ = "https://github.com/lk-geimfari/mimesis"

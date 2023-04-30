@@ -3,21 +3,17 @@
 Structured Data Generation
 ==========================
 
-
-Schema
-------
-
 For generating data by schema, just create an instance of :class:`~mimesis.schema.Field`
 object, which takes any string which represents the name of data
-provider in format *provider.method_name* (explicitly defines that the
-method *method_name* belongs to data-provider *provider*) or *method* (will be
-chosen the first provider which has a method *method_name*) and the
-**\**kwargs** of the method *method_name*, after that you should
+provider in following formats:
+
+- ``method`` — will be chosen the first provider which has a method **method**
+- ``provider.method`` — explicitly defines that the method **method** belongs to **provider**
+
+
+and **\**kwargs** of the method *method*, after that you should
 describe the schema in lambda function (or any other callable object) and pass it to
 the object :class:`~mimesis.schema.Schema` and call method :meth:`~mimesis.schema.Schema.create`.
-
-Since **v5.6.0** you can use multiplication, instead of the explicit call of :meth:`~mimesis.schema.Schema.create`.
-Please, see :meth:`~mimesis.schema.Schema.__mul__` of :class:`~mimesis.schema.Schema` for more details.
 
 Optionally, you can apply a *key function* to result returned by the
 method, to do it, just pass the parameter `key` with a callable object
@@ -32,21 +28,21 @@ Example of usage:
     from mimesis.schema import Field, Schema
 
     _ = Field(locale=Locale.EN)
-    schema = Schema(schema=lambda: {
-        "pk": _("increment"),
-        "uid": _("uuid"),
-        "name": _("text.word"),
-        "version": _("version", pre_release=True),
-        "timestamp": _("timestamp", posix=False),
-        "owner": {
-            "email": _("person.email", domains=["test.com"], key=str.lower),
-            "token": _("token_hex"),
-            "creator": _("full_name", gender=Gender.FEMALE),
-        },
+    schema = Schema(
+        schema=lambda: {
+            "pk": _("increment"),
+            "uid": _("uuid"),
+            "name": _("text.word"),
+            "version": _("version", pre_release=True),
+            "timestamp": _("timestamp", posix=False),
+            "owner": {
+                "email": _("person.email", domains=["test.com"], key=str.lower),
+                "token": _("token_hex"),
+                "creator": _("full_name", gender=Gender.FEMALE),
+            },
+        iterations=2
     })
-    schema.create(iterations=2)
-    # Since v5.6.0 you can do the same thing using multiplication:
-    schema * 2
+    schema.create()
 
 
 Output:
@@ -103,42 +99,7 @@ to change this behavior should be passed parameter *providers* with a sequence o
     # Output: '657340522'
 
 
-You can create infinite lazy schema-based data generators using :meth:`~mimesis.schema.Schema.loop`.:
-
-.. code:: python
-
-    from mimesis import Schema, Field
-    from mimesis.locales import Locale
-
-    field = Field(Locale.DE)
-
-    schema = Schema(
-        schema=lambda: {
-            "pk": field("increment"),
-            "name": field("full_name"),
-            "email": field("email", domains=["example.org"]),
-        }
-    )
-
-
-    for obj in schema.loop():
-        pk = obj.get("pk")
-
-        if pk > 100:
-            break
-
-        print(obj)
-
-Output:
-
-.. code:: text
-
-    {'pk': 1, 'name': 'Wenzel Feigenbaum', 'email': 'cambridge1883@example.org'}
-    ...
-    {'pk': 100, 'name': 'Gerard Garber', 'email': 'travelers1947@example.org'}
-
-
-or create a lazy data generator of limited length, using :meth:`~mimesis.schema.Schema.iterator`:
+The scheme is an iterator, so you can iterate over it, for example like this:
 
 
 .. code:: python
@@ -153,11 +114,12 @@ or create a lazy data generator of limited length, using :meth:`~mimesis.schema.
             "pk": field("increment"),
             "name": field("full_name"),
             "email": field("email", domains=["example.org"]),
-        }
+        },
+        iterations=100,
     )
 
 
-    for obj in schema.iterator(100):
+    for obj in schema:
         print(obj)
 
 Output:
@@ -168,10 +130,6 @@ Output:
     ...
     {'pk': 100, 'name': 'Karsten Haase', 'email': 'dennis2024@example.org'}
 
-
-Since **8.0.0** you can use a :class:`~mimesis.schema.Fieldset` class for creating set of fields.
-
-See **Fieldset vs Fields** section below for more details.
 
 Field vs Fieldset
 -----------------
@@ -232,7 +190,7 @@ Let's take a look at the example:
 Fieldset and Pandas
 -------------------
 
-If your aim is to create synthetic data for your Pandas dataframes,
+If your aim is to create synthetic data for your `Pandas dataframes <https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html>`_ ,
 you can make use of the :class:`~mimesis.schema.Fieldset` as well.
 
 With :class:`~mimesis.schema.Fieldset`, you can create datasets that are
@@ -270,10 +228,81 @@ Output:
 
 Isn't it cool? Of course, it is!
 
-Exporting Data
---------------
 
-You can export data as JSON, CSV or as pickled representations of objects:
+Maybe This, Maybe That
+----------------------
+
+Real-world data can be messy and may contain missing values.
+This is why generating data with **None** values may be useful
+to create more realistic synthetic data.
+
+Luckily, you can achieve this by using key function :func:`~mimesis.keys.maybe`
+
+It's has nothing to do with `monads <https://wiki.haskell.org/All_About_Monads>`_, it is just a closure which accepts two arguments: **value** and **probability**.
+
+Let's take a look at the example:
+
+.. code:: python
+
+    >>> from mimesis import Fieldset
+    >>> from mimesis.keys import maybe
+    >>> from mimesis.locales import Locale
+
+    >>> fieldset = Fieldset(Locale.EN, i=5)
+    >>> fieldset("email", key=maybe(None, probability=0.6))
+
+    [None, None, None, 'bobby1882@gmail.com', None]
+
+In the example above, the probability of generating a **None** value instead of **email** is 0.6, which is 60%.
+
+You can use any other value instead of **None**:
+
+.. code:: python
+
+    >>> from mimesis import Fieldset
+    >>> from mimesis.keys import maybe
+
+    >>> fieldset = Fieldset("en", i=5)
+    >>> fieldset("email", key=maybe('N/A', probability=0.6))
+
+    ['N/A', 'N/A', 'static1955@outlook.com', 'publish1929@live.com', 'command2060@yahoo.com']
+
+Accessing Random In Key Functions
+---------------------------------
+
+To ensure that all key functions have the same seed, it may be necessary to access a random object,
+especially if you require a complex key function that involves performing additional tasks with **random** object.
+
+In order to achieve this, you are required to create a **key function**
+that accepts two parameters - ``result`` and ``random``.
+The ``result`` argument denotes the output generated by the field,
+while ``random`` is an instance of the :class:`~mimesis.random.Random`
+class used to ensure that all key functions accessing random have the same seed.
+
+Here is an example of how to do this:
+
+.. code:: python
+
+    >>> from mimesis import Field
+    >>> from mimesis.locales import Locale
+
+    >>> field = Field(Locale.EN, seed=42)
+    >>> key_fb = lambda r, rnd: rnd.choice(["foo", "bar"]) + r
+
+    >>> field("email", key=key_fb)
+    'bazany1925@gmail.com'
+
+    >>> field = Field(Locale.EN, seed=42)
+    >>> field("email", key=key_fb)
+    'bazany1925@gmail.com'
+
+
+Data Exportation: JSON, CSV and Pickle
+--------------------------------------
+
+Data can be exported in JSON or CSV formats, as well as pickled object representations.
+
+Let's take a look at the example:
 
 .. code:: python
 
@@ -281,15 +310,18 @@ You can export data as JSON, CSV or as pickled representations of objects:
     from mimesis.schema import Field, Schema
 
     _ = Field(locale=Locale.EN)
-    schema = Schema(schema=lambda: {
-        "pk": _("increment"),
-        "name": _("text.word"),
-        "version": _("version"),
-        "timestamp": _("timestamp", posix=False),
-    })
-    schema.to_csv(file_path='data.csv', iterations=1000)
-    schema.to_json(file_path='data.json', iterations=1000)
-    schema.to_pickle(file_path='data.obj', iterations=1000)
+    schema = Schema(
+        schema=lambda: {
+            "pk": _("increment"),
+            "name": _("text.word"),
+            "version": _("version"),
+            "timestamp": _("timestamp", posix=False),
+        },
+        iterations=1000
+    )
+    schema.to_csv(file_path='data.csv')
+    schema.to_json(file_path='data.json')
+    schema.to_pickle(file_path='data.obj')
 
 
 Example of the content of ``data.csv`` (truncated):
@@ -301,4 +333,3 @@ Example of the content of ``data.csv`` (truncated):
     2,sponsors,6.9.6-rc.7,2015-03-02T06:18:44Z
     3,after,4.5.6-rc.8,2022-03-31T02:56:15Z
     4,queen,9.0.6-alpha.11,2008-07-22T05:56:59Z
-

@@ -37,7 +37,7 @@ class ItalySpecProvider(BaseSpecProvider):
 
         code += self.random.custom_code(mask="##")
 
-        month_codes = self.extract(["fiscal_code", "month_codes"])
+        month_codes = self._extract(["fiscal_code", "month_codes"])
         code += self.random.choice(month_codes)
 
         birth_day = self.random.randint(101, 131)
@@ -46,7 +46,7 @@ class ItalySpecProvider(BaseSpecProvider):
             birth_day += 40
         code += str(birth_day)[1:]
 
-        city_letters = self.extract(["fiscal_code", "city_letters"])
+        city_letters = self._extract(["fiscal_code", "city_letters"])
         code += self.random.choice(city_letters)
         code += self.random.custom_code(mask="###@")
 

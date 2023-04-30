@@ -3,7 +3,6 @@ import json
 import pickle
 import re
 import tempfile
-import warnings
 from collections.abc import Iterator
 
 import pytest
@@ -11,24 +10,42 @@ import pytest
 from mimesis.builtins.en import USASpecProvider
 from mimesis.enums import Gender
 from mimesis.exceptions import FieldError, FieldsetError, SchemaError
+from mimesis.keys import maybe
 from mimesis.locales import Locale
-from mimesis.schema import BaseField, Field, Fieldset, Schema
+from mimesis.schema import Field, Fieldset, Schema
 from mimesis.types import MissingSeed
-from tests.test_providers import patterns
+from tests.test_providers.patterns import DATA_PROVIDER_STR_REGEX
 
 
 def test_str(field):
-    assert re.match(patterns.DATA_PROVIDER_STR_REGEX, str(field))
-
-
-@pytest.fixture
-def default_field():
-    return Field(locale=Locale.EN)
+    assert re.match(DATA_PROVIDER_STR_REGEX, str(field))
 
 
 @pytest.fixture(scope="module", params=list(Locale))
 def field(request):
     return Field(request.param)
+
+
+@pytest.fixture
+def schema(field):
+    return Schema(
+        schema=lambda: {
+            "id": field("uuid"),
+            "name": field("word"),
+            "timestamp": field("timestamp"),
+            "zip_code": field("postal_code"),
+            "owner": {
+                "email": field("email", key=str.lower),
+                "creator": field("full_name", gender=Gender.FEMALE),
+            },
+        },
+        iterations=10,
+    )
+
+
+@pytest.fixture
+def extended_field():
+    return Field(locale=Locale.EN, providers=(USASpecProvider,))
 
 
 @pytest.fixture(scope="module", params=list(Locale))
@@ -45,19 +62,33 @@ def custom_fieldset(request):
 
 
 @pytest.fixture(scope="module", params=list(Locale))
-def fieldset_with_common_i(request):
+def fieldset_with_default_i(request):
     return Fieldset(request.param, i=100)
 
 
-@pytest.fixture
-def modified_field():
-    return Field(locale=Locale.EN, providers=(USASpecProvider,))
+@pytest.mark.parametrize(
+    "field_name",
+    [
+        "uuid",
+        "full_name",
+        "street_name",
+    ],
+)
+def test_field(field, field_name):
+    assert field(field_name)
 
 
-def test_field(field):
-    assert field("uuid")
-    assert field("full_name")
-    assert field("street_name")
+@pytest.mark.parametrize(
+    "field_name",
+    [
+        "text title",
+        "person.title",
+        "person/title",
+        "person:title",
+    ],
+)
+def test_field_different_separator(field, field_name):
+    assert isinstance(field(field_name), str)
 
 
 @pytest.mark.parametrize(
@@ -83,9 +114,8 @@ def test_fieldset(fieldset, field_name, i):
 )
 def test_fieldset_with_default_i(fieldset, field_name):
     result = fieldset(field_name)
-    assert (
-        isinstance(result, list) and len(result) == fieldset.fieldset_default_iterations
-    )
+    assert isinstance(result, list)
+    assert len(result) == fieldset.fieldset_default_iterations
 
 
 def test_custom_fieldset(custom_fieldset):
@@ -96,12 +126,35 @@ def test_custom_fieldset(custom_fieldset):
         custom_fieldset("name", i=4)
 
 
-def test_fieldset_with_common_i(fieldset_with_common_i):
-    result = fieldset_with_common_i("name")
+def test_fieldset_with_common_i(fieldset_with_default_i):
+    result = fieldset_with_default_i("name")
     assert isinstance(result, list) and len(result) == 100
 
-    result = fieldset_with_common_i("name", i=3)
+    result = fieldset_with_default_i("name", i=3)
     assert isinstance(result, list) and len(result) == 3
+
+
+def test_field_with_key_function(field):
+    result = field("person.name", key=list)
+    assert isinstance(result, list) and len(result) >= 1
+
+
+def test_field_with_key_function_two_parameters(field):
+    def key_function(value, random):
+        return f"{value}_{random.randint(1, 100)}"
+
+    result = field("person.name", key=key_function)
+    name, number = result.split("_")
+    assert isinstance(result, str)
+    assert 1 <= int(number) <= 100
+
+
+def test_field_with_maybe(field):
+    result = field("person.name", key=maybe("foo", probability=1))
+    assert result == "foo"
+
+    result = field("person.name", key=maybe("foo", probability=0))
+    assert result != "foo"
 
 
 def test_fieldset_error(fieldset):
@@ -114,30 +167,30 @@ def test_fieldset_field_error(fieldset):
         fieldset("unsupported_field")
 
 
-def test_field_with_custom_providers(default_field, modified_field):
+@pytest.mark.parametrize(
+    "field_name", ["person.full_name.invalid", "invalid_field", "unsupported_field"]
+)
+def test_field_error(field, field_name):
     with pytest.raises(FieldError):
-        default_field("ssn")
-
-    assert modified_field("ssn")
+        field(field_name)
 
 
-def test_field_with_key_function(field):
-    result = field("person.name", key=list)
-    assert isinstance(result, list) and len(result) >= 1
+def test_field_with_custom_providers(extended_field):
+    assert extended_field("ssn")
 
 
-def test_field_raises_field_error(default_field):
+def test_field_raises_field_error(field):
     with pytest.raises(FieldError):
-        default_field("person.unsupported_field")
-
-    with pytest.raises(FieldError):
-        default_field("unsupported_field")
+        field("person.unsupported_field")
 
     with pytest.raises(FieldError):
-        default_field()
+        field("unsupported_field")
 
     with pytest.raises(FieldError):
-        default_field("person.full_name.invalid")
+        field()
+
+    with pytest.raises(FieldError):
+        field("person.full_name.invalid")
 
 
 def test_explicit_lookup(field):
@@ -156,26 +209,12 @@ def test_fuzzy_lookup(field):
 
 @pytest.mark.parametrize(
     "field_name",
-    (
-        "surname",
-        "person.surname",
-    ),
-)
-def test_lookup_method(field, field_name):
-    result = field._lookup_method(field_name)
-
-    assert callable(result)
-    assert isinstance(result(), str)
-
-
-@pytest.mark.parametrize(
-    "field_name",
-    (
+    [
         "",
         "foo",
         "foo.bar",
         "person.surname.male",
-    ),
+    ],
 )
 def test_lookup_method_field_error(field, field_name):
     with pytest.raises(FieldError):
@@ -188,43 +227,17 @@ def test_lookup_method_field_error(field, field_name):
         field._fuzzy_lookup(field_name)
 
 
-@pytest.fixture(scope="module", params=list(Locale))
-def test_base_field(request):
-    field = BaseField(request.param)
-
-    assert field.perform("uuid")
-    assert field.perform("full_name")
-    assert field.perform("street_name")
-
-
-@pytest.fixture
-def schema(field):
-    return Schema(
-        schema=lambda: {
-            "id": field("uuid"),
-            "name": field("word"),
-            "timestamp": field("timestamp"),
-            "zip_code": field("postal_code"),
-            "owner": {
-                "email": field("email", key=str.lower),
-                "creator": field("full_name", gender=Gender.FEMALE),
-            },
-            "defined_cls": {
-                "t1": field("person.title"),
-                "t2": field("person/title"),
-                "t3": field("person:title"),
-                "t4": field("text title"),
-            },
-        }
-    )
-
-
 @pytest.mark.parametrize(
     "invalid_schema", [None, {"a": "uuid"}, [True, False], (1, 2, 3)]
 )
-def test_schema_raises_schema_error(invalid_schema):
+def test_schema_instantiation_raises_schema_error(invalid_schema):
     with pytest.raises(SchemaError):
         Schema(schema=invalid_schema)  # type: ignore
+
+
+def test_schema_instantiation_raises_value_error():
+    with pytest.raises(ValueError):
+        Schema(schema=lambda: {"uuid": Field()("uuid")}, iterations=0)
 
 
 def test_choice_field(field):
@@ -232,123 +245,56 @@ def test_choice_field(field):
     assert len(result) == 2
 
 
-@pytest.mark.parametrize(
-    "count",
-    [
-        8,
-        32,
-    ],
-)
-def test_schema_multiplication(schema, count):
-    result = 1 * (schema * count)
-    assert len(result) == count
-    assert result[0] != result[-1]
-
-
-def test_schema_multiplication_order(schema):
-    result = schema * 1 * 10
-    assert result[0]["id"] == result[-1]["id"]
-    result = schema * (1 * 10)
-    assert result[0]["id"] != result[-1]["id"]
-    result = 1 * schema * 10
-    assert result[0]["id"] == result[-1]["id"]
-    result = 1 * (schema * 10)
-    assert result[0]["id"] != result[-1]["id"]
-
-
-def test_schema_zero_multiplication(schema):
-    with pytest.raises(ValueError):
-        schema * 0
-
-    with pytest.raises(ValueError):
-        0 * schema
-
-
 def test_schema_create(schema):
-    result = schema.create(5)
+    result = schema.create()
 
-    assert len(result) == 5
+    assert len(result) == schema.iterations
     assert isinstance(result, list)
-
-    with pytest.raises(ValueError):
-        schema.create(0)
 
 
 def test_schema_iterator(schema):
-    result = schema.iterator(5)
+    count = 0
+    for item in schema:
+        assert isinstance(item, dict)
+        count += 1
 
-    assert len(list(result)) == 5
-    assert isinstance(result, Iterator)
+    assert isinstance(schema, Iterator)
+    assert count == schema.iterations
 
-    result = schema.iterator(1)
-    assert len(list(result)) == 1
-
-    with pytest.raises(ValueError):
-        next(schema.iterator(0))
-
-
-def test_schema_loop(schema):
-    with warnings.catch_warnings():
-        warnings.simplefilter("ignore")
-        infinite = schema.loop()
-
-        r1 = next(infinite)
-        r2 = next(infinite)
-
-        assert r1["timestamp"] != r2["timestamp"]
-        assert r1["owner"]["creator"] != r2["owner"]["creator"]
+    with pytest.raises(StopIteration):
+        schema.iterations = 0
+        next(schema)
 
 
-@pytest.mark.parametrize(
-    "iterations",
-    [
-        5,
-        10,
-    ],
-)
-def test_schema_to_csv(schema, iterations):
+def test_schema_to_csv(schema):
     with tempfile.NamedTemporaryFile("r+") as temp_file:
-        schema.to_csv(temp_file.name, iterations=iterations)
+        schema.to_csv(temp_file.name)
         dict_reader = csv.DictReader(temp_file)
 
-        assert len(list(dict_reader)) == iterations
+        assert len(list(dict_reader)) == schema.iterations
         assert isinstance(dict_reader, csv.DictReader)
 
         for row in dict_reader:
             assert "id" in row and "timestamp" in row
 
 
-@pytest.mark.parametrize(
-    "iterations",
-    [
-        5,
-        10,
-    ],
-)
-def test_schema_to_json(schema, iterations):
+def test_schema_to_json(schema):
     with tempfile.NamedTemporaryFile("r+") as temp_file:
-        schema.to_json(temp_file.name, iterations, sort_keys=True, ensure_ascii=False)
+        schema.to_json(temp_file.name, sort_keys=True, ensure_ascii=False)
 
         data = json.load(temp_file)
-        assert len(list(data)) == iterations
+        assert len(list(data)) == schema.iterations
         assert "id" in data[0] and "id" in data[-1]
 
 
-@pytest.mark.parametrize(
-    "iterations",
-    [
-        5,
-        10,
-    ],
-)
-def test_schema_to_pickle(schema, iterations):
+def test_schema_to_pickle(schema):
     with tempfile.NamedTemporaryFile("rb") as temp_file:
-        schema.to_pickle(temp_file.name, iterations)
+        schema.to_pickle(temp_file.name)
 
         data = pickle.load(temp_file)
         assert "id" in data[0] and "id" in data[-1]
         assert isinstance(data, list)
-        assert len(data) == iterations
+        assert len(data) == schema.iterations
 
 
 @pytest.mark.parametrize(
