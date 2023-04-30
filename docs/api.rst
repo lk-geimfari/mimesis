@@ -13,6 +13,13 @@ Random object
    :members:
    :special-members: __init__
 
+Key functions
+=============
+
+.. automodule:: mimesis.keys
+   :members:
+   :undoc-members:
+
 
 Builtin Data Providers
 ======================

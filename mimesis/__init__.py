@@ -6,6 +6,7 @@ Email: <likid.geimfari@gmail.com>
 Repository: https://github.com/lk-geimfari/mimesis
 """
 
+from mimesis import keys
 from mimesis.enums import (
     Algorithm,
     AudioFile,
@@ -81,6 +82,8 @@ __all__ = [
     "Cryptographic",
     # Has all:
     "Generic",
+    # Keys:
+    "keys",
     # Schema:
     "Field",
     "Fieldset",

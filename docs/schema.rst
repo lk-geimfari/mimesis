@@ -226,37 +226,45 @@ Output:
 Isn't it cool? Of course, it is!
 
 
-Probability-Expression Syntax
------------------------------
+Maybe This, Maybe That
+----------------------
 
 Real-world data can be messy and may contain missing values.
 This is why generating data with **None** values may be useful
 to create more realistic synthetic data.
 
-Luckily, you can achieve this by using **probability-expression** syntax:
+Luckily, you can achieve this by using key function :func:`~mimesis.keys.maybe`
+
+It's has nothing to do with `monads <https://wiki.haskell.org/All_About_Monads>`_, it is just a closure which accepts two arguments: **value** and **probability**.
+
+Let's take a look at the example:
 
 .. code:: python
 
     >>> from mimesis import Fieldset
+    >>> from mimesis.keys import maybe
     >>> from mimesis.locales import Locale
-    >>> from mimesis.random import random
 
     >>> fieldset = Fieldset(Locale.EN, i=5)
-    >>> fieldset("email[none=0.3]")
+    >>> fieldset("email", key=maybe(None, probability=0.6))
 
     [None, None, None, 'bobby1882@gmail.com', None]
 
-In the example above, the probability of generating a **None** value is 0.3, which is 30%.
+In the example above, the probability of generating a **None** value instead of **email** is 0.6, which is 60%.
 
-If the probability-expression and key function are **both defined**,
-then the key function is **exclusively applied** to truthy values.
+You can use any other value instead of **None**:
 
 .. code:: python
 
-    >>> fieldset = Fieldset(Locale.EN, i=5)
-    >>> fieldset("email[none=0.3]", key=str.upper)
+    >>> from mimesis import Fieldset
+    >>> from mimesis.keys import maybe
 
-    [None, 'BOB1235@DUCK.COM', None, None, None]
+    >>> fieldset = Fieldset("en", i=5)
+    >>> fieldset("email", key=maybe('N/A', probability=0.6))
+
+    ['N/A', 'N/A', 'static1955@outlook.com', 'publish1929@live.com', 'command2060@yahoo.com']
+
+
 
 Exporting Data
 --------------

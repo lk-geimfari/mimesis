@@ -10,6 +10,7 @@ import pytest
 from mimesis.builtins.en import USASpecProvider
 from mimesis.enums import Gender
 from mimesis.exceptions import FieldError, FieldsetError, SchemaError
+from mimesis.keys import maybe
 from mimesis.locales import Locale
 from mimesis.schema import Field, Fieldset, Schema
 from mimesis.types import MissingSeed
@@ -133,6 +134,29 @@ def test_fieldset_with_common_i(fieldset_with_default_i):
     assert isinstance(result, list) and len(result) == 3
 
 
+def test_field_with_key_function(field):
+    result = field("person.name", key=list)
+    assert isinstance(result, list) and len(result) >= 1
+
+
+def test_field_with_key_function_two_parameters(field):
+    def key_function(value, random):
+        return f"{value}_{random.randint(1, 100)}"
+
+    result = field("person.name", key=key_function)
+    name, number = result.split("_")
+    assert isinstance(result, str)
+    assert 1 <= int(number) <= 100
+
+
+def test_field_with_maybe(field):
+    result = field("person.name", key=maybe("foo", probability=1))
+    assert result == "foo"
+
+    result = field("person.name", key=maybe("foo", probability=0))
+    assert result != "foo"
+
+
 def test_fieldset_error(fieldset):
     with pytest.raises(FieldsetError):
         fieldset("username", key=str.upper, i=0)
@@ -153,11 +177,6 @@ def test_field_error(field, field_name):
 
 def test_field_with_custom_providers(extended_field):
     assert extended_field("ssn")
-
-
-def test_field_with_key_function(field):
-    result = field("person.name", key=list)
-    assert isinstance(result, list) and len(result) >= 1
 
 
 def test_field_raises_field_error(field):
@@ -184,22 +203,6 @@ def test_explicit_lookup(field):
 def test_fuzzy_lookup(field):
     result = field._fuzzy_lookup("surname")
 
-    assert callable(result)
-    assert isinstance(result(), str)
-
-
-@pytest.mark.parametrize(
-    "field_name",
-    [
-        "surname",
-        "person.surname",
-        "person/surname",
-        "person:surname",
-        "person.surname[none=0.5]",
-    ],
-)
-def test_lookup_method(field, field_name):
-    result = field._lookup_method(field_name)
     assert callable(result)
     assert isinstance(result(), str)
 
@@ -311,42 +314,3 @@ def test_field_reseed(field, seed):
     result2 = field("dsn")
 
     assert result1 == result2
-
-
-@pytest.mark.parametrize(
-    "expression, expected",
-    [
-        ("email[none=1]", 1.0),
-        ("email[none=0]", 0.0),
-        ("email[none=.5]", 0.5),
-        ("email[none = .5 ]", 0.5),
-    ],
-)
-def test_field_parse_none_expression(field, expression, expected):
-    assert field._parse_none_expression(expression) == expected
-
-
-def test_field_with_none_expression_ignore_key(field):
-    result = field("email[none=1]", key=str.lower)
-    assert result is None
-
-
-def test_field_with_invalid_none_expression(field):
-    with pytest.raises(ValueError):
-        field("email[null=.5]")
-
-
-def test_field_with_none_expression(field):
-    result = field("email[none=1]")
-    assert result is None
-
-    result = field("email[none=0]")
-    assert result is not None
-
-
-def test_fieldset_with_none_expression(fieldset):
-    result = fieldset("email[none=1]")
-    assert result.count(None) == len(result)
-
-    result = fieldset("email[none=0]")
-    assert all(result)

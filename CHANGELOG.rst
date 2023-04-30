@@ -4,6 +4,10 @@ Version 9.0.0
 
     This release contains some breaking changes in Schema's API.
 
+**Updated**:
+
+- Key functions now may accept additional ``random`` as a parameter. See docs for more information.
+
 **Removed**:
 
 - The ``loop`` method for the ``Schema``, which was considered deprecated and unsafe, has been removed.
@@ -14,7 +18,7 @@ Version 9.0.0
 **Added**:
 
 - Add ``weighted_choice()`` method for ``Random()``. See docs for more information.
-- Add probability expressions support for ``Field()``. See docs for more information.
+- Add module ``keys`` for generating key functions.
 
 Version 8.0.0
 -------------
