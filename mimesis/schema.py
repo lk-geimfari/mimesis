@@ -174,10 +174,8 @@ class Field(BaseField):
 
         If you doing this:
 
-        .. code-block:: python
-
-            for i in range(1000):
-                field = Field()
+        >>> for i in range(1000):
+        ...     field = Field()
 
         You doing it **wrong**! It is a terrible idea that will lead to a memory leak.
 
