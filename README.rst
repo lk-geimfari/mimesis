@@ -36,7 +36,7 @@ Description
      :alt: Python version
 
 
-Mimesis (`/mɪˈmiːsɪs <https://mimesis.name/en/master/about.html#what-does-name-mean>`_) is a robust data generator for Python that can produce a wide range of fake data in various languages. This tool is useful for populating testing databases, creating fake API endpoints, generating JSON and XML files with custom structures, and anonymizing production data, among other purposes. 
+Mimesis (`/mɪˈmiːsɪs <https://mimesis.name/en/master/about.html#what-does-name-mean>`_) is a robust data generator for Python that can produce a wide range of fake data in various languages. This tool is useful for populating testing databases, creating fake API endpoints, generating JSON and XML files with custom structures, and anonymizing production data, among other purposes.
 
 Installation
 ------------
@@ -54,7 +54,7 @@ Python compatibility
 
 Mimesis is compatible with Python, including PyPy, version 3.8 or higher. The Mimesis 4.1.3 is the last release that accommodates Python 3.6 and 3.7.
 
-To prevent unintended upgrades, it is higly advisable to always specify the version of mimesis that you are using by pinning it.
+To prevent unintended upgrades, it is highly advisable to always specify the version of mimesis that you are using by pinning it.
 
 Supported Features
 ------------------
@@ -88,7 +88,7 @@ You can improve it by sending pull requests to this repository.
 Usage
 -----
 
-The library is exceptionally user-friendly, and it only requires you to import a **Data Provider** object that corresponds to the desired data type. 
+The library is exceptionally user-friendly, and it only requires you to import a **Data Provider** object that corresponds to the desired data type.
 
 For instance, the `Person <https://mimesis.name/en/latest/api.html#person>`_ provider can be imported to access personal information, including name, surname, email, and other related fields:
 
@@ -144,7 +144,7 @@ Here's how it operates practically:
 Providers
 ---------
 
-Mimesis provides more than twenty data providers which can generate a broad range of data related to food, transportation, computer hardware, people, internet, addresses, and more. 
+Mimesis provides more than twenty data providers which can generate a broad range of data related to food, transportation, computer hardware, people, internet, addresses, and more.
 
 See `API Reference <https://mimesis.name/en/latest/api.html>`_ and `Data Providers <https://mimesis.name/en/latest/getting_started.html#data-providers>`_ for more info.
 
@@ -167,7 +167,7 @@ How to Contribute
 Disclaimer
 ----------
 
-The creators of `Mimesis` do not hold themselves accountable for how you employ the library's functionalities or the data generated with it. 
+The creators of `Mimesis` do not hold themselves accountable for how you employ the library's functionalities or the data generated with it.
 Mimesis is designed to facilitate testing and with good intentions. Mimesis should not be used for illicit purposes.
 
 License

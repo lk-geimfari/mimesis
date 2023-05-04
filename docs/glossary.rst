@@ -6,6 +6,12 @@ Glossary
 .. glossary::
     :sorted:
 
+    field
+        A string which represents a method of a data provider.
+
+    fieldset
+        A list of fields.
+
     provider
         A class which provides various data generators.
 

@@ -5,6 +5,7 @@ help:
 	@echo "Please use \`make <target>' where <target> is one of"
 	@echo "  release    to create a release"
 	@echo "  docs       to build documentations"
+	@echo "  serve-docs to serve documentations"
 	@echo "  clean      to remove build artifacts"
 	@echo "  format     to format code using autoformatters"
 	@echo "  lint       to check code using autoformatters"
@@ -21,6 +22,10 @@ format:
 .PHONY: docs
 docs:
 	bash scripts/docs.sh
+
+.PHONY: serve-docs
+serve-docs:
+	bash scripts/serve-docs.sh
 
 .PHONY: clean
 clean:

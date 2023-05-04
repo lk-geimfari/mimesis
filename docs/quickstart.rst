@@ -1,13 +1,12 @@
-.. _quickstart:
-
+==========
 Quickstart
 ==========
 
 Basic Usage
 -----------
 
-The usual process for using Mimesis involves importing the necessary provider, locale,
-and enums (if required), followed by creating a provider instance and invoking the
+The typical process for using Mimesis involves importing the necessary provider,
+locale, and enums (if required). Next, create a provider instance and invoke the
 desired method with the appropriate parameters.
 
 Consider the following example:
@@ -26,13 +25,12 @@ Consider the following example:
     # Output: 'Jordon Hall'
 
 
-So what did the code above?
+What did the code above do?
 
-1. First we imported the :class:`~mimesis.Person` provider. An instance of this
-   class will be our provider of personal data.
-2. We import the object :class:`~mimesis.enums.Locale` which provides locale codes and must
-   be used as a parameter for locale-depend data providers.
-3. We import object :class:`~mimesis.enums.Gender` which we are used as a
+1. First we imported the :class:`~mimesis.Person` provider from **mimesis**.
+   An instance of this class will serve as our provider of personal data.
+2. We imported the :class:`~mimesis.enums.Locale` object, which provides locale codes and must be used as a parameter for locale-dependent data providers.
+3. We imported the :class:`~mimesis.enums.Gender` object from the :mod:`mimesis.enums` module, which we use as a parameter for the :meth:`~mimesis.Person.full_name`.
    parameter for the :meth:`~mimesis.Person.full_name`.
 4. Next we generate random female full name.
 5. The same as above, but for male.
@@ -105,5 +103,7 @@ What's next?
 ------------
 
 - See :ref:`providers` for a list of all available providers.
+- See :ref:`structured_data_generation` for generating structured data.
 - See :ref:`locale` for a list of all available locales.
-- See :mod:`mimesis.enums` for a list of all available enums.
+- See :ref:`api-reference` for a list of all available methods, providers, and
+  enums.

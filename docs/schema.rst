@@ -1,5 +1,6 @@
-.. _schema:
+.. _structured_data_generation:
 
+==========================
 Structured Data Generation
 ==========================
 

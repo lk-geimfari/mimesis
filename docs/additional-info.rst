@@ -1,3 +1,5 @@
+.. _additional-info:
+
 License
 =======
 

@@ -246,6 +246,6 @@ All providers must be subclasses of :class:`~mimesis.providers.base.BaseProvider
 that only a single instance of the Random object is used.
 
 Everything here is quite straightforward, but we would like to clarify one point:
-the name attribute in the Meta class refers to the name of the class through which access
+the **name** attribute in the **Meta** class refers to the name of the class through which access
 to methods of user-class providers is carried out. By default, the class name is used in
 lowercase letters.
