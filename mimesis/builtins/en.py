@@ -2,14 +2,14 @@
 
 import typing as t
 
-from mimesis.builtins.base import BaseSpecProvider
+from mimesis.builtins.base import CountrySpecificProvider
 from mimesis.locales import Locale
 from mimesis.types import MissingSeed, Seed
 
 __all__ = ["USASpecProvider"]
 
 
-class USASpecProvider(BaseSpecProvider):
+class USASpecProvider(CountrySpecificProvider):
     """Class that provides special data for the USA (en)."""
 
     def __init__(self, seed: Seed = MissingSeed) -> None:

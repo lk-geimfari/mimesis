@@ -3,14 +3,14 @@ import operator
 import typing as t
 
 from mimesis import Datetime
-from mimesis.builtins.base import BaseSpecProvider
+from mimesis.builtins.base import CountrySpecificProvider
 from mimesis.locales import Locale
 from mimesis.types import MissingSeed, Seed
 
 __all__ = ["DenmarkSpecProvider"]
 
 
-class DenmarkSpecProvider(BaseSpecProvider):
+class DenmarkSpecProvider(CountrySpecificProvider):
     """Class that provides special data for Denmark (da)."""
 
     def __init__(self, seed: Seed = MissingSeed) -> None:
@@ -24,10 +24,7 @@ class DenmarkSpecProvider(BaseSpecProvider):
         self._checksum_factors = (4, 3, 2, 7, 6, 5, 4, 3, 2)
 
     class Meta:
-        """The name of the provider."""
-
-        name: t.Final[str] = "denmark_provider"
-        datafile = None
+        name = "denmark_provider"
 
     def _calculate_century_selector(self, year: int) -> int:
         if 1858 <= year < 1900:

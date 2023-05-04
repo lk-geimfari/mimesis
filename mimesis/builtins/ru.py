@@ -3,7 +3,7 @@
 import typing as t
 from datetime import datetime
 
-from mimesis.builtins.base import BaseSpecProvider
+from mimesis.builtins.base import CountrySpecificProvider
 from mimesis.enums import Gender
 from mimesis.locales import Locale
 from mimesis.types import MissingSeed, Seed
@@ -11,7 +11,7 @@ from mimesis.types import MissingSeed, Seed
 __all__ = ["RussiaSpecProvider"]
 
 
-class RussiaSpecProvider(BaseSpecProvider):
+class RussiaSpecProvider(CountrySpecificProvider):
     """Class that provides special data for Russia (ru)."""
 
     def __init__(self, seed: Seed = MissingSeed) -> None:
