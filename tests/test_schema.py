@@ -3,6 +3,7 @@ import json
 import pickle
 import re
 import tempfile
+import unicodedata
 from collections.abc import Iterator
 
 import pytest
@@ -10,7 +11,7 @@ import pytest
 from mimesis.builtins.en import USASpecProvider
 from mimesis.enums import Gender
 from mimesis.exceptions import FieldError, FieldsetError, SchemaError
-from mimesis.keys import maybe
+from mimesis.keys import maybe, romanize
 from mimesis.locales import Locale
 from mimesis.schema import Field, Fieldset, Schema
 from mimesis.types import MissingSeed
@@ -147,6 +148,35 @@ def test_field_with_key_function_two_parameters(field):
     name, number = result.split("_")
     assert isinstance(result, str)
     assert 1 <= int(number) <= 100
+
+
+@pytest.mark.parametrize(
+    "locale",
+    (
+        Locale.RU,
+        Locale.UK,
+        Locale.KK,
+    ),
+)
+def test_field_with_romanize(locale):
+    field = Field(locale=locale)
+    result = field("name", key=romanize(locale))
+    assert not all(unicodedata.category(char).startswith("C") for char in result)
+
+
+@pytest.mark.parametrize(
+    "locale",
+    (
+        Locale.RU,
+        Locale.UK,
+        Locale.KK,
+    ),
+)
+def test_fieldset_with_romanize(locale):
+    fieldset = Fieldset(locale=locale, i=5)
+    romanized_results = fieldset("name", key=romanize(locale))
+    for result in romanized_results:
+        assert not all(unicodedata.category(char).startswith("C") for char in result)
 
 
 def test_field_with_maybe(field):

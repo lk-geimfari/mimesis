@@ -4,6 +4,9 @@
 Structured Data Generation
 ==========================
 
+Schema and Field
+----------------
+
 For generating data by schema, just create an instance of :class:`~mimesis.schema.Field`
 object, which takes any string which represents the name of data
 provider in following formats:
@@ -15,10 +18,6 @@ provider in following formats:
 and **\**kwargs** of the method *method*, after that you should
 describe the schema in lambda function (or any other callable object) and pass it to
 the object :class:`~mimesis.schema.Schema` and call method :meth:`~mimesis.schema.Schema.create`.
-
-Optionally, you can apply a *key function* to result returned by the
-method, to do it, just pass the parameter `key` with a callable object
-which returns final result.
 
 Example of usage:
 
@@ -37,7 +36,7 @@ Example of usage:
             "version": _("version", pre_release=True),
             "timestamp": _("timestamp", posix=False),
             "owner": {
-                "email": _("person.email", domains=["test.com"], key=str.lower),
+                "email": _("person.email", domains=["test.com"]),
                 "token": _("token_hex"),
                 "creator": _("full_name", gender=Gender.FEMALE),
             },
@@ -229,9 +228,41 @@ Output:
 
 Isn't it cool? Of course, it is!
 
+Key Functions
+-------------
+
+You can optionally apply a key function to the result returned by a **field**
+or **fieldset**. To do this, simply pass a callable object that returns
+the final result as the **key** parameter.
+
+Let's take a look at the example:
+
+.. code-block::
+
+    >>> from mimesis import Field, Fieldset
+    >>> from mimesis.locales import Locale
+
+    >>> field = Field(Locale.EN)
+    >>> field("name", key=str.upper)
+    'JAMES'
+
+    >>> fieldset = Fieldset(i=3)
+    >>> fieldset("name", key=str.upper)
+    ['PETER', 'MARY', 'ROBERT']
+
+
+As you can see, **key** function can be applied to both — **field** and **fieldset**.
+
+Mimesis also provides a set of built-in key functions:
+
+- :func:`~mimesis.keys.maybe` (See :ref:`key_maybe`)
+- :func:`~mimesis.keys.romanize` (See :ref:`key_romanize`)
+
+.. _key_maybe:
+
 
 Maybe This, Maybe That
-----------------------
+~~~~~~~~~~~~~~~~~~~~~~
 
 Real-world data can be messy and may contain missing values.
 This is why generating data with **None** values may be useful
@@ -239,7 +270,8 @@ to create more realistic synthetic data.
 
 Luckily, you can achieve this by using key function :func:`~mimesis.keys.maybe`
 
-It's has nothing to do with `monads <https://wiki.haskell.org/All_About_Monads>`_, it is just a closure which accepts two arguments: **value** and **probability**.
+It's has nothing to do with `monads <https://wiki.haskell.org/All_About_Monads>`_,
+it is just a closure which accepts two arguments: **value** and **probability**.
 
 Let's take a look at the example:
 
@@ -268,8 +300,38 @@ You can use any other value instead of **None**:
 
     ['N/A', 'N/A', 'static1955@outlook.com', 'publish1929@live.com', 'command2060@yahoo.com']
 
-Accessing Random In Key Functions
----------------------------------
+.. _key_romanize:
+
+
+Romanization of Cyrillic Data
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If your locale is part of the Cyrillic language family, but you require locale-specific
+data in romanized form, you can make use of the following key function :func:`~mimesis.keys.romanize`.
+
+Let's take a look at the example:
+
+.. code:: python
+
+    >>> from mimesis.keys import romanize
+    >>> from mimesis.locales import Locale
+    >>> from mimesis.schema import Field, Fieldset
+
+    >>> fieldset = Fieldset(Locale.RU, i=5)
+    >>> fieldset("name", key=romanize(Locale.RU))
+    ['Gerasim', 'Magdalena', 'Konstantsija', 'Egor', 'Alisa']
+
+    >>> field = Field(locale=Locale.UK)
+    >>> field("full_name", key=romanize(Locale.UK))
+    'Dem'jan Babarychenko'
+
+
+At this moment :func:`~mimesis.keys.romanize` works only with Russian (**Locale.RU**),
+Ukrainian (**Locale.UK**) and Kazakh (**Locale.KK**) locales.
+
+
+Accessing Random Object in Key Functions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 To ensure that all key functions have the same seed, it may be necessary to access a random object,
 especially if you require a complex key function that involves performing additional tasks with **random** object.
@@ -314,7 +376,7 @@ Let's take a look at the example:
     schema = Schema(
         schema=lambda: {
             "pk": _("increment"),
-            "name": _("text.word"),
+            "name": _("text.word", key=maybe("N/A", probability=0.2)),
             "version": _("version"),
             "timestamp": _("timestamp", posix=False),
         },
@@ -332,5 +394,5 @@ Example of the content of ``data.csv`` (truncated):
     pk,uid,name,version,timestamp
     1,save,6.8.6-alpha.3,2018-09-21T21:30:43Z
     2,sponsors,6.9.6-rc.7,2015-03-02T06:18:44Z
-    3,after,4.5.6-rc.8,2022-03-31T02:56:15Z
+    3,N/A,4.5.6-rc.8,2022-03-31T02:56:15Z
     4,queen,9.0.6-alpha.11,2008-07-22T05:56:59Z

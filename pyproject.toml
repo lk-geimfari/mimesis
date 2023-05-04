@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "mimesis"
-version = "9.0.0"
+version = "10.0.0"
 description = "Mimesis: Fake Data Generator."
 authors = ["Isaak Uchakaev <likid.geimfari@gmail.com>"]
 license = "MIT"
@@ -20,7 +20,8 @@ keywords = [
     "mimesis",
     "mock",
     "populate",
-    "testing"
+    "testing",
+    "pandas"
 ]
 classifiers = [
     "Development Status :: 5 - Production/Stable",

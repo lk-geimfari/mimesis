@@ -1,3 +1,11 @@
+Version 10.0.0
+--------------
+
+**Updated**:
+
+- ``romanize()`` is a key function now. See docs for more information.
+
+
 Version 9.0.0
 -------------
 .. note::

@@ -25,27 +25,7 @@ Very bad:
     ~ python manage.py fill_fake_db --count=600000 --locale=de
 
 
-Romanization of Cyrillic data
------------------------------
-
-If your locale belongs to the family of Cyrillic languages, but you need
-romanized locale-specific data, then you can use function :func:`~mimesis.shortcuts.romanize` which
-help you romanize your data.
-
-Example of usage for romanization of Russian full name:
-
-.. code:: python
-
-    from mimesis.shortcuts import romanize
-    from mimesis.locales import Locale
-
-    romanize("Вероника Денисова", locale=Locale.RU)
-    # Output: 'Veronika Denisova'
-
-
-
-At this moment it works only for Russian (**ru**),
-Ukrainian (**uk**) and Kazakh (**kk**):
+For ORM integration, you might find it useful to use `mimesis-factory`_.
 
 
 Dummy API Endpoints

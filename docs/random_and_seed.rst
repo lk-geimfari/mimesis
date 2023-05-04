@@ -10,7 +10,7 @@ Random
 
 All of the data providers in this library are subclasses of the :class:`~mimesis.providers.base.BaseProvider`
 class, which has a **random** attribute.
-This attribute is an instance of the :class:`~mimesis.random.Random` class from module :mod:`~mimesis.random`.
+This attribute is an instance of the :class:`~mimesis.random.Random` class from the module :mod:`~mimesis.random`.
 
 If you are creating your own data provider, you should use this random attribute to access the **random**.
 
@@ -38,7 +38,7 @@ Seeding random
 
 .. note::
     Keep in mind that some methods of some providers cannot be used with seeded
-    providers since their crypto secure nature.
+    providers since their nondeterministic nature.
 
 .. note::
     We support ``pytest_randomly`` and its global seed.
