@@ -151,12 +151,11 @@ class BaseDataProvider(BaseProvider):
         :param other: Dict to update from.
         :return: Updated dict.
         """
-        for key, value in other.items():
-            if isinstance(value, dict):
-                r = self._update_dict(initial.get(key, {}), value)
-                initial[key] = r
+        for k, v in other.items():
+            if isinstance(v, dict):
+                initial[k] = self._update_dict(initial.get(k, {}), v)
             else:
-                initial[key] = other[key]
+                initial[k] = other[k]
         return initial
 
     def _load_datafile(self, datafile: str = "") -> None:
@@ -166,28 +165,26 @@ class BaseDataProvider(BaseProvider):
         :return: The content of the file.
         :raises UnsupportedLocale: Raises if locale is unsupported.
         """
-        locale = self.locale
-        data_dir = self._data_dir
-
         if not datafile:
             datafile = self._datafile
 
-        def get_data(locale_name: str) -> t.Any:
+        def read_file(locale_name: str) -> t.Any:
             """Pull JSON data from file.
 
             :param locale_name: Locale name.
             :return: Content of JSON file as dict.
             """
-            file_path = Path(data_dir).joinpath(locale_name, datafile)
+            file_path = Path(self._data_dir) / locale_name / datafile
             with open(file_path, encoding="utf8") as f:
                 return json.load(f)
 
-        locale_separator = "-"
-        master_locale = locale.split(locale_separator).pop(0)
-        data = get_data(master_locale)
+        separator = "-"
+        master_locale = self.locale.split(separator).pop(0)
 
-        if locale_separator in locale:
-            data = self._update_dict(data, get_data(locale))
+        data = read_file(master_locale)
+
+        if separator in self.locale:
+            data = self._update_dict(data, read_file(self.locale))
 
         self._data = data
 
