@@ -243,7 +243,7 @@ class Datetime(BaseDataProvider):
         return datetime_obj
 
     def formatted_datetime(self, fmt: str = "", **kwargs: t.Any) -> str:
-        """Generate datetime string in human readable format.
+        """Generate datetime string in human-readable format.
 
         :param fmt: Custom format (default is format for current locale)
         :param kwargs: Keyword arguments for :meth:`~Datetime.datetime()`
