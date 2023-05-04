@@ -43,9 +43,10 @@ class Datetime(BaseDataProvider):
 
         .. warning::
 
-            Empty ``**kwargs`` produces **timedelta(0)** which obviously cannot be used as step,
-            so you have to pass valid ``**kwargs`` for :py:class:`datetime.timedelta` which will be
-            used as a step by which ``date_start`` will be incremented until it reaches ``date_end``
+            Empty ``**kwargs`` produces **timedelta(0)** which obviously
+            cannot be used as step, so you have to pass valid ``**kwargs``
+            for :py:class:`datetime.timedelta` which will be used as a step
+            by which ``date_start`` will be incremented until it reaches ``date_end``
             to avoid infinite loop which eventually leads to ``OverflowError``.
 
         See :py:class:`datetime.timedelta` for more details.

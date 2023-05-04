@@ -133,13 +133,15 @@ class BaseField:
         the method, by passing a parameter **key** with a callable
         object which returns the final result.
 
-        The key function has the option to accept two parameters: **result** and **random**.
-        In case you require access to a random instance within the key function,
-        you must modify the function to accept both of them, where the first corresponds
-        to the method result and the second corresponds to the instance of random.
+        The key function has the option to accept two parameters: **result**
+        and **random**. In case you require access to a random instance within
+        the key function, you must modify the function to accept both of them,
+        where the first corresponds to the method result and the second
+        corresponds to the instance of random.
 
         :param name: Name of the method.
-        :param key: A key function (any other callable object) which will be applied to result.
+        :param key: A key function (any callable object)
+            which will be applied to result.
         :param kwargs: Kwargs of method.
         :return: Value which represented by method.
         :raises ValueError: if provider not supported or if field not defined.
