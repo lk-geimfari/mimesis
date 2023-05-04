@@ -20,6 +20,7 @@ class USASpecProvider(BaseSpecProvider):
         """The name of the provider."""
 
         name: t.Final[str] = "usa_provider"
+        datafile = None
 
     def tracking_number(self, service: str = "usps") -> str:
         """Generate random tracking number.

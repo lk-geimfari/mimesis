@@ -68,15 +68,23 @@ class TestBase:
         ],
     )
     def test_load_datafile(self, locale, city):
-        data_provider = BaseDataProvider(locale)
-        data_provider._load_datafile("address.json")
+        class MyProvider(BaseDataProvider):
+            class Meta:
+                name = "my_provider"
+                datafile = "address.json"
+
+        data_provider = MyProvider(locale)
         assert city in data_provider._data["city"]
 
     @pytest.mark.parametrize("locale", list(Locale))
     def test_load_datafile_raises(self, locale):
-        data_provider = BaseDataProvider(locale=locale)
+        class BadProvider(BaseDataProvider):
+            class Meta:
+                name = "bad"
+                datafile = "bad.json"
+
         with pytest.raises(FileNotFoundError):
-            data_provider._load_datafile("something.json")
+            BadProvider(locale=locale)
 
     def test_extract(self, base_data_provider):
         dictionary = {"names": {"female": "Ariel", "male": "John"}}

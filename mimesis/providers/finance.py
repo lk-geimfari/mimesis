@@ -19,19 +19,9 @@ __all__ = ["Finance"]
 class Finance(BaseDataProvider):
     """Class for generating finance data."""
 
-    def __init__(self, *args: t.Any, **kwargs: t.Any) -> None:
-        """Initialize attributes.
-
-        :param locale: Current locale.
-        """
-        super().__init__(*args, **kwargs)
-        self._datafile = "finance.json"
-        self._load_datafile(self._datafile)
-
     class Meta:
-        """Class for metadata."""
-
         name: t.Final[str] = "finance"
+        datafile: t.Final[str] = "finance.json"
 
     def company(self) -> str:
         """Get a random company name.

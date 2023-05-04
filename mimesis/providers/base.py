@@ -101,6 +101,10 @@ class BaseProvider:
 class BaseDataProvider(BaseProvider):
     """This is a base class for all data providers."""
 
+    class Meta:
+        name: str
+        datafile: str = ""
+
     def __init__(
         self,
         locale: Locale = Locale.DEFAULT,
@@ -115,9 +119,9 @@ class BaseDataProvider(BaseProvider):
         """
         super().__init__(seed=seed, *args, **kwargs)
         self._data: JSON = {}
-        self._datafile: str = ""
         self._setup_locale(locale)
         self._data_dir = Path(__file__).parent.parent.joinpath("data")
+        self._load_datafile()
 
     def _setup_locale(self, locale: Locale = Locale.DEFAULT) -> None:
         """Set up locale after pre-check.
@@ -158,15 +162,16 @@ class BaseDataProvider(BaseProvider):
                 initial[k] = other[k]
         return initial
 
-    def _load_datafile(self, datafile: str = "") -> None:
+    def _load_datafile(self) -> None:
         """Loads the content from the JSON.
 
-        :param datafile: The name of file.
         :return: The content of the file.
         :raises UnsupportedLocale: Raises if locale is unsupported.
         """
+        datafile = self.Meta.datafile
+
         if not datafile:
-            datafile = self._datafile
+            return None
 
         def read_file(locale_name: str) -> t.Any:
             """Pull JSON data from file.

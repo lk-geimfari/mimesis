@@ -15,12 +15,10 @@ class UkraineSpecProvider(BaseSpecProvider):
     def __init__(self, seed: Seed = MissingSeed) -> None:
         """Initialize attributes."""
         super().__init__(locale=Locale.UK, seed=seed)
-        self._load_datafile(self._datafile)
 
     class Meta:
-        """The name of the provider."""
-
         name: t.Final[str] = "ukraine_provider"
+        datafile: t.Final[str] = "builtin.json"
 
     def patronymic(self, gender: t.Optional[Gender] = None) -> str:
         """Generate random patronymic name.

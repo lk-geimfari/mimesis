@@ -19,16 +19,9 @@ class Datetime(BaseDataProvider):
     # See: https://git.io/Jf15A
     _CURRENT_YEAR = datetime.now().year
 
-    def __init__(self, *args: t.Any, **kwargs: t.Any) -> None:
-        """Initialize attributes."""
-        super().__init__(*args, **kwargs)
-        self._datafile = "datetime.json"
-        self._load_datafile(self._datafile)
-
     class Meta:
-        """Class for metadata."""
-
         name: t.Final[str] = "datetime"
+        datafile: t.Final[str] = "datetime.json"
 
     @staticmethod
     def bulk_create_datetimes(

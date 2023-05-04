@@ -11,20 +11,9 @@ __all__ = ["Text"]
 class Text(BaseDataProvider):
     """Class for generating text data."""
 
-    def __init__(self, *args: t.Any, **kwargs: t.Any) -> None:
-        """Initialize attributes.
-
-        :param locale: Current locale.
-        :param seed: Seed.
-        """
-        super().__init__(*args, **kwargs)
-        self._datafile = "text.json"
-        self._load_datafile(self._datafile)
-
     class Meta:
-        """Class for metadata."""
-
         name: t.Final[str] = "text"
+        datafile: t.Final[str] = "text.json"
 
     def alphabet(self, lower_case: bool = False) -> t.List[str]:
         """Get an alphabet for current locale.

@@ -20,6 +20,7 @@ class NetherlandsSpecProvider(BaseSpecProvider):
         """The name of the provider."""
 
         name: t.Final[str] = "netherlands_provider"
+        datafile: t.Final = None
 
     def bsn(self) -> str:
         """Generate a random, but valid ``Burgerservicenummer``.

@@ -27,6 +27,7 @@ class DenmarkSpecProvider(BaseSpecProvider):
         """The name of the provider."""
 
         name: t.Final[str] = "denmark_provider"
+        datafile = None
 
     def _calculate_century_selector(self, year: int) -> int:
         if 1858 <= year < 1900:

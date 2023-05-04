@@ -25,18 +25,9 @@ class Address(BaseDataProvider):
     geographical location.
     """
 
-    def __init__(self, *args: t.Any, **kwargs: t.Any) -> None:
-        """Initialize attributes.
-
-        :param locale: Current locale.
-        """
-        super().__init__(*args, **kwargs)
-        self._load_datafile("address.json")
-
     class Meta:
-        """Class for metadata."""
-
         name: t.Final = "address"
+        datafile: t.Final = "address.json"
 
     @staticmethod
     def _dd_to_dms(num: float, _type: str) -> str:

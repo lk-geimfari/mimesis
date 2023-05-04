@@ -17,13 +17,13 @@ class RussiaSpecProvider(BaseSpecProvider):
     def __init__(self, seed: Seed = MissingSeed) -> None:
         """Initialize attributes."""
         super().__init__(locale=Locale.RU, seed=seed)
-        self._load_datafile(self._datafile)
         self._current_year = str(datetime.now().year)
 
     class Meta:
         """The name of the provider."""
 
         name: t.Final[str] = "russia_provider"
+        datafile: t.Final[str] = "builtin.json"
 
     def generate_sentence(self) -> str:
         """Generate sentence from the parts.

@@ -19,9 +19,8 @@ class PolandSpecProvider(BaseSpecProvider):
         super().__init__(locale=Locale.PL, seed=seed)
 
     class Meta:
-        """The name of the provider."""
-
         name: t.Final[str] = "poland_provider"
+        datafile = None
 
     def nip(self) -> str:
         """Generate random valid 10-digit NIP.
@@ -44,7 +43,7 @@ class PolandSpecProvider(BaseSpecProvider):
     ) -> str:
         """Generate random 11-digit PESEL.
 
-        :param birth_date: Initial birth date (optional)
+        :param birth_date: Initial birthdate (optional)
         :param gender: Gender of person
         :return: Valid 11-digit PESEL
         """

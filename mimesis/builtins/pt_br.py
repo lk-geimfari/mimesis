@@ -19,6 +19,7 @@ class BrazilSpecProvider(BaseSpecProvider):
         """The name of the provider."""
 
         name: t.Final[str] = "brazil_provider"
+        datafile = None
 
     @staticmethod
     def __get_verifying_digit_cpf(cpf: t.List[int], weight: int) -> int:

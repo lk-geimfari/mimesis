@@ -28,8 +28,6 @@ class Person(BaseDataProvider):
         :param seed: Seed.
         """
         super().__init__(*args, **kwargs)
-        self._datafile = "person.json"
-        self._load_datafile(self._datafile)
         self._store = {
             "age": 0,
         }
@@ -38,6 +36,7 @@ class Person(BaseDataProvider):
         """Class for metadata."""
 
         name: t.Final[str] = "person"
+        datafile: t.Final[str] = "person.json"
 
     def age(self, minimum: int = 16, maximum: int = 66) -> int:
         """Get a random integer value.

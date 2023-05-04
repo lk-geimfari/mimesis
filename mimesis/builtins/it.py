@@ -17,12 +17,10 @@ class ItalySpecProvider(BaseSpecProvider):
     def __init__(self, seed: Seed = MissingSeed) -> None:
         """Initialize attributes."""
         super().__init__(locale=Locale.IT, seed=seed)
-        self._load_datafile(self._datafile)
 
     class Meta:
-        """The name of the provider."""
-
         name: t.Final[str] = "italy_provider"
+        datafile: t.Final[str] = "builtin.json"
 
     def fiscal_code(self, gender: t.Optional[Gender] = None) -> str:
         """Return a random fiscal code.
