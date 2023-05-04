@@ -13,9 +13,7 @@ class File(BaseProvider):
     """Class for generate data related to files."""
 
     class Meta:
-        """Class for metadata."""
-
-        name: t.Final[str] = "file"
+        name = "file"
 
     def extension(self, file_type: t.Optional[FileType] = None) -> str:
         """Get a random file extension from list.

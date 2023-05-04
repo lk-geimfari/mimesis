@@ -12,8 +12,7 @@ class Text(BaseDataProvider):
     """Class for generating text data."""
 
     class Meta:
-        name: t.Final[str] = "text"
-        datafile: t.Final[str] = "text.json"
+        name = "text"
 
     def alphabet(self, lower_case: bool = False) -> t.List[str]:
         """Get an alphabet for current locale.

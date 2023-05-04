@@ -21,9 +21,7 @@ class Code(BaseProvider):
     """A class, which provides methods for generating codes."""
 
     class Meta:
-        """Class for metadata."""
-
-        name: t.Final[str] = "code"
+        name = "code"
 
     def locale_code(self) -> str:
         """Get a random locale code (MS-LCID).

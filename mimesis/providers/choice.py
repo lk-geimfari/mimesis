@@ -10,9 +10,7 @@ class Choice(BaseProvider):
     """Class for generating a random choice from items in a sequence."""
 
     class Meta:
-        """Class for metadata."""
-
-        name: t.Final[str] = "choice"
+        name = "choice"
 
     def choice(self, *args: t.Any, **kwargs: t.Any) -> t.Any:
         """Choice random item form sequence.

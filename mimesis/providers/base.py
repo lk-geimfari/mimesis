@@ -117,7 +117,7 @@ class BaseDataProvider(BaseProvider):
         # This is a dict with data
         # loaded from the JSON file.
         self._data: JSON = {}
-        self._base_dir = Path(__file__).parent.parent
+        self._default_datadir = Path(__file__).parent.parent / "data"
         # Order matters here, since
         # we have to set up locale first.
         self._setup_locale(locale)
@@ -168,8 +168,9 @@ class BaseDataProvider(BaseProvider):
         :return: The content of the file.
         :raises UnsupportedLocale: Raises if locale is unsupported.
         """
-        datafile = getattr(self.Meta, "datafile", "")
-        datadir = getattr(self.Meta, "datadir", self._base_dir / "data")
+        provider_name = getattr(self.Meta, "name", "")
+        datafile = getattr(self.Meta, "datafile", provider_name)
+        datadir = getattr(self.Meta, "datadir", self._default_datadir)
 
         if not datafile:
             return None
@@ -181,6 +182,10 @@ class BaseDataProvider(BaseProvider):
             :return: Content of JSON file as dict.
             """
             file_path = datadir / locale_name / datafile
+
+            if file_path.suffix != ".json":
+                file_path = file_path.with_suffix(".json")
+
             with open(file_path, encoding="utf8") as f:
                 return json.load(f)
 

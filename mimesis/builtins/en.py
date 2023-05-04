@@ -1,6 +1,5 @@
 """Specific data provider for the USA (en)."""
 
-import typing as t
 
 from mimesis.builtins.base import CountrySpecificProvider
 from mimesis.locales import Locale
@@ -17,9 +16,7 @@ class USASpecProvider(CountrySpecificProvider):
         super().__init__(locale=Locale.EN, seed=seed)
 
     class Meta:
-        """The name of the provider."""
-
-        name: t.Final[str] = "usa_provider"
+        name = "usa_provider"
         datafile = None
 
     def tracking_number(self, service: str = "usps") -> str:

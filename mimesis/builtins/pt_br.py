@@ -16,9 +16,7 @@ class BrazilSpecProvider(CountrySpecificProvider):
         super().__init__(locale=Locale.PT_BR, seed=seed)
 
     class Meta:
-        """The name of the provider."""
-
-        name: t.Final[str] = "brazil_provider"
+        name = "brazil_provider"
         datafile = None
 
     @staticmethod

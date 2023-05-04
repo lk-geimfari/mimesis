@@ -22,8 +22,8 @@ class RussiaSpecProvider(CountrySpecificProvider):
     class Meta:
         """The name of the provider."""
 
-        name: t.Final[str] = "russia_provider"
-        datafile: t.Final[str] = "builtin.json"
+        name = "russia_provider"
+        datafile = "builtin.json"
 
     def generate_sentence(self) -> str:
         """Generate sentence from the parts.

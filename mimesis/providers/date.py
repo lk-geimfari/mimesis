@@ -20,8 +20,7 @@ class Datetime(BaseDataProvider):
     _CURRENT_YEAR = datetime.now().year
 
     class Meta:
-        name: t.Final[str] = "datetime"
-        datafile: t.Final[str] = "datetime.json"
+        name = "datetime"
 
     @staticmethod
     def bulk_create_datetimes(

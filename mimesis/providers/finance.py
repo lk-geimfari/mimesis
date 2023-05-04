@@ -20,8 +20,7 @@ class Finance(BaseDataProvider):
     """Class for generating finance data."""
 
     class Meta:
-        name: t.Final[str] = "finance"
-        datafile: t.Final[str] = "finance.json"
+        name = "finance"
 
     def company(self) -> str:
         """Get a random company name.

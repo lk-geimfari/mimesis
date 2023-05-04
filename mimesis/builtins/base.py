@@ -12,4 +12,5 @@ class CountrySpecificProvider(BaseDataProvider):
     shared logic among all built-in providers.
     """
 
-
+    class Meta:
+        datafile = "builtin.json"

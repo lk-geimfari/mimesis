@@ -19,8 +19,8 @@ class ItalySpecProvider(CountrySpecificProvider):
         super().__init__(locale=Locale.IT, seed=seed)
 
     class Meta:
-        name: t.Final[str] = "italy_provider"
-        datafile: t.Final[str] = "builtin.json"
+        name = "italy_provider"
+        datafile = "builtin.json"
 
     def fiscal_code(self, gender: t.Optional[Gender] = None) -> str:
         """Return a random fiscal code.

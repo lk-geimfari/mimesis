@@ -33,10 +33,7 @@ class Person(BaseDataProvider):
         }
 
     class Meta:
-        """Class for metadata."""
-
-        name: t.Final[str] = "person"
-        datafile: t.Final[str] = "person.json"
+        name = "person"
 
     def age(self, minimum: int = 16, maximum: int = 66) -> int:
         """Get a random integer value.

@@ -66,9 +66,7 @@ class Internet(BaseProvider):
         )
 
     class Meta:
-        """Class for metadata."""
-
-        name: t.Final[str] = "internet"
+        name = "internet"
 
     def content_type(self, mime_type: t.Optional[MimeType] = None) -> str:
         """Get a random HTTP content type.

@@ -25,6 +25,7 @@ class DenmarkSpecProvider(CountrySpecificProvider):
 
     class Meta:
         name = "denmark_provider"
+        datafile = None
 
     def _calculate_century_selector(self, year: int) -> int:
         if 1858 <= year < 1900:

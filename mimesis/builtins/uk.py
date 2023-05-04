@@ -17,8 +17,8 @@ class UkraineSpecProvider(CountrySpecificProvider):
         super().__init__(locale=Locale.UK, seed=seed)
 
     class Meta:
-        name: t.Final[str] = "ukraine_provider"
-        datafile: t.Final[str] = "builtin.json"
+        name = "ukraine_provider"
+        datafile = "builtin.json"
 
     def patronymic(self, gender: t.Optional[Gender] = None) -> str:
         """Generate random patronymic name.

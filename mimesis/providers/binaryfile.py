@@ -29,9 +29,7 @@ class BinaryFile(BaseProvider):
         self._sample_name: t.Final[str] = "sample"
 
     class Meta:
-        """Class for metadata."""
-
-        name: t.Final[str] = "binaryfile"
+        name = "binaryfile"
 
     def _read_file(
         self,

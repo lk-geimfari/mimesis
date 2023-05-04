@@ -10,8 +10,7 @@ class Food(BaseDataProvider):
     """Class for generating data related to food."""
 
     class Meta:
-        name: t.Final[str] = "food"
-        datafile: t.Final[str] = "food.json"
+        name = "food"
 
     def _choice_from(self, key: str) -> str:
         """Choice random element."""

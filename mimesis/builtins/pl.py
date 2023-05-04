@@ -19,7 +19,7 @@ class PolandSpecProvider(CountrySpecificProvider):
         super().__init__(locale=Locale.PL, seed=seed)
 
     class Meta:
-        name: t.Final[str] = "poland_provider"
+        name = "poland_provider"
         datafile = None
 
     def nip(self) -> str:
