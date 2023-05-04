@@ -249,3 +249,5 @@ Everything here is quite straightforward, but we would like to clarify one point
 the **name** attribute in the **Meta** class refers to the name of the class through which access
 to methods of user-class providers is carried out. By default, the class name is used in
 lowercase letters.
+
+See :ref:`seeded_data` to learn how to access the :class:`~mimesis.random.Random` object.

@@ -6,15 +6,15 @@ API
 
 This part of the documentation covers all the public interfaces of *Mimesis*.
 
-Random object
+Random module
 =============
 
 .. autoclass:: mimesis.random.Random
    :members:
    :special-members: __init__
 
-Key functions
-=============
+Keys module
+===========
 
 .. automodule:: mimesis.keys
    :members:
