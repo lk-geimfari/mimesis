@@ -360,8 +360,8 @@ Here is an example of how to do this:
     'bazany1925@gmail.com'
 
 
-Data Exportation: JSON, CSV and Pickle
---------------------------------------
+Export Data to JSON, CSV or Pickle
+----------------------------------
 
 Data can be exported in JSON or CSV formats, as well as pickled object representations.
 
