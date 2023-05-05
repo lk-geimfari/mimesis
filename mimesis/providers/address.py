@@ -27,6 +27,7 @@ class Address(BaseDataProvider):
 
     class Meta:
         name = "address"
+        datafile = f"{name}.json"
 
     @staticmethod
     def _dd_to_dms(num: float, _type: str) -> str:

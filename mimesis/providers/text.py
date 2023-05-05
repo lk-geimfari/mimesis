@@ -13,6 +13,7 @@ class Text(BaseDataProvider):
 
     class Meta:
         name = "text"
+        datafile = f"{name}.json"
 
     def alphabet(self, lower_case: bool = False) -> t.List[str]:
         """Get an alphabet for current locale.

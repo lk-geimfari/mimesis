@@ -21,6 +21,7 @@ class Datetime(BaseDataProvider):
 
     class Meta:
         name = "datetime"
+        datafile = f"{name}.json"
 
     @staticmethod
     def bulk_create_datetimes(

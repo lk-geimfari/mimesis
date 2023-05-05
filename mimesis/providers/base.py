@@ -168,24 +168,14 @@ class BaseDataProvider(BaseProvider):
         :return: The content of the file.
         :raises UnsupportedLocale: Raises if locale is unsupported.
         """
-        provider_name = getattr(self.Meta, "name", "")
-        datafile = getattr(self.Meta, "datafile", provider_name)
+        datafile = getattr(self.Meta, "datafile", "")
         datadir = getattr(self.Meta, "datadir", self._default_datadir)
 
         if not datafile:
             return None
 
         def read_file(locale_name: str) -> t.Any:
-            """Pull JSON data from file.
-
-            :param locale_name: Locale name.
-            :return: Content of JSON file as dict.
-            """
             file_path = datadir / locale_name / datafile
-
-            if file_path.suffix != ".json":
-                file_path = file_path.with_suffix(".json")
-
             with open(file_path, encoding="utf8") as f:
                 return json.load(f)
 

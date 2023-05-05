@@ -21,6 +21,7 @@ class Finance(BaseDataProvider):
 
     class Meta:
         name = "finance"
+        datafile = f"{name}.json"
 
     def company(self) -> str:
         """Get a random company name.

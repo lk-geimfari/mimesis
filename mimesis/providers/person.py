@@ -34,6 +34,7 @@ class Person(BaseDataProvider):
 
     class Meta:
         name = "person"
+        datafile = f"{name}.json"
 
     def age(self, minimum: int = 16, maximum: int = 66) -> int:
         """Get a random integer value.
