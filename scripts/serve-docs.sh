@@ -1,14 +1,21 @@
 #!/usr/bin/env bash
 
 PORT=8888
+URL=http://localhost:${PORT}
 DOCS_DIR="docs/_build/html"
 
-open_url() {
-  open http://localhost:${PORT}
+open_in_browser() {
+  if which gnome-open >/dev/null; then
+    gnome-open ${URL}
+  elif which open >/dev/null; then
+    open ${URL}
+  else
+    echo "Could not detect the web browser."
+  fi
 }
 
 serve_docs() {
-  open_url & # Open the URL in the background
+  open_in_browser &
   python3 -m http.server ${PORT} -d ${DOCS_DIR}
 }
 
