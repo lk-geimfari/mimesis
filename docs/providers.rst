@@ -251,3 +251,73 @@ to methods of user-class providers is carried out. By default, the class name is
 lowercase letters.
 
 See :ref:`seeded_data` to learn how to access the :class:`~mimesis.random.Random` object.
+
+
+Custom Data Providers
+---------------------
+
+To create your own **data provider** and store your data
+in JSON files, you can follow these steps:
+
+First, create a directory to store your data with the following structure:
+
+.. code-block:: text
+
+    custom_datadir/
+    ├── de
+    │   └── file_name.json
+    ├── en
+    │   └── file_name.json
+    └── ru
+        └── file_name.json
+
+To ensure that your provider supports the desired locale, every custom
+**data directory** (datadir) must include a directory with the name of the locale.
+
+Next, you need to populate the files with the relevant data.
+
+For example:
+
+.. code-block:: json
+
+    {
+      "key": [
+        "value1",
+        "value2",
+        "value3"
+      ]
+    }
+
+Afterwards, you will need to create a class that inherits from :class:`~mimesis.providers.base.BaseDataProvider`:
+
+.. code:: python
+
+    from pathlib import Path
+
+    from mimesis import BaseDataProvider
+    from mimesis.locales import Locale
+
+    class CustomDataProvider(BaseDataProvider):
+        class Meta:
+            name = 'custom_provider'
+            datafile = 'file_name.json'
+            datadir = Path(__file__).parent / 'custom_datadir'
+
+        def my_method(self):
+            return self.random.choice(self.extract(['key']))
+
+The **Meta** class is required and must contain the following attributes:
+
+- **name** - the name of the provider in lowercase letters.
+- **datafile** - the name of the file with data.
+- **datadir** - the path to the directory with data.
+
+That’s it! Now you can use your custom data provider:
+
+.. code:: python
+
+    >>> from mimesis.locales import Locale
+
+    >>> cdp = CustomDataProvider(Locale.EN)
+    >>> cdp.my_method()
+    'value3'

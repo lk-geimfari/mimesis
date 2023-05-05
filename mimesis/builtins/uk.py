@@ -28,5 +28,5 @@ class UkraineSpecProvider(CountrySpecificProvider):
         :return: Patronymic name.
         """
         gender = self.validate_enum(gender, Gender)
-        patronymics: t.List[str] = self._extract(["patronymic", str(gender)])
+        patronymics: t.List[str] = self.extract(["patronymic", str(gender)])
         return self.random.choice(patronymics)
