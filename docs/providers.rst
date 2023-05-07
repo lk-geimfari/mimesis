@@ -310,7 +310,7 @@ The **Meta** class is required and must contain the following attributes:
 
 - **name** - the name of the provider in lowercase letters.
 - **datafile** - the name of the file with data.
-- **datadir** - the path to the directory with data.
+- **datadir** - the path to the directory with data (must be an instance of :class:`~pathlib.Path`).
 
 That’s it! Now you can use your custom data provider:
 
