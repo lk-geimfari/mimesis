@@ -3,14 +3,14 @@ import operator
 import typing as t
 
 from mimesis import Datetime
-from mimesis.builtins.base import CountrySpecificProvider
 from mimesis.locales import Locale
+from mimesis.providers import BaseDataProvider
 from mimesis.types import MissingSeed, Seed
 
 __all__ = ["DenmarkSpecProvider"]
 
 
-class DenmarkSpecProvider(CountrySpecificProvider):
+class DenmarkSpecProvider(BaseDataProvider):
     """Class that provides special data for Denmark (da)."""
 
     def __init__(self, seed: Seed = MissingSeed) -> None:

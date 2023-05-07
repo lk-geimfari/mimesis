@@ -1,14 +1,14 @@
 """Specific data provider for the Netherlands (nl)."""
 
 
-from mimesis.builtins.base import CountrySpecificProvider
 from mimesis.locales import Locale
+from mimesis.providers import BaseDataProvider
 from mimesis.types import MissingSeed, Seed
 
 __all__ = ["NetherlandsSpecProvider"]
 
 
-class NetherlandsSpecProvider(CountrySpecificProvider):
+class NetherlandsSpecProvider(BaseDataProvider):
     """Class that provides special data for the Netherlands (nl)."""
 
     def __init__(self, seed: Seed = MissingSeed) -> None:

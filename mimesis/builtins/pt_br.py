@@ -1,14 +1,14 @@
 """Specific data provider for Brazil (pt-br)."""
 import typing as t
 
-from mimesis.builtins.base import CountrySpecificProvider
 from mimesis.locales import Locale
+from mimesis.providers import BaseDataProvider
 from mimesis.types import MissingSeed, Seed
 
 __all__ = ["BrazilSpecProvider"]
 
 
-class BrazilSpecProvider(CountrySpecificProvider):
+class BrazilSpecProvider(BaseDataProvider):
     """Class that provides special data for Brazil (pt-br)."""
 
     def __init__(self, seed: Seed = MissingSeed) -> None:
