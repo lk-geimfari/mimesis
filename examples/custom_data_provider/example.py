@@ -14,7 +14,8 @@ class CustomDataProvider(BaseDataProvider):
         # Name of json file for this provider.
         datafile = 'data.json'
         # Directory where json file for this provider is located.
-        datadir = BASE_DIR.joinpath('datadir')
+        # Must an instance of pathlib.Path.
+        datadir = BASE_DIR / 'datadir'
 
     def my_method(self):
         return self.random.choice(self.extract(['key']))

@@ -14,6 +14,9 @@ from mimesis.types import JSON, MissingSeed, Seed
 
 __all__ = ["BaseDataProvider", "BaseProvider"]
 
+DATADIR: t.Final = Path(__file__).parent.parent / "data"
+LOCALE_SEPARATOR: t.Final = "-"
+
 
 class BaseProvider:
     """This is a base class for all providers.
@@ -117,7 +120,6 @@ class BaseDataProvider(BaseProvider):
         # This is a dict with data
         # loaded from the JSON file.
         self._data: JSON = {}
-        self._default_datadir = Path(__file__).parent.parent / "data"
         # Order matters here, since
         # we have to set up locale first.
         self._setup_locale(locale)
@@ -168,8 +170,9 @@ class BaseDataProvider(BaseProvider):
         :return: The content of the file.
         :raises UnsupportedLocale: Raises if locale is unsupported.
         """
+        locale = self.locale
         datafile = getattr(self.Meta, "datafile", "")
-        datadir = getattr(self.Meta, "datadir", self._default_datadir)
+        datadir = getattr(self.Meta, "datadir", DATADIR)
 
         if not datafile:
             return None
@@ -179,13 +182,12 @@ class BaseDataProvider(BaseProvider):
             with open(file_path, encoding="utf8") as f:
                 return json.load(f)
 
-        separator = "-"
-        master_locale = self.locale.split(separator).pop(0)
+        master_locale = locale.split(LOCALE_SEPARATOR).pop(0)
 
         data = read_file(master_locale)
 
-        if separator in self.locale:
-            data = self._update_dict(data, read_file(self.locale))
+        if LOCALE_SEPARATOR in locale:
+            data = self._update_dict(data, read_file(locale))
 
         self._data = data
 
