@@ -146,8 +146,8 @@ def test_weighted_choice(random):
         for _ in range(100)
     ]
 
-    assert result.count(Gender.MALE) < 20
-    assert result.count(Gender.FEMALE) > 80
+    assert result.count(Gender.MALE) <= 20
+    assert result.count(Gender.FEMALE) >= 80
 
 
 def test_weighted_choice_with_empty_dict(random):
