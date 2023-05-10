@@ -5,6 +5,8 @@ version: 2
 build:
   os: ubuntu-22.04
   image: latest
+  tools:
+    python: "3.8"
 
 sphinx:
   configuration: docs/conf.py
