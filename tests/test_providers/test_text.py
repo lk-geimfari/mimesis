@@ -79,11 +79,7 @@ class TestText:
 
     def test_word(self, text):
         result = text.word()
-        assert result in text._data["words"]["normal"]
-
-    def test_swear_word(self, text):
-        result = text.swear_word()
-        assert result in text._data["words"]["bad"]
+        assert result in text._data["words"]
 
     def test_quote(self, text):
         result = text.quote()
@@ -141,9 +137,6 @@ class TestSeededText:
 
     def test_word(self, t1, t2):
         assert t1.word() == t2.word()
-
-    def test_swear_word(self, t1, t2):
-        assert t1.swear_word() == t2.swear_word()
 
     def test_quote(self, t1, t2):
         assert t1.quote() == t2.quote()

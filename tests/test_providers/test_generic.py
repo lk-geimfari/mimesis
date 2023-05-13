@@ -196,9 +196,5 @@ class TestSeededGeneric:
     def test_generic_science(self, g1, g2):
         assert g1.science.rna_sequence() == g2.science.rna_sequence()
 
-    def test_generic_text(self, g1, g2):
-        assert g1.text.swear_word() == g2.text.swear_word()
-        assert g1.text.color() == g2.text.color()
-
     def test_generic_transport(self, g1, g2):
         assert g1.transport.airplane() == g2.transport.airplane()

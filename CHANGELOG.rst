@@ -1,9 +1,16 @@
 Version 10.0.0
 --------------
 
+**Work is still in progress**
+
 **Updated**:
 
 - ``romanize()`` is a key function now. See docs for more information.
+
+
+**Removed**:
+
+- Removed method ``swear_word()`` of ``Text()``.
 
 
 Version 9.0.0

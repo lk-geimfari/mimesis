@@ -13,7 +13,7 @@ If any of the following statements is true, move the type to this file:
 """
 
 import datetime
-import typing as t
+from typing import Set, Optional, Dict, List, Any, Final, Union, Tuple, Callable
 from decimal import Decimal
 
 __all__ = [
@@ -31,7 +31,7 @@ __all__ = [
     "Timestamp",
 ]
 
-JSON = t.Dict[str, t.Any]
+JSON = Dict[str, Any]
 
 DateTime = datetime.datetime
 
@@ -39,27 +39,23 @@ Time = datetime.time
 
 Date = datetime.date
 
-Timestamp = t.Union[str, int]
+Timestamp = Union[str, int]
 
 
 class _MissingSeed:
     """We use this type as a placeholder for cases when seed is not set."""
 
 
-MissingSeed: t.Final = _MissingSeed()
-Seed = t.Union[None, int, float, str, bytes, bytearray, _MissingSeed]
+MissingSeed: Final = _MissingSeed()
+Seed = Union[None, int, float, str, bytes, bytearray, _MissingSeed]
 
-Keywords = t.Union[t.List[str], t.Set[str], t.Tuple[str, ...]]
+Keywords = Union[List[str], Set[str], Tuple[str, ...]]
 
-Matrix = t.Union[
-    t.List[int],
-    t.List[float],
-    t.List[complex],
-    t.List[Decimal],
-]
+Number = Union[int, float, complex, Decimal]
+Matrix = List[List[Number]]
 
-CallableSchema = t.Callable[[], JSON]
+CallableSchema = Callable[[], JSON]
 
-Key = t.Optional[t.Callable[[t.Any], t.Any]]
+Key = Optional[Callable[[Any], Any]]
 
-FieldCache = t.Dict[str, t.Callable[[t.Any], t.Any]]
+FieldCache = Dict[str, Callable[[Any], Any]]

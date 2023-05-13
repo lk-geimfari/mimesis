@@ -69,7 +69,7 @@ class Text(BaseDataProvider):
         :Example:
             [science, network, god, octopus, love]
         """
-        words = self.extract(["words", "normal"])
+        words = self.extract(["words"])
         return self.random.choices(words, k=quantity)
 
     def word(self) -> str:
@@ -81,17 +81,6 @@ class Text(BaseDataProvider):
             Science.
         """
         return self.words(quantity=1)[0]
-
-    def swear_word(self) -> str:
-        """Get a random swear word.
-
-        :return: Swear word.
-
-        :Example:
-            Damn.
-        """
-        words: t.List[str] = self.extract(["words", "bad"])
-        return self.random.choice(words)
 
     def quote(self) -> str:
         """Get a random quote.
@@ -122,8 +111,7 @@ class Text(BaseDataProvider):
         :param color: Hex color.
         :return: RGB tuple.
         """
-        if color.startswith("#"):
-            color = color.lstrip("#")
+        color = color.lstrip("#") if color.startswith("#") else color
         return tuple(int(color[i : i + 2], 16) for i in (0, 2, 4))
 
     def hex_color(self, safe: bool = False) -> str:
