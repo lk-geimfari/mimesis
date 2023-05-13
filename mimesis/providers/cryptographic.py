@@ -16,9 +16,7 @@ class Cryptographic(BaseProvider):
     """Class that provides cryptographic data."""
 
     class Meta:
-        """Class for metadata."""
-
-        name: t.Final[str] = "cryptographic"
+        name = "cryptographic"
 
     @staticmethod
     def uuid_object() -> UUID:

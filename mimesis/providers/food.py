@@ -9,23 +9,13 @@ __all__ = ["Food"]
 class Food(BaseDataProvider):
     """Class for generating data related to food."""
 
-    def __init__(self, *args: t.Any, **kwargs: t.Any) -> None:
-        """Initialize attributes.
-
-        :param locale: Current locale.
-        """
-        super().__init__(*args, **kwargs)
-        self._datafile = "food.json"
-        self._load_datafile(self._datafile)
-
     class Meta:
-        """Class for metadata."""
-
-        name: t.Final[str] = "food"
+        name = "food"
+        datafile = f"{name}.json"
 
     def _choice_from(self, key: str) -> str:
         """Choice random element."""
-        data: t.List[str] = self._extract([key])
+        data: t.List[str] = self.extract([key])
         return self.random.choice(data)
 
     def vegetable(self) -> str:

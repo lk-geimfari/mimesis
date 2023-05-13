@@ -3,26 +3,24 @@
 import string
 import typing as t
 
-from mimesis.builtins.base import BaseSpecProvider
 from mimesis.enums import Gender
 from mimesis.locales import Locale
+from mimesis.providers import BaseDataProvider
 from mimesis.types import MissingSeed, Seed
 
 __all__ = ["ItalySpecProvider"]
 
 
-class ItalySpecProvider(BaseSpecProvider):
+class ItalySpecProvider(BaseDataProvider):
     """Specific-provider of misc data for Italy."""
 
     def __init__(self, seed: Seed = MissingSeed) -> None:
         """Initialize attributes."""
         super().__init__(locale=Locale.IT, seed=seed)
-        self._load_datafile(self._datafile)
 
     class Meta:
-        """The name of the provider."""
-
-        name: t.Final[str] = "italy_provider"
+        name = "italy_provider"
+        datafile = "builtin.json"
 
     def fiscal_code(self, gender: t.Optional[Gender] = None) -> str:
         """Return a random fiscal code.
@@ -37,7 +35,7 @@ class ItalySpecProvider(BaseSpecProvider):
 
         code += self.random.custom_code(mask="##")
 
-        month_codes = self._extract(["fiscal_code", "month_codes"])
+        month_codes = self.extract(["fiscal_code", "month_codes"])
         code += self.random.choice(month_codes)
 
         birth_day = self.random.randint(101, 131)
@@ -46,7 +44,7 @@ class ItalySpecProvider(BaseSpecProvider):
             birth_day += 40
         code += str(birth_day)[1:]
 
-        city_letters = self._extract(["fiscal_code", "city_letters"])
+        city_letters = self.extract(["fiscal_code", "city_letters"])
         code += self.random.choice(city_letters)
         code += self.random.custom_code(mask="###@")
 

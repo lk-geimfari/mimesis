@@ -1,15 +1,14 @@
 """Specific data provider for the USA (en)."""
 
-import typing as t
 
-from mimesis.builtins.base import BaseSpecProvider
 from mimesis.locales import Locale
+from mimesis.providers import BaseDataProvider
 from mimesis.types import MissingSeed, Seed
 
 __all__ = ["USASpecProvider"]
 
 
-class USASpecProvider(BaseSpecProvider):
+class USASpecProvider(BaseDataProvider):
     """Class that provides special data for the USA (en)."""
 
     def __init__(self, seed: Seed = MissingSeed) -> None:
@@ -17,9 +16,8 @@ class USASpecProvider(BaseSpecProvider):
         super().__init__(locale=Locale.EN, seed=seed)
 
     class Meta:
-        """The name of the provider."""
-
-        name: t.Final[str] = "usa_provider"
+        name = "usa_provider"
+        datafile = None
 
     def tracking_number(self, service: str = "usps") -> str:
         """Generate random tracking number.

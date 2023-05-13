@@ -37,9 +37,7 @@ class Path(BaseProvider):
         self._pathlib_home /= PLATFORMS[platform]["home"]
 
     class Meta:
-        """Class for metadata."""
-
-        name: t.Final[str] = "path"
+        name = "path"
 
     def root(self) -> str:
         """Generate a root dir path.

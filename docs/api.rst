@@ -154,13 +154,6 @@ Person
    :members:
    :special-members: __init__
 
-Science
--------
-
-.. autoclass:: mimesis.Science
-   :members:
-   :special-members: __init__
-
 Text
 ----
 
@@ -253,6 +246,14 @@ Transport
 ---------
 
 .. autoclass:: mimesis.Transport
+   :members:
+   :special-members: __init__
+
+
+Science
+-------
+
+.. autoclass:: mimesis.Science
    :members:
    :special-members: __init__
 

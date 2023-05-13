@@ -13,9 +13,7 @@ class Science(BaseProvider):
     """Class for generating pseudo-scientific data."""
 
     class Meta:
-        """Class for metadata."""
-
-        name: t.Final[str] = "science"
+        name = "science"
 
     def rna_sequence(self, length: int = 10) -> str:
         """Generate a random RNA sequence.

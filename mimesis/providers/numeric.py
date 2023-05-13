@@ -20,9 +20,7 @@ class Numeric(BaseProvider):
         self.__default_accumulator_value: t.Final[str] = "default"
 
     class Meta:
-        """Class for metadata."""
-
-        name: t.Final[str] = "numeric"
+        name = "numeric"
 
     def increment(self, accumulator: t.Optional[str] = None) -> int:
         """Generate incremental number.

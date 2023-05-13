@@ -1,5 +1,4 @@
 """Provides data related to hardware."""
-import typing as t
 
 from mimesis.data import (
     CPU,
@@ -25,7 +24,7 @@ class Hardware(BaseProvider):
     class Meta:
         """Class for metadata."""
 
-        name: t.Final[str] = "hardware"
+        name = "hardware"
 
     def resolution(self) -> str:
         """Get a random screen resolution.

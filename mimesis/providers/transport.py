@@ -19,9 +19,7 @@ class Transport(BaseProvider):
     """Class for generating data related to transports."""
 
     class Meta:
-        """Class for metadata."""
-
-        name: t.Final[str] = "transport"
+        name = "transport"
 
     def manufacturer(self) -> str:
         """Get a random car manufacturer.

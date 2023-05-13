@@ -1,10 +1,25 @@
 #!/usr/bin/env bash
 
-serve_docs() {
-  python3 -m http.server 8888 -d docs/_build/html
+PORT=8888
+URL=http://localhost:${PORT}
+DOCS_DIR="docs/_build/html"
+
+open_in_browser() {
+  if which gnome-open >/dev/null; then
+    gnome-open ${URL}
+  elif which open >/dev/null; then
+    open ${URL}
+  else
+    echo "Could not detect the web browser."
+  fi
 }
 
-if [ -d "docs/_build/html" ]; then
+serve_docs() {
+  open_in_browser &
+  python3 -m http.server ${PORT} -d ${DOCS_DIR}
+}
+
+if [ -d "${DOCS_DIR}" ]; then
   serve_docs
 else
   make docs && serve_docs

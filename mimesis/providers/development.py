@@ -24,9 +24,7 @@ class Development(BaseProvider):
         self._now = datetime.now()
 
     class Meta:
-        """Class for metadata."""
-
-        name: t.Final[str] = "development"
+        name = "development"
 
     def dsn(self, dsn_type: t.Optional[DSNType] = None, **kwargs: t.Any) -> str:
         """Generates a random DSN (Data Source Name).

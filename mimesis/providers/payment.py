@@ -32,9 +32,7 @@ class Payment(BaseProvider):
         )
 
     class Meta:
-        """Class for metadata."""
-
-        name: t.Final[str] = "payment"
+        name = "payment"
 
     def cid(self) -> str:
         """Generate a random CID.

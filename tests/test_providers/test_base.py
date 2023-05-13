@@ -1,4 +1,7 @@
+import json
 import re
+import tempfile
+from pathlib import Path
 
 import pytest
 
@@ -68,15 +71,23 @@ class TestBase:
         ],
     )
     def test_load_datafile(self, locale, city):
-        data_provider = BaseDataProvider(locale)
-        data_provider._load_datafile("address.json")
+        class MyProvider(BaseDataProvider):
+            class Meta:
+                name = "my_provider"
+                datafile = "address.json"
+
+        data_provider = MyProvider(locale)
         assert city in data_provider._data["city"]
 
     @pytest.mark.parametrize("locale", list(Locale))
     def test_load_datafile_raises(self, locale):
-        data_provider = BaseDataProvider(locale=locale)
+        class BadProvider(BaseDataProvider):
+            class Meta:
+                name = "bad"
+                datafile = "bad.json"
+
         with pytest.raises(FileNotFoundError):
-            data_provider._load_datafile("something.json")
+            BadProvider(locale=locale)
 
     def test_extract(self, base_data_provider):
         dictionary = {"names": {"female": "Ariel", "male": "John"}}
@@ -84,22 +95,22 @@ class TestBase:
         base_data_provider._data = dictionary
 
         a = list(sorted(dictionary["names"].keys()))
-        b = list(sorted(base_data_provider._extract(["names"]).keys()))
+        b = list(sorted(base_data_provider.extract(["names"]).keys()))
 
-        assert base_data_provider._extract(["names", "male"]) == "John"
-        assert base_data_provider._extract(["names", "female"]) == "Ariel"
-        assert base_data_provider._extract(["names", "other"], default="Sam") == "Sam"
+        assert base_data_provider.extract(["names", "male"]) == "John"
+        assert base_data_provider.extract(["names", "female"]) == "Ariel"
+        assert base_data_provider.extract(["names", "other"], default="Sam") == "Sam"
         assert a == b
 
         with pytest.raises(ValueError):
-            assert base_data_provider._extract([])
+            assert base_data_provider.extract([])
 
     def test_extract_missing_positional_arguments(self, base_data_provider):
         with pytest.raises(TypeError):
-            assert base_data_provider._extract(default=None)
+            assert base_data_provider.extract(default=None)
 
         with pytest.raises(TypeError):
-            assert base_data_provider._extract()
+            assert base_data_provider.extract()
 
     def test_update_dict(self, base_data_provider):
         first = {
@@ -177,6 +188,43 @@ class TestBase:
     def test_base_wrong_random_type(self):
         with pytest.raises(TypeError):
             BaseProvider(random="")
+
+    @pytest.mark.repeat(5)
+    def test_custom_data_provider(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            datadir = Path(tmpdir).joinpath("en")
+            datadir.mkdir(parents=True, exist_ok=True)
+            file_data = {"key": ["value", "value2", "value3"]}
+
+            with open(datadir / "data.json", "w") as f:
+                json.dump(file_data, f)
+
+            class CustomDataProvider(BaseDataProvider):
+                class Meta:
+                    name = "cdp"
+                    datafile = "data.json"
+                    datadir = Path(tmpdir)
+
+                def val(self):
+                    return self.random.choice(self.extract(["key"]))
+
+            cdp = CustomDataProvider(Locale.EN)
+            assert cdp.val() in file_data["key"]
+
+            class CustomDataProvider(BaseDataProvider):
+                class Meta:
+                    name = "cdp"
+                    datafile = "data.json"
+
+            # Datadir is not set, so this should
+            # raise an error
+            with pytest.raises(FileNotFoundError):
+                CustomDataProvider(Locale.EN)
+
+            # We didn't create a ru folder,
+            # so this should raise an error
+            with pytest.raises(FileNotFoundError):
+                CustomDataProvider(Locale.RU)
 
 
 class TestSeededBase:

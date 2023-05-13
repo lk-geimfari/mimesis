@@ -136,7 +136,8 @@ class TLDType(Enum):
 class FileType(Enum):
     """Provides file types.
 
-    An argument for :meth:`~mimesis.File.extension()` and :meth:`~mimesis.File.file_name()`.
+    An argument for :meth:`~mimesis.File.extension()`
+    and :meth:`~mimesis.File.file_name()`.
     """
 
     SOURCE = "source"

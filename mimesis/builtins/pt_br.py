@@ -1,14 +1,14 @@
 """Specific data provider for Brazil (pt-br)."""
 import typing as t
 
-from mimesis.builtins.base import BaseSpecProvider
 from mimesis.locales import Locale
+from mimesis.providers import BaseDataProvider
 from mimesis.types import MissingSeed, Seed
 
 __all__ = ["BrazilSpecProvider"]
 
 
-class BrazilSpecProvider(BaseSpecProvider):
+class BrazilSpecProvider(BaseDataProvider):
     """Class that provides special data for Brazil (pt-br)."""
 
     def __init__(self, seed: Seed = MissingSeed) -> None:
@@ -16,9 +16,8 @@ class BrazilSpecProvider(BaseSpecProvider):
         super().__init__(locale=Locale.PT_BR, seed=seed)
 
     class Meta:
-        """The name of the provider."""
-
-        name: t.Final[str] = "brazil_provider"
+        name = "brazil_provider"
+        datafile = None
 
     @staticmethod
     def __get_verifying_digit_cpf(cpf: t.List[int], weight: int) -> int:

@@ -14,6 +14,9 @@ from mimesis.types import JSON, MissingSeed, Seed
 
 __all__ = ["BaseDataProvider", "BaseProvider"]
 
+DATADIR: t.Final = Path(__file__).parent.parent / "data"
+LOCALE_SEPARATOR: t.Final = "-"
+
 
 class BaseProvider:
     """This is a base class for all providers.
@@ -114,10 +117,13 @@ class BaseDataProvider(BaseProvider):
         :param seed: Seed to all the random functions.
         """
         super().__init__(seed=seed, *args, **kwargs)
+        # This is a dict with data
+        # loaded from the JSON file.
         self._data: JSON = {}
-        self._datafile: str = ""
+        # Order matters here, since
+        # we have to set up locale first.
         self._setup_locale(locale)
-        self._data_dir = Path(__file__).parent.parent.joinpath("data")
+        self._load_datafile()
 
     def _setup_locale(self, locale: Locale = Locale.DEFAULT) -> None:
         """Set up locale after pre-check.
@@ -130,7 +136,7 @@ class BaseDataProvider(BaseProvider):
         locale_obj = validate_locale(locale)
         self.locale = locale_obj.value
 
-    def _extract(self, keys: t.List[str], default: t.Optional[t.Any] = None) -> t.Any:
+    def extract(self, keys: t.List[str], default: t.Optional[t.Any] = None) -> t.Any:
         """Extracts nested values from JSON file by list of keys.
 
         :param keys: List of keys (order extremely matters).
@@ -158,33 +164,30 @@ class BaseDataProvider(BaseProvider):
                 initial[k] = other[k]
         return initial
 
-    def _load_datafile(self, datafile: str = "") -> None:
+    def _load_datafile(self) -> None:
         """Loads the content from the JSON.
 
-        :param datafile: The name of file.
         :return: The content of the file.
         :raises UnsupportedLocale: Raises if locale is unsupported.
         """
+        locale = self.locale
+        datafile = getattr(self.Meta, "datafile", "")
+        datadir = getattr(self.Meta, "datadir", DATADIR)
+
         if not datafile:
-            datafile = self._datafile
+            return None
 
         def read_file(locale_name: str) -> t.Any:
-            """Pull JSON data from file.
-
-            :param locale_name: Locale name.
-            :return: Content of JSON file as dict.
-            """
-            file_path = Path(self._data_dir) / locale_name / datafile
+            file_path = datadir / locale_name / datafile
             with open(file_path, encoding="utf8") as f:
                 return json.load(f)
 
-        separator = "-"
-        master_locale = self.locale.split(separator).pop(0)
+        master_locale = locale.split(LOCALE_SEPARATOR).pop(0)
 
         data = read_file(master_locale)
 
-        if separator in self.locale:
-            data = self._update_dict(data, read_file(self.locale))
+        if LOCALE_SEPARATOR in locale:
+            data = self._update_dict(data, read_file(locale))
 
         self._data = data
 

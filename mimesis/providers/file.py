@@ -12,18 +12,8 @@ __all__ = ["File"]
 class File(BaseProvider):
     """Class for generate data related to files."""
 
-    def __init__(self, *args: t.Any, **kwargs: t.Any) -> None:
-        """Initialize attributes.
-
-        :param args: Arguments.
-        :param kwargs: Keyword arguments.
-        """
-        super().__init__(*args, **kwargs)
-
     class Meta:
-        """Class for metadata."""
-
-        name: t.Final[str] = "file"
+        name = "file"
 
     def extension(self, file_type: t.Optional[FileType] = None) -> str:
         """Get a random file extension from list.

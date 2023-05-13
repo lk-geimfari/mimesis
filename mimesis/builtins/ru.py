@@ -3,34 +3,34 @@
 import typing as t
 from datetime import datetime
 
-from mimesis.builtins.base import BaseSpecProvider
 from mimesis.enums import Gender
 from mimesis.locales import Locale
+from mimesis.providers import BaseDataProvider
 from mimesis.types import MissingSeed, Seed
 
 __all__ = ["RussiaSpecProvider"]
 
 
-class RussiaSpecProvider(BaseSpecProvider):
+class RussiaSpecProvider(BaseDataProvider):
     """Class that provides special data for Russia (ru)."""
 
     def __init__(self, seed: Seed = MissingSeed) -> None:
         """Initialize attributes."""
         super().__init__(locale=Locale.RU, seed=seed)
-        self._load_datafile(self._datafile)
         self._current_year = str(datetime.now().year)
 
     class Meta:
         """The name of the provider."""
 
-        name: t.Final[str] = "russia_provider"
+        name = "russia_provider"
+        datafile = "builtin.json"
 
     def generate_sentence(self) -> str:
         """Generate sentence from the parts.
 
         :return: Sentence.
         """
-        sentences = self._extract(["sentence"])
+        sentences = self.extract(["sentence"])
         sentence = [
             self.random.choice(sentences[k]) for k in ("head", "p1", "p2", "tail")
         ]
@@ -46,7 +46,7 @@ class RussiaSpecProvider(BaseSpecProvider):
             Алексеевна.
         """
         gender = self.validate_enum(gender, Gender)
-        patronymics: t.List[str] = self._extract(["patronymic", str(gender)])
+        patronymics: t.List[str] = self.extract(["patronymic", str(gender)])
         return self.random.choice(patronymics)
 
     def passport_series(self, year: t.Optional[int] = None) -> str:
@@ -108,19 +108,19 @@ class RussiaSpecProvider(BaseSpecProvider):
         code = "".join(map(str, numbers))
 
         if control_code in (100, 101):
-            snils = code + "00"
-            return snils
+            _snils = code + "00"
+            return _snils
 
         if control_code < 100:
-            snils = code + str(control_code)
-            return snils
+            _snils = code + str(control_code)
+            return _snils
 
         if control_code > 101:
             control_code = control_code % 101
             if control_code == 100:
                 control_code = 0
-            snils = code + f"{control_code:02}"
-            return snils
+            _snils = code + f"{control_code:02}"
+            return _snils
         raise RuntimeError("Must not be reached")
 
     def inn(self) -> str:
@@ -163,10 +163,10 @@ class RussiaSpecProvider(BaseSpecProvider):
         for _ in range(0, 12):
             numbers.append(self.random.randint(1 if _ == 0 else 0, 9))
 
-        ogrn = "".join(map(str, numbers))
-        check_sum = str(int(ogrn) % 11 % 10)
+        _ogrn = "".join(str(i) for i in numbers)
+        check_sum = str(int(_ogrn) % 11 % 10)
 
-        return f"{ogrn}{check_sum}"
+        return f"{_ogrn}{check_sum}"
 
     def bic(self) -> str:
         """Generate random ``BIC`` (Bank ID Code).

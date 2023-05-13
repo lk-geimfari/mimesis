@@ -19,16 +19,9 @@ class Datetime(BaseDataProvider):
     # See: https://git.io/Jf15A
     _CURRENT_YEAR = datetime.now().year
 
-    def __init__(self, *args: t.Any, **kwargs: t.Any) -> None:
-        """Initialize attributes."""
-        super().__init__(*args, **kwargs)
-        self._datafile = "datetime.json"
-        self._load_datafile(self._datafile)
-
     class Meta:
-        """Class for metadata."""
-
-        name: t.Final[str] = "datetime"
+        name = "datetime"
+        datafile = f"{name}.json"
 
     @staticmethod
     def bulk_create_datetimes(
@@ -51,9 +44,10 @@ class Datetime(BaseDataProvider):
 
         .. warning::
 
-            Empty ``**kwargs`` produces **timedelta(0)** which obviously cannot be used as step,
-            so you have to pass valid ``**kwargs`` for :py:class:`datetime.timedelta` which will be
-            used as a step by which ``date_start`` will be incremented until it reaches ``date_end``
+            Empty ``**kwargs`` produces **timedelta(0)** which obviously
+            cannot be used as step, so you have to pass valid ``**kwargs``
+            for :py:class:`datetime.timedelta` which will be used as a step
+            by which ``date_start`` will be incremented until it reaches ``date_end``
             to avoid infinite loop which eventually leads to ``OverflowError``.
 
         See :py:class:`datetime.timedelta` for more details.
@@ -101,7 +95,7 @@ class Datetime(BaseDataProvider):
         :return: Day of the week.
         """
         key = "abbr" if abbr else "name"
-        days: t.List[str] = self._extract(["day", key])
+        days: t.List[str] = self.extract(["day", key])
         return self.random.choice(days)
 
     def month(self, abbr: bool = False) -> str:
@@ -111,7 +105,7 @@ class Datetime(BaseDataProvider):
         :return: Month name.
         """
         key = "abbr" if abbr else "name"
-        months: t.List[str] = self._extract(["month", key])
+        months: t.List[str] = self.extract(["month", key])
         return self.random.choice(months)
 
     def year(self, minimum: int = 1990, maximum: int = _CURRENT_YEAR) -> int:
@@ -135,7 +129,7 @@ class Datetime(BaseDataProvider):
 
         :return: Periodicity.
         """
-        periodicity: t.List[str] = self._extract(["periodicity"])
+        periodicity: t.List[str] = self.extract(["periodicity"])
         return self.random.choice(periodicity)
 
     def date(self, start: int = 2000, end: int = _CURRENT_YEAR) -> Date:
@@ -162,7 +156,7 @@ class Datetime(BaseDataProvider):
         date_obj = self.date(**kwargs)
 
         if not fmt:
-            fmt = self._extract(["formats", "date"])
+            fmt = self.extract(["formats", "date"])
 
         return date_obj.strftime(fmt)
 
@@ -189,7 +183,7 @@ class Datetime(BaseDataProvider):
         time_obj = self.time()
 
         if not fmt:
-            fmt = self._extract(["formats", "time"])
+            fmt = self.extract(["formats", "time"])
         return time_obj.strftime(fmt)
 
     def day_of_month(self) -> int:
@@ -252,8 +246,8 @@ class Datetime(BaseDataProvider):
         dt_obj = self.datetime(**kwargs)
 
         if not fmt:
-            date_fmt = self._extract(["formats", "date"])
-            time_fmt = self._extract(["formats", "time"])
+            date_fmt = self.extract(["formats", "date"])
+            time_fmt = self.extract(["formats", "time"])
             fmt = f"{date_fmt} {time_fmt}"
 
         return dt_obj.strftime(fmt)
