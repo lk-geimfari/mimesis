@@ -13,8 +13,8 @@ If any of the following statements is true, move the type to this file:
 """
 
 import datetime
-from typing import Set, Optional, Dict, List, Any, Final, Union, Tuple, Callable
 from decimal import Decimal
+from typing import Any, Callable, Dict, Final, List, Optional, Set, Tuple, Union
 
 __all__ = [
     "CallableSchema",
