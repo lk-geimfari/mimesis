@@ -370,6 +370,7 @@ Let's take a look at the example:
 .. code:: python
 
     from mimesis.locales import Locale
+    from mimesis.keys import maybe
     from mimesis.schema import Field, Schema
 
     _ = Field(locale=Locale.EN)

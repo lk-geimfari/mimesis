@@ -13,8 +13,8 @@ if [[ ! -z "$CHECK" ]]; then
   echo 'Running lint check'
 fi
 
-poetry run isort mimesis tests $CHECK
-poetry run black mimesis tests $CHECK
+poetry run isort mimesis tests examples $CHECK
+poetry run black mimesis tests examples $CHECK
 poetry run autoflake \
   --remove-all-unused-imports \
   --recursive \
@@ -22,4 +22,4 @@ poetry run autoflake \
   --in-place \
   --exclude=__init__.py \
   --quiet \
-  mimesis tests $CHECK
+  mimesis tests examples $CHECK

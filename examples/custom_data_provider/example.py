@@ -10,15 +10,15 @@ class CustomDataProvider(BaseDataProvider):
     class Meta:
         # Name of provider, which will be used when
         # you add this provider to mimesis.Generic.
-        name = 'custom_provider'
+        name = "custom_provider"
         # Name of json file for this provider.
-        datafile = 'data.json'
+        datafile = "data.json"
         # Directory where json file for this provider is located.
         # Must an instance of pathlib.Path.
-        datadir = BASE_DIR / 'datadir'
+        datadir = BASE_DIR / "datadir"
 
     def my_method(self):
-        return self.random.choice(self.extract(['key']))
+        return self.random.choice(self.extract(["key"]))
 
 
 custom_en = CustomDataProvider(locale=Locale.EN)
