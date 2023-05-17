@@ -121,8 +121,9 @@ class Generic(BaseProvider):
         Overrides method `BaseProvider.reseed()`.
 
         :param seed: Seed for random.
+        :return: None.
         """
-        # Ensure that we reseed the random generator on Generic itself.
+        # Make sure to reseed the random generator on Generic itself.
         super().reseed(seed)
 
         for attr in self.__dir__():
@@ -136,9 +137,10 @@ class Generic(BaseProvider):
         """Add a custom provider to Generic() object.
 
         :param cls: Custom provider.
-        :return: None
+        :param kwargs: Keyword arguments for provider.
         :raises TypeError: if cls is not class or is not a subclass
             of BaseProvider.
+        :return: Absolutely none.
         """
         if inspect.isclass(cls):
             if not issubclass(cls, BaseProvider):
@@ -151,6 +153,7 @@ class Generic(BaseProvider):
             except AttributeError:
                 name = cls.__name__.lower()
 
+            # Enforce the same seed is used across all providers.
             if "seed" in kwargs:
                 kwargs.pop("seed")
 
@@ -159,7 +162,23 @@ class Generic(BaseProvider):
             raise TypeError("The provider must be a class")
 
     def add_providers(self, *providers: t.Type[BaseProvider]) -> None:
-        """Add a lot of custom providers to Generic() object.
+        """Add numerous custom providers to the :class:`Generic` object.
+
+        This method is a convenience method for adding multiple providers
+        at once. It is equivalent to calling :meth:`add_provider` for each
+        provider in the list of providers.
+
+        Example:
+
+        >>> from mimesis import Generic
+        >>> from myproviders import ProviderA, ProviderB
+        >>> g = Generic()
+        >>> g.add_providers(ProviderA, ProviderB)
+        >>> g.providera.never()
+        >>> g.providerb.gonna()
+
+        If you want to pass keyword arguments to the providers, you can
+        do so by using :meth:`add_provider` instead.
 
         :param providers: Custom providers.
         :return: None
