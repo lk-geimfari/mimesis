@@ -19,6 +19,12 @@ and **\**kwargs** of the method *method*, after that you should
 describe the schema in lambda function (or any other callable object) and pass it to
 the object :class:`~mimesis.schema.Schema` and call method :meth:`~mimesis.schema.Schema.create`.
 
+.. warning::
+
+    The `schema` **should be wrapped in a callable object** to ensure that it is evaluated
+    dynamically, rather than just once, resulting in the same data being generated for each iteration.
+
+
 Example of usage:
 
 .. code:: python
