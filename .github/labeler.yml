@@ -9,3 +9,7 @@ documentation:
 
 tests:
   - tests/*
+
+dependencies:
+  - pyproject.toml
+  - poetry.lock
