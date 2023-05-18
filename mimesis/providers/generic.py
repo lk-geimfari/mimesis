@@ -138,10 +138,11 @@ class Generic(BaseProvider):
 
         :param cls: Custom provider.
         :param kwargs: Keyword arguments for provider.
-        :raises TypeError: if cls is not class or is not a subclass
-            of BaseProvider.
+        :raises TypeError: if cls is Generic, if cls is not
+            class or is not a subclass of BaseProvider.
         :return: Absolutely none.
         """
+
         if inspect.isclass(cls):
             if not issubclass(cls, BaseProvider):
                 raise TypeError(
@@ -154,10 +155,12 @@ class Generic(BaseProvider):
                 name = cls.__name__.lower()
 
             # Enforce the same seed is used across all providers.
-            if "seed" in kwargs:
-                kwargs.pop("seed")
+            kwargs.pop("seed", None)
 
-            setattr(self, name, cls(seed=self.seed, **kwargs))
+            instance = cls(seed=self.seed, **kwargs)
+            if isinstance(instance, Generic):
+                raise TypeError("Cannot add Generic instance to itself.")
+            setattr(self, name, instance)
         else:
             raise TypeError("The provider must be a class")
 

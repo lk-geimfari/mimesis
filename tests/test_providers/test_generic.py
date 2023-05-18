@@ -104,6 +104,14 @@ class TestGeneric:
         generic.add_provider(UnnamedProvider)
         assert generic.unnamedprovider.nothing() is None
 
+    def test_add_provider_generic_to_generic(self, generic):
+        with pytest.raises(TypeError):
+            generic.add_provider(Generic)
+
+    def test_add_providers_generic_to_generic(self, generic):
+        with pytest.raises(TypeError):
+            generic.add_providers(Generic)
+
     def test_add_provider(self, generic):
         class CustomProvider(BaseProvider):
             def __init__(self, seed, a, b, c):
