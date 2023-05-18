@@ -40,8 +40,9 @@ Example of usage:
                 "token": _("token_hex"),
                 "creator": _("full_name", gender=Gender.FEMALE),
             },
-        iterations=2
-    })
+        },
+        iterations=2,
+    )
     schema.create()
 
 
