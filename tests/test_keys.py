@@ -39,7 +39,7 @@ def test_maybe():
         ),
     ],
 )
-def test_romanize_russian_string(locale, string, expected):
+def test_romanize_cyrillic_string(locale, string, expected):
     assert romanize(locale)(string) == expected
 
 
