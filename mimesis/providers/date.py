@@ -253,7 +253,7 @@ class Datetime(BaseDataProvider):
         return dt_obj.strftime(fmt)
 
     def timestamp(self, posix: bool = True, **kwargs: t.Any) -> t.Union[str, int]:
-        """Generate random timestamp.
+        """Generate random timestamp in ISO 8601 or POSIX format.
 
         :param posix: POSIX time.
         :param kwargs: Kwargs for :meth:`~Datetime.datetime()`.
