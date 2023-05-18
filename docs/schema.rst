@@ -357,14 +357,10 @@ Here is an example of how to do this:
     >>> from mimesis.locales import Locale
 
     >>> field = Field(Locale.EN, seed=42)
-    >>> key_fb = lambda r, rnd: rnd.choice(["foo", "bar"]) + r
+    >>> foobarify = lambda val, rand: rand.choice(["foo", "bar"]) + val
 
-    >>> field("email", key=key_fb)
-    'bazany1925@gmail.com'
-
-    >>> field = Field(Locale.EN, seed=42)
-    >>> field("email", key=key_fb)
-    'bazany1925@gmail.com'
+    >>> field("email", key=foobarify)
+    'fooany1925@gmail.com'
 
 
 Export Data to JSON, CSV or Pickle
