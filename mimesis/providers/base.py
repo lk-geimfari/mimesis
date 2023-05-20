@@ -5,17 +5,14 @@ import json
 import operator
 import typing as t
 from functools import reduce
-from pathlib import Path
 
 from mimesis import random as _random
+from mimesis.constants import DATADIR, LOCALE_SEP
 from mimesis.exceptions import NonEnumerableError
 from mimesis.locales import Locale, validate_locale
 from mimesis.types import JSON, MissingSeed, Seed
 
 __all__ = ["BaseDataProvider", "BaseProvider"]
-
-DATADIR: t.Final = Path(__file__).parent.parent / "data"
-LOCALE_SEPARATOR: t.Final = "-"
 
 
 class BaseProvider:
@@ -182,11 +179,11 @@ class BaseDataProvider(BaseProvider):
             with open(file_path, encoding="utf8") as f:
                 return json.load(f)
 
-        master_locale = locale.split(LOCALE_SEPARATOR).pop(0)
+        master_locale = locale.split(LOCALE_SEP).pop(0)
 
         data = read_file(master_locale)
 
-        if LOCALE_SEPARATOR in locale:
+        if LOCALE_SEP in locale:
             data = self._update_dict(data, read_file(locale))
 
         self._data = data

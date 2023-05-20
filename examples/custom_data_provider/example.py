@@ -3,8 +3,6 @@ from pathlib import Path
 from mimesis import BaseDataProvider
 from mimesis.locales import Locale
 
-BASE_DIR = Path(__file__).parent
-
 
 class CustomDataProvider(BaseDataProvider):
     class Meta:
@@ -15,9 +13,9 @@ class CustomDataProvider(BaseDataProvider):
         datafile = "data.json"
         # Directory where json file for this provider is located.
         # Must an instance of pathlib.Path.
-        datadir = BASE_DIR / "datadir"
+        datadir = Path(__file__).parent.joinpath("datadir")
 
-    def my_method(self):
+    def my_method(self) -> str:
         return self.random.choice(self.extract(["key"]))
 
 
