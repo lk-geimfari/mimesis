@@ -77,11 +77,15 @@ You can find the complete documentation on the `Read the Docs <https://mimesis.n
 It is divided into several sections:
 
 -  `About Mimesis <https://mimesis.name/en/latest/about.html>`_
--  `Getting Started <https://mimesis.name/en/latest/getting_started.html>`_
--  `Tips and Tricks <https://mimesis.name/en/latest/tips.html>`_
--  `API Reference <https://mimesis.name/en/latest/api.html>`_
--  `Contributing <https://mimesis.name/en/latest/contributing.html>`_
--  `Changelog <https://mimesis.name/en/latest/changelog.html>`_
+-  `Quickstart <https://mimesis.name/en/master/quickstart.html>`_
+-  `Locales <https://mimesis.name/en/master/locales.html>`_
+-  `Data Providers <https://mimesis.name/en/master/providers.html>`_
+-  `Structured Data Generation <https://mimesis.name/en/master/schema.html>`_
+-  `Random and Seed <https://mimesis.name/en/master/random_and_seed.html>`_
+-  `Tricks and Tips <https://mimesis.name/en/master/tips.html>`_
+-  `API Reference <https://mimesis.name/en/master/index.html#api-reference>`_
+-  `Additional Information <https://mimesis.name/en/master/index.html#additional-information>`_
+-  `Changelog <https://mimesis.name/en/master/index.html#changelog>`_
 
 You can improve it by sending pull requests to this repository.
 
