@@ -59,15 +59,15 @@ To prevent unintended upgrades, it is highly advisable to always specify the ver
 Supported Features
 ------------------
 
-- **Easy**: A simple design and clear documentation for easy and swift data generation.
-- **Multilingual**: Mimesis generates data in a vast range of `languages <https://mimesis.name/en/latest/getting_started.html#supported-locales>`_.
-- **Performance**: Mimesis has excellent performance and is widely regarded as the fastest data generator among all Python solutions available.
-- **Data variety**: Mimesis supports a broad range of data providers, including names, addresses, phone numbers, email addresses, dates, times, and more, enabling users to generate data for various purposes.
-- **Country-specific data providers**: Mimesis supports country-specific data providers for generating country-specific data.
-- **Extensibility**: Mimesis is extensible, allowing developers to create and integrate their own data providers with the library.
-- **Generic data provider**: Mimesis provides a generic data provider that offers easy access to all the available data providers within the library from a single object.
-- **Zero hard dependencies**: Mimesis has zero hard dependencies and does not require the installation of any thrid-party libraries.
-- **Schema-based generators**: Mimesis provides schema-based data generators, offering an effortless way to produce data by the schema of any complexity.
+- **Easy**: Mimesis offers a simple design and clear documentation for easy data generation.
+- **Multilingual**: Mimesis can generate data in multiple languages.
+- **Performance**: Widely recognized as the fastest data generator among Python solutions.
+- **Data variety**: Mimesis includes various data providers for names, addresses, phone numbers, email addresses, dates, times, and more, catering to different use cases.
+- **Country-specific data providers**: Mimesis supports country-specific data providers for generating region-specific data.
+- **Extensibility**: Developers can extend Mimesis by creating and integrating their own data providers.
+- **Generic data provider**: Mimesis provides a single object that grants easy access to all available data providers in the library.
+- **Zero hard dependencies**: Mimesis has no hard dependencies, eliminating the need for additional third-party libraries.
+- **Schema-based generators**: Mimesis offers schema-based data generators to effortlessly produce data of any complexity.
 
 Documentation
 -------------
