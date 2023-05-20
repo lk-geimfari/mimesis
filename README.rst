@@ -133,13 +133,13 @@ Here's how it operates practically:
     >>> from mimesis.locales import Locale
     >>> from mimesis.enums import Gender
 
-    >>> de = Person(locale=Locale.DE)
-    >>> en = Person(locale=Locale.EN)
+    >>> person_de = Person(locale=Locale.DE)
+    >>> person_en = Person(locale=Locale.EN)
 
-    >>> de.full_name(gender=Gender.FEMALE)
+    >>> person_de.full_name(gender=Gender.FEMALE)
     'Sabrina Gutermuth'
 
-    >>> en.full_name(gender=Gender.MALE)
+    >>> person_en.full_name(gender=Gender.MALE)
     'Layne Gallagher'
 
 
