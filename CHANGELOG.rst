@@ -10,7 +10,7 @@ Version 10.0.0
 
 **Removed**:
 
-- Removed method ``swear_word()`` of ``Text()``.
+- Removed method ``swear_word()`` of ``Text()``. This method is inappropriate and lacks practical utility.
 
 
 Version 9.0.0
