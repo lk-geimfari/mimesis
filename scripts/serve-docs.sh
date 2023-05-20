@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-PORT=8888
+PORT=8887
 URL=http://localhost:${PORT}
 DOCS_DIR="docs/_build/html"
 
