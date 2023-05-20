@@ -72,18 +72,18 @@ Supported Features
 Documentation
 -------------
 
-You can find the complete documentation on the `Read the Docs <https://mimesis.name/en/latest/>`_.
+You can find the complete documentation on the `Read the Docs`_.
 
 It is divided into several sections:
 
 -  `About Mimesis <https://mimesis.name/en/latest/about.html>`_
 -  `Quickstart <https://mimesis.name/en/master/quickstart.html>`_
--  `Locales <https://mimesis.name/en/master/locales.html>`_
--  `Data Providers <https://mimesis.name/en/master/providers.html>`_
+-  `Locales`_
+-  `Data Providers`_
 -  `Structured Data Generation <https://mimesis.name/en/master/schema.html>`_
 -  `Random and Seed <https://mimesis.name/en/master/random_and_seed.html>`_
 -  `Tricks and Tips <https://mimesis.name/en/master/tips.html>`_
--  `API Reference <https://mimesis.name/en/master/index.html#api-reference>`_
+-  `API Reference`_
 -  `Additional Information <https://mimesis.name/en/master/index.html#additional-information>`_
 -  `Changelog <https://mimesis.name/en/master/index.html#changelog>`_
 
@@ -123,7 +123,7 @@ More about the other providers you can read in our `documentation`_.
 Locales
 -------
 
-Mimesis presently encompasses 34 distinct `locales`_, enabling users to specify the desired region and language when creating providers.
+Mimesis presently encompasses 34 distinct locales, enabling users to specify the desired region and language when creating providers.
 
 Here's how it operates practically:
 
@@ -143,14 +143,12 @@ Here's how it operates practically:
     'Layne Gallagher'
 
 
-.. _locales: https://mimesis.name/en/latest/getting_started.html#supported-locales
-
 Providers
 ---------
 
 Mimesis provides more than twenty data providers which can generate a broad range of data related to food, transportation, computer hardware, people, internet, addresses, and more.
 
-See `API Reference <https://mimesis.name/en/latest/api.html>`_ and `Data Providers <https://mimesis.name/en/latest/getting_started.html#data-providers>`_ for more info.
+See `API Reference`_ and `Data Providers`_ for more info.
 
 How to Contribute
 -----------------
@@ -180,4 +178,8 @@ License
 Mimesis is licensed under the MIT License. See `LICENSE`_ for more
 information.
 
+.. _Locales: https://mimesis.name/en/master/locales.html
 .. _LICENSE: https://github.com/lk-geimfari/mimesis/blob/master/LICENSE
+.. _API Reference: https://mimesis.name/en/master/api.html
+.. _Data Providers: https://mimesis.name/en/master/getting_started.html#data-providers
+.. _Read the Docs: https://mimesis.name/en/master/
