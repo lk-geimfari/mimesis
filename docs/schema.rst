@@ -31,25 +31,31 @@ Example of usage:
 
     from mimesis.enums import Gender
     from mimesis.locales import Locale
-    from mimesis.schema import Field, Schema
+    from mimesis.schema import Field, Fieldset, Schema
 
-    _ = Field(locale=Locale.EN)
+    field = Field(locale=Locale.EN)
+    fieldset = Fieldset(locale=Locale.EN)
+
     schema = Schema(
         schema=lambda: {
-            "pk": _("increment"),
-            "uid": _("uuid"),
-            "name": _("text.word"),
-            "version": _("version", pre_release=True),
-            "timestamp": _("timestamp", posix=False),
+            "pk": field("increment"),
+            "uid": field("uuid"),
+            "name": field("text.word"),
+            "version": field("version", pre_release=True),
+            "timestamp": field("timestamp", posix=False),
             "owner": {
-                "email": _("person.email", domains=["test.com"]),
-                "token": _("token_hex"),
-                "creator": _("full_name", gender=Gender.FEMALE),
+                "email": field("person.email", domains=["mimesis.name"]),
+                "token": field("token_hex"),
+                "creator": field("full_name", gender=Gender.FEMALE),
             },
+            "apps": fieldset(
+                "text.word", i=5, key=lambda name: {"name": name, "id": field("uuid")}
+            ),
         },
         iterations=2,
     )
     schema.create()
+
 
 
 Output:
@@ -58,29 +64,49 @@ Output:
 
     [
       {
-        "pk": 1,
-        "uid": "c1b2fda1-762b-4c0b-aef7-e995e19758b6",
-        "name": "brother",
-        "version": "3.0.6-alpha.9",
-        "timestamp": "2016-12-07T13:26:54Z",
+        "apps": [
+          {
+            "id": "680b1947-e747-44a5-aec2-3558491cac34",
+            "name": "exit"
+          },
+          {
+            "id": "2c030612-229a-4415-8caa-82e070604f02",
+            "name": "requirement"
+          }
+        ],
+        "name": "undergraduate",
         "owner": {
-          "email": "tewing1841@test.com",
-          "token": "09960ce907dee56a3c4a6730b7e1ff6ad9620b878c68ff978bfe296da09c1b4b",
-          "creator": "Travis Burton"
-        }
+          "creator": "Temple Martinez",
+          "email": "franklin1919@mimesis.name",
+          "token": "18c9c17aa696fd502f27a1e9d5aff5a4e0394133491358fb85c59d07eafd2694"
+        },
+        "pk": 1,
+        "timestamp": "2005-04-30T10:37:26Z",
+        "uid": "1d30ca34-349b-4852-a9b8-dc2ecf6c7b20",
+        "version": "0.4.8-alpha.11"
       },
       {
-        "pk": 2,
-        "uid": "b0f33a7e-0e3e-4bf0-92df-3ba869add555",
-        "name": "disney",
-        "version": "2.6.0-alpha.11",
-        "timestamp": "2017-02-11T10:45:27Z",
+        "apps": [
+          {
+            "id": "e5505358-b090-4784-9148-f2acce8d3451",
+            "name": "taste"
+          },
+          {
+            "id": "2903c277-826d-4deb-9e71-7b9fe061fc3f",
+            "name": "upcoming"
+          }
+        ],
+        "name": "advisory",
         "owner": {
-          "email": "cyprus1904@test.com",
-          "token": "a087fadffce394141d3e93c895e4da6db906a60fd0886bad909dc179861b4650",
-          "creator": "Dot Anderson"
-        }
-      },
+          "creator": "Arlena Moreno",
+          "email": "progress2030@mimesis.name",
+          "token": "72f0102513053cd8942eaa85c0e0ffea47eed424e40eeb9cb5ba0f45880c2893"
+        },
+        "pk": 2,
+        "timestamp": "2021-02-24T04:46:00Z",
+        "uid": "951cd971-a6a4-4cdc-9c7d-79a2245ac4a0",
+        "version": "6.0.0-beta.5"
+      }
     ]
 
 
@@ -97,12 +123,12 @@ to change this behavior should be passed parameter *providers* with a sequence o
          builtins.RussiaSpecProvider,
          builtins.NetherlandsSpecProvider,
     )
-    _ = Field(Locale.EN, providers=custom_providers)
+    field = Field(Locale.EN, providers=custom_providers)
 
-    _('snils')
+    field('snils')
     # Output: '239-315-742-84'
 
-    _('bsn')
+    field('bsn')
     # Output: '657340522'
 
 
@@ -376,13 +402,13 @@ Let's take a look at the example:
     from mimesis.keys import maybe
     from mimesis.schema import Field, Schema
 
-    _ = Field(locale=Locale.EN)
+    field = Field(locale=Locale.EN)
     schema = Schema(
         schema=lambda: {
-            "pk": _("increment"),
-            "name": _("text.word", key=maybe("N/A", probability=0.2)),
-            "version": _("version"),
-            "timestamp": _("timestamp", posix=False),
+            "pk": field("increment"),
+            "name": field("text.word", key=maybe("N/A", probability=0.2)),
+            "version": field("version"),
+            "timestamp": field("timestamp", posix=False),
         },
         iterations=1000
     )
