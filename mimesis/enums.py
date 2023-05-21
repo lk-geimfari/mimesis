@@ -9,9 +9,8 @@ there no guarantee that you will get the result which you actually expected.
 
 Below you can see an example of usage enums in methods of data providers.
 """
-
 import typing as t
-from enum import Enum
+from enum import Enum, auto
 
 
 class Locale(Enum):
@@ -342,3 +341,9 @@ class DSNType(Enum):
     COUCHBASE = ("couchbase", 8092)
     MEMCACHED = ("memcached", 11211)
     RABBITMQ = ("rabbitmq", 5672)
+
+
+class TimestampFormat(Enum):
+    POSIX = auto()
+    ISO_8601 = auto()
+    RFC_3339 = auto()

@@ -5,7 +5,8 @@ import pytest
 
 from mimesis import Datetime
 from mimesis.data import GMT_OFFSETS, TIMEZONES
-from mimesis.enums import TimezoneRegion
+from mimesis.enums import TimestampFormat, TimezoneRegion
+from mimesis.exceptions import NonEnumerableError
 
 from . import patterns
 
@@ -46,6 +47,7 @@ class TestDatetime:
         with pytest.raises(ValueError):
             _datetime.bulk_create_datetimes(None, None)
 
+        # Empty **kwargs for timedelta must raise an error.
         with pytest.raises(ValueError):
             _datetime.bulk_create_datetimes(
                 date_start, date_start + datetime.timedelta(days=1)
@@ -140,16 +142,27 @@ class TestDatetime:
         assert region in set([tz.split("/")[0] for tz in TIMEZONES])
 
     @pytest.mark.parametrize(
-        "posix, _type",
+        "fmt, out_type, kwargs",
         [
-            (False, str),
-            (True, int),
+            (TimestampFormat.POSIX, int, {}),
+            (TimestampFormat.RFC_3339, str, {"start": 2023, "end": 2023}),
+            (TimestampFormat.ISO_8601, str, {}),
         ],
     )
-    def test_timestamp(self, _datetime, posix, _type):
-        result = _datetime.timestamp(posix)
+    def test_timestamp(self, _datetime, fmt, out_type, kwargs):
+        result = _datetime.timestamp(fmt=fmt, **kwargs)
         assert result is not None
-        assert isinstance(result, _type)
+        assert isinstance(result, out_type)
+
+        start = kwargs.get("start")
+        end = kwargs.get("end")
+
+        if start and end:
+            year = int(result[:4])
+            assert start <= year <= end
+
+        with pytest.raises(NonEnumerableError):
+            _datetime.timestamp(fmt="Blabla")
 
     @pytest.mark.parametrize(
         "start, end, timezone",
@@ -259,9 +272,9 @@ class TestSeededDatetime:
             region=TimezoneRegion.EUROPE
         )
 
-    def test_timestamp(self, d1, d2):
-        assert d1.timestamp() == d2.timestamp()
-        assert d1.timestamp(posix=False) == d2.timestamp(posix=False)
+    @pytest.mark.parametrize("fmt", TimestampFormat)
+    def test_timestamp(self, d1, d2, fmt):
+        assert d1.timestamp(fmt) == d2.timestamp(fmt)
 
     def test_formatted_datetime(self, d1, d2):
         assert d1.formatted_datetime() == d2.formatted_datetime()

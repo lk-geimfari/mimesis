@@ -1,12 +1,12 @@
 """Provider of data related to date and time."""
 
 import typing as t
-from calendar import monthrange, timegm
+from calendar import monthrange
 from datetime import date, datetime, time, timedelta
 
 from mimesis.compat import pytz
 from mimesis.data import GMT_OFFSETS, ROMAN_NUMS, TIMEZONES
-from mimesis.enums import TimezoneRegion
+from mimesis.enums import TimestampFormat, TimezoneRegion
 from mimesis.providers.base import BaseDataProvider
 from mimesis.types import Date, DateTime, Time
 
@@ -213,7 +213,7 @@ class Datetime(BaseDataProvider):
 
     def datetime(
         self,
-        start: int = 2000,
+        start: int = _CURRENT_YEAR,
         end: int = _CURRENT_YEAR,
         timezone: t.Optional[str] = None,
     ) -> DateTime:
@@ -252,16 +252,39 @@ class Datetime(BaseDataProvider):
 
         return dt_obj.strftime(fmt)
 
-    def timestamp(self, posix: bool = True, **kwargs: t.Any) -> t.Union[str, int]:
-        """Generate random timestamp in ISO 8601 or POSIX format.
+    def timestamp(
+        self, fmt: TimestampFormat = TimestampFormat.POSIX, **kwargs: t.Any
+    ) -> t.Union[str, int]:
+        """Generate random timestamp in given format.
 
-        :param posix: POSIX time.
+        Supported formats are:
+
+        - TimestampFormat.POSIX
+        - TimestampFormat.RFC_3339
+        - TimestampFormat.ISO_8601
+
+        Example:
+
+        >>> from mimesis import Datetime
+        >>> from mimesis.enums import TimestampFormat
+        >>> dt = Datetime()
+        >>> dt.timestamp(fmt=TimestampFormat.POSIX)
+        1697322442
+        >>> dt.timestamp(fmt=TimestampFormat.RFC_3339)
+        '2023-12-08T18:46:34'
+        >>> dt.timestamp(fmt=TimestampFormat.ISO_8601)
+        '2009-05-30T21:45:57.328600'
+
+        :param fmt: Format of timestamp (Default is TimestampFormat.POSIX).
         :param kwargs: Kwargs for :meth:`~Datetime.datetime()`.
         :return: Timestamp.
         """
+        self.validate_enum(fmt, TimestampFormat)
         stamp = self.datetime(**kwargs)
 
-        if posix:
-            return timegm(stamp.utctimetuple())
-
-        return stamp.strftime("%Y-%m-%dT%H:%M:%SZ")
+        if fmt == TimestampFormat.RFC_3339:
+            return stamp.strftime("%Y-%m-%dT%H:%M:%SZ")
+        elif fmt == TimestampFormat.ISO_8601:
+            return stamp.isoformat()
+        else:
+            return int(stamp.timestamp())

@@ -29,7 +29,7 @@ Example of usage:
 
 .. code:: python
 
-    from mimesis.enums import Gender
+    from mimesis.enums import Gender, TimestampFormat
     from mimesis.locales import Locale
     from mimesis.schema import Field, Fieldset, Schema
 
@@ -42,7 +42,7 @@ Example of usage:
             "uid": field("uuid"),
             "name": field("text.word"),
             "version": field("version", pre_release=True),
-            "timestamp": field("timestamp", posix=False),
+            "timestamp": field("timestamp", fmt=TimestampFormat.POSIX),
             "owner": {
                 "email": field("person.email", domains=["mimesis.name"]),
                 "token": field("token_hex"),
@@ -398,6 +398,7 @@ Let's take a look at the example:
 
 .. code:: python
 
+    from mimesis.enums import TimestampFormat
     from mimesis.locales import Locale
     from mimesis.keys import maybe
     from mimesis.schema import Field, Schema
@@ -408,7 +409,7 @@ Let's take a look at the example:
             "pk": field("increment"),
             "name": field("text.word", key=maybe("N/A", probability=0.2)),
             "version": field("version"),
-            "timestamp": field("timestamp", posix=False),
+            "timestamp": field("timestamp", TimestampFormat.RFC_3339),
         },
         iterations=1000
     )
