@@ -1,3 +1,20 @@
+Version 11.0.0
+--------------
+
+**Added**:
+
+- Added a new enum ``TimestampFormat`` for the ``timestamp()`` method.
+
+**Updated**:
+
+- The method ``timestamp()`` for ``Datetime()`` now expects one of the following timestamp formats: `TimestampFormat.POSIX`, `TimestampFormat.RFC_3339`, or `TimestampFormat.ISO_8601`.
+- The ``datetime()`` method now has default parameters start and end set to the current year.
+
+**Removed**:
+
+- The method `timestamp()` no longer accepts the ``posix`` parameter.
+
+
 Version 10.0.0
 --------------
 
