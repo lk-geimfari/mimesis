@@ -169,8 +169,7 @@ How to Contribute
 Disclaimer
 ----------
 
-The creators of `Mimesis` do not hold themselves accountable for how you employ the library's functionalities or the data generated with it.
-Mimesis is designed to facilitate testing and with good intentions. Mimesis should not be used for illicit purposes.
+The creators of ``mimesis`` are not responsible for how you use the library or the data it generates. Mimesis is meant for testing purposes and should not be used for illegal activities.
 
 License
 -------
