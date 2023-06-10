@@ -117,15 +117,6 @@ div.highlight pre, table.highlighttable pre {
         border-bottom: none;
     }
 
-    /*.reference:hover {*/
-    /*    border-bottom: none;*/
-    /*    text-decoration: underline;*/
-    /*}*/
-
-    /*a.reference {*/
-    /*    color: #539bf5;*/
-    /*}*/
-
     a {
         color: #539bf5;
         border-bottom: none;
