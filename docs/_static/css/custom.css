@@ -197,7 +197,8 @@ div.highlight pre, table.highlighttable pre {
     }
 
     .rst-versions .rst-current-version {
-        background-color: #adbac7 !important;
+        background-color: #21272E !important;
+        border: 1px solid #2d333b;
     }
 
 }
