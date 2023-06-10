@@ -196,4 +196,8 @@ div.highlight pre, table.highlighttable pre {
         cursor: pointer;
     }
 
+    .rst-versions .rst-current-version {
+        background-color: #adbac7 !important;
+    }
+
 }
