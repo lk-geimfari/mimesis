@@ -201,4 +201,30 @@ div.highlight pre, table.highlighttable pre {
         border: 1px solid #2d333b;
     }
 
+    .highlight .nf {
+        color: #dcbdfb;
+    }
+
+    .highlight .bp {
+        color: #adbac7;
+    }
+
+    .highlight .nc {
+        color: #f69d50;
+        font-weight: bold;
+    }
+
+    .highlight .mf {
+        color: #6cb6ff;
+    }
+
+    .highlight .nd {
+        color: #adbac7;
+        font-weight: normal;
+    }
+
+    div.sphinxsidebarwrapper p.logo {
+        margin-bottom: 15px;
+    }
+
 }
