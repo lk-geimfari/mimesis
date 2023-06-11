@@ -6,6 +6,14 @@ a.reference:hover {
     border-bottom: 1px rgb(225, 83, 67);
 }
 
+div.body p, div.body dd, div.body li {
+    line-height: 1.5;
+}
+
+body {
+    font-size: 16px;
+}
+
 div.note {
     border-radius: 10px;
 }
