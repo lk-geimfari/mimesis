@@ -94,6 +94,10 @@ div.highlight pre, table.highlighttable pre {
         color: #adbac7;
     }
 
+    #api-reference .reference span.pre {
+        background-color: #21272E; !important;
+    }
+
     div.highlight {
         background-color: #2d333b !important;
         border-radius: 15px;
