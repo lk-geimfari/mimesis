@@ -76,16 +76,16 @@ You can find the complete documentation on the `Read the Docs`_.
 
 It is divided into several sections:
 
--  `About Mimesis <https://mimesis.name/en/latest/about.html>`_
--  `Quickstart <https://mimesis.name/en/master/quickstart.html>`_
+-  `About Mimesis`_
+-  `Quickstart`_
 -  `Locales`_
 -  `Data Providers`_
--  `Structured Data Generation <https://mimesis.name/en/master/schema.html>`_
--  `Random and Seed <https://mimesis.name/en/master/random_and_seed.html>`_
--  `Tricks and Tips <https://mimesis.name/en/master/tips.html>`_
+-  `Structured Data Generation`_
+-  `Random and Seed`_
+-  `Tricks and Tips`_
 -  `API Reference`_
--  `Additional Information <https://mimesis.name/en/master/index.html#additional-information>`_
--  `Changelog <https://mimesis.name/en/master/index.html#changelog>`_
+-  `Additional Information`_
+-  `Changelog`_
 
 You can improve it by sending pull requests to this repository.
 
@@ -116,8 +116,6 @@ For instance, the `Person <https://mimesis.name/en/latest/api.html#person>`_ pro
 
 
 More about the other providers you can read in our `documentation`_.
-
-.. _documentation: https://mimesis.name/en/latest/getting_started.html#data-providers
 
 
 Locales
@@ -162,9 +160,6 @@ How to Contribute
 5. Send a pull request and bug the maintainer until it gets merged and
    published.
 
-.. _contributing guidelines: https://github.com/lk-geimfari/mimesis/blob/master/CONTRIBUTING.rst
-.. _contributors: https://github.com/lk-geimfari/mimesis/blob/master/CONTRIBUTORS.rst
-
 
 Disclaimer
 ----------
@@ -182,3 +177,13 @@ information.
 .. _API Reference: https://mimesis.name/en/master/api.html
 .. _Data Providers: https://mimesis.name/en/master/getting_started.html#data-providers
 .. _Read the Docs: https://mimesis.name/en/master/
+.. _About Mimesis: https://mimesis.name/en/latest/about.html
+.. _Quickstart: https://mimesis.name/en/master/quickstart.html
+.. _Structured Data Generation: https://mimesis.name/en/master/schema.html
+.. _Random and Seed: https://mimesis.name/en/master/random_and_seed.html
+.. _Tricks and Tips: https://mimesis.name/en/master/tips.html
+.. _Additional Information: https://mimesis.name/en/master/index.html#additional-information
+.. _Changelog: https://mimesis.name/en/master/index.html#changelog
+.. _documentation: https://mimesis.name/en/latest/getting_started.html#data-providers
+.. _contributing guidelines: https://github.com/lk-geimfari/mimesis/blob/master/CONTRIBUTING.rst
+.. _contributors: https://github.com/lk-geimfari/mimesis/blob/master/CONTRIBUTORS.rst
