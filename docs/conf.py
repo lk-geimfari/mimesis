@@ -201,7 +201,6 @@ _default_sidebars = [
     "sidebars/head.html",
     "searchbox.html",
     "sidebars/toc.html",
-    "sidebars/support.html",
     "sidebars/follow_me.html",
     "sidebars/useful_links.html",
 ]
