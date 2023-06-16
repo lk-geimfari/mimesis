@@ -239,4 +239,30 @@ div.highlight pre, table.highlighttable pre {
         margin-bottom: 15px;
     }
 
+    div.sphinxsidebar #searchbox input[type="text"] {
+        float: left;
+        width: 80%;
+        padding: 0.25em;
+        box-sizing: border-box;
+        background: #21272E;
+    }
+
+    div.sphinxsidebar input {
+        border: 1px solid #3E4348;
+        color: #ADBAC7;
+    }
+
+    div.sphinxsidebar #searchbox input[type="submit"] {
+        color: #ADBAC7;
+        background: #21272E;
+    }
+
+    input[value="Go"] {
+        background-color: #21272E !important;
+    }
+
+    input[value="Go"]:hover {
+        background-color: #2c2f36 !important;
+    }
+
 }
