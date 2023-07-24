@@ -81,7 +81,7 @@ class TestInternet:
 
     def test_default(self, net):
         uri = net.uri()
-        assert uri.split(":")[0].strip() == "https"
+        assert uri.startswith(URLScheme.HTTPS.value)
 
     @pytest.mark.repeat(10)
     @pytest.mark.parametrize(
