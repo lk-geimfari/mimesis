@@ -43,7 +43,7 @@ class TestHardware:
 
     def test_cpu_frequency(self, hard):
         result = hard.cpu_frequency().split("G")[0]
-        assert float(result) < 4.4
+        assert 1.5 <= float(result) <= 4.3
 
     def test_cpu(self, hard):
         result = hard.cpu()
