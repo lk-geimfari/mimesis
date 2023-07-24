@@ -73,7 +73,7 @@ class TestDatetime:
 
     def test_formatted_date(self, _datetime):
         fmt_date = _datetime.formatted_date("%Y", start=2000, end=2000)
-        assert fmt_date == '2000'
+        assert fmt_date == "2000"
         assert isinstance(fmt_date, str)
 
     def test_formatted_datetime(self, dt):
