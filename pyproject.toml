@@ -70,6 +70,8 @@ sphinx-autodoc-typehints = "^1.19.2"
 isort = "^5.12"
 coverage = "^7.2.3"
 pytest-cov = "^4.0.0"
+matplotlib = "^3.7.2"
+notebook = "^7.0.2"
 
 [tool.poetry.plugins."pytest_randomly.random_seeder"]
 mimesis = "mimesis.entrypoints:pytest_randomly_reseed"
