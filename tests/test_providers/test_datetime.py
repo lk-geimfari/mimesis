@@ -64,7 +64,7 @@ class TestDatetime:
 
     def test_day_of_month(self, _datetime):
         result = _datetime.day_of_month()
-        assert (result >= 1) or (result <= 31)
+        assert 1 <= result <= 31
 
     def test_date(self, dt):
         date_object = dt.date(start=dt._CURRENT_YEAR, end=dt._CURRENT_YEAR)
@@ -73,7 +73,7 @@ class TestDatetime:
 
     def test_formatted_date(self, _datetime):
         fmt_date = _datetime.formatted_date("%Y", start=2000, end=2000)
-        assert int(fmt_date) == 2000
+        assert fmt_date == "2000"
         assert isinstance(fmt_date, str)
 
     def test_formatted_datetime(self, dt):

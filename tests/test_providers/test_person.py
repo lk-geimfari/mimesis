@@ -146,13 +146,12 @@ class TestPerson:
 
     def test_height(self, _person):
         result = _person.height(minimum=1.60, maximum=1.90)
-        assert result.startswith("1")
+        assert 1.6 <= float(result) <= 1.9
         assert isinstance(result, str)
 
     def test_weight(self, _person):
         result = _person.weight(minimum=40, maximum=60)
-        assert result >= 40
-        assert result <= 60
+        assert 40 <= result <= 60
 
     def test_blood_type(self, _person):
         result = _person.blood_type()
