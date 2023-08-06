@@ -1,8 +1,6 @@
 Version 10.2.0
 --------------
 
-*This version is still in development.*
-
 **Added**:
 
 - Added a new method ``system_quality_attribute()`` (and its alias ``ility()``) for ``Development``.
