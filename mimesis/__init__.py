@@ -32,6 +32,13 @@ from mimesis.enums import (
     URLScheme,
     VideoFile,
 )
+from mimesis.exceptions import (
+    FieldError,
+    FieldsetError,
+    LocaleError,
+    NonEnumerableError,
+    SchemaError,
+)
 from mimesis.locales import Locale
 from mimesis.providers import (
     Address,
@@ -58,13 +65,6 @@ from mimesis.providers import (
     Transport,
 )
 from mimesis.schema import Field, Fieldset, Schema
-from mimesis.exceptions import (
-    LocaleError,
-    SchemaError,
-    NonEnumerableError,
-    FieldError,
-    FieldsetError,
-)
 
 __all__ = [
     "Address",
