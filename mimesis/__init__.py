@@ -58,6 +58,13 @@ from mimesis.providers import (
     Transport,
 )
 from mimesis.schema import Field, Fieldset, Schema
+from mimesis.exceptions import (
+    LocaleError,
+    SchemaError,
+    NonEnumerableError,
+    FieldError,
+    FieldsetError,
+)
 
 __all__ = [
     "Address",
@@ -115,6 +122,12 @@ __all__ = [
     "TLDType",
     "URLScheme",
     "VideoFile",
+    # Exceptions:
+    "LocaleError",
+    "SchemaError",
+    "NonEnumerableError",
+    "FieldError",
+    "FieldsetError",
     # Meta:
     "__version__",
     "__title__",
@@ -125,7 +138,7 @@ __all__ = [
     "__license__",
 ]
 
-__version__ = "10.1.0"
+__version__ = "10.2.0"
 __title__ = "mimesis"
 __description__ = "Mimesis: Fake Data Generator."
 __url__ = "https://github.com/lk-geimfari/mimesis"
