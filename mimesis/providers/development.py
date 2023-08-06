@@ -3,7 +3,12 @@
 import typing as t
 from datetime import datetime
 
-from mimesis.data import LICENSES, OS, PROGRAMMING_LANGS
+from mimesis.data import (
+    LICENSES,
+    OS,
+    PROGRAMMING_LANGS,
+    SYSTEM_QUALITY_ATTRIBUTES,
+)
 from mimesis.enums import DSNType
 from mimesis.providers.base import BaseProvider
 from mimesis.providers.internet import Internet
@@ -97,3 +102,22 @@ class Development(BaseProvider):
         :return: True of False.
         """
         return self.random.choice([True, False])
+
+    def system_quality_attribute(self) -> str:
+        """Get a random system quality attribute.
+
+        Within systems engineering, quality attributes are realized
+        non-functional requirements used to evaluate the performance
+        of a system. These are sometimes named "ilities" after the
+        suffix many of the words share.
+
+        :return: System quality attribute.
+        """
+        return self.random.choice(SYSTEM_QUALITY_ATTRIBUTES)
+
+    def ility(self) -> str:
+        """Get a random system quality attribute.
+
+        An alias for system_quality_attribute().
+        """
+        return self.system_quality_attribute()

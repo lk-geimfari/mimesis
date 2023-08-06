@@ -20,6 +20,14 @@ class TestDevelopment:
         result = dev.software_license()
         assert result in data.LICENSES
 
+    def test_system_quality_attribute(self, dev):
+        result = dev.system_quality_attribute()
+        assert result in data.SYSTEM_QUALITY_ATTRIBUTES
+
+    def test_ility(self, dev):
+        result = dev.ility()
+        assert result in data.SYSTEM_QUALITY_ATTRIBUTES
+
     def test_version(self, dev):
         result = dev.version().split(".")
         result = [int(i) for i in result]
@@ -108,3 +116,9 @@ class TestSeededDevelopment:
 
     def test_dsn(self, dv1, dv2):
         assert dv1.dsn() == dv2.dsn()
+
+    def test_system_quality_attribute(self, dv1, dv2):
+        assert dv1.system_quality_attribute() == dv2.system_quality_attribute()
+
+    def test_ility(self, dv1, dv2):
+        assert dv1.ility() == dv2.ility()
