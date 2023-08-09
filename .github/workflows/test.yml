@@ -50,7 +50,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ['pypy3.8', 'pypy3.9']
+        python-version: ['pypy3.8', 'pypy3.9', 'pypy3.10']
     steps:
       - uses: actions/checkout@v3
       - name: Set up Python ${{ matrix.python-version }}
