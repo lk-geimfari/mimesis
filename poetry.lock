@@ -2147,13 +2147,13 @@ dev = ["pre-commit", "pytest-asyncio", "tox"]
 
 [[package]]
 name = "pytest-randomly"
-version = "3.13.0"
+version = "3.14.0"
 description = "Pytest plugin to randomly order tests and control random.seed."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "pytest_randomly-3.13.0-py3-none-any.whl", hash = "sha256:e78d898ef4066f89744e5075083aa7fb6f0de07ffd70ca9c4435cda590cf1eac"},
-    {file = "pytest_randomly-3.13.0.tar.gz", hash = "sha256:079c78b94693189879fbd7304de4e147304f0811fa96249ea5619f2f1cd33df0"},
+    {file = "pytest_randomly-3.14.0-py3-none-any.whl", hash = "sha256:f3c7234cda4658534b50fe73a493732e114867101ae6a47db3853b75d13f524c"},
+    {file = "pytest_randomly-3.14.0.tar.gz", hash = "sha256:9d18daaa54915466b56767ac4015256cb7ed7519c9fbe869f5c23b465a1e65d7"},
 ]
 
 [package.dependencies]
