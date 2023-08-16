@@ -344,3 +344,19 @@ def test_field_reseed(field, seed):
     result2 = field("dsn")
 
     assert result1 == result2
+
+
+def test_register_field(field):
+    raise NotImplementedError
+
+
+def test_register_fields(field):
+    raise NotImplementedError
+
+
+def test_unregister_field(field):
+    raise NotImplementedError
+
+
+def test_unregister_fields(field):
+    raise NotImplementedError

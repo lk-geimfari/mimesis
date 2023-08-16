@@ -1,3 +1,11 @@
+Version 11.0.0
+--------------
+
+**Added**:
+
+- Added support for registering custom fields for ``Schema``. This allows you to use your own fields in schemas. See docs for more information.
+
+
 Version 10.2.0
 --------------
 

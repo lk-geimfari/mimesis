@@ -9,6 +9,7 @@ import typing as t
 from mimesis.exceptions import FieldError, FieldsetError, SchemaError
 from mimesis.locales import Locale
 from mimesis.providers.base import BaseProvider
+from mimesis.random import Random
 from mimesis.providers.generic import Generic
 from mimesis.types import (
     JSON,
@@ -20,6 +21,10 @@ from mimesis.types import (
 )
 
 __all__ = ["BaseField", "Field", "Fieldset", "Schema"]
+
+RegisterableFieldHandler = t.Callable[[Random, t.Any], t.Any]
+RegisterableField = t.Tuple[str, RegisterableFieldHandler]
+RegisterableFields = t.Sequence[RegisterableField]
 
 
 class BaseField:
@@ -40,6 +45,7 @@ class BaseField:
             self._gen.add_providers(*providers)
 
         self._cache: FieldCache = {}
+        self._custom_fields: t.Dict[str, t.Callable[[Random, t.Any], t.Any]] = {}
 
     def reseed(self, seed: Seed = MissingSeed) -> None:
         """Reseed the random generator.
@@ -47,6 +53,13 @@ class BaseField:
         :param seed: Seed for random.
         """
         self._gen.reseed(seed)
+
+    def get_random_instance(self) -> Random:
+        """Get random object from Generic.
+
+        :return: Random object.
+        """
+        return self._gen.random
 
     def _explicit_lookup(self, name: str) -> t.Any:
         """An explicit method lookup.
@@ -149,13 +162,18 @@ class BaseField:
         if name is None:
             raise FieldError()
 
-        result = self._lookup_method(name)(**kwargs)
+        random = self.get_random_instance()
+
+        if name in self._custom_fields:
+            result = self._custom_fields[name](random, **kwargs)
+        else:
+            result = self._lookup_method(name)(**kwargs)
 
         if key and callable(key):
             try:
                 # If key function accepts two parameters
                 # then pass random instance to it.
-                return key(result, self._gen.random)  # type: ignore
+                return key(result, random)  # type: ignore
             except TypeError:
                 return key(result)
 
@@ -163,6 +181,54 @@ class BaseField:
 
     def __str__(self) -> str:
         return f"{self.__class__.__name__} <{self._gen.locale}>"
+
+    def register_field(self, field_name: str, handler: RegisterableFieldHandler) -> None:
+        """Register a new field handler.
+
+        :param field_name: Name of the field.
+        :param handler: Callable object.
+        """
+
+        if not callable(handler):
+            raise TypeError(
+                f"Handler must be a callable object, "
+                f"but {handler.__class__.__name__} given."
+            )
+
+        if field_name not in self._custom_fields:
+            self._custom_fields[field_name] = handler
+
+    def register_fields(self, fields: RegisterableFields) -> None:
+        """Register a new field handlers.
+
+        :param fields: A sequence of tuples with field name and handler.
+        :return: None.
+        """
+        for name, handler in fields:
+            self.register_field(name, handler)
+
+    def unregister_field(self, field_name: str) -> None:
+        """Unregister a field handler.
+
+        :param field_name: Name of the field.
+        """
+        if field_name in self._custom_fields:
+            del self._custom_fields[field_name]
+
+    def unregister_fields(self, field_names: t.Union[t.Sequence[str], ...]) -> None:
+        """Unregister a field handlers with given names.
+
+        Unregisters all custom fields if ``field_names`` is ``...`` (aka Ellipsis).
+
+        :param field_names: Names of the fields.
+        :return: None.
+        """
+
+        if field_names is ...:
+            self._custom_fields.clear()
+        else:
+            for name in field_names:
+                self.unregister_field(name)
 
 
 class Field(BaseField):

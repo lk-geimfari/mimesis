@@ -261,6 +261,104 @@ Output:
 
 Isn't it cool? Of course, it is!
 
+
+Custom Field Handlers
+---------------------
+
+.. versionadded:: 11.0.0
+
+Sometimes, it's necessary to register custom fields or override existing ones to return custom data. This
+can be achieved using **custom field handlers**.
+
+A custom field handler can be any callable object. It should accept an instance of :class:`~mimesis.random.Random` as
+its first argument, and **keyword arguments** for the remaining arguments, returning the result.
+
+
+.. warning::
+
+    **Every** field handler must take a random instance as its first argument.
+    This ensures it uses the same :class:`~mimesis.random.Random` instance as the rest of the library.
+
+
+Register Field Handler
+~~~~~~~~~~~~~~~~~~~~~~
+
+Suppose you want to create a field that returns a random value from a list of values. First, you need to
+create a field handler. Let's call it ``my_field``.
+
+.. code:: python
+
+    def my_field(random, a=None, b=None) -> Any:
+        return random.choice([a, b])
+
+
+Afterwards, you need to register this field handler using a name you intend to use later. In this example,
+we will name the field ``hohoho``.
+
+.. code:: python
+
+    >>> from mimesis.schema import Field
+
+    >>> field = Field()
+    >>> field.register_field("hohoho", my_field)
+    >>> # Now you can use it:
+    >>> field("hohoho", a="a", b="b")
+    'a'
+    >>> # Note that you can still use the key function:
+    >>> field("hohoho", key=str.upper, a="a", b="b")
+    'A'
+
+You can register multiple fields at once:
+
+.. code:: python
+
+    >>> field.register_fields(
+        fields=[
+            ('mf1', my_field_1),
+            ('mf2', my_field_2),
+        ]
+    )
+    >>> field("mf1", key=str.lower)
+    >>> field("mf2", key=str.upper)
+
+
+Unregister Field Handler
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+If you want to unregister a field handler, you can do it like this:
+
+.. code:: python
+
+    >>> field.unregister_field("hohoho")
+
+Now you can't use it anymore and will get a ``FieldError`` if you try to do so.
+
+If you attempt to unregister a field that was never registered, nothing will happen:
+
+.. code:: python
+
+    >>> field.unregister_field("blabla") # nothing happens
+
+
+It's pretty obvious that you can unregister multiple fields at once as well:
+
+.. code:: python
+
+    >>> field.unregister_fields(
+        fields=[
+            'wow',
+            'much',
+            'fields',
+        ]
+    )
+
+or all fields at once via passing ``...`` as the only argument:
+
+.. code:: python
+
+    >>> field.unregister_fields(...)
+
+
 Key Functions
 -------------
 
