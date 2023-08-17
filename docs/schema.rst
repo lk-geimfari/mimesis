@@ -266,6 +266,7 @@ Custom Field Handlers
 ---------------------
 
 .. versionadded:: 11.0.0
+.. note:: This feature is experimental and may be changed or removed in future versions.
 
 Sometimes, it's necessary to register custom fields or override existing ones to return custom data. This
 can be achieved using **custom field handlers**.
@@ -278,6 +279,13 @@ its first argument, and **keyword arguments** for the remaining arguments, retur
 
     **Every** field handler must take a random instance as its first argument.
     This ensures it uses the same :class:`~mimesis.random.Random` instance as the rest of the library.
+
+    Below you can see examples of valid field handlers calls:
+
+    - ``field_handler(random, **kwargs)``
+    - ``field_handler(random, a=None, b=None, c=None, **kwargs)``
+
+    The **main thing** is that the first argument must be a random instance, and the rest must be **keyword arguments**.
 
 
 Register Field Handler
@@ -320,6 +328,12 @@ You can register multiple fields at once:
     )
     >>> field("mf1", key=str.lower)
     >>> field("mf2", key=str.upper)
+
+
+.. note::
+
+    It's important to note that **every** field handler must be registered using a unique name,
+    otherwise it will override the existing field handler with the same name.
 
 
 Unregister Field Handler
