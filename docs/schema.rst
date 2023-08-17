@@ -352,11 +352,11 @@ It's pretty obvious that you can unregister multiple fields at once as well:
         ]
     )
 
-or all fields at once via passing ``...`` as the only argument:
+or all fields at once:
 
 .. code:: python
 
-    >>> field.unregister_fields(...)
+    >>> field.unregister_all_fields()
 
 
 Key Functions

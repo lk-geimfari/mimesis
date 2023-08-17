@@ -10,7 +10,12 @@ import pytest
 
 from mimesis.builtins.en import USASpecProvider
 from mimesis.enums import Gender
-from mimesis.exceptions import FieldError, FieldsetError, SchemaError
+from mimesis.exceptions import (
+    FieldArityError,
+    FieldError,
+    FieldsetError,
+    SchemaError,
+)
 from mimesis.keys import maybe, romanize
 from mimesis.locales import Locale
 from mimesis.schema import Field, Fieldset, Schema
@@ -103,6 +108,10 @@ def test_field_different_separator(field, field_name):
 def test_fieldset(fieldset, field_name, i):
     result = fieldset(field_name, i=i)
     assert isinstance(result, list) and len(result) == i
+
+
+def test_field_get_random_instance(field):
+    assert field.get_random_instance() == field._gen.random
 
 
 @pytest.mark.parametrize(
@@ -346,17 +355,117 @@ def test_field_reseed(field, seed):
     assert result1 == result2
 
 
-def test_register_field(field):
-    raise NotImplementedError
+def my_field_handler(random, a="b", c="d", **kwargs):
+    return random.choice([a, c])
+
+
+class MyFieldHandler:
+    def __call__(self, random, a="b", c="d", **kwargs):
+        return random.choice([a, c])
+
+
+@pytest.mark.parametrize(
+    "field_name, handler",
+    [
+        ("wow", MyFieldHandler()),
+        ("wow", my_field_handler),
+        ("wow", lambda rnd, a="a", c="d", **kwargs: rnd.choice([a, c])),
+    ],
+)
+def test_register_field(field, fieldset, field_name, handler):
+    field.register_field(field_name, handler)
+    fieldset.register_field(field_name, handler)
+
+    res_1 = field(field_name, key=str.upper)
+    res_2 = field(field_name, key=str.lower, a="a", c="c", d="e")
+
+    assert res_1.isupper() and res_2.islower()
+
+    field.unregister_field(field_name)
+
+    with pytest.raises(FieldError):
+        field(field_name)
+
+
+def test_register_field_callable_with_wrong_arity(field):
+    wrong_arity = lambda **kwargs: "error"
+
+    with pytest.raises(FieldArityError):
+        field.register_field("invalid_field", wrong_arity)
+
+
+def test_register_field_non_callable(field):
+    with pytest.raises(TypeError):
+        field.register_field("a", "a")
+
+    with pytest.raises(TypeError):
+        field.register_field(b"sd", my_field_handler)
 
 
 def test_register_fields(field):
-    raise NotImplementedError
+    _kwargs = {"a": "a", "b": "b"}
+    field.register_fields(
+        fields=[
+            ("a", lambda rnd, **kwargs: kwargs),
+            ("b", lambda rnd, **kwargs: kwargs),
+            ("c", lambda rnd, lol="lol", **kwargs: kwargs),
+        ]
+    )
+
+    result = field("a", **_kwargs)
+    assert result["a"] == _kwargs["a"] and result["b"] == _kwargs["b"]
 
 
 def test_unregister_field(field):
-    raise NotImplementedError
+    # Make sure that there are no handlers.
+    field.unregister_all_fields()
+    # Register fields first
+    field.register_field("my_field", my_field_handler)
+    # Make sure that registration is done.
+    assert len(field._custom_fields.keys()) > 0
+    # Extract field handler by its name
+    registered_field = field._custom_fields["my_field"]
+    # Make sure that handlers are the same
+    assert registered_field == my_field_handler
+    # Unregister field
+    field.unregister_field("my_field")
+    with pytest.raises(FieldError):
+        field("my_field")
 
 
 def test_unregister_fields(field):
-    raise NotImplementedError
+    field.unregister_all_fields()
+    fields = [
+        ("a", lambda rnd, **kwargs: kwargs),
+        ("b", lambda rnd, **kwargs: kwargs),
+        ("c", lambda rnd, **kwargs: kwargs),
+    ]
+
+    # Register fields first
+    field.register_fields(fields=fields)
+    assert len(field._custom_fields.keys()) == 3
+
+    # Unregister all field with given names.
+    field.unregister_fields(["a", "b", "c", "d", "e"])
+    assert len(field._custom_fields.keys()) == 0
+
+    # Register fields again and unregister all of them at once
+    field.register_fields(fields=fields)
+    field.unregister_all_fields()
+    assert len(field._custom_fields.keys()) == 0
+
+
+def test_unregister_all_fields(field):
+    fields = [
+        ("a", lambda rnd, **kwargs: kwargs),
+        ("b", lambda rnd, **kwargs: kwargs),
+        ("c", lambda rnd, **kwargs: kwargs),
+    ]
+
+    # Register fields first
+    field.register_fields(fields=fields)
+    assert len(field._custom_fields.keys()) == 3
+
+    # Unregister all fields
+    field.unregister_all_fields()
+    assert len(field._custom_fields.keys()) == 0

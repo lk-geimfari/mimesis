@@ -67,3 +67,8 @@ class FieldsetError(ValueError):
 
     def __str__(self) -> str:
         return "The «iterations» parameter must be greater than 1."
+
+
+class FieldArityError(ValueError):
+    def __str__(self) -> str:
+        return "The custom handler must accept at least two arguments: 'random' and '**kwargs'"

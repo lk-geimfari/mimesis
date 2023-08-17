@@ -1,16 +1,22 @@
 """Implements classes for generating data by schema."""
 
 import csv
+import inspect
 import json
 import pickle
 import re
 import typing as t
 
-from mimesis.exceptions import FieldError, FieldsetError, SchemaError
+from mimesis.exceptions import (
+    FieldArityError,
+    FieldError,
+    FieldsetError,
+    SchemaError,
+)
 from mimesis.locales import Locale
 from mimesis.providers.base import BaseProvider
-from mimesis.random import Random
 from mimesis.providers.generic import Generic
+from mimesis.random import Random
 from mimesis.types import (
     JSON,
     CallableSchema,
@@ -22,9 +28,9 @@ from mimesis.types import (
 
 __all__ = ["BaseField", "Field", "Fieldset", "Schema"]
 
-RegisterableFieldHandler = t.Callable[[Random, t.Any], t.Any]
-RegisterableField = t.Tuple[str, RegisterableFieldHandler]
-RegisterableFields = t.Sequence[RegisterableField]
+FieldHandler = t.Callable[[Random, t.Any], t.Any]
+RegisterableFieldHandler = t.Tuple[str, FieldHandler]
+RegisterableFieldHandlers = t.Sequence[RegisterableFieldHandler]
 
 
 class BaseField:
@@ -45,7 +51,7 @@ class BaseField:
             self._gen.add_providers(*providers)
 
         self._cache: FieldCache = {}
-        self._custom_fields: t.Dict[str, t.Callable[[Random, t.Any], t.Any]] = {}
+        self._custom_fields: t.Dict[str, FieldHandler] = {}
 
     def reseed(self, seed: Seed = MissingSeed) -> None:
         """Reseed the random generator.
@@ -165,7 +171,7 @@ class BaseField:
         random = self.get_random_instance()
 
         if name in self._custom_fields:
-            result = self._custom_fields[name](random, **kwargs)
+            result = self._custom_fields[name](random, **kwargs)  # type: ignore
         else:
             result = self._lookup_method(name)(**kwargs)
 
@@ -182,26 +188,30 @@ class BaseField:
     def __str__(self) -> str:
         return f"{self.__class__.__name__} <{self._gen.locale}>"
 
-    def register_field(self, field_name: str, handler: RegisterableFieldHandler) -> None:
+    def register_field(self, field_name: str, field_handler: FieldHandler) -> None:
         """Register a new field handler.
 
         :param field_name: Name of the field.
-        :param handler: Callable object.
+        :param field_handler: Callable object.
         """
+        if not isinstance(field_name, str):
+            raise TypeError("Field name must be a string.")
 
-        if not callable(handler):
-            raise TypeError(
-                f"Handler must be a callable object, "
-                f"but {handler.__class__.__name__} given."
-            )
+        if not callable(field_handler):
+            raise TypeError("Handler must be a callable object.")
+
+        callable_signature = inspect.signature(field_handler)
+
+        if len(callable_signature.parameters) <= 1:
+            raise FieldArityError()
 
         if field_name not in self._custom_fields:
-            self._custom_fields[field_name] = handler
+            self._custom_fields[field_name] = field_handler
 
-    def register_fields(self, fields: RegisterableFields) -> None:
+    def register_fields(self, fields: RegisterableFieldHandlers) -> None:
         """Register a new field handlers.
 
-        :param fields: A sequence of tuples with field name and handler.
+        :param fields: A sequence of sequences with field name and handler.
         :return: None.
         """
         for name, handler in fields:
@@ -215,20 +225,22 @@ class BaseField:
         if field_name in self._custom_fields:
             del self._custom_fields[field_name]
 
-    def unregister_fields(self, field_names: t.Union[t.Sequence[str], ...]) -> None:
+    def unregister_fields(self, field_names: t.Sequence[str] = ()) -> None:
         """Unregister a field handlers with given names.
-
-        Unregisters all custom fields if ``field_names`` is ``...`` (aka Ellipsis).
 
         :param field_names: Names of the fields.
         :return: None.
         """
 
-        if field_names is ...:
-            self._custom_fields.clear()
-        else:
-            for name in field_names:
-                self.unregister_field(name)
+        for name in field_names:
+            self.unregister_field(name)
+
+    def unregister_all_fields(self) -> None:
+        """Unregister all field handlers.
+
+        :return: None.
+        """
+        self._custom_fields.clear()
 
 
 class Field(BaseField):
@@ -240,7 +252,7 @@ class Field(BaseField):
 
         There is no case when you need to instance **field** in loops.
 
-        If you doing this:
+        If you are doing this:
 
         >>> for i in range(1000):
         ...     field = Field()
