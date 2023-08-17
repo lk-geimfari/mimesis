@@ -280,10 +280,11 @@ its first argument, and **keyword arguments** for the remaining arguments, retur
     **Every** field handler must take a random instance as its first argument.
     This ensures it uses the same :class:`~mimesis.random.Random` instance as the rest of the library.
 
-    Below you can see examples of valid field handlers calls:
+    Below you can see examples of valid signatures of field handlers:
 
     - ``field_handler(random, **kwargs)``
     - ``field_handler(random, a=None, b=None, c=None, **kwargs)``
+    - ``field_handler(random, **{a: None, b: None, c: None})``
 
     The **main thing** is that the first argument must be a random instance, and the rest must be **keyword arguments**.
 
