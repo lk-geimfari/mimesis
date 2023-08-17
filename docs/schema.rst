@@ -286,7 +286,7 @@ its first argument, and **keyword arguments** for the remaining arguments, retur
     - ``field_handler(random, a=None, b=None, c=None, **kwargs)``
     - ``field_handler(random, **{a: None, b: None, c: None})``
 
-    The **main thing** is that the first argument must be a random instance, and the rest must be **keyword arguments**.
+    The **main thing** is that the first argument must be positional (a random instance), and the rest must be **keyword arguments**.
 
 
 Register Field Handler
