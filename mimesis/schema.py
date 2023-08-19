@@ -170,6 +170,7 @@ class BaseField:
 
         random = self.get_random_instance()
 
+        # Check if there is a custom field handler.
         if name in self._custom_fields:
             result = self._custom_fields[name](random, **kwargs)  # type: ignore
         else:
