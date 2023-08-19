@@ -373,6 +373,8 @@ or all fields at once:
 
     >>> field.unregister_all_fields()
 
+All the features described above are also available for :class:`~mimesis.schema.Fieldset`.
+
 
 Key Functions
 -------------
