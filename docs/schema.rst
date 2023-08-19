@@ -304,6 +304,13 @@ create a field handler. Let's call it ``my_field``.
 Afterwards, you need to register this field handler using a name you intend to use later. In this example,
 we will name the field ``hohoho``.
 
+.. note::
+
+    To avoid receiving a ValueError, the field name must be a string that conforms to a valid Python identifier.
+
+    Also, it's important to note that **every** field handler must be registered using a unique name,
+    otherwise, you will override an existing field handler. The filed names are case-sensitive.
+
 .. code:: python
 
     >>> from mimesis.schema import Field
@@ -313,7 +320,8 @@ we will name the field ``hohoho``.
     >>> # Now you can use it:
     >>> field("hohoho", a="a", b="b")
     'a'
-    >>> # Note that you can still use the key function:
+    >>> # Note that you can still use the key function, but the order of arguments matters, so
+    >>> # key goes first, and then the rest of the arguments which are passed to the field handler.
     >>> field("hohoho", key=str.upper, a="a", b="b")
     'A'
 
@@ -329,12 +337,6 @@ You can register multiple fields at once:
     )
     >>> field("mf1", key=str.lower)
     >>> field("mf2", key=str.upper)
-
-
-.. note::
-
-    It's important to note that **every** field handler must be registered using a unique name,
-    otherwise it will override the existing field handler with the same name.
 
 
 Unregister Field Handler

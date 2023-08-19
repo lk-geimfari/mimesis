@@ -1,3 +1,11 @@
+Version 11.1.0
+--------------
+
+**Added**:
+
+- Added custom field name validation.
+
+
 Version 11.0.0
 --------------
 

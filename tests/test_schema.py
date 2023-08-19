@@ -23,30 +23,18 @@ from mimesis.types import MissingSeed
 from tests.test_providers.patterns import DATA_PROVIDER_STR_REGEX
 
 
-def test_str(field):
-    assert re.match(DATA_PROVIDER_STR_REGEX, str(field))
+def test_str(default_field):
+    assert re.match(DATA_PROVIDER_STR_REGEX, str(default_field))
 
 
 @pytest.fixture(scope="module", params=list(Locale))
-def field(request):
+def localized_field(request):
     return Field(request.param)
 
 
-@pytest.fixture
-def schema(field):
-    return Schema(
-        schema=lambda: {
-            "id": field("uuid"),
-            "name": field("word"),
-            "timestamp": field("timestamp"),
-            "zip_code": field("postal_code"),
-            "owner": {
-                "email": field("email", key=str.lower),
-                "creator": field("full_name", gender=Gender.FEMALE),
-            },
-        },
-        iterations=10,
-    )
+@pytest.fixture(scope="module")
+def default_field(request):
+    return Field()
 
 
 @pytest.fixture
@@ -55,21 +43,43 @@ def extended_field():
 
 
 @pytest.fixture(scope="module", params=list(Locale))
-def fieldset(request):
+def localized_fieldset(request):
     return Fieldset(request.param)
 
 
-@pytest.fixture(scope="module", params=list(Locale))
+@pytest.fixture(scope="module")
+def default_fieldset(request):
+    return Fieldset()
+
+
+@pytest.fixture(scope="module")
 def custom_fieldset(request):
     class MyFieldSet(Fieldset):
-        fieldset_iterations_kwarg = "wubba_lubba_dub_dub"
+        fieldset_iterations_kwarg = "iterations"
 
-    return MyFieldSet(request.param)
+    return MyFieldSet()
 
 
 @pytest.fixture(scope="module", params=list(Locale))
 def fieldset_with_default_i(request):
     return Fieldset(request.param, i=100)
+
+
+@pytest.fixture
+def schema(localized_field):
+    return Schema(
+        schema=lambda: {
+            "id": localized_field("uuid"),
+            "name": localized_field("word"),
+            "timestamp": localized_field("timestamp"),
+            "zip_code": localized_field("postal_code"),
+            "owner": {
+                "email": localized_field("email", key=str.lower),
+                "creator": localized_field("full_name", gender=Gender.FEMALE),
+            },
+        },
+        iterations=10,
+    )
 
 
 @pytest.mark.parametrize(
@@ -80,8 +90,8 @@ def fieldset_with_default_i(request):
         "street_name",
     ],
 )
-def test_field(field, field_name):
-    assert field(field_name)
+def test_field(localized_field, field_name):
+    assert localized_field(field_name)
 
 
 @pytest.mark.parametrize(
@@ -93,8 +103,8 @@ def test_field(field, field_name):
         "person:title",
     ],
 )
-def test_field_different_separator(field, field_name):
-    assert isinstance(field(field_name), str)
+def test_field_different_separator(localized_field, field_name):
+    assert isinstance(localized_field(field_name), str)
 
 
 @pytest.mark.parametrize(
@@ -105,13 +115,13 @@ def test_field_different_separator(field, field_name):
         ("name", 2),
     ],
 )
-def test_fieldset(fieldset, field_name, i):
-    result = fieldset(field_name, i=i)
+def test_fieldset(localized_fieldset, field_name, i):
+    result = localized_fieldset(field_name, i=i)
     assert isinstance(result, list) and len(result) == i
 
 
-def test_field_get_random_instance(field):
-    assert field.get_random_instance() == field._gen.random
+def test_field_get_random_instance(localized_field):
+    assert localized_field.get_random_instance() == localized_field._gen.random
 
 
 @pytest.mark.parametrize(
@@ -122,14 +132,14 @@ def test_field_get_random_instance(field):
         "full_name",
     ],
 )
-def test_fieldset_with_default_i(fieldset, field_name):
-    result = fieldset(field_name)
+def test_fieldset_with_default_i(localized_fieldset, field_name):
+    result = localized_fieldset(field_name)
     assert isinstance(result, list)
-    assert len(result) == fieldset.fieldset_default_iterations
+    assert len(result) == localized_fieldset.fieldset_default_iterations
 
 
 def test_custom_fieldset(custom_fieldset):
-    result = custom_fieldset("name", wubba_lubba_dub_dub=3)
+    result = custom_fieldset("name", iterations=3)
     assert isinstance(result, list) and len(result) == 3
 
     with pytest.raises(TypeError):
@@ -144,16 +154,16 @@ def test_fieldset_with_common_i(fieldset_with_default_i):
     assert isinstance(result, list) and len(result) == 3
 
 
-def test_field_with_key_function(field):
-    result = field("person.name", key=list)
+def test_field_with_key_function(localized_field):
+    result = localized_field("person.name", key=list)
     assert isinstance(result, list) and len(result) >= 1
 
 
-def test_field_with_key_function_two_parameters(field):
+def test_field_with_key_function_two_parameters(localized_field):
     def key_function(value, random):
         return f"{value}_{random.randint(1, 100)}"
 
-    result = field("person.name", key=key_function)
+    result = localized_field("person.name", key=key_function)
     name, number = result.split("_")
     assert isinstance(result, str)
     assert 1 <= int(number) <= 100
@@ -168,8 +178,8 @@ def test_field_with_key_function_two_parameters(field):
     ),
 )
 def test_field_with_romanize(locale):
-    field = Field(locale=locale)
-    result = field("name", key=romanize(locale))
+    localized_field = Field(locale=locale)
+    result = localized_field("name", key=romanize(locale))
     assert not all(unicodedata.category(char).startswith("C") for char in result)
 
 
@@ -182,65 +192,65 @@ def test_field_with_romanize(locale):
     ),
 )
 def test_fieldset_with_romanize(locale):
-    fieldset = Fieldset(locale=locale, i=5)
-    romanized_results = fieldset("name", key=romanize(locale))
+    localized_fieldset = Fieldset(locale=locale, i=5)
+    romanized_results = localized_fieldset("name", key=romanize(locale))
     for result in romanized_results:
         assert not all(unicodedata.category(char).startswith("C") for char in result)
 
 
-def test_field_with_maybe(field):
-    result = field("person.name", key=maybe("foo", probability=1))
+def test_field_with_maybe(default_field):
+    result = default_field("person.name", key=maybe("foo", probability=1))
     assert result == "foo"
 
-    result = field("person.name", key=maybe("foo", probability=0))
+    result = default_field("person.name", key=maybe("foo", probability=0))
     assert result != "foo"
 
 
-def test_fieldset_error(fieldset):
+def test_fieldset_error(default_fieldset):
     with pytest.raises(FieldsetError):
-        fieldset("username", key=str.upper, i=0)
+        default_fieldset("username", key=str.upper, i=0)
 
 
-def test_fieldset_field_error(fieldset):
+def test_fieldset_field_error(default_fieldset):
     with pytest.raises(FieldError):
-        fieldset("unsupported_field")
+        default_fieldset("unsupported_field")
 
 
 @pytest.mark.parametrize(
     "field_name", ["person.full_name.invalid", "invalid_field", "unsupported_field"]
 )
-def test_field_error(field, field_name):
+def test_field_error(localized_field, field_name):
     with pytest.raises(FieldError):
-        field(field_name)
+        localized_field(field_name)
 
 
 def test_field_with_custom_providers(extended_field):
     assert extended_field("ssn")
 
 
-def test_field_raises_field_error(field):
+def test_field_raises_field_error(default_field):
     with pytest.raises(FieldError):
-        field("person.unsupported_field")
-
-    with pytest.raises(FieldError):
-        field("unsupported_field")
+        default_field("person.unsupported_field")
 
     with pytest.raises(FieldError):
-        field()
+        default_field("unsupported_field")
 
     with pytest.raises(FieldError):
-        field("person.full_name.invalid")
+        default_field()
+
+    with pytest.raises(FieldError):
+        default_field("person.full_name.invalid")
 
 
-def test_explicit_lookup(field):
-    result = field._explicit_lookup("person.surname")
+def test_explicit_lookup(localized_field):
+    result = localized_field._explicit_lookup("person.surname")
 
     assert callable(result)
     assert isinstance(result(), str)
 
 
-def test_fuzzy_lookup(field):
-    result = field._fuzzy_lookup("surname")
+def test_fuzzy_lookup(localized_field):
+    result = localized_field._fuzzy_lookup("surname")
 
     assert callable(result)
     assert isinstance(result(), str)
@@ -255,15 +265,15 @@ def test_fuzzy_lookup(field):
         "person.surname.male",
     ],
 )
-def test_lookup_method_field_error(field, field_name):
+def test_lookup_method_field_error(localized_field, field_name):
     with pytest.raises(FieldError):
-        field._lookup_method(field_name)
+        localized_field._lookup_method(field_name)
 
     with pytest.raises(ValueError):
-        field._explicit_lookup(field_name)
+        localized_field._explicit_lookup(field_name)
 
     with pytest.raises(FieldError):
-        field._fuzzy_lookup(field_name)
+        localized_field._fuzzy_lookup(field_name)
 
 
 @pytest.mark.parametrize(
@@ -279,8 +289,8 @@ def test_schema_instantiation_raises_value_error():
         Schema(schema=lambda: {"uuid": Field()("uuid")}, iterations=0)
 
 
-def test_choice_field(field):
-    result = field("choice", items=["a", "b", "c", "d"], length=2)
+def test_choice_field(localized_field):
+    result = localized_field("choice", items=["a", "b", "c", "d"], length=2)
     assert len(result) == 2
 
 
@@ -345,12 +355,12 @@ def test_schema_to_pickle(schema):
         MissingSeed,
     ],
 )
-def test_field_reseed(field, seed):
-    field.reseed(seed)
-    result1 = field("dsn")
+def test_field_reseed(localized_field, seed):
+    localized_field.reseed(seed)
+    result1 = localized_field("dsn")
 
-    field.reseed(seed)
-    result2 = field("dsn")
+    localized_field.reseed(seed)
+    result2 = localized_field("dsn")
 
     assert result1 == result2
 
@@ -372,39 +382,55 @@ class MyFieldHandler:
         ("wow", lambda rnd, a="a", c="d", **kwargs: rnd.choice([a, c])),
     ],
 )
-def test_register_field(field, fieldset, field_name, handler):
-    field.register_field(field_name, handler)
-    fieldset.register_field(field_name, handler)
+def test_register_field(default_field, default_fieldset, field_name, handler):
+    default_field.register_field(field_name, handler)
+    default_fieldset.register_field(field_name, handler)
 
-    res_1 = field(field_name, key=str.upper)
-    res_2 = field(field_name, key=str.lower, a="a", c="c", d="e")
+    res_1 = default_field(field_name, key=str.upper)
+    res_2 = default_field(field_name, key=str.lower, a="a", c="c", d="e")
 
     assert res_1.isupper() and res_2.islower()
 
-    field.unregister_field(field_name)
+    default_field.unregister_field(field_name)
 
     with pytest.raises(FieldError):
-        field(field_name)
+        default_field(field_name)
 
 
-def test_register_field_callable_with_wrong_arity(field):
+def test_register_field_callable_with_wrong_arity(default_field):
     wrong_arity = lambda **kwargs: "error"
 
     with pytest.raises(FieldArityError):
-        field.register_field("invalid_field", wrong_arity)
+        default_field.register_field("invalid_field", wrong_arity)
 
 
-def test_register_field_non_callable(field):
+def test_register_field_non_callable(default_field):
     with pytest.raises(TypeError):
-        field.register_field("a", "a")
+        default_field.register_field("a", "a")
 
     with pytest.raises(TypeError):
-        field.register_field(b"sd", my_field_handler)
+        default_field.register_field(b"sd", my_field_handler)
 
 
-def test_register_fields(field):
+@pytest.mark.parametrize(
+    "invalid_field_name",
+    [
+        "a.b",
+        "a b",
+        "a-b",
+        "a/b",
+        "a\\b",
+        "1a",
+    ],
+)
+def test_register_field_with_invalid_name(default_field, invalid_field_name):
+    with pytest.raises(ValueError):
+        default_field.register_field(invalid_field_name, my_field_handler)
+
+
+def test_register_fields(default_field):
     _kwargs = {"a": "a", "b": "b"}
-    field.register_fields(
+    default_field.register_fields(
         fields=[
             ("a", lambda rnd, **kwargs: kwargs),
             ("b", lambda rnd, **kwargs: kwargs),
@@ -412,29 +438,29 @@ def test_register_fields(field):
         ]
     )
 
-    result = field("a", **_kwargs)
+    result = default_field("a", **_kwargs)
     assert result["a"] == _kwargs["a"] and result["b"] == _kwargs["b"]
 
 
-def test_unregister_field(field):
+def test_unregister_field(default_field):
     # Make sure that there are no handlers.
-    field.unregister_all_fields()
+    default_field.unregister_all_fields()
     # Register fields first
-    field.register_field("my_field", my_field_handler)
+    default_field.register_field("my_field", my_field_handler)
     # Make sure that registration is done.
-    assert len(field._custom_fields.keys()) > 0
+    assert len(default_field._custom_fields.keys()) > 0
     # Extract field handler by its name
-    registered_field = field._custom_fields["my_field"]
+    registered_field = default_field._custom_fields["my_field"]
     # Make sure that handlers are the same
     assert registered_field == my_field_handler
     # Unregister field
-    field.unregister_field("my_field")
+    default_field.unregister_field("my_field")
     with pytest.raises(FieldError):
-        field("my_field")
+        default_field("my_field")
 
 
-def test_unregister_fields(field):
-    field.unregister_all_fields()
+def test_unregister_fields(default_field):
+    default_field.unregister_all_fields()
     fields = [
         ("a", lambda rnd, **kwargs: kwargs),
         ("b", lambda rnd, **kwargs: kwargs),
@@ -442,20 +468,20 @@ def test_unregister_fields(field):
     ]
 
     # Register fields first
-    field.register_fields(fields=fields)
-    assert len(field._custom_fields.keys()) == 3
+    default_field.register_fields(fields=fields)
+    assert len(default_field._custom_fields.keys()) == 3
 
     # Unregister all field with given names.
-    field.unregister_fields(["a", "b", "c", "d", "e"])
-    assert len(field._custom_fields.keys()) == 0
+    default_field.unregister_fields(["a", "b", "c", "d", "e"])
+    assert len(default_field._custom_fields.keys()) == 0
 
     # Register fields again and unregister all of them at once
-    field.register_fields(fields=fields)
-    field.unregister_all_fields()
-    assert len(field._custom_fields.keys()) == 0
+    default_field.register_fields(fields=fields)
+    default_field.unregister_all_fields()
+    assert len(default_field._custom_fields.keys()) == 0
 
 
-def test_unregister_all_fields(field):
+def test_unregister_all_fields(default_field):
     fields = [
         ("a", lambda rnd, **kwargs: kwargs),
         ("b", lambda rnd, **kwargs: kwargs),
@@ -463,9 +489,9 @@ def test_unregister_all_fields(field):
     ]
 
     # Register fields first
-    field.register_fields(fields=fields)
-    assert len(field._custom_fields.keys()) == 3
+    default_field.register_fields(fields=fields)
+    assert len(default_field._custom_fields.keys()) == 3
 
     # Unregister all fields
-    field.unregister_all_fields()
-    assert len(field._custom_fields.keys()) == 0
+    default_field.unregister_all_fields()
+    assert len(default_field._custom_fields.keys()) == 0

@@ -186,17 +186,18 @@ class BaseField:
 
         return result
 
-    def __str__(self) -> str:
-        return f"{self.__class__.__name__} <{self._gen.locale}>"
-
     def register_field(self, field_name: str, field_handler: FieldHandler) -> None:
         """Register a new field handler.
 
         :param field_name: Name of the field.
         :param field_handler: Callable object.
         """
+
         if not isinstance(field_name, str):
             raise TypeError("Field name must be a string.")
+
+        if not field_name.isidentifier():
+            raise ValueError("Field name must be a valid Python identifier.")
 
         if not callable(field_handler):
             raise TypeError("Handler must be a callable object.")
@@ -242,6 +243,9 @@ class BaseField:
         :return: None.
         """
         self._custom_fields.clear()
+
+    def __str__(self) -> str:
+        return f"{self.__class__.__name__} <{self._gen.locale}>"
 
 
 class Field(BaseField):

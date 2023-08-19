@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "mimesis"
-version = "11.0.0"
+version = "11.1.0"
 description = "Mimesis: Fake Data Generator."
 authors = ["Isaak Uchakaev <likid.geimfari@gmail.com>"]
 license = "MIT"
