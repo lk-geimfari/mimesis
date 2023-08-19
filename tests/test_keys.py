@@ -22,7 +22,7 @@ def test_maybe():
         (
             Locale.RU,
             " ".join(
-                "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ" "абвгдеёжзийклмнопрстуфхцчшщъыьэюя"
+                "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюя"
             ),
             (
                 "A B V G D E Yo Zh Z I Ye K L M N O P R S T U F Kh Ts "
@@ -45,7 +45,7 @@ def test_romanize_cyrillic_string(locale, string, expected):
 
 def test_romanize_invalid_locale():
     with pytest.raises(LocaleError):
-        romanize(locale="sdsdsd")
+        romanize(locale="sdsdsd")  # type: ignore
 
 
 def test_romanize_unsupported_locale():
@@ -55,7 +55,7 @@ def test_romanize_unsupported_locale():
 
 def test_romanize_missing_positional_arguments():
     with pytest.raises(TypeError):
-        romanize()
+        romanize()  # type: ignore
 
     with pytest.raises(TypeError):
-        romanize(locale=Locale.RU)()
+        romanize(locale=Locale.RU)()  # type: ignore
