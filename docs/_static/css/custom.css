@@ -1,3 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap');
+
+pre, tt, code {
+    font-family: 'Fira Code', 'Menlo', 'Deja Vu Sans Mono', 'Bitstream Vera Sans Mono', monospace !important;
+    font-size: 0.9em;
+}
+
 .function, .method, .class, .exception {
     padding-bottom: 15px;
 }
