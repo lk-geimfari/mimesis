@@ -3,7 +3,7 @@ Version 11.1.0
 
 **Added**:
 
-- Added custom field name validation.
+- Added validation for custom field names.
 
 
 Version 11.0.0
