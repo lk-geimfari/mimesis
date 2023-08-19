@@ -24,7 +24,7 @@ If you are looking for information on a specific function, class or
 method, this part of the documentation is for you.
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 2
 
    api
    glossary
@@ -36,7 +36,7 @@ Additional Information
 Disclaimer, legal information and other information are here for the interested.
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
    additional-info
    contributing
@@ -57,5 +57,4 @@ Indices
 -------
 
 * :ref:`genindex`
-* :ref:`modindex`
 * :ref:`search`
