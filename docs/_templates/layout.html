@@ -15,6 +15,20 @@
     <meta name="twitter:image" content="https://mimesis.name/en/master/_static/preview.png" />
 {% endblock %}
 
+<!-- Makes logo appropriate for current color scheme -->
+{%- block sidebarlogo %}
+{%- if logo_url %}
+<p class="logo"><a href="{{ pathto(root_doc)|e }}">
+  <picture>
+    <source srcset="_static/octopus-dark.svg" media="(prefers-color-scheme: dark)" />
+    <source srcset="{{ logo_url|e }}" media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)" />
+    <img class="logo" decoding="async" id="screenshot" src="{{ logo_url|e }}" />
+  </picture>
+
+</a></p>
+{%- endif %}
+{%- endblock %}
+
 {% block footer %}
   <style type="text/css">
     .rst-versions.rst-badge {
