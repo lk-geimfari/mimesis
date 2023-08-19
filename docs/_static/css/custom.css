@@ -6,6 +6,12 @@ a.reference:hover {
     border-bottom: 1px rgb(225, 83, 67);
 }
 
+a.headerlink:hover {
+    color: #444 !important;
+    background: transparent !important;
+    text-decoration: none !important;
+}
+
 div.body p, div.body dd, div.body li {
     line-height: 1.5;
 }
@@ -99,7 +105,8 @@ div.highlight pre, table.highlighttable pre {
     }
 
     #api-reference .reference span.pre {
-        background-color: #21272E; !important;
+        background-color: #21272E;
+    !important;
     }
 
     div.highlight {
