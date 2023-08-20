@@ -11,7 +11,7 @@ For generating data by schema, just create an instance of :class:`~mimesis.schem
 object, which takes any string which represents the name of data
 provider in following formats:
 
-- ``method`` — will be chosen the first provider which has a method **method**
+- ``handler``/``method`` — the first custom field handler registered under the name ``handler`` will be chosen, or the first provider that has a method named ``method`` will be selected.
 - ``provider.method`` — explicitly defines that the method **method** belongs to **provider**
 
 
@@ -29,9 +29,9 @@ Example of usage:
 
 .. code:: python
 
+    from mimesis import Field, Fieldset, Schema
     from mimesis.enums import Gender, TimestampFormat
     from mimesis.locales import Locale
-    from mimesis.schema import Field, Fieldset, Schema
 
     field = Field(locale=Locale.EN)
     fieldset = Fieldset(locale=Locale.EN)
@@ -115,9 +115,8 @@ to change this behavior should be passed parameter *providers* with a sequence o
 
 .. code:: python
 
-    from mimesis.schema import Field
+    from mimesis import builtins, Field
     from mimesis.locales import Locale
-    from mimesis import builtins
 
     custom_providers = (
          builtins.RussiaSpecProvider,
@@ -175,21 +174,13 @@ Let's take a look at the example:
 
 .. code:: python
 
-    >>> from mimesis import Field, Fieldset
-    >>> from mimesis.locales import Locale
-
+    >>> from mimesis import Field, Fieldset, Locale
     >>> field = Field(locale=Locale.EN)
     >>> fieldset = Fieldset(locale=Locale.EN)
-
     >>> field("name")
     Chase
-
-    >> [field("name") for _ in range(3)]
-    ['Nicolle', 'Kelvin', 'Adaline']
-
     >>> fieldset("name", i=3)
     ['Basil', 'Carlee', 'Sheryll']
-
 
 The keyword argument **i** is used to specify the number of values to generate.
 If **i** is not specified, a reasonable default value (which is 10) is used.
@@ -207,16 +198,12 @@ Let's take a look at the example:
 
 .. code:: python
 
-    >>> from mimesis import Fieldset
-    >>> class MyFieldset(Fieldset):
-    ...     fieldset_iterations_kwarg = "wubba_lubba_dub_dub"
-
-    >>> fs = MyFieldset(locale=Locale.EN)
-    >>> fs("name", wubba_lubba_dub_dub=3)
+    >>> from mimesis import Fieldset, Locale
+    >>> fs = Fieldset(locale=Locale.EN)
+    >>> fs.fieldset_iterations_kwarg = "count"
+    >>> fs("name", count=3)
     ['Janella', 'Beckie', 'Jeremiah']
-
-    # The order of keyword arguments doesn't matter.
-    >>> fs("name", wubba_lubba_dub_dub=3, key=str.upper)
+    >>> fs("name", count=3, key=str.upper)
     ['RICKY', 'LEONORE', 'DORIAN']
 
 
@@ -233,7 +220,7 @@ and reliable testing and analysis:
 .. code:: python
 
     import pandas as pd
-    from mimesis.schema import Fieldset
+    from mimesis import Fieldset
     from mimesis.locales import Locale
 
     fs = Fieldset(locale=Locale.EN, i=5)
@@ -259,125 +246,6 @@ Output:
     5   Blondell Bolton       strongly2081@example.com  +1 (327) 952-7799
 
 
-Isn't it cool? Of course, it is!
-
-
-Custom Field Handlers
----------------------
-
-.. versionadded:: 11.0.0
-.. note:: This feature is experimental and may be changed or removed in future versions.
-
-Sometimes, it's necessary to register custom fields or override existing ones to return custom data. This
-can be achieved using **custom field handlers**.
-
-A custom field handler can be any callable object. It should accept an instance of :class:`~mimesis.random.Random` as
-its first argument, and **keyword arguments** for the remaining arguments, returning the result.
-
-
-.. warning::
-
-    **Every** field handler must take a random instance as its first argument.
-    This ensures it uses the same :class:`~mimesis.random.Random` instance as the rest of the library.
-
-    Below you can see examples of valid signatures of field handlers:
-
-    - ``field_handler(random, **kwargs)``
-    - ``field_handler(random, a=None, b=None, c=None, **kwargs)``
-    - ``field_handler(random, **{a: None, b: None, c: None})``
-
-    The **main thing** is that the first argument must be positional (a random instance), and the rest must be **keyword arguments**.
-
-
-Register Field Handler
-~~~~~~~~~~~~~~~~~~~~~~
-
-Suppose you want to create a field that returns a random value from a list of values. First, you need to
-create a field handler. Let's call it ``my_field``.
-
-.. code:: python
-
-    def my_field(random, a=None, b=None) -> Any:
-        return random.choice([a, b])
-
-
-Afterwards, you need to register this field handler using a name you intend to use later. In this example,
-we will name the field ``hohoho``.
-
-.. note::
-
-    To avoid receiving a ValueError, the field name must be a string that conforms to a valid Python identifier.
-
-    Also, it's important to note that **every** field handler must be registered using a unique name,
-    otherwise, you will override an existing field handler. The filed names are case-sensitive.
-
-.. code:: python
-
-    >>> from mimesis.schema import Field
-
-    >>> field = Field()
-    >>> field.register_field("hohoho", my_field)
-    >>> # Now you can use it:
-    >>> field("hohoho", a="a", b="b")
-    'a'
-    >>> # Note that you can still use the key function, but the order of arguments matters, so
-    >>> # key goes first, and then the rest of the arguments which are passed to the field handler.
-    >>> field("hohoho", key=str.upper, a="a", b="b")
-    'A'
-
-You can register multiple fields at once:
-
-.. code:: python
-
-    >>> field.register_fields(
-        fields=[
-            ('mf1', my_field_1),
-            ('mf2', my_field_2),
-        ]
-    )
-    >>> field("mf1", key=str.lower)
-    >>> field("mf2", key=str.upper)
-
-
-Unregister Field Handler
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-If you want to unregister a field handler, you can do it like this:
-
-.. code:: python
-
-    >>> field.unregister_field("hohoho")
-
-Now you can't use it anymore and will get a ``FieldError`` if you try to do so.
-
-If you attempt to unregister a field that was never registered, nothing will happen:
-
-.. code:: python
-
-    >>> field.unregister_field("blabla") # nothing happens
-
-
-It's pretty obvious that you can unregister multiple fields at once as well:
-
-.. code:: python
-
-    >>> field.unregister_fields(
-        fields=[
-            'wow',
-            'much',
-            'fields',
-        ]
-    )
-
-or all fields at once:
-
-.. code:: python
-
-    >>> field.unregister_all_fields()
-
-All the features described above are also available for :class:`~mimesis.schema.Fieldset`.
-
-
 Key Functions
 -------------
 
@@ -389,9 +257,7 @@ Let's take a look at the example:
 
 .. code-block::
 
-    >>> from mimesis import Field, Fieldset
-    >>> from mimesis.locales import Locale
-
+    >>> from mimesis import Field, Fieldset, Locale
     >>> field = Field(Locale.EN)
     >>> field("name", key=str.upper)
     'JAMES'
@@ -399,7 +265,6 @@ Let's take a look at the example:
     >>> fieldset = Fieldset(i=3)
     >>> fieldset("name", key=str.upper)
     ['PETER', 'MARY', 'ROBERT']
-
 
 As you can see, **key** function can be applied to both — **field** and **fieldset**.
 
@@ -427,10 +292,8 @@ Let's take a look at the example:
 
 .. code:: python
 
-    >>> from mimesis import Fieldset
+    >>> from mimesis import Fieldset, Locale
     >>> from mimesis.keys import maybe
-    >>> from mimesis.locales import Locale
-
     >>> fieldset = Fieldset(Locale.EN, i=5)
     >>> fieldset("email", key=maybe(None, probability=0.6))
 
@@ -444,7 +307,6 @@ You can use any other value instead of **None**:
 
     >>> from mimesis import Fieldset
     >>> from mimesis.keys import maybe
-
     >>> fieldset = Fieldset("en", i=5)
     >>> fieldset("email", key=maybe('N/A', probability=0.6))
 
@@ -463,9 +325,8 @@ Let's take a look at the example:
 
 .. code:: python
 
+    >>> from mimesis.schema import Field, Fieldset, Locale
     >>> from mimesis.keys import romanize
-    >>> from mimesis.locales import Locale
-    >>> from mimesis.schema import Field, Fieldset
 
     >>> fieldset = Fieldset(Locale.RU, i=5)
     >>> fieldset("name", key=romanize(Locale.RU))
@@ -504,6 +365,128 @@ Here is an example of how to do this:
 
     >>> field("email", key=foobarify)
     'fooany1925@gmail.com'
+
+
+Custom Field Handlers
+---------------------
+
+.. versionadded:: 11.0.0
+
+.. note::
+
+    We using :class:`~mimesis.schema.Field` in our examples, but all the features described
+    below are available for :class:`~mimesis.schema.Fieldset` as well.
+
+Sometimes, it's necessary to register custom fields or override existing ones to return custom data. This
+can be achieved using **custom field handlers**.
+
+A custom field handler can be any callable object. It should accept an instance of :class:`~mimesis.random.Random` as
+its first argument, and **keyword arguments** (`**kwargs`) for the remaining arguments, returning the result.
+
+
+.. warning::
+
+    **Every** field handler must take a random instance as its first argument.
+    This ensures it uses the same :class:`~mimesis.random.Random` instance as the rest of the library.
+
+    Below you can see examples of valid signatures of field handlers:
+
+    - ``field_handler(random, **kwargs)``
+    - ``field_handler(random, a=None, b=None, c=None, **kwargs)``
+    - ``field_handler(random, **{a: None, b: None, c: None})``
+
+    The **main thing** is that the first argument must be positional (a random instance), and the rest must be **keyword arguments**.
+
+
+Register Field Handler
+~~~~~~~~~~~~~~~~~~~~~~
+
+Suppose you want to create a field that returns a random value from a list of values. First, you need to
+create a field handler. Let's call it ``my_field``.
+
+.. code:: python
+
+    def my_field(random, a=None, b=None) -> Any:
+        return random.choice([a, b])
+
+
+Afterwards, you need to register this field handler using a name you intend to use later. It's important to note
+that **every** field handler must be registered using a unique name, otherwise, you will override an existing
+field handler.
+
+In this example, we will name the field ``hohoho``.
+
+.. note::
+
+    To avoid receiving a ValueError, the field name must be a string that conforms to a valid Python identifier,
+    i.e ``field_name.isidentifier()`` returns ``True``.
+
+.. code:: python
+
+    >>> from mimesis import Field
+
+    >>> field = Field()
+    >>> field.register_field("hohoho", my_field)
+    >>> field("hohoho", a="a", b="b")
+    'a'
+
+Note that you can still use a `key function`, but the order of the arguments matters, so the field name comes first,
+the `key function` second, and then the rest of the keyword arguments (`**kwargs`) that are passed to the field handler:
+
+.. code:: python
+
+    >>> field("hohoho", key=str.upper, a="a", b="b")
+    'A'
+
+You can register multiple fields at once:
+
+.. code:: python
+
+    >>> field.register_fields(
+        fields=[
+            ('mf1', my_field_1),
+            ('mf2', my_field_2),
+        ]
+    )
+    >>> field("mf1", key=str.lower)
+    >>> field("mf2", key=str.upper)
+
+
+Unregister Field Handler
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+If you want to unregister a field handler, you can do it like this:
+
+.. code:: python
+
+    >>> field.unregister_field("hohoho")
+
+Now you can't use it anymore and will get a ``FieldError`` if you try to do so.
+
+If you'll attempt to unregister a field that was never registered then nothing going to happen:
+
+.. code:: python
+
+    >>> field.unregister_field("blabla") # nothing happens
+
+
+It's pretty obvious that you can unregister multiple fields at once as well:
+
+.. code:: python
+
+    >>> field.unregister_fields(
+        fields=[
+            'wow',
+            'much',
+            'fields',
+        ]
+    )
+
+or all fields at once:
+
+.. code:: python
+
+    >>> field.unregister_all_fields()
 
 
 Export Data to JSON, CSV or Pickle
