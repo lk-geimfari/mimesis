@@ -285,4 +285,8 @@ div.highlight pre, table.highlighttable pre {
         background: transparent !important;
         text-decoration: none !important;
     }
+
+    .highlight .fm {
+        color: #4fb8ff !important;
+    }
 }

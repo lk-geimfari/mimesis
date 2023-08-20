@@ -38,7 +38,7 @@ Let's define the structure of the dummy response.
 
 `dummy_endpoints.py`:
 
-.. code:: python
+.. code-block:: python
 
     from mimesis.schema import Field, Schema
     from mimesis.locales import Locale
@@ -70,7 +70,7 @@ Django Dummy API Endpoint
 
 Basically you need just create simple view, which returns `JsonResponse`:
 
-.. code:: python
+.. code-block:: python
 
     from dummy_endpoints import dummy_users
 
@@ -81,7 +81,7 @@ Basically you need just create simple view, which returns `JsonResponse`:
 
 For DRF the same, but in terms of DRF:
 
-.. code:: python
+.. code-block:: python
 
     from dummy_endpoints import dummy_users
 
@@ -92,7 +92,7 @@ For DRF the same, but in terms of DRF:
 
 Response:
 
-.. code:: json
+.. code-block:: json
 
     [
       {
@@ -116,7 +116,7 @@ Flask Dummy API Endpoint
 
 The same way as above:
 
-.. code:: python
+.. code-block:: python
 
     from dummy_endpoints import dummy_users
 
@@ -128,7 +128,7 @@ The same way as above:
 
 Response:
 
-.. code:: json
+.. code-block:: json
 
     [
       {

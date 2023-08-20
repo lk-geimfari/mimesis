@@ -51,8 +51,7 @@ to data provider:
 
 .. code-block:: python
 
-    from mimesis import Person
-    from mimesis.locales import Locale
+    from mimesis import Person, Locale
 
     person = Person(locale=Locale.TR, seed=0xFF)
     person.full_name()
@@ -67,8 +66,7 @@ method of the :class:`~mimesis.providers.BaseProvider` class
 
 .. code-block:: python
 
-    from mimesis import Person
-    from mimesis.locales import Locale
+    from mimesis import Person, Locale
 
     person = Person(Locale.EN, seed='Wow.')
 
@@ -85,8 +83,7 @@ If you want to use the same seed for all your data providers, then using :class:
 
 .. code-block:: python
 
-    from mimesis import Generic
-    from mimesis.locales import Locale
+    from mimesis import Generic, Locale
 
     generic = Generic(Locale.EN, seed='Wow. Much seed. Much random.')
 

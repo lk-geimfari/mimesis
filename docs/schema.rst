@@ -172,7 +172,7 @@ while :class:`~mimesis.schema.Field` generates a single value.
 
 Let's take a look at the example:
 
-.. code:: python
+.. code-block:: python
 
     >>> from mimesis import Field, Fieldset, Locale
     >>> field = Field(locale=Locale.EN)
@@ -196,7 +196,7 @@ of a keyword argument **i** for a specific field.
 
 Let's take a look at the example:
 
-.. code:: python
+.. code-block:: python
 
     >>> from mimesis import Fieldset, Locale
     >>> fs = Fieldset(locale=Locale.EN)
@@ -217,7 +217,7 @@ With :class:`~mimesis.schema.Fieldset`, you can create datasets that are
 similar in structure to your real-world data, allowing you to perform accurate
 and reliable testing and analysis:
 
-.. code:: python
+.. code-block:: python
 
     import pandas as pd
     from mimesis import Fieldset
@@ -255,7 +255,7 @@ the final result as the **key** parameter.
 
 Let's take a look at the example:
 
-.. code-block::
+.. code-block:: python
 
     >>> from mimesis import Field, Fieldset, Locale
     >>> field = Field(Locale.EN)
@@ -290,7 +290,7 @@ it is just a closure which accepts two arguments: **value** and **probability**.
 
 Let's take a look at the example:
 
-.. code:: python
+.. code-block:: python
 
     >>> from mimesis import Fieldset, Locale
     >>> from mimesis.keys import maybe
@@ -303,7 +303,7 @@ In the example above, the probability of generating a **None** value instead of 
 
 You can use any other value instead of **None**:
 
-.. code:: python
+.. code-block:: python
 
     >>> from mimesis import Fieldset
     >>> from mimesis.keys import maybe
@@ -323,7 +323,7 @@ data in romanized form, you can make use of the following key function :func:`~m
 
 Let's take a look at the example:
 
-.. code:: python
+.. code-block:: python
 
     >>> from mimesis.schema import Field, Fieldset, Locale
     >>> from mimesis.keys import romanize
@@ -355,7 +355,7 @@ class used to ensure that all key functions accessing random have the same seed.
 
 Here is an example of how to do this:
 
-.. code:: python
+.. code-block:: python
 
     >>> from mimesis import Field
     >>> from mimesis.locales import Locale
@@ -404,7 +404,7 @@ Register Field Handler
 Suppose you want to create a field that returns a random value from a list of values. First, you need to
 create a field handler. Let's call it ``my_field``.
 
-.. code:: python
+.. code-block:: python
 
     def my_field(random, a=None, b=None) -> Any:
         return random.choice([a, b])
@@ -421,7 +421,7 @@ In this example, we will name the field ``hohoho``.
     To avoid receiving a ValueError, the field name must be a string that conforms to a valid Python identifier,
     i.e ``field_name.isidentifier()`` returns ``True``.
 
-.. code:: python
+.. code-block:: python
 
     >>> from mimesis import Field
 
@@ -433,14 +433,14 @@ In this example, we will name the field ``hohoho``.
 Note that you can still use a `key function`, but the order of the arguments matters, so the field name comes first,
 the `key function` second, and then the rest of the keyword arguments (`**kwargs`) that are passed to the field handler:
 
-.. code:: python
+.. code-block:: python
 
     >>> field("hohoho", key=str.upper, a="a", b="b")
     'A'
 
 You can register multiple fields at once:
 
-.. code:: python
+.. code-block:: python
 
     >>> field.register_fields(
         fields=[
@@ -457,7 +457,7 @@ Unregister Field Handler
 
 If you want to unregister a field handler, you can do it like this:
 
-.. code:: python
+.. code-block:: python
 
     >>> field.unregister_field("hohoho")
 
@@ -465,14 +465,14 @@ Now you can't use it anymore and will get a ``FieldError`` if you try to do so.
 
 If you'll attempt to unregister a field that was never registered then nothing going to happen:
 
-.. code:: python
+.. code-block:: python
 
     >>> field.unregister_field("blabla") # nothing happens
 
 
 It's pretty obvious that you can unregister multiple fields at once as well:
 
-.. code:: python
+.. code-block:: python
 
     >>> field.unregister_fields(
         fields=[
@@ -484,7 +484,7 @@ It's pretty obvious that you can unregister multiple fields at once as well:
 
 or all fields at once:
 
-.. code:: python
+.. code-block:: python
 
     >>> field.unregister_all_fields()
 
@@ -496,7 +496,7 @@ Data can be exported in JSON or CSV formats, as well as pickled object represent
 
 Let's take a look at the example:
 
-.. code:: python
+.. code-block:: python
 
     from mimesis.enums import TimestampFormat
     from mimesis.locales import Locale

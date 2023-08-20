@@ -103,7 +103,7 @@ irrespective of the selected locale.
 
 By examining the example provided (the code won't execute), you can see this for yourself:
 
-.. code:: python
+.. code-block:: python
 
     from mimesis import Person
     from mimesis.locales import Locale
@@ -119,7 +119,7 @@ class structure for all languages and their objects.
 
 Here’s how it works:
 
-.. code:: python
+.. code-block:: python
 
     from mimesis import Generic
     from mimesis.locales import Locale
@@ -132,7 +132,7 @@ Here’s how it works:
 
 To modify the default name of the built-in provider, you can change the value of the attribute **Meta.name**:
 
-.. code:: python
+.. code-block:: python
 
     BrazilSpecProvider.Meta.name = 'brasil'
     generic.add_provider(BrazilSpecProvider)
@@ -142,7 +142,7 @@ To modify the default name of the built-in provider, you can change the value of
 Or just inherit the class and override the value of attribute *name*
 of class *Meta* of the provider (in our case this is :class:`~mimesis.builtins.BrazilSpecProvider`) :
 
-.. code:: python
+.. code-block:: python
 
     class Brasil(BrazilSpecProvider):
         class Meta:
@@ -158,7 +158,7 @@ Generally, you don’t need to add built-it classes to the object
 demonstrating in which cases you should add a built-in class provider to
 the object :class:`~mimesis.Generic`. You can use it directly, as shown below:
 
-.. code:: python
+.. code-block:: python
 
     from mimesis.builtins import RussiaSpecProvider
     from mimesis.enums import Gender
@@ -180,7 +180,7 @@ The library provides support for a wide range of data, which is sufficient
 for most use cases. However, for those who wish to create their own providers
 with more specific data, this can be achieved as follows:
 
-.. code:: python
+.. code-block:: python
 
     from mimesis import Generic
     from mimesis.locales import Locale
@@ -218,7 +218,7 @@ with more specific data, this can be achieved as follows:
 
 In addition, you can also add multiple providers:
 
-.. code:: python
+.. code-block:: python
 
     generic.add_providers(SomeProvider, Another)
     generic.some_provider.hello()
@@ -229,7 +229,7 @@ In addition, you can also add multiple providers:
 If you attempt to add a provider that does not inherit from :class:`~mimesis.providers.base.BaseProvider`,
 you will receive a **TypeError** exception:
 
-.. code:: python
+.. code-block:: python
 
     class InvalidProvider:
          @staticmethod
@@ -237,7 +237,7 @@ you will receive a **TypeError** exception:
              return 'Hello!'
 
     generic.add_provider(InvalidProvider)
-    Traceback (most recent call last):
+      ...
       ...
     TypeError: The provider must be a subclass of mimesis.providers.BaseProvider.
 
@@ -247,7 +247,7 @@ that only a single instance of the Random object is used.
 
 Everything here is quite straightforward, but we would like to clarify one point:
 the **name** attribute in the **Meta** class refers to the name of the class through which access
-to methods of user-class providers is carried out. By default, the class name is used in
+to methods of user-class providers is carried out. By default, the class name (``cls.__name__``) is used in
 lowercase letters.
 
 See :ref:`seeded_data` to learn how to access the :class:`~mimesis.random.Random` object.
@@ -290,7 +290,7 @@ For example:
 
 Afterwards, you will need to create a class that inherits from :class:`~mimesis.providers.base.BaseDataProvider`:
 
-.. code:: python
+.. code-block:: python
 
     from pathlib import Path
 
@@ -314,10 +314,9 @@ The **Meta** class is required and must contain the following attributes:
 
 That’s it! Now you can use your custom data provider:
 
-.. code:: python
+.. code-block:: python
 
     >>> from mimesis.locales import Locale
-
     >>> cdp = CustomDataProvider(Locale.EN)
     >>> cdp.my_method()
     'value3'

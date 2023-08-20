@@ -11,7 +11,7 @@ desired method with the appropriate parameters.
 
 Consider the following example:
 
-.. code:: python
+.. code-block:: python
 
     from mimesis import Person
     from mimesis.locales import Locale
@@ -46,7 +46,7 @@ code.
 
 Incorrect:
 
-.. code:: python
+.. code-block:: python
 
     from mimesis import Person, Datetime, Text, Code
     from mimesis.locales import Locale
@@ -59,7 +59,7 @@ Incorrect:
 
 Correct:
 
-.. code:: python
+.. code-block:: python
 
     from mimesis import Generic
     from mimesis.locales import Locale
@@ -73,7 +73,7 @@ Correct:
 
 Still correct:
 
-.. code:: python
+.. code-block:: python
 
     from mimesis import Person
     from mimesis.locales import Locale
@@ -84,7 +84,7 @@ Still correct:
 
 Also correct:
 
-.. code:: python
+.. code-block:: python
 
     from mimesis import Person
 
