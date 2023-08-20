@@ -33,12 +33,12 @@ from mimesis.enums import (
     VideoFile,
 )
 from mimesis.exceptions import (
+    FieldArityError,
     FieldError,
     FieldsetError,
     LocaleError,
     NonEnumerableError,
     SchemaError,
-    FieldArityError,
 )
 from mimesis.locales import Locale
 from mimesis.providers import (
