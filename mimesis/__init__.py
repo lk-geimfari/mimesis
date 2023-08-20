@@ -38,6 +38,7 @@ from mimesis.exceptions import (
     LocaleError,
     NonEnumerableError,
     SchemaError,
+    FieldArityError,
 )
 from mimesis.locales import Locale
 from mimesis.providers import (
@@ -128,6 +129,7 @@ __all__ = [
     "NonEnumerableError",
     "FieldError",
     "FieldsetError",
+    "FieldArityError",
     # Meta:
     "__version__",
     "__title__",
