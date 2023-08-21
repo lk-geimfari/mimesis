@@ -18,6 +18,7 @@ from mimesis.exceptions import (
 )
 from mimesis.keys import maybe, romanize
 from mimesis.locales import Locale
+from mimesis.random import Random
 from mimesis.schema import Field, Fieldset, Schema
 from mimesis.types import MissingSeed
 from tests.test_providers.patterns import DATA_PROVIDER_STR_REGEX
@@ -121,6 +122,7 @@ def test_fieldset(localized_fieldset, field_name, i):
 
 
 def test_field_get_random_instance(localized_field):
+    assert isinstance(localized_field.get_random_instance(), Random)
     assert localized_field.get_random_instance() == localized_field._gen.random
 
 
