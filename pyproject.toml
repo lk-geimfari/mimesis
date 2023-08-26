@@ -84,6 +84,7 @@ testpaths = [
 ]
 
 [tool.mypy]
+exclude = ["tests", "docs"]
 files = ["mimesis", "minifier.py"]
 strict_optional = true
 check_untyped_defs = true
