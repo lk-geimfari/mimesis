@@ -280,6 +280,10 @@ div.highlight pre, table.highlighttable pre {
         font-weight: bold;
     }
 
+    .highlight .ne {
+        color: #FF983B;
+    }
+
     a.headerlink:hover {
         color: #adbac7 !important;
         background: transparent !important;
