@@ -7,7 +7,5 @@ for populating testing databases, creating fake API endpoints, generating custom
 in JSON and XML files, and anonymizing production data, among other things. With Mimesis,
 developers can obtain realistic, randomized data easily to facilitate development and testing.
 
-Mimesis is Open Source and licensed under the `MIT License <additional-info.html#license>`_.
-
 .. include:: contents.rst.inc
 
