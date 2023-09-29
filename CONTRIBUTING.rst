@@ -2,7 +2,7 @@ Contributing Guidelines
 -----------------------
 
 The `source code`_ and `issue tracker`_ are hosted on GitHub. *Mimesis*
-is tested against Python 3.8 through 3.10 on **GitHub Actions** and **AppVeyor**.
+is tested against Python 3.8 through 3.11 on **GitHub Actions** and **AppVeyor**.
 
 Test coverage is monitored with `Codecov`_.
 
