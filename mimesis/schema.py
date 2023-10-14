@@ -178,7 +178,7 @@ class BaseField:
 
         if key and callable(key):
             try:
-                # If key function accepts two parameters
+                # If a key function accepts two parameters
                 # then pass random instance to it.
                 return key(result, random)  # type: ignore
             except TypeError:
@@ -251,7 +251,7 @@ class BaseField:
 class Field(BaseField):
     """Greedy field.
 
-    The field whcih evaluates immediately.
+    The field which evaluates immediately.
 
     .. warning::
 
@@ -262,11 +262,11 @@ class Field(BaseField):
         >>> for i in range(1000):
         ...     field = Field()
 
-        You doing it **wrong**! It is a terrible idea that will lead to a memory leak.
+        You're doing it **wrong**! It is a terrible idea that will lead to a memory leak.
 
         Forewarned is forearmed.
 
-    Here is usage example:
+    Here is an example of how to use it:
 
         >>> _ = Field()
         >>> _('username')
@@ -282,7 +282,7 @@ class Fieldset(BaseField):
 
     Works like a field, but returns a list of values.
 
-    Here is usage example:
+    Here is an example:
 
         >>> fieldset = Fieldset(i=100)
         >>> fieldset('username')
@@ -413,7 +413,7 @@ class Schema:
         """Creates a list of a fulfilled schemas.
 
         .. note::
-            This method evaluates immediately, so be careful on creating
+            This method evaluates immediately, so be careful when creating
             large datasets otherwise you're risking running out of memory.
 
             If you need a lazy version of this method, see :meth:`iterator`.
