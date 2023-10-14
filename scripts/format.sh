@@ -6,7 +6,7 @@ set -e
 : ${CHECK:=''}
 
 if [[ "$CHECK" == '0' ]]; then
-  CHECK=''  # 0 is semantically equvivalent to ''
+  CHECK=''  # 0 is semantically equivalent to ''
 fi
 if [[ ! -z "$CHECK" ]]; then
   CHECK='--check'
