@@ -31,7 +31,7 @@ Description
      :target: https://pypi.org/project/mimesis/
      :alt: PyPI - Downloads
 
-.. image:: https://img.shields.io/badge/python-3.8%20%7C%203.9%20%7C%203.10%20%7C%203.11%20%7C%20pypy-brightgreen
+.. image:: https://img.shields.io/badge/python-3.8%20%7C%203.9%20%7C%203.10%20%7C%203.11%20%7C%203.12%20%7C%20pypy-brightgreen
      :target: https://pypi.org/project/mimesis/
      :alt: Python version
 
@@ -55,6 +55,8 @@ Python compatibility
 Mimesis is compatible with Python, including PyPy, version 3.8 or higher. The Mimesis 4.1.3 is the last release that accommodates Python 3.6 and 3.7.
 
 To prevent unintended upgrades, it is highly advisable to always specify the version of mimesis that you are using by pinning it.
+
+As of version 12.0.0, Mimesis will no longer support older versions of Python. The minimum supported version of Python will be 3.10.
 
 Supported Features
 ------------------
