@@ -49,24 +49,15 @@ To install mimesis, simply use pip:
     pip install mimesis
 
 
-Python compatibility
----------------------
+Features
+--------
 
-Mimesis is compatible with Python, including PyPy, version 3.8 or higher. The Mimesis 4.1.3 is the last release that accommodates Python 3.6 and 3.7.
-
-To prevent unintended upgrades, it is highly advisable to always specify the version of mimesis that you are using by pinning it.
-
-As of version 12.0.0, Mimesis will no longer support older versions of Python. The minimum supported version of Python will be 3.10.
-
-Supported Features
-------------------
-
-- **Easy**: Mimesis offers a simple design and clear documentation for easy data generation.
-- **Multilingual**: Mimesis can generate data in multiple languages.
+- **Easy**: Offers a simple design and clear documentation for easy data generation.
+- **Multilingual**: Supports multiple languages.
 - **Performance**: Widely recognized as the fastest data generator among Python solutions.
-- **Data variety**: Mimesis includes various data providers for names, addresses, phone numbers, email addresses, dates, times, and more, catering to different use cases.
-- **Country-specific data providers**: Mimesis supports country-specific data providers for generating region-specific data.
-- **Extensibility**: Developers can extend Mimesis by creating and integrating their own data providers.
+- **Data variety**: Includes various data providers for names, addresses, phone numbers, email addresses, dates, times, and more, catering to different use cases.
+- **Country-specific data providers**: Supports country-specific data providers for generating region-specific data.
+- **Extensibility**: Supports custom data providers.
 - **Generic data provider**: Mimesis provides a single object that grants easy access to all available data providers in the library.
 - **Zero hard dependencies**: Mimesis has no hard dependencies, eliminating the need for additional third-party libraries.
 - **Schema-based generators**: Mimesis offers schema-based data generators to effortlessly produce data of any complexity.
@@ -117,38 +108,8 @@ For instance, the `Person <https://mimesis.name/en/latest/api.html#person>`_ pro
     '1-436-896-5213'
 
 
-More about the other providers you can read in our `documentation`_.
+You can learn more about other providers and locales in our `documentation`_.
 
-
-Locales
--------
-
-Mimesis presently encompasses 34 distinct locales, enabling users to specify the desired region and language when creating providers.
-
-Here's how it operates practically:
-
-.. code:: python
-
-    >>> from mimesis import Person
-    >>> from mimesis.locales import Locale
-    >>> from mimesis.enums import Gender
-
-    >>> person_de = Person(locale=Locale.DE)
-    >>> person_en = Person(locale=Locale.EN)
-
-    >>> person_de.full_name(gender=Gender.FEMALE)
-    'Sabrina Gutermuth'
-
-    >>> person_en.full_name(gender=Gender.MALE)
-    'Layne Gallagher'
-
-
-Providers
----------
-
-Mimesis provides more than twenty data providers which can generate a broad range of data related to food, transportation, computer hardware, people, internet, addresses, and more.
-
-See `API Reference`_ and `Data Providers`_ for more info.
 
 How to Contribute
 -----------------
@@ -162,11 +123,6 @@ How to Contribute
 5. Send a pull request and bug the maintainer until it gets merged and
    published.
 
-
-Disclaimer
-----------
-
-The creators of ``mimesis`` are not responsible for how you use the library or the data it generates. Mimesis is meant for testing purposes and should not be used for illegal activities.
 
 License
 -------
