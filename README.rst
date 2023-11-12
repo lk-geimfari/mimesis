@@ -52,12 +52,11 @@ To install mimesis, simply use pip:
 Features
 --------
 
-- **Easy**: Offers a simple design and clear documentation for easy data generation.
 - **Multilingual**: Supports multiple languages.
+- **Extensibility**: Supports custom data providers.
+- **Easy**: Offers a simple design and clear documentation for easy data generation.
 - **Performance**: Widely recognized as the fastest data generator among Python solutions.
 - **Data variety**: Includes various data providers for names, addresses, phone numbers, email addresses, dates, times, and more, catering to different use cases.
-- **Extensibility**: Supports custom data providers.
-- **Generic data provider**: Provides a single object that grants easy access to all available data providers in the library.
 - **Schema-based generators**: Supports schema-based data generators to effortlessly produce data of any complexity.
 
 Documentation
