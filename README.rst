@@ -56,11 +56,9 @@ Features
 - **Multilingual**: Supports multiple languages.
 - **Performance**: Widely recognized as the fastest data generator among Python solutions.
 - **Data variety**: Includes various data providers for names, addresses, phone numbers, email addresses, dates, times, and more, catering to different use cases.
-- **Country-specific data providers**: Supports country-specific data providers for generating region-specific data.
 - **Extensibility**: Supports custom data providers.
-- **Generic data provider**: Mimesis provides a single object that grants easy access to all available data providers in the library.
-- **Zero hard dependencies**: Mimesis has no hard dependencies, eliminating the need for additional third-party libraries.
-- **Schema-based generators**: Mimesis offers schema-based data generators to effortlessly produce data of any complexity.
+- **Generic data provider**: Provides a single object that grants easy access to all available data providers in the library.
+- **Schema-based generators**: Supports schema-based data generators to effortlessly produce data of any complexity.
 
 Documentation
 -------------
