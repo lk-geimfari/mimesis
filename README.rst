@@ -56,8 +56,8 @@ Features
 - **Extensibility**: Supports custom data providers.
 - **Easy**: Offers a simple design and clear documentation for easy data generation.
 - **Performance**: Widely recognized as the fastest data generator among Python solutions.
-- **Data variety**: Includes various data providers for names, addresses, phone numbers, email addresses, dates, times, and more, catering to different use cases.
-- **Schema-based generators**: Supports schema-based data generators to effortlessly produce data of any complexity.
+- **Data variety**: Includes a variety of data providers designed for different use cases.
+- **Schema-based generators**: Offers schema-based data generators to effortlessly produce data of any complexity.
 
 Documentation
 -------------
