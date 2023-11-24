@@ -375,10 +375,8 @@ class Schema:
     def to_csv(self, file_path: str, **kwargs: t.Any) -> None:
         """Export a schema as a CSV file.
 
-        :param file_path: File path.
+        :param file_path: The file path.
         :param kwargs: The keyword arguments for :py:class:`csv.DictWriter` class.
-
-        *New in version 5.3.0*
         """
         data = self.create()
         with open(file_path, "w", encoding="utf-8", newline="") as fp:
@@ -390,10 +388,8 @@ class Schema:
     def to_json(self, file_path: str, **kwargs: t.Any) -> None:
         """Export a schema as a JSON file.
 
-        :param file_path: File path.
+        :param file_path: File a path.
         :param kwargs: Extra keyword arguments for :py:func:`json.dump` class.
-
-        *New in version 5.3.0*
         """
         with open(file_path, "w", encoding="utf-8") as fp:
             json.dump(self.create(), fp, **kwargs)
@@ -401,10 +397,8 @@ class Schema:
     def to_pickle(self, file_path: str, **kwargs: t.Any) -> None:
         """Export a schema as the pickled representation of the object to the file.
 
-        :param file_path: File path.
+        :param file_path: The file path.
         :param kwargs: Extra keyword arguments for :py:func:`pickle.dump` class.
-
-        *New in version 5.3.0*
         """
         with open(file_path, "wb") as fp:
             pickle.dump(self.create(), fp, **kwargs)
