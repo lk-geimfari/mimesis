@@ -191,7 +191,7 @@ class BaseDataProvider(BaseProvider):
     def get_current_locale(self) -> str:
         """Get current locale.
 
-        If locale is not defined then this method will always return ``en``,
+        If locale is not defined, then this method will always return ``en``,
         because ``en`` is default locale for all providers, excluding builtins.
 
         :return: Current locale.

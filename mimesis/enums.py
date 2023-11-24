@@ -5,9 +5,9 @@ You should always import enums from this module if you want
 behavior for the methods that differ from the default behavior.
 
 You should never use your own enums in methods because in this case,
-there no guarantee that you will get the result which you actually expected.
+there is no guarantee that you will get the result which you actually expected.
 
-Below you can see an example of usage enums in methods of data providers.
+Below, you can see an example of usage enums in methods of data providers.
 """
 import typing as t
 from enum import Enum, auto
