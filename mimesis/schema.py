@@ -132,10 +132,10 @@ class BaseField:
     ) -> t.Any:
         """Performs the value of the field by its name.
 
-        It takes any string which represents the name of any method of
+        It takes any string that represents the name of any method of
         any supported data provider and the ``**kwargs`` of this method.
 
-        .. note:: Some data providers have methods with the same names
+        .. note:: Some data providers have methods with the same names,
             and in such cases, you can explicitly define that the method
             belongs to data-provider ``name='provider.name'`` otherwise
             it will return the data from the first provider which
@@ -162,8 +162,8 @@ class BaseField:
         :param key: A key function (any callable object)
             which will be applied to result.
         :param kwargs: Kwargs of method.
-        :return: Value which represented by method.
-        :raises ValueError: if provider not supported or if field not defined.
+        :return: The result of method.
+        :raises ValueError: if provider is not supported or if field is not defined.
         """
         if name is None:
             raise FieldError()
