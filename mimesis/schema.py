@@ -62,7 +62,7 @@ class BaseField:
         self._gen.reseed(seed)
 
     def get_random_instance(self) -> Random:
-        """Get random object from Generic.
+        """Get a random object from Generic.
 
         :return: Random object.
         """
