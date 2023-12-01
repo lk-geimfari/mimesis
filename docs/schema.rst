@@ -418,7 +418,7 @@ In this example, we will name the field ``hohoho``.
 
 .. note::
 
-    To avoid receiving a ValueError, the field name must be a string that conforms to a valid Python identifier,
+    To avoid receiving a ``FieldNameError``, the field name must be a string that conforms to a valid Python identifier,
     i.e ``field_name.isidentifier()`` returns ``True``.
 
 .. code-block:: python

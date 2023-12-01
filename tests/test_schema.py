@@ -13,6 +13,7 @@ from mimesis.enums import Gender
 from mimesis.exceptions import (
     FieldArityError,
     FieldError,
+    FieldNameError,
     FieldsetError,
     SchemaError,
 )
@@ -426,7 +427,7 @@ def test_register_field_non_callable(default_field):
     ],
 )
 def test_register_field_with_invalid_name(default_field, invalid_field_name):
-    with pytest.raises(ValueError):
+    with pytest.raises(FieldNameError):
         default_field.register_field(invalid_field_name, my_field_handler)
 
 

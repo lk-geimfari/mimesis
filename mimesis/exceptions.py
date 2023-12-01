@@ -27,7 +27,7 @@ class SchemaError(ValueError):
 
 
 class NonEnumerableError(TypeError):
-    """Raised when object is not instance of Enum."""
+    """Raised when an object is not an instance of Enum."""
 
     message = "You should use one item of: «{}» of the object mimesis.enums.{}"
 
@@ -47,6 +47,8 @@ class NonEnumerableError(TypeError):
 
 
 class FieldError(ValueError):
+    """Raised when field is not found."""
+
     def __init__(self, name: t.Optional[str] = None) -> None:
         """Initialize attributes for more informative output.
 
@@ -69,6 +71,22 @@ class FieldsetError(ValueError):
         return "The «iterations» parameter must be greater than 1."
 
 
+class FieldNameError(ValueError):
+    """Raised when a field name is invalid."""
+
+    def __init__(self, name: t.Optional[str] = None) -> None:
+        """Initialize attributes for more informative output.
+
+        :param name: Name of the field.
+        """
+        self.name = name
+
+    def __str__(self) -> str:
+        return f"The field name «{self.name}» is not a valid Python identifier."
+
+
 class FieldArityError(ValueError):
+    """Raised when registering field handler has incompatible arity."""
+
     def __str__(self) -> str:
         return "The custom handler must accept at least two arguments: 'random' and '**kwargs'"

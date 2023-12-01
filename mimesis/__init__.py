@@ -35,6 +35,7 @@ from mimesis.enums import (
 from mimesis.exceptions import (
     FieldArityError,
     FieldError,
+    FieldNameError,
     FieldsetError,
     LocaleError,
     NonEnumerableError,
@@ -130,6 +131,7 @@ __all__ = [
     "FieldError",
     "FieldsetError",
     "FieldArityError",
+    "FieldNameError",
     # Meta:
     "__version__",
     "__title__",
@@ -140,7 +142,7 @@ __all__ = [
     "__license__",
 ]
 
-__version__ = "11.1.0"
+__version__ = "12.0.0"
 __title__ = "mimesis"
 __description__ = "Mimesis: Fake Data Generator."
 __url__ = "https://github.com/lk-geimfari/mimesis"

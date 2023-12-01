@@ -10,6 +10,7 @@ import typing as t
 from mimesis.exceptions import (
     FieldArityError,
     FieldError,
+    FieldNameError,
     FieldsetError,
     SchemaError,
 )
@@ -197,7 +198,7 @@ class BaseField:
             raise TypeError("Field name must be a string.")
 
         if not field_name.isidentifier():
-            raise ValueError("Field name must be a valid Python identifier.")
+            raise FieldNameError(field_name)
 
         if not callable(field_handler):
             raise TypeError("Handler must be a callable object.")
