@@ -457,8 +457,8 @@ class Person(BaseDataProvider):
     def identifier(self, mask: str = "##-##/##") -> str:
         """Generate a random identifier by mask.
 
-        With this method you can generate any identifiers that
-        you need. Simply select the mask that you need.
+        With this method, you can generate any identifiers that
+        you need by specifying the mask.
 
         :param mask:
             The mask. Here ``@`` is a placeholder for characters and ``#`` is

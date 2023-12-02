@@ -125,7 +125,7 @@ class Random(random_module.Random):
         """Returns a random element according to the specified weights.
 
         :param choices: A dictionary where keys are choices and values are weights.
-        :raises ValueError: if choices is empty.
+        :raises ValueError: If choices are empty.
         :return: Random key from dictionary.
         """
         if not choices:

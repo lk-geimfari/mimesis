@@ -59,7 +59,7 @@ class BinaryFile(BaseProvider):
         return self._read_file(file_type=file_type)
 
     def audio(self, *, file_type: AudioFile = AudioFile.MP3) -> bytes:
-        """Generates audio file of given format and returns it as bytes.
+        """Generates an audio file of given format and returns it as bytes.
 
         .. note:: This method accepts keyword-only arguments.
 
@@ -69,7 +69,7 @@ class BinaryFile(BaseProvider):
         return self._read_file(file_type=file_type)
 
     def document(self, *, file_type: DocumentFile = DocumentFile.PDF) -> bytes:
-        """Generates document of given format and returns it as bytes.
+        """Generates a document of given format and returns it as bytes.
 
         .. note:: This method accepts keyword-only arguments.
 
@@ -79,7 +79,7 @@ class BinaryFile(BaseProvider):
         return self._read_file(file_type=file_type)
 
     def image(self, *, file_type: ImageFile = ImageFile.PNG) -> bytes:
-        """Generates image of given format and returns it as bytes.
+        """Generates an image of given format and returns it as bytes.
 
         .. note:: This method accepts keyword-only arguments.
 
@@ -89,7 +89,7 @@ class BinaryFile(BaseProvider):
         return self._read_file(file_type=file_type)
 
     def compressed(self, *, file_type: CompressedFile = CompressedFile.ZIP) -> bytes:
-        """Generates compressed file of given format and returns it as bytes.
+        """Generates a compressed file of given format and returns it as bytes.
 
         .. note:: This method accepts keyword-only arguments.
 

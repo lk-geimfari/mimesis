@@ -72,7 +72,7 @@ class Choice(BaseProvider):
         if length == 0:
             return self.random.choice(items)
 
-        if unique and len(set(items)) < length:  # Sanity check
+        if unique and len(set(items)) < length:
             raise ValueError(
                 "There are not enough unique elements in "
                 "**items** to provide the specified **number**."

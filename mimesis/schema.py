@@ -327,7 +327,7 @@ class Fieldset(BaseField):
 
         :param args: Arguments for field.
         :param kwargs: Keyword arguments for field.
-        :raises FieldsetError: If iterations less than 1.
+        :raises FieldsetError: If parameter **i** is less than 1.
         :return: List of values.
         """
         min_iterations = 1
