@@ -11,7 +11,7 @@ For generating data by schema, just create an instance of :class:`~mimesis.schem
 object, which takes any string which represents the name of data
 provider in following formats:
 
-- ``handler``/``method`` — the first custom field handler registered under the name ``handler`` will be chosen, or the first provider that has a method named ``method`` will be selected.
+- ``handler``/``method`` — the first custom field handler registered under the name ``handler`` will be chosen, or the first provider that has a method named ``method`` will be selected (See :ref:`api` to get the full list of available data providers and their methods).
 - ``provider.method`` — explicitly defines that the method **method** belongs to **provider**
 
 
