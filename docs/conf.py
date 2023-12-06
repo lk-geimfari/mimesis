@@ -198,10 +198,8 @@ html_css_files = [
 #
 
 _default_sidebars = [
-    "sidebars/head.html",
     "searchbox.html",
     "sidebars/toc.html",
-    "sidebars/follow_me.html",
     "sidebars/useful_links.html",
 ]
 

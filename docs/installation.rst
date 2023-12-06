@@ -7,13 +7,6 @@ Python compatibility
 
 Mimesis is compatible with Python, including PyPy, version 3.8 or higher.
 
-To prevent unintended upgrades, it is highly advisable to always specify the version of mimesis that you are using by locking it.
-
-.. image:: https://img.shields.io/badge/python-3.8%20%7C%203.9%20%7C%203.10%20%7C%203.11%20%7C%20pypy-brightgreen
-     :target: https://pypi.org/project/mimesis/
-     :alt: Python version
-
-
 Dependencies
 ------------
 
