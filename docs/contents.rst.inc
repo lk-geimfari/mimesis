@@ -33,23 +33,13 @@ method, this part of the documentation is for you.
 Additional Information
 ----------------------
 
-Disclaimer, legal information and other information are here for the interested.
+Disclaimers, legal information, and other details are provided here for those interested.
 
 .. toctree::
    :maxdepth: 1
 
    additional-info
    contributing
-
-
-Changelog
----------
-
-Here you can see the full list of changes between each Mimesis release.
-
-.. toctree::
-   :maxdepth: 1
-
    changelog
 
 

@@ -129,11 +129,19 @@ div.highlight pre, table.highlighttable pre {
         border: 1px solid rgba(142, 117, 114, 0.25);
     }
 
-    #contents li a {
+    #contents li a,
+    #api-reference li a,
+    #additional-information li a,
+    #changelog li a,
+    #indices li a {
         color: #98a3ad !important;
     }
 
-    #contents li a:hover {
+    #contents li a:hover,
+    #api-reference li a:hover,
+    #additional-information li a:hover,
+    #changelog li a:hover,
+    #indices li a:hover {
         color: #2b79a2 !important;
         text-decoration: underline !important;
     }
