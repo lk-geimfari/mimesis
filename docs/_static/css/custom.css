@@ -98,7 +98,7 @@ div.highlight pre, table.highlighttable pre {
     div.note {
         background-color: #1d1f21 !important;
         border-radius: 10px;
-        border: 1px solid hsla(203.8, 34.4%, 35.9%, 0.43)
+        border: 1px solid #2a2e2f;
     }
 
     pre {
@@ -109,11 +109,13 @@ div.highlight pre, table.highlighttable pre {
     tt, code {
         background-color: #1d1f21 !important;
         color: #98a3ad;
+        border-bottom: none;
+        padding: 1px 4px;
+        border-radius: 3px;
     }
 
     #api-reference .reference span.pre {
-        background-color: #141617;
-    !important;
+        background-color: #141617 !important;
     }
 
     div.highlight {
@@ -124,7 +126,7 @@ div.highlight pre, table.highlighttable pre {
     div.warning {
         background-color: #1d1f21 !important;
         border-radius: 8px;
-        border: 1px solid rgba(223, 193, 161, 0.25);
+        border: 1px solid rgba(142, 117, 114, 0.25);
     }
 
     #contents li a {
