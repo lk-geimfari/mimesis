@@ -95,7 +95,7 @@ class Address(BaseDataProvider):
         if self.locale == "ja":
             return fmt.format(
                 self.random.choice(self.extract(["city"])),
-                # Generate list of random integers
+                # Generate a list of random integers
                 # in amount of 3, from 1 to 100.
                 *self.random.randints(amount=3, a=1, b=100),
             )
@@ -107,7 +107,7 @@ class Address(BaseDataProvider):
         )
 
     def state(self, abbr: bool = False) -> str:
-        """Get a random administrative district of country.
+        """Get a random administrative district of the country.
 
         :param abbr: Return ISO 3166-2 code.
         :return: Administrative district.
@@ -164,7 +164,7 @@ class Address(BaseDataProvider):
         """Get a random code of country.
 
         Default format is :attr:`~enums.CountryCode.A2` (ISO 3166-1-alpha2),
-        you can change it by passing parameter ``fmt`` with enum object
+        you can change it by passing parameter ``fmt`` with an enum object
         :class:`~enums.CountryCode`.
 
         :param code: Enum object CountryCode.

@@ -33,8 +33,8 @@ class BaseProvider:
     ) -> None:
         """Initialize attributes.
 
-        Keep in mind, that locale-independent data providers will work
-        only with keyword-only arguments since version 5.0.0.
+        Keep in mind that locale-independent data providers will work
+        only with keyword-only arguments.
 
         :param seed: Seed for random.
             When set to `None` the current system time is used.
@@ -56,7 +56,7 @@ class BaseProvider:
         """Reseed the internal random generator.
 
         In case we use the default seed, we need to create a per instance
-        random generator, in this case two providers with the same seed
+        random generator. In this case, two providers with the same seed
         will always return the same values.
 
         :param seed: Seed for random.
@@ -76,7 +76,7 @@ class BaseProvider:
         :param item: Item of an enum object.
         :param enum: Enum object.
         :return: Value of item.
-        :raises NonEnumerableError: if ``item`` not in ``enum``.
+        :raises NonEnumerableError: If ``item`` not in ``enum``.
         """
         if item is None:
             result = self.random.choice_enum_item(enum)
