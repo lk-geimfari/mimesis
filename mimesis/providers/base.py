@@ -73,7 +73,7 @@ class BaseProvider:
     def validate_enum(self, item: t.Any, enum: t.Any) -> t.Any:
         """Validate enum parameter of method in subclasses of BaseProvider.
 
-        :param item: Item of enum object.
+        :param item: Item of an enum object.
         :param enum: Enum object.
         :return: Value of item.
         :raises NonEnumerableError: if ``item`` not in ``enum``.
