@@ -44,7 +44,7 @@ class Random(random_module.Random):
         return [int(self.random() * (b - a)) + a for _ in range(amount)]
 
     def _generate_string(self, str_seq: str, length: int = 10) -> str:
-        """Generate random string created from string sequence.
+        """Generate random string created from a string sequence.
 
         :param str_seq: String sequence of letters or digits.
         :param length: Max value.
@@ -104,7 +104,7 @@ class Random(random_module.Random):
         Basically, this method is just a simple wrapper around :py:class:`uuid.UUID`.
 
         :param unique: Generate only unique values.
-        :param length: Length of string. Default range is [a, b].
+        :param length: Length of string. The default range is [a, b].
         :return: Random string.
 
         """

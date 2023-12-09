@@ -79,7 +79,7 @@ class Generic(BaseProvider):
         name: t.Final[str] = "generic"
 
     def __getattr__(self, attrname: str) -> t.Any:
-        """Get attribute without underscore.
+        """Get attribute without an underscore.
 
         :param attrname: Attribute name.
         :return: An attribute.
@@ -134,7 +134,7 @@ class Generic(BaseProvider):
                 continue
 
     def add_provider(self, cls: t.Type[BaseProvider], **kwargs: t.Any) -> None:
-        """Add a custom provider to Generic() object.
+        """Add a custom provider to a Generic() object.
 
         :param cls: Custom provider.
         :param kwargs: Keyword arguments for provider.
@@ -190,7 +190,7 @@ class Generic(BaseProvider):
             self.add_provider(provider)
 
     def __iadd__(self, other: t.Type[BaseProvider]) -> "Generic":
-        """Add a custom provider to Generic() object.
+        """Add a custom provider to a Generic() object.
 
         :param other: Custom provider.
         :return: None

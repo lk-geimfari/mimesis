@@ -51,7 +51,7 @@ class Food(BaseDataProvider):
     def spices(self) -> str:
         """Get a random spices or herbs.
 
-        :return: Spices or herbs.
+        :return: The name of the spices or herbs.
 
         :Example:
             Anise.
@@ -61,7 +61,7 @@ class Food(BaseDataProvider):
     def drink(self) -> str:
         """Get a random drink.
 
-        :return: Alcoholic drink.
+        :return: The name of the alcoholic beverage.
 
         :Example:
             Vodka.

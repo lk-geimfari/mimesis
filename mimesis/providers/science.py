@@ -42,7 +42,7 @@ class Science(BaseProvider):
         name: t.Optional[MeasureUnit] = None,
         symbol: bool = False,
     ) -> str:
-        """Get unit name from International System of Units.
+        """Get unit name from the International System of Units.
 
         :param name: Enum object UnitName.
         :param symbol: Return only symbol
