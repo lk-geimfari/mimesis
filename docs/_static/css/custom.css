@@ -5,6 +5,16 @@ pre, tt, code {
     font-size: 0.9em;
 }
 
+a.reference {
+    text-decoration: none;
+    border-bottom: none;
+}
+
+div.sphinxsidebar a {
+    text-decoration: none;
+    border-bottom: none;
+}
+
 .function, .method, .class, .exception {
     padding-bottom: 15px;
 }
@@ -52,7 +62,7 @@ div.highlight pre, table.highlighttable pre {
 
 @media (prefers-color-scheme: dark) {
     body {
-        background-color: #141617;
+        background-color: #171717;
     }
 
     div.sphinxsidebar p {
@@ -65,11 +75,11 @@ div.highlight pre, table.highlighttable pre {
     }
 
     dt:target, .highlight {
-        background: #141617;
+        background: #171717;
     }
 
     .py, .py-class {
-        background: #141617;
+        background: #171717;
     }
 
     div.sphinxsidebar h3,
@@ -91,23 +101,23 @@ div.highlight pre, table.highlighttable pre {
     }
 
     div.body {
-        background-color: #141617;
+        background-color: #171717;
         color: #98a3ad;
     }
 
     div.note {
-        background-color: #1d1f21 !important;
+        background-color: #1a1a1a !important;
         border-radius: 10px;
         border: 1px solid #2a2e2f;
     }
 
     pre {
-        background-color: #1d1f21 !important;
+        background-color: #1a1a1a !important;
         border-radius: 10px;
     }
 
     tt, code {
-        background-color: #1d1f21 !important;
+        background-color: #1a1a1a !important;
         color: #98a3ad;
         border-bottom: none;
         padding: 1px 4px;
@@ -115,16 +125,16 @@ div.highlight pre, table.highlighttable pre {
     }
 
     #api-reference .reference span.pre {
-        background-color: #141617 !important;
+        background-color: #171717 !important;
     }
 
     div.highlight {
-        background-color: #1d1f21 !important;
+        background-color: #1a1a1a !important;
         border-radius: 15px;
     }
 
     div.warning {
-        background-color: #1d1f21 !important;
+        background-color: #1a1a1a !important;
         border-radius: 8px;
         border: 1px solid rgba(142, 117, 114, 0.25);
     }
@@ -245,8 +255,8 @@ div.highlight pre, table.highlighttable pre {
     }
 
     .rst-versions .rst-current-version {
-        background-color: #141617 !important;
-        border: 1px solid #1d1f21;
+        background-color: #171717 !important;
+        border: 1px solid #1a1a1a;
     }
 
     .highlight .nf {
@@ -280,7 +290,7 @@ div.highlight pre, table.highlighttable pre {
         width: 80%;
         padding: 0.25em;
         box-sizing: border-box;
-        background: #141617;
+        background: #171717;
     }
 
     div.sphinxsidebar input {
@@ -290,11 +300,11 @@ div.highlight pre, table.highlighttable pre {
 
     div.sphinxsidebar #searchbox input[type="submit"] {
         color: #98a3ad;
-        background: #141617;
+        background: #171717;
     }
 
     input[value="Go"] {
-        background-color: #141617 !important;
+        background-color: #171717 !important;
     }
 
     input[value="Go"]:hover {
