@@ -96,8 +96,8 @@ class Address(BaseDataProvider):
             return fmt.format(
                 self.random.choice(self.extract(["city"])),
                 # Generate a list of random integers
-                # in amount of 3, from 1 to 100.
-                *self.random.randints(amount=3, a=1, b=100),
+                # in n of 3, from 1 to 100.
+                *self.random.randints(n=3, a=1, b=100),
             )
 
         return fmt.format(

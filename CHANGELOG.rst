@@ -4,7 +4,12 @@ Version 11.1.0
 **Added**:
 
 - Added validation for custom field names.
+- Added method ``calver`` for ``Development``.
+- Added method ``stage`` for ``Development``.
 
+**Updated**:
+
+- The ``version()`` method of ``Development`` no longer accepts ``pre_release`` and ``pre_release`` parameters.
 
 Version 11.0.0
 --------------

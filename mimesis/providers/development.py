@@ -7,6 +7,7 @@ from mimesis.data import (
     LICENSES,
     OS,
     PROGRAMMING_LANGS,
+    STAGES,
     SYSTEM_QUALITY_ATTRIBUTES,
 )
 from mimesis.enums import DSNType
@@ -26,7 +27,7 @@ class Development(BaseProvider):
             *args,
             **kwargs,
         )
-        self._now = datetime.now()
+        self.__now = datetime.now()
 
     class Meta:
         name = "development"
@@ -51,30 +52,39 @@ class Development(BaseProvider):
         """
         return self.random.choice(LICENSES)
 
-    def version(self, calver: bool = False, pre_release: bool = False) -> str:
-        """Generate version number.
+    def calver(self) -> str:
+        """Generate a random calendar versioning string.
 
-        :param calver: Calendar versioning.
-        :param pre_release: Pre-release.
-        :return: Version.
+        :return: Calendar versioning string.
+
+        :Example:
+            2016.11.08
+        """
+        year = self.random.randint(2016, self.__now.year)
+        month = self.random.randint(1, 12)
+        day = self.random.randint(1, 29)
+        return f"{year}.{month}.{day}"
+
+    def version(self) -> str:
+        """Generate a random semantic versioning string.
+
+        :return: Semantic versioning string.
 
         :Example:
             0.2.1
         """
-        if calver:
-            major = self.random.randint(2016, self._now.year)
-            minor, patch = self.random.randints(2, 1, 10)
-        else:
-            major, minor, patch = self.random.randints(3, 0, 10)
+        major, minor, patch = self.random.randints(n=3, a=0, b=100)
+        return f"{major}.{minor}.{patch}"
 
-        version = f"{major}.{minor}.{patch}"
+    def stage(self) -> str:
+        """Generate a random stage of development.
 
-        if pre_release:
-            suffix = self.random.choice(("alpha", "beta", "rc"))
-            number = self.random.randint(1, 11)
-            version = f"{version}-{suffix}.{number}"
+        :return: Release stage.
 
-        return version
+        :Example:
+            Alpha.
+        """
+        return self.random.choice(STAGES)
 
     def programming_language(self) -> str:
         """Get a random programming language from the list.

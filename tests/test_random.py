@@ -10,16 +10,16 @@ def random():
 
 
 @pytest.mark.parametrize(
-    "amount, a, b",
+    "n, a, b",
     [
         (3, 1, 20),
         (5, 1, 20),
         (10, 1, 20),
     ],
 )
-def test_randints(random, amount, a, b):
-    result = random.randints(amount, a, b)
-    assert len(result) == amount
+def test_randints(random, n, a, b):
+    result = random.randints(n, a, b)
+    assert len(result) == n
     assert all(a <= x <= b for x in result)
 
 

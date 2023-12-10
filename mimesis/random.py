@@ -29,19 +29,19 @@ class Random(random_module.Random):
     This class can be extended according to specific requirements.
     """
 
-    def randints(self, amount: int = 3, a: int = 1, b: int = 100) -> t.List[int]:
-        """Generate list of random integers.
+    def randints(self, n: int = 3, a: int = 1, b: int = 100) -> t.List[int]:
+        """Generate a list of random integers.
 
-        :param amount: Amount of elements.
+        :param n: Number of elements.
         :param a: Minimum value of range.
         :param b: Maximum value of range.
         :return: List of random integers.
-        :raises ValueError: if amount less or equal to zero.
+        :raises ValueError: if the number is less or equal to zero.
         """
-        if amount <= 0:
+        if n <= 0:
             raise ValueError("Amount out of range.")
 
-        return [int(self.random() * (b - a)) + a for _ in range(amount)]
+        return [int(self.random() * (b - a)) + a for _ in range(n)]
 
     def _generate_string(self, str_seq: str, length: int = 10) -> str:
         """Generate random string created from a string sequence.
