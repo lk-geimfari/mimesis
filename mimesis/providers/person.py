@@ -156,7 +156,7 @@ class Person(BaseDataProvider):
     def username(
         self, mask: t.Optional[str] = None, drange: t.Tuple[int, int] = (1800, 2100)
     ) -> str:
-        """Generate username by mask.
+        """Generate a username by mask.
 
         Masks allow you to generate a variety of usernames.
 
