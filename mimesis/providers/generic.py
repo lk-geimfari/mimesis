@@ -95,9 +95,6 @@ class Generic(BaseProvider):
     def __dir__(self) -> t.List[str]:
         """Available data providers.
 
-        The list of result will be used in AbstractField to
-        determine method's class.
-
         :return: List of attributes.
         """
         attributes = []

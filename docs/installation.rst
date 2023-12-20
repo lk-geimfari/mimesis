@@ -5,12 +5,15 @@ Installation
 Python compatibility
 --------------------
 
-Mimesis is compatible with Python, including PyPy, version 3.8 or higher.
+Mimesis is compatible with Python version 3.10 or higher (including PyPy 3.10).
+
+To work with Mimesis on Python versions 3.8 and 3.9, the final compatible
+version is Mimesis 11.1.0. Install this specific version to ensure compatibility.
 
 Dependencies
 ------------
 
-Mimesis has no hard dependencies, but you need to install pytz to add
+Mimesis has no hard dependencies, but you need to install `pytz` to add
 timezone support for some methods of the :class:`~mimesis.Datetime` provider.
 
 
