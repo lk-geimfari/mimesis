@@ -1,4 +1,4 @@
-Version 11.1.0
+Version 12.1.0
 --------------
 
 **Added**:
@@ -7,9 +7,13 @@ Version 11.1.0
 - Added method ``calver`` for ``Development``.
 - Added method ``stage`` for ``Development``.
 
+**Removed**:
+
+- Locale codes as strings are no longer allowed. Use the ``Locale'' enumeration instead.
+
 **Updated**:
 
-- The ``version()`` method of ``Development`` no longer accepts ``pre_release`` and ``pre_release`` parameters.
+- The ``version()`` method of ``Development`` no longer accepts ``pre_release`` and ``calver`` parameters. Use methods ``stage()`` and ``calver()`` instead.
 
 Version 11.0.0
 --------------
