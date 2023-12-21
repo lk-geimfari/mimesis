@@ -55,7 +55,7 @@ have incredible `mimicry <https://en.wikipedia.org/wiki/Mimicry>`_ abilities.
 `Thaumoctopus mimicus <https://en.wikipedia.org/wiki/Mimic_octopus>`_ is a particularly
 impressive example, and if you haven't heard of it yet, you should definitely read up on this remarkable species.
 
-Check out that spotty bastard. Isn't it badass as fuck?
+Check out that spotty bastard. Isn't it badass as hell?
 
 .. image:: _static/thaumoctopus_mimicus.jpg
    :width: 700
