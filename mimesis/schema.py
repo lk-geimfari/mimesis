@@ -124,7 +124,7 @@ class BaseField:
 
     def perform(
         self,
-        name: t.Optional[str] = None,
+        name: str | None = None,
         key: Key = None,
         **kwargs: t.Any,
     ) -> t.Any:
@@ -207,6 +207,21 @@ class BaseField:
 
         if field_name not in self._custom_fields:
             self._custom_fields[field_name] = field_handler
+
+    def register(self, field_name: str) -> t.Callable[[FieldHandler], FieldHandler]:
+        """Decorator for registering a custom field handler.
+
+        .. versionadded:: 12.0.0
+
+        :param field_name: Name of the field.
+        :return: Decorator.
+        """
+
+        def decorator(field_handler: FieldHandler) -> FieldHandler:
+            self.register_field(field_name, field_handler)
+            return field_handler
+
+        return decorator
 
     def register_fields(self, fields: RegisterableFieldHandlers) -> None:
         """Register a new field handlers.

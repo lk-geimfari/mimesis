@@ -94,7 +94,7 @@ class Payment(BaseProvider):
         """
         return self.random.choice(CREDIT_CARD_NETWORKS)
 
-    def credit_card_number(self, card_type: t.Optional[CardType] = None) -> str:
+    def credit_card_number(self, card_type: CardType | None = None) -> str:
         """Generate a random credit card number.
 
         :param card_type: Issuing Network. Default is Visa.
@@ -162,7 +162,7 @@ class Payment(BaseProvider):
 
     def credit_card_owner(
         self,
-        gender: t.Optional[Gender] = None,
+        gender: Gender | None = None,
     ) -> t.Dict[str, str]:
         """Generate credit card owner.
 

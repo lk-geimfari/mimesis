@@ -390,6 +390,32 @@ def test_register_field(default_field, default_fieldset, field_name, handler):
         default_field(field_name)
 
 
+def test_field_register_decorator(default_field):
+    @default_field.register("my_field")
+    def my_field(random, **kwargs):
+        return random.choice(["a", "b"])
+
+    assert default_field("my_field") in ["a", "b"]
+
+    default_field.unregister_field("my_field")
+
+    with pytest.raises(FieldError):
+        default_field("my_field")
+
+
+def test_fieldset_register_decorator(default_fieldset):
+    @default_fieldset.register("my_field")
+    def my_field(random, **kwargs):
+        return random.choice(["a", "b"])
+
+    assert len(default_fieldset("my_field")) == 10
+
+    default_fieldset.unregister_field("my_field")
+
+    with pytest.raises(FieldError):
+        default_fieldset("my_field")
+
+
 def test_register_field_callable_with_wrong_arity(default_field):
     wrong_arity = lambda **kwargs: "error"
 

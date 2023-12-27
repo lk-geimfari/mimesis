@@ -32,7 +32,7 @@ class Development(BaseProvider):
     class Meta:
         name = "development"
 
-    def dsn(self, dsn_type: t.Optional[DSNType] = None, **kwargs: t.Any) -> str:
+    def dsn(self, dsn_type: DSNType | None = None, **kwargs: t.Any) -> str:
         """Generates a random DSN (Data Source Name).
 
         :param dsn_type: DSN type.

@@ -39,7 +39,7 @@ class Science(BaseProvider):
 
     def measure_unit(
         self,
-        name: t.Optional[MeasureUnit] = None,
+        name: MeasureUnit | None = None,
         symbol: bool = False,
     ) -> str:
         """Get unit name from the International System of Units.
@@ -58,7 +58,7 @@ class Science(BaseProvider):
         return result[0]
 
     def metric_prefix(
-        self, sign: t.Optional[MetricPrefixSign] = None, symbol: bool = False
+        self, sign: MetricPrefixSign | None = None, symbol: bool = False
     ) -> str:
         """Get a random prefix for the International System of Units.
 

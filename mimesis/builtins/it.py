@@ -22,7 +22,7 @@ class ItalySpecProvider(BaseDataProvider):
         name = "italy_provider"
         datafile = "builtin.json"
 
-    def fiscal_code(self, gender: t.Optional[Gender] = None) -> str:
+    def fiscal_code(self, gender: Gender | None = None) -> str:
         """Return a random fiscal code.
 
         :param gender: Gender's enum object.

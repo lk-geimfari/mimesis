@@ -51,7 +51,7 @@ class Transport(BaseProvider):
         """
         return self.random.choice(AIRPLANES)
 
-    def vehicle_registration_code(self, locale: t.Optional[Locale] = None) -> str:
+    def vehicle_registration_code(self, locale: Locale | None = None) -> str:
         """Get vehicle registration code of country.
 
         :param locale: Registration code for locale (country).

@@ -25,10 +25,10 @@ class Choice(BaseProvider):
 
     def __call__(
         self,
-        items: t.Optional[t.Sequence[t.Any]],
+        items: t.Sequence[t.Any] | None,
         length: int = 0,
         unique: bool = False,
-    ) -> t.Union[t.Sequence[t.Any], t.Any]:
+    ) -> t.Sequence[t.Any] | t.Any:
         """Generate a randomly-chosen sequence or bare element from a sequence.
 
         Provide elements randomly chosen from the elements in a sequence

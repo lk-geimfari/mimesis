@@ -68,7 +68,7 @@ class Internet(BaseProvider):
     class Meta:
         name = "internet"
 
-    def content_type(self, mime_type: t.Optional[MimeType] = None) -> str:
+    def content_type(self, mime_type: MimeType | None = None) -> str:
         """Get a random HTTP content type.
 
         :return: Content type.
@@ -191,9 +191,9 @@ class Internet(BaseProvider):
 
     @staticmethod
     def stock_image_url(
-        width: t.Union[int, str] = 1920,
-        height: t.Union[int, str] = 1080,
-        keywords: t.Optional[Keywords] = None,
+        width: int | str = 1920,
+        height: int | str = 1080,
+        keywords: Keywords | None = None,
     ) -> str:
         """Generate a random stock image URL hosted on Unsplash.
 
@@ -230,8 +230,8 @@ class Internet(BaseProvider):
 
     def hostname(
         self,
-        tld_type: t.Optional[TLDType] = None,
-        subdomains: t.Optional[t.List[str]] = None,
+        tld_type: TLDType | None = None,
+        subdomains: t.List[str] | None = None,
     ) -> str:
         """Generate a random hostname without a scheme.
 
@@ -250,10 +250,10 @@ class Internet(BaseProvider):
 
     def url(
         self,
-        scheme: t.Optional[URLScheme] = URLScheme.HTTPS,
-        port_range: t.Optional[PortRange] = None,
-        tld_type: t.Optional[TLDType] = None,
-        subdomains: t.Optional[t.List[str]] = None,
+        scheme: URLScheme | None = URLScheme.HTTPS,
+        port_range: PortRange | None = None,
+        tld_type: TLDType | None = None,
+        subdomains: t.List[str] | None = None,
     ) -> str:
         """Generate a random URL.
 
@@ -275,10 +275,10 @@ class Internet(BaseProvider):
 
     def uri(
         self,
-        scheme: t.Optional[URLScheme] = URLScheme.HTTPS,
-        tld_type: t.Optional[TLDType] = None,
-        subdomains: t.Optional[t.List[str]] = None,
-        query_params_count: t.Optional[int] = None,
+        scheme: URLScheme | None = URLScheme.HTTPS,
+        tld_type: TLDType | None = None,
+        subdomains: t.List[str] | None = None,
+        query_params_count: int | None = None,
     ) -> str:
         """Generate a random URI.
 
@@ -301,7 +301,7 @@ class Internet(BaseProvider):
 
         return uri
 
-    def query_string(self, length: t.Optional[int] = None) -> str:
+    def query_string(self, length: int | None = None) -> str:
         """Generate arbitrary query string of given length.
 
         :param length: Length of query string.
@@ -309,7 +309,7 @@ class Internet(BaseProvider):
         """
         return urllib.parse.urlencode(self.query_parameters(length))
 
-    def query_parameters(self, length: t.Optional[int] = None) -> t.Dict[str, str]:
+    def query_parameters(self, length: int | None = None) -> t.Dict[str, str]:
         """Generate arbitrary query parameters as a dict.
 
         :param length: Length of query parameters dictionary (maximum is 32).
@@ -383,7 +383,7 @@ class Internet(BaseProvider):
         """
         return self.slug(*args, **kwargs).replace("-", "/")
 
-    def slug(self, parts_count: t.Optional[int] = None) -> str:
+    def slug(self, parts_count: int | None = None) -> str:
         """Generate a random slug of given parts count.
 
         :param parts_count: Slug's parts count.

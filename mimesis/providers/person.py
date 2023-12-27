@@ -62,7 +62,7 @@ class Person(BaseDataProvider):
 
         return max(age - working_start_age, 0)
 
-    def name(self, gender: t.Optional[Gender] = None) -> str:
+    def name(self, gender: Gender | None = None) -> str:
         """Generate a random name.
 
         :param gender: Gender's enum object.
@@ -75,7 +75,7 @@ class Person(BaseDataProvider):
         names: t.List[str] = self.extract(["names", key])
         return self.random.choice(names)
 
-    def first_name(self, gender: t.Optional[Gender] = None) -> str:
+    def first_name(self, gender: Gender | None = None) -> str:
         """Generate a random first name.
 
         ..note: An alias for self.name().
@@ -85,7 +85,7 @@ class Person(BaseDataProvider):
         """
         return self.name(gender)
 
-    def surname(self, gender: t.Optional[Gender] = None) -> str:
+    def surname(self, gender: Gender | None = None) -> str:
         """Generate a random surname.
 
         :param gender: Gender's enum object.
@@ -103,7 +103,7 @@ class Person(BaseDataProvider):
 
         return self.random.choice(surnames)
 
-    def last_name(self, gender: t.Optional[Gender] = None) -> str:
+    def last_name(self, gender: Gender | None = None) -> str:
         """Generate a random last name.
 
         ..note: An alias for self.surname().
@@ -115,8 +115,8 @@ class Person(BaseDataProvider):
 
     def title(
         self,
-        gender: t.Optional[Gender] = None,
-        title_type: t.Optional[TitleType] = None,
+        gender: Gender | None = None,
+        title_type: TitleType | None = None,
     ) -> str:
         """Generate a random title for name.
 
@@ -138,7 +138,9 @@ class Person(BaseDataProvider):
         return self.random.choice(titles)
 
     def full_name(
-        self, gender: t.Optional[Gender] = None, reverse: bool = False
+        self,
+        gender: Gender | None = None,
+        reverse: bool = False,
     ) -> str:
         """Generate a random full name.
 
@@ -154,7 +156,7 @@ class Person(BaseDataProvider):
         return f"{surname} {name}" if reverse else f"{name} {surname}"
 
     def username(
-        self, mask: t.Optional[str] = None, drange: t.Tuple[int, int] = (1800, 2100)
+        self, mask: str | None = None, drange: t.Tuple[int, int] = (1800, 2100)
     ) -> str:
         """Generate a username by mask.
 
@@ -233,7 +235,7 @@ class Person(BaseDataProvider):
 
     def email(
         self,
-        domains: t.Optional[t.Sequence[str]] = None,
+        domains: t.Sequence[str] | None = None,
         unique: bool = False,
     ) -> str:
         """Generate a random email.
@@ -266,7 +268,7 @@ class Person(BaseDataProvider):
 
         return f"{name}{domain}"
 
-    def gender(self, iso5218: bool = False, symbol: bool = False) -> t.Union[str, int]:
+    def gender(self, iso5218: bool = False, symbol: bool = False) -> str | int:
         """Get a random gender.
 
         Get a random title of gender, code for the representation
@@ -292,7 +294,7 @@ class Person(BaseDataProvider):
         genders: t.List[str] = self.extract(["gender"])
         return self.random.choice(genders)
 
-    def sex(self, *args: t.Any, **kwargs: t.Any) -> t.Union[str, int]:
+    def sex(self, *args: t.Any, **kwargs: t.Any) -> str | int:
         """An alias for method self.gender().
 
         See docstrings of method self.gender() for details.
@@ -382,7 +384,7 @@ class Person(BaseDataProvider):
         views: t.List[str] = self.extract(["views_on"])
         return self.random.choice(views)
 
-    def nationality(self, gender: t.Optional[Gender] = None) -> str:
+    def nationality(self, gender: Gender | None = None) -> str:
         """Get a random nationality.
 
         :param gender: Gender.

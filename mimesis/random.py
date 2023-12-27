@@ -95,7 +95,7 @@ class Random(random_module.Random):
         """
         return round(a + (b - a) * self.random(), precision)
 
-    def _randstr(self, unique: bool = False, length: t.Optional[int] = None) -> str:
+    def _randstr(self, unique: bool = False, length: int | None = None) -> str:
         """Generate random string value.
 
         This method can be especially useful when you need to generate

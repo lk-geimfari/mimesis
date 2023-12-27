@@ -193,7 +193,7 @@ class Datetime(BaseDataProvider):
         """
         return self.random.randint(1, 31)
 
-    def timezone(self, region: t.Optional[TimezoneRegion] = None) -> str:
+    def timezone(self, region: TimezoneRegion | None = None) -> str:
         """Get a random timezone.
 
         :param region: Timezone region.
@@ -215,7 +215,7 @@ class Datetime(BaseDataProvider):
         self,
         start: int = _CURRENT_YEAR,
         end: int = _CURRENT_YEAR,
-        timezone: t.Optional[str] = None,
+        timezone: str | None = None,
     ) -> DateTime:
         """Generate random datetime.
 
@@ -254,7 +254,7 @@ class Datetime(BaseDataProvider):
 
     def timestamp(
         self, fmt: TimestampFormat = TimestampFormat.POSIX, **kwargs: t.Any
-    ) -> t.Union[str, int]:
+    ) -> str | int:
         """Generate random timestamp in given format.
 
         Supported formats are:

@@ -8,7 +8,7 @@ from mimesis.enums import Locale
 class LocaleError(ValueError):
     """Raised when a locale isn't supported."""
 
-    def __init__(self, locale: t.Union[Locale, str]) -> None:
+    def __init__(self, locale: Locale | str) -> None:
         """Initialize attributes for informative output.
 
         :param locale: Locale.
@@ -49,7 +49,7 @@ class NonEnumerableError(TypeError):
 class FieldError(ValueError):
     """Raised when field is not found."""
 
-    def __init__(self, name: t.Optional[str] = None) -> None:
+    def __init__(self, name: str | None = None) -> None:
         """Initialize attributes for more informative output.
 
         :param name: Name of the field.
@@ -74,7 +74,7 @@ class FieldsetError(ValueError):
 class FieldNameError(ValueError):
     """Raised when a field name is invalid."""
 
-    def __init__(self, name: t.Optional[str] = None) -> None:
+    def __init__(self, name: str | None = None) -> None:
         """Initialize attributes for more informative output.
 
         :param name: Name of the field.

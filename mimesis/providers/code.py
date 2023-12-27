@@ -42,7 +42,7 @@ class Code(BaseProvider):
         return self.random.custom_code(mask=mask)
 
     def isbn(
-        self, fmt: t.Optional[ISBNFormat] = None, locale: Locale = Locale.DEFAULT
+        self, fmt: ISBNFormat | None = None, locale: Locale = Locale.DEFAULT
     ) -> str:
         """Generate ISBN for current locale.
 
@@ -58,7 +58,7 @@ class Code(BaseProvider):
         mask = ISBN_MASKS[fmt_value].format(ISBN_GROUPS[locale.value])
         return self.random.custom_code(mask)
 
-    def ean(self, fmt: t.Optional[EANFormat] = None) -> str:
+    def ean(self, fmt: EANFormat | None = None) -> str:
         """Generate EAN.
 
         To change EAN format, pass parameter ``code`` with needed value of

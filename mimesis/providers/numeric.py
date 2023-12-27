@@ -22,7 +22,7 @@ class Numeric(BaseProvider):
     class Meta:
         name = "numeric"
 
-    def increment(self, accumulator: t.Optional[str] = None) -> int:
+    def increment(self, accumulator: str | None = None) -> int:
         """Generate incremental number.
 
         Each call of this method returns an incrementing number (with the step of +1).

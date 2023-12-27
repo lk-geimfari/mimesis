@@ -2,7 +2,6 @@
 
 import hashlib
 import secrets
-import typing as t
 from uuid import UUID, uuid4
 
 from mimesis.data.int.cryptographic import WORDLIST
@@ -33,7 +32,7 @@ class Cryptographic(BaseProvider):
         """
         return str(self.uuid_object())
 
-    def hash(self, algorithm: t.Optional[Algorithm] = None) -> str:  # noqa: A003
+    def hash(self, algorithm: Algorithm | None = None) -> str:  # noqa: A003
         """Generate random hash.
 
         To change hashing algorithm, pass parameter ``algorithm``

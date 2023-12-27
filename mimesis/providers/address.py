@@ -160,7 +160,7 @@ class Address(BaseDataProvider):
         """
         return self.postal_code()
 
-    def country_code(self, code: t.Optional[CountryCode] = CountryCode.A2) -> str:
+    def country_code(self, code: CountryCode | None = CountryCode.A2) -> str:
         """Get a random code of country.
 
         Default format is :attr:`~enums.CountryCode.A2` (ISO 3166-1-alpha2),
@@ -198,7 +198,7 @@ class Address(BaseDataProvider):
         cities: t.List[str] = self.extract(["city"])
         return self.random.choice(cities)
 
-    def _get_fs(self, key: str, dms: bool = False) -> t.Union[str, float]:
+    def _get_fs(self, key: str, dms: bool = False) -> str | float:
         """Get float number.
 
         :param key: Key (`lt` or `lg`).
@@ -214,7 +214,7 @@ class Address(BaseDataProvider):
 
         return result
 
-    def latitude(self, dms: bool = False) -> t.Union[str, float]:
+    def latitude(self, dms: bool = False) -> str | float:
         """Generate a random value of latitude.
 
         :param dms: DMS format.
@@ -222,7 +222,7 @@ class Address(BaseDataProvider):
         """
         return self._get_fs("lt", dms)
 
-    def longitude(self, dms: bool = False) -> t.Union[str, float]:
+    def longitude(self, dms: bool = False) -> str | float:
         """Generate a random value of longitude.
 
         :param dms: DMS format.
@@ -230,7 +230,7 @@ class Address(BaseDataProvider):
         """
         return self._get_fs("lg", dms)
 
-    def coordinates(self, dms: bool = False) -> t.Dict[str, t.Union[str, float]]:
+    def coordinates(self, dms: bool = False) -> t.Dict[str, str | float]:
         """Generate random geo coordinates.
 
         :param dms: DMS format.

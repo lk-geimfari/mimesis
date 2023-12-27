@@ -34,13 +34,7 @@ class BinaryFile(BaseProvider):
     def _read_file(
         self,
         *,
-        file_type: t.Union[
-            AudioFile,
-            CompressedFile,
-            DocumentFile,
-            ImageFile,
-            VideoFile,
-        ],
+        file_type: AudioFile | CompressedFile | DocumentFile | ImageFile | VideoFile,
     ) -> bytes:
         file_type = self.validate_enum(file_type, file_type.__class__)
         file_path = self._data_dir.joinpath(f"{self._sample_name}.{file_type}")

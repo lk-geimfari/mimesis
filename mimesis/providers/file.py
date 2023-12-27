@@ -15,7 +15,7 @@ class File(BaseProvider):
     class Meta:
         name = "file"
 
-    def extension(self, file_type: t.Optional[FileType] = None) -> str:
+    def extension(self, file_type: FileType | None = None) -> str:
         """Get a random file extension from list.
 
         :param file_type: Enum object FileType.
@@ -28,7 +28,7 @@ class File(BaseProvider):
         extensions = EXTENSIONS[key]
         return self.random.choice(extensions)
 
-    def mime_type(self, type_: t.Optional[MimeType] = None) -> str:
+    def mime_type(self, type_: MimeType | None = None) -> str:
         """Get a random mime type from list.
 
         :param type_: Enum object MimeType.
@@ -52,7 +52,7 @@ class File(BaseProvider):
         unit = self.random.choice(["bytes", "kB", "MB", "GB", "TB"])
         return f"{num} {unit}"
 
-    def file_name(self, file_type: t.Optional[FileType] = None) -> str:
+    def file_name(self, file_type: FileType | None = None) -> str:
         """Get a random file name with some extension.
 
         :param file_type: Enum object FileType

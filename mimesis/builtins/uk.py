@@ -20,7 +20,7 @@ class UkraineSpecProvider(BaseDataProvider):
         name = "ukraine_provider"
         datafile = "builtin.json"
 
-    def patronymic(self, gender: t.Optional[Gender] = None) -> str:
+    def patronymic(self, gender: Gender | None = None) -> str:
         """Generate random patronymic name.
 
         :param gender: Gender of person.

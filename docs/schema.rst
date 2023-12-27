@@ -331,6 +331,24 @@ In this example, we will name the field ``hohoho``.
     >>> field("hohoho", a="a", b="b")
     'a'
 
+
+You can also register fields using decorators, which is a more convenient way to do it:
+
+.. versionadded:: 12.0.0
+
+.. code-block:: python
+
+    >>> from mimesis import Field
+
+    >>> field = Field()
+    >>> @field.register("my_field")
+    ... def my_field(random, a=None, b=None) -> Any:
+    ...     return random.choice([a, b])
+    ...
+    >>> field("my_field", a="a", b="b")
+    'b'
+
+
 Note that you can still use a `key function`, but the order of the arguments matters, so the field name comes first,
 the `key function` second, and then the rest of the keyword arguments (`**kwargs`) that are passed to the field handler:
 
