@@ -33,7 +33,7 @@ If you are creating your own data provider, you should use this random attribute
 See :ref:`providers` for more information about custom providers.
 
 
-Seeding random
+Seeding Random
 --------------
 
 .. note::
@@ -58,7 +58,7 @@ to data provider:
     # Output: 'Gizem Tekand'
 
 
-Reseeding random
+Reseeding Random
 ----------------
 
 To reseed the random number generator, you can use the :meth:`~mimesis.providers.BaseProvider.reseed`
@@ -143,3 +143,25 @@ Output:
 
     We are accessing **random** attribute of the :class:`~mimesis.Person` class to ensure same seed.
 
+
+Global Seed
+-----------
+
+You can set a global seed for all data providers and use it without explicitly passing it to each provider:
+
+.. code-block:: python
+
+    from mimesis import random
+
+    random.global_seed = 0xFF
+
+
+Now you can use any data provider without passing the seed:
+
+.. code-block:: python
+
+    from mimesis import Person, Locale
+
+    person = Person(Locale.EN)
+    person.full_name()
+    # Output: 'Karl Munoz'
