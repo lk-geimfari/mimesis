@@ -1,8 +1,8 @@
 """Mimesis is a Python library, which helps generate fake data.
 
-Copyright (c) 2016 - 2023 Isaak Uchakaev (Likid Geimfari).
+Copyright (c) 2016 - 2024 Isaak Uchakaev (Likid Geimfari).
 Website: https://mimesis.name
-Email: <likid.geimfari@gmail.com>
+Email: <hey@isaak.dev>
 Repository: https://github.com/lk-geimfari/mimesis
 """
 
@@ -147,5 +147,5 @@ __title__ = "mimesis"
 __description__ = "Mimesis: Fake Data Generator."
 __url__ = "https://github.com/lk-geimfari/mimesis"
 __author__ = "Isaak Uchakaev (Likid Geimfari)"
-__author_email__ = "likid.geimfari@gmail.com"
+__author_email__ = "hey@isaak.dev"
 __license__ = "MIT License"

@@ -2,7 +2,7 @@
 name = "mimesis"
 version = "12.0.0"
 description = "Mimesis: Fake Data Generator."
-authors = ["Isaak Uchakaev <likid.geimfari@gmail.com>"]
+authors = ["Isaak Uchakaev <hey@isaak.dev>"]
 license = "MIT"
 readme = "README.rst"
 homepage = "https://github.com/lk-geimfari/mimesis"
