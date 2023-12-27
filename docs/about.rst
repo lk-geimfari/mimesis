@@ -24,12 +24,9 @@ What Mimesis is?
 creates intricate JSON/XML files, anonymizes productive service data, and generating high-quality
 Pandas dataframes. If you require these functions, Mimesis is the ideal tool for you.
 
-What Mimesis is Not?
---------------------
-
-Mimesis was not created as an object factory intended for use with a specific database or
-ORM (e.g., Django ORM, SQLAlchemy, etc.). However, this does not mean that it cannot be
-used with an ORM. In fact, it can be easily integrated with an ORM using third-party libraries like `mimesis-factory <https://github.com/lk-geimfari/mimesis-factory>`_ or others.
+Mimesis **is not** an object factory intended for use with a specific database or ORM.
+However, this does not mean that it cannot be used with an ORM. In fact, it can be easily
+integrated with an ORM using third-party libraries like `mimesis-factory <https://github.com/lk-geimfari/mimesis-factory>`_ or others.
 
 What is the fake data?
 ----------------------
@@ -64,6 +61,8 @@ Check out that spotty bastard. Isn't it badass as hell?
 
 Performance
 -----------
+
+Overall, Mimesis is many times faster (≈12 times faster) than Faker, and generates more unique data, which is important for testing.
 
 Below you can see the result of `performance comparison <https://gist.github.com/lk-geimfari/99c5b45906be5299a3088f42c3f55bf4>`_ of Mimesis and Faker:
 
