@@ -4,12 +4,11 @@
 Structured Data Generation
 ==========================
 
-Schema and Field
-----------------
+Generating Data by Schema
+-------------------------
 
 For generating data by schema, just create an instance of :class:`~mimesis.schema.Field`
-object, which takes any string which represents the name of data
-provider in following formats:
+object, which takes any string which represents the name of data provider in following formats:
 
 - ``handler``/``method`` — the first custom field handler registered under the name ``handler`` will be chosen, or the first provider that has a method named ``method`` will be selected (See :ref:`api` to get the full list of available data providers and their methods).
 - ``provider.method`` — explicitly defines that the method **method** belongs to **provider**
@@ -25,7 +24,7 @@ the object :class:`~mimesis.schema.Schema` and call method :meth:`~mimesis.schem
     dynamically, rather than just once, resulting in the same data being generated for each iteration.
 
 
-Example of usage:
+Let's consider an example to understand how it works:
 
 .. code:: python
 
@@ -34,28 +33,22 @@ Example of usage:
     from mimesis.locales import Locale
 
     field = Field(locale=Locale.EN)
-    fieldset = Fieldset(locale=Locale.EN)
 
-    schema = Schema(
-        schema=lambda: {
-            "pk": field("increment"),
-            "uid": field("uuid"),
-            "name": field("text.word"),
-            "version": field("version", pre_release=True),
-            "timestamp": field("timestamp", fmt=TimestampFormat.POSIX),
-            "owner": {
-                "email": field("person.email", domains=["mimesis.name"]),
-                "token": field("token_hex"),
-                "creator": field("full_name", gender=Gender.FEMALE),
-            },
-            "apps": fieldset(
-                "text.word", i=5, key=lambda name: {"name": name, "id": field("uuid")}
-            ),
+    schema_definition = lambda: {
+        "pk": field("increment"),
+        "uid": field("uuid"),
+        "name": field("text.word"),
+        "version": field("version", pre_release=True),
+        "timestamp": field("timestamp", fmt=TimestampFormat.POSIX),
+        "owner": {
+            "email": field("person.email", domains=["mimesis.name"]),
+            "token": field("token_hex"),
+            "creator": field("full_name", gender=Gender.FEMALE),
         },
-        iterations=2,
-    )
-    schema.create()
+    }
 
+    schema = Schema(schema=schema_definition, iterations=1)
+    schema.create()
 
 
 Output:
@@ -64,16 +57,6 @@ Output:
 
     [
       {
-        "apps": [
-          {
-            "id": "680b1947-e747-44a5-aec2-3558491cac34",
-            "name": "exit"
-          },
-          {
-            "id": "2c030612-229a-4415-8caa-82e070604f02",
-            "name": "requirement"
-          }
-        ],
         "name": "undergraduate",
         "owner": {
           "creator": "Temple Martinez",
@@ -84,34 +67,42 @@ Output:
         "timestamp": "2005-04-30T10:37:26Z",
         "uid": "1d30ca34-349b-4852-a9b8-dc2ecf6c7b20",
         "version": "0.4.8-alpha.11"
-      },
-      {
-        "apps": [
-          {
-            "id": "e5505358-b090-4784-9148-f2acce8d3451",
-            "name": "taste"
-          },
-          {
-            "id": "2903c277-826d-4deb-9e71-7b9fe061fc3f",
-            "name": "upcoming"
-          }
-        ],
-        "name": "advisory",
-        "owner": {
-          "creator": "Arlena Moreno",
-          "email": "progress2030@mimesis.name",
-          "token": "72f0102513053cd8942eaa85c0e0ffea47eed424e40eeb9cb5ba0f45880c2893"
-        },
-        "pk": 2,
-        "timestamp": "2021-02-24T04:46:00Z",
-        "uid": "951cd971-a6a4-4cdc-9c7d-79a2245ac4a0",
-        "version": "6.0.0-beta.5"
       }
     ]
 
 
-By default, :class:`~mimesis.schema.Field` works only with providers which supported by :class:`~mimesis.Generic`,
-to change this behavior should be passed parameter *providers* with a sequence of data providers:
+So, what's going on here?
+
+1. Import the required classes and enums.
+2. Create an instance of :class:`~mimesis.schema.Field` and pass the locale using the enum :class:`~mimesis.enums.Locale`.
+3. Create a schema definition and wrap it in a callable object (``lambda`` function in this case).
+4. Create an instance of :class:`~mimesis.schema.Schema` and pass the schema definition and the number of iterations.
+5. Generate data using the method  :meth:`~mimesis.schema.Schema.create` of :class:`~mimesis.schema.Schema`.
+
+If you're wondering where the data comes from, the answer is simple: the first argument passed to the ``field``
+is actually the name of the method to be called.
+
+This can be done explicitly, indicating the provider to which the method belongs, like this:
+
+.. code:: python
+
+    field("text.word")
+
+
+or implicitly, like this:
+
+.. code:: python
+
+    field("increment")
+
+
+In the latter case, the first provider that has a method named ``increment`` will be selected.
+
+Using Custom Data Providers
+---------------------------
+
+By default, :class:`~mimesis.schema.Field` works only with providers that are supported by :class:`~mimesis.Generic`.
+To change this behavior, a parameter ``providers`` should be passed with a sequence of data providers:
 
 .. code:: python
 
@@ -163,8 +154,12 @@ Output:
     {'pk': 100, 'name': 'Karsten Haase', 'email': 'dennis2024@example.org'}
 
 
-Field vs Fieldset
------------------
+Generating a Set of Values
+--------------------------
+
+Sometimes it is necessary to generate a set of values for a given field instead of a single value.
+This can be achieved using the :class:`~mimesis.schema.Fieldset` class which is very similar to :class:`~mimesis.schema.Field`.
+
 
 The main difference between :class:`~mimesis.schema.Field` and :class:`~mimesis.schema.Fieldset` is that
 :class:`~mimesis.schema.Fieldset` generates a set (well, actually a ``list``) of values for a given field,
@@ -188,8 +183,7 @@ If **i** is not specified, a reasonable default value (which is 10) is used.
 The :class:`~mimesis.schema.Fieldset` class is a subclass of :class:`~mimesis.schema.BaseField` and inherits
 all its methods, attributes and properties. This means that API of :class:`~mimesis.schema.Fieldset` is almost the same
 as for :class:`~mimesis.schema.Field` which is also a subclass of :class:`~mimesis.schema.BaseField`.
-
-Almost, because an instance of :class:`~mimesis.schema.Fieldset` accepts keyword argument **i**.
+Almost, because an instance of :class:`~mimesis.schema.Fieldset` accepts an additional keyword argument **i**.
 
 While it may not be necessary in most cases, it is possible to override the default name
 of a keyword argument **i** for a specific field.
@@ -207,47 +201,9 @@ Let's take a look at the example:
     ['RICKY', 'LEONORE', 'DORIAN']
 
 
-Fieldset and Pandas
--------------------
 
-If your aim is to create synthetic data for your `Pandas dataframes <https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html>`_ ,
-you can make use of the :class:`~mimesis.schema.Fieldset` as well.
-
-With :class:`~mimesis.schema.Fieldset`, you can create datasets that are
-similar in structure to your real-world data, allowing you to perform accurate
-and reliable testing and analysis:
-
-.. code-block:: python
-
-    import pandas as pd
-    from mimesis import Fieldset
-    from mimesis.locales import Locale
-
-    fs = Fieldset(locale=Locale.EN, i=5)
-
-    df = pd.DataFrame.from_dict({
-        "ID": fs("increment"),
-        "Name": fs("person.full_name"),
-        "Email": fs("email"),
-        "Phone": fs("telephone", mask="+1 (###) #5#-7#9#"),
-    })
-
-    print(df)
-
-Output:
-
-.. code:: text
-
-    ID             Name                          Email              Phone
-    1     Jamal Woodard              ford1925@live.com  +1 (202) 752-7396
-    2       Loma Farley               seq1926@live.com  +1 (762) 655-7893
-    3  Kiersten Barrera      relationship1991@duck.com  +1 (588) 956-7099
-    4   Jesus Frederick  troubleshooting1901@gmail.com  +1 (514) 255-7091
-    5   Blondell Bolton       strongly2081@example.com  +1 (327) 952-7799
-
-
-Key Functions
--------------
+Key Functions and Post-Processing
+---------------------------------
 
 You can optionally apply a key function to the result returned by a **field**
 or **fieldset**. To do this, simply pass a callable object that returns
@@ -367,8 +323,8 @@ Here is an example of how to do this:
     'fooany1925@gmail.com'
 
 
-Custom Field Handlers
----------------------
+Creating Custom Fields
+----------------------
 
 .. versionadded:: 11.0.0
 
@@ -489,8 +445,8 @@ or all fields at once:
     >>> field.unregister_all_fields()
 
 
-Export Data to JSON, CSV or Pickle
-----------------------------------
+Exporting Data to Files
+-----------------------
 
 Data can be exported in JSON or CSV formats, as well as pickled object representations.
 
@@ -527,3 +483,80 @@ Example of the content of ``data.csv`` (truncated):
     2,sponsors,6.9.6-rc.7,2015-03-02T06:18:44Z
     3,N/A,4.5.6-rc.8,2022-03-31T02:56:15Z
     4,queen,9.0.6-alpha.11,2008-07-22T05:56:59Z
+
+
+Integrating with Pandas
+-----------------------
+
+If you're using `pandas <https://pandas.pydata.org/>`_, you can make use of the :class:`~mimesis.schema.Fieldset`.
+
+With :class:`~mimesis.schema.Fieldset`, you can create dataframes that are similar in structure
+to your real-world data, allowing you to perform accurate and reliable testing and analysis:
+
+.. code-block:: python
+
+    import pandas as pd
+    from mimesis import Fieldset
+    from mimesis.locales import Locale
+
+    fs = Fieldset(locale=Locale.EN, i=5)
+
+    df = pd.DataFrame.from_dict({
+        "ID": fs("increment"),
+        "Name": fs("person.full_name"),
+        "Email": fs("email"),
+        "Phone": fs("telephone", mask="+1 (###) #5#-7#9#"),
+    })
+
+    print(df)
+
+Output:
+
+.. code:: text
+
+    ID             Name                          Email              Phone
+    1     Jamal Woodard              ford1925@live.com  +1 (202) 752-7396
+    2       Loma Farley               seq1926@live.com  +1 (762) 655-7893
+    3  Kiersten Barrera      relationship1991@duck.com  +1 (588) 956-7099
+    4   Jesus Frederick  troubleshooting1901@gmail.com  +1 (514) 255-7091
+    5   Blondell Bolton       strongly2081@example.com  +1 (327) 952-7799
+
+
+Integrating with Polars
+-----------------------
+
+If you're using `polars <https://pola.rs/>`_, you can make use of the :class:`~mimesis.schema.Fieldset` as well.
+
+.. code-block:: python
+
+    import polars as pl
+    from mimesis import Fieldset
+    from mimesis.locales import Locale
+
+    fs = Fieldset(locale=Locale.EN, i=5)
+
+    df = pl.DataFrame({
+        "ID": fs("increment"),
+        "Name": fs("person.full_name"),
+        "Email": fs("email"),
+        "Phone": fs("telephone", mask="+1 (###) #5#-7#9#"),
+    })
+
+    print(df)
+
+
+Output:
+
+.. code:: text
+
+    ┌─────┬─────────────────┬─────────────────────────┬───────────────────┐
+    │ ID  ┆ Name            ┆ Email                   ┆ Phone             │
+    │ --- ┆ ---             ┆ ---                     ┆ ---               │
+    │ i64 ┆ str             ┆ str                     ┆ str               │
+    ╞═════╪═════════════════╪═════════════════════════╪═══════════════════╡
+    │ 1   ┆ Terrell Mccall  ┆ chubby1964@duck.com     ┆ +1 (091) 353-7298 │
+    │ 2   ┆ Peter Moran     ┆ nova1830@duck.com       ┆ +1 (332) 150-7298 │
+    │ 3   ┆ Samira Shaw     ┆ george1804@example.org  ┆ +1 (877) 051-7098 │
+    │ 4   ┆ Rolande Fischer ┆ edge2000@duck.com       ┆ +1 (767) 653-7792 │
+    │ 5   ┆ Britt Gentry    ┆ neuromancer820@duck.com ┆ +1 (756) 258-7396 │
+    └─────┴─────────────────┴─────────────────────────┴───────────────────┘
