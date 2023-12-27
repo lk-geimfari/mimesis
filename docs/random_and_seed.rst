@@ -33,8 +33,8 @@ If you are creating your own data provider, you should use this random attribute
 See :ref:`providers` for more information about custom providers.
 
 
-Seeding Random
---------------
+Seeding
+-------
 
 .. note::
     Keep in mind that some methods of some providers cannot be used with seeded
@@ -58,8 +58,8 @@ to data provider:
     # Output: 'Gizem Tekand'
 
 
-Reseeding Random
-----------------
+Reseeding
+---------
 
 To reseed the random number generator, you can use the :meth:`~mimesis.providers.BaseProvider.reseed`
 method of the :class:`~mimesis.providers.BaseProvider` class
@@ -95,8 +95,8 @@ If you want to use the same seed for all your data providers, then using :class:
     # Output: 'platform'
 
 
-Probability and Weighted Choice
--------------------------------
+Weighted Choice
+---------------
 
 You might wish to produce data with a specific likelihood of appearing.
 

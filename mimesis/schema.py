@@ -39,18 +39,15 @@ class BaseField:
         self,
         locale: Locale = Locale.DEFAULT,
         seed: Seed = MissingSeed,
-        providers: t.Optional[t.Sequence[t.Any]] = None,
     ) -> None:
-        """Initialize field.
+        """Base class for fields.
 
-        :param locale: Locale
+        This class is used as a base class for :class:`Field` and :class:`Fieldset`.
+
+        :param locale: Locale.
         :param seed: Seed for random.
         """
         self._gen = Generic(locale, seed)
-
-        if providers:
-            self._gen.add_providers(*providers)
-
         self._cache: FieldCache = {}
         self._custom_fields: t.Dict[str, FieldHandler] = {}
 
@@ -138,7 +135,7 @@ class BaseField:
 
         .. note:: Some data providers have methods with the same names,
             and in such cases, you can explicitly define that the method
-            belongs to data-provider ``name='provider.name'`` otherwise
+            belongs to data-provider ``field(name='provider.name')`` otherwise
             it will return the data from the first provider which
             has a method ``name``.
 
@@ -250,9 +247,7 @@ class BaseField:
 
 
 class Field(BaseField):
-    """Greedy field.
-
-    The field which evaluates immediately.
+    """Greedy field (evaluates immediately).
 
     .. warning::
 

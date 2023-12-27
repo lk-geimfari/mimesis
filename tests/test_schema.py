@@ -8,7 +8,6 @@ from collections.abc import Iterator
 
 import pytest
 
-from mimesis.builtins.en import USASpecProvider
 from mimesis.enums import Gender
 from mimesis.exceptions import (
     FieldArityError,
@@ -37,11 +36,6 @@ def localized_field(request):
 @pytest.fixture(scope="module")
 def default_field(request):
     return Field()
-
-
-@pytest.fixture
-def extended_field():
-    return Field(locale=Locale.EN, providers=(USASpecProvider,))
 
 
 @pytest.fixture(scope="module", params=list(Locale))
@@ -225,10 +219,6 @@ def test_fieldset_field_error(default_fieldset):
 def test_field_error(localized_field, field_name):
     with pytest.raises(FieldError):
         localized_field(field_name)
-
-
-def test_field_with_custom_providers(extended_field):
-    assert extended_field("ssn")
 
 
 def test_field_raises_field_error(default_field):

@@ -2,8 +2,8 @@
 Installation
 ============
 
-Python compatibility
---------------------
+Compatibility
+-------------
 
 Mimesis is compatible with Python version 3.10 or higher (including PyPy 3.10).
 

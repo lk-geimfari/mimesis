@@ -1,15 +1,12 @@
 Version 12.0.0
 --------------
 
-**Added**:
-
-- Added validation for custom field names.
+- Improve validation for custom field names.
 - Added method ``calver`` for ``Development``.
 - Added method ``stage`` for ``Development``.
+- Removed parameter ``providers`` for ``Field`` and ``Fieldset``. Use custom fields instead.
+- Removed parameters ``pre_release`` and ``calver`` for ``Development.version``. Use methods ``stage`` and ``calver`` instead.
 
-**Updated**:
-
-- The ``version()`` method of ``Development`` no longer accepts ``pre_release`` and ``calver`` parameters. Use methods ``stage()`` and ``calver()`` instead.
 
 Version 11.0.0
 --------------
