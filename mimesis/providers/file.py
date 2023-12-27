@@ -1,7 +1,5 @@
 """File data provider."""
 
-import typing as t
-
 from mimesis.data import EXTENSIONS, FILENAMES, MIME_TYPES
 from mimesis.enums import FileType, MimeType
 from mimesis.providers.base import BaseProvider

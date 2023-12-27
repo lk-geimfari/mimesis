@@ -1,7 +1,5 @@
 """The data provider of a variety of codes."""
 
-import typing as t
-
 from mimesis.data import (
     EAN_MASKS,
     IMEI_TACS,

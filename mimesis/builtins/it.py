@@ -1,7 +1,6 @@
 """Specific data provider for Italy (it)."""
 
 import string
-import typing as t
 
 from mimesis.enums import Gender
 from mimesis.locales import Locale

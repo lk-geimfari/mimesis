@@ -1,7 +1,5 @@
 """Provides data related to transports."""
 
-import typing as t
-
 from mimesis.data import (
     AIRPLANES,
     AUTO_MANUFACTURERS,

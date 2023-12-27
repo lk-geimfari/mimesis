@@ -1,7 +1,5 @@
 """Specific data provider for Poland (pl)."""
 
-import typing as t
-
 from mimesis.enums import Gender
 from mimesis.locales import Locale
 from mimesis.providers import BaseDataProvider, Datetime
