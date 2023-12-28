@@ -212,7 +212,7 @@ class Internet(BaseProvider):
 
         return f"https://source.unsplash.com/{width}x{height}?{keywords_str}"
 
-    def hashtags(self, quantity: int = 4) -> t.List[str]:
+    def hashtags(self, quantity: int = 4) -> list[str]:
         """Generate a list of hashtags.
 
         :param quantity: The quantity of hashtags.
@@ -231,7 +231,7 @@ class Internet(BaseProvider):
     def hostname(
         self,
         tld_type: TLDType | None = None,
-        subdomains: t.List[str] | None = None,
+        subdomains: list[str] | None = None,
     ) -> str:
         """Generate a random hostname without a scheme.
 
@@ -253,7 +253,7 @@ class Internet(BaseProvider):
         scheme: URLScheme | None = URLScheme.HTTPS,
         port_range: PortRange | None = None,
         tld_type: TLDType | None = None,
-        subdomains: t.List[str] | None = None,
+        subdomains: list[str] | None = None,
     ) -> str:
         """Generate a random URL.
 
@@ -277,7 +277,7 @@ class Internet(BaseProvider):
         self,
         scheme: URLScheme | None = URLScheme.HTTPS,
         tld_type: TLDType | None = None,
-        subdomains: t.List[str] | None = None,
+        subdomains: list[str] | None = None,
         query_params_count: int | None = None,
     ) -> str:
         """Generate a random URI.
@@ -316,8 +316,8 @@ class Internet(BaseProvider):
         :return: Dict of query parameters.
         """
 
-        def pick_unique_words(quantity: int = 5) -> t.List[str]:
-            words: t.Set[str] = set()
+        def pick_unique_words(quantity: int = 5) -> list[str]:
+            words: set[str] = set()
 
             while len(words) != quantity:
                 words.add(self._text.word())

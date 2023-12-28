@@ -78,7 +78,7 @@ class Choice(BaseProvider):
                 "**items** to provide the specified **number**."
             )
         if unique:
-            data: t.List[str] = self.random.sample(list(set(items)), k=length)
+            data: list[str] = self.random.sample(list(set(items)), k=length)
         else:
             data = self.random.choices(items, k=length)
 

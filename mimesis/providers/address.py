@@ -1,7 +1,7 @@
 """Address module.
 
-This module contains provider Address() and other utils which represents
-data related to location, such as street name, city, country and etc.
+This module contains provider Address() and other utils which represent
+data related to location, such as street name, city etc.
 """
 
 import typing as t
@@ -65,7 +65,7 @@ class Address(BaseDataProvider):
 
         :return: Street name.
         """
-        street_names: t.List[str] = self.extract(["street", "name"])
+        street_names: list[str] = self.extract(["street", "name"])
         return self.random.choice(street_names)
 
     def street_suffix(self) -> str:
@@ -73,7 +73,7 @@ class Address(BaseDataProvider):
 
         :return: Street suffix.
         """
-        suffixes: t.List[str] = self.extract(["street", "suffix"])
+        suffixes: list[str] = self.extract(["street", "suffix"])
         return self.random.choice(suffixes)
 
     def address(self) -> str:
@@ -113,7 +113,7 @@ class Address(BaseDataProvider):
         :return: Administrative district.
         """
         key = "abbr" if abbr else "name"
-        states: t.List[str] = self.extract(["state", key])
+        states: list[str] = self.extract(["state", key])
         return self.random.choice(states)
 
     def region(self, *args: t.Any, **kwargs: t.Any) -> str:
@@ -187,7 +187,7 @@ class Address(BaseDataProvider):
 
         :return: The Country.
         """
-        countries: t.List[str] = self.extract(["country", "name"])
+        countries: list[str] = self.extract(["country", "name"])
         return self.random.choice(countries)
 
     def city(self) -> str:
@@ -195,7 +195,7 @@ class Address(BaseDataProvider):
 
         :return: City name.
         """
-        cities: t.List[str] = self.extract(["city"])
+        cities: list[str] = self.extract(["city"])
         return self.random.choice(cities)
 
     def _get_fs(self, key: str, dms: bool = False) -> str | float:
@@ -247,7 +247,7 @@ class Address(BaseDataProvider):
         :param code: Return code of continent.
         :return: Continent name.
         """
-        codes: t.List[str] = self.extract(["continent"])
+        codes: list[str] = self.extract(["continent"])
 
         if code:
             codes = CONTINENT_CODES

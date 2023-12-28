@@ -133,7 +133,7 @@ class BaseDataProvider(BaseProvider):
         locale_obj = validate_locale(locale)
         self.locale = locale_obj.value
 
-    def extract(self, keys: t.List[str], default: t.Any = None) -> t.Any:
+    def extract(self, keys: list[str], default: t.Any = None) -> t.Any:
         """Extracts nested values from JSON file by list of keys.
 
         :param keys: List of keys (order extremely matters).

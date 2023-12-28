@@ -28,7 +28,7 @@ class Datetime(BaseDataProvider):
         date_start: DateTime,
         date_end: DateTime,
         **kwargs: t.Any,
-    ) -> t.List[DateTime]:
+    ) -> list[DateTime]:
         """Bulk create datetime objects.
 
         This method creates list of datetime objects from
@@ -95,7 +95,7 @@ class Datetime(BaseDataProvider):
         :return: Day of the week.
         """
         key = "abbr" if abbr else "name"
-        days: t.List[str] = self.extract(["day", key])
+        days: list[str] = self.extract(["day", key])
         return self.random.choice(days)
 
     def month(self, abbr: bool = False) -> str:
@@ -105,7 +105,7 @@ class Datetime(BaseDataProvider):
         :return: Month name.
         """
         key = "abbr" if abbr else "name"
-        months: t.List[str] = self.extract(["month", key])
+        months: list[str] = self.extract(["month", key])
         return self.random.choice(months)
 
     def year(self, minimum: int = 1990, maximum: int = _CURRENT_YEAR) -> int:
@@ -129,7 +129,7 @@ class Datetime(BaseDataProvider):
 
         :return: Periodicity.
         """
-        periodicity: t.List[str] = self.extract(["periodicity"])
+        periodicity: list[str] = self.extract(["periodicity"])
         return self.random.choice(periodicity)
 
     def date(self, start: int = 2000, end: int = _CURRENT_YEAR) -> Date:

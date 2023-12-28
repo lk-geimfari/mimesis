@@ -1,6 +1,5 @@
 """Specific data provider for Russia (ru)."""
 
-import typing as t
 from datetime import datetime
 
 from mimesis.enums import Gender
@@ -46,7 +45,7 @@ class RussiaSpecProvider(BaseDataProvider):
             Алексеевна.
         """
         gender = self.validate_enum(gender, Gender)
-        patronymics: t.List[str] = self.extract(["patronymic", str(gender)])
+        patronymics: list[str] = self.extract(["patronymic", str(gender)])
         return self.random.choice(patronymics)
 
     def passport_series(self, year: int | None = None) -> str:
@@ -129,7 +128,7 @@ class RussiaSpecProvider(BaseDataProvider):
         :return: INN.
         """
 
-        def control_sum(nums: t.List[int], t: str) -> int:
+        def control_sum(nums: list[int], t: str) -> int:
             digits_dict = {
                 "n2": [7, 2, 4, 10, 3, 5, 9, 4, 6, 8],
                 "n1": [3, 7, 2, 4, 10, 3, 5, 9, 4, 6, 8],

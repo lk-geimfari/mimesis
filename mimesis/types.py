@@ -14,7 +14,7 @@ If any of the following statements is true, move the type to this file:
 
 import datetime
 from decimal import Decimal
-from typing import Any, Callable, Final, List, Set, Tuple
+from typing import Any, Callable, Final
 
 __all__ = [
     "CallableSchema",
@@ -50,11 +50,11 @@ MissingSeed: Final = _MissingSeed()
 
 Seed = None | int | float | str | bytes | bytearray | _MissingSeed
 
-Keywords = List[str] | Set[str] | Tuple[str, ...]
+Keywords = list[str] | set[str] | tuple[str, ...]
 
 Number = int | float | complex | Decimal
 
-Matrix = List[List[Number]]
+Matrix = list[list[Number]]
 
 CallableSchema = Callable[[], JSON]
 

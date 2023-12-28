@@ -30,7 +30,7 @@ from mimesis.types import (
 __all__ = ["BaseField", "Field", "Fieldset", "Schema"]
 
 FieldHandler = t.Callable[[Random, t.Any], t.Any]
-RegisterableFieldHandler = t.Tuple[str, FieldHandler]
+RegisterableFieldHandler = tuple[str, FieldHandler]
 RegisterableFieldHandlers = t.Sequence[RegisterableFieldHandler]
 
 
@@ -339,7 +339,7 @@ class Fieldset(BaseField):
         )
         super().__init__(*args, **kwargs)
 
-    def __call__(self, *args: t.Any, **kwargs: t.Any) -> t.List[t.Any]:
+    def __call__(self, *args: t.Any, **kwargs: t.Any) -> list[t.Any]:
         """Perform fieldset.
 
         :param args: Arguments for field.
@@ -421,7 +421,7 @@ class Schema:
         with open(file_path, "wb") as fp:
             pickle.dump(self.create(), fp, **kwargs)
 
-    def create(self) -> t.List[JSON]:
+    def create(self) -> list[JSON]:
         """Creates a list of a fulfilled schemas.
 
         .. note::

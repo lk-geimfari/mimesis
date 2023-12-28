@@ -1,5 +1,4 @@
 """Specific data provider for Brazil (pt-br)."""
-import typing as t
 
 from mimesis.locales import Locale
 from mimesis.providers import BaseDataProvider
@@ -20,7 +19,7 @@ class BrazilSpecProvider(BaseDataProvider):
         datafile = None
 
     @staticmethod
-    def __get_verifying_digit_cpf(cpf: t.List[int], weight: int) -> int:
+    def __get_verifying_digit_cpf(cpf: list[int], weight: int) -> int:
         """Calculate the verifying digit for the CPF.
 
         :param cpf: List of integers with the CPF.
@@ -63,7 +62,7 @@ class BrazilSpecProvider(BaseDataProvider):
         return cpf
 
     @staticmethod
-    def __get_verifying_digit_cnpj(cnpj: t.List[int], weight: int) -> int:
+    def __get_verifying_digit_cnpj(cnpj: list[int], weight: int) -> int:
         """Calculate the verifying digit for the CNPJ.
 
         :param cnpj: List of integers with the CNPJ.

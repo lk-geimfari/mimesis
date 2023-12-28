@@ -1,7 +1,5 @@
 """Business data provider."""
 
-import typing as t
-
 from mimesis.data import (
     CRYPTOCURRENCY_ISO_CODES,
     CRYPTOCURRENCY_SYMBOLS,
@@ -28,7 +26,7 @@ class Finance(BaseDataProvider):
 
         :return: Company name.
         """
-        names: t.List[str] = self.extract(["company", "name"])
+        names: list[str] = self.extract(["company", "name"])
 
         return self.random.choice(names)
 
@@ -40,7 +38,7 @@ class Finance(BaseDataProvider):
         """
         key = "abbr" if abbr else "title"
 
-        company_types: t.List[str] = self.extract(["company", "type", key])
+        company_types: list[str] = self.extract(["company", "type", key])
         return self.random.choice(company_types)
 
     def currency_iso_code(self, allow_random: bool = False) -> str:
@@ -60,7 +58,7 @@ class Finance(BaseDataProvider):
 
         :return: Bank name.
         """
-        banks: t.List[str] = self.extract(["banks"])
+        banks: list[str] = self.extract(["banks"])
         return self.random.choice(banks)
 
     def cryptocurrency_iso_code(self) -> str:

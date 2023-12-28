@@ -1,5 +1,4 @@
 """Specific data provider for Ukraine (uk)."""
-import typing as t
 
 from mimesis.enums import Gender
 from mimesis.locales import Locale
@@ -28,5 +27,5 @@ class UkraineSpecProvider(BaseDataProvider):
         :return: Patronymic name.
         """
         gender = self.validate_enum(gender, Gender)
-        patronymics: t.List[str] = self.extract(["patronymic", str(gender)])
+        patronymics: list[str] = self.extract(["patronymic", str(gender)])
         return self.random.choice(patronymics)

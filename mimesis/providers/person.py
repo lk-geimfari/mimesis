@@ -72,7 +72,7 @@ class Person(BaseDataProvider):
             John.
         """
         key = self.validate_enum(gender, Gender)
-        names: t.List[str] = self.extract(["names", key])
+        names: list[str] = self.extract(["names", key])
         return self.random.choice(names)
 
     def first_name(self, gender: Gender | None = None) -> str:
@@ -134,7 +134,7 @@ class Person(BaseDataProvider):
         gender_key = self.validate_enum(gender, Gender)
         title_key = self.validate_enum(title_type, TitleType)
 
-        titles: t.List[str] = self.extract(["title", gender_key, title_key])
+        titles: list[str] = self.extract(["title", gender_key, title_key])
         return self.random.choice(titles)
 
     def full_name(
@@ -156,7 +156,7 @@ class Person(BaseDataProvider):
         return f"{surname} {name}" if reverse else f"{name} {surname}"
 
     def username(
-        self, mask: str | None = None, drange: t.Tuple[int, int] = (1800, 2100)
+        self, mask: str | None = None, drange: tuple[int, int] = (1800, 2100)
     ) -> str:
         """Generate a username by mask.
 
@@ -291,7 +291,7 @@ class Person(BaseDataProvider):
         if symbol:
             return self.random.choice(GENDER_SYMBOLS)
 
-        genders: t.List[str] = self.extract(["gender"])
+        genders: list[str] = self.extract(["gender"])
         return self.random.choice(genders)
 
     def sex(self, *args: t.Any, **kwargs: t.Any) -> str | int:
@@ -348,7 +348,7 @@ class Person(BaseDataProvider):
         :Example:
             Programmer.
         """
-        jobs: t.List[str] = self.extract(["occupation"])
+        jobs: list[str] = self.extract(["occupation"])
         return self.random.choice(jobs)
 
     def political_views(self) -> str:
@@ -359,7 +359,7 @@ class Person(BaseDataProvider):
         :Example:
             Liberal.
         """
-        views: t.List[str] = self.extract(["political_views"])
+        views: list[str] = self.extract(["political_views"])
         return self.random.choice(views)
 
     def worldview(self) -> str:
@@ -370,7 +370,7 @@ class Person(BaseDataProvider):
         :Example:
             Pantheism.
         """
-        views: t.List[str] = self.extract(["worldview"])
+        views: list[str] = self.extract(["worldview"])
         return self.random.choice(views)
 
     def views_on(self) -> str:
@@ -381,7 +381,7 @@ class Person(BaseDataProvider):
         :Example:
             Negative.
         """
-        views: t.List[str] = self.extract(["views_on"])
+        views: list[str] = self.extract(["views_on"])
         return self.random.choice(views)
 
     def nationality(self, gender: Gender | None = None) -> str:
@@ -393,7 +393,7 @@ class Person(BaseDataProvider):
         :Example:
             Russian
         """
-        nationalities: t.List[str] = self.extract(["nationality"])
+        nationalities: list[str] = self.extract(["nationality"])
 
         # Separated by gender
         if isinstance(nationalities, dict):
@@ -410,7 +410,7 @@ class Person(BaseDataProvider):
         :Example:
             MIT.
         """
-        universities: t.List[str] = self.extract(["university"])
+        universities: list[str] = self.extract(["university"])
         return self.random.choice(universities)
 
     def academic_degree(self) -> str:
@@ -421,7 +421,7 @@ class Person(BaseDataProvider):
         :Example:
             Bachelor.
         """
-        degrees: t.List[str] = self.extract(["academic_degree"])
+        degrees: list[str] = self.extract(["academic_degree"])
         return self.random.choice(degrees)
 
     def language(self) -> str:
@@ -432,7 +432,7 @@ class Person(BaseDataProvider):
         :Example:
             Irish.
         """
-        languages: t.List[str] = self.extract(["language"])
+        languages: list[str] = self.extract(["language"])
         return self.random.choice(languages)
 
     def phone_number(self, mask: str = "", placeholder: str = "#") -> str:

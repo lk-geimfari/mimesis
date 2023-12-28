@@ -29,7 +29,7 @@ class Random(random_module.Random):
     This class can be extended according to specific requirements.
     """
 
-    def randints(self, n: int = 3, a: int = 1, b: int = 100) -> t.List[int]:
+    def randints(self, n: int = 3, a: int = 1, b: int = 100) -> list[int]:
         """Generate a list of random integers.
 
         :param n: Number of elements.

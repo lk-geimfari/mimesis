@@ -1,5 +1,4 @@
 """Provides data related to food."""
-import typing as t
 
 from mimesis.providers.base import BaseDataProvider
 
@@ -15,7 +14,7 @@ class Food(BaseDataProvider):
 
     def _choice_from(self, key: str) -> str:
         """Choice random element."""
-        data: t.List[str] = self.extract([key])
+        data: list[str] = self.extract([key])
         return self.random.choice(data)
 
     def vegetable(self) -> str:

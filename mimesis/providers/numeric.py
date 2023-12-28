@@ -67,7 +67,7 @@ class Numeric(BaseProvider):
 
     def floats(
         self, start: float = 0, end: float = 1, n: int = 10, precision: int = 15
-    ) -> t.List[float]:
+    ) -> list[float]:
         """Generate a list of random float numbers.
 
         :param start: Start range.
@@ -88,7 +88,7 @@ class Numeric(BaseProvider):
         """
         return self.random.randint(start, end)
 
-    def integers(self, start: int = 0, end: int = 10, n: int = 10) -> t.List[int]:
+    def integers(self, start: int = 0, end: int = 10, n: int = 10) -> list[int]:
         """Generate a list of random integers.
 
         :param start: Start.
@@ -135,7 +135,7 @@ class Numeric(BaseProvider):
         precision_real: int = 15,
         precision_imag: int = 15,
         n: int = 10,
-    ) -> t.List[complex]:
+    ) -> list[complex]:
         """Generate a list of random complex numbers.
 
         :param start_real: Start real range.
@@ -174,7 +174,7 @@ class Numeric(BaseProvider):
 
     def decimals(
         self, start: float = 0.0, end: float = 1000.0, n: int = 10
-    ) -> t.List[Decimal]:
+    ) -> list[Decimal]:
         """Generate a list of decimal numbers.
 
         :param start: Start range.

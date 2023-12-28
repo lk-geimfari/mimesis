@@ -92,7 +92,7 @@ class Generic(BaseProvider):
             )
             return self.__dict__[attrname]
 
-    def __dir__(self) -> t.List[str]:
+    def __dir__(self) -> list[str]:
         """Available data providers.
 
         :return: List of attributes.

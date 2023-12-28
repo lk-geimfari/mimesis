@@ -1,5 +1,4 @@
 """Provides all the data related to the internet."""
-from typing import List
 
 HTTP_METHODS = [
     "GET",
@@ -1028,7 +1027,7 @@ TLD = {
     ],
 }
 
-EMAIL_DOMAINS: List[str] = [
+EMAIL_DOMAINS: list[str] = [
     "@duck.com",
     "@gmail.com",
     "@yandex.com",

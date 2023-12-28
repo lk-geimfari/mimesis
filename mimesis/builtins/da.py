@@ -1,6 +1,5 @@
 """Specific data provider for Denmark (da)."""
 import operator
-import typing as t
 
 from mimesis import Datetime
 from mimesis.locales import Locale
@@ -74,7 +73,7 @@ class DenmarkSpecProvider(BaseDataProvider):
             return 0
         return 11 - remainder
 
-    def _generate_serial_checksum(self, cpr_century: str) -> t.Tuple[str, int]:
+    def _generate_serial_checksum(self, cpr_century: str) -> tuple[str, int]:
         """Generate a serial number and checksum from cpr_century."""
         serial_number = f"{self.random.randint(0, 99):02d}"
 
