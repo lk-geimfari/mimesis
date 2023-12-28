@@ -268,8 +268,8 @@ Here is an example of how to do this:
     'fooany1925@gmail.com'
 
 
-Creating Custom Fields
-----------------------
+Custom Field Handlers
+---------------------
 
 .. versionadded:: 11.0.0
 
@@ -278,7 +278,7 @@ Creating Custom Fields
     We using :class:`~mimesis.schema.Field` in our examples, but all the features described
     below are available for :class:`~mimesis.schema.Fieldset` as well.
 
-Sometimes, it's necessary to register custom fields or override existing ones to return custom data. This
+Sometimes, it's necessary to register custom field handler or override existing ones to return custom data. This
 can be achieved using **custom field handlers**.
 
 A custom field handler can be any callable object. It should accept an instance of :class:`~mimesis.random.Random` as
@@ -303,7 +303,7 @@ Register Field Handler
 ~~~~~~~~~~~~~~~~~~~~~~
 
 Suppose you want to create a field that returns a random value from a list of values. First, you need to
-create a field handler. Let's call it ``my_field``.
+create a callable object that handles field. Let's call it ``my_field``.
 
 .. code-block:: python
 
@@ -311,9 +311,8 @@ create a field handler. Let's call it ``my_field``.
         return random.choice([a, b])
 
 
-Afterwards, you need to register this field handler using a name you intend to use later. It's important to note
-that **every** field handler must be registered using a unique name, otherwise, you will override an existing
-field handler.
+Afterwards, you need to register it using a name you intend to use later. It's important to note
+that **every** field handler must be registered using a unique name, otherwise, you will override an existing handler.
 
 In this example, we will name the field ``hohoho``.
 
