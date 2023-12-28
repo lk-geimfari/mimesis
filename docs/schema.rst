@@ -275,7 +275,7 @@ Custom Field Handlers
 
 .. note::
 
-    We using :class:`~mimesis.schema.Field` in our examples, but all the features described
+    We use :class:`~mimesis.schema.Field` in our examples, but all the features described
     below are available for :class:`~mimesis.schema.Fieldset` as well.
 
 Sometimes, it's necessary to register custom field handler or override existing ones to return custom data. This
