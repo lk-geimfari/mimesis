@@ -332,7 +332,7 @@ In this example, we will name the field ``hohoho``.
     'a'
 
 
-You can also register fields using decorators, which is a more convenient way to do it:
+You can also register fields using decorator ``register()``, which is a more convenient way to do it:
 
 .. versionadded:: 12.0.0
 
