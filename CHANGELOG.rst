@@ -4,9 +4,14 @@ Version 12.0.0
 - Improve validation for custom field names.
 - Added method ``calver`` for ``Development``.
 - Added method ``stage`` for ``Development``.
-- Added decorator ``@register`` for ``Field`` and ``Fieldset`` to register custom fields.
 - Removed parameter ``providers`` for ``Field`` and ``Fieldset``. Use custom fields instead.
 - Removed parameters ``pre_release`` and ``calver`` for ``Development.version``. Use methods ``stage`` and ``calver`` instead.
+- Added decorator ``@handle`` for ``Field`` and ``Fieldset`` to register custom fields.
+- Renamed ``register_field`` to ``register_handler`` for `Field` and `Fieldset`.
+- Renamed ``register_fields`` to ``register_handlers`` for `Field` and `Fieldset`.
+- Renamed ``unregister_field`` to ``unregister_handler`` for `Field` and `Fieldset`.
+- Renamed ``unregister_fields`` to ``unregister_handlers`` for `Field` and `Fieldset`.
+- Renamed ``unregister_all_fields`` to ``unregister_all_handlers`` for `Field` and `Fieldset`.
 
 
 Version 11.0.0

@@ -184,7 +184,7 @@ class BaseField:
 
         return result
 
-    def register_field(self, field_name: str, field_handler: FieldHandler) -> None:
+    def register_handler(self, field_name: str, field_handler: FieldHandler) -> None:
         """Register a new field handler.
 
         :param field_name: Name of the field.
@@ -208,7 +208,7 @@ class BaseField:
         if field_name not in self._custom_fields:
             self._custom_fields[field_name] = field_handler
 
-    def register(self, field_name: str) -> t.Callable[[FieldHandler], FieldHandler]:
+    def handle(self, field_name: str) -> t.Callable[[FieldHandler], FieldHandler]:
         """Decorator for registering a custom field handler.
 
         .. versionadded:: 12.0.0
@@ -218,29 +218,29 @@ class BaseField:
         """
 
         def decorator(field_handler: FieldHandler) -> FieldHandler:
-            self.register_field(field_name, field_handler)
+            self.register_handler(field_name, field_handler)
             return field_handler
 
         return decorator
 
-    def register_fields(self, fields: RegisterableFieldHandlers) -> None:
-        """Register a new field handlers.
+    def register_handlers(self, fields: RegisterableFieldHandlers) -> None:
+        """Register the new field handlers.
 
         :param fields: A sequence of sequences with field name and handler.
         :return: None.
         """
         for name, handler in fields:
-            self.register_field(name, handler)
+            self.register_handler(name, handler)
 
-    def unregister_field(self, field_name: str) -> None:
+    def unregister_handler(self, field_name: str) -> None:
         """Unregister a field handler.
 
         :param field_name: Name of the field.
         """
-        if field_name in self._custom_fields:
-            del self._custom_fields[field_name]
 
-    def unregister_fields(self, field_names: t.Sequence[str] = ()) -> None:
+        self._custom_fields.pop(field_name, None)
+
+    def unregister_handlers(self, field_names: t.Sequence[str] = ()) -> None:
         """Unregister a field handlers with given names.
 
         :param field_names: Names of the fields.
@@ -248,10 +248,10 @@ class BaseField:
         """
 
         for name in field_names:
-            self.unregister_field(name)
+            self.unregister_handler(name)
 
-    def unregister_all_fields(self) -> None:
-        """Unregister all field handlers.
+    def unregister_all_handlers(self) -> None:
+        """Unregister all custom field handlers.
 
         :return: None.
         """

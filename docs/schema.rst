@@ -327,12 +327,12 @@ In this example, we will name the field ``hohoho``.
     >>> from mimesis import Field
 
     >>> field = Field()
-    >>> field.register_field("hohoho", my_field)
+    >>> field.register_handler("hohoho", my_field)
     >>> field("hohoho", a="a", b="b")
     'a'
 
 
-You can also register fields using decorator ``register()``, which is a more convenient way to do it:
+You can also register field handlers using decorator ``handle()``, which is a more convenient way to do it:
 
 .. versionadded:: 12.0.0
 
@@ -341,7 +341,7 @@ You can also register fields using decorator ``register()``, which is a more con
     >>> from mimesis import Field
 
     >>> field = Field()
-    >>> @field.register("my_field")
+    >>> @field.handle("my_field")
     ... def my_field(random, a=None, b=None) -> Any:
     ...     return random.choice([a, b])
     ...
@@ -357,11 +357,11 @@ the `key function` second, and then the rest of the keyword arguments (`**kwargs
     >>> field("hohoho", key=str.upper, a="a", b="b")
     'A'
 
-You can register multiple fields at once:
+You can register multiple handlers at once:
 
 .. code-block:: python
 
-    >>> field.register_fields(
+    >>> field.register_handlers(
         fields=[
             ('mf1', my_field_1),
             ('mf2', my_field_2),
@@ -378,22 +378,22 @@ If you want to unregister a field handler, you can do it like this:
 
 .. code-block:: python
 
-    >>> field.unregister_field("hohoho")
+    >>> field.unregister_handler("hohoho")
 
 Now you can't use it anymore and will get a ``FieldError`` if you try to do so.
 
-If you'll attempt to unregister a field that was never registered then nothing going to happen:
+If you'll attempt to unregister a field handler that was never registered then nothing going to happen:
 
 .. code-block:: python
 
-    >>> field.unregister_field("blabla") # nothing happens
+    >>> field.unregister_handler("blabla") # nothing happens
 
 
-It's pretty obvious that you can unregister multiple fields at once as well:
+It's quite evident that you can also unregister multiple field handlers at once:
 
 .. code-block:: python
 
-    >>> field.unregister_fields(
+    >>> field.unregister_handlers(
         fields=[
             'wow',
             'much',
@@ -401,11 +401,11 @@ It's pretty obvious that you can unregister multiple fields at once as well:
         ]
     )
 
-or all fields at once:
+or all of them at once:
 
 .. code-block:: python
 
-    >>> field.unregister_all_fields()
+    >>> field.unregister_all_handlers()
 
 
 Exporting Data to Files
