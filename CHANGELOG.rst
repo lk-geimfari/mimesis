@@ -1,10 +1,10 @@
 Version 12.0.0
 --------------
 
-- Improve validation for custom field names.
+- Python 3.8 and 3.9 are no longer supported.
 - Added method ``calver`` for ``Development``.
 - Added method ``stage`` for ``Development``.
-- Removed parameter ``providers`` for ``Field`` and ``Fieldset``. Use custom fields instead.
+- Removed parameter ``providers`` for ``Field`` and ``Fieldset``. Use custom field handlers instead.
 - Removed parameters ``pre_release`` and ``calver`` for ``Development.version``. Use methods ``stage`` and ``calver`` instead.
 - Added decorator ``@handle`` for ``Field`` and ``Fieldset`` to register custom fields.
 - Renamed ``register_field`` to ``register_handler`` for `Field` and `Fieldset`.
