@@ -379,7 +379,7 @@ Let's take a look at the example:
     'b'
 
 
-When the field name is not specified, the name of the function (``func.__name__``) is used instead:
+When the field name is not specified, the name of the function (``func.__name__``) is used instead.
 
 
 Unregister Field Handler
