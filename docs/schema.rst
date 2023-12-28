@@ -331,23 +331,6 @@ In this example, we will name the field ``hohoho``.
     'a'
 
 
-You can also register field handlers using decorator ``handle()``, which is a more convenient way to do it:
-
-.. versionadded:: 12.0.0
-
-.. code-block:: python
-
-    >>> from mimesis import Field
-
-    >>> field = Field()
-    >>> @field.handle("my_field")
-    ... def my_field(random, a=None, b=None) -> Any:
-    ...     return random.choice([a, b])
-    ...
-    >>> field("my_field", a="a", b="b")
-    'b'
-
-
 Note that you can still use a `key function`, but the order of the arguments matters, so the field name comes first,
 the `key function` second, and then the rest of the keyword arguments (`**kwargs`) that are passed to the field handler:
 
@@ -368,6 +351,35 @@ You can register multiple handlers at once:
     )
     >>> field("mf1", key=str.lower)
     >>> field("mf2", key=str.upper)
+
+
+Register Field Handlers using Decorator
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. versionadded:: 12.0.0
+
+.. note::
+
+    Decorator `@handle` **can only be used with functions**, not with any callable object.
+
+You can also register field handlers using decorator ``@handle('field_name')`` that takes the name of the field as an argument.
+
+Let's take a look at the example:
+
+.. code-block:: python
+
+    >>> from mimesis import Field
+
+    >>> field = Field()
+    >>> @field.handle("my_field")
+    ... def my_field(random, a=None, b=None) -> Any:
+    ...     return random.choice([a, b])
+    ...
+    >>> field("my_field", a="a", b="b")
+    'b'
+
+
+When the field name is not specified, the name of the function (``func.__name__``) is used instead:
 
 
 Unregister Field Handler

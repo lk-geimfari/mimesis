@@ -208,17 +208,22 @@ class BaseField:
         if field_name not in self._custom_fields:
             self._custom_fields[field_name] = field_handler
 
-    def handle(self, field_name: str) -> t.Callable[[FieldHandler], FieldHandler]:
+    def handle(self, field_name: str | None = None) -> t.Callable[[FieldHandler], FieldHandler]:
         """Decorator for registering a custom field handler.
+
+        You can use this decorator only for functions,
+        not for any other callables.
 
         .. versionadded:: 12.0.0
 
         :param field_name: Name of the field.
+            If not specified, the name of the function is used.
         :return: Decorator.
         """
 
         def decorator(field_handler: FieldHandler) -> FieldHandler:
-            self.register_handler(field_name, field_handler)
+            _field_name = field_name or field_handler.__name__
+            self.register_handler(_field_name, field_handler)
             return field_handler
 
         return decorator

@@ -404,7 +404,7 @@ def test_field_handle_decorator(default_field):
 
 
 def test_fieldset_handle_decorator(default_fieldset):
-    @default_fieldset.handle("my_field")
+    @default_fieldset.handle()
     def my_field(random, **kwargs):
         return random.choice(["a", "b"])
 
@@ -417,7 +417,8 @@ def test_fieldset_handle_decorator(default_fieldset):
 
 
 def test_register_handler_callable_with_wrong_arity(default_field):
-    wrong_arity = lambda **kwargs: "error"
+    def wrong_arity(**kwargs):
+        return "error"
 
     with pytest.raises(FieldArityError):
         default_field.register_handler("invalid_field", wrong_arity)
