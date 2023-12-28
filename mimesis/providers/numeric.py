@@ -23,7 +23,7 @@ class Numeric(BaseProvider):
         name = "numeric"
 
     def increment(self, accumulator: str | None = None) -> int:
-        """Generate incremental number.
+        """Generate an incrementing number.
 
         Each call of this method returns an incrementing number (with the step of +1).
 
@@ -91,12 +91,9 @@ class Numeric(BaseProvider):
     def integers(self, start: int = 0, end: int = 10, n: int = 10) -> t.List[int]:
         """Generate a list of random integers.
 
-        Integers can be negative or positive numbers.
-        .. note: You can use both positive and negative numbers.
-
         :param start: Start.
         :param end: End.
-        :param n: Length of list.
+        :param n: Length of the list.
         :return: List of integers.
 
         :Example:
@@ -167,7 +164,7 @@ class Numeric(BaseProvider):
         return numbers
 
     def decimal_number(self, start: float = -1000.0, end: float = 1000.0) -> Decimal:
-        """Generate random decimal number.
+        """Generate a random decimal number.
 
         :param start:  Start range.
         :param end: End range.
@@ -178,12 +175,12 @@ class Numeric(BaseProvider):
     def decimals(
         self, start: float = 0.0, end: float = 1000.0, n: int = 10
     ) -> t.List[Decimal]:
-        """Generate a decimal number as :py:class:`decimal.Decimal` objects.
+        """Generate a list of decimal numbers.
 
         :param start: Start range.
         :param end: End range.
         :param n: Length of the list.
-        :return: A list of random decimal numbers.
+        :return: A list of :py:class:`decimal.Decimal` objects.
         """
         return [self.decimal_number(start, end) for _ in range(n)]
 
@@ -196,10 +193,8 @@ class Numeric(BaseProvider):
     ) -> Matrix:
         """Generate m x n matrix with random numbers.
 
-        This method works with variety of types,
+        This method works with a variety of types,
         so you can pass method-specific `**kwargs`.
-
-        See code for more details.
 
         :param m: Number of rows.
         :param n: Number of columns.
