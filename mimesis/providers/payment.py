@@ -163,11 +163,11 @@ class Payment(BaseProvider):
     def credit_card_owner(
         self,
         gender: Gender | None = None,
-    ) -> t.Dict[str, str]:
-        """Generate credit card owner.
+    ) -> dict[str, str]:
+        """Generate a credit card owner.
 
-        :param gender: Gender of credit card owner.
-        :type gender: Gender's enum object.
+        :param gender: Gender of the card owner.
+        :type gender: Gender enum.
         :return:
         """
         owner = {

@@ -14,7 +14,7 @@ If any of the following statements is true, move the type to this file:
 
 import datetime
 from decimal import Decimal
-from typing import Any, Callable, Dict, Final, List, Set, Tuple
+from typing import Any, Callable, Final, List, Set, Tuple
 
 __all__ = [
     "CallableSchema",
@@ -31,7 +31,7 @@ __all__ = [
     "Timestamp",
 ]
 
-JSON = Dict[str, Any]
+JSON = dict[str, Any]
 
 DateTime = datetime.datetime
 
@@ -60,4 +60,4 @@ CallableSchema = Callable[[], JSON]
 
 Key = Callable[[Any], Any] | None
 
-FieldCache = Dict[str, Callable[[Any], Any]]
+FieldCache = dict[str, Callable[[Any], Any]]

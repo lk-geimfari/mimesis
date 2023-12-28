@@ -230,7 +230,7 @@ class Address(BaseDataProvider):
         """
         return self._get_fs("lg", dms)
 
-    def coordinates(self, dms: bool = False) -> t.Dict[str, str | float]:
+    def coordinates(self, dms: bool = False) -> dict[str, str | float]:
         """Generate random geo coordinates.
 
         :param dms: DMS format.

@@ -121,7 +121,7 @@ class Random(random_module.Random):
         """Generate n random bytes."""
         return self.getrandbits(n * 8).to_bytes(n, "little")
 
-    def weighted_choice(self, choices: t.Dict[t.Any, float]) -> t.Any:
+    def weighted_choice(self, choices: dict[t.Any, float]) -> t.Any:
         """Returns a random element according to the specified weights.
 
         :param choices: A dictionary where keys are choices and values are weights.

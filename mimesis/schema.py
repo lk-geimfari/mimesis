@@ -49,7 +49,7 @@ class BaseField:
         """
         self._gen = Generic(locale, seed)
         self._cache: FieldCache = {}
-        self._custom_fields: t.Dict[str, FieldHandler] = {}
+        self._custom_fields: dict[str, FieldHandler] = {}
 
     def reseed(self, seed: Seed = MissingSeed) -> None:
         """Reseed the random generator.
@@ -208,7 +208,9 @@ class BaseField:
         if field_name not in self._custom_fields:
             self._custom_fields[field_name] = field_handler
 
-    def handle(self, field_name: str | None = None) -> t.Callable[[FieldHandler], FieldHandler]:
+    def handle(
+        self, field_name: str | None = None
+    ) -> t.Callable[[FieldHandler], FieldHandler]:
         """Decorator for registering a custom field handler.
 
         You can use this decorator only for functions,

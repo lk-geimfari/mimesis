@@ -309,7 +309,7 @@ class Internet(BaseProvider):
         """
         return urllib.parse.urlencode(self.query_parameters(length))
 
-    def query_parameters(self, length: int | None = None) -> t.Dict[str, str]:
+    def query_parameters(self, length: int | None = None) -> dict[str, str]:
         """Generate arbitrary query parameters as a dict.
 
         :param length: Length of query parameters dictionary (maximum is 32).
@@ -409,7 +409,7 @@ class Internet(BaseProvider):
         """
         return self.random.choice(PUBLIC_DNS)
 
-    def http_response_headers(self) -> t.Dict[str, t.Any]:
+    def http_response_headers(self) -> dict[str, t.Any]:
         """Generate a random HTTP response headers.
 
         The following headers are included:
@@ -469,7 +469,7 @@ class Internet(BaseProvider):
         }
         return headers
 
-    def http_request_headers(self) -> t.Dict[str, t.Any]:
+    def http_request_headers(self) -> dict[str, t.Any]:
         """Generates a random HTTP request headers.
 
         The following headers are included:

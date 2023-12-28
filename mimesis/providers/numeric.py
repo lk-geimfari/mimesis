@@ -192,7 +192,7 @@ class Numeric(BaseProvider):
         m: int = 10,
         n: int = 10,
         num_type: NumType = NumType.FLOAT,
-        **kwargs: t.Any
+        **kwargs: t.Any,
     ) -> Matrix:
         """Generate m x n matrix with random numbers.
 
