@@ -452,11 +452,11 @@ Example of the content of ``data.csv`` (truncated):
 
 .. code:: text
 
-    pk,uid,name,version,timestamp
-    1,save,6.8.6-alpha.3,2018-09-21T21:30:43Z
-    2,sponsors,6.9.6-rc.7,2015-03-02T06:18:44Z
-    3,N/A,4.5.6-rc.8,2022-03-31T02:56:15Z
-    4,queen,9.0.6-alpha.11,2008-07-22T05:56:59Z
+    pk,name,     version,        timestamp
+    1, save,     6.8.6-alpha.3,  2018-09-21T21:30:43Z
+    2, sponsors, 6.9.6-rc.7,     2015-03-02T06:18:44Z
+    3, N/A,      4.5.6-rc.8,     2022-03-31T02:56:15Z
+    4, queen,    9.0.6-alpha.11, 2008-07-22T05:56:59Z
 
 
 Integrating with Pandas
