@@ -174,6 +174,23 @@ class Address(BaseDataProvider):
         key = self.validate_enum(code, CountryCode)
         return self.random.choice(COUNTRY_CODES[key])
 
+    def country_emoji_flag(self) -> str:
+        """Generate a randomly chosen country emoji flag.
+
+        :example:
+            🇹🇷
+
+        :return: Flag emoji.
+        """
+        code = self.country_code(
+            code=CountryCode.A2,
+        )
+
+        offset = ord("🇦") - ord("A")
+        first = ord(code[0]) + offset
+        second = ord(code[1]) + offset
+        return chr(first) + chr(second)
+
     def default_country(self) -> str:
         """Get the country associated with the current locale.
 
@@ -260,3 +277,10 @@ class Address(BaseDataProvider):
         :return: Calling code.
         """
         return self.random.choice(CALLING_CODES)
+
+    def isd_code(self) -> str:
+        """Get a random ISD code.
+
+        An alias for :meth:`~Address.calling_code()`.
+        """
+        return self.calling_code()

@@ -5,6 +5,7 @@ Version 12.0.0
 - Added support for field aliases. See docs for more information.
 - Added method ``calver`` for ``Development``.
 - Added method ``stage`` for ``Development``.
+- Added method ``country_emoji_flag`` for ``Address``.
 - Removed parameter ``providers`` for ``Field`` and ``Fieldset``. Use custom field handlers instead.
 - Removed parameters ``pre_release`` and ``calver`` for ``Development.version``. Use methods ``stage`` and ``calver`` instead.
 - Added decorator ``@handle`` for ``Field`` and ``Fieldset`` to register custom fields.

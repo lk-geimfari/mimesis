@@ -9,7 +9,6 @@ COUNTRY_CODES = {
         "AI",
         "AL",
         "AM",
-        "AN",
         "AO",
         "AQ",
         "AR",
