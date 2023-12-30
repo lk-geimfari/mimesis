@@ -44,6 +44,7 @@ class BaseField:
 
         This class is used as a base class for :class:`Field` and :class:`Fieldset`.
 
+        :attr: aliases: A dictionary of aliases for standard fields.
         :param locale: Locale.
         :param seed: Seed for random.
         """

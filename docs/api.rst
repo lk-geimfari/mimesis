@@ -266,7 +266,7 @@ BaseField
 
 .. autoclass:: mimesis.schema.BaseField
    :members:
-   :special-members: __call__
+   :special-members: __call__, __init__
 
 Field
 ------
@@ -285,7 +285,7 @@ Schema
 
 .. autoclass:: mimesis.schema.Schema
    :members:
-   :special-members: __init__, __mul__, __rmul__
+   :special-members: __init__
 
 Enums
 =====
