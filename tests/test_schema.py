@@ -118,7 +118,7 @@ def test_fieldset(localized_fieldset, field_name, i):
 
 def test_field_get_random_instance(localized_field):
     assert isinstance(localized_field.get_random_instance(), Random)
-    assert localized_field.get_random_instance() == localized_field._gen.random
+    assert localized_field.get_random_instance() == localized_field._generic.random
 
 
 @pytest.mark.parametrize(
@@ -468,9 +468,9 @@ def test_unregister_handler(default_field):
     # Register fields first
     default_field.register_handler("my_field", my_field_handler)
     # Make sure that registration is done.
-    assert len(default_field._custom_fields.keys()) > 0
+    assert len(default_field._field_handlers.keys()) > 0
     # Extract field handler by its name
-    registered_field = default_field._custom_fields["my_field"]
+    registered_field = default_field._field_handlers["my_field"]
     # Make sure that handlers are the same
     assert registered_field == my_field_handler
     # Unregister field
@@ -489,16 +489,16 @@ def test_unregister_handlers(default_field):
 
     # Register fields first
     default_field.register_handlers(fields=fields)
-    assert len(default_field._custom_fields.keys()) == 3
+    assert len(default_field._field_handlers.keys()) == 3
 
     # Unregister all field with given names.
     default_field.unregister_handlers(["a", "b", "c", "d", "e"])
-    assert len(default_field._custom_fields.keys()) == 0
+    assert len(default_field._field_handlers.keys()) == 0
 
     # Register fields again and unregister all of them at once
     default_field.register_handlers(fields=fields)
     default_field.unregister_all_handlers()
-    assert len(default_field._custom_fields.keys()) == 0
+    assert len(default_field._field_handlers.keys()) == 0
 
 
 def test_unregister_all_handlers(default_field):
@@ -510,8 +510,8 @@ def test_unregister_all_handlers(default_field):
 
     # Register fields first
     default_field.register_handlers(fields=fields)
-    assert len(default_field._custom_fields.keys()) == 3
+    assert len(default_field._field_handlers.keys()) == 3
 
     # Unregister all fields
     default_field.unregister_all_handlers()
-    assert len(default_field._custom_fields.keys()) == 0
+    assert len(default_field._field_handlers.keys()) == 0

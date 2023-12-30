@@ -47,23 +47,23 @@ class BaseField:
         :param locale: Locale.
         :param seed: Seed for random.
         """
-        self._gen = Generic(locale, seed)
+        self._generic = Generic(locale, seed)
         self._cache: FieldCache = {}
-        self._custom_fields: dict[str, FieldHandler] = {}
+        self._field_handlers: dict[str, FieldHandler] = {}
 
     def reseed(self, seed: Seed = MissingSeed) -> None:
         """Reseed the random generator.
 
         :param seed: Seed for random.
         """
-        self._gen.reseed(seed)
+        self._generic.reseed(seed)
 
     def get_random_instance(self) -> Random:
         """Get a random object from Generic.
 
         :return: Random object.
         """
-        return self._gen.random
+        return self._generic.random
 
     def _explicit_lookup(self, name: str) -> t.Any:
         """An explicit method lookup.
@@ -77,7 +77,7 @@ class BaseField:
         """
         provider_name, method_name = name.split(".", 1)
         try:
-            provider = getattr(self._gen, provider_name)
+            provider = getattr(self._generic, provider_name)
             return getattr(provider, method_name)
         except AttributeError:
             raise FieldError(name)
@@ -92,8 +92,8 @@ class BaseField:
         :return: Callable object.
         :raise FieldError: When field is invalid.
         """
-        for provider in dir(self._gen):
-            provider = getattr(self._gen, provider)
+        for provider in dir(self._generic):
+            provider = getattr(self._generic, provider)
             if isinstance(provider, BaseProvider):
                 if name in dir(provider):
                     return getattr(provider, name)
@@ -168,9 +168,9 @@ class BaseField:
 
         random = self.get_random_instance()
 
-        # Check if there is a custom field handler.
-        if name in self._custom_fields:
-            result = self._custom_fields[name](random, **kwargs)  # type: ignore
+        # First, try to find a custom field handler.
+        if name in self._field_handlers:
+            result = self._field_handlers[name](random, **kwargs)  # type: ignore
         else:
             result = self._lookup_method(name)(**kwargs)
 
@@ -205,8 +205,8 @@ class BaseField:
         if len(callable_signature.parameters) <= 1:
             raise FieldArityError()
 
-        if field_name not in self._custom_fields:
-            self._custom_fields[field_name] = field_handler
+        if field_name not in self._field_handlers:
+            self._field_handlers[field_name] = field_handler
 
     def handle(
         self, field_name: str | None = None
@@ -245,7 +245,7 @@ class BaseField:
         :param field_name: Name of the field.
         """
 
-        self._custom_fields.pop(field_name, None)
+        self._field_handlers.pop(field_name, None)
 
     def unregister_handlers(self, field_names: t.Sequence[str] = ()) -> None:
         """Unregister a field handlers with given names.
@@ -262,10 +262,10 @@ class BaseField:
 
         :return: None.
         """
-        self._custom_fields.clear()
+        self._field_handlers.clear()
 
     def __str__(self) -> str:
-        return f"{self.__class__.__name__} <{self._gen.locale}>"
+        return f"{self.__class__.__name__} <{self._generic.locale}>"
 
 
 class Field(BaseField):
@@ -363,10 +363,9 @@ class Schema:
     """Class which return list of filled schemas."""
 
     __slots__ = (
-        "_count",
-        "_schema",
+        "__counter",
+        "__schema",
         "iterations",
-        "_min_iterations",
     )
 
     def __init__(self, schema: CallableSchema, iterations: int = 10) -> None:
@@ -376,18 +375,14 @@ class Schema:
             This parameter is keyword-only. The default value is 10.
         :param schema: A schema (must be a callable object).
         """
+        if iterations < 1:
+            raise ValueError("Number of iterations should be greater than 1.")
+
+        self.iterations = iterations
         if schema and callable(schema):  # type: ignore[truthy-function]
-            self._schema = schema
-            self._count = 0
-            self._min_iterations = 1
-            if iterations >= self._min_iterations:
-                self.iterations = iterations
-            else:
-                raise ValueError(
-                    f"Iterations must be greater than {self._min_iterations}"
-                )
+            self.__schema = schema
+            self.__counter = 0
         else:
-            # This is just a better error message
             raise SchemaError()
 
     def to_csv(self, file_path: str, **kwargs: t.Any) -> None:
@@ -432,16 +427,16 @@ class Schema:
 
         :return: List of fulfilled schemas.
         """
-        return [self._schema() for _ in range(self.iterations)]
+        return [self.__schema() for _ in range(self.iterations)]
 
     def __next__(self) -> JSON:
         """Return the next item from the iterator."""
-        if self._count < self.iterations:
-            self._count += 1
-            return self._schema()
+        if self.__counter < self.iterations:
+            self.__counter += 1
+            return self.__schema()
         raise StopIteration
 
     def __iter__(self) -> "Schema":
         """Return the iterator object itself."""
-        self._count = 0
+        self.__counter = 0
         return self

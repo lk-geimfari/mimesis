@@ -23,7 +23,10 @@ class SchemaError(ValueError):
     """Raised when a schema is unsupported."""
 
     def __str__(self) -> str:
-        return "The schema must be a callable object."
+        return (
+            "The schema must be a callable object that returns a dict."
+            "See https://mimesis.name/en/master/schema.html for more details."
+        )
 
 
 class NonEnumerableError(TypeError):
@@ -68,7 +71,7 @@ class FieldsetError(ValueError):
     """Raised when a resulting fieldset is empty."""
 
     def __str__(self) -> str:
-        return "The «iterations» parameter must be greater than 1."
+        return "The «iterations» parameter should be greater than 1."
 
 
 class FieldNameError(ValueError):
