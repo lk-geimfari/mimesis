@@ -146,6 +146,54 @@ Let's take a look at the example:
     ['RICKY', 'LEONORE', 'DORIAN']
 
 
+Using Field Aliases
+-------------------
+
+.. versionadded:: 12.0.0
+
+Sometimes it is necessary to use a field name that is more relevant to your specific domain and this is where
+field aliases come in handy.
+
+Let's take a look at the example:
+
+.. code-block:: python
+
+    from mimesis import Field, Locale
+
+    field = Field(Locale.EN)
+    field.aliases = {
+        '🇺🇸': 'country',
+        '🧬': 'dna_sequence',
+        '📧': 'email',
+        '📞': 'telephone',
+        '🍆': 'vegetable',
+        'ебаныйтокен': 'token_hex',
+    }
+
+
+You can now use aliases instead of standard field names:
+
+.. code-block:: python
+
+    >>> field("🇺🇸")
+    'Iraq' # I swear this was generated randomly.
+    >>> field("🧬")
+    'ATTCTAGCAT'
+    >>> field('📧', domains=['@gmail.com'])
+    'walker1827@gmail.com'
+    >>> field('📞')
+    '+17181130182'
+    >>> field('🍆')
+    'Radicchio'
+    >>> field('ебаныйтокен')
+    'aef9765d029c91ac737d04119c94a2b52a52d34b61bc39bec393e82e7bf0b8b5'
+
+
+As you can see, you can use any string as an alias, so I'm doing my part to get someone fired for emoji-driven code.
+
+Jokes aside, while any string can serve as an alias, it's advisable to opt for a string that aligns with your
+specific domain or context for improved clarity and understanding.
+
 
 Key Functions and Post-Processing
 ---------------------------------
@@ -277,6 +325,10 @@ Custom Field Handlers
 
     We use :class:`~mimesis.schema.Field` in our examples, but all the features described
     below are available for :class:`~mimesis.schema.Fieldset` as well.
+
+.. warning::
+
+    For obvious reasons, aliases cannot be applied to custom field handlers.
 
 Sometimes, it's necessary to register custom field handler or override existing ones to return custom data. This
 can be achieved using **custom field handlers**.

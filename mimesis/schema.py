@@ -50,6 +50,7 @@ class BaseField:
         self._generic = Generic(locale, seed)
         self._cache: FieldCache = {}
         self._field_handlers: dict[str, FieldHandler] = {}
+        self.aliases: dict[str, str] = {}
 
     def reseed(self, seed: Seed = MissingSeed) -> None:
         """Reseed the random generator.
@@ -112,6 +113,9 @@ class BaseField:
 
         if name.count(".") > 1:
             raise FieldError(name)
+
+        if name in self.aliases:
+            name = self.aliases[name]
 
         if name not in self._cache:
             if "." not in name:

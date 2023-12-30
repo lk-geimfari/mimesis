@@ -515,3 +515,14 @@ def test_unregister_all_handlers(default_field):
     # Unregister all fields
     default_field.unregister_all_handlers()
     assert len(default_field._field_handlers.keys()) == 0
+
+
+def test_base_field_aliasing(default_field):
+    default_field.aliases = {
+        "🇺🇸": "country_code",
+    }
+    assert default_field("🇺🇸")
+
+    with pytest.raises(FieldError):
+        default_field.aliases.clear()
+        default_field("🇺🇸")
