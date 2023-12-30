@@ -221,8 +221,8 @@ When you no longer need aliases, you can remove them individually like regular d
 Key Functions and Post-Processing
 ---------------------------------
 
-You can optionally apply a key function to the result returned by a **field**
-or **fieldset**. To do this, simply pass a callable object that returns
+You can optionally apply a key function to the result returned by the instance of :class:`~mimesis.schema.Field`
+or :class:`~mimesis.schema.Fieldset`. To do this, simply pass a callable object that returns
 the final result as the **key** parameter.
 
 Let's take a look at the example:
