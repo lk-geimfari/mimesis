@@ -87,7 +87,7 @@ class RussiaSpecProvider(BaseDataProvider):
         return f"{series} {number}"
 
     def snils(self) -> str:
-        """Generate snils with special algorithm.
+        """Generate snils with a special algorithm.
 
         :return: SNILS.
 
