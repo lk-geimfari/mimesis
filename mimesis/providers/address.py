@@ -205,7 +205,7 @@ class Address(BaseDataProvider):
         :param dms: DMS format.
         :return: Float number
         """
-        # Default range is a range of longitude.
+        # The default range is a range of longitudes.
         rng = (-90, 90) if key == "lt" else (-180, 180)
         result = self.random.uniform(*rng, precision=6)
 
@@ -244,7 +244,7 @@ class Address(BaseDataProvider):
     def continent(self, code: bool = False) -> str:
         """Get a random continent name or continent code.
 
-        :param code: Return code of continent.
+        :param code: Return code of a continent.
         :return: Continent name.
         """
         codes: list[str] = self.extract(["continent"])

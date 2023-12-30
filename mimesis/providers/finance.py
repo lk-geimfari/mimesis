@@ -15,7 +15,7 @@ __all__ = ["Finance"]
 
 
 class Finance(BaseDataProvider):
-    """Class for generating finance data."""
+    """Class to generate finance and business related data."""
 
     class Meta:
         name = "finance"
