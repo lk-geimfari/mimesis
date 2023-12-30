@@ -8,6 +8,7 @@ import re
 import typing as t
 
 from mimesis.exceptions import (
+    AliasesTypeError,
     FieldArityError,
     FieldError,
     FieldNameError,
@@ -109,14 +110,14 @@ class BaseField:
         :return: Callable object.
         :raise FieldError: When field is invalid.
         """
+        # Check if the field is defined in aliases
+        name = self.aliases.get(name, name)
+
         # Support additional delimiters
         name = re.sub(r"[/:\s]", ".", name)
 
         if name.count(".") > 1:
             raise FieldError(name)
-
-        if name in self.aliases:
-            name = self.aliases[name]
 
         if name not in self._cache:
             if "." not in name:
@@ -126,6 +127,17 @@ class BaseField:
             self._cache[name] = method
 
         return self._cache[name]
+
+    def _validate_aliases(self) -> bool:
+        """Validate aliases."""
+        if not isinstance(self.aliases, dict) or any(
+            not isinstance(key, str) or not isinstance(value, str)
+            for key, value in self.aliases.items()
+        ):
+            # Reset to valid state
+            self.aliases = {}
+            raise AliasesTypeError()
+        return True
 
     def perform(
         self,
@@ -168,6 +180,9 @@ class BaseField:
         :return: The result of method.
         :raises ValueError: if provider is not supported or if field is not defined.
         """
+        # Validate aliases before lookup
+        self._validate_aliases()
+
         if name is None:
             raise FieldError()
 

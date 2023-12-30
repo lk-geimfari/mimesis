@@ -93,3 +93,13 @@ class FieldArityError(ValueError):
 
     def __str__(self) -> str:
         return "The custom handler must accept at least two arguments: 'random' and '**kwargs'"
+
+
+class AliasesTypeError(TypeError):
+    """Raised when the aliases attribute is set to a format other than a flat dictionary."""
+
+    def __str__(self) -> str:
+        return (
+            "The 'aliases' attribute needs to be a non-nested dictionary where "
+            "keys are the aliases and values are the corresponding field names."
+        )

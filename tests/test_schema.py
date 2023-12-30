@@ -10,6 +10,7 @@ import pytest
 
 from mimesis.enums import Gender
 from mimesis.exceptions import (
+    AliasesTypeError,
     FieldArityError,
     FieldError,
     FieldNameError,
@@ -517,7 +518,7 @@ def test_unregister_all_handlers(default_field):
     assert len(default_field._field_handlers.keys()) == 0
 
 
-def test_base_field_aliasing(default_field):
+def test_field_aliasing(default_field):
     default_field.aliases = {
         "🇺🇸": "country_code",
     }
@@ -526,3 +527,26 @@ def test_base_field_aliasing(default_field):
     with pytest.raises(FieldError):
         default_field.aliases.clear()
         default_field("🇺🇸")
+
+
+@pytest.mark.parametrize(
+    "aliases",
+    [
+        {"🇺🇸": tuple},
+        {"hey": 22},
+        {12: "email"},
+        {b"hey": "email"},
+        None,
+        [],
+        tuple(),
+    ],
+)
+def test_field_invalid_aliases(default_field, aliases):
+    default_field.aliases = aliases
+    with pytest.raises(AliasesTypeError):
+        default_field("email")
+
+    default_field.aliases = aliases
+
+    with pytest.raises(AliasesTypeError):
+        default_field._validate_aliases()

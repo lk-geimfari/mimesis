@@ -2,6 +2,7 @@ Version 12.0.0
 --------------
 
 - Python 3.8 and 3.9 are no longer supported.
+- Added support for field aliases. See docs for more information.
 - Added method ``calver`` for ``Development``.
 - Added method ``stage`` for ``Development``.
 - Removed parameter ``providers`` for ``Field`` and ``Fieldset``. Use custom field handlers instead.

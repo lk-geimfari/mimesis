@@ -151,8 +151,11 @@ Using Field Aliases
 
 .. versionadded:: 12.0.0
 
-Sometimes it is necessary to use a field name that is more relevant to your specific domain and this is where
-field aliases come in handy.
+Sometimes, you need a field name that truly matches what your domain is about, and that's when field aliases become useful.
+
+In order to utilize field aliases, it's necessary to instantiate either a :class:`~mimesis.schema.Field` or
+:class:`~mimesis.schema.Fieldset` and then update the attribute ``aliases`` (essentially a regular :class:`dict`) to
+associate aliases with field names.
 
 Let's take a look at the example:
 
@@ -161,14 +164,17 @@ Let's take a look at the example:
     from mimesis import Field, Locale
 
     field = Field(Locale.EN)
-    field.aliases = {
+
+    # The key is an alias, the value is the field
+    # name to which the alias is associated (both should be strings).
+    field.aliases.update({
         '🇺🇸': 'country',
         '🧬': 'dna_sequence',
         '📧': 'email',
         '📞': 'telephone',
         '🍆': 'vegetable',
         'ебаныйтокен': 'token_hex',
-    }
+    })
 
 
 You can now use aliases instead of standard field names:
@@ -190,9 +196,26 @@ You can now use aliases instead of standard field names:
 
 
 As you can see, you can use any string as an alias, so I'm doing my part to get someone fired for emoji-driven code.
+Putting jokes aside, although any string can work as an alias, it's wise to choose one that fits your domain or
+context better to enhance clarity and comprehension.
 
-Jokes aside, while any string can serve as an alias, it's advisable to opt for a string that aligns with your
-specific domain or context for improved clarity and understanding.
+If you try to replace the ``aliases`` attribute with anything other than a non-nested dictionary,
+you'll receive an exception :class:`~mimesis.exceptions.AliasesTypeError`.
+
+.. code-block:: python
+
+    >>> field.aliases = None # Raises AliasesTypeError
+
+
+When you no longer need aliases, you can remove them individually like regular dictionary keys or clear them all at once:
+
+.. code-block:: python
+
+    >>> field.aliases.pop('🇺🇸')
+
+    # clear all aliases
+
+    >>> field.aliases.clear()
 
 
 Key Functions and Post-Processing
@@ -325,10 +348,6 @@ Custom Field Handlers
 
     We use :class:`~mimesis.schema.Field` in our examples, but all the features described
     below are available for :class:`~mimesis.schema.Fieldset` as well.
-
-.. warning::
-
-    For obvious reasons, aliases cannot be applied to custom field handlers.
 
 Sometimes, it's necessary to register custom field handler or override existing ones to return custom data. This
 can be achieved using **custom field handlers**.
