@@ -6,8 +6,11 @@ Version 12.0.0
 - Added method ``calver`` for ``Development``.
 - Added method ``stage`` for ``Development``.
 - Added method ``country_emoji_flag`` for ``Address``.
+- Removed method ``hashtags`` of the ``Internet`` provider. Use method ``words`` of the ``Text`` provider instead.
 - Removed parameter ``providers`` for ``Field`` and ``Fieldset``. Use custom field handlers instead.
 - Removed parameters ``pre_release`` and ``calver`` for ``Development.version``. Use methods ``stage`` and ``calver`` instead.
+- Moved method ``emoji`` of the ``Internet`` provider to the ``Text`` provider.
+- The ``Text().emoji()`` method now supports the ``category`` parameter and ``EmojiCategory`` enum. Also it return emoji instead of emoji shortcut string.
 - Added decorator ``@handle`` for ``Field`` and ``Fieldset`` to register custom fields.
 - Renamed ``register_field`` to ``register_handler`` for `Field` and `Fieldset`.
 - Renamed ``register_fields`` to ``register_handlers`` for `Field` and `Fieldset`.

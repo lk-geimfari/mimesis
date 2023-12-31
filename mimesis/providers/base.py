@@ -87,6 +87,20 @@ class BaseProvider:
 
         return result.value
 
+    def _read_global_file(self, file_name: str) -> JSON:
+        """Read JSON file and return dict.
+
+        Read JSON file from mimesis/data/global/ directory.
+
+        :param file_name: Path to file.
+        :raises FileNotFoundError: If the file was not found.
+        :return: JSON data.
+        """
+        with open(DATADIR.joinpath("global", file_name)) as f:
+            data: JSON = json.load(f)
+
+        return data
+
     def _has_seed(self) -> bool:
         """Internal API to check if seed is set."""
         return (self.seed is not None and self.seed is not MissingSeed) or (

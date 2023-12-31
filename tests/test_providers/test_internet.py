@@ -19,20 +19,6 @@ class TestInternet:
     def test_str(self, net):
         assert re.match(patterns.PROVIDER_STR_REGEX, str(net))
 
-    def test_emoji(self, net):
-        result = net.emoji()
-        assert result in data.EMOJI
-
-    def test_hashtags(self, net):
-        result = net.hashtags(quantity=5)
-        assert len(result) == 5
-
-        with pytest.raises(ValueError):
-            net.hashtags(quantity=0)
-
-        with pytest.raises(ValueError):
-            net.hashtags(quantity=-1)
-
     @pytest.mark.parametrize(
         "subdomains",
         [
@@ -322,13 +308,6 @@ class TestSeededInternet:
 
         for key, val in r1.items():
             assert r2[key] == val
-
-    def test_emoji(self, i1, i2):
-        assert i1.emoji() == i2.emoji()
-
-    def test_hashtags(self, i1, i2):
-        assert i1.hashtags() == i2.hashtags()
-        assert i1.hashtags(quantity=7) == i2.hashtags(quantity=7)
 
     def test_hostname(self, i1, i2):
         assert i1.hostname() == i2.hostname()

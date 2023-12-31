@@ -4,6 +4,7 @@ import pytest
 
 from mimesis import Text
 from mimesis.data import SAFE_COLORS
+from mimesis.enums import EmojyCategory
 
 from . import patterns
 
@@ -99,6 +100,26 @@ class TestText:
         assert result is not None
         assert isinstance(result, str)
 
+    @pytest.mark.parametrize(
+        "category",
+        [
+            None,
+            EmojyCategory.DEFAULT,
+            EmojyCategory.SMILEYS_AND_EMOTION,
+            EmojyCategory.PEOPLE_AND_BODY,
+            EmojyCategory.ANIMALS_AND_NATURE,
+            EmojyCategory.FOOD_AND_DRINK,
+            EmojyCategory.TRAVEL_AND_PLACES,
+            EmojyCategory.ACTIVITIES,
+            EmojyCategory.OBJECTS,
+            EmojyCategory.SYMBOLS,
+            EmojyCategory.FLAGS,
+        ],
+    )
+    def test_emoji(self, _text, category):
+        result = _text.emoji(category=category)
+        assert isinstance(result, str)
+
 
 class TestSeededText:
     @pytest.fixture
@@ -149,3 +170,6 @@ class TestSeededText:
 
     def test_answer(self, t1, t2):
         assert t1.answer() == t2.answer()
+
+    def test_emoji(self, t1, t2):
+        assert t1.emoji() == t2.emoji()

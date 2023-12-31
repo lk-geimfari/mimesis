@@ -189,6 +189,14 @@ class TestBase:
         with pytest.raises(TypeError):
             BaseProvider(random="")
 
+    def test_read_global_file(self, base_data_provider):
+        result = base_data_provider._read_global_file("emojis.json")
+        assert isinstance(result, dict)
+        assert len(result.keys()) > 0
+
+        with pytest.raises(FileNotFoundError):
+            base_data_provider._read_global_file("nil.json")
+
     @pytest.mark.repeat(5)
     def test_custom_data_provider(self):
         with tempfile.TemporaryDirectory() as tmpdir:

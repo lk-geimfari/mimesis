@@ -11,7 +11,6 @@ from mimesis.data import (
     CONTENT_ENCODING_DIRECTIVES,
     CORS_OPENER_POLICIES,
     CORS_RESOURCE_POLICIES,
-    EMOJI,
     HTTP_METHODS,
     HTTP_SERVERS,
     HTTP_STATUS_CODES,
@@ -179,16 +178,6 @@ class Internet(BaseProvider):
         mac = [f"{x:02x}" for x in mac_hex]
         return ":".join(mac)
 
-    def emoji(self) -> str:
-        """Get a random emoji shortcut code.
-
-        :return: Emoji code.
-
-        :Example:
-            :kissing:
-        """
-        return self.random.choice(EMOJI)
-
     @staticmethod
     def stock_image_url(
         width: int | str = 1920,
@@ -211,22 +200,6 @@ class Internet(BaseProvider):
             keywords_str = ""
 
         return f"https://source.unsplash.com/{width}x{height}?{keywords_str}"
-
-    def hashtags(self, quantity: int = 4) -> list[str]:
-        """Generate a list of hashtags.
-
-        :param quantity: The quantity of hashtags.
-        :return: The list of hashtags.
-        :raises NonEnumerableError: if category is not in Hashtag.
-
-        :Example:
-            ['#love', '#sky', '#nice']
-        """
-
-        if quantity < 1:
-            raise ValueError("Quantity must be a positive integer.")
-
-        return ["#" + self._text.word() for _ in range(quantity)]
 
     def hostname(
         self,

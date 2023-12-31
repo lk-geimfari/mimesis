@@ -17,6 +17,7 @@ from mimesis.enums import (
     DocumentFile,
     DSNType,
     EANFormat,
+    EmojyCategory,
     FileType,
     Gender,
     ImageFile,
@@ -125,6 +126,7 @@ __all__ = [
     "TLDType",
     "URLScheme",
     "VideoFile",
+    "EmojyCategory",
     # Exceptions:
     "LocaleError",
     "SchemaError",
