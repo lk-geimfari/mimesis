@@ -22,7 +22,7 @@ class Code(BaseProvider):
         name = "code"
 
     def locale_code(self) -> str:
-        """Get a random locale code (MS-LCID).
+        """Generates a random locale code (MS-LCID).
 
         See Windows Language Code Identifier Reference
         for more information.
@@ -32,7 +32,7 @@ class Code(BaseProvider):
         return self.random.choice(LOCALE_CODES)
 
     def issn(self, mask: str = "####-####") -> str:
-        """Generate a random ISSN.
+        """Generates a random ISSN.
 
         :param mask: Mask of ISSN.
         :return: ISSN.
@@ -42,7 +42,7 @@ class Code(BaseProvider):
     def isbn(
         self, fmt: ISBNFormat | None = None, locale: Locale = Locale.DEFAULT
     ) -> str:
-        """Generate ISBN for current locale.
+        """Generates ISBN for current locale.
 
         To change ISBN format, pass parameter ``code`` with needed value of
         the enum object :class:`~mimesis.enums.ISBNFormat`
@@ -57,7 +57,7 @@ class Code(BaseProvider):
         return self.random.custom_code(mask)
 
     def ean(self, fmt: EANFormat | None = None) -> str:
-        """Generate EAN.
+        """Generates EAN.
 
         To change EAN format, pass parameter ``code`` with needed value of
         the enum object :class:`~mimesis.enums.EANFormat`.
@@ -74,7 +74,7 @@ class Code(BaseProvider):
         return self.random.custom_code(mask=mask)
 
     def imei(self) -> str:
-        """Generate a random IMEI.
+        """Generates a random IMEI.
 
         :return: IMEI.
         """
@@ -83,7 +83,7 @@ class Code(BaseProvider):
         return num + luhn_checksum(num)
 
     def pin(self, mask: str = "####") -> str:
-        """Generate a random PIN code.
+        """Generates a random PIN code.
 
         :param mask: Mask of pin code.
         :return: PIN code.

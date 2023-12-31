@@ -29,7 +29,7 @@ class Choice(BaseProvider):
         length: int = 0,
         unique: bool = False,
     ) -> t.Sequence[t.Any] | t.Any:
-        """Generate a randomly-chosen sequence or bare element from a sequence.
+        """Generates a randomly chosen sequence or bare element from a sequence.
 
         Provide elements randomly chosen from the elements in a sequence
         **items**, where when **length** is specified the random choices are
@@ -38,7 +38,7 @@ class Choice(BaseProvider):
         to True, constrain a returned sequence to contain only unique elements.
 
         :param items: Non-empty sequence (list, tuple or string) of elements.
-        :param length: Length of sequence (number of elements) to provide.
+        :param length: Length of the sequence (number of elements) to provide.
         :param unique: If True, ensures provided elements are unique.
         :return: Sequence or uncontained element randomly chosen from items.
         :raises TypeError: For non-sequence items or non-integer length.

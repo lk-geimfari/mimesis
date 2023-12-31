@@ -18,7 +18,7 @@ class Food(BaseDataProvider):
         return self.random.choice(data)
 
     def vegetable(self) -> str:
-        """Get a random vegetable.
+        """Generates a random vegetable name.
 
         :return: Vegetable name.
 
@@ -28,7 +28,7 @@ class Food(BaseDataProvider):
         return self._choice_from("vegetables")
 
     def fruit(self) -> str:
-        """Get a random fruit or berry.
+        """Generates a random fruit or berry name.
 
         :return: Fruit name.
 
@@ -38,7 +38,7 @@ class Food(BaseDataProvider):
         return self._choice_from("fruits")
 
     def dish(self) -> str:
-        """Get a random dish.
+        """Generates a random dish name.
 
         :return: Dish name.
 
@@ -48,7 +48,7 @@ class Food(BaseDataProvider):
         return self._choice_from("dishes")
 
     def spices(self) -> str:
-        """Get a random spices or herbs.
+        """Generates a random spices/herb name.
 
         :return: The name of the spices or herbs.
 
@@ -58,9 +58,9 @@ class Food(BaseDataProvider):
         return self._choice_from("spices")
 
     def drink(self) -> str:
-        """Get a random drink.
+        """Generates a random drink name.
 
-        :return: The name of the alcoholic beverage.
+        :return: Drink name.
 
         :Example:
             Vodka.

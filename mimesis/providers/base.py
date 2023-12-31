@@ -19,7 +19,8 @@ class BaseProvider:
     """This is a base class for all providers.
 
 
-    :attr: random: Instance of :class:`mimesis.random.Random`.
+    :attr: random: An instance of :class:`mimesis.random.Random`.
+    :attr: seed: Seed for random.
     """
 
     class Meta:
@@ -53,7 +54,7 @@ class BaseProvider:
         self.reseed(seed)
 
     def reseed(self, seed: Seed = MissingSeed) -> None:
-        """Reseed the internal random generator.
+        """Reseeds the internal random generator.
 
         In case we use the default seed, we need to create a per instance
         random generator. In this case, two providers with the same seed
@@ -71,12 +72,12 @@ class BaseProvider:
             self.random.seed(t.cast(t.Any, seed))
 
     def validate_enum(self, item: t.Any, enum: t.Any) -> t.Any:
-        """Validate enum parameter of method in subclasses of BaseProvider.
+        """Validates various enum objects that are used as arguments for methods.
 
         :param item: Item of an enum object.
         :param enum: Enum object.
         :return: Value of item.
-        :raises NonEnumerableError: If ``item`` not in ``enum``.
+        :raises NonEnumerableError: If enums has not such an item.
         """
         if item is None:
             result = self.random.choice_enum_item(enum)
@@ -88,9 +89,9 @@ class BaseProvider:
         return result.value
 
     def _read_global_file(self, file_name: str) -> JSON:
-        """Read JSON file and return dict.
+        """Reads JSON file and return dict.
 
-        Read JSON file from mimesis/data/global/ directory.
+        Reads JSON file from mimesis/data/global/ directory.
 
         :param file_name: Path to file.
         :raises FileNotFoundError: If the file was not found.
@@ -162,7 +163,7 @@ class BaseDataProvider(BaseProvider):
             return default
 
     def _update_dict(self, initial: JSON, other: JSON) -> JSON:
-        """Recursively update a dictionary.
+        """Recursively updates a dictionary.
 
         :param initial: Dict to update.
         :param other: Dict to update from.
@@ -203,7 +204,7 @@ class BaseDataProvider(BaseProvider):
         self._data = data
 
     def get_current_locale(self) -> str:
-        """Get current locale.
+        """Returns current locale.
 
         If locale is not defined, then this method will always return ``en``,
         because ``en`` is default locale for all providers, excluding builtins.
@@ -227,7 +228,7 @@ class BaseDataProvider(BaseProvider):
         self,
         locale: Locale,
     ) -> t.Generator["BaseDataProvider", None, None]:
-        """Context manager which allows overriding current locale.
+        """Context manager that allows overriding current locale.
 
         Temporarily overrides current locale for
         locale-dependent providers.

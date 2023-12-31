@@ -19,21 +19,21 @@ class Cryptographic(BaseProvider):
 
     @staticmethod
     def uuid_object() -> UUID:
-        """Generate UUID4 object.
+        """Generates UUID4 object.
 
         :return: UUID4 object.
         """
         return uuid4()
 
     def uuid(self) -> str:
-        """Generate UUID4 string.
+        """Generates UUID4 string.
 
         :return: UUID4 as string.
         """
         return str(self.uuid_object())
 
     def hash(self, algorithm: Algorithm | None = None) -> str:  # noqa: A003
-        """Generate random hash.
+        """Generates random hash.
 
         To change hashing algorithm, pass parameter ``algorithm``
         with needed value of the enum object :class:`~mimesis.enums.Algorithm`
@@ -52,7 +52,7 @@ class Cryptographic(BaseProvider):
 
     @staticmethod
     def token_bytes(entropy: int = 32) -> bytes:
-        """Generate byte string containing ``entropy`` bytes.
+        """Generates byte string containing ``entropy`` bytes.
 
         The string has ``entropy`` random bytes, each byte
         converted to two hex digits.
@@ -67,7 +67,7 @@ class Cryptographic(BaseProvider):
 
     @staticmethod
     def token_hex(entropy: int = 32) -> str:
-        """Return a random text string, in hexadecimal.
+        """Generates a random text string, in hexadecimal.
 
         The string has *entropy* random bytes, each byte converted to two
         hex digits.  If *entropy* is ``None`` or not supplied, a reasonable
@@ -83,7 +83,7 @@ class Cryptographic(BaseProvider):
 
     @staticmethod
     def token_urlsafe(entropy: int = 32) -> str:
-        """Return a random URL-safe text string, in Base64 encoding.
+        """Generates a random URL-safe text string, in Base64 encoding.
 
         The string has *entropy* random bytes.  If *entropy* is ``None``
         or not supplied, a reasonable default is used.
@@ -97,7 +97,7 @@ class Cryptographic(BaseProvider):
         return secrets.token_urlsafe(entropy)
 
     def mnemonic_phrase(self) -> str:
-        """Generate BIP-39-compatible mnemonic phrase.
+        """Generates BIP-39 looking mnemonic phrase.
 
         :return: Mnemonic phrase.
         """

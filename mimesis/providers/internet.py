@@ -68,7 +68,7 @@ class Internet(BaseProvider):
         name = "internet"
 
     def content_type(self, mime_type: MimeType | None = None) -> str:
-        """Get a random HTTP content type.
+        """Generates a random HTTP content type.
 
         :return: Content type.
 
@@ -78,7 +78,7 @@ class Internet(BaseProvider):
         return self._file.mime_type(type_=mime_type)
 
     def http_status_message(self) -> str:
-        """Get a random HTTP status message.
+        """Generates a random HTTP status message.
 
         :return: HTTP status message.
 
@@ -88,7 +88,7 @@ class Internet(BaseProvider):
         return self.random.choice(HTTP_STATUS_MSGS)
 
     def http_status_code(self) -> int:
-        """Get a random HTTP status code.
+        """Generates a random HTTP status code.
 
         :return: HTTP status.
 
@@ -98,7 +98,7 @@ class Internet(BaseProvider):
         return self.random.choice(HTTP_STATUS_CODES)
 
     def http_method(self) -> str:
-        """Get a random HTTP method.
+        """Generates a random HTTP method.
 
         :return: HTTP method.
 
@@ -108,7 +108,7 @@ class Internet(BaseProvider):
         return self.random.choice(HTTP_METHODS)
 
     def ip_v4_object(self) -> IPv4Address:
-        """Generate random :py:class:`ipaddress.IPv4Address` object.
+        """Generates a random :py:class:`ipaddress.IPv4Address` object.
 
         :return: :py:class:`ipaddress.IPv4Address` object.
         """
@@ -117,7 +117,7 @@ class Internet(BaseProvider):
         )
 
     def ip_v4_with_port(self, port_range: PortRange = PortRange.ALL) -> str:
-        """Generate a random IPv4 address as string.
+        """Generates a random IPv4 address as string.
 
         :param port_range: PortRange enum object.
         :return: IPv4 address as string.
@@ -130,7 +130,7 @@ class Internet(BaseProvider):
         return f"{addr}:{port}"
 
     def ip_v4(self) -> str:
-        """Generate a random IPv4 address as string.
+        """Generates a random IPv4 address as string.
 
         :Example:
             19.121.223.58
@@ -138,7 +138,7 @@ class Internet(BaseProvider):
         return str(self.ip_v4_object())
 
     def ip_v6_object(self) -> IPv6Address:
-        """Generate random :py:class:`ipaddress.IPv6Address` object.
+        """Generates random :py:class:`ipaddress.IPv6Address` object.
 
         :return: :py:class:`ipaddress.IPv6Address` object.
         """
@@ -150,7 +150,7 @@ class Internet(BaseProvider):
         )
 
     def ip_v6(self) -> str:
-        """Generate a random IPv6 address as string.
+        """Generates a random IPv6 address as string.
 
         :return: IPv6 address string.
 
@@ -160,7 +160,7 @@ class Internet(BaseProvider):
         return str(self.ip_v6_object())
 
     def mac_address(self) -> str:
-        """Generate a random MAC address.
+        """Generates a random MAC address.
 
         :return: Random MAC address.
 
@@ -184,7 +184,7 @@ class Internet(BaseProvider):
         height: int | str = 1080,
         keywords: Keywords | None = None,
     ) -> str:
-        """Generate a random stock image URL hosted on Unsplash.
+        """Generates a random stock image URL hosted on Unsplash.
 
         See «Random search term» on https://source.unsplash.com/
         for more details.
@@ -206,7 +206,7 @@ class Internet(BaseProvider):
         tld_type: TLDType | None = None,
         subdomains: list[str] | None = None,
     ) -> str:
-        """Generate a random hostname without a scheme.
+        """Generates a random hostname without a scheme.
 
         :param tld_type: TLDType.
         :param subdomains: List of subdomains (make sure they are valid).
@@ -228,7 +228,7 @@ class Internet(BaseProvider):
         tld_type: TLDType | None = None,
         subdomains: list[str] | None = None,
     ) -> str:
-        """Generate a random URL.
+        """Generates a random URL.
 
         :param scheme: The scheme.
         :param port_range: PortRange enum object.
@@ -253,7 +253,7 @@ class Internet(BaseProvider):
         subdomains: list[str] | None = None,
         query_params_count: int | None = None,
     ) -> str:
-        """Generate a random URI.
+        """Generates a random URI.
 
         :param scheme: Scheme.
         :param tld_type: TLDType.
@@ -275,7 +275,7 @@ class Internet(BaseProvider):
         return uri
 
     def query_string(self, length: int | None = None) -> str:
-        """Generate arbitrary query string of given length.
+        """Generates an arbitrary query string of given length.
 
         :param length: Length of query string.
         :return: Query string.
@@ -283,7 +283,7 @@ class Internet(BaseProvider):
         return urllib.parse.urlencode(self.query_parameters(length))
 
     def query_parameters(self, length: int | None = None) -> dict[str, str]:
-        """Generate arbitrary query parameters as a dict.
+        """Generates an arbitrary query parameters as a dict.
 
         :param length: Length of query parameters dictionary (maximum is 32).
         :return: Dict of query parameters.
@@ -316,7 +316,7 @@ class Internet(BaseProvider):
         return self.random.choice(TLD[key])
 
     def tld(self, *args: t.Any, **kwargs: t.Any) -> str:
-        """Generates random top level domain.
+        """Generates a random TLD.
 
         An alias for :meth:`top_level_domain`
         """
@@ -334,7 +334,7 @@ class Internet(BaseProvider):
         return self.random.choice(USER_AGENTS)
 
     def port(self, port_range: PortRange = PortRange.ALL) -> int:
-        """Generate random port.
+        """Generates a random port.
 
         :param port_range: PortRange enum object.
         :return: Port number.
@@ -357,7 +357,7 @@ class Internet(BaseProvider):
         return self.slug(*args, **kwargs).replace("-", "/")
 
     def slug(self, parts_count: int | None = None) -> str:
-        """Generate a random slug of given parts count.
+        """Generates a random slug of given parts count.
 
         :param parts_count: Slug's parts count.
         :return: Slug.
@@ -383,7 +383,7 @@ class Internet(BaseProvider):
         return self.random.choice(PUBLIC_DNS)
 
     def http_response_headers(self) -> dict[str, t.Any]:
-        """Generate a random HTTP response headers.
+        """Generates a random HTTP response headers.
 
         The following headers are included:
 

@@ -27,7 +27,7 @@ class Hardware(BaseProvider):
         name = "hardware"
 
     def resolution(self) -> str:
-        """Get a random screen resolution.
+        """Generates a random screen resolution.
 
         :return: Resolution of screen.
 
@@ -37,7 +37,7 @@ class Hardware(BaseProvider):
         return self.random.choice(RESOLUTIONS)
 
     def screen_size(self) -> str:
-        """Get a random size of screen in inch.
+        """Generates a random size of screen in inch.
 
         :return: Screen size.
 
@@ -47,7 +47,7 @@ class Hardware(BaseProvider):
         return self.random.choice(SCREEN_SIZES)
 
     def cpu(self) -> str:
-        """Get a random CPU name.
+        """Generates a random CPU name.
 
         :return: CPU name.
 
@@ -57,7 +57,7 @@ class Hardware(BaseProvider):
         return self.random.choice(CPU)
 
     def cpu_frequency(self) -> str:
-        """Get a random frequency of CPU.
+        """Generates a random frequency of CPU.
 
         :return: Frequency of CPU.
 
@@ -68,7 +68,7 @@ class Hardware(BaseProvider):
         return f"{frequency}GHz"
 
     def generation(self) -> str:
-        """Get a random generation.
+        """Generates a random generation.
 
         :return: Generation of something.
 
@@ -78,7 +78,7 @@ class Hardware(BaseProvider):
         return self.random.choice(GENERATION)
 
     def cpu_codename(self) -> str:
-        """Get a random CPU code name.
+        """Generates a random CPU code name.
 
         :return: CPU code name.
 
@@ -88,7 +88,7 @@ class Hardware(BaseProvider):
         return self.random.choice(CPU_CODENAMES)
 
     def ram_type(self) -> str:
-        """Get a random RAM type.
+        """Generates a random RAM type.
 
         :return: Type of RAM.
 
@@ -98,7 +98,7 @@ class Hardware(BaseProvider):
         return self.random.choice(RAM_TYPES)
 
     def ram_size(self) -> str:
-        """Get a random size of RAM.
+        """Generates a random size of RAM.
 
         :return: RAM size.
 
@@ -108,7 +108,7 @@ class Hardware(BaseProvider):
         return self.random.choice(RAM_SIZES)
 
     def ssd_or_hdd(self) -> str:
-        """Get a random value from list.
+        """Generates a random type of disk.
 
         :return: HDD or SSD.
 
@@ -118,7 +118,7 @@ class Hardware(BaseProvider):
         return self.random.choice(HDD_SSD)
 
     def graphics(self) -> str:
-        """Get a random graphics.
+        """Generates a random graphics card name.
 
         :return: Graphics.
 
@@ -128,7 +128,7 @@ class Hardware(BaseProvider):
         return self.random.choice(GRAPHICS)
 
     def manufacturer(self) -> str:
-        """Get a random manufacturer.
+        """Generates a random manufacturer of hardware.
 
         :return: Manufacturer.
 
@@ -138,7 +138,7 @@ class Hardware(BaseProvider):
         return self.random.choice(MANUFACTURERS)
 
     def phone_model(self) -> str:
-        """Get a random phone model.
+        """Generates a random phone model.
 
         :return: Phone model.
 

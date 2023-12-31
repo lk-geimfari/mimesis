@@ -14,7 +14,7 @@ class File(BaseProvider):
         name = "file"
 
     def extension(self, file_type: FileType | None = None) -> str:
-        """Get a random file extension from list.
+        """Generates a random file extension.
 
         :param file_type: Enum object FileType.
         :return: Extension of the file.
@@ -27,7 +27,7 @@ class File(BaseProvider):
         return self.random.choice(extensions)
 
     def mime_type(self, type_: MimeType | None = None) -> str:
-        """Get a random mime type from list.
+        """Generates a random mime type.
 
         :param type_: Enum object MimeType.
         :return: Mime type.
@@ -37,7 +37,7 @@ class File(BaseProvider):
         return self.random.choice(types)
 
     def size(self, minimum: int = 1, maximum: int = 100) -> str:
-        """Get size of file.
+        """Generates a random file size as string.
 
         :param minimum: Maximum value.
         :param maximum: Minimum value.
@@ -51,7 +51,7 @@ class File(BaseProvider):
         return f"{num} {unit}"
 
     def file_name(self, file_type: FileType | None = None) -> str:
-        """Get a random file name with some extension.
+        """Generates a random file name with an extension.
 
         :param file_type: Enum object FileType
         :return: File name.

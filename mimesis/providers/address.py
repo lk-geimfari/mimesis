@@ -31,7 +31,7 @@ class Address(BaseDataProvider):
 
     @staticmethod
     def _dd_to_dms(num: float, _type: str) -> str:
-        """Convert decimal number to DMS format.
+        """Converts decimal number to DMS format.
 
         :param num: Decimal number.
         :param _type: Type of number.
@@ -53,7 +53,7 @@ class Address(BaseDataProvider):
         return f"{degrees}º{minutes}'{seconds:.3f}\"{direction}"
 
     def street_number(self, maximum: int = 1400) -> str:
-        """Generate a random street number.
+        """Generates a random street number.
 
         :param maximum: Maximum value.
         :return: Street number.
@@ -61,7 +61,7 @@ class Address(BaseDataProvider):
         return str(self.random.randint(1, maximum))
 
     def street_name(self) -> str:
-        """Get a random street name.
+        """Generates a random street name.
 
         :return: Street name.
         """
@@ -69,7 +69,7 @@ class Address(BaseDataProvider):
         return self.random.choice(street_names)
 
     def street_suffix(self) -> str:
-        """Get a random street suffix.
+        """Generates a random street suffix.
 
         :return: Street suffix.
         """
@@ -77,7 +77,7 @@ class Address(BaseDataProvider):
         return self.random.choice(suffixes)
 
     def address(self) -> str:
-        """Generate a random full address.
+        """Generates a random full address.
 
         :return: Full address.
         """
@@ -107,7 +107,7 @@ class Address(BaseDataProvider):
         )
 
     def state(self, abbr: bool = False) -> str:
-        """Get a random administrative district of the country.
+        """Generates a random administrative district of the country.
 
         :param abbr: Return ISO 3166-2 code.
         :return: Administrative district.
@@ -117,42 +117,42 @@ class Address(BaseDataProvider):
         return self.random.choice(states)
 
     def region(self, *args: t.Any, **kwargs: t.Any) -> str:
-        """Get a random region.
+        """Generates a random region.
 
         An alias for :meth:`~Address.state()`.
         """
         return self.state(*args, **kwargs)
 
     def province(self, *args: t.Any, **kwargs: t.Any) -> str:
-        """Get a random province.
+        """Generates a random province.
 
         An alias for :meth:`~Address.state()`.
         """
         return self.state(*args, **kwargs)
 
     def federal_subject(self, *args: t.Any, **kwargs: t.Any) -> str:
-        """Get a random region.
+        """Generates a random federal_subject (Russia).
 
         An alias for :meth:`~Address.state()`.
         """
         return self.state(*args, **kwargs)
 
     def prefecture(self, *args: t.Any, **kwargs: t.Any) -> str:
-        """Get a random prefecture.
+        """Generates a random prefecture.
 
         An alias for :meth:`~Address.state()`.
         """
         return self.state(*args, **kwargs)
 
     def postal_code(self) -> str:
-        """Generate a postal code for current locale.
+        """Generates a postal code for current locale.
 
         :return: Postal code.
         """
         return self.random.custom_code(self.extract(["postal_code_fmt"]))
 
     def zip_code(self) -> str:
-        """Generate a zip code.
+        """Generates a zip code.
 
         An alias for :meth:`~Address.postal_code()`.
 
@@ -161,13 +161,12 @@ class Address(BaseDataProvider):
         return self.postal_code()
 
     def country_code(self, code: CountryCode | None = CountryCode.A2) -> str:
-        """Get a random code of country.
+        """Generates a random code of country.
 
         Default format is :attr:`~enums.CountryCode.A2` (ISO 3166-1-alpha2),
-        you can change it by passing parameter ``fmt`` with an enum object
-        :class:`~enums.CountryCode`.
+        you can change it by passing parameter ``fmt``.
 
-        :param code: Enum object CountryCode.
+        :param code: Country code.
         :return: Country code in selected format.
         :raises KeyError: if fmt is not supported.
         """
@@ -175,7 +174,7 @@ class Address(BaseDataProvider):
         return self.random.choice(COUNTRY_CODES[key])
 
     def country_emoji_flag(self) -> str:
-        """Generate a randomly chosen country emoji flag.
+        """Generates a randomly chosen country emoji flag.
 
         :example:
             🇹🇷
@@ -192,7 +191,7 @@ class Address(BaseDataProvider):
         return chr(first) + chr(second)
 
     def default_country(self) -> str:
-        """Get the country associated with the current locale.
+        """Returns the country associated with the current locale.
 
         :return: The country associated with current locale.
         """
@@ -200,7 +199,7 @@ class Address(BaseDataProvider):
         return country
 
     def country(self) -> str:
-        """Get a random country.
+        """Generates a random country.
 
         :return: The Country.
         """
@@ -208,7 +207,7 @@ class Address(BaseDataProvider):
         return self.random.choice(countries)
 
     def city(self) -> str:
-        """Get a random city.
+        """Generates a random city.
 
         :return: City name.
         """
@@ -232,7 +231,7 @@ class Address(BaseDataProvider):
         return result
 
     def latitude(self, dms: bool = False) -> str | float:
-        """Generate a random value of latitude.
+        """Generates a random value of latitude.
 
         :param dms: DMS format.
         :return: Value of longitude.
@@ -240,7 +239,7 @@ class Address(BaseDataProvider):
         return self._get_fs("lt", dms)
 
     def longitude(self, dms: bool = False) -> str | float:
-        """Generate a random value of longitude.
+        """Generates a random value of longitude.
 
         :param dms: DMS format.
         :return: Value of longitude.
@@ -248,7 +247,7 @@ class Address(BaseDataProvider):
         return self._get_fs("lg", dms)
 
     def coordinates(self, dms: bool = False) -> dict[str, str | float]:
-        """Generate random geo coordinates.
+        """Generates random geo coordinates.
 
         :param dms: DMS format.
         :return: Dict with coordinates.
@@ -259,7 +258,7 @@ class Address(BaseDataProvider):
         }
 
     def continent(self, code: bool = False) -> str:
-        """Get a random continent name or continent code.
+        """Returns a random continent name or continent code.
 
         :param code: Return code of a continent.
         :return: Continent name.
@@ -272,14 +271,14 @@ class Address(BaseDataProvider):
         return self.random.choice(codes)
 
     def calling_code(self) -> str:
-        """Get a random calling code of random country.
+        """Generates a random calling code of random country.
 
         :return: Calling code.
         """
         return self.random.choice(CALLING_CODES)
 
     def isd_code(self) -> str:
-        """Get a random ISD code.
+        """Generates a random ISD code.
 
         An alias for :meth:`~Address.calling_code()`.
         """

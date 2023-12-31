@@ -35,7 +35,7 @@ class Payment(BaseProvider):
         name = "payment"
 
     def cid(self) -> str:
-        """Generate a random CID.
+        """Generates a random CID.
 
         :return: CID code.
 
@@ -45,7 +45,7 @@ class Payment(BaseProvider):
         return f"{self.random.randint(1, 9999):04d}"
 
     def paypal(self) -> str:
-        """Generate a random PayPal account.
+        """Generates a random PayPal account.
 
         :return: Email of PapPal user.
 
@@ -55,7 +55,7 @@ class Payment(BaseProvider):
         return self._person.email()
 
     def bitcoin_address(self) -> str:
-        """Generate a random bitcoin address.
+        """Generates a random bitcoin address.
 
         Keep in mind that although it generates **valid-looking** addresses,
         it does not mean that they are actually valid.
@@ -70,7 +70,7 @@ class Payment(BaseProvider):
         return type_ + "".join(self.random.choices(characters, k=33))
 
     def ethereum_address(self) -> str:
-        """Generate a random Ethereum address.
+        """Generates a random Ethereum address.
 
         ..note: The address will look like Ethereum address,
         but keep in mind that it is not the valid address.
@@ -85,7 +85,7 @@ class Payment(BaseProvider):
         return "0x" + address.hex()
 
     def credit_card_network(self) -> str:
-        """Generate a random credit card network.
+        """Generates a random credit card network.
 
         :return: Credit card network
 
@@ -95,7 +95,7 @@ class Payment(BaseProvider):
         return self.random.choice(CREDIT_CARD_NETWORKS)
 
     def credit_card_number(self, card_type: CardType | None = None) -> str:
-        """Generate a random credit card number.
+        """Generates a random credit card number.
 
         :param card_type: Issuing Network. Default is Visa.
         :return: Credit card number.
@@ -137,7 +137,7 @@ class Payment(BaseProvider):
         return card
 
     def credit_card_expiration_date(self, minimum: int = 16, maximum: int = 25) -> str:
-        """Generate a random expiration date for credit card.
+        """Generates a random expiration date for credit card.
 
         :param minimum: Date of issue.
         :param maximum: Maximum of expiration_date.
@@ -151,7 +151,7 @@ class Payment(BaseProvider):
         return f"{month:02d}/{year}"
 
     def cvv(self) -> str:
-        """Generate a random CVV.
+        """Generates a random CVV.
 
         :return: CVV code.
 
@@ -164,7 +164,7 @@ class Payment(BaseProvider):
         self,
         gender: Gender | None = None,
     ) -> dict[str, str]:
-        """Generate a credit card owner.
+        """Generates a random credit card owner.
 
         :param gender: Gender of the card owner.
         :type gender: Gender enum.
