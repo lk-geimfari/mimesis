@@ -37,7 +37,7 @@ class Code(BaseProvider):
         :param mask: Mask of ISSN.
         :return: ISSN.
         """
-        return self.random.custom_code(mask=mask)
+        return self.random.generate_string_by_mask(mask=mask)
 
     def isbn(
         self, fmt: ISBNFormat | None = None, locale: Locale = Locale.DEFAULT
@@ -54,7 +54,7 @@ class Code(BaseProvider):
         """
         fmt_value = self.validate_enum(item=fmt, enum=ISBNFormat)
         mask = ISBN_MASKS[fmt_value].format(ISBN_GROUPS[locale.value])
-        return self.random.custom_code(mask)
+        return self.random.generate_string_by_mask(mask)
 
     def ean(self, fmt: EANFormat | None = None) -> str:
         """Generates EAN.
@@ -71,7 +71,7 @@ class Code(BaseProvider):
             enum=EANFormat,
         )
         mask = EAN_MASKS[key]
-        return self.random.custom_code(mask=mask)
+        return self.random.generate_string_by_mask(mask=mask)
 
     def imei(self) -> str:
         """Generates a random IMEI.
@@ -88,4 +88,4 @@ class Code(BaseProvider):
         :param mask: Mask of pin code.
         :return: PIN code.
         """
-        return self.random.custom_code(mask=mask)
+        return self.random.generate_string_by_mask(mask=mask)

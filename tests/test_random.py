@@ -58,7 +58,7 @@ def test_uniform(random, precision):
     ],
 )
 def test_custom_code(random, mask, digit, char):
-    result = random.custom_code(mask=mask, char=char, digit=digit)
+    result = random.generate_string_by_mask(mask=mask, char=char, digit=digit)
     digit, middle, char = result.split("-")
     _, middle_mask, _ = mask.split("-")
     assert char.isalpha()
@@ -73,9 +73,9 @@ def test_custom_code(random, mask, digit, char):
         ("@@-FF-@@", "@", "@"),
     ],
 )
-def test_custom_code_with_same_placeholders(random, mask, digit, char):
+def test_generate_string_by_mask_with_same_placeholders(random, mask, digit, char):
     with pytest.raises(ValueError):
-        random.custom_code(mask=mask, char=char, digit=digit)
+        random.generate_string_by_mask(mask=mask, char=char, digit=digit)
 
 
 @pytest.mark.parametrize(
@@ -86,9 +86,9 @@ def test_custom_code_with_same_placeholders(random, mask, digit, char):
         ("👽", "B806"),
     ],
 )
-def test_custom_code_with_seed(random, seed, expected):
+def test_generate_string_by_mask_with_seed(random, seed, expected):
     random.seed(seed)
-    assert random.custom_code() == expected
+    assert random.generate_string_by_mask() == expected
 
 
 def test_get_random_item(random):

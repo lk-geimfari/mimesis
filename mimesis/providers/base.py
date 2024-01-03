@@ -88,7 +88,7 @@ class BaseProvider:
 
         return result.value
 
-    def _read_global_file(self, file_name: str) -> JSON:
+    def _read_global_file(self, file_name: str) -> t.Any:
         """Reads JSON file and return dict.
 
         Reads JSON file from mimesis/data/global/ directory.
@@ -98,7 +98,7 @@ class BaseProvider:
         :return: JSON data.
         """
         with open(DATADIR.joinpath("global", file_name)) as f:
-            data: JSON = json.load(f)
+            data = json.load(f)
 
         return data
 

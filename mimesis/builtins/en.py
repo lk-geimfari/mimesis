@@ -44,7 +44,7 @@ class USASpecProvider(BaseDataProvider):
             "ups": ("1Z@####@##########",),
         }
         mask = self.random.choice(services[service])
-        return self.random.custom_code(mask=mask)
+        return self.random.generate_string_by_mask(mask=mask)
 
     def ssn(self) -> str:
         """Generate a random, but valid SSN.

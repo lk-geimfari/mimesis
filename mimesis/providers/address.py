@@ -149,7 +149,7 @@ class Address(BaseDataProvider):
 
         :return: Postal code.
         """
-        return self.random.custom_code(self.extract(["postal_code_fmt"]))
+        return self.random.generate_string_by_mask(self.extract(["postal_code_fmt"]))
 
     def zip_code(self) -> str:
         """Generates a zip code.

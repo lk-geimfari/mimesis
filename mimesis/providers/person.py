@@ -452,7 +452,7 @@ class Person(BaseDataProvider):
             masks = self.extract(["telephone_fmt"], default=[default])
             mask = self.random.choice(masks)
 
-        return self.random.custom_code(mask=mask, digit=placeholder)
+        return self.random.generate_string_by_mask(mask=mask, digit=placeholder)
 
     def telephone(self, *args: t.Any, **kwargs: t.Any) -> str:
         """An alias for method self.phone_number()."""
@@ -472,4 +472,4 @@ class Person(BaseDataProvider):
         :Example:
             07-97/04
         """
-        return self.random.custom_code(mask=mask)
+        return self.random.generate_string_by_mask(mask=mask)

@@ -6,9 +6,7 @@ but frequently used in this project.
 """
 
 import random as random_module
-import string
 import typing as t
-import uuid
 
 from mimesis.types import MissingSeed, Seed
 
@@ -52,7 +50,12 @@ class Random(random_module.Random):
         """
         return "".join(self.choices(str_seq, k=length))
 
-    def custom_code(self, mask: str = "@###", char: str = "@", digit: str = "#") -> str:
+    def generate_string_by_mask(
+        self,
+        mask: str = "@###",
+        char: str = "@",
+        digit: str = "#",
+    ) -> str:
         """Generate custom code using ascii uppercase and random integers.
 
         :param mask: Mask of code.
