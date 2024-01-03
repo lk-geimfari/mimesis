@@ -101,40 +101,6 @@ def test_get_random_item(random):
     assert result_1 == result_2
 
 
-@pytest.mark.parametrize("length", [64, 128, 256])
-def test_randstr(random, length):
-    result = random._randstr(length=length)
-    result2 = random._randstr(length=length)
-    assert len(result) == length
-    assert result != result2
-
-
-def test_randstr_no_length(random):
-    string = len(random._randstr(length=None))
-    assert 16 <= string <= 128
-
-
-@pytest.mark.parametrize("count", [1000, 5000, 10000])
-def test_randstr_unique(random, count):
-    results = [random._randstr(unique=True) for _ in range(count)]
-    assert len(results) == len(set(results))
-
-
-@pytest.mark.parametrize(
-    "seed",
-    [
-        "👽",
-        "seed",
-    ],
-)
-def test_randstr_non_unique_with_same_seed(random, seed):
-    random.seed(seed)
-    first = random._randstr(unique=False)
-    random.seed(seed)
-    second = random._randstr(unique=False)
-    assert first == second
-
-
 def test_weighted_choice(random):
     result = [
         random.weighted_choice(

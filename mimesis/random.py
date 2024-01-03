@@ -95,28 +95,6 @@ class Random(random_module.Random):
         """
         return round(a + (b - a) * self.random(), precision)
 
-    def _randstr(self, unique: bool = False, length: int | None = None) -> str:
-        """Generate random string value.
-
-        This method can be especially useful when you need to generate
-        only unique values in your provider. Just pass parameter unique=True.
-
-        Basically, this method is just a simple wrapper around :py:class:`uuid.UUID`.
-
-        :param unique: Generate only unique values.
-        :param length: Length of string. The default range is [a, b].
-        :return: Random string.
-
-        """
-        if unique:
-            return str(uuid.uuid4().hex)
-
-        if length is None:
-            length = self.randint(16, 128)
-
-        characters = string.ascii_letters + string.digits
-        return "".join(self.choices(characters, k=length))
-
     def randbytes(self, n: int = 16) -> bytes:
         """Generate n random bytes."""
         return self.getrandbits(n * 8).to_bytes(n, "little")

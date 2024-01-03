@@ -3,6 +3,7 @@
 import hashlib
 import re
 import typing as t
+import uuid
 from string import ascii_letters, digits, punctuation
 
 from mimesis.data import (
@@ -262,7 +263,7 @@ class Person(BaseDataProvider):
             domain = "@" + domain
 
         if unique:
-            name = self.random._randstr(unique)
+            name = str(uuid.uuid4().hex)
         else:
             name = self.username(mask="ld")
 
@@ -271,7 +272,7 @@ class Person(BaseDataProvider):
     def gender(self, iso5218: bool = False, symbol: bool = False) -> str | int:
         """Generates a random gender.
 
-        Get a random title of gender, code for the representation
+        Get a random title of gender code for the representation
         of human sexes is an international standard that defines a
         representation of human sexes through a language-neutral single-digit
         code or symbol of gender.
