@@ -4,107 +4,94 @@
 Structured Data Generation
 ==========================
 
-Generating Data by Schema
+Introduction
+------------
+
+The classes :class:`~mimesis.schema.Field` and :class:`~mimesis.schema.Fieldset` are used to generating
+structured data in conjunction with :class:`~mimesis.schema.Schema`.
+
+- :class:`~mimesis.schema.Field` is used to generate a single value for a given field.
+- :class:`~mimesis.schema.Fieldset` is used to generate a set of values for a given field name.
+- :class:`~mimesis.schema.Schema` is used to generate structured data using a schema definition.
+
+The instances of :class:`~mimesis.schema.Field` and :class:`~mimesis.schema.Fieldset` are callable objects
+that accept the name of the method to be called as the first argument (``name``), the ``key`` argument (a key function)
+as the second argument, and the remaining arguments as ``**kwargs`` passed to the method.
+
+There are two ways to specify the field name: **explicit** and **implicit**. Let's take a look at each of them.
+
+Explicit
+~~~~~~~~
+
+The explicit approach involves specifying the provider's name and the method name,
+separated by a dot, like this:
+
+.. code:: python
+
+    >>> from mimesis import Field
+    >>> field = Field()
+    >>> field("person.username", mask="U_d", drange=(100, 1000))
+
+
+This code is equivalent to:
+
+.. code:: python
+
+    >>> from mimesis import Person
+    >>> person = Person()
+    >>> person.username(mask="U_d", drange=(100, 1000))
+
+
+The explicit way is more verbose but more reliable. It allows you to specify the
+provider from which the method will be called, thereby avoiding method name collisions.
+
+Implicit
+~~~~~~~~
+
+The implicit approach involves specifying only the method name without referencing
+the provider's name, as shown below:
+
+.. code:: python
+
+    >>> from mimesis import Field, Locale
+    >>> field = Field(Locale.EN)
+    >>> field("username", mask="U_d", drange=(100, 1000))
+
+
+In this scenario, the ``Mimesis`` will call either the first registered custom field handler
+under ``username`` or the first provider with a method named ``username``.
+
+To clarify, if you've registered a custom field handler with a name that matches any method
+within a provider, the custom field handler will take precedence due to its higher priority
+and will be called instead.
+
+
+Generating a Single Value
 -------------------------
 
-For generating data by schema, just create an instance of :class:`~mimesis.schema.Field`
-object, which takes any string which represents the name of data provider in following formats:
-
-- ``handler``/``method`` — the first custom field handler registered under the name ``handler`` will be chosen, or the first provider that has a method named ``method`` will be selected (See :ref:`api` to get the full list of available data providers and their methods).
-- ``provider.method`` — explicitly defines that the method **method** belongs to **provider**
-
-
-and **\**kwargs** of the method *method*, after that you should
-describe the schema in lambda function (or any other callable object) and pass it to
-the object :class:`~mimesis.schema.Schema` and call method :meth:`~mimesis.schema.Schema.create`.
-
-.. warning::
-
-    The `schema` **should be wrapped in a callable object** to ensure that it is evaluated
-    dynamically, rather than just once, resulting in the same data being generated for each iteration.
-
-
-Let's consider an example to understand how it works:
+To generate a single value for a specific field, you'll need to instantiate the :class:`~mimesis.schema.Field` class.
 
 .. code:: python
 
-    from mimesis import Field, Fieldset, Schema
-    from mimesis.enums import Gender, TimestampFormat
-    from mimesis.locales import Locale
+    >>> from mimesis import Field, Locale
+    >>> field = Field(locale=Locale.EN)
 
-    field = Field(locale=Locale.EN)
-
-    schema_definition = lambda: {
-        "pk": field("increment"),
-        "uid": field("uuid"),
-        "name": field("text.word"),
-        "version": field("version", pre_release=True),
-        "timestamp": field("timestamp", fmt=TimestampFormat.POSIX),
-        "owner": {
-            "email": field("person.email", domains=["mimesis.name"]),
-            "token": field("token_hex"),
-            "creator": field("full_name", gender=Gender.FEMALE),
-        },
-    }
-
-    schema = Schema(schema=schema_definition, iterations=1)
-    schema.create()
-
-
-Output:
-
-.. code:: json
-
-    [
-      {
-        "name": "undergraduate",
-        "owner": {
-          "creator": "Temple Martinez",
-          "email": "franklin1919@mimesis.name",
-          "token": "18c9c17aa696fd502f27a1e9d5aff5a4e0394133491358fb85c59d07eafd2694"
-        },
-        "pk": 1,
-        "timestamp": "2005-04-30T10:37:26Z",
-        "uid": "1d30ca34-349b-4852-a9b8-dc2ecf6c7b20",
-        "version": "0.4.8-alpha.11"
-      }
-    ]
-
-
-So, what's going on here?
-
-1. Import the required classes and enums.
-2. Create an instance of :class:`~mimesis.schema.Field` and pass the locale using the enum :class:`~mimesis.enums.Locale`.
-3. Create a schema definition and wrap it in a callable object (``lambda`` function in this case).
-4. Create an instance of :class:`~mimesis.schema.Schema` and pass the schema definition and the number of iterations.
-5. Generate data using the method  :meth:`~mimesis.schema.Schema.create` of :class:`~mimesis.schema.Schema`.
-
-If you're wondering where the data comes from, the answer is simple: the first argument passed to the ``field``
-is actually the name of the method to be called.
-
-This can be done explicitly, indicating the provider to which the method belongs, like this:
+Then, you can use its instance as an entry point to access all the methods of the available providers:
 
 .. code:: python
 
-    field("text.word")
-
-
-or implicitly, like this:
-
-.. code:: python
-
-    field("increment")
-
-
-In the latter case, the first provider that has a method named ``increment`` will be selected.
+    >>> # Explicitly, like this:
+    >>> field("person.name", key=str.upper, **kwargs)
+    'Chase'
+    >>> # Or implicitly, like this:
+    >>> field("name", key=str.upper, **kwargs)
 
 
 Generating a Set of Values
 --------------------------
 
-Sometimes it is necessary to generate a set of values for a given field instead of a single value.
+Sometimes it is necessary to generate a set of values for a given ``field`` instead of a single value.
 This can be achieved using the :class:`~mimesis.schema.Fieldset` class which is very similar to :class:`~mimesis.schema.Field`.
-
 
 The main difference between :class:`~mimesis.schema.Field` and :class:`~mimesis.schema.Fieldset` is that
 :class:`~mimesis.schema.Fieldset` generates a set (well, actually a ``list``) of values for a given field,
@@ -114,11 +101,8 @@ Let's take a look at the example:
 
 .. code-block:: python
 
-    >>> from mimesis import Field, Fieldset, Locale
-    >>> field = Field(locale=Locale.EN)
+    >>> from mimesis import Fieldset, Locale
     >>> fieldset = Fieldset(locale=Locale.EN)
-    >>> field("name")
-    Chase
     >>> fieldset("name", i=3)
     ['Basil', 'Carlee', 'Sheryll']
 
@@ -130,8 +114,11 @@ all its methods, attributes and properties. This means that API of :class:`~mime
 as for :class:`~mimesis.schema.Field` which is also a subclass of :class:`~mimesis.schema.BaseField`.
 Almost, because an instance of :class:`~mimesis.schema.Fieldset` accepts an additional keyword argument **i**.
 
+Overriding the Default Keyword Argument for Fieldset
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 While it may not be necessary in most cases, it is possible to override the default name
-of a keyword argument **i** for a specific field.
+of a keyword argument **i** for a specific instance of :class:`~mimesis.schema.Fieldset`.
 
 Let's take a look at the example:
 
@@ -145,6 +132,135 @@ Let's take a look at the example:
     >>> fs("name", count=3, key=str.upper)
     ['RICKY', 'LEONORE', 'DORIAN']
 
+
+
+Schema Definition
+-----------------
+
+Now that you better understand how to use :class:`~mimesis.schema.Field` (and :class:`~mimesis.schema.Fieldset`),
+let's take a look at how to use them to generate structured data using :class:`~mimesis.schema.Schema`.
+
+Firstly, let's import the required classes and enums and create required instances:
+
+.. code:: python
+
+    from mimesis import Field, Fieldset, Schema
+    from mimesis.enums import Gender, TimestampFormat
+    from mimesis.locales import Locale
+
+    field = Field(Locale.EN, seed=0xff)
+    fieldset = Fieldset(Locale.EN, seed=0xff)
+
+Afterwards, you need to define a schema:
+
+.. warning::
+
+    The `schema` **should be wrapped in a callable object** to ensure that it is evaluated
+    dynamically, rather than just once, resulting in the same data being generated for each iteration.
+
+.. code:: python
+
+    schema_definition = lambda: {
+        "pk": field("increment"),
+        "uid": field("uuid"),
+        "name": field("text.word"),
+        "version": field("version"),
+        "timestamp": field("timestamp", fmt=TimestampFormat.POSIX),
+        "owner": {
+            "email": field("person.email", domains=["mimesis.name"]),
+            "creator": field("full_name", gender=Gender.FEMALE),
+        },
+        "apiKeys": fieldset("token_hex", key=lambda s: s[:16], i=3),
+    }
+
+
+Finally, you can create an instance of :class:`~mimesis.schema.Schema`
+and generate data. Let's put all these code pieces together by invoking the :meth:`~mimesis.schema.Schema.create` method:
+
+.. code:: python
+
+    from mimesis import Field, Fieldset, Schema
+    from mimesis.enums import Gender, TimestampFormat
+    from mimesis.locales import Locale
+
+    field = Field(Locale.EN, seed=0xff)
+    fieldset = Fieldset(Locale.EN, seed=0xff)
+
+    schema_definition = lambda: {
+        "pk": field("increment"),
+        "uid": field("uuid"),
+        "name": field("text.word"),
+        "version": field("version"),
+        "timestamp": field("timestamp", fmt=TimestampFormat.POSIX),
+        "owner": {
+            "email": field("person.email", domains=["mimesis.name"]),
+            "creator": field("full_name", gender=Gender.FEMALE),
+        },
+        "apiKeys": fieldset("token_hex", key=lambda s: s[:16], i=3),
+    }
+
+    schema = Schema(schema=schema_definition, iterations=3)
+    schema.create()
+
+The final result will look like this:
+
+.. code:: json
+
+    [
+      {
+        "pk": 1,
+        "uid": "adcb2a69-ee41-4266-8d63-7bc02a7f06dd",
+        "name": "arrangement",
+        "version": "5.64.79",
+        "timestamp": 1718992237,
+        "owner": {
+          "email": "metabolism1990@mimesis.name",
+          "token": "cff564302f38541063a5a8243ef3715aaabe6c88eecc2f54f323fb4daab15c43",
+          "creator": "Dierdre Lee"
+        },
+        "apiKeys": [
+          "e31fac793bbda801",
+          "9b844ee2cd5e66cd",
+          "c9dacc05c44e3a82"
+        ]
+      },
+      {
+        "pk": 2,
+        "uid": "411929ec-f85b-46a8-b247-a1b99f066aad",
+        "name": "paintings",
+        "version": "4.99.61",
+        "timestamp": 1729820023,
+        "owner": {
+          "email": "pioneer2099@mimesis.name",
+          "token": "86ceabe478126d918532bc4324b3ba70dfbce2bd010117f4a07ddd114a11ee54",
+          "creator": "Saran Willis"
+        },
+        "apiKeys": [
+          "98a61b80f8d7510d",
+          "eed10d63059c7ea6",
+          "1b1003853da9cac6"
+        ]
+      },
+      {
+        "pk": 3,
+        "uid": "4d281c07-8f08-446c-a673-8444ee4f963b",
+        "name": "sec",
+        "version": "12.68.56",
+        "timestamp": 1722235048,
+        "owner": {
+          "email": "shapes2013@mimesis.name",
+          "token": "458f1535d9a13180eace4a4128ff051facfb66d43798eb9ef428b7a5fd436bbb",
+          "creator": "Carlos Lucas"
+        },
+        "apiKeys": [
+          "a8bfaf1c1b3fc69b",
+          "268a35c593483d2d",
+          "f7ecb7f5dbe3cb6e"
+        ]
+      }
+    ]
+
+That's it! You've just generated structured data using Mimesis.
 
 Using Field Aliases
 -------------------
@@ -171,7 +287,7 @@ Let's take a look at the example:
         '🇺🇸': 'country',
         '🧬': 'dna_sequence',
         '📧': 'email',
-        '📞': 'telephone',
+        '📞': 'person.telephone',
         '🍆': 'vegetable',
         'ебаныйтокен': 'token_hex',
     })
