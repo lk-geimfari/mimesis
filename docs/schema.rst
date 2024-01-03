@@ -315,14 +315,6 @@ As you can see, you can use any string as an alias, so I'm doing my part to get 
 Putting jokes aside, although any string can work as an alias, it's wise to choose one that fits your domain or
 context better to enhance clarity and comprehension.
 
-If you try to replace the ``aliases`` attribute with anything other than a non-nested dictionary,
-you'll receive an exception :class:`~mimesis.exceptions.AliasesTypeError`.
-
-.. code-block:: python
-
-    >>> field.aliases = None # Raises AliasesTypeError
-
-
 When you no longer need aliases, you can remove them individually like regular dictionary keys or clear them all at once:
 
 .. code-block:: python
