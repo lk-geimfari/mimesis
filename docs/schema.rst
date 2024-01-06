@@ -10,7 +10,7 @@ Introduction
 The classes :class:`~mimesis.schema.Field` and :class:`~mimesis.schema.Fieldset` are used to generating
 structured data in conjunction with :class:`~mimesis.schema.Schema`.
 
-- :class:`~mimesis.schema.Field` is used to generate a single value for a given field.
+- :class:`~mimesis.schema.Field` is used to generate a single value for a given field name.
 - :class:`~mimesis.schema.Fieldset` is used to generate a set of values for a given field name.
 - :class:`~mimesis.schema.Schema` is used to generate structured data using a schema definition.
 
@@ -151,7 +151,7 @@ Firstly, let's import the required classes and enums and create required instanc
     field = Field(Locale.EN, seed=0xff)
     fieldset = Fieldset(Locale.EN, seed=0xff)
 
-Afterwards, you need to define a schema:
+Afterwards, we need to define a schema:
 
 .. warning::
 
@@ -175,7 +175,9 @@ Afterwards, you need to define a schema:
 
 
 Finally, you can create an instance of :class:`~mimesis.schema.Schema`
-and generate data. Let's put all these code pieces together by invoking the :meth:`~mimesis.schema.Schema.create` method:
+and generate data by invoking the :meth:`~mimesis.schema.Schema.create` method.
+
+Let's put all these code pieces together.
 
 .. code:: python
 
