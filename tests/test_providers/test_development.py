@@ -4,7 +4,6 @@ import re
 import pytest
 
 from mimesis import Development, data
-from mimesis.enums import DSNType
 
 from . import patterns
 
@@ -58,23 +57,6 @@ class TestDevelopment:
         result = dev.boolean()
         assert result or (not result)
 
-    @pytest.mark.parametrize(
-        "dsn_type",
-        [
-            DSNType.POSTGRES,
-            DSNType.MYSQL,
-            DSNType.MONGODB,
-            DSNType.REDIS,
-            DSNType.COUCHBASE,
-            DSNType.MEMCACHED,
-            DSNType.RABBITMQ,
-        ],
-    )
-    def test_dsn(self, dev, dsn_type):
-        scheme, port = dsn_type.value
-        assert dev.dsn(dsn_type=dsn_type).endswith(f":{port}")
-        assert dev.dsn(dsn_type=dsn_type).startswith(f"{scheme}://")
-
 
 class TestSeededDevelopment:
     @pytest.fixture
@@ -105,9 +87,6 @@ class TestSeededDevelopment:
 
     def test_boolean(self, dv1, dv2):
         assert dv1.boolean() == dv2.boolean()
-
-    def test_dsn(self, dv1, dv2):
-        assert dv1.dsn() == dv2.dsn()
 
     def test_system_quality_attribute(self, dv1, dv2):
         assert dv1.system_quality_attribute() == dv2.system_quality_attribute()

@@ -10,6 +10,7 @@ Version 12.0.0
 - Removed parameter ``providers`` for ``Field`` and ``Fieldset``. Use custom field handlers instead.
 - Removed parameters ``pre_release`` and ``calver`` for ``Development.version``. Use methods ``stage`` and ``calver`` instead.
 - Moved method ``emoji`` of the ``Internet`` provider to the ``Text`` provider.
+- Moved method ``dsn`` of the ``Development`` provider to the ``Internet`` provider.
 - The ``Text().emoji()`` method now supports the ``category`` parameter and ``EmojiCategory`` enum. Also it return emoji instead of emoji shortcut string.
 - Added decorator ``@handle`` for ``Field`` and ``Fieldset`` to register custom fields.
 - Renamed ``register_field`` to ``register_handler`` for `Field` and `Fieldset`.

@@ -20,8 +20,14 @@ from mimesis.data import (
     USER_AGENTS,
     USERNAMES,
 )
-from mimesis.enums import MimeType, PortRange, TLDType, URLScheme
-from mimesis.locales import Locale
+from mimesis.enums import (
+    DSNType,
+    Locale,
+    MimeType,
+    PortRange,
+    TLDType,
+    URLScheme,
+)
 from mimesis.providers.base import BaseProvider
 from mimesis.providers.code import Code
 from mimesis.providers.date import Datetime
@@ -76,6 +82,16 @@ class Internet(BaseProvider):
             application/json
         """
         return self._file.mime_type(type_=mime_type)
+
+    def dsn(self, dsn_type: DSNType | None = None, **kwargs: t.Any) -> str:
+        """Generates a random DSN (Data Source Name).
+
+        :param dsn_type: DSN type.
+        :param kwargs: Additional keyword-arguments for hostname method.
+        """
+        hostname = self.hostname(**kwargs)
+        scheme, port = self.validate_enum(dsn_type, DSNType)
+        return f"{scheme}://{hostname}:{port}"
 
     def http_status_message(self) -> str:
         """Generates a random HTTP status message.
