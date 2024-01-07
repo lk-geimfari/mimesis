@@ -28,7 +28,7 @@ class Text(BaseDataProvider):
         """
         case = "uppercase" if not lower_case else "lowercase"
 
-        alpha: list[str] = self.extract(["alphabet", case])
+        alpha: list[str] = self._extract(["alphabet", case])
         return alpha
 
     def level(self) -> str:
@@ -39,7 +39,7 @@ class Text(BaseDataProvider):
         :Example:
             critical.
         """
-        levels: list[str] = self.extract(["level"])
+        levels: list[str] = self._extract(["level"])
         return self.random.choice(levels)
 
     def text(self, quantity: int = 5) -> str:
@@ -48,7 +48,7 @@ class Text(BaseDataProvider):
         :param quantity: Quantity of sentences.
         :return: Text.
         """
-        text = self.extract(["text"])
+        text = self._extract(["text"])
         return " ".join(self.random.choices(text, k=quantity))
 
     def sentence(self) -> str:
@@ -74,7 +74,7 @@ class Text(BaseDataProvider):
         :Example:
             [science, network, god, octopus, love]
         """
-        words = self.extract(["words"])
+        words = self._extract(["words"])
         return self.random.choices(words, k=quantity)
 
     def word(self) -> str:
@@ -95,7 +95,7 @@ class Text(BaseDataProvider):
         :Example:
             "Bond... James Bond."
         """
-        quotes: list[str] = self.extract(["quotes"])
+        quotes: list[str] = self._extract(["quotes"])
         return self.random.choice(quotes)
 
     def color(self) -> str:
@@ -106,7 +106,7 @@ class Text(BaseDataProvider):
         :Example:
             Red.
         """
-        colors: list[str] = self.extract(["color"])
+        colors: list[str] = self._extract(["color"])
         return self.random.choice(colors)
 
     @staticmethod
@@ -153,7 +153,7 @@ class Text(BaseDataProvider):
         :Example:
             No
         """
-        answers: list[str] = self.extract(["answers"])
+        answers: list[str] = self._extract(["answers"])
         return self.random.choice(answers)
 
     def emoji(self, category: EmojyCategory | None = EmojyCategory.DEFAULT) -> str:

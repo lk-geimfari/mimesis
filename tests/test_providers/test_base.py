@@ -95,22 +95,22 @@ class TestBase:
         base_data_provider._data = dictionary
 
         a = list(sorted(dictionary["names"].keys()))
-        b = list(sorted(base_data_provider.extract(["names"]).keys()))
+        b = list(sorted(base_data_provider._extract(["names"]).keys()))
 
-        assert base_data_provider.extract(["names", "male"]) == "John"
-        assert base_data_provider.extract(["names", "female"]) == "Ariel"
-        assert base_data_provider.extract(["names", "other"], default="Sam") == "Sam"
+        assert base_data_provider._extract(["names", "male"]) == "John"
+        assert base_data_provider._extract(["names", "female"]) == "Ariel"
+        assert base_data_provider._extract(["names", "other"], default="Sam") == "Sam"
         assert a == b
 
         with pytest.raises(ValueError):
-            assert base_data_provider.extract([])
+            assert base_data_provider._extract([])
 
     def test_extract_missing_positional_arguments(self, base_data_provider):
         with pytest.raises(TypeError):
-            assert base_data_provider.extract(default=None)
+            assert base_data_provider._extract(default=None)
 
         with pytest.raises(TypeError):
-            assert base_data_provider.extract()
+            assert base_data_provider._extract()
 
     def test_update_dict(self, base_data_provider):
         first = {
@@ -214,7 +214,7 @@ class TestBase:
                     datadir = Path(tmpdir)
 
                 def val(self):
-                    return self.random.choice(self.extract(["key"]))
+                    return self.random.choice(self._extract(["key"]))
 
             cdp = CustomDataProvider(Locale.EN)
             assert cdp.val() in file_data["key"]
