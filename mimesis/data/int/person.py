@@ -1,6 +1,5 @@
 """Provides all the generic data related to the personal information."""
 
-
 BLOOD_GROUPS = (
     "O+",
     "A+",
@@ -12,11 +11,9 @@ BLOOD_GROUPS = (
     "AB−",
 )
 
-GENDER_SYMBOLS = (
-    "♂",
-    "♀",
-    "⚲",
-)
+GENDER_SYMBOLS = ("♂", "♀", "⚲")
+
+GENDER_CODES = (0, 1, 2, 9)
 
 USERNAMES = [
     "aaa",

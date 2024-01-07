@@ -1,3 +1,11 @@
+Version 12.1.0
+--------------
+
+- Methods ``gender_code()`` and ``gender_symbol()`` have been added for the ``Person`` provider.
+- The methods ``gender()`` and ``sex()`` no longer accept arguments like ``iso5218`` and ``symbol``. Please use ``gender_code()`` and ``gender_symbol()`` instead.
+- Added a stub for ``mimesis.providers.generic.py``, enabling type hints for ``Generic``.
+
+
 Version 12.0.0
 --------------
 

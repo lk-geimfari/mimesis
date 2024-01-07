@@ -3,7 +3,7 @@ import re
 import pytest
 
 from mimesis import Person, random
-from mimesis.data import BLOOD_GROUPS, GENDER_SYMBOLS
+from mimesis.data import BLOOD_GROUPS, GENDER_CODES, GENDER_SYMBOLS
 from mimesis.enums import Gender, TitleType
 from mimesis.exceptions import NonEnumerableError
 
@@ -250,31 +250,21 @@ class TestPerson:
         with pytest.raises(NonEnumerableError):
             person.full_name(gender="nil")
 
+    def test_gender_code(self, _person):
+        code = _person.gender_code()
+        assert code in GENDER_CODES
+
+    def test_gender_symbol(self, _person):
+        symbol = _person.gender_symbol()
+        assert symbol in GENDER_SYMBOLS
+
     def test_gender(self, person):
         result = person.gender()
         assert result in person._data["gender"]
 
-        result = person.gender(symbol=True)
-        assert result in GENDER_SYMBOLS
-
-        # The four codes specified in ISO/IEC 5218 are:
-        # 0 = not known, 1 = male, 2 = female, 9 = not applicable.
-        codes = [0, 1, 2, 9]
-        iso5218 = person.gender(iso5218=True)
-        assert iso5218 in codes
-
     def test_sex(self, person):
         result = person.sex()
         assert result in person._data["gender"]
-
-        result = person.gender(symbol=True)
-        assert result in GENDER_SYMBOLS
-
-        # The four codes specified in ISO/IEC 5218 are:
-        # 0 = not known, 1 = male, 2 = female, 9 = not applicable.
-        codes = [0, 1, 2, 9]
-        iso5218 = person.gender(iso5218=True)
-        assert iso5218 in codes
 
     def test_profession(self, person):
         result = person.occupation()
@@ -420,15 +410,17 @@ class TestSeededPerson:
             gender=Gender.FEMALE, reverse=True
         )
 
+    def test_gender_code(self, p1, p2):
+        assert p1.gender_code() == p2.gender_code()
+
+    def test_gender_symbol(self, p1, p2):
+        assert p1.gender_symbol() == p2.gender_symbol()
+
     def test_gender(self, p1, p2):
         assert p1.gender() == p2.gender()
-        assert p1.gender(iso5218=True, symbol=True) == p2.gender(
-            iso5218=True, symbol=True
-        )
 
     def test_sex(self, p1, p2):
         assert p1.sex() == p2.sex()
-        assert p1.sex(iso5218=True, symbol=True) == p2.sex(iso5218=True, symbol=True)
 
     def test_occupation(self, p1, p2):
         assert p1.occupation() == p2.occupation()

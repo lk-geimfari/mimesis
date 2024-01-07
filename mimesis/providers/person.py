@@ -10,6 +10,7 @@ from mimesis.data import (
     BLOOD_GROUPS,
     CALLING_CODES,
     EMAIL_DOMAINS,
+    GENDER_CODES,
     GENDER_SYMBOLS,
     USERNAMES,
 )
@@ -79,7 +80,7 @@ class Person(BaseDataProvider):
     def first_name(self, gender: Gender | None = None) -> str:
         """Generates a random first name.
 
-        ..note: An alias for self.name().
+        ..note: An alias for :meth:`~.name`.
 
         :param gender: Gender's enum object.
         :return: First name.
@@ -107,7 +108,7 @@ class Person(BaseDataProvider):
     def last_name(self, gender: Gender | None = None) -> str:
         """Generates a random last name.
 
-        ..note: An alias for self.surname().
+        ..note: An alias for :meth:`~.surname`.
 
         :param gender: Gender's enum object.
         :return: Last name.
@@ -269,42 +270,44 @@ class Person(BaseDataProvider):
 
         return f"{name}{domain}"
 
-    def gender(self, iso5218: bool = False, symbol: bool = False) -> str | int:
-        """Generates a random gender.
+    def gender_symbol(self) -> str:
+        """Generate a random sex symbol.
 
-        Get a random title of gender code for the representation
+        :Example:
+            ♂
+        """
+        return self.random.choice(GENDER_SYMBOLS)
+
+    def gender_code(self) -> int:
+        """Generate a random ISO/IEC 5218 gender code.
+
+        Generate a random title of gender code for the representation
         of human sexes is an international standard that defines a
         representation of human sexes through a language-neutral single-digit
         code or symbol of gender.
 
-        :param iso5218:
-            Codes for the representation of human sexes is an international
-            standard (0 - not known, 1 - male, 2 - female, 9 - not applicable).
-        :param symbol: Symbol of gender.
-        :return: Title of gender.
+        Codes for the representation of human sexes is an international
+        standard (0 - not known, 1 - male, 2 - female, 9 - not applicable).
+
+        :return:
+        """
+        return self.random.choice(GENDER_CODES)
+
+    def gender(self) -> str:
+        """Generates a random gender title.
 
         :Example:
             Male
         """
-        if iso5218:
-            return self.random.choice([0, 1, 2, 9])
-
-        if symbol:
-            return self.random.choice(GENDER_SYMBOLS)
-
         genders: list[str] = self._extract(["gender"])
         return self.random.choice(genders)
 
-    def sex(self, *args: t.Any, **kwargs: t.Any) -> str | int:
-        """An alias for method self.gender().
+    def sex(self) -> str:
+        """An alias for method :meth:`~.gender`.
 
-        See docstrings of method self.gender() for details.
-
-        :param args: Positional arguments.
-        :param kwargs: Keyword arguments.
-        :return: Sex
+        :return: Sex.
         """
-        return self.gender(*args, **kwargs)
+        return self.gender()
 
     def height(self, minimum: float = 1.5, maximum: float = 2.0) -> str:
         """Generates a random height in meters.
@@ -455,7 +458,7 @@ class Person(BaseDataProvider):
         return self.random.generate_string_by_mask(mask=mask, digit=placeholder)
 
     def telephone(self, *args: t.Any, **kwargs: t.Any) -> str:
-        """An alias for method self.phone_number()."""
+        """An alias for :meth:`~.phone_number`."""
         return self.phone_number(*args, **kwargs)
 
     def identifier(self, mask: str = "##-##/##") -> str:
