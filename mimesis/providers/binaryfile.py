@@ -34,13 +34,7 @@ class BinaryFile(BaseProvider):
     def _read_file(
         self,
         *,
-        file_type: t.Union[
-            AudioFile,
-            CompressedFile,
-            DocumentFile,
-            ImageFile,
-            VideoFile,
-        ],
+        file_type: AudioFile | CompressedFile | DocumentFile | ImageFile | VideoFile,
     ) -> bytes:
         file_type = self.validate_enum(file_type, file_type.__class__)
         file_path = self._data_dir.joinpath(f"{self._sample_name}.{file_type}")
@@ -59,7 +53,7 @@ class BinaryFile(BaseProvider):
         return self._read_file(file_type=file_type)
 
     def audio(self, *, file_type: AudioFile = AudioFile.MP3) -> bytes:
-        """Generates audio file of given format and returns it as bytes.
+        """Generates an audio file of given format and returns it as bytes.
 
         .. note:: This method accepts keyword-only arguments.
 
@@ -69,7 +63,7 @@ class BinaryFile(BaseProvider):
         return self._read_file(file_type=file_type)
 
     def document(self, *, file_type: DocumentFile = DocumentFile.PDF) -> bytes:
-        """Generates document of given format and returns it as bytes.
+        """Generates a document of given format and returns it as bytes.
 
         .. note:: This method accepts keyword-only arguments.
 
@@ -79,7 +73,7 @@ class BinaryFile(BaseProvider):
         return self._read_file(file_type=file_type)
 
     def image(self, *, file_type: ImageFile = ImageFile.PNG) -> bytes:
-        """Generates image of given format and returns it as bytes.
+        """Generates an image of given format and returns it as bytes.
 
         .. note:: This method accepts keyword-only arguments.
 
@@ -89,7 +83,7 @@ class BinaryFile(BaseProvider):
         return self._read_file(file_type=file_type)
 
     def compressed(self, *, file_type: CompressedFile = CompressedFile.ZIP) -> bytes:
-        """Generates compressed file of given format and returns it as bytes.
+        """Generates a compressed file of given format and returns it as bytes.
 
         .. note:: This method accepts keyword-only arguments.
 

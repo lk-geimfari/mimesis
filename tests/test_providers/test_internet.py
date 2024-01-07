@@ -5,7 +5,7 @@ import pytest
 import validators
 
 from mimesis import Internet, data
-from mimesis.enums import MimeType, PortRange, TLDType, URLScheme
+from mimesis.enums import DSNType, MimeType, PortRange, TLDType, URLScheme
 from mimesis.exceptions import NonEnumerableError
 
 from . import patterns
@@ -19,19 +19,22 @@ class TestInternet:
     def test_str(self, net):
         assert re.match(patterns.PROVIDER_STR_REGEX, str(net))
 
-    def test_emoji(self, net):
-        result = net.emoji()
-        assert result in data.EMOJI
-
-    def test_hashtags(self, net):
-        result = net.hashtags(quantity=5)
-        assert len(result) == 5
-
-        with pytest.raises(ValueError):
-            net.hashtags(quantity=0)
-
-        with pytest.raises(ValueError):
-            net.hashtags(quantity=-1)
+    @pytest.mark.parametrize(
+        "dsn_type",
+        [
+            DSNType.POSTGRES,
+            DSNType.MYSQL,
+            DSNType.MONGODB,
+            DSNType.REDIS,
+            DSNType.COUCHBASE,
+            DSNType.MEMCACHED,
+            DSNType.RABBITMQ,
+        ],
+    )
+    def test_dsn(self, net, dsn_type):
+        scheme, port = dsn_type.value
+        assert net.dsn(dsn_type=dsn_type).endswith(f":{port}")
+        assert net.dsn(dsn_type=dsn_type).startswith(f"{scheme}://")
 
     @pytest.mark.parametrize(
         "subdomains",
@@ -323,13 +326,6 @@ class TestSeededInternet:
         for key, val in r1.items():
             assert r2[key] == val
 
-    def test_emoji(self, i1, i2):
-        assert i1.emoji() == i2.emoji()
-
-    def test_hashtags(self, i1, i2):
-        assert i1.hashtags() == i2.hashtags()
-        assert i1.hashtags(quantity=7) == i2.hashtags(quantity=7)
-
     def test_hostname(self, i1, i2):
         assert i1.hostname() == i2.hostname()
         assert i1.hostname(subdomains=["app", "core", "api"]) == i2.hostname(
@@ -406,3 +402,6 @@ class TestSeededInternet:
 
     def test_public_dns(self, i1, i2):
         assert i1.public_dns() == i2.public_dns()
+
+    def test_dsn(self, i1, i2):
+        assert i1.dsn() == i2.dsn()

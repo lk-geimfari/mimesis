@@ -11,7 +11,6 @@ from mimesis.data import (
     CONTENT_ENCODING_DIRECTIVES,
     CORS_OPENER_POLICIES,
     CORS_RESOURCE_POLICIES,
-    EMOJI,
     HTTP_METHODS,
     HTTP_SERVERS,
     HTTP_STATUS_CODES,
@@ -21,8 +20,14 @@ from mimesis.data import (
     USER_AGENTS,
     USERNAMES,
 )
-from mimesis.enums import MimeType, PortRange, TLDType, URLScheme
-from mimesis.locales import Locale
+from mimesis.enums import (
+    DSNType,
+    Locale,
+    MimeType,
+    PortRange,
+    TLDType,
+    URLScheme,
+)
 from mimesis.providers.base import BaseProvider
 from mimesis.providers.code import Code
 from mimesis.providers.date import Datetime
@@ -68,8 +73,8 @@ class Internet(BaseProvider):
     class Meta:
         name = "internet"
 
-    def content_type(self, mime_type: t.Optional[MimeType] = None) -> str:
-        """Get a random HTTP content type.
+    def content_type(self, mime_type: MimeType | None = None) -> str:
+        """Generates a random HTTP content type.
 
         :return: Content type.
 
@@ -78,8 +83,18 @@ class Internet(BaseProvider):
         """
         return self._file.mime_type(type_=mime_type)
 
+    def dsn(self, dsn_type: DSNType | None = None, **kwargs: t.Any) -> str:
+        """Generates a random DSN (Data Source Name).
+
+        :param dsn_type: DSN type.
+        :param kwargs: Additional keyword-arguments for hostname method.
+        """
+        hostname = self.hostname(**kwargs)
+        scheme, port = self.validate_enum(dsn_type, DSNType)
+        return f"{scheme}://{hostname}:{port}"
+
     def http_status_message(self) -> str:
-        """Get a random HTTP status message.
+        """Generates a random HTTP status message.
 
         :return: HTTP status message.
 
@@ -89,7 +104,7 @@ class Internet(BaseProvider):
         return self.random.choice(HTTP_STATUS_MSGS)
 
     def http_status_code(self) -> int:
-        """Get a random HTTP status code.
+        """Generates a random HTTP status code.
 
         :return: HTTP status.
 
@@ -99,7 +114,7 @@ class Internet(BaseProvider):
         return self.random.choice(HTTP_STATUS_CODES)
 
     def http_method(self) -> str:
-        """Get a random HTTP method.
+        """Generates a random HTTP method.
 
         :return: HTTP method.
 
@@ -109,7 +124,7 @@ class Internet(BaseProvider):
         return self.random.choice(HTTP_METHODS)
 
     def ip_v4_object(self) -> IPv4Address:
-        """Generate random :py:class:`ipaddress.IPv4Address` object.
+        """Generates a random :py:class:`ipaddress.IPv4Address` object.
 
         :return: :py:class:`ipaddress.IPv4Address` object.
         """
@@ -118,7 +133,7 @@ class Internet(BaseProvider):
         )
 
     def ip_v4_with_port(self, port_range: PortRange = PortRange.ALL) -> str:
-        """Generate a random IPv4 address as string.
+        """Generates a random IPv4 address as string.
 
         :param port_range: PortRange enum object.
         :return: IPv4 address as string.
@@ -131,7 +146,7 @@ class Internet(BaseProvider):
         return f"{addr}:{port}"
 
     def ip_v4(self) -> str:
-        """Generate a random IPv4 address as string.
+        """Generates a random IPv4 address as string.
 
         :Example:
             19.121.223.58
@@ -139,7 +154,7 @@ class Internet(BaseProvider):
         return str(self.ip_v4_object())
 
     def ip_v6_object(self) -> IPv6Address:
-        """Generate random :py:class:`ipaddress.IPv6Address` object.
+        """Generates random :py:class:`ipaddress.IPv6Address` object.
 
         :return: :py:class:`ipaddress.IPv6Address` object.
         """
@@ -151,7 +166,7 @@ class Internet(BaseProvider):
         )
 
     def ip_v6(self) -> str:
-        """Generate a random IPv6 address as string.
+        """Generates a random IPv6 address as string.
 
         :return: IPv6 address string.
 
@@ -161,7 +176,7 @@ class Internet(BaseProvider):
         return str(self.ip_v6_object())
 
     def mac_address(self) -> str:
-        """Generate a random MAC address.
+        """Generates a random MAC address.
 
         :return: Random MAC address.
 
@@ -179,23 +194,13 @@ class Internet(BaseProvider):
         mac = [f"{x:02x}" for x in mac_hex]
         return ":".join(mac)
 
-    def emoji(self) -> str:
-        """Get a random emoji shortcut code.
-
-        :return: Emoji code.
-
-        :Example:
-            :kissing:
-        """
-        return self.random.choice(EMOJI)
-
     @staticmethod
     def stock_image_url(
-        width: t.Union[int, str] = 1920,
-        height: t.Union[int, str] = 1080,
-        keywords: t.Optional[Keywords] = None,
+        width: int | str = 1920,
+        height: int | str = 1080,
+        keywords: Keywords | None = None,
     ) -> str:
-        """Generate a random stock image URL hosted on Unsplash.
+        """Generates a random stock image URL hosted on Unsplash.
 
         See «Random search term» on https://source.unsplash.com/
         for more details.
@@ -212,28 +217,12 @@ class Internet(BaseProvider):
 
         return f"https://source.unsplash.com/{width}x{height}?{keywords_str}"
 
-    def hashtags(self, quantity: int = 4) -> t.List[str]:
-        """Generate a list of hashtags.
-
-        :param quantity: The quantity of hashtags.
-        :return: The list of hashtags.
-        :raises NonEnumerableError: if category is not in Hashtag.
-
-        :Example:
-            ['#love', '#sky', '#nice']
-        """
-
-        if quantity < 1:
-            raise ValueError("Quantity must be a positive integer.")
-
-        return ["#" + self._text.word() for _ in range(quantity)]
-
     def hostname(
         self,
-        tld_type: t.Optional[TLDType] = None,
-        subdomains: t.Optional[t.List[str]] = None,
+        tld_type: TLDType | None = None,
+        subdomains: list[str] | None = None,
     ) -> str:
-        """Generate a random hostname without a scheme.
+        """Generates a random hostname without a scheme.
 
         :param tld_type: TLDType.
         :param subdomains: List of subdomains (make sure they are valid).
@@ -250,12 +239,12 @@ class Internet(BaseProvider):
 
     def url(
         self,
-        scheme: t.Optional[URLScheme] = URLScheme.HTTPS,
-        port_range: t.Optional[PortRange] = None,
-        tld_type: t.Optional[TLDType] = None,
-        subdomains: t.Optional[t.List[str]] = None,
+        scheme: URLScheme | None = URLScheme.HTTPS,
+        port_range: PortRange | None = None,
+        tld_type: TLDType | None = None,
+        subdomains: list[str] | None = None,
     ) -> str:
-        """Generate a random URL.
+        """Generates a random URL.
 
         :param scheme: The scheme.
         :param port_range: PortRange enum object.
@@ -275,12 +264,12 @@ class Internet(BaseProvider):
 
     def uri(
         self,
-        scheme: t.Optional[URLScheme] = URLScheme.HTTPS,
-        tld_type: t.Optional[TLDType] = None,
-        subdomains: t.Optional[t.List[str]] = None,
-        query_params_count: t.Optional[int] = None,
+        scheme: URLScheme | None = URLScheme.HTTPS,
+        tld_type: TLDType | None = None,
+        subdomains: list[str] | None = None,
+        query_params_count: int | None = None,
     ) -> str:
-        """Generate a random URI.
+        """Generates a random URI.
 
         :param scheme: Scheme.
         :param tld_type: TLDType.
@@ -301,23 +290,23 @@ class Internet(BaseProvider):
 
         return uri
 
-    def query_string(self, length: t.Optional[int] = None) -> str:
-        """Generate arbitrary query string of given length.
+    def query_string(self, length: int | None = None) -> str:
+        """Generates an arbitrary query string of given length.
 
         :param length: Length of query string.
         :return: Query string.
         """
         return urllib.parse.urlencode(self.query_parameters(length))
 
-    def query_parameters(self, length: t.Optional[int] = None) -> t.Dict[str, str]:
-        """Generate arbitrary query parameters as a dict.
+    def query_parameters(self, length: int | None = None) -> dict[str, str]:
+        """Generates an arbitrary query parameters as a dict.
 
         :param length: Length of query parameters dictionary (maximum is 32).
         :return: Dict of query parameters.
         """
 
-        def pick_unique_words(quantity: int = 5) -> t.List[str]:
-            words: t.Set[str] = set()
+        def pick_unique_words(quantity: int = 5) -> list[str]:
+            words: set[str] = set()
 
             while len(words) != quantity:
                 words.add(self._text.word())
@@ -343,7 +332,7 @@ class Internet(BaseProvider):
         return self.random.choice(TLD[key])
 
     def tld(self, *args: t.Any, **kwargs: t.Any) -> str:
-        """Generates random top level domain.
+        """Generates a random TLD.
 
         An alias for :meth:`top_level_domain`
         """
@@ -361,7 +350,7 @@ class Internet(BaseProvider):
         return self.random.choice(USER_AGENTS)
 
     def port(self, port_range: PortRange = PortRange.ALL) -> int:
-        """Generate random port.
+        """Generates a random port.
 
         :param port_range: PortRange enum object.
         :return: Port number.
@@ -383,8 +372,8 @@ class Internet(BaseProvider):
         """
         return self.slug(*args, **kwargs).replace("-", "/")
 
-    def slug(self, parts_count: t.Optional[int] = None) -> str:
-        """Generate a random slug of given parts count.
+    def slug(self, parts_count: int | None = None) -> str:
+        """Generates a random slug of given parts count.
 
         :param parts_count: Slug's parts count.
         :return: Slug.
@@ -409,8 +398,8 @@ class Internet(BaseProvider):
         """
         return self.random.choice(PUBLIC_DNS)
 
-    def http_response_headers(self) -> t.Dict[str, t.Any]:
-        """Generate a random HTTP response headers.
+    def http_response_headers(self) -> dict[str, t.Any]:
+        """Generates a random HTTP response headers.
 
         The following headers are included:
 
@@ -469,7 +458,7 @@ class Internet(BaseProvider):
         }
         return headers
 
-    def http_request_headers(self) -> t.Dict[str, t.Any]:
+    def http_request_headers(self) -> dict[str, t.Any]:
         """Generates a random HTTP request headers.
 
         The following headers are included:

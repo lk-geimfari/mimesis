@@ -1,5 +1,4 @@
 """Provides data related to food."""
-import typing as t
 
 from mimesis.providers.base import BaseDataProvider
 
@@ -15,11 +14,11 @@ class Food(BaseDataProvider):
 
     def _choice_from(self, key: str) -> str:
         """Choice random element."""
-        data: t.List[str] = self.extract([key])
+        data: list[str] = self.extract([key])
         return self.random.choice(data)
 
     def vegetable(self) -> str:
-        """Get a random vegetable.
+        """Generates a random vegetable name.
 
         :return: Vegetable name.
 
@@ -29,7 +28,7 @@ class Food(BaseDataProvider):
         return self._choice_from("vegetables")
 
     def fruit(self) -> str:
-        """Get a random fruit or berry.
+        """Generates a random fruit or berry name.
 
         :return: Fruit name.
 
@@ -39,7 +38,7 @@ class Food(BaseDataProvider):
         return self._choice_from("fruits")
 
     def dish(self) -> str:
-        """Get a random dish.
+        """Generates a random dish name.
 
         :return: Dish name.
 
@@ -49,9 +48,9 @@ class Food(BaseDataProvider):
         return self._choice_from("dishes")
 
     def spices(self) -> str:
-        """Get a random spices or herbs.
+        """Generates a random spices/herb name.
 
-        :return: Spices or herbs.
+        :return: The name of the spices or herbs.
 
         :Example:
             Anise.
@@ -59,9 +58,9 @@ class Food(BaseDataProvider):
         return self._choice_from("spices")
 
     def drink(self) -> str:
-        """Get a random drink.
+        """Generates a random drink name.
 
-        :return: Alcoholic drink.
+        :return: Drink name.
 
         :Example:
             Vodka.

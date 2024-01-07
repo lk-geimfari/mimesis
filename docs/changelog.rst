@@ -1,1 +1,4 @@
+Changelog
+=========
+
 .. include:: ../CHANGELOG.rst

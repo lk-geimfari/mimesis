@@ -1,7 +1,6 @@
 """Specific data provider for Italy (it)."""
 
 import string
-import typing as t
 
 from mimesis.enums import Gender
 from mimesis.locales import Locale
@@ -22,7 +21,7 @@ class ItalySpecProvider(BaseDataProvider):
         name = "italy_provider"
         datafile = "builtin.json"
 
-    def fiscal_code(self, gender: t.Optional[Gender] = None) -> str:
+    def fiscal_code(self, gender: Gender | None = None) -> str:
         """Return a random fiscal code.
 
         :param gender: Gender's enum object.
@@ -33,7 +32,7 @@ class ItalySpecProvider(BaseDataProvider):
         """
         code = "".join(self.random.choices(string.ascii_uppercase, k=6))
 
-        code += self.random.custom_code(mask="##")
+        code += self.random.generate_string_by_mask(mask="##")
 
         month_codes = self.extract(["fiscal_code", "month_codes"])
         code += self.random.choice(month_codes)
@@ -46,6 +45,6 @@ class ItalySpecProvider(BaseDataProvider):
 
         city_letters = self.extract(["fiscal_code", "city_letters"])
         code += self.random.choice(city_letters)
-        code += self.random.custom_code(mask="###@")
+        code += self.random.generate_string_by_mask(mask="###@")
 
         return code

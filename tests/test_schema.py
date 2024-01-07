@@ -8,11 +8,12 @@ from collections.abc import Iterator
 
 import pytest
 
-from mimesis.builtins.en import USASpecProvider
 from mimesis.enums import Gender
 from mimesis.exceptions import (
+    AliasesTypeError,
     FieldArityError,
     FieldError,
+    FieldNameError,
     FieldsetError,
     SchemaError,
 )
@@ -36,11 +37,6 @@ def localized_field(request):
 @pytest.fixture(scope="module")
 def default_field(request):
     return Field()
-
-
-@pytest.fixture
-def extended_field():
-    return Field(locale=Locale.EN, providers=(USASpecProvider,))
 
 
 @pytest.fixture(scope="module", params=list(Locale))
@@ -123,7 +119,7 @@ def test_fieldset(localized_fieldset, field_name, i):
 
 def test_field_get_random_instance(localized_field):
     assert isinstance(localized_field.get_random_instance(), Random)
-    assert localized_field.get_random_instance() == localized_field._gen.random
+    assert localized_field.get_random_instance() == localized_field._generic.random
 
 
 @pytest.mark.parametrize(
@@ -224,10 +220,6 @@ def test_fieldset_field_error(default_fieldset):
 def test_field_error(localized_field, field_name):
     with pytest.raises(FieldError):
         localized_field(field_name)
-
-
-def test_field_with_custom_providers(extended_field):
-    assert extended_field("ssn")
 
 
 def test_field_raises_field_error(default_field):
@@ -384,34 +376,61 @@ class MyFieldHandler:
         ("wow", lambda rnd, a="a", c="d", **kwargs: rnd.choice([a, c])),
     ],
 )
-def test_register_field(default_field, default_fieldset, field_name, handler):
-    default_field.register_field(field_name, handler)
-    default_fieldset.register_field(field_name, handler)
+def test_register_handler(default_field, default_fieldset, field_name, handler):
+    default_field.register_handler(field_name, handler)
+    default_fieldset.register_handler(field_name, handler)
 
     res_1 = default_field(field_name, key=str.upper)
     res_2 = default_field(field_name, key=str.lower, a="a", c="c", d="e")
 
     assert res_1.isupper() and res_2.islower()
 
-    default_field.unregister_field(field_name)
+    default_field.unregister_handler(field_name)
 
     with pytest.raises(FieldError):
         default_field(field_name)
 
 
-def test_register_field_callable_with_wrong_arity(default_field):
-    wrong_arity = lambda **kwargs: "error"
+def test_field_handle_decorator(default_field):
+    @default_field.handle("my_field")
+    def my_field(random, **kwargs):
+        return random.choice(["a", "b"])
+
+    assert default_field("my_field") in ["a", "b"]
+
+    default_field.unregister_handler("my_field")
+
+    with pytest.raises(FieldError):
+        default_field("my_field")
+
+
+def test_fieldset_handle_decorator(default_fieldset):
+    @default_fieldset.handle()
+    def my_field(random, **kwargs):
+        return random.choice(["a", "b"])
+
+    assert len(default_fieldset("my_field")) == 10
+
+    default_fieldset.unregister_handler("my_field")
+
+    with pytest.raises(FieldError):
+        default_fieldset("my_field")
+
+
+def test_register_handler_callable_with_wrong_arity(default_field):
+    def wrong_arity(**kwargs):
+        return "error"
 
     with pytest.raises(FieldArityError):
-        default_field.register_field("invalid_field", wrong_arity)
+        default_field.register_handler("invalid_field", wrong_arity)
 
 
-def test_register_field_non_callable(default_field):
+def test_register_handler_non_callable(default_field):
     with pytest.raises(TypeError):
-        default_field.register_field("a", "a")
+        default_field.register_handler("a", "a")
 
     with pytest.raises(TypeError):
-        default_field.register_field(b"sd", my_field_handler)
+        default_field.register_handler(b"sd", my_field_handler)
 
 
 @pytest.mark.parametrize(
@@ -425,14 +444,14 @@ def test_register_field_non_callable(default_field):
         "1a",
     ],
 )
-def test_register_field_with_invalid_name(default_field, invalid_field_name):
-    with pytest.raises(ValueError):
-        default_field.register_field(invalid_field_name, my_field_handler)
+def test_register_handler_with_invalid_name(default_field, invalid_field_name):
+    with pytest.raises(FieldNameError):
+        default_field.register_handler(invalid_field_name, my_field_handler)
 
 
-def test_register_fields(default_field):
+def test_register_handlers(default_field):
     _kwargs = {"a": "a", "b": "b"}
-    default_field.register_fields(
+    default_field.register_handlers(
         fields=[
             ("a", lambda rnd, **kwargs: kwargs),
             ("b", lambda rnd, **kwargs: kwargs),
@@ -444,25 +463,25 @@ def test_register_fields(default_field):
     assert result["a"] == _kwargs["a"] and result["b"] == _kwargs["b"]
 
 
-def test_unregister_field(default_field):
+def test_unregister_handler(default_field):
     # Make sure that there are no handlers.
-    default_field.unregister_all_fields()
+    default_field.unregister_all_handlers()
     # Register fields first
-    default_field.register_field("my_field", my_field_handler)
+    default_field.register_handler("my_field", my_field_handler)
     # Make sure that registration is done.
-    assert len(default_field._custom_fields.keys()) > 0
+    assert len(default_field._field_handlers.keys()) > 0
     # Extract field handler by its name
-    registered_field = default_field._custom_fields["my_field"]
+    registered_field = default_field._field_handlers["my_field"]
     # Make sure that handlers are the same
     assert registered_field == my_field_handler
     # Unregister field
-    default_field.unregister_field("my_field")
+    default_field.unregister_handler("my_field")
     with pytest.raises(FieldError):
         default_field("my_field")
 
 
-def test_unregister_fields(default_field):
-    default_field.unregister_all_fields()
+def test_unregister_handlers(default_field):
+    default_field.unregister_all_handlers()
     fields = [
         ("a", lambda rnd, **kwargs: kwargs),
         ("b", lambda rnd, **kwargs: kwargs),
@@ -470,20 +489,20 @@ def test_unregister_fields(default_field):
     ]
 
     # Register fields first
-    default_field.register_fields(fields=fields)
-    assert len(default_field._custom_fields.keys()) == 3
+    default_field.register_handlers(fields=fields)
+    assert len(default_field._field_handlers.keys()) == 3
 
     # Unregister all field with given names.
-    default_field.unregister_fields(["a", "b", "c", "d", "e"])
-    assert len(default_field._custom_fields.keys()) == 0
+    default_field.unregister_handlers(["a", "b", "c", "d", "e"])
+    assert len(default_field._field_handlers.keys()) == 0
 
     # Register fields again and unregister all of them at once
-    default_field.register_fields(fields=fields)
-    default_field.unregister_all_fields()
-    assert len(default_field._custom_fields.keys()) == 0
+    default_field.register_handlers(fields=fields)
+    default_field.unregister_all_handlers()
+    assert len(default_field._field_handlers.keys()) == 0
 
 
-def test_unregister_all_fields(default_field):
+def test_unregister_all_handlers(default_field):
     fields = [
         ("a", lambda rnd, **kwargs: kwargs),
         ("b", lambda rnd, **kwargs: kwargs),
@@ -491,9 +510,43 @@ def test_unregister_all_fields(default_field):
     ]
 
     # Register fields first
-    default_field.register_fields(fields=fields)
-    assert len(default_field._custom_fields.keys()) == 3
+    default_field.register_handlers(fields=fields)
+    assert len(default_field._field_handlers.keys()) == 3
 
     # Unregister all fields
-    default_field.unregister_all_fields()
-    assert len(default_field._custom_fields.keys()) == 0
+    default_field.unregister_all_handlers()
+    assert len(default_field._field_handlers.keys()) == 0
+
+
+def test_field_aliasing(default_field):
+    default_field.aliases = {
+        "🇺🇸": "country_code",
+    }
+    assert default_field("🇺🇸")
+
+    with pytest.raises(FieldError):
+        default_field.aliases.clear()
+        default_field("🇺🇸")
+
+
+@pytest.mark.parametrize(
+    "aliases",
+    [
+        {"🇺🇸": tuple},
+        {"hey": 22},
+        {12: "email"},
+        {b"hey": "email"},
+        None,
+        [],
+        tuple(),
+    ],
+)
+def test_field_invalid_aliases(default_field, aliases):
+    default_field.aliases = aliases
+    with pytest.raises(AliasesTypeError):
+        default_field("email")
+
+    default_field.aliases = aliases
+
+    with pytest.raises(AliasesTypeError):
+        default_field._validate_aliases()

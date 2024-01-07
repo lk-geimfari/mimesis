@@ -1,7 +1,5 @@
 """Business data provider."""
 
-import typing as t
-
 from mimesis.data import (
     CRYPTOCURRENCY_ISO_CODES,
     CRYPTOCURRENCY_SYMBOLS,
@@ -17,34 +15,34 @@ __all__ = ["Finance"]
 
 
 class Finance(BaseDataProvider):
-    """Class for generating finance data."""
+    """Class to generate finance and business related data."""
 
     class Meta:
         name = "finance"
         datafile = f"{name}.json"
 
     def company(self) -> str:
-        """Get a random company name.
+        """Generates a random company name.
 
         :return: Company name.
         """
-        names: t.List[str] = self.extract(["company", "name"])
+        names: list[str] = self.extract(["company", "name"])
 
         return self.random.choice(names)
 
     def company_type(self, abbr: bool = False) -> str:
-        """Get a random type of business entity.
+        """Generates a random type of business entity.
 
         :param abbr: Abbreviated company type.
         :return: Types of business entity.
         """
         key = "abbr" if abbr else "title"
 
-        company_types: t.List[str] = self.extract(["company", "type", key])
+        company_types: list[str] = self.extract(["company", "type", key])
         return self.random.choice(company_types)
 
     def currency_iso_code(self, allow_random: bool = False) -> str:
-        """Get code of the currency for current locale.
+        """Returns a currency code for current locale.
 
         :param allow_random: Get a random ISO code.
         :return: Currency code.
@@ -56,22 +54,22 @@ class Finance(BaseDataProvider):
         return code
 
     def bank(self) -> str:
-        """Get a random bank name.
+        """Generates a random bank name.
 
         :return: Bank name.
         """
-        banks: t.List[str] = self.extract(["banks"])
+        banks: list[str] = self.extract(["banks"])
         return self.random.choice(banks)
 
     def cryptocurrency_iso_code(self) -> str:
-        """Get symbol of random cryptocurrency.
+        """Generates a random cryptocurrency ISO code.
 
         :return: Symbol of cryptocurrency.
         """
         return self.random.choice(CRYPTOCURRENCY_ISO_CODES)
 
     def currency_symbol(self) -> str:
-        """Get a currency symbol for current locale.
+        """Returns a currency symbol for current locale.
 
         :return: Currency symbol.
         """
@@ -85,7 +83,7 @@ class Finance(BaseDataProvider):
         return self.random.choice(CRYPTOCURRENCY_SYMBOLS)
 
     def price(self, minimum: float = 500, maximum: float = 1500) -> float:
-        """Generate random price.
+        """Generate a random price.
 
         :param minimum: Minimum value of price.
         :param maximum: Maximum value of price.
@@ -98,7 +96,7 @@ class Finance(BaseDataProvider):
         )
 
     def price_in_btc(self, minimum: float = 0, maximum: float = 2) -> float:
-        """Generate random price in BTC.
+        """Generates a random price in BTC.
 
         :param minimum: Minimum value of price.
         :param maximum: Maximum value of price.
@@ -111,21 +109,21 @@ class Finance(BaseDataProvider):
         )
 
     def stock_ticker(self) -> str:
-        """Returns random stock ticker.
+        """Generates a random stock ticker.
 
         :return: Ticker.
         """
         return self.random.choice(STOCK_TICKERS)
 
     def stock_name(self) -> str:
-        """Returns stock name.
+        """Generates a stock name.
 
         :return: Stock name.
         """
         return self.random.choice(STOCK_NAMES)
 
     def stock_exchange(self) -> str:
-        """Returns stock exchange name.
+        """Generates a stock exchange name.
 
         :return: Returns exchange name.
         """

@@ -31,7 +31,6 @@ What did the code above do?
    An instance of this class will serve as our provider of personal data.
 2. We imported the :class:`~mimesis.enums.Locale` object, which provides locale codes and must be used as a parameter for locale-dependent data providers.
 3. We imported the :class:`~mimesis.enums.Gender` object from the :mod:`mimesis.enums` module, which we use as a parameter for the :meth:`~mimesis.Person.full_name`.
-   parameter for the :meth:`~mimesis.Person.full_name`.
 4. Next we generate random female full name.
 5. The same as above, but for male.
 
@@ -93,10 +92,9 @@ Also correct:
         pass
 
 
-Importing individual class providers may be useful if you only need access
-to the data provided by that specific class. However, if you need access to a
-wider range of data, it's recommended to use the :class:`~mimesis.Generic()` class instead.
-This will allow you to access data from all available providers within the library.
+Importing individual class providers may be useful if you only need access to the data provided by that specific class.
+However, if you require access to a broader range of data, it is recommended to use the :class:`~mimesis.Generic()` class instead.
+This will enable you to access data from all available providers within the library.
 
 
 What's next?
@@ -105,5 +103,4 @@ What's next?
 - See :ref:`providers` for a list of all available providers.
 - See :ref:`structured_data_generation` for generating structured data.
 - See :ref:`locale` for a list of all available locales.
-- See :ref:`api-reference` for a list of all available methods, providers, and
-  enums.
+- See :ref:`api-reference` for a list of all available methods, providers, and enums.

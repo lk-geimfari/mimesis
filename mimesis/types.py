@@ -14,7 +14,7 @@ If any of the following statements is true, move the type to this file:
 
 import datetime
 from decimal import Decimal
-from typing import Any, Callable, Dict, Final, List, Optional, Set, Tuple, Union
+from typing import Any, Callable, Final
 
 __all__ = [
     "CallableSchema",
@@ -31,7 +31,7 @@ __all__ = [
     "Timestamp",
 ]
 
-JSON = Dict[str, Any]
+JSON = dict[str, Any]
 
 DateTime = datetime.datetime
 
@@ -39,7 +39,7 @@ Time = datetime.time
 
 Date = datetime.date
 
-Timestamp = Union[str, int]
+Timestamp = str | int
 
 
 class _MissingSeed:
@@ -47,15 +47,17 @@ class _MissingSeed:
 
 
 MissingSeed: Final = _MissingSeed()
-Seed = Union[None, int, float, str, bytes, bytearray, _MissingSeed]
 
-Keywords = Union[List[str], Set[str], Tuple[str, ...]]
+Seed = None | int | float | str | bytes | bytearray | _MissingSeed
 
-Number = Union[int, float, complex, Decimal]
-Matrix = List[List[Number]]
+Keywords = list[str] | set[str] | tuple[str, ...]
+
+Number = int | float | complex | Decimal
+
+Matrix = list[list[Number]]
 
 CallableSchema = Callable[[], JSON]
 
-Key = Optional[Callable[[Any], Any]]
+Key = Callable[[Any], Any] | None
 
-FieldCache = Dict[str, Callable[[Any], Any]]
+FieldCache = dict[str, Callable[[Any], Any]]

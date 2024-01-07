@@ -1,9 +1,23 @@
-Version 11.1.0
+Version 12.0.0
 --------------
 
-**Added**:
-
-- Added validation for custom field names.
+- Python 3.8 and 3.9 are no longer supported.
+- Added support for field aliases. See docs for more information.
+- Added method ``calver`` for ``Development``.
+- Added method ``stage`` for ``Development``.
+- Added method ``country_emoji_flag`` for ``Address``.
+- Removed method ``hashtags`` of the ``Internet`` provider. Use method ``words`` of the ``Text`` provider instead.
+- Removed parameter ``providers`` for ``Field`` and ``Fieldset``. Use custom field handlers instead.
+- Removed parameters ``pre_release`` and ``calver`` for ``Development.version``. Use methods ``stage`` and ``calver`` instead.
+- Moved method ``emoji`` of the ``Internet`` provider to the ``Text`` provider.
+- Moved method ``dsn`` of the ``Development`` provider to the ``Internet`` provider.
+- The ``Text().emoji()`` method now supports the ``category`` parameter and ``EmojiCategory`` enum. Also it return emoji instead of emoji shortcut string.
+- Added decorator ``@handle`` for ``Field`` and ``Fieldset`` to register custom fields.
+- Renamed ``register_field`` to ``register_handler`` for `Field` and `Fieldset`.
+- Renamed ``register_fields`` to ``register_handlers`` for `Field` and `Fieldset`.
+- Renamed ``unregister_field`` to ``unregister_handler`` for `Field` and `Fieldset`.
+- Renamed ``unregister_fields`` to ``unregister_handlers`` for `Field` and `Fieldset`.
+- Renamed ``unregister_all_fields`` to ``unregister_all_handlers`` for `Field` and `Fieldset`.
 
 
 Version 11.0.0

@@ -522,3 +522,11 @@ SYSTEM_QUALITY_ATTRIBUTES = (
     "usability",
     "vulnerability",
 )
+
+STAGES = (
+    "Pre-alpha",
+    "Alpha",
+    "Beta",
+    "RC",
+    "Stable",
+)

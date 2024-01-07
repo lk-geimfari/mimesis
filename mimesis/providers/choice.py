@@ -25,11 +25,11 @@ class Choice(BaseProvider):
 
     def __call__(
         self,
-        items: t.Optional[t.Sequence[t.Any]],
+        items: t.Sequence[t.Any] | None,
         length: int = 0,
         unique: bool = False,
-    ) -> t.Union[t.Sequence[t.Any], t.Any]:
-        """Generate a randomly-chosen sequence or bare element from a sequence.
+    ) -> t.Sequence[t.Any] | t.Any:
+        """Generates a randomly chosen sequence or bare element from a sequence.
 
         Provide elements randomly chosen from the elements in a sequence
         **items**, where when **length** is specified the random choices are
@@ -38,7 +38,7 @@ class Choice(BaseProvider):
         to True, constrain a returned sequence to contain only unique elements.
 
         :param items: Non-empty sequence (list, tuple or string) of elements.
-        :param length: Length of sequence (number of elements) to provide.
+        :param length: Length of the sequence (number of elements) to provide.
         :param unique: If True, ensures provided elements are unique.
         :return: Sequence or uncontained element randomly chosen from items.
         :raises TypeError: For non-sequence items or non-integer length.
@@ -72,13 +72,13 @@ class Choice(BaseProvider):
         if length == 0:
             return self.random.choice(items)
 
-        if unique and len(set(items)) < length:  # Sanity check
+        if unique and len(set(items)) < length:
             raise ValueError(
                 "There are not enough unique elements in "
                 "**items** to provide the specified **number**."
             )
         if unique:
-            data: t.List[str] = self.random.sample(list(set(items)), k=length)
+            data: list[str] = self.random.sample(list(set(items)), k=length)
         else:
             data = self.random.choices(items, k=length)
 

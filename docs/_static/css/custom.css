@@ -5,6 +5,16 @@ pre, tt, code {
     font-size: 0.9em;
 }
 
+a.reference {
+    text-decoration: none;
+    border-bottom: none;
+}
+
+div.sphinxsidebar a {
+    text-decoration: none;
+    border-bottom: none;
+}
+
 .function, .method, .class, .exception {
     padding-bottom: 15px;
 }
@@ -32,7 +42,7 @@ div.note {
 }
 
 div.warning {
-    border-radius: 10px;
+    border-radius: 8px;
 }
 
 pre, div[class*="highlight-"] {
@@ -42,7 +52,7 @@ pre, div[class*="highlight-"] {
 
 div.highlight pre, table.highlighttable pre {
     margin: 0;
-    border-radius: 10px !important;
+    border-radius: 5px !important;
     padding: 20px !important;
 }
 
@@ -52,29 +62,29 @@ div.highlight pre, table.highlighttable pre {
 
 @media (prefers-color-scheme: dark) {
     body {
-        background-color: #21272E;
+        background-color: #171717;
     }
 
     div.sphinxsidebar p {
-        color: #adbac7;
+        color: #98a3ad;
     }
 
     div.sphinxsidebar a {
-        color: #adbac7;
+        color: #98a3ad;
         border-bottom: none;
     }
 
     dt:target, .highlight {
-        background: #21272E;
+        background: #171717;
     }
 
     .py, .py-class {
-        background: #21272E;
+        background: #171717;
     }
 
     div.sphinxsidebar h3,
     div.sphinxsidebar h4 {
-        color: #adbac7;
+        color: #98a3ad;
     }
 
     div.sphinxsidebar a:hover {
@@ -83,48 +93,67 @@ div.highlight pre, table.highlighttable pre {
     }
 
     div.sphinxsidebar h3 a {
-        color: #adbac7;
+        color: #98a3ad;
     }
 
     div.sphinxsidebar ul {
-        color: #adbac7;
+        color: #98a3ad;
     }
 
     div.body {
-        background-color: #21272E;
-        color: #adbac7;
+        background-color: #171717;
+        color: #98a3ad;
     }
 
     div.note {
-        background-color: #2d333b !important;
+        background-color: #1a1a1a !important;
         border-radius: 10px;
-        border: 1px solid hsla(203.9, 85.8%, 52.9%, 0.43);
+        border: 1px solid #2a2e2f;
     }
 
     pre {
-        background-color: #2d333b !important;
+        background-color: #1a1a1a !important;
         border-radius: 10px;
     }
 
     tt, code {
-        background-color: #2d333b !important;
-        color: #adbac7;
+        background-color: #201f1f !important;
+        color: #98a3ad;
+        border-bottom: none;
+        padding: 1px 4px;
+        border-radius: 3px;
     }
 
     #api-reference .reference span.pre {
-        background-color: #21272E;
-    !important;
+        background-color: #171717 !important;
     }
 
     div.highlight {
-        background-color: #2d333b !important;
+        background-color: #1a1a1a !important;
         border-radius: 15px;
     }
 
     div.warning {
-        background-color: #2d333b !important;
-        border-radius: 10px;
-        border: 1px solid rgba(255, 170, 0, 0.25)
+        background-color: #1a1a1a !important;
+        border-radius: 8px;
+        border: 1px solid rgba(142, 117, 114, 0.25);
+    }
+
+    #contents li a,
+    #api-reference li a,
+    #additional-information li a,
+    #changelog li a,
+    #indices li a {
+        color: #98a3ad !important;
+    }
+
+    #contents li a:hover,
+    #api-reference li a:hover,
+    #additional-information li a:hover,
+    #changelog li a:hover,
+    #indices li a:hover {
+        color: #2b79a2 !important;
+        text-decoration: underline !important;
     }
 
     table.docutils {
@@ -137,17 +166,24 @@ div.highlight pre, table.highlighttable pre {
     tt.xref, code.xref, a tt {
         background-color: #FBFBFB;
         border-bottom: none;
+        padding: 1px 4px;
+        border-radius: 3px;
+    }
+
+    div.admonition tt.xref, div.admonition code.xref, div.admonition a tt {
+        border-bottom: none !important;
     }
 
     a {
-        color: #539bf5;
+        color: #2b79a2;
         border-bottom: none;
     }
 
     a:hover {
-        color: #539bf5;
-        text-decoration: underline;
+        color: #2b79a2;
+        text-decoration: underline !important;
     }
+
 
     a.reference {
         border-bottom: none !important;
@@ -193,7 +229,7 @@ div.highlight pre, table.highlighttable pre {
     }
 
     .highlight .nn {
-        color: #adbac7;
+        color: #98a3ad;
         font-weight: bold;
     }
 
@@ -219,8 +255,8 @@ div.highlight pre, table.highlighttable pre {
     }
 
     .rst-versions .rst-current-version {
-        background-color: #21272E !important;
-        border: 1px solid #2d333b;
+        background-color: #171717 !important;
+        border: 1px solid #1a1a1a;
     }
 
     .highlight .nf {
@@ -228,7 +264,7 @@ div.highlight pre, table.highlighttable pre {
     }
 
     .highlight .bp {
-        color: #adbac7;
+        color: #98a3ad;
     }
 
     .highlight .nc {
@@ -241,7 +277,7 @@ div.highlight pre, table.highlighttable pre {
     }
 
     .highlight .nd {
-        color: #adbac7;
+        color: #98a3ad;
         font-weight: normal;
     }
 
@@ -254,21 +290,21 @@ div.highlight pre, table.highlighttable pre {
         width: 80%;
         padding: 0.25em;
         box-sizing: border-box;
-        background: #21272E;
+        background: #171717;
     }
 
     div.sphinxsidebar input {
         border: 1px solid #3E4348;
-        color: #ADBAC7;
+        color: #98a3ad;
     }
 
     div.sphinxsidebar #searchbox input[type="submit"] {
-        color: #ADBAC7;
-        background: #21272E;
+        color: #98a3ad;
+        background: #171717;
     }
 
     input[value="Go"] {
-        background-color: #21272E !important;
+        background-color: #171717 !important;
     }
 
     input[value="Go"]:hover {
@@ -285,7 +321,7 @@ div.highlight pre, table.highlighttable pre {
     }
 
     a.headerlink:hover {
-        color: #adbac7 !important;
+        color: #98a3ad !important;
         background: transparent !important;
         text-decoration: none !important;
     }

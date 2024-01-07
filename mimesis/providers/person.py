@@ -3,6 +3,7 @@
 import hashlib
 import re
 import typing as t
+import uuid
 from string import ascii_letters, digits, punctuation
 
 from mimesis.data import (
@@ -37,7 +38,7 @@ class Person(BaseDataProvider):
         datafile = f"{name}.json"
 
     def age(self, minimum: int = 16, maximum: int = 66) -> int:
-        """Get a random integer value.
+        """Generates a random age of a person.
 
         :param maximum: Maximum value of age.
         :param minimum: Minimum value of age.
@@ -51,7 +52,7 @@ class Person(BaseDataProvider):
         return age
 
     def work_experience(self, working_start_age: int = 22) -> int:
-        """Get a work experience.
+        """Generates a random work experience.
 
         :param working_start_age: Age then person start to work.
         :return: Depend on previous generated age.
@@ -62,8 +63,8 @@ class Person(BaseDataProvider):
 
         return max(age - working_start_age, 0)
 
-    def name(self, gender: t.Optional[Gender] = None) -> str:
-        """Generate a random name.
+    def name(self, gender: Gender | None = None) -> str:
+        """Generates a random name.
 
         :param gender: Gender's enum object.
         :return: Name.
@@ -72,11 +73,11 @@ class Person(BaseDataProvider):
             John.
         """
         key = self.validate_enum(gender, Gender)
-        names: t.List[str] = self.extract(["names", key])
+        names: list[str] = self.extract(["names", key])
         return self.random.choice(names)
 
-    def first_name(self, gender: t.Optional[Gender] = None) -> str:
-        """Generate a random first name.
+    def first_name(self, gender: Gender | None = None) -> str:
+        """Generates a random first name.
 
         ..note: An alias for self.name().
 
@@ -85,8 +86,8 @@ class Person(BaseDataProvider):
         """
         return self.name(gender)
 
-    def surname(self, gender: t.Optional[Gender] = None) -> str:
-        """Generate a random surname.
+    def surname(self, gender: Gender | None = None) -> str:
+        """Generates a random surname.
 
         :param gender: Gender's enum object.
         :return: Surname.
@@ -103,8 +104,8 @@ class Person(BaseDataProvider):
 
         return self.random.choice(surnames)
 
-    def last_name(self, gender: t.Optional[Gender] = None) -> str:
-        """Generate a random last name.
+    def last_name(self, gender: Gender | None = None) -> str:
+        """Generates a random last name.
 
         ..note: An alias for self.surname().
 
@@ -115,12 +116,12 @@ class Person(BaseDataProvider):
 
     def title(
         self,
-        gender: t.Optional[Gender] = None,
-        title_type: t.Optional[TitleType] = None,
+        gender: Gender | None = None,
+        title_type: TitleType | None = None,
     ) -> str:
-        """Generate a random title for name.
+        """Generates a random title for name.
 
-        You can generate random prefix or suffix
+        You can generate a random prefix or suffix
         for name using this method.
 
         :param gender: The gender.
@@ -134,13 +135,15 @@ class Person(BaseDataProvider):
         gender_key = self.validate_enum(gender, Gender)
         title_key = self.validate_enum(title_type, TitleType)
 
-        titles: t.List[str] = self.extract(["title", gender_key, title_key])
+        titles: list[str] = self.extract(["title", gender_key, title_key])
         return self.random.choice(titles)
 
     def full_name(
-        self, gender: t.Optional[Gender] = None, reverse: bool = False
+        self,
+        gender: Gender | None = None,
+        reverse: bool = False,
     ) -> str:
-        """Generate a random full name.
+        """Generates a random full name.
 
         :param reverse: Return reversed full name.
         :param gender: Gender's enum object.
@@ -154,9 +157,9 @@ class Person(BaseDataProvider):
         return f"{surname} {name}" if reverse else f"{name} {surname}"
 
     def username(
-        self, mask: t.Optional[str] = None, drange: t.Tuple[int, int] = (1800, 2100)
+        self, mask: str | None = None, drange: tuple[int, int] = (1800, 2100)
     ) -> str:
-        """Generate username by mask.
+        """Generates a username by mask.
 
         Masks allow you to generate a variety of usernames.
 
@@ -212,7 +215,7 @@ class Person(BaseDataProvider):
         return final_username
 
     def password(self, length: int = 8, hashed: bool = False) -> str:
-        """Generate a password or hash of password.
+        """Generates a password or hash of password.
 
         :param length: Length of password.
         :param hashed: SHA256 hash.
@@ -233,10 +236,10 @@ class Person(BaseDataProvider):
 
     def email(
         self,
-        domains: t.Optional[t.Sequence[str]] = None,
+        domains: t.Sequence[str] | None = None,
         unique: bool = False,
     ) -> str:
-        """Generate a random email.
+        """Generates a random email.
 
         :param domains: List of custom domains for emails.
         :param unique: Makes email addresses unique.
@@ -260,16 +263,16 @@ class Person(BaseDataProvider):
             domain = "@" + domain
 
         if unique:
-            name = self.random._randstr(unique)
+            name = str(uuid.uuid4().hex)
         else:
             name = self.username(mask="ld")
 
         return f"{name}{domain}"
 
-    def gender(self, iso5218: bool = False, symbol: bool = False) -> t.Union[str, int]:
-        """Get a random gender.
+    def gender(self, iso5218: bool = False, symbol: bool = False) -> str | int:
+        """Generates a random gender.
 
-        Get a random title of gender, code for the representation
+        Get a random title of gender code for the representation
         of human sexes is an international standard that defines a
         representation of human sexes through a language-neutral single-digit
         code or symbol of gender.
@@ -289,10 +292,10 @@ class Person(BaseDataProvider):
         if symbol:
             return self.random.choice(GENDER_SYMBOLS)
 
-        genders: t.List[str] = self.extract(["gender"])
+        genders: list[str] = self.extract(["gender"])
         return self.random.choice(genders)
 
-    def sex(self, *args: t.Any, **kwargs: t.Any) -> t.Union[str, int]:
+    def sex(self, *args: t.Any, **kwargs: t.Any) -> str | int:
         """An alias for method self.gender().
 
         See docstrings of method self.gender() for details.
@@ -304,7 +307,7 @@ class Person(BaseDataProvider):
         return self.gender(*args, **kwargs)
 
     def height(self, minimum: float = 1.5, maximum: float = 2.0) -> str:
-        """Generate a random height in meters.
+        """Generates a random height in meters.
 
         :param minimum: Minimum value.
         :param float maximum: Maximum value.
@@ -317,7 +320,7 @@ class Person(BaseDataProvider):
         return f"{h:0.2f}"
 
     def weight(self, minimum: int = 38, maximum: int = 90) -> int:
-        """Generate a random weight in Kg.
+        """Generates a random weight in Kg.
 
         :param minimum: min value
         :param maximum: max value
@@ -329,7 +332,7 @@ class Person(BaseDataProvider):
         return self.random.randint(minimum, maximum)
 
     def blood_type(self) -> str:
-        """Get a random blood type.
+        """Generates a random blood type.
 
         :return: Blood type (blood group).
 
@@ -339,14 +342,14 @@ class Person(BaseDataProvider):
         return self.random.choice(BLOOD_GROUPS)
 
     def occupation(self) -> str:
-        """Get a random job.
+        """Generates a random job.
 
         :return: The name of job.
 
         :Example:
             Programmer.
         """
-        jobs: t.List[str] = self.extract(["occupation"])
+        jobs: list[str] = self.extract(["occupation"])
         return self.random.choice(jobs)
 
     def political_views(self) -> str:
@@ -357,18 +360,18 @@ class Person(BaseDataProvider):
         :Example:
             Liberal.
         """
-        views: t.List[str] = self.extract(["political_views"])
+        views: list[str] = self.extract(["political_views"])
         return self.random.choice(views)
 
     def worldview(self) -> str:
-        """Get a random worldview.
+        """Generates a random worldview.
 
         :return: Worldview.
 
         :Example:
             Pantheism.
         """
-        views: t.List[str] = self.extract(["worldview"])
+        views: list[str] = self.extract(["worldview"])
         return self.random.choice(views)
 
     def views_on(self) -> str:
@@ -379,11 +382,11 @@ class Person(BaseDataProvider):
         :Example:
             Negative.
         """
-        views: t.List[str] = self.extract(["views_on"])
+        views: list[str] = self.extract(["views_on"])
         return self.random.choice(views)
 
-    def nationality(self, gender: t.Optional[Gender] = None) -> str:
-        """Get a random nationality.
+    def nationality(self, gender: Gender | None = None) -> str:
+        """Generates a random nationality.
 
         :param gender: Gender.
         :return: Nationality.
@@ -391,7 +394,7 @@ class Person(BaseDataProvider):
         :Example:
             Russian
         """
-        nationalities: t.List[str] = self.extract(["nationality"])
+        nationalities: list[str] = self.extract(["nationality"])
 
         # Separated by gender
         if isinstance(nationalities, dict):
@@ -401,40 +404,40 @@ class Person(BaseDataProvider):
         return self.random.choice(nationalities)
 
     def university(self) -> str:
-        """Get a random university.
+        """Generates a random university name.
 
         :return: University name.
 
         :Example:
             MIT.
         """
-        universities: t.List[str] = self.extract(["university"])
+        universities: list[str] = self.extract(["university"])
         return self.random.choice(universities)
 
     def academic_degree(self) -> str:
-        """Get a random academic degree.
+        """Generates a random academic degree.
 
         :return: Degree.
 
         :Example:
             Bachelor.
         """
-        degrees: t.List[str] = self.extract(["academic_degree"])
+        degrees: list[str] = self.extract(["academic_degree"])
         return self.random.choice(degrees)
 
     def language(self) -> str:
-        """Get a random language.
+        """Generates a random language name.
 
         :return: Random language.
 
         :Example:
             Irish.
         """
-        languages: t.List[str] = self.extract(["language"])
+        languages: list[str] = self.extract(["language"])
         return self.random.choice(languages)
 
     def phone_number(self, mask: str = "", placeholder: str = "#") -> str:
-        """Generate a random phone number.
+        """Generates a random phone number.
 
         :param mask: Mask for formatting number.
         :param placeholder: A placeholder for a mask (default is #).
@@ -449,16 +452,17 @@ class Person(BaseDataProvider):
             masks = self.extract(["telephone_fmt"], default=[default])
             mask = self.random.choice(masks)
 
-        return self.random.custom_code(mask=mask, digit=placeholder)
+        return self.random.generate_string_by_mask(mask=mask, digit=placeholder)
 
     def telephone(self, *args: t.Any, **kwargs: t.Any) -> str:
+        """An alias for method self.phone_number()."""
         return self.phone_number(*args, **kwargs)
 
     def identifier(self, mask: str = "##-##/##") -> str:
-        """Generate a random identifier by mask.
+        """Generates a random identifier by mask.
 
-        With this method you can generate any identifiers that
-        you need. Simply select the mask that you need.
+        With this method, you can generate any identifiers that
+        you need by specifying the mask.
 
         :param mask:
             The mask. Here ``@`` is a placeholder for characters and ``#`` is
@@ -468,4 +472,4 @@ class Person(BaseDataProvider):
         :Example:
             07-97/04
         """
-        return self.random.custom_code(mask=mask)
+        return self.random.generate_string_by_mask(mask=mask)

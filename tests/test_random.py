@@ -10,16 +10,16 @@ def random():
 
 
 @pytest.mark.parametrize(
-    "amount, a, b",
+    "n, a, b",
     [
         (3, 1, 20),
         (5, 1, 20),
         (10, 1, 20),
     ],
 )
-def test_randints(random, amount, a, b):
-    result = random.randints(amount, a, b)
-    assert len(result) == amount
+def test_randints(random, n, a, b):
+    result = random.randints(n, a, b)
+    assert len(result) == n
     assert all(a <= x <= b for x in result)
 
 
@@ -58,7 +58,7 @@ def test_uniform(random, precision):
     ],
 )
 def test_custom_code(random, mask, digit, char):
-    result = random.custom_code(mask=mask, char=char, digit=digit)
+    result = random.generate_string_by_mask(mask=mask, char=char, digit=digit)
     digit, middle, char = result.split("-")
     _, middle_mask, _ = mask.split("-")
     assert char.isalpha()
@@ -73,9 +73,9 @@ def test_custom_code(random, mask, digit, char):
         ("@@-FF-@@", "@", "@"),
     ],
 )
-def test_custom_code_with_same_placeholders(random, mask, digit, char):
+def test_generate_string_by_mask_with_same_placeholders(random, mask, digit, char):
     with pytest.raises(ValueError):
-        random.custom_code(mask=mask, char=char, digit=digit)
+        random.generate_string_by_mask(mask=mask, char=char, digit=digit)
 
 
 @pytest.mark.parametrize(
@@ -86,9 +86,9 @@ def test_custom_code_with_same_placeholders(random, mask, digit, char):
         ("👽", "B806"),
     ],
 )
-def test_custom_code_with_seed(random, seed, expected):
+def test_generate_string_by_mask_with_seed(random, seed, expected):
     random.seed(seed)
-    assert random.custom_code() == expected
+    assert random.generate_string_by_mask() == expected
 
 
 def test_get_random_item(random):
@@ -99,40 +99,6 @@ def test_get_random_item(random):
     result_1 = random.choice_enum_item(Gender)
     result_2 = random.choice_enum_item(Gender)
     assert result_1 == result_2
-
-
-@pytest.mark.parametrize("length", [64, 128, 256])
-def test_randstr(random, length):
-    result = random._randstr(length=length)
-    result2 = random._randstr(length=length)
-    assert len(result) == length
-    assert result != result2
-
-
-def test_randstr_no_length(random):
-    string = len(random._randstr(length=None))
-    assert 16 <= string <= 128
-
-
-@pytest.mark.parametrize("count", [1000, 5000, 10000])
-def test_randstr_unique(random, count):
-    results = [random._randstr(unique=True) for _ in range(count)]
-    assert len(results) == len(set(results))
-
-
-@pytest.mark.parametrize(
-    "seed",
-    [
-        "👽",
-        "seed",
-    ],
-)
-def test_randstr_non_unique_with_same_seed(random, seed):
-    random.seed(seed)
-    first = random._randstr(unique=False)
-    random.seed(seed)
-    second = random._randstr(unique=False)
-    assert first == second
 
 
 def test_weighted_choice(random):

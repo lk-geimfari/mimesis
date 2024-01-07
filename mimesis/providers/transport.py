@@ -1,7 +1,5 @@
 """Provides data related to transports."""
 
-import typing as t
-
 from mimesis.data import (
     AIRPLANES,
     AUTO_MANUFACTURERS,
@@ -22,7 +20,7 @@ class Transport(BaseProvider):
         name = "transport"
 
     def manufacturer(self) -> str:
-        """Get a random car manufacturer.
+        """Generates a random car manufacturer.
 
         :return: A car manufacturer
 
@@ -32,7 +30,7 @@ class Transport(BaseProvider):
         return self.random.choice(AUTO_MANUFACTURERS)
 
     def car(self) -> str:
-        """Get a random vehicle.
+        """Generates a random vehicle name.
 
         :return: A vehicle.
 
@@ -42,7 +40,7 @@ class Transport(BaseProvider):
         return self.random.choice(CARS)
 
     def airplane(self) -> str:
-        """Generate a dummy airplane model.
+        """Generates a random airplane model name.
 
         :return: Airplane model.
 
@@ -51,8 +49,8 @@ class Transport(BaseProvider):
         """
         return self.random.choice(AIRPLANES)
 
-    def vehicle_registration_code(self, locale: t.Optional[Locale] = None) -> str:
-        """Get vehicle registration code of country.
+    def vehicle_registration_code(self, locale: Locale | None = None) -> str:
+        """Returns vehicle registration code.
 
         :param locale: Registration code for locale (country).
         :return: Vehicle registration code.

@@ -8,8 +8,10 @@ import re
 import typing as t
 
 from mimesis.exceptions import (
+    AliasesTypeError,
     FieldArityError,
     FieldError,
+    FieldNameError,
     FieldsetError,
     SchemaError,
 )
@@ -29,7 +31,7 @@ from mimesis.types import (
 __all__ = ["BaseField", "Field", "Fieldset", "Schema"]
 
 FieldHandler = t.Callable[[Random, t.Any], t.Any]
-RegisterableFieldHandler = t.Tuple[str, FieldHandler]
+RegisterableFieldHandler = tuple[str, FieldHandler]
 RegisterableFieldHandlers = t.Sequence[RegisterableFieldHandler]
 
 
@@ -38,34 +40,33 @@ class BaseField:
         self,
         locale: Locale = Locale.DEFAULT,
         seed: Seed = MissingSeed,
-        providers: t.Optional[t.Sequence[t.Any]] = None,
     ) -> None:
-        """Initialize field.
+        """Base class for fields.
 
-        :param locale: Locale
+        This class is used as a base class for :class:`Field` and :class:`Fieldset`.
+
+        :attr: aliases: A dictionary of aliases for standard fields.
+        :param locale: Locale.
         :param seed: Seed for random.
         """
-        self._gen = Generic(locale, seed)
-
-        if providers:
-            self._gen.add_providers(*providers)
-
+        self._generic = Generic(locale, seed)
         self._cache: FieldCache = {}
-        self._custom_fields: t.Dict[str, FieldHandler] = {}
+        self._field_handlers: dict[str, FieldHandler] = {}
+        self.aliases: dict[str, str] = {}
 
     def reseed(self, seed: Seed = MissingSeed) -> None:
         """Reseed the random generator.
 
         :param seed: Seed for random.
         """
-        self._gen.reseed(seed)
+        self._generic.reseed(seed)
 
     def get_random_instance(self) -> Random:
-        """Get random object from Generic.
+        """Get a random object from Generic.
 
         :return: Random object.
         """
-        return self._gen.random
+        return self._generic.random
 
     def _explicit_lookup(self, name: str) -> t.Any:
         """An explicit method lookup.
@@ -79,7 +80,7 @@ class BaseField:
         """
         provider_name, method_name = name.split(".", 1)
         try:
-            provider = getattr(self._gen, provider_name)
+            provider = getattr(self._generic, provider_name)
             return getattr(provider, method_name)
         except AttributeError:
             raise FieldError(name)
@@ -94,8 +95,8 @@ class BaseField:
         :return: Callable object.
         :raise FieldError: When field is invalid.
         """
-        for provider in dir(self._gen):
-            provider = getattr(self._gen, provider)
+        for provider in dir(self._generic):
+            provider = getattr(self._generic, provider)
             if isinstance(provider, BaseProvider):
                 if name in dir(provider):
                     return getattr(provider, name)
@@ -109,6 +110,9 @@ class BaseField:
         :return: Callable object.
         :raise FieldError: When field is invalid.
         """
+        # Check if the field is defined in aliases
+        name = self.aliases.get(name, name)
+
         # Support additional delimiters
         name = re.sub(r"[/:\s]", ".", name)
 
@@ -124,20 +128,31 @@ class BaseField:
 
         return self._cache[name]
 
+    def _validate_aliases(self) -> bool:
+        """Validate aliases."""
+        if not isinstance(self.aliases, dict) or any(
+            not isinstance(key, str) or not isinstance(value, str)
+            for key, value in self.aliases.items()
+        ):
+            # Reset to valid state
+            self.aliases = {}
+            raise AliasesTypeError()
+        return True
+
     def perform(
         self,
-        name: t.Optional[str] = None,
+        name: str | None = None,
         key: Key = None,
         **kwargs: t.Any,
     ) -> t.Any:
         """Performs the value of the field by its name.
 
-        It takes any string which represents the name of any method of
+        It takes any string that represents the name of any method of
         any supported data provider and the ``**kwargs`` of this method.
 
-        .. note:: Some data providers have methods with the same names
+        .. note:: Some data providers have methods with the same names,
             and in such cases, you can explicitly define that the method
-            belongs to data-provider ``name='provider.name'`` otherwise
+            belongs to data-provider ``field(name='provider.name')`` otherwise
             it will return the data from the first provider which
             has a method ``name``.
 
@@ -162,17 +177,20 @@ class BaseField:
         :param key: A key function (any callable object)
             which will be applied to result.
         :param kwargs: Kwargs of method.
-        :return: Value which represented by method.
-        :raises ValueError: if provider not supported or if field not defined.
+        :return: The result of method.
+        :raises ValueError: if provider is not supported or if field is not defined.
         """
+        # Validate aliases before lookup
+        self._validate_aliases()
+
         if name is None:
             raise FieldError()
 
         random = self.get_random_instance()
 
-        # Check if there is a custom field handler.
-        if name in self._custom_fields:
-            result = self._custom_fields[name](random, **kwargs)  # type: ignore
+        # First, try to find a custom field handler.
+        if name in self._field_handlers:
+            result = self._field_handlers[name](random, **kwargs)  # type: ignore
         else:
             result = self._lookup_method(name)(**kwargs)
 
@@ -186,7 +204,7 @@ class BaseField:
 
         return result
 
-    def register_field(self, field_name: str, field_handler: FieldHandler) -> None:
+    def register_handler(self, field_name: str, field_handler: FieldHandler) -> None:
         """Register a new field handler.
 
         :param field_name: Name of the field.
@@ -197,7 +215,7 @@ class BaseField:
             raise TypeError("Field name must be a string.")
 
         if not field_name.isidentifier():
-            raise ValueError("Field name must be a valid Python identifier.")
+            raise FieldNameError(field_name)
 
         if not callable(field_handler):
             raise TypeError("Handler must be a callable object.")
@@ -207,27 +225,49 @@ class BaseField:
         if len(callable_signature.parameters) <= 1:
             raise FieldArityError()
 
-        if field_name not in self._custom_fields:
-            self._custom_fields[field_name] = field_handler
+        if field_name not in self._field_handlers:
+            self._field_handlers[field_name] = field_handler
 
-    def register_fields(self, fields: RegisterableFieldHandlers) -> None:
-        """Register a new field handlers.
+    def handle(
+        self, field_name: str | None = None
+    ) -> t.Callable[[FieldHandler], FieldHandler]:
+        """Decorator for registering a custom field handler.
+
+        You can use this decorator only for functions,
+        not for any other callables.
+
+        .. versionadded:: 12.0.0
+
+        :param field_name: Name of the field.
+            If not specified, the name of the function is used.
+        :return: Decorator.
+        """
+
+        def decorator(field_handler: FieldHandler) -> FieldHandler:
+            _field_name = field_name or field_handler.__name__
+            self.register_handler(_field_name, field_handler)
+            return field_handler
+
+        return decorator
+
+    def register_handlers(self, fields: RegisterableFieldHandlers) -> None:
+        """Register the new field handlers.
 
         :param fields: A sequence of sequences with field name and handler.
         :return: None.
         """
         for name, handler in fields:
-            self.register_field(name, handler)
+            self.register_handler(name, handler)
 
-    def unregister_field(self, field_name: str) -> None:
+    def unregister_handler(self, field_name: str) -> None:
         """Unregister a field handler.
 
         :param field_name: Name of the field.
         """
-        if field_name in self._custom_fields:
-            del self._custom_fields[field_name]
 
-    def unregister_fields(self, field_names: t.Sequence[str] = ()) -> None:
+        self._field_handlers.pop(field_name, None)
+
+    def unregister_handlers(self, field_names: t.Sequence[str] = ()) -> None:
         """Unregister a field handlers with given names.
 
         :param field_names: Names of the fields.
@@ -235,23 +275,21 @@ class BaseField:
         """
 
         for name in field_names:
-            self.unregister_field(name)
+            self.unregister_handler(name)
 
-    def unregister_all_fields(self) -> None:
-        """Unregister all field handlers.
+    def unregister_all_handlers(self) -> None:
+        """Unregister all custom field handlers.
 
         :return: None.
         """
-        self._custom_fields.clear()
+        self._field_handlers.clear()
 
     def __str__(self) -> str:
-        return f"{self.__class__.__name__} <{self._gen.locale}>"
+        return f"{self.__class__.__name__} <{self._generic.locale}>"
 
 
 class Field(BaseField):
-    """Greedy field.
-
-    The field which evaluates immediately.
+    """Greedy field (evaluates immediately).
 
     .. warning::
 
@@ -321,12 +359,12 @@ class Fieldset(BaseField):
         )
         super().__init__(*args, **kwargs)
 
-    def __call__(self, *args: t.Any, **kwargs: t.Any) -> t.List[t.Any]:
+    def __call__(self, *args: t.Any, **kwargs: t.Any) -> list[t.Any]:
         """Perform fieldset.
 
         :param args: Arguments for field.
         :param kwargs: Keyword arguments for field.
-        :raises FieldsetError: If iterations less than 1.
+        :raises FieldsetError: If parameter **i** is less than 1.
         :return: List of values.
         """
         min_iterations = 1
@@ -345,10 +383,9 @@ class Schema:
     """Class which return list of filled schemas."""
 
     __slots__ = (
-        "_count",
-        "_schema",
+        "__counter",
+        "__schema",
         "iterations",
-        "_min_iterations",
     )
 
     def __init__(self, schema: CallableSchema, iterations: int = 10) -> None:
@@ -358,27 +395,21 @@ class Schema:
             This parameter is keyword-only. The default value is 10.
         :param schema: A schema (must be a callable object).
         """
+        if iterations < 1:
+            raise ValueError("Number of iterations should be greater than 1.")
+
+        self.iterations = iterations
         if schema and callable(schema):  # type: ignore[truthy-function]
-            self._schema = schema
-            self._count = 0
-            self._min_iterations = 1
-            if iterations >= self._min_iterations:
-                self.iterations = iterations
-            else:
-                raise ValueError(
-                    f"Iterations must be greater than {self._min_iterations}"
-                )
+            self.__schema = schema
+            self.__counter = 0
         else:
-            # This is just a better error message
             raise SchemaError()
 
     def to_csv(self, file_path: str, **kwargs: t.Any) -> None:
         """Export a schema as a CSV file.
 
-        :param file_path: File path.
+        :param file_path: The file path.
         :param kwargs: The keyword arguments for :py:class:`csv.DictWriter` class.
-
-        *New in version 5.3.0*
         """
         data = self.create()
         with open(file_path, "w", encoding="utf-8", newline="") as fp:
@@ -390,10 +421,8 @@ class Schema:
     def to_json(self, file_path: str, **kwargs: t.Any) -> None:
         """Export a schema as a JSON file.
 
-        :param file_path: File path.
+        :param file_path: File a path.
         :param kwargs: Extra keyword arguments for :py:func:`json.dump` class.
-
-        *New in version 5.3.0*
         """
         with open(file_path, "w", encoding="utf-8") as fp:
             json.dump(self.create(), fp, **kwargs)
@@ -401,15 +430,13 @@ class Schema:
     def to_pickle(self, file_path: str, **kwargs: t.Any) -> None:
         """Export a schema as the pickled representation of the object to the file.
 
-        :param file_path: File path.
+        :param file_path: The file path.
         :param kwargs: Extra keyword arguments for :py:func:`pickle.dump` class.
-
-        *New in version 5.3.0*
         """
         with open(file_path, "wb") as fp:
             pickle.dump(self.create(), fp, **kwargs)
 
-    def create(self) -> t.List[JSON]:
+    def create(self) -> list[JSON]:
         """Creates a list of a fulfilled schemas.
 
         .. note::
@@ -420,16 +447,16 @@ class Schema:
 
         :return: List of fulfilled schemas.
         """
-        return [self._schema() for _ in range(self.iterations)]
+        return [self.__schema() for _ in range(self.iterations)]
 
     def __next__(self) -> JSON:
         """Return the next item from the iterator."""
-        if self._count < self.iterations:
-            self._count += 1
-            return self._schema()
+        if self.__counter < self.iterations:
+            self.__counter += 1
+            return self.__schema()
         raise StopIteration
 
     def __iter__(self) -> "Schema":
         """Return the iterator object itself."""
-        self._count = 0
+        self.__counter = 0
         return self

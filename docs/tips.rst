@@ -3,7 +3,9 @@
 Tricks and Tips
 ===============
 
-Working with ORM
+This section contains some tricks and tips for using Mimesis.
+
+Dealing with ORM
 ----------------
 
 If you need to generate data and import it into a database we strongly
@@ -28,8 +30,8 @@ Very bad:
 For ORM integration, you might find it useful to use `mimesis-factory`_.
 
 
-Dummy API Endpoints
--------------------
+Test API Endpoints
+------------------
 
 You can create dummy API endpoints when you have not data,
 but need them and know the structure of the endpoint's response.
@@ -65,9 +67,6 @@ Let's define the structure of the dummy response.
 
 Now, you can return unique response with JSON for each request.
 
-Django Dummy API Endpoint
--------------------------
-
 Basically you need just create simple view, which returns `JsonResponse`:
 
 .. code-block:: python
@@ -77,18 +76,6 @@ Basically you need just create simple view, which returns `JsonResponse`:
     def users(request):
         dummy_data = dummy_users.create(iterations=1)
         return JsonResponse(dummy_data)
-
-
-For DRF the same, but in terms of DRF:
-
-.. code-block:: python
-
-    from dummy_endpoints import dummy_users
-
-    class Users(APIView):
-        def get(self, request):
-            data = dummy_users.create(iterations=1)
-            return Response(data)
 
 Response:
 
@@ -111,45 +98,8 @@ Response:
       },
     ]
 
-Flask Dummy API Endpoint
-------------------------
 
-The same way as above:
-
-.. code-block:: python
-
-    from dummy_endpoints import dummy_users
-
-    @app.route('/users')
-    def users():
-        dummy_data = dummy_users.create(iterations=1)
-        return jsonify(dummy_data)
-
-
-Response:
-
-.. code-block:: json
-
-    [
-      {
-        "id": "f2b326e3-4ce7-1ae9-9e6d-34a28fb70106",
-        "name": "Johnny",
-        "surname": "Waller",
-        "email": "vault1907@live.com",
-        "age": 47,
-        "username": "CaterpillarsSummational_1995",
-        "occupation": "Scrap Dealer",
-        "address": {
-          "street": "Tonquin",
-          "city": "Little Elm",
-          "zipcode": "30328"
-        }
-      },
-    ]
-
-
-
-Integration with third-party libraries
+Integration with 3rd-party libraries
 --------------------------------------
 
 - `mimesis-factory`_ - Integration with ``factory_boy``.

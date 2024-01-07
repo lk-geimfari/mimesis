@@ -6,9 +6,7 @@ but frequently used in this project.
 """
 
 import random as random_module
-import string
 import typing as t
-import uuid
 
 from mimesis.types import MissingSeed, Seed
 
@@ -29,22 +27,22 @@ class Random(random_module.Random):
     This class can be extended according to specific requirements.
     """
 
-    def randints(self, amount: int = 3, a: int = 1, b: int = 100) -> t.List[int]:
-        """Generate list of random integers.
+    def randints(self, n: int = 3, a: int = 1, b: int = 100) -> list[int]:
+        """Generate a list of random integers.
 
-        :param amount: Amount of elements.
+        :param n: Number of elements.
         :param a: Minimum value of range.
         :param b: Maximum value of range.
         :return: List of random integers.
-        :raises ValueError: if amount less or equal to zero.
+        :raises ValueError: if the number is less or equal to zero.
         """
-        if amount <= 0:
+        if n <= 0:
             raise ValueError("Amount out of range.")
 
-        return [int(self.random() * (b - a)) + a for _ in range(amount)]
+        return [int(self.random() * (b - a)) + a for _ in range(n)]
 
     def _generate_string(self, str_seq: str, length: int = 10) -> str:
-        """Generate random string created from string sequence.
+        """Generate random string created from a string sequence.
 
         :param str_seq: String sequence of letters or digits.
         :param length: Max value.
@@ -52,7 +50,12 @@ class Random(random_module.Random):
         """
         return "".join(self.choices(str_seq, k=length))
 
-    def custom_code(self, mask: str = "@###", char: str = "@", digit: str = "#") -> str:
+    def generate_string_by_mask(
+        self,
+        mask: str = "@###",
+        char: str = "@",
+        digit: str = "#",
+    ) -> str:
         """Generate custom code using ascii uppercase and random integers.
 
         :param mask: Mask of code.
@@ -95,37 +98,15 @@ class Random(random_module.Random):
         """
         return round(a + (b - a) * self.random(), precision)
 
-    def _randstr(self, unique: bool = False, length: t.Optional[int] = None) -> str:
-        """Generate random string value.
-
-        This method can be especially useful when you need to generate
-        only unique values in your provider. Just pass parameter unique=True.
-
-        Basically, this method is just a simple wrapper around :py:class:`uuid.UUID`.
-
-        :param unique: Generate only unique values.
-        :param length: Length of string. Default range is [a, b].
-        :return: Random string.
-
-        """
-        if unique:
-            return str(uuid.uuid4().hex)
-
-        if length is None:
-            length = self.randint(16, 128)
-
-        characters = string.ascii_letters + string.digits
-        return "".join(self.choices(characters, k=length))
-
     def randbytes(self, n: int = 16) -> bytes:
         """Generate n random bytes."""
         return self.getrandbits(n * 8).to_bytes(n, "little")
 
-    def weighted_choice(self, choices: t.Dict[t.Any, float]) -> t.Any:
+    def weighted_choice(self, choices: dict[t.Any, float]) -> t.Any:
         """Returns a random element according to the specified weights.
 
         :param choices: A dictionary where keys are choices and values are weights.
-        :raises ValueError: if choices is empty.
+        :raises ValueError: If choices are empty.
         :return: Random key from dictionary.
         """
         if not choices:

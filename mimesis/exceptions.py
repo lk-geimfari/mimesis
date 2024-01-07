@@ -8,7 +8,7 @@ from mimesis.enums import Locale
 class LocaleError(ValueError):
     """Raised when a locale isn't supported."""
 
-    def __init__(self, locale: t.Union[Locale, str]) -> None:
+    def __init__(self, locale: Locale | str) -> None:
         """Initialize attributes for informative output.
 
         :param locale: Locale.
@@ -23,11 +23,14 @@ class SchemaError(ValueError):
     """Raised when a schema is unsupported."""
 
     def __str__(self) -> str:
-        return "The schema must be a callable object."
+        return (
+            "The schema must be a callable object that returns a dict."
+            "See https://mimesis.name/en/master/schema.html for more details."
+        )
 
 
 class NonEnumerableError(TypeError):
-    """Raised when object is not instance of Enum."""
+    """Raised when an object is not an instance of Enum."""
 
     message = "You should use one item of: «{}» of the object mimesis.enums.{}"
 
@@ -47,7 +50,9 @@ class NonEnumerableError(TypeError):
 
 
 class FieldError(ValueError):
-    def __init__(self, name: t.Optional[str] = None) -> None:
+    """Raised when field is not found."""
+
+    def __init__(self, name: str | None = None) -> None:
         """Initialize attributes for more informative output.
 
         :param name: Name of the field.
@@ -66,9 +71,35 @@ class FieldsetError(ValueError):
     """Raised when a resulting fieldset is empty."""
 
     def __str__(self) -> str:
-        return "The «iterations» parameter must be greater than 1."
+        return "The «iterations» parameter should be greater than 1."
+
+
+class FieldNameError(ValueError):
+    """Raised when a field name is invalid."""
+
+    def __init__(self, name: str | None = None) -> None:
+        """Initialize attributes for more informative output.
+
+        :param name: Name of the field.
+        """
+        self.name = name
+
+    def __str__(self) -> str:
+        return f"The field name «{self.name}» is not a valid Python identifier."
 
 
 class FieldArityError(ValueError):
+    """Raised when registering field handler has incompatible arity."""
+
     def __str__(self) -> str:
         return "The custom handler must accept at least two arguments: 'random' and '**kwargs'"
+
+
+class AliasesTypeError(TypeError):
+    """Raised when the aliases attribute is set to a format other than a flat dictionary."""
+
+    def __str__(self) -> str:
+        return (
+            "The 'aliases' attribute needs to be a non-nested dictionary where "
+            "keys are the aliases and values are the corresponding field names."
+        )

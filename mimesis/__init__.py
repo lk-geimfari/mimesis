@@ -1,9 +1,10 @@
-"""Mimesis is a Python library, which helps generate fake data.
+"""Mimesis: Fake Data Generator.
 
-Copyright (c) 2016 - 2023 Isaak Uchakaev (Likid Geimfari).
+Copyright (c) 2016 - 2024 Isaak Uchakaev (Likid Geimfari).
 Website: https://mimesis.name
-Email: <likid.geimfari@gmail.com>
+Email: <hey@isaak.dev>
 Repository: https://github.com/lk-geimfari/mimesis
+License: MIT License.
 """
 
 from mimesis import keys
@@ -16,6 +17,7 @@ from mimesis.enums import (
     DocumentFile,
     DSNType,
     EANFormat,
+    EmojyCategory,
     FileType,
     Gender,
     ImageFile,
@@ -35,6 +37,7 @@ from mimesis.enums import (
 from mimesis.exceptions import (
     FieldArityError,
     FieldError,
+    FieldNameError,
     FieldsetError,
     LocaleError,
     NonEnumerableError,
@@ -123,6 +126,7 @@ __all__ = [
     "TLDType",
     "URLScheme",
     "VideoFile",
+    "EmojyCategory",
     # Exceptions:
     "LocaleError",
     "SchemaError",
@@ -130,6 +134,7 @@ __all__ = [
     "FieldError",
     "FieldsetError",
     "FieldArityError",
+    "FieldNameError",
     # Meta:
     "__version__",
     "__title__",
@@ -140,10 +145,10 @@ __all__ = [
     "__license__",
 ]
 
-__version__ = "11.1.0"
+__version__ = "12.0.0"
 __title__ = "mimesis"
 __description__ = "Mimesis: Fake Data Generator."
 __url__ = "https://github.com/lk-geimfari/mimesis"
 __author__ = "Isaak Uchakaev (Likid Geimfari)"
-__author_email__ = "likid.geimfari@gmail.com"
+__author_email__ = "hey@isaak.dev"
 __license__ = "MIT License"

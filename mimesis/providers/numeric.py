@@ -22,8 +22,8 @@ class Numeric(BaseProvider):
     class Meta:
         name = "numeric"
 
-    def increment(self, accumulator: t.Optional[str] = None) -> int:
-        """Generate incremental number.
+    def increment(self, accumulator: str | None = None) -> int:
+        """Generates an incrementing number.
 
         Each call of this method returns an incrementing number (with the step of +1).
 
@@ -55,7 +55,7 @@ class Numeric(BaseProvider):
     def float_number(
         self, start: float = -1000.0, end: float = 1000.0, precision: int = 15
     ) -> float:
-        """Generate random float number in range [start, end].
+        """Generates a random float number in range [start, end].
 
         :param start: Start range.
         :param end:  End range.
@@ -67,8 +67,8 @@ class Numeric(BaseProvider):
 
     def floats(
         self, start: float = 0, end: float = 1, n: int = 10, precision: int = 15
-    ) -> t.List[float]:
-        """Generate a list of random float numbers.
+    ) -> list[float]:
+        """Generates a list of random float numbers.
 
         :param start: Start range.
         :param end: End range.
@@ -80,7 +80,7 @@ class Numeric(BaseProvider):
         return [self.float_number(start, end, precision) for _ in range(n)]
 
     def integer_number(self, start: int = -1000, end: int = 1000) -> int:
-        """Generate random integer from start to end.
+        """Generates a random integer from start to end.
 
         :param start: Start range.
         :param end: End range.
@@ -88,15 +88,12 @@ class Numeric(BaseProvider):
         """
         return self.random.randint(start, end)
 
-    def integers(self, start: int = 0, end: int = 10, n: int = 10) -> t.List[int]:
-        """Generate a list of random integers.
-
-        Integers can be negative or positive numbers.
-        .. note: You can use both positive and negative numbers.
+    def integers(self, start: int = 0, end: int = 10, n: int = 10) -> list[int]:
+        """Generates a list of random integers.
 
         :param start: Start.
         :param end: End.
-        :param n: Length of list.
+        :param n: Length of the list.
         :return: List of integers.
 
         :Example:
@@ -113,7 +110,7 @@ class Numeric(BaseProvider):
         precision_real: int = 15,
         precision_imag: int = 15,
     ) -> complex:
-        """Generate a random complex number.
+        """Generates a random complex number.
 
         :param start_real: Start real range.
         :param end_real: End real range.
@@ -138,8 +135,8 @@ class Numeric(BaseProvider):
         precision_real: int = 15,
         precision_imag: int = 15,
         n: int = 10,
-    ) -> t.List[complex]:
-        """Generate a list of random complex numbers.
+    ) -> list[complex]:
+        """Generates a list of random complex numbers.
 
         :param start_real: Start real range.
         :param end_real: End real range.
@@ -167,7 +164,7 @@ class Numeric(BaseProvider):
         return numbers
 
     def decimal_number(self, start: float = -1000.0, end: float = 1000.0) -> Decimal:
-        """Generate random decimal number.
+        """Generates a random decimal number.
 
         :param start:  Start range.
         :param end: End range.
@@ -177,13 +174,13 @@ class Numeric(BaseProvider):
 
     def decimals(
         self, start: float = 0.0, end: float = 1000.0, n: int = 10
-    ) -> t.List[Decimal]:
-        """Generate a decimal number as :py:class:`decimal.Decimal` objects.
+    ) -> list[Decimal]:
+        """Generates a list of decimal numbers.
 
         :param start: Start range.
         :param end: End range.
         :param n: Length of the list.
-        :return: A list of random decimal numbers.
+        :return: A list of :py:class:`decimal.Decimal` objects.
         """
         return [self.decimal_number(start, end) for _ in range(n)]
 
@@ -192,14 +189,12 @@ class Numeric(BaseProvider):
         m: int = 10,
         n: int = 10,
         num_type: NumType = NumType.FLOAT,
-        **kwargs: t.Any
+        **kwargs: t.Any,
     ) -> Matrix:
-        """Generate m x n matrix with random numbers.
+        """Generates m x n matrix with a random numbers.
 
-        This method works with variety of types,
+        This method works with a variety of types,
         so you can pass method-specific `**kwargs`.
-
-        See code for more details.
 
         :param m: Number of rows.
         :param n: Number of columns.

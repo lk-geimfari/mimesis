@@ -19,7 +19,8 @@ class BaseProvider:
     """This is a base class for all providers.
 
 
-    :attr: random: Instance of :class:`mimesis.random.Random`.
+    :attr: random: An instance of :class:`mimesis.random.Random`.
+    :attr: seed: Seed for random.
     """
 
     class Meta:
@@ -29,12 +30,12 @@ class BaseProvider:
         self,
         *,
         seed: Seed = MissingSeed,
-        random: t.Optional[_random.Random] = None,
+        random: _random.Random | None = None,
     ) -> None:
         """Initialize attributes.
 
-        Keep in mind, that locale-independent data providers will work
-        only with keyword-only arguments since version 5.0.0.
+        Keep in mind that locale-independent data providers will work
+        only with keyword-only arguments.
 
         :param seed: Seed for random.
             When set to `None` the current system time is used.
@@ -53,10 +54,10 @@ class BaseProvider:
         self.reseed(seed)
 
     def reseed(self, seed: Seed = MissingSeed) -> None:
-        """Reseed the internal random generator.
+        """Reseeds the internal random generator.
 
         In case we use the default seed, we need to create a per instance
-        random generator, in this case two providers with the same seed
+        random generator. In this case, two providers with the same seed
         will always return the same values.
 
         :param seed: Seed for random.
@@ -71,12 +72,12 @@ class BaseProvider:
             self.random.seed(t.cast(t.Any, seed))
 
     def validate_enum(self, item: t.Any, enum: t.Any) -> t.Any:
-        """Validate enum parameter of method in subclasses of BaseProvider.
+        """Validates various enum objects that are used as arguments for methods.
 
-        :param item: Item of enum object.
+        :param item: Item of an enum object.
         :param enum: Enum object.
         :return: Value of item.
-        :raises NonEnumerableError: if ``item`` not in ``enum``.
+        :raises NonEnumerableError: If enums has not such an item.
         """
         if item is None:
             result = self.random.choice_enum_item(enum)
@@ -86,6 +87,20 @@ class BaseProvider:
             raise NonEnumerableError(enum)
 
         return result.value
+
+    def _read_global_file(self, file_name: str) -> t.Any:
+        """Reads JSON file and return dict.
+
+        Reads JSON file from mimesis/data/global/ directory.
+
+        :param file_name: Path to file.
+        :raises FileNotFoundError: If the file was not found.
+        :return: JSON data.
+        """
+        with open(DATADIR.joinpath("global", file_name)) as f:
+            data = json.load(f)
+
+        return data
 
     def _has_seed(self) -> bool:
         """Internal API to check if seed is set."""
@@ -133,7 +148,7 @@ class BaseDataProvider(BaseProvider):
         locale_obj = validate_locale(locale)
         self.locale = locale_obj.value
 
-    def extract(self, keys: t.List[str], default: t.Optional[t.Any] = None) -> t.Any:
+    def extract(self, keys: list[str], default: t.Any = None) -> t.Any:
         """Extracts nested values from JSON file by list of keys.
 
         :param keys: List of keys (order extremely matters).
@@ -148,7 +163,7 @@ class BaseDataProvider(BaseProvider):
             return default
 
     def _update_dict(self, initial: JSON, other: JSON) -> JSON:
-        """Recursively update a dictionary.
+        """Recursively updates a dictionary.
 
         :param initial: Dict to update.
         :param other: Dict to update from.
@@ -189,9 +204,9 @@ class BaseDataProvider(BaseProvider):
         self._data = data
 
     def get_current_locale(self) -> str:
-        """Get current locale.
+        """Returns current locale.
 
-        If locale is not defined then this method will always return ``en``,
+        If locale is not defined, then this method will always return ``en``,
         because ``en`` is default locale for all providers, excluding builtins.
 
         :return: Current locale.
@@ -213,7 +228,7 @@ class BaseDataProvider(BaseProvider):
         self,
         locale: Locale,
     ) -> t.Generator["BaseDataProvider", None, None]:
-        """Context manager which allows overriding current locale.
+        """Context manager that allows overriding current locale.
 
         Temporarily overrides current locale for
         locale-dependent providers.

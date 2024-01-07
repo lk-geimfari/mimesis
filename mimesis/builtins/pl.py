@@ -1,7 +1,5 @@
 """Specific data provider for Poland (pl)."""
 
-import typing as t
-
 from mimesis.enums import Gender
 from mimesis.locales import Locale
 from mimesis.providers import BaseDataProvider, Datetime
@@ -38,12 +36,14 @@ class PolandSpecProvider(BaseDataProvider):
         return "".join(map(str, nip_digits))
 
     def pesel(
-        self, birth_date: t.Optional[DateTime] = None, gender: t.Optional[Gender] = None
+        self,
+        birth_date: DateTime | None = None,
+        gender: Gender | None = None,
     ) -> str:
         """Generate random 11-digit PESEL.
 
         :param birth_date: Initial birthdate (optional)
-        :param gender: Gender of person
+        :param gender: Gender of the person.
         :return: Valid 11-digit PESEL
         """
         date_object = birth_date

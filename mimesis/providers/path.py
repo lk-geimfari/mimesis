@@ -40,7 +40,7 @@ class Path(BaseProvider):
         name = "path"
 
     def root(self) -> str:
-        """Generate a root dir path.
+        """Generates a root dir path.
 
         :return: Root dir.
 
@@ -50,7 +50,7 @@ class Path(BaseProvider):
         return str(self._pathlib_home.parent)
 
     def home(self) -> str:
-        """Generate a home path.
+        """Generates a home path.
 
         :return: Home path.
 
@@ -60,7 +60,7 @@ class Path(BaseProvider):
         return str(self._pathlib_home)
 
     def user(self) -> str:
-        """Generate a random user.
+        """Generates a random user.
 
         :return: Path to user.
 
@@ -72,7 +72,7 @@ class Path(BaseProvider):
         return str(self._pathlib_home / user)
 
     def users_folder(self) -> str:
-        """Generate a random path to user's folders.
+        """Generates a random path to user's folders.
 
         :return: Path.
 
@@ -84,7 +84,7 @@ class Path(BaseProvider):
         return str(self._pathlib_home / user / folder)
 
     def dev_dir(self) -> str:
-        """Generate a random path to development directory.
+        """Generates a random path to development directory.
 
         :return: Path.
 
@@ -97,7 +97,7 @@ class Path(BaseProvider):
         return str(self._pathlib_home / user / folder / stack)
 
     def project_dir(self) -> str:
-        """Generate a random path to project directory.
+        """Generates a random path to project directory.
 
         :return: Path to project.
 

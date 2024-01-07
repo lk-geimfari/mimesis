@@ -5,9 +5,9 @@ You should always import enums from this module if you want
 behavior for the methods that differ from the default behavior.
 
 You should never use your own enums in methods because in this case,
-there no guarantee that you will get the result which you actually expected.
+there is no guarantee that you will get the result which you actually expected.
 
-Below you can see an example of usage enums in methods of data providers.
+Below, you can see an example of usage enums in methods of data providers.
 """
 import typing as t
 from enum import Enum, auto
@@ -16,7 +16,7 @@ from enum import Enum, auto
 class Locale(Enum):
     """This class provides access to the supported locales from one place.
 
-    An argument for all locale-depend providers.
+    An argument for all local-depend providers.
     """
 
     CS = "cs"
@@ -347,3 +347,16 @@ class TimestampFormat(Enum):
     POSIX = auto()
     ISO_8601 = auto()
     RFC_3339 = auto()
+
+
+class EmojyCategory(Enum):
+    DEFAULT = "smileys_and_emotion"
+    SMILEYS_AND_EMOTION = "smileys_and_emotion"
+    PEOPLE_AND_BODY = "people_and_body"
+    ANIMALS_AND_NATURE = "animals_and_nature"
+    FOOD_AND_DRINK = "food_and_drink"
+    TRAVEL_AND_PLACES = "travel_and_places"
+    ACTIVITIES = "activities"
+    OBJECTS = "objects"
+    SYMBOLS = "symbols"
+    FLAGS = "flags"
