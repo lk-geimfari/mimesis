@@ -1,54 +1,35 @@
 """Provides all at one."""
 
+import importlib
 import inspect
 import typing as t
 
 from mimesis.locales import Locale
-from mimesis.providers.address import Address
 from mimesis.providers.base import BaseDataProvider, BaseProvider
-from mimesis.providers.binaryfile import BinaryFile
-from mimesis.providers.choice import Choice
-from mimesis.providers.code import Code
-from mimesis.providers.cryptographic import Cryptographic
-from mimesis.providers.date import Datetime
-from mimesis.providers.development import Development
-from mimesis.providers.file import File
-from mimesis.providers.finance import Finance
-from mimesis.providers.food import Food
-from mimesis.providers.hardware import Hardware
-from mimesis.providers.internet import Internet
-from mimesis.providers.numeric import Numeric
-from mimesis.providers.path import Path
-from mimesis.providers.payment import Payment
-from mimesis.providers.person import Person
-from mimesis.providers.science import Science
-from mimesis.providers.text import Text
-from mimesis.providers.transport import Transport
 from mimesis.types import MissingSeed, Seed
 
 __all__ = ["Generic"]
 
-DEFAULT_PROVIDERS = (
-    Address,
-    BinaryFile,
-    Finance,
-    Choice,
-    Code,
-    Choice,
-    Datetime,
-    Development,
-    File,
-    Food,
-    Hardware,
-    Internet,
-    Numeric,
-    Path,
-    Payment,
-    Person,
-    Science,
-    Text,
-    Transport,
-    Cryptographic,
+DEFAULT_PROVIDERS: tuple[str, ...] = (
+    "Address",
+    "BinaryFile",
+    "Finance",
+    "Choice",
+    "Code",
+    "Datetime",
+    "Development",
+    "File",
+    "Food",
+    "Hardware",
+    "Internet",
+    "Numeric",
+    "Path",
+    "Payment",
+    "Person",
+    "Science",
+    "Text",
+    "Transport",
+    "Cryptographic",
 )
 
 
@@ -65,6 +46,8 @@ class Generic(BaseProvider):
         self.locale = locale
 
         for provider in DEFAULT_PROVIDERS:
+            module = importlib.import_module("mimesis.providers")
+            provider = getattr(module, provider)
             name = getattr(provider.Meta, "name")  # type: ignore
 
             # Check if a provider is locale-dependent.
