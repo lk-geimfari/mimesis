@@ -20,7 +20,6 @@ __all__ = [
     "CallableSchema",
     "Date",
     "DateTime",
-    "FieldCache",
     "JSON",
     "Key",
     "Keywords",
@@ -59,5 +58,3 @@ Matrix = list[list[Number]]
 CallableSchema = Callable[[], JSON]
 
 Key = Callable[[Any], Any] | None
-
-FieldCache = dict[str, Callable[[Any], Any]]

@@ -22,7 +22,6 @@ from mimesis.random import Random
 from mimesis.types import (
     JSON,
     CallableSchema,
-    FieldCache,
     Key,
     MissingSeed,
     Seed,
@@ -30,6 +29,7 @@ from mimesis.types import (
 
 __all__ = ["BaseField", "Field", "Fieldset", "Schema"]
 
+FieldCache = dict[str, t.Callable[[t.Any], t.Any]]
 FieldHandler = t.Callable[[Random, t.Any], t.Any]
 RegisterableFieldHandler = tuple[str, FieldHandler]
 RegisterableFieldHandlers = t.Sequence[RegisterableFieldHandler]
@@ -51,7 +51,7 @@ class BaseField:
         """
         self._generic = Generic(locale, seed)
         self._cache: FieldCache = {}
-        self._field_handlers: dict[str, FieldHandler] = {}
+        self._handlers: dict[str, FieldHandler] = {}
         self.aliases: dict[str, str] = {}
 
     def reseed(self, seed: Seed = MissingSeed) -> None:
@@ -189,8 +189,8 @@ class BaseField:
         random = self.get_random_instance()
 
         # First, try to find a custom field handler.
-        if name in self._field_handlers:
-            result = self._field_handlers[name](random, **kwargs)  # type: ignore
+        if name in self._handlers:
+            result = self._handlers[name](random, **kwargs)  # type: ignore
         else:
             result = self._lookup_method(name)(**kwargs)
 
@@ -225,8 +225,8 @@ class BaseField:
         if len(callable_signature.parameters) <= 1:
             raise FieldArityError()
 
-        if field_name not in self._field_handlers:
-            self._field_handlers[field_name] = field_handler
+        if field_name not in self._handlers:
+            self._handlers[field_name] = field_handler
 
     def handle(
         self, field_name: str | None = None
@@ -265,7 +265,7 @@ class BaseField:
         :param field_name: Name of the field.
         """
 
-        self._field_handlers.pop(field_name, None)
+        self._handlers.pop(field_name, None)
 
     def unregister_handlers(self, field_names: t.Sequence[str] = ()) -> None:
         """Unregister a field handlers with given names.
@@ -282,7 +282,7 @@ class BaseField:
 
         :return: None.
         """
-        self._field_handlers.clear()
+        self._handlers.clear()
 
     def __str__(self) -> str:
         return f"{self.__class__.__name__} <{self._generic.locale}>"
