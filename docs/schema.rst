@@ -291,7 +291,7 @@ Let's take a look at the example:
         '📧': 'email',
         '📞': 'person.telephone',
         '🍆': 'vegetable',
-        'ебаныйтокен': 'token_hex',
+        'токен': 'token_hex',
     })
 
 
@@ -309,7 +309,7 @@ You can now use aliases instead of standard field names:
     '+17181130182'
     >>> field('🍆')
     'Radicchio'
-    >>> field('ебаныйтокен')
+    >>> field('токен')
     'aef9765d029c91ac737d04119c94a2b52a52d34b61bc39bec393e82e7bf0b8b5'
 
 
