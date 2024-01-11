@@ -119,28 +119,28 @@ class Address(BaseDataProvider):
     def region(self, *args: t.Any, **kwargs: t.Any) -> str:
         """Generates a random region.
 
-        An alias for :meth:`~Address.state()`.
+        An alias for :meth:`~.state()`.
         """
         return self.state(*args, **kwargs)
 
     def province(self, *args: t.Any, **kwargs: t.Any) -> str:
         """Generates a random province.
 
-        An alias for :meth:`~Address.state()`.
+        An alias for :meth:`~.state()`.
         """
         return self.state(*args, **kwargs)
 
     def federal_subject(self, *args: t.Any, **kwargs: t.Any) -> str:
         """Generates a random federal_subject (Russia).
 
-        An alias for :meth:`~Address.state()`.
+        An alias for :meth:`~.state()`.
         """
         return self.state(*args, **kwargs)
 
     def prefecture(self, *args: t.Any, **kwargs: t.Any) -> str:
         """Generates a random prefecture.
 
-        An alias for :meth:`~Address.state()`.
+        An alias for :meth:`~.state()`.
         """
         return self.state(*args, **kwargs)
 
@@ -154,7 +154,7 @@ class Address(BaseDataProvider):
     def zip_code(self) -> str:
         """Generates a zip code.
 
-        An alias for :meth:`~Address.postal_code()`.
+        An alias for :meth:`~.postal_code()`.
 
         :return: Zip code.
         """

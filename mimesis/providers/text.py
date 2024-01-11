@@ -172,8 +172,8 @@ class Text(BaseDataProvider):
         category = self.validate_enum(category, EmojyCategory)
         symbol = self.random.choice(self._emojis[category])
 
+        base = 16
         # Some emoji consist of multiple Unicode characters.
         if isinstance(symbol, list):
-            return "".join([chr(int(s, 16)) for s in symbol])
-
-        return chr(int(symbol, 16))
+            return "".join([chr(int(s, base)) for s in symbol])
+        return chr(int(symbol, base))

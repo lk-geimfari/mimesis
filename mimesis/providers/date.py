@@ -31,7 +31,7 @@ class Datetime(BaseDataProvider):
     ) -> list[DateTime]:
         """Bulk create datetime objects.
 
-        This method creates list of datetime objects from
+        This method creates a list of datetime objects from
         ``date_start`` to ``date_end``.
 
         You can use the following keyword arguments:
@@ -150,7 +150,7 @@ class Datetime(BaseDataProvider):
 
         :param fmt: The format of date, if None then use standard
             accepted in the current locale.
-        :param kwargs: Keyword arguments for :meth:`~Datetime.date()`
+        :param kwargs: Keyword arguments for :meth:`~.date()`
         :return: Formatted date.
         """
         date_obj = self.date(**kwargs)
@@ -240,7 +240,7 @@ class Datetime(BaseDataProvider):
         """Generates datetime string in human-readable format.
 
         :param fmt: Custom format (default is format for current locale)
-        :param kwargs: Keyword arguments for :meth:`~Datetime.datetime()`
+        :param kwargs: Keyword arguments for :meth:`~.datetime()`
         :return: Formatted datetime string.
         """
         dt_obj = self.datetime(**kwargs)
@@ -276,7 +276,7 @@ class Datetime(BaseDataProvider):
         '2009-05-30T21:45:57.328600'
 
         :param fmt: Format of timestamp (Default is TimestampFormat.POSIX).
-        :param kwargs: Kwargs for :meth:`~Datetime.datetime()`.
+        :param kwargs: Kwargs for :meth:`~.datetime()`.
         :return: Timestamp.
         """
         self.validate_enum(fmt, TimestampFormat)

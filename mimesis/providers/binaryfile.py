@@ -1,8 +1,8 @@
 """Binary data provider."""
 
 import typing as t
-from pathlib import Path
 
+from mimesis.constants import DATADIR
 from mimesis.enums import (
     AudioFile,
     CompressedFile,
@@ -25,8 +25,6 @@ class BinaryFile(BaseProvider):
         :param seed: Seed.
         """
         super().__init__(*args, **kwargs)
-        self._data_dir = Path(__file__).parent.parent.joinpath("data", "bin")
-        self._sample_name: t.Final[str] = "sample"
 
     class Meta:
         name = "binaryfile"
@@ -37,7 +35,7 @@ class BinaryFile(BaseProvider):
         file_type: AudioFile | CompressedFile | DocumentFile | ImageFile | VideoFile,
     ) -> bytes:
         file_type = self.validate_enum(file_type, file_type.__class__)
-        file_path = self._data_dir.joinpath(f"{self._sample_name}.{file_type}")
+        file_path = DATADIR / "bin" / f"sample.{file_type}"
 
         with open(file_path, "rb") as file:
             return file.read()
