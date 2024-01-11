@@ -19,13 +19,7 @@ from mimesis.locales import Locale
 from mimesis.providers.base import BaseProvider
 from mimesis.providers.generic import Generic
 from mimesis.random import Random
-from mimesis.types import (
-    JSON,
-    CallableSchema,
-    Key,
-    MissingSeed,
-    Seed,
-)
+from mimesis.types import JSON, CallableSchema, Key, MissingSeed, Seed
 
 __all__ = ["BaseField", "Field", "Fieldset", "Schema"]
 
