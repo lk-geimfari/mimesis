@@ -18,6 +18,8 @@ The instances of :class:`~mimesis.schema.Field` and :class:`~mimesis.schema.Fiel
 that accept the name of the method to be called as the first argument (``name``), the ``key`` argument (a key function)
 as the second argument, and the remaining arguments as ``**kwargs`` passed to the method.
 
+See :ref:`api` for more information about the available providers and their methods.
+
 There are two ways to specify the field name: **explicit** and **implicit**. Let's take a look at each of them.
 
 Explicit
@@ -37,9 +39,9 @@ This code is equivalent to:
 
 .. code:: python
 
-    >>> from mimesis import Person
-    >>> person = Person()
-    >>> person.username(mask="U_d", drange=(100, 1000))
+    >>> from mimesis import Generic
+    >>> generic = Generic()
+    >>> generic.person.username(mask="U_d", drange=(100, 1000))
 
 
 The explicit way is more verbose but more reliable. It allows you to specify the
