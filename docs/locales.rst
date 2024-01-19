@@ -95,8 +95,8 @@ Country   Code    Associated attribute  Name                  Native Name
    🇨🇿    `cs`     **Locale.CS**         Czech                 Česky
    🇩🇰    `da`     **Locale.DA**         Danish                Dansk
    🇩🇪    `de`     **Locale.DE**         German                Deutsch
-   🇦🇹    `de-at`  **Locale.DE_AT**      Austrian german       Deutsch
-   🇨🇭    `de-ch`  **Locale.DE_CH**      Swiss german          Deutsch
+   🇦🇹    `de-at`  **Locale.DE_AT**      Austrian German       Deutsch
+   🇨🇭    `de-ch`  **Locale.DE_CH**      Swiss German          Deutsch
    🇬🇷	 `el`	  **Locale.EL**         Greek                 Ελληνικά
    🇺🇸    `en`     **Locale.EN**         English               English
    🇦🇺    `en-au`  **Locale.EN_AU**      Australian English    English
