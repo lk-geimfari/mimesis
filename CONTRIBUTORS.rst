@@ -91,7 +91,8 @@ Patches and Suggestions
 -  Nick Pope `(ngnpope)`_
 -  Arul Prabakaran `(arulprabakaran)`_
 -  Florian Kroiß `(Wooza)`_
-- Han Wang `(freddiewanah)`_
+-  Han Wang `(freddiewanah)`_
+-  David Gorup `(CerealKiller0807)`_
 
 
 .. _(lk-geimfari): https://github.com/lk-geimfari
@@ -162,3 +163,4 @@ Patches and Suggestions
 .. _(arulprabakaran): https://github.com/arulprabakaran
 .. _(Wooza): https://github.com/Wooza
 .. _(freddiewanah): https://github.com/freddiewanah
+.. _(CerealKiller0807): https://github.com/CerealKiller0807
