@@ -1441,7 +1441,7 @@ VRC_BY_LOCALES = {
     "fa": "IR",
     "fi": "FIN",
     "fr": "F",
-    "hr": "ZG",
+    "hr": "HR",
     "hu": "H",
     "is": "IS",
     "it": "I",
