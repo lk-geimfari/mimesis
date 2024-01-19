@@ -1,0 +1,69 @@
+{
+  "day": {
+    "abbr": [
+      "Ned.",
+      "Pet.",
+      "Pon.",
+      "Sri.",
+      "Sub.",
+      "Uto.",
+      "Čet."
+    ],
+    "name": [
+      "Nedjelja",
+      "Petak",
+      "Ponedjeljak",
+      "Srijeda",
+      "Subota",
+      "Utorak",
+      "Četvrtak"
+    ]
+  },
+  "formats": {
+    "date": "%d.%m.%Y",
+    "time": "%H:%M:%S"
+  },
+  "month": {
+    "abbr": [
+      "Kol.",
+      "Lip.",
+      "Lis.",
+      "Ožu.",
+      "Pro.",
+      "Ruj.",
+      "Sij.",
+      "Srp.",
+      "Stu.",
+      "Svi.",
+      "Tra.",
+      "Velj."
+    ],
+    "name": [
+      "Kolovoz",
+      "Lipanj",
+      "Listopad",
+      "Ožujak",
+      "Prosinac",
+      "Rujan",
+      "Siječanj",
+      "Srpanj",
+      "Studeni",
+      "Svibanj",
+      "Travanj",
+      "Veljača"
+    ]
+  },
+  "periodicity": [
+    "Dnevno",
+    "Godišnje",
+    "Jednom",
+    "Mjesečno",
+    "Nikad",
+    "Svakih nekoliko dana",
+    "Svakih nekoliko godina",
+    "Svakih nekoliko mjeseci",
+    "Svakih nekoliko tjedana",
+    "Tjedno",
+    "Često"
+  ]
+}
