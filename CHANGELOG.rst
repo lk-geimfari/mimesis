@@ -1,7 +1,7 @@
 Version 12.2.0
 --------------
 
-- Added Croatian locale support (``Locale.HR``).
+- Added Croatian locale support (``Locale.HR``). Great appreciation to `@CerealKiller0807 <https://github.com/CerealKiller0807>`_ for this contribution.
 
 Version 12.1.0
 --------------
