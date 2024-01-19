@@ -5,9 +5,11 @@ import pytest
 from mimesis.exceptions import LocaleError
 from mimesis.locales import Locale, validate_locale
 
+SUPPORTED_LOCALES_COUNT = 35
+
 
 def test_locale_enum():
-    assert len(list(Locale)) == 34
+    assert len(list(Locale)) == SUPPORTED_LOCALES_COUNT
     assert issubclass(Locale, Enum)
 
 
