@@ -84,7 +84,7 @@ You can also use it with :class:`~mimesis.Generic()`:
 Supported locales
 -----------------
 
-Mimesis currently includes support for 34 different locales:
+Mimesis currently includes support for 35 different locales:
 
 =======  ====================  ====================  ====================
 Code     Associated attribute  Name                  Native Name
@@ -105,6 +105,7 @@ Code     Associated attribute  Name                  Native Name
 `fa`     **Locale.FA**         Farsi                 فارسی
 `fi`     **Locale.FI**         Finnish               Suomi
 `fr`     **Locale.FR**         French                Français
+`hr`     **Locale.HR**         Croatian              Hrvatski
 `hu`     **Locale.HU**         Hungarian             Magyar
 `is`     **Locale.IS**         Icelandic             Íslenska
 `it`     **Locale.IT**         Italian               Italiano

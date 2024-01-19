@@ -54,11 +54,11 @@ Install this specific version to ensure compatibility.
 Features
 --------
 
-- **Multilingual**: Supports multiple languages.
+- **Multilingual**: Supports 35 different locales.
 - **Extensibility**: Supports custom data providers.
-- **Easy**: Offers a simple design and clear documentation for easy data generation.
+- **Ease of use**: Features a simple design and clear documentation for straightforward data generation.
 - **Performance**: Widely recognized as the fastest data generator among Python solutions.
-- **Data variety**: Includes a variety of data providers designed for different use cases.
+- **Data variety**: Includes various data providers designed for different use cases.
 - **Schema-based generators**: Offers schema-based data generators to effortlessly produce data of any complexity.
 
 Documentation

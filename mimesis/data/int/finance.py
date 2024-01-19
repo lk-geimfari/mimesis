@@ -222,6 +222,7 @@ CURRENCY_SYMBOLS = {
     "fa": "﷼",
     "fi": "€",
     "fr": "€",
+    "hr": "€",
     "hu": "Ft",
     "is": "kr",
     "it": "€",
