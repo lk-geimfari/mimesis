@@ -543,9 +543,9 @@ Register Field Handlers using Decorator
 
 .. note::
 
-    Decorator `@handle` **can only be used with functions**, not with any callable object.
+    The decorator `@handle` **can only be used with functions** and not with any callable object.
 
-You can also register field handlers using decorator ``@handle('field_name')`` that takes the name of the field as an argument.
+You can also register field handlers using decorator ``@field.handle('field_name')`` that takes the name of the field as an argument.
 
 Let's take a look at the example:
 
