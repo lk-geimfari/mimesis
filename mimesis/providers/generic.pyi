@@ -18,7 +18,7 @@ class Generic(BaseProvider):
     food: providers.Food
 
     # Locale-independent providers
-    cryptography: providers.Cryptographic
+    cryptographic: providers.Cryptographic
     binaryfile: providers.BinaryFile
     file: providers.File
     code: providers.Code
