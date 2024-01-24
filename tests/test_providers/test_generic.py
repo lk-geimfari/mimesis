@@ -198,7 +198,7 @@ class TestSeededGeneric:
         assert g1.payment.paypal() == g2.payment.paypal()
 
     def test_generic_person(self, g1, g2):
-        assert g1.person.age() == g2.person.age()
+        assert g1.person.birthdate() == g2.person.birthdate()
         assert g1.person.name() == g2.person.name()
 
     def test_generic_science(self, g1, g2):

@@ -1,3 +1,10 @@
+Version 13.1.0
+--------------
+
+- Removed the `age()` and `work_experience()` methods from the `Person` provider. Use ``person.random.randint()`` instead.
+- Fixed type hints for `Generic`. (See `#1470 <https://github.com/lk-geimfari/mimesis/issues/1471>`_).
+- Added the `birthdate()` method to the `Person` provider. (See `#1470 <https://github.com/lk-geimfari/mimesis/issues/1470>`_).
+
 Version 13.0.0
 --------------
 

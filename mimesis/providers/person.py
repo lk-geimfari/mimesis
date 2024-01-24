@@ -4,6 +4,7 @@ import hashlib
 import re
 import typing as t
 import uuid
+from datetime import date, datetime
 from string import ascii_letters, digits, punctuation
 
 from mimesis.data import (
@@ -16,6 +17,7 @@ from mimesis.data import (
 )
 from mimesis.enums import Gender, TitleType
 from mimesis.providers.base import BaseDataProvider
+from mimesis.types import Date
 
 __all__ = ["Person"]
 
@@ -30,39 +32,56 @@ class Person(BaseDataProvider):
         :param seed: Seed.
         """
         super().__init__(*args, **kwargs)
-        self._store = {
-            "age": 0,
-        }
 
     class Meta:
         name = "person"
         datafile = f"{name}.json"
 
-    def age(self, minimum: int = 16, maximum: int = 66) -> int:
-        """Generates a random age of a person.
+    def _validate_birth_year_params(self, min_year: int, max_year: int) -> None:
+        if min_year > max_year:
+            raise ValueError("min_year must be less than or equal to max_year")
 
-        :param maximum: Maximum value of age.
-        :param minimum: Minimum value of age.
-        :return: Random integer.
+        if min_year < 1900:
+            raise ValueError("min_year must be greater than or equal to 1900")
 
-        :Example:
-            23.
+        if max_year > datetime.now().year:
+            raise ValueError(
+                "The max_year must be less than or equal to the current year"
+            )
+
+    def _is_leap_year(self, year: int) -> bool:
+        return (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0)
+
+    def birthdate(self, min_year: int = 1980, max_year: int = 2023) -> Date:
+        """Generates a random birthdate as a :py:class:`datetime.date` object.
+
+        :param min_year: Maximum birth year.
+        :param max_year: Minimum birth year.
+        :return: Random date object.
         """
-        age = self.random.randint(minimum, maximum)
-        self._store["age"] = age
-        return age
+        self._validate_birth_year_params(min_year, max_year)
+        year = self.random.randint(min_year, max_year)
+        feb_days = 29 if self._is_leap_year(year) else 28
 
-    def work_experience(self, working_start_age: int = 22) -> int:
-        """Generates a random work experience.
+        month_days_map = {
+            1: 31,
+            2: feb_days,
+            3: 31,
+            4: 30,
+            5: 31,
+            6: 30,
+            7: 31,
+            8: 31,
+            9: 30,
+            10: 31,
+            11: 30,
+            12: 31,
+        }
 
-        :param working_start_age: Age then person start to work.
-        :return: Depend on previous generated age.
-        """
-        age = self._store["age"]
-        if age == 0:
-            age = self.age()
-
-        return max(age - working_start_age, 0)
+        month = self.random.randint(1, 12)
+        max_day = month_days_map[month]
+        day = self.random.randint(1, max_day)
+        return date(year=year, month=month, day=day)
 
     def name(self, gender: Gender | None = None) -> str:
         """Generates a random name.

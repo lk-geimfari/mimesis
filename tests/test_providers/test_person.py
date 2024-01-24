@@ -1,4 +1,5 @@
 import re
+from datetime import date, datetime
 
 import pytest
 
@@ -19,36 +20,31 @@ class TestPerson:
         assert re.match(patterns.DATA_PROVIDER_STR_REGEX, str(person))
 
     @pytest.mark.parametrize(
-        "minimum, maximum",
+        "min_year, max_year",
         [
-            (16, 18),
-            (18, 21),
-            (22, 28),
+            (1900, 1950),
+            (1951, 2001),
+            (2001, 2023),
         ],
     )
-    def test_age(self, _person, minimum, maximum):
-        result = _person.age(minimum, maximum)
-        assert (result >= minimum) and (result <= maximum)
+    def test_birthdate(self, _person, min_year, max_year):
+        birthdate = _person.birthdate(min_year, max_year)
+        assert min_year <= birthdate.year <= max_year
+        assert isinstance(birthdate, date)
 
-    def test_age_store(self, _person):
-        result = _person._store["age"]
-        assert result == 0
+    @pytest.mark.parametrize(
+        "min_year, max_year",
+        [
+            (1899, 1950),
+            (datetime.now().year + 1, datetime.now().year + 3),
+        ],
+    )
+    def test_birthdate_with_invalid_params(self, _person, min_year, max_year):
+        with pytest.raises(ValueError):
+            _person.birthdate(min_year, max_year)
 
-    def test_age_update(self, _person):
-        result = _person.age() - _person._store["age"]
-        assert result == 0
-
-    def test_work_experience(self, _person):
-        result = _person.work_experience(working_start_age=0) - _person._store["age"]
-        assert result == 0
-
-    def test_work_experience_store(self, _person):
-        result = _person.work_experience() - _person.work_experience()
-        assert result == 0
-
-    def test_work_experience_extreme(self, _person):
-        result = _person.work_experience(working_start_age=100000)
-        assert result == 0
+    def test_is_leap_year(self, _person):
+        assert _person._is_leap_year(2024)
 
     def test_password(self, _person):
         result = _person.password(length=15)
@@ -344,14 +340,6 @@ class TestSeededPerson:
     def p2(self, seed):
         return Person(seed=seed)
 
-    def test_age(self, p1, p2):
-        assert p1.age() == p2.age()
-        assert p1.age(12, 42) == p2.age(12, 42)
-
-    def test_work_experience(self, p1, p2):
-        assert p1.work_experience() == p2.work_experience()
-        assert p1.work_experience(19) == p2.work_experience(19)
-
     def test_password(self, p1, p2):
         assert p1.password() == p2.password()
         assert p1.password(length=12, hashed=True) == p2.password(
@@ -412,6 +400,12 @@ class TestSeededPerson:
 
     def test_gender_code(self, p1, p2):
         assert p1.gender_code() == p2.gender_code()
+
+    def test_birthdate(self, p1, p2):
+        assert p1.birthdate() == p2.birthdate()
+        assert p1.birthdate(min_year=1900, max_year=2023) == p2.birthdate(
+            min_year=1900, max_year=2023
+        )
 
     def test_gender_symbol(self, p1, p2):
         assert p1.gender_symbol() == p2.gender_symbol()
