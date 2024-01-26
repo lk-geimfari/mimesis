@@ -6,13 +6,13 @@ from mimesis.schema import Field
 try:
     import pytest
 except ImportError:
-    raise ImportError('pytest is required to use this plugin')
+    raise ImportError("pytest is required to use this plugin")
 
 _CacheCallable = Callable[[Locale], Field]
 
 
-@pytest.fixture(scope='session')  # noqa: PT005
-def _mimesis_cache() -> _CacheCallable:  # noqa: PT005
+@pytest.fixture(scope="session")
+def _mimesis_cache() -> _CacheCallable:
     cached_instances: dict[Locale, Field] = {}
 
     def factory(locale: Locale) -> Field:
