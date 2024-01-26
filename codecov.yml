@@ -30,4 +30,3 @@ ignore:
   - "mimesis/locales.py"
   - "mimesis/exceptions.py"
   - "mimesis/__version__.py"
-  - "mimesis/plugins/pytest.py"
