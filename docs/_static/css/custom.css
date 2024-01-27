@@ -5,6 +5,10 @@ pre, tt, code {
     font-size: 0.9em;
 }
 
+a:visited {
+    color: #2b79a2;
+}
+
 a.reference {
     text-decoration: none;
     border-bottom: none;
