@@ -1,7 +1,7 @@
 """Provides data related to text."""
 import typing as t
 
-from mimesis.data import SAFE_COLORS
+from mimesis.datasets import SAFE_COLORS
 from mimesis.enums import EmojyCategory
 from mimesis.providers.base import BaseDataProvider
 

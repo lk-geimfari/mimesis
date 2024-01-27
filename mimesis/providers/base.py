@@ -131,11 +131,11 @@ class BaseDataProvider(BaseProvider):
         super().__init__(seed=seed, *args, **kwargs)
         # This is a dict with data
         # loaded from the JSON file.
-        self._data: JSON = {}
+        self._dataset: JSON = {}
         # Order matters here, since
         # we have to set up locale first.
         self._setup_locale(locale)
-        self._load_datafile()
+        self._load_dataset()
 
     def _setup_locale(self, locale: Locale = Locale.DEFAULT) -> None:
         """Set up locale after pre-check.
@@ -158,7 +158,7 @@ class BaseDataProvider(BaseProvider):
         if not keys:
             raise ValueError("The list of keys to extract cannot be empty.")
         try:
-            return reduce(operator.getitem, keys, self._data)
+            return reduce(operator.getitem, keys, self._dataset)
         except (TypeError, KeyError):
             return default
 
@@ -176,7 +176,7 @@ class BaseDataProvider(BaseProvider):
                 initial[k] = other[k]
         return initial
 
-    def _load_datafile(self) -> None:
+    def _load_dataset(self) -> None:
         """Loads the content from the JSON.
 
         :return: The content of the file.
@@ -201,7 +201,7 @@ class BaseDataProvider(BaseProvider):
         if LOCALE_SEP in locale:
             data = self._update_dict(data, read_file(locale))
 
-        self._data = data
+        self._dataset = data
 
     def get_current_locale(self) -> str:
         """Returns current locale.
@@ -221,7 +221,7 @@ class BaseDataProvider(BaseProvider):
         :return: Nothing.
         """
         self._setup_locale(locale)
-        self._load_datafile()
+        self._load_dataset()
 
     @contextlib.contextmanager
     def override_locale(

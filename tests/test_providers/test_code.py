@@ -3,7 +3,7 @@ import re
 import pytest
 
 from mimesis import Code
-from mimesis.data import LOCALE_CODES
+from mimesis.datasets import LOCALE_CODES
 from mimesis.enums import EANFormat, ISBNFormat
 from mimesis.exceptions import NonEnumerableError
 from mimesis.locales import Locale

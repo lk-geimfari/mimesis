@@ -1,6 +1,6 @@
 """Provides pseudo-scientific data."""
 
-from mimesis.data import SI_PREFIXES, SI_PREFIXES_SYM
+from mimesis.datasets import SI_PREFIXES, SI_PREFIXES_SYM
 from mimesis.enums import MeasureUnit, MetricPrefixSign
 from mimesis.providers.base import BaseProvider
 

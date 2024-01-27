@@ -1,6 +1,6 @@
 """Business data provider."""
 
-from mimesis.data import (
+from mimesis.datasets import (
     CRYPTOCURRENCY_ISO_CODES,
     CRYPTOCURRENCY_SYMBOLS,
     CURRENCY_ISO_CODES,

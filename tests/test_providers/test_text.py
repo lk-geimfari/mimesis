@@ -3,7 +3,7 @@ import re
 import pytest
 
 from mimesis import Text
-from mimesis.data import SAFE_COLORS
+from mimesis.datasets import SAFE_COLORS
 from mimesis.enums import EmojyCategory
 
 from . import patterns
@@ -59,12 +59,12 @@ class TestText:
 
     def test_sentence(self, text):
         result = text.sentence().strip()
-        assert result in text._data["text"]
+        assert result in text._dataset["text"]
 
     def test_title(self, text):
         result = text.title()
         assert result is not None
-        assert result.strip() in text._data["text"]
+        assert result.strip() in text._dataset["text"]
 
     def test_text(self, text):
         result = text.text(quantity=4)
@@ -80,15 +80,15 @@ class TestText:
 
     def test_word(self, text):
         result = text.word()
-        assert result in text._data["words"]
+        assert result in text._dataset["words"]
 
     def test_quote(self, text):
         result = text.quote()
-        assert result in text._data["quotes"]
+        assert result in text._dataset["quotes"]
 
     def test_color(self, text):
         result = text.color()
-        assert result in text._data["color"]
+        assert result in text._dataset["color"]
 
     def test_level(self, text):
         result = text.level()

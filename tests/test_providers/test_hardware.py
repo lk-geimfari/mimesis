@@ -3,7 +3,7 @@ import re
 import pytest
 
 from mimesis import Hardware
-from mimesis.data import (
+from mimesis.datasets import (
     CPU,
     CPU_CODENAMES,
     GENERATION,

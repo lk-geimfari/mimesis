@@ -7,7 +7,7 @@ field is returned to the caller.
 
 from typing import Any, Callable
 
-from mimesis.data import COMMON_LETTERS, ROMANIZATION_DICT
+from mimesis.datasets import COMMON_LETTERS, ROMANIZATION_DICT
 from mimesis.locales import Locale, validate_locale
 from mimesis.random import Random
 

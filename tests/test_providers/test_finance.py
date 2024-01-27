@@ -3,7 +3,7 @@ import re
 import pytest
 
 from mimesis import Finance
-from mimesis.data import (
+from mimesis.datasets import (
     CRYPTOCURRENCY_ISO_CODES,
     CRYPTOCURRENCY_SYMBOLS,
     CURRENCY_ISO_CODES,
@@ -65,15 +65,15 @@ class TestFinance:
     )
     def test_company_type(self, finance, abbr, key):
         result = finance.company_type(abbr=abbr)
-        assert result in finance._data["company"]["type"][key]
+        assert result in finance._dataset["company"]["type"][key]
 
     def test_bank(self, finance):
         result = finance.bank()
-        assert result in finance._data["banks"]
+        assert result in finance._dataset["banks"]
 
     def test_company(self, finance):
         result = finance.company()
-        assert result in finance._data["company"]["name"]
+        assert result in finance._dataset["company"]["name"]
 
     def test_price(self, finance):
         result = finance.price(minimum=100.00, maximum=1999.99)

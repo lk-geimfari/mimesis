@@ -3,7 +3,7 @@ import re
 import pytest
 
 from mimesis import Path
-from mimesis.data import FOLDERS, PROGRAMMING_LANGS, PROJECT_NAMES
+from mimesis.datasets import FOLDERS, PROGRAMMING_LANGS, PROJECT_NAMES
 
 
 class TestPath:

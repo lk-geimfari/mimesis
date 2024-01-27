@@ -4,7 +4,7 @@ import sys
 import typing as t
 from pathlib import PurePosixPath, PureWindowsPath
 
-from mimesis.data import (
+from mimesis.datasets import (
     FOLDERS,
     PLATFORMS,
     PROGRAMMING_LANGS,

@@ -6,7 +6,7 @@ data related to location, such as street name, city etc.
 
 import typing as t
 
-from mimesis.data import (
+from mimesis.datasets import (
     CALLING_CODES,
     CONTINENT_CODES,
     COUNTRY_CODES,

@@ -4,7 +4,7 @@ import hashlib
 import secrets
 from uuid import UUID, uuid4
 
-from mimesis.data.int.cryptographic import WORDLIST
+from mimesis.datasets.int.cryptographic import WORDLIST
 from mimesis.enums import Algorithm
 from mimesis.providers.base import BaseProvider
 

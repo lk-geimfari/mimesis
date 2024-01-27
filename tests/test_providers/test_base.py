@@ -32,11 +32,11 @@ class TestBase:
         assert Locale(provider.locale) == locale
 
         with provider.override_locale(new_locale):
-            assert "Жен." in provider._data["gender"]
+            assert "Жен." in provider._dataset["gender"]
             assert Locale(provider.locale) == new_locale
 
         assert Locale(provider.locale) == locale
-        assert "Жен." not in provider._data["gender"]
+        assert "Жен." not in provider._dataset["gender"]
 
         del provider.locale
         with pytest.raises(ValueError):
@@ -77,7 +77,7 @@ class TestBase:
                 datafile = "address.json"
 
         data_provider = MyProvider(locale)
-        assert city in data_provider._data["city"]
+        assert city in data_provider._dataset["city"]
 
     @pytest.mark.parametrize("locale", list(Locale))
     def test_load_datafile_raises(self, locale):
@@ -92,7 +92,7 @@ class TestBase:
     def test_extract(self, base_data_provider):
         dictionary = {"names": {"female": "Ariel", "male": "John"}}
 
-        base_data_provider._data = dictionary
+        base_data_provider._dataset = dictionary
 
         a = list(sorted(dictionary["names"].keys()))
         b = list(sorted(base_data_provider._extract(["names"]).keys()))

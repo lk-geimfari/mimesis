@@ -7,7 +7,7 @@ import uuid
 from datetime import date, datetime
 from string import ascii_letters, digits, punctuation
 
-from mimesis.data import (
+from mimesis.datasets import (
     BLOOD_GROUPS,
     CALLING_CODES,
     EMAIL_DOMAINS,

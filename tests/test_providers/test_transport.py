@@ -3,7 +3,7 @@ import re
 import pytest
 
 from mimesis import Transport
-from mimesis.data import (
+from mimesis.datasets import (
     AIRPLANES,
     AUTO_MANUFACTURERS,
     CARS,
