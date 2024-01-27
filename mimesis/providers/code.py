@@ -59,7 +59,7 @@ class Code(BaseProvider):
     def ean(self, fmt: EANFormat | None = None) -> str:
         """Generates EAN.
 
-        To change EAN format, pass parameter ``code`` with needed value of
+        To change an EAN format, pass parameter ``code`` with needed value of
         the enum object :class:`~mimesis.enums.EANFormat`.
 
         :param fmt: Format of EAN.
