@@ -32,16 +32,45 @@ class TestBase:
         assert Locale(provider.locale) == locale
 
         with provider.override_locale(new_locale):
-            assert "Жен." in provider._data["gender"]
+            assert "Жен." in provider._dataset["gender"]
             assert Locale(provider.locale) == new_locale
 
         assert Locale(provider.locale) == locale
-        assert "Жен." not in provider._data["gender"]
+        assert "Жен." not in provider._dataset["gender"]
 
         del provider.locale
         with pytest.raises(ValueError):
             with provider.override_locale(new_locale):
                 pass
+
+    @pytest.mark.parametrize(
+        "data, keys_count, values_count",
+        [
+            (
+                {"test": "test"},
+                1,
+                1,
+            ),
+            (
+                {"test": "test", "test2": ["a", "b", "c"]},
+                2,
+                2,
+            ),
+        ],
+    )
+    def test_update_dataset(self, base_data_provider, data, keys_count, values_count):
+        base_data_provider.update_dataset(data=data)
+        assert len(base_data_provider._dataset.keys()) == keys_count
+        assert len(base_data_provider._dataset.values()) == values_count
+
+        base_data_provider.update_dataset(data={"test3": "test3"})
+        assert len(base_data_provider._dataset.keys()) == keys_count + 1
+        assert len(base_data_provider._dataset.keys()) == values_count + 1
+
+    @pytest.mark.parametrize("data", [set(), [], "", tuple()])
+    def test_update_dataset_raises_error(self, base_data_provider, data):
+        with pytest.raises(TypeError):
+            base_data_provider.update_dataset(data=data)
 
     def test_override_missing_locale_argument(self):
         provider = Person(Locale.EN)
@@ -77,7 +106,7 @@ class TestBase:
                 datafile = "address.json"
 
         data_provider = MyProvider(locale)
-        assert city in data_provider._data["city"]
+        assert city in data_provider._dataset["city"]
 
     @pytest.mark.parametrize("locale", list(Locale))
     def test_load_datafile_raises(self, locale):
@@ -92,7 +121,7 @@ class TestBase:
     def test_extract(self, base_data_provider):
         dictionary = {"names": {"female": "Ariel", "male": "John"}}
 
-        base_data_provider._data = dictionary
+        base_data_provider._dataset = dictionary
 
         a = list(sorted(dictionary["names"].keys()))
         b = list(sorted(base_data_provider._extract(["names"]).keys()))

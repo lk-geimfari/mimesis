@@ -5,7 +5,7 @@ from calendar import monthrange
 from datetime import date, datetime, time, timedelta
 
 from mimesis.compat import pytz
-from mimesis.data import GMT_OFFSETS, ROMAN_NUMS, TIMEZONES
+from mimesis.datasets import GMT_OFFSETS, ROMAN_NUMS, TIMEZONES
 from mimesis.enums import TimestampFormat, TimezoneRegion
 from mimesis.providers.base import BaseDataProvider
 from mimesis.types import Date, DateTime, Time

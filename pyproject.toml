@@ -41,7 +41,7 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
 ]
 exclude = [
-    "mimesis/data/locale_template",
+    "mimesis/datasets/locale_template",
 ]
 
 [tool.poetry.dependencies]

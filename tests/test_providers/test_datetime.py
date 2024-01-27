@@ -4,7 +4,7 @@ import re
 import pytest
 
 from mimesis import Datetime
-from mimesis.data import GMT_OFFSETS, TIMEZONES
+from mimesis.datasets import GMT_OFFSETS, TIMEZONES
 from mimesis.enums import TimestampFormat, TimezoneRegion
 from mimesis.exceptions import NonEnumerableError
 
@@ -100,10 +100,10 @@ class TestDatetime:
 
     def test_day_of_week(self, dt):
         result = dt.day_of_week()
-        assert result in dt._data["day"]["name"]
+        assert result in dt._dataset["day"]["name"]
 
         result_abbr = dt.day_of_week(abbr=True)
-        assert result_abbr in dt._data["day"]["abbr"]
+        assert result_abbr in dt._dataset["day"]["abbr"]
 
     def test_month(self, dt):
         result = dt.month()
@@ -114,7 +114,7 @@ class TestDatetime:
 
     def test_periodicity(self, dt):
         result = dt.periodicity()
-        assert result in dt._data["periodicity"]
+        assert result in dt._dataset["periodicity"]
 
     @pytest.mark.parametrize(
         "region",

@@ -4,7 +4,7 @@ from ipaddress import IPv4Address, IPv6Address
 import pytest
 import validators
 
-from mimesis import Internet, data
+from mimesis import Internet, datasets
 from mimesis.enums import DSNType, MimeType, PortRange, TLDType, URLScheme
 from mimesis.exceptions import NonEnumerableError
 
@@ -160,7 +160,7 @@ class TestInternet:
 
     def test_user_agent(self, net):
         result = net.user_agent()
-        assert result in data.USER_AGENTS
+        assert result in datasets.USER_AGENTS
 
     @pytest.mark.parametrize(
         "w, h, keywords",
@@ -225,7 +225,7 @@ class TestInternet:
 
     def test_http_method(self, net):
         result = net.http_method()
-        assert result in data.HTTP_METHODS
+        assert result in datasets.HTTP_METHODS
 
     @pytest.mark.parametrize(
         "mime_type",
@@ -240,7 +240,7 @@ class TestInternet:
     )
     def test_content_type(self, net, mime_type):
         ct = net.content_type(mime_type=mime_type)
-        assert ct in data.MIME_TYPES[mime_type.value]
+        assert ct in datasets.MIME_TYPES[mime_type.value]
 
     def test_content_type_wrong_arg(self, net):
         with pytest.raises(NonEnumerableError):
@@ -252,7 +252,7 @@ class TestInternet:
 
     def test_http_status_message(self, net):
         result = net.http_status_message()
-        assert result in data.HTTP_STATUS_MSGS
+        assert result in datasets.HTTP_STATUS_MSGS
 
     @pytest.mark.parametrize(
         "domain_type",
@@ -267,8 +267,8 @@ class TestInternet:
     def test_top_level_domain(self, net, domain_type):
         res_a = net.top_level_domain(tld_type=domain_type)
         res_b = net.tld(tld_type=domain_type)
-        assert res_a in data.TLD[domain_type.value]
-        assert res_b in data.TLD[domain_type.value]
+        assert res_a in datasets.TLD[domain_type.value]
+        assert res_b in datasets.TLD[domain_type.value]
 
     def test_top_level_domain_unsupported(self, net):
         with pytest.raises(NonEnumerableError):
@@ -290,7 +290,7 @@ class TestInternet:
             net.port("nil")
 
     def test_public_dns(self, net):
-        assert net.public_dns() in data.PUBLIC_DNS
+        assert net.public_dns() in datasets.PUBLIC_DNS
 
     def test_http_response_headers(self, net):
         result = net.http_response_headers()

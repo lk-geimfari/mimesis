@@ -1,6 +1,6 @@
 """The data provider of a variety of codes."""
 
-from mimesis.data import (
+from mimesis.datasets import (
     EAN_MASKS,
     IMEI_TACS,
     ISBN_GROUPS,

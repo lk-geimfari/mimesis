@@ -1,6 +1,6 @@
 """Provides data related to transports."""
 
-from mimesis.data import (
+from mimesis.datasets import (
     AIRPLANES,
     AUTO_MANUFACTURERS,
     CARS,

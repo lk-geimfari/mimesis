@@ -7,7 +7,7 @@ import urllib.request
 from base64 import b64encode
 from ipaddress import IPv4Address, IPv6Address
 
-from mimesis.data import (
+from mimesis.datasets import (
     CONTENT_ENCODING_DIRECTIVES,
     CORS_OPENER_POLICIES,
     CORS_RESOURCE_POLICIES,

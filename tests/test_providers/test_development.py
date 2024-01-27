@@ -3,7 +3,7 @@ import re
 
 import pytest
 
-from mimesis import Development, data
+from mimesis import Development, datasets
 
 from . import patterns
 
@@ -18,15 +18,15 @@ class TestDevelopment:
 
     def test_license(self, dev):
         result = dev.software_license()
-        assert result in data.LICENSES
+        assert result in datasets.LICENSES
 
     def test_system_quality_attribute(self, dev):
         result = dev.system_quality_attribute()
-        assert result in data.SYSTEM_QUALITY_ATTRIBUTES
+        assert result in datasets.SYSTEM_QUALITY_ATTRIBUTES
 
     def test_ility(self, dev):
         result = dev.ility()
-        assert result in data.SYSTEM_QUALITY_ATTRIBUTES
+        assert result in datasets.SYSTEM_QUALITY_ATTRIBUTES
 
     def test_version(self, dev):
         result = dev.version().split(".")
@@ -43,15 +43,15 @@ class TestDevelopment:
         assert (int(year) >= 2016) and (int(year) <= datetime.datetime.now().year)
 
     def test_stage(self, dev):
-        assert dev.stage() in data.STAGES
+        assert dev.stage() in datasets.STAGES
 
     def test_programming_language(self, dev):
         result = dev.programming_language()
-        assert result in data.PROGRAMMING_LANGS
+        assert result in datasets.PROGRAMMING_LANGS
 
     def test_os(self, dev):
         result = dev.os()
-        assert result in data.OS
+        assert result in datasets.OS
 
     def test_boolean(self, dev):
         result = dev.boolean()

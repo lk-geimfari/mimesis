@@ -3,7 +3,7 @@ import re
 import pytest
 
 from mimesis import Address
-from mimesis.data import CALLING_CODES, CONTINENT_CODES, COUNTRY_CODES
+from mimesis.datasets import CALLING_CODES, CONTINENT_CODES, COUNTRY_CODES
 from mimesis.enums import CountryCode
 from mimesis.exceptions import NonEnumerableError
 
@@ -67,11 +67,11 @@ class TestAddress:
 
     def test_street_name(self, address):
         result = address.street_name()
-        assert result in address._data["street"]["name"]
+        assert result in address._dataset["street"]["name"]
 
     def test_street_suffix(self, address):
         result = address.street_suffix()
-        assert result in address._data["street"]["suffix"]
+        assert result in address._dataset["street"]["suffix"]
 
     def test_address(self, address):
         result = address.address()
@@ -87,7 +87,7 @@ class TestAddress:
     )
     def test_state(self, address, abbr, key):
         result = address.state(abbr=abbr)
-        assert result in address._data["state"][key]
+        assert result in address._dataset["state"][key]
 
     @pytest.mark.parametrize(
         "alias, abbr",
@@ -101,7 +101,7 @@ class TestAddress:
     def test_state_aliases_abbreviated(self, address, alias, abbr):
         method = getattr(address, alias)
         result = method(abbr=abbr)
-        assert result in address._data["state"]["abbr"]
+        assert result in address._dataset["state"]["abbr"]
 
     @pytest.mark.parametrize(
         "alias",
@@ -114,7 +114,7 @@ class TestAddress:
     )
     def test_state_aliases(self, address, alias):
         result = getattr(address, alias)()
-        assert result in address._data["state"]["name"]
+        assert result in address._dataset["state"]["name"]
 
     def test_postal_code(self, address):
         result = address.postal_code()
@@ -160,11 +160,11 @@ class TestAddress:
 
     def test_city(self, address):
         result = address.city()
-        assert result in address._data["city"]
+        assert result in address._dataset["city"]
 
     def test_continent(self, address):
         result = address.continent()
-        assert result in address._data["continent"]
+        assert result in address._dataset["continent"]
 
         result = address.continent(code=True)
         assert result in CONTINENT_CODES

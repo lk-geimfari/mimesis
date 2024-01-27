@@ -4,7 +4,7 @@ from datetime import date, datetime
 import pytest
 
 from mimesis import Person, random
-from mimesis.data import BLOOD_GROUPS, GENDER_CODES, GENDER_SYMBOLS
+from mimesis.datasets import BLOOD_GROUPS, GENDER_CODES, GENDER_SYMBOLS
 from mimesis.enums import Gender, TitleType
 from mimesis.exceptions import NonEnumerableError
 
@@ -171,7 +171,7 @@ class TestPerson:
     )
     def test_name(self, person, gender):
         result = person.name(gender=gender)
-        assert result in person._data["names"][gender.value]
+        assert result in person._dataset["names"][gender.value]
 
     @pytest.mark.parametrize(
         "gender",
@@ -182,11 +182,11 @@ class TestPerson:
     )
     def test_first_name(self, person, gender):
         result = person.first_name(gender=gender)
-        assert result in person._data["names"][gender.value]
+        assert result in person._dataset["names"][gender.value]
 
     def test_name_with_none(self, _person):
         result = _person.name(gender=None)
-        names = _person._data["names"]
+        names = _person._dataset["names"]
 
         females = names["female"]
         males = names["male"]
@@ -214,7 +214,7 @@ class TestPerson:
         ],
     )
     def test_surname(self, person, gender):
-        surnames = person._data["surnames"]
+        surnames = person._dataset["surnames"]
 
         # Surnames separated by gender.
         if isinstance(surnames, dict):
@@ -256,39 +256,39 @@ class TestPerson:
 
     def test_gender(self, person):
         result = person.gender()
-        assert result in person._data["gender"]
+        assert result in person._dataset["gender"]
 
     def test_sex(self, person):
         result = person.sex()
-        assert result in person._data["gender"]
+        assert result in person._dataset["gender"]
 
     def test_profession(self, person):
         result = person.occupation()
-        assert result in person._data["occupation"]
+        assert result in person._dataset["occupation"]
 
     def test_university(self, person):
         result = person.university()
-        assert result in person._data["university"]
+        assert result in person._dataset["university"]
 
     def test_academic_degree(self, person):
         result = person.academic_degree()
-        assert result in person._data["academic_degree"]
+        assert result in person._dataset["academic_degree"]
 
     def test_language(self, person):
         result = person.language()
-        assert result in person._data["language"]
+        assert result in person._dataset["language"]
 
     def test_worldview(self, person):
         result = person.worldview()
-        assert result in person._data["worldview"]
+        assert result in person._dataset["worldview"]
 
     def test_views_on(self, person):
         result = person.views_on()
-        assert result in person._data["views_on"]
+        assert result in person._dataset["views_on"]
 
     def test_political_views(self, person):
         result = person.political_views()
-        assert result in person._data["political_views"]
+        assert result in person._dataset["political_views"]
 
     @pytest.mark.parametrize(
         "title_type",
@@ -322,10 +322,10 @@ class TestPerson:
         ],
     )
     def test_nationality(self, person, gender):
-        nationality = person._data["nationality"]
+        nationality = person._dataset["nationality"]
         if isinstance(nationality, dict):
             result = person.nationality(gender=gender)
-            assert result in person._data["nationality"][gender.value]
+            assert result in person._dataset["nationality"][gender.value]
 
         result = person.nationality()
         assert result is not None

@@ -43,9 +43,9 @@ data to the `locale/builtin.json` file.
 3. Remove all `"__COMMENT_KEY__": "Description"` from the JSON files. This data is only for developers.
 4. Add your locale to the `mimesis.locales.Locale` class in `mimesis/locales.py`.
 5. Format the content of JSON files alphabetically using a tool like [jsoneditoronline.org](http://jsoneditoronline.org).
-6. If your locale uses a shortened address format, add your locale code to `SHORTENED_ADDRESS_FMT` in `mimesis/data/int/address.py`.
-7. Make sure you have added the currency symbol for your locale to `CURRENCY_SYMBOLS` in `mimesis/data/int/finance.py`.
-8. Ensure that you have added your locale code to `ISBN_GROUPS` in `mimesis/data/int/code.py`.
+6. If your locale uses a shortened address format, add your locale code to `SHORTENED_ADDRESS_FMT` in `mimesis/datasets/int/address.py`.
+7. Make sure you have added the currency symbol for your locale to `CURRENCY_SYMBOLS` in `mimesis/datasets/int/finance.py`.
+8. Ensure that you have added your locale code to `ISBN_GROUPS` in `mimesis/datasets/int/code.py`.
 9. Run tests and confirm that all tests pass successfully.
 10. Add yourself as a contributor in `CONTRIBUTORS.md`.
 

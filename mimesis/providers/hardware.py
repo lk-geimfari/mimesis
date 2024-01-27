@@ -1,6 +1,6 @@
 """Provides data related to hardware."""
 
-from mimesis.data import (
+from mimesis.datasets import (
     CPU,
     CPU_CODENAMES,
     GENERATION,

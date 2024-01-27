@@ -2,7 +2,7 @@ import re
 
 import pytest
 
-from mimesis.data import EXTENSIONS, MIME_TYPES
+from mimesis.datasets import EXTENSIONS, MIME_TYPES
 from mimesis.enums import FileType, MimeType
 from mimesis.exceptions import NonEnumerableError
 from mimesis.providers.file import File
