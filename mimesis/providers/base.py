@@ -177,7 +177,7 @@ class BaseDataProvider(BaseProvider):
         return initial
 
     def _load_dataset(self) -> None:
-        """Loads the content from the JSON.
+        """Loads the content from the JSON dataset.
 
         :return: The content of the file.
         :raises UnsupportedLocale: Raises if locale is unsupported.
@@ -202,6 +202,17 @@ class BaseDataProvider(BaseProvider):
             data = self._update_dict(data, read_file(locale))
 
         self._dataset = data
+
+    def update_dataset(self, data: JSON) -> None:
+        """Updates dataset merging a given dict into default data.
+
+        This method may be useful when you need to override data
+        for a given key in JSON file.
+        """
+        if not isinstance(data, dict):
+            raise TypeError("The data must be a dict.")
+
+        self._dataset |= data
 
     def get_current_locale(self) -> str:
         """Returns current locale.

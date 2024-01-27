@@ -43,6 +43,35 @@ class TestBase:
             with provider.override_locale(new_locale):
                 pass
 
+    @pytest.mark.parametrize(
+        "data, keys_count, values_count",
+        [
+            (
+                {"test": "test"},
+                1,
+                1,
+            ),
+            (
+                {"test": "test", "test2": ["a", "b", "c"]},
+                2,
+                2,
+            ),
+        ],
+    )
+    def test_update_dataset(self, base_data_provider, data, keys_count, values_count):
+        base_data_provider.update_dataset(data=data)
+        assert len(base_data_provider._dataset.keys()) == keys_count
+        assert len(base_data_provider._dataset.values()) == values_count
+
+        base_data_provider.update_dataset(data={"test3": "test3"})
+        assert len(base_data_provider._dataset.keys()) == keys_count + 1
+        assert len(base_data_provider._dataset.keys()) == values_count + 1
+
+    @pytest.mark.parametrize("data", [set(), [], "", tuple()])
+    def test_update_dataset_raises_error(self, base_data_provider, data):
+        with pytest.raises(TypeError):
+            base_data_provider.update_dataset(data=data)
+
     def test_override_missing_locale_argument(self):
         provider = Person(Locale.EN)
         with pytest.raises(TypeError):
