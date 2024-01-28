@@ -13,7 +13,7 @@ def test_locale(mimesis_locale, mimesis):
 @pytest.mark.parametrize('mimesis_locale', [Locale.DE])
 def test_locale_override(mimesis_locale, mimesis):
     assert mimesis_locale == Locale.DE
-    assert mimesis.locale == Locale.DE
+    assert mimesis._generic.locale == Locale.DE
 
 
 def test_mimesis_fixture(mimesis):
@@ -23,7 +23,7 @@ def test_mimesis_fixture(mimesis):
 
 @pytest.mark.parametrize('mimesis_locale', [Locale.RU])
 def test_mimesis_fixture_with_overridden_locale(mimesis, mimesis_locale):
-    assert mimesis.locale == Locale.RU
+    assert mimesis._generic.locale == Locale.RU
 
     name = mimesis('full_name')
     for letter in name:  # russian letters are not in ASCII:
