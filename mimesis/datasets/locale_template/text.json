@@ -29,12 +29,5 @@
   "text": [
     "Test"
   ],
-  "words": {
-    "bad": [
-      "Test"
-    ],
-    "normal": [
-      "Test"
-    ]
-  }
+  "words": []
 }
