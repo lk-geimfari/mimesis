@@ -1,47 +1,23 @@
 ## How to Add a New Locale
 
-This is a template of the data directory structure for a specific locale.
+This is a template of the dataset directory structure for a specific locale.
 
 There are seven JSON files (`File name`) that contain data related to various data providers (`Provider`):
 
-```
-.----------------------------.
-| File name        Provider  |
-.----------------------------.
-├── address.json   # Address()
-├── builtin.json   # YourSpecProvider()
-├── datetime.json  # Datetime()
-├── finance.json   # Finance()
-├── food.json      # Food()
-├── person.json    # Person()
-└── text.json      # Text()
-```
-
-Almost all locales have a similar structure, but the structure of the locale file may vary when there are specific data
-providers built-in for that locale.
-
-For instance, the locale `ru` has a different structure for the `person.json` file, as in Russia, patronymic names are
-mandatory and therefore included in the data. So, this feature is only useful for this particular locale (and a few others).
-
-This implies that if someone wishes to utilize patronymic names, they would need to import a specific built-in provider.
-
-```
->>> from mimesis.builtins import RussiaSpecProvider
->>> ru = RussiaSpecProvider()
->>> ru.patronymic()
-'Васильевна'
-```
-
-If you need to include data that is not common for all locales, it is important not to directly modify the provider
-object. Instead, if you wish to create a `YourCountrySpecProvider()` for your locale, you should add all the relevant
-data to the `locale/builtin.json` file.
+* `address.json` - Address()
+* `builtin.json` - YourSpecProvider()
+* `datetime.json` - Datetime()
+* `finance.json` - Finance()
+* `food.json` - Food()
+* `person.json` - Person()
+* `text.json` - Text()
 
 ## Steps to Follow Before Submitting a Pull Request for Adding Support for a New Locale:
 
-1. Rename the folder from `locale_template` to `your-locale-code`.
+1. Copy the folder from `locale_template` to `your-locale-code`.
 2. Ensure that you have replaced all `["Tests""]` sections with data specific to your locale.
 3. Remove all `"__COMMENT_KEY__": "Description"` from the JSON files. This data is only for developers.
-4. Add your locale to the `mimesis.locales.Locale` class in `mimesis/locales.py`.
+4. Add your locale to the `mimesis.enums.Locale` class.
 5. Format the content of JSON files alphabetically using a tool like [jsoneditoronline.org](http://jsoneditoronline.org).
 6. If your locale uses a shortened address format, add your locale code to `SHORTENED_ADDRESS_FMT` in `mimesis/datasets/int/address.py`.
 7. Make sure you have added the currency symbol for your locale to `CURRENCY_SYMBOLS` in `mimesis/datasets/int/finance.py`.
