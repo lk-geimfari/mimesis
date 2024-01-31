@@ -103,7 +103,5 @@ Integration with 3rd-party libraries
 --------------------------------------
 
 - `mimesis-factory`_ - Integration with ``factory_boy``.
-- `pytest-mimesis`_ - is a pytest plugin that provides pytest fixtures for Mimesis providers.
 
 .. _mimesis-factory: https://github.com/mimesis-lab/mimesis-factory
-.. _pytest-mimesis: https://github.com/pytest-dev/pytest-mimesis

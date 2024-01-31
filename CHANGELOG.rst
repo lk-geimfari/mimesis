@@ -1,3 +1,10 @@
+Version 14.0.0
+--------------
+
+- Fixed street suffixes for locale `Locale.HR`.
+- Made `pytest-mimesis` a part of Mimesis itself.
+
+
 Version 13.1.0
 --------------
 
