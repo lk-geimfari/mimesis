@@ -31,3 +31,5 @@ ignore:
   - "mimesis/exceptions.py"
   - "mimesis/__version__.py"
   - "mimesis/plugins/pytest.py"
+  - "mimesis/types.py"
+  - "mimesis/constants.py"
