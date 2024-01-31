@@ -7,15 +7,13 @@ Features
 
 The key features are:
 
-- **Easy**: Mimesis offers a simple design and clear documentation for easy data generation.
-- **Multilingual**: Mimesis can generate data in multiple languages.
+- **Multilingual**: Supports 35 different locales.
+- **Extensibility**: Supports custom data providers and custom field handlers.
+- **Ease of use**: Features a simple design and clear documentation for straightforward data generation.
 - **Performance**: Widely recognized as the fastest data generator among Python solutions.
-- **Data variety**: Mimesis includes various data providers for names, addresses, phone numbers, email addresses, dates, and more, catering to different use cases.
-- **Country-specific data**: Mimesis supports country-specific data providers for generating region-specific data.
-- **Extensibility**: You can extend Mimesis by creating and integrating your own data providers.
-- **Generic data provider**: Mimesis provides a single object that grants easy access to all available data providers in the library.
-- **Zero hard dependencies**: Mimesis has no hard dependencies, eliminating the need for additional third-party libraries.
-- **Schema-based generators**: Mimesis offers schema-based data generators to effortlessly produce data of any complexity.
+- **Data variety**: Includes various data providers designed for different use cases.
+- **Schema-based generators**: Offers schema-based data generators to effortlessly produce data of any complexity.
+- **Intuitive**: Great editor support. Fully-typed, thus autocompletion almost everywhere.
 
 What Mimesis is?
 ----------------

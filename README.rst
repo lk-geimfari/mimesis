@@ -55,11 +55,12 @@ Features
 --------
 
 - **Multilingual**: Supports 35 different locales.
-- **Extensibility**: Supports custom data providers.
+- **Extensibility**: Supports custom data providers and custom field handlers.
 - **Ease of use**: Features a simple design and clear documentation for straightforward data generation.
 - **Performance**: Widely recognized as the fastest data generator among Python solutions.
 - **Data variety**: Includes various data providers designed for different use cases.
 - **Schema-based generators**: Offers schema-based data generators to effortlessly produce data of any complexity.
+- **Intuitive**: Great editor support. Fully-typed, thus autocompletion almost everywhere.
 
 Documentation
 -------------
