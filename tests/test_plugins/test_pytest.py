@@ -7,7 +7,7 @@ from mimesis.locales import Locale
 
 def test_locale(mimesis_locale, mimesis):
     assert mimesis_locale == Locale.DEFAULT
-    assert mimesis.locale == Locale.DEFAULT
+    assert mimesis._generic.locale == Locale.DEFAULT
 
 
 @pytest.mark.parametrize('mimesis_locale', [Locale.DE])
