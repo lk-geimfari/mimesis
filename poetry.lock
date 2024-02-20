@@ -1094,9 +1094,9 @@ decorator = ">=3.4.0"
 test = ["flake8 (>=2.4.0)", "isort (>=4.2.2)", "pytest (>=2.2.3)"]
 
 [extras]
-factory = []
+factory = ["factory-boy"]
 
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "f7819564d9d5e7512da6691f5904a5a6bbdc5fe9dde87a4e5281bf855897ec7e"
+content-hash = "62384505ccdf4f1876231f9305fd8b15a2b02e978d8d99f94640d3ad75783e2a"
