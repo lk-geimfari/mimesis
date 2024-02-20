@@ -72,6 +72,11 @@ pytest-cov = "^4.0.0"
 Sphinx = ">=5.1.1,<8.0.0"
 sphinx-copybutton = "^0.5.0"
 sphinx-autodoc-typehints = "^1.19.2"
+factory-boy = "^3.3.0"
+pytest-factoryboy = "^2.6.0"
+
+[tool.poetry.extras]
+factory = ["factory_boy"]
 
 [tool.poetry.plugins."pytest_randomly.random_seeder"]
 mimesis = "mimesis.entrypoints:pytest_randomly_reseed"
