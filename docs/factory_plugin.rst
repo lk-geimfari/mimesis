@@ -58,8 +58,39 @@ Now, use the ``MimesisField`` class to define how fake data is generated:
 
 See `factory_boy <https://factoryboy.readthedocs.io/>`_ documentation for more information about how to use factories.
 
-pytest
-------
+
+Configuration
+-------------
+
+You can also define custom field handlers for your factories. To do this, you need to
+define an attribute named ``field_handlers`` in the ``Params`` class of your factory.
+
+Just like this:
+
+.. code-block:: python
+
+    import factory
+    from mimesis.plugins.factory import MimesisField
+
+    class FactoryWithCustomFieldHandlers(factory.Factory):
+        class Meta(object):
+            model = Guest # Your model here
+
+        class Params(object):
+            field_handlers = [
+                ("num", lambda rand, **kwargs: rand.randint(1, 99)),
+                ("nick", lambda rand, **kwargs: rand.choice(["john", "alice"])),
+            ]
+
+        age = MimesisField("num")
+        nickname = MimesisField("nick")
+
+
+See `Custom Field Handlers <https://mimesis.name/en/master/schema.html#custom-field-handlers>`_ for more information
+about how to define custom field handlers.
+
+Factories and pytest
+--------------------
 
 We also recommend to use `pytest-factoryboy <https://github.com/pytest-dev/pytest-factoryboy>`_.
 This way it will be possible to integrate your factories into pytest fixtures.
