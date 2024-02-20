@@ -3,7 +3,8 @@
 Integration with factory_boy
 ============================
 
-Starting from version ``15.0.0``, Mimesis now supports ``factory_boy`` out of the box.
+.. versionadded:: 15.0.0
+
 You no longer require any third-party packages to integrate Mimesis with ``factory_boy``.
 
 Mimesis requires ``factory_boy`` to be installed, but it's not a hard dependency.

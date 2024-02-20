@@ -3,8 +3,9 @@
 Integration with Pytest
 =======================
 
-Starting from version `14.0.0`, Mimesis now supports `pytest` out of the box. You no longer
-require any third-party packages to seamlessly integrate Mimesis with `pytest`.
+.. versionadded:: 14.0.0
+
+You no longer require any third-party packages to seamlessly integrate Mimesis with `pytest`.
 
 
 Usage
