@@ -12,7 +12,7 @@ Therefore, you'll need to install it manually:
 
 .. code-block:: bash
 
-    poetry add factory_boy
+    poetry add --group dev factory_boy
 
 
 Utilization

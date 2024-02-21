@@ -44,3 +44,6 @@ def test_factory_without_custom_field_handlers(factory_without_custom_field_hand
 def test_factory_with_custom_field_handlers(factory_with_custom_field_handlers):
     guest = factory_with_custom_field_handlers()
     assert isinstance(guest, Guest)
+
+    assert 1 <= guest.age <= 99
+    assert guest.full_name in ["john", "alice"]
