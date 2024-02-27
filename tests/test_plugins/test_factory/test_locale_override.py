@@ -4,7 +4,7 @@ import factory
 from pytest_factoryboy import register
 
 from mimesis.locales import Locale
-from mimesis.plugins.factory import MimesisField
+from mimesis.plugins.factory import FactoryField
 
 
 class Person(object):
@@ -28,8 +28,8 @@ class PersonFactory(factory.Factory):
     class Meta(object):
         model = Person
 
-    full_name_en = MimesisField("full_name")
-    full_name_ru = MimesisField("full_name", locale=Locale.RU)
+    full_name_en = FactoryField("full_name")
+    full_name_ru = FactoryField("full_name", locale=Locale.RU)
 
 
 def test_data_with_different_locales(person):
@@ -41,7 +41,7 @@ def test_data_with_different_locales(person):
 
 
 def test_data_with_override_locale(person_factory):
-    with MimesisField.override_locale(Locale.RU):
+    with FactoryField.override_locale(Locale.RU):
         person = person_factory()
 
     for letter in person.full_name_en:
@@ -53,7 +53,7 @@ def test_data_with_override_locale(person_factory):
 
 
 def test_data_with_override_defined_locale(person_factory):
-    with MimesisField.override_locale(Locale.EN):
+    with FactoryField.override_locale(Locale.EN):
         person = person_factory()
 
     for letter in person.full_name_en:

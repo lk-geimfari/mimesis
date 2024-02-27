@@ -3,7 +3,7 @@ import pytest
 from pytest_factoryboy import register
 
 from mimesis.enums import Gender
-from mimesis.plugins.factory import MimesisField
+from mimesis.plugins.factory import FactoryField
 
 MIN_AGE = 30
 MAX_AGE = 32
@@ -20,8 +20,8 @@ class GuestFactory(factory.Factory):
     class Meta(object):
         model = Guest
 
-    full_name = MimesisField("full_name", gender=Gender.FEMALE)
-    age = MimesisField("integer_number", start=MIN_AGE, end=MAX_AGE)
+    full_name = FactoryField("full_name", gender=Gender.FEMALE)
+    age = FactoryField("integer_number", start=MIN_AGE, end=MAX_AGE)
 
 
 def test_guest_factory_different_data(guest_factory):

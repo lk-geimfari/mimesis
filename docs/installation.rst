@@ -59,3 +59,19 @@ update the code from the master branch:
     (env) ➜ cd mimesis/
     (env) ➜ make install
 
+
+Optional Dependencies
+---------------------
+
+To enable the ``factory_boy`` plugin, you need to install Mimesis with the corresponding extra, as shown below:
+
+.. code-block:: sh
+
+    (env) ➜ poetry add --group dev mimesis[factory]
+
+
+Similarly, for the ``pytest`` plugin:
+
+.. code-block:: sh
+
+    (env) ➜ poetry add --group dev mimesis[pytest]

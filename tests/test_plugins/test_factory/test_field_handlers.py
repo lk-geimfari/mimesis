@@ -3,7 +3,7 @@ import pytest
 from pytest_factoryboy import register
 
 from mimesis.exceptions import FieldError
-from mimesis.plugins.factory import MimesisField
+from mimesis.plugins.factory import FactoryField
 
 
 class Guest:
@@ -17,8 +17,8 @@ class FactoryWithoutCustomFieldHandlers(factory.Factory):
     class Meta(object):
         model = Guest
 
-    age = MimesisField("anynum")
-    full_name = MimesisField("nickname")
+    age = FactoryField("anynum")
+    full_name = FactoryField("nickname")
 
 
 @register
@@ -32,8 +32,8 @@ class FactoryWithCustomFieldHandlers(factory.Factory):
             ("nickname", lambda rand, **kwargs: rand.choice(["john", "alice"])),
         ]
 
-    age = MimesisField("anynum")
-    full_name = MimesisField("nickname")
+    age = FactoryField("anynum")
+    full_name = FactoryField("nickname")
 
 
 def test_factory_without_custom_field_handlers(factory_without_custom_field_handlers):

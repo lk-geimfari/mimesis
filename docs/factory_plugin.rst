@@ -8,11 +8,17 @@ Integration with factory_boy
 You no longer require any third-party packages to integrate Mimesis with ``factory_boy``.
 
 Mimesis requires ``factory_boy`` to be installed, but it's not a hard dependency.
-Therefore, you'll need to install it manually:
+Therefore, you'll need to install it manually, like this:
 
 .. code-block:: bash
 
     poetry add --group dev factory_boy
+
+Alternatively, you can include it as an extra when installing Mimesis itself, like so:
+
+.. code-block:: bash
+
+    poetry add --group dev mimesis[factory]
 
 
 Utilization
@@ -33,12 +39,12 @@ Look at the example below and you’ll understand how it works:
 
 
 
-Now, use the ``MimesisField`` class to define how fake data is generated:
+Now, use the ``FactoryField`` class to define how fake data is generated:
 
 .. code-block:: python
 
     import factory
-    from mimesis.plugins.factory import MimesisField
+    from mimesis.plugins.factory import FactoryField
 
     from account import Account
 
@@ -46,14 +52,14 @@ Now, use the ``MimesisField`` class to define how fake data is generated:
         class Meta(object):
             model = Account
 
-        username = MimesisField('username', template='l_d')
-        name = MimesisField('name', gender='female')
-        surname = MimesisField('surname', gender='female')
-        age = MimesisField('age', minimum=18, maximum=90)
+        username = FactoryField('username', template='l_d')
+        name = FactoryField('name', gender='female')
+        surname = FactoryField('surname', gender='female')
+        age = FactoryField('age', minimum=18, maximum=90)
         email = factory.LazyAttribute(
             lambda instance: '{0}@example.org'.format(instance.username)
         )
-        access_token = MimesisField('token', entropy=32)
+        access_token = FactoryField('token', entropy=32)
 
 
 
@@ -71,7 +77,7 @@ Just like this:
 .. code-block:: python
 
     import factory
-    from mimesis.plugins.factory import MimesisField
+    from mimesis.plugins.factory import FactoryField
 
     class FactoryWithCustomFieldHandlers(factory.Factory):
         class Meta(object):
@@ -83,8 +89,8 @@ Just like this:
                 ("nick", lambda rand, **kwargs: rand.choice(["john", "alice"])),
             ]
 
-        age = MimesisField("num")
-        nickname = MimesisField("nick")
+        age = FactoryField("num")
+        nickname = FactoryField("nick")
 
 
 See `Custom Field Handlers <https://mimesis.name/en/master/schema.html#custom-field-handlers>`_ for more information

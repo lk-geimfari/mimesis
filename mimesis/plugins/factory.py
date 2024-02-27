@@ -10,10 +10,10 @@ try:
 except ImportError:
     raise ImportError("This plugin requires factory_boy to be installed.")
 
-__all__ = ["MimesisField"]
+__all__ = ["FactoryField", "MimesisField"]
 
 
-class MimesisField(declarations.BaseDeclaration):  # type: ignore[misc]
+class FactoryField(declarations.BaseDeclaration):  # type: ignore[misc]
     """
     Mimesis integration with FactoryBoy starts here.
 
@@ -65,11 +65,11 @@ class MimesisField(declarations.BaseDeclaration):  # type: ignore[misc]
             "field_handlers", []
         )
 
-        mimesis_field = self._get_cached_instance(
+        _field = self._get_cached_instance(
             locale=self.locale,
             field_handlers=field_handlers,
         )
-        return mimesis_field(self.field, **kwargs)
+        return _field(self.field, **kwargs)
 
     @classmethod
     @contextmanager
@@ -116,3 +116,6 @@ class MimesisField(declarations.BaseDeclaration):  # type: ignore[misc]
             cls._cached_instances[key] = field
 
         return cls._cached_instances[key]
+
+# An alias
+MimesisField = FactoryField

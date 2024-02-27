@@ -1,6 +1,6 @@
 import factory
 
-from mimesis.plugins.factory import MimesisField
+from mimesis.plugins.factory import FactoryField
 
 
 class User(object):
@@ -14,7 +14,7 @@ class UserFactory(factory.Factory):
         model = User
 
     uid = factory.Sequence(lambda order: order)
-    email = MimesisField("email")
+    email = FactoryField("email")
 
 
 def test_direct_factory():

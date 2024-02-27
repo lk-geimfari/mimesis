@@ -146,7 +146,7 @@ __all__ = [
     "__license__",
 ]
 
-__version__ = "15.0.0"
+__version__ = "15.1.0"
 __title__ = "mimesis"
 __description__ = "Mimesis: Fake Data Generator."
 __url__ = "https://github.com/lk-geimfari/mimesis"

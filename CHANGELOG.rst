@@ -1,3 +1,8 @@
+Version 15.1.0
+--------------
+
+- Minor fixes in ``factory_boy`` plugin.
+
 Version 15.0.0
 --------------
 

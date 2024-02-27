@@ -3,7 +3,7 @@ import pytest
 import validators
 from pytest_factoryboy import register
 
-from mimesis.plugins.factory import MimesisField
+from mimesis.plugins.factory import FactoryField
 
 TEST_USERNAMES = ("sobolevn", "lk-geimfari")
 
@@ -22,8 +22,8 @@ class AccountFactory(factory.Factory):
         exclude = ("_domain",)
 
     uid = factory.Sequence(lambda order: order + 1)
-    username = MimesisField("username")
-    _domain = MimesisField("top_level_domain")
+    username = FactoryField("username")
+    _domain = FactoryField("top_level_domain")
     email = factory.LazyAttribute(
         lambda instance: "{0}@example{1}".format(
             instance.username,
