@@ -117,5 +117,6 @@ class FactoryField(declarations.BaseDeclaration):  # type: ignore[misc]
 
         return cls._cached_instances[key]
 
+
 # An alias
 MimesisField = FactoryField
