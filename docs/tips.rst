@@ -97,11 +97,3 @@ Response:
         }
       },
     ]
-
-
-Integration with 3rd-party libraries
---------------------------------------
-
-- `mimesis-factory`_ - Integration with ``factory_boy``.
-
-.. _mimesis-factory: https://github.com/mimesis-lab/mimesis-factory
