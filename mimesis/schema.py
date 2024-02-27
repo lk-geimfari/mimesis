@@ -5,7 +5,7 @@ import inspect
 import json
 import pickle
 import re
-import typing as t
+from typing import Any, Callable, Sequence
 
 from mimesis.exceptions import (
     AliasesTypeError,
@@ -21,12 +21,20 @@ from mimesis.providers.generic import Generic
 from mimesis.random import Random
 from mimesis.types import JSON, CallableSchema, Key, MissingSeed, Seed
 
-__all__ = ["BaseField", "Field", "Fieldset", "Schema"]
+__all__ = [
+    "BaseField",
+    "Field",
+    "Fieldset",
+    "Schema",
+    "FieldHandler",
+    "RegisterableFieldHandler",
+    "RegisterableFieldHandlers",
+]
 
-FieldCache = dict[str, t.Callable[[t.Any], t.Any]]
-FieldHandler = t.Callable[[Random, t.Any], t.Any]
+FieldCache = dict[str, Callable[[Any], Any]]
+FieldHandler = Callable[[Random, Any], Any]
 RegisterableFieldHandler = tuple[str, FieldHandler]
-RegisterableFieldHandlers = t.Sequence[RegisterableFieldHandler]
+RegisterableFieldHandlers = Sequence[RegisterableFieldHandler]
 
 
 class BaseField:
@@ -62,7 +70,7 @@ class BaseField:
         """
         return self._generic.random
 
-    def _explicit_lookup(self, name: str) -> t.Any:
+    def _explicit_lookup(self, name: str) -> Any:
         """An explicit method lookup.
 
         This method is called when the field
@@ -79,7 +87,7 @@ class BaseField:
         except AttributeError:
             raise FieldError(name)
 
-    def _fuzzy_lookup(self, name: str) -> t.Any:
+    def _fuzzy_lookup(self, name: str) -> Any:
         """A fuzzy method lookup.
 
         This method is called when the field definition
@@ -97,7 +105,7 @@ class BaseField:
 
         raise FieldError(name)
 
-    def _lookup_method(self, name: str) -> t.Any:
+    def _lookup_method(self, name: str) -> Any:
         """Lookup method by the field name.
 
         :param name: The field name.
@@ -137,8 +145,8 @@ class BaseField:
         self,
         name: str | None = None,
         key: Key = None,
-        **kwargs: t.Any,
-    ) -> t.Any:
+        **kwargs: Any,
+    ) -> Any:
         """Performs the value of the field by its name.
 
         It takes any string that represents the name of any method of
@@ -224,7 +232,7 @@ class BaseField:
 
     def handle(
         self, field_name: str | None = None
-    ) -> t.Callable[[FieldHandler], FieldHandler]:
+    ) -> Callable[[FieldHandler], FieldHandler]:
         """Decorator for registering a custom field handler.
 
         You can use this decorator only for functions,
@@ -261,7 +269,7 @@ class BaseField:
 
         self._handlers.pop(field_name, None)
 
-    def unregister_handlers(self, field_names: t.Sequence[str] = ()) -> None:
+    def unregister_handlers(self, field_names: Sequence[str] = ()) -> None:
         """Unregister a field handlers with given names.
 
         :param field_names: Names of the fields.
@@ -305,7 +313,7 @@ class Field(BaseField):
         Dogtag_1836
     """
 
-    def __call__(self, *args: t.Any, **kwargs: t.Any) -> t.Any:
+    def __call__(self, *args: Any, **kwargs: Any) -> Any:
         return self.perform(*args, **kwargs)
 
 
@@ -338,7 +346,7 @@ class Fieldset(BaseField):
     fieldset_default_iterations: int = 10
     fieldset_iterations_kwarg: str = "i"
 
-    def __init__(self, *args: t.Any, **kwargs: t.Any) -> None:
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
         """Initialize fieldset.
 
         Accepts additional keyword argument **i** which is used
@@ -353,7 +361,7 @@ class Fieldset(BaseField):
         )
         super().__init__(*args, **kwargs)
 
-    def __call__(self, *args: t.Any, **kwargs: t.Any) -> list[t.Any]:
+    def __call__(self, *args: Any, **kwargs: Any) -> list[Any]:
         """Perform fieldset.
 
         :param args: Arguments for field.
@@ -399,7 +407,7 @@ class Schema:
         else:
             raise SchemaError()
 
-    def to_csv(self, file_path: str, **kwargs: t.Any) -> None:
+    def to_csv(self, file_path: str, **kwargs: Any) -> None:
         """Export a schema as a CSV file.
 
         :param file_path: The file path.
@@ -412,7 +420,7 @@ class Schema:
             dict_writer.writeheader()
             dict_writer.writerows(data)
 
-    def to_json(self, file_path: str, **kwargs: t.Any) -> None:
+    def to_json(self, file_path: str, **kwargs: Any) -> None:
         """Export a schema as a JSON file.
 
         :param file_path: File a path.
@@ -421,7 +429,7 @@ class Schema:
         with open(file_path, "w", encoding="utf-8") as fp:
             json.dump(self.create(), fp, **kwargs)
 
-    def to_pickle(self, file_path: str, **kwargs: t.Any) -> None:
+    def to_pickle(self, file_path: str, **kwargs: Any) -> None:
         """Export a schema as the pickled representation of the object to the file.
 
         :param file_path: The file path.

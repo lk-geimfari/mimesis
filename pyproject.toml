@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "mimesis"
-version = "14.0.0"
+version = "15.0.0"
 description = "Mimesis: Fake Data Generator."
 authors = ["Isaak Uchakaev <hey@isaak.dev>"]
 license = "MIT"
@@ -25,7 +25,9 @@ keywords = [
     "testing",
     "pandas",
     "polars",
-    "pytest"
+    "pytest",
+    "factory",
+    "factory_boy"
 ]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
@@ -50,6 +52,7 @@ exclude = [
 
 [tool.poetry.dependencies]
 python = "^3.10"
+factory-boy = { version = "^3.3.0", optional = true }
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.2"
@@ -72,6 +75,10 @@ pytest-cov = "^4.0.0"
 Sphinx = ">=5.1.1,<8.0.0"
 sphinx-copybutton = "^0.5.0"
 sphinx-autodoc-typehints = "^1.19.2"
+pytest-factoryboy = "^2.6.0"
+
+[tool.poetry.extras]
+factory = ["factory-boy"]
 
 [tool.poetry.plugins."pytest_randomly.random_seeder"]
 mimesis = "mimesis.entrypoints:pytest_randomly_reseed"

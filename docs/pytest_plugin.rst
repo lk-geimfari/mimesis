@@ -3,12 +3,13 @@
 Integration with Pytest
 =======================
 
-Starting from version `14.0.0`, Mimesis now supports `pytest` out of the box. You no longer
-require any third-party packages to seamlessly integrate Mimesis with `pytest`.
+.. versionadded:: 14.0.0
+
+You no longer require any third-party packages to seamlessly integrate Mimesis with `pytest`.
 
 
 Usage
-~~~~~
+-----
 
 Using the personal provider as part of a test.
 
@@ -51,7 +52,7 @@ You can also specify locales:
 
 
 Fixtures
-~~~~~~~~
+--------
 
 We offer two public fixtures: `mimesis_locale` and `mimesis`. While `mimesis_locale` is
 an enum object (e.g., `Locale.EN`, `Locale.RU`), `mimesis` is an instance of :class:`mimesis.schema.Field`.
@@ -60,7 +61,7 @@ See :class:`mimesis.enums.Locale`.
 
 
 Impact on Test Speed
-~~~~~~~~~~~~~~~~~~~~
+--------------------
 
 We employ caching of Mimesis instances for various locales throughout the entire test session, making
 the creation of new instances cost-effective.

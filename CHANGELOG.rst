@@ -1,3 +1,9 @@
+Version 15.0.0
+--------------
+
+- Integrated `mimesis-factory` into Mimesis itself. See `mimesis-factory#246 <https://github.com/lk-geimfari/mimesis-factory/issues/246>`_ and `mimesis#1494 <https://github.com/lk-geimfari/mimesis/issues/1494>`_ for more information.
+
+
 Version 14.0.0
 --------------
 
