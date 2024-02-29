@@ -75,6 +75,8 @@ It is divided into several sections:
 -  `Data Providers`_
 -  `Structured Data Generation`_
 -  `Random and Seed`_
+-  `Integration with Pytest`_
+-  `Integration with factory_boy`_
 -  `Tricks and Tips`_
 -  `API Reference`_
 -  `Additional Information`_
@@ -145,3 +147,5 @@ information.
 .. _documentation: https://mimesis.name/en/latest/getting_started.html#data-providers
 .. _contributing guidelines: https://github.com/lk-geimfari/mimesis/blob/master/CONTRIBUTING.rst
 .. _contributors: https://github.com/lk-geimfari/mimesis/blob/master/CONTRIBUTORS.rst
+.. _Integration with Pytest: https://mimesis.name/en/master/pytest_plugin.html
+.. _Integration with factory_boy: https://mimesis.name/en/master/factory_plugin.html
