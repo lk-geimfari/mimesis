@@ -16,7 +16,6 @@ documentation explains the different parts of the Mimesis and how they can be us
    random_and_seed
    pytest_plugin
    factory_plugin
-   tips
 
 
 API Reference
