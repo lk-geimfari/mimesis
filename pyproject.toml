@@ -85,8 +85,8 @@ factory = ["factory-boy"]
 [tool.poetry.plugins."pytest_randomly.random_seeder"]
 mimesis = "mimesis.entrypoints:pytest_randomly_reseed"
 
-#[tool.poetry.plugins.pytest11]
-#mimesis = "mimesis.plugins.pytest"
+[tool.poetry.plugins.pytest11]
+mimesis = "mimesis.plugins.pytest"
 
 [tool.pytest.ini_options]
 testpaths = [
