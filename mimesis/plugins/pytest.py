@@ -1,18 +1,18 @@
-from typing import Any, Callable
+from typing import Callable
+
+from mimesis.locales import Locale
+from mimesis.schema import Field
 
 try:
     import pytest
 except ImportError:
     raise ImportError("pytest is required to use this plugin")
 
-_CacheCallable = Callable[[Any], Any]
+_CacheCallable = Callable[[Locale], Field]
 
 
 @pytest.fixture(scope="session")
 def _mimesis_cache() -> _CacheCallable:
-    from mimesis.locales import Locale
-    from mimesis.schema import Field
-
     cached_instances: dict[Locale, Field] = {}
 
     def factory(locale: Locale) -> Field:
@@ -24,14 +24,12 @@ def _mimesis_cache() -> _CacheCallable:
 
 
 @pytest.fixture()
-def mimesis_locale():  # type: ignore
+def mimesis_locale() -> Locale:
     """Specifies which locale to use."""
-    from mimesis.locales import Locale
-
     return Locale.DEFAULT
 
 
 @pytest.fixture()
-def mimesis(_mimesis_cache: _CacheCallable, mimesis_locale):  # type: ignore
+def mimesis(_mimesis_cache: _CacheCallable, mimesis_locale: Locale) -> Field:
     """Mimesis fixture to provide fake data using all built-in providers."""
     return _mimesis_cache(mimesis_locale)
