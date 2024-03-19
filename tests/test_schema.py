@@ -368,6 +368,17 @@ class MyFieldHandler:
         return random.choice([a, c])
 
 
+def test_register_handler_with_alias(default_field: "Field"):
+    default_field.register_handler("bloop", my_field_handler)
+    default_field.aliases.update({"zoop": "bloop"})
+
+    assert isinstance(default_field("zoop"), str)
+    assert isinstance(default_field("bloop"), str)
+
+    default_field.unregister_handler("bloop")
+    default_field.aliases.pop("zoop")
+
+
 @pytest.mark.parametrize(
     "field_name, handler",
     [
