@@ -112,9 +112,6 @@ class BaseField:
         :return: Callable object.
         :raise FieldError: When field is invalid.
         """
-        # Check if the field is defined in aliases
-        name = self.aliases.get(name, name)
-
         # Support additional delimiters
         name = re.sub(r"[/:\s]", ".", name)
 
@@ -189,6 +186,9 @@ class BaseField:
             raise FieldError()
 
         random = self.get_random_instance()
+
+        # Check if the field is defined in aliases
+        name = self.aliases.get(name, name)
 
         # First, try to find a custom field handler.
         if name in self._handlers:

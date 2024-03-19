@@ -1,3 +1,8 @@
+Version next
+--------------
+
+- Fix for custom handler with alias not working.
+
 Version 15.1.0
 --------------
 
