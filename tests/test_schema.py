@@ -2,7 +2,7 @@ import csv
 import json
 import pickle
 import re
-import tempfile
+from typing import TYPE_CHECKING
 import unicodedata
 from collections.abc import Iterator
 
@@ -24,6 +24,8 @@ from mimesis.schema import Field, Fieldset, Schema
 from mimesis.types import MissingSeed
 from tests.test_providers.patterns import DATA_PROVIDER_STR_REGEX
 
+if TYPE_CHECKING:
+    from pathlib import Path
 
 def test_str(default_field):
     assert re.match(DATA_PROVIDER_STR_REGEX, str(default_field))
@@ -309,35 +311,36 @@ def test_schema_iterator(schema):
         next(schema)
 
 
-def test_schema_to_csv(schema):
-    with tempfile.NamedTemporaryFile("r+") as temp_file:
-        schema.to_csv(temp_file.name)
-        dict_reader = csv.DictReader(temp_file)
+def test_schema_to_csv(tmp_path: "Path" ,schema: Schema):
+    file = tmp_path / "test.csv"
+    schema.to_csv(str(file))
 
-        assert len(list(dict_reader)) == schema.iterations
-        assert isinstance(dict_reader, csv.DictReader)
+    dict_reader = csv.DictReader(file.read_text("UTF-8").splitlines())
 
-        for row in dict_reader:
-            assert "id" in row and "timestamp" in row
+    assert len(list(dict_reader)) == schema.iterations
+    assert isinstance(dict_reader, csv.DictReader)
 
-
-def test_schema_to_json(schema):
-    with tempfile.NamedTemporaryFile("r+") as temp_file:
-        schema.to_json(temp_file.name, sort_keys=True, ensure_ascii=False)
-
-        data = json.load(temp_file)
-        assert len(list(data)) == schema.iterations
-        assert "id" in data[0] and "id" in data[-1]
+    for row in dict_reader:
+        assert "id" in row and "timestamp" in row
 
 
-def test_schema_to_pickle(schema):
-    with tempfile.NamedTemporaryFile("rb") as temp_file:
-        schema.to_pickle(temp_file.name)
+def test_schema_to_json(tmp_path: "Path" ,schema: Schema):
+    file = tmp_path / "test.json"
+    schema.to_json(str(file), sort_keys=True, ensure_ascii=False)
 
-        data = pickle.load(temp_file)
-        assert "id" in data[0] and "id" in data[-1]
-        assert isinstance(data, list)
-        assert len(data) == schema.iterations
+    data = json.loads(file.read_text("UTF-8"))
+    assert len(list(data)) == schema.iterations
+    assert "id" in data[0] and "id" in data[-1]
+
+
+def test_schema_to_pickle(tmp_path: "Path" ,schema: Schema):
+    file = tmp_path / "test.pkl"
+    schema.to_pickle(str(file))
+
+    data = pickle.loads(file.read_bytes())
+    assert "id" in data[0] and "id" in data[-1]
+    assert isinstance(data, list)
+    assert len(data) == schema.iterations
 
 
 @pytest.mark.parametrize(
