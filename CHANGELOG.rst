@@ -1,3 +1,8 @@
+Version next
+--------------
+
+- Fix file permissions in Windows.
+
 Version 15.1.0
 --------------
 
