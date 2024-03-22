@@ -2,9 +2,9 @@ import csv
 import json
 import pickle
 import re
-from typing import TYPE_CHECKING
 import unicodedata
 from collections.abc import Iterator
+from typing import TYPE_CHECKING
 
 import pytest
 
@@ -26,6 +26,7 @@ from tests.test_providers.patterns import DATA_PROVIDER_STR_REGEX
 
 if TYPE_CHECKING:
     from pathlib import Path
+
 
 def test_str(default_field):
     assert re.match(DATA_PROVIDER_STR_REGEX, str(default_field))
@@ -311,7 +312,7 @@ def test_schema_iterator(schema):
         next(schema)
 
 
-def test_schema_to_csv(tmp_path: "Path" ,schema: Schema):
+def test_schema_to_csv(tmp_path: "Path", schema: Schema):
     file = tmp_path / "test.csv"
     schema.to_csv(str(file))
 
@@ -324,7 +325,7 @@ def test_schema_to_csv(tmp_path: "Path" ,schema: Schema):
         assert "id" in row and "timestamp" in row
 
 
-def test_schema_to_json(tmp_path: "Path" ,schema: Schema):
+def test_schema_to_json(tmp_path: "Path", schema: Schema):
     file = tmp_path / "test.json"
     schema.to_json(str(file), sort_keys=True, ensure_ascii=False)
 
@@ -333,7 +334,7 @@ def test_schema_to_json(tmp_path: "Path" ,schema: Schema):
     assert "id" in data[0] and "id" in data[-1]
 
 
-def test_schema_to_pickle(tmp_path: "Path" ,schema: Schema):
+def test_schema_to_pickle(tmp_path: "Path", schema: Schema):
     file = tmp_path / "test.pkl"
     schema.to_pickle(str(file))
 
