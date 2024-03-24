@@ -57,4 +57,4 @@ Matrix = list[list[Number]]
 
 CallableSchema = Callable[[], JSON]
 
-Key = Callable[[Any], Any] | None
+Key = Callable[..., Any] | None

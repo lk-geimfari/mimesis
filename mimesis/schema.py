@@ -32,7 +32,7 @@ __all__ = [
 ]
 
 FieldCache = dict[str, Callable[[Any], Any]]
-FieldHandler = Callable[[Random, Any], Any]
+FieldHandler = Callable[..., Any]
 RegisterableFieldHandler = tuple[str, FieldHandler]
 RegisterableFieldHandlers = Sequence[RegisterableFieldHandler]
 
@@ -192,7 +192,7 @@ class BaseField:
 
         # First, try to find a custom field handler.
         if name in self._handlers:
-            result = self._handlers[name](random, **kwargs)  # type: ignore
+            result = self._handlers[name](random, **kwargs)
         else:
             result = self._lookup_method(name)(**kwargs)
 
@@ -200,7 +200,7 @@ class BaseField:
             try:
                 # If a key function accepts two parameters
                 # then pass random instance to it.
-                return key(result, random)  # type: ignore
+                return key(result, random)
             except TypeError:
                 return key(result)
 
@@ -309,7 +309,7 @@ class Field(BaseField):
     Here is an example of how to use it:
 
         >>> _ = Field()
-        >>> _('username')
+        >>> _("username")
         Dogtag_1836
     """
 
@@ -325,14 +325,14 @@ class Fieldset(BaseField):
     Here is an example:
 
         >>> fieldset = Fieldset(i=100)
-        >>> fieldset('username')
+        >>> fieldset("username")
         ['pot_1821', 'vhs_1915', ..., 'reviewed_1849']
 
     You may also specify the number of iterations by passing the **i** keyword
     argument to the callable instance of fieldset:
 
         >>> fieldset = Fieldset()
-        >>> fieldset('username', i=2)
+        >>> fieldset("username", i=2)
         ['pot_1821', 'vhs_1915']
 
     When **i** is not specified, the reasonable default is used — **10**.
