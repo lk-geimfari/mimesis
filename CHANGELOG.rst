@@ -2,6 +2,7 @@ Version next
 --------------
 
 - Fix file permissions in Windows.
+- Move location of pytest plugin.
 
 Version 15.1.0
 --------------

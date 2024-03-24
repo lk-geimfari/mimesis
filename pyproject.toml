@@ -86,7 +86,7 @@ factory = ["factory-boy"]
 mimesis = "mimesis.entrypoints:pytest_randomly_reseed"
 
 [tool.poetry.plugins.pytest11]
-mimesis = "mimesis.plugins.pytest"
+mimesis = "pytest_plugin.plugin"
 
 [tool.pytest.ini_options]
 testpaths = [
