@@ -19,10 +19,6 @@ Description
      :target: https://mimesis.name/en/latest/
      :alt: Documentation Status
 
-.. image:: https://codecov.io/gh/lk-geimfari/mimesis/branch/master/graph/badge.svg
-     :target: https://codecov.io/gh/lk-geimfari/mimesis
-     :alt: Code Coverage
-
 .. image:: https://img.shields.io/pypi/v/mimesis?color=bright-green
      :target: https://pypi.org/project/mimesis/
      :alt: PyPi Version
