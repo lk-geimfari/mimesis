@@ -27,7 +27,7 @@ keywords = [
     "polars",
     "pytest",
     "factory",
-    "factory_boy"
+    "factory_boy",
 ]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
@@ -46,9 +46,7 @@ classifiers = [
     "Topic :: Software Development :: Testing",
     "License :: OSI Approved :: MIT License",
 ]
-exclude = [
-    "mimesis/datasets/locale_template",
-]
+exclude = ["mimesis/datasets/locale_template"]
 
 [tool.poetry.dependencies]
 python = "^3.10"
@@ -89,15 +87,11 @@ mimesis = "mimesis.entrypoints:pytest_randomly_reseed"
 mimesis = "pytest_plugin.plugin"
 
 [tool.pytest.ini_options]
-testpaths = [
-    "mimesis",
-    "tests",
-    "minifier.py",
-]
+testpaths = ["mimesis", "tests", "minifier.py"]
 
 [tool.mypy]
 exclude = ["tests", "docs"]
-files = ["mimesis", "minifier.py"]
+files = ["mimesis", "minifier.py", "pytest_plugin/plugin.py"]
 strict_optional = true
 check_untyped_defs = true
 ignore_errors = false
@@ -116,6 +110,9 @@ no_implicit_optional = true
 warn_return_any = true
 strict_equality = true
 
+[tool.coverage.report]
+exclude_also = ["if TYPE_CHECKING:"]
+
 [tool.isort]
 profile = "wemake"
 
@@ -124,4 +121,3 @@ minify = "python minifier.py"
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
-
