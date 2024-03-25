@@ -445,7 +445,7 @@ class Schema:
             This method evaluates immediately, so be careful when creating
             large datasets otherwise you're risking running out of memory.
 
-            If you need a lazy version of this method, see :meth:`iterator`.
+            For lazy generation, iterate over the Schema object instead.
 
         :return: List of fulfilled schemas.
         """
