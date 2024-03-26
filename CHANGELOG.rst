@@ -2,6 +2,7 @@ Version next
 --------------
 
 - Fix file permissions in Windows.
+- Change type hints for key functions and field handlers.
 
 Version 15.1.0
 --------------
