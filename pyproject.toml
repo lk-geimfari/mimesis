@@ -47,6 +47,7 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
 ]
 exclude = ["mimesis/datasets/locale_template"]
+packages = [{ include = "mimesis" }, { include = "mimesis_pytest_plugin" }]
 
 [tool.poetry.dependencies]
 python = "^3.10"
