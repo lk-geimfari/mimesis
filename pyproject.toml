@@ -84,14 +84,14 @@ factory = ["factory-boy"]
 mimesis = "mimesis.entrypoints:pytest_randomly_reseed"
 
 [tool.poetry.plugins.pytest11]
-mimesis = "pytest_plugin.plugin"
+mimesis = "mimesis_pytest_plugin.plugin"
 
 [tool.pytest.ini_options]
 testpaths = ["mimesis", "tests", "minifier.py"]
 
 [tool.mypy]
 exclude = ["tests", "docs"]
-files = ["mimesis", "minifier.py", "pytest_plugin/plugin.py"]
+files = ["mimesis", "minifier.py", "mimesis_pytest_plugin/plugin.py"]
 strict_optional = true
 check_untyped_defs = true
 ignore_errors = false
