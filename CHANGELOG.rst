@@ -1,6 +1,7 @@
-Version next
+Version 16.0.0
 --------------
 
+- Removed unsafe and inaproppriate words from datasets. See `#1511 <https://github.com/lk-geimfari/mimesis/issues/1511>`_
 - Fix file permissions in Windows.
 
 Version 15.1.0
