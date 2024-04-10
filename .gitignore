@@ -1,7 +1,16 @@
+###User Defined###
+venv/
+.env
+*.env
+_private/
+*_private/
+.editorconfig
+
 #### macos ####
 *.DS_Store
 .AppleDouble
 .LSOverride
+
 
 # Icon must end with two \r
 Icon
