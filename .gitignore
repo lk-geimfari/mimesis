@@ -1,0 +1,4 @@
+.env
+*.env
+_private/
+node_modules/
