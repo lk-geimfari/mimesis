@@ -3,7 +3,7 @@ from dotenv import load_dotenv, find_dotenv
 from google.cloud import storage
 load_dotenv(find_dotenv())
 
-def authenticate_implicit_with_adc(project_id="your-google-cloud-project-id"):
+def authenticate_implicit_with_adc(project_id=os.getenv("GCP_PROJECT_ID")):
     """
     When interacting with Google Cloud Client libraries, the library can auto-detect the
     credentials to use.

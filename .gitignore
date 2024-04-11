@@ -3,3 +3,4 @@
 _private/
 node_modules/
 venv/
+**/datasets/
