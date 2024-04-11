@@ -1,0 +1,40 @@
+
+# Default configuration for specialized time series model.
+
+# See https://docs.gretel.ai/synthetics/models/gretel-dgan for detailed info on
+# all config options.
+
+schema_version: "1.0"
+name: "time-series-dgan"
+models:
+  - timeseries_dgan:
+        data_source: __tmp__
+
+        # "auto" will infer the time column from the input data. Alternately,
+        # replace with a specific column name to use as the time column. Or
+        # remove the field, equivalently set to null, if the input data does not
+        # have a time column (and is already sorted by increasing time).
+        time_column: auto
+        
+        # Replace with "wide" if time series data is in a wide 
+        # format.
+        df_style: long
+        params:
+     
+            # Replace max_sequence_len with the length of sequences.
+            max_sequence_len: 10
+            
+            # sample_len must be must be a divisor of max_sequence_len.
+            sample_len: 1
+            
+            feature_noise_dim: 32
+            feature_num_layers: 1
+            feature_num_units: 100
+            apply_feature_scaling: True
+            generator_learning_rate: 1e-5
+            discriminator_learning_rate: 1e-5
+            attribute_discriminator_learning_rate: 1e-5
+            batch_size: 100
+            epochs: 5000
+            apply_example_scaling: False
+            attribute_loss_coef: 10
