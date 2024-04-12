@@ -1,17 +1,15 @@
 # Python Client Library to upload file
 from google.cloud import Client, storage
-gcp_conn = 
 
 
 def upload_blob(bucket_name, source_file_name, destination_blob_name):
     """Uploads a file to the bucket."""
     # The ID of your GCS bucket
-    bucket_name = bucket_name
-    if 
+    #bucket_name = bucket_name
     # The path to your file to upload
-    # source_file_name = "local/path/to/file"
+    #source_file_name = "local/path/to/file"
     # The ID of your GCS object
-    # destination_blob_name = "storage-object-name"
+    #destination_blob_name = "storage-object-name"
 
     storage_client = storage.Client()
     bucket = storage_client.bucket(bucket_name)

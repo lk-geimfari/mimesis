@@ -1,0 +1,19 @@
+dataset:
+  name: house-price
+  train_path: s3://gretel-datasets/ml_ops/house_price/train.csv
+  validation_path: null
+  test_path: null
+  target_column: Price
+  drop_columns: null
+ML:
+  ml_task: regression
+  objective: reg:linear
+  objective_type: Minimize
+  ml_eval_metric: rmse
+  ml_metric_threshold: 6.0
+gretel:
+  strategy: augment
+  generate_factor: 1.0
+  target_balance: null
+  mode: cloud
+  sink_bucket: null

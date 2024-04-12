@@ -1,0 +1,19 @@
+dataset:
+  name: heart-failure
+  train_path: s3://gretel-datasets/ml_ops/heart_failure/train.csv
+  validation_path: null
+  test_path: null
+  target_column: HeartDisease
+  drop_columns: null
+ML:
+  ml_task: classification
+  objective: binary:logistic
+  objective_type: Maximize
+  ml_eval_metric: f1
+  ml_metric_threshold: 0.0
+gretel:
+  strategy: balance
+  generate_factor: 1.0
+  target_balance: 1.0
+  mode: cloud
+  sink_bucket: null
