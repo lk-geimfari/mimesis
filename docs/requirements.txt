@@ -1,3 +1,3 @@
-sphinx==7.2.6
+sphinx==7.3.5
 sphinx-copybutton==0.5.2
 sphinx-autodoc-typehints==1.23.0
