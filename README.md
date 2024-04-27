@@ -63,7 +63,7 @@ It is divided into several sections:
 -  [About Mimesis](https://mimesis.name/en/latest/about.html)
 -  [Quickstart](https://mimesis.name/en/master/quickstart.html)
 -  [Locales](https://mimesis.name/en/master/locales.html)
--  [Data Providers](https://mimesis.name/en/master/getting_started.html#data-providers)
+-  [Data Providers](https://mimesis.name/en/latest/providers.html)
 -  [Structured Data Generation](https://mimesis.name/en/master/schema.html)
 -  [Random and Seed](https://mimesis.name/en/master/random_and_seed.html)
 -  [Integration with Pytest](https://mimesis.name/en/master/pytest_plugin.html)
