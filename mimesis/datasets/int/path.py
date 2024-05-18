@@ -14,4 +14,7 @@ PLATFORMS = {
     "win64": {
         "home": "C:\\Users\\",
     },
+    "freebsd": {
+        "home": "/home/",
+    },
 }
