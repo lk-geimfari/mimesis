@@ -17,6 +17,9 @@
     <img src="https://img.shields.io/pypi/v/mimesis?color=bright-green" alt="Package version">
 </a>
 <a href="https://pypi.org/project/mimesis/" target="_blank">
+    <img src="https://img.shields.io/pypi/dm/mimesis" alt="Package version">
+</a>
+<a href="https://pypi.org/project/mimesis/" target="_blank">
     <img src="https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12%20%7C%20pypy-brightgreen" alt="Supported Python versions">
 </a>
 </p>
@@ -27,7 +30,7 @@
 
 ---
 
-Mimesis ([/mɪˈmiːsɪs](https://mimesis.name/en/master/about.html#what-does-name-mean)) is a robust data generator for
+Mimesis ([/mɪˈmiːsɪs](https://mimesis.name/en/latest/about.html#what-does-name-mean)) is a robust data generator for
 Python that can produce a wide range of fake data in various languages.
 
 The key features are:
@@ -58,15 +61,15 @@ You can find the complete documentation on the [Read the Docs](https://mimesis.n
 It is divided into several sections:
 
 -  [About Mimesis](https://mimesis.name/en/latest/about.html)
--  [Quickstart](https://mimesis.name/en/master/quickstart.html)
--  [Locales](https://mimesis.name/en/master/locales.html)
--  [Data Providers](https://mimesis.name/en/master/getting_started.html#data-providers)
--  [Structured Data Generation](https://mimesis.name/en/master/schema.html)
--  [Random and Seed](https://mimesis.name/en/master/random_and_seed.html)
--  [Integration with Pytest](https://mimesis.name/en/master/pytest_plugin.html)
--  [Integration with factory_boy](https://mimesis.name/en/master/factory_plugin.html)
--  [API Reference](https://mimesis.name/en/master/api.html)
--  [Changelog](https://mimesis.name/en/master/index.html#changelog)
+-  [Quickstart](https://mimesis.name/en/latest/quickstart.html)
+-  [Locales](https://mimesis.name/en/latest/locales.html)
+-  [Data Providers](https://mimesis.name/en/latest/providers.html)
+-  [Structured Data Generation](https://mimesis.name/en/latest/schema.html)
+-  [Random and Seed](https://mimesis.name/en/latest/random_and_seed.html)
+-  [Integration with Pytest](https://mimesis.name/en/latest/pytest_plugin.html)
+-  [Integration with factory_boy](https://mimesis.name/en/latest/factory_plugin.html)
+-  [API Reference](https://mimesis.name/en/latest/api.html)
+-  [Changelog](https://mimesis.name/en/latest/index.html#changelog)
 
 You can improve it by sending pull requests to this repository.
 

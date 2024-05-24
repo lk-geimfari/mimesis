@@ -27,11 +27,13 @@ class Path(BaseProvider):
     ) -> None:
         """Initialize attributes.
 
-        Supported platforms: 'linux', 'darwin', 'win32', 'win64'.
+        Supported platforms: 'linux', 'darwin', 'win32', 'win64', 'freebsd'.
 
         :param platform: Required platform type.
         """
         super().__init__(*args, **kwargs)
+        if platform.startswith("freebsd"):
+            platform = "freebsd"
         self.platform = platform
         self._pathlib_home = PureWindowsPath() if "win" in platform else PurePosixPath()
         self._pathlib_home /= PLATFORMS[platform]["home"]
