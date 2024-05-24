@@ -66,7 +66,7 @@ div.highlight pre, table.highlighttable pre {
 
 @media (prefers-color-scheme: dark) {
     body {
-        background-color: #171717;
+        background-color: #121212;
     }
 
     div.sphinxsidebar p {
@@ -79,11 +79,11 @@ div.highlight pre, table.highlighttable pre {
     }
 
     dt:target, .highlight {
-        background: #171717;
+        background: #121212;
     }
 
     .py, .py-class {
-        background: #171717;
+        background: #121212;
     }
 
     div.sphinxsidebar h3,
@@ -105,7 +105,7 @@ div.highlight pre, table.highlighttable pre {
     }
 
     div.body {
-        background-color: #171717;
+        background-color: #121212;
         color: #98a3ad;
     }
 
@@ -129,7 +129,7 @@ div.highlight pre, table.highlighttable pre {
     }
 
     #api-reference .reference span.pre {
-        background-color: #171717 !important;
+        background-color: #121212 !important;
     }
 
     div.highlight {
@@ -259,7 +259,7 @@ div.highlight pre, table.highlighttable pre {
     }
 
     .rst-versions .rst-current-version {
-        background-color: #171717 !important;
+        background-color: #121212 !important;
         border: 1px solid #1a1a1a;
     }
 
@@ -294,7 +294,7 @@ div.highlight pre, table.highlighttable pre {
         width: 80%;
         padding: 0.25em;
         box-sizing: border-box;
-        background: #171717;
+        background: #121212;
     }
 
     div.sphinxsidebar input {
@@ -304,11 +304,11 @@ div.highlight pre, table.highlighttable pre {
 
     div.sphinxsidebar #searchbox input[type="submit"] {
         color: #98a3ad;
-        background: #171717;
+        background: #121212;
     }
 
     input[value="Go"] {
-        background-color: #171717 !important;
+        background-color: #121212 !important;
     }
 
     input[value="Go"]:hover {
