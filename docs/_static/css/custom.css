@@ -112,7 +112,7 @@ div.highlight pre, table.highlighttable pre {
     div.note {
         background-color: #1a1a1a !important;
         border-radius: 10px;
-        border: 1px solid #2a2e2f;
+        border: 1px solid rgba(90, 90, 90, 0.25)
     }
 
     pre {
@@ -140,7 +140,7 @@ div.highlight pre, table.highlighttable pre {
     div.warning {
         background-color: #1a1a1a !important;
         border-radius: 8px;
-        border: 1px solid rgba(142, 117, 114, 0.25);
+        border: 1px solid rgba(90, 90, 90, 0.25);
     }
 
     #contents li a,
