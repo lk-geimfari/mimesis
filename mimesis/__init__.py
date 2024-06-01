@@ -16,6 +16,7 @@ from mimesis.enums import (
     CountryCode,
     DocumentFile,
     DSNType,
+    DurationUnit,
     EANFormat,
     EmojyCategory,
     FileType,
@@ -107,6 +108,7 @@ __all__ = [
     "Algorithm",
     "AudioFile",
     "CardType",
+    "DurationUnit",
     "CompressedFile",
     "CountryCode",
     "DocumentFile",
@@ -146,7 +148,7 @@ __all__ = [
     "__license__",
 ]
 
-__version__ = "16.0.0"
+__version__ = "17.0.0"
 __title__ = "mimesis"
 __description__ = "Mimesis: Fake Data Generator."
 __url__ = "https://github.com/lk-geimfari/mimesis"

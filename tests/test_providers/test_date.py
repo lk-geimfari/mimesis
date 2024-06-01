@@ -5,7 +5,7 @@ import pytest
 
 from mimesis import Datetime
 from mimesis.datasets import GMT_OFFSETS, TIMEZONES
-from mimesis.enums import TimestampFormat, TimezoneRegion
+from mimesis.enums import DurationUnit, TimestampFormat, TimezoneRegion
 from mimesis.exceptions import NonEnumerableError
 
 from . import patterns
@@ -215,6 +215,49 @@ class TestDatetime:
         assert (int(year) >= 2017) and (int(year) <= _datetime._CURRENT_YEAR)
         assert int(week) <= 52
 
+    @pytest.mark.parametrize(
+        "min_duration, max_duration, duration_unit",
+        [
+            (1, 10, DurationUnit.WEEKS),
+            (1, 10, DurationUnit.DAYS),
+            (1, 10, DurationUnit.HOURS),
+            (1, 10, DurationUnit.MINUTES),
+            (1, 10, DurationUnit.SECONDS),
+            (1, 10, DurationUnit.MILLISECONDS),
+            (1, 10, DurationUnit.MICROSECONDS),
+            (1, 10, None),
+        ],
+    )
+    def test_duration(self, _datetime, min_duration, max_duration, duration_unit):
+        result = _datetime.duration(
+            min_duration=min_duration,
+            max_duration=max_duration,
+            duration_unit=duration_unit,
+        )
+        assert isinstance(result, datetime.timedelta)
+
+    def test_duration_error(self, _datetime):
+        with pytest.raises(ValueError):
+            _datetime.duration(
+                min_duration=10,
+                max_duration=1,
+                duration_unit=DurationUnit.WEEKS,
+            )
+
+        with pytest.raises(NonEnumerableError):
+            _datetime.duration(
+                min_duration=10,
+                max_duration=10,
+                duration_unit="Blabla",
+            )
+
+        with pytest.raises(TypeError):
+            _datetime.duration(
+                min_duration=10.5,
+                max_duration=10.9,
+                duration_unit=DurationUnit.WEEKS,
+            )
+
 
 class TestSeededDatetime:
     @pytest.fixture
@@ -289,3 +332,9 @@ class TestSeededDatetime:
         assert d1.bulk_create_datetimes(
             date_start, date_end, minutes=10
         ) == d2.bulk_create_datetimes(date_start, date_end, minutes=10)
+
+    def test_duratioh(self, d1, d2):
+        assert d1.duration() == d2.duration()
+        assert d1.duration(10, 20, DurationUnit.WEEKS) == d2.duration(
+            10, 20, DurationUnit.WEEKS
+        )

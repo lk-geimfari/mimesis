@@ -6,7 +6,7 @@ from datetime import date, datetime, time, timedelta
 
 from mimesis.compat import pytz
 from mimesis.datasets import GMT_OFFSETS, ROMAN_NUMS, TIMEZONES
-from mimesis.enums import TimestampFormat, TimezoneRegion
+from mimesis.enums import DurationUnit, TimestampFormat, TimezoneRegion
 from mimesis.providers.base import BaseDataProvider
 from mimesis.types import Date, DateTime, Time
 
@@ -288,3 +288,33 @@ class Datetime(BaseDataProvider):
             return stamp.isoformat()
         else:
             return int(stamp.timestamp())
+
+    def duration(
+        self,
+        min_duration: int = 1,
+        max_duration: int = 10,
+        duration_unit: DurationUnit | None = DurationUnit.MINUTES,
+    ) -> timedelta:
+        """Generate a random duration.
+
+        The default duration unit is Duration.MINUTES.
+
+        When the duration unit is None, then random
+        duration from DurationUnit is chosen.
+
+        A timedelta object represents a duration, the difference
+        between two datetime or date instances.
+
+        :param min_duration: Minimum duration.
+        :param max_duration: Maximum duration.
+        :param duration_unit: Duration unit.
+        :return: Duration as timedelta.
+        """
+        if min_duration > max_duration:
+            raise ValueError("min_duration must be less or equal to max_duration")
+
+        if not isinstance(min_duration, int) or not isinstance(max_duration, int):
+            raise TypeError("min_duration and max_duration must be integers")
+
+        unit = self.validate_enum(duration_unit, DurationUnit)
+        return timedelta(**{unit: self.random.randint(min_duration, max_duration)})

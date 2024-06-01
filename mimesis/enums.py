@@ -13,6 +13,21 @@ import typing as t
 from enum import Enum, auto
 
 
+class DurationUnit(Enum):
+    """Provides duration units.
+
+    An argument for :meth:`~mimesis.Datetime.duration()`.
+    """
+
+    WEEKS = "weeks"
+    DAYS = "days"
+    HOURS = "hours"
+    MINUTES = "minutes"
+    SECONDS = "seconds"
+    MILLISECONDS = "milliseconds"
+    MICROSECONDS = "microseconds"
+
+
 class Locale(Enum):
     """This class provides access to the supported locales from one place.
 

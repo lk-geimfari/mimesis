@@ -1,3 +1,9 @@
+Version 17.0.0
+--------------
+
+- Added ``mimesis.enums.DurationUnit`` enum.
+- Added ``.duration()`` method for ``Datetime`` provider to generate random durations.
+
 Version 16.0.0
 --------------
 
