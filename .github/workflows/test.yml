@@ -26,7 +26,7 @@ jobs:
       - name: Install Poetry
         run: pip install poetry
       - name: Cache virtual environment
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: .venv
           key: ${{ runner.os }}-python-${{ matrix.python-version }}-venv-${{ hashFiles('**/poetry.lock') }}
@@ -37,7 +37,7 @@ jobs:
       - name: Check code style
         run: make lint
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v4
         if: "github.repository == 'lk-geimfari/mimesis' && matrix.os == 'ubuntu-latest' && matrix.python-version == '3.10'"
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
