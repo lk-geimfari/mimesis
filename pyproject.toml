@@ -53,10 +53,10 @@ exclude = [
 [tool.poetry.dependencies]
 python = "^3.10"
 factory-boy = { version = "^3.3.0", optional = true }
-pytest = { version = "^7.2", optional = true }
+pytest = { version = ">=7.2,<9.0", optional = true }
 
 [tool.poetry.group.dev.dependencies]
-pytest = "^7.2"
+pytest = ">=7.2,<9.0"
 pytest-mock = "^3.10"
 requests = "^2.28"
 mypy = "^1.1"
