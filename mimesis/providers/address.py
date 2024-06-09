@@ -10,6 +10,8 @@ from mimesis.datasets import (
     CALLING_CODES,
     CONTINENT_CODES,
     COUNTRY_CODES,
+    IATA_CODES,
+    ICAO_CODES,
     SHORTENED_ADDRESS_FMT,
 )
 from mimesis.enums import CountryCode
@@ -283,3 +285,17 @@ class Address(BaseDataProvider):
         An alias for :meth:`~Address.calling_code()`.
         """
         return self.calling_code()
+
+    def iata_code(self) -> str:
+        """Generates a random IATA code.
+
+        :return: IATA code.
+        """
+        return self.random.choice(IATA_CODES)
+
+    def icao_code(self) -> str:
+        """Generates a random ICAO code.
+
+        :return: ICAO code.
+        """
+        return self.random.choice(ICAO_CODES)

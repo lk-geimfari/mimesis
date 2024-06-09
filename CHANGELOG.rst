@@ -1,3 +1,9 @@
+Version 17.1.0
+--------------
+
+- Added ``iata_code()`` method for ``Address`` provider.
+- Added ``icao_code()`` method for ``Address`` provider.
+
 Version 17.0.0
 --------------
 

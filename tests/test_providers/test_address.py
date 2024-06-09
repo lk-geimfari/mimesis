@@ -3,7 +3,13 @@ import re
 import pytest
 
 from mimesis import Address
-from mimesis.datasets import CALLING_CODES, CONTINENT_CODES, COUNTRY_CODES
+from mimesis.datasets import (
+    CALLING_CODES,
+    CONTINENT_CODES,
+    COUNTRY_CODES,
+    IATA_CODES,
+    ICAO_CODES,
+)
 from mimesis.enums import CountryCode
 from mimesis.exceptions import NonEnumerableError
 
@@ -191,6 +197,14 @@ class TestAddress:
 
         assert all(is_emoji_flag(char) for char in emoji_flag)
 
+    def test_icao_code(self, address):
+        result = address.icao_code()
+        assert result in ICAO_CODES
+
+    def test_iata_code(self, address):
+        result = address.iata_code()
+        assert result in IATA_CODES
+
 
 class TestSeededAddress:
     @pytest.fixture
@@ -260,6 +274,12 @@ class TestSeededAddress:
 
     def test_country_emoji_flag(self, a1, a2):
         assert a1.country_emoji_flag() == a2.country_emoji_flag()
+
+    def test_icao_code(self, a1, a2):
+        assert a1.icao_code() == a2.icao_code()
+
+    def test_iata_code(self, a1, a2):
+        assert a1.iata_code() == a2.iata_code()
 
 
 @pytest.mark.parametrize(
