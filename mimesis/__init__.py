@@ -7,8 +7,8 @@ Repository: https://github.com/lk-geimfari/mimesis
 License: MIT License.
 """
 
-from mimesis import keys
-from mimesis.enums import (
+from . import keys
+from .enums import (
     Algorithm,
     AudioFile,
     CardType,
@@ -35,7 +35,7 @@ from mimesis.enums import (
     URLScheme,
     VideoFile,
 )
-from mimesis.exceptions import (
+from .exceptions import (
     FieldArityError,
     FieldError,
     FieldNameError,
@@ -44,8 +44,8 @@ from mimesis.exceptions import (
     NonEnumerableError,
     SchemaError,
 )
-from mimesis.locales import Locale
-from mimesis.providers import (
+from .locales import Locale
+from .providers import (
     Address,
     BaseDataProvider,
     BaseProvider,
@@ -69,7 +69,7 @@ from mimesis.providers import (
     Text,
     Transport,
 )
-from mimesis.schema import Field, Fieldset, Schema
+from .schema import Field, Fieldset, Schema
 
 __all__ = [
     # Providers:
