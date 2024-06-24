@@ -1,34 +1,22 @@
-from langchain_huggingface import HuggingFaceEndpoint
-from langchain_core.prompts import PromptTemplate
+"""
+use ai for generating your data
+"""
+try:
+    from langchain_huggingface import HuggingFaceEndpoint
+    from langchain_core.prompts import PromptTemplate
+except ImportError:
+    raise ImportError("langchain_huggingface,\
+                    langchain_core is required to run this plugin")
 
-
+from ai_config import default_prompt, default_model_name
 class TextAI:
     def __init__(self, model=None):
         if not model:
-            self.model = "mistralai/Mixtral-8x7B-Instruct-v0.1"
+            self.model = default_model_name
         else:
             self.model = model
         self.llm = HuggingFaceEndpoint(repo_id=self.model, temperature=0.5)
-        self.prompt_template = """
-        Answer the following question after <<<>>> with only one word.
-        Do not include any other information.
-        You will only respond with one word, Do not provide explanations or notes.
-
-        ####
-        Here are some examples:
-
-        Question: generate a random number.
-        Answer: 10
-        Question: generate a random fruit name.
-        Answer: apple
-        Question: generate a random name.
-        Answer: brad
-        ###
-
-        <<<
-        Question: {question}
-        >>>
-        """
+        self.prompt_template = default_prompt
 
     def chat(self, question, prompt_template=None):
         if prompt_template:
