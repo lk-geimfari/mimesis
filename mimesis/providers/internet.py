@@ -22,6 +22,7 @@ from mimesis.datasets import (
 )
 from mimesis.enums import (
     DSNType,
+    IPv4Purpose,
     Locale,
     MimeType,
     PortRange,
@@ -126,6 +127,9 @@ class Internet(BaseProvider):
     def ip_v4_object(self) -> IPv4Address:
         """Generates a random :py:class:`ipaddress.IPv4Address` object.
 
+        If you only need special purpose IPv4 addresses,
+        use :meth:`special_ip_v4_object`.
+
         :return: :py:class:`ipaddress.IPv4Address` object.
         """
         return IPv4Address(
@@ -174,6 +178,20 @@ class Internet(BaseProvider):
             2001:c244:cf9d:1fb1:c56d:f52c:8a04:94f3
         """
         return str(self.ip_v6_object())
+
+    def asn(self) -> str:
+        """Generates a random 4-byte ASN.
+
+        ASNs reserved for private use are not considered.
+
+        :return: ASN number as a string.
+
+        :Example:
+            AS123456
+        """
+        ranges = (1, 4_199_999_999)
+        number = self.random.randint(*ranges)
+        return f"AS{number}"
 
     def mac_address(self) -> str:
         """Generates a random MAC address.
@@ -516,3 +534,22 @@ class Internet(BaseProvider):
             ),
         }
         return headers
+
+    def special_ip_v4_object(self, purpose: IPv4Purpose | None = None) -> IPv4Address:
+        """Generates a special purpose IPv4 address.
+
+        :param purpose: Enum object :class:`enums.IPv4Purpose`.
+        :return: IPv4 address.
+        :raises NonEnumerableError: if purpose not in :class:`enums.IPv4Purpose`.
+        """
+        ranges = self.validate_enum(purpose, IPv4Purpose)
+        number = self.random.randint(*ranges)
+        return IPv4Address(number)
+
+    def special_ip_v4(self, purpose: IPv4Purpose | None = None) -> str:
+        """Generates a special purpose IPv4 address as string.
+
+        :param purpose: Enum object :class:`enums.IPv4Purpose`.
+        :return: IPv4 address as string.
+        """
+        return str(self.special_ip_v4_object(purpose))

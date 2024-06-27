@@ -13,6 +13,38 @@ import typing as t
 from enum import Enum, auto
 
 
+class IPv4Purpose(Enum):
+    """Provides IPv4 address ranges for different purposes.
+
+    An argument for :meth:`~mimesis.Internet.special_ip_v4_object()`.
+
+    We use integer representation of IP addresses instead of
+    IPv4Network objects for better performance.
+    """
+
+    THIS_NETWORK = (0, 16_777_215)
+    AMT = (3_224_682_752, 3_224_683_007)
+    LOOBACK = (2_130_706_432, 2_147_483_647)
+    AS112_V4 = (3_223_307_264, 3_223_307_519)
+    LINK_LOCAL = (2_851_995_648, 2_852_061_183)
+    TEST_NET_1 = (3_221_225_984, 3_221_226_239)
+    TEST_NET_2 = (3_325_256_704, 3_325_256_959)
+    TEST_NET_3 = (3_405_803_776, 3_405_804_031)
+    BENCHMARKING = (3_323_068_416, 3_323_199_487)
+    PRIVATE_USE_1 = (167_772_160, 184_549_375)
+    PRIVATE_USE_2 = (2_886_729_728, 2_887_778_303)
+    PRIVATE_USE_3 = (3_232_235_520, 3_232_301_055)
+    RESERVED = (4_026_531_840, 4_294_967_295)
+    SHARE_ADDRESS_SPACE = (1_681_915_904, 1_686_110_207)
+    LIMITED_BROADCAST = (4_294_967_295, 4_294_967_295)
+    IPV4_DUMMY_ADDRESS = (3_221_225_480, 3_221_225_480)
+    TURN_RELAY_ANYCAST = (3_221_225_482, 3_221_225_482)
+    IETF_PROTOCOL_ASSIGNMENTS = (3_221_225_472, 3_221_225_727)
+    PORT_CONTROL_PROTOCOL_ANYCAST = (3_221_225_481, 3_221_225_481)
+    IPV4_SERVICE_CONTINUITY_PREFIX = (3_221_225_472, 3_221_225_479)
+    DIRECT_DELEGATION_AS112_SERVICE = (3_232_706_560, 3_232_706_815)
+
+
 class DurationUnit(Enum):
     """Provides duration units.
 

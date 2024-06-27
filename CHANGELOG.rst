@@ -1,8 +1,10 @@
 Version 17.1.0
 --------------
 
-- Added ``iata_code()`` method for ``Address`` provider.
-- Added ``icao_code()`` method for ``Address`` provider.
+- Added the `iata_code()` method for the `Address` provider.
+- Added the `icao_code()` method for the `Address` provider.
+- Added the `asn` method for the `Internet` provider.
+- Added the `special_ip_v4_object()` and `special_ip_v4()` methods for the `Internet` provider, along with the `IPv4Purpose` enum for those methods.
 
 Version 17.0.0
 --------------

@@ -5,7 +5,14 @@ import pytest
 import validators
 
 from mimesis import Internet, datasets
-from mimesis.enums import DSNType, MimeType, PortRange, TLDType, URLScheme
+from mimesis.enums import (
+    DSNType,
+    IPv4Purpose,
+    MimeType,
+    PortRange,
+    TLDType,
+    URLScheme,
+)
 from mimesis.exceptions import NonEnumerableError
 
 from . import patterns
@@ -302,6 +309,54 @@ class TestInternet:
         assert isinstance(result, dict)
         assert result["Cookie"].startswith("csrftoken")
 
+    def test_asn(self, net):
+        result = net.asn()
+        assert isinstance(result, str)
+        assert result.startswith("AS")
+        assert 1 <= int(result[2:]) <= 4_199_999_999
+
+    @pytest.mark.parametrize(
+        "purpose",
+        [
+            None,
+            IPv4Purpose.THIS_NETWORK,
+            IPv4Purpose.AMT,
+            IPv4Purpose.LOOBACK,
+            IPv4Purpose.AS112_V4,
+            IPv4Purpose.LINK_LOCAL,
+            IPv4Purpose.TEST_NET_1,
+            IPv4Purpose.TEST_NET_2,
+            IPv4Purpose.TEST_NET_3,
+            IPv4Purpose.BENCHMARKING,
+            IPv4Purpose.PRIVATE_USE_1,
+            IPv4Purpose.PRIVATE_USE_2,
+            IPv4Purpose.PRIVATE_USE_3,
+            IPv4Purpose.RESERVED,
+            IPv4Purpose.SHARE_ADDRESS_SPACE,
+            IPv4Purpose.LIMITED_BROADCAST,
+            IPv4Purpose.IPV4_DUMMY_ADDRESS,
+            IPv4Purpose.TURN_RELAY_ANYCAST,
+            IPv4Purpose.IETF_PROTOCOL_ASSIGNMENTS,
+            IPv4Purpose.PORT_CONTROL_PROTOCOL_ANYCAST,
+            IPv4Purpose.IPV4_SERVICE_CONTINUITY_PREFIX,
+            IPv4Purpose.DIRECT_DELEGATION_AS112_SERVICE,
+        ],
+    )
+    def test_special_ip_v4_object(self, net, purpose):
+        ip = net.special_ip_v4_object(purpose)
+        assert ip.version == 4
+        assert isinstance(ip, IPv4Address)
+        if purpose is not None:
+            assert purpose.value[0] <= int(ip) <= purpose.value[1]
+
+    def test_special_ip_v4_object_wrong_arg(self, net):
+        with pytest.raises(NonEnumerableError):
+            net.special_ip_v4_object("nil")
+
+    def test_special_ip_v4(self, net):
+        ip = net.special_ip_v4(purpose=None)
+        assert re.match(patterns.IP_V4_REGEX, ip)
+
 
 class TestSeededInternet:
     @pytest.fixture
@@ -405,3 +460,14 @@ class TestSeededInternet:
 
     def test_dsn(self, i1, i2):
         assert i1.dsn() == i2.dsn()
+
+    def test_asn(self, i1, i2):
+        assert i1.asn() == i2.asn()
+
+    def test_special_ip_v4_object(self, i1, i2):
+        assert i1.special_ip_v4_object(purpose=None) == i2.special_ip_v4_object(
+            purpose=None
+        )
+        assert i1.special_ip_v4_object(purpose=None) == i2.special_ip_v4_object(
+            purpose=None
+        )
