@@ -77,10 +77,14 @@ Sphinx = ">=5.1.1,<8.0.0"
 sphinx-copybutton = "^0.5.0"
 sphinx-autodoc-typehints = "^1.19.2"
 pytest-factoryboy = "^2.6.0"
+langchain-huggingface = {version="^0.0.3", "extras"=["ai"]}
+langchain = {version="^0.2.5", "extras"=["ai"]}
+
 
 [tool.poetry.extras]
 pytest = ["pytest"]
 factory = ["factory-boy"]
+ai = ["ai"]
 
 [tool.poetry.plugins."pytest_randomly.random_seeder"]
 mimesis = "mimesis.entrypoints:pytest_randomly_reseed"
