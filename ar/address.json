@@ -1,5 +1,5 @@
 {
-  "address_fmt": " {st_name} {st_sfx} {st_num}",
+  "address_fmt": " {st_name} {st_sfx} {st_num} {st_city}",
   "city": [
     "الرياض",
     "مكة المكرمة",
