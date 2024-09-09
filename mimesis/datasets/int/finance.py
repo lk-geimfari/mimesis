@@ -1,6 +1,7 @@
 """Provides all the generic data related to the business."""
 
 CURRENCY_ISO_CODES = [
+    "دج",
     "AED",
     "AFN",
     "ALL",
