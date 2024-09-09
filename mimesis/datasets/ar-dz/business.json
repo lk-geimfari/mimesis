@@ -1,0 +1,20 @@
+{
+  "company": {
+    "name": [
+      "Test"
+    ],
+    "type": {
+      "abbr": [
+        "Test"
+      ],
+      "title": [
+        "Test"
+      ]
+    }
+  },
+  "currency-code": "Test",
+  "price-format": "# Test",
+  "numeric-decimal": ".",
+  "numeric-thousands": ",",
+  "numeric-frac-digits": 2
+}
