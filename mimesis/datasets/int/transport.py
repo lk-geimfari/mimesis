@@ -1425,6 +1425,7 @@ VR_CODES = [
 ]
 
 VRC_BY_LOCALES = {
+    "ar-dz":"DZ",
     "cs": "CZ",
     "da": "DK",
     "de": "D",

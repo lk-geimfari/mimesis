@@ -206,6 +206,7 @@ CRYPTOCURRENCY_ISO_CODES = [
 
 
 CURRENCY_SYMBOLS = {
+    "ar-dz":"د.ج.",
     "cs": "Kč",
     "da": "kr",
     "de": "€",

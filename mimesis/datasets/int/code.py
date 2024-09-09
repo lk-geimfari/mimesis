@@ -33,6 +33,7 @@ IMEI_TACS = [
 ]
 
 ISBN_GROUPS = {
+    "ar-dz":"9931",
     "cs": "80",
     "da": "87",
     "de": "3",
