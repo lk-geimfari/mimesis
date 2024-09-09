@@ -65,7 +65,7 @@ class Locale(Enum):
 
     An argument for all local-depend providers.
     """
-
+    AR_DZ = "ar-dz"
     CS = "cs"
     DA = "da"
     DE = "de"
@@ -84,6 +84,7 @@ class Locale(Enum):
     FR = "fr"
     HU = "hu"
     HR = "hr"
+    AR="ar"
     IS = "is"
     IT = "it"
     JA = "ja"
