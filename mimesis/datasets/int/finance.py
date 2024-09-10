@@ -206,7 +206,24 @@ CRYPTOCURRENCY_ISO_CODES = [
 
 
 CURRENCY_SYMBOLS = {
-    "ar-dz":"د.ج.",
+    "ar-ae" : "د.إ.",
+    "ar-bh" : "د.ب.",
+    "ar-dz" : "د.ج.",
+    "ar-eg" : "ج.م.",
+    "ar-iq" : "د.ع.",
+    "ar-jo" : "د.ا.",
+    "ar-kw" : "د.ك.",
+    "ar-lb" : "ل.ل.",
+    "ar-ly" : "د.ل.",
+    "ar-ma" : "د.م.",
+    "ar-om" : "ر.ع.",
+    "ar-qa" : "ر.ق.",
+    "ar-ps" : "ش.",
+    "ar-sa" : "ر.س.",
+    "ar-sy" : "ل.س.",
+    "ar-tn" : "د.ت.",
+    "ar-ye" : "ر.ي.",
+
     "cs": "Kč",
     "da": "kr",
     "de": "€",

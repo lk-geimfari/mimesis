@@ -33,7 +33,24 @@ IMEI_TACS = [
 ]
 
 ISBN_GROUPS = {
-    "ar-dz":"9931",
+    "ar-ae" : "9948",
+    "ar-bh" : "99901",
+    "ar-dz" : "9961",
+    "ar-eg" : "977",
+    "ar-iq" : "9922",
+    "ar-jo" : "9957",
+    "ar-kw" : "9921",
+    "ar-lb" : "9953",
+    "ar-ly" : "9959",
+    "ar-ma" : "9954",
+    "ar-om" : "99969",
+    "ar-qa" : "9927",
+    "ar-ps" : "9950",
+    "ar-sa" : "9960",
+    "ar-sy" : "9927",
+    "ar-tn" : "9938",
+    "ar-ye" : "0000", # Yemen is not a member of ISBN
+
     "cs": "80",
     "da": "87",
     "de": "3",
@@ -96,6 +113,7 @@ LOCALE_CODES = [
     "ar-ma",
     "ar-om",
     "ar-qa",
+    "ar-ps",
     "ar-sa",
     "ar-sy",
     "ar-tn",
