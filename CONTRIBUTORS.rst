@@ -164,3 +164,4 @@ Patches and Suggestions
 .. _(Wooza): https://github.com/Wooza
 .. _(freddiewanah): https://github.com/freddiewanah
 .. _(CerealKiller0807): https://github.com/CerealKiller0807
+.. _(zayedalsaidi): https://github.com/zayedalsaidi
