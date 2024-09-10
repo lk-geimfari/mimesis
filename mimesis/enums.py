@@ -70,7 +70,7 @@ class Locale(Enum):
     AR_DZ = "ar-dz"
     AR_EG = "ar-eg"
     # AR_IQ = "ar-iq"
-    # AR_JO = "ar-jo"
+    AR_JO = "ar-jo"
     # AR_KW = "ar-kw"
     # AR_LB = "ar-lb"
     # AR_LY = "ar-ly"
