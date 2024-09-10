@@ -93,6 +93,8 @@ Patches and Suggestions
 -  Florian Kroiß `(Wooza)`_
 -  Han Wang `(freddiewanah)`_
 -  David Gorup `(CerealKiller0807)`_
+- Taha Zerrouki `(linuxscout)`_
+- Yahia Abdeldjallil Benamrouche `(yah04dev)`_
 
 
 .. _(lk-geimfari): https://github.com/lk-geimfari
@@ -164,3 +166,5 @@ Patches and Suggestions
 .. _(Wooza): https://github.com/Wooza
 .. _(freddiewanah): https://github.com/freddiewanah
 .. _(CerealKiller0807): https://github.com/CerealKiller0807
+.. _(linuxscout): https://github.com/linuxscout
+.. _(yah04dev): https://github.com/yah04dev
