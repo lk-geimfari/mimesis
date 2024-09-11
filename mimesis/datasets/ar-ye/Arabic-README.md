@@ -1,5 +1,16 @@
 ## How to Add a New Locale
 
+** To build an arabic locale dataset **
+
+* Follow the following template, and the "How to add a new locale",
+* There are many common parts 
+* Make changes in some parts of data:
+  * datetime: months
+  * address: localize to your country
+  * Finance: to be localized.
+  * Person: universities, surnames
+  * food: dishes
+
 This is a template of the dataset directory structure for a specific locale.
 
 There are seven JSON files (`File name`) that contain data related to various data providers (`Provider`):
@@ -21,10 +32,9 @@ There are seven JSON files (`File name`) that contain data related to various da
 5. Format the content of JSON files alphabetically using a tool like [jsoneditoronline.org](http://jsoneditoronline.org).
 6. If your locale uses a shortened address format, add your locale code to `SHORTENED_ADDRESS_FMT` in `mimesis/datasets/int/address.py`.
 7. Make sure you have added the currency symbol for your locale to `CURRENCY_SYMBOLS` in `mimesis/datasets/int/finance.py`.
-8. Make sure you have added the currency symbol for your locale to `VRC_BY_LOCALES` in `mimesis/datasets/int/transport.py`.
-9. Ensure that you have added your locale code to `ISBN_GROUPS` in `mimesis/datasets/int/code.py`.
-10. Run tests and confirm that all tests pass successfully.
-11. Add yourself as a contributor in `CONTRIBUTORS.md`.
+8. Ensure that you have added your locale code to `ISBN_GROUPS` in `mimesis/datasets/int/code.py`.
+9. Run tests and confirm that all tests pass successfully.
+10. Add yourself as a contributor in `CONTRIBUTORS.md`.
 
 #### You can grab code of your locale from the table below:
 
