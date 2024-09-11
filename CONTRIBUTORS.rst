@@ -96,6 +96,7 @@ Patches and Suggestions
 - Taha Zerrouki `(linuxscout)`_
 - Yahia Abdeldjallil Benamrouche `(yah04dev)`_
 - Watheq Alshowaiter `(watheqAlshowaiter)`_
+- Zayed Alsaidi `(zayedalsaidi)`_
 
 
 .. _(lk-geimfari): https://github.com/lk-geimfari
@@ -167,6 +168,8 @@ Patches and Suggestions
 .. _(Wooza): https://github.com/Wooza
 .. _(freddiewanah): https://github.com/freddiewanah
 .. _(CerealKiller0807): https://github.com/CerealKiller0807
+.. _(zayedalsaidi): https://github.com/zayedalsaidi
 .. _(linuxscout): https://github.com/linuxscout
 .. _(watheqAlshowaiter): https://github.com/watheqAlshowaiter
 .. _(yah04dev): https://github.com/yah04dev
+
