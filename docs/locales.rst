@@ -92,13 +92,13 @@ countries.
 =======  =======  ====================  ====================  ====================
 Country   Code    Associated attribute  Name                  Native Name
 =======  =======  ====================  ====================  ====================
-   🇦🇪    `ar-ae`     **Locale.AR_AE**   Arabic U.A.E          العربية
-   🇩🇿    `ar-dz`     **Locale.AR_DZ**   Arabic Algeria        العربية
-   🇪🇬    `ar-eg`     **Locale.AR_EG**   Arabic Egypt          العربية
-   🇯🇴    `ar-jo`     **Locale.AR_JO**   Arabic Jordan         العربية
-   🇴🇲    `ar-om`     **Locale.AR_OM**   Arabic Oman           العربية
-   🇸🇾    `ar-sy`     **Locale.AR_SY**   Arabic Syria          العربية
-   🇾🇪    `ar-ye`     **Locale.AR_YE**   Arabic Yemen          العربية
+   🇦🇪    `ar-ae`  **Locale.AR_AE**      Arabic U.A.E          العربية
+   🇩🇿    `ar-dz`  **Locale.AR_DZ**      Arabic Algeria        العربية
+   🇪🇬    `ar-eg`  **Locale.AR_EG**      Arabic Egypt          العربية
+   🇯🇴    `ar-jo`  **Locale.AR_JO**      Arabic Jordan         العربية
+   🇴🇲    `ar-om`  **Locale.AR_OM**      Arabic Oman           العربية
+   🇸🇾    `ar-sy`  **Locale.AR_SY**      Arabic Syria          العربية
+   🇾🇪    `ar-ye`  **Locale.AR_YE**      Arabic Yemen          العربية
    🇨🇿    `cs`     **Locale.CS**         Czech                 Česky
    🇩🇰    `da`     **Locale.DA**         Danish                Dansk
    🇩🇪    `de`     **Locale.DE**         German                Deutsch
