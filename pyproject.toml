@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "mimesis"
-version = "17.1.0"
+version = "18.0.0"
 description = "Mimesis: Fake Data Generator."
 authors = ["Isaak Uchakaev <hey@isaak.dev>"]
 license = "MIT"
@@ -54,7 +54,6 @@ exclude = [
 python = "^3.10"
 factory-boy = { version = "^3.3.0", optional = true }
 pytest = { version = "^7.2", optional = true }
-isort = "^5.13.2"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.2"

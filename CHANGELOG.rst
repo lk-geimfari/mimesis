@@ -1,3 +1,8 @@
+Version 18.0.0
+--------------
+
+- Added support of Arabic for various arabic countries.
+
 Version 17.1.0
 --------------
 
