@@ -84,7 +84,7 @@ You can also use it with :class:`~mimesis.Generic()`:
 Supported locales
 -----------------
 
-Mimesis currently includes support for 35 different locales (see :class:`~mimesis.enums.Locale` for more details).
+Mimesis currently includes support for 42 different locales (see :class:`~mimesis.enums.Locale` for more details).
 
 The table below lists all supported locales and their associated
 countries.

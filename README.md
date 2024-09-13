@@ -35,7 +35,7 @@ Python that can produce a wide range of fake data in various languages.
 
 The key features are:
 
-- **Multilingual**: Supports 35 different locales.
+- **Multilingual**: Supports 42 different locales.
 - **Extensibility**: Supports custom data providers and custom field handlers.
 - **Ease of use**: Features a simple design and clear documentation for straightforward data generation.
 - **Performance**: Widely recognized as the fastest data generator among Python solutions.
