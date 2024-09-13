@@ -60,16 +60,16 @@ You can find the complete documentation on the [Read the Docs](https://mimesis.n
 
 It is divided into several sections:
 
--  [About Mimesis](https://mimesis.name/en/latest/about.html)
--  [Quickstart](https://mimesis.name/en/latest/quickstart.html)
--  [Locales](https://mimesis.name/en/latest/locales.html)
--  [Data Providers](https://mimesis.name/en/latest/providers.html)
--  [Structured Data Generation](https://mimesis.name/en/latest/schema.html)
--  [Random and Seed](https://mimesis.name/en/latest/random_and_seed.html)
--  [Integration with Pytest](https://mimesis.name/en/latest/pytest_plugin.html)
--  [Integration with factory_boy](https://mimesis.name/en/latest/factory_plugin.html)
--  [API Reference](https://mimesis.name/en/latest/api.html)
--  [Changelog](https://mimesis.name/en/latest/index.html#changelog)
+-  [About Mimesis](https://mimesis.name/latest/about.html)
+-  [Quickstart](https://mimesis.name/latest/quickstart.html)
+-  [Locales](https://mimesis.name/latest/locales.html)
+-  [Data Providers](https://mimesis.name/latest/providers.html)
+-  [Structured Data Generation](https://mimesis.name/latest/schema.html)
+-  [Random and Seed](https://mimesis.name/latest/random_and_seed.html)
+-  [Integration with Pytest](https://mimesis.name/latest/pytest_plugin.html)
+-  [Integration with factory_boy](https://mimesis.name/latest/factory_plugin.html)
+-  [API Reference](https://mimesis.name/latest/api.html)
+-  [Changelog](https://mimesis.name/latest/index.html#changelog)
 
 You can improve it by sending pull requests to this repository.
 
@@ -78,7 +78,7 @@ You can improve it by sending pull requests to this repository.
 The library is exceptionally user-friendly, and it only requires you to import a **Data Provider** object that
 corresponds to the desired data type.
 
-For instance, the [Person](https://mimesis.name/en/latest/api.html#person) provider can be imported to access personal information,
+For instance, the [Person](https://mimesis.name/latest/api.html#person) provider can be imported to access personal information,
 including name, surname, email, and other related fields:
 
 ```python
