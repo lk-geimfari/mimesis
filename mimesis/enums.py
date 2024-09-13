@@ -66,6 +66,13 @@ class Locale(Enum):
     An argument for all local-depend providers.
     """
 
+    AR_AE = "ar-ae"
+    AR_DZ = "ar-dz"
+    AR_EG = "ar-eg"
+    AR_JO = "ar-jo"
+    AR_OM = "ar-om"
+    AR_SY = "ar-sy"
+    AR_YE = "ar-ye"
     CS = "cs"
     DA = "da"
     DE = "de"
