@@ -72,6 +72,8 @@ class Locale(Enum):
     AR_JO = "ar-jo"
     AR_OM = "ar-om"
     AR_MA = "ar-ma"
+    AR_QA = "ar-qa"
+    AR_SA = "ar-sa"
     AR_SY = "ar-sy"
     AR_TN = "ar-tn"
     AR_YE = "ar-ye"
