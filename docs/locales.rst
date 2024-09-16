@@ -97,7 +97,7 @@ Country   Code    Associated attribute  Name                  Native Name
    🇪🇬    `ar-eg`  **Locale.AR_EG**      Arabic Egypt          العربية
    🇯🇴    `ar-jo`  **Locale.AR_JO**      Arabic Jordan         العربية
    🇴🇲    `ar-om`  **Locale.AR_OM**      Arabic Oman           العربية
-   🇲🇦    `ar-ma`  **Locale.AR_MA**      Arabic Morroco        العربية
+   🇲🇦    `ar-ma`  **Locale.AR_MA**      Arabic Morocco        العربية
    🇸🇾    `ar-sy`  **Locale.AR_SY**      Arabic Syria          العربية
    🇹🇳    `ar-tn`  **Locale.AR_TN**      Arabic Tunisia        العربية
    🇾🇪    `ar-ye`  **Locale.AR_YE**      Arabic Yemen          العربية
