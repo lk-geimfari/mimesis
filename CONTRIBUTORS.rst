@@ -97,6 +97,7 @@ Patches and Suggestions
 - Yahia Abdeldjallil Benamrouche `(yah04dev)`_
 - Watheq Alshowaiter `(watheqAlshowaiter)`_
 - Zayed Alsaidi `(zayedalsaidi)`_
+- Muayyad AlSadi `(muayyadalsadi)`_
 
 
 .. _(lk-geimfari): https://github.com/lk-geimfari
@@ -172,4 +173,5 @@ Patches and Suggestions
 .. _(linuxscout): https://github.com/linuxscout
 .. _(watheqAlshowaiter): https://github.com/watheqAlshowaiter
 .. _(yah04dev): https://github.com/yah04dev
+.. _(muayyadalsadi): https://github.com/muayyad-alsadi
 
