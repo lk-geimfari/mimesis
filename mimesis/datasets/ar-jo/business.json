@@ -53,9 +53,9 @@
       ]
     }
   },
-  "currency-code": "د.أ.",
-  "price-format": "####.###",
+  "currency-code": "د.ج.",
+  "price-format": "####;##",
   "numeric-decimal": ".",
   "numeric-thousands": ",",
-  "numeric-frac-digits": 3
+  "numeric-frac-digits": 2
 }
