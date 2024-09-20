@@ -97,16 +97,18 @@ Country   Code    Associated attribute  Name                  Native Name
    🇪🇬    `ar-eg`  **Locale.AR_EG**      Arabic Egypt          العربية
    🇯🇴    `ar-jo`  **Locale.AR_JO**      Arabic Jordan         العربية
    🇴🇲    `ar-om`  **Locale.AR_OM**      Arabic Oman           العربية
+   🇲🇦    `ar-ma`  **Locale.AR_MA**      Arabic Morocco        العربية
    🇶🇦    `ar-qa`  **Locale.AR_QA**      Arabic Qatar          العربية
    🇸🇦    `ar-sa`  **Locale.AR_SA**      Arabic Saudi Arabia   العربية
    🇸🇾    `ar-sy`  **Locale.AR_SY**      Arabic Syria          العربية
+   🇹🇳    `ar-tn`  **Locale.AR_TN**      Arabic Tunisia        العربية
    🇾🇪    `ar-ye`  **Locale.AR_YE**      Arabic Yemen          العربية
    🇨🇿    `cs`     **Locale.CS**         Czech                 Česky
    🇩🇰    `da`     **Locale.DA**         Danish                Dansk
    🇩🇪    `de`     **Locale.DE**         German                Deutsch
    🇦🇹    `de-at`  **Locale.DE_AT**      Austrian German       Deutsch
    🇨🇭    `de-ch`  **Locale.DE_CH**      Swiss German          Deutsch
-   🇬🇷	 `el`	  **Locale.EL**         Greek                 Ελληνικά
+   🇬🇷    `el`     **Locale.EL**         Greek                 Ελληνικά
    🇺🇸    `en`     **Locale.EN**         English               English
    🇦🇺    `en-au`  **Locale.EN_AU**      Australian English    English
    🇨🇦    `en-ca`  **LocALE.EN_CA**      Canadian English      English
@@ -123,7 +125,7 @@ Country   Code    Associated attribute  Name                  Native Name
    🇮🇹    `it`     **Locale.IT**         Italian               Italiano
    🇯🇵    `ja`     **Locale.JA**         Japanese              日本語
    🇰🇿    `kk`     **Locale.KK**         Kazakh                Қазақша
-   🇰🇷	 `ko`	  **Locale.KO**         Korean                한국어
+   🇰🇷    `ko`     **Locale.KO**         Korean                한국어
    🇳🇱    `nl`     **Locale.NL**         Dutch                 Nederlands
    🇧🇪    `nl-be`  **Locale.NL_BE**      Belgium Dutch         Nederlands
    🇳🇴    `no`     **Locale.NO**         Norwegian             Norsk

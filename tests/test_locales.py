@@ -5,7 +5,7 @@ import pytest
 from mimesis.exceptions import LocaleError
 from mimesis.locales import Locale, validate_locale
 
-SUPPORTED_LOCALES_COUNT = 44
+SUPPORTED_LOCALES_COUNT = 46
 
 
 def test_locale_enum():
