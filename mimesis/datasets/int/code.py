@@ -50,6 +50,7 @@ ISBN_GROUPS = {
     "ar-sy": "9927",
     "ar-tn": "9938",
     "ar-ye": "0000",  # Yemen is not a member of ISBN
+    "az":"9952",
     "cs": "80",
     "da": "87",
     "de": "3",
