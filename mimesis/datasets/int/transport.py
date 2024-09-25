@@ -1443,6 +1443,7 @@ VRC_BY_LOCALES = {
     "ar-sy": "SYR",
     "ar-tn": "TN",
     "ar-ye": "YAR",
+    "az":"AZ",
     "cs": "CZ",
     "da": "DK",
     "de": "D",
