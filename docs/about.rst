@@ -7,7 +7,7 @@ Features
 
 The key features are:
 
-- **Multilingual**: Supports 46 different locales.
+- **Multilingual**: Supports 47 different locales.
 - **Extensibility**: Supports custom data providers and custom field handlers.
 - **Ease of use**: Features a simple design and clear documentation for straightforward data generation.
 - **Performance**: Widely recognized as the fastest data generator among Python solutions.
