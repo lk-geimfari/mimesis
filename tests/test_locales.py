@@ -8,7 +8,6 @@ from mimesis.locales import Locale, validate_locale
 SUPPORTED_LOCALES_COUNT = 48
 
 
-
 def test_locale_enum():
     assert len(list(Locale)) == SUPPORTED_LOCALES_COUNT
     assert issubclass(Locale, Enum)

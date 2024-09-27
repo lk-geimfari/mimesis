@@ -223,7 +223,7 @@ CURRENCY_SYMBOLS = {
     "ar-sy": "ل.س.",
     "ar-tn": "د.ت.",
     "ar-ye": "ر.ي.",
-    "az":"₼",
+    "az": "₼",
     "cs": "Kč",
     "da": "kr",
     "de": "€",
