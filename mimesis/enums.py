@@ -78,6 +78,7 @@ class Locale(Enum):
     AR_SY = "ar-sy"
     AR_TN = "ar-tn"
     AR_YE = "ar-ye"
+    AZ = "az"
     CS = "cs"
     DA = "da"
     DE = "de"

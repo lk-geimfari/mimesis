@@ -1,0 +1,65 @@
+{
+  "day": {
+    "abbr": [
+      "B.e.",
+      "Ç.a.",
+      "Ç.",
+      "C.a.",
+      "C.",
+      "Ş.",
+      "B."
+    ],
+    "name": [
+      "Bazar Ertəsi",
+      "Çərşənbə Axşamı",
+      "Çərşənbə",
+      "Cümə Axşamı",
+      "Cümə",
+      "Şənbə",
+      "Bazar"
+    ]
+  },
+  "formats": {
+    "date": "%d/%m/%Y",
+    "time": "%H:%M:%S"
+  },
+  "month": {
+    "abbr": [
+        "Yan.",
+        "Fev.",
+        "Mar.",
+        "Apr.",
+        "May.",
+        "İyn.",
+        "İyl.",
+        "Avq.",
+        "Sen.",
+        "Okt.",
+        "Noy.",
+        "Dek."
+      ],
+    "name": [
+      "Yanvar",
+      "Fevral",
+      "Mart",
+      "Aprel",
+      "May",
+      "İyun",
+      "İyul",
+      "Avqust",
+      "Sentyabr",
+      "Oktyabr",
+      "Noyabr",
+      "Dekabr"
+    ]
+  },
+ "periodicity": [
+  "Bir dəfə",
+  "Heç",
+  "Tez-tez",
+  "Günlük",
+  "Həftəlik",
+  "Aylıq",
+  "İllik"
+]
+}
