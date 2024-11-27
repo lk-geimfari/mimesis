@@ -1038,19 +1038,19 @@ test = ["pytest"]
 
 [[package]]
 name = "taskipy"
-version = "1.13.0"
+version = "1.14.1"
 description = "tasks runner for python projects"
 optional = false
 python-versions = "<4.0,>=3.6"
 files = [
-    {file = "taskipy-1.13.0-py3-none-any.whl", hash = "sha256:56f42b7e508d9aed2c7b6365f8d3dab62dbd0c768c1ab606c819da4fc38421f7"},
-    {file = "taskipy-1.13.0.tar.gz", hash = "sha256:2b52f0257958fed151f1340f7de93fcf0848f7a358ad62ba05c31c2ca04f89fe"},
+    {file = "taskipy-1.14.1-py3-none-any.whl", hash = "sha256:6e361520f29a0fd2159848e953599f9c75b1d0b047461e4965069caeb94908f1"},
+    {file = "taskipy-1.14.1.tar.gz", hash = "sha256:410fbcf89692dfd4b9f39c2b49e1750b0a7b81affd0e2d7ea8c35f9d6a4774ed"},
 ]
 
 [package.dependencies]
 colorama = ">=0.4.4,<0.5.0"
 mslex = {version = ">=1.1.0,<2.0.0", markers = "sys_platform == \"win32\""}
-psutil = ">=5.7.2,<6.0.0"
+psutil = ">=5.7.2,<7"
 tomli = {version = ">=2.0.1,<3.0.0", markers = "python_version >= \"3.7\" and python_version < \"4.0\""}
 
 [[package]]
