@@ -104,6 +104,7 @@ Country   Code    Associated attribute  Name                  Native Name
    🇸🇾    `ar-sy`  **Locale.AR_SY**      Arabic Syria          العربية
    🇹🇳    `ar-tn`  **Locale.AR_TN**      Arabic Tunisia        العربية
    🇾🇪    `ar-ye`  **Locale.AR_YE**      Arabic Yemen          العربية
+   AZ    `az`     **Locale.AZ**         Azerbaijan            Azərbaycan
    🇨🇿    `cs`     **Locale.CS**         Czech                 Česky
    🇩🇰    `da`     **Locale.DA**         Danish                Dansk
    🇩🇪    `de`     **Locale.DE**         German                Deutsch
