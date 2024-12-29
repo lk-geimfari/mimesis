@@ -1,12 +1,14 @@
 version: 2
 updates:
-- package-ecosystem: pip
-  directory: "/"
-  schedule:
-    interval: daily
-    time: "10:00"
-  open-pull-requests-limit: 10
-  reviewers:
-  - lk-geimfari
-  assignees:
-  - lk-geimfari
+  - package-ecosystem: pip
+    directory: /
+    schedule:
+      interval: daily
+      time: '10:00'
+    open-pull-requests-limit: 10
+    reviewers:
+      - lk-geimfari
+    assignees:
+      - lk-geimfari
+    commit-message:
+      prefix: "chore(deps)"
