@@ -54,7 +54,7 @@ exclude = [
 python = "^3.10"
 factory-boy = { version = "^3.3.0", optional = true }
 pytest = { version = "^7.2", optional = true }
-isort = "^5.13.2"
+isort = ">=5.13.2,<7.0.0"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.2"
