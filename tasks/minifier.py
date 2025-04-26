@@ -62,6 +62,7 @@ class Minimizer:
 
 
 if __name__ == "__main__":  # pragma: no cover
-    data_dir = Path(__file__).parent / "mimesis" / "data"
+    data_dir = Path(__file__).parent.parent / "mimesis" / "datasets"
+    print(data_dir)
     files = sorted(data_dir.rglob("*.json"))
     Minimizer(files=files).run()

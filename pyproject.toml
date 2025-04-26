@@ -85,6 +85,7 @@ dev = [
     "sphinx-autodoc-typehints>=1.19.2,<2",
     "pytest-factoryboy>=2.6.0,<3",
     "isort>=6.0.1",
+    "twine>=6.1.0",
 ]
 
 [tool.hatch.build.targets.sdist]
@@ -129,5 +130,5 @@ strict_equality = true
 profile = "wemake"
 
 [tool.taskipy.tasks]
-minify = "python minifier.py"
+minify = "python tasks/minifier.py"
 
