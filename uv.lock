@@ -589,9 +589,6 @@ source = { editable = "." }
 factory = [
     { name = "factory-boy" },
 ]
-pytest = [
-    { name = "pytest" },
-]
 
 [package.dev-dependencies]
 dev = [
@@ -620,11 +617,8 @@ dev = [
 ]
 
 [package.metadata]
-requires-dist = [
-    { name = "factory-boy", marker = "extra == 'factory'", specifier = ">=3.3.0,<4" },
-    { name = "pytest", marker = "extra == 'pytest'", specifier = "~=7.2" },
-]
-provides-extras = ["pytest", "factory"]
+requires-dist = [{ name = "factory-boy", marker = "extra == 'factory'", specifier = ">=3.3.0,<4" }]
+provides-extras = ["factory"]
 
 [package.metadata.requires-dev]
 dev = [

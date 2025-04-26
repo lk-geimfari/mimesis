@@ -48,7 +48,6 @@ classifiers = [
 dependencies = []
 
 [project.optional-dependencies]
-pytest = ["pytest~=7.2"]
 factory = ["factory-boy>=3.3.0,<4"]
 
 [project.urls]
@@ -58,9 +57,6 @@ Documentation = "https://mimesis.name"
 
 [project.entry-points."pytest_randomly.random_seeder"]
 mimesis = "mimesis.entrypoints:pytest_randomly_reseed"
-
-[project.entry-points.pytest11]
-mimesis = "mimesis.plugins.pytest"
 
 [dependency-groups]
 dev = [

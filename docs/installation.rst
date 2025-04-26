@@ -69,9 +69,3 @@ To enable the ``factory_boy`` plugin, you need to install Mimesis with the corre
 
     (env) ➜ poetry add --group dev mimesis[factory]
 
-
-Similarly, for the ``pytest`` plugin:
-
-.. code-block:: sh
-
-    (env) ➜ poetry add --group dev mimesis[pytest]
