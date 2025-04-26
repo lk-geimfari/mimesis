@@ -2,7 +2,7 @@ import sys
 
 import pytest
 
-from minifier import Minimizer, human_repr
+from tasks.minifier import Minimizer, human_repr
 
 
 def test_human_repr():
@@ -11,12 +11,12 @@ def test_human_repr():
     assert human_repr(100.1) == "100.1B"
     assert human_repr(1024) == "1.0KB"
     assert human_repr(1024 * 100.1) == "100.1KB"
-    assert human_repr(1024**2) == "1.0MB"
-    assert human_repr(1024**2 * 100.1) == "100.1MB"
+    assert human_repr(1024 ** 2) == "1.0MB"
+    assert human_repr(1024 ** 2 * 100.1) == "100.1MB"
 
 
 def test_human_repr_cant_handle_gigabytes():
-    assert human_repr(1024**3) == "1.0"
+    assert human_repr(1024 ** 3) == "1.0"
 
 
 def test_minimizer_minifies_file(tmp_path):
