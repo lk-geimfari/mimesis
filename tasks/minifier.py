@@ -4,6 +4,8 @@ from typing import Iterable
 
 from colorama import Fore, Style
 
+MIMESIS_DIR = Path(__file__).parent.parent.joinpath("mimesis")
+
 
 def human_repr(num: float) -> str:
     for unit in ["B", "KB", "MB"]:
@@ -62,6 +64,6 @@ class Minimizer:
 
 
 if __name__ == "__main__":  # pragma: no cover
-    data_dir = Path(__file__).parent / "mimesis" / "data"
+    data_dir = MIMESIS_DIR / "datasets"
     files = sorted(data_dir.rglob("*.json"))
     Minimizer(files=files).run()

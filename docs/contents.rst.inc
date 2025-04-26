@@ -40,7 +40,6 @@ Disclaimers, legal information, and other details are provided here for those in
    :maxdepth: 1
 
    additional-info
-   contributing
    changelog
 
 
