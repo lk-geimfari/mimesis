@@ -13,9 +13,9 @@ if [[ ! -z "$CHECK" ]]; then
   echo 'Running lint check'
 fi
 
-poetry run isort mimesis tests $CHECK
-poetry run black mimesis tests $CHECK
-poetry run autoflake \
+uv run isort mimesis tests $CHECK
+uv run black mimesis tests $CHECK
+uv run autoflake \
   --remove-all-unused-imports \
   --recursive \
   --remove-unused-variables \

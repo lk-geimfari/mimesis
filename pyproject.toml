@@ -1,13 +1,11 @@
-[tool.poetry]
+[project]
 name = "mimesis"
 version = "18.0.0"
 description = "Mimesis: Fake Data Generator."
-authors = ["Isaak Uchakaev <hey@isaak.dev>"]
-license = "MIT"
+authors = [{ name = "Isaak Uchakaev", email = "hey@isaak.dev" }]
+requires-python = "~=3.10"
 readme = "README.md"
-homepage = "https://github.com/lk-geimfari/mimesis"
-repository = "https://github.com/lk-geimfari/mimesis"
-documentation = "https://mimesis.name"
+license = "MIT"
 keywords = [
     "data",
     "datascince",
@@ -27,7 +25,7 @@ keywords = [
     "polars",
     "pytest",
     "factory",
-    "factory_boy"
+    "factory_boy",
 ]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
@@ -38,6 +36,7 @@ classifiers = [
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
     "Programming Language :: Python :: Implementation :: CPython",
     "Programming Language :: Python :: Implementation :: PyPy",
     "Operating System :: OS Independent",
@@ -46,47 +45,57 @@ classifiers = [
     "Topic :: Software Development :: Testing",
     "License :: OSI Approved :: MIT License",
 ]
-exclude = [
-    "mimesis/datasets/locale_template",
-]
+dependencies = []
 
-[tool.poetry.dependencies]
-python = "^3.10"
-factory-boy = { version = "^3.3.0", optional = true }
-pytest = { version = "^7.2", optional = true }
-isort = "^5.13.2"
+[project.optional-dependencies]
+pytest = ["pytest~=7.2"]
+factory = ["factory-boy>=3.3.0,<4"]
 
-[tool.poetry.group.dev.dependencies]
-pytest = "^7.2"
-pytest-mock = "^3.10"
-requests = "^2.28"
-mypy = "^1.1"
-colorama = "^0.4.6"
-pygments = "^2.13"
-pytest-randomly = "^3.12"
-pytz = "^2023.3"
-black = ">=22.10,<24.0"
-autoflake = "^2.0"
-types-pytz = "^2023.3"
-taskipy = "^1.10.1"
-validators = "^0.20.0"
-pytest-repeat = "^0.9.1"
-coverage = "^7.2.3"
-pytest-cov = "^4.0.0"
-Sphinx = ">=5.1.1,<8.0.0"
-sphinx-copybutton = "^0.5.0"
-sphinx-autodoc-typehints = "^1.19.2"
-pytest-factoryboy = "^2.6.0"
+[project.urls]
+Homepage = "https://github.com/lk-geimfari/mimesis"
+Repository = "https://github.com/lk-geimfari/mimesis"
+Documentation = "https://mimesis.name"
 
-[tool.poetry.extras]
-pytest = ["pytest"]
-factory = ["factory-boy"]
-
-[tool.poetry.plugins."pytest_randomly.random_seeder"]
+[project.entry-points."pytest_randomly.random_seeder"]
 mimesis = "mimesis.entrypoints:pytest_randomly_reseed"
 
-[tool.poetry.plugins.pytest11]
+[project.entry-points.pytest11]
 mimesis = "mimesis.plugins.pytest"
+
+[dependency-groups]
+dev = [
+    "pytest~=7.2",
+    "pytest-mock~=3.10",
+    "requests~=2.28",
+    "mypy~=1.1",
+    "colorama>=0.4.6,<0.5",
+    "pygments~=2.13",
+    "pytest-randomly~=3.12",
+    "pytz~=2023.3",
+    "black>=22.10,<24.0",
+    "autoflake~=2.0",
+    "types-pytz~=2023.3",
+    "taskipy>=1.10.1,<2",
+    "validators>=0.20.0,<0.21",
+    "pytest-repeat>=0.9.1,<0.10",
+    "coverage>=7.2.3,<8",
+    "pytest-cov>=4.0.0,<5",
+    "Sphinx>=5.1.1,<8.0.0",
+    "sphinx-copybutton>=0.5.0,<0.6",
+    "sphinx-autodoc-typehints>=1.19.2,<2",
+    "pytest-factoryboy>=2.6.0,<3",
+    "isort>=6.0.1",
+]
+
+[tool.hatch.build.targets.sdist]
+exclude = ["mimesis/datasets/locale_template"]
+
+[tool.hatch.build.targets.wheel]
+exclude = ["mimesis/datasets/locale_template"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
 [tool.pytest.ini_options]
 testpaths = [
@@ -121,7 +130,4 @@ profile = "wemake"
 
 [tool.taskipy.tasks]
 minify = "python minifier.py"
-[build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
 

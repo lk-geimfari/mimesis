@@ -5,7 +5,6 @@ help:
 	@echo "Please use \`make <target>' where <target> is one of"
 	@echo "  release    to create a release"
 	@echo "  docs       to build documentations"
-	@echo "  serve-docs to serve documentations"
 	@echo "  clean      to remove build artifacts"
 	@echo "  format     to format code using autoformatters"
 	@echo "  lint       to check code using autoformatters"
@@ -23,17 +22,13 @@ format:
 docs:
 	bash scripts/docs.sh
 
-.PHONY: serve-docs
-serve-docs:
-	bash scripts/serve-docs.sh
-
 .PHONY: clean
 clean:
 	bash scripts/clean.sh
 
 .PHONY: release
 release:
-	bash scripts/release.sh
+	uv build && uv publish
 
 .PHONY: lint
 lint: LINT_CHECK=1
@@ -46,4 +41,4 @@ test:
 
 .PHONY: update-deps
 update-deps:
-	poetry update
+	uv pip compile --group dev --upgrade
