@@ -13,7 +13,7 @@ except ImportError:
 __all__ = ["FactoryField", "MimesisField"]
 
 
-class FactoryField(declarations.BaseDeclaration):  # type: ignore[misc]
+class FactoryField(declarations.BaseDeclaration):
     """
     Mimesis integration with FactoryBoy starts here.
 

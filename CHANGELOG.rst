@@ -1,3 +1,11 @@
+Version 19.0.0
+--------------
+
+**Note**: Work in progress.
+
+- Removed the `pytest` plugin from the package. Just use own fixtures instead and `Field` class.
+
+
 Version 18.0.0
 --------------
 
