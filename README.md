@@ -45,7 +45,7 @@ The key features are:
 
 ## Installation
 
-> [!IMPORTANT]  
+> [!IMPORTANT]
 > To work with Mimesis on Python versions 3.8 and 3.9, the final compatible version is Mimesis 11.1.0. Install this specific version to ensure compatibility.
 
 
@@ -67,7 +67,6 @@ It is divided into several sections:
 -  [Data Providers](https://mimesis.name/latest/providers.html)
 -  [Structured Data Generation](https://mimesis.name/latest/schema.html)
 -  [Random and Seed](https://mimesis.name/latest/random_and_seed.html)
--  [Integration with Pytest](https://mimesis.name/latest/pytest_plugin.html)
 -  [Integration with factory_boy](https://mimesis.name/latest/factory_plugin.html)
 -  [API Reference](https://mimesis.name/latest/api.html)
 -  [Changelog](https://mimesis.name/latest/index.html#changelog)
