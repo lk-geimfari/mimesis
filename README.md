@@ -1,5 +1,7 @@
 <p align="center">
-  <a href="https://github.com/lk-geimfari/mimesis"><img src="https://raw.githubusercontent.com/lk-geimfari/mimesis/master/.github/images/logo.png" alt="Mimesis"></a>
+  <a href="https://github.com/lk-geimfari/mimesis">
+    <img src="https://raw.githubusercontent.com/lk-geimfari/mimesis/master/.github/images/logo.png" width="400" alt="Mimesis">
+  </a>
 </p>
 
 <p align="center">

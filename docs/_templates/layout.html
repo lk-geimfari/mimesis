@@ -18,14 +18,11 @@
 <!-- Makes logo appropriate for current color scheme -->
 {%- block sidebarlogo %}
 {%- if logo_url %}
-<p class="logo"><a href="{{ pathto(root_doc)|e }}">
-  <picture>
-    <source srcset="_static/octopus-dark.svg" media="(prefers-color-scheme: dark)" />
-    <source srcset="{{ logo_url|e }}" media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)" />
-    <img class="logo" decoding="async" id="screenshot" src="{{ logo_url|e }}" />
-  </picture>
-
-</a></p>
+<p class="logo">
+  <a href="{{ pathto(root_doc)|e }}">
+    <img id="logo" class="logo" decoding="async" src="{{ logo_url|e }}" alt="Logo"/>
+  </a>
+</p>
 {%- endif %}
 {%- endblock %}
 
