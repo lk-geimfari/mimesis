@@ -20,52 +20,6 @@ Keys module
    :members:
    :undoc-members:
 
-
-Builtin Data Providers
-======================
-
-BrazilSpecProvider
-------------------
-
-.. autoclass:: mimesis.builtins.BrazilSpecProvider
-   :members:
-   :special-members: __init__
-
-DenmarkSpecProvider
--------------------
-
-.. autoclass:: mimesis.builtins.DenmarkSpecProvider
-   :members:
-   :special-members: __init__
-
-NetherlandsSpecProvider
------------------------
-
-.. autoclass:: mimesis.builtins.NetherlandsSpecProvider
-   :members:
-   :special-members: __init__
-
-RussiaSpecProvider
-------------------
-
-.. autoclass:: mimesis.builtins.RussiaSpecProvider
-   :members:
-   :special-members: __init__
-
-USASpecProvider
----------------
-
-.. autoclass:: mimesis.builtins.USASpecProvider
-   :members:
-   :special-members: __init__
-
-PolandSpecProvider
-------------------
-
-.. autoclass:: mimesis.builtins.PolandSpecProvider
-   :members:
-   :special-members: __init__
-
 Shortcuts
 =========
 
