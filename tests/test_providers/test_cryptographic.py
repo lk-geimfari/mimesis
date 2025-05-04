@@ -83,8 +83,8 @@ class TestSeededCryptographic:
         return Cryptographic(seed=seed)
 
     def test_hash(self, c1, c2):
-        assert c1.hash() != c2.hash()
-        assert c1.hash(algorithm=Algorithm.SHA512) != c2.hash(
+        assert c1.hash() == c2.hash()
+        assert c1.hash(algorithm=Algorithm.SHA512) == c2.hash(
             algorithm=Algorithm.SHA512
         )
 

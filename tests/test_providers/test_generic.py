@@ -159,8 +159,8 @@ class TestSeededGeneric:
         assert g1.code.issn() == g2.code.issn()
 
     def test_generic_cryptographic(self, g1, g2):
-        assert g1.cryptographic.uuid() != g2.cryptographic.uuid()
-        assert g1.cryptographic.hash() != g2.cryptographic.hash()
+        assert g1.cryptographic.uuid() == g2.cryptographic.uuid()
+        assert g1.cryptographic.hash() == g2.cryptographic.hash()
 
     def test_generic_datetime(self, g1, g2):
         assert g1.datetime.week_date() == g2.datetime.week_date()
