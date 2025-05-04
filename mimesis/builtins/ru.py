@@ -2,7 +2,6 @@
 
 from datetime import datetime
 
-from mimesis.enums import Gender
 from mimesis.locales import Locale
 from mimesis.providers import BaseDataProvider
 from mimesis.types import MissingSeed, Seed
@@ -34,19 +33,6 @@ class RussiaSpecProvider(BaseDataProvider):
             self.random.choice(sentences[k]) for k in ("head", "p1", "p2", "tail")
         ]
         return " ".join(sentence)
-
-    def patronymic(self, gender: Gender | None = None) -> str:
-        """Generate random patronymic name.
-
-        :param gender: Gender of person.
-        :return: Patronymic name.
-
-        :Example:
-            Алексеевна.
-        """
-        gender = self.validate_enum(gender, Gender)
-        patronymics: list[str] = self._extract(["patronymic", str(gender)])
-        return self.random.choice(patronymics)
 
     def passport_series(self, year: int | None = None) -> str:
         """Generate random series of passport.

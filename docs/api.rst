@@ -52,13 +52,6 @@ RussiaSpecProvider
    :members:
    :special-members: __init__
 
-UkraineSpecProvider
--------------------
-
-.. autoclass:: mimesis.builtins.UkraineSpecProvider
-   :members:
-   :special-members: __init__
-
 USASpecProvider
 ---------------
 

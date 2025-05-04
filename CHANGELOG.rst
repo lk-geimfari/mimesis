@@ -4,6 +4,7 @@ Version 19.0.0
 **Note**: Work in progress.
 
 - Removed the ``pytest`` plugin from the package. Just use own fixtures instead and ``Field`` class.
+- Removed the ``UkraineSpecProvider``. Instead, use ``patronymic()`` method from the ``Person`` provider.
 - ``Cryptographic`` provider now uses seedable random instead of ``secrets`` module. See (`#1656 <https://github.com/lk-geimfari/mimesis/issues/1656>`_).
 
 

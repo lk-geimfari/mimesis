@@ -134,6 +134,28 @@ class Person(BaseDataProvider):
         """
         return self.surname(gender)
 
+    def patronymic(self, gender: Gender | None = None) -> str | None:
+        """Generates a random patronymic name.
+
+        Patronymics are available only for Locale.RU and Locale.UK.
+
+        :param gender: Gender's enum object.
+        :return: Patronymic name.
+        """
+        gender = self.validate_enum(gender, Gender)
+        patronymics: list[str] = self._extract(
+            keys=[
+                "patronymic",
+                f"{gender}",
+            ],
+            default=[],
+        )
+
+        if not patronymics:
+            return None
+
+        return self.random.choice(patronymics)
+
     def title(
         self,
         gender: Gender | None = None,

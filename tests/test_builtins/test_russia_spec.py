@@ -1,8 +1,6 @@
 import pytest
 
 from mimesis.builtins import RussiaSpecProvider
-from mimesis.enums import Gender
-from mimesis.exceptions import NonEnumerableError
 
 
 @pytest.fixture
@@ -31,23 +29,6 @@ def test_passport_number(russia):
 def test_series_and_number(russia):
     result = russia.series_and_number()
     assert result is not None
-
-
-@pytest.mark.parametrize(
-    "gender",
-    [
-        Gender.FEMALE,
-        Gender.MALE,
-    ],
-)
-def test_patronymic(russia, gender):
-    result = russia.patronymic(gender=gender)
-
-    assert result is not None
-    assert len(result) >= 4
-
-    with pytest.raises(NonEnumerableError):
-        russia.patronymic(gender="nil")
 
 
 def test_generate_sentence(russia):
