@@ -32,7 +32,7 @@
 
 ---
 
-Mimesis ([/mɪˈmiːsɪs](https://mimesis.name/en/latest/about.html#what-does-name-mean)) is a robust data generator for
+Mimesis ([/mɪˈmiːsɪs](https://mimesis.name/master/about.html#what-does-name-mean)) is a robust data generator for
 Python that can produce a wide range of fake data in various languages.
 
 The key features are:
