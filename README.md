@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://github.com/lk-geimfari/mimesis">
-    <img src="https://raw.githubusercontent.com/lk-geimfari/mimesis/master/.github/images/logo.png" width="350" alt="Mimesis">
+    <img src="https://raw.githubusercontent.com/lk-geimfari/mimesis/master/.github/images/logo.png" width="300" alt="Mimesis">
   </a>
 </p>
 
