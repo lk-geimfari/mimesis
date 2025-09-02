@@ -3,6 +3,7 @@
 from .da import DenmarkSpecProvider
 from .en import USASpecProvider
 from .it import ItalySpecProvider
+from .kk import KazakhstanSpecProvider
 from .nl import NetherlandsSpecProvider
 from .pl import PolandSpecProvider
 from .pt_br import BrazilSpecProvider
@@ -18,4 +19,5 @@ __all__ = [
     "PolandSpecProvider",
     "DenmarkSpecProvider",
     "ItalySpecProvider",
+    "KazakhstanSpecProvider",
 ]
