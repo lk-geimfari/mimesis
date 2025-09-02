@@ -98,6 +98,7 @@ Patches and Suggestions
 - Watheq Alshowaiter `(watheqAlshowaiter)`_
 - Zayed Alsaidi `(zayedalsaidi)`_
 - Muayyad AlSadi `(muayyadalsadi)`_
+- Nurzhan Zhanuzak `(nurzhanzhanuzak)`_
 
 
 .. _(lk-geimfari): https://github.com/lk-geimfari
@@ -174,4 +175,5 @@ Patches and Suggestions
 .. _(watheqAlshowaiter): https://github.com/watheqAlshowaiter
 .. _(yah04dev): https://github.com/yah04dev
 .. _(muayyadalsadi): https://github.com/muayyad-alsadi
+.. _(nurzhanzhanuzak): https://github.com/nurzhanzhanuzak
 

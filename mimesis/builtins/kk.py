@@ -30,7 +30,7 @@ class KazakhstanSpecProvider(BaseDataProvider):
         :return: Patronymic name.
 
         :Example:
-            Алексеевна.
+            Абайқызы.
         """
         gender = self.validate_enum(gender, Gender)
         patronymics: list[str] = self._extract(["patronymic", str(gender)])
