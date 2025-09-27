@@ -50,6 +50,9 @@ The key features are:
 > [!IMPORTANT]
 > To work with Mimesis on Python versions 3.8 and 3.9, the final compatible version is Mimesis 11.1.0. Install this specific version to ensure compatibility.
 
+> [!WARNING]
+> Starting from version 19.0.0, Mimesis has dropped support for builtin providers.
+
 
 To install mimesis, use pip:
 
