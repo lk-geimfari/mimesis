@@ -330,6 +330,26 @@ class TestPerson:
         result = person.nationality()
         assert result is not None
 
+    @pytest.mark.parametrize(
+        "gender",
+        [
+            Gender.FEMALE,
+            Gender.MALE,
+        ],
+    )
+    def test_patronymic(self, person, gender):
+        result = person.patronymic(gender=gender)
+        locale = person.locale
+
+        if locale in ["ru", "uk"]:
+            assert result is not None
+            assert len(result) >= 4
+        else:
+            assert result is None
+
+        with pytest.raises(NonEnumerableError):
+            person.patronymic(gender="nil")
+
 
 class TestSeededPerson:
     @pytest.fixture

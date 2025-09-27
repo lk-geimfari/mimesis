@@ -218,7 +218,7 @@ class BaseDataProvider(BaseProvider):
         """Returns current locale.
 
         If locale is not defined, then this method will always return ``en``,
-        because ``en`` is default locale for all providers, excluding builtins.
+        because ``en`` is a default locale for all providers.
 
         :return: Current locale.
         """
@@ -226,7 +226,7 @@ class BaseDataProvider(BaseProvider):
         return self.locale
 
     def _override_locale(self, locale: Locale = Locale.DEFAULT) -> None:
-        """Overrides current locale with passed and pull data for new locale.
+        """Overrides the current locale with passed and pull data for the new locale.
 
         :param locale: Locale
         :return: Nothing.

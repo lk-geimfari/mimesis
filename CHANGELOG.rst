@@ -3,9 +3,9 @@ Version 19.0.0
 
 **Note**: Work in progress.
 
-- Removed the ``pytest`` plugin from the package. Just use own fixtures instead and ``Field`` class.
-- ``Cryptographic`` provider now uses seedable random instead of ``secrets`` module. See (`#1656 <https://github.com/lk-geimfari/mimesis/issues/1656>`_).
-
+- Removed the `pytest` plugin from the package. Use project-specific fixtures and the `Field` class instead.
+- Removed the `builtins` module from the package.
+- The `Cryptographic` provider now uses a seedable random number generator instead of the `secrets` module. See (`#1656 <https://github.com/lk-geimfari/mimesis/issues/1656>`_).
 
 Version 18.0.0
 --------------
