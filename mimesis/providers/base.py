@@ -226,7 +226,7 @@ class BaseDataProvider(BaseProvider):
         return self.locale
 
     def _override_locale(self, locale: Locale = Locale.DEFAULT) -> None:
-        """Overrides current locale with passed and pull data for new locale.
+        """Overrides the current locale with passed and pull data for the new locale.
 
         :param locale: Locale
         :return: Nothing.
