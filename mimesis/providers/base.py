@@ -218,7 +218,7 @@ class BaseDataProvider(BaseProvider):
         """Returns current locale.
 
         If locale is not defined, then this method will always return ``en``,
-        because ``en`` is default locale for all providers, excluding builtins.
+        because ``en`` is a default locale for all providers.
 
         :return: Current locale.
         """
