@@ -27,7 +27,7 @@ class TestPath:
         slash_character = ""
         if path.platform == "win32":
             slash_character = "\\"
-        elif path.platform == "linux":
+        elif path.platform in ("linux", "darwin"):
             slash_character = "/"
         return slash_character
 
