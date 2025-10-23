@@ -35,7 +35,9 @@ class Path(BaseProvider):
         if platform.startswith("freebsd"):
             platform = "freebsd"
         self.platform = platform
-        self._pathlib_home = PureWindowsPath() if "win" in platform else PurePosixPath()
+        self._pathlib_home = (
+            PureWindowsPath() if platform.startswith("win") else PurePosixPath()
+        )
         self._pathlib_home /= PLATFORMS[platform]["home"]
 
     class Meta:
@@ -70,7 +72,7 @@ class Path(BaseProvider):
             /home/oretha
         """
         user = self.random.choice(USERNAMES)
-        user = user.capitalize() if "win" in self.platform else user.lower()
+        user = user.capitalize() if self.platform.startswith("win") else user.lower()
         return str(self._pathlib_home / user)
 
     def users_folder(self) -> str:
