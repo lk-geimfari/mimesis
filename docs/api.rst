@@ -18,7 +18,6 @@ Keys module
 
 .. automodule:: mimesis.keys
    :members:
-   :undoc-members:
 
 Shortcuts
 =========
