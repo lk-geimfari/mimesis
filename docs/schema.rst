@@ -330,12 +330,14 @@ When you no longer need aliases, you can remove them individually like regular d
     >>> field.aliases.clear()
 
 
-Key Functions and Post-Processing
+Key Functions and Transformations
 ---------------------------------
 
-You can optionally apply a key function to the result returned by the instance of :class:`~mimesis.schema.Field`
-or :class:`~mimesis.schema.Fieldset`. To do this, simply pass a callable object that returns
-the final result as the **key** parameter.
+.. versionadded:: 19.0.0
+
+The :mod:`mimesis.keys` module provides transformation functions that can be applied to field values
+using the ``key`` parameter in :class:`~mimesis.schema.Field` and :class:`~mimesis.schema.Fieldset`.
+These functions are executed after a value is generated and before it's returned to the caller.
 
 Let's take a look at the example:
 
@@ -352,16 +354,219 @@ Let's take a look at the example:
 
 As you can see, **key** function can be applied to both — **field** and **fieldset**.
 
-Mimesis also provides a set of built-in key functions:
+Although you can use any callable object as a key function, Mimesis provides a comprehensive
+set of built-in key functions for various transformations:
 
-- :func:`~mimesis.keys.maybe` (See :ref:`key_maybe`)
-- :func:`~mimesis.keys.romanize` (See :ref:`key_romanize`)
+- :ref:`key_string_transformations`
+- :ref:`key_sequence_operations`
+- :ref:`key_conditional_composition`
 
-.. _key_maybe:
+.. _key_string_transformations:
 
-
-Maybe This, Maybe That
+String Transformations
 ~~~~~~~~~~~~~~~~~~~~~~
+
+Mimesis provides several key functions for transforming string values. These functions only accept
+string types and will raise a :class:`TypeError` if a non-string value is provided.
+
+Transliteration
+^^^^^^^^^^^^^^^
+
+**romanize**
+
+The :func:`~mimesis.keys.romanize` is used to transliterate strings from Cyrillic script to Latin (romanized) script.
+
+Let's take a look at the example:
+
+.. code-block:: python
+
+    >>> from mimesis.schema import Field, Fieldset, Locale
+    >>> from mimesis.keys import romanize
+
+    >>> fieldset = Fieldset(Locale.RU, i=5)
+    >>> fieldset("name", key=romanize(Locale.RU))
+    ['Gerasim', 'Magdalena', 'Konstantsija', 'Egor', 'Alisa']
+
+    >>> field = Field(locale=Locale.UK)
+    >>> field("full_name", key=romanize(Locale.UK))
+    'Dem'jan Babarychenko'
+
+
+At this moment :func:`~mimesis.keys.romanize` works only with Russian (**Locale.RU**),
+Ukrainian (**Locale.UK**) and Kazakh (**Locale.KK**) locales.
+
+Case Conversion Functions
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+These functions transform strings between different naming conventions commonly used in programming.
+
+**snake_case**
+
+The :func:`~mimesis.keys.snake_case` function converts strings to snake_case format:
+
+.. code-block:: python
+
+    >>> field("occupation", key=keys.snake_case)
+    'cab_driver'
+
+**camelCase**
+
+The :func:`~mimesis.keys.camel_case` function converts strings to camelCase format:
+
+.. code-block:: python
+
+    >>> field("full_name", key=keys.camel_case)
+    'ellenaEstes'
+
+**kebab-case / slugify**
+
+The :func:`~mimesis.keys.kebab_case` (alias: :func:`~mimesis.keys.slugify`) function converts strings
+to kebab-case format, creating URL-friendly slugs. It removes special characters, replaces spaces
+with hyphens, and converts everything to lowercase.
+
+.. code-block:: python
+
+    >>> field("full_name", key=keys.kebab_case)
+    'lou-wise'
+
+Text Wrapping and Affixes
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+These functions add text before, after, or around generated values.
+
+**wrap**
+
+The :func:`~mimesis.keys.wrap` function wraps a string with specified before and after text. By default,
+it wraps with angle brackets (``<`` and ``>``), but you can specify custom delimiters.
+
+.. code-block:: python
+
+    >>> field("username", key=keys.wrap(before='<', after='>'))
+    '<chain_1893>'
+
+**prefix**
+
+The :func:`~mimesis.keys.prefix` function adds text to the beginning of a string. This is useful
+for adding prefixes to usernames, IDs, or other identifiers.
+
+.. code-block:: python
+
+    >>> field("word", key=keys.prefix('user_'))
+    'user_metal'
+
+**suffix**
+
+The :func:`~mimesis.keys.suffix` function adds text to the end of a string. This is commonly used
+for adding file extensions or domain suffixes.
+
+.. code-block:: python
+
+    >>> field("word", key=keys.suffix('.com'))
+    'priorities.com'
+
+String Manipulation
+^^^^^^^^^^^^^^^^^^^
+
+**reverse**
+
+The :func:`~mimesis.keys.reverse` function reverses the characters in a string:
+
+.. code-block:: python
+
+    >>> field("word", key=keys.reverse)
+    'olleh'
+
+**truncate**
+
+The :func:`~mimesis.keys.truncate` function limits a string to a maximum length, adding a suffix
+(by default ``...``) when truncation occurs. This is useful for creating previews or ensuring
+data fits within length constraints.
+
+.. code-block:: python
+
+    >>> field("sentence", key=keys.truncate(20, suffix=''))
+    'Messages can be shor'
+
+**remove_whitespace**
+
+The :func:`~mimesis.keys.remove_whitespace` function removes all whitespace characters from a string,
+including spaces, tabs, and newlines. This can be useful for creating compact identifiers or tokens.
+
+.. code-block:: python
+
+    >>> field("full_name", key=keys.remove_whitespace)
+    'KanishaBurch'
+
+Encoding and Hashing
+^^^^^^^^^^^^^^^^^^^^
+
+**hash_with**
+
+The :func:`~mimesis.keys.hash_with` function hashes a string using a specified algorithm from
+Python's :mod:`hashlib` module. Supported algorithms include ``sha256``, ``sha1``, ``md5``,
+``sha512``, and others available in :data:`hashlib.algorithms_available`.
+
+This is useful for creating hashed passwords, checksums, or unique identifiers.
+
+.. code-block:: python
+
+    >>> field("password", key=keys.hash_with('sha256'))
+    '8742c08c354ea086510c5a6abf7f6ed8b938ad00b35c740c3f02d01b75f11d06'
+    >>> field("email", key=keys.hash_with('blake2s'))
+    '86167b4b002d323526088b837edc34223a404055b7ab8b6205957ab42325f752'
+
+**base64_encode**
+
+The :func:`~mimesis.keys.base64_encode` function encodes a string as base64:
+
+.. code-block:: python
+
+    >>> field("sentence", key=keys.base64_encode)
+    'SSBkb24ndCBldmVuIGNhcmUu'
+
+**urlsafe_base64_encode**
+
+The :func:`~mimesis.keys.urlsafe_base64_encode` function encodes a string as URL-safe base64,
+replacing characters that have special meaning in URLs (``+`` and ``/``) with URL-safe
+alternatives (``-`` and ``_``).
+
+.. code-block:: python
+
+    >>> field("token_hex", key=keys.urlsafe_base64_encode)
+    'SXQgaXMgYWxzbyBhIGdhcmJhZ2UtY29sbGVjdGVkIHJ1bnRpbWUgc3lzdGVtLg=='
+
+.. _key_sequence_operations:
+
+Sequence Operations
+~~~~~~~~~~~~~~~~~~~
+
+Key functions for working with sequences (lists and tuples). These functions help you manipulate
+collections of values generated by fieldsets or methods that return sequences.
+
+**join**
+
+The :func:`~mimesis.keys.join` function takes a list or tuple and joins all items into a single
+string using the specified separator. By default, it uses ``", "`` as the separator. Each item
+is automatically converted to a string before joining.
+
+This is particularly useful when working with :class:`~mimesis.schema.Fieldset` to combine
+multiple generated values into a single formatted string.
+
+.. code-block:: python
+
+    >>> fieldset("words", key=keys.join(' | '))
+    ['personals | errors', 'eyes | monday', 'kim | mn']
+
+.. _key_conditional_composition:
+
+Conditional and Composition
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Advanced key functions that enable conditional transformations and function composition.
+These functions provide powerful ways to combine multiple transformations or apply logic
+to your data generation.
+
+**maybe**
 
 Real-world data can be messy and may contain missing values.
 This is why generating data with **None** values may be useful
@@ -396,34 +601,91 @@ You can use any other value instead of **None**:
 
     ['N/A', 'N/A', 'static1955@outlook.com', 'publish1929@live.com', 'command2060@yahoo.com']
 
-.. _key_romanize:
 
+**redact**
 
-Romanization of Cyrillic Data
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+The :func:`~mimesis.keys.redact` function replaces any generated value with a redaction marker.
+By default, it uses ``"[REDACTED]"`` as the replacement, but you can specify any string.
 
-If your locale is part of the Cyrillic language family, but you require locale-specific
-data in romanized form, you can make use of the following key function :func:`~mimesis.keys.romanize`.
+This is useful for generating datasets where certain sensitive fields need to be masked or
+for creating test data that simulates redacted documents.
 
-Let's take a look at the example:
+Use it with ``apply_if`` to make it meaningful.
 
 .. code-block:: python
 
-    >>> from mimesis.schema import Field, Fieldset, Locale
-    >>> from mimesis.keys import romanize
-
-    >>> fieldset = Fieldset(Locale.RU, i=5)
-    >>> fieldset("name", key=romanize(Locale.RU))
-    ['Gerasim', 'Magdalena', 'Konstantsija', 'Egor', 'Alisa']
-
-    >>> field = Field(locale=Locale.UK)
-    >>> field("full_name", key=romanize(Locale.UK))
-    'Dem'jan Babarychenko'
+    >>> field("password", key=keys.redact('[CLASSIFIED]'))
+    '[CLASSIFIED]'
 
 
-At this moment :func:`~mimesis.keys.romanize` works only with Russian (**Locale.RU**),
-Ukrainian (**Locale.UK**) and Kazakh (**Locale.KK**) locales.
+**apply_if**
 
+The :func:`~mimesis.keys.apply_if` function conditionally applies a transformation based on a
+predicate function. If the condition is true, it applies the first transform; if false,
+it optionally applies an alternative transform or returns the value unchanged.
+
+This enables dynamic data transformations based on the generated value's characteristics.
+
+.. code-block:: python
+
+    >>> field("integer_number", key=keys.apply_if(
+    ...     lambda x: x > 100,
+    ...     lambda x: x * 2,
+    ...     lambda x: x / 2
+    ... ))
+
+    >>> # Mark long strings with a prefix
+    >>> field("sentence", key=keys.apply_if(
+    ...     lambda s: len(s) > 50,
+    ...     keys.prefix('[LONG] '),
+    ...     keys.prefix('[SHORT] ')
+    ... ))
+    '[LONG] This is a very long sentence...'
+
+    >>> # Convert to uppercase only if it contains a digit
+    >>> field("person.username", key=keys.apply_if(
+    ...     lambda s: any(c.isdigit() for c in s),
+    ...     str.upper
+    ... ))
+    'USER123'
+
+**pipe**
+
+The :func:`~mimesis.keys.pipe` function chains multiple key functions together, applying them
+in sequence from left to right. The output of each function becomes the input to the next.
+
+This is one of the most powerful key functions, enabling complex transformations by composing
+simpler functions. It's inspired by Elixir's pipe operator (`|>`).
+
+.. code-block:: python
+
+    >>> field("full_name", key=keys.pipe(
+    ...     str.lower,
+    ...     keys.slugify,
+    ...     keys.prefix('user-')
+    ... ))
+    'user-ken-hopper'
+
+    >>> # Create a hashed, prefixed username
+    >>> field("email", key=keys.pipe(
+    ...     lambda s: s.split('@')[0],
+    ...     keys.hash_with('md5'),
+    ...     keys.prefix('usr_'),
+    ...     lambda x: x[:16]
+    ... ))
+    'usr_5d2be58391f3'
+
+    >>> # Complex transformation chain
+    >>> field("sentence", key=keys.pipe(
+    ...     str.lower,
+    ...     keys.remove_whitespace,
+    ...     keys.base64_encode
+    ... ))
+    'YW55ZWxlbWVudG9mYXR1cGxlY2FuYmVhY2Nlc3NlZGluY29uc3RhbnR0aW1lLg=='
+
+The :func:`~mimesis.keys.pipe` function is compatible with all other key functions and can also
+work with regular Python functions. It automatically handles functions that require a random
+instance as their second parameter (like :func:`~mimesis.keys.maybe`).
 
 Accessing Random Object in Key Functions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

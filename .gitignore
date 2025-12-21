@@ -195,3 +195,5 @@ fabric.properties
 
 # vim
 *.swp
+
+TEST_DOC.md

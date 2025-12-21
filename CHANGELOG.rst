@@ -3,8 +3,9 @@ Version 19.0.0
 
 **Note**: Work in progress.
 
+- Added many key functions for various transformations.
 - Removed the `pytest` plugin from the package. Use project-specific fixtures and the `Field` class instead.
-- Removed the `builtins` module from the package.
+- Removed the `builtins` module from the package. Use custom field handlers.
 - The `Cryptographic` provider now uses a seedable random number generator instead of the `secrets` module. See (`#1656 <https://github.com/lk-geimfari/mimesis/issues/1656>`_).
 
 Version 18.0.0
