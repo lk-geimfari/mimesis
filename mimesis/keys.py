@@ -413,10 +413,10 @@ def apply_if(
     return key
 
 
-Function = Callable[[Any], Any] | Callable[[Any, Random], Any]
+KeyFunc = Callable[[Any], Any] | Callable[[Any, Random | None], Any]
 
 
-def pipe(*functions: Function) -> Function:
+def pipe(*functions: KeyFunc) -> KeyFunc:
     """Pipe multiple key functions together.
 
     Example:
@@ -430,9 +430,9 @@ def pipe(*functions: Function) -> Function:
     def key(result: Any, random: Random | None = None) -> Any:
         for func in functions:
             try:
-                result = func(result, random)
+                result = func(result, random)  # type: ignore[call-arg]
             except TypeError:
-                result = func(result)
+                result = func(result)  # type: ignore[call-arg]
         return result
 
     return key
