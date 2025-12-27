@@ -2,7 +2,7 @@
 import typing as t
 
 from mimesis.datasets import SAFE_COLORS
-from mimesis.enums import EmojyCategory
+from mimesis.enums import EmojiCategory
 from mimesis.providers.base import BaseDataProvider
 
 __all__ = ["Text"]
@@ -156,20 +156,20 @@ class Text(BaseDataProvider):
         answers: list[str] = self._extract(["answers"])
         return self.random.choice(answers)
 
-    def emoji(self, category: EmojyCategory | None = EmojyCategory.DEFAULT) -> str:
+    def emoji(self, category: EmojiCategory | None = EmojiCategory.DEFAULT) -> str:
         """Generates a random emoji from the specified category.
 
         Generates a random emoji from the specified category.
         If the category is not specified, a random emoji
         from any category will be returned.
 
-        :param category: :class:`~mimesis.enums.EmojyCategory`.
+        :param category: :class:`~mimesis.enums.EmojiCategory`.
         :raises NonEnumerableError: When category is not supported.
         :return: Emoji code.
         :example:
             😟
         """
-        category = self.validate_enum(category, EmojyCategory)
+        category = self.validate_enum(category, EmojiCategory)
         symbol = self.random.choice(self._emojis[category])
 
         base = 16

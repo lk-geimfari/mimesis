@@ -410,7 +410,7 @@ class TimestampFormat(Enum):
     RFC_3339 = auto()
 
 
-class EmojyCategory(Enum):
+class EmojiCategory(Enum):
     DEFAULT = "smileys_and_emotion"
     SMILEYS_AND_EMOTION = "smileys_and_emotion"
     PEOPLE_AND_BODY = "people_and_body"
@@ -421,3 +421,6 @@ class EmojyCategory(Enum):
     OBJECTS = "objects"
     SYMBOLS = "symbols"
     FLAGS = "flags"
+
+
+EmojyCategory = EmojiCategory
