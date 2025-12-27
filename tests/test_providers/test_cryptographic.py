@@ -174,7 +174,7 @@ class TestCryptographic:
 
         assert len(result) >= expected_min_length
 
-        key_part = result[len(prefix):] if prefix else result
+        key_part = result[len(prefix) :] if prefix else result
         if fmt == "hex":
             assert all(c in "0123456789abcdef" for c in key_part)
         elif fmt == "base64":
@@ -194,10 +194,12 @@ class TestCryptographic:
         "algorithm, expected_length, expected_colons",
         [
             ("sha256", 95, 31),  # 32 bytes = 64 hex chars + 31 colons = 95 total
-            ("sha1", 59, 19),    # 20 bytes = 40 hex chars + 19 colons = 59 total
+            ("sha1", 59, 19),  # 20 bytes = 40 hex chars + 19 colons = 59 total
         ],
     )
-    def test_certificate_fingerprint(self, crypto, algorithm, expected_length, expected_colons):
+    def test_certificate_fingerprint(
+        self, crypto, algorithm, expected_length, expected_colons
+    ):
         result = crypto.certificate_fingerprint(algorithm=algorithm)
         assert isinstance(result, str)
         assert len(result) == expected_length
@@ -256,8 +258,12 @@ class TestSeededCryptographic:
     def test_api_key(self, c1, c2):
         assert c1.api_key() == c2.api_key()
         assert c1.api_key(prefix="sk_") == c2.api_key(prefix="sk_")
-        assert c1.api_key(length=64, fmt="base64") == c2.api_key(length=64, fmt="base64")
+        assert c1.api_key(length=64, fmt="base64") == c2.api_key(
+            length=64, fmt="base64"
+        )
 
     def test_certificate_fingerprint(self, c1, c2):
         assert c1.certificate_fingerprint() == c2.certificate_fingerprint()
-        assert c1.certificate_fingerprint(algorithm="sha1") == c2.certificate_fingerprint(algorithm="sha1")
+        assert c1.certificate_fingerprint(
+            algorithm="sha1"
+        ) == c2.certificate_fingerprint(algorithm="sha1")

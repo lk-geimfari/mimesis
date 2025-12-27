@@ -94,7 +94,9 @@ class Cryptographic(BaseProvider):
         phrases = self.random.choices(WORDLIST, k=length)
         return " ".join(phrases)
 
-    def jwt(self, payload: dict[str, t.Any] | None = None, algorithm: str = "HS256") -> str:
+    def jwt(
+        self, payload: dict[str, t.Any] | None = None, algorithm: str = "HS256"
+    ) -> str:
         """Generate JWT-like token structure for testing.
 
         :param payload: JWT payload (claims).
