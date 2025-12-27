@@ -104,6 +104,7 @@ class TestBase:
             class Meta:
                 name = "my_provider"
                 datafile = "address.json"
+                auto_register = False
 
         data_provider = MyProvider(locale)
         assert city in data_provider._dataset["city"]
@@ -114,6 +115,7 @@ class TestBase:
             class Meta:
                 name = "bad"
                 datafile = "bad.json"
+                auto_register = False
 
         with pytest.raises(FileNotFoundError):
             BadProvider(locale=locale)
@@ -241,6 +243,7 @@ class TestBase:
                     name = "cdp"
                     datafile = "data.json"
                     datadir = Path(tmpdir)
+                    auto_register = False
 
                 def val(self):
                     return self.random.choice(self._extract(["key"]))
@@ -252,6 +255,7 @@ class TestBase:
                 class Meta:
                     name = "cdp"
                     datafile = "data.json"
+                    auto_register = False
 
             # Datadir is not set, so this should
             # raise an error

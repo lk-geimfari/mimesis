@@ -1,36 +1,17 @@
 """Provides all at one."""
 
-import importlib
 import inspect
 import typing as t
 
 from mimesis.locales import Locale
-from mimesis.providers.base import BaseDataProvider, BaseProvider
+from mimesis.providers.base import (
+    BaseDataProvider,
+    BaseProvider,
+    ProviderRegistry,
+)
 from mimesis.types import MissingSeed, Seed
 
 __all__ = ["Generic"]
-
-DEFAULT_PROVIDERS: tuple[str, ...] = (
-    "Address",
-    "BinaryFile",
-    "Finance",
-    "Choice",
-    "Code",
-    "Datetime",
-    "Development",
-    "File",
-    "Food",
-    "Hardware",
-    "Internet",
-    "Numeric",
-    "Path",
-    "Payment",
-    "Person",
-    "Science",
-    "Text",
-    "Transport",
-    "Cryptographic",
-)
 
 
 class Generic(BaseProvider):
@@ -45,21 +26,20 @@ class Generic(BaseProvider):
         super().__init__(seed=seed)
         self.locale = locale
 
-        for provider in DEFAULT_PROVIDERS:
-            module = importlib.import_module("mimesis.providers")
-            provider = getattr(module, provider)
-            name = getattr(provider.Meta, "name")  # type: ignore
+        for name, provider_cls in ProviderRegistry.get_all().items():
+            if provider_cls is Generic:
+                continue
 
-            # Check if a provider is locale-dependent.
-            if issubclass(provider, BaseDataProvider):
-                setattr(self, f"_{name}", provider)
-            elif issubclass(provider, BaseProvider):
-                setattr(self, name, provider(seed=self.seed))
+            if issubclass(provider_cls, BaseDataProvider):
+                setattr(self, f"_{name}", provider_cls)
+            elif issubclass(provider_cls, BaseProvider):
+                setattr(self, name, provider_cls(seed=self.seed))
 
     class Meta:
         """Class for metadata."""
 
         name: t.Final[str] = "generic"
+        auto_register: t.Final[bool] = False
 
     def __getattr__(self, attrname: str) -> t.Any:
         """Get attribute without an underscore.
@@ -74,6 +54,7 @@ class Generic(BaseProvider):
                 self.seed,
             )
             return self.__dict__[attrname]
+        return None
 
     def __dir__(self) -> list[str]:
         """Available data providers.

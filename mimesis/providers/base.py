@@ -12,7 +12,43 @@ from mimesis.exceptions import NonEnumerableError
 from mimesis.locales import Locale, validate_locale
 from mimesis.types import JSON, MissingSeed, Seed
 
-__all__ = ["BaseDataProvider", "BaseProvider"]
+__all__ = ["BaseDataProvider", "BaseProvider", "ProviderRegistry"]
+
+
+class ProviderRegistry:
+    """Central registry for all data providers.
+
+    This registry is automatically populated when provider classes
+    are defined via __init_subclass__ hook.
+    """
+
+    _providers: t.ClassVar[dict[str, type["BaseProvider"]]] = {}
+
+    @classmethod
+    def register(cls, name: str, provider_cls: type["BaseProvider"]) -> None:
+        """Register a provider in the global registry.
+
+        :param name: Provider name (from Meta.name)
+        :param provider_cls: Provider class
+        """
+        cls._providers[name] = provider_cls
+
+    @classmethod
+    def get_all(cls) -> dict[str, type["BaseProvider"]]:
+        """Get all registered providers.
+
+        :return: Dictionary mapping provider names to classes
+        """
+        return cls._providers.copy()
+
+    @classmethod
+    def get(cls, name: str) -> type["BaseProvider"] | None:
+        """Get a specific provider by name.
+
+        :param name: Provider name
+        :return: Provider class or None
+        """
+        return cls._providers.get(name)
 
 
 class BaseProvider:
@@ -25,6 +61,21 @@ class BaseProvider:
 
     class Meta:
         name: str
+        auto_register: bool = True
+
+    def __init_subclass__(cls, **kwargs: t.Any) -> None:
+        """Automatically register providers when they are defined.
+
+        This hook is called when a class inherits from BaseProvider.
+        It automatically registers the provider in the global registry
+        unless auto_register is explicitly set to False in Meta.
+        """
+        super().__init_subclass__(**kwargs)
+
+        if hasattr(cls, "Meta") and hasattr(cls.Meta, "name"):
+            should_register = getattr(cls.Meta, "auto_register", True)
+            if should_register:
+                ProviderRegistry.register(cls.Meta.name, cls)
 
     def __init__(
         self,
