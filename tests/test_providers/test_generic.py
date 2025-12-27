@@ -55,6 +55,10 @@ class TestGeneric:
 
     def test_add_providers(self, generic):
         class Provider1(BaseProvider):
+            class Meta:
+                name = "provider1"
+                auto_register = False
+
             @staticmethod
             def one():
                 return 1
@@ -62,12 +66,17 @@ class TestGeneric:
         class Provider2(BaseProvider):
             class Meta:
                 name = "custom_provider"
+                auto_register = False
 
             @staticmethod
             def two():
                 return 2
 
         class Provider3(BaseProvider):
+            class Meta:
+                name = "provider3"
+                auto_register = False
+
             @staticmethod
             def three():
                 return 3
@@ -78,6 +87,10 @@ class TestGeneric:
                 ...
 
         class Provider5(BaseProvider):
+            class Meta:
+                name = "provider5"
+                auto_register = False
+
             @staticmethod
             def five():
                 return 5
@@ -97,6 +110,9 @@ class TestGeneric:
             generic.add_providers(3)
 
         class UnnamedProvider(BaseProvider):
+            class Meta:
+                auto_register = False
+
             @staticmethod
             def nothing():
                 return None
@@ -114,14 +130,15 @@ class TestGeneric:
 
     def test_add_provider(self, generic):
         class CustomProvider(BaseProvider):
+            class Meta:
+                name = "custom_provider"
+                auto_register = False
+
             def __init__(self, seed, a, b, c):
                 super().__init__(seed=seed)
                 self.a = a
                 self.b = b
                 self.c = c
-
-            class Meta:
-                name = "custom_provider"
 
         generic.add_provider(CustomProvider, a="a", b="b", c="c", seed=0xFFF)
 
