@@ -43,6 +43,7 @@ The key features are:
 - **Performance**: Widely recognized as the fastest data generator among Python solutions.
 - **Data variety**: Includes various data providers designed for different use cases.
 - **Schema-based generators**: Offers schema-based data generators to effortlessly produce data of any complexity.
+- **Relational data**: Supports generating relational data with references between schemas for complex data structures.
 - **Intuitive**: Great editor support. Fully typed, thus autocompletion almost everywhere.
 
 ## Installation

@@ -272,7 +272,7 @@ Relational Schema
 .. versionadded:: 19.0.0
 
 Mimesis 19.0 introduces powerful features for generating relational data with foreign key references
-between different schemas. This is achieved through the :class:`~mimesis.schema.RelationalSchema` class,
+between different schemas. This is achieved through the :class:`~mimesis.schema.SchemaBuilder` class,
 which allows you to define multiple schemas and create relationships between them.
 
 Basic Relational Example
@@ -283,14 +283,14 @@ Here's a simple example of creating users and posts where each post references a
 .. code-block:: python
 
     from mimesis import Field, Schema
-    from mimesis.schema import RelationalSchema
+    from mimesis.schema import SchemaBuilder
     from mimesis.locales import Locale
 
     field = Field(Locale.EN, seed=0xFF)
-    rel_schema = RelationalSchema(seed=field.seed)
+    builder = SchemaBuilder(seed=field.seed)
 
     # Define the users schema
-    rel_schema.define(
+    builder.define(
         "users",
         Schema(lambda: {
             "id": field("increment"),
@@ -300,7 +300,7 @@ Here's a simple example of creating users and posts where each post references a
     )
 
     # Define the posts schema with a reference to users
-    rel_schema.define(
+    builder.define(
         "projects",
         Schema(lambda: {
             "id": field("increment"),
@@ -313,7 +313,7 @@ Here's a simple example of creating users and posts where each post references a
     )
 
     # Create data
-    data = rel_schema.create(users=5, projects=20)
+    data = builder.create(users=5, projects=20)
 
     # Access generated data
     print(data["users"])     # List of 5 users
@@ -322,7 +322,7 @@ Here's a simple example of creating users and posts where each post references a
 Context Methods for Relational Data
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-When using transformations inside a :class:`~mimesis.schema.RelationalSchema`, the context object
+When using transformations inside a :class:`~mimesis.schema.SchemaBuilder`, the context object
 provides special methods for working with relational data:
 
 - ``ctx.pick_from(schema_name, field)`` - Pick a random value from a previously generated schema's field
@@ -339,16 +339,15 @@ Here's a more complex example with three related schemas:
 
 .. code-block:: python
 
-    from mimesis import Field, Schema
-    from mimesis.schema import RelationalSchema
+    from mimesis.schema import Field, Schema, SchemaBuilder
     from mimesis.enums import TimestampFormat
     from mimesis.locales import Locale
 
     field = Field(Locale.EN, seed=0xFF)
-    rel_schema = RelationalSchema(seed=0xFF)
+    builder = SchemaBuilder(seed=0xFF)
 
     # Define users
-    rel_schema.define(
+    builder.define(
         "users",
         Schema(lambda: {
             "id": field("increment"),
@@ -359,7 +358,7 @@ Here's a more complex example with three related schemas:
     )
 
     # Define projects (owned by users)
-    rel_schema.define(
+    builder.define(
         "projects",
         Schema(lambda: {
             "id": field("increment"),
@@ -376,7 +375,7 @@ Here's a more complex example with three related schemas:
     )
 
     # Define API keys (belong to projects, created by users)
-    rel_schema.define(
+    builder.define(
         "api_keys",
         Schema(lambda: {
             "id": field("increment"),
@@ -386,12 +385,12 @@ Here's a more complex example with three related schemas:
         .map(lambda item, ctx: {
             **item,
             "project_id": ctx.pick_from("projects", "id"),
-            "created_by": ctx.pick_from("users", "id"),
+            "user_id": ctx.pick_from("users", "id"),
         })
     )
 
     # Generate all data with proper relationships
-    data = rel_schema.create(
+    data = builder.create(
         users=3,
         projects=5,
         api_keys=10
@@ -401,7 +400,7 @@ This will generate:
 
 - 3 users
 - 5 projects (each with a valid ``owner_id`` referencing a user)
-- 10 API keys (each with a valid ``project_id`` and ``created_by`` referencing projects and users)
+- 10 API keys (each with a valid ``project_id`` and ``user_id`` referencing projects and users)
 
 
 Using Field Aliases

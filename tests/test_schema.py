@@ -20,13 +20,7 @@ from mimesis.exceptions import (
 from mimesis.keys import maybe, romanize
 from mimesis.locales import Locale
 from mimesis.random import Random
-from mimesis.schema import (
-    Field,
-    Fieldset,
-    RelationalSchema,
-    Schema,
-    SchemaContext,
-)
+from mimesis.schema import Field, Fieldset, Schema, SchemaBuilder, SchemaContext
 from mimesis.types import MissingSeed
 from tests.test_providers.patterns import DATA_PROVIDER_STR_REGEX
 
@@ -626,8 +620,8 @@ def test_schema_with_context():
 
 def test_relational_schema():
     field = Field(Locale.EN, seed=0xFF)
-    rel_schema = RelationalSchema(seed=0xFF)
-    rel_schema.define(
+    builder = SchemaBuilder(seed=field.seed)
+    builder.define(
         "users",
         Schema(
             lambda: {
@@ -636,7 +630,7 @@ def test_relational_schema():
             }
         ),
     )
-    rel_schema.define(
+    builder.define(
         "posts",
         Schema(
             lambda: {
@@ -651,7 +645,7 @@ def test_relational_schema():
         ),
     )
 
-    data = rel_schema.create(users=3, posts=5)
+    data = builder.create(users=3, posts=5)
 
     assert len(data["users"]) == 3
     assert len(data["posts"]) == 5

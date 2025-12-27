@@ -70,7 +70,7 @@ from .providers import (
     Text,
     Transport,
 )
-from .schema import Field, Fieldset, Schema
+from .schema import Field, Fieldset, Schema, SchemaBuilder
 
 __all__ = [
     # Providers:
@@ -103,6 +103,7 @@ __all__ = [
     "Field",
     "Fieldset",
     "Schema",
+    "SchemaBuilder",
     # Locale:
     "Locale",
     # Enums:

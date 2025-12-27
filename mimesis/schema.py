@@ -28,7 +28,7 @@ __all__ = [
     "Fieldset",
     "Schema",
     "SchemaContext",
-    "RelationalSchema",
+    "SchemaBuilder",
     "FieldHandler",
     "RegisterableFieldHandler",
     "RegisterableFieldHandlers",
@@ -395,14 +395,14 @@ class SchemaContext:
         index: int,
         seed: Seed = MissingSeed,
         custom: dict[str, Any] | None = None,
-        builder: "RelationalSchema | None" = None,
+        builder: "SchemaBuilder | None" = None,
     ) -> None:
         """Initialize context.
 
         :param index: Current iteration index (0-based).
         :param seed: Current seed state.
         :param custom: Custom context data.
-        :param builder: Reference to RelationalSchema for relational data.
+        :param builder: Reference to SchemaBuilder for relational data.
         """
         self.index = index
         self.iteration = index + 1
@@ -420,7 +420,7 @@ class SchemaContext:
         :raises ValueError: If builder is not available or schema is not found.
         """
         if not self.schema_builder:
-            raise ValueError("pick_from() requires RelationalSchema")
+            raise ValueError("pick_from() requires SchemaBuilder")
         return self.schema_builder._pick_from(schema_name, field)
 
     def ref(self, schema_name: str) -> list[JSON]:
@@ -431,7 +431,7 @@ class SchemaContext:
         :raises ValueError: If builder is not available or schema is not found.
         """
         if not self.schema_builder:
-            raise ValueError("ref() requires RelationalSchema")
+            raise ValueError("ref() requires SchemaBuilder")
         return self.schema_builder._get_data(schema_name)
 
 
@@ -542,6 +542,22 @@ class Schema:
         with open(file_path, "wb") as fp:
             pickle.dump(self.create(), fp, **kwargs)
 
+    def _create_item(self, index: int) -> JSON:
+        """Create a single item with given index.
+
+        :param index: The index for the context.
+        :return: Generated and transformed item.
+        """
+        ctx = SchemaContext(
+            index=index,
+            seed=self.__seed,
+            custom=self._custom_context,
+        )
+
+        result = self.__schema()
+        result = self._apply_transformers(result, ctx)
+        return result
+
     def create(self) -> list[JSON]:
         """Creates a list of a fulfilled schemas.
 
@@ -557,14 +573,7 @@ class Schema:
         results: list[JSON] = []
 
         while len(results) < self.iterations:
-            ctx = SchemaContext(
-                index=index,
-                seed=self.__seed,
-                custom=self._custom_context,
-            )
-
-            result = self.__schema()
-            result = self._apply_transformers(result, ctx)
+            result = self._create_item(index)
 
             if result is not None:
                 results.append(result)
@@ -575,22 +584,13 @@ class Schema:
 
     def __next__(self) -> JSON:
         """Return the next item from the iterator."""
-        if self.__counter < self.iterations:
-            ctx = SchemaContext(
-                index=self.__counter,
-                seed=self.__seed,
-                custom=self._custom_context,
-            )
-
-            result = self.__schema()
-            result = self._apply_transformers(result, ctx)
-
+        while self.__counter < self.iterations:
+            result = self._create_item(self.__counter)
             self.__counter += 1
 
-            if result is None:
-                return self.__next__()
+            if result is not None:
+                return result
 
-            return result
         raise StopIteration
 
     def __iter__(self) -> "Schema":
@@ -599,7 +599,7 @@ class Schema:
         return self
 
 
-class RelationalSchema:
+class SchemaBuilder:
     """Builder for creating related schemas with references."""
 
     __slots__ = ("_schemas", "_data", "_seed", "_random")
@@ -615,7 +615,8 @@ class RelationalSchema:
         if seed is MissingSeed:
             self._random = Random()
         else:
-            self._random = Random(seed)
+            # Type narrowing: seed is not MissingSeed here
+            self._random = Random(seed)  # type: ignore[arg-type]
 
     def define(self, name: str, schema: Schema) -> Schema:
         """Register a schema with a name.
@@ -654,6 +655,28 @@ class RelationalSchema:
             raise ValueError(f"Schema '{schema_name}' not yet generated")
         return self._data[schema_name]
 
+    def _wrap_transformer(self, orig_fn: Callable[..., JSON]) -> Callable[..., Any]:
+        """Wrap a transformer to inject SchemaBuilder context.
+
+        :param orig_fn: Original transformer function.
+        :return: Wrapped transformer function.
+        """
+
+        def wrapped_transformer(item: JSON, ctx: SchemaContext) -> JSON:
+            new_ctx = SchemaContext(
+                index=ctx.index,
+                seed=ctx.seed,
+                custom=ctx.custom,
+                builder=self,
+            )
+
+            sig = inspect.signature(orig_fn)
+            if len(sig.parameters) >= 2:
+                return orig_fn(item, new_ctx)
+            return orig_fn(item)
+
+        return wrapped_transformer
+
     def create(self, **counts: int) -> dict[str, list[JSON]]:
         """Create all schemas with specified counts.
 
@@ -668,28 +691,11 @@ class RelationalSchema:
 
             schema = self._schemas[name]
 
-            temp_transformers: list[Callable[..., Any]] = []
-
-            for transformer in schema._transformers:
-
-                def wrapped_transformer(
-                    item: JSON,
-                    ctx: SchemaContext,
-                    orig_fn: Callable[..., Any] = transformer,
-                ) -> JSON:
-                    new_ctx = SchemaContext(
-                        index=ctx.index,
-                        seed=ctx.seed,
-                        custom=ctx.custom,
-                        builder=self,
-                    )
-
-                    sig = inspect.signature(orig_fn)
-                    if len(sig.parameters) >= 2:
-                        return orig_fn(item, new_ctx)
-                    return orig_fn(item)
-
-                temp_transformers.append(wrapped_transformer)
+            # Wrap transformers to inject builder context
+            temp_transformers = [
+                self._wrap_transformer(transformer)
+                for transformer in schema._transformers
+            ]
 
             old_transformers = schema._transformers
             schema._transformers = temp_transformers
