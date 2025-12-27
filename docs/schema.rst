@@ -266,6 +266,144 @@ The final result will look like this:
 
 That's it! You've just generated structured data using Mimesis.
 
+Relational Schema
+-----------------
+
+.. versionadded:: 19.0.0
+
+Mimesis 19.0 introduces powerful features for generating relational data with foreign key references
+between different schemas. This is achieved through the :class:`~mimesis.schema.RelationalSchema` class,
+which allows you to define multiple schemas and create relationships between them.
+
+Basic Relational Example
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Here's a simple example of creating users and posts where each post references a user:
+
+.. code-block:: python
+
+    from mimesis import Field, Schema
+    from mimesis.schema import RelationalSchema
+    from mimesis.locales import Locale
+
+    field = Field(Locale.EN, seed=0xFF)
+    rel_schema = RelationalSchema(seed=field.seed)
+
+    # Define the users schema
+    rel_schema.define(
+        "users",
+        Schema(lambda: {
+            "id": field("increment"),
+            "username": field("username"),
+            "email": field("email"),
+        })
+    )
+
+    # Define the posts schema with a reference to users
+    rel_schema.define(
+        "projects",
+        Schema(lambda: {
+            "id": field("increment"),
+            "title": field("sentence"),
+        })
+        .map(lambda item, ctx: {
+            **item,
+            "user_id": ctx.pick_from("users", "id"),  # Reference to user
+        })
+    )
+
+    # Create data
+    data = rel_schema.create(users=5, projects=20)
+
+    # Access generated data
+    print(data["users"])     # List of 5 users
+    print(data["projects"])  # List of 20 projects with valid user_id references
+
+Context Methods for Relational Data
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+When using transformations inside a :class:`~mimesis.schema.RelationalSchema`, the context object
+provides special methods for working with relational data:
+
+- ``ctx.pick_from(schema_name, field)`` - Pick a random value from a previously generated schema's field
+- ``ctx.ref(schema_name)`` - Get all generated items from a schema
+
+.. note::
+    The schemas must be generated in the correct order. A schema can only reference
+    schemas that were defined before it in the ``create()`` call.
+
+Complex Relational Example
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Here's a more complex example with three related schemas:
+
+.. code-block:: python
+
+    from mimesis import Field, Schema
+    from mimesis.schema import RelationalSchema
+    from mimesis.enums import TimestampFormat
+    from mimesis.locales import Locale
+
+    field = Field(Locale.EN, seed=0xFF)
+    rel_schema = RelationalSchema(seed=0xFF)
+
+    # Define users
+    rel_schema.define(
+        "users",
+        Schema(lambda: {
+            "id": field("increment"),
+            "username": field("username"),
+            "email": field("email"),
+            "created_at": field("timestamp", fmt=TimestampFormat.POSIX),
+        })
+    )
+
+    # Define projects (owned by users)
+    rel_schema.define(
+        "projects",
+        Schema(lambda: {
+            "id": field("increment"),
+            "name": field("text.word"),
+            "version": field("version"),
+        })
+        .map(lambda item, ctx: {
+            **item,
+            "owner_id": ctx.pick_from("users", "id"),
+            "status": field.get_random_instance().choice(
+                ["active", "archived", "draft"]
+            ),
+        })
+    )
+
+    # Define API keys (belong to projects, created by users)
+    rel_schema.define(
+        "api_keys",
+        Schema(lambda: {
+            "id": field("increment"),
+            "key": field("token_hex"),
+            "created_at": field("timestamp", fmt=TimestampFormat.POSIX),
+        })
+        .map(lambda item, ctx: {
+            **item,
+            "project_id": ctx.pick_from("projects", "id"),
+            "created_by": ctx.pick_from("users", "id"),
+        })
+    )
+
+    # Generate all data with proper relationships
+    data = rel_schema.create(
+        users=3,
+        projects=5,
+        api_keys=10
+    )
+
+This will generate:
+
+- 3 users
+- 5 projects (each with a valid ``owner_id`` referencing a user)
+- 10 API keys (each with a valid ``project_id`` and ``created_by`` referencing projects and users)
+
+
 Using Field Aliases
 -------------------
 

@@ -5,6 +5,7 @@ import inspect
 import json
 import pickle
 import re
+import time
 from typing import Any, Callable, Sequence
 
 from mimesis.exceptions import (
@@ -26,6 +27,8 @@ __all__ = [
     "Field",
     "Fieldset",
     "Schema",
+    "SchemaContext",
+    "RelationalSchema",
     "FieldHandler",
     "RegisterableFieldHandler",
     "RegisterableFieldHandlers",
@@ -51,6 +54,7 @@ class BaseField:
         :param locale: Locale.
         :param seed: Seed for random.
         """
+        self.seed = seed
         self._generic = Generic(locale, seed)
         self._cache: FieldCache = {}
         self._handlers: dict[str, FieldHandler] = {}
@@ -381,31 +385,131 @@ class Fieldset(BaseField):
         return [self.perform(*args, **kwargs) for _ in range(iterations)]
 
 
+class SchemaContext:
+    """Context object passed to transformation functions."""
+
+    __slots__ = ("index", "iteration", "timestamp", "seed", "custom", "schema_builder")
+
+    def __init__(
+        self,
+        index: int,
+        seed: Seed = MissingSeed,
+        custom: dict[str, Any] | None = None,
+        builder: "RelationalSchema | None" = None,
+    ) -> None:
+        """Initialize context.
+
+        :param index: Current iteration index (0-based).
+        :param seed: Current seed state.
+        :param custom: Custom context data.
+        :param builder: Reference to RelationalSchema for relational data.
+        """
+        self.index = index
+        self.iteration = index + 1
+        self.timestamp = time.time()
+        self.seed = seed
+        self.custom = custom or {}
+        self.schema_builder = builder
+
+    def pick_from(self, schema_name: str, field: str | None = None) -> Any:
+        """Pick a random item from a registered schema.
+
+        :param schema_name: Name of the schema in builder registry.
+        :param field: Optional field to extract from item.
+        :return: Random item or field value.
+        :raises ValueError: If builder is not available or schema is not found.
+        """
+        if not self.schema_builder:
+            raise ValueError("pick_from() requires RelationalSchema")
+        return self.schema_builder._pick_from(schema_name, field)
+
+    def ref(self, schema_name: str) -> list[JSON]:
+        """Get all generated items from a schema.
+
+        :param schema_name: Name of the schema in builder registry.
+        :return: List of all items from that schema.
+        :raises ValueError: If builder is not available or schema is not found.
+        """
+        if not self.schema_builder:
+            raise ValueError("ref() requires RelationalSchema")
+        return self.schema_builder._get_data(schema_name)
+
+
 class Schema:
     """Class which return list of filled schemas."""
 
     __slots__ = (
+        "iterations",
+        "_transformers",
         "__counter",
         "__schema",
-        "iterations",
+        "__seed",
+        "_custom_context",
     )
 
-    def __init__(self, schema: CallableSchema, iterations: int = 10) -> None:
+    def __init__(
+        self,
+        schema: CallableSchema,
+        iterations: int = 10,
+        seed: Seed = MissingSeed,
+    ) -> None:
         """Initialize schema.
 
-        :param iterations: Number of iterations.
-            This parameter is keyword-only. The default value is 10.
         :param schema: A schema (must be a callable object).
+        :param iterations: Number of iterations.
+        :param seed: Seed for random generator.
         """
         if iterations < 1:
             raise ValueError("Number of iterations should be greater than 1.")
 
-        self.iterations = iterations
-        if schema and callable(schema):  # type: ignore[truthy-function]
-            self.__schema = schema
-            self.__counter = 0
-        else:
+        if not callable(schema):
             raise SchemaError()
+
+        self.__schema = schema
+        self.__seed = seed
+        self.__counter = 0
+        self.iterations = iterations
+        self._transformers: list[Callable[..., Any]] = []
+        self._custom_context: dict[str, Any] = {}
+
+    def _apply_transformers(self, item: JSON, ctx: SchemaContext) -> JSON:
+        """Apply all transformers to an item.
+
+        :param item: The item to transform.
+        :param ctx: The context object.
+        :return: Transformed item.
+        """
+        for transformer in self._transformers:
+            sig = inspect.signature(transformer)
+            param_count = len(sig.parameters)
+
+            if param_count == 1:
+                item = transformer(item)
+            elif param_count >= 2:
+                item = transformer(item, ctx)
+            else:
+                item = transformer(item)
+
+        return item
+
+    def map(self, fn: Callable[..., Any]) -> "Schema":
+        """Transform each generated item.
+
+        :param fn: Function to transform items.
+            Can accept (item) or (item, context).
+        :return: Self for chaining.
+        """
+        self._transformers.append(fn)
+        return self
+
+    def with_context(self, **kwargs: Any) -> "Schema":
+        """Add custom context data.
+
+        :param kwargs: Custom context values.
+        :return: Self for chaining.
+        """
+        self._custom_context.update(kwargs)
+        return self
 
     def to_csv(self, file_path: str, **kwargs: Any) -> None:
         """Export a schema as a CSV file.
@@ -449,16 +553,155 @@ class Schema:
 
         :return: List of fulfilled schemas.
         """
-        return [self.__schema() for _ in range(self.iterations)]
+        index = 0
+        results: list[JSON] = []
+
+        while len(results) < self.iterations:
+            ctx = SchemaContext(
+                index=index,
+                seed=self.__seed,
+                custom=self._custom_context,
+            )
+
+            result = self.__schema()
+            result = self._apply_transformers(result, ctx)
+
+            if result is not None:
+                results.append(result)
+
+            index += 1
+
+        return results
 
     def __next__(self) -> JSON:
         """Return the next item from the iterator."""
         if self.__counter < self.iterations:
+            ctx = SchemaContext(
+                index=self.__counter,
+                seed=self.__seed,
+                custom=self._custom_context,
+            )
+
+            result = self.__schema()
+            result = self._apply_transformers(result, ctx)
+
             self.__counter += 1
-            return self.__schema()
+
+            if result is None:
+                return self.__next__()
+
+            return result
         raise StopIteration
 
     def __iter__(self) -> "Schema":
         """Return the iterator object itself."""
         self.__counter = 0
         return self
+
+
+class RelationalSchema:
+    """Builder for creating related schemas with references."""
+
+    __slots__ = ("_schemas", "_data", "_seed", "_random")
+
+    def __init__(self, seed: Seed = MissingSeed) -> None:
+        """Initialize relation schema.
+
+        :param seed: Seed for random generator.
+        """
+        self._schemas: dict[str, Schema] = {}
+        self._data: dict[str, list[JSON]] = {}
+        self._seed = seed
+        if seed is MissingSeed:
+            self._random = Random()
+        else:
+            self._random = Random(seed)
+
+    def define(self, name: str, schema: Schema) -> Schema:
+        """Register a schema with a name.
+
+        :param name: Name to register schema under.
+        :param schema: Schema instance.
+        :return: The schema for chaining.
+        """
+        self._schemas[name] = schema
+        return schema
+
+    def _pick_from(self, schema_name: str, field: str | None = None) -> Any:
+        """Pick random item from generated data.
+
+        :param schema_name: Name of schema.
+        :param field: Optional field to extract.
+        :return: Random item or field value.
+        """
+        if schema_name not in self._data:
+            raise ValueError(f"Schema '{schema_name}' not yet generated")
+
+        items = self._data[schema_name]
+        if not items:
+            raise ValueError(f"Schema '{schema_name}' has no items")
+
+        item = self._random.choice(items)
+        return item[field] if field else item
+
+    def _get_data(self, schema_name: str) -> list[JSON]:
+        """Get all data for a schema.
+
+        :param schema_name: Name of schema.
+        :return: List of items.
+        """
+        if schema_name not in self._data:
+            raise ValueError(f"Schema '{schema_name}' not yet generated")
+        return self._data[schema_name]
+
+    def create(self, **counts: int) -> dict[str, list[JSON]]:
+        """Create all schemas with specified counts.
+
+        :param counts: Schema names and their counts.
+        :return: Dictionary of schema names to generated data.
+        """
+        result: dict[str, list[JSON]] = {}
+
+        for name, count in counts.items():
+            if name not in self._schemas:
+                raise ValueError(f"Schema '{name}' is not defined")
+
+            schema = self._schemas[name]
+
+            temp_transformers: list[Callable[..., Any]] = []
+
+            for transformer in schema._transformers:
+
+                def wrapped_transformer(
+                    item: JSON,
+                    ctx: SchemaContext,
+                    orig_fn: Callable[..., Any] = transformer,
+                ) -> JSON:
+                    new_ctx = SchemaContext(
+                        index=ctx.index,
+                        seed=ctx.seed,
+                        custom=ctx.custom,
+                        builder=self,
+                    )
+
+                    sig = inspect.signature(orig_fn)
+                    if len(sig.parameters) >= 2:
+                        return orig_fn(item, new_ctx)
+                    return orig_fn(item)
+
+                temp_transformers.append(wrapped_transformer)
+
+            old_transformers = schema._transformers
+            schema._transformers = temp_transformers
+
+            old_iterations = schema.iterations
+            schema.iterations = count
+            data = schema.create()
+            schema.iterations = old_iterations
+
+            self._data[name] = data
+            result[name] = data
+
+            schema._transformers = old_transformers
+
+        return result

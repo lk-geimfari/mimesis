@@ -20,7 +20,13 @@ from mimesis.exceptions import (
 from mimesis.keys import maybe, romanize
 from mimesis.locales import Locale
 from mimesis.random import Random
-from mimesis.schema import Field, Fieldset, Schema
+from mimesis.schema import (
+    Field,
+    Fieldset,
+    RelationalSchema,
+    Schema,
+    SchemaContext,
+)
 from mimesis.types import MissingSeed
 from tests.test_providers.patterns import DATA_PROVIDER_STR_REGEX
 
@@ -554,3 +560,110 @@ def test_field_invalid_aliases(default_field, aliases):
 
     with pytest.raises(AliasesTypeError):
         default_field._validate_aliases()
+
+
+def test_schema_map():
+    field = Field(Locale.EN, seed=0xFF)
+
+    data = (
+        Schema(
+            lambda: {"value": field("integer_number", start=1, end=10)}, iterations=3
+        )
+        .map(lambda item: {**item, "doubled": item["value"] * 2})
+        .create()
+    )
+
+    assert len(data) == 3
+    for item in data:
+        assert "value" in item
+        assert "doubled" in item
+        assert item["doubled"] == item["value"] * 2
+
+
+def test_schema_map_with_context():
+    field = Field(Locale.EN, seed=0xFF)
+
+    data = (
+        Schema(lambda: {"name": field("name")}, iterations=3)
+        .map(lambda item, ctx: {**item, "index": ctx.index, "iteration": ctx.iteration})
+        .create()
+    )
+
+    assert len(data) == 3
+    for i, item in enumerate(data):
+        assert item["index"] == i
+        assert item["iteration"] == i + 1
+
+
+def test_schema_chaining():
+    field = Field(Locale.EN, seed=0xFF)
+
+    data = (
+        Schema(
+            lambda: {"value": field("integer_number", start=1, end=20)}, iterations=3
+        )
+        .map(lambda item: {**item, "doubled": item["value"] * 2})
+        .create()
+    )
+
+    assert len(data) == 3
+
+
+def test_schema_with_context():
+    field = Field(Locale.EN, seed=0xFF)
+
+    data = (
+        Schema(lambda: {"name": field("name")}, iterations=2)
+        .with_context(company="Acme Inc", version="v2")
+        .map(lambda item, ctx: {**item, "company": ctx.custom["company"]})
+        .create()
+    )
+
+    assert len(data) == 2
+    for item in data:
+        assert item["company"] == "Acme Inc"
+
+
+def test_relational_schema():
+    field = Field(Locale.EN, seed=0xFF)
+    rel_schema = RelationalSchema(seed=0xFF)
+    rel_schema.define(
+        "users",
+        Schema(
+            lambda: {
+                "id": field("increment"),
+                "name": field("name"),
+            }
+        ),
+    )
+    rel_schema.define(
+        "posts",
+        Schema(
+            lambda: {
+                "id": field("increment"),
+                "title": field("sentence"),
+            }
+        ).map(
+            lambda item, ctx: {
+                **item,
+                "user_id": ctx.pick_from("users", "id"),
+            }
+        ),
+    )
+
+    data = rel_schema.create(users=3, posts=5)
+
+    assert len(data["users"]) == 3
+    assert len(data["posts"]) == 5
+
+    for post in data["posts"]:
+        assert "user_id" in post
+        assert post["user_id"] in [u["id"] for u in data["users"]]
+
+
+def test_schema_context():
+    ctx = SchemaContext(index=5, seed=0xFF, custom={"test": "value"})
+
+    assert ctx.index == 5
+    assert ctx.iteration == 6
+    assert ctx.custom["test"] == "value"
