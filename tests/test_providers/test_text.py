@@ -4,7 +4,7 @@ import pytest
 
 from mimesis import Text
 from mimesis.datasets import SAFE_COLORS
-from mimesis.enums import EmojyCategory
+from mimesis.enums import EmojiCategory
 
 from . import patterns
 
@@ -104,16 +104,16 @@ class TestText:
         "category",
         [
             None,
-            EmojyCategory.DEFAULT,
-            EmojyCategory.SMILEYS_AND_EMOTION,
-            EmojyCategory.PEOPLE_AND_BODY,
-            EmojyCategory.ANIMALS_AND_NATURE,
-            EmojyCategory.FOOD_AND_DRINK,
-            EmojyCategory.TRAVEL_AND_PLACES,
-            EmojyCategory.ACTIVITIES,
-            EmojyCategory.OBJECTS,
-            EmojyCategory.SYMBOLS,
-            EmojyCategory.FLAGS,
+            EmojiCategory.DEFAULT,
+            EmojiCategory.SMILEYS_AND_EMOTION,
+            EmojiCategory.PEOPLE_AND_BODY,
+            EmojiCategory.ANIMALS_AND_NATURE,
+            EmojiCategory.FOOD_AND_DRINK,
+            EmojiCategory.TRAVEL_AND_PLACES,
+            EmojiCategory.ACTIVITIES,
+            EmojiCategory.OBJECTS,
+            EmojiCategory.SYMBOLS,
+            EmojiCategory.FLAGS,
         ],
     )
     def test_emoji(self, _text, category):

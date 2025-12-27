@@ -18,7 +18,7 @@ from .enums import (
     DSNType,
     DurationUnit,
     EANFormat,
-    EmojyCategory,
+    EmojiCategory,
     FileType,
     Gender,
     ImageFile,
@@ -131,7 +131,7 @@ __all__ = [
     "TLDType",
     "URLScheme",
     "VideoFile",
-    "EmojyCategory",
+    "EmojiCategory",
     # Exceptions:
     "LocaleError",
     "SchemaError",
