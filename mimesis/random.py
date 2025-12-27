@@ -72,20 +72,16 @@ class Random(random_module.Random):
                 "used for both numbers and characters."
             )
 
-        def random_int(a: int, b: int) -> int:
-            b = b - a
-            return int(self.random() * b) + a
-
         _mask = mask.encode()
         code = bytearray(len(_mask))
+        rand_fn = self.random
         for i, p in enumerate(_mask):
             if p == char_code:
-                a = random_int(65, 91)  # A-Z
+                code[i] = int(rand_fn() * 26) + 65  # A-Z
             elif p == digit_code:
-                a = random_int(48, 58)  # 0-9
+                code[i] = int(rand_fn() * 10) + 48  # 0-9
             else:
-                a = p
-            code[i] = a
+                code[i] = p
         return code.decode()
 
     def uniform(self, a: float, b: float, precision: int = 15) -> float:
