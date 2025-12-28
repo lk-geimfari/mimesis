@@ -1,8 +1,6 @@
 Version 19.0.0
 --------------
 
-**Note**: Work in progress.
-
 - Added many key functions for various transformations.
 - Removed the `pytest` plugin from the package. Use project-specific fixtures and the `Field` class instead.
 - Removed the `builtins` module from the package. Use custom field handlers.
