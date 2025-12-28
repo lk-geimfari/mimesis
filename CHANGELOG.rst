@@ -7,8 +7,9 @@ Version 19.0.0
 - Removed the `pytest` plugin from the package. Use project-specific fixtures and the `Field` class instead.
 - Removed the `builtins` module from the package. Use custom field handlers.
 - The `Cryptographic` provider now uses a seedable random number generator instead of the `secrets` module. See (`#1656 <https://github.com/lk-geimfari/mimesis/issues/1656>`_).
-- Add more methods for `Cryptographic`.
+- Add `jwt`, `api_key` and `certificate_fingerprint` methods for the `Cryptographic` provider.
 - Add `SchemaBuilder` for generating relational data.
+- Add `ip_v4_cidr()`, `ip_v6_cidr()` and `cloud_region()` methods for the `Internet` provider.
 
 Version 18.0.0
 --------------
