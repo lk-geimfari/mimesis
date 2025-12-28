@@ -1,9 +1,9 @@
 [project]
 name = "mimesis"
-version = "19.0.0"
+version = "19.0.1"
 description = "Mimesis: Fake Data Generator."
 authors = [{ name = "Isaak Uchakaev", email = "hey@isaak.dev" }]
-requires-python = "~=3.10"
+requires-python = ">=3.10"
 readme = "README.md"
 license = "MIT"
 keywords = [
