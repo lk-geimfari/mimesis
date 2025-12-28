@@ -1,5 +1,5 @@
 import re
-from ipaddress import IPv4Address, IPv6Address
+from ipaddress import IPv4Address, IPv4Network, IPv6Address, IPv6Network
 
 import pytest
 import validators
@@ -357,6 +357,45 @@ class TestInternet:
         ip = net.special_ip_v4(purpose=None)
         assert re.match(patterns.IP_V4_REGEX, ip)
 
+    def test_ip_v4_cidr(self, net):
+        cidr = net.ip_v4_cidr()
+        assert re.match(patterns.IP_V4_CIDR_REGEX, cidr)
+
+        # Validate it's a proper network object
+        network = IPv4Network(cidr)
+
+        # Validate structure
+        ip_part, prefix = cidr.split("/")
+        assert re.match(patterns.IP_V4_REGEX, ip_part)
+
+        # Validate prefix length range
+        prefix_len = int(prefix)
+        assert 0 <= prefix_len <= 32
+
+        # Validate that the network address has host bits zeroed
+        assert str(network.network_address) == ip_part
+        assert network.prefixlen == prefix_len
+
+    def test_ip_v6_cidr(self, net):
+        cidr = net.ip_v6_cidr()
+        assert re.match(patterns.IP_V6_CIDR_REGEX, cidr)
+
+        # Validate it's a proper network object
+        network = IPv6Network(cidr)
+
+        # Validate structure
+        parts = cidr.rsplit("/", 1)
+        assert len(parts) == 2
+        ip_part, prefix = parts
+
+        # Validate prefix length range
+        prefix_len = int(prefix)
+        assert 0 <= prefix_len <= 128
+
+        # Validate that the network address has host bits zeroed
+        assert str(network.network_address) == ip_part
+        assert network.prefixlen == prefix_len
+
 
 class TestSeededInternet:
     @pytest.fixture
@@ -471,3 +510,9 @@ class TestSeededInternet:
         assert i1.special_ip_v4_object(purpose=None) == i2.special_ip_v4_object(
             purpose=None
         )
+
+    def test_ip_v4_cidr(self, i1, i2):
+        assert i1.ip_v4_cidr() == i2.ip_v4_cidr()
+
+    def test_ip_v6_cidr(self, i1, i2):
+        assert i1.ip_v6_cidr() == i2.ip_v6_cidr()
