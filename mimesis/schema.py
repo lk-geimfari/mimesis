@@ -5,7 +5,6 @@ import inspect
 import json
 import pickle
 import re
-import time
 from typing import Any, Callable, Sequence
 
 from mimesis.exceptions import (
@@ -406,7 +405,6 @@ class SchemaContext:
         """
         self.index = index
         self.iteration = index + 1
-        self.timestamp = time.time()
         self.seed = seed
         self.custom = custom or {}
         self.schema_builder = builder
@@ -565,7 +563,8 @@ class Schema:
             This method evaluates immediately, so be careful when creating
             large datasets otherwise you're risking running out of memory.
 
-            If you need a lazy version of this method, see :meth:`iterator`.
+            If you need a lazy version of this method, just use :meth:`iterator` or
+            the iterator protocol of :class:`Schema`
 
         :return: List of fulfilled schemas.
         """
@@ -581,6 +580,13 @@ class Schema:
             index += 1
 
         return results
+
+    def iterator(self) -> "Schema":
+        """Return an iterator for the schema.
+
+        :return: Iterator object.
+        """
+        return iter(self)
 
     def __next__(self) -> JSON:
         """Return the next item from the iterator."""

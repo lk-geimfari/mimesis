@@ -298,9 +298,9 @@ def test_schema_create(schema):
     assert isinstance(result, list)
 
 
-def test_schema_iterator(schema):
+def _assert_schema_iteration(schema, iterable):
     count = 0
-    for item in schema:
+    for item in iterable:
         assert isinstance(item, dict)
         count += 1
 
@@ -310,6 +310,14 @@ def test_schema_iterator(schema):
     with pytest.raises(StopIteration):
         schema.iterations = 0
         next(schema)
+
+
+def test_schema_iterator(schema):
+    _assert_schema_iteration(schema, schema.iterator())
+
+
+def test_schema_iterator_protocol(schema):
+    _assert_schema_iteration(schema, schema)
 
 
 def test_schema_to_csv(tmp_path: "Path", schema: Schema):
