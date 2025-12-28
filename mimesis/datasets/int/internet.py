@@ -2284,3 +2284,25 @@ HTTP_SERVERS = [
     "Apache/2.4.1 (Unix)",
     "nginx/1.14.0 (Ubuntu)",
 ]
+
+CLOUD_REGION_PREFIXES = [
+    "us",
+    "eu",
+    "ap",
+    "ca",
+    "sa",
+    "af",
+    "me",
+]
+
+CLOUD_REGION_DIRECTIONS = [
+    "north",
+    "south",
+    "east",
+    "west",
+    "central",
+    "northeast",
+    "northwest",
+    "southeast",
+    "southwest",
+]

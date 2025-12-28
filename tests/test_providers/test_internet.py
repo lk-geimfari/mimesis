@@ -396,6 +396,36 @@ class TestInternet:
         assert str(network.network_address) == ip_part
         assert network.prefixlen == prefix_len
 
+    def test_cloud_region(self, net):
+        region = net.cloud_region()
+        parts = region.split("-")
+
+        # Should have 3 parts: prefix-direction-number
+        assert len(parts) == 3
+
+        prefix, direction, zone = parts
+
+        # Validate prefix is valid
+        assert prefix in datasets.CLOUD_REGION_PREFIXES
+
+        # Validate direction is valid
+        assert direction in datasets.CLOUD_REGION_DIRECTIONS
+
+        # Validate zone number is 1-5
+        zone_num = int(zone)
+        assert 1 <= zone_num <= 5
+
+    def test_cloud_region_custom_separator(self, net):
+        region = net.cloud_region(separator="_")
+        parts = region.split("_")
+
+        assert len(parts) == 3
+
+        prefix, direction, zone = parts
+        assert prefix in datasets.CLOUD_REGION_PREFIXES
+        assert direction in datasets.CLOUD_REGION_DIRECTIONS
+        assert 1 <= int(zone) <= 5
+
 
 class TestSeededInternet:
     @pytest.fixture
@@ -516,3 +546,7 @@ class TestSeededInternet:
 
     def test_ip_v6_cidr(self, i1, i2):
         assert i1.ip_v6_cidr() == i2.ip_v6_cidr()
+
+    def test_cloud_region(self, i1, i2):
+        assert i1.cloud_region() == i2.cloud_region()
+        assert i1.cloud_region(separator="_") == i2.cloud_region(separator="_")

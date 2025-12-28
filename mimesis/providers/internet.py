@@ -8,6 +8,8 @@ from base64 import b64encode
 from ipaddress import IPv4Address, IPv4Network, IPv6Address, IPv6Network
 
 from mimesis.datasets import (
+    CLOUD_REGION_DIRECTIONS,
+    CLOUD_REGION_PREFIXES,
     CONTENT_ENCODING_DIRECTIVES,
     CORS_OPENER_POLICIES,
     CORS_RESOURCE_POLICIES,
@@ -210,6 +212,25 @@ class Internet(BaseProvider):
         prefix_length = self.random.randint(0, 128)
         network = IPv6Network(f"{ip}/{prefix_length}", strict=False)
         return str(network)
+
+    def cloud_region(self, separator: str = "-") -> str:
+        """Generates a random cloud provider region identifier.
+
+        This generates region identifiers commonly used by cloud providers
+        like AWS, Azure, GCP, etc.
+
+        :param separator: Separator between parts (default is "-").
+        :return: Cloud region identifier.
+
+        :Example:
+            eu-west-1
+            us-east-2
+            ap-southeast-3
+        """
+        prefix = self.random.choice(CLOUD_REGION_PREFIXES)
+        direction = self.random.choice(CLOUD_REGION_DIRECTIONS)
+        zone_number = self.random.randint(1, 5)
+        return f"{prefix}{separator}{direction}{separator}{zone_number}"
 
     def asn(self) -> str:
         """Generates a random 4-byte ASN.
