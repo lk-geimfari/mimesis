@@ -9,6 +9,10 @@ a:visited {
     color: #2b79a2;
 }
 
+.logo img {
+    max-width: 90%;
+}
+
 a.reference {
     text-decoration: none;
     border-bottom: none;
