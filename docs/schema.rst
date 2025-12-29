@@ -7,7 +7,7 @@ Structured Data Generation
 Introduction
 ------------
 
-The classes :class:`~mimesis.schema.Field` and :class:`~mimesis.schema.Fieldset` are used to generating
+The classes :class:`~mimesis.schema.Field` and :class:`~mimesis.schema.Fieldset` are used for generating
 structured data in conjunction with :class:`~mimesis.schema.Schema`.
 
 - :class:`~mimesis.schema.Field` is used to generate a single value for a given field name.
@@ -60,7 +60,7 @@ the provider's name, as shown below:
     >>> field("username", mask="U_d", drange=(100, 1000))
 
 
-In this scenario, the ``Mimesis`` will call either the first registered custom field handler
+In this scenario, Mimesis will call either the first registered custom field handler
 under ``username`` or the first provider with a method named ``username``.
 
 To clarify, if you've registered a custom field handler with a name that matches any method
@@ -78,7 +78,7 @@ To generate a single value for a specific field, you'll need to instantiate the 
     >>> from mimesis import Field, Locale
     >>> field = Field(locale=Locale.EN)
 
-Then, you can use its instance as an entry point to access all the methods of the available providers:
+You can then use this instance as an entry point to access all methods of the available providers:
 
 .. code:: python
 
@@ -92,8 +92,8 @@ Then, you can use its instance as an entry point to access all the methods of th
 Generating a Set of Values
 --------------------------
 
-Sometimes it is necessary to generate a set of values for a given ``field`` instead of a single value.
-This can be achieved using the :class:`~mimesis.schema.Fieldset` class which is very similar to :class:`~mimesis.schema.Field`.
+Sometimes it's necessary to generate a set of values for a given field instead of a single value.
+This can be achieved using the :class:`~mimesis.schema.Fieldset` class, which is very similar to :class:`~mimesis.schema.Field`.
 
 The main difference between :class:`~mimesis.schema.Field` and :class:`~mimesis.schema.Fieldset` is that
 :class:`~mimesis.schema.Fieldset` generates a set (well, actually a ``list``) of values for a given field,
@@ -109,18 +109,18 @@ Let's take a look at the example:
     ['Basil', 'Carlee', 'Sheryll']
 
 The keyword argument **i** is used to specify the number of values to generate.
-If **i** is not specified, a reasonable default value (which is 10) is used.
+If **i** is not specified, the default value of 10 is used.
 
 The :class:`~mimesis.schema.Fieldset` class is a subclass of :class:`~mimesis.schema.BaseField` and inherits
-all its methods, attributes and properties. This means that API of :class:`~mimesis.schema.Fieldset` is almost the same
-as for :class:`~mimesis.schema.Field` which is also a subclass of :class:`~mimesis.schema.BaseField`.
-Almost, because an instance of :class:`~mimesis.schema.Fieldset` accepts an additional keyword argument **i**.
+all its methods, attributes, and properties. This means the API of :class:`~mimesis.schema.Fieldset` is almost the same
+as :class:`~mimesis.schema.Field`, which is also a subclass of :class:`~mimesis.schema.BaseField`.
+The only difference is that :class:`~mimesis.schema.Fieldset` accepts an additional keyword argument **i**.
 
 Overriding the Default Keyword Argument for Fieldset
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-While it may not be necessary in most cases, it is possible to override the default name
-of a keyword argument **i** for a specific instance of :class:`~mimesis.schema.Fieldset`.
+While not necessary in most cases, you can override the default name
+of the keyword argument **i** for a specific instance of :class:`~mimesis.schema.Fieldset`.
 
 Let's take a look at the example:
 
@@ -139,10 +139,10 @@ Let's take a look at the example:
 Schema Definition
 -----------------
 
-Now that you better understand how to use :class:`~mimesis.schema.Field` (and :class:`~mimesis.schema.Fieldset`),
-let's take a look at how to use them to generate structured data using :class:`~mimesis.schema.Schema`.
+Now that you understand how to use :class:`~mimesis.schema.Field` and :class:`~mimesis.schema.Fieldset`,
+let's look at how to use them to generate structured data with :class:`~mimesis.schema.Schema`.
 
-Firstly, let's import the required classes and enums and create required instances:
+First, let's import the required classes and enums and create the necessary instances:
 
 .. code:: python
 
@@ -153,12 +153,12 @@ Firstly, let's import the required classes and enums and create required instanc
     field = Field(Locale.EN, seed=0xff)
     fieldset = Fieldset(Locale.EN, seed=0xff)
 
-Afterwards, we need to define a schema:
+Next, we need to define a schema:
 
 .. warning::
 
-    The `schema` **should be wrapped in a callable object** to ensure that it is evaluated
-    dynamically, rather than just once, resulting in the same data being generated for each iteration.
+    The schema **must be wrapped in a callable object** to ensure it is evaluated
+    dynamically, rather than just once. Otherwise, the same data will be generated for each iteration.
 
 .. code:: python
 
@@ -219,7 +219,6 @@ The final result will look like this:
         "timestamp": 1718992237,
         "owner": {
           "email": "metabolism1990@mimesis.name",
-          "token": "cff564302f38541063a5a8243ef3715aaabe6c88eecc2f54f323fb4daab15c43",
           "creator": "Dierdre Lee"
         },
         "apiKeys": [
@@ -236,7 +235,6 @@ The final result will look like this:
         "timestamp": 1729820023,
         "owner": {
           "email": "pioneer2099@mimesis.name",
-          "token": "86ceabe478126d918532bc4324b3ba70dfbce2bd010117f4a07ddd114a11ee54",
           "creator": "Saran Willis"
         },
         "apiKeys": [
@@ -253,7 +251,6 @@ The final result will look like this:
         "timestamp": 1722235048,
         "owner": {
           "email": "shapes2013@mimesis.name",
-          "token": "458f1535d9a13180eace4a4128ff051facfb66d43798eb9ef428b7a5fd436bbb",
           "creator": "Carlos Lucas"
         },
         "apiKeys": [
@@ -270,8 +267,8 @@ Efficient Data Generation
 -------------------------
 
 When using :meth:`~mimesis.schema.Schema.create`, all field and fieldset calls are evaluated immediately,
-which affects performance when generating large datasets, since all values are generated upfront and
-more memory is consumed. Use the iteration protocol of `Schema` to avoid this and achieve a more efficient approach.
+which affects performance when generating large datasets since all values are generated upfront and
+more memory is consumed. Use the iteration protocol of :class:`~mimesis.schema.Schema` to avoid this and achieve a more efficient approach.
 
 So, instead of:
 
@@ -287,12 +284,12 @@ You can do this:
         print(item)
 
 
-This will lead to significant memory savings and better performance when generating large datasets,
-since lazy iteration is approximately 40–45% faster and 85–99%+ more memory-efficient,
+This approach leads to significant memory savings and better performance when generating large datasets.
+Lazy iteration is approximately 40–45% faster and 85–99%+ more memory-efficient,
 with efficiency increasing at larger scales.
 
-Universal rule of thumb: if you plan to generate more than 10,000 items or the schema complexity is high,
-consider using lazy iteration.
+As a rule of thumb: if you plan to generate more than 10,000 items or your schema complexity is high,
+use lazy iteration.
 
 Relational Schema
 -----------------
@@ -353,11 +350,11 @@ Context Methods for Relational Data
 When using transformations inside a :class:`~mimesis.schema.SchemaBuilder`, the context object
 provides special methods for working with relational data:
 
-- ``ctx.pick_from(schema_name, field)`` - Pick a random value from a previously generated schema's field
-- ``ctx.ref(schema_name)`` - Get all generated items from a schema
+- ``ctx.pick_from(schema_name, field)`` - Picks a random value from a previously generated schema's field
+- ``ctx.ref(schema_name)`` - Gets all generated items from a schema
 
 .. note::
-    The schemas must be generated in the correct order. A schema can only reference
+    Schemas must be generated in the correct order. A schema can only reference
     schemas that were defined before it in the ``create()`` call.
 
 Complex Relational Example
@@ -436,11 +433,11 @@ Using Field Aliases
 
 .. versionadded:: 12.0.0
 
-Sometimes, you need a field name that truly matches what your domain is about, and that's when field aliases become useful.
+Sometimes you need a field name that truly matches your domain, and that's when field aliases become useful.
 
-In order to utilize field aliases, it's necessary to instantiate either a :class:`~mimesis.schema.Field` or
-:class:`~mimesis.schema.Fieldset` and then update the attribute ``aliases`` (essentially a regular :class:`dict`) to
-associate aliases with field names.
+To use field aliases, instantiate either a :class:`~mimesis.schema.Field` or
+:class:`~mimesis.schema.Fieldset` and update the ``aliases`` attribute (a regular :class:`dict`)
+to associate aliases with field names.
 
 Let's take a look at the example:
 
@@ -481,10 +478,10 @@ You can now use aliases instead of standard field names:
 
 
 As you can see, you can use any string as an alias, so I'm doing my part to get someone fired for emoji-driven code.
-Putting jokes aside, although any string can work as an alias, it's wise to choose one that fits your domain or
-context better to enhance clarity and comprehension.
+Jokes aside, while any string can work as an alias, it's wise to choose one that fits your domain or
+context to enhance clarity and comprehension.
 
-When you no longer need aliases, you can remove them individually like regular dictionary keys or clear them all at once:
+When you no longer need aliases, you can remove them individually like regular dictionary keys, or clear them all at once:
 
 .. code-block:: python
 
@@ -517,7 +514,7 @@ Let's take a look at the example:
     >>> fieldset("name", key=str.upper)
     ['PETER', 'MARY', 'ROBERT']
 
-As you can see, **key** function can be applied to both — **field** and **fieldset**.
+As you can see, a **key** function can be applied to both **field** and **fieldset**.
 
 Although you can use any callable object as a key function, Mimesis provides a comprehensive
 set of built-in key functions for various transformations:
@@ -539,7 +536,7 @@ Transliteration
 
 **romanize**
 
-The :func:`~mimesis.keys.romanize` is used to transliterate strings from Cyrillic script to Latin (romanized) script.
+The :func:`~mimesis.keys.romanize` function is used to transliterate strings from Cyrillic script to Latin (romanized) script.
 
 Let's take a look at the example:
 
@@ -557,8 +554,8 @@ Let's take a look at the example:
     'Dem'jan Babarychenko'
 
 
-At this moment :func:`~mimesis.keys.romanize` works only with Russian (**Locale.RU**),
-Ukrainian (**Locale.UK**) and Kazakh (**Locale.KK**) locales.
+Currently, :func:`~mimesis.keys.romanize` only works with Russian (**Locale.RU**),
+Ukrainian (**Locale.UK**), and Kazakh (**Locale.KK**) locales.
 
 Case Conversion Functions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -601,8 +598,8 @@ These functions add text before, after, or around generated values.
 
 **wrap**
 
-The :func:`~mimesis.keys.wrap` function wraps a string with specified before and after text. By default,
-it wraps with angle brackets (``<`` and ``>``), but you can specify custom delimiters.
+The :func:`~mimesis.keys.wrap` function wraps a string with specified text before and after. By default,
+it uses angle brackets (``<`` and ``>``), but you can specify custom delimiters.
 
 .. code-block:: python
 
@@ -611,8 +608,8 @@ it wraps with angle brackets (``<`` and ``>``), but you can specify custom delim
 
 **prefix**
 
-The :func:`~mimesis.keys.prefix` function adds text to the beginning of a string. This is useful
-for adding prefixes to usernames, IDs, or other identifiers.
+The :func:`~mimesis.keys.prefix` function adds text to the beginning of a string.
+This is useful for adding prefixes to usernames, IDs, or other identifiers.
 
 .. code-block:: python
 
@@ -621,8 +618,8 @@ for adding prefixes to usernames, IDs, or other identifiers.
 
 **suffix**
 
-The :func:`~mimesis.keys.suffix` function adds text to the end of a string. This is commonly used
-for adding file extensions or domain suffixes.
+The :func:`~mimesis.keys.suffix` function adds text to the end of a string.
+This is commonly used for adding file extensions or domain suffixes.
 
 .. code-block:: python
 
@@ -644,8 +641,8 @@ The :func:`~mimesis.keys.reverse` function reverses the characters in a string:
 **truncate**
 
 The :func:`~mimesis.keys.truncate` function limits a string to a maximum length, adding a suffix
-(by default ``...``) when truncation occurs. This is useful for creating previews or ensuring
-data fits within length constraints.
+(by default ``...``) when truncation occurs. This is useful for creating previews or
+ensuring data fits within length constraints.
 
 .. code-block:: python
 
@@ -655,7 +652,7 @@ data fits within length constraints.
 **remove_whitespace**
 
 The :func:`~mimesis.keys.remove_whitespace` function removes all whitespace characters from a string,
-including spaces, tabs, and newlines. This can be useful for creating compact identifiers or tokens.
+including spaces, tabs, and newlines. This is useful for creating compact identifiers or tokens.
 
 .. code-block:: python
 
@@ -671,7 +668,7 @@ The :func:`~mimesis.keys.hash_with` function hashes a string using a specified a
 Python's :mod:`hashlib` module. Supported algorithms include ``sha256``, ``sha1``, ``md5``,
 ``sha512``, and others available in :data:`hashlib.algorithms_available`.
 
-This is useful for creating hashed passwords, checksums, or unique identifiers.
+This is useful for generating hashed passwords, checksums, or unique identifiers.
 
 .. code-block:: python
 
@@ -691,8 +688,8 @@ The :func:`~mimesis.keys.base64_encode` function encodes a string as base64:
 
 **urlsafe_base64_encode**
 
-The :func:`~mimesis.keys.urlsafe_base64_encode` function encodes a string as URL-safe base64,
-replacing characters that have special meaning in URLs (``+`` and ``/``) with URL-safe
+The :func:`~mimesis.keys.urlsafe_base64_encode` function encodes a string as URL-safe base64
+by replacing characters that have special meaning in URLs (``+`` and ``/``) with URL-safe
 alternatives (``-`` and ``_``).
 
 .. code-block:: python
@@ -705,13 +702,13 @@ alternatives (``-`` and ``_``).
 Sequence Operations
 ~~~~~~~~~~~~~~~~~~~
 
-Key functions for working with sequences (lists and tuples). These functions help you manipulate
+Key functions for working with sequences (lists and tuples). These functions help manipulate
 collections of values generated by fieldsets or methods that return sequences.
 
 **join**
 
 The :func:`~mimesis.keys.join` function takes a list or tuple and joins all items into a single
-string using the specified separator. By default, it uses ``", "`` as the separator. Each item
+string using the specified separator. By default, it uses ``", "`` as the separator, and each item
 is automatically converted to a string before joining.
 
 This is particularly useful when working with :class:`~mimesis.schema.Fieldset` to combine
@@ -728,19 +725,18 @@ Conditional and Composition
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Advanced key functions that enable conditional transformations and function composition.
-These functions provide powerful ways to combine multiple transformations or apply logic
+These provide powerful ways to combine multiple transformations or apply logic
 to your data generation.
 
 **maybe**
 
 Real-world data can be messy and may contain missing values.
-This is why generating data with **None** values may be useful
-to create more realistic synthetic data.
+Generating data with **None** values can help create more realistic synthetic data.
 
-Luckily, you can achieve this by using key function :func:`~mimesis.keys.maybe`
+You can achieve this by using the key function :func:`~mimesis.keys.maybe`.
 
-It's has nothing to do with `monads <https://wiki.haskell.org/All_About_Monads>`_,
-it is just a closure which accepts two arguments: **value** and **probability**.
+It has nothing to do with `monads <https://wiki.haskell.org/All_About_Monads>`_,
+it is just a closure that accepts two arguments: **value** and **probability**.
 
 Let's take a look at the example:
 
@@ -753,9 +749,9 @@ Let's take a look at the example:
 
     [None, None, None, 'bobby1882@gmail.com', None]
 
-In the example above, the probability of generating a **None** value instead of **email** is 0.6, which is 60%.
+In the example above, the probability of generating a **None** value instead of an email is 0.6 (60%).
 
-You can use any other value instead of **None**:
+You can use any value instead of **None**:
 
 .. code-block:: python
 
@@ -770,12 +766,12 @@ You can use any other value instead of **None**:
 **redact**
 
 The :func:`~mimesis.keys.redact` function replaces any generated value with a redaction marker.
-By default, it uses ``"[REDACTED]"`` as the replacement, but you can specify any string.
+By default, it uses ``"[REDACTED]"``, but you can specify any string.
 
-This is useful for generating datasets where certain sensitive fields need to be masked or
+This is useful for generating datasets where sensitive fields need to be masked or
 for creating test data that simulates redacted documents.
 
-Use it with ``apply_if`` to make it meaningful.
+Use it with :func:`~mimesis.keys.apply_if` to make it meaningful.
 
 .. code-block:: python
 
@@ -787,7 +783,7 @@ Use it with ``apply_if`` to make it meaningful.
 
 The :func:`~mimesis.keys.apply_if` function conditionally applies a transformation based on a
 predicate function. If the condition is true, it applies the first transform; if false,
-it optionally applies an alternative transform or returns the value unchanged.
+it can optionally apply an alternative transform or return the value unchanged.
 
 This enables dynamic data transformations based on the generated value's characteristics.
 
@@ -820,7 +816,7 @@ The :func:`~mimesis.keys.pipe` function chains multiple key functions together, 
 in sequence from left to right. The output of each function becomes the input to the next.
 
 This is one of the most powerful key functions, enabling complex transformations by composing
-simpler functions. It's inspired by Elixir's pipe operator (`|>`).
+simpler functions. It's inspired by Elixir's pipe operator (``|>``).
 
 .. code-block:: python
 
@@ -855,16 +851,15 @@ instance as their second parameter (like :func:`~mimesis.keys.maybe`).
 Accessing Random Object in Key Functions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To ensure that all key functions have the same seed, it may be necessary to access a random object,
-especially if you require a complex key function that involves performing additional tasks with **random** object.
+To ensure all key functions share the same seed, you may need to access a random object,
+especially if you need a complex key function that performs additional operations with the **random** object.
 
-In order to achieve this, you are required to create a **key function**
-that accepts two parameters - ``result`` and ``random``.
-The ``result`` argument denotes the output generated by the field,
+To achieve this, create a **key function** that accepts two parameters: ``result`` and ``random``.
+The ``result`` parameter represents the output generated by the field,
 while ``random`` is an instance of the :class:`~mimesis.random.Random`
-class used to ensure that all key functions accessing random have the same seed.
+class, ensuring all key functions that access random share the same seed.
 
-Here is an example of how to do this:
+Here's an example:
 
 .. code-block:: python
 
@@ -888,32 +883,32 @@ Custom Field Handlers
     We use :class:`~mimesis.schema.Field` in our examples, but all the features described
     below are available for :class:`~mimesis.schema.Fieldset` as well.
 
-Sometimes, it's necessary to register custom field handler or override existing ones to return custom data. This
-can be achieved using **custom field handlers**.
+Sometimes it's necessary to register custom field handlers or override existing ones to return custom data.
+This can be achieved using **custom field handlers**.
 
 A custom field handler can be any callable object. It should accept an instance of :class:`~mimesis.random.Random` as
-its first argument, and **keyword arguments** (`**kwargs`) for the remaining arguments, returning the result.
+its first argument and **keyword arguments** (``**kwargs``) for the remaining arguments, returning the result.
 
 
 .. warning::
 
-    **Every** field handler must take a random instance as its first argument.
+    **Every** field handler must accept a random instance as its first argument.
     This ensures it uses the same :class:`~mimesis.random.Random` instance as the rest of the library.
 
-    Below you can see examples of valid signatures of field handlers:
+    Valid signatures for field handlers:
 
     - ``field_handler(random, **kwargs)``
     - ``field_handler(random, a=None, b=None, c=None, **kwargs)``
     - ``field_handler(random, **{a: None, b: None, c: None})``
 
-    The **main thing** is that the first argument must be positional (a random instance), and the rest must be **keyword arguments**.
+    The key requirement is that the first argument must be positional (a random instance), and the rest must be **keyword arguments**.
 
 
 Register Field Handler
 ~~~~~~~~~~~~~~~~~~~~~~
 
-Suppose you want to create a field that returns a random value from a list of values. First, you need to
-create a callable object that handles field. Let's call it ``my_field``.
+Suppose you want to create a field that returns a random value from a list of values. First, create
+a callable object that handles the field. Let's call it ``my_field``.
 
 .. code-block:: python
 
@@ -921,15 +916,15 @@ create a callable object that handles field. Let's call it ``my_field``.
         return random.choice([a, b])
 
 
-Afterwards, you need to register it using a name you intend to use later. It's important to note
-that **every** field handler must be registered using a unique name, otherwise, you will override an existing handler.
+Next, register it using a name you intend to use later. Note that **every** field handler must be registered
+with a unique name; otherwise, you will override an existing handler.
 
-In this example, we will name the field ``hohoho``.
+In this example, we'll name the field ``hohoho``.
 
 .. note::
 
-    To avoid receiving a ``FieldNameError``, the field name must be a string that conforms to a valid Python identifier,
-    i.e ``field_name.isidentifier()`` returns ``True``.
+    To avoid a ``FieldNameError``, the field name must be a valid Python identifier,
+    i.e., ``field_name.isidentifier()`` must return ``True``.
 
 .. code-block:: python
 
@@ -941,8 +936,8 @@ In this example, we will name the field ``hohoho``.
     'a'
 
 
-Note that you can still use a `key function`, but the order of the arguments matters, so the field name comes first,
-the `key function` second, and then the rest of the keyword arguments (`**kwargs`) that are passed to the field handler:
+You can still use a key function, but the order of arguments matters: the field name comes first,
+the key function second, followed by the keyword arguments (``**kwargs``) passed to the field handler:
 
 .. code-block:: python
 
@@ -970,7 +965,7 @@ Register Field Handlers using Decorator
 
 .. note::
 
-    The decorator `@handle` **can only be used with functions** and not with any callable object.
+    The decorator ``@handle`` **can only be used with functions** and not with other callable objects.
 
 You can also register field handlers using decorator ``@field.handle('field_name')`` that takes the name of the field as an argument.
 
@@ -989,28 +984,28 @@ Let's take a look at the example:
     'b'
 
 
-When the field name is not specified, the name of the function (``func.__name__``) is used instead.
+When no field name is specified, the function's name (``func.__name__``) is used instead.
 
 
 Unregister Field Handler
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-If you want to unregister a field handler, you can do it like this:
+To unregister a field handler:
 
 .. code-block:: python
 
     >>> field.unregister_handler("hohoho")
 
-Now you can't use it anymore and will get a ``FieldError`` if you try to do so.
+Now you can't use it anymore and will get a ``FieldError`` if you try.
 
-If you'll attempt to unregister a field handler that was never registered then nothing going to happen:
+If you attempt to unregister a field handler that was never registered, nothing will happen:
 
 .. code-block:: python
 
     >>> field.unregister_handler("blabla") # nothing happens
 
 
-It's quite evident that you can also unregister multiple field handlers at once:
+You can also unregister multiple field handlers at once:
 
 .. code-block:: python
 
@@ -1072,10 +1067,10 @@ Example of the content of ``data.csv`` (truncated):
 Integrating with Pandas
 -----------------------
 
-If you're using `pandas <https://pandas.pydata.org/>`_, you can make use of the :class:`~mimesis.schema.Fieldset`.
+If you're using `pandas <https://pandas.pydata.org/>`_, you can leverage :class:`~mimesis.schema.Fieldset`.
 
-With :class:`~mimesis.schema.Fieldset`, you can create dataframes that are similar in structure
-to your real-world data, allowing you to perform accurate and reliable testing and analysis:
+With :class:`~mimesis.schema.Fieldset`, you can create DataFrames that mirror the structure
+of your real-world data, enabling accurate and reliable testing and analysis:
 
 .. code-block:: python
 
@@ -1109,7 +1104,7 @@ Output:
 Integrating with Polars
 -----------------------
 
-If you're using `polars <https://pola.rs/>`_, you can make use of the :class:`~mimesis.schema.Fieldset` as well.
+If you're using `polars <https://pola.rs/>`_, you can also leverage :class:`~mimesis.schema.Fieldset`.
 
 .. code-block:: python
 
