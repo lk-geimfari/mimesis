@@ -136,7 +136,7 @@ class Cryptographic(BaseProvider):
     def api_key(self, prefix: str = "", length: int = 32, fmt: str = "hex") -> str:
         """Generate API key.
 
-        :param prefix: Optional prefix (e.g., 'sk_', 'pk_', 'api_').
+        :param prefix: Optional prefix (e.g., `sk_`, `pk_`, `api_`).
         :param length: Length of the random part (default: 32).
         :param fmt: Format of the key - 'hex' or 'base64' (default: 'hex').
         :return: API key string.
