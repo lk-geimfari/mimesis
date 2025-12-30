@@ -7,7 +7,7 @@ from mimesis.enums import FileType, MimeType
 from mimesis.exceptions import NonEnumerableError
 from mimesis.providers.file import File
 
-from . import patterns
+from .. import patterns
 
 
 class TestFile:

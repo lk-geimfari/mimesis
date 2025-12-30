@@ -13,7 +13,7 @@ from mimesis.datasets import (
     STOCK_TICKERS,
 )
 
-from . import patterns
+from .. import patterns
 
 
 class TestFinance:

@@ -8,7 +8,7 @@ from mimesis.enums import EANFormat, ISBNFormat
 from mimesis.exceptions import NonEnumerableError
 from mimesis.locales import Locale
 
-from . import patterns
+from .. import patterns
 
 
 class TestCode:

@@ -6,7 +6,7 @@ from mimesis import Text
 from mimesis.datasets import SAFE_COLORS
 from mimesis.enums import EmojiCategory
 
-from . import patterns
+from .. import patterns
 
 
 class TestText:

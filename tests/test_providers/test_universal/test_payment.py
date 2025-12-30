@@ -7,7 +7,7 @@ from mimesis.datasets import CREDIT_CARD_NETWORKS
 from mimesis.enums import CardType, Gender
 from mimesis.exceptions import NonEnumerableError
 
-from . import patterns
+from .. import patterns
 
 
 class TestPayment:

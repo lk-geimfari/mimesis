@@ -5,7 +5,7 @@ import pytest
 
 from mimesis import Development, datasets
 
-from . import patterns
+from .. import patterns
 
 
 class TestDevelopment:

@@ -17,7 +17,7 @@ from mimesis.datasets import (
     SCREEN_SIZES,
 )
 
-from . import patterns
+from .. import patterns
 
 
 class TestHardware:

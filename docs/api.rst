@@ -63,8 +63,8 @@ Generic
 
 
 
-Locale-Dependent Providers
-==========================
+Localized Providers
+===================
 
 Address
 -------
@@ -108,8 +108,8 @@ Text
    :special-members: __init__
 
 
-Locale-Independent Providers
-=============================
+Universal Providers
+===================
 
 BinaryFile
 ----------
@@ -232,6 +232,24 @@ Schema
 .. autoclass:: mimesis.schema.Schema
    :members:
    :special-members: __init__
+
+
+SchemaContext
+-------------
+
+.. autoclass:: mimesis.schema.SchemaContext
+   :members:
+   :special-members: __init__
+
+
+SchemaBuilder
+-------------
+
+.. autoclass:: mimesis.schema.SchemaBuilder
+   :members:
+   :special-members: __init__
+
+
 
 Enums
 =====

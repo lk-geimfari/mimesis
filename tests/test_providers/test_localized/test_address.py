@@ -13,7 +13,7 @@ from mimesis.datasets import (
 from mimesis.enums import CountryCode
 from mimesis.exceptions import NonEnumerableError
 
-from . import patterns
+from .. import patterns
 
 
 class TestAddress:

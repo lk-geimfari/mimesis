@@ -7,7 +7,7 @@ from mimesis.datasets.int.scientific import SI_PREFIXES, SI_PREFIXES_SYM
 from mimesis.enums import MeasureUnit, MetricPrefixSign
 from mimesis.exceptions import NonEnumerableError
 
-from . import patterns
+from .. import patterns
 
 
 class TestScience:

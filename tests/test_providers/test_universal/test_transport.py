@@ -12,7 +12,7 @@ from mimesis.datasets import (
 )
 from mimesis.locales import Locale
 
-from . import patterns
+from .. import patterns
 
 
 class TestTransport:

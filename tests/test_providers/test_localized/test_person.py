@@ -8,7 +8,7 @@ from mimesis.datasets import BLOOD_GROUPS, GENDER_CODES, GENDER_SYMBOLS
 from mimesis.enums import Gender, TitleType
 from mimesis.exceptions import NonEnumerableError
 
-from . import patterns
+from .. import patterns
 
 
 class TestPerson:

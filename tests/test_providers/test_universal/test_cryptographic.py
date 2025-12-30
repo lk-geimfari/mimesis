@@ -9,7 +9,7 @@ from mimesis import Cryptographic
 from mimesis.enums import Algorithm
 from mimesis.exceptions import NonEnumerableError
 
-from . import patterns
+from .. import patterns
 
 
 class TestCryptographic:

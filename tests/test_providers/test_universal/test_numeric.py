@@ -7,7 +7,7 @@ from mimesis import Numeric
 from mimesis.enums import NumType
 from mimesis.exceptions import NonEnumerableError
 
-from . import patterns
+from .. import patterns
 
 
 class TestNumbers:

@@ -4,7 +4,7 @@ import pytest
 
 from mimesis import Food
 
-from . import patterns
+from .. import patterns
 
 
 class TestFood:

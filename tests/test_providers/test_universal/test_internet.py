@@ -15,7 +15,7 @@ from mimesis.enums import (
 )
 from mimesis.exceptions import NonEnumerableError
 
-from . import patterns
+from .. import patterns
 
 
 class TestInternet:

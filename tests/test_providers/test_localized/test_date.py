@@ -8,7 +8,7 @@ from mimesis.datasets import GMT_OFFSETS, TIMEZONES
 from mimesis.enums import DurationUnit, TimestampFormat, TimezoneRegion
 from mimesis.exceptions import NonEnumerableError
 
-from . import patterns
+from .. import patterns
 
 
 class TestDatetime:

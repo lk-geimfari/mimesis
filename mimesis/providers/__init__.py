@@ -26,6 +26,7 @@ __all__ = [
     # Base classes:
     "BaseProvider",
     "BaseDataProvider",
+    "ProviderRegistry",
     # Data providers:
     "Address",
     "BinaryFile",
