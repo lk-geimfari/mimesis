@@ -32,19 +32,9 @@ def test_str(default_field):
     assert re.match(DATA_PROVIDER_STR_REGEX, str(default_field))
 
 
-@pytest.fixture(scope="module", params=list(Locale))
-def localized_field(request):
-    return Field(request.param)
-
-
 @pytest.fixture(scope="module")
 def default_field(request):
     return Field()
-
-
-@pytest.fixture(scope="module", params=list(Locale))
-def localized_fieldset(request):
-    return Fieldset(request.param)
 
 
 @pytest.fixture(scope="module")
@@ -58,11 +48,6 @@ def custom_fieldset(request):
         fieldset_iterations_kwarg = "iterations"
 
     return MyFieldSet()
-
-
-@pytest.fixture(scope="module", params=list(Locale))
-def fieldset_with_default_i(request):
-    return Fieldset(request.param, i=100)
 
 
 @pytest.fixture
@@ -173,9 +158,9 @@ def test_field_with_key_function_two_parameters(localized_field):
 @pytest.mark.parametrize(
     "locale",
     (
-        Locale.RU,
-        Locale.UK,
-        Locale.KK,
+            Locale.RU,
+            Locale.UK,
+            Locale.KK,
     ),
 )
 def test_field_with_romanize(locale):
@@ -187,9 +172,9 @@ def test_field_with_romanize(locale):
 @pytest.mark.parametrize(
     "locale",
     (
-        Locale.RU,
-        Locale.UK,
-        Locale.KK,
+            Locale.RU,
+            Locale.UK,
+            Locale.KK,
     ),
 )
 def test_fieldset_with_romanize(locale):

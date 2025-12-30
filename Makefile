@@ -9,6 +9,7 @@ help:
 	@echo "  format     to format code using autoformatters"
 	@echo "  lint       to check code using autoformatters"
 	@echo "  test       to run tests"
+	@echo "  test-en    to run tests only for default locale"
 	@echo "  all        run pipeline format -> test -> docs -> clean"
 
 .PHONY: all
@@ -38,6 +39,10 @@ lint: format
 .PHONY: test
 test:
 	bash scripts/test.sh
+
+.PHONY: test-en
+test-en :
+	MIMESIS_TESTS_ONLY_EN=true bash scripts/test.sh
 
 .PHONY: update-deps
 update-deps:
