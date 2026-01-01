@@ -149,7 +149,12 @@ class TestProviderSynchronization:
     def test_all_providers_in_init_are_in_registry(self):
         from mimesis.providers import __all__
 
-        exported = set(__all__) - {"BaseProvider", "BaseDataProvider", "ProviderRegistry", "Generic"}
+        exported = set(__all__) - {
+            "BaseProvider",
+            "BaseDataProvider",
+            "ProviderRegistry",
+            "Generic",
+        }
 
         registered_classes = set()
         for name, cls in ProviderRegistry.get_all().items():

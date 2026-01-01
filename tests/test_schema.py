@@ -158,9 +158,9 @@ def test_field_with_key_function_two_parameters(localized_field):
 @pytest.mark.parametrize(
     "locale",
     (
-            Locale.RU,
-            Locale.UK,
-            Locale.KK,
+        Locale.RU,
+        Locale.UK,
+        Locale.KK,
     ),
 )
 def test_field_with_romanize(locale):
@@ -172,9 +172,9 @@ def test_field_with_romanize(locale):
 @pytest.mark.parametrize(
     "locale",
     (
-            Locale.RU,
-            Locale.UK,
-            Locale.KK,
+        Locale.RU,
+        Locale.UK,
+        Locale.KK,
     ),
 )
 def test_fieldset_with_romanize(locale):

@@ -9,7 +9,7 @@ platform = ["win32", "linux", "darwin"]
 
 
 def get_locales():
-    if os.getenv('MIMESIS_TESTS_ONLY_EN'):
+    if os.getenv("MIMESIS_TESTS_ONLY_EN"):
         return [Locale.EN]
     return Locale.values()
 
