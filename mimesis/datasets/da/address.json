@@ -5721,5 +5721,11 @@
       "Østrigsgade",
       "Østtoftevej"
     ]
-  }
+  },
+  "secondary_address_fmt": [
+    "Lejl. #",
+    "Lejl. ##",
+    "Etage #",
+    "Sal @"
+  ]
 }

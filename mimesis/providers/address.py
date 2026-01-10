@@ -78,6 +78,34 @@ class Address(BaseDataProvider):
         suffixes: list[str] = self._extract(["street", "suffix"])
         return self.random.choice(suffixes)
 
+    def secondary_address(self) -> str:
+        """Generates a random secondary address.
+
+        Secondary addresses are used for apartments, suites, units, etc.
+
+        :return: Secondary address.
+
+        :Example:
+            Apt. 42
+            Suite 1200
+            Unit B
+        """
+        default_patterns = [
+            "Apt. #",
+            "Apt. ##",
+            "Apt. ###",
+            "Apt. @",
+            "Suite ###",
+            "Suite ####",
+            "Unit #",
+            "Unit @",
+        ]
+        patterns: list[str] = self._extract(
+            ["secondary_address_fmt"], default=default_patterns
+        )
+        pattern = self.random.choice(patterns)
+        return self.random.generate_string_by_mask(mask=pattern, digit="#", char="@")
+
     def address(self) -> str:
         """Generates a random full address.
 

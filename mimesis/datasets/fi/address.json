@@ -448,5 +448,12 @@
       "katu"
     ]
   },
-  "postal_code_fmt": "#####"
+  "postal_code_fmt": "#####",
+  "secondary_address_fmt": [
+    "Asunto #",
+    "Asunto ##",
+    "Asunto ###",
+    "Huone #",
+    "Kerros #"
+  ]
 }

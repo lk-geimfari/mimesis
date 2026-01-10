@@ -6087,5 +6087,21 @@
       "Rua"
     ]
   },
-  "postal_code_fmt": "#####-###"
+  "postal_code_fmt": "#####-###",
+  "secondary_address_fmt": [
+    "Apto. ###",
+    "Apto. ####",
+    "Apartamento ###",
+    "Bloco @",
+    "Bloco @ Apto. ###",
+    "Bloco @ Apto. ####",
+    "Quadra # Lote ##",
+    "Quadra ## Lote ##",
+    "Sala ###",
+    "Sala ####",
+    "Conjunto ###",
+    "Andar ##",
+    "Casa #",
+    "Casa ##"
+  ]
 }

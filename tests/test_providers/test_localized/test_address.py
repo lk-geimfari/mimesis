@@ -84,6 +84,16 @@ class TestAddress:
         assert isinstance(result, str)
         assert result is not None
 
+    def test_secondary_address(self, _address):
+        result = _address.secondary_address()
+        assert isinstance(result, str)
+        assert len(result) > 0
+        valid_prefixes = ("Apt.", "Suite", "Unit", "PO Box")
+        has_valid_format = any(
+            result.startswith(p) for p in valid_prefixes
+        ) or re.match(r"^\d+\s[A-Z]$", result)
+        assert has_valid_format, f"Invalid secondary address format: {result}"
+
     @pytest.mark.parametrize(
         "abbr, key",
         [
@@ -236,6 +246,9 @@ class TestSeededAddress:
 
     def test_address(self, a1, a2):
         assert a1.address() == a2.address()
+
+    def test_secondary_address(self, a1, a2):
+        assert a1.secondary_address() == a2.secondary_address()
 
     def test_state(self, a1, a2):
         assert a1.state() == a2.state()

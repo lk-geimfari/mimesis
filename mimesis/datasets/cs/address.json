@@ -5483,5 +5483,12 @@
       "Žďárská",
       "Žďárského"
     ]
-  }
+  },
+  "secondary_address_fmt": [
+    "Byt #",
+    "Byt ##",
+    "Byt ###",
+    "Patro #",
+    "Vchod @"
+  ]
 }

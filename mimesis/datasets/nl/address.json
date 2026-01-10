@@ -4004,5 +4004,13 @@
       "steeg"
     ]
   },
-  "postal_code_fmt": "1### @@"
+  "postal_code_fmt": "1### @@",
+  "secondary_address_fmt": [
+    "App. #",
+    "App. ##",
+    "App. ###",
+    "Verdieping #",
+    "Kamer ##",
+    "Unit @"
+  ]
 }

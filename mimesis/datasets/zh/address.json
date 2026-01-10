@@ -840,5 +840,12 @@
       "路"
     ]
   },
-  "postal_code_fmt": "######"
+  "postal_code_fmt": "######",
+  "secondary_address_fmt": [
+    "###室",
+    "####室",
+    "#楼",
+    "##楼",
+    "@栋###室"
+  ]
 }
