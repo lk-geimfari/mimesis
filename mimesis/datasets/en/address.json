@@ -1,5 +1,20 @@
 {
   "address_fmt": "{st_num} {st_name} {st_sfx}",
+  "secondary_address_fmt": [
+    "Apt. #",
+    "Apt. ##",
+    "Apt. ###",
+    "Apt. @",
+    "Suite ###",
+    "Suite ####",
+    "Unit #",
+    "Unit ##",
+    "Unit @",
+    "PO Box ###",
+    "PO Box ####",
+    "# @",
+    "## @"
+  ],
   "city": [
     "Aberdeen",
     "Abilene",

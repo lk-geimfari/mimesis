@@ -1451,5 +1451,12 @@
       "Rua"
     ]
   },
-  "postal_code_fmt": "####"
+  "postal_code_fmt": "####",
+  "secondary_address_fmt": [
+    "Apartamento #",
+    "Apartamento ##",
+    "Apartamento ###",
+    "Andar #",
+    "Fração @"
+  ]
 }

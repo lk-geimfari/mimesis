@@ -2792,5 +2792,11 @@
       "Øysteins"
     ]
   },
-  "postal_code_fmt": "####"
+  "postal_code_fmt": "####",
+  "secondary_address_fmt": [
+    "Leil. #",
+    "Leil. ##",
+    "Leil. ###",
+    "Etasje #"
+  ]
 }

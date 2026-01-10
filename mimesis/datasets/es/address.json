@@ -1245,5 +1245,17 @@
       "rúa do Loureiro"
     ]
   },
-  "postal_code_fmt": "#####"
+  "postal_code_fmt": "#####",
+  "secondary_address_fmt": [
+    "Apto. #",
+    "Apto. ##",
+    "Apto. ###",
+    "Piso #",
+    "Piso ##",
+    "Depto. ###",
+    "Depto. ####",
+    "Oficina ###",
+    "Local ##",
+    "Unidad @"
+  ]
 }

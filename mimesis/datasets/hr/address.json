@@ -448,5 +448,12 @@
       "Avenija",
       "Ulica"
     ]
-  }
+  },
+  "secondary_address_fmt": [
+    "Stan #",
+    "Stan ##",
+    "Stan ###",
+    "Kat #",
+    "Zgrada @"
+  ]
 }

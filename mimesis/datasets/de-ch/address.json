@@ -2706,5 +2706,15 @@
       "Zürichbergstrasse",
       "Zürichholzstrasse"
     ]
-  }
+  },
+  "secondary_address_fmt": [
+    "Wohnung #",
+    "Wohnung ##",
+    "Wohnung ###",
+    "Etage #",
+    "Etage ##",
+    "Einheit #",
+    "Einheit ##",
+    "Haus @"
+  ]
 }

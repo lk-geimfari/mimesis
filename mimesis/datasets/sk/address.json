@@ -2194,5 +2194,12 @@
       "trieda",
       "ulica"
     ]
-  }
+  },
+  "secondary_address_fmt": [
+    "Byt #",
+    "Byt ##",
+    "Byt ###",
+    "Poschodie #",
+    "Vchod @"
+  ]
 }

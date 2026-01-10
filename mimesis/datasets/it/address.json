@@ -9481,5 +9481,14 @@
       "Zoccoli"
     ]
   },
-  "postal_code_fmt": "#####"
+  "postal_code_fmt": "#####",
+  "secondary_address_fmt": [
+    "App. #",
+    "App. ##",
+    "App. ###",
+    "Piano #",
+    "Scala @",
+    "Int. #",
+    "Interno ##"
+  ]
 }
