@@ -480,15 +480,22 @@ class Person(BaseDataProvider):
         languages: list[str] = self._extract(["language"])
         return self.random.choice(languages)
 
-    def phone_number(self, mask: str = "", placeholder: str = "#") -> str:
+    def phone_number(
+        self,
+        mask: str = "",
+        placeholder: str = "#",
+        e164: bool = False,
+    ) -> str:
         """Generates a random phone number.
 
         :param mask: Mask for formatting number.
         :param placeholder: A placeholder for a mask (default is #).
+        :param e164: If True, returns phone number in E.164 format (e.g., +14155552671).
         :return: Phone number.
 
         :Example:
-            +7-(963)-409-11-22.
+            Default: +7-(963)-409-11-22
+            E.164: +79634091122
         """
         if not mask:
             code = self.random.choice(CALLING_CODES)
@@ -496,7 +503,10 @@ class Person(BaseDataProvider):
             masks = self._extract(["telephone_fmt"], default=[default])
             mask = self.random.choice(masks)
 
-        return self.random.generate_string_by_mask(mask=mask, digit=placeholder)
+        result = self.random.generate_string_by_mask(mask=mask, digit=placeholder)
+        if e164:
+            return "+" + "".join(c for c in result if c.isdigit())
+        return result
 
     def telephone(self, *args: t.Any, **kwargs: t.Any) -> str:
         """An alias for :meth:`~.phone_number`."""
