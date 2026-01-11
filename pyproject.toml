@@ -1,6 +1,6 @@
 [project]
 name = "mimesis"
-version = "19.0.1"
+version = "19.1.0"
 description = "Mimesis: Fake Data Generator."
 authors = [{ name = "Isaak Uchakaev", email = "hey@isaak.dev" }]
 requires-python = ">=3.10"
