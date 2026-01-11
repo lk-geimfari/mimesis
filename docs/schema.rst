@@ -267,7 +267,7 @@ Performance Optimization
 ------------------------
 
 When using :meth:`~mimesis.schema.Schema.create`, all values are evaluated immediately,
-which impacts performance and memory usage for large datasets. Use the iteration protocol 
+which impacts performance and memory usage for large datasets. Use the iteration protocol
 of :class:`~mimesis.schema.Schema` for a more efficient approach.
 
 Instead of eager evaluation:
@@ -311,14 +311,16 @@ Here's a simple example of creating users and posts where each post references a
     from mimesis.schema import SchemaBuilder
     from mimesis.locales import Locale
 
-    field = Field(Locale.EN, seed=0xFF)
-    builder = SchemaBuilder(seed=field.seed)
+    SEED = 0xFF
+
+    field = Field(Locale.EN, seed=SEED)
+    builder = SchemaBuilder(seed=SEED)
 
     # Define the users schema
     builder.define(
         "users",
         Schema(lambda: {
-            "id": field("increment"),
+            "id": field("increment", accumulator="user"),
             "username": field("username"),
             "email": field("email"),
         })
@@ -328,7 +330,7 @@ Here's a simple example of creating users and posts where each post references a
     builder.define(
         "projects",
         Schema(lambda: {
-            "id": field("increment"),
+            "id": field("increment", accumulator="project"),
             "title": field("sentence"),
         })
         .map(lambda item, ctx: {
@@ -368,14 +370,16 @@ Here's a more complex example with three related schemas:
     from mimesis.enums import TimestampFormat
     from mimesis.locales import Locale
 
-    field = Field(Locale.EN, seed=0xFF)
-    builder = SchemaBuilder(seed=0xFF)
+    SEED = 0xFF
+
+    field = Field(Locale.EN, seed=SEED)
+    builder = SchemaBuilder(seed=SEED)
 
     # Define users
     builder.define(
         "users",
         Schema(lambda: {
-            "id": field("increment"),
+            "id": field("increment", accumulator="user"),
             "username": field("username"),
             "email": field("email"),
             "created_at": field("timestamp", fmt=TimestampFormat.POSIX),
@@ -386,13 +390,13 @@ Here's a more complex example with three related schemas:
     builder.define(
         "projects",
         Schema(lambda: {
-            "id": field("increment"),
+            "id": field("increment", accumulator="project"),
             "name": field("text.word"),
             "version": field("version"),
         })
         .map(lambda item, ctx: {
             **item,
-            "owner_id": ctx.pick_from("users", "id"),
+            "owner_id": ctx.pick_from("users", "id"), # Assign random user as owner
             "status": field.get_random_instance().choice(
                 ["active", "archived", "draft"]
             ),
@@ -403,15 +407,11 @@ Here's a more complex example with three related schemas:
     builder.define(
         "api_keys",
         Schema(lambda: {
-            "id": field("increment"),
+            "id": field("uuid"),
             "key": field("token_hex"),
             "created_at": field("timestamp", fmt=TimestampFormat.POSIX),
         })
-        .map(lambda item, ctx: {
-            **item,
-            "project_id": ctx.pick_from("projects", "id"),
-            "user_id": ctx.pick_from("users", "id"),
-        })
+        .map(lambda item, ctx: item | {"project_id": ctx.pick_from("projects", "id")})
     )
 
     # Generate all data with proper relationships
@@ -425,7 +425,7 @@ This will generate:
 
 - 3 users
 - 5 projects (each with a valid ``owner_id`` referencing a user)
-- 10 API keys (each with a valid ``project_id`` and ``user_id`` referencing projects and users)
+- 10 API keys (each with a valid ``project_id`` referencing projects)
 
 
 Field Aliases
