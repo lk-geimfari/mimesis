@@ -1,5 +1,7 @@
 """Business data provider."""
 
+from decimal import Decimal
+
 from mimesis.datasets import (
     CRYPTOCURRENCY_ISO_CODES,
     CRYPTOCURRENCY_SYMBOLS,
@@ -82,31 +84,51 @@ class Finance(BaseDataProvider):
         """
         return self.random.choice(CRYPTOCURRENCY_SYMBOLS)
 
-    def price(self, minimum: float = 500, maximum: float = 1500) -> float:
+    def price(
+        self,
+        minimum: float = 500,
+        maximum: float = 1500,
+        precision: int = 2,
+        as_decimal: bool = False,
+    ) -> float | Decimal:
         """Generate a random price.
 
         :param minimum: Minimum value of price.
         :param maximum: Maximum value of price.
-        :return: Price.
+        :param precision: Number of decimal places (default 2).
+        :param as_decimal: If True, returns Decimal for high-precision.
+        :return: Price as float or Decimal.
         """
-        return self.random.uniform(
-            minimum,
-            maximum,
-            precision=2,
-        )
+        if as_decimal:
+            factor = Decimal(10) ** precision
+            min_units = int(Decimal(str(minimum)) * factor)
+            max_units = int(Decimal(str(maximum)) * factor)
+            units = self.random.randint(min_units, max_units)
+            return Decimal(units) / factor
+        return self.random.uniform(minimum, maximum, precision=precision)
 
-    def price_in_btc(self, minimum: float = 0, maximum: float = 2) -> float:
+    def price_in_btc(
+        self,
+        minimum: float = 0,
+        maximum: float = 2,
+        precision: int = 8,
+        as_decimal: bool = False,
+    ) -> float | Decimal:
         """Generates a random price in BTC.
 
         :param minimum: Minimum value of price.
         :param maximum: Maximum value of price.
-        :return: Price in BTC.
+        :param precision: Number of decimal places (default 8 for satoshi).
+        :param as_decimal: If True, returns Decimal for high-precision.
+        :return: Price in BTC as float or Decimal.
         """
-        return self.random.uniform(
-            minimum,
-            maximum,
-            precision=7,
-        )
+        if as_decimal:
+            factor = Decimal(10) ** precision
+            min_units = int(Decimal(str(minimum)) * factor)
+            max_units = int(Decimal(str(maximum)) * factor)
+            units = self.random.randint(min_units, max_units)
+            return Decimal(units) / factor
+        return self.random.uniform(minimum, maximum, precision=precision)
 
     def stock_ticker(self) -> str:
         """Generates a random stock ticker.
