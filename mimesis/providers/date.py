@@ -289,6 +289,78 @@ class Datetime(BaseDataProvider):
         else:
             return int(stamp.timestamp())
 
+    def future_date(self, days: int = 30) -> Date:
+        """Generates a random date in the future.
+
+        :param days: Maximum number of days in the future.
+        :return: A date object between tomorrow and `days` from now.
+        """
+        return self.future_datetime(days).date()
+
+    def future_datetime(
+        self,
+        days: int = 30,
+        seconds: int | None = None,
+        timezone: str | None = None,
+    ) -> DateTime:
+        """Generates a random datetime in the future.
+
+        :param days: Maximum number of days in the future (ignored if seconds is set).
+        :param seconds: Maximum number of seconds in the future (overrides days).
+        :param timezone: Set custom timezone (pytz required).
+        :return: A datetime object between now and the specified time in the future.
+        """
+        now = datetime.now()
+        start_dt = now + timedelta(seconds=1)
+        window = timedelta(seconds=seconds) if seconds else timedelta(days=days)
+        end_dt = now + window
+        delta_seconds = self.random.randint(0, int((end_dt - start_dt).total_seconds()))
+        result = start_dt + timedelta(seconds=delta_seconds)
+
+        if timezone:
+            if not pytz:
+                raise ImportError("Timezones are supported only with pytz")
+            tz = pytz.timezone(timezone)
+            result = tz.localize(result)
+
+        return result
+
+    def past_date(self, days: int = 30) -> Date:
+        """Generates a random date in the past.
+
+        :param days: Maximum number of days in the past.
+        :return: A date object between `days` ago and yesterday.
+        """
+        return self.past_datetime(days).date()
+
+    def past_datetime(
+        self,
+        days: int = 30,
+        seconds: int | None = None,
+        timezone: str | None = None,
+    ) -> DateTime:
+        """Generates a random datetime in the past.
+
+        :param days: Maximum number of days in the past (ignored if seconds is set).
+        :param seconds: Maximum number of seconds in the past (overrides days).
+        :param timezone: Set custom timezone (pytz required).
+        :return: A datetime object between the specified time ago and now.
+        """
+        now = datetime.now()
+        window = timedelta(seconds=seconds) if seconds else timedelta(days=days)
+        start_dt = now - window
+        end_dt = now - timedelta(seconds=1)
+        delta_seconds = self.random.randint(0, int((end_dt - start_dt).total_seconds()))
+        result = start_dt + timedelta(seconds=delta_seconds)
+
+        if timezone:
+            if not pytz:
+                raise ImportError("Timezones are supported only with pytz")
+            tz = pytz.timezone(timezone)
+            result = tz.localize(result)
+
+        return result
+
     def duration(
         self,
         min_duration: int = 1,

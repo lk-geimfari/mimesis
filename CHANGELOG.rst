@@ -4,6 +4,8 @@ Version 19.1.0
 - Added support for E.164 phone number formatting to the ``Person`` provider's ``phone_number()`` method.
 - Added ``secondary_address()`` method to the ``Address`` provider.
 - Add SHA-3 family hash algorithms (``SHA3_224``, ``SHA3_256``, ``SHA3_384``, ``SHA3_512``, ``SHAKE128``, ``SHAKE256``) to the ``Algorithm`` enum.
+- Add ``future_date()``, ``future_datetime()``, ``past_date()`` and ``past_datetime()`` methods for the ``Datetime`` provider. See (`#775 <https://github.com/lk-geimfari/mimesis/issues/775>`_).
+
 
 Version 19.0.0
 --------------
