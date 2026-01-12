@@ -1,8 +1,9 @@
 Version 19.1.0
 --------------
 
-- Added support for E.164 phone number formatting to the ``Person`` provider’s ``phone_number()`` method.
+- Added support for E.164 phone number formatting to the ``Person`` provider's ``phone_number()`` method.
 - Added ``secondary_address()`` method to the ``Address`` provider.
+- Add SHA-3 family hash algorithms (``SHA3_224``, ``SHA3_256``, ``SHA3_384``, ``SHA3_512``, ``SHAKE128``, ``SHAKE256``) to the ``Algorithm`` enum.
 
 Version 19.0.0
 --------------
@@ -14,6 +15,8 @@ Version 19.0.0
 - Add ``jwt``, ``api_key`` and ``certificate_fingerprint`` methods for the ``Cryptographic`` provider.
 - Add ``SchemaBuilder`` for generating relational data.
 - Add ``ip_v4_cidr()``, ``ip_v6_cidr()`` and ``cloud_region()`` methods for the ``Internet`` provider.
+
+
 
 Version 18.0.0
 --------------

@@ -39,6 +39,12 @@ class TestCryptographic:
             (Algorithm.SHA512, 128),
             (Algorithm.BLAKE2S, 64),
             (Algorithm.BLAKE2B, 128),
+            (Algorithm.SHA3_224, 56),
+            (Algorithm.SHA3_256, 64),
+            (Algorithm.SHA3_384, 96),
+            (Algorithm.SHA3_512, 128),
+            (Algorithm.SHAKE128, 64),
+            (Algorithm.SHAKE256, 64),
         ],
     )
     def test_hash(self, crypto, algorithm, length):

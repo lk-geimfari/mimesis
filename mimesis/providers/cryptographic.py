@@ -48,6 +48,8 @@ class Cryptographic(BaseProvider):
         key = self.validate_enum(algorithm, Algorithm)
         func = getattr(hashlib, key)
         value = func(self.uuid().encode())
+        if key in ("shake_128", "shake_256"):
+            return str(value.hexdigest(32))
         return str(value.hexdigest())
 
     def token_bytes(self, entropy: int = 32) -> bytes:
