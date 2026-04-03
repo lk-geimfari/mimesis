@@ -99,7 +99,7 @@ Patches and Suggestions
 - Zayed Alsaidi `(zayedalsaidi)`_
 - Muayyad AlSadi `(muayyadalsadi)`_
 - Rodrigo Nogueira `(rodrigobnogueira)`_
-
+- Roman Mikhaylov `(ApusBerliozi)`_
 
 .. _(lk-geimfari): https://github.com/lk-geimfari
 .. _(sobolevn): https://github.com/sobolevn
@@ -176,4 +176,5 @@ Patches and Suggestions
 .. _(yah04dev): https://github.com/yah04dev
 .. _(muayyadalsadi): https://github.com/muayyad-alsadi
 .. _(rodrigobnogueira): https://github.com/rodrigobnogueira
+.. _(ApusBerliozi): https://github.com/ApusBerliozi
 
