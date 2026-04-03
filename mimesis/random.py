@@ -68,8 +68,7 @@ class Random(random_module.Random):
 
         if char_code == digit_code:
             raise ValueError(
-                "The same placeholder cannot be "
-                "used for both numbers and characters."
+                "The same placeholder cannot be used for both numbers and characters."
             )
 
         _mask = mask.encode()

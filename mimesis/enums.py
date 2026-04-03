@@ -9,6 +9,7 @@ there is no guarantee that you will get the result which you actually expected.
 
 Below, you can see an example of usage enums in methods of data providers.
 """
+
 import typing as t
 from enum import Enum, auto
 

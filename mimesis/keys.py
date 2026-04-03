@@ -33,8 +33,6 @@ __all__ = [
     "urlsafe_base64_encode",
     "redact",
     "join",
-    "take_first",
-    "take_last",
     "apply_if",
     "pipe",
 ]

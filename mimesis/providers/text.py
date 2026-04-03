@@ -1,4 +1,5 @@
 """Provides data related to text."""
+
 import typing as t
 
 from mimesis.datasets import SAFE_COLORS

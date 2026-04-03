@@ -189,7 +189,7 @@ class TestDatetime:
             (2019, 2019),
         ],
     )
-    def test_formatted_datetime(self, _datetime, start, end):
+    def test_formatted_datetime_with_fmt(self, _datetime, start, end):
         dt_str = _datetime.formatted_date(fmt="%Y", start=start, end=end)
         assert isinstance(dt_str, str)
         assert start <= int(dt_str) <= end

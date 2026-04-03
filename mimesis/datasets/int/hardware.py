@@ -1,4 +1,5 @@
 """Provides all the data related to the hardware."""
+
 from itertools import product
 
 RESOLUTIONS = [

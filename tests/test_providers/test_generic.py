@@ -83,8 +83,7 @@ class TestGeneric:
 
         class Provider4:
             @staticmethod
-            def empty():
-                ...
+            def empty(): ...
 
         class Provider5(BaseProvider):
             class Meta:

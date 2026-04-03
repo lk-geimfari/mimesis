@@ -107,8 +107,7 @@ class Generic(BaseProvider):
         if inspect.isclass(cls):
             if not issubclass(cls, BaseProvider):
                 raise TypeError(
-                    "The provider must be a "
-                    "subclass of mimesis.providers.BaseProvider"
+                    "The provider must be a subclass of mimesis.providers.BaseProvider"
                 )
             try:
                 name = cls.Meta.name

@@ -201,8 +201,8 @@ class TestAddress:
 
         def is_emoji_flag(char):
             return (
-                "\U0001F1E0" <= char <= "\U0001F1FF"
-                or "\U0001F3F4" <= char <= "\U0001F3FF"
+                "\U0001f1e0" <= char <= "\U0001f1ff"
+                or "\U0001f3f4" <= char <= "\U0001f3ff"
             )
 
         assert all(is_emoji_flag(char) for char in emoji_flag)

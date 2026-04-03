@@ -1,4 +1,5 @@
 """Provides a random choice from items in a sequence."""
+
 import typing as t
 
 from mimesis.providers.base import BaseProvider
