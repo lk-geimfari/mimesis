@@ -13,13 +13,5 @@ if [[ ! -z "$CHECK" ]]; then
   echo 'Running lint check'
 fi
 
-uv run isort mimesis tests $CHECK
-uv run black mimesis tests $CHECK
-uv run autoflake \
-  --remove-all-unused-imports \
-  --recursive \
-  --remove-unused-variables \
-  --in-place \
-  --exclude=__init__.py \
-  --quiet \
-  mimesis tests $CHECK
+uv run ruff check mimesis tests $CHECK
+uv run ruff format --quiet mimesis tests $CHECK
