@@ -6,12 +6,14 @@ set -e
 : ${CHECK:=''}
 
 if [[ "$CHECK" == '0' ]]; then
-  CHECK=''  # 0 is semantically equivalent to ''
+  FORMAT=''  # 0 is semantically equivalent to ''
+  LINT=''
 fi
 if [[ ! -z "$CHECK" ]]; then
-  CHECK='--check'
+  FORMAT='--check'
+  LINT='--diff'
   echo 'Running lint check'
 fi
 
-uv run ruff check mimesis tests $CHECK
-uv run ruff format --quiet mimesis tests $CHECK
+uv run ruff check mimesis tests $LINT
+uv run ruff format --quiet mimesis tests $FORMAT
