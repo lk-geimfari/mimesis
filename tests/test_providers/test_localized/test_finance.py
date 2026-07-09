@@ -1,4 +1,5 @@
 import re
+from decimal import Decimal
 
 import pytest
 
@@ -79,6 +80,12 @@ class TestFinance:
         result = finance.price(minimum=100.00, maximum=1999.99)
         assert isinstance(result, float)
 
+    def test_price_as_decimal(self, finance):
+        result = finance.price(minimum=100.00, maximum=1999.99, as_decimal=True)
+        assert isinstance(result, Decimal)
+        assert result >= Decimal("100.00")
+        assert result <= Decimal("1999.99")
+
     @pytest.mark.parametrize(
         "minimum, maximum",
         [
@@ -91,6 +98,26 @@ class TestFinance:
         price = _finance.price_in_btc(minimum, maximum)
         assert float(price) >= minimum
         assert float(price) <= maximum
+
+    def test_price_in_btc_as_decimal(self, _finance):
+        result = _finance.price_in_btc(minimum=0.5, maximum=1.5, as_decimal=True)
+        assert isinstance(result, Decimal)
+        assert result >= Decimal("0.5")
+        assert result <= Decimal("1.5")
+
+    def test_price_precision(self, _finance):
+        result = _finance.price(minimum=10, maximum=100, precision=4, as_decimal=True)
+        assert isinstance(result, Decimal)
+        decimal_places = abs(result.as_tuple().exponent)
+        assert decimal_places <= 4
+
+    def test_price_in_btc_precision(self, _finance):
+        result = _finance.price_in_btc(
+            minimum=0, maximum=1, precision=4, as_decimal=True
+        )
+        assert isinstance(result, Decimal)
+        decimal_places = abs(result.as_tuple().exponent)
+        assert decimal_places <= 4
 
 
 class TestSeededFinance:
@@ -137,6 +164,12 @@ class TestSeededFinance:
     def test_price_in_btc(self, f1, f2):
         assert f1.price_in_btc() == f2.price_in_btc()
         assert f1.price_in_btc(1.11, 22.2) == f2.price_in_btc(1.11, 22.2)
+
+    def test_price_as_decimal(self, f1, f2):
+        assert f1.price(as_decimal=True) == f2.price(as_decimal=True)
+
+    def test_price_in_btc_as_decimal(self, f1, f2):
+        assert f1.price_in_btc(as_decimal=True) == f2.price_in_btc(as_decimal=True)
 
     def test_bank(self, f1, f2):
         assert f1.bank() == f2.bank()
