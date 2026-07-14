@@ -39,9 +39,7 @@ def test_factory_plugin_requires_factory_boy(monkeypatch: pytest.MonkeyPatch) ->
 
     monkeypatch.setattr(builtins, "__import__", fake_import)
     for key in list(sys.modules):
-        if key == "factory" or key.startswith(
-            ("factory.", "mimesis.plugins.factory")
-        ):
+        if key == "factory" or key.startswith(("factory.", "mimesis.plugins.factory")):
             sys.modules.pop(key, None)
 
     with pytest.raises(ImportError, match="factory_boy"):
