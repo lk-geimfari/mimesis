@@ -8,18 +8,14 @@ set -e
 if [[ "$CHECK" == '0' ]]; then
   CHECK=''  # 0 is semantically equivalent to ''
 fi
-if [[ ! -z "$CHECK" ]]; then
-  CHECK='--check'
-  echo 'Running lint check'
-fi
 
-uv run isort mimesis tests $CHECK
-uv run black mimesis tests $CHECK
-uv run autoflake \
-  --remove-all-unused-imports \
-  --recursive \
-  --remove-unused-variables \
-  --in-place \
-  --exclude=__init__.py \
-  --quiet \
-  mimesis tests $CHECK
+TARGETS=(mimesis tests tasks/minifier.py)
+
+if [[ -n "$CHECK" ]]; then
+  echo 'Running lint check'
+  uv run ruff check "${TARGETS[@]}"
+  uv run ruff format --check "${TARGETS[@]}"
+else
+  uv run ruff check --fix "${TARGETS[@]}"
+  uv run ruff format "${TARGETS[@]}"
+fi
