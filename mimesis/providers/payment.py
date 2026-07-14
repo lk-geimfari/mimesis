@@ -47,7 +47,7 @@ class Payment(BaseProvider):
     def paypal(self) -> str:
         """Generates a random PayPal account.
 
-        :return: Email of PapPal user.
+        :return: Email of a PayPal user.
 
         :Example:
             wolf235@gmail.com
@@ -73,7 +73,7 @@ class Payment(BaseProvider):
         """Generates a random Ethereum address.
 
         ..note: The address will look like Ethereum address,
-        but keep in mind that it is not the valid address.
+        but keep in mind that it is not a valid address.
 
         :return: Ethereum address.
 
@@ -139,8 +139,8 @@ class Payment(BaseProvider):
     def credit_card_expiration_date(self, minimum: int = 16, maximum: int = 25) -> str:
         """Generates a random expiration date for credit card.
 
-        :param minimum: Date of issue.
-        :param maximum: Maximum of expiration_date.
+        :param minimum: Minimum two-digit year.
+        :param maximum: Maximum two-digit year.
         :return: Expiration date of credit card.
 
         :Example:

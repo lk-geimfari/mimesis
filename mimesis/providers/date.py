@@ -52,7 +52,7 @@ class Datetime(BaseDataProvider):
 
         See :py:class:`datetime.timedelta` for more details.
 
-        :param date_start: Begin of the range.
+        :param date_start: Start of the range.
         :param date_end: End of the range.
         :param kwargs: Keyword arguments for :py:class:`datetime.timedelta`
         :return: List of datetime objects
@@ -146,7 +146,7 @@ class Datetime(BaseDataProvider):
         return date_object
 
     def formatted_date(self, fmt: str = "", **kwargs: t.Any) -> str:
-        """Generates random date as string.
+        """Generates a random date as a string.
 
         :param fmt: The format of date, if None then use standard
             accepted in the current locale.
@@ -174,7 +174,7 @@ class Datetime(BaseDataProvider):
         return random_time
 
     def formatted_time(self, fmt: str = "") -> str:
-        """Generates formatted time as string.
+        """Generates formatted time as a string.
 
         :param fmt: The format of time, if None then use standard
             accepted in the current locale.
@@ -255,7 +255,7 @@ class Datetime(BaseDataProvider):
     def timestamp(
         self, fmt: TimestampFormat = TimestampFormat.POSIX, **kwargs: t.Any
     ) -> str | int:
-        """Generates a random timestamp in given format.
+        """Generates a random timestamp in the given format.
 
         Supported formats are:
 

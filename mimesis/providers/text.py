@@ -21,7 +21,7 @@ class Text(BaseDataProvider):
         datafile = f"{name}.json"
 
     def alphabet(self, lower_case: bool = False) -> list[str]:
-        """Returns an alphabet for current locale.
+        """Returns an alphabet for the current locale.
 
         :param lower_case: Return alphabet in lower case.
         :return: Alphabet.

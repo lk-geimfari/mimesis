@@ -8,7 +8,7 @@ __all__ = ["File"]
 
 
 class File(BaseProvider):
-    """Class for generate data related to files."""
+    """Class for generating data related to files."""
 
     class Meta:
         name = "file"
@@ -37,10 +37,10 @@ class File(BaseProvider):
         return self.random.choice(types)
 
     def size(self, minimum: int = 1, maximum: int = 100) -> str:
-        """Generates a random file size as string.
+        """Generates a random file size as a string.
 
-        :param minimum: Maximum value.
-        :param maximum: Minimum value.
+        :param minimum: Minimum value.
+        :param maximum: Maximum value.
         :return: Size of file.
 
         :Example:

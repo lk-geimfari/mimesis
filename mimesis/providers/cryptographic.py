@@ -51,10 +51,7 @@ class Cryptographic(BaseProvider):
         return str(value.hexdigest())
 
     def token_bytes(self, entropy: int = 32) -> bytes:
-        """Generates byte string containing ``entropy`` bytes.
-
-        The string has ``entropy`` random bytes, each byte
-        converted to two hex digits.
+        """Generates a byte string containing ``entropy`` random bytes.
 
         :param entropy: Number of bytes (default: 32).
         :return: Random bytes.
@@ -86,7 +83,7 @@ class Cryptographic(BaseProvider):
         return urlsafe_b64encode(token).rstrip(b"=").decode()
 
     def mnemonic_phrase(self) -> str:
-        """Generates BIP-39 looking mnemonic phrase.
+        """Generates a BIP-39-like mnemonic phrase.
 
         :return: Mnemonic phrase.
         """
@@ -99,9 +96,8 @@ class Cryptographic(BaseProvider):
     ) -> str:
         """Generate JWT-like token structure for testing.
 
-        :param payload: JWT payload (claims).
+        :param payload: JWT payload (claims). If None, generates a default payload.
         :param algorithm: JWT algorithm (default: HS256).
-            If None, generates default payload.
         :return: JWT-like token string.
 
         Example:

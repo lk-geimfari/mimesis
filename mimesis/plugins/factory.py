@@ -90,11 +90,11 @@ class FactoryField(declarations.BaseDeclaration):
         locale: Locale | None = None,
         field_handlers: RegisterableFieldHandlers | None = None,
     ) -> Field:
-        """Returns cached instance.
+        """Returns a cached instance.
 
         :param locale: locale to use.
         :param field_handlers: custom field handlers.
-        :return: cached instance of Field.
+        :return: Cached instance of Field.
         """
         if locale is None:
             locale = cls._default_locale

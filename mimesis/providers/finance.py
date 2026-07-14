@@ -15,7 +15,7 @@ __all__ = ["Finance"]
 
 
 class Finance(BaseDataProvider):
-    """Class to generate finance and business related data."""
+    """Class to generate finance- and business-related data."""
 
     class Meta:
         name = "finance"
@@ -34,7 +34,7 @@ class Finance(BaseDataProvider):
         """Generates a random type of business entity.
 
         :param abbr: Abbreviated company type.
-        :return: Types of business entity.
+        :return: Type of business entity.
         """
         key = "abbr" if abbr else "title"
 
@@ -42,7 +42,7 @@ class Finance(BaseDataProvider):
         return self.random.choice(company_types)
 
     def currency_iso_code(self, allow_random: bool = False) -> str:
-        """Returns a currency code for current locale.
+        """Returns a currency code for the current locale.
 
         :param allow_random: Get a random ISO code.
         :return: Currency code.
@@ -69,7 +69,7 @@ class Finance(BaseDataProvider):
         return self.random.choice(CRYPTOCURRENCY_ISO_CODES)
 
     def currency_symbol(self) -> str:
-        """Returns a currency symbol for current locale.
+        """Returns a currency symbol for the current locale.
 
         :return: Currency symbol.
         """

@@ -77,7 +77,7 @@ def maybe(value: Any, probability: float = 0.5) -> Callable[[Any, Random], Any]:
     """Return a closure (a key function).
 
     The returned closure itself returns either **value** or
-    the first argument passed to closure with a certain probability (0.5 by default).
+    the first argument passed to the closure with a certain probability (0.5 by default).
 
     :param value: The value that may be returned.
     :param probability: The probability of returning **value**.
@@ -98,7 +98,7 @@ def maybe(value: Any, probability: float = 0.5) -> Callable[[Any, Random], Any]:
 
 
 def wrap(before: str = "<", after: str = ">") -> Callable[[str], str]:
-    """Wrap result with before and after strings.
+    """Wrap the result with before and after strings.
 
     Example:
         >>> field('word', key=wrap('[', ']'))
@@ -246,7 +246,7 @@ def remove_whitespace(value: str) -> str:
 
 
 def prefix(text: str) -> Callable[[str], str]:
-    """Add prefix to result.
+    """Add a prefix to the result.
 
     Example:
         >>> field('word', key=prefix('user_'))
@@ -266,7 +266,7 @@ def prefix(text: str) -> Callable[[str], str]:
 
 
 def suffix(text: str) -> Callable[[str], str]:
-    """Add suffix to result.
+    """Add a suffix to the result.
 
     Example:
         >>> field('word', key=suffix('.io'))

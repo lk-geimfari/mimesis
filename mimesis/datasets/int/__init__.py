@@ -1,4 +1,4 @@
-"""Here you can see data that used in all locales."""
+"""Here you can see data that is used in all locales."""
 
 from .address import *
 from .code import *

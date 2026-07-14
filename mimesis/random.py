@@ -1,8 +1,8 @@
-"""Implements various helpers which are used in the various data providers.
+"""Implements various helpers used by the data providers.
 
-This module contains custom ``Random()`` class where implemented a lot of
-methods which are not included in standard :py:class:`random.Random`,
-but frequently used in this project.
+This module contains a custom ``Random()`` class that implements many
+methods which are not included in the standard :py:class:`random.Random`,
+but are frequently used in this project.
 """
 
 import random as random_module
@@ -34,7 +34,7 @@ class Random(random_module.Random):
         :param a: Minimum value of range.
         :param b: Maximum value of range.
         :return: List of random integers.
-        :raises ValueError: if the number is less or equal to zero.
+        :raises ValueError: if the number is less than or equal to zero.
         """
         if n <= 0:
             raise ValueError("Amount out of range.")

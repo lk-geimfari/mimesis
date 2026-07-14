@@ -43,7 +43,7 @@ class Numeric(BaseProvider):
             >>> self.increment(accumulator="a")
             3
 
-        :param accumulator: Accumulator (used to create associative incrementation).
+        :param accumulator: Accumulator (used for keyed increments).
         :return: Integer.
         """
         if not accumulator:
@@ -191,7 +191,7 @@ class Numeric(BaseProvider):
         num_type: NumType = NumType.FLOAT,
         **kwargs: t.Any,
     ) -> Matrix:
-        """Generates m x n matrix with a random numbers.
+        """Generates an m x n matrix with random numbers.
 
         This method works with a variety of types,
         so you can pass method-specific `**kwargs`.

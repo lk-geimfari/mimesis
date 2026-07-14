@@ -13,7 +13,7 @@ class Food(BaseDataProvider):
         datafile = f"{name}.json"
 
     def _choice_from(self, key: str) -> str:
-        """Choice random element."""
+        """Choose a random element."""
         data: list[str] = self._extract([key])
         return self.random.choice(data)
 
@@ -48,7 +48,7 @@ class Food(BaseDataProvider):
         return self._choice_from("dishes")
 
     def spices(self) -> str:
-        """Generates a random spices/herb name.
+        """Generates a random spice or herb name.
 
         :return: The name of the spices or herbs.
 

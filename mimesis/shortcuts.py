@@ -1,4 +1,4 @@
-"""This module provides internal util functions."""
+"""This module provides internal utility functions."""
 
 
 def luhn_checksum(num: str) -> str:

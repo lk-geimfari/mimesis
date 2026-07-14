@@ -7,7 +7,7 @@ behavior for the methods that differ from the default behavior.
 You should never use your own enums in methods because in this case,
 there is no guarantee that you will get the result which you actually expected.
 
-Below, you can see an example of usage enums in methods of data providers.
+Below, you can see an example of using enums in methods of data providers.
 """
 import typing as t
 from enum import Enum, auto
@@ -63,7 +63,7 @@ class DurationUnit(Enum):
 class Locale(Enum):
     """This class provides access to the supported locales from one place.
 
-    An argument for all local-depend providers.
+    An argument for all locale-dependent providers.
     """
 
     AR_AE = "ar-ae"
@@ -136,7 +136,7 @@ class PortRange(Enum):
 class Gender(Enum):
     """Represents genders.
 
-    An argument for a lot of methods which are taking parameter ``gender``.
+    An argument for a lot of methods which take the parameter ``gender``.
     """
 
     MALE = "male"
@@ -165,7 +165,7 @@ class CardType(Enum):
 
 
 class Algorithm(Enum):
-    """Provides algorithms which available.
+    """Provides algorithms that are available.
 
     An argument for :meth:`~mimesis.Cryptographic.hash()`.
     """
@@ -183,7 +183,7 @@ class Algorithm(Enum):
 class TLDType(Enum):
     """Provides top level domain types.
 
-    An argument for a few methods which are taking parameter **tld_type**.
+    An argument for a few methods which take the parameter **tld_type**.
     """
 
     CCTLD = "cctld"
@@ -268,7 +268,7 @@ class EANFormat(Enum):
 
 
 class MeasureUnit(Enum):
-    """Provide unit names.
+    """Provides unit names.
 
     An argument for :meth:`~mimesis.Science.measure_unit()`.
     """
@@ -310,7 +310,7 @@ class NumType(Enum):
 
 
 class VideoFile(Enum):
-    """Provides the vide file types.
+    """Provides the video file types.
 
     An argument for :meth:`~mimesis.BinaryFile.video()`
     """

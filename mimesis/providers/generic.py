@@ -1,4 +1,4 @@
-"""Provides all at one."""
+"""Provides all providers in one place."""
 
 import inspect
 import typing as t
@@ -15,7 +15,7 @@ __all__ = ["Generic"]
 
 
 class Generic(BaseProvider):
-    """Class which contain all providers at one."""
+    """Class which contains all providers in one place."""
 
     def __init__(
         self,
@@ -101,7 +101,7 @@ class Generic(BaseProvider):
         :param kwargs: Keyword arguments for provider.
         :raises TypeError: if cls is Generic, if cls is not
             class or is not a subclass of BaseProvider.
-        :return: Absolutely none.
+        :return: None.
         """
 
         if inspect.isclass(cls):

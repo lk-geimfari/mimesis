@@ -55,8 +55,8 @@ class Person(BaseDataProvider):
     def birthdate(self, min_year: int = 1980, max_year: int = 2023) -> Date:
         """Generates a random birthdate as a :py:class:`datetime.date` object.
 
-        :param min_year: Maximum birth year.
-        :param max_year: Minimum birth year.
+        :param min_year: Minimum birth year.
+        :param max_year: Maximum birth year.
         :return: Random date object.
         """
         self._validate_birth_year_params(min_year, max_year)
@@ -161,7 +161,7 @@ class Person(BaseDataProvider):
         gender: Gender | None = None,
         title_type: TitleType | None = None,
     ) -> str:
-        """Generates a random title for name.
+        """Generates a random title for a name.
 
         You can generate a random prefix or suffix
         for name using this method.
@@ -169,7 +169,7 @@ class Person(BaseDataProvider):
         :param gender: The gender.
         :param title_type: TitleType enum object.
         :return: The title.
-        :raises NonEnumerableError: if gender or title_type in incorrect format.
+        :raises NonEnumerableError: if gender or title_type has an incorrect format.
 
         :Example:
             PhD.
@@ -201,7 +201,7 @@ class Person(BaseDataProvider):
     def username(
         self, mask: str | None = None, drange: tuple[int, int] = (1800, 2100)
     ) -> str:
-        """Generates a username by mask.
+        """Generates a username using a mask.
 
         Masks allow you to generate a variety of usernames.
 
@@ -257,11 +257,11 @@ class Person(BaseDataProvider):
         return final_username
 
     def password(self, length: int = 8, hashed: bool = False) -> str:
-        """Generates a password or hash of password.
+        """Generates a password or a hash of a password.
 
         :param length: Length of password.
         :param hashed: SHA256 hash.
-        :return: Password or hash of password.
+        :return: Password or hash of a password.
 
         :Example:
             k6dv2odff9#4h
@@ -312,7 +312,7 @@ class Person(BaseDataProvider):
         return f"{name}{domain}"
 
     def gender_symbol(self) -> str:
-        """Generate a random sex symbol.
+        """Generate a random gender symbol.
 
         :Example:
             ♂
@@ -322,15 +322,11 @@ class Person(BaseDataProvider):
     def gender_code(self) -> int:
         """Generate a random ISO/IEC 5218 gender code.
 
-        Generate a random title of gender code for the representation
-        of human sexes is an international standard that defines a
-        representation of human sexes through a language-neutral single-digit
-        code or symbol of gender.
+        ISO/IEC 5218 defines a language-neutral single-digit code for the
+        representation of human sexes (0 — not known, 1 — male, 2 — female,
+        9 — not applicable).
 
-        Codes for the representation of human sexes is an international
-        standard (0 - not known, 1 - male, 2 - female, 9 - not applicable).
-
-        :return:
+        :return: Gender code.
         """
         return self.random.choice(GENDER_CODES)
 
@@ -364,7 +360,7 @@ class Person(BaseDataProvider):
         return f"{h:0.2f}"
 
     def weight(self, minimum: int = 38, maximum: int = 90) -> int:
-        """Generates a random weight in Kg.
+        """Generates a random weight in kg.
 
         :param minimum: min value
         :param maximum: max value
@@ -388,7 +384,7 @@ class Person(BaseDataProvider):
     def occupation(self) -> str:
         """Generates a random job.
 
-        :return: The name of job.
+        :return: The name of a job.
 
         :Example:
             Programmer.
@@ -397,7 +393,7 @@ class Person(BaseDataProvider):
         return self.random.choice(jobs)
 
     def political_views(self) -> str:
-        """Get a random political views.
+        """Get random political views.
 
         :return: Political views.
 
@@ -419,7 +415,7 @@ class Person(BaseDataProvider):
         return self.random.choice(views)
 
     def views_on(self) -> str:
-        """Get a random views on.
+        """Get a random «views on» value.
 
         :return: Views on.
 
@@ -513,7 +509,7 @@ class Person(BaseDataProvider):
         return self.phone_number(*args, **kwargs)
 
     def identifier(self, mask: str = "##-##/##") -> str:
-        """Generates a random identifier by mask.
+        """Generates a random identifier using a mask.
 
         With this method, you can generate any identifiers that
         you need by specifying the mask.

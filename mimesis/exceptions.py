@@ -89,7 +89,7 @@ class FieldNameError(ValueError):
 
 
 class FieldArityError(ValueError):
-    """Raised when registering field handler has incompatible arity."""
+    """Raised when a registered field handler has incompatible arity."""
 
     def __str__(self) -> str:
         return "The custom handler must accept at least two arguments: 'random' and '**kwargs'"

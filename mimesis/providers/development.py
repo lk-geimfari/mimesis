@@ -16,7 +16,7 @@ __all__ = ["Development"]
 
 
 class Development(BaseProvider):
-    """Class for getting fake data for Developers."""
+    """Class for getting fake data for developers."""
 
     def __init__(self, *args: t.Any, **kwargs: t.Any) -> None:
         super().__init__(*args, **kwargs)
@@ -79,7 +79,7 @@ class Development(BaseProvider):
         return self.random.choice(PROGRAMMING_LANGS)
 
     def os(self) -> str:
-        """Generates a random operating system or distributive name.
+        """Generates a random operating system or distribution name.
 
         :return: The name of OS.
 
@@ -91,7 +91,7 @@ class Development(BaseProvider):
     def boolean(self) -> bool:
         """Generates a random boolean value.
 
-        :return: True of False.
+        :return: True or False.
         """
         return self.random.choice([True, False])
 

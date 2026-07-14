@@ -128,7 +128,7 @@ class BaseProvider:
         :param item: Item of an enum object.
         :param enum: Enum object.
         :return: Value of item.
-        :raises NonEnumerableError: If enums has not such an item.
+        :raises NonEnumerableError: If the enum does not have such an item.
         """
         if item is None:
             result = self.random.choice_enum_item(enum)
@@ -140,7 +140,7 @@ class BaseProvider:
         return result.value
 
     def _read_global_file(self, file_name: str) -> t.Any:
-        """Reads JSON file and return dict.
+        """Reads a JSON file and returns a dict.
 
         Reads JSON file from mimesis/data/global/ directory.
 
@@ -177,7 +177,7 @@ class BaseDataProvider(BaseProvider):
         """Initialize attributes for data providers.
 
         :param locale: Current locale.
-        :param seed: Seed to all the random functions.
+        :param seed: Seed for all the random functions.
         """
         super().__init__(seed=seed, *args, **kwargs)
         # This is a dict with data
@@ -277,7 +277,7 @@ class BaseDataProvider(BaseProvider):
         return self.locale
 
     def _override_locale(self, locale: Locale = Locale.DEFAULT) -> None:
-        """Overrides the current locale with passed and pull data for the new locale.
+        """Overrides the current locale with the given one and loads data for the new locale.
 
         :param locale: Locale
         :return: Nothing.

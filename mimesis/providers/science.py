@@ -40,7 +40,7 @@ class Science(BaseProvider):
         name: MeasureUnit | None = None,
         symbol: bool = False,
     ) -> str:
-        """Returns unit name from the International System of Units.
+        """Returns a unit name from the International System of Units.
 
         :param name: Enum object UnitName.
         :param symbol: Return only symbol
@@ -60,7 +60,7 @@ class Science(BaseProvider):
     ) -> str:
         """Generates a random prefix for the International System of Units.
 
-        :param sign: Sing of prefix (positive/negative).
+        :param sign: Sign of prefix (positive/negative).
         :param symbol: Return the symbol of the prefix.
         :return: Metric prefix for SI measure units.
         :raises NonEnumerableError: if sign is not supported.

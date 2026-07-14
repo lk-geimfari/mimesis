@@ -139,7 +139,7 @@ class Internet(BaseProvider):
         )
 
     def ip_v4_with_port(self, port_range: PortRange = PortRange.ALL) -> str:
-        """Generates a random IPv4 address as string.
+        """Generates a random IPv4 address as a string.
 
         :param port_range: PortRange enum object.
         :return: IPv4 address as string.
@@ -152,7 +152,7 @@ class Internet(BaseProvider):
         return f"{addr}:{port}"
 
     def ip_v4(self) -> str:
-        """Generates a random IPv4 address as string.
+        """Generates a random IPv4 address as a string.
 
         :Example:
             19.121.223.58
@@ -172,7 +172,7 @@ class Internet(BaseProvider):
         )
 
     def ip_v6(self) -> str:
-        """Generates a random IPv6 address as string.
+        """Generates a random IPv6 address as a string.
 
         :return: IPv6 address string.
 
@@ -370,7 +370,7 @@ class Internet(BaseProvider):
         return urllib.parse.urlencode(self.query_parameters(length))
 
     def query_parameters(self, length: int | None = None) -> dict[str, str]:
-        """Generates an arbitrary query parameters as a dict.
+        """Generates arbitrary query parameters as a dict.
 
         :param length: Length of query parameters dictionary (maximum is 32).
         :return: Dict of query parameters.
@@ -393,7 +393,7 @@ class Internet(BaseProvider):
         return dict(zip(pick_unique_words(length), self._text.words(length)))
 
     def top_level_domain(self, tld_type: TLDType = TLDType.CCTLD) -> str:
-        """Generates random top level domain.
+        """Generates a random top-level domain.
 
         :param tld_type: Enum object :class:`enums.TLDType`
         :return: Top level domain.
@@ -444,7 +444,7 @@ class Internet(BaseProvider):
         return self.slug(*args, **kwargs).replace("-", "/")
 
     def slug(self, parts_count: int | None = None) -> str:
-        """Generates a random slug of given parts count.
+        """Generates a random slug with a given number of parts.
 
         :param parts_count: Slug's parts count.
         :return: Slug.
@@ -470,7 +470,7 @@ class Internet(BaseProvider):
         return self.random.choice(PUBLIC_DNS)
 
     def http_response_headers(self) -> dict[str, t.Any]:
-        """Generates a random HTTP response headers.
+        """Generates random HTTP response headers.
 
         The following headers are included:
 
@@ -530,7 +530,7 @@ class Internet(BaseProvider):
         return headers
 
     def http_request_headers(self) -> dict[str, t.Any]:
-        """Generates a random HTTP request headers.
+        """Generates random HTTP request headers.
 
         The following headers are included:
 
@@ -600,7 +600,7 @@ class Internet(BaseProvider):
         return IPv4Address(number)
 
     def special_ip_v4(self, purpose: IPv4Purpose | None = None) -> str:
-        """Generates a special purpose IPv4 address as string.
+        """Generates a special purpose IPv4 address as a string.
 
         :param purpose: Enum object :class:`enums.IPv4Purpose`.
         :return: IPv4 address as string.

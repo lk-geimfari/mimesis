@@ -1,4 +1,4 @@
-"""Provides data related to transports."""
+"""Provides data related to transport."""
 
 from mimesis.datasets import (
     AIRPLANES,
@@ -14,7 +14,7 @@ __all__ = ["Transport"]
 
 
 class Transport(BaseProvider):
-    """Class for generating data related to transports."""
+    """Class for generating data related to transport."""
 
     class Meta:
         name = "transport"
@@ -50,7 +50,7 @@ class Transport(BaseProvider):
         return self.random.choice(AIRPLANES)
 
     def vehicle_registration_code(self, locale: Locale | None = None) -> str:
-        """Returns vehicle registration code.
+        """Returns a vehicle registration code.
 
         :param locale: Registration code for locale (country).
         :return: Vehicle registration code.

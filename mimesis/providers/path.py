@@ -17,7 +17,7 @@ __all__ = ["Path"]
 
 
 class Path(BaseProvider):
-    """Class that provides methods and property for generate paths."""
+    """Class that provides methods and properties for generating paths."""
 
     def __init__(
         self,
@@ -76,7 +76,7 @@ class Path(BaseProvider):
         return str(self._pathlib_home / user)
 
     def users_folder(self) -> str:
-        """Generates a random path to user's folders.
+        """Generates a random path to a user's folder.
 
         :return: Path.
 

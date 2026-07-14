@@ -13,13 +13,13 @@ class Choice(BaseProvider):
         name = "choice"
 
     def choice(self, *args: t.Any, **kwargs: t.Any) -> t.Any:
-        """Choice random item form sequence.
+        """Choose a random item from a sequence.
 
         See https://github.com/lk-geimfari/mimesis/issues/619
 
         :param args: Positional arguments.
         :param kwargs: Keyword arguments.
-        :return: Sequence or uncontained element randomly chosen from items.
+        :return: Sequence or single element randomly chosen from items.
         """
         return self.__call__(*args, **kwargs)
 
@@ -34,13 +34,13 @@ class Choice(BaseProvider):
         Provide elements randomly chosen from the elements in a sequence
         **items**, where when **length** is specified the random choices are
         contained in a sequence of the same type of length **length**,
-        otherwise a single uncontained element is chosen. If **unique** is set
+        otherwise a single element is chosen. If **unique** is set
         to True, constrain a returned sequence to contain only unique elements.
 
         :param items: Non-empty sequence (list, tuple or string) of elements.
         :param length: Length of the sequence (number of elements) to provide.
         :param unique: If True, ensures provided elements are unique.
-        :return: Sequence or uncontained element randomly chosen from items.
+        :return: Sequence or single element randomly chosen from items.
         :raises TypeError: For non-sequence items or non-integer length.
         :raises ValueError: If negative length or insufficient unique elements.
 

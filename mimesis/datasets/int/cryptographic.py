@@ -1,4 +1,4 @@
-"""Provides all the data related to text."""
+"""Provides all the data related to cryptography."""
 
 __all__ = ["WORDLIST"]
 

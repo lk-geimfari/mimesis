@@ -76,7 +76,7 @@ class BaseField:
         """An explicit method lookup.
 
         This method is called when the field
-        defined explicitly, like this: ``provider.method``
+        is defined explicitly, like this: ``provider.method``
 
         :param name: The field name.
         :return: Callable object.
@@ -149,7 +149,7 @@ class BaseField:
         key: Key = None,
         **kwargs: Any,
     ) -> Any:
-        """Performs the value of the field by its name.
+        """Returns the value of the field by its name.
 
         It takes any string that represents the name of any method of
         any supported data provider and the ``**kwargs`` of this method.
@@ -179,9 +179,9 @@ class BaseField:
 
         :param name: Name of the method.
         :param key: A key function (any callable object)
-            which will be applied to result.
-        :param kwargs: Kwargs of method.
-        :return: The result of method.
+            which will be applied to the result.
+        :param kwargs: Keyword arguments of the method.
+        :return: The result of the method.
         :raises ValueError: if provider is not supported or if field is not defined.
         """
         # Validate aliases before lookup
@@ -255,7 +255,7 @@ class BaseField:
         return decorator
 
     def register_handlers(self, fields: RegisterableFieldHandlers) -> None:
-        """Register the new field handlers.
+        """Register new field handlers.
 
         :param fields: A sequence of sequences with field name and handler.
         :return: None.
@@ -272,7 +272,7 @@ class BaseField:
         self._handlers.pop(field_name, None)
 
     def unregister_handlers(self, field_names: Sequence[str] = ()) -> None:
-        """Unregister a field handlers with given names.
+        """Unregister field handlers with the given names.
 
         :param field_names: Names of the fields.
         :return: None.
@@ -297,7 +297,7 @@ class Field(BaseField):
 
     .. warning::
 
-        There is no case when you need to instance **field** in loops.
+        There is no case when you need to instantiate **Field** in loops.
 
         If you are doing this:
 
@@ -407,7 +407,7 @@ class SchemaContext:
 
 
 class Schema:
-    """Class which return list of filled schemas."""
+    """Class which returns a list of filled schemas."""
 
     __slots__ = (
         "iterations",
@@ -498,7 +498,7 @@ class Schema:
     def to_json(self, file_path: str, **kwargs: Any) -> None:
         """Export a schema as a JSON file.
 
-        :param file_path: File a path.
+        :param file_path: File path.
         :param kwargs: Extra keyword arguments for :py:func:`json.dump` class.
         """
         with open(file_path, "w", encoding="utf-8") as fp:
@@ -530,16 +530,16 @@ class Schema:
         return result
 
     def create(self) -> list[JSON]:
-        """Creates a list of a fulfilled schemas.
+        """Creates a list of filled schemas.
 
         .. note::
             This method evaluates immediately, so be careful when creating
-            large datasets otherwise you're risking running out of memory.
+            large datasets otherwise you risk running out of memory.
 
             If you need a lazy version of this method, just use :meth:`iterator` or
             the iterator protocol of :class:`Schema`
 
-        :return: List of fulfilled schemas.
+        :return: List of filled schemas.
         """
         index = 0
         results: list[JSON] = []
