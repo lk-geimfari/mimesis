@@ -291,7 +291,6 @@ class MeasureUnit(Enum):
     PRESSURE = ("pascal", "P")
     ENERGY = ("joule", "J")
     POWER = ("watt", "W")
-    FLUX = ("watt", "W")  # noqa: PIE796
     ELECTRIC_CHARGE = ("coulomb", "C")
     VOLTAGE = ("volt", "V")
     ELECTRIC_CAPACITANCE = ("farad", "F")
