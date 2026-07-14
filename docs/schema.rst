@@ -19,9 +19,33 @@ that accept:
 
 - A method name as the first argument (``name``)
 - An optional ``key`` function as the second argument for transformations
+  (see :ref:`key_functions`)
 - Additional keyword arguments (``**kwargs``) passed to the underlying method
 
 See :doc:`api` for more information about the available providers and their methods.
+
+Generating a Single Value
+-------------------------
+
+To generate a single value for a field, instantiate the :class:`~mimesis.schema.Field` class:
+
+.. code:: python
+
+    >>> from mimesis import Field, Locale
+    >>> field = Field(locale=Locale.EN)
+
+You can then use this instance as an entry point to access all methods of the available providers:
+
+.. code:: python
+
+    >>> field("person.name")
+    'Chase'
+    >>> field("person.name", key=str.upper)
+    'CHASE'
+
+
+Field Names
+-----------
 
 There are two ways to specify field names: **explicit** and **implicit**.
 
@@ -66,28 +90,8 @@ Mimesis will call either the first registered custom field handler named ``usern
 or the first provider with a method of that name.
 
 **Note:** Custom field handlers always take precedence over provider methods
-when names match, due to their higher priority in the lookup order.
-
-
-Generating a Single Value
--------------------------
-
-To generate a single value for a field, instantiate the :class:`~mimesis.schema.Field` class:
-
-.. code:: python
-
-    >>> from mimesis import Field, Locale
-    >>> field = Field(locale=Locale.EN)
-
-You can then use this instance as an entry point to access all methods of the available providers:
-
-.. code:: python
-
-    >>> # Explicitly, like this:
-    >>> field("person.name", key=str.upper, **kwargs)
-    'Chase'
-    >>> # Or implicitly, like this:
-    >>> field("name", key=str.upper, **kwargs)
+when names match, due to their higher priority in the lookup order
+(see :ref:`custom_field_handlers`).
 
 
 Generating a Set of Values
@@ -133,7 +137,6 @@ Example:
     ['Janella', 'Beckie', 'Jeremiah']
     >>> fs("name", count=3, key=str.upper)
     ['RICKY', 'LEONORE', 'DORIAN']
-
 
 
 Defining Schemas
@@ -263,322 +266,7 @@ The final result will look like this:
 
 That's it! You've just generated structured data using Mimesis.
 
-Transforming Items with ``map()`` and ``SchemaContext``
--------------------------------------------------------
-
-:class:`~mimesis.schema.Schema` can post-process every generated item with
-:meth:`~mimesis.schema.Schema.map`. Transformers may accept either the item alone,
-or ``(item, ctx)`` where ``ctx`` is a :class:`~mimesis.schema.SchemaContext`.
-
-:class:`~mimesis.schema.SchemaContext` provides:
-
-- ``index`` — zero-based index of the current item
-- ``iteration`` — one-based counter (``index + 1``)
-- ``seed`` — schema seed
-- ``custom`` — dict populated by :meth:`~mimesis.schema.Schema.with_context`
-
-Basic transformation
-~~~~~~~~~~~~~~~~~~~~
-
-Use ``.map()`` to reshape or enrich each record:
-
-.. code-block:: python
-
-    from mimesis import Field, Schema
-    from mimesis.locales import Locale
-
-    field = Field(Locale.EN, seed=0xFF)
-
-    schema = (
-        Schema(
-            lambda: {
-                "id": field("increment"),
-                "email": field("email"),
-                "score": field("integer_number", start=1, end=100),
-            },
-            iterations=3,
-        )
-        .map(lambda item: {**item, "passed": item["score"] >= 50})
-        .map(lambda item, ctx: {
-            **item,
-            "row": ctx.index,
-            "batch": ctx.iteration,
-        })
-    )
-
-    schema.create()
-
-Example output:
-
-.. code-block:: json
-
-    [
-      {"id": 1, "email": "...", "score": 72, "passed": true, "row": 0, "batch": 1},
-      {"id": 2, "email": "...", "score": 31, "passed": false, "row": 1, "batch": 2},
-      {"id": 3, "email": "...", "score": 88, "passed": true, "row": 2, "batch": 3}
-    ]
-
-Custom context values
-~~~~~~~~~~~~~~~~~~~~~
-
-Attach shared metadata once with :meth:`~mimesis.schema.Schema.with_context`,
-then read it from ``ctx.custom`` inside transformers. This is useful for
-environment labels, tenant IDs, or request-scoped defaults shared across all
-generated rows:
-
-.. code-block:: python
-
-    from mimesis import Field, Schema
-    from mimesis.locales import Locale
-
-    field = Field(Locale.EN, seed=0xFF)
-
-    schema = (
-        Schema(
-            lambda: {
-                "username": field("username"),
-                "email": field("email"),
-            },
-            iterations=2,
-            seed=0xFF,
-        )
-        .with_context(
-            tenant="acme",
-            environment="staging",
-            source="seed-job",
-        )
-        .map(lambda item, ctx: {
-            **item,
-            "meta": {
-                "tenant": ctx.custom["tenant"],
-                "environment": ctx.custom["environment"],
-                "source": ctx.custom["source"],
-                "seed": ctx.seed,
-                "index": ctx.index,
-            },
-        })
-    )
-
-    data = schema.create()
-    # data[0]["meta"]["tenant"] == "acme"
-    # data[0]["meta"]["index"] == 0
-    # data[1]["meta"]["index"] == 1
-
-.. note::
-
-   Transformers are applied in the order they were registered with ``.map()``.
-   Prefer small, focused transformers so each step does one job.
-
-
-Performance Optimization
-------------------------
-
-When using :meth:`~mimesis.schema.Schema.create`, all values are evaluated immediately,
-which impacts performance and memory usage for large datasets. Use the iteration protocol
-of :class:`~mimesis.schema.Schema` for a more efficient approach.
-
-Instead of eager evaluation:
-
-.. code-block:: python
-
-    data = schema.create()
-
-Use lazy iteration:
-
-.. code-block:: python
-
-    for item in schema:  # or schema.iterator(), which is the same
-        print(item)
-
-
-This approach leads to significant memory savings and better performance when generating large datasets.
-Lazy iteration is approximately 40–45% faster and 85–99%+ more memory-efficient,
-with efficiency increasing at larger scales.
-
-As a rule of thumb, if you plan to generate more than 10,000 items, or if your schema is highly complex,
-use lazy iteration.
-
-Relational Schemas
-------------------
-
-.. versionadded:: 20.0.0
-
-Use :class:`~mimesis.builder.SchemaBuilder` to generate related datasets with
-foreign keys, nested documents, and automatic dependency resolution.
-
-Basic Relational Example
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-Create users and posts where each post references a user:
-
-.. code-block:: python
-
-    from mimesis import SchemaBuilder
-    from mimesis.locales import Locale
-
-    sb = SchemaBuilder(Locale.EN, seed=0xFF)
-
-    users = sb.schema("users", {
-        "id": sb.f("increment", accumulator="user"),
-        "username": sb.f("username"),
-        "email": sb.f("email"),
-    })
-
-    posts = sb.schema("posts", {
-        "id": sb.f("increment", accumulator="post"),
-        "title": sb.f("sentence"),
-        "user_id": sb.ref(users).id,  # Foreign key to users
-    })
-
-    # Order of kwargs does not matter — dependencies are resolved automatically
-    data = sb.create(posts=20, users=5)
-
-    print(data["users"])  # 5 users
-    print(data["posts"])  # 20 posts with valid user_id values
-
-Schema References
-~~~~~~~~~~~~~~~~~
-
-``sb.schema()`` returns a :class:`~mimesis.builder.SchemaRef` that supports:
-
-- **Foreign keys** — ``sb.ref(users).id`` picks a random field value from
-  generated data
-- **Whole records** — ``sb.ref(users)`` embeds a random full record
-- **Nesting** — ``addresses(count=2)`` embeds generated items inline
-
-.. code-block:: python
-
-    addresses = sb.schema("addresses", {
-        "city": sb.f("city"),
-        "street": sb.f("street_name"),
-    })
-
-    customers = sb.schema("customers", {
-        "id": sb.f("increment"),
-        "name": sb.f("full_name"),
-        "addresses": addresses(count=2),  # Nested documents
-    })
-
-    data = sb.create(customers=10)
-
-.. note::
-    Include every schema that is referenced via ``sb.ref()`` in the same
-    ``create()`` call. Nested schemas used only via ``schema_ref(count=N)``
-    do not need to be passed to ``create()``.
-
-Complex Relational Example
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-A multi-level graph with users, projects, and API keys:
-
-.. code-block:: python
-
-    from mimesis import SchemaBuilder
-    from mimesis.enums import TimestampFormat
-    from mimesis.locales import Locale
-
-    sb = SchemaBuilder(Locale.EN, seed=0xFF)
-
-    users = sb.schema("users", {
-        "id": sb.f("increment", accumulator="user"),
-        "username": sb.f("username"),
-        "email": sb.f("email"),
-        "created_at": sb.f("timestamp", fmt=TimestampFormat.POSIX),
-    })
-
-    projects = sb.schema("projects", {
-        "id": sb.f("increment", accumulator="project"),
-        "name": sb.f("word"),
-        "version": sb.f("version"),
-        "owner_id": sb.ref(users).id,
-        "status": sb.choice(["active", "archived", "draft"]),
-    })
-
-    api_keys = sb.schema("api_keys", {
-        "id": sb.f("uuid"),
-        "key": sb.f("token_hex"),
-        "project_id": sb.ref(projects).id,
-        "created_at": sb.f("timestamp", fmt=TimestampFormat.POSIX),
-    })
-
-    data = sb.create(
-        api_keys=10,
-        projects=5,
-        users=3,
-    )
-
-This will generate:
-
-- 3 users
-- 5 projects (each with a valid ``owner_id`` referencing a user)
-- 10 API keys (each with a valid ``project_id`` referencing a project)
-
-See also: :class:`~mimesis.builder.SchemaBuilder` API reference.
-
-
-Field Aliases
--------------
-
-.. versionadded:: 12.0.0
-
-Sometimes you need a field name that truly matches your domain, and that's when field aliases become useful.
-
-To use field aliases, instantiate a :class:`~mimesis.schema.Field` or
-:class:`~mimesis.schema.Fieldset` and update the ``aliases`` attribute (a :class:`dict`)
-to map aliases to field names.
-
-Example:
-
-.. code-block:: python
-
-    from mimesis import Field, Locale
-
-    field = Field(Locale.EN)
-
-    # The key is an alias, the value is the field
-    # name to which the alias is associated (both should be strings).
-    field.aliases.update({
-        '🇺🇸': 'country',
-        '🧬': 'dna_sequence',
-        '📧': 'email',
-        '📞': 'person.telephone',
-        '🍆': 'vegetable',
-        'ебаныйтокен': 'token_hex',
-    })
-
-
-You can now use aliases instead of standard field names:
-
-.. code-block:: python
-
-    >>> field("🇺🇸")
-    'Iraq' # I swear this was generated randomly.
-    >>> field("🧬")
-    'ATTCTAGCAT'
-    >>> field('📧', domains=['@gmail.com'])
-    'walker1827@gmail.com'
-    >>> field('📞')
-    '+17181130182'
-    >>> field('🍆')
-    'Radicchio'
-    >>> field('ебаныйтокен')
-    'aef9765d029c91ac737d04119c94a2b52a52d34b61bc39bec393e82e7bf0b8b5'
-
-
-As you can see, you can use any string as an alias, so I'm doing my part to get someone fired for emoji-driven code.
-Jokes aside, while any string can work as an alias, it's wise to choose one that fits your domain or
-context for clarity.
-
-When you no longer need aliases, you can remove them individually like regular dictionary keys, or clear them all at once:
-
-.. code-block:: python
-
-    >>> field.aliases.pop('🇺🇸')
-
-    # clear all aliases
-
-    >>> field.aliases.clear()
-
+.. _key_functions:
 
 Key Functions and Transformations
 ---------------------------------
@@ -960,6 +648,115 @@ Here's an example:
     'fooany1925@gmail.com'
 
 
+Transforming Items with ``map()`` and ``SchemaContext``
+-------------------------------------------------------
+
+:class:`~mimesis.schema.Schema` can post-process every generated item with
+:meth:`~mimesis.schema.Schema.map`. Transformers may accept either the item alone,
+or ``(item, ctx)`` where ``ctx`` is a :class:`~mimesis.schema.SchemaContext`.
+
+:class:`~mimesis.schema.SchemaContext` provides:
+
+- ``index`` — zero-based index of the current item
+- ``iteration`` — one-based counter (``index + 1``)
+- ``seed`` — schema seed
+- ``custom`` — dict populated by :meth:`~mimesis.schema.Schema.with_context`
+
+Basic transformation
+~~~~~~~~~~~~~~~~~~~~
+
+Use ``.map()`` to reshape or enrich each record:
+
+.. code-block:: python
+
+    from mimesis import Field, Schema
+    from mimesis.locales import Locale
+
+    field = Field(Locale.EN, seed=0xFF)
+
+    schema = (
+        Schema(
+            lambda: {
+                "id": field("increment"),
+                "email": field("email"),
+                "score": field("integer_number", start=1, end=100),
+            },
+            iterations=3,
+        )
+        .map(lambda item: {**item, "passed": item["score"] >= 50})
+        .map(lambda item, ctx: {
+            **item,
+            "row": ctx.index,
+            "batch": ctx.iteration,
+        })
+    )
+
+    schema.create()
+
+Example output:
+
+.. code-block:: json
+
+    [
+      {"id": 1, "email": "...", "score": 72, "passed": true, "row": 0, "batch": 1},
+      {"id": 2, "email": "...", "score": 31, "passed": false, "row": 1, "batch": 2},
+      {"id": 3, "email": "...", "score": 88, "passed": true, "row": 2, "batch": 3}
+    ]
+
+Custom context values
+~~~~~~~~~~~~~~~~~~~~~
+
+Attach shared metadata once with :meth:`~mimesis.schema.Schema.with_context`,
+then read it from ``ctx.custom`` inside transformers. This is useful for
+environment labels, tenant IDs, or request-scoped defaults shared across all
+generated rows:
+
+.. code-block:: python
+
+    from mimesis import Field, Schema
+    from mimesis.locales import Locale
+
+    field = Field(Locale.EN, seed=0xFF)
+
+    schema = (
+        Schema(
+            lambda: {
+                "username": field("username"),
+                "email": field("email"),
+            },
+            iterations=2,
+            seed=0xFF,
+        )
+        .with_context(
+            tenant="acme",
+            environment="staging",
+            source="seed-job",
+        )
+        .map(lambda item, ctx: {
+            **item,
+            "meta": {
+                "tenant": ctx.custom["tenant"],
+                "environment": ctx.custom["environment"],
+                "source": ctx.custom["source"],
+                "seed": ctx.seed,
+                "index": ctx.index,
+            },
+        })
+    )
+
+    data = schema.create()
+    # data[0]["meta"]["tenant"] == "acme"
+    # data[0]["meta"]["index"] == 0
+    # data[1]["meta"]["index"] == 1
+
+.. note::
+
+   Transformers are applied in the order they were registered with ``.map()``.
+   Prefer small, focused transformers so each step does one job.
+
+
+.. _custom_field_handlers:
+
 Custom Field Handlers
 ---------------------
 
@@ -1110,6 +907,216 @@ or all of them at once:
 
     >>> field.unregister_all_handlers()
 
+
+Field Aliases
+-------------
+
+.. versionadded:: 12.0.0
+
+Sometimes you need a field name that truly matches your domain, and that's when field aliases become useful.
+
+To use field aliases, instantiate a :class:`~mimesis.schema.Field` or
+:class:`~mimesis.schema.Fieldset` and update the ``aliases`` attribute (a :class:`dict`)
+to map aliases to field names.
+
+Example:
+
+.. code-block:: python
+
+    from mimesis import Field, Locale
+
+    field = Field(Locale.EN)
+
+    # The key is an alias, the value is the field
+    # name to which the alias is associated (both should be strings).
+    field.aliases.update({
+        '🇺🇸': 'country',
+        '🧬': 'dna_sequence',
+        '📧': 'email',
+        '📞': 'person.telephone',
+        '🍆': 'vegetable',
+        'ебаныйтокен': 'token_hex',
+    })
+
+
+You can now use aliases instead of standard field names:
+
+.. code-block:: python
+
+    >>> field("🇺🇸")
+    'Iraq' # I swear this was generated randomly.
+    >>> field("🧬")
+    'ATTCTAGCAT'
+    >>> field('📧', domains=['@gmail.com'])
+    'walker1827@gmail.com'
+    >>> field('📞')
+    '+17181130182'
+    >>> field('🍆')
+    'Radicchio'
+    >>> field('ебаныйтокен')
+    'aef9765d029c91ac737d04119c94a2b52a52d34b61bc39bec393e82e7bf0b8b5'
+
+
+As you can see, you can use any string as an alias, so I'm doing my part to get someone fired for emoji-driven code.
+Jokes aside, while any string can work as an alias, it's wise to choose one that fits your domain or
+context for clarity.
+
+When you no longer need aliases, you can remove them individually like regular dictionary keys, or clear them all at once:
+
+.. code-block:: python
+
+    >>> field.aliases.pop('🇺🇸')
+
+    # clear all aliases
+
+    >>> field.aliases.clear()
+
+
+Relational Schemas
+------------------
+
+.. versionadded:: 20.0.0
+
+Use :class:`~mimesis.builder.SchemaBuilder` to generate related datasets with
+foreign keys, nested documents, and automatic dependency resolution.
+
+Basic Relational Example
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+Create users and posts where each post references a user:
+
+.. code-block:: python
+
+    from mimesis import SchemaBuilder
+    from mimesis.locales import Locale
+
+    sb = SchemaBuilder(Locale.EN, seed=0xFF)
+
+    users = sb.schema("users", {
+        "id": sb.f("increment", accumulator="user"),
+        "username": sb.f("username"),
+        "email": sb.f("email"),
+    })
+
+    posts = sb.schema("posts", {
+        "id": sb.f("increment", accumulator="post"),
+        "title": sb.f("sentence"),
+        "user_id": sb.ref(users).id,  # Foreign key to users
+    })
+
+    # Order of kwargs does not matter — dependencies are resolved automatically
+    data = sb.create(posts=20, users=5)
+
+    print(data["users"])  # 5 users
+    print(data["posts"])  # 20 posts with valid user_id values
+
+Schema References
+~~~~~~~~~~~~~~~~~
+
+``sb.schema()`` returns a :class:`~mimesis.builder.SchemaRef` that supports:
+
+- **Foreign keys** — ``sb.ref(users).id`` picks a random field value from
+  generated data
+- **Whole records** — ``sb.ref(users)`` embeds a random full record
+- **Nesting** — ``addresses(count=2)`` embeds generated items inline
+
+.. code-block:: python
+
+    addresses = sb.schema("addresses", {
+        "city": sb.f("city"),
+        "street": sb.f("street_name"),
+    })
+
+    customers = sb.schema("customers", {
+        "id": sb.f("increment"),
+        "name": sb.f("full_name"),
+        "addresses": addresses(count=2),  # Nested documents
+    })
+
+    data = sb.create(customers=10)
+
+.. note::
+    Include every schema that is referenced via ``sb.ref()`` in the same
+    ``create()`` call. Nested schemas used only via ``schema_ref(count=N)``
+    do not need to be passed to ``create()``.
+
+Complex Relational Example
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+A multi-level graph with users, projects, and API keys:
+
+.. code-block:: python
+
+    from mimesis import SchemaBuilder
+    from mimesis.enums import TimestampFormat
+    from mimesis.locales import Locale
+
+    sb = SchemaBuilder(Locale.EN, seed=0xFF)
+
+    users = sb.schema("users", {
+        "id": sb.f("increment", accumulator="user"),
+        "username": sb.f("username"),
+        "email": sb.f("email"),
+        "created_at": sb.f("timestamp", fmt=TimestampFormat.POSIX),
+    })
+
+    projects = sb.schema("projects", {
+        "id": sb.f("increment", accumulator="project"),
+        "name": sb.f("word"),
+        "version": sb.f("version"),
+        "owner_id": sb.ref(users).id,
+        "status": sb.choice(["active", "archived", "draft"]),
+    })
+
+    api_keys = sb.schema("api_keys", {
+        "id": sb.f("uuid"),
+        "key": sb.f("token_hex"),
+        "project_id": sb.ref(projects).id,
+        "created_at": sb.f("timestamp", fmt=TimestampFormat.POSIX),
+    })
+
+    data = sb.create(
+        api_keys=10,
+        projects=5,
+        users=3,
+    )
+
+This will generate:
+
+- 3 users
+- 5 projects (each with a valid ``owner_id`` referencing a user)
+- 10 API keys (each with a valid ``project_id`` referencing a project)
+
+See also: :class:`~mimesis.builder.SchemaBuilder` API reference.
+
+
+Performance Optimization
+------------------------
+
+When using :meth:`~mimesis.schema.Schema.create`, all values are evaluated immediately,
+which impacts performance and memory usage for large datasets. Use the iteration protocol
+of :class:`~mimesis.schema.Schema` for a more efficient approach.
+
+Instead of eager evaluation:
+
+.. code-block:: python
+
+    data = schema.create()
+
+Use lazy iteration:
+
+.. code-block:: python
+
+    for item in schema:  # or schema.iterator(), which is the same
+        print(item)
+
+
+This approach leads to significant memory savings and better performance when generating large datasets.
+Lazy iteration is approximately 40–45% faster and 85–99%+ more memory-efficient,
+with efficiency increasing at larger scales.
+
+As a rule of thumb, if you plan to generate more than 10,000 items, or if your schema is highly complex,
+use lazy iteration.
 
 Exporting Data
 --------------

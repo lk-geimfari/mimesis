@@ -1,11 +1,12 @@
 Mimesis: Fake Data Generator
 ============================
 
-`Mimesis <https://github.com/lk-geimfari/mimesis>`_ is a powerful data generator for
-Python that can produce a wide range of fake data in multiple languages. This tool is useful
-for populating testing databases, creating fake API endpoints, generating custom structures
-in JSON and XML files, and anonymizing production data, among other things. With Mimesis,
-developers can obtain realistic, randomized data easily to facilitate development and testing.
+`Mimesis <https://github.com/lk-geimfari/mimesis>`_ is a Python library for generating
+fake but realistic data in multiple languages and locales. It can generate names,
+addresses, dates, phone numbers, emails, financial data, and many other types of values.
+
+It is commonly used to populate test databases, mock API responses, generate JSON or XML
+fixtures, create sample datasets, and anonymize production data. Mimesis provides a simple,
+consistent API that makes it easy to generate realistic data for development and testing.
 
 .. include:: contents.rst.inc
-

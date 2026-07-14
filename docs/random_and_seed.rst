@@ -95,6 +95,29 @@ If you want to use the same seed for all your data providers, then using :class:
     # Output: 'platform'
 
 
+Global Seed
+-----------
+
+You can set a global seed for all data providers and use it without explicitly passing it to each provider:
+
+.. code-block:: python
+
+    from mimesis import random
+
+    random.global_seed = 0xFF
+
+
+Now you can use any data provider without passing the seed:
+
+.. code-block:: python
+
+    from mimesis import Person, Locale
+
+    person = Person(Locale.EN)
+    person.full_name()
+    # Output: 'Karl Munoz'
+
+
 Weighted Choice
 ---------------
 
@@ -144,24 +167,3 @@ Output:
     We are accessing the **random** attribute of the :class:`~mimesis.Person` class to ensure the same seed.
 
 
-Global Seed
------------
-
-You can set a global seed for all data providers and use it without explicitly passing it to each provider:
-
-.. code-block:: python
-
-    from mimesis import random
-
-    random.global_seed = 0xFF
-
-
-Now you can use any data provider without passing the seed:
-
-.. code-block:: python
-
-    from mimesis import Person, Locale
-
-    person = Person(Locale.EN)
-    person.full_name()
-    # Output: 'Karl Munoz'

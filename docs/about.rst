@@ -2,6 +2,17 @@
 About Mimesis
 =============
 
+What is Mimesis?
+----------------
+
+**Mimesis** provides a perfect solution for generating data. It effectively populates databases,
+creates intricate JSON/XML files, anonymizes production data, and generates high-quality
+Pandas dataframes. If you require these functions, Mimesis is the ideal tool for you.
+
+Mimesis **is not** an object factory intended for use with a specific database or ORM.
+However, this does not mean that it cannot be used with an ORM. In fact, it can be easily
+integrated with an ORM using third-party libraries like `mimesis-factory <https://github.com/lk-geimfari/mimesis-factory>`_ or others.
+
 Features
 --------
 
@@ -15,17 +26,6 @@ The key features are:
 - **Schema-based generators**: Offers schema-based data generators to effortlessly produce data of any complexity.
 - **Relational data**: Supports generating relational data with references between schemas for complex data structures.
 - **Intuitive**: Great editor support. Fully typed, so you get autocompletion almost everywhere.
-
-What is Mimesis?
-----------------
-
-**Mimesis** provides a perfect solution for generating data. It effectively populates databases,
-creates intricate JSON/XML files, anonymizes production data, and generates high-quality
-Pandas dataframes. If you require these functions, Mimesis is the ideal tool for you.
-
-Mimesis **is not** an object factory intended for use with a specific database or ORM.
-However, this does not mean that it cannot be used with an ORM. In fact, it can be easily
-integrated with an ORM using third-party libraries like `mimesis-factory <https://github.com/lk-geimfari/mimesis-factory>`_ or others.
 
 What is fake data?
 ------------------
