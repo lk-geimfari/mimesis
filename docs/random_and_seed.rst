@@ -12,7 +12,7 @@ All of the data providers in this library are subclasses of the :class:`~mimesis
 class, which has a **random** attribute.
 This attribute is an instance of the :class:`~mimesis.random.Random` class from the module :mod:`~mimesis.random`.
 
-If you are creating your own data provider, you should use this random attribute to access the **random**.
+If you are creating your own data provider, you should use this random attribute to access the random number generator.
 
 .. code-block:: python
 
@@ -38,7 +38,7 @@ Seeding
 
 .. note::
     Keep in mind that some methods of some providers cannot be used with seeded
-    providers since their nondeterministic nature.
+    providers due to their nondeterministic nature.
 
 .. note::
     We support ``pytest_randomly`` and its global seed.
@@ -46,8 +46,8 @@ Seeding
     ``mimesis`` will have the same seed as shown in your ``pytest`` output:
     ``Using --randomly-seed=XXX``
 
-For using seeded data just pass an argument *seed* (which can be *int*, *str*, *bytes*, *bytearray*)
-to data provider:
+To use seeded data, just pass an argument *seed* (which can be *int*, *str*, *bytes*, or *bytearray*)
+to the data provider:
 
 .. code-block:: python
 
@@ -62,7 +62,7 @@ Reseeding
 ---------
 
 To reseed the random number generator, you can use the :meth:`~mimesis.providers.BaseProvider.reseed`
-method of the :class:`~mimesis.providers.BaseProvider` class
+method of the :class:`~mimesis.providers.BaseProvider` class:
 
 .. code-block:: python
 
@@ -79,7 +79,7 @@ method of the :class:`~mimesis.providers.BaseProvider` class
     # Output: 'Fausto'
 
 
-If you want to use the same seed for all your data providers, then using :class:`~mimesis.Generic()` is your option:
+If you want to use the same seed for all your data providers, then using :class:`~mimesis.Generic()` is a good option:
 
 .. code-block:: python
 
@@ -100,10 +100,10 @@ Weighted Choice
 
 You might wish to produce data with a specific likelihood of appearing.
 
-To illustrate, suppose you aim to produce random complete names for males
+For example, suppose you want to produce random full names for males
 and females, but with a greater likelihood of female names being generated.
 
-Here's one approach to accomplish this:
+Here's one approach:
 
 .. code-block:: python
 
@@ -141,7 +141,7 @@ Output:
 
 .. note::
 
-    We are accessing **random** attribute of the :class:`~mimesis.Person` class to ensure same seed.
+    We are accessing the **random** attribute of the :class:`~mimesis.Person` class to ensure the same seed.
 
 
 Global Seed

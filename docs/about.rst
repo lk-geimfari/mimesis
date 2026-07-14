@@ -14,28 +14,28 @@ The key features are:
 - **Data variety**: Includes various data providers designed for different use cases.
 - **Schema-based generators**: Offers schema-based data generators to effortlessly produce data of any complexity.
 - **Relational data**: Supports generating relational data with references between schemas for complex data structures.
-- **Intuitive**: Great editor support. Fully-typed, thus autocompletion almost everywhere.
+- **Intuitive**: Great editor support. Fully typed, so you get autocompletion almost everywhere.
 
-What Mimesis is?
+What is Mimesis?
 ----------------
 
 **Mimesis** provides a perfect solution for generating data. It effectively populates databases,
-creates intricate JSON/XML files, anonymizes productive service data, and generating high-quality
+creates intricate JSON/XML files, anonymizes production data, and generates high-quality
 Pandas dataframes. If you require these functions, Mimesis is the ideal tool for you.
 
 Mimesis **is not** an object factory intended for use with a specific database or ORM.
 However, this does not mean that it cannot be used with an ORM. In fact, it can be easily
 integrated with an ORM using third-party libraries like `mimesis-factory <https://github.com/lk-geimfari/mimesis-factory>`_ or others.
 
-What is the fake data?
-----------------------
+What is fake data?
+------------------
 
 Fake data refers to data that is not useful or sensitive, but is used to occupy a space
 where real data is typically located. This type of data can act as a placeholder for both
 testing and operational purposes. In testing, it can also serve as stubs or placeholders.
 
-What does name mean?
---------------------
+What does the name mean?
+------------------------
 
 Mimesis (`/maɪˈmiːsəs/ <https://en.wikipedia.org/wiki/Help:IPA/English>`_;
 `Ancient Greek <https://en.wikipedia.org/wiki/Ancient_Greek_language>`_: μίμησις (*mīmēsis*), from μιμεῖσθαι (*mīmeisthai*),
@@ -61,9 +61,9 @@ Check out that spotty bastard. Isn't it badass as hell?
 Performance
 -----------
 
-Overall, Mimesis is many times faster (≈12 times faster) than Faker, and generates more unique data, which is important for testing.
+Overall, Mimesis is many times faster (≈12 times faster) than Faker and generates more unique data, which is important for testing.
 
-Below you can see the result of `performance comparison <https://gist.github.com/lk-geimfari/99c5b45906be5299a3088f42c3f55bf4>`_ of Mimesis and Faker:
+Below you can see the results of a `performance comparison <https://gist.github.com/lk-geimfari/99c5b45906be5299a3088f42c3f55bf4>`_ of Mimesis and Faker:
 
 
 Generating 10k full names

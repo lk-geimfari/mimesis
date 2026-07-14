@@ -43,7 +43,7 @@ Use the following command to install Mimesis in Jupyter Notebook:
 
     (env) ➜ ! pip install mimesis
 
-Installation using *poetry* is pretty same:
+Installation using *poetry* is pretty much the same:
 
 .. code-block:: sh
 

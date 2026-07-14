@@ -121,5 +121,5 @@ Disclaimer
 
 The creators of Mimesis do not hold themselves accountable for how you
 employ the library's functionalities or the data generated with it.
-Mimesis is designed to facilitate testing and with good intentions.
+Mimesis is designed to facilitate testing and is intended for legitimate use.
 Mimesis should not be used for illicit purposes.

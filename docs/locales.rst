@@ -3,18 +3,18 @@
 Locales
 =======
 
-The Mimesis supports multiple locales. This means that you can generate
+Mimesis supports multiple locales. This means that you can generate
 data in different languages and for different countries.
 
 The default locale for all providers is English (United States) (``Locale.EN``).
 
-You have to import :class:`~mimesis.enums.Locale` object first, like this:
+You have to import the :class:`~mimesis.enums.Locale` object first, like this:
 
 .. code-block:: python
 
     from mimesis.locales import Locale
 
-Now you can specify a locale when creating providers and they will return data that
+Now you can specify a locale when creating providers, and they will return data that
 is appropriate for the language or country associated with that locale:
 
 .. code-block:: python
@@ -42,8 +42,8 @@ See the table below for more details.
 Overriding locale
 -----------------
 
-Sometimes you need only some data from other locale and creating an instance for such cases
-is not really good,  so it's better just temporarily override current locale for provider's instance:
+Sometimes you need only some data from another locale, and creating a new instance
+for such cases is not ideal, so it's better to temporarily override the current locale for the provider's instance:
 
 .. code-block:: python
 
@@ -84,7 +84,7 @@ You can also use it with :class:`~mimesis.Generic()`:
 Supported locales
 -----------------
 
-Mimesis currently includes support for 42 different locales (see :class:`~mimesis.enums.Locale` for more details).
+Mimesis currently includes support for 47 different locales (see :class:`~mimesis.enums.Locale` for more details).
 
 The table below lists all supported locales and their associated
 countries.
@@ -112,7 +112,7 @@ Country   Code    Associated attribute  Name                  Native Name
    🇬🇷    `el`     **Locale.EL**         Greek                 Ελληνικά
    🇺🇸    `en`     **Locale.EN**         English               English
    🇦🇺    `en-au`  **Locale.EN_AU**      Australian English    English
-   🇨🇦    `en-ca`  **LocALE.EN_CA**      Canadian English      English
+   🇨🇦    `en-ca`  **Locale.EN_CA**      Canadian English      English
    🇬🇧    `en-gb`  **Locale.EN_GB**      British English       English
    🇪🇸    `es`     **Locale.ES**         Spanish               Español
    🇲🇽    `es-mx`  **Locale.ES_MX**      Mexican Spanish       Español
@@ -128,7 +128,7 @@ Country   Code    Associated attribute  Name                  Native Name
    🇰🇿    `kk`     **Locale.KK**         Kazakh                Қазақша
    🇰🇷    `ko`     **Locale.KO**         Korean                한국어
    🇳🇱    `nl`     **Locale.NL**         Dutch                 Nederlands
-   🇧🇪    `nl-be`  **Locale.NL_BE**      Belgium Dutch         Nederlands
+   🇧🇪    `nl-be`  **Locale.NL_BE**      Belgian Dutch         Nederlands
    🇳🇴    `no`     **Locale.NO**         Norwegian             Norsk
    🇵🇱    `pl`     **Locale.PL**         Polish                Polski
    🇵🇹    `pt`     **Locale.PT**         Portuguese            Português

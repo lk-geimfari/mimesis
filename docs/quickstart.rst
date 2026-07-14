@@ -27,20 +27,20 @@ Consider the following example:
 
 What did the code above do?
 
-1. First we imported the :class:`~mimesis.Person` provider from **mimesis**.
+1. First, we imported the :class:`~mimesis.Person` provider from **mimesis**.
    An instance of this class will serve as our provider of personal data.
 2. We imported the :class:`~mimesis.enums.Locale` object, which provides locale codes and must be used as a parameter for locale-dependent data providers.
-3. We imported the :class:`~mimesis.enums.Gender` object from the :mod:`mimesis.enums` module, which we use as a parameter for the :meth:`~mimesis.Person.full_name`.
-4. Next we generate random female full name.
-5. The same as above, but for male.
+3. We imported the :class:`~mimesis.enums.Gender` object from the :mod:`mimesis.enums` module, which we use as a parameter for :meth:`~mimesis.Person.full_name`.
+4. Next, we generate a random female full name.
+5. The same as above, but for a male.
 
 Creating objects
 ----------------
 
 If your app requires data in one particular language, it’s preferable to
-use class :class:`~mimesis.Generic()`, giving access to all class providers through a
-single object, rather than through multiple separate class providers.
-Using :class:`~mimesis.Generic()` will allow you to get rid of several extra lines of
+use the :class:`~mimesis.Generic()` class, which gives access to all providers through a
+single object, rather than through multiple separate providers.
+Using :class:`~mimesis.Generic()` lets you get rid of several extra lines of
 code.
 
 Incorrect:
@@ -86,13 +86,14 @@ Also correct:
 .. code-block:: python
 
     from mimesis import Person
+    from mimesis.locales import Locale
 
     person = Person(Locale.EN)
-    with person.override_locale(Locale.SV)
+    with person.override_locale(Locale.SV):
         pass
 
 
-Importing individual class providers may be useful if you only need access to the data provided by that specific class.
+Importing individual providers may be useful if you only need access to the data provided by that specific class.
 However, if you require access to a broader range of data, it is recommended to use the :class:`~mimesis.Generic()` class instead.
 This will enable you to access data from all available providers within the library.
 

@@ -2,7 +2,7 @@ Contents
 --------
 
 Mimesis provides configuration and conventions, with sensible defaults. This section of the
-documentation explains the different parts of the Mimesis and how they can be used, customized, and extended.
+documentation explains the different parts of Mimesis and how they can be used, customized, and extended.
 
 .. toctree::
    :maxdepth: 2
