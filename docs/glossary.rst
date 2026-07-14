@@ -40,8 +40,10 @@ Glossary
 
     schema context
         A context object passed to :meth:`~mimesis.schema.Schema.map`
-        transformation functions. It exposes the current item index, seed, and
-        custom data set via :meth:`~mimesis.schema.Schema.with_context`.
+        transformers that need more than the item itself. It exposes the
+        current row index, schema seed, and shared run metadata set via
+        :meth:`~mimesis.schema.Schema.with_context` (for example tenant or
+        environment labels).
 
         See :py:class:`~mimesis.schema.SchemaContext` and the guide section
         *Transforming Items with map() and SchemaContext* in :doc:`schema`.

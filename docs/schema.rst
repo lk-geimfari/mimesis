@@ -651,21 +651,44 @@ Here's an example:
 Transforming Items with ``map()`` and ``SchemaContext``
 -------------------------------------------------------
 
-:class:`~mimesis.schema.Schema` can post-process every generated item with
-:meth:`~mimesis.schema.Schema.map`. Transformers may accept either the item alone,
-or ``(item, ctx)`` where ``ctx`` is a :class:`~mimesis.schema.SchemaContext`.
+Keep the schema definition focused on **fake domain fields**. Use
+:meth:`~mimesis.schema.Schema.map` when you still need **per-record
+post-processing** after values are generated:
+
+- derive fields from other fields
+- reshape records for a destination format (API payload, ORM model, DataFrame row)
+- rename, drop, or nest keys
+- attach generation metadata that should not live inside the schema lambda
+
+Transformers run in registration order and work with both
+:meth:`~mimesis.schema.Schema.create` and lazy iteration
+(``for item in schema``).
+
+When to use ``map(item)`` vs ``map(item, ctx)``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+A transformer may accept either:
+
+- ``item`` alone — enough when the output depends only on the generated record
+- ``(item, ctx)`` — when you also need generation metadata from
+  :class:`~mimesis.schema.SchemaContext`
 
 :class:`~mimesis.schema.SchemaContext` provides:
 
-- ``index`` — zero-based index of the current item
+- ``index`` — zero-based position of the current item
 - ``iteration`` — one-based counter (``index + 1``)
-- ``seed`` — schema seed
-- ``custom`` — dict populated by :meth:`~mimesis.schema.Schema.with_context`
+- ``seed`` — schema seed for debugging or reproducible batch tags
+- ``custom`` — shared values set with :meth:`~mimesis.schema.Schema.with_context`
 
-Basic transformation
-~~~~~~~~~~~~~~~~~~~~
+Use context when you would otherwise reach for a mutable counter, outer
+closures, or a separate ``enumerate(schema.create())`` step. Typical cases:
 
-Use ``.map()`` to reshape or enrich each record:
+- number rows as they are generated
+- stamp each record with tenant / environment / job IDs once for the whole run
+- include the active seed in exported metadata without putting it in every field
+
+Derive and enrich records
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: python
 
@@ -683,7 +706,9 @@ Use ``.map()`` to reshape or enrich each record:
             },
             iterations=3,
         )
+        # Depends only on the item:
         .map(lambda item: {**item, "passed": item["score"] >= 50})
+        # Needs generation position from context:
         .map(lambda item, ctx: {
             **item,
             "row": ctx.index,
@@ -703,13 +728,13 @@ Example output:
       {"id": 3, "email": "...", "score": 88, "passed": true, "row": 2, "batch": 3}
     ]
 
-Custom context values
-~~~~~~~~~~~~~~~~~~~~~
+Attach shared run metadata with ``with_context``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Attach shared metadata once with :meth:`~mimesis.schema.Schema.with_context`,
-then read it from ``ctx.custom`` inside transformers. This is useful for
-environment labels, tenant IDs, or request-scoped defaults shared across all
-generated rows:
+:meth:`~mimesis.schema.Schema.with_context` stores values once for the whole
+schema run. Transformers read them from ``ctx.custom``. Prefer this over
+repeating constants in the schema lambda or closing over outer variables in
+every ``.map()`` callback:
 
 .. code-block:: python
 
@@ -753,6 +778,10 @@ generated rows:
 
    Transformers are applied in the order they were registered with ``.map()``.
    Prefer small, focused transformers so each step does one job.
+
+   Put fake domain data in the schema; use ``key=`` for per-field transforms;
+   use ``.map()`` for per-record transforms; use ``SchemaContext`` when a
+   transformer needs row position, seed, or shared run configuration.
 
 
 .. _custom_field_handlers:
