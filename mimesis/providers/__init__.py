@@ -22,31 +22,32 @@ from mimesis.providers.science import Science
 from mimesis.providers.text import Text
 from mimesis.providers.transport import Transport
 
+
 __all__ = [
-    # Base classes:
-    "BaseProvider",
-    "BaseDataProvider",
-    "ProviderRegistry",
     # Data providers:
     "Address",
+    "BaseDataProvider",
+    # Base classes:
+    "BaseProvider",
     "BinaryFile",
-    "Finance",
+    "Choice",
     "Choice",
     "Code",
-    "Choice",
+    "Cryptographic",
     "Datetime",
     "Development",
     "File",
+    "Finance",
     "Food",
+    "Generic",
     "Hardware",
     "Internet",
     "Numeric",
     "Path",
     "Payment",
     "Person",
+    "ProviderRegistry",
     "Science",
     "Text",
     "Transport",
-    "Cryptographic",
-    "Generic",
 ]
