@@ -2156,16 +2156,6 @@
     "Yıkıcı",
     "Zabıta"
   ],
-  "political_views": [
-    "Merkez Sağ",
-    "Merkez Sol",
-    "Sağ",
-    "Komunist",
-    "Milliyetçi",
-    "Muhafazakar",
-    "Solcu",
-    "Cumhuriyetçi"
-  ],
   "surnames": [
     "Abacı",
     "Abadan",
@@ -2500,21 +2490,6 @@
     "Yıldız Teknik Üniversitesi",
     "Yüzüncü Yıl Üniversitesi",
     "Bülent Ecevit Üniversitesi"
-  ],
-  "views_on": [
-    "Negatif",
-    "Çok Negatif",
-    "Pozitif",
-    "Normal",
-    "Dayanabilir"
-  ],
-  "worldview": [
-    "Ateizm",
-    "Agnostizm",
-    "Deizm",
-    "Judaizm",
-    "Katolik",
-    "Islam"
   ],
   "telephone_fmt": [
     "+90 (5##) ### ## ##",

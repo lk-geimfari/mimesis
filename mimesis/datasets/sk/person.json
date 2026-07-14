@@ -449,9 +449,6 @@
     "vrátnik",
     "zvárač"
   ],
-  "political_views": [
-    "bez názoru"
-  ],
   "surnames": {
     "female": [
       "Balogová",
@@ -521,14 +518,6 @@
     "Vysoká škola múzických umení v Bratislave",
     "Vysoká škola výtvarných umení v Bratislave",
     "Žilinská univerzita v Žiline"
-  ],
-  "views_on": [
-    "negatívny",
-    "neutrálny",
-    "pozitívny"
-  ],
-  "worldview": [
-    "bez názoru"
   ],
   "telephone_fmt": [
     "+421-###-###-####",

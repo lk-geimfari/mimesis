@@ -300,18 +300,6 @@ class TestPerson:
         result = person.language()
         assert result in person._dataset["language"]
 
-    def test_worldview(self, person):
-        result = person.worldview()
-        assert result in person._dataset["worldview"]
-
-    def test_views_on(self, person):
-        result = person.views_on()
-        assert result in person._dataset["views_on"]
-
-    def test_political_views(self, person):
-        result = person.political_views()
-        assert result in person._dataset["political_views"]
-
     @pytest.mark.parametrize(
         "title_type",
         [
@@ -470,15 +458,6 @@ class TestSeededPerson:
 
     def test_language(self, p1, p2):
         assert p1.language() == p2.language()
-
-    def test_worldview(self, p1, p2):
-        assert p1.worldview() == p2.worldview()
-
-    def test_views_on(self, p1, p2):
-        assert p1.views_on() == p2.views_on()
-
-    def test_political_views(self, p1, p2):
-        assert p1.political_views() == p2.political_views()
 
     def test_title(self, p1, p2):
         assert p1.title() == p2.title()

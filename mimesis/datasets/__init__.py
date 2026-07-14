@@ -10,6 +10,5 @@ from .int.internet import *
 from .int.path import *
 from .int.payment import *
 from .int.person import *
-from .int.scientific import *
 from .int.text import *
 from .int.transport import *

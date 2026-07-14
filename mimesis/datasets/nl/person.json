@@ -1587,16 +1587,6 @@
     "Verzekeringsadministrateur",
     "Vrachtwagenchauffeur"
   ],
-  "political_views": [
-    "Communistisch",
-    "Conservatief",
-    "Gematigd",
-    "Liberaal",
-    "Liberaal",
-    "Onverschillig",
-    "Socialistisch",
-    "Ultraconservatief"
-  ],
   "surnames": [
     "Aabel",
     "Aaftink",
@@ -9781,19 +9771,6 @@
     "Vrije universiteit",
     "Wageningen universiteit",
     "Webster university"
-  ],
-  "views_on": [
-    "Heel erg negatief",
-    "In overleg",
-    "Negatief",
-    "Neutraal",
-    "Positief"
-  ],
-  "worldview": [
-    "Atheïsme",
-    "Pantheïsme",
-    "Agnosticisme",
-    "Christendom"
   ],
   "telephone_fmt": [
     "+31 ## ### ####",

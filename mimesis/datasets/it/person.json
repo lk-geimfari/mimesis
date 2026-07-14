@@ -2322,16 +2322,6 @@
     "Zoologo",
     "Zoccolaio"
   ],
-  "political_views": [
-    "Anarchico",
-    "Comunista",
-    "Socialista",
-    "Moderato",
-    "Liberale",
-    "Conservatore",
-    "Ultraconservatore",
-    "Libertario"
-  ],
   "surnames": [
     "Abate",
     "Abato",
@@ -6018,22 +6008,6 @@
     "Università Cattolica del Sacro Cuore",
     "Università Politecnica delle Marche",
     "Università Vita-Salute San Raffaele"
-  ],
-  "views_on": [
-    "Negativo",
-    "Molto negativo",
-    "Positivo",
-    "Neutro"
-  ],
-  "worldview": [
-    "Agnostico",
-    "Ateo",
-    "Buddista",
-    "Cattolico",
-    "Confuciano",
-    "Ebreo",
-    "Ortodosso",
-    "Panteico"
   ],
   "telephone_fmt": [
     "+39 0## ### ###",

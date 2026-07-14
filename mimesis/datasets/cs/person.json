@@ -2498,11 +2498,6 @@
     "Šéfkuchař",
     "Šéfredaktor"
   ],
-  "political_views": [
-    "Anarchismus",
-    "Anarchokomunismus",
-    "Liberalismus"
-  ],
   "surnames": [
     "Adamec",
     "Bakes",
@@ -2930,19 +2925,5 @@
     "Západočeská univerzita v Plzni",
     "Česká zemědělská univerzita v Praze",
     "České vysoké učení technické v Praze"
-  ],
-  "views_on": [
-    "Negativy",
-    "Neutrální",
-    "Pozitivní"
-  ],
-  "worldview": [
-    "Agnosticismus",
-    "Ateismus",
-    "Islám",
-    "Judaismus",
-    "Křesťanství",
-    "Panteismus",
-    "Transgunnanismus"
   ]
 }

@@ -25,7 +25,6 @@ __all__ = [
     "DateTime",
     "Key",
     "KeyFunc",
-    "Keywords",
     "Matrix",
     "MissingSeed",
     "Number",
@@ -52,8 +51,6 @@ class _MissingSeed:
 MissingSeed: Final = _MissingSeed()
 
 Seed = None | int | float | str | bytes | bytearray | _MissingSeed
-
-Keywords = list[str] | set[str] | tuple[str, ...]
 
 Number = int | float | complex | Decimal
 

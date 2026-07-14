@@ -25,8 +25,6 @@ from .enums import (
     ImageFile,
     IPv4Purpose,
     ISBNFormat,
-    MeasureUnit,
-    MetricPrefixSign,
     MimeType,
     NumType,
     PortRange,
@@ -118,8 +116,6 @@ __all__ = [
     "Locale",
     # Exceptions:
     "LocaleError",
-    "MeasureUnit",
-    "MetricPrefixSign",
     "MimeType",
     "NonEnumerableError",
     "NumType",

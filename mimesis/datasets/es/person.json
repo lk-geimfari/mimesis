@@ -1038,15 +1038,6 @@
     "Veterinario",
     "Zapatero"
   ],
-  "political_views": [
-    "Anarquista",
-    "Liberal",
-    "Comunista",
-    "Moderato",
-    "Socialista",
-    "Conservador",
-    "Libertario"
-  ],
   "surnames": [
     "Aguilar",
     "Alonso",
@@ -1280,23 +1271,6 @@
     "Universidad de Zaragoza",
     "Universidad de las Islas Baleares",
     "Universidad del País Vasco"
-  ],
-  "views_on": [
-    "Negativo",
-    "Muy negativo",
-    "Positivo",
-    "Neutral",
-    "Compromisable"
-  ],
-  "worldview": [
-    "Ateísmo",
-    "Agnosticismo",
-    "Deísmo",
-    "Judaísmo",
-    "Catolicismo",
-    "Panteísmo",
-    "Confucionismo",
-    "Humanismo secular"
   ],
   "telephone_fmt": [
     "+34 91# ## ## ##",

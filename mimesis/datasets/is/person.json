@@ -4407,13 +4407,6 @@
     "Hönnuður",
     "Arkitekt"
   ],
-  "political_views": [
-    "Áhugalausir",
-    "Kommúnista",
-    "Miðlungs",
-    "Liberal",
-    "Frjálshyggjufélagið"
-  ],
   "surnames": {
     "male": [
       "Addason",
@@ -5902,20 +5895,6 @@
     "Háskólinn í Reykjavík",
     "Hólaskóli",
     "Landbúnaðarháskóli Íslands"
-  ],
-  "views_on": [
-    "Neikvæð",
-    "Very neikvæð",
-    "Jákvæð",
-    "Hlutlaus"
-  ],
-  "worldview": [
-    "Trúleysi",
-    "Algyðistrú",
-    "Guðleysi",
-    "Kristni",
-    "Gyðingdómur",
-    "Frumgyðistrú"
   ],
   "telephone_fmt": [
     "+354 ### ####",

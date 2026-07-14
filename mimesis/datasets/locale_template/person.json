@@ -23,9 +23,6 @@
   "occupation": [
     "Test"
   ],
-  "political_views": [
-    "Test"
-  ],
   "__COMMENT_SURNAMES__": "Optional -> surnames: {female: [], male: []}",
   "surnames": [
     "Test"
@@ -49,12 +46,6 @@
     }
   },
   "university": [
-    "Test"
-  ],
-  "views_on": [
-    "Test"
-  ],
-  "worldview": [
     "Test"
   ],
   "telephone_fmt": [

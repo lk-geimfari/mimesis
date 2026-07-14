@@ -45,16 +45,6 @@ class Payment(BaseProvider):
         """
         return f"{self.random.randint(1, 9999):04d}"
 
-    def paypal(self) -> str:
-        """Generates a random PayPal account.
-
-        :return: Email of a PayPal user.
-
-        :Example:
-            wolf235@gmail.com
-        """
-        return self._person.email()
-
     def bitcoin_address(self) -> str:
         """Generates a random bitcoin address.
 

@@ -5,7 +5,7 @@ from calendar import monthrange
 from datetime import date, datetime, time, timedelta
 
 from mimesis.compat import pytz
-from mimesis.datasets import GMT_OFFSETS, ROMAN_NUMS, TIMEZONES
+from mimesis.datasets import GMT_OFFSETS, TIMEZONES
 from mimesis.enums import DurationUnit, TimestampFormat, TimezoneRegion
 from mimesis.providers.base import BaseDataProvider
 from mimesis.types import Date, DateTime, Time, Timestamp
@@ -118,13 +118,6 @@ class Datetime(BaseDataProvider):
         :return: Year.
         """
         return self.random.randint(minimum, maximum)
-
-    def century(self) -> str:
-        """Generates a random century.
-
-        :return: Century.
-        """
-        return self.random.choice(ROMAN_NUMS)
 
     def periodicity(self) -> str:
         """Generates a random periodicity string.

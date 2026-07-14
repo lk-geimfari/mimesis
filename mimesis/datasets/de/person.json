@@ -1209,24 +1209,6 @@
     "Zahnarzt / Zahnärztin",
     "Übersetzer / Übersetzerin"
   ],
-  "political_views": [
-    "Anarchistisch",
-    "Kommunistisch",
-    "Konservativ",
-    "Liberal",
-    "Libertär",
-    "Linksliberal",
-    "Monarchistisch",
-    "Nationalistisch",
-    "Nationalliberal",
-    "Nationalsozialistisch",
-    "Radikaldemokratisch",
-    "Rechtskonservativ",
-    "Sozialdemokratisch",
-    "Sozialistisch",
-    "Ständisch",
-    "Traditionalistisch"
-  ],
   "surnames": [
     "Abeln",
     "Abraham",
@@ -1672,26 +1654,5 @@
     "Universität Würzburg",
     "Universität der Künste Berlin",
     "Zeppelin Universität"
-  ],
-  "views_on": [
-    "Kompromittierbar",
-    "Negativ",
-    "Neutral",
-    "Positiv",
-    "Sehr negativ",
-    "Sehr positiv"
-  ],
-  "worldview": [
-    "Agnostizismus",
-    "Atheismus",
-    "Deismus",
-    "Humanismus",
-    "Judentum",
-    "Katholizismus",
-    "Konfuzianismus",
-    "Pantheismus",
-    "Hinduismus",
-    "Islam",
-    "Buddhismus"
   ]
 }

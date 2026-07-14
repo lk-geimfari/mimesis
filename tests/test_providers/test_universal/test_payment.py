@@ -61,10 +61,6 @@ class TestPayment:
         assert isinstance(result, str)
         assert len(result) == 4
 
-    def test_paypal(self, payment):
-        result = payment.paypal()
-        assert result is not None
-
     @pytest.mark.parametrize(
         "gender",
         [
@@ -116,9 +112,6 @@ class TestSeededPayment:
 
     def test_cid(self, p1, p2):
         assert p1.cid() == p2.cid()
-
-    def test_paypal(self, p1, p2):
-        assert p1.paypal() == p2.paypal()
 
     def test_credit_card_owner(self, p1, p2):
         assert p1.credit_card_owner() == p2.credit_card_owner()

@@ -3536,16 +3536,6 @@
     "Webmaster",
     "Zoólogo"
   ],
-  "political_views": [
-    "Apolítico",
-    "Anarquista",
-    "Liberal",
-    "Communista",
-    "Moderado",
-    "Socialista",
-    "Conservador",
-    "Libertário"
-  ],
   "surnames": [
     "Abreu",
     "Afonso",
@@ -3696,33 +3686,6 @@
     "University of Lisbon",
     "University of Porto",
     "University of the Algarve"
-  ],
-  "views_on": [
-    "Negativa",
-    "Muito Negativa",
-    "Positiva",
-    "Neutra",
-    "Conciliável"
-  ],
-  "worldview": [
-    "Agnóstico",
-    "Ateu",
-    "Budista",
-    "Candomblé",
-    "Católico",
-    "Confucionista",
-    "Deísta",
-    "Hindú",
-    "Humanista",
-    "Islamita",
-    "Judeu",
-    "Messiânico",
-    "Panteísta",
-    "Protestante",
-    "Satanista",
-    "Ubandista",
-    "Xinoísta",
-    "Outro"
   ],
   "telephone_fmt": [
     "+351 # #### ####",

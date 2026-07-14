@@ -2257,15 +2257,6 @@
     "Äventyrare",
     "Öva Chef"
   ],
-  "political_views": [
-    "Apatisk",
-    "Kommunist",
-    "Socialist",
-    "Centerpartist",
-    "Liberal",
-    "Konservativ",
-    "Libertarian"
-  ],
   "surnames": [
     "Aaberg",
     "Aalberg",
@@ -3094,22 +3085,6 @@
     "Uppsala universitet (UU)",
     "Örebro teologiska högskola (ÖTH)",
     "Örebro universitet (ÖU)"
-  ],
-  "views_on": [
-    "Mycket negativ",
-    "Negativ",
-    "Kompromissvillig",
-    "Neutral",
-    "Positiv"
-  ],
-  "worldview": [
-    "Agnosticism",
-    "Ateism",
-    "Buddhist",
-    "Katolik",
-    "Panteism",
-    "Protestant",
-    "Sekulär humanism"
   ],
   "telephone_fmt": [
     "+46 ### ### ###",

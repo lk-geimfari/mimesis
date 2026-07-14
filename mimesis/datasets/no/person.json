@@ -4056,15 +4056,6 @@
     "Webmaster",
     "Webutvikler"
   ],
-  "political_views": [
-    "Likegyldig",
-    "Kommunistiske",
-    "Sosialistiske",
-    "Moderate",
-    "Liberale",
-    "Konservative",
-    "Libertarianske"
-  ],
   "surnames": [
     "Aabel",
     "Aaker",
@@ -4493,26 +4484,6 @@
     "University of Tromsø",
     "Volda University College",
     "Østfold University College"
-  ],
-  "views_on": [
-    "Negativ",
-    "Veldig negativ",
-    "Positiv",
-    "Kompromiss",
-    "Nøytral"
-  ],
-  "worldview": [
-    "Agnostisisme",
-    "Ateisme",
-    "Buddhisme",
-    "Humanisme",
-    "Ignostisisme",
-    "Jødedom",
-    "Katolsk kristendom",
-    "Konfusianisme",
-    "Panteisme",
-    "Pastafarianism",
-    "Protestantisk kristendom"
   ],
   "telephone_fmt": [
     "+47 #### ####",

@@ -231,16 +231,6 @@ class MimeType(Enum):
     VIDEO = "video"
 
 
-class MetricPrefixSign(Enum):
-    """Provides prefix signs.
-
-    An argument for :meth:`~mimesis.Science.metric_prefix()``.
-    """
-
-    POSITIVE = "positive"
-    NEGATIVE = "negative"
-
-
 class CountryCode(Enum):
     """Provides types of country codes.
 
@@ -272,35 +262,6 @@ class EANFormat(Enum):
 
     EAN8 = "ean-8"
     EAN13 = "ean-13"
-
-
-class MeasureUnit(Enum):
-    """Provides unit names.
-
-    An argument for :meth:`~mimesis.Science.measure_unit()`.
-    """
-
-    MASS = ("gram", "gr")
-    INFORMATION = ("byte", "b")
-    THERMODYNAMIC_TEMPERATURE = ("kelvin", "K")
-    AMOUNT_OF_SUBSTANCE = ("mole", "mol")
-    ANGLE = ("radian", "r")
-    SOLID_ANGLE = ("steradian", "㏛")
-    FREQUENCY = ("hertz", "Hz")
-    FORCE = ("newton", "N")
-    PRESSURE = ("pascal", "P")
-    ENERGY = ("joule", "J")
-    POWER = ("watt", "W")
-    ELECTRIC_CHARGE = ("coulomb", "C")
-    VOLTAGE = ("volt", "V")
-    ELECTRIC_CAPACITANCE = ("farad", "F")
-    ELECTRIC_RESISTANCE = ("ohm", "Ω")
-    ELECTRICAL_CONDUCTANCE = ("siemens", "S")
-    MAGNETIC_FLUX = ("weber", "Wb")
-    MAGNETIC_FLUX_DENSITY = ("tesla", "T")
-    INDUCTANCE = ("henry", "H")
-    TEMPERATURE = ("Celsius", "°C")
-    RADIOACTIVITY = ("becquerel", "Bq")
 
 
 class NumType(Enum):
