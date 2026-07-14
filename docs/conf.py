@@ -142,7 +142,7 @@ html_show_sphinx = False
 # Furo — modern, developer-friendly theme (works great on Read the Docs).
 # Body: Source Sans 3; monospace: Fira Code.
 html_theme_options = {
-    "sidebar_hide_name": False,
+    "sidebar_hide_name": True,
     "navigation_with_keys": True,
     "top_of_page_button": "edit",
     "source_repository": "https://github.com/lk-geimfari/mimesis/",
