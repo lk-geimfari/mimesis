@@ -12,6 +12,7 @@ from mimesis.builder.resolver import (
     LazyField,
     LazyWeightedChoice,
     NestedSchema,
+    Resolvable,
     SchemaRefProxy,
 )
 from mimesis.enums import TimestampFormat
@@ -44,10 +45,12 @@ class TestLazyPrimitives:
     def test_choice_returns_lazy_choice(self, sb: SchemaBuilder) -> None:
         choice = sb.choice(["a", "b"])
         assert isinstance(choice, LazyChoice)
+        assert repr(choice) == "LazyChoice(['a', 'b'])"
 
     def test_weighted_choice_returns_lazy(self, sb: SchemaBuilder) -> None:
         weighted = sb.weighted_choice(["a", "b"], [0.5, 0.5])
         assert isinstance(weighted, LazyWeightedChoice)
+        assert repr(weighted) == "LazyWeightedChoice(['a', 'b'])"
 
     def test_choice_rejects_empty(self, sb: SchemaBuilder) -> None:
         with pytest.raises(ValueError, match="empty"):
@@ -60,6 +63,32 @@ class TestLazyPrimitives:
     def test_weighted_choice_empty(self, sb: SchemaBuilder) -> None:
         with pytest.raises(ValueError, match="empty"):
             sb.weighted_choice([], [])
+
+    def test_ref_proxy_and_field_repr(self, sb: SchemaBuilder) -> None:
+        users = sb.schema("users", {"id": sb.f("increment")})
+        proxy = sb.ref(users)
+        assert isinstance(proxy, SchemaRefProxy)
+        assert repr(proxy) == "SchemaRefProxy('users')"
+        assert users.name == "users"
+        assert repr(users) == "SchemaRef('users')"
+
+        field_ref = proxy.id
+        assert isinstance(field_ref, FieldRef)
+        assert repr(field_ref) == "FieldRef('users'.'id')"
+
+        nested = users(count=2)
+        assert isinstance(nested, NestedSchema)
+        assert repr(nested) == "NestedSchema('users', count=2)"
+
+    def test_ref_proxy_rejects_private_attrs(self, sb: SchemaBuilder) -> None:
+        users = sb.schema("users", {"id": sb.f("increment")})
+        proxy = sb.ref(users)
+        with pytest.raises(AttributeError, match="_private"):
+            _ = proxy._private
+
+    def test_resolvable_base_raises(self) -> None:
+        with pytest.raises(NotImplementedError):
+            Resolvable._resolve(None, None)  # type: ignore[arg-type]
 
 
 class TestBasicGeneration:
@@ -431,6 +460,27 @@ class TestErrors:
         sb.schema("users", {"id": sb.f("increment")})
         with pytest.raises(ValueError, match="Count"):
             sb.create(users=-1)
+
+    def test_empty_schema_field_ref_raises(self, sb: SchemaBuilder) -> None:
+        users = sb.schema("users", {"id": sb.f("increment")})
+        sb.schema("posts", {"user_id": sb.ref(users).id})
+
+        with pytest.raises(ValueError, match="no items"):
+            sb.create(users=0, posts=1)
+
+    def test_empty_schema_record_ref_raises(self, sb: SchemaBuilder) -> None:
+        users = sb.schema("users", {"id": sb.f("increment")})
+        sb.schema("posts", {"author": sb.ref(users)})
+
+        with pytest.raises(ValueError, match="no items"):
+            sb.create(users=0, posts=1)
+
+    def test_missing_record_dependency(self, sb: SchemaBuilder) -> None:
+        users = sb.schema("users", {"id": sb.f("increment")})
+        sb.schema("posts", {"author": sb.ref(users)})
+
+        with pytest.raises(ValueError, match="not yet generated"):
+            sb.create(posts=1)
 
 
 class TestLifecycle:

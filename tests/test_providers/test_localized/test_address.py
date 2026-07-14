@@ -190,7 +190,7 @@ class TestAddress:
         assert result is not None
         assert result in CALLING_CODES
 
-    def isd_code(self, _address):
+    def test_isd_code(self, _address):
         result = _address.isd_code()
         assert result is not None
         assert result in CALLING_CODES
@@ -282,7 +282,7 @@ class TestSeededAddress:
     def test_calling_code(self, a1, a2):
         assert a1.calling_code() == a2.calling_code()
 
-    def isd_code(self, a1, a2):
+    def test_isd_code(self, a1, a2):
         assert a1.isd_code() == a2.isd_code()
 
     def test_country_emoji_flag(self, a1, a2):

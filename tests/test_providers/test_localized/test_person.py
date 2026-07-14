@@ -36,6 +36,7 @@ class TestPerson:
         "min_year, max_year",
         [
             (1899, 1950),
+            (2000, 1990),
             (datetime.now().year + 1, datetime.now().year + 3),
         ],
     )

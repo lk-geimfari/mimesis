@@ -153,6 +153,24 @@ class TestGeneric:
         for p in providers:
             assert not p.startswith("_")
 
+    def test_getattr_non_callable_returns_none(self, generic):
+        generic._not_a_provider = "literal"
+        assert generic.not_a_provider is None
+
+    def test_reseed_skips_missing_attributes(self, generic, monkeypatch):
+        monkeypatch.setattr(generic, "__dir__", lambda: ["does_not_exist"])
+        generic.reseed(0xABC)
+
+    def test_skips_generic_in_provider_registry(self):
+        from mimesis.providers.base import ProviderRegistry
+
+        ProviderRegistry.register("generic_self", Generic)
+        try:
+            instance = Generic()
+            assert instance is not None
+        finally:
+            ProviderRegistry._providers.pop("generic_self", None)
+
 
 class TestSeededGeneric:
     @pytest.fixture

@@ -466,9 +466,7 @@ class Schema:
             sig = inspect.signature(transformer)
             param_count = len(sig.parameters)
 
-            if param_count == 1:
-                item = transformer(item)
-            elif param_count >= 2:
+            if param_count >= 2:
                 item = transformer(item, ctx)
             else:
                 item = transformer(item)
