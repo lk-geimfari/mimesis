@@ -63,7 +63,7 @@ Performance
 
 Overall, Mimesis is many times faster (≈12 times faster) than Faker and generates more unique data, which is important for testing.
 
-Below you can see the results of a `performance comparison <https://gist.github.com/lk-geimfari/99c5b45906be5299a3088f42c3f55bf4>`_ of Mimesis and Faker:
+Below you can see the results of a `performance comparison <https://github.com/lk-geimfari/mimesis/tree/master/benchmarks>`_ of Mimesis and Faker:
 
 
 Generating 10k full names
