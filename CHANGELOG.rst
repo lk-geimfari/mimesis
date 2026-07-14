@@ -1,21 +1,19 @@
 Version 20.0.0
 --------------
 
-- Added a new declarative ``SchemaBuilder`` under ``mimesis.builder`` for
-  generating related fake data. Features include:
+This release introduces a new schema generation system for relational data.
 
-  - Lazy fields via ``sb.f()``, ``sb.choice()``, and ``sb.weighted_choice()``
-  - Foreign-key and whole-record references via ``sb.ref(schema).field`` /
-    ``sb.ref(schema)``
-  - Nested / embedded schemas via ``schema_ref(count=N)``
-  - Automatic dependency resolution in ``sb.create()``
-  - Lifecycle helpers: ``reseed()``, ``clear()``, and ``reset()``
+**Breaking changes**:
 
-  Import with ``from mimesis import SchemaBuilder``.
+* Added ``SchemaBuilder`` in mimesis.builder.
+* Removed the legacy ``mimesis.schema.SchemaBuilder``.
+* Removed ``SchemaContext.pick_from()`` and ``SchemaContext.ref()``. Existing schemas must be migrated to the new API.
 
-- **Breaking:** Removed the previous ``Schema``-based relational helper
-  (``mimesis.schema.SchemaBuilder``) and ``SchemaContext.pick_from()`` /
-  ``SchemaContext.ref()``. Use the new declarative ``SchemaBuilder`` instead.
+**SchemaBuilder**:
+
+* Supports lazy fields, record references, nested schemas, and automatic dependency resolution.
+* Includes ``reseed()``, ``clear()``, and ``reset()`` helpers.
+* Available via ``from mimesis import SchemaBuilder``.
 
 
 Version 19.1.0

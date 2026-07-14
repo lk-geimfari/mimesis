@@ -1069,6 +1069,29 @@ Schema References
     ``create()`` call. Nested schemas used only via ``schema_ref(count=N)``
     do not need to be passed to ``create()``.
 
+Lifecycle Helpers
+~~~~~~~~~~~~~~~~~
+
+:class:`~mimesis.builder.SchemaBuilder` provides a few helpers for controlling
+state between runs:
+
+- :meth:`~mimesis.builder.SchemaBuilder.reseed` — change the random seed
+- :meth:`~mimesis.builder.SchemaBuilder.clear` — drop generated data, keep
+  schema definitions
+- :meth:`~mimesis.builder.SchemaBuilder.reset` — clear schemas and generated
+  data
+
+.. code-block:: python
+
+    data_a = sb.create(users=5)
+    sb.clear()
+    data_b = sb.create(users=5)  # same schemas, fresh data
+
+    sb.reseed(0xAB)
+    data_c = sb.create(users=5)
+
+    sb.reset()  # definitions are gone; call sb.schema() again
+
 Complex Relational Example
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
