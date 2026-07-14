@@ -1,9 +1,11 @@
 """Provides data related to text."""
+
 import typing as t
 
 from mimesis.datasets import SAFE_COLORS
 from mimesis.enums import EmojiCategory
 from mimesis.providers.base import BaseDataProvider
+
 
 __all__ = ["Text"]
 

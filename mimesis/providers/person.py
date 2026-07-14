@@ -19,6 +19,7 @@ from mimesis.enums import Gender, TitleType
 from mimesis.providers.base import BaseDataProvider
 from mimesis.types import Date
 
+
 __all__ = ["Person"]
 
 
@@ -219,11 +220,11 @@ class Person(BaseDataProvider):
         :return: Username as string.
 
         Example:
-            >>> username(mask='C_C_d')
+            >>> username(mask="C_C_d")
             Cotte_Article_1923
-            >>> username(mask='U.l.d')
+            >>> username(mask="U.l.d")
             ELKINS.wolverine.2013
-            >>> username(mask='l_l_d', drange=(1900, 2021))
+            >>> username(mask="l_l_d", drange=(1900, 2021))
             plasmic_blockader_1907
         """
         if len(drange) != 2:
@@ -304,10 +305,7 @@ class Person(BaseDataProvider):
         if not domain.startswith("@"):
             domain = "@" + domain
 
-        if unique:
-            name = str(uuid.uuid4().hex)
-        else:
-            name = self.username(mask="ld")
+        name = str(uuid.uuid4().hex) if unique else self.username(mask="ld")
 
         return f"{name}{domain}"
 

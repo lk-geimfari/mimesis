@@ -9,7 +9,7 @@ there is no guarantee that you will get the result which you actually expected.
 
 Below, you can see an example of using enums in methods of data providers.
 """
-import typing as t
+
 from enum import Enum, auto
 
 
@@ -117,7 +117,8 @@ class Locale(Enum):
     DEFAULT = EN
 
     @classmethod
-    def values(cls) -> t.List[str]:
+    def values(cls) -> list[str]:
+        """Return a list of all locale values."""
         return [i.value for i in cls.__members__.values()]
 
 
@@ -290,7 +291,7 @@ class MeasureUnit(Enum):
     PRESSURE = ("pascal", "P")
     ENERGY = ("joule", "J")
     POWER = ("watt", "W")
-    FLUX = ("watt", "W")
+    FLUX = ("watt", "W")  # noqa: PIE796
     ELECTRIC_CHARGE = ("coulomb", "C")
     VOLTAGE = ("volt", "V")
     ELECTRIC_CAPACITANCE = ("farad", "F")
@@ -401,6 +402,11 @@ class TimezoneRegion(Enum):
 
 
 class DSNType(Enum):
+    """Provides DSN types for database connections.
+
+    An argument for :meth:`~mimesis.Internet.dsn()`.
+    """
+
     POSTGRES = ("postgres", 5432)
     MYSQL = ("mysql", 3306)
     MONGODB = ("mongodb", 27017)
@@ -411,14 +417,24 @@ class DSNType(Enum):
 
 
 class TimestampFormat(Enum):
+    """Provides timestamp output formats.
+
+    An argument for :meth:`~mimesis.Datetime.timestamp()`.
+    """
+
     POSIX = auto()
     ISO_8601 = auto()
     RFC_3339 = auto()
 
 
 class EmojiCategory(Enum):
+    """Provides emoji categories.
+
+    An argument for :meth:`~mimesis.Internet.emoji()`.
+    """
+
     DEFAULT = "smileys_and_emotion"
-    SMILEYS_AND_EMOTION = "smileys_and_emotion"
+    SMILEYS_AND_EMOTION = "smileys_and_emotion"  # noqa: PIE796
     PEOPLE_AND_BODY = "people_and_body"
     ANIMALS_AND_NATURE = "animals_and_nature"
     FOOD_AND_DRINK = "food_and_drink"

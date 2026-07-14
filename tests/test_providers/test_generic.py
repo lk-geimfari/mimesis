@@ -51,7 +51,7 @@ class TestGeneric:
 
     def test_bad_argument(self, generic):
         with pytest.raises(AttributeError):
-            _ = generic.bad_argument  # noqa
+            _ = generic.bad_argument
 
     def test_add_providers(self, generic):
         class Provider1(BaseProvider):
@@ -83,8 +83,7 @@ class TestGeneric:
 
         class Provider4:
             @staticmethod
-            def empty():
-                ...
+            def empty(): ...
 
         class Provider5(BaseProvider):
             class Meta:

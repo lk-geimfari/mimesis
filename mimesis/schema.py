@@ -5,7 +5,9 @@ import inspect
 import json
 import pickle
 import re
-from typing import Any, Callable, Sequence
+from collections.abc import Callable, Sequence
+from pathlib import Path
+from typing import Any
 
 from mimesis.exceptions import (
     AliasesTypeError,
@@ -21,15 +23,16 @@ from mimesis.providers.generic import Generic
 from mimesis.random import Random
 from mimesis.types import JSON, CallableSchema, Key, MissingSeed, Seed
 
+
 __all__ = [
     "BaseField",
     "Field",
-    "Fieldset",
-    "Schema",
-    "SchemaContext",
     "FieldHandler",
+    "Fieldset",
     "RegisterableFieldHandler",
     "RegisterableFieldHandlers",
+    "Schema",
+    "SchemaContext",
 ]
 
 FieldCache = dict[str, Callable[[Any], Any]]
@@ -39,6 +42,8 @@ RegisterableFieldHandlers = Sequence[RegisterableFieldHandler]
 
 
 class BaseField:
+    """Base class for field and fieldset generators."""
+
     def __init__(
         self,
         locale: Locale = Locale.DEFAULT,
@@ -86,8 +91,8 @@ class BaseField:
         try:
             provider = getattr(self._generic, provider_name)
             return getattr(provider, method_name)
-        except AttributeError:
-            raise FieldError(name)
+        except AttributeError as err:
+            raise FieldError(name) from err
 
     def _fuzzy_lookup(self, name: str) -> Any:
         """A fuzzy method lookup.
@@ -99,11 +104,10 @@ class BaseField:
         :return: Callable object.
         :raise FieldError: When field is invalid.
         """
-        for provider in dir(self._generic):
-            provider = getattr(self._generic, provider)
-            if isinstance(provider, BaseProvider):
-                if name in dir(provider):
-                    return getattr(provider, name)
+        for provider_name in dir(self._generic):
+            provider = getattr(self._generic, provider_name)
+            if isinstance(provider, BaseProvider) and name in dir(provider):
+                return getattr(provider, name)
 
         raise FieldError(name)
 
@@ -140,7 +144,7 @@ class BaseField:
         ):
             # Reset to valid state
             self.aliases = {}
-            raise AliasesTypeError()
+            raise AliasesTypeError
         return True
 
     def perform(
@@ -188,13 +192,13 @@ class BaseField:
         self._validate_aliases()
 
         if name is None:
-            raise FieldError()
+            raise FieldError
 
         random = self.get_random_instance()
 
         # First, try to find a custom field handler.
         if name in self._handlers:
-            result = self._handlers[name](random, **kwargs)  # type: ignore
+            result = self._handlers[name](random, **kwargs)  # type: ignore[call-arg]
         else:
             result = self._lookup_method(name)(**kwargs)
 
@@ -202,7 +206,7 @@ class BaseField:
             try:
                 # If a key function accepts two parameters
                 # then pass random instance to it.
-                return key(result, random)  # type: ignore
+                return key(result, random)  # type: ignore[call-arg]
             except TypeError:
                 return key(result)
 
@@ -214,7 +218,6 @@ class BaseField:
         :param field_name: Name of the field.
         :param field_handler: Callable object.
         """
-
         if not isinstance(field_name, str):
             raise TypeError("Field name must be a string.")
 
@@ -227,7 +230,7 @@ class BaseField:
         callable_signature = inspect.signature(field_handler)
 
         if len(callable_signature.parameters) <= 1:
-            raise FieldArityError()
+            raise FieldArityError
 
         if field_name not in self._handlers:
             self._handlers[field_name] = field_handler
@@ -268,7 +271,6 @@ class BaseField:
 
         :param field_name: Name of the field.
         """
-
         self._handlers.pop(field_name, None)
 
     def unregister_handlers(self, field_names: Sequence[str] = ()) -> None:
@@ -277,7 +279,6 @@ class BaseField:
         :param field_names: Names of the fields.
         :return: None.
         """
-
         for name in field_names:
             self.unregister_handler(name)
 
@@ -304,18 +305,20 @@ class Field(BaseField):
         >>> for i in range(1000):
         ...     field = Field()
 
-        You're doing it **wrong**! It is a terrible idea that will lead to a memory leak.
+        You're doing it **wrong**! It is a terrible idea that will lead
+        to a memory leak.
 
         Forewarned is forearmed.
 
     Here is an example of how to use it:
 
         >>> _ = Field()
-        >>> _('username')
+        >>> _("username")
         Dogtag_1836
     """
 
     def __call__(self, *args: Any, **kwargs: Any) -> Any:
+        """Generate a field value."""
         return self.perform(*args, **kwargs)
 
 
@@ -327,14 +330,14 @@ class Fieldset(BaseField):
     Here is an example:
 
         >>> fieldset = Fieldset(i=100)
-        >>> fieldset('username')
+        >>> fieldset("username")
         ['pot_1821', 'vhs_1915', ..., 'reviewed_1849']
 
     You may also specify the number of iterations by passing the **i** keyword
     argument to the callable instance of fieldset:
 
         >>> fieldset = Fieldset()
-        >>> fieldset('username', i=2)
+        >>> fieldset("username", i=2)
         ['pot_1821', 'vhs_1915']
 
     When **i** is not specified, the reasonable default is used — **10**.
@@ -378,7 +381,7 @@ class Fieldset(BaseField):
         )
 
         if iterations < min_iterations:
-            raise FieldsetError()
+            raise FieldsetError
 
         return [self.perform(*args, **kwargs) for _ in range(iterations)]
 
@@ -386,7 +389,7 @@ class Fieldset(BaseField):
 class SchemaContext:
     """Context object passed to transformation functions."""
 
-    __slots__ = ("index", "iteration", "timestamp", "seed", "custom")
+    __slots__ = ("custom", "index", "iteration", "seed", "timestamp")
 
     def __init__(
         self,
@@ -410,12 +413,12 @@ class Schema:
     """Class which returns a list of filled schemas."""
 
     __slots__ = (
-        "iterations",
-        "_transformers",
         "__counter",
         "__schema",
         "__seed",
         "_custom_context",
+        "_transformers",
+        "iterations",
     )
 
     def __init__(
@@ -434,7 +437,7 @@ class Schema:
             raise ValueError("Number of iterations should be greater than 1.")
 
         if not callable(schema):
-            raise SchemaError()
+            raise SchemaError
 
         self.__schema = schema
         self.__seed = seed
@@ -489,7 +492,7 @@ class Schema:
         :param kwargs: The keyword arguments for :py:class:`csv.DictWriter` class.
         """
         data = self.create()
-        with open(file_path, "w", encoding="utf-8", newline="") as fp:
+        with Path(file_path).open("w", encoding="utf-8", newline="") as fp:
             fieldnames = list(data[0])
             dict_writer = csv.DictWriter(fp, fieldnames, **kwargs)
             dict_writer.writeheader()
@@ -501,7 +504,7 @@ class Schema:
         :param file_path: File path.
         :param kwargs: Extra keyword arguments for :py:func:`json.dump` class.
         """
-        with open(file_path, "w", encoding="utf-8") as fp:
+        with Path(file_path).open("w", encoding="utf-8") as fp:
             json.dump(self.create(), fp, **kwargs)
 
     def to_pickle(self, file_path: str, **kwargs: Any) -> None:
@@ -510,7 +513,7 @@ class Schema:
         :param file_path: The file path.
         :param kwargs: Extra keyword arguments for :py:func:`pickle.dump` class.
         """
-        with open(file_path, "wb") as fp:
+        with Path(file_path).open("wb") as fp:
             pickle.dump(self.create(), fp, **kwargs)
 
     def _create_item(self, index: int) -> JSON:
@@ -526,8 +529,7 @@ class Schema:
         )
 
         result = self.__schema()
-        result = self._apply_transformers(result, ctx)
-        return result
+        return self._apply_transformers(result, ctx)
 
     def create(self) -> list[JSON]:
         """Creates a list of filled schemas.

@@ -12,6 +12,7 @@ from mimesis.exceptions import NonEnumerableError
 from mimesis.locales import Locale, validate_locale
 from mimesis.types import JSON, MissingSeed, Seed
 
+
 __all__ = ["BaseDataProvider", "BaseProvider", "ProviderRegistry"]
 
 
@@ -53,7 +54,6 @@ class ProviderRegistry:
 
 class BaseProvider:
     """This is a base class for all providers.
-
 
     :attr: random: An instance of :class:`mimesis.random.Random`.
     :attr: seed: Seed for random.
@@ -118,9 +118,9 @@ class BaseProvider:
         if seed is MissingSeed:
             # Remove casts after mypy will fix this inference:
             if _random.global_seed is not MissingSeed:
-                self.random.seed(t.cast(t.Any, _random.global_seed))
+                self.random.seed(t.cast("t.Any", _random.global_seed))
         else:
-            self.random.seed(t.cast(t.Any, seed))
+            self.random.seed(t.cast("t.Any", seed))
 
     def validate_enum(self, item: t.Any, enum: t.Any) -> t.Any:
         """Validates various enum objects that are used as arguments for methods.
@@ -148,10 +148,8 @@ class BaseProvider:
         :raises FileNotFoundError: If the file was not found.
         :return: JSON data.
         """
-        with open(DATADIR.joinpath("global", file_name)) as f:
-            data = json.load(f)
-
-        return data
+        with DATADIR.joinpath("global", file_name).open() as f:
+            return json.load(f)
 
     def _has_seed(self) -> bool:
         """Internal API to check if seed is set."""
@@ -179,7 +177,7 @@ class BaseDataProvider(BaseProvider):
         :param locale: Current locale.
         :param seed: Seed for all the random functions.
         """
-        super().__init__(seed=seed, *args, **kwargs)
+        super().__init__(*args, seed=seed, **kwargs)
         # This is a dict with data
         # loaded from the JSON file.
         self._dataset: JSON = {}
@@ -195,7 +193,6 @@ class BaseDataProvider(BaseProvider):
         :raises UnsupportedLocale: When locale not supported.
         :return: Nothing.
         """
-
         locale_obj = validate_locale(locale)
         self.locale = locale_obj.value
 
@@ -224,7 +221,7 @@ class BaseDataProvider(BaseProvider):
             if isinstance(v, dict):
                 initial[k] = self._update_dict(initial.get(k, {}), v)
             else:
-                initial[k] = other[k]
+                initial[k] = v
         return initial
 
     def _load_dataset(self) -> None:
@@ -238,11 +235,11 @@ class BaseDataProvider(BaseProvider):
         datadir = getattr(self.Meta, "datadir", DATADIR)
 
         if not datafile:
-            return None
+            return
 
         def read_file(locale_name: str) -> t.Any:
             file_path = datadir / locale_name / datafile
-            with open(file_path, encoding="utf8") as f:
+            with file_path.open(encoding="utf8") as f:
                 return json.load(f)
 
         master_locale = locale.split(LOCALE_SEP).pop(0)
@@ -277,7 +274,9 @@ class BaseDataProvider(BaseProvider):
         return self.locale
 
     def _override_locale(self, locale: Locale = Locale.DEFAULT) -> None:
-        """Overrides the current locale with the given one and loads data for the new locale.
+        """Overrides the current locale with the given one.
+
+        Loads data for the new locale.
 
         :param locale: Locale
         :return: Nothing.
@@ -305,8 +304,10 @@ class BaseDataProvider(BaseProvider):
                 yield self
             finally:
                 self._override_locale(origin_locale)
-        except AttributeError:
-            raise ValueError(f"«{self.__class__.__name__}» has not locale dependent")
+        except AttributeError as err:
+            raise ValueError(
+                f"«{self.__class__.__name__}» has not locale dependent",
+            ) from err
 
     def __str__(self) -> str:
         """Human-readable representation of locale."""

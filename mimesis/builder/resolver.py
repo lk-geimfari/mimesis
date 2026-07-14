@@ -1,18 +1,21 @@
 """Lazy evaluation types for SchemaBuilder."""
+
 from abc import ABC, abstractmethod
-from typing import TYPE_CHECKING, Any, Sequence
+from collections.abc import Sequence
+from typing import TYPE_CHECKING, Any
+
 
 if TYPE_CHECKING:
     from mimesis.builder.core import SchemaBuilder
 
 __all__ = [
-    "Resolvable",
-    "LazyField",
-    "LazyChoice",
-    "LazyWeightedChoice",
     "FieldRef",
-    "SchemaRefProxy",
+    "LazyChoice",
+    "LazyField",
+    "LazyWeightedChoice",
     "NestedSchema",
+    "Resolvable",
+    "SchemaRefProxy",
 ]
 
 
@@ -41,7 +44,7 @@ class LazyField(Resolvable):
         sb.f("integer_number", start=1, end=100)
     """
 
-    __slots__ = ("_name", "_key", "_kwargs")
+    __slots__ = ("_key", "_kwargs", "_name")
 
     def __init__(
         self,
@@ -119,7 +122,7 @@ class FieldRef(Resolvable):
         sb.ref(users).id  # Returns FieldRef
     """
 
-    __slots__ = ("_schema_name", "_field_name")
+    __slots__ = ("_field_name", "_schema_name")
 
     def __init__(self, schema_name: str, field_name: str) -> None:
         self._schema_name = schema_name
@@ -172,13 +175,16 @@ class NestedSchema(Resolvable):
     Example::
 
         addresses = sb.schema("addresses", {"city": sb.f("city")})
-        users = sb.schema("users", {
-            "name": sb.f("full_name"),
-            "addresses": addresses(count=3),
-        })
+        users = sb.schema(
+            "users",
+            {
+                "name": sb.f("full_name"),
+                "addresses": addresses(count=3),
+            },
+        )
     """
 
-    __slots__ = ("_schema_name", "_definition", "_count")
+    __slots__ = ("_count", "_definition", "_schema_name")
 
     def __init__(
         self,

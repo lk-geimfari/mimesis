@@ -2,6 +2,7 @@
 
 from mimesis.providers.base import BaseDataProvider
 
+
 __all__ = ["Food"]
 
 

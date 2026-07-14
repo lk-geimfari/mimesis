@@ -1,8 +1,9 @@
 import json
+from collections.abc import Iterable
 from pathlib import Path
-from typing import Iterable
 
 from colorama import Fore, Style
+
 
 MIMESIS_DIR = Path(__file__).parent.parent.joinpath("mimesis")
 
@@ -56,7 +57,7 @@ class Minimizer:
 
         rel_file = file.relative_to(file.parent.parent)
         info = (
-            f"{Fore.BLUE}{str(rel_file):<30}{Style.RESET_ALL} : "
+            f"{Fore.BLUE}{rel_file!s:<30}{Style.RESET_ALL} : "
             f"{Fore.LIGHTGREEN_EX}minimized{Style.RESET_ALL} : "
             f"{Fore.YELLOW}{before:<7}{Style.RESET_ALL} -> {Fore.LIGHTGREEN_EX}{after:<7}{Style.RESET_ALL}"
         )

@@ -4,6 +4,7 @@ from typing import Any
 
 from mimesis.builder.resolver import NestedSchema
 
+
 __all__ = ["SchemaRef"]
 
 
@@ -19,17 +20,23 @@ class SchemaRef:
 
         users = sb.schema("users", {"id": sb.f("increment")})
 
-        posts = sb.schema("posts", {
-            "user_id": sb.ref(users).id,  # Foreign key
-        })
+        posts = sb.schema(
+            "posts",
+            {
+                "user_id": sb.ref(users).id,  # Foreign key
+            },
+        )
 
-        companies = sb.schema("companies", {
-            "name": sb.f("company"),
-            "employees": users(count=5),  # Nested users
-        })
+        companies = sb.schema(
+            "companies",
+            {
+                "name": sb.f("company"),
+                "employees": users(count=5),  # Nested users
+            },
+        )
     """
 
-    __slots__ = ("_name", "_definition")
+    __slots__ = ("_definition", "_name")
 
     def __init__(self, name: str, definition: dict[str, Any]) -> None:
         """Initialize schema reference.
@@ -42,6 +49,7 @@ class SchemaRef:
 
     @property
     def name(self) -> str:
+        """Return the schema name."""
         return self._name
 
     def __call__(self, *, count: int = 1) -> NestedSchema:

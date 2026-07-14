@@ -4,6 +4,7 @@ from mimesis.datasets import SI_PREFIXES, SI_PREFIXES_SYM
 from mimesis.enums import MeasureUnit, MetricPrefixSign
 from mimesis.providers.base import BaseProvider
 
+
 __all__ = ["Science"]
 
 
@@ -22,7 +23,7 @@ class Science(BaseProvider):
         :Example:
             AGUGACACAA
         """
-        return self.random._generate_string("UCGA", length)
+        return "".join(self.random.choices("UCGA", k=length))
 
     def dna_sequence(self, length: int = 10) -> str:
         """Generates a random DNA sequence.
@@ -33,7 +34,7 @@ class Science(BaseProvider):
         :Example:
             GCTTTAGACC
         """
-        return self.random._generate_string("TCGA", length)
+        return "".join(self.random.choices("TCGA", k=length))
 
     def measure_unit(
         self,

@@ -24,6 +24,7 @@ from mimesis.schema import Field, Fieldset, Schema, SchemaContext
 from mimesis.types import MissingSeed
 from tests.test_providers.patterns import DATA_PROVIDER_STR_REGEX
 
+
 if TYPE_CHECKING:
     from pathlib import Path
 
@@ -150,7 +151,7 @@ def test_field_with_key_function_two_parameters(localized_field):
         return f"{value}_{random.randint(1, 100)}"
 
     result = localized_field("person.name", key=key_function)
-    name, number = result.split("_")
+    _name, number = result.split("_")
     assert isinstance(result, str)
     assert 1 <= int(number) <= 100
 
@@ -263,7 +264,7 @@ def test_lookup_method_field_error(localized_field, field_name):
 )
 def test_schema_instantiation_raises_schema_error(invalid_schema):
     with pytest.raises(SchemaError):
-        Schema(schema=invalid_schema)  # type: ignore
+        Schema(schema=invalid_schema)  # type: ignore[arg-type]
 
 
 def test_schema_instantiation_raises_value_error():
@@ -535,7 +536,7 @@ def test_field_aliasing(default_field):
         {b"hey": "email"},
         None,
         [],
-        tuple(),
+        (),
     ],
 )
 def test_field_invalid_aliases(default_field, aliases):

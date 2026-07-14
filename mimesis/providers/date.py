@@ -10,6 +10,7 @@ from mimesis.enums import DurationUnit, TimestampFormat, TimezoneRegion
 from mimesis.providers.base import BaseDataProvider
 from mimesis.types import Date, DateTime, Time
 
+
 __all__ = ["Datetime"]
 
 
@@ -142,8 +143,7 @@ class Datetime(BaseDataProvider):
         year = self.random.randint(start, end)
         month = self.random.randint(1, 12)
         day = self.random.randint(1, monthrange(year, month)[1])
-        date_object = date(year, month, day)
-        return date_object
+        return date(year, month, day)
 
     def formatted_date(self, fmt: str = "", **kwargs: t.Any) -> str:
         """Generates a random date as a string.
@@ -165,13 +165,12 @@ class Datetime(BaseDataProvider):
 
         :return: ``datetime.time`` object.
         """
-        random_time = time(
+        return time(
             self.random.randint(0, 23),
             self.random.randint(0, 59),
             self.random.randint(0, 59),
             self.random.randint(0, 999999),
         )
-        return random_time
 
     def formatted_time(self, fmt: str = "") -> str:
         """Generates formatted time as a string.
@@ -264,7 +263,6 @@ class Datetime(BaseDataProvider):
         - TimestampFormat.ISO_8601
 
         Example:
-
         >>> from mimesis import Datetime
         >>> from mimesis.enums import TimestampFormat
         >>> dt = Datetime()
@@ -284,10 +282,9 @@ class Datetime(BaseDataProvider):
 
         if fmt == TimestampFormat.RFC_3339:
             return stamp.strftime("%Y-%m-%dT%H:%M:%SZ")
-        elif fmt == TimestampFormat.ISO_8601:
+        if fmt == TimestampFormat.ISO_8601:
             return stamp.isoformat()
-        else:
-            return int(stamp.timestamp())
+        return int(stamp.timestamp())
 
     def future_date(self, days: int = 30) -> Date:
         """Generates a random date in the future.
@@ -295,7 +292,11 @@ class Datetime(BaseDataProvider):
         :param days: Maximum number of days in the future.
         :return: A date object between tomorrow and `days` from now.
         """
-        return self.future_datetime(days).date()
+        today = date.today()
+        start = today + timedelta(days=1)
+        end = today + timedelta(days=days)
+        offset = self.random.randint(0, (end - start).days)
+        return start + timedelta(days=offset)
 
     def future_datetime(
         self,
@@ -331,7 +332,11 @@ class Datetime(BaseDataProvider):
         :param days: Maximum number of days in the past.
         :return: A date object between `days` ago and yesterday.
         """
-        return self.past_datetime(days).date()
+        today = date.today()
+        start = today - timedelta(days=days)
+        end = today - timedelta(days=1)
+        offset = self.random.randint(0, (end - start).days)
+        return start + timedelta(days=offset)
 
     def past_datetime(
         self,

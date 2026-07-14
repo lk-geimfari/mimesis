@@ -524,14 +524,12 @@ class TestComplexSchemas:
             {
                 "id": sb.f("increment"),
                 "customer_id": sb.ref(customers).id,
-                "status": sb.choice(
-                    ["pending", "paid", "shipped", "cancelled"]
-                ),
+                "status": sb.choice(["pending", "paid", "shipped", "cancelled"]),
                 "total": sb.f("price", minimum=10.0, maximum=2000.0),
             },
         )
 
-        order_items = sb.schema(
+        sb.schema(
             "order_items",
             {
                 "id": sb.f("increment"),
@@ -614,7 +612,7 @@ class TestComplexSchemas:
             },
         )
 
-        comments = sb.schema(
+        sb.schema(
             "comments",
             {
                 "id": sb.f("increment"),

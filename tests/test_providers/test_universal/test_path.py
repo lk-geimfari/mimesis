@@ -9,11 +9,11 @@ from mimesis.datasets import FOLDERS, PROGRAMMING_LANGS, PROJECT_NAMES
 class TestPath:
     def test_root(self, path):
         result = path.root()
-        assert result == "C:\\" or result == "/"
+        assert result in {"C:\\", "/"}
 
     def test_home(self, path):
         result = path.home()
-        assert result == "C:\\Users" or result == "/home"
+        assert result in {"C:\\Users", "/home"}
 
     def test_user(self, path):
         user = path.user()

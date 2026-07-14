@@ -10,6 +10,7 @@ import typing as t
 
 from mimesis.types import MissingSeed, Seed
 
+
 __all__ = ["Random", "random"]
 
 #: Different plugins (like `pytest-randomly`)
@@ -68,8 +69,7 @@ class Random(random_module.Random):
 
         if char_code == digit_code:
             raise ValueError(
-                "The same placeholder cannot be "
-                "used for both numbers and characters."
+                "The same placeholder cannot be used for both numbers and characters."
             )
 
         _mask = mask.encode()

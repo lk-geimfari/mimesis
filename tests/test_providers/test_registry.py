@@ -157,7 +157,7 @@ class TestProviderSynchronization:
         }
 
         registered_classes = set()
-        for name, cls in ProviderRegistry.get_all().items():
+        for cls in ProviderRegistry.get_all().values():
             if cls.__name__ in exported:
                 registered_classes.add(cls.__name__)
 

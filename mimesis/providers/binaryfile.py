@@ -12,6 +12,7 @@ from mimesis.enums import (
 )
 from mimesis.providers.base import BaseProvider
 
+
 __all__ = ["BinaryFile"]
 
 
@@ -37,7 +38,7 @@ class BinaryFile(BaseProvider):
         file_type = self.validate_enum(file_type, file_type.__class__)
         file_path = DATADIR / "bin" / f"sample.{file_type}"
 
-        with open(file_path, "rb") as file:
+        with file_path.open("rb") as file:
             return file.read()
 
     def video(self, *, file_type: VideoFile = VideoFile.MP4) -> bytes:

@@ -18,7 +18,7 @@ from .. import patterns
 
 
 class TestFinance:
-    @pytest.fixture()
+    @pytest.fixture
     def _finance(self):
         return Finance()
 
@@ -121,11 +121,11 @@ class TestFinance:
 
 
 class TestSeededFinance:
-    @pytest.fixture()
+    @pytest.fixture
     def f1(self, seed):
         return Finance(seed=seed)
 
-    @pytest.fixture()
+    @pytest.fixture
     def f2(self, seed):
         return Finance(seed=seed)
 

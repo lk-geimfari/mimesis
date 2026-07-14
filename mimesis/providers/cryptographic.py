@@ -11,6 +11,7 @@ from mimesis.datasets.int.cryptographic import WORDLIST
 from mimesis.enums import Algorithm
 from mimesis.providers.base import BaseProvider
 
+
 __all__ = ["Cryptographic"]
 
 
@@ -35,7 +36,7 @@ class Cryptographic(BaseProvider):
         """
         return str(self.uuid_object())
 
-    def hash(self, algorithm: Algorithm | None = None) -> str:  # noqa: A003
+    def hash(self, algorithm: Algorithm | None = None) -> str:
         """Generates random hash.
 
         To change hashing algorithm, pass parameter ``algorithm``
@@ -103,12 +104,11 @@ class Cryptographic(BaseProvider):
         :return: JWT-like token string.
 
         Example:
-
             >>> from mimesis import Cryptographic
             >>> crypto = Cryptographic()
             >>> crypto.jwt()
             'eyJhbGc...'
-            >>> crypto.jwt(payload={'user_id': 123, 'role': 'admin'})
+            >>> crypto.jwt(payload={"user_id": 123, "role": "admin"})
             'eyJhbGc...'
         """
         header = {
@@ -141,14 +141,13 @@ class Cryptographic(BaseProvider):
         :raises ValueError: If format is not 'hex' or 'base64'.
 
         Example:
-
             >>> from mimesis import Cryptographic
             >>> crypto = Cryptographic()
             >>> crypto.api_key()
             'a3d2f5e8b9c1d4e7f0a2b5c8d1e4f7a0'
-            >>> crypto.api_key(prefix='sk_')
+            >>> crypto.api_key(prefix="sk_")
             'sk_a3d2f5e8b9c1d4e7f0a2b5c8d1e4f7a0'
-            >>> crypto.api_key(prefix='pk_', format='base64')
+            >>> crypto.api_key(prefix="pk_", format="base64")
             'pk_dGVzdGluZ3Rlc3Rpbmc'
         """
         if fmt == "hex":
@@ -168,12 +167,11 @@ class Cryptographic(BaseProvider):
         :raises ValueError: If algorithm is not supported.
 
         Example:
-
             >>> from mimesis import Cryptographic
             >>> crypto = Cryptographic()
             >>> crypto.certificate_fingerprint()
             'A3:D2:F5:E8:B9:C1:D4:E7:F0:A2:B5:C8:D1:E4:F7:A0'
-            >>> crypto.certificate_fingerprint(algorithm='sha1')
+            >>> crypto.certificate_fingerprint(algorithm="sha1")
             'A3:D2:F5:E8:B9:C1:D4:E7:F0:A2:B5:C8:D1:E4:F7:A0:B1:C2:D3:E4'
         """
         if algorithm == "sha256":

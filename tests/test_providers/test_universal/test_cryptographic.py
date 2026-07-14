@@ -78,7 +78,7 @@ class TestCryptographic:
         result = crypto.mnemonic_phrase()
         assert isinstance(result, str)
         phrase_len = len(result.split(" "))
-        assert phrase_len == 12 or phrase_len == 24
+        assert phrase_len in {12, 24}
 
     def test_jwt_default(self, crypto):
         result = crypto.jwt()

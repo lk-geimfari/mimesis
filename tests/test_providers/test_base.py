@@ -39,9 +39,8 @@ class TestBase:
         assert "Жен." not in provider._dataset["gender"]
 
         del provider.locale
-        with pytest.raises(ValueError):
-            with provider.override_locale(new_locale):
-                pass
+        with pytest.raises(ValueError), provider.override_locale(new_locale):
+            pass
 
     @pytest.mark.parametrize(
         "data, keys_count, values_count",
@@ -67,16 +66,15 @@ class TestBase:
         assert len(base_data_provider._dataset.keys()) == keys_count + 1
         assert len(base_data_provider._dataset.keys()) == values_count + 1
 
-    @pytest.mark.parametrize("data", [set(), [], "", tuple()])
+    @pytest.mark.parametrize("data", [set(), [], "", ()])
     def test_update_dataset_raises_error(self, base_data_provider, data):
         with pytest.raises(TypeError):
             base_data_provider.update_dataset(data=data)
 
     def test_override_missing_locale_argument(self):
         provider = Person(Locale.EN)
-        with pytest.raises(TypeError):
-            with provider.override_locale():
-                pass
+        with pytest.raises(TypeError), provider.override_locale():
+            pass
 
     @pytest.mark.parametrize(
         "provider",
@@ -87,9 +85,8 @@ class TestBase:
         ],
     )
     def test_override_locale_independent(self, provider):
-        with pytest.raises(AttributeError):
-            with provider.override_locale():
-                pass
+        with pytest.raises(AttributeError), provider.override_locale():
+            pass
 
     @pytest.mark.parametrize(
         "locale, city",
@@ -125,8 +122,8 @@ class TestBase:
 
         base_data_provider._dataset = dictionary
 
-        a = list(sorted(dictionary["names"].keys()))
-        b = list(sorted(base_data_provider._extract(["names"]).keys()))
+        a = sorted(dictionary["names"].keys())
+        b = sorted(base_data_provider._extract(["names"]).keys())
 
         assert base_data_provider._extract(["names", "male"]) == "John"
         assert base_data_provider._extract(["names", "female"]) == "Ariel"
@@ -235,7 +232,7 @@ class TestBase:
             datadir.mkdir(parents=True, exist_ok=True)
             file_data = {"key": ["value", "value2", "value3"]}
 
-            with open(datadir / "data.json", "w") as f:
+            with (datadir / "data.json").open("w") as f:
                 json.dump(file_data, f)
 
             class CustomDataProvider(BaseDataProvider):

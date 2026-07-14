@@ -5,10 +5,11 @@ from pytest_factoryboy import register
 
 from mimesis.plugins.factory import FactoryField
 
+
 TEST_USERNAMES = ("sobolevn", "lk-geimfari")
 
 
-class Account(object):
+class Account:
     def __init__(self, uid, username, email):
         self.uid = uid
         self.username = username
@@ -17,7 +18,7 @@ class Account(object):
 
 @register
 class AccountFactory(factory.Factory):
-    class Meta(object):
+    class Meta:
         model = Account
         exclude = ("_domain",)
 
@@ -25,10 +26,7 @@ class AccountFactory(factory.Factory):
     username = FactoryField("username")
     _domain = FactoryField("top_level_domain")
     email = factory.LazyAttribute(
-        lambda instance: "{0}@example{1}".format(
-            instance.username,
-            instance._domain,  # noqa: WPS437
-        ),
+        lambda instance: f"{instance.username}@example{instance._domain}",
     )
 
 
@@ -110,6 +108,7 @@ def test_account_data_overrides(account):
     zip(
         TEST_USERNAMES,
         range(10000, 10003),
+        strict=False,
     ),
 )
 def test_account_multiple_data_overrides(account):
@@ -124,4 +123,4 @@ def test_account_multiple_data_overrides(account):
 
 def test_account_excluded_data(account):
     with pytest.raises(AttributeError):
-        account._domain  # noqa: WPS428, WPS437
+        _ = account._domain

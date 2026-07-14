@@ -38,6 +38,7 @@ from mimesis.providers.file import File
 from mimesis.providers.text import Text
 from mimesis.types import Keywords
 
+
 __all__ = ["Internet"]
 
 
@@ -281,10 +282,7 @@ class Internet(BaseProvider):
         :param keywords: Sequence of search keywords.
         :return: URL of the image.
         """
-        if keywords is not None:
-            keywords_str = ",".join(keywords)
-        else:
-            keywords_str = ""
+        keywords_str = ",".join(keywords) if keywords is not None else ""
 
         return f"https://source.unsplash.com/{width}x{height}?{keywords_str}"
 
@@ -349,9 +347,7 @@ class Internet(BaseProvider):
         :return: URI.
         """
         directory = (
-            self._datetime.date(start=2010, end=self._datetime._CURRENT_YEAR)
-            .strftime("%Y-%m-%d")
-            .replace("-", "/")
+            self._datetime.date(start=2010).strftime("%Y-%m-%d").replace("-", "/")
         )
         url = self.url(scheme, None, tld_type, subdomains)
         uri = f"{url}{directory}/{self.slug()}"
@@ -390,7 +386,9 @@ class Internet(BaseProvider):
         if length > 32:
             raise ValueError("Maximum allowed length of query parameters is 32.")
 
-        return dict(zip(pick_unique_words(length), self._text.words(length)))
+        return dict(
+            zip(pick_unique_words(length), self._text.words(length), strict=False),
+        )
 
     def top_level_domain(self, tld_type: TLDType = TLDType.CCTLD) -> str:
         """Generates a random top-level domain.
@@ -430,7 +428,6 @@ class Internet(BaseProvider):
         :Example:
             8080
         """
-
         rng = self.validate_enum(port_range, PortRange)
         return self.random.randint(*rng)
 
@@ -449,7 +446,6 @@ class Internet(BaseProvider):
         :param parts_count: Slug's parts count.
         :return: Slug.
         """
-
         if not parts_count:
             parts_count = self.random.randint(2, 12)
 
@@ -508,7 +504,7 @@ class Internet(BaseProvider):
         csrf_token = b64encode(self.random.randbytes(n=32)).decode()
         cookie_value = f"csrftoken={csrf_token}; {k}={v}; {cookie_attr}"
 
-        headers = {
+        return {
             "Allow": "*",
             "Age": max_age,
             "Server": self.random.choice(HTTP_SERVERS),
@@ -527,7 +523,6 @@ class Internet(BaseProvider):
             "Cross-Origin-Resource-Policy": self.random.choice(CORS_RESOURCE_POLICIES),
             "Strict-Transport-Security": f"max-age={max_age}",
         }
-        return headers
 
     def http_request_headers(self) -> dict[str, t.Any]:
         """Generates random HTTP request headers.
@@ -553,7 +548,7 @@ class Internet(BaseProvider):
         max_age = self.random.randint(0, 60 * 60 * 15)
         token = b64encode(self.random.randbytes(64)).hex()
         csrf_token = b64encode(self.random.randbytes(n=32)).decode()
-        headers = {
+        return {
             "Referer": self.uri(),
             "Authorization": f"Bearer {token}",
             "Cookie": f"csrftoken={csrf_token}; {k}={v}",
@@ -586,7 +581,6 @@ class Internet(BaseProvider):
                 ]
             ),
         }
-        return headers
 
     def special_ip_v4_object(self, purpose: IPv4Purpose | None = None) -> IPv4Address:
         """Generates a special purpose IPv4 address.

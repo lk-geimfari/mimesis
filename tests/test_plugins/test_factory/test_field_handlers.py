@@ -1,3 +1,5 @@
+from typing import ClassVar
+
 import factory
 import pytest
 from pytest_factoryboy import register
@@ -14,7 +16,7 @@ class Guest:
 
 @register
 class FactoryWithoutCustomFieldHandlers(factory.Factory):
-    class Meta(object):
+    class Meta:
         model = Guest
 
     age = FactoryField("anynum")
@@ -23,11 +25,11 @@ class FactoryWithoutCustomFieldHandlers(factory.Factory):
 
 @register
 class FactoryWithCustomFieldHandlers(factory.Factory):
-    class Meta(object):
+    class Meta:
         model = Guest
 
-    class Params(object):
-        field_handlers = [
+    class Params:
+        field_handlers: ClassVar = [
             ("anynum", lambda rand, **kwargs: rand.randint(1, 99)),
             ("nickname", lambda rand, **kwargs: rand.choice(["john", "alice"])),
         ]

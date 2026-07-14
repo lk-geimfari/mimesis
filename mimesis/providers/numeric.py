@@ -8,6 +8,7 @@ from mimesis.enums import NumType
 from mimesis.providers.base import BaseProvider
 from mimesis.types import Matrix
 
+
 __all__ = ["Numeric"]
 
 
@@ -16,7 +17,7 @@ class Numeric(BaseProvider):
 
     def __init__(self, *args: t.Any, **kwargs: t.Any) -> None:
         super().__init__(*args, **kwargs)
-        self.__increment_dict: t.DefaultDict[str, int] = defaultdict(int)
+        self.__increment_dict: defaultdict[str, int] = defaultdict(int)
         self.__default_accumulator_value: t.Final[str] = "default"
 
     class Meta:
@@ -149,19 +150,17 @@ class Numeric(BaseProvider):
         :param n: Length of the list.
         :return: A list of random complex numbers.
         """
-        numbers = []
-        for _ in range(n):
-            numbers.append(
-                self.complex_number(
-                    start_real=start_real,
-                    end_real=end_real,
-                    start_imag=start_imag,
-                    end_imag=end_imag,
-                    precision_real=precision_real,
-                    precision_imag=precision_imag,
-                ),
+        return [
+            self.complex_number(
+                start_real=start_real,
+                end_real=end_real,
+                start_imag=start_imag,
+                end_imag=end_imag,
+                precision_real=precision_real,
+                precision_imag=precision_imag,
             )
-        return numbers
+            for _ in range(n)
+        ]
 
     def decimal_number(self, start: float = -1000.0, end: float = 1000.0) -> Decimal:
         """Generates a random decimal number.

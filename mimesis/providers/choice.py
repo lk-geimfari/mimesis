@@ -1,7 +1,9 @@
 """Provides a random choice from items in a sequence."""
+
 import typing as t
 
 from mimesis.providers.base import BaseProvider
+
 
 __all__ = ["Choice"]
 
@@ -47,19 +49,18 @@ class Choice(BaseProvider):
         >>> from mimesis import Choice
         >>> choice = Choice()
 
-        >>> choice(items=['a', 'b', 'c'])
+        >>> choice(items=["a", "b", "c"])
         'c'
-        >>> choice(items=['a', 'b', 'c'], length=1)
+        >>> choice(items=["a", "b", "c"], length=1)
         ['a']
-        >>> choice(items='abc', length=2)
+        >>> choice(items="abc", length=2)
         'ba'
-        >>> choice(items=('a', 'b', 'c'), length=5)
+        >>> choice(items=("a", "b", "c"), length=5)
         ('c', 'a', 'a', 'b', 'c')
-        >>> choice(items='aabbbccccddddd', length=4, unique=True)
+        >>> choice(items="aabbbccccddddd", length=4, unique=True)
         'cdba'
 
         """
-
         if not isinstance(items, t.Sequence):
             raise TypeError("**items** must be non-empty sequence.")
 
@@ -84,6 +85,6 @@ class Choice(BaseProvider):
 
         if isinstance(items, list):
             return data
-        elif isinstance(items, tuple):
+        if isinstance(items, tuple):
             return tuple(data)
         return "".join(data)

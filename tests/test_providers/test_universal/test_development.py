@@ -54,8 +54,8 @@ class TestDevelopment:
         assert result in datasets.OS
 
     def test_boolean(self, dev):
-        result = dev.boolean()
-        assert result or (not result)
+        dev.boolean()
+        assert True
 
 
 class TestSeededDevelopment:

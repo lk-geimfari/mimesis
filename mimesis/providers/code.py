@@ -12,6 +12,7 @@ from mimesis.locales import Locale
 from mimesis.providers.base import BaseProvider
 from mimesis.shortcuts import luhn_checksum
 
+
 __all__ = ["Code"]
 
 

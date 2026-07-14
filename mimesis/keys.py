@@ -8,35 +8,34 @@ field is returned to the caller.
 import base64
 import hashlib
 import re
-from collections.abc import Iterable
-from typing import Any, Callable
+from collections.abc import Callable, Iterable
+from typing import Any
 
 from mimesis.datasets import COMMON_LETTERS, ROMANIZATION_DICT
 from mimesis.locales import Locale, validate_locale
 from mimesis.random import Random
 
+
 __all__ = [
+    "apply_if",
+    "base64_encode",
+    "camel_case",
+    "hash_with",
+    "join",
+    "kebab_case",
     "maybe",
-    "romanize",
-    "wrap",
+    "pipe",
+    "prefix",
+    "redact",
+    "remove_whitespace",
     "reverse",
+    "romanize",
     "slugify",
     "snake_case",
-    "camel_case",
-    "kebab_case",
-    "truncate",
-    "remove_whitespace",
-    "prefix",
     "suffix",
-    "hash_with",
-    "base64_encode",
+    "truncate",
     "urlsafe_base64_encode",
-    "redact",
-    "join",
-    "take_first",
-    "take_last",
-    "apply_if",
-    "pipe",
+    "wrap",
 ]
 
 
@@ -77,7 +76,8 @@ def maybe(value: Any, probability: float = 0.5) -> Callable[[Any, Random], Any]:
     """Return a closure (a key function).
 
     The returned closure itself returns either **value** or
-    the first argument passed to the closure with a certain probability (0.5 by default).
+    the first argument passed to the closure with a certain
+    probability (0.5 by default).
 
     :param value: The value that may be returned.
     :param probability: The probability of returning **value**.
@@ -101,7 +101,7 @@ def wrap(before: str = "<", after: str = ">") -> Callable[[str], str]:
     """Wrap the result with before and after strings.
 
     Example:
-        >>> field('word', key=wrap('[', ']'))
+        >>> field("word", key=wrap("[", "]"))
         '[dynamics]'
 
     :param before: String to prepend.
@@ -126,7 +126,7 @@ def reverse(value: str) -> str:
     :raises TypeError: If result is not a string.
 
     Example:
-        >>> field('word', key=reverse)
+        >>> field("word", key=reverse)
         'ebircsed'
 
     """
@@ -139,7 +139,7 @@ def slugify(value: str) -> str:
     """Convert to URL-friendly slug.
 
     Example:
-        >>> field('sentence', key=slugify)
+        >>> field("sentence", key=slugify)
         'where-are-my-pants'
 
     :param value: Input string to slugify.
@@ -158,7 +158,7 @@ def snake_case(value: str) -> str:
     """Convert to snake_case.
 
     Example:
-        >>> field('full_name', key=snake_case)
+        >>> field("full_name", key=snake_case)
         'michael_caldwell'
 
     :param value: Input string to convert.
@@ -176,7 +176,7 @@ def camel_case(value: str) -> str:
     """Convert to camelCase.
 
     Example:
-        >>> field('sentence', key=camel_case)
+        >>> field("sentence", key=camel_case)
         'makeMeASandwich.'
 
     :param value: Input string to convert.
@@ -207,7 +207,7 @@ def truncate(max_length: int, suffix: str = "...") -> Callable[[str], str]:
     """Truncate to maximum length.
 
     Example:
-        >>> field('sentence', key=truncate(20))
+        >>> field("sentence", key=truncate(20))
         'Ports are created...'
 
     :param max_length: Maximum length of the result.
@@ -249,7 +249,7 @@ def prefix(text: str) -> Callable[[str], str]:
     """Add a prefix to the result.
 
     Example:
-        >>> field('word', key=prefix('user_'))
+        >>> field("word", key=prefix("user_"))
         'user_order'
 
     :param text: Prefix text to add.
@@ -269,7 +269,7 @@ def suffix(text: str) -> Callable[[str], str]:
     """Add a suffix to the result.
 
     Example:
-        >>> field('word', key=suffix('.io'))
+        >>> field("word", key=suffix(".io"))
         'ecipe.io'
 
     :param text: Suffix text to add.
@@ -291,7 +291,7 @@ def hash_with(algorithm: str = "sha256") -> Callable[[str], str]:
     Supported algorithms are those available in :mod:`hashlib.algorithms_available`.
 
     Example:
-        >>> field('password', key=hash_with('sha1'))
+        >>> field("password", key=hash_with("sha1"))
         'd3e7130d657733468b10c1fd207c4d62b7180cda'
 
     :param algorithm: Hash algorithm name.
@@ -320,7 +320,7 @@ def base64_encode(value: str) -> str:
     :raises TypeError: If result is not a string.
 
     Example:
-        >>> field('word', key=base64_encode)
+        >>> field("word", key=base64_encode)
         'cHJlcGFyZWQ='
 
     """
@@ -339,7 +339,7 @@ def urlsafe_base64_encode(value: str) -> str:
     :raises TypeError: If result is not a string.
 
     Example:
-        >>> field('word', key=urlsafe_base64_encode)
+        >>> field("word", key=urlsafe_base64_encode)
         'YXBwZWFscw=='
     """
     if not isinstance(value, str):
@@ -353,7 +353,7 @@ def redact(replacement: str = "[REDACTED]") -> Callable[[Any], str]:
     """Replace the entire value with redaction marker.
 
     Example:
-        >>> field('password', key=redact('[CLASSIFIED]'))
+        >>> field("password", key=redact("[CLASSIFIED]"))
         '[CLASSIFIED]'
 
     :param replacement: Replacement text.
@@ -370,7 +370,7 @@ def join(sep: str = ", ") -> Callable[[list[Any]], str]:
     """Join list items with separator.
 
     Example:
-        >>> field('words', quantity=3, key=join(' | '))
+        >>> field("words", quantity=3, key=join(" | "))
         'pci | promise | excel'
 
     :param sep: Separator string.
@@ -394,7 +394,7 @@ def apply_if(
     """Apply transform only if the condition is true.
 
     Example:
-        >>> field('word', key=apply_if(lambda x: len(x) > 3, str.upper, str.lower))
+        >>> field("word", key=apply_if(lambda x: len(x) > 3, str.upper, str.lower))
         'FIELDS'
 
     :param condition: Condition function.
@@ -406,7 +406,7 @@ def apply_if(
     def key(v: Any) -> Any:
         if condition(v):
             return transform(v)
-        elif otherwise:
+        if otherwise:
             return otherwise(v)
         return v
 
@@ -416,11 +416,22 @@ def apply_if(
 KeyFunc = Callable[[Any], Any] | Callable[[Any, Random | None], Any]
 
 
+def _call_key_func(
+    func: KeyFunc,
+    result: Any,
+    random: Random | None,
+) -> Any:
+    try:
+        return func(result, random)  # type: ignore[call-arg]
+    except TypeError:
+        return func(result)  # type: ignore[call-arg]
+
+
 def pipe(*functions: KeyFunc) -> KeyFunc:
     """Pipe multiple key functions together.
 
     Example:
-        >>> field('full_name', key=pipe(str.lower, slugify, prefix('user-')))
+        >>> field("full_name", key=pipe(str.lower, slugify, prefix("user-")))
         'user-john-doe'
 
     :param functions: Key functions to pipe together.
@@ -429,10 +440,7 @@ def pipe(*functions: KeyFunc) -> KeyFunc:
 
     def key(result: Any, random: Random | None = None) -> Any:
         for func in functions:
-            try:
-                result = func(result, random)  # type: ignore[call-arg]
-            except TypeError:
-                result = func(result)  # type: ignore[call-arg]
+            result = _call_key_func(func, result, random)
         return result
 
     return key

@@ -13,6 +13,7 @@ from mimesis.datasets import (
 )
 from mimesis.providers.base import BaseDataProvider
 
+
 __all__ = ["Finance"]
 
 

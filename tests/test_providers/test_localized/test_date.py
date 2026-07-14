@@ -139,7 +139,7 @@ class TestDatetime:
     def test_timezone_without_region(self, _datetime):
         result = _datetime.timezone()
         region = result.split("/")[0]
-        assert region in set([tz.split("/")[0] for tz in TIMEZONES])
+        assert region in {tz.split("/")[0] for tz in TIMEZONES}
 
     @pytest.mark.parametrize(
         "fmt, out_type, kwargs",
@@ -189,7 +189,7 @@ class TestDatetime:
             (2019, 2019),
         ],
     )
-    def test_formatted_datetime(self, _datetime, start, end):
+    def test_formatted_date_with_year_range(self, _datetime, start, end):
         dt_str = _datetime.formatted_date(fmt="%Y", start=start, end=end)
         assert isinstance(dt_str, str)
         assert start <= int(dt_str) <= end
@@ -323,14 +323,16 @@ class TestDatetime:
         result = _datetime.future_datetime(seconds=60)
         assert isinstance(result, datetime.datetime)
         assert result > now
-        assert (result - now).total_seconds() <= 60
+        # Allow clock skew between this ``now`` and the provider's internal ``now``.
+        assert (result - now).total_seconds() <= 61
 
     def test_past_datetime_seconds(self, _datetime):
         now = datetime.datetime.now()
         result = _datetime.past_datetime(seconds=120)
         assert isinstance(result, datetime.datetime)
         assert result < now
-        assert (now - result).total_seconds() <= 120
+        # Allow clock skew between this ``now`` and the provider's internal ``now``.
+        assert (now - result).total_seconds() <= 121
 
 
 class TestSeededDatetime:

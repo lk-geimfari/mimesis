@@ -1,6 +1,7 @@
 """SchemaBuilder — unified API for related fake data generation."""
 
-from typing import Any, Sequence
+from collections.abc import Sequence
+from typing import Any
 
 from mimesis.builder.resolver import (
     FieldRef,
@@ -16,6 +17,7 @@ from mimesis.locales import Locale
 from mimesis.schema import Field
 from mimesis.types import JSON, Key, MissingSeed, Seed
 
+
 __all__ = ["SchemaBuilder"]
 
 
@@ -29,30 +31,36 @@ class SchemaBuilder:
 
         sb = SchemaBuilder(Locale.EN, seed=0xFF)
 
-        users = sb.schema("users", {
-            "id": sb.f("increment"),
-            "username": sb.f("username"),
-            "email": sb.f("email"),
-        })
+        users = sb.schema(
+            "users",
+            {
+                "id": sb.f("increment"),
+                "username": sb.f("username"),
+                "email": sb.f("email"),
+            },
+        )
 
-        posts = sb.schema("posts", {
-            "id": sb.f("increment"),
-            "title": sb.f("sentence"),
-            "user_id": sb.ref(users).id,
-        })
+        posts = sb.schema(
+            "posts",
+            {
+                "id": sb.f("increment"),
+                "title": sb.f("sentence"),
+                "user_id": sb.ref(users).id,
+            },
+        )
 
         data = sb.create(users=10, posts=50)
     """
 
     __slots__ = (
-        "_locale",
-        "_seed",
-        "_random",
-        "_field",
-        "_schemas",
         "_dependencies",
+        "_field",
         "_generated",
         "_generating",
+        "_locale",
+        "_random",
+        "_schemas",
+        "_seed",
     )
 
     def __init__(
@@ -124,10 +132,7 @@ class SchemaBuilder:
 
         Example::
 
-            sb.weighted_choice(
-                ["common", "rare", "legendary"],
-                [0.7, 0.25, 0.05]
-            )
+            sb.weighted_choice(["common", "rare", "legendary"], [0.7, 0.25, 0.05])
         """
         return LazyWeightedChoice(items, weights)
 
@@ -141,10 +146,13 @@ class SchemaBuilder:
 
             users = sb.schema("users", {"id": sb.f("increment")})
 
-            posts = sb.schema("posts", {
-                "user_id": sb.ref(users).id,  # FK to users.id
-                "author": sb.ref(users),       # Whole user record
-            })
+            posts = sb.schema(
+                "posts",
+                {
+                    "user_id": sb.ref(users).id,  # FK to users.id
+                    "author": sb.ref(users),  # Whole user record
+                },
+            )
         """
         if not isinstance(schema, SchemaRef):
             raise TypeError(
@@ -162,13 +170,16 @@ class SchemaBuilder:
 
         Example::
 
-            users = sb.schema("users", {
-                "id": sb.f("increment"),
-                "username": sb.f("username"),
-                "profile": {
-                    "bio": sb.f("text"),
+            users = sb.schema(
+                "users",
+                {
+                    "id": sb.f("increment"),
+                    "username": sb.f("username"),
+                    "profile": {
+                        "bio": sb.f("text"),
+                    },
                 },
-            })
+            )
         """
         self._schemas[name] = schema
         self._dependencies[name] = self._extract_dependencies(schema)
@@ -249,9 +260,7 @@ class SchemaBuilder:
 
         item = self._random.choice(items)
         if field_name not in item:
-            raise KeyError(
-                f"Field '{field_name}' not found in schema '{schema_name}'"
-            )
+            raise KeyError(f"Field '{field_name}' not found in schema '{schema_name}'")
         return item[field_name]
 
     def _pick_record(self, schema_name: str) -> JSON:

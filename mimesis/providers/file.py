@@ -4,6 +4,7 @@ from mimesis.datasets import EXTENSIONS, FILENAMES, MIME_TYPES
 from mimesis.enums import FileType, MimeType
 from mimesis.providers.base import BaseProvider
 
+
 __all__ = ["File"]
 
 

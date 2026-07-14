@@ -92,11 +92,14 @@ class FieldArityError(ValueError):
     """Raised when a registered field handler has incompatible arity."""
 
     def __str__(self) -> str:
-        return "The custom handler must accept at least two arguments: 'random' and '**kwargs'"
+        return (
+            "The custom handler must accept at least two arguments: "
+            "'random' and '**kwargs'"
+        )
 
 
 class AliasesTypeError(TypeError):
-    """Raised when the aliases attribute is set to a format other than a flat dictionary."""
+    """Raised when aliases is not a flat dictionary."""
 
     def __str__(self) -> str:
         return (
