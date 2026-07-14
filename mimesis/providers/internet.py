@@ -91,7 +91,9 @@ class Internet(BaseProvider):
         """Generates a random DSN (Data Source Name).
 
         :param dsn_type: DSN type.
-        :param kwargs: Additional keyword-arguments for hostname method.
+        :param kwargs: Additional keyword arguments for :meth:`~.hostname`.
+        :return: DSN as a string.
+        :raises NonEnumerableError: If ``dsn_type`` is not a valid :class:`~enums.DSNType`.
         """
         hostname = self.hostname(**kwargs)
         scheme, port = self.validate_enum(dsn_type, DSNType)

@@ -73,7 +73,7 @@ class FieldsetError(ValueError):
     """Raised when the fieldset iteration count is invalid."""
 
     def __str__(self) -> str:
-        return "The «iterations» parameter must be at least 1."
+        return "The «i» parameter must be at least 1."
 
 
 class FieldNameError(ValueError):

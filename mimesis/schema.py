@@ -42,7 +42,10 @@ RegisterableFieldHandlers = Sequence[RegisterableFieldHandler]
 
 
 class BaseField:
-    """Base class for field and fieldset generators."""
+    """Base class for field and fieldset generators.
+
+    :ivar aliases: A dictionary of aliases for standard fields.
+    """
 
     def __init__(
         self,
@@ -53,7 +56,6 @@ class BaseField:
 
         This class is used as a base class for :class:`Field` and :class:`Fieldset`.
 
-        :attr: aliases: A dictionary of aliases for standard fields.
         :param locale: Locale.
         :param seed: Seed for random.
         """
@@ -186,7 +188,8 @@ class BaseField:
             which will be applied to the result.
         :param kwargs: Keyword arguments of the method.
         :return: The result of the method.
-        :raises ValueError: if provider is not supported or if field is not defined.
+        :raises FieldError: If the field is missing or invalid.
+        :raises AliasesTypeError: If ``aliases`` is not a flat dictionary.
         """
         # Validate aliases before lookup
         self._validate_aliases()
@@ -387,9 +390,15 @@ class Fieldset(BaseField):
 
 
 class SchemaContext:
-    """Context object passed to transformation functions."""
+    """Context object passed to transformation functions.
 
-    __slots__ = ("custom", "index", "iteration", "seed", "timestamp")
+    :ivar index: Current iteration index (0-based).
+    :ivar iteration: Current iteration number (1-based).
+    :ivar seed: Current seed state.
+    :ivar custom: Custom context data.
+    """
+
+    __slots__ = ("custom", "index", "iteration", "seed")
 
     def __init__(
         self,
@@ -489,7 +498,7 @@ class Schema:
         """Export a schema as a CSV file.
 
         :param file_path: The file path.
-        :param kwargs: The keyword arguments for :py:class:`csv.DictWriter` class.
+        :param kwargs: Keyword arguments for :py:class:`csv.DictWriter`.
         """
         data = self.create()
         with Path(file_path).open("w", encoding="utf-8", newline="") as fp:
@@ -502,7 +511,7 @@ class Schema:
         """Export a schema as a JSON file.
 
         :param file_path: File path.
-        :param kwargs: Extra keyword arguments for :py:func:`json.dump` class.
+        :param kwargs: Extra keyword arguments for :py:func:`json.dump`.
         """
         with Path(file_path).open("w", encoding="utf-8") as fp:
             json.dump(self.create(), fp, **kwargs)
@@ -511,7 +520,7 @@ class Schema:
         """Export a schema as the pickled representation of the object to the file.
 
         :param file_path: The file path.
-        :param kwargs: Extra keyword arguments for :py:func:`pickle.dump` class.
+        :param kwargs: Extra keyword arguments for :py:func:`pickle.dump`.
         """
         with Path(file_path).open("wb") as fp:
             pickle.dump(self.create(), fp, **kwargs)

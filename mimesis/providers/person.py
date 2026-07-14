@@ -216,7 +216,7 @@ class Person(BaseDataProvider):
 
         :param mask: Mask.
         :param drange: Digits range.
-        :raises ValueError: If template is not supported.
+        :raises ValueError: If ``mask`` is not supported.
         :return: Username as string.
 
         Example:

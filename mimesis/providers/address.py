@@ -194,12 +194,12 @@ class Address(BaseDataProvider):
     def country_code(self, code: CountryCode | None = CountryCode.A2) -> str:
         """Generates a random country code.
 
-        Default format is :attr:`~enums.CountryCode.A2` (ISO 3166-1-alpha2),
-        you can change it by passing parameter ``fmt``.
+        Default format is :attr:`~enums.CountryCode.A2` (ISO 3166-1-alpha2).
+        You can change it by passing the ``code`` parameter.
 
-        :param code: Country code.
-        :return: Country code in selected format.
-        :raises KeyError: if fmt is not supported.
+        :param code: Country code format.
+        :return: Country code in the selected format.
+        :raises NonEnumerableError: If ``code`` is not a valid :class:`~enums.CountryCode`.
         """
         key = self.validate_enum(code, CountryCode)
         return self.random.choice(COUNTRY_CODES[key])

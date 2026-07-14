@@ -57,9 +57,10 @@ class Datetime(BaseDataProvider):
         :param date_end: End of the range.
         :param kwargs: Keyword arguments for :py:class:`datetime.timedelta`
         :return: List of datetime objects
-        :raises: ValueError: When ``date_start``/``date_end`` not passed,
-            when ``date_start`` larger than ``date_end`` or when the given
-            keywords for `datetime.timedelta` represent a non-positive timedelta.
+        :raises ValueError: When ``date_start``/``date_end`` are not passed,
+            when ``date_start`` is larger than ``date_end``, or when the given
+            keywords for :py:class:`datetime.timedelta` represent a non-positive
+            timedelta.
         """
         dt_objects = []
 

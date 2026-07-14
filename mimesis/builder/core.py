@@ -112,6 +112,7 @@ class SchemaBuilder:
 
         :param items: Sequence of items to choose from.
         :return: A lazy choice that resolves during data generation.
+        :raises ValueError: If ``items`` is empty.
 
         Example::
 
@@ -129,6 +130,7 @@ class SchemaBuilder:
         :param items: Sequence of items to choose from.
         :param weights: Weights for each item (must match items length).
         :return: A lazy weighted choice that resolves during data generation.
+        :raises ValueError: If ``items`` is empty or lengths do not match.
 
         Example::
 
@@ -141,6 +143,7 @@ class SchemaBuilder:
 
         :param schema: The SchemaRef returned by sb.schema().
         :return: A proxy that allows field access for FK references.
+        :raises TypeError: If ``schema`` is not a :class:`~mimesis.builder.schema.SchemaRef`.
 
         Example::
 
@@ -342,7 +345,7 @@ class SchemaBuilder:
 
         :param counts: Schema names mapped to their counts.
         :return: Dictionary of schema names to generated data lists.
-        :raises ValueError: If a schema name is not defined.
+        :raises ValueError: If a schema name is not defined or a count is negative.
 
         Example::
 

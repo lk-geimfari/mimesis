@@ -55,8 +55,8 @@ class ProviderRegistry:
 class BaseProvider:
     """This is a base class for all providers.
 
-    :attr: random: An instance of :class:`mimesis.random.Random`.
-    :attr: seed: Seed for random.
+    :ivar random: An instance of :class:`mimesis.random.Random`.
+    :ivar seed: Seed for random.
     """
 
     class Meta:
@@ -189,9 +189,8 @@ class BaseDataProvider(BaseProvider):
     def _setup_locale(self, locale: Locale = Locale.DEFAULT) -> None:
         """Set up locale after pre-check.
 
-        :param str locale: Locale
-        :raises UnsupportedLocale: When locale not supported.
-        :return: Nothing.
+        :param locale: Locale.
+        :raises LocaleError: When the locale is not supported.
         """
         locale_obj = validate_locale(locale)
         self.locale = locale_obj.value
@@ -225,11 +224,7 @@ class BaseDataProvider(BaseProvider):
         return initial
 
     def _load_dataset(self) -> None:
-        """Loads the content from the JSON dataset.
-
-        :return: The content of the file.
-        :raises UnsupportedLocale: Raises if locale is unsupported.
-        """
+        """Loads the content from the JSON dataset into ``_dataset``."""
         locale = self.locale
         datafile = getattr(self.Meta, "datafile", "")
         datadir = getattr(self.Meta, "datadir", DATADIR)

@@ -57,6 +57,7 @@ class SchemaRef:
 
         :param count: Number of items to generate and embed.
         :return: A NestedSchema that resolves to a list of items.
+        :raises ValueError: If ``count`` is less than 1.
         """
         return NestedSchema(self._name, self._definition, count)
 

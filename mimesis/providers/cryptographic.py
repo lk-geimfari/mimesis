@@ -147,7 +147,7 @@ class Cryptographic(BaseProvider):
             'a3d2f5e8b9c1d4e7f0a2b5c8d1e4f7a0'
             >>> crypto.api_key(prefix="sk_")
             'sk_a3d2f5e8b9c1d4e7f0a2b5c8d1e4f7a0'
-            >>> crypto.api_key(prefix="pk_", format="base64")
+            >>> crypto.api_key(prefix="pk_", fmt="base64")
             'pk_dGVzdGluZ3Rlc3Rpbmc'
         """
         if fmt == "hex":
