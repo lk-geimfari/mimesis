@@ -54,7 +54,7 @@ def romanize(locale: Locale) -> Callable[[str], str]:
     locale = validate_locale(locale)
 
     if locale not in (Locale.RU, Locale.UK, Locale.KK):
-        raise ValueError(f"Romanization is not available for: {locale}")
+        raise ValueError(f"Romanization is not available for locale {locale}")
 
     table = str.maketrans({**ROMANIZATION_DICT[locale.value], **COMMON_LETTERS})
 
@@ -380,7 +380,7 @@ def join(sep: str = ", ") -> Callable[[list[Any]], str]:
 
     def key(v: Iterable[Any]) -> str:
         if not isinstance(v, Iterable):
-            raise TypeError(f"join() requires iterable, got {type(v).__name__}")
+            raise TypeError(f"join() requires an iterable, got {type(v).__name__}")
         return sep.join(str(item) for item in v)
 
     return key

@@ -35,10 +35,10 @@ class Random(random_module.Random):
         :param a: Minimum value of range.
         :param b: Maximum value of range.
         :return: List of random integers.
-        :raises ValueError: if the number is less than or equal to zero.
+        :raises ValueError: if n is less than or equal to zero.
         """
         if n <= 0:
-            raise ValueError("Amount out of range.")
+            raise ValueError("n must be greater than 0")
 
         return [int(self.random() * (b - a)) + a for _ in range(n)]
 

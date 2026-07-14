@@ -124,7 +124,7 @@ class Generic(BaseProvider):
                 raise TypeError("Cannot add Generic instance to itself.")
             setattr(self, name, instance)
         else:
-            raise TypeError("The provider must be a class")
+            raise TypeError("The provider must be a class.")
 
     def add_providers(self, *providers: type[BaseProvider]) -> None:
         """Adds multiple custom providers to a Generic() object.

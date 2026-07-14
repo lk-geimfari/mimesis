@@ -434,7 +434,7 @@ class Schema:
         :param seed: Seed for random generator.
         """
         if iterations < 1:
-            raise ValueError("Number of iterations should be greater than 1.")
+            raise ValueError("Number of iterations must be at least 1.")
 
         if not callable(schema):
             raise SchemaError

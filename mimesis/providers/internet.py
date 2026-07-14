@@ -443,17 +443,17 @@ class Internet(BaseProvider):
     def slug(self, parts_count: int | None = None) -> str:
         """Generates a random slug with a given number of parts.
 
-        :param parts_count: Slug's parts count.
+        :param parts_count: Number of parts in the slug.
         :return: Slug.
         """
         if not parts_count:
             parts_count = self.random.randint(2, 12)
 
         if parts_count > 12:
-            raise ValueError("Slug's parts count must be <= 12")
+            raise ValueError("parts_count must be at most 12")
 
         if parts_count < 2:
-            raise ValueError("Slug must contain more than 2 parts")
+            raise ValueError("parts_count must be at least 2")
 
         return "-".join(self._text.words(parts_count))
 

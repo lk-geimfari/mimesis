@@ -67,7 +67,7 @@ class Datetime(BaseDataProvider):
             raise ValueError("You must pass date_start and date_end")
 
         if date_end < date_start:
-            raise ValueError("date_start can not be larger than date_end")
+            raise ValueError("date_start cannot be greater than date_end")
 
         if timedelta(**kwargs) <= timedelta():
             raise ValueError("timedelta must be positive")
@@ -229,7 +229,7 @@ class Datetime(BaseDataProvider):
         )
         if timezone:
             if not pytz:
-                raise ImportError("Timezones are supported only with pytz")
+                raise ImportError("Timezone support requires the pytz package")
             tz = pytz.timezone(timezone)
             datetime_obj = tz.localize(datetime_obj)
 
@@ -320,7 +320,7 @@ class Datetime(BaseDataProvider):
 
         if timezone:
             if not pytz:
-                raise ImportError("Timezones are supported only with pytz")
+                raise ImportError("Timezone support requires the pytz package")
             tz = pytz.timezone(timezone)
             result = tz.localize(result)
 
@@ -360,7 +360,7 @@ class Datetime(BaseDataProvider):
 
         if timezone:
             if not pytz:
-                raise ImportError("Timezones are supported only with pytz")
+                raise ImportError("Timezone support requires the pytz package")
             tz = pytz.timezone(timezone)
             result = tz.localize(result)
 
@@ -388,7 +388,9 @@ class Datetime(BaseDataProvider):
         :return: Duration as timedelta.
         """
         if min_duration > max_duration:
-            raise ValueError("min_duration must be less or equal to max_duration")
+            raise ValueError(
+                "min_duration must be less than or equal to max_duration"
+            )
 
         if not isinstance(min_duration, int) or not isinstance(max_duration, int):
             raise TypeError("min_duration and max_duration must be integers")

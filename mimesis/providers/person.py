@@ -47,7 +47,7 @@ class Person(BaseDataProvider):
 
         if max_year > datetime.now().year:
             raise ValueError(
-                "The max_year must be less than or equal to the current year"
+                "max_year must be less than or equal to the current year"
             )
 
     def _is_leap_year(self, year: int) -> bool:
@@ -294,7 +294,7 @@ class Person(BaseDataProvider):
         """
         if unique and self._has_seed():
             raise ValueError(
-                "You cannot use «unique» parameter with the seeded provider"
+                "Cannot use the «unique» parameter with a seeded provider"
             )
 
         if not domains:

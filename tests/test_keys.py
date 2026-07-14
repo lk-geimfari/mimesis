@@ -378,7 +378,7 @@ def test_join_default_separator():
 
 def test_join_type_error():
     key = keys.join(" | ")
-    with pytest.raises(TypeError, match="join\\(\\) requires iterable"):
+    with pytest.raises(TypeError, match="join\\(\\) requires an iterable"):
         key(None)
 
 

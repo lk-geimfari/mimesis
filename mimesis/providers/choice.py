@@ -62,13 +62,13 @@ class Choice(BaseProvider):
 
         """
         if not isinstance(items, t.Sequence):
-            raise TypeError("**items** must be non-empty sequence.")
+            raise TypeError("**items** must be a sequence.")
 
         if not items:
             raise ValueError("**items** must be a non-empty sequence.")
 
         if length < 0:
-            raise ValueError("**length** should be a positive integer.")
+            raise ValueError("**length** must be a non-negative integer.")
 
         if length == 0:
             return self.random.choice(items)
@@ -76,7 +76,7 @@ class Choice(BaseProvider):
         if unique and len(set(items)) < length:
             raise ValueError(
                 "There are not enough unique elements in "
-                "**items** to provide the specified **number**."
+                "**items** to provide the specified **length**."
             )
         if unique:
             data: list[str] = self.random.sample(list(set(items)), k=length)

@@ -96,7 +96,7 @@ class BaseProvider:
         if random is not None:
             if not isinstance(random, _random.Random):
                 raise TypeError(
-                    "The random must be an instance of mimesis.random.Random"
+                    "random must be an instance of mimesis.random.Random"
                 )
             self.random = random
         else:
@@ -306,7 +306,7 @@ class BaseDataProvider(BaseProvider):
                 self._override_locale(origin_locale)
         except AttributeError as err:
             raise ValueError(
-                f"«{self.__class__.__name__}» has not locale dependent",
+                f"«{self.__class__.__name__}» is not locale-dependent",
             ) from err
 
     def __str__(self) -> str:
