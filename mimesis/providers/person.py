@@ -46,9 +46,7 @@ class Person(BaseDataProvider):
             raise ValueError("min_year must be greater than or equal to 1900")
 
         if max_year > datetime.now().year:
-            raise ValueError(
-                "max_year must be less than or equal to the current year"
-            )
+            raise ValueError("max_year must be less than or equal to the current year")
 
     def _is_leap_year(self, year: int) -> bool:
         return (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0)
@@ -293,9 +291,7 @@ class Person(BaseDataProvider):
             foretime10@live.com
         """
         if unique and self._has_seed():
-            raise ValueError(
-                "Cannot use the «unique» parameter with a seeded provider"
-            )
+            raise ValueError("Cannot use the «unique» parameter with a seeded provider")
 
         if not domains:
             domains = EMAIL_DOMAINS

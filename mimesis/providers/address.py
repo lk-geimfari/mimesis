@@ -199,7 +199,8 @@ class Address(BaseDataProvider):
 
         :param code: Country code format.
         :return: Country code in the selected format.
-        :raises NonEnumerableError: If ``code`` is not a valid :class:`~enums.CountryCode`.
+        :raises NonEnumerableError: If ``code`` is not a valid
+            :class:`~enums.CountryCode`.
         """
         key = self.validate_enum(code, CountryCode)
         return self.random.choice(COUNTRY_CODES[key])

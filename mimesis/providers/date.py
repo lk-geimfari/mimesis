@@ -389,9 +389,7 @@ class Datetime(BaseDataProvider):
         :return: Duration as timedelta.
         """
         if min_duration > max_duration:
-            raise ValueError(
-                "min_duration must be less than or equal to max_duration"
-            )
+            raise ValueError("min_duration must be less than or equal to max_duration")
 
         if not isinstance(min_duration, int) or not isinstance(max_duration, int):
             raise TypeError("min_duration and max_duration must be integers")

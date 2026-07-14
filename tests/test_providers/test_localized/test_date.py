@@ -310,12 +310,16 @@ class TestDatetime:
 
     def test_future_datetime_no_pytz(self, _datetime, mocker):
         mocker.patch("mimesis.providers.date.pytz", None)
-        with pytest.raises(ImportError, match="Timezone support requires the pytz package"):
+        with pytest.raises(
+            ImportError, match="Timezone support requires the pytz package"
+        ):
             _datetime.future_datetime(timezone="Europe/Paris")
 
     def test_past_datetime_no_pytz(self, _datetime, mocker):
         mocker.patch("mimesis.providers.date.pytz", None)
-        with pytest.raises(ImportError, match="Timezone support requires the pytz package"):
+        with pytest.raises(
+            ImportError, match="Timezone support requires the pytz package"
+        ):
             _datetime.past_datetime(timezone="Europe/Paris")
 
     def test_future_datetime_seconds(self, _datetime):

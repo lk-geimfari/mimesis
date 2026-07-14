@@ -95,9 +95,7 @@ class BaseProvider:
         """
         if random is not None:
             if not isinstance(random, _random.Random):
-                raise TypeError(
-                    "random must be an instance of mimesis.random.Random"
-                )
+                raise TypeError("random must be an instance of mimesis.random.Random")
             self.random = random
         else:
             self.random = _random.Random()

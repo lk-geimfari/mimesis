@@ -143,7 +143,8 @@ class SchemaBuilder:
 
         :param schema: The SchemaRef returned by sb.schema().
         :return: A proxy that allows field access for FK references.
-        :raises TypeError: If ``schema`` is not a :class:`~mimesis.builder.schema.SchemaRef`.
+        :raises TypeError: If ``schema`` is not a
+            :class:`~mimesis.builder.schema.SchemaRef`.
 
         Example::
 
