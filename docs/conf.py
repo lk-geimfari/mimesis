@@ -137,6 +137,7 @@ html_static_path = ["_static"]
 html_css_files = ["css/custom.css"]
 html_copy_source = False
 html_show_sourcelink = False
+html_show_sphinx = False
 
 # Furo — modern, developer-friendly theme (works great on Read the Docs).
 # Body: Source Sans 3; monospace: Fira Code.

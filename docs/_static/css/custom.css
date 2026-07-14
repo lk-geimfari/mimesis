@@ -189,10 +189,6 @@ button.copybtn:focus {
   opacity: 1;
 }
 
-.related-pages a .page-info .title {
-  font-weight: 600;
-}
-
 dt:target,
 span.highlighted {
   background: var(--color-highlight-on-target);

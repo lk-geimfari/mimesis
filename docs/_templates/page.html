@@ -15,3 +15,70 @@
     <meta name="twitter:description" content="A robust data generator for Python, capable of rapidly producing large volumes of synthetic data for various use cases." />
     <meta name="twitter:image" content="https://mimesis.name/en/master/_static/preview.png" />
 {% endblock %}
+
+{# Same as Furo's footer, minus the "Made with … Furo" attribution. #}
+{% block footer %}
+        <div class="related-pages">
+          {% if next -%}
+            <a class="next-page" href="{{ next.link }}">
+              <div class="page-info">
+                <div class="context">
+                  <span>{{ _("Next") }}</span>
+                </div>
+                <div class="title">{{ next.title }}</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          {%- endif %}
+          {% if prev -%}
+            <a class="prev-page" href="{{ prev.link }}">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>{{ _("Previous") }}</span>
+                </div>
+                {% if prev.link == pathto(master_doc) %}
+                <div class="title">{{ _("Home") }}</div>
+                {% else %}
+                <div class="title">{{ prev.title }}</div>
+                {% endif %}
+              </div>
+            </a>
+          {%- endif %}
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            {%- if show_copyright %}
+            <div class="copyright">
+              {%- if hasdoc('copyright') %}
+                {% trans path=pathto('copyright'), copyright=copyright|e -%}
+                  <a href="{{ path }}">Copyright</a> &#169; {{ copyright }}
+                {%- endtrans %}
+              {%- else %}
+                {% trans copyright=copyright|e -%}
+                  Copyright &#169; {{ copyright }}
+                {%- endtrans %}
+              {%- endif %}
+            </div>
+            {%- endif %}
+            {%- if last_updated -%}
+            <div class="last-updated">
+              {% trans last_updated=last_updated|e -%}
+                Last updated on {{ last_updated }}
+              {%- endtrans -%}
+            </div>
+            {%- endif %}
+          </div>
+          <div class="right-details">
+            {% if theme_footer_icons -%}
+            <div class="icons">
+              {% for icon_dict in theme_footer_icons -%}
+              <a class="muted-link {{ icon_dict.class }}" href="{{ icon_dict.url }}" aria-label="{{ icon_dict.name }}">
+                {{- icon_dict.html -}}
+              </a>
+              {% endfor %}
+            </div>
+            {%- endif %}
+          </div>
+        </div>
+{% endblock footer %}
