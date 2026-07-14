@@ -38,14 +38,14 @@ It is commonly used to populate test databases, mock API responses, generate JSO
 
 The key features are:
 
-- **Multilingual**: Supports 46 different locales.
+- **Multilingual**: Supports 47 different locales.
 - **Extensibility**: Supports custom data providers and custom field handlers.
 - **Ease of use**: Features a simple design and clear documentation for straightforward data generation.
 - **Performance**: Widely recognized as the fastest data generator among Python solutions.
 - **Data variety**: Includes various data providers designed for different use cases.
 - **Schema-based generators**: Offers schema-based data generators to effortlessly produce data of any complexity.
 - **Relational data**: Supports generating relational data with references between schemas for complex data structures.
-- **Intuitive**: Great editor support. Fully typed, thus autocompletion almost everywhere.
+- **Intuitive**: Great editor support. Fully typed, so you get autocompletion almost everywhere.
 
 ## Installation
 
@@ -53,10 +53,10 @@ The key features are:
 > To work with Mimesis on Python versions 3.8 and 3.9, the final compatible version is Mimesis 11.1.0. Install this specific version to ensure compatibility.
 
 > [!WARNING]
-> Starting from version 19.0.0, Mimesis has dropped support for builtin providers.
+> Starting from version 19.0.0, Mimesis has dropped support for built-in providers.
 
 
-To install mimesis, use pip:
+To install Mimesis, use pip:
 
 ```
 ~ pip install mimesis
@@ -82,10 +82,9 @@ You can improve it by sending pull requests to this repository.
 
 ## Usage
 
-The library is exceptionally user-friendly, and it only requires you to import a **Data Provider** object that
-corresponds to the desired data type.
+Import a data provider that corresponds to the data type you need.
 
-For instance, the [Person](https://mimesis.name/latest/api.html#person) provider can be imported to access personal information,
+For example, the [Person](https://mimesis.name/latest/api.html#person) provider gives access to personal information,
 including name, surname, email, and other related fields:
 
 ```python
