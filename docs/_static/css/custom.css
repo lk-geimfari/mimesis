@@ -1,446 +1,200 @@
-/* Mimesis docs — Alabaster refinements
+/* Mimesis docs — Furo theme refinements
  *
- * Type stack matches Django docs (docs.djangoproject.com):
- *   body  → Roboto
- *   code  → Fira Mono
+ * Fonts:
+ *   body  → Source Sans 3 (highly readable for prose/docs)
+ *   code  → Fira Code (as used by many modern developer docs)
  */
 
-@import url("https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;700&family=Roboto:ital,wght@0,300;0,400;0,700;1,400;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap");
 
 :root {
-  --m-bg: #ffffff;
-  --m-bg-soft: #f8fafc;
-  --m-bg-code: #f1f5f9;
-  --m-fg: #1e293b;
-  --m-fg-muted: #64748b;
-  --m-border: #e2e8f0;
-  --m-accent: #0e7490;
-  --m-accent-hover: #155e75;
-  --m-accent-soft: #ecfeff;
-  --m-radius: 10px;
-  --m-font-sans: "Roboto", Corbel, Avenir, "Lucida Grande", "Lucida Sans", sans-serif;
-  --m-font-mono: "Fira Mono", Consolas, Menlo, Monaco, "Courier New", Courier, monospace;
+  --mimesis-radius: 10px;
+  --mimesis-code-radius: 12px;
 }
 
-body {
-  font-family: var(--m-font-sans);
-  font-size: 16px;
-  color: var(--m-fg);
-  -webkit-font-smoothing: antialiased;
-}
-
-div.body {
-  color: var(--m-fg);
-  font-family: var(--m-font-sans);
-}
-
-div.body p,
-div.body dd,
-div.body li {
-  line-height: 1.65;
-}
-
-div.body h1,
-div.body h2,
-div.body h3,
-div.body h4,
-div.body h5,
-div.body h6 {
-  font-family: var(--m-font-sans);
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  color: #0f172a;
-}
-
-/* Links */
-a,
-a.reference {
-  color: var(--m-accent);
-  text-decoration: none;
-  border-bottom: none;
-}
-
-a:visited {
-  color: var(--m-accent);
+/* Keep visited links on-brand (avoid default purple); no underlines */
+a:link,
+a:visited,
+a:hover,
+a:active,
+a.reference:link,
+a.reference:visited,
+a.reference:hover,
+a.reference:active,
+a.muted-link:link,
+a.muted-link:visited,
+a.muted-link:hover {
+  color: var(--color-brand-content);
+  text-decoration: none !important;
+  text-decoration-color: transparent !important;
 }
 
 a:hover,
-a.reference:hover {
-  color: var(--m-accent-hover);
-  border-bottom: 1px solid var(--m-accent-hover);
+a:visited:hover,
+a.reference:hover,
+a.reference:visited:hover,
+a.muted-link:hover {
+  color: var(--color-brand-primary);
 }
 
-div.sphinxsidebar a {
-  text-decoration: none;
-  border-bottom: none;
+article {
+  max-width: 52rem;
 }
 
-div.sphinxsidebar a:hover {
-  color: var(--m-accent);
+p,
+li {
+  line-height: 1.7;
 }
 
-a.headerlink:hover {
-  color: var(--m-accent) !important;
-  background: transparent !important;
-  text-decoration: none !important;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  letter-spacing: -0.015em;
+  font-weight: 650;
 }
 
-/* Logo */
-.logo img {
-  max-width: 80%;
-}
-
-/* Code — Fira Mono, same as Django docs */
-pre,
-tt,
-code,
+/* Inline + block code */
+code.literal,
 span.pre {
-  font-family: var(--m-font-mono) !important;
-  font-variant-ligatures: no-common-ligatures;
-}
-
-tt,
-code {
-  font-size: 0.875em;
-  background-color: var(--m-bg-code) !important;
-  color: #0f172a;
-  border: none;
-  padding: 0.12em 0.4em;
+  font-family: "Fira Code", ui-monospace, monospace !important;
+  font-size: 0.88em;
+  font-variant-ligatures: contextual;
   border-radius: 5px;
+  padding: 0.12em 0.38em;
 }
 
-pre,
 div[class*="highlight-"] {
-  clear: both;
-  border-radius: var(--m-radius) !important;
+  border-radius: var(--mimesis-code-radius);
+  overflow: hidden;
 }
 
 div.highlight {
-  background-color: var(--m-bg-code) !important;
-  border: 1px solid var(--m-border);
-  border-radius: var(--m-radius) !important;
+  border-radius: var(--mimesis-code-radius);
+  border: 1px solid var(--color-background-border);
 }
 
-div.highlight pre,
-table.highlighttable pre {
-  margin: 0;
-  border-radius: var(--m-radius) !important;
-  padding: 1.05rem 1.2rem !important;
+div.highlight pre {
+  font-family: "Fira Code", ui-monospace, monospace !important;
+  padding: 1.15rem 1.3rem;
   line-height: 1.55;
-  font-size: 0.86em;
+  font-size: 0.86rem;
+  font-variant-ligatures: contextual;
 }
 
 /* API signatures */
-.function,
-.method,
-.class,
-.exception {
-  padding-bottom: 1rem;
-  margin-bottom: 0.5rem;
+dl.py {
+  margin: 1.5rem 0;
+  padding: 1rem 1.15rem;
+  border: 1px solid var(--color-background-border);
+  border-radius: var(--mimesis-radius);
+  background: var(--color-background-secondary);
 }
 
 dl.py > dt {
-  font-family: var(--m-font-mono);
-  background: var(--m-bg-soft);
-  border: 1px solid var(--m-border);
-  border-radius: 8px;
-  padding: 0.55rem 0.75rem !important;
+  font-family: "Fira Code", ui-monospace, monospace;
+  font-size: 0.92em;
+  font-weight: 500;
 }
 
-/* Admonitions */
-div.note,
-div.warning,
-div.tip,
-div.important {
-  border-radius: var(--m-radius);
-  border: 1px solid var(--m-border);
-  background: var(--m-bg-soft);
+dl.py > dd {
+  margin-top: 0.75rem;
 }
 
-div.note {
-  border-left: 4px solid var(--m-accent);
+dl.py.class > dt,
+dl.py.function > dt,
+dl.py.method > dt,
+dl.py.exception > dt {
+  padding-bottom: 0.4rem;
+  border-bottom: 1px dashed var(--color-background-border);
 }
 
-/* Tables */
+.admonition {
+  border-radius: var(--mimesis-radius);
+}
+
 table.docutils {
-  border: 1px solid var(--m-border);
-  border-radius: 8px;
-  box-shadow: none;
+  border-radius: var(--mimesis-radius);
   overflow: hidden;
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+}
+
+table.docutils th {
+  font-weight: 600;
+  background: var(--color-background-secondary);
 }
 
 table.docutils td,
 table.docutils th {
-  border-color: var(--m-border) !important;
-  padding: 0.55rem 0.75rem;
+  padding: 0.65rem 0.85rem;
 }
 
-table.docutils th {
-  background: var(--m-bg-soft);
+/* Sidebar extras */
+.sidebar-useful-links {
+  margin: 1rem 0.85rem 1.5rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--color-sidebar-search-border);
+}
+
+.sidebar-useful-links h3 {
+  font-size: 0.72rem;
   font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-foreground-secondary);
+  margin: 0 0 0.55rem;
+}
+
+.sidebar-useful-links ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar-useful-links li {
+  margin: 0.2rem 0;
+}
+
+.sidebar-useful-links a {
+  display: block;
+  padding: 0.32rem 0.5rem;
+  border-radius: 6px;
+  color: var(--color-foreground-secondary);
+  text-decoration: none;
+  font-size: 0.92em;
+}
+
+.sidebar-useful-links a:hover {
+  color: var(--color-brand-content);
+  background: var(--color-sidebar-item-background--hover);
+}
+
+.sidebar-brand img,
+.sidebar-logo {
+  max-width: 70%;
+  height: auto;
 }
 
 button.copybtn {
-  cursor: pointer;
-  opacity: 0.55;
+  opacity: 0.5;
+  transition: opacity 0.15s ease;
 }
 
-div.highlight:hover button.copybtn {
+div.highlight:hover button.copybtn,
+button.copybtn:focus {
   opacity: 1;
 }
 
-/* -------- Dark mode -------- */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --m-bg: #0b1220;
-    --m-bg-soft: #111827;
-    --m-bg-code: #0f172a;
-    --m-fg: #e2e8f0;
-    --m-fg-muted: #94a3b8;
-    --m-border: #1e293b;
-    --m-accent: #22d3ee;
-    --m-accent-hover: #67e8f9;
-    --m-accent-soft: #164e63;
-  }
+.related-pages a .page-info .title {
+  font-weight: 600;
+}
 
-  body {
-    background-color: var(--m-bg);
-    color: var(--m-fg);
-  }
-
-  div.document,
-  div.documentwrapper,
-  div.bodywrapper,
-  div.body {
-    background-color: var(--m-bg);
-    color: var(--m-fg);
-  }
-
-  div.body h1,
-  div.body h2,
-  div.body h3,
-  div.body h4,
-  div.body h5,
-  div.body h6 {
-    color: #f1f5f9;
-  }
-
-  div.sphinxsidebar {
-    background: var(--m-bg);
-  }
-
-  div.sphinxsidebar p,
-  div.sphinxsidebar h3,
-  div.sphinxsidebar h4,
-  div.sphinxsidebar ul {
-    color: var(--m-fg-muted);
-  }
-
-  div.sphinxsidebar a,
-  div.sphinxsidebar h3 a {
-    color: var(--m-fg-muted);
-    border-bottom: none;
-  }
-
-  div.sphinxsidebar a:hover {
-    color: var(--m-accent);
-    text-decoration: underline;
-  }
-
-  a,
-  a:visited,
-  a.reference {
-    color: var(--m-accent);
-    border-bottom: none !important;
-  }
-
-  a:hover {
-    color: var(--m-accent-hover);
-    text-decoration: underline !important;
-  }
-
-  tt,
-  code {
-    background-color: #1e293b !important;
-    color: #e2e8f0;
-  }
-
-  tt.xref,
-  code.xref,
-  a tt {
-    background-color: #1e293b !important;
-    border-bottom: none;
-    color: var(--m-accent);
-  }
-
-  #api-reference .reference span.pre {
-    background-color: transparent !important;
-  }
-
-  div.highlight,
-  pre {
-    background-color: var(--m-bg-code) !important;
-    border-color: var(--m-border);
-  }
-
-  dl.py > dt {
-    background: var(--m-bg-soft);
-    border-color: var(--m-border);
-    color: #f8fafc;
-  }
-
-  dt:target,
-  .highlight {
-    background: #164e63;
-  }
-
-  .py,
-  .py-class {
-    background: transparent;
-  }
-
-  div.note,
-  div.warning,
-  div.tip,
-  div.important {
-    background-color: var(--m-bg-soft) !important;
-    border-color: var(--m-border);
-  }
-
-  div.note {
-    border-left-color: var(--m-accent);
-  }
-
-  table.docutils {
-    border: 1px solid var(--m-border);
-    box-shadow: none;
-  }
-
-  table.docutils th {
-    background: var(--m-bg-soft);
-  }
-
-  #contents li a,
-  #api-reference li a,
-  #additional-information li a,
-  #changelog li a,
-  #indices li a {
-    color: var(--m-fg-muted) !important;
-  }
-
-  #contents li a:hover,
-  #api-reference li a:hover,
-  #additional-information li a:hover,
-  #changelog li a:hover,
-  #indices li a:hover {
-    color: var(--m-accent) !important;
-    text-decoration: underline !important;
-  }
-
-  /* Syntax colors — editor-like on dark */
-  .highlight .k,
-  .highlight .kn,
-  .highlight .kc,
-  .highlight .kd {
-    color: #fb7185;
-    font-weight: 600;
-  }
-
-  .highlight .nf,
-  .highlight .nc,
-  .highlight .fm,
-  .highlight .nb {
-    color: #67e8f9;
-  }
-
-  .highlight .nc {
-    color: #fdba74;
-    font-weight: 600;
-  }
-
-  .highlight .s1,
-  .highlight .s2,
-  .highlight .sa,
-  .highlight .sd {
-    color: #86efac;
-  }
-
-  .highlight .mi,
-  .highlight .mf,
-  .highlight .o,
-  .highlight .ow {
-    color: #7dd3fc;
-  }
-
-  .highlight .c1,
-  .highlight .cm,
-  .highlight .c {
-    color: #64748b;
-    font-style: italic;
-  }
-
-  .highlight .nn {
-    color: #cbd5e1;
-  }
-
-  .highlight .bp,
-  .highlight .nd {
-    color: #94a3b8;
-  }
-
-  .highlight .gp {
-    color: #22d3ee;
-    font-weight: 600;
-  }
-
-  .highlight .go {
-    color: #94a3b8;
-  }
-
-  .highlight .ne {
-    color: #fdba74;
-  }
-
-  div.sphinxsidebarwrapper p.logo {
-    margin-bottom: 15px;
-  }
-
-  div.sphinxsidebar #searchbox input[type="text"] {
-    float: left;
-    width: 80%;
-    padding: 0.35em 0.5em;
-    box-sizing: border-box;
-    background: var(--m-bg-code);
-    color: var(--m-fg);
-    border: 1px solid var(--m-border);
-    border-radius: 6px;
-  }
-
-  div.sphinxsidebar input {
-    border: 1px solid var(--m-border);
-    color: var(--m-fg);
-    background: var(--m-bg-code);
-  }
-
-  div.sphinxsidebar #searchbox input[type="submit"],
-  input[value="Go"] {
-    color: var(--m-fg) !important;
-    background: var(--m-bg-soft) !important;
-    border: 1px solid var(--m-border);
-    border-radius: 6px;
-  }
-
-  input[value="Go"]:hover {
-    background-color: #1e293b !important;
-  }
-
-  a.headerlink:hover {
-    color: var(--m-fg-muted) !important;
-    background: transparent !important;
-  }
-
-  .rst-versions .rst-current-version {
-    background-color: var(--m-bg) !important;
-    border: 1px solid var(--m-border);
-  }
+dt:target,
+span.highlighted {
+  background: var(--color-highlight-on-target);
+  border-radius: 4px;
 }
