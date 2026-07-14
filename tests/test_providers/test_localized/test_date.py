@@ -258,6 +258,80 @@ class TestDatetime:
                 duration_unit=DurationUnit.WEEKS,
             )
 
+    @pytest.mark.parametrize("days", [7, 30, 90])
+    def test_future_date(self, _datetime, days):
+        today = datetime.date.today()
+        result = _datetime.future_date(days=days)
+        assert isinstance(result, datetime.date)
+        assert result > today
+        assert result <= today + datetime.timedelta(days=days)
+
+    @pytest.mark.parametrize(
+        "days, timezone",
+        [
+            (30, None),
+            (30, "Europe/Paris"),
+        ],
+    )
+    def test_future_datetime(self, _datetime, days, timezone):
+        now = datetime.datetime.now()
+        result = _datetime.future_datetime(days=days, timezone=timezone)
+        assert isinstance(result, datetime.datetime)
+        assert result.replace(tzinfo=None) > now
+        if timezone:
+            assert result.tzinfo is not None
+        else:
+            assert result.tzinfo is None
+
+    @pytest.mark.parametrize("days", [7, 30, 90])
+    def test_past_date(self, _datetime, days):
+        today = datetime.date.today()
+        result = _datetime.past_date(days=days)
+        assert isinstance(result, datetime.date)
+        assert result < today
+        assert result >= today - datetime.timedelta(days=days)
+
+    @pytest.mark.parametrize(
+        "days, timezone",
+        [
+            (30, None),
+            (30, "Europe/Paris"),
+        ],
+    )
+    def test_past_datetime(self, _datetime, days, timezone):
+        now = datetime.datetime.now()
+        result = _datetime.past_datetime(days=days, timezone=timezone)
+        assert isinstance(result, datetime.datetime)
+        assert result.replace(tzinfo=None) < now
+        if timezone:
+            assert result.tzinfo is not None
+        else:
+            assert result.tzinfo is None
+
+    def test_future_datetime_no_pytz(self, _datetime, mocker):
+        mocker.patch("mimesis.providers.date.pytz", None)
+        with pytest.raises(ImportError, match="Timezones are supported only with pytz"):
+            _datetime.future_datetime(timezone="Europe/Paris")
+
+    def test_past_datetime_no_pytz(self, _datetime, mocker):
+        mocker.patch("mimesis.providers.date.pytz", None)
+        with pytest.raises(ImportError, match="Timezones are supported only with pytz"):
+            _datetime.past_datetime(timezone="Europe/Paris")
+
+    def test_future_datetime_seconds(self, _datetime):
+        now = datetime.datetime.now()
+        result = _datetime.future_datetime(seconds=60)
+        assert isinstance(result, datetime.datetime)
+        assert result > now
+        assert (result - now).total_seconds() <= 60
+
+    def test_past_datetime_seconds(self, _datetime):
+        now = datetime.datetime.now()
+        result = _datetime.past_datetime(seconds=120)
+        assert isinstance(result, datetime.datetime)
+        assert result < now
+        assert (now - result).total_seconds() <= 120
+
 
 class TestSeededDatetime:
     @pytest.fixture
@@ -338,3 +412,21 @@ class TestSeededDatetime:
         assert d1.duration(10, 20, DurationUnit.WEEKS) == d2.duration(
             10, 20, DurationUnit.WEEKS
         )
+
+    def test_future_date(self, d1, d2):
+        assert d1.future_date() == d2.future_date()
+        assert d1.future_date(days=7) == d2.future_date(days=7)
+
+    def test_future_datetime(self, d1, d2):
+        r1 = d1.future_datetime().replace(microsecond=0)
+        r2 = d2.future_datetime().replace(microsecond=0)
+        assert r1 == r2
+
+    def test_past_date(self, d1, d2):
+        assert d1.past_date() == d2.past_date()
+        assert d1.past_date(days=7) == d2.past_date(days=7)
+
+    def test_past_datetime(self, d1, d2):
+        r1 = d1.past_datetime().replace(microsecond=0)
+        r2 = d2.past_datetime().replace(microsecond=0)
+        assert r1 == r2

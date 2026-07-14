@@ -49,6 +49,9 @@ The key features are:
 
 ## Installation
 
+> [!WARNING]
+> In Mimesis 20.0.0, I’m going to completely rework the current schema-based generation implementation. There will be no backward compatibility with the existing implementation.
+
 > [!IMPORTANT]
 > To work with Mimesis on Python versions 3.8 and 3.9, the final compatible version is Mimesis 11.1.0. Install this specific version to ensure compatibility.
 

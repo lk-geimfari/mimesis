@@ -178,6 +178,12 @@ class Algorithm(Enum):
     SHA512 = "sha512"
     BLAKE2B = "blake2b"
     BLAKE2S = "blake2s"
+    SHA3_224 = "sha3_224"
+    SHA3_256 = "sha3_256"
+    SHA3_384 = "sha3_384"
+    SHA3_512 = "sha3_512"
+    SHAKE128 = "shake_128"
+    SHAKE256 = "shake_256"
 
 
 class TLDType(Enum):
