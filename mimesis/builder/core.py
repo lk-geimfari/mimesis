@@ -343,7 +343,7 @@ class SchemaBuilder:
         Schemas are automatically sorted by dependencies, so you can
         pass them in any order.
 
-        :param counts: Schema names mapped to their counts.
+        :param counts: Schema names are mapped to their counts.
         :return: Dictionary of schema names to generated data lists.
         :raises ValueError: If a schema name is not defined or a count is negative.
 
