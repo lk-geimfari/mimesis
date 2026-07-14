@@ -1,5 +1,7 @@
 """Provides all the data related to the hardware."""
+
 from itertools import product
+
 
 RESOLUTIONS = [
     "1152x768",
@@ -96,7 +98,7 @@ CPU_CODENAMES = [
     "Ivytown",
     "Haswell",
     "Fortville",
-    "Devil's Canyon",  # noqa: Q003
+    "Devil's Canyon",
     "Valley Island",
     "Broadwell",
     "Bay Trail",

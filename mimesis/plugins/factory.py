@@ -1,14 +1,16 @@
+from collections.abc import Iterator
 from contextlib import contextmanager
-from typing import Any, ClassVar, Iterator
+from typing import Any, ClassVar
 
 from mimesis.locales import Locale
 from mimesis.schema import Field, RegisterableFieldHandlers
 
+
 try:
     from factory import declarations
     from factory.builder import BuildStep, Resolver
-except ImportError:
-    raise ImportError("This plugin requires factory_boy to be installed.")
+except ImportError as err:
+    raise ImportError("This plugin requires factory_boy to be installed.") from err
 
 __all__ = ["FactoryField", "MimesisField"]
 
@@ -47,14 +49,14 @@ class FactoryField(declarations.BaseDeclaration):
 
     def evaluate(
         self,
-        instance: Resolver,
+        _instance: Resolver,
         step: BuildStep,
         extra: dict[str, Any] | None = None,
     ) -> Any:
         """Evaluates the lazy field.
 
-        :param instance: (factory.builder.Resolver): The object holding currently computed attributes.
-        :param step: (factory.builder.BuildStep): The object holding the current build step.
+        :param _instance: The object holding currently computed attributes.
+        :param step: The object holding the current build step.
         :param extra: Extra call-time added kwargs that would be passed to ``Field``.
         """
         kwargs: dict[str, Any] = {}
@@ -90,18 +92,18 @@ class FactoryField(declarations.BaseDeclaration):
         locale: Locale | None = None,
         field_handlers: RegisterableFieldHandlers | None = None,
     ) -> Field:
-        """Returns cached instance.
+        """Returns a cached instance.
 
         :param locale: locale to use.
         :param field_handlers: custom field handlers.
-        :return: cached instance of Field.
+        :return: Cached instance of Field.
         """
         if locale is None:
             locale = cls._default_locale
 
         field_names = "-".join(
             sorted(
-                dict(field_handlers if field_handlers else []).keys(),
+                dict(field_handlers or []).keys(),
             )
         )
 

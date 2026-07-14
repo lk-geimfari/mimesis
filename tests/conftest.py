@@ -5,6 +5,7 @@ import pytest
 import mimesis
 from mimesis.locales import Locale
 
+
 platform = ["win32", "linux", "darwin"]
 
 

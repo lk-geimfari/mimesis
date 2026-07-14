@@ -8,6 +8,7 @@ License: MIT License.
 """
 
 from . import keys
+from .builder import SchemaBuilder, SchemaRef
 from .enums import (
     Algorithm,
     AudioFile,
@@ -70,88 +71,90 @@ from .providers import (
     Text,
     Transport,
 )
-from .schema import Field, Fieldset, Schema, SchemaBuilder
+from .schema import Field, Fieldset, Schema
+
 
 __all__ = [
     # Providers:
     "Address",
+    # Enums:
+    "Algorithm",
+    "AudioFile",
     "BaseDataProvider",
     "BaseProvider",
     "BinaryFile",
-    "Finance",
-    "Code",
+    "CardType",
     "Choice",
+    "Code",
+    "CompressedFile",
+    "CountryCode",
+    "Cryptographic",
+    "DSNType",
     "Datetime",
     "Development",
+    "DocumentFile",
+    "DurationUnit",
+    "EANFormat",
+    "EmojiCategory",
+    "Field",
+    "FieldArityError",
+    "FieldError",
+    "FieldNameError",
+    "Fieldset",
+    "FieldsetError",
     "File",
+    "FileType",
+    "Finance",
     "Food",
+    "Gender",
+    # Generic provider:
+    "Generic",
     "Hardware",
+    "IPv4Purpose",
+    "ISBNFormat",
+    "ImageFile",
     "Internet",
+    # Locale:
+    "Locale",
+    # Exceptions:
+    "LocaleError",
+    "MeasureUnit",
+    "MetricPrefixSign",
+    "MimeType",
+    "NonEnumerableError",
+    "NumType",
     "Numeric",
     "Path",
     "Payment",
     "Person",
-    "Science",
-    "Text",
-    "Transport",
-    "Cryptographic",
-    # Generic provider:
-    "Generic",
-    # Keys:
-    "keys",
-    # Schema:
-    "Field",
-    "Fieldset",
-    "Schema",
-    "SchemaBuilder",
-    # Locale:
-    "Locale",
-    # Enums:
-    "Algorithm",
-    "AudioFile",
-    "CardType",
-    "DurationUnit",
-    "CompressedFile",
-    "CountryCode",
-    "DocumentFile",
-    "DSNType",
-    "EANFormat",
-    "FileType",
-    "Gender",
-    "ImageFile",
-    "ISBNFormat",
-    "IPv4Purpose",
-    "MeasureUnit",
-    "MetricPrefixSign",
-    "MimeType",
-    "NumType",
     "PortRange",
-    "TimezoneRegion",
-    "TimestampFormat",
-    "TitleType",
+    "Schema",
+    # Schema:
+    "SchemaBuilder",
+    "SchemaError",
+    "SchemaRef",
+    "Science",
     "TLDType",
+    "Text",
+    "TimestampFormat",
+    "TimezoneRegion",
+    "TitleType",
+    "Transport",
     "URLScheme",
     "VideoFile",
-    "EmojiCategory",
-    # Exceptions:
-    "LocaleError",
-    "SchemaError",
-    "NonEnumerableError",
-    "FieldError",
-    "FieldsetError",
-    "FieldArityError",
-    "FieldNameError",
-    # Meta:
-    "__version__",
-    "__title__",
-    "__description__",
-    "__url__",
     "__author__",
     "__author_email__",
+    "__description__",
     "__license__",
+    "__title__",
+    "__url__",
+    # Meta:
+    "__version__",
+    # Keys:
+    "keys",
 ]
 
-__version__ = "19.1.0"
+__version__ = "20.0.0"
 __title__ = "mimesis"
 __description__ = "Mimesis: Fake Data Generator."
 __url__ = "https://github.com/lk-geimfari/mimesis"

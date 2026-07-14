@@ -20,9 +20,10 @@ from mimesis.exceptions import (
 from mimesis.keys import maybe, romanize
 from mimesis.locales import Locale
 from mimesis.random import Random
-from mimesis.schema import Field, Fieldset, Schema, SchemaBuilder, SchemaContext
+from mimesis.schema import Field, Fieldset, Schema, SchemaContext
 from mimesis.types import MissingSeed
 from tests.test_providers.patterns import DATA_PROVIDER_STR_REGEX
+
 
 if TYPE_CHECKING:
     from pathlib import Path
@@ -150,7 +151,7 @@ def test_field_with_key_function_two_parameters(localized_field):
         return f"{value}_{random.randint(1, 100)}"
 
     result = localized_field("person.name", key=key_function)
-    name, number = result.split("_")
+    _name, number = result.split("_")
     assert isinstance(result, str)
     assert 1 <= int(number) <= 100
 
@@ -263,7 +264,7 @@ def test_lookup_method_field_error(localized_field, field_name):
 )
 def test_schema_instantiation_raises_schema_error(invalid_schema):
     with pytest.raises(SchemaError):
-        Schema(schema=invalid_schema)  # type: ignore
+        Schema(schema=invalid_schema)  # type: ignore[arg-type]
 
 
 def test_schema_instantiation_raises_value_error():
@@ -535,7 +536,7 @@ def test_field_aliasing(default_field):
         {b"hey": "email"},
         None,
         [],
-        tuple(),
+        (),
     ],
 )
 def test_field_invalid_aliases(default_field, aliases):
@@ -609,43 +610,6 @@ def test_schema_with_context():
     assert len(data) == 2
     for item in data:
         assert item["company"] == "Acme Inc"
-
-
-def test_relational_schema():
-    field = Field(Locale.EN, seed=0xFF)
-    builder = SchemaBuilder(seed=field.seed)
-    builder.define(
-        "users",
-        Schema(
-            lambda: {
-                "id": field("increment"),
-                "name": field("name"),
-            }
-        ),
-    )
-    builder.define(
-        "posts",
-        Schema(
-            lambda: {
-                "id": field("increment"),
-                "title": field("sentence"),
-            }
-        ).map(
-            lambda item, ctx: {
-                **item,
-                "user_id": ctx.pick_from("users", "id"),
-            }
-        ),
-    )
-
-    data = builder.create(users=3, posts=5)
-
-    assert len(data["users"]) == 3
-    assert len(data["posts"]) == 5
-
-    for post in data["posts"]:
-        assert "user_id" in post
-        assert post["user_id"] in [u["id"] for u in data["users"]]
 
 
 def test_schema_context():

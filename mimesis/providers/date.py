@@ -10,6 +10,7 @@ from mimesis.enums import DurationUnit, TimestampFormat, TimezoneRegion
 from mimesis.providers.base import BaseDataProvider
 from mimesis.types import Date, DateTime, Time
 
+
 __all__ = ["Datetime"]
 
 
@@ -52,13 +53,14 @@ class Datetime(BaseDataProvider):
 
         See :py:class:`datetime.timedelta` for more details.
 
-        :param date_start: Begin of the range.
+        :param date_start: Start of the range.
         :param date_end: End of the range.
         :param kwargs: Keyword arguments for :py:class:`datetime.timedelta`
         :return: List of datetime objects
-        :raises: ValueError: When ``date_start``/``date_end`` not passed,
-            when ``date_start`` larger than ``date_end`` or when the given
-            keywords for `datetime.timedelta` represent a non-positive timedelta.
+        :raises ValueError: When ``date_start``/``date_end`` are not passed,
+            when ``date_start`` is larger than ``date_end``, or when the given
+            keywords for :py:class:`datetime.timedelta` represent a non-positive
+            timedelta.
         """
         dt_objects = []
 
@@ -66,7 +68,7 @@ class Datetime(BaseDataProvider):
             raise ValueError("You must pass date_start and date_end")
 
         if date_end < date_start:
-            raise ValueError("date_start can not be larger than date_end")
+            raise ValueError("date_start cannot be greater than date_end")
 
         if timedelta(**kwargs) <= timedelta():
             raise ValueError("timedelta must be positive")
@@ -142,11 +144,10 @@ class Datetime(BaseDataProvider):
         year = self.random.randint(start, end)
         month = self.random.randint(1, 12)
         day = self.random.randint(1, monthrange(year, month)[1])
-        date_object = date(year, month, day)
-        return date_object
+        return date(year, month, day)
 
     def formatted_date(self, fmt: str = "", **kwargs: t.Any) -> str:
-        """Generates random date as string.
+        """Generates a random date as a string.
 
         :param fmt: The format of date, if None then use standard
             accepted in the current locale.
@@ -165,16 +166,15 @@ class Datetime(BaseDataProvider):
 
         :return: ``datetime.time`` object.
         """
-        random_time = time(
+        return time(
             self.random.randint(0, 23),
             self.random.randint(0, 59),
             self.random.randint(0, 59),
             self.random.randint(0, 999999),
         )
-        return random_time
 
     def formatted_time(self, fmt: str = "") -> str:
-        """Generates formatted time as string.
+        """Generates formatted time as a string.
 
         :param fmt: The format of time, if None then use standard
             accepted in the current locale.
@@ -230,7 +230,7 @@ class Datetime(BaseDataProvider):
         )
         if timezone:
             if not pytz:
-                raise ImportError("Timezones are supported only with pytz")
+                raise ImportError("Timezone support requires the pytz package")
             tz = pytz.timezone(timezone)
             datetime_obj = tz.localize(datetime_obj)
 
@@ -255,7 +255,7 @@ class Datetime(BaseDataProvider):
     def timestamp(
         self, fmt: TimestampFormat = TimestampFormat.POSIX, **kwargs: t.Any
     ) -> str | int:
-        """Generates a random timestamp in given format.
+        """Generates a random timestamp in the given format.
 
         Supported formats are:
 
@@ -264,7 +264,6 @@ class Datetime(BaseDataProvider):
         - TimestampFormat.ISO_8601
 
         Example:
-
         >>> from mimesis import Datetime
         >>> from mimesis.enums import TimestampFormat
         >>> dt = Datetime()
@@ -284,10 +283,9 @@ class Datetime(BaseDataProvider):
 
         if fmt == TimestampFormat.RFC_3339:
             return stamp.strftime("%Y-%m-%dT%H:%M:%SZ")
-        elif fmt == TimestampFormat.ISO_8601:
+        if fmt == TimestampFormat.ISO_8601:
             return stamp.isoformat()
-        else:
-            return int(stamp.timestamp())
+        return int(stamp.timestamp())
 
     def future_date(self, days: int = 30) -> Date:
         """Generates a random date in the future.
@@ -295,7 +293,11 @@ class Datetime(BaseDataProvider):
         :param days: Maximum number of days in the future.
         :return: A date object between tomorrow and `days` from now.
         """
-        return self.future_datetime(days).date()
+        today = date.today()
+        start = today + timedelta(days=1)
+        end = today + timedelta(days=days)
+        offset = self.random.randint(0, (end - start).days)
+        return start + timedelta(days=offset)
 
     def future_datetime(
         self,
@@ -319,7 +321,7 @@ class Datetime(BaseDataProvider):
 
         if timezone:
             if not pytz:
-                raise ImportError("Timezones are supported only with pytz")
+                raise ImportError("Timezone support requires the pytz package")
             tz = pytz.timezone(timezone)
             result = tz.localize(result)
 
@@ -331,7 +333,11 @@ class Datetime(BaseDataProvider):
         :param days: Maximum number of days in the past.
         :return: A date object between `days` ago and yesterday.
         """
-        return self.past_datetime(days).date()
+        today = date.today()
+        start = today - timedelta(days=days)
+        end = today - timedelta(days=1)
+        offset = self.random.randint(0, (end - start).days)
+        return start + timedelta(days=offset)
 
     def past_datetime(
         self,
@@ -355,7 +361,7 @@ class Datetime(BaseDataProvider):
 
         if timezone:
             if not pytz:
-                raise ImportError("Timezones are supported only with pytz")
+                raise ImportError("Timezone support requires the pytz package")
             tz = pytz.timezone(timezone)
             result = tz.localize(result)
 
@@ -383,7 +389,7 @@ class Datetime(BaseDataProvider):
         :return: Duration as timedelta.
         """
         if min_duration > max_duration:
-            raise ValueError("min_duration must be less or equal to max_duration")
+            raise ValueError("min_duration must be less than or equal to max_duration")
 
         if not isinstance(min_duration, int) or not isinstance(max_duration, int):
             raise TypeError("min_duration and max_duration must be integers")

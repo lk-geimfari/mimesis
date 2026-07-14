@@ -9,11 +9,11 @@ from mimesis.datasets import FOLDERS, PROGRAMMING_LANGS, PROJECT_NAMES
 class TestPath:
     def test_root(self, path):
         result = path.root()
-        assert result == "C:\\" or result == "/"
+        assert result in {"C:\\", "/"}
 
     def test_home(self, path):
         result = path.home()
-        assert result == "C:\\Users" or result == "/home"
+        assert result in {"C:\\Users", "/home"}
 
     def test_user(self, path):
         user = path.user()
@@ -23,7 +23,7 @@ class TestPath:
         result = re.search(pattern, user)
         assert result
 
-    def directory_separator(self, path):
+    def _directory_separator(self, path):
         slash_character = ""
         if path.platform == "win32":
             slash_character = "\\"
@@ -33,21 +33,26 @@ class TestPath:
 
     def test_users_folder(self, path):
         folder = path.users_folder()
-        folder = folder.split(self.directory_separator(path))
+        folder = folder.split(self._directory_separator(path))
         assert len(folder) == 4
         assert folder[3] in FOLDERS
 
     def test_dev_dir(self, path):
         dev_dir = path.dev_dir()
-        dev_dir = dev_dir.split(self.directory_separator(path))
+        dev_dir = dev_dir.split(self._directory_separator(path))
         assert len(dev_dir) == 5
         assert dev_dir[4] in PROGRAMMING_LANGS
 
     def test_project_dir(self, path):
         project_path = path.project_dir()
-        project_path = project_path.split(self.directory_separator(path))
+        project_path = project_path.split(self._directory_separator(path))
         assert len(project_path) == 6
         assert project_path[5] in PROJECT_NAMES
+
+    def test_freebsd_platform_normalized(self):
+        path = Path(platform="freebsd14")
+        assert path.platform == "freebsd"
+        assert path.home().startswith("/")
 
 
 class TestSeededPath:

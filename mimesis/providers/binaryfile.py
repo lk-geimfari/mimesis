@@ -12,11 +12,12 @@ from mimesis.enums import (
 )
 from mimesis.providers.base import BaseProvider
 
+
 __all__ = ["BinaryFile"]
 
 
 class BinaryFile(BaseProvider):
-    """Class for generating binary data"""
+    """Class for generating binary data."""
 
     def __init__(self, *args: t.Any, **kwargs: t.Any) -> None:
         """Initialize attributes.
@@ -37,11 +38,11 @@ class BinaryFile(BaseProvider):
         file_type = self.validate_enum(file_type, file_type.__class__)
         file_path = DATADIR / "bin" / f"sample.{file_type}"
 
-        with open(file_path, "rb") as file:
+        with file_path.open("rb") as file:
             return file.read()
 
     def video(self, *, file_type: VideoFile = VideoFile.MP4) -> bytes:
-        """Generates video file of given format and returns it as bytes.
+        """Generates a video file of the given format and returns it as bytes.
 
         .. note:: This method accepts keyword-only arguments.
 
@@ -51,7 +52,7 @@ class BinaryFile(BaseProvider):
         return self._read_file(file_type=file_type)
 
     def audio(self, *, file_type: AudioFile = AudioFile.MP3) -> bytes:
-        """Generates an audio file of given format and returns it as bytes.
+        """Generates an audio file of the given format and returns it as bytes.
 
         .. note:: This method accepts keyword-only arguments.
 
@@ -61,7 +62,7 @@ class BinaryFile(BaseProvider):
         return self._read_file(file_type=file_type)
 
     def document(self, *, file_type: DocumentFile = DocumentFile.PDF) -> bytes:
-        """Generates a document of given format and returns it as bytes.
+        """Generates a document of the given format and returns it as bytes.
 
         .. note:: This method accepts keyword-only arguments.
 
@@ -71,7 +72,7 @@ class BinaryFile(BaseProvider):
         return self._read_file(file_type=file_type)
 
     def image(self, *, file_type: ImageFile = ImageFile.PNG) -> bytes:
-        """Generates an image of given format and returns it as bytes.
+        """Generates an image of the given format and returns it as bytes.
 
         .. note:: This method accepts keyword-only arguments.
 
@@ -81,7 +82,7 @@ class BinaryFile(BaseProvider):
         return self._read_file(file_type=file_type)
 
     def compressed(self, *, file_type: CompressedFile = CompressedFile.ZIP) -> bytes:
-        """Generates a compressed file of given format and returns it as bytes.
+        """Generates a compressed file of the given format and returns it as bytes.
 
         .. note:: This method accepts keyword-only arguments.
 

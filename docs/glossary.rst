@@ -39,14 +39,17 @@ Glossary
         the :py:meth:`~mimesis.schema.BaseField.handle` decorator.
 
     schema context
-        A context object passed to schema transformation functions. It contains
-        metadata about the current iteration (index, seed, custom data) and provides
-        methods for accessing related schema data.
+        A context object passed to :meth:`~mimesis.schema.Schema.map`
+        transformers that need more than the item itself. It exposes the
+        current row index, schema seed, and shared run metadata set via
+        :meth:`~mimesis.schema.Schema.with_context` (for example tenant or
+        environment labels).
 
-        See :py:class:`~mimesis.schema.SchemaContext`
+        See :py:class:`~mimesis.schema.SchemaContext` and the guide section
+        *Transforming Items with map() and SchemaContext* in :doc:`schema`.
 
     schema builder
-        A builder class for creating related schemas with cross-references between them.
-        It allows defining multiple named schemas and generating relational data.
+        A declarative builder for generating related fake datasets with foreign
+        keys, nested schemas, and automatic dependency resolution.
 
-        See :py:class:`~mimesis.schema.SchemaBuilder`
+        See :py:class:`~mimesis.builder.SchemaBuilder`

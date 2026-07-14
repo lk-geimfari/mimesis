@@ -38,6 +38,7 @@ from mimesis.providers.file import File
 from mimesis.providers.text import Text
 from mimesis.types import Keywords
 
+
 __all__ = ["Internet"]
 
 
@@ -90,7 +91,10 @@ class Internet(BaseProvider):
         """Generates a random DSN (Data Source Name).
 
         :param dsn_type: DSN type.
-        :param kwargs: Additional keyword-arguments for hostname method.
+        :param kwargs: Additional keyword arguments for :meth:`~.hostname`.
+        :return: DSN as a string.
+        :raises NonEnumerableError: If ``dsn_type`` is not a valid
+            :class:`~enums.DSNType`.
         """
         hostname = self.hostname(**kwargs)
         scheme, port = self.validate_enum(dsn_type, DSNType)
@@ -139,7 +143,7 @@ class Internet(BaseProvider):
         )
 
     def ip_v4_with_port(self, port_range: PortRange = PortRange.ALL) -> str:
-        """Generates a random IPv4 address as string.
+        """Generates a random IPv4 address as a string.
 
         :param port_range: PortRange enum object.
         :return: IPv4 address as string.
@@ -152,7 +156,7 @@ class Internet(BaseProvider):
         return f"{addr}:{port}"
 
     def ip_v4(self) -> str:
-        """Generates a random IPv4 address as string.
+        """Generates a random IPv4 address as a string.
 
         :Example:
             19.121.223.58
@@ -172,7 +176,7 @@ class Internet(BaseProvider):
         )
 
     def ip_v6(self) -> str:
-        """Generates a random IPv6 address as string.
+        """Generates a random IPv6 address as a string.
 
         :return: IPv6 address string.
 
@@ -281,10 +285,7 @@ class Internet(BaseProvider):
         :param keywords: Sequence of search keywords.
         :return: URL of the image.
         """
-        if keywords is not None:
-            keywords_str = ",".join(keywords)
-        else:
-            keywords_str = ""
+        keywords_str = ",".join(keywords) if keywords is not None else ""
 
         return f"https://source.unsplash.com/{width}x{height}?{keywords_str}"
 
@@ -349,9 +350,7 @@ class Internet(BaseProvider):
         :return: URI.
         """
         directory = (
-            self._datetime.date(start=2010, end=self._datetime._CURRENT_YEAR)
-            .strftime("%Y-%m-%d")
-            .replace("-", "/")
+            self._datetime.date(start=2010).strftime("%Y-%m-%d").replace("-", "/")
         )
         url = self.url(scheme, None, tld_type, subdomains)
         uri = f"{url}{directory}/{self.slug()}"
@@ -370,7 +369,7 @@ class Internet(BaseProvider):
         return urllib.parse.urlencode(self.query_parameters(length))
 
     def query_parameters(self, length: int | None = None) -> dict[str, str]:
-        """Generates an arbitrary query parameters as a dict.
+        """Generates arbitrary query parameters as a dict.
 
         :param length: Length of query parameters dictionary (maximum is 32).
         :return: Dict of query parameters.
@@ -390,10 +389,12 @@ class Internet(BaseProvider):
         if length > 32:
             raise ValueError("Maximum allowed length of query parameters is 32.")
 
-        return dict(zip(pick_unique_words(length), self._text.words(length)))
+        return dict(
+            zip(pick_unique_words(length), self._text.words(length), strict=False),
+        )
 
     def top_level_domain(self, tld_type: TLDType = TLDType.CCTLD) -> str:
-        """Generates random top level domain.
+        """Generates a random top-level domain.
 
         :param tld_type: Enum object :class:`enums.TLDType`
         :return: Top level domain.
@@ -430,7 +431,6 @@ class Internet(BaseProvider):
         :Example:
             8080
         """
-
         rng = self.validate_enum(port_range, PortRange)
         return self.random.randint(*rng)
 
@@ -444,20 +444,19 @@ class Internet(BaseProvider):
         return self.slug(*args, **kwargs).replace("-", "/")
 
     def slug(self, parts_count: int | None = None) -> str:
-        """Generates a random slug of given parts count.
+        """Generates a random slug with a given number of parts.
 
-        :param parts_count: Slug's parts count.
+        :param parts_count: Number of parts in the slug.
         :return: Slug.
         """
-
         if not parts_count:
             parts_count = self.random.randint(2, 12)
 
         if parts_count > 12:
-            raise ValueError("Slug's parts count must be <= 12")
+            raise ValueError("parts_count must be at most 12")
 
         if parts_count < 2:
-            raise ValueError("Slug must contain more than 2 parts")
+            raise ValueError("parts_count must be at least 2")
 
         return "-".join(self._text.words(parts_count))
 
@@ -470,7 +469,7 @@ class Internet(BaseProvider):
         return self.random.choice(PUBLIC_DNS)
 
     def http_response_headers(self) -> dict[str, t.Any]:
-        """Generates a random HTTP response headers.
+        """Generates random HTTP response headers.
 
         The following headers are included:
 
@@ -508,7 +507,7 @@ class Internet(BaseProvider):
         csrf_token = b64encode(self.random.randbytes(n=32)).decode()
         cookie_value = f"csrftoken={csrf_token}; {k}={v}; {cookie_attr}"
 
-        headers = {
+        return {
             "Allow": "*",
             "Age": max_age,
             "Server": self.random.choice(HTTP_SERVERS),
@@ -527,10 +526,9 @@ class Internet(BaseProvider):
             "Cross-Origin-Resource-Policy": self.random.choice(CORS_RESOURCE_POLICIES),
             "Strict-Transport-Security": f"max-age={max_age}",
         }
-        return headers
 
     def http_request_headers(self) -> dict[str, t.Any]:
-        """Generates a random HTTP request headers.
+        """Generates random HTTP request headers.
 
         The following headers are included:
 
@@ -553,7 +551,7 @@ class Internet(BaseProvider):
         max_age = self.random.randint(0, 60 * 60 * 15)
         token = b64encode(self.random.randbytes(64)).hex()
         csrf_token = b64encode(self.random.randbytes(n=32)).decode()
-        headers = {
+        return {
             "Referer": self.uri(),
             "Authorization": f"Bearer {token}",
             "Cookie": f"csrftoken={csrf_token}; {k}={v}",
@@ -586,7 +584,6 @@ class Internet(BaseProvider):
                 ]
             ),
         }
-        return headers
 
     def special_ip_v4_object(self, purpose: IPv4Purpose | None = None) -> IPv4Address:
         """Generates a special purpose IPv4 address.
@@ -600,7 +597,7 @@ class Internet(BaseProvider):
         return IPv4Address(number)
 
     def special_ip_v4(self, purpose: IPv4Purpose | None = None) -> str:
-        """Generates a special purpose IPv4 address as string.
+        """Generates a special purpose IPv4 address as a string.
 
         :param purpose: Enum object :class:`enums.IPv4Purpose`.
         :return: IPv4 address as string.

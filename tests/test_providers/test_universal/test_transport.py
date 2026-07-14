@@ -64,7 +64,7 @@ class TestSeededTransport:
 
     @pytest.mark.parametrize(
         "locale",
-        list(Locale) + [None],
+        [*list(Locale), None],
     )
     def test_vehicle_registration_code(self, t1, t2, locale):
         a = t1.vehicle_registration_code(locale)

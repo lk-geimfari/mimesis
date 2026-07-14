@@ -51,7 +51,7 @@ class TestGeneric:
 
     def test_bad_argument(self, generic):
         with pytest.raises(AttributeError):
-            _ = generic.bad_argument  # noqa
+            _ = generic.bad_argument
 
     def test_add_providers(self, generic):
         class Provider1(BaseProvider):
@@ -83,8 +83,7 @@ class TestGeneric:
 
         class Provider4:
             @staticmethod
-            def empty():
-                ...
+            def empty(): ...
 
         class Provider5(BaseProvider):
             class Meta:
@@ -153,6 +152,24 @@ class TestGeneric:
         providers = generic.__dir__()
         for p in providers:
             assert not p.startswith("_")
+
+    def test_getattr_non_callable_returns_none(self, generic):
+        generic._not_a_provider = "literal"
+        assert generic.not_a_provider is None
+
+    def test_reseed_skips_missing_attributes(self, generic, monkeypatch):
+        monkeypatch.setattr(generic, "__dir__", lambda: ["does_not_exist"])
+        generic.reseed(0xABC)
+
+    def test_skips_generic_in_provider_registry(self):
+        from mimesis.providers.base import ProviderRegistry
+
+        ProviderRegistry.register("generic_self", Generic)
+        try:
+            instance = Generic()
+            assert instance is not None
+        finally:
+            ProviderRegistry._providers.pop("generic_self", None)
 
 
 class TestSeededGeneric:

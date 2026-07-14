@@ -3,14 +3,14 @@ import factory
 from mimesis.plugins.factory import FactoryField
 
 
-class User(object):
+class User:
     def __init__(self, uid, email):
         self.uid = uid
         self.email = email
 
 
 class UserFactory(factory.Factory):
-    class Meta(object):
+    class Meta:
         model = User
 
     uid = factory.Sequence(lambda order: order)

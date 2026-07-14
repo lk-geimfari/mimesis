@@ -12,6 +12,7 @@ from mimesis.providers.base import BaseProvider
 from mimesis.providers.person import Person
 from mimesis.shortcuts import luhn_checksum
 
+
 __all__ = ["Payment"]
 
 
@@ -47,7 +48,7 @@ class Payment(BaseProvider):
     def paypal(self) -> str:
         """Generates a random PayPal account.
 
-        :return: Email of PapPal user.
+        :return: Email of a PayPal user.
 
         :Example:
             wolf235@gmail.com
@@ -73,7 +74,7 @@ class Payment(BaseProvider):
         """Generates a random Ethereum address.
 
         ..note: The address will look like Ethereum address,
-        but keep in mind that it is not the valid address.
+        but keep in mind that it is not a valid address.
 
         :return: Ethereum address.
 
@@ -130,17 +131,16 @@ class Payment(BaseProvider):
         while len(str_num) < length - 1:
             str_num += self.random.choice(string.digits)
 
-        groups = regex.search(  # type: ignore
+        groups = regex.search(  # type: ignore[union-attr]
             str_num + luhn_checksum(str_num),
         ).groups()
-        card = " ".join(groups)
-        return card
+        return " ".join(groups)
 
     def credit_card_expiration_date(self, minimum: int = 16, maximum: int = 25) -> str:
         """Generates a random expiration date for credit card.
 
-        :param minimum: Date of issue.
-        :param maximum: Maximum of expiration_date.
+        :param minimum: Minimum two-digit year.
+        :param maximum: Maximum two-digit year.
         :return: Expiration date of credit card.
 
         :Example:
@@ -170,9 +170,8 @@ class Payment(BaseProvider):
         :type gender: Gender enum.
         :return:
         """
-        owner = {
+        return {
             "credit_card": self.credit_card_number(),
             "expiration_date": self.credit_card_expiration_date(),
             "owner": self._person.full_name(gender=gender).upper(),
         }
-        return owner

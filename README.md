@@ -32,33 +32,24 @@
 
 ---
 
-Mimesis ([/mɪˈmiːsɪs](https://mimesis.name/master/about.html#what-does-name-mean)) is a robust data generator for
-Python that can produce a wide range of fake data in various languages.
+Mimesis ([/mɪˈmiːsɪs](https://mimesis.name/master/about.html#what-does-name-mean)) is a Python library for generating fake but realistic data in multiple languages and locales. It can generate names, addresses, dates, phone numbers, emails, financial data, and many other types of values.
+
+It is commonly used to populate test databases, mock API responses, generate JSON or XML fixtures, create sample datasets, and anonymize production data. Mimesis provides a simple, consistent API that makes it easy to generate realistic data for development and testing.
 
 The key features are:
 
-- **Multilingual**: Supports 46 different locales.
+- **Multilingual**: Supports 47 different locales.
 - **Extensibility**: Supports custom data providers and custom field handlers.
 - **Ease of use**: Features a simple design and clear documentation for straightforward data generation.
 - **Performance**: Widely recognized as the fastest data generator among Python solutions.
 - **Data variety**: Includes various data providers designed for different use cases.
 - **Schema-based generators**: Offers schema-based data generators to effortlessly produce data of any complexity.
 - **Relational data**: Supports generating relational data with references between schemas for complex data structures.
-- **Intuitive**: Great editor support. Fully typed, thus autocompletion almost everywhere.
+- **Intuitive**: Great editor support. Fully typed, so you get autocompletion almost everywhere.
 
 ## Installation
 
-> [!WARNING]
-> In Mimesis 20.0.0, I’m going to completely rework the current schema-based generation implementation. There will be no backward compatibility with the existing implementation.
-
-> [!IMPORTANT]
-> To work with Mimesis on Python versions 3.8 and 3.9, the final compatible version is Mimesis 11.1.0. Install this specific version to ensure compatibility.
-
-> [!WARNING]
-> Starting from version 19.0.0, Mimesis has dropped support for builtin providers.
-
-
-To install mimesis, use pip:
+To install Mimesis, use pip:
 
 ```
 ~ pip install mimesis
@@ -84,10 +75,9 @@ You can improve it by sending pull requests to this repository.
 
 ## Usage
 
-The library is exceptionally user-friendly, and it only requires you to import a **Data Provider** object that
-corresponds to the desired data type.
+Import a data provider that corresponds to the data type you need.
 
-For instance, the [Person](https://mimesis.name/latest/api.html#person) provider can be imported to access personal information,
+For example, the [Person](https://mimesis.name/latest/api.html#person) provider gives access to personal information,
 including name, surname, email, and other related fields:
 
 ```python

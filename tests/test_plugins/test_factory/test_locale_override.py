@@ -7,7 +7,7 @@ from mimesis.locales import Locale
 from mimesis.plugins.factory import FactoryField
 
 
-class Person(object):
+class Person:
     def __init__(self, full_name_en: str, full_name_ru: str) -> None:
         self._full_name_en = full_name_en
         self._full_name_ru = full_name_ru
@@ -25,7 +25,7 @@ class Person(object):
 
 @register
 class PersonFactory(factory.Factory):
-    class Meta(object):
+    class Meta:
         model = Person
 
     full_name_en = FactoryField("full_name")

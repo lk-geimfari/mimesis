@@ -6,21 +6,23 @@ Policy
 
 If any of the following statements is true, move the type to this file:
 
-- if type is used in multiple files
-- if type is complex enough it has to be documented
-- if type is very important for the public API
+- if a type is used in multiple files
+- if a type is complex enough it has to be documented
+- if a type is very important for the public API
 
 """
 
 import datetime
+from collections.abc import Callable
 from decimal import Decimal
-from typing import Any, Callable, Final
+from typing import Any, Final
+
 
 __all__ = [
+    "JSON",
     "CallableSchema",
     "Date",
     "DateTime",
-    "JSON",
     "Key",
     "Keywords",
     "Matrix",

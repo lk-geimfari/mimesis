@@ -15,11 +15,12 @@ from mimesis.datasets import (
 )
 from mimesis.providers.base import BaseProvider
 
+
 __all__ = ["Hardware"]
 
 
 class Hardware(BaseProvider):
-    """Class for generate data related to hardware."""
+    """Class for generating data related to hardware."""
 
     class Meta:
         """Class for metadata."""
@@ -37,7 +38,7 @@ class Hardware(BaseProvider):
         return self.random.choice(RESOLUTIONS)
 
     def screen_size(self) -> str:
-        """Generates a random size of screen in inch.
+        """Generates a random size of screen in inches.
 
         :return: Screen size.
 

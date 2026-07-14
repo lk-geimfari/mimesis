@@ -1,6 +1,6 @@
 [project]
 name = "mimesis"
-version = "19.1.0"
+version = "20.0.0"
 description = "Mimesis: Fake Data Generator."
 authors = [{ name = "Isaak Uchakaev", email = "hey@isaak.dev" }]
 requires-python = ">=3.10"
@@ -69,8 +69,7 @@ dev = [
     "pygments~=2.13",
     "pytest-randomly~=3.12",
     "pytz~=2023.3",
-    "black>=22.10,<24.0",
-    "autoflake~=2.0",
+    "ruff>=0.12.0",
     "types-pytz~=2023.3",
     "taskipy>=1.10.1,<2",
     "validators>=0.20.0,<0.21",
@@ -80,8 +79,8 @@ dev = [
     "Sphinx>=5.1.1,<8.0.0",
     "sphinx-copybutton>=0.5.0,<0.6",
     "sphinx-autodoc-typehints>=1.19.2,<2",
+    "furo>=2024.8.6",
     "pytest-factoryboy>=2.6.0,<3",
-    "isort>=6.0.1",
     "twine>=6.1.0",
 ]
 
@@ -103,7 +102,7 @@ testpaths = [
 ]
 
 [tool.mypy]
-exclude = ["tests", "docs"]
+exclude = ["tests", "docs", "benchmarks"]
 files = ["mimesis", "minifier.py"]
 strict_optional = true
 check_untyped_defs = true
@@ -123,9 +122,178 @@ no_implicit_optional = true
 warn_return_any = true
 strict_equality = true
 
-[tool.isort]
-profile = "wemake"
+[tool.ruff]
+target-version = "py310"
+line-length = 88
+src = ["mimesis", "tests"]
+extend-exclude = [
+    "docs",
+    "mimesis/datasets/locale_template",
+]
+
+[tool.ruff.lint]
+select = [
+    "F",      # Pyflakes
+    "E",      # pycodestyle errors
+    "W",      # pycodestyle warnings
+    "C90",    # mccabe complexity
+    "I",      # isort
+    "N",      # pep8-naming
+    "D",      # pydocstyle
+    "UP",     # pyupgrade
+    "YTT",    # flake8-2020
+    "ASYNC",  # flake8-async
+    "S",      # flake8-bandit
+    "BLE",    # flake8-blind-except
+    "B",      # flake8-bugbear
+    "A",      # flake8-builtins
+    "COM",    # flake8-commas
+    "C4",     # flake8-comprehensions
+    "DTZ",    # flake8-datetimez
+    "T10",    # flake8-debugger
+    "EM",     # flake8-errmsg
+    "EXE",    # flake8-executable
+    "FA",     # flake8-future-annotations
+    "ISC",    # flake8-implicit-str-concat
+    "ICN",    # flake8-import-conventions
+    "LOG",    # flake8-logging
+    "G",      # flake8-logging-format
+    "INP",    # flake8-no-pep420
+    "PIE",    # flake8-pie
+    "T20",    # flake8-print
+    "PYI",    # flake8-pyi
+    "PT",     # flake8-pytest-style
+    "Q",      # flake8-quotes
+    "RSE",    # flake8-raise
+    "RET",    # flake8-return
+    "SLF",    # flake8-self
+    "SLOT",   # flake8-slots
+    "SIM",    # flake8-simplify
+    "TID",    # flake8-tidy-imports
+    "TC",     # flake8-type-checking
+    "INT",    # flake8-gettext
+    "ARG",    # flake8-unused-arguments
+    "PTH",    # flake8-use-pathlib
+    "ERA",    # eradicate
+    "PGH",    # pygrep-hooks
+    "PL",     # pylint
+    "TRY",    # tryceratops
+    "FLY",    # flynt
+    "PERF",   # perflint
+    "FURB",   # refurb
+    "RUF",    # Ruff-specific
+]
+ignore = [
+    # Formatter conflicts
+    "COM812",  # trailing-comma-missing — conflicts with ruff format
+    "ISC001",  # implicit-str-concat — conflicts with ruff format
+
+    # Docstyle: Sphinx/RST ``:param:`` style, not Google/NumPy
+    "D100",    # missing-module-docstring (many dataset modules)
+    "D104",    # missing-package-docstring
+    "D105",    # missing-magic-method-docstring
+    "D106",    # undocumented-public-nested-class (Meta nested classes)
+    "D107",    # missing-__init__-docstring
+    "D203",    # incorrect-blank-line-before-class (conflicts with D211)
+    "D213",    # multi-line-summary-second-line (conflicts with D212)
+    "D401",    # non-imperative-mood (project uses mixed moods)
+    "D406",    # new-line-after-section-name (RST sections)
+    "D407",    # missing-dashed-underline-after-section
+    "D413",    # missing-blank-line-after-last-section
+
+    # Library / API ergonomics
+    "A003",    # builtin-attribute-shadowing (e.g. ``id``, ``type`` fields)
+    "A005",    # stdlib-module-shadowing (``mimesis.random``, ``mimesis.types``)
+    "DTZ",     # naive datetimes are intentional for fake data
+    "EM101",   # exception message assignment style is too pedantic here
+    "EM102",   # f-string in exception — same
+    "PLC0415", # import-outside-top-level (lazy imports are intentional)
+    "PLR0913", # too-many-arguments (provider APIs)
+    "PLR2004", # magic-value-comparison (OK in data generators)
+    "TRY003",  # raise-vanilla-args (short messages are fine)
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*.py" = [
+    "D",       # tests need not carry full docstring coverage
+    "S101",    # assert is expected in tests
+    "S105",    # hardcoded passwords in fixtures
+    "S106",    # hardcoded passwords in fixtures
+    "S301",    # pickle used in export tests
+    "S311",    # pseudo-random for tests
+    "SLF001",  # private member access in tests
+    "ARG001",  # unused fixture args
+    "ARG002",  # unused method args in mocks
+    "ARG005",  # unused lambda args in fixtures/mocks
+    "PLR0915", # too many statements in large tests
+    "PLR0912", # too many branches in large tests
+    "INP001",  # namespace packages in tests
+    "N803",    # argument name conventions in fixtures
+    "TID252",  # relative imports in test packages
+    "RUF001",  # unicode in locale/assertion fixtures
+    # Existing pytest style; keep PT001/PT003/etc. for real footguns
+    "PT006",   # parametrize names as string vs tuple
+    "PT007",   # parametrize values as list vs tuple
+    "PT011",   # broad ``pytest.raises(Exception)`` in negative tests
+    "PT012",   # multi-statement raises blocks
+    "PT018",   # composite assertions
+    "PT019",   # fixture without default in signature
+]
+"mimesis/datasets/**/*.py" = [
+    "E501",    # long data strings
+    "F403",    # star-imports re-export datasets
+    "F405",    # undefined names from star-imports
+    "RUF001",  # ambiguous unicode in locale data
+    "RUF002",
+    "RUF003",
+]
+"mimesis/builder/**/*.py" = [
+    "SLF001",  # intentional private access between builder types
+]
+"minifier.py" = [
+    "T20",     # CLI script uses print
+]
+"tasks/**/*.py" = [
+    "T20",
+    "INP001",
+    "D",       # internal scripts
+    "E501",    # colorful CLI output lines
+]
+"example.py" = [
+    "T20",
+    "INP001",
+]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 10
+
+[tool.ruff.lint.pydocstyle]
+convention = "pep257"
+
+[tool.ruff.lint.isort]
+known-first-party = ["mimesis"]
+combine-as-imports = true
+force-wrap-aliases = true
+lines-after-imports = 2
+
+[tool.ruff.lint.flake8-tidy-imports]
+ban-relative-imports = "parents"
+
+[tool.ruff.lint.flake8-type-checking]
+strict = true
+
+[tool.ruff.lint.pylint]
+max-args = 8
+max-branches = 12
+max-returns = 8
+max-statements = 50
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+docstring-code-format = true
 
 [tool.taskipy.tasks]
 minify = "python tasks/minifier.py"
-

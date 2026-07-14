@@ -1,3 +1,21 @@
+Version 20.0.0
+--------------
+
+This release introduces a new schema generation system for relational data.
+
+**Breaking changes**:
+
+* Added ``SchemaBuilder`` in mimesis.builder.
+* Removed the legacy ``mimesis.schema.SchemaBuilder``.
+* Removed ``SchemaContext.pick_from()`` and ``SchemaContext.ref()``. Existing schemas must be migrated to the new API.
+
+**SchemaBuilder**:
+
+* Supports lazy fields, record references, nested schemas, and automatic dependency resolution.
+* Includes ``reseed()``, ``clear()``, and ``reset()`` helpers.
+* Available via ``from mimesis import SchemaBuilder``.
+
+
 Version 19.1.0
 --------------
 

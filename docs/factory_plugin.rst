@@ -5,7 +5,7 @@ Integration with factory_boy
 
 .. versionadded:: 15.0.0
 
-You no longer require any third-party packages to integrate Mimesis with ``factory_boy``.
+You no longer need any third-party packages to integrate Mimesis with ``factory_boy``.
 
 Mimesis requires ``factory_boy`` to be installed, but it's not a hard dependency.
 Therefore, you'll need to install it manually, like this:
@@ -21,8 +21,8 @@ Alternatively, you can include it as an extra when installing Mimesis itself, li
     poetry add --group dev mimesis[factory]
 
 
-Utilization
------------
+Usage
+-----
 
 Look at the example below and you’ll understand how it works:
 
@@ -99,5 +99,5 @@ about how to define custom field handlers.
 Factories and pytest
 --------------------
 
-We also recommend to use `pytest-factoryboy <https://github.com/pytest-dev/pytest-factoryboy>`_.
+We also recommend using `pytest-factoryboy <https://github.com/pytest-dev/pytest-factoryboy>`_.
 This way it will be possible to integrate your factories into pytest fixtures.

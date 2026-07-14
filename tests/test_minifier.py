@@ -1,7 +1,6 @@
 import sys
 
 import pytest
-
 from tasks.minifier import Minimizer, human_repr
 
 
@@ -32,7 +31,7 @@ def disable_colorama_codes(monkeypatch):
     from colorama import Fore, Style
 
     monkeypatch.setattr(Style, "RESET_ALL", "")
-    for name in vars(Fore).keys():
+    for name in vars(Fore):
         if name.upper() == name:
             monkeypatch.setattr(Fore, name, "")
 

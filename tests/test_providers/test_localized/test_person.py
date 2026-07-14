@@ -36,6 +36,7 @@ class TestPerson:
         "min_year, max_year",
         [
             (1899, 1950),
+            (2000, 1990),
             (datetime.now().year + 1, datetime.now().year + 3),
         ],
     )
@@ -95,7 +96,7 @@ class TestPerson:
         assert 1000 <= int(digits.strip()) <= 2000
 
         with pytest.raises(ValueError):
-            _person.username(drange=(1000, 2000, 3000))  # type: ignore
+            _person.username(drange=(1000, 2000, 3000))  # type: ignore[arg-type]
 
     def test_username_unsupported_mask(self, _person):
         with pytest.raises(ValueError):
@@ -125,7 +126,7 @@ class TestPerson:
             count = 1000000
             generated = set()
 
-            for i in range(count):
+            for _i in range(count):
                 email = _person.email(
                     domains=["example.com"],
                     unique=unique,
@@ -208,9 +209,9 @@ class TestPerson:
 
     def test_telephone_e164(self, _person):
         result = _person.telephone(e164=True)
-        assert re.match(
-            r"^\+\d+$", result
-        ), f"E.164 format should be +digits, got: {result}"
+        assert re.match(r"^\+\d+$", result), (
+            f"E.164 format should be +digits, got: {result}"
+        )
         assert len(result) >= 8, "E.164 number should have at least 7 digits plus +"
 
         mask = "+1 (555)-123-4567"
@@ -219,13 +220,13 @@ class TestPerson:
 
         mask_with_separators = "+1-(###)-###-####"
         result_e164 = _person.telephone(mask=mask_with_separators, e164=True)
-        assert re.match(
-            r"^\+\d+$", result_e164
-        ), f"Should be E.164 format, got: {result_e164}"
+        assert re.match(r"^\+\d+$", result_e164), (
+            f"Should be E.164 format, got: {result_e164}"
+        )
         result_default = _person.telephone(mask=mask_with_separators, e164=False)
-        assert (
-            "-" in result_default or "(" in result_default
-        ), f"Default should have separators: {result_default}"
+        assert "-" in result_default or "(" in result_default, (
+            f"Default should have separators: {result_default}"
+        )
 
     @pytest.mark.parametrize(
         "gender",

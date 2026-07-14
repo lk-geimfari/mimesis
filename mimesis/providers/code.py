@@ -12,11 +12,12 @@ from mimesis.locales import Locale
 from mimesis.providers.base import BaseProvider
 from mimesis.shortcuts import luhn_checksum
 
+
 __all__ = ["Code"]
 
 
 class Code(BaseProvider):
-    """A class, which provides methods for generating codes."""
+    """A class that provides methods for generating codes."""
 
     class Meta:
         name = "code"
@@ -42,7 +43,7 @@ class Code(BaseProvider):
     def isbn(
         self, fmt: ISBNFormat | None = None, locale: Locale = Locale.DEFAULT
     ) -> str:
-        """Generates ISBN for current locale.
+        """Generates an ISBN for the current locale.
 
         To change ISBN format, pass parameter ``code`` with needed value of
         the enum object :class:`~mimesis.enums.ISBNFormat`

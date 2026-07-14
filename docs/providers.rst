@@ -3,15 +3,15 @@
 Data Providers
 ==============
 
-Mimesis support over twenty different data providers available,
+Mimesis supports over twenty different data providers,
 which can produce data related to food, people, computer hardware,
 transportation, addresses, and more.
 
 See :ref:`api-reference` for more info.
 
 .. warning::
-    Data providers are **heavy objects** since each instance of provider keeps in memory all
-    the data from the provider's JSON file so you **should not** construct too many providers.
+    Data providers are **heavy objects**, since each instance of a provider keeps in memory all
+    the data from the provider's JSON file, so you **should not** construct too many providers.
 
     You can read more about the heaviness of providers in `this issue <https://github.com/lk-geimfari/mimesis/issues/968>`_.
 
@@ -35,7 +35,7 @@ Here is an example of a locale-dependent provider:
     person.name()
     # Output: 'John'
 
-If you don't specify the locale for a provider that is dependent on the locale,
+If you don't specify a locale for a locale-dependent provider,
 the default locale (i.e. **Locale.EN**) will be used.
 
 Locale-independent providers do not require a locale to be specified:
@@ -68,7 +68,7 @@ Generic Provider
 If you only require generating data for a specific locale, you may opt to
 use the :class:`~mimesis.Generic()` provider. It provides access to all the
 other Mimesis providers through a single object, allowing you to generate
-a wide range of data types using for the same locale.
+a wide range of data types for the same locale.
 
 Let's take a look at an example:
 
@@ -134,7 +134,7 @@ with more specific data, this can be achieved as follows:
     # Output: 'Bye!'
 
 
-In addition, you can also add multiple providers:
+You can also add multiple providers:
 
 .. code-block:: python
 
@@ -145,7 +145,7 @@ In addition, you can also add multiple providers:
     # Output: 'Bye!'
 
 If you attempt to add a provider that does not inherit from :class:`~mimesis.providers.base.BaseProvider`,
-you will receive a **TypeError** exception:
+a **TypeError** will be raised:
 
 .. code-block:: python
 
@@ -164,9 +164,9 @@ All providers must be subclasses of :class:`~mimesis.providers.base.BaseProvider
 that only a single instance of the Random object is used.
 
 Everything here is quite straightforward, but we would like to clarify one point:
-the **name** attribute in the **Meta** class refers to the name of the class through which access
-to methods of user-class providers is carried out. By default, the class name (``cls.__name__``) is used in
-lowercase letters.
+the **name** attribute in the **Meta** class refers to the name of the attribute through which
+methods of custom providers are accessed. By default, the class name (``cls.__name__``) is used in
+lowercase.
 
 See :ref:`seeded_data` to learn how to access the :class:`~mimesis.random.Random` object.
 
@@ -206,7 +206,7 @@ For example:
       ]
     }
 
-Afterwards, you will need to create a class that inherits from :class:`~mimesis.providers.base.BaseDataProvider`:
+Next, create a class that inherits from :class:`~mimesis.providers.base.BaseDataProvider`:
 
 .. code-block:: python
 

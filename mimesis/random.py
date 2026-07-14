@@ -1,14 +1,15 @@
-"""Implements various helpers which are used in the various data providers.
+"""Implements various helpers used by the data providers.
 
-This module contains custom ``Random()`` class where implemented a lot of
-methods which are not included in standard :py:class:`random.Random`,
-but frequently used in this project.
+This module contains a custom ``Random()`` class that implements many
+methods which are not included in the standard :py:class:`random.Random`,
+but are frequently used in this project.
 """
 
 import random as random_module
 import typing as t
 
 from mimesis.types import MissingSeed, Seed
+
 
 __all__ = ["Random", "random"]
 
@@ -34,10 +35,10 @@ class Random(random_module.Random):
         :param a: Minimum value of range.
         :param b: Maximum value of range.
         :return: List of random integers.
-        :raises ValueError: if the number is less or equal to zero.
+        :raises ValueError: if n is less than or equal to zero.
         """
         if n <= 0:
-            raise ValueError("Amount out of range.")
+            raise ValueError("n must be greater than 0")
 
         return [int(self.random() * (b - a)) + a for _ in range(n)]
 
@@ -68,8 +69,7 @@ class Random(random_module.Random):
 
         if char_code == digit_code:
             raise ValueError(
-                "The same placeholder cannot be "
-                "used for both numbers and characters."
+                "The same placeholder cannot be used for both numbers and characters."
             )
 
         _mask = mask.encode()

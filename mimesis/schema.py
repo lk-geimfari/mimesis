@@ -5,7 +5,9 @@ import inspect
 import json
 import pickle
 import re
-from typing import Any, Callable, Sequence
+from collections.abc import Callable, Sequence
+from pathlib import Path
+from typing import Any
 
 from mimesis.exceptions import (
     AliasesTypeError,
@@ -21,16 +23,16 @@ from mimesis.providers.generic import Generic
 from mimesis.random import Random
 from mimesis.types import JSON, CallableSchema, Key, MissingSeed, Seed
 
+
 __all__ = [
     "BaseField",
     "Field",
-    "Fieldset",
-    "Schema",
-    "SchemaContext",
-    "SchemaBuilder",
     "FieldHandler",
+    "Fieldset",
     "RegisterableFieldHandler",
     "RegisterableFieldHandlers",
+    "Schema",
+    "SchemaContext",
 ]
 
 FieldCache = dict[str, Callable[[Any], Any]]
@@ -40,6 +42,11 @@ RegisterableFieldHandlers = Sequence[RegisterableFieldHandler]
 
 
 class BaseField:
+    """Base class for field and fieldset generators.
+
+    :ivar aliases: A dictionary of aliases for standard fields.
+    """
+
     def __init__(
         self,
         locale: Locale = Locale.DEFAULT,
@@ -49,7 +56,6 @@ class BaseField:
 
         This class is used as a base class for :class:`Field` and :class:`Fieldset`.
 
-        :attr: aliases: A dictionary of aliases for standard fields.
         :param locale: Locale.
         :param seed: Seed for random.
         """
@@ -77,7 +83,7 @@ class BaseField:
         """An explicit method lookup.
 
         This method is called when the field
-        defined explicitly, like this: ``provider.method``
+        is defined explicitly, like this: ``provider.method``
 
         :param name: The field name.
         :return: Callable object.
@@ -87,8 +93,8 @@ class BaseField:
         try:
             provider = getattr(self._generic, provider_name)
             return getattr(provider, method_name)
-        except AttributeError:
-            raise FieldError(name)
+        except AttributeError as err:
+            raise FieldError(name) from err
 
     def _fuzzy_lookup(self, name: str) -> Any:
         """A fuzzy method lookup.
@@ -100,11 +106,10 @@ class BaseField:
         :return: Callable object.
         :raise FieldError: When field is invalid.
         """
-        for provider in dir(self._generic):
-            provider = getattr(self._generic, provider)
-            if isinstance(provider, BaseProvider):
-                if name in dir(provider):
-                    return getattr(provider, name)
+        for provider_name in dir(self._generic):
+            provider = getattr(self._generic, provider_name)
+            if isinstance(provider, BaseProvider) and name in dir(provider):
+                return getattr(provider, name)
 
         raise FieldError(name)
 
@@ -141,7 +146,7 @@ class BaseField:
         ):
             # Reset to valid state
             self.aliases = {}
-            raise AliasesTypeError()
+            raise AliasesTypeError
         return True
 
     def perform(
@@ -150,7 +155,7 @@ class BaseField:
         key: Key = None,
         **kwargs: Any,
     ) -> Any:
-        """Performs the value of the field by its name.
+        """Returns the value of the field by its name.
 
         It takes any string that represents the name of any method of
         any supported data provider and the ``**kwargs`` of this method.
@@ -180,22 +185,23 @@ class BaseField:
 
         :param name: Name of the method.
         :param key: A key function (any callable object)
-            which will be applied to result.
-        :param kwargs: Kwargs of method.
-        :return: The result of method.
-        :raises ValueError: if provider is not supported or if field is not defined.
+            which will be applied to the result.
+        :param kwargs: Keyword arguments of the method.
+        :return: The result of the method.
+        :raises FieldError: If the field is missing or invalid.
+        :raises AliasesTypeError: If ``aliases`` is not a flat dictionary.
         """
         # Validate aliases before lookup
         self._validate_aliases()
 
         if name is None:
-            raise FieldError()
+            raise FieldError
 
         random = self.get_random_instance()
 
         # First, try to find a custom field handler.
         if name in self._handlers:
-            result = self._handlers[name](random, **kwargs)  # type: ignore
+            result = self._handlers[name](random, **kwargs)  # type: ignore[call-arg]
         else:
             result = self._lookup_method(name)(**kwargs)
 
@@ -203,7 +209,7 @@ class BaseField:
             try:
                 # If a key function accepts two parameters
                 # then pass random instance to it.
-                return key(result, random)  # type: ignore
+                return key(result, random)  # type: ignore[call-arg]
             except TypeError:
                 return key(result)
 
@@ -215,7 +221,6 @@ class BaseField:
         :param field_name: Name of the field.
         :param field_handler: Callable object.
         """
-
         if not isinstance(field_name, str):
             raise TypeError("Field name must be a string.")
 
@@ -228,7 +233,7 @@ class BaseField:
         callable_signature = inspect.signature(field_handler)
 
         if len(callable_signature.parameters) <= 1:
-            raise FieldArityError()
+            raise FieldArityError
 
         if field_name not in self._handlers:
             self._handlers[field_name] = field_handler
@@ -256,7 +261,7 @@ class BaseField:
         return decorator
 
     def register_handlers(self, fields: RegisterableFieldHandlers) -> None:
-        """Register the new field handlers.
+        """Register new field handlers.
 
         :param fields: A sequence of sequences with field name and handler.
         :return: None.
@@ -269,16 +274,14 @@ class BaseField:
 
         :param field_name: Name of the field.
         """
-
         self._handlers.pop(field_name, None)
 
     def unregister_handlers(self, field_names: Sequence[str] = ()) -> None:
-        """Unregister a field handlers with given names.
+        """Unregister field handlers with the given names.
 
         :param field_names: Names of the fields.
         :return: None.
         """
-
         for name in field_names:
             self.unregister_handler(name)
 
@@ -298,25 +301,27 @@ class Field(BaseField):
 
     .. warning::
 
-        There is no case when you need to instance **field** in loops.
+        There is no case when you need to instantiate **Field** in loops.
 
         If you are doing this:
 
         >>> for i in range(1000):
         ...     field = Field()
 
-        You're doing it **wrong**! It is a terrible idea that will lead to a memory leak.
+        You're doing it **wrong**! It is a terrible idea that will lead
+        to a memory leak.
 
         Forewarned is forearmed.
 
     Here is an example of how to use it:
 
         >>> _ = Field()
-        >>> _('username')
+        >>> _("username")
         Dogtag_1836
     """
 
     def __call__(self, *args: Any, **kwargs: Any) -> Any:
+        """Generate a field value."""
         return self.perform(*args, **kwargs)
 
 
@@ -328,14 +333,14 @@ class Fieldset(BaseField):
     Here is an example:
 
         >>> fieldset = Fieldset(i=100)
-        >>> fieldset('username')
+        >>> fieldset("username")
         ['pot_1821', 'vhs_1915', ..., 'reviewed_1849']
 
     You may also specify the number of iterations by passing the **i** keyword
     argument to the callable instance of fieldset:
 
         >>> fieldset = Fieldset()
-        >>> fieldset('username', i=2)
+        >>> fieldset("username", i=2)
         ['pot_1821', 'vhs_1915']
 
     When **i** is not specified, the reasonable default is used — **10**.
@@ -379,70 +384,50 @@ class Fieldset(BaseField):
         )
 
         if iterations < min_iterations:
-            raise FieldsetError()
+            raise FieldsetError
 
         return [self.perform(*args, **kwargs) for _ in range(iterations)]
 
 
 class SchemaContext:
-    """Context object passed to transformation functions."""
+    """Context object passed to transformation functions.
 
-    __slots__ = ("index", "iteration", "timestamp", "seed", "custom", "schema_builder")
+    :ivar index: Current iteration index (0-based).
+    :ivar iteration: Current iteration number (1-based).
+    :ivar seed: Current seed state.
+    :ivar custom: Custom context data.
+    """
+
+    __slots__ = ("custom", "index", "iteration", "seed")
 
     def __init__(
         self,
         index: int,
         seed: Seed = MissingSeed,
         custom: dict[str, Any] | None = None,
-        builder: "SchemaBuilder | None" = None,
     ) -> None:
         """Initialize context.
 
         :param index: Current iteration index (0-based).
         :param seed: Current seed state.
         :param custom: Custom context data.
-        :param builder: Reference to SchemaBuilder for relational data.
         """
         self.index = index
         self.iteration = index + 1
         self.seed = seed
         self.custom = custom or {}
-        self.schema_builder = builder
-
-    def pick_from(self, schema_name: str, field: str | None = None) -> Any:
-        """Pick a random item from a registered schema.
-
-        :param schema_name: Name of the schema in builder registry.
-        :param field: Optional field to extract from item.
-        :return: Random item or field value.
-        :raises ValueError: If builder is not available or schema is not found.
-        """
-        if not self.schema_builder:
-            raise ValueError("pick_from() requires SchemaBuilder")
-        return self.schema_builder._pick_from(schema_name, field)
-
-    def ref(self, schema_name: str) -> list[JSON]:
-        """Get all generated items from a schema.
-
-        :param schema_name: Name of the schema in builder registry.
-        :return: List of all items from that schema.
-        :raises ValueError: If builder is not available or schema is not found.
-        """
-        if not self.schema_builder:
-            raise ValueError("ref() requires SchemaBuilder")
-        return self.schema_builder._get_data(schema_name)
 
 
 class Schema:
-    """Class which return list of filled schemas."""
+    """Class which returns a list of filled schemas."""
 
     __slots__ = (
-        "iterations",
-        "_transformers",
         "__counter",
         "__schema",
         "__seed",
         "_custom_context",
+        "_transformers",
+        "iterations",
     )
 
     def __init__(
@@ -458,10 +443,10 @@ class Schema:
         :param seed: Seed for random generator.
         """
         if iterations < 1:
-            raise ValueError("Number of iterations should be greater than 1.")
+            raise ValueError("Number of iterations must be at least 1.")
 
         if not callable(schema):
-            raise SchemaError()
+            raise SchemaError
 
         self.__schema = schema
         self.__seed = seed
@@ -481,12 +466,7 @@ class Schema:
             sig = inspect.signature(transformer)
             param_count = len(sig.parameters)
 
-            if param_count == 1:
-                item = transformer(item)
-            elif param_count >= 2:
-                item = transformer(item, ctx)
-            else:
-                item = transformer(item)
+            item = transformer(item, ctx) if param_count >= 2 else transformer(item)
 
         return item
 
@@ -513,10 +493,10 @@ class Schema:
         """Export a schema as a CSV file.
 
         :param file_path: The file path.
-        :param kwargs: The keyword arguments for :py:class:`csv.DictWriter` class.
+        :param kwargs: Keyword arguments for :py:class:`csv.DictWriter`.
         """
         data = self.create()
-        with open(file_path, "w", encoding="utf-8", newline="") as fp:
+        with Path(file_path).open("w", encoding="utf-8", newline="") as fp:
             fieldnames = list(data[0])
             dict_writer = csv.DictWriter(fp, fieldnames, **kwargs)
             dict_writer.writeheader()
@@ -525,19 +505,19 @@ class Schema:
     def to_json(self, file_path: str, **kwargs: Any) -> None:
         """Export a schema as a JSON file.
 
-        :param file_path: File a path.
-        :param kwargs: Extra keyword arguments for :py:func:`json.dump` class.
+        :param file_path: File path.
+        :param kwargs: Extra keyword arguments for :py:func:`json.dump`.
         """
-        with open(file_path, "w", encoding="utf-8") as fp:
+        with Path(file_path).open("w", encoding="utf-8") as fp:
             json.dump(self.create(), fp, **kwargs)
 
     def to_pickle(self, file_path: str, **kwargs: Any) -> None:
         """Export a schema as the pickled representation of the object to the file.
 
         :param file_path: The file path.
-        :param kwargs: Extra keyword arguments for :py:func:`pickle.dump` class.
+        :param kwargs: Extra keyword arguments for :py:func:`pickle.dump`.
         """
-        with open(file_path, "wb") as fp:
+        with Path(file_path).open("wb") as fp:
             pickle.dump(self.create(), fp, **kwargs)
 
     def _create_item(self, index: int) -> JSON:
@@ -553,20 +533,19 @@ class Schema:
         )
 
         result = self.__schema()
-        result = self._apply_transformers(result, ctx)
-        return result
+        return self._apply_transformers(result, ctx)
 
     def create(self) -> list[JSON]:
-        """Creates a list of a fulfilled schemas.
+        """Creates a list of filled schemas.
 
         .. note::
             This method evaluates immediately, so be careful when creating
-            large datasets otherwise you're risking running out of memory.
+            large datasets otherwise you risk running out of memory.
 
             If you need a lazy version of this method, just use :meth:`iterator` or
             the iterator protocol of :class:`Schema`
 
-        :return: List of fulfilled schemas.
+        :return: List of filled schemas.
         """
         index = 0
         results: list[JSON] = []
@@ -603,117 +582,3 @@ class Schema:
         """Return the iterator object itself."""
         self.__counter = 0
         return self
-
-
-class SchemaBuilder:
-    """Builder for creating related schemas with references."""
-
-    __slots__ = ("_schemas", "_data", "_seed", "_random")
-
-    def __init__(self, seed: Seed = MissingSeed) -> None:
-        """Initialize relation schema.
-
-        :param seed: Seed for random generator.
-        """
-        self._schemas: dict[str, Schema] = {}
-        self._data: dict[str, list[JSON]] = {}
-        self._seed = seed
-        if seed is MissingSeed:
-            self._random = Random()
-        else:
-            # Type narrowing: seed is not MissingSeed here
-            self._random = Random(seed)  # type: ignore[arg-type]
-
-    def define(self, name: str, schema: Schema) -> Schema:
-        """Register a schema with a name.
-
-        :param name: Name to register schema under.
-        :param schema: Schema instance.
-        :return: The schema for chaining.
-        """
-        self._schemas[name] = schema
-        return schema
-
-    def _pick_from(self, schema_name: str, field: str | None = None) -> Any:
-        """Pick random item from generated data.
-
-        :param schema_name: Name of schema.
-        :param field: Optional field to extract.
-        :return: Random item or field value.
-        """
-        if schema_name not in self._data:
-            raise ValueError(f"Schema '{schema_name}' not yet generated")
-
-        items = self._data[schema_name]
-        if not items:
-            raise ValueError(f"Schema '{schema_name}' has no items")
-
-        item = self._random.choice(items)
-        return item[field] if field else item
-
-    def _get_data(self, schema_name: str) -> list[JSON]:
-        """Get all data for a schema.
-
-        :param schema_name: Name of schema.
-        :return: List of items.
-        """
-        if schema_name not in self._data:
-            raise ValueError(f"Schema '{schema_name}' not yet generated")
-        return self._data[schema_name]
-
-    def _wrap_transformer(self, orig_fn: Callable[..., JSON]) -> Callable[..., Any]:
-        """Wrap a transformer to inject SchemaBuilder context.
-
-        :param orig_fn: Original transformer function.
-        :return: Wrapped transformer function.
-        """
-
-        def wrapped_transformer(item: JSON, ctx: SchemaContext) -> JSON:
-            new_ctx = SchemaContext(
-                index=ctx.index,
-                seed=ctx.seed,
-                custom=ctx.custom,
-                builder=self,
-            )
-
-            sig = inspect.signature(orig_fn)
-            if len(sig.parameters) >= 2:
-                return orig_fn(item, new_ctx)
-            return orig_fn(item)
-
-        return wrapped_transformer
-
-    def create(self, **counts: int) -> dict[str, list[JSON]]:
-        """Create all schemas with specified counts.
-
-        :param counts: Schema names and their counts.
-        :return: Dictionary of schema names to generated data.
-        """
-        result: dict[str, list[JSON]] = {}
-
-        for name, count in counts.items():
-            if name not in self._schemas:
-                raise ValueError(f"Schema '{name}' is not defined")
-
-            schema = self._schemas[name]
-
-            # Wrap transformers to inject builder context
-            temp_transformers = [
-                self._wrap_transformer(transformer)
-                for transformer in schema._transformers
-            ]
-
-            old_transformers = schema._transformers
-            schema._transformers = temp_transformers
-
-            old_iterations = schema.iterations
-            schema.iterations = count
-            data = schema.create()
-            schema.iterations = old_iterations
-
-            self._data[name] = data
-            result[name] = data
-
-            schema._transformers = old_transformers
-
-        return result

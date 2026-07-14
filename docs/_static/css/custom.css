@@ -1,340 +1,196 @@
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap');
+/* Mimesis docs — Furo theme refinements
+ *
+ * Fonts:
+ *   body  → Source Sans 3 (highly readable for prose/docs)
+ *   code  → Fira Code (as used by many modern developer docs)
+ */
 
-pre, tt, code {
-    font-family: 'Fira Code', 'Menlo', 'Deja Vu Sans Mono', 'Bitstream Vera Sans Mono', monospace !important;
-    font-size: 0.9em;
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap");
+
+:root {
+  --mimesis-radius: 10px;
+  --mimesis-code-radius: 12px;
 }
 
-a:visited {
-    color: #2b79a2;
+/* Keep visited links on-brand (avoid default purple); no underlines */
+a:link,
+a:visited,
+a:hover,
+a:active,
+a.reference:link,
+a.reference:visited,
+a.reference:hover,
+a.reference:active,
+a.muted-link:link,
+a.muted-link:visited,
+a.muted-link:hover {
+  color: var(--color-brand-content);
+  text-decoration: none !important;
+  text-decoration-color: transparent !important;
 }
 
-.logo img {
-    max-width: 80%;
+a:hover,
+a:visited:hover,
+a.reference:hover,
+a.reference:visited:hover,
+a.muted-link:hover {
+  color: var(--color-brand-primary);
 }
 
-a.reference {
-    text-decoration: none;
-    border-bottom: none;
+article {
+  max-width: 52rem;
 }
 
-div.sphinxsidebar a {
-    text-decoration: none;
-    border-bottom: none;
+p,
+li {
+  line-height: 1.7;
 }
 
-.function, .method, .class, .exception {
-    padding-bottom: 15px;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  letter-spacing: -0.015em;
+  font-weight: 650;
 }
 
-a.reference:hover {
-    border-bottom: 1px rgb(225, 83, 67);
+/* Inline + block code */
+code.literal,
+span.pre {
+  font-family: "Fira Code", ui-monospace, monospace !important;
+  font-size: 0.88em;
+  font-variant-ligatures: contextual;
+  border-radius: 5px;
+  padding: 0.12em 0.38em;
 }
 
-a.headerlink:hover {
-    color: #444 !important;
-    background: transparent !important;
-    text-decoration: none !important;
+div[class*="highlight-"] {
+  border-radius: var(--mimesis-code-radius);
+  overflow: hidden;
 }
 
-div.body p, div.body dd, div.body li {
-    line-height: 1.5;
+div.highlight {
+  border-radius: var(--mimesis-code-radius);
+  border: 1px solid var(--color-background-border);
 }
 
-body {
-    font-size: 16px;
+div.highlight pre {
+  font-family: "Fira Code", ui-monospace, monospace !important;
+  padding: 1.15rem 1.3rem;
+  line-height: 1.55;
+  font-size: 0.86rem;
+  font-variant-ligatures: contextual;
 }
 
-div.note {
-    border-radius: 10px;
+/* API signatures */
+dl.py {
+  margin: 1.5rem 0;
+  padding: 1rem 1.15rem;
+  border: 1px solid var(--color-background-border);
+  border-radius: var(--mimesis-radius);
+  background: var(--color-background-secondary);
 }
 
-div.warning {
-    border-radius: 8px;
+dl.py > dt {
+  font-family: "Fira Code", ui-monospace, monospace;
+  font-size: 0.92em;
+  font-weight: 500;
 }
 
-pre, div[class*="highlight-"] {
-    clear: both;
-    border-radius: 10px !important;
+dl.py > dd {
+  margin-top: 0.75rem;
 }
 
-div.highlight pre, table.highlighttable pre {
-    margin: 0;
-    border-radius: 5px !important;
-    padding: 20px !important;
+dl.py.class > dt,
+dl.py.function > dt,
+dl.py.method > dt,
+dl.py.exception > dt {
+  padding-bottom: 0.4rem;
+  border-bottom: 1px dashed var(--color-background-border);
 }
 
-.function, .method, .class, .exception {
-    padding-bottom: 15px;
+.admonition {
+  border-radius: var(--mimesis-radius);
 }
 
-@media (prefers-color-scheme: dark) {
-    body {
-        background-color: #121212;
-    }
+table.docutils {
+  border-radius: var(--mimesis-radius);
+  overflow: hidden;
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+}
 
-    div.sphinxsidebar p {
-        color: #98a3ad;
-    }
+table.docutils th {
+  font-weight: 600;
+  background: var(--color-background-secondary);
+}
 
-    div.sphinxsidebar a {
-        color: #98a3ad;
-        border-bottom: none;
-    }
+table.docutils td,
+table.docutils th {
+  padding: 0.65rem 0.85rem;
+}
 
-    dt:target, .highlight {
-        background: #121212;
-    }
+/* Sidebar extras */
+.sidebar-useful-links {
+  margin: 1rem 0.85rem 1.5rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--color-sidebar-search-border);
+}
 
-    .py, .py-class {
-        background: #121212;
-    }
+.sidebar-useful-links h3 {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-foreground-secondary);
+  margin: 0 0 0.55rem;
+}
 
-    div.sphinxsidebar h3,
-    div.sphinxsidebar h4 {
-        color: #98a3ad;
-    }
+.sidebar-useful-links ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
 
-    div.sphinxsidebar a:hover {
-        border-bottom: none;
-        text-decoration: underline;
-    }
+.sidebar-useful-links li {
+  margin: 0.2rem 0;
+}
 
-    div.sphinxsidebar h3 a {
-        color: #98a3ad;
-    }
+.sidebar-useful-links a {
+  display: block;
+  padding: 0.32rem 0.5rem;
+  border-radius: 6px;
+  color: var(--color-foreground-secondary);
+  text-decoration: none;
+  font-size: 0.92em;
+}
 
-    div.sphinxsidebar ul {
-        color: #98a3ad;
-    }
+.sidebar-useful-links a:hover {
+  color: var(--color-brand-content);
+  background: var(--color-sidebar-item-background--hover);
+}
 
-    div.body {
-        background-color: #121212;
-        color: #98a3ad;
-    }
+.sidebar-brand img,
+.sidebar-logo {
+  max-width: 70%;
+  height: auto;
+}
 
-    div.note {
-        background-color: #1a1a1a !important;
-        border-radius: 10px;
-        border: 1px solid rgba(90, 90, 90, 0.25)
-    }
+button.copybtn {
+  opacity: 0.5;
+  transition: opacity 0.15s ease;
+}
 
-    pre {
-        background-color: #1a1a1a !important;
-        border-radius: 10px;
-    }
+div.highlight:hover button.copybtn,
+button.copybtn:focus {
+  opacity: 1;
+}
 
-    tt, code {
-        background-color: #201f1f !important;
-        color: #98a3ad;
-        border-bottom: none;
-        padding: 1px 4px;
-        border-radius: 3px;
-    }
-
-    #api-reference .reference span.pre {
-        background-color: #121212 !important;
-    }
-
-    div.highlight {
-        background-color: #1a1a1a !important;
-        border-radius: 15px;
-    }
-
-    div.warning {
-        background-color: #1a1a1a !important;
-        border-radius: 8px;
-        border: 1px solid rgba(90, 90, 90, 0.25);
-    }
-
-    #contents li a,
-    #api-reference li a,
-    #additional-information li a,
-    #changelog li a,
-    #indices li a {
-        color: #98a3ad !important;
-    }
-
-    #contents li a:hover,
-    #api-reference li a:hover,
-    #additional-information li a:hover,
-    #changelog li a:hover,
-    #indices li a:hover {
-        color: #2b79a2 !important;
-        text-decoration: underline !important;
-    }
-
-    table.docutils {
-        border: 1px solid #888;
-        -moz-box-shadow: 2px 2px 4px #EEE;
-        -webkit-box-shadow: 2px 2px 4px #EEE;
-        box-shadow: 0 0 0 #EEE;
-    }
-
-    tt.xref, code.xref, a tt {
-        background-color: #FBFBFB;
-        border-bottom: none;
-        padding: 1px 4px;
-        border-radius: 3px;
-    }
-
-    div.admonition tt.xref, div.admonition code.xref, div.admonition a tt {
-        border-bottom: none !important;
-    }
-
-    a {
-        color: #2b79a2;
-        border-bottom: none;
-    }
-
-    a:hover {
-        color: #2b79a2;
-        text-decoration: underline !important;
-    }
-
-
-    a.reference {
-        border-bottom: none !important;
-    }
-
-    .highlight .go {
-        color: #b5b5b5;
-    }
-
-    .highlight .nt {
-        color: #b392f0;
-    }
-
-    .highlight .s1 {
-        color: #96d0ff;
-    }
-
-    .highlight .s2 {
-        color: #96d0ff;
-    }
-
-    .highlight .ow {
-        color: #6cb6ff;
-        font-weight: bold;
-    }
-
-    .highlight .o {
-        color: #6cb6ff;
-    }
-
-    .highlight .nb {
-        color: #dcbdfb;
-    }
-
-    .highlight .gp {
-        color: #6cb6ff;
-        font-weight: bold;
-    }
-
-    .highlight .kn {
-        color: #f47067;
-        font-weight: bold;
-    }
-
-    .highlight .nn {
-        color: #98a3ad;
-        font-weight: bold;
-    }
-
-    .highlight .nt {
-        color: #96d0ff;
-    }
-
-    .highlight .k {
-        color: #f47067;
-    }
-
-    .highlight .mi {
-        color: #6cb6ff;
-    }
-
-    .highlight .c1 {
-        color: #768390;
-        font-style: normal;
-    }
-
-    button.copybtn {
-        cursor: pointer;
-    }
-
-    .rst-versions .rst-current-version {
-        background-color: #121212 !important;
-        border: 1px solid #1a1a1a;
-    }
-
-    .highlight .nf {
-        color: #dcbdfb;
-    }
-
-    .highlight .bp {
-        color: #98a3ad;
-    }
-
-    .highlight .nc {
-        color: #f69d50;
-        font-weight: bold;
-    }
-
-    .highlight .mf {
-        color: #6cb6ff;
-    }
-
-    .highlight .nd {
-        color: #98a3ad;
-        font-weight: normal;
-    }
-
-    div.sphinxsidebarwrapper p.logo {
-        margin-bottom: 15px;
-    }
-
-    div.sphinxsidebar #searchbox input[type="text"] {
-        float: left;
-        width: 80%;
-        padding: 0.25em;
-        box-sizing: border-box;
-        background: #121212;
-    }
-
-    div.sphinxsidebar input {
-        border: 1px solid #3E4348;
-        color: #98a3ad;
-    }
-
-    div.sphinxsidebar #searchbox input[type="submit"] {
-        color: #98a3ad;
-        background: #121212;
-    }
-
-    input[value="Go"] {
-        background-color: #121212 !important;
-    }
-
-    input[value="Go"]:hover {
-        background-color: #2c2f36 !important;
-    }
-
-    .highlight .kc {
-        color: #f47067 !important;
-        font-weight: bold;
-    }
-
-    .highlight .ne {
-        color: #FF983B;
-    }
-
-    a.headerlink:hover {
-        color: #98a3ad !important;
-        background: transparent !important;
-        text-decoration: none !important;
-    }
-
-    .highlight .fm {
-        color: #4fb8ff !important;
-    }
+dt:target,
+span.highlighted {
+  background: var(--color-highlight-on-target);
+  border-radius: 4px;
 }

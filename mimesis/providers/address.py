@@ -1,6 +1,6 @@
 """Address module.
 
-This module contains provider Address() and other utils which represent
+This module contains provider Address() and other utilities that provide
 data related to location, such as street name, city etc.
 """
 
@@ -17,11 +17,12 @@ from mimesis.datasets import (
 from mimesis.enums import CountryCode
 from mimesis.providers.base import BaseDataProvider
 
+
 __all__ = ["Address"]
 
 
 class Address(BaseDataProvider):
-    """Class for generate fake address data.
+    """Class for generating fake address data.
 
     This object provides all the data related to
     geographical location.
@@ -175,7 +176,7 @@ class Address(BaseDataProvider):
         return self.state(*args, **kwargs)
 
     def postal_code(self) -> str:
-        """Generates a postal code for current locale.
+        """Generates a postal code for the current locale.
 
         :return: Postal code.
         """
@@ -191,14 +192,15 @@ class Address(BaseDataProvider):
         return self.postal_code()
 
     def country_code(self, code: CountryCode | None = CountryCode.A2) -> str:
-        """Generates a random code of country.
+        """Generates a random country code.
 
-        Default format is :attr:`~enums.CountryCode.A2` (ISO 3166-1-alpha2),
-        you can change it by passing parameter ``fmt``.
+        Default format is :attr:`~enums.CountryCode.A2` (ISO 3166-1-alpha2).
+        You can change it by passing the ``code`` parameter.
 
-        :param code: Country code.
-        :return: Country code in selected format.
-        :raises KeyError: if fmt is not supported.
+        :param code: Country code format.
+        :return: Country code in the selected format.
+        :raises NonEnumerableError: If ``code`` is not a valid
+            :class:`~enums.CountryCode`.
         """
         key = self.validate_enum(code, CountryCode)
         return self.random.choice(COUNTRY_CODES[key])
@@ -223,7 +225,7 @@ class Address(BaseDataProvider):
     def default_country(self) -> str:
         """Returns the country associated with the current locale.
 
-        :return: The country associated with current locale.
+        :return: The country associated with the current locale.
         """
         country: str = self._extract(["country", "current_locale"])
         return country
@@ -264,7 +266,7 @@ class Address(BaseDataProvider):
         """Generates a random value of latitude.
 
         :param dms: DMS format.
-        :return: Value of longitude.
+        :return: Value of latitude.
         """
         return self._get_fs("lt", dms)
 
@@ -301,7 +303,7 @@ class Address(BaseDataProvider):
         return self.random.choice(codes)
 
     def calling_code(self) -> str:
-        """Generates a random calling code of random country.
+        """Generates a random calling code of a random country.
 
         :return: Calling code.
         """

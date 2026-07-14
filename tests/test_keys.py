@@ -5,6 +5,7 @@ from mimesis.exceptions import LocaleError
 from mimesis.locales import Locale
 from mimesis.random import random
 
+
 ROMANIZE_INPUT_PARAMETERS = [
     (Locale.RU, "Ликид", "Likid"),
     (Locale.RU, "Что-то там_4352-!@", "Chto-to tam_4352-!@"),
@@ -377,7 +378,7 @@ def test_join_default_separator():
 
 def test_join_type_error():
     key = keys.join(" | ")
-    with pytest.raises(TypeError, match="join\\(\\) requires iterable"):
+    with pytest.raises(TypeError, match="join\\(\\) requires an iterable"):
         key(None)
 
 

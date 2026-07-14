@@ -1,4 +1,4 @@
-"""Provides all the data related to the data and time."""
+"""Provides all the data related to date and time."""
 
 ROMAN_NUMS = [
     "I",

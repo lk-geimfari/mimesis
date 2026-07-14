@@ -190,7 +190,7 @@ class TestAddress:
         assert result is not None
         assert result in CALLING_CODES
 
-    def isd_code(self, _address):
+    def test_isd_code(self, _address):
         result = _address.isd_code()
         assert result is not None
         assert result in CALLING_CODES
@@ -201,8 +201,8 @@ class TestAddress:
 
         def is_emoji_flag(char):
             return (
-                "\U0001F1E0" <= char <= "\U0001F1FF"
-                or "\U0001F3F4" <= char <= "\U0001F3FF"
+                "\U0001f1e0" <= char <= "\U0001f1ff"
+                or "\U0001f3f4" <= char <= "\U0001f3ff"
             )
 
         assert all(is_emoji_flag(char) for char in emoji_flag)
@@ -282,7 +282,7 @@ class TestSeededAddress:
     def test_calling_code(self, a1, a2):
         assert a1.calling_code() == a2.calling_code()
 
-    def isd_code(self, a1, a2):
+    def test_isd_code(self, a1, a2):
         assert a1.isd_code() == a2.isd_code()
 
     def test_country_emoji_flag(self, a1, a2):

@@ -3,4 +3,4 @@
 try:
     import pytz
 except ImportError:
-    pytz = None  # type: ignore
+    pytz = None  # type: ignore[assignment]

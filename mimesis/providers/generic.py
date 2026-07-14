@@ -1,7 +1,9 @@
-"""Provides all at one."""
+"""Provides all providers in one place."""
 
 import inspect
 import typing as t
+
+from typing_extensions import Self
 
 from mimesis.locales import Locale
 from mimesis.providers.base import (
@@ -11,11 +13,12 @@ from mimesis.providers.base import (
 )
 from mimesis.types import MissingSeed, Seed
 
+
 __all__ = ["Generic"]
 
 
 class Generic(BaseProvider):
-    """Class which contain all providers at one."""
+    """Class which contains all providers in one place."""
 
     def __init__(
         self,
@@ -88,27 +91,25 @@ class Generic(BaseProvider):
         super().reseed(seed)
 
         for attr in self.__dir__():
-            try:
-                provider = getattr(self, attr)
-                provider.reseed(seed)
-            except AttributeError:
+            if not hasattr(self, attr):
                 continue
+            provider = getattr(self, attr)
+            if hasattr(provider, "reseed"):
+                provider.reseed(seed)
 
-    def add_provider(self, cls: t.Type[BaseProvider], **kwargs: t.Any) -> None:
+    def add_provider(self, cls: type[BaseProvider], **kwargs: t.Any) -> None:
         """Adds a custom provider to a Generic() object.
 
         :param cls: Custom provider.
         :param kwargs: Keyword arguments for provider.
         :raises TypeError: if cls is Generic, if cls is not
             class or is not a subclass of BaseProvider.
-        :return: Absolutely none.
+        :return: None.
         """
-
         if inspect.isclass(cls):
             if not issubclass(cls, BaseProvider):
                 raise TypeError(
-                    "The provider must be a "
-                    "subclass of mimesis.providers.BaseProvider"
+                    "The provider must be a subclass of mimesis.providers.BaseProvider"
                 )
             try:
                 name = cls.Meta.name
@@ -123,9 +124,9 @@ class Generic(BaseProvider):
                 raise TypeError("Cannot add Generic instance to itself.")
             setattr(self, name, instance)
         else:
-            raise TypeError("The provider must be a class")
+            raise TypeError("The provider must be a class.")
 
-    def add_providers(self, *providers: t.Type[BaseProvider]) -> None:
+    def add_providers(self, *providers: type[BaseProvider]) -> None:
         """Adds multiple custom providers to a Generic() object.
 
         This method is a convenience method for adding multiple providers
@@ -133,7 +134,6 @@ class Generic(BaseProvider):
         provider in the list of providers.
 
         Example:
-
         >>> from mimesis import Generic
         >>> from myproviders import ProviderA, ProviderB
         >>> g = Generic()
@@ -150,7 +150,7 @@ class Generic(BaseProvider):
         for provider in providers:
             self.add_provider(provider)
 
-    def __iadd__(self, other: t.Type[BaseProvider]) -> "Generic":
+    def __iadd__(self, other: type[BaseProvider]) -> Self:
         """Adds a custom provider to a Generic() object.
 
         :param other: Custom provider.
