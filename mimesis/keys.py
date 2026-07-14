@@ -14,6 +14,7 @@ from typing import Any
 from mimesis.datasets import COMMON_LETTERS, ROMANIZATION_DICT
 from mimesis.locales import Locale, validate_locale
 from mimesis.random import Random
+from mimesis.types import KeyFunc
 
 
 __all__ = [
@@ -411,9 +412,6 @@ def apply_if(
         return v
 
     return key
-
-
-KeyFunc = Callable[[Any], Any] | Callable[[Any, Random | None], Any]
 
 
 def _call_key_func(

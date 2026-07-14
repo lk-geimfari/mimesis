@@ -4,6 +4,8 @@ from abc import ABC, abstractmethod
 from collections.abc import Sequence
 from typing import TYPE_CHECKING, Any
 
+from mimesis.types import Key
+
 
 if TYPE_CHECKING:
     from mimesis.builder.core import SchemaBuilder
@@ -49,7 +51,7 @@ class LazyField(Resolvable):
     def __init__(
         self,
         name: str,
-        key: Any = None,
+        key: Key = None,
         **kwargs: Any,
     ) -> None:
         self._name = name

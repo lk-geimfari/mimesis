@@ -12,7 +12,7 @@ from mimesis.builder.resolver import (
     Resolvable,
     SchemaRefProxy,
 )
-from mimesis.builder.schema import SchemaRef
+from mimesis.builder.schema import SchemaDefinition, SchemaRef
 from mimesis.locales import Locale
 from mimesis.schema import Field
 from mimesis.types import JSON, Key, MissingSeed, Seed
@@ -77,7 +77,7 @@ class SchemaBuilder:
         self._seed = seed
         self._field = Field(locale, seed)
         self._random = self._field.get_random_instance()
-        self._schemas: dict[str, JSON] = {}
+        self._schemas: dict[str, SchemaDefinition] = {}
         self._dependencies: dict[str, set[str]] = {}
         self._generated: dict[str, list[JSON]] = {}
         self._generating: set[str] = set()
@@ -165,7 +165,7 @@ class SchemaBuilder:
             )
         return SchemaRefProxy(schema._name)
 
-    def schema(self, name: str, schema: dict[str, Any]) -> SchemaRef:
+    def schema(self, name: str, schema: SchemaDefinition) -> SchemaRef:
         """Define a schema and return a reference.
 
         :param name: Unique name for this schema.

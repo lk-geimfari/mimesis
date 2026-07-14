@@ -24,9 +24,11 @@ __all__ = [
     "Date",
     "DateTime",
     "Key",
+    "KeyFunc",
     "Keywords",
     "Matrix",
     "MissingSeed",
+    "Number",
     "Seed",
     "Time",
     "Timestamp",
@@ -57,6 +59,8 @@ Number = int | float | complex | Decimal
 
 Matrix = list[list[Number]]
 
-CallableSchema = Callable[[], JSON]
+CallableSchema = Callable[[], JSON | None]
 
-Key = Callable[[Any], Any] | None
+# One-arg keys, or two-arg keys that also receive Random.
+KeyFunc = Callable[[Any], Any] | Callable[[Any, Any], Any]
+Key = KeyFunc | None

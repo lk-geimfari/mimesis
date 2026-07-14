@@ -8,7 +8,7 @@ from mimesis.compat import pytz
 from mimesis.datasets import GMT_OFFSETS, ROMAN_NUMS, TIMEZONES
 from mimesis.enums import DurationUnit, TimestampFormat, TimezoneRegion
 from mimesis.providers.base import BaseDataProvider
-from mimesis.types import Date, DateTime, Time
+from mimesis.types import Date, DateTime, Time, Timestamp
 
 
 __all__ = ["Datetime"]
@@ -254,7 +254,7 @@ class Datetime(BaseDataProvider):
 
     def timestamp(
         self, fmt: TimestampFormat = TimestampFormat.POSIX, **kwargs: t.Any
-    ) -> str | int:
+    ) -> Timestamp:
         """Generates a random timestamp in the given format.
 
         Supported formats are:

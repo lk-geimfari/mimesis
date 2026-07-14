@@ -5,7 +5,7 @@ import inspect
 import json
 import pickle
 import re
-from collections.abc import Callable, Sequence
+from collections.abc import Callable, Iterator, Sequence
 from pathlib import Path
 from typing import Any
 
@@ -33,12 +33,14 @@ __all__ = [
     "RegisterableFieldHandlers",
     "Schema",
     "SchemaContext",
+    "SchemaTransformer",
 ]
 
-FieldCache = dict[str, Callable[[Any], Any]]
-FieldHandler = Callable[[Random, Any], Any]
+FieldHandler = Callable[..., Any]
+FieldCache = dict[str, Callable[..., Any]]
 RegisterableFieldHandler = tuple[str, FieldHandler]
 RegisterableFieldHandlers = Sequence[RegisterableFieldHandler]
+SchemaTransformer = Callable[[JSON], JSON] | Callable[[JSON, "SchemaContext"], JSON]
 
 
 class BaseField:
@@ -201,7 +203,7 @@ class BaseField:
 
         # First, try to find a custom field handler.
         if name in self._handlers:
-            result = self._handlers[name](random, **kwargs)  # type: ignore[call-arg]
+            result = self._handlers[name](random, **kwargs)
         else:
             result = self._lookup_method(name)(**kwargs)
 
@@ -211,7 +213,7 @@ class BaseField:
                 # then pass random instance to it.
                 return key(result, random)  # type: ignore[call-arg]
             except TypeError:
-                return key(result)
+                return key(result)  # type: ignore[call-arg]
 
         return result
 
@@ -320,9 +322,14 @@ class Field(BaseField):
         Dogtag_1836
     """
 
-    def __call__(self, *args: Any, **kwargs: Any) -> Any:
+    def __call__(
+        self,
+        name: str | None = None,
+        key: Key = None,
+        **kwargs: Any,
+    ) -> Any:
         """Generate a field value."""
-        return self.perform(*args, **kwargs)
+        return self.perform(name, key=key, **kwargs)
 
 
 class Fieldset(BaseField):
@@ -354,7 +361,12 @@ class Fieldset(BaseField):
     fieldset_default_iterations: int = 10
     fieldset_iterations_kwarg: str = "i"
 
-    def __init__(self, *args: Any, **kwargs: Any) -> None:
+    def __init__(
+        self,
+        locale: Locale = Locale.DEFAULT,
+        seed: Seed = MissingSeed,
+        **kwargs: Any,
+    ) -> None:
         """Initialize fieldset.
 
         Accepts additional keyword argument **i** which is used
@@ -367,12 +379,18 @@ class Fieldset(BaseField):
             self.fieldset_iterations_kwarg,
             self.fieldset_default_iterations,
         )
-        super().__init__(*args, **kwargs)
+        super().__init__(locale=locale, seed=seed)
 
-    def __call__(self, *args: Any, **kwargs: Any) -> list[Any]:
+    def __call__(
+        self,
+        name: str | None = None,
+        key: Key = None,
+        **kwargs: Any,
+    ) -> list[Any]:
         """Perform fieldset.
 
-        :param args: Arguments for field.
+        :param name: Name of the field.
+        :param key: A key function applied to each result.
         :param kwargs: Keyword arguments for field.
         :raises FieldsetError: If parameter **i** is less than 1.
         :return: List of values.
@@ -386,7 +404,7 @@ class Fieldset(BaseField):
         if iterations < min_iterations:
             raise FieldsetError
 
-        return [self.perform(*args, **kwargs) for _ in range(iterations)]
+        return [self.perform(name, key=key, **kwargs) for _ in range(iterations)]
 
 
 class SchemaContext:
@@ -452,7 +470,7 @@ class Schema:
         self.__seed = seed
         self.__counter = 0
         self.iterations = iterations
-        self._transformers: list[Callable[..., Any]] = []
+        self._transformers: list[SchemaTransformer] = []
         self._custom_context: dict[str, Any] = {}
 
     def _apply_transformers(self, item: JSON, ctx: SchemaContext) -> JSON:
@@ -466,11 +484,15 @@ class Schema:
             sig = inspect.signature(transformer)
             param_count = len(sig.parameters)
 
-            item = transformer(item, ctx) if param_count >= 2 else transformer(item)
+            item = (
+                transformer(item, ctx)  # type: ignore[call-arg]
+                if param_count >= 2
+                else transformer(item)  # type: ignore[call-arg]
+            )
 
         return item
 
-    def map(self, fn: Callable[..., Any]) -> "Schema":
+    def map(self, fn: SchemaTransformer) -> "Schema":
         """Transform each generated item.
 
         :param fn: Function to transform items.
@@ -520,11 +542,11 @@ class Schema:
         with Path(file_path).open("wb") as fp:
             pickle.dump(self.create(), fp, **kwargs)
 
-    def _create_item(self, index: int) -> JSON:
+    def _create_item(self, index: int) -> JSON | None:
         """Create a single item with given index.
 
         :param index: The index for the context.
-        :return: Generated and transformed item.
+        :return: Generated and transformed item, or ``None`` to skip.
         """
         ctx = SchemaContext(
             index=index,
@@ -533,6 +555,8 @@ class Schema:
         )
 
         result = self.__schema()
+        if result is None:
+            return None
         return self._apply_transformers(result, ctx)
 
     def create(self) -> list[JSON]:
@@ -560,10 +584,10 @@ class Schema:
 
         return results
 
-    def iterator(self) -> "Schema":
+    def iterator(self) -> Iterator[JSON]:
         """Return an iterator for the schema.
 
-        :return: Iterator object.
+        :return: Iterator of generated items.
         """
         return iter(self)
 
@@ -578,7 +602,7 @@ class Schema:
 
         raise StopIteration
 
-    def __iter__(self) -> "Schema":
+    def __iter__(self) -> Iterator[JSON]:
         """Return the iterator object itself."""
         self.__counter = 0
         return self
