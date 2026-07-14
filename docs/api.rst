@@ -245,10 +245,17 @@ SchemaContext
 SchemaBuilder
 -------------
 
-.. autoclass:: mimesis.schema.SchemaBuilder
+.. autoclass:: mimesis.builder.SchemaBuilder
    :members:
    :special-members: __init__
 
+
+SchemaRef
+---------
+
+.. autoclass:: mimesis.builder.SchemaRef
+   :members:
+   :special-members: __init__, __call__
 
 
 Enums

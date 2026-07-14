@@ -1,340 +1,446 @@
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap');
+/* Mimesis docs — Alabaster refinements
+ *
+ * Type stack matches Django docs (docs.djangoproject.com):
+ *   body  → Roboto
+ *   code  → Fira Mono
+ */
 
-pre, tt, code {
-    font-family: 'Fira Code', 'Menlo', 'Deja Vu Sans Mono', 'Bitstream Vera Sans Mono', monospace !important;
-    font-size: 0.9em;
-}
+@import url("https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;700&family=Roboto:ital,wght@0,300;0,400;0,700;1,400;1,700&display=swap");
 
-a:visited {
-    color: #2b79a2;
-}
-
-.logo img {
-    max-width: 80%;
-}
-
-a.reference {
-    text-decoration: none;
-    border-bottom: none;
-}
-
-div.sphinxsidebar a {
-    text-decoration: none;
-    border-bottom: none;
-}
-
-.function, .method, .class, .exception {
-    padding-bottom: 15px;
-}
-
-a.reference:hover {
-    border-bottom: 1px rgb(225, 83, 67);
-}
-
-a.headerlink:hover {
-    color: #444 !important;
-    background: transparent !important;
-    text-decoration: none !important;
-}
-
-div.body p, div.body dd, div.body li {
-    line-height: 1.5;
+:root {
+  --m-bg: #ffffff;
+  --m-bg-soft: #f8fafc;
+  --m-bg-code: #f1f5f9;
+  --m-fg: #1e293b;
+  --m-fg-muted: #64748b;
+  --m-border: #e2e8f0;
+  --m-accent: #0e7490;
+  --m-accent-hover: #155e75;
+  --m-accent-soft: #ecfeff;
+  --m-radius: 10px;
+  --m-font-sans: "Roboto", Corbel, Avenir, "Lucida Grande", "Lucida Sans", sans-serif;
+  --m-font-mono: "Fira Mono", Consolas, Menlo, Monaco, "Courier New", Courier, monospace;
 }
 
 body {
-    font-size: 16px;
+  font-family: var(--m-font-sans);
+  font-size: 16px;
+  color: var(--m-fg);
+  -webkit-font-smoothing: antialiased;
+}
+
+div.body {
+  color: var(--m-fg);
+  font-family: var(--m-font-sans);
+}
+
+div.body p,
+div.body dd,
+div.body li {
+  line-height: 1.65;
+}
+
+div.body h1,
+div.body h2,
+div.body h3,
+div.body h4,
+div.body h5,
+div.body h6 {
+  font-family: var(--m-font-sans);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: #0f172a;
+}
+
+/* Links */
+a,
+a.reference {
+  color: var(--m-accent);
+  text-decoration: none;
+  border-bottom: none;
+}
+
+a:visited {
+  color: var(--m-accent);
+}
+
+a:hover,
+a.reference:hover {
+  color: var(--m-accent-hover);
+  border-bottom: 1px solid var(--m-accent-hover);
+}
+
+div.sphinxsidebar a {
+  text-decoration: none;
+  border-bottom: none;
+}
+
+div.sphinxsidebar a:hover {
+  color: var(--m-accent);
+}
+
+a.headerlink:hover {
+  color: var(--m-accent) !important;
+  background: transparent !important;
+  text-decoration: none !important;
+}
+
+/* Logo */
+.logo img {
+  max-width: 80%;
+}
+
+/* Code — Fira Mono, same as Django docs */
+pre,
+tt,
+code,
+span.pre {
+  font-family: var(--m-font-mono) !important;
+  font-variant-ligatures: no-common-ligatures;
+}
+
+tt,
+code {
+  font-size: 0.875em;
+  background-color: var(--m-bg-code) !important;
+  color: #0f172a;
+  border: none;
+  padding: 0.12em 0.4em;
+  border-radius: 5px;
+}
+
+pre,
+div[class*="highlight-"] {
+  clear: both;
+  border-radius: var(--m-radius) !important;
+}
+
+div.highlight {
+  background-color: var(--m-bg-code) !important;
+  border: 1px solid var(--m-border);
+  border-radius: var(--m-radius) !important;
+}
+
+div.highlight pre,
+table.highlighttable pre {
+  margin: 0;
+  border-radius: var(--m-radius) !important;
+  padding: 1.05rem 1.2rem !important;
+  line-height: 1.55;
+  font-size: 0.86em;
+}
+
+/* API signatures */
+.function,
+.method,
+.class,
+.exception {
+  padding-bottom: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+dl.py > dt {
+  font-family: var(--m-font-mono);
+  background: var(--m-bg-soft);
+  border: 1px solid var(--m-border);
+  border-radius: 8px;
+  padding: 0.55rem 0.75rem !important;
+}
+
+/* Admonitions */
+div.note,
+div.warning,
+div.tip,
+div.important {
+  border-radius: var(--m-radius);
+  border: 1px solid var(--m-border);
+  background: var(--m-bg-soft);
 }
 
 div.note {
-    border-radius: 10px;
+  border-left: 4px solid var(--m-accent);
 }
 
-div.warning {
-    border-radius: 8px;
+/* Tables */
+table.docutils {
+  border: 1px solid var(--m-border);
+  border-radius: 8px;
+  box-shadow: none;
+  overflow: hidden;
 }
 
-pre, div[class*="highlight-"] {
-    clear: both;
-    border-radius: 10px !important;
+table.docutils td,
+table.docutils th {
+  border-color: var(--m-border) !important;
+  padding: 0.55rem 0.75rem;
 }
 
-div.highlight pre, table.highlighttable pre {
-    margin: 0;
-    border-radius: 5px !important;
-    padding: 20px !important;
+table.docutils th {
+  background: var(--m-bg-soft);
+  font-weight: 700;
 }
 
-.function, .method, .class, .exception {
-    padding-bottom: 15px;
+button.copybtn {
+  cursor: pointer;
+  opacity: 0.55;
 }
 
+div.highlight:hover button.copybtn {
+  opacity: 1;
+}
+
+/* -------- Dark mode -------- */
 @media (prefers-color-scheme: dark) {
-    body {
-        background-color: #121212;
-    }
+  :root {
+    --m-bg: #0b1220;
+    --m-bg-soft: #111827;
+    --m-bg-code: #0f172a;
+    --m-fg: #e2e8f0;
+    --m-fg-muted: #94a3b8;
+    --m-border: #1e293b;
+    --m-accent: #22d3ee;
+    --m-accent-hover: #67e8f9;
+    --m-accent-soft: #164e63;
+  }
 
-    div.sphinxsidebar p {
-        color: #98a3ad;
-    }
+  body {
+    background-color: var(--m-bg);
+    color: var(--m-fg);
+  }
 
-    div.sphinxsidebar a {
-        color: #98a3ad;
-        border-bottom: none;
-    }
+  div.document,
+  div.documentwrapper,
+  div.bodywrapper,
+  div.body {
+    background-color: var(--m-bg);
+    color: var(--m-fg);
+  }
 
-    dt:target, .highlight {
-        background: #121212;
-    }
+  div.body h1,
+  div.body h2,
+  div.body h3,
+  div.body h4,
+  div.body h5,
+  div.body h6 {
+    color: #f1f5f9;
+  }
 
-    .py, .py-class {
-        background: #121212;
-    }
+  div.sphinxsidebar {
+    background: var(--m-bg);
+  }
 
-    div.sphinxsidebar h3,
-    div.sphinxsidebar h4 {
-        color: #98a3ad;
-    }
+  div.sphinxsidebar p,
+  div.sphinxsidebar h3,
+  div.sphinxsidebar h4,
+  div.sphinxsidebar ul {
+    color: var(--m-fg-muted);
+  }
 
-    div.sphinxsidebar a:hover {
-        border-bottom: none;
-        text-decoration: underline;
-    }
+  div.sphinxsidebar a,
+  div.sphinxsidebar h3 a {
+    color: var(--m-fg-muted);
+    border-bottom: none;
+  }
 
-    div.sphinxsidebar h3 a {
-        color: #98a3ad;
-    }
+  div.sphinxsidebar a:hover {
+    color: var(--m-accent);
+    text-decoration: underline;
+  }
 
-    div.sphinxsidebar ul {
-        color: #98a3ad;
-    }
+  a,
+  a:visited,
+  a.reference {
+    color: var(--m-accent);
+    border-bottom: none !important;
+  }
 
-    div.body {
-        background-color: #121212;
-        color: #98a3ad;
-    }
+  a:hover {
+    color: var(--m-accent-hover);
+    text-decoration: underline !important;
+  }
 
-    div.note {
-        background-color: #1a1a1a !important;
-        border-radius: 10px;
-        border: 1px solid rgba(90, 90, 90, 0.25)
-    }
+  tt,
+  code {
+    background-color: #1e293b !important;
+    color: #e2e8f0;
+  }
 
-    pre {
-        background-color: #1a1a1a !important;
-        border-radius: 10px;
-    }
+  tt.xref,
+  code.xref,
+  a tt {
+    background-color: #1e293b !important;
+    border-bottom: none;
+    color: var(--m-accent);
+  }
 
-    tt, code {
-        background-color: #201f1f !important;
-        color: #98a3ad;
-        border-bottom: none;
-        padding: 1px 4px;
-        border-radius: 3px;
-    }
+  #api-reference .reference span.pre {
+    background-color: transparent !important;
+  }
 
-    #api-reference .reference span.pre {
-        background-color: #121212 !important;
-    }
+  div.highlight,
+  pre {
+    background-color: var(--m-bg-code) !important;
+    border-color: var(--m-border);
+  }
 
-    div.highlight {
-        background-color: #1a1a1a !important;
-        border-radius: 15px;
-    }
+  dl.py > dt {
+    background: var(--m-bg-soft);
+    border-color: var(--m-border);
+    color: #f8fafc;
+  }
 
-    div.warning {
-        background-color: #1a1a1a !important;
-        border-radius: 8px;
-        border: 1px solid rgba(90, 90, 90, 0.25);
-    }
+  dt:target,
+  .highlight {
+    background: #164e63;
+  }
 
-    #contents li a,
-    #api-reference li a,
-    #additional-information li a,
-    #changelog li a,
-    #indices li a {
-        color: #98a3ad !important;
-    }
+  .py,
+  .py-class {
+    background: transparent;
+  }
 
-    #contents li a:hover,
-    #api-reference li a:hover,
-    #additional-information li a:hover,
-    #changelog li a:hover,
-    #indices li a:hover {
-        color: #2b79a2 !important;
-        text-decoration: underline !important;
-    }
+  div.note,
+  div.warning,
+  div.tip,
+  div.important {
+    background-color: var(--m-bg-soft) !important;
+    border-color: var(--m-border);
+  }
 
-    table.docutils {
-        border: 1px solid #888;
-        -moz-box-shadow: 2px 2px 4px #EEE;
-        -webkit-box-shadow: 2px 2px 4px #EEE;
-        box-shadow: 0 0 0 #EEE;
-    }
+  div.note {
+    border-left-color: var(--m-accent);
+  }
 
-    tt.xref, code.xref, a tt {
-        background-color: #FBFBFB;
-        border-bottom: none;
-        padding: 1px 4px;
-        border-radius: 3px;
-    }
+  table.docutils {
+    border: 1px solid var(--m-border);
+    box-shadow: none;
+  }
 
-    div.admonition tt.xref, div.admonition code.xref, div.admonition a tt {
-        border-bottom: none !important;
-    }
+  table.docutils th {
+    background: var(--m-bg-soft);
+  }
 
-    a {
-        color: #2b79a2;
-        border-bottom: none;
-    }
+  #contents li a,
+  #api-reference li a,
+  #additional-information li a,
+  #changelog li a,
+  #indices li a {
+    color: var(--m-fg-muted) !important;
+  }
 
-    a:hover {
-        color: #2b79a2;
-        text-decoration: underline !important;
-    }
+  #contents li a:hover,
+  #api-reference li a:hover,
+  #additional-information li a:hover,
+  #changelog li a:hover,
+  #indices li a:hover {
+    color: var(--m-accent) !important;
+    text-decoration: underline !important;
+  }
 
+  /* Syntax colors — editor-like on dark */
+  .highlight .k,
+  .highlight .kn,
+  .highlight .kc,
+  .highlight .kd {
+    color: #fb7185;
+    font-weight: 600;
+  }
 
-    a.reference {
-        border-bottom: none !important;
-    }
+  .highlight .nf,
+  .highlight .nc,
+  .highlight .fm,
+  .highlight .nb {
+    color: #67e8f9;
+  }
 
-    .highlight .go {
-        color: #b5b5b5;
-    }
+  .highlight .nc {
+    color: #fdba74;
+    font-weight: 600;
+  }
 
-    .highlight .nt {
-        color: #b392f0;
-    }
+  .highlight .s1,
+  .highlight .s2,
+  .highlight .sa,
+  .highlight .sd {
+    color: #86efac;
+  }
 
-    .highlight .s1 {
-        color: #96d0ff;
-    }
+  .highlight .mi,
+  .highlight .mf,
+  .highlight .o,
+  .highlight .ow {
+    color: #7dd3fc;
+  }
 
-    .highlight .s2 {
-        color: #96d0ff;
-    }
+  .highlight .c1,
+  .highlight .cm,
+  .highlight .c {
+    color: #64748b;
+    font-style: italic;
+  }
 
-    .highlight .ow {
-        color: #6cb6ff;
-        font-weight: bold;
-    }
+  .highlight .nn {
+    color: #cbd5e1;
+  }
 
-    .highlight .o {
-        color: #6cb6ff;
-    }
+  .highlight .bp,
+  .highlight .nd {
+    color: #94a3b8;
+  }
 
-    .highlight .nb {
-        color: #dcbdfb;
-    }
+  .highlight .gp {
+    color: #22d3ee;
+    font-weight: 600;
+  }
 
-    .highlight .gp {
-        color: #6cb6ff;
-        font-weight: bold;
-    }
+  .highlight .go {
+    color: #94a3b8;
+  }
 
-    .highlight .kn {
-        color: #f47067;
-        font-weight: bold;
-    }
+  .highlight .ne {
+    color: #fdba74;
+  }
 
-    .highlight .nn {
-        color: #98a3ad;
-        font-weight: bold;
-    }
+  div.sphinxsidebarwrapper p.logo {
+    margin-bottom: 15px;
+  }
 
-    .highlight .nt {
-        color: #96d0ff;
-    }
+  div.sphinxsidebar #searchbox input[type="text"] {
+    float: left;
+    width: 80%;
+    padding: 0.35em 0.5em;
+    box-sizing: border-box;
+    background: var(--m-bg-code);
+    color: var(--m-fg);
+    border: 1px solid var(--m-border);
+    border-radius: 6px;
+  }
 
-    .highlight .k {
-        color: #f47067;
-    }
+  div.sphinxsidebar input {
+    border: 1px solid var(--m-border);
+    color: var(--m-fg);
+    background: var(--m-bg-code);
+  }
 
-    .highlight .mi {
-        color: #6cb6ff;
-    }
+  div.sphinxsidebar #searchbox input[type="submit"],
+  input[value="Go"] {
+    color: var(--m-fg) !important;
+    background: var(--m-bg-soft) !important;
+    border: 1px solid var(--m-border);
+    border-radius: 6px;
+  }
 
-    .highlight .c1 {
-        color: #768390;
-        font-style: normal;
-    }
+  input[value="Go"]:hover {
+    background-color: #1e293b !important;
+  }
 
-    button.copybtn {
-        cursor: pointer;
-    }
+  a.headerlink:hover {
+    color: var(--m-fg-muted) !important;
+    background: transparent !important;
+  }
 
-    .rst-versions .rst-current-version {
-        background-color: #121212 !important;
-        border: 1px solid #1a1a1a;
-    }
-
-    .highlight .nf {
-        color: #dcbdfb;
-    }
-
-    .highlight .bp {
-        color: #98a3ad;
-    }
-
-    .highlight .nc {
-        color: #f69d50;
-        font-weight: bold;
-    }
-
-    .highlight .mf {
-        color: #6cb6ff;
-    }
-
-    .highlight .nd {
-        color: #98a3ad;
-        font-weight: normal;
-    }
-
-    div.sphinxsidebarwrapper p.logo {
-        margin-bottom: 15px;
-    }
-
-    div.sphinxsidebar #searchbox input[type="text"] {
-        float: left;
-        width: 80%;
-        padding: 0.25em;
-        box-sizing: border-box;
-        background: #121212;
-    }
-
-    div.sphinxsidebar input {
-        border: 1px solid #3E4348;
-        color: #98a3ad;
-    }
-
-    div.sphinxsidebar #searchbox input[type="submit"] {
-        color: #98a3ad;
-        background: #121212;
-    }
-
-    input[value="Go"] {
-        background-color: #121212 !important;
-    }
-
-    input[value="Go"]:hover {
-        background-color: #2c2f36 !important;
-    }
-
-    .highlight .kc {
-        color: #f47067 !important;
-        font-weight: bold;
-    }
-
-    .highlight .ne {
-        color: #FF983B;
-    }
-
-    a.headerlink:hover {
-        color: #98a3ad !important;
-        background: transparent !important;
-        text-decoration: none !important;
-    }
-
-    .highlight .fm {
-        color: #4fb8ff !important;
-    }
+  .rst-versions .rst-current-version {
+    background-color: var(--m-bg) !important;
+    border: 1px solid var(--m-border);
+  }
 }

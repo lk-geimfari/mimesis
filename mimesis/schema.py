@@ -27,7 +27,6 @@ __all__ = [
     "Fieldset",
     "Schema",
     "SchemaContext",
-    "SchemaBuilder",
     "FieldHandler",
     "RegisterableFieldHandler",
     "RegisterableFieldHandlers",
@@ -387,50 +386,24 @@ class Fieldset(BaseField):
 class SchemaContext:
     """Context object passed to transformation functions."""
 
-    __slots__ = ("index", "iteration", "timestamp", "seed", "custom", "schema_builder")
+    __slots__ = ("index", "iteration", "timestamp", "seed", "custom")
 
     def __init__(
         self,
         index: int,
         seed: Seed = MissingSeed,
         custom: dict[str, Any] | None = None,
-        builder: "SchemaBuilder | None" = None,
     ) -> None:
         """Initialize context.
 
         :param index: Current iteration index (0-based).
         :param seed: Current seed state.
         :param custom: Custom context data.
-        :param builder: Reference to SchemaBuilder for relational data.
         """
         self.index = index
         self.iteration = index + 1
         self.seed = seed
         self.custom = custom or {}
-        self.schema_builder = builder
-
-    def pick_from(self, schema_name: str, field: str | None = None) -> Any:
-        """Pick a random item from a registered schema.
-
-        :param schema_name: Name of the schema in builder registry.
-        :param field: Optional field to extract from item.
-        :return: Random item or field value.
-        :raises ValueError: If builder is not available or schema is not found.
-        """
-        if not self.schema_builder:
-            raise ValueError("pick_from() requires SchemaBuilder")
-        return self.schema_builder._pick_from(schema_name, field)
-
-    def ref(self, schema_name: str) -> list[JSON]:
-        """Get all generated items from a schema.
-
-        :param schema_name: Name of the schema in builder registry.
-        :return: List of all items from that schema.
-        :raises ValueError: If builder is not available or schema is not found.
-        """
-        if not self.schema_builder:
-            raise ValueError("ref() requires SchemaBuilder")
-        return self.schema_builder._get_data(schema_name)
 
 
 class Schema:
@@ -603,117 +576,3 @@ class Schema:
         """Return the iterator object itself."""
         self.__counter = 0
         return self
-
-
-class SchemaBuilder:
-    """Builder for creating related schemas with references."""
-
-    __slots__ = ("_schemas", "_data", "_seed", "_random")
-
-    def __init__(self, seed: Seed = MissingSeed) -> None:
-        """Initialize relation schema.
-
-        :param seed: Seed for random generator.
-        """
-        self._schemas: dict[str, Schema] = {}
-        self._data: dict[str, list[JSON]] = {}
-        self._seed = seed
-        if seed is MissingSeed:
-            self._random = Random()
-        else:
-            # Type narrowing: seed is not MissingSeed here
-            self._random = Random(seed)  # type: ignore[arg-type]
-
-    def define(self, name: str, schema: Schema) -> Schema:
-        """Register a schema with a name.
-
-        :param name: Name to register schema under.
-        :param schema: Schema instance.
-        :return: The schema for chaining.
-        """
-        self._schemas[name] = schema
-        return schema
-
-    def _pick_from(self, schema_name: str, field: str | None = None) -> Any:
-        """Pick random item from generated data.
-
-        :param schema_name: Name of schema.
-        :param field: Optional field to extract.
-        :return: Random item or field value.
-        """
-        if schema_name not in self._data:
-            raise ValueError(f"Schema '{schema_name}' not yet generated")
-
-        items = self._data[schema_name]
-        if not items:
-            raise ValueError(f"Schema '{schema_name}' has no items")
-
-        item = self._random.choice(items)
-        return item[field] if field else item
-
-    def _get_data(self, schema_name: str) -> list[JSON]:
-        """Get all data for a schema.
-
-        :param schema_name: Name of schema.
-        :return: List of items.
-        """
-        if schema_name not in self._data:
-            raise ValueError(f"Schema '{schema_name}' not yet generated")
-        return self._data[schema_name]
-
-    def _wrap_transformer(self, orig_fn: Callable[..., JSON]) -> Callable[..., Any]:
-        """Wrap a transformer to inject SchemaBuilder context.
-
-        :param orig_fn: Original transformer function.
-        :return: Wrapped transformer function.
-        """
-
-        def wrapped_transformer(item: JSON, ctx: SchemaContext) -> JSON:
-            new_ctx = SchemaContext(
-                index=ctx.index,
-                seed=ctx.seed,
-                custom=ctx.custom,
-                builder=self,
-            )
-
-            sig = inspect.signature(orig_fn)
-            if len(sig.parameters) >= 2:
-                return orig_fn(item, new_ctx)
-            return orig_fn(item)
-
-        return wrapped_transformer
-
-    def create(self, **counts: int) -> dict[str, list[JSON]]:
-        """Create all schemas with specified counts.
-
-        :param counts: Schema names and their counts.
-        :return: Dictionary of schema names to generated data.
-        """
-        result: dict[str, list[JSON]] = {}
-
-        for name, count in counts.items():
-            if name not in self._schemas:
-                raise ValueError(f"Schema '{name}' is not defined")
-
-            schema = self._schemas[name]
-
-            # Wrap transformers to inject builder context
-            temp_transformers = [
-                self._wrap_transformer(transformer)
-                for transformer in schema._transformers
-            ]
-
-            old_transformers = schema._transformers
-            schema._transformers = temp_transformers
-
-            old_iterations = schema.iterations
-            schema.iterations = count
-            data = schema.create()
-            schema.iterations = old_iterations
-
-            self._data[name] = data
-            result[name] = data
-
-            schema._transformers = old_transformers
-
-        return result

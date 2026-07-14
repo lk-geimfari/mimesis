@@ -20,7 +20,7 @@ from mimesis.exceptions import (
 from mimesis.keys import maybe, romanize
 from mimesis.locales import Locale
 from mimesis.random import Random
-from mimesis.schema import Field, Fieldset, Schema, SchemaBuilder, SchemaContext
+from mimesis.schema import Field, Fieldset, Schema, SchemaContext
 from mimesis.types import MissingSeed
 from tests.test_providers.patterns import DATA_PROVIDER_STR_REGEX
 
@@ -609,43 +609,6 @@ def test_schema_with_context():
     assert len(data) == 2
     for item in data:
         assert item["company"] == "Acme Inc"
-
-
-def test_relational_schema():
-    field = Field(Locale.EN, seed=0xFF)
-    builder = SchemaBuilder(seed=field.seed)
-    builder.define(
-        "users",
-        Schema(
-            lambda: {
-                "id": field("increment"),
-                "name": field("name"),
-            }
-        ),
-    )
-    builder.define(
-        "posts",
-        Schema(
-            lambda: {
-                "id": field("increment"),
-                "title": field("sentence"),
-            }
-        ).map(
-            lambda item, ctx: {
-                **item,
-                "user_id": ctx.pick_from("users", "id"),
-            }
-        ),
-    )
-
-    data = builder.create(users=3, posts=5)
-
-    assert len(data["users"]) == 3
-    assert len(data["posts"]) == 5
-
-    for post in data["posts"]:
-        assert "user_id" in post
-        assert post["user_id"] in [u["id"] for u in data["users"]]
 
 
 def test_schema_context():

@@ -70,7 +70,8 @@ from .providers import (
     Text,
     Transport,
 )
-from .schema import Field, Fieldset, Schema, SchemaBuilder
+from .builder import SchemaBuilder, SchemaRef
+from .schema import Field, Fieldset, Schema
 
 __all__ = [
     # Providers:
@@ -100,10 +101,11 @@ __all__ = [
     # Keys:
     "keys",
     # Schema:
+    "SchemaBuilder",
+    "SchemaRef",
     "Field",
     "Fieldset",
     "Schema",
-    "SchemaBuilder",
     # Locale:
     "Locale",
     # Enums:
@@ -151,7 +153,7 @@ __all__ = [
     "__license__",
 ]
 
-__version__ = "19.1.0"
+__version__ = "20.0.0"
 __title__ = "mimesis"
 __description__ = "Mimesis: Fake Data Generator."
 __url__ = "https://github.com/lk-geimfari/mimesis"

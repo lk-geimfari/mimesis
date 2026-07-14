@@ -21,7 +21,7 @@ that accept:
 - An optional ``key`` function as the second argument for transformations
 - Additional keyword arguments (``**kwargs``) passed to the underlying method
 
-See :ref:`api` for more information about the available providers and their methods.
+See :doc:`api` for more information about the available providers and their methods.
 
 There are two ways to specify field names: **explicit** and **implicit**.
 
@@ -263,6 +263,113 @@ The final result will look like this:
 
 That's it! You've just generated structured data using Mimesis.
 
+Transforming Items with ``map()`` and ``SchemaContext``
+-------------------------------------------------------
+
+:class:`~mimesis.schema.Schema` can post-process every generated item with
+:meth:`~mimesis.schema.Schema.map`. Transformers may accept either the item alone,
+or ``(item, ctx)`` where ``ctx`` is a :class:`~mimesis.schema.SchemaContext`.
+
+:class:`~mimesis.schema.SchemaContext` provides:
+
+- ``index`` — zero-based index of the current item
+- ``iteration`` — one-based counter (``index + 1``)
+- ``seed`` — schema seed
+- ``custom`` — dict populated by :meth:`~mimesis.schema.Schema.with_context`
+
+Basic transformation
+~~~~~~~~~~~~~~~~~~~~
+
+Use ``.map()`` to reshape or enrich each record:
+
+.. code-block:: python
+
+    from mimesis import Field, Schema
+    from mimesis.locales import Locale
+
+    field = Field(Locale.EN, seed=0xFF)
+
+    schema = (
+        Schema(
+            lambda: {
+                "id": field("increment"),
+                "email": field("email"),
+                "score": field("integer_number", start=1, end=100),
+            },
+            iterations=3,
+        )
+        .map(lambda item: {**item, "passed": item["score"] >= 50})
+        .map(lambda item, ctx: {
+            **item,
+            "row": ctx.index,
+            "batch": ctx.iteration,
+        })
+    )
+
+    schema.create()
+
+Example output:
+
+.. code-block:: json
+
+    [
+      {"id": 1, "email": "...", "score": 72, "passed": true, "row": 0, "batch": 1},
+      {"id": 2, "email": "...", "score": 31, "passed": false, "row": 1, "batch": 2},
+      {"id": 3, "email": "...", "score": 88, "passed": true, "row": 2, "batch": 3}
+    ]
+
+Custom context values
+~~~~~~~~~~~~~~~~~~~~~
+
+Attach shared metadata once with :meth:`~mimesis.schema.Schema.with_context`,
+then read it from ``ctx.custom`` inside transformers. This is useful for
+environment labels, tenant IDs, or request-scoped defaults shared across all
+generated rows:
+
+.. code-block:: python
+
+    from mimesis import Field, Schema
+    from mimesis.locales import Locale
+
+    field = Field(Locale.EN, seed=0xFF)
+
+    schema = (
+        Schema(
+            lambda: {
+                "username": field("username"),
+                "email": field("email"),
+            },
+            iterations=2,
+            seed=0xFF,
+        )
+        .with_context(
+            tenant="acme",
+            environment="staging",
+            source="seed-job",
+        )
+        .map(lambda item, ctx: {
+            **item,
+            "meta": {
+                "tenant": ctx.custom["tenant"],
+                "environment": ctx.custom["environment"],
+                "source": ctx.custom["source"],
+                "seed": ctx.seed,
+                "index": ctx.index,
+            },
+        })
+    )
+
+    data = schema.create()
+    # data[0]["meta"]["tenant"] == "acme"
+    # data[0]["meta"]["index"] == 0
+    # data[1]["meta"]["index"] == 1
+
+.. note::
+
+   Transformers are applied in the order they were registered with ``.map()``.
+   Prefer small, focused transformers so each step does one job.
+
+
 Performance Optimization
 ------------------------
 
@@ -294,138 +401,119 @@ use lazy iteration.
 Relational Schemas
 ------------------
 
-.. versionadded:: 19.0.0
+.. versionadded:: 20.0.0
 
-Mimesis 19.0 introduces powerful features for generating relational data with foreign key references
-between different schemas. This is achieved through the :class:`~mimesis.schema.SchemaBuilder` class,
-which allows you to define multiple schemas and create relationships between them.
+Use :class:`~mimesis.builder.SchemaBuilder` to generate related datasets with
+foreign keys, nested documents, and automatic dependency resolution.
 
 Basic Relational Example
-~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~
 
-Here's a simple example of creating users and posts where each post references a user:
+Create users and posts where each post references a user:
 
 .. code-block:: python
 
-    from mimesis import Field, Schema
-    from mimesis.schema import SchemaBuilder
+    from mimesis import SchemaBuilder
     from mimesis.locales import Locale
 
-    SEED = 0xFF
+    sb = SchemaBuilder(Locale.EN, seed=0xFF)
 
-    field = Field(Locale.EN, seed=SEED)
-    builder = SchemaBuilder(seed=SEED)
+    users = sb.schema("users", {
+        "id": sb.f("increment", accumulator="user"),
+        "username": sb.f("username"),
+        "email": sb.f("email"),
+    })
 
-    # Define the users schema
-    builder.define(
-        "users",
-        Schema(lambda: {
-            "id": field("increment", accumulator="user"),
-            "username": field("username"),
-            "email": field("email"),
-        })
-    )
+    posts = sb.schema("posts", {
+        "id": sb.f("increment", accumulator="post"),
+        "title": sb.f("sentence"),
+        "user_id": sb.ref(users).id,  # Foreign key to users
+    })
 
-    # Define the posts schema with a reference to users
-    builder.define(
-        "projects",
-        Schema(lambda: {
-            "id": field("increment", accumulator="project"),
-            "title": field("sentence"),
-        })
-        .map(lambda item, ctx: {
-            **item,
-            "user_id": ctx.pick_from("users", "id"),  # Reference to user
-        })
-    )
+    # Order of kwargs does not matter — dependencies are resolved automatically
+    data = sb.create(posts=20, users=5)
 
-    # Create data
-    data = builder.create(users=5, projects=20)
+    print(data["users"])  # 5 users
+    print(data["posts"])  # 20 posts with valid user_id values
 
-    # Access generated data
-    print(data["users"])     # List of 5 users
-    print(data["projects"])  # List of 20 projects with valid user_id references
+Schema References
+~~~~~~~~~~~~~~~~~
 
-Context Methods for Relational Data
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+``sb.schema()`` returns a :class:`~mimesis.builder.SchemaRef` that supports:
 
-When using transformations inside a :class:`~mimesis.schema.SchemaBuilder`, the context object
-provides special methods for working with relational data:
+- **Foreign keys** — ``sb.ref(users).id`` picks a random field value from
+  generated data
+- **Whole records** — ``sb.ref(users)`` embeds a random full record
+- **Nesting** — ``addresses(count=2)`` embeds generated items inline
 
-- ``ctx.pick_from(schema_name, field)`` - Picks a random value from a previously generated schema's field
-- ``ctx.ref(schema_name)`` - Gets all generated items from a schema
+.. code-block:: python
+
+    addresses = sb.schema("addresses", {
+        "city": sb.f("city"),
+        "street": sb.f("street_name"),
+    })
+
+    customers = sb.schema("customers", {
+        "id": sb.f("increment"),
+        "name": sb.f("full_name"),
+        "addresses": addresses(count=2),  # Nested documents
+    })
+
+    data = sb.create(customers=10)
 
 .. note::
-    Schemas must be generated in the correct order. A schema can only reference
-    schemas that were defined before it in the ``create()`` call.
+    Include every schema that is referenced via ``sb.ref()`` in the same
+    ``create()`` call. Nested schemas used only via ``schema_ref(count=N)``
+    do not need to be passed to ``create()``.
 
 Complex Relational Example
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Here's a more complex example with three related schemas:
+A multi-level graph with users, projects, and API keys:
 
 .. code-block:: python
 
-    from mimesis.schema import Field, Schema, SchemaBuilder
+    from mimesis import SchemaBuilder
     from mimesis.enums import TimestampFormat
     from mimesis.locales import Locale
 
-    SEED = 0xFF
+    sb = SchemaBuilder(Locale.EN, seed=0xFF)
 
-    field = Field(Locale.EN, seed=SEED)
-    builder = SchemaBuilder(seed=SEED)
+    users = sb.schema("users", {
+        "id": sb.f("increment", accumulator="user"),
+        "username": sb.f("username"),
+        "email": sb.f("email"),
+        "created_at": sb.f("timestamp", fmt=TimestampFormat.POSIX),
+    })
 
-    # Define users
-    builder.define(
-        "users",
-        Schema(lambda: {
-            "id": field("increment", accumulator="user"),
-            "username": field("username"),
-            "email": field("email"),
-            "created_at": field("timestamp", fmt=TimestampFormat.POSIX),
-        })
-    )
+    projects = sb.schema("projects", {
+        "id": sb.f("increment", accumulator="project"),
+        "name": sb.f("word"),
+        "version": sb.f("version"),
+        "owner_id": sb.ref(users).id,
+        "status": sb.choice(["active", "archived", "draft"]),
+    })
 
-    # Define projects (owned by users)
-    builder.define(
-        "projects",
-        Schema(lambda: {
-            "id": field("increment", accumulator="project"),
-            "name": field("text.word"),
-            "version": field("version"),
-        })
-        .map(lambda item, ctx: {
-            **item,
-            "owner_id": ctx.pick_from("users", "id"), # Assign random user as owner
-            "status": field.get_random_instance().choice(
-                ["active", "archived", "draft"]
-            ),
-        })
-    )
+    api_keys = sb.schema("api_keys", {
+        "id": sb.f("uuid"),
+        "key": sb.f("token_hex"),
+        "project_id": sb.ref(projects).id,
+        "created_at": sb.f("timestamp", fmt=TimestampFormat.POSIX),
+    })
 
-    # Define API keys (belong to projects, created by users)
-    builder.define(
-        "api_keys",
-        Schema(lambda: {
-            "id": field("uuid"),
-            "key": field("token_hex"),
-            "created_at": field("timestamp", fmt=TimestampFormat.POSIX),
-        })
-        .map(lambda item, ctx: item | {"project_id": ctx.pick_from("projects", "id")})
-    )
-
-    # Generate all data with proper relationships
-    data = builder.create(
-        users=3,
+    data = sb.create(
+        api_keys=10,
         projects=5,
-        api_keys=10
+        users=3,
     )
 
 This will generate:
 
 - 3 users
 - 5 projects (each with a valid ``owner_id`` referencing a user)
-- 10 API keys (each with a valid ``project_id`` referencing projects)
+- 10 API keys (each with a valid ``project_id`` referencing a project)
+
+See also: :class:`~mimesis.builder.SchemaBuilder` API reference.
 
 
 Field Aliases
