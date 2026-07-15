@@ -8,6 +8,7 @@ documentation explains the different parts of Mimesis and how they can be used, 
    :maxdepth: 2
 
    about
+   benchmarks
    installation
    quickstart
    locales

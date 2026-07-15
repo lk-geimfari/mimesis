@@ -129,6 +129,7 @@ src = ["mimesis", "tests"]
 extend-exclude = [
     "docs",
     "mimesis/datasets/locale_template",
+    "benchmarks/performance_comparison.py",
 ]
 
 [tool.ruff.lint]
