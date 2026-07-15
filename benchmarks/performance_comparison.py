@@ -28,7 +28,7 @@ except ImportError:
 
 ITERATIONS = 20_000
 MEMORY_BATCH_SIZE = 50_000
-UNIQUENESS_SIZES = (10_000, 100_000)
+UNIQUENESS_SIZE = 100_000
 LOCALE = "en"
 
 
@@ -802,39 +802,27 @@ def benchmark_memory_usage() -> list[dict[str, Any]]:
 
 
 def benchmark_uniqueness_usage() -> list[dict[str, Any]]:
-    """Compare uniqueness (%) for representative generators at fixed sample sizes."""
+    """Compare uniqueness (%) for representative generators."""
     print("\n📊 Benchmarking Uniqueness...")
 
     mim_person = Person(locale=Locale.EN)
     mim_address = Address(locale=Locale.EN)
     mim_internet = Internet()
-    mim_payment = Payment()
     fkr = Faker(LOCALE)
 
     scenarios: list[tuple[str, Callable[[], Any], Callable[[], Any]]] = [
         ("full_name", mim_person.full_name, fkr.name),
         ("email", mim_person.email, fkr.email),
         ("username", mim_person.username, fkr.user_name),
-        ("password", mim_person.password, fkr.password),
         ("phone_number", mim_person.phone_number, fkr.phone_number),
         ("address", mim_address.address, fkr.address),
         ("url", mim_internet.url, fkr.url),
-        ("ipv4", mim_internet.ip_v4, fkr.ipv4),
-        ("credit_card_number", mim_payment.credit_card_number, fkr.credit_card_number),
     ]
 
-    results: list[dict[str, Any]] = []
-    for samples in UNIQUENESS_SIZES:
-        for name, mimesis_func, faker_func in scenarios:
-            results.append(
-                benchmark_uniqueness(
-                    name,
-                    mimesis_func,
-                    faker_func,
-                    samples,
-                )
-            )
-    return results
+    return [
+        benchmark_uniqueness(name, mimesis_func, faker_func, UNIQUENESS_SIZE)
+        for name, mimesis_func, faker_func in scenarios
+    ]
 
 
 def main() -> None:
@@ -844,10 +832,7 @@ def main() -> None:
     print(f"{'=' * 100}")
     print(f"\nIterations per timing test: {ITERATIONS:,}")
     print(f"Batch size for memory tests: {MEMORY_BATCH_SIZE:,}")
-    print(
-        "Sample sizes for uniqueness tests: "
-        + ", ".join(f"{n:,}" for n in UNIQUENESS_SIZES)
-    )
+    print(f"Sample size for uniqueness tests: {UNIQUENESS_SIZE:,}")
     print(f"Locale: {LOCALE}")
     print(f"\n{'=' * 100}")
 
@@ -968,7 +953,7 @@ def main() -> None:
         f"{'Mimesis' if memory_ratio > 1 else 'Faker'}"
     )
 
-    print("\nUniqueness (average % across scenarios and sample sizes):")
+    print("\nUniqueness (average % across scenarios):")
     print(f"  Mimesis: {avg_mim_unique:.2f}%")
     print(f"  Faker:   {avg_fkr_unique:.2f}%")
     print(
