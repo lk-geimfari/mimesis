@@ -51,7 +51,7 @@ Create users and posts where each post references a user:
     print(data["posts"][0]["user_id"] in {u["id"] for u in data["users"]})
     # True
 
-Defining Fields with ``sb.f``
+Defining Fields with ``f()``
 -----------------------------
 
 :meth:`~mimesis.builder.SchemaBuilder.f` creates a lazy field that is evaluated
@@ -73,7 +73,7 @@ You can also pick from fixed or weighted lists without a provider method:
     sb.choice(["active", "archived", "draft"])
     sb.weighted_choice(["common", "rare"], [0.9, 0.1])
 
-Key Functions with ``sb.f``
+Key Functions with ``f()``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The optional ``key`` parameter accepts the same callables as
