@@ -150,7 +150,7 @@ __all__ = [
     "keys",
 ]
 
-__version__ = "20.0.0"
+__version__ = "21.0.0"
 __title__ = "mimesis"
 __description__ = "Mimesis: Fake Data Generator."
 __url__ = "https://github.com/lk-geimfari/mimesis"
