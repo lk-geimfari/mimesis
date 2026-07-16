@@ -5,7 +5,9 @@ from typing import Any
 from mimesis.builder.resolver import NestedSchema
 
 
-__all__ = ["SchemaRef"]
+__all__ = ["SchemaDefinition", "SchemaRef"]
+
+SchemaDefinition = dict[str, Any]
 
 
 class SchemaRef:
@@ -38,7 +40,7 @@ class SchemaRef:
 
     __slots__ = ("_definition", "_name")
 
-    def __init__(self, name: str, definition: dict[str, Any]) -> None:
+    def __init__(self, name: str, definition: SchemaDefinition) -> None:
         """Initialize schema reference.
 
         :param name: The schema name.

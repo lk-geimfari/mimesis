@@ -1766,14 +1766,6 @@
     "Webmaster",
     "Zoologiste"
   ],
-  "political_views": [
-    "Anarchiste",
-    "Libéral",
-    "Communiste",
-    "Socialiste",
-    "Conservateur",
-    "Libertaire"
-  ],
   "surnames": [
     "Abadie",
     "Adam",
@@ -3737,21 +3729,6 @@
     "Université François-Rabelais",
     "Université de Valenciennes",
     "Université de Valenciennes et du Hainaut-Cambrésis"
-  ],
-  "views_on": [
-    "Négatif",
-    "Positif",
-    "Neutre",
-    "Indécis"
-  ],
-  "worldview": [
-    "Athéisme",
-    "Agnosticisme",
-    "Catholicisme",
-    "Déisme",
-    "Panthéisme",
-    "Confucianisme",
-    "Humanisme séculier"
   ],
   "telephone_fmt": [
     "01########",

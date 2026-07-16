@@ -24,9 +24,10 @@ __all__ = [
     "Date",
     "DateTime",
     "Key",
-    "Keywords",
+    "KeyFunc",
     "Matrix",
     "MissingSeed",
+    "Number",
     "Seed",
     "Time",
     "Timestamp",
@@ -51,12 +52,12 @@ MissingSeed: Final = _MissingSeed()
 
 Seed = None | int | float | str | bytes | bytearray | _MissingSeed
 
-Keywords = list[str] | set[str] | tuple[str, ...]
-
 Number = int | float | complex | Decimal
 
 Matrix = list[list[Number]]
 
-CallableSchema = Callable[[], JSON]
+CallableSchema = Callable[[], JSON | None]
 
-Key = Callable[[Any], Any] | None
+# One-arg keys, or two-arg keys that also receive Random.
+KeyFunc = Callable[[Any], Any] | Callable[[Any, Any], Any]
+Key = KeyFunc | None

@@ -94,20 +94,68 @@ on the locale and which does not, so you don't have to worry about it.
 Custom Providers
 ----------------
 
-The library provides support for a wide range of data, which is sufficient
-for most use cases. However, for those who wish to create their own providers
-with more specific data, this can be achieved as follows:
+Built-in providers cover most cases. When you need domain-specific methods,
+subclass :class:`~mimesis.providers.base.BaseProvider` (or
+:class:`~mimesis.providers.base.BaseDataProvider` for JSON datasets — see
+:ref:`custom_data_providers`).
+
+Requirements
+~~~~~~~~~~~~
+
+1. Inherit from :class:`~mimesis.providers.base.BaseProvider`.
+2. Define a nested ``Meta`` class with at least ``name`` (attribute used to
+   access the provider, e.g. ``generic.some_provider``).
+3. Decide how the provider is attached — see the next subsection.
+
+All custom providers must subclass ``BaseProvider`` so they share Mimesis’s
+:class:`~mimesis.random.Random` instance. See :ref:`seeded_data` for seeded
+access to ``self.random``.
+
+Choosing how to attach the provider
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+When a subclass defines ``Meta.name``, Mimesis may register it in
+:class:`~mimesis.providers.base.ProviderRegistry` at **class definition** time.
+:class:`~mimesis.Generic` builds its attributes from that registry, and
+:class:`~mimesis.schema.Field` uses ``Generic`` internally — so registration
+affects both.
+
+Control this with ``Meta.auto_register``:
+
++--------------------------+-----------------------------------------------------+
+| Setting                  | Use when                                            |
++==========================+=====================================================+
+| ``auto_register = False``| **Recommended for application code and tests.**     |
+|                          | You attach the provider yourself with               |
+|                          | ``add_provider()`` on specific ``Generic``          |
+|                          | instances. Nothing leaks into unrelated             |
+|                          | ``Generic`` / ``Field`` objects.                    |
++--------------------------+-----------------------------------------------------+
+| ``auto_register = True`` | **For reusable plugins / shared libraries.**        |
+| (default if omitted)     | After the class is imported, every **new**          |
+|                          | ``Generic()`` and ``Field()`` exposes the provider  |
+|                          | automatically — no ``add_provider()`` call.         |
++--------------------------+-----------------------------------------------------+
+
+.. note::
+   Auto-registration only affects instances created **after** the provider
+   class is defined. Existing ``Generic`` objects are unchanged; call
+   ``add_provider()`` on them if you need the provider there too.
+
+Step by step: explicit attachment
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**1.** Define the provider with ``auto_register = False``:
 
 .. code-block:: python
 
-    from mimesis import Generic
-    from mimesis.locales import Locale
     from mimesis.providers.base import BaseProvider
 
 
     class SomeProvider(BaseProvider):
         class Meta:
             name = "some_provider"
+            auto_register = False
 
         @staticmethod
         def hello() -> str:
@@ -115,6 +163,10 @@ with more specific data, this can be achieved as follows:
 
 
     class Another(BaseProvider):
+        class Meta:
+            name = "another"
+            auto_register = False
+
         def __init__(self, seed, message: str) -> None:
             super().__init__(seed=seed)
             self.message = message
@@ -122,91 +174,146 @@ with more specific data, this can be achieved as follows:
         def bye(self) -> str:
             return self.message
 
+**2.** Create a ``Generic`` and attach the classes:
+
+.. code-block:: python
+
+    from mimesis import Generic
+    from mimesis.locales import Locale
 
     generic = Generic(locale=Locale.DEFAULT)
-    generic.add_provider(SomeProvider) # or generic += SomeProvider
+    generic.add_provider(SomeProvider)  # or: generic += SomeProvider
     generic.add_provider(Another, message="Bye!")
 
+Extra keyword arguments (except ``seed``, which is always taken from
+``Generic``) are passed to the provider’s ``__init__``.
+
+**3.** Call your methods:
+
+.. code-block:: python
+
     generic.some_provider.hello()
-    # Output: 'Hello!'
+    # 'Hello!'
 
     generic.another.bye()
-    # Output: 'Bye!'
+    # 'Bye!'
 
-
-You can also add multiple providers:
+Attach several providers at once with
+:meth:`~mimesis.providers.generic.Generic.add_providers`:
 
 .. code-block:: python
 
     generic.add_providers(SomeProvider, Another)
-    generic.some_provider.hello()
-    # Output: 'Hello!'
-    generic.another.bye()
-    # Output: 'Bye!'
 
-If you attempt to add a provider that does not inherit from :class:`~mimesis.providers.base.BaseProvider`,
-a **TypeError** will be raised:
+If ``Meta.name`` is omitted, ``add_provider()`` falls back to the class name
+in lowercase (``SomeProvider`` → ``generic.someprovider``). Prefer setting
+``Meta.name`` explicitly.
+
+A class that does not inherit from ``BaseProvider`` raises ``TypeError``:
 
 .. code-block:: python
 
     class InvalidProvider:
-         @staticmethod
-         def hello() -> str:
-             return 'Hello!'
+        @staticmethod
+        def hello() -> str:
+            return "Hello!"
 
     generic.add_provider(InvalidProvider)
-      ...
-      ...
-    TypeError: The provider must be a subclass of mimesis.providers.BaseProvider.
+    # TypeError: The provider must be a subclass of mimesis.providers.BaseProvider
+
+Step by step: automatic registration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Use this when shipping a provider that should appear everywhere after import.
+
+**1.** Define the provider with ``Meta.name`` (leave ``auto_register`` at its
+default ``True``, or set it explicitly):
+
+.. code-block:: python
+
+    from mimesis.providers.base import BaseProvider
 
 
-All providers must be subclasses of :class:`~mimesis.providers.base.BaseProvider` to ensure
-that only a single instance of the Random object is used.
+    class Greeting(BaseProvider):
+        class Meta:
+            name = "greeting"
+            # auto_register = True  (default)
 
-Everything here is quite straightforward, but we would like to clarify one point:
-the **name** attribute in the **Meta** class refers to the name of the attribute through which
-methods of custom providers are accessed. By default, the class name (``cls.__name__``) is used in
-lowercase.
+        def hello(self) -> str:
+            return "Hello!"
 
-See :ref:`seeded_data` to learn how to access the :class:`~mimesis.random.Random` object.
+**2.** Construct ``Generic`` or ``Field`` **after** the class is defined:
 
+.. code-block:: python
+
+    from mimesis import Field, Generic
+
+    generic = Generic()
+    generic.greeting.hello()
+    # 'Hello!'
+
+    field = Field()
+    field("greeting.hello")
+    # 'Hello!'
+
+Prefer ``auto_register = False`` in apps and tests so custom providers do not
+appear on unrelated ``Generic`` / ``Field`` instances.
+
+
+.. _custom_data_providers:
 
 Custom Data Providers
 ---------------------
 
-To create your own **data provider** and store your data
-in JSON files, you can follow these steps:
+Use :class:`~mimesis.providers.base.BaseDataProvider` when your fake data lives
+in **locale-specific JSON files** (the same pattern as built-in providers like
+:class:`~mimesis.Person`).
 
-First, create a directory to store your data with the following structure:
+Step 1: Create a data directory
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Layout one folder per locale; each locale folder contains the same JSON
+filename:
 
 .. code-block:: text
 
     custom_datadir/
-    ├── de
-    │   └── file_name.json
-    ├── en
-    │   └── file_name.json
-    └── ru
-        └── file_name.json
+    ├── de/
+    │   └── items.json
+    ├── en/
+    │   └── items.json
+    └── ru/
+        └── items.json
 
-To ensure that your provider supports the desired locale, every custom
-**data directory** (datadir) must include a directory with the name of the locale.
+Every locale you plan to use must have its own directory (locale codes match
+:class:`~mimesis.locales.Locale`, e.g. ``en``, ``ru``, ``de``).
 
-Next, you need to populate the files with the relevant data.
+Step 2: Add JSON data
+~~~~~~~~~~~~~~~~~~~~~
 
-For example:
+Example ``en/items.json``:
 
 .. code-block:: json
 
     {
-      "key": [
+      "items": [
         "value1",
         "value2",
         "value3"
       ]
     }
 
-Next, create a class that inherits from :class:`~mimesis.providers.base.BaseDataProvider`:
+Step 3: Subclass ``BaseDataProvider``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+``Meta`` must include:
+
+- ``name`` — attribute name on ``Generic`` / field prefix for ``Field``
+- ``datafile`` — JSON filename inside each locale folder
+- ``datadir`` — :class:`~pathlib.Path` to the directory that contains the
+  locale folders
+
+Read values with ``_extract()`` — pass a list of keys into the loaded JSON:
 
 .. code-block:: python
 
@@ -215,26 +322,43 @@ Next, create a class that inherits from :class:`~mimesis.providers.base.BaseData
     from mimesis import BaseDataProvider
     from mimesis.locales import Locale
 
-    class CustomDataProvider(BaseDataProvider):
+
+    class ItemsProvider(BaseDataProvider):
         class Meta:
-            name = 'custom_provider'
-            datafile = 'file_name.json'
-            datadir = Path(__file__).parent / 'custom_datadir'
+            name = "items"
+            datafile = "items.json"
+            datadir = Path(__file__).parent / "custom_datadir"
+            auto_register = False  # recommended unless this is a shared plugin
 
-        def my_method(self):
-            return self.random.choice(self.extract(['key']))
+        def item(self) -> str:
+            return self.random.choice(self._extract(["items"]))
 
-The **Meta** class is required and must contain the following attributes:
+Step 4: Use the provider
+~~~~~~~~~~~~~~~~~~~~~~~~
 
-- **name** - the name of the provider in lowercase letters.
-- **datafile** - the name of the file with data.
-- **datadir** - the path to the directory with data (must be an instance of :class:`~pathlib.Path`).
-
-That’s it! Now you can use your custom data provider:
+Instantiate it directly:
 
 .. code-block:: python
 
+    >>> provider = ItemsProvider(Locale.EN)
+    >>> provider.item()
+    'value2'
+
+Or attach it to ``Generic``. Pass ``locale=`` explicitly —
+:meth:`~mimesis.providers.generic.Generic.add_provider` does **not** copy
+``Generic.locale`` into the provider:
+
+.. code-block:: python
+
+    >>> from mimesis import Generic
     >>> from mimesis.locales import Locale
-    >>> cdp = CustomDataProvider(Locale.EN)
-    >>> cdp.my_method()
-    'value3'
+
+    >>> generic = Generic(locale=Locale.RU)
+    >>> generic.add_provider(ItemsProvider, locale=Locale.RU)
+    >>> generic.items.item()
+    'value1'
+
+If you set ``auto_register = True`` instead, any **new** ``Generic(locale=...)``
+constructed after the class is defined will expose ``generic.items`` and load
+JSON for that locale automatically (same as built-in locale-dependent
+providers).

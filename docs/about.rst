@@ -21,10 +21,12 @@ The key features are:
 - **Multilingual**: Supports 47 different locales.
 - **Extensibility**: Supports custom data providers and custom field handlers.
 - **Ease of use**: Features a simple design and clear documentation for straightforward data generation.
-- **Performance**: Widely recognized as the fastest data generator among Python solutions.
+- **Performance**: Widely recognized as the fastest data generator among Python solutions. See :doc:`benchmarks`.
 - **Data variety**: Includes various data providers designed for different use cases.
 - **Schema-based generators**: Offers schema-based data generators to effortlessly produce data of any complexity.
-- **Relational data**: Supports generating relational data with references between schemas for complex data structures.
+- **Relational data**: Supports generating related datasets with foreign keys and
+  nested schemas via :class:`~mimesis.builder.SchemaBuilder`
+  (see :doc:`relational`).
 - **Intuitive**: Great editor support. Fully typed, so you get autocompletion almost everywhere.
 
 What is fake data?
@@ -56,45 +58,3 @@ Check out that spotty bastard. Isn't it badass as hell?
 .. image:: _static/thaumoctopus_mimicus.jpg
    :width: 700
    :target: https://mimesis.name/
-
-
-Performance
------------
-
-Overall, Mimesis is many times faster (≈12 times faster) than Faker and generates more unique data, which is important for testing.
-
-Below you can see the results of a `performance comparison <https://github.com/lk-geimfari/mimesis/tree/master/benchmarks>`_ of Mimesis and Faker:
-
-
-Generating 10k full names
-~~~~~~~~~~~~~~~~~~~~~~~~~
-
-+----------+----------------------------------------+---------------------+------------------------+------------------------+
-| Library  | Method name                            | Iterations          |  Uniqueness            |  Runtime (in seconds)  |
-+==========+========================================+=====================+========================+========================+
-|  Mimesis | :meth:`~mimesis.Person.full_name`      | 10 000              |  9988 (99.88%)         |  0.137                 |
-+----------+----------------------------------------+---------------------+------------------------+------------------------+
-|  Faker   | **Faker.name()**                       | 10 000              |  9363 (93.63%)         |  1.758                 |
-+----------+----------------------------------------+---------------------+------------------------+------------------------+
-
-Generating 100k full names
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-+----------+----------------------------------------+---------------------+------------------------+------------------------+
-| Library  | Method name                            | Iterations          |  Uniqueness            |  Runtime (in seconds)  |
-+==========+========================================+=====================+========================+========================+
-|  Mimesis | :meth:`~mimesis.Person.full_name`      | 100 000             |  98 265 (98.27%)       |  1.344                 |
-+----------+----------------------------------------+---------------------+------------------------+------------------------+
-|  Faker   | **Faker.name()**                       | 100 000             |  71 067 (71.07%)       |  17.375                |
-+----------+----------------------------------------+---------------------+------------------------+------------------------+
-
-Generating 1 million full names
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-+----------+----------------------------------------+---------------------+------------------------+------------------------+
-| Library  | Method name                            | Iterations          |  Uniqueness            |  Runtime (in seconds)  |
-+==========+========================================+=====================+========================+========================+
-|  Mimesis | :meth:`~mimesis.Person.full_name`      | 1 000 000           |  847 645 (84.76%)      |  13.685                |
-+----------+----------------------------------------+---------------------+------------------------+------------------------+
-|  Faker   | **Faker.name()**                       | 1 000 000           |  330 166 (33.02%)      |  185.945               |
-+----------+----------------------------------------+---------------------+------------------------+------------------------+

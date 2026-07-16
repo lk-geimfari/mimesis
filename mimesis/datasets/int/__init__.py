@@ -12,6 +12,5 @@ from .internet import *
 from .path import *
 from .payment import *
 from .person import *
-from .scientific import *
 from .text import *
 from .transport import *

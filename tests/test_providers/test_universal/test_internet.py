@@ -169,24 +169,6 @@ class TestInternet:
         result = net.user_agent()
         assert result in datasets.USER_AGENTS
 
-    @pytest.mark.parametrize(
-        "w, h, keywords",
-        [
-            (900, 900, ["octopus", "mimicry"]),
-            (800, 800, {"octopus", "mimicry"}),
-            (800, 800, None),
-        ],
-    )
-    def test_stock_image_url(self, net, w, h, keywords):
-        result = net.stock_image_url(
-            width=w,
-            height=h,
-            keywords=keywords,
-        )
-        assert isinstance(result, str)
-        assert re.match(patterns.STOCK_IMAGE, result)
-        assert result.endswith("?" + ",".join(keywords or []))
-
     def test_ip_v4_object(self, net):
         ip = net.ip_v4_object()
         assert ip.version == 4

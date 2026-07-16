@@ -4814,16 +4814,6 @@
     "Zoo Manager",
     "Zoologist"
   ],
-  "political_views": [
-    "Apathetic",
-    "Anarchism",
-    "Liberal",
-    "Communist",
-    "Moderate",
-    "Socialist",
-    "Conservative",
-    "Libertarian"
-  ],
   "surnames": [
     "Abbott",
     "Acevedo",
@@ -6607,22 +6597,5 @@
     "University of North Florida (UNF)",
     "University of South Florida (USF)",
     "University of West Florida (UWF)"
-  ],
-  "views_on": [
-    "Negative",
-    "Very negative",
-    "Positive",
-    "Neutral",
-    "Compromisable"
-  ],
-  "worldview": [
-    "Atheism",
-    "Agnosticism",
-    "Deism",
-    "Judaism",
-    "Catholicism",
-    "Pantheism",
-    "Confucianism",
-    "Secular humanism"
   ]
 }

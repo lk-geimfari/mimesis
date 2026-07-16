@@ -1195,13 +1195,6 @@
     "Webudvikler",
     "Økonom"
   ],
-  "political_views": [
-    "Apartisk",
-    "Centrist",
-    "Frihedsforkæmper",
-    "Kommunist",
-    "Konservativ"
-  ],
   "surnames": [
     "Aaen",
     "Aagaard",
@@ -2281,24 +2274,5 @@
     "University College of Northern Danmark",
     "VIA University College",
     "Vestjylland University College"
-  ],
-  "views_on": [
-    "Kompromissøgende",
-    "Meget negativ",
-    "Negativ",
-    "Neutral",
-    "Positiv"
-  ],
-  "worldview": [
-    "Agnosticism",
-    "Ateisme",
-    "Buddhisme",
-    "Deisme",
-    "Katolicisme",
-    "Kungfutses lærersætninger",
-    "Ortodoks",
-    "Panteisme",
-    "Protestantisme",
-    "Sekulær Humanisme"
   ]
 }

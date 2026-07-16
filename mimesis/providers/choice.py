@@ -27,7 +27,7 @@ class Choice(BaseProvider):
 
     def __call__(
         self,
-        items: t.Sequence[t.Any] | None,
+        items: t.Sequence[t.Any],
         length: int = 0,
         unique: bool = False,
     ) -> t.Sequence[t.Any] | t.Any:
@@ -79,7 +79,7 @@ class Choice(BaseProvider):
                 "**items** to provide the specified **length**."
             )
         if unique:
-            data: list[str] = self.random.sample(list(set(items)), k=length)
+            data: list[t.Any] = self.random.sample(list(set(items)), k=length)
         else:
             data = self.random.choices(items, k=length)
 

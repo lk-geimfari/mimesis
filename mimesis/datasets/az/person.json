@@ -303,22 +303,6 @@
     "Bərbər",
     "Mexanik"
   ],
-  "political_views": [
-    "Liberal",
-    "Sosialist",
-    "Millətçi",
-    "Demokrat",
-    "Respublikaçı",
-    "Anarxist",
-    "Kommunist",
-    "Monarxist",
-    "Sosial-demokrat",
-    "Faşist",
-    "İslamçı",
-    "Sekulyar",
-    "Radikal",
-    "Tərəfsiz"
-  ],
   "surnames": [
     "Aslanlı",
     "Bəhmənli",
@@ -368,7 +352,7 @@
       ]
     }
   },
- "university": [
+  "university": [
     "Bakı Dövlət Universiteti",
     "Azərbaycan Dövlət Neft və Sənaye Universiteti",
     "Bakı Musiqi Akademiyası",
@@ -423,20 +407,6 @@
     "Azərbaycan Kooperasiya Universiteti",
     "Odlar Yurdu Universiteti",
     "Azərbaycan Əmək və Sosial Münasibətlər Akademiyası"
-]
-,
-"views_on": [
-    "Mənfi",
-    "Müsbət",
-    "Normal"
-],
-  "worldview": [
-    "Ateizm",
-    "Agnostizm",
-    "Deizm",
-    "Yəhudilik",
-    "Katolik",
-    "İslam"
   ],
   "telephone_fmt": [
     "+994 (050) ### ## ##",

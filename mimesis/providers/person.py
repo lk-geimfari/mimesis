@@ -386,39 +386,6 @@ class Person(BaseDataProvider):
         jobs: list[str] = self._extract(["occupation"])
         return self.random.choice(jobs)
 
-    def political_views(self) -> str:
-        """Get random political views.
-
-        :return: Political views.
-
-        :Example:
-            Liberal.
-        """
-        views: list[str] = self._extract(["political_views"])
-        return self.random.choice(views)
-
-    def worldview(self) -> str:
-        """Generates a random worldview.
-
-        :return: Worldview.
-
-        :Example:
-            Pantheism.
-        """
-        views: list[str] = self._extract(["worldview"])
-        return self.random.choice(views)
-
-    def views_on(self) -> str:
-        """Get a random «views on» value.
-
-        :return: Views on.
-
-        :Example:
-            Negative.
-        """
-        views: list[str] = self._extract(["views_on"])
-        return self.random.choice(views)
-
     def nationality(self, gender: Gender | None = None) -> str:
         """Generates a random nationality.
 

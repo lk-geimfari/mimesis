@@ -666,15 +666,6 @@
     "Čistačica",
     "Čuvar"
   ],
-  "political_views": [
-    "Demokrat",
-    "Komunist",
-    "Konzervatist",
-    "Liberalist",
-    "Nacionalist",
-    "Populist",
-    "Socijalist"
-  ],
   "surnames": [
     "Abramović",
     "Andrić",
@@ -1060,20 +1051,5 @@
     "Sveučilište u Splitu",
     "Sveučilište u Zadru",
     "Sveučilište u Zagrebu"
-  ],
-  "views_on": [
-    "Jako negativan",
-    "Kompromisan",
-    "Negativan",
-    "Neutralan",
-    "Pozitivan"
-  ],
-  "worldview": [
-    "Agnosticizam",
-    "Ateizam",
-    "Budizam",
-    "Islamizam",
-    "Judaizam",
-    "Katolicizam"
   ]
 }

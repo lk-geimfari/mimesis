@@ -1669,16 +1669,6 @@
     "Äänitarkkailija",
     "Äänittäjä"
   ],
-  "political_views": [
-    "Kommunistinen",
-    "Liberaali",
-    "Libertaari",
-    "Pidättyvä",
-    "Sosialistinen",
-    "Vanhoillinen",
-    "Välinpitämätön",
-    "Äärivanhoillinen"
-  ],
   "surnames": [
     "Aalto",
     "Aaltonen",
@@ -2199,23 +2189,6 @@
     "Turun yliopisto",
     "Vaasan yliopisto",
     "Åbo Akademi"
-  ],
-  "views_on": [
-    "Kompromissi",
-    "Negatiivinen",
-    "Neutraali",
-    "Positiivinen",
-    "Todella negatiivinen"
-  ],
-  "worldview": [
-    "Agnostisismi",
-    "Ateismi",
-    "Buddhalaisuus",
-    "Hindulaisuus",
-    "Humanismi",
-    "Katolisuus",
-    "Panteismi",
-    "Protestantit"
   ],
   "telephone_fmt": [
     "+358 ## ### ####",

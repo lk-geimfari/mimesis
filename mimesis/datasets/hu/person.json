@@ -2180,16 +2180,6 @@
     "Zongorista",
     "Zoológus"
   ],
-  "political_views": [
-    "Anarchista",
-    "Kommunista",
-    "Konzervatív",
-    "Liberális",
-    "Libertariánus",
-    "Mérsékelt",
-    "Semleges",
-    "Szocialista"
-  ],
   "surnames": [
     "Ady",
     "András",
@@ -2596,23 +2586,6 @@
     "Színház- és Filmművészeti Egyetem",
     "Szegedi Tudományegyetem",
     "Zsigmond Király Egyetem"
-  ],
-  "views_on": [
-    "Negatív",
-    "Nagyon pozitív",
-    "Pozitív",
-    "Semleges",
-    "Kompromittálható"
-  ],
-  "worldview": [
-    "Agnoszticizmus",
-    "Ateizmus",
-    "Deizmus",
-    "Judaizmus",
-    "Katolicizmus",
-    "Konfucianizmus",
-    "Panteizmus",
-    "Szekuláris humanizmus"
   ],
   "telephone_fmt": [
     "+36 1 ### ###",

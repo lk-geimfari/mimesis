@@ -632,7 +632,7 @@ class TestComplexSchemas:
                 "username": sb.f("username"),
                 "profile": {
                     "bio": sb.f("text"),
-                    "avatar": sb.f("stock_image_url"),
+                    "avatar": sb.f("uuid"),
                 },
             },
         )

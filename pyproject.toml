@@ -1,6 +1,6 @@
 [project]
 name = "mimesis"
-version = "20.0.0"
+version = "21.0.0"
 description = "Mimesis: Fake Data Generator."
 authors = [{ name = "Isaak Uchakaev", email = "hey@isaak.dev" }]
 requires-python = ">=3.10"
@@ -129,6 +129,7 @@ src = ["mimesis", "tests"]
 extend-exclude = [
     "docs",
     "mimesis/datasets/locale_template",
+    "benchmarks/performance_comparison.py",
 ]
 
 [tool.ruff.lint]

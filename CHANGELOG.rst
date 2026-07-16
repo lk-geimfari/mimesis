@@ -1,3 +1,15 @@
+Version 21.0.0
+--------------
+
+**Removed APIs**:
+
+* ``Person.political_views()``, ``Person.worldview()``, and ``Person.views_on()``
+* ``Datetime.century()``
+* ``Payment.paypal()``
+* ``Science.measure_unit()`` and ``Science.metric_prefix()``
+* Enums ``MeasureUnit`` and ``MetricPrefixSign``
+* ``Internet.stock_image_url()``
+
 Version 20.0.0
 --------------
 

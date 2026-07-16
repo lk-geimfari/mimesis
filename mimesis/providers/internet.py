@@ -36,7 +36,6 @@ from mimesis.providers.code import Code
 from mimesis.providers.date import Datetime
 from mimesis.providers.file import File
 from mimesis.providers.text import Text
-from mimesis.types import Keywords
 
 
 __all__ = ["Internet"]
@@ -268,26 +267,6 @@ class Internet(BaseProvider):
         ]
         mac = [f"{x:02x}" for x in mac_hex]
         return ":".join(mac)
-
-    @staticmethod
-    def stock_image_url(
-        width: int | str = 1920,
-        height: int | str = 1080,
-        keywords: Keywords | None = None,
-    ) -> str:
-        """Generates a random stock image URL hosted on Unsplash.
-
-        See «Random search term» on https://source.unsplash.com/
-        for more details.
-
-        :param width: Width of the image.
-        :param height: Height of the image.
-        :param keywords: Sequence of search keywords.
-        :return: URL of the image.
-        """
-        keywords_str = ",".join(keywords) if keywords is not None else ""
-
-        return f"https://source.unsplash.com/{width}x{height}?{keywords_str}"
 
     def hostname(
         self,

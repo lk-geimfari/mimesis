@@ -25,8 +25,6 @@ from .enums import (
     ImageFile,
     IPv4Purpose,
     ISBNFormat,
-    MeasureUnit,
-    MetricPrefixSign,
     MimeType,
     NumType,
     PortRange,
@@ -118,8 +116,6 @@ __all__ = [
     "Locale",
     # Exceptions:
     "LocaleError",
-    "MeasureUnit",
-    "MetricPrefixSign",
     "MimeType",
     "NonEnumerableError",
     "NumType",
@@ -154,7 +150,7 @@ __all__ = [
     "keys",
 ]
 
-__version__ = "20.0.0"
+__version__ = "21.0.0"
 __title__ = "mimesis"
 __description__ = "Mimesis: Fake Data Generator."
 __url__ = "https://github.com/lk-geimfari/mimesis"

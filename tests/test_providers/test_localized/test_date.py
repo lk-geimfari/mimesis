@@ -93,11 +93,6 @@ class TestDatetime:
         default = dt.formatted_time()
         assert isinstance(default, str)
 
-    def test_century(self, _datetime):
-        result = _datetime.century()
-        assert result is not None
-        assert isinstance(result, str)
-
     def test_day_of_week(self, dt):
         result = dt.day_of_week()
         assert result in dt._dataset["day"]["name"]
@@ -380,9 +375,6 @@ class TestSeededDatetime:
 
     def test_formatted_time(self, d1, d2):
         assert d1.formatted_time() == d2.formatted_time()
-
-    def test_century(self, d1, d2):
-        assert d1.century() == d2.century()
 
     def test_day_of_week(self, d1, d2):
         assert d1.day_of_week() == d2.day_of_week()

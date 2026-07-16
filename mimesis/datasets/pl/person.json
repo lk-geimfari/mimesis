@@ -979,16 +979,6 @@
     "Tester oprogramowania",
     "Webmaster"
   ],
-  "political_views": [
-    "Komunistyczne",
-    "Konserwatywne",
-    "Liberalne",
-    "Libertariańskie",
-    "Neutralne",
-    "Socjalistyczne",
-    "Ultrakonserwatywne",
-    "Umiarkowane"
-  ],
   "surnames": {
     "male": [
       "Abakanowicz",
@@ -2267,25 +2257,6 @@
     "Uniwersytet Łódzki",
     "Uniwersytet Śląski w Katowicach",
     "Zachodniopomorski Uniwersytet Technologiczny w Szczecinie"
-  ],
-  "views_on": [
-    "Bardzo negatywny",
-    "Kompromisowy",
-    "Negatywny",
-    "Neutralny",
-    "Nie wpisano",
-    "Pozytywny"
-  ],
-  "worldview": [
-    "Agnostycyzm",
-    "Ateizm",
-    "Buddyzm",
-    "Katolicyzm",
-    "Konfucjonizm",
-    "Panteizm",
-    "Prawosławie",
-    "Protestantyzm",
-    "Świecki"
   ],
   "telephone_fmt": [
     "+48 ### ### ###",
