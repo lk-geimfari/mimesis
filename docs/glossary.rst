@@ -52,4 +52,5 @@ Glossary
         A declarative builder for generating related fake datasets with foreign
         keys, nested schemas, and automatic dependency resolution.
 
-        See :py:class:`~mimesis.builder.SchemaBuilder`
+        See :py:class:`~mimesis.builder.SchemaBuilder` and
+        :doc:`relational`.

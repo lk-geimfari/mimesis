@@ -44,7 +44,7 @@ The key features are:
 - **Performance**: Widely recognized as the fastest data generator among Python solutions.
 - **Data variety**: Includes various data providers designed for different use cases.
 - **Schema-based generators**: Offers schema-based data generators to effortlessly produce data of any complexity.
-- **Relational data**: Supports generating relational data with references between schemas for complex data structures.
+- **Relational data**: Supports generating related datasets with foreign keys and nested schemas.
 - **Intuitive**: Great editor support. Fully typed, so you get autocompletion almost everywhere.
 
 ## Installation
@@ -66,6 +66,7 @@ It is divided into several sections:
 -  [Locales](https://mimesis.name/latest/locales.html)
 -  [Data Providers](https://mimesis.name/latest/providers.html)
 -  [Structured Data Generation](https://mimesis.name/latest/schema.html)
+-  [Relational Data Generation](https://mimesis.name/latest/relational.html)
 -  [Random and Seed](https://mimesis.name/latest/random_and_seed.html)
 -  [Integration with factory_boy](https://mimesis.name/latest/factory_plugin.html)
 -  [API Reference](https://mimesis.name/latest/api.html)

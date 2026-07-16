@@ -24,7 +24,9 @@ The key features are:
 - **Performance**: Widely recognized as the fastest data generator among Python solutions. See :doc:`benchmarks`.
 - **Data variety**: Includes various data providers designed for different use cases.
 - **Schema-based generators**: Offers schema-based data generators to effortlessly produce data of any complexity.
-- **Relational data**: Supports generating relational data with references between schemas for complex data structures.
+- **Relational data**: Supports generating related datasets with foreign keys and
+  nested schemas via :class:`~mimesis.builder.SchemaBuilder`
+  (see :doc:`relational`).
 - **Intuitive**: Great editor support. Fully typed, so you get autocompletion almost everywhere.
 
 What is fake data?

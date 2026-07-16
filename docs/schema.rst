@@ -4,6 +4,11 @@
 Structured Data Generation
 ==========================
 
+.. note::
+
+    For **related** datasets (foreign keys, nested documents, dependency graphs), use
+    :class:`~mimesis.builder.SchemaBuilder` instead — see :doc:`relational`.
+
 Introduction
 ------------
 
@@ -89,9 +94,11 @@ The implicit approach specifies only the method name without the provider:
 Mimesis will call either the first registered custom field handler named ``username``
 or the first provider with a method of that name.
 
-**Note:** Custom field handlers always take precedence over provider methods
-when names match, due to their higher priority in the lookup order
-(see :ref:`custom_field_handlers`).
+.. warning::
+
+    Custom field handlers always take precedence over provider methods
+    when names match, due to their higher priority in the lookup order
+    (see :ref:`custom_field_handlers`).
 
 
 Generating a Set of Values
@@ -290,6 +297,23 @@ Example:
     ['PETER', 'MARY', 'ROBERT']
 
 As you can see, a **key** function can be applied to both **field** and **fieldset**.
+
+The same ``key`` parameter works with :meth:`~mimesis.builder.SchemaBuilder.f` when defining
+relational schemas (see :doc:`relational`). Any callable accepted by
+:class:`~mimesis.schema.Field` — including the built-ins in :mod:`mimesis.keys` — can be
+passed as ``key=``:
+
+.. code-block:: python
+
+    >>> from mimesis import SchemaBuilder
+    >>> from mimesis.keys import maybe, pipe, slugify, prefix
+    >>> from mimesis.locales import Locale
+
+    >>> sb = SchemaBuilder(Locale.EN, seed=0xFF)
+    >>> users = sb.schema("users", {
+    ...     "username": sb.f("username", key=pipe(slugify, prefix("user-"))),
+    ...     "email": sb.f("email", key=maybe(None, probability=0.2)),
+    ... })
 
 Although you can use any callable object as a key function, Mimesis provides a comprehensive
 set of built-in key functions for various transformations:
@@ -999,147 +1023,6 @@ When you no longer need aliases, you can remove them individually like regular d
     # clear all aliases
 
     >>> field.aliases.clear()
-
-
-Relational Schemas
-------------------
-
-.. versionadded:: 20.0.0
-
-Use :class:`~mimesis.builder.SchemaBuilder` to generate related datasets with
-foreign keys, nested documents, and automatic dependency resolution.
-
-Basic Relational Example
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-Create users and posts where each post references a user:
-
-.. code-block:: python
-
-    from mimesis import SchemaBuilder
-    from mimesis.locales import Locale
-
-    sb = SchemaBuilder(Locale.EN, seed=0xFF)
-
-    users = sb.schema("users", {
-        "id": sb.f("increment", accumulator="user"),
-        "username": sb.f("username"),
-        "email": sb.f("email"),
-    })
-
-    posts = sb.schema("posts", {
-        "id": sb.f("increment", accumulator="post"),
-        "title": sb.f("sentence"),
-        "user_id": sb.ref(users).id,  # Foreign key to users
-    })
-
-    # Order of kwargs does not matter — dependencies are resolved automatically
-    data = sb.create(posts=20, users=5)
-
-    print(data["users"])  # 5 users
-    print(data["posts"])  # 20 posts with valid user_id values
-
-Schema References
-~~~~~~~~~~~~~~~~~
-
-``sb.schema()`` returns a :class:`~mimesis.builder.SchemaRef` that supports:
-
-- **Foreign keys** — ``sb.ref(users).id`` picks a random field value from
-  generated data
-- **Whole records** — ``sb.ref(users)`` embeds a random full record
-- **Nesting** — ``addresses(count=2)`` embeds generated items inline
-
-.. code-block:: python
-
-    addresses = sb.schema("addresses", {
-        "city": sb.f("city"),
-        "street": sb.f("street_name"),
-    })
-
-    customers = sb.schema("customers", {
-        "id": sb.f("increment"),
-        "name": sb.f("full_name"),
-        "addresses": addresses(count=2),  # Nested documents
-    })
-
-    data = sb.create(customers=10)
-
-.. note::
-    Include every schema that is referenced via ``sb.ref()`` in the same
-    ``create()`` call. Nested schemas used only via ``schema_ref(count=N)``
-    do not need to be passed to ``create()``.
-
-Lifecycle Helpers
-~~~~~~~~~~~~~~~~~
-
-:class:`~mimesis.builder.SchemaBuilder` provides a few helpers for controlling
-state between runs:
-
-- :meth:`~mimesis.builder.SchemaBuilder.reseed` — change the random seed
-- :meth:`~mimesis.builder.SchemaBuilder.clear` — drop generated data, keep
-  schema definitions
-- :meth:`~mimesis.builder.SchemaBuilder.reset` — clear schemas and generated
-  data
-
-.. code-block:: python
-
-    data_a = sb.create(users=5)
-    sb.clear()
-    data_b = sb.create(users=5)  # same schemas, fresh data
-
-    sb.reseed(0xAB)
-    data_c = sb.create(users=5)
-
-    sb.reset()  # definitions are gone; call sb.schema() again
-
-Complex Relational Example
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-A multi-level graph with users, projects, and API keys:
-
-.. code-block:: python
-
-    from mimesis import SchemaBuilder
-    from mimesis.enums import TimestampFormat
-    from mimesis.locales import Locale
-
-    sb = SchemaBuilder(Locale.EN, seed=0xFF)
-
-    users = sb.schema("users", {
-        "id": sb.f("increment", accumulator="user"),
-        "username": sb.f("username"),
-        "email": sb.f("email"),
-        "created_at": sb.f("timestamp", fmt=TimestampFormat.POSIX),
-    })
-
-    projects = sb.schema("projects", {
-        "id": sb.f("increment", accumulator="project"),
-        "name": sb.f("word"),
-        "version": sb.f("version"),
-        "owner_id": sb.ref(users).id,
-        "status": sb.choice(["active", "archived", "draft"]),
-    })
-
-    api_keys = sb.schema("api_keys", {
-        "id": sb.f("uuid"),
-        "key": sb.f("token_hex"),
-        "project_id": sb.ref(projects).id,
-        "created_at": sb.f("timestamp", fmt=TimestampFormat.POSIX),
-    })
-
-    data = sb.create(
-        api_keys=10,
-        projects=5,
-        users=3,
-    )
-
-This will generate:
-
-- 3 users
-- 5 projects (each with a valid ``owner_id`` referencing a user)
-- 10 API keys (each with a valid ``project_id`` referencing a project)
-
-See also: :class:`~mimesis.builder.SchemaBuilder` API reference.
 
 
 Performance Optimization
