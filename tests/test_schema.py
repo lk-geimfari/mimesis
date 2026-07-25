@@ -527,6 +527,17 @@ def test_field_aliasing(default_field):
         default_field("🇺🇸")
 
 
+def test_field_aliasing_custom_handler(default_field):
+    def custom_handler(random, **kwargs):
+        return "custom"
+
+    default_field.register_handler("bloop", custom_handler)
+    default_field.aliases = {"zoop": "bloop"}
+
+    assert default_field("bloop") == "custom"
+    assert default_field("zoop") == "custom"
+
+
 @pytest.mark.parametrize(
     "aliases",
     [
