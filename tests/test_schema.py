@@ -534,8 +534,14 @@ def test_field_aliasing_custom_handler(default_field):
     default_field.register_handler("bloop", custom_handler)
     default_field.aliases = {"zoop": "bloop"}
 
-    assert default_field("bloop") == "custom"
-    assert default_field("zoop") == "custom"
+    try:
+        assert default_field("bloop") == "custom"
+        assert default_field("zoop") == "custom"
+    finally:
+        # The fixture is module-scoped, so the state must be
+        # restored to not affect the other tests.
+        default_field.unregister_handler("bloop")
+        default_field.aliases.clear()
 
 
 @pytest.mark.parametrize(
