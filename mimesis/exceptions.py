@@ -23,10 +23,7 @@ class SchemaError(ValueError):
     """Raised when a schema is invalid."""
 
     def __str__(self) -> str:
-        return (
-            "The schema must be a callable object that returns a dict. "
-            "See https://mimesis.name/en/master/schema.html for more details."
-        )
+        return "The schema must be a callable object that returns a dict."
 
 
 class NonEnumerableError(TypeError):
