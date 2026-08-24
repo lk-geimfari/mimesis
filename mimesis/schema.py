@@ -1,13 +1,22 @@
 """Implements classes for generating data by schema."""
 
 import csv
+import importlib
 import inspect
 import json
 import pickle
 import re
+import types
 from collections.abc import Callable, Iterator, Sequence
 from pathlib import Path
-from typing import Any
+from typing import (
+    Any,
+    Union,
+    get_args,
+    get_origin,
+    get_type_hints,
+    is_typeddict,
+)
 
 from mimesis.exceptions import (
     AliasesTypeError,
@@ -139,6 +148,25 @@ class BaseField:
             self._cache[name] = method
 
         return self._cache[name]
+
+    def can_resolve(self, name: str) -> bool:
+        """Return whether ``name`` can be resolved to a value.
+
+        A name is resolvable when a custom handler is registered for it (see
+        :meth:`register_handler`) or when it matches a method of one of the
+        supported data providers.
+
+        :param name: The field name.
+        :return: ``True`` if the name is resolvable, ``False`` otherwise.
+        """
+        if name in self._handlers:
+            return True
+
+        try:
+            self._lookup_method(name)
+        except FieldError:
+            return False
+        return True
 
     def _validate_aliases(self) -> bool:
         """Validate aliases."""
@@ -436,6 +464,119 @@ class SchemaContext:
         self.custom = custom or {}
 
 
+# ``Required``/``NotRequired`` live in ``typing`` on Python 3.11+ and in
+# ``typing_extensions`` on older versions. Collect whichever are importable so
+# ``TypedDict`` field qualifiers can be stripped regardless of Python version.
+_TYPED_DICT_QUALIFIERS: set[Any] = set()
+for _module_name in ("typing", "typing_extensions"):
+    try:
+        _module = importlib.import_module(_module_name)
+    except ImportError:  # pragma: no cover
+        continue
+    for _qualifier_name in ("Required", "NotRequired"):
+        _qualifier = getattr(_module, _qualifier_name, None)
+        if _qualifier is not None:
+            _TYPED_DICT_QUALIFIERS.add(_qualifier)
+
+# Both the ``typing.Union`` and the PEP 604 (``X | Y``) union forms.
+_UNION_ORIGINS = (Union, types.UnionType)
+
+# Providers used to generate a value when a ``TypedDict`` key cannot be
+# resolved to a data-provider method by its name and we fall back to its type.
+_TYPE_FALLBACKS: dict[type, str] = {
+    bool: "boolean",
+    int: "integer_number",
+    float: "float_number",
+    str: "word",
+}
+
+
+def _unwrap_annotation(annotation: Any) -> Any:
+    """Strip typing wrappers that do not affect data generation.
+
+    Removes ``Annotated``, ``Required``, ``NotRequired`` and ``Optional``
+    (i.e. ``Union[T, None]``) wrappers, returning the underlying type.
+
+    :param annotation: A type annotation.
+    :return: The unwrapped annotation.
+    """
+    # For an Annotated type, the underlying type is stored in its origin.
+    if hasattr(annotation, "__metadata__"):
+        return _unwrap_annotation(annotation.__origin__)
+
+    origin = get_origin(annotation)
+
+    # Strip the TypedDict Required and NotRequired qualifiers.
+    if origin in _TYPED_DICT_QUALIFIERS:
+        return _unwrap_annotation(get_args(annotation)[0])
+
+    # Strip an optional type, i.e. a two-member union with None.
+    if origin in _UNION_ORIGINS:
+        non_none = [arg for arg in get_args(annotation) if arg is not type(None)]
+        if len(non_none) == 1:
+            return _unwrap_annotation(non_none[0])
+
+    return annotation
+
+
+def _typed_dict_definition(
+    typed_dict: type,
+    field: "Field",
+) -> CallableSchema:
+    """Build a callable schema definition from a ``TypedDict``.
+
+    :param typed_dict: A ``TypedDict`` subclass.
+    :param field: The field used to generate values.
+    :return: A callable that returns a single record.
+    """
+    hints = get_type_hints(typed_dict, include_extras=True)
+    generators = {
+        key: _field_generator(key, annotation, field)
+        for key, annotation in hints.items()
+    }
+
+    def definition() -> JSON:
+        return {key: generate() for key, generate in generators.items()}
+
+    return definition
+
+
+def _field_generator(
+    key: str,
+    annotation: Any,
+    field: "Field",
+) -> Callable[[], Any]:
+    """Return a zero-argument callable that generates a value for ``key``.
+
+    A key is first resolved against the data providers by its name (so a key
+    named ``email`` yields a real email address). Nested ``TypedDict``
+    annotations are expanded recursively. When the name cannot be resolved, the
+    annotated type is used to pick a sensible generator.
+
+    :param key: The ``TypedDict`` key.
+    :param annotation: The annotation of the key.
+    :param field: The field used to generate values.
+    :return: A callable generating a value for the key.
+    :raises FieldError: If the key can be resolved neither by name nor by type.
+    """
+    core = _unwrap_annotation(annotation)
+
+    if is_typeddict(core):
+        return _typed_dict_definition(core, field)
+
+    # Prefer semantic, name-based resolution (a registered custom handler or a
+    # data-provider method matching the key name).
+    if field.can_resolve(key):
+        return lambda: field(key)
+
+    # Fall back to the annotated type for keys without a matching provider.
+    fallback = _TYPE_FALLBACKS.get(core)
+    if fallback is not None:
+        return lambda: field(fallback)
+
+    raise FieldError(key)
+
+
 class Schema:
     """Class which returns a list of filled schemas."""
 
@@ -472,6 +613,79 @@ class Schema:
         self.iterations = iterations
         self._transformers: list[SchemaTransformer] = []
         self._custom_context: dict[str, Any] = {}
+
+    @classmethod
+    def from_typed_dict(
+        cls,
+        typed_dict: type,
+        *,
+        field: "Field | None" = None,
+        locale: Locale = Locale.DEFAULT,
+        iterations: int = 10,
+        seed: Seed = MissingSeed,
+    ) -> "Schema":
+        """Create a schema from a :class:`typing.TypedDict`.
+
+        Every key of **typed_dict** becomes a key of each generated record.
+        Values are produced by resolving the key against the data providers —
+        the very same lookup used by :class:`Field` — so a key named ``email``
+        yields a real email address, ``username`` a username, and so on.
+
+        When a key does not match any provider method, its annotated type is
+        used to pick a generator instead (``int`` → ``integer_number``,
+        ``float`` → ``float_number``, ``bool`` → ``boolean``, ``str`` →
+        ``word``). Nested ``TypedDict`` annotations are expanded recursively,
+        and the ``Annotated``, ``Required``, ``NotRequired`` and ``Optional``
+        wrappers are transparently unwrapped.
+
+        Example::
+
+            >>> from typing import TypedDict
+            >>> from mimesis import Schema
+            >>>
+            >>> class User(TypedDict):
+            ...     name: str
+            ...     email: str
+            ...     age: int
+            >>>
+            >>> schema = Schema.from_typed_dict(User, iterations=2)
+            >>> schema.create()  # doctest: +SKIP
+            [{'name': 'Cythia', 'email': 'wed1841@example.com', 'age': 42}, ...]
+
+        Keys that can be resolved neither by name nor by type require a custom
+        field handler; register it on a :class:`Field` and pass it explicitly::
+
+            >>> from mimesis import Field
+            >>>
+            >>> class Record(TypedDict):
+            ...     external_id: str
+            >>>
+            >>> field = Field()
+            >>> field.register_handler(
+            ...     "external_id", lambda random, **kwargs: random.randint(1, 100)
+            ... )
+            >>> schema = Schema.from_typed_dict(Record, field=field)
+
+        :param typed_dict: A ``TypedDict`` subclass describing each record.
+        :param field: The field used to generate values. When omitted, a new
+            :class:`Field` is created from **locale** and **seed**.
+        :param locale: Locale for the default field (ignored when **field** is
+            given).
+        :param iterations: Number of records to generate.
+        :param seed: Seed for the default field (ignored when **field** is
+            given).
+        :return: Schema instance.
+        :raises TypeError: If **typed_dict** is not a ``TypedDict`` subclass.
+        :raises FieldError: If a key can be resolved neither by name nor type.
+        """
+        if not is_typeddict(typed_dict):
+            raise TypeError(f"{typed_dict!r} is not a TypedDict subclass.")
+
+        if field is None:
+            field = Field(locale=locale, seed=seed)
+
+        definition = _typed_dict_definition(typed_dict, field)
+        return cls(schema=definition, iterations=iterations, seed=seed)
 
     def _apply_transformers(self, item: JSON, ctx: SchemaContext) -> JSON:
         """Apply all transformers to an item.

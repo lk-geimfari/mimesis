@@ -4,9 +4,20 @@ import pickle
 import re
 import unicodedata
 from collections.abc import Iterator
-from typing import TYPE_CHECKING
+from typing import (
+    TYPE_CHECKING,
+    Annotated,
+    TypedDict,
+    get_type_hints,
+)
 
 import pytest
+
+
+try:
+    from typing import NotRequired
+except ImportError:  # Python 3.10
+    from typing_extensions import NotRequired
 
 from mimesis.enums import Gender
 from mimesis.exceptions import (
@@ -618,3 +629,120 @@ def test_schema_context():
     assert ctx.index == 5
     assert ctx.iteration == 6
     assert ctx.custom["test"] == "value"
+
+
+class Address(TypedDict):
+    city: str
+    country: str
+
+
+class User(TypedDict):
+    name: str
+    email: str
+    username: str
+    age: int
+    score: float
+    active: bool
+    nickname: NotRequired[str]
+    note: str | None
+    tagged: Annotated[int, "meta"]
+    address: Address
+
+
+def test_from_typed_dict_create():
+    schema = Schema.from_typed_dict(User, iterations=5, seed=0xFF)
+    data = schema.create()
+
+    assert len(data) == 5
+    for item in data:
+        assert set(item) == set(get_type_hints(User))
+        assert isinstance(item["name"], str)
+        assert isinstance(item["email"], str)
+        # ``bool`` must not be treated as ``int``.
+        assert isinstance(item["age"], int) and not isinstance(item["age"], bool)
+        assert isinstance(item["score"], float)
+        assert isinstance(item["active"], bool)
+        assert isinstance(item["tagged"], int)
+        assert isinstance(item["nickname"], str)
+        assert isinstance(item["note"], str)
+        assert isinstance(item["address"], dict)
+        assert set(item["address"]) == {"city", "country"}
+
+
+def test_from_typed_dict_name_resolution():
+    # A key matching a provider method must yield semantically correct data,
+    # not a type-based fallback value.
+    field = Field(Locale.EN, seed=0xFF)
+    email = Schema.from_typed_dict(User, field=field, iterations=1).create()[0]["email"]
+    assert "@" in email
+
+
+def test_from_typed_dict_is_deterministic():
+    first = Schema.from_typed_dict(User, iterations=3, seed=42).create()
+    second = Schema.from_typed_dict(User, iterations=3, seed=42).create()
+    assert first == second
+
+
+def test_from_typed_dict_iterations():
+    assert len(Schema.from_typed_dict(User, iterations=7).create()) == 7
+
+
+def test_from_typed_dict_with_custom_field_handler():
+    class Record(TypedDict):
+        external_id: str
+        email: str
+
+    field = Field(seed=1)
+    field.register_handler(
+        "external_id", lambda random, **kwargs: random.randint(1, 100)
+    )
+    data = Schema.from_typed_dict(Record, field=field, iterations=3).create()
+
+    for item in data:
+        assert 1 <= item["external_id"] <= 100
+        assert "@" in item["email"]
+
+
+def test_from_typed_dict_respects_field_locale():
+    field = Field(Locale.RU, seed=0xFF)
+    schema = Schema.from_typed_dict(Address, field=field, iterations=1)
+    assert schema.create()[0]["country"]
+
+
+@pytest.mark.parametrize("not_a_typed_dict", [dict, {"a": int}, int, "User"])
+def test_from_typed_dict_raises_type_error(not_a_typed_dict):
+    with pytest.raises(TypeError):
+        Schema.from_typed_dict(not_a_typed_dict)
+
+
+def test_from_typed_dict_raises_field_error_for_unresolvable_key():
+    class Unresolvable(TypedDict):
+        some_unknown_thing: complex
+
+    # Unresolvable keys are reported eagerly, when the schema is built.
+    with pytest.raises(FieldError):
+        Schema.from_typed_dict(Unresolvable, iterations=1)
+
+
+def test_from_typed_dict_inherited_keys():
+    class Base(TypedDict):
+        email: str
+
+    class Derived(Base):
+        username: str
+
+    item = Schema.from_typed_dict(Derived, iterations=1).create()[0]
+    assert set(item) == {"email", "username"}
+
+
+def test_can_resolve(default_field):
+    assert default_field.can_resolve("email") is True
+    assert default_field.can_resolve("person.name") is True
+    assert default_field.can_resolve("definitely_not_a_field") is False
+
+
+def test_can_resolve_custom_handler():
+    field = Field()
+    assert field.can_resolve("my_custom") is False
+    field.register_handler("my_custom", lambda random, **kwargs: 1)
+    assert field.can_resolve("my_custom") is True
