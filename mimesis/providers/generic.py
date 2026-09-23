@@ -31,14 +31,11 @@ class Generic(BaseProvider):
         super().__init__(seed=seed)
         self.locale = locale
 
+        # Every provider is stored as a class under ``_<name>`` and
+        # instantiated on first access (see ``__getattr__``).
         for name, provider_cls in ProviderRegistry.get_all().items():
-            if provider_cls is Generic:
-                continue
-
-            if issubclass(provider_cls, BaseDataProvider):
+            if provider_cls is not Generic:
                 setattr(self, f"_{name}", provider_cls)
-            elif issubclass(provider_cls, BaseProvider):
-                setattr(self, name, provider_cls(seed=self.seed))
 
     class Meta:
         """Class for metadata."""
@@ -53,9 +50,13 @@ class Generic(BaseProvider):
         :return: An attribute.
         """
         attribute = object.__getattribute__(self, "_" + attrname)
-        if callable(attribute):
-            self.__dict__[attrname] = attribute(self.locale, self.seed)
-            return self.__dict__[attrname]
+        if inspect.isclass(attribute) and issubclass(attribute, BaseProvider):
+            if issubclass(attribute, BaseDataProvider):
+                instance = attribute(self.locale, self.seed)
+            else:
+                instance = attribute(seed=self.seed)
+            self.__dict__[attrname] = instance
+            return instance
         raise AttributeError(attrname)
 
     def __dir__(self) -> list[str]:
@@ -64,10 +65,8 @@ class Generic(BaseProvider):
         :return: List of attributes.
         """
         attributes = []
-        exclude = list(BaseProvider().__dict__.keys())
-        # Exclude locale explicitly because
-        # it is not a provider.
-        exclude.append("locale")
+        # Instance attributes of BaseProvider plus ``locale``: not providers.
+        exclude = {"random", "seed", "locale"}
 
         for attr in self.__dict__:
             if attr not in exclude:
@@ -89,11 +88,10 @@ class Generic(BaseProvider):
         # Make sure to reseed the random generator on Generic itself.
         super().reseed(seed)
 
-        for attr in self.__dir__():
-            if not hasattr(self, attr):
-                continue
-            provider = getattr(self, attr)
-            if hasattr(provider, "reseed"):
+        # Only instantiated providers need reseeding: lazy ones are
+        # created with the current ``self.seed`` in ``__getattr__``.
+        for provider in self.__dict__.values():
+            if isinstance(provider, BaseProvider):
                 provider.reseed(seed)
 
     def add_provider(self, cls: type[BaseProvider], **kwargs: t.Any) -> None:

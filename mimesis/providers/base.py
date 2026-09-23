@@ -1,10 +1,12 @@
 """Base data provider."""
 
 import contextlib
+import functools
 import json
 import operator
 import typing as t
 from functools import reduce
+from pathlib import Path
 
 from mimesis import random as _random
 from mimesis.constants import DATADIR, LOCALE_SEP
@@ -14,6 +16,17 @@ from mimesis.types import JSON, MissingSeed, Seed
 
 
 __all__ = ["BaseDataProvider", "BaseProvider", "ProviderRegistry"]
+
+
+@functools.cache
+def _read_json(path: Path) -> t.Any:
+    """Read and parse a JSON file once per process.
+
+    The returned object is shared between every provider instance that
+    uses the same file, so callers must treat it as read-only.
+    """
+    with path.open(encoding="utf8") as f:
+        return json.load(f)
 
 
 class ProviderRegistry:
@@ -146,8 +159,7 @@ class BaseProvider:
         :raises FileNotFoundError: If the file was not found.
         :return: JSON data.
         """
-        with DATADIR.joinpath("global", file_name).open() as f:
-            return json.load(f)
+        return _read_json(DATADIR / "global" / file_name)
 
     def _has_seed(self) -> bool:
         """Internal API to check if seed is set."""
@@ -208,18 +220,22 @@ class BaseDataProvider(BaseProvider):
             return default
 
     def _update_dict(self, initial: JSON, other: JSON) -> JSON:
-        """Recursively updates a dictionary.
+        """Recursively merges two dictionaries into a new one.
 
-        :param initial: Dict to update.
-        :param other: Dict to update from.
-        :return: Updated dict.
+        Neither argument is modified: ``initial`` may be the cached,
+        shared master-locale dataset.
+
+        :param initial: Base dict.
+        :param other: Dict with overrides.
+        :return: Merged dict.
         """
+        result = dict(initial)
         for k, v in other.items():
-            if isinstance(v, dict):
-                initial[k] = self._update_dict(initial.get(k, {}), v)
+            if isinstance(v, dict) and isinstance(result.get(k), dict):
+                result[k] = self._update_dict(result[k], v)
             else:
-                initial[k] = v
-        return initial
+                result[k] = v
+        return result
 
     def _load_dataset(self) -> None:
         """Loads the content from the JSON dataset into ``_dataset``."""
@@ -230,17 +246,11 @@ class BaseDataProvider(BaseProvider):
         if not datafile:
             return
 
-        def read_file(locale_name: str) -> t.Any:
-            file_path = datadir / locale_name / datafile
-            with file_path.open(encoding="utf8") as f:
-                return json.load(f)
-
         master_locale = locale.split(LOCALE_SEP).pop(0)
-
-        data = read_file(master_locale)
+        data = _read_json(datadir / master_locale / datafile)
 
         if LOCALE_SEP in locale:
-            data = self._update_dict(data, read_file(locale))
+            data = self._update_dict(data, _read_json(datadir / locale / datafile))
 
         self._dataset = data
 
@@ -253,7 +263,8 @@ class BaseDataProvider(BaseProvider):
         if not isinstance(data, dict):
             raise TypeError("The data must be a dict.")
 
-        self._dataset |= data
+        # Copy: ``_dataset`` may be the cached dict shared with other instances.
+        self._dataset = {**self._dataset, **data}
 
     def get_current_locale(self) -> str:
         """Returns current locale.
