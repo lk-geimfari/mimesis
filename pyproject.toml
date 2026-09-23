@@ -1,6 +1,6 @@
 [project]
 name = "mimesis"
-version = "22.1.0"
+version = "22.2.0"
 description = "Mimesis: Fake Data Generator."
 authors = [{ name = "Isaak Uchakaev", email = "hey@isaak.dev" }]
 requires-python = ">=3.10"
@@ -81,7 +81,7 @@ dev = [
     "sphinx-autodoc-typehints>=1.19.2,<2",
     "furo>=2024.8.6",
     "pytest-factoryboy>=2.6.0,<3",
-    "twine>=6.1.0",
+    "twine>=7.0.0",
 ]
 
 [tool.hatch.build.targets.sdist]
