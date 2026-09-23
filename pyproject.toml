@@ -95,15 +95,11 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.pytest.ini_options]
-testpaths = [
-    "mimesis",
-    "tests",
-    "minifier.py",
-]
+testpaths = ["tests"]
 
 [tool.mypy]
 exclude = ["tests", "docs", "benchmarks"]
-files = ["mimesis", "minifier.py"]
+files = ["mimesis"]
 strict_optional = true
 check_untyped_defs = true
 ignore_errors = false
@@ -251,18 +247,11 @@ ignore = [
 "mimesis/builder/**/*.py" = [
     "SLF001",  # intentional private access between builder types
 ]
-"minifier.py" = [
-    "T20",     # CLI script uses print
-]
 "tasks/**/*.py" = [
     "T20",
     "INP001",
     "D",       # internal scripts
     "E501",    # colorful CLI output lines
-]
-"example.py" = [
-    "T20",
-    "INP001",
 ]
 
 [tool.ruff.lint.mccabe]

@@ -153,9 +153,11 @@ class TestGeneric:
         for p in providers:
             assert not p.startswith("_")
 
-    def test_getattr_non_callable_returns_none(self, generic):
+    def test_getattr_non_callable_raises(self, generic):
         generic._not_a_provider = "literal"
-        assert generic.not_a_provider is None
+        with pytest.raises(AttributeError):
+            _ = generic.not_a_provider
+        assert not hasattr(generic, "not_a_provider")
 
     def test_reseed_skips_missing_attributes(self, generic, monkeypatch):
         monkeypatch.setattr(generic, "__dir__", lambda: ["does_not_exist"])

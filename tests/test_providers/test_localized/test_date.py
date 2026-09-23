@@ -44,8 +44,14 @@ class TestDatetime:
         with pytest.raises(ValueError):
             _datetime.bulk_create_datetimes(date_start, date_end)
 
-        with pytest.raises(ValueError):
+        with pytest.raises(ValueError, match="You must pass"):
             _datetime.bulk_create_datetimes(None, None)
+
+        with pytest.raises(ValueError, match="You must pass"):
+            _datetime.bulk_create_datetimes(date_start, None)
+
+        with pytest.raises(ValueError, match="You must pass"):
+            _datetime.bulk_create_datetimes(None, date_start)
 
         # Empty **kwargs for timedelta must raise an error.
         with pytest.raises(ValueError):
@@ -252,6 +258,9 @@ class TestDatetime:
                 max_duration=10.9,
                 duration_unit=DurationUnit.WEEKS,
             )
+
+        with pytest.raises(TypeError, match="must be integers"):
+            _datetime.duration(min_duration="a", max_duration=5)
 
     @pytest.mark.parametrize("days", [7, 30, 90])
     def test_future_date(self, _datetime, days):

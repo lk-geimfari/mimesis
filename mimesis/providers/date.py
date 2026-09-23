@@ -64,7 +64,7 @@ class Datetime(BaseDataProvider):
         """
         dt_objects = []
 
-        if not date_start and not date_end:
+        if not date_start or not date_end:
             raise ValueError("You must pass date_start and date_end")
 
         if date_end < date_start:
@@ -271,7 +271,7 @@ class Datetime(BaseDataProvider):
         :param kwargs: Kwargs for :meth:`~.datetime()`.
         :return: Timestamp.
         """
-        self.validate_enum(fmt, TimestampFormat)
+        fmt = TimestampFormat(self.validate_enum(fmt, TimestampFormat))
         stamp = self.datetime(**kwargs)
 
         if fmt == TimestampFormat.RFC_3339:
@@ -381,11 +381,11 @@ class Datetime(BaseDataProvider):
         :param duration_unit: Duration unit.
         :return: Duration as timedelta.
         """
-        if min_duration > max_duration:
-            raise ValueError("min_duration must be less than or equal to max_duration")
-
         if not isinstance(min_duration, int) or not isinstance(max_duration, int):
             raise TypeError("min_duration and max_duration must be integers")
+
+        if min_duration > max_duration:
+            raise ValueError("min_duration must be less than or equal to max_duration")
 
         unit = self.validate_enum(duration_unit, DurationUnit)
         return timedelta(**{unit: self.random.randint(min_duration, max_duration)})

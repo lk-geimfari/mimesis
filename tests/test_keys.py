@@ -518,3 +518,16 @@ def test_pipe_with_case_conversion_and_transformation():
     )
     result = key("  Get User Data  ", random)
     assert result == "API_GET_USER_DATA_ENDPOINT"
+
+
+def test_call_key_func_propagates_type_error_from_inside_key():
+    def key(result, random):
+        raise TypeError("boom")
+
+    with pytest.raises(TypeError, match="boom"):
+        keys._call_key_func(key, "value", random)
+
+
+def test_call_key_func_falls_back_to_single_argument():
+    assert keys._call_key_func(str.strip, "  value  ", random) == "value"
+    assert keys._call_key_func(lambda v: v.upper(), "value", random) == "VALUE"

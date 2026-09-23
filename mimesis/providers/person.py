@@ -244,7 +244,7 @@ class Person(BaseDataProvider):
             username = self.random.choice(USERNAMES)
             if tag == "C":
                 final_username += username.capitalize()
-            if tag == "U":
+            elif tag == "U":
                 final_username += username.upper()
             elif tag == "l":
                 final_username += username.lower()

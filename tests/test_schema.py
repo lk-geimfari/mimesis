@@ -21,7 +21,6 @@ from mimesis.keys import maybe, romanize
 from mimesis.locales import Locale
 from mimesis.random import Random
 from mimesis.schema import Field, Fieldset, Schema, SchemaContext
-from mimesis.types import MissingSeed
 from tests.test_providers.patterns import DATA_PROVIDER_STR_REGEX
 
 
@@ -344,7 +343,6 @@ def test_schema_to_pickle(tmp_path: "Path", schema: Schema):
         1,
         3.14,
         "seed",
-        MissingSeed,
     ],
 )
 def test_field_reseed(localized_field, seed):

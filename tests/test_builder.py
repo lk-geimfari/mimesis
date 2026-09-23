@@ -438,6 +438,22 @@ class TestErrors:
         with pytest.raises(ValueError, match="not yet generated"):
             sb.create(posts=5)
 
+    def test_missing_dependency_is_reported_before_generation(
+        self, sb: SchemaBuilder
+    ) -> None:
+        users = sb.schema("users", {"id": sb.f("increment")})
+        sb.schema("posts", {"user_id": sb.ref(users).id})
+
+        with pytest.raises(ValueError, match="required by 'posts'"):
+            sb.create(posts=5)
+        assert sb._generated == {}
+
+    def test_duplicate_schema_name(self, sb: SchemaBuilder) -> None:
+        sb.schema("users", {"id": sb.f("increment")})
+
+        with pytest.raises(ValueError, match="already defined"):
+            sb.schema("users", {"id": sb.f("increment")})
+
     def test_missing_field_on_ref(self, sb: SchemaBuilder) -> None:
         users = sb.schema("users", {"id": sb.f("increment")})
         sb.schema("posts", {"name": sb.ref(users).missing})

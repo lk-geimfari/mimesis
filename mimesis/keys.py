@@ -419,9 +419,17 @@ def _call_key_func(
     result: Any,
     random: Random | None,
 ) -> Any:
+    """Call a one- or two-argument key function.
+
+    Tries ``func(result, random)`` first and falls back to ``func(result)``
+    only when the ``TypeError`` was raised by the call itself (wrong arity),
+    not from inside the key function.
+    """
     try:
         return func(result, random)  # type: ignore[call-arg]
-    except TypeError:
+    except TypeError as err:
+        if err.__traceback__ is not None and err.__traceback__.tb_next is not None:
+            raise
         return func(result)  # type: ignore[call-arg]
 
 

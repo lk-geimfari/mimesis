@@ -171,6 +171,7 @@ class SchemaBuilder:
         :param name: Unique name for this schema.
         :param schema: Dictionary defining the schema fields.
         :return: A SchemaRef for FK references and nesting.
+        :raises ValueError: If a schema with this name is already defined.
 
         Example::
 
@@ -185,6 +186,8 @@ class SchemaBuilder:
                 },
             )
         """
+        if name in self._schemas:
+            raise ValueError(f"Schema '{name}' is already defined")
         self._schemas[name] = schema
         self._dependencies[name] = self._extract_dependencies(schema)
         return SchemaRef(name, schema)
@@ -306,8 +309,7 @@ class SchemaBuilder:
             visiting.add(name)
 
             for dep in self._dependencies.get(name, set()):
-                if dep in names:
-                    visit(dep)
+                visit(dep)
 
             visiting.remove(name)
             visited.add(name)
@@ -346,7 +348,8 @@ class SchemaBuilder:
 
         :param counts: Schema names are mapped to their counts.
         :return: Dictionary of schema names to generated data lists.
-        :raises ValueError: If a schema name is not defined or a count is negative.
+        :raises ValueError: If a schema name is not defined, a count is negative,
+            or a schema it references was not requested.
 
         Example::
 
@@ -364,6 +367,13 @@ class SchemaBuilder:
                 raise ValueError(f"Schema '{name}' is not defined")
             if count < 0:
                 raise ValueError(f"Count for '{name}' must be >= 0")
+
+        for name in counts:
+            for dep in sorted(self._dependencies[name] - counts.keys()):
+                raise ValueError(
+                    f"Schema '{dep}' is required by '{name}' but not yet generated. "
+                    f"Pass {dep}=<count> to create() as well."
+                )
 
         ordered_names = self._topological_sort(list(counts.keys()))
 

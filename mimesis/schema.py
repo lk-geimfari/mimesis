@@ -17,6 +17,7 @@ from mimesis.exceptions import (
     FieldsetError,
     SchemaError,
 )
+from mimesis.keys import _call_key_func
 from mimesis.locales import Locale
 from mimesis.providers.base import BaseProvider
 from mimesis.providers.generic import Generic
@@ -208,12 +209,7 @@ class BaseField:
             result = self._lookup_method(name)(**kwargs)
 
         if key and callable(key):
-            try:
-                # If a key function accepts two parameters
-                # then pass random instance to it.
-                return key(result, random)  # type: ignore[call-arg]
-            except TypeError:
-                return key(result)  # type: ignore[call-arg]
+            return _call_key_func(key, result, random)
 
         return result
 

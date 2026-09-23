@@ -3,8 +3,6 @@
 import inspect
 import typing as t
 
-from typing_extensions import Self
-
 from mimesis.locales import Locale
 from mimesis.providers.base import (
     BaseDataProvider,
@@ -12,6 +10,10 @@ from mimesis.providers.base import (
     ProviderRegistry,
 )
 from mimesis.types import MissingSeed, Seed
+
+
+if t.TYPE_CHECKING:
+    from typing_extensions import Self
 
 
 __all__ = ["Generic"]
@@ -51,13 +53,10 @@ class Generic(BaseProvider):
         :return: An attribute.
         """
         attribute = object.__getattribute__(self, "_" + attrname)
-        if attribute and callable(attribute):
-            self.__dict__[attrname] = attribute(
-                self.locale,
-                self.seed,
-            )
+        if callable(attribute):
+            self.__dict__[attrname] = attribute(self.locale, self.seed)
             return self.__dict__[attrname]
-        return None
+        raise AttributeError(attrname)
 
     def __dir__(self) -> list[str]:
         """Available data providers.
@@ -150,7 +149,7 @@ class Generic(BaseProvider):
         for provider in providers:
             self.add_provider(provider)
 
-    def __iadd__(self, other: type[BaseProvider]) -> Self:
+    def __iadd__(self, other: type[BaseProvider]) -> "Self":
         """Adds a custom provider to a Generic() object.
 
         :param other: Custom provider.
