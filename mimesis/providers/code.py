@@ -10,7 +10,7 @@ from mimesis.datasets import (
 from mimesis.enums import EANFormat, ISBNFormat
 from mimesis.locales import Locale
 from mimesis.providers.base import BaseProvider
-from mimesis.shortcuts import luhn_checksum
+from mimesis.shortcuts import gs1_checksum, luhn_checksum, mod11_checksum
 
 
 __all__ = ["Code"]
@@ -35,10 +35,17 @@ class Code(BaseProvider):
     def issn(self, mask: str = "####-####") -> str:
         """Generates a random ISSN.
 
+        The last character of the mask is replaced by the mod 11 check digit,
+        which may be the letter ``X``.
+
         :param mask: Mask of ISSN.
         :return: ISSN.
         """
-        return self.random.generate_string_by_mask(mask=mask)
+        payload = self.random.generate_string_by_mask(mask=mask[:-1])
+        # The mask may contain separators for readability, but a check digit is
+        # computed over the digits alone.
+        digits = "".join(char for char in payload if char.isdigit())
+        return payload + mod11_checksum(digits)
 
     def isbn(
         self, fmt: ISBNFormat | None = None, locale: Locale = Locale.DEFAULT
@@ -55,7 +62,13 @@ class Code(BaseProvider):
         """
         fmt_value = self.validate_enum(item=fmt, enum=ISBNFormat)
         mask = ISBN_MASKS[fmt_value].format(ISBN_GROUPS[locale.value])
-        return self.random.generate_string_by_mask(mask)
+        payload = self.random.generate_string_by_mask(mask[:-1])
+        # The mask may contain separators for readability, but a check digit is
+        # computed over the digits alone.
+        digits = "".join(char for char in payload if char.isdigit())
+        if fmt_value == "isbn-13":
+            return payload + gs1_checksum(digits)
+        return payload + mod11_checksum(digits)
 
     def ean(self, fmt: EANFormat | None = None) -> str:
         """Generates EAN.
@@ -72,7 +85,8 @@ class Code(BaseProvider):
             enum=EANFormat,
         )
         mask = EAN_MASKS[key]
-        return self.random.generate_string_by_mask(mask=mask)
+        payload = self.random.generate_string_by_mask(mask=mask[:-1])
+        return payload + gs1_checksum(payload)
 
     def imei(self) -> str:
         """Generates a random IMEI.

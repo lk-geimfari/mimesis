@@ -11,6 +11,32 @@ from mimesis.locales import Locale
 from .. import patterns
 
 
+def _has_gs1_check_digit(code: str) -> bool:
+    """Check the GS1 mod 10 relation, weighted from the left.
+
+    Deliberately a different formulation from the implementation, which
+    enumerates the digits in reverse, so that a transposed weighting cannot
+    satisfy both. Note the weight depends on the distance from the right-hand
+    end, so it is not simply "every other digit from the left".
+    """
+    digits = [int(char) for char in code]
+    payload = digits[:-1]
+    last = len(payload) - 1
+    total = sum(
+        digit * (3 if (last - index) % 2 == 0 else 1)
+        for index, digit in enumerate(payload)
+    )
+    return digits[-1] == (10 - total) % 10
+
+
+def _has_mod11_check_digit(code: str) -> bool:
+    """Check the mod 11 relation, allowing ``X`` for a remainder of 10."""
+    digits = [int(char) for char in code[:-1]]
+    total = sum(d * (len(digits) + 1 - index) for index, d in enumerate(digits))
+    expected = (11 - total) % 11
+    return code[-1] == ("X" if expected == 10 else str(expected))
+
+
 class TestCode:
     @pytest.fixture
     def code(self):
@@ -45,6 +71,24 @@ class TestCode:
     def test_issn(self, code):
         result = code.issn()
         assert len(result) == 9
+
+    def test_issn_check_digit(self, code):
+        for _ in range(50):
+            assert _has_mod11_check_digit(code.issn().replace("-", ""))
+
+    def test_ean_check_digit(self, code):
+        for fmt in (EANFormat.EAN8, EANFormat.EAN13):
+            for _ in range(50):
+                assert _has_gs1_check_digit(code.ean(fmt=fmt))
+
+    @pytest.mark.parametrize("fmt", [ISBNFormat.ISBN10, ISBNFormat.ISBN13])
+    def test_isbn_check_digit(self, code, fmt):
+        for _ in range(50):
+            result = code.isbn(fmt=fmt, locale=Locale.EN).replace("-", "")
+            if fmt == ISBNFormat.ISBN13:
+                assert _has_gs1_check_digit(result)
+            else:
+                assert _has_mod11_check_digit(result)
 
     def test_locale_code(self, code):
         result = code.locale_code()
