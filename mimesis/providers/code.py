@@ -66,7 +66,7 @@ class Code(BaseProvider):
         # The mask may contain separators for readability, but a check digit is
         # computed over the digits alone.
         digits = "".join(char for char in payload if char.isdigit())
-        if fmt_value == "isbn-13":
+        if fmt_value == ISBNFormat.ISBN13.value:
             return payload + gs1_checksum(digits)
         return payload + mod11_checksum(digits)
 
