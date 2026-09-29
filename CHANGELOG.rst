@@ -1,3 +1,9 @@
+Version 21.1.0
+--------------
+
+- Added :meth:`Schema.from_typed_dict() <mimesis.schema.Schema.from_typed_dict>` to build a schema directly from a :class:`typing.TypedDict`. Keys are resolved by name (falling back to the annotated type), nested ``TypedDict`` annotations are expanded recursively, and the ``Annotated``, ``Required``, ``NotRequired`` and ``Optional`` wrappers are unwrapped. See (`#1579 <https://github.com/lk-geimfari/mimesis/issues/1579>`_).
+- Added :meth:`Field.can_resolve() <mimesis.schema.BaseField.can_resolve>` to check whether a field name can be resolved to a value.
+
 Version 21.0.0
 --------------
 

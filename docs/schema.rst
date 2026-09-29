@@ -273,6 +273,78 @@ The final result will look like this:
 
 That's it! You've just generated structured data using Mimesis.
 
+.. _schema_from_typed_dict:
+
+Generating From a TypedDict
+---------------------------
+
+.. versionadded:: 21.1.0
+
+If you already describe your records with a :class:`typing.TypedDict`, you can
+build a schema directly from it with :meth:`~mimesis.schema.Schema.from_typed_dict`
+instead of writing the schema definition by hand.
+
+Every key of the ``TypedDict`` becomes a key of each generated record. Values
+are produced by resolving the key against the data providers — the same lookup
+used by :class:`~mimesis.schema.Field` — so a key named ``email`` yields a real
+email address:
+
+.. code-block:: python
+
+    >>> from typing import TypedDict
+    >>> from mimesis import Schema
+
+    >>> class User(TypedDict):
+    ...     name: str
+    ...     email: str
+    ...     age: int
+
+    >>> schema = Schema.from_typed_dict(User, iterations=2)
+    >>> schema.create()
+    [{'name': 'Cordell', 'email': 'exposure1874@example.org', 'age': 42}, ...]
+
+When a key does not match any provider method, the annotated type is used to
+pick a generator instead (``int`` → ``integer_number``, ``float`` →
+``float_number``, ``bool`` → ``boolean``, ``str`` → ``word``). Nested
+``TypedDict`` annotations are expanded recursively, and the ``Annotated``,
+``Required``, ``NotRequired`` and ``Optional`` wrappers are unwrapped
+automatically:
+
+.. code-block:: python
+
+    >>> from typing import NotRequired, TypedDict
+
+    >>> class Address(TypedDict):
+    ...     city: str
+    ...     country: str
+
+    >>> class Profile(TypedDict):
+    ...     username: str
+    ...     age: int
+    ...     nickname: NotRequired[str]
+    ...     address: Address
+
+    >>> Schema.from_typed_dict(Profile, iterations=1).create()
+    [{'username': 'wrapped_1974', 'age': 55, 'nickname': 'apnic', 'address': {'city': 'Reno', 'country': 'Aruba'}}]
+
+For full control over locale, seeding, or keys that require custom generation,
+pass your own :class:`~mimesis.schema.Field`. A key that can be resolved neither
+by name nor by type needs a registered handler:
+
+.. code-block:: python
+
+    >>> from mimesis import Field
+
+    >>> class Record(TypedDict):
+    ...     external_id: str
+
+    >>> field = Field()
+    >>> field.register_handler(
+    ...     "external_id", lambda random, **kwargs: random.randint(1, 100)
+    ... )
+    >>> Schema.from_typed_dict(Record, field=field, iterations=1).create()
+    [{'external_id': 87}]
+
 .. _key_functions:
 
 Key Functions and Transformations
