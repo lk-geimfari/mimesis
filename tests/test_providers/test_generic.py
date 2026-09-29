@@ -173,6 +173,22 @@ class TestGeneric:
         finally:
             ProviderRegistry._providers.pop("generic_self", None)
 
+    def test_reseed_does_not_instantiate_lazy_providers(self):
+        generic = Generic()
+        assert "address" not in generic.__dict__
+        assert "_address" in generic.__dict__
+
+        generic.reseed(0x123)
+        assert "address" not in generic.__dict__
+
+        val1 = generic.address.address()
+        assert "address" in generic.__dict__
+
+        generic.reseed(0x123)
+        val2 = generic.address.address()
+        assert val1 == val2
+
+
 
 class TestSeededGeneric:
     @pytest.fixture
