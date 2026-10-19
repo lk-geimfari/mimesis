@@ -2,7 +2,13 @@
 
 import typing as t
 from calendar import monthrange
-from datetime import date, datetime, time, timedelta
+from datetime import (
+    date,
+    datetime,
+    time,
+    timedelta,
+    timezone as datetime_timezone,
+)
 
 from mimesis.compat import pytz
 from mimesis.datasets import GMT_OFFSETS, TIMEZONES
@@ -256,6 +262,9 @@ class Datetime(BaseDataProvider):
         - TimestampFormat.RFC_3339
         - TimestampFormat.ISO_8601
 
+        RFC 3339 output uses UTC, converting timezone-aware datetimes before
+        appending the ``Z`` suffix.
+
         Example:
         >>> from mimesis import Datetime
         >>> from mimesis.enums import TimestampFormat
@@ -263,7 +272,7 @@ class Datetime(BaseDataProvider):
         >>> dt.timestamp(fmt=TimestampFormat.POSIX)
         1697322442
         >>> dt.timestamp(fmt=TimestampFormat.RFC_3339)
-        '2023-12-08T18:46:34'
+        '2023-12-08T18:46:34Z'
         >>> dt.timestamp(fmt=TimestampFormat.ISO_8601)
         '2009-05-30T21:45:57.328600'
 
@@ -275,6 +284,8 @@ class Datetime(BaseDataProvider):
         stamp = self.datetime(**kwargs)
 
         if fmt == TimestampFormat.RFC_3339:
+            if stamp.tzinfo is not None:
+                stamp = stamp.astimezone(datetime_timezone.utc)
             return stamp.strftime("%Y-%m-%dT%H:%M:%SZ")
         if fmt == TimestampFormat.ISO_8601:
             return stamp.isoformat()
