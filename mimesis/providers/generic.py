@@ -35,10 +35,7 @@ class Generic(BaseProvider):
             if provider_cls is Generic:
                 continue
 
-            if issubclass(provider_cls, BaseDataProvider):
-                setattr(self, f"_{name}", provider_cls)
-            elif issubclass(provider_cls, BaseProvider):
-                setattr(self, name, provider_cls(seed=self.seed))
+            setattr(self, f"_{name}", provider_cls)
 
     class Meta:
         """Class for metadata."""
@@ -53,6 +50,12 @@ class Generic(BaseProvider):
         :return: An attribute.
         """
         attribute = object.__getattribute__(self, "_" + attrname)
+        if inspect.isclass(attribute) and issubclass(attribute, BaseProvider):
+            if issubclass(attribute, BaseDataProvider):
+                self.__dict__[attrname] = attribute(self.locale, self.seed)
+            else:
+                self.__dict__[attrname] = attribute(seed=self.seed)
+            return self.__dict__[attrname]
         if callable(attribute):
             self.__dict__[attrname] = attribute(self.locale, self.seed)
             return self.__dict__[attrname]
@@ -90,11 +93,13 @@ class Generic(BaseProvider):
         super().reseed(seed)
 
         for attr in self.__dir__():
-            if not hasattr(self, attr):
-                continue
-            provider = getattr(self, attr)
-            if hasattr(provider, "reseed"):
-                provider.reseed(seed)
+            # Only reseed providers that have actually been instantiated.
+            # Uninstantiated lazy providers will receive the new seed
+            # when lazily instantiated via __getattr__.
+            if attr in self.__dict__:
+                provider = self.__dict__[attr]
+                if hasattr(provider, "reseed") and callable(provider.reseed):
+                    provider.reseed(seed)
 
     def add_provider(self, cls: type[BaseProvider], **kwargs: t.Any) -> None:
         """Adds a custom provider to a Generic() object.
