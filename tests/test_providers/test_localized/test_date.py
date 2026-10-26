@@ -166,6 +166,40 @@ class TestDatetime:
             _datetime.timestamp(fmt="Blabla")
 
     @pytest.mark.parametrize(
+        "timezone, day, expected",
+        [
+            (
+                "Asia/Kolkata",
+                datetime.date(2024, 1, 1),
+                "2023-12-31T18:45:30Z",
+            ),
+            (
+                "America/New_York",
+                datetime.date(2024, 1, 1),
+                "2024-01-01T05:15:30Z",
+            ),
+            (
+                "America/New_York",
+                datetime.date(2024, 7, 1),
+                "2024-07-01T04:15:30Z",
+            ),
+            ("UTC", datetime.date(2024, 1, 1), "2024-01-01T00:15:30Z"),
+            (None, datetime.date(2024, 1, 1), "2024-01-01T00:15:30Z"),
+        ],
+    )
+    def test_rfc3339_timestamp_preserves_instant(
+        self, _datetime, mocker, timezone, day, expected
+    ):
+        mocker.patch.object(_datetime, "date", return_value=day)
+        mocker.patch.object(
+            _datetime, "time", return_value=datetime.time(0, 15, 30, 123456)
+        )
+
+        result = _datetime.timestamp(fmt=TimestampFormat.RFC_3339, timezone=timezone)
+
+        assert result == expected
+
+    @pytest.mark.parametrize(
         "start, end, timezone",
         [
             (2014, 2019, "Europe/Paris"),
