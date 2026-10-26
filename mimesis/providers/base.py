@@ -292,15 +292,16 @@ class BaseDataProvider(BaseProvider):
         """
         try:
             origin_locale = Locale(self.locale)
-            self._override_locale(locale)
-            try:
-                yield self
-            finally:
-                self._override_locale(origin_locale)
         except AttributeError as err:
             raise ValueError(
                 f"«{self.__class__.__name__}» is not locale-dependent",
             ) from err
+
+        self._override_locale(locale)
+        try:
+            yield self
+        finally:
+            self._override_locale(origin_locale)
 
     def __str__(self) -> str:
         """Human-readable representation of locale."""
