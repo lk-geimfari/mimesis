@@ -1,6 +1,6 @@
 [project]
 name = "mimesis"
-version = "22.2.0"
+version = "23.0.0"
 description = "Mimesis: Fake Data Generator."
 authors = [{ name = "Isaak Uchakaev", email = "hey@isaak.dev" }]
 requires-python = ">=3.10"
@@ -85,6 +85,9 @@ dev = [
 ]
 
 [tool.hatch.build.targets.sdist]
+# Ship only what is needed to build and run the package. hatchling adds
+# pyproject.toml, README.md and LICENSE (referenced from [project]) itself.
+only-include = ["mimesis"]
 exclude = ["mimesis/datasets/locale_template"]
 
 [tool.hatch.build.targets.wheel]
@@ -125,7 +128,7 @@ src = ["mimesis", "tests"]
 extend-exclude = [
     "docs",
     "mimesis/datasets/locale_template",
-    "benchmarks/performance_comparison.py",
+    "benchmarks",
 ]
 
 [tool.ruff.lint]

@@ -139,10 +139,14 @@ class TestGenericWithRegistry:
         assert person is not None
         assert hasattr(generic, "person")
 
-    def test_locale_independent_providers_eager_loaded(self, generic):
-        assert hasattr(generic, "numeric")
-        assert not hasattr(generic, "_numeric")
-        assert generic.numeric is not None
+    def test_locale_independent_providers_lazy_loaded(self, generic):
+        assert isinstance(generic._numeric, type)
+        assert "numeric" not in generic.__dict__
+
+        numeric = generic.numeric
+        assert numeric is not None
+        assert generic.__dict__["numeric"] is numeric
+        assert numeric.seed == generic.seed
 
 
 class TestProviderSynchronization:
