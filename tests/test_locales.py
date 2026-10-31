@@ -1,7 +1,9 @@
+import json
 from enum import Enum
 
 import pytest
 
+from mimesis.constants import DATADIR
 from mimesis.exceptions import LocaleError
 from mimesis.locales import Locale, validate_locale
 
@@ -33,3 +35,25 @@ def test_validate_locale():
     assert validated_locale == Locale.EN
     assert issubclass(validated_locale.__class__, Enum)
     assert isinstance(validate_locale(Locale.EN), Locale)
+
+
+def _iter_strings(data):
+    if isinstance(data, dict):
+        for value in data.values():
+            yield from _iter_strings(value)
+    elif isinstance(data, list):
+        for value in data:
+            yield from _iter_strings(value)
+    elif isinstance(data, str):
+        yield data
+
+
+@pytest.mark.parametrize(
+    "dataset",
+    sorted(DATADIR.glob("*/*.json")),
+    ids=lambda path: f"{path.parent.name}/{path.name}",
+)
+def test_dataset_values_have_no_surrounding_whitespace(dataset):
+    data = json.loads(dataset.read_text(encoding="utf-8"))
+    bad = [value for value in _iter_strings(data) if value != value.strip()]
+    assert not bad
