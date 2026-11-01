@@ -100,6 +100,7 @@ Patches and Suggestions
 - Zayed Alsaidi `(zayedalsaidi)`_
 - Muayyad AlSadi `(muayyadalsadi)`_
 - Rodrigo Nogueira `(rodrigobnogueira)`_
+- James Du `(DU8866-nice)`_
 
 
 .. _(lk-geimfari): https://github.com/lk-geimfari
@@ -177,4 +178,5 @@ Patches and Suggestions
 .. _(yah04dev): https://github.com/yah04dev
 .. _(muayyadalsadi): https://github.com/muayyad-alsadi
 .. _(rodrigobnogueira): https://github.com/rodrigobnogueira
+.. _(DU8866-nice): https://github.com/DU8866-nice
 
