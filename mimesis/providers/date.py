@@ -39,7 +39,8 @@ class Datetime(BaseDataProvider):
         """Bulk create datetime objects.
 
         This method creates a list of datetime objects from
-        ``date_start`` to ``date_end``.
+        ``date_start`` to ``date_end``, including both endpoints when the
+        step reaches ``date_end`` exactly. No value exceeds ``date_end``.
 
         You can use the following keyword arguments:
 
@@ -76,12 +77,15 @@ class Datetime(BaseDataProvider):
         if date_end < date_start:
             raise ValueError("date_start cannot be greater than date_end")
 
-        if timedelta(**kwargs) <= timedelta():
+        step = timedelta(**kwargs)
+        if step <= timedelta():
             raise ValueError("timedelta must be positive")
 
         while date_start <= date_end:
-            date_start += timedelta(**kwargs)
             dt_objects.append(date_start)
+            if date_end - date_start < step:
+                break
+            date_start += step
 
         return dt_objects
 
