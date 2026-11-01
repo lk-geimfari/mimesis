@@ -90,7 +90,7 @@ class BaseField:
 
         :param name: The field name.
         :return: Callable object.
-        :raise FieldError: When field is invalid.
+        :raise FieldError: When a field is invalid.
         """
         provider_name, method_name = name.split(".", 1)
         try:
@@ -107,11 +107,11 @@ class BaseField:
 
         :param name: The field name.
         :return: Callable object.
-        :raise FieldError: When field is invalid.
+        :raise FieldError: When a field is invalid.
         """
         for provider_name in dir(self._generic):
             provider = getattr(self._generic, provider_name)
-            if isinstance(provider, BaseProvider) and name in dir(provider):
+            if isinstance(provider, BaseProvider) and hasattr(provider, name):
                 return getattr(provider, name)
 
         raise FieldError(name)
@@ -121,11 +121,8 @@ class BaseField:
 
         :param name: The field name.
         :return: Callable object.
-        :raise FieldError: When field is invalid.
+        :raise FieldError: When a field is invalid.
         """
-        # Check if the field is defined in aliases
-        name = self.aliases.get(name, name)
-
         # Support additional delimiters
         name = re.sub(r"[/:\s]", ".", name)
 
@@ -201,6 +198,10 @@ class BaseField:
             raise FieldError
 
         random = self.get_random_instance()
+
+        # Resolve the alias before the lookup, so that aliases
+        # can point at custom field handlers as well.
+        name = self.aliases.get(name, name)
 
         # First, try to find a custom field handler.
         if name in self._handlers:
@@ -331,7 +332,7 @@ class Field(BaseField):
 class Fieldset(BaseField):
     """Greedy fieldset (evaluates immediately).
 
-    Works like a field, but returns a list of values.
+    Works like a field but returns a list of values.
 
     Here is an example:
 

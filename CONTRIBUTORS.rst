@@ -27,6 +27,7 @@ Special thanks
 Patches and Suggestions
 ~~~~~~~~~~~~~~~~~~~~~~~
 
+-  Rexyysilent (`Rexyysilent <https://github.com/Rexyysilent>`_)
 -  Kevin Schellenberg `(wikkiewikkie)`_
 -  Casey Weed `(Battleroid)`_
 -  Alessandro Martini `(martini97)`_
