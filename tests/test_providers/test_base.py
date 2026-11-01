@@ -42,6 +42,36 @@ class TestBase:
         with pytest.raises(ValueError), provider.override_locale(new_locale):
             pass
 
+    @pytest.mark.parametrize("error_type", [AttributeError, ValueError, RuntimeError])
+    def test_override_locale_preserves_body_exception(self, error_type):
+        provider = Person(Locale.EN)
+        error = error_type("Application error")
+
+        with pytest.raises(error_type) as exc_info, provider.override_locale(Locale.RU):
+            assert provider.locale == Locale.RU.value
+            raise error
+
+        assert exc_info.value is error
+        assert provider.locale == Locale.EN.value
+        assert "Жен." not in provider._dataset["gender"]
+
+    def test_override_locale_nested_exception(self):
+        provider = Person(Locale.EN)
+        error = AttributeError("Application error")
+
+        with provider.override_locale(Locale.RU):
+            with (
+                pytest.raises(AttributeError) as exc_info,
+                provider.override_locale(Locale.DE),
+            ):
+                raise error
+
+            assert exc_info.value is error
+            assert provider.locale == Locale.RU.value
+            assert "Жен." in provider._dataset["gender"]
+
+        assert provider.locale == Locale.EN.value
+
     @pytest.mark.parametrize(
         "data, keys_count, values_count",
         [
