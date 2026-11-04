@@ -61,7 +61,11 @@ class Code(BaseProvider):
         :raises NonEnumerableError: if code is not enum ISBNFormat.
         """
         fmt_value = self.validate_enum(item=fmt, enum=ISBNFormat)
-        mask = ISBN_MASKS[fmt_value].format(ISBN_GROUPS[locale.value])
+        group = ISBN_GROUPS[locale.value]
+        # The group, registrant and publication elements take 9 digits
+        # together, so a longer group leaves a shorter registrant.
+        registrant = "#" * (6 - len(group))
+        mask = ISBN_MASKS[fmt_value].format(group).replace("#####", registrant, 1)
         payload = self.random.generate_string_by_mask(mask[:-1])
         # The mask may contain separators for readability, but a check digit is
         # computed over the digits alone.
