@@ -110,6 +110,18 @@ class TestCode:
         assert result is not None
         assert len(result) >= length
 
+    @pytest.mark.parametrize("locale", list(Locale))
+    def test_isbn_digits(self, code, locale):
+        for _ in range(10):
+            isbn10 = code.isbn(fmt=ISBNFormat.ISBN10, locale=locale).replace("-", "")
+            isbn13 = code.isbn(fmt=ISBNFormat.ISBN13, locale=locale).replace("-", "")
+            assert len(isbn10) == 10
+            assert len(isbn13) == 13
+            # Registration groups in ISBN_GROUPS sit under the "978" prefix.
+            assert isbn13.startswith("978")
+            assert _has_mod11_check_digit(isbn10)
+            assert _has_gs1_check_digit(isbn13)
+
     def test_isbn_non_enum(self, code):
         with pytest.raises(NonEnumerableError):
             code.isbn(fmt="nil")
