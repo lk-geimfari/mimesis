@@ -73,13 +73,14 @@ class Choice(BaseProvider):
         if length == 0:
             return self.random.choice(items)
 
-        if unique and len(set(items)) < length:
-            raise ValueError(
-                "There are not enough unique elements in "
-                "**items** to provide the specified **length**."
-            )
         if unique:
-            data: list[t.Any] = self.random.sample(list(set(items)), k=length)
+            unique_items = list(dict.fromkeys(items))
+            if len(unique_items) < length:
+                raise ValueError(
+                    "There are not enough unique elements in "
+                    "**items** to provide the specified **length**."
+                )
+            data: list[t.Any] = self.random.sample(unique_items, k=length)
         else:
             data = self.random.choices(items, k=length)
 
