@@ -1,6 +1,6 @@
 {
   "banks": [
-    "Αlpha Βank Α.Ε.",
+    "Alpha Bank Α.Ε.",
     "Eurobank Ergasias Α.Ε.",
     "National Bank of Greece Α.Ε.",
     "Piraeus Bank Α.Ε.",
@@ -56,7 +56,7 @@
     ],
     "type": {
       "abbr": [
-        "EΠΕ",
+        "ΕΠΕ",
         "ΑΕ",
         "ΑΝΕ",
         "ΕΕ",
