@@ -101,6 +101,7 @@ Patches and Suggestions
 - Muayyad AlSadi `(muayyadalsadi)`_
 - Rodrigo Nogueira `(rodrigobnogueira)`_
 - James Du `(DU8866-nice)`_
+- Mradul Singh `(bardrop)`_
 
 
 .. _(lk-geimfari): https://github.com/lk-geimfari
@@ -179,4 +180,5 @@ Patches and Suggestions
 .. _(muayyadalsadi): https://github.com/muayyad-alsadi
 .. _(rodrigobnogueira): https://github.com/rodrigobnogueira
 .. _(DU8866-nice): https://github.com/DU8866-nice
+.. _(bardrop): https://github.com/bardrop
 
