@@ -1,6 +1,7 @@
 """Data related to the development."""
 
 import typing as t
+from calendar import monthrange
 from datetime import datetime
 
 from mimesis.datasets import (
@@ -45,7 +46,7 @@ class Development(BaseProvider):
         """
         year = self.random.randint(2016, datetime.now().year)
         month = self.random.randint(1, 12)
-        day = self.random.randint(1, 29)
+        day = self.random.randint(1, monthrange(year, month)[1])
         return f"{year}.{month}.{day}"
 
     def version(self) -> str:

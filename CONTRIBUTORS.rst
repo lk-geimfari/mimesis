@@ -101,6 +101,7 @@ Patches and Suggestions
 - Muayyad AlSadi `(muayyadalsadi)`_
 - Rodrigo Nogueira `(rodrigobnogueira)`_
 - James Du `(DU8866-nice)`_
+- `Tibefox <https://github.com/Tibefox>`_
 
 
 .. _(lk-geimfari): https://github.com/lk-geimfari
