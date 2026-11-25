@@ -37,6 +37,64 @@ class TestDatetime:
         )
         assert len(datetime_objects) == objects_count
 
+    @pytest.mark.parametrize(
+        "start, end, step, expected",
+        [
+            (
+                datetime.datetime(2020, 1, 1),
+                datetime.datetime(2020, 1, 1, 3),
+                {"hours": 1},
+                [datetime.datetime(2020, 1, 1, hour) for hour in range(4)],
+            ),
+            (
+                datetime.datetime(2020, 1, 1),
+                datetime.datetime(2020, 1, 1, 2, 30),
+                {"hours": 1},
+                [datetime.datetime(2020, 1, 1, hour) for hour in range(3)],
+            ),
+            (
+                datetime.datetime(2020, 1, 1),
+                datetime.datetime(2020, 1, 1),
+                {"hours": 1},
+                [datetime.datetime(2020, 1, 1)],
+            ),
+            (
+                datetime.datetime(2020, 1, 1),
+                datetime.datetime(2020, 1, 1, 1),
+                {"hours": 2},
+                [datetime.datetime(2020, 1, 1)],
+            ),
+            (
+                datetime.datetime.max - datetime.timedelta(microseconds=2),
+                datetime.datetime.max,
+                {"microseconds": 1},
+                [
+                    datetime.datetime.max - datetime.timedelta(microseconds=i)
+                    for i in (2, 1, 0)
+                ],
+            ),
+            (
+                datetime.datetime.max - datetime.timedelta(microseconds=1),
+                datetime.datetime.max,
+                {"days": 1},
+                [datetime.datetime.max - datetime.timedelta(microseconds=1)],
+            ),
+            (
+                datetime.datetime(2020, 1, 1, tzinfo=datetime.timezone.utc),
+                datetime.datetime(2020, 1, 1, 1, tzinfo=datetime.timezone.utc),
+                {"hours": 1},
+                [
+                    datetime.datetime(2020, 1, 1, hour, tzinfo=datetime.timezone.utc)
+                    for hour in (0, 1)
+                ],
+            ),
+        ],
+    )
+    def test_bulk_create_datetimes_stays_within_bounds(
+        self, start, end, step, expected
+    ):
+        assert Datetime.bulk_create_datetimes(start, end, **step) == expected
+
     def test_bulk_create_datetimes_error(self, _datetime):
         date_start = datetime.datetime.now()
         date_end = date_start - datetime.timedelta(days=7)
