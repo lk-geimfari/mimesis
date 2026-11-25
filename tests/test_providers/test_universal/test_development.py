@@ -42,6 +42,17 @@ class TestDevelopment:
         year = calver.split(".")[0]
         assert (int(year) >= 2016) and (int(year) <= datetime.datetime.now().year)
 
+    @pytest.mark.parametrize(
+        ("year", "month", "last_day"),
+        [(2023, 2, 28), (2024, 2, 29), (2024, 4, 30), (2024, 1, 31)],
+    )
+    def test_calver_last_day(self, dev, monkeypatch, year, month, last_day):
+        # Fix the year and month, then choose the largest day offered.
+        draws = iter((year, month))
+        monkeypatch.setattr(dev.random, "randint", lambda low, high: next(draws, high))
+
+        assert dev.calver() == f"{year}.{month}.{last_day}"
+
     def test_stage(self, dev):
         assert dev.stage() in datasets.STAGES
 
