@@ -57,6 +57,11 @@ to the data provider:
     person.full_name()
     # Output: 'Gizem Tekand'
 
+Unique choices from a sequence preserve the input order when removing duplicate
+values, so the same provider seed and sequence produce the same result regardless
+of Python's hash seed. Seeded outputs with ``unique=True`` may differ from older
+versions that sampled from an unordered set.
+
 
 Reseeding
 ---------
