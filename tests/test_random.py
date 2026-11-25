@@ -91,6 +91,24 @@ def test_generate_string_by_mask_with_seed(random, seed, expected):
     assert random.generate_string_by_mask() == expected
 
 
+@pytest.mark.parametrize(
+    "mask, char, digit, expected",
+    [
+        ("Ж##", "Ж", "#", "C23"),
+        ("@@🔢🔢", "@", "🔢", "CF39"),
+        ("好-Ж🔢🔢", "Ж", "🔢", "好-C23"),
+        ("é", "Ã", "#", "é"),
+        ("é", "@", "©", "é"),
+        ("好-@##", "@", "#", "好-C23"),
+    ],
+)
+def test_generate_string_by_mask_with_unicode_placeholders(
+    random, mask, char, digit, expected
+):
+    random.seed(32)
+    assert random.generate_string_by_mask(mask, char=char, digit=digit) == expected
+
+
 def test_get_random_item(random):
     result = random.choice_enum_item(Gender)
     assert result in Gender

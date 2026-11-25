@@ -72,9 +72,19 @@ class Random(random_module.Random):
                 "The same placeholder cannot be used for both numbers and characters."
             )
 
+        rand_fn = self.random
+        if char_code > 127 or digit_code > 127:
+            return "".join(
+                chr(int(rand_fn() * 26) + 65)
+                if p == char
+                else str(int(rand_fn() * 10))
+                if p == digit
+                else p
+                for p in mask
+            )
+
         _mask = mask.encode()
         code = bytearray(len(_mask))
-        rand_fn = self.random
         for i, p in enumerate(_mask):
             if p == char_code:
                 code[i] = int(rand_fn() * 26) + 65  # A-Z
